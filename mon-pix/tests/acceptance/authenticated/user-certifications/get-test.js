@@ -31,83 +31,46 @@ module('Acceptance | Authenticated | User certifications | get', function (hooks
       await authenticate(user);
     });
 
-    module('when isV3CertificationPageEnabled feature toggle is disabled', function () {
-      module('when algorithm version is v3', function () {
-        test('displays old candidate certificate page', async function (assert) {
-          // given
-          const certificate = server.create('certification', {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            birthdate: '2000-01-01',
-            certificationCenter: 'Université de Pix',
-            certifiedBadgeImages: [],
-            date: new Date('2018-07-20T14:33:56Z'),
-            status: 'validated',
-            pixScore: 777,
-            isPublished: true,
-            algorithmEngineVersion: 3,
-            resultCompetenceTree: _getResultCompetenceTree({ server }),
-          });
-          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: false });
+    module('when algorithm version is v3', function () {
+      test('displays v3 candidate certificate page', async function (assert) {
+        // given
+        const certificate = _getV3Certificate({ user, server });
+        // when
+        const screen = await visit(`/mes-certifications/${certificate.id}`);
+        // then
+        assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
+        const globalLevelLabels = screen.getAllByText('Expert 1');
+        assert.strictEqual(globalLevelLabels.length, 2);
+      });
 
-          // when
+      module('when user clicks on the breadcrumb', function () {
+        test('should returns to certificates list page', async function (assert) {
+          // given
+          const certificate = _getV3Certificate({ user, server });
           const screen = await visit(`/mes-certifications/${certificate.id}`);
 
+          // when
+          await click(screen.getByRole('link', { name: t('pages.certifications-list.title') }));
+
           // then
-          assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
-          assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
-          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.details.competences.title') })).exists();
+          assert.strictEqual(currentURL(), '/mes-certifications');
         });
       });
     });
 
-    module('when isV3CertificationPageEnabled feature toggle is enabled', function () {
-      module('when algorithm version is v3', function () {
-        test('displays v3 candidate certificate page', async function (assert) {
-          // given
-          const certificate = _getV3Certificate({ user, server });
-          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
+    module('when algorithm version is v2', function () {
+      test('displays v2 candidate certificate page', async function (assert) {
+        // given
+        const certificate = _getV2Certificate({ user, server });
 
-          // when
-          const screen = await visit(`/mes-certifications/${certificate.id}`);
+        // when
+        const screen = await visit(`/mes-certifications/${certificate.id}`);
 
-          // then
-          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.title') })).exists();
-          const globalLevelLabels = screen.getAllByText('Expert 1');
-          assert.strictEqual(globalLevelLabels.length, 2);
-        });
-
-        module('when user clicks on the breadcrumb', function () {
-          test('should returns to certificates list page', async function (assert) {
-            // given
-            const certificate = _getV3Certificate({ user, server });
-            server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
-            const screen = await visit(`/mes-certifications/${certificate.id}`);
-
-            // when
-            await click(screen.getByRole('link', { name: t('pages.certifications-list.title') }));
-
-            // then
-            assert.strictEqual(currentURL(), '/mes-certifications');
-          });
-        });
-      });
-
-      module('when algorithm version is v2', function () {
-        test('displays v2 candidate certificate page', async function (assert) {
-          // given
-          const certificate = _getV2Certificate({ user, server });
-          server.create('feature-toggle', { id: '0', isV3CertificationPageEnabled: true });
-
-          // when
-          const screen = await visit(`/mes-certifications/${certificate.id}`);
-
-          // then
-          assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
-          assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
-          assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
-          assert.dom(screen.getByRole('heading', { name: t('pages.certificate.details.competences.title') })).exists();
-        });
+        // then
+        assert.dom(screen.getByRole('link', { name: t('pages.certificate.back-link') })).exists();
+        assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+        assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.jury-title') })).exists();
+        assert.dom(screen.getByRole('heading', { name: t('pages.certificate.details.competences.title') })).exists();
       });
     });
   });
