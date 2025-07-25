@@ -258,24 +258,25 @@ describe('Acceptance | Route | llm-preview', function () {
           },
           hasAttachmentContextBeenAdded: true,
           messages: [
-            { content: 'coucou user1', isFromUser: true, notCounted: false },
-            { content: 'coucou LLM1', isFromUser: false, notCounted: false },
+            { content: 'coucou user1', isFromUser: true, shouldBeRenderedInPreview: true },
+            { content: 'coucou LLM1', isFromUser: false, shouldBeRenderedInPreview: true },
             {
               attachmentName: 'expected_file.txt',
               isFromUser: true,
-              notCounted: true,
+              shouldBeRenderedInPreview: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
             },
             {
               attachmentName: 'expected_file.txt',
               attachmentContext: 'add me in the chat !',
               isFromUser: false,
-              notCounted: false,
+              shouldBeRenderedInPreview: false,
             },
-            { content: 'un message', isFromUser: true, notCounted: false },
+            { content: 'un message', isFromUser: true, shouldBeRenderedInPreview: true },
             {
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
               isFromUser: false,
-              notCounted: false,
+              shouldBeRenderedInPreview: true,
             },
           ],
         },
@@ -295,13 +296,14 @@ describe('Acceptance | Route | llm-preview', function () {
         inputMaxPrompts: 3,
         attachmentName: 'expected_file.txt',
         messages: [
-          { content: 'coucou user1', attachmentName: undefined, isFromUser: true },
-          { content: 'coucou LLM1', attachmentName: undefined, isFromUser: false },
-          { content: 'un message', attachmentName: 'expected_file.txt', isFromUser: true },
+          { content: 'coucou user1', attachmentName: undefined, isFromUser: true, isAttachmentValid: false },
+          { content: 'coucou LLM1', attachmentName: undefined, isFromUser: false, isAttachmentValid: false },
+          { content: 'un message', attachmentName: 'expected_file.txt', isFromUser: true, isAttachmentValid: true },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
             attachmentName: undefined,
             isFromUser: false,
+            isAttachmentValid: false,
           },
         ],
       });
@@ -431,7 +433,7 @@ describe('Acceptance | Route | llm-preview', function () {
       // then
       expect(response.statusCode).to.equal(201);
       expect(promptLlmScope.isDone()).to.be.true;
-      expect(response.result).to.deep.equal("event: attachment\ndata: \n\ndata: coucou c'est super\n\n");
+      expect(response.result).to.deep.equal("event: attachment-success\ndata: \n\ndata: coucou c'est super\n\n");
     });
   });
 });

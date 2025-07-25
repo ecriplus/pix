@@ -3,31 +3,38 @@ import { Message } from '../../../domain/models/Chat.js';
 /**
  * @param {import('../../../domain/models/Chat').Chat} chat
  */
-export function serialize({ id, configuration: { inputMaxChars, inputMaxPrompts, attachmentName }, messages }) {
-  messages = messages.filter(({ isAttachmentContent }) => !isAttachmentContent);
+export function serialize(chat) {
+  let messagesForPreview = chat.messages.filter(({ shouldBeRenderedInPreview }) => shouldBeRenderedInPreview);
 
-  const notCountedAttachmentIndex = messages.findIndex(({ isAttachment, notCounted }) => isAttachment && notCounted);
-  if (notCountedAttachmentIndex !== -1) {
-    messages = messages.toSpliced(
-      notCountedAttachmentIndex,
-      2,
-      new Message({
-        content: messages[notCountedAttachmentIndex + 1].content,
-        attachmentName: messages[notCountedAttachmentIndex].attachmentName,
+  let i = 0;
+
+  while (i < messagesForPreview.length - 1) {
+    const current = messagesForPreview[i];
+    const next = messagesForPreview[i + 1];
+
+    if (current.hasAttachmentBeenSubmittedAlongWithAPrompt) {
+      const mergedMessage = new Message({
+        content: next.content,
+        attachmentName: current.attachmentName,
         isFromUser: true,
-      }),
-    );
+      });
+
+      messagesForPreview = messagesForPreview.toSpliced(i, 2, mergedMessage);
+    } else {
+      i++;
+    }
   }
 
   return {
-    id,
-    inputMaxChars,
-    inputMaxPrompts,
-    attachmentName,
-    messages: messages.map(({ content, attachmentName, isFromUser }) => ({
+    id: chat.id,
+    inputMaxChars: chat.configuration.inputMaxChars,
+    inputMaxPrompts: chat.configuration.inputMaxPrompts,
+    attachmentName: chat.configuration.attachmentName,
+    messages: messagesForPreview.map(({ content, attachmentName, isFromUser }) => ({
       content,
       attachmentName,
       isFromUser,
+      isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
     })),
   };
 }

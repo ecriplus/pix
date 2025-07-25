@@ -21,6 +21,15 @@ import { catchErr, expect, nock } from '../../../../test-helper.js';
 const chatTemporaryStorage = temporaryStorage.withPrefix(chatRepository.CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
+  let dependencies;
+
+  beforeEach(function () {
+    dependencies = {
+      promptRepository,
+      chatRepository,
+      toEventStream,
+    };
+  });
   afterEach(async function () {
     await chatTemporaryStorage.flushAll();
   });
@@ -31,7 +40,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const chatId = null;
 
       // when
-      const err = await catchErr(promptChat)({ chatId, message: 'un message', userId: 12345 });
+      const err = await catchErr(promptChat)({ chatId, message: 'un message', userId: 12345, ...dependencies });
 
       // then
       expect(err).to.be.instanceOf(ChatNotFoundError);
@@ -61,7 +70,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         chatId: 'chatId',
         userId: 12345,
         message: 'un message',
-        chatRepository,
+        ...dependencies,
       });
 
       // then
@@ -93,7 +102,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
 
       // when
-      const err = await catchErr(promptChat)({ chatId: 'chatId', userId: 123, message: 'un message', chatRepository });
+      const err = await catchErr(promptChat)({
+        chatId: 'chatId',
+        userId: 123,
+        message: 'un message',
+        ...dependencies,
+      });
 
       // then
       expect(err).to.be.instanceOf(TooLargeMessageInputError);
@@ -116,9 +130,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          new Message({ content: 'coucou LLM1', isFromUser: false }),
-          new Message({ content: 'coucou LLM2', isFromUser: false }),
-          new Message({ content: 'coucou user', isFromUser: true }),
+          buildBasicAssistantMessage('coucou LLM1'),
+          buildBasicAssistantMessage('coucou LLM2'),
+          buildBasicUserMessage('coucou user'),
         ],
       });
       await chatTemporaryStorage.save({
@@ -148,9 +162,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         chatId: 'chatId',
         userId: 123,
         message: 'un message',
-        chatRepository,
-        promptRepository,
-        toEventStream,
+        ...dependencies,
       });
 
       // then
@@ -177,9 +189,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          new Message({ content: 'coucou user1', isFromUser: true }),
-          new Message({ content: 'coucou LLM2', isFromUser: false }),
-          new Message({ content: 'coucou user2', isFromUser: true }),
+          buildBasicUserMessage('coucou user1'),
+          buildBasicAssistantMessage('coucou LLM2'),
+          buildBasicUserMessage('coucou user2'),
         ],
       });
       await chatTemporaryStorage.save({
@@ -189,7 +201,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
 
       // when
-      const err = await catchErr(promptChat)({ chatId: 'chatId', userId: 123, message: 'un message', chatRepository });
+      const err = await catchErr(promptChat)({ chatId: 'chatId', userId: 123, message: 'un message', ...dependencies });
 
       // then
       expect(err).to.be.instanceOf(MaxPromptsReachedError);
@@ -198,6 +210,34 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   });
 
   context('success cases', function () {
+    let configuration, configurationWithAttachment;
+    const configurationId = 'uneConfigQuiExist';
+
+    beforeEach(function () {
+      configuration = new Configuration({
+        llm: {
+          historySize: 123,
+        },
+        challenge: {
+          inputMaxPrompts: 100,
+          inputMaxChars: 255,
+        },
+      });
+      configurationWithAttachment = new Configuration({
+        llm: {
+          historySize: 123,
+        },
+        challenge: {
+          inputMaxPrompts: 100,
+          inputMaxChars: 255,
+        },
+        attachment: {
+          name: 'expected_file.txt',
+          context: 'add me in the chat !',
+        },
+      });
+    });
+
     context('when a prompt is provided', function () {
       context('when no attachmentName is provided', function () {
         it('should return a stream which will contain the llm response', async function () {
@@ -205,21 +245,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const chat = new Chat({
             id: 'chatId',
             userId: 123,
-            configurationId: 'uneConfigQuiExist',
-            configuration: new Configuration({
-              llm: {
-                historySize: 123,
-              },
-              challenge: {
-                inputMaxPrompts: 100,
-                inputMaxChars: 255,
-              },
-            }),
+            configurationId,
+            configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [
-              new Message({ content: 'coucou user1', isFromUser: true }),
-              new Message({ content: 'coucou LLM1', isFromUser: false }),
-            ],
+            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -258,9 +287,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             message: 'un message',
             attachmentName: null,
-            chatRepository,
-            promptRepository,
-            toEventStream,
+            ...dependencies,
           });
 
           // then
@@ -291,22 +318,30 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               {
                 content: 'coucou user1',
                 isFromUser: true,
-                notCounted: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
               },
               {
                 content: 'coucou LLM1',
                 isFromUser: false,
-                notCounted: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
               },
               {
                 content: 'un message',
                 isFromUser: true,
-                notCounted: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
               },
               {
                 content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                 isFromUser: false,
-                notCounted: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
               },
             ],
           });
@@ -326,10 +361,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               }),
               hasAttachmentContextBeenAdded: false,
-              messages: [
-                new Message({ content: 'coucou user1', isFromUser: true }),
-                new Message({ content: 'coucou LLM1', isFromUser: false }),
-              ],
+              messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
             });
             await chatTemporaryStorage.save({
               key: chat.id,
@@ -381,9 +413,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               userId: 123,
               message: 'un message',
               attachmentName: null,
-              chatRepository,
-              promptRepository,
-              toEventStream,
+              ...dependencies,
             });
 
             // then
@@ -415,22 +445,30 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 {
                   content: 'coucou user1',
                   isFromUser: true,
-                  notCounted: false,
+                  shouldBeRenderedInPreview: true,
+                  shouldBeForwardedToLLM: true,
+                  shouldBeCountedAsAPrompt: true,
                 },
                 {
                   content: 'coucou LLM1',
                   isFromUser: false,
-                  notCounted: false,
+                  shouldBeRenderedInPreview: true,
+                  shouldBeForwardedToLLM: true,
+                  shouldBeCountedAsAPrompt: false,
                 },
                 {
                   content: 'un message',
                   isFromUser: true,
-                  notCounted: false,
+                  shouldBeRenderedInPreview: true,
+                  shouldBeForwardedToLLM: true,
+                  shouldBeCountedAsAPrompt: true,
                 },
                 {
                   content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                   isFromUser: false,
-                  notCounted: false,
+                  shouldBeRenderedInPreview: true,
+                  shouldBeForwardedToLLM: true,
+                  shouldBeCountedAsAPrompt: false,
                 },
               ],
             });
@@ -447,21 +485,13 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             const chat = new Chat({
               id: 'chatId',
               userId: 123,
-              configurationId: 'uneConfigQuiExist',
-              configuration: new Configuration({
-                llm: {
-                  historySize: 123,
-                },
-                challenge: {
-                  inputMaxPrompts: 100,
-                  inputMaxChars: 255,
-                },
-              }),
+              configurationId,
+              configuration,
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'coucou user1', isFromUser: true }),
-                new Message({ content: 'coucou LLM2', isFromUser: false }),
-                new Message({ content: 'coucou user2', isFromUser: true }),
+                buildBasicUserMessage('coucou user1'),
+                buildBasicAssistantMessage('coucou LLM2'),
+                buildBasicUserMessage('coucou user2'),
               ],
             });
             await chatTemporaryStorage.save({
@@ -476,7 +506,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               userId: 123,
               message: 'un message',
               attachmentName: 'un_attachment.pdf',
-              chatRepository,
+              ...dependencies,
             });
 
             // then
@@ -488,164 +518,39 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         });
 
         context('when attachmentName is not the expected one for the given configuration', function () {
-          it(
-            'should return a stream which will contain the attachment event and the llm response while ' +
-              'ignoring the invalid attachmentName by not adding anything to the context',
-            async function () {
-              // given
-              const chat = new Chat({
-                id: 'chatId',
-                userId: 123,
-                configurationId: 'uneConfigQuiExist',
-                configuration: new Configuration({
-                  llm: {
-                    historySize: 123,
-                  },
-                  challenge: {
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                  },
-                  attachment: {
-                    name: 'expected_file.txt',
-                    context: 'add me in the chat !',
-                  },
-                }),
-                hasAttachmentContextBeenAdded: false,
-                messages: [
-                  new Message({ content: 'coucou user1', isFromUser: true }),
-                  new Message({ content: 'coucou LLM1', isFromUser: false }),
-                ],
-              });
-              await chatTemporaryStorage.save({
-                key: chat.id,
-                value: chat.toDTO(),
-                expirationDelaySeconds: ms('24h'),
-              });
-              const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
-                .post('/chat', {
-                  configuration: {
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxPrompts: 100,
-                      inputMaxChars: 255,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  },
-                  history: [
-                    { content: 'coucou user1', role: 'user' },
-                    { content: 'coucou LLM1', role: 'assistant' },
-                  ],
-                  prompt: 'un message',
-                })
-                .reply(
-                  201,
-                  Readable.from([
-                    '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
-                    '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
-                    '29:{"jecrois":{"que":"jaifini"}}',
-                  ]),
-                );
-
-              // when
-              const stream = await promptChat({
-                chatId: 'chatId',
-                userId: 123,
-                message: 'un message',
-                attachmentName: 'invalid_file.txt',
-                chatRepository,
-                promptRepository,
-                toEventStream,
-              });
-
-              // then
-              const parts = [];
-              const decoder = new TextDecoder();
-              for await (const chunk of stream) {
-                parts.push(decoder.decode(chunk));
-              }
-              const llmResponse = parts.join('');
-              const attachmentMessage = 'event: attachment\ndata: \n\n';
-              const llmMessage =
-                "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
-              expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
-              expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
-                id: 'chatId',
-                userId: 123,
-                configurationId: 'uneConfigQuiExist',
-                configuration: {
-                  llm: {
-                    historySize: 123,
-                  },
-                  challenge: {
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                  },
-                  attachment: {
-                    name: 'expected_file.txt',
-                    context: 'add me in the chat !',
-                  },
-                },
-                hasAttachmentContextBeenAdded: false,
-                messages: [
-                  { content: 'coucou user1', isFromUser: true, notCounted: false },
-                  { content: 'coucou LLM1', isFromUser: false, notCounted: false },
-                  { content: 'un message', isFromUser: true, notCounted: false },
-                  {
-                    content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-                    isFromUser: false,
-                    notCounted: false,
-                  },
-                ],
-              });
-              expect(llmPostPromptScope.isDone()).to.be.true;
-            },
-          );
-        });
-
-        context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
               'should return a stream which will contain the attachment event and the llm response while ' +
-                'not adding the attachment context in the conversation a second time',
+                'adding a fictional wrong attachment message from user that will not be send to llm, just persisted',
               async function () {
                 // given
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
-                  configurationId: 'uneConfigQuiExist',
-                  configuration: new Configuration({
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxPrompts: 100,
-                      inputMaxChars: 255,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  }),
+                  configurationId,
+                  configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    new Message({ content: 'coucou user1', isFromUser: true }),
-                    new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    buildBasicUserMessage('coucou user1'),
+                    buildBasicAssistantMessage('coucou LLM1'),
                     new Message({
-                      content:
-                        'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                      attachmentName: 'expected_file.txt',
                       isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     }),
                     new Message({
-                      content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
                       isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     }),
-                    new Message({ content: 'coucou user2', isFromUser: true }),
-                    new Message({ content: 'coucou LLM2', isFromUser: false }),
+                    buildBasicUserMessage('coucou user2'),
+                    buildBasicAssistantMessage('coucou LLM2'),
                   ],
                 });
                 await chatTemporaryStorage.save({
@@ -673,11 +578,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       { content: 'coucou LLM1', role: 'assistant' },
                       {
                         content:
-                          'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                          "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>expected_file.txt</attachment_name></system_notification>",
                         role: 'user',
                       },
                       {
-                        content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                        content:
+                          '<read_attachment_tool>Lecture de la pièce jointe, expected_file.txt : <attachment_content>add me in the chat !</attachment_content></read_attachment_tool>',
                         role: 'assistant',
                       },
                       { content: 'coucou user2', role: 'user' },
@@ -699,10 +605,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   chatId: 'chatId',
                   userId: 123,
                   message: 'un message',
-                  attachmentName: 'expected_file.txt',
-                  chatRepository,
-                  promptRepository,
-                  toEventStream,
+                  attachmentName: 'wrong_file.txt',
+                  ...dependencies,
                 });
 
                 // then
@@ -712,7 +616,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                const attachmentMessage = 'event: attachment\ndata: \n\n';
+                const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                 expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
@@ -735,26 +639,355 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                     {
-                      content:
-                        'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                      content: 'coucou user1',
                       isFromUser: true,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
                     },
                     {
-                      content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                      content: 'coucou LLM1',
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
-                    { content: 'coucou user2', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM2', isFromUser: false, notCounted: false },
-                    { content: 'un message', isFromUser: true, notCounted: false },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      content: 'coucou user2',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM2',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      attachmentName: 'wrong_file.txt',
+                      isFromUser: true,
+                      shouldBeForwardedToLLM: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    },
+                    {
+                      content: 'un message',
+                      isFromUser: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                  ],
+                });
+                expect(llmPostPromptScope.isDone()).to.be.true;
+              },
+            );
+          });
+
+          context('when the context for this attachmentName has not been added yet', function () {
+            it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist on redis', async function () {
+              // given
+              const chat = new Chat({
+                id: 'chatId',
+                userId: 123,
+                configurationId,
+                configuration: configurationWithAttachment,
+                hasAttachmentContextBeenAdded: false,
+                messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+
+              // when
+              const stream = await promptChat({
+                chatId: 'chatId',
+                userId: 123,
+                message: 'un message',
+                attachmentName: 'wrong_file.txt',
+                ...dependencies,
+              });
+
+              // then
+              const parts = [];
+              const decoder = new TextDecoder();
+              for await (const chunk of stream) {
+                parts.push(decoder.decode(chunk));
+              }
+              const llmResponse = parts.join('');
+              const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
+              expect(llmResponse).to.deep.equal(attachmentMessage);
+              expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                id: 'chatId',
+                userId: 123,
+                configurationId: 'uneConfigQuiExist',
+                configuration: {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
+                },
+                hasAttachmentContextBeenAdded: false,
+                messages: [
+                  {
+                    content: 'coucou user1',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: true,
+                  },
+                  {
+                    content: 'coucou LLM1',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                  {
+                    attachmentName: 'wrong_file.txt',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: false,
+                    shouldBeCountedAsAPrompt: false,
+                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                  },
+                  {
+                    content: 'un message',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: false,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                ],
+              });
+            });
+          });
+        });
+
+        context('when attachmentName is the expected one for the given configuration', function () {
+          context('when the context for this attachmentName has already been added', function () {
+            it(
+              'should return a stream which will contain the attachment event and the llm response while ' +
+                'only adding a fictional user message that will not be send to the LLM, but persisted. Thus, it should re-send the context to the LLM',
+              async function () {
+                // given
+                const chat = new Chat({
+                  id: 'chatId',
+                  userId: 123,
+                  configurationId,
+                  configuration: configurationWithAttachment,
+                  hasAttachmentContextBeenAdded: true,
+                  messages: [
+                    buildBasicUserMessage('coucou user1'),
+                    buildBasicAssistantMessage('coucou LLM1'),
+                    new Message({
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    }),
+                    new Message({
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    }),
+                    buildBasicUserMessage('coucou user2'),
+                    buildBasicAssistantMessage('coucou LLM2'),
+                  ],
+                });
+                await chatTemporaryStorage.save({
+                  key: chat.id,
+                  value: chat.toDTO(),
+                  expirationDelaySeconds: ms('24h'),
+                });
+                const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+                  .post('/chat', {
+                    configuration: {
+                      llm: {
+                        historySize: 123,
+                      },
+                      challenge: {
+                        inputMaxPrompts: 100,
+                        inputMaxChars: 255,
+                      },
+                      attachment: {
+                        name: 'expected_file.txt',
+                        context: 'add me in the chat !',
+                      },
+                    },
+                    history: [
+                      { content: 'coucou user1', role: 'user' },
+                      { content: 'coucou LLM1', role: 'assistant' },
+                      {
+                        content:
+                          "<system_notification>L'utilisateur a téléversé une pièce jointe : <attachment_name>expected_file.txt</attachment_name></system_notification>",
+                        role: 'user',
+                      },
+                      {
+                        content:
+                          '<read_attachment_tool>Lecture de la pièce jointe, expected_file.txt : <attachment_content>add me in the chat !</attachment_content></read_attachment_tool>',
+                        role: 'assistant',
+                      },
+                      { content: 'coucou user2', role: 'user' },
+                      { content: 'coucou LLM2', role: 'assistant' },
+                    ],
+                    prompt: 'un message',
+                  })
+                  .reply(
+                    201,
+                    Readable.from([
+                      '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                      '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                      '29:{"jecrois":{"que":"jaifini"}}',
+                    ]),
+                  );
+
+                // when
+                const stream = await promptChat({
+                  chatId: 'chatId',
+                  userId: 123,
+                  message: 'un message',
+                  attachmentName: 'expected_file.txt',
+                  ...dependencies,
+                });
+
+                // then
+                const parts = [];
+                const decoder = new TextDecoder();
+                for await (const chunk of stream) {
+                  parts.push(decoder.decode(chunk));
+                }
+                const llmResponse = parts.join('');
+                const attachmentMessage = 'event: attachment-success\ndata: \n\n';
+                const llmMessage =
+                  "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
+                expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
+                expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                  id: 'chatId',
+                  userId: 123,
+                  configurationId: 'uneConfigQuiExist',
+                  configuration: {
+                    llm: {
+                      historySize: 123,
+                    },
+                    challenge: {
+                      inputMaxPrompts: 100,
+                      inputMaxChars: 255,
+                    },
+                    attachment: {
+                      name: 'expected_file.txt',
+                      context: 'add me in the chat !',
+                    },
+                  },
+                  hasAttachmentContextBeenAdded: true,
+                  messages: [
+                    {
+                      content: 'coucou user1',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM1',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      content: 'coucou user2',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM2',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: false,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    },
+                    {
+                      content: 'un message',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
                   ],
                 });
@@ -772,25 +1005,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
-                  configurationId: 'uneConfigQuiExist',
-                  configuration: new Configuration({
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxPrompts: 100,
-                      inputMaxChars: 255,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  }),
+                  configurationId,
+                  configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: false,
-                  messages: [
-                    new Message({ content: 'coucou user1', isFromUser: true }),
-                    new Message({ content: 'coucou LLM1', isFromUser: false }),
-                  ],
+                  messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
                 });
                 await chatTemporaryStorage.save({
                   key: chat.id,
@@ -843,9 +1061,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   message: 'un message',
                   attachmentName: 'expected_file.txt',
-                  chatRepository,
-                  promptRepository,
-                  toEventStream,
+                  ...dependencies,
                 });
 
                 // then
@@ -855,7 +1071,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                const attachmentMessage = 'event: attachment\ndata: \n\n';
+                const attachmentMessage = 'event: attachment-success\ndata: \n\n';
                 const llmMessage =
                   "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n";
                 expect(llmResponse).to.deep.equal(attachmentMessage + llmMessage);
@@ -878,24 +1094,49 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
+                    {
+                      content: 'coucou user1',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM1',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
                     {
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
-                      notCounted: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
-                    { content: 'un message', isFromUser: true, notCounted: false },
+                    {
+                      content: 'un message',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
                   ],
                 });
@@ -917,10 +1158,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}),
             hasAttachmentContextBeenAdded: false,
-            messages: [
-              new Message({ content: 'coucou user1', isFromUser: true }),
-              new Message({ content: 'coucou LLM2', isFromUser: false }),
-            ],
+            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM2')],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -934,6 +1172,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             message: null,
             attachmentName: null,
+            ...dependencies,
           });
 
           // then
@@ -949,21 +1188,13 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             const chat = new Chat({
               id: 'chatId',
               userId: 123,
-              configurationId: 'uneConfigQuiExist',
-              configuration: new Configuration({
-                llm: {
-                  historySize: 123,
-                },
-                challenge: {
-                  inputMaxPrompts: 2,
-                  inputMaxChars: 255,
-                },
-              }),
+              configurationId,
+              configuration,
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'coucou user1', isFromUser: true }),
-                new Message({ content: 'coucou LLM2', isFromUser: false }),
-                new Message({ content: 'coucou user2', isFromUser: true }),
+                buildBasicUserMessage('coucou user1'),
+                buildBasicAssistantMessage('coucou LLM2'),
+                buildBasicUserMessage('coucou user2'),
               ],
             });
             await chatTemporaryStorage.save({
@@ -978,7 +1209,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               userId: 123,
               message: null,
               attachmentName: 'un_attachment.pdf',
-              chatRepository,
+              ...dependencies,
             });
 
             // then
@@ -990,32 +1221,36 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         });
 
         context('when attachmentName is not the expected one for the given configuration', function () {
-          it(
-            'should return a stream which will contain the attachment event while ' +
-              'ignoring the invalid attachmentName by not adding anything to the context',
-            async function () {
+          context('when the context for this attachmentName has already been added', function () {
+            it('should return a stream which will contain the attachment event and add a fictional wrong attachment message from user that will not be send to the LLM but persisted', async function () {
               // given
               const chat = new Chat({
                 id: 'chatId',
                 userId: 123,
-                configurationId: 'uneConfigQuiExist',
-                configuration: new Configuration({
-                  llm: {
-                    historySize: 123,
-                  },
-                  challenge: {
-                    inputMaxPrompts: 100,
-                    inputMaxChars: 255,
-                  },
-                  attachment: {
-                    name: 'expected_file.txt',
-                    context: 'add me in the chat !',
-                  },
-                }),
-                hasAttachmentContextBeenAdded: false,
+                configurationId,
+                configuration: configurationWithAttachment,
+                hasAttachmentContextBeenAdded: true,
                 messages: [
-                  new Message({ content: 'coucou user1', isFromUser: true }),
-                  new Message({ content: 'coucou LLM1', isFromUser: false }),
+                  buildBasicUserMessage('coucou user1'),
+                  buildBasicAssistantMessage('coucou LLM1'),
+                  new Message({
+                    attachmentName: 'expected_file.txt',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                  }),
+                  new Message({
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: false,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  }),
+                  buildBasicUserMessage('coucou user2'),
+                  buildBasicAssistantMessage('coucou LLM2'),
                 ],
               });
               await chatTemporaryStorage.save({
@@ -1029,10 +1264,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 chatId: 'chatId',
                 userId: 123,
                 message: null,
-                attachmentName: 'invalid_file.txt',
-                chatRepository,
-                promptRepository,
-                toEventStream,
+                attachmentName: 'wrong_file.txt',
+                ...dependencies,
               });
 
               // then
@@ -1042,7 +1275,119 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 parts.push(decoder.decode(chunk));
               }
               const llmResponse = parts.join('');
-              expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+              const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
+              expect(llmResponse).to.deep.equal(attachmentMessage);
+              expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+                id: 'chatId',
+                userId: 123,
+                configurationId: 'uneConfigQuiExist',
+                configuration: {
+                  llm: {
+                    historySize: 123,
+                  },
+                  challenge: {
+                    inputMaxPrompts: 100,
+                    inputMaxChars: 255,
+                  },
+                  attachment: {
+                    name: 'expected_file.txt',
+                    context: 'add me in the chat !',
+                  },
+                },
+                hasAttachmentContextBeenAdded: true,
+                messages: [
+                  {
+                    content: 'coucou user1',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: true,
+                  },
+                  {
+                    content: 'coucou LLM1',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                  {
+                    attachmentName: 'expected_file.txt',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                    hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                  },
+                  {
+                    attachmentName: 'expected_file.txt',
+                    attachmentContext: 'add me in the chat !',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: false,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                  {
+                    content: 'coucou user2',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: true,
+                  },
+                  {
+                    content: 'coucou LLM2',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                  {
+                    attachmentName: 'wrong_file.txt',
+                    isFromUser: true,
+                    shouldBeForwardedToLLM: false,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeCountedAsAPrompt: true,
+                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                  },
+                ],
+              });
+            });
+          });
+
+          context('when the context for this attachmentName has not been added yet', function () {
+            it('should return a stream which will contain only the attachment-failure event and still persist on redis', async function () {
+              // given
+              const chat = new Chat({
+                id: 'chatId',
+                userId: 123,
+                configurationId,
+                configuration: configurationWithAttachment,
+                hasAttachmentContextBeenAdded: false,
+                messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+              });
+              await chatTemporaryStorage.save({
+                key: chat.id,
+                value: chat.toDTO(),
+                expirationDelaySeconds: ms('24h'),
+              });
+
+              // when
+              const stream = await promptChat({
+                chatId: 'chatId',
+                userId: 123,
+                message: null,
+                attachmentName: 'wrong_file.txt',
+                ...dependencies,
+              });
+
+              // then
+              const parts = [];
+              const decoder = new TextDecoder();
+              for await (const chunk of stream) {
+                parts.push(decoder.decode(chunk));
+              }
+              const llmResponse = parts.join('');
+              const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
+              expect(llmResponse).to.deep.equal(attachmentMessage);
               expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                 id: 'chatId',
                 userId: 123,
@@ -1062,53 +1407,68 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 },
                 hasAttachmentContextBeenAdded: false,
                 messages: [
-                  { content: 'coucou user1', isFromUser: true, notCounted: false },
-                  { content: 'coucou LLM1', isFromUser: false, notCounted: false },
+                  {
+                    content: 'coucou user1',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: true,
+                  },
+                  {
+                    content: 'coucou LLM1',
+                    isFromUser: false,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: true,
+                    shouldBeCountedAsAPrompt: false,
+                  },
+                  {
+                    attachmentName: 'wrong_file.txt',
+                    isFromUser: true,
+                    shouldBeRenderedInPreview: true,
+                    shouldBeForwardedToLLM: false,
+                    shouldBeCountedAsAPrompt: true,
+                    hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                  },
                 ],
               });
-            },
-          );
+            });
+          });
         });
 
         context('when attachmentName is the expected one for the given configuration', function () {
           context('when the context for this attachmentName has already been added', function () {
             it(
               'should return a stream which will contain the attachment event while ' +
-                'not adding the attachment context in the conversation a second time',
+                'adding a fictional attachment user message that will not be send to the LLM but persisted. Thus,it wont send to the LLM the context once again',
               async function () {
                 // given
                 const chat = new Chat({
                   id: 'chatId',
                   userId: 123,
-                  configurationId: 'uneConfigQuiExist',
-                  configuration: new Configuration({
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxPrompts: 100,
-                      inputMaxChars: 255,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  }),
+                  configurationId,
+                  configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    new Message({ content: 'coucou user1', isFromUser: true }),
-                    new Message({ content: 'coucou LLM1', isFromUser: false }),
+                    buildBasicUserMessage('coucou user1'),
+                    buildBasicAssistantMessage('coucou LLM1'),
                     new Message({
-                      content:
-                        'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                      attachmentName: 'expected_file.txt',
                       isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     }),
                     new Message({
-                      content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
                       isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     }),
-                    new Message({ content: 'coucou user2', isFromUser: true }),
-                    new Message({ content: 'coucou LLM2', isFromUser: false }),
+                    buildBasicUserMessage('coucou user2'),
+                    buildBasicAssistantMessage('coucou LLM2'),
                   ],
                 });
                 await chatTemporaryStorage.save({
@@ -1123,9 +1483,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   message: null,
                   attachmentName: 'expected_file.txt',
-                  chatRepository,
-                  promptRepository,
-                  toEventStream,
+                  ...dependencies,
                 });
 
                 // then
@@ -1135,7 +1493,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+                expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
@@ -1155,21 +1513,58 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
                     {
-                      content:
-                        'Ajoute le fichier fictif "expected_file.txt" à ton contexte. Voici le contenu du fichier :\nadd me in the chat !',
+                      content: 'coucou user1',
                       isFromUser: true,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
                     },
                     {
-                      content: 'Le contenu du fichier fictif a été ajouté au contexte.',
+                      content: 'coucou LLM1',
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
-                    { content: 'coucou user2', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM2', isFromUser: false, notCounted: false },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      attachmentContext: 'add me in the chat !',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      content: 'coucou user2',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM2',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
+                    {
+                      attachmentName: 'expected_file.txt',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: false,
+                      shouldBeCountedAsAPrompt: true,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                    },
                   ],
                 });
               },
@@ -1186,24 +1581,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   id: 'chatId',
                   userId: 123,
                   configurationId: 'uneConfigQuiExist',
-                  configuration: new Configuration({
-                    llm: {
-                      historySize: 123,
-                    },
-                    challenge: {
-                      inputMaxPrompts: 100,
-                      inputMaxChars: 255,
-                    },
-                    attachment: {
-                      name: 'expected_file.txt',
-                      context: 'add me in the chat !',
-                    },
-                  }),
+                  configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: false,
-                  messages: [
-                    new Message({ content: 'coucou user1', isFromUser: true }),
-                    new Message({ content: 'coucou LLM1', isFromUser: false }),
-                  ],
+                  messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
                 });
                 await chatTemporaryStorage.save({
                   key: chat.id,
@@ -1217,9 +1597,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   message: null,
                   attachmentName: 'expected_file.txt',
-                  chatRepository,
-                  promptRepository,
-                  toEventStream,
+                  ...dependencies,
                 });
 
                 // then
@@ -1229,7 +1607,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   parts.push(decoder.decode(chunk));
                 }
                 const llmResponse = parts.join('');
-                expect(llmResponse).to.deep.equal('event: attachment\ndata: \n\n');
+                expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
                   id: 'chatId',
                   userId: 123,
@@ -1249,18 +1627,35 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   },
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    { content: 'coucou user1', isFromUser: true, notCounted: false },
-                    { content: 'coucou LLM1', isFromUser: false, notCounted: false },
+                    {
+                      content: 'coucou user1',
+                      isFromUser: true,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                    },
+                    {
+                      content: 'coucou LLM1',
+                      isFromUser: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
+                    },
                     {
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: true,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: true,
+                      hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                     },
                     {
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
-                      notCounted: false,
+                      shouldBeRenderedInPreview: false,
+                      shouldBeForwardedToLLM: true,
+                      shouldBeCountedAsAPrompt: false,
                     },
                   ],
                 });
@@ -1272,3 +1667,23 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
     });
   });
 });
+
+function buildBasicUserMessage(content) {
+  return new Message({
+    content,
+    isFromUser: true,
+    shouldBeRenderedInPreview: true,
+    shouldBeForwardedToLLM: true,
+    shouldBeCountedAsAPrompt: true,
+  });
+}
+
+function buildBasicAssistantMessage(content) {
+  return new Message({
+    content,
+    isFromUser: false,
+    shouldBeRenderedInPreview: true,
+    shouldBeForwardedToLLM: true,
+    shouldBeCountedAsAPrompt: false,
+  });
+}

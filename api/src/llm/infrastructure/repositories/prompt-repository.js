@@ -21,9 +21,7 @@ const logger = child('llm:api', { event: SCOPES.LLM });
  * @returns {Promise<ReadableStream>}
  */
 export async function prompt({ message, chat }) {
-  const messagesToForward = chat.messages
-    .slice(-chat.configuration.historySize)
-    .map((message) => message.toLLMHistory());
+  const messagesToForward = chat.messagesToForwardToLLM;
   const payload = JSON.stringify({
     prompt: message,
     configuration: chat.configuration.toDTO(),
