@@ -22,6 +22,7 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
+    sinon.stub(localeService, 'supportedLocales').value(['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl']);
 
     cookiesService = this.owner.lookup('service:cookies');
     sinon.stub(cookiesService, 'write');
