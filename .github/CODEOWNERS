@@ -75,6 +75,7 @@
 /certif/app/services/session.js @1024pix/team-acces
 
 /admin/app/services/oidc-identity-providers.js @1024pix/team-acces
+/admin/app/services/locale.js @1024pix/team-acces
 /admin/app/services/session.js @1024pix/team-acces
 
 # Directories maintained by team Captains
