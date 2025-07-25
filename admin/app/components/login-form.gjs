@@ -66,7 +66,7 @@ export default class LoginForm extends Component {
     switch (error?.code) {
       case 'USER_IS_TEMPORARY_BLOCKED':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: this.url.forgottenPasswordUrl,
+          url: this.url.pixAppForgottenPasswordUrl,
           htmlSafe: true,
         });
         break;
