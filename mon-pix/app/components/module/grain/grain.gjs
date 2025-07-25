@@ -216,6 +216,19 @@ export default class ModuleGrain extends Component {
     return this.intl.t(`pages.modulix.grain.tag.${this.args.grain.type}`);
   }
 
+  get skipButtonLabel() {
+    if (!this.hasStepper) {
+      return this.intl.t('pages.modulix.buttons.grain.skipActivity');
+    }
+
+    const stepper = this.args.grain.components.find((component) => component.type === 'stepper');
+    const stepperElements = stepper.steps.flatMap((step) => step.elements);
+    const stepperWithAnswerableElement = stepperElements.some((element) => element.isAnswerable);
+    return stepperWithAnswerableElement
+      ? this.intl.t('pages.modulix.buttons.grain.skipActivity')
+      : this.intl.t('pages.modulix.buttons.grain.skip');
+  }
+
   <template>
     <article
       id={{this.elementId}}
@@ -280,7 +293,7 @@ export default class ModuleGrain extends Component {
         {{#if this.shouldDisplaySkipButton}}
           <footer class="grain-card__footer grain-card__footer__with-skip-button">
             <PixButton @variant="tertiary" @triggerAction={{@onGrainSkip}} @iconAfter="arrowBottom">
-              {{t "pages.modulix.buttons.grain.skip"}}
+              {{this.skipButtonLabel}}
             </PixButton>
           </footer>
         {{/if}}

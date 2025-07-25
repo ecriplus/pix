@@ -383,7 +383,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
           <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
         // then
-        assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).doesNotExist();
+        assert
+          .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') }))
+          .doesNotExist();
       });
 
       module('when canMoveToNextGrain is true', function () {
@@ -532,7 +534,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
             <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
 
           // then
-          assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
+          assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') })).exists();
         });
       });
 
@@ -573,7 +575,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
             <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{false}} @passage={{this.passage}} />`);
 
           // then
-          assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).doesNotExist();
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') }))
+            .doesNotExist();
         });
       });
     });
@@ -630,7 +634,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                                 @onGrainContinue={{this.onGrainContinue}} @onGrainSkip={{this.onGrainSkip}}
                                 @passage={{this.passage}} />`,
       );
-      await clickByName(t('pages.modulix.buttons.grain.skip'));
+      await clickByName(t('pages.modulix.buttons.grain.skipActivity'));
 
       // then
       sinon.assert.calledOnce(onGrainSkipStub);
@@ -1020,7 +1024,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).doesNotExist();
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') }))
+            .doesNotExist();
         });
       });
     });
@@ -1082,10 +1088,12 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
             // when
             const screen = await render(hbs`
-          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}} @onStepperNextStep={{this.onStepperNextStep}} />`);
+              <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}}
+                                    @onElementRetry={{this.onElementRetry}}
+                                    @onStepperNextStep={{this.onStepperNextStep}} />`);
 
             // then
-            assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
+            assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') })).exists();
           });
 
           test('should not display continue button', async function (assert) {
@@ -1187,7 +1195,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
               await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
               // then
-              assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
+              assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') })).exists();
             });
 
             test('should not display continue button', async function (assert) {
@@ -1306,7 +1314,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @canMoveToNextGrain={{true}} @onElementRetry={{this.onElementRetry}}  />`);
 
             // then
-            assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skip') })).exists();
+            assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') })).exists();
           });
           test('should not display continue button', async function (assert) {
             // given
