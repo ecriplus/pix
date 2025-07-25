@@ -24,6 +24,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
     super(...arguments);
     if (this.args.campaignParticipationResult.canRetry) {
       this.pixMetrics.trackEvent("Présence du bouton 'Repasser un parcours'", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
@@ -31,6 +32,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
 
     if (this.args.campaignParticipationResult.canReset) {
       this.pixMetrics.trackEvent("Présence du bouton 'Remettre à zéro et tout retenter'", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
@@ -40,6 +42,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @action
   handleRetryClick() {
     this.pixMetrics.trackEvent("Clic sur le bouton 'Repasser mon parcours'", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Affichage du bloc RAZ/Repasser un parcours',
     });
@@ -49,6 +52,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   toggleResetModalVisibility() {
     if (!this.isResetModalVisible) {
       this.pixMetrics.trackEvent("Ouverture de la modale 'Remettre à zéro et tout retenter'", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Affichage du bloc RAZ/Repasser un parcours',
       });
@@ -60,6 +64,7 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   @action
   handleResetClick() {
     this.pixMetrics.trackEvent("Confirmation de la modale 'Remettre à zéro et tout retenter'", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Affichage du bloc RAZ/Repasser un parcours',
     });

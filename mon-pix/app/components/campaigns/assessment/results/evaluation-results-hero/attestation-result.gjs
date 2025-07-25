@@ -37,6 +37,7 @@ export default class AttestationResult extends Component {
 
   sendMetrics() {
     this.pixMetrics.trackEvent('Clic sur le bouton Télécharger (attestation)', {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Cliquer sur le bouton Télécharger (attestation)',
     });

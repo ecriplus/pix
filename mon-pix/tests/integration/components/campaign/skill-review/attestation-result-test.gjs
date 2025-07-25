@@ -92,6 +92,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       assert.ok(
         metricsAddStub.calledWithExactly('Clic sur le bouton Télécharger (attestation)', {
           category: 'Fin de parcours',
+          disabled: true,
           action: 'Cliquer sur le bouton Télécharger (attestation)',
         }),
       );

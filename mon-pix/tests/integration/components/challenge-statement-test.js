@@ -291,6 +291,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
                 // then
                 sinon.assert.calledWithExactly(trackEvent, "Clic sur le bouton de lecture d'épreuve : play", {
                   category: 'Vocalisation',
+                  disabled: true,
                   action: "Lecture d'une épreuve",
                 });
                 assert.ok(true);

@@ -21,6 +21,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
     super(...arguments);
 
     this.pixMetrics.trackEvent("Affichage de l'onglet Formations", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Affichage onglet',
     });
@@ -48,6 +49,7 @@ export default class EvaluationResultsTabsTrainings extends Component {
       campaignParticipationResultToShare.canImprove = false;
 
       this.pixMetrics.trackEvent("Envoi des résultats depuis l'onglet Formations", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Envoi des résultats',
       });

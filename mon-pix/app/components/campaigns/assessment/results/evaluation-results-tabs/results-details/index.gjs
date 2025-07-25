@@ -10,6 +10,7 @@ export default class EvaluationResultsDetailsTab extends Component {
   constructor() {
     super(...arguments);
     this.pixMetrics.trackEvent("Affichage de l'onglet Détails", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Affichage onglet',
     });

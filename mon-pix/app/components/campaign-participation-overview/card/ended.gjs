@@ -68,6 +68,7 @@ export default class Ended extends Component {
   @action
   onClick() {
     this.pixMetrics.trackEvent(`Voir le détail d'une participation partagée`, {
+      disabled: true,
       category: 'Campaign participation',
       action: `Voir le détail d'une participation partagée`,
     });

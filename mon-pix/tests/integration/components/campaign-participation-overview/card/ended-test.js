@@ -169,6 +169,7 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
         sinon.assert.calledWithExactly(metrics.trackEvent, `Voir le détail d'une participation partagée`, {
           category: 'Campaign participation',
           action: `Voir le détail d'une participation partagée`,
+          disabled: true,
         });
         assert.ok(true);
       });

@@ -27,6 +27,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
   @action
   handleCustomButtonDisplay() {
     this.pixMetrics.trackEvent('Présence d’un bouton comportant un lien externe', {
+      disabled: true,
       category: 'Fin de parcours',
       action: "Affichage du bloc de l'organisation",
     });
@@ -35,6 +36,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
   @action
   handleCustomButtonClick() {
     this.pixMetrics.trackEvent('Clic sur le lien externe', {
+      disabled: true,
       category: 'Fin de parcours',
       action: "Affichage du bloc de l'organisation",
     });

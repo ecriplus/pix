@@ -252,6 +252,7 @@ export default class ChallengeController extends Controller {
     this.pixMetrics.trackEvent(
       `Clic sur le bouton d'activation de la vocalisation : ${this.isTextToSpeechActivated ? 'activé' : 'désactivé'}`,
       {
+        disabled: true,
         category: 'Vocalisation',
         action: 'Activation globale de la vocalisation',
       },

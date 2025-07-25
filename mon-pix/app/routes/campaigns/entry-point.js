@@ -43,6 +43,7 @@ export default class EntryPoint extends Route {
     }
     if (queryParams.retry) {
       this.pixMetrics.trackEvent('Clic sur Retenter la campagne', {
+        disabled: true,
         category: 'Campagnes',
         action: 'Retenter la campagne',
       });
@@ -50,6 +51,7 @@ export default class EntryPoint extends Route {
     }
     if (queryParams.reset) {
       this.pixMetrics.trackEvent('Clic sur Remise à zéro de la campagne', {
+        disabled: true,
         category: 'Campagnes',
         action: 'Remise à zéro de la campagne',
       });

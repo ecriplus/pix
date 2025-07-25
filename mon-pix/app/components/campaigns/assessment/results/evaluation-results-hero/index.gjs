@@ -101,6 +101,7 @@ export default class EvaluationResultsHero extends Component {
       await adapter.beginImprovement(campaignParticipationResult.id);
 
       this.pixMetrics.trackEvent("Clic sur le bouton 'Je retente'", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Amélioration des résultats',
       });
@@ -130,6 +131,7 @@ export default class EvaluationResultsHero extends Component {
       this.args.onResultsShared();
 
       this.pixMetrics.trackEvent("Envoi des résultats depuis l'en-tête", {
+        disabled: true,
         category: 'Fin de parcours',
         action: 'Envoi des résultats',
       });
@@ -148,6 +150,7 @@ export default class EvaluationResultsHero extends Component {
   @action
   handleBackToHomepageDisplay() {
     this.pixMetrics.trackEvent("Affichage du bouton 'Revenir à la page d'accueil'", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Sortie de parcours',
     });
@@ -156,6 +159,7 @@ export default class EvaluationResultsHero extends Component {
   @action
   handleBackToHomepageClick() {
     this.pixMetrics.trackEvent("Clic sur le bouton 'Revenir à la page d'accueil'", {
+      disabled: true,
       category: 'Fin de parcours',
       action: 'Sortie de parcours',
     });
