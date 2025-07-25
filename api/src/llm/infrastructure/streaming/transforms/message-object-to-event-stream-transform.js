@@ -8,14 +8,20 @@ export function getTransform(llmMessageAccumulator) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
-      const { message } = chunk;
-      if (!message) {
-        callback();
-        return;
+      const { message, isValid } = chunk;
+      let data = '';
+
+      if (isValid) {
+        data += 'event: victory-conditions-success\ndata: \n\n';
       }
-      llmMessageAccumulator.push(...message.split(''));
-      const data = toEventStreamData(message);
-      callback(null, data);
+
+      if (message) {
+        llmMessageAccumulator.push(...message.split(''));
+        data += toEventStreamData(message);
+      }
+
+      if (data) callback(null, data);
+      else callback();
     },
   });
 }

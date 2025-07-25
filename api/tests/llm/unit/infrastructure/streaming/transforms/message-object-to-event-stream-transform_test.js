@@ -25,6 +25,37 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       // then
       expect(result).to.equal('data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\n');
     });
+    it('should return a Transform that is capable of convert object "isValid" into event stream event', async function () {
+      // given
+      const input = [
+        { message: 'Coucou les amis comment ça va ?' },
+        { pasMessage: 'Ca va super' },
+        { message: 'Et toi ?' },
+        {
+          usage: { superKey: 'wowouuo' },
+          isValid: true,
+          message: 'message possible dans le mm chunk que isValid Event',
+        },
+        {
+          usage: { superKey: 'wowouuo' },
+          isValid: false,
+          message: 'done',
+        },
+      ];
+      const readable = Readable.from(input);
+      const transform = getTransform([]);
+      let result = '';
+
+      // when
+      readable.pipe(transform);
+      transform.on('data', (str) => (result = result + str));
+      await finished(transform);
+
+      // then
+      expect(result).to.equal(
+        'data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\nevent: victory-conditions-success\ndata: \n\ndata: message possible dans le mm chunk que isValid Event\n\ndata: done\n\n',
+      );
+    });
 
     it('should replace "\n" with "\ndata: " to comply with event stream data', async function () {
       // given
