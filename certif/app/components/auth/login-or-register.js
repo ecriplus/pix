@@ -19,7 +19,7 @@ export default class LoginOrRegister extends Component {
   @action
   onLanguageChange(value) {
     this.selectedLanguage = value;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('join', {
       queryParams: {
         lang: null,

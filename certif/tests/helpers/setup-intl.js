@@ -5,6 +5,6 @@ export default function setupIntl(hooks, locale = 'fr') {
 
   hooks.beforeEach(function () {
     this.localeService = this.owner.lookup('service:locale');
-    this.localeService.setLocale(locale);
+    this.localeService.setCurrentLocale(locale);
   });
 }

@@ -18,7 +18,7 @@ export default class LoginController extends Controller {
   @action
   onLanguageChange(value) {
     this.selectedLanguage = value;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('login', { queryParams: { lang: null } });
   }
 }

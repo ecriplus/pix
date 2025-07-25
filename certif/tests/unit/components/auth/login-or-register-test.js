@@ -15,14 +15,14 @@ module('Unit | Component | login-or-register', (hooks) => {
       const localeService = this.owner.lookup('service:locale');
       const router = this.owner.lookup('service:router');
 
-      sinon.stub(localeService, 'setLocale');
+      sinon.stub(localeService, 'setCurrentLocale');
       sinon.stub(router, 'replaceWith');
 
       // when
       component.onLanguageChange(ENGLISH_INTERNATIONAL_LOCALE);
 
       // then
-      sinon.assert.calledWith(localeService.setLocale, ENGLISH_INTERNATIONAL_LOCALE);
+      sinon.assert.calledWith(localeService.setCurrentLocale, ENGLISH_INTERNATIONAL_LOCALE);
       sinon.assert.calledWith(router.replaceWith, 'join', { queryParams: { lang: null } });
       assert.ok(component.selectedLanguage, ENGLISH_INTERNATIONAL_LOCALE);
     });
