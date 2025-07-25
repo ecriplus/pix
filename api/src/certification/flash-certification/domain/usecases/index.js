@@ -6,20 +6,17 @@ import * as challengeRepository from '../../../../shared/infrastructure/reposito
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
  *
  * @typedef {challengeRepository} ChallengeRepository
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {flashAlgorithmService} FlashAlgorithmService
  */
 const dependencies = {
   challengeRepository,
-  flashAlgorithmConfigurationRepository,
   sharedFlashAlgorithmConfigurationRepository,
   flashAlgorithmService,
 };

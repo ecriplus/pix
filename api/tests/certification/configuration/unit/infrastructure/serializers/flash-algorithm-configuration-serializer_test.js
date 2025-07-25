@@ -1,4 +1,4 @@
-import * as serializer from '../../../../../../src/certification/flash-certification/infrastructure/serializers/flash-algorithm-configuration-serializer.js';
+import * as serializer from '../../../../../../src/certification/configuration/infrastructure/serializers/flash-algorithm-configuration-serializer.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { expect } from '../../../../../test-helper.js';
 

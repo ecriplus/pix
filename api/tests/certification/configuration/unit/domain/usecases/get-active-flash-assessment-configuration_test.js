@@ -1,4 +1,4 @@
-import { getActiveFlashAssessmentConfiguration } from '../../../../../../src/certification/flash-certification/domain/usecases/get-active-flash-assessment-configuration.js';
+import { getActiveFlashAssessmentConfiguration } from '../../../../../../src/certification/configuration/domain/usecases/get-active-flash-assessment-configuration.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('#getActiveFlashAssessmentConfiguration', function () {

@@ -2,7 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function ({ flashAlgorithmConfiguration }) {
+export const serialize = ({ flashAlgorithmConfiguration }) => {
   const attributes = [
     'maximumAssessmentLength',
     'challengesBetweenSameCompetence',
@@ -17,5 +17,3 @@ const serialize = function ({ flashAlgorithmConfiguration }) {
     attributes,
   }).serialize(flashAlgorithmConfiguration);
 };
-
-export { serialize };

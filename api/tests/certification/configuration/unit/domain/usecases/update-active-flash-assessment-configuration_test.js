@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { createFlashAssessmentConfiguration } from '../../../../../../src/certification/flash-certification/domain/usecases/create-flash-assessment-configuration.js';
+import { createFlashAssessmentConfiguration } from '../../../../../../src/certification/configuration/domain/usecases/create-flash-assessment-configuration.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | UseCases | create-flash-assessment-configuration', function () {
