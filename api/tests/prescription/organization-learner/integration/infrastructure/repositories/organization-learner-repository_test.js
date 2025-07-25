@@ -831,6 +831,36 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       });
     });
 
+    context('when organization learner is linked to anonymous user', function () {
+      it('should return empry array', async function () {
+        // given
+        const attestation = databaseBuilder.factory.buildAttestation();
+        const firstUser = new User(
+          databaseBuilder.factory.buildUser({ firstName: '', lastName: '', isAnonymous: true }),
+        );
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          firstName: '',
+          lastName: '',
+          division: '',
+          userId: firstUser.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await organizationLearnerRepository.getAttestationStatusForOrganizationLearnersAndKey({
+          organizationId,
+          organizationLearners: [organizationLearner1],
+          attestationKey: attestation.key,
+        });
+
+        // then
+        expect(result).to.have.lengthOf(0);
+      });
+    });
+
     context('when organization learner has obtained his attestation', function () {
       it('should return attestation participants status with obtainedAt filled', async function () {
         // given
