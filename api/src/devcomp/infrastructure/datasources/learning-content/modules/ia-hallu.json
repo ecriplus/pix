@@ -743,7 +743,7 @@
                       "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p>La réponse de l’IA ne comporte pas d'éléments inventés. La vérification de Léonie montre que le sportif s’était gravement blessé la veille de la question à l’IA.<br>N'hésitez pas à réessayer.</p>"
                       }
                     },
                     {
@@ -751,7 +751,7 @@
                       "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p><p>L’erreur faite par l’IA ne vient pas de la demande de l’utilisateur mais plutôt du logiciel d’IA générative.<br>N'hésitez pas à réessayer.</p>"
                       }
                     },
                     {
@@ -793,7 +793,7 @@
                       "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p><p>Les réponses de l’IA tentent de répondre correctement à la question de Darius. Ce ne sont pas des hallucinations.<br>N'hésitez pas à réessayer.</p>"
                       }
                     },
                     {
@@ -806,10 +806,10 @@
                     },
                     {
                       "id": "3",
-                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou trop anciennes.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse</p>",
-                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p>Il est vrai que de nouveaux émojis sont régulièrement créés. Mais ce n’est pas la source de l’erreur de l’IA ici.<br>N'hésitez pas à réessayer.</p>"
                       }
                     }
                   ],
@@ -851,15 +851,15 @@
                       "content": "<p>La demande utilisateur comporte une erreur que l’IA n’a pas corrigée.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p><p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p><p>La demande d’Amalia ne comprend pas d’erreur. La source de l’erreur se situe du côté du logiciel d’IA générative.<br>N'hésitez pas à réessayer.</p>"
                       }
                     },
                     {
                       "id": "3",
-                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou obsolètes.</p>",
+                      "content": "<p>Les données d’entraînement de l’IA sont fausses ou trop anciennes.</p>",
                       "feedback": {
                         "state": "<p>Mauvaise réponse.</p>",
-                        "diagnosis": "<p>N'hésitez pas à réessayer. <br>Pour vous aider à identifier la cause de l'erreur, vous pouvez relire les informations plus haut. 👆</p>"
+                        "diagnosis": "<p>L’erreur relevée par Amalia est que cet article ne semble pas exister. La source de l’erreur n’est donc pas un problème de données d’entraînement. <br>N'hésitez pas à réessayer.</p>"
                       }
                     }
                   ],
