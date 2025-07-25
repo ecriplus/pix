@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { UnauthorizedError } from '../../../shared/application/http-errors.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { Certificate } from '../domain/models/v3/Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -77,17 +76,10 @@ const getPDFCertificate = async function (
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
-  const userId = request.auth.credentials.userId;
   const certificationCourseId = request.params.certificationCourseId;
   const { i18n } = request;
   const { isFrenchDomainExtension } = request.query;
   const locale = i18n.getLocale();
-
-  const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
-
-  if (certificationCourse.getUserId() !== userId) {
-    throw new UnauthorizedError();
-  }
 
   const certificate = await usecases.getCertificate({ certificationCourseId, locale });
 

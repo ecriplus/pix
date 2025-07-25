@@ -106,4 +106,52 @@ describe('Certification | Results | Unit | Application | Certification Route', f
       expect(response.statusCode).to.equal(400);
     });
   });
+
+  describe('GET /api/attestation/{certificationCourseId}', function () {
+    it('should reject access if not authenticated', async function () {
+      // given
+      const certificationCourseId = 3695;
+      sinon
+        .stub(securityPreHandlers, 'checkUserOwnsCertificationCourse')
+        .callsFake((_, h) => h.response().code(403).takeover());
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+
+      const response = await httpTestServer.request(
+        'GET',
+        `/api/attestation/${certificationCourseId}?isFrenchDomainExtension=true&lang=fr`,
+      );
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkUserOwnsCertificationCourse);
+      expect(response.statusCode).to.equal(403);
+    });
+
+    it('should reject access to a certification that does not belong to the current user', async function () {
+      // given
+      const userId = 123;
+      const certificationCourseId = 3695;
+      sinon
+        .stub(securityPreHandlers, 'checkUserOwnsCertificationCourse')
+        .callsFake((_, h) => h.response().code(403).takeover());
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+
+      const response = await httpTestServer.request(
+        'GET',
+        `/api/attestation/${certificationCourseId}?isFrenchDomainExtension=true&lang=fr`,
+        {
+          auth: { credentials: { userId } },
+        },
+      );
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkUserOwnsCertificationCourse);
+      expect(response.statusCode).to.equal(403);
+    });
+  });
 });

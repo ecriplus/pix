@@ -13,6 +13,12 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/attestation/{certificationCourseId}',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserOwnsCertificationCourse,
+            assign: 'hasAuthorizationToAccessOwnCertificationCourse',
+          },
+        ],
         validate: {
           params: Joi.object({
             certificationCourseId: identifiersType.certificationCourseId,
