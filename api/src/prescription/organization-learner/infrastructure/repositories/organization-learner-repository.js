@@ -153,13 +153,17 @@ async function getAttestationStatusForOrganizationLearnersAndKey({
   organizationId,
   attestationsApi,
 }) {
-  const userIds = organizationLearners.map((learner) => learner.userId);
+  const isRealLearner = (learner) =>
+    learner.firstName !== '' && learner.lastName !== '' && learner.firstName !== null && learner.lastName !== null;
+  const realOrganizationLearners = organizationLearners.filter(isRealLearner);
+  const userIds = realOrganizationLearners.map((learner) => learner.userId);
   const attestations = await attestationsApi.getAttestationsUserDetail({
     attestationKey,
     userIds,
     organizationId,
   });
-  return organizationLearners.map((organizationLearner) => {
+
+  return realOrganizationLearners.filter(isRealLearner).map((organizationLearner) => {
     const attestation = attestations.find(({ userId }) => userId === organizationLearner.userId);
     return new AttestationParticipantStatus({
       attestationKey,
