@@ -12,6 +12,10 @@ export async function getProposalsListAsCsv(modules) {
     data: proposals,
     delimiter: '\t',
     fileHeaders: [
+      { label: 'ProposalModuleSlug', value: 'moduleSlug' },
+      { label: 'ProposalGrainTitle', value: 'grainTitle' },
+      { label: 'ProposalGrainId', value: 'grainId' },
+      { label: 'ProposalGrainPosition', value: (row) => row.grainPosition + 1 },
       { label: 'ProposalElementId', value: 'id' },
       { label: 'ProposalElementType', value: 'type' },
       { label: 'ProposalActivityElementPosition', value: (row) => row.activityElementPosition + 1 },
@@ -22,11 +26,6 @@ export async function getProposalsListAsCsv(modules) {
         label: 'ProposalIsSolution',
         value: (row) => (row.isSolution ? '=TRUE' : '=FALSE'),
       },
-      { label: 'ProposalGrainPosition', value: (row) => row.grainPosition + 1 },
-      { label: 'ProposalGrainId', value: 'grainId' },
-      { label: 'ProposalGrainTitle', value: 'grainTitle' },
-      { label: 'ProposalModuleSlug', value: 'moduleSlug' },
-      { label: 'ProposalModuleId', value: 'moduleId' },
     ],
   });
 }
