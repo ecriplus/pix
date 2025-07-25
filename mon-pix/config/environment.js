@@ -133,11 +133,6 @@ module.exports = function (environment) {
       strikethrough: true,
     },
 
-    metrics: {
-      enabled: analyticsEnabled,
-      matomoUrl: process.env.WEB_ANALYTICS_URL,
-    },
-
     companion: {
       disabled: false,
     },
@@ -209,7 +204,6 @@ module.exports = function (environment) {
     ENV.APP.LOAD_EXTERNAL_SCRIPT = false;
     ENV.APP.FT_FOCUS_CHALLENGE_ENABLED = true;
     ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID = 999;
-    ENV.metrics.enabled = false;
 
     ENV.companion.disabled = true;
 

@@ -2,21 +2,12 @@
 
 require('dotenv').config({ quiet: true });
 
-function _isFeatureEnabled(environmentVariable) {
-  return environmentVariable === 'true';
-}
-
 module.exports = function (environment) {
-  const analyticsEnabled = _isFeatureEnabled(process.env.WEB_ANALYTICS_ENABLED);
   const ENV = {
     modulePrefix: 'junior',
     environment,
     locationType: 'history',
     rootURL: '/',
-    metrics: {
-      enabled: analyticsEnabled,
-      matomoUrl: process.env.WEB_ANALYTICS_URL,
-    },
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {
@@ -61,7 +52,6 @@ module.exports = function (environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
     ENV.APP.CHALLENGE_DISPLAY_DELAY = 0;
-    ENV.metrics.enabled = false;
 
     ENV['ember-cli-mirage'] = {
       enabled: true,

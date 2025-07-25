@@ -121,10 +121,6 @@ module.exports = function (environment) {
       enabled: false,
     },
 
-    metrics: {
-      enabled: analyticsEnabled,
-      matomoUrl: process.env.WEB_ANALYTICS_URL,
-    },
     metricsAdapters: [
       {
         name: 'PlausibleAdapter',
@@ -171,7 +167,6 @@ module.exports = function (environment) {
       autoClear: null,
       clearDuration: null,
     };
-    ENV.metrics.enabled = false;
     ENV.pagination.debounce = 0;
 
     ENV['ember-cli-mirage'] = {

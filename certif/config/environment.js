@@ -12,14 +12,9 @@ function _getEnvironmentVariableAsNumber({ environmentVariableName, defaultValue
   );
 }
 
-function _isFeatureEnabled(environmentVariable) {
-  return environmentVariable === 'true';
-}
-
 const ACTIVE_FEATURE_TOGGLES = [];
 
 module.exports = function (environment) {
-  const analyticsEnabled = _isFeatureEnabled(process.env.WEB_ANALYTICS_ENABLED);
   const ENV = {
     modulePrefix: 'pix-certif',
     environment,
@@ -105,19 +100,10 @@ module.exports = function (environment) {
       enabled: false,
     },
 
-    matomo: {},
-
     'ember-inputmask5': {
       defaults: { showMaskOnHover: false },
     },
   };
-
-  if (environment === 'development') {
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-      ENV.matomo.debug = true;
-    }
-  }
 
   if (environment === 'test') {
     // Testem prefers this...
@@ -138,12 +124,6 @@ module.exports = function (environment) {
       enabled: true,
       usingProxy: false,
     };
-  }
-
-  if (environment === 'production') {
-    if (analyticsEnabled) {
-      ENV.matomo.url = process.env.WEB_ANALYTICS_URL;
-    }
   }
 
   // Warn for unknown feature toggles
