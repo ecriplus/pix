@@ -24,7 +24,7 @@ const getCertificateByVerificationCode = async function (
 
   const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
 
-  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
+  if (certificationCourse.isV3()) {
     certificate = await usecases.getCertificate({
       certificationCourseId: certificationCourse.getId(),
       locale,
@@ -51,7 +51,7 @@ const getCertificate = async function (
   const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
 
   let certificate;
-  if (certificationCourse.isV3() && (await featureToggles.get('isV3CertificationPageEnabled'))) {
+  if (certificationCourse.isV3()) {
     certificate = await usecases.getCertificate({
       certificationCourseId: certificationCourse.getId(),
       locale,

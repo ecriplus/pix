@@ -15,84 +15,43 @@ const { FRENCH } = LANGUAGES_CODE;
 describe('Certification | Results | Unit | Application | certificate-controller', function () {
   describe('#getCertificateByVerificationCode', function () {
     describe('when certification course version is V3', function () {
-      describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
-        it('should return serialized V3 certificate data', async function () {
-          // given
-          const i18n = getI18n();
-          await featureToggles.set('isV3CertificationPageEnabled', true);
-          const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
-          const locale = 'fr-fr';
+      it('should return serialized V3 certificate data', async function () {
+        // given
+        const i18n = getI18n();
+        const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
+        const locale = 'fr-fr';
 
-          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
 
-          const certificateSerializerStub = { serialize: sinon.stub() };
+        const certificateSerializerStub = { serialize: sinon.stub() };
 
-          const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
+        const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
 
-          sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-          usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
+        sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
+        usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
 
-          sinon.stub(usecases, 'getCertificate');
-          const certificate = Symbol('certificate');
-          usecases.getCertificate.resolves(certificate);
+        sinon.stub(usecases, 'getCertificate');
+        const certificate = Symbol('certificate');
+        usecases.getCertificate.resolves(certificate);
 
-          sinon.stub(usecases, 'getShareableCertificate');
+        sinon.stub(usecases, 'getShareableCertificate');
 
-          // when
-          await certificateController.getCertificateByVerificationCode(request, hFake, {
-            requestResponseUtils: requestResponseUtilsStub,
-            certificateSerializer: certificateSerializerStub,
-          });
-
-          // then
-          expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
-            verificationCode: 'P-123456BB',
-          });
-          expect(usecases.getCertificate).calledOnceWithExactly({
-            certificationCourseId: certificationCourse.getId(),
-            locale,
-          });
-          expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
+        // when
+        await certificateController.getCertificateByVerificationCode(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
+          certificateSerializer: certificateSerializerStub,
         });
-      });
 
-      describe('when isV3CertificationPageEnabled feature toggle is disabled', function () {
-        it('should return serialized V2 certificate data', async function () {
-          // given
-          const i18n = getI18n();
-          await featureToggles.set('isV3CertificationPageEnabled', false);
-          const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
-          const locale = 'fr-fr';
-          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          const certificateSerializerStub = { serialize: sinon.stub() };
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-          sinon.stub(usecases, 'getShareableCertificate');
-          sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
-          sinon.stub(usecases, 'getCertificate');
-          usecases.getShareableCertificate
-            .withArgs({ verificationCode: 'P-123456BB', locale })
-            .resolves(Symbol('certificate'));
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-          const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
-          usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
-
-          // when
-          await certificateController.getCertificateByVerificationCode(request, hFake, {
-            requestResponseUtils: requestResponseUtilsStub,
-            certificateSerializer: certificateSerializerStub,
-          });
-
-          // then
-          expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
-            verificationCode: 'P-123456BB',
-          });
-          expect(usecases.getShareableCertificate).calledOnceWithExactly({
-            certificationCourseId: certificationCourse.getId(),
-            locale,
-          });
-          expect(usecases.getCertificate).to.not.have.been.calledOnce;
+        // then
+        expect(usecases.getCertificationCourseByVerificationCode).calledOnceWithExactly({
+          verificationCode: 'P-123456BB',
         });
+        expect(usecases.getCertificate).calledOnceWithExactly({
+          certificationCourseId: certificationCourse.getId(),
+          locale,
+        });
+        expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
       });
     });
 
@@ -181,102 +140,51 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     });
 
     describe('when certification course version is V3', function () {
-      describe('when isV3CertificationPageEnabled feature toggle is enabled', function () {
-        it('should return a serialized certificate', async function () {
-          // given
-          await featureToggles.set('isV3CertificationPageEnabled', true);
+      it('should return a serialized certificate', async function () {
+        // given
+        const userId = 1;
+        const certificationCourseId = 2;
+        const request = {
+          auth: { credentials: { userId } },
+          params: { certificationCourseId },
+          i18n: getI18n(),
+        };
 
-          const userId = 1;
-          const certificationCourseId = 2;
-          const request = {
-            auth: { credentials: { userId } },
-            params: { certificationCourseId },
-            i18n: getI18n(),
-          };
+        const locale = 'fr-fr';
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
 
-          const locale = 'fr-fr';
-          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-
-          const certificationCourse = domainBuilder.buildCertificationCourse({
-            id: certificationCourseId,
-            version: AlgorithmEngineVersion.V3,
-          });
-          const certificate = Symbol('V3 certificate');
-
-          sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
-          certificationSharedUsecases.getCertificationCourse
-            .withArgs({ certificationCourseId })
-            .resolves(certificationCourse);
-
-          sinon.stub(usecases, 'getCertificate');
-          usecases.getCertificate.withArgs({ certificationCourseId, locale }).resolves(certificate);
-
-          const certificateSerializerStub = {
-            serialize: sinon.stub(),
-          };
-
-          const dependencies = {
-            requestResponseUtils: requestResponseUtilsStub,
-            certificateSerializer: certificateSerializerStub,
-          };
-
-          // when
-          await certificateController.getCertificate(request, hFake, dependencies);
-
-          // then
-          const translate = getI18n().__;
-          expect(dependencies.certificateSerializer.serialize).to.have.been.calledWithExactly({
-            translate,
-            certificate,
-          });
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          version: AlgorithmEngineVersion.V3,
         });
-      });
+        const certificate = Symbol('V3 certificate');
 
-      describe('when isV3CertificationPageEnabled feature toggle is disabled', function () {
-        it('should return a serialized private certificate given by id', async function () {
-          // given
-          const userId = 1;
-          const certificationCourseId = 2;
-          const locale = 'fr-fr';
-          const request = {
-            auth: { credentials: { userId } },
-            params: { certificationCourseId },
-            i18n: getI18n(),
-          };
-          await featureToggles.set('isV3CertificationPageEnabled', false);
-          const certificationCourse = domainBuilder.buildCertificationCourse({
-            id: certificationCourseId,
-            version: AlgorithmEngineVersion.V3,
-          });
-          const certificate = Symbol('V2 private certificate');
-          sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
-          certificationSharedUsecases.getCertificationCourse
-            .withArgs({ certificationCourseId })
-            .resolves(certificationCourse);
-          sinon.stub(usecases, 'getPrivateCertificate');
-          usecases.getPrivateCertificate.withArgs({ userId, certificationCourseId, locale }).resolves(certificate);
+        sinon.stub(certificationSharedUsecases, 'getCertificationCourse');
+        certificationSharedUsecases.getCertificationCourse
+          .withArgs({ certificationCourseId })
+          .resolves(certificationCourse);
 
-          const privateCertificateSerializerStub = {
-            serialize: sinon.stub(),
-          };
+        sinon.stub(usecases, 'getCertificate');
+        usecases.getCertificate.withArgs({ certificationCourseId, locale }).resolves(certificate);
 
-          const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-          requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+        const certificateSerializerStub = {
+          serialize: sinon.stub(),
+        };
 
-          const dependencies = {
-            requestResponseUtils: requestResponseUtilsStub,
-            privateCertificateSerializer: privateCertificateSerializerStub,
-          };
+        const dependencies = {
+          requestResponseUtils: requestResponseUtilsStub,
+          certificateSerializer: certificateSerializerStub,
+        };
 
-          // when
-          await certificateController.getCertificate(request, hFake, dependencies);
+        // when
+        await certificateController.getCertificate(request, hFake, dependencies);
 
-          // then
-          const translate = getI18n().__;
-          expect(dependencies.privateCertificateSerializer.serialize).to.have.been.calledWithExactly(certificate, {
-            translate,
-          });
+        // then
+        const translate = getI18n().__;
+        expect(dependencies.certificateSerializer.serialize).to.have.been.calledWithExactly({
+          translate,
+          certificate,
         });
       });
     });

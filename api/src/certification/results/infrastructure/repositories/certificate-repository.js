@@ -272,7 +272,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
     return new Certificate({
       ...certificationCourseDTO,
       certificationDate: certificationCourseDTO.date,
-      resultCompetenceTree: (await featureToggles.get('isV3CertificationPageEnabled')) ? resultCompetenceTree : [],
+      resultCompetenceTree,
       acquiredComplementaryCertification: certifiedBadges.length ? certifiedBadges[0] : null,
     });
   }
