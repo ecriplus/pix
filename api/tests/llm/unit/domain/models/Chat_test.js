@@ -28,6 +28,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: false,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
         {
           content: 'un message pas vide',
@@ -38,6 +39,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: true,
           shouldBeCountedAsAPrompt: true,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
       ]);
     });
@@ -67,6 +69,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: false,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
       ]);
     });
@@ -94,6 +97,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: true,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
       ]);
     });
@@ -121,6 +125,35 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: true,
           shouldBeCountedAsAPrompt: true,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+        },
+      ]);
+    });
+
+    it('should set haveVictoryConditionsBeenFulfilled at true if given as true', function () {
+      // given
+      const chat = new Chat({
+        id: 'some-chat-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+
+      // when
+      chat.addUserMessage('some content', true, true);
+
+      // then
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'some content',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: true,
+          shouldBeForwardedToLLM: true,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: true,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: true,
         },
       ]);
     });
@@ -150,6 +183,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: false,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
         {
           content: 'un message pas vide',
@@ -160,6 +194,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: true,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
       ]);
     });
@@ -189,6 +224,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           shouldBeRenderedInPreview: false,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
         },
       ]);
     });
@@ -232,6 +268,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -242,6 +279,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -252,6 +290,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: true,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -262,6 +301,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeRenderedInPreview: false,
                 shouldBeCountedAsAPrompt: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -301,6 +341,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -311,6 +352,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -321,6 +363,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: true,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -331,6 +374,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeRenderedInPreview: false,
                 shouldBeCountedAsAPrompt: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -373,6 +417,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -383,6 +428,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -393,6 +439,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -432,6 +479,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -442,6 +490,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -452,6 +501,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -496,6 +546,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -506,6 +557,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -516,6 +568,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -555,6 +608,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -565,6 +619,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -575,6 +630,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -617,6 +673,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -627,6 +684,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -637,6 +695,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -676,6 +735,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: 'some answer',
@@ -686,6 +746,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: false,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
               {
                 content: undefined,
@@ -696,6 +757,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 shouldBeForwardedToLLM: false,
                 shouldBeRenderedInPreview: true,
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+                haveVictoryConditionsBeenFulfilled: undefined,
               },
             ]);
           });
@@ -818,6 +880,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
           }),
           new Message({
             attachmentName: 'file.txt',
@@ -850,6 +913,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
           {
             content: 'message llm 1',
@@ -860,6 +924,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeRenderedInPreview: true,
             shouldBeForwardedToLLM: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
           {
             content: undefined,
@@ -870,6 +935,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
           },
           {
             content: undefined,
@@ -880,6 +946,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: false,
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
         ],
       });
@@ -905,6 +972,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
           {
             content: 'message llm 1',
@@ -915,6 +983,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeRenderedInPreview: true,
             shouldBeForwardedToLLM: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
           {
             content: undefined,
@@ -925,6 +994,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeForwardedToLLM: true,
             shouldBeRenderedInPreview: true,
             hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
           },
           {
             content: undefined,
@@ -972,6 +1042,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               shouldBeForwardedToLLM: true,
               shouldBeRenderedInPreview: true,
               hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
               attachmentName: 'file.txt',

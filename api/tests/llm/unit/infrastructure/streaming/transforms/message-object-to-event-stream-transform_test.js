@@ -6,6 +6,14 @@ import { expect } from '../../../../../test-helper.js';
 
 describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectToEventStreamTransform', function () {
   describe('#getTransform', function () {
+    let streamCapture;
+    beforeEach(function () {
+      streamCapture = {
+        LLMMessageParts: [],
+        haveVictoryConditionsBeenFulfilled: false,
+      };
+    });
+
     it('should return a Transform that is capable of convert object "message" into event stream data', async function () {
       // given
       const input = [
@@ -14,7 +22,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
         { message: 'Et toi ?' },
       ];
       const readable = Readable.from(input);
-      const transform = getTransform([]);
+      const transform = getTransform(streamCapture);
       let result = '';
 
       // when
@@ -43,7 +51,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
         },
       ];
       const readable = Readable.from(input);
-      const transform = getTransform([]);
+      const transform = getTransform(streamCapture);
       let result = '';
 
       // when
@@ -61,7 +69,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       // given
       const input = [{ message: '\n des retours à \n la ligne \n\n dans tous les sens\n' }];
       const readable = Readable.from(input);
-      const transform = getTransform([]);
+      const transform = getTransform(streamCapture);
       let result = '';
 
       // when
@@ -75,25 +83,52 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       );
     });
 
-    it('should store the whole message in the accumulator, before converting it to event stream data', async function () {
-      // given
-      const input = [
-        { message: 'Coucou les amis \ncomment ça va ?' },
-        { pasMessage: 'Ca va super' },
-        { message: 'Et toi ?' },
-      ];
-      const readable = Readable.from(input);
-      const acc = [];
-      const transform = getTransform(acc);
+    context('streamCapture', function () {
+      it('should store all the LLM response message parts in the streamCapture object while transforming', async function () {
+        // given
+        const input = [
+          { message: 'Coucou les amis \ncomment ça va ?' },
+          { pasMessage: 'Ca va super' },
+          { message: 'Et toi ?' },
+        ];
+        const readable = Readable.from(input);
+        const transform = getTransform(streamCapture);
 
-      // when
-      readable.pipe(transform);
-      // eslint-disable-next-line no-empty-function
-      transform.on('data', () => {});
-      await finished(transform);
+        // when
+        readable.pipe(transform);
+        // eslint-disable-next-line no-empty-function
+        transform.on('data', () => {});
+        await finished(transform);
 
-      // then
-      expect(acc.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
+        // then
+        expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
+        expect(streamCapture.haveVictoryConditionsBeenFulfilled).to.be.false;
+      });
+
+      it('should toggle "haveVictoryConditionsBeenFulfilled" to true when isValid: true appears in stream', async function () {
+        // given
+        const input = [
+          { message: 'Coucou les amis \ncomment ça va ?' },
+          { pasMessage: 'Ca va super' },
+          { message: 'Et toi ?' },
+          {
+            usage: { superKey: 'wowouuo' },
+            isValid: true,
+          },
+        ];
+        const readable = Readable.from(input);
+        const transform = getTransform(streamCapture);
+
+        // when
+        readable.pipe(transform);
+        // eslint-disable-next-line no-empty-function
+        transform.on('data', () => {});
+        await finished(transform);
+
+        // then
+        expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
+        expect(streamCapture.haveVictoryConditionsBeenFulfilled).to.be.true;
+      });
     });
   });
 });

@@ -20,7 +20,11 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
+          new Message({
+            content: 'Salut',
+            isFromUser: true,
+            shouldBeRenderedInPreview: true,
+          }),
           new Message({
             content: 'Bonjour comment puis-je vous aider ?',
             isFromUser: false,
@@ -39,12 +43,19 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         inputMaxChars: 500,
         inputMaxPrompts: 4,
         messages: [
-          { content: 'Salut', attachmentName: undefined, isFromUser: true, isAttachmentValid: false },
+          {
+            content: 'Salut',
+            attachmentName: undefined,
+            isFromUser: true,
+            isAttachmentValid: false,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
           {
             content: 'Bonjour comment puis-je vous aider ?',
             attachmentName: undefined,
             isFromUser: false,
             isAttachmentValid: false,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
         ],
       });
@@ -66,11 +77,17 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           }),
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: false }),
+            new Message({
+              content: 'Salut',
+              isFromUser: true,
+              shouldBeRenderedInPreview: false,
+              haveVictoryConditionsBeenFulfilled: true,
+            }),
             new Message({
               content: 'Bonjour comment puis-je vous aider ?',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
           ],
         });
@@ -90,6 +107,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               attachmentName: undefined,
               isFromUser: false,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: true,
             },
           ],
         });
@@ -123,6 +141,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
               content: 'i should not be serialized',
@@ -144,6 +163,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
           ],
         });
@@ -158,30 +178,40 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           inputMaxChars: 500,
           inputMaxPrompts: 4,
           messages: [
-            { content: 'Salut', attachmentName: undefined, isFromUser: true, isAttachmentValid: false },
+            {
+              content: 'Salut',
+              attachmentName: undefined,
+              isFromUser: true,
+              isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
             {
               content: 'Bonjour comment puis-je vous aider ?',
               attachmentName: undefined,
               isFromUser: false,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: 'Que contient ce fichier ?',
               attachmentName: 'chien.webp',
               isFromUser: true,
               isAttachmentValid: true,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
               attachmentName: undefined,
               isFromUser: false,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               attachmentName: 'chat.webp',
               isFromUser: true,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: true,
             },
           ],
         });
@@ -215,6 +245,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
               content: 'i should not be serialized',
@@ -236,6 +267,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
+              haveVictoryConditionsBeenFulfilled: true,
             }),
           ],
         });
@@ -250,42 +282,54 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           inputMaxChars: 500,
           inputMaxPrompts: 4,
           messages: [
-            { content: 'Salut', attachmentName: undefined, isFromUser: true, isAttachmentValid: false },
+            {
+              content: 'Salut',
+              attachmentName: undefined,
+              isFromUser: true,
+              isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
             {
               content: 'Bonjour comment puis-je vous aider ?',
               attachmentName: undefined,
               isFromUser: false,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: undefined,
               attachmentName: 'chien.webp',
               isFromUser: true,
               isAttachmentValid: true,
+              haveVictoryConditionsBeenFulfilled: true,
             },
             {
               content: 'Que contient ce fichier ?',
               attachmentName: undefined,
               isFromUser: true,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
               attachmentName: undefined,
               isFromUser: false,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: undefined,
               attachmentName: 'chat.webp',
               isFromUser: true,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               attachmentName: undefined,
               isFromUser: true,
               isAttachmentValid: false,
+              haveVictoryConditionsBeenFulfilled: true,
             },
           ],
         });

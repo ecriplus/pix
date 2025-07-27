@@ -1,10 +1,16 @@
 import { Transform } from 'node:stream';
 
 /**
- * @param {Array<string>} llmMessageAccumulator Array of characters that will hold the complete LLM response. Using an array so we can pass around the reference.
+ * @typedef {Object} StreamCapture
+ * @property {string[]} LLMMessageParts - Accumulated message chunks.
+ * @property {boolean=} haveVictoryConditionsBeenFulfilled - Whether victory conditions were fulfilled during this exchange or not
+ */
+
+/**
+ * @param {StreamCapture} streamCapture Structure that will hold state, such as the accumulated LLM response
  * @returns {module:stream.internal.Transform}
  */
-export function getTransform(llmMessageAccumulator) {
+export function getTransform(streamCapture) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
@@ -13,10 +19,11 @@ export function getTransform(llmMessageAccumulator) {
 
       if (isValid) {
         data += 'event: victory-conditions-success\ndata: \n\n';
+        streamCapture.haveVictoryConditionsBeenFulfilled = true;
       }
 
       if (message) {
-        llmMessageAccumulator.push(...message.split(''));
+        streamCapture.LLMMessageParts.push(...message.split(''));
         data += toEventStreamData(message);
       }
 

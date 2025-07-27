@@ -17,6 +17,7 @@ export function serialize(chat) {
         content: next.content,
         attachmentName: current.attachmentName,
         isFromUser: true,
+        haveVictoryConditionsBeenFulfilled: next.haveVictoryConditionsBeenFulfilled,
       });
 
       messagesForPreview = messagesForPreview.toSpliced(i, 2, mergedMessage);
@@ -30,10 +31,11 @@ export function serialize(chat) {
     inputMaxChars: chat.configuration.inputMaxChars,
     inputMaxPrompts: chat.configuration.inputMaxPrompts,
     attachmentName: chat.configuration.attachmentName,
-    messages: messagesForPreview.map(({ content, attachmentName, isFromUser }) => ({
+    messages: messagesForPreview.map(({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled }) => ({
       content,
       attachmentName,
       isFromUser,
+      haveVictoryConditionsBeenFulfilled,
       isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
     })),
   };
