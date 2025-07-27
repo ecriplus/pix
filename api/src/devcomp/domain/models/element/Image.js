@@ -3,7 +3,7 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { Element } from './Element.js';
 
 class Image extends Element {
-  static #VALID_PRODUCTION_HOSTNAME = 'assets.pix.org';
+  static #VALID_HOSTNAME = 'assets.pix.org';
 
   /**
    * @param{object} params
@@ -13,9 +13,8 @@ class Image extends Element {
    * @param{string} params.alternativeText
    * @param{string} params.legend
    * @param{string} params.licence
-   * @param{boolean} params.isBeta
    */
-  constructor({ id, url, alt, alternativeText, legend, licence, isBeta = true }) {
+  constructor({ id, url, alt, alternativeText, legend, licence }) {
     super({ id, type: 'image' });
 
     assertNotNullOrUndefined(url, 'The URL is required for an image');
@@ -32,10 +31,8 @@ class Image extends Element {
     this.legend = legend;
     this.licence = licence;
 
-    if (!isBeta) {
-      if (URL.parse(url).hostname !== Image.#VALID_PRODUCTION_HOSTNAME) {
-        throw new DomainError('The image URL must be from "assets.pix.org" when module is production ready');
-      }
+    if (URL.parse(url).hostname !== Image.#VALID_HOSTNAME) {
+      throw new DomainError('The image URL must be from "assets.pix.org"');
     }
   }
 }
