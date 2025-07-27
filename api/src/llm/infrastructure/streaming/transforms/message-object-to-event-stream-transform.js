@@ -18,13 +18,13 @@ export function getTransform(streamCapture) {
       let data = '';
 
       if (isValid) {
-        data += 'event: victory-conditions-success\ndata: \n\n';
+        data += getVictoryConditionsSuccessEvent();
         streamCapture.haveVictoryConditionsBeenFulfilled = true;
       }
 
       if (message) {
         streamCapture.LLMMessageParts.push(...message.split(''));
-        data += toEventStreamData(message);
+        data += getFormattedMessage(message);
       }
 
       if (data) callback(null, data);
@@ -33,7 +33,11 @@ export function getTransform(streamCapture) {
   });
 }
 
-function toEventStreamData(message) {
+function getFormattedMessage(message) {
   const formattedMessage = message.replaceAll('\n', '\ndata: ');
   return `data: ${formattedMessage}\n\n`;
+}
+
+function getVictoryConditionsSuccessEvent() {
+  return 'event: victory-conditions-success\ndata: \n\n';
 }

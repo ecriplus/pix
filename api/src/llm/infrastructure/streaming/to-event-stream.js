@@ -29,7 +29,7 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  *
  * @param {Object} params
  * @param {ReadableStream|null} params.llmResponse
- * @param {OnStreamDoneCallback} params.onStreamDone Callback called when stream is done streaming. Will be called asynchronously with one parameter: the complete LLM message
+ * @param {OnStreamDoneCallback} params.onStreamDone
  * @param {string} params.attachmentMessageType
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
