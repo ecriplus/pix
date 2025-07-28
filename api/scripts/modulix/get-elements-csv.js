@@ -10,14 +10,14 @@ export async function getElementsListAsCsv(modules) {
     data: elements,
     delimiter: '\t',
     fileHeaders: [
+      { label: 'ElementModule', value: 'moduleId' },
+      { label: 'ElementGrainId', value: 'grainId' },
       { label: 'ElementId', value: 'id' },
       { label: 'ElementType', value: 'type' },
-      { label: 'ElementPosition', value: (row) => row.elementPosition + 1 },
-      { label: 'ElementGrainPosition', value: (row) => row.grainPosition + 1 },
-      { label: 'ElementGrainId', value: 'grainId' },
       { label: 'ElementGrainTitle', value: 'grainTitle' },
-      { label: 'ElementModuleSlug', value: 'moduleSlug' },
-      { label: 'ElementModuleId', value: 'moduleId' },
+      { label: 'ElementGrainPosition', value: (row) => row.grainPosition + 1 },
+      { label: 'ActivityElementPosition', value: (row) => row.elementPosition + 1 },
+      { label: 'ElementInstruction', value: 'instruction' },
     ],
   });
 }
@@ -65,7 +65,6 @@ export function getElements(modules) {
           elements.push({
             ...component.element,
             moduleId: module.id,
-            moduleSlug: module.slug,
             elementPosition: elementPosition++,
             grainPosition: module.grains.indexOf(grain),
             grainId: grain.id,
@@ -83,7 +82,6 @@ export function getElements(modules) {
               elements.push({
                 ...element,
                 moduleId: module.id,
-                moduleSlug: module.slug,
                 elementPosition: elementPosition++,
                 grainPosition: module.grains.indexOf(grain),
                 grainId: grain.id,

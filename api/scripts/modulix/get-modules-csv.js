@@ -8,43 +8,18 @@ export async function getModulesListAsCsv(modules) {
     data: modules,
     delimiter: '\t',
     fileHeaders: [
-      { label: 'ModuleId', value: 'id' },
+      { label: 'Module', value: 'id' },
       { label: 'ModuleSlug', value: 'slug' },
-      { label: 'ModuleTitle', value: 'title' },
       { label: 'ModuleLevel', value: 'details.level' },
       { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
-      {
-        label: 'ModuleIsBeta',
-        value: (row) => (row.isBeta ? '=TRUE' : '=FALSE'),
-      },
-      {
-        label: 'ModuleObjectives',
-        value: (row) => row.details.objectives.join('.'),
-      },
       { label: 'ModuleTotalGrains', value: 'grains.length' },
-      {
-        label: 'ModuleTotalLessons',
-        value: (row) => row.grains.filter((grain) => grain.type === 'lesson').length,
-      },
       {
         label: 'ModuleTotalActivities',
         value: (row) => row.grains.filter((grain) => grain.type === 'activity').length,
       },
       {
-        label: 'ModuleTotalChallenges',
-        value: (row) => row.grains.filter((grain) => grain.type === 'challenge').length,
-      },
-      {
-        label: 'ModuleTotalDiscoveries',
-        value: (row) => row.grains.filter((grain) => grain.type === 'discovery').length,
-      },
-      {
-        label: 'ModuleTotalSummaries',
-        value: (row) => row.grains.filter((grain) => grain.type === 'summary').length,
-      },
-      {
-        label: 'ModuleTotalTransitions',
-        value: (row) => row.grains.filter((grain) => grain.type === 'transition').length,
+        label: 'ModuleTotalLessons',
+        value: (row) => row.grains.filter((grain) => grain.type === 'lesson').length,
       },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
       {
