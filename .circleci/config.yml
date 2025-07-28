@@ -1073,31 +1073,19 @@ jobs:
           working_directory: ~/pix/api
           command: npm run cache:refresh
       - run:
-          name: Run E2E tests (with sharding)
+          name: Run E2E tests
           command: |
             if [ "$CIRCLE_NODE_TOTAL" -eq 1 ]; then
-              echo "Only one shard, running all tests without sharding..."
+              echo "Only one shard: run both parallel and serial tests"
               npx playwright test --grep-invert @runSerially
-            else
-              SHARD="$((${CIRCLE_NODE_INDEX}+1))"
-              echo "Running sharded tests: shard $SHARD of $CIRCLE_NODE_TOTAL"
-              npx playwright test --grep-invert @runSerially --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
-            fi
-          environment:
-            PIX_API_PORT: 3000
-            PIX_APP_URL: http://localhost:4200
-            PIX_ORGA_URL: http://localhost:4201
-            PIX_CERTIF_URL: http://localhost:4203
-            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-            AUTH_SECRET: 'secret'
-      - run:
-          name: Run E2E tests (serially)
-          command: |
-            if [ "$CIRCLE_NODE_TOTAL" -eq 1 ] || [ "$CIRCLE_NODE_INDEX" -eq 0 ]; then
-              echo "Running serial tests..."
+              npx playwright test --grep @runSerially --workers=1
+            elif [ "$CIRCLE_NODE_INDEX" -eq 0 ]; then
+              echo "Shard 0: run serial tests"
               npx playwright test --grep @runSerially --workers=1
             else
-              echo "Skipping serial tests on this shard."
+              SHARD="$((${CIRCLE_NODE_INDEX}+1))"
+              echo "Shard $SHARD of $CIRCLE_NODE_TOTAL: run parallel tests"
+              npx playwright test --grep-invert @runSerially --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
             fi
           environment:
             PIX_API_PORT: 3000
