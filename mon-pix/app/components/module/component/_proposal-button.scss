@@ -1,4 +1,8 @@
+@use 'pix-design-tokens/typography';
+
 .proposal-button {
+  @extend %pix-body-m;
+
   display: flex;
   align-items: center;
   width: 100%;
@@ -22,8 +26,12 @@
     cursor: not-allowed;
 
     &:hover {
-    background: var(--pix-neutral-0);
+      background: var(--pix-neutral-0);
     }
+  }
+
+  &.proposal-button--selected {
+    font-weight: var(--pix-font-bold);
   }
 
   &[disabled]:not(.proposal-button--selected) {
@@ -31,5 +39,26 @@
 
     background: var(--pix-primary-100);
     border-color: var(--state-border-color);
+  }
+}
+
+.proposal-button--variant-discovery {
+  &:hover,
+  &:active {
+    background: rgb(var(--pix-orga-50-inline), 0.5);
+  }
+
+  &.proposal-button--selected {
+    background: var(--pix-orga-50);
+    border-color: var(--pix-neutral-500);
+
+    &:hover {
+      background: var(--pix-orga-50);
+    }
+  }
+
+  &[disabled]:not(.proposal-button--selected) {
+    background: var(--pix-neutral-20);
+    border-color: transparent;
   }
 }

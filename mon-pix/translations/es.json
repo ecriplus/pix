@@ -1750,6 +1750,9 @@
         "complementaryInstruction": "Seleccione una sola respuesta.",
         "direction": "There is no right or wrong answer."
       },
+      "qcuDiscovery": {
+        "direction": "Seleccione la respuesta que le parezca más adecuada."
+      },
       "qrocm": {
         "direction": "Rellena {count, plural, =1 {le champ vide} other {les champs vides}}."
       },
