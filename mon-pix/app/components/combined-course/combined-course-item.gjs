@@ -1,9 +1,21 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { LinkTo } from '@ember/routing';
 
+const Content = <template>
+  <div class="combined-course-item">
+    <div class="combined-course-item__title">{{@title}}</div>
+    {{#if @isLocked}}
+      <PixIcon @name="lock" @plainIcon={{true}} />
+    {{/if}}
+  </div>
+</template>;
+
 <template>
-  <LinkTo @route={{@item.route}} @model={{@item.reference}}>
-    <div class="combined-course-item">
-      <div class="combined-course-item__title">{{@item.title}}</div>
-    </div>
-  </LinkTo>
+  {{#if @isLocked}}
+    <Content @title={{@item.title}} @isLocked={{true}} />
+  {{else}}
+    <LinkTo @route={{@item.route}} @model={{@item.reference}} disabled>
+      <Content @title={{@item.title}} />
+    </LinkTo>
+  {{/if}}
 </template>
