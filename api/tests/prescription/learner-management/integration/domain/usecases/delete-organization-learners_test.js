@@ -62,6 +62,16 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
     clock.restore();
   });
 
+  context('when no organization learner is provided', function () {
+    it('should do nothing', async function () {
+      await expect(
+        usecases.deleteOrganizationLearners({
+          organizationLearnerIds: [],
+        }),
+      ).to.be.fulfilled;
+    });
+  });
+
   context('when feature toggle `isAnonymizationWithDeletionEnabled` is false', function () {
     beforeEach(async function () {
       await featureToggles.set('isAnonymizationWithDeletionEnabled', false);

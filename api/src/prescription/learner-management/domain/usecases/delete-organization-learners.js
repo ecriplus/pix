@@ -17,6 +17,10 @@ const deleteOrganizationLearners = withTransaction(async function ({
   userRecommendedTrainingRepository,
   organizationsProfileRewardRepository,
 }) {
+  if (organizationLearnerIds.length === 0) {
+    return;
+  }
+
   const organizationLearnersFromOrganization =
     await organizationLearnerRepository.findOrganizationLearnersByOrganizationId({
       organizationId,
