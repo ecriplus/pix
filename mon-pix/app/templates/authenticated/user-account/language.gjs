@@ -1,12 +1,13 @@
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import t from 'ember-intl/helpers/t';
-import LanguageSwitcher from 'mon-pix/components/language-switcher';
+import LocaleSwitcher from 'mon-pix/components/locale-switcher';
+
 <template>
   <div class="language">
-    <LanguageSwitcher
-      @label="{{t 'pages.user-account.language.lang'}}"
-      @selectedLanguage={{@model.lang}}
-      @onLanguageChange={{@controller.onLanguageChange}}
+    <LocaleSwitcher
+      @label={{t "pages.user-account.language.lang"}}
+      @defaultValue={{@model.lang}}
+      @onChange={{@controller.onLanguageChange}}
     />
 
     {{#if @controller.shouldDisplayLanguageUpdatedMessage}}
