@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.168.0](https://github.com/1024pix/pix/compare/v5.167.0...v5.168.0) (2025-07-28)
+
+### :rocket: Amélioration
+
+- [#12974](https://github.com/1024pix/pix/pull/12974) Afficher la campagne de diagnostique sur la page d'un parcours combiné (PIX-18847) 
+- [#12966](https://github.com/1024pix/pix/pull/12966) Afficher quelle Attestation est activé dans PixAdmin (PIX-18856). 
+- [#13009](https://github.com/1024pix/pix/pull/13009) Ajout des fichiers de config Scalingo pour les RAs front 
+- [#12984](https://github.com/1024pix/pix/pull/12984) Ajouter un contrôle sur les modules concernant l'hébergement des assets utilisés (PIX-18846) (PIX-18790) 
+- [#12938](https://github.com/1024pix/pix/pull/12938) Scorer une certification via une calibration du datamart (PIX-18809). 
+- [#12990](https://github.com/1024pix/pix/pull/12990) Update module tmp-ia-hallu suite à la validation Contenu 
+
+### :bug: Correction
+
+- [#13001](https://github.com/1024pix/pix/pull/13001) Afficher seulement les apprenants ayant un vrai compte dans la liste des attestations sur PixOrga (PIX-18860). 
+
+### :building_construction: Tech
+
+- [#12977](https://github.com/1024pix/pix/pull/12977) :truck: Déplace `CertifiedProfile` vers `src/certification/results/` 
+- [#12975](https://github.com/1024pix/pix/pull/12975) :truck: Déplace `StudentForEnrolment` vers  `src/certification/enrolment/` 
+- [#12973](https://github.com/1024pix/pix/pull/12973) :truck: Déplace une suite d'utilitaire numérique vers le contexte qui l'utilise : la gestion de session de certification 
+- [#12989](https://github.com/1024pix/pix/pull/12989) Corriger les verifications des routes du certificat (PIX-18175). 
+- [#12993](https://github.com/1024pix/pix/pull/12993) Suppression du feature toggle isV3CertificationPageEnabled (PIX-). 
+- [#12978](https://github.com/1024pix/pix/pull/12978) utiliser le service pixMetrics (pix-18875)
+
 # [5.167.0](https://github.com/1024pix/pix/compare/v5.166.0...v5.167.0) (2025-07-25)
 
 ### :rocket: Amélioration
