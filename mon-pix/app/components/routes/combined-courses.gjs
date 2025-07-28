@@ -21,7 +21,7 @@ export default class CombinedCourses extends Component {
       {{/if}}
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
-        <CombinedCourseItem @item={{item}} />
+        <CombinedCourseItem @item={{item}} @isLocked={{eq @combinedCourse.status "NOT_STARTED"}} />
       {{/each}}
     </div>
   </template>
