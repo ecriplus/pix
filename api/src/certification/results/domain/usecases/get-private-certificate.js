@@ -1,12 +1,17 @@
-import { NotFoundError } from '../../../../shared/domain/errors.js';
+/**
+ * @typedef {import('./index.js').CertificateRepository} CertificateRepository
+ */
 
-const getPrivateCertificate = async function ({ certificationCourseId, userId, locale, certificateRepository }) {
-  const privateCertificate = await certificateRepository.getPrivateCertificate(certificationCourseId, { locale });
-  if (privateCertificate.userId !== userId) {
-    throw new NotFoundError();
-  }
-
-  return privateCertificate;
+/**
+ * @param {Object} params
+ * @param {number} params.certificationCourseId
+ * @param {string} params.locale
+ * @param {CertificateRepository} params.certificateRepository
+ *
+ * @returns {PrivateCertificate}
+ **/
+const getPrivateCertificate = async function ({ certificationCourseId, locale, certificateRepository }) {
+  return certificateRepository.getPrivateCertificate(certificationCourseId, { locale });
 };
 
 export { getPrivateCertificate };

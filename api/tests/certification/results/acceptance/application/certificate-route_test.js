@@ -1,12 +1,15 @@
+import dayjs from 'dayjs';
+
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment, AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertUserWithRoleSuperAdmin,
   learningContentBuilder,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -16,99 +19,200 @@ describe('Certification | Results | Acceptance | Application | Certification', f
   let userId;
   let session, certificationCourse, assessment, assessmentResult, badge;
 
+  beforeEach(async function () {
+    const learningContent = [
+      {
+        id: 'recvoGdo7z2z7pXWa',
+        frameworkId: 'Pix',
+        code: '1',
+        name: '1. Information et données',
+        title_i18n: { fr: 'Information et données' },
+        color: 'jaffa',
+        competences: [
+          {
+            id: 'Pix',
+            name_i18n: { fr: 'Mener une recherche et une veille d’information' },
+            index: '1.1',
+            tubes: [
+              {
+                id: 'recTube1',
+                skills: [
+                  {
+                    id: 'recSkillId1',
+                    challenges: [
+                      { id: 'rec02tVrimXNkgaLD1' },
+                      { id: 'rec0gm0GFue3PQB3k1' },
+                      { id: 'rec0hoSlSwCeNNLkq1' },
+                      { id: 'rec2FcZ4jsPuY1QYt1' },
+                      { id: 'rec39bDMnaVw3MyMR1' },
+                      { id: 'rec3FMoD8h9USTktb1' },
+                      { id: 'rec3P7fvPSpFkIFLV1' },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'recNv8qhaY887jQb2',
+            frameworkId: 'Pix',
+            name_i18n: { fr: 'Gérer des données' },
+            index: '1.2',
+            tubes: [
+              {
+                id: 'recTube2',
+                skills: [
+                  {
+                    id: 'recSkillId2',
+                    challenges: [
+                      { id: 'rec02tVrimXNkgaLD2' },
+                      { id: 'rec0gm0GFue3PQB3k2' },
+                      { id: 'rec0hoSlSwCeNNLkq2' },
+                      { id: 'rec2FcZ4jsPuY1QYt2' },
+                      { id: 'rec39bDMnaVw3MyMR2' },
+                      { id: 'rec3FMoD8h9USTktb2' },
+                      { id: 'rec3P7fvPSpFkIFLV2' },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'recIkYm646lrGvLNT',
+            frameworkId: 'Pix',
+            name_i18n: { fr: 'Traiter des données' },
+            index: '1.3',
+            tubes: [
+              {
+                id: 'recTube3',
+                skills: [
+                  {
+                    id: 'recSkillId3',
+                    challenges: [
+                      { id: 'rec02tVrimXNkgaLD3' },
+                      { id: 'rec0gm0GFue3PQB3k3' },
+                      { id: 'rec0hoSlSwCeNNLkq3' },
+                      { id: 'rec2FcZ4jsPuY1QYt3' },
+                      { id: 'rec39bDMnaVw3MyMR3' },
+                      { id: 'rec3FMoD8h9USTktb3' },
+                      { id: 'rec3P7fvPSpFkIFLV3' },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'recoB4JYOBS1PCxhh',
+        frameworkId: 'Pix',
+        code: '2',
+        name: '2. Communication et collaboration',
+        competences: [
+          {
+            id: 'recDH19F7kKrfL3Ii',
+            name_i18n: { fr: 'Interagir' },
+            index: '2.1',
+          },
+          {
+            id: 'recgxqQfz3BqEbtzh',
+            name_i18n: { fr: 'Partager et publier' },
+            index: '2.2',
+          },
+          {
+            id: 'recMiZPNl7V1hyE1d',
+            name_i18n: { fr: 'Collaborer' },
+            index: '2.3',
+          },
+          {
+            id: 'recFpYXCKcyhLI3Nu',
+            name_i18n: { fr: "S'insérer" },
+            index: '2.4',
+          },
+        ],
+      },
+      {
+        id: 'recOdC9UDVJbAXHAm',
+        frameworkId: 'Pix',
+        code: '3',
+        name: '3. Création de contenu',
+        competences: [
+          {
+            id: 'recOdC9UDVJbAXHAm',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '3.1',
+          },
+          {
+            id: 'recbDTF8KwupqkeZ6',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '3.2',
+          },
+          {
+            id: 'recHmIWG6D0huq6Kx',
+            name_i18n: { fr: 'Adapt' },
+            index: '3.3',
+          },
+          {
+            id: 'rece6jYwH4WEw549z',
+            name_i18n: { fr: 'Programmer' },
+            index: '3.4',
+          },
+        ],
+      },
+      {
+        id: 'recUcSnS2lsOhFIeE',
+        frameworkId: 'Pix',
+        code: '4',
+        name: '4. Protection et sécurité',
+        competences: [
+          {
+            id: 'rec6rHqas39zvLZep',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '4.1',
+          },
+          {
+            id: 'recofJCxg0NqTqTdP',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '4.2',
+          },
+          {
+            id: 'recfr0ax8XrfvJ3ER',
+            name_i18n: { fr: 'Adapt' },
+            index: '4.3',
+          },
+        ],
+      },
+      {
+        id: 'recnrCmBiPXGbgIyQ',
+        frameworkId: 'Pix',
+        code: '5',
+        name: '5. Environnement numérique',
+        competences: [
+          {
+            id: 'recIhdrmCuEmCDAzj',
+            name_i18n: { fr: 'Dev des docs' },
+            index: '5.1',
+          },
+          {
+            id: 'recudHE5Omrr10qrx',
+            name_i18n: { fr: 'Dev des docs mult' },
+            index: '5.2',
+          },
+        ],
+      },
+    ];
+    const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
+    await mockLearningContent(learningContentObjects);
+  });
+
   describe('GET /api/certifications/{certificationCourseId}', function () {
-    beforeEach(async function () {
+    it('should return 200 HTTP status code and the certification with the result competence tree included', async function () {
+      // given
       server = await createServer();
-
-      const learningContent = [
-        {
-          id: 'recvoGdo7z2z7pXWa',
-          code: '1',
-          name: '1. Information et données',
-          title_i18n: { fr: 'Information et données' },
-          color: 'jaffa',
-          frameworkId: 'Pix',
-          competences: [
-            {
-              id: 'recsvLz0W2ShyfD63',
-              name_i18n: { fr: 'Mener une recherche et une veille d’information' },
-              index: '1.1',
-              tubes: [
-                {
-                  id: 'recTube1',
-                  skills: [
-                    {
-                      id: 'recSkillId1',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD1' },
-                        { id: 'rec0gm0GFue3PQB3k1' },
-                        { id: 'rec0hoSlSwCeNNLkq1' },
-                        { id: 'rec2FcZ4jsPuY1QYt1' },
-                        { id: 'rec39bDMnaVw3MyMR1' },
-                        { id: 'rec3FMoD8h9USTktb1' },
-                        { id: 'rec3P7fvPSpFkIFLV1' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recNv8qhaY887jQb2',
-              name_i18n: { fr: 'Gérer des données' },
-              index: '1.2',
-              tubes: [
-                {
-                  id: 'recTube2',
-                  skills: [
-                    {
-                      id: 'recSkillId2',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD2' },
-                        { id: 'rec0gm0GFue3PQB3k2' },
-                        { id: 'rec0hoSlSwCeNNLkq2' },
-                        { id: 'rec2FcZ4jsPuY1QYt2' },
-                        { id: 'rec39bDMnaVw3MyMR2' },
-                        { id: 'rec3FMoD8h9USTktb2' },
-                        { id: 'rec3P7fvPSpFkIFLV2' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recIkYm646lrGvLNT',
-              name_i18n: { fr: 'Traiter des données' },
-              index: '1.3',
-              tubes: [
-                {
-                  id: 'recTube3',
-                  skills: [
-                    {
-                      id: 'recSkillId3',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD3' },
-                        { id: 'rec0gm0GFue3PQB3k3' },
-                        { id: 'rec0hoSlSwCeNNLkq3' },
-                        { id: 'rec2FcZ4jsPuY1QYt3' },
-                        { id: 'rec39bDMnaVw3MyMR3' },
-                        { id: 'rec3FMoD8h9USTktb3' },
-                        { id: 'rec3P7fvPSpFkIFLV3' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
-
-      ({ userId, session, badge, certificationCourse, assessmentResult } = await _buildDatabaseForV2Certification());
+      const userId = databaseBuilder.factory.buildUser().id;
+      ({ session, badge, certificationCourse, assessmentResult } = await _buildDatabaseForV2Certification({ userId }));
       databaseBuilder.factory.buildCompetenceMark({
         level: 3,
         score: 23,
@@ -118,10 +222,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
         acquiredComplementaryCertifications: [badge.key],
       });
       await databaseBuilder.commit();
-    });
 
-    it('should return 200 HTTP status code and the certification with the result competence tree included', async function () {
-      // given
       options = {
         method: 'GET',
         url: `/api/certifications/${certificationCourse.id}`,
@@ -153,7 +254,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
                 imageUrl: 'http://tarte.fr/mirabelle.png',
                 isTemporaryBadge: false,
                 label: 'tarte à la mirabelle',
-                stickerUrl: 'http://tarte.fr/sticker.png',
+                stickerUrl: 'http://example.net/stickers/macaron_pixclea.pdf',
                 message: 'Miam',
               },
             ],
@@ -180,56 +281,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               name: 'Mener une recherche et une veille d’information',
               score: 23,
             },
-            id: 'recsvLz0W2ShyfD63',
+            id: 'Pix',
             type: 'result-competences',
-          },
-          {
-            attributes: {
-              index: '1.2',
-              level: -1,
-              name: 'Gérer des données',
-              score: 0,
-            },
-            id: 'recNv8qhaY887jQb2',
-            type: 'result-competences',
-          },
-          {
-            attributes: {
-              index: '1.3',
-              level: -1,
-              name: 'Traiter des données',
-              score: 0,
-            },
-            id: 'recIkYm646lrGvLNT',
-            type: 'result-competences',
-          },
-          {
-            attributes: {
-              code: '1',
-              name: '1. Information et données',
-              title: 'Information et données',
-              color: 'jaffa',
-            },
-            id: 'recvoGdo7z2z7pXWa',
-            relationships: {
-              'result-competences': {
-                data: [
-                  {
-                    id: 'recsvLz0W2ShyfD63',
-                    type: 'result-competences',
-                  },
-                  {
-                    id: 'recNv8qhaY887jQb2',
-                    type: 'result-competences',
-                  },
-                  {
-                    id: 'recIkYm646lrGvLNT',
-                    type: 'result-competences',
-                  },
-                ],
-              },
-            },
-            type: 'areas',
           },
           {
             attributes: {
@@ -243,6 +296,22 @@ describe('Certification | Results | Acceptance | Application | Certification', f
                     id: 'recvoGdo7z2z7pXWa',
                     type: 'areas',
                   },
+                  {
+                    id: 'recoB4JYOBS1PCxhh',
+                    type: 'areas',
+                  },
+                  {
+                    id: 'recOdC9UDVJbAXHAm',
+                    type: 'areas',
+                  },
+                  {
+                    id: 'recUcSnS2lsOhFIeE',
+                    type: 'areas',
+                  },
+                  {
+                    id: 'recnrCmBiPXGbgIyQ',
+                    type: 'areas',
+                  },
                 ],
               },
             },
@@ -251,107 +320,20 @@ describe('Certification | Results | Acceptance | Application | Certification', f
         ],
       };
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.deep.equal(expectedBody);
+      expect(response.result.data).to.deep.equal(expectedBody.data);
+      expect(response.result.included[0]).to.deep.equal(expectedBody.included[0]);
+      expect(response.result.included[21]).to.deep.equal(expectedBody.included[1]);
     });
   });
 
   describe('GET /api/certifications', function () {
-    beforeEach(async function () {
-      server = await createServer();
-
-      const learningContent = [
-        {
-          id: 'recvoGdo7z2z7pXWa',
-          code: '1',
-          name: '1. Information et données',
-          title_i18n: { fr: 'Information et données' },
-          color: 'jaffa',
-          frameworkId: 'Pix',
-          competences: [
-            {
-              id: 'recsvLz0W2ShyfD63',
-              name_i18n: { fr: 'Mener une recherche et une veille d’information' },
-              index: '1.1',
-              tubes: [
-                {
-                  id: 'recTube1',
-                  skills: [
-                    {
-                      id: 'recSkillId1',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD1' },
-                        { id: 'rec0gm0GFue3PQB3k1' },
-                        { id: 'rec0hoSlSwCeNNLkq1' },
-                        { id: 'rec2FcZ4jsPuY1QYt1' },
-                        { id: 'rec39bDMnaVw3MyMR1' },
-                        { id: 'rec3FMoD8h9USTktb1' },
-                        { id: 'rec3P7fvPSpFkIFLV1' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recNv8qhaY887jQb2',
-              name_i18n: { fr: 'Gérer des données' },
-              index: '1.2',
-              tubes: [
-                {
-                  id: 'recTube2',
-                  skills: [
-                    {
-                      id: 'recSkillId2',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD2' },
-                        { id: 'rec0gm0GFue3PQB3k2' },
-                        { id: 'rec0hoSlSwCeNNLkq2' },
-                        { id: 'rec2FcZ4jsPuY1QYt2' },
-                        { id: 'rec39bDMnaVw3MyMR2' },
-                        { id: 'rec3FMoD8h9USTktb2' },
-                        { id: 'rec3P7fvPSpFkIFLV2' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recIkYm646lrGvLNT',
-              name_i18n: { fr: 'Traiter des données' },
-              index: '1.3',
-              tubes: [
-                {
-                  id: 'recTube3',
-                  skills: [
-                    {
-                      id: 'recSkillId3',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD3' },
-                        { id: 'rec0gm0GFue3PQB3k3' },
-                        { id: 'rec0hoSlSwCeNNLkq3' },
-                        { id: 'rec2FcZ4jsPuY1QYt3' },
-                        { id: 'rec39bDMnaVw3MyMR3' },
-                        { id: 'rec3FMoD8h9USTktb3' },
-                        { id: 'rec3P7fvPSpFkIFLV3' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
-    });
-
     context('when certification is v2', function () {
       beforeEach(async function () {
-        ({ userId, session, certificationCourse, assessment, assessmentResult } =
-          await _buildDatabaseForV2Certification());
+        server = await createServer();
+        userId = databaseBuilder.factory.buildUser().id;
+        ({ session, certificationCourse, assessment, assessmentResult } = await _buildDatabaseForV2Certification({
+          userId,
+        }));
 
         await databaseBuilder.commit();
       });
@@ -495,95 +477,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
     beforeEach(async function () {
       server = await createServer();
 
-      const learningContent = [
-        {
-          id: 'recvoGdo7z2z7pXWa',
-          code: '1',
-          name: '1. Information et données',
-          title_i18n: { fr: 'Information et données' },
-          color: 'jaffa',
-          frameworkId: 'Pix',
-          competences: [
-            {
-              id: 'recsvLz0W2ShyfD63',
-              name_i18n: { fr: 'Mener une recherche et une veille d’information' },
-              index: '1.1',
-              tubes: [
-                {
-                  id: 'recTube1',
-                  skills: [
-                    {
-                      id: 'recSkillId1',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD1' },
-                        { id: 'rec0gm0GFue3PQB3k1' },
-                        { id: 'rec0hoSlSwCeNNLkq1' },
-                        { id: 'rec2FcZ4jsPuY1QYt1' },
-                        { id: 'rec39bDMnaVw3MyMR1' },
-                        { id: 'rec3FMoD8h9USTktb1' },
-                        { id: 'rec3P7fvPSpFkIFLV1' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recNv8qhaY887jQb2',
-              name_i18n: { fr: 'Gérer des données' },
-              index: '1.2',
-              tubes: [
-                {
-                  id: 'recTube2',
-                  skills: [
-                    {
-                      id: 'recSkillId2',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD2' },
-                        { id: 'rec0gm0GFue3PQB3k2' },
-                        { id: 'rec0hoSlSwCeNNLkq2' },
-                        { id: 'rec2FcZ4jsPuY1QYt2' },
-                        { id: 'rec39bDMnaVw3MyMR2' },
-                        { id: 'rec3FMoD8h9USTktb2' },
-                        { id: 'rec3P7fvPSpFkIFLV2' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'recIkYm646lrGvLNT',
-              name_i18n: { fr: 'Traiter des données' },
-              index: '1.3',
-              tubes: [
-                {
-                  id: 'recTube3',
-                  skills: [
-                    {
-                      id: 'recSkillId3',
-                      challenges: [
-                        { id: 'rec02tVrimXNkgaLD3' },
-                        { id: 'rec0gm0GFue3PQB3k3' },
-                        { id: 'rec0hoSlSwCeNNLkq3' },
-                        { id: 'rec2FcZ4jsPuY1QYt3' },
-                        { id: 'rec39bDMnaVw3MyMR3' },
-                        { id: 'rec3FMoD8h9USTktb3' },
-                        { id: 'rec3P7fvPSpFkIFLV3' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
-
-      ({ session, badge, certificationCourse, assessmentResult } = await _buildDatabaseForV2Certification());
+      const userId = databaseBuilder.factory.buildUser().id;
+      ({ session, badge, certificationCourse, assessmentResult } = await _buildDatabaseForV2Certification({ userId }));
       databaseBuilder.factory.buildCompetenceMark({
         level: 3,
         score: 23,
@@ -626,7 +521,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
                   imageUrl: 'http://tarte.fr/mirabelle.png',
                   isTemporaryBadge: false,
                   label: 'tarte à la mirabelle',
-                  stickerUrl: 'http://tarte.fr/sticker.png',
+                  stickerUrl: 'http://example.net/stickers/macaron_pixclea.pdf',
                   message: 'Miam',
                 },
               ],
@@ -658,54 +553,6 @@ describe('Certification | Results | Acceptance | Application | Certification', f
             },
             {
               attributes: {
-                index: '1.2',
-                level: -1,
-                name: 'Gérer des données',
-                score: 0,
-              },
-              id: 'recNv8qhaY887jQb2',
-              type: 'result-competences',
-            },
-            {
-              attributes: {
-                index: '1.3',
-                level: -1,
-                name: 'Traiter des données',
-                score: 0,
-              },
-              id: 'recIkYm646lrGvLNT',
-              type: 'result-competences',
-            },
-            {
-              attributes: {
-                code: '1',
-                name: '1. Information et données',
-                title: 'Information et données',
-                color: 'jaffa',
-              },
-              id: 'recvoGdo7z2z7pXWa',
-              relationships: {
-                'result-competences': {
-                  data: [
-                    {
-                      id: 'recsvLz0W2ShyfD63',
-                      type: 'result-competences',
-                    },
-                    {
-                      id: 'recNv8qhaY887jQb2',
-                      type: 'result-competences',
-                    },
-                    {
-                      id: 'recIkYm646lrGvLNT',
-                      type: 'result-competences',
-                    },
-                  ],
-                },
-              },
-              type: 'areas',
-            },
-            {
-              attributes: {
                 id: `${certificationCourse.id}-${assessmentResult.id}`,
               },
               id: `${certificationCourse.id}-${assessmentResult.id}`,
@@ -716,6 +563,22 @@ describe('Certification | Results | Acceptance | Application | Certification', f
                       id: 'recvoGdo7z2z7pXWa',
                       type: 'areas',
                     },
+                    {
+                      id: 'recoB4JYOBS1PCxhh',
+                      type: 'areas',
+                    },
+                    {
+                      id: 'recOdC9UDVJbAXHAm',
+                      type: 'areas',
+                    },
+                    {
+                      id: 'recUcSnS2lsOhFIeE',
+                      type: 'areas',
+                    },
+                    {
+                      id: 'recnrCmBiPXGbgIyQ',
+                      type: 'areas',
+                    },
                   ],
                 },
               },
@@ -724,7 +587,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
           ],
         };
         expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal(expectedBody);
+        expect(response.result.data).to.deep.equal(expectedBody.data);
+        expect(response.result.included[21]).to.deep.equal(expectedBody.included[1]);
       });
     });
 
@@ -746,10 +610,295 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       });
     });
   });
+
+  describe('GET /api/attestation/{certificationCourseId}', function () {
+    context('when user own the certification', function () {
+      context('when session version is V3', function () {
+        it('should return 200 HTTP status code and the certification', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser().id;
+
+          const session = databaseBuilder.factory.buildSession({
+            id: 123,
+            publishedAt: new Date('2018-12-01T01:02:03Z'),
+            version: AlgorithmEngineVersion.V3,
+          });
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+            id: 1234,
+            sessionId: session.id,
+            userId,
+            isPublished: true,
+            verificationCode: await generateCertificateVerificationCode(),
+          });
+          const assessment = databaseBuilder.factory.buildAssessment({
+            userId,
+            certificationCourseId: certificationCourse.id,
+            type: Assessment.types.CERTIFICATION,
+            state: Assessment.states.COMPLETED,
+          });
+          databaseBuilder.factory.buildAssessmentResult.last({
+            certificationCourseId: certificationCourse.id,
+            assessmentId: assessment.id,
+            level: 1,
+            pixScore: 23,
+            status: AssessmentResult.status.VALIDATED,
+          });
+
+          await databaseBuilder.commit();
+
+          const server = await createServer();
+
+          // when
+          const response = await server.inject({
+            method: 'GET',
+            url: `/api/attestation/${certificationCourse.id}?isFrenchDomainExtension=true&lang=fr`,
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          expect(response.headers['content-type']).to.equal('application/pdf');
+
+          const filename = `filename=certification-pix-20181201.pdf`;
+          expect(response.headers['content-disposition']).to.include(filename);
+
+          const fileFormat = response.result.substring(1, 4);
+          expect(fileFormat).to.equal('PDF');
+        });
+      });
+    });
+
+    context('when session version is V2', function () {
+      it('should return 200 HTTP status code and the certification', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const { certificationCourse } = await _buildDatabaseForV2Certification({ userId });
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: `/api/attestation/${certificationCourse.id}?isFrenchDomainExtension=true&lang=fr`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.include('filename=certification-pix');
+        expect(response.file).not.to.be.null;
+      });
+    });
+  });
+
+  describe('GET /api/organizations/{organizationId}/certification-attestations', function () {
+    context('when the session version is V2', function () {
+      it('should return HTTP status 200 and a PDF', async function () {
+        // given
+        const adminIsManagingStudent = databaseBuilder.factory.buildUser.withRawPassword();
+
+        const organization = databaseBuilder.factory.buildOrganization({ type: 'SCO', isManagingStudents: true });
+        databaseBuilder.factory.buildMembership({
+          organizationId: organization.id,
+          userId: adminIsManagingStudent.id,
+          organizationRole: Membership.roles.ADMIN,
+        });
+
+        const student = databaseBuilder.factory.buildUser.withRawPassword();
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+          division: 'aDivision',
+          userId: student.id,
+        });
+
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          organizationLearnerId: organizationLearner.id,
+          userId: student.id,
+        });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+          userId: candidate.userId,
+          sessionId: candidate.sessionId,
+          isPublished: true,
+          isCancelled: false,
+        });
+
+        databaseBuilder.factory.buildBadge({ key: 'a badge' });
+
+        const assessment = databaseBuilder.factory.buildAssessment({
+          userId: candidate.userId,
+          certificationCourseId: certificationCourse.id,
+          type: Assessment.types.CERTIFICATION,
+          state: 'completed',
+        });
+
+        const assessmentResult = databaseBuilder.factory.buildAssessmentResult.last({
+          certificationCourseId: certificationCourse.id,
+          assessmentId: assessment.id,
+          status: AssessmentResult.status.VALIDATED,
+        });
+        databaseBuilder.factory.buildCompetenceMark({
+          level: 3,
+          score: 23,
+          area_code: '1',
+          competence_code: '1.3',
+          assessmentResultId: assessmentResult.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${organization.id}/certification-attestations?division=aDivision&isFrenchDomainExtension=true&lang=fr`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminIsManagingStudent.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.include(`_attestations_${organizationLearner.division}`);
+      });
+    });
+
+    context('when the session version is V3', function () {
+      it('should return HTTP status 200', async function () {
+        // given
+        const adminIsManagingStudent = databaseBuilder.factory.buildUser.withRawPassword();
+
+        const organization = databaseBuilder.factory.buildOrganization({ type: 'SCO', isManagingStudents: true });
+        databaseBuilder.factory.buildMembership({
+          organizationId: organization.id,
+          userId: adminIsManagingStudent.id,
+          organizationRole: Membership.roles.ADMIN,
+        });
+
+        const student = databaseBuilder.factory.buildUser.withRawPassword();
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+          division: 'aDivision',
+          userId: student.id,
+        });
+
+        const session = databaseBuilder.factory.buildSession({
+          version: AlgorithmEngineVersion.V3,
+          publishedAt: new Date(),
+        });
+
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          organizationLearnerId: organizationLearner.id,
+          userId: student.id,
+          sessionId: session.id,
+        });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+          userId: candidate.userId,
+          sessionId: session.id,
+          isPublished: true,
+          isCancelled: false,
+        });
+
+        const assessment = databaseBuilder.factory.buildAssessment({
+          userId: candidate.userId,
+          certificationCourseId: certificationCourse.id,
+          type: Assessment.types.CERTIFICATION,
+          state: 'completed',
+        });
+
+        databaseBuilder.factory.buildAssessmentResult.last({
+          certificationCourseId: certificationCourse.id,
+          assessmentId: assessment.id,
+          status: AssessmentResult.status.VALIDATED,
+        });
+
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${organization.id}/certification-attestations?division=aDivision&isFrenchDomainExtension=true&lang=fr`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminIsManagingStudent.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=${organizationLearner.division.toLowerCase()}-certification-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
+        expect(response.file).not.to.be.null;
+      });
+    });
+  });
+
+  describe('GET /api/admin/sessions/{sessionId}/attestations', function () {
+    context('when the session version is V2', function () {
+      it('should return 200 HTTP status code and the certification', async function () {
+        // given
+        const superAdmin = await insertUserWithRoleSuperAdmin();
+        const { session } = await _buildDatabaseForV2Certification({ userId: superAdmin.id });
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: `/api/admin/sessions/${session.id}/attestations`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=session-${session.id}-certification-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
+        expect(response.file).not.to.be.null;
+      });
+    });
+
+    context('when the session version is V3', function () {
+      it('should return 200 HTTP status code and the certification', async function () {
+        // given
+        const superAdmin = await insertUserWithRoleSuperAdmin();
+        const { session, userId } = await _buildDatabaseForV2Certification({ userId: superAdmin.id });
+        await databaseBuilder.commit();
+
+        const server = await createServer();
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: `/api/admin/sessions/${session.id}/attestations`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.headers['content-type']).to.equal('application/pdf');
+        expect(response.headers['content-disposition']).to.equal(
+          `attachment; filename=session-${session.id}-certification-pix-${dayjs(session.publishedAt).format('YYYYMMDD')}.pdf`,
+        );
+        expect(response.file).not.to.be.null;
+      });
+    });
+  });
 });
 
-async function _buildDatabaseForV2Certification() {
-  const userId = databaseBuilder.factory.buildUser().id;
+async function _buildDatabaseForV2Certification({ userId }) {
   const session = databaseBuilder.factory.buildSession({
     version: AlgorithmEngineVersion.V2,
     publishedAt: new Date('2018-12-01T01:02:03Z'),
@@ -763,7 +912,7 @@ async function _buildDatabaseForV2Certification() {
     isTemporaryBadge: false,
     label: 'tarte à la mirabelle',
     certificateMessage: 'Miam',
-    stickerUrl: 'http://tarte.fr/sticker.png',
+    stickerUrl: 'http://example.net/stickers/macaron_pixclea.pdf',
   });
   const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
     sessionId: session.id,
@@ -795,5 +944,5 @@ async function _buildDatabaseForV2Certification() {
     complementaryCertificationCourseId: id,
     complementaryCertificationBadgeId: ccBadge.id,
   });
-  return { userId, session, badge, certificationCourse, assessment, assessmentResult };
+  return { session, badge, certificationCourse, assessment, assessmentResult };
 }
