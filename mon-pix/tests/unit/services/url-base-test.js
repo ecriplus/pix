@@ -76,23 +76,6 @@ module('Unit | Service | url-base', function (hooks) {
     });
   });
 
-  module('pixAppCampaignRootUrl', function () {
-    test('returns the Pix app campaign root url', function (assert) {
-      // given
-      const service = this.owner.lookup('service:url-base');
-      sinon.stub(ENV, 'APP').value({ PIX_APP_URL_WITHOUT_EXTENSION: 'https://app.pix.' });
-
-      const domainService = this.owner.lookup('service:current-domain');
-      sinon.stub(domainService, 'getExtension').returns('fr');
-
-      // when
-      const homeUrl = service.pixAppCampaignRootUrl;
-
-      // then
-      assert.strictEqual(homeUrl, 'https://app.pix.fr/campagne');
-    });
-  });
-
   module('pixAppForgottenPasswordUrl', function () {
     test('returns the Pix app forgotten password url', function (assert) {
       // given
@@ -200,7 +183,8 @@ module('Unit | Service | url-base', function (hooks) {
       test('returns the Pix website url with the default locale', function (assert) {
         // given
         const service = this.owner.lookup('service:url-base');
-        setLocale('xxx');
+        const localeService = this.owner.lookup('service:locale');
+        sinon.stub(localeService, 'currentLocale').value('xxx');
 
         // when
         const homeUrl = service.getPixWebsiteUrlFor();
@@ -212,7 +196,8 @@ module('Unit | Service | url-base', function (hooks) {
       test('returns the Pix website url and path with the default locale', function (assert) {
         // given
         const service = this.owner.lookup('service:url-base');
-        setLocale('xxx');
+        const localeService = this.owner.lookup('service:locale');
+        sinon.stub(localeService, 'currentLocale').value('xxx');
 
         // when
         const homeUrl = service.getPixWebsiteUrlFor('CGU');

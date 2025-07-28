@@ -28,10 +28,6 @@ export default class UrlBaseService extends Service {
     return `${ENV.APP.PIX_APP_URL_WITHOUT_EXTENSION}${tld}`;
   }
 
-  get pixAppCampaignRootUrl() {
-    return `${this.pixAppUrl}/campagne`;
-  }
-
   get pixAppForgottenPasswordUrl() {
     const url = `${this.pixAppUrl}/mot-de-passe-oublie`;
     const currentLocale = this.locale.currentLocale;
@@ -109,6 +105,15 @@ export const PIX_WEBSITE_PATHS = {
     en: 'accessibility-pix-orga',
     es: 'accessibility-pix-orga',
     fr: 'accessibilite-pix-orga',
+  },
+  ACCESSIBILITY_CERTIF: {
+    'fr-FR': 'accessibilite-pix-certif',
+    'fr-BE': 'accessibilite-pix-certif',
+    'nl-BE': 'toegankelijkheid-pix-certif',
+    nl: 'toegankelijkheid-pix-certif',
+    en: 'accessibility-pix-certif',
+    es: 'accessibility-pix-certif',
+    fr: 'accessibilite-pix-certif',
   },
   SUPPORT: {
     'fr-FR': 'support',
