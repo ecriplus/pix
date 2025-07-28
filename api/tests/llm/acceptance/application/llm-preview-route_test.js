@@ -250,6 +250,7 @@ describe('Acceptance | Route | llm-preview', function () {
             challenge: {
               inputMaxChars: 500,
               inputMaxPrompts: 4,
+              context: 'modulix',
             },
             attachment: {
               name: 'expected_file.txt',
@@ -300,6 +301,7 @@ describe('Acceptance | Route | llm-preview', function () {
         inputMaxChars: 500,
         inputMaxPrompts: 3,
         attachmentName: 'expected_file.txt',
+        context: 'modulix',
         messages: [
           {
             content: 'coucou user1',

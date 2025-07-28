@@ -13,6 +13,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           challenge: {
             inputMaxChars: 500,
             inputMaxPrompts: 5,
+            context: 'modulix',
           },
           attachment: {
             name: 'filename.txt',
@@ -42,6 +43,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         attachmentName: 'filename.txt',
         inputMaxChars: 500,
         inputMaxPrompts: 4,
+        context: 'modulix',
         messages: [
           {
             content: 'Salut',
@@ -101,6 +103,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           attachmentName: 'filename.txt',
           inputMaxChars: 500,
           inputMaxPrompts: 4,
+          context: undefined,
           messages: [
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -123,6 +126,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             challenge: {
               inputMaxChars: 500,
               inputMaxPrompts: 5,
+              context: 'modulix',
             },
             attachment: {
               name: 'chien.webp',
@@ -177,6 +181,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           attachmentName: 'chien.webp',
           inputMaxChars: 500,
           inputMaxPrompts: 4,
+          context: 'modulix',
           messages: [
             {
               content: 'Salut',
@@ -227,6 +232,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             challenge: {
               inputMaxChars: 500,
               inputMaxPrompts: 5,
+              context: 'modulix',
             },
             attachment: {
               name: 'chien.webp',
@@ -281,6 +287,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           attachmentName: 'chien.webp',
           inputMaxChars: 500,
           inputMaxPrompts: 4,
+          context: 'modulix',
           messages: [
             {
               content: 'Salut',
