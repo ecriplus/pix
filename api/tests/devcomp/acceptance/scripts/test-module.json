@@ -16,25 +16,25 @@
   },
   "grains": [
     {
+      "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
+      "type": "transition",
+      "title": "",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
+            "type": "text",
+            "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
+          }
+        }
+      ]
+    },
+    {
       "id": "f312c33d-e7c9-4a69-9ba0-913957b8f7dd",
       "type": "discovery",
       "title": "Voici une leçon",
       "components": [
-        {
-          "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
-                "type": "text",
-                "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
-              }
-            }
-          ]
-        },
         {
           "type": "element",
           "element": {
@@ -453,6 +453,52 @@
                 "solution": "B"
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
+      "type": "discovery",
+      "title": "test qcu-discovery",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0c397035-a940-441f-8936-050db7f997af",
+            "type": "qcu-discovery",
+            "instruction": "<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "Des cookies maison tout chauds",
+                "feedback": {
+                  "diagnosis": "<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "Des mini-éclairs au chocolat",
+                "feedback": {
+                  "diagnosis": "<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "Un plateau de fruits frais et de fromage",
+                "feedback": {
+                  "diagnosis": "<p>Parfait pour ceux qui préfèrent un goûter plus léger, mais tout aussi délicieux.</p>"
+                }
+              },
+              {
+                "id": "4",
+                "content": "Une part de gâteau marbré au chocolat et à la vanille",
+                "feedback": {
+                  "diagnosis": "<p>Un gâteau moelleux et gourmand qui se marie parfaitement avec une tasse de thé ou de café.</p>"
+                }
+              }
+            ],
+            "solution": "1"
           }
         }
       ]

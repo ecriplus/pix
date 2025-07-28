@@ -1,312 +1,14 @@
 import { getProposals, getProposalsListAsCsv } from '../../../../scripts/modulix/get-proposals-csv.js';
 import { getAnswerableElements } from '../../../../scripts/modulix/utils/get-answerable-elements.js';
 import { expect } from '../../../test-helper.js';
+import moduleContent from './test-module.json' with { type: 'json' };
 
 describe('Acceptance | Script | Get Proposals as CSV', function () {
-  const modulesListAsJs = [
-    {
-      id: '6282925d-4775-4bca-b513-4c3009ec5886',
-      slug: 'bac-a-sable',
-      title: 'Bac à sable',
-      details: {
-        image: 'https://images.pix.fr/modulix/placeholder-details.svg',
-        description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
-        duration: 5,
-        level: 'Débutant',
-        tabletSupport: 'comfortable',
-        objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
-      },
-      grains: [
-        {
-          id: '47cd065b-dbf2-4adc-b5c3-02fb69cb9ec2',
-          type: 'activity',
-          title: 'Test Stepper',
-          components: [
-            {
-              type: 'stepper',
-              steps: [
-                {
-                  elements: [
-                    {
-                      id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                      type: 'text',
-                      content: '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
-                    },
-                  ],
-                },
-                {
-                  elements: [
-                    {
-                      id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                      type: 'text',
-                      content: '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
-          type: 'lesson',
-          title: 'Voici une leçon',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '84726001-1665-457d-8f13-4a74dc4768ea',
-                type: 'text',
-                content:
-                  '<h3>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h3>',
-              },
-            },
-            {
-              type: 'element',
-              element: {
-                id: 'a2372bf4-86a4-4ecc-a188-b51f4f98bca2',
-                type: 'text',
-                content:
-                  '<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden="true">📚</span>.<br>Et là, voici une image&#8239;!</p>',
-              },
-            },
-            {
-              type: 'element',
-              element: {
-                id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
-                type: 'image',
-                url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
-                alt: "Dessin détaillé dans l'alternative textuelle",
-                alternativeText: "Dessin d'un ordinateur dans un univers spatial.",
-              },
-            },
-          ],
-        },
-        {
-          id: '73ac3644-7637-4cee-86d4-1a75f53f0b9c',
-          type: 'lesson',
-          title: 'Vidéo de présentation de Pix',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                type: 'text',
-                content: '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
-              },
-            },
-            {
-              type: 'element',
-              element: {
-                id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
-                type: 'video',
-                title: 'Vidéo de présentation de Pix',
-                url: 'https://videos.pix.fr/modulix/didacticiel/presentation.mp4',
-                subtitles: '',
-                transcription:
-                  '<p>Le numérique évolue en permanence, vos compétences aussi, pour travailler, communiquer et s\'informer, se déplacer, réaliser des démarches, un enjeu tout au long de la vie.</p><p>Sur <a href="https://pix.fr" target="blank">pix.fr</a>, testez-vous et cultivez vos compétences numériques.</p><p>Les tests Pix sont personnalisés, les questions s\'adaptent à votre niveau, réponse après réponse.</p><p>Évaluez vos connaissances et savoir-faire sur 16 compétences, dans 5 domaines, sur 5 niveaux de débutants à confirmer, avec des mises en situation ludiques, recherches en ligne, manipulation de fichiers et de données, culture numérique...</p><p>Allez à votre rythme, vous pouvez arrêter et reprendre quand vous le voulez.</p><p>Toutes les 5 questions, découvrez vos résultats et progressez grâce aux astuces et aux tutos.</p><p>En relevant les défis Pix, vous apprendrez de nouvelles choses et aurez envie d\'aller plus loin.</p><p>Vous pensez pouvoir faire mieux&#8239;?</p><p>Retentez les tests et améliorez votre score.</p><p>Faites reconnaître officiellement votre niveau en passant la certification Pix, reconnue par l\'État et le monde professionnel.</p><p>Pix&nbsp;: le service public en ligne pour évaluer, développer et certifier ses compétences numériques.</p>',
-              },
-            },
-          ],
-        },
-        {
-          id: '533c69b8-a836-41be-8ffc-8d4636e31224',
-          type: 'activity',
-          title: 'Voici un vrai-faux',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '71de6394-ff88-4de3-8834-a40057a50ff4',
-                type: 'qcu',
-                instruction: '<p>Pix évalue 16 compétences numériques différentes.</p>',
-                proposals: [
-                  {
-                    id: '1',
-                    content: 'Vrai',
-                  },
-                  {
-                    id: '2',
-                    content: 'Faux',
-                  },
-                ],
-                feedbacks: {
-                  valid: '<p>Correct&#8239;! Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                  invalid:
-                    '<p>Incorrect. Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-                },
-                solution: '1',
-              },
-            },
-          ],
-        },
-        {
-          id: '0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c',
-          type: 'activity',
-          title: 'Les 3 piliers de Pix',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '30701e93-1b4d-4da4-b018-fa756c07d53f',
-                type: 'qcm',
-                instruction: '<p>Quels sont les 3 piliers de Pix&#8239;?</p>',
-                proposals: [
-                  {
-                    id: '1',
-                    content: 'Evaluer ses connaissances et savoir-faire sur 16 compétences du numérique',
-                  },
-                  {
-                    id: '2',
-                    content: 'Développer son savoir-faire sur les jeux de type TPS',
-                  },
-                  {
-                    id: '3',
-                    content: 'Développer ses compétences numériques',
-                  },
-                  {
-                    id: '4',
-                    content: 'Certifier ses compétences Pix',
-                  },
-                  {
-                    id: '5',
-                    content: 'Evaluer ses compétences de logique et compréhension mathématique',
-                  },
-                ],
-                feedbacks: {
-                  valid: '<p>Correct&#8239;! Vous nous avez bien cernés&nbsp;:)</p>',
-                  invalid:
-                    '<p>Et non&#8239;! Pix sert à évaluer, certifier et développer ses compétences numériques.</p>',
-                },
-                solutions: ['1', '3', '4'],
-              },
-            },
-          ],
-        },
-        {
-          id: '2a77a10f-19a3-4544-80f9-8012dad6506a',
-          type: 'activity',
-          title: 'Activité remonter dans la page',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447',
-                type: 'qcu',
-                instruction:
-                  '<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>',
-                proposals: [
-                  {
-                    id: '1',
-                    content: 'Bienvenue',
-                  },
-                  {
-                    id: '2',
-                    content: 'Bonjour',
-                  },
-                  {
-                    id: '3',
-                    content: 'Nous',
-                  },
-                ],
-                feedbacks: {
-                  valid: '<p>Correct&#8239;! Vous avez bien remonté la page</p>',
-                  invalid: '<p>Incorrect. Remonter la page pour retrouver le premier mot&#8239;!</p>',
-                },
-                solution: '2',
-              },
-            },
-          ],
-        },
-        {
-          id: '4ce2a31a-6584-4dae-87c6-d08b58d0f3b9',
-          type: 'activity',
-          title: 'Connaissez-vous bien Pix',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: 'c23436d4-6261-49f1-b50d-13a547529c29',
-                type: 'qrocm',
-                instruction: '<p>Compléter le texte suivant :</p>',
-                proposals: [
-                  {
-                    type: 'text',
-                    content: '<span>Pix est un</span>',
-                  },
-                  {
-                    input: 'pix-name',
-                    type: 'input',
-                    inputType: 'text',
-                    size: 10,
-                    display: 'inline',
-                    placeholder: '',
-                    ariaLabel: 'Mot à trouver',
-                    defaultValue: '',
-                    tolerances: ['t1', 't3'],
-                    solutions: ['Groupement'],
-                  },
-                  {
-                    type: 'text',
-                    content: "<span>d'intérêt public qui a été créée en</span>",
-                  },
-                  {
-                    input: 'pix-birth',
-                    type: 'input',
-                    inputType: 'text',
-                    size: 10,
-                    display: 'inline',
-                    placeholder: '',
-                    ariaLabel: 'Année à trouver',
-                    defaultValue: '',
-                    tolerances: [],
-                    solutions: ['2016'],
-                  },
-                ],
-                feedbacks: {
-                  valid: '<p>Correct&#8239;! vous nous connaissez bien&nbsp;<span aria-hidden="true">🎉</span></p>',
-                  invalid: '<p>Incorrect&#8239;! vous y arriverez la prochaine fois&#8239;!</p>',
-                },
-              },
-            },
-          ],
-        },
-        {
-          id: '7cf75e70-8749-4392-8081-f2c02badb0fb',
-          type: 'activity',
-          title: 'Le nom de ce produit',
-          components: [
-            {
-              type: 'element',
-              element: {
-                id: '98c51fa7-03b7-49b1-8c5e-49341d35909c',
-                type: 'qrocm',
-                instruction: '<p>Quel est le nom de ce nouveau produit Pix&#8239;?</p>',
-                proposals: [
-                  {
-                    input: 'nom-produit',
-                    type: 'input',
-                    inputType: 'text',
-                    size: 10,
-                    display: 'block',
-                    placeholder: '',
-                    ariaLabel: 'Nom de ce produit',
-                    defaultValue: '',
-                    tolerances: ['t1'],
-                    solutions: ['Modulix'],
-                  },
-                ],
-                feedbacks: {
-                  valid: '<p>Correct&#8239;! vous êtes prêt à explorer&nbsp;<span aria-hidden="true">🎉</span></p>',
-                  invalid: '<p>Incorrect&#8239;! vous y arriverez la prochaine fois&#8239;!</p>',
-                },
-              },
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  let modulesListAsJs;
+
+  beforeEach(async function () {
+    modulesListAsJs = [moduleContent];
+  });
 
   describe('#getProposals', function () {
     let elementsListAsJs;
@@ -321,8 +23,11 @@ describe('Acceptance | Script | Get Proposals as CSV', function () {
 
       // Then
       expect(proposalsListAsJs).to.be.an('array');
-      expect(proposalsListAsJs.every((proposalElement) => ['qcm', 'qcu', 'qrocm'].includes(proposalElement.type))).to.be
-        .true;
+      expect(
+        proposalsListAsJs.every((proposalElement) =>
+          ['qcm', 'qcu', 'qcu-declarative', 'qcu-discovery', 'qrocm'].includes(proposalElement.type),
+        ),
+      ).to.be.true;
     });
 
     it('should add some meta info to proposals', async function () {
@@ -349,16 +54,24 @@ describe('Acceptance | Script | Get Proposals as CSV', function () {
       expect(proposalsListAsCsv).to.be.a('string');
       expect(proposalsListAsCsv).to
         .equal(`\ufeff"ProposalModule"\t"ProposalGrainTitle"\t"ProposalGrainId"\t"ProposalGrainPosition"\t"ProposalElementId"\t"ProposalElementType"\t"ProposalActivityElementPosition"\t"ProposalElementInstruction"\t"ProposalId"\t"ProposalContent"\t"ProposalIsSolution"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t4\t"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'1"\t"'Vrai"\t"=TRUE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t4\t"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t1\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'2"\t"'Faux"\t"=FALSE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t5\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'1"\t"'Evaluer ses connaissances et savoir-faire sur 16 compétences du numérique"\t"=TRUE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t5\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'2"\t"'Développer son savoir-faire sur les jeux de type TPS"\t"=FALSE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t5\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'3"\t"'Développer ses compétences numériques"\t"=TRUE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t5\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'4"\t"'Certifier ses compétences Pix"\t"=TRUE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t5\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t2\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'5"\t"'Evaluer ses compétences de logique et compréhension mathématique"\t"=FALSE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Activité remonter dans la page"\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t6\t"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'1"\t"'Bienvenue"\t"=FALSE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Activité remonter dans la page"\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t6\t"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'2"\t"'Bonjour"\t"=TRUE"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"Activité remonter dans la page"\t"2a77a10f-19a3-4544-80f9-8012dad6506a"\t6\t"0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447"\t"qcu"\t3\t"<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>"\t"'3"\t"'Nous"\t"=FALSE"`);
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Un fichier à télécharger"\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t3\t"31106aeb-8346-44a6-8ed4-ebaa2106a373"\t"qcu"\t1\t"<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>"\t"'1"\t"'Des recettes de lasagne"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Un fichier à télécharger"\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t3\t"31106aeb-8346-44a6-8ed4-ebaa2106a373"\t"qcu"\t1\t"<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>"\t"'2"\t"'Des recettes de pâté en croûte"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Un fichier à télécharger"\t"b14df125-82d5-4d55-a660-7b34cd9ea1ab"\t3\t"31106aeb-8346-44a6-8ed4-ebaa2106a373"\t"qcu"\t1\t"<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>"\t"'3"\t"'Des recettes végétariennes"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t2\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'1"\t"'Vrai"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"71de6394-ff88-4de3-8834-a40057a50ff4"\t"qcu"\t2\t"<p>Pix évalue 16 compétences numériques différentes.</p>"\t"'2"\t"'Faux"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"79dc17f9-142b-4e19-bcbe-bfde4e170d3f"\t"qcu"\t3\t"<p>Pix est découpé en 6 domaines.</p>"\t"'1"\t"'Vrai"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"79dc17f9-142b-4e19-bcbe-bfde4e170d3f"\t"qcu"\t3\t"<p>Pix est découpé en 6 domaines.</p>"\t"'2"\t"'Faux"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"09dc17f9-142b-4e19-bcbe-bfde4e170d3l"\t"qcu-declarative"\t4\t"<p>Pix est découpé en 6 domaines.</p>"\t"'1"\t"'Vrai"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Voici un vrai-faux"\t"533c69b8-a836-41be-8ffc-8d4636e31224"\t5\t"09dc17f9-142b-4e19-bcbe-bfde4e170d3l"\t"qcu-declarative"\t4\t"<p>Pix est découpé en 6 domaines.</p>"\t"'2"\t"'Faux"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t6\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t5\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'1"\t"'Evaluer ses connaissances et savoir-faire sur 16 compétences du numérique"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t6\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t5\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'2"\t"'Développer son savoir-faire sur les jeux de type TPS"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t6\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t5\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'3"\t"'Développer ses compétences numériques"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t6\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t5\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'4"\t"'Certifier ses compétences Pix"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"Les 3 piliers de Pix"\t"0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c"\t6\t"30701e93-1b4d-4da4-b018-fa756c07d53f"\t"qcm"\t5\t"<p>Quels sont les 3 piliers de Pix&#8239;?</p>"\t"'5"\t"'Evaluer ses compétences de logique et compréhension mathématique"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"test qcu-discovery"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t11\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t7\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"\t"'1"\t"'Des cookies maison tout chauds"\t"=TRUE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"test qcu-discovery"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t11\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t7\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"\t"'2"\t"'Des mini-éclairs au chocolat"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"test qcu-discovery"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t11\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t7\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"\t"'3"\t"'Un plateau de fruits frais et de fromage"\t"=FALSE"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"test qcu-discovery"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t11\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t7\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"\t"'4"\t"'Une part de gâteau marbré au chocolat et à la vanille"\t"=FALSE"`);
     });
   });
 });
