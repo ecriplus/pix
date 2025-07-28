@@ -26,10 +26,10 @@ export default class CurrentSessionService extends SessionService {
     super.handleAuthentication(this.routeAfterAuthentication);
   }
 
-  async handleInvalidation() {
+  handleInvalidation() {
     this.store.clear();
     const routeAfterInvalidation = this._getRouteAfterInvalidation();
-    await super.handleInvalidation(routeAfterInvalidation);
+    super.handleInvalidation(routeAfterInvalidation);
   }
 
   handleLocale({ isFranceDomain, localeFromQueryParam, userLocale }) {
