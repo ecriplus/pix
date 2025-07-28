@@ -11,13 +11,25 @@ export const ATTACHMENT_MESSAGE_TYPES = {
   IS_VALID: 'IS_VALID',
   IS_INVALID: 'IS_INVALID',
 };
+
+/**
+ * @typedef {Object} StreamCapture
+ * @property {string[]} LLMMessageParts - Accumulated message chunks.
+ * @property {boolean=} haveVictoryConditionsBeenFulfilled - Whether victory conditions were fulfilled during this exchange or not
+ */
+
+/**
+ * @callback OnStreamDoneCallback
+ * @param {StreamCapture} streamCapture
+ */
+
 /**
  * @function
  * @name fromLLMResponse
  *
  * @param {Object} params
  * @param {ReadableStream|null} params.llmResponse
- * @param {Function} params.onStreamDone Callback called when stream is done streaming. Will be called asynchronously with one parameter: the complete LLM message
+ * @param {OnStreamDoneCallback} params.onStreamDone
  * @param {string} params.attachmentMessageType
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
@@ -30,11 +42,15 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
     writableStream.write(getAttachmentEventMessage(attachmentMessageType === ATTACHMENT_MESSAGE_TYPES.IS_VALID));
   }
   const readableStream = llmResponse ?? emptyReadable();
-  const completeLLMMessage = [];
+  /** @type {StreamCapture} */
+  const streamCapture = {
+    LLMMessageParts: [],
+    haveVictoryConditionsBeenFulfilled: undefined,
+  };
   pipeline(
     readableStream,
     lengthPrefixedJsonDecoderTransform.getTransform(),
-    messageObjectToEventStreamTransform.getTransform(completeLLMMessage),
+    messageObjectToEventStreamTransform.getTransform(streamCapture),
     writableStream,
     async (err) => {
       if (err) {
@@ -43,7 +59,7 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
           writableStream.end('Error while streaming response from LLM');
         }
       } else {
-        await onStreamDone(completeLLMMessage.join(''));
+        await onStreamDone(streamCapture);
       }
     },
   );

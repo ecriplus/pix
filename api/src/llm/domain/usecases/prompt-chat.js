@@ -68,10 +68,20 @@ export async function promptChat({
   });
 }
 
+/**
+ * @function
+ * @name addMessagesToChat
+ *
+ * @param {Chat} chat
+ * @param {string} prompt
+ * @param {boolean} shouldBeForwardedToLLM
+ * @param {Object} chatRepository
+ * @returns {(streamCapture: StreamCapture) => Promise<void>}
+ */
 function addMessagesToChat(chat, prompt, shouldBeForwardedToLLM, chatRepository) {
-  return async (llmMessage) => {
-    chat.addUserMessage(prompt, shouldBeForwardedToLLM);
-    chat.addLLMMessage(llmMessage);
+  return async (streamCapture) => {
+    chat.addUserMessage(prompt, shouldBeForwardedToLLM, streamCapture.haveVictoryConditionsBeenFulfilled);
+    chat.addLLMMessage(streamCapture.LLMMessageParts.join(''));
     await chatRepository.save(chat);
   };
 }

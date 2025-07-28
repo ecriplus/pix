@@ -22,8 +22,9 @@ export class Chat {
   /**
    * @param {string=} message
    * @param {boolean=} shouldBeForwardedToLLM
+   * @param {boolean=} haveVictoryConditionsBeenFulfilled
    */
-  addUserMessage(message, shouldBeForwardedToLLM) {
+  addUserMessage(message, shouldBeForwardedToLLM, haveVictoryConditionsBeenFulfilled) {
     if (!message) return;
     this.messages.push(
       new Message({
@@ -32,6 +33,7 @@ export class Chat {
         shouldBeCountedAsAPrompt: shouldBeForwardedToLLM,
         shouldBeForwardedToLLM,
         shouldBeRenderedInPreview: true,
+        haveVictoryConditionsBeenFulfilled,
       }),
     );
   }
@@ -145,6 +147,7 @@ export class Message {
    * @param {boolean} params.shouldBeRenderedInPreview
    * @param {boolean} params.shouldBeCountedAsAPrompt
    * @param {boolean=} params.hasAttachmentBeenSubmittedAlongWithAPrompt
+   * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
    */
   constructor({
     content,
@@ -155,6 +158,7 @@ export class Message {
     shouldBeRenderedInPreview,
     shouldBeCountedAsAPrompt,
     hasAttachmentBeenSubmittedAlongWithAPrompt,
+    haveVictoryConditionsBeenFulfilled,
   }) {
     this.content = content;
     this.isFromUser = isFromUser;
@@ -164,6 +168,7 @@ export class Message {
     this.shouldBeRenderedInPreview = !!shouldBeRenderedInPreview;
     this.shouldBeCountedAsAPrompt = !!shouldBeCountedAsAPrompt;
     this.hasAttachmentBeenSubmittedAlongWithAPrompt = hasAttachmentBeenSubmittedAlongWithAPrompt;
+    this.haveVictoryConditionsBeenFulfilled = haveVictoryConditionsBeenFulfilled;
   }
 
   get isAttachment() {
@@ -195,6 +200,7 @@ export class Message {
       shouldBeRenderedInPreview: this.shouldBeRenderedInPreview,
       shouldBeCountedAsAPrompt: this.shouldBeCountedAsAPrompt,
       hasAttachmentBeenSubmittedAlongWithAPrompt: this.hasAttachmentBeenSubmittedAlongWithAPrompt,
+      haveVictoryConditionsBeenFulfilled: this.haveVictoryConditionsBeenFulfilled,
     };
   }
 

@@ -272,7 +272,12 @@ describe('Acceptance | Route | llm-preview', function () {
               isFromUser: false,
               shouldBeRenderedInPreview: false,
             },
-            { content: 'un message', isFromUser: true, shouldBeRenderedInPreview: true },
+            {
+              content: 'un message',
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+              haveVictoryConditionsBeenFulfilled: true,
+            },
             {
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
               isFromUser: false,
@@ -296,14 +301,33 @@ describe('Acceptance | Route | llm-preview', function () {
         inputMaxPrompts: 3,
         attachmentName: 'expected_file.txt',
         messages: [
-          { content: 'coucou user1', attachmentName: undefined, isFromUser: true, isAttachmentValid: false },
-          { content: 'coucou LLM1', attachmentName: undefined, isFromUser: false, isAttachmentValid: false },
-          { content: 'un message', attachmentName: 'expected_file.txt', isFromUser: true, isAttachmentValid: true },
+          {
+            content: 'coucou user1',
+            attachmentName: undefined,
+            isFromUser: true,
+            isAttachmentValid: false,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: 'coucou LLM1',
+            attachmentName: undefined,
+            isFromUser: false,
+            isAttachmentValid: false,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: 'un message',
+            attachmentName: 'expected_file.txt',
+            isFromUser: true,
+            isAttachmentValid: true,
+            haveVictoryConditionsBeenFulfilled: true,
+          },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
             attachmentName: undefined,
             isFromUser: false,
             isAttachmentValid: false,
+            haveVictoryConditionsBeenFulfilled: undefined,
           },
         ],
       });
