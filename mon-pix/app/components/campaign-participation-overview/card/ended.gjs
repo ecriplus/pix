@@ -16,7 +16,10 @@ export default class Ended extends Component {
           {{t "pages.campaign-participation-overview.card.tag.finished"}}
         </PixTag>
         <h2 class="campaign-participation-overview-card-header__title">{{@model.organizationName}}</h2>
-        <strong class="campaign-participation-overview-card-header__subtitle">{{@model.campaignTitle}}</strong>
+        <strong
+          class="campaign-participation-overview-card-header__subtitle"
+          title={{@model.campaignTitle}}
+        >{{@model.campaignTitle}}</strong>
         <time class="campaign-participation-overview-card-header__date" datetime="{{@model.sharedAt}}">
           {{t "pages.campaign-participation-overview.card.finished-at" date=(dayjsFormat @model.sharedAt "DD/MM/YYYY")}}
         </time>

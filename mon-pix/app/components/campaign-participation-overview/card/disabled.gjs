@@ -14,7 +14,10 @@ export default class Disabled extends Component {
           {{t "pages.campaign-participation-overview.card.tag.disabled"}}
         </PixTag>
         <h2 class="campaign-participation-overview-card-header__title">{{@model.organizationName}}</h2>
-        <strong class="campaign-participation-overview-card-header__subtitle">{{@model.campaignTitle}}</strong>
+        <strong
+          class="campaign-participation-overview-card-header__subtitle"
+          title={{@model.campaignTitle}}
+        >{{@model.campaignTitle}}</strong>
         <time class="campaign-participation-overview-card-header__date" datetime="{{@model.createdAt}}">
           {{t "pages.campaign-participation-overview.card.started-at" date=(dayjsFormat @model.createdAt "DD/MM/YYYY")}}
         </time>

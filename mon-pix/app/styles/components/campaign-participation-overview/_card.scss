@@ -82,8 +82,11 @@
 
     display: block;
     margin-top: var(--pix-spacing-2x);
+    overflow: hidden;
     color: var(--pix-neutral-500);
     font-weight: var(--pix-font-bold);
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__date {
