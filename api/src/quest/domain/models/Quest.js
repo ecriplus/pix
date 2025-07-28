@@ -72,8 +72,7 @@ class Quest {
     if (campaignParticipationRequirements.length === 0) return [];
 
     const targetProfileIds = campaignParticipationRequirements
-      // TODO: requirement.criterion.data.targetProfileId.data would be more explicit
-      .map((requirement) => requirement.data.data?.targetProfileId?.data)
+      .map((requirement) => requirement.data?.targetProfileId?.data)
       .filter(Boolean)
       .flat();
 

@@ -1,13 +1,16 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { CombinedCourse } from '../models/CombinedCourse.js';
+import { CombinedCourseDetails } from '../models/CombinedCourse.js';
 
 export async function getCombinedCourseByCode({
   userId,
   code,
   combinedCourseParticipationRepository,
+  combinedCourseRepository,
+  campaignRepository,
   questRepository,
 }) {
   const quest = await questRepository.getByCode({ code });
+  const combinedCourse = await combinedCourseRepository.getByCode({ code });
 
   let participation = null;
   try {
@@ -18,5 +21,18 @@ export async function getCombinedCourseByCode({
     }
   }
 
-  return new CombinedCourse(quest, participation);
+  const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, participation);
+
+  const campaignIds = combinedCourseDetails.campaignIds;
+
+  const campaigns = [];
+
+  for (const campaignId of campaignIds) {
+    const campaign = await campaignRepository.get({ id: campaignId });
+    campaigns.push(campaign);
+  }
+
+  combinedCourseDetails.generateItems(campaigns);
+
+  return combinedCourseDetails;
 }

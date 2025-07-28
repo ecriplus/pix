@@ -41,6 +41,7 @@
 @use 'components/certifications/shareable-certificate/v3-certificate' as *;
 @use 'components/certifications/shareable-certificate/v2-certificate' as *;
 @use 'components/certifications/certification-ender' as *;
+@use 'components/combined-courses' as *;
 @use 'components/communication-banner' as *;
 @use 'components/companion/blocker' as *;
 @use 'components/companion/check' as *;
@@ -199,16 +200,14 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'pages/certification-instructions' as *;
 @use 'pages/download-session-results' as *;
 
-
 .unauthenticated-page {
-
-  &>.pix-app-layout__main,
+  & > .pix-app-layout__main,
   .pix-app-layout__footer,
   .pix-app-layout__navigation {
     padding: 0;
   }
 
-  &>.pix-app-layout__main {
+  & > .pix-app-layout__main {
     max-width: 100%;
   }
 }

@@ -1,7 +1,7 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { VerifiedCode } from '../models/VerifiedCode.js';
 
-export const getVerifiedCode = async ({ code, campaignRepository, questRepository }) => {
+export const getVerifiedCode = async ({ code, campaignRepository, combinedCourseRepository }) => {
   try {
     const campaign = await campaignRepository.getByCode({ code });
     return new VerifiedCode({ code: campaign.code, type: 'campaign' });
@@ -10,6 +10,6 @@ export const getVerifiedCode = async ({ code, campaignRepository, questRepositor
       throw error;
     }
   }
-  const quest = await questRepository.getByCode({ code });
-  return new VerifiedCode({ code: quest.code, type: 'combined-course' });
+  const combinedCourse = await combinedCourseRepository.getByCode({ code });
+  return new VerifiedCode({ code: combinedCourse.code, type: 'combined-course' });
 };

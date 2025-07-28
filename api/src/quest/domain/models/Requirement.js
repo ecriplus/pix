@@ -141,7 +141,7 @@ export class ObjectRequirement extends BaseRequirement {
   }
 
   get data() {
-    return Object.freeze(this.#criterion);
+    return Object.freeze(this.#criterion).data;
   }
 
   /**

@@ -11,7 +11,7 @@ import { injectDependencies } from '../../../shared/infrastructure/utils/depende
 import * as campaignRepository from './campaign-repository.js';
 import * as combinedCourseParticipantRepository from './combined-course-participant-repository.js';
 import * as combinedCourseParticipationRepository from './combined-course-participation-repository.js';
-import * as combinedCourseRepository from './combined-course-participation-repository.js';
+import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as rewardRepository from './reward-repository.js';

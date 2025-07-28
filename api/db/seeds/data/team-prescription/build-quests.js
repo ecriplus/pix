@@ -19,14 +19,30 @@ import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
-  databaseBuilder.factory.buildQuest({
+  const campaign = databaseBuilder.factory.buildCampaign({
+    name: 'Je teste mes compétences',
+    organizationId,
+    code: 'CODE123',
+  });
+  databaseBuilder.factory.buildQuestForCombinedCourse({
     name: 'Combinix',
     rewardType: null,
     rewardId: null,
     code: 'COMBINIX1',
     organizationId,
     eligibilityRequirements: [],
-    successRequirements: [],
+    successRequirements: [
+      {
+        requirement_type: 'campaignParticipations',
+        comparison: 'all',
+        data: {
+          campaignId: {
+            data: campaign.id,
+            comparison: 'equal',
+          },
+        },
+      },
+    ],
   });
 }
 

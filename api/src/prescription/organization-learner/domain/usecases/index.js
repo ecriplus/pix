@@ -10,6 +10,7 @@ import * as userRepository from '../../../../identity-access-management/infrastr
 import { userToCreateRepository } from '../../../../identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import * as organizationFeaturesAPI from '../../../../organizational-entities/application/api/organization-features-api.js';
 import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as combinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import * as questRepository from '../../../../quest/infrastructure/repositories/quest-repository.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
 import * as obfuscationService from '../../../../shared/domain/services/obfuscation-service.js';
@@ -21,6 +22,7 @@ import * as userService from '../../../../shared/domain/services/user-service.js
  * campaignRepository.getByCode
  * groupRepository.findByOrganizationId
  * questRepository.getByCode
+ * combinedCourseRepository.getByCode
  */
 import * as passwordValidator from '../../../../shared/domain/validators/password-validator.js';
 import * as userValidator from '../../../../shared/domain/validators/user-validator.js';
@@ -72,6 +74,7 @@ const dependencies = {
   campaignParticipationOverviewRepository,
   registrationOrganizationLearnerRepository,
   questRepository,
+  combinedCourseRepository,
   tagRepository,
   userService,
   userReconciliationService,
