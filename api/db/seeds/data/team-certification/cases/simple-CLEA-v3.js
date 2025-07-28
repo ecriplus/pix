@@ -5,6 +5,7 @@ import { Candidate } from '../../../../../src/certification/enrolment/domain/mod
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { BILLING_MODES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -20,9 +21,9 @@ import {
   CLEA_V2_TARGET_PROFILE_ID,
 } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
-import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
+import { CommonOrganizations } from '../shared/common-organisations.js';
 import {
-  DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+  CLEA_CERTIFICATION_CENTER_ID,
   PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
   STARTED_DOUBLE_CERTIFICATION_CLEA_SESSION,
 } from '../shared/constants.js';
@@ -80,7 +81,7 @@ export class CleaV3Seed {
   }
 
   async #addOrganization() {
-    const { organization, organizationMember } = await CommonPixCertifOrganization.getInstance({
+    const { organization, organizationMember } = await CommonOrganizations.getPro({
       databaseBuilder: this.databaseBuilder,
     });
 
@@ -99,10 +100,10 @@ export class CleaV3Seed {
   async #addCertifCenter({ organizationMember }) {
     const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
       certificationCenter: new CertificationCenter({
-        id: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        id: CLEA_CERTIFICATION_CENTER_ID,
         name: 'CLEA V3 Certification Center',
         type: certificationCenterTypes.PRO,
-        externalId: DOUBLE_CERTIFICATION_CLEA_CERTIFICATION_CENTER_EXTERNAL_ID,
+        externalId: 'CLEA_V3_EXTERNAL_ID',
         createdAt: new Date('2024-01-30'),
         habilitations: [ComplementaryCertificationKeys.CLEA],
       }),
@@ -160,7 +161,6 @@ export class CleaV3Seed {
     const candidateBirthdate = '2000-10-30';
 
     const candidate = new Candidate({
-      authorizedToStart: true,
       firstName: pixAppUser.firstName,
       lastName: pixAppUser.lastName,
       sex: 'F',
@@ -186,6 +186,11 @@ export class CleaV3Seed {
       sessionId: session.id,
       candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
       normalizeStringFnc: normalize,
+    });
+
+    await sessionManagementUseCases.authorizeCertificationCandidateToStart({
+      certificationCandidateForSupervisingId: candidateId,
+      authorizedToStart: true,
     });
 
     await enrolmentServices.registerCandidateParticipation({

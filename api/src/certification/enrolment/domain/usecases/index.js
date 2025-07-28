@@ -37,7 +37,6 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../infrastructure/repositories/index.js').CenterRepository} CenterRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CountryRepository} CountryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ScoCertificationCandidateRepository} ScoCertificationCandidateRepository
- * @typedef {import('../../infrastructure/repositories/index.js').OrganizationLearnerRepository} OrganizationLearnerRepository
  * @typedef {import('../../../../shared/infrastructure/repositories/index.js').UserRepository} UserRepository
  * @typedef {import('../../../shared/domain/validators/session-validator.js')} SessionValidator
  * @typedef {import('../../../shared/domain/services/certification-cpf-service.js')} CertificationCpfService
@@ -47,7 +46,6 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../../../shared/domain/services/placement-profile-service.js')} PlacementProfileService
  * @typedef {import('../../../../shared/domain/services/language-service.js')} languageService
  * @typedef {import('../../../../shared/infrastructure/repositories/organization-repository.js')} organizationRepository
- * @typedef {import('../../infrastructure/repositories/organization-learner-repository.js')} organizationLearnerRepository
  * @typedef {import('../../../shared/infrastructure/repositories/certification-candidate-repository.js')} certificationCandidateRepository
  * @typedef {import('../../../../prescription/campaign/infrastructure/repositories/division-repository.js')} divisionRepository
  **/
@@ -67,7 +65,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {CertificationOfficerRepository} CertificationOfficerRepository
  * @typedef {SessionForAttendanceSheetRepository} SessionForAttendanceSheetRepository
  * @typedef {CountryRepository} CountryRepository
- * @typedef {OrganizationLearnerRepository} OrganizationLearnerRepository
+ * @typedef {organizationLearnerRepository} OrganizationLearnerRepository
  * @typedef {UserRepository} UserRepository
  * @typedef {ScoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {certificationCpfService} CertificationCpfService
@@ -81,7 +79,6 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {LanguageService} LanguageService
  * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {organizationRepository} OrganizationRepository
- * @typedef {organizationLearnerRepository} OrganizationLearnerRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {divisionRepository} DivisionRepository
  * @typedef {certificationCourseRepository} CertificationCourseRepository

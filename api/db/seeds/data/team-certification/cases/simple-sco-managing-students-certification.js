@@ -5,7 +5,9 @@ import { Candidate } from '../../../../../src/certification/enrolment/domain/mod
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { Subscription } from '../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { usecases as organizationalEntitiesUsecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { usecases as prescriptionLearnerManagementUsecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CertificationCenter,
   types as certificationCenterTypes,
@@ -13,13 +15,8 @@ import {
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
-import { CommonPixCertifOrganization } from '../shared/common-organisation.js';
-import {
-  PUBLISHED_SCO_SESSION,
-  SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
-  SCO_CERTIFICATION_CENTER_ID,
-  STARTED_SCO_SESSION,
-} from '../shared/constants.js';
+import { CommonOrganizations } from '../shared/common-organisations.js';
+import { PUBLISHED_SCO_SESSION, SCO_CERTIFICATION_CENTER_ID, STARTED_SCO_SESSION } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
 import publishSessionWithValidatedCertification from '../tools/publish-session-with-validated-certification.js';
 
@@ -33,16 +30,14 @@ import publishSessionWithValidatedCertification from '../tools/publish-session-w
  *   - I have previously obtained a certif SCO with ~550 pix
  */
 export class ScoManagingStudent {
-  static USER_BIRTHDATE = '2000-01-01';
-
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
 
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
-    const { certificationCenter } = await this.#addCertifCenter({ organizationMember });
-    const { certifiableUser } = await this.#addCertifiableUser({ organization });
+    const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
+    const organizationLearner = await this.#addCertifiableUser({ organization });
 
     /**
      * Session with candidat ready to start his certification
@@ -51,7 +46,7 @@ export class ScoManagingStudent {
       certificationCenterMember: organizationMember,
       certificationCenter,
     });
-    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+    await this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart });
 
     /**
      * Session with a published certification
@@ -61,7 +56,7 @@ export class ScoManagingStudent {
       certificationCenter,
     });
     const candidateToPublish = await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
+      organizationLearner,
       session: sessionToPublish,
     });
 
@@ -74,20 +69,19 @@ export class ScoManagingStudent {
   }
 
   async #addOrganization() {
-    const commonOrgaService = await CommonPixCertifOrganization.getInstance({ databaseBuilder: this.databaseBuilder });
-    return {
-      organization: commonOrgaService.organization,
-      organizationMember: commonOrgaService.organizationMember,
-    };
+    const { organization, organizationMember } = await CommonOrganizations.getScoManagingStudents({
+      databaseBuilder: this.databaseBuilder,
+    });
+    return { organization, organizationMember };
   }
 
-  async #addCertifCenter({ organizationMember }) {
+  async #addCertifCenter({ organization, organizationMember }) {
     const certificationCenter = await organizationalEntitiesUsecases.createCertificationCenter({
       certificationCenter: new CertificationCenter({
         id: SCO_CERTIFICATION_CENTER_ID,
         name: 'SCO Certification Center',
         type: certificationCenterTypes.SCO,
-        externalId: SCO_CERTIFICATION_CENTER_EXTERNAL_ID,
+        externalId: organization.externalId,
         createdAt: new Date('2022-01-30'),
         habilitations: [],
       }),
@@ -105,23 +99,29 @@ export class ScoManagingStudent {
   async #addCertifiableUser({ organization }) {
     const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
 
-    const organizationLearner = await this.databaseBuilder.factory.buildOrganizationLearner({
+    await this.databaseBuilder.factory.buildOrganizationLearner({
       userId: certifiableUser.id,
       organizationId: organization.id,
+      nationalStudentId: 'INE1234',
       firstName: certifiableUser.firstName,
       lastName: certifiableUser.lastName,
       email: certifiableUser.email,
-      division: 'Terminal',
+      division: 'Terminale',
       sex: 'F',
-      birthdate: ScoManagingStudent.USER_BIRTHDATE,
+      birthdate: '2000-01-01',
       isCertifiable: true,
       isDisabled: false,
       certifiableAt: new Date('2022-01-30'),
-      user: certifiableUser,
     });
     await this.databaseBuilder.commit();
 
-    return { certifiableUser, organizationLearner };
+    const organizationLearner =
+      await prescriptionLearnerManagementUsecases.reconcileScoOrganizationLearnerAutomatically({
+        organizationId: organization.id,
+        userId: certifiableUser.id,
+      });
+
+    return organizationLearner;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
@@ -141,40 +141,43 @@ export class ScoManagingStudent {
     });
   }
 
-  async #addCandidateToSession({ pixAppUser, session }) {
-    const candidateBirthdate = ScoManagingStudent.USER_BIRTHDATE;
+  async #addCandidateToSession({ organizationLearner, session }) {
     const candidate = new Candidate({
-      authorizedToStart: true,
-      firstName: pixAppUser.firstName,
-      lastName: pixAppUser.lastName,
+      firstName: organizationLearner.firstName,
+      lastName: organizationLearner.lastName,
       sex: 'F',
-      birthdate: new Date(candidateBirthdate),
+      birthdate: new Date(organizationLearner.birthdate),
       birthCountry: 'France',
       birthINSEECode: '75115',
-      email: pixAppUser.email,
+      email: organizationLearner.email,
       isLinked: true,
       hasSeenCertificationInstructions: false,
       accessibilityAdjustmentNeeded: false,
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-      userId: pixAppUser.id,
+      userId: organizationLearner.userId,
+      organizationLearnerId: organizationLearner.id,
     });
 
-    const candidateId = await enrolmentUseCases.addCandidateToSession({
+    await enrolmentUseCases.enrolStudentsToSession({
       sessionId: session.id,
-      candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
-      normalizeStringFnc: normalize,
+      studentIds: [organizationLearner.id],
     });
 
-    await enrolmentServices.registerCandidateParticipation({
-      userId: pixAppUser.id,
+    const registeredCandidate = await enrolmentServices.registerCandidateParticipation({
+      userId: organizationLearner.userId,
       sessionId: session.id,
       firstName: candidate.firstName,
       lastName: candidate.lastName,
-      birthdate: candidateBirthdate,
+      birthdate: organizationLearner.birthdate,
       normalizeStringFnc: normalize,
     });
 
-    return enrolmentUseCases.getCandidate({ certificationCandidateId: candidateId });
+    await sessionManagementUseCases.authorizeCertificationCandidateToStart({
+      certificationCandidateForSupervisingId: registeredCandidate.id,
+      authorizedToStart: true,
+    });
+
+    return registeredCandidate;
   }
 
   async #addSessionToPublish({ certificationCenterMember, certificationCenter }) {

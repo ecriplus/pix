@@ -69,6 +69,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
  * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.respository.js').UserRepository} UserRepository
  **/
 
@@ -114,6 +115,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {userRepository} UserRepository
+ * @typedef {CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
  **/
 const dependencies = {
   ...sessionRepositories,
