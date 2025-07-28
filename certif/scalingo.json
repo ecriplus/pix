@@ -1,0 +1,20 @@
+{
+  "name": "Pix Certif Review App",
+  "env": {
+    "REVIEW_APP": {
+      "description": "Indicates that the application is a review app",
+      "value": "true"
+    },
+    "PIX_APP_URL_WITHOUT_EXTENSION": {
+      "generator": "template",
+      "template": "https://app-pr%PR_NUMBER%.review.pix"
+    }
+  },
+  "formation": {
+    "web": {
+      "amount": 1,
+      "size": "S"
+    }
+  },
+  "stack": "scalingo-22"
+}
