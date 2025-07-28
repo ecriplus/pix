@@ -275,7 +275,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.strictEqual(findAll('.element-text').length, 0);
 
       // when
-      await clickByName(t('pages.modulix.buttons.grain.skip'));
+      await clickByName(t('pages.modulix.buttons.grain.skipActivity'));
 
       // then
       assert.strictEqual(findAll('.element-text').length, 1);
@@ -307,7 +307,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       metrics.trackEvent = sinon.stub();
 
       // when
-      await clickByName(t('pages.modulix.buttons.grain.skip'));
+      await clickByName(t('pages.modulix.buttons.grain.skipActivity'));
 
       // then
       sinon.assert.calledWithExactly(passageEventRecordStub, {
