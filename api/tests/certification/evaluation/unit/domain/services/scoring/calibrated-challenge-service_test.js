@@ -190,25 +190,17 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         // given
         const certificationCourseId = 1234;
         const assessmentId = 5678;
-        const challengesAfterCalibration = challengeList.slice(1);
-
-        const challengeExcludedFromCalibration = domainBuilder.buildChallenge({
-          ...challengeList[0],
-          discriminant: null,
-          difficulty: null,
-        });
+        const expectedAskedChallenges = challengeList;
 
         const expectedChallengeCalibrations = _buildDataFromAnsweredChallenges(
           challengeList,
           sharedChallengeRepository,
         );
 
-        const expectedAskedChallenges = [challengeExcludedFromCalibration, ...challengesAfterCalibration];
-
         certificationCourseRepository.get
           .withArgs({ id: certificationCourseId })
           .resolves(
-            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-23') }),
+            domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2019-01-01') }),
           );
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId })
@@ -220,14 +212,13 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           .withArgs({ certificationCourseId })
           .resolves(expectedChallengeCalibrations);
 
-        challengeRepository.findFlashCompatibleWithoutLocale.resolves(challengesAfterCalibration);
+        challengeRepository.findFlashCompatibleWithoutLocale.resolves(expectedAskedChallenges);
 
         certificationCourseRepository.get
           .withArgs({ id: certificationCourseId })
           .resolves(
             domainBuilder.buildCertificationCourse({ id: certificationCourseId, createdAt: new Date('2025-06-20') }),
           );
-        config.v3Certification.latestCalibrationDate = new Date('2025-06-23');
 
         // when
         await calibratedChallengeService.findByCertificationCourseIdAndAssessmentId({

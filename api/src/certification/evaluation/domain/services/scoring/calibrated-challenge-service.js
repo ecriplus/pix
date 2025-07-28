@@ -2,9 +2,11 @@
  * @typedef {import('../index.js').ChallengeCalibrationRepository} ChallengeCalibrationRepository
  * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
  * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
  */
 import differenceBy from 'lodash/differenceBy.js';
 
+import { config } from '../../../../../shared/config.js';
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 
 export const findByCertificationCourseIdAndAssessmentId = withTransaction(
@@ -13,6 +15,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
    * @param {ChallengeRepository} params.challengeRepository
+   * @param {CertificationCourseRepository} params.certificationCourseRepository
    */
   async ({
     certificationCourseId,
@@ -21,10 +24,13 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
     certificationChallengeLiveAlertRepository,
     sharedChallengeRepository,
     challengeRepository,
+    certificationCourseRepository,
   }) => {
+    const fromArchivedCalibration = await _isOldCalibration({ certificationCourseId, certificationCourseRepository });
+
     const flashCompatibleChallenges = await challengeRepository.findFlashCompatibleWithoutLocale({
       useObsoleteChallenges: true,
-      fromArchivedCalibration: false,
+      fromArchivedCalibration,
     });
 
     const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
@@ -32,6 +38,8 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
       certificationCourseId,
       challengeCalibrationRepository,
       sharedChallengeRepository,
+      challengeRepository,
+      fromArchivedCalibration,
     });
 
     const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
@@ -48,6 +56,17 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
 
 /**
  * @param {Object} params
+ * @param {number} params.certificationCourseId
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ */
+const _isOldCalibration = async ({ certificationCourseId, certificationCourseRepository }) => {
+  const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+  const latestCalibrationDate = config.v3Certification.latestCalibrationDate;
+  return certificationCourse.getStartDate() < latestCalibrationDate;
+};
+
+/**
+ * @param {Object} params
  * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
  */
 const _findByCertificationCourseId = async ({
@@ -55,10 +74,18 @@ const _findByCertificationCourseId = async ({
   certificationCourseId,
   challengeCalibrationRepository,
   sharedChallengeRepository,
+  fromArchivedCalibration = false,
 }) => {
   const challengesCalibrations = await challengeCalibrationRepository.getByCertificationCourseId({
     certificationCourseId,
   });
+
+  if (fromArchivedCalibration) {
+    const askedChallenges = compatibleChallenges.filter((challenge) => {
+      return challengesCalibrations.find((calibration) => challenge.id === calibration.id);
+    });
+    return { allChallenges: compatibleChallenges, askedChallenges, challengesCalibrations };
+  }
 
   const askedChallenges = await sharedChallengeRepository.getMany(
     challengesCalibrations.map((challenge) => challenge.id),
