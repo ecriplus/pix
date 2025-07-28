@@ -1,33 +1,21 @@
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
 import FooterLinks from '../footer/footer-links';
-import LanguageSwitcher from '../language-switcher';
+import LocaleSwitcher from '../locale-switcher';
 
 export default class Footer extends Component {
   @service currentDomain;
-  @service locale;
   @service router;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;
   }
 
-  get selectedLanguage() {
-    return this.locale.currentLocale;
-  }
-
-  @action
-  onLanguageChange(language) {
-    this.locale.setCurrentLocale(language);
-    this.router.replaceWith({ queryParams: { lang: null } });
-  }
-
   <template>
     <footer class="authentication-layout-footer" role="contentinfo">
       {{#if this.isInternationalDomain}}
-        <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
+        <LocaleSwitcher />
       {{/if}}
       <FooterLinks @size="extra-small" />
     </footer>
