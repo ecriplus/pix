@@ -1,4 +1,5 @@
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
@@ -34,6 +35,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           attributes: {
             title: 'diagnostique',
             reference: 'ABCDIAG1',
+            type: ITEM_TYPE.CAMPAIGN,
           },
         },
       ],

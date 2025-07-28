@@ -16,6 +16,7 @@ export const TYPES = {
     ORGANIZATION_LEARNER: 'organizationLearner',
     ORGANIZATION: 'organization',
     CAMPAIGN_PARTICIPATIONS: 'campaignParticipations',
+    PASSAGES: 'passages',
   },
 };
 

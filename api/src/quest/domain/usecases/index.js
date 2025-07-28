@@ -20,6 +20,7 @@ const dependencies = {
   combinedCourseParticipationRepository: repositories.combinedCourseParticipationRepository,
   combinedCourseParticipantRepository: repositories.combinedCourseParticipantRepository,
   combinedCourseRepository: repositories.combinedCourseRepository,
+  moduleRepository: repositories.moduleRepository,
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
   logger,

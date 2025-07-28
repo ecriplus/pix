@@ -54,6 +54,7 @@ module('Integration | Component | combined course', function (hooks) {
         id: 1,
         title: 'ma campagne',
         reference: 'ABCDIAG1',
+        type: 'CAMPAIGN',
       });
 
       const combinedCourse = store.createRecord('combined-course', {

@@ -42,6 +42,26 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
           },
         },
       },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: '6282925d-4775-4bca-b513-4c3009ec5886',
+            comparison: 'equal',
+          },
+        },
+      },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: '875df1ff-27c1-4b41-a0a8-5ff46013f35e',
+            comparison: 'equal',
+          },
+        },
+      },
     ],
   });
 }

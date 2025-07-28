@@ -83,6 +83,23 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
       });
     });
 
+    context('when requirement_type is "passages"', function () {
+      it('should build an ObjectRequirement', function () {
+        // given
+        const buildData = {
+          requirement_type: TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS.ALL,
+          data: {},
+        };
+
+        // when
+        const requirement = buildRequirement(buildData);
+
+        // then
+        expect(requirement instanceof ObjectRequirement).to.be.true;
+      });
+    });
+
     context('when requirement_type is "skillProfile"', function () {
       it('should build an SkillProfileRequirement', function () {
         // given
