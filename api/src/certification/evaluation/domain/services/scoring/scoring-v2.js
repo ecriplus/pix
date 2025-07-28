@@ -16,13 +16,13 @@ import CertificationCancelled from '../../../../../../src/shared/domain/events/C
 import {
   AnswerCollectionForScoring,
   CertificationAssessmentScore,
-  CertificationContract,
   CompetenceMark,
   ReproducibilityRate,
 } from '../../../../../shared/domain/models/index.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertifiedScore } from '../../../domain/models/CertifiedScore.js';
+import { CertificationContract } from '../../models/CertificationContract.js';
 import { CertifiedLevel } from '../../models/CertifiedLevel.js';
 
 /**

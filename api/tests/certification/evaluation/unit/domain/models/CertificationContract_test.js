@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { CertificationComputeError } from '../../../../src/shared/domain/errors.js';
-import { CertificationContract } from '../../../../src/shared/domain/models/CertificationContract.js';
-import { catchErr, domainBuilder, expect } from '../../../test-helper.js';
+import { CertificationContract } from '../../../../../../src/certification/evaluation/domain/models/CertificationContract.js';
+import { CertificationComputeError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationContract', function () {
   context('#assertThatWeHaveEnoughAnswers', function () {

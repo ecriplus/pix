@@ -65,7 +65,6 @@ import { CertificationCenter } from './CertificationCenter.js';
 import { CertificationCenterMembership } from './CertificationCenterMembership.js';
 import { CertificationChallenge } from './CertificationChallenge.js';
 import { CertificationChallengeWithType } from './CertificationChallengeWithType.js';
-import { CertificationContract } from './CertificationContract.js';
 import { CertificationResult } from './CertificationResult.js';
 import { Challenge } from './Challenge.js';
 import { Competence } from './Competence.js';
@@ -134,7 +133,6 @@ export {
   CertificationCenterMembership,
   CertificationChallenge,
   CertificationChallengeWithType,
-  CertificationContract,
   CertificationCourse,
   CertificationIssueReport,
   CertificationIssueReportCategory,
