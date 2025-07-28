@@ -67,6 +67,22 @@ class QCUDeclarativeAnsweredEvent extends PassageEventWithElement {
   }
 }
 
+class QCUDiscoveryAnsweredEvent extends PassageEventWithElementAnswered {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
+    super({
+      type: 'QCU_DISCOVERY_ANSWERED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+      answer,
+      status,
+    });
+  }
+}
+
 class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, answer, status }) {
     super({
@@ -83,4 +99,11 @@ class QROCMAnsweredEvent extends PassageEventWithElementAnswered {
   }
 }
 
-export { EmbedAnsweredEvent, QCMAnsweredEvent, QCUAnsweredEvent, QCUDeclarativeAnsweredEvent, QROCMAnsweredEvent };
+export {
+  EmbedAnsweredEvent,
+  QCMAnsweredEvent,
+  QCUAnsweredEvent,
+  QCUDeclarativeAnsweredEvent,
+  QCUDiscoveryAnsweredEvent,
+  QROCMAnsweredEvent,
+};

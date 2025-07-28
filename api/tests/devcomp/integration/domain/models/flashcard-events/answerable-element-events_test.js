@@ -3,6 +3,7 @@ import {
   QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
+  QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
@@ -175,6 +176,41 @@ describe('Integration | Devcomp | Domain | Models | passage-events | answerable-
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The answer is required for a QCUDeclarativeAnsweredEvent');
       });
+    });
+  });
+
+  describe('#QCUDiscoveryAnsweredEvent', function () {
+    it('should init and keep attributes', function () {
+      // given
+      const id = Symbol('id');
+      const occurredAt = new Date();
+      const createdAt = new Date();
+      const passageId = 2;
+      const sequenceNumber = 3;
+      const elementId = '5ad40bc9-8b5c-47ee-b893-f8ab1a1b8095';
+      const answer = 'Poire';
+      const status = 'ok';
+
+      // when
+      const qcuAnsweredEvent = new QCUDiscoveryAnsweredEvent({
+        id,
+        occurredAt,
+        createdAt,
+        passageId,
+        sequenceNumber,
+        elementId,
+        answer,
+        status,
+      });
+
+      // then
+      expect(qcuAnsweredEvent.id).to.equal(id);
+      expect(qcuAnsweredEvent.type).to.equal('QCU_DISCOVERY_ANSWERED');
+      expect(qcuAnsweredEvent.occurredAt).to.equal(occurredAt);
+      expect(qcuAnsweredEvent.createdAt).to.equal(createdAt);
+      expect(qcuAnsweredEvent.passageId).to.equal(passageId);
+      expect(qcuAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(qcuAnsweredEvent.data).to.deep.equal({ elementId, answer, status });
     });
   });
 
