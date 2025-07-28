@@ -4,6 +4,7 @@ import {
   QCMAnsweredEvent,
   QCUAnsweredEvent,
   QCUDeclarativeAnsweredEvent,
+  QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
@@ -52,6 +53,8 @@ class PassageEventFactory {
         return new QCUAnsweredEvent(eventData);
       case 'QCU_DECLARATIVE_ANSWERED':
         return new QCUDeclarativeAnsweredEvent(eventData);
+      case 'QCU_DISCOVERY_ANSWERED':
+        return new QCUDiscoveryAnsweredEvent(eventData);
       default:
         throw new DomainError(`Passage event with type ${eventData.type} does not exist`);
     }
