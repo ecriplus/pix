@@ -7,12 +7,6 @@ import {
   TooLargeMessageInputError,
 } from '../errors.js';
 
-/**
- * @typedef {Object} StreamCapture
- * @property {string[]} LLMMessageParts - Accumulated message chunks.
- * @property {boolean=} haveVictoryConditionsBeenFulfilled - Whether victory conditions were fulfilled during this exchange or not
- */
-
 export async function promptChat({
   chatId,
   userId,

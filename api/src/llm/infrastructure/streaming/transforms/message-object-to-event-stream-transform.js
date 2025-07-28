@@ -1,12 +1,6 @@
 import { Transform } from 'node:stream';
 
 /**
- * @typedef {Object} StreamCapture
- * @property {string[]} LLMMessageParts - Accumulated message chunks.
- * @property {boolean=} haveVictoryConditionsBeenFulfilled - Whether victory conditions were fulfilled during this exchange or not
- */
-
-/**
  * @param {StreamCapture} streamCapture Structure that will hold state, such as the accumulated LLM response
  * @returns {module:stream.internal.Transform}
  */
