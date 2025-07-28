@@ -13,7 +13,6 @@ export default class LoginOrRegisterOidcController extends Controller {
   @service url;
   @service oidcIdentityProviders;
   @service store;
-  @service locale;
   @service router;
   @service currentDomain;
 
@@ -41,18 +40,8 @@ export default class LoginOrRegisterOidcController extends Controller {
     return !this.currentDomain.isFranceDomain;
   }
 
-  get selectedLanguage() {
-    return this.locale.currentLocale;
-  }
-
   get authenticationKey() {
     return this.oidcUserAuthenticationStorage?.authenticationKey;
-  }
-
-  @action
-  onLanguageChange(language) {
-    this.locale.setCurrentLocale(language);
-    this.router.replaceWith('authentication.login-or-register-oidc', { queryParams: { lang: null } });
   }
 
   @action toggleOidcReconciliation() {
