@@ -18,6 +18,7 @@ import { QAB } from '../../domain/models/element/qab/QAB.js';
 import { QCM } from '../../domain/models/element/QCM.js';
 import { QCU } from '../../domain/models/element/QCU.js';
 import { QCUDeclarative } from '../../domain/models/element/QCU-declarative.js';
+import { QCUDiscovery } from '../../domain/models/element/QCU-discovery.js';
 import { QROCM } from '../../domain/models/element/QROCM.js';
 import { Separator } from '../../domain/models/element/Separator.js';
 import { Text } from '../../domain/models/element/Text.js';
@@ -114,6 +115,8 @@ export class ModuleFactory {
         return ModuleFactory.#buildQCU(element);
       case 'qcu-declarative':
         return ModuleFactory.#buildQCUDeclarative(element);
+      case 'qcu-discovery':
+        return ModuleFactory.#buildQCUDiscovery(element);
       case 'qrocm':
         return ModuleFactory.#buildQROCM(element);
       case 'flashcards':
@@ -236,6 +239,21 @@ export class ModuleFactory {
           feedback: proposal.feedback,
         });
       }),
+    });
+  }
+
+  static #buildQCUDiscovery(element) {
+    return new QCUDiscovery({
+      id: element.id,
+      instruction: element.instruction,
+      proposals: element.proposals.map((proposal) => {
+        return new QcuProposal({
+          id: proposal.id,
+          content: proposal.content,
+          feedback: proposal.feedback,
+        });
+      }),
+      solution: element.solution,
     });
   }
 

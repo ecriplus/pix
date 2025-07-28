@@ -9,6 +9,7 @@ import { imageElementSchema } from './element/image-schema.js';
 import { qabElementSchema } from './element/qab-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
 import { qcuDeclarativeElementSchema } from './element/qcu-declarative-schema.js';
+import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { qrocmElementSchema } from './element/qrocm-schema.js';
 import { separatorElementSchema } from './element/separator-schema.js';
@@ -26,6 +27,7 @@ const ALLOWED_ELEMENTS_SCHEMA = [
   { is: 'qab', then: qabElementSchema },
   { is: 'qcu', then: qcuElementSchema },
   { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
+  { is: 'qcu-discovery', then: qcuDiscoveryElementSchema },
   { is: 'qcm', then: qcmElementSchema },
   { is: 'qrocm', then: qrocmElementSchema },
   { is: 'separator', then: separatorElementSchema },

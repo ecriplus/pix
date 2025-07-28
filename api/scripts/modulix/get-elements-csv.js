@@ -43,6 +43,7 @@ export function getElements(modules) {
     'qcm',
     'qcu',
     'qcu-declarative',
+    'qcu-discovery',
     'qrocm',
     'separator',
     'text',

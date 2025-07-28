@@ -6,6 +6,7 @@ import { getImageSample } from '../../../../../../../src/devcomp/infrastructure/
 import { getQabSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qab.sample.js';
 import { getQcmSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcm.sample.js';
 import { getQcuSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcu.sample.js';
+import { getQCUDiscoverySample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qcu-discovery.sample.js';
 import { getQrocmSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/qrocm.sample.js';
 import { getSeparatorSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/separator.sample.js';
 import { getTextSample } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/samples/elements/text.sample.js';
@@ -18,6 +19,7 @@ import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
 import { qabElementSchema } from './element/qab-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
+import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { blockInputSchema, blockSelectSchema, qrocmElementSchema } from './element/qrocm-schema.js';
 import { separatorElementSchema } from './element/separator-schema.js';
@@ -96,6 +98,15 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
     it('should validate sample qcu structure', async function () {
       try {
         await qcuElementSchema.validateAsync(getQcuSample(), { abortEarly: false });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
+
+    it('should validate sample qcu discovery structure', async function () {
+      try {
+        await qcuDiscoveryElementSchema.validateAsync(getQCUDiscoverySample(), { abortEarly: false });
       } catch (joiError) {
         const formattedError = joiErrorParser.format(joiError);
         expect(joiError).to.equal(undefined, formattedError);

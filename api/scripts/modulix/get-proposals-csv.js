@@ -45,6 +45,8 @@ export function getProposals(elements) {
     .filter((element) => {
       switch (element.type) {
         case 'qcu':
+        case 'qcu-declarative':
+        case 'qcu-discovery':
         case 'qcm':
           return true;
         case 'qrocm':
@@ -72,7 +74,10 @@ export function getProposals(elements) {
 
 function isSolution(row) {
   switch (row.type) {
+    case 'qcu-declarative':
+      return false;
     case 'qcu':
+    case 'qcu-discovery':
       return row.solution === row.proposal.id;
     case 'qcm':
       return row.solutions.includes(row.proposal.id);

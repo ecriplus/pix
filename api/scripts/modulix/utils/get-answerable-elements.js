@@ -1,5 +1,5 @@
 export function getAnswerableElements(modules) {
-  const ANSWERABLE_ELEMENT_TYPES = ['qcm', 'qcu', 'qrocm'];
+  const ANSWERABLE_ELEMENT_TYPES = ['qcm', 'qcu', 'qcu-declarative', 'qcu-discovery', 'qrocm'];
 
   const elements = [];
   for (const module of modules) {

@@ -13,6 +13,52 @@
   },
   "grains": [
     {
+      "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
+      "type": "discovery",
+      "title": "test qcu-discovery",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0c397035-a940-441f-8936-050db7f997af",
+            "type": "qcu-discovery",
+            "instruction": "<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "Des cookies maison tout chauds",
+                "feedback": {
+                  "diagnosis": "<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "Des mini-éclairs au chocolat",
+                "feedback": {
+                  "diagnosis": "<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "Un plateau de fruits frais et de fromage",
+                "feedback": {
+                  "diagnosis": "<p>Parfait pour ceux qui préfèrent un goûter plus léger, mais tout aussi délicieux.</p>"
+                }
+              },
+              {
+                "id": "4",
+                "content": "Une part de gâteau marbré au chocolat et à la vanille",
+                "feedback": {
+                  "diagnosis": "<p>Un gâteau moelleux et gourmand qui se marie parfaitement avec une tasse de thé ou de café.</p>"
+                }
+              }
+            ],
+            "solution": "1"
+          }
+        }
+      ]
+    },
+    {
       "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
       "type": "summary",
       "title": "test table",
