@@ -145,7 +145,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
   module('on international domain (.org)', function () {
     module('when connected', function () {
       module('when accessing the fill in campaign code page with "Français" as default language', function () {
-        test('does not display the language switcher', async function (assert) {
+        test('does not display the locale switcher', async function (assert) {
           // given & when
           await authenticate(user);
           const screen = await visit('/campagnes');
