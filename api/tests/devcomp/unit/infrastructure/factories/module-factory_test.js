@@ -8,6 +8,7 @@ import { QAB } from '../../../../../src/devcomp/domain/models/element/qab/QAB.js
 import { QCM } from '../../../../../src/devcomp/domain/models/element/QCM.js';
 import { QCU } from '../../../../../src/devcomp/domain/models/element/QCU.js';
 import { QCUDeclarative } from '../../../../../src/devcomp/domain/models/element/QCU-declarative.js';
+import { QCUDiscovery } from '../../../../../src/devcomp/domain/models/element/QCU-discovery.js';
 import { QROCM } from '../../../../../src/devcomp/domain/models/element/QROCM.js';
 import { Separator } from '../../../../../src/devcomp/domain/models/element/Separator.js';
 import { Text } from '../../../../../src/devcomp/domain/models/element/Text.js';
@@ -620,6 +621,82 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
 
         // then
         expect(module.grains[0].components[0].element).to.be.an.instanceOf(QCUDeclarative);
+      });
+
+      it('should instantiate a Module with a ComponentElement which contains a QCUDiscovery Element', function () {
+        // given
+        const moduleData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'Débutant',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          grains: [
+            {
+              id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+              type: 'discovery',
+              title: 'title',
+              components: [
+                {
+                  type: 'element',
+                  element: {
+                    id: '6a6944be-a8a3-4138-b5dc-af664cf40b07',
+                    type: 'qcu-discovery',
+                    instruction: '<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>',
+                    proposals: [
+                      {
+                        id: '1',
+                        content: 'Des cookies maison tout chauds',
+                        feedback: {
+                          diagnosis:
+                            '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                        },
+                      },
+                      {
+                        id: '2',
+                        content: 'Des mini-éclairs au chocolat',
+                        feedback: {
+                          diagnosis:
+                            '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                        },
+                      },
+                      {
+                        id: '3',
+                        content: 'Un plateau de fruits frais et de fromage',
+                        feedback: {
+                          diagnosis:
+                            '<p>Parfait pour ceux qui préfèrent un goûter plus léger, mais tout aussi délicieux.</p>',
+                        },
+                      },
+                      {
+                        id: '4',
+                        content: 'Une part de gâteau marbré au chocolat et à la vanille',
+                        feedback: {
+                          diagnosis:
+                            '<p>Un gâteau moelleux et gourmand qui se marie parfaitement avec une tasse de thé ou de café.</p>',
+                        },
+                      },
+                    ],
+                    solution: '1',
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.grains[0].components[0].element).to.be.an.instanceOf(QCUDiscovery);
       });
 
       it('should instantiate a Module with a ComponentElement which contains a QCM Element', function () {
