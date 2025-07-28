@@ -8,7 +8,8 @@ export async function getModulesListAsCsv(modules) {
     data: modules,
     delimiter: '\t',
     fileHeaders: [
-      { label: 'Module', value: 'slug' },
+      { label: 'Module', value: 'id' },
+      { label: 'ModuleSlug', value: 'slug' },
       { label: 'ModuleLevel', value: 'details.level' },
       { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
       { label: 'ModuleTotalGrains', value: 'grains.length' },

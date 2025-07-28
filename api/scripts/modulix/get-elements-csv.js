@@ -10,7 +10,7 @@ export async function getElementsListAsCsv(modules) {
     data: elements,
     delimiter: '\t',
     fileHeaders: [
-      { label: 'ElementModuleSlug', value: 'moduleSlug' },
+      { label: 'ElementModule', value: 'moduleId' },
       { label: 'ElementGrainId', value: 'grainId' },
       { label: 'ElementId', value: 'id' },
       { label: 'ElementType', value: 'type' },
@@ -65,7 +65,6 @@ export function getElements(modules) {
           elements.push({
             ...component.element,
             moduleId: module.id,
-            moduleSlug: module.slug,
             elementPosition: elementPosition++,
             grainPosition: module.grains.indexOf(grain),
             grainId: grain.id,
@@ -83,7 +82,6 @@ export function getElements(modules) {
               elements.push({
                 ...element,
                 moduleId: module.id,
-                moduleSlug: module.slug,
                 elementPosition: elementPosition++,
                 grainPosition: module.grains.indexOf(grain),
                 grainId: grain.id,
