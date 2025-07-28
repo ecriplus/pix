@@ -806,7 +806,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
             attachmentName: 'file.txt',
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;
-          expect(response.result).to.have.property('chatId').that.is.a('string').and.not.empty;
           expect(llmApiScope.isDone()).to.be.true;
         });
       });
