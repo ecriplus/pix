@@ -9,7 +9,6 @@ import {
   ResultCompetenceTree,
   ShareableCertificate,
 } from '../../../../shared/domain/models/index.js';
-import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
 import { Certificate } from '../../domain/models/v3/Certificate.js';
@@ -272,7 +271,7 @@ async function _toDomainForCertificationAttestation({ certificationCourseDTO, co
     return new Certificate({
       ...certificationCourseDTO,
       certificationDate: certificationCourseDTO.date,
-      resultCompetenceTree: (await featureToggles.get('isV3CertificationPageEnabled')) ? resultCompetenceTree : [],
+      resultCompetenceTree,
       acquiredComplementaryCertification: certifiedBadges.length ? certifiedBadges[0] : null,
     });
   }

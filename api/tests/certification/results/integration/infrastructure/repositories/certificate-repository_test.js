@@ -4,7 +4,6 @@ import { ComplementaryCertificationKeys } from '../../../../../../src/certificat
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
-import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   catchErr,
   databaseBuilder,
@@ -495,26 +494,125 @@ describe('Integration | Infrastructure | Repository | Certification', function (
     });
 
     context('when session is V3', function () {
-      context('when isV3CertificationPageEnabled feature toggle is truthy', function () {
-        it('should return a V3CertificationAttestation with translated ResultCompetenceTree', async function () {
-          // given
-          await featureToggles.set('isV3CertificationPageEnabled', true);
+      it('should return a V3CertificationAttestation with translated ResultCompetenceTree', async function () {
+        // given
+        const locale = 'en';
 
+        const certificationAttestationData = {
+          id: 123,
+          firstName: 'Sarah Mi',
+          lastName: 'Gell',
+          birthdate: '1977-04-14',
+          birthplace: 'Saint-Ouen',
+          isPublished: true,
+          userId: 456,
+          date: new Date('2020-01-01'),
+          verificationCode: 'P-SOMECODE',
+          maxReachableLevelOnCertificationDate: 5,
+          deliveredAt: new Date('2021-05-05'),
+          certificationCenter: 'Centre des poules bien dodues',
+          pixScore: 51,
+          sessionId: 789,
+        };
+        const version = _buildSession({
+          userId: certificationAttestationData.userId,
+          sessionId: certificationAttestationData.sessionId,
+          publishedAt: certificationAttestationData.deliveredAt,
+          certificationCenter: certificationAttestationData.certificationCenter,
+        });
+        const assessmentResultId = _buildValidCertificationAttestation(certificationAttestationData, false, version);
+
+        const competenceMarks1 = domainBuilder.buildCompetenceMark({
+          id: 1234,
+          level: 4,
+          score: 32,
+          area_code: '1',
+          competence_code: '1.1',
+          competenceId: 'recComp1',
+          assessmentResultId,
+        });
+        databaseBuilder.factory.buildCompetenceMark(competenceMarks1);
+
+        const competenceMarks2 = domainBuilder.buildCompetenceMark({
+          id: 4567,
+          level: 5,
+          score: 40,
+          area_code: '1',
+          competence_code: '1.2',
+          competenceId: 'recComp2',
+          assessmentResultId,
+        });
+        databaseBuilder.factory.buildCompetenceMark(competenceMarks2);
+
+        const competence1 = {
+          id: 'recComp1',
+          index: '1.1',
+          name_i18n: { fr: 'competence 1 en français', en: 'english competence 1 name' },
+        };
+        const competence2 = {
+          id: 'recComp2',
+          index: '1.2',
+          name_i18n: { fr: 'competence 2 en français', en: 'translated competence 1 name' },
+        };
+
+        await databaseBuilder.commit();
+
+        const area1 = domainBuilder.buildArea({
+          id: 'recArea1',
+          code: '1',
+          competences: [
+            { ...competence1, name: competence1.name_i18n[locale] },
+            { ...competence2, name: competence2.name_i18n[locale] },
+          ],
+          title: 'titre test',
+          frameworkId: 'Pix',
+        });
+
+        const learningContentObjects = learningContentBuilder.fromAreas([
+          { ...area1, title_i18n: { fr: area1.title } },
+        ]);
+        await mockLearningContent(learningContentObjects);
+
+        // when
+        const certificationAttestation = await certificateRepository.getCertificate({
+          certificationCourseId: 123,
+          locale,
+        });
+
+        // then
+        const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({
+          id: `123-${assessmentResultId}`,
+          competenceMarks: [competenceMarks1, competenceMarks2],
+          competenceTree: domainBuilder.buildCompetenceTree({ areas: [area1] }),
+        });
+        const expectedCertificationAttestation = domainBuilder.certification.results.buildCertificate({
+          ...certificationAttestationData,
+          id: certificationAttestationData.id,
+          firstName: certificationAttestationData.firstName,
+          lastName: certificationAttestationData.lastName,
+          birthdate: certificationAttestationData.birthdate,
+          birthplace: certificationAttestationData.birthplace,
+          certificationCenter: certificationAttestationData.certificationCenter,
+          deliveredAt: certificationAttestationData.deliveredAt,
+          pixScore: certificationAttestationData.pixScore,
+          algorithmEngineVersion: AlgorithmEngineVersion.V3,
+          certificationDate: certificationAttestationData.date,
+          resultCompetenceTree,
+        });
+        expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
+      });
+
+      context('when a complementary certification is acquired', function () {
+        it('should return a V3Certificate with complementary', async function () {
+          // given
           const locale = 'en';
 
           const certificationAttestationData = {
             id: 123,
-            firstName: 'Sarah Mi',
-            lastName: 'Gell',
-            birthdate: '1977-04-14',
-            birthplace: 'Saint-Ouen',
             isPublished: true,
             userId: 456,
             date: new Date('2020-01-01'),
-            verificationCode: 'P-SOMECODE',
-            maxReachableLevelOnCertificationDate: 5,
             deliveredAt: new Date('2021-05-05'),
-            certificationCenter: 'Centre des poules bien dodues',
             pixScore: 51,
             sessionId: 789,
           };
@@ -522,60 +620,44 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             userId: certificationAttestationData.userId,
             sessionId: certificationAttestationData.sessionId,
             publishedAt: certificationAttestationData.deliveredAt,
-            certificationCenter: certificationAttestationData.certificationCenter,
           });
-          const assessmentResultId = _buildValidCertificationAttestation(certificationAttestationData, false, version);
+          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            id: certificationAttestationData.id,
+            isPublished: certificationAttestationData.isPublished,
+            isCancelled: false,
+            createdAt: certificationAttestationData.date,
+            sessionId: certificationAttestationData.sessionId,
+            userId: certificationAttestationData.userId,
+            version,
+          }).id;
+          databaseBuilder.factory.buildAssessmentResult.last({
+            certificationCourseId,
+            pixScore: certificationAttestationData.pixScore,
+            status: AssessmentResult.status.VALIDATED,
+          }).id;
 
-          const competenceMarks1 = domainBuilder.buildCompetenceMark({
-            id: 1234,
-            level: 4,
-            score: 32,
-            area_code: '1',
-            competence_code: '1.1',
-            competenceId: 'recComp1',
-            assessmentResultId,
+          const badgeId = databaseBuilder.factory.buildBadge().id;
+          const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
+            key: ComplementaryCertificationKeys.CLEA,
+          }).id;
+
+          const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
+            badgeId,
+            complementaryCertificationId,
+          }).id;
+          const { id: complementaryCertificationCourseId } =
+            databaseBuilder.factory.buildComplementaryCertificationCourse({
+              certificationCourseId,
+              complementaryCertificationId,
+              complementaryCertificationBadgeId,
+            });
+          databaseBuilder.factory.buildComplementaryCertificationCourseResult({
+            complementaryCertificationCourseId,
+            complementaryCertificationBadgeId,
+            acquired: true,
           });
-          databaseBuilder.factory.buildCompetenceMark(competenceMarks1);
-
-          const competenceMarks2 = domainBuilder.buildCompetenceMark({
-            id: 4567,
-            level: 5,
-            score: 40,
-            area_code: '1',
-            competence_code: '1.2',
-            competenceId: 'recComp2',
-            assessmentResultId,
-          });
-          databaseBuilder.factory.buildCompetenceMark(competenceMarks2);
-
-          const competence1 = {
-            id: 'recComp1',
-            index: '1.1',
-            name_i18n: { fr: 'competence 1 en français', en: 'english competence 1 name' },
-          };
-          const competence2 = {
-            id: 'recComp2',
-            index: '1.2',
-            name_i18n: { fr: 'competence 2 en français', en: 'translated competence 1 name' },
-          };
 
           await databaseBuilder.commit();
-
-          const area1 = domainBuilder.buildArea({
-            id: 'recArea1',
-            code: '1',
-            competences: [
-              { ...competence1, name: competence1.name_i18n[locale] },
-              { ...competence2, name: competence2.name_i18n[locale] },
-            ],
-            title: 'titre test',
-            frameworkId: 'Pix',
-          });
-
-          const learningContentObjects = learningContentBuilder.fromAreas([
-            { ...area1, title_i18n: { fr: area1.title } },
-          ]);
-          await mockLearningContent(learningContentObjects);
 
           // when
           const certificationAttestation = await certificateRepository.getCertificate({
@@ -584,101 +666,12 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           });
 
           // then
-          const resultCompetenceTree = domainBuilder.buildResultCompetenceTree({
-            id: `123-${assessmentResultId}`,
-            competenceMarks: [competenceMarks1, competenceMarks2],
-            competenceTree: domainBuilder.buildCompetenceTree({ areas: [area1] }),
-          });
-          const expectedCertificationAttestation = domainBuilder.certification.results.buildCertificate({
-            ...certificationAttestationData,
-            id: certificationAttestationData.id,
-            firstName: certificationAttestationData.firstName,
-            lastName: certificationAttestationData.lastName,
-            birthdate: certificationAttestationData.birthdate,
-            birthplace: certificationAttestationData.birthplace,
-            certificationCenter: certificationAttestationData.certificationCenter,
-            deliveredAt: certificationAttestationData.deliveredAt,
-            pixScore: certificationAttestationData.pixScore,
-            algorithmEngineVersion: AlgorithmEngineVersion.V3,
-            certificationDate: certificationAttestationData.date,
-            resultCompetenceTree,
-          });
-          expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
-        });
-
-        context('when a complementary certification is acquired', function () {
-          it('should return a V3Certificate with complementary', async function () {
-            // given
-            await featureToggles.set('isV3CertificationPageEnabled', true);
-
-            const locale = 'en';
-
-            const certificationAttestationData = {
-              id: 123,
-              isPublished: true,
-              userId: 456,
-              date: new Date('2020-01-01'),
-              deliveredAt: new Date('2021-05-05'),
-              pixScore: 51,
-              sessionId: 789,
-            };
-            const version = _buildSession({
-              userId: certificationAttestationData.userId,
-              sessionId: certificationAttestationData.sessionId,
-              publishedAt: certificationAttestationData.deliveredAt,
-            });
-            const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-              id: certificationAttestationData.id,
-              isPublished: certificationAttestationData.isPublished,
-              isCancelled: false,
-              createdAt: certificationAttestationData.date,
-              sessionId: certificationAttestationData.sessionId,
-              userId: certificationAttestationData.userId,
-              version,
-            }).id;
-            databaseBuilder.factory.buildAssessmentResult.last({
-              certificationCourseId,
-              pixScore: certificationAttestationData.pixScore,
-              status: AssessmentResult.status.VALIDATED,
-            }).id;
-
-            const badgeId = databaseBuilder.factory.buildBadge().id;
-            const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
-              key: ComplementaryCertificationKeys.CLEA,
-            }).id;
-
-            const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
-              badgeId,
-              complementaryCertificationId,
-            }).id;
-            const { id: complementaryCertificationCourseId } =
-              databaseBuilder.factory.buildComplementaryCertificationCourse({
-                certificationCourseId,
-                complementaryCertificationId,
-                complementaryCertificationBadgeId,
-              });
-            databaseBuilder.factory.buildComplementaryCertificationCourseResult({
-              complementaryCertificationCourseId,
-              complementaryCertificationBadgeId,
-              acquired: true,
-            });
-
-            await databaseBuilder.commit();
-
-            // when
-            const certificationAttestation = await certificateRepository.getCertificate({
-              certificationCourseId: 123,
-              locale,
-            });
-
-            // then
-            expect(certificationAttestation.acquiredComplementaryCertification).to.deep.equal({
-              imageUrl: 'http://badge-image-url.fr',
-              isTemporaryBadge: false,
-              label: 'Label par defaut',
-              message: null,
-              stickerUrl: 'http://stiker-url.fr',
-            });
+          expect(certificationAttestation.acquiredComplementaryCertification).to.deep.equal({
+            imageUrl: 'http://badge-image-url.fr',
+            isTemporaryBadge: false,
+            label: 'Label par defaut',
+            message: null,
+            stickerUrl: 'http://stiker-url.fr',
           });
         });
       });
