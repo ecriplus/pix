@@ -36,10 +36,6 @@ export default class LoginForm extends Component {
     return !this.args.isWithInvitation;
   }
 
-  get forgottenPasswordUrl() {
-    return this.url.forgottenPasswordUrl;
-  }
-
   @action
   async authenticate(event) {
     event.preventDefault();
@@ -146,13 +142,13 @@ export default class LoginForm extends Component {
     switch (error?.code) {
       case 'SHOULD_CHANGE_PASSWORD':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.SHOULD_CHANGE_PASSWORD.I18N_KEY, {
-          url: this.url.forgottenPasswordUrl,
+          url: this.url.pixAppForgottenPasswordUrl,
           htmlSafe: true,
         });
         break;
       case 'USER_IS_TEMPORARY_BLOCKED':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: this.url.forgottenPasswordUrl,
+          url: this.url.pixAppForgottenPasswordUrl,
           htmlSafe: true,
         });
         break;
@@ -245,7 +241,7 @@ export default class LoginForm extends Component {
         </PixButton>
 
         <div class="login-form__forgotten-password">
-          <a href="{{this.forgottenPasswordUrl}}" target="_blank" rel="noopener noreferrer">
+          <a href="{{this.url.pixAppForgottenPasswordUrl}}" target="_blank" rel="noopener noreferrer">
             {{t "pages.login-form.forgot-password"}}
           </a>
         </div>
