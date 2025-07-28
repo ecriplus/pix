@@ -62,10 +62,10 @@ module('Integration | Component | Auth::RegisterForm', function (hooks) {
       .exists();
     assert
       .dom(screen.getByRole('link', { name: "conditions d'utilisation de Pix" }))
-      .hasAttribute('href', 'https://pix.fr/conditions-generales-d-utilisation');
+      .hasAttribute('href', 'https://pix.org/fr/conditions-generales-d-utilisation');
     assert
       .dom(screen.getByRole('link', { name: 'politique de confidentialité' }))
-      .hasAttribute('href', 'https://pix.fr/politique-protection-donnees-personnelles-app');
+      .hasAttribute('href', 'https://pix.org/fr/politique-protection-donnees-personnelles-app');
   });
 
   module('errors management', function () {

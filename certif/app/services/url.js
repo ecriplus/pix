@@ -1,58 +1,33 @@
-import Service, { service } from '@ember/service';
-import ENV from 'pix-certif/config/environment';
+import { service } from '@ember/service';
 
-export default class Url extends Service {
-  @service currentDomain;
+import UrlBaseService from './url-base.js';
+
+export default class Url extends UrlBaseService {
   @service intl;
   @service locale;
 
-  definedHomeUrl = ENV.rootURL;
-  pixAppUrlWithoutExtension = ENV.APP.PIX_APP_URL_WITHOUT_EXTENSION;
-
-  get homeUrl() {
-    return this.definedHomeUrl;
-  }
-
   get cguUrl() {
-    if (this.#isEnglishSpoken()) return 'https://pix.org/en/terms-and-conditions';
-    return `https://pix.${this.currentDomain.getExtension()}/conditions-generales-d-utilisation`;
-  }
-
-  get dataProtectionPolicyUrl() {
-    if (this.#isEnglishSpoken()) return 'https://pix.org/en/personal-data-protection-policy';
-    return `https://pix.${this.currentDomain.getExtension()}/politique-protection-donnees-personnelles-app`;
-  }
-
-  get forgottenPasswordUrl() {
-    let url = `${this.pixAppUrlWithoutExtension}${this.currentDomain.getExtension()}/mot-de-passe-oublie`;
-    if (this.#isEnglishSpoken()) {
-      url += '?lang=en';
-    }
-    return url;
+    return this.getPixWebsiteUrlFor('CGU');
   }
 
   get legalNoticeUrl() {
-    if (this.currentDomain.isFranceDomain) return 'https://pix.fr/mentions-legales';
+    return this.getPixWebsiteUrlFor('LEGAL_NOTICE');
+  }
 
-    return this.#isFrenchSpoken() ? 'https://pix.org/fr/mentions-legales' : 'https://pix.org/en/legal-notice';
+  get dataProtectionPolicyUrl() {
+    return this.getPixWebsiteUrlFor('DATA_PROTECTION_POLICY');
   }
 
   get accessibilityUrl() {
-    if (this.currentDomain.isFranceDomain) return 'https://pix.fr/accessibilite-pix-certif';
-
-    return this.#isFrenchSpoken()
-      ? 'https://pix.org/fr/accessibilite-pix-certif'
-      : 'https://pix.org/en/accessibility-pix-certif';
+    return this.getPixWebsiteUrlFor('ACCESSIBILITY_CERTIF');
   }
 
   get supportUrl() {
-    if (this.currentDomain.isFranceDomain) return 'https://pix.fr/support';
-
-    return this.#isFrenchSpoken() ? 'https://pix.org/fr/support' : 'https://pix.org/en/support';
+    return this.getPixWebsiteUrlFor('SUPPORT');
   }
 
   get joiningIssueSheetUrl() {
-    if (this.#isFrenchSpoken()) {
+    if (this.locale.currentLocale === 'fr') {
       return 'https://cloud.pix.fr/s/b8BFXX94Ys2WGxM/download/Probl%C3%A8mes%20d%27acc%C3%A8s%20en%20session.pdf';
     }
 
@@ -60,7 +35,7 @@ export default class Url extends Service {
   }
 
   get urlToDownloadSessionIssueReportSheet() {
-    if (this.#isFrenchSpoken()) {
+    if (this.locale.currentLocale === 'fr') {
       return 'https://cloud.pix.fr/s/B76yA8ip9Radej9/download';
     }
 
@@ -81,13 +56,5 @@ export default class Url extends Service {
 
   get invigilatorDocumentationUrl() {
     return 'https://cloud.pix.fr/s/s4H9x4PD4eKokqX';
-  }
-
-  #isFrenchSpoken() {
-    return this.locale.currentLocale === 'fr';
-  }
-
-  #isEnglishSpoken() {
-    return this.locale.currentLocale === 'en';
   }
 }

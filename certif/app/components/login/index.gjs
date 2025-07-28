@@ -18,10 +18,6 @@ export default class Login extends Component {
   @tracked isErrorMessagePresent = false;
   @tracked errorMessage = null;
 
-  get forgottenPasswordUrl() {
-    return this.url.forgottenPasswordUrl;
-  }
-
   @action
   setEmail(event) {
     this.email = event.target.value;
@@ -51,13 +47,13 @@ export default class Login extends Component {
     switch (error?.code) {
       case 'SHOULD_CHANGE_PASSWORD':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.SHOULD_CHANGE_PASSWORD.I18N_KEY, {
-          url: this.url.forgottenPasswordUrl,
+          url: this.url.pixAppForgottenPasswordUrl,
           htmlSafe: true,
         });
         break;
       case 'USER_IS_TEMPORARY_BLOCKED':
         this.errorMessage = this.intl.t(ENV.APP.API_ERROR_MESSAGES.USER_IS_TEMPORARY_BLOCKED.I18N_KEY, {
-          url: this.url.forgottenPasswordUrl,
+          url: this.url.pixAppForgottenPasswordUrl,
           htmlSafe: true,
         });
         break;
@@ -105,7 +101,7 @@ export default class Login extends Component {
           @setPassword={{this.setPassword}}
           @isErrorMessagePresent={{this.isErrorMessagePresent}}
           @errorMessage={{this.errorMessage}}
-          @forgottenPasswordUrl={{this.forgottenPasswordUrl}}
+          @forgottenPasswordUrl={{this.url.pixAppForgottenPasswordUrl}}
         />
       </main>
     </div>
