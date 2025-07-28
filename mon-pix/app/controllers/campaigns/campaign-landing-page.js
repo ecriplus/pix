@@ -1,18 +1,14 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import ENV from 'mon-pix/config/environment';
 
 export default class CampaignLandingPageController extends Controller {
   @service currentDomain;
-  @service locale;
   @service router;
   @service session;
 
-  @tracked selectedLanguage = this.locale.currentLocale;
-
-  get shouldDisplayLanguageSwitcher() {
+  get shouldDisplayLocaleSwitcher() {
     return this.isInternationalDomain && this.isUserNotAuthenticated;
   }
 
@@ -34,13 +30,6 @@ export default class CampaignLandingPageController extends Controller {
 
   get isUserNotAuthenticated() {
     return !this.isUserAuthenticatedByPix && !this.isUserAuthenticatedByGAR;
-  }
-
-  @action
-  onLanguageChange(language) {
-    this.selectedLanguage = language;
-    this.locale.setCurrentLocale(this.selectedLanguage);
-    this.router.replaceWith('campaigns.campaign-landing-page', { queryParams: { lang: null } });
   }
 
   @action

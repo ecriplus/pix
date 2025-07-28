@@ -2,7 +2,8 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import LandingPageStartBlock from 'mon-pix/components/autonomous-course/landing-page-start-block';
 import CampaignStartBlock from 'mon-pix/components/campaign-start-block';
-import LanguageSwitcher from 'mon-pix/components/language-switcher';
+import LocaleSwitcher from 'mon-pix/components/locale-switcher';
+
 <template>
   {{pageTitle (t "pages.campaign-landing.title")}}
 
@@ -20,12 +21,9 @@ import LanguageSwitcher from 'mon-pix/components/language-switcher';
         />
       {{/if}}
 
-      {{#if @controller.shouldDisplayLanguageSwitcher}}
+      {{#if @controller.shouldDisplayLocaleSwitcher}}
         <div>
-          <LanguageSwitcher
-            @selectedLanguage={{@controller.selectedLanguage}}
-            @onLanguageChange={{@controller.onLanguageChange}}
-          />
+          <LocaleSwitcher />
         </div>
       {{/if}}
     </main>
