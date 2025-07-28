@@ -395,7 +395,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
-  describe('GET /api/admin/organizations/{id}', function () {
+  describe('GET /api/admin/organizations/{organizationId}', function () {
     context('Expected output', function () {
       it('should return the matching organization as JSON API', async function () {
         // given

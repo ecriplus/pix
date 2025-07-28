@@ -524,6 +524,10 @@
           "PLACES_MANAGEMENT": "Display the Places page on PixOrga",
           "SHOW_NPS": "Net Promoter Score display",
           "SHOW_SKILLS": "Displaying skills in the results export",
+          "attestation-list": {
+            "PARENTHOOD": "Parenthood",
+            "SIXTH_GRADE": "Sixth grade"
+          },
           "title": "Features"
         },
         "parent-organization": "Parent organization"
