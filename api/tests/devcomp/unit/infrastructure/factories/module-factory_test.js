@@ -442,7 +442,12 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                   element: {
                     id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
                     type: 'download',
-                    files: [{ url: 'https://example.org/modulix/file.pdf', format: '.pdf' }],
+                    files: [
+                      {
+                        url: 'https://example.org/modulix/file.pdf',
+                        format: '.pdf',
+                      },
+                    ],
                   },
                 },
               ],
@@ -588,7 +593,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                         id: '1',
                         content: 'Avant de mettre le dentifrice',
                         feedback: {
-                          state: '',
                           diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
                         },
                       },
@@ -596,7 +600,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                         id: '2',
                         content: 'Après avoir mis le dentifrice',
                         feedback: {
-                          state: '',
                           diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
                         },
                       },
@@ -604,7 +607,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                         id: '3',
                         content: 'Pendant que le dentifrice est mis',
                         feedback: {
-                          state: '',
                           diagnosis: '<p>Digne des plus grands acrobates !</p>',
                         },
                       },
@@ -1237,7 +1239,12 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                         {
                           id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
                           type: 'download',
-                          files: [{ url: 'https://example.org/modulix/file.pdf', format: '.pdf' }],
+                          files: [
+                            {
+                              url: 'https://example.org/modulix/file.pdf',
+                              format: '.pdf',
+                            },
+                          ],
                         },
                       ],
                     },
@@ -1349,7 +1356,9 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                             {
                               id: '2',
                               content: 'Faux',
-                              feedback: { state: "Faux n'est pas la bonne réponse." },
+                              feedback: {
+                                state: "Faux n'est pas la bonne réponse.",
+                              },
                             },
                           ],
                           solution: '1',
@@ -1407,7 +1416,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                               id: '1',
                               content: 'Avant de mettre le dentifrice',
                               feedback: {
-                                state: '',
                                 diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
                               },
                             },
@@ -1415,7 +1423,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                               id: '2',
                               content: 'Après avoir mis le dentifrice',
                               feedback: {
-                                state: '',
                                 diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
                               },
                             },
@@ -1423,7 +1430,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                               id: '3',
                               content: 'Pendant que le dentifrice est mis',
                               feedback: {
-                                state: '',
                                 diagnosis: '<p>Digne des plus grands acrobates !</p>',
                               },
                             },

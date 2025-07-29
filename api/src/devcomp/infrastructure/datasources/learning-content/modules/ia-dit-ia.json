@@ -157,9 +157,7 @@
                 "ariaLabel": "nombre d'utilisation de l'IA",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": [
-                  6
-                ]
+                "solutions": [6]
               }
             ],
             "feedbacks": {
@@ -481,7 +479,6 @@
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               },
@@ -489,7 +486,6 @@
                 "id": "2",
                 "content": "<p>non</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               },
@@ -497,7 +493,6 @@
                 "id": "3",
                 "content": "<p>J'hésite.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Vous n'êtes pas sûr, mais il y a de grandes chances que ce soit le cas. &nbsp;L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                 }
               }

@@ -91,7 +91,6 @@ function _getQcuDeclarativeElement() {
       id: '1',
       content: 'Du ‘oui‘',
       feedback: {
-        state: '',
         diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
       },
     },
@@ -99,7 +98,6 @@ function _getQcuDeclarativeElement() {
       id: '2',
       content: 'Du ‘non‘',
       feedback: {
-        state: '',
         diagnosis: '<p>Possible, mais attention à ne pas faire une rafarinade !</p>',
       },
     },
@@ -107,7 +105,6 @@ function _getQcuDeclarativeElement() {
       id: '3',
       content: 'Du ‘peut-être‘',
       feedback: {
-        state: '',
         diagnosis: '<p>Digne des plus grands acrobates !</p>',
       },
     },

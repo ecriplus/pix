@@ -41,7 +41,15 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           'Comprendre les fonctions des parties d’une adresse mail',
         ],
       };
-      const moduleFromDomain = new Module({ id, details, slug, title, grains: [], isBeta, version });
+      const moduleFromDomain = new Module({
+        id,
+        details,
+        slug,
+        title,
+        grains: [],
+        isBeta,
+        version,
+      });
       const expectedJson = {
         data: {
           type: 'modules',
@@ -212,7 +220,6 @@ function getComponents() {
             id: '1',
             content: 'plop',
             feedback: {
-              state: '',
               diagnosis: 'blabla',
             },
           },
@@ -220,7 +227,6 @@ function getComponents() {
             id: '2',
             content: 'bam',
             feedback: {
-              state: '',
               diagnosis: 'blabla',
             },
           },
@@ -399,7 +405,6 @@ function getAttributesComponents() {
             content: 'plop',
             id: '1',
             feedback: {
-              state: '',
               diagnosis: 'blabla',
             },
           },
@@ -407,7 +412,6 @@ function getAttributesComponents() {
             content: 'bam',
             id: '2',
             feedback: {
-              state: '',
               diagnosis: 'blabla',
             },
           },

@@ -103,7 +103,7 @@
             "id": "de11d987-0276-4a1c-9266-cc28961283d5",
             "type": "custom",
             "tagName": "llm-compare-messages",
-            "props":{
+            "props": {
               "conversation1": {
                 "title": "Conversation 1",
                 "llmName": "Chatbot #1"
@@ -433,7 +433,6 @@
                 "id": "1",
                 "content": "<p>tous les articles de Wikipedia</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>C'est un bon début&nbsp;: les articles Wikipedia sont très nombreux, variés et souvent bien écrits.</p>"
                 }
               },
@@ -441,7 +440,6 @@
                 "id": "2",
                 "content": "<p>des discussions de forums</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>C'est intéressant pour avoir des mots du quotidien ! Mais la précision du vocabulaire ne sera sûrement pas garantie.<br></p>"
                 }
               },
@@ -449,7 +447,6 @@
                 "id": "3",
                 "content": "<p>des articles scientifiques</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>C'est utile pour avoir du vocabulaire scientifique, donc des mots très précis.</p>"
                 }
               },
@@ -457,7 +454,6 @@
                 "id": "4",
                 "content": "<p>toutes ces réponses</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>C'est l'idéal&nbsp;: plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
                 }
               },
@@ -465,7 +461,6 @@
                 "id": "5",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
                 }
               }
@@ -677,7 +672,6 @@
                 "id": "1",
                 "content": "<p>J’utiliserai les réponses qu’elle me donne, sans les vérifier.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les logiciels d'IA générative répondent de manière souvent intéressante. </p><p>Mais ils ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
                 }
               },
@@ -685,7 +679,6 @@
                 "id": "2",
                 "content": "<p>Je poserai plusieurs questions pendant la discussion.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p><strong>C’est un bon réflexe !</strong> </p><p> En demandant des précisions par exemple, vous pourrez avoir une réponse plus précise. </p><p> Vous pouvez aussi demander : « Est-ce que cela est vraiment exact ? ».</p>"
                 }
               },
@@ -693,7 +686,6 @@
                 "id": "3",
                 "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres…).</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>Un logiciel d'IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d'autres sources.</p>"
                 }
               },
@@ -701,7 +693,6 @@
                 "id": "4",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d'IA générative peut faire des erreurs. Il faut donc toujours vérifier ses réponses.</p>"
                 }
               }

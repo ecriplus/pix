@@ -133,12 +133,7 @@
                 "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.<br></p>"
               }
             },
-            "solutions": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
+            "solutions": ["1", "2", "3", "4"]
           }
         }
       ]
@@ -197,7 +192,6 @@
                 "id": "1",
                 "content": "<p>celui avec un ton festif</p>",
                 "feedback": {
-                  "state": "<p>Un choix sympa !</p>",
                   "diagnosis": "<p><strong>Un choix sympa !</strong>&nbsp; Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                 }
               },
@@ -205,7 +199,6 @@
                 "id": "2",
                 "content": "<p>celui avec un ton sérieux</p>",
                 "feedback": {
-                  "state": "<p>Un choix formel !</p><p><br></p>",
                   "diagnosis": "<p><strong>Un choix formel ! </strong>Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                 }
               },
@@ -213,7 +206,6 @@
                 "id": "3",
                 "content": "<p>celui avec un ton drôle</p>",
                 "feedback": {
-                  "state": "<p><br></p>",
                   "diagnosis": "<p><strong>Un choix original ! </strong>Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. <br></p>"
                 }
               },
@@ -221,7 +213,6 @@
                 "id": "4",
                 "content": "<p>aucun ne me plait\t<br></p>",
                 "feedback": {
-                  "state": "<p>Pas de souci !&nbsp; </p>",
                   "diagnosis": "<p><strong>Pas de souci !</strong> Il existe beaucoup d’autres tons : enfantin, ironique, poétique… Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi ! </p>"
                 }
               }
@@ -286,14 +277,8 @@
                 "placeholder": "un seul mot",
                 "ariaLabel": "champs à remplir",
                 "defaultValue": "",
-                "tolerances": [
-                  "t1",
-                  "t2",
-                  "t3"
-                ],
-                "solutions": [
-                  "tableau"
-                ]
+                "tolerances": ["t1", "t2", "t3"],
+                "solutions": ["tableau"]
               }
             ],
             "feedbacks": {
@@ -431,11 +416,7 @@
                       "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.<br></p>"
                     }
                   },
-                  "solutions": [
-                    "1",
-                    "2",
-                    "4"
-                  ]
+                  "solutions": ["1", "2", "4"]
                 }
               ]
             },
@@ -478,11 +459,7 @@
                       "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.<br></p>"
                     }
                   },
-                  "solutions": [
-                    "1",
-                    "2",
-                    "3"
-                  ]
+                  "solutions": ["1", "2", "3"]
                 }
               ]
             },
@@ -525,10 +502,7 @@
                       "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.<br></p>"
                     }
                   },
-                  "solutions": [
-                    "1",
-                    "4"
-                  ]
+                  "solutions": ["1", "4"]
                 }
               ]
             },
@@ -571,12 +545,7 @@
                       "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                     }
                   },
-                  "solutions": [
-                    "1",
-                    "2",
-                    "3",
-                    "4"
-                  ]
+                  "solutions": ["1", "2", "3", "4"]
                 }
               ]
             }
