@@ -46,7 +46,6 @@ import { OrganizationInvitation } from '../../../team/domain/models/Organization
 import { CampaignParticipant } from './../../../prescription/campaign-participation/domain/models/CampaignParticipant.js';
 import { CampaignParticipation } from './../../../prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AdminMember } from './AdminMember.js';
-import { AnswerCollectionForScoring } from './AnswerCollectionForScoring.js';
 import { AnswerStatus } from './AnswerStatus.js';
 import { Area } from './Area.js';
 import { Assessment } from './Assessment.js';
@@ -98,7 +97,6 @@ export {
   ActivityAnswer,
   AdminMember,
   Answer,
-  AnswerCollectionForScoring,
   AnswerStatus,
   Area,
   AreaForAdmin,
