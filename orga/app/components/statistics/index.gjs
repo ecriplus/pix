@@ -16,12 +16,12 @@ import TagLevel from './tag-level';
 
 export default class Statistics extends Component {
   @service router;
-  @service intl;
+  @service locale;
 
   @tracked currentDomainFilter = null;
 
   get currentLocale() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   get analysisByTubes() {

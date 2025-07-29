@@ -9,7 +9,7 @@ import MembersListItem from './members-list-item';
 
 export default class MembersList extends Component {
   @service currentUser;
-  @service intl;
+  @service locale;
   @tracked members = [];
 
   constructor() {
@@ -21,7 +21,7 @@ export default class MembersList extends Component {
   }
 
   get currentLocale() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   get displayManagingColumn() {

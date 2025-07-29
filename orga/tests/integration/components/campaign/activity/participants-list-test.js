@@ -54,8 +54,8 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
     class CurrentUserStub extends Service {
       isAdminInOrganization = true;
     }
-    const intl = this.owner.lookup('service:intl');
-    intl.setLocale(['en', 'en']);
+    const locale = this.owner.lookup('service:locale');
+    locale.setCurrentLocale('en');
 
     this.owner.register('service:current-user', CurrentUserStub);
 

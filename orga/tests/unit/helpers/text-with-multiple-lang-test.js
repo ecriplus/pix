@@ -6,7 +6,7 @@ module('Unit | Helper | TextWithMultipleLang', function (hooks) {
   let helper;
   hooks.beforeEach(function () {
     helper = new textWithMultipleLang();
-    helper.intl = { locales: ['fr', 'en'] };
+    helper.locale = { supportedLocales: ['fr', 'en'] };
   });
 
   [
@@ -25,7 +25,7 @@ module('Unit | Helper | TextWithMultipleLang', function (hooks) {
   ].forEach((expected) => {
     test(`should return the text "${expected.outputText}" if the text is "${expected.text}" in lang ${expected.lang}`, function (assert) {
       // given
-      helper.intl.primaryLocale = expected.lang;
+      helper.locale.currentLocale = expected.lang;
 
       // when
       const computedText = helper.compute([expected.text]).toString();

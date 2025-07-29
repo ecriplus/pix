@@ -8,8 +8,6 @@ module('Unit | Controller | authenticated/sco-organization-participants/list', f
   let controller;
 
   hooks.beforeEach(function () {
-    this.intl = this.owner.lookup('service:intl');
-    this.intl.setLocale('fr');
     controller = this.owner.lookup('controller:authenticated/sco-organization-participants/list');
     controller.send = sinon.stub();
     controller.currentUser = currentUser;

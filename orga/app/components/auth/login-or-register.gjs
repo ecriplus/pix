@@ -15,10 +15,10 @@ import RegisterForm from './register-form';
 export default class LoginOrRegister extends Component {
   @service currentDomain;
   @service locale;
-  @service intl;
   @service router;
+
   @tracked displayRegisterForm = true;
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;
@@ -32,7 +32,7 @@ export default class LoginOrRegister extends Component {
   @action
   onLanguageChange(value) {
     this.selectedLanguage = value;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('join', {
       queryParams: {
         lang: null,

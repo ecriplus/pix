@@ -3,6 +3,8 @@ import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+const FRENCH_FRANCE_LOCALE = 'fr-fr';
+
 module('Unit | Adapters | ApplicationAdapter', function (hooks) {
   setupTest(hooks);
 
@@ -38,47 +40,13 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
       assert.notOk(applicationAdapter.headers['Authorization']);
     });
 
-    test('should add Accept-Language header set to fr-fr when the current domain contains pix.fr and locale is "fr"', function (assert) {
-      // Given
+    test('should add Accept-Language header from the locale service', function (assert) {
+      // Given // When
       const applicationAdapter = this.owner.lookup('adapter:application');
-      applicationAdapter.intl = { primaryLocale: 'fr' };
-
-      // When
-      applicationAdapter.set('currentDomain', {
-        getExtension() {
-          return 'fr';
-        },
-      });
+      applicationAdapter.locale = { acceptLanguageHeader: FRENCH_FRANCE_LOCALE };
 
       // Then
-      assert.strictEqual(applicationAdapter.headers['Accept-Language'], 'fr-fr');
-    });
-
-    test('should add Accept-Language header set to fr when the current domain contains pix.org and locale is "fr"', function (assert) {
-      // Given
-      const applicationAdapter = this.owner.lookup('adapter:application');
-      applicationAdapter.intl = { primaryLocale: 'fr' };
-
-      // When
-      applicationAdapter.set('currentDomain', {
-        getExtension() {
-          return 'org';
-        },
-      });
-
-      // Then
-      assert.strictEqual(applicationAdapter.headers['Accept-Language'], 'fr');
-    });
-
-    test('should add Accept-Language header set to en when locale is "en"', function (assert) {
-      // Given
-      const applicationAdapter = this.owner.lookup('adapter:application');
-
-      // When
-      applicationAdapter.intl = { primaryLocale: 'en' };
-
-      // Then
-      assert.strictEqual(applicationAdapter.headers['Accept-Language'], 'en');
+      assert.strictEqual(applicationAdapter.headers['Accept-Language'], FRENCH_FRANCE_LOCALE);
     });
   });
 

@@ -33,6 +33,7 @@ module.exports = function (environment) {
       API_HOST: process.env.API_HOST || '',
       APPLICATION_NAME: process.env.APP || 'pix-orga-local',
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
+      SUPPORTED_LOCALES: ['en', 'fr', 'nl'],
       BANNER_CONTENT: process.env.BANNER_CONTENT || '',
       CERTIFICATION_BANNER_DISPLAY_DATES: process.env.CERTIFICATION_BANNER_DISPLAY_DATES || '',
       BANNER_TYPE: process.env.BANNER_TYPE || '',

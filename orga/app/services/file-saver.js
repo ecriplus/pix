@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 export default class FileSaverService extends Service {
   @service notifications;
   @service intl;
+  @service locale;
 
   async save({
     url,
@@ -14,7 +15,7 @@ export default class FileSaverService extends Service {
     downloadFileForModernBrowsers = _downloadFileForModernBrowsers,
     noContentMessageNotification = this.intl.t('common.no-content'),
   }) {
-    const response = await fetcher({ url, token, locale: this.locale });
+    const response = await fetcher({ url, token, locale: this.locale.currentLocale });
 
     if (response.status === 204) {
       this.notifications.sendWarning(noContentMessageNotification);
@@ -34,10 +35,6 @@ export default class FileSaverService extends Service {
     browserIsInternetExplorer
       ? downloadFileForIEBrowser({ fileContent, fileName: newFileName })
       : downloadFileForModernBrowsers({ fileContent, fileName: newFileName });
-  }
-
-  get locale() {
-    return this.intl.primaryLocale;
   }
 }
 

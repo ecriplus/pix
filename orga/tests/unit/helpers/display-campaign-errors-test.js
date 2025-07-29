@@ -5,7 +5,7 @@ module('Unit | Helper | display-campaign-errors', function (hooks) {
   setupTest(hooks);
   let helper;
   hooks.beforeEach(function () {
-    this.owner.lookup('service:intl').setLocale('fr');
+    this.owner.lookup('service:locale').setCurrentLocale('fr');
     helper = this.owner.factoryFor('helper:display-campaign-errors').create();
   });
 

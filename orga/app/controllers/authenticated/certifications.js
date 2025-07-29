@@ -10,8 +10,9 @@ export default class AuthenticatedCertificationsController extends Controller {
   @service currentUser;
   @service notifications;
   @service intl;
+  @service locale;
 
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   @tracked selectedDivision = '';
 
@@ -68,7 +69,7 @@ export default class AuthenticatedCertificationsController extends Controller {
         );
       }
 
-      const lang = this.intl.primaryLocale;
+      const lang = this.locale.currentLocale;
       const organizationId = this.currentUser.organization.id;
       const url = `/api/organizations/${organizationId}/certification-attestations?division=${this.selectedDivision}&isFrenchDomainExtension=${this.currentDomain.isFranceDomain}&lang=${lang}`;
       let token = '';

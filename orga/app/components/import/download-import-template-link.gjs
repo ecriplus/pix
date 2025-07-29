@@ -6,11 +6,11 @@ import ENV from 'pix-orga/config/environment';
 
 export default class DownloadImportTemplateLink extends Component {
   @service currentUser;
-  @service intl;
+  @service locale;
   @service session;
 
   get urlToDownloadCsvTemplate() {
-    return `${ENV.APP.API_HOST}/api/organizations/${this.currentUser.organization.id}/organization-learners/csv-template?accessToken=${this.session.data.authenticated.access_token}&lang=${this.intl.primaryLocale}`;
+    return `${ENV.APP.API_HOST}/api/organizations/${this.currentUser.organization.id}/organization-learners/csv-template?accessToken=${this.session.data.authenticated.access_token}&lang=${this.locale.currentLocale}`;
   }
 
   get showLink() {

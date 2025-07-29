@@ -150,8 +150,8 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
     {{/unless}}
 
     {{#if (gt @profiles.length 0)}}
-      {{#let (getService "service:intl") as |intl|}}
-        <PixPagination @pagination={{@profiles.meta}} @locale={{intl.primaryLocale}} />
+      {{#let (getService "service:locale") as |locale|}}
+        <PixPagination @pagination={{@profiles.meta}} @locale={{locale.currentLocale}} />
       {{/let}}
     {{/if}}
   </section>

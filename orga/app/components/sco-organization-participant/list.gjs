@@ -34,6 +34,7 @@ export default class ScoList extends Component {
   @service currentUser;
   @service notifications;
   @service intl;
+  @service locale;
   @service store;
   @service session;
   @service fileSaver;
@@ -58,10 +59,6 @@ export default class ScoList extends Component {
         value: name,
       }));
     });
-  }
-
-  get currentLocale() {
-    return this.intl.primaryLocale;
   }
 
   get connectionTypes() {
@@ -263,7 +260,7 @@ export default class ScoList extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@students.meta}}
-          @locale={{this.currentLocale}}
+          @locale={{this.locale.currentLocale}}
         />
 
         <Filters

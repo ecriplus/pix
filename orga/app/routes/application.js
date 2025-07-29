@@ -9,6 +9,7 @@ export default class ApplicationRoute extends Route {
   @service currentDomain;
   @service currentUser;
   @service session;
+  @service locale;
   @service intl;
   @service pixMetrics;
   @service router;
@@ -28,11 +29,7 @@ export default class ApplicationRoute extends Route {
   async beforeModel(transition) {
     await this.session.setup();
     await this.featureToggles.load();
-    const isFranceDomain = this.currentDomain.isFranceDomain;
-    const localeFromQueryParam = transition.to.queryParams.lang;
-    await this.currentUser.load();
-    const userLocale = this.currentUser.prescriber?.lang;
-    await this.session.handleLocale({ isFranceDomain, localeFromQueryParam, userLocale });
+    await this.session.loadCurrentUserAndSetLocale(transition);
   }
 
   async model() {

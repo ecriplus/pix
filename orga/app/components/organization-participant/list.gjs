@@ -41,10 +41,7 @@ export default class List extends Component {
   @tracked showDeletionModal = false;
   @service currentUser;
   @service intl;
-
-  get currentLocale() {
-    return this.intl.primaryLocale;
-  }
+  @service locale;
 
   displayDate(date) {
     return dayjs(date).format('DD/MM/YYYY');
@@ -406,7 +403,7 @@ export default class List extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@participants.meta}}
-          @locale={{this.currentLocale}}
+          @locale={{this.locale.currentLocale}}
         />
       </SelectableList>
 

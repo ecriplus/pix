@@ -13,12 +13,9 @@ import ENV from 'pix-orga/config/environment';
 
 export default class AttestationList extends Component {
   @service intl;
+  @service locale;
 
   debounceTime = ENV.pagination.debounce;
-
-  get currentLocale() {
-    return this.intl.primaryLocale;
-  }
 
   get statusesOptions() {
     return [
@@ -120,6 +117,6 @@ export default class AttestationList extends Component {
       </:columns>
     </PixTable>
 
-    <PixPagination @pagination={{@participantStatuses.meta}} @locale={{this.currentLocale}} />
+    <PixPagination @pagination={{@participantStatuses.meta}} @locale={{this.locale.currentLocale}} />
   </template>
 }
