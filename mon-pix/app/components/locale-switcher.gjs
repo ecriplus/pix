@@ -1,3 +1,7 @@
+// This file is the ORIGINAL file. Copies of it are used in all the fronts.
+// If you need a change, modify the original file and
+// propagate the changes in the copies in all the fronts.
+
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -40,7 +44,7 @@ export default class LocaleSwitcher extends Component {
       @hideDefaultOption="true"
       @screenReaderOnly="true"
     >
-      <:label>{{t "pages.inscription.choose-language-aria-label"}}</:label>
+      <:label>{{t "components.locale-switcher.label"}}</:label>
     </PixSelect>
   </template>
 }

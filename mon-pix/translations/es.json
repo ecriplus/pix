@@ -314,6 +314,9 @@
         },
         "title": "Únete a la organización { organizationName }"
       }
+    },
+    "locale-switcher": {
+      "label": "Selecciona un idioma"
     }
   },
   "navigation": {
@@ -1447,9 +1450,6 @@
       "action": "Estoy listo",
       "description": "Para la o las siguientes preguntas, no podrás salir de la página.",
       "title": "Modo enfoque"
-    },
-    "inscription": {
-      "choose-language-aria-label": "Selecciona un idioma"
     },
     "join": {
       "button": "¡Empecemos!",

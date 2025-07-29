@@ -1,3 +1,7 @@
+// This file is the ORIGINAL file. Copies of it are used in all the fronts.
+// If you need a change, modify the original file and
+// propagate the changes in the copies in all the fronts.
+
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import LocaleSwitcher from 'mon-pix/components/locale-switcher';
@@ -15,6 +19,12 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
     routerService = this.owner.lookup('service:router');
+
+    sinon.stub(localeService, 'switcherDisplayedLanguages').value([
+      { value: 'fr', label: 'Français' },
+      { value: 'en', label: 'English' },
+      { value: 'nl', label: 'Nederlands' },
+    ]);
   });
 
   module('when component renders', function () {

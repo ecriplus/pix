@@ -314,6 +314,9 @@
         },
         "title": "Sluit je aan bij de organisatie { organizationName }"
       }
+    },
+    "locale-switcher": {
+      "label": "Selecteer een taal"
     }
   },
   "navigation": {
@@ -1450,9 +1453,6 @@
       "action": "Ik ben er klaar voor",
       "description": "Voor de volgende vraag of vragen mag je de pagina niet verlaten.",
       "title": "Scherpstelmodus"
-    },
-    "inscription": {
-      "choose-language-aria-label": "Selecteer een taal"
     },
     "join": {
       "button": "Laten we gaan!",
