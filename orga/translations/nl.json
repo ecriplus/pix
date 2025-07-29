@@ -353,6 +353,9 @@
       "in-progress-link": "(controleer importstatus).",
       "success": "De deelnemers zijn geïmporteerd op {date} door {firstName} {lastName}."
     },
+    "locale-switcher": {
+      "label": "Selecteer een taal"
+    },
     "organization-participants-header": {
       "import-button": "Importeren",
       "sco-title": "{count, plural, =0 {Leerling} =1 {Leerling ({count})} other {Leerlingen ({count})}}",
@@ -1025,7 +1028,6 @@
       "title": "Je bent uitgenodigd om lid te worden van de organisatie {organizationName}"
     },
     "login": {
-      "choose-language-aria-label": "Taal selecteren",
       "title": "Inloggen"
     },
     "missions": {

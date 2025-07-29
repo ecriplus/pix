@@ -60,7 +60,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   });
 
   module('when domain is not .fr', function () {
-    test('displays the language switcher and translate to language selected', async function (assert) {
+    test('displays the locale switcher and translate to selected locale', async function (assert) {
       // given
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
@@ -77,7 +77,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
       const screen = await render(hbs`<Auth::LoginOrRegister @organizationName='Organization Aztec' />`);
 
       // then
-      await click(screen.getByRole('button', { name: t('pages.login.choose-language-aria-label') }));
+      await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'English' }));
       assert.dom(screen.getByText('You have been invited to join the organisation Organization Aztec')).exists();
@@ -100,18 +100,18 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
 
       // when
       const screen = await render(hbs`<Auth::LoginOrRegister @organizationName='Organization Aztec' />`);
-      await click(screen.getByRole('button', { name: t('pages.login.choose-language-aria-label') }));
+      await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'English' }));
 
       // then
       assert.ok(localeService.setCurrentLocale.calledWithMatch('en'));
-      assert.ok(routerService.replaceWith.calledWithMatch('join', { queryParams: { lang: null } }));
+      assert.ok(routerService.replaceWith.calledWithMatch({ queryParams: { lang: null } }));
     });
   });
 
   module('when domain is .fr', function () {
-    test('does not display the language switcher', async function (assert) {
+    test('does not display the locale switcher', async function (assert) {
       // given
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
@@ -125,7 +125,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
 
       // then
       assert.dom(screen.getByText("Vous êtes invité(e) à rejoindre l'organisation Organization Aztec")).exists();
-      assert.dom(screen.queryByRole('button', { name: t('pages.login.choose-language-aria-label') })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: t('components.locale-switcher.label') })).doesNotExist();
     });
   });
 });

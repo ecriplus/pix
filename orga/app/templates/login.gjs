@@ -2,8 +2,9 @@ import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import LoginForm from 'pix-orga/components/auth/login-form';
-import LanguageSwitcher from 'pix-orga/components/language-switcher';
+import LocaleSwitcher from 'pix-orga/components/locale-switcher';
 import PageTitle from 'pix-orga/components/ui/page-title';
+
 <template>
   {{pageTitle (t "pages.login.title")}}
   <main class="login-page">
@@ -27,10 +28,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
       </PixBlock>
 
       {{#if @controller.isInternationalDomain}}
-        <LanguageSwitcher
-          @selectedLanguage={{@controller.selectedLanguage}}
-          @onLanguageChange={{@controller.onLanguageChange}}
-        />
+        <LocaleSwitcher />
       {{/if}}
     </div>
   </main>

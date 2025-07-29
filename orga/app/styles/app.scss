@@ -30,6 +30,7 @@
 @use 'components/layout/sidebar' as *;
 @use 'components/layout/topbar' as *;
 @use 'components/layout/user-logged-menu' as *;
+@use 'components/locale-switcher' as *;
 @use 'components/mission/navigation' as *;
 @use 'components/mission/result-table' as *;
 @use 'components/organization-learner' as *;

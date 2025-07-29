@@ -69,7 +69,7 @@ module('Acceptance | join', function (hooks) {
 
           assert.ok(screen.getByText('You have been invited to join the organisation Le collège fou fou fou'));
 
-          await click(screen.getByRole('button', { name: t('pages.login.choose-language-aria-label') }));
+          await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
           await screen.findByRole('listbox');
           await click(screen.getByRole('option', { name: 'Français' }));
 
@@ -184,7 +184,7 @@ module('Acceptance | join', function (hooks) {
         // given
         const screen = await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
 
-        await click(screen.getByRole('button', { name: t('pages.login.choose-language-aria-label') }));
+        await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
         await screen.findByRole('listbox');
         await click(screen.getByRole('option', { name: 'English' }));
 
@@ -465,7 +465,7 @@ module('Acceptance | join', function (hooks) {
             }).id;
 
             const screen = await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
-            await click(screen.getByRole('button', { name: t('pages.login.choose-language-aria-label') }));
+            await click(screen.getByRole('button', { name: t('components.locale-switcher.label') }));
             await screen.findByRole('listbox');
             await click(screen.getByRole('option', { name: 'English' }));
 

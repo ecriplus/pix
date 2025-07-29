@@ -7,18 +7,16 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import LanguageSwitcher from '../language-switcher';
+import LocaleSwitcher from '../locale-switcher';
 import PageTitle from '../ui/page-title';
 import LoginForm from './login-form';
 import RegisterForm from './register-form';
 
 export default class LoginOrRegister extends Component {
   @service currentDomain;
-  @service locale;
   @service router;
 
   @tracked displayRegisterForm = true;
-  @tracked selectedLanguage = this.locale.currentLocale;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;
@@ -27,17 +25,6 @@ export default class LoginOrRegister extends Component {
   @action
   toggleFormsVisibility() {
     this.displayRegisterForm = !this.displayRegisterForm;
-  }
-
-  @action
-  onLanguageChange(value) {
-    this.selectedLanguage = value;
-    this.locale.setCurrentLocale(this.selectedLanguage);
-    this.router.replaceWith('join', {
-      queryParams: {
-        lang: null,
-      },
-    });
   }
 
   <template>
@@ -102,8 +89,8 @@ export default class LoginOrRegister extends Component {
         </div>
       </PixBlock>
       {{#if this.isInternationalDomain}}
-        <div class="login-or-register__language-switcher">
-          <LanguageSwitcher @selectedLanguage={{this.selectedLanguage}} @onLanguageChange={{this.onLanguageChange}} />
+        <div class="login-or-register__locale-switcher">
+          <LocaleSwitcher />
         </div>
       {{/if}}
     </div>

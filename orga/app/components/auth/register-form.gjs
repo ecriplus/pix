@@ -66,7 +66,6 @@ export default class RegisterForm extends Component {
   @tracked cguValidationMessage = null;
   @tracked errorMessage = null;
   @tracked validation = new SignupFormValidation();
-  @tracked selectedLanguage = this.locale.currentLocale;
   @tracked apiErrors = API_ERRORS;
 
   get cguUrl() {
@@ -104,7 +103,7 @@ export default class RegisterForm extends Component {
         email: this.email,
         password: this.password,
         cgu: true,
-        lang: this.selectedLanguage,
+        lang: this.locale.currentLocale,
       });
       await user.save();
 
