@@ -8,15 +8,28 @@ export class Chat {
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
+   * @param {number|undefined} params.totalInputTokens
+   * @param {number|undefined} params.totalOutputTokens
    * @param {Message[]} params.messages
    */
-  constructor({ id, userId, configurationId, configuration, hasAttachmentContextBeenAdded, messages = [] }) {
+  constructor({
+    id,
+    userId,
+    configurationId,
+    configuration,
+    hasAttachmentContextBeenAdded,
+    messages = [],
+    totalInputTokens,
+    totalOutputTokens,
+  }) {
     this.id = id;
     this.userId = userId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
+    this.totalInputTokens = totalInputTokens;
+    this.totalOutputTokens = totalOutputTokens;
   }
 
   /**
@@ -123,6 +136,8 @@ export class Chat {
       configuration: this.configuration.toDTO(),
       hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
       messages: this.messages.map((message) => message.toDTO()),
+      totalInputTokens: this.totalInputTokens,
+      totalOutputTokens: this.totalOutputTokens,
     };
   }
 

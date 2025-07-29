@@ -858,6 +858,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         configurationId: 'abc123',
         configuration: new Configuration(configurationDTO),
         hasAttachmentContextBeenAdded: true,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
         messages: [
           new Message({
             content: 'message user 1',
@@ -903,6 +905,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         configurationId: 'abc123',
         configuration: configurationDTO,
         hasAttachmentContextBeenAdded: true,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
         messages: [
           {
             content: 'message user 1',
