@@ -18,6 +18,7 @@ export async function startChat({ configId, userId }) {
     attachmentName: configuration.attachmentName,
     inputMaxChars: configuration.inputMaxChars,
     inputMaxPrompts: configuration.inputMaxPrompts,
+    context: configuration.context,
   });
 }
 

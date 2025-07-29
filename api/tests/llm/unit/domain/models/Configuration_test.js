@@ -13,6 +13,7 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
           challenge: {
             inputMaxChars: 456,
             inputMaxPrompts: 789,
+            context: 'modulix',
           },
           attachment: {
             name: 'some-attachment-name',
@@ -28,6 +29,7 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
           hasAttachment: true,
           attachmentName: 'some-attachment-name',
           attachmentContext: 'some-attachment-context',
+          context: 'modulix',
         });
       });
     });
@@ -53,6 +55,7 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
           hasAttachment: false,
           attachmentName: undefined,
           attachmentContext: undefined,
+          context: undefined,
         });
       });
     });
@@ -82,6 +85,7 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
         challenge: {
           inputMaxChars: 456,
           inputMaxPrompts: 789,
+          context: 'evaluation',
         },
         attachment: {
           name: 'some-attachment-name',
@@ -101,6 +105,7 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
         hasAttachment: true,
         attachmentName: 'some-attachment-name',
         attachmentContext: 'some-attachment-context',
+        context: 'evaluation',
       });
     });
   });

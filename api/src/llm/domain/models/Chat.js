@@ -94,17 +94,6 @@ export class Chat {
     return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
   }
 
-  toDTO() {
-    return {
-      id: this.id,
-      userId: this.userId,
-      configurationId: this.configurationId,
-      configuration: this.configuration.toDTO(),
-      hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
-      messages: this.messages.map((message) => message.toDTO()),
-    };
-  }
-
   isAttachmentValid(attachmentName) {
     if (!this.configuration.hasAttachment) {
       return false;
@@ -124,6 +113,17 @@ export class Chat {
       .filter((message) => message.shouldBeForwardedToLLM)
       .slice(-this.configuration.historySize)
       .map((message) => message.toLLMHistory());
+  }
+
+  toDTO() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      configurationId: this.configurationId,
+      configuration: this.configuration.toDTO(),
+      hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
+      messages: this.messages.map((message) => message.toDTO()),
+    };
   }
 
   static fromDTO(chatDTO) {

@@ -33,6 +33,10 @@ export class Configuration {
     return this.#dto.attachment?.context;
   }
 
+  get context() {
+    return this.#dto.challenge?.context;
+  }
+
   toDTO() {
     return this.#dto;
   }
@@ -62,6 +66,7 @@ export class Configuration {
  * @property {number} challenge.inputMaxChars
  * @property {number} challenge.inputMaxPrompts
  * @property {object} challenge.victoryConditions FIXME add victoryConditions properties
+ * @property {string=} challenge.context
  * @property {Attachment=} attachment
  */
 

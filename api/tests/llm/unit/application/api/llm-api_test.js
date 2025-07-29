@@ -30,6 +30,7 @@ describe('LLM | Unit | Application | API | llm', function () {
             challenge: {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
+              context: 'modulix',
             },
             attachment: {
               name: 'file.txt',
@@ -53,6 +54,7 @@ describe('LLM | Unit | Application | API | llm', function () {
             attachmentName: newChat.configuration.attachmentName,
             inputMaxChars: newChat.configuration.inputMaxChars,
             inputMaxPrompts: newChat.configuration.inputMaxPrompts,
+            context: newChat.configuration.context,
           }),
         );
         expect(startChat).to.have.been.calledOnceWithExactly({ configurationId: configId, userId });

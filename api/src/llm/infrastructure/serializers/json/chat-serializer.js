@@ -31,6 +31,7 @@ export function serialize(chat) {
     inputMaxChars: chat.configuration.inputMaxChars,
     inputMaxPrompts: chat.configuration.inputMaxPrompts,
     attachmentName: chat.configuration.attachmentName,
+    context: chat.configuration.context,
     messages: messagesForPreview.map(({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled }) => ({
       content,
       attachmentName,
