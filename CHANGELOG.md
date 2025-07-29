@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.169.0](https://github.com/1024pix/pix/compare/v5.168.0...v5.169.0) (2025-07-29)
+
+### :rocket: Amélioration
+
+- [#13000](https://github.com/1024pix/pix/pull/13000) Afficher les modules sur la page d'un parcours combiné (PIX-18847) 
+- [#13012](https://github.com/1024pix/pix/pull/13012) Ajouter l'élément QCU découverte (PIX-18877) 
+- [#13016](https://github.com/1024pix/pix/pull/13016) Ajouter l'événénement QCUDiscoveryAnswered (PIX-18880) 
+- [#12908](https://github.com/1024pix/pix/pull/12908) Ajuster le CTA "Passer l'activité" (PIX-18797) 
+- [#13014](https://github.com/1024pix/pix/pull/13014) Empêche le démarrage des activités d'un parcours combiné sur l'utilisateur n'a pas démarré (PIX-18905) 
+- [#13002](https://github.com/1024pix/pix/pull/13002) Mettre à jour les scripts d'extraction CSV des modules (PIX-18892) 
+- [#13007](https://github.com/1024pix/pix/pull/13007) Relayer l'information de réalisation des conditions de victoires, lors d'une épreuve de prompt LLM, au front (PIX-18886) 
+
+### :bug: Correction
+
+- [#12998](https://github.com/1024pix/pix/pull/12998) Afficher correctement les cartes récapitulatives des campagnes sur PixApp (PIX-17246). 
+- [#13030](https://github.com/1024pix/pix/pull/13030) Corriger la gestion d'erreur dans deux usecases combinix (PIX-18838) 
+- [#12947](https://github.com/1024pix/pix/pull/12947) Les seeds SCO n'etaient pas lie a une organization gerant des etudiants (PIX-18640). 
+
+### :building_construction: Tech
+
+- [#13022](https://github.com/1024pix/pix/pull/13022)  Montée de version pix-ui v55.25.1 sur PixOrga (PIX-18915) 
+
+### :coffee: Autre
+
+- [#12968](https://github.com/1024pix/pix/pull/12968) Isoler la logique des locales des fronts dans le service "locale" (PIX-18833) 
+- [#12959](https://github.com/1024pix/pix/pull/12959) Isoler la logique des locales du front dans le service "locale"
+
 # [5.168.0](https://github.com/1024pix/pix/compare/v5.167.0...v5.168.0) (2025-07-28)
 
 ### :rocket: Amélioration
