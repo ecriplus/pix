@@ -4,6 +4,7 @@ import ENV from 'pix-certif/config/environment';
 export default class Url extends Service {
   @service currentDomain;
   @service intl;
+  @service locale;
 
   definedHomeUrl = ENV.rootURL;
   pixAppUrlWithoutExtension = ENV.APP.PIX_APP_URL_WITHOUT_EXTENSION;
@@ -83,10 +84,10 @@ export default class Url extends Service {
   }
 
   #isFrenchSpoken() {
-    return this.intl.primaryLocale === 'fr';
+    return this.locale.currentLocale === 'fr';
   }
 
   #isEnglishSpoken() {
-    return this.intl.primaryLocale === 'en';
+    return this.locale.currentLocale === 'en';
   }
 }

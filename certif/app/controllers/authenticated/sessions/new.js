@@ -10,6 +10,7 @@ export default class SessionsNewController extends Controller {
   @alias('model') session;
   @service router;
   @service intl;
+  @service locale;
   @service pixToast;
 
   @tracked isSessionDateMissing;
@@ -23,7 +24,7 @@ export default class SessionsNewController extends Controller {
   }
 
   get currentLocale() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   @action

@@ -4,12 +4,11 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class LoginController extends Controller {
-  @service intl;
   @service currentDomain;
   @service router;
   @service locale;
 
-  @tracked selectedLanguage = this.intl.primaryLocale;
+  @tracked selectedLanguage = this.locale.currentLocale;
 
   get isInternationalDomain() {
     return !this.currentDomain.isFranceDomain;
@@ -18,7 +17,7 @@ export default class LoginController extends Controller {
   @action
   onLanguageChange(value) {
     this.selectedLanguage = value;
-    this.locale.setLocale(this.selectedLanguage);
+    this.locale.setCurrentLocale(this.selectedLanguage);
     this.router.replaceWith('login', { queryParams: { lang: null } });
   }
 }

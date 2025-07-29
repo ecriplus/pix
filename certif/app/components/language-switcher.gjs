@@ -2,28 +2,12 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import { FRENCH_INTERNATIONAL_LOCALE } from 'pix-certif/services/locale';
 
 export default class LanguageSwitcher extends Component {
   @service locale;
 
-  get alphabeticallySortedLanguages() {
-    const availableLanguages = this.locale.getAvailableLanguages();
-
-    const options = Object.entries(availableLanguages)
-      .filter(([_, config]) => config.languageSwitcherDisplayed)
-      .map(([key, config]) => ({
-        label: config.value,
-        value: key,
-      }));
-
-    const optionsWithoutFrSortedByLabel = options
-      .filter((option) => option.value !== FRENCH_INTERNATIONAL_LOCALE)
-      .sort((option) => option.label);
-
-    const frenchLanguageOption = options.find((option) => option.value === FRENCH_INTERNATIONAL_LOCALE);
-
-    return [frenchLanguageOption, ...optionsWithoutFrSortedByLabel];
+  get availableLanguages() {
+    return this.locale.switcherDisplayedLanguages;
   }
 
   <template>
@@ -31,7 +15,7 @@ export default class LanguageSwitcher extends Component {
       @id='language-switcher'
       @iconName='globe'
       @value={{@selectedLanguage}}
-      @options={{this.alphabeticallySortedLanguages}}
+      @options={{this.availableLanguages}}
       @onChange={{@onLanguageChange}}
       @hideDefaultOption='true'
       @screenReaderOnly='true'

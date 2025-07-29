@@ -22,6 +22,7 @@ module('Unit | Services | locale', function (hooks) {
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
+    sinon.stub(localeService, 'supportedLocales').value(['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl']);
 
     cookiesService = this.owner.lookup('service:cookies');
     sinon.stub(cookiesService, 'write');
@@ -252,18 +253,36 @@ module('Unit | Services | locale', function (hooks) {
 
       module('when user is loaded', function () {
         module('when there is no overriding language', function () {
-          test('sets the locale with the user language', async function (assert) {
-            // given
-            currentDomainService.getExtension.returns('org');
-            const user = { lang: 'nl' };
+          module('when the user language is supported', function () {
+            test('sets the locale with the user language', async function (assert) {
+              // given
+              currentDomainService.getExtension.returns('org');
+              const user = { lang: 'nl' };
 
-            // when
-            localeService.detectBestLocale({ language: null, user });
+              // when
+              localeService.detectBestLocale({ language: null, user });
 
-            // then
-            sinon.assert.calledWith(intlService.setLocale, 'nl');
-            sinon.assert.calledWith(dayjsService.setLocale, 'nl');
-            assert.strictEqual(metricsService.context.locale, 'nl');
+              // then
+              sinon.assert.calledWith(intlService.setLocale, 'nl');
+              sinon.assert.calledWith(dayjsService.setLocale, 'nl');
+              assert.strictEqual(metricsService.context.locale, 'nl');
+            });
+          });
+
+          module('when the user language is not supported', function () {
+            test('sets the default locale', async function (assert) {
+              // given
+              currentDomainService.getExtension.returns('org');
+              const user = { lang: 'tlh' }; // tlh: Klingon locale
+
+              // when
+              localeService.detectBestLocale({ language: null, user });
+
+              // then
+              sinon.assert.calledWith(intlService.setLocale, DEFAULT_LOCALE);
+              sinon.assert.calledWith(dayjsService.setLocale, DEFAULT_LOCALE);
+              assert.strictEqual(metricsService.context.locale, DEFAULT_LOCALE);
+            });
           });
         });
 
@@ -298,16 +317,32 @@ module('Unit | Services | locale', function (hooks) {
   });
 
   module('switcherDisplayedLanguages', function () {
-    test('returns available languages for switcher with french first', function (assert) {
-      // when
-      const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
+    module('when supportedLocales contains all the pixLanguages', function () {
+      test('returns all the pixLanguages that should be displayed in the switcher with french first', function (assert) {
+        // when
+        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
 
-      // then
-      assert.deepEqual(switcherDisplayedLanguages, [
-        { value: 'fr', label: 'Français' },
-        { value: 'en', label: 'English' },
-        { value: 'nl', label: 'Nederlands' },
-      ]);
+        // then
+        assert.deepEqual(switcherDisplayedLanguages, [
+          { value: 'fr', label: 'Français' },
+          { value: 'en', label: 'English' },
+          { value: 'nl', label: 'Nederlands' },
+        ]);
+      });
+    });
+
+    module('when supportedLocales does not contain all the pixLanguages', function () {
+      test('returns the pixLanguages part of the supportedLocales that should be displayed in the switcher with french first', function (assert) {
+        // when
+        sinon.stub(localeService, 'supportedLocales').value(['en', 'fr']);
+        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
+
+        // then
+        assert.deepEqual(switcherDisplayedLanguages, [
+          { value: 'fr', label: 'Français' },
+          { value: 'en', label: 'English' },
+        ]);
+      });
     });
   });
 });

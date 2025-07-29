@@ -38,16 +38,15 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
       assert.notOk(applicationAdapter.headers['Authorization']);
     });
 
-    ['fr', 'fr-fr', 'en'].forEach((locale) =>
-      test(`should add Accept-Language header from the ${locale}`, function (assert) {
-        // Given
-        const applicationAdapter = this.owner.lookup('adapter:application');
-        applicationAdapter.intl = { primaryLocale: locale };
+    test('should add Accept-Language header from the locale service', function (assert) {
+      // Given
+      const applicationAdapter = this.owner.lookup('adapter:application');
+      const localeService = this.owner.lookup('service:locale');
+      sinon.stub(localeService, 'acceptLanguageHeader').value('fr');
 
-        // Then
-        assert.strictEqual(applicationAdapter.headers['Accept-Language'], locale);
-      }),
-    );
+      // Then
+      assert.strictEqual(applicationAdapter.headers['Accept-Language'], 'fr');
+    });
   });
 
   module('#ajax()', function () {

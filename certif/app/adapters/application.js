@@ -5,7 +5,7 @@ import ENV from 'pix-certif/config/environment';
 export default class ApplicationAdapter extends JSONAPIAdapter {
   @service ajaxQueue;
   @service session;
-  @service intl;
+  @service locale;
 
   host = ENV.APP.API_HOST;
   namespace = 'api';
@@ -15,7 +15,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     if (this.session.isAuthenticated) {
       headers['Authorization'] = `Bearer ${this.session.data.authenticated.access_token}`;
     }
-    headers['Accept-Language'] = this.intl.primaryLocale;
+    headers['Accept-Language'] = this.locale.acceptLanguageHeader;
     headers['X-App-Version'] = ENV.APP.APP_VERSION;
 
     return headers;

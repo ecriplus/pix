@@ -23,6 +23,7 @@ export default class SessionList extends Component {
   @service store;
   @service pixToast;
   @service intl;
+  @service locale;
 
   @action statusLabel(status) {
     if (status === FINALIZED) return this.intl.t(`pages.sessions.list.status.${FINALIZED}`);
@@ -31,7 +32,7 @@ export default class SessionList extends Component {
   }
 
   get currentLocale() {
-    return this.intl.primaryLocale;
+    return this.locale.currentLocale;
   }
 
   @action

@@ -22,8 +22,8 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
         class CurrentDomainStub extends Service {
           getExtension = sinon.stub().returns('org');
         }
-        class IntlStub extends Service {
-          primaryLocale = 'fr';
+        class LocaleStub extends Service {
+          currentLocale = 'fr';
         }
         class RouterStub extends Service {
           replaceWith = sinon.stub().resolves();
@@ -31,7 +31,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
         this.owner.register('service:router', RouterStub);
         this.owner.register('service:current-domain', CurrentDomainStub);
-        this.owner.register('service:intl', IntlStub);
+        this.owner.register('service:locale', LocaleStub);
         this.owner.register('service:current-user', CurrentUserStub);
         const route = this.owner.lookup('route:authenticated/sessions/import');
 
@@ -58,8 +58,8 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
         class CurrentDomainStub extends Service {
           getExtension = sinon.stub().returns('org');
         }
-        class IntlStub extends Service {
-          primaryLocale = 'en';
+        class LocaleStub extends Service {
+          currentLocale = 'en';
         }
         class RouterStub extends Service {
           replaceWith = sinon.stub().resolves();
@@ -67,7 +67,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
         this.owner.register('service:router', RouterStub);
         this.owner.register('service:current-domain', CurrentDomainStub);
-        this.owner.register('service:intl', IntlStub);
+        this.owner.register('service:locale', LocaleStub);
         this.owner.register('service:current-user', CurrentUserStub);
         const route = this.owner.lookup('route:authenticated/sessions/import');
 
@@ -95,8 +95,8 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
       class CurrentDomainStub extends Service {
         getExtension = sinon.stub().returns('fr');
       }
-      class IntlStub extends Service {
-        primaryLocale = 'fr';
+      class LocaleStub extends Service {
+        currentLocale = 'fr';
       }
       class RouterStub extends Service {
         replaceWith = sinon.stub().resolves();
@@ -104,7 +104,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
       this.owner.register('service:router', RouterStub);
       this.owner.register('service:current-domain', CurrentDomainStub);
-      this.owner.register('service:intl', IntlStub);
+      this.owner.register('service:locale', LocaleStub);
       this.owner.register('service:current-user', CurrentUserStub);
       const route = this.owner.lookup('route:authenticated/sessions/import');
 

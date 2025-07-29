@@ -12,24 +12,12 @@ module('Integration | Component | Language Switcher', function (hooks) {
 
   let localeService;
 
-  let availableLanguages = {
-    en: {
-      value: 'English',
-      languageSwitcherDisplayed: true,
-    },
-    fr: {
-      value: 'Français',
-      languageSwitcherDisplayed: true,
-    },
-    el: {
-      value: 'Primitive Eldarìn',
-      languageSwitcherDisplayed: true,
-    },
-    si: {
-      value: 'Sindarìn',
-      languageSwitcherDisplayed: true,
-    },
-  };
+  const switcherDisplayedLanguages = [
+    { value: 'fr', originalName: 'Français' },
+    { value: 'en', originalName: 'English' },
+    { value: 'el', originalName: 'Primitive Eldarìn' },
+    { value: 'si', originalName: 'Sindarìn' },
+  ];
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
@@ -38,7 +26,7 @@ module('Integration | Component | Language Switcher', function (hooks) {
   module('when component renders', function () {
     test('displays a button with default option selected', async function (assert) {
       // given
-      sinon.stub(localeService, 'getAvailableLanguages').returns(availableLanguages);
+      sinon.stub(localeService, 'switcherDisplayedLanguages').returns(switcherDisplayedLanguages);
 
       // when
       const screen = await render(<template><LanguageSwitcher @selectedLanguage='en' /></template>);
@@ -53,7 +41,7 @@ module('Integration | Component | Language Switcher', function (hooks) {
   module('when component is clicked', function () {
     test('displays a sorted list of available languages with french language first', async function (assert) {
       // given
-      sinon.stub(localeService, 'getAvailableLanguages').returns(availableLanguages);
+      sinon.stub(localeService, 'switcherDisplayedLanguages').returns(switcherDisplayedLanguages);
 
       // when
       const screen = await render(<template><LanguageSwitcher @selectedLanguage='en' /></template>);
@@ -70,48 +58,7 @@ module('Integration | Component | Language Switcher', function (hooks) {
         return option.innerText;
       });
 
-      assert.deepEqual(optionsInnerText, ['Français', 'English', 'Primitive Eldarìn', 'Sindarìn']);
-    });
-
-    test(`displays all languages with "languageSwitcherDisplayed" attribute at true`, async function (assert) {
-      // given
-      availableLanguages = {
-        en: {
-          value: 'English',
-          languageSwitcherDisplayed: true,
-        },
-        fr: {
-          value: 'Français',
-          languageSwitcherDisplayed: true,
-        },
-        el: {
-          value: 'Primitive Eldarìn',
-          languageSwitcherDisplayed: false,
-        },
-        si: {
-          value: 'Sindarìn',
-          languageSwitcherDisplayed: true,
-        },
-      };
-
-      sinon.stub(localeService, 'getAvailableLanguages').returns(availableLanguages);
-
-      const screen = await render(<template><LanguageSwitcher @selectedLanguage='en' /></template>);
-
-      // when
-      const selectALanguage = t('common.forms.login.choose-language-aria-label');
-
-      await click(screen.getByRole('button', { name: selectALanguage }));
-      await screen.findByRole('listbox');
-
-      // then
-      const options = await screen.findAllByRole('option');
-      assert.dom(screen.getByRole('option', { name: 'English' })).exists();
-      const optionsInnerText = options.map((option) => {
-        return option.innerText;
-      });
-
-      assert.deepEqual(optionsInnerText, ['Français', 'English', 'Sindarìn']);
+      assert.deepEqual(optionsInnerText, ['Français', 'English']);
     });
   });
 
@@ -119,7 +66,7 @@ module('Integration | Component | Language Switcher', function (hooks) {
     test('should display correct language', async function (assert) {
       // given
       const onLanguageChangeStub = sinon.stub();
-      sinon.stub(localeService, 'getAvailableLanguages').returns(availableLanguages);
+      sinon.stub(localeService, 'switcherDisplayedLanguages').returns(switcherDisplayedLanguages);
 
       // when
       const screen = await render(

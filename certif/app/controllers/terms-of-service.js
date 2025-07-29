@@ -8,8 +8,9 @@ export default class TermsOfServiceController extends Controller {
   @service pixToast;
   @service router;
   @service intl;
+  @service locale;
 
-  @tracked isEnglishLocale = this.intl.primaryLocale === 'en';
+  @tracked isEnglishLocale = this.locale.currentLocale === 'en';
 
   @action
   async submit() {
