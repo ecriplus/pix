@@ -171,6 +171,16 @@ const get = async function ({ organizationId }) {
       };
     }
 
+    if (key === ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key) {
+      return {
+        ...features,
+        [key]: {
+          active: enabled,
+          params,
+        },
+      };
+    }
+
     return { ...features, [key]: { active: enabled, params: null } };
   }, {});
 
