@@ -149,7 +149,7 @@ export default class ToggableLoginForm extends Component {
   }
 
   get forgottenPasswordUrl() {
-    return this.url.forgottenPasswordUrl;
+    return this.url.pixAppForgottenPasswordUrl;
   }
 
   _handleResponseError(errorResponse) {
