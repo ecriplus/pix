@@ -5,13 +5,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes sont créés et pourquoi.</p><br>",
+    "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes (ou hypertrucages en français) sont créés et pourquoi.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
       "<p>Savoir que des médias en ligne peuvent être créés avec l'intelligence artificielle (IA)</p>",
-      "<p>Connaître la notion de deepfake</p>",
-      "<p>Repérer les intentions des auteurs de deepfakes</p>"
+      "<p>Connaître la notion de deepfake (hypertrucage)</p>",
+      "<p>Repérer les intentions des auteurs de deepfakes (hypertrucages)</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -29,7 +29,7 @@
             "content": "<p>Dans la vidéo suivante, on peut voir un scientifique célèbre faire une annonce importante.</p>"
           }
         },
-  {
+        {
           "type": "element",
           "element": {
             "id": "ff755fbe-52a3-45c7-b828-41c0f8d9f228",
@@ -95,7 +95,7 @@
     {
       "id": "1a062483-a1cd-4cef-bb5a-40bfda85caf4",
       "type": "discovery",
-      "title": "Visages",
+      "title": "Activité découverte - 1",
       "components": [
         {
           "type": "element",
@@ -181,14 +181,14 @@
     {
       "id": "56ad33ff-d28b-4a76-b98a-412b9c193126",
       "type": "discovery",
-      "title": "La chanson de Caroline",
+      "title": "Activité découverte - 2",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "42d51784-c0d0-4c68-953b-059ea9052e33",
             "type": "text",
-            "content": "<p>Avec un logiciel d'itelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
+            "content": "<p>Avec un logiciel d'intelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
           }
         },
         {
@@ -243,7 +243,7 @@
     {
       "id": "f22c5976-43e5-473a-aa0d-e2183328da48",
       "type": "transition",
-      "title": "Transition",
+      "title": "Transition 3",
       "components": [
         {
           "type": "element",
@@ -258,7 +258,7 @@
     {
       "id": "fb72268d-e7c4-4d58-9ee8-9ac5dcd86218",
       "type": "discovery",
-      "title": "Pourquoi créer un deepfake",
+      "title": "Activité découverte - 3",
       "components": [
         {
           "type": "element",
@@ -329,7 +329,7 @@
     {
       "id": "bcea5fd7-28db-43a1-9613-d5fca0b00ad0",
       "type": "transition",
-      "title": "Transition",
+      "title": "Transition 4",
       "components": [
         {
           "type": "element",
@@ -344,7 +344,7 @@
     {
       "id": "297c91e5-21e8-4ace-a6d6-5c8748d06273",
       "type": "discovery",
-      "title": "Un message de Brian",
+      "title": "Activité découverte - 4",
       "components": [
         {
           "type": "element",
@@ -359,7 +359,7 @@
           "element": {
             "id": "6e6af05b-b933-4022-baa9-6194fdb63584",
             "type": "image",
-            "url": "https://assets.pix.org/draft/modules/PUHOpPE.png",
+            "url": "https://assets.pix.org/modules/deepfakes/telephone_deepfake.png",
             "alt": "",
             "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les 3ème D\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE DEVOIRS !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
             "legend": "",
@@ -468,7 +468,7 @@
     {
       "id": "d4254b9a-b078-4c7b-aa9f-3449bd16806e",
       "type": "activity",
-      "title": "Vrai ou faux ?",
+      "title": "Activité d'application - 1 : Vrai ou faux ?",
       "components": [
         {
           "type": "element",
@@ -529,14 +529,14 @@
     {
       "id": "41ec196a-0940-4caf-8957-d2bf07d1ba84",
       "type": "transition",
-      "title": "Transition",
+      "title": "Transition 5",
       "components": [
         {
           "type": "element",
           "element": {
             "id": "7c57b98b-0c92-4a53-a169-d83b453da813",
             "type": "text",
-            "content": "<p>Et pour finir, voyons un cas pratique. <br></p>"
+            "content": "<p>Et pour finir, voyons un cas pratique.</p>"
           }
         }
       ]
@@ -544,7 +544,7 @@
     {
       "id": "20300d89-a258-48ec-a1db-f98609a3dd76",
       "type": "activity",
-      "title": "Etude de cas",
+      "title": "Activité d'application - 2 : Etude de cas",
       "components": [
         {
           "type": "element",
