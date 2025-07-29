@@ -1,5 +1,6 @@
 import { Subscription } from '../../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Enrolment | Domain | Models | Subscription', function () {
@@ -16,7 +17,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       // given
       const expectedSubscription = new Subscription({
         certificationCandidateId: certificationCandidate.id,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
         type: SUBSCRIPTION_TYPES.CORE,
       });
 
@@ -29,10 +30,10 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       expect(subscription).to.deepEqualInstance(expectedSubscription);
     });
 
-    it('should not allow to have a complementaryCertificationId', function () {
+    it('should not allow to have a complementaryCertificationKey', function () {
       // given, when
       const error = catchErrSync((data) => new Subscription(data))({
-        complementaryCertificationId: complementaryCertification.id,
+        complementaryCertificationKey: complementaryCertification.key,
         type: SUBSCRIPTION_TYPES.CORE,
       });
 
@@ -46,12 +47,12 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       // given / when
       const subscription = Subscription.buildComplementary({
         certificationCandidateId: certificationCandidate.id,
-        complementaryCertificationId: complementaryCertification.id,
+        complementaryCertificationKey: complementaryCertification.key,
       });
 
       const expectedSubscription = new Subscription({
         certificationCandidateId: certificationCandidate.id,
-        complementaryCertificationId: complementaryCertification.id,
+        complementaryCertificationKey: complementaryCertification.key,
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
       });
 
@@ -59,10 +60,10 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       expect(subscription).to.deepEqualInstance(expectedSubscription);
     });
 
-    it('should enforce the need of the complementaryCertificationId', function () {
+    it('should enforce the need of the complementaryCertificationKey', function () {
       // given /  when
       const error = catchErrSync((data) => new Subscription(data))({
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
       });
 
@@ -76,7 +77,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       // given
       const subscription = domainBuilder.certification.enrolment.buildSubscription({
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 123,
+        complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
       });
 
       // when
@@ -93,7 +94,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
           // given
           const subscription = domainBuilder.certification.enrolment.buildSubscription({
             type: SUBSCRIPTION_TYPES[typeKey],
-            complementaryCertificationId: null,
+            complementaryCertificationKey: null,
           });
 
           // when
@@ -110,7 +111,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
       // given
       const subscription = domainBuilder.certification.enrolment.buildSubscription({
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
 
       // when
@@ -127,7 +128,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
           // given
           const subscription = domainBuilder.certification.enrolment.buildSubscription({
             type: SUBSCRIPTION_TYPES[typeKey],
-            complementaryCertificationId: 123,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           });
 
           // when
