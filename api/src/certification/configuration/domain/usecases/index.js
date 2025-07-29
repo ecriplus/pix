@@ -7,6 +7,8 @@ import * as tubeRepository from '../../../../shared/infrastructure/repositories/
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as complementaryCertificationRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
+import * as flashAlgorithmConfigurationRepository from '../../../configuration/infrastructure/repositories/flash-algorithm-configuration-repository.js';
+import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
@@ -28,6 +30,8 @@ import * as learningContentRepository from '../../infrastructure/repositories/le
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
+ * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
+ * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  **/
 const dependencies = {
   activeCalibratedChallengeRepository,
@@ -40,6 +44,8 @@ const dependencies = {
   learningContentRepository,
   skillRepository,
   tubeRepository,
+  flashAlgorithmConfigurationRepository,
+  sharedFlashAlgorithmConfigurationRepository,
 };
 
 const path = dirname(fileURLToPath(import.meta.url));

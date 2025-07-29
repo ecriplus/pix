@@ -1,4 +1,4 @@
-import * as flash from '../../../../../src/certification/flash-certification/domain/services/algorithm-methods/flash.js';
+import * as flash from '../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
 import { getNextChallengeForCampaignAssessment } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-campaign-assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 

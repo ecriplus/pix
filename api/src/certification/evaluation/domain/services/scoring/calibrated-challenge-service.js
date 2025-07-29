@@ -3,6 +3,7 @@
  * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
  * @typedef {import('../index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../index.js').CertificationCourseRepository} CertificationCourseRepository
+ * @typedef {import('../index.js').SharedChallengeRepository} SharedChallengeRepository
  */
 import differenceBy from 'lodash/differenceBy.js';
 
@@ -14,6 +15,7 @@ export const findByCertificationCourseIdAndAssessmentId = withTransaction(
    * @param {Object} params
    * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
    * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
+   * @param {SharedChallengeRepository} params.sharedChallengeRepository
    * @param {ChallengeRepository} params.challengeRepository
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    */
@@ -68,6 +70,7 @@ const _isOldCalibration = async ({ certificationCourseId, certificationCourseRep
 /**
  * @param {Object} params
  * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
+ * @param {SharedChallengeRepository} params.sharedChallengeRepository
  */
 const _findByCertificationCourseId = async ({
   compatibleChallenges,

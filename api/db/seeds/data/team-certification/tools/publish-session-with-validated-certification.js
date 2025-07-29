@@ -4,7 +4,7 @@ import i18n from 'i18n';
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import pickChallengeService from '../../../../../src/certification/evaluation/domain/services/pick-challenge-service.js';
 import { usecases as evaluationUseCases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
-import { usecases as flashUseCases } from '../../../../../src/certification/flash-certification/domain/usecases/index.js';
+import { usecases as flashUseCases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { usecases as scoringUseCases } from '../../../../../src/certification/scoring/domain/usecases/index.js';
 import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/models/CertificationCourse.js';

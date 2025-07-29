@@ -23,7 +23,7 @@ const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-ch
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {ChallengeRepository} params.challengeRepository
+ * @param {ChallengeRepository} params.sharedChallengeRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
  * @param {PickChallengeService} params.pickChallengeService

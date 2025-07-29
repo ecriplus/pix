@@ -2,8 +2,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // TODO: cross-bounded context violation
-import * as flashAlgorithmService from '../../../../certification/flash-certification/domain/services/algorithm-methods/flash.js';
-// TODO: cross-bounded context violation
 import * as scoringDegradationService from '../../../../certification/scoring/domain/services/scoring-degradation-service.js';
 import * as scoringCertificationService from '../../../../certification/shared/domain/services/scoring-certification-service.js';
 import * as certificationChallengeLiveAlertRepository from '../../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
@@ -28,6 +26,7 @@ import * as certificationAssessmentHistoryRepository from '../../infrastructure/
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import * as flashAlgorithmService from './algorithm-methods/flash.js';
 
 /**
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
@@ -53,6 +52,7 @@ import * as complementaryCertificationScoringCriteriaRepository from '../../infr
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository *
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
+ * @typedef {sharedChallengeRepository} SharedChallengeRepository
  */
 const dependencies = {
   assessmentResultRepository,

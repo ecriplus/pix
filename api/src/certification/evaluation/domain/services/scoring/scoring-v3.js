@@ -17,7 +17,7 @@ import CertificationCancelled from '../../../../../../src/shared/domain/events/C
 import { config } from '../../../../../shared/config.js';
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 import { CompetenceMark } from '../../../../../shared/domain/models/index.js';
-import { FlashAssessmentAlgorithm } from '../../../../flash-certification/domain/models/FlashAssessmentAlgorithm.js';
+import { FlashAssessmentAlgorithm } from '../../../../evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';

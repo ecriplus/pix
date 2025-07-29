@@ -82,7 +82,6 @@ const config = {
     'src/certification/configuration',
     'src/certification/enrolment',
     'src/certification/evaluation',
-    'src/certification/flash-certification',
     'src/certification/results',
     'src/certification/scoring',
     'src/certification/session-management',
