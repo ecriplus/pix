@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { KnowledgeElement } from './KnowledgeElement.js';
+import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 
 class CertifiableProfileForLearningContent {
   constructor({ learningContent, knowledgeElements, answerAndChallengeIdsByAnswerId }) {

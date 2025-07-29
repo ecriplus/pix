@@ -59,7 +59,6 @@ import { BadgeForCalculation } from './BadgeForCalculation.js';
 import { CampaignLearningContent } from './CampaignLearningContent.js';
 import { CampaignParticipationResult } from './CampaignParticipationResult.js';
 import { CertifiableBadgeAcquisition } from './CertifiableBadgeAcquisition.js';
-import { CertifiableProfileForLearningContent } from './CertifiableProfileForLearningContent.js';
 import { CertificationCandidate } from './CertificationCandidate.js';
 import { CertificationCenter } from './CertificationCenter.js';
 import { CertificationCenterMembership } from './CertificationCenterMembership.js';
@@ -124,7 +123,6 @@ export {
   CampaignToStartParticipation,
   CampaignTypes,
   CertifiableBadgeAcquisition,
-  CertifiableProfileForLearningContent,
   CertificationAssessmentScore,
   CertificationAttestation,
   CertificationCandidate,

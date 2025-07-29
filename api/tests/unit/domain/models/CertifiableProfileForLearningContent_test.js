@@ -1,4 +1,4 @@
-import { CertifiableProfileForLearningContent } from '../../../../src/shared/domain/models/CertifiableProfileForLearningContent.js';
+import { CertifiableProfileForLearningContent } from '../../../../src/certification/evaluation/domain/models/CertifiableProfileForLearningContent.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertifiableProfileForLearningContent', function () {
