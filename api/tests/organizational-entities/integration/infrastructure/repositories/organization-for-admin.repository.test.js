@@ -852,6 +852,111 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       });
     });
 
+    describe('when organization has a feature,', function () {
+      it('should return if its enable and the additional params', async function () {
+        // given
+        const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
+        const organization = databaseBuilder.factory.buildOrganization({
+          type: 'SCO',
+          name: 'Organization of the dark side',
+          logoUrl: 'some logo url',
+          credit: 154,
+          externalId: '100',
+          provinceCode: '75',
+          isManagingStudents: false,
+          email: 'sco.generic.account@example.net',
+          documentationUrl: 'https://pix.fr/',
+          createdBy: superAdminUser.id,
+          createdAt: now,
+          showNPS: true,
+          formNPSUrl: 'https://pix.fr/',
+          showSkills: false,
+          identityProviderForCampaigns: 'genericOidcProviderCode',
+        });
+
+        databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
+          firstName: 'Justin',
+          lastName: 'Ptipeu',
+          email: 'justin.ptipeu@example.net',
+          organizationId: organization.id,
+        });
+
+        const placesManagementFeatureId = databaseBuilder.factory.buildFeature(
+          ORGANIZATION_FEATURE.PLACES_MANAGEMENT,
+        ).id;
+        const attestationsManagementFeatureId = databaseBuilder.factory.buildFeature(
+          ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT,
+        ).id;
+
+        databaseBuilder.factory.buildOrganizationFeature({
+          featureId: placesManagementFeatureId,
+          organizationId: organization.id,
+          params: JSON.stringify({ enableMaximumPlacesLimit: false }),
+        });
+        databaseBuilder.factory.buildOrganizationFeature({
+          featureId: attestationsManagementFeatureId,
+          organizationId: organization.id,
+          params: JSON.stringify(['SIXTH_GRADE']),
+        });
+
+        const otherFeatureId = databaseBuilder.factory.buildFeature({
+          key: 'Pizza feature',
+          description: 'Not Hawai',
+        }).id;
+        databaseBuilder.factory.buildOrganizationFeature({
+          featureId: otherFeatureId,
+          organizationId: organization.id,
+          params: JSON.stringify({ mushrooms: true, pinapple: false }),
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const foundOrganizationForAdmin = await repositories.organizationForAdminRepository.get({
+          organizationId: organization.id,
+        });
+
+        // then
+        const expectedOrganizationForAdmin = new OrganizationForAdmin({
+          id: organization.id,
+          type: 'SCO',
+          name: 'Organization of the dark side',
+          logoUrl: 'some logo url',
+          credit: 154,
+          externalId: '100',
+          provinceCode: '75',
+          isManagingStudents: false,
+          email: 'sco.generic.account@example.net',
+          students: [],
+          targetProfileShares: [],
+          organizationInvitations: [],
+          tags: [],
+          documentationUrl: 'https://pix.fr/',
+          createdBy: organization.createdBy,
+          createdAt: now,
+          showNPS: true,
+          formNPSUrl: 'https://pix.fr/',
+          showSkills: false,
+          archivedAt: null,
+          archivistFirstName: null,
+          archivistLastName: null,
+          dataProtectionOfficerFirstName: 'Justin',
+          dataProtectionOfficerLastName: 'Ptipeu',
+          dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
+          creatorFirstName: 'Cécile',
+          creatorLastName: 'Encieux',
+          identityProviderForCampaigns: 'genericOidcProviderCode',
+          features: {
+            [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: { active: true, params: { enableMaximumPlacesLimit: false } },
+            [ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key]: { active: true, params: ['SIXTH_GRADE'] },
+            'Pizza feature': { active: true, params: null },
+          },
+          parentOrganizationId: null,
+          parentOrganizationName: null,
+        });
+        expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
+      });
+    });
+
     describe('when the organization has associated tags', function () {
       it('should return an organization with associated tags', async function () {
         // given
