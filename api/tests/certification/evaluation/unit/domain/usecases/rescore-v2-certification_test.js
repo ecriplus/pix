@@ -1,3 +1,4 @@
+import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { ChallengeDeneutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { rescoreV2Certification } from '../../../../../../src/certification/evaluation/domain/usecases/rescore-v2-certification.js';
@@ -7,7 +8,7 @@ import { CertificationAssessment } from '../../../../../../src/certification/ses
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationComputeError, NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
+import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 

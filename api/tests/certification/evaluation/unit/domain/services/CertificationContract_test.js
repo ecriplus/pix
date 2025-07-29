@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
-import { CertificationComputeError } from '../../../../src/shared/domain/errors.js';
-import { CertificationContract } from '../../../../src/shared/domain/models/CertificationContract.js';
-import { catchErr, domainBuilder, expect } from '../../../test-helper.js';
+import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
+import { CertificationContract } from '../../../../../../src/certification/evaluation/domain/services/CertificationContract.js';
+import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | CertificationContract', function () {
+describe('Unit | Domain | Services | CertificationContract', function () {
   context('#assertThatWeHaveEnoughAnswers', function () {
     context('when there are unanswered challenges', function () {
       it('should throw', async function () {
