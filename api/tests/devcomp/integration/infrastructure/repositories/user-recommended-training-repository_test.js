@@ -159,6 +159,128 @@ describe('Integration | Repository | user-recommended-training-repository', func
     });
   });
 
+  describe('#findModulesByCampaignParticipationIds', function () {
+    it('should return saved recommended modules for given campaignParticipationId', async function () {
+      // given
+      const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+      const training = databaseBuilder.factory.buildTraining({ type: 'modulix' });
+      const userRecommendedTraining1 = {
+        userId,
+        trainingId: training.id,
+        campaignParticipationId,
+      };
+      const userRecommendedTraining2 = {
+        userId,
+        trainingId: databaseBuilder.factory.buildTraining({ type: 'webinaire' }).id,
+        campaignParticipationId,
+      };
+      const anotherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
+      const anotherTraining = databaseBuilder.factory.buildTraining({ type: 'modulix' });
+      const anotherUserRecommendedTraining = {
+        userId: anotherCampaignParticipation.userId,
+        trainingId: anotherTraining.id,
+
+        campaignParticipationId: anotherCampaignParticipation.id,
+      };
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTraining1);
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTraining2);
+      databaseBuilder.factory.buildUserRecommendedTraining(anotherUserRecommendedTraining);
+      await databaseBuilder.commit();
+
+      // when
+      const result = await userRecommendedTrainingRepository.findModulesByCampaignParticipationIds({
+        campaignParticipationIds: [campaignParticipationId, anotherCampaignParticipation.id],
+      });
+
+      // then
+      expect(result).to.have.lengthOf(2);
+      expect(result[0]).to.be.instanceOf(UserRecommendedTraining);
+      expect(result[0]).to.deep.equal(new UserRecommendedTraining({ ...training, duration: { hours: 6 } }));
+      expect(result[1]).to.be.instanceOf(UserRecommendedTraining);
+      expect(result[1]).to.deep.equal(new UserRecommendedTraining({ ...anotherTraining, duration: { hours: 6 } }));
+    });
+
+    it('should  not return twice the same module', async function () {
+      // given
+      const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+      const training = databaseBuilder.factory.buildTraining({ type: 'modulix' });
+      const userRecommendedTraining1 = {
+        userId,
+        trainingId: training.id,
+        campaignParticipationId,
+      };
+      const anotherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ userId });
+      const anotherUserRecommendedTraining = {
+        userId,
+        trainingId: training.id,
+
+        campaignParticipationId: anotherCampaignParticipation.id,
+      };
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTraining1);
+      databaseBuilder.factory.buildUserRecommendedTraining(anotherUserRecommendedTraining);
+      await databaseBuilder.commit();
+
+      // when
+      const result = await userRecommendedTrainingRepository.findModulesByCampaignParticipationIds({
+        campaignParticipationIds: [campaignParticipationId, anotherCampaignParticipation.id],
+      });
+
+      // then
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.be.instanceOf(UserRecommendedTraining);
+      expect(result[0]).to.deep.equal(new UserRecommendedTraining({ ...training, duration: { hours: 6 } }));
+    });
+
+    it('should not return disabled recommended trainings for given campaignParticipationId and locale', async function () {
+      // given
+      const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+      const training = databaseBuilder.factory.buildTraining({ type: 'modulix' });
+      const userRecommendedTrainingDisabled = {
+        userId,
+        trainingId: databaseBuilder.factory.buildTraining({ type: 'modulix', isDisabled: true }).id,
+        campaignParticipationId,
+      };
+      const userRecommendedTrainingEnabled = {
+        userId,
+        trainingId: training.id,
+        campaignParticipationId,
+      };
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTrainingDisabled);
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTrainingEnabled);
+      await databaseBuilder.commit();
+
+      // when
+      const result = await userRecommendedTrainingRepository.findModulesByCampaignParticipationIds({
+        campaignParticipationIds: [campaignParticipationId],
+      });
+
+      // then
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.be.instanceOf(UserRecommendedTraining);
+      expect(result[0]).to.deep.equal(new UserRecommendedTraining({ ...training, duration: { hours: 6 } }));
+    });
+
+    it('should return an empty array when user has no recommended training for this campaignParticipation', async function () {
+      // given
+      const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+      const anotherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
+      const userRecommendedTraining = {
+        userId,
+        trainingId: databaseBuilder.factory.buildTraining({ type: 'modulix' }).id,
+        campaignParticipationId,
+      };
+      databaseBuilder.factory.buildUserRecommendedTraining(userRecommendedTraining);
+      await databaseBuilder.commit();
+
+      // when
+      const result = await userRecommendedTrainingRepository.findModulesByCampaignParticipationIds({
+        campaignParticipationIds: [anotherCampaignParticipation.id],
+      });
+
+      // then
+      expect(result).to.have.lengthOf(0);
+    });
+  });
   describe('#hasRecommendedTrainings', function () {
     it('should return true if the user has recommended trainings', async function () {
       // given

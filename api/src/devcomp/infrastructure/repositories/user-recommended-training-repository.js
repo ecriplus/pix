@@ -20,6 +20,19 @@ const findByCampaignParticipationId = async function ({ campaignParticipationId,
   return trainings.map(_toDomain);
 };
 
+const findModulesByCampaignParticipationIds = async function ({ campaignParticipationIds }) {
+  const knexConn = DomainTransaction.getConnection();
+  const moduleLinks = await knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+    .select('trainings.*')
+    .innerJoin('trainings', 'trainings.id', `${USER_RECOMMENDED_TRAININGS_TABLE_NAME}.trainingId`)
+    .where({ isDisabled: false, type: 'modulix' })
+    .whereIn('campaignParticipationId', campaignParticipationIds)
+    .distinct('trainings.id')
+    .orderBy('trainings.id', 'asc');
+
+  return moduleLinks.map(_toDomain);
+};
+
 const hasRecommendedTrainings = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME).select(1).where({ userId }).first();
@@ -33,7 +46,13 @@ const deleteCampaignParticipationIds = async ({ campaignParticipationIds }) => {
     .whereIn('campaignParticipationId', campaignParticipationIds);
 };
 
-export { deleteCampaignParticipationIds, findByCampaignParticipationId, hasRecommendedTrainings, save };
+export {
+  deleteCampaignParticipationIds,
+  findByCampaignParticipationId,
+  findModulesByCampaignParticipationIds,
+  hasRecommendedTrainings,
+  save,
+};
 
 function _toDomain(training) {
   return new UserRecommendedTraining({ ...training });
