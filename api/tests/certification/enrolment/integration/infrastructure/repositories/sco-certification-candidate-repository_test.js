@@ -109,11 +109,7 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
       });
       const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner().id;
       const organizationLearnerId3 = databaseBuilder.factory.buildOrganizationLearner().id;
-      databaseBuilder.factory.buildComplementaryCertification({
-        id: 123,
-        label: 'quelquechose',
-        key: 'quelquechose',
-      });
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
       await databaseBuilder.commit();
 
       const scoCandidates = [
@@ -141,7 +137,7 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
             domainBuilder.buildCoreSubscription({ certificationCandidateId: null }),
             domainBuilder.buildComplementarySubscription({
               certificationCandidateId: null,
-              complementaryCertificationId: 123,
+              complementaryCertificationKey: complementaryCertification.key,
             }),
           ],
         }),
@@ -176,7 +172,7 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
       });
       sinon.assert.match(subscriptions[3], {
         certificationCandidateId: sinon.match.number,
-        complementaryCertificationId: sinon.match.number,
+        complementaryCertificationId: complementaryCertification.id,
         createdAt: sinon.match.date,
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
       });
