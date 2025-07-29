@@ -17,7 +17,7 @@ export async function getCombinedCourseByCode({
   try {
     participation = await combinedCourseParticipationRepository.getByUserId({ questId: quest.id, userId });
   } catch (err) {
-    if ((!err) instanceof NotFoundError) {
+    if (!(err instanceof NotFoundError)) {
       throw err;
     }
   }
