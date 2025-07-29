@@ -1,3 +1,4 @@
+.scalingo/node
 app
 config
 ember-cli-build.js
