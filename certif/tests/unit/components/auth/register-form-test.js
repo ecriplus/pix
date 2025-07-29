@@ -54,7 +54,6 @@ module('Unit | Component | register-form', (hooks) => {
         const firstName = 'Alain';
         const lastName = 'Ternational';
         const password = 'Password123';
-        const selectedLanguage = FRENCH_INTERNATIONAL_LOCALE;
 
         component.args = {
           ...component.args,
@@ -66,7 +65,6 @@ module('Unit | Component | register-form', (hooks) => {
         component.email = email;
         component.firstName = firstName;
         component.lastName = lastName;
-        component.selectedLanguage = selectedLanguage;
         component.password = password;
 
         // when
@@ -78,7 +76,7 @@ module('Unit | Component | register-form', (hooks) => {
           email,
           firstName,
           lastName,
-          lang: selectedLanguage,
+          lang: FRENCH_INTERNATIONAL_LOCALE,
           password,
         });
         sinon.assert.calledWith(component.store.createRecord, 'certification-center-invitation-response', {
