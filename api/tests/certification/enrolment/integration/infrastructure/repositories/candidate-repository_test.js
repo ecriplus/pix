@@ -2,6 +2,7 @@ import { CertificationCandidateNotFoundError } from '../../../../../../src/certi
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import * as candidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Certification | Enrolment | Repository | Candidate', function () {
@@ -9,18 +10,22 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
     context('when the candidate exists', function () {
       it('should return the candidate', async function () {
         // given
-        databaseBuilder.factory.buildComplementaryCertification({
-          id: 1,
-          key: 'comp1',
-        });
         const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate();
+
         databaseBuilder.factory.buildCoreSubscription({
           certificationCandidateId: certificationCandidate.id,
         });
+
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+          id: 1,
+          key: ComplementaryCertificationKeys.CLEA,
+        });
+
         databaseBuilder.factory.buildComplementaryCertificationSubscription({
           certificationCandidateId: certificationCandidate.id,
-          complementaryCertificationId: 1,
+          complementaryCertificationId: complementaryCertification.id,
         });
+
         await databaseBuilder.commit();
 
         // when
@@ -33,7 +38,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
             subscriptions: [
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate.id,
-                complementaryCertificationId: 1,
+                complementaryCertificationKey: complementaryCertification.key,
               }),
               domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
             ],
@@ -63,7 +68,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         const sessionId = databaseBuilder.factory.buildSession().id;
         databaseBuilder.factory.buildComplementaryCertification({
           id: 1,
-          key: 'comp1',
+          key: ComplementaryCertificationKeys.CLEA,
         });
         const certificationCandidate1 = databaseBuilder.factory.buildCertificationCandidate({
           sessionId,
@@ -95,7 +100,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
             subscriptions: [
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate1.id,
-                complementaryCertificationId: 1,
+                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
               }),
               domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate1.id }),
             ],
@@ -199,20 +204,20 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
 
       it('should update its subscriptions', async function () {
         // when
-        databaseBuilder.factory.buildComplementaryCertification({
+        const complementaryCertificationDroit = databaseBuilder.factory.buildComplementaryCertification({
           id: 555,
-          key: 'comp1',
+          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         });
-        databaseBuilder.factory.buildComplementaryCertification({
+        const complementaryCertificationEdu = databaseBuilder.factory.buildComplementaryCertification({
           id: 666,
-          key: 'comp2',
+          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
         });
         const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
           firstName: 'toto',
         });
         databaseBuilder.factory.buildComplementaryCertificationSubscription({
           certificationCandidateId: certificationCandidate.id,
-          complementaryCertificationId: 555,
+          complementaryCertificationId: complementaryCertificationDroit.id,
         });
         databaseBuilder.factory.buildCoreSubscription({
           certificationCandidateId: certificationCandidate.id,
@@ -226,7 +231,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
             domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
             domainBuilder.buildComplementarySubscription({
               certificationCandidateId: certificationCandidate.id,
-              complementaryCertificationId: 666,
+              complementaryCertificationKey: complementaryCertificationEdu.key,
             }),
           ],
         });
@@ -237,7 +242,9 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
             certificationCandidateId: certificationCandidateToUpdate.id,
           })
         ).subscriptions;
+
         await candidateRepository.update(certificationCandidateToUpdate);
+
         const subscriptionsAfter = (
           await candidateRepository.get({
             certificationCandidateId: certificationCandidateToUpdate.id,
@@ -248,14 +255,14 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         expect(subscriptionsBefore).to.deepEqualArray([
           domainBuilder.buildComplementarySubscription({
             certificationCandidateId: certificationCandidate.id,
-            complementaryCertificationId: 555,
+            complementaryCertificationKey: complementaryCertificationDroit.key,
           }),
           domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
         ]);
         expect(subscriptionsAfter).to.deepEqualArray([
           domainBuilder.buildComplementarySubscription({
             certificationCandidateId: certificationCandidate.id,
-            complementaryCertificationId: 666,
+            complementaryCertificationKey: complementaryCertificationEdu.key,
           }),
           domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
         ]);

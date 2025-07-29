@@ -1,5 +1,6 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CertificationCandidateNotFoundError } from '../../domain/errors.js';
 import { Candidate } from '../../domain/models/Candidate.js';
 import { Subscription } from '../../domain/models/Subscription.js';
@@ -70,12 +71,28 @@ export async function update(candidate) {
   }
 
   await knexConn('certification-subscriptions').where({ certificationCandidateId: candidate.id }).del();
+
   for (const subscription of candidate.subscriptions) {
-    await knexConn('certification-subscriptions').insert({
-      certificationCandidateId: candidate.id,
-      type: subscription.type,
-      complementaryCertificationId: subscription.complementaryCertificationId,
-    });
+    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
+      await knexConn('certification-subscriptions').insert({
+        certificationCandidateId: candidate.id,
+        type: SUBSCRIPTION_TYPES.CORE,
+        complementaryCertificationId: null,
+      });
+    } else {
+      const complementaryCertification = await knexConn('complementary-certifications')
+        .select('id')
+        .where({
+          key: subscription.complementaryCertificationKey,
+        })
+        .first();
+
+      await knexConn('certification-subscriptions').insert({
+        certificationCandidateId: candidate.id,
+        type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+        complementaryCertificationId: complementaryCertification.id,
+      });
+    }
   }
 }
 
@@ -165,7 +182,7 @@ function buildBaseReadQuery(knexConnection) {
         `json_agg(
           json_build_object(
             'type', "certification-subscriptions"."type",
-            'complementaryCertificationId', "certification-subscriptions"."complementaryCertificationId",
+            'complementaryCertificationKey', "complementary-certifications"."key",
             'certificationCandidateId', "certification-candidates"."id"
           ) ORDER BY type
       )`,
@@ -176,6 +193,11 @@ function buildBaseReadQuery(knexConnection) {
       'certification-subscriptions',
       'certification-subscriptions.certificationCandidateId',
       'certification-candidates.id',
+    )
+    .leftJoin(
+      'complementary-certifications',
+      'certification-subscriptions.complementaryCertificationId',
+      'complementary-certifications.id',
     )
     .groupBy('certification-candidates.id');
 }
