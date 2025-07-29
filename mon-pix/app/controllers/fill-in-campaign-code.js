@@ -7,7 +7,6 @@ const IDENTITY_PROVIDER_ID_GAR = 'GAR';
 
 export default class FillInCampaignCodeController extends Controller {
   @service intl;
-  @service locale;
   @service router;
   @service session;
   @service store;
@@ -15,7 +14,6 @@ export default class FillInCampaignCodeController extends Controller {
   @tracked apiErrorMessage = null;
   @tracked showGARModal = false;
   @tracked campaign = null;
-  @tracked selectedLanguage = this.locale.currentLocale;
   @tracked name = null;
   @tracked organizationName = null;
   @tracked code = null;
@@ -80,13 +78,6 @@ export default class FillInCampaignCodeController extends Controller {
   @action
   closeModal() {
     this.showGARModal = false;
-  }
-
-  @action
-  onLanguageChange(language) {
-    this.selectedLanguage = language;
-    this.locale.setCurrentLocale(this.selectedLanguage);
-    this.router.replaceWith('fill-in-campaign-code', { queryParams: { lang: null } });
   }
 }
 

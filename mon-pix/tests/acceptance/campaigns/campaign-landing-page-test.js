@@ -25,7 +25,7 @@ module('Acceptance | Campaigns | campaign-landing-page', function (hooks) {
     module('on international domain (.org)', function () {
       module('when connected', function () {
         module('when accessing the campaign landing page with "Français" as default language', function () {
-          test('does not display the language switcher', async function (assert) {
+          test('does not display the locale switcher', async function (assert) {
             // given
             const user = server.create('user', 'withEmail');
 

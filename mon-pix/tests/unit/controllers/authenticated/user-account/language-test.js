@@ -7,21 +7,18 @@ module('Unit | Controller | user-account/language', function (hooks) {
 
   let controller;
   let userSaveStub;
-  let setCurrentLocaleStub;
 
   hooks.beforeEach(function () {
     userSaveStub = sinon.stub();
-    setCurrentLocaleStub = sinon.stub();
 
     controller = this.owner.lookup('controller:authenticated/user-account/language');
     controller.currentUser = { user: { save: userSaveStub } };
-    controller.locale = { setCurrentLocale: setCurrentLocaleStub };
     controller.set('shouldDisplayLanguageUpdatedMessage', false);
   });
 
   module('#onLanguageChange', function () {
     module('when domain is international', function () {
-      test('saves user language and update application locale', async function (assert) {
+      test('saves user locale', async function (assert) {
         // given
         const language = 'en';
 
@@ -32,13 +29,12 @@ module('Unit | Controller | user-account/language', function (hooks) {
 
         // then
         sinon.assert.calledWith(userSaveStub, { adapterOptions: { lang: language } });
-        sinon.assert.calledWith(setCurrentLocaleStub, language);
         assert.true(controller.shouldDisplayLanguageUpdatedMessage);
-        assert.ok(true);
       });
     });
+
     module('when in France domain', function () {
-      test('does not save user language and update application locale', async function (assert) {
+      test('does not save user locale and update application locale', async function (assert) {
         // given
         const language = 'en';
 
@@ -49,7 +45,6 @@ module('Unit | Controller | user-account/language', function (hooks) {
 
         // then
         sinon.assert.notCalled(userSaveStub);
-        sinon.assert.notCalled(setCurrentLocaleStub);
         assert.ok(true);
       });
     });

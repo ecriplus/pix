@@ -10,7 +10,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import LanguageSwitcher from './language-switcher';
+import LocaleSwitcher from './locale-switcher';
 
 export default class CampaignCodeForm extends Component {
   @service intl;
@@ -41,7 +41,7 @@ export default class CampaignCodeForm extends Component {
     return !this.args.isUserAuthenticatedByPix && !this.args.isUserAuthenticatedByGAR;
   }
 
-  get canDisplayLanguageSwitcher() {
+  get canDisplayLocaleSwitcher() {
     return this.isInternationalDomain && this.isUserNotAuthenticated;
   }
 
@@ -123,14 +123,10 @@ export default class CampaignCodeForm extends Component {
           </LinkTo>
         </div>
       {{/if}}
-
     </PixBlock>
-    {{#if this.canDisplayLanguageSwitcher}}
-      <LanguageSwitcher
-        @selectedLanguage={{@selectedLanguage}}
-        @onLanguageChange={{@onLanguageChange}}
-        class="fill-in-campaign-code__switcher"
-      />
+
+    {{#if this.canDisplayLocaleSwitcher}}
+      <LocaleSwitcher />
     {{/if}}
   </template>
 }

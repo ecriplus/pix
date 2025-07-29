@@ -7,7 +7,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Authentication-layout | footer', function (hooks) {
   setupIntlRenderingTest(hooks);
-  test('it displays a language switcher when url has org extension', async function (assert) {
+  test('it displays a locale switcher when url has org extension', async function (assert) {
     //given
     class CurrentDomainServiceStub extends Service {
       get isFranceDomain() {
@@ -27,7 +27,7 @@ module('Integration | Component | Authentication-layout | footer', function (hoo
 
     assert.dom(screen.queryByRole('button', { name: 'Sélectionnez une langue' })).exists();
   });
-  test('it displays no language switcher when url has fr extension', async function (assert) {
+  test('it displays no locale switcher when url has fr extension', async function (assert) {
     //given
     class CurrentDomainServiceStub extends Service {
       get isFranceDomain() {

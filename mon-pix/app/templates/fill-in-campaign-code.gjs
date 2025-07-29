@@ -18,8 +18,6 @@ import DataProtectionPolicyInformationBanner from 'mon-pix/components/data-prote
       @isUserAuthenticatedByPix={{@controller.isUserAuthenticatedByPix}}
       @isUserAuthenticatedByGAR={{@controller.isUserAuthenticatedByGAR}}
       @startCampaign={{@controller.startCampaign}}
-      @onLanguageChange={{@controller.onLanguageChange}}
-      @selectedLanguage={{@controller.selectedLanguage}}
       @apiErrorMessage={{@controller.apiErrorMessage}}
       @clearErrors={{@controller.clearErrors}}
     />

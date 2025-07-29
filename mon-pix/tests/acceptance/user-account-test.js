@@ -96,7 +96,7 @@ module('Acceptance | User account page', function (hooks) {
       });
 
       module('When not in France domain', () => {
-        test('it displays language switcher on click on "Choisir ma langue"', async function (assert) {
+        test('it displays locale switcher on click on "Choisir ma langue"', async function (assert) {
           // given
           class CurrentDomainStubService extends Service {
             get isFranceDomain() {
@@ -114,10 +114,10 @@ module('Acceptance | User account page', function (hooks) {
           await click(screen.getByRole('link', { name: t('pages.user-account.language.menu-link-title') }));
 
           // then
-          const languageSwitcherGeneric = screen.getByRole('button', { name: 'Sélectionnez une langue' });
+          const localeSwitcher = screen.getByRole('button', { name: 'Sélectionnez une langue' });
 
           assert.strictEqual(currentURL(), '/mon-compte/langue');
-          assert.dom(languageSwitcherGeneric).exists();
+          assert.dom(localeSwitcher).exists();
         });
       });
 

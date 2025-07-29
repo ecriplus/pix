@@ -6,7 +6,6 @@ import { tracked } from '@glimmer/tracking';
 export default class UserAccountPersonalInformationController extends Controller {
   @service currentUser;
   @service currentDomain;
-  @service locale;
 
   @tracked shouldDisplayLanguageUpdatedMessage = false;
 
@@ -14,13 +13,7 @@ export default class UserAccountPersonalInformationController extends Controller
   async onLanguageChange(language) {
     if (!this.currentDomain.isFranceDomain) {
       await this.currentUser.user.save({ adapterOptions: { lang: language } });
-
-      this.locale.setCurrentLocale(language);
-      this._displayLanguageUpdatedMessage();
+      this.shouldDisplayLanguageUpdatedMessage = true;
     }
-  }
-
-  _displayLanguageUpdatedMessage() {
-    this.shouldDisplayLanguageUpdatedMessage = true;
   }
 }

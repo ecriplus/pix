@@ -4,7 +4,8 @@ import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import LoginOrRegisterOidc from 'mon-pix/components/authentication/login-or-register-oidc';
 import OidcReconciliation from 'mon-pix/components/authentication/oidc-reconciliation';
-import LanguageSwitcher from 'mon-pix/components/language-switcher';
+import LocaleSwitcher from 'mon-pix/components/locale-switcher';
+
 <template>
   {{pageTitle (t "pages.login-or-register-oidc.title")}}
 
@@ -37,10 +38,7 @@ import LanguageSwitcher from 'mon-pix/components/language-switcher';
     </PixBlock>
 
     {{#if @controller.isInternationalDomain}}
-      <LanguageSwitcher
-        @selectedLanguage={{@controller.selectedLanguage}}
-        @onLanguageChange={{@controller.onLanguageChange}}
-      />
+      <LocaleSwitcher />
     {{/if}}
   </PixBackgroundHeader>
 </template>
