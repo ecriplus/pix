@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/enrolled-candidate-serializer.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -72,7 +73,7 @@ describe('Certification | Enrolment | Unit | Serializer | enrolled-candidate-ser
             type: 'subscriptions',
             id: `${enrolledCandidate.id}-CORE`,
             attributes: {
-              'complementary-certification-id': null,
+              'complementary-certification-key': null,
               type: SUBSCRIPTION_TYPES.CORE,
             },
           },
@@ -114,7 +115,7 @@ describe('Certification | Enrolment | Unit | Serializer | enrolled-candidate-ser
           }),
           domainBuilder.certification.enrolment.buildComplementarySubscription({
             certificationCandidateId: 123,
-            complementaryCertificationId: 456,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           }),
         ],
         accessibilityAdjustmentNeeded: true,
@@ -143,7 +144,7 @@ describe('Certification | Enrolment | Unit | Serializer | enrolled-candidate-ser
             sex: enrolledCandidate.sex,
             'has-seen-certification-instructions': true,
             'complementary-certification': {
-              id: enrolledCandidate.subscriptions[1].complementaryCertificationId,
+              key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
             },
             'accessibility-adjustment-needed': true,
           },
@@ -156,7 +157,7 @@ describe('Certification | Enrolment | Unit | Serializer | enrolled-candidate-ser
                 },
                 {
                   type: 'subscriptions',
-                  id: `${enrolledCandidate.id}-456`,
+                  id: `${enrolledCandidate.id}-${ComplementaryCertificationKeys.PIX_PLUS_DROIT}`,
                 },
               ],
             },
@@ -167,15 +168,15 @@ describe('Certification | Enrolment | Unit | Serializer | enrolled-candidate-ser
             type: 'subscriptions',
             id: `${enrolledCandidate.id}-CORE`,
             attributes: {
-              'complementary-certification-id': null,
+              'complementary-certification-key': null,
               type: SUBSCRIPTION_TYPES.CORE,
             },
           },
           {
             type: 'subscriptions',
-            id: `${enrolledCandidate.id}-456`,
+            id: `${enrolledCandidate.id}-${ComplementaryCertificationKeys.PIX_PLUS_DROIT}`,
             attributes: {
-              'complementary-certification-id': 456,
+              'complementary-certification-key': ComplementaryCertificationKeys.PIX_PLUS_DROIT,
               type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
             },
           },
