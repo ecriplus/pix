@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED } from '../../../../shared/domain/constants.js';
 import { status } from '../../../../shared/domain/models/AssessmentResult.js';
+import { MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED } from '../../../shared/domain/constants.js';
 
 class CertificationAssessmentScore {
   constructor({

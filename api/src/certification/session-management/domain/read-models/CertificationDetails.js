@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { ReproducibilityRate } from '../../../../shared/domain/models/ReproducibilityRate.js';
 import { AnswerCollectionForScoring } from '../../../shared/domain/models/AnswerCollectionForScoring.js';
+import { ReproducibilityRate } from '../../../shared/domain/models/ReproducibilityRate.js';
 
 class CertificationDetails {
   constructor({
