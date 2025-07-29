@@ -76,6 +76,7 @@
 
       table {
         color: var(--pix-neutral-800);
+        border-collapse: collapse;
       }
 
       th {
@@ -88,6 +89,10 @@
         padding-left: 1rem;
         text-align: left;
         vertical-align: middle;
+      }
+
+      tr:not(:first-child) {
+        border-top: 1px solid var(--pix-neutral-20);
       }
 
       td.table__column--center,
