@@ -1,3 +1,4 @@
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidateSubscription } from '../read-models/CertificationCandidateSubscription.js';
 
 const getCertificationCandidateSubscription = async function ({
@@ -34,11 +35,39 @@ const getCertificationCandidateSubscription = async function ({
     limitDate: certificationCandidate.reconciledAt,
   });
 
+  const [doubleCertificationCertifiableBadgeAcquisition] = certifiableBadgeAcquisitions.filter(
+    (certifiableBadgeAcquisition) =>
+      certifiableBadgeAcquisition.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
+  );
+
+  if (
+    !doubleCertificationCertifiableBadgeAcquisition &&
+    certificationCandidate.complementaryCertification.key === ComplementaryCertificationKeys.CLEA
+  ) {
+    return new CertificationCandidateSubscription({
+      id: certificationCandidateId,
+      sessionId: certificationCandidate.sessionId,
+      eligibleSubscriptions,
+      nonEligibleSubscription: {
+        label: certificationCandidate.complementaryCertification.label,
+        type: 'COMPLEMENTARY',
+      },
+      sessionVersion: session.version,
+    });
+  } else if (!doubleCertificationCertifiableBadgeAcquisition) {
+    return new CertificationCandidateSubscription({
+      id: certificationCandidateId,
+      sessionId: certificationCandidate.sessionId,
+      eligibleSubscriptions,
+      nonEligibleSubscription: null,
+      sessionVersion: session.version,
+    });
+  }
+
   if (center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
-    const isSubscriptionEligible = certifiableBadgeAcquisitions.some(
-      ({ complementaryCertificationKey }) =>
-        complementaryCertificationKey === certificationCandidate.complementaryCertification.key,
-    );
+    const isSubscriptionEligible =
+      doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey ===
+      certificationCandidate.complementaryCertification.key;
 
     if (isSubscriptionEligible) {
       eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
