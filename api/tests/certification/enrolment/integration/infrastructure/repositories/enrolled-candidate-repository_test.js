@@ -1,5 +1,6 @@
 import * as enrolledCandidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/enrolled-candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -132,7 +133,7 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.CORE,
               certificationCandidateId: jeannetteData.id,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
             },
           ],
         }),
@@ -142,7 +143,7 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.CORE,
               certificationCandidateId: michelData.id,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
             },
           ],
         }),
@@ -152,7 +153,7 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.CORE,
               certificationCandidateId: fredericData.id,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
             },
           ],
         }),
@@ -163,13 +164,11 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
       // given
       const complementaryCertificationData1 = {
         id: 1,
-        label: 'ComplementaryCertif1Label',
-        key: 'ComplementaryCertif1Key',
+        key: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
       };
       const complementaryCertificationData2 = {
         id: 2,
-        label: 'ComplementaryCertif2Label',
-        key: 'ComplementaryCertif2Key',
+        key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
       };
       databaseBuilder.factory.buildComplementaryCertification(complementaryCertificationData1);
       databaseBuilder.factory.buildComplementaryCertification(complementaryCertificationData2);
@@ -194,12 +193,12 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.CORE,
               certificationCandidateId: jeannetteData.id,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
             },
             {
               type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
               certificationCandidateId: jeannetteData.id,
-              complementaryCertificationId: complementaryCertificationData1.id,
+              complementaryCertificationKey: complementaryCertificationData1.key,
             },
           ],
         }),
@@ -209,7 +208,7 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.CORE,
               certificationCandidateId: michelData.id,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
             },
           ],
         }),
@@ -219,7 +218,7 @@ describe('Certification | Enrolment | Integration | Repository | EnrolledCandida
             {
               type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
               certificationCandidateId: fredericData.id,
-              complementaryCertificationId: complementaryCertificationData2.id,
+              complementaryCertificationKey: complementaryCertificationData2.key,
             },
           ],
         }),
