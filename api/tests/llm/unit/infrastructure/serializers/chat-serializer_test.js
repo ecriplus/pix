@@ -20,6 +20,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           },
         }),
         hasAttachmentContextBeenAdded: false,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
         messages: [
           new Message({
             content: 'Salut',
@@ -44,6 +46,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         inputMaxChars: 500,
         inputMaxPrompts: 4,
         context: 'modulix',
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
         messages: [
           {
             content: 'Salut',
@@ -78,6 +82,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             },
           }),
           hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             new Message({
               content: 'Salut',
@@ -104,6 +110,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           inputMaxChars: 500,
           inputMaxPrompts: 4,
           context: undefined,
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -133,6 +141,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             },
           }),
           hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
@@ -182,6 +192,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           inputMaxChars: 500,
           inputMaxPrompts: 4,
           context: 'modulix',
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             {
               content: 'Salut',
@@ -239,6 +251,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             },
           }),
           hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
@@ -288,6 +302,8 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           inputMaxChars: 500,
           inputMaxPrompts: 4,
           context: 'modulix',
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             {
               content: 'Salut',
