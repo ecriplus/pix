@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { CertifiableProfileForLearningContent } from '../../../../shared/domain/models/CertifiableProfileForLearningContent.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
+import { CertifiableProfileForLearningContent } from '../../domain/models/CertifiableProfileForLearningContent.js';
 
 const get = async function ({ id, profileDate, learningContent }) {
   const knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId: id, limitDate: profileDate });
