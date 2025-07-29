@@ -3,6 +3,7 @@ import lodash from 'lodash';
 import * as sessionsImportValidationService from '../../../../../../src/certification/enrolment/domain/services/sessions-import-validation-service.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CpfBirthInformationValidation } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -582,7 +583,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         };
         complementaryCertificationRepository.getByLabel
           .withArgs({ label: 'MaComplémentaire' })
-          .resolves({ id: 3, key: 'SOME_KEY', label: 'MaComplémentaire' });
+          .resolves({ id: 3, key: ComplementaryCertificationKeys.PIX_PLUS_DROIT, label: 'MaComplémentaire' });
 
         // when
         const { certificationCandidateComplementaryErrors, subscriptions } =
