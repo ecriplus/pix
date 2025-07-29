@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { CertificationComputeError } from '../../../../shared/domain/errors.js';
 
 class CertificationContract {
-  /* PUBLIC INTERFACE */
   static assertThatWeHaveEnoughAnswers(listAnswers, listChallenges) {
     const someUnansweredChallenges = _.some(listChallenges, (challenge) => {
       return (
