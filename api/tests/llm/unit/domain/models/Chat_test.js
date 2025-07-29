@@ -848,220 +848,6 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
     });
   });
 
-  describe('#toDTO', function () {
-    it('should return the DTO version of the Chat model', function () {
-      // given
-      const configurationDTO = Symbol('configurationDTO');
-      const chat = new Chat({
-        id: 'some-chat-id',
-        userId: 123,
-        configurationId: 'abc123',
-        configuration: new Configuration(configurationDTO),
-        hasAttachmentContextBeenAdded: true,
-        totalInputTokens: 2_000,
-        totalOutputTokens: 5_000,
-        messages: [
-          new Message({
-            content: 'message user 1',
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-          }),
-          new Message({
-            content: 'message llm 1',
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-          }),
-          new Message({
-            attachmentName: 'file.txt',
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: true,
-          }),
-          new Message({
-            attachmentName: 'file.txt',
-            attachmentContext: 'je suis un poulet',
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: false,
-          }),
-        ],
-      });
-
-      // when
-      const dto = chat.toDTO();
-
-      // then
-      expect(dto).to.deep.equal({
-        id: 'some-chat-id',
-        userId: 123,
-        configurationId: 'abc123',
-        configuration: configurationDTO,
-        hasAttachmentContextBeenAdded: true,
-        totalInputTokens: 2_000,
-        totalOutputTokens: 5_000,
-        messages: [
-          {
-            content: 'message user 1',
-            attachmentName: undefined,
-            attachmentContext: undefined,
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-            haveVictoryConditionsBeenFulfilled: undefined,
-          },
-          {
-            content: 'message llm 1',
-            attachmentName: undefined,
-            attachmentContext: undefined,
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-            haveVictoryConditionsBeenFulfilled: undefined,
-          },
-          {
-            content: undefined,
-            attachmentName: 'file.txt',
-            attachmentContext: undefined,
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: true,
-          },
-          {
-            content: undefined,
-            attachmentName: 'file.txt',
-            attachmentContext: 'je suis un poulet',
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: false,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-            haveVictoryConditionsBeenFulfilled: undefined,
-          },
-        ],
-      });
-    });
-  });
-
-  describe('#fromDTO', function () {
-    it('should return a Chat model', function () {
-      // given
-      const dto = {
-        id: 'some-chat-id',
-        userId: 123,
-        configurationId: 'abc123',
-        configuration: {},
-        hasAttachmentContextBeenAdded: true,
-        messages: [
-          {
-            content: 'message user 1',
-            attachmentName: undefined,
-            attachmentContext: undefined,
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-            haveVictoryConditionsBeenFulfilled: undefined,
-          },
-          {
-            content: 'message llm 1',
-            attachmentName: undefined,
-            attachmentContext: undefined,
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-            haveVictoryConditionsBeenFulfilled: undefined,
-          },
-          {
-            content: undefined,
-            attachmentName: 'file.txt',
-            attachmentContext: undefined,
-            isFromUser: true,
-            shouldBeCountedAsAPrompt: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: true,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-            haveVictoryConditionsBeenFulfilled: true,
-          },
-          {
-            content: undefined,
-            attachmentName: 'file.txt',
-            attachmentContext: 'je suis un poulet',
-            isFromUser: false,
-            shouldBeCountedAsAPrompt: false,
-            shouldBeForwardedToLLM: true,
-            shouldBeRenderedInPreview: false,
-            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
-          },
-        ],
-      };
-
-      // when
-      const chat = Chat.fromDTO(dto);
-
-      // then
-      expect(chat).to.deepEqualInstance(
-        new Chat({
-          id: 'some-chat-id',
-          userId: 123,
-          configurationId: 'abc123',
-          configuration: new Configuration({}), // Configuration model has no enumerable properties
-          hasAttachmentContextBeenAdded: true,
-          messages: [
-            new Message({
-              content: 'message user 1',
-              isFromUser: true,
-              shouldBeCountedAsAPrompt: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-            }),
-            new Message({
-              content: 'message llm 1',
-              isFromUser: false,
-              shouldBeCountedAsAPrompt: false,
-              shouldBeRenderedInPreview: true,
-              shouldBeForwardedToLLM: true,
-            }),
-            new Message({
-              attachmentName: 'file.txt',
-              isFromUser: true,
-              shouldBeCountedAsAPrompt: true,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: true,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
-              haveVictoryConditionsBeenFulfilled: true,
-            }),
-            new Message({
-              attachmentName: 'file.txt',
-              attachmentContext: 'je suis un poulet',
-              isFromUser: false,
-              shouldBeCountedAsAPrompt: false,
-              shouldBeForwardedToLLM: true,
-              shouldBeRenderedInPreview: false,
-            }),
-          ],
-        }),
-      );
-    });
-  });
-
   describe('#isAttachmentValid', function () {
     context('when configuration has no attachment', function () {
       it('returns false', function () {
@@ -1281,6 +1067,360 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           },
         ]);
       });
+    });
+  });
+
+  describe('#updateTokenConsumption', function () {
+    context('when chat has not initialized integer values for totalTokens attributes (old chats)', function () {
+      it('does nothing', function () {
+        // given
+        const configurationDTO = Symbol('configurationDTO');
+        const chat = new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configurationId: 'abc123',
+          configuration: new Configuration(configurationDTO),
+          hasAttachmentContextBeenAdded: false,
+          messages: [
+            new Message({
+              content: 'message user 1',
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+            }),
+            new Message({
+              content: 'message llm 1',
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+            }),
+          ],
+        });
+
+        // when
+        chat.updateTokenConsumption(2_000, 5_000);
+
+        // then
+        expect(chat.toDTO()).to.deep.equal({
+          id: 'some-chat-id',
+          userId: 123,
+          configurationId: 'abc123',
+          configuration: configurationDTO,
+          hasAttachmentContextBeenAdded: false,
+          totalInputTokens: undefined,
+          totalOutputTokens: undefined,
+          messages: [
+            {
+              content: 'message user 1',
+              attachmentName: undefined,
+              attachmentContext: undefined,
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
+            {
+              content: 'message llm 1',
+              attachmentName: undefined,
+              attachmentContext: undefined,
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
+          ],
+        });
+      });
+    });
+
+    context('when chat has integer values for totalTokens attributes', function () {
+      it('adds to corresponding total the token counts in param', function () {
+        // given
+        const configurationDTO = Symbol('configurationDTO');
+        const chat = new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configurationId: 'abc123',
+          configuration: new Configuration(configurationDTO),
+          hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 1_000,
+          totalOutputTokens: 10_000,
+          messages: [
+            new Message({
+              content: 'message user 1',
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+            }),
+            new Message({
+              content: 'message llm 1',
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+            }),
+          ],
+        });
+
+        // when
+        chat.updateTokenConsumption(2_000, 5_000);
+
+        // then
+        expect(chat.toDTO()).to.deep.equal({
+          id: 'some-chat-id',
+          userId: 123,
+          configurationId: 'abc123',
+          configuration: configurationDTO,
+          hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 3_000,
+          totalOutputTokens: 15_000,
+          messages: [
+            {
+              content: 'message user 1',
+              attachmentName: undefined,
+              attachmentContext: undefined,
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
+            {
+              content: 'message llm 1',
+              attachmentName: undefined,
+              attachmentContext: undefined,
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+              haveVictoryConditionsBeenFulfilled: undefined,
+            },
+          ],
+        });
+      });
+    });
+  });
+
+  describe('#toDTO', function () {
+    it('should return the DTO version of the Chat model', function () {
+      // given
+      const configurationDTO = Symbol('configurationDTO');
+      const chat = new Chat({
+        id: 'some-chat-id',
+        userId: 123,
+        configurationId: 'abc123',
+        configuration: new Configuration(configurationDTO),
+        hasAttachmentContextBeenAdded: true,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
+        messages: [
+          new Message({
+            content: 'message user 1',
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+          }),
+          new Message({
+            content: 'message llm 1',
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+          }),
+          new Message({
+            attachmentName: 'file.txt',
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
+          }),
+          new Message({
+            attachmentName: 'file.txt',
+            attachmentContext: 'je suis un poulet',
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: false,
+          }),
+        ],
+      });
+
+      // when
+      const dto = chat.toDTO();
+
+      // then
+      expect(dto).to.deep.equal({
+        id: 'some-chat-id',
+        userId: 123,
+        configurationId: 'abc123',
+        configuration: configurationDTO,
+        hasAttachmentContextBeenAdded: true,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
+        messages: [
+          {
+            content: 'message user 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: 'message llm 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: undefined,
+            attachmentName: 'file.txt',
+            attachmentContext: undefined,
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
+          },
+          {
+            content: undefined,
+            attachmentName: 'file.txt',
+            attachmentContext: 'je suis un poulet',
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: false,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+        ],
+      });
+    });
+  });
+
+  describe('#fromDTO', function () {
+    it('should return a Chat model', function () {
+      // given
+      const dto = {
+        id: 'some-chat-id',
+        userId: 123,
+        configurationId: 'abc123',
+        configuration: {},
+        hasAttachmentContextBeenAdded: true,
+        messages: [
+          {
+            content: 'message user 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: 'message llm 1',
+            attachmentName: undefined,
+            attachmentContext: undefined,
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+            haveVictoryConditionsBeenFulfilled: undefined,
+          },
+          {
+            content: undefined,
+            attachmentName: 'file.txt',
+            attachmentContext: undefined,
+            isFromUser: true,
+            shouldBeCountedAsAPrompt: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: true,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+            haveVictoryConditionsBeenFulfilled: true,
+          },
+          {
+            content: undefined,
+            attachmentName: 'file.txt',
+            attachmentContext: 'je suis un poulet',
+            isFromUser: false,
+            shouldBeCountedAsAPrompt: false,
+            shouldBeForwardedToLLM: true,
+            shouldBeRenderedInPreview: false,
+            hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          },
+        ],
+      };
+
+      // when
+      const chat = Chat.fromDTO(dto);
+
+      // then
+      expect(chat).to.deepEqualInstance(
+        new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configurationId: 'abc123',
+          configuration: new Configuration({}), // Configuration model has no enumerable properties
+          hasAttachmentContextBeenAdded: true,
+          messages: [
+            new Message({
+              content: 'message user 1',
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+            }),
+            new Message({
+              content: 'message llm 1',
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+            }),
+            new Message({
+              attachmentName: 'file.txt',
+              isFromUser: true,
+              shouldBeCountedAsAPrompt: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: true,
+            }),
+            new Message({
+              attachmentName: 'file.txt',
+              attachmentContext: 'je suis un poulet',
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: false,
+            }),
+          ],
+        }),
+      );
     });
   });
 });
