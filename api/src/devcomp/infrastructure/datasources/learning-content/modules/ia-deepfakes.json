@@ -5,13 +5,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes sont créés et pourquoi.</p><br>",
+    "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes (ou hypertrucages en français) sont créés et pourquoi.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
       "<p>Savoir que des médias en ligne peuvent être créés avec l'intelligence artificielle (IA)</p>",
-      "<p>Connaître la notion de deepfake</p>",
-      "<p>Repérer les intentions des auteurs de deepfakes</p>"
+      "<p>Connaître la notion de deepfake (hypertrucage)</p>",
+      "<p>Repérer les intentions des auteurs de deepfakes (hypertrucages)</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -188,7 +188,7 @@
           "element": {
             "id": "42d51784-c0d0-4c68-953b-059ea9052e33",
             "type": "text",
-            "content": "<p>Avec un logiciel d'itelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
+            "content": "<p>Avec un logiciel d'intelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
           }
         },
         {
