@@ -69,7 +69,6 @@
                 "id": "1",
                 "content": "<p>Il a l’air incollable.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
                 }
               },
@@ -77,7 +76,6 @@
                 "id": "2",
                 "content": "<p>Il s’exprime comme un humain.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
                 }
               },
@@ -85,7 +83,6 @@
                 "id": "3",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
                 }
               }
@@ -141,7 +138,6 @@
                 "id": "1",
                 "content": "<p>kangourou</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Observez attentivement la taille du cercle nommé « koala » par rapport à celui qui représente « kangourou ».</p>"
                 }
               },
@@ -149,7 +145,6 @@
                 "id": "2",
                 "content": "<p>koala</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot « koala » apparaît souvent en même temps que « animaux », « Océanie », etc.</p>"
                 }
               },
@@ -157,7 +152,6 @@
                 "id": "3",
                 "content": "<p>wallaby</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Observez attentivement la taille du cercle nommé « koala » par rapport à celui qui représente « wallaby ».</p>"
                 }
               }
@@ -494,7 +488,8 @@
                   "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               }
-            ],"solution": "3"
+            ],
+            "solution": "3"
           }
         }
       ]
@@ -785,7 +780,6 @@
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>todo</p>"
                 }
               },
@@ -793,7 +787,6 @@
                 "id": "2",
                 "content": "<p>non</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>todo</p>"
                 }
               }

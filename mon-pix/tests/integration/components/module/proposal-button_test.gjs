@@ -13,7 +13,6 @@ module('Integration | Component | Module | ProposalButton', function (hooks) {
       id: '1',
       content: 'Avant de mettre le dentifrice',
       feedback: {
-        state: '',
         diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
       },
     };
@@ -31,7 +30,6 @@ module('Integration | Component | Module | ProposalButton', function (hooks) {
         id: '1',
         content: 'Avant de mettre le dentifrice',
         feedback: {
-          state: '',
           diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
         },
       };
@@ -50,7 +48,6 @@ module('Integration | Component | Module | ProposalButton', function (hooks) {
         id: '1',
         content: 'Avant de mettre le dentifrice',
         feedback: {
-          state: '',
           diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
         },
       };

@@ -580,7 +580,6 @@
                 "id": "1",
                 "content": "<p>Partager la vidéo.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Attention à ne pas partager de deepfakes !</p>"
                 }
               },
@@ -588,7 +587,6 @@
                 "id": "2",
                 "content": "<p>Signaler la vidéo.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, quand on repère un deepfake sur un réseau social, on peut le signaler.</p>"
                 }
               },
@@ -596,7 +594,6 @@
                 "id": "3",
                 "content": "<p>Chercher la source.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Bon réflexe !&nbsp;</p>"
                 }
               },
@@ -604,7 +601,6 @@
                 "id": "4",
                 "content": "<p>En discuter avec vos amis.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, lorsqu'on a un doute sur un contenu en ligne, on peut demander l'avis de ses amis.</p>"
                 }
               },
@@ -612,7 +608,6 @@
                 "id": "5",
                 "content": "<p>Rien de spécial.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Passer son chemin face à un contenu en ligne qu'on soupçonne d'être un deepfake, c'est bien ! Le signaler, c'est mieux !</p>"
                 }
               }

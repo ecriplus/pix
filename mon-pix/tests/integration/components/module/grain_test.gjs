@@ -405,7 +405,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 id: '1',
                 content: 'Avant de mettre le dentifrice',
                 feedback: {
-                  state: '',
                   diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
                 },
               },
@@ -413,7 +412,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 id: '2',
                 content: 'Après avoir mis le dentifrice',
                 feedback: {
-                  state: '',
                   diagnosis: '<p>Possible, mais attention à ne pas faire tomber le dentifrice !</p>',
                 },
               },
@@ -421,7 +419,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 id: '3',
                 content: 'Pendant que le dentifrice est mis',
                 feedback: {
-                  state: '',
                   diagnosis: '<p>Digne des plus grands acrobates !</p>',
                 },
               },
