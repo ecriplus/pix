@@ -6,4 +6,10 @@ class ChallengeAlreadyAnsweredError extends DomainError {
   }
 }
 
-export { ChallengeAlreadyAnsweredError };
+class CertificationComputeError extends DomainError {
+  constructor(message = 'Erreur lors du calcul de la certification.') {
+    super(message);
+  }
+}
+
+export { CertificationComputeError, ChallengeAlreadyAnsweredError };

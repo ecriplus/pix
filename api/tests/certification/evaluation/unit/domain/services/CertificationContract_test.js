@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
+import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { CertificationContract } from '../../../../../../src/certification/evaluation/domain/services/CertificationContract.js';
-import { CertificationComputeError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Services | CertificationContract', function () {

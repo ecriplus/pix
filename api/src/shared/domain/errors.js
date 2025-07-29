@@ -154,12 +154,6 @@ class CertificationCandidatesError extends DomainError {
   }
 }
 
-class CertificationComputeError extends DomainError {
-  constructor(message = 'Erreur lors du calcul de la certification.') {
-    super(message);
-  }
-}
-
 class CertificationCenterMembershipCreationError extends DomainError {
   constructor(message = 'Erreur lors de la création du membership de centre de certification.') {
     super(message);
@@ -1051,7 +1045,6 @@ export {
   CertificationCandidatesError,
   CertificationCenterMembershipCreationError,
   CertificationCenterMembershipDisableError,
-  CertificationComputeError,
   CertificationEndedByFinalizationError,
   CertificationEndedBySupervisorError,
   ChallengeAlreadyAnsweredError,

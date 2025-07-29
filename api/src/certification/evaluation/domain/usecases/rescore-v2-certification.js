@@ -8,7 +8,7 @@
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').Services} Services
  */
-import { CertificationComputeError, NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
+import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import CertificationCancelled from '../../../../shared/domain/events/CertificationCancelled.js';
 import { CertificationCourseUnrejected } from '../../../../shared/domain/events/CertificationCourseUnrejected.js';
 import CertificationUncancelled from '../../../../shared/domain/events/CertificationUncancelled.js';
@@ -17,6 +17,7 @@ import { AssessmentResultFactory } from '../../../scoring/domain/models/factorie
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
 import { CertificationCourseRejected } from '../../../session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../session-management/domain/events/CertificationJuryDone.js';
+import { CertificationComputeError } from '../errors.js';
 import CertificationRescored from '../events/CertificationRescored.js';
 import { ChallengeDeneutralized } from '../events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';

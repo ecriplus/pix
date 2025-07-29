@@ -7,8 +7,8 @@
  * @typedef {import('./index.js').ComplementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  */
 
-import { CertificationComputeError } from '../../../../shared/domain/errors.js';
 import { AssessmentResultFactory } from '../../../scoring/domain/models/factories/AssessmentResultFactory.js';
+import { CertificationComputeError } from '../errors.js';
 
 /**
  * @param {Object} params

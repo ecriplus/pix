@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { CertificationComputeError } from '../../../../shared/domain/errors.js';
+import { CertificationComputeError } from '../errors.js';
 
 class CertificationContract {
   static assertThatWeHaveEnoughAnswers(listAnswers, listChallenges) {

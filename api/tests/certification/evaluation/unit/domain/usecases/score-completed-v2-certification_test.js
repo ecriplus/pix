@@ -1,8 +1,8 @@
+import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { scoreCompletedV2Certification } from '../../../../../../src/certification/evaluation/domain/usecases/score-completed-v2-certification.js';
 import { AssessmentResultFactory } from '../../../../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { CertificationComputeError } from '../../../../../../src/shared/domain/errors.js';
 import { CertificationCourse } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 

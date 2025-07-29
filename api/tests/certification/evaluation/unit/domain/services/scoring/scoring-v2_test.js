@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { CertificationComputeError } from '../../../../../../../src/certification/evaluation/domain/errors.js';
 import { ChallengeDeneutralized } from '../../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import {
@@ -15,7 +16,6 @@ import { AlgorithmEngineVersion } from '../../../../../../../src/certification/s
 import { ABORT_REASONS } from '../../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import * as scoringService from '../../../../../../../src/evaluation/domain/services/scoring/scoring-service.js';
-import { CertificationComputeError } from '../../../../../../../src/shared/domain/errors.js';
 import CertificationCancelled from '../../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
