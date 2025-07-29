@@ -20,24 +20,14 @@ export default class Tube extends Component {
   }
 
   <template>
-    <td class="table__column--center">
-      <PixCheckbox
-        @screenReaderOnly={{true}}
-        @id="tube-{{@tube.id}}"
-        {{on "click" this.toggleTube}}
-        @checked={{this.checked}}
-      >
+    <td>
+      <PixCheckbox @id="tube-{{@tube.id}}" {{on "click" this.toggleTube}} @checked={{this.checked}}>
         <:label>
           {{@tube.practicalTitle}}
           :
           {{@tube.practicalDescription}}
         </:label>
       </PixCheckbox>
-    </td>
-    <td>
-      {{@tube.practicalTitle}}
-      :
-      {{@tube.practicalDescription}}
     </td>
     <td class="table__column--center">
       <div
