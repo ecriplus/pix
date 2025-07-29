@@ -83,8 +83,6 @@ import { Membership } from './Membership.js';
 import { OrganizationTag } from './OrganizationTag.js';
 import { PlacementProfile } from './PlacementProfile.js';
 import { ReproducibilityRate } from './ReproducibilityRate.js';
-import { ScoringSimulation } from './ScoringSimulation.js';
-import { ScoringSimulationResult } from './ScoringSimulationResult.js';
 import { Skill } from './Skill.js';
 import { Solution } from './Solution.js';
 import { Student } from './Student.js';
@@ -171,8 +169,6 @@ export {
   Progression,
   ReproducibilityRate,
   ResultCompetenceTree,
-  ScoringSimulation,
-  ScoringSimulationResult,
   ShareableCertificate,
   Skill,
   Solution,
