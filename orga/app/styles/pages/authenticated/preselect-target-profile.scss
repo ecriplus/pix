@@ -21,6 +21,20 @@
   .not-responsive {
     fill: var(--pix-error-700);
   }
+
+  .table__column {
+    &--medium {
+      width: 30%;
+    }
+
+    &--wide {
+      width: 60%;
+    }
+
+    &--small {
+      width: 5%;
+    }
+  }
 }
 
 .preselect-target-profile {
