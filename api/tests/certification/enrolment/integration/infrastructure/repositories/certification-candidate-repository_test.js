@@ -137,7 +137,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
 
   describe('#getBySessionIdAndUserId', function () {
     let userId;
-    let complementaryCertificationId;
+    let complementaryCertification;
     let certificationCandidateId;
     let createdAt, reconciledAt;
 
@@ -146,16 +146,20 @@ describe('Integration | Repository | CertificationCandidate', function () {
       createdAt = new Date('2000-01-01');
       reconciledAt = new Date('2020-01-02');
       userId = databaseBuilder.factory.buildUser().id;
-      complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification().id;
+
+      complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+
       certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate({
         sessionId,
         userId,
         createdAt,
         reconciledAt,
       }).id;
+
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
+
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
-        complementaryCertificationId,
+        complementaryCertificationId: complementaryCertification.id,
         certificationCandidateId,
       });
 
@@ -179,7 +183,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
           birthProvinceCode: null,
           birthdate: '2000-01-04',
           complementaryCertification: {
-            id: complementaryCertificationId,
+            id: complementaryCertification.id,
             key: 'DROIT',
             label: 'UneSuperCertifComplémentaire',
           },
@@ -200,12 +204,12 @@ describe('Integration | Repository | CertificationCandidate', function () {
           subscriptions: [
             {
               certificationCandidateId,
-              complementaryCertificationId: null,
+              complementaryCertificationKey: null,
               type: 'CORE',
             },
             {
               certificationCandidateId,
-              complementaryCertificationId,
+              complementaryCertificationKey: complementaryCertification.key,
               type: 'COMPLEMENTARY',
             },
           ],

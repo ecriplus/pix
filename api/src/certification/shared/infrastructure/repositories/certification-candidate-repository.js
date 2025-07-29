@@ -90,5 +90,14 @@ function _candidateBaseQuery() {
 }
 
 async function _getSubscriptions(candidateId) {
-  return knex.select('*').from('certification-subscriptions').where('certificationCandidateId', candidateId);
+  return knex
+    .select('certification-subscriptions.*', 'complementary-certifications.key as complementaryCertificationKey')
+    .from('certification-subscriptions')
+    .where('certificationCandidateId', candidateId)
+    .leftJoin(
+      'complementary-certifications',
+      'certification-subscriptions.complementaryCertificationId',
+      'complementary-certifications.id',
+    )
+    .orderBy('certification-subscriptions.type', 'desc');
 }
