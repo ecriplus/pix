@@ -3,8 +3,8 @@ import {
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EmailingAttempt } from '../../../../../src/shared/domain/models/EmailingAttempt.js';
 import { mailService } from '../../../../../src/shared/domain/services/mail-service.js';
+import { EmailingAttempt } from '../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';

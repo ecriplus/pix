@@ -5,10 +5,10 @@ import {
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EmailingAttempt } from '../../../../../src/shared/domain/models/EmailingAttempt.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { mailService } from '../../../../../src/shared/domain/services/mail-service.js';
 import * as organizationRepository from '../../../../../src/shared/infrastructure/repositories/organization-repository.js';
+import { EmailingAttempt } from '../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { organizationInvitationService } from '../../../../../src/team/domain/services/organization-invitation.service.js';
 import { organizationInvitationRepository } from '../../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';

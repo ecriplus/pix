@@ -2,8 +2,8 @@ import {
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EmailingAttempt } from '../../../../../src/shared/domain/models/EmailingAttempt.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
+import { EmailingAttempt } from '../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { organizationInvitationService } from '../../../../../src/team/domain/services/organization-invitation.service.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';

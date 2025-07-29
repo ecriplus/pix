@@ -3,7 +3,7 @@ import {
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EmailingAttempt } from '../../../../../src/shared/domain/models/index.js';
+import { EmailingAttempt } from '../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import {
   createOrUpdateCertificationCenterInvitation,

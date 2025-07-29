@@ -10,8 +10,8 @@ import {
   publishSession,
 } from '../../../../../../src/certification/session-management/domain/services/session-publication-service.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { EmailingAttempt } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { EmailingAttempt } from '../../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Domain | Services | session-publication-service', function () {
