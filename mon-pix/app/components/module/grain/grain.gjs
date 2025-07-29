@@ -28,6 +28,7 @@ export default class ModuleGrain extends Component {
     'qab',
     'qcu',
     'qcu-declarative',
+    'qcu-discovery',
     'qcm',
     'qrocm',
     'separator',
@@ -36,7 +37,7 @@ export default class ModuleGrain extends Component {
   ];
   static AVAILABLE_GRAIN_TYPES = ['lesson', 'activity', 'discovery', 'challenge', 'summary', 'transition'];
 
-  static LOCALLY_ANSWERABLE_ELEMENTS = ['qab', 'qcu-declarative', 'flashcards'];
+  static LOCALLY_ANSWERABLE_ELEMENTS = ['qab', 'qcu-declarative', 'qcu-discovery', 'flashcards'];
 
   @tracked isStepperFinished = this.hasStepper === false;
 

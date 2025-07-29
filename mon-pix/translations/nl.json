@@ -1753,6 +1753,9 @@
         "complementaryInstruction": "Kies één antwoord",
         "direction": "There is no right or wrong answer."
       },
+      "qcuDiscovery": {
+        "direction": "Selecteer het antwoord dat u het meest juist lijkt."
+      },
       "qrocm": {
         "direction": "Vul de lege velden in."
       },

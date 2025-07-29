@@ -1730,7 +1730,7 @@
         },
         "title": {
           "lesson": "Leçon",
-          "summary":  "Récapitulatif"
+          "summary": "Récapitulatif"
         }
       },
       "interactiveElement": {
@@ -1763,6 +1763,9 @@
       "qcuDeclarative": {
         "complementaryInstruction": "Il n’y a pas de bonne ou de mauvaise réponse.",
         "direction": "Sélectionnez une seule réponse."
+      },
+      "qcuDiscovery": {
+        "direction": "Sélectionner la réponse qui vous semble la plus juste."
       },
       "qrocm": {
         "direction": "Remplissez {count, plural, =1 {le champ vide} other {les champs vides}}."

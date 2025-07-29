@@ -11,6 +11,7 @@ import QabElement from 'mon-pix/components/module/element/qab/qab';
 import QcmElement from 'mon-pix/components/module/element/qcm';
 import QcuElement from 'mon-pix/components/module/element/qcu';
 import QcuDeclarativeElement from 'mon-pix/components/module/element/qcu-declarative';
+import QcuDiscoveryElement from 'mon-pix/components/module/element/qcu-discovery';
 import QrocmElement from 'mon-pix/components/module/element/qrocm';
 import SeparatorElement from 'mon-pix/components/module/element/separator';
 import TextElement from 'mon-pix/components/module/element/text';
@@ -50,6 +51,8 @@ export default class ModulixElement extends Component {
       />
     {{else if (eq @element.type "qcu-declarative")}}
       <QcuDeclarativeElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
+    {{else if (eq @element.type "qcu-discovery")}}
+      <QcuDiscoveryElement @element={{@element}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "qcm")}}
       <QcmElement
         @element={{@element}}

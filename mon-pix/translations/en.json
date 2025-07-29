@@ -1764,6 +1764,9 @@
         "complementaryInstruction": "Select a single answer.",
         "direction": "There is no right or wrong answer."
       },
+      "qcuDiscovery": {
+        "direction": "Select the answer that you think is most accurate."
+      },
       "qrocm": {
         "direction": "Fill in the {count, plural, =1 {blank} other {blanks}}."
       },

@@ -244,6 +244,27 @@ module('Integration | Component | Module | Element', function (hooks) {
     assert.ok(screen.getByRole('button', { name: element.proposals[0].content }));
   });
 
+  test('should display an element with a qcu discovery element', async function (assert) {
+    // given
+    const element = {
+      id: '0c397035-a940-441f-8936-050db7f997af',
+      instruction: 'Instruction',
+      proposals: [
+        { id: '1', content: 'prop1' },
+        { id: '2', content: 'prop2' },
+      ],
+      solution: '1',
+      type: 'qcu-discovery',
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.deepEqual(screen.getAllByText('Sélectionner la réponse qui vous semble la plus juste.').length, 2);
+    assert.ok(screen.getByRole('button', { name: element.proposals[0].content }));
+  });
+
   test('should display an element with a qcm element', async function (assert) {
     // given
     const element = {
