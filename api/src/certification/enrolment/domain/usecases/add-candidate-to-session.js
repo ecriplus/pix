@@ -55,7 +55,7 @@ export async function addCandidateToSession({
       cleaCertificationId: cleaCertification.id,
     });
   } catch (error) {
-    logger.error(error);
+    logger.warn(error);
     throw new CertificationCandidatesError({
       code: error.code,
       meta: { value: error.meta },
