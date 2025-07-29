@@ -63,14 +63,14 @@ export async function promptChat({
 
   return toEventStream.fromLLMResponse({
     llmResponse: readableStream,
-    onStreamDone: addMessagesToChat(chat, message, shouldBeForwardedToLLM, chatRepository),
+    onStreamDone: finalize(chat, message, shouldBeForwardedToLLM, chatRepository),
     attachmentMessageType,
   });
 }
 
 /**
  * @function
- * @name addMessagesToChat
+ * @name finalize
  *
  * @param {Chat} chat
  * @param {string} prompt
@@ -78,10 +78,11 @@ export async function promptChat({
  * @param {Object} chatRepository
  * @returns {(streamCapture: StreamCapture) => Promise<void>}
  */
-function addMessagesToChat(chat, prompt, shouldBeForwardedToLLM, chatRepository) {
+function finalize(chat, prompt, shouldBeForwardedToLLM, chatRepository) {
   return async (streamCapture) => {
     chat.addUserMessage(prompt, shouldBeForwardedToLLM, streamCapture.haveVictoryConditionsBeenFulfilled);
     chat.addLLMMessage(streamCapture.LLMMessageParts.join(''));
+    chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
     await chatRepository.save(chat);
   };
 }

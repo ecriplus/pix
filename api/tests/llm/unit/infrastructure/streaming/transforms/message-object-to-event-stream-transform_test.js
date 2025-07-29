@@ -1,6 +1,8 @@
 import { Readable } from 'node:stream';
 import { finished } from 'node:stream/promises';
 
+import _ from 'lodash';
+
 import { getTransform } from '../../../../../../src/llm/infrastructure/streaming/transforms/message-object-to-event-stream-transform.js';
 import { expect } from '../../../../../test-helper.js';
 
@@ -11,6 +13,8 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       streamCapture = {
         LLMMessageParts: [],
         haveVictoryConditionsBeenFulfilled: false,
+        inputTokens: 0,
+        outputTokens: 0,
       };
     });
 
@@ -101,8 +105,12 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
         await finished(transform);
 
         // then
+        expect(_.omit(streamCapture, 'LLMMessageParts')).to.deep.equal({
+          haveVictoryConditionsBeenFulfilled: false,
+          inputTokens: 0,
+          outputTokens: 0,
+        });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
-        expect(streamCapture.haveVictoryConditionsBeenFulfilled).to.be.false;
       });
 
       it('should toggle "haveVictoryConditionsBeenFulfilled" to true when isValid: true appears in stream', async function () {
@@ -126,8 +134,40 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
         await finished(transform);
 
         // then
+        expect(_.omit(streamCapture, 'LLMMessageParts')).to.deep.equal({
+          haveVictoryConditionsBeenFulfilled: true,
+          inputTokens: 0,
+          outputTokens: 0,
+        });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
-        expect(streamCapture.haveVictoryConditionsBeenFulfilled).to.be.true;
+      });
+
+      it('should capture the inputTokens and outputTokens values in "usage" key if present', async function () {
+        // given
+        const input = [
+          { message: 'Coucou les amis \ncomment ça va ?' },
+          { pasMessage: 'Ca va super' },
+          { message: 'Et toi ?' },
+          {
+            usage: { superKey: 'wowouuo', inputTokens: 2_000, outputTokens: 5_000 },
+          },
+        ];
+        const readable = Readable.from(input);
+        const transform = getTransform(streamCapture);
+
+        // when
+        readable.pipe(transform);
+        // eslint-disable-next-line no-empty-function
+        transform.on('data', () => {});
+        await finished(transform);
+
+        // then
+        expect(_.omit(streamCapture, 'LLMMessageParts')).to.deep.equal({
+          haveVictoryConditionsBeenFulfilled: false,
+          inputTokens: 2_000,
+          outputTokens: 5_000,
+        });
+        expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
     });
   });
