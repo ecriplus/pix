@@ -46,8 +46,8 @@ describe('Integration | Repository | Certifiable Badge Acquisition', function ()
           complementaryCertificationId: complementaryCertification.id,
           complementaryCertificationKey: complementaryCertification.key,
           complementaryCertificationBadgeId: complementaryCertificationBadge.id,
-          complementaryCertificationBadgeLabel: complementaryCertificationBadge.label,
-          complementaryCertificationBadgeImageUrl: complementaryCertificationBadge.imageUrl,
+          complementaryCertificationBadgeLabel: acquiredBadge.altMessage,
+          complementaryCertificationBadgeImageUrl: acquiredBadge.imageUrl,
           isOutdated: false,
         });
         expect(certifiableBadgesAcquiredByUser).to.deepEqualArray([expectedCertifiableBadgeAcquisition]);
@@ -88,8 +88,8 @@ describe('Integration | Repository | Certifiable Badge Acquisition', function ()
             complementaryCertificationId: complementaryCertification.id,
             complementaryCertificationKey: complementaryCertification.key,
             complementaryCertificationBadgeId: complementaryCertificationBadge.id,
-            complementaryCertificationBadgeLabel: complementaryCertificationBadge.label,
-            complementaryCertificationBadgeImageUrl: complementaryCertificationBadge.imageUrl,
+            complementaryCertificationBadgeLabel: acquiredBadge.altMessage,
+            complementaryCertificationBadgeImageUrl: acquiredBadge.imageUrl,
             isOutdated: false,
           });
           expect(certifiableBadgesAcquiredByUser).to.deepEqualArray([expectedCertifiableBadgeAcquisition]);
@@ -147,8 +147,8 @@ describe('Integration | Repository | Certifiable Badge Acquisition', function ()
           complementaryCertificationId: complementaryCertification.id,
           complementaryCertificationKey: complementaryCertification.key,
           complementaryCertificationBadgeId: complementaryCertificationBadge.id,
-          complementaryCertificationBadgeLabel: complementaryCertificationBadge.label,
-          complementaryCertificationBadgeImageUrl: complementaryCertificationBadge.imageUrl,
+          complementaryCertificationBadgeLabel: acquiredBadge.altMessage,
+          complementaryCertificationBadgeImageUrl: acquiredBadge.imageUrl,
           isOutdated: false,
         });
         expect(certifiableBadgesAcquiredByUser).to.deepEqualArray([expectedCertifiableBadgeAcquisition]);

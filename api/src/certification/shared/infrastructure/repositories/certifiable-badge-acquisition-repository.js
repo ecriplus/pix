@@ -21,8 +21,8 @@ const findHighestCertifiable = async function ({ userId, limitDate = new Date() 
           campaignParticipationId: 'badge-acquisitions.campaignParticipationId',
           complementaryCertificationId: 'complementary-certification-badges.complementaryCertificationId',
           complementaryCertificationBadgeId: 'complementary-certification-badges.id',
-          complementaryCertificationBadgeImageUrl: 'complementary-certification-badges.imageUrl',
-          complementaryCertificationBadgeLabel: 'complementary-certification-badges.label',
+          complementaryCertificationBadgeImageUrl: 'badges.imageUrl',
+          complementaryCertificationBadgeLabel: 'badges.altMessage',
           complementaryCertificationBadgeLevel: 'complementary-certification-badges.level',
           complementaryCertificationBadgeDetachedAt: 'complementary-certification-badges.detachedAt',
         })

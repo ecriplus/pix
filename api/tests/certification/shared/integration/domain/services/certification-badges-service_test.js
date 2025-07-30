@@ -113,8 +113,8 @@ describe('Integration | Service | Certification-Badges Service', function () {
         complementaryCertificationId: complementaryCertification.id,
         complementaryCertificationKey: complementaryCertification.key,
         complementaryCertificationBadgeId: complementaryCertificationBadge.id,
-        complementaryCertificationBadgeLabel: complementaryCertificationBadge.label,
-        complementaryCertificationBadgeImageUrl: complementaryCertificationBadge.imageUrl,
+        complementaryCertificationBadgeLabel: badge.altMessage,
+        complementaryCertificationBadgeImageUrl: badge.imageUrl,
       });
       expect(badgeAcquisitions).to.deepEqualArray([expectedCertifiableBadgeAcquisition]);
     });
