@@ -216,14 +216,8 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         // given
         const { flashcards } = _getFlashcards();
 
-        const onSelfAssessmentStub = sinon.stub();
-
         // when
-        const screen = await render(
-          <template>
-            <ModulixFlashcards @flashcards={{flashcards}} @onSelfAssessment={{onSelfAssessmentStub}} />
-          </template>,
-        );
+        const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
         await clickByName(t('pages.modulix.buttons.flashcards.answers.no'));
@@ -231,8 +225,6 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         // then
         assert.ok(screen.getByText('Qui a écrit le Dormeur du Val ?'));
         assert.ok(screen.getByText(t('pages.modulix.flashcards.position', { currentCardPosition: 2, totalCards: 2 })));
-        assert.true(onSelfAssessmentStub.calledOnce);
-
         assert.ok(
           passageEventsService.record.calledWith({
             type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
@@ -252,17 +244,10 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         const { flashcards } = _getFlashcards();
 
         const onAnswerStub = sinon.stub();
-        const onSelfAssessmentStub = sinon.stub();
 
         // when
         const screen = await render(
-          <template>
-            <ModulixFlashcards
-              @flashcards={{flashcards}}
-              @onAnswer={{onAnswerStub}}
-              @onSelfAssessment={{onSelfAssessmentStub}}
-            />
-          </template>,
+          <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
@@ -307,17 +292,10 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       const { flashcards } = _getFlashcards();
 
       const onAnswerStub = sinon.stub();
-      const onSelfAssessment = sinon.stub();
 
       // when
       const screen = await render(
-        <template>
-          <ModulixFlashcards
-            @flashcards={{flashcards}}
-            @onAnswer={{onAnswerStub}}
-            @onSelfAssessment={{onSelfAssessment}}
-          />
-        </template>,
+        <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
       );
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
@@ -338,17 +316,10 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
       const { flashcards } = _getFlashcards();
 
       const onAnswerStub = sinon.stub();
-      const onSelfAssessmentStub = sinon.stub();
 
       // when
       const screen = await render(
-        <template>
-          <ModulixFlashcards
-            @flashcards={{flashcards}}
-            @onAnswer={{onAnswerStub}}
-            @onSelfAssessment={{onSelfAssessmentStub}}
-          />
-        </template>,
+        <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
       );
       await clickByName(t('pages.modulix.buttons.flashcards.start'));
       await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
@@ -373,17 +344,10 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
         const { flashcards, firstCard } = _getFlashcards();
 
         const onAnswerStub = sinon.stub();
-        const onSelfAssessmentStub = sinon.stub();
 
         // when
         const screen = await render(
-          <template>
-            <ModulixFlashcards
-              @flashcards={{flashcards}}
-              @onAnswer={{onAnswerStub}}
-              @onSelfAssessment={{onSelfAssessmentStub}}
-            />
-          </template>,
+          <template><ModulixFlashcards @flashcards={{flashcards}} @onAnswer={{onAnswerStub}} /></template>,
         );
         await clickByName(t('pages.modulix.buttons.flashcards.start'));
         await clickByName(t('pages.modulix.buttons.flashcards.seeAnswer'));
