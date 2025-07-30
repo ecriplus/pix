@@ -24,7 +24,7 @@
     background: linear-gradient(0deg, rgb(var(--pix-primary-100-inline), 0.50) 0%, rgb(var(--pix-primary-100-inline), 0.50) 100%);
   }
 
-  &[disabled] {
+  &[aria-disabled] {
     --qab-proposal-border-color: var(--pix-primary-100);
 
     background: var(--pix-neutral-20);

@@ -100,11 +100,11 @@ module('Integration | Component | Module | QAB', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).hasClass('qab-proposal-button--selected');
-        assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).isDisabled();
+        assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).hasAttribute('aria-disabled');
         assert
           .dom(screen.getByRole('button', { name: 'Option B: Faux' }))
           .doesNotHaveClass('qab-proposal-button--selected');
-        assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).isDisabled();
+        assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasAttribute('aria-disabled');
         assert.dom(screen.getByRole('status')).hasText('Bonne réponse !');
       });
     });
@@ -122,9 +122,9 @@ module('Integration | Component | Module | QAB', function (hooks) {
         assert
           .dom(screen.getByRole('button', { name: 'Option A: Vrai' }))
           .doesNotHaveClass('qab-proposal-button--selected');
-        assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).isDisabled();
+        assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).hasAttribute('aria-disabled');
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasClass('qab-proposal-button--selected');
-        assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).isDisabled();
+        assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasAttribute('aria-disabled');
         assert.dom(screen.getByRole('status')).hasText('Mauvaise réponse.');
       });
     });
