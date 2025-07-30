@@ -558,10 +558,10 @@
                   "id": "b0f296c2-a295-4424-8eb1-76e3fbcc1ebb",
                   "type": "video",
                   "title": "Bravo, vous êtes sur internet",
-                  "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-vous-etes-sur-internet.mp4",
-                  "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-vous-etes-sur-internet.jpg",
-                  "subtitles": "",
-                  "transcription": "<p>Bravo, vous êtes sur internet.</p><p>Vous allez voir c'est facile.</p>"
+                  "url": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.mp4",
+                  "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.jpg",
+                  "subtitles": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-souris.vtt",
+                  "transcription": "<p>Bravo, vous avez lancé la vidéo. Vous pouvez continuer le module.</p><p>Vous allez voir, c'est facile.</p>"
                 },
                 {
                   "id": "06cd1e83-06ce-4ca2-a648-1184ca6700f3",
