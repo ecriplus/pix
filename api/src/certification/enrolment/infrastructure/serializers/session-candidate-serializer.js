@@ -6,7 +6,7 @@ const serialize = function (enrolledCandidates) {
     subscriptions: {
       include: true,
       ref: 'id',
-      attributes: ['complementaryCertificationId', 'type'],
+      attributes: ['complementaryCertificationKey', 'type'],
     },
   }).serialize(enrolledCandidates);
 };

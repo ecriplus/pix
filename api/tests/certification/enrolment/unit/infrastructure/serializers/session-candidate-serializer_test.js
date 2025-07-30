@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/session-candidate-serializer.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -33,7 +34,7 @@ describe('Certification | Enrolment | Unit | Serializer | session-candidate-seri
           }),
           domainBuilder.certification.enrolment.buildComplementarySubscription({
             certificationCandidateId: 123,
-            complementaryCertificationId: 456,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
           }),
         ],
         accessibilityAdjustmentNeeded: true,
@@ -56,7 +57,7 @@ describe('Certification | Enrolment | Unit | Serializer | session-candidate-seri
                 },
                 {
                   type: 'subscriptions',
-                  id: `${sessionCandidate.id}-456`,
+                  id: `${sessionCandidate.id}-${ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE}`,
                 },
               ],
             },
@@ -67,15 +68,15 @@ describe('Certification | Enrolment | Unit | Serializer | session-candidate-seri
             type: 'subscriptions',
             id: `${sessionCandidate.id}-CORE`,
             attributes: {
-              'complementary-certification-id': null,
+              'complementary-certification-key': null,
               type: SUBSCRIPTION_TYPES.CORE,
             },
           },
           {
             type: 'subscriptions',
-            id: `${sessionCandidate.id}-456`,
+            id: `${sessionCandidate.id}-${ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE}`,
             attributes: {
-              'complementary-certification-id': 456,
+              'complementary-certification-key': ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
               type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
             },
           },
