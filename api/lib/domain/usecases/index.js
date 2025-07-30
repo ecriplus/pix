@@ -6,11 +6,11 @@ import * as oidcProviderRepository from '../../../src/identity-access-management
 import * as userRepository from '../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import * as campaignRepository from '../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as studentRepository from '../../../src/prescription/learner-management/infrastructure/repositories/student-repository.js';
+import * as organizationLearnerRepository from '../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as obfuscationService from '../../../src/shared/domain/services/obfuscation-service.js';
 import * as userReconciliationService from '../../../src/shared/domain/services/user-reconciliation-service.js';
 import * as areaRepository from '../../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../src/shared/infrastructure/repositories/competence-repository.js';
-import * as organizationLearnerRepository from '../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import * as skillRepository from '../../../src/shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../../../src/shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../src/shared/infrastructure/repositories/tube-repository.js';

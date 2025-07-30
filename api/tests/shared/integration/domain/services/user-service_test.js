@@ -6,9 +6,9 @@ import * as authenticationMethodRepository from '../../../../../src/identity-acc
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userToCreateRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import { getLearnerInfo } from '../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationLearnerRepository from '../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerNotFound } from '../../../../../src/shared/domain/errors.js';
 import * as userService from '../../../../../src/shared/domain/services/user-service.js';
-import * as organizationLearnerRepository from '../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Domain | Services | user-service', function () {

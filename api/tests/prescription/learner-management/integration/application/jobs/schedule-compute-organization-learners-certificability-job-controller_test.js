@@ -1,7 +1,7 @@
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
 import { computeCertificabilityJobRepository } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/compute-certificability-job-repository.js';
+import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
-import * as organizationLearnerRepository from '../../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Jobs | scheduleComputeOrganizationLearnersCertificabilityJobController', function () {
