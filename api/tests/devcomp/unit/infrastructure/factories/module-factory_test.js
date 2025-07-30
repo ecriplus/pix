@@ -1,6 +1,7 @@
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { ComponentStepper } from '../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js';
+import { CustomElement } from '../../../../../src/devcomp/domain/models/element/CustomElement.js';
 import { Download } from '../../../../../src/devcomp/domain/models/element/Download.js';
 import { Embed } from '../../../../../src/devcomp/domain/models/element/Embed.js';
 import { Image } from '../../../../../src/devcomp/domain/models/element/Image.js';
@@ -230,6 +231,97 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
     });
 
     describe('With ComponentElement', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Custom Element', function () {
+        // given
+        const moduleData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'Débutant',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          grains: [
+            {
+              id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+              type: 'discovery',
+              title: 'title',
+              components: [
+                {
+                  type: 'element',
+                  element: {
+                    id: 'cfec5a0e-2ed5-462f-8974-e5ca25faae39',
+                    type: 'custom',
+                    tagName: 'message-conversation',
+                    props: {
+                      title: 'Confessions nocturnes',
+                      messages: [
+                        {
+                          userName: 'Mel',
+                          direction: 'outgoing',
+                          content: "Ouais c'est qui là ?",
+                        },
+                        {
+                          userName: 'Vita',
+                          direction: 'incoming',
+                          content: "Mel, c'est Vi ouvre moi.",
+                        },
+                        {
+                          userName: 'Mel',
+                          direction: 'outgoing',
+                          content: 'Ça va Vi ?',
+                        },
+                        {
+                          userName: 'Mel',
+                          direction: 'outgoing',
+                          content: "T'as l'air bizarre. Qu'est ce qu'il y a ?",
+                        },
+                        {
+                          userName: 'Vita',
+                          direction: 'incoming',
+                          content: 'Non, ça va pas non.',
+                        },
+                        {
+                          userName: 'Mel',
+                          direction: 'outgoing',
+                          content: "Ben dis-moi, qu'est qu'il y a ?",
+                        },
+                        {
+                          userName: 'Vita',
+                          direction: 'incoming',
+                          content: 'Mel, assieds-toi faut que je te parle...',
+                        },
+                        {
+                          userName: 'Vita',
+                          direction: 'incoming',
+                          content: "J'ai passé ma journée dans le noir.",
+                        },
+                        {
+                          userName: 'Vita',
+                          direction: 'incoming',
+                          content: 'Mel, je le sens, je le sais, je le suis, il se fout de moi...',
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.grains[0].components[0].element).to.be.an.instanceOf(CustomElement);
+      });
+
       it('should instantiate a Module with a ComponentElement which contains an Image Element', function () {
         // given
         const moduleData = {
