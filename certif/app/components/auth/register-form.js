@@ -56,7 +56,6 @@ export default class RegisterForm extends Component {
   @tracked isTermsOfServiceValidated = false;
   @tracked cguValidationMessage = null;
   @tracked errorMessage = null;
-  @tracked selectedLanguage = this.locale.currentLocale;
   @tracked validation = new SignupFormValidation();
 
   get cguUrl() {
@@ -82,7 +81,7 @@ export default class RegisterForm extends Component {
       lastName: this.lastName,
       firstName: this.firstName,
       email: this.email,
-      lang: this.selectedLanguage,
+      lang: this.locale.currentLocale,
       password: this.password,
       cgu: true,
     });

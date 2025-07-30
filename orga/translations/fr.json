@@ -353,6 +353,9 @@
       "in-progress-link": "(consulter l'état de l'import).",
       "success": "Les participants ont bien été importés le {date} par {firstname} {lastname}."
     },
+    "locale-switcher": {
+      "label": "Sélectionnez une langue"
+    },
     "organization-participants-header": {
       "default": {
         "title": "{count, plural, =0 {Participants} =1 {Participant ({count})} other {Participants ({count})}}"
@@ -959,7 +962,6 @@
       "organization-code": "UAI/RNE de l'établissement"
     },
     "login": {
-      "choose-language-aria-label": "Sélectionnez une langue",
       "title": "Connectez-vous"
     },
     "login-form": {

@@ -1,6 +1,6 @@
-// This file is the ORIGINAL file. Copies of it are used in all the fronts.
-// If you need a change, modify the original file and
-// propagate the changes in the copies in all the fronts.
+// This file is a COPY of an original file from mon-pix.
+// If you need a change, as much as possible modify the original file
+// and propagate the changes in the copies in all the fronts
 
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';

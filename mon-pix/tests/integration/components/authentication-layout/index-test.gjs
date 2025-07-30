@@ -21,6 +21,6 @@ module('Integration | Component | authentication-layout/index', function (hooks)
     //then
     assert.dom(screen.getByRole('contentinfo')).exists();
     assert.dom(screen.getByRole('banner')).exists();
-    assert.dom(screen.queryByRole('button', { name: t('pages.inscription.choose-language-aria-label') })).exists();
+    assert.dom(screen.queryByRole('button', { name: t('components.locale-switcher.label') })).exists();
   });
 });

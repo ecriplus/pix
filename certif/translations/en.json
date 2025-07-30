@@ -127,7 +127,6 @@
         "selected-subscriptions": "Selected certification"
       },
       "login": {
-        "choose-language-aria-label": "Select a language",
         "email": "Email address",
         "forgot-password": "Forgot your password?",
         "password": "Password"
@@ -195,6 +194,11 @@
     },
     "urls": {
       "fraud": "https://cloud.pix.fr/s/9A598pR5ksp6jss/download"
+    }
+  },
+  "components": {
+    "locale-switcher": {
+      "label": "Select a language"
     }
   },
   "navigation": {

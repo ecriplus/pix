@@ -1,6 +1,6 @@
-// This file is the ORIGINAL file. Copies of it are used in all the fronts.
-// If you need a change, modify the original file and
-// propagate the changes in the copies in all the fronts.
+// This file is a COPY of an original file from mon-pix.
+// If you need a change, as much as possible modify the original file
+// and propagate the changes in the copies in all the fronts
 
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
@@ -35,16 +35,16 @@ export default class LocaleSwitcher extends Component {
   <template>
     <PixSelect
       ...attributes
-      class="locale-switcher"
-      @id="locale-switcher"
-      @iconName="globe"
+      class='locale-switcher'
+      @id='locale-switcher'
+      @iconName='globe'
       @value={{this.selectedLocale}}
       @options={{this.locale.switcherDisplayedLanguages}}
       @onChange={{this.onChange}}
-      @hideDefaultOption="true"
-      @screenReaderOnly="true"
+      @hideDefaultOption='true'
+      @screenReaderOnly='true'
     >
-      <:label>{{t "components.locale-switcher.label"}}</:label>
+      <:label>{{t 'components.locale-switcher.label'}}</:label>
     </PixSelect>
   </template>
 }

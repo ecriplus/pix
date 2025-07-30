@@ -33,6 +33,7 @@
 @use 'components/layout/footer' as *;
 @use 'components/layout/sidebar' as *;
 @use 'components/layout/banners' as *;
+@use 'components/locale-switcher' as *;
 @use 'components/login-form' as *;
 @use 'components/login-or-register' as *;
 @use 'components/login-session-supervisor' as *;

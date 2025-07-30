@@ -80,7 +80,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   });
 
   module('When domain is international tld (.org)', function () {
-    test('does display the language switcher', async function (assert) {
+    test('does display the locale switcher', async function (assert) {
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
           return false;
@@ -101,7 +101,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   });
 
   module('When domain is french tld (.fr)', function () {
-    test('does not display the language switcher', async function (assert) {
+    test('does not display the locale switcher', async function (assert) {
       // given
       class CurrentDomainServiceStub extends Service {
         get isFranceDomain() {
