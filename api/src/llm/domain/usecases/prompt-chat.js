@@ -19,7 +19,9 @@ export async function promptChat({
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
   }
-  if (!attachmentName && !message) {
+  const hasAnAttachmentBeenProvided = !!attachmentName;
+  const hasAMessageBeenProvided = !!message;
+  if (!hasAnAttachmentBeenProvided && !hasAMessageBeenProvided) {
     throw new NoAttachmentNorMessageProvidedError();
   }
 
@@ -29,12 +31,12 @@ export async function promptChat({
   }
 
   const { configuration } = chat;
-  if (attachmentName && !configuration.hasAttachment) {
+  if (hasAnAttachmentBeenProvided && !configuration.hasAttachment) {
     throw new NoAttachmentNeededError();
   }
   let attachmentMessageType;
   let isAttachmentValid;
-  if (attachmentName) {
+  if (hasAnAttachmentBeenProvided) {
     isAttachmentValid = chat.addAttachmentContextMessages(attachmentName, message);
     attachmentMessageType = isAttachmentValid
       ? toEventStream.ATTACHMENT_MESSAGE_TYPES.IS_VALID
@@ -43,8 +45,11 @@ export async function promptChat({
     attachmentMessageType = toEventStream.ATTACHMENT_MESSAGE_TYPES.NONE;
   }
   let readableStream = null;
-  const shouldBeForwardedToLLM = !attachmentName || (attachmentName && chat.hasAttachmentContextBeenAdded);
-  if (message) {
+  // As long as the attachment context has been added to the chat, if we receive other attachments valid or invalid later on we must
+  // forward the message to the LLM anyway
+  const shouldSendMessageToLLM =
+    !hasAnAttachmentBeenProvided || (hasAnAttachmentBeenProvided && chat.hasAttachmentContextBeenAdded);
+  if (hasAMessageBeenProvided) {
     if (message.length > configuration.inputMaxChars) {
       throw new TooLargeMessageInputError();
     }
@@ -53,7 +58,7 @@ export async function promptChat({
       throw new MaxPromptsReachedError();
     }
 
-    if (shouldBeForwardedToLLM) {
+    if (shouldSendMessageToLLM) {
       readableStream = await promptRepository.prompt({
         message,
         chat,
@@ -63,7 +68,7 @@ export async function promptChat({
 
   return toEventStream.fromLLMResponse({
     llmResponse: readableStream,
-    onStreamDone: finalize(chat, message, shouldBeForwardedToLLM, chatRepository),
+    onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository),
     attachmentMessageType,
   });
 }
@@ -73,14 +78,22 @@ export async function promptChat({
  * @name finalize
  *
  * @param {Chat} chat
- * @param {string} prompt
- * @param {boolean} shouldBeForwardedToLLM
+ * @param {string} message
+ * @param {boolean} hasJustBeenSentToLLM
  * @param {Object} chatRepository
  * @returns {(streamCapture: StreamCapture) => Promise<void>}
  */
-function finalize(chat, prompt, shouldBeForwardedToLLM, chatRepository) {
+function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
   return async (streamCapture) => {
-    chat.addUserMessage(prompt, shouldBeForwardedToLLM, streamCapture.haveVictoryConditionsBeenFulfilled);
+    const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM;
+    const shouldBeForwardedToLLM = hasJustBeenSentToLLM && !streamCapture.wasModerated;
+    chat.addUserMessage(
+      message,
+      shouldBeCountedAsAPrompt,
+      shouldBeForwardedToLLM,
+      streamCapture.haveVictoryConditionsBeenFulfilled,
+      streamCapture.wasModerated,
+    );
     chat.addLLMMessage(streamCapture.LLMMessageParts.join(''));
     chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
     await chatRepository.save(chat);

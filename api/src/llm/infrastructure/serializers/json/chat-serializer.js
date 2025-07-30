@@ -18,6 +18,7 @@ export function serialize(chat) {
         attachmentName: current.attachmentName,
         isFromUser: true,
         haveVictoryConditionsBeenFulfilled: next.haveVictoryConditionsBeenFulfilled,
+        wasModerated: next.wasModerated,
       });
 
       messagesForPreview = messagesForPreview.toSpliced(i, 2, mergedMessage);
@@ -34,12 +35,15 @@ export function serialize(chat) {
     context: chat.configuration.context,
     totalInputTokens: chat.totalInputTokens,
     totalOutputTokens: chat.totalOutputTokens,
-    messages: messagesForPreview.map(({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled }) => ({
-      content,
-      attachmentName,
-      isFromUser,
-      haveVictoryConditionsBeenFulfilled,
-      isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
-    })),
+    messages: messagesForPreview.map(
+      ({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled, wasModerated }) => ({
+        content,
+        attachmentName,
+        isFromUser,
+        haveVictoryConditionsBeenFulfilled,
+        wasModerated,
+        isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
+      }),
+    ),
   };
 }

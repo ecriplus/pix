@@ -313,6 +313,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isFromUser: true,
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
+            wasModerated: undefined,
           },
           {
             content: 'coucou LLM1',
@@ -320,6 +321,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isFromUser: false,
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
+            wasModerated: undefined,
           },
           {
             content: 'un message',
@@ -327,6 +329,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isFromUser: true,
             isAttachmentValid: true,
             haveVictoryConditionsBeenFulfilled: true,
+            wasModerated: undefined,
           },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -334,6 +337,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isFromUser: false,
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
+            wasModerated: undefined,
           },
         ],
       });

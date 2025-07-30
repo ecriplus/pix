@@ -15,6 +15,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
         haveVictoryConditionsBeenFulfilled: false,
         inputTokens: 0,
         outputTokens: 0,
+        wasModerated: false,
       };
     });
 
@@ -37,7 +38,26 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       // then
       expect(result).to.equal('data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\n');
     });
-    it('should return a Transform that is capable of convert object "isValid" into event stream event', async function () {
+
+    it('should replace "\n" with "\ndata: " to comply with event stream data', async function () {
+      // given
+      const input = [{ message: '\n des retours à \n la ligne \n\n dans tous les sens\n' }];
+      const readable = Readable.from(input);
+      const transform = getTransform(streamCapture);
+      let result = '';
+
+      // when
+      readable.pipe(transform);
+      transform.on('data', (str) => (result = result + str));
+      await finished(transform);
+
+      // then
+      expect(result).to.equal(
+        'data: \ndata:  des retours à \ndata:  la ligne \ndata: \ndata:  dans tous les sens\ndata: \n\n',
+      );
+    });
+
+    it('should return a Transform that is capable of convert information "isValid" into event stream event', async function () {
       // given
       const input = [
         { message: 'Coucou les amis comment ça va ?' },
@@ -69,9 +89,22 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
       );
     });
 
-    it('should replace "\n" with "\ndata: " to comply with event stream data', async function () {
+    it('should return a Transform that is capable of convert information "wasModerated" into event stream event', async function () {
       // given
-      const input = [{ message: '\n des retours à \n la ligne \n\n dans tous les sens\n' }];
+      const input = [
+        { message: 'Coucou les amis comment ça va ?' },
+        { pasMessage: 'Ca va super' },
+        { message: 'Et toi ?' },
+        {
+          usage: { superKey: 'wowouuo' },
+          wasModerated: true,
+        },
+        {
+          usage: { superKey: 'wowouuo' },
+          wasModerated: false,
+          message: 'done',
+        },
+      ];
       const readable = Readable.from(input);
       const transform = getTransform(streamCapture);
       let result = '';
@@ -83,7 +116,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
 
       // then
       expect(result).to.equal(
-        'data: \ndata:  des retours à \ndata:  la ligne \ndata: \ndata:  dans tous les sens\ndata: \n\n',
+        'data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\nevent: user-message-moderated\ndata: \n\ndata: done\n\n',
       );
     });
 
@@ -109,6 +142,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
           haveVictoryConditionsBeenFulfilled: false,
           inputTokens: 0,
           outputTokens: 0,
+          wasModerated: false,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
@@ -138,6 +172,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
           haveVictoryConditionsBeenFulfilled: true,
           inputTokens: 0,
           outputTokens: 0,
+          wasModerated: false,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
@@ -166,6 +201,37 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
           haveVictoryConditionsBeenFulfilled: false,
           inputTokens: 2_000,
           outputTokens: 5_000,
+          wasModerated: false,
+        });
+        expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
+      });
+
+      it('should capture the wasModerated flag if present', async function () {
+        // given
+        const input = [
+          { message: 'Coucou les amis \ncomment ça va ?' },
+          { pasMessage: 'Ca va super' },
+          { message: 'Et toi ?' },
+          {
+            usage: { superKey: 'wowouuo' },
+            wasModerated: true,
+          },
+        ];
+        const readable = Readable.from(input);
+        const transform = getTransform(streamCapture);
+
+        // when
+        readable.pipe(transform);
+        // eslint-disable-next-line no-empty-function
+        transform.on('data', () => {});
+        await finished(transform);
+
+        // then
+        expect(_.omit(streamCapture, 'LLMMessageParts')).to.deep.equal({
+          haveVictoryConditionsBeenFulfilled: false,
+          inputTokens: 0,
+          outputTokens: 0,
+          wasModerated: true,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
