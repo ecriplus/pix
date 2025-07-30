@@ -1,6 +1,8 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import QabCard from 'mon-pix/components/module/element/qab/qab-card';
 import QabScoreCard from 'mon-pix/components/module/element/qab/qab-score-card';
@@ -150,7 +152,7 @@ export default class ModuleQab extends ModuleElement {
             {{/each}}
           {{/if}}
           {{#if this.shouldDisplayScore}}
-            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}}/>
+            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} />
           {{/if}}
         </div>
         <div class="element-qab__proposals {{unless this.shouldDisplayCards 'element-qab__proposals--empty'}}">
@@ -177,6 +179,18 @@ export default class ModuleQab extends ModuleElement {
       <div class="element-qab__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.feedback}}
       </div>
+    {{/if}}
+    {{#if this.shouldDisplayScore}}
+      <PixButton
+        class="element-qab__retry-button"
+        @variant="tertiary"
+        @size="small"
+        @type="button"
+        @triggerAction={{this.onRetry}}
+        @iconAfter="refresh"
+      >
+        {{t "pages.modulix.qab.retry"}}
+      </PixButton>
     {{/if}}
   </template>
 }

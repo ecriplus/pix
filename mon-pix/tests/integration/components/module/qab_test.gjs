@@ -154,6 +154,26 @@ module('Integration | Component | Module | QAB', function (hooks) {
         assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
       });
 
+      module('when there is no feedback', function () {
+        test('should also display the retry button', async function (assert) {
+          // given
+          const qabElement = { ..._getQabElement(), feedback: undefined };
+          const onAnswerStub = sinon.stub();
+
+          // when
+          const screen = await render(
+            <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+          );
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
+        });
+      });
+
       module('when user clicks the retry button', function () {
         test('should reset the component, display the first card and send an event', async function (assert) {
           // given

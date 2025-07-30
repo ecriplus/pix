@@ -46,6 +46,10 @@
     border-radius: 16px;
   }
 
+  &__retry-button {
+    margin-bottom: var(--pix-spacing-2x);
+  }
+
   &__proposals {
     display: flex;
     flex-wrap: wrap;
