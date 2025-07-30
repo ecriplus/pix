@@ -22,8 +22,9 @@
     background: var(--pix-primary-10);
   }
 
-  &[disabled] {
+  &[aria-disabled] {
     cursor: not-allowed;
+    pointer-events: none;
 
     &:hover {
       background: var(--pix-neutral-0);
@@ -34,7 +35,7 @@
     font-weight: var(--pix-font-bold);
   }
 
-  &[disabled]:not(.proposal-button--selected) {
+  &[aria-disabled]:not(.proposal-button--selected) {
     --state-border-color: var(--pix-neutral-100);
 
     background: var(--pix-primary-100);
@@ -57,7 +58,7 @@
     }
   }
 
-  &[disabled]:not(.proposal-button--selected) {
+  &[aria-disabled]:not(.proposal-button--selected) {
     background: var(--pix-neutral-20);
     border-color: transparent;
   }

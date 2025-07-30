@@ -45,9 +45,9 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
       // then
       const button2 = screen.getByRole('button', { name: proposals[1].content });
       const button3 = screen.getByRole('button', { name: proposals[2].content });
-      assert.dom(button1).isDisabled();
-      assert.dom(button2).isDisabled();
-      assert.dom(button3).isDisabled();
+      assert.dom(button1).hasAttribute('aria-disabled');
+      assert.dom(button2).hasAttribute('aria-disabled');
+      assert.dom(button3).hasAttribute('aria-disabled');
       assert.ok(screen.getByText("C'est l'approche de la plupart des gens."));
       sinon.assert.calledWithExactly(passageEventRecordStub, {
         type: 'QCU_DECLARATIVE_ANSWERED',

@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -31,7 +32,29 @@ module('Integration | Component | Module | QabProposalButton', function (hooks) 
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).isDisabled();
+      assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).hasAttribute('aria-disabled');
+    });
+
+    test('it should not send a click event when clicking on the proposal button', async function (assert) {
+      const text = 'Faux';
+      const option = 'B';
+
+      const onSubmit = sinon.stub();
+
+      // when
+      await render(
+        <template>
+          <form onSubmit={{onSubmit}}><QabProposalButton
+              @text={{text}}
+              @option={{option}}
+              @isDisabled={{true}}
+            /></form>
+        </template>,
+      );
+
+      // then
+      sinon.assert.notCalled(onSubmit);
+      assert.ok(true);
     });
   });
 

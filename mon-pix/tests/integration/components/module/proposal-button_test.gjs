@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import ProposalButton from 'mon-pix/components/module/component/proposal-button';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -38,7 +39,30 @@ module('Integration | Component | Module | ProposalButton', function (hooks) {
       const screen = await render(<template><ProposalButton @proposal={{proposal}} @isDisabled={{true}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('button', { name: proposal.content })).isDisabled();
+      assert.dom(screen.getByRole('button', { name: proposal.content })).hasAttribute('aria-disabled');
+    });
+
+    test('it should not send a click event when clicking on the proposal button', async function (assert) {
+      const proposal = {
+        id: '1',
+        content: 'Avant de mettre le dentifrice',
+        feedback: {
+          diagnosis: "<p>C'est l'approche de la plupart des gens.</p>",
+        },
+      };
+
+      const onSubmit = sinon.stub();
+
+      // when
+      await render(
+        <template>
+          <form onSubmit={{onSubmit}}><ProposalButton @proposal={{proposal}} @isDisabled={{true}} /></form>
+        </template>,
+      );
+
+      // then
+      sinon.assert.notCalled(onSubmit);
+      assert.ok(true);
     });
   });
 

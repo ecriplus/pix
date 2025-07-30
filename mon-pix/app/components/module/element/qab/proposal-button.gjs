@@ -1,3 +1,5 @@
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
 import Component from '@glimmer/component';
 export default class QabProposalButton extends Component {
   get ariaLabel() {
@@ -9,6 +11,13 @@ export default class QabProposalButton extends Component {
     return `/images/icons/${icon}`;
   }
 
+  @action
+  onButtonClick(event) {
+    if (this.args.isDisabled) {
+      event.preventDefault();
+    }
+  }
+
   <template>
     <button
       class="qab-proposal-button
@@ -17,8 +26,9 @@ export default class QabProposalButton extends Component {
       type="submit"
       name={{@option}}
       value={{@option}}
-      disabled={{@isDisabled}}
+      aria-disabled={{@isDisabled}}
       aria-label={{this.ariaLabel}}
+      {{on "click" this.onButtonClick}}
     >
       <span class="qab-proposal-button__option">{{@option}}</span>
       <span class="qab-proposal-button__text">{{@text}}</span>
