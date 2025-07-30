@@ -108,7 +108,7 @@ export class ModuleFactory {
       case 'video':
         return ModuleFactory.#buildVideo(element);
       case 'qab':
-        return new QAB(element);
+        return ModuleFactory.#buildQAB(element);
       case 'qcm':
         return ModuleFactory.#buildQCM(element);
       case 'qcu':
@@ -197,6 +197,16 @@ export class ModuleFactory {
       subtitles: element.subtitles,
       transcription: element.transcription,
       poster: element.poster,
+    });
+  }
+
+  static #buildQAB(element) {
+    return new QAB({
+      id: element.id,
+      type: element.type,
+      instruction: element.instruction,
+      cards: element.cards,
+      feedback: element.feedback,
     });
   }
 
