@@ -126,8 +126,11 @@
                 },
                 {
                   "id": "7aac23e0-6642-4ca4-928f-50e074dabc77",
-                  "type": "text",
-                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test image scroll-02-02.jpg\" width=\"788\" height=\"340\"></iframe>"
+                  "type": "custom-draft",
+                  "title": "Élément interactif",
+                  "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-molette2image/test%20image%20scroll-02-02.jpg",
+                  "instruction": "",
+                  "height": 340
                 }
               ]
             },
@@ -326,17 +329,12 @@
         {
           "type": "element",
           "element": {
-            "id": "aa057bdd-af4f-4ed1-985e-c98158db7f9d",
-            "type": "text",
-            "content": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "be1b5866-6475-4bed-a775-e07be73f156e",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clic-1erdoublesclics/index.html",
+            "instruction": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>",
+            "height": 445
           }
         }
       ]
@@ -503,8 +501,11 @@
           "type": "element",
           "element": {
             "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
-            "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p><p><br></p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-souris2-clicdroitpuisgauche/index.html",
+            "instruction": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p>",
+            "height": 445
           }
         }
       ]
@@ -567,8 +568,11 @@
           "type": "element",
           "element": {
             "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
-            "type": "text",
-            "content": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-recap3boutonsbleu/index.html",
+            "instruction": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l'image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p>",
+            "height": 445
           }
         },
         {

@@ -219,17 +219,12 @@
         {
           "type": "element",
           "element": {
-            "id": "566fe41a-c2fc-4745-bb0c-ea9a0d25eba6",
-            "type": "text",
-            "content": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule :</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "3b6efd13-0d4d-461c-a61a-15a58b46383a",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-majuscules/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-majuscules/index.html",
+            "instruction": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule :</strong></p>",
+            "height": 445
           }
         }
       ]
@@ -469,17 +464,12 @@
         {
           "type": "element",
           "element": {
-            "id": "276fb20d-3957-4c39-a1ff-c8a2cc235a0f",
-            "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr :</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "d74e4428-accc-44c4-b206-105d4dee8e12",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-AltGr/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-AltGr/index.html",
+            "instruction": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr :</strong></p>",
+            "height": 445
           }
         }
       ]
@@ -612,17 +602,12 @@
         {
           "type": "element",
           "element": {
-            "id": "ca8c63e7-b192-4c9a-8f99-a4e54a2ea826",
-            "type": "text",
-            "content": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "0f0010c2-b794-49d3-9182-f813e416d317",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-jeuautomatisationtimerlong/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier2-jeuautomatisationtimerlong/index.html",
+            "instruction": "<p><strong>Dans l'espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>",
+            "height": 445
           }
         }
       ]

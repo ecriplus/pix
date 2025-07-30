@@ -79,17 +79,12 @@
         {
           "type": "element",
           "element": {
-            "id": "a89cbfef-8266-4bfd-a8d9-142999989c1b",
-            "type": "text",
-            "content": "<p>Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "88af557c-e8f8-4bce-bc72-4f3aa35262fa",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html\" height=\"600\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
+            "instruction": "<p>Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>",
+            "height": 550
           }
         },
         {
@@ -167,17 +162,12 @@
         {
           "type": "element",
           "element": {
-            "id": "0a3d0ea4-e017-40a1-ae8c-b95275325a02",
-            "type": "text",
-            "content": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html\" height=\"500\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
+            "instruction": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>",
+            "height": 500
           }
         },
         {
@@ -257,15 +247,18 @@
           "element": {
             "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
             "type": "text",
-            "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p><p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>"
+            "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html\" height=\"400\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
+            "instruction": "<p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>",
+            "height": 400
           }
         },
         {
@@ -435,17 +428,12 @@
         {
           "type": "element",
           "element": {
-            "id": "23a7796e-475a-467c-b2b1-f45e3a09c2ce",
-            "type": "text",
-            "content": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.<br></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html\" height=\"500\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
+            "instruction": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.</p>",
+            "height": 500
           }
         }
       ]

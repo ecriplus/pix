@@ -112,12 +112,11 @@
           "type": "element",
           "element": {
             "id": "46dd0846-573d-408f-abe3-76cd0c4e67c8",
-            "type": "embed",
-            "isCompletionRequired": false,
+            "type": "custom-draft",
             "title": "simulateur 1FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_1FA_v1.html",
-            "instruction": "<p></p>",
-            "height": 600
+            "instruction": "",
+            "height": 550
           }
         }
       ]
@@ -219,12 +218,11 @@
           "type": "element",
           "element": {
             "id": "0cf6b85d-9b0a-4b41-a317-0be1b36a81fb",
-            "type": "embed",
-            "isCompletionRequired": false,
+            "type": "custom-draft",
             "title": "simulateur 2FA",
             "url": "https://1024pix.github.io/atelier-contenus/RPE/simulateur_2FA_v1.html",
-            "instruction": "<p></p>",
-            "height": 320
+            "instruction": "",
+            "height": 550
           }
         }
       ]

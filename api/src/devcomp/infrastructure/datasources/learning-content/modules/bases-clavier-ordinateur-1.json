@@ -128,12 +128,15 @@
                 {
                   "id": "24829c18-2220-4cb8-9749-296d8c314353",
                   "type": "text",
-                  "content": "<p>Taper sur une touche, c’est <strong>appuyer une fois</strong> dessus et <strong>relâcher immédiatement</strong>.</p><p><span aria-hidden=\"true\">👇</span> Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>"
+                  "content": "<p>Taper sur une touche, c’est <strong>appuyer une fois</strong> dessus et <strong>relâcher immédiatement</strong>.</p>"
                 },
                 {
                   "id": "274d2a22-5c45-40a3-87e2-13f650f49560",
-                  "type": "text",
-                  "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-1-zones/index.html\" height=\"445\"></iframe>"
+                  "type": "custom-draft",
+                  "title": "Élément interactif",
+                  "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-1-zones/index.html",
+                  "instruction": "<p><span aria-hidden=\"true\">👇</span> Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>",
+                  "height": 445
                 }
               ]
             }
@@ -204,17 +207,12 @@
         {
           "type": "element",
           "element": {
-            "id": "cfff35e1-f84d-48b1-95ae-4cc7f2ff79e0",
-            "type": "text",
-            "content": "<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée, puis tapez les mots demandés.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "62b13b03-4b39-4893-a3ac-5b55c5a4b0a2",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-2-saisie-1er-mots/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-2-saisie-1er-mots/index.html",
+            "instruction": "<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée, puis tapez les mots demandés.</strong></p>",
+            "height": 445
           }
         }
       ]
@@ -463,17 +461,12 @@
         {
           "type": "element",
           "element": {
-            "id": "5cea384d-f3bd-450c-b250-f6fb9a34cafa",
-            "type": "text",
-            "content": "<p><strong>Dans la zone ci-dessous, vous allez corriger une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "247c064e-8d6f-4b8c-9298-0a12f0643e27",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-3-listedecourse/index.html\" height=\"445\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-3-listedecourse/index.html",
+            "instruction": "<p><strong>Dans la zone ci-dessous, vous allez corriger une liste de courses en vous aidant des touches espace, entrée, effacer et des flèches.</strong></p>",
+            "height": 445
           }
         },
         {
@@ -712,17 +705,12 @@
         {
           "type": "element",
           "element": {
-            "id": "2e384ac8-402c-4745-b187-3cb7fc3eb916",
-            "type": "text",
-            "content": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p><p>«Quelle bonne idée d'avoir mis de la purée de cornichons dans le bac à glaçons.»<br></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "ddec6ee3-178f-4ab5-862a-fc776e9ff6f4",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-bossfinal2/index.html\" height=\"394\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/Modulix-1emarche-clavier1-bossfinal2/index.html",
+            "instruction": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire :&nbsp;</strong> </p><p>«Quelle bonne idée d'avoir mis de la purée de cornichons dans le bac à glaçons.»<br></p>",
+            "height": 394
           }
         },
         {

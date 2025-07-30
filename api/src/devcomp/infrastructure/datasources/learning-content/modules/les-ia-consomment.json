@@ -95,15 +95,18 @@
           "element": {
             "id": "bbc2cbde-08d2-4869-a6d3-61ac27865f5a",
             "type": "text",
-            "content": "<p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ?</p><p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>"
+            "content": "<p>Que se passe-t-il quand on fait une demande à un logiciel d’IA générative ?</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "9cb3a20f-cedf-45c9-8910-1e8086fdd728",
-            "type": "text",
-            "content": "<iframe title=\"Trajet de la requête\" src=\"https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html\" height=\"400\"></iframe>"
+            "type": "custom-draft",
+            "title": "Trajet de la requête",
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/protoAffichageProcessus02.html",
+            "instruction": "<p>Cliquez sur \"Commencer\" pour voir le trajet d'une demande à un logiciel d'IA générative</p>",
+            "height": 400
           }
         },
         {
@@ -210,8 +213,11 @@
           "type": "element",
           "element": {
             "id": "6f6f9dd0-6252-44ee-b4b3-3ff40e8d1151",
-            "type": "text",
-            "content": "<iframe title=\"Traitement de la requête\" src=\"https://1024pix.github.io/atelier-contenus/FRI/affichageProcessusTraitementRequete.html\" height=\"500\"></iframe>"
+            "type": "custom-draft",
+            "title": "Traitement de la requête",
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/affichageProcessusTraitementRequete.html",
+            "instruction": "",
+            "height": 500
           }
         }
       ]
@@ -276,15 +282,18 @@
           "element": {
             "id": "8286afa8-20b5-4e86-99bc-7daf29f91363",
             "type": "text",
-            "content": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p><p> Testez la <strong>capacité de calcul</strong> et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>"
+            "content": "<p>Imaginons que <strong>plusieurs personnes demandent la même chose en même temps</strong> à un logiciel d’IA générative. </p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "a44b87c8-ecf4-45dd-9cf7-1dc90492ef91",
-            "type": "text",
-            "content": "<iframe title=\"Requêtes multiples\" src=\"https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html\" height=\"500\"></iframe>"
+            "type": "custom-draft",
+            "title": "Requêtes multiples",
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
+            "instruction": "<p> Testez la <strong>capacité de calcul</strong> et la <strong>consommation électrique</strong> d’un supercalculateur en choisissant la demande et le nombre de requêtes. Puis répondez aux questions suivantes</p>",
+            "height": 500
           }
         },
         {
@@ -764,8 +773,11 @@
           "type": "element",
           "element": {
             "id": "98bf1662-2985-452d-ba51-1d625f43bebb",
-            "type": "text",
-            "content": "<iframe title=\"Transfert impact\" src=\"https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html\" height=\"800\"></iframe>"
+            "type": "custom-draft",
+            "title": "Transfert impact",
+            "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html",
+            "instruction": "",
+            "height": 550
           }
         }
       ]

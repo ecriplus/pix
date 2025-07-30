@@ -94,15 +94,18 @@
           "element": {
             "id": "3147aedb-8fc2-4510-aad8-fa7f35e77dd7",
             "type": "text",
-            "content": "<p>Découvrez ci-dessous plusieurs exemples de réponses données par des logiciels d'IA générative. Ces exemples sont inspirés de réponses réelles.<br>Pour chacun des exemples, indiquez votre niveau de confiance en la réponse donnée par un logiciel d'IA générative.</p>"
+            "content": "<p>Découvrez ci-dessous plusieurs exemples de réponses données par des logiciels d'IA générative. Ces exemples sont inspirés de réponses réelles.</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "44ab1d9c-5cad-4bec-81ea-416dfd913635",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-hallu-carousel.html \" height=\"600\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-hallu-carousel.html",
+            "instruction": "<p>Pour chacun des exemples, indiquez votre niveau de confiance en la réponse donnée par un logiciel d'IA générative.</p>",
+            "height": 550
           }
         }
       ]

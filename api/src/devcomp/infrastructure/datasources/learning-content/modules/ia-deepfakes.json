@@ -100,17 +100,12 @@
         {
           "type": "element",
           "element": {
-            "id": "0d9bafd7-0845-484f-9fd4-c4123c30377b",
-            "type": "text",
-            "content": "<p><strong>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "9cad8650-9381-4d1e-92e5-81c68c7748a5",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-trivisage.html\" height=\"650\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-trivisage.html",
+            "instruction": "<p><strong>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?</strong></p>",
+            "height": 550
           }
         }
       ]
@@ -195,8 +190,11 @@
           "type": "element",
           "element": {
             "id": "c5a52a17-163e-4969-8704-fab8f5ee500a",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-videoCaroline.html\" height=\"550\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-videoCaroline.html",
+            "instruction": "",
+            "height": 550
           }
         }
       ]
@@ -263,17 +261,12 @@
         {
           "type": "element",
           "element": {
-            "id": "7004de22-c4af-4e4e-ac47-1e08122e6de2",
-            "type": "text",
-            "content": "<p><strong>Pour chaque exemple de deepfake, choisissez la bonne réponse.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "652c79cc-b2d4-4279-9d95-8495fa81d56c",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-objectif.html\" height=\"600\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-objectif.html",
+            "instruction": "<p><strong>Pour chaque exemple de deepfake, choisissez la bonne réponse.</strong></p>",
+            "height": 550
           }
         }
       ]
@@ -552,17 +545,12 @@
         {
           "type": "element",
           "element": {
-            "id": "634ce6a5-46c4-4027-ac3b-9cc3fd36a13f",
-            "type": "text",
-            "content": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
             "id": "79936024-306f-4a46-b39e-db21e9c49a31",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-articlequestions.html\" height=\"625\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-articlequestions.html",
+            "instruction": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong></p>",
+            "height": 550
           }
         }
       ]
