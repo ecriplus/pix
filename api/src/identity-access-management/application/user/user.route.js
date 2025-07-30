@@ -54,14 +54,35 @@ export const userRoutes = [
         payload: Joi.object({
           data: Joi.object({
             type: Joi.string(),
-            attributes: Joi.object().required(),
+            attributes: Joi.object({
+              'first-name': Joi.string().required(),
+              'last-name': Joi.string().required(),
+              lang: Joi.string().valid(...localeService.getSupportedLanguages()),
+              locale: Joi.string()
+                .valid(...localeService.getSupportedLocales())
+                .allow(null),
+              email: Joi.string().allow(null),
+              username: Joi.string().allow(null),
+              password: Joi.string().allow(null),
+              cgu: Joi.boolean().allow(null),
+              'anonymous-user-token': Joi.string().allow(null),
+              'is-anonymous': Joi.boolean().allow(null),
+              'must-validate-terms-of-service': Joi.boolean().allow(null),
+              'code-for-last-profile-to-share': Joi.string().allow(null),
+              'email-confirmed': Joi.boolean().allow(null),
+              'has-assessment-participations': Joi.boolean().allow(null),
+              'has-recommended-trainings': Joi.boolean().allow(null),
+              'has-seen-assessment-instructions': Joi.boolean().allow(null),
+              'has-seen-focused-challenge-tooltip': Joi.boolean().allow(null),
+              'has-seen-new-dashboard-info': Joi.boolean().allow(null),
+              'has-seen-other-challenges-tooltip': Joi.boolean().allow(null),
+              'should-see-data-protection-policy-information-banner': Joi.boolean().allow(null),
+              'pix-orga-terms-of-service-status': Joi.boolean().allow(null), // sent by Pix Orga when creating a user upon invitation
+            }).required(),
             relationships: Joi.object(),
           }).required(),
           meta: Joi.object(),
         }).required(),
-        options: {
-          allowUnknown: true,
-        },
       },
       handler: (request, h) => userController.createUser(request, h),
       notes: ['- **Cette route est publique**\n' + '- Crée un compte utilisateur'],

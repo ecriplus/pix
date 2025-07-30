@@ -37,6 +37,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
           attributes: {
             password: 'Password123',
             cgu: true,
+            'pix-orga-terms-of-service-status': true, // sent by Pix Orga when creating a user upon invitation
           },
           relationships: {},
         },
@@ -146,7 +147,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         cgu: true,
       };
 
-      it('returns Unprocessable Entity (HTTP_422) with offending properties', async function () {
+      it('returns 400', async function () {
         const invalidUserAttributes = { ...validUserAttributes, 'must-validate-terms-of-service': 'not_a_boolean' };
 
         const options = {
@@ -165,8 +166,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         const response = await server.inject(options);
 
         // then
-        expect(response.statusCode).to.equal(422);
-        expect(response.result.errors[0].title).to.equal('Invalid data attribute "mustValidateTermsOfService"');
+        expect(response.statusCode).to.equal(400);
       });
     });
   });
