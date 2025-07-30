@@ -26,9 +26,9 @@ class UserModuleStatus {
       return StatusesEnumValues.NOT_STARTED;
     }
 
-    const mostRecentPassage = this.#findMostRecentPassage(this.passages);
+    const hasTerminatedPassage = this.#hasTerminatedPassage(this.passages);
 
-    if (!mostRecentPassage.terminatedAt) {
+    if (!hasTerminatedPassage) {
       return StatusesEnumValues.IN_PROGRESS;
     } else {
       return StatusesEnumValues.COMPLETED;
@@ -43,11 +43,8 @@ class UserModuleStatus {
     }
   }
 
-  #findMostRecentPassage(passages) {
-    const sortedPassages = passages.sort((p1, p2) => {
-      return p2.updatedAt.getTime() - p1.updatedAt.getTime();
-    });
-    return sortedPassages[0];
+  #hasTerminatedPassage(passages) {
+    return passages.some((passage) => passage.terminatedAt);
   }
 }
 
