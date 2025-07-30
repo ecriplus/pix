@@ -36,6 +36,7 @@ import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
 import { CampaignCreator } from '../../../prescription/campaign/domain/models/CampaignCreator.js';
 import { CampaignForCreation } from '../../../prescription/campaign/domain/models/CampaignForCreation.js';
 import { Group } from '../../../prescription/campaign/domain/models/Group.js';
+import { CampaignParticipationResult } from '../../../prescription/campaign-participation/domain/models/CampaignParticipationResult.js';
 import { CampaignToStartParticipation } from '../../../prescription/campaign-participation/domain/models/CampaignToStartParticipation.js';
 import { OrganizationPlacesLotForManagement } from '../../../prescription/organization-place/domain/models/OrganizationPlacesLotForManagement.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../prescription/shared/domain/constants.js';
@@ -56,7 +57,6 @@ import { BadgeCriterionForCalculation } from './BadgeCriterionForCalculation.js'
 import { BadgeDetails } from './BadgeDetails.js';
 import { BadgeForCalculation } from './BadgeForCalculation.js';
 import { CampaignLearningContent } from './CampaignLearningContent.js';
-import { CampaignParticipationResult } from './CampaignParticipationResult.js';
 import { CertifiableBadgeAcquisition } from './CertifiableBadgeAcquisition.js';
 import { CertificationCandidate } from './CertificationCandidate.js';
 import { CertificationCenter } from './CertificationCenter.js';

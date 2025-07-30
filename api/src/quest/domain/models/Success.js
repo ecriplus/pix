@@ -19,7 +19,7 @@ export class Success {
    * @returns {number}
    */
   getMasteryPercentageForSkills(skillIds) {
-    // genre de doublon avec api/src/shared/domain/models/CampaignParticipationResult.js:64
+    // genre de doublon avec api/src/prescription/campaign-participation/domain/models/CampaignParticipationResult.js:64
     const totalSkillsCount = skillIds?.length;
     if (!totalSkillsCount) {
       return 0;

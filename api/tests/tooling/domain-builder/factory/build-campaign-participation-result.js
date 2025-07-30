@@ -1,4 +1,4 @@
-import { CampaignParticipationResult } from '../../../../src/shared/domain/models/CampaignParticipationResult.js';
+import { CampaignParticipationResult } from '../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationResult.js';
 
 const buildCampaignParticipationResult = function ({
   id = 1,

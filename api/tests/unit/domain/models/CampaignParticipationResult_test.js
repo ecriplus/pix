@@ -1,5 +1,5 @@
+import { CampaignParticipationResult } from '../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationResult.js';
 import { Area } from '../../../../src/shared/domain/models/Area.js';
-import { CampaignParticipationResult } from '../../../../src/shared/domain/models/CampaignParticipationResult.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect } from '../../../test-helper.js';
 
