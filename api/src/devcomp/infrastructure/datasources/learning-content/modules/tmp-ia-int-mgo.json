@@ -117,14 +117,14 @@
             "cards": [
               {
                 "id": "c47a6882-9ceb-436d-b157-88e22926620d",
-                "text": "Après le pré-entraînement, l'IA générative sait répondre à toutes les questions qui portent sur l'encyclopédie.",
+                "text": "Après le pré-entraînement, l'IA générative sait écrire du texte sur de nombreux sujets.",
                 "image": {
                   "url": "",
                   "altText": ""
                 },
                 "proposalA": "vrai",
                 "proposalB": "faux",
-                "solution": "B"
+                "solution": "A"
               },
               {
                 "id": "eee8c179-041b-4cc3-812a-f87b9d71d43f",
