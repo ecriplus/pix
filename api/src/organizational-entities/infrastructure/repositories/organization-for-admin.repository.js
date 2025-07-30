@@ -149,29 +149,30 @@ const get = async function ({ organizationId }) {
   const importFormats = await knex('organization-learner-import-formats');
 
   organization.features = availableFeatures.reduce((features, { key, enabled, params }) => {
-    if (key === ORGANIZATION_FEATURE.LEARNER_IMPORT.key) {
-      return {
-        ...features,
-        [key]: {
-          active: enabled,
-          params: enabled
-            ? { name: importFormats.find(({ id }) => params.organizationLearnerImportFormatId === id).name }
-            : null,
-        },
-      };
-    }
+    switch (key) {
+      case ORGANIZATION_FEATURE.LEARNER_IMPORT.key:
+        return {
+          ...features,
+          [key]: {
+            active: enabled,
+            params: enabled
+              ? { name: importFormats.find(({ id }) => params.organizationLearnerImportFormatId === id).name }
+              : null,
+          },
+        };
+      case ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key:
+      case ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key:
+        return {
+          ...features,
+          [key]: {
+            active: enabled,
+            params,
+          },
+        };
 
-    if (key === ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key) {
-      return {
-        ...features,
-        [key]: {
-          active: enabled,
-          params,
-        },
-      };
+      default:
+        return { ...features, [key]: { active: enabled, params: null } };
     }
-
-    return { ...features, [key]: { active: enabled, params: null } };
   }, {});
 
   organization.tags = tags.map((tag) => {

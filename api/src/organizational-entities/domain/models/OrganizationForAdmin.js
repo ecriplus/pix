@@ -9,7 +9,10 @@ const PAD_TARGET_LENGTH = 3;
 const PAD_STRING = '0';
 
 const schema = Joi.object({
-  features: Joi.object().pattern(Joi.string(), Joi.object({ active: Joi.boolean(), params: Joi.object().empty(null) })),
+  features: Joi.object().pattern(
+    Joi.string(),
+    Joi.object({ active: Joi.boolean(), params: Joi.alternatives().try(Joi.object(), Joi.array()).empty(null) }),
+  ),
 }).unknown();
 
 class OrganizationForAdmin {
