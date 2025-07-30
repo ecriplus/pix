@@ -130,7 +130,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
     });
 
     module('when user answers the last card', function () {
-      test('should display the score card and call "onAnswer" function passed as argument', async function (assert) {
+      test('should display the score card, a feedback and call "onAnswer" function passed as argument', async function (assert) {
         // given
         const qabElement = _getQabElement();
         const onAnswerStub = sinon.stub();
@@ -150,6 +150,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
         });
 
         assert.dom(screen.getByText('Votre score : 1/2')).exists();
+        assert.dom(screen.getByText('Continuez comme ça !')).exists();
         assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
       });
 
@@ -216,5 +217,8 @@ function _getQabElement(solution = 'A') {
         solution: 'B',
       },
     ],
+    feedback: {
+      diagnosis: '<p>Continuez comme ça !</p>',
+    },
   };
 }

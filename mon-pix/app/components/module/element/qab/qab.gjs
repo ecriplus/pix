@@ -38,6 +38,14 @@ export default class ModuleQab extends ModuleElement {
     return this.displayedCards[0];
   }
 
+  get feedback() {
+    return this.element.feedback.diagnosis;
+  }
+
+  get shouldDisplayFeedback() {
+    return this.shouldDisplayScore && this.element.feedback?.diagnosis.length > 0;
+  }
+
   @action
   isProposalSolution(option) {
     return this.currentCard.solution === option;
@@ -165,5 +173,10 @@ export default class ModuleQab extends ModuleElement {
         </div>
       </fieldset>
     </form>
+    {{#if this.shouldDisplayFeedback}}
+      <div class="element-qab__feedback" role="status" tabindex="-1">
+        {{htmlUnsafe this.feedback}}
+      </div>
+    {{/if}}
   </template>
 }
