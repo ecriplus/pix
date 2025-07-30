@@ -134,7 +134,7 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
     });
 
     describe('when passages passed are not empty', function () {
-      context('when the most recent passage does not have a terminatedAt attribute', function () {
+      context('when all passages do not have a "terminatedAt" attribute', function () {
         it('should return IN_PROGRESS', function () {
           // given
           const nowMinusOneHour = new Date(now.getTime() - 3600);
@@ -145,7 +145,7 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
               userId,
               createdAt: nowMinusOneHour,
               updatedAt: nowMinusOneHour,
-              terminatedAt: nowMinusOneHour,
+              terminatedAt: null,
             }),
             new Passage({
               id: 2,
@@ -165,7 +165,7 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
           expect(status).to.equal('IN_PROGRESS');
         });
       });
-      context('when the most recent passage has a terminatedAt attribute', function () {
+      context('when a passage has a "terminatedAt" attribute', function () {
         it('should set the status attribute to COMPLETED', function () {
           // given
           const nowMinusOneHour = new Date(now.getTime() - 3600);
@@ -184,7 +184,7 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
               userId,
               createdAt: now,
               updatedAt: now,
-              terminatedAt: now,
+              terminatedAt: null,
             }),
           ];
           const userModuleStatus = new UserModuleStatus({ userId, moduleId, passages });
