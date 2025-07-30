@@ -8,12 +8,17 @@ export function getTransform(streamCapture) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
-      const { message, isValid, usage } = chunk;
+      const { message, isValid, usage, wasModerated } = chunk;
       let data = '';
 
       if (isValid) {
-        data += getVictoryConditionsSuccessEvent();
         streamCapture.haveVictoryConditionsBeenFulfilled = true;
+        data += getVictoryConditionsSuccessEvent();
+      }
+
+      if (wasModerated) {
+        streamCapture.wasModerated = true;
+        data += getMessageModeratedEvent();
       }
 
       if (message) {
@@ -39,4 +44,8 @@ function getFormattedMessage(message) {
 
 function getVictoryConditionsSuccessEvent() {
   return 'event: victory-conditions-success\ndata: \n\n';
+}
+
+function getMessageModeratedEvent() {
+  return 'event: user-message-moderated\ndata: \n\n';
 }
