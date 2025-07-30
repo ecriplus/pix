@@ -85,7 +85,7 @@
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Voyons comment fonctionne cette première étape : le « pré-entraînement ». 🤔</p>"
+            "content": "<p>La première étape est le <strong>pré-entraînement</strong>. C'est lors de cette étape que l'IA apprend à produire du texte. 🤔</p>"
           }
         },
         {
@@ -98,6 +98,14 @@
             "alternativeText": "",
             "legend": "",
             "licence": ""
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "CD154C09-0017-40A5-8B98-6F556DE893CC",
+            "type": "text",
+            "content": "<p>À la fin de cette étape, l'IA sait prolonger un texte sur des sujets variés. En général, ce texte ressemble à un texte qu'un humain aurait pu écrire.</p>"
           }
         },
         {
