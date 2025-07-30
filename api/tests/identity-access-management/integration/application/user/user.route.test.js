@@ -23,6 +23,96 @@ describe('Integration | Identity Access Management | Application | Route | User'
   });
 
   describe('POST /api/users', function () {
+    context('invalid payload', function () {
+      context('when a required property is missing', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          const payload = {
+            data: {
+              type: 'users',
+              attributes: {
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: true,
+              },
+            },
+          };
+
+          const url = '/api/users';
+
+          // when
+          const response = await httpTestServer.request('POST', url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.first-name" is required');
+        });
+      });
+
+      context('when the locale is not supported', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          const locale1 = 'fr-fr';
+          const locale2 = 'tlh'; // tlh: Klingon locale
+          const payload = {
+            data: {
+              type: 'users',
+              attributes: {
+                'first-name': 'Joséphine',
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: true,
+              },
+            },
+          };
+
+          const url = '/api/users';
+
+          // when
+          payload.locale = locale1;
+          const response1 = await httpTestServer.request('POST', url, payload);
+
+          payload.locale = locale2;
+          const response2 = await httpTestServer.request('POST', url, payload);
+
+          // then
+          expect(response1.statusCode).to.equal(400);
+          expect(response1.result.errors[0].detail).to.equal('"locale" is not allowed');
+          expect(response2.statusCode).to.equal(400);
+          expect(response2.result.errors[0].detail).to.equal('"locale" is not allowed');
+        });
+      });
+
+      context('when a property has not the valid format', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          const payload = {
+            data: {
+              type: 'users',
+              attributes: {
+                'first-name': 'Joséphine',
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: 'not_a_boolean',
+              },
+            },
+          };
+
+          const url = '/api/users';
+
+          // when
+          const response = await httpTestServer.request('POST', url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.cgu" must be a boolean');
+        });
+      });
+    });
+
     context('when user create account before joining campaign', function () {
       it('should return HTTP 201', async function () {
         // given / when
@@ -50,19 +140,6 @@ describe('Integration | Identity Access Management | Application | Route | User'
 
         // then
         expect(response.statusCode).to.equal(201);
-      });
-
-      it('should return HTTP 400', async function () {
-        // given
-        const payload = {};
-
-        const url = '/api/users';
-
-        // when
-        const response = await httpTestServer.request('POST', url, payload);
-
-        // then
-        expect(response.statusCode).to.equal(400);
       });
     });
   });

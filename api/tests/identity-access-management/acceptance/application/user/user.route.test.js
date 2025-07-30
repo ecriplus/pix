@@ -137,38 +137,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.statusCode).to.equal(201);
       });
     });
-
-    context('user is invalid', function () {
-      const validUserAttributes = {
-        'first-name': 'John',
-        'last-name': 'DoDoe',
-        email: 'john.doe@example.net',
-        password: 'Ab124B2C3#!',
-        cgu: true,
-      };
-
-      it('returns 400', async function () {
-        const invalidUserAttributes = { ...validUserAttributes, 'must-validate-terms-of-service': 'not_a_boolean' };
-
-        const options = {
-          method: 'POST',
-          url: '/api/users',
-          payload: {
-            data: {
-              type: 'users',
-              attributes: invalidUserAttributes,
-              relationships: {},
-            },
-          },
-        };
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        expect(response.statusCode).to.equal(400);
-      });
-    });
   });
 
   describe('PATCH /api/users/{id}', function () {
