@@ -133,12 +133,6 @@ export default class ModulixFlashcards extends Component {
 
   @action
   async onSelfAssessment(userAssessment) {
-    const selfAssessmentData = {
-      userAssessment,
-      cardId: this.currentCard.id,
-    };
-    this.args.onSelfAssessment(selfAssessmentData);
-
     this.passageEvents.record({
       type: 'FLASHCARDS_CARD_AUTO_ASSESSED',
       data: {
