@@ -205,31 +205,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       // then
       expect(response.statusCode).to.equal(401);
     });
-
-    it('fails with 401 if anonymousUserToken is invalid', async function () {
-      // given
-      const invalidPayload = {
-        ...requestPayload,
-        data: {
-          ...requestPayload.data,
-          attributes: {
-            ...requestPayload.data.attributes,
-            'anonymous-user-token': 'invalid-token',
-          },
-        },
-      };
-
-      // when
-      const response = await server.inject({
-        method: 'PATCH',
-        url: `/api/users/${userId}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-        payload: invalidPayload,
-      });
-
-      // then
-      expect(response.statusCode).to.equal(401);
-    });
   });
 
   describe('GET /api/users/me', function () {

@@ -144,6 +144,109 @@ describe('Integration | Identity Access Management | Application | Route | User'
     });
   });
 
+  describe('PATCH /api/users', function () {
+    context('invalid payload', function () {
+      context('when a required property is missing', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser.anonymous().id;
+          await databaseBuilder.commit();
+
+          const headers = generateAuthenticatedUserRequestHeaders({ userId });
+
+          const payload = {
+            data: {
+              id: userId,
+              type: 'users',
+              attributes: {
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: true,
+              },
+            },
+          };
+
+          const url = `/api/users/${userId}`;
+
+          // when
+          const response = await httpTestServer.request('PATCH', url, payload, null, headers);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.first-name" is required');
+        });
+      });
+
+      context('when a property has not the valid format', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser.anonymous().id;
+          await databaseBuilder.commit();
+
+          const headers = generateAuthenticatedUserRequestHeaders({ userId });
+
+          const payload = {
+            data: {
+              id: userId,
+              type: 'users',
+              attributes: {
+                'first-name': 'Joséphine',
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: 'not_a_boolean',
+              },
+            },
+          };
+
+          const url = `/api/users/${userId}`;
+
+          // when
+          const response = await httpTestServer.request('PATCH', url, payload, null, headers);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.cgu" must be a boolean');
+        });
+      });
+    });
+
+    context('when anonymousUserToken is invalid', function () {
+      it('returns an HTTP status code 401', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser.anonymous().id;
+        await databaseBuilder.commit();
+
+        const headers = generateAuthenticatedUserRequestHeaders({ userId });
+
+        const payload = {
+          data: {
+            id: userId,
+            type: 'users',
+            attributes: {
+              'first-name': 'Joséphine',
+              'last-name': 'Baker',
+              email: 'test1@example.net',
+              password: 'someValidPassword-12345678',
+              cgu: true,
+              'anonymous-user-token': 'invalid-token',
+            },
+          },
+        };
+
+        const url = `/api/users/${userId}`;
+
+        // when
+        const response = await httpTestServer.request('PATCH', url, payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+        expect(response.result.errors[0].code).to.equal('INVALID_ANONYMOUS_TOKEN');
+      });
+    });
+  });
+
   describe('GET /api/user/validate-email', function () {
     context('when redirect_url is invalid', function () {
       it('should return HTTP 400 if not a URI', async function () {
