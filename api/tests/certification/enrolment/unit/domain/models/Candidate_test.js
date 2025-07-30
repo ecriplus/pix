@@ -1,8 +1,12 @@
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidatesError } from '../../../../../../src/shared/domain/errors.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
+import {
+  CertificationCandidate,
+  ComplementaryCertification,
+} from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
 const FIRST_NAME_ERROR_CODE = CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_FIRST_NAME_REQUIRED.code;
@@ -389,8 +393,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
     });
 
     context('compatibility core/complementary enable, should use new schema', function () {
-      const cleaCertificationId = 123;
-
       context('success cases', function () {
         it('should validate when there is only one core subscription', function () {
           // given
@@ -400,17 +402,16 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when, then
-          candidate.validate({ cleaCertificationId });
+          candidate.validate();
         });
 
-        it('should validate when there are one core and one clea', function () {
+        it('should validate when there is a double certification', function () {
           // given
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.buildDoubleCertificationSubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId,
               }),
               domainBuilder.buildCoreSubscription({
                 certificationCandidateId: null,
@@ -419,7 +420,22 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when, then
-          candidate.validate({ cleaCertificationId });
+          candidate.validate();
+        });
+        it('should validate when there is only one complementary subscription excluding CLEA', function () {
+          // given
+          const candidate = domainBuilder.certification.enrolment.buildCandidate({
+            ...candidateData,
+            subscriptions: [
+              domainBuilder.buildComplementarySubscription({
+                certificationCandidateId: null,
+                complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+              }),
+            ],
+          });
+
+          // when, then
+          candidate.validate();
         });
       });
 
@@ -435,7 +451,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
+          const error = await catchErr(candidate.validate, candidate)();
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -448,11 +464,9 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
             subscriptions: [
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 20,
               }),
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 40,
               }),
             ],
           });
@@ -461,24 +475,22 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
+          const error = await catchErr(candidate.validate, candidate)();
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
         });
 
-        it('should not validate when there are two complementary, one of which is clea', async function () {
+        it('should not validate when there are two complementary, one of which is CLEA', async function () {
           // given
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 20,
               }),
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.buildDoubleCertificationSubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId,
               }),
             ],
           });
@@ -487,7 +499,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
+          const error = await catchErr(candidate.validate, candidate)();
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
@@ -511,13 +523,13 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
+          const error = await catchErr(candidate.validate, candidate)();
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);
         });
 
-        it('should not validate when there are one core and one not clea', async function () {
+        it('should not validate when there are one core and one complementary not clea', async function () {
           // given
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
@@ -527,7 +539,6 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
               }),
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: null,
-                complementaryCertificationId: cleaCertificationId + 20,
               }),
             ],
           });
@@ -536,7 +547,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           });
 
           // when
-          const error = await catchErr(candidate.validate, candidate)({ cleaCertificationId });
+          const error = await catchErr(candidate.validate, candidate)();
 
           // then
           expect(error).to.deepEqualInstanceOmitting(certificationCandidatesError, ['message', 'stack', 'meta']);

@@ -183,6 +183,7 @@ import { buildSessionEnrolment } from './certification/enrolment/build-session.j
 import {
   buildComplementarySubscription,
   buildCoreSubscription,
+  buildDoubleCertificationSubscription,
   buildSubscription,
 } from './certification/enrolment/build-subscription.js';
 import { buildUserEnrolment } from './certification/enrolment/build-user.js';
@@ -255,6 +256,7 @@ const certification = {
     buildCandidate,
     buildCoreSubscription,
     buildComplementarySubscription,
+    buildDoubleCertificationSubscription,
     buildEditedCandidate,
     buildSubscription,
     buildUser: buildUserEnrolment,
@@ -427,6 +429,7 @@ export {
   buildCourse,
   buildCpfCertificationResult,
   buildDataProtectionOfficer,
+  buildDoubleCertificationSubscription,
   buildFeedback,
   buildFinalizedSession,
   buildFlashAlgorithmConfiguration,

@@ -1,18 +1,24 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
+import { _ } from '../../../../shared/infrastructure/utils/lodash-utils.js';
 import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+
+const COMPLEMENTARY_CERTIFICATIONS_EXCEPTED_DOUBLE_CERTIFICATION = _.omit(ComplementaryCertificationKeys, [
+  ComplementaryCertificationKeys.CLEA,
+]);
 
 const alternativeCoreOnly = Joi.array()
   .length(1)
   .items({
     certificationCandidateId: Joi.number().allow(null),
     type: SUBSCRIPTION_TYPES.CORE,
-    complementaryCertificationId: null,
+    complementaryCertificationKey: null,
   })
   .required();
-const alternativeClea = Joi.array()
+const alternativeDoubleCertification = Joi.array()
   .length(2)
   .items(
     Joi.object({
@@ -20,16 +26,32 @@ const alternativeClea = Joi.array()
       type: Joi.string()
         .required()
         .valid(...Object.values(SUBSCRIPTION_TYPES)),
-      complementaryCertificationId: Joi.when('type', {
+      complementaryCertificationKey: Joi.when('type', {
         is: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        then: Joi.ref('$cleaCertificationId'),
+        then: Joi.string().valid(ComplementaryCertificationKeys.CLEA),
         otherwise: null,
       }),
     }),
   )
   .unique('type')
   .required();
-const schemaForCompatibilitySubscriptions = Joi.alternatives().match('one').try(alternativeCoreOnly, alternativeClea);
+
+const alternativeComplementaryCertification = Joi.array()
+  .length(1)
+  .items(
+    Joi.object({
+      type: Joi.string().required().valid(SUBSCRIPTION_TYPES.COMPLEMENTARY),
+      complementaryCertificationKey: Joi.string().valid(
+        ...Object.values(COMPLEMENTARY_CERTIFICATIONS_EXCEPTED_DOUBLE_CERTIFICATION),
+      ),
+    }),
+  )
+  .unique('type')
+  .required();
+
+const schemaForCompatibilitySubscriptions = Joi.alternatives()
+  .match('one')
+  .try(alternativeCoreOnly, alternativeDoubleCertification, alternativeComplementaryCertification);
 
 const schema = Joi.object({
   firstName: Joi.string().trim().required().empty(['', null]).messages({
