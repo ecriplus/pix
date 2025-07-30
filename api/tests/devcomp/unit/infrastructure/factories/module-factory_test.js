@@ -1,6 +1,7 @@
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { ComponentStepper } from '../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js';
+import { CustomDraft } from '../../../../../src/devcomp/domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../../../../src/devcomp/domain/models/element/CustomElement.js';
 import { Download } from '../../../../../src/devcomp/domain/models/element/Download.js';
 import { Embed } from '../../../../../src/devcomp/domain/models/element/Embed.js';
@@ -320,6 +321,50 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
 
         // then
         expect(module.grains[0].components[0].element).to.be.an.instanceOf(CustomElement);
+      });
+
+      it('should instantiate a Module with a ComponentElement which contains a CustomDraft Element', function () {
+        // given
+        const moduleData = {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'Débutant',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          grains: [
+            {
+              id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+              type: 'discovery',
+              title: 'title',
+              components: [
+                {
+                  type: 'element',
+                  element: {
+                    id: 'f00133f5-0653-425b-a25f-3c9604820529',
+                    type: 'custom-draft',
+                    title: 'Retourner les cartes',
+                    url: 'https://1024pix.github.io/atelier-contenus/RPE/cartes2.html',
+                    instruction: '<p>Retournez les cartes.</p>',
+                    height: 400,
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.grains[0].components[0].element).to.be.an.instanceOf(CustomDraft);
       });
 
       it('should instantiate a Module with a ComponentElement which contains an Image Element', function () {
