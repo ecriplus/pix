@@ -63,14 +63,13 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
 
   test('it should display candidate information', async function (assert) {
     // given
-    const complementaryCertificationId = 2;
     const coreSubscription = store.createRecord('subscription', {
       type: SUBSCRIPTION_TYPES.CORE,
-      complementaryCertificationId: null,
+      complementaryCertificationKey: null,
     });
     const complementarySubscription = store.createRecord('subscription', {
       type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-      complementaryCertificationId,
+      complementaryCertificationKey: 'DROIT',
     });
     const candidate = _buildCertificationCandidate({
       accessibilityAdjustmentNeeded: true,
@@ -78,8 +77,9 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
     });
     const complementaryCertifications = [
       {
-        id: complementaryCertificationId,
+        id: 2,
         label: 'Pix+Droit',
+        key: 'DROIT',
       },
     ];
 
@@ -333,11 +333,11 @@ module('Integration | Component | Sessions | SessionDetails | EnrolledCandidates
       const cleaCertificationId = 2;
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
       const complementarySubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: cleaCertificationId,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
       const candidate = _buildCertificationCandidate({
         subscriptions: [coreSubscription, complementarySubscription],

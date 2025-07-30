@@ -21,7 +21,7 @@ module('Unit | Model | subscription', function (hooks) {
       ];
       const cleaSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 123,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
 
       // when
@@ -34,18 +34,16 @@ module('Unit | Model | subscription', function (hooks) {
     test('it should return false when subscription is complementary but not CLEA', function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const cleaId = 123;
-      const notCleaId = 124;
       const habilitations = [
         {
-          id: cleaId,
+          id: 123,
           label: 'Certif cléa',
           key: COMPLEMENTARY_KEYS.CLEA,
         },
       ];
       const otherSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: notCleaId,
+        complementaryCertificationKey: 'notClea',
       });
 
       // when
@@ -67,7 +65,7 @@ module('Unit | Model | subscription', function (hooks) {
       ];
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
 
       // when
@@ -84,7 +82,7 @@ module('Unit | Model | subscription', function (hooks) {
       const store = this.owner.lookup('service:store');
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
 
       // when
@@ -99,7 +97,7 @@ module('Unit | Model | subscription', function (hooks) {
       const store = this.owner.lookup('service:store');
       const otherSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 123,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
 
       // when

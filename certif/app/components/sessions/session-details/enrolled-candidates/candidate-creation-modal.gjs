@@ -159,12 +159,12 @@ export default class CandidateCreationModal extends Component {
       this.args.candidateData.subscriptions = [
         {
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId: complementaryCertification.id,
+          complementaryCertificationKey: complementaryCertification.key,
         },
       ];
       if (complementaryCertification?.key === COMPLEMENTARY_KEYS.CLEA) {
         this.args.candidateData.subscriptions.push({
-          complementaryCertificationId: null,
+          complementaryCertificationKey: null,
           type: SUBSCRIPTION_TYPES.CORE,
         });
       }

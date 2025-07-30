@@ -111,11 +111,23 @@ export async function insert(candidate) {
     .returning('id');
 
   for (const subscription of candidate.subscriptions) {
-    await knexTransaction('certification-subscriptions').insert({
-      certificationCandidateId: candidateId,
-      type: subscription.type,
-      complementaryCertificationId: subscription.complementaryCertificationId,
-    });
+    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
+      await knexTransaction('certification-subscriptions').insert({
+        certificationCandidateId: candidateId,
+        type: SUBSCRIPTION_TYPES.CORE,
+        complementaryCertificationId: null,
+      });
+    } else {
+      const complementaryCertification = await knexTransaction('complementary-certifications')
+        .select('id')
+        .where({ key: subscription.complementaryCertificationKey })
+        .first();
+      await knexTransaction('certification-subscriptions').insert({
+        certificationCandidateId: candidateId,
+        type: subscription.type,
+        complementaryCertificationId: complementaryCertification.id,
+      });
+    }
   }
 
   return candidateId;

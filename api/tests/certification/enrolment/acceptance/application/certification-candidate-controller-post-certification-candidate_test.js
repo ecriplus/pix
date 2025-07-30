@@ -103,11 +103,11 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId: cleaCertificationId,
+                  complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
-                  complementaryCertificationId: null,
+                  complementaryCertificationKey: null,
                 },
               ],
             },
@@ -218,11 +218,11 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
-                  complementaryCertificationId: null,
+                  complementaryCertificationKey: null,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId: cleaCertificationId,
+                  complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
                 },
               ],
             },

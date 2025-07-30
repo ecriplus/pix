@@ -2,6 +2,7 @@ import { certificationCandidateController } from '../../../../../src/certificati
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/certification-candidate-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
@@ -28,7 +29,12 @@ describe('Unit | Application | Sessions | Routes', function () {
         sex: 'F',
         'billing-mode': 'FREE',
         'prepayment-code': null,
-        subscriptions: [{ complementaryCertificationId: 5, type: SUBSCRIPTION_TYPES.COMPLEMENTARY }],
+        subscriptions: [
+          {
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+          },
+        ],
       };
     });
 

@@ -410,7 +410,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildDoubleCertificationSubscription({
+              domainBuilder.certification.enrolment.buildDoubleCertificationSubscription({
                 certificationCandidateId: null,
               }),
               domainBuilder.buildCoreSubscription({
@@ -489,7 +489,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
               domainBuilder.buildComplementarySubscription({
                 certificationCandidateId: null,
               }),
-              domainBuilder.buildDoubleCertificationSubscription({
+              domainBuilder.certification.enrolment.buildDoubleCertificationSubscription({
                 certificationCandidateId: null,
               }),
             ],

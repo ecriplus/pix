@@ -89,7 +89,8 @@ export default class CandidateDetailsModal extends Component {
         if (subscription.isCore) subscriptionLabels.unshift(this.intl.t(`${TRANSLATE_PREFIX}.list.subscriptions.core`));
         else {
           const candidateComplementaryCertification = complementaryCertificationList.find(
-            (complementaryCertification) => complementaryCertification.id === subscription.complementaryCertificationId,
+            (complementaryCertification) =>
+              complementaryCertification.key === subscription.complementaryCertificationKey,
           );
           subscriptionLabels.push(candidateComplementaryCertification?.label || '-');
         }
