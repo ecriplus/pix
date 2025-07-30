@@ -34,6 +34,9 @@ describe('Unit | Devcomp | Domain | Models | Element | QAB', function () {
             solution: 'A',
           },
         ],
+        feedback: {
+          diagnosis: '<p>Continuez comme ça !</p>',
+        },
       });
 
       // Then
@@ -65,6 +68,9 @@ describe('Unit | Devcomp | Domain | Models | Element | QAB', function () {
           solution: 'A',
         }),
       ]);
+      expect(qab.feedback).deep.equal({
+        diagnosis: '<p>Continuez comme ça !</p>',
+      });
     });
   });
 });

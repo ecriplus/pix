@@ -992,7 +992,25 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                     type: 'qab',
                     instruction:
                       '<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>',
-                    cards: [],
+                    cards: [
+                      {
+                        id: '4420c9f6-ae21-4401-a16c-41296d898a66',
+                        text: 'La Terre est plus proche du Soleil que Mars.',
+                        proposalA: 'Vrai',
+                        proposalB: 'Faux',
+                        solution: 'B',
+                      },
+                      {
+                        id: '52d99648-5904-4a66-9fb8-476ba4da9465',
+                        text: 'L’eau bout à 100°C au niveau de la mer.',
+                        proposalA: 'Vrai',
+                        proposalB: 'Faux',
+                        solution: 'A',
+                      },
+                    ],
+                    feedback: {
+                      diagnosis: '<p>Continuez comme ça !</p>',
+                    },
                   },
                 },
               ],
