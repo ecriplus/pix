@@ -21,6 +21,20 @@
   .not-responsive {
     fill: var(--pix-error-700);
   }
+
+  .table__column {
+    &--medium {
+      width: 30%;
+    }
+
+    &--wide {
+      width: 60%;
+    }
+
+    &--small {
+      width: 5%;
+    }
+  }
 }
 
 .preselect-target-profile {
@@ -63,7 +77,7 @@
     }
 
     &__content {
-      padding: 0;
+      padding: 0 1rem;
       cursor: auto;
 
       h2 {
@@ -76,6 +90,7 @@
 
       table {
         color: var(--pix-neutral-800);
+        border-collapse: collapse;
       }
 
       th {
@@ -85,7 +100,13 @@
 
       th,
       td {
+        padding-left: 1rem;
+        text-align: left;
         vertical-align: middle;
+      }
+
+      tr:not(:first-child) {
+        border-top: 1px solid var(--pix-neutral-20);
       }
 
       td.table__column--center,

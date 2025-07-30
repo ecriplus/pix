@@ -1376,7 +1376,6 @@
       "table": {
         "caption": "Selectie van onderwerpen",
         "column": {
-          "action": "Selectie",
           "mobile": "Geschikt voor smartphone",
           "name": "Naam onderwerp",
           "tablet": "Geschikt voor tablet",

@@ -1376,7 +1376,6 @@
       "table": {
         "caption": "Sélection des sujets",
         "column": {
-          "action": "Sélection",
           "mobile": "Compatible smartphone",
           "name": "Nom du sujet",
           "tablet": "Compatible tablette",

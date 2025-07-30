@@ -1376,7 +1376,6 @@
       "table": {
         "caption": "Topic selection",
         "column": {
-          "action": "Select",
           "mobile": "Mobile compliant",
           "name": "Topic name",
           "tablet": "Tablet compliant",

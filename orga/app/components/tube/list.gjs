@@ -145,11 +145,8 @@ export default class TubeList extends Component {
                 <caption>{{t "pages.preselect-target-profile.table.caption"}}</caption>
                 <thead>
                   <tr>
-                    <Header @size="medium" @align="center" scope="col">
+                    <Header @size="medium" scope="col">
                       {{t "pages.preselect-target-profile.table.column.theme-name"}}
-                    </Header>
-                    <Header @size="small" @align="center" scope="col">
-                      {{t "pages.preselect-target-profile.table.column.action"}}
                     </Header>
                     <Header @size="wide" scope="col">
                       {{t "pages.preselect-target-profile.table.column.name"}}
