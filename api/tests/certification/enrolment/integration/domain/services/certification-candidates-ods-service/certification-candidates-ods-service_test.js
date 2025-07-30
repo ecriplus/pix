@@ -378,7 +378,7 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
     secondCandidate.subscriptions.push(
       domainBuilder.buildComplementarySubscription({
         certificationCandidateId: null,
-        complementaryCertificationId: complementaryCertifications[0].id,
+        complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
       }),
     );
 

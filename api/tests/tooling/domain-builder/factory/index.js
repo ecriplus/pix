@@ -429,7 +429,6 @@ export {
   buildCourse,
   buildCpfCertificationResult,
   buildDataProtectionOfficer,
-  buildDoubleCertificationSubscription,
   buildFeedback,
   buildFinalizedSession,
   buildFlashAlgorithmConfiguration,
