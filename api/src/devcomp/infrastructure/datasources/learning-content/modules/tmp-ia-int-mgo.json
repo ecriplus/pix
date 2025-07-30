@@ -57,13 +57,6 @@
               ]
             }
           }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
-            "type": "text"
-          }
         }
       ]
     },
@@ -311,7 +304,7 @@
                   "id": "7fdc0205-db66-4003-b8e4-df3bb53cd3b4",
                   "type": "image",
                   "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
-                  "alt": "Capture d'écran d'une page \"Questions fréquentes\" (FAQ avec questions et réponses).",
+                  "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses).",
                   "alternativeText": "",
                   "legend": "",
                   "licence": ""
@@ -539,14 +532,6 @@
       "type": "summary",
       "title": "Récap",
       "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "e439337d-8f77-4ad6-b925-14cf68679a2d",
-            "type": "text",
-            "content": "<div></div>"
-          }
-        },
         {
           "type": "element",
           "element": {
