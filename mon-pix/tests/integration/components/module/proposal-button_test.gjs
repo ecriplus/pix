@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import ProposalButton from 'mon-pix/components/module/component/proposal-button';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -54,11 +55,12 @@ module('Integration | Component | Module | ProposalButton', function (hooks) {
       const onSubmit = sinon.stub();
 
       // when
-      await render(
+      const screen = await render(
         <template>
           <form onSubmit={{onSubmit}}><ProposalButton @proposal={{proposal}} @isDisabled={{true}} /></form>
         </template>,
       );
+      await click(screen.getByRole('button', { name: 'Avant de mettre le dentifrice' }));
 
       // then
       sinon.assert.notCalled(onSubmit);
