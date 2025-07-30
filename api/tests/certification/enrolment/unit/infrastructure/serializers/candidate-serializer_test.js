@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/candidate-serializer.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -85,11 +86,11 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
             'has-seen-certification-instructions': candidateData.hasSeenCertificationInstructions,
             subscriptions: [
               {
-                complementaryCertificationId: 777,
+                complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
                 type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
               },
               {
-                complementaryCertificationId: null,
+                complementaryCertificationKey: null,
                 type: SUBSCRIPTION_TYPES.CORE,
               },
             ],
@@ -104,11 +105,11 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
       expect(deserializedCandidate).to.deepEqualInstance(
         domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData,
-          complementaryCertificationId: 777,
+          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
           subscriptions: [
             domainBuilder.buildComplementarySubscription({
               certificationCandidateId: null,
-              complementaryCertificationId: 777,
+              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
             }),
             domainBuilder.buildCoreSubscription({ certificationCandidateId: null }),
           ],
