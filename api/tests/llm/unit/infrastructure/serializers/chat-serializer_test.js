@@ -55,6 +55,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             isFromUser: true,
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
+            wasModerated: undefined,
           },
           {
             content: 'Bonjour comment puis-je vous aider ?',
@@ -62,6 +63,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             isFromUser: false,
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
+            wasModerated: undefined,
           },
         ],
       });
@@ -90,12 +92,14 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               shouldBeRenderedInPreview: false,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             }),
             new Message({
               content: 'Bonjour comment puis-je vous aider ?',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             }),
           ],
         });
@@ -119,6 +123,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: false,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             },
           ],
         });
@@ -178,6 +183,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             }),
           ],
         });
@@ -201,6 +207,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -208,6 +215,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: false,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'Que contient ce fichier ?',
@@ -215,6 +223,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: true,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
@@ -222,6 +231,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: false,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
@@ -229,6 +239,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             },
           ],
         });
@@ -288,6 +299,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             }),
           ],
         });
@@ -311,6 +323,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -318,6 +331,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: false,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: undefined,
@@ -325,6 +339,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: undefined,
             },
             {
               content: 'Que contient ce fichier ?',
@@ -332,6 +347,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
@@ -339,6 +355,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: false,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: undefined,
@@ -346,6 +363,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
+              wasModerated: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
@@ -353,6 +371,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isFromUser: true,
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: true,
             },
           ],
         });
