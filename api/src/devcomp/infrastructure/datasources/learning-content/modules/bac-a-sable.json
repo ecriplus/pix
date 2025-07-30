@@ -135,7 +135,10 @@
                 "proposalB": "Faux",
                 "solution": "A"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": "<p>Continuez comme ça !</p>"
+            }
           }
         }
       ]
