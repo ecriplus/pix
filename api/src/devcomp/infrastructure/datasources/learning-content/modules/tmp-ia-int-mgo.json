@@ -69,6 +69,7 @@
                 "id": "1",
                 "content": "<p>Il a l’air incollable.</p>",
                 "feedback": {
+                  "state": "",
                   "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
                 }
               },
@@ -76,6 +77,7 @@
                 "id": "2",
                 "content": "<p>Il s’exprime comme un humain.</p>",
                 "feedback": {
+                  "state": "",
                   "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
                 }
               },
@@ -83,6 +85,7 @@
                 "id": "3",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
+                  "state": "",
                   "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
                 }
               }
@@ -116,44 +119,60 @@
           "element": {
             "id": "2d943050-b29c-4398-a336-143f3173c51a",
             "type": "text",
-            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Pour cela l'IA générative doit ingurgiter des <strong>quantités gigantesques de données</strong>. Elle utilisera ensuite une représentation de ces données pour produire de nouveaux textes</p><p>Voyons comment fonctionne cette première étape : le « pré-entraînement ». 🤔<br>Pour commencer, cliquez sur \"Entraîner l'IA avec ces données\"</p>"
+            "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Voyons comment fonctionne cette première étape : le « pré-entraînement ». 🤔</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
-            "type": "text",
-            "content": "<iframe title=\"pretraining\" src=\"https://1024pix.github.io/atelier-contenus/MGO/ia-dec-pretraining.html\" height=\"500\"></iframe>"
+            "type": "image",
+            "url": "https://assets.pix.org/draft/modules/ia-int-mgo/placeholder-video.png",
+            "alt": "placeholder",
+            "alternativeText": "",
+            "legend": "",
+            "licence": ""
           }
         },
         {
           "type": "element",
           "element": {
             "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
-            "type": "qcu-declarative",
-            "instruction": "<p>À votre avis, quel mot ce logiciel d'IA générative va-t-il choisir pour compléter cette phrase ?</p><p>En Océanie, l'animal le plus courant est le&nbsp;:</p>",
-            "proposals": [
+            "type": "qab",
+            "instruction": "<p>Répondez aux affirmations suivantes. <br></p>",
+            "cards": [
               {
-                "id": "1",
-                "content": "<p>kangourou</p>",
-                "feedback": {
-                  "diagnosis": "<p>Observez attentivement la taille du cercle nommé « koala » par rapport à celui qui représente « kangourou ».</p>"
-                }
+                "id": "c47a6882-9ceb-436d-b157-88e22926620d",
+                "text": "Après le pré-entraînement, l'IA générative sait répondre à toutes les questions qui portent sur l'encyclopédie.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "B"
               },
               {
-                "id": "2",
-                "content": "<p>koala</p>",
-                "feedback": {
-                  "diagnosis": "<p>Pendant cette étape de l’entraînement, elle a bien remarqué que le mot « koala » apparaît souvent en même temps que « animaux », « Océanie », etc.</p>"
-                }
+                "id": "eee8c179-041b-4cc3-812a-f87b9d71d43f",
+                "text": "Après le pré-entraînement, l'IA générative sait produire du texte qui ressemble à ce qu'un humain aurait pu écrire.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "A"
               },
               {
-                "id": "3",
-                "content": "<p>wallaby</p>",
-                "feedback": {
-                  "diagnosis": "<p>Observez attentivement la taille du cercle nommé « koala » par rapport à celui qui représente « wallaby ».</p>"
-                }
+                "id": "04db4a05-57bf-42ca-bc2b-7999051a5ebb",
+                "text": "Après le pré-entraînement, l'IA générative sait comment interagir avec un utilisateur.",
+                "image": {
+                  "url": "",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "B"
               }
             ]
           }
@@ -259,7 +278,7 @@
                       "id": "1",
                       "content": "<p>Utile</p>",
                       "feedback": {
-                        "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>&nbsp;Effectivement, un forum en ligne est très utile ! Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.<br></p>"
                       }
                     },
@@ -304,7 +323,7 @@
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>Effectivement, une page de contact d'une entreprise n'est pas vraiment utile ! Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
                       }
                     }
@@ -333,7 +352,7 @@
                       "id": "1",
                       "content": "<p>Utile</p>",
                       "feedback": {
-                        "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>Effectivement, une page de questions fréquentes contient principalement des questions et des réponses ! Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
                       }
                     },
@@ -378,7 +397,7 @@
                       "id": "2",
                       "content": "<p>Pas utile</p>",
                       "feedback": {
-                        "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
+                        "state": "<p>Bonne réponse ! 🎉</p>",
                         "diagnosis": "<p>Effectivement, les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                       }
                     }
@@ -404,7 +423,7 @@
                 {
                   "id": "9e50b0f7-2936-46af-8171-4793c5cc65a1",
                   "type": "text",
-                  "content": "<p>Les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation.<br>C’est de l’apprentissage <strong>supervisé</strong>.</p><p>\uD83D\uDCA1 Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
+                  "content": "<p>Les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation.<br>C’est de l’apprentissage <strong>supervisé</strong>.</p><p>💡 Le saviez-vous ? Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
                 }
               ]
             },
@@ -468,7 +487,7 @@
                 "id": "1",
                 "content": "<p>La réponse 1.</p>",
                 "feedback": {
-                  "state": "<p>Bonne réponse ! \uD83C\uDF89</p>",
+                  "state": "<p>Bonne réponse ! 🎉</p>",
                   "diagnosis": "<p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                 }
               },
@@ -780,6 +799,7 @@
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
+                  "state": "",
                   "diagnosis": "<p>todo</p>"
                 }
               },
@@ -787,6 +807,7 @@
                 "id": "2",
                 "content": "<p>non</p>",
                 "feedback": {
+                  "state": "",
                   "diagnosis": "<p>todo</p>"
                 }
               }
