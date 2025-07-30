@@ -258,6 +258,8 @@ describe('Acceptance | Route | llm-preview', function () {
             },
           },
           hasAttachmentContextBeenAdded: true,
+          totalInputTokens: 2_000,
+          totalOutputTokens: 5_000,
           messages: [
             { content: 'coucou user1', isFromUser: true, shouldBeRenderedInPreview: true },
             { content: 'coucou LLM1', isFromUser: false, shouldBeRenderedInPreview: true },
@@ -302,6 +304,8 @@ describe('Acceptance | Route | llm-preview', function () {
         inputMaxPrompts: 3,
         attachmentName: 'expected_file.txt',
         context: 'modulix',
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
         messages: [
           {
             content: 'coucou user1',

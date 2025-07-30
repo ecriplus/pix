@@ -8,15 +8,28 @@ export class Chat {
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
+   * @param {number|undefined} params.totalInputTokens
+   * @param {number|undefined} params.totalOutputTokens
    * @param {Message[]} params.messages
    */
-  constructor({ id, userId, configurationId, configuration, hasAttachmentContextBeenAdded, messages = [] }) {
+  constructor({
+    id,
+    userId,
+    configurationId,
+    configuration,
+    hasAttachmentContextBeenAdded,
+    messages = [],
+    totalInputTokens,
+    totalOutputTokens,
+  }) {
     this.id = id;
     this.userId = userId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
+    this.totalInputTokens = totalInputTokens;
+    this.totalOutputTokens = totalOutputTokens;
   }
 
   /**
@@ -115,6 +128,15 @@ export class Chat {
       .map((message) => message.toLLMHistory());
   }
 
+  updateTokenConsumption(inputTokens, outputTokens) {
+    // FIXME this can be removed after some time, this guard was for the chats in cache at the time the feature was introduced
+    // The decision taken was to not update token consumption at all on an already cached chat
+    this.totalInputTokens = Number.isInteger(this.totalInputTokens) ? this.totalInputTokens + inputTokens : undefined;
+    this.totalOutputTokens = Number.isInteger(this.totalOutputTokens)
+      ? this.totalOutputTokens + outputTokens
+      : undefined;
+  }
+
   toDTO() {
     return {
       id: this.id,
@@ -123,6 +145,8 @@ export class Chat {
       configuration: this.configuration.toDTO(),
       hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
       messages: this.messages.map((message) => message.toDTO()),
+      totalInputTokens: this.totalInputTokens,
+      totalOutputTokens: this.totalOutputTokens,
     };
   }
 

@@ -16,6 +16,8 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  * @typedef {Object} StreamCapture
  * @property {string[]} LLMMessageParts - Accumulated message chunks.
  * @property {boolean=} haveVictoryConditionsBeenFulfilled - Whether victory conditions were fulfilled during this exchange or not
+ * @property {number=} inputTokens
+ * @property {number=} outputTokens
  */
 
 /**
@@ -46,6 +48,8 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
   const streamCapture = {
     LLMMessageParts: [],
     haveVictoryConditionsBeenFulfilled: undefined,
+    inputTokens: 0,
+    outputTokens: 0,
   };
   pipeline(
     readableStream,

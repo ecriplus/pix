@@ -8,7 +8,7 @@ export function getTransform(streamCapture) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
-      const { message, isValid } = chunk;
+      const { message, isValid, usage } = chunk;
       let data = '';
 
       if (isValid) {
@@ -19,6 +19,11 @@ export function getTransform(streamCapture) {
       if (message) {
         streamCapture.LLMMessageParts.push(...message.split(''));
         data += getFormattedMessage(message);
+      }
+
+      if (usage) {
+        streamCapture.inputTokens = usage?.inputTokens ?? streamCapture.inputTokens;
+        streamCapture.outputTokens = usage?.outputTokens ?? streamCapture.outputTokens;
       }
 
       if (data) callback(null, data);

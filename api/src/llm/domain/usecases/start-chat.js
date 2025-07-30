@@ -19,6 +19,8 @@ export async function startChat({
     configuration,
     hasAttachmentContextBeenAdded: false,
     messages: [],
+    totalInputTokens: 0,
+    totalOutputTokens: 0,
   });
   await chatRepository.save(newChat);
   return newChat;

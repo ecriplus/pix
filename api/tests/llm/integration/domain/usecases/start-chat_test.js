@@ -48,6 +48,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             id: '123e4567-e89b-12d3-a456-426614174000',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
+            totalInputTokens: 0,
+            totalOutputTokens: 0,
           }),
         );
         expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
@@ -67,6 +69,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           },
           hasAttachmentContextBeenAdded: false,
           messages: [],
+          totalInputTokens: 0,
+          totalOutputTokens: 0,
         });
       });
     });
@@ -105,6 +109,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
+            totalInputTokens: 0,
+            totalOutputTokens: 0,
           }),
         );
         expect(llmApiScope.isDone()).to.be.true;
@@ -126,6 +132,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             },
           },
           hasAttachmentContextBeenAdded: false,
+          totalInputTokens: 0,
+          totalOutputTokens: 0,
           messages: [],
         });
       });
