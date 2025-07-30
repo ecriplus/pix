@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.170.0](https://github.com/1024pix/pix/compare/v5.169.0...v5.170.0) (2025-07-30)
+
+### :rocket: Amélioration
+
+- [#13043](https://github.com/1024pix/pix/pull/13043) : Modifs mineures sur module Deepfakes suite 1ers tests et retours 
+- [#13023](https://github.com/1024pix/pix/pull/13023) Enlever le runtime NodeJS des containers front 
+- [#13027](https://github.com/1024pix/pix/pull/13027) Intégrer le QCU découverte (PIX-18829) (PIX-18879) 
+- [#13033](https://github.com/1024pix/pix/pull/13033) Retirer le champ `state` du feedback du QCU déclaratif (PIX-18440) 
+- [#13051](https://github.com/1024pix/pix/pull/13051) Utilisation du `aria-disabled` plutôt que du `disabled` sur les proposal-buttons 
+- [#13032](https://github.com/1024pix/pix/pull/13032) V2 Module contrôle parental 
+
+### :bug: Correction
+
+- [#13013](https://github.com/1024pix/pix/pull/13013) Corriger l'activation de la feature d'import lorsque l'organisation n'a pas de prescrits (PIX-17766). 
+- [#13052](https://github.com/1024pix/pix/pull/13052) Corriger les fichiers de config Scalingo pour les RAs front 
+- [#13049](https://github.com/1024pix/pix/pull/13049) faire remonter les paramètres de la feature d'attestation au front (PIX-18921) 
+
+### :building_construction: Tech
+
+- [#13036](https://github.com/1024pix/pix/pull/13036) :loud_sound: Changement du niveau de log pour réduire le bruit pour l'équipe Captains ! 
+- [#13021](https://github.com/1024pix/pix/pull/13021) :truck: Déplace des fonctions utilitaires dans leurs contexte `certification/evaluation/` 
+- [#13029](https://github.com/1024pix/pix/pull/13029) :truck: Déplace le modèle partagé `CertifiableProfileForLearningContent` vers le contexte  spécifique `src/certification/evaluation/` 
+- [#13025](https://github.com/1024pix/pix/pull/13025) Améliorer la répartition des shards pour le job playwright des tests end-to-end pour ne pas exécuter plusieurs fois certains tests  
+- [#12982](https://github.com/1024pix/pix/pull/12982) Isoler la logique des URL dans les fronts (PIX-18876) 
+- [#13045](https://github.com/1024pix/pix/pull/13045) Isoler la logique du LocaleSwitcher dans PixOrga/PixCertif (PIX-18920) 
+- [#13018](https://github.com/1024pix/pix/pull/13018) Isoler le LocaleSwitcher dans Pix App (PIX-18910) 
+- [#13024](https://github.com/1024pix/pix/pull/13024) Relayer les informations de contexte depuis la configuration poc-llm vers le front (PIX-18912) 
+- [#12997](https://github.com/1024pix/pix/pull/12997) Suppression du contexte flash-certification (PIX-18917). 
+- [#13031](https://github.com/1024pix/pix/pull/13031) Supprimer les fichiers de génération d'éléments
+
 # [5.169.0](https://github.com/1024pix/pix/compare/v5.168.0...v5.169.0) (2025-07-29)
 
 ### :rocket: Amélioration
