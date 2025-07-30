@@ -481,7 +481,7 @@
                 }
               }
             ],
-            "solution": "3"
+            "solution": "1"
           }
         }
       ]
@@ -758,7 +758,7 @@
             "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
             "type": "expand",
             "title": "Indice",
-            "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable. Par exemple, nous avons proposé de défendre un menu de petit-déjeuner un peu spécial. 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p><p><img src=\"https://assets.pix.org/draft/modules/ia-int-mgo/comparia.png\"></p>"
+            "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable. Par exemple, nous avons réussi avec le prompt suivant : « Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner » 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
           }
         },
         {
