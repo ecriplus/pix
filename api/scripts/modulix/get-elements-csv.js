@@ -49,6 +49,7 @@ export function getElements(modules) {
     'text',
     'video',
     'custom',
+    'custom-draft',
   ];
 
   const elements = [];
