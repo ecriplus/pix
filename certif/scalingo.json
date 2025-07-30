@@ -7,7 +7,7 @@
     },
     "PIX_APP_URL_WITHOUT_EXTENSION": {
       "generator": "template",
-      "template": "https://app-pr%PR_NUMBER%.review.pix"
+      "template": "https://app-pr%PR_NUMBER%.review.pix."
     }
   },
   "formation": {
