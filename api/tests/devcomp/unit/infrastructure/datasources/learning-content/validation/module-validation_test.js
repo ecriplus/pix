@@ -233,6 +233,9 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
               solution: 'B',
             },
           ],
+          feedback: {
+            diagnosis: '<p>Continuez comme ça !</p>',
+          },
         };
 
         await qabElementSchema.validateAsync(sample, {

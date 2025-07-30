@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from '../utils.js';
+import { feedbackNeutralSchema } from './feedback-neutral-schema.js';
 
 const qabElementSchema = Joi.object({
   id: uuidSchema,
@@ -21,6 +22,7 @@ const qabElementSchema = Joi.object({
     .min(1)
     .max(6)
     .required(),
+  feedback: feedbackNeutralSchema.optional(),
 }).required();
 
 export { qabElementSchema };
