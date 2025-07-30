@@ -1,6 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { eq } from 'ember-truth-helpers';
+import CustomDraftElement from 'mon-pix/components/module/element/custom-draft';
 import CustomElement from 'mon-pix/components/module/element/custom-element';
 import DownloadElement from 'mon-pix/components/module/element/download';
 import EmbedElement from 'mon-pix/components/module/element/embed';
@@ -36,6 +37,8 @@ export default class ModulixElement extends Component {
       <EmbedElement @embed={{@element}} @passageId={{@passageId}} @onAnswer={{@onElementAnswer}} />
     {{else if (eq @element.type "custom")}}
       <CustomElement @component={{@element}} @onAnswer={{@onElementAnswer}} />
+    {{else if (eq @element.type "custom-draft")}}
+      <CustomDraftElement @customDraft={{@element}} />
     {{else if (eq @element.type "expand")}}
       <ExpandElement @expand={{@element}} @onExpandToggle={{@onExpandToggle}} />
     {{else if (eq @element.type "separator")}}
