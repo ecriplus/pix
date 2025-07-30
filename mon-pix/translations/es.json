@@ -1669,8 +1669,8 @@
       "details": {
         "duration": "Duración",
         "durationValue": "'<span aria-hidden=\"true\">'≈'</span><span class=\"screen-reader-only\">'Aproximadamente '</span>'{duration} min",
-        "explanationText1": "Los módulos de formación Pix se componen de lecciones y actividades que le ayudarán a practicar y desarrollar sus competencias digitales. Las lecciones se presentan en forma de vídeos, audio, imágenes y texto. Las actividades permiten practicar y comprobar directamente las respuestas. Cada módulo tiene una duración aproximada de 10 minutos, sobre un tema específico, con un nivel de dificultad que va de principiante a experto.",
-        "explanationText2": "Estos módulos de formación se encuentran actualmente en fase de prueba beta. Puede enviarnos sus sugerencias de mejora a través del cuestionario que figura al final de cada módulo.",
+        "explanationText1": "Los módulos de aprendizaje Pix se componen de lecciones y actividades para practicar y desarrollar tus competencias digitales. Las lecciones se presentan en forma de vídeos, audio, imágenes y texto. Las actividades permiten practicar y comprobar directamente las respuestas. Cada módulo tiene una duración aproximada de 10 minutos, sobre un tema específico, con un nivel de dificultad que va de principiante a experto.",
+        "explanationText2": "Estos módulos de aprendizaje se encuentran actualmente en fase de prueba beta. Puede enviarnos sus sugerencias de mejora a través del cuestionario que figura al final de cada módulo.",
         "explanationTitle": "¿Qué es un módulo?",
         "level": "Nivel",
         "objectives": "Objetivos",
@@ -1716,7 +1716,7 @@
         },
         "title": {
           "lesson": "Lección",
-          "summary":  "Recapitular"
+          "summary": "Recapitular"
         }
       },
       "interactiveElement": {

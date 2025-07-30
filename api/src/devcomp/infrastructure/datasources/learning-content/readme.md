@@ -23,7 +23,7 @@ Les modules sont accessibles via l'URL : `http://localhost:4200/modules/<slug-du
 
 ### Mise à jour des contenus
 
-Les contenus sont placés dans des fichiers [au format `.json`](http://www.json.org/json-fr.html). Chaque fichier `.json` correspond à un module de formation. Ces fichiers respectent une structure commune. Le [bac à sable](./modules/bac-a-sable.json) sert de démo technique et utilise donc toutes les fonctionnalités existantes.
+Les contenus sont placés dans des fichiers [au format `.json`](http://www.json.org/json-fr.html). Chaque fichier `.json` correspond à un module apprenant. Ces fichiers respectent une structure commune. Le [bac à sable](./modules/bac-a-sable.json) sert de démo technique et utilise donc toutes les fonctionnalités existantes.
 
 > [!IMPORTANT]
 > Le format et la structure des fichiers n'est pas finalisé. Il est tout à fait possible qu'un autre format soit utilisé après l'expérimentation.
