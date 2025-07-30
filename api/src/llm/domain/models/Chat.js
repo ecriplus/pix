@@ -34,19 +34,28 @@ export class Chat {
 
   /**
    * @param {string=} message
+   * @param {boolean=} shouldBeCountedAsAPrompt
    * @param {boolean=} shouldBeForwardedToLLM
    * @param {boolean=} haveVictoryConditionsBeenFulfilled
+   * @param {boolean} wasModerated
    */
-  addUserMessage(message, shouldBeForwardedToLLM, haveVictoryConditionsBeenFulfilled) {
+  addUserMessage(
+    message,
+    shouldBeCountedAsAPrompt,
+    shouldBeForwardedToLLM,
+    haveVictoryConditionsBeenFulfilled,
+    wasModerated,
+  ) {
     if (!message) return;
     this.messages.push(
       new Message({
         content: message,
         isFromUser: true,
-        shouldBeCountedAsAPrompt: shouldBeForwardedToLLM,
+        shouldBeCountedAsAPrompt,
         shouldBeForwardedToLLM,
         shouldBeRenderedInPreview: true,
         haveVictoryConditionsBeenFulfilled,
+        wasModerated,
       }),
     );
   }
@@ -172,6 +181,7 @@ export class Message {
    * @param {boolean} params.shouldBeCountedAsAPrompt
    * @param {boolean=} params.hasAttachmentBeenSubmittedAlongWithAPrompt
    * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
+   * @param {boolean=} params.wasModerated
    */
   constructor({
     content,
@@ -183,6 +193,7 @@ export class Message {
     shouldBeCountedAsAPrompt,
     hasAttachmentBeenSubmittedAlongWithAPrompt,
     haveVictoryConditionsBeenFulfilled,
+    wasModerated,
   }) {
     this.content = content;
     this.isFromUser = isFromUser;
@@ -193,6 +204,7 @@ export class Message {
     this.shouldBeCountedAsAPrompt = !!shouldBeCountedAsAPrompt;
     this.hasAttachmentBeenSubmittedAlongWithAPrompt = hasAttachmentBeenSubmittedAlongWithAPrompt;
     this.haveVictoryConditionsBeenFulfilled = haveVictoryConditionsBeenFulfilled;
+    this.wasModerated = wasModerated;
   }
 
   get isAttachment() {
@@ -225,6 +237,7 @@ export class Message {
       shouldBeCountedAsAPrompt: this.shouldBeCountedAsAPrompt,
       hasAttachmentBeenSubmittedAlongWithAPrompt: this.hasAttachmentBeenSubmittedAlongWithAPrompt,
       haveVictoryConditionsBeenFulfilled: this.haveVictoryConditionsBeenFulfilled,
+      wasModerated: this.wasModerated,
     };
   }
 

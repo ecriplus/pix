@@ -335,6 +335,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: true,
+                wasModerated: false,
               },
               {
                 content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -462,6 +463,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   shouldBeRenderedInPreview: true,
                   shouldBeForwardedToLLM: true,
                   shouldBeCountedAsAPrompt: true,
+                  wasModerated: false,
                 },
                 {
                   content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -697,6 +699,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeRenderedInPreview: true,
                       shouldBeCountedAsAPrompt: true,
+                      wasModerated: false,
                     },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -794,6 +797,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeRenderedInPreview: true,
                     shouldBeForwardedToLLM: false,
                     shouldBeCountedAsAPrompt: false,
+                    wasModerated: false,
                   },
                 ],
               });
@@ -981,6 +985,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: true,
+                      wasModerated: false,
                     },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -1130,6 +1135,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: true,
+                      wasModerated: false,
                     },
                     {
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -1764,6 +1770,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: false,
             },
             {
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -1776,6 +1783,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         });
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
+
       it('should update the token consumption if such information was provided in the stream response', async function () {
         // given
         const chat = new Chat({
@@ -1877,6 +1885,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: true,
               haveVictoryConditionsBeenFulfilled: true,
+              wasModerated: false,
             },
             {
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -1884,6 +1893,99 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: false,
+            },
+          ],
+        });
+        expect(llmPostPromptScope.isDone()).to.be.true;
+      });
+
+      it('should mark the current user message if user message has been moderated, according to the stream response', async function () {
+        // given
+        const chat = new Chat({
+          id: 'chatId',
+          userId: 123,
+          configurationId,
+          configuration,
+          hasAttachmentContextBeenAdded: false,
+          messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+        });
+        await chatTemporaryStorage.save({
+          key: chat.id,
+          value: chat.toDTO(),
+          expirationDelaySeconds: ms('24h'),
+        });
+        const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+          .post('/chat', {
+            configuration: {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
+            },
+            history: [
+              { content: 'coucou user1', role: 'user' },
+              { content: 'coucou LLM1', role: 'assistant' },
+            ],
+            prompt: "C'est quoi un chat tout terrain ? Un cat-cat !!",
+          })
+          .reply(201, Readable.from(['21:{"wasModerated":true}']));
+
+        // when
+        const stream = await promptChat({
+          chatId: 'chatId',
+          userId: 123,
+          message: "C'est quoi un chat tout terrain ? Un cat-cat !!",
+          attachmentName: null,
+          ...dependencies,
+        });
+
+        // then
+        const parts = [];
+        const decoder = new TextDecoder();
+        for await (const chunk of stream) {
+          parts.push(decoder.decode(chunk));
+        }
+        const llmResponse = parts.join('');
+        expect(llmResponse).to.deep.equal('event: user-message-moderated\ndata: \n\n');
+        expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+          id: 'chatId',
+          userId: 123,
+          configurationId: 'uneConfigQuiExist',
+          configuration: {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxPrompts: 100,
+              inputMaxChars: 255,
+            },
+          },
+          hasAttachmentContextBeenAdded: false,
+          messages: [
+            {
+              content: 'coucou user1',
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: true,
+            },
+            {
+              content: 'coucou LLM1',
+              isFromUser: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+            },
+            {
+              content: "C'est quoi un chat tout terrain ? Un cat-cat !!",
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: false,
+              shouldBeCountedAsAPrompt: true,
+              wasModerated: true,
             },
           ],
         });
