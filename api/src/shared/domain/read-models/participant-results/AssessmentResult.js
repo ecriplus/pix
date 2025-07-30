@@ -35,7 +35,6 @@ class AssessmentResult {
     this.validatedSkillsCount = knowledgeElements.filter(({ isValidated }) => isValidated).length;
     this.masteryRate = this._computeMasteryRate(
       participationResults.masteryRate,
-      this.isShared,
       this.totalSkillsCount,
       this.validatedSkillsCount,
     );
@@ -98,10 +97,8 @@ class AssessmentResult {
     return remainingSecondsBeforeRetrying;
   }
 
-  _computeMasteryRate(masteryRate, isShared, totalSkillsCount, validatedSkillsCount) {
-    if (isShared) {
-      return masteryRate;
-    } else if (totalSkillsCount > 0) {
+  _computeMasteryRate(masteryRate, totalSkillsCount, validatedSkillsCount) {
+    if (totalSkillsCount > 0) {
       const rate = (validatedSkillsCount / totalSkillsCount).toPrecision(2);
       return parseFloat(rate);
     } else {

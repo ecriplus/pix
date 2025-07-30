@@ -460,35 +460,6 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
       });
     });
 
-    context('when the participation is shared', function () {
-      it('returns the mastery rate for the participation using the mastery rate stocked', async function () {
-        const { id: userId } = databaseBuilder.factory.buildUser();
-        const { id: campaignId } = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-        _buildCampaignSkills(campaignId);
-        const sharedAt = new Date('2020-01-02');
-        const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
-          userId,
-          campaignId,
-          status: CampaignParticipationStatuses.SHARED,
-          sharedAt,
-          masteryRate: 0.6,
-        });
-
-        databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId, state: 'completed' });
-
-        await databaseBuilder.commit();
-        const participantResult = await participantResultRepository.get({
-          userId,
-          campaignId,
-          targetProfile,
-          badges: [],
-          locale: 'FR',
-        });
-        expect(participantResult.masteryRate).to.equal(0.6);
-        expect(participantResult.sharedAt).to.deep.equal(sharedAt);
-      });
-    });
-
     context('when there are several participations', function () {
       it('use the participation not improved yet', async function () {
         const { id: userId } = databaseBuilder.factory.buildUser();

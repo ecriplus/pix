@@ -176,46 +176,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
           });
         });
       });
-
-      context('when the participation is shared', function () {
-        it('return the mastery rate of the participation', function () {
-          const competences = [
-            {
-              competence: domainBuilder.buildCompetence({
-                id: 'rec1',
-                name: 'C1',
-                index: '1.1',
-              }),
-              area: domainBuilder.buildArea({
-                name: 'Domaine1',
-                color: 'Couleur1',
-              }),
-              targetedSkillIds: ['skill1', 'skill2', 'skill2'],
-            },
-          ];
-
-          const participationResults = {
-            campaignParticipationId: 12,
-            isCompleted: true,
-            knowledgeElements: [],
-            acquiredBadgeIds: [],
-            sharedAt: new Date('2021-09-25'),
-            status: CampaignParticipationStatuses.SHARED,
-            masteryRate: 0.5,
-          };
-
-          const assessmentResult = new AssessmentResult({
-            participationResults,
-            competences,
-            stages: [],
-            badgeResultsDTO: [],
-            isCampaignMultipleSendings: false,
-            isOrganizationLearnerActive: false,
-            isCampaignArchived: false,
-          });
-          expect(assessmentResult.masteryRate).to.equal(0.5);
-        });
-      });
     });
 
     it('computes the result by competences', function () {
@@ -676,8 +636,18 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
         const isCampaignMultipleSendings = true;
         const isOrganizationLearnerActive = true;
         const isCampaignArchived = false;
+        const ke = domainBuilder.buildKnowledgeElement({
+          skillId: 'recSkillComp1',
+          status: KnowledgeElement.StatusType.VALIDATED,
+          createdAt: new Date('2020-01-01'),
+        });
+        const targetedCompetence = {
+          competence: { id: 'competence1' },
+          area: {},
+          targetedSkillIds: ['recSkillComp1'],
+        };
         const participationResults = {
-          knowledgeElements: [],
+          knowledgeElements: [ke],
           acquiredBadgeIds: [],
           masteryRate: '1',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
@@ -687,7 +657,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
 
         const assessmentResult = new AssessmentResult({
           participationResults,
-          competences: [],
+          competences: [targetedCompetence],
           stages: [],
           badgeResultsDTO: [],
           campaignType: CampaignTypes.ASSESSMENT,
@@ -706,7 +676,6 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
         const participationResults = {
           knowledgeElements: [],
           acquiredBadgeIds: [],
-          masteryRate: '1',
           sharedAt: new Date('2020-01-01T05:06:07Z'),
           status: CampaignParticipationStatuses.SHARED,
           isDeleted: false,
