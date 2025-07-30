@@ -150,7 +150,7 @@ export default class ModuleQab extends ModuleElement {
             {{/each}}
           {{/if}}
           {{#if this.shouldDisplayScore}}
-            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}} @onRetry={{this.onRetry}} />
+            <QabScoreCard @score={{this.score}} @total={{this.numberOfCards}}/>
           {{/if}}
         </div>
         <div class="element-qab__proposals {{unless this.shouldDisplayCards 'element-qab__proposals--empty'}}">

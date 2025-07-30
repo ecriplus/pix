@@ -15,11 +15,4 @@
     font-weight: 900;
     text-align: center;
   }
-
-  &__retry-button {
-    padding: var(--pix-spacing-4x) var(--pix-spacing-10x);
-    font-weight: var(--pix-font-bold);
-    background: var(--pix-primary-10);
-    border-radius: var(--modulix-radius-s);
-  }
 }
