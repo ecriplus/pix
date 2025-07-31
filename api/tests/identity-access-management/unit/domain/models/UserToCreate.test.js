@@ -3,28 +3,43 @@ import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | UserToCreate', function () {
   describe('constructor', function () {
-    it('accepts no locale', function () {
-      // given
-      const users = [
-        new UserToCreate({ locale: '' }),
-        new UserToCreate({ locale: null }),
-        new UserToCreate({ locale: undefined }),
-      ];
+    context('locale', function () {
+      context('when there is no locale', function () {
+        ['', null, undefined].forEach((locale) => {
+          it(`returns null for ${locale}`, function () {
+            // when
+            const user = new UserToCreate({ locale });
 
-      // then
-      expect(users).to.have.lengthOf(3);
-    });
+            //then
+            expect(user.locale).to.be.undefined;
+          });
+        });
+      });
 
-    it('validates and canonicalizes the locale', function () {
-      // given
-      const localeServiceStub = { getCanonicalLocale: sinon.stub().returns('fr-BE') };
+      context('when the locale is not supported', function () {
+        it('throws a RangeError', function () {
+          // given
+          const locale = 'fr-fr';
 
-      // when
-      const userToCreate = new UserToCreate({ locale: 'fr-be', dependencies: { localeService: localeServiceStub } });
+          // when
+          const user = new UserToCreate({ locale });
 
-      // then
-      expect(localeServiceStub.getCanonicalLocale).to.have.been.calledWithExactly('fr-be');
-      expect(userToCreate.locale).to.equal('fr-BE');
+          //then
+          expect(user.locale).to.equal('fr-FR');
+        });
+      });
+
+      context('when the locale is supported', function () {
+        ['fr', 'fr-FR', 'fr-BE'].forEach((locale) => {
+          it(`returns the locale ${locale}`, function () {
+            // when
+            const user = new UserToCreate({ locale });
+
+            //then
+            expect(user.locale).to.equal(locale);
+          });
+        });
+      });
     });
 
     it('should build a default user', function () {

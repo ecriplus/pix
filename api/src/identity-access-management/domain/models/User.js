@@ -44,10 +44,6 @@ class User {
     } = {},
     dependencies = { localeService },
   ) {
-    if (locale) {
-      locale = dependencies.localeService.getCanonicalLocale(locale);
-    }
-
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -68,7 +64,7 @@ class User {
     this.hasSeenFocusedChallengeTooltip = hasSeenFocusedChallengeTooltip;
     this.knowledgeElements = knowledgeElements;
     this.lang = dependencies.localeService.coerceLanguage(lang);
-    this.locale = locale;
+    this.locale = dependencies.localeService.getNearestSupportedLocale(locale);
     this.isAnonymous = isAnonymous;
     this.pixScore = pixScore;
     this.memberships = memberships;
@@ -110,8 +106,7 @@ class User {
   setLocaleIfNotAlreadySet(newLocale, dependencies = { localeService }) {
     this.hasBeenModified = false;
     if (newLocale && !this.locale) {
-      const canonicalLocale = dependencies.localeService.getCanonicalLocale(newLocale);
-      this.locale = canonicalLocale;
+      this.locale = dependencies.localeService.getNearestSupportedLocale(newLocale);
       this.hasBeenModified = true;
     }
   }

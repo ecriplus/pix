@@ -132,12 +132,10 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  * @return {Promise<*>}
  */
 const createUser = async function (request, h, dependencies = { userSerializer, requestResponseUtils, localeService }) {
-  const localeFromCookie = request.state?.locale;
-  const canonicalLocaleFromCookie = localeFromCookie
-    ? dependencies.localeService.getCanonicalLocale(localeFromCookie)
-    : undefined;
+  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
+
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
-  const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: canonicalLocaleFromCookie };
+  const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: localeFromCookie };
   const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
   const password = request.payload.data.attributes.password;
@@ -268,8 +266,8 @@ const upgradeToRealUser = async function (
 ) {
   const anonymousUserId = request.auth.credentials.userId;
 
-  const localeFromCookie = request.state?.locale;
-  const locale = localeFromCookie ? dependencies.localeService.getCanonicalLocale(localeFromCookie) : undefined;
+  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
+
   const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
   const userAttributes = {
@@ -277,7 +275,7 @@ const upgradeToRealUser = async function (
     lastName: request.payload.data.attributes['last-name'],
     email: request.payload.data.attributes.email,
     cgu: request.payload.data.attributes.cgu,
-    locale,
+    locale: localeFromCookie,
   };
 
   const password = request.payload.data.attributes.password;

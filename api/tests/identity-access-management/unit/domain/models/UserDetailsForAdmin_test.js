@@ -1,40 +1,45 @@
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | UserDetailsForAdmin', function () {
-  let localeService;
-  let dependencies;
-
-  beforeEach(function () {
-    localeService = {
-      getCanonicalLocale: sinon.stub(),
-    };
-    dependencies = { localeService };
-  });
-
   describe('constructor', function () {
-    it('accepts no locale', function () {
-      // given
-      const users = [
-        new UserDetailsForAdmin({ locale: '' }, dependencies),
-        new UserDetailsForAdmin({ locale: null }, dependencies),
-        new UserDetailsForAdmin({ locale: undefined }, dependencies),
-      ];
+    context('locale', function () {
+      context('when there is no locale', function () {
+        ['', null, undefined].forEach((locale) => {
+          it(`returns null for ${locale}`, function () {
+            // when
+            const user = new UserDetailsForAdmin({ locale });
 
-      //then
-      expect(users).to.have.lengthOf(3);
-    });
+            //then
+            expect(user.locale).to.be.undefined;
+          });
+        });
+      });
 
-    it('validates and canonicalizes the locale', function () {
-      // given
-      localeService.getCanonicalLocale.returns('fr-BE');
+      context('when the locale is not supported', function () {
+        it('throws a RangeError', function () {
+          // given
+          const locale = 'fr-fr';
 
-      // when
-      const user = new UserDetailsForAdmin({ locale: 'fr-be' }, dependencies);
+          // when
+          const user = new UserDetailsForAdmin({ locale });
 
-      // then
-      expect(localeService.getCanonicalLocale).to.have.been.calledWithExactly('fr-be');
-      expect(user.locale).to.equal('fr-BE');
+          //then
+          expect(user.locale).to.equal('fr-FR');
+        });
+      });
+
+      context('when the locale is supported', function () {
+        ['fr', 'fr-FR', 'fr-BE'].forEach((locale) => {
+          it(`returns the locale ${locale}`, function () {
+            // when
+            const user = new UserDetailsForAdmin({ locale });
+
+            //then
+            expect(user.locale).to.equal(locale);
+          });
+        });
+      });
     });
   });
 
