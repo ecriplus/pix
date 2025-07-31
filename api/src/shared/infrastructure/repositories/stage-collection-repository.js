@@ -1,6 +1,6 @@
-import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { StageCollection } from '../../../../src/shared/domain/models/user-campaign-results/StageCollection.js';
-import * as skillRepository from '../../../../src/shared/infrastructure/repositories/skill-repository.js';
+import { StageCollection } from '../../../prescription/target-profile/domain/models/StageCollection.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
+import * as skillRepository from '../../infrastructure/repositories/skill-repository.js';
 const MAX_STAGE_THRESHOLD = 100;
 
 const findStageCollection = async function ({ campaignId }) {
