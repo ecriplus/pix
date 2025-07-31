@@ -1,10 +1,10 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, tab } from '@ember/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { t } from 'ember-intl/test-support';
 import CompetencesDetails from 'mon-pix/components/certifications/certificate-information/competences-details';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
@@ -56,13 +56,9 @@ module('Integration | Component | Certifications | Certificate | Competences det
     module('when domain is fr', function () {
       test('should display a link to the results explanation', async function (assert) {
         // given
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
 
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
         const store = this.owner.lookup('service:store');
         const certification = store.createRecord('certification', {
           birthdate: '2000-01-22',
@@ -88,12 +84,6 @@ module('Integration | Component | Certifications | Certificate | Competences det
       module('when user is a french reader', function () {
         test('should display a link to the results explanation', async function (assert) {
           // given
-          class CurrentDomainServiceStub extends Service {
-            get isFranceDomain() {
-              return false;
-            }
-          }
-          this.owner.register('service:currentDomain', CurrentDomainServiceStub);
           stubCurrentUserService(this.owner, { lang: 'fr' });
           const store = this.owner.lookup('service:store');
           const certification = store.createRecord('certification', {
@@ -119,12 +109,6 @@ module('Integration | Component | Certifications | Certificate | Competences det
       module('when user is not a french reader', function () {
         test('should not display a link to the results explanation', async function (assert) {
           // given
-          class CurrentDomainServiceStub extends Service {
-            get isFranceDomain() {
-              return false;
-            }
-          }
-          this.owner.register('service:currentDomain', CurrentDomainServiceStub);
           stubCurrentUserService(this.owner, { lang: 'en' });
           const store = this.owner.lookup('service:store');
           const certification = store.createRecord('certification', {

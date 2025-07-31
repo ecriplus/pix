@@ -11,12 +11,8 @@ module('Unit | Component | Certifications | Certificate information | download p
   module('when domain is french', function () {
     test('should call file saver with isFrenchDomainExtension set to true in url', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {

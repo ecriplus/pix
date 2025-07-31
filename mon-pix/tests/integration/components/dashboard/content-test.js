@@ -1,9 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -403,11 +403,8 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
     test('should display link on new dashboard banner when domain is pix.fr', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-      }
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
       stubCurrentUserService(
         this.owner,
@@ -421,7 +418,6 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
         { withStoreStubbed: false },
       );
 
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],
@@ -439,12 +435,6 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
 
     test('should hide link on new dashboard banner when domain is pix.org', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-
       stubCurrentUserService(
         this.owner,
         {
@@ -457,7 +447,6 @@ module('Integration | Component | Dashboard | Content', function (hooks) {
         { withStoreStubbed: false },
       );
 
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       this.set('model', {
         campaignParticipationOverviews: [],
         campaignParticipations: [],

@@ -3,6 +3,7 @@ import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import AppNavigation from 'mon-pix/components/global/app-navigation';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -27,12 +28,9 @@ module('Integration | Component | Global | App Navigation', function (hooks) {
 
     module('when it is the french domain', function () {
       test('it should only display the Pix logo', async function (assert) {
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+        // given
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
 
         // when
         const screen = await render(<template><AppNavigation /></template>);

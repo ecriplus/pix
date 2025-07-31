@@ -1,5 +1,4 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import PasswordResetDemandForm from 'mon-pix/components/authentication/password-reset-demand/password-reset-demand-form';
@@ -31,17 +30,10 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
 
   test('it displays all elements of component successfully', async function (assert) {
     // given
-    class CurrentDomainServiceStub extends Service {
-      get isFranceDomain() {
-        return true;
-      }
+    const domainService = this.owner.lookup('service:currentDomain');
+    sinon.stub(domainService, 'getExtension').returns('fr');
 
-      getExtension() {
-        return '.fr';
-      }
-    }
-    this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-
+    // when
     const screen = await render(<template><PasswordResetDemandForm /></template>);
 
     // then

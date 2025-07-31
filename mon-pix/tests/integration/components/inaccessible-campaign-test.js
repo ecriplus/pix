@@ -2,9 +2,9 @@
 /* eslint ember/require-tagless-components: 0 */
 
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -12,9 +12,6 @@ module('Integration | Component | inaccessible-campaign', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('should not display marianne logo when url does not have frenchDomainExtension', async function (assert) {
-    // given
-    this.owner.register('service:currentDomain', Service.extend({ isFranceDomain: false }));
-
     // when
     await render(hbs`<InaccessibleCampaign />`);
 
@@ -24,7 +21,8 @@ module('Integration | Component | inaccessible-campaign', function (hooks) {
 
   test('should display marianne logo when url does have frenchDomainExtension', async function (assert) {
     // given
-    this.owner.register('service:currentDomain', Service.extend({ isFranceDomain: true }));
+    const domainService = this.owner.lookup('service:currentDomain');
+    sinon.stub(domainService, 'getExtension').returns('fr');
 
     // when
     await render(hbs`<InaccessibleCampaign />`);

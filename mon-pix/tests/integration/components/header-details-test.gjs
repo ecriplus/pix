@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
@@ -67,14 +67,10 @@ module('Integration | Component | Certifications | Certificate information | Hea
 
   module('when domain is french', function (hooks) {
     hooks.beforeEach(function () {
-      stubCurrentUserService(this.owner, { lang: 'fr' });
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-      }
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      stubCurrentUserService(this.owner, { lang: 'fr' });
     });
 
     module('when certification is delivered after 2022-01-01', function () {
@@ -152,14 +148,6 @@ module('Integration | Component | Certifications | Certificate information | Hea
     test('should not display the professionalizing warning', async function (assert) {
       // given
       stubCurrentUserService(this.owner, { lang: 'en' });
-
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
       const store = this.owner.lookup('service:store');
       const certification = store.createRecord('certification', {
