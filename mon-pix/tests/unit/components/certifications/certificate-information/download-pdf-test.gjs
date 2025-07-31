@@ -18,10 +18,6 @@ module('Unit | Component | Certifications | Certificate information | download p
       }
       this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
-      class IntlServiceStub extends Service {
-        primaryLocale = 'fr';
-      }
-      this.owner.register('service:intl', IntlServiceStub);
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;
@@ -46,17 +42,6 @@ module('Unit | Component | Certifications | Certificate information | download p
   module('when domain is not french', function () {
     test('should call file saver with isFrenchDomainExtension set to false in url', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-
-      class IntlServiceStub extends Service {
-        primaryLocale = 'fr';
-      }
-      this.owner.register('service:intl', IntlServiceStub);
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;

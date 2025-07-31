@@ -69,12 +69,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         test('it should not display the quest result if the flag is false', async function (assert) {
           // given
           stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
-
-          class FeatureTogglesStub extends Service {
-            featureToggles = { isQuestEnabled: false };
-          }
-
-          this.owner.register('service:featureToggles', FeatureTogglesStub);
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: false });
 
           this.set('campaign', {
             customResultPageText: 'My custom result page text',
@@ -122,11 +118,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
           test('it should not display the quest result if the flag is true', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { isQuestEnabled: true };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: true });
 
             this.set('campaign', {
               customResultPageText: 'My custom result page text',
@@ -165,11 +158,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
           test('it should display the quest result if the flag is true', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { isQuestEnabled: true };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: true });
 
             this.set('campaign', {
               customResultPageText: 'My custom result page text',
@@ -288,11 +278,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when feature toggle upgradeToRealUserEnabled is true', function () {
           test('it should not display a sign in button', async function (assert) {
             //given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { upgradeToRealUserEnabled: true };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ upgradeToRealUserEnabled: true });
 
             stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
             this.set('campaign', {
@@ -583,10 +570,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when feature toggle upgradeToRealUserEnabled is false', function () {
           test('it should not display a sign in button', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { upgradeToRealUserEnabled: false };
-            }
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ upgradeToRealUserEnabled: false });
 
             // when
             const screen = await render(
@@ -612,11 +597,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when feature toggle upgradeToRealUserEnabled is true', function () {
           test('it should display a sign in button', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { upgradeToRealUserEnabled: true };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ upgradeToRealUserEnabled: true });
 
             // when
             const screen = await render(
@@ -642,11 +624,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when feature toggle upgradeToRealUserEnabled is true ', function () {
           test('it should display only an inscription link', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { upgradeToRealUserEnabled: true };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ upgradeToRealUserEnabled: true });
 
             stubCurrentUserService(this.owner, { isAnonymous: true });
 
@@ -675,11 +654,8 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when feature toggle upgradeToRealUserEnabled is false', function () {
           test('it should display only a connection link', async function (assert) {
             // given
-            class FeatureTogglesStub extends Service {
-              featureToggles = { upgradeToRealUserEnabled: false };
-            }
-
-            this.owner.register('service:featureToggles', FeatureTogglesStub);
+            const featureToggles = this.owner.lookup('service:featureToggles');
+            sinon.stub(featureToggles, 'featureToggles').value({ upgradeToRealUserEnabled: false });
 
             stubCurrentUserService(this.owner, { isAnonymous: true });
 

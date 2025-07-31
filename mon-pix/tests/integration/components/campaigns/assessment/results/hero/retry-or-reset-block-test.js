@@ -1,8 +1,8 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { clickByLabel } from '../../../../../../helpers/click-by-label';
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
@@ -90,12 +90,8 @@ module(
 
     module('with auto share enabled', function (hooks) {
       hooks.beforeEach(function () {
-        class FeatureTogglesStub extends Service {
-          featureToggles = {
-            isAutoShareEnabled: true,
-          };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
       });
 
       test('should display retry message with auto share', async function (assert) {
@@ -160,12 +156,8 @@ module(
 
       module('with auto share enabled', function (hooks) {
         hooks.beforeEach(function () {
-          class FeatureTogglesStub extends Service {
-            featureToggles = {
-              isAutoShareEnabled: true,
-            };
-          }
-          this.owner.register('service:featureToggles', FeatureTogglesStub);
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
         });
 
         test('should display retry message with auto share', async function (assert) {

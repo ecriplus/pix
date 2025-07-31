@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -13,12 +12,8 @@ module('Integration | Component | campaign-start-block', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    class FeatureTogglesStub extends Service {
-      featureToggles = {
-        isAutoShareEnabled: false,
-      };
-    }
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
+    const featureToggles = this.owner.lookup('service:featureToggles');
+    sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: false });
   });
 
   module('When the organization has a logo and landing page text', function () {
@@ -164,12 +159,8 @@ module('Integration | Component | campaign-start-block', function (hooks) {
 
       test('should display legal with auto share', async function (assert) {
         // given
-        class FeatureTogglesStub extends Service {
-          featureToggles = {
-            isAutoShareEnabled: true,
-          };
-        }
-        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
 
         // when
         const screen = await render(

@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
@@ -90,11 +89,8 @@ module('Integration | Component | assessment-banner', function (hooks) {
 
   module('when the text to speech feature toggle is enabled', function (hooks) {
     hooks.beforeEach(async function () {
-      this.owner.lookup('service:store');
-      class FeatureTogglesStub extends Service {
-        featureToggles = { isTextToSpeechButtonEnabled: true };
-      }
-      this.owner.register('service:featureToggles', FeatureTogglesStub);
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isTextToSpeechButtonEnabled: true });
     });
 
     module('when displayTextToSpeechActivationButton is true', function () {
@@ -170,11 +166,8 @@ module('Integration | Component | assessment-banner', function (hooks) {
 
   module('when the text to speech feature toggle is disabled', function (hooks) {
     hooks.beforeEach(async function () {
-      this.owner.lookup('service:store');
-      class FeatureTogglesStub extends Service {
-        featureToggles = { isTextToSpeechButtonEnabled: false };
-      }
-      this.owner.register('service:featureToggles', FeatureTogglesStub);
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isTextToSpeechButtonEnabled: false });
     });
 
     test('it should not display text to speech toggle button', async function (assert) {
