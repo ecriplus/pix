@@ -24,7 +24,7 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
       await httpTestServer.register(routesUnderTest);
 
       const payloadAttributes = { 'first-name': 'firstname', 'last-name': 'lastname', email: 'partial@update.com' };
-      const payload = { data: { attributes: payloadAttributes } };
+      const payload = { data: { id: 12344, attributes: payloadAttributes } };
 
       // when
       const result = await httpTestServer.request('PATCH', '/api/admin/users/12344', payload);
@@ -47,7 +47,7 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
       await httpTestServer.register(routesUnderTest);
 
       const payloadAttributes = { 'first-name': 'firstname', 'last-name': 'lastname', email: 'partial@update.com' };
-      const payload = { data: { attributes: payloadAttributes } };
+      const payload = { data: { id: 12344, attributes: payloadAttributes } };
 
       // when
       const result = await httpTestServer.request('PATCH', '/api/admin/users/12344', payload);
@@ -98,7 +98,7 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
       await httpTestServer.register(routesUnderTest);
 
       const payloadAttributes = { 'first-name': 'firstname', 'last-name': 'lastname', email: 'partial@update.com' };
-      const payload = { data: { attributes: payloadAttributes } };
+      const payload = { data: { id: 12344, attributes: payloadAttributes } };
 
       // when
       const result = await httpTestServer.request('PATCH', '/api/admin/users/12344', payload);
