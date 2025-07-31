@@ -149,10 +149,6 @@ export default class LoginOrRegisterOidcComponent extends Component {
     return this.oidcIdentityProviders[this.args.identityProviderSlug]?.organizationName;
   }
 
-  get currentLanguage() {
-    return this.locale.currentLocale;
-  }
-
   get cguUrl() {
     return this.url.cguUrl;
   }

@@ -88,7 +88,7 @@ export default class SignupForm extends Component {
     this.isLoading = true;
 
     try {
-      user.lang = this.locale.currentLocale;
+      user.lang = this.locale.currentLanguage;
       const wasAnonymousBeforeSaving = user.isAnonymous;
       await user.save({ adapterOptions: { redirectionUrl: this.session.redirectionUrl } });
       if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && wasAnonymousBeforeSaving) {
