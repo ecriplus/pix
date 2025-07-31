@@ -211,7 +211,8 @@
       "close": "Close",
       "confirm": "Confirm",
       "global": "Actions",
-      "link-to-participant": "See whole participant's activity"
+      "link-to-participant": "See whole participant's activity",
+      "save": "Save"
     },
     "api-error-messages": {
       "bad-request-error": "The data entered was not in the correct format.",
@@ -406,6 +407,18 @@
       "deletion-modal": {
         "confirm-deletion": "Yes, I delete",
         "confirmation-checkbox": "I confirm that I have understood the impacts of the {count} deletions"
+      },
+      "edit-participant-name-modal": {
+        "error-messages":{
+          "first-name": "The user's first name cannot be empty.",
+          "last-name": "The user's name cannot be empty."
+        },
+        "fields": {
+          "first-name": "First name",
+          "last-name": "Last name"
+        },
+        "label": "Udate the participant's name",
+        "success-message": "The participant's name has been successfully updated."
       }
     }
   },
