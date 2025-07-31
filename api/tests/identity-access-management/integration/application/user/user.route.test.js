@@ -119,6 +119,7 @@ describe('Integration | Identity Access Management | Application | Route | User'
       it('returns a 403 HTTP status code', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
+        await databaseBuilder.commit();
 
         const url = '/api/users/me';
         const headers = generateAuthenticatedUserRequestHeaders({ userId });
@@ -136,6 +137,8 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('returns controller success response HTTP code', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+
       const headers = generateAuthenticatedUserRequestHeaders({ userId });
       sinon.stub(userController, 'getCertificationPointOfContact').callsFake((request, h) => h.response().code(200));
 
@@ -157,6 +160,8 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('should return 400 - Bad request when challengeType is not valid', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+
       const headers = generateAuthenticatedUserRequestHeaders({ userId });
       const url = `/api/users/${userId}/has-seen-challenge-tooltip/invalid`;
 
@@ -170,6 +175,8 @@ describe('Integration | Identity Access Management | Application | Route | User'
     it('should return 200 when challengeType is valid', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+
       const headers = generateAuthenticatedUserRequestHeaders({ userId });
       const url = `/api/users/${userId}/has-seen-challenge-tooltip/other`;
 
