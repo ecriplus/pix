@@ -6,11 +6,11 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { ORGANIZATION_FEATURE } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ParticipantRepartition } from '../../../../shared/domain/models/ParticipantRepartition.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationLearner as OrganizationLearnerToManage } from '../../../learner-management/domain/models/OrganizationLearner.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
+import { ParticipantRepartition } from '../../domain/models/ParticipantRepartition.js';
 import { AttestationParticipantStatus } from '../../domain/read-models/AttestationParticipantStatus.js';
 import { OrganizationLearner } from '../../domain/read-models/OrganizationLearner.js';
 
