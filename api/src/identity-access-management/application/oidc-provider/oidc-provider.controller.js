@@ -1,4 +1,5 @@
 import { BadRequestError, UnauthorizedError } from '../../../shared/application/http-errors.js';
+import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -53,9 +54,10 @@ async function authenticateOidcUser(request, h) {
  * @param h
  * @return {Promise<{access_token: string, logout_url_uuid: string}>}
  */
-async function createUser(request, h, dependencies = { requestResponseUtils }) {
+async function createUser(request, h, dependencies = { requestResponseUtils, localeService }) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
-  const localeFromCookie = request.state?.locale;
+  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
+
   // todo(locale): really extract the language (use new Locale(locale).language)
   const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
   const origin = getForwardedOrigin(request.headers);
