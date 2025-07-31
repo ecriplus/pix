@@ -1,7 +1,7 @@
-import { CampaignParticipationResult } from '../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationResult.js';
-import { Area } from '../../../../src/shared/domain/models/Area.js';
-import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import { expect } from '../../../test-helper.js';
+import { CampaignParticipationResult } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationResult.js';
+import { Area } from '../../../../../../src/shared/domain/models/Area.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignParticipationResult', function () {
   describe('#buildFrom', function () {
