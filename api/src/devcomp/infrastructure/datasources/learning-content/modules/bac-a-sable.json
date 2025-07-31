@@ -251,31 +251,18 @@
           "element": {
             "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
             "type": "text",
-            "content": "<p>Voici une iframe :</p>"
+            "content": "<p>Voici un Petit Objet Interactif expérimental :</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "f00133f5-0653-425b-a25f-3c9604820529",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/RPE/cartes2.html\" height=\"420\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "32e9196a-d854-4553-bb93-5a341213f6e2",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/videoCaroline.html\" height=\"800\"></iframe>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "a5e32f35-889c-45aa-8151-2da532de4eeb",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/objectif.html\" height=\"600\"></iframe>"
+            "type": "custom-draft",
+            "title": "Retourner les cartes",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/cartes2.html",
+            "instruction": "<p>Retournez les cartes.</p>",
+            "height": 400
           }
         },
         {
@@ -283,7 +270,7 @@
           "element": {
             "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
             "type": "text",
-            "content": "<p>Elles ne sont autorisées qu'en béta.</p>"
+            "content": "<p>Ils ne sont autorisés qu'en béta.</p>"
           }
         }
       ]

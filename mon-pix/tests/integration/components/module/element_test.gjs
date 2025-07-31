@@ -72,6 +72,24 @@ module('Integration | Component | Module | Element', function (hooks) {
     assert.strictEqual(findAll('qcu-image').length, 1);
   });
 
+  test('should display an element with an custom-draft element', async function (assert) {
+    // given
+    const element = {
+      id: 'f00133f5-0653-425b-a25f-3c9604820529',
+      type: 'custom-draft',
+      title: 'Retourner les cartes',
+      url: 'https://1024pix.github.io/atelier-contenus/RPE/cartes2.html',
+      instruction: '<p>Retournez les cartes.</p>',
+      height: 400,
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.dom(screen.getByTitle(element.title)).exists();
+  });
+
   test('should display an element with a text element', async function (assert) {
     // given
     const element = {

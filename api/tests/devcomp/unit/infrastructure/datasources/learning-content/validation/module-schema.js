@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { customDraftElementSchema } from './element/custom-draft-element-schema.js';
 import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
@@ -19,6 +20,7 @@ import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from './utils.js';
 
 const ALLOWED_ELEMENTS_SCHEMA = [
   { is: 'custom', then: customElementSchema },
+  { is: 'custom-draft', then: customDraftElementSchema },
   { is: 'download', then: downloadElementSchema },
   { is: 'embed', then: embedElementSchema },
   { is: 'expand', then: expandElementSchema },

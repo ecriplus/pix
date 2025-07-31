@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
 import { expect } from '../../../../../../test-helper.js';
+import { customDraftElementSchema } from './element/custom-draft-element-schema.js';
 import { customElementSchema } from './element/custom-element-schema.js';
 import { downloadElementSchema } from './element/download-schema.js';
 import { embedElementSchema } from './element/embed-schema.js';
@@ -76,6 +77,26 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
           expect(joiError).to.equal(undefined, formattedError);
         }
       });
+    });
+
+    it('should validate sample custom-draft structure', async function () {
+      try {
+        const sample = {
+          id: randomUUID(),
+          type: 'custom-draft',
+          title: 'Echange de mails',
+          url: 'https://1024pix.github.io/pixmail-alert_avast_b.html',
+          instruction: '<p>Vous participez à un échange de mail.</p>',
+          height: 400,
+        };
+
+        await customDraftElementSchema.validateAsync(sample, {
+          abortEarly: false,
+        });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
     });
 
     it('should validate sample download structure', async function () {

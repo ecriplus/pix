@@ -14,6 +14,6 @@ describe('Acceptance | Script | Get Modules as CSV', function () {
     expect(modulesListAsCsv).to.be.a('string');
     expect(modulesListAsCsv).to
       .equal(`\ufeff"Module"\t"ModuleSlug"\t"ModuleLevel"\t"ModuleLink"\t"ModuleTotalGrains"\t"ModuleTotalActivities"\t"ModuleTotalLessons"\t"ModuleDuration"\t"ModuleTotalElements"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"bac-a-sable"\t"Débutant"\t"https://app.recette.pix.fr/modules/bac-a-sable"\t11\t4\t2\t"=TEXT(5/24/60; ""mm:ss"")"\t18`);
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"bac-a-sable"\t"Débutant"\t"https://app.recette.pix.fr/modules/bac-a-sable"\t11\t4\t2\t"=TEXT(5/24/60; ""mm:ss"")"\t19`);
   });
 });

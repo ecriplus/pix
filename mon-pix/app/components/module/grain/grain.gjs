@@ -20,6 +20,7 @@ export default class ModuleGrain extends Component {
 
   static AVAILABLE_ELEMENT_TYPES = [
     'custom',
+    'custom-draft',
     'download',
     'embed',
     'expand',

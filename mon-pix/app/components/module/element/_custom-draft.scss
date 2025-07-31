@@ -1,0 +1,18 @@
+.element-custom-draft {
+  &__instruction {
+    margin-bottom: var(--pix-spacing-2x);
+    font-weight: var(--pix-font-medium);
+  }
+
+  &__iframe {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: none;
+  }
+
+  &__reset {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

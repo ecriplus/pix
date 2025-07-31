@@ -7,6 +7,7 @@ import { BlockText } from '../../domain/models/block/BlockText.js';
 import { ComponentElement } from '../../domain/models/component/ComponentElement.js';
 import { ComponentStepper } from '../../domain/models/component/ComponentStepper.js';
 import { Step } from '../../domain/models/component/Step.js';
+import { CustomDraft } from '../../domain/models/element/CustomDraft.js';
 import { CustomElement } from '../../domain/models/element/CustomElement.js';
 import { Download } from '../../domain/models/element/Download.js';
 import { Embed } from '../../domain/models/element/Embed.js';
@@ -93,6 +94,8 @@ export class ModuleFactory {
     switch (element.type) {
       case 'custom':
         return ModuleFactory.#buildCustom(element);
+      case 'custom-draft':
+        return ModuleFactory.#buildCustomDraft(element);
       case 'download':
         return ModuleFactory.#buildDownload(element);
       case 'embed':
@@ -135,6 +138,16 @@ export class ModuleFactory {
       id: element.id,
       tagName: element.tagName,
       props: element.props,
+    });
+  }
+
+  static #buildCustomDraft(element) {
+    return new CustomDraft({
+      id: element.id,
+      title: element.title,
+      url: element.url,
+      instruction: element.instruction,
+      height: element.height,
     });
   }
 

@@ -405,6 +405,17 @@
         {
           "type": "element",
           "element": {
+            "id": "f00133f5-0653-425b-a25f-3c9604820529",
+            "type": "custom-draft",
+            "title": "Retourner les cartes",
+            "url": "https://1024pix.github.io/atelier-contenus/RPE/cartes2.html",
+            "instruction": "<p>Retournez les cartes.</p>",
+            "height": 450
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "0e3315fd-98ad-492f-9046-4aa867495d85",
             "type": "custom",
             "isCompletionRequired": false,
