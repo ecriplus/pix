@@ -681,7 +681,10 @@
                 "proposalB": "faux",
                 "solution": "A"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]

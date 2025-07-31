@@ -528,7 +528,10 @@
                 "proposalB": "Flou et vague",
                 "solution": "B"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]

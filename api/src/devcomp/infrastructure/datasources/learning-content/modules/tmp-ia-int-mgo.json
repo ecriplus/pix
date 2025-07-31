@@ -148,7 +148,10 @@
                 "proposalB": "faux",
                 "solution": "B"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]
@@ -599,7 +602,10 @@
                 "proposalB": "faux",
                 "solution": "B"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]

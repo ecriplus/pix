@@ -521,7 +521,10 @@
                 "proposalB": "faux",
                 "solution": "B"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]
