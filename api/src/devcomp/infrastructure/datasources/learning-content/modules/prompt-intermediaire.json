@@ -163,15 +163,18 @@
           "element": {
             "id": "77fa2e62-b572-40ed-ad92-2b6433efaf45",
             "type": "text",
-            "content": "<p>Gustave a envoyé les invitations pour le tournoi. Il a hâte !&nbsp; </p><p>Mais certaines personnes ne lui ont pas encore répondu…&nbsp; <br>Il veut écrire un message de relance mais il hésite sur la manière de le formuler.🤔 <br>Testez différents tons de messages avec l’IA.</p>\n"
+            "content": "<p>Gustave a envoyé les invitations pour le tournoi. Il a hâte !&nbsp; </p><p>Mais certaines personnes ne lui ont pas encore répondu…&nbsp; <br>Il veut écrire un message de relance mais il hésite sur la manière de le formuler.🤔 <br></p>\n"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "4f35bf9d-e319-4a6d-b1f5-dc0a84f2139d",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/JTE/testerleton.html\" height=\"450\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/JTE/testerleton.html",
+            "instruction": "<p>Testez différents tons de messages avec l’IA.</p>",
+            "height": 450
           }
         }
       ]
@@ -614,8 +617,11 @@
           "type": "element",
           "element": {
             "id": "c992a84d-933f-4a33-8485-5b64cacd6aea",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/JTE/actualitestournoi.html\" height=\"900\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/JTE/actualitestournoi.html",
+            "instruction": "",
+            "height": 550
           }
         },
         {

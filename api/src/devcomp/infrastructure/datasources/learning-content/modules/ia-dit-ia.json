@@ -45,8 +45,11 @@
           "type": "element",
           "element": {
             "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
-            "type": "text",
-            "content": "<p> Derrière ces deux lettres, « I » et « A », se cache l'<strong>Intelligence Artificielle</strong>.<br><strong>À votre avis, de quand date l'expression « intelligence artificielle » ?</strong>&nbsp;⌛</p><iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html\" height=\"325\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html",
+            "instruction": "<p> Derrière ces deux lettres, « I » et « A », se cache l'<strong>Intelligence Artificielle</strong>.<br><strong>À votre avis, de quand date l'expression « intelligence artificielle » ?</strong>&nbsp;⌛</p>",
+            "height": 325
           }
         }
       ]
@@ -76,15 +79,18 @@
           "element": {
             "id": "937b62e7-c4f5-479a-8e1f-afbe7881fa92",
             "type": "text",
-            "content": "<p>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur !<br><strong>Selon vous, que peut faire un ordinateur ?</strong></p>"
+            "content": "<p>Et si on regardait plus précisément ce qu'est l'IA ? Pour cela, partons de l’ordinateur !</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "183c3094-b691-44ca-a75c-baed6b3c93c6",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-ordinateur.html\" height=\"650\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-ordinateur.html",
+            "instruction": "<p><strong>Selon vous, que peut faire un ordinateur ?</strong></p>",
+            "height": 550
           }
         }
       ]
@@ -129,15 +135,18 @@
           "element": {
             "id": "8dba133c-906f-4793-939f-015df7d2acce",
             "type": "text",
-            "content": "<p>Mariam est équipée de nombreux appareils électroniques.<br><strong>Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</strong></p>"
+            "content": "<p>Mariam est équipée de nombreux appareils électroniques.</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-image-interactive.html\" height=\"520\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-image-interactive.html",
+            "instruction": "<p><strong>Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</strong></p>",
+            "height": 520
           }
         },
         {
@@ -199,15 +208,18 @@
           "element": {
             "id": "a2b1291d-6043-4582-ac69-337835330c07",
             "type": "text",
-            "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l'exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p><p><strong>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</strong></p>"
+            "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l'exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p>"
           }
         },
         {
           "type": "element",
           "element": {
             "id": "c4a0562d-60f8-48b3-8489-2c8c195597b8",
-            "type": "text",
-            "content": "<iframe title=\"dnd\" src=\"https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html\" height=\"590\"></iframe>"
+            "type": "custom-draft",
+            "title": "Élément interactif",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html",
+            "instruction": "<p><strong>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</strong></p>",
+            "height": 550
           }
         }
       ]
