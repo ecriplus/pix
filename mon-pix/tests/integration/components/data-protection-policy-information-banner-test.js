@@ -1,12 +1,13 @@
 import { render } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
-import { setLocale, t } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import ENV from 'mon-pix/config/environment';
 import PixWindow from 'mon-pix/utils/pix-window';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import { stubCurrentUserService, stubSessionService } from '../../helpers/service-stubs';
+import { setCurrentLocale } from '../../helpers/setup-intl';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | data-protection-policy-information-banner', function (hooks) {
@@ -112,10 +113,10 @@ module('Integration | Component | data-protection-policy-information-banner', fu
           module('when user language is "en"', function () {
             test('displays the data protection policy banner in english', async function (assert) {
               // given
+              await setCurrentLocale('en');
               stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
               _stubWindowLocationHostname('pix.org');
               _communicationBannerIsNotDisplayed();
-              setLocale('en');
 
               // when
               const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);
@@ -137,10 +138,10 @@ module('Integration | Component | data-protection-policy-information-banner', fu
           module('when user language is "nl"', function () {
             test('displays the data protection policy banner in dutch', async function (assert) {
               // given
+              await setCurrentLocale('nl');
               stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
               _stubWindowLocationHostname('pix.org');
               _communicationBannerIsNotDisplayed();
-              setLocale('nl');
 
               // when
               const screen = await render(hbs`<DataProtectionPolicyInformationBanner />`);

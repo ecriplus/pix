@@ -5,10 +5,12 @@ import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
 import { authenticateByEmail } from '../helpers/authentication';
+import setupIntl from '../helpers/setup-intl.js';
 
 module('Acceptance | User account', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
   module('When in profile', function () {
     test('should open tests page when click on menu', async function (assert) {
