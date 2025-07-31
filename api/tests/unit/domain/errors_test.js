@@ -6,7 +6,6 @@ import {
   EntityValidationError,
   ForbiddenAccess,
   InvalidTemporaryKeyError,
-  LocaleFormatError,
 } from '../../../src/shared/domain/errors.js';
 import { expect } from '../../test-helper.js';
 
@@ -251,10 +250,6 @@ describe('Unit | Domain | Errors', function () {
 
   it('exports SendingEmailToInvalidEmailAddressError', function () {
     expect(errors.SendingEmailToInvalidEmailAddressError).to.exist;
-  });
-
-  it('exports LocaleFormatError', function () {
-    expect(LocaleFormatError).to.exist;
   });
 
   it('NotEnoughDaysPassedBeforeResetCampaignParticipationError error should have the correct wording', function () {

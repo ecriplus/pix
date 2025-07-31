@@ -433,14 +433,6 @@ class LearningContentResourceNotFound extends Error {
   }
 }
 
-class LocaleFormatError extends DomainError {
-  constructor(locale) {
-    super(`Given locale is in invalid format: "${locale}"`);
-    this.code = 'INVALID_LOCALE_FORMAT';
-    this.meta = { locale };
-  }
-}
-
 class MissingAssessmentId extends DomainError {
   constructor(message = 'AssessmentId manquant ou incorrect') {
     super(message);
@@ -1066,7 +1058,6 @@ export {
   InvalidVerificationCodeError,
   LanguageNotSupportedError,
   LearningContentResourceNotFound,
-  LocaleFormatError,
   ManyOrganizationsFoundError,
   MatchingReconciledStudentNotFoundError,
   MembershipCreationError,

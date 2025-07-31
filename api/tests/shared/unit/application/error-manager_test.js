@@ -24,7 +24,6 @@ import {
   InvalidInputDataError,
   InvalidJuryLevelError,
   InvalidVerificationCodeError,
-  LocaleFormatError,
   MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
   NoCertificateForDivisionError,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
@@ -237,27 +236,6 @@ describe('Shared | Unit | Application | ErrorManager', function () {
 
       // then
       expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(error.message, error.code);
-    });
-
-    context('Locale errors', function () {
-      context('When receiving LocaleFormatError', function () {
-        it('instantiates a BadRequest error', function () {
-          // given
-          const error = new LocaleFormatError('zzzz');
-          sinon.stub(HttpErrors, 'BadRequestError');
-          const params = { request: {}, h: hFake, error };
-
-          // when
-          handle(params.request, params.h, params.error);
-
-          // then
-          expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(
-            'Given locale is in invalid format: "zzzz"',
-            'INVALID_LOCALE_FORMAT',
-            { locale: 'zzzz' },
-          );
-        });
-      });
     });
 
     context('when handling an OidcError', function () {
