@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import QabProposalButton from 'mon-pix/components/module/element/qab/proposal-button';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -42,7 +43,7 @@ module('Integration | Component | Module | QabProposalButton', function (hooks) 
       const onSubmit = sinon.stub();
 
       // when
-      await render(
+      const screen = await render(
         <template>
           <form onSubmit={{onSubmit}}><QabProposalButton
               @text={{text}}
@@ -51,6 +52,7 @@ module('Integration | Component | Module | QabProposalButton', function (hooks) 
             /></form>
         </template>,
       );
+      await click(screen.getByRole('button', { name: 'Option B: Faux' }));
 
       // then
       sinon.assert.notCalled(onSubmit);

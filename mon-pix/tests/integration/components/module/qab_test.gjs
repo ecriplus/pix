@@ -130,7 +130,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
     });
 
     module('when user answers the last card', function () {
-      test('should display the score card and call "onAnswer" function passed as argument', async function (assert) {
+      test('should display the score card, a feedback and call "onAnswer" function passed as argument', async function (assert) {
         // given
         const qabElement = _getQabElement();
         const onAnswerStub = sinon.stub();
@@ -150,7 +150,28 @@ module('Integration | Component | Module | QAB', function (hooks) {
         });
 
         assert.dom(screen.getByText('Votre score : 1/2')).exists();
+        assert.dom(screen.getByText('Continuez comme ça !')).exists();
         assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
+      });
+
+      module('when there is no feedback', function () {
+        test('should also display the retry button', async function (assert) {
+          // given
+          const qabElement = { ..._getQabElement(), feedback: undefined };
+          const onAnswerStub = sinon.stub();
+
+          // when
+          const screen = await render(
+            <template><ModuleQabElement @element={{qabElement}} @onAnswer={{onAnswerStub}} /></template>,
+          );
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+          await click(screen.getByRole('button', { name: 'Option A: Vrai' }));
+          await clock.tickAsync(NEXT_CARD_DELAY);
+
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
+        });
       });
 
       module('when user clicks the retry button', function () {
@@ -216,5 +237,8 @@ function _getQabElement(solution = 'A') {
         solution: 'B',
       },
     ],
+    feedback: {
+      diagnosis: '<p>Continuez comme ça !</p>',
+    },
   };
 }

@@ -21,6 +21,35 @@
     justify-items: center;
   }
 
+  &__feedback {
+    @media (not (prefers-reduced-motion: reduce)) {
+      animation: 0.5s fade-in ease-in-out;
+
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+
+        33% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+
+    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+    color: var(--pix-neutral-800);
+    background: var(--pix-orga-50);
+    border-radius: 16px;
+  }
+
+  &__retry-button {
+    margin-bottom: var(--pix-spacing-2x);
+  }
+
   &__proposals {
     display: flex;
     flex-wrap: wrap;
