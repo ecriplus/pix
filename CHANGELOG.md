@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.171.0](https://github.com/1024pix/pix/compare/v5.170.0...v5.171.0) (2025-07-31)
+
+### :rocket: Amélioration
+
+- [#13068](https://github.com/1024pix/pix/pull/13068) Ajout vidéo maison "Bravo" dans le module souris-1 
+- [#13062](https://github.com/1024pix/pix/pull/13062) Ajouter un champ feedback à l'élément QAB (PIX-18945) 
+- [#13059](https://github.com/1024pix/pix/pull/13059) Changer la manière de calculer l'avancement d'un module pour un utilisateur (PIX-18938) 
+- [#13064](https://github.com/1024pix/pix/pull/13064) Créer le type d'élément `custom-draft` (PIX-18815) 
+- [#13058](https://github.com/1024pix/pix/pull/13058) Créer une api interne pour récupérer les modules recommandés lors de participations à des campagnes (PIX-18924) 
+- [#13050](https://github.com/1024pix/pix/pull/13050) Module apprentissage IA intermediaire s31 
+- [#13046](https://github.com/1024pix/pix/pull/13046) Persister et transmettre les informations de consommation de tokens vers la preview pour les épreuves avec prompt LLM (PIX-18928) 
+- [#13067](https://github.com/1024pix/pix/pull/13067) Relayer l'info de modération d'un message adressé au LLM au front, et persister l'info dans le Chat (PIX-18943) 
+- [#13056](https://github.com/1024pix/pix/pull/13056) Revue wording modules apprenants (PIX-18873) 
+
+### :bug: Correction
+
+- [#13057](https://github.com/1024pix/pix/pull/13057)  Corriger le fait qu'on ne peut plus passer à la carte suivante sur les Flashcards (PIX-18939 
+- [#13037](https://github.com/1024pix/pix/pull/13037) Afficher correctement le référentiel dans le sélecteur de sujets sur Pix Orga (PIX-17183). 
+
+### :building_construction: Tech
+
+- [#13063](https://github.com/1024pix/pix/pull/13063) Corriger le double déploiement des frontends à la création de RA
+
 # [5.170.0](https://github.com/1024pix/pix/compare/v5.169.0...v5.170.0) (2025-07-30)
 
 ### :rocket: Amélioration
