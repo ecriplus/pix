@@ -2,7 +2,6 @@ export class Eligibility {
   constructor({ organizationLearner, organization, campaignParticipations = [] }) {
     this.organizationLearner = {
       id: organizationLearner?.id,
-      MEFCode: organizationLearner?.MEFCode,
     };
     this.organization = organization;
     this.campaignParticipations = campaignParticipations;

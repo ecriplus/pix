@@ -38,7 +38,6 @@ describe('Unit | API | Organization Learner With Participations', function () {
         {
           organizationLearner: {
             id: organizationLearner1.id,
-            MEFCode: organizationLearner1.MEFCode,
           },
           organization: {
             id: organization1.id,
@@ -56,7 +55,6 @@ describe('Unit | API | Organization Learner With Participations', function () {
         {
           organizationLearner: {
             id: organizationLearner2.id,
-            MEFCode: organizationLearner2.MEFCode,
           },
           organization: {
             id: organization2.id,
