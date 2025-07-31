@@ -54,8 +54,8 @@ export default class CurrentSessionService extends SessionService {
   }
 
   async handleUserLanguageAndLocale(transition = null) {
-    const queryParamLanguage = transition?.to?.queryParams?.lang;
-    await this._loadCurrentUserAndLocale(queryParamLanguage);
+    const queryParams = transition?.to?.queryParams;
+    await this._loadCurrentUserAndLocale(queryParams);
   }
 
   get redirectionUrl() {
@@ -116,9 +116,9 @@ export default class CurrentSessionService extends SessionService {
     userIdForLearnerAssociationStorage.remove();
   }
 
-  async _loadCurrentUserAndLocale(language) {
+  async _loadCurrentUserAndLocale(queryParams) {
     await this.currentUser.load();
-    this.locale.detectBestLocale({ language, user: this.currentUser.user });
+    this.locale.setBestLocale({ user: this.currentUser.user, queryParams });
   }
 
   _getRouteAfterInvalidation() {
