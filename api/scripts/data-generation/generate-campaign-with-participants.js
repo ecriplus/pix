@@ -195,7 +195,7 @@ async function _getTargetProfileAndSkills(targetProfileId, profileType) {
     }
 
     const targetProfile = await knex('target-profiles').select('name', 'id').where({ id: targetProfileId }).first();
-    return { targetProfile, allSkills };
+    return { targetProfile, skills: allSkills };
   }
   _log('Création du profil cible...');
   const competences = await competenceRepository.listPixCompetencesOnly();
@@ -244,7 +244,7 @@ async function _createCampaign({ organizationId, campaignType, targetProfileId, 
     .insert({
       name: `Campaign_${organizationId}_${targetProfileId}`,
       code,
-      ownerId: 1,
+      ownerId: adminMemberId,
       organizationId,
       creatorId: adminMemberId,
       targetProfileId,
