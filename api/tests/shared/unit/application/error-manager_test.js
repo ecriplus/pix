@@ -25,7 +25,6 @@ import {
   InvalidJuryLevelError,
   InvalidVerificationCodeError,
   LocaleFormatError,
-  LocaleNotSupportedError,
   MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
   NoCertificateForDivisionError,
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
@@ -256,25 +255,6 @@ describe('Shared | Unit | Application | ErrorManager', function () {
             'Given locale is in invalid format: "zzzz"',
             'INVALID_LOCALE_FORMAT',
             { locale: 'zzzz' },
-          );
-        });
-      });
-
-      context('When receiving LocaleNotSupportedError', function () {
-        it('instantiates a BadRequest error', function () {
-          // given
-          const error = new LocaleNotSupportedError('nl-BE');
-          sinon.stub(HttpErrors, 'BadRequestError');
-          const params = { request: {}, h: hFake, error };
-
-          // when
-          handle(params.request, params.h, params.error);
-
-          // then
-          expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(
-            'Given locale is not supported : "nl-BE"',
-            'LOCALE_NOT_SUPPORTED',
-            { locale: 'nl-BE' },
           );
         });
       });

@@ -441,14 +441,6 @@ class LocaleFormatError extends DomainError {
   }
 }
 
-class LocaleNotSupportedError extends DomainError {
-  constructor(locale) {
-    super(`Given locale is not supported : "${locale}"`);
-    this.code = 'LOCALE_NOT_SUPPORTED';
-    this.meta = { locale };
-  }
-}
-
 class MissingAssessmentId extends DomainError {
   constructor(message = 'AssessmentId manquant ou incorrect') {
     super(message);
@@ -1075,7 +1067,6 @@ export {
   LanguageNotSupportedError,
   LearningContentResourceNotFound,
   LocaleFormatError,
-  LocaleNotSupportedError,
   ManyOrganizationsFoundError,
   MatchingReconciledStudentNotFoundError,
   MembershipCreationError,

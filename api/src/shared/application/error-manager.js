@@ -156,9 +156,6 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.LanguageNotSupportedError) {
     return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
   }
-  if (error instanceof SharedDomainErrors.LocaleNotSupportedError) {
-    return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
-  }
   if (error instanceof AdminMemberError) {
     return new HttpErrors.UnprocessableEntityError(error.message, error.code);
   }

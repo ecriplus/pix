@@ -7,7 +7,6 @@ import {
   ForbiddenAccess,
   InvalidTemporaryKeyError,
   LocaleFormatError,
-  LocaleNotSupportedError,
 } from '../../../src/shared/domain/errors.js';
 import { expect } from '../../test-helper.js';
 
@@ -256,10 +255,6 @@ describe('Unit | Domain | Errors', function () {
 
   it('exports LocaleFormatError', function () {
     expect(LocaleFormatError).to.exist;
-  });
-
-  it('exports LocaleNotSupportedError', function () {
-    expect(LocaleNotSupportedError).to.exist;
   });
 
   it('NotEnoughDaysPassedBeforeResetCampaignParticipationError error should have the correct wording', function () {
