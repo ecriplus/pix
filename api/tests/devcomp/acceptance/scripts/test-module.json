@@ -463,7 +463,10 @@
                 "proposalB": "Le coeur",
                 "solution": "B"
               }
-            ]
+            ],
+            "feedback": {
+              "diagnosis": ""
+            }
           }
         }
       ]
