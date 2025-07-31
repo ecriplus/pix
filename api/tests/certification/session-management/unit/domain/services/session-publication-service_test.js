@@ -40,19 +40,19 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
   beforeEach(function () {
     candidateWithRecipient1 = domainBuilder.buildCertificationCandidate({
       resultRecipientEmail: recipient1,
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     candidateWithRecipient2 = domainBuilder.buildCertificationCandidate({
       resultRecipientEmail: recipient2,
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     candidate2WithRecipient2 = domainBuilder.buildCertificationCandidate({
       resultRecipientEmail: recipient2WithUpperCases,
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     candidateWithNoRecipient = domainBuilder.buildCertificationCandidate({
       resultRecipientEmail: null,
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     originalSession = domainBuilder.certification.sessionManagement.buildSession({
       id: sessionId,
@@ -337,7 +337,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       it('should leave resultSentToPrescriberAt untouched', async function () {
         // given
         const candidateWithNoRecipient = domainBuilder.buildCertificationCandidate({
-          subscriptions: [domainBuilder.buildCoreSubscription()],
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
           resultRecipientEmail: null,
         });
         const sessionWithoutResultsRecipient = domainBuilder.certification.sessionManagement.buildSession({

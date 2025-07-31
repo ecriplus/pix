@@ -342,7 +342,7 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
     extraTimePercentage: 0.15,
     billingMode: hasBillingMode ? BILLING_MODES.PAID : null,
     prepaymentCode: null,
-    subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
     organizationLearnerId: null,
     userId: null,
   };
@@ -365,7 +365,7 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
     extraTimePercentage: null,
     billingMode: hasBillingMode ? BILLING_MODES.FREE : null,
     prepaymentCode: null,
-    subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
     organizationLearnerId: null,
     userId: null,
   };
@@ -376,7 +376,7 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
   if (complementaryCertifications.length > 0) {
     // CLEA
     secondCandidate.subscriptions.push(
-      domainBuilder.buildComplementarySubscription({
+      domainBuilder.certification.enrolment.buildComplementarySubscription({
         certificationCandidateId: null,
         complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
       }),

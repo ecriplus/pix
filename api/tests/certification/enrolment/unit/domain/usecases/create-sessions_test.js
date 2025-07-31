@@ -32,7 +32,7 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
     candidateData = {
       sessionId: undefined,
       subscriptions: [
-        domainBuilder.buildCoreSubscription(),
+        domainBuilder.certification.enrolment.buildCoreSubscription(),
         domainBuilder.buildComplementaryCertification({
           id: 1,
           label: 'Pix+Droit',

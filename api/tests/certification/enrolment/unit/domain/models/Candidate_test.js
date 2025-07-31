@@ -3,10 +3,7 @@ import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/d
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidatesError } from '../../../../../../src/shared/domain/errors.js';
-import {
-  CertificationCandidate,
-  ComplementaryCertification,
-} from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
 const FIRST_NAME_ERROR_CODE = CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_FIRST_NAME_REQUIRED.code;
@@ -398,7 +395,9 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           // given
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
-            subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+            ],
           });
 
           // when, then
@@ -410,10 +409,11 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.certification.enrolment.buildDoubleCertificationSubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
+                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
               }),
-              domainBuilder.buildCoreSubscription({
+              domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: null,
               }),
             ],
@@ -427,7 +427,7 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
                 complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
               }),
@@ -462,10 +462,10 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
               }),
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
               }),
             ],
@@ -486,11 +486,12 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
               }),
-              domainBuilder.certification.enrolment.buildDoubleCertificationSubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
+                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
               }),
             ],
           });
@@ -510,10 +511,10 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildCoreSubscription({
+              domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: null,
               }),
-              domainBuilder.buildCoreSubscription({
+              domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: null,
               }),
             ],
@@ -534,10 +535,10 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             ...candidateData,
             subscriptions: [
-              domainBuilder.buildCoreSubscription({
+              domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: null,
               }),
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: null,
               }),
             ],
@@ -1110,7 +1111,9 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       // given
       const candidate = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData,
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
 
       // when
@@ -1124,7 +1127,9 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       // given
       const candidate = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData,
-        subscriptions: [domainBuilder.buildComplementarySubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildComplementarySubscription({ certificationCandidateId: null }),
+        ],
       });
 
       // when

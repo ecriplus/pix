@@ -32,7 +32,9 @@ describe('Certification | Enrolment | Unit | UseCase | enrol-students-to-session
           sex: sr.sex,
           sessionId: sessionId,
           organizationLearnerId: sr.id,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
       });
 
@@ -101,7 +103,9 @@ describe('Certification | Enrolment | Unit | UseCase | enrol-students-to-session
         birthCity: organizationLearner.birthCity,
         sessionId: sessionId,
         organizationLearnerId: 1,
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
 
       const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();

@@ -10,7 +10,7 @@ class Subscription {
    * @param {Object} params
    * @param {number} params.certificationCandidateId - identifier of the certification candidate
    * @param {SUBSCRIPTION_TYPES} params.type
-   * @param {string} params.complementaryCertificationKey
+   * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
    */
   constructor({ certificationCandidateId, type, complementaryCertificationKey }) {
     this.certificationCandidateId = certificationCandidateId;
@@ -53,7 +53,7 @@ class Subscription {
   }
 
   get id() {
-    return `${this.certificationCandidateId}-${this.complementaryCertificationKey ?? 'CORE'}`;
+    return `${this.certificationCandidateId}-${this.complementaryCertificationKey ?? SUBSCRIPTION_TYPES.CORE}`;
   }
 }
 

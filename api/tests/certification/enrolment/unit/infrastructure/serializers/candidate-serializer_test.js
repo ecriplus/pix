@@ -107,11 +107,11 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
           ...candidateData,
           complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
           subscriptions: [
-            domainBuilder.buildComplementarySubscription({
+            domainBuilder.certification.enrolment.buildComplementarySubscription({
               certificationCandidateId: null,
               complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
             }),
-            domainBuilder.buildCoreSubscription({ certificationCandidateId: null }),
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
           ],
         }),
       );

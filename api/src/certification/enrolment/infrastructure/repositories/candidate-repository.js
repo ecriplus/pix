@@ -76,11 +76,11 @@ export async function update(candidate) {
     if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
       await knexConn('certification-subscriptions').insert({
         certificationCandidateId: candidate.id,
-        type: SUBSCRIPTION_TYPES.CORE,
+        type: subscription.type,
         complementaryCertificationId: null,
       });
     } else {
-      const complementaryCertification = await knexConn('complementary-certifications')
+      const { id: complementaryCertificationId } = await knexConn('complementary-certifications')
         .select('id')
         .where({
           key: subscription.complementaryCertificationKey,
@@ -89,8 +89,8 @@ export async function update(candidate) {
 
       await knexConn('certification-subscriptions').insert({
         certificationCandidateId: candidate.id,
-        type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: complementaryCertification.id,
+        type: subscription.type,
+        complementaryCertificationId: complementaryCertificationId,
       });
     }
   }
@@ -114,18 +114,18 @@ export async function insert(candidate) {
     if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
       await knexTransaction('certification-subscriptions').insert({
         certificationCandidateId: candidateId,
-        type: SUBSCRIPTION_TYPES.CORE,
+        type: subscription.type,
         complementaryCertificationId: null,
       });
     } else {
-      const complementaryCertification = await knexTransaction('complementary-certifications')
+      const { id: complementaryCertificationId } = await knexTransaction('complementary-certifications')
         .select('id')
         .where({ key: subscription.complementaryCertificationKey })
         .first();
       await knexTransaction('certification-subscriptions').insert({
         certificationCandidateId: candidateId,
         type: subscription.type,
-        complementaryCertificationId: complementaryCertification.id,
+        complementaryCertificationId: complementaryCertificationId,
       });
     }
   }
@@ -162,11 +162,23 @@ export async function saveInSession({ candidate, sessionId }) {
     .returning('id');
 
   for (const subscription of candidate.subscriptions) {
-    await knexTransaction('certification-subscriptions').insert({
-      certificationCandidateId,
-      type: subscription.type,
-      complementaryCertificationId: subscription.complementaryCertificationId,
-    });
+    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
+      await knexTransaction('certification-subscriptions').insert({
+        certificationCandidateId: certificationCandidateId,
+        type: subscription.type,
+        complementaryCertificationId: null,
+      });
+    } else {
+      const { id: complementaryCertificationId } = await knexTransaction('complementary-certifications')
+        .select('id')
+        .where({ key: subscription.complementaryCertificationKey })
+        .first();
+      await knexTransaction('certification-subscriptions').insert({
+        certificationCandidateId: certificationCandidateId,
+        type: subscription.type,
+        complementaryCertificationId: complementaryCertificationId,
+      });
+    }
   }
 
   return certificationCandidateId;

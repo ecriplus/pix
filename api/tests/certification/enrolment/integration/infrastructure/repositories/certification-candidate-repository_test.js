@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { ComplementaryCertification } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertification.js';
+import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import * as certificationCandidateRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-candidate-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -169,9 +170,10 @@ describe('Integration | Repository | CertificationCandidate', function () {
     context('when there is one certification candidate with the given session id and user id', function () {
       it('should fetch the candidate', async function () {
         // when
-        const actualCandidate = await certificationCandidateRepository.getBySessionIdAndUserId({ sessionId, userId });
+        const result = await certificationCandidateRepository.getBySessionIdAndUserId({ sessionId, userId });
 
         // then
+        const actualCandidate = _.omit(result, 'subscriptions');
         expect(actualCandidate).to.deep.equal({
           accessibilityAdjustmentNeeded: false,
           authorizedToStart: false,
@@ -201,20 +203,20 @@ describe('Integration | Repository | CertificationCandidate', function () {
           resultRecipientEmail: 'somerecipientmail@example.net',
           sessionId,
           sex: 'M',
-          subscriptions: [
-            {
-              certificationCandidateId,
-              complementaryCertificationKey: null,
-              type: 'CORE',
-            },
-            {
-              certificationCandidateId,
-              complementaryCertificationKey: complementaryCertification.key,
-              type: 'COMPLEMENTARY',
-            },
-          ],
           userId: userId,
         });
+        expect(result.subscriptions).to.deep.have.members([
+          {
+            certificationCandidateId,
+            complementaryCertificationKey: null,
+            type: SUBSCRIPTION_TYPES.CORE,
+          },
+          {
+            certificationCandidateId,
+            complementaryCertificationKey: complementaryCertification.key,
+            type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+          },
+        ]);
       });
     });
 
@@ -269,7 +271,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
           domainBuilder.buildCertificationCandidate({
             id: certificationCandidate.id,
             authorizedToStart: false,
-            subscriptions: [domainBuilder.buildCoreSubscription()],
+            subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
           }),
         );
 
@@ -309,7 +311,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
           domainBuilder.buildCertificationCandidate({
             id: wrongCandidateId,
             authorizedToStart: false,
-            subscriptions: [domainBuilder.buildCoreSubscription()],
+            subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
           }),
         );
 
@@ -355,7 +357,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
             ...certificationCandidate,
             complementaryCertification: null,
             subscriptions: [
-              domainBuilder.buildCoreSubscription({
+              domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: certificationCandidate.id,
               }),
             ],
@@ -386,7 +388,7 @@ describe('Integration | Repository | CertificationCandidate', function () {
           domainBuilder.buildCertificationCandidate({
             ...certificationCandidate,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate.id,
                 complementaryCertificationId: complementaryCertification.id,
               }),
@@ -416,28 +418,51 @@ describe('Integration | Repository | CertificationCandidate', function () {
         await databaseBuilder.commit();
 
         // when
-        const certificationCandidateWithComplementaryCertification =
-          await certificationCandidateRepository.getWithComplementaryCertification({ id: certificationCandidate.id });
+        const result = await certificationCandidateRepository.getWithComplementaryCertification({
+          id: certificationCandidate.id,
+        });
 
         // then
-        expect(certificationCandidateWithComplementaryCertification).to.deep.equal(
-          domainBuilder.buildCertificationCandidate({
-            ...certificationCandidate,
-            subscriptions: [
-              domainBuilder.buildCoreSubscription({
-                certificationCandidateId: certificationCandidate.id,
-              }),
-              domainBuilder.buildComplementarySubscription({
-                complementaryCertificationId: complementaryCertification.id,
-                certificationCandidateId: certificationCandidate.id,
-              }),
-            ],
-            complementaryCertification:
-              domainBuilder.certification.sessionManagement.buildCertificationSessionComplementaryCertification(
-                complementaryCertification,
-              ),
+        const certificationCandidateWithComplementaryCertification = _.omit(result, 'subscriptions');
+        expect(certificationCandidateWithComplementaryCertification).to.deep.equal({
+          accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
+          authorizedToStart: certificationCandidate.authorizedToStart,
+          billingMode: certificationCandidate.billingMode,
+          birthCity: certificationCandidate.birthCity,
+          birthCountry: certificationCandidate.birthCountry,
+          birthINSEECode: certificationCandidate.birthINSEECode,
+          birthPostalCode: certificationCandidate.birthPostalCode,
+          birthProvinceCode: certificationCandidate.birthProvinceCode,
+          birthdate: certificationCandidate.birthdate,
+          createdAt: certificationCandidate.createdAt,
+          email: certificationCandidate.email,
+          externalId: certificationCandidate.externalId,
+          extraTimePercentage: certificationCandidate.extraTimePercentage,
+          firstName: certificationCandidate.firstName,
+          hasSeenCertificationInstructions: certificationCandidate.hasSeenCertificationInstructions,
+          id: certificationCandidate.id,
+          lastName: certificationCandidate.lastName,
+          organizationLearnerId: certificationCandidate.organizationLearnerId,
+          prepaymentCode: certificationCandidate.prepaymentCode,
+          reconciledAt: certificationCandidate.reconciledAt,
+          resultRecipientEmail: certificationCandidate.resultRecipientEmail,
+          sessionId: certificationCandidate.sessionId,
+          sex: certificationCandidate.sex,
+          userId: certificationCandidate.userId,
+          complementaryCertification:
+            domainBuilder.certification.sessionManagement.buildCertificationSessionComplementaryCertification(
+              complementaryCertification,
+            ),
+        });
+        expect(result.subscriptions).to.deep.have.members([
+          domainBuilder.certification.enrolment.buildCoreSubscription({
+            certificationCandidateId: certificationCandidate.id,
           }),
-        );
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
+            complementaryCertificationId: complementaryCertification.id,
+            certificationCandidateId: certificationCandidate.id,
+          }),
+        ]);
       });
     });
   });

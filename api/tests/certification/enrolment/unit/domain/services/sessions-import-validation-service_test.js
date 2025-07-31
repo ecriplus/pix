@@ -568,7 +568,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         // then
         expect(certificationCandidateComplementaryErrors).to.be.empty;
         expect(subscriptions).to.deepEqualArray([
-          domainBuilder.buildCoreSubscription({ certificationCandidateId: null }),
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
         ]);
       });
     });
@@ -596,8 +596,8 @@ describe('Unit | Service | sessions import validation Service', function () {
         // then
         expect(certificationCandidateComplementaryErrors).to.be.empty;
         expect(subscriptions).to.deepEqualArray([
-          domainBuilder.buildCoreSubscription({ certificationCandidateId: null }),
-          domainBuilder.buildComplementarySubscription({
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
             certificationCandidateId: null,
             complementaryCertificationId: 3,
           }),
@@ -1050,6 +1050,6 @@ function _buildValidCandidateModel({ lineNumber = 0, candidateNumber = 2 } = { c
     extraTimePercentage: 20,
     billingMode: 'PAID',
     line: lineNumber,
-    subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
   });
 }

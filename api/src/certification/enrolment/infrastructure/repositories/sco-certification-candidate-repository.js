@@ -1,5 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
+import { Subscription } from '../../domain/models/Subscription.js';
 
 const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertificationCandidates }) {
   await knex.transaction(async (trx) => {
@@ -20,28 +20,17 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
       .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.includes(candidate.organizationLearnerId))
       .map(scoCandidateToDTO);
 
-    const allSubscriptionsDTO = [];
-    const complementaryCertifications = await trx('complementary-certifications').select('*');
-
     for (const candidateDTO of candidatesToBeEnrolledDTOs) {
       const subscriptions = candidateDTO.subscriptions;
       delete candidateDTO.subscriptions;
 
       const [{ id }] = await trx('certification-candidates').insert(candidateDTO).returning('id');
 
-      for (const subscriptionDTO of subscriptions) {
-        subscriptionDTO.certificationCandidateId = id;
-        subscriptionDTO.complementaryCertificationId =
-          subscriptionDTO.type === SUBSCRIPTION_TYPES.CORE
-            ? null
-            : complementaryCertifications.find(({ key }) => key === subscriptionDTO.complementaryCertificationKey)?.id;
+      subscriptions[0].certificationCandidateId = id;
+      delete subscriptions[0].complementaryCertificationKey;
 
-        delete subscriptionDTO.complementaryCertificationKey;
-
-        allSubscriptionsDTO.push(subscriptionDTO);
-      }
+      await trx('certification-subscriptions').insert(subscriptions[0]);
     }
-    await knex.batchInsert('certification-subscriptions', allSubscriptionsDTO).transacting(trx);
   });
 };
 
@@ -59,10 +48,7 @@ function _scoCandidateToDTOForSession(sessionId) {
       birthCity: scoCandidate.birthCity,
       birthCountry: scoCandidate.birthCountry,
       sessionId,
-      subscriptions: scoCandidate.subscriptions.map((sub) => ({
-        type: sub.type,
-        complementaryCertificationKey: sub.complementaryCertificationKey,
-      })),
+      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
     };
   };
 }

@@ -3,6 +3,7 @@ import { Candidate } from '../../../../../../src/certification/enrolment/domain/
 import * as candidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Certification | Enrolment | Repository | Candidate', function () {
@@ -36,11 +37,13 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
           new Candidate({
             ...certificationCandidate,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate.id,
                 complementaryCertificationKey: complementaryCertification.key,
               }),
-              domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
+              domainBuilder.certification.enrolment.buildCoreSubscription({
+                certificationCandidateId: certificationCandidate.id,
+              }),
             ],
           }),
         );
@@ -98,17 +101,21 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
           domainBuilder.certification.enrolment.buildCandidate({
             ...certificationCandidate1,
             subscriptions: [
-              domainBuilder.buildComplementarySubscription({
+              domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate1.id,
                 complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
               }),
-              domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate1.id }),
+              domainBuilder.certification.enrolment.buildCoreSubscription({
+                certificationCandidateId: certificationCandidate1.id,
+              }),
             ],
           }),
           domainBuilder.certification.enrolment.buildCandidate({
             ...certificationCandidate2,
             subscriptions: [
-              domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate2.id }),
+              domainBuilder.certification.enrolment.buildCoreSubscription({
+                certificationCandidateId: certificationCandidate2.id,
+              }),
             ],
           }),
         ]);
@@ -155,11 +162,15 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         expect(result).to.deepEqualArray([
           domainBuilder.certification.enrolment.buildCandidate({
             ...candidate1,
-            subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: candidate1.id })],
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: candidate1.id }),
+            ],
           }),
           domainBuilder.certification.enrolment.buildCandidate({
             ...candidate2,
-            subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: candidate2.id })],
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: candidate2.id }),
+            ],
           }),
         ]);
       });
@@ -187,7 +198,11 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         await databaseBuilder.commit();
         const certificationCandidateToUpdate = domainBuilder.certification.enrolment.buildCandidate({
           ...certificationCandidate,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({
+              certificationCandidateId: certificationCandidate.id,
+            }),
+          ],
         });
         certificationCandidateToUpdate.firstName = 'tutu';
 
@@ -228,8 +243,10 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         const certificationCandidateToUpdate = domainBuilder.certification.enrolment.buildCandidate({
           ...certificationCandidate,
           subscriptions: [
-            domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
-            domainBuilder.buildComplementarySubscription({
+            domainBuilder.certification.enrolment.buildCoreSubscription({
+              certificationCandidateId: certificationCandidate.id,
+            }),
+            domainBuilder.certification.enrolment.buildComplementarySubscription({
               certificationCandidateId: certificationCandidate.id,
               complementaryCertificationKey: complementaryCertificationEdu.key,
             }),
@@ -253,18 +270,22 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
 
         // then
         expect(subscriptionsBefore).to.deepEqualArray([
-          domainBuilder.buildComplementarySubscription({
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
             certificationCandidateId: certificationCandidate.id,
             complementaryCertificationKey: complementaryCertificationDroit.key,
           }),
-          domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
+          domainBuilder.certification.enrolment.buildCoreSubscription({
+            certificationCandidateId: certificationCandidate.id,
+          }),
         ]);
         expect(subscriptionsAfter).to.deepEqualArray([
-          domainBuilder.buildComplementarySubscription({
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
             certificationCandidateId: certificationCandidate.id,
             complementaryCertificationKey: complementaryCertificationEdu.key,
           }),
-          domainBuilder.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id }),
+          domainBuilder.certification.enrolment.buildCoreSubscription({
+            certificationCandidateId: certificationCandidate.id,
+          }),
         ]);
       });
     });
@@ -290,6 +311,12 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
     let candidateData;
 
     beforeEach(function () {
+      const subscriptionCore = domainBuilder.certification.enrolment.buildCoreSubscription({
+        certificationCandidateId: null,
+      });
+      const subscriptionComplementary = domainBuilder.certification.enrolment.buildComplementarySubscription({
+        certificationCandidateId: null,
+      });
       candidateData = {
         id: null,
         createdAt: new Date('2020-01-01'),
@@ -315,24 +342,15 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: null,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: false,
-        subscriptions: [
-          {
-            type: SUBSCRIPTION_TYPES.CORE,
-            complementaryCertificationId: null,
-            complementaryCertificationLabel: null,
-            complementaryCertificationKey: null,
-          },
-          {
-            type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-            complementaryCertificationId: 22,
-            complementaryCertificationLabel: 'Quelque',
-            complementaryCertificationKey: 'Chose',
-          },
-        ],
+        subscriptions: [subscriptionCore, subscriptionComplementary],
         reconciledAt: null,
       };
       databaseBuilder.factory.buildSession({ id: candidateData.sessionId });
-      databaseBuilder.factory.buildComplementaryCertification({ id: 22, label: 'Quelque', key: 'Chose' });
+      databaseBuilder.factory.buildComplementaryCertification({
+        id: 22,
+        label: 'Pix+DROIT',
+        key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+      });
       return databaseBuilder.commit();
     });
 
@@ -363,6 +381,81 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
           certificationCandidateId: candidateId,
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
           complementaryCertificationId: 22,
+        },
+        ['createdAt'],
+      );
+      expect(savedSubscriptionsData[1]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: candidateId,
+          type: SUBSCRIPTION_TYPES.CORE,
+          complementaryCertificationId: null,
+        },
+        ['createdAt'],
+      );
+    });
+  });
+
+  describe('#saveInSession', function () {
+    it("should insert session's candidate in DB with subscriptions", async function () {
+      // given
+      const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification.clea({}).id;
+      const sessionId = databaseBuilder.factory.buildSession({}).id;
+      const aUserId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        accessibilityAdjustmentNeeded: true,
+        userId: aUserId,
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription(),
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
+            complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+          }),
+        ],
+      });
+
+      // when
+      const candidateId = await candidateRepository.saveInSession({ candidate, sessionId });
+
+      // then
+      const savedCandidateData = await knex('certification-candidates').select('*').where({ id: candidateId }).first();
+      const savedSubscriptionsData = await knex('certification-subscriptions')
+        .select('*')
+        .where({ certificationCandidateId: candidateId })
+        .orderBy('type');
+
+      expect(_.omit(savedCandidateData, ['createdAt', 'extraTimePercentage'])).to.deep.equal({
+        id: candidateId,
+        firstName: candidate.firstName,
+        reconciledAt: null,
+        lastName: candidate.lastName,
+        birthCity: candidate.birthCity,
+        externalId: candidate.externalId,
+        birthdate: candidate.birthdate,
+        sessionId: sessionId,
+        birthProvinceCode: candidate.birthProvinceCode,
+        birthCountry: candidate.birthCountry,
+        userId: candidate.userId,
+        email: candidate.email,
+        resultRecipientEmail: candidate.resultRecipientEmail,
+        organizationLearnerId: candidate.organizationLearnerId,
+        birthPostalCode: candidate.birthPostalCode,
+        birthINSEECode: candidate.birthINSEECode,
+        sex: candidate.sex,
+        authorizedToStart: false,
+        billingMode: candidate.billingMode,
+        prepaymentCode: candidate.prepaymentCode,
+        hasSeenCertificationInstructions: false,
+        accessibilityAdjustmentNeeded: candidate.accessibilityAdjustmentNeeded,
+      });
+      expect(savedCandidateData.createdAt).to.be.instanceOf(Date);
+      expect(parseFloat(savedCandidateData.extraTimePercentage)).to.equal(candidate.extraTimePercentage);
+
+      expect(savedSubscriptionsData).to.have.lengthOf(2);
+      expect(savedSubscriptionsData[0]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: candidateId,
+          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+          complementaryCertificationId,
         },
         ['createdAt'],
       );

@@ -12,13 +12,6 @@ const buildComplementarySubscription = function ({
   return Subscription.buildComplementary({ certificationCandidateId, complementaryCertificationKey });
 };
 
-const buildDoubleCertificationSubscription = function ({
-  certificationCandidateId,
-  complementaryCertificationKey = ComplementaryCertificationKeys.CLEA,
-} = {}) {
-  return Subscription.buildComplementary({ certificationCandidateId, complementaryCertificationKey });
-};
-
 const buildSubscription = function ({
   certificationCandidateId,
   complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT,
@@ -27,9 +20,4 @@ const buildSubscription = function ({
   return new Subscription({ certificationCandidateId, complementaryCertificationKey, type });
 };
 
-export {
-  buildComplementarySubscription,
-  buildCoreSubscription,
-  buildDoubleCertificationSubscription,
-  buildSubscription,
-};
+export { buildComplementarySubscription, buildCoreSubscription, buildSubscription };

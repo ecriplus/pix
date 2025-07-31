@@ -98,7 +98,7 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
           const complementaryCertification = domainBuilder.buildComplementaryCertification();
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             subscriptions: [
-              domainBuilder.buildCoreSubscription(),
+              domainBuilder.certification.enrolment.buildCoreSubscription(),
               domainBuilder.buildComplementaryCertification({ ...complementaryCertification }),
             ],
           });

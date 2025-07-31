@@ -54,7 +54,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
           birthPostalCode: null,
           birthCity: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription()],
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
         });
         userId = databaseBuilder.factory.buildUser().id;
 

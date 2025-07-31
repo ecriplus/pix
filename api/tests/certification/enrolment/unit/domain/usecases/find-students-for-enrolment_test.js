@@ -65,7 +65,7 @@ describe('Unit | UseCase | find-students-for-enrolment', function () {
         domainBuilder.buildCertificationCandidate({
           sessionId,
           organizationLearnerId: enrolledStudent.id,
-          subscriptions: [domainBuilder.buildCoreSubscription()],
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
         }),
       ];
       organizationLearnerRepository.findByOrganizationIdAndUpdatedAtOrderByDivision
