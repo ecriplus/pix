@@ -853,6 +853,86 @@ describe('Integration | Repository | training-repository', function () {
       expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
     });
   });
+
+  describe('#findModulesByTargetProfileIds', function () {
+    it('should return recommended modules for given targetProfileIds', async function () {
+      // given
+      const targetProfileId1 = databaseBuilder.factory.buildTargetProfile().id;
+      const targetProfileId2 = databaseBuilder.factory.buildTargetProfile().id;
+      const targetProfileId3 = databaseBuilder.factory.buildTargetProfile().id;
+      const targetProfileId4 = databaseBuilder.factory.buildTargetProfile().id;
+      const trainingId1 = databaseBuilder.factory.buildTraining({ type: 'modulix' }).id;
+      const trainingId2 = databaseBuilder.factory.buildTraining({ type: 'modulix' }).id;
+      const trainingId3 = databaseBuilder.factory.buildTraining({ type: 'webinaire' }).id;
+      databaseBuilder.factory.buildTargetProfileTraining({
+        targetProfileId: targetProfileId1,
+        trainingId: trainingId1,
+      });
+      databaseBuilder.factory.buildTargetProfileTraining({
+        targetProfileId: targetProfileId2,
+        trainingId: trainingId1,
+      });
+      databaseBuilder.factory.buildTargetProfileTraining({
+        targetProfileId: targetProfileId2,
+        trainingId: trainingId2,
+      });
+      databaseBuilder.factory.buildTargetProfileTraining({
+        targetProfileId: targetProfileId4,
+        trainingId: trainingId2,
+      });
+      databaseBuilder.factory.buildTargetProfileTraining({
+        targetProfileId: targetProfileId2,
+        trainingId: trainingId3,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const results = await trainingRepository.findModulesByTargetProfileIds({
+        targetProfileIds: [targetProfileId1, targetProfileId2, targetProfileId3],
+      });
+
+      // then
+      expect(results).to.be.lengthOf(2);
+      expect(results[0]).to.be.an.instanceOf(Training);
+      expect(results[0].id).to.equal(trainingId1);
+      expect(results[0].targetProfileIds).to.deep.equal([targetProfileId1, targetProfileId2]);
+      expect(results[1]).to.be.an.instanceOf(Training);
+      expect(results[1].id).to.equal(trainingId2);
+      expect(results[1].targetProfileIds).to.deep.equal([targetProfileId2, targetProfileId4]);
+    });
+
+    it('should return an empty array when given target profiles does not have recommended trainings', async function () {
+      // given
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+
+      await databaseBuilder.commit();
+
+      // when
+      const results = await trainingRepository.findModulesByTargetProfileIds({
+        targetProfileIds: [targetProfileId],
+      });
+
+      // then
+      expect(results).to.be.lengthOf(0);
+    });
+
+    it('should not return disabled trainings', async function () {
+      // given
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const trainingId = databaseBuilder.factory.buildTraining({ type: 'modulix', isDisabled: true }).id;
+      databaseBuilder.factory.buildTargetProfileTraining({ trainingId, targetProfileId });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await trainingRepository.findModulesByTargetProfileIds({
+        targetProfileIds: [targetProfileId],
+      });
+
+      // then
+      expect(results).to.be.lengthOf(0);
+    });
+  });
 });
 
 function createDatabaseRepresentationForTrainingSummary({ trainingSummary, databaseBuilder }) {
