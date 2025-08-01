@@ -86,6 +86,63 @@ const messageConversationPropsSchema = Joi.object({
     .required(),
 }).required();
 
+const licenseSchema = Joi.object({
+  name: Joi.string().required(),
+  attribution: Joi.string().required(),
+  url: Joi.string().required(),
+});
+
+const slideImageSchema = Joi.object({
+  title: Joi.string().required(),
+  description: Joi.string().allow('').required(),
+  displayWidth: Joi.number().min(0).required(),
+  image: Joi.object({
+    src: Joi.string().required(),
+    alt: Joi.string().required(),
+  }).required(),
+  license: licenseSchema.optional(),
+});
+
+const slideTextSchema = Joi.object({
+  title: Joi.string().required(),
+  description: Joi.string().allow('').required(),
+  text: Joi.string().required(),
+});
+
+const slideImageTextSchema = Joi.object({
+  title: Joi.string().required(),
+  description: Joi.string().allow('').required(),
+  displayHeight: Joi.number().min(0).required(),
+  text: Joi.string().required(),
+  image: Joi.object({
+    src: Joi.string().required(),
+    alt: Joi.string().required(),
+  }).required(),
+});
+
+const commonFields = {
+  aspectRatio: Joi.number().min(0).required(),
+  randomSlides: Joi.boolean().required(),
+  titleLevel: Joi.number().integer().min(0).max(6).required(),
+  disableAnimation: Joi.boolean().required(),
+};
+
+const pixCarouselPropsSchema = Joi.object({
+  type: Joi.string().valid('image', 'image-text', 'text').required(),
+  slides: Joi.alternatives()
+    .conditional('type', {
+      switch: [
+        { is: 'image', then: Joi.array().items(slideImageSchema) },
+        { is: 'image-text', then: Joi.array().items(slideImageTextSchema) },
+        { is: 'text', then: Joi.array().items(slideTextSchema) },
+      ],
+    })
+    .required(),
+  ...commonFields,
+})
+  .meta({ title: 'pix-carousel' })
+  .required();
+
 const customElementSchema = Joi.object({
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
@@ -96,6 +153,7 @@ const customElementSchema = Joi.object({
       'llm-compare-messages',
       'llm-prompt-select',
       'message-conversation',
+      'pix-carousel',
       'qcu-image',
     )
     .required(),
@@ -107,6 +165,7 @@ const customElementSchema = Joi.object({
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
         { is: 'llm-prompt-select', then: llmPromptSelectPropsSchema },
         { is: 'message-conversation', then: messageConversationPropsSchema },
+        { is: 'pix-carousel', then: pixCarouselPropsSchema },
         { is: 'qcu-image', then: imageQuizPropsSchema },
       ],
       otherwise: Joi.object().required(),

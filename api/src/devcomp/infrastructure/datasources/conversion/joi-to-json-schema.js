@@ -212,7 +212,9 @@ function getAlternativeSwitchCaseJsonSchema(switchCase) {
   const childJsonSchema = convertFromType(switchCase.then);
 
   const optionalTitle =
-    getOptionalTitleBasedOnChildrenType(switchCase) || getOptionalTitleBasedOnSiblingTagName(switchCase);
+    getOptionalTitleBasedOnTitleMetadata(switchCase) ||
+    getOptionalTitleBasedOnChildrenType(switchCase) ||
+    getOptionalTitleBasedOnSiblingTagName(switchCase);
   if (optionalTitle !== undefined) {
     childJsonSchema.title = optionalTitle;
   }
@@ -220,12 +222,16 @@ function getAlternativeSwitchCaseJsonSchema(switchCase) {
   return childJsonSchema;
 }
 
+function getOptionalTitleBasedOnTitleMetadata(switchCase) {
+  return switchCase.then?.metas?.find(({ title }) => title)?.title;
+}
+
 function getOptionalTitleBasedOnSiblingTagName(switchCase) {
   return switchCase.is?.allow[1];
 }
 
 function getOptionalTitleBasedOnChildrenType(switchCase) {
-  return switchCase.then.keys.type?.allow[0];
+  return switchCase.then.keys?.type?.allow[0];
 }
 
 function findRule(rules, ruleName) {
