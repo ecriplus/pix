@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.172.0](https://github.com/1024pix/pix/compare/v5.171.0...v5.172.0) (2025-08-01)
+
+### :rocket: Amélioration
+
+- [#13065](https://github.com/1024pix/pix/pull/13065) Afficher le feedback sur un élément QAB (PIX-18946) 
+- [#13074](https://github.com/1024pix/pix/pull/13074) Créer une api interne pour récupérer les modules recommandés depuis une liste d'id de profil cible (PIX-18923) 
+- [#13076](https://github.com/1024pix/pix/pull/13076) Mettre à jour le feedback du schéma QAB (PIX-18964) (PIX-18900) 
+- [#13070](https://github.com/1024pix/pix/pull/13070) Migrer les POIC d'iframe/embed vers l'élément `custom-draft` 
+- [#13079](https://github.com/1024pix/pix/pull/13079) Modifier le texte de la carte de score (PIX-18967) (PIX-18900) 
+
+### :bug: Correction
+
+- [#13054](https://github.com/1024pix/pix/pull/13054) Corriger l'affichage du pourcentage de réussite en fin de campagnes (PIX-18929). 
+
+### :building_construction: Tech
+
+- [#13041](https://github.com/1024pix/pix/pull/13041) :wastebasket: Supprime des modèles inutilisées 
+- [#13069](https://github.com/1024pix/pix/pull/13069) Supprimer le script qui fait du monitoring sur la migration API
+
 # [5.171.0](https://github.com/1024pix/pix/compare/v5.170.0...v5.171.0) (2025-07-31)
 
 ### :rocket: Amélioration
