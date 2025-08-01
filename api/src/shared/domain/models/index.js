@@ -71,7 +71,6 @@ import { CompetenceTree } from './CompetenceTree.js';
 import { ComplementaryCertificationHabilitation } from './ComplementaryCertificationHabilitation.js';
 import { Correction } from './Correction.js';
 import { Course } from './Course.js';
-import { EmailingAttempt } from './EmailingAttempt.js';
 import { Examiner } from './Examiner.js';
 import { Framework } from './Framework.js';
 import { Hint } from './Hint.js';
@@ -146,7 +145,6 @@ export {
   Correction,
   Course,
   DataProtectionOfficer,
-  EmailingAttempt,
   Examiner,
   FlashAssessmentAlgorithm,
   Framework,
