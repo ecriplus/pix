@@ -179,7 +179,7 @@
           "element": {
             "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
             "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><iframe id=\"inlineFrameExample\" title=\"Inline Frame Example\" width=\"425\" height=\"790\" src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\"></iframe></details>"
+            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><img src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\" alt=\"\" /></details>"
           }
         }
       ]
