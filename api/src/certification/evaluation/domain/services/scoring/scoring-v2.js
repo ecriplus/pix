@@ -14,13 +14,13 @@ import _ from 'lodash';
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import {
-  AnswerCollectionForScoring,
   CertificationAssessmentScore,
   CompetenceMark,
   ReproducibilityRate,
 } from '../../../../../shared/domain/models/index.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../shared/domain/models/AlgorithmEngineVersion.js';
+import { AnswerCollectionForScoring } from '../../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { CertifiedScore } from '../../../domain/models/CertifiedScore.js';
 import { CertifiedLevel } from '../../models/CertifiedLevel.js';
 import { CertificationContract } from '../CertificationContract.js';
