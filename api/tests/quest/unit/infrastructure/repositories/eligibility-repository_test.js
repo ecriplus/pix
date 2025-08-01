@@ -8,13 +8,13 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
   describe('#find', function () {
     it('should call organizationLearnersWithParticipations api', async function () {
       // given
-      const mefCode = Symbol('organizationLearnerMefCode');
+      const organizationLearnerId = Symbol('organizationLearnerId');
       const organization = Symbol('organization');
       const targetProfileId = Symbol('targetProfileId');
       const apiResponseSymbol = [
         {
           organizationLearner: {
-            MEFCode: mefCode,
+            id: organizationLearnerId,
           },
           organization,
           campaignParticipations: [{ targetProfileId }],
@@ -35,8 +35,8 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       // then
       expect(result[0]).to.be.an.instanceof(Eligibility);
       expect(result[0].organization).to.equal(organization);
+      expect(result[0].organizationLearner.id).to.equal(organizationLearnerId);
       expect(result[0].campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
-      expect(result[0].organizationLearner.MEFCode).to.equal(mefCode);
     });
   });
 });

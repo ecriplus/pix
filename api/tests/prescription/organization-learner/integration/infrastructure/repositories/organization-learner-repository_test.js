@@ -935,4 +935,25 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       });
     });
   });
+  describe('#getIdByUserIdAndOrganizationId', function () {
+    it('should throw if no organization learner is found', async function () {
+      const result = await catchErr(organizationLearnerRepository.getIdByUserIdAndOrganizationId)({
+        organizationId: 1,
+        userId: 123,
+      });
+
+      expect(result).to.be.instanceOf(NotFoundError);
+      expect(result.message).to.equal('Learner not found for organization ID 1 and user Id 123.');
+    });
+    it('should return existing organization learner for given id', async function () {
+      const organizationId = await databaseBuilder.factory.buildOrganization().id;
+      const userId = await databaseBuilder.factory.buildUser().id;
+      const organizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId })
+        .id;
+      await databaseBuilder.commit();
+
+      const result = await organizationLearnerRepository.getIdByUserIdAndOrganizationId({ organizationId, userId });
+      expect(result).to.equal(organizationLearnerId);
+    });
+  });
 });

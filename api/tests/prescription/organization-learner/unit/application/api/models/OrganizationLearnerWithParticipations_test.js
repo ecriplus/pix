@@ -39,7 +39,6 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
     );
     expect(organizationLearnerWithParticipations.organizationLearner).to.deep.equal({
       id: organizationLearner.id,
-      MEFCode: organizationLearner.MEFCode,
     });
     expect(organizationLearnerWithParticipations.organization).to.deep.equal({
       id: organization.id,

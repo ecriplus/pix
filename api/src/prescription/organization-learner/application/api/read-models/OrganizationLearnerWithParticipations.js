@@ -2,7 +2,6 @@ export class OrganizationLearnerWithParticipations {
   constructor({ organizationLearner, organization, campaignParticipations, tagNames }) {
     this.organizationLearner = {
       id: organizationLearner.id,
-      MEFCode: organizationLearner.MEFCode,
     };
     this.organization = {
       id: organization.id,

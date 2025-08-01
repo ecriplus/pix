@@ -67,3 +67,11 @@ export async function find({ userIds }) {
     },
   );
 }
+
+export async function getByUserIdAndOrganizationId({ userId, organizationId }) {
+  const organizationLearnerWithParticipation = await usecases.getOrganizationLearnerWithParticipations({
+    userId,
+    organizationId,
+  });
+  return new OrganizationLearnerWithParticipations(organizationLearnerWithParticipation);
+}
