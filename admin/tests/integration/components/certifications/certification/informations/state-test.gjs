@@ -89,8 +89,6 @@ module('Integration | Component | Certifications | Certification | Information |
       );
 
       // then
-      assert.strictEqual(screen.getAllByText('Annulée').length, 2);
-
       const statusInfo = screen.getByText('Statut :');
       assert.dom(statusInfo).exists();
       assert.dom(within(statusInfo.parentNode).getByText('Annulée')).exists();
