@@ -1741,7 +1741,10 @@
         "correct-answer": "Correct antwoord",
         "incorrect-answer": "Onjuist antwoord",
         "retry": "Probeer het opnieuw",
-        "your_score": "Je score : {score}/{totalScore}"
+        "score": {
+          "title": "Serie beëindigd",
+          "yourScore": "Je score : {score}/{totalScore}"
+        }
       },
       "qcm": {
         "direction": "Kies meerdere antwoorden."

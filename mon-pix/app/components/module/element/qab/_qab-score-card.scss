@@ -3,16 +3,22 @@
 .qab-score-card {
   .qab-card__container {
     flex-direction: column;
-    gap: var(--pix-spacing-4x);
+    gap: var(--pix-spacing-1x);
     background: var(--pix-primary-700);
     border-color: var(--pix-primary-700);
   }
 
-  &__title {
-    @extend %pix-title-m;
-
+  &__title, &__subtitle {
     color: var(--pix-neutral-0);
     font-weight: 900;
     text-align: center;
+  }
+
+  &__title {
+    @extend %pix-title-m;
+  }
+
+  &__subtitle {
+    @extend %pix-title-xs;
   }
 }

@@ -1752,7 +1752,10 @@
         "correct-answer": "Bonne réponse !",
         "incorrect-answer": "Mauvaise réponse.",
         "retry": "Réessayer",
-        "your_score": "Votre score : {score}/{total}"
+        "score": {
+          "title": "Série terminée",
+          "yourScore": "Votre score : {score}/{total}"
+        }
       },
       "qcm": {
         "direction": "Sélectionnez plusieurs réponses."
