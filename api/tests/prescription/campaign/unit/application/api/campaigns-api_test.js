@@ -89,6 +89,7 @@ describe('Unit | API | Campaigns', function () {
         customLandingPageText: 'Pika pika pikaCHUUUUUUUUUUUUUUUUUU',
         createdAt: new Date('2020-01-01'),
         archivedAt: new Date('2023-01-01'),
+        targetProfileId: 123,
       });
 
       const getCampaignStub = sinon.stub(usecases, 'getCampaign');
@@ -106,6 +107,7 @@ describe('Unit | API | Campaigns', function () {
       expect(result.archivedAt).to.equal(campaignInformation.archivedAt);
       expect(result.archivedAt).to.equal(campaignInformation.archivedAt);
       expect(result.customLandingPageText).to.equal(campaignInformation.customLandingPageText);
+      expect(result.targetProfileId).to.equal(campaignInformation.targetProfileId);
       expect(result).not.to.be.instanceOf(Campaign);
     });
   });
