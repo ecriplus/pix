@@ -8,6 +8,14 @@ const proposalIdSchema = Joi.string().regex(/^\d+$/);
 const htmlValidate = new HtmlValidate({
   rules: {
     'no-style-tag': 'error',
+    'element-name': [
+      'error',
+      {
+        pattern: '[a-z][a-z0-9\\-._]*-[a-z0-9\\-._]*$',
+        whitelist: [],
+        blacklist: ['iframe'],
+      },
+    ],
   },
 });
 const htmlSchema = Joi.string().external(htmlValidation);
