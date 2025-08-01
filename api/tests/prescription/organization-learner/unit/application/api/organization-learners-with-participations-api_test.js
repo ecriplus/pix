@@ -72,4 +72,51 @@ describe('Unit | API | Organization Learner With Participations', function () {
       ]);
     });
   });
+
+  describe('#getByUserIdAndOrganizationId', function () {
+    it('should call the usecase and return OrganizationLearnerWithParticipations list', async function () {
+      // given
+      const user = domainBuilder.buildUser();
+      const organization = domainBuilder.buildOrganization();
+      const organizationLearner = domainBuilder.buildOrganizationLearner({ userId: user.id, organization });
+      const campaignParticipations = [
+        domainBuilder.buildCampaignParticipationOverview(),
+        domainBuilder.buildCampaignParticipationOverview(),
+      ];
+      const tagNames = ['tagName1', 'tagName1'];
+
+      const useCaseStub = sinon.stub(usecases, 'getOrganizationLearnerWithParticipations');
+      useCaseStub
+        .withArgs({ organizationId: organization.id, userId: user.id })
+        .resolves({ organizationLearner, organization, campaignParticipations, tagNames });
+
+      // when
+      const apiResponse = await organizationLearnersWithParticipationsApi.getByUserIdAndOrganizationId({
+        userId: user.id,
+        organizationId: organization.id,
+      });
+
+      // then
+      expect(useCaseStub).to.be.called;
+
+      expect(apiResponse).to.be.instanceOf(OrganizationLearnerWithParticipations);
+      expect(apiResponse).to.deep.equal({
+        organizationLearner: {
+          id: organizationLearner.id,
+        },
+        organization: {
+          id: organization.id,
+          isManagingStudents: organization.isManagingStudents,
+          tags: tagNames,
+          type: organization.type,
+        },
+        campaignParticipations: campaignParticipations.map(({ id, targetProfileId, status, campaignName }) => ({
+          id,
+          targetProfileId,
+          status,
+          campaignName,
+        })),
+      });
+    });
+  });
 });

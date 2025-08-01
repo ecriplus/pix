@@ -175,10 +175,22 @@ async function getAttestationStatusForOrganizationLearnersAndKey({
   });
 }
 
+async function getIdByUserIdAndOrganizationId({ organizationId, userId }) {
+  const row = await knex('view-active-organization-learners')
+    .where('organizationId', organizationId)
+    .andWhere('userId', userId)
+    .first('id');
+  if (!row) {
+    throw new NotFoundError(`Learner not found for organization ID ${organizationId} and user Id ${userId}.`);
+  }
+  return row.id;
+}
+
 export {
   findOrganizationLearnersByDivisions,
   findPaginatedLearners,
   get,
   getAttestationsForOrganizationLearnersAndKey,
   getAttestationStatusForOrganizationLearnersAndKey,
+  getIdByUserIdAndOrganizationId,
 };
