@@ -193,12 +193,33 @@ async function findPaginatedByUserId({ userId, locale, page }) {
   return { userRecommendedTrainings, pagination };
 }
 
+async function findModulesByTargetProfileIds({ targetProfileIds }) {
+  const knexConn = DomainTransaction.getConnection();
+  const trainingsDTO = await knexConn(TABLE_NAME)
+    .select('trainings.*')
+    .join('target-profile-trainings', `${TABLE_NAME}.id`, 'trainingId')
+    .where({ type: 'modulix', isDisabled: false })
+    .whereIn('target-profile-trainings.targetProfileId', targetProfileIds)
+    .distinct('trainings.id')
+    .orderBy('trainings.id', 'asc');
+
+  const targetProfileTrainings = await knexConn('target-profile-trainings').whereIn(
+    'trainingId',
+    trainingsDTO.map(({ id }) => id),
+  );
+
+  return trainingsDTO.map((training) => {
+    return _toDomain(training, targetProfileTrainings);
+  });
+}
+
 function _transformDurationFormat(durationObject) {
   return `${durationObject.days ?? 0}d${durationObject.hours ?? 0}h${durationObject.minutes ?? 0}m${durationObject.seconds ?? 0}s`;
 }
 
 export {
   create,
+  findModulesByTargetProfileIds,
   findPaginatedByUserId,
   findPaginatedSummaries,
   findPaginatedSummariesByTargetProfileId,
