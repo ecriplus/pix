@@ -1,4 +1,5 @@
 import * as modulesApi from '../../../devcomp/application/api/modules-api.js';
+import * as recommendedModulesApi from '../../../devcomp/application/api/recommended-modules-api.js';
 import * as knowledgeElementsApi from '../../../evaluation/application/api/knowledge-elements-api.js';
 import * as userApi from '../../../identity-access-management/application/api/users-api.js';
 import * as skillsApi from '../../../learning-content/application/api/skills-api.js';
@@ -16,6 +17,7 @@ import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
 import * as questRepository from './quest-repository.js';
+import * as recommendedModulesRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
 import * as userRepository from './user-repository.js';
@@ -33,6 +35,7 @@ const repositoriesWithoutInjectedDependencies = {
   combinedCourseParticipantRepository,
   combinedCourseParticipationRepository,
   userRepository,
+  recommendedModulesRepository,
 };
 
 const dependencies = {
@@ -46,6 +49,7 @@ const dependencies = {
   profileRewardTemporaryStorage,
   rewardApi,
   userApi,
+  recommendedModulesApi,
 };
 
 const repositories = injectDependencies(repositoriesWithoutInjectedDependencies, dependencies);
