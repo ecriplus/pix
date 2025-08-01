@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.173.0](https://github.com/1024pix/pix/compare/v5.172.0...v5.173.0) (2025-08-01)
+
+### :rocket: Amélioration
+
+- [#13082](https://github.com/1024pix/pix/pull/13082) Interdire les `iframe` dans les contenus de Modules (PIX-18969)
+
 # [5.172.0](https://github.com/1024pix/pix/compare/v5.171.0...v5.172.0) (2025-08-01)
 
 ### :rocket: Amélioration
