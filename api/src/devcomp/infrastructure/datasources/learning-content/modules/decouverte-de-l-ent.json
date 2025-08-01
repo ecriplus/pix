@@ -179,7 +179,7 @@
             "feedbacks": {
               "valid": {
                 "state": "",
-                "diagnosis": "<p>Effectivement, grâce à l'ENT, Martin peut consulter des informations qui concernent sa fille&nbsp;: ses notes, son emploi du temps, ses devoirs. Par contre, il ne peut pas modifier l'emploi du temps de la classe.&nbsp;<br></p>"
+                "diagnosis": "<p>Effectivement, grâce à l'ENT, Martin peut consulter des informations qui concernent sa fille&nbsp;: ses notes, son emploi du temps, ses devoirs. Par contre, il ne peut pas modifier l'emploi du temps de la classe.</p>"
               },
               "invalid": {
                 "state": "",
