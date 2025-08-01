@@ -186,6 +186,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
       key: 'PARTNER_KEY',
       isCertifiable: true,
       targetProfileId,
+      imageUrl: 'http://my-badge-image-url.com',
     }).id;
     databaseBuilder.factory.buildBadgeCriterion({
       badgeId: cleaBadgeId,
@@ -272,8 +273,8 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
               'is-certifiable': true,
               'complementary-certifications': [
                 {
-                  imageUrl: 'http://badge-image-url.fr',
-                  label: 'PARTNER_LABEL',
+                  imageUrl: 'http://my-badge-image-url.com',
+                  label: 'alt message',
                   isOutdated: false,
                   isAcquiredExpectedLevel: false,
                 },
