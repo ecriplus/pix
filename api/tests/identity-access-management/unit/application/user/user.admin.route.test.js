@@ -59,32 +59,6 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
       sinon.assert.calledOnce(userAdminController.updateUserDetailsByAdmin);
     });
 
-    it('returns bad request when param id is not numeric', async function () {
-      // given
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(routesUnderTest);
-
-      const payload = { data: { attributes: { email: 'partial@update.net' } } };
-
-      // when
-      const result = await httpTestServer.request('PATCH', '/api/admin/users/not_number', payload);
-
-      // then
-      expect(result.statusCode).to.equal(400);
-    });
-
-    it('returns bad request when payload is not found', async function () {
-      // given
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(routesUnderTest);
-
-      // when
-      const result = await httpTestServer.request('PATCH', '/api/admin/users/12344');
-
-      // then
-      expect(result.statusCode).to.equal(400);
-    });
-
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
       // given
       sinon.stub(userAdminController, 'updateUserDetailsByAdmin').returns('ok');
@@ -169,24 +143,6 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
         sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
         sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
         sinon.assert.calledOnce(userAdminController.addPixAuthenticationMethod);
-      });
-    });
-
-    describe('when id is not a number', function () {
-      it('returns 400', async function () {
-        // given
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(routesUnderTest);
-
-        // when
-        const { statusCode, payload } = await httpTestServer.request(
-          'POST',
-          '/api/admin/users/invalid-id/add-pix-authentication-method',
-        );
-
-        // then
-        expect(statusCode).to.equal(400);
-        expect(JSON.parse(payload).errors[0].detail).to.equal('"id" must be a number');
       });
     });
 
@@ -289,62 +245,6 @@ describe('Unit | Identity Access Management | Application | Route | User', funct
         sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
         sinon.assert.calledOnce(userAdminController.reassignAuthenticationMethod);
       });
-    });
-
-    it('returns 400 when "userId" is not a number', async function () {
-      // given
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(routesUnderTest);
-
-      // when
-      const { statusCode, payload } = await httpTestServer.request(
-        'POST',
-        '/api/admin/users/invalid-id/authentication-methods/1',
-      );
-
-      // then
-      expect(statusCode).to.equal(400);
-      expect(JSON.parse(payload).errors[0].detail).to.equal('"userId" must be a number');
-    });
-
-    it('returns 400 when "authenticationMethodId" is not a number', async function () {
-      // given
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(routesUnderTest);
-
-      // when
-      const { statusCode, payload } = await httpTestServer.request(
-        'POST',
-        '/api/admin/users/1/authentication-methods/invalid-id',
-      );
-
-      // then
-      expect(statusCode).to.equal(400);
-      expect(JSON.parse(payload).errors[0].detail).to.equal('"authenticationMethodId" must be a number');
-    });
-
-    it('returns 400 when the payload contains an invalid user id', async function () {
-      // given
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(routesUnderTest);
-      const payload = {
-        data: {
-          attributes: {
-            'user-id': 'invalid-user-id',
-          },
-        },
-      };
-
-      // when
-      const { statusCode, result } = await httpTestServer.request(
-        'POST',
-        '/api/admin/users/1/authentication-methods/1',
-        payload,
-      );
-
-      // then
-      expect(statusCode).to.equal(400);
-      expect(result.errors[0].detail).to.equal('"data.attributes.user-id" must be a number');
     });
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {

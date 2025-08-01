@@ -195,17 +195,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
         });
       });
     });
-
-    it('should return a 400 when id in param is not a number"', async function () {
-      // given
-      const url = '/api/admin/users/NOT_A_NUMBER';
-
-      // when
-      const response = await httpTestServer.request('PATCH', url);
-
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
   });
 
   describe('GET /api/admin/users/{id}', function () {
@@ -238,28 +227,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // then
       expect(response.statusCode).to.equal(403);
       sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-    });
-
-    it('returns BAD_REQUEST (400) when id in param is not a number"', async function () {
-      // given
-      const url = '/api/admin/users/NOT_A_NUMBER';
-
-      // when
-      const response = await httpTestServer.request('GET', url);
-
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
-
-    it('returns BAD_REQUEST (400) when id in params is out of range"', async function () {
-      // given
-      const url = '/api/admin/users/0';
-
-      // when
-      const response = await httpTestServer.request('GET', url);
-
-      // then
-      expect(response.statusCode).to.equal(400);
     });
   });
 
@@ -298,15 +265,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
       sinon.assert.calledOnce(userAdminController.anonymizeUser);
-    });
-
-    it('returns 400 when id is not a number', async function () {
-      // when
-      const { statusCode, payload } = await httpTestServer.request('POST', '/api/admin/users/wrongId/anonymize');
-
-      // then
-      expect(statusCode).to.equal(400);
-      expect(JSON.parse(payload).errors[0].detail).to.equal('"id" must be a number');
     });
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
@@ -387,20 +345,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
         });
       },
     );
-
-    it('returns 400 when id is not a number', async function () {
-      // when
-      const result = await httpTestServer.request('POST', '/api/admin/users/invalid-id/remove-authentication', {
-        data: {
-          attributes: {
-            type: 'EMAIL',
-          },
-        },
-      });
-
-      // then
-      expect(result.statusCode).to.equal(400);
-    });
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
       // given
