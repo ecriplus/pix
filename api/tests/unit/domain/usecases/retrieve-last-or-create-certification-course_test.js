@@ -3,7 +3,7 @@ import { SessionNotAccessible } from '../../../../src/certification/session-mana
 import { ComplementaryCertificationCourse } from '../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { LOCALE, MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
+import { MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
@@ -13,6 +13,7 @@ import {
   UnexpectedUserAccountError,
 } from '../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
+import { FRENCH_SPOKEN } from '../../../../src/shared/domain/services/locale-service.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | UseCase | retrieve-last-or-create-certification-course', function () {
@@ -30,7 +31,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const certificationCenterRepository = {};
   const certificationBadgesService = {};
   const placementProfileService = {};
-  const languageService = {};
   const verifyCertificateCodeService = {};
   const userRepository = {};
 
@@ -46,7 +46,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     certificationChallengesService,
     placementProfileService,
     verifyCertificateCodeService,
-    languageService,
     userRepository,
   };
 
@@ -70,7 +69,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     placementProfileService.getPlacementProfile = sinon.stub();
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
-    languageService.isLanguageAvailableForV3Certification = sinon.stub();
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
@@ -304,9 +302,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
           context('when a certification course has been created meanwhile', function () {
             it('should return it with flag created marked as false', async function () {
               // given
-              const user = domainBuilder.buildUser({ id: 2, lang: LOCALE.FRENCH });
+              const user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
               userRepository.get.withArgs({ id: user.id }).resolves(user);
-              languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(true);
 
               const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                 id: 1,
@@ -364,9 +361,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             let user;
 
             beforeEach(function () {
-              user = domainBuilder.buildUser({ id: 2, lang: LOCALE.FRENCH });
+              user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
               userRepository.get.withArgs({ id: user.id }).resolves(user);
-              languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(true);
             });
 
             it('should return it with flag created marked as true with related resources', async function () {
@@ -447,7 +443,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             context('when the candidate is enroled in complementary certification only', function () {
               it('should build a v2 algorithm certification with only pix plus challenges', async function () {
                 // given
-                const user = domainBuilder.buildUser({ id: 2, lang: LOCALE.FRENCH_SPOKEN });
+                const user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
                 const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                   accessCode: 'accessCode',
                   version: AlgorithmEngineVersion.V3,
@@ -507,7 +503,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 });
 
                 userRepository.get.withArgs({ id: user.id }).resolves(user);
-                languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(true);
 
                 certificationCenterRepository.getBySessionId.resolves(certificationCenter);
 
@@ -607,8 +602,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 const user = domainBuilder.buildUser({ id: userId, lang: 'nl' });
                 userRepository.get.withArgs({ id: userId }).resolves(user);
 
-                languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(false);
-
                 // when
                 const error = await catchErr(await retrieveLastOrCreateCertificationCourse)({
                   sessionId: 1,
@@ -661,8 +654,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                 const user = domainBuilder.buildUser({ id: userId });
                 userRepository.get.withArgs({ id: userId }).resolves(user);
-
-                languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(true);
 
                 const certificationCourseToSave = CertificationCourse.from({
                   certificationCandidate: foundCertificationCandidate,
@@ -722,9 +713,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               let user;
 
               beforeEach(function () {
-                user = domainBuilder.buildUser({ id: 2, lang: LOCALE.FRENCH });
+                user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
                 userRepository.get.withArgs({ id: user.id }).resolves(user);
-                languageService.isLanguageAvailableForV3Certification.withArgs(user.lang).returns(true);
               });
 
               context('when certification center is habilitated', function () {

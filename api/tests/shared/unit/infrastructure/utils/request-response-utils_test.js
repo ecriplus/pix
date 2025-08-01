@@ -1,4 +1,8 @@
-import { LOCALE } from '../../../../../src/shared/domain/constants.js';
+import {
+  ENGLISH_SPOKEN,
+  FRENCH_FRANCE,
+  FRENCH_SPOKEN,
+} from '../../../../../src/shared/domain/services/locale-service.js';
 import {
   escapeFileName,
   extractLocaleFromRequest,
@@ -6,8 +10,6 @@ import {
   extractUserIdFromRequest,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
-
-const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
 
 describe('Unit | Utils | Request Utils', function () {
   describe('#extractUserIdFromRequest', function () {
@@ -64,7 +66,7 @@ describe('Unit | Utils | Request Utils', function () {
       { header: 'fr-FR', expectedLocale: FRENCH_FRANCE },
       { header: 'fr', expectedLocale: FRENCH_SPOKEN },
       { header: 'en', expectedLocale: ENGLISH_SPOKEN },
-      { header: 'de', expectedLocale: FRENCH_FRANCE },
+      { header: 'tlh', expectedLocale: FRENCH_FRANCE }, // tlh: Klingon locale
       { header: 'fr-BE', expectedLocale: FRENCH_FRANCE },
     ].forEach(function (data) {
       it(`should return ${data.expectedLocale} locale when header is ${data.header}`, function () {

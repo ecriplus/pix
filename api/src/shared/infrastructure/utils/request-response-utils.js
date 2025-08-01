@@ -1,11 +1,11 @@
 import accept from '@hapi/accept';
 
-import { LOCALE } from '../../../shared/domain/constants.js';
-import { LANGUAGES_CODE } from '../../../shared/domain/services/language-service.js';
+import { getChallengeLocales, getDefaultChallengeLocale } from '../../../shared/domain/services/locale-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 
-const { ENGLISH_SPOKEN, FRENCH_FRANCE, FRENCH_SPOKEN } = LOCALE;
-const { DUTCH, SPANISH } = LANGUAGES_CODE;
+const acceptedLanguages = getChallengeLocales();
+const defaultChallengeLocale = getDefaultChallengeLocale();
+
 const requestResponseUtils = {
   escapeFileName,
   extractUserIdFromRequest,
@@ -32,13 +32,12 @@ function extractUserIdFromRequest(request) {
 }
 
 function extractLocaleFromRequest(request) {
-  const defaultLocale = FRENCH_FRANCE;
   const languageHeader = request.headers && request.headers['accept-language'];
   if (!languageHeader) {
-    return defaultLocale;
+    return defaultChallengeLocale;
   }
-  const acceptedLanguages = [ENGLISH_SPOKEN, FRENCH_SPOKEN, FRENCH_FRANCE, DUTCH, SPANISH];
-  return accept.language(languageHeader, acceptedLanguages) || defaultLocale;
+
+  return accept.language(languageHeader, acceptedLanguages) || defaultChallengeLocale;
 }
 
 function extractTimestampFromRequest(request) {
