@@ -307,7 +307,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
     });
 
     describe('Joi.alternatives.conditional', function () {
-      it('should convert conditional deep ref switch is/then to JSON Schema and add title if an allowed property exist', function () {
+      it('should convert conditional deep ref switch is/then to JSON Schema and add title if an allowed property exists', function () {
         const joiSchema = Joi.alternatives().conditional('.sport', {
           switch: [
             {
@@ -424,6 +424,74 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
               type: 'object',
             },
           ],
+        });
+      });
+
+      it('should convert conditional deep ref switch is/then to JSON Schema and add title if a title metadata exists', function () {
+        const joiSchema = Joi.object({
+          sport: Joi.string().valid('handball', 'volleyball').required(),
+          data: Joi.alternatives()
+            .conditional('sport', {
+              switch: [
+                {
+                  is: 'handball',
+                  then: Joi.object({
+                    a: Joi.string().valid('a').required(),
+                  }).meta({ title: 'pix-handball' }),
+                },
+                {
+                  is: 'volleyball',
+                  then: Joi.object({
+                    b: Joi.string().valid('b').required(),
+                  }).meta({ title: 'pix-volleyball' }),
+                },
+              ],
+            })
+            .required(),
+        });
+
+        const jsonSchema = convertJoiToJsonSchema(joiSchema);
+
+        expect(joiSchema.validate({ sport: 'handball', data: { a: 'a' } }).error).to.be.undefined;
+        expect(joiSchema.validate({ sport: 'volleyball', data: { b: 'b' } }).error).to.be.undefined;
+        expect(jsonSchema).to.deep.equal({
+          additionalProperties: false,
+          properties: {
+            data: {
+              oneOf: [
+                {
+                  additionalProperties: false,
+                  properties: {
+                    a: {
+                      enum: ['a'],
+                      type: 'string',
+                    },
+                  },
+                  required: ['a'],
+                  title: 'pix-handball',
+                  type: 'object',
+                },
+                {
+                  additionalProperties: false,
+                  properties: {
+                    b: {
+                      enum: ['b'],
+                      type: 'string',
+                    },
+                  },
+                  required: ['b'],
+                  title: 'pix-volleyball',
+                  type: 'object',
+                },
+              ],
+            },
+            sport: {
+              enum: ['handball', 'volleyball'],
+              type: 'string',
+            },
+          },
+          required: ['sport', 'data'],
+          type: 'object',
         });
       });
     });
