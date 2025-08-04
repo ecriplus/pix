@@ -43,23 +43,6 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaigns/{campaignId}/analyses',
-      config: {
-        validate: {
-          params: Joi.object({
-            campaignId: identifiersType.campaignId,
-          }),
-        },
-        handler: campaignController.getAnalysis,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération de l'analyse de la campagne par son id",
-        ],
-        tags: ['api', 'campaign'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/campaigns/{campaignId}/level-per-tubes-and-competences',
       config: {
         pre: [{ method: securityPreHandlers.checkAuthorizationToAccessCampaign }],
