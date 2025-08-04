@@ -15,7 +15,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
     userId = 1;
 
     questRepository = {
-      findAll: sinon.stub(),
+      findAllWithReward: sinon.stub(),
     };
 
     logger = {
@@ -42,7 +42,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
   context('when there are no quests available', function () {
     it('should not call eligibility repository', async function () {
       // given
-      questRepository.findAll.resolves([]);
+      questRepository.findAllWithReward.resolves([]);
 
       // when
       await rewardUser({ userId, ...dependencies });
@@ -54,7 +54,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
     it('should not call eligibility repository', async function () {
       // given
       const quest = { isEligible: () => false };
-      questRepository.findAll.resolves([quest]);
+      questRepository.findAllWithReward.resolves([quest]);
       rewardRepository.getByUserId.resolves([]);
       eligibilityRepository.find.resolves([]);
 
@@ -68,7 +68,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
     it('should not call success repository', async function () {
       // given
       const quest = { isEligible: () => false };
-      questRepository.findAll.resolves([quest]);
+      questRepository.findAllWithReward.resolves([quest]);
       eligibilityRepository.find.resolves([Symbol('eligibility')]);
       rewardRepository.getByUserId.resolves([]);
 
@@ -89,7 +89,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
         isSuccessful: () => false,
         rewardId: 1,
       };
-      questRepository.findAll.resolves([quest]);
+      questRepository.findAllWithReward.resolves([quest]);
       eligibilityRepository.find.resolves([Symbol('eligibility')]);
       successRepository.find.resolves([Symbol('success')]);
       rewardRepository.getByUserId.resolves([]);
@@ -110,7 +110,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
       // given
       const questRewardId = Symbol('questRewardId');
       const quest = { isEligible: () => true, rewardId: questRewardId };
-      questRepository.findAll.resolves([quest]);
+      questRepository.findAllWithReward.resolves([quest]);
       eligibilityRepository.find.resolves([Symbol('eligibility')]);
       rewardRepository.getByUserId.resolves([
         {
@@ -129,7 +129,7 @@ describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
 
   it('ensure that quest system does not throw error', async function () {
     const error = new Error('my error');
-    dependencies.questRepository.findAll.throws(error);
+    dependencies.questRepository.findAllWithReward.throws(error);
 
     await rewardUser({
       userId,

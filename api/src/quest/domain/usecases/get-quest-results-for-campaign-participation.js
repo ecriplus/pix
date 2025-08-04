@@ -9,7 +9,7 @@ export const getQuestResultsForCampaignParticipation = async ({
   logger,
 }) => {
   try {
-    const quests = await questRepository.findAll();
+    const quests = await questRepository.findAllWithReward();
 
     if (quests.length === 0) {
       return [];
