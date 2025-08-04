@@ -10,6 +10,7 @@ export class Campaign {
     isExam,
     isAssessment,
     isProfilesCollection,
+    targetProfileId,
   }) {
     this.id = id;
     this.code = code;
@@ -21,5 +22,6 @@ export class Campaign {
     this.isExam = isExam;
     this.isAssessment = isAssessment;
     this.isProfilesCollection = isProfilesCollection;
+    this.targetProfileId = targetProfileId;
   }
 }

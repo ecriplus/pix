@@ -15,14 +15,14 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
     userId = 1;
     campaignParticipationId = 2;
     logger = { error: sinon.stub() };
-    questRepository = { findAll: sinon.stub() };
+    questRepository = { findAllWithReward: sinon.stub() };
     eligibilityRepository = { find: sinon.stub() };
     rewardRepository = { getByQuestAndUserId: sinon.stub() };
   });
 
   it('should return empty array when there are no quests', async function () {
     // given
-    questRepository.findAll.resolves([]);
+    questRepository.findAllWithReward.resolves([]);
 
     // when
     const result = await getQuestResultsForCampaignParticipation({
@@ -42,7 +42,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
   it('should return empty array when there is no eligibility', async function () {
     // given
     const wrongCampaignParticipationId = 30;
-    questRepository.findAll.resolves([
+    questRepository.findAllWithReward.resolves([
       new Quest({
         id: 10,
         eligibilityRequirements: [],
@@ -74,7 +74,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
   it('should return empty array when there is no eligible quests', async function () {
     // given
     const wrongTargetProfileId = 41;
-    questRepository.findAll.resolves([
+    questRepository.findAllWithReward.resolves([
       new Quest({
         id: 10,
         eligibilityRequirements: [
@@ -116,7 +116,7 @@ describe('Quest | Unit | Domain | Usecases | getQuestResultsForCampaignParticipa
 
   it('ensure that quest system does not throw error', async function () {
     const error = new Error('my error');
-    questRepository.findAll.throws(error);
+    questRepository.findAllWithReward.throws(error);
 
     const result = await getQuestResultsForCampaignParticipation({
       userId,

@@ -6,10 +6,10 @@ import { Quest } from '../../domain/models/Quest.js';
 
 const toDomain = (quests) => quests.map((quest) => new Quest(quest));
 
-const findAll = async () => {
+const findAllWithReward = async () => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quests = await knexConn('quests');
+  const quests = await knexConn('quests').whereNotNull('rewardId');
 
   return toDomain(quests);
 };
@@ -61,4 +61,4 @@ const deleteByIds = async ({ questIds }) => {
   return knexConn('quests').whereIn('id', questIds).delete();
 };
 
-export { deleteByIds, findAll, findById, getByCode, saveInBatch };
+export { deleteByIds, findAllWithReward, findById, getByCode, saveInBatch };

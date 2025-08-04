@@ -14,12 +14,14 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         targetProfileId: 321,
         status: CampaignParticipationStatuses.SHARED,
         campaignName: 'Mon nom 1',
+        campaignId: 66,
       }),
       domainBuilder.buildCampaignParticipationOverview({
         id: 456,
         targetProfileId: 654,
         status: CampaignParticipationStatuses.TO_SHARE,
         campaignName: 'Mon nom 2',
+        campaignId: 77,
       }),
     ];
 
@@ -52,12 +54,14 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         id: 123,
         status: CampaignParticipationStatuses.SHARED,
         campaignName: 'Mon nom 1',
+        campaignId: 66,
       },
       {
         targetProfileId: 654,
         id: 456,
         status: CampaignParticipationStatuses.TO_SHARE,
         campaignName: 'Mon nom 2',
+        campaignId: 77,
       },
     ]);
   });

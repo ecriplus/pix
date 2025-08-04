@@ -22,7 +22,7 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
         organizationId,
       });
 
-      const quest = databaseBuilder.factory.buildQuest({ code: 'SOMETHING', name: 'Mon parcours' });
+      const quest = databaseBuilder.factory.buildQuest({ code: 'SOMETHING', name: 'Mon parcours', organizationId });
 
       await databaseBuilder.commit();
 

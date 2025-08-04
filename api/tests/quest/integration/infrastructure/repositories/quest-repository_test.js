@@ -57,8 +57,8 @@ describe('Quest | Integration | Repository | quest', function () {
     });
   });
 
-  describe('#findAll', function () {
-    it('should return all quests', async function () {
+  describe('#findAllWithReward', function () {
+    it('should return all quests with reward', async function () {
       // given
       databaseBuilder.factory.buildQuest({
         id: 1,
@@ -76,19 +76,19 @@ describe('Quest | Integration | Repository | quest', function () {
       });
       databaseBuilder.factory.buildQuest({
         id: 3,
-        rewardType: REWARD_TYPES.ATTESTATION,
-        rewardId: 2,
+        rewardType: null,
+        rewardId: null,
         eligibilityRequirements: [],
         successRequirements: [],
       });
       await databaseBuilder.commit();
 
       // when
-      const quests = await questRepository.findAll();
+      const quests = await questRepository.findAllWithReward();
 
       // then
       expect(quests[0]).to.be.an.instanceof(Quest);
-      expect(quests).to.have.lengthOf(3);
+      expect(quests).to.have.lengthOf(2);
     });
   });
 
@@ -177,7 +177,7 @@ describe('Quest | Integration | Repository | quest', function () {
       // when
       await questRepository.deleteByIds({ questIds: ['1', 3] });
 
-      const quests = await questRepository.findAll();
+      const quests = await questRepository.findAllWithReward();
 
       // then
       expect(quests).to.have.lengthOf(1);

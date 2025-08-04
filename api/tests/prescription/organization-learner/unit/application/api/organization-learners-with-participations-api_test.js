@@ -45,12 +45,15 @@ describe('Unit | API | Organization Learner With Participations', function () {
             tags: tagNames,
             type: organization1.type,
           },
-          campaignParticipations: campaignParticipations.map(({ id, targetProfileId, status, campaignName }) => ({
-            id,
-            targetProfileId,
-            status,
-            campaignName,
-          })),
+          campaignParticipations: campaignParticipations.map(
+            ({ id, targetProfileId, status, campaignName, campaignId }) => ({
+              id,
+              targetProfileId,
+              status,
+              campaignName,
+              campaignId,
+            }),
+          ),
         },
         {
           organizationLearner: {
@@ -62,12 +65,15 @@ describe('Unit | API | Organization Learner With Participations', function () {
             tags: tagNames,
             type: organization2.type,
           },
-          campaignParticipations: campaignParticipations.map(({ id, targetProfileId, status, campaignName }) => ({
-            id,
-            targetProfileId,
-            status,
-            campaignName,
-          })),
+          campaignParticipations: campaignParticipations.map(
+            ({ id, targetProfileId, status, campaignName, campaignId }) => ({
+              id,
+              targetProfileId,
+              status,
+              campaignName,
+              campaignId,
+            }),
+          ),
         },
       ]);
     });
@@ -110,12 +116,15 @@ describe('Unit | API | Organization Learner With Participations', function () {
           tags: tagNames,
           type: organization.type,
         },
-        campaignParticipations: campaignParticipations.map(({ id, targetProfileId, status, campaignName }) => ({
-          id,
-          targetProfileId,
-          status,
-          campaignName,
-        })),
+        campaignParticipations: campaignParticipations.map(
+          ({ id, targetProfileId, status, campaignName, campaignId }) => ({
+            id,
+            targetProfileId,
+            status,
+            campaignName,
+            campaignId,
+          }),
+        ),
       });
     });
   });

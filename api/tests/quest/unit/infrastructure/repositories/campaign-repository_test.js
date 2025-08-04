@@ -6,16 +6,23 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
   let id;
   let code;
   let campaignsApiStub;
+  let expectedResult;
 
   beforeEach(function () {
     id = Symbol('id');
     code = Symbol('code');
+    expectedResult = {
+      id: 1,
+      name: 'campagne',
+      code: 'abc',
+      targetProfileId: 123,
+    };
     campaignsApiStub = {
       get: sinon.stub(),
       getByCode: sinon.stub(),
     };
-    campaignsApiStub.get.withArgs(id).resolves(new Campaign({}));
-    campaignsApiStub.getByCode.withArgs(code).resolves(new Campaign({}));
+    campaignsApiStub.get.withArgs(id).resolves(new Campaign(expectedResult));
+    campaignsApiStub.getByCode.withArgs(code).resolves(new Campaign(expectedResult));
   });
 
   describe('#get', function () {
@@ -25,6 +32,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
 
       // then
       expect(result).to.be.an.instanceof(Campaign);
+      expect(result).to.deep.equal(expectedResult);
     });
   });
 
@@ -35,6 +43,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
 
       // then
       expect(result).to.be.an.instanceof(Campaign);
+      expect(result).to.deep.equal(expectedResult);
     });
   });
 });

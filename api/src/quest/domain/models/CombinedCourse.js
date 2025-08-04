@@ -43,25 +43,44 @@ export class CombinedCourseDetails extends CombinedCourse {
       .map(({ data }) => data.moduleId.data);
   }
 
-  generateItems(data) {
-    this.items = this.#quest.successRequirements.map((requirement) => {
+  generateItems(data, recommendableModuleIds = [], recommendedModuleIdsForUser = []) {
+    this.items = [];
+    for (const requirement of this.#quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = data.find(({ id }) => id === requirement.data.campaignId.data);
-        return new CombinedCourseItem({
-          id: campaign.id,
-          reference: campaign.code,
-          title: campaign.name,
-          type: ITEM_TYPE.CAMPAIGN,
-        });
+        this.items.push(
+          new CombinedCourseItem({
+            id: campaign.id,
+            reference: campaign.code,
+            title: campaign.name,
+            type: ITEM_TYPE.CAMPAIGN,
+          }),
+        );
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const module = data.find(({ id }) => id === requirement.data.moduleId.data);
-        return new CombinedCourseItem({
-          id: module.id,
-          reference: module.slug,
-          title: module.title,
-          type: ITEM_TYPE.MODULE,
-        });
+
+        const isRecommandable = recommendableModuleIds.find(
+          (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
+        );
+
+        if (isRecommandable) {
+          const isRecommended = recommendedModuleIdsForUser.find(
+            (recommendedModule) => recommendedModule.moduleId === module.id,
+          );
+          if (!isRecommended) {
+            continue;
+          }
+        }
+
+        this.items.push(
+          new CombinedCourseItem({
+            id: module.id,
+            reference: module.slug,
+            title: module.title,
+            type: ITEM_TYPE.MODULE,
+          }),
+        );
       }
-    });
+    }
   }
 }

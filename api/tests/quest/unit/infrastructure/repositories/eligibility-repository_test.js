@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
-import * as organizationLearnersWithParticipationsRepository from '../../../../../src/quest/infrastructure/repositories/eligibility-repository.js';
+import * as eligibilityRepository from '../../../../../src/quest/infrastructure/repositories/eligibility-repository.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | repositories | eligibility', function () {
@@ -27,7 +27,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       organizationLearnerWithParticipationApi.find.withArgs({ userIds: [userId] }).resolves(apiResponseSymbol);
 
       // when
-      const result = await organizationLearnersWithParticipationsRepository.find({
+      const result = await eligibilityRepository.find({
         userId,
         organizationLearnerWithParticipationApi,
       });
@@ -37,6 +37,41 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       expect(result[0].organization).to.equal(organization);
       expect(result[0].organizationLearner.id).to.equal(organizationLearnerId);
       expect(result[0].campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
+    });
+  });
+  describe('#findByUserIdAndOrganizationId', function () {
+    it('should call organizationLearnerWithParticipationApi', async function () {
+      // given
+      const organizationLearnerId = Symbol('organizationLearnerId');
+      const organization = { id: 1 };
+      const targetProfileId = Symbol('targetProfileId');
+      const apiResponseSymbol = {
+        organizationLearner: {
+          id: organizationLearnerId,
+        },
+        organization,
+        campaignParticipations: [{ targetProfileId }],
+      };
+      const userId = 1;
+      const organizationLearnerWithParticipationApi = {
+        getByUserIdAndOrganizationId: sinon.stub(),
+      };
+      organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId
+        .withArgs({ userId, organizationId: organization.id })
+        .resolves(apiResponseSymbol);
+
+      // when
+      const result = await eligibilityRepository.findByUserIdAndOrganizationId({
+        userId,
+        organizationId: organization.id,
+        organizationLearnerWithParticipationApi,
+      });
+
+      // then
+      expect(result).to.be.an.instanceof(Eligibility);
+      expect(result.organization).to.equal(organization);
+      expect(result.organizationLearner.id).to.equal(organizationLearnerId);
+      expect(result.campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
     });
   });
 });
