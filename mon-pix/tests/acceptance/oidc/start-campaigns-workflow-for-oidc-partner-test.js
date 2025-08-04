@@ -1,7 +1,6 @@
 /* eslint ember/no-classic-classes: 0 */
 
 import { visit } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, currentURL, fillIn, settled, waitUntil } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -23,16 +22,11 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
 
   module('Start a campaign that belongs to an external provider', function () {
     module('When user is not logged in', function (hooks) {
-      let assignLocationStub;
+      let locationService;
 
       hooks.beforeEach(function () {
-        assignLocationStub = sinon.stub().returns();
-        this.owner.register(
-          'service:location',
-          Service.extend({
-            assign: assignLocationStub,
-          }),
-        );
+        locationService = this.owner.lookup('service:location');
+        sinon.stub(locationService, 'assign');
 
         campaign = server.create('campaign', { organizationId: 1 });
         server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
@@ -60,9 +54,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
         // when
         await clickByLabel('Je commence');
 
-        await waitUntil(() => assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
+        await waitUntil(() => locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
         // then
-        assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
+        assert.ok(locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
       });
 
       test('should redirect to login or register oidc page', async function (assert) {
@@ -103,21 +97,18 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
     });
 
     module('When user is logged in', function (hooks) {
-      let assignLocationStub;
+      let locationService;
 
       hooks.beforeEach(async function () {
+        locationService = this.owner.lookup('service:location');
+        sinon.stub(locationService, 'assign');
+
         const prescritUser = server.create('user', 'withEmail', {
           mustValidateTermsOfService: false,
           lastTermsOfServiceValidatedAt: null,
         });
         await authenticateByEmail(prescritUser);
-        assignLocationStub = sinon.stub().resolves();
-        this.owner.register(
-          'service:location',
-          Service.extend({
-            assign: assignLocationStub,
-          }),
-        );
+
         campaign = server.create('campaign', { organizationId: 1 });
         server.create('organization-to-join', { id: 1, identityProvider: 'OIDC_PARTNER', code: campaign.code });
       });
@@ -185,10 +176,10 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           // when
           await clickByLabel('Je commence');
 
-          await waitUntil(() => assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
+          await waitUntil(() => locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
 
           // then
-          assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
+          assert.ok(locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
         });
       });
     });

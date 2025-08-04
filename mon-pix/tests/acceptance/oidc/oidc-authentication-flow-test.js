@@ -1,5 +1,4 @@
 import { visit } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -15,14 +14,11 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
-  let assignLocationStub;
+  let locationService;
 
   hooks.beforeEach(async function () {
-    assignLocationStub = sinon.stub().returns();
-    class LocationServiceStub extends Service {
-      assign = assignLocationStub;
-    }
-    this.owner.register('service:location', LocationServiceStub);
+    locationService = this.owner.lookup('service:location');
+    sinon.stub(locationService, 'assign');
   });
 
   module('when the user has not performed an authentication to the OIDC Provider', function () {
@@ -42,7 +38,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
         await unabortedVisit('/connexion/oidc-partner');
 
         // then
-        assert.ok(assignLocationStub.calledWith('https://oidc/connexion/oauth2/authorize'));
+        assert.ok(locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
       });
     });
   });
