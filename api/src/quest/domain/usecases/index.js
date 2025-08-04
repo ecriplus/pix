@@ -21,6 +21,7 @@ const dependencies = {
   combinedCourseParticipantRepository: repositories.combinedCourseParticipantRepository,
   combinedCourseRepository: repositories.combinedCourseRepository,
   moduleRepository: repositories.moduleRepository,
+  recommendedModulesRepository: repositories.recommendedModulesRepository,
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
   logger,

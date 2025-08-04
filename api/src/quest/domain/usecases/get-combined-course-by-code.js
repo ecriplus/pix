@@ -1,5 +1,6 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CombinedCourseDetails } from '../models/CombinedCourse.js';
+import { DataForQuest } from '../models/DataForQuest.js';
 
 export async function getCombinedCourseByCode({
   userId,
@@ -9,6 +10,8 @@ export async function getCombinedCourseByCode({
   campaignRepository,
   questRepository,
   moduleRepository,
+  eligibilityRepository,
+  recommendedModulesRepository,
 }) {
   const quest = await questRepository.getByCode({ code });
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
@@ -24,18 +27,43 @@ export async function getCombinedCourseByCode({
 
   const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, participation);
 
+  const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
+    userId,
+    organizationId: combinedCourse.organizationId,
+  });
+
+  const dataForQuest = new DataForQuest({ eligibility });
+
+  const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
   const campaignIds = combinedCourseDetails.campaignIds;
   const campaigns = [];
+  const targetProfileIds = [];
   for (const campaignId of campaignIds) {
     const campaign = await campaignRepository.get({ id: campaignId });
     campaigns.push(campaign);
+    targetProfileIds.push(campaign.targetProfileId);
+  }
+
+  let recommendableModuleIds = [];
+  if (targetProfileIds.length > 0) {
+    recommendableModuleIds = await recommendedModulesRepository.findIdsByTargetProfileIds({
+      targetProfileIds,
+    });
+  }
+
+  let recommendedModuleIdsForUser = [];
+  if (campaignParticipationIds.length > 0) {
+    recommendedModuleIdsForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
+      campaignParticipationIds,
+    });
   }
 
   const moduleIds = combinedCourseDetails.moduleIds;
 
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
 
-  combinedCourseDetails.generateItems([...campaigns, ...modules]);
+  combinedCourseDetails.generateItems([...campaigns, ...modules], recommendableModuleIds, recommendedModuleIdsForUser);
 
   return combinedCourseDetails;
 }
