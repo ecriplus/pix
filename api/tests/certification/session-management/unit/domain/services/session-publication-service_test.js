@@ -27,6 +27,8 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
   const sessionDate = '2020-05-08';
   const recipient1 = 'email1@example.net';
   const recipient2 = 'email2@example.net';
+  const recipient2WithUpperCases = 'EMAIL2@EXAMPLE.NET';
+
   const certificationCenter = 'certificationCenter';
   let clock;
   let candidateWithRecipient1,
@@ -45,7 +47,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       subscriptions: [domainBuilder.buildCoreSubscription()],
     });
     candidate2WithRecipient2 = domainBuilder.buildCertificationCandidate({
-      resultRecipientEmail: recipient2,
+      resultRecipientEmail: recipient2WithUpperCases,
       subscriptions: [domainBuilder.buildCoreSubscription()],
     });
     candidateWithNoRecipient = domainBuilder.buildCertificationCandidate({
