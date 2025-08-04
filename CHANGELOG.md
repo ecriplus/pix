@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.174.0](https://github.com/1024pix/pix/compare/v5.173.0...v5.174.0) (2025-08-04)
+
+### :rocket: Amélioration
+
+- [#13078](https://github.com/1024pix/pix/pull/13078) Ajouter une api interne pour récuperer les orga learners et ses participations depuis un orga Id et user Id (PIX-18922) 
+- [#12983](https://github.com/1024pix/pix/pull/12983) Suppression de l'éligibilité en dehors de CleA (PIX-18853). 
+- [#13080](https://github.com/1024pix/pix/pull/13080) V2 module ENT nouveau pattern 
+
+### :bug: Correction
+
+- [#13066](https://github.com/1024pix/pix/pull/13066) Récupérer les infos du badge certifiant et non certifié sur la page d'éligibilité (PIX-18953). 
+
+### :building_construction: Tech
+
+- [#13040](https://github.com/1024pix/pix/pull/13040) :truck: Déplace le modèle `AnswerCollectionForScoring` vers le contexte `src/certification/shared/` 
+- [#13047](https://github.com/1024pix/pix/pull/13047) :wastebasket: Supprime le fichier temporaire `EmailAttempt` 
+
+### :arrow_up: Montée de version
+
+- [#13092](https://github.com/1024pix/pix/pull/13092) Lock file maintenance (orga) 
+
+### :coffee: Autre
+
+- [#13085](https://github.com/1024pix/pix/pull/13085) Isoler et factoriser les locales (PIX-18903)
+
 # [5.173.0](https://github.com/1024pix/pix/compare/v5.172.0...v5.173.0) (2025-08-01)
 
 ### :rocket: Amélioration
