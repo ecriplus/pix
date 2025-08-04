@@ -14,16 +14,41 @@ import {
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
-import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
+import { QUEST_OFFSET, TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
+const firstTrainingId = QUEST_OFFSET + 1;
+const secondTrainingId = QUEST_OFFSET + 2;
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
+  const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
   const campaign = databaseBuilder.factory.buildCampaign({
     name: 'Je teste mes compétences',
     organizationId,
     code: 'CODE123',
+    targetProfileId: targetProfile.id,
   });
+  CAMPAIGN_SKILLS[0].map((skillId) =>
+    databaseBuilder.factory.buildCampaignSkill({
+      campaignId: campaign.id,
+      skillId,
+    }),
+  );
+  databaseBuilder.factory.buildTraining({
+    id: firstTrainingId,
+    type: 'modulix',
+    title: 'Bac à sable',
+    link: '/modules/bac-a-sable',
+    locale: 'fr-fr',
+  });
+  databaseBuilder.factory.buildTraining({
+    id: secondTrainingId,
+    type: 'modulix',
+    title: 'Choisir un jeu vidéo adapté à son enfant',
+    link: '/modules/jeux-video-enfant',
+    locale: 'fr-fr',
+  });
+
   databaseBuilder.factory.buildQuestForCombinedCourse({
     name: 'Combinix',
     rewardType: null,
@@ -62,8 +87,31 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
           },
         },
       },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
+            comparison: 'equal',
+          },
+        },
+      },
     ],
   });
+  const trainingTriggerIds = [
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingId, threshold: 0, type: 'prerequisite' })
+      .id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingId, threshold: 50, type: 'goal' }).id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingId, threshold: 50, type: 'prerequisite' })
+      .id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingId, threshold: 100, type: 'goal' }).id,
+  ];
+  trainingTriggerIds.forEach((trainingTriggerId) =>
+    TARGET_PROFILE_TUBES[0].map((tube) =>
+      databaseBuilder.factory.buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
+    ),
+  );
 }
 
 function buildParenthoodQuest(databaseBuilder) {
@@ -310,24 +358,34 @@ const buildSixthGradeQuests = (
   });
 };
 
-const buildTargetProfiles = (databaseBuilder, organization) =>
-  TARGET_PROFILE_TUBES.map((tubes, index) => {
-    const targetProfile = databaseBuilder.factory.buildTargetProfile({
-      description: `parcours attestation 6 eme numero ${index + 1}`,
-      name: `parcours attestation 6 eme numero ${index + 1}`,
-      ownerOrganizationId: organization.id,
-    });
-
-    tubes.map(({ id, level }) =>
-      databaseBuilder.factory.buildTargetProfileTube({
-        targetProfileId: targetProfile.id,
-        tubeId: id,
-        level,
-      }),
-    );
-
-    return targetProfile;
+const buildTargetProfile = (databaseBuilder, organization, index, tubes) => {
+  const targetProfile = databaseBuilder.factory.buildTargetProfile({
+    description: `parcours attestation 6 eme numero ${index + 1}`,
+    name: `parcours attestation 6 eme numero ${index + 1}`,
+    ownerOrganizationId: organization.id,
   });
+  databaseBuilder.factory.buildTargetProfileTraining({
+    targetProfileId: targetProfile.id,
+    trainingId: firstTrainingId,
+  });
+  databaseBuilder.factory.buildTargetProfileTraining({
+    targetProfileId: targetProfile.id,
+    trainingId: secondTrainingId,
+  });
+
+  tubes.map(({ id, level }) =>
+    databaseBuilder.factory.buildTargetProfileTube({
+      targetProfileId: targetProfile.id,
+      tubeId: id,
+      level,
+    }),
+  );
+
+  return targetProfile;
+};
+
+const buildTargetProfiles = (databaseBuilder, organization) =>
+  TARGET_PROFILE_TUBES.map((tubes, index) => buildTargetProfile(databaseBuilder, organization, index, tubes));
 
 const buildCampaigns = (databaseBuilder, organization, targetProfiles) =>
   targetProfiles.map((targetProfile, index) => {
