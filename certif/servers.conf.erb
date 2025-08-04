@@ -27,6 +27,7 @@ log_format keyvalue
 access_log off;
 
 <%
+  is_not_review_app  = ENV['REVIEW_APP'] != 'true'
   canary_enabled = ENV['NGINX_UPSTREAM_CANARY'] == 'enabled' && ENV['NGINX_UPSTREAM_CANARY_WEIGHT'] && ENV['NGINX_UPSTREAM_CANARY_APP_NAME']
   canary_weight  = ENV['NGINX_UPSTREAM_CANARY_WEIGHT'].to_i
   server_options = "max_fails=#{ENV['NGINX_UPSTREAM_MAX_FAILS'] || 3} fail_timeout=#{ENV['NGINX_UPSTREAM_FAIL_TIMEOUT'] || '5s'}"
@@ -143,7 +144,10 @@ server {
     proxy_set_header X-Source-Front <%= ENV['APP'] %>;
 
     # Set X-Forwarded-xxx headers for the API to compute getForwardedOrigin
-    proxy_set_header X-Forwarded-Host $http_host;
+    # Review apps url must keep their original hostname (we do not Scalingo internal urls)
+    <% if is_not_review_app %>
+      proxy_set_header X-Forwarded-Host ${http_host};
+    <% end %>
     proxy_set_header X-Forwarded-Proto $scheme;
 
     # Set X-Forwarded-For header to be able to know the remote client IP

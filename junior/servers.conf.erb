@@ -26,6 +26,9 @@ log_format keyvalue
 # as we are about to override it in the server directive here below
 access_log off;
 
+<%
+  is_not_review_app  = ENV['REVIEW_APP'] != 'true'
+%>
 upstream api {
     <%
     # We compute the API host from the front app name, examples:
@@ -121,7 +124,10 @@ server {
     proxy_set_header X-Source-Front <%= ENV['APP'] %>;
 
     # Set X-Forwarded-xxx headers for the API to compute getForwardedOrigin
-    proxy_set_header X-Forwarded-Host $http_host;
+    # Review apps url must keep their original hostname (we do not Scalingo internal urls)
+    <% if is_not_review_app %>
+      proxy_set_header X-Forwarded-Host ${http_host};
+    <% end %>
     proxy_set_header X-Forwarded-Proto $scheme;
 
     # Set X-Forwarded-For header to be able to know the remote client IP
