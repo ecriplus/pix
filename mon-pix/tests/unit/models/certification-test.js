@@ -1,6 +1,6 @@
-import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 module('Unit | Model | certification', function (hooks) {
   setupTest(hooks);
@@ -26,12 +26,8 @@ module('Unit | Model | certification', function (hooks) {
   module('#shouldDisplayProfessionalizingWarning', function () {
     module('when domain is french', function (hooks) {
       hooks.beforeEach(function () {
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
       });
 
       module('when version is 2', function () {
@@ -58,13 +54,6 @@ module('Unit | Model | certification', function (hooks) {
     module('when domain is not french', function () {
       test('should be false', function (assert) {
         // given
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return false;
-          }
-        }
-
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
         const model = store.createRecord('certification', { deliveredAt: '2022-01-01' });
 
         // when / then
@@ -75,13 +64,8 @@ module('Unit | Model | certification', function (hooks) {
     module('when version is not 2', function () {
       test('should be false', function (assert) {
         // given
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
-
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
         const model = store.createRecord('certification', { deliveredAt: '2022-01-01', version: 3 });
 
         // when / then

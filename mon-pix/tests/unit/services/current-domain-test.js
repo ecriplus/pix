@@ -14,7 +14,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is FR TLD', function () {
       test(`returns fr`, function (assert) {
         // given
-        _stubPixWindow('https://pix.fr/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://pix.fr/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -28,7 +28,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is ORG TLD', function () {
       test(`returns org`, function (assert) {
         // given
-        _stubPixWindow('https://pix.org/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://pix.org/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -44,7 +44,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is FR TLD', function () {
       test('returns true', function (assert) {
         // given
-        _stubPixWindow('https://pix.fr/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://pix.fr/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -58,7 +58,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is ORG TLD', function () {
       test('returns false', function (assert) {
         // given
-        _stubPixWindow('https://pix.org/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://pix.org/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -70,11 +70,41 @@ module('Unit | Service | currentDomain', function (hooks) {
     });
   });
 
+  module('#domain', function () {
+    module('when location is localhost', function () {
+      test('returns locahost as domain', function (assert) {
+        // given
+        _stubWindowUrl(this.owner, 'http://localhost:4200/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
+
+        // when
+        const domain = service.domain;
+
+        // then
+        assert.strictEqual(domain, 'localhost');
+      });
+    });
+
+    module('when location is not localhost', function () {
+      test('returns the last 2-parts segment', function (assert) {
+        // given
+        _stubWindowUrl(this.owner, 'https://pix.fr/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
+
+        // when
+        const domain = service.domain;
+
+        // then
+        assert.strictEqual(domain, 'pix.fr');
+      });
+    });
+  });
+
   module('#isLocalhost', function () {
     module('when location is localhost', function () {
       test('returns true', function (assert) {
         // given
-        _stubPixWindow('http://localhost:4200/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'http://localhost:4200/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -88,7 +118,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is not localhost', function () {
       test('returns false', function (assert) {
         // given
-        _stubPixWindow('https://pix.fr/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://pix.fr/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -104,7 +134,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is localhost', function () {
       test('returns the original URL', function (assert) {
         // given
-        _stubPixWindow('http://localhost:4200/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'http://localhost:4200/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -118,7 +148,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is FR TLD', function () {
       test('returns the URL with ORG TLD', function (assert) {
         // given
-        _stubPixWindow('https://app.pix.fr/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://app.pix.fr/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -132,7 +162,7 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is ORG TLD', function () {
       test('returns the original URL', function (assert) {
         // given
-        _stubPixWindow('https://app.pix.org/foo?bar=baz');
+        _stubWindowUrl(this.owner, 'https://app.pix.org/foo?bar=baz');
         const service = this.owner.lookup('service:currentDomain');
 
         // when
@@ -145,11 +175,15 @@ module('Unit | Service | currentDomain', function (hooks) {
   });
 });
 
-function _stubPixWindow(url) {
+function _stubWindowUrl(owner, url) {
   const newUrl = new URL(url);
   sinon.stub(PixWindow, 'getLocationHash').returns(newUrl.hash);
+  sinon.stub(PixWindow, 'getLocationHost').returns(newUrl.host);
   sinon.stub(PixWindow, 'getLocationHostname').returns(newUrl.hostname);
   sinon.stub(PixWindow, 'getLocationHref').returns(newUrl.href);
   sinon.stub(PixWindow, 'reload');
   sinon.stub(PixWindow, 'replace');
+
+  const locationService = owner.lookup('service:location');
+  sinon.stub(locationService, 'href').value(url);
 }

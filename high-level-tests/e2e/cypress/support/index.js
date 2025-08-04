@@ -21,6 +21,8 @@ import { disableAnimation } from "./disable-animation";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+const BROWSER_LOCALE = 'fr';
+
 beforeEach(() => {
   cy.exec('npm run db:empty');
 
@@ -32,6 +34,8 @@ beforeEach(() => {
   // see https://gist.github.com/cvan/576eb41ab5d382660c14e3831c33c6ea
   // for source code inspiration
   cy.on('window:before:load', (cyWindow) => {
+    Object.defineProperty(cyWindow.navigator, 'language', { value: BROWSER_LOCALE })
+    Object.defineProperty(cyWindow.navigator, 'languages', { value: [BROWSER_LOCALE] })
     disableAnimation(cyWindow);
   });
 

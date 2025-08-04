@@ -1,12 +1,11 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { setLocale, t } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import PasswordResetDemandForm from 'mon-pix/components/authentication/password-reset-demand/password-reset-demand-form';
-import { ENGLISH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { setCurrentLocale } from '../../../../helpers/setup-intl';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 const I18N_KEYS = {
@@ -31,17 +30,10 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
 
   test('it displays all elements of component successfully', async function (assert) {
     // given
-    class CurrentDomainServiceStub extends Service {
-      get isFranceDomain() {
-        return true;
-      }
+    const domainService = this.owner.lookup('service:currentDomain');
+    sinon.stub(domainService, 'getExtension').returns('fr');
 
-      getExtension() {
-        return '.fr';
-      }
-    }
-    this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-
+    // when
     const screen = await render(<template><PasswordResetDemandForm /></template>);
 
     // then
@@ -115,10 +107,9 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
         requestManagerService.request.resolves({ response: { ok: true, status: 201 } });
 
         const email = 'someone@example.net';
-        const locale = ENGLISH_INTERNATIONAL_LOCALE;
+        await setCurrentLocale('en');
 
         // when
-        await setLocale(locale);
         const screen = await render(<template><PasswordResetDemandForm /></template>);
 
         await fillByLabel(t(I18N_KEYS.emailInput), email);
@@ -131,7 +122,7 @@ module('Integration | Component | Authentication | PasswordResetDemand | passwor
 
         const tryAgainLink = await screen.queryByRole('link', { name: t(I18N_KEYS.tryAgainLink) });
         assert.dom(tryAgainLink).exists();
-        assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=${locale}`);
+        assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=en`);
       });
     });
 

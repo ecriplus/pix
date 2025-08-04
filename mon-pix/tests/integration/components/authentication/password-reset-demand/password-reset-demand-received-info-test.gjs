@@ -1,9 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setLocale, t } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import PasswordResetDemandReceivedInfo from 'mon-pix/components/authentication/password-reset-demand/password-reset-demand-received-info';
-import { ENGLISH_INTERNATIONAL_LOCALE } from 'mon-pix/services/locale';
 import { module, test } from 'qunit';
 
+import { setCurrentLocale } from '../../../../helpers/setup-intl';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module(
@@ -36,17 +36,16 @@ module(
 
     test('it displays a link with a lang query param equal to the app locale', async function (assert) {
       // given
-      const locale = ENGLISH_INTERNATIONAL_LOCALE;
+      await setCurrentLocale('en');
 
       // when
-      await setLocale(locale);
       const screen = await render(<template><PasswordResetDemandReceivedInfo /></template>);
 
       // then
       const tryAgainLink = await screen.queryByRole('link', {
         name: t('components.authentication.password-reset-demand-received-info.try-again'),
       });
-      assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=${locale}`);
+      assert.strictEqual(tryAgainLink.getAttribute('href'), `/mot-de-passe-oublie?lang=en`);
     });
   },
 );

@@ -1,25 +1,13 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import Footer from 'mon-pix/components/authentication-layout/footer';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Authentication-layout | footer', function (hooks) {
   setupIntlRenderingTest(hooks);
   test('it displays a locale switcher when url has org extension', async function (assert) {
-    //given
-    class CurrentDomainServiceStub extends Service {
-      get isFranceDomain() {
-        return false;
-      }
-
-      getExtension() {
-        return 'org';
-      }
-    }
-
-    this.owner.register('service:currentDomain', CurrentDomainServiceStub);
     //when
     const screen = await render(<template><Footer /></template>);
 
@@ -29,17 +17,9 @@ module('Integration | Component | Authentication-layout | footer', function (hoo
   });
   test('it displays no locale switcher when url has fr extension', async function (assert) {
     //given
-    class CurrentDomainServiceStub extends Service {
-      get isFranceDomain() {
-        return true;
-      }
+    const domainService = this.owner.lookup('service:currentDomain');
+    sinon.stub(domainService, 'getExtension').returns('fr');
 
-      getExtension() {
-        return 'fr';
-      }
-    }
-
-    this.owner.register('service:currentDomain', CurrentDomainServiceStub);
     //when
     const screen = await render(<template><Footer /></template>);
 

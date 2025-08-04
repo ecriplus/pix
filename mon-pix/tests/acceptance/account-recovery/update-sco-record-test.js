@@ -1,7 +1,6 @@
 /* eslint ember/no-classic-classes: 0 */
 
 import { visit } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -393,13 +392,8 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
 
   test('should display on reset passord form a quit button redirecting to login page ', async function (assert) {
     // given
-    const replaceLocationStub = sinon.stub().resolves();
-    this.owner.register(
-      'service:location',
-      Service.extend({
-        replace: replaceLocationStub,
-      }),
-    );
+    const locationService = this.owner.lookup('service:location');
+    sinon.stub(locationService, 'replace');
 
     const temporaryKey = '6fe76ea1bb34a1d17e7b2253ee0f7f4b2bc66ddde37d50ee661cbbf3c00cfdc9';
 
@@ -409,6 +403,6 @@ module('Acceptance | account-recovery | UpdateScoRecordRoute', function (hooks) 
     await click(screen.getByText(t('common.actions.quit')));
 
     // then
-    assert.ok(replaceLocationStub.calledWith('/?lang=fr'));
+    assert.ok(locationService.replace.calledWith('/?lang=fr'));
   });
 });

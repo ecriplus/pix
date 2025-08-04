@@ -11,17 +11,9 @@ module('Unit | Component | Certifications | List | item', function (hooks) {
   module('when domain is french', function () {
     test('should call file saver with isFrenchDomainExtension set to true in url', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
-      class IntlServiceStub extends Service {
-        primaryLocale = 'fr';
-      }
-      this.owner.register('service:intl', IntlServiceStub);
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;
@@ -46,17 +38,6 @@ module('Unit | Component | Certifications | List | item', function (hooks) {
   module('when domain is not french', function () {
     test('should call file saver with isFrenchDomainExtension set to false in url', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-
-      class IntlServiceStub extends Service {
-        primaryLocale = 'fr';
-      }
-      this.owner.register('service:intl', IntlServiceStub);
       const fileSaverSaveStub = sinon.stub();
       class FileSaverStub extends Service {
         save = fileSaverSaveStub;

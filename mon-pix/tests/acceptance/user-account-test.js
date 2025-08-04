@@ -1,5 +1,4 @@
 import { visit } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -98,16 +97,6 @@ module('Acceptance | User account page', function (hooks) {
       module('When not in France domain', () => {
         test('it displays locale switcher on click on "Choisir ma langue"', async function (assert) {
           // given
-          class CurrentDomainStubService extends Service {
-            get isFranceDomain() {
-              return false;
-            }
-
-            getExtension = sinon.stub().returns('org');
-          }
-
-          this.owner.register('service:currentDomain', CurrentDomainStubService);
-
           const screen = await visit('/mon-compte');
 
           // when
@@ -124,15 +113,8 @@ module('Acceptance | User account page', function (hooks) {
       module('When in France domain', () => {
         test('it does not display language menu link', async function (assert) {
           // given
-          class CurrentDomainStubService extends Service {
-            get isFranceDomain() {
-              return true;
-            }
-
-            getExtension = sinon.stub().returns('fr');
-          }
-
-          this.owner.register('service:currentDomain', CurrentDomainStubService);
+          const domainService = this.owner.lookup('service:currentDomain');
+          sinon.stub(domainService, 'getExtension').returns('fr');
 
           const screen = await visit('/mon-compte');
 

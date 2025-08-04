@@ -201,11 +201,8 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
     module('Text to speech button:', function () {
       module('when FT_ENABLE_TEXT_TO_SPEECH_BUTTON is enabled', function (hooks) {
         hooks.beforeEach(async function () {
-          this.owner.lookup('service:store');
-          class FeatureTogglesStub extends Service {
-            featureToggles = { isTextToSpeechButtonEnabled: true };
-          }
-          this.owner.register('service:featureToggles', FeatureTogglesStub);
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isTextToSpeechButtonEnabled: true });
         });
 
         module('when the assessment is not a certification', function () {
@@ -355,11 +352,8 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
 
       module('when FT_ENABLE_TEXT_TO_SPEECH_BUTTON is disabled', function (hooks) {
         hooks.beforeEach(async function () {
-          this.owner.lookup('service:store');
-          class FeatureTogglesStub extends Service {
-            featureToggles = { isTextToSpeechButtonEnabled: false };
-          }
-          this.owner.register('service:featureToggles', FeatureTogglesStub);
+          const featureToggles = this.owner.lookup('service:featureToggles');
+          sinon.stub(featureToggles, 'featureToggles').value({ isTextToSpeechButtonEnabled: false });
         });
 
         module('when the assessment is not a certification', function () {

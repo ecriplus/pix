@@ -2,6 +2,10 @@ function getLocationHash() {
   return window.location.hash;
 }
 
+function getLocationHost() {
+  return window.location.host;
+}
+
 function getLocationHostname() {
   return window.location.hostname;
 }
@@ -20,6 +24,7 @@ function reload() {
 
 const PixWindow = {
   getLocationHash,
+  getLocationHost,
   getLocationHostname,
   getLocationHref,
   replace,

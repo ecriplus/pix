@@ -11,7 +11,7 @@ import SavedEmpty from 'mon-pix/components/tutorials/saved-empty';
         <PixPagination
           @pagination={{@model.savedTutorials.meta.pagination}}
           @pageOptions={{@controller.pageOptions}}
-          @locale={{@controller.locale.currentLocale}}
+          @locale={{@controller.locale.currentLanguage}}
           @isCondensed="true"
         />
       {{else}}

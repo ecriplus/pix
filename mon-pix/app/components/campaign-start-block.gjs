@@ -96,7 +96,7 @@ export default class CampaignStartBlock extends Component {
   }
 
   get legalText() {
-    if (this.featureToggles.featureToggles.isAutoShareEnabled && this.campaignType === 'assessment') {
+    if (this.featureToggles.featureToggles?.isAutoShareEnabled && this.campaignType === 'assessment') {
       return this.intl.t(`pages.campaign-landing.${this.campaignType}.legal-with-auto-share`);
     }
     return this.intl.t(`pages.campaign-landing.${this.campaignType}.legal`);

@@ -1,8 +1,9 @@
-import { setLocale } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import setupIntl from 'mon-pix/tests/helpers/setup-intl';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
+
+import { setCurrentLocale } from '../../helpers/setup-intl.js';
 
 module('Unit | Service | url', function (hooks) {
   setupTest(hooks);
@@ -29,12 +30,12 @@ module('Unit | Service | url', function (hooks) {
         expectedShowcaseLinkText: "Pix.org's Homepage",
       },
     ].forEach(function (testCase) {
-      test(`gets "${testCase.expectedShowcaseUrl}" when current domain="${testCase.currentDomainExtension}" and lang="${testCase.language}"`, function (assert) {
+      test(`gets "${testCase.expectedShowcaseUrl}" when current domain="${testCase.currentDomainExtension}" and lang="${testCase.language}"`, async function (assert) {
         // given
         const service = this.owner.lookup('service:url');
         service.definedHomeUrl = '/';
         sinon.stub(service.currentDomain, 'getExtension').returns(testCase.currentDomainExtension);
-        setLocale([testCase.language]);
+        await setCurrentLocale(testCase.language);
 
         // when
         const showcase = service.showcase;
@@ -58,10 +59,10 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(cguUrl, 'https://pix.org/fr/conditions-generales-d-utilisation');
     });
 
-    test('returns the Pix website CGU URL for a locale', function (assert) {
+    test('returns the Pix website CGU URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const cguUrl = service.cguUrl;
@@ -83,10 +84,10 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(dataProtectionPolicyUrl, 'https://pix.org/fr/politique-protection-donnees-personnelles-app');
     });
 
-    test('returns the Pix website data protection policy URL for a locale', function (assert) {
+    test('returns the Pix website data protection policy URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const dataProtectionPolicyUrl = service.dataProtectionPolicyUrl;
@@ -108,10 +109,10 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(legalNoticeUrl, 'https://pix.org/fr/mentions-legales');
     });
 
-    test('returns the Pix website legal notice URL for a locale', function (assert) {
+    test('returns the Pix website legal notice URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const legalNoticeUrl = service.legalNoticeUrl;
@@ -133,10 +134,10 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(accessibilityUrl, 'https://pix.org/fr/accessibilite');
     });
 
-    test('returns the Pix website accessibility URL for a locale', function (assert) {
+    test('returns the Pix website accessibility URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const accessibilityUrl = service.accessibilityUrl;
@@ -158,10 +159,10 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(supportHomeUrl, 'https://pix.org/fr/support');
     });
 
-    test('returns the Pix website support URL for a locale', function (assert) {
+    test('returns the Pix website support URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const supportHomeUrl = service.supportHomeUrl;
@@ -186,10 +187,10 @@ module('Unit | Service | url', function (hooks) {
       );
     });
 
-    test('returns the Pix website certification results explanation URL for a locale', function (assert) {
+    test('returns the Pix website certification results explanation URL for a locale', async function (assert) {
       // given
       const service = this.owner.lookup('service:url');
-      setLocale('en');
+      await setCurrentLocale('en');
 
       // when
       const certificationResultsExplanationUrl = service.certificationResultsExplanationUrl;
