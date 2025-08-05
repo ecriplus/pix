@@ -14,6 +14,6 @@ export default class ApplicationRoute extends Route {
 
     await this.currentUser.load();
 
-    this.locale.detectBestLocale({ user: this.currentUser.user });
+    this.locale.setBestLocale({ user: this.currentUser.user });
   }
 }
