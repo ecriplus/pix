@@ -92,7 +92,7 @@ export default class IndexController extends Controller {
   async copyResultsDownloadLink() {
     try {
       const adapter = this.store.adapterFor('session');
-      const link = await adapter.getDownloadLink({ id: this.model.id, lang: this.locale.currentLocale });
+      const link = await adapter.getDownloadLink({ id: this.model.id, lang: this.locale.currentLanguage });
       await navigator.clipboard.writeText(link.sessionResultsLink);
       this._displaySuccessTooltip();
     } catch {
