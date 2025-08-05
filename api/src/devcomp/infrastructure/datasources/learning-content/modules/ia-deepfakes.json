@@ -101,11 +101,46 @@
           "type": "element",
           "element": {
             "id": "9cad8650-9381-4d1e-92e5-81c68c7748a5",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-trivisage.html",
+            "type": "qab",
             "instruction": "<p><strong>Voici les photos de 3 personnes&nbsp;: sont-elles vraies ou fausses ?</strong></p>",
-            "height": 550
+            "cards": [
+              {
+                "id": "89298c11-f564-4fc9-83dc-ec9c439ddd3e",
+                "text": "",
+                "image": {
+                  "url": "https://assets.pix.org/modules/deepfakes/visage1.jpg",
+                  "altText": ""
+                },
+                "proposalA": "vraie personne",
+                "proposalB": "fausse personne",
+                "solution": "B"
+              },
+              {
+                "id": "da1ef1e8-ee77-4cf2-904c-23a293cac7f3",
+                "text": "",
+                "image": {
+                  "url": "https://assets.pix.org/modules/deepfakes/visage2.jpeg",
+                  "altText": ""
+                },
+                "proposalA": "vraie personne",
+                "proposalB": "fausse personne",
+                "solution": "B"
+              },
+              {
+                "id": "5a55a4d9-e10f-48df-8e63-30aeb6d8a681",
+                "text": "",
+                "image": {
+                  "url": "https://assets.pix.org/modules/deepfakes/visage3.jpg",
+                  "altText": ""
+                },
+                "proposalA": "vraie personne",
+                "proposalB": "fausse personne",
+                "solution": "B"
+              }
+            ],
+            "feedback": {
+              "diagnosis": "<p>En fait, ces trois personnes n'existent pas ! Avant, on pouvait facilement détecter les fausses images à cause de flous ou de détails ratés, mais c'est devenu très difficile.</p>"
+            }
           }
         }
       ]
@@ -254,20 +289,121 @@
       ]
     },
     {
-      "id": "fb72268d-e7c4-4d58-9ee8-9ac5dcd86218",
+      "id": "a92461c6-246a-4d33-b70b-2bea8b28c926",
       "type": "discovery",
-      "title": "Activité découverte - 3",
+      "title": "Activité découverte - 3 : QCUx3",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "652c79cc-b2d4-4279-9d95-8495fa81d56c",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-objectif.html",
-            "instruction": "<p><strong>Pour chaque exemple de deepfake, choisissez la bonne réponse.</strong></p>",
-            "height": 550
+            "id": "b5da21e5-f012-4248-94a8-de57dadfd515",
+            "type": "text",
+            "content": "<p>Pour chaque exemple de deepfake, choisissez la bonne réponse.</p>"
           }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "eeb6ed38-d2d1-4191-8805-2100de5e128b",
+                  "type": "qcu-discovery",
+                  "instruction": "<p>🎭 Une vidéo d’une personne connue qui fait la danse des canards déguisée en hot dog.<br><br>Quel est le but du créateur de cette vidéo ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>💸 Arnaquer.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>😂 Amuser.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Effectivement, cette vidéo est amusante, par contre elle peut enfreindre le droit à l'image.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>🧠 Manipuler.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "2"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "f70639c2-12be-461e-9153-bd7b7763cb75",
+                  "type": "qcu-discovery",
+                  "instruction": "<p>🎤 Une fausse déclaration d’un président qui accuse un autre pays d'être à l'origine d'un attentat.<br><br>Quel est le but du créateur de cette vidéo ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>💸 Arnaquer.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Créer une fausse déclaration permet de manipuler le public.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>😂 Amuser.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Ici pas de divertissement ! Créer une fausse déclaration permet de manipuler le public.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>🧠 Manipuler.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Effectivement, créer une fausse déclaration permet de manipuler le public.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "98a98ad8-f666-4bd5-b604-0acf4562f942",
+                  "type": "qcu-discovery",
+                  "instruction": "<p>📞 Un faux message vocal avec la voix d’un proche qui demande un virement pour se sortir d’une situation difficile.<br></p><p>Quel est le but du créateur de cette vidéo ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>💸 Arnaquer.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Effectivement, ce type de message vocal est souvent utilisé pour arnaquer.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>😂 Amuser.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Ce type de message vocal est souvent utilisé pour arnaquer.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>🧠 Manipuler.</p>",
+                      "feedback": {
+                        "diagnosis": "<p>Ce type de message vocal est souvent utilisé pour arnaquer.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "1"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -363,14 +499,13 @@
           "type": "element",
           "element": {
             "id": "35425bd8-df9b-402d-a576-2f0fe96d35ad",
-            "type": "qcu",
+            "type": "qcu-discovery",
             "instruction": "<p>Qu’est ce que Djibril devrait faire avec ce message ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>Liker le message de Brian.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Liker cette photo, c’est participer à du cyberharcèlement.</p>"
                 }
               },
@@ -378,7 +513,6 @@
                 "id": "2",
                 "content": "<p>Partager la photo à ses contacts.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.&nbsp;Partager cette photo, c’est participer à du cyberharcèlement.</p>"
                 }
               },
@@ -386,7 +520,6 @@
                 "id": "3",
                 "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
                 }
               },
@@ -394,7 +527,6 @@
                 "id": "4",
                 "content": "<p>Chercher la source de l'image sur internet.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !&nbsp;La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
                 }
               }
@@ -461,7 +593,7 @@
     {
       "id": "d4254b9a-b078-4c7b-aa9f-3449bd16806e",
       "type": "activity",
-      "title": "Activité d'application - 1 : Vrai ou faux ?",
+      "title": "Activité d'application - 1 : Vrai ou faux ?",
       "components": [
         {
           "type": "element",
@@ -540,18 +672,140 @@
     {
       "id": "20300d89-a258-48ec-a1db-f98609a3dd76",
       "type": "activity",
-      "title": "Activité d'application - 2 : Etude de cas",
+      "title": "Activité d'application - 2 : Etude de cas",
       "components": [
         {
           "type": "element",
           "element": {
-            "id": "79936024-306f-4a46-b39e-db21e9c49a31",
+            "id": "941ea25d-7b42-46fc-8a96-d35762dfd07b",
             "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-articlequestions.html",
-            "instruction": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong></p>",
+            "title": "Article",
+            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-articlemaire.html",
+            "instruction": "<p>Lisez l’article ci-dessous, puis répondez aux questions.</p>",
             "height": 550
           }
+        },
+        {
+          "type": "stepper",
+          "steps": [
+            {
+              "elements": [
+                {
+                  "id": "50220f94-8cee-487e-829f-25d6947cfd65",
+                  "type": "qcu",
+                  "instruction": "<p>Quel peut être le but de la personne qui a créé ce deepfake ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Informer le public.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Ce deepfake présente une fausse déclaration politique, il n'a pas été créé pour informer.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Faire rire les gens.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Ce deepfake présente une fausse déclaration politique, il n'a pas été créé pour amuser.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Manipuler l’opinion du public.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>Ce deepfake présente une fausse déclaration politique, il a bien été créé pour manipuler.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "57f59662-8bb3-4601-bc9a-1f33f541aa1c",
+                  "type": "qcm",
+                  "instruction": "<p>Avec quoi a été créé ce deepfake ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>avec un programme d’intelligence artificielle</p>"
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>avec du matériel professionnel dans un studio de cinéma</p>"
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>avec quelques images de la maire de la capitale</p>"
+                    },
+                    {
+                      "id": "4",
+                      "content": "<p>avec un sosie de la maire de la capitale</p>"
+                    },
+                    {
+                      "id": "5",
+                      "content": "<p>avec de très bonnes connaissances en montage vidéo</p>"
+                    }
+                  ],
+                  "feedbacks": {
+                    "valid": {
+                      "state": "<p>Bonne réponse ! 🎉</p>",
+                      "diagnosis": "<p>Un programme d'intelligence artificielle et quelques images sont suffisants pour créer un deepfake très difficile à détecter.</p>"
+                    },
+                    "invalid": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
+                    }
+                  },
+                  "solutions": [
+                    "1",
+                    "3"
+                  ]
+                }
+              ]
+            },
+            {
+              "elements": [
+                {
+                  "id": "46824fe5-1e52-467f-b48a-deaee3ec65fa",
+                  "type": "qcu",
+                  "instruction": "<p>Quel est le rôle des réseaux sociaux dans la diffusion de la vidéo de la maire ?</p>",
+                  "proposals": [
+                    {
+                      "id": "1",
+                      "content": "<p>Ils ont empêché la diffusion de la vidéo.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Au contraire, la vidéo a été largement partagée.</p>"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "content": "<p>Ils ont aidé à identifier le deepfake.</p>",
+                      "feedback": {
+                        "state": "<p>Mauvaise réponse.</p>",
+                        "diagnosis": "<p>Ce sont les services municipaux qui ont signalé le deepfake.</p>"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "content": "<p>Ils ont permis une large diffusion de la vidéo.</p>",
+                      "feedback": {
+                        "state": "<p>Bonne réponse ! 🎉</p>",
+                        "diagnosis": "<p>Le deepfake s’est propagé très rapidement grâce aux partages sur les réseaux.</p>"
+                      }
+                    }
+                  ],
+                  "solution": "3"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
