@@ -686,4 +686,76 @@ describe('Integration | Application | SecurityPreHandlers', function () {
       expect(response.statusCode).to.equal(404);
     });
   });
+
+  describe('#checkOrganizationDoesNotHaveFeature', function () {
+    let httpServerTest;
+
+    beforeEach(async function () {
+      const moduleUnderTest = {
+        name: 'has-feature-test',
+        register: async function (server) {
+          server.route([
+            {
+              method: 'GET',
+              path: '/api/test/organizations/{organizationId}',
+              handler: (r, h) => h.response().code(200),
+              config: {
+                auth: false,
+                pre: [
+                  {
+                    method: securityPreHandlers.checkOrganizationDoesNotHaveFeature(
+                      ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+                    ),
+                  },
+                ],
+              },
+            },
+          ]);
+        },
+      };
+      httpServerTest = new HttpTestServer();
+      await httpServerTest.register(moduleUnderTest);
+      httpServerTest.setupAuthentication();
+    });
+
+    it('should return 200 when organization does not have the feature', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/test/organizations/${organizationId}`,
+      };
+
+      // when
+      const response = await httpServerTest.requestObject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('should return a 403 when organization has the feature', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const feature = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+      });
+      databaseBuilder.factory.buildOrganizationFeature({
+        featureId: feature.id,
+        organizationId,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/test/organizations/${organizationId}`,
+      };
+
+      // when
+      const response = await httpServerTest.requestObject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+    });
+  });
+
 });

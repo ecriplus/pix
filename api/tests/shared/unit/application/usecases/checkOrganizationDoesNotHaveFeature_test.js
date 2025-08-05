@@ -1,7 +1,7 @@
 import * as checkOrganizationDoesNotHaveFeatureUseCase from '../../../../../src/shared/application/usecases/checkOrganizationDoesNotHaveFeature.js';
-import { expect, sinon } from '../../../../../tests/test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Validator | checkOrganizationDoesNotHaveFeature', function () {
+describe('Unit | Application | Use Case | checkOrganizationDoesNotHaveFeature', function () {
   context('When organization does not have the feature enabled', function () {
     it('should return true', async function () {
       // given

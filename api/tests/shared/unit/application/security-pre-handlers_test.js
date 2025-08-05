@@ -2143,4 +2143,60 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       });
     });
   });
+  describe('#checkOrganizationDoesNotHaveFeature', function () {
+    context('Successful case', function () {
+      let request;
+
+      beforeEach(function () {
+        request = {
+          params: { id: 1234 },
+        };
+      });
+
+      it('should authorize access to resource when the organization does NOT have feature enabled', async function () {
+        const featureKey = 'SOME_FEATURE';
+        const organizationId = 1234;
+
+        const checkOrganizationDoesNotHaveFeatureUseCaseStub = {
+          execute: sinon.stub(),
+        };
+
+        checkOrganizationDoesNotHaveFeatureUseCaseStub.execute.withArgs({ organizationId, featureKey }).resolves(true);
+
+        const checkOrganizationDoesNotHaveFeature = securityPreHandlers.checkOrganizationDoesNotHaveFeature(featureKey);
+        const response = await checkOrganizationDoesNotHaveFeature(request, hFake, {
+          checkOrganizationDoesNotHaveFeatureUseCase: checkOrganizationDoesNotHaveFeatureUseCaseStub,
+        });
+
+        expect(response.source).to.be.true;
+      });
+    });
+
+    context('Error cases', function () {
+      let request;
+
+      beforeEach(function () {
+        request = { params: { id: 1234 } };
+      });
+
+      it('should forbid resource access when organization does have feature enabled', async function () {
+        const featureKey = 'SOME_FEATURE';
+        const organizationId = 1234;
+
+        const checkOrganizationDoesNotHaveFeatureUseCaseStub = {
+          execute: sinon.stub(),
+        };
+
+        checkOrganizationDoesNotHaveFeatureUseCaseStub.execute.withArgs({ organizationId, featureKey }).resolves(false);
+
+        const checkOrganizationDoesNotHaveFeature = securityPreHandlers.checkOrganizationDoesNotHaveFeature(featureKey);
+        const response = await checkOrganizationDoesNotHaveFeature(request, hFake, {
+          checkOrganizationDoesNotHaveFeatureUseCase: checkOrganizationDoesNotHaveFeatureUseCaseStub,
+        });
+
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+      });
+    });
+  });
 });
