@@ -2,7 +2,7 @@
 Fonctionnalité: Accessibilité de Modulix
 
   Contexte:
-    Étant donné que je lance le module "bac-a-sable"
+    Étant donné que je lance le module "galerie"
 
   Scénario: Je valide l'accessibilité de la page de détails
     Quand j'attends 500 ms
@@ -12,14 +12,6 @@ Fonctionnalité: Accessibilité de Modulix
     Quand je clique sur "Commencer le module"
     Et que j'attends 500 ms
     Alors la page de "passage" devrait s'afficher
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
-    Quand je vais au grain suivant
     Quand je vais au grain suivant
     Quand je vais au grain suivant
     Quand je vais au grain suivant
