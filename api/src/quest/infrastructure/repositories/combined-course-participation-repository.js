@@ -41,3 +41,13 @@ export const getByUserId = async function ({ userId, questId }) {
 
   return new CombinedCourseParticipation(questParticipations[0]);
 };
+
+export const update = async function ({ combinedCourseParticipation }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const [updatedRow] = await knexConnection('combined_course_participations')
+    .where({ id: combinedCourseParticipation.id })
+    .update({ status: combinedCourseParticipation.status, updatedAt: combinedCourseParticipation.updatedAt })
+    .returning('*');
+
+  return new CombinedCourseParticipation(updatedRow);
+};
