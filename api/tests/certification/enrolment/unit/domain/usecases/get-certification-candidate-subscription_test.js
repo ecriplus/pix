@@ -40,19 +40,30 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
   context('when certification center is not habilitated', function () {
     context('when the candidate is registered and eligible to one complementary certification', function () {
       context('when the complementary certification is a doubled certification', function () {
-        it('should return the candidate with a non eligible complementary certification', async function () {
+        it('should return the candidate without any subscription', async function () {
           // given
 
           const complementaryCertification = domainBuilder.buildComplementaryCertification({
             key: ComplementaryCertificationKeys.CLEA,
           });
 
+          const badge = domainBuilder.buildBadge({
+            key: ComplementaryCertificationKeys.CLEA,
+            isCertifiable: true,
+          });
+
+          const complementaryCertificationBadge =
+            domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+              badgeId: badge.id,
+              complementaryCertificationId: complementaryCertification.id,
+            });
+
           const certifiableBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-            badge: domainBuilder.buildBadge({
-              key: 'PIX+_BADGE',
-              isCertifiable: true,
-            }),
-            complementaryCertification,
+            badgeId: badge.id,
+            badgeKey: badge.key,
+            complementaryCertificationId: complementaryCertification.id,
+            complementaryCertificationKey: complementaryCertification.key,
+            complementaryCertificationBadgeId: complementaryCertificationBadge.id,
           });
 
           const candidateWithComplementaryCertification = domainBuilder.buildCertificationCandidate({
@@ -96,10 +107,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
               id: certificationCandidateId,
               sessionId,
               eligibleSubscriptions: [],
-              nonEligibleSubscription: {
-                label: complementaryCertification.label,
-                type: 'COMPLEMENTARY',
-              },
+              nonEligibleSubscription: null,
               sessionVersion: 2,
             }),
           );

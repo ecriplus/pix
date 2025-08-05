@@ -28,6 +28,16 @@ const getCertificationCandidateSubscription = async function ({
     id: session.certificationCenterId,
   });
 
+  if (!center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
+    return new CertificationCandidateSubscription({
+      id: certificationCandidateId,
+      sessionId: certificationCandidate.sessionId,
+      eligibleSubscriptions: [],
+      nonEligibleSubscription: null,
+      sessionVersion: session.version,
+    });
+  }
+
   let eligibleSubscriptions = [];
   let nonEligibleSubscription = null;
   const certifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
@@ -64,21 +74,19 @@ const getCertificationCandidateSubscription = async function ({
     });
   }
 
-  if (center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
-    const isSubscriptionEligible =
-      doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey ===
-      certificationCandidate.complementaryCertification.key;
+  const isSubscriptionEligible =
+    doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey ===
+    certificationCandidate.complementaryCertification.key;
 
-    if (isSubscriptionEligible) {
-      eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
-        return {
-          label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
-          type: subscription.type,
-        };
-      });
-    } else {
-      nonEligibleSubscription = certificationCandidate.complementaryCertification;
-    }
+  if (isSubscriptionEligible) {
+    eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
+      return {
+        label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
+        type: subscription.type,
+      };
+    });
+  } else {
+    nonEligibleSubscription = certificationCandidate.complementaryCertification;
   }
 
   return new CertificationCandidateSubscription({
