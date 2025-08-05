@@ -14,7 +14,7 @@ const getCertificationCandidateSubscription = async function ({
 
   const session = await sessionRepository.get({ id: certificationCandidate.sessionId });
 
-  if (!certificationCandidate.complementaryCertification) {
+  if (certificationCandidate.complementaryCertification?.key !== ComplementaryCertificationKeys.CLEA) {
     return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
 
@@ -36,22 +36,7 @@ const getCertificationCandidateSubscription = async function ({
       certifiableBadgeAcquisition.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
   );
 
-  if (
-    !doubleCertificationCertifiableBadgeAcquisition &&
-    certificationCandidate.complementaryCertification.key === ComplementaryCertificationKeys.CLEA
-  ) {
-    return _uneligibleCertificationCandidateSubscription(certificationCandidate, session);
-  }
-
   if (!doubleCertificationCertifiableBadgeAcquisition) {
-    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
-  }
-
-  const isSubscriptionNonEligible =
-    doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey !==
-    certificationCandidate.complementaryCertification.key;
-
-  if (isSubscriptionNonEligible) {
     return _uneligibleCertificationCandidateSubscription(certificationCandidate, session);
   }
 
