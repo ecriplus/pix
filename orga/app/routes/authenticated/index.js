@@ -9,7 +9,10 @@ export default class IndexRoute extends Route {
     return { doNotTrackPage: true };
   }
 
-  beforeModel() {
+  beforeModel(transition) {
+    if (transition.to.queryParams.preview) {
+      return;
+    }
     return this.router.replaceWith(this.currentUser.homePage);
   }
 }

@@ -26,6 +26,7 @@ Router.map(function () {
   this.route('terms-of-service', { path: '/cgu' });
 
   this.route('authenticated', { path: '' }, function () {
+    this.route('index', { path: '' });
     this.route('sco-organization-participants', { path: 'eleves' }, function () {
       this.route('list', { path: '/' });
       this.route('sco-organization-participant', { path: '/:eleve_id' }, function () {
