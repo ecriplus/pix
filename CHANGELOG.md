@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.175.0](https://github.com/1024pix/pix/compare/v5.174.0...v5.175.0) (2025-08-05)
+
+### :rocket: Amélioration
+
+- [#13061](https://github.com/1024pix/pix/pull/13061) Changer l'algo de détection de local  avec cookie dans PixApp (PIX-18780) 
+- [#13094](https://github.com/1024pix/pix/pull/13094) Ne pas afficher les modules non recommandés par les diagnostiques dans un parcours combiné (PIX-18125) 
+- [#13090](https://github.com/1024pix/pix/pull/13090) Permettre l'utilisation de `pix-carousel` dans les modules (PIX-18963) 
+
+### :bug: Correction
+
+- [#13071](https://github.com/1024pix/pix/pull/13071) Réparer l'affichage d'analyse d'une campagne lorsqu'il y a beaucoup de participations (PIX-18957).   
+- [#13100](https://github.com/1024pix/pix/pull/13100) X-Forwarded-Host sans modification pour les RA 
+
+### :building_construction: Tech
+
+- [#13086](https://github.com/1024pix/pix/pull/13086) Supprimer l'ancienne page d'analyse de Pix Orga (PIX-17680).
+
 # [5.174.0](https://github.com/1024pix/pix/compare/v5.173.0...v5.174.0) (2025-08-04)
 
 ### :rocket: Amélioration
