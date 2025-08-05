@@ -44,14 +44,13 @@
           "type": "element",
           "element": {
             "id": "c1a11c3d-31ee-4770-9331-3c61685fe771",
-            "type": "qcu",
+            "type": "qcu-discovery",
             "instruction": "<p>À votre avis, Albert Einstein a-t-il fait cette annonce ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>oui</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
                 }
               },
@@ -59,7 +58,6 @@
                 "id": "2",
                 "content": "<p>non</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake&nbsp;ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
                 }
               },
@@ -67,7 +65,6 @@
                 "id": "3",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
                 }
               }
