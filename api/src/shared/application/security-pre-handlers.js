@@ -24,6 +24,7 @@ import * as checkOrganizationDoesNotHaveFeatureUseCase from './usecases/checkOrg
 import * as checkOrganizationHasFeatureUseCase from './usecases/checkOrganizationHasFeature.js';
 import * as checkOrganizationIsNotManagingStudentsUseCase from './usecases/checkOrganizationIsNotManagingStudents.js';
 import * as checkOrganizationIsScoAndManagingStudentUsecase from './usecases/checkOrganizationIsScoAndManagingStudent.js';
+import * as checkOrganizationLearnerBelongsToOrganizationUseCase from './usecases/checkOrganizationLearnerBelongsToOrganization.js';
 import * as checkUserBelongsToLearnersOrganizationUseCase from './usecases/checkUserBelongsToLearnersOrganization.js';
 import * as checkUserBelongsToOrganizationUseCase from './usecases/checkUserBelongsToOrganization.js';
 import * as checkUserBelongsToOrganizationManagingStudentsUseCase from './usecases/checkUserBelongsToOrganizationManagingStudents.js';
@@ -836,6 +837,26 @@ function checkOrganizationDoesNotHaveFeature(featureKey) {
   };
 }
 
+async function checkOrganizationLearnerBelongsToOrganization(
+  request,
+  h,
+  dependencies = { checkOrganizationLearnerBelongsToOrganizationUseCase },
+) {
+  const organizationId = request.params.organizationId;
+  const organizationLearnerId = request.params.organizationLearnerId;
+
+  try {
+    const organizationLearnerBelongsToOrganization =
+      await dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute(
+        organizationId,
+        organizationLearnerId,
+      );
+    return organizationLearnerBelongsToOrganization ? h.response(true) : _replyNotFoundError(h);
+  } catch {
+    return _replyForbiddenError(h);
+  }
+}
+
 function _noOrganizationFound(error) {
   return error instanceof NotFoundError;
 }
@@ -863,6 +884,7 @@ const securityPreHandlers = {
   checkUserCanDisableHisOrganizationMembership,
   checkUserDoesNotBelongsToScoOrganizationManagingStudents,
   checkOrganizationIsNotManagingStudents,
+  checkOrganizationLearnerBelongsToOrganization,
   checkUserIsAdminInOrganization,
   checkUserIsAdminInSCOOrganizationManagingStudents,
   checkUserIsAdminInSUPOrganizationManagingStudents,
