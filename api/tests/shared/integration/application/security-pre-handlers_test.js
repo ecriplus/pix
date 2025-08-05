@@ -758,4 +758,64 @@ describe('Integration | Application | SecurityPreHandlers', function () {
     });
   });
 
+  describe('#checkOrganizationIsNotManagingStudents', function () {
+    let httpServerTest;
+
+    beforeEach(async function () {
+      const moduleUnderTest = {
+        name: 'security-test',
+        register: async function (server) {
+          server.route([
+            {
+              method: 'GET',
+              path: '/api/organizations/{organizationId}/test',
+              handler: (r, h) => h.response().code(200),
+              config: {
+                pre: [
+                  {
+                    method: securityPreHandlers.checkOrganizationIsNotManagingStudents,
+                  },
+                ],
+              },
+            },
+          ]);
+        },
+      };
+      httpServerTest = new HttpTestServer();
+      await httpServerTest.register(moduleUnderTest);
+      httpServerTest.setupAuthentication();
+    });
+
+    it('returns 200 when organization is not managing students', async function () {
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/organizations/${organizationId}/test`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      const response = await httpServerTest.requestObject(options);
+
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('returns 403 when organization is managing students', async function () {
+      const { id: userId } = databaseBuilder.factory.buildUser();
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/organizations/${organizationId}/test`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      const response = await httpServerTest.requestObject(options);
+
+      expect(response.statusCode).to.equal(403);
+    });
+  });
 });

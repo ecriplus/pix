@@ -2143,6 +2143,124 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       });
     });
   });
+  describe('#checkOrganizationIsNotManagingStudents', function () {
+    let checkOrganizationIsNotManagingStudentsUseCaseStub;
+    let dependencies;
+
+    beforeEach(function () {
+      checkOrganizationIsNotManagingStudentsUseCaseStub = { execute: sinon.stub() };
+      dependencies = {
+        checkOrganizationIsNotManagingStudentsUseCase: checkOrganizationIsNotManagingStudentsUseCaseStub,
+      };
+    });
+
+    context('Successful cases', function () {
+      context('when organization is not managing students', function () {
+        it('should authorize access when organization id is in request params', async function () {
+          // given
+          const request = {
+            auth: {
+              credentials: {
+                accessToken: 'valid.access.token',
+                userId: 1234,
+              },
+            },
+            params: {
+              organizationId: 5678,
+            },
+          };
+          dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(true);
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(
+            request,
+            hFake,
+            dependencies,
+          );
+
+          // then
+          expect(response.source).to.be.true;
+          expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+            organizationId: 5678,
+          });
+        });
+
+        it('should authorize access when organization id is in request params as id', async function () {
+          // given
+          const request = {
+            auth: {
+              credentials: {
+                accessToken: 'valid.access.token',
+                userId: 1234,
+              },
+            },
+            params: {
+              id: 5678,
+            },
+          };
+          dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(true);
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(
+            request,
+            hFake,
+            dependencies,
+          );
+
+          // then
+          expect(response.source).to.be.true;
+          expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+            organizationId: 5678,
+          });
+        });
+      });
+    });
+
+    context('Error cases', function () {
+      it('should forbid resource access when user was not previously authenticated', async function () {
+        // given
+        const request = {
+          params: {
+            organizationId: 5678,
+          },
+        };
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(request, hFake, dependencies);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).not.to.have.been.called;
+      });
+
+      it('should forbid resource access when organization is managing students', async function () {
+        // given
+        const request = {
+          auth: {
+            credentials: {
+              accessToken: 'valid.access.token',
+              userId: 1234,
+            },
+          },
+          params: {
+            organizationId: 5678,
+          },
+        };
+        dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(false);
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(request, hFake, dependencies);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+          organizationId: 5678,
+        });
+      });
+    });
+  });
   describe('#checkOrganizationDoesNotHaveFeature', function () {
     context('Successful case', function () {
       let request;

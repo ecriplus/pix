@@ -22,6 +22,7 @@ import * as checkAuthorizationToManageCampaignUsecase from './usecases/checkAuth
 import * as checkIfUserIsBlockedUseCase from './usecases/checkIfUserIsBlocked.js';
 import * as checkOrganizationDoesNotHaveFeatureUseCase from './usecases/checkOrganizationDoesNotHaveFeature.js';
 import * as checkOrganizationHasFeatureUseCase from './usecases/checkOrganizationHasFeature.js';
+import * as checkOrganizationIsNotManagingStudentsUseCase from './usecases/checkOrganizationIsNotManagingStudents.js';
 import * as checkOrganizationIsScoAndManagingStudentUsecase from './usecases/checkOrganizationIsScoAndManagingStudent.js';
 import * as checkUserBelongsToLearnersOrganizationUseCase from './usecases/checkUserBelongsToLearnersOrganization.js';
 import * as checkUserBelongsToOrganizationUseCase from './usecases/checkUserBelongsToOrganization.js';
@@ -799,6 +800,31 @@ async function checkOrganizationAccess(request, h, dependencies = { checkOrganiz
     return _replyForbiddenError(h);
   }
 }
+
+async function checkOrganizationIsNotManagingStudents(
+  request,
+  h,
+  dependencies = {
+    checkOrganizationIsNotManagingStudentsUseCase,
+  },
+) {
+  if (_noCredentials(request)) {
+    return _replyForbiddenError(h);
+  }
+
+  const organizationId = request.params.organizationId || request.params.id;
+
+  const isOrganizationNotManagingStudents = await dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute({
+    organizationId,
+  });
+
+  if (!isOrganizationNotManagingStudents) {
+    return _replyForbiddenError(h);
+  }
+
+  return h.response(true);
+}
+
 function checkOrganizationDoesNotHaveFeature(featureKey) {
   return async function (request, h, dependencies = { checkOrganizationDoesNotHaveFeatureUseCase }) {
     const organizationId = request.params.organizationId || request.params.id;
@@ -836,6 +862,7 @@ const securityPreHandlers = {
   checkUserBelongsToSupOrganizationAndManagesStudents,
   checkUserCanDisableHisOrganizationMembership,
   checkUserDoesNotBelongsToScoOrganizationManagingStudents,
+  checkOrganizationIsNotManagingStudents,
   checkUserIsAdminInOrganization,
   checkUserIsAdminInSCOOrganizationManagingStudents,
   checkUserIsAdminInSUPOrganizationManagingStudents,
