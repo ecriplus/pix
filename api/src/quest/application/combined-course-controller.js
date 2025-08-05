@@ -25,9 +25,22 @@ const start = async function (request, h, dependencies = { requestResponseUtils 
   return h.response().code(204);
 };
 
+const update = async function (request, h, dependencies = { requestResponseUtils }) {
+  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const code = request.params.code;
+
+  await usecases.updateCombinedCourse({
+    userId,
+    code,
+  });
+
+  return h.response().code(204);
+};
+
 const combinedCourseController = {
   getByCode,
   start,
+  update,
 };
 
 export { combinedCourseController };

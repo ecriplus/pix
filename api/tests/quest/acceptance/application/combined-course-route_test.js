@@ -109,4 +109,38 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
       expect(response.statusCode).to.equal(204);
     });
   });
+
+  describe('PATCH /api/combined-courses/{code}/', function () {
+    it('should update combined course', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'COMBINIX1',
+        organizationId,
+        successRequirements: [],
+      });
+      databaseBuilder.factory.buildCombinedCourseParticipation({
+        organizationLearnerId,
+        questId,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+        status: CombinedCourseParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'PATCH',
+        url: '/api/combined-courses/COMBINIX1/',
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+    });
+  });
 });
