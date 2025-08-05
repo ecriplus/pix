@@ -1,5 +1,4 @@
 import { visit } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -34,32 +33,7 @@ module('Acceptance | Campaign Analysis', function (hooks) {
     await authenticateSession(user.id);
   });
 
-  test('it should display old campaign analysis page when toggle is false', async function (assert) {
-    //given
-    class FeatureTogglesStub extends Service {
-      featureToggles = { shouldDisplayNewAnalysisPage: false };
-
-      load() {}
-    }
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
-
-    // when
-    const screen = await visit('/campagnes/1/analyse');
-
-    // then
-    assert.ok(screen.getByRole('table', { name: t('pages.campaign-review.table.analysis.caption') }));
-    assert.ok(screen.getByText(t('pages.campaign-review.table.analysis.column.subjects', { count: 2 })));
-  });
-
-  test('it should display new campaign analysis page when toggle is true', async function (assert) {
-    //given
-    class FeatureTogglesStub extends Service {
-      featureToggles = { shouldDisplayNewAnalysisPage: true };
-
-      load() {}
-    }
-    this.owner.register('service:featureToggles', FeatureTogglesStub);
-
+  test('it should display campaign analysis page', async function (assert) {
     // when
     const screen = await visit('/campagnes/1/analyse');
 

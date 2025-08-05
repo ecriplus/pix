@@ -16,11 +16,8 @@ export default class AnalysisRoute extends Route {
 
   async model() {
     const campaign = this.modelFor('authenticated.campaigns.campaign');
-    const isNewPage = this.featureToggles.featureToggles.shouldDisplayNewAnalysisPage;
-    const analysisModel = isNewPage ? 'campaignResultLevelsPerTubesAndCompetence' : 'campaignAnalysis';
-
-    const analysisData = await campaign[analysisModel];
+    const analysisData = await campaign.campaignResultLevelsPerTubesAndCompetence;
     await campaign.belongsTo('campaignCollectiveResult').reload();
-    return { campaign, analysisData, isNewPage };
+    return { campaign, analysisData };
   }
 }
