@@ -14,7 +14,7 @@ const getCertificationCandidateSubscription = async function ({
 
   const session = await sessionRepository.get({ id: certificationCandidate.sessionId });
 
-  if (certificationCandidate.complementaryCertification?.key !== ComplementaryCertificationKeys.CLEA) {
+  if (!certificationCandidate.isEnrolledToDoubleCertification()) {
     return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
 
