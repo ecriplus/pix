@@ -26,8 +26,6 @@ const getCertificationCandidateSubscription = async function ({
     return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
 
-  let eligibleSubscriptions = [];
-  let nonEligibleSubscription = null;
   const certifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
     userId: certificationCandidate.userId,
     limitDate: certificationCandidate.reconciledAt,
@@ -49,26 +47,26 @@ const getCertificationCandidateSubscription = async function ({
     return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
 
-  const isSubscriptionEligible =
-    doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey ===
+  const isSubscriptionNonEligible =
+    doubleCertificationCertifiableBadgeAcquisition.complementaryCertificationKey !==
     certificationCandidate.complementaryCertification.key;
 
-  if (isSubscriptionEligible) {
-    eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
-      return {
-        label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
-        type: subscription.type,
-      };
-    });
-  } else {
-    nonEligibleSubscription = certificationCandidate.complementaryCertification;
+  if (isSubscriptionNonEligible) {
+    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
+
+  const eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
+    return {
+      label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
+      type: subscription.type,
+    };
+  });
 
   return new CertificationCandidateSubscription({
     id: certificationCandidateId,
     sessionId: certificationCandidate.sessionId,
     eligibleSubscriptions,
-    nonEligibleSubscription,
+    nonEligibleSubscription: null,
     sessionVersion: session.version,
   });
 };
