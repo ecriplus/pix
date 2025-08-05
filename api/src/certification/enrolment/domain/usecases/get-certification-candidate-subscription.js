@@ -52,23 +52,10 @@ const getCertificationCandidateSubscription = async function ({
     certificationCandidate.complementaryCertification.key;
 
   if (isSubscriptionNonEligible) {
-    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
+    return _uneligibleCertificationCandidateSubscription(certificationCandidate, session);
   }
 
-  const eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
-    return {
-      label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
-      type: subscription.type,
-    };
-  });
-
-  return new CertificationCandidateSubscription({
-    id: certificationCandidateId,
-    sessionId: certificationCandidate.sessionId,
-    eligibleSubscriptions,
-    nonEligibleSubscription: null,
-    sessionVersion: session.version,
-  });
+  return _eligibleCertificationCandidateSubscriptions(certificationCandidate, session);
 };
 
 function _emptyCertificationCandidateSubscription(candidate, session) {
@@ -90,6 +77,23 @@ function _uneligibleCertificationCandidateSubscription(candidate, session) {
       label: candidate.complementaryCertification.label,
       type: 'COMPLEMENTARY',
     },
+    sessionVersion: session.version,
+  });
+}
+
+function _eligibleCertificationCandidateSubscriptions(candidate, session) {
+  const eligibleSubscriptions = candidate.subscriptions.map((subscription) => {
+    return {
+      label: subscription.type === 'COMPLEMENTARY' ? candidate.complementaryCertification.label : null,
+      type: subscription.type,
+    };
+  });
+
+  return new CertificationCandidateSubscription({
+    id: candidate.id,
+    sessionId: candidate.sessionId,
+    eligibleSubscriptions,
+    nonEligibleSubscription: null,
     sessionVersion: session.version,
   });
 }
