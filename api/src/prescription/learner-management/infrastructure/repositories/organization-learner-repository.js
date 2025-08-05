@@ -382,7 +382,6 @@ const findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId = async fu
   const knexConn = DomainTransaction.getConnection();
   return knexConn('view-active-organization-learners').where({ organizationId }).whereNull('attributes').pluck('id');
 };
-
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   countByUserId,

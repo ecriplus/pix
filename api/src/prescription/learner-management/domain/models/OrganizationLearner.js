@@ -97,8 +97,7 @@ class OrganizationLearner {
     this.thirdName = null;
 
     if (this.birthdate) {
-      const birthdate = dayjs(this.birthdate).set('date', 1).set('month', 0).format('YYYY-MM-DD');
-      this.birthdate = birthdate;
+      this.birthdate = dayjs(this.birthdate).set('date', 1).set('month', 0).format('YYYY-MM-DD');
     }
 
     this.birthCity = null;
@@ -122,6 +121,11 @@ class OrganizationLearner {
   detachUser() {
     this.userId = null;
     this.updatedAt = new Date();
+  }
+
+  updateName(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   delete(userId, isAnonymizedWithDeletionEnabled) {
