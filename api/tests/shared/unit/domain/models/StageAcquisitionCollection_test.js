@@ -1,5 +1,5 @@
 import { Stage } from '../../../../../src/evaluation/domain/models/Stage.js';
-import { StageAcquisitionCollection } from '../../../../../src/shared/domain/models/user-campaign-results/StageAcquisitionCollection.js';
+import { StageAcquisitionCollection } from '../../../../../src/prescription/campaign-participation/domain/models/StageAcquisitionCollection.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 

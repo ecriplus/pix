@@ -8,6 +8,7 @@ import * as campaignRepository from '../../../prescription/campaign/infrastructu
 import { repositories as campaignRepositories } from '../../../prescription/campaign/infrastructure/repositories/index.js';
 import * as campaignParticipationRepository from '../../../prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as prescriptionOrganizationLearnerRepository from '../../../prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationLearnerRepository from '../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { config } from '../../../shared/config.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { mailService } from '../../../shared/domain/services/mail-service.js';
@@ -20,7 +21,6 @@ import * as userValidator from '../../../shared/domain/validators/user-validator
 import { httpAgent } from '../../../shared/infrastructure/http-agent.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
-import * as organizationLearnerRepository from '../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import * as codeUtils from '../../../shared/infrastructure/utils/code-utils.js';

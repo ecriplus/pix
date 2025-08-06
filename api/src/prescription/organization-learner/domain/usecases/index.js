@@ -10,6 +10,7 @@ import * as userRepository from '../../../../identity-access-management/infrastr
 import { userToCreateRepository } from '../../../../identity-access-management/infrastructure/repositories/user-to-create.repository.js';
 import * as organizationFeaturesAPI from '../../../../organizational-entities/application/api/organization-features-api.js';
 import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as libOrganizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as combinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import * as questRepository from '../../../../quest/infrastructure/repositories/quest-repository.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
@@ -26,7 +27,6 @@ import * as userService from '../../../../shared/domain/services/user-service.js
  */
 import * as passwordValidator from '../../../../shared/domain/validators/password-validator.js';
 import * as userValidator from '../../../../shared/domain/validators/user-validator.js';
-import * as libOrganizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import * as userLoginRepository from '../../../../shared/infrastructure/repositories/user-login-repository.js';
 import * as writeCsvUtils from '../../../../shared/infrastructure/utils/csv/write-csv-utils.js';

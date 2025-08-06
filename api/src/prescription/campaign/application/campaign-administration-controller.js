@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import { usecases } from '../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as checkAdminMemberHasRoleSuperAdminUseCase from '../../../shared/application/usecases/checkAdminMemberHasRoleSuperAdmin.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { usecases } from '../domain/usecases/index.js';
 import * as csvCampaignsIdsParser from '../infrastructure/serializers/csv/csv-campaigns-ids-parser.js';
 import * as campaignManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
 import * as campaignReportSerializer from '../infrastructure/serializers/jsonapi/campaign-report-serializer.js';
