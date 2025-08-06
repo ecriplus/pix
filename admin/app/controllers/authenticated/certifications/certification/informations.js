@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 /* eslint-disable ember/no-computed-properties-in-native-classes */
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 /* eslint-enable ember/no-computed-properties-in-native-classes */
 import { service } from '@ember/service';
@@ -21,11 +21,6 @@ export default class CertificationInformationsController extends Controller {
   @tracked displayJuryLevelSelect = false;
 
   @tracked selectedJuryLevel = null;
-
-  @computed('certification.status')
-  get isCertificationCancelled() {
-    return this.certification.status === 'cancelled';
-  }
 
   get juryLevelOptions() {
     const translatedDefaultJuryOptions = this.certification.complementaryCertificationCourseResultWithExternal

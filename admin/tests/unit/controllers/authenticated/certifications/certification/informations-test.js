@@ -96,20 +96,6 @@ module('Unit | Controller | authenticated/certifications/certification/informati
     });
   });
 
-  module('#isCertificationCancelled', function () {
-    test('should return true when certification status is cancelled', function (assert) {
-      // given
-      controller.model = {
-        certification: EmberObject.create({
-          status: 'cancelled',
-        }),
-      };
-
-      // when/then
-      assert.true(controller.isCertificationCancelled);
-    });
-  });
-
   module('#juryLevelOptions', function () {
     test('should return an array of labels and values', function (assert) {
       // given
