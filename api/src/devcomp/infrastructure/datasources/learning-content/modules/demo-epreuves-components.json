@@ -489,6 +489,61 @@
       ]
     },
     {
+      "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef8",
+      "type": "lesson",
+      "title": "llm-messages",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a1f5e147-ea8c-4046-8020-f21c28529388",
+            "type": "text",
+            "content": "<p>llm-messages</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "03bacda5-2b76-49fd-a266-3a9bb16c20c9",
+            "type": "custom",
+            "tagName": "llm-messages",
+            "props": {
+              "messages": [
+                {
+                  "direction": "outbound",
+                  "content": "Bonjour"
+                },
+                {
+                  "direction": "inbound",
+                  "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Pourquoi pas..."
+                },
+                {
+                  "direction": "inbound",
+                  "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Elle est bizarre ta recette."
+                },
+                {
+                  "direction": "inbound",
+                  "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Non, je m'en vais."
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
       "id": "662434d8-5d88-4be6-a339-a81916933229",
       "type": "lesson",
       "title": "llm-prompt-select",

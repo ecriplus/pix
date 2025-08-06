@@ -54,16 +54,18 @@ const llmCompareMessagesPropsSchema = Joi.object({
     .required(),
 }).required();
 
+const llmMessageSchema = Joi.object({
+  direction: Joi.string().valid('inbound', 'outbound').required(),
+  content: Joi.string().required(),
+});
+
+const llmMessagesPropsSchema = Joi.object({
+  messages: Joi.array().items(llmMessageSchema.required()).required(),
+}).required();
+
 const llmPromptSelectPropsSchema = Joi.object({
   speed: Joi.number().default(20).min(0).optional(),
-  messages: Joi.array()
-    .items(
-      Joi.object({
-        direction: Joi.string().valid('inbound', 'outbound').required(),
-        content: Joi.string().required(),
-      }).required(),
-    )
-    .required(),
+  messages: Joi.array().items(llmMessageSchema).required(),
   prompts: Joi.array()
     .items(
       Joi.object({
@@ -152,6 +154,7 @@ const customElementSchema = Joi.object({
       'image-quiz',
       'image-quizzes',
       'llm-compare-messages',
+      'llm-messages',
       'llm-prompt-select',
       'message-conversation',
       'pix-carousel',
@@ -164,6 +167,7 @@ const customElementSchema = Joi.object({
         { is: 'image-quiz', then: imageQuizPropsSchema },
         { is: 'image-quizzes', then: imageQuizzesPropsSchema },
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
+        { is: 'llm-messages', then: llmMessagesPropsSchema },
         { is: 'llm-prompt-select', then: llmPromptSelectPropsSchema },
         { is: 'message-conversation', then: messageConversationPropsSchema },
         { is: 'pix-carousel', then: pixCarouselPropsSchema },
