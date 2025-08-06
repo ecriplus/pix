@@ -53,12 +53,6 @@ export default {
     defaultValue: false,
     tags: ['modulix', 'team-contenu', 'llm', 'embed', 'pix-app'],
   },
-  upgradeToRealUserEnabled: {
-    type: 'boolean',
-    description: 'Enable upgrade of anonymous accounts to true accounts after anonymous campaign participation.',
-    defaultValue: false,
-    tags: ['frontend', 'team-acces', 'pix-app'],
-  },
   isAutoShareEnabled: {
     type: 'boolean',
     description: 'Enable automatic campaign sharing.',
