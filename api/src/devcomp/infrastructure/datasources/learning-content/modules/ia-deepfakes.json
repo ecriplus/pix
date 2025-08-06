@@ -503,28 +503,28 @@
                 "id": "1",
                 "content": "<p>Liker le message de Brian.</p>",
                 "feedback": {
-                  "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Liker cette photo, c’est participer à du cyberharcèlement.</p>"
+                  "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, c’est participer à du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
                 }
               },
               {
                 "id": "2",
                 "content": "<p>Partager la photo à ses contacts.</p>",
                 "feedback": {
-                  "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.&nbsp;Partager cette photo, c’est participer à du cyberharcèlement.</p>"
+                  "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, c’est participer à du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
                 }
               },
               {
                 "id": "3",
                 "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                 "feedback": {
-                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
+                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, serait du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
                 }
               },
               {
                 "id": "4",
                 "content": "<p>Chercher la source de l'image sur internet.</p>",
                 "feedback": {
-                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !&nbsp;La partager, comme le demande Brian, serait du cyberharcèlement.</p>"
+                  "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !&nbsp;<br>La partager, comme le demande Brian, serait du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
                 }
               }
             ],
@@ -555,7 +555,7 @@
                 {
                   "id": "ef89f877-b8a8-4279-b63a-eb1761e48d84",
                   "type": "text",
-                  "content": "<p>Si vous partagez un deepfake créé avec de mauvaises intentions, vous pouvez répandre de <strong>fausses informations </strong>ou participer au <strong>cyberharcèlement </strong>d’une personne.</p>"
+                  "content": "<p>Si vous partagez un deepfake créé avec de mauvaises intentions, vous pouvez répandre de <strong>fausses informations </strong>ou participer au <strong>cyberharcèlement </strong>d’une personne.<br>👉 Cela peut aussi enfreindre le droit à l’image et mener à un dépôt de plainte contre vous.</p>"
                 }
               ]
             },
