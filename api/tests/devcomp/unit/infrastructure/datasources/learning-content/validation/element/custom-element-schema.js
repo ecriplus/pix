@@ -160,7 +160,7 @@ const customElementSchema = Joi.object({
   props: Joi.alternatives()
     .conditional('tagName', {
       switch: [
-        { is: 'image-quizz', then: imageQuizPropsSchema },
+        { is: 'image-quiz', then: imageQuizPropsSchema },
         { is: 'image-quizzes', then: imageQuizzesPropsSchema },
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
         { is: 'llm-prompt-select', then: llmPromptSelectPropsSchema },
