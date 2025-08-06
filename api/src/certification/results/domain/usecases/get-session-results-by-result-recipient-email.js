@@ -8,7 +8,7 @@ const getSessionResultsByResultRecipientEmail = async function ({
 }) {
   const session = await sharedSessionRepository.getWithCertificationCandidates({ id: sessionId });
   const certificationCandidateIdsForResultRecipient = _(session.certificationCandidates)
-    .filter({ resultRecipientEmail })
+    .filter((candidate) => candidate.resultRecipientEmail.toLowerCase() === resultRecipientEmail.toLowerCase())
     .map('id')
     .value();
 
