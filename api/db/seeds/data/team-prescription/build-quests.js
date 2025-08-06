@@ -5,6 +5,7 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../src/quest/domain/models/Quest.js';
+import { config } from '../../../../src/shared/config.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -21,12 +22,15 @@ const firstTrainingId = QUEST_OFFSET + 1;
 const secondTrainingId = QUEST_OFFSET + 2;
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
+  const tldFr = config.environment === 'development' ? '' : config.domain.tldFr;
   const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
   const campaign = databaseBuilder.factory.buildCampaign({
     name: 'Je teste mes compétences',
     organizationId,
     code: 'CODE123',
     targetProfileId: targetProfile.id,
+    customResultPageButtonText: 'Continuer',
+    customResultPageButtonUrl: `${config.domain.pixApp}${tldFr}/parcours/COMBINIX1`,
   });
   CAMPAIGN_SKILLS[0].map((skillId) =>
     databaseBuilder.factory.buildCampaignSkill({
