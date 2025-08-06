@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.176.0](https://github.com/1024pix/pix/compare/v5.175.0...v5.176.0) (2025-08-06)
+
+### :rocket: Amélioration
+
+- [#13102](https://github.com/1024pix/pix/pull/13102) Afficher la bordure des Custom element seulement si ils sont interactifs (PIX-18999) 
+- [#13107](https://github.com/1024pix/pix/pull/13107) Modifications module IA Deepfakes suite évolutions 
+- [#13095](https://github.com/1024pix/pix/pull/13095) Permettre de visualiser les différent éléments Modulix (PIX-18993) 
+
+### :building_construction: Tech
+
+- [#13093](https://github.com/1024pix/pix/pull/13093) Supprimer l'ancienne route d'analyse des campagnes (PIX-17681).
+
 # [5.175.0](https://github.com/1024pix/pix/compare/v5.174.0...v5.175.0) (2025-08-05)
 
 ### :rocket: Amélioration
