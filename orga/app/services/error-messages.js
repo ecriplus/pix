@@ -74,7 +74,7 @@ export default class ErrorMessagesService extends Service {
     if (!i18nKey) return;
     // TODO : Remove this when all import will be on generic import
     if (code === 'FIELD_DATE_FORMAT' && !meta.acceptedFormat) {
-      meta.acceptedFormat = this.locale.currentLocale === 'fr' ? 'jj/mm/aaaa' : 'dd/mm/yyyy';
+      meta.acceptedFormat = this.locale.currentLanguage === 'fr' ? 'jj/mm/aaaa' : 'dd/mm/yyyy';
     }
 
     return this.intl.t(i18nKey, this._formatMeta(meta));

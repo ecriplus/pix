@@ -117,6 +117,6 @@ export default class AttestationList extends Component {
       </:columns>
     </PixTable>
 
-    <PixPagination @pagination={{@participantStatuses.meta}} @locale={{this.locale.currentLocale}} />
+    <PixPagination @pagination={{@participantStatuses.meta}} @locale={{this.locale.currentLanguage}} />
   </template>
 }
