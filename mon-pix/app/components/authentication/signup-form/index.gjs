@@ -32,7 +32,6 @@ export default class SignupForm extends Component {
   @service locale;
   @service url;
   @service errorMessages;
-  @service featureToggles;
   @service pixMetrics;
 
   @tracked isLoading = false;
@@ -91,7 +90,7 @@ export default class SignupForm extends Component {
       user.lang = this.locale.currentLanguage;
       const wasAnonymousBeforeSaving = user.isAnonymous;
       await user.save({ adapterOptions: { redirectionUrl: this.session.redirectionUrl } });
-      if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && wasAnonymousBeforeSaving) {
+      if (wasAnonymousBeforeSaving) {
         this.pixMetrics.trackEvent('SignUpFromAnonymousUserDone');
         this.session.set('skipRedirectAfterSessionInvalidation', true);
         await this.session.invalidate();
