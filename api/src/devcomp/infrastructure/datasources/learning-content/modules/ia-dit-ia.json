@@ -44,11 +44,19 @@
         {
           "type": "element",
           "element": {
+            "id": "f9de3bea-9094-4773-9e03-d72127d8f313",
+            "type": "text",
+            "content": "<p>Derrière ces deux lettres, «&nbsp;I&nbsp;» et «&nbsp;A&nbsp;», se cache l'<strong>Intelligence Artificielle</strong>.</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
             "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
             "type": "custom-draft",
             "title": "Élément interactif",
             "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html",
-            "instruction": "<p> Derrière ces deux lettres, « I » et « A », se cache l'<strong>Intelligence Artificielle</strong>.<br><strong>À votre avis, de quand date l'expression « intelligence artificielle » ?</strong>&nbsp;⌛</p>",
+            "instruction": "<p> À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</p>",
             "height": 325
           }
         }
@@ -85,12 +93,58 @@
         {
           "type": "element",
           "element": {
-            "id": "183c3094-b691-44ca-a75c-baed6b3c93c6",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-ordinateur.html",
-            "instruction": "<p><strong>Selon vous, que peut faire un ordinateur ?</strong></p>",
-            "height": 550
+            "id": "4f4ab566-2a26-47bd-9814-cba6ecf2f989",
+            "type": "qab",
+            "instruction": "<p>Selon vous, que peut faire un ordinateur ?</p>",
+            "cards": [
+              {
+                "id": "940cf3fa-b3fa-4d89-8551-77ce96474a89",
+                "text": "Jouer et gagner une partie de jeu d’échec.",
+                "image": {
+                  "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordiechecs.png",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "A"
+              },
+              {
+                "id": "a2d89587-3356-4f06-8458-416e6aa7d4dd",
+                "text": "Dialoguer sur des sujets variés.",
+                "image": {
+                  "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordidiscut.png",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "A"
+              },
+              {
+                "id": "fef2a126-7d2d-401e-981c-aaf06317b171",
+                "text": "Conduire un véhicule en ville.",
+                "image": {
+                  "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordiconduit.png",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "A"
+              },
+              {
+                "id": "df9eb3bd-ef3f-4db3-88a6-455e41d08dba",
+                "text": "Écrire la fin d’une symphonie inachevée.",
+                "image": {
+                  "url": "https://assets.pix.org/draft/modules/ia-dit-ia/ordimusique.png",
+                  "altText": ""
+                },
+                "proposalA": "vrai",
+                "proposalB": "faux",
+                "solution": "A"
+              }
+            ],
+            "feedback": {
+              "diagnosis": "<p>Toutes ces actions ont déjà été réalisées par des ordinateurs, grâce à <strong>l’intelligence artificielle</strong>.</p>"
+            }
           }
         }
       ]
@@ -166,7 +220,9 @@
                 "ariaLabel": "nombre d'utilisation de l'IA",
                 "defaultValue": "",
                 "tolerances": [],
-                "solutions": [6]
+                "solutions": [
+                  6
+                ]
               }
             ],
             "feedbacks": {
@@ -176,7 +232,7 @@
               },
               "invalid": {
                 "state": "",
-                "diagnosis": "<p>Et non. Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA : le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
+                "diagnosis": "<p>Et non. Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
               }
             }
           }
@@ -193,7 +249,7 @@
           "element": {
             "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
             "type": "text",
-            "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses : traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de mathématiques, etc.&nbsp;📝<br></p>"
+            "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de mathématiques, etc.&nbsp;📝<br></p>"
           }
         }
       ]
@@ -218,7 +274,7 @@
             "type": "custom-draft",
             "title": "Élément interactif",
             "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html",
-            "instruction": "<p><strong>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</strong></p>",
+            "instruction": "<p>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</p>",
             "height": 550
           }
         }
@@ -347,7 +403,7 @@
                 {
                   "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                   "type": "qcu",
-                  "instruction": "<h4>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -391,7 +447,7 @@
                 {
                   "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                   "type": "qcu",
-                  "instruction": "<h4>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
@@ -435,7 +491,7 @@
                 {
                   "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                   "type": "qcu",
-                  "instruction": "<h4>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                  "instruction": "<h4>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                   "proposals": [
                     {
                       "id": "1",
