@@ -4,7 +4,6 @@
  * @typedef {import('../index.js').CompetenceMarkRepository} CompetenceMarkRepository
  * @typedef {import('../index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
- * @typedef {import('../index.js').ScoringCertificationService} ScoringCertificationService
  * @typedef {import('../index.js').ScoringService} ScoringService
  * @typedef {import('../index.js').PlacementProfileService} PlacementProfileService
  * @typedef {import('../../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
@@ -32,7 +31,6 @@ import { CertificationContract } from '../CertificationContract.js';
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CompetenceMarkRepository} params.competenceMarkRepository
- * @param {ScoringCertificationService} params.scoringCertificationService
  * @param {AreaRepository} params.areaRepository
  * @param {PlacementProfileService} params.placementProfileService
  * @param {ScoringService} params.scoringService
@@ -46,7 +44,6 @@ export const handleV2CertificationScoring = async ({
   assessmentResultRepository,
   certificationCourseRepository,
   competenceMarkRepository,
-  scoringCertificationService,
   areaRepository,
   placementProfileService,
   scoringService,
@@ -72,7 +69,6 @@ export const handleV2CertificationScoring = async ({
     certificationCourse,
     certificationAssessment,
     certificationAssessmentScore,
-    scoringCertificationService,
   });
 
   await _saveV2Result({
@@ -253,7 +249,6 @@ function _getResult(answers, certificationChallenges, testedCompetences, allArea
 /**
  * @param {Object} params
  * @param {CertificationAssessment} params.certificationAssessment
- * @param {ScoringCertificationService} params.scoringCertificationService
  */
 function _createV2AssessmentResult({
   juryId,
@@ -261,7 +256,6 @@ function _createV2AssessmentResult({
   certificationCourse,
   certificationAssessmentScore,
   certificationAssessment,
-  scoringCertificationService,
 }) {
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
@@ -290,9 +284,7 @@ function _createV2AssessmentResult({
     });
   }
 
-  if (
-    scoringCertificationService.isLackOfAnswersForTechnicalReason({ certificationAssessmentScore, certificationCourse })
-  ) {
+  if (_isLackOfAnswersForTechnicalReason({ certificationAssessmentScore, certificationCourse })) {
     return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
       pixScore: certificationAssessmentScore.nbPix,
       reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
@@ -340,4 +332,8 @@ async function _saveV2Result({
     const competenceMarkDomain = new CompetenceMark({ ...competenceMark, assessmentResultId });
     await competenceMarkRepository.save(competenceMarkDomain);
   }
+}
+
+function _isLackOfAnswersForTechnicalReason({ certificationCourse, certificationAssessmentScore }) {
+  return certificationCourse.isAbortReasonTechnical() && certificationAssessmentScore.hasInsufficientCorrectAnswers();
 }

@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 
 // TODO: cross-bounded context violation
 import * as scoringDegradationService from '../../../../certification/scoring/domain/services/scoring-degradation-service.js';
-import * as scoringCertificationService from '../../../../certification/shared/domain/services/scoring-certification-service.js';
 import * as certificationChallengeLiveAlertRepository from '../../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 // TODO: cross-bounded context violation
 import * as scoringService from '../../../../evaluation/domain/services/scoring/scoring-service.js';
@@ -46,7 +45,6 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {scoringService} ScoringService
  * @typedef {areaRepository} AreaRepository
  * @typedef {placementProfileService} PlacementProfileService
- * @typedef {scoringCertificationService} ScoringCertificationService
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
@@ -70,7 +68,6 @@ const dependencies = {
   areaRepository,
   placementProfileService,
   scoringService,
-  scoringCertificationService,
   certificationCandidateRepository,
   complementaryCertificationBadgesRepository,
   certificationAssessmentRepository,

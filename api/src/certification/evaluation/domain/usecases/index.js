@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as scoringCertificationService from '../../../../certification/shared/domain/services/scoring-certification-service.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -45,7 +44,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  * @typedef {assessmentResultRepository} AssessmentResultRepository
  * @typedef {certificationCourseRepository} CertificationCourseRepository
- * @typedef {scoringCertificationService} ScoringCertificationService
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {services} Services
@@ -78,7 +76,6 @@ const dependencies = {
   certificationCourseRepository,
   certificationAssessmentRepository,
   complementaryCertificationScoringCriteriaRepository,
-  scoringCertificationService,
   sharedFlashAlgorithmConfigurationRepository,
   services,
 };
