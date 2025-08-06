@@ -55,6 +55,7 @@ const llmCompareMessagesPropsSchema = Joi.object({
 }).required();
 
 const llmPromptSelectPropsSchema = Joi.object({
+  speed: Joi.number().default(20).min(0).optional(),
   messages: Joi.array()
     .items(
       Joi.object({
