@@ -44,7 +44,9 @@ module('Integration | Component | Module | Embed', function (hooks) {
     assert.strictEqual(expectedIframe.getAttribute('src'), embed.url);
     assert.strictEqual(expectedIframe.style.getPropertyValue('height'), '800px');
     assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.embed.start.ariaLabel') })).exists();
-    assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') })).doesNotExist();
+    assert
+      .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel') }))
+      .doesNotExist();
     assert.dom(screen.getByText("Instruction de l'embed")).exists();
   });
 
@@ -83,7 +85,9 @@ module('Integration | Component | Module | Embed', function (hooks) {
       const startButtonName = t('pages.modulix.buttons.embed.start.ariaLabel');
       await clickByName(startButtonName);
       assert.dom(screen.queryByRole('button', { name: startButtonName })).doesNotExist();
-      assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') })).exists();
+      assert
+        .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel') }))
+        .exists();
     });
 
     test('should focus on the iframe', async function (assert) {
@@ -361,7 +365,9 @@ module('Integration | Component | Module | Embed', function (hooks) {
 
             // then
             assert
-              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') }))
+              .dom(
+                screen.queryByRole('button', { name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel') }),
+              )
               .doesNotExist();
           });
         });
@@ -536,7 +542,7 @@ module('Integration | Component | Module | Embed', function (hooks) {
 
       // when
       await clickByName(t('pages.modulix.buttons.embed.start.ariaLabel'));
-      await clickByName(t('pages.modulix.buttons.embed.reset.ariaLabel'));
+      await clickByName(t('pages.modulix.buttons.interactive-element.reset.ariaLabel'));
 
       // then
       const iframe = screen.getByTitle(embed.title);
