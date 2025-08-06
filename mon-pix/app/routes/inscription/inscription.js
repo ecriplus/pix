@@ -13,7 +13,7 @@ export default class InscriptionRoute extends Route {
   }
 
   beforeModel() {
-    if (this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.isAnonymous) {
+    if (this.isAnonymous) {
       return;
     }
     this.session.prohibitAuthentication('authenticated.user-dashboard');
