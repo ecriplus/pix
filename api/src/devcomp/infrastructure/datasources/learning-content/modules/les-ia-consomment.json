@@ -110,91 +110,127 @@
                 {
                   "title": "Enzo rédige et envoie sa demande au logiciel d'IA générative",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete02.jpeg",
                     "alt": "Enzo envoie sa demande au logiciel d'IA générative"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La demande est envoyée sur le réseau WIFi jusqu'à sa box",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete03.jpeg",
-                    "alt": ""
+                    "alt": "Enzo rédige et envoie sa demande au logiciel d'IA générative"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La demande d'Enzo voyage sur le réseau internet mondial",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete04.jpeg",
-                    "alt": ""
+                    "alt": "La demande d'Enzo voyage sur le réseau internet mondial"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La demande d'Enzo parvient à un supercalculateur",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete05.jpeg",
-                    "alt": ""
+                    "alt": "La demande d'Enzo parvient à un supercalculateur"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Le supercalculateur calcule la réponse à apporter",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete06.jpeg",
-                    "alt": ""
+                    "alt": "Le supercalculateur calcule la réponse à apporter"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La réponse est prête à être envoyée",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete07.jpeg",
-                    "alt": ""
+                    "alt": "La réponse est prête à être envoyée"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La réponse fait le trajet retour sur internet",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete08.jpeg",
-                    "alt": ""
+                    "alt": "La réponse fait le trajet retour sur internet"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La réponse est envoyée par WiFi à l'ordinateur",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete09.jpeg",
-                    "alt": ""
+                    "alt": "La réponse est envoyée par WiFi à l'ordinateur"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "La réponse est affichée sur l'écran d'Enzo",
                   "description": "",
-                  "displayHeight": 250,
-                  "text": "",
+                  "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/voyageRequete10.jpeg",
-                    "alt": ""
+                    "alt": "La réponse est affichée sur l'écran d'Enzo"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 }
               ],
@@ -320,7 +356,7 @@
                   "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete01.jpeg",
-                    "alt": "azerty"
+                    "alt": "Une requête est reçue par le supercalculateur"
                   },
                   "license": {
                     "name": "",
@@ -334,7 +370,7 @@
                   "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete02.jpeg",
-                    "alt": ""
+                    "alt": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l'IA."
                   },
                   "license": {
                     "name": "",
@@ -348,7 +384,7 @@
                   "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete03.jpeg",
-                    "alt": ""
+                    "alt": "Les serveurs calculent la réponse. Ils consomment de l'énergie."
                   },
                   "license": {
                     "name": "",
@@ -362,21 +398,7 @@
                   "displayWidth": 600,
                   "image": {
                     "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete04.jpeg",
-                    "alt": ""
-                  },
-                  "license": {
-                    "name": "",
-                    "attribution": "",
-                    "url": ""
-                  }
-                },
-                {
-                  "title": "Les serveurs dégagent de la chaleur.",
-                  "description": "",
-                  "displayWidth": 600,
-                  "image": {
-                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete05.jpeg",
-                    "alt": ""
+                    "alt": "Les serveurs dégagent de la chaleur."
                   },
                   "license": {
                     "name": "",
@@ -389,8 +411,8 @@
                   "description": "",
                   "displayWidth": 600,
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete06.jpeg",
-                    "alt": ""
+                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete05.jpeg",
+                    "alt": "Un système de refroidissement est nécessaire. Il consomme de l'énergie supplémentaire et de l'eau."
                   },
                   "license": {
                     "name": "",
@@ -403,8 +425,8 @@
                   "description": "",
                   "displayWidth": 600,
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete07.jpeg",
-                    "alt": ""
+                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete06.jpeg",
+                    "alt": "Les serveurs poursuivent les calculs et préparent la réponse."
                   },
                   "license": {
                     "name": "",
@@ -417,8 +439,8 @@
                   "description": "",
                   "displayWidth": 600,
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete08.jpeg",
-                    "alt": ""
+                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete07.jpeg",
+                    "alt": "La réponse est prête et sort des serveurs."
                   },
                   "license": {
                     "name": "",
@@ -431,8 +453,8 @@
                   "description": "",
                   "displayWidth": 600,
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete09.jpeg",
-                    "alt": ""
+                    "src": "https://assets.pix.org/draft/modules/les-IA-consomment/traitementRequete08.jpeg",
+                    "alt": "La réponse sort du supercalculateur et est envoyée sur internet."
                   },
                   "license": {
                     "name": "",
