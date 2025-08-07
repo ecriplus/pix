@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/ValidatorQCM.js';
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -1515,26 +1518,58 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
       challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
+      challengesLC.push(domainBuilder.buildChallenge({ id: 'toto' }));
     });
 
     context('when complementary certification given', function () {
       it('returns flash compatible challenge that link to complementary', async function () {
+        // given
+        const candidateReconciliationDate = new Date('2025-01-01');
+
         const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
+        const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.pixEdu1erDegre(
+          {},
+        );
 
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
         const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[0].id,
+          version: dayjs(candidateReconciliationDate).subtract(10, 'day').format('YYYYMMDDHHmmss'),
+        });
+
+        // other complementary challenge
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: otherComplementaryCertification.key,
+          challengeId: challengesLC[3].id,
+          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
+        });
+
+        // too old version certificationFrameworksChallenge
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[1].id,
+          version: dayjs(candidateReconciliationDate).subtract(2, 'month').format('YYYYMMDDHHmmss'),
+        });
+
+        // too recent version certificationFrameworksChallenge
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[2].id,
+          version: dayjs(candidateReconciliationDate).add(1, 'second').format('YYYYMMDDHHmmss'),
         });
 
         await databaseBuilder.commit();
 
+        // when
         const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
           complementaryCertificationKey: complementaryCertification.key,
           locale: 'fr',
+          date: candidateReconciliationDate,
         });
 
+        // then
         expect(flashCompatibleChallenges).to.have.lengthOf(1);
         expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[0].id);
         expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);

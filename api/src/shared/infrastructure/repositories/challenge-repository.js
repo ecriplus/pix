@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { knex } from '../../../../db/knex-database-connection.js';
 import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
@@ -104,6 +106,7 @@ export async function findOperativeBySkills(skills, locale) {
 }
 
 export async function findActiveFlashCompatible({
+  date,
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
@@ -114,7 +117,11 @@ export async function findActiveFlashCompatible({
   let challengeDtos;
 
   if (complementaryCertificationKey) {
-    challengeDtos = await _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey });
+    challengeDtos = await _findChallengesForComplementaryCertification({
+      complementaryCertificationKey,
+      cacheKey,
+      date,
+    });
   } else {
     challengeDtos = await _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey });
   }
@@ -124,10 +131,19 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey }) {
+async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, date }) {
+  const formattedDate = dayjs(date).format('YYYYMMDDHHmmss');
+
+  const { closestVersion } = await knex('certification-frameworks-challenges')
+    .where({ complementaryCertificationKey })
+    .andWhere('version', '<=', formattedDate)
+    .max('version as closestVersion')
+    .first();
+
   const complementaryCertificationChallenges = await knex
     .from('certification-frameworks-challenges')
-    .where({ complementaryCertificationKey });
+    .where({ complementaryCertificationKey })
+    .andWhere('version', '=', closestVersion);
 
   const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
     ({ challengeId }) => challengeId,
