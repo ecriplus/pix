@@ -139,17 +139,9 @@ describe('Unit | Application | organization-place-controller', function () {
       const dataOrganizationPlacesStatistics = Symbol('dataOrganizationPlacesStatistics');
       const dataOrganizationPlacesStatisticsSerialized = Symbol('dataOrganizationPlacesStatisticsSerialized');
 
-      const getOrganizationPlacesStatisticsStub = sinon.stub();
-      const findPaginatedFilteredOrganizationsStub = sinon.stub();
-
       sinon.stub(usecases, 'getDataOrganizationsPlacesStatistics');
 
-      usecases.getDataOrganizationsPlacesStatistics
-        .withArgs({
-          getOrganizationPlacesStatistics: getOrganizationPlacesStatisticsStub,
-          findPaginatedFilteredOrganizations: findPaginatedFilteredOrganizationsStub,
-        })
-        .resolves(dataOrganizationPlacesStatistics);
+      usecases.getDataOrganizationsPlacesStatistics.resolves(dataOrganizationPlacesStatistics);
 
       const dataOrganizationPlacesStatisticsSerializerStub = {
         serialize: sinon.stub(),
@@ -161,8 +153,6 @@ describe('Unit | Application | organization-place-controller', function () {
 
       const dependencies = {
         dataOrganizationPlacesStatisticsSerializer: dataOrganizationPlacesStatisticsSerializerStub,
-        getOrganizationPlacesStatistics: getOrganizationPlacesStatisticsStub,
-        findPaginatedFilteredOrganizations: findPaginatedFilteredOrganizationsStub,
       };
 
       // when

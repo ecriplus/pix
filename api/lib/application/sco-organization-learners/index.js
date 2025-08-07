@@ -2,8 +2,8 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
+import { scoOrganizationLearnerController } from '../../../src/prescription/organization-learner/application/sco-organization-learner-controller.js';
 import { sendJsonApiError, UnprocessableEntityError } from '../../../src/shared/application/http-errors.js';
-import { libScoOrganizationLearnerController } from './sco-organization-learner-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -12,7 +12,7 @@ const register = async function (server) {
       path: '/api/sco-organization-learners/possibilities',
       config: {
         auth: false,
-        handler: libScoOrganizationLearnerController.generateUsername,
+        handler: scoOrganizationLearnerController.generateUsername,
         validate: {
           options: {
             allowUnknown: true,
