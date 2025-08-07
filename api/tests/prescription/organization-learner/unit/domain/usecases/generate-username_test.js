@@ -1,10 +1,10 @@
-import { usecases } from '../../../../lib/domain/usecases/index.js';
+import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import {
   OrganizationLearnerAlreadyLinkedToUserError,
   OrganizationLearnerNotFound,
-} from '../../../../src/shared/domain/errors.js';
-import { Student } from '../../../../src/shared/domain/models/Student.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../../src/shared/domain/errors.js';
+import { Student } from '../../../../../../src/shared/domain/models/Student.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const { generateUsername } = usecases;
 
