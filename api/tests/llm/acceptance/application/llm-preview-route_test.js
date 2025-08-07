@@ -122,7 +122,7 @@ describe('Acceptance | Route | llm-preview', function () {
       });
     });
 
-    it('should throw a 201', async function () {
+    it('should return a 201', async function () {
       // given
       const token = generateValidRequestAuthorizationHeaderForApplication('pix-llm', 'Pix LLM', 'llm-preview');
 
@@ -142,6 +142,10 @@ describe('Acceptance | Route | llm-preview', function () {
             challenge: {
               inputMaxChars: 1024,
               inputMaxPrompts: 5,
+            },
+            preview: {
+              moderationPrompt: 'Un nouveau prompt de modération à transmettre à poc-llm',
+              validationPrompt: 'Un nouveau prompt de validation à transmettre à poc-llm',
             },
           },
         },
@@ -164,6 +168,10 @@ describe('Acceptance | Route | llm-preview', function () {
           challenge: {
             inputMaxChars: 1024,
             inputMaxPrompts: 5,
+          },
+          preview: {
+            moderationPrompt: 'Un nouveau prompt de modération à transmettre à poc-llm',
+            validationPrompt: 'Un nouveau prompt de validation à transmettre à poc-llm',
           },
         },
         hasAttachmentContextBeenAdded: false,
