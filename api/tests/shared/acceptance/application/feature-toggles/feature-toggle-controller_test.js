@@ -27,7 +27,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': true,
-            'should-display-new-analysis-page': false,
             'use-locale': false,
           },
         },
