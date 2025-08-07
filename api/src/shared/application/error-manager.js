@@ -150,13 +150,7 @@ function _mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.InvalidVerificationCodeError) {
     return new HttpErrors.ForbiddenError(error.message, error.code);
   }
-  if (error instanceof SharedDomainErrors.LocaleFormatError) {
-    return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
-  }
   if (error instanceof SharedDomainErrors.LanguageNotSupportedError) {
-    return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
-  }
-  if (error instanceof SharedDomainErrors.LocaleNotSupportedError) {
     return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
   }
   if (error instanceof AdminMemberError) {

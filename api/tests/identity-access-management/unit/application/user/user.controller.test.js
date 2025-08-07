@@ -1,6 +1,7 @@
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
+import * as localeService from '../../../../../src/shared/domain/services/locale-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import * as requestResponseUtils from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -208,9 +209,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       const cryptoService = {
         hashPassword: sinon.stub(),
       };
-      const localeService = {
-        getCanonicalLocale: sinon.stub(),
-      };
 
       dependencies = {
         userSerializer,
@@ -250,7 +248,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
 
           // then
           expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(savedUser);
-          expect(dependencies.localeService.getCanonicalLocale).to.not.have.been.called;
           expect(response.source).to.deep.equal(expectedSerializedUser);
           expect(response.statusCode).to.equal(201);
         });
@@ -272,7 +269,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
             i18n: undefined,
           };
 
-          dependencies.localeService.getCanonicalLocale.returns(locale);
           dependencies.userSerializer.serialize.returns(expectedSerializedUser);
           usecases.createUser.resolves(savedUser);
 
@@ -300,7 +296,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
 
           // then
           expect(usecases.createUser).to.have.been.calledWithExactly(useCaseParameters);
-          expect(dependencies.localeService.getCanonicalLocale).to.have.been.calledWithExactly(locale);
           expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(savedUser);
           expect(response.statusCode).to.equal(201);
         });
@@ -334,10 +329,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         extractLocaleFromRequest: sinon.stub().returns(language),
       };
 
-      const localeService = {
-        getCanonicalLocale: sinon.stub().returns(locale),
-      };
-
       dependencies = { userSerializer, requestResponseUtils, localeService };
     });
 
@@ -369,7 +360,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       );
 
       // then
-      expect(dependencies.localeService.getCanonicalLocale).to.have.been.calledWithExactly(locale);
       expect(dependencies.requestResponseUtils.extractLocaleFromRequest).to.have.been.called;
       expect(usecases.upgradeToRealUser).to.have.been.calledWithExactly({
         userId,

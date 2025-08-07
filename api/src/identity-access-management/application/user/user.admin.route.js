@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
-import { getSupportedLanguages, getSupportedLocales } from '../../../shared/domain/services/locale-service.js';
+import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { QUERY_TYPES } from '../../domain/constants/user-query.js';
 import { userAdminController } from './user.admin.controller.js';
@@ -101,22 +101,46 @@ export const userAdminRoutes = [
         }),
         payload: Joi.object({
           data: {
-            attributes: {
-              'first-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-              'last-name': Joi.string().empty(Joi.string().regex(/^\s*$/)).required(),
-              email: Joi.string().email().allow(null).optional(),
-              username: Joi.string().allow(null).optional(),
-              lang: Joi.string().valid(...getSupportedLanguages()),
+            id: identifiersType.userId.required(),
+            type: Joi.string(),
+            attributes: Joi.object({
+              'first-name': Joi.string().required(),
+              'last-name': Joi.string().required(),
+              lang: Joi.string().valid(...localeService.getSupportedLanguages()),
               locale: Joi.string()
-                .allow(null)
-                .optional()
-                .valid(...getSupportedLocales()),
-            },
+                .valid(...localeService.getSupportedLocales())
+                .allow(null),
+              email: Joi.string().allow(null),
+              username: Joi.string().allow(null),
+              password: Joi.string().allow(null),
+              cgu: Joi.boolean().allow(null),
+              'anonymous-user-token': Joi.string().allow(null),
+              'is-anonymous': Joi.boolean().allow(null),
+              'must-validate-terms-of-service': Joi.boolean().allow(null),
+              'code-for-last-profile-to-share': Joi.string().allow(null),
+              'email-confirmed': Joi.boolean().allow(null),
+              'has-assessment-participations': Joi.boolean().allow(null),
+              'has-recommended-trainings': Joi.boolean().allow(null),
+              'has-seen-assessment-instructions': Joi.boolean().allow(null),
+              'has-seen-focused-challenge-tooltip': Joi.boolean().allow(null),
+              'has-seen-new-dashboard-info': Joi.boolean().allow(null),
+              'has-seen-other-challenges-tooltip': Joi.boolean().allow(null),
+              'last-terms-of-service-validated-at': Joi.string().allow(null),
+              'pix-orga-terms-of-service-accepted': Joi.boolean().allow(null),
+              'last-pix-orga-terms-of-service-validated-at': Joi.string().allow(null),
+              'pix-certif-terms-of-service-accepted': Joi.boolean().allow(null),
+              'last-pix-certif-terms-of-service-validated-at': Joi.string().allow(null),
+              'is-pix-agent': Joi.boolean().allow(null),
+              'created-at': Joi.string().allow(null),
+              'last-logged-at': Joi.string().allow(null),
+              'email-confirmed-at': Joi.string().allow(null),
+              'has-been-anonymised': Joi.boolean().allow(null),
+              'anonymised-by-full-name': Joi.string().allow(null),
+              'has-been-anonymised-by': identifiersType.userId.allow(null).optional(),
+            }).required(),
+            relationships: Joi.object(),
           },
         }),
-        options: {
-          allowUnknown: true,
-        },
       },
       handler: (request, h) => userAdminController.updateUserDetailsByAdmin(request, h),
       notes: [

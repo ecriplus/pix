@@ -37,6 +37,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
           attributes: {
             password: 'Password123',
             cgu: true,
+            'pix-orga-terms-of-service-status': true, // sent by Pix Orga when creating a user upon invitation
           },
           relationships: {},
         },
@@ -136,39 +137,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.statusCode).to.equal(201);
       });
     });
-
-    context('user is invalid', function () {
-      const validUserAttributes = {
-        'first-name': 'John',
-        'last-name': 'DoDoe',
-        email: 'john.doe@example.net',
-        password: 'Ab124B2C3#!',
-        cgu: true,
-      };
-
-      it('returns Unprocessable Entity (HTTP_422) with offending properties', async function () {
-        const invalidUserAttributes = { ...validUserAttributes, 'must-validate-terms-of-service': 'not_a_boolean' };
-
-        const options = {
-          method: 'POST',
-          url: '/api/users',
-          payload: {
-            data: {
-              type: 'users',
-              attributes: invalidUserAttributes,
-              relationships: {},
-            },
-          },
-        };
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        expect(response.statusCode).to.equal(422);
-        expect(response.result.errors[0].title).to.equal('Invalid data attribute "mustValidateTermsOfService"');
-      });
-    });
   });
 
   describe('PATCH /api/users/{id}', function () {
@@ -232,31 +200,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PATCH',
         url: `/api/users/${userId}`,
         payload: requestPayload,
-      });
-
-      // then
-      expect(response.statusCode).to.equal(401);
-    });
-
-    it('fails with 401 if anonymousUserToken is invalid', async function () {
-      // given
-      const invalidPayload = {
-        ...requestPayload,
-        data: {
-          ...requestPayload.data,
-          attributes: {
-            ...requestPayload.data.attributes,
-            'anonymous-user-token': 'invalid-token',
-          },
-        },
-      };
-
-      // when
-      const response = await server.inject({
-        method: 'PATCH',
-        url: `/api/users/${userId}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-        payload: invalidPayload,
       });
 
       // then

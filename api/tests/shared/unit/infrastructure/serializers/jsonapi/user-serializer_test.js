@@ -1,7 +1,6 @@
 import { User } from '../../../../../../src/identity-access-management/domain/models/User.js';
-import { LocaleFormatError, LocaleNotSupportedError } from '../../../../../../src/shared/domain/errors.js';
 import * as serializer from '../../../../../../src/shared/infrastructure/serializers/jsonapi/user-serializer.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Shared | Infrastructure | Serializer | JSONAPI | user-serializer', function () {
   describe('#serialize', function () {
@@ -137,34 +136,6 @@ describe('Unit | Shared | Infrastructure | Serializer | JSONAPI | user-serialize
 
       // then
       expect(user.id).to.be.undefined;
-    });
-
-    context('user with a invalid locale format', function () {
-      it('throws locale format error', function () {
-        // given
-        jsonUser.data.attributes.locale = 'zzzz';
-
-        // when
-        const error = catchErrSync(serializer.deserialize)(jsonUser);
-
-        // then
-        expect(error).to.be.instanceOf(LocaleFormatError);
-        expect(error.message).to.equal('Given locale is in invalid format: "zzzz"');
-      });
-    });
-
-    context('user with a not supported locale', function () {
-      it('throws locale not supported error', function () {
-        // given
-        jsonUser.data.attributes.locale = 'jp';
-
-        // when
-        const error = catchErrSync(serializer.deserialize)(jsonUser);
-
-        // then
-        expect(error).to.be.instanceOf(LocaleNotSupportedError);
-        expect(error.message).to.equal('Given locale is not supported : "jp"');
-      });
     });
   });
 });
