@@ -216,4 +216,17 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
       expect(organizationLearner.updatedAt).deep.equal(now);
     });
   });
+
+  describe('#updateName', function () {
+    it('should update first and last name', function () {
+      const organizationLearner = domainBuilder.buildOrganizationLearner({
+        firstName: 'Hippopotamus',
+        lastName: 'nivea',
+      });
+
+      organizationLearner.updateName('Spilogale', 'Americanum');
+      expect(organizationLearner.firstName).deep.equal('Spilogale');
+      expect(organizationLearner.lastName).deep.equal('Americanum');
+    });
+  });
 });

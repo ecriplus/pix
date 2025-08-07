@@ -2143,4 +2143,291 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       });
     });
   });
+
+  describe('#checkOrganizationIsNotManagingStudents', function () {
+    let checkOrganizationIsNotManagingStudentsUseCaseStub;
+    let dependencies;
+
+    beforeEach(function () {
+      checkOrganizationIsNotManagingStudentsUseCaseStub = { execute: sinon.stub() };
+      dependencies = {
+        checkOrganizationIsNotManagingStudentsUseCase: checkOrganizationIsNotManagingStudentsUseCaseStub,
+      };
+    });
+
+    context('Successful cases', function () {
+      context('when organization is not managing students', function () {
+        it('should authorize access when organization id is in request params', async function () {
+          // given
+          const request = {
+            auth: {
+              credentials: {
+                accessToken: 'valid.access.token',
+                userId: 1234,
+              },
+            },
+            params: {
+              organizationId: 5678,
+            },
+          };
+          dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(true);
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(
+            request,
+            hFake,
+            dependencies,
+          );
+
+          // then
+          expect(response.source).to.be.true;
+          expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+            organizationId: 5678,
+          });
+        });
+
+        it('should authorize access when organization id is in request params as id', async function () {
+          // given
+          const request = {
+            auth: {
+              credentials: {
+                accessToken: 'valid.access.token',
+                userId: 1234,
+              },
+            },
+            params: {
+              id: 5678,
+            },
+          };
+          dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(true);
+
+          // when
+          const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(
+            request,
+            hFake,
+            dependencies,
+          );
+
+          // then
+          expect(response.source).to.be.true;
+          expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+            organizationId: 5678,
+          });
+        });
+      });
+    });
+
+    context('Error cases', function () {
+      it('should forbid resource access when user was not previously authenticated', async function () {
+        // given
+        const request = {
+          params: {
+            organizationId: 5678,
+          },
+        };
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(request, hFake, dependencies);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).not.to.have.been.called;
+      });
+
+      it('should forbid resource access when organization is managing students', async function () {
+        // given
+        const request = {
+          auth: {
+            credentials: {
+              accessToken: 'valid.access.token',
+              userId: 1234,
+            },
+          },
+          params: {
+            organizationId: 5678,
+          },
+        };
+        dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute.resolves(false);
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationIsNotManagingStudents(request, hFake, dependencies);
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute).to.have.been.calledWith({
+          organizationId: 5678,
+        });
+      });
+    });
+  });
+
+  describe('#checkOrganizationDoesNotHaveFeature', function () {
+    context('Successful case', function () {
+      let request;
+
+      beforeEach(function () {
+        request = {
+          params: { id: 1234 },
+        };
+      });
+
+      it('should authorize access to resource when the organization does NOT have feature enabled', async function () {
+        const featureKey = 'SOME_FEATURE';
+        const organizationId = 1234;
+
+        const checkOrganizationDoesNotHaveFeatureUseCaseStub = {
+          execute: sinon.stub(),
+        };
+
+        checkOrganizationDoesNotHaveFeatureUseCaseStub.execute.withArgs({ organizationId, featureKey }).resolves(true);
+
+        const checkOrganizationDoesNotHaveFeature = securityPreHandlers.checkOrganizationDoesNotHaveFeature(featureKey);
+        const response = await checkOrganizationDoesNotHaveFeature(request, hFake, {
+          checkOrganizationDoesNotHaveFeatureUseCase: checkOrganizationDoesNotHaveFeatureUseCaseStub,
+        });
+
+        expect(response.source).to.be.true;
+      });
+    });
+
+    context('Error cases', function () {
+      let request;
+
+      beforeEach(function () {
+        request = { params: { id: 1234 } };
+      });
+
+      it('should forbid resource access when organization does have feature enabled', async function () {
+        const featureKey = 'SOME_FEATURE';
+        const organizationId = 1234;
+
+        const checkOrganizationDoesNotHaveFeatureUseCaseStub = {
+          execute: sinon.stub(),
+        };
+
+        checkOrganizationDoesNotHaveFeatureUseCaseStub.execute.withArgs({ organizationId, featureKey }).resolves(false);
+
+        const checkOrganizationDoesNotHaveFeature = securityPreHandlers.checkOrganizationDoesNotHaveFeature(featureKey);
+        const response = await checkOrganizationDoesNotHaveFeature(request, hFake, {
+          checkOrganizationDoesNotHaveFeatureUseCase: checkOrganizationDoesNotHaveFeatureUseCaseStub,
+        });
+
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+      });
+    });
+  });
+
+  describe('#checkOrganizationLearnerBelongsToOrganization', function () {
+    let checkOrganizationLearnerBelongsToOrganizationUseCaseStub;
+    let dependencies;
+
+    beforeEach(function () {
+      checkOrganizationLearnerBelongsToOrganizationUseCaseStub = { execute: sinon.stub() };
+      dependencies = {
+        checkOrganizationLearnerBelongsToOrganizationUseCase: checkOrganizationLearnerBelongsToOrganizationUseCaseStub,
+      };
+    });
+
+    context('Successful cases', function () {
+      it('should authorize access when organization learner belongs to the organization', async function () {
+        // given
+        const request = {
+          auth: {
+            credentials: {
+              accessToken: 'valid.access.token',
+              userId: 1234,
+            },
+          },
+          params: {
+            organizationId: 5678,
+            organizationLearnerId: 9999,
+          },
+        };
+        dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute.resolves(true);
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationLearnerBelongsToOrganization(
+          request,
+          hFake,
+          dependencies,
+        );
+
+        // then
+        expect(response.source).to.be.true;
+        expect(dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute).to.have.been.calledWith(
+          5678,
+          9999,
+        );
+      });
+    });
+
+    context('Error cases', function () {
+      it('should forbid resource access when organization learner does not belong to the organization', async function () {
+        // given
+        const request = {
+          auth: {
+            credentials: {
+              accessToken: 'valid.access.token',
+              userId: 1234,
+            },
+          },
+          params: {
+            organizationId: 5678,
+            organizationLearnerId: 9999,
+          },
+        };
+        dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute.resolves(false);
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationLearnerBelongsToOrganization(
+          request,
+          hFake,
+          dependencies,
+        );
+
+        // then
+        expect(response.statusCode).to.equal(404);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute).to.have.been.calledWith(
+          5678,
+          9999,
+        );
+      });
+
+      it('should forbid resource access when use case throws an error', async function () {
+        // given
+        const request = {
+          auth: {
+            credentials: {
+              accessToken: 'valid.access.token',
+              userId: 1234,
+            },
+          },
+          params: {
+            organizationId: 5678,
+            organizationLearnerId: 9999,
+          },
+        };
+        dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute.rejects(new Error('Some error'));
+
+        // when
+        const response = await securityPreHandlers.checkOrganizationLearnerBelongsToOrganization(
+          request,
+          hFake,
+          dependencies,
+        );
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+        expect(dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute).to.have.been.calledWith(
+          5678,
+          9999,
+        );
+      });
+    });
+  });
 });
