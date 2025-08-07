@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.177.0](https://github.com/1024pix/pix/compare/v5.176.0...v5.177.0) (2025-08-07)
+
+### :rocket: Amélioration
+
+- [#13097](https://github.com/1024pix/pix/pull/13097) Ajout d'une route pour changer le nom des participants (PIX-18970) 
+- [#13099](https://github.com/1024pix/pix/pull/13099) Créer la table target-profile-training-organizations (PIX-18864) 
+- [#13116](https://github.com/1024pix/pix/pull/13116) Mettre à jour les seeds côté Devcomp (PIX-19011) 
+- [#13122](https://github.com/1024pix/pix/pull/13122) Modif module IA Hallucinations suite évolutions 
+- [#13111](https://github.com/1024pix/pix/pull/13111) modifcations module IA vous avez dit IA ? suite évolutions 
+- [#13118](https://github.com/1024pix/pix/pull/13118) modifs module IA deepfakes suite retours FTO 
+- [#13110](https://github.com/1024pix/pix/pull/13110) Rediriger l'utilisateur à la page de parcours combiné lors de la fin de la campagne de diagnostique (PIX-18124) 
+- [#13103](https://github.com/1024pix/pix/pull/13103) Suppression de isCancelled dans le check de vérification en entrée de certification (PIX-16048). 
+
+### :bug: Correction
+
+- [#13115](https://github.com/1024pix/pix/pull/13115) Permettre d'ignorer les valeurs par défaut de `modulix-editor` dans les arguments de POIs (PIX-18994) 
+
+### :building_construction: Tech
+
+- [#13075](https://github.com/1024pix/pix/pull/13075) placer le contexte prescription se trouvant dans src/shared dans src/prescription (PIX-15344) 
+- [#13123](https://github.com/1024pix/pix/pull/13123) Suppression de warnings liés à l'ODS dans les fichiers de tests (PIX-18986). 
+- [#13084](https://github.com/1024pix/pix/pull/13084) Supprimer isCancelled sur les pages de détail d'une certification/session sur Pix Admin (PIX-18974). 
+- [#13113](https://github.com/1024pix/pix/pull/13113) Supprimer le feature toggle d'inscription d'un utilisateur après parcours anonyme (PIX-18027)
+
 # [5.176.0](https://github.com/1024pix/pix/compare/v5.175.0...v5.176.0) (2025-08-06)
 
 ### :rocket: Amélioration
