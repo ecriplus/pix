@@ -55,6 +55,7 @@ const llmCompareMessagesPropsSchema = Joi.object({
 }).required();
 
 const llmPromptSelectPropsSchema = Joi.object({
+  speed: Joi.number().default(20).min(0).optional(),
   messages: Joi.array()
     .items(
       Joi.object({
@@ -87,15 +88,15 @@ const messageConversationPropsSchema = Joi.object({
 }).required();
 
 const licenseSchema = Joi.object({
-  name: Joi.string().required(),
-  attribution: Joi.string().required(),
-  url: Joi.string().required(),
+  name: Joi.string().allow('').required(),
+  attribution: Joi.string().allow('').required(),
+  url: Joi.string().allow('').required(),
 });
 
 const slideImageSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().allow('').required(),
-  displayWidth: Joi.number().min(0).required(),
+  displayWidth: Joi.number().min(0).optional(),
   image: Joi.object({
     src: Joi.string().required(),
     alt: Joi.string().required(),
@@ -112,7 +113,7 @@ const slideTextSchema = Joi.object({
 const slideImageTextSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().allow('').required(),
-  displayHeight: Joi.number().min(0).required(),
+  displayHeight: Joi.number().min(0).optional(),
   text: Joi.string().required(),
   image: Joi.object({
     src: Joi.string().required(),
@@ -123,7 +124,7 @@ const slideImageTextSchema = Joi.object({
 const commonFields = {
   aspectRatio: Joi.number().min(0).required(),
   randomSlides: Joi.boolean().required(),
-  titleLevel: Joi.number().integer().min(0).max(6).required(),
+  titleLevel: Joi.number().integer().min(0).max(6).optional(),
   disableAnimation: Joi.boolean().required(),
 };
 
@@ -160,7 +161,7 @@ const customElementSchema = Joi.object({
   props: Joi.alternatives()
     .conditional('tagName', {
       switch: [
-        { is: 'image-quizz', then: imageQuizPropsSchema },
+        { is: 'image-quiz', then: imageQuizPropsSchema },
         { is: 'image-quizzes', then: imageQuizzesPropsSchema },
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
         { is: 'llm-prompt-select', then: llmPromptSelectPropsSchema },

@@ -562,37 +562,57 @@
                 {
                   "title": "Situation A",
                   "description": "Super description!",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "une alternative A avec des \"double quotes\""
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Situation B",
                   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at imperdiet libero, eget suscipit enim. Proin in nibh id ligula tempus suscipit eu at dolor. Fusce tincidunt gravida turpis, a sagittis ex bibendum nec. Morbi hendrerit lectus sed libero tristique, non luctus diam ultricies. Cras in quam consectetur, tempor quam id, euismod turpis. Duis faucibus erat lectus, blandit mattis lectus euismod quis. Duis imperdiet volutpat metus at varius. Nunc vitae mattis leo, ac vehicula urna. Mauris euismod eleifend lorem quis porta. Quisque ac diam sollicitudin nisl convallis ullamcorper. Donec ut suscipit arcu.",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "une alternative B"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Liste non ordonnée",
                   "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zooma</li>\n         <li>Stela</li>\n       </ul>\n     ",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "hehe je suis un alt"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Liste ordonnée",
                   "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zooma</li>\n         <li>Stela</li>\n       </ol>\n",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "halte là !"
+                  },
+                  "license": {
+                    "name": "name",
+                    "attribution": "attri",
+                    "url": "url"
                   }
                 }
               ]
