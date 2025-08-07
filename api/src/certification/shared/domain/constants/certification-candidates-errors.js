@@ -116,10 +116,14 @@ const CERTIFICATION_CANDIDATES_ERRORS = {
     code: 'CANDIDATE_NO_SUBSCRIPTION',
     getMessage: () => 'Le candidat doit être inscrit à au moins une certification',
   },
-  CANDIDATE_COMPLEMENTARY_WITHOUT_CORE: {
-    code: 'CANDIDATE_COMPLEMENTARY_WITHOUT_CORE',
+  CANDIDATE_DOUBLE_CERTIFICATION_WITHOUT_CORE: {
+    code: 'CANDIDATE_DOUBLE_CERTIFICATION_WITHOUT_CORE',
     getMessage: () =>
-      'Le candidat doit être inscrit aussi en Certification Pix pour pouvoir être inscrit en certification complémentaire',
+      'Le candidat doit être inscrit aussi en Certification Pix pour pouvoir être inscrit en double certification',
+  },
+  CANDIDATE_COMPLEMENTARY_CERTIFICATION_WITH_CORE: {
+    code: 'CANDIDATE_COMPLEMENTARY_CERTIFICATION_WITH_CORE',
+    getMessage: () => 'Le candidat ne doit pas être à la fois inscrit en Certification Pix et en certification Pix +',
   },
   CANDIDATE_FOREIGN_POSTAL_CODE_MUST_BE_EMPTY: {
     code: 'CANDIDATE_FOREIGN_POSTAL_CODE_MUST_BE_EMPTY',

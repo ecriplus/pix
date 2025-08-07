@@ -27,7 +27,6 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
   let i18n;
   let center;
   let centerRepository;
-  let certificationCourseRepository;
   let complementaryCertificationRepository;
   let sessionCodeService;
   let sessionsImportValidationService;
@@ -47,7 +46,6 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
     });
     centerRepository = { getById: sinon.stub() };
     centerRepository.getById.withArgs({ id: certificationCenterId }).resolves(center);
-    certificationCourseRepository = sinon.stub();
     complementaryCertificationRepository = { getByLabel: sinon.stub() };
     sessionCodeService = { getNewSessionCode: sinon.stub().returns(accessCode) };
 
@@ -76,7 +74,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
       externalId: 'popi',
       birthdate: '1981-03-12',
       extraTimePercentage: '20',
-      subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+      subscriptionKeys: [SUBSCRIPTION_TYPES.CORE],
       billingMode: 'Gratuite',
       prepaymentCode: 'PIX2024',
       sessionId: 1,
@@ -95,7 +93,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
       externalId: 'souris',
       birthdate: '2003-07-04',
       extraTimePercentage: '20',
-      subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+      subscriptionKeys: [SUBSCRIPTION_TYPES.CORE],
       billingMode: 'Gratuite',
       prepaymentCode: null,
       sessionId: 2,
@@ -310,7 +308,6 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           userId,
           certificationCenterId,
           centerRepository,
-          certificationCourseRepository,
           sessionCodeService,
           i18n,
           sessionsImportValidationService,
