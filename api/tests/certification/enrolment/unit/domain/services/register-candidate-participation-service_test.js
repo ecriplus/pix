@@ -75,7 +75,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
       clock.restore();
     });
 
-    it('should verify candidate subscriptions', async function () {
+    it('verifies candidate certificability', async function () {
       // when
       unlinkedCandidate.reconcile();
       usecases.reconcileCandidate.resolves(unlinkedCandidate);
@@ -91,7 +91,6 @@ describe('Unit | Application | Service | register-candidate-participation', func
       // then
       expect(usecases.verifyCandidateSubscriptions).to.have.been.calledWithExactly({
         candidate: unlinkedCandidate,
-        sessionId,
       });
     });
 

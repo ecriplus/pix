@@ -1,7 +1,6 @@
 import { HttpErrors } from '../../../shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../../shared/application/models/domain-error-mapping-configuration.js';
 import {
-  CertificationCandidateEligibilityError,
   CertificationCandidateForbiddenDeletionError,
   CertificationCandidateNotFoundError,
   InvalidCertificationCandidate,
@@ -26,10 +25,6 @@ const enrolmentDomainErrorMappingConfiguration = [
   {
     name: InvalidCertificationCandidate.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message),
-  },
-  {
-    name: CertificationCandidateEligibilityError.name,
-    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code),
   },
 ].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
 
