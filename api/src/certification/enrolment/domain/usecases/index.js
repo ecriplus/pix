@@ -15,7 +15,6 @@ import * as sessionValidator from '../../../shared/domain/validators/session-val
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
-import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import { enrolmentRepositories } from '../../infrastructure/repositories/index.js';
 import * as certificationCandidatesOdsService from '../services/certification-candidates-ods-service.js';
 import * as sessionCodeService from '../services/session-code-service.js';
@@ -74,7 +73,6 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {certificationBadgesService} CertificationBadgesService
  * @typedef {CertificationCandidatesOdsService} CertificationCandidatesOdsService
  * @typedef {PlacementProfileService} PlacementProfileService
- * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {organizationRepository} OrganizationRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {divisionRepository} DivisionRepository
@@ -94,7 +92,6 @@ const dependencies = {
   divisionRepository,
   certificationCandidatesOdsService,
   placementProfileService,
-  complementaryCertificationBadgesRepository,
   organizationRepository,
   organizationLearnerRepository,
   certificationCandidateRepository,
