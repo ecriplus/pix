@@ -6,6 +6,8 @@ import uniq from 'lodash/uniq';
 
 export default class TrainingDetailsTargetProfilesController extends Controller {
   @service('store') store;
+  @service router;
+  @service featureToggles;
   @tracked targetProfilesToAttach = '';
 
   @service accessControl;
@@ -17,6 +19,14 @@ export default class TrainingDetailsTargetProfilesController extends Controller 
 
   get noTargetProfilesToAttach() {
     return this.targetProfilesToAttach === '';
+  }
+
+  get showOrganizationsFiltersForm() {
+    return this.router.currentRoute.localName.includes('organizations');
+  }
+
+  get displayFilterOrganizationsLink() {
+    return this.featureToggles.featureToggles?.isFilteringRecommendedTrainingByOrganizationsEnabled;
   }
 
   @action
