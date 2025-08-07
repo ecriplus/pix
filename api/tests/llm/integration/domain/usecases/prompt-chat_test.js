@@ -1824,7 +1824,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
               '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
               '16:{"isValid":true}',
-              '78:{"jecrois":{"que":"jaifini"},"usage":{"inputTokens":3000,"outputTokens":5000}}',
+              '80:{"jecrois":{"que":"jaifini"},"usage":{"input_tokens":3000,"output_tokens":5000}}',
             ]),
           );
 

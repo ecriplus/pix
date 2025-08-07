@@ -184,7 +184,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
           { pasMessage: 'Ca va super' },
           { message: 'Et toi ?' },
           {
-            usage: { superKey: 'wowouuo', inputTokens: 2_000, outputTokens: 5_000 },
+            usage: { superKey: 'wowouuo', input_tokens: 2_000, output_tokens: 5_000 },
           },
         ];
         const readable = Readable.from(input);
