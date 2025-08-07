@@ -7,8 +7,8 @@ class CompetenceResultForKnowledgeElementSnapshots {
   index;
   name;
   description;
-  meanLevel;
-  maxLevel;
+  meanLevel = 0;
+  maxLevel = 0;
 
   constructor({ competence } = {}) {
     this.#tubeResults = competence.tubes.map(

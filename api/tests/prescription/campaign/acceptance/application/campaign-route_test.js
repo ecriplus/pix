@@ -256,7 +256,7 @@ describe('Acceptance | API | Campaign Route', function () {
     });
 
     context('when there is no participation', function () {
-      it('should return 500', async function () {
+      it('should return 200', async function () {
         // given
         const campaignWithoutParticipation = databaseBuilder.factory.buildCampaign({
           name: 'Campagne de Test N°3',
@@ -271,7 +271,7 @@ describe('Acceptance | API | Campaign Route', function () {
         const response = await server.inject(options);
 
         // then
-        expect(response.statusCode).to.equal(500, response.payload);
+        expect(response.statusCode).to.equal(200, response.payload);
       });
     });
   });
