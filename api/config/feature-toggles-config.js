@@ -29,6 +29,12 @@ export default {
     defaultValue: false,
     tags: ['team-prescription', 'pix-api', 'backend'],
   },
+  isFilteringRecommendedTrainingByOrganizationsEnabled: {
+    type: 'boolean',
+    description: 'Used to enable filtering recommended training by organizations',
+    defaultValue: false,
+    tags: ['frontend', 'team-devcomp', 'pix-admin'],
+  },
   isSelfAccountDeletionEnabled: {
     description: 'Toggle self account deletion feature',
     type: 'boolean',
