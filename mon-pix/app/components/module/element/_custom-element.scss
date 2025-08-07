@@ -1,18 +1,17 @@
 @use 'pix-design-tokens/typography';
 
-
 message-conversation::part(conversation) {
   background-color: var(--pix-primary-10);
 }
 
 .element-custom {
-  fieldset {
+  &__container {
     padding: var(--pix-spacing-2x);
     border: 2px dashed var(--pix-primary-700);
     border-radius: var(--pix-spacing-2x);
   }
 
-  legend {
+  &__legend {
     @extend %pix-body-s;
 
     display: inline-flex;
@@ -20,5 +19,10 @@ message-conversation::part(conversation) {
     align-items: center;
     padding: 0 var(--pix-spacing-2x);
     color: var(--pix-primary-700);
+  }
+
+  &__reset {
+    display: flex;
+    justify-content: flex-end;
   }
 }
