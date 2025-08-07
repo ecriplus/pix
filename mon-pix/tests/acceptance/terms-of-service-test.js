@@ -1,3 +1,4 @@
+import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
@@ -12,6 +13,17 @@ module('Acceptance | terms-of-service', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+
+  module('when user is not authenticated', function () {
+    test('should redirect to login page', async function (assert) {
+      // given / when
+      const screen = await visit('/cgu');
+
+      // then
+      assert.ok(screen.findByRole('heading', { name: t('pages.sign-in.first-title') }));
+      assert.strictEqual(currentURL(), '/connexion');
+    });
+  });
 
   module('When user log in and must validate Pix latest terms of service', function () {
     test('should be redirected to terms-of-services page', async function (assert) {
