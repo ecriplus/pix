@@ -27,7 +27,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
   let i18n;
   let center;
   let centerRepository;
-  let complementaryCertificationRepository;
+  let certificationCourseRepository;
   let sessionCodeService;
   let sessionsImportValidationService;
   let temporarySessionsStorageForMassImportService;
@@ -46,7 +46,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
     });
     centerRepository = { getById: sinon.stub() };
     centerRepository.getById.withArgs({ id: certificationCenterId }).resolves(center);
-    complementaryCertificationRepository = { getByLabel: sinon.stub() };
+    certificationCourseRepository = sinon.stub();
     sessionCodeService = { getNewSessionCode: sinon.stub().returns(accessCode) };
 
     sessionsImportValidationService = {
@@ -308,6 +308,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           userId,
           certificationCenterId,
           centerRepository,
+          certificationCourseRepository,
           sessionCodeService,
           i18n,
           sessionsImportValidationService,
@@ -442,8 +443,6 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           candidatesCount: 1,
           errorReports: ['Veuillez indiquer un nom de site.', 'lastName required'],
         });
-
-        expect(complementaryCertificationRepository.getByLabel).to.not.have.been.called;
       });
     });
 

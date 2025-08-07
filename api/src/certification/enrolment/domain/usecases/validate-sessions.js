@@ -127,7 +127,7 @@ async function _createValidCertificationCandidates({
 
     const { certificationCandidateComplementaryErrors, subscriptions } =
       await sessionsImportValidationService.getValidatedSubscriptionsForMassImport({
-        subscriptionKeys: candidateDTO.subscriptions,
+        subscriptionKeys: candidateDTO.subscriptionKeys,
         line: candidateDTO.line,
       });
 

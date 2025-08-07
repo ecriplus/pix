@@ -120,47 +120,10 @@ const getUniqueCandidates = function (candidates) {
   return { uniqueCandidates, duplicateCandidateErrors };
 };
 
-const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKeys, line }) {
+const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKeys = [], line }) {
   const certificationCandidateComplementaryErrors = [];
 
-  if (subscriptionKeys.length === 0) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_NO_SUBSCRIPTION.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  if (
-    subscriptionKeys.includes(ComplementaryCertificationKeys.CLEA) &&
-    !subscriptionKeys.includes(SUBSCRIPTION_TYPES.CORE)
-  ) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_DOUBLE_CERTIFICATION_WITHOUT_CORE.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  if (
-    subscriptionKeys.length === 2 &&
-    subscriptionKeys.includes(SUBSCRIPTION_TYPES.CORE) &&
-    !subscriptionKeys.includes(ComplementaryCertificationKeys.CLEA)
-  ) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_COMPLEMENTARY_CERTIFICATION_WITH_CORE.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  if (_hasMoreThanOneComplementaryCertificationSubscriptions(subscriptionKeys)) {
+  if (subscriptionKeys.length > 1) {
     _addToErrorList({
       errorList: certificationCandidateComplementaryErrors,
       line,
@@ -168,6 +131,10 @@ const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKey
     });
 
     return { certificationCandidateComplementaryErrors, subscriptions: [] };
+  }
+
+  if (subscriptionKeys.includes(ComplementaryCertificationKeys.CLEA) || subscriptionKeys.length === 0) {
+    subscriptionKeys.push(SUBSCRIPTION_TYPES.CORE);
   }
 
   const subscriptions = [];
@@ -275,10 +242,6 @@ export {
   validateCandidateEmails,
   validateSession,
 };
-
-function _hasMoreThanOneComplementaryCertificationSubscriptions(subscriptionKeys) {
-  return subscriptionKeys.filter((label) => label !== SUBSCRIPTION_TYPES.CORE).length > 1;
-}
 
 function _isDateAndTimeValid(session) {
   return dayjs(`${session.date} ${session.time}`, 'YYYY-MM-DD HH:mm', true).isValid();

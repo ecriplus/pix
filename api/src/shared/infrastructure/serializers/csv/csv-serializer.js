@@ -1,7 +1,5 @@
 import lodash from 'lodash';
 
-import { SUBSCRIPTION_TYPES } from '../../../../certification/shared/domain/constants.js';
-import { ComplementaryCertificationKeys } from '../../../../certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import {
   COMPLEMENTARY_CERTIFICATION_SUFFIX,
   emptySession,
@@ -493,17 +491,11 @@ function _createCandidate(
   },
   certificationCenterHabilitations,
 ) {
-  let subscriptionKeys;
-  if (certificationCenterHabilitations) {
-    subscriptionKeys = certificationCenterHabilitations
-      .filter(({ label }) => complementarySubscriptionLabels.includes(label))
-      .map(({ key }) => key);
-  } else {
-    subscriptionKeys = [];
-  }
-  if (subscriptionKeys.includes(ComplementaryCertificationKeys.CLEA) || subscriptionKeys.length === 0) {
-    subscriptionKeys.push(SUBSCRIPTION_TYPES.CORE);
-  }
+  const subscriptionKeys = certificationCenterHabilitations
+    ? certificationCenterHabilitations
+        .filter(({ label }) => complementarySubscriptionLabels.includes(label))
+        .map(({ key }) => key)
+    : [];
 
   return {
     lastName,
