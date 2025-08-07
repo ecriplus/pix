@@ -189,7 +189,7 @@ describe('Acceptance | API | Campaign Route', function () {
   });
 
   describe('GET /api/campaigns/{campaignId}/level-per-tubes-and-competences', function () {
-    let campaign, userId;
+    let campaign, userId, organization, skillId;
     const options = {
       headers: { authorization: null },
       method: 'GET',
@@ -198,7 +198,7 @@ describe('Acceptance | API | Campaign Route', function () {
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser({ firstName: 'Jean', lastName: 'Bono' }).id;
-      const organization = databaseBuilder.factory.buildOrganization();
+      organization = databaseBuilder.factory.buildOrganization();
       databaseBuilder.factory.buildMembership({
         userId,
         organizationId: organization.id,
@@ -218,7 +218,7 @@ describe('Acceptance | API | Campaign Route', function () {
 
       const tubeId = databaseBuilder.factory.learningContent.buildTube({ competenceId }).id;
 
-      const skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId, status: 'actif' }).id;
+      skillId = databaseBuilder.factory.learningContent.buildSkill({ tubeId, status: 'actif' }).id;
 
       const user1 = databaseBuilder.factory.buildUser();
 
@@ -253,6 +253,26 @@ describe('Acceptance | API | Campaign Route', function () {
       // then
       expect(response.statusCode).to.equal(200, response.payload);
       expect(response.result.data.type).to.deep.equal('campaign-result-levels-per-tubes-and-competences');
+    });
+
+    context('when there is no participation', function () {
+      it('should return 200', async function () {
+        // given
+        const campaignWithoutParticipation = databaseBuilder.factory.buildCampaign({
+          name: 'Campagne de Test N°3',
+          organizationId: organization.id,
+        });
+        databaseBuilder.factory.buildCampaignSkill({ campaignId: campaignWithoutParticipation.id, skillId });
+        await databaseBuilder.commit();
+
+        options.url = `/api/campaigns/${campaignWithoutParticipation.id}/level-per-tubes-and-competences`;
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200, response.payload);
+      });
     });
   });
 });
