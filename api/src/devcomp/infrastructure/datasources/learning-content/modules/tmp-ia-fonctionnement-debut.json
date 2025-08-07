@@ -306,7 +306,7 @@
             {
               "elements": [
                 {
-                  "id": "fcac6dfc-fc03-49e2-af21-7356908e1094",
+                  "id": "23d57d7e-2bea-4c79-83e8-3fa7bcc273d0",
                   "type": "text",
                   "content": "<p>Pour répondre, un logiciel d'<strong>IA générative</strong>,&nbsp;construit sa réponse comme s'il <strong>complétait la demande&nbsp;de l’utilisateur</strong>.</p><p> Pour compléter ce texte, il choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que le logiciel choississe ce mot. </p><p>Il répète cette méthode&nbsp;<strong>mot après m</strong><strong>ot</strong>.</p>"
                 },
@@ -478,7 +478,7 @@
         {
           "type": "element",
           "element": {
-            "id": "546fcfcd-a7a8-4290-bde6-a8cc203013f3",
+            "id": "58a0b8d9-30ce-4e62-95a6-b30a55a9c76d",
             "type": "qcu",
             "instruction": "<p>Parmi les propositions suivantes, laquelle définit le mieux ce qu’est un <strong>logiciel d’IA générative</strong> ?<br></p>",
             "proposals": [
