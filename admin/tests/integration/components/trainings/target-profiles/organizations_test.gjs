@@ -1,13 +1,15 @@
-import { module, test } from 'qunit';
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
+import Organizations from 'pix-admin/components/trainings/target-profiles/organizations';
+import { module, test } from 'qunit';
 
-import Organizations from "pix-admin/templates/authenticated/trainings/training/target-profiles/organizations";
-import setupIntlRenderingTest from "../../../../../../helpers/setup-intl-rendering";
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Templates | Authenticated | Trainings | Training | Target Profiles | Organizations', function (hooks) {
+module('Integration | Components | Trainings | Training | Target Profiles | Organizations', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should display organizations', async function(assert) {
+  test('it should display organizations', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
     const targetProfile = store.createRecord('target-profile', { internalName: 'Profil cible 1' });
@@ -17,14 +19,20 @@ module('Integration | Templates | Authenticated | Trainings | Training | Target 
       type: 'Type A',
       externalId: 'ext-org1',
     });
-    const model = {
-      targetProfile,
-      organizations: [organization],
+    const organizations = [organization];
+
+    const controller = {
+      id: '',
+      name: '',
+      externalId: '',
+      type: '',
     };
 
     // when
     const screen = await render(
-      <template><Organizations @model={{model}} /></template>,
+      <template>
+        <Organizations @controller={{controller}} @organizations={{organizations}} @targetProfile={{targetProfile}} />
+      </template>,
     );
 
     // then
