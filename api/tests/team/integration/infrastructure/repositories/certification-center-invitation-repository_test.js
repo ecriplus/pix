@@ -194,4 +194,131 @@ describe('Integration | Team | Infrastructure | Repositories | CertificationCent
       expect(result).to.deep.equal(expectedInvitation);
     });
   });
+
+  describe('#findPendingByCertificationCenterId', function () {
+    it('returns all pending invitations for a given certification center', async function () {
+      // given
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const invitation1 = databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId,
+        status: CertificationCenterInvitation.StatusType.PENDING,
+      });
+      const invitation2 = databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId,
+        status: CertificationCenterInvitation.StatusType.PENDING,
+      });
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId,
+        status: CertificationCenterInvitation.StatusType.ACCEPTED,
+      });
+      await databaseBuilder.commit();
+      // when
+      const result = await certificationCenterInvitationRepository.findPendingByCertificationCenterId({
+        certificationCenterId,
+      });
+      // then
+      expect(result.map((i) => i.id)).to.have.members([invitation1.id, invitation2.id]);
+    });
+  });
+
+  describe('#getByIdAndCode', function () {
+    it('returns the invitation for the given id and code', async function () {
+      // given
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      const invitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: certificationCenter.id,
+        code: 'CODE123',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await certificationCenterInvitationRepository.getByIdAndCode({
+        id: invitation.id,
+        code: 'CODE123',
+      });
+
+      // then
+      expect(result.id).to.equal(invitation.id);
+      expect(result.status).to.equal(CertificationCenterInvitation.StatusType.PENDING);
+      expect(result.certificationCenterId).to.equal(certificationCenter.id);
+      expect(result.certificationCenterName).to.equal(certificationCenter.name);
+    });
+
+    it('throws NotFoundError if not found', async function () {
+      await expect(
+        certificationCenterInvitationRepository.getByIdAndCode({ id: 9999, code: 'nope' }),
+      ).to.be.rejectedWith("L'invitation à ce centre de certification n'existe pas");
+    });
+  });
+
+  describe('#get', function () {
+    it('returns the invitation for the given id', async function () {
+      // given
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const invitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await certificationCenterInvitationRepository.get(invitation.id);
+
+      // then
+      expect(result.id).to.equal(invitation.id);
+    });
+
+    it('throws NotFoundError if not found', async function () {
+      await expect(certificationCenterInvitationRepository.get(9999)).to.be.rejectedWith(
+        "L'invitation à ce centre de certification n'existe pas",
+      );
+    });
+  });
+
+  describe('#create', function () {
+    it('creates a new invitation and returns it', async function () {
+      // given
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      await databaseBuilder.commit();
+      const invitation = domainBuilder.buildCertificationCenterInvitation({
+        certificationCenterId: certificationCenter.id,
+        email: 'new@pix.fr',
+        code: 'NEWCODE',
+      });
+      const invitationToCreate = CertificationCenterInvitation.create(invitation);
+
+      // when
+      const result = await certificationCenterInvitationRepository.create(invitationToCreate);
+
+      // then
+      expect(result.email).to.equal('new@pix.fr');
+      expect(result.code).to.equal('NEWCODE');
+      expect(result.certificationCenterId).to.equal(certificationCenter.id);
+    });
+  });
+
+  describe('#markAsCancelled', function () {
+    it('marks the invitation as cancelled', async function () {
+      // given
+      const invitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+        status: CertificationCenterInvitation.StatusType.PENDING,
+      });
+
+      const invitationToCancel = domainBuilder.buildCertificationCenterInvitation({ ...invitation });
+
+      await databaseBuilder.commit();
+
+      // when
+      await certificationCenterInvitationRepository.markAsCancelled({ id: invitationToCancel.id });
+
+      // then
+      const result = await knex('certification-center-invitations').where({ id: invitationToCancel.id }).first();
+      expect(result.status).to.equal(CertificationCenterInvitation.StatusType.CANCELLED);
+    });
+
+    it('throws NotFoundError if not found', async function () {
+      await expect(certificationCenterInvitationRepository.markAsCancelled({ id: 9999 })).to.be.rejectedWith(
+        'Certification center invitation of id 9999 is not found.',
+      );
+    });
+  });
 });
