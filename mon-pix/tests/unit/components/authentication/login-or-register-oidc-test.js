@@ -74,58 +74,6 @@ module('Unit | Component | authentication | login-or-register-oidc', function (h
         });
       });
 
-      module('locale errors', function () {
-        module('when invalid locale', function () {
-          test('it displays the invalid locale error message', async function (assert) {
-            // given
-            const component = createGlimmerComponent('authentication/login-or-register-oidc');
-
-            const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
-            sessionService.authenticate.rejects({
-              errors: [{ status: '400', code: 'INVALID_LOCALE_FORMAT', meta: { locale: 'zzzz' } }],
-            });
-
-            component.args.identityProviderSlug = 'super-idp';
-            component.args.authenticationKey = 'super-key';
-            component.isTermsOfServiceValidated = true;
-
-            // when
-            await component.register();
-
-            // then
-            assert.strictEqual(
-              component.registerErrorMessage,
-              `${t('pages.sign-up.errors.invalid-locale-format', { invalidLocale: 'zzzz' })}`,
-            );
-          });
-        });
-
-        module('when locale is not supported', function () {
-          test('it displays the unsupported locale error message', async function (assert) {
-            // given
-            const component = createGlimmerComponent('authentication/login-or-register-oidc');
-
-            const sessionService = stubSessionService(this.owner, { isAuthenticated: false });
-            sessionService.authenticate.rejects({
-              errors: [{ status: '400', code: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'jp' } }],
-            });
-
-            component.args.identityProviderSlug = 'super-idp';
-            component.args.authenticationKey = 'super-key';
-            component.isTermsOfServiceValidated = true;
-
-            // when
-            await component.register();
-
-            // then
-            assert.strictEqual(
-              component.registerErrorMessage,
-              `${t('pages.sign-up.errors.locale-not-supported', { localeNotSupported: 'jp' })}`,
-            );
-          });
-        });
-      });
-
       test('displays an error message but not with the details', async function (assert) {
         // given
         const component = createGlimmerComponent('authentication/login-or-register-oidc');

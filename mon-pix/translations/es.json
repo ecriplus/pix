@@ -1915,10 +1915,6 @@
         "submit": "Crear cuenta",
         "sign-up-on-pix": "Crear cuenta en Pix"
       },
-      "errors": {
-        "invalid-locale-format": "Tu configuración local «{invalidLocale}» tiene un formato incorrecto.",
-        "locale-not-supported": "Tu configuración local «{localeNotSupported}» no es compatible actualmente."
-      },
       "fields": {
         "email": {
           "help": "(ej. nombre@ejemplo.fr)"
