@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.179.0](https://github.com/1024pix/pix/compare/v5.178.0...v5.179.0) (2025-08-08)
+
+### :rocket: Amélioration
+
+- [#13153](https://github.com/1024pix/pix/pull/13153) ajout du component pix-carousel dans module PPN JV + qcu-discovery dans PPN JV et PPNCP 
+- [#13104](https://github.com/1024pix/pix/pull/13104) Changer l'algo de détection de local avec cookie dans PixAdmin (PIX-18977) 
+- [#13119](https://github.com/1024pix/pix/pull/13119) Changer l'algo de détection de local avec cookie dans PixOrga (PIX-18978) 
+- [#13145](https://github.com/1024pix/pix/pull/13145) Créer deux modules de démo quasiment vide à des fins de tests (PIX-19080) 
+- [#13146](https://github.com/1024pix/pix/pull/13146) Modifs sur le module IA Deepfakes 
+- [#13136](https://github.com/1024pix/pix/pull/13136) Revue design boutons action QAB (PIX-19065) 
+- [#13131](https://github.com/1024pix/pix/pull/13131) Suppression de la vérification de certificat valide et badges lors de la réconciliation (PIX-19045). 
+- [#13088](https://github.com/1024pix/pix/pull/13088) Suppression du bandeau hors CleA avant entrée en certification (PIX-18926). 
+- [#13140](https://github.com/1024pix/pix/pull/13140) Suppression du feature-toggle  shouldDisplayNewAnalysisPage (PIX-17682) 
+
+### :bug: Correction
+
+- [#13098](https://github.com/1024pix/pix/pull/13098) Ignorer la case des emails des destinataires de résultats (PIX-12345) 
+- [#13154](https://github.com/1024pix/pix/pull/13154) Réparer le démarrage de l'API Maddo (PIX-19085).
+
 # [5.178.0](https://github.com/1024pix/pix/compare/v5.177.0...v5.178.0) (2025-08-08)
 
 ### :rocket: Amélioration
