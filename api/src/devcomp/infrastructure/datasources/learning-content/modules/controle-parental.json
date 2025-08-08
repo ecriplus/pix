@@ -52,14 +52,13 @@
           "type": "element",
           "element": {
             "id": "3281eca4-ff14-4f28-bb65-11b2e5f70faf",
-            "type": "qcu",
+            "type": "qcu-discovery",
             "instruction": "<p>Le contrôle parental est un outil numérique. Que permet-il ?</p>",
             "proposals": [
               {
                 "id": "1",
                 "content": "<p>Il permet d’encadrer les pratiques numériques de son enfant.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Bien joué ! En plus du contrôle parental, des temps de discussion entre parents et enfants sont indispensables pour accompagner les pratiques numériques des enfants.</p>"
                 }
               },
@@ -67,7 +66,6 @@
                 "id": "2",
                 "content": "<p>Il permet de surveiller la santé de son enfant.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Et non ! Le contrôle parental ne concerne pas la surveillance de la santé.<br>Il permet d’encadrer les pratiques numériques de son enfant. En plus du contrôle parental, des temps de discussion entre parents et enfants sont indispensables pour accompagner les pratiques numériques des enfants.</p>"
                 }
               },
@@ -75,7 +73,6 @@
                 "id": "3",
                 "content": "<p>Il permet de vérifier que son enfant a fait ses devoirs scolaires.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Et non ! Le contrôle parental ne concerne pas le suivi de la scolarité.<br>Il permet d’encadrer les pratiques numériques de son enfant. En plus du contrôle parental, des temps de discussion entre parents et enfants sont indispensables pour accompagner les pratiques numériques des enfants.</p>"
                 }
               },
@@ -83,7 +80,6 @@
                 "id": "4",
                 "content": "<p>Je ne sais pas.</p>",
                 "feedback": {
-                  "state": "",
                   "diagnosis": "<p>Le contrôle parental permet d’encadrer les pratiques numériques de son enfant. En plus du contrôle parental, des temps de discussion entre parents et enfants sont indispensables pour accompagner les pratiques numériques des enfants.</p>"
                 }
               }
@@ -128,14 +124,13 @@
               "elements": [
                 {
                   "id": "2b0cfa3f-700e-4ab4-b8bd-613aa91c89d1",
-                  "type": "qcu",
+                  "type": "qcu-discovery",
                   "instruction": "<p>Tim, 9 ans, utilise une tablette pour regarder des vidéos. Son parent remarque qu’il est parfois redirigé vers des vidéos inappropriées.&nbsp;😨</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>oui</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>Effectivement, la plupart des outils de contrôle parental permettent de filtrer les contenus selon l'âge.&nbsp;</p>"
                       }
                     },
@@ -143,7 +138,6 @@
                       "id": "2",
                       "content": "<p>non</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>En fait si. La plupart des outils de contrôle parental permettent de filtrer les contenus selon l'âge.</p>"
                       }
                     }
@@ -156,14 +150,13 @@
               "elements": [
                 {
                   "id": "4431dfa1-bab5-43e1-a7d8-dae795b5c2da",
-                  "type": "qcu",
+                  "type": "qcu-discovery",
                   "instruction": "<p>Camille a 14 ans. Elle se couche très tard parce qu’elle joue en ligne jusqu’à minuit en semaine.&nbsp;Ses parents s'inquiètent car elle semble fatiguée la journée.&nbsp;😴</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>oui</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>Tout à fait. Les outils de contrôle parental permettent souvent de limiter les horaires ou la durée d'utilisation d'un jeu ou d'une application.&nbsp;</p>"
                       }
                     },
@@ -171,7 +164,6 @@
                       "id": "2",
                       "content": "<p>non</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>En fait, si.&nbsp;Les outils de contrôle parental permettent souvent de limiter les horaires ou la durée d'utilisation d'un jeu ou d'une application.</p>"
                       }
                     }
@@ -184,14 +176,13 @@
               "elements": [
                 {
                   "id": "b4c2ee50-96dd-417d-b415-181e7108bc94",
-                  "type": "qcu",
+                  "type": "qcu-discovery",
                   "instruction": "<p>Julien s'inquiète de ce que son enfant de 11 ans fait en ligne, mais il ne sait pas par quoi commencer pour en discuter avec lui.&nbsp;😟</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>oui</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>Et non. Un outil de contrôle parental peut donner des informations sur les pratiques numériques d'un enfant. Mais il ne remplace pas la communication entre un parent et son enfant.&nbsp;</p>"
                       }
                     },
@@ -199,7 +190,6 @@
                       "id": "2",
                       "content": "<p>non</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>Effectivement,&nbsp;un outil de contrôle parental peut donner des informations sur les pratiques numériques d'un enfant.&nbsp;Mais il ne remplace pas la communication entre un parent et son enfant.</p>"
                       }
                     }
@@ -212,14 +202,13 @@
               "elements": [
                 {
                   "id": "388f7876-1d66-4598-888d-c5e78a7eb78e",
-                  "type": "qcu",
+                  "type": "qcu-discovery",
                   "instruction": "<p>Marianne veut être alertée si son enfant tente d'installer une nouvelle application sans lui en parler.&nbsp;🔎</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
                   "proposals": [
                     {
                       "id": "1",
                       "content": "<p>oui</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>Effectivement, certains outils de contrôle parental permettent de bloquer ou valider l'installation d'applications à distance.</p>"
                       }
                     },
@@ -227,7 +216,6 @@
                       "id": "2",
                       "content": "<p>non</p>",
                       "feedback": {
-                        "state": "",
                         "diagnosis": "<p>En fait, si. Certains outils de contrôle parental permettent de bloquer ou valider l'installation d'applications à distance.</p>"
                       }
                     }
@@ -320,7 +308,7 @@
           "element": {
             "id": "5432d74b-3bcd-44f6-a031-8e0ba0cdceda",
             "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>\n<p><br></p>\n<p>\n</p><p><details open=\"\">\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil. ⚙️</p>\n</details>\n<details open=\"\">\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant</p>\n</details>\n</p><p></p>"
+            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>\n<p><br></p>\n<p>\n</p><p></p><details open=\"\">\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil. ⚙️</p>\n</details>\n<details open=\"\">\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant</p>\n</details>\n<p></p><p></p>"
           }
         },
         {
