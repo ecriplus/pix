@@ -19,7 +19,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
     };
     normalizeStringFnc = sinon.stub();
     sinon.stub(usecases, 'reconcileCandidate');
-    sinon.stub(usecases, 'verifyCandidateSubscriptions');
+    sinon.stub(usecases, 'verifyCandidateCertificability');
   });
 
   context('when the candidate is already link to a user', function () {
@@ -51,7 +51,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
         normalizeStringFnc,
       });
       expect(usecases.reconcileCandidate).to.not.have.been.called;
-      expect(usecases.verifyCandidateSubscriptions).to.not.have.been.called;
+      expect(usecases.verifyCandidateCertificability).to.not.have.been.called;
     });
   });
 
@@ -68,14 +68,14 @@ describe('Unit | Application | Service | register-candidate-participation', func
         ...candidateData,
       });
       sinon.stub(usecases, 'verifyCandidateIdentity').resolves(unlinkedCandidate);
-      usecases.verifyCandidateSubscriptions.resolves();
+      usecases.verifyCandidateCertificability.resolves();
     });
 
     afterEach(function () {
       clock.restore();
     });
 
-    it('should verify candidate subscriptions', async function () {
+    it('verifies candidate certificability', async function () {
       // when
       unlinkedCandidate.reconcile();
       usecases.reconcileCandidate.resolves(unlinkedCandidate);
@@ -89,9 +89,8 @@ describe('Unit | Application | Service | register-candidate-participation', func
       });
 
       // then
-      expect(usecases.verifyCandidateSubscriptions).to.have.been.calledWithExactly({
+      expect(usecases.verifyCandidateCertificability).to.have.been.calledWithExactly({
         candidate: unlinkedCandidate,
-        sessionId,
       });
     });
 

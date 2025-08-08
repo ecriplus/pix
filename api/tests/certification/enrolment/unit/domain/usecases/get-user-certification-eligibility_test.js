@@ -1,9 +1,6 @@
 import { getUserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/usecases/get-user-certification-eligibility.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import {
-  AssessmentResult,
-  ComplementaryCertificationCourseResult,
-} from '../../../../../../src/shared/domain/models/index.js';
+import { ComplementaryCertificationCourseResult } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Usecases | get-user-certification-eligibility', function () {
@@ -20,7 +17,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
     placementProfileService.getPlacementProfile = sinon.stub();
     certificationBadgesService.findLatestBadgeAcquisitions = sinon.stub();
     complementaryCertificationCourseRepository.findByUserId = sinon.stub();
-    pixCertificationRepository.findByUserId = sinon.stub();
     complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile = sinon.stub();
     dependencies = {
       userId,
@@ -37,7 +33,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
     beforeEach(function () {
       certificationBadgesService.findLatestBadgeAcquisitions.resolves([]);
       complementaryCertificationCourseRepository.findByUserId.resolves([]);
-      pixCertificationRepository.findByUserId.resolves([]);
       complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([]);
     });
 
@@ -149,15 +144,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               id: complementaryCertificationBadgeId,
               requiredPixScore,
               offsetVersion: 1,
-            }),
-          ]);
-
-          pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
-            domainBuilder.certification.enrolment.buildPixCertification({
-              pixScore: requiredPixScore,
-              status: AssessmentResult.status.VALIDATED,
-              isCancelled: false,
-              isRejectedForFraud: false,
             }),
           ]);
         });
@@ -480,15 +466,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 userId,
               }),
             );
-
-            pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
-              domainBuilder.certification.enrolment.buildPixCertification({
-                pixScore: requiredPixScore,
-                status: AssessmentResult.status.VALIDATED,
-                isCancelled: false,
-                isRejectedForFraud: false,
-              }),
-            ]);
           });
 
           context('when user has an acquired certification for this badge', function () {
@@ -598,15 +575,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 userCompetences: [domainBuilder.buildUserCompetence({ estimatedLevel: 1, pixScore: 1 })],
               }),
             );
-
-            pixCertificationRepository.findByUserId.withArgs({ userId }).resolves([
-              domainBuilder.certification.enrolment.buildPixCertification({
-                pixScore: requiredPixScore,
-                status: AssessmentResult.status.VALIDATED,
-                isCancelled: false,
-                isRejectedForFraud: false,
-              }),
-            ]);
           });
 
           context('when user has an acquired certification for this badge', function () {

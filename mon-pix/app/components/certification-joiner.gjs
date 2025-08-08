@@ -33,10 +33,6 @@ function _isLanguageNotSupported(err) {
   return _get(err, 'errors[0].code') === 'LANGUAGE_NOT_SUPPORTED';
 }
 
-function _isCandidateNotEligibleError(err) {
-  return _get(err, 'errors[0].code') === 'CERTIFICATION_CANDIDATE_ELIGIBILITY_ERROR';
-}
-
 export default class CertificationJoiner extends Component {
   <template>
     {{! template-lint-disable require-input-label no-bare-strings }}
@@ -272,10 +268,6 @@ export default class CertificationJoiner extends Component {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.wrong-account');
       } else if (_isSessionNotAccessibleError(error)) {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.session-not-accessible');
-      } else if (_isCandidateNotEligibleError(error)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.candidate-not-eligible', {
-          htmlSafe: true,
-        });
       } else {
         this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.generic.disclaimer');
         this.errorDetailList = [

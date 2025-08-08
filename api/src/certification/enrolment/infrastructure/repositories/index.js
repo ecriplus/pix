@@ -15,7 +15,6 @@ import * as complementaryCertificationCourseRepository from './complementary-cer
 import * as complementaryCertificationRepository from './complementary-certification-repository.js';
 import * as countryRepository from './country-repository.js';
 import * as enrolledCandidateRepository from './enrolled-candidate-repository.js';
-import * as pixCertificationRepository from './pix-certification-repository.js';
 import * as scoCertificationCandidateRepository from './sco-certification-candidate-repository.js';
 import * as sessionForAttendanceSheetRepository from './session-for-attendance-sheet-repository.js';
 import * as sessionRepository from './session-repository.js';
@@ -40,7 +39,6 @@ import * as sessionRepository from './session-repository.js';
  * @typedef {userRepository} UserRepository
  * @typedef {targetProfileHistoryRepository} TargetProfileHistoryRepository
  * @typedef {complementaryCertificationCourseRepository} ComplementaryCertificationCourseRepository
- * @typedef {pixCertificationRepository} PixCertificationRepository
  * @typedef {complementaryCertificationBadgeWithOffsetVersionRepository} ComplementaryCertificationBadgeWithOffsetVersionRepository
  */
 const repositoriesWithoutInjectedDependencies = {
@@ -61,7 +59,6 @@ const repositoriesWithoutInjectedDependencies = {
   userRepository,
   targetProfileHistoryRepository,
   complementaryCertificationCourseRepository,
-  pixCertificationRepository,
   complementaryCertificationBadgeWithOffsetVersionRepository,
 };
 
