@@ -1,6 +1,6 @@
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import * as certificationCenterInvitationRepository from '../../../../../src/team/infrastructure/repositories/certification-center-invitation-repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Team | Infrastructure | Repositories | CertificationCenterInvitationRepository', function () {
   let clock, now;
@@ -146,6 +146,52 @@ describe('Integration | Team | Infrastructure | Repositories | CertificationCent
         .first();
       expect(otherCenterInvitation.status).to.equal(pendingStatus);
       expect(otherCenterInvitation.updatedAt).to.deep.equal(previousUpdate);
+    });
+  });
+
+  describe('#findOnePendingByEmailAndCertificationCenterId', function () {
+    it('returns null if no pending invitation exists for the given email and certification center id', async function () {
+      // given
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const email = 'toto@example.net';
+
+      // when
+      const result = await certificationCenterInvitationRepository.findOnePendingByEmailAndCertificationCenterId({
+        email,
+        certificationCenterId,
+      });
+
+      // then
+      expect(result).to.be.null;
+    });
+
+    it('returns the pending invitation for the given email and certification center id', async function () {
+      // given
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      const email = 'toto@example.net';
+      const certificationCenterInvitation = databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: certificationCenter.id,
+        email,
+        status: CertificationCenterInvitation.StatusType.PENDING,
+      });
+      await databaseBuilder.commit();
+
+      const expectedInvitation = domainBuilder.buildCertificationCenterInvitation({
+        id: certificationCenterInvitation.id,
+        certificationCenterId: certificationCenter.id,
+        certificationCenterName: certificationCenter.name,
+        status: CertificationCenterInvitation.StatusType.PENDING,
+        ...certificationCenterInvitation,
+      });
+
+      // when
+      const result = await certificationCenterInvitationRepository.findOnePendingByEmailAndCertificationCenterId({
+        email,
+        certificationCenterId: certificationCenter.id,
+      });
+
+      // then
+      expect(result).to.deep.equal(expectedInvitation);
     });
   });
 });

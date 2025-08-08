@@ -83,7 +83,6 @@ const get = async function (id) {
  */
 const findOnePendingByEmailAndCertificationCenterId = async function ({ email, certificationCenterId }) {
   const existingPendingInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS)
-    .select('id')
     .where({ email, certificationCenterId, status: CertificationCenterInvitation.StatusType.PENDING })
     .first();
 
