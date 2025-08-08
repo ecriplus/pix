@@ -1,4 +1,3 @@
-import { usecases as libUsecases } from '../../../../lib/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as dataOrganizationPlacesStatisticsSerializer from '../infrastructure/serializers/json/data-organization-places-statistics-serializer.js';
 import * as organizationPlacesCapacitySerializer from '../infrastructure/serializers/jsonapi/organization-places-capacity-serializer.js';
@@ -66,14 +65,9 @@ const getDataOrganizationsPlacesStatistics = async function (
   h,
   dependencies = {
     dataOrganizationPlacesStatisticsSerializer,
-    getOrganizationPlacesStatistics: usecases.getOrganizationPlacesStatistics,
-    findPaginatedFilteredOrganizations: libUsecases.findPaginatedFilteredOrganizations,
   },
 ) {
-  const dataOrganizationPlacesStatistics = await usecases.getDataOrganizationsPlacesStatistics({
-    getOrganizationPlacesStatistics: dependencies.getOrganizationPlacesStatistics,
-    findPaginatedFilteredOrganizations: dependencies.findPaginatedFilteredOrganizations,
-  });
+  const dataOrganizationPlacesStatistics = await usecases.getDataOrganizationsPlacesStatistics();
   return dependencies.dataOrganizationPlacesStatisticsSerializer.serialize(dataOrganizationPlacesStatistics);
 };
 

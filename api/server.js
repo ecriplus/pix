@@ -5,7 +5,6 @@ import { parse } from 'neoqs';
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
-import { routes } from './lib/routes.js';
 import { bannerRoutes } from './src/banner/routes.js';
 import {
   attachTargetProfileRoutes,
@@ -227,7 +226,6 @@ const setupAuthentication = function (server) {
 const setupRoutesAndPlugins = async function (server) {
   const configuration = [].concat(
     plugins,
-    routes,
     identityAccessManagementRoutes,
     organizationalEntitiesRoutes,
     sharedRoutes,

@@ -1,9 +1,5 @@
 /**
  * @typedef {import ('../../../../lib/domain/usecases/index.js').OidcAuthenticationService} OidcAuthenticationService
- * @typedef {import ('../../../../lib/domain/usecases/index.js').AuthenticationSessionService} AuthenticationSessionService
- * @typedef {import ('../../../../lib/domain/usecases/index.js').AuthenticationMethodRepository} AuthenticationMethodRepository
- * @typedef {import ('../../../../lib/domain/usecases/index.js').UserRepository} UserRepository
- * @typedef {import ('../../../../lib/domain/usecases/index.js').UserLoginRepository} UserLoginRepository
  */
 
 import { AuthenticationKeyExpired, DifferentExternalIdentifierError } from '../errors.js';

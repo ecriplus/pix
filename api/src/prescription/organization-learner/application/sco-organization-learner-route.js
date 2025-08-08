@@ -2,7 +2,11 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 import XRegExp from 'xregexp';
 
-import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import {
+  BadRequestError,
+  sendJsonApiError,
+  UnprocessableEntityError,
+} from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { config } from '../../../shared/config.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
@@ -177,6 +181,37 @@ const register = async function (server) {
         notes: [
           "- Génère un identifiant pour l'élève avec un mot de passe temporaire \n" +
             "- La demande de génération d'identifiant doit être effectuée par un membre de l'organisation à laquelle appartient l'élève.",
+        ],
+        tags: ['api', 'sco-organization-learners'],
+      },
+    },
+    {
+      method: 'PUT',
+      path: '/api/sco-organization-learners/possibilities',
+      config: {
+        auth: false,
+        handler: scoOrganizationLearnerController.generateUsername,
+        validate: {
+          options: {
+            allowUnknown: true,
+          },
+          payload: Joi.object({
+            data: {
+              attributes: {
+                'first-name': Joi.string().trim().empty(null).required(),
+                'last-name': Joi.string().trim().empty(null).required(),
+                birthdate: Joi.date().format('YYYY-MM-DD').raw().required(),
+                'organization-id': Joi.number().empty(null).required(),
+              },
+            },
+          }),
+          failAction: (request, h) => {
+            return sendJsonApiError(new UnprocessableEntityError('Un des champs saisis n’est pas valide.'), h);
+          },
+        },
+        notes: [
+          '- Elle permet de savoir si un élève identifié par son nom, prénom et date de naissance est inscrit à ' +
+            "l'organisation détenant la campagne. Cet élève n'est, de plus, pas encore associé à l'organisation.",
         ],
         tags: ['api', 'sco-organization-learners'],
       },

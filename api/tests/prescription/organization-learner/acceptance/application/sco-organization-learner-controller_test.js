@@ -3,7 +3,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+} from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | sco-organization-learners', function () {
   let server;
