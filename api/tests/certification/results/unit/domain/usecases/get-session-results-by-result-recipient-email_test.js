@@ -44,15 +44,20 @@ describe('Certification | Results | Unit | Domain | Use Cases | get-session-resu
       resultRecipientEmail: 'matching@example.net',
       subscriptions: [domainBuilder.buildCoreSubscription()],
     });
+    const certificationCandidate3 = domainBuilder.buildCertificationCandidate({
+      id: 987,
+      resultRecipientEmail: 'MATCHING@example.net',
+      subscriptions: [domainBuilder.buildCoreSubscription()],
+    });
     const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
-      certificationCandidates: [certificationCandidate1, certificationCandidate2],
+      certificationCandidates: [certificationCandidate1, certificationCandidate2, certificationCandidate3],
       date: '2019-06-06',
       time: '12:05:30',
     });
     sharedSessionRepository.getWithCertificationCandidates.withArgs({ id: 123 }).resolves(expectedSession);
     const certificationResult = domainBuilder.buildCertificationResult({ firstName: 'Buffy' });
     certificationResultRepository.findByCertificationCandidateIds
-      .withArgs({ certificationCandidateIds: [789] })
+      .withArgs({ certificationCandidateIds: [789, 987] })
       .resolves([certificationResult]);
 
     // when

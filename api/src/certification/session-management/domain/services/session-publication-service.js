@@ -155,7 +155,7 @@ async function _managerPrescriberEmails({ session, mailService, i18n }) {
 }
 
 function _distinctCandidatesResultRecipientEmails(certificationCandidates) {
-  return uniqBy(certificationCandidates, 'resultRecipientEmail')
+  return uniqBy(certificationCandidates, (candidate) => candidate.resultRecipientEmail?.toLowerCase())
     .map((candidate) => candidate.resultRecipientEmail)
     .filter(Boolean);
 }
