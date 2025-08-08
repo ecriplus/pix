@@ -1918,10 +1918,6 @@
         "submit": "Registreren",
         "sign-up-on-pix": "Inschrijven bij Pix"
       },
-      "errors": {
-        "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
-        "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
-      },
       "fields": {
         "email": {
           "help": "(voorbeeld: naam.voornaam@voorbeeld.org)"

@@ -176,52 +176,6 @@ module('Integration | Component | Authentication | SignupForm | index', function
     });
   });
 
-  module('When a business error occurred', function (hooks) {
-    let screen;
-
-    hooks.beforeEach(async function () {
-      const userModel = { save: sinon.stub() };
-      screen = await render(<template><SignupForm @user={{userModel}} /></template>);
-      await fillByLabel(t(I18N_KEYS.firstNameInput), 'John');
-      await fillByLabel(t(I18N_KEYS.lastNameInput), 'Doe');
-      await fillByLabel(t(I18N_KEYS.emailInput), 'john.doe@email.com');
-      await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
-      await clickByName(t(I18N_KEYS.cguCheckbox));
-    });
-
-    test('it displays an error message for invalid locale', async function (assert) {
-      // given
-      sessionService.authenticateUser.rejects(
-        _buildApiReponseError({ errorCode: 'INVALID_LOCALE_FORMAT', meta: { locale: 'foo' } }),
-      );
-
-      // when
-      await clickByName(t(I18N_KEYS.submitButton));
-
-      // then
-      const errorMessage = t('pages.sign-up.errors.invalid-locale-format', {
-        invalidLocale: 'foo',
-      });
-      assert.dom(screen.getByText(errorMessage)).exists();
-    });
-
-    test('it displays an error message for not supported locale', async function (assert) {
-      // given
-      sessionService.authenticateUser.rejects(
-        _buildApiReponseError({ errorCode: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'foo' } }),
-      );
-
-      // when
-      await clickByName(t(I18N_KEYS.submitButton));
-
-      // then
-      const errorMessage = t('pages.sign-up.errors.locale-not-supported', {
-        localeNotSupported: 'foo',
-      });
-      assert.dom(screen.getByText(errorMessage)).exists();
-    });
-  });
-
   module('When a http error occurred', function (hooks) {
     let screen;
 

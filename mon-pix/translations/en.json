@@ -1929,10 +1929,6 @@
         "sign-up-on-pix": "Sign up for Pix",
         "submit": "Sign up"
       },
-      "errors": {
-        "invalid-locale-format": "Provided locale \"{invalidLocale}\" has an invalid format.",
-        "locale-not-supported": "Provided locale \"{localeNotSupported}\" isn't currently supported."
-      },
       "fields": {
         "email": {
           "help": "(e.g. name@example.org)"
