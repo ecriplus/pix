@@ -54,16 +54,18 @@ const llmCompareMessagesPropsSchema = Joi.object({
     .required(),
 }).required();
 
+const llmMessageSchema = Joi.object({
+  direction: Joi.string().valid('inbound', 'outbound').required(),
+  content: Joi.string().required(),
+});
+
+const llmMessagesPropsSchema = Joi.object({
+  messages: Joi.array().items(llmMessageSchema.required()).required(),
+}).required();
+
 const llmPromptSelectPropsSchema = Joi.object({
   speed: Joi.number().default(20).min(0).optional(),
-  messages: Joi.array()
-    .items(
-      Joi.object({
-        direction: Joi.string().valid('inbound', 'outbound').required(),
-        content: Joi.string().required(),
-      }).required(),
-    )
-    .required(),
+  messages: Joi.array().items(llmMessageSchema).required(),
   prompts: Joi.array()
     .items(
       Joi.object({
@@ -144,6 +146,18 @@ const pixCarouselPropsSchema = Joi.object({
   .meta({ title: 'pix-carousel' })
   .required();
 
+const pixCursorOptions = Joi.object({
+  label: Joi.string().required(),
+  feedback: Joi.object({
+    type: Joi.string().valid('bad', 'neutral', 'close', 'good').required(),
+    text: Joi.string().required(),
+  }).required(),
+});
+
+const pixCursorPropsSchema = Joi.object({
+  options: Joi.array().items(pixCursorOptions.required()).required(),
+});
+
 const customElementSchema = Joi.object({
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
@@ -152,9 +166,11 @@ const customElementSchema = Joi.object({
       'image-quiz',
       'image-quizzes',
       'llm-compare-messages',
+      'llm-messages',
       'llm-prompt-select',
       'message-conversation',
       'pix-carousel',
+      'pix-cursor',
       'qcu-image',
     )
     .required(),
@@ -164,9 +180,11 @@ const customElementSchema = Joi.object({
         { is: 'image-quiz', then: imageQuizPropsSchema },
         { is: 'image-quizzes', then: imageQuizzesPropsSchema },
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
+        { is: 'llm-messages', then: llmMessagesPropsSchema },
         { is: 'llm-prompt-select', then: llmPromptSelectPropsSchema },
         { is: 'message-conversation', then: messageConversationPropsSchema },
         { is: 'pix-carousel', then: pixCarouselPropsSchema },
+        { is: 'pix-cursor', then: pixCursorPropsSchema },
         { is: 'qcu-image', then: imageQuizPropsSchema },
       ],
       otherwise: Joi.object().required(),
