@@ -41,15 +41,15 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
   databaseBuilder.factory.buildTraining({
     id: firstTrainingId,
     type: 'modulix',
-    title: 'Bac à sable',
-    link: '/modules/bac-a-sable',
+    title: 'Demo combinix 1',
+    link: '/modules/demo-combinix-1',
     locale: 'fr-fr',
   });
   databaseBuilder.factory.buildTraining({
     id: secondTrainingId,
     type: 'modulix',
-    title: 'Choisir un jeu vidéo adapté à son enfant',
-    link: '/modules/jeux-video-enfant',
+    title: 'Demo combinix 2',
+    link: '/modules/demo-combinix-2',
     locale: 'fr-fr',
   });
 
@@ -76,7 +76,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '6282925d-4775-4bca-b513-4c3009ec5886',
+            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
             comparison: 'equal',
           },
         },
@@ -86,7 +86,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '875df1ff-27c1-4b41-a0a8-5ff46013f35e',
+            data: 'f32a2238-4f65-4698-b486-15d51935d335',
             comparison: 'equal',
           },
         },
@@ -96,7 +96,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
+            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
             comparison: 'equal',
           },
         },
