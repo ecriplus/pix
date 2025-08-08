@@ -1,3 +1,4 @@
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidateSubscription } from '../read-models/CertificationCandidateSubscription.js';
 
 const getCertificationCandidateSubscription = async function ({
@@ -13,52 +14,73 @@ const getCertificationCandidateSubscription = async function ({
 
   const session = await sessionRepository.get({ id: certificationCandidate.sessionId });
 
-  if (!certificationCandidate.complementaryCertification) {
-    return new CertificationCandidateSubscription({
-      id: certificationCandidateId,
-      sessionId: certificationCandidate.sessionId,
-      eligibleSubscriptions: [],
-      nonEligibleSubscription: null,
-      sessionVersion: session.version,
-    });
+  if (!certificationCandidate.isEnrolledToDoubleCertification()) {
+    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
   }
 
   const center = await centerRepository.getById({
     id: session.certificationCenterId,
   });
 
-  let eligibleSubscriptions = [];
-  let nonEligibleSubscription = null;
+  if (!center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
+    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
+  }
+
   const certifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
     userId: certificationCandidate.userId,
     limitDate: certificationCandidate.reconciledAt,
   });
 
-  if (center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
-    const isSubscriptionEligible = certifiableBadgeAcquisitions.some(
-      ({ complementaryCertificationKey }) =>
-        complementaryCertificationKey === certificationCandidate.complementaryCertification.key,
-    );
+  const [doubleCertificationCertifiableBadgeAcquisition] = certifiableBadgeAcquisitions.filter(
+    (certifiableBadgeAcquisition) =>
+      certifiableBadgeAcquisition.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
+  );
 
-    if (isSubscriptionEligible) {
-      eligibleSubscriptions = certificationCandidate.subscriptions.map((subscription) => {
-        return {
-          label: subscription.type === 'COMPLEMENTARY' ? certificationCandidate.complementaryCertification.label : null,
-          type: subscription.type,
-        };
-      });
-    } else {
-      nonEligibleSubscription = certificationCandidate.complementaryCertification;
-    }
+  if (!doubleCertificationCertifiableBadgeAcquisition) {
+    return _uneligibleCertificationCandidateSubscription(certificationCandidate, session);
   }
 
+  return _eligibleCertificationCandidateSubscriptions(certificationCandidate, session);
+};
+
+function _emptyCertificationCandidateSubscription(candidate, session) {
   return new CertificationCandidateSubscription({
-    id: certificationCandidateId,
-    sessionId: certificationCandidate.sessionId,
-    eligibleSubscriptions,
-    nonEligibleSubscription,
+    id: candidate.id,
+    sessionId: candidate.sessionId,
+    eligibleSubscriptions: [],
+    nonEligibleSubscription: null,
     sessionVersion: session.version,
   });
-};
+}
+
+function _uneligibleCertificationCandidateSubscription(candidate, session) {
+  return new CertificationCandidateSubscription({
+    id: candidate.id,
+    sessionId: candidate.sessionId,
+    eligibleSubscriptions: [],
+    nonEligibleSubscription: {
+      label: candidate.complementaryCertification.label,
+      type: 'COMPLEMENTARY',
+    },
+    sessionVersion: session.version,
+  });
+}
+
+function _eligibleCertificationCandidateSubscriptions(candidate, session) {
+  const eligibleSubscriptions = candidate.subscriptions.map((subscription) => {
+    return {
+      label: subscription.type === 'COMPLEMENTARY' ? candidate.complementaryCertification.label : null,
+      type: subscription.type,
+    };
+  });
+
+  return new CertificationCandidateSubscription({
+    id: candidate.id,
+    sessionId: candidate.sessionId,
+    eligibleSubscriptions,
+    nonEligibleSubscription: null,
+    sessionVersion: session.version,
+  });
+}
 
 export { getCertificationCandidateSubscription };
