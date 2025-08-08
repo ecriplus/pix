@@ -197,7 +197,7 @@ export default class List extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@campaigns.meta}}
-          @locale={{this.locale.currentLocale}}
+          @locale={{this.locale.currentLanguage}}
         />
         <Filters
           @destinationId={{filtersId}}

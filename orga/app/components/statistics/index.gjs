@@ -20,10 +20,6 @@ export default class Statistics extends Component {
 
   @tracked currentDomainFilter = null;
 
-  get currentLocale() {
-    return this.locale.currentLocale;
-  }
-
   get analysisByTubes() {
     return this.args.model.data.sort(
       (a, b) => a.competence_code.localeCompare(b.competence_code) || a.sujet?.localeCompare(b.sujet),
@@ -169,7 +165,7 @@ export default class Statistics extends Component {
         </:columns>
       </PixTable>
 
-      <PixPagination @pagination={{this.pagination}} @locale={{this.currentLocale}} />
+      <PixPagination @pagination={{this.pagination}} @locale={{this.locale.currentLanguage}} />
     {{else}}
       <PixBlock class="empty-state" @variant="orga">
         <div class="empty-state__text">

@@ -37,7 +37,7 @@ export default class AuthenticatedCertificationsController extends Controller {
       const organizationId = this.currentUser.organization.id;
       const url = `/api/organizations/${organizationId}/certification-results?division=${encodeURIComponent(
         this.selectedDivision,
-      )}&lang=${this.locale.currentLocale}`;
+      )}&lang=${this.locale.currentLanguage}`;
 
       let token = '';
 
@@ -67,7 +67,7 @@ export default class AuthenticatedCertificationsController extends Controller {
         );
       }
 
-      const lang = this.locale.currentLocale;
+      const lang = this.locale.currentLanguage;
       const organizationId = this.currentUser.organization.id;
       const url = `/api/organizations/${organizationId}/certification-attestations?division=${this.selectedDivision}&isFrenchDomainExtension=${this.currentDomain.isFranceDomain}&lang=${lang}`;
       let token = '';

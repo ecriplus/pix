@@ -260,7 +260,7 @@ export default class ScoList extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@students.meta}}
-          @locale={{this.locale.currentLocale}}
+          @locale={{this.locale.currentLanguage}}
         />
 
         <Filters

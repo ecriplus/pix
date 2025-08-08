@@ -20,10 +20,6 @@ export default class MembersList extends Component {
     });
   }
 
-  get currentLocale() {
-    return this.locale.currentLocale;
-  }
-
   get displayManagingColumn() {
     return this.currentUser.isAdminInOrganization;
   }
@@ -51,7 +47,7 @@ export default class MembersList extends Component {
     {{/unless}}
 
     {{#if @members}}
-      <PixPagination @pagination={{@members.meta}} @locale={{this.currentLocale}} />
+      <PixPagination @pagination={{@members.meta}} @locale={{this.locale.currentLanguage}} />
     {{/if}}
   </template>
 }

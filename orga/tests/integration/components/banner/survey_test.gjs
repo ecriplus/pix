@@ -3,6 +3,7 @@ import Service from '@ember/service';
 import Survey from 'pix-orga/components/banner/survey';
 import ENV from 'pix-orga/config/environment';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -19,14 +20,10 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         class RouterStub extends Service {
           currentRouteName = 'authenticated.campaigns.list.my-campaigns';
         }
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
-
         this.owner.register('service:router', RouterStub);
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
 
         // when
         const screen = await render(<template><Survey /></template>);
@@ -45,15 +42,10 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         class RouterStub extends Service {
           currentRouteName = 'authenticated.campaigns.list.my-campaigns';
         }
-
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return true;
-          }
-        }
-
         this.owner.register('service:router', RouterStub);
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+
+        const domainService = this.owner.lookup('service:currentDomain');
+        sinon.stub(domainService, 'getExtension').returns('fr');
 
         // when
         const screen = await render(<template><Survey /></template>);
@@ -74,15 +66,7 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         class RouterStub extends Service {
           currentRouteName = 'authenticated.sco-organization-participants.list';
         }
-
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return false;
-          }
-        }
-
         this.owner.register('service:router', RouterStub);
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
         // when
         const screen = await render(<template><Survey /></template>);
@@ -99,15 +83,7 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         class RouterStub extends Service {
           currentRouteName = 'authenticated.campaigns.list.my-campaigns';
         }
-
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return false;
-          }
-        }
-
         this.owner.register('service:router', RouterStub);
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
         // when
         const screen = await render(<template><Survey /></template>);
@@ -124,15 +100,7 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         class RouterStub extends Service {
           currentRouteName = 'authenticated.campaigns.list.my-campaigns';
         }
-
-        class CurrentDomainServiceStub extends Service {
-          get isFranceDomain() {
-            return false;
-          }
-        }
-
         this.owner.register('service:router', RouterStub);
-        this.owner.register('service:currentDomain', CurrentDomainServiceStub);
 
         // when
         const screen = await render(<template><Survey /></template>);

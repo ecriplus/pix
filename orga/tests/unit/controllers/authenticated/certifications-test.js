@@ -182,7 +182,7 @@ module('Unit | Controller | authenticated/certifications', function (hooks) {
         };
 
         controller.locale = {
-          currentLocale: 'fr',
+          currentLanguage: 'fr',
         };
 
         controller.model = {
@@ -245,7 +245,7 @@ module('Unit | Controller | authenticated/certifications', function (hooks) {
           };
 
           controller.locale = {
-            currentLocale: 'en',
+            currentLanguage: 'en',
           };
 
           controller.model = {

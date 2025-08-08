@@ -49,7 +49,7 @@ function statusColor(status) {
     </PixTable>
 
     {{#let (getService "service:locale") as |locale|}}
-      <PixPagination @pagination={{@missionLearners.meta}} @locale={{locale.currentLocale}} />
+      <PixPagination @pagination={{@missionLearners.meta}} @locale={{locale.currentLanguage}} />
     {{/let}}
 
   {{else}}
