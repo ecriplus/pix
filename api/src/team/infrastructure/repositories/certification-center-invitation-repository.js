@@ -83,7 +83,6 @@ const get = async function (id) {
  */
 const findOnePendingByEmailAndCertificationCenterId = async function ({ email, certificationCenterId }) {
   const existingPendingInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS)
-    .select('id')
     .where({ email, certificationCenterId, status: CertificationCenterInvitation.StatusType.PENDING })
     .first();
 
@@ -146,7 +145,6 @@ const markAsCancelled = async function ({ id }) {
   if (!certificationCenterInvitation) {
     throw new NotFoundError(`Certification center invitation of id ${id} is not found.`);
   }
-  return _toDomain(certificationCenterInvitation);
 };
 
 /**

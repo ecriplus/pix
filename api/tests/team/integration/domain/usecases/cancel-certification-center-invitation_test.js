@@ -2,7 +2,7 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { UncancellableCertificationCenterInvitationError } from '../../../../../src/team/domain/errors.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Team | Domain | UseCase | cancel-certification-center-invitation', function () {
   describe('when the invitation exists', function () {
@@ -39,12 +39,15 @@ describe('Integration | Team | Domain | UseCase | cancel-certification-center-in
         await databaseBuilder.commit();
 
         // when
-        const result = await usecases.cancelCertificationCenterInvitation({
+        await usecases.cancelCertificationCenterInvitation({
           certificationCenterInvitationId: certificationCenterInvitation.id,
         });
 
         // then
-        expect(result).to.be.instanceOf(CertificationCenterInvitation);
+        const result = await knex('certification-center-invitations')
+          .where({ id: certificationCenterInvitation.id })
+          .first();
+
         expect(result).to.deep.include({
           id: certificationCenterInvitation.id,
           email: 'ploup.user@example.net',
