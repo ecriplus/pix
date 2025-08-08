@@ -41,12 +41,6 @@ export default {
     defaultValue: true,
     tags: ['frontend', 'team-acces'],
   },
-  shouldDisplayNewAnalysisPage: {
-    description: 'Display the new page for campaign analysis',
-    type: 'boolean',
-    defaultValue: false,
-    tags: ['frontend', 'pix-orga', 'team-prescription'],
-  },
   showExperimentalMissions: {
     type: 'boolean',
     description: 'Consider experimental missions as active',
