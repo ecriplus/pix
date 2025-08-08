@@ -31,8 +31,8 @@ export default class ModulixCustomDraft extends ModuleElement {
         </div>
       {{/if}}
 
-      <fieldset>
-        <legend>
+      <fieldset class="element-custom__container">
+        <legend class="element-custom__legend">
           <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
           <span>{{t "pages.modulix.interactiveElement.label"}}</span>
         </legend>
