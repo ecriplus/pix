@@ -37,8 +37,8 @@ module('Integration | Component | Index::Missions', function (hooks) {
     const screen = await render(<template><IndexMissions /></template>);
 
     // then
-    assert.ok(screen.getByRole('heading', { name: t('pages.index.missions.organization-information.title') }));
-    assert.ok(screen.getByText(t('pages.index.missions.organization-information.label')));
+    assert.ok(screen.getByRole('heading', { name: t('components.index.organization-information.title') }));
+    assert.ok(screen.getByText(t('components.index.organization-information.label')));
     assert.ok(screen.getByText('Ma super organization'));
   });
 });

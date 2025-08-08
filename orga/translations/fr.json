@@ -362,7 +362,8 @@
         "description": {
           "classic": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins.",
           "missions": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins."
-        }
+        },
+        "title": "Bonjour {name},"
       }
     },
     "locale-switcher": {
@@ -964,19 +965,7 @@
       "title": "Résultats de certification"
     },
     "index": {
-      "classic": {
-        "organization-information": {
-          "label": "Nom de votre organisation",
-          "title": "Les informations de votre organisation"
-        }
-      },
-      "missions": {
-        "organization-information": {
-          "label": "Nom de votre organisation",
-          "title": "Les informations de votre organisation"
-        }
-      },
-      "title": "Accueil",
+      "title": "Accueil"
     },
     "join-request-form": {
       "firstname": "Votre prénom",

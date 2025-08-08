@@ -37,8 +37,8 @@ module('Integration | Component | Index::Classic', function (hooks) {
     const screen = await render(<template><IndexClassic /></template>);
 
     // then
-    assert.ok(screen.getByRole('heading', { name: t('pages.index.classic.organization-information.title') }));
-    assert.ok(screen.getByText(t('pages.index.classic.organization-information.label')));
+    assert.ok(screen.getByRole('heading', { name: t('components.index.organization-information.title') }));
+    assert.ok(screen.getByText(t('components.index.organization-information.label')));
     assert.ok(screen.getByText('Ma super organization'));
   });
 });
