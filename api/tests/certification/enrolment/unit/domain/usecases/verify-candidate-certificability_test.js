@@ -1,8 +1,8 @@
-import { verifyCandidateSubscriptions } from '../../../../../../src/certification/enrolment/domain/usecases/verify-candidate-subscriptions.js';
+import { verifyCandidateCertificability } from '../../../../../../src/certification/enrolment/domain/usecases/verify-candidate-certificability.js';
 import { UserNotAuthorizedToCertifyError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate-subscriptions', function () {
+describe('Certification | Enrolment | Unit | Domain | UseCases | verify-candidate-certificability', function () {
   let placementProfileService;
 
   beforeEach(function () {
@@ -23,7 +23,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
         .resolves({ isCertifiable: sinon.stub().returns(false) });
 
       // when
-      const error = await catchErr(verifyCandidateSubscriptions)({
+      const error = await catchErr(verifyCandidateCertificability)({
         candidate,
         placementProfileService,
       });
@@ -50,7 +50,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate
       // when
       // then
       return expect(
-        verifyCandidateSubscriptions({
+        verifyCandidateCertificability({
           candidate,
           placementProfileService,
         }),
