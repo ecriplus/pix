@@ -1992,6 +1992,228 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         expect(llmPostPromptScope.isDone()).to.be.true;
       });
     });
+
+    context('debug', function () {
+      context('when chat is a preview chat', function () {
+        it('should return a stream which will contain, at the end, information regarding token consumption', async function () {
+          // given
+          const chat = new Chat({
+            id: 'chatId',
+            configurationId,
+            configuration,
+            hasAttachmentContextBeenAdded: false,
+            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+          });
+          await chatTemporaryStorage.save({
+            key: chat.id,
+            value: chat.toDTO(),
+            expirationDelaySeconds: ms('24h'),
+          });
+          const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+            .post('/chat', {
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
+              history: [
+                { content: 'coucou user1', role: 'user' },
+                { content: 'coucou LLM1', role: 'assistant' },
+              ],
+              prompt: 'un message',
+            })
+            .reply(
+              201,
+              Readable.from([
+                '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                '78:{"jecrois":{"que":"jaifini"},"usage":{"inputTokens":3000,"outputTokens":5000}}',
+              ]),
+            );
+
+          // when
+          const stream = await promptChat({
+            chatId: 'chatId',
+            userId: 123,
+            message: 'un message',
+            attachmentName: null,
+            ...dependencies,
+          });
+
+          // then
+          const parts = [];
+          const decoder = new TextDecoder();
+          for await (const chunk of stream) {
+            parts.push(decoder.decode(chunk));
+          }
+          const llmResponse = parts.join('');
+          expect(llmResponse).to.deep.equal(
+            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: input-tokens-3000\ndata: \n\nevent: output-tokens-5000\ndata: \n\n",
+          );
+          expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+            id: 'chatId',
+            configurationId: 'uneConfigQuiExist',
+            configuration: {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
+            },
+            hasAttachmentContextBeenAdded: false,
+            messages: [
+              {
+                content: 'coucou user1',
+                isFromUser: true,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
+              },
+              {
+                content: 'coucou LLM1',
+                isFromUser: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
+              },
+              {
+                content: 'un message',
+                isFromUser: true,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
+                wasModerated: false,
+              },
+              {
+                content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                isFromUser: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
+              },
+            ],
+          });
+          expect(llmPostPromptScope.isDone()).to.be.true;
+        });
+      });
+
+      context('when chat is not a preview chat', function () {
+        it('should return a stream which will not contain, at the end, any information regarding token consumption', async function () {
+          // given
+          const chat = new Chat({
+            id: 'chatId',
+            userId: 123,
+            configurationId,
+            configuration,
+            hasAttachmentContextBeenAdded: false,
+            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+          });
+          await chatTemporaryStorage.save({
+            key: chat.id,
+            value: chat.toDTO(),
+            expirationDelaySeconds: ms('24h'),
+          });
+          const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+            .post('/chat', {
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
+              history: [
+                { content: 'coucou user1', role: 'user' },
+                { content: 'coucou LLM1', role: 'assistant' },
+              ],
+              prompt: 'un message',
+            })
+            .reply(
+              201,
+              Readable.from([
+                '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                '78:{"jecrois":{"que":"jaifini"},"usage":{"inputTokens":3000,"outputTokens":5000}}',
+              ]),
+            );
+
+          // when
+          const stream = await promptChat({
+            chatId: 'chatId',
+            userId: 123,
+            message: 'un message',
+            attachmentName: null,
+            ...dependencies,
+          });
+
+          // then
+          const parts = [];
+          const decoder = new TextDecoder();
+          for await (const chunk of stream) {
+            parts.push(decoder.decode(chunk));
+          }
+          const llmResponse = parts.join('');
+          expect(llmResponse).to.deep.equal(
+            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
+          );
+          expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+            id: 'chatId',
+            userId: 123,
+            configurationId: 'uneConfigQuiExist',
+            configuration: {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
+            },
+            hasAttachmentContextBeenAdded: false,
+            messages: [
+              {
+                content: 'coucou user1',
+                isFromUser: true,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
+              },
+              {
+                content: 'coucou LLM1',
+                isFromUser: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
+              },
+              {
+                content: 'un message',
+                isFromUser: true,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: true,
+                wasModerated: false,
+              },
+              {
+                content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+                isFromUser: false,
+                shouldBeRenderedInPreview: true,
+                shouldBeForwardedToLLM: true,
+                shouldBeCountedAsAPrompt: false,
+              },
+            ],
+          });
+          expect(llmPostPromptScope.isDone()).to.be.true;
+        });
+      });
+    });
   });
 });
 
