@@ -2052,7 +2052,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           }
           const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
-            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: input-tokens-3000\ndata: \n\nevent: output-tokens-5000\ndata: \n\n",
+            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: debug-input-tokens-3000\ndata: \n\nevent: debug-output-tokens-5000\ndata: \n\n",
           );
           expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
             id: 'chatId',

@@ -38,7 +38,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | SendDebugDataTr
 
         // then
         expect(result).to.equal(
-          'data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\nevent: victory-conditions-success\ndata: \n\ndata: message possible dans le mm chunk que isValid Event\n\ndata: done\n\nevent: input-tokens-3000\ndata: \n\nevent: output-tokens-5000\ndata: \n\n',
+          'data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\nevent: victory-conditions-success\ndata: \n\ndata: message possible dans le mm chunk que isValid Event\n\ndata: done\n\nevent: debug-input-tokens-3000\ndata: \n\nevent: debug-output-tokens-5000\ndata: \n\n',
         );
       });
     });
