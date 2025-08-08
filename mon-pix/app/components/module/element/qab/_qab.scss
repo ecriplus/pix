@@ -22,6 +22,11 @@
   }
 
   &__feedback {
+    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+    color: var(--pix-neutral-800);
+    background: var(--pix-orga-50);
+    border-radius: 16px;
+
     @media (not (prefers-reduced-motion: reduce)) {
       animation: 0.5s fade-in ease-in-out;
 
@@ -39,11 +44,6 @@
         }
       }
     }
-
-    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
-    color: var(--pix-neutral-800);
-    background: var(--pix-orga-50);
-    border-radius: 16px;
   }
 
   &__retry-button {
@@ -85,4 +85,3 @@
     }
   }
 }
-
