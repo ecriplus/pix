@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.178.0](https://github.com/1024pix/pix/compare/v5.177.0...v5.178.0) (2025-08-08)
+
+### :rocket: Amélioration
+
+- [#13127](https://github.com/1024pix/pix/pull/13127) Ajouter la possibilité de passer une url de redirection en fin de modulix (PIX-19046) 
+- [#13141](https://github.com/1024pix/pix/pull/13141) Ajouter les dates de création et mise à jour des lignes dans la table "combined_course_participations" (PIX-19073) 
+- [#13125](https://github.com/1024pix/pix/pull/13125) Ajouter un bouton de réinitialisation de custom element (PIX-18931) 
+- [#13130](https://github.com/1024pix/pix/pull/13130) Ajouter un feature toggle pour pouvoir filtrer la recommandation de contenu formatif par organisations (PIX-19057) 
+- [#13129](https://github.com/1024pix/pix/pull/13129) Modif module Les IA ça consomme 
+- [#13120](https://github.com/1024pix/pix/pull/13120) Permettre l'utilisation de `pix-cursor` et `llm-messages` dans les modules (PIX-18962) 
+
+### :bug: Correction
+
+- [#13128](https://github.com/1024pix/pix/pull/13128) Afficher la page d'analyse correctement même lorsqu'il n'y a pas de participation (PIX-19047). 
+- [#13144](https://github.com/1024pix/pix/pull/13144) Invitation Centre de Certif: si un utilisateur a une invitation en attente, le code n'est pas envoyé dans l'URL (PIX-18961) 
+- [#13132](https://github.com/1024pix/pix/pull/13132) Ne pas afficher la page des CGU pour les utilisateurs non connectés (PIX-19062) 
+
+### :building_construction: Tech
+
+- [#13135](https://github.com/1024pix/pix/pull/13135) Migrer la route possibilities vers son Bounded Context (PIX-16334) 
+- [#13134](https://github.com/1024pix/pix/pull/13134) Preparer la future structure pour stocker les configuration de l'algo flash de certif (PIX-19042). 
+- [#13143](https://github.com/1024pix/pix/pull/13143) Remplacer les feature toggles liés aux locales 
+- [#13108](https://github.com/1024pix/pix/pull/13108) Supprimer isCancelled sur la publication d'une session et l'obtention des résultats via CSV (PIX-19003). 
+- [#13101](https://github.com/1024pix/pix/pull/13101) Supprimer isCancelled sur les attestations et certificats Pix (PIX-18997). 
+- [#13142](https://github.com/1024pix/pix/pull/13142) Supprimer les anciennes erreurs de locales sur PixApp 
+
+### :coffee: Autre
+
+- [#13053](https://github.com/1024pix/pix/pull/13053) Compléter et rendre plus pratique la validation des locales (PIX-18904)
+
 # [5.177.0](https://github.com/1024pix/pix/compare/v5.176.0...v5.177.0) (2025-08-07)
 
 ### :rocket: Amélioration
