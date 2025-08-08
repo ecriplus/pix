@@ -375,12 +375,13 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
   }
   if (complementaryCertifications.length > 0) {
     // CLEA
-    secondCandidate.subscriptions.push(
+    secondCandidate.subscriptions = [
       domainBuilder.certification.enrolment.buildComplementarySubscription({
         certificationCandidateId: null,
         complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
       }),
-    );
+      domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+    ];
 
     firstCandidate.billingMode = BILLING_MODES.FREE;
     secondCandidate.billingMode = BILLING_MODES.FREE;
