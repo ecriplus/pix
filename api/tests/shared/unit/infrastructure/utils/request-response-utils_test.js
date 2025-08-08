@@ -7,6 +7,7 @@ import {
   escapeFileName,
   extractLocaleFromRequest,
   extractTimestampFromRequest,
+  extractTLDFromRequest,
   extractUserIdFromRequest,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
@@ -34,6 +35,42 @@ describe('Unit | Utils | Request Utils', function () {
 
       // then
       expect(result).to.equal(null);
+    });
+  });
+
+  describe('#extractTLDFromRequest', function () {
+    it('should return fr when forwared host includes .fr', function () {
+      // given
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ audience: 'https://app.pix.fr' }),
+      };
+      // when
+      const result = extractTLDFromRequest(request);
+
+      // then
+      expect(result).to.equal('fr');
+    });
+    it('should return org when forwared host includes .org', function () {
+      // given
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ audience: 'https://app.pix.org' }),
+      };
+      // when
+      const result = extractTLDFromRequest(request);
+
+      // then
+      expect(result).to.equal('org');
+    });
+    it('should return null when forwared host includes something else', function () {
+      // given
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ audience: 'http://localhost:4200' }),
+      };
+      // when
+      const result = extractTLDFromRequest(request);
+
+      // then
+      expect(result).to.be.null;
     });
   });
 
