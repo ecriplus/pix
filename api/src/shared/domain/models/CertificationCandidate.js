@@ -104,6 +104,10 @@ class CertificationCandidate {
   isEnrolledToComplementaryOnly() {
     return this.subscriptions.length === 1 && this.subscriptions[0].isComplementary();
   }
+
+  isEnrolledToDoubleCertification() {
+    return this.subscriptions.length === 2;
+  }
 }
 
 CertificationCandidate.BILLING_MODES = BILLING_MODES;

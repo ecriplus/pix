@@ -34,7 +34,7 @@
 .congratulations-banner__complementary-certifications {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: var(--pix-spacing-2x);
   padding: 16px 32px;
   background-color: var(--pix-success-50);
   border-radius: 16px;
