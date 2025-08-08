@@ -67,13 +67,13 @@ export default {
   },
   useLocale: {
     type: 'boolean',
-    description: 'Enable new locale management in apps.',
+    description: 'Enable usage of cookie locale in Frontend apps keeping retro-compatibility with the backend.',
     defaultValue: false,
     tags: ['frontend', 'team-acces'],
   },
-  useOnlyHapiI18n: {
+  useCookieLocaleInApi: {
     type: 'boolean',
-    description: 'Enable exclusive usage of hapi i18n plugin for locale management in the API.',
+    description: 'Enable usage of cookie locale in the API to get the user or challenge locales.',
     defaultValue: false,
     tags: ['team-acces'],
   },
