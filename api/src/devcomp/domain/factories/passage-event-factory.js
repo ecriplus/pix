@@ -17,6 +17,7 @@ import {
 import { GrainContinuedEvent, GrainSkippedEvent } from '../models/passage-events/grain-events.js';
 import { PassageStartedEvent, PassageTerminatedEvent } from '../models/passage-events/passage-events.js';
 import { QABCardAnsweredEvent, QABCardRetriedEvent } from '../models/passage-events/qab-events.js';
+import { StepperNextStepEvent } from '../models/passage-events/stepper-events.js';
 
 class PassageEventFactory {
   static build(eventData) {
@@ -37,6 +38,8 @@ class PassageEventFactory {
         return new GrainContinuedEvent(eventData);
       case 'GRAIN_SKIPPED':
         return new GrainSkippedEvent(eventData);
+      case 'STEPPER_NEXT_STEP':
+        return new StepperNextStepEvent(eventData);
       case 'PASSAGE_STARTED':
         return new PassageStartedEvent(eventData);
       case 'PASSAGE_TERMINATED':

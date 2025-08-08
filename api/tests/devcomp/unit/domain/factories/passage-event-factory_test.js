@@ -28,6 +28,7 @@ import {
   QABCardAnsweredEvent,
   QABCardRetriedEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/qab-events.js';
+import { StepperNextStepEvent } from '../../../../../src/devcomp/domain/models/passage-events/stepper-events.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErrSync } from '../../../../test-helper.js';
 
@@ -202,6 +203,25 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(GrainSkippedEvent);
+      });
+    });
+
+    describe('when given a STEPPER_NEXT_STEP event', function () {
+      it('should return a StepperNextStepEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          grainId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
+          stepNumber: 1,
+          type: 'STEPPER_NEXT_STEP',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(StepperNextStepEvent);
       });
     });
 
