@@ -69,6 +69,10 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
             data: campaign.id,
             comparison: 'equal',
           },
+          status: {
+            data: 'SHARED',
+            comparison: 'equal',
+          },
         },
       },
       {
@@ -77,6 +81,10 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         data: {
           moduleId: {
             data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
             comparison: 'equal',
           },
         },
@@ -89,6 +97,10 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
             data: 'f32a2238-4f65-4698-b486-15d51935d335',
             comparison: 'equal',
           },
+          isTerminated: {
+            data: true,
+            comparison: 'equal',
+          },
         },
       },
       {
@@ -97,6 +109,10 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         data: {
           moduleId: {
             data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
             comparison: 'equal',
           },
         },
