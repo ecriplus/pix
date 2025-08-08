@@ -9,8 +9,8 @@ describe('Unit | Domain | Models | Certification Candidate', function () {
   let rawData, expectedData, coreSubscription, complementarySubscription;
 
   beforeEach(function () {
-    coreSubscription = domainBuilder.buildCoreSubscription();
-    complementarySubscription = domainBuilder.buildComplementarySubscription();
+    coreSubscription = domainBuilder.certification.enrolment.buildCoreSubscription();
+    complementarySubscription = domainBuilder.certification.enrolment.buildComplementarySubscription();
     const date = new Date();
 
     rawData = {

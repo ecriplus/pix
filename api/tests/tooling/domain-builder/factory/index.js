@@ -421,8 +421,6 @@ export {
   buildComplementaryCertificationForTargetProfileAttachment,
   buildComplementaryCertificationHabilitation,
   buildComplementaryCertificationTargetProfileHistory,
-  buildComplementarySubscription,
-  buildCoreSubscription,
   buildCountry,
   buildCourse,
   buildCpfCertificationResult,

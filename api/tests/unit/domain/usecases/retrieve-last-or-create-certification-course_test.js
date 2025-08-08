@@ -143,7 +143,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               userId: 2,
               sessionId: 1,
               authorizedToStart: false,
-              subscriptions: [domainBuilder.buildCoreSubscription()],
+              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             });
             sharedCertificationCandidateRepository.getBySessionIdAndUserId
               .withArgs({ sessionId: 1, userId: 2 })
@@ -176,7 +176,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               userId: 2,
               sessionId: 1,
               authorizedToStart: false,
-              subscriptions: [domainBuilder.buildCoreSubscription()],
+              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             });
             sharedCertificationCandidateRepository.getBySessionIdAndUserId
               .withArgs({ sessionId: 1, userId: 2 })
@@ -222,7 +222,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               userId: foundCertificationCandidateId,
               sessionId: foundSession.id,
               authorizedToStart: true,
-              subscriptions: [domainBuilder.buildCoreSubscription()],
+              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             });
 
             sharedCertificationCandidateRepository.getBySessionIdAndUserId
@@ -256,7 +256,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               userId: 2,
               sessionId: 1,
               authorizedToStart: true,
-              subscriptions: [domainBuilder.buildCoreSubscription()],
+              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             });
             sharedCertificationCandidateRepository.getBySessionIdAndUserId
               .withArgs({ sessionId: 1, userId: 2 })
@@ -314,7 +314,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 userId: user.id,
                 sessionId: foundSession.id,
                 authorizedToStart: true,
-                subscriptions: [domainBuilder.buildCoreSubscription()],
+                subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                 reconciledAt,
               });
 
@@ -377,7 +377,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 userId: user.id,
                 sessionId: foundSession.id,
                 authorizedToStart: true,
-                subscriptions: [domainBuilder.buildCoreSubscription()],
+                subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                 reconciledAt,
               });
               sharedCertificationCandidateRepository.getBySessionIdAndUserId
@@ -451,7 +451,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                 sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
 
-                const candidateComplementarySubscription = domainBuilder.buildComplementarySubscription();
+                const candidateComplementarySubscription =
+                  domainBuilder.certification.enrolment.buildComplementarySubscription();
                 const complementaryCertification = domainBuilder.buildComplementaryCertification({
                   id: candidateComplementarySubscription.complementaryCertificationId,
                   key: 'PIX_DROIT',
@@ -584,7 +585,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   userId,
                   sessionId: 1,
                   authorizedToStart: true,
-                  subscriptions: [domainBuilder.buildCoreSubscription()],
+                  subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                 });
                 sharedCertificationCandidateRepository.getBySessionIdAndUserId
                   .withArgs({ sessionId: 1, userId })
@@ -633,7 +634,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   userId,
                   sessionId: 1,
                   authorizedToStart: true,
-                  subscriptions: [domainBuilder.buildCoreSubscription()],
+                  subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                   reconciledAt,
                   accessibilityAdjustmentNeeded: true,
                 });
@@ -745,7 +746,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       userId: user.id,
                       sessionId: foundSession.id,
                       authorizedToStart: true,
-                      subscriptions: [domainBuilder.buildCoreSubscription()],
+                      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                       complementaryCertification,
                       reconciledAt,
                     });
@@ -858,7 +859,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       userId: user.id,
                       sessionId: 1,
                       authorizedToStart: true,
-                      subscriptions: [domainBuilder.buildCoreSubscription()],
+                      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                       complementaryCertification,
                       reconciledAt,
                     });
@@ -962,7 +963,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         userId: 2,
                         sessionId: 1,
                         authorizedToStart: true,
-                        subscriptions: [domainBuilder.buildCoreSubscription()],
+                        subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                         complementaryCertification,
                         reconciledAt,
                       });
@@ -1053,7 +1054,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         userId: 2,
                         sessionId: 1,
                         authorizedToStart: true,
-                        subscriptions: [domainBuilder.buildCoreSubscription()],
+                        subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                         complementaryCertification,
                       });
 
@@ -1161,7 +1162,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       userId: 2,
                       authorizedToStart: true,
                       sessionId: 1,
-                      subscriptions: [domainBuilder.buildCoreSubscription()],
+                      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                       complementaryCertification: null,
                       reconciledAt,
                     });
@@ -1250,7 +1251,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     userId: 2,
                     sessionId: 1,
                     authorizedToStart: true,
-                    subscriptions: [domainBuilder.buildCoreSubscription()],
+                    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
                     complementaryCertification,
                     reconciledAt,
                   });

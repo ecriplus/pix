@@ -10,7 +10,7 @@ export const COMPLEMENTARY_KEYS = Object.freeze({
 });
 
 export default class SubscriptionModel extends Model {
-  @attr('number') complementaryCertificationId;
+  @attr('string') complementaryCertificationKey;
   @attr('string') type;
 
   get isCore() {
@@ -19,7 +19,7 @@ export default class SubscriptionModel extends Model {
 
   isClea(centerHabilitations) {
     const matchingHabilitation = centerHabilitations.find(
-      (habilitation) => habilitation.id === this.complementaryCertificationId,
+      (habilitation) => habilitation.key === this.complementaryCertificationKey,
     );
     return matchingHabilitation?.key === COMPLEMENTARY_KEYS.CLEA;
   }

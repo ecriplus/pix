@@ -116,11 +116,11 @@ module('Unit | Model | certification-candidate', function (hooks) {
       ];
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
       const cleaSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 123,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
       const candidate = store.createRecord('certification-candidate', {
         subscriptions: [coreSubscription, cleaSubscription],
@@ -137,7 +137,6 @@ module('Unit | Model | certification-candidate', function (hooks) {
       // given
       const store = this.owner.lookup('service:store');
       const cleaId = 123;
-      const notCleaId = 124;
       const habilitations = [
         {
           id: cleaId,
@@ -147,11 +146,11 @@ module('Unit | Model | certification-candidate', function (hooks) {
       ];
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
       const otherSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: notCleaId,
+        complementaryCertificationKey: 'notClea',
       });
       const candidate = store.createRecord('certification-candidate', {
         subscriptions: [coreSubscription, otherSubscription],
@@ -176,7 +175,7 @@ module('Unit | Model | certification-candidate', function (hooks) {
       ];
       const cleaSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 123,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
       const candidate = store.createRecord('certification-candidate', {
         subscriptions: [cleaSubscription],

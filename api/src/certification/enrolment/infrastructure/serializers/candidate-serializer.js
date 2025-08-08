@@ -11,11 +11,11 @@ export async function deserialize(json) {
   const { attributes } = json.data;
 
   const subscriptions = attributes['subscriptions'].map(
-    ({ type, complementaryCertificationId }) =>
+    ({ type, complementaryCertificationKey }) =>
       new Subscription({
         certificationCandidateId: null,
         type,
-        complementaryCertificationId,
+        complementaryCertificationKey,
       }),
   );
 

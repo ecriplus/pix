@@ -17,7 +17,7 @@ module(
       const store = this.owner.lookup('service:store');
       const pixEduSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 1,
+        complementaryCertificationKey: 'EDU',
       });
       const candidate = store.createRecord('certification-candidate', {
         firstName: 'Jean-Paul',
@@ -36,7 +36,7 @@ module(
       });
 
       const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
-        habilitations: [{ id: 1, label: 'Pix+Edu' }],
+        habilitations: [{ id: 1, label: 'Pix+Edu', key: 'EDU' }],
       });
 
       const closeModalStub = sinon.stub();
@@ -75,11 +75,11 @@ module(
       const store = this.owner.lookup('service:store');
       const cleaSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        complementaryCertificationId: 1,
+        complementaryCertificationKey: COMPLEMENTARY_KEYS.CLEA,
       });
       const coreSubscription = store.createRecord('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
       const candidate = store.createRecord('certification-candidate', {
         firstName: 'Jean-Paul',
@@ -125,7 +125,7 @@ module(
         const store = this.owner.lookup('service:store');
         const coreSubscription = store.createRecord('subscription', {
           type: SUBSCRIPTION_TYPES.CORE,
-          complementaryCertificationId: null,
+          complementaryCertificationKey: null,
         });
         const candidate = store.createRecord('certification-candidate', {
           firstName: undefined,
@@ -160,7 +160,7 @@ module(
         const store = this.owner.lookup('service:store');
         const coreSubscription = store.createRecord('subscription', {
           type: SUBSCRIPTION_TYPES.CORE,
-          complementaryCertificationId: null,
+          complementaryCertificationKey: null,
         });
         const candidate = store.createRecord('certification-candidate', {
           firstName: 'Jean-Paul',
@@ -218,7 +218,7 @@ module(
         const store = this.owner.lookup('service:store');
         const coreSubscription = store.createRecord('subscription', {
           type: SUBSCRIPTION_TYPES.CORE,
-          complementaryCertificationId: null,
+          complementaryCertificationKey: null,
         });
         const candidate = store.createRecord('certification-candidate', {
           firstName: 'Jean-Paul',

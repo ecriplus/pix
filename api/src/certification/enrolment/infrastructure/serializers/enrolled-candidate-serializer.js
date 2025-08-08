@@ -14,7 +14,7 @@ const serialize = function (enrolledCandidates) {
     transform: function (enrolledCandidate) {
       const candidateSubscription = enrolledCandidate.findComplementarySubscriptionInfo();
       const complementaryCertification = candidateSubscription
-        ? { id: candidateSubscription.complementaryCertificationId }
+        ? { key: candidateSubscription.complementaryCertificationKey }
         : null;
 
       return {
@@ -48,7 +48,7 @@ const serialize = function (enrolledCandidates) {
     subscriptions: {
       include: true,
       ref: 'id',
-      attributes: ['complementaryCertificationId', 'type'],
+      attributes: ['complementaryCertificationKey', 'type'],
     },
   }).serialize(enrolledCandidates);
 };

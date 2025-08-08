@@ -28,7 +28,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
       id: certificationCandidateId,
       userId,
       sessionId,
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
       reconciledAt: new Date('2024-10-09'),
     };
 

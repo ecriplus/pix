@@ -142,8 +142,7 @@ class CandidateData {
 
     const complementaryCertification =
       certificationCenterHabilitations.find(
-        ({ complementaryCertificationId }) =>
-          complementaryCertificationId === candidateComplementarySubscription.complementaryCertificationId,
+        ({ key }) => key === candidateComplementarySubscription.complementaryCertificationKey,
       ) || null;
 
     return new CandidateData({

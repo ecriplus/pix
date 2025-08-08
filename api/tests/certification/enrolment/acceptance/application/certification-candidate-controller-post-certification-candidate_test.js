@@ -54,7 +54,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
           birthPostalCode: null,
           birthCity: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription()],
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
         });
         userId = databaseBuilder.factory.buildUser().id;
 
@@ -103,11 +103,11 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId: cleaCertificationId,
+                  complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
-                  complementaryCertificationId: null,
+                  complementaryCertificationKey: null,
                 },
               ],
             },
@@ -218,11 +218,11 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
-                  complementaryCertificationId: null,
+                  complementaryCertificationKey: null,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId: cleaCertificationId,
+                  complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
                 },
               ],
             },

@@ -88,11 +88,11 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
               subscriptions: [
                 {
                   type: SUBSCRIPTION_TYPES.CORE,
-                  complementaryCertificationId: null,
+                  complementaryCertificationKey: null,
                 },
                 {
                   type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-                  complementaryCertificationId: cleaComplementaryCertification.id,
+                  complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
                 },
               ],
             },
@@ -166,7 +166,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.payload).to.equal(
-        '{"data":[{"type":"certification-candidates","id":"1001","attributes":{"first-name":"first-name","last-name":"last-name","birthdate":"2000-01-04","birth-province-code":null,"birth-city":"PARIS 1","birth-country":"France","email":"somemail@example.net","result-recipient-email":"somerecipientmail@example.net","external-id":"externalId","extra-time-percentage":0.3,"is-linked":true,"organization-learner-id":null,"sex":"M","birth-insee-code":"75101","birth-postal-code":null,"complementary-certification":{"id":10000006},"billing-mode":"PREPAID","prepayment-code":null,"has-seen-certification-instructions":false,"accessibility-adjustment-needed":false},"relationships":{"subscriptions":{"data":[{"type":"subscriptions","id":"1001-CORE"},{"type":"subscriptions","id":"1001-10000006"}]}}}],"included":[{"type":"subscriptions","id":"1001-CORE","attributes":{"complementary-certification-id":null,"type":"CORE"}},{"type":"subscriptions","id":"1001-10000006","attributes":{"complementary-certification-id":10000006,"type":"COMPLEMENTARY"}}]}',
+        '{"data":[{"type":"certification-candidates","id":"1001","attributes":{"first-name":"first-name","last-name":"last-name","birthdate":"2000-01-04","birth-province-code":null,"birth-city":"PARIS 1","birth-country":"France","email":"somemail@example.net","result-recipient-email":"somerecipientmail@example.net","external-id":"externalId","extra-time-percentage":0.3,"is-linked":true,"organization-learner-id":null,"sex":"M","birth-insee-code":"75101","birth-postal-code":null,"complementary-certification":{"key":"CLEA"},"billing-mode":"PREPAID","prepayment-code":null,"has-seen-certification-instructions":false,"accessibility-adjustment-needed":false},"relationships":{"subscriptions":{"data":[{"type":"subscriptions","id":"1001-CORE"},{"type":"subscriptions","id":"1001-CLEA"}]}}}],"included":[{"type":"subscriptions","id":"1001-CORE","attributes":{"complementary-certification-key":null,"type":"CORE"}},{"type":"subscriptions","id":"1001-CLEA","attributes":{"complementary-certification-key":"CLEA","type":"COMPLEMENTARY"}}]}',
       );
     });
   });
@@ -225,7 +225,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.payload).to.equal(
-        '{"data":[{"type":"certification-candidates","id":"1001","attributes":{"first-name":"first-name","last-name":"last-name","birthdate":"2000-01-04"},"relationships":{"subscriptions":{"data":[{"type":"subscriptions","id":"1001-CORE"},{"type":"subscriptions","id":"1001-10000006"}]}}}],"included":[{"type":"subscriptions","id":"1001-CORE","attributes":{"complementary-certification-id":null,"type":"CORE"}},{"type":"subscriptions","id":"1001-10000006","attributes":{"complementary-certification-id":10000006,"type":"COMPLEMENTARY"}}]}',
+        '{"data":[{"type":"certification-candidates","id":"1001","attributes":{"first-name":"first-name","last-name":"last-name","birthdate":"2000-01-04"},"relationships":{"subscriptions":{"data":[{"type":"subscriptions","id":"1001-CORE"},{"type":"subscriptions","id":"1001-CLEA"}]}}}],"included":[{"type":"subscriptions","id":"1001-CORE","attributes":{"complementary-certification-key":null,"type":"CORE"}},{"type":"subscriptions","id":"1001-CLEA","attributes":{"complementary-certification-key":"CLEA","type":"COMPLEMENTARY"}}]}',
       );
     });
   });

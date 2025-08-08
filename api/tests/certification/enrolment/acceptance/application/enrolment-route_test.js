@@ -119,7 +119,6 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
       it('should respond with a 201', async function () {
         // when
         const response = await server.inject(options);
-
         // then
         expect(response.statusCode).to.equal(201);
         sinon.assert.match(response.result, {
@@ -167,7 +166,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
               id: sinon.match.string,
               attributes: {
                 type: 'CORE',
-                'complementary-certification-id': null,
+                'complementary-certification-key': null,
               },
             },
           ],

@@ -10,12 +10,12 @@ class Subscription {
    * @param {Object} params
    * @param {number} params.certificationCandidateId - identifier of the certification candidate
    * @param {SUBSCRIPTION_TYPES} params.type
-   * @param {number} params.complementaryCertificationId
+   * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
    */
-  constructor({ certificationCandidateId, type, complementaryCertificationId }) {
+  constructor({ certificationCandidateId, type, complementaryCertificationKey }) {
     this.certificationCandidateId = certificationCandidateId;
     this.type = type;
-    this.complementaryCertificationId = complementaryCertificationId;
+    this.complementaryCertificationKey = complementaryCertificationKey;
     validate(this);
   }
 
@@ -27,20 +27,20 @@ class Subscription {
     return new Subscription({
       certificationCandidateId,
       type: SUBSCRIPTION_TYPES.CORE,
-      complementaryCertificationId: null,
+      complementaryCertificationKey: null,
     });
   }
 
   /**
    * @param {Object} params
    * @param {number} params.certificationCandidateId - identifier of the certification candidate
-   * @param {number} params.complementaryCertificationId
+   * @param {string} params.complementaryCertificationKey
    */
-  static buildComplementary({ certificationCandidateId, complementaryCertificationId }) {
+  static buildComplementary({ certificationCandidateId, complementaryCertificationKey }) {
     return new Subscription({
       certificationCandidateId,
       type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-      complementaryCertificationId,
+      complementaryCertificationKey,
     });
   }
 
@@ -53,7 +53,7 @@ class Subscription {
   }
 
   get id() {
-    return `${this.certificationCandidateId}-${this.complementaryCertificationId ?? 'CORE'}`;
+    return `${this.certificationCandidateId}-${this.complementaryCertificationKey ?? SUBSCRIPTION_TYPES.CORE}`;
   }
 }
 

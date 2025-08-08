@@ -214,7 +214,7 @@ export default class EnrolledCandidates extends Component {
     if (subscriptions.length === 0) {
       subscriptions.push({
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
     }
 
@@ -305,7 +305,8 @@ export default class EnrolledCandidates extends Component {
         if (subscription.isCore) subscriptionLabels.unshift(this.intl.t(`${TRANSLATE_PREFIX}.list.subscriptions.core`));
         else {
           const candidateComplementaryCertification = complementaryCertificationList.find(
-            (complementaryCertification) => complementaryCertification.id === subscription.complementaryCertificationId,
+            (complementaryCertification) =>
+              complementaryCertification.key === subscription.complementaryCertificationKey,
           );
           subscriptionLabels.push(candidateComplementaryCertification?.label || '-');
         }
