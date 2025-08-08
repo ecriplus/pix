@@ -78,4 +78,62 @@ describe('Unit | Shared | Domain | Service | Locale', function () {
       });
     });
   });
+
+  describe('getBaseLocale', function () {
+    context('when locale is valid', function () {
+      [
+        { locale: 'fr-fr', expectedBaseLocale: 'fr' },
+        { locale: 'fr-FR', expectedBaseLocale: 'fr' },
+        { locale: 'en', expectedBaseLocale: 'en' },
+        { locale: 'en-GB', expectedBaseLocale: 'en' },
+      ].forEach(({ locale, expectedBaseLocale }) => {
+        it(`returns the corresponding base locale ${expectedBaseLocale} for ${locale}`, function () {
+          // given / when
+          const baseLocale = localeService.getBaseLocale(locale);
+
+          // then
+          expect(baseLocale).to.equal(expectedBaseLocale);
+        });
+      });
+    });
+
+    context('when locale is invalid', function () {
+      ['fr_FR', 'yo-yo-yo', null].forEach((invalidLocale) => {
+        it(`returns the default base locale for ${invalidLocale}`, function () {
+          // given / when
+          const baseLocale = localeService.getBaseLocale(invalidLocale);
+
+          // then
+          const defaultBaseLocale = new Intl.Locale(localeService.getDefaultLocale()).language;
+          expect(baseLocale).to.equal(defaultBaseLocale);
+        });
+      });
+    });
+  });
+
+  describe('isFranceLocale', function () {
+    context('when locale from France', function () {
+      ['fr-fr', 'fr-FR'].forEach((franceLocale) => {
+        it(`returns true for ${franceLocale}`, function () {
+          // given / when
+          const isFranceLocale = localeService.isFranceLocale(franceLocale);
+
+          // then
+          expect(isFranceLocale).to.be.true;
+        });
+      });
+    });
+
+    context('when locale is not from France', function () {
+      ['fr', 'en', 'en-GB', null].forEach((franceLocale) => {
+        it(`returns true for ${franceLocale}`, function () {
+          // given / when
+          const isFranceLocale = localeService.isFranceLocale(franceLocale);
+
+          // then
+          expect(isFranceLocale).to.be.false;
+        });
+      });
+    });
+  });
 });
