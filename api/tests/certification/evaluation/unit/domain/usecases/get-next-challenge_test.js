@@ -1,5 +1,6 @@
 import { getNextChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { config } from '../../../../../../src/shared/config.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -14,7 +15,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       pickChallengeService,
       flashAlgorithmService,
       flashAlgorithmConfigurationRepository,
-      certificationCandidateRepository;
+      certificationCandidateRepository,
+      complementaryCertificationCourseRepository;
 
     let flashAlgorithmConfiguration;
     let certificationCandidateId;
@@ -34,6 +36,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       };
       certificationCourseRepository = {
         get: sinon.stub(),
+      };
+      complementaryCertificationCourseRepository = {
+        findByCertificationCourseId: sinon.stub(),
       };
       certificationChallengeLiveAlertRepository = {
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
@@ -93,7 +98,28 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
-        sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
+        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
+        const complementaryCertificationCourse =
+          domainBuilder.certification.evaluation.buildComplementaryCertificationCourse({
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            hasComplementaryReferential: true,
+          });
+        complementaryCertificationCourseRepository.findByCertificationCourseId
+          .withArgs({ certificationCourseId: v3CertificationCourse.getId() })
+          .resolves(complementaryCertificationCourse);
+
+        sharedChallengeRepository.findActiveFlashCompatible
+          .withArgs({
+            locale,
+            date: candidate.reconciledAt,
+            complementaryCertificationKey: complementaryCertificationCourse.complementaryCertificationKey,
+            hasComplementaryReferential: complementaryCertificationCourse.hasComplementaryReferential,
+          })
+          .resolves([nextChallengeToAnswer]);
         sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
@@ -133,6 +159,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
+          complementaryCertificationCourseRepository,
         });
 
         // then
@@ -182,7 +209,27 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs(assessment.certificationCourseId, [])
             .resolves(null);
 
-          sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves(allChallenges);
+          const candidateNeedingAccessibilityAdjustment = domainBuilder.buildCertificationCandidateForSupervising({
+            id: 'candidateNeedingAccessibilityAdjustmentId',
+            accessibilityAdjustmentNeeded: true,
+          });
+          certificationCandidateRepository.findByAssessmentId
+            .withArgs({ assessmentId: assessment.id })
+            .resolves(candidateNeedingAccessibilityAdjustment);
+
+          complementaryCertificationCourseRepository.findByCertificationCourseId
+            .withArgs({ certificationCourseId: v3CertificationCourse.id })
+            .resolves(null);
+
+          sharedChallengeRepository.findActiveFlashCompatible
+            .withArgs({
+              locale,
+              date: candidateNeedingAccessibilityAdjustment.reconciledAt,
+              complementaryCertificationKey: undefined,
+              hasComplementaryReferential: undefined,
+            })
+            .resolves(allChallenges);
+
           sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
@@ -209,15 +256,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .returns(nextChallengeToAnswer);
           pickChallengeService.getChallengePicker.withArgs().returns(getChallengePickerImpl);
 
-          const candidateNeedingAccessibilityAdjustment = domainBuilder.buildCertificationCandidateForSupervising({
-            id: 'candidateNeedingAccessibilityAdjustmentId',
-            accessibilityAdjustmentNeeded: true,
-          });
-
-          certificationCandidateRepository.findByAssessmentId
-            .withArgs({ assessmentId: assessment.id })
-            .resolves(candidateNeedingAccessibilityAdjustment);
-
           // when
           const challenge = await getNextChallenge({
             answerRepository,
@@ -231,6 +269,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             pickChallengeService,
             certificationCandidateRepository,
+            complementaryCertificationCourseRepository,
           });
 
           // then
@@ -336,8 +375,18 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
+        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
         sharedChallengeRepository.findActiveFlashCompatible
-          .withArgs({ locale })
+          .withArgs({
+            locale,
+            date: candidate.reconciledAt,
+            complementaryCertificationKey: undefined,
+            hasComplementaryReferential: undefined,
+          })
           .resolves([alreadyAnsweredChallenge, nextChallengeToAnswer]);
 
         sharedChallengeRepository.getMany
@@ -381,6 +430,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
+          complementaryCertificationCourseRepository,
         });
 
         // then
@@ -422,8 +472,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
           })
           .resolves([]);
+
+        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
         sharedChallengeRepository.findActiveFlashCompatible
-          .withArgs({ locale })
+          .withArgs({
+            locale,
+            date: candidate.reconciledAt,
+            complementaryCertificationKey: undefined,
+            hasComplementaryReferential: undefined,
+          })
           .resolves([nextChallenge, lastSeenChallenge]);
         sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
@@ -475,6 +536,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
+          complementaryCertificationCourseRepository,
         });
 
         // then
@@ -575,6 +637,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
+          complementaryCertificationCourseRepository,
         });
 
         // then
@@ -619,7 +682,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
-        sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([answeredChallenge]);
+        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
+        sharedChallengeRepository.findActiveFlashCompatible
+          .withArgs({
+            locale,
+            date: candidate.reconciledAt,
+            complementaryCertificationKey: undefined,
+            hasComplementaryReferential: undefined,
+          })
+          .resolves([answeredChallenge]);
         sharedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
 
         // when
@@ -636,6 +711,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           pickChallengeService,
           certificationCandidateRepository,
           certificationCandidateId,
+          complementaryCertificationCourseRepository,
         });
 
         // then
@@ -691,7 +767,19 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .resolves(null);
             sharedChallengeRepository.get.resolves();
 
-            sharedChallengeRepository.findActiveFlashCompatible.withArgs({ locale }).resolves([nextChallengeToAnswer]);
+            const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+            certificationCandidateRepository.findByAssessmentId
+              .withArgs({ assessmentId: assessment.id })
+              .resolves(candidate);
+
+            sharedChallengeRepository.findActiveFlashCompatible
+              .withArgs({
+                locale,
+                date: candidate.reconciledAt,
+                complementaryCertificationKey: undefined,
+                hasComplementaryReferential: undefined,
+              })
+              .resolves([nextChallengeToAnswer]);
             sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
             flashAlgorithmService.getCapacityAndErrorRate
@@ -731,6 +819,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               locale,
               pickChallengeService,
               certificationCandidateRepository,
+              complementaryCertificationCourseRepository,
             });
 
             // then

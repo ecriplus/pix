@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 
-import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/ValidatorQCM.js';
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -1518,7 +1517,6 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
       challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
-      challengesLC.push(domainBuilder.buildChallenge({ id: 'toto' }));
     });
 
     context('when complementary certification given', function () {
@@ -1530,6 +1528,8 @@ describe('Integration | Repository | challenge-repository', function () {
         const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.pixEdu1erDegre(
           {},
         );
+
+        challengesLC.push(domainBuilder.buildChallenge({ id: 'toto' }));
 
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
@@ -1564,9 +1564,10 @@ describe('Integration | Repository | challenge-repository', function () {
 
         // when
         const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
-          complementaryCertificationKey: complementaryCertification.key,
-          locale: 'fr',
           date: candidateReconciliationDate,
+          locale: 'fr',
+          complementaryCertificationKey: complementaryCertification.key,
+          hasComplementaryReferential: complementaryCertification.hasComplementaryReferential,
         });
 
         // then

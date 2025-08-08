@@ -1,13 +1,14 @@
 /**
  * @typedef {import('../../../session-management/domain/usecases/index.js').AnswerRepository} AnswerRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
+ * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').ChallengeRepository} ChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').ComplementaryCertificationCourseRepository} ComplementaryCertificationCourseRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
+ * @typedef {import('../../../session-management/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
  */
 
 import Debug from 'debug';
@@ -21,27 +22,29 @@ const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-ch
 /**
  * @param {Object} params
  * @param {AnswerRepository} params.answerRepository
- * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {ChallengeRepository} params.sharedChallengeRepository
+ * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
+ * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
  * @param {PickChallengeService} params.pickChallengeService
- * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  */
 const getNextChallenge = async function ({
   assessment,
   answerRepository,
-  sessionManagementCertificationChallengeRepository,
+  locale,
+  certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
-  sharedChallengeRepository,
+  complementaryCertificationCourseRepository,
   flashAlgorithmConfigurationRepository,
+  sessionManagementCertificationChallengeRepository,
+  sharedChallengeRepository,
   flashAlgorithmService,
-  locale,
   pickChallengeService,
-  certificationCandidateRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: assessment.certificationCourseId });
 
@@ -69,7 +72,18 @@ const getNextChallenge = async function ({
     return sharedChallengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
   }
 
-  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({ locale });
+  const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
+
+  const complementaryCertificationCourse = await complementaryCertificationCourseRepository.findByCertificationCourseId(
+    { certificationCourseId: certificationCourse.getId() },
+  );
+
+  const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
+    locale,
+    date: candidate.reconciledAt,
+    complementaryCertificationKey: complementaryCertificationCourse?.complementaryCertificationKey,
+    hasComplementaryReferential: complementaryCertificationCourse?.hasComplementaryReferential,
+  });
 
   const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
 
@@ -80,7 +94,6 @@ const getNextChallenge = async function ({
     challenges,
   });
 
-  const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
   const challengesForCandidate = candidate.accessibilityAdjustmentNeeded
     ? challengesWithoutSkillsWithAValidatedLiveAlert.filter((challenge) => challenge.isAccessible)
     : challengesWithoutSkillsWithAValidatedLiveAlert;

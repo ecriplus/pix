@@ -111,12 +111,13 @@ export async function findActiveFlashCompatible({
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
   complementaryCertificationKey,
+  hasComplementaryReferential,
 } = {}) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
   let challengeDtos;
 
-  if (complementaryCertificationKey) {
+  if (hasComplementaryReferential) {
     challengeDtos = await _findChallengesForComplementaryCertification({
       complementaryCertificationKey,
       cacheKey,
