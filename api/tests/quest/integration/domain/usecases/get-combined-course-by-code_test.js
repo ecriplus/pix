@@ -3,11 +3,22 @@ import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedC
 import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code', function () {
+  let hostURL, combinedCourseUrl, code;
+
+  beforeEach(function () {
+    code = 'SOMETHING';
+    hostURL = 'http://app.pix.fr';
+    combinedCourseUrl = hostURL + '/parcours/' + code;
+
+    sinon.stub(cryptoService, 'encrypt');
+    cryptoService.encrypt.withArgs(combinedCourseUrl).resolves('hashedUrl');
+  });
+
   it('should return CombinedCourse for provided code', async function () {
-    const code = 'SOMETHING';
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
@@ -61,7 +72,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
 
     await databaseBuilder.commit();
 
-    const result = await usecases.getCombinedCourseByCode({ code, userId });
+    const result = await usecases.getCombinedCourseByCode({ code, userId, hostURL });
 
     expect(result).to.be.instanceOf(CombinedCourse);
     expect(result.items).to.be.deep.equal([
@@ -76,12 +87,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         reference: 'bac-a-sable',
         title: 'Bac à sable',
         type: ITEM_TYPE.MODULE,
+        redirection: 'hashedUrl',
       }),
       new CombinedCourseItem({
         id: moduleId2,
         reference: 'bases-clavier-1',
         title: 'Les bases du clavier sur ordinateur 1/2',
         type: ITEM_TYPE.MODULE,
+        redirection: 'hashedUrl',
       }),
     ]);
     expect(result.id).to.equal(questId);
@@ -89,7 +102,6 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
   });
 
   it('should return started combined course for given userId', async function () {
-    const code = 'SOMETHING';
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
@@ -163,7 +175,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       ],
     });
 
-    databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId });
+    databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId, hostURL });
 
     await databaseBuilder.commit();
 
