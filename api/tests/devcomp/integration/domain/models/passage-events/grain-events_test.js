@@ -5,7 +5,7 @@ import {
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
-describe('Integration | Devcomp | Domain | Models | passage-events | qab-events', function () {
+describe('Integration | Devcomp | Domain | Models | passage-events | grain-events', function () {
   describe('#GrainContinuedEvent', function () {
     it('should init and keep attributes', function () {
       // given
