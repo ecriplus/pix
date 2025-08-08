@@ -96,34 +96,6 @@ module('Integration | Component | Authentication | LoginForm', function (hooks) 
       await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
     });
 
-    test('it displays error message for invalid local', async function (assert) {
-      // given
-      sessionService.authenticateUser.rejects(
-        _buildApiResponseError({ errorCode: 'INVALID_LOCALE_FORMAT', meta: { locale: 'foo' } }),
-      );
-
-      // when
-      await clickByName(t(I18N_KEYS.submitButton));
-
-      // then
-      const errorMessage = t('pages.sign-up.errors.invalid-locale-format', { invalidLocale: 'foo' });
-      assert.dom(screen.getByText(errorMessage)).exists();
-    });
-
-    test('it displays error message for local not supported', async function (assert) {
-      // given
-      sessionService.authenticateUser.rejects(
-        _buildApiResponseError({ errorCode: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'foo' } }),
-      );
-
-      // when
-      await clickByName(t(I18N_KEYS.submitButton));
-
-      // then
-      const errorMessage = t('pages.sign-up.errors.locale-not-supported', { localeNotSupported: 'foo' });
-      assert.dom(screen.getByText(errorMessage)).exists();
-    });
-
     test('it displays error message for a user with a temporary password', async function (assert) {
       // given
       sinon.stub(storeService, 'createRecord');

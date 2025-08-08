@@ -5,6 +5,7 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../src/quest/domain/models/Quest.js';
+import { config } from '../../../../src/shared/config.js';
 import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
@@ -21,12 +22,15 @@ const firstTrainingId = QUEST_OFFSET + 1;
 const secondTrainingId = QUEST_OFFSET + 2;
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
+  const tldFr = config.environment === 'development' ? '' : config.domain.tldFr;
   const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
   const campaign = databaseBuilder.factory.buildCampaign({
     name: 'Je teste mes compétences',
     organizationId,
     code: 'CODE123',
     targetProfileId: targetProfile.id,
+    customResultPageButtonText: 'Continuer',
+    customResultPageButtonUrl: `${config.domain.pixApp}${tldFr}/parcours/COMBINIX1`,
   });
   CAMPAIGN_SKILLS[0].map((skillId) =>
     databaseBuilder.factory.buildCampaignSkill({
@@ -37,15 +41,15 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
   databaseBuilder.factory.buildTraining({
     id: firstTrainingId,
     type: 'modulix',
-    title: 'Bac à sable',
-    link: '/modules/bac-a-sable',
+    title: 'Demo combinix 1',
+    link: '/modules/demo-combinix-1',
     locale: 'fr-fr',
   });
   databaseBuilder.factory.buildTraining({
     id: secondTrainingId,
     type: 'modulix',
-    title: 'Choisir un jeu vidéo adapté à son enfant',
-    link: '/modules/jeux-video-enfant',
+    title: 'Demo combinix 2',
+    link: '/modules/demo-combinix-2',
     locale: 'fr-fr',
   });
 
@@ -72,7 +76,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '6282925d-4775-4bca-b513-4c3009ec5886',
+            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
             comparison: 'equal',
           },
         },
@@ -82,7 +86,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '875df1ff-27c1-4b41-a0a8-5ff46013f35e',
+            data: 'f32a2238-4f65-4698-b486-15d51935d335',
             comparison: 'equal',
           },
         },
@@ -92,7 +96,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
         comparison: 'all',
         data: {
           moduleId: {
-            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
+            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
             comparison: 'equal',
           },
         },

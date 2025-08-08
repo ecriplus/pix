@@ -22,10 +22,6 @@ class UserToCreate {
     updatedAt,
     dependencies = { localeService },
   } = {}) {
-    if (locale) {
-      locale = dependencies.localeService.getCanonicalLocale(locale);
-    }
-
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -35,7 +31,7 @@ class UserToCreate {
     this.mustValidateTermsOfService = mustValidateTermsOfService;
     this.lastTermsOfServiceValidatedAt = lastTermsOfServiceValidatedAt;
     this.lang = lang;
-    this.locale = locale;
+    this.locale = dependencies.localeService.getNearestSupportedLocale(locale);
     this.hasSeenNewDashboardInfo = hasSeenNewDashboardInfo;
     this.isAnonymous = isAnonymous;
     this.hasSeenFocusedChallengeTooltip = hasSeenFocusedChallengeTooltip;

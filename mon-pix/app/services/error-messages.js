@@ -16,14 +16,6 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
   EXPIRED_AUTHENTICATION_KEY: {
     i18nKey: 'pages.login-or-register-oidc.error.expired-authentication-key',
   },
-  INVALID_LOCALE_FORMAT: {
-    i18nKey: 'pages.sign-up.errors.invalid-locale-format',
-    getOptions: (error) => ({ invalidLocale: error.meta.locale }),
-  },
-  LOCALE_NOT_SUPPORTED: {
-    i18nKey: 'pages.sign-up.errors.locale-not-supported',
-    getOptions: (error) => ({ localeNotSupported: error.meta.locale }),
-  },
   USER_IS_TEMPORARY_BLOCKED: {
     getI18nKey: (error) => {
       if (error.meta?.isLoginFailureWithUsername) {

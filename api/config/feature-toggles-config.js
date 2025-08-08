@@ -29,17 +29,17 @@ export default {
     defaultValue: false,
     tags: ['team-prescription', 'pix-api', 'backend'],
   },
+  isFilteringRecommendedTrainingByOrganizationsEnabled: {
+    type: 'boolean',
+    description: 'Used to enable filtering recommended training by organizations',
+    defaultValue: false,
+    tags: ['frontend', 'team-devcomp', 'pix-admin'],
+  },
   isSelfAccountDeletionEnabled: {
     description: 'Toggle self account deletion feature',
     type: 'boolean',
     defaultValue: true,
     tags: ['frontend', 'team-acces'],
-  },
-  shouldDisplayNewAnalysisPage: {
-    description: 'Display the new page for campaign analysis',
-    type: 'boolean',
-    defaultValue: false,
-    tags: ['frontend', 'pix-orga', 'team-prescription'],
   },
   showExperimentalMissions: {
     type: 'boolean',
@@ -53,12 +53,6 @@ export default {
     defaultValue: false,
     tags: ['modulix', 'team-contenu', 'llm', 'embed', 'pix-app'],
   },
-  upgradeToRealUserEnabled: {
-    type: 'boolean',
-    description: 'Enable upgrade of anonymous accounts to true accounts after anonymous campaign participation.',
-    defaultValue: false,
-    tags: ['frontend', 'team-acces', 'pix-app'],
-  },
   isAutoShareEnabled: {
     type: 'boolean',
     description: 'Enable automatic campaign sharing.',
@@ -67,13 +61,13 @@ export default {
   },
   useLocale: {
     type: 'boolean',
-    description: 'Enable new locale management in apps.',
+    description: 'Enable usage of cookie locale in Frontend apps keeping retro-compatibility with the backend.',
     defaultValue: false,
     tags: ['frontend', 'team-acces'],
   },
-  useOnlyHapiI18n: {
+  useCookieLocaleInApi: {
     type: 'boolean',
-    description: 'Enable exclusive usage of hapi i18n plugin for locale management in the API.',
+    description: 'Enable usage of cookie locale in the API to get the user or challenge locales.',
     defaultValue: false,
     tags: ['team-acces'],
   },

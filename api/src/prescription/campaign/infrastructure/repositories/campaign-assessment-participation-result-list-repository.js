@@ -1,8 +1,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../../db/migrations/20230721114848_create-stage_acquisitions-table.js';
-import { StageAcquisitionCollection } from '../../../../shared/domain/models/user-campaign-results/StageAcquisitionCollection.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
+import { StageAcquisitionCollection } from '../../../campaign-participation/domain/models/StageAcquisitionCollection.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { CampaignAssessmentParticipationResultMinimal } from '../../domain/read-models/CampaignAssessmentParticipationResultMinimal.js';
 import * as stageCollectionRepository from './stage-collection-repository.js';

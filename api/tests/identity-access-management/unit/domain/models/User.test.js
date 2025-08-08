@@ -1,19 +1,11 @@
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { config } from '../../../../../src/shared/config.js';
+import * as localeService from '../../../../../src/shared/domain/services/locale-service.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | User', function () {
-  let localeService;
-  let dependencies;
-
   beforeEach(function () {
     sinon.stub(config.dataProtectionPolicy, 'updateDate').value('2020-01-01');
-
-    localeService = {
-      getCanonicalLocale: sinon.stub(),
-      coerceLanguage: sinon.stub().returns('fr'),
-    };
-    dependencies = { localeService };
   });
 
   describe('constructor', function () {
@@ -30,35 +22,48 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     });
 
     context('locale', function () {
-      it('accepts no locale', function () {
-        // given
-        const users = [
-          new User({ locale: '' }, dependencies),
-          new User({ locale: null }, dependencies),
-          new User({ locale: undefined }, dependencies),
-        ];
+      context('when there is no locale', function () {
+        ['', null, undefined].forEach((locale) => {
+          it(`returns null for ${locale}`, function () {
+            // when
+            const user = new User({ locale });
 
-        //then
-        expect(users).to.have.lengthOf(3);
+            //then
+            expect(user.locale).to.be.undefined;
+          });
+        });
       });
 
-      it('validates and canonicalizes the locale', function () {
-        // given
-        localeService.getCanonicalLocale.returns('fr-BE');
+      context('when the locale is not supported', function () {
+        it('throws a RangeError', function () {
+          // given
+          const locale = 'fr-fr';
 
-        // when
-        const user = new User({ locale: 'fr-be' }, dependencies);
+          // when
+          const user = new User({ locale });
 
-        // then
-        expect(localeService.getCanonicalLocale).to.have.been.calledWithExactly('fr-be');
-        expect(user.locale).to.equal('fr-BE');
+          //then
+          expect(user.locale).to.equal('fr-FR');
+        });
+      });
+
+      context('when the locale is supported', function () {
+        ['fr', 'fr-FR', 'fr-BE'].forEach((locale) => {
+          it(`returns the locale ${locale}`, function () {
+            // when
+            const user = new User({ locale });
+
+            //then
+            expect(user.locale).to.equal(locale);
+          });
+        });
       });
     });
 
     context('language', function () {
       it('coerces the given language to the default locale', function () {
         // when
-        const user = new User({ lang: 'nl' }, dependencies);
+        const user = new User({ lang: 'thl' });
 
         // then
         expect(user.lang).to.equal('fr');
@@ -67,7 +72,8 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       context('when there is no language given', function () {
         it('returns default language', function () {
           // when
-          const user = new User({}, dependencies);
+          const user = new User({});
+
           // then
           expect(user.lang).to.equal('fr');
         });
@@ -100,49 +106,50 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
   describe('setLocaleIfNotAlreadySet', function () {
     it('deals with empty locale', function () {
       // given
-      const user = new User(undefined, dependencies);
+      const user = new User(undefined);
 
       // when
       user.setLocaleIfNotAlreadySet(null, { localeService });
 
       // then
-      expect(localeService.getCanonicalLocale).to.not.have.been.called;
       expect(user.locale).to.be.undefined;
       expect(user.hasBeenModified).to.be.false;
     });
 
     context('when user has no locale', function () {
-      it('validates, canonicalizes and sets the locale', function () {
+      it('validates and sets the locale', function () {
         // given
-        const user = new User(undefined, dependencies);
-        localeService.getCanonicalLocale.returns('fr-FR');
+        const user1 = new User(undefined);
+        const user2 = new User(undefined);
+        const user3 = new User(undefined);
+        const locale1 = 'fr';
+        const locale2 = 'fr-FR';
+        const locale3 = 'fr-BE';
 
         // when
-        user.setLocaleIfNotAlreadySet('fr-fr', { localeService });
+        user1.setLocaleIfNotAlreadySet(locale1, { localeService });
+        user2.setLocaleIfNotAlreadySet(locale2, { localeService });
+        user3.setLocaleIfNotAlreadySet(locale3, { localeService });
 
         // then
-        expect(localeService.getCanonicalLocale).to.have.been.calledWithExactly('fr-fr');
-        expect(user.locale).to.equal('fr-FR');
-        expect(user.hasBeenModified).to.be.true;
+        expect(user1.locale).to.equal('fr');
+        expect(user1.hasBeenModified).to.be.true;
+        expect(user2.locale).to.equal('fr-FR');
+        expect(user2.hasBeenModified).to.be.true;
+        expect(user3.locale).to.equal('fr-BE');
+        expect(user3.hasBeenModified).to.be.true;
       });
     });
 
     context('when user has a locale', function () {
       it('does not set a new locale', function () {
         // given
-        localeService.getCanonicalLocale.returns('en');
-        const user = new User({ locale: 'en' }, dependencies);
-
-        // Overload our stub to make sure it is not called after the user has been created
-        localeService = {
-          getCanonicalLocale: sinon.stub(),
-        };
+        const user = new User({ locale: 'en' });
 
         // when
-        user.setLocaleIfNotAlreadySet('fr-fr');
+        user.setLocaleIfNotAlreadySet('fr-FR');
 
         // then
-        expect(localeService.getCanonicalLocale).to.not.have.been.called;
         expect(user.locale).to.equal('en');
         expect(user.hasBeenModified).to.be.false;
       });
@@ -165,7 +172,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
 
     it('should be false is user has no role in no organization', function () {
       // given
-      const user = new User(undefined, dependencies);
+      const user = new User(undefined);
 
       // when
       const isLinked = user.isLinkedToOrganizations();
@@ -191,7 +198,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
 
     it('should be false if user has no role in certification center', function () {
       // given
-      const user = new User(undefined, dependencies);
+      const user = new User(undefined);
 
       // when
       const isLinked = user.isLinkedToCertificationCenters();
@@ -204,7 +211,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
   describe('hasAccessToOrganization', function () {
     it('should be false is user has no access to no organizations', function () {
       // given
-      const user = new User(undefined, dependencies);
+      const user = new User(undefined);
       const organizationId = 12345;
 
       // when
@@ -246,7 +253,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
   describe('hasAccessToCertificationCenter', function () {
     it('should be false if user has no access to given certification center', function () {
       // given
-      const user = new User(undefined, dependencies);
+      const user = new User(undefined);
       const certificationCenterId = 12345;
 
       // when
@@ -312,7 +319,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       };
 
       // when
-      const userObject = new User(userData, dependencies);
+      const userObject = new User(userData);
 
       // then
       expect(userObject.email).to.equal('testmail@gmail.com');
@@ -325,7 +332,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       };
 
       // when
-      const userObject = new User(userData, dependencies);
+      const userObject = new User(userData);
 
       // then
       expect(userObject.email).to.be.undefined;
@@ -339,7 +346,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       };
 
       // when
-      const userObject = new User(userData, dependencies);
+      const userObject = new User(userData);
 
       // then
       expect(userObject.email).to.be.null;
@@ -358,14 +365,11 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
             shouldChangePassword: true,
           });
 
-        const user = new User(
-          {
-            id: 1,
-            email: 'email@example.net',
-            authenticationMethods: [pixAuthenticationMethod],
-          },
-          dependencies,
-        );
+        const user = new User({
+          id: 1,
+          email: 'email@example.net',
+          authenticationMethods: [pixAuthenticationMethod],
+        });
 
         // when
         const shouldChangePassword = user.shouldChangePassword;
@@ -381,14 +385,11 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
             shouldChangePassword: false,
           });
 
-        const user = new User(
-          {
-            id: 1,
-            email: 'email@example.net',
-            authenticationMethods: [pixAuthenticationMethod],
-          },
-          dependencies,
-        );
+        const user = new User({
+          id: 1,
+          email: 'email@example.net',
+          authenticationMethods: [pixAuthenticationMethod],
+        });
 
         // when
         const shouldChangePassword = user.shouldChangePassword;
@@ -404,13 +405,10 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
         const poleEmploiAuthenticationMethod =
           domainBuilder.buildAuthenticationMethod.withPoleEmploiAsIdentityProvider();
 
-        const user = new User(
-          {
-            id: 1,
-            authenticationMethods: [poleEmploiAuthenticationMethod],
-          },
-          dependencies,
-        );
+        const user = new User({
+          id: 1,
+          authenticationMethods: [poleEmploiAuthenticationMethod],
+        });
 
         // when
         const shouldChangePassword = user.shouldChangePassword;
@@ -463,7 +461,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false', function () {
         // given
         config.dataProtectionPolicy.updateDate = null;
-        const user = new User({ lastDataProtectionPolicySeenAt: null }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: null });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -474,7 +472,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return true', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date();
-        const user = new User({ lastDataProtectionPolicySeenAt: null, cgu: true }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: null, cgu: true });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.true;
@@ -483,7 +481,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false for an organization learner', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date();
-        const user = new User({ lastDataProtectionPolicySeenAt: null, cgu: false }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: null, cgu: false });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -494,7 +492,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false', function () {
         // given
         config.dataProtectionPolicy.updateDate = null;
-        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: true }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: true });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -503,7 +501,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false for an organization learner', function () {
         // given
         config.dataProtectionPolicy.updateDate = null;
-        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: false }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: false });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -514,10 +512,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date();
-        const user = new User(
-          { lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000), cgu: true },
-          dependencies,
-        );
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000), cgu: true });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -526,10 +521,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false for an organization learner', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date();
-        const user = new User(
-          { lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000), cgu: false },
-          dependencies,
-        );
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000), cgu: false });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;
@@ -540,7 +532,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return true', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date(Date.now() + 3600 * 1000);
-        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: true }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: true });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.true;
@@ -549,7 +541,7 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
       it('should return false for an organization learner', function () {
         // given
         config.dataProtectionPolicy.updateDate = new Date(Date.now() + 3600 * 1000);
-        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: false }, dependencies);
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(), cgu: false });
 
         // then
         expect(user.shouldSeeDataProtectionPolicyInformationBanner).to.be.false;

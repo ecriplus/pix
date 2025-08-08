@@ -9,9 +9,6 @@ import CertificationInfoField from '../../info-field';
       {{#if @certification.isPublished}}
         <PixTag @color="success">Publiée</PixTag>
       {{/if}}
-      {{#if @certification.isCertificationCancelled}}
-        <PixTag @color="error">Annulée</PixTag>
-      {{/if}}
     </h2>
     <CertificationInfoField
       @value={{@session.id}}

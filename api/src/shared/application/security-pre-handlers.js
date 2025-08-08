@@ -20,8 +20,11 @@ import * as checkAdminMemberHasRoleSupportUseCase from './usecases/checkAdminMem
 import * as checkAuthorizationToAccessCampaignUsecase from './usecases/checkAuthorizationToAccessCampaign.js';
 import * as checkAuthorizationToManageCampaignUsecase from './usecases/checkAuthorizationToManageCampaign.js';
 import * as checkIfUserIsBlockedUseCase from './usecases/checkIfUserIsBlocked.js';
+import * as checkOrganizationDoesNotHaveFeatureUseCase from './usecases/checkOrganizationDoesNotHaveFeature.js';
 import * as checkOrganizationHasFeatureUseCase from './usecases/checkOrganizationHasFeature.js';
+import * as checkOrganizationIsNotManagingStudentsUseCase from './usecases/checkOrganizationIsNotManagingStudents.js';
 import * as checkOrganizationIsScoAndManagingStudentUsecase from './usecases/checkOrganizationIsScoAndManagingStudent.js';
+import * as checkOrganizationLearnerBelongsToOrganizationUseCase from './usecases/checkOrganizationLearnerBelongsToOrganization.js';
 import * as checkUserBelongsToLearnersOrganizationUseCase from './usecases/checkUserBelongsToLearnersOrganization.js';
 import * as checkUserBelongsToOrganizationUseCase from './usecases/checkUserBelongsToOrganization.js';
 import * as checkUserBelongsToOrganizationManagingStudentsUseCase from './usecases/checkUserBelongsToOrganizationManagingStudents.js';
@@ -799,6 +802,61 @@ async function checkOrganizationAccess(request, h, dependencies = { checkOrganiz
   }
 }
 
+async function checkOrganizationIsNotManagingStudents(
+  request,
+  h,
+  dependencies = {
+    checkOrganizationIsNotManagingStudentsUseCase,
+  },
+) {
+  if (_noCredentials(request)) {
+    return _replyForbiddenError(h);
+  }
+
+  const organizationId = request.params.organizationId || request.params.id;
+
+  const isOrganizationNotManagingStudents = await dependencies.checkOrganizationIsNotManagingStudentsUseCase.execute({
+    organizationId,
+  });
+
+  if (!isOrganizationNotManagingStudents) {
+    return _replyForbiddenError(h);
+  }
+
+  return h.response(true);
+}
+
+function checkOrganizationDoesNotHaveFeature(featureKey) {
+  return async function (request, h, dependencies = { checkOrganizationDoesNotHaveFeatureUseCase }) {
+    const organizationId = request.params.organizationId || request.params.id;
+    const organizationDoesNotHaveFeature = await dependencies.checkOrganizationDoesNotHaveFeatureUseCase.execute({
+      organizationId,
+      featureKey,
+    });
+    return organizationDoesNotHaveFeature ? h.response(true) : _replyForbiddenError(h);
+  };
+}
+
+async function checkOrganizationLearnerBelongsToOrganization(
+  request,
+  h,
+  dependencies = { checkOrganizationLearnerBelongsToOrganizationUseCase },
+) {
+  const organizationId = request.params.organizationId;
+  const organizationLearnerId = request.params.organizationLearnerId;
+
+  try {
+    const organizationLearnerBelongsToOrganization =
+      await dependencies.checkOrganizationLearnerBelongsToOrganizationUseCase.execute(
+        organizationId,
+        organizationLearnerId,
+      );
+    return organizationLearnerBelongsToOrganization ? h.response(true) : _replyNotFoundError(h);
+  } catch {
+    return _replyForbiddenError(h);
+  }
+}
+
 function _noOrganizationFound(error) {
   return error instanceof NotFoundError;
 }
@@ -825,10 +883,13 @@ const securityPreHandlers = {
   checkUserBelongsToSupOrganizationAndManagesStudents,
   checkUserCanDisableHisOrganizationMembership,
   checkUserDoesNotBelongsToScoOrganizationManagingStudents,
+  checkOrganizationIsNotManagingStudents,
+  checkOrganizationLearnerBelongsToOrganization,
   checkUserIsAdminInOrganization,
   checkUserIsAdminInSCOOrganizationManagingStudents,
   checkUserIsAdminInSUPOrganizationManagingStudents,
   checkUserIsMemberOfAnOrganization,
+  checkOrganizationDoesNotHaveFeature,
   checkUserIsAdminOfCertificationCenter,
   checkUserIsAdminOfCertificationCenterWithCertificationCenterInvitationId,
   checkUserIsAdminOfCertificationCenterWithCertificationCenterMembershipId,

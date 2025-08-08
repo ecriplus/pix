@@ -65,36 +65,6 @@ module('Unit | Service | errorMessages', function (hooks) {
         assert.deepEqual(message, t('pages.login-or-register-oidc.error.expired-authentication-key'));
       });
 
-      test('INVALID_LOCALE_FORMAT', function (assert) {
-        // given
-        const error = { code: 'INVALID_LOCALE_FORMAT', meta: { locale: 'fr' } };
-
-        // when
-        const errorMessages = this.owner.lookup('service:errorMessages');
-        const message = errorMessages.getAuthenticationErrorMessage(error);
-
-        // then
-        assert.deepEqual(
-          message,
-          t('pages.sign-up.errors.invalid-locale-format', { invalidLocale: error.meta.locale }),
-        );
-      });
-
-      test('LOCALE_NOT_SUPPORTED', function (assert) {
-        // given
-        const error = { code: 'LOCALE_NOT_SUPPORTED', meta: { locale: 'fr' } };
-
-        // when
-        const errorMessages = this.owner.lookup('service:errorMessages');
-        const message = errorMessages.getAuthenticationErrorMessage(error);
-
-        // then
-        assert.deepEqual(
-          message,
-          t('pages.sign-up.errors.locale-not-supported', { localeNotSupported: error.meta.locale }),
-        );
-      });
-
       module('USER_IS_TEMPORARY_BLOCKED', function () {
         test('When isLoginFailureWithUsername is false', function (assert) {
           // given

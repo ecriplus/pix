@@ -1635,10 +1635,6 @@
           "transcription": "Transcriptie weergeven"
         },
         "embed": {
-          "reset": {
-            "ariaLabel": "De simulator resetten",
-            "name": "Reset"
-          },
           "start": {
             "ariaLabel": "De simulator starten",
             "name": "Start"
@@ -1661,6 +1657,12 @@
           "skip": "Overslaan",
           "skipActivity": "Overslaan activiteit",
           "terminate": "Afwerking"
+        },
+        "interactive-element": {
+          "reset": {
+            "ariaLabel": "De simulator resetten",
+            "name": "Reset"
+          }
         },
         "stepper": {
           "next": {
@@ -1915,10 +1917,6 @@
         "login": "Inloggen",
         "submit": "Registreren",
         "sign-up-on-pix": "Inschrijven bij Pix"
-      },
-      "errors": {
-        "invalid-locale-format": "Uw locale \"{invalidLocale}\" heeft de verkeerde indeling.",
-        "locale-not-supported": "Uw \"{localeNotSupported}\" locale wordt momenteel niet ondersteund."
       },
       "fields": {
         "email": {

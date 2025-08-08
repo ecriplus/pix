@@ -2,11 +2,6 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 
 /**
  * @typedef {import ('../../../../../src/certification/session-management/domain/usecases/index.js').CertificationRepository} CertificationRepository
- * @typedef {import ('../../../../../lib/domain/usecases/index.js').FinalizedSessionRepository} FinalizedSessionRepository
- * @typedef {import ('../../../../../lib/domain/usecases/index.js').SharedSessionRepository} SharedSessionRepository
- * @typedef {import ('../../../../../lib/domain/usecases/index.js').SessionRepository} SessionRepository
- * @typedef {import ('../../../../../lib/domain/usecases/index.js').MailService} MailService
- * @typedef {import ('../../../../../lib/domain/usecases/index.js').SessionPublicationService} SessionPublicationService
  */
 
 /**

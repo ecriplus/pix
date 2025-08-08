@@ -4,7 +4,7 @@ import XRegExp from 'xregexp';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { config } from '../../../shared/config.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
-import { getSupportedLanguages } from '../../../shared/domain/services/locale-service.js';
+import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { userController } from './user.controller.js';
 import { userVerification } from './user-existence-verification-pre-handler.js';
@@ -54,14 +54,35 @@ export const userRoutes = [
         payload: Joi.object({
           data: Joi.object({
             type: Joi.string(),
-            attributes: Joi.object().required(),
+            attributes: Joi.object({
+              'first-name': Joi.string().required(),
+              'last-name': Joi.string().required(),
+              lang: Joi.string().valid(...localeService.getSupportedLanguages()),
+              locale: Joi.string()
+                .valid(...localeService.getSupportedLocales())
+                .allow(null),
+              email: Joi.string().allow(null),
+              username: Joi.string().allow(null),
+              password: Joi.string().allow(null),
+              cgu: Joi.boolean().allow(null),
+              'anonymous-user-token': Joi.string().allow(null),
+              'is-anonymous': Joi.boolean().allow(null),
+              'must-validate-terms-of-service': Joi.boolean().allow(null),
+              'code-for-last-profile-to-share': Joi.string().allow(null),
+              'email-confirmed': Joi.boolean().allow(null),
+              'has-assessment-participations': Joi.boolean().allow(null),
+              'has-recommended-trainings': Joi.boolean().allow(null),
+              'has-seen-assessment-instructions': Joi.boolean().allow(null),
+              'has-seen-focused-challenge-tooltip': Joi.boolean().allow(null),
+              'has-seen-new-dashboard-info': Joi.boolean().allow(null),
+              'has-seen-other-challenges-tooltip': Joi.boolean().allow(null),
+              'should-see-data-protection-policy-information-banner': Joi.boolean().allow(null),
+              'pix-orga-terms-of-service-status': Joi.boolean().allow(null), // sent by Pix Orga when creating a user upon invitation
+            }).required(),
             relationships: Joi.object(),
           }).required(),
           meta: Joi.object(),
         }).required(),
-        options: {
-          allowUnknown: true,
-        },
       },
       handler: (request, h) => userController.createUser(request, h),
       notes: ['- **Cette route est publique**\n' + '- Crée un compte utilisateur'],
@@ -129,7 +150,7 @@ export const userRoutes = [
   },
   {
     method: 'PATCH',
-    path: '/api/users/{id}',
+    path: '/api/users/{id}', // TODO: Rename this route to reflect it's only for upgradeToRealUser
     config: {
       pre: [
         {
@@ -143,6 +164,8 @@ export const userRoutes = [
         }),
         payload: Joi.object({
           data: Joi.object({
+            id: identifiersType.userId.required(),
+            type: Joi.string().required(),
             attributes: Joi.object({
               'first-name': Joi.string().required(),
               'last-name': Joi.string().required(),
@@ -150,6 +173,25 @@ export const userRoutes = [
               password: Joi.string().required(),
               cgu: Joi.boolean().required(),
               'anonymous-user-token': Joi.string().required(),
+              // TODO: attributes bellow should not be sent, they are not used.
+              username: Joi.string().allow(null),
+              lang: Joi.string().valid(...localeService.getSupportedLanguages()),
+              locale: Joi.string()
+                .valid(...localeService.getSupportedLocales())
+                .allow(null),
+              'is-anonymous': Joi.boolean().allow(null),
+              'must-validate-terms-of-service': Joi.boolean().allow(null),
+              'code-for-last-profile-to-share': Joi.string().allow(null),
+              'email-confirmed': Joi.boolean().allow(null),
+              'has-assessment-participations': Joi.boolean().allow(null),
+              'has-recommended-trainings': Joi.boolean().allow(null),
+              'has-seen-assessment-instructions': Joi.boolean().allow(null),
+              'has-seen-focused-challenge-tooltip': Joi.boolean().allow(null),
+              'has-seen-new-dashboard-info': Joi.boolean().allow(null),
+              'has-seen-other-challenges-tooltip': Joi.boolean().allow(null),
+              'should-see-data-protection-policy-information-banner': Joi.boolean().allow(null),
+              'last-terms-of-service-validated-at': Joi.string().allow(null),
+              'last-data-protection-policy-seen-at': Joi.string().allow(null),
             }).required(),
           }).required(),
         }),
@@ -282,7 +324,7 @@ export const userRoutes = [
       validate: {
         params: Joi.object({
           id: identifiersType.userId,
-          lang: Joi.string().valid(...getSupportedLanguages()),
+          lang: Joi.string().valid(...localeService.getSupportedLanguages()),
         }),
       },
       pre: [

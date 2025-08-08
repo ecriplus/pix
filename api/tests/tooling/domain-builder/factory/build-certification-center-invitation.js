@@ -7,6 +7,7 @@ const buildCertificationCenterInvitation = function ({
   status = CertificationCenterInvitation.StatusType.PENDING,
   role = 'MEMBER',
   code = 'ABCDE12345',
+  locale = 'fr',
   createdAt = new Date('2020-01-01'),
   updatedAt = new Date('2020-01-02'),
 } = {}) {
@@ -17,6 +18,7 @@ const buildCertificationCenterInvitation = function ({
     status,
     role,
     code,
+    locale,
     createdAt,
     updatedAt,
   });

@@ -1,4 +1,4 @@
-import { StageAcquisitionCollection } from '../../../../shared/domain/models/user-campaign-results/StageAcquisitionCollection.js';
+import { StageAcquisitionCollection } from '../../../../prescription/campaign-participation/domain/models/StageAcquisitionCollection.js';
 
 /**
  * Compare stages and stages acquisitions to

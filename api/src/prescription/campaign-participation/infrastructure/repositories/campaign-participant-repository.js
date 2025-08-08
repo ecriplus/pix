@@ -9,8 +9,8 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
 } from '../../../../shared/domain/errors.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { OrganizationLearnerForStartingParticipation } from '../../../../shared/domain/read-models/OrganizationLearnerForStartingParticipation.js';
 import * as knexUtils from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { OrganizationLearnerForStartingParticipation } from '../../../organization-learner/domain/read-models/OrganizationLearnerForStartingParticipation.js';
 import { CampaignParticipant } from '../../domain/models/CampaignParticipant.js';
 import { CampaignToStartParticipation } from '../../domain/models/CampaignToStartParticipation.js';
 import { PreviousCampaignParticipation } from '../../domain/models/PreviousCampaignParticipation.js';

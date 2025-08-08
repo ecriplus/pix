@@ -1,0 +1,32 @@
+{
+  "id": "f32a2238-4f65-4698-b486-15d51935d335",
+  "slug": "demo-combinix-2",
+  "title": "Demo combinix 2",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il permet d'avoir le scénario d'un module en arrivant rapidement à la fin</p>",
+    "duration": 1,
+    "level": "Débutant",
+    "tabletSupport": "inconvenient",
+    "objectives": ["Test parcours combiné 2"]
+  },
+  "grains": [
+    {
+      "id": "f585adba-3a6a-4a60-acef-e35b1c79b1e5",
+      "type": "activity",
+      "title": "Grain de démo",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "0692109f-2ea3-4cf2-ad4f-9e05ec5e60d2",
+            "type": "text",
+            "content": "<p>Bravo, le module 2 est terminé</p>"
+          }
+        }
+      ]
+    }
+
+  ]
+}

@@ -8,7 +8,6 @@ import { UncancellableCertificationCenterInvitationError } from '../errors.js';
  *
  * @param {string} certificationCenterInvitationId
  * @param {CertificationCenterInvitationRepository} certificationCenterInvitationRepository
- * @returns {Promise<CertificationCenterInvitation>}
  * @throws {UncancellableCertificationCenterInvitationError}
  */
 const cancelCertificationCenterInvitation = async function ({
@@ -21,7 +20,7 @@ const cancelCertificationCenterInvitation = async function ({
   if (!foundCertificationCenterInvitation.isPending) {
     throw new UncancellableCertificationCenterInvitationError();
   }
-  return await certificationCenterInvitationRepository.markAsCancelled({ id: foundCertificationCenterInvitation.id });
+  await certificationCenterInvitationRepository.markAsCancelled({ id: foundCertificationCenterInvitation.id });
 };
 
 export { cancelCertificationCenterInvitation };

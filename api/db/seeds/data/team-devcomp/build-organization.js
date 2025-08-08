@@ -5,7 +5,7 @@ import {
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
 import { organization } from '../common/tooling/index.js';
-import { TEAM_DEVCOMP_ORGANIZATION_ID } from './constants.js';
+import { NB_TARGET_PROFILE_SHARES, TEAM_DEVCOMP_ORGANIZATION_ID } from './constants.js';
 
 export async function createDevcompOrganization(databaseBuilder) {
   await organization.createOrganization({
@@ -22,4 +22,26 @@ export async function createDevcompOrganization(databaseBuilder) {
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
     ],
   });
+
+  return _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, nextId: TEAM_DEVCOMP_ORGANIZATION_ID + 1 });
+}
+
+async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, nextId }) {
+  const result = [];
+  for (let i = 0; i < NB_TARGET_PROFILE_SHARES; i++) {
+    const { organizationId } = await organization.createOrganization({
+      databaseBuilder,
+      organizationId: nextId,
+      type: 'SCO',
+      name: `DevComp orga ${i}`,
+      isManagingStudents: true,
+      externalId: `SCO_DEVCOMP ${i}`,
+      adminIds: [USER_ID_ADMIN_ORGANIZATION],
+      memberIds: [USER_ID_MEMBER_ORGANIZATION],
+    });
+
+    result.push(organizationId);
+    nextId++;
+  }
+  return result;
 }

@@ -4,7 +4,7 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 const CODE_IDENTITY_PROVIDER_GAR = NON_OIDC_IDENTITY_PROVIDERS.GAR.code;
 const CODE_IDENTITY_PROVIDER_POLE_EMPLOI = OidcIdentityProviders.POLE_EMPLOI.code;
@@ -88,64 +88,112 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       sinon.stub(userAdminController, 'updateUserDetailsByAdmin').returns('updated');
     });
 
-    it('should return bad request when firstName is missing', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-      const url = '/api/admin/users/123';
+    context('invalid payload', function () {
+      context('when a required property is missing', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
 
-      const payload = {
-        data: {
-          id: '123',
-          attributes: {
-            'last-name': 'lastNameUpdated',
-            email: 'emailUpdated@example.net',
-          },
-        },
-      };
+          const userId = databaseBuilder.factory.buildUser.anonymous().id;
+          await databaseBuilder.commit();
 
-      // when
-      const response = await httpTestServer.request('PATCH', url, payload);
+          const payload = {
+            data: {
+              id: userId,
+              type: 'users',
+              attributes: {
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: true,
+              },
+            },
+          };
 
-      // then
-      expect(response.statusCode).to.equal(400);
-      const firstError = response.result.errors[0];
-      expect(firstError.detail).to.equal('"data.attributes.first-name" is required');
-    });
+          const url = `/api/admin/users/${userId}`;
 
-    it('should return bad request when lastName is missing', async function () {
-      // given
-      sinon
-        .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-        .returns((request, h) => h.response().code(403).takeover());
-      const url = '/api/admin/users/123';
-      const payload = {
-        data: {
-          id: '123',
-          attributes: {
-            'first-name': 'firstNameUpdated',
-            email: 'emailUpdated',
-          },
-        },
-      };
+          // when
+          const response = await httpTestServer.request('PATCH', url, payload);
 
-      // when
-      const response = await httpTestServer.request('PATCH', url, payload);
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.first-name" is required');
+        });
+      });
 
-      // then
-      expect(response.statusCode).to.equal(400);
-      const firstError = response.result.errors[0];
-      expect(firstError.detail).to.equal('"data.attributes.last-name" is required');
-    });
+      context('when the locale is not supported', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
 
-    it('should return a 400 when id in param is not a number"', async function () {
-      // given
-      const url = '/api/admin/users/NOT_A_NUMBER';
+          const userId = databaseBuilder.factory.buildUser.anonymous().id;
+          await databaseBuilder.commit();
 
-      // when
-      const response = await httpTestServer.request('PATCH', url);
+          const locale1 = 'fr-fr';
+          const locale2 = 'tlh'; // tlh: Klingon locale
+          const payload = {
+            data: {
+              id: userId,
+              type: 'users',
+              attributes: {
+                'first-name': 'Joséphine',
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: true,
+              },
+            },
+          };
 
-      // then
-      expect(response.statusCode).to.equal(400);
+          const url = `/api/admin/users/${userId}`;
+
+          // when
+          payload.locale = locale1;
+          const response1 = await httpTestServer.request('PATCH', url, payload);
+
+          payload.locale = locale2;
+          const response2 = await httpTestServer.request('PATCH', url, payload);
+
+          // then
+          expect(response1.statusCode).to.equal(400);
+          expect(response1.result.errors[0].detail).to.equal('"locale" is not allowed');
+          expect(response2.statusCode).to.equal(400);
+          expect(response2.result.errors[0].detail).to.equal('"locale" is not allowed');
+        });
+      });
+
+      context('when a property has not the valid format', function () {
+        it('returns an HTTP status code 400', async function () {
+          // given
+          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+
+          const userId = databaseBuilder.factory.buildUser.anonymous().id;
+          await databaseBuilder.commit();
+
+          const payload = {
+            data: {
+              id: userId,
+              type: 'users',
+              attributes: {
+                'first-name': 'Joséphine',
+                'last-name': 'Baker',
+                email: 'josephine.baker@example.net',
+                password: 'someValidPassword-12345678',
+                cgu: 'not_a_boolean',
+              },
+            },
+          };
+
+          const url = `/api/admin/users/${userId}`;
+
+          // when
+          const response = await httpTestServer.request('PATCH', url, payload);
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          expect(response.result.errors[0].detail).to.equal('"data.attributes.cgu" must be a boolean');
+        });
+      });
     });
   });
 
@@ -179,28 +227,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       // then
       expect(response.statusCode).to.equal(403);
       sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-    });
-
-    it('returns BAD_REQUEST (400) when id in param is not a number"', async function () {
-      // given
-      const url = '/api/admin/users/NOT_A_NUMBER';
-
-      // when
-      const response = await httpTestServer.request('GET', url);
-
-      // then
-      expect(response.statusCode).to.equal(400);
-    });
-
-    it('returns BAD_REQUEST (400) when id in params is out of range"', async function () {
-      // given
-      const url = '/api/admin/users/0';
-
-      // when
-      const response = await httpTestServer.request('GET', url);
-
-      // then
-      expect(response.statusCode).to.equal(400);
     });
   });
 
@@ -239,15 +265,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSuperAdmin);
       sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
       sinon.assert.calledOnce(userAdminController.anonymizeUser);
-    });
-
-    it('returns 400 when id is not a number', async function () {
-      // when
-      const { statusCode, payload } = await httpTestServer.request('POST', '/api/admin/users/wrongId/anonymize');
-
-      // then
-      expect(statusCode).to.equal(400);
-      expect(JSON.parse(payload).errors[0].detail).to.equal('"id" must be a number');
     });
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
@@ -328,20 +345,6 @@ describe('Integration | Identity Access Management | Application | Route | Admin
         });
       },
     );
-
-    it('returns 400 when id is not a number', async function () {
-      // when
-      const result = await httpTestServer.request('POST', '/api/admin/users/invalid-id/remove-authentication', {
-        data: {
-          attributes: {
-            type: 'EMAIL',
-          },
-        },
-      });
-
-      // then
-      expect(result.statusCode).to.equal(400);
-    });
 
     it(`returns 403 when user don't have access (CERTIF | METIER)`, async function () {
       // given

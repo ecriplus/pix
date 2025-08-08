@@ -1,8 +1,8 @@
 import { SCO_ORGANIZATION_ID } from '../common/constants.js';
 import { PIX_EDU_SMALL_TARGET_PROFILE_ID } from './constants.js';
 
-export async function buildTargetProfiles(databaseBuilder) {
-  databaseBuilder.factory.buildTargetProfile({
+export async function buildTargetProfiles({ databaseBuilder, organizationIds }) {
+  const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({
     id: PIX_EDU_SMALL_TARGET_PROFILE_ID,
     ownerOrganizationId: SCO_ORGANIZATION_ID,
     imageUrl: 'https://images.pix.fr/profil-cible/Illu_GEN.svg',
@@ -23,5 +23,16 @@ export async function buildTargetProfiles(databaseBuilder) {
       level,
     });
   });
+
+  _buildTargetProfileShares({ databaseBuilder, organizationIds, targetProfileId });
   await databaseBuilder.commit();
+}
+
+function _buildTargetProfileShares({ databaseBuilder, organizationIds, targetProfileId }) {
+  organizationIds.forEach((organizationId) => {
+    databaseBuilder.factory.buildTargetProfileShare({
+      targetProfileId,
+      organizationId,
+    });
+  });
 }

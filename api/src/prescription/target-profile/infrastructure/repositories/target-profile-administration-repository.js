@@ -8,13 +8,13 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError, ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { BadgeCriterion, BadgeDetails, CappedTube, SCOPES } from '../../../../shared/domain/models/BadgeDetails.js';
 import { TargetProfile } from '../../../../shared/domain/models/index.js';
-import { StageCollection } from '../../../../shared/domain/models/target-profile-management/StageCollection.js';
 import { FRENCH_FRANCE } from '../../../../shared/domain/services/locale-service.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
+import { StageCollection } from '../../domain/models/StageCollection.js';
 import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileSummaryForAdmin.js';
 
 const TARGET_PROFILE_TABLE = 'target-profiles';

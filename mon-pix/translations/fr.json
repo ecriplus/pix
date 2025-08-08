@@ -1646,10 +1646,6 @@
           "transcription": "Afficher la transcription"
         },
         "embed": {
-          "reset": {
-            "ariaLabel": "Réinitialiser le simulateur",
-            "name": "Réinitialiser"
-          },
           "start": {
             "ariaLabel": "Commencer le simulateur",
             "name": "Commencer"
@@ -1672,6 +1668,12 @@
           "skip": "Passer",
           "skipActivity": "Passer l‘activité",
           "terminate": "Terminer"
+        },
+        "interactive-element": {
+          "reset": {
+            "ariaLabel": "Réinitialiser le simulateur",
+            "name": "Réinitialiser"
+          }
         },
         "stepper": {
           "next": {
@@ -1926,10 +1928,6 @@
         "login": "Se connecter",
         "sign-up-on-pix": "S'inscrire sur Pix",
         "submit": "Je m'inscris"
-      },
-      "errors": {
-        "invalid-locale-format": "Votre locale \"{invalidLocale}\" n'est pas dans le bon format.",
-        "locale-not-supported": "Votre locale \"{localeNotSupported}\" n'est actuellement pas supportée."
       },
       "fields": {
         "email": {

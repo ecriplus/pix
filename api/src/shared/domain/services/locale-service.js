@@ -1,5 +1,3 @@
-import { LocaleFormatError, LocaleNotSupportedError } from '../errors.js';
-
 const ENGLISH_SPOKEN = 'en';
 const FRENCH_FRANCE = 'fr-fr';
 const FRENCH_SPOKEN = 'fr';
@@ -10,7 +8,7 @@ const CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
 
 const DEFAULT_CHALLENGE_LOCALE = 'fr-fr';
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'fr-BE', 'fr-FR', 'nl-BE', 'nl'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'];
 
 const SUPPORTED_LANGUAGES = Array.from(new Set(SUPPORTED_LOCALES.map((locale) => new Intl.Locale(locale).language)));
 
@@ -54,21 +52,23 @@ function coerceLanguage(language) {
   return DEFAULT_LOCALE;
 }
 
-const getCanonicalLocale = function (locale) {
-  let canonicalLocale;
-
+function getNearestSupportedLocale(locale) {
+  if (!locale) return undefined;
   try {
-    canonicalLocale = Intl.getCanonicalLocales(locale)[0];
+    const intlLocale = new Intl.Locale(locale);
+
+    if (SUPPORTED_LOCALES.includes(intlLocale.toString())) {
+      return intlLocale.toString();
+    }
+
+    const localeMatch = SUPPORTED_LOCALES.find((l) => new Intl.Locale(l).language === intlLocale.language);
+    if (localeMatch) return localeMatch;
+
+    return DEFAULT_LOCALE;
   } catch {
-    throw new LocaleFormatError(locale);
+    return DEFAULT_LOCALE;
   }
-
-  if (!SUPPORTED_LOCALES.includes(canonicalLocale)) {
-    throw new LocaleNotSupportedError(canonicalLocale);
-  }
-
-  return canonicalLocale;
-};
+}
 
 export {
   coerceLanguage,
@@ -76,10 +76,10 @@ export {
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
-  getCanonicalLocale,
   getChallengeLocales,
   getDefaultChallengeLocale,
   getDefaultLocale,
+  getNearestSupportedLocale,
   getSupportedLanguages,
   getSupportedLocales,
   SPANISH_SPOKEN,

@@ -1,8 +1,5 @@
 /**
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').CertificationRepository} CertificationRepository
- * @typedef {import('../../../../../lib/domain/usecases/index.js').FinalizedSessionRepository} FinalizedSessionRepository
- * @typedef {import('../../../../../lib/domain/usecases/index.js').SessionRepository} SessionRepository
- * @typedef {import('../../../../../lib/domain/usecases/index.js').SharedSessionRepository} SharedSessionRepository
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').MailService} MailService
  */
 import lodash from 'lodash';
@@ -193,17 +190,12 @@ function _isAnyCertificationNotPublishable(certificationStatuses) {
 
 function _hasCertificationInError(certificationStatus) {
   return certificationStatus.some(
-    // DEPRECATED : isCancelled will be removed
-    ({ pixCertificationStatus, isCancelled }) =>
-      pixCertificationStatus === AssessmentResult.status.ERROR && !isCancelled,
+    ({ pixCertificationStatus }) => pixCertificationStatus === AssessmentResult.status.ERROR,
   );
 }
 
 function _hasCertificationWithNoScoring(certificationStatuses) {
-  return certificationStatuses.some(
-    // DEPRECATED : isCancelled will be remove
-    ({ pixCertificationStatus, isCancelled }) => pixCertificationStatus === null && !isCancelled,
-  );
+  return certificationStatuses.some(({ pixCertificationStatus }) => pixCertificationStatus === null);
 }
 
 export { manageEmails, publishSession };

@@ -32,10 +32,6 @@ class UserDetailsForAdmin {
     } = {},
     dependencies = { localeService },
   ) {
-    if (locale) {
-      locale = dependencies.localeService.getCanonicalLocale(locale);
-    }
-
     this.id = id;
     this.cgu = cgu;
     this.firstName = firstName;
@@ -48,7 +44,7 @@ class UserDetailsForAdmin {
     this.authenticationMethods = authenticationMethods;
     this.createdAt = createdAt;
     this.lang = lang;
-    this.locale = locale;
+    this.locale = dependencies.localeService.getNearestSupportedLocale(locale);
     this.lastTermsOfServiceValidatedAt = lastTermsOfServiceValidatedAt;
     this.lastPixOrgaTermsOfServiceValidatedAt = lastPixOrgaTermsOfServiceValidatedAt;
     this.lastPixCertifTermsOfServiceValidatedAt = lastPixCertifTermsOfServiceValidatedAt;

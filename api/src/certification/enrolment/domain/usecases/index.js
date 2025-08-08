@@ -3,8 +3,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as divisionRepository from '../../../../prescription/campaign/infrastructure/repositories/division-repository.js';
+import * as organizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
-import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -74,7 +74,6 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {certificationBadgesService} CertificationBadgesService
  * @typedef {CertificationCandidatesOdsService} CertificationCandidatesOdsService
  * @typedef {PlacementProfileService} PlacementProfileService
- * @typedef {LanguageService} LanguageService
  * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {organizationRepository} OrganizationRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository

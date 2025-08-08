@@ -4,7 +4,7 @@ import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/applicat
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { identifiersType, queriesType } from '../../../shared/domain/types/identifiers-type.js';
-import { campaignAdministrationController } from './campaign-adminstration-controller.js';
+import { campaignAdministrationController } from './campaign-administration-controller.js';
 
 const ERRORS = {
   PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',

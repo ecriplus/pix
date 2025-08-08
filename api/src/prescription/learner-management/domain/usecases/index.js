@@ -12,7 +12,6 @@ import * as userReconciliationService from '../../../../shared/domain/services/u
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
-import * as libOrganizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
@@ -20,6 +19,7 @@ import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import * as membershipRepository from '../../../../team/infrastructure/repositories/membership.repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as campaignParticipationRepositoryfromBC from '../../../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import * as libOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 import { importCommonOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
@@ -110,6 +110,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {reconcileScoOrganizationLearnerAutomatically} reconcileScoOrganizationLearnerAutomatically
  * @property {replaceSupOrganizationLearners} replaceSupOrganizationLearners
  * @property {updateOrganizationLearnerImportFormats} updateOrganizationLearnerImportFormats
+ * @property {updateOrganizationLearnerName} updateOrganizationLearnerName
  * @property {updateStudentNumber} updateStudentNumber
  * @property {uploadCsvFile} uploadCsvFile
  * @property {uploadSiecleFile} uploadSiecleFile

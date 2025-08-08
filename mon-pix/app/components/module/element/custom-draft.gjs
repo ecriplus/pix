@@ -51,8 +51,8 @@ export default class ModulixCustomDraft extends ModuleElement {
           @iconBefore="refresh"
           @variant="tertiary"
           @triggerAction={{this.resetEmbed}}
-          aria-label="{{t 'pages.modulix.buttons.embed.reset.ariaLabel'}}"
-        >{{t "pages.modulix.buttons.embed.reset.name"}}</PixButton>
+          aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
+        >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
       </div>
     </div>
   </template>

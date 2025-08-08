@@ -1,4 +1,4 @@
-import { campaignAdministrationController } from '../../../../../src/prescription/campaign/application/campaign-adminstration-controller.js';
+import { campaignAdministrationController } from '../../../../../src/prescription/campaign/application/campaign-administration-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignExternalIdTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';

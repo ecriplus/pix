@@ -1,10 +1,10 @@
-import { CampaignParticipationResult } from '../../../../shared/domain/models/CampaignParticipationResult.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
+import { CampaignParticipationResult } from '../../domain/models/CampaignParticipationResult.js';
 import * as campaignParticipationRepository from './campaign-participation-repository.js';
 
 const campaignParticipationResultRepository = {

@@ -1,6 +1,6 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 import dayjs from 'dayjs';
-import { assessmentResultStatus, assessmentStates } from 'pix-admin/models/certification';
+import { assessmentStates } from 'pix-admin/models/certification';
 
 const ONE_HOUR_45_MINUTES_IN_MS = 1 * 60 * 60 * 1000 + 45 * 60 * 1000;
 
@@ -9,11 +9,9 @@ export const abortReasons = {
   TECHNICAL: 'technical',
 };
 
-// isCancelled will be removed
 export default class V3CertificationCourseDetailsForAdministration extends Model {
   @attr('number') certificationCourseId;
   @attr('boolean') isRejectedForFraud;
-  @attr('boolean') isCancelled;
   @attr('date') createdAt;
   @attr('date') completedAt;
   @attr('date') endedAt;
@@ -44,11 +42,6 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
 
   get wasCompleted() {
     return this.assessmentState === assessmentStates.COMPLETED;
-  }
-
-  // isCancelled will be removed
-  get isCertificationCancelled() {
-    return this.isCancelled || this.assessmentResultStatus === assessmentResultStatus.CANCELLED;
   }
 
   get numberOfOkAnswers() {

@@ -489,6 +489,61 @@
       ]
     },
     {
+      "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef8",
+      "type": "lesson",
+      "title": "llm-messages",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "a1f5e147-ea8c-4046-8020-f21c28529388",
+            "type": "text",
+            "content": "<p>llm-messages</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "03bacda5-2b76-49fd-a266-3a9bb16c20c9",
+            "type": "custom",
+            "tagName": "llm-messages",
+            "props": {
+              "messages": [
+                {
+                  "direction": "outbound",
+                  "content": "Bonjour"
+                },
+                {
+                  "direction": "inbound",
+                  "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Pourquoi pas..."
+                },
+                {
+                  "direction": "inbound",
+                  "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Elle est bizarre ta recette."
+                },
+                {
+                  "direction": "inbound",
+                  "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
+                },
+                {
+                  "direction": "outbound",
+                  "content": "Non, je m'en vais."
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
       "id": "662434d8-5d88-4be6-a339-a81916933229",
       "type": "lesson",
       "title": "llm-prompt-select",
@@ -562,38 +617,101 @@
                 {
                   "title": "Situation A",
                   "description": "Super description!",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "une alternative A avec des \"double quotes\""
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Situation B",
                   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at imperdiet libero, eget suscipit enim. Proin in nibh id ligula tempus suscipit eu at dolor. Fusce tincidunt gravida turpis, a sagittis ex bibendum nec. Morbi hendrerit lectus sed libero tristique, non luctus diam ultricies. Cras in quam consectetur, tempor quam id, euismod turpis. Duis faucibus erat lectus, blandit mattis lectus euismod quis. Duis imperdiet volutpat metus at varius. Nunc vitae mattis leo, ac vehicula urna. Mauris euismod eleifend lorem quis porta. Quisque ac diam sollicitudin nisl convallis ullamcorper. Donec ut suscipit arcu.",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "une alternative B"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Liste non ordonnée",
                   "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zooma</li>\n         <li>Stela</li>\n       </ul>\n     ",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "hehe je suis un alt"
+                  },
+                  "license": {
+                    "name": "",
+                    "attribution": "",
+                    "url": ""
                   }
                 },
                 {
                   "title": "Liste ordonnée",
                   "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zooma</li>\n         <li>Stela</li>\n       </ol>\n",
-                  "displayWidth": 624,
+                  "displayWidth": 0,
                   "image": {
                     "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                     "alt": "halte là !"
+                  },
+                  "license": {
+                    "name": "name",
+                    "attribution": "attri",
+                    "url": "url"
                   }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "fc38e052-ed9f-4d68-b09f-515b7069ad00",
+      "type": "lesson",
+      "title": "pix-cursor",
+      "components": [
+        {
+          "type": "element",
+          "element": {
+            "id": "7c2efda7-1839-4b58-8673-ab32294cc799",
+            "type": "text",
+            "content": "<p>pix-cursor</p>"
+          }
+        },
+        {
+          "type": "element",
+          "element": {
+            "id": "b04ef581-48f2-4543-9bf4-e1e8784fa396",
+            "type": "custom",
+            "tagName": "pix-cursor",
+            "props": {
+              "options": [
+                {
+                  "label": "Bon",
+                  "feedback": { "type": "good", "text": "OUI, ÇA SENT LA PATATE ! 🎉" }
+                },
+                {
+                  "label": "Presque",
+                  "feedback": { "type": "close", "text": "PATATE 🥔" }
+                },
+                {
+                  "label": "Neutre",
+                  "feedback": { "type": "neutral", "text": "Ça souffle dis donc 💨" }
+                },
+                {
+                  "label": "Incorrect",
+                  "feedback": { "type": "bad", "text": "❌ C'EST NON! Et voici pourquoi : <br>Quis elit cupidatat commodo adipisicing aliqua qui commodo proident ipsum dolore culpa in. Mollit eiusmod elit sint in aute nulla enim. Sit sint in sunt esse excepteur cupidatat et adipisicing nulla excepteur consectetur reprehenderit est ipsum. Cupidatat proident est pariatur minim labore excepteur culpa aliqua consectetur laboris voluptate consectetur enim nulla laboris. Aliquip occaecat irure sunt. Laboris eiusmod eu dolor veniam minim proident. Elit consequat est occaecat." }
                 }
               ]
             }

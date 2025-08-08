@@ -1,4 +1,4 @@
-import { StageCollection } from '../../../../../src/shared/domain/models/target-profile-management/StageCollection.js';
+import { StageCollection } from '../../../../../src/prescription/target-profile/domain/models/StageCollection.js';
 
 const buildStageCollection = function ({ id, stages = [], maxLevel } = {}) {
   return new StageCollection({ id, stages, maxLevel });

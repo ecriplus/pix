@@ -185,7 +185,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
         lastName: 'Aheurfix',
         attributes: {
           'date de naissance': '2020-01-01',
-          catégorie: 'manger',
+          category: 'manger',
         },
         userId: null,
         organizationId,
@@ -222,6 +222,232 @@ describe('Acceptance | Prescription | learner management | Application | organiz
 
       // then
       expect(response.statusCode).to.equal(204);
+    });
+  });
+
+  describe('PATCH /api/organizations/{organizationId}/organization-learners/{organizationLearnerId}', function () {
+    let organization;
+    let organizationLearner;
+    let user;
+    let headers;
+
+    beforeEach(async function () {
+      user = databaseBuilder.factory.buildUser();
+      headers = generateAuthenticatedUserRequestHeaders({ userId: user.id });
+      await databaseBuilder.commit();
+    });
+
+    context('Success cases', function () {
+      it('should return 204 and update organization learner name', async function () {
+        // given
+        organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+        organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+          firstName: 'OldFirstName',
+          lastName: 'OldLastName',
+        });
+        databaseBuilder.factory.buildMembership({
+          organizationId: organization.id,
+          userId: user.id,
+          organizationRole: Membership.roles.ADMIN,
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'PATCH',
+          url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+          headers,
+          payload: {
+            firstName: 'NewFirstName',
+            lastName: 'NewLastName',
+          },
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(204);
+      });
+    });
+
+    context('Error cases', function () {
+      context('when organization is managing students', function () {
+        it('should return 403 - Forbidden', async function () {
+          // given
+          organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
+          organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            firstName: 'OldFirstName',
+            lastName: 'OldLastName',
+          });
+          databaseBuilder.factory.buildMembership({
+            organizationId: organization.id,
+            userId: user.id,
+            organizationRole: Membership.roles.ADMIN,
+          });
+          await databaseBuilder.commit();
+
+          const options = {
+            method: 'PATCH',
+            url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+            headers,
+            payload: {
+              firstName: 'NewFirstName',
+              lastName: 'NewLastName',
+            },
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(403);
+        });
+      });
+
+      context('when user is not admin of organization', function () {
+        it('should return 403 - Forbidden', async function () {
+          // given==
+          organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+          organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            firstName: 'OldFirstName',
+            lastName: 'OldLastName',
+          });
+          databaseBuilder.factory.buildMembership({
+            organizationId: organization.id,
+            userId: user.id,
+            organizationRole: Membership.roles.MEMBER, // Not admin
+          });
+          await databaseBuilder.commit();
+
+          const options = {
+            method: 'PATCH',
+            url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+            headers,
+            payload: {
+              firstName: 'NewFirstName',
+              lastName: 'NewLastName',
+            },
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(403);
+        });
+      });
+
+      context('when organization has LEARNER_IMPORT feature', function () {
+        it('should return 403 - Forbidden', async function () {
+          // given
+          organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+          organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            firstName: 'OldFirstName',
+            lastName: 'OldLastName',
+          });
+          databaseBuilder.factory.buildMembership({
+            organizationId: organization.id,
+            userId: user.id,
+            organizationRole: Membership.roles.ADMIN,
+          });
+
+          // Add LEARNER_IMPORT feature to organization
+          const featureId = databaseBuilder.factory.buildFeature({ key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key }).id;
+          databaseBuilder.factory.buildOrganizationFeature({
+            organizationId: organization.id,
+            featureId,
+          });
+
+          await databaseBuilder.commit();
+
+          const options = {
+            method: 'PATCH',
+            url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+            headers,
+            payload: {
+              firstName: 'NewFirstName',
+              lastName: 'NewLastName',
+            },
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(403);
+        });
+      });
+
+      context('when organization learner does not belong to the organization', function () {
+        it('should return 404 - Not Found', async function () {
+          // given
+          organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+          const otherOrganization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+
+          // Organization learner belongs to a different organization
+          organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: otherOrganization.id,
+            firstName: 'OldFirstName',
+            lastName: 'OldLastName',
+          });
+
+          databaseBuilder.factory.buildMembership({
+            organizationId: organization.id,
+            userId: user.id,
+            organizationRole: Membership.roles.ADMIN,
+          });
+          await databaseBuilder.commit();
+
+          const options = {
+            method: 'PATCH',
+            url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+            headers,
+            payload: {
+              firstName: 'NewFirstName',
+              lastName: 'NewLastName',
+            },
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(404);
+        });
+      });
+
+      context('when user is not authenticated', function () {
+        it('should return 401 - Unauthorized', async function () {
+          // given
+          organization = databaseBuilder.factory.buildOrganization({ isManagingStudents: false });
+          organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            firstName: 'OldFirstName',
+            lastName: 'OldLastName',
+          });
+          await databaseBuilder.commit();
+
+          const options = {
+            method: 'PATCH',
+            url: `/api/organizations/${organization.id}/organization-learners/${organizationLearner.id}`,
+            headers: {}, // No authentication headers
+            payload: {
+              firstName: 'NewFirstName',
+              lastName: 'NewLastName',
+            },
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          expect(response.statusCode).to.equal(401);
+        });
+      });
     });
   });
 

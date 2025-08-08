@@ -5,11 +5,11 @@ import { buildTargetProfiles } from './build-target-profiles.js';
 import { buildTrainings } from './build-trainings.js';
 
 async function teamDevcompDataBuilder({ databaseBuilder }) {
-  await createDevcompOrganization(databaseBuilder);
+  const organizationIds = await createDevcompOrganization(databaseBuilder);
   const learnersCount = await createDevcompOrganizationLearners(databaseBuilder);
   await databaseBuilder.commit();
 
-  await buildTargetProfiles(databaseBuilder);
+  await buildTargetProfiles({ databaseBuilder, organizationIds });
   const trainingsIds = await buildTrainings(databaseBuilder);
   await buildCampaigns(databaseBuilder, trainingsIds, learnersCount);
 }

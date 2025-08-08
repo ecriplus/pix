@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
+import * as organizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
   OrganizationLearnersCouldNotBeSavedError,
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
-import * as organizationLearnerRepository from '../../../../shared/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/errors.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
@@ -382,7 +382,6 @@ const findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId = async fu
   const knexConn = DomainTransaction.getConnection();
   return knexConn('view-active-organization-learners').where({ organizationId }).whereNull('attributes').pluck('id');
 };
-
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   countByUserId,

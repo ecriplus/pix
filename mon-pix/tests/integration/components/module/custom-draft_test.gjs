@@ -28,7 +28,9 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
     const expectedIframe = screen.getByTitle(customDraft.title);
     assert.strictEqual(expectedIframe.getAttribute('src'), customDraft.url);
     assert.strictEqual(window.getComputedStyle(expectedIframe).getPropertyValue('height'), `${customDraft.height}px`);
-    assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.embed.reset.ariaLabel') })).exists();
+    assert
+      .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.interactive-element.reset.ariaLabel') }))
+      .exists();
     assert.dom(screen.getByText('Instruction du POIC')).exists();
   });
 
@@ -62,7 +64,7 @@ module('Integration | Component | Module | CustomDraft', function (hooks) {
       const screen = await render(<template><ModulixCustomDraft @customDraft={{customDraft}} /></template>);
 
       // when
-      await clickByName(t('pages.modulix.buttons.embed.reset.ariaLabel'));
+      await clickByName(t('pages.modulix.buttons.interactive-element.reset.ariaLabel'));
 
       // then
       const iframe = screen.getByTitle(customDraft.title);

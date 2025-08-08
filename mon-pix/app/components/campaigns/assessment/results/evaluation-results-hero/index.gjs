@@ -66,8 +66,8 @@ export default class EvaluationResultsHero extends Component {
     );
   }
 
-  get isUserAnonymousAndUpgradeToRealUserEnabled() {
-    return this.featureToggles.featureToggles?.upgradeToRealUserEnabled && this.currentUser.user.isAnonymous;
+  get isUserAnonymous() {
+    return this.currentUser?.user?.isAnonymous;
   }
 
   get hasQuestResults() {
@@ -245,7 +245,7 @@ export default class EvaluationResultsHero extends Component {
         <div class="evaluation-results-hero-details__actions">
           {{#if @isSharableCampaign}}
             {{#if @campaignParticipationResult.isShared}}
-              {{#if this.isUserAnonymousAndUpgradeToRealUserEnabled}}
+              {{#if this.isUserAnonymous}}
                 <p>{{t "pages.sign-up.save-progress-message"}}</p>
                 <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
                   {{t "pages.sign-up.actions.sign-up-on-pix"}}
@@ -256,7 +256,7 @@ export default class EvaluationResultsHero extends Component {
                   {{t "pages.skill-review.hero.see-trainings"}}
                 </PixButton>
               {{else}}
-                {{#unless (or @campaign.hasCustomResultPageButton this.isUserAnonymousAndUpgradeToRealUserEnabled)}}
+                {{#unless (or @campaign.hasCustomResultPageButton this.isUserAnonymous)}}
                   {{this.handleBackToHomepageDisplay}}
                   <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
                     {{t "navigation.back-to-homepage"}}
@@ -290,7 +290,7 @@ export default class EvaluationResultsHero extends Component {
             {{/if}}
           {{else}}
             {{#unless @campaign.hasCustomResultPageButton}}
-              {{#if this.isUserAnonymousAndUpgradeToRealUserEnabled}}
+              {{#if this.isUserAnonymous}}
                 <p>{{t "pages.sign-up.save-progress-message"}}</p>
                 <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
                   {{t "pages.sign-up.actions.sign-up-on-pix"}}

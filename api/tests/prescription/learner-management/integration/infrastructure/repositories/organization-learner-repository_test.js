@@ -23,13 +23,13 @@ import {
   update,
   updateCertificability,
 } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
+import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
   OrganizationLearnersCouldNotBeSavedError,
   UserCouldNotBeReconciledError,
 } from '../../../../../../src/shared/domain/errors.js';
-import * as organizationLearnerRepository from '../../../../../../src/shared/infrastructure/repositories/organization-learner-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Organization Learner Management | Organization Learner', function () {
