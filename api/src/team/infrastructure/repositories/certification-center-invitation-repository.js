@@ -145,7 +145,6 @@ const markAsCancelled = async function ({ id }) {
   if (!certificationCenterInvitation) {
     throw new NotFoundError(`Certification center invitation of id ${id} is not found.`);
   }
-  return _toDomain(certificationCenterInvitation);
 };
 
 /**
