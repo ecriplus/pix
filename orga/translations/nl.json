@@ -353,6 +353,15 @@
       "in-progress-link": "(controleer importstatus).",
       "success": "De deelnemers zijn geïmporteerd op {date} door {firstName} {lastName}."
     },
+    "index": {
+      "welcome": {
+        "title": "Hallo {name},",
+        "description": {
+          "classic": "Welkom op uw platform voor de evaluatie van digitale vaardigheden! Configureer en verspreid uw evaluatiecampagnes onder uw deelnemers. Volg hun voortgang en analyseer hun resultaten om hen begeleiding op maat aan te bieden die aangepast is aan hun behoeften of hen te begeleiden naar Pix-certificering.",
+          "missions": "Welkom op uw platform voor de evaluatie van digitale vaardigheden! Configureer en verspreid uw evaluatiecampagnes onder uw deelnemers. Volg hun voortgang en analyseer hun resultaten om hen begeleiding op maat aan te bieden die aangepast is aan hun behoeften of hen te begeleiden naar Pix-certificering."
+        }
+      }
+    },
     "locale-switcher": {
       "label": "Selecteer een taal"
     },
@@ -953,16 +962,13 @@
     },
     "index": {
       "title": "Home",
-      "welcome-title": "Hallo {name},",
       "classic": {
-        "description": "Welkom op uw platform voor de evaluatie van digitale vaardigheden! \nConfigureer en verspreid uw evaluatiecampagnes onder uw deelnemers. Volg hun voortgang en analyseer hun resultaten om hen begeleiding op maat aan te bieden die aangepast is aan hun behoeften of hen te begeleiden naar Pix-certificering.",
         "organization-information": {
           "title": "De informatie van uw organisatie",
           "label": "Naam van uw organisatie"
         }
       },
       "missions": {
-        "description": "Welkom op uw platform voor de evaluatie van digitale vaardigheden! \nConfigureer en verspreid uw evaluatiecampagnes onder uw deelnemers. Volg hun voortgang en analyseer hun resultaten om hen begeleiding op maat aan te bieden die aangepast is aan hun behoeften of hen te begeleiden naar Pix-certificering.",
         "organization-information": {
           "title": "De informatie van uw organisatie",
           "label": "Naam van uw organisatie"

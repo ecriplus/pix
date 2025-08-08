@@ -2,18 +2,18 @@ import PixIndicatorCard from '@1024pix/pix-ui/components/pix-indicator-card';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import PageTitle from 'pix-orga/components/ui/page-title';
+import Welcome from 'pix-orga/components/index/welcome';
 
 export default class IndexMissions extends Component {
   @service currentUser;
+  @service intl;
+
+  get description() {
+    return this.intl.t('components.index.welcome.description.missions');
+  }
 
   <template>
-    <PageTitle>
-      <:title>
-        {{t "pages.index.welcome-title" name=this.currentUser.prescriber.firstName}}
-      </:title>
-    </PageTitle>
-    <p class="page-index__description">{{t "pages.index.missions.description"}}</p>
+    <Welcome @firstName={{this.currentUser.prescriber.firstName}} @description={{this.description}} />
     <section>
       <h2 class="page-index-organization__title">{{t "pages.index.classic.organization-information.title"}}</h2>
 

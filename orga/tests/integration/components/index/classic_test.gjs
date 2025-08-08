@@ -19,9 +19,8 @@ module('Integration | Component | Index::Classic', function (hooks) {
     const screen = await render(<template><IndexClassic /></template>);
 
     // then
-    assert.ok(screen.getByRole('heading', { name: t('pages.index.welcome-title', { name: 'Jean' }) }));
-    assert.ok(screen.getByText(t('pages.index.classic.description')));
-    assert.ok(screen.getByRole('heading', { name: t('pages.index.classic.organization-information.title') }));
+    assert.ok(screen.getByRole('heading', { name: t('components.index.welcome.title', { name: 'Jean' }) }));
+    assert.ok(screen.getByText(t('components.index.welcome.description.classic')));
   });
 
   test('should display organization information', async function (assert) {
