@@ -1,11 +1,20 @@
+import { getContext, settled } from '@ember/test-helpers';
 import { setupIntl as setupIntlFromEmberIntl, t } from 'ember-intl/test-support';
 
-export default function setupIntl(hooks, locale = ['fr']) {
-  setupIntlFromEmberIntl(hooks, locale[0]);
+export async function setCurrentLocale(locale) {
+  const { owner } = getContext();
 
-  hooks.beforeEach(function () {
-    this.dayjs = this.owner.lookup('service:dayjs');
-    this.dayjs.setLocale(locale[0]);
+  const localeService = owner.lookup('service:locale');
+  localeService.setCurrentLocale(locale);
+
+  await settled();
+}
+
+export default function setupIntl(hooks, locale = 'fr') {
+  setupIntlFromEmberIntl(hooks, locale);
+
+  hooks.beforeEach(async function () {
+    await setCurrentLocale(locale);
   });
 }
 

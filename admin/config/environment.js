@@ -29,7 +29,7 @@ module.exports = function (environment) {
       API_HOST: process.env.API_HOST || '',
       PIX_APP_URL_WITHOUT_EXTENSION: process.env.PIX_APP_URL_WITHOUT_EXTENSION || 'https://app.pix.',
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
-      SUPPORTED_LOCALES: ['en', 'fr'],
+      SUPPORTED_LOCALES: ['en', 'fr', 'fr-FR'],
       API_ERROR_MESSAGES: {
         BAD_REQUEST: {
           CODE: '400',
