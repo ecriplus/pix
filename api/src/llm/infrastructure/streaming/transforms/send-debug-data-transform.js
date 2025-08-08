@@ -1,0 +1,25 @@
+import { Transform } from 'node:stream';
+
+/**
+ * @param {StreamCapture} streamCapture Structure that will hold state, such as the accumulated LLM response
+ * @param {boolean} shouldSendDebugData
+ * @returns {module:stream.internal.Transform}
+ */
+export function getTransform(streamCapture, shouldSendDebugData) {
+  return new Transform({
+    objectMode: true,
+    transform(chunk, _encoding, callback) {
+      callback(null, chunk);
+    },
+    flush(callback) {
+      if (shouldSendDebugData) {
+        this.push(getTokenConsumptionEvent(streamCapture.inputTokens, streamCapture.outputTokens));
+      }
+      callback();
+    },
+  });
+}
+
+function getTokenConsumptionEvent(inputTokens, outputTokens) {
+  return 'event: input-tokens-' + inputTokens + '\ndata: \n\nevent: output-tokens-' + outputTokens + '\ndata: \n\n';
+}
