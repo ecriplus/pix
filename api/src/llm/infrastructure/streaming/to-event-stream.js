@@ -2,7 +2,7 @@ import { PassThrough, pipeline } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
-import * as messageObjectToEventStreamTransform from './transforms/message-object-to-event-stream-transform.js';
+import * as responseObjectToEventStreamTransform from './transforms/response-object-to-event-stream-transform.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
 
@@ -56,7 +56,7 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
   pipeline(
     readableStream,
     lengthPrefixedJsonDecoderTransform.getTransform(),
-    messageObjectToEventStreamTransform.getTransform(streamCapture),
+    responseObjectToEventStreamTransform.getTransform(streamCapture),
     writableStream,
     async (err) => {
       if (err) {
