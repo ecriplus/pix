@@ -133,12 +133,51 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           }),
         ]);
       });
+      it('should not take hashedCombinedCourseUrl if item type is campaign', function () {
+        // given
+        const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
+        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+        const quest = new Quest({
+          id: 1,
+          rewardId: null,
+          rewardType: null,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: campaign.id,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+        // when
+        combinedCourse.generateItems([campaign], [], [], hashedCombinedCourseUrl);
+
+        // then
+        expect(combinedCourse.items).to.deep.equal([
+          new CombinedCourseItem({
+            id: campaign.id,
+            reference: campaign.code,
+            title: campaign.name,
+            type: ITEM_TYPE.CAMPAIGN,
+            redirection: undefined,
+          }),
+        ]);
+      });
 
       describe('when items are type module', function () {
         it('should return module if it is in quest but not is not in target profile', function () {
           // given
           const recommendableModuleIds = [];
           const recommendedModuleIdsForUser = [];
+          const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
           const quest = new Quest({
             id: 1,
             rewardId: null,
@@ -161,7 +200,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           const module = new Module({ id: 7, title: 'module' });
 
           // when
-          combinedCourse.generateItems([module], recommendableModuleIds, recommendedModuleIdsForUser);
+          combinedCourse.generateItems(
+            [module],
+            recommendableModuleIds,
+            recommendedModuleIdsForUser,
+            hashedCombinedCourseUrl,
+          );
 
           // then
           expect(combinedCourse.items).to.deep.equal([
@@ -170,6 +214,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               reference: module.slug,
               title: module.title,
               type: ITEM_TYPE.MODULE,
+              redirection: hashedCombinedCourseUrl,
             }),
           ]);
         });
@@ -224,6 +269,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         it('should return module if it in quest, recommandable and recommended for user', function () {
           // given
+          const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
           const module = new Module({ id: 1, title: 'module' });
           const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
@@ -260,7 +306,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
 
           // when
-          combinedCourse.generateItems([campaign, module], recommendableModuleIds, recommendedModuleIdsForUser);
+          combinedCourse.generateItems(
+            [campaign, module],
+            recommendableModuleIds,
+            recommendedModuleIdsForUser,
+            hashedCombinedCourseUrl,
+          );
 
           // then
           expect(combinedCourse.items).to.deep.equal([
@@ -275,6 +326,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               reference: module.slug,
               title: module.title,
               type: ITEM_TYPE.MODULE,
+              redirection: hashedCombinedCourseUrl,
             }),
           ]);
         });
