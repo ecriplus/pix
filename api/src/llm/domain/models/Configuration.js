@@ -68,6 +68,9 @@ export class Configuration {
  * @property {object} challenge.victoryConditions FIXME add victoryConditions properties
  * @property {string=} challenge.context
  * @property {Attachment=} attachment
+ * @property {object=} preview
+ * @property {string=} preview.moderationPrompt
+ * @property {string=} preview.validationPrompt
  */
 
 /**
