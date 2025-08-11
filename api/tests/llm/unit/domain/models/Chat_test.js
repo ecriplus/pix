@@ -3,6 +3,39 @@ import { Configuration } from '../../../../../src/llm/domain/models/Configuratio
 import { expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Chat', function () {
+  describe('#get isPreview', function () {
+    context('when chat is not linked to a user', function () {
+      it('should return true', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('isPreview', true);
+      });
+    });
+
+    context('when chat is linked to a user', function () {
+      it('should return false', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configuration: new Configuration({ id: 'some-config-id' }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('isPreview', false);
+      });
+    });
+  });
+
   describe('#addUserMessage', function () {
     it('should append a message as user message when message has content', function () {
       // given

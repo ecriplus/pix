@@ -3,10 +3,10 @@ import { finished } from 'node:stream/promises';
 
 import _ from 'lodash';
 
-import { getTransform } from '../../../../../../src/llm/infrastructure/streaming/transforms/message-object-to-event-stream-transform.js';
+import { getTransform } from '../../../../../../src/llm/infrastructure/streaming/transforms/response-object-to-event-stream-transform.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectToEventStreamTransform', function () {
+describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectToEventStreamTransform', function () {
   describe('#getTransform', function () {
     let streamCapture;
     beforeEach(function () {

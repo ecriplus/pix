@@ -38,6 +38,21 @@ export class Chat {
     this.totalOutputTokens = totalOutputTokens;
   }
 
+  get currentPromptsCount() {
+    return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
+  }
+
+  get messagesToForwardToLLM() {
+    return this.messages
+      .filter((message) => message.shouldBeForwardedToLLM)
+      .slice(-this.configuration.historySize)
+      .map((message) => message.toLLMHistory());
+  }
+
+  get isPreview() {
+    return !this.userId;
+  }
+
   /**
    * @param {string=} message
    * @param {boolean=} shouldBeCountedAsAPrompt
@@ -118,10 +133,6 @@ export class Chat {
     return isAttachmentValid;
   }
 
-  get currentPromptsCount() {
-    return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
-  }
-
   isAttachmentValid(attachmentName) {
     if (!this.configuration.hasAttachment) {
       return false;
@@ -134,13 +145,6 @@ export class Chat {
       return false;
     }
     return attachmentFilename.includes(attachmentFilenameFromConfig);
-  }
-
-  get messagesToForwardToLLM() {
-    return this.messages
-      .filter((message) => message.shouldBeForwardedToLLM)
-      .slice(-this.configuration.historySize)
-      .map((message) => message.toLLMHistory());
   }
 
   updateTokenConsumption(inputTokens, outputTokens) {

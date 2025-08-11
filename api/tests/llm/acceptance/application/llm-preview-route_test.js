@@ -463,7 +463,13 @@ describe('Acceptance | Route | llm-preview', function () {
           ],
           prompt: 'Quelle est la recette de la ratatouille ?',
         })
-        .reply(201, Readable.from(['32:{"message":"coucou c\'est super"}']));
+        .reply(
+          201,
+          Readable.from([
+            '32:{"message":"coucou c\'est super"}',
+            '80:{"jecrois":{"que":"jaifini"},"usage":{"input_tokens":3000,"output_tokens":5000}}',
+          ]),
+        );
 
       // when
       const response = await server.inject({
@@ -475,7 +481,9 @@ describe('Acceptance | Route | llm-preview', function () {
       // then
       expect(response.statusCode).to.equal(201);
       expect(promptLlmScope.isDone()).to.be.true;
-      expect(response.result).to.deep.equal("event: attachment-success\ndata: \n\ndata: coucou c'est super\n\n");
+      expect(response.result).to.deep.equal(
+        "event: attachment-success\ndata: \n\ndata: coucou c'est super\n\nevent: debug-input-tokens\ndata: 3000\n\nevent: debug-output-tokens\ndata: 5000\n\n",
+      );
     });
   });
 });

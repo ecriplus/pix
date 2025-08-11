@@ -70,6 +70,7 @@ export async function promptChat({
     llmResponse: readableStream,
     onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository),
     attachmentMessageType,
+    shouldSendDebugData: chat.isPreview,
   });
 }
 
