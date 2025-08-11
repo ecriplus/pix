@@ -29,7 +29,6 @@ describe('Integration | Application | ScoringConfigurationController', function 
       expect(response.statusCode).to.equal(201);
       expect(usecases.saveCompetenceForScoringConfiguration).to.have.been.calledWith({
         data: request.payload,
-        userId,
       });
     });
   });
@@ -60,7 +59,6 @@ describe('Integration | Application | ScoringConfigurationController', function 
       expect(response.statusCode).to.equal(201);
       expect(usecases.saveCertificationScoringConfiguration).to.have.been.calledWith({
         data: request.payload,
-        userId,
       });
     });
   });

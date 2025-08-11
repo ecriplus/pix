@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
@@ -39,18 +38,25 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   });
 };
 
-export const saveCompetenceForScoringConfiguration = async ({ configuration, userId }) => {
-  const data = {
-    configuration: JSON.stringify(configuration),
-    createdByUserId: userId,
-  };
-  await knex('competence-scoring-configurations').insert(data);
+export const saveCompetenceForScoringConfiguration = async ({ configuration }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('certification-configurations')
+    .where({
+      expirationDate: null,
+    })
+    .update({
+      competencesScoringConfiguration: JSON.stringify(configuration),
+    });
 };
 
-export const saveCertificationScoringConfiguration = async ({ configuration, userId }) => {
-  const data = {
-    configuration: JSON.stringify(configuration),
-    createdByUserId: userId,
-  };
-  await knex('certification-scoring-configurations').insert(data);
+export const saveCertificationScoringConfiguration = async ({ configuration }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('certification-configurations')
+    .where({
+      expirationDate: null,
+    })
+    .update({
+      globalScoringConfiguration: JSON.stringify(configuration),
+    });
 };

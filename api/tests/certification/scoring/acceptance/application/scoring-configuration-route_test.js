@@ -93,6 +93,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
+          databaseBuilder.factory.buildCertificationConfiguration({
+            competencesScoringConfiguration: null,
+            expirationDate: null,
+          });
 
           await databaseBuilder.commit();
 
@@ -122,8 +126,9 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
           // then
           expect(response.statusCode).to.equal(201);
 
-          const configurations = await knex('competence-scoring-configurations');
+          const configurations = await knex('certification-configurations');
           expect(configurations).to.have.lengthOf(1);
+          expect(configurations[0].competencesScoringConfiguration).to.not.be.null;
         });
       });
     });
@@ -205,7 +210,10 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
-
+          databaseBuilder.factory.buildCertificationConfiguration({
+            globalScoringConfiguration: null,
+            expirationDate: null,
+          });
           await databaseBuilder.commit();
 
           const options = {
@@ -229,8 +237,9 @@ describe('Acceptance | Application | scoring-configuration-route', function () {
           // then
           expect(response.statusCode).to.equal(201);
 
-          const configurations = await knex('certification-scoring-configurations');
+          const configurations = await knex('certification-configurations');
           expect(configurations).to.have.lengthOf(1);
+          expect(configurations[0].globalScoringConfiguration).to.not.be.null;
         });
       });
     });

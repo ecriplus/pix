@@ -131,40 +131,66 @@ describe('Integration | Repository | scoring-configuration-repository', function
   });
 
   describe('#saveCompetenceForScoringConfiguration', function () {
-    it('should save a configuration for competence scoring', async function () {
+    it('should update latest configuration with new competence scoring', async function () {
       // given
-      const userId = 1000;
-      databaseBuilder.factory.buildUser({ id: userId });
-      const configuration = { some: 'data' };
+      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationConfiguration({
+        competencesScoringConfiguration: null,
+        expirationDate: null,
+      }).id;
+      const competencesConfigUntouched = { untouched: 'data' };
+      const configUntouchedId = databaseBuilder.factory.buildCertificationConfiguration({
+        competencesScoringConfiguration: competencesConfigUntouched,
+        expirationDate: new Date(),
+      }).id;
       await databaseBuilder.commit();
 
+      const newCompetencesScoringConfig = { some: 'data' };
+
       // when
-      await saveCompetenceForScoringConfiguration({ configuration, userId });
+      await saveCompetenceForScoringConfiguration({ configuration: newCompetencesScoringConfig });
 
       // then
-      const configurations = await knex('competence-scoring-configurations');
-      expect(configurations).to.have.lengthOf(1);
-      expect(configurations[0].configuration).to.deep.equal({ some: 'data' });
-      expect(configurations[0].createdByUserId).to.equal(userId);
+      const updatedConfiguration = await knex('certification-configurations')
+        .where({ id: configToBeUpdatedId })
+        .first();
+      expect(updatedConfiguration.competencesScoringConfiguration).to.deep.equal(newCompetencesScoringConfig);
+
+      const configurationUntouched = await knex('certification-configurations')
+        .where({ id: configUntouchedId })
+        .first();
+      expect(configurationUntouched.competencesScoringConfiguration).to.deep.equal(competencesConfigUntouched);
     });
   });
 
   describe('#saveCertificationScoringConfiguration', function () {
-    it('should save a configuration for competence scoring', async function () {
+    it('should update latest configuration with new global scoring configuration', async function () {
       // given
-      const userId = 1000;
-      databaseBuilder.factory.buildUser({ id: userId }).id;
-      const data = { some: 'data' };
+      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationConfiguration({
+        globalScoringConfiguration: null,
+        expirationDate: null,
+      }).id;
+      const globalScoringConfigUntouched = { untouched: 'data' };
+      const configUntouchedId = databaseBuilder.factory.buildCertificationConfiguration({
+        globalScoringConfiguration: globalScoringConfigUntouched,
+        expirationDate: new Date(),
+      }).id;
       await databaseBuilder.commit();
 
+      const newGlobalScoringConfig = { some: 'data' };
+
       // when
-      await saveCertificationScoringConfiguration({ configuration: data, userId });
+      await saveCertificationScoringConfiguration({ configuration: newGlobalScoringConfig });
 
       // then
-      const configurations = await knex('certification-scoring-configurations');
-      expect(configurations).to.have.lengthOf(1);
-      expect(configurations[0].configuration).to.deep.equal({ some: 'data' });
-      expect(configurations[0].createdByUserId).to.equal(userId);
+      const updatedConfiguration = await knex('certification-configurations')
+        .where({ id: configToBeUpdatedId })
+        .first();
+      expect(updatedConfiguration.globalScoringConfiguration).to.deep.equal(newGlobalScoringConfig);
+
+      const configurationUntouched = await knex('certification-configurations')
+        .where({ id: configUntouchedId })
+        .first();
+      expect(configurationUntouched.globalScoringConfiguration).to.deep.equal(globalScoringConfigUntouched);
     });
   });
 });

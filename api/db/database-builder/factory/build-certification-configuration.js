@@ -1,6 +1,7 @@
 import { databaseBuffer } from '../database-buffer.js';
 
 export const buildCertificationConfiguration = function ({
+  id = databaseBuffer.getNextId(),
   startingDate = new Date('2018-01-01'),
   expirationDate = null,
   maximumAssessmentLength = 20,
@@ -14,6 +15,7 @@ export const buildCertificationConfiguration = function ({
   return databaseBuffer.pushInsertable({
     tableName: 'certification-configurations',
     values: {
+      id,
       startingDate,
       expirationDate,
       challengesConfiguration: JSON.stringify({
