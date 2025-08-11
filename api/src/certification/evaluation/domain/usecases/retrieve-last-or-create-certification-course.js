@@ -6,7 +6,6 @@
  * @typedef {import('./index.js').PlacementProfileService} PlacementProfileService
  * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
- * @typedef {import('./index.js').CertificationChallengesService} CertificationChallengesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {import('./index.js').AssessmentRepository} AssessmentRepository
  * @typedef {import('../../../src/shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
@@ -25,6 +24,8 @@ import { SessionNotAccessible } from '../../../session-management/domain/errors.
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { CenterHabilitationError } from '../errors.js';
 
 const { features } = config;
 
@@ -37,7 +38,6 @@ const { features } = config;
  * @param {UserRepository} params.userRepository
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
- * @param {CertificationChallengesService} params.certificationChallengesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
  */
 export const retrieveLastOrCreateCertificationCourse = async function ({
@@ -51,7 +51,6 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   sessionRepository,
   certificationCenterRepository,
   userRepository,
-  certificationChallengesService,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
@@ -98,7 +97,6 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
     certificationCourseRepository,
     certificationCenterRepository,
     userRepository,
-    certificationChallengesService,
     verifyCertificateCodeService,
     certificationBadgesService,
   });
@@ -156,56 +154,53 @@ async function _blockCandidateFromRestartingWithoutExplicitValidation(
  * @param {UserRepository} params.userRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {AssessmentRepository} params.assessmentRepository
- * @param {CertificationChallengesService} params.certificationChallengesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
  */
 async function _startNewCertification({
   session,
   userId,
   certificationCandidate,
-  locale,
   assessmentRepository,
   certificationCourseRepository,
   certificationCenterRepository,
   userRepository,
-  certificationChallengesService,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
   const user = await userRepository.get({ id: userId });
   _validateUserLanguage(user.lang);
 
-  const challengesForCertification = [];
-
   const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId: session.id });
 
   const complementaryCertificationCourseData = [];
 
-  const highestCertifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
-    userId,
-  });
+  if (certificationCandidate.isEnrolledToComplementaryOnly()) {
+    if (!certificationCenter.isHabilitated(certificationCandidate.complementaryCertification.key)) {
+      throw new CenterHabilitationError();
+    }
 
-  for (const highestCertifiableBadgeAcquisition of highestCertifiableBadgeAcquisitions) {
-    const {
-      complementaryCertificationKey,
-      complementaryCertificationId,
-      complementaryCertificationBadgeId,
-      campaignId,
-      badgeKey,
-    } = highestCertifiableBadgeAcquisition;
+    complementaryCertificationCourseData.push({
+      complementaryCertificationBadgeId: null,
+      complementaryCertificationId: certificationCandidate.complementaryCertification.id,
+    });
+  }
 
-    if (
-      certificationCenter.isHabilitated(complementaryCertificationKey) &&
-      certificationCandidate.isGranted(complementaryCertificationKey)
-    ) {
+  if (certificationCandidate.isEnrolledToDoubleCertification()) {
+    if (!certificationCenter.isHabilitated(certificationCandidate.complementaryCertification.key)) {
+      throw new CenterHabilitationError();
+    }
+
+    const highestCertifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
+      userId,
+    });
+
+    const [doubleCertificationBadge] = highestCertifiableBadgeAcquisitions.filter(
+      (acquiredBadge) => acquiredBadge.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
+    );
+
+    if (doubleCertificationBadge) {
+      const { complementaryCertificationId, complementaryCertificationBadgeId } = doubleCertificationBadge;
       complementaryCertificationCourseData.push({ complementaryCertificationBadgeId, complementaryCertificationId });
-      const certificationChallenges = await certificationChallengesService.pickCertificationChallengesForPixPlus(
-        campaignId,
-        badgeKey,
-        userId,
-        locale,
-      );
-      challengesForCertification.push(...certificationChallenges);
     }
   }
 
@@ -228,7 +223,6 @@ async function _startNewCertification({
     certificationCourseRepository,
     assessmentRepository,
     userId,
-    certificationChallenges: challengesForCertification,
     verifyCertificateCodeService,
     complementaryCertificationCourseData,
     lang: user.lang,
@@ -261,7 +255,6 @@ async function _createCertificationCourse({
   assessmentRepository,
   verifyCertificateCodeService,
   userId,
-  certificationChallenges,
   complementaryCertificationCourseData,
   lang,
 }) {
@@ -273,7 +266,6 @@ async function _createCertificationCourse({
 
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
-    challenges: certificationChallenges,
     maxReachableLevelOnCertificationDate: features.maxReachableLevel,
     complementaryCertificationCourses,
     verificationCode,
