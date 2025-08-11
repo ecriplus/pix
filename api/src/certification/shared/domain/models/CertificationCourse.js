@@ -46,7 +46,7 @@ class CertificationCourse {
    * @param {Date} props.maxReachableLevelOnCertificationDate
    * @param {boolean} props.isCancelled - will be removed
    * @param {string} props.abortReason
-   * @param {Array<ComplementaryCertificationCourse>} props.complementaryCertificationCourses
+   * @param {ComplementaryCertificationCourse} props.complementaryCertificationCourse
    * @param {number} props.numberOfChallenges
    * @param {AlgorithmEngineVersion} props.version
    * @param {boolean} props.isRejectedForFraud
@@ -76,7 +76,7 @@ class CertificationCourse {
     maxReachableLevelOnCertificationDate,
     isCancelled = false,
     abortReason,
-    complementaryCertificationCourses = [],
+    complementaryCertificationCourse = null,
     numberOfChallenges,
     version = AlgorithmEngineVersion.V2,
     isRejectedForFraud = false,
@@ -106,7 +106,7 @@ class CertificationCourse {
     this._maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this._isCancelled = isCancelled;
     this._abortReason = abortReason;
-    this._complementaryCertificationCourses = complementaryCertificationCourses;
+    this._complementaryCertificationCourse = complementaryCertificationCourse;
     this._isRejectedForFraud = isRejectedForFraud;
     this._isAdjustedForAccessibility = isAdjustedForAccessibility;
     this._numberOfChallenges = numberOfChallenges;
@@ -118,7 +118,7 @@ class CertificationCourse {
     challenges,
     verificationCode,
     maxReachableLevelOnCertificationDate,
-    complementaryCertificationCourses,
+    complementaryCertificationCourse,
     numberOfChallenges,
     algorithmEngineVersion,
     lang,
@@ -140,7 +140,7 @@ class CertificationCourse {
       numberOfChallenges,
       verificationCode,
       maxReachableLevelOnCertificationDate,
-      complementaryCertificationCourses,
+      complementaryCertificationCourse,
       version: algorithmEngineVersion,
       lang,
     });
@@ -370,7 +370,7 @@ class CertificationCourse {
       maxReachableLevelOnCertificationDate: this._maxReachableLevelOnCertificationDate,
       isCancelled: this._isCancelled,
       abortReason: this._abortReason,
-      complementaryCertificationCourses: this._complementaryCertificationCourses,
+      complementaryCertificationCourse: this._complementaryCertificationCourse,
       numberOfChallenges: this._numberOfChallenges,
       version: this._version,
       lang: this._lang,

@@ -172,17 +172,17 @@ async function _startNewCertification({
 
   const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId: session.id });
 
-  const complementaryCertificationCourseData = [];
+  let complementaryCertificationCourseData;
 
   if (certificationCandidate.isEnrolledToComplementaryOnly()) {
     if (!certificationCenter.isHabilitated(certificationCandidate.complementaryCertification.key)) {
       throw new CenterHabilitationError();
     }
 
-    complementaryCertificationCourseData.push({
+    complementaryCertificationCourseData = {
       complementaryCertificationBadgeId: null,
       complementaryCertificationId: certificationCandidate.complementaryCertification.id,
-    });
+    };
   }
 
   if (certificationCandidate.isEnrolledToDoubleCertification()) {
@@ -200,7 +200,7 @@ async function _startNewCertification({
 
     if (doubleCertificationBadge) {
       const { complementaryCertificationId, complementaryCertificationBadgeId } = doubleCertificationBadge;
-      complementaryCertificationCourseData.push({ complementaryCertificationBadgeId, complementaryCertificationId });
+      complementaryCertificationCourseData = { complementaryCertificationBadgeId, complementaryCertificationId };
     }
   }
 
@@ -259,15 +259,17 @@ async function _createCertificationCourse({
   lang,
 }) {
   const verificationCode = await verifyCertificateCodeService.generateCertificateVerificationCode();
-  const complementaryCertificationCourses = complementaryCertificationCourseData.map(
-    ({ complementaryCertificationBadgeId, complementaryCertificationId }) =>
-      new ComplementaryCertificationCourse({ complementaryCertificationBadgeId, complementaryCertificationId }),
-  );
+  const complementaryCertificationCourse = complementaryCertificationCourseData
+    ? new ComplementaryCertificationCourse({
+        complementaryCertificationBadgeId: complementaryCertificationCourseData.complementaryCertificationBadgeId,
+        complementaryCertificationId: complementaryCertificationCourseData.complementaryCertificationId,
+      })
+    : null;
 
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
     maxReachableLevelOnCertificationDate: features.maxReachableLevel,
-    complementaryCertificationCourses,
+    complementaryCertificationCourse,
     verificationCode,
     algorithmEngineVersion: AlgorithmEngineVersion.V3,
     lang,

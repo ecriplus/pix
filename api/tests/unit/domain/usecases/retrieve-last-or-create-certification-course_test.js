@@ -639,7 +639,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 });
 
                 // then
-                expect(result.certificationCourse._complementaryCertificationCourses).to.be.empty;
+                expect(result.certificationCourse._complementaryCertificationCourse).to.be.null;
               });
             });
 
@@ -700,7 +700,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     certificationCandidate: foundCertificationCandidate,
                     verificationCode,
                     maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
-                    complementaryCertificationCourses: [complementaryCertificationCourse],
+                    complementaryCertificationCourse,
                     algorithmEngineVersion: AlgorithmEngineVersion.V3,
                     lang: user.lang,
                   });
@@ -708,14 +708,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   const savedCertificationCourse = domainBuilder.buildCertificationCourse(
                     certificationCourseToSave.toDTO(),
                   );
-                  savedCertificationCourse._complementaryCertificationCourses = [
-                    {
-                      ...complementaryCertificationCourse,
-                      id: 99,
-                      certificationCourseId: savedCertificationCourse.getId(),
-                      complementaryCertificationBadgeId: null,
-                    },
-                  ];
+                  savedCertificationCourse._complementaryCertificationCourse = {
+                    ...complementaryCertificationCourse,
+                    id: 99,
+                    certificationCourseId: savedCertificationCourse.getId(),
+                    complementaryCertificationBadgeId: null,
+                  };
                   certificationCourseRepository.save
                     .withArgs({ certificationCourse: certificationCourseToSave })
                     .resolves(savedCertificationCourse);
@@ -741,14 +739,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   });
 
                   // then
-                  expect(result.certificationCourse._complementaryCertificationCourses).to.deep.equal([
-                    {
-                      id: 99,
-                      certificationCourseId: savedCertificationCourse.getId(),
-                      complementaryCertificationId: complementaryCertification.id,
-                      complementaryCertificationBadgeId: null,
-                    },
-                  ]);
+                  expect(result.certificationCourse._complementaryCertificationCourse).to.deep.equal({
+                    id: 99,
+                    certificationCourseId: savedCertificationCourse.getId(),
+                    complementaryCertificationId: complementaryCertification.id,
+                    complementaryCertificationBadgeId: null,
+                  });
                 });
               });
 
@@ -877,7 +873,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       certificationCandidate: foundCertificationCandidate,
                       verificationCode,
                       maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
-                      complementaryCertificationCourses: [complementaryCertificationCourse],
+                      complementaryCertificationCourse,
                       algorithmEngineVersion: AlgorithmEngineVersion.V3,
                       lang: user.lang,
                     });
@@ -885,14 +881,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     const savedCertificationCourse = domainBuilder.buildCertificationCourse(
                       certificationCourseToSave.toDTO(),
                     );
-                    savedCertificationCourse._complementaryCertificationCourses = [
-                      {
-                        ...complementaryCertificationCourse,
-                        id: 99,
-                        certificationCourseId: savedCertificationCourse.getId(),
-                        complementaryCertificationBadgeId: 100,
-                      },
-                    ];
+                    savedCertificationCourse._complementaryCertificationCourse = {
+                      ...complementaryCertificationCourse,
+                      id: 99,
+                      certificationCourseId: savedCertificationCourse.getId(),
+                      complementaryCertificationBadgeId: 100,
+                    };
                     certificationCourseRepository.save
                       .withArgs({ certificationCourse: certificationCourseToSave })
                       .resolves(savedCertificationCourse);
@@ -918,14 +912,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     });
 
                     // then
-                    expect(result.certificationCourse._complementaryCertificationCourses).to.deep.equal([
-                      {
-                        id: 99,
-                        certificationCourseId: savedCertificationCourse.getId(),
-                        complementaryCertificationId: cleaCertification.id,
-                        complementaryCertificationBadgeId: 100,
-                      },
-                    ]);
+                    expect(result.certificationCourse._complementaryCertificationCourse).to.deep.equal({
+                      id: 99,
+                      certificationCourseId: savedCertificationCourse.getId(),
+                      complementaryCertificationId: cleaCertification.id,
+                      complementaryCertificationBadgeId: 100,
+                    });
                   });
 
                   context('when user has no certifiable badges', function () {
@@ -1013,7 +1005,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                           assessment: savedAssessment,
                         }),
                       });
-                      expect(result.certificationCourse._complementaryCertificationCourses).to.be.empty;
+                      expect(result.certificationCourse._complementaryCertificationCourse).to.be.null;
                     });
                   });
                 });
