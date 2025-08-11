@@ -12,6 +12,8 @@ const buildCombinedCourseParticipation = function ({
   questId,
   organizationLearnerId,
   status = STARTED,
+  createdAt = new Date(),
+  updatedAt = new Date(),
 } = {}) {
   organizationLearnerId = _.isUndefined(organizationLearnerId) ? buildOrganizationLearner().id : organizationLearnerId;
   questId = _.isUndefined(questId) ? buildQuest().id : questId;
@@ -21,6 +23,8 @@ const buildCombinedCourseParticipation = function ({
     questId,
     organizationLearnerId,
     status,
+    createdAt,
+    updatedAt,
   };
 
   databaseBuffer.pushInsertable({
@@ -33,6 +37,8 @@ const buildCombinedCourseParticipation = function ({
     questId,
     organizationLearnerId,
     status,
+    createdAt,
+    updatedAt,
   };
 };
 

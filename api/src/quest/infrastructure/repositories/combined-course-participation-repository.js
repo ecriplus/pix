@@ -22,6 +22,8 @@ export const getByUserId = async function ({ userId, questId }) {
       'questId',
       'organizationLearnerId',
       'combined_course_participations.status',
+      'combined_course_participations.createdAt',
+      'combined_course_participations.updatedAt',
     )
     .join(
       'view-active-organization-learners',
