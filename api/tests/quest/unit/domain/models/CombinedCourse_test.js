@@ -5,6 +5,8 @@ import {
 import { Campaign } from '../../../../../src/quest/domain/models/Campaign.js';
 import { CombinedCourse, CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { DataForQuest } from '../../../../../src/quest/domain/models/DataForQuest.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
@@ -92,6 +94,571 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
         // then
         expect(moduleIds).to.deep.equal([moduleId]);
+      });
+    });
+
+    describe('#isCompleted', function () {
+      describe('when items are type campaignParticipations', function () {
+        it('returns true when every participations are shared', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: campaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: secondCampaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            campaignParticipations: [
+              {
+                campaignId: campaign.id,
+                status: 'SHARED',
+              },
+              {
+                campaignId: secondCampaign.id,
+
+                status: 'SHARED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.true;
+        });
+        it('returns false when some participations are not shared', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: campaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: secondCampaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            campaignParticipations: [
+              {
+                campaignId: campaign.id,
+                status: 'STARTED',
+              },
+              {
+                campaignId: secondCampaign.id,
+
+                status: 'SHARED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.false;
+        });
+      });
+      describe('when items are type module', function () {
+        it('returns true when every passages are terminated', function () {
+          // given
+          const firstModuleId = 1;
+          const secondModuleId = 2;
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: firstModuleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: secondModuleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            passages: [
+              {
+                id: firstModuleId,
+                status: 'COMPLETED',
+              },
+              {
+                id: secondModuleId,
+                status: 'COMPLETED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.true;
+        });
+        it('returns false when some passages are not terminated', function () {
+          // given
+          const firstModuleId = 1;
+          const secondModuleId = 2;
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: firstModuleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: secondModuleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            passages: [
+              {
+                id: firstModuleId,
+                status: 'COMPLETED',
+              },
+              {
+                id: secondModuleId,
+                status: 'STARTED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.false;
+        });
+      });
+
+      describe('when items are mixed', function () {
+        it('returns true when all modules and campaignParticipations are done', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const moduleId = 1;
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: campaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: moduleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            campaignParticipations: [
+              {
+                campaignId: campaign.id,
+                status: 'SHARED',
+              },
+            ],
+            passages: [
+              {
+                id: moduleId,
+                status: 'COMPLETED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.true;
+        });
+        it('returns false when some modules and campaignParticipations are not done', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const moduleId = 1;
+
+          const quest = new Quest({
+            id: 1,
+            rewardId: null,
+            rewardType: null,
+            eligibilityRequirements: [],
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  campaignId: {
+                    data: campaign.id,
+                    comparison: 'equal',
+                  },
+                  status: {
+                    data: 'SHARED',
+                    comparison: 'equal',
+                  },
+                },
+              },
+              {
+                requirement_type: 'passages',
+                comparison: 'all',
+                data: {
+                  moduleId: {
+                    data: moduleId,
+                    comparison: 'equal',
+                  },
+                  isTerminated: {
+                    data: true,
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const eligibility = new Eligibility({
+            campaignParticipations: [
+              {
+                campaignId: campaign.id,
+                status: 'STARTED',
+              },
+            ],
+            passages: [
+              {
+                id: moduleId,
+                status: 'STARTED',
+              },
+            ],
+          });
+          const dataForQuest = new DataForQuest({ eligibility });
+          const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+          // when
+          const result = combinedCourse.isCompleted(dataForQuest);
+
+          // then
+          expect(result).to.be.false;
+        });
+
+        describe('when there are recommandable modules', function () {
+          it('returns true when recommended modules are done', function () {
+            // given
+            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+            const moduleId = 1;
+            const notRecommendedModuleId = 2;
+
+            const quest = new Quest({
+              id: 1,
+              rewardId: null,
+              rewardType: null,
+              eligibilityRequirements: [],
+              successRequirements: [
+                {
+                  requirement_type: 'campaignParticipations',
+                  comparison: 'all',
+                  data: {
+                    campaignId: {
+                      data: campaign.id,
+                      comparison: 'equal',
+                    },
+                    status: {
+                      data: 'SHARED',
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: moduleId,
+                      comparison: 'equal',
+                    },
+                    isTerminated: {
+                      data: true,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: notRecommendedModuleId,
+                      comparison: 'equal',
+                    },
+                    isTerminated: {
+                      data: true,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+              ],
+            });
+            const eligibility = new Eligibility({
+              campaignParticipations: [
+                {
+                  campaignId: campaign.id,
+                  status: 'SHARED',
+                },
+              ],
+              passages: [
+                {
+                  id: moduleId,
+                  status: 'COMPLETED',
+                },
+                {
+                  id: notRecommendedModuleId,
+                  status: 'STARTED',
+                },
+              ],
+            });
+            const dataForQuest = new DataForQuest({ eligibility });
+            const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+            // when
+            const result = combinedCourse.isCompleted(
+              dataForQuest,
+              [{ moduleId }, { moduleId: notRecommendedModuleId }],
+              [{ moduleId }],
+            );
+
+            // then
+            expect(result).to.be.true;
+          });
+          it('returns false when recommended modules are not done', function () {
+            // given
+            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+            const moduleId = 1;
+            const notRecommendedModuleId = 2;
+
+            const quest = new Quest({
+              id: 1,
+              rewardId: null,
+              rewardType: null,
+              eligibilityRequirements: [],
+              successRequirements: [
+                {
+                  requirement_type: 'campaignParticipations',
+                  comparison: 'all',
+                  data: {
+                    campaignId: {
+                      data: campaign.id,
+                      comparison: 'equal',
+                    },
+                    status: {
+                      data: 'SHARED',
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: moduleId,
+                      comparison: 'equal',
+                    },
+                    isTerminated: {
+                      data: true,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: notRecommendedModuleId,
+                      comparison: 'equal',
+                    },
+                    isTerminated: {
+                      data: true,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+              ],
+            });
+            const eligibility = new Eligibility({
+              campaignParticipations: [
+                {
+                  campaignId: campaign.id,
+                  status: 'SHARED',
+                },
+              ],
+              passages: [
+                {
+                  id: moduleId,
+                  status: 'STARTED',
+                },
+                {
+                  id: notRecommendedModuleId,
+                  status: 'STARTED',
+                },
+              ],
+            });
+            const dataForQuest = new DataForQuest({ eligibility });
+            const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
+
+            // when
+            const result = combinedCourse.isCompleted(
+              dataForQuest,
+              [{ moduleId }, { moduleId: notRecommendedModuleId }],
+              [{ moduleId }],
+            );
+
+            // then
+            expect(result).to.be.false;
+          });
+        });
       });
     });
 
