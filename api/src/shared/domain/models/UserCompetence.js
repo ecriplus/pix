@@ -26,11 +26,6 @@ class UserCompetence {
   isCertifiable() {
     return this.estimatedLevel >= MINIMUM_COMPETENCE_LEVEL_FOR_CERTIFIABILITY;
   }
-
-  getSkillsAtLatestVersion() {
-    const skillsSortedByNameAndVersion = _.orderBy(this.skills, ['name', 'version'], ['asc', 'desc']);
-    return _.uniqWith(skillsSortedByNameAndVersion, (a, b) => a.name === b.name);
-  }
 }
 
 export { UserCompetence };

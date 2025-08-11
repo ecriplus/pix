@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Validator } from '../../../evaluation/domain/models/Validator.js';
 import { ValidatorQCM } from '../../../evaluation/domain/models/ValidatorQCM.js';
 import { ValidatorQCU } from '../../../evaluation/domain/models/ValidatorQCU.js';
@@ -209,10 +207,6 @@ class Challenge {
       default:
         return new Validator({ solution });
     }
-  }
-
-  static findBySkill({ challenges, skill }) {
-    return _.filter(challenges, (challenge) => challenge.skill?.id === skill.id);
   }
 }
 

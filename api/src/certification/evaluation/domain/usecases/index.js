@@ -30,7 +30,6 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
-import * as certificationChallengesService from '../services/certification-challenges-service.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
 
@@ -61,7 +60,6 @@ const dependencies = {
   sharedChallengeRepository,
   userRepository,
   competenceMarkRepository,
-  certificationChallengesService,
   cpfExportRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,

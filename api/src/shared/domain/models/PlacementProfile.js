@@ -39,10 +39,6 @@ class PlacementProfile {
   getUserCompetence(competenceId) {
     return _.find(this.userCompetences, { id: competenceId }) || null;
   }
-
-  getCertifiableUserCompetences() {
-    return this.userCompetences.filter((uc) => uc.isCertifiable());
-  }
 }
 
 export { PlacementProfile };

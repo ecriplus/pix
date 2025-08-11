@@ -102,15 +102,6 @@ class KnowledgeElement {
     const precise = true;
     return dayjs().diff(lastCreatedAt, 'days', precise);
   }
-
-  static findDirectlyValidatedFromGroups(knowledgeElementsByCompetence) {
-    return _(knowledgeElementsByCompetence)
-      .values()
-      .flatten()
-      .filter({ status: KnowledgeElement.StatusType.VALIDATED })
-      .filter({ source: KnowledgeElement.SourceType.DIRECT })
-      .value();
-  }
 }
 
 KnowledgeElement.SourceType = sources;

@@ -24,38 +24,6 @@ class CertificationChallenge {
     this.discriminant = discriminant;
     this.createdAt = createdAt;
   }
-
-  static createForPixCertification({ associatedSkillName, associatedSkillId, challengeId, competenceId }) {
-    return new CertificationChallenge({
-      id: undefined,
-      courseId: undefined,
-      associatedSkillName,
-      associatedSkillId,
-      challengeId,
-      competenceId,
-      isNeutralized: false,
-      certifiableBadgeKey: null,
-    });
-  }
-
-  static createForPixPlusCertification({
-    associatedSkillName,
-    associatedSkillId,
-    challengeId,
-    competenceId,
-    certifiableBadgeKey,
-  }) {
-    return new CertificationChallenge({
-      id: undefined,
-      courseId: undefined,
-      associatedSkillName,
-      associatedSkillId,
-      challengeId,
-      competenceId,
-      isNeutralized: false,
-      certifiableBadgeKey,
-    });
-  }
 }
 
 export { CertificationChallenge };

@@ -1,6 +1,6 @@
 import { PlacementProfile } from '../../../../src/shared/domain/models/PlacementProfile.js';
 import { UserCompetence } from '../../../../src/shared/domain/models/UserCompetence.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | PlacementProfile', function () {
   describe('#constructor', function () {
@@ -148,22 +148,6 @@ describe('Unit | Domain | Models | PlacementProfile', function () {
       const userCompetence = placementProfile.getUserCompetence('wrongId');
 
       expect(userCompetence).to.be.null;
-    });
-  });
-
-  describe('#getCertifiableUserCompetences', function () {
-    it('filters certifiable user competences', function () {
-      const uc1 = domainBuilder.buildUserCompetence({ estimatedLevel: 1 });
-      const uc2 = domainBuilder.buildUserCompetence({ estimatedLevel: 0 });
-      const uc3 = domainBuilder.buildUserCompetence({ estimatedLevel: 1 });
-      const uc4 = domainBuilder.buildUserCompetence({ estimatedLevel: 0 });
-      const placementProfile = domainBuilder.buildPlacementProfile({
-        userCompetences: [uc1, uc2, uc3, uc4],
-      });
-
-      const result = placementProfile.getCertifiableUserCompetences();
-
-      expect(result).to.deep.equal([uc1, uc3]);
     });
   });
 });
