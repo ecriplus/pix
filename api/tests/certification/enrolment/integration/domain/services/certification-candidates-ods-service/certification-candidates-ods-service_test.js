@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
-import * as complementaryCertificationRepository from '../../../../../../../src/certification/complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
 import * as certificationCandidatesOdsService from '../../../../../../../src/certification/enrolment/domain/services/certification-candidates-ods-service.js';
 import * as centerRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
@@ -28,11 +27,16 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
   let mailCheck;
   let candidateList;
   let cleaComplementaryCertification;
+  let eduComplementaryCertification;
 
   beforeEach(async function () {
     cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
       label: 'CléA Numérique',
       key: ComplementaryCertificationKeys.CLEA,
+    });
+    eduComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+      label: 'Pix+ Édu 1er degré',
+      key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
     });
     const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
     userId = databaseBuilder.factory.buildUser().id;
@@ -56,17 +60,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
     databaseBuilder.factory.buildCertificationCpfCity({ name: 'AJACCIO', INSEECode: '2A004', isActualName: true });
     databaseBuilder.factory.buildCertificationCpfCity({ name: 'PARIS 18', postalCode: '75018', isActualName: true });
-    databaseBuilder.factory.buildCertificationCpfCity({
-      name: 'SAINT-ANNE',
-      postalCode: '97180',
-      isActualName: true,
-    });
 
-    databaseBuilder.factory.buildCertificationCpfCity({
-      name: 'BUELLAS',
-      postalCode: '01310',
-      INSEECode: '01065',
-    });
     await databaseBuilder.commit();
 
     mailCheck = { checkDomainIsValid: sinon.stub() };
@@ -91,7 +85,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       certificationCpfCountryRepository,
       certificationCpfCityRepository,
       centerRepository,
-      complementaryCertificationRepository,
       isSco: true,
       mailCheck,
     });
@@ -119,7 +112,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       certificationCpfCountryRepository,
       certificationCpfCityRepository,
       centerRepository,
-      complementaryCertificationRepository,
       isSco: true,
       mailCheck,
     });
@@ -146,7 +138,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       certificationCpfCountryRepository,
       certificationCpfCityRepository,
       centerRepository,
-      complementaryCertificationRepository,
       isSco: true,
       mailCheck,
     });
@@ -177,7 +168,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
         certificationCpfCountryRepository,
         certificationCpfCityRepository,
         centerRepository,
-        complementaryCertificationRepository,
         isSco: true,
         mailCheck,
       });
@@ -209,7 +199,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
         certificationCpfCountryRepository,
         certificationCpfCityRepository,
         centerRepository,
-        complementaryCertificationRepository,
         mailCheck,
       });
 
@@ -230,6 +219,11 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
         complementaryCertificationId: cleaComplementaryCertification.id,
       });
 
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: eduComplementaryCertification.id,
+      });
+
       const userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
       const sessionData = databaseBuilder.factory.buildSession({ certificationCenterId });
@@ -241,7 +235,11 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       const odsBuffer = await readFile(odsFilePath);
       candidateList = _buildCandidateList({
         sessionId: sessionData.id,
-        complementaryCertifications: [cleaComplementaryCertification],
+        billingModes: [BILLING_MODES.FREE, BILLING_MODES.FREE],
+        complementaryCertifications: [
+          ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+          ComplementaryCertificationKeys.CLEA,
+        ],
       });
       const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
 
@@ -255,13 +253,57 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
           certificationCpfCountryRepository,
           certificationCpfCityRepository,
           centerRepository,
-          complementaryCertificationRepository,
           isSco: false,
           mailCheck,
         });
 
       // then
       expect(actualCandidates).to.deep.equal(expectedCandidates);
+    });
+
+    it('should throw an error if candidate is registered for multiple complementary certifications', async function () {
+      // given
+      mailCheck.checkDomainIsValid.resolves();
+
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: cleaComplementaryCertification.id,
+      });
+
+      databaseBuilder.factory.buildComplementaryCertificationHabilitation({
+        certificationCenterId,
+        complementaryCertificationId: eduComplementaryCertification.id,
+      });
+
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
+      const sessionData = databaseBuilder.factory.buildSession({ certificationCenterId });
+      const session = domainBuilder.certification.enrolment.buildSession(sessionData);
+
+      await databaseBuilder.commit();
+
+      const odsFilePath = `${__dirname}/attendance_sheet_extract_with_complementary_certifications_ko_test.ods`;
+      const odsBuffer = await readFile(odsFilePath);
+
+      // when
+      const error = await catchErr(
+        certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet,
+      )({
+        i18n,
+        session,
+        odsBuffer,
+        certificationCpfService,
+        certificationCpfCountryRepository,
+        certificationCpfCityRepository,
+        centerRepository,
+        isSco: true,
+        mailCheck,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(CertificationCandidatesError);
+      expect(error.code).to.equal('CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION');
     });
   });
 
@@ -272,7 +314,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
     const odsFilePath = `${__dirname}/attendance_sheet_extract_with_billing_ok_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
-    candidateList = _buildCandidateList({ hasBillingMode: true, sessionId });
+    candidateList = _buildCandidateList({ billingModes: [BILLING_MODES.PAID, BILLING_MODES.FREE], sessionId });
     const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
 
     // when
@@ -286,7 +328,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
         certificationCpfCountryRepository,
         certificationCpfCityRepository,
         centerRepository,
-        complementaryCertificationRepository,
         mailCheck,
       });
 
@@ -312,7 +353,6 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
         certificationCpfCountryRepository,
         certificationCpfCityRepository,
         centerRepository,
-        complementaryCertificationRepository,
         mailCheck,
       });
 
@@ -322,8 +362,9 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
   });
 });
 
-function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryCertifications = [] }) {
-  const firstCandidate = {
+function _buildCandidateList({ billingModes = [], sessionId, complementaryCertifications = [] }) {
+  const candidates = [];
+  candidates.push({
     id: null,
     sessionId,
     createdAt: null,
@@ -340,13 +381,13 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
     email: 'jack@d.it',
     externalId: null,
     extraTimePercentage: 0.15,
-    billingMode: hasBillingMode ? BILLING_MODES.PAID : null,
+    billingMode: billingModes[0] ? billingModes[0] : null,
     prepaymentCode: null,
-    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
+    subscriptions: _buildSubscriptions(complementaryCertifications[0] ? complementaryCertifications[0] : null),
     organizationLearnerId: null,
     userId: null,
-  };
-  const secondCandidate = {
+  });
+  candidates.push({
     id: null,
     sessionId,
     createdAt: null,
@@ -363,28 +404,31 @@ function _buildCandidateList({ hasBillingMode = false, sessionId, complementaryC
     email: 'jaja@hotmail.fr',
     externalId: 'DEF456',
     extraTimePercentage: null,
-    billingMode: hasBillingMode ? BILLING_MODES.FREE : null,
+    billingMode: billingModes[1] ? billingModes[1] : null,
     prepaymentCode: null,
-    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
+    subscriptions: _buildSubscriptions(complementaryCertifications[1] ? complementaryCertifications[1] : null),
     organizationLearnerId: null,
     userId: null,
-  };
+  });
 
-  if (hasBillingMode) {
-    return [firstCandidate, secondCandidate];
-  }
-  if (complementaryCertifications.length > 0) {
-    // CLEA
-    secondCandidate.subscriptions = [
+  return candidates;
+}
+
+function _buildSubscriptions(subscriptionKey) {
+  const subscriptions = [];
+
+  if (subscriptionKey) {
+    subscriptions.push(
       domainBuilder.certification.enrolment.buildComplementarySubscription({
         certificationCandidateId: null,
-        complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+        complementaryCertificationKey: subscriptionKey,
       }),
-      domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-    ];
-
-    firstCandidate.billingMode = BILLING_MODES.FREE;
-    secondCandidate.billingMode = BILLING_MODES.FREE;
+    );
   }
-  return [firstCandidate, secondCandidate];
+
+  if (subscriptionKey === ComplementaryCertificationKeys.CLEA || !subscriptionKey) {
+    subscriptions.push(domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }));
+  }
+
+  return subscriptions;
 }

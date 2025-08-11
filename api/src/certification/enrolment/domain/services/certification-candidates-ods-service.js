@@ -21,7 +21,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
   certificationCpfService,
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
-  complementaryCertificationRepository,
   centerRepository,
   mailCheck = mailCheckImplementation,
 }) {
@@ -72,7 +71,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       certificationCpfCountryRepository,
     });
 
-    const complementaryCertificationsInDB = await complementaryCertificationRepository.findAll();
     const subscriptions = _buildSubscriptions(candidateData);
 
     if (cpfBirthInformation.hasFailed()) {
@@ -128,11 +126,8 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       userId: null,
     });
 
-    const cleaCertification = complementaryCertificationsInDB.find(
-      (complementaryCertification) => complementaryCertification.key === ComplementaryCertificationKeys.CLEA,
-    );
     try {
-      candidate.validate({ isSco, cleaCertificationId: cleaCertification.id });
+      candidate.validate({ isSco });
       _checkForDuplication(candidate);
     } catch (error) {
       if (error?.code?.includes('subscriptions')) {
