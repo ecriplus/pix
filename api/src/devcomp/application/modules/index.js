@@ -14,7 +14,7 @@ const register = async function (server) {
         validate: {
           params: Joi.object({ slug: Joi.string().required() }),
           query: Joi.object({
-            redirectionHash: Joi.string(),
+            encryptedRedirectionUrl: Joi.string(),
           }),
         },
         notes: ['- Permet de récupérer un module grâce à son titre slugifié'],

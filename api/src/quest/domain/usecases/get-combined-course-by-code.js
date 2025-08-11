@@ -67,12 +67,12 @@ export async function getCombinedCourseByCode({
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
 
   const combinedCourseUrl = hostURL + '/parcours/' + combinedCourseDetails.code;
-  const hashedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
+  const encryptedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
   combinedCourseDetails.generateItems(
     [...campaigns, ...modules],
     recommendableModuleIds,
     recommendedModuleIdsForUser,
-    hashedCombinedCourseUrl,
+    encryptedCombinedCourseUrl,
   );
 
   return combinedCourseDetails;

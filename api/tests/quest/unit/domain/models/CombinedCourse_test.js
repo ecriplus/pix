@@ -133,9 +133,9 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           }),
         ]);
       });
-      it('should not take hashedCombinedCourseUrl if item type is campaign', function () {
+      it('should not take encryptedCombinedCourseUrl if item type is campaign', function () {
         // given
-        const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
+        const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
         const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
         const quest = new Quest({
           id: 1,
@@ -158,7 +158,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         const combinedCourse = new CombinedCourseDetails(new CombinedCourse(), quest);
 
         // when
-        combinedCourse.generateItems([campaign], [], [], hashedCombinedCourseUrl);
+        combinedCourse.generateItems([campaign], [], [], encryptedCombinedCourseUrl);
 
         // then
         expect(combinedCourse.items).to.deep.equal([
@@ -177,7 +177,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           // given
           const recommendableModuleIds = [];
           const recommendedModuleIdsForUser = [];
-          const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
+          const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const quest = new Quest({
             id: 1,
             rewardId: null,
@@ -204,7 +204,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             [module],
             recommendableModuleIds,
             recommendedModuleIdsForUser,
-            hashedCombinedCourseUrl,
+            encryptedCombinedCourseUrl,
           );
 
           // then
@@ -214,7 +214,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               reference: module.slug,
               title: module.title,
               type: ITEM_TYPE.MODULE,
-              redirection: hashedCombinedCourseUrl,
+              redirection: encryptedCombinedCourseUrl,
             }),
           ]);
         });
@@ -269,7 +269,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         it('should return module if it in quest, recommandable and recommended for user', function () {
           // given
-          const hashedCombinedCourseUrl = 'hashedCombinedCourseUrl';
+          const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
           const module = new Module({ id: 1, title: 'module' });
           const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
 
@@ -310,7 +310,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             [campaign, module],
             recommendableModuleIds,
             recommendedModuleIdsForUser,
-            hashedCombinedCourseUrl,
+            encryptedCombinedCourseUrl,
           );
 
           // then
@@ -326,7 +326,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               reference: module.slug,
               title: module.title,
               type: ITEM_TYPE.MODULE,
-              redirection: hashedCombinedCourseUrl,
+              redirection: encryptedCombinedCourseUrl,
             }),
           ]);
         });

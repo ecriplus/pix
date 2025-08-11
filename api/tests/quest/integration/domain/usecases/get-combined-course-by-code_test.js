@@ -15,7 +15,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
     combinedCourseUrl = hostURL + '/parcours/' + code;
 
     sinon.stub(cryptoService, 'encrypt');
-    cryptoService.encrypt.withArgs(combinedCourseUrl).resolves('hashedUrl');
+    cryptoService.encrypt.withArgs(combinedCourseUrl).resolves('encryptedUrl');
   });
 
   it('should return CombinedCourse for provided code', async function () {
@@ -87,14 +87,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         reference: 'bac-a-sable',
         title: 'Bac à sable',
         type: ITEM_TYPE.MODULE,
-        redirection: 'hashedUrl',
+        redirection: 'encryptedUrl',
       }),
       new CombinedCourseItem({
         id: moduleId2,
         reference: 'bases-clavier-1',
         title: 'Les bases du clavier sur ordinateur 1/2',
         type: ITEM_TYPE.MODULE,
-        redirection: 'hashedUrl',
+        redirection: 'encryptedUrl',
       }),
     ]);
     expect(result.id).to.equal(questId);

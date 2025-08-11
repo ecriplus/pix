@@ -1,7 +1,7 @@
 const getBySlug = async function (request, h, { moduleSerializer, usecases }) {
   const { slug } = request.params;
-  const redirectionHash = request.query.redirectionHash;
-  const module = await usecases.getModule({ slug, redirectionHash });
+  const encryptedRedirectionUrl = request.query.encryptedRedirectionUrl;
+  const module = await usecases.getModule({ slug, encryptedRedirectionUrl });
 
   return moduleSerializer.serialize(module);
 };

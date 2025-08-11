@@ -43,7 +43,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       .map(({ data }) => data.moduleId.data);
   }
 
-  generateItems(data, recommendableModuleIds = [], recommendedModuleIdsForUser = [], hashedCombinedCourseUrl) {
+  generateItems(data, recommendableModuleIds = [], recommendedModuleIdsForUser = [], encryptedCombinedCourseUrl) {
     this.items = [];
     for (const requirement of this.#quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
@@ -78,7 +78,7 @@ export class CombinedCourseDetails extends CombinedCourse {
             reference: module.slug,
             title: module.title,
             type: ITEM_TYPE.MODULE,
-            redirection: hashedCombinedCourseUrl,
+            redirection: encryptedCombinedCourseUrl,
           }),
         );
       }

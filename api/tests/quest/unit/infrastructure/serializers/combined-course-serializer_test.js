@@ -49,7 +49,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             title: 'title',
             reference: 'slug',
             type: ITEM_TYPE.MODULE,
-            redirection: 'hashedCombinedCourseUrl',
+            redirection: 'encryptedCombinedCourseUrl',
           },
         },
       ],

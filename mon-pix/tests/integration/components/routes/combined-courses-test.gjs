@@ -151,7 +151,7 @@ module('Integration | Component | combined course', function (hooks) {
         title: 'mon module',
         reference: 'mon-module',
         type: 'MODULE',
-        redirection: 'une+url',
+        redirection: 'une+url+chiffree',
       });
 
       const combinedCourse = store.createRecord('combined-course', {

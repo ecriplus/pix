@@ -7,19 +7,19 @@ describe('Unit | Devcomp | Application | Modules | Module Controller', function 
   describe('#getBySlug', function () {
     it('should call getModule use-case and return serialized modules', async function () {
       const slug = 'slug';
-      const redirectionHash = 'redirectionHash';
+      const encryptedRedirectionUrl = 'encryptedRedirectionUrl';
       const serializedModule = Symbol('serialized modules');
       const module = Symbol('modules');
       const usecases = {
         getModule: sinon.stub(),
       };
-      usecases.getModule.withArgs({ slug, redirectionHash }).returns(module);
+      usecases.getModule.withArgs({ slug, encryptedRedirectionUrl }).returns(module);
       const moduleSerializer = {
         serialize: sinon.stub(),
       };
       moduleSerializer.serialize.withArgs(module).returns(serializedModule);
 
-      const result = await modulesController.getBySlug({ params: { slug }, query: { redirectionHash } }, null, {
+      const result = await modulesController.getBySlug({ params: { slug }, query: { encryptedRedirectionUrl } }, null, {
         moduleSerializer,
         usecases,
       });
