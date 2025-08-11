@@ -1196,6 +1196,10 @@
       }
     },
     "combined-courses": {
+      "completed": {
+        "description": "Bien joué ! Vous avez franchi une étape importante pour naviguer en toute sécurité dans le monde numérique.",
+        "title": "Félicitations ! Vous avez terminé !"
+      },
       "content": {
         "start-button": "Commencer mon parcours"
       }

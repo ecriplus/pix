@@ -1,5 +1,5 @@
 import { applyEmberDataSerializers, discoverEmberDataModels } from 'ember-cli-mirage';
-import { createServer } from 'miragejs';
+import { createServer, Response } from 'miragejs';
 
 import loadAccountRecoveryRoutes from './routes/account-recovery/index';
 import loadAnswerRoutes from './routes/answers/index';
@@ -133,5 +133,6 @@ function routes() {
   this.get('/organizations-to-join/:code', getOrganizationsToJoin);
 
   this.get('/verified-codes/:code', getVerifiedCodes);
+  this.patch('/combined-courses/:code/reassess-status', () => new Response(204));
   this.get('/combined-courses', getCombinedCourses);
 }
