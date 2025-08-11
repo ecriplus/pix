@@ -1,8 +1,8 @@
-import { setLocale, t } from 'ember-intl/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-import setupIntl from '../../helpers/setup-intl';
+import setupIntl, { setCurrentLocale } from '../../helpers/setup-intl';
 
 module('Unit | Service | Error messages', function (hooks) {
   setupTest(hooks);
@@ -165,9 +165,9 @@ module('Unit | Service | Error messages', function (hooks) {
         );
       });
 
-      test('should return the en message when error code is found without acceptedFormat', function (assert) {
+      test('should return the en message when error code is found without acceptedFormat', async function (assert) {
         // Given
-        setLocale(['en']);
+        await setCurrentLocale('en');
         const errorMessages = this.owner.lookup('service:errorMessages');
 
         // When

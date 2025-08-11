@@ -2,7 +2,7 @@ import { DomainError } from '../../../shared/domain/errors.js';
 
 export async function startEmbedLlmChat({ configId, userId, passageId, llmApi, passageRepository }) {
   await checkIfPassageBelongsToUser(passageId, userId, passageRepository);
-  return await llmApi.startChat({ configId, userId });
+  return await llmApi.startChat({ configId, userId, passageId });
 }
 
 async function checkIfPassageBelongsToUser(passageId, userId, passageRepository) {

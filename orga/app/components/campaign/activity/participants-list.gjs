@@ -24,10 +24,6 @@ export default class ParticipantsList extends Component {
   @tracked isModalOpen = false;
   @tracked participationToDelete;
 
-  get currentLocale() {
-    return this.locale.currentLocale;
-  }
-
   get canDeleteParticipation() {
     return this.currentUser.isAdminInOrganization || this.args.campaign.ownerId == this.currentUser.prescriber?.id;
   }
@@ -165,7 +161,7 @@ export default class ParticipantsList extends Component {
     {{/unless}}
 
     {{#if @participations}}
-      <PixPagination @pagination={{@participations.meta}} @locale={{this.currentLocale}} />
+      <PixPagination @pagination={{@participations.meta}} @locale={{this.locale.currentLanguage}} />
     {{/if}}
 
     <DeleteParticipationModal

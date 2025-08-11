@@ -75,7 +75,6 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
     const complementaryCertificationsInDB = await complementaryCertificationRepository.findAll();
     const subscriptions = _buildSubscriptions({
       hasCleaNumerique,
-      complementaryCertificationsInDB,
     });
 
     if (cpfBirthInformation.hasFailed()) {
@@ -205,26 +204,19 @@ function _handleDuplicateCandidate() {
   };
 }
 
-function _buildComplementaryCertification(complementaryCertificationId) {
+function _buildComplementaryCertification(complementaryCertificationKey) {
   return Subscription.buildComplementary({
     certificationCandidateId: null,
-    complementaryCertificationId,
+    complementaryCertificationKey,
   });
 }
 
-function _buildSubscriptions({ hasCleaNumerique, complementaryCertificationsInDB }) {
-  const complementaryCertificationsByKey = _.keyBy(complementaryCertificationsInDB, 'key');
-
+function _buildSubscriptions({ hasCleaNumerique }) {
   const subscriptions = [];
   subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
 
   if (hasCleaNumerique) {
-    subscriptions.push(
-      _buildComplementaryCertification(complementaryCertificationsByKey[ComplementaryCertificationKeys.CLEA].id),
-    );
-  }
-  if (subscriptions.length === 0) {
-    subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
+    subscriptions.push(_buildComplementaryCertification(ComplementaryCertificationKeys.CLEA));
   }
 
   return subscriptions;

@@ -99,13 +99,23 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
       it('should return the newly created chat', async function () {
         // when
-        const chat = await startChat({ configurationId, userId, randomUUID, chatRepository, configurationRepository });
+        const chat = await startChat({
+          configurationId,
+          userId,
+          assessmentId: 11,
+          passageId: 22,
+          randomUUID,
+          chatRepository,
+          configurationRepository,
+        });
 
         // then
         expect(chat).to.deepEqualInstance(
           new Chat({
             id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
+            assessmentId: 11,
+            passageId: 22,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
@@ -117,6 +127,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
         expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
           id: '123e4567-e89b-12d3-a456-426614174000',
           userId: 123456,
+          assessmentId: 11,
+          passageId: 22,
           configurationId: 'uneConfigQuiExist',
           configuration: {
             llm: {

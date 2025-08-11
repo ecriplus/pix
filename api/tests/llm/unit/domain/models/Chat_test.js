@@ -3,6 +3,39 @@ import { Configuration } from '../../../../../src/llm/domain/models/Configuratio
 import { expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Chat', function () {
+  describe('#get isPreview', function () {
+    context('when chat is not linked to a user', function () {
+      it('should return true', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({ id: 'some-config-id' }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('isPreview', true);
+      });
+    });
+
+    context('when chat is linked to a user', function () {
+      it('should return false', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          userId: 123,
+          configuration: new Configuration({ id: 'some-config-id' }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('isPreview', false);
+      });
+    });
+  });
+
   describe('#addUserMessage', function () {
     it('should append a message as user message when message has content', function () {
       // given
@@ -1170,6 +1203,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chat.toDTO()).to.deep.equal({
           id: 'some-chat-id',
           userId: 123,
+          assessmentId: undefined,
+          passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
           hasAttachmentContextBeenAdded: false,
@@ -1242,6 +1277,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chat.toDTO()).to.deep.equal({
           id: 'some-chat-id',
           userId: 123,
+          assessmentId: undefined,
+          passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
           hasAttachmentContextBeenAdded: false,
@@ -1285,6 +1322,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       const chat = new Chat({
         id: 'some-chat-id',
         userId: 123,
+        assessmentId: 456,
         configurationId: 'abc123',
         configuration: new Configuration(configurationDTO),
         hasAttachmentContextBeenAdded: true,
@@ -1333,6 +1371,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(dto).to.deep.equal({
         id: 'some-chat-id',
         userId: 123,
+        assessmentId: 456,
+        passageId: undefined,
         configurationId: 'abc123',
         configuration: configurationDTO,
         hasAttachmentContextBeenAdded: true,

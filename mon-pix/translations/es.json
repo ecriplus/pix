@@ -808,7 +808,6 @@
         "message": "Enhorabuena {fullName}, tu perfil Pix se puede certificar."
       },
       "error-messages": {
-        "candidate-not-eligible": "<strong>La cuenta con la que ha iniciado sesión actualmente no es elegible para esta sesión de certificación.</strong> <br>' La información introducida corresponde a un candidato registrado para la sesión en certificación complementaria únicamente. <br>' Compruebe que ha iniciado sesión con la cuenta elegible para realizar la certificación complementaria únicamente.",
         "generic": {
           "check-personal-info": "Comprueba con el supervisor que tus datos personales coinciden con los de la hoja de inscripción.",
           "check-session-number": "Comprueba el número de sesión.",

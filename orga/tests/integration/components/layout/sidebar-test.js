@@ -3,6 +3,7 @@ import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -10,14 +11,9 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('when the user is authenticated on orga.pix.fr', function (hooks) {
-    class CurrentDomainServiceStub extends Service {
-      get isFranceDomain() {
-        return true;
-      }
-    }
-
     hooks.beforeEach(function () {
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
     });
 
     test('it should display documentation url given by current organization', async function (assert) {

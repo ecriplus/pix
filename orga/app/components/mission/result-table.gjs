@@ -105,7 +105,7 @@ function getMissionResultColor(result) {
     </PixTable>
 
     {{#let (getService "service:locale") as |locale|}}
-      <PixPagination @pagination={{@missionLearners.meta}} @locale={{locale.currentLocale}} />
+      <PixPagination @pagination={{@missionLearners.meta}} @locale={{locale.currentLanguage}} />
     {{/let}}
   {{else}}
     <div class="table__empty content-text">

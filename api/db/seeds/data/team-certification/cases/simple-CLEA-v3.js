@@ -175,7 +175,7 @@ export class CleaV3Seed {
         Subscription.buildCore({ certificationCandidateId: null }),
         Subscription.buildComplementary({
           certificationCandidateId: null,
-          complementaryCertificationId: CLEA_COMPLEMENTARY_CERTIFICATION_ID,
+          complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
         }),
       ],
       userId: pixAppUser.id,

@@ -132,7 +132,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
         userId: null,
         reconciledAt: null,
         billingMode: CertificationCandidate.BILLING_MODES.FREE,
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
       const session1 = { ...firstSession, candidates: [candidateData1] };
       const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
@@ -142,13 +144,17 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
         userId: null,
         reconciledAt: null,
         billingMode: CertificationCandidate.BILLING_MODES.FREE,
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
       const session2 = { ...secondSession, candidates: [candidateData2] };
 
       sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
         certificationCandidateComplementaryErrors: [],
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
 
       sessionsImportValidationService.getValidatedCandidateInformation.resolves({
@@ -236,7 +242,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           userId: null,
           reconciledAt: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         const session1 = { ...firstSession, candidates: [candidateData1] };
         const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
@@ -246,7 +254,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           userId: null,
           reconciledAt: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         const candidateData3 = { ...candidateData2, lastName: 'Brun', firstName: 'Petit Ours' };
         const candidate3 = domainBuilder.certification.enrolment.buildCandidate({
@@ -256,7 +266,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           userId: null,
           reconciledAt: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         const session2 = { sessionId: 2, candidates: [candidateData2, candidateData3] };
 
@@ -285,7 +297,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
 
         sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
           certificationCandidateComplementaryErrors: [],
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
 
         temporarySessionsStorageForMassImportService.save.resolves(cachedValidatedSessionsKey);
@@ -359,7 +373,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
       // given
       sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
         certificationCandidateComplementaryErrors: [],
-        subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
       });
       sessionsImportValidationService.validateSession.resolves([
         { code: 'Veuillez indiquer un nom de site.', isBlocking: true },
@@ -396,7 +412,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
 
         sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
           certificationCandidateComplementaryErrors: [],
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         sessionsImportValidationService.validateSession.resolves(['Veuillez indiquer un nom de site.']);
         sessionsImportValidationService.getValidatedCandidateInformation.resolves({
@@ -441,7 +459,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           createdAt: null,
           userId: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData2,
@@ -449,7 +469,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           createdAt: null,
           userId: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         const sessionsData = [
           {
@@ -460,7 +482,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
 
         sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
           certificationCandidateComplementaryErrors: [],
-          complementaryCertification: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          complementaryCertification: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         sessionsImportValidationService.validateSession.resolves([]);
         sessionsImportValidationService.getValidatedCandidateInformation.resolves({
@@ -527,7 +551,9 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
 
         sessionsImportValidationService.getValidatedSubscriptionsForMassImport.resolves({
           certificationCandidateComplementaryErrors: [],
-          subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
         });
         sessionsImportValidationService.validateSession.resolves([]);
         sessionsImportValidationService.getValidatedCandidateInformation.resolves({

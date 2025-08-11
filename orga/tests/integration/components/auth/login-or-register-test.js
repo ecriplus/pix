@@ -1,5 +1,4 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -62,15 +61,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   module('when domain is not .fr', function () {
     test('displays the locale switcher and translate to selected locale', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       const routerService = this.owner.lookup('service:router');
-
       sinon.stub(routerService, 'replaceWith').returns(false);
 
       // when
@@ -85,13 +76,6 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
 
     test('saves selected locale and remove lang from query params', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-      }
-
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
       const routerService = this.owner.lookup('service:router');
       const localeService = this.owner.lookup('service:locale');
 
@@ -113,12 +97,8 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   module('when domain is .fr', function () {
     test('does not display the locale switcher', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
       // when
       const screen = await render(hbs`<Auth::LoginOrRegister @organizationName='Organization Aztec' />`);

@@ -1,15 +1,23 @@
 import { Subscription } from '../../../../../../src/certification/enrolment/domain/models/Subscription.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 
 const buildCoreSubscription = function ({ certificationCandidateId } = {}) {
   return Subscription.buildCore({ certificationCandidateId });
 };
 
-const buildComplementarySubscription = function ({ certificationCandidateId, complementaryCertificationId = 1 } = {}) {
-  return Subscription.buildComplementary({ certificationCandidateId, complementaryCertificationId });
+const buildComplementarySubscription = function ({
+  certificationCandidateId,
+  complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+} = {}) {
+  return Subscription.buildComplementary({ certificationCandidateId, complementaryCertificationKey });
 };
 
-const buildSubscription = function ({ certificationCandidateId, complementaryCertificationId = 1, type } = {}) {
-  return new Subscription({ certificationCandidateId, complementaryCertificationId, type });
+const buildSubscription = function ({
+  certificationCandidateId,
+  complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+  type,
+} = {}) {
+  return new Subscription({ certificationCandidateId, complementaryCertificationKey, type });
 };
 
 export { buildComplementarySubscription, buildCoreSubscription, buildSubscription };

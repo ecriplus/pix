@@ -32,7 +32,6 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
     let allowedCertificationCenterAccess;
     let certificationPointOfContact;
     let session;
-    const complementaryCertificationId = 123;
 
     hooks.beforeEach(async () => {
       allowedCertificationCenterAccess = server.create('allowed-certification-center-access', {
@@ -42,7 +41,8 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
         isAccessBlockedAgri: false,
         habilitations: [
           {
-            id: complementaryCertificationId,
+            id: 123,
+            key: 'DROIT',
             label: 'Pix+Droit',
           },
         ],
@@ -110,11 +110,11 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
         });
         const coreSubscription = server.create('subscription', {
           type: SUBSCRIPTION_TYPES.CORE,
-          complementaryCertificationId: null,
+          complementaryCertificationKey: null,
         });
         const complementarySubscription = server.create('subscription', {
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId,
+          complementaryCertificationKey: 'DROIT',
         });
         server.create('certification-candidate', {
           firstName: 'Alin',

@@ -4,6 +4,8 @@ export async function startChat({
   configuration,
   configurationId,
   userId,
+  assessmentId,
+  passageId,
   chatRepository,
   configurationRepository,
   randomUUID,
@@ -15,6 +17,8 @@ export async function startChat({
   const newChat = new Chat({
     id: chatId,
     userId,
+    assessmentId,
+    passageId,
     configurationId,
     configuration,
     hasAttachmentContextBeenAdded: false,

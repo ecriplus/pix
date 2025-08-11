@@ -2,7 +2,8 @@ import { PassThrough, pipeline } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
-import * as messageObjectToEventStreamTransform from './transforms/message-object-to-event-stream-transform.js';
+import * as responseObjectToEventStreamTransform from './transforms/response-object-to-event-stream-transform.js';
+import * as sendDebugDataTransform from './transforms/send-debug-data-transform.js';
 
 const logger = child('llm:api', { event: SCOPES.LLM });
 
@@ -34,9 +35,10 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  * @param {ReadableStream|null} params.llmResponse
  * @param {OnStreamDoneCallback} params.onStreamDone
  * @param {string} params.attachmentMessageType
+ * @param {boolean} params.shouldSendDebugData
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMessageType }) {
+export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMessageType, shouldSendDebugData }) {
   const writableStream = new PassThrough();
   writableStream.on('error', (err) => {
     logger.error(`error while streaming response: ${err}`);
@@ -56,7 +58,8 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
   pipeline(
     readableStream,
     lengthPrefixedJsonDecoderTransform.getTransform(),
-    messageObjectToEventStreamTransform.getTransform(streamCapture),
+    responseObjectToEventStreamTransform.getTransform(streamCapture),
+    sendDebugDataTransform.getTransform(streamCapture, shouldSendDebugData),
     writableStream,
     async (err) => {
       if (err) {

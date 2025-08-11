@@ -49,7 +49,7 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
         }),
       );
       const someLLMChatDTO = Symbol('LLMCHATDTO');
-      llmApi.startChat.withArgs({ configId, userId }).resolves(someLLMChatDTO);
+      llmApi.startChat.withArgs({ configId, userId, passageId }).resolves(someLLMChatDTO);
 
       // when
       const chat = await startEmbedLlmChat({ configId, passageId, userId, llmApi, passageRepository });

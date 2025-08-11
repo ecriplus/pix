@@ -3,10 +3,10 @@ import { finished } from 'node:stream/promises';
 
 import _ from 'lodash';
 
-import { getTransform } from '../../../../../../src/llm/infrastructure/streaming/transforms/message-object-to-event-stream-transform.js';
+import { getTransform } from '../../../../../../src/llm/infrastructure/streaming/transforms/response-object-to-event-stream-transform.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectToEventStreamTransform', function () {
+describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectToEventStreamTransform', function () {
   describe('#getTransform', function () {
     let streamCapture;
     beforeEach(function () {
@@ -184,7 +184,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | MessageObjectTo
           { pasMessage: 'Ca va super' },
           { message: 'Et toi ?' },
           {
-            usage: { superKey: 'wowouuo', inputTokens: 2_000, outputTokens: 5_000 },
+            usage: { superKey: 'wowouuo', input_tokens: 2_000, output_tokens: 5_000 },
           },
         ];
         const readable = Readable.from(input);

@@ -1,5 +1,4 @@
 import { clickByName, fillByLabel, render as renderScreen } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { triggerEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
@@ -278,18 +277,6 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
   module('when domain is pix.org', function () {
     test('should not display recovery link', async function (assert) {
-      // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return false;
-        }
-
-        getExtension() {
-          return '.org';
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
-
       // when
       await renderScreen(hbs`<Auth::LoginForm />`);
 
@@ -301,16 +288,8 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
   module('when domain is pix.fr', function () {
     test('should display recovery link', async function (assert) {
       // given
-      class CurrentDomainServiceStub extends Service {
-        get isFranceDomain() {
-          return true;
-        }
-
-        getExtension() {
-          return '.fr';
-        }
-      }
-      this.owner.register('service:currentDomain', CurrentDomainServiceStub);
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
 
       // when
       await renderScreen(hbs`<Auth::LoginForm />`);

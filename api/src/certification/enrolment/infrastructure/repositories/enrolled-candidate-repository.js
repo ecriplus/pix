@@ -33,7 +33,7 @@ function buildBaseReadQuery(knexConnection) {
         `json_agg(
           json_build_object(
             'type', "certification-subscriptions"."type",
-            'complementaryCertificationId', "certification-subscriptions"."complementaryCertificationId",
+            'complementaryCertificationKey', "complementary-certifications"."key",
             'certificationCandidateId', "certification-candidates"."id"
           )
       )`,
@@ -44,6 +44,11 @@ function buildBaseReadQuery(knexConnection) {
       'certification-subscriptions',
       'certification-subscriptions.certificationCandidateId',
       'certification-candidates.id',
+    )
+    .leftJoin(
+      'complementary-certifications',
+      'certification-subscriptions.complementaryCertificationId',
+      'complementary-certifications.id',
     )
     .groupBy('certification-candidates.id');
 }

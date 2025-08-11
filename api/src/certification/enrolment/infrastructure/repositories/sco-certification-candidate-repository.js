@@ -1,4 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { Subscription } from '../../domain/models/Subscription.js';
 
 const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertificationCandidates }) {
   await knex.transaction(async (trx) => {
@@ -19,17 +20,17 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
       .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.includes(candidate.organizationLearnerId))
       .map(scoCandidateToDTO);
 
-    const allSubscriptionsDTO = [];
     for (const candidateDTO of candidatesToBeEnrolledDTOs) {
       const subscriptions = candidateDTO.subscriptions;
       delete candidateDTO.subscriptions;
+
       const [{ id }] = await trx('certification-candidates').insert(candidateDTO).returning('id');
-      for (const subscriptionDTO of subscriptions) {
-        subscriptionDTO.certificationCandidateId = id;
-        allSubscriptionsDTO.push(subscriptionDTO);
-      }
+
+      subscriptions[0].certificationCandidateId = id;
+      delete subscriptions[0].complementaryCertificationKey;
+
+      await trx('certification-subscriptions').insert(subscriptions[0]);
     }
-    await knex.batchInsert('certification-subscriptions', allSubscriptionsDTO).transacting(trx);
   });
 };
 
@@ -47,10 +48,7 @@ function _scoCandidateToDTOForSession(sessionId) {
       birthCity: scoCandidate.birthCity,
       birthCountry: scoCandidate.birthCountry,
       sessionId,
-      subscriptions: scoCandidate.subscriptions.map((sub) => ({
-        type: sub.type,
-        complementaryCertificationId: sub.complementaryCertificationId,
-      })),
+      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
     };
   };
 }

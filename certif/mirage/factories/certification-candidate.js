@@ -73,7 +73,7 @@ export default Factory.extend({
     if (!hasSubscriptions) {
       const coreSubscription = server.create('subscription', {
         type: SUBSCRIPTION_TYPES.CORE,
-        complementaryCertificationId: null,
+        complementaryCertificationKey: null,
       });
       candidate.update({
         subscriptions: [coreSubscription],

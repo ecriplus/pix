@@ -133,7 +133,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
 
     {{#if @participations}}
       {{#let (getService "service:locale") as |locale|}}
-        <PixPagination @pagination={{@participations.meta}} @locale={{locale.currentLocale}} />
+        <PixPagination @pagination={{@participations.meta}} @locale={{locale.currentLanguage}} />
       {{/let}}
     {{/if}}
   </section>

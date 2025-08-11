@@ -1,9 +1,9 @@
 import { services } from '../../../../../../src/certification/enrolment/application/services/index.js';
 import { normalize } from '../../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Application | Service | register-candidate-participation', function () {
-  context('when eligibility checks fail for a certification', function () {
+  context('when certificability checks fail for a certification', function () {
     it('should rollback user reconciliation', async function () {
       // given
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
@@ -28,8 +28,19 @@ describe('Integration | Application | Service | register-candidate-participation
 
       await databaseBuilder.commit();
 
+      const placementProfileService = {
+        getPlacementProfile: sinon.stub(),
+      };
+
+      placementProfileService.getPlacementProfile
+        .withArgs({
+          userId: certificationCandidate.userId,
+          limitDate: certificationCandidate.reconciledAt,
+        })
+        .resolves({ isCertifiable: sinon.stub().returns(false) });
+
       // when
-      await services.registerCandidateParticipation({
+      await catchErr(services.registerCandidateParticipation)({
         userId,
         sessionId,
         firstName: certificationCandidate.firstName,

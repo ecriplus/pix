@@ -27,8 +27,8 @@ export function getTransform(streamCapture) {
       }
 
       if (usage) {
-        streamCapture.inputTokens = usage?.inputTokens ?? streamCapture.inputTokens;
-        streamCapture.outputTokens = usage?.outputTokens ?? streamCapture.outputTokens;
+        streamCapture.inputTokens = usage?.input_tokens ?? streamCapture.inputTokens;
+        streamCapture.outputTokens = usage?.output_tokens ?? streamCapture.outputTokens;
       }
 
       if (data) callback(null, data);

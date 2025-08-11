@@ -5,6 +5,8 @@ export class Chat {
    * @param {Object} params
    * @param {string} params.id
    * @param {number=} params.userId
+   * @param {number=} params.assessmentId
+   * @param {number=} params.passageId
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
@@ -15,6 +17,8 @@ export class Chat {
   constructor({
     id,
     userId,
+    assessmentId,
+    passageId,
     configurationId,
     configuration,
     hasAttachmentContextBeenAdded,
@@ -24,12 +28,29 @@ export class Chat {
   }) {
     this.id = id;
     this.userId = userId;
+    this.assessmentId = assessmentId;
+    this.passageId = passageId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
     this.messages = messages;
     this.totalInputTokens = totalInputTokens;
     this.totalOutputTokens = totalOutputTokens;
+  }
+
+  get currentPromptsCount() {
+    return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
+  }
+
+  get messagesToForwardToLLM() {
+    return this.messages
+      .filter((message) => message.shouldBeForwardedToLLM)
+      .slice(-this.configuration.historySize)
+      .map((message) => message.toLLMHistory());
+  }
+
+  get isPreview() {
+    return !this.userId;
   }
 
   /**
@@ -112,10 +133,6 @@ export class Chat {
     return isAttachmentValid;
   }
 
-  get currentPromptsCount() {
-    return this.messages.filter((message) => message.isFromUser && message.shouldBeCountedAsAPrompt).length;
-  }
-
   isAttachmentValid(attachmentName) {
     if (!this.configuration.hasAttachment) {
       return false;
@@ -128,13 +145,6 @@ export class Chat {
       return false;
     }
     return attachmentFilename.includes(attachmentFilenameFromConfig);
-  }
-
-  get messagesToForwardToLLM() {
-    return this.messages
-      .filter((message) => message.shouldBeForwardedToLLM)
-      .slice(-this.configuration.historySize)
-      .map((message) => message.toLLMHistory());
   }
 
   updateTokenConsumption(inputTokens, outputTokens) {
@@ -150,6 +160,8 @@ export class Chat {
     return {
       id: this.id,
       userId: this.userId,
+      assessmentId: this.assessmentId,
+      passageId: this.passageId,
       configurationId: this.configurationId,
       configuration: this.configuration.toDTO(),
       hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,

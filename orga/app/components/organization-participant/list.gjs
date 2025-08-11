@@ -403,7 +403,7 @@ export default class List extends Component {
           @destinationId={{paginationId}}
           @onChange={{reset}}
           @pagination={{@participants.meta}}
-          @locale={{this.locale.currentLocale}}
+          @locale={{this.locale.currentLanguage}}
         />
       </SelectableList>
 

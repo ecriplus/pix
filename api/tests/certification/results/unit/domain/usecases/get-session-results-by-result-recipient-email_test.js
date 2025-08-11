@@ -37,22 +37,27 @@ describe('Certification | Results | Unit | Domain | Use Cases | get-session-resu
     const certificationCandidate1 = domainBuilder.buildCertificationCandidate({
       id: 456,
       resultRecipientEmail: 'notMatching@example.net',
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     const certificationCandidate2 = domainBuilder.buildCertificationCandidate({
       id: 789,
       resultRecipientEmail: 'matching@example.net',
-      subscriptions: [domainBuilder.buildCoreSubscription()],
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+    });
+    const certificationCandidate3 = domainBuilder.buildCertificationCandidate({
+      id: 987,
+      resultRecipientEmail: 'MATCHING@example.net',
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
     const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
-      certificationCandidates: [certificationCandidate1, certificationCandidate2],
+      certificationCandidates: [certificationCandidate1, certificationCandidate2, certificationCandidate3],
       date: '2019-06-06',
       time: '12:05:30',
     });
     sharedSessionRepository.getWithCertificationCandidates.withArgs({ id: 123 }).resolves(expectedSession);
     const certificationResult = domainBuilder.buildCertificationResult({ firstName: 'Buffy' });
     certificationResultRepository.findByCertificationCandidateIds
-      .withArgs({ certificationCandidateIds: [789] })
+      .withArgs({ certificationCandidateIds: [789, 987] })
       .resolves([certificationResult]);
 
     // when

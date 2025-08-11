@@ -35,6 +35,12 @@ export async function register(server) {
               })
                 .optional()
                 .unknown(true),
+              preview: Joi.object({
+                moderationPrompt: Joi.string().min(1).optional(),
+                validationPrompt: Joi.string().min(1).optional(),
+              })
+                .optional()
+                .unknown(true),
             })
               .required()
               .unknown(true),

@@ -314,7 +314,7 @@ async function _getValidatedSubscriptionsForMassImport_old({
       subscriptions.push(
         Subscription.buildComplementary({
           certificationCandidateId: null,
-          complementaryCertificationId: complementaryCertification.id,
+          complementaryCertificationKey: complementaryCertification.key,
         }),
       );
     }

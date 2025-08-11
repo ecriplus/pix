@@ -137,7 +137,7 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
       let subscription;
 
       beforeEach(function () {
-        subscription = domainBuilder.buildCoreSubscription({ certificationCandidateId: null });
+        subscription = domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null });
         candidateToEnroll = domainBuilder.certification.enrolment.buildCandidate({
           subscriptions: [subscription],
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
@@ -312,7 +312,7 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
               // given
               centerRepository.getById.resolves(domainBuilder.certification.enrolment.buildCenter({}));
               candidateToEnroll.subscriptions = [
-                domainBuilder.buildCoreSubscription({
+                domainBuilder.certification.enrolment.buildCoreSubscription({
                   certificationCandidateId: null,
                 }),
               ];
@@ -323,7 +323,9 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
                 birthINSEECode: 'INSEE_CODE',
                 birthPostalCode: null,
                 birthCity: 'CITY',
-                subscriptions: [domainBuilder.buildCoreSubscription({ certificationCandidateId: null })],
+                subscriptions: [
+                  domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+                ],
               });
               candidateRepository.insert.resolves(159);
 

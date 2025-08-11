@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.180.0](https://github.com/1024pix/pix/compare/v5.179.0...v5.180.0) (2025-08-11)
+
+### :rocket: Amélioration
+
+- [#13083](https://github.com/1024pix/pix/pull/13083) Supprimer isCancelled des routes d'annulation et de désannulation d'une certification (PIX-18855). 
+
+### :building_construction: Tech
+
+- [#13138](https://github.com/1024pix/pix/pull/13138) Copier la configuration des tables de config certif vers la nouvelle table (PIX-19064). 
+- [#13148](https://github.com/1024pix/pix/pull/13148) Enregistrer l'assessmentId ou le passageId dans le Chat LLM persisté (PIX-19063) 
+- [#13126](https://github.com/1024pix/pix/pull/13126) Inclure les données de surcharge de prompt de modération et de validation en preview lors des échanges avec POC-LLM (PIX-19040) 
+- [#13019](https://github.com/1024pix/pix/pull/13019) Utiliser la clé de certif complémentaire au moment de l'ajout d'un candidat à une session (PIX-18902).
+
+# [5.179.0](https://github.com/1024pix/pix/compare/v5.178.0...v5.179.0) (2025-08-08)
+
+### :rocket: Amélioration
+
+- [#13153](https://github.com/1024pix/pix/pull/13153) ajout du component pix-carousel dans module PPN JV + qcu-discovery dans PPN JV et PPNCP 
+- [#13104](https://github.com/1024pix/pix/pull/13104) Changer l'algo de détection de local avec cookie dans PixAdmin (PIX-18977) 
+- [#13119](https://github.com/1024pix/pix/pull/13119) Changer l'algo de détection de local avec cookie dans PixOrga (PIX-18978) 
+- [#13145](https://github.com/1024pix/pix/pull/13145) Créer deux modules de démo quasiment vide à des fins de tests (PIX-19080) 
+- [#13146](https://github.com/1024pix/pix/pull/13146) Modifs sur le module IA Deepfakes 
+- [#13136](https://github.com/1024pix/pix/pull/13136) Revue design boutons action QAB (PIX-19065) 
+- [#13131](https://github.com/1024pix/pix/pull/13131) Suppression de la vérification de certificat valide et badges lors de la réconciliation (PIX-19045). 
+- [#13088](https://github.com/1024pix/pix/pull/13088) Suppression du bandeau hors CleA avant entrée en certification (PIX-18926). 
+- [#13140](https://github.com/1024pix/pix/pull/13140) Suppression du feature-toggle  shouldDisplayNewAnalysisPage (PIX-17682) 
+
+### :bug: Correction
+
+- [#13098](https://github.com/1024pix/pix/pull/13098) Ignorer la case des emails des destinataires de résultats (PIX-12345) 
+- [#13154](https://github.com/1024pix/pix/pull/13154) Réparer le démarrage de l'API Maddo (PIX-19085).
+
 # [5.178.0](https://github.com/1024pix/pix/compare/v5.177.0...v5.178.0) (2025-08-08)
 
 ### :rocket: Amélioration

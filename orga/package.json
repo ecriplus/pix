@@ -1,6 +1,6 @@
 {
   "name": "pix-orga",
-  "version": "5.178.0",
+  "version": "5.180.0",
   "private": false,
   "description": "Plateforme en ligne de gestion de campagne d'évaluation",
   "license": "AGPL-3.0",
@@ -111,6 +111,7 @@
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-qunit": "^8.1.2",
     "globals": "^16.0.0",
+    "i18next-browser-languagedetector": "^8.2.0",
     "loader.js": "^4.7.0",
     "lodash": "^4.17.21",
     "npm-run-all2": "^8.0.0",

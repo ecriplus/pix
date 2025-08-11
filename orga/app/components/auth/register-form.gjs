@@ -103,7 +103,7 @@ export default class RegisterForm extends Component {
         email: this.email,
         password: this.password,
         cgu: true,
-        lang: this.locale.currentLocale,
+        lang: this.locale.currentLanguage,
       });
       await user.save();
 

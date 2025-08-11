@@ -14,14 +14,23 @@
   background: var(--pix-primary-10);
   border: 1px solid var(--qab-proposal-border-color);
   border-radius: var(--pix-spacing-2x);
-  box-shadow: 0 -2px 0 0 var(--qab-proposal-border-color) inset, 0 2px 0 0 var(--qab-proposal-border-color) inset;
+  box-shadow:
+    0 -2px 0 0 var(--qab-proposal-border-color) inset,
+    0 0 0 0 var(--qab-proposal-border-color) inset;
 
-  &:active, &:focus {
+  &:active,
+  &:focus {
     --qab-proposal-border-color: var(--pix-primary-300);
   }
 
-  &:active, &:focus, &:hover {
-    background: linear-gradient(0deg, rgb(var(--pix-primary-100-inline), 0.50) 0%, rgb(var(--pix-primary-100-inline), 0.50) 100%);
+  &:active,
+  &:focus,
+  &:hover {
+    background: linear-gradient(
+      0deg,
+      rgb(var(--pix-primary-100-inline), 0.5) 0%,
+      rgb(var(--pix-primary-100-inline), 0.5) 100%
+    );
   }
 
   &[aria-disabled] {
@@ -82,4 +91,3 @@
     align-items: center;
   }
 }
-
