@@ -22,10 +22,11 @@ export function getTransform(streamCapture, shouldSendDebugData) {
 
 function getTokenConsumptionEvent(inputTokens, outputTokens) {
   return (
-    'event: debug-input-tokens-' +
+    'event: debug-input-tokens\ndata: ' +
     inputTokens +
-    '\ndata: \n\nevent: debug-output-tokens-' +
+    '\n\n' +
+    'event: debug-output-tokens\ndata: ' +
     outputTokens +
-    '\ndata: \n\n'
+    '\n\n'
   );
 }

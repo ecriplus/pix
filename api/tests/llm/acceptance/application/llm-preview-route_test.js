@@ -467,7 +467,7 @@ describe('Acceptance | Route | llm-preview', function () {
           201,
           Readable.from([
             '32:{"message":"coucou c\'est super"}',
-            '78:{"jecrois":{"que":"jaifini"},"usage":{"inputTokens":3000,"outputTokens":5000}}',
+            '80:{"jecrois":{"que":"jaifini"},"usage":{"input_tokens":3000,"output_tokens":5000}}',
           ]),
         );
 
@@ -482,7 +482,7 @@ describe('Acceptance | Route | llm-preview', function () {
       expect(response.statusCode).to.equal(201);
       expect(promptLlmScope.isDone()).to.be.true;
       expect(response.result).to.deep.equal(
-        "event: attachment-success\ndata: \n\ndata: coucou c'est super\n\nevent: debug-input-tokens-3000\ndata: \n\nevent: debug-output-tokens-5000\ndata: \n\n",
+        "event: attachment-success\ndata: \n\ndata: coucou c'est super\n\nevent: debug-input-tokens\ndata: 3000\n\nevent: debug-output-tokens\ndata: 5000\n\n",
       );
     });
   });

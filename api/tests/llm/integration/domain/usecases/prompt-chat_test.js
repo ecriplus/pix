@@ -2031,7 +2031,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               Readable.from([
                 '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
                 '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
-                '78:{"jecrois":{"que":"jaifini"},"usage":{"inputTokens":3000,"outputTokens":5000}}',
+                '80:{"jecrois":{"que":"jaifini"},"usage":{"input_tokens":3000,"output_tokens":5000}}',
               ]),
             );
 
@@ -2052,7 +2052,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           }
           const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
-            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: debug-input-tokens-3000\ndata: \n\nevent: debug-output-tokens-5000\ndata: \n\n",
+            "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: debug-input-tokens\ndata: 3000\n\nevent: debug-output-tokens\ndata: 5000\n\n",
           );
           expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
             id: 'chatId',
