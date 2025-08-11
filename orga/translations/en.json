@@ -353,6 +353,19 @@
       "in-progress-link": "(check import status).",
       "success": "Participants have been imported on {date} by {firstName} {lastName}."
     },
+    "index": {
+      "organization-information": {
+        "label": "Name of your organisation",
+        "title": "Your organisation's information"
+      },
+      "welcome": {
+        "description": {
+          "classic": "Welcome to your digital skills assessment platform! Configure and distribute your assessment campaigns to your participants. Track their progress and analyse their results in order to offer them support tailored to their needs or guide them towards Pix certification.",
+          "missions": "Welcome to your digital skills assessment platform! Configure and distribute your assessment campaigns to your participants. Track their progress and analyse their results in order to offer them support tailored to their needs or guide them towards Pix certification."
+        },
+        "title": "Hello {name},"
+      }
+    },
     "locale-switcher": {
       "label": "Select a language"
     },
@@ -950,6 +963,9 @@
       "no-students-imported-yet": "In this tab, you will find the certification results and certificates of the students. You will first need to import the students database of your school.",
       "select-label": "Class",
       "title": "Certification results"
+    },
+    "index": {
+      "title": "Home"
     },
     "join-request-form": {
       "firstname": "Votre prénom",

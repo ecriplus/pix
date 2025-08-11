@@ -353,6 +353,19 @@
       "in-progress-link": "(consulter l'état de l'import).",
       "success": "Les participants ont bien été importés le {date} par {firstname} {lastname}."
     },
+    "index": {
+      "organization-information": {
+        "label": "Nom de votre organisation",
+        "title": "Les informations de votre organisation"
+      },
+      "welcome": {
+        "description": {
+          "classic": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins.",
+          "missions": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins."
+        },
+        "title": "Bonjour {name},"
+      }
+    },
     "locale-switcher": {
       "label": "Sélectionnez une langue"
     },
@@ -950,6 +963,9 @@
       "no-students-imported-yet": "Dans cet onglet, vous retrouverez les résultats et les certificats des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement. ",
       "select-label": "Classe",
       "title": "Résultats de certification"
+    },
+    "index": {
+      "title": "Accueil"
     },
     "join-request-form": {
       "firstname": "Votre prénom",
