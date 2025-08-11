@@ -10,9 +10,14 @@ import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 export default class Organizations extends Component {
+  @service router;
+
+  @tracked submitting = false;
+
   optionType = [
     { value: 'PRO', label: 'PRO' },
     { value: 'SCO', label: 'SCO' },
@@ -24,6 +29,18 @@ export default class Organizations extends Component {
   searchedName = this.args.controller.name;
   searchedExternalId = this.args.controller.externalId;
   searchedType = this.args.controller.type;
+
+  @action
+  onCancel() {
+    const trainingId = this.router.currentRoute.parent.parent.params.training_id;
+    return this.router.transitionTo('authenticated.trainings.training.target-profiles', trainingId);
+  }
+
+  @action
+  onSubmit() {
+    const trainingId = this.router.currentRoute.parent.parent.params.training_id;
+    return this.router.transitionTo('authenticated.trainings.training.target-profiles', trainingId);
+  }
 
   <template>
     <section class="page-section organizations-list">
@@ -116,7 +133,13 @@ export default class Organizations extends Component {
           </PixButton>
         </li>
         <li>
-          <PixButton @variant="success" @size="small" @type="submit" @isLoading={{this.submitting}}>
+          <PixButton
+            @variant="success"
+            @size="small"
+            @type="submit"
+            @triggerAction={{this.onSubmit}}
+            @isLoading={{this.submitting}}
+          >
             Enregistrer
           </PixButton>
         </li>
