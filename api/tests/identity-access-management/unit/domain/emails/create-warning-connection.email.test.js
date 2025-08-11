@@ -59,7 +59,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
         'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Fen%2Fsupport';
 
       const expectedResetUrl =
-        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Den%26email%3Dtoto%2540example.net';
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Femail%3Dtoto%2540example.net%26lang%3Den';
       expect(resetUrl).to.equal(expectedResetUrl);
       expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
@@ -83,7 +83,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const expectedSupportUrl =
         'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.fr%2Fsupport';
       const expectedResetUrl =
-        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.fr%2Fmot-de-passe-oublie%3Flang%3Dfr%26email%3Dtoto%2540example.net';
+        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.fr%2Fmot-de-passe-oublie%3Femail%3Dtoto%2540example.net';
       expect(resetUrl).to.equal(expectedResetUrl);
       expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
@@ -107,7 +107,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const expectedSupportUrl =
         'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Ffr%2Fsupport';
       const expectedResetUrl =
-        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Dfr%26email%3Dtoto%2540example.net';
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Femail%3Dtoto%2540example.net%26lang%3Dfr';
       expect(resetUrl).to.equal(expectedResetUrl);
       expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });
@@ -129,7 +129,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       // then
       const { resetUrl, helpDeskUrl } = email.variables;
       const expectedResetUrl =
-        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Flang%3Dnl%26email%3Dtoto%2540example.net';
+        'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.org%2Fmot-de-passe-oublie%3Femail%3Dtoto%2540example.net%26lang%3Dnl';
 
       const expectedSupportUrl =
         'https://test.app.pix.org/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.org%2Fnl-be%2Fsupport';
@@ -156,7 +156,7 @@ describe('Unit | Identity Access Management | Domain | Email | create-warning-co
       const expectedSupportUrl =
         'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Fpix.fr%2Fsupport';
       const expectedResetUrl =
-        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.fr%2Fmot-de-passe-oublie%3Flang%3Dfr%26email%3Dtoto%252Btata%2540example.net';
+        'https://test.app.pix.fr/api/users/validate-email?token=token&redirect_url=https%3A%2F%2Ftest.app.pix.fr%2Fmot-de-passe-oublie%3Femail%3Dtoto%252Btata%2540example.net';
       expect(resetUrl).to.equal(expectedResetUrl);
       expect(helpDeskUrl).to.equal(expectedSupportUrl);
     });

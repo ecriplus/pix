@@ -1,5 +1,4 @@
 import { validateUserAccountEmail } from '../../../../../src/identity-access-management/domain/usecases/validate-user-account-email.usecase.js';
-import { config } from '../../../../../src/shared/config.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -8,11 +7,9 @@ describe('Unit | Identity Access Management | Domain | UseCase | validate-user-a
   let clock, now;
 
   const token = '00000000-0000-0000-0000-000000000000';
-  let defaultRedirectionUrl;
+  const defaultRedirectionUrl = 'https://test.app.pix.fr/connexion';
 
   beforeEach(function () {
-    defaultRedirectionUrl = `${config.domain.pixApp + config.domain.tldFr}/connexion`;
-
     emailValidationDemandRepository = {
       get: sinon.stub(),
       remove: sinon.stub(),

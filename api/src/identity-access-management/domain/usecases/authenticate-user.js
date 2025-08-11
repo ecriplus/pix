@@ -87,7 +87,7 @@ const authenticateUser = async function ({
       const validationToken = !user.emailConfirmedAt ? await emailValidationDemandRepository.save(user.id) : null;
       await emailRepository.sendEmailAsync(
         createWarningConnectionEmail({
-          locale: user.locale,
+          locale,
           email: user.email,
           firstName: user.firstName,
           validationToken,

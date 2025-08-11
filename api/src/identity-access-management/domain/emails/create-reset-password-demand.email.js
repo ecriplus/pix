@@ -1,5 +1,10 @@
-import { FRENCH_FRANCE } from '../../../shared/domain/services/locale-service.js';
-import { urlBuilder } from '../../../shared/infrastructure/utils/url-builder.js';
+import { FRENCH_FRANCE, isFranceLocale } from '../../../shared/domain/services/locale-service.js';
+import {
+  getPixAppUrl,
+  getPixWebsiteDomain,
+  getPixWebsiteUrl,
+  getSupportUrl,
+} from '../../../shared/domain/services/url-service.js';
 import { EmailFactory } from '../../../shared/mail/domain/models/EmailFactory.js';
 import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 
@@ -15,19 +20,18 @@ import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 export function createResetPasswordDemandEmail({ email, temporaryKey, locale = FRENCH_FRANCE }) {
   const factory = new EmailFactory({ app: 'pix-app', locale });
 
-  const { i18n, defaultVariables } = factory;
-  const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
+  const { i18n } = factory;
 
   return factory.buildEmail({
     template: mailer.passwordResetTemplateId,
     subject: i18n.__('reset-password-demand-email.subject'),
     to: email,
     variables: {
-      locale,
-      homeName: defaultVariables.homeName,
-      homeUrl: defaultVariables.homeUrl,
-      helpdeskUrl: defaultVariables.helpdeskUrl,
-      resetUrl: `${pixAppUrl}/changer-mot-de-passe/${temporaryKey}/?lang=${locale}`,
+      homeName: getPixWebsiteDomain(locale),
+      homeUrl: getPixWebsiteUrl(locale),
+      helpdeskUrl: getSupportUrl(locale),
+      displayNationalLogo: isFranceLocale(locale),
+      resetUrl: getPixAppUrl(locale, { pathname: `/changer-mot-de-passe/${temporaryKey}` }),
       clickOnTheButton: i18n.__('reset-password-demand-email.params.clickOnTheButton'),
       contactUs: i18n.__('reset-password-demand-email.params.contactUs'),
       doNotAnswer: i18n.__('reset-password-demand-email.params.doNotAnswer'),

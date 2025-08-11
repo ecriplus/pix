@@ -497,6 +497,7 @@
   },
   "self-account-deletion-email": {
     "params": {
+      "contactUs": "neem hier contact met ons op",
       "hello": "Hallo {firstName},",
       "requestConfirmation": "Na je verzoek zullen we de verwijdering van je Pix-account en je persoonlijke gegevens bevestigen.",
       "seeYouSoon": "We hopen je snel te zien voor nieuwe digitale avonturen.",
