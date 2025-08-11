@@ -1,13 +1,13 @@
 import { config } from '../../../shared/config.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 
-async function getModule({ slug, redirectionHash, moduleRepository }) {
+async function getModule({ slug, encryptedRedirectionUrl, moduleRepository }) {
   const module = await moduleRepository.getBySlug({ slug });
 
-  if (redirectionHash) {
+  if (encryptedRedirectionUrl) {
     let redirectionUrl = null;
     try {
-      redirectionUrl = await cryptoService.decrypt(redirectionHash, config.module.secret);
+      redirectionUrl = await cryptoService.decrypt(encryptedRedirectionUrl, config.module.secret);
       if (redirectionUrl) {
         module.setRedirectionUrl(redirectionUrl);
       }

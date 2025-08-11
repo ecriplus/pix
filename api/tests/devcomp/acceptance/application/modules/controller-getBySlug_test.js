@@ -25,10 +25,10 @@ describe('Acceptance | Controller | modules-controller-getBySlug', function () {
 
       it('should return module with redirectionUrl', async function () {
         const expectedUrl = 'https://app.pix.fr/parcours/COMBINIX1';
-        const redirectionHash = await cryptoService.encrypt(expectedUrl, config.module.secret);
+        const encryptedRedirectionUrl = await cryptoService.encrypt(expectedUrl, config.module.secret);
         const options = {
           method: 'GET',
-          url: `/api/modules/bien-ecrire-son-adresse-mail?redirectionHash=${encodeURIComponent(redirectionHash)}`,
+          url: `/api/modules/bien-ecrire-son-adresse-mail?encryptedRedirectionUrl=${encodeURIComponent(encryptedRedirectionUrl)}`,
         };
 
         const response = await server.inject(options);

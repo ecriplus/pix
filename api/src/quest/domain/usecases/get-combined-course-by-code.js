@@ -1,10 +1,13 @@
+import { config } from '../../../shared/config.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { CombinedCourseDetails } from '../models/CombinedCourse.js';
 import { DataForQuest } from '../models/DataForQuest.js';
 
 export async function getCombinedCourseByCode({
   userId,
   code,
+  hostURL,
   combinedCourseParticipationRepository,
   combinedCourseRepository,
   campaignRepository,
@@ -63,7 +66,14 @@ export async function getCombinedCourseByCode({
 
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
 
-  combinedCourseDetails.generateItems([...campaigns, ...modules], recommendableModuleIds, recommendedModuleIdsForUser);
+  const combinedCourseUrl = hostURL + '/parcours/' + combinedCourseDetails.code;
+  const encryptedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
+  combinedCourseDetails.generateItems(
+    [...campaigns, ...modules],
+    recommendableModuleIds,
+    recommendedModuleIdsForUser,
+    encryptedCombinedCourseUrl,
+  );
 
   return combinedCourseDetails;
 }

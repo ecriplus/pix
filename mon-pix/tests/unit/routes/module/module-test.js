@@ -21,7 +21,7 @@ module('Unit | Route | modules | module', function (hooks) {
     const module = Symbol('the-module');
 
     store.queryRecord = sinon.stub();
-    store.queryRecord.withArgs('module', { slug: 'the-module', redirectionHash: 'somehash' }).resolves(module);
+    store.queryRecord.withArgs('module', { slug: 'the-module', encryptedRedirectionUrl: 'somehash' }).resolves(module);
 
     // when
     const model = await route.model({ slug: 'the-module', redirection: 'somehash' });

@@ -24,7 +24,10 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
         id: '1',
         relationships: {
           items: {
-            data: [{ id: '1', type: 'combined-course-items' }],
+            data: [
+              { id: '1', type: 'combined-course-items' },
+              { id: '7', type: 'combined-course-items' },
+            ],
           },
         },
       },
@@ -36,6 +39,17 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             title: 'diagnostique',
             reference: 'ABCDIAG1',
             type: ITEM_TYPE.CAMPAIGN,
+            redirection: undefined,
+          },
+        },
+        {
+          type: 'combined-course-items',
+          id: '7',
+          attributes: {
+            title: 'title',
+            reference: 'slug',
+            type: ITEM_TYPE.MODULE,
+            redirection: 'encryptedCombinedCourseUrl',
           },
         },
       ],

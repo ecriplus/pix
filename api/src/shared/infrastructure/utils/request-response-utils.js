@@ -11,7 +11,15 @@ const requestResponseUtils = {
   extractUserIdFromRequest,
   extractLocaleFromRequest,
   extractTimestampFromRequest,
+  extractTLDFromRequest,
 };
+
+function extractTLDFromRequest(request) {
+  const forwardedHost = request.headers['x-forwarded-host'];
+  if (forwardedHost.includes('.fr')) return 'fr';
+  if (forwardedHost.includes('.org')) return 'org';
+  return null;
+}
 
 function escapeFileName(fileName) {
   return fileName
@@ -48,6 +56,7 @@ export {
   escapeFileName,
   extractLocaleFromRequest,
   extractTimestampFromRequest,
+  extractTLDFromRequest,
   extractUserIdFromRequest,
   requestResponseUtils,
 };

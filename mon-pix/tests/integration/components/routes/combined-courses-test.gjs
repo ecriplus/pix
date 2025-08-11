@@ -151,6 +151,7 @@ module('Integration | Component | combined course', function (hooks) {
         title: 'mon module',
         reference: 'mon-module',
         type: 'MODULE',
+        redirection: 'une+url+chiffree',
       });
 
       const combinedCourse = store.createRecord('combined-course', {
@@ -171,7 +172,17 @@ module('Integration | Component | combined course', function (hooks) {
       assert.ok(screen.getByText('mon module'));
       assert.strictEqual(
         screen.getByRole('link', { name: 'mon module' }).getAttribute('href'),
-        router.urlFor('module', { slug: combinedCourseItem.reference }),
+        router.urlFor(
+          'module',
+          {
+            slug: combinedCourseItem.reference,
+          },
+          {
+            queryParams: {
+              redirection: combinedCourseItem.redirection,
+            },
+          },
+        ),
       );
     });
   });

@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import { hash } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 
 const Content = <template>
@@ -14,7 +15,7 @@ const Content = <template>
   {{#if @isLocked}}
     <Content @title={{@item.title}} @isLocked={{true}} />
   {{else}}
-    <LinkTo @route={{@item.route}} @model={{@item.reference}} disabled>
+    <LinkTo @route={{@item.route}} @model={{@item.reference}} @query={{hash redirection=@item.redirection}} disabled>
       <Content @title={{@item.title}} />
     </LinkTo>
   {{/if}}

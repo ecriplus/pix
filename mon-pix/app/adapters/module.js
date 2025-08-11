@@ -5,9 +5,9 @@ export default class Module extends ApplicationAdapter {
     if (query.slug) {
       let url = `${this.host}/${this.namespace}/modules/${query.slug}`;
 
-      if (query.redirectionHash) {
-        const redirectionHash = encodeURIComponent(query.redirectionHash);
-        url += `?redirectionHash=${redirectionHash}`;
+      if (query.encryptedRedirectionUrl) {
+        const encryptedRedirectionUrl = encodeURIComponent(query.encryptedRedirectionUrl);
+        url += `?encryptedRedirectionUrl=${encryptedRedirectionUrl}`;
       }
 
       return this.ajax(url, 'GET');

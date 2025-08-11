@@ -38,10 +38,10 @@ describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
       };
       moduleRepository.getBySlug.withArgs({ slug }).resolves(expectedModule);
       const expectedUrl = 'https://app.pix.fr/parcours/COMBINIX1';
-      const redirectionHash = await cryptoService.encrypt(expectedUrl, config.module.secret);
+      const encryptedRedirectionUrl = await cryptoService.encrypt(expectedUrl, config.module.secret);
 
       // when
-      const module = await getModule({ slug, redirectionHash, moduleRepository });
+      const module = await getModule({ slug, encryptedRedirectionUrl, moduleRepository });
 
       // then
       expect(module.redirectionUrl).to.equal(expectedUrl);

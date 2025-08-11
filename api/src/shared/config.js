@@ -640,6 +640,10 @@ const configuration = (function () {
     config.v3Certification.latestCalibrationDate = '2020-01-01';
   }
 
+  if (process.env.NODE_ENV === 'development') {
+    config.domain.pixApp = 'http://localhost:4200';
+  }
+
   return config;
 })();
 
