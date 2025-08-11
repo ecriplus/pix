@@ -34,7 +34,7 @@ from (select
 
     hasNext = updates.rowCount === CHUNK_SIZE;
     ++numberOfBatchProcessed;
-    logger.info(
+    logger.debug(
       `${TABLE_NAME}: Batch number ${numberOfBatchProcessed} : ${updates.rowCount} items updated. hasNext = ${hasNext}`,
     );
   } while (hasNext);
