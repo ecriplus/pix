@@ -158,7 +158,9 @@ Router.map(function () {
         this.route('triggers', function () {
           this.route('edit');
         });
-        this.route('target-profiles');
+        this.route('target-profiles', function () {
+          this.route('organizations', { path: '/:target_profile_id/organizations' });
+        });
       });
     });
 

@@ -1,13 +1,12 @@
 import {
   FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID,
   FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID,
-  USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
 import { organization } from '../common/tooling/index.js';
 import { NB_TARGET_PROFILE_SHARES, TEAM_DEVCOMP_ORGANIZATION_ID } from './constants.js';
 
-export async function createDevcompOrganization(databaseBuilder) {
+export async function createDevcompOrganization({ databaseBuilder, adminId }) {
   await organization.createOrganization({
     databaseBuilder,
     organizationId: TEAM_DEVCOMP_ORGANIZATION_ID,
@@ -15,7 +14,7 @@ export async function createDevcompOrganization(databaseBuilder) {
     name: 'DevComp',
     isManagingStudents: true,
     externalId: 'SCO_DEVCOMP',
-    adminIds: [USER_ID_ADMIN_ORGANIZATION],
+    adminIds: [adminId],
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
     features: [
       { id: FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID },
@@ -23,10 +22,14 @@ export async function createDevcompOrganization(databaseBuilder) {
     ],
   });
 
-  return _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, nextId: TEAM_DEVCOMP_ORGANIZATION_ID + 1 });
+  return _buildOrganizationsIdForTargetProfileShares({
+    databaseBuilder,
+    adminId,
+    nextId: TEAM_DEVCOMP_ORGANIZATION_ID + 1,
+  });
 }
 
-async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, nextId }) {
+async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, adminId, nextId }) {
   const result = [];
   for (let i = 0; i < NB_TARGET_PROFILE_SHARES; i++) {
     const { organizationId } = await organization.createOrganization({
@@ -36,7 +39,7 @@ async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, ne
       name: `DevComp orga ${i}`,
       isManagingStudents: true,
       externalId: `SCO_DEVCOMP ${i}`,
-      adminIds: [USER_ID_ADMIN_ORGANIZATION],
+      adminIds: [adminId],
       memberIds: [USER_ID_MEMBER_ORGANIZATION],
     });
 

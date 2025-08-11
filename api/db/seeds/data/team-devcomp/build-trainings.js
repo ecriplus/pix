@@ -1,8 +1,11 @@
-import { PIX_EDU_SMALL_TARGET_PROFILE_ID } from './constants.js';
+import { DEVCOMP_BASE_TRAINING_ID, PIX_EDU_SMALL_TARGET_PROFILE_ID } from './constants.js';
 
 export function buildTrainings(databaseBuilder) {
+  let trainingId = DEVCOMP_BASE_TRAINING_ID;
   const frTrainingId = databaseBuilder.factory.buildTraining({
+    id: trainingId++,
     title: 'Apprendre à manger un croissant comme les français',
+    internalTitle: 'Apprendre à manger un croissant comme les français',
     locale: 'fr',
   }).id;
 
@@ -24,7 +27,9 @@ export function buildTrainings(databaseBuilder) {
   });
 
   const frFrTrainingId1 = databaseBuilder.factory.buildTraining({
+    id: trainingId++,
     title: 'Apprendre à peindre comme Monet',
+    internalTitle: 'Apprendre à peindre comme Monet',
     locale: 'fr-fr',
   }).id;
 
@@ -46,7 +51,9 @@ export function buildTrainings(databaseBuilder) {
   });
 
   const frFrTrainingId2 = databaseBuilder.factory.buildTraining({
+    id: trainingId++,
     title: 'Bac à sable Pix',
+    internalTitle: 'Bac à sable Pix',
     link: '/modules/bac-a-sable/details',
     duration: '00:10:00',
     editorName: 'Pix',
@@ -73,7 +80,9 @@ export function buildTrainings(databaseBuilder) {
   });
 
   const enTrainingId = databaseBuilder.factory.buildTraining({
+    id: trainingId++,
     title: 'Eat a croissant like the french',
+    internalTitle: 'Eat a croissant like the french',
     locale: 'en',
   }).id;
 
