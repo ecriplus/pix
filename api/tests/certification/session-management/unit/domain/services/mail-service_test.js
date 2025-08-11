@@ -1,5 +1,4 @@
 import * as mailService from '../../../../../../src/certification/session-management/domain/services/mail-service.js';
-import { config as settings } from '../../../../../../src/shared/config.js';
 import { ENGLISH_SPOKEN, FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -52,7 +51,6 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
   describe('#sendCertificationResultEmail', function () {
     it(`should call sendEmail with from, to, template, tags, ${FRENCH_FRANCE} and ${ENGLISH_SPOKEN} translations`, async function () {
       // given
-      sinon.stub(settings.domain, 'pixApp').value('https://pix.app');
       const translate = i18n.__;
       const sessionDate = '2020-10-03';
       const sessionId = '3';
@@ -62,7 +60,7 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
       const daysBeforeExpiration = 30;
       const tokenServiceStub = sinon.stub(tokenService, 'createCertificationResultsByRecipientEmailLinkToken');
       tokenServiceStub.withArgs({ sessionId, resultRecipientEmail, daysBeforeExpiration }).returns('token-1');
-      const link = 'https://pix.app.org/api/sessions/download-results/token-1';
+      const link = 'https://test.app.pix.org/api/sessions/download-results/token-1';
 
       // when
       await mailService.sendCertificationResultEmail({
@@ -90,14 +88,14 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
             homeName: 'pix.fr',
             homeUrl: 'https://pix.fr',
             homeNameInternational: 'pix.org',
-            homeUrlInternational: 'https://pix.org/fr/',
+            homeUrlInternational: 'https://pix.org/fr',
             link: `${link}?lang=fr`,
           },
           en: {
             ...mainTranslationsMapping.en['certification-result-email'].params,
             title: translate({ phrase: 'certification-result-email.title', locale: 'en' }, { sessionId }),
             homeName: 'pix.org',
-            homeUrl: 'https://pix.org/en/',
+            homeUrl: 'https://pix.org/en',
             link: `${link}?lang=en`,
           },
           sessionId,

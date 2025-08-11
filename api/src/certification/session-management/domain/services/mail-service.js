@@ -1,23 +1,11 @@
 import dayjs from 'dayjs';
 
 import * as translations from '../../../../../translations/index.js';
-import { config } from '../../../../shared/config.js';
 import { tokenService } from '../../../../shared/domain/services/token-service.js';
+import { getPixAppUrl, getPixWebsiteDomain, getPixWebsiteUrl } from '../../../../shared/domain/services/url-service.js';
 import { mailer } from '../../../../shared/mail/infrastructure/services/mailer.js';
 
 const EMAIL_ADDRESS_NO_RESPONSE = 'ne-pas-repondre@pix.fr';
-
-// FRENCH_FRANCE
-const PIX_HOME_NAME_FRENCH_FRANCE = `pix${config.domain.tldFr}`;
-const PIX_HOME_URL_FRENCH_FRANCE = `${config.domain.pix + config.domain.tldFr}`;
-
-// INTERNATIONAL
-const PIX_HOME_NAME_INTERNATIONAL = `pix${config.domain.tldOrg}`;
-const PIX_HOME_URL_INTERNATIONAL = {
-  en: `${config.domain.pix + config.domain.tldOrg}/en/`,
-  fr: `${config.domain.pix + config.domain.tldOrg}/fr/`,
-  nl: `${config.domain.pix + config.domain.tldOrg}/nl-be/`,
-};
 
 function sendNotificationToCertificationCenterRefererForCleaResults({ email, sessionId, sessionDate }) {
   const formattedSessionDate = dayjs(sessionDate).locale('fr').format('DD/MM/YYYY');
@@ -47,8 +35,6 @@ function sendCertificationResultEmail({
     resultRecipientEmail,
     daysBeforeExpiration,
   });
-  const link = `${config.domain.pixApp + config.domain.tldOrg}/api/sessions/download-results/${token}`;
-
   const formattedSessionDate = dayjs(sessionDate).locale('fr').format('DD/MM/YYYY');
 
   const templateVariables = {
@@ -57,19 +43,19 @@ function sendCertificationResultEmail({
     sessionDate: formattedSessionDate,
     fr: {
       ...translations.fr['certification-result-email'].params,
-      homeName: PIX_HOME_NAME_FRENCH_FRANCE,
-      homeUrl: PIX_HOME_URL_FRENCH_FRANCE,
-      homeNameInternational: PIX_HOME_NAME_INTERNATIONAL,
-      homeUrlInternational: PIX_HOME_URL_INTERNATIONAL.fr,
+      homeName: getPixWebsiteDomain('fr-FR'),
+      homeUrl: getPixWebsiteUrl('fr-FR'),
+      homeNameInternational: getPixWebsiteDomain('fr'),
+      homeUrlInternational: getPixWebsiteUrl('fr'),
       title: translate({ phrase: 'certification-result-email.title', locale: 'fr' }, { sessionId }),
-      link: `${link}?lang=fr`,
+      link: getPixAppUrl('fr', { pathname: `/api/sessions/download-results/${token}` }),
     },
     en: {
       ...translations.en['certification-result-email'].params,
-      homeName: PIX_HOME_NAME_INTERNATIONAL,
-      homeUrl: PIX_HOME_URL_INTERNATIONAL.en,
+      homeName: getPixWebsiteDomain('en'),
+      homeUrl: getPixWebsiteUrl('en'),
       title: translate({ phrase: 'certification-result-email.title', locale: 'en' }, { sessionId }),
-      link: `${link}?lang=en`,
+      link: getPixAppUrl('en', { pathname: `/api/sessions/download-results/${token}` }),
     },
   };
 
