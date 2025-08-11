@@ -1,5 +1,5 @@
 import { PoleEmploiPayload } from '../../../../../../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
-import { config } from '../../../../../../../src/shared/config.js';
+import { getPixAppUrl } from '../../../../../../../src/shared/domain/services/url-service.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Infrastructure | Externals | Pole-Emploi | PoleEmploiPayload', function () {
@@ -54,7 +54,7 @@ describe('Unit | Infrastructure | Externals | Pole-Emploi | PoleEmploiPayload', 
         dateFin: campaign.archivedAt,
         type: 'EVALUATION',
         codeCampagne: campaign.code,
-        urlCampagne: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaign.code}`,
+        urlCampagne: getPixAppUrl('fr-FR', { pathname: `/campagnes/${campaign.code}` }),
         nomOrganisme: 'Pix',
         typeOrganisme: 'externe',
       });
@@ -120,7 +120,7 @@ describe('Unit | Infrastructure | Externals | Pole-Emploi | PoleEmploiPayload', 
         dateFin: campaign.archivedAt,
         type: 'EVALUATION',
         codeCampagne: campaign.code,
-        urlCampagne: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaign.code}`,
+        urlCampagne: getPixAppUrl('fr-FR', { pathname: `/campagnes/${campaign.code}` }),
         nomOrganisme: 'Pix',
         typeOrganisme: 'externe',
       });
@@ -191,7 +191,7 @@ describe('Unit | Infrastructure | Externals | Pole-Emploi | PoleEmploiPayload', 
         dateFin: campaign.archivedAt,
         type: 'EVALUATION',
         codeCampagne: campaign.code,
-        urlCampagne: `${config.domain.pixApp + config.domain.tldFr}/campagnes/${campaign.code}`,
+        urlCampagne: getPixAppUrl('fr-FR', { pathname: `/campagnes/${campaign.code}` }),
         nomOrganisme: 'Pix',
         typeOrganisme: 'externe',
       });

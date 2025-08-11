@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import { config } from '../../../../../shared/config.js';
+import { getPixAppUrl } from '../../../../../shared/domain/services/url-service.js';
 
 const CAMPAIGN_TYPE = 'EVALUATION';
 const STRUCTURE_NAME = 'Pix';
 const STRUCTURE_TYPE = 'externe';
-const CAMPAIGN_URL = `${config.domain.pixApp}${config.domain.tldFr}/campagnes`;
+const CAMPAIGN_URL = getPixAppUrl('fr-FR', { pathname: '/campagnes' });
 const TEST_STATE = { STARTED: 2, FINISHED: 3, SHARED: 4 };
 const UNITS = { PERCENTAGE: 'A', SCORE: 'B' };
 const EVALUATION_CATEGORY = 'competence';
