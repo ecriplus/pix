@@ -2,19 +2,19 @@ import * as targetProfileTrainingRepository from '../../../../../src/devcomp/inf
 import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | target-profile-training-repository', function () {
+  let clock;
+  let now;
+
+  beforeEach(function () {
+    now = new Date('2022-02-13');
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(async function () {
+    clock.restore();
+  });
+
   describe('#create', function () {
-    let clock;
-    let now;
-
-    beforeEach(function () {
-      now = new Date('2022-02-13');
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(async function () {
-      clock.restore();
-    });
-
     it('should create a target-profile-training for given training and given target profile', async function () {
       // given
       const targetProfile = databaseBuilder.factory.buildTargetProfile({ id: 1 });
@@ -88,6 +88,46 @@ describe('Integration | Repository | target-profile-training-repository', functi
 
       // then
       expect(removedResult).to.be.false;
+    });
+  });
+
+  describe('#get', function () {
+    describe('when found', function () {
+      it('should return training/target-profile', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const training = databaseBuilder.factory.buildTraining();
+        const expectedTargetProfileTraining = databaseBuilder.factory.buildTargetProfileTraining({
+          id: 8000,
+          trainingId: training.id,
+          targetProfileId: targetProfile.id,
+          createdAt: now,
+          updatedAt: now,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const getResult = await targetProfileTrainingRepository.get({
+          trainingId: training.id,
+          targetProfileId: targetProfile.id,
+        });
+
+        // then
+        expect(getResult).to.deep.equal(expectedTargetProfileTraining);
+      });
+    });
+
+    describe('when not found', function () {
+      it('should return null', async function () {
+        // when
+        const getResult = await targetProfileTrainingRepository.get({
+          trainingId: 1,
+          targetProfileId: 2,
+        });
+
+        // then
+        expect(getResult).to.be.undefined;
+      });
     });
   });
 });
