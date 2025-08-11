@@ -230,20 +230,13 @@ const userCompetences = [
 
 describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', function () {
   context('#handleV2CertificationScoring', function () {
-    let assessmentResultRepository,
-      competenceMarkRepository,
-      certificationCourseRepository,
-      scoringCertificationService,
-      dependencies;
+    let assessmentResultRepository, competenceMarkRepository, certificationCourseRepository, dependencies;
 
     beforeEach(function () {
       competenceMarkRepository = { save: sinon.stub() };
       assessmentResultRepository = { save: sinon.stub() };
       certificationCourseRepository = { get: sinon.stub() };
       dependencies = { calculateCertificationAssessmentScore: sinon.stub() };
-      scoringCertificationService = {
-        isLackOfAnswersForTechnicalReason: sinon.stub(),
-      };
     });
 
     context('for scoring certification', function () {
@@ -279,7 +272,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           });
 
           dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
           certificationCourseRepository.get
             .withArgs({ id: certificationAssessment.certificationCourseId })
             .resolves(certificationCourse);
@@ -296,7 +288,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -320,7 +311,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -350,7 +340,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           const savedAssessmentResult = { id: 123123 };
 
           dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
           certificationCourseRepository.get
             .withArgs({ id: certificationAssessment.certificationCourseId })
             .resolves(certificationCourse);
@@ -363,7 +352,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -397,7 +385,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           const certificationCourse = domainBuilder.buildCertificationCourse({
             id: certificationCourseId,
             abortReason: null,
-            isCancelled: true,
           });
           const certificationAssessmentScore = domainBuilder.buildCertificationAssessmentScore({
             competenceMarks: [],
@@ -412,7 +399,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           const savedAssessmentResult = { id: 123123 };
 
           dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
           certificationCourseRepository.get
             .withArgs({ id: certificationAssessment.certificationCourseId })
             .resolves(certificationCourse);
@@ -426,7 +412,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -450,10 +435,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
     context('for rescoring certification', function () {
       it('computes and persists the assessment result and competence marks', async function () {
         // given
-        const certificationCourse = domainBuilder.buildCertificationCourse({
-          isCancelled: false,
-        });
-
+        const certificationCourse = domainBuilder.buildCertificationCourse();
         const event = new ChallengeNeutralized({ certificationCourseId: certificationCourse.getId(), juryId: 7 });
         const certificationAssessment = new CertificationAssessment({
           id: 123,
@@ -495,7 +477,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
         });
 
         dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-        scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
         certificationCourseRepository.get
           .withArgs({ id: certificationAssessment.certificationCourseId })
           .resolves(certificationCourse);
@@ -509,7 +490,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           assessmentResultRepository,
           certificationCourseRepository,
           competenceMarkRepository,
-          scoringCertificationService,
           dependencies,
         });
 
@@ -571,7 +551,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           });
 
           dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
           certificationCourseRepository.get
             .withArgs({ id: certificationAssessment.certificationCourseId })
             .resolves(certificationCourse);
@@ -585,7 +564,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -617,7 +595,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               assessmentResult: savedAssessmentResult,
             });
             dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-            scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(certificationCourse);
@@ -631,7 +608,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               assessmentResultRepository,
               certificationCourseRepository,
               competenceMarkRepository,
-              scoringCertificationService,
               dependencies,
             });
 
@@ -647,7 +623,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
       context('when the certification has enough non neutralized challenges to be trusted', function () {
         it('build and save a standard assessment result', async function () {
           // given
-          const certificationCourse = domainBuilder.buildCertificationCourse({ id: 789, isCancelled: true });
+          const certificationCourse = domainBuilder.buildCertificationCourse({ id: 789 });
 
           const event = new ChallengeNeutralized({ certificationCourseId: 789, juryId: 7 });
           const certificationAssessment = new CertificationAssessment({
@@ -688,7 +664,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           });
 
           dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-          scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
           certificationCourseRepository.get
             .withArgs({ id: certificationAssessment.certificationCourseId })
             .resolves(certificationCourse);
@@ -702,7 +677,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             assessmentResultRepository,
             certificationCourseRepository,
             competenceMarkRepository,
-            scoringCertificationService,
             dependencies,
           });
 
@@ -759,7 +733,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             });
 
             dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-            scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(certificationCourse);
@@ -772,7 +745,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               assessmentResultRepository,
               certificationCourseRepository,
               competenceMarkRepository,
-              scoringCertificationService,
               dependencies,
             });
 
@@ -828,7 +800,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               assessmentResult: assessmentResultToBeSaved,
             });
             dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-            scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(false);
             certificationCourseRepository.get
               .withArgs({ id: certificationAssessment.certificationCourseId })
               .resolves(certificationCourse);
@@ -841,7 +812,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               assessmentResultRepository,
               certificationCourseRepository,
               competenceMarkRepository,
-              scoringCertificationService,
               dependencies,
             });
 
@@ -890,7 +860,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
                 assessmentResult: assessmentResultToBeSaved,
               });
               dependencies.calculateCertificationAssessmentScore.resolves(certificationAssessmentScore);
-              scoringCertificationService.isLackOfAnswersForTechnicalReason.returns(true);
               certificationCourseRepository.get
                 .withArgs({ id: certificationAssessment.certificationCourseId })
                 .resolves(certificationCourse);
@@ -903,7 +872,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
                 assessmentResultRepository,
                 certificationCourseRepository,
                 competenceMarkRepository,
-                scoringCertificationService,
                 dependencies,
               });
 
