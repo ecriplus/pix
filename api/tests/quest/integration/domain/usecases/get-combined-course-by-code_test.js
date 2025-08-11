@@ -23,7 +23,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
     databaseBuilder.factory.buildCampaignParticipation({
-      campaign,
+      campaignId: campaign.id,
       userId,
       organizationLearnerId,
       status: 'STARTED',
