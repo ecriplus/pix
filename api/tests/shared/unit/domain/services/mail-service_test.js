@@ -1,4 +1,3 @@
-import { config } from '../../../../../src/shared/config.js';
 import {
   DUTCH_SPOKEN,
   ENGLISH_SPOKEN,
@@ -118,7 +117,7 @@ describe('Unit | Service | MailService', function () {
           expect(options.subject).to.equal(mainTranslationsMapping.fr['organization-invitation-email'].subject);
           expect(options.variables).to.include({
             pixHomeName: 'pix.org',
-            pixHomeUrl: 'https://pix.org/fr/',
+            pixHomeUrl: 'https://pix.org/fr',
             pixOrgaHomeUrl: 'https://orga.pix.org/?lang=fr',
             redirectionUrl: `https://orga.pix.org/rejoindre?invitationId=${organizationInvitationId}&code=${code}&lang=fr`,
             supportUrl: 'https://pix.org/fr/support',
@@ -190,7 +189,7 @@ describe('Unit | Service | MailService', function () {
           expect(options.subject).to.equal(mainTranslationsMapping.en['organization-invitation-email'].subject);
           expect(options.variables).to.include({
             pixHomeName: 'pix.org',
-            pixHomeUrl: 'https://pix.org/en/',
+            pixHomeUrl: 'https://pix.org/en',
             pixOrgaHomeUrl: 'https://orga.pix.org/?lang=en',
             redirectionUrl: `https://orga.pix.org/rejoindre?invitationId=${organizationInvitationId}&code=${code}&lang=en`,
             supportUrl: 'https://pix.org/en/support',
@@ -209,7 +208,6 @@ describe('Unit | Service | MailService', function () {
       const lastName = 'LastName';
       const organizationInvitationId = 1;
       const code = 'ABCDEFGH01';
-      const pixOrgaUrl = 'https://orga.pix.fr';
       const expectedOptions = {
         from: senderEmailAddress,
         fromName: 'Pix Orga - Ne pas répondre',
@@ -222,9 +220,8 @@ describe('Unit | Service | MailService', function () {
           lastName,
           pixHomeName: 'pix.fr',
           pixHomeUrl: 'https://pix.fr',
-          pixOrgaHomeUrl: pixOrgaUrl,
-          locale: FRENCH_FRANCE,
-          redirectionUrl: `${pixOrgaUrl}/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
+          pixOrgaHomeUrl: 'https://orga.pix.fr/',
+          redirectionUrl: `https://orga.pix.fr/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
         },
         tags: null,
       };
@@ -299,7 +296,7 @@ describe('Unit | Service | MailService', function () {
         expect(sendEmailParameters.variables).to.include({
           certificationCenterName: 'Centre Pixi',
           pixHomeName: 'pix.org',
-          pixHomeUrl: 'https://pix.org/fr/',
+          pixHomeUrl: 'https://pix.org/fr',
           pixCertifHomeUrl: 'https://certif.pix.org/?lang=fr',
           redirectionUrl: `https://certif.pix.org/rejoindre?invitationId=7&code=AAABBBCCC7&lang=fr`,
           supportUrl: 'https://pix.org/fr/support',
@@ -331,7 +328,7 @@ describe('Unit | Service | MailService', function () {
         expect(sendEmailParameters.variables).to.include({
           certificationCenterName: 'Centre Pixi',
           pixHomeName: 'pix.org',
-          pixHomeUrl: 'https://pix.org/en/',
+          pixHomeUrl: 'https://pix.org/en',
           pixCertifHomeUrl: 'https://certif.pix.org/?lang=en',
           redirectionUrl: `https://certif.pix.org/rejoindre?invitationId=777&code=LLLJJJVVV1&lang=en`,
           supportUrl: 'https://pix.org/en/support',
@@ -347,9 +344,9 @@ describe('Unit | Service | MailService', function () {
       const translationsMapping = mainTranslationsMapping.fr['account-recovery-email'];
 
       const firstName = 'Carla';
-      const temporaryKey = 'a temporary key';
+      const temporaryKey = 'a-temporary-key';
       const email = 'carla@example.net';
-      const redirectionUrl = `${config.domain.pixApp + config.domain.tldFr}/recuperer-mon-compte/${temporaryKey}`;
+      const redirectionUrl = `https://test.app.pix.fr/recuperer-mon-compte/${temporaryKey}`;
 
       // when
       await mailService.sendAccountRecoveryEmail({
@@ -399,7 +396,7 @@ describe('Unit | Service | MailService', function () {
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
         homeName: 'pix.org',
-        homeUrl: 'https://pix.org/fr/',
+        homeUrl: 'https://pix.org/fr',
         displayNationalLogo: false,
         code,
         ...mainTranslationsMapping.fr['verification-code-email'].body,
@@ -457,7 +454,7 @@ describe('Unit | Service | MailService', function () {
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
         homeName: 'pix.org',
-        homeUrl: 'https://pix.org/en/',
+        homeUrl: 'https://pix.org/en',
         displayNationalLogo: false,
         code,
         ...mainTranslationsMapping.en['verification-code-email'].body,
@@ -487,7 +484,7 @@ describe('Unit | Service | MailService', function () {
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
         homeName: 'pix.org',
-        homeUrl: 'https://pix.org/nl-be/',
+        homeUrl: 'https://pix.org/nl-be',
         displayNationalLogo: false,
         code,
         ...mainTranslationsMapping.nl['verification-code-email'].body,
@@ -517,7 +514,7 @@ describe('Unit | Service | MailService', function () {
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
         homeName: 'pix.org',
-        homeUrl: 'https://pix.org/en/',
+        homeUrl: 'https://pix.org/en',
         displayNationalLogo: false,
         code,
         ...mainTranslationsMapping.es['verification-code-email'].body,
@@ -544,29 +541,6 @@ describe('Unit | Service | MailService', function () {
         to: email,
         template: mailer.cpfEmailTemplateId,
         variables: { generatedFiles },
-      });
-    });
-  });
-
-  describe('#sendNotificationToOrganizationMembersForTargetProfileDetached', function () {
-    it(`should call sendEmail with the right options`, async function () {
-      // given
-      const email = 'user@example.net';
-      const complementaryCertificationName = 'what a complementary';
-
-      // when
-      await mailService.sendNotificationToOrganizationMembersForTargetProfileDetached({
-        email,
-        complementaryCertificationName,
-      });
-
-      // then
-      expect(mailer.sendEmail).to.have.been.calledWith({
-        from: 'ne-pas-repondre@pix.fr',
-        fromName: 'PIX - Ne pas répondre',
-        to: email,
-        template: mailer.targetProfileNotCertifiableTemplateId,
-        variables: { complementaryCertificationName },
       });
     });
   });
