@@ -14,7 +14,7 @@ const up = async function (knex) {
       .insert(nextCandidatesWithoutCoreSubscription(knex, CHUNK_SIZE));
 
     hasNext = insertions.rowCount === CHUNK_SIZE;
-    logger.info(
+    logger.debug(
       `${TABLE_NAME}: Batch number ${++numberOfBatchProcessed} of ${insertions.rowCount} items inserted. hasNext = ${hasNext}`,
     );
   } while (hasNext && numberOfBatchProcessed <= BATCH_LIMIT);

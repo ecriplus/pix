@@ -16,13 +16,15 @@ export const buildCertificationConfiguration = function ({
     values: {
       startingDate,
       expirationDate,
-      maximumAssessmentLength,
-      challengesBetweenSameCompetence,
-      limitToOneQuestionPerTube,
-      enablePassageByAllCompetences,
-      variationPercent,
-      'global-scoring-configuration': JSON.stringify(globalScoringConfiguration),
-      'competences-scoring-configuration': JSON.stringify(competencesScoringConfiguration),
+      challengesConfiguration: JSON.stringify({
+        maximumAssessmentLength,
+        challengesBetweenSameCompetence,
+        limitToOneQuestionPerTube,
+        enablePassageByAllCompetences,
+        variationPercent,
+      }),
+      globalScoringConfiguration: JSON.stringify(globalScoringConfiguration),
+      competencesScoringConfiguration: JSON.stringify(competencesScoringConfiguration),
     },
   });
 };
