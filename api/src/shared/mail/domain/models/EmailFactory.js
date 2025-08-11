@@ -1,5 +1,4 @@
 import { getI18n } from '../../../infrastructure/i18n/i18n.js';
-import { getEmailDefaultVariables } from '../emails-default-variables.js';
 import { Email } from './Email.js';
 
 const NO_REPLY_PIX_EMAIL = 'ne-pas-repondre@pix.fr';
@@ -18,7 +17,6 @@ export class EmailFactory {
   constructor({ app, locale }) {
     this.app = app;
     this.i18n = getI18n(locale);
-    this.defaultVariables = getEmailDefaultVariables(locale);
   }
 
   /**
