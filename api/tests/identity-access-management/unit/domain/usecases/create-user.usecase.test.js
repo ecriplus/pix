@@ -10,10 +10,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
   const userId = 123;
   const userEmail = 'test@example.net';
   const password = 'Password123';
-  const localeFromHeader = 'fr-FR';
+  const locale = 'fr-FR';
   const user = new User({ email: userEmail });
   const hashedPassword = 'ABCDEF1234';
-  const savedUser = new User({ id: userId, email: userEmail, locale: localeFromHeader });
+  const savedUser = new User({ id: userId, email: userEmail, locale });
 
   let campaignCode;
   let authenticationMethodRepository;
@@ -71,7 +71,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // when
       await createUser({
         user,
-        localeFromHeader,
+        locale,
         password,
         campaignCode,
         authenticationMethodRepository,
@@ -94,7 +94,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // when
       await createUser({
         user,
-        localeFromHeader,
+        locale,
         password,
         campaignCode,
         authenticationMethodRepository,
@@ -117,7 +117,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // when
       await createUser({
         user,
-        localeFromHeader,
+        locale,
         password,
         campaignCode,
         authenticationMethodRepository,
@@ -154,7 +154,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         const error = await catchErr(createUser)({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -196,7 +196,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         const error = await catchErr(createUser)({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -240,7 +240,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         const error = await catchErr(createUser)({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -272,7 +272,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         await createUser({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -303,7 +303,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         await createUser({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -332,7 +332,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // when
       await createUser({
         user,
-        localeFromHeader,
+        locale,
         password,
         campaignCode,
         authenticationMethodRepository,
@@ -357,7 +357,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         await createUser({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -383,7 +383,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         const error = await catchErr(createUser)({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -404,7 +404,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         await createUser({
           user,
-          localeFromHeader,
+          locale,
           password,
           campaignCode,
           authenticationMethodRepository,
@@ -431,7 +431,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
     });
 
     context('step send account creation email to user', function () {
-      const user = new User({ email: userEmail, locale: localeFromHeader });
+      const user = new User({ email: userEmail, locale });
       let redirectionUrl;
 
       beforeEach(function () {
@@ -444,7 +444,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         const expectedEmail = createAccountCreationEmail({
           email: userEmail,
           firstName: user.firstName,
-          locale: localeFromHeader,
+          locale,
           token,
           redirectionUrl,
         });
@@ -452,7 +452,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // when
         await createUser({
           user,
-          localeFromHeader,
+          locale,
           password,
           redirectionUrl,
           authenticationMethodRepository,
@@ -478,7 +478,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           const expectedEmail = createAccountCreationEmail({
             email: userEmail,
             firstName: user.firstName,
-            locale: localeFromHeader,
+            locale,
             token,
             redirectionUrl: null,
           });
@@ -486,7 +486,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           // when
           await createUser({
             user,
-            localeFromHeader,
+            locale,
             password,
             campaignCode,
             authenticationMethodRepository,
@@ -515,7 +515,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           const expectedEmail = createAccountCreationEmail({
             email: userEmail,
             firstName: user.firstName,
-            locale: localeFromHeader,
+            locale,
             token,
             redirectionUrl: null,
           });
@@ -523,7 +523,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           // when
           await createUser({
             user,
-            localeFromHeader,
+            locale,
             password,
             campaignCode,
             authenticationMethodRepository,
@@ -553,7 +553,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       const expectedEmail = createAccountCreationEmail({
         email: userEmail,
         firstName: user.firstName,
-        locale: localeFromHeader,
+        locale,
         token,
         redirectionUrl,
       });
@@ -561,7 +561,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
       // when
       const createdUser = await createUser({
         user,
-        localeFromHeader,
+        locale,
         password,
         redirectionUrl,
         authenticationMethodRepository,
