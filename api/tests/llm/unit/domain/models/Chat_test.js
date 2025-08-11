@@ -1170,6 +1170,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chat.toDTO()).to.deep.equal({
           id: 'some-chat-id',
           userId: 123,
+          assessmentId: undefined,
+          passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
           hasAttachmentContextBeenAdded: false,
@@ -1242,6 +1244,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         expect(chat.toDTO()).to.deep.equal({
           id: 'some-chat-id',
           userId: 123,
+          assessmentId: undefined,
+          passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
           hasAttachmentContextBeenAdded: false,
@@ -1285,6 +1289,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       const chat = new Chat({
         id: 'some-chat-id',
         userId: 123,
+        assessmentId: 456,
         configurationId: 'abc123',
         configuration: new Configuration(configurationDTO),
         hasAttachmentContextBeenAdded: true,
@@ -1333,6 +1338,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       expect(dto).to.deep.equal({
         id: 'some-chat-id',
         userId: 123,
+        assessmentId: 456,
+        passageId: undefined,
         configurationId: 'abc123',
         configuration: configurationDTO,
         hasAttachmentContextBeenAdded: true,

@@ -5,6 +5,8 @@ export class Chat {
    * @param {Object} params
    * @param {string} params.id
    * @param {number=} params.userId
+   * @param {number=} params.assessmentId
+   * @param {number=} params.passageId
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
@@ -15,6 +17,8 @@ export class Chat {
   constructor({
     id,
     userId,
+    assessmentId,
+    passageId,
     configurationId,
     configuration,
     hasAttachmentContextBeenAdded,
@@ -24,6 +28,8 @@ export class Chat {
   }) {
     this.id = id;
     this.userId = userId;
+    this.assessmentId = assessmentId;
+    this.passageId = passageId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
@@ -150,6 +156,8 @@ export class Chat {
     return {
       id: this.id,
       userId: this.userId,
+      assessmentId: this.assessmentId,
+      passageId: this.passageId,
       configurationId: this.configurationId,
       configuration: this.configuration.toDTO(),
       hasAttachmentContextBeenAdded: this.hasAttachmentContextBeenAdded,
