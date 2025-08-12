@@ -4,6 +4,7 @@ import ENV from 'mon-pix/config/environment';
 export default class PassageEvents extends Service {
   @service store;
   @service requestManager;
+  @service modulixPreviewMode;
 
   passageId = null;
   sequenceNumber = 1;
@@ -16,6 +17,10 @@ export default class PassageEvents extends Service {
   async record({ type, data }) {
     this.sequenceNumber++;
 
+    if (this.modulixPreviewMode.isEnabled) {
+      return;
+    }
+
     const events = [
       {
         type,
@@ -25,6 +30,7 @@ export default class PassageEvents extends Service {
         ...data,
       },
     ];
+
     return this.requestManager.request({
       url: `${ENV.APP.API_HOST}/api/passage-events`,
       method: 'POST',

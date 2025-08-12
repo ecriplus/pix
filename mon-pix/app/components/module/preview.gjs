@@ -92,6 +92,10 @@ export default class ModulixPreview extends Component {
   }
 
   get formattedModule() {
+    if (this.args.module) {
+      return this.args.module;
+    }
+
     if (!this.module || this.module === '') {
       return { grains: [] };
     }

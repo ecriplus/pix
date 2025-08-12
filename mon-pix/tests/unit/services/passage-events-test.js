@@ -1,3 +1,4 @@
+import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -50,6 +51,11 @@ module('Unit | Services | PassageEvents', function (hooks) {
       const requestStub = sinon.stub(requestManager, 'request');
       passageEventService.initialize({ passageId: 1 });
 
+      class PreviewModeServiceStub extends Service {
+        isEnabled = false;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
       // when
       await passageEventService.record({
         type: 'FlashcardsStartedEvent',
@@ -87,6 +93,11 @@ module('Unit | Services | PassageEvents', function (hooks) {
       const requestManager = this.owner.lookup('service:request-manager');
       const requestStub = sinon.stub(requestManager, 'request');
       passageEventService.initialize({ passageId: 1 });
+
+      class PreviewModeServiceStub extends Service {
+        isEnabled = false;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
 
       // when
       await passageEventService.record({
@@ -142,6 +153,34 @@ module('Unit | Services | PassageEvents', function (hooks) {
         }),
       });
       assert.ok(true);
+    });
+
+    module('when preview mode is enabled', function () {
+      test('should not record a passageEvent', async function (assert) {
+        // given
+        const passageEventService = this.owner.lookup('service:passageEvents');
+        const requestManager = this.owner.lookup('service:request-manager');
+        const requestStub = sinon.stub(requestManager, 'request');
+        passageEventService.initialize({ passageId: 1 });
+
+        class PreviewModeServiceStub extends Service {
+          isEnabled = true;
+        }
+        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+        // when
+        await passageEventService.record({
+          type: 'FlashcardsRectoSeenEvent',
+          passageId: 1,
+          data: {
+            elementId: '04287d5b-285e-4a67-9fb1-3adbf95deb2f',
+          },
+        });
+
+        // then
+        sinon.assert.notCalled(requestStub);
+        assert.ok(true);
+      });
     });
   });
 });
