@@ -23,4 +23,24 @@ module('Unit | Adapters | combined-course', function (hooks) {
       assert.true(adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/combined-courses/code/start`, 'PUT'));
     });
   });
+  module('#reassessStatus', function () {
+    test('should send a PATCH request to reassess combined course status', async function (assert) {
+      // when
+      await adapter.reassessStatus('MONCODEE1');
+
+      // then
+      assert.true(
+        adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/combined-courses/MONCODEE1/reassess-status`, 'PATCH'),
+      );
+    });
+  });
+  module('#urlForFindRecord', function () {
+    test('should format request with given code as query param ', async function (assert) {
+      // when
+      const result = adapter.urlForFindRecord(undefined, 'combined-course', { record: { code: 'MONCODEE1' } });
+
+      // then
+      assert.strictEqual(result, `${ENV.APP.API_HOST}/api/combined-courses?filter[code]=MONCODEE1`);
+    });
+  });
 });
