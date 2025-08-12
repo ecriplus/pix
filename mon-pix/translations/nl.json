@@ -825,7 +825,8 @@
         "wrong-account-sco-link": {
           "label": "Hoe vind ik de rekening die aan de vestiging is gekoppeld?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
-        }
+        },
+        "missing-center-habilitation": "U kunt niet deelnemen aan de sessie. Het certificeringscentrum is niet bevoegd om u deze certificering te laten afleggen."
       },
       "first-title": "Deelnemen aan een sessie",
       "form": {
