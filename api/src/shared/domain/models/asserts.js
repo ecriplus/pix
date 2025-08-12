@@ -24,3 +24,9 @@ export function assertHasUuidLength(value, errorMessage = 'Uuid value must be ex
     throw new DomainError(errorMessage);
   }
 }
+
+export function assertPositiveInteger(value, errorMessage = 'value must be a positive integer') {
+  if (!Number.isInteger(value) || value < 1) {
+    throw new DomainError(errorMessage);
+  }
+}

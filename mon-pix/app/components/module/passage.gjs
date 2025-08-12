@@ -73,6 +73,14 @@ export default class ModulePassage extends Component {
   onStepperNextStep(currentStepPosition) {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
 
+    this.passageEvents.record({
+      type: 'STEPPER_NEXT_STEP',
+      data: {
+        grainId: currentGrain.id,
+        stepNumber: currentStepPosition,
+      },
+    });
+
     this.pixMetrics.trackEvent(
       `Click sur le bouton suivant de l'étape ${currentStepPosition} du stepper dans le grain : ${currentGrain.id}`,
       {

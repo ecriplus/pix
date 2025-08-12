@@ -1,12 +1,9 @@
-import {
-  GrainContinuedEvent,
-  GrainSkippedEvent,
-} from '../../../../../../src/devcomp/domain/models/passage-events/grain-events.js';
+import { StepperNextStepEvent } from '../../../../../../src/devcomp/domain/models/passage-events/stepper-events.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
-describe('Integration | Devcomp | Domain | Models | passage-events | grain-events', function () {
-  describe('#GrainContinuedEvent', function () {
+describe('Integration | Devcomp | Domain | Models | passage-events | stepper-events', function () {
+  describe('#StepperNextStepEvent', function () {
     it('should init and keep attributes', function () {
       // given
       const id = Symbol('id');
@@ -15,25 +12,27 @@ describe('Integration | Devcomp | Domain | Models | passage-events | grain-event
       const passageId = 2;
       const sequenceNumber = 3;
       const grainId = '05112f63-0b47-4774-b638-6669c4e3a26d';
+      const stepNumber = 1;
 
       // when
-      const grainContinuedEvent = new GrainContinuedEvent({
+      const stepperNextStepEvent = new StepperNextStepEvent({
         id,
         occurredAt,
         createdAt,
         passageId,
         sequenceNumber,
         grainId,
+        stepNumber,
       });
 
       // then
-      expect(grainContinuedEvent.id).to.equal(id);
-      expect(grainContinuedEvent.type).to.equal('GRAIN_CONTINUED');
-      expect(grainContinuedEvent.occurredAt).to.equal(occurredAt);
-      expect(grainContinuedEvent.createdAt).to.equal(createdAt);
-      expect(grainContinuedEvent.passageId).to.equal(passageId);
-      expect(grainContinuedEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(grainContinuedEvent.data).to.deep.equal({ grainId });
+      expect(stepperNextStepEvent.id).to.equal(id);
+      expect(stepperNextStepEvent.type).to.equal('STEPPER_NEXT_STEP');
+      expect(stepperNextStepEvent.occurredAt).to.equal(occurredAt);
+      expect(stepperNextStepEvent.createdAt).to.equal(createdAt);
+      expect(stepperNextStepEvent.passageId).to.equal(passageId);
+      expect(stepperNextStepEvent.sequenceNumber).to.equal(sequenceNumber);
+      expect(stepperNextStepEvent.data).to.deep.equal({ grainId, stepNumber });
     });
 
     describe('when grainId is not given', function () {
@@ -44,22 +43,24 @@ describe('Integration | Devcomp | Domain | Models | passage-events | grain-event
         const createdAt = new Date();
         const passageId = 2;
         const sequenceNumber = 3;
+        const stepNumber = 0;
 
         // when
         const error = catchErrSync(
           () =>
-            new GrainContinuedEvent({
+            new StepperNextStepEvent({
               id,
               occurredAt,
               createdAt,
               passageId,
               sequenceNumber,
+              stepNumber,
             }),
         )();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The grainId property is required for a GrainContinuedEvent');
+        expect(error.message).to.equal('The grainId property is required for a StepperNextStepEvent');
       });
     });
 
@@ -72,11 +73,42 @@ describe('Integration | Devcomp | Domain | Models | passage-events | grain-event
         const passageId = 2;
         const sequenceNumber = 3;
         const grainId = 'invalidGrainId';
+        const stepNumber = 0;
 
         // when
         const error = catchErrSync(
           () =>
-            new GrainContinuedEvent({
+            new StepperNextStepEvent({
+              id,
+              occurredAt,
+              createdAt,
+              passageId,
+              sequenceNumber,
+              grainId,
+              stepNumber,
+            }),
+        )();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('The grainId property should be exactly 36 characters long');
+      });
+    });
+
+    describe('when stepNumber is not given', function () {
+      it('should throw an error', function () {
+        // given
+        const id = Symbol('id');
+        const occurredAt = new Date();
+        const createdAt = new Date();
+        const passageId = 2;
+        const sequenceNumber = 3;
+        const grainId = '05112f63-0b47-4774-b638-6669c4e3a26d';
+
+        // when
+        const error = catchErrSync(
+          () =>
+            new StepperNextStepEvent({
               id,
               occurredAt,
               createdAt,
@@ -88,42 +120,11 @@ describe('Integration | Devcomp | Domain | Models | passage-events | grain-event
 
         // then
         expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The grainId property should be exactly 36 characters long');
+        expect(error.message).to.equal('The stepNumber property is required for a StepperNextStepEvent');
       });
     });
-  });
 
-  describe('#GrainSkippedEvent', function () {
-    it('should init and keep attributes', function () {
-      // given
-      const id = Symbol('id');
-      const occurredAt = new Date();
-      const createdAt = new Date();
-      const passageId = 2;
-      const sequenceNumber = 3;
-      const grainId = '05112f63-0b47-4774-b638-6669c4e3a26d';
-
-      // when
-      const grainSkippedEvent = new GrainSkippedEvent({
-        id,
-        occurredAt,
-        createdAt,
-        passageId,
-        sequenceNumber,
-        grainId,
-      });
-
-      // then
-      expect(grainSkippedEvent.id).to.equal(id);
-      expect(grainSkippedEvent.type).to.equal('GRAIN_SKIPPED');
-      expect(grainSkippedEvent.occurredAt).to.equal(occurredAt);
-      expect(grainSkippedEvent.createdAt).to.equal(createdAt);
-      expect(grainSkippedEvent.passageId).to.equal(passageId);
-      expect(grainSkippedEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(grainSkippedEvent.data).to.deep.equal({ grainId });
-    });
-
-    describe('when grainId is not given', function () {
+    describe('when stepNumber is invalid', function () {
       it('should throw an error', function () {
         // given
         const id = Symbol('id');
@@ -131,51 +132,26 @@ describe('Integration | Devcomp | Domain | Models | passage-events | grain-event
         const createdAt = new Date();
         const passageId = 2;
         const sequenceNumber = 3;
+        const grainId = '05112f63-0b47-4774-b638-6669c4e3a26d';
+        const stepNumber = 0;
 
         // when
         const error = catchErrSync(
           () =>
-            new GrainSkippedEvent({
-              id,
-              occurredAt,
-              createdAt,
-              passageId,
-              sequenceNumber,
-            }),
-        )();
-
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The grainId property is required for a GrainSkippedEvent');
-      });
-    });
-
-    describe('when grainId is invalid', function () {
-      it('should throw an error', function () {
-        // given
-        const id = Symbol('id');
-        const occurredAt = new Date();
-        const createdAt = new Date();
-        const passageId = 2;
-        const sequenceNumber = 3;
-        const grainId = 'invalidGrainId';
-
-        // when
-        const error = catchErrSync(
-          () =>
-            new GrainSkippedEvent({
+            new StepperNextStepEvent({
               id,
               occurredAt,
               createdAt,
               passageId,
               sequenceNumber,
               grainId,
+              stepNumber,
             }),
         )();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The grainId property should be exactly 36 characters long');
+        expect(error.message).to.equal('The stepNumber property must be a positive integer');
       });
     });
   });

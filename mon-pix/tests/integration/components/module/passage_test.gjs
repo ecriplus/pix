@@ -737,6 +737,49 @@ module('Integration | Component | Module | Passage', function (hooks) {
       );
       assert.ok(true);
     });
+
+    test('should send an event', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const text1Element = { content: 'content', type: 'text' };
+      const text2Element = { content: 'content 2', type: 'text' };
+      const text3Element = { content: 'content 3', type: 'text' };
+      const step1 = { elements: [text1Element] };
+      const step2 = { elements: [text2Element] };
+      const step3 = { elements: [text3Element] };
+      const grain = store.createRecord('grain', {
+        id: '123',
+        components: [{ type: 'stepper', steps: [step1, step2, step3] }],
+      });
+
+      const module = store.createRecord('module', {
+        id: '1',
+        slug: 'module-slug',
+        title: 'Module title',
+        grains: [grain],
+      });
+      const passage = store.createRecord('passage');
+      const onStepperNextStepButtonName = t('pages.modulix.buttons.stepper.next.ariaLabel');
+
+      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      const metrics = this.owner.lookup('service:pix-metrics');
+      metrics.trackEvent = sinon.stub();
+
+      // when
+      await clickByName(onStepperNextStepButtonName);
+      await clickByName(onStepperNextStepButtonName);
+
+      // then
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'STEPPER_NEXT_STEP',
+        data: {
+          grainId: grain.id,
+          stepNumber: 2,
+        },
+      });
+      assert.ok(true);
+    });
   });
 
   module('when there is no more grain to display', function () {

@@ -4,6 +4,7 @@ import {
   assertHasUuidLength,
   assertInstanceOf,
   assertNotNullOrUndefined,
+  assertPositiveInteger,
 } from '../../../../../src/shared/domain/models/asserts.js';
 import { catchErrSync, expect } from '../../../../test-helper.js';
 
@@ -121,6 +122,102 @@ describe('Unit | Shared | Models | asserts', function () {
 
         // when/then
         expect(() => assertHasUuidLength(value)).not.to.throw();
+      });
+    });
+  });
+
+  describe('#assertPositiveInteger', function () {
+    describe('given invalid value', function () {
+      it('should throw', function () {
+        // given
+        const value = 0;
+
+        // when
+        const error = catchErrSync(() => assertPositiveInteger(value))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('value must be a positive integer');
+      });
+
+      describe('given undefined', function () {
+        it('should throw', function () {
+          // given
+          const value = undefined;
+
+          // when
+          const error = catchErrSync(() => assertPositiveInteger(value))();
+
+          // then
+          expect(error).to.be.instanceOf(DomainError);
+          expect(error.message).to.equal('value must be a positive integer');
+        });
+      });
+
+      describe('given negative number', function () {
+        it('should throw', function () {
+          // given
+          const value = -1;
+
+          // when
+          const error = catchErrSync(() => assertPositiveInteger(value))();
+
+          // then
+          expect(error).to.be.instanceOf(DomainError);
+          expect(error.message).to.equal('value must be a positive integer');
+        });
+      });
+
+      describe('given zero', function () {
+        it('should throw', function () {
+          // given
+          const value = 0;
+
+          // when
+          const error = catchErrSync(() => assertPositiveInteger(value))();
+
+          // then
+          expect(error).to.be.instanceOf(DomainError);
+          expect(error.message).to.equal('value must be a positive integer');
+        });
+      });
+
+      describe('given positive floating number', function () {
+        it('should throw', function () {
+          // given
+          const value = 1.5;
+
+          // when
+          const error = catchErrSync(() => assertPositiveInteger(value))();
+
+          // then
+          expect(error).to.be.instanceOf(DomainError);
+          expect(error.message).to.equal('value must be a positive integer');
+        });
+      });
+    });
+
+    describe('given invalid value and a custom error message', function () {
+      it('should throw with the custom error message', function () {
+        // given
+        const value = 0;
+
+        // when
+        const error = catchErrSync(() => assertPositiveInteger(value, 'NOPE'))();
+
+        // then
+        expect(error).to.be.instanceOf(DomainError);
+        expect(error.message).to.equal('NOPE');
+      });
+    });
+
+    describe('given valid value', function () {
+      it('should not throw', function () {
+        // given
+        const value = 5;
+
+        // when/then
+        expect(() => assertPositiveInteger(value)).not.to.throw();
       });
     });
   });
