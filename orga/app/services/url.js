@@ -35,6 +35,10 @@ export default class Url extends UrlBaseService {
     return `${this.currentDomain.getJuniorBaseUrl()}/schools/${schoolCode}`;
   }
 
+  get pixJuniorUrl() {
+    return this.currentDomain.getJuniorBaseUrl();
+  }
+
   getLegalDocumentUrl(path) {
     return this.getPixWebsiteUrl(path);
   }

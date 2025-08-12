@@ -14,6 +14,9 @@ module('Integration | Component | Index::Missions', function (hooks) {
       prescriber = {
         firstName: 'Jean',
       };
+      organization = {
+        schoolCode: 'MISSION',
+      };
     }
     this.owner.register('service:current-user', CurrentUserStub);
     const screen = await render(<template><IndexMissions /></template>);
@@ -21,6 +24,22 @@ module('Integration | Component | Index::Missions', function (hooks) {
     // then
     assert.ok(screen.getByRole('heading', { name: t('components.index.welcome.title', { name: 'Jean' }) }));
     assert.ok(screen.getByText(t('components.index.welcome.description.missions')));
+  });
+
+  test('should display mission banner', async function (assert) {
+    class CurrentUserStub extends Service {
+      prescriber = {
+        firstName: 'Jean',
+      };
+      organization = {
+        schoolCode: 'MISSION',
+      };
+    }
+    this.owner.register('service:current-user', CurrentUserStub);
+    const screen = await render(<template><IndexMissions /></template>);
+
+    // then
+    assert.ok(screen.getByText(t('pages.missions.list.banner.welcome')));
   });
 
   test('should display organization information', async function (assert) {
@@ -31,6 +50,7 @@ module('Integration | Component | Index::Missions', function (hooks) {
 
       organization = {
         name: 'Ma super organization',
+        schoolCode: 'MISSION',
       };
     }
     this.owner.register('service:current-user', CurrentUserStub);
