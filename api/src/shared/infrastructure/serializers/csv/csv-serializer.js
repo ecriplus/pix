@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 
-import { SUBSCRIPTION_TYPES } from '../../../../certification/shared/domain/constants.js';
 import {
   COMPLEMENTARY_CERTIFICATION_SUFFIX,
   emptySession,
@@ -91,7 +90,7 @@ function deserializeForSessionsImport({ parsedCsvData, hasBillingMode, certifica
     }
 
     if (_hasCandidateInformation(data)) {
-      currentParsedSession.candidates.push(_createCandidate(data));
+      currentParsedSession.candidates.push(_createCandidate(data, certificationCenterHabilitations));
     }
   });
 
@@ -471,26 +470,32 @@ function _createSession({ sessionId, address, room, date, time, examiner, descri
   };
 }
 
-function _createCandidate({
-  lastName,
-  firstName,
-  birthdate,
-  birthINSEECode,
-  birthPostalCode,
-  birthCity,
-  birthCountry,
-  resultRecipientEmail,
-  email,
-  externalId,
-  extraTimePercentage,
-  billingMode,
-  prepaymentCode,
-  sex,
-  complementarySubscriptionLabels,
-  line,
-}) {
-  const subscriptionLabels = [];
-  subscriptionLabels.push(...[SUBSCRIPTION_TYPES.CORE, ...complementarySubscriptionLabels]);
+function _createCandidate(
+  {
+    lastName,
+    firstName,
+    birthdate,
+    birthINSEECode,
+    birthPostalCode,
+    birthCity,
+    birthCountry,
+    resultRecipientEmail,
+    email,
+    externalId,
+    extraTimePercentage,
+    billingMode,
+    prepaymentCode,
+    sex,
+    complementarySubscriptionLabels,
+    line,
+  },
+  certificationCenterHabilitations,
+) {
+  const subscriptionKeys = certificationCenterHabilitations
+    ? certificationCenterHabilitations
+        .filter(({ label }) => complementarySubscriptionLabels.includes(label))
+        .map(({ key }) => key)
+    : [];
 
   return {
     lastName,
@@ -507,7 +512,7 @@ function _createCandidate({
     billingMode,
     prepaymentCode,
     sex,
-    subscriptionLabels,
+    subscriptionKeys,
     line,
   };
 }

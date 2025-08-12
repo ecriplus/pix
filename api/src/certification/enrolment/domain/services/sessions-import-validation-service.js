@@ -4,6 +4,7 @@ import * as mailCheck from '../../../../shared/mail/infrastructure/services/mail
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { CERTIFICATION_SESSIONS_ERRORS } from '../../../shared/domain/constants/sessions-errors.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 //  should be injected
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as sessionValidator from '../../../shared/domain/validators/session-validator.js';
@@ -119,16 +120,38 @@ const getUniqueCandidates = function (candidates) {
   return { uniqueCandidates, duplicateCandidateErrors };
 };
 
-const getValidatedSubscriptionsForMassImport = async function ({
-  subscriptionLabels,
-  line,
-  complementaryCertificationRepository,
-}) {
-  return _getValidatedSubscriptionsForMassImport_old({
-    subscriptionLabels,
-    line,
-    complementaryCertificationRepository,
-  });
+const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKeys = [], line }) {
+  const certificationCandidateComplementaryErrors = [];
+
+  if (subscriptionKeys.length > 1) {
+    _addToErrorList({
+      errorList: certificationCandidateComplementaryErrors,
+      line,
+      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION.code],
+    });
+
+    return { certificationCandidateComplementaryErrors, subscriptions: [] };
+  }
+
+  if (subscriptionKeys.includes(ComplementaryCertificationKeys.CLEA) || subscriptionKeys.length === 0) {
+    subscriptionKeys.push(SUBSCRIPTION_TYPES.CORE);
+  }
+
+  const subscriptions = [];
+  for (const subscriptionKey of subscriptionKeys) {
+    if (subscriptionKey === SUBSCRIPTION_TYPES.CORE) {
+      subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
+    } else {
+      subscriptions.push(
+        Subscription.buildComplementary({
+          certificationCandidateId: null,
+          complementaryCertificationKey: subscriptionKey,
+        }),
+      );
+    }
+  }
+
+  return { certificationCandidateComplementaryErrors, subscriptions };
 };
 
 const getValidatedCandidateInformation = async function ({
@@ -220,10 +243,6 @@ export {
   validateSession,
 };
 
-function _hasMoreThanOneComplementaryCertificationSubscriptions(subscriptionLabels) {
-  return subscriptionLabels.filter((label) => label !== SUBSCRIPTION_TYPES.CORE).length > 1;
-}
-
 function _isDateAndTimeValid(session) {
   return dayjs(`${session.date} ${session.time}`, 'YYYY-MM-DD HH:mm', true).isValid();
 }
@@ -264,61 +283,4 @@ async function _validateEmail({ email, mailCheck, errorCode, certificationCandid
       });
     }
   }
-}
-
-async function _getValidatedSubscriptionsForMassImport_old({
-  subscriptionLabels,
-  line,
-  complementaryCertificationRepository,
-}) {
-  const certificationCandidateComplementaryErrors = [];
-
-  if (subscriptionLabels.length === 0) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_NO_SUBSCRIPTION.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  if (!subscriptionLabels.find((label) => label === SUBSCRIPTION_TYPES.CORE)) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_COMPLEMENTARY_WITHOUT_CORE.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  if (_hasMoreThanOneComplementaryCertificationSubscriptions(subscriptionLabels)) {
-    _addToErrorList({
-      errorList: certificationCandidateComplementaryErrors,
-      line,
-      codes: [CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION.code],
-    });
-
-    return { certificationCandidateComplementaryErrors, subscriptions: [] };
-  }
-
-  const subscriptions = [];
-  for (const subscriptionLabel of subscriptionLabels) {
-    if (subscriptionLabel === SUBSCRIPTION_TYPES.CORE) {
-      subscriptions.push(Subscription.buildCore({ certificationCandidateId: null }));
-    } else {
-      const complementaryCertification = await complementaryCertificationRepository.getByLabel({
-        label: subscriptionLabel,
-      });
-      subscriptions.push(
-        Subscription.buildComplementary({
-          certificationCandidateId: null,
-          complementaryCertificationKey: complementaryCertification.key,
-        }),
-      );
-    }
-  }
-
-  return { certificationCandidateComplementaryErrors, subscriptions };
 }

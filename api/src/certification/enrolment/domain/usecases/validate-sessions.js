@@ -108,7 +108,6 @@ async function _createValidCertificationCandidates({
   sessionsMassImportReport,
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
-  complementaryCertificationRepository,
   translate,
   sessionsImportValidationService,
 }) {
@@ -128,9 +127,8 @@ async function _createValidCertificationCandidates({
 
     const { certificationCandidateComplementaryErrors, subscriptions } =
       await sessionsImportValidationService.getValidatedSubscriptionsForMassImport({
-        subscriptionLabels: candidateDTO.subscriptionLabels,
+        subscriptionKeys: candidateDTO.subscriptionKeys,
         line: candidateDTO.line,
-        complementaryCertificationRepository,
       });
 
     certificationCandidateErrors.push(...certificationCandidateComplementaryErrors);

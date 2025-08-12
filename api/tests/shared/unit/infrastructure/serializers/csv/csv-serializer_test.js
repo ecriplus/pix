@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { emptySession } from '../../../../../../src/certification/shared/infrastructure/utils/csv/sessions-import.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { FileValidationError } from '../../../../../../src/shared/domain/errors.js';
@@ -528,7 +528,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   extraTimePercentage: null,
                   billingMode: 'Prépayée',
                   prepaymentCode: '43',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 2,
                 },
                 {
@@ -546,7 +546,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   extraTimePercentage: null,
                   billingMode: 'Prépayée',
                   prepaymentCode: '43',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 4,
                 },
               ],
@@ -576,7 +576,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   extraTimePercentage: null,
                   billingMode: 'Prépayée',
                   prepaymentCode: '43',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 3,
                 },
               ],
@@ -629,7 +629,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   prepaymentCode: '43',
                   resultRecipientEmail: 'robindahood@email.fr',
                   sex: 'M',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 2,
                 },
                 {
@@ -647,7 +647,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   prepaymentCode: '43',
                   resultRecipientEmail: 'robindahood@email.fr',
                   sex: 'M',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 3,
                 },
               ],
@@ -700,7 +700,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                   extraTimePercentage: null,
                   billingMode: 'Prépayée',
                   prepaymentCode: '43',
-                  subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                  subscriptionKeys: [],
                   line: 3,
                 },
               ],
@@ -760,7 +760,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                     billingMode: '',
                     prepaymentCode: expectedParsedPrepaymentCode,
                     sex: '',
-                    subscriptionLabels: [SUBSCRIPTION_TYPES.CORE],
+                    subscriptionKeys: [],
                     line: 2,
                   },
                 ],
@@ -807,16 +807,28 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
                 prepaymentCode: '43',
                 resultRecipientEmail: 'robindahood@email.fr',
                 sex: 'M',
-                subscriptionLabels: [SUBSCRIPTION_TYPES.CORE, 'Pix certif complementaire'],
+                subscriptionKeys: [ComplementaryCertificationKeys.CLEA],
                 line: 2,
               },
             ],
           },
         ];
 
+        const habilitations = [
+          domainBuilder.buildComplementaryCertification({
+            id: 52,
+            label: 'CléA Numérique',
+            key: 'CLEA',
+          }),
+        ];
+
         // when
         const result = csvSerializer
-          .deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true })
+          .deserializeForSessionsImport({
+            parsedCsvData,
+            hasBillingMode: true,
+            certificationCenterHabilitations: habilitations,
+          })
           .map((session) => _.omit(session, 'uniqueKey'));
 
         // then
@@ -1721,7 +1733,7 @@ function _line({
     'Temps majoré ? (exemple format: 33%)': extraTimePercentage,
     '* Tarification part Pix (Gratuite, Prépayée ou Payante)': billingMode,
     'Code de prépaiement (si Tarification part Pix Prépayée)': prepaymentCode,
-    "Pix certif complementaire ('oui' ou laisser vide)": shouldSubscribeToComplementaryCertification,
+    "CléA Numérique ('oui' ou laisser vide)": shouldSubscribeToComplementaryCertification,
   };
 }
 
