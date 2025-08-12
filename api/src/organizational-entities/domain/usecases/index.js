@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as centerRepository from '../../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as learnersApi from '../../../prescription/learner-management/application/api/learners-api.js';
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
@@ -8,7 +5,6 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
 import { certificationCenterApiRepository } from '../../infrastructure/repositories/certification-center-api.repository.js';
 import * as certificationCenterForAdminRepository from '../../infrastructure/repositories/certification-center-for-admin.repository.js';
@@ -21,8 +17,6 @@ import { tagRepository } from '../../infrastructure/repositories/tag.repository.
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
 import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
 import * as organizationValidator from '../validators/organization-with-tags-and-target-profiles.js';
-
-const path = dirname(fileURLToPath(import.meta.url));
 
 /**
  * @typedef {import ('../../../prescription/learner-management/application/api/learners-api.js')} learnersApi
@@ -66,10 +60,57 @@ const repositories = {
 
 const dependencies = Object.assign({}, repositories);
 
-const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
-};
+import { addOrganizationFeatureInBatch } from './add-organization-feature-in-batch.js';
+import { addTagsToOrganizations } from './add-tags-to-organizations.usecase.js';
+import { archiveCertificationCenter } from './archive-certification-center.usecase.js';
+import { archiveCertificationCentersInBatch } from './archive-certification-centers-in-batch.usecase.js';
+import { archiveOrganization } from './archive-organization.usecase.js';
+import { archiveOrganizationsInBatch } from './archive-organizations-in-batch.usecase.js';
+import { attachChildOrganizationToOrganization } from './attach-child-organization-to-organization.js';
+import { createCertificationCenter } from './create-certification-center.usecase.js';
+import { createOrganization } from './create-organization.js';
+import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizations-with-tags-and-target-profiles.usecase.js';
+import { createTag } from './create-tag.js';
+import { findAllTags } from './find-all-tags.usecase.js';
+import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
+import { findOrganizationFeatures } from './find-organization-features.js';
+import { findPaginatedFilteredCertificationCenters } from './find-paginated-filtered-certification-centers.usecase.js';
+import { findPaginatedFilteredOrganizations } from './find-paginated-filtered-organizations.usecase.js';
+import { getCenterForAdmin } from './get-center-for-admin.usecase.js';
+import { getOrganizationById } from './get-organization-by-id.js';
+import { getOrganizationDetails } from './get-organization-details.usecase.js';
+import { getRecentlyUsedTags } from './get-recently-used-tags.usecase.js';
+import { updateCertificationCenter } from './update-certification-center.usecase.js';
+import { updateCertificationCenterDataProtectionOfficerInformation } from './update-certification-center-data-protection-officer-information.usecase.js';
+import { updateOrganizationInformation } from './update-organization-information.usecase.js';
+import { updateOrganizationsInBatch } from './update-organizations-in-batch.usecase.js';
 
+const usecasesWithoutInjectedDependencies = {
+  addOrganizationFeatureInBatch,
+  addTagsToOrganizations,
+  archiveCertificationCenter,
+  archiveCertificationCentersInBatch,
+  archiveOrganization,
+  archiveOrganizationsInBatch,
+  attachChildOrganizationToOrganization,
+  createCertificationCenter,
+  createOrganization,
+  createOrganizationsWithTagsAndTargetProfiles,
+  createTag,
+  findAllTags,
+  findChildrenOrganizations,
+  findOrganizationFeatures,
+  findPaginatedFilteredCertificationCenters,
+  findPaginatedFilteredOrganizations,
+  getCenterForAdmin,
+  getOrganizationById,
+  getOrganizationDetails,
+  getRecentlyUsedTags,
+  updateCertificationCenterDataProtectionOfficerInformation,
+  updateCertificationCenter,
+  updateOrganizationInformation,
+  updateOrganizationsInBatch,
+};
 /**
  * @typedef OrganizationalEntitiesUsecases
  * @property {addOrganizationFeatureInBatch} addOrganizationFeatureInBatch
