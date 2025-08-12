@@ -211,7 +211,8 @@
       "close": "Sluiten",
       "confirm": "Bevestigen",
       "global": "Acties",
-      "link-to-participant": "Alle activiteiten van de deelnemer bekijken"
+      "link-to-participant": "Alle activiteiten van de deelnemer bekijken",
+      "save": "Opslaan"
     },
     "api-error-messages": {
       "bad-request-error": "De gegevens die je hebt opgegeven, hebben niet het juiste format.",
@@ -406,6 +407,18 @@
       "deletion-modal": {
         "confirm-deletion": "Ja, verwijderen",
         "confirmation-checkbox": "Ik kan bevestigen dat ik de gevolgen van de {count} schrappingen volledig begrijp. "
+      },
+      "edit-participant-name-modal": {
+        "error-messages":{
+          "first-name": "De voornaam van de gebruiker mag niet leeg zijn.",
+          "last-name": "De achternaam van de gebruiker mag niet leeg zijn."
+        },
+        "fields": {
+          "first-name": "Voornaam",
+          "last-name": "Achternaam"
+        },
+        "label": "Deelnemer naam wijzigen",
+        "success-message": "De naam van de deelnemer is bijgewerkt."
       }
     }
   },

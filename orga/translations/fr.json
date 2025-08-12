@@ -211,7 +211,8 @@
       "close": "Fermer",
       "confirm": "Confirmer",
       "global": "Actions",
-      "link-to-participant": "Voir toute l'activité du participant"
+      "link-to-participant": "Voir toute l'activité du participant",
+      "save": "Enregistrer"
     },
     "api-error-messages": {
       "bad-request-error": "Les données que vous avez soumises ne sont pas au bon format.",
@@ -406,6 +407,18 @@
       "deletion-modal": {
         "confirm-deletion": "Oui, je supprime",
         "confirmation-checkbox": "Je confirme avoir bien compris les impacts des {count} suppressions"
+      },
+      "edit-participant-name-modal": {
+        "error-messages":{
+          "first-name": "Le prénom de l'utilisateur ne peut pas être vide.",
+          "last-name": "Le nom de l'utilisateur ne peut pas être vide."
+        },
+        "fields": {
+          "first-name": "Prénom",
+          "last-name": "Nom"
+        },
+        "label": "Modifier le nom de l'utilisateur",
+        "success-message": "Nom mis à jour avec succès"
       }
     }
   },
