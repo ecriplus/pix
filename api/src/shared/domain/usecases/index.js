@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as complementaryCertificationBadgeRepository from '../../../certification/complementary-certification/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCompanionAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
@@ -13,12 +10,6 @@ import * as competenceRepository from '../../infrastructure/repositories/compete
 import * as courseRepository from '../../infrastructure/repositories/course-repository.js';
 import { repositories as sharedInjectedRepositories } from '../../infrastructure/repositories/index.js';
 import { injectDependencies } from '../../infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../infrastructure/utils/import-named-exports-from-directory.js';
-const path = dirname(fileURLToPath(import.meta.url));
-
-const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
-};
 
 const dependencies = {
   assessmentRepository,
@@ -32,6 +23,18 @@ const dependencies = {
   challengeRepository,
   evaluationUsecases,
   ...sharedInjectedRepositories,
+};
+
+import { deleteUnassociatedBadge } from './delete-unassociated-badge.js';
+import { getAssessment } from './get-assessment.js';
+import { updateAssessmentWithNextChallenge } from './update-assessment-with-next-challenge.js';
+import { updateLastQuestionState } from './update-last-question-state.js';
+
+const usecasesWithoutInjectedDependencies = {
+  deleteUnassociatedBadge,
+  getAssessment,
+  updateAssessmentWithNextChallenge,
+  updateLastQuestionState,
 };
 
 const sharedUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
