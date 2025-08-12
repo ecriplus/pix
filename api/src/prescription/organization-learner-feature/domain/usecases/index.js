@@ -1,10 +1,6 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as featureRepository from '../../../../shared/infrastructure/repositories/feature-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as organizationLearnerFeatureRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-feature-repository.js';
 import * as organizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 
@@ -15,13 +11,12 @@ const dependencies = {
   featureRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { createOrganizationLearnerFeature } from './create-organization-learner-feature.js';
+import { unlinkOrganizationLearnerFeature } from './unlink-organization-learner-feature.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  createOrganizationLearnerFeature,
+  unlinkOrganizationLearnerFeature,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
