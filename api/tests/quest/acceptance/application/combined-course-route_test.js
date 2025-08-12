@@ -110,7 +110,7 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
     });
   });
 
-  describe('PATCH /api/combined-courses/{code}/', function () {
+  describe('PATCH /api/combined-courses/{code}/reassess-status', function () {
     it('should update combined course', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
@@ -132,7 +132,7 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
 
       const options = {
         method: 'PATCH',
-        url: '/api/combined-courses/COMBINIX1/',
+        url: '/api/combined-courses/COMBINIX1/reassess-status',
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 

@@ -7,7 +7,7 @@ export default class CombinedCourse extends ApplicationAdapter {
   }
 
   updateStatus(code) {
-    const url = `${this.host}/${this.namespace}/combined-courses/${code}`;
+    const url = `${this.host}/${this.namespace}/combined-courses/${code}/reassess-status`;
     return this.ajax(url, 'PATCH');
   }
 

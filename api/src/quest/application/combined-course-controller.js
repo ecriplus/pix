@@ -25,7 +25,7 @@ const start = async function (request, h, dependencies = { requestResponseUtils 
   return h.response().code(204);
 };
 
-const update = async function (request, h, dependencies = { requestResponseUtils }) {
+const reassessStatus = async function (request, h, dependencies = { requestResponseUtils }) {
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
   const code = request.params.code;
 
@@ -40,7 +40,7 @@ const update = async function (request, h, dependencies = { requestResponseUtils
 const combinedCourseController = {
   getByCode,
   start,
-  update,
+  reassessStatus,
 };
 
 export { combinedCourseController };
