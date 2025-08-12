@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.181.0](https://github.com/1024pix/pix/compare/v5.180.0...v5.181.0) (2025-08-12)
+
+### :rocket: Amélioration
+
+- [#13158](https://github.com/1024pix/pix/pull/13158) Afficher la liste des organisations rattachées au profil cible (PIX-18867) 
+- [#13121](https://github.com/1024pix/pix/pull/13121) Ajout d'une modale pour changer le nom des participants sur PixOrga (PIX-18971) 
+- [#13168](https://github.com/1024pix/pix/pull/13168) Ajouter des méthodes pour récupérer les profils cibles filtré par orga (PIX-19108) 
+- [#13117](https://github.com/1024pix/pix/pull/13117) Ajouter une page d'accueil sur Pix Orga (PIX-18948). 
+- [#13163](https://github.com/1024pix/pix/pull/13163) Aligner le bouton "Passer l'activité" à gauche (PIX-19103) 
+- [#13133](https://github.com/1024pix/pix/pull/13133) Changer l'algo de détection de local avec cookie dans PixCertif (PIX-18979)  
+- [#13167](https://github.com/1024pix/pix/pull/13167) Ne plus vérifier le badge en cas de passage d'une certification complémentaire seul (PIX-19099). 
+- [#13157](https://github.com/1024pix/pix/pull/13157) Passer l'url du combinix en cours lors du clic sur un item de type module (PIX-19061) 
+- [#13139](https://github.com/1024pix/pix/pull/13139) Permettre l'inscription d'une liste de candidats Pix+ dans plusieurs sessions via la gestion massive des sessions (.csv) (PIX-18596) 
+- [#13149](https://github.com/1024pix/pix/pull/13149) Renvoyer les informations de consommation de tokens après chaque message dans le cadre d'un simulateur LLM en preview (PIX-19082) 
+
+### :bug: Correction
+
+- [#13164](https://github.com/1024pix/pix/pull/13164) Renommer le bouton "commencer" affiché au début d'une épreuve timée (PIX-19105) 
+
+### :building_construction: Tech
+
+- [#13161](https://github.com/1024pix/pix/pull/13161) Algo de selection de challenge au format jsonb  (PIX-19083). 
+- [#13160](https://github.com/1024pix/pix/pull/13160) Isoler la gestion des URLs Pix dans l'API 
+- [#13147](https://github.com/1024pix/pix/pull/13147) Seeds pour peupler la nouvelle table de configurations certif (PIX-19072). 
+- [#13105](https://github.com/1024pix/pix/pull/13105) Supprimer isCancelled dans le scoring (PIX-19002).
+
 # [5.180.0](https://github.com/1024pix/pix/compare/v5.179.0...v5.180.0) (2025-08-11)
 
 ### :rocket: Amélioration
