@@ -293,7 +293,7 @@ export default class ModuleGrain extends Component {
         </div>
 
         {{#if this.shouldDisplaySkipButton}}
-          <footer class="grain-card__footer grain-card__footer__with-skip-button">
+          <footer class="grain-card__footer">
             <PixButton @variant="tertiary" @triggerAction={{@onGrainSkip}} @iconAfter="arrowBottom">
               {{this.skipButtonLabel}}
             </PixButton>
