@@ -21,4 +21,9 @@ const remove = async function ({ trainingId, targetProfileId }) {
   return removedLines > 0;
 };
 
-export { create, remove };
+const get = async function ({ trainingId, targetProfileId }) {
+  const knexConn = DomainTransaction.getConnection();
+  return await knexConn(TABLE_NAME).select().where({ trainingId, targetProfileId }).first();
+};
+
+export { create, get, remove };
