@@ -3,16 +3,14 @@ import { CertificationCandidateSubscription } from '../../../../src/certificatio
 const buildCertificationCandidateSubscription = function ({
   id = 1234,
   sessionId = 1234,
-  eligibleSubscriptions = [],
-  nonEligibleSubscription = null,
-  sessionVersion = 2,
+  enrolledDoubleCertificationLabel = null,
+  doubleCertificationEligibility = false,
 } = {}) {
   return new CertificationCandidateSubscription({
     id,
     sessionId,
-    eligibleSubscriptions,
-    nonEligibleSubscription,
-    sessionVersion,
+    enrolledDoubleCertificationLabel,
+    doubleCertificationEligibility,
   });
 };
 

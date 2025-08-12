@@ -1,6 +1,4 @@
-import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { _ } from '../../../../../src/shared/infrastructure/utils/lodash-utils.js';
 import {
   createServer,
   databaseBuilder,
@@ -107,25 +105,15 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | subscr
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(_.omit(response.result.data, 'attributes.eligible-subscriptions')).to.deep.equal({
+      expect(response.result.data).to.deep.equal({
         id: `${candidate.id}`,
         type: 'certification-candidate-subscriptions',
         attributes: {
           'session-id': session.id,
-          'session-version': session.version,
-          'non-eligible-subscription': null,
+          'double-certification-eligibility': true,
+          'enrolled-double-certification-label': cleaComplementaryCertification.label,
         },
       });
-      expect(response.result.data.attributes['eligible-subscriptions']).to.have.deep.members([
-        {
-          label: null,
-          type: SUBSCRIPTION_TYPES.CORE,
-        },
-        {
-          label: 'CléA Numérique',
-          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-        },
-      ]);
     });
   });
 });

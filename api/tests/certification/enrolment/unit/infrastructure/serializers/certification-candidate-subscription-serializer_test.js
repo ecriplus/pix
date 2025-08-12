@@ -7,40 +7,25 @@ describe('Certification | Enrolment | Unit | Serializer | certification-candidat
       const certificationCandidateSubscription = domainBuilder.buildCertificationCandidateSubscription({
         id: 123,
         sessionId: 456,
-        eligibleSubscriptions: [{ type: 'COMPLEMENTARY', label: 'First Complementary Certification' }],
-        sessionVersion: 2,
-        nonEligibleSubscription: domainBuilder.buildComplementaryCertification({
-          key: 'SECOND_COMPLEMENTARY',
-          label: 'Second Complementary Certification',
-        }),
+        enrolledDoubleCertificationLabel: 'First Complementary Certification',
+        doubleCertificationEligibility: true,
       });
-
-      const expectedSerializedResult = {
-        data: {
-          id: '123',
-          type: 'certification-candidate-subscriptions',
-          attributes: {
-            'eligible-subscriptions': [
-              {
-                type: 'COMPLEMENTARY',
-                label: 'First Complementary Certification',
-              },
-            ],
-            'non-eligible-subscription': {
-              id: 1,
-              key: 'SECOND_COMPLEMENTARY',
-              label: 'Second Complementary Certification',
-            },
-            'session-id': 456,
-            'session-version': 2,
-          },
-        },
-      };
 
       // when
       const result = serializer.serialize(certificationCandidateSubscription);
 
       // then
+      const expectedSerializedResult = {
+        data: {
+          id: '123',
+          type: 'certification-candidate-subscriptions',
+          attributes: {
+            'enrolled-double-certification-label': 'First Complementary Certification',
+            'double-certification-eligibility': true,
+            'session-id': 456,
+          },
+        },
+      };
       expect(result).to.deep.equal(expectedSerializedResult);
     });
   });

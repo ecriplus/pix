@@ -1,10 +1,9 @@
 class CertificationCandidateSubscription {
-  constructor({ id, sessionId, eligibleSubscriptions, nonEligibleSubscription, sessionVersion }) {
+  constructor({ id, sessionId, enrolledDoubleCertificationLabel, doubleCertificationEligibility }) {
     this.id = id;
     this.sessionId = sessionId;
-    this.eligibleSubscriptions = eligibleSubscriptions;
-    this.nonEligibleSubscription = nonEligibleSubscription;
-    this.sessionVersion = sessionVersion;
+    this.enrolledDoubleCertificationLabel = enrolledDoubleCertificationLabel;
+    this.doubleCertificationEligibility = doubleCertificationEligibility;
   }
 }
 
