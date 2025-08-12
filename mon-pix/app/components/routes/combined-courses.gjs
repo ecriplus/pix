@@ -7,10 +7,22 @@ import eq from 'ember-truth-helpers/helpers/eq';
 
 import CombinedCourseItem from '../combined-course/combined-course-item';
 
+const CompletedText = <template>
+  <div class="completed-text" ...attributes>
+    <h2 class="completed-text__title">{{t "pages.combined-courses.completed.title"}}</h2>
+    <p class="completed-text__description">{{t "pages.combined-courses.completed.description"}}</p>
+  </div>
+</template>;
+
 export default class CombinedCourses extends Component {
   <template>
     <div class="combined-course">
-      {{#if (eq @combinedCourse.status "NOT_STARTED")}}
+      {{#if (eq @combinedCourse.status "COMPLETED")}}
+        <section class="combined-course-completed">
+          <img src="/images/illustrations/combined-course/completed.svg" />
+          <CompletedText />
+        </section>
+      {{else if (eq @combinedCourse.status "NOT_STARTED")}}
         <PixButton
           @type="submit"
           @triggerAction={{this.startQuestParticipation}}

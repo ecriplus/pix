@@ -24,8 +24,10 @@ export default class CombinedCourseRoute extends Route {
     });
   }
 
-  model(params) {
-    return this.store.queryRecord('combined-course', { filter: { code: params.code } });
+  async model(params) {
+    const code = params.code;
+    await this.store.adapterFor('combined-course').reassessStatus(code);
+    return this.store.queryRecord('combined-course', { filter: { code } });
   }
 
   afterModel(combinedCourse) {

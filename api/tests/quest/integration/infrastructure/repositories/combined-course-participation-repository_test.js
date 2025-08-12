@@ -1,4 +1,7 @@
+import sinon from 'sinon';
+
 import { CombinedCourseParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
 import * as combinedCourseParticipationRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-participation-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -89,6 +92,54 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(error.message).to.equal(
         `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et la quête d'id ${questId}`,
       );
+    });
+  });
+  describe('#update', function () {
+    let clock;
+    const now = new Date('2025-07-07');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should update only status and updatedAt for given id', async function () {
+      //given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      const questId = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const combinedCourseParticipationFromDB = databaseBuilder.factory.buildCombinedCourseParticipation({
+        organizationLearnerId,
+        questId,
+        status: CombinedCourseParticipationStatuses.STARTED,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      const combinedCourseParticipation = new CombinedCourseParticipation({
+        ...combinedCourseParticipationFromDB,
+        questId: 1,
+        organizationLearnerId: 1,
+      });
+      combinedCourseParticipation.complete();
+
+      const updatedParticipation = await combinedCourseParticipationRepository.update({
+        combinedCourseParticipation,
+      });
+
+      //then
+      expect(updatedParticipation.id).to.equal(combinedCourseParticipationFromDB.id);
+      expect(updatedParticipation.organizationLearnerId).to.equal(
+        combinedCourseParticipationFromDB.organizationLearnerId,
+      );
+      expect(updatedParticipation.questId).to.equal(combinedCourseParticipationFromDB.questId);
+      expect(updatedParticipation.status).to.deep.equal(CombinedCourseParticipationStatuses.COMPLETED);
+      expect(updatedParticipation.updatedAt).to.deep.equal(now);
     });
   });
 });

@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
-import * as eligibilityRepository from '../../../../../src/quest/infrastructure/repositories/eligibility-repository.js';
+import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | repositories | eligibility', function () {
@@ -11,7 +11,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       const organizationLearnerId = Symbol('organizationLearnerId');
       const organization = Symbol('organization');
       const targetProfileId = Symbol('targetProfileId');
-      const apiResponseSymbol = [
+      const organizationLearnerWithParticipationApiResponseSymbol = [
         {
           organizationLearner: {
             id: organizationLearnerId,
@@ -24,10 +24,12 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       const organizationLearnerWithParticipationApi = {
         find: sinon.stub(),
       };
-      organizationLearnerWithParticipationApi.find.withArgs({ userIds: [userId] }).resolves(apiResponseSymbol);
+      organizationLearnerWithParticipationApi.find
+        .withArgs({ userIds: [userId] })
+        .resolves(organizationLearnerWithParticipationApiResponseSymbol);
 
       // when
-      const result = await eligibilityRepository.find({
+      const result = await repositories.eligibilityRepository.find({
         userId,
         organizationLearnerWithParticipationApi,
       });
@@ -59,12 +61,19 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId
         .withArgs({ userId, organizationId: organization.id })
         .resolves(apiResponseSymbol);
+      const moduleApiResponse = [{ id: 1, status: 'COMPLETED' }];
+      const modulesApi = {
+        getUserModuleStatuses: sinon.stub(),
+      };
+
+      modulesApi.getUserModuleStatuses.withArgs({ userId, moduleIds: [] }).resolves(moduleApiResponse);
 
       // when
-      const result = await eligibilityRepository.findByUserIdAndOrganizationId({
+      const result = await repositories.eligibilityRepository.findByUserIdAndOrganizationId({
         userId,
         organizationId: organization.id,
         organizationLearnerWithParticipationApi,
+        modulesApi,
       });
 
       // then
@@ -72,6 +81,7 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       expect(result.organization).to.equal(organization);
       expect(result.organizationLearner.id).to.equal(organizationLearnerId);
       expect(result.campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
+      expect(result.passages).to.deep.equal([{ moduleId: 1, isTerminated: true }]);
     });
   });
 });

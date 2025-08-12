@@ -36,6 +36,20 @@ const register = async function (server) {
         tags: ['api', 'combined-courses'],
       },
     },
+    {
+      method: 'PATCH',
+      path: '/api/combined-courses/{code}/reassess-status',
+      config: {
+        validate: {
+          params: Joi.object({
+            code: Joi.string().regex(/^[a-zA-Z0-9]*$/),
+          }),
+        },
+        handler: combinedCourseController.reassessStatus,
+        notes: ["- Mets à jour le statut du parcours combiné pour l'utilisateur connecté."],
+        tags: ['api', 'combined-courses'],
+      },
+    },
   ]);
 };
 const name = 'combined-courses-api';

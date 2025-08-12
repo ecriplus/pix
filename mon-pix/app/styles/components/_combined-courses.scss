@@ -3,6 +3,36 @@
 .combined-course {
   padding: var(--pix-spacing-12x) 80px;
 
+  &-completed {
+      display: flex;
+      gap: var(--pix-spacing-4x);
+      align-items: center;
+      padding: var(--pix-spacing-6x);
+      background: var(--pix-secondary-100);
+      border: 1px solid var(--pix-secondary-500);
+      border-radius: 16px;
+      box-shadow: 2px 6px 0 1px var(--pix-secondary-700);
+
+    .completed-text {
+      display: flex;
+      flex-direction: column;
+      color: var(--pix-secondary-900);
+
+      &__title {
+        @extend %pix-title-s;
+
+      }
+
+      &__description {
+        @extend %pix-body-m;
+
+      }
+
+    }
+
+
+  }
+
   &__divider {
     margin: var(--pix-spacing-6x) 0;
     border-top: 1px solid var(--pix-neutral-100);

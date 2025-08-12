@@ -1196,6 +1196,10 @@
       }
     },
     "combined-courses": {
+      "completed": {
+        "description": "Well done! You have taken an important step toward navigating the digital world safely.",
+        "title": "Congratulations! You're done!"
+      },
       "content": {
         "start-button": "Start course"
       }

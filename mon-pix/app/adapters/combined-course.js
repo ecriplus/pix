@@ -6,6 +6,11 @@ export default class CombinedCourse extends ApplicationAdapter {
     return this.ajax(url, 'PUT');
   }
 
+  reassessStatus(code) {
+    const url = `${this.host}/${this.namespace}/combined-courses/${code}/reassess-status`;
+    return this.ajax(url, 'PATCH');
+  }
+
   urlForFindRecord(_, modelName, snapshot) {
     const { code } = snapshot.record;
     return `${this.urlForQueryRecord({ filter: { code } }, modelName)}?filter[code]=${code}`;

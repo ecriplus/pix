@@ -186,4 +186,25 @@ module('Integration | Component | combined course', function (hooks) {
       );
     });
   });
+  module('when participation is completed', function () {
+    test('should display that combined course is finished', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'COMPLETED',
+        code: 'COMBINIX9',
+      });
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
+    });
+  });
 });

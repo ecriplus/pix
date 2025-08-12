@@ -35,6 +35,10 @@ export class DataForQuest {
     return this.#eligibility.campaignParticipations;
   }
 
+  get passages() {
+    return this.#eligibility.passages;
+  }
+
   buildDataForQuestScopedByCampaignParticipationId({ campaignParticipationId }) {
     const eligibility = this.#eligibility.buildEligibilityScopedByCampaignParticipationId({ campaignParticipationId });
     return new DataForQuest({ eligibility, success: this.#success });

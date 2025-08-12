@@ -1,10 +1,14 @@
 export class Eligibility {
-  constructor({ organizationLearner, organization, campaignParticipations = [] }) {
+  constructor({ organizationLearner, organization, campaignParticipations = [], passages = [] }) {
     this.organizationLearner = {
       id: organizationLearner?.id,
     };
     this.organization = organization;
     this.campaignParticipations = campaignParticipations;
+    this.passages = passages.map((passage) => ({
+      moduleId: passage.id,
+      isTerminated: passage.status === 'COMPLETED',
+    }));
   }
 
   /**
