@@ -41,4 +41,36 @@ module('Integration | Component | Index::Classic', function (hooks) {
     assert.ok(screen.getByText(t('components.index.organization-information.label')));
     assert.ok(screen.getByText('Ma super organization'));
   });
+
+  module('when organisation is SCO and managingStudents', function () {
+    test('should display sco banner', async function (assert) {
+      class CurrentUserStub extends Service {
+        isSCOManagingStudents = true;
+        prescriber = {
+          firstName: 'Jean',
+        };
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const screen = await render(<template><IndexClassic /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('banners.import.message')));
+    });
+  });
+
+  module('when organisation is not SCO and managingStudents', function () {
+    test('should display sco banner', async function (assert) {
+      class CurrentUserStub extends Service {
+        isSCOManagingStudents = false;
+        prescriber = {
+          firstName: 'Jean',
+        };
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const screen = await render(<template><IndexClassic /></template>);
+
+      // then
+      assert.notOk(screen.queryByText(t('banners.import.message')));
+    });
+  });
 });
