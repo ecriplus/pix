@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 // TODO: cross-bounded context violation
 import * as scoringDegradationService from '../../../../certification/scoring/domain/services/scoring-degradation-service.js';
 import * as certificationChallengeLiveAlertRepository from '../../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
@@ -12,7 +9,6 @@ import * as areaRepository from '../../../../shared/infrastructure/repositories/
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as challengeRepository from '../../../evaluation/infrastructure/repositories/challenge-repository.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -76,18 +72,19 @@ const dependencies = {
   sharedChallengeRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { findByCertificationCourseIdAndAssessmentId } from './scoring/calibrated-challenge-service.js';
+import { scoreComplementaryCertificationV2 } from './scoring/score-complementary-certification-v2.js';
+import { scoreDoubleCertificationV3 } from './scoring/score-double-certification-v3.js';
+import { calculateCertificationAssessmentScore, handleV2CertificationScoring } from './scoring/scoring-v2.js';
+import { handleV3CertificationScoring } from './scoring/scoring-v3.js';
 
-/**
- * Note : current ignoredFileNames are injected in * {@link file://./../../../shared/domain/usecases/index.js}
- * This is in progress, because they should be injected in this file and not by shared sub-domain
- * The only remaining file ignored should be index.js
- */
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './scoring/'),
-    ignoredFileNames: ['index.js'],
-  })),
+  findByCertificationCourseIdAndAssessmentId,
+  scoreComplementaryCertificationV2,
+  scoreDoubleCertificationV3,
+  calculateCertificationAssessmentScore,
+  handleV2CertificationScoring,
+  handleV3CertificationScoring,
 };
 
 const services = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
