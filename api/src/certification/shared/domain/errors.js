@@ -11,4 +11,11 @@ class InvalidCertificationReportForFinalization extends DomainError {
   }
 }
 
-export { CertificationCourseUpdateError, InvalidCertificationReportForFinalization };
+class CenterHabilitationError extends DomainError {
+  constructor() {
+    super('This certification center has no habilitation for the given complementary certification.');
+    this.code = 'CENTER_HABILITATION_ERROR';
+  }
+}
+
+export { CenterHabilitationError, CertificationCourseUpdateError, InvalidCertificationReportForFinalization };

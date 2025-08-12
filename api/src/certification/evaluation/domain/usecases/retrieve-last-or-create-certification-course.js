@@ -22,10 +22,10 @@ import {
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { SessionNotAccessible } from '../../../session-management/domain/errors.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
+import { CenterHabilitationError } from '../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { CenterHabilitationError } from '../errors.js';
 
 const { features } = config;
 
