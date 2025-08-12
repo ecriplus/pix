@@ -39,11 +39,16 @@ describe('Integration | Application | FlashAssessmentConfigurationController', f
 
   describe('#createFlashAssessmentConfiguration', function () {
     it('should create an active flash assessment configuration', async function () {
+      const flashAlgorithmConfigurationSerializer = {
+        deserialize: sinon.stub(),
+      };
       sinon.stub(usecases, 'createFlashAssessmentConfiguration');
 
       const payload = {
         enablePassageByAllCompetences: true,
       };
+      const flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(payload);
+      flashAlgorithmConfigurationSerializer.deserialize.withArgs(payload).returns(flashAlgorithmConfiguration);
 
       const response = await flashAssessmentConfigurationController.createFlashAssessmentConfiguration(
         { payload },
@@ -52,7 +57,7 @@ describe('Integration | Application | FlashAssessmentConfigurationController', f
 
       expect(response.statusCode).to.equal(204);
       expect(usecases.createFlashAssessmentConfiguration).to.have.been.calledWith({
-        configuration: payload,
+        configuration: flashAlgorithmConfiguration,
       });
     });
   });
