@@ -41,4 +41,15 @@ module('Integration | Component | Module | Preview', function (hooks) {
     // then
     assert.dom(screen.queryByRole('textbox', { name: 'Contenu du Module' })).exists();
   });
+
+  module('when previewing an existing module passed as argument', function () {
+    test('should display the module title', async function (assert) {
+      // given
+      const moduleData = { title: 'Existing module' };
+      const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('heading', { name: 'Existing module' })).exists();
+    });
+  });
 });
