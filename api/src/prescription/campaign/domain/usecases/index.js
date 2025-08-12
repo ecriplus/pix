@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
@@ -19,7 +16,6 @@ import { eventLoggingJobRepository } from '../../../../shared/infrastructure/rep
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as membershipRepository from '../../../../team/infrastructure/repositories/membership.repository.js';
 import * as campaignAnalysisRepository from '../../../campaign-participation/infrastructure/repositories/campaign-analysis-repository.js';
 import * as campaignParticipationRepository from '../../../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
@@ -88,17 +84,80 @@ const dependencies = {
   userRecommendedTrainingRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { archiveCampaign } from './archive-campaign.js';
+import { archiveCampaigns } from './archive-campaigns.js';
+import { computeCampaignCollectiveResult } from './compute-campaign-collective-result.js';
+import { createCampaign } from './create-campaign.js';
+import { createCampaigns } from './create-campaigns.js';
+import { deleteCampaigns } from './delete-campaigns.js';
+import { findAssessmentParticipationResultList } from './find-assessment-participation-result-list.js';
+import { findCampaignProfilesCollectionParticipationSummaries } from './find-campaign-profiles-collection-participation-summaries.js';
+import { findCampaignSkillIdsForCampaignParticipations } from './find-campaign-skill-ids-for-campaign-participations.js';
+import { findPaginatedCampaignManagements } from './find-paginated-campaign-managements.js';
+import { findPaginatedCampaignParticipantsActivities } from './find-paginated-campaign-participants-activities.js';
+import { findPaginatedFilteredOrganizationCampaigns } from './find-paginated-filtered-organization-campaigns.js';
+import { getCampaign } from './get-campaign.js';
+import { getCampaignByCode } from './get-campaign-by-code.js';
+import { getCampaignManagement } from './get-campaign-management.js';
+import { getCampaignOfCampaignParticipation } from './get-campaign-of-campaign-participation.js';
+import { getCampaignParticipations } from './get-campaign-participations.js';
+import { getKnowledgeElementSnapshotForParticipation } from './get-knowledge-element-snapshot-for-participation.js';
+import { getParticipantsDivision } from './get-participants-division.js';
+import { getParticipantsGroup } from './get-participants-group.js';
+import { getPresentationSteps } from './get-presentation-steps.js';
+import { getResultLevelsPerTubesAndCompetences } from './get-result-levels-per-tubes-and-competences.js';
+import { getTargetProfile } from './get-target-profile.js';
+import { saveKnowledgeElementSnapshotForParticipation } from './save-knowledge-element-snapshot-for-participation.js';
+import { startWritingCampaignAssessmentResultsToStream } from './start-writing-campaign-assessment-results-to-stream.js';
+import { startWritingCampaignProfilesCollectionResultsToStream } from './start-writing-campaign-profiles-collection-results-to-stream.js';
+import { getBadgeAcquisitionsStatistics } from './statistics/get-badge-acquisitions-statistics.js';
+import { getCampaignParticipationsActivityByDay } from './statistics/get-campaign-participations-activity-by-day.js';
+import { getCampaignParticipationsCountByStage } from './statistics/get-campaign-participations-counts-by-stage.js';
+import { getCampaignParticipationsCountsByStatus } from './statistics/get-campaign-participations-counts-by-status.js';
+import { getParticipationsCountByMasteryRate } from './statistics/get-participations-count-by-mastery-rate.js';
+import { swapCampaignCodes } from './swap-campaign-code.js';
+import { unarchiveCampaign } from './unarchive-campaign.js';
+import { updateCampaign } from './update-campaign.js';
+import { updateCampaignCode } from './update-campaign-code.js';
+import { updateCampaignDetails } from './update-campaign-details.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './statistics/'),
-    ignoredFileNames: ['index.js'],
-  })),
+  archiveCampaign,
+  archiveCampaigns,
+  computeCampaignCollectiveResult,
+  createCampaign,
+  createCampaigns,
+  deleteCampaigns,
+  findAssessmentParticipationResultList,
+  findCampaignProfilesCollectionParticipationSummaries,
+  findCampaignSkillIdsForCampaignParticipations,
+  findPaginatedCampaignManagements,
+  findPaginatedCampaignParticipantsActivities,
+  findPaginatedFilteredOrganizationCampaigns,
+  getCampaignByCode,
+  getCampaignManagement,
+  getCampaignOfCampaignParticipation,
+  getCampaignParticipations,
+  getCampaign,
+  getKnowledgeElementSnapshotForParticipation,
+  getParticipantsDivision,
+  getParticipantsGroup,
+  getPresentationSteps,
+  getResultLevelsPerTubesAndCompetences,
+  getTargetProfile,
+  saveKnowledgeElementSnapshotForParticipation,
+  startWritingCampaignAssessmentResultsToStream,
+  startWritingCampaignProfilesCollectionResultsToStream,
+  swapCampaignCodes,
+  unarchiveCampaign,
+  updateCampaignCode,
+  updateCampaignDetails,
+  updateCampaign,
+  getBadgeAcquisitionsStatistics,
+  getCampaignParticipationsActivityByDay,
+  getCampaignParticipationsCountByStage,
+  getCampaignParticipationsCountsByStatus,
+  getParticipationsCountByMasteryRate,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
