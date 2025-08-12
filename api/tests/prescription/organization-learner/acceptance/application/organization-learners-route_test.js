@@ -135,6 +135,52 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
     });
   });
 
+  describe('GET /api/organizations/{organizationId}/participation-statistics', function () {
+    describe('Success case', function () {
+      it('should return the participation statistics and a 200 status code response', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        databaseBuilder.factory.buildMembership({
+          organizationId,
+          userId,
+          organizationRole: Membership.roles.MEMBER,
+        });
+
+        // Create campaigns and participations for test data
+        const campaign1 = databaseBuilder.factory.buildCampaign({ organizationId, ownerId: userId });
+
+        const organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+
+        // Create campaign participations - some completed, some not
+        databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign1.id,
+          organizationLearnerId: organizationLearner1.id,
+          isShared: true,
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${organizationId}/participation-statistics`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result).to.have.property('data');
+        expect(response.result.data).to.have.property('type', 'organization-participation-statistics');
+        expect(response.result.data).to.have.property('attributes');
+        expect(response.result.data.attributes).to.have.property('total-participation-count');
+        expect(response.result.data.attributes).to.have.property('completed-participation-count');
+      });
+    });
+  });
+
   describe('GET /api/organizations/{organizationId}/organization-learners-level-by-tubes', function () {
     describe('Success case', function () {
       it('should return the organization learner and a 200 status code response', async function () {
