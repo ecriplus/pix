@@ -1,13 +1,7 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import * as legalDocumentRepository from '../../infrastructure/repositories/legal-document.repository.js';
 import * as userAcceptanceRepository from '../../infrastructure/repositories/user-acceptance.repository.js';
-
-const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   legalDocumentRepository,
@@ -16,8 +10,14 @@ const repositories = {
 
 const dependencies = Object.assign({ logger }, repositories);
 
+import { acceptLegalDocumentByUserId } from './accept-legal-document-by-user-id.usecase.js';
+import { createLegalDocument } from './create-legal-document.usecase.js';
+import { getLegalDocumentStatusByUserId } from './get-legal-document-status-by-user-id.usecase.js';
+
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
+  acceptLegalDocumentByUserId,
+  createLegalDocument,
+  getLegalDocumentStatusByUserId,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
