@@ -33,5 +33,6 @@ export default class AuthenticatedRoute extends Route {
   @action
   refreshAuthenticatedModel() {
     this.refresh();
+    this.store.unloadAll('organization-place-statistic');
   }
 }

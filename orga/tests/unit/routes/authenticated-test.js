@@ -136,6 +136,7 @@ module('Unit | Route | authenticated', function (hooks) {
     test('should call refresh', async function (assert) {
       // given
       const route = this.owner.lookup('route:authenticated');
+      const unloadAllStub = sinon.stub(route.store, 'unloadAll');
       route.refresh = sinon.stub();
 
       // when
@@ -143,6 +144,7 @@ module('Unit | Route | authenticated', function (hooks) {
 
       // then
       assert.ok(route.refresh.called);
+      assert.ok(unloadAllStub.calledWithExactly('organization-place-statistic'));
     });
   });
 });
