@@ -72,26 +72,17 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           maximumAssessmentLength: 1,
           createdAt: new Date('2010-02-01'),
         });
-        databaseBuilder.factory.buildScoringConfiguration({
-          createdByUserId: user.id,
-          createdAt: new Date('2010-02-01'),
+
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2009-02-01'),
+          expirationDate: new Date('2010-02-01'),
+          challengesConfiguration: null,
+          globalScoringConfiguration: null,
+          competencesScoringConfiguration: null,
         });
-        databaseBuilder.factory.buildCompetenceScoringConfiguration({
-          createdByUserId: user.id,
-          configuration: [
-            {
-              competence: '1.1',
-              values: [
-                {
-                  bounds: {
-                    max: 0,
-                    min: -5,
-                  },
-                  competenceLevel: 0,
-                },
-              ],
-            },
-          ],
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2010-02-01'),
+          expirationDate: null,
         });
 
         const candidate = databaseBuilder.factory.buildUser();
@@ -212,26 +203,16 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           maximumAssessmentLength: 1,
           createdAt: new Date('2010-02-01'),
         });
-        databaseBuilder.factory.buildScoringConfiguration({
-          createdByUserId: user.id,
-          createdAt: new Date('2010-02-01'),
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2010-02-01'),
+          expirationDate: new Date('2024-02-01'),
         });
-        databaseBuilder.factory.buildCompetenceScoringConfiguration({
-          createdByUserId: user.id,
-          configuration: [
-            {
-              competence: '1.1',
-              values: [
-                {
-                  bounds: {
-                    max: 0,
-                    min: -5,
-                  },
-                  competenceLevel: 0,
-                },
-              ],
-            },
-          ],
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2024-02-01'),
+          expirationDate: null,
+          challengesConfiguration: null,
+          globalScoringConfiguration: null,
+          competencesScoringConfiguration: null,
         });
 
         const candidate = databaseBuilder.factory.buildUser();

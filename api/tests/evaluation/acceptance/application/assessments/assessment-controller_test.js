@@ -409,38 +409,12 @@ describe('Acceptance | Controller | assessment-controller', function () {
     server = await createServer();
 
     user = databaseBuilder.factory.buildUser({});
-    const configurationCreatorId = databaseBuilder.factory.buildUser().id;
     assessment = databaseBuilder.factory.buildAssessment({
       userId: user.id,
       state: Assessment.states.STARTED,
     });
-
-    databaseBuilder.factory.buildCompetenceScoringConfiguration({
-      createdByUserId: configurationCreatorId,
-      configuration: [
-        {
-          competence: '1.1',
-          values: [
-            {
-              bounds: {
-                max: 0,
-                min: -5,
-              },
-              competenceLevel: 0,
-            },
-            {
-              bounds: {
-                max: 5,
-                min: 0,
-              },
-              competenceLevel: 1,
-            },
-          ],
-        },
-      ],
-    });
-    databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
     databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+    databaseBuilder.factory.buildCertificationConfiguration();
 
     await databaseBuilder.commit();
 

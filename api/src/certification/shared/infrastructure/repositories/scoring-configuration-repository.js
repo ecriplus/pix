@@ -10,29 +10,22 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   // NOTE : only works for certification of core competencies
   const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
 
-  const competenceScoringConfiguration = await knexConn('competence-scoring-configurations')
-    .select('configuration')
-    .where('createdAt', '<=', date)
-    .orderBy('createdAt', 'desc')
+  const configuration = await knexConn('certification-configurations')
+    .select('id', 'globalScoringConfiguration', 'competencesScoringConfiguration')
+    .where('startingDate', '<=', date)
+    .andWhere((queryBuilder) => {
+      queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
+    })
+    .orderBy('startingDate', 'asc')
     .first();
 
-  if (!competenceScoringConfiguration) {
-    throw new NotFoundError(`No competence scoring configuration found for date ${date.toISOString()}`);
-  }
-
-  const certificationScoringConfiguration = await knexConn('certification-scoring-configurations')
-    .select('configuration')
-    .where('createdAt', '<=', date)
-    .orderBy('createdAt', 'desc')
-    .first();
-
-  if (!certificationScoringConfiguration) {
+  if (!configuration || !configuration.competencesScoringConfiguration || !configuration.globalScoringConfiguration) {
     throw new NotFoundError(`No certification scoring configuration found for date ${date.toISOString()}`);
   }
 
   return V3CertificationScoring.fromConfigurations({
-    competenceForScoringConfiguration: competenceScoringConfiguration.configuration,
-    certificationScoringConfiguration: certificationScoringConfiguration.configuration,
+    competenceForScoringConfiguration: configuration.competencesScoringConfiguration,
+    certificationScoringConfiguration: configuration.globalScoringConfiguration,
     allAreas,
     competenceList,
   });

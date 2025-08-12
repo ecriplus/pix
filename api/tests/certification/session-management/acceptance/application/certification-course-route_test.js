@@ -183,34 +183,27 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
         databaseBuilder.factory.buildFlashAlgorithmConfiguration();
 
-        databaseBuilder.factory.buildScoringConfiguration({
-          createdByUserId: userId,
-        });
-
         const session = databaseBuilder.factory.buildSession({
           finalizedAt: new Date('2018-12-01T01:02:03Z'),
           version: 3,
         });
 
-        const configuration = [
-          {
-            competence: '1.1',
-            values: [
-              {
-                bounds: {
-                  max: -2.2,
-                  min: -9.8,
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2018-12-01T01:02:03Z'),
+          competencesScoringConfiguration: [
+            {
+              competence: '1.1',
+              values: [
+                {
+                  bounds: {
+                    max: -2.2,
+                    min: -9.8,
+                  },
+                  competenceLevel: 0,
                 },
-                competenceLevel: 0,
-              },
-            ],
-          },
-        ];
-
-        databaseBuilder.factory.buildCompetenceScoringConfiguration({
-          configuration,
-          createdAt: new Date('2018-01-01T08:00:00Z'),
-          createdByUserId: userId,
+              ],
+            },
+          ],
         });
 
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
@@ -279,33 +272,8 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         version: AlgorithmEngineVersion.V3,
       });
 
-      const configurationCreatorId = databaseBuilder.factory.buildUser().id;
-      databaseBuilder.factory.buildCompetenceScoringConfiguration({
-        createdByUserId: configurationCreatorId,
-        configuration: [
-          {
-            competence: '1.1',
-            values: [
-              {
-                bounds: {
-                  max: 0,
-                  min: -5,
-                },
-                competenceLevel: 0,
-              },
-              {
-                bounds: {
-                  max: 5,
-                  min: 0,
-                },
-                competenceLevel: 1,
-              },
-            ],
-          },
-        ],
-      });
-      databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
       databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+      databaseBuilder.factory.buildCertificationConfiguration();
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,
