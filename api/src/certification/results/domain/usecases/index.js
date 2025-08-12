@@ -1,9 +1,4 @@
-// eslint-disable import/no-restricted-paths
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as sessionEnrolmentRepository from '../../../enrolment/infrastructure/repositories/session-repository.js';
 import * as resultsCertificationCourseRepository from '../../../results/infrastructure/repositories/certification-course-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -48,18 +43,40 @@ const dependencies = {
   certificationLivretScolaireRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { findCertificatesForDivision } from './find-certificates-for-division.js';
+import { findCertificationAttestationsForDivision } from './find-certification-attestations-for-division.js';
+import { findUserCertificationCourses } from './find-user-certification-courses.js';
+import { findUserPrivateCertificates } from './find-user-private-certificates.js';
+import { getCertificate } from './get-certificate.js';
+import { getCertificatesForSession } from './get-certificates-for-session.js';
+import { getCertificationCourseByVerificationCode } from './get-certification-course-by-verification-code.js';
+import { getCertificationResultForParcoursup } from './get-certification-result-for-parcoursup.js';
+import { getCertificationsResultsForLivretScolaire } from './get-certifications-results-for-livret-scolaire.js';
+import { getCleaCertifiedCandidateBySession } from './get-clea-certified-candidate-by-session.js';
+import { getPrivateCertificate } from './get-private-certificate.js';
+import { getScoCertificationResultsByDivision } from './get-sco-certification-results-by-division.js';
+import { getSessionCertificationReports } from './get-session-certification-reports.js';
+import { getSessionResults } from './get-session-results.js';
+import { getSessionResultsByResultRecipientEmail } from './get-session-results-by-result-recipient-email.js';
+import { getShareableCertificate } from './get-shareable-certificate.js';
 
-/**
- * Note : current ignoredFileNames are injected in * {@link file://./../../../shared/domain/usecases/index.js}
- * This is in progress, because they should be injected in this file and not by shared sub-domain
- * The only remaining file ignored should be index.js
- */
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  findCertificatesForDivision,
+  findCertificationAttestationsForDivision,
+  findUserCertificationCourses,
+  findUserPrivateCertificates,
+  getCertificate,
+  getCertificatesForSession,
+  getCertificationCourseByVerificationCode,
+  getCertificationResultForParcoursup,
+  getCertificationsResultsForLivretScolaire,
+  getCleaCertifiedCandidateBySession,
+  getPrivateCertificate,
+  getScoCertificationResultsByDivision,
+  getSessionCertificationReports,
+  getSessionResultsByResultRecipientEmail,
+  getSessionResults,
+  getShareableCertificate,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
