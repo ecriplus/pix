@@ -4,6 +4,7 @@ import { InMemoryKeyValueStorage } from '../key-value-storages/InMemoryKeyValueS
 import { FeatureTogglesClient } from './feature-toggles-client.js';
 
 const isTestEnv = process.env.NODE_ENV === 'test';
+const isReviewAppEnv = process.env.REVIEW_APP === 'true';
 
 let _instance = null;
 
@@ -13,11 +14,19 @@ let _instance = null;
  */
 async function getInstance() {
   if (!_instance) {
+    const environment = getFeatureTogglesEnv();
     const storage = isTestEnv ? new InMemoryKeyValueStorage() : featureTogglesStorage;
-    _instance = new FeatureTogglesClient(storage);
+    _instance = new FeatureTogglesClient(storage, environment);
+
     await _instance.init(config);
   }
   return _instance;
+}
+
+function getFeatureTogglesEnv() {
+  if (isTestEnv) return 'test';
+  if (isReviewAppEnv) return 'reviewApp';
+  return;
 }
 
 /**
