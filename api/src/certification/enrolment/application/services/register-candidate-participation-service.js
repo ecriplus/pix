@@ -35,8 +35,9 @@ export const registerCandidateParticipation = withTransaction(
       candidate,
     });
 
-    await usecases.verifyCandidateCertificability({
+    await usecases.verifyCandidateReconciliationRequirements({
       candidate: reconciliedCandidate,
+      sessionId,
     });
 
     return reconciliedCandidate;

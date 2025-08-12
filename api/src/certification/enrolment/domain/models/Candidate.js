@@ -4,7 +4,7 @@
 import _ from 'lodash';
 
 import { CertificationCandidatesError } from '../../../../shared/domain/errors.js';
-import { BILLING_MODES } from '../../../shared/domain/constants.js';
+import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { validate } from '../validators/candidate-validator.js';
 
 export class Candidate {
@@ -143,7 +143,11 @@ export class Candidate {
     this.extraTimePercentage = this.extraTimePercentage / 100;
   }
 
-  hasCoreSubscription() {
-    return this.subscriptions.some((subscription) => subscription.isCore());
+  hasComplementarySubscription() {
+    return this.subscriptions.some((subscription) => subscription.isComplementary());
+  }
+
+  getComplementarySubscription() {
+    return this.subscriptions.find((subscription) => subscription.type === SUBSCRIPTION_TYPES.COMPLEMENTARY);
   }
 }

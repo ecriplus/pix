@@ -4,7 +4,7 @@ import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTra
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Application | Service | register-candidate-participation', function () {
-  let enrolledCandidateRepository, normalizeStringFnc;
+  let normalizeStringFnc;
   const candidateData = {
     firstName: 'Brice',
     lastName: 'Wine',
@@ -14,12 +14,9 @@ describe('Unit | Application | Service | register-candidate-participation', func
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
-    enrolledCandidateRepository = {
-      get: sinon.stub(),
-    };
     normalizeStringFnc = sinon.stub();
     sinon.stub(usecases, 'reconcileCandidate');
-    sinon.stub(usecases, 'verifyCandidateCertificability');
+    sinon.stub(usecases, 'verifyCandidateReconciliationRequirements');
   });
 
   context('when the candidate is already link to a user', function () {
@@ -40,7 +37,6 @@ describe('Unit | Application | Service | register-candidate-participation', func
         userId,
         sessionId,
         normalizeStringFnc,
-        enrolledCandidateRepository,
       });
 
       // then
@@ -51,7 +47,7 @@ describe('Unit | Application | Service | register-candidate-participation', func
         normalizeStringFnc,
       });
       expect(usecases.reconcileCandidate).to.not.have.been.called;
-      expect(usecases.verifyCandidateCertificability).to.not.have.been.called;
+      expect(usecases.verifyCandidateReconciliationRequirements).to.not.have.been.called;
     });
   });
 
@@ -68,14 +64,14 @@ describe('Unit | Application | Service | register-candidate-participation', func
         ...candidateData,
       });
       sinon.stub(usecases, 'verifyCandidateIdentity').resolves(unlinkedCandidate);
-      usecases.verifyCandidateCertificability.resolves();
+      usecases.verifyCandidateReconciliationRequirements.resolves();
     });
 
     afterEach(function () {
       clock.restore();
     });
 
-    it('verifies candidate certificability', async function () {
+    it('verifies candidate subscriptions', async function () {
       // when
       unlinkedCandidate.reconcile();
       usecases.reconcileCandidate.resolves(unlinkedCandidate);
@@ -85,12 +81,12 @@ describe('Unit | Application | Service | register-candidate-participation', func
         sessionId,
         userId,
         normalizeStringFnc,
-        enrolledCandidateRepository,
       });
 
       // then
-      expect(usecases.verifyCandidateCertificability).to.have.been.calledWithExactly({
+      expect(usecases.verifyCandidateReconciliationRequirements).to.have.been.calledWithExactly({
         candidate: unlinkedCandidate,
+        sessionId,
       });
     });
 
@@ -101,7 +97,6 @@ describe('Unit | Application | Service | register-candidate-participation', func
         userId,
         sessionId,
         normalizeStringFnc,
-        enrolledCandidateRepository,
       });
 
       // then
