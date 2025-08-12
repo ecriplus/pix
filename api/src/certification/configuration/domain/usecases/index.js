@@ -1,11 +1,7 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as complementaryCertificationRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
 import * as flashAlgorithmConfigurationRepository from '../../../configuration/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
@@ -48,13 +44,28 @@ const dependencies = {
   sharedFlashAlgorithmConfigurationRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { calibrateConsolidatedFramework } from './calibrate-consolidated-framework.js';
+import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
+import { createConsolidatedFramework } from './create-consolidated-framework.js';
+import { createFlashAssessmentConfiguration } from './create-flash-assessment-configuration.js';
+import { exportScoWhitelist } from './export-sco-whitelist.js';
+import { findComplementaryCertifications } from './find-complementary-certifications.js';
+import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
+import { getCurrentConsolidatedFramework } from './get-current-consolidated-framework.js';
+import { importScoWhitelist } from './import-sco-whitelist.js';
+import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: 'index.js',
-  })),
+  calibrateConsolidatedFramework,
+  catchingUpCandidateReconciliation,
+  createConsolidatedFramework,
+  createFlashAssessmentConfiguration,
+  exportScoWhitelist,
+  findComplementaryCertifications,
+  getActiveFlashAssessmentConfiguration,
+  getCurrentConsolidatedFramework,
+  importScoWhitelist,
+  searchAttachableTargetProfiles,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
