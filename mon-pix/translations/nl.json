@@ -2073,7 +2073,7 @@
       "title": "Gebruiksvoorwaarden"
     },
     "timed-challenge-instructions": {
-      "action": "De test beginnen",
+      "action": "Beginnen",
       "primary": "Je hebt '<span class=\"timed-challenge-instructies__time\">'{time}'</span>' om de volgende vraag te beantwoorden.",
       "secondary": "Als je doorgaat wordt de opdracht niet als voltooid beschouwd.",
       "time": {

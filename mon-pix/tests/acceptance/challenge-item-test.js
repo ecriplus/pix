@@ -686,7 +686,7 @@ module('Acceptance | Displaying a challenge of any type', function (hooks) {
           .exists();
 
         // when
-        await click(screen.getByRole('button', { name: `Commencer l'épreuve` }));
+        await click(screen.getByRole('button', { name: `Commencer` }));
 
         // then
         assert.dom(screen.getByRole('heading', { name: 'Mode Focus', level: 3 })).exists();

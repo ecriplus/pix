@@ -2083,7 +2083,7 @@
       "title": "Terms and conditions of use"
     },
     "timed-challenge-instructions": {
-      "action": "Start the challenge",
+      "action": "Start",
       "primary": "You have '<span class=\"timed-challenge-instructions__time\">'{time}'</span>' to complete the next question.",
       "secondary": "You can continue answering after this, but the question will not be marked as correct.",
       "time": {

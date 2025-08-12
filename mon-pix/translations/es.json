@@ -2069,7 +2069,7 @@
       "title": "Condiciones de uso"
     },
     "timed-challenge-instructions": {
-      "action": "Empezar la prueba",
+      "action": "Empezar",
       "primary": "Dispondrás de '<span class=\"timed-challenge-instructions__time\">'{time}'</span>' para superar la siguiente pregunta.",
       "secondary": "Podrás seguir respondiendo después, pero la pregunta no se considerará acertada.",
       "time": {
