@@ -12,18 +12,18 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 module('Integration | Component | certification-starter', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when the candidate has no complementary certification subscription', function () {
-    test('should not display subscriptions panel', async function (assert) {
+  module('when the candidate has only core subscription', function () {
+    test('should not display subscription eligible panel', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       this.set(
         'certificationCandidateSubscription',
         store.createRecord('certification-candidate-subscription', {
-          eligibleSubscriptions: null,
+          eligibleSubscriptions: [{ label: null, type: 'CORE' }],
           nonEligibleSubscription: null,
+          sessionVersion: 3,
         }),
       );
-      this.set('certificationCandidateSubscription', { eligibleSubscriptions: null, nonEligibleSubscription: null });
 
       // when
       const screen = await render(
@@ -31,45 +31,17 @@ module('Integration | Component | certification-starter', function (hooks) {
       );
 
       // then
+      assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
       assert.notOk(
         screen.queryByText(
-          "'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :",
+          'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :',
         ),
       );
-      assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
     });
   });
 
-  module('when the session is v3', function () {
-    module('when the candidate has only core subscription', function () {
-      test('should not display subscription eligible panel', async function (assert) {
-        // given
-        const store = this.owner.lookup('service:store');
-        this.set(
-          'certificationCandidateSubscription',
-          store.createRecord('certification-candidate-subscription', {
-            eligibleSubscriptions: [{ label: null, type: 'CORE' }],
-            nonEligibleSubscription: null,
-            sessionVersion: 3,
-          }),
-        );
-
-        // when
-        const screen = await render(
-          hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
-        );
-
-        // then
-        assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
-        assert.notOk(
-          screen.queryByText(
-            'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :',
-          ),
-        );
-      });
-    });
-
-    module('when the candidate has core and complementary subscriptions', function () {
+  module('when the candidate has double subscriptions', function () {
+    module('when the candidate is eligible', function () {
       test('should display subscription eligible panel', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
@@ -78,10 +50,10 @@ module('Integration | Component | certification-starter', function (hooks) {
           store.createRecord('certification-candidate-subscription', {
             eligibleSubscriptions: [
               { label: null, type: 'CORE' },
-              { label: 'Pix+ toto', type: 'COMPLEMENTARY' },
+              { label: 'Certif complémentaire 1', type: 'COMPLEMENTARY' },
             ],
             nonEligibleSubscription: null,
-            sessionVersion: 3,
+            sessionVersion: 2,
           }),
         );
 
@@ -91,26 +63,22 @@ module('Integration | Component | certification-starter', function (hooks) {
         );
 
         // then
+        assert.ok(screen.getByText('Vous êtes inscrit à la certification complémentaire suivante :'));
+        assert.ok(screen.getByText('Certif complémentaire 1'));
         assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
-        assert.ok(
-          screen.queryByText(
-            'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :',
-          ),
-        );
-        assert.ok(screen.getByText('Pix+ toto'));
       });
     });
 
-    module('when the candidate has only a complementary subscriptions', function () {
-      test('should display subscription eligible panel', async function (assert) {
+    module('when the candidate is not eligible', function () {
+      test('should display subscription non eligible panel', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
         this.set(
           'certificationCandidateSubscription',
           store.createRecord('certification-candidate-subscription', {
-            eligibleSubscriptions: [{ label: 'Pix+ toto', type: 'COMPLEMENTARY' }],
-            nonEligibleSubscription: null,
-            sessionVersion: 3,
+            eligibleSubscriptions: [],
+            nonEligibleSubscription: { label: 'Certif complémentaire 1' },
+            sessionVersion: 2,
           }),
         );
 
@@ -120,71 +88,45 @@ module('Integration | Component | certification-starter', function (hooks) {
         );
 
         // then
-        assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
-        assert.ok(screen.queryByText('Vous êtes inscrit à la certification complémentaire suivante :'));
-        assert.ok(screen.getByText('Pix+ toto'));
+        assert.ok(
+          screen.getByText(
+            "Vous n'êtes pas éligible à Certif complémentaire 1. Vous pouvez néanmoins passer votre certification Pix.",
+          ),
+        );
+        assert.notOk(
+          screen.queryByText(
+            'Vous êtes inscrit aux certifications complémentaires suivantes en plus de la certification Pix :',
+          ),
+        );
       });
     });
   });
 
-  module('when the session is v2', function () {
-    module('when the candidate has complementary certification subscription', function () {
-      module('when the candidate is eligible', function () {
-        test('should display subscription eligible panel', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          this.set(
-            'certificationCandidateSubscription',
-            store.createRecord('certification-candidate-subscription', {
-              eligibleSubscriptions: [{ label: 'Certif complémentaire 1', type: 'COMPLEMENTARY' }],
-              nonEligibleSubscription: null,
-              sessionVersion: 2,
-            }),
-          );
+  module('when the candidate has only a complementary subscriptions', function () {
+    test('should not display subscription eligible panel', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      this.set(
+        'certificationCandidateSubscription',
+        store.createRecord('certification-candidate-subscription', {
+          eligibleSubscriptions: [{ label: 'Pix+ toto', type: 'COMPLEMENTARY' }],
+          nonEligibleSubscription: null,
+          sessionVersion: 3,
+        }),
+      );
 
-          // when
-          const screen = await render(
-            hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
-          );
+      // when
+      const screen = await render(
+        hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
+      );
 
-          // then
-          assert.ok(screen.getByText('Vous êtes inscrit à la certification complémentaire suivante :'));
-          assert.ok(screen.getByText('Certif complémentaire 1'));
-          assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
-        });
-      });
-
-      module('when the candidate is not eligible', function () {
-        test('should display subscription non eligible panel', async function (assert) {
-          // given
-          const store = this.owner.lookup('service:store');
-          this.set(
-            'certificationCandidateSubscription',
-            store.createRecord('certification-candidate-subscription', {
-              eligibleSubscriptions: null,
-              nonEligibleSubscription: { label: 'Certif complémentaire 1' },
-              sessionVersion: 2,
-            }),
-          );
-
-          // when
-          const screen = await render(
-            hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
-          );
-
-          // then
-          assert.ok(
-            screen.getByText(
-              "Vous n'êtes pas éligible à Certif complémentaire 1. Vous pouvez néanmoins passer votre certification Pix.",
-            ),
-          );
-          assert.notOk(
-            screen.queryByText(
-              'Vous êtes inscrit aux certifications complémentaires suivantes en plus de la certification Pix :',
-            ),
-          );
-        });
-      });
+      // then
+      assert.notOk(screen.queryByText('Vous n’êtes pas éligible à'));
+      assert.notOk(
+        screen.queryByText(
+          'Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :',
+        ),
+      );
     });
   });
 
@@ -495,6 +437,51 @@ module('Integration | Component | certification-starter', function (hooks) {
             assert.ok(
               screen.getByText(t('pages.certification-start.error-messages.candidate-not-authorized-to-resume')),
             );
+          });
+
+          module('when the certification centre has no habilitation to hold the session', function () {
+            test('should display the appropriate error message', async function (assert) {
+              // given
+              const replaceWithStub = sinon.stub();
+
+              class RouterServiceStub extends Service {
+                replaceWith = replaceWithStub;
+              }
+
+              this.owner.register('service:router', RouterServiceStub);
+              const createRecordStub = sinon.stub();
+
+              class StoreStubService extends Service {
+                createRecord = createRecordStub;
+              }
+
+              this.owner.register('service:store', StoreStubService);
+              const certificationCourse = {
+                id: '123',
+                save: sinon.stub(),
+                deleteRecord: sinon.stub(),
+              };
+              createRecordStub.returns(certificationCourse);
+              this.set('certificationCandidateSubscription', { sessionId: 123 });
+              const screen = await render(
+                hbs`<CertificationStarter @certificationCandidateSubscription={{this.certificationCandidateSubscription}} />`,
+              );
+              await fillIn(
+                screen.getByRole('textbox', {
+                  name: `${t('pages.certification-start.access-code')} *`,
+                }),
+                'ABC123',
+              );
+              certificationCourse.save.rejects({
+                errors: [{ status: '403', code: 'CENTER_HABILITATION_ERROR' }],
+              });
+
+              // when
+              await clickByLabel(t('pages.certification-start.actions.submit'));
+
+              // then
+              assert.ok(screen.getByText(t('pages.certification-joiner.error-messages.missing-center-habilitation')));
+            });
           });
         });
 

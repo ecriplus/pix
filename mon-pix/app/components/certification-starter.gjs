@@ -76,7 +76,7 @@ export default class CertificationStarter extends Component {
         />
 
         {{#if this.apiErrorMessage}}
-          <PixNotificationAlert @type="error" @withIcon={{true}} class="certification-start-page__error-message">
+          <PixNotificationAlert @type="error" class="certification-start-page__error-message">
             {{this.apiErrorMessage}}
           </PixNotificationAlert>
         {{/if}}
@@ -188,6 +188,8 @@ export default class CertificationStarter extends Component {
           this.apiErrorMessage = this.intl.t(
             'pages.certification-start.error-messages.candidate-not-authorized-to-resume',
           );
+        } else if (errorCode === 'CENTER_HABILITATION_ERROR') {
+          this.apiErrorMessage = this.intl.t('pages.certification-joiner.error-messages.missing-center-habilitation');
         }
       } else {
         // This should not happen, but in case it does, let give as much info as possible
