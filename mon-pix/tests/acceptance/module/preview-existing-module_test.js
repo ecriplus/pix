@@ -1,0 +1,32 @@
+import { visit } from '@1024pix/ember-testing-library';
+import { currentURL } from '@ember/test-helpers';
+import { setupMirage } from 'ember-cli-mirage/test-support';
+import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
+import setupIntl from '../../helpers/setup-intl';
+
+module('Acceptance | Module | Routes | Preview Existing Module', function (hooks) {
+  setupApplicationTest(hooks);
+  setupMirage(hooks);
+  setupIntl(hooks);
+
+  test('should allow to preview existing module', async function (assert) {
+    // given
+    server.create('module', {
+      id: 'existing-module',
+      slug: 'existing-module',
+      title: 'Existing Module',
+      isBeta: true,
+      grains: [],
+      details: {},
+    });
+
+    // when
+    const screen = await visit('/modules/preview/existing-module');
+
+    // then
+    assert.strictEqual(currentURL(), '/modules/preview/existing-module');
+    assert.dom(screen.getByRole('heading', { name: 'Existing Module' })).exists();
+  });
+});
