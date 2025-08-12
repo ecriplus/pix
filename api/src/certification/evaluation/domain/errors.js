@@ -12,4 +12,11 @@ class CertificationComputeError extends DomainError {
   }
 }
 
-export { CertificationComputeError, ChallengeAlreadyAnsweredError };
+class CenterHabilitationError extends DomainError {
+  constructor() {
+    super('This certification center has no habilitation for the given complementary certification.');
+    this.code = 'CENTER_HABILITATION_ERROR';
+  }
+}
+
+export { CenterHabilitationError, CertificationComputeError, ChallengeAlreadyAnsweredError };

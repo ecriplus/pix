@@ -33,7 +33,6 @@ import { buildCampaignToStartParticipation } from './build-campaign-to-start-par
 import { buildCenter, buildMatchingOrganization } from './build-center.js';
 import { buildCenterForAdmin } from './build-center-for-admin.js';
 import { buildCertifiableBadgeAcquisition } from './build-certifiable-badge-acquisition.js';
-import { buildCertifiableProfileForLearningContent } from './build-certifiable-profile-for-learning-content.js';
 import { buildCertificationAssessment } from './build-certification-assessment.js';
 import { buildCertificationAssessmentScore } from './build-certification-assessment-score.js';
 import { buildCertificationAssessmentScoreV3 } from './build-certification-assessment-score-v3.js';
@@ -367,7 +366,6 @@ export {
   buildCampaignToStartParticipation,
   buildCenterForAdmin,
   buildCertifiableBadgeAcquisition,
-  buildCertifiableProfileForLearningContent,
   buildCertificationAssessment,
   buildCertificationAssessmentHistory,
   buildCertificationAssessmentScore,

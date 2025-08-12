@@ -346,57 +346,6 @@ describe('Integration | Repository | answerRepository', function () {
     });
   });
 
-  describe('#findChallengeIdsFromAnswerIds', function () {
-    context('when provided answerIds collection is empty', function () {
-      it('should return an empty array', async function () {
-        // when
-        const challengeIds = await answerRepository.findChallengeIdsFromAnswerIds([]);
-
-        // then
-        expect(challengeIds).to.be.empty;
-      });
-    });
-
-    context('when provided answerIds refer to non-existent answers', function () {
-      it('should return an empty array', async function () {
-        // when
-        const challengeIds = await answerRepository.findChallengeIdsFromAnswerIds([1]);
-
-        // then
-        expect(challengeIds).to.be.empty;
-      });
-    });
-
-    context('when provided answerIds list contains duplicate ids', function () {
-      it('should return distinct challengeIds', async function () {
-        // given
-        databaseBuilder.factory.buildAnswer({ id: 123, challengeId: 'recABC' });
-        await databaseBuilder.commit();
-
-        // when
-        const challengeIds = await answerRepository.findChallengeIdsFromAnswerIds([123, 123]);
-
-        // then
-        expect(challengeIds).to.deepEqualArray(['recABC']);
-      });
-    });
-
-    it('should return a list of corresponding distinct challenge ids ordered by challenge id', async function () {
-      // given
-      databaseBuilder.factory.buildAnswer({ id: 123, challengeId: 'recABC' });
-      databaseBuilder.factory.buildAnswer({ id: 456, challengeId: 'recDEF' });
-      databaseBuilder.factory.buildAnswer({ id: 789, challengeId: 'recGHI' });
-      databaseBuilder.factory.buildAnswer({ id: 159, challengeId: 'recABC' });
-      await databaseBuilder.commit();
-
-      // when
-      const challengeIds = await answerRepository.findChallengeIdsFromAnswerIds([456, 123, 789, 159]);
-
-      // then
-      expect(challengeIds).to.have.same.members(['recABC', 'recDEF', 'recGHI']);
-    });
-  });
-
   describe('#save', function () {
     it('should save and return the answer', async function () {
       // given

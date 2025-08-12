@@ -24,19 +24,4 @@ describe('Unit | Domain | Models | UserCompetence', function () {
       expect(result).to.be.true;
     });
   });
-
-  describe('#getSkillsAtLatestVersion', function () {
-    it('should return only the latest versions', function () {
-      // given
-      const skill1 = domainBuilder.buildSkill({ name: '@url4', version: 1 });
-      const skill2 = domainBuilder.buildSkill({ name: '@web2', version: 1 });
-      const skill3 = domainBuilder.buildSkill({ name: '@url4', version: 2 });
-      const userCompetence = domainBuilder.buildUserCompetence({ skills: [skill1, skill2, skill3] });
-
-      // when
-      const result = userCompetence.getSkillsAtLatestVersion();
-      // then
-      expect(result).to.deepEqualArray([skill3, skill2]);
-    });
-  });
 });

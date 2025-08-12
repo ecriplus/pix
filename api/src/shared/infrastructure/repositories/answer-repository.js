@@ -88,11 +88,6 @@ const findByAssessmentExcludingChallengeIds = async function ({ assessmentId, ex
   return _toDomainArray(answerDTOs);
 };
 
-const findChallengeIdsFromAnswerIds = async function (ids) {
-  const knexConn = DomainTransaction.getConnection();
-  return knexConn.distinct().pluck('challengeId').from('answers').whereInArray('id', ids);
-};
-
 const save = async function ({ answer }) {
   const knexConn = DomainTransaction.getConnection();
   const answerForDB = _adaptAnswerToDb(answer);
@@ -100,11 +95,4 @@ const save = async function ({ answer }) {
   return _toDomain(savedAnswerDTO);
 };
 
-export {
-  findByAssessment,
-  findByAssessmentExcludingChallengeIds,
-  findByChallengeAndAssessment,
-  findChallengeIdsFromAnswerIds,
-  get,
-  save,
-};
+export { findByAssessment, findByAssessmentExcludingChallengeIds, findByChallengeAndAssessment, get, save };

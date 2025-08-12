@@ -5,7 +5,6 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
-import * as certifiableProfileForLearningContentRepository from '../../../evaluation/infrastructure/repositories/certifiable-profile-for-learning-content-repository.js';
 import {
   answerRepository,
   assessmentRepository,
@@ -31,7 +30,6 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
-import * as certificationChallengesService from '../services/certification-challenges-service.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
 
@@ -40,7 +38,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
- * @typedef {certifiableProfileForLearningContentRepository} CertifiableProfileForLearningContentRepository
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  * @typedef {assessmentResultRepository} AssessmentResultRepository
  * @typedef {certificationCourseRepository} CertificationCourseRepository
@@ -54,7 +51,6 @@ const dependencies = {
   sessionManagementCertificationChallengeRepository,
   challengeCalibrationRepository,
   certificationCandidateRepository,
-  certifiableProfileForLearningContentRepository,
   assessmentRepository,
   sharedCertificationCandidateRepository,
   verifyCertificateCodeService,
@@ -64,7 +60,6 @@ const dependencies = {
   sharedChallengeRepository,
   userRepository,
   competenceMarkRepository,
-  certificationChallengesService,
   cpfExportRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,

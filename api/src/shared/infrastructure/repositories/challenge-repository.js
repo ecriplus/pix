@@ -78,16 +78,6 @@ export async function findValidated(locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-export async function findOperative(locale) {
-  _assertLocaleIsDefined(locale);
-  const cacheKey = `findOperative(${locale})`;
-  const findOperativeByLocaleCallback = (knex) =>
-    knex.whereRaw('?=ANY(??)', [locale, 'locales']).whereIn('status', OPERATIVE_STATUSES).orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
 export async function findValidatedByCompetenceId(competenceId, locale) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidatedByCompetenceId(${competenceId}, ${locale})`;

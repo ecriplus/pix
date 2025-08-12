@@ -7,7 +7,6 @@ import { Assessment } from '../../../../shared/domain/models/index.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
-import * as certificationChallengeRepository from './certification-challenge-repository.js';
 
 async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
@@ -17,25 +16,12 @@ async function save({ certificationCourse }) {
     .insert(certificationCourseToSaveDTO)
     .returning('id');
 
-  const complementaryCertificationCourses = certificationCourse
-    .toDTO()
-    .complementaryCertificationCourses.map(({ complementaryCertificationId, complementaryCertificationBadgeId }) => ({
-      complementaryCertificationId,
-      complementaryCertificationBadgeId,
+  const complementaryCertificationCourse = certificationCourse.toDTO().complementaryCertificationCourse;
+
+  if (complementaryCertificationCourse) {
+    await knexConn('complementary-certification-courses').insert({
+      ...complementaryCertificationCourse,
       certificationCourseId,
-    }));
-
-  if (!_.isEmpty(complementaryCertificationCourses)) {
-    await knexConn('complementary-certification-courses').insert(complementaryCertificationCourses);
-  }
-
-  for (const certificationChallenge of certificationCourse.toDTO().challenges) {
-    const certificationChallengeWithCourseId = {
-      ...certificationChallenge,
-      courseId: certificationCourseId,
-    };
-    await certificationChallengeRepository.save({
-      certificationChallenge: certificationChallengeWithCourseId,
     });
   }
 
@@ -68,9 +54,11 @@ async function get({ id }) {
     certificationCourseId: id,
   });
 
-  const complementaryCertificationCoursesDTO = await knexConn('complementary-certification-courses').where({
-    certificationCourseId: id,
-  });
+  const complementaryCertificationCourseDTO = await knexConn('complementary-certification-courses')
+    .where({
+      certificationCourseId: id,
+    })
+    .first();
 
   const challengesDTO = await _findAllChallenges(id, knexConn);
 
@@ -96,7 +84,7 @@ async function get({ id }) {
     certificationCourseDTO,
     challengesDTO,
     assessmentDTO,
-    complementaryCertificationCoursesDTO,
+    complementaryCertificationCourseDTO,
     certificationIssueReportsDTO,
     accessibilityAdjustmentNeeded,
   });
@@ -106,13 +94,13 @@ function _toDomain({
   certificationCourseDTO,
   challengesDTO = [],
   assessmentDTO = {},
-  complementaryCertificationCoursesDTO = [],
+  complementaryCertificationCourseDTO = null,
   certificationIssueReportsDTO = [],
   accessibilityAdjustmentNeeded,
 }) {
-  const complementaryCertificationCourses = complementaryCertificationCoursesDTO.map(
-    (complementaryCertificationCourseDTO) => new ComplementaryCertificationCourse(complementaryCertificationCourseDTO),
-  );
+  const complementaryCertificationCourse = complementaryCertificationCourseDTO
+    ? new ComplementaryCertificationCourse(complementaryCertificationCourseDTO)
+    : null;
 
   const certificationIssueReports = certificationIssueReportsDTO.map(
     (certificationIssueReportDTO) => new CertificationIssueReport(certificationIssueReportDTO),
@@ -124,7 +112,7 @@ function _toDomain({
     ...certificationCourseDTO,
     assessment,
     challenges: challengesDTO,
-    complementaryCertificationCourses,
+    complementaryCertificationCourse,
     certificationIssueReports,
     isAdjustedForAccessibility: accessibilityAdjustmentNeeded,
   });
@@ -251,7 +239,7 @@ export {
 
 function _adaptModelToDb(certificationCourse) {
   return _.omit(certificationCourse.toDTO(), [
-    'complementaryCertificationCourses',
+    'complementaryCertificationCourse',
     'certificationIssueReports',
     'assessment',
     'challenges',
