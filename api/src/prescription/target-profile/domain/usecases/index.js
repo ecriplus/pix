@@ -1,11 +1,7 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as learningContentConversionService from '../../../../../lib/domain/services/learning-content/learning-content-conversion-service.js';
 import { adminMemberRepository } from '../../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as learningContentRepository from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as organizationsToAttachToTargetProfileRepository from '../../infrastructure/repositories/organizations-to-attach-to-target-profile-repository.js';
@@ -43,13 +39,46 @@ const dependencies = {
   targetProfileSummaryForAdminRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { attachOrganizationsFromExistingTargetProfile } from './attach-organizations-from-existing-target-profile.js';
+import { attachOrganizationsToTargetProfile } from './attach-organizations-to-target-profile.js';
+import { attachTargetProfilesToOrganization } from './attach-target-profiles-to-organization.js';
+import { copyTargetProfile } from './copy-target-profile.js';
+import { createTargetProfile } from './create-target-profile.js';
+import { detachOrganizationsFromTargetProfile } from './detach-organizations-from-target-profile.js';
+import { findOrganizationTargetProfileSummariesForAdmin } from './find-organization-target-profile-summaries-for-admin.js';
+import { findPaginatedFilteredOrganizationByTargetProfileId } from './find-paginated-filtered-target-profile-organizations.js';
+import { findPaginatedFilteredTargetProfileSummariesForAdmin } from './find-paginated-filtered-target-profile-summaries-for-admin.js';
+import { findSkillsByTargetProfileIds } from './find-skills-by-target-profile-ids.js';
+import { getAvailableTargetProfilesForOrganization } from './get-available-target-profiles-for-organization.js';
+import { getLearningContentByTargetProfile } from './get-learning-content-by-target-profile.js';
+import { getLearningContentForTargetProfileSubmission } from './get-learning-content-for-target-profile-submission.js';
+import { getTargetProfile } from './get-target-profile.js';
+import { getTargetProfileContentAsJson } from './get-target-profile-content-as-json.js';
+import { getTargetProfileForAdmin } from './get-target-profile-for-admin.js';
+import { markTargetProfileAsSimplifiedAccess } from './mark-target-profile-as-simplified-access.js';
+import { outdateTargetProfile } from './outdate-target-profile.js';
+import { updateTargetProfile } from './update-target-profile.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  attachOrganizationsFromExistingTargetProfile,
+  attachOrganizationsToTargetProfile,
+  attachTargetProfilesToOrganization,
+  copyTargetProfile,
+  createTargetProfile,
+  detachOrganizationsFromTargetProfile,
+  findOrganizationTargetProfileSummariesForAdmin,
+  findPaginatedFilteredOrganizationByTargetProfileId,
+  findPaginatedFilteredTargetProfileSummariesForAdmin,
+  findSkillsByTargetProfileIds,
+  getAvailableTargetProfilesForOrganization,
+  getLearningContentByTargetProfile,
+  getLearningContentForTargetProfileSubmission,
+  getTargetProfileContentAsJson,
+  getTargetProfileForAdmin,
+  getTargetProfile,
+  markTargetProfileAsSimplifiedAccess,
+  outdateTargetProfile,
+  updateTargetProfile,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
