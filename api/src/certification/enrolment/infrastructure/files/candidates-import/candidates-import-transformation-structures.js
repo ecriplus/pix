@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { convertDateValue } from '../../../../../shared/infrastructure/utils/date-utils.js';
-import { ComplementaryCertificationKeys } from '../../../../shared/domain/models/ComplementaryCertificationKeys.js';
 
 // These are transformation structures. They provide all the necessary info
 // on how to transform cell values in an attendance sheet into a target JS object.
@@ -94,14 +93,13 @@ function getTransformationStructsForPixCertifCandidatesImport({ i18n, habilitati
 }
 
 function _includeHabilitationColumns({ habilitations, transformationStruct, translate }) {
-  const habilitation = habilitations.find((habilitation) => habilitation.key === ComplementaryCertificationKeys.CLEA);
-  if (habilitation) {
+  habilitations.forEach((habilitation) => {
     transformationStruct.push({
       header: `${habilitation.label}${translate('candidate-list-template.yes-or-empty')}`,
-      property: 'hasCleaNumerique',
+      property: habilitation.key,
       transformFn: (val) => _toBooleanIfValueEqualsOuiOrNull({ val, translate }),
     });
-  }
+  });
 }
 
 function _includeBillingColumns({ transformationStruct, translate }) {

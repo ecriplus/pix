@@ -13,7 +13,6 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
   let certificationCpfService;
   let certificationCpfCityRepository;
   let certificationCpfCountryRepository;
-  let complementaryCertificationRepository;
   let centerRepository;
   let sessionRepository;
 
@@ -34,7 +33,6 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
     };
     certificationCpfCountryRepository = Symbol('certificationCpfCountryRepository');
     certificationCpfCityRepository = Symbol('certificationCpfCityRepository');
-    complementaryCertificationRepository = Symbol('complementaryCertificationRepository');
     centerRepository = Symbol('centerRepository');
     sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => {
       return lambda();
@@ -66,7 +64,6 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
           certificationCpfService,
           certificationCpfCountryRepository,
           certificationCpfCityRepository,
-          complementaryCertificationRepository,
           centerRepository,
           sessionRepository,
         });
@@ -113,7 +110,6 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
               certificationCpfService,
               certificationCpfCountryRepository,
               certificationCpfCityRepository,
-              complementaryCertificationRepository,
               centerRepository,
             })
             .resolves(candidates);
@@ -128,7 +124,6 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
             certificationCpfService,
             certificationCpfCountryRepository,
             certificationCpfCityRepository,
-            complementaryCertificationRepository,
             centerRepository,
             sessionRepository,
           });

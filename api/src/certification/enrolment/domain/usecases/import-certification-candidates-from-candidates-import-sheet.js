@@ -18,7 +18,6 @@ const importCertificationCandidatesFromCandidatesImportSheet = async function ({
   candidateRepository,
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
-  complementaryCertificationRepository,
   centerRepository,
   sessionRepository,
   certificationCandidatesOdsService,
@@ -39,7 +38,6 @@ const importCertificationCandidatesFromCandidatesImportSheet = async function ({
     certificationCpfService,
     certificationCpfCountryRepository,
     certificationCpfCityRepository,
-    complementaryCertificationRepository,
     centerRepository,
   });
 
