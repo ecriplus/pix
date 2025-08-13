@@ -89,7 +89,7 @@ module('Integration | Component | data-protection-policy-information-banner', fu
         test('displays the data protection policy banner', async function (assert) {
           // given
           stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
-          _stubWindowLocationHostname('pix.fr');
+          sinon.stub(Location, 'getHref').returns('https://pix.fr');
           _communicationBannerIsNotDisplayed();
 
           // when
@@ -115,7 +115,7 @@ module('Integration | Component | data-protection-policy-information-banner', fu
               // given
               await setCurrentLocale('en');
               stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
-              _stubWindowLocationHostname('pix.org');
+              sinon.stub(Location, 'getHref').returns('https://pix.org');
               _communicationBannerIsNotDisplayed();
 
               // when
@@ -140,7 +140,7 @@ module('Integration | Component | data-protection-policy-information-banner', fu
               // given
               await setCurrentLocale('nl');
               stubCurrentUserService(this.owner, { shouldSeeDataProtectionPolicyInformationBanner: true });
-              _stubWindowLocationHostname('pix.org');
+              sinon.stub(Location, 'getHref').returns('https://pix.org');
               _communicationBannerIsNotDisplayed();
 
               // when
@@ -171,8 +171,4 @@ function _communicationBannerIsDisplayed() {
 function _communicationBannerIsNotDisplayed() {
   ENV.APP.BANNER_CONTENT = undefined;
   ENV.APP.BANNER_TYPE = undefined;
-}
-
-function _stubWindowLocationHostname(hostname) {
-  sinon.stub(Location, 'getLocationHostname').returns(hostname);
 }
