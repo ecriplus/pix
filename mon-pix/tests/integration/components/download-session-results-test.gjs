@@ -4,7 +4,7 @@ import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import DownloadSessionResults from 'mon-pix/components/download-session-results';
 import ENV from 'mon-pix/config/environment';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -51,7 +51,7 @@ module('Integration | Component | download-session-results', function (hooks) {
     // given
     fileSaver.save.resolves();
     const tokenHash = 'mytoken';
-    sinon.stub(PixWindow, 'getLocationHash').returns(`#${tokenHash}`);
+    sinon.stub(Location, 'getLocationHash').returns(`#${tokenHash}`);
 
     // when
     const screen = await render(hbs`<DownloadSessionResults />`);

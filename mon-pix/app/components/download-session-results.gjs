@@ -8,7 +8,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ENV from 'mon-pix/config/environment';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 
 export default class DownloadSessionResults extends Component {
   @tracked errorMessage = null;
@@ -21,7 +21,7 @@ export default class DownloadSessionResults extends Component {
     this.errorMessage = null;
 
     try {
-      const token = decodeURIComponent(PixWindow.getLocationHash().slice(1));
+      const token = decodeURIComponent(Location.getLocationHash().slice(1));
       await this.fileSaver.save({
         url: `${ENV.APP.API_HOST}/api/sessions/download-all-results`,
         options: {

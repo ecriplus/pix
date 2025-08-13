@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 
 export default class EntryPoint extends Route {
   @service currentUser;
@@ -33,7 +33,7 @@ export default class EntryPoint extends Route {
     // TODO: Change this when identity providers target apps are managed through the API
     if (campaign.identityProvider === 'FWB' && this.currentDomain.isFranceDomain && !this.currentDomain.isLocalhost) {
       const redirectUrl = this.currentDomain.convertUrlToOrgDomain();
-      return PixWindow.replace(redirectUrl);
+      return Location.replace(redirectUrl);
     }
 
     const queryParams = transition.to.queryParams;

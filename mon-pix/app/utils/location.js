@@ -22,7 +22,7 @@ function reload() {
   window.location.reload(true);
 }
 
-const PixWindow = {
+const Location = {
   getLocationHash,
   getLocationHost,
   getLocationHostname,
@@ -31,4 +31,4 @@ const PixWindow = {
   reload,
 };
 
-export default PixWindow;
+export default Location;

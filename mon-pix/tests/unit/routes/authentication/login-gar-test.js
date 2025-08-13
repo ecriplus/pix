@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -21,7 +21,7 @@ module('Unit | Routes | authentication | login-gar', function (hooks) {
         });
         route.set('session', sessionStub);
 
-        sinon.stub(PixWindow, 'getLocationHash').returns('#access_token');
+        sinon.stub(Location, 'getLocationHash').returns('#access_token');
 
         // when
         await route.beforeModel();

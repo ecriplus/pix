@@ -2,7 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ENV from 'mon-pix/config/environment';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -174,5 +174,5 @@ function _communicationBannerIsNotDisplayed() {
 }
 
 function _stubWindowLocationHostname(hostname) {
-  sinon.stub(PixWindow, 'getLocationHostname').returns(hostname);
+  sinon.stub(Location, 'getLocationHostname').returns(hostname);
 }

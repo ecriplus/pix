@@ -5,7 +5,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 
 import ShieldIcon from './shield-icon';
 
@@ -34,7 +34,7 @@ export default class CompanionBlocker extends Component {
 
   @action
   refreshPage() {
-    PixWindow.reload();
+    Location.reload();
   }
 
   <template>
