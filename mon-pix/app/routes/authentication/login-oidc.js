@@ -11,7 +11,6 @@ const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentic
 
 export default class LoginOidcRoute extends Route {
   @service intl;
-  @service location;
   @service oidcIdentityProviders;
   @service router;
   @service session;
