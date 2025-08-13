@@ -2,10 +2,6 @@ function getLocationHash() {
   return window.location.hash;
 }
 
-function getLocationHost() {
-  return window.location.host;
-}
-
 function getLocationHref() {
   return window.location.href;
 }
@@ -24,7 +20,6 @@ function assign(url) {
 
 const Location = {
   getLocationHash,
-  getLocationHost,
   getLocationHref,
   replace,
   reload,

@@ -178,7 +178,6 @@ module('Unit | Service | currentDomain', function (hooks) {
 function _stubWindowUrl(owner, url) {
   const newUrl = new URL(url);
   sinon.stub(Location, 'getLocationHash').returns(newUrl.hash);
-  sinon.stub(Location, 'getLocationHost').returns(newUrl.host);
   sinon.stub(Location, 'getLocationHref').returns(newUrl.href);
   sinon.stub(Location, 'reload');
   sinon.stub(Location, 'replace');
