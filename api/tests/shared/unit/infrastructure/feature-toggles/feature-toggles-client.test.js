@@ -61,6 +61,50 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
       // when / then
       await expect(featureToggles.init(invalidConfig)).to.rejectedWith(Joi.ValidationError);
     });
+
+    context('when in test environement', function () {
+      it('adds feature toggles with provided devDefaultValues.test', async function () {
+        // given
+        const featureToggles = new FeatureTogglesClient(storage, 'test');
+
+        // when
+        await featureToggles.init({
+          myToggle1: { description: 'Description 1', type: 'boolean', defaultValue: false },
+          myToggle2: {
+            description: 'Description 2',
+            type: 'boolean',
+            defaultValue: false,
+            devDefaultValues: { test: true },
+          },
+        });
+
+        // then
+        const all = await featureToggles.all();
+        expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+      });
+    });
+
+    context('when in review app environement', function () {
+      it('adds feature toggles with provided devDefaultValues.reviewApp', async function () {
+        // given
+        const featureToggles = new FeatureTogglesClient(storage, 'reviewApp');
+
+        // when
+        await featureToggles.init({
+          myToggle1: { description: 'Description 1', type: 'boolean', defaultValue: false },
+          myToggle2: {
+            description: 'Description 2',
+            type: 'boolean',
+            defaultValue: false,
+            devDefaultValues: { reviewApp: true },
+          },
+        });
+
+        // then
+        const all = await featureToggles.all();
+        expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+      });
+    });
   });
 
   describe('get', function () {
@@ -157,6 +201,56 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
 
       // then
       expect(all).to.deep.equal({ myToggle1: false, myToggle2: true, myToggle3: 'foo' });
+    });
+
+    context('when in test environement', function () {
+      it('resets feature toggles with provided devDefaultValues.test', async function () {
+        // given
+        const featureToggles = new FeatureTogglesClient(storage, 'test');
+        await featureToggles.init({
+          myToggle1: { description: 'Description 1', type: 'boolean', defaultValue: false },
+          myToggle2: {
+            description: 'Description 2',
+            type: 'boolean',
+            defaultValue: false,
+            devDefaultValues: { test: true },
+          },
+        });
+        await featureToggles.set('myToggle1', true);
+        await featureToggles.set('myToggle2', false);
+
+        // when
+        await featureToggles.resetDefaults();
+
+        // then
+        const all = await featureToggles.all();
+        expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+      });
+    });
+
+    context('when in review app environement', function () {
+      it('resets feature toggles with provided devDefaultValues.reviewApp', async function () {
+        // given
+        const featureToggles = new FeatureTogglesClient(storage, 'reviewApp');
+        await featureToggles.init({
+          myToggle1: { description: 'Description 1', type: 'boolean', defaultValue: false },
+          myToggle2: {
+            description: 'Description 2',
+            type: 'boolean',
+            defaultValue: false,
+            devDefaultValues: { reviewApp: true },
+          },
+        });
+        await featureToggles.set('myToggle1', true);
+        await featureToggles.set('myToggle2', false);
+
+        // when
+        await featureToggles.resetDefaults();
+
+        // then
+        const all = await featureToggles.all();
+        expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+      });
     });
   });
 });

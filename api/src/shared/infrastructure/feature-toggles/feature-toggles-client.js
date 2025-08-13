@@ -6,6 +6,10 @@ const ConfigSchema = Joi.object().pattern(
     description: Joi.string().required(),
     type: Joi.string().valid('boolean', 'number', 'string').required(),
     defaultValue: Joi.any().required(),
+    devDefaultValues: Joi.object({
+      test: Joi.any().optional(),
+      reviewApp: Joi.any().optional(),
+    }).optional(),
     tags: Joi.array().items(Joi.string()),
   }),
 );
@@ -24,9 +28,11 @@ export class FeatureTogglesClient {
   /**
    * Create a feature toggles client.
    * @param {KeyValueStorage} storage - A KeyValueStorage instance.
+   * @param {'test' | 'reviewApp'} [environment] - environment (test or reviewApp)
    */
-  constructor(storage) {
+  constructor(storage, environment) {
     this.storage = storage;
+    this.environment = environment;
     this.config = {};
   }
 
@@ -48,7 +54,8 @@ export class FeatureTogglesClient {
 
     for (const [key, featureToggle] of Object.entries(this.config)) {
       if (!currentStoredKeys.includes(key)) {
-        await this.storage.save({ key, value: featureToggle.defaultValue });
+        const defaultValue = this.#getFeatureToggleDefaultValue(featureToggle);
+        await this.storage.save({ key, value: defaultValue });
       }
     }
 
@@ -115,7 +122,20 @@ export class FeatureTogglesClient {
    */
   async resetDefaults() {
     for (const [key, featureToggle] of Object.entries(this.config)) {
-      await this.storage.save({ key, value: featureToggle.defaultValue });
+      const defaultValue = this.#getFeatureToggleDefaultValue(featureToggle);
+      await this.storage.save({ key, value: defaultValue });
     }
+  }
+
+  #getFeatureToggleDefaultValue(featureToggle) {
+    if (this.environment === 'test' && featureToggle.devDefaultValues?.test !== undefined) {
+      return featureToggle.devDefaultValues.test;
+    }
+
+    if (this.environment === 'reviewApp' && featureToggle.devDefaultValues?.reviewApp !== undefined) {
+      return featureToggle.devDefaultValues.reviewApp;
+    }
+
+    return featureToggle.defaultValue;
   }
 }
