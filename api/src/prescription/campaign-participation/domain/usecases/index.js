@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as learningContentRepository from '../../../../../src/prescription/shared/infrastructure/repositories/learning-content-repository.js';
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
@@ -20,7 +17,6 @@ import { repositories as injectedSharedRepositories } from '../../../../shared/i
 import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import * as stageCollectionRepository from '../../../campaign/infrastructure/repositories/stage-collection-repository.js';
@@ -85,13 +81,54 @@ const dependencies = {
   userRecommendedTrainingRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { beginCampaignParticipationImprovement } from './begin-campaign-participation-improvement.js';
+import { computeCampaignParticipationAnalysis } from './compute-campaign-participation-analysis.js';
+import { deleteCampaignParticipation } from './delete-campaign-participation.js';
+import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
+import { findPaginatedParticipationsForCampaignManagement } from './find-paginated-participations-for-campaign-management.js';
+import { findUserAnonymisedCampaignAssessments } from './find-user-anonymised-campaign-assessments.js';
+import { findUserCampaignParticipationOverviews } from './find-user-campaign-participation-overviews.js';
+import { getCampaignAssessmentParticipation } from './get-campaign-assessment-participation.js';
+import { getCampaignAssessmentParticipationResult } from './get-campaign-assessment-participation-result.js';
+import { getCampaignParticipationsForOrganizationLearner } from './get-campaign-participations-for-organization-learner.js';
+import { getCampaignProfile } from './get-campaign-profile.js';
+import { getPoleEmploiSendings } from './get-pole-emploi-sendings.js';
+import { getSharedCampaignParticipationProfile } from './get-shared-campaign-participation-profile.js';
+import { getUserCampaignAssessmentResult } from './get-user-campaign-assessment-result.js';
+import { getUserCampaignParticipationToCampaign } from './get-user-campaign-participation-to-campaign.js';
+import { hasCampaignParticipations } from './has-campaign-participations.js';
+import { saveComputedCampaignParticipationResult } from './save-computed-campaign-participation-result.js';
+import { sendCompletedParticipationResultsToPoleEmploi } from './send-completed-participation-results-to-pole-emploi.js';
+import { sendSharedParticipationResultsToPoleEmploi } from './send-shared-participation-results-to-pole-emploi.js';
+import { sendStartedParticipationResultsToPoleEmploi } from './send-started-participation-results-to-pole-emploi.js';
+import { shareCampaignResult } from './share-campaign-result.js';
+import { startCampaignParticipation } from './start-campaign-participation.js';
+import { updateParticipantExternalId } from './update-participant-external-id.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  beginCampaignParticipationImprovement,
+  computeCampaignParticipationAnalysis,
+  deleteCampaignParticipation,
+  findCampaignParticipationsForUserManagement,
+  findPaginatedParticipationsForCampaignManagement,
+  findUserAnonymisedCampaignAssessments,
+  findUserCampaignParticipationOverviews,
+  getCampaignAssessmentParticipationResult,
+  getCampaignAssessmentParticipation,
+  getCampaignParticipationsForOrganizationLearner,
+  getCampaignProfile,
+  getPoleEmploiSendings,
+  getSharedCampaignParticipationProfile,
+  getUserCampaignAssessmentResult,
+  getUserCampaignParticipationToCampaign,
+  hasCampaignParticipations,
+  saveComputedCampaignParticipationResult,
+  sendCompletedParticipationResultsToPoleEmploi,
+  sendSharedParticipationResultsToPoleEmploi,
+  sendStartedParticipationResultsToPoleEmploi,
+  shareCampaignResult,
+  startCampaignParticipation,
+  updateParticipantExternalId,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

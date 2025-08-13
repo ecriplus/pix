@@ -1,13 +1,9 @@
 // eslint-disable import/no-restricted-paths
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as divisionRepository from '../../../../prescription/campaign/infrastructure/repositories/division-repository.js';
 import * as organizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as attendanceSheetPdfUtils from '../../../enrolment/infrastructure/utils/pdf/attendance-sheet-pdf.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
@@ -99,18 +95,64 @@ const dependencies = {
   certificationAssessmentRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { addCandidateToSession } from './add-candidate-to-session.js';
+import { candidateHasSeenCertificationInstructions } from './candidate-has-seen-certification-instructions.js';
+import { createSession } from './create-session.js';
+import { createSessions } from './create-sessions.js';
+import { deleteSession } from './delete-session.js';
+import { deleteUnlinkedCertificationCandidate } from './delete-unlinked-certification-candidate.js';
+import { enrolStudentsToSession } from './enrol-students-to-session.js';
+import { findCountries } from './find-countries.js';
+import { findDivisionsByCertificationCenter } from './find-divisions-by-certification-center.js';
+import { findStudentsForEnrolment } from './find-students-for-enrolment.js';
+import { getAttendanceSheet } from './get-attendance-sheet.js';
+import { getCandidate } from './get-candidate.js';
+import { getCandidateImportSheetData } from './get-candidate-import-sheet-data.js';
+import { getCandidateTimeline } from './get-candidate-timeline.js';
+import { getCenter } from './get-center.js';
+import { getCertificationCandidateSubscription } from './get-certification-candidate-subscription.js';
+import { getEnrolledCandidatesInSession } from './get-enrolled-candidates-in-session.js';
+import { getMassImportTemplateInformation } from './get-mass-import-template-information.js';
+import { getSession } from './get-session.js';
+import { getUserCertificationEligibility } from './get-user-certification-eligibility.js';
+import { hasBeenCandidate } from './has-been-candidate.js';
+import { importCertificationCandidatesFromCandidatesImportSheet } from './import-certification-candidates-from-candidates-import-sheet.js';
+import { reconcileCandidate } from './reconcile-candidate.js';
+import { updateEnrolledCandidate } from './update-enrolled-candidate.js';
+import { updateSession } from './update-session.js';
+import { validateSessions } from './validate-sessions.js';
+import { verifyCandidateCertificability } from './verify-candidate-certificability.js';
+import { verifyCandidateIdentity } from './verify-candidate-identity.js';
 
-/**
- * Note : current ignoredFileNames are injected in * {@link file://./../../../shared/domain/usecases/index.js}
- * This is in progress, because they should be injected in this file and not by shared sub-domain
- * The only remaining file ignored should be index.js
- */
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  addCandidateToSession,
+  candidateHasSeenCertificationInstructions,
+  createSession,
+  createSessions,
+  deleteSession,
+  deleteUnlinkedCertificationCandidate,
+  enrolStudentsToSession,
+  findCountries,
+  findDivisionsByCertificationCenter,
+  findStudentsForEnrolment,
+  getAttendanceSheet,
+  getCandidateImportSheetData,
+  getCandidateTimeline,
+  getCandidate,
+  getCenter,
+  getCertificationCandidateSubscription,
+  getEnrolledCandidatesInSession,
+  getMassImportTemplateInformation,
+  getSession,
+  getUserCertificationEligibility,
+  hasBeenCandidate,
+  importCertificationCandidatesFromCandidatesImportSheet,
+  reconcileCandidate,
+  updateEnrolledCandidate,
+  updateSession,
+  validateSessions,
+  verifyCandidateCertificability,
+  verifyCandidateIdentity,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

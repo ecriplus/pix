@@ -1,9 +1,4 @@
-// eslint-disable import/no-restricted-paths
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 
 /**
@@ -12,13 +7,16 @@ import * as scoringConfigurationRepository from '../../../shared/infrastructure/
  **/
 const dependencies = { scoringConfigurationRepository };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { saveCertificationScoringConfiguration } from './save-certification-scoring-configuration.js';
+import { saveCompetenceForScoringConfiguration } from './save-competence-for-scoring-configuration.js';
+import { simulateCapacityFromScore } from './simulate-capacity-from-score.js';
+import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: ['index.js'],
-  })),
+  saveCertificationScoringConfiguration,
+  saveCompetenceForScoringConfiguration,
+  simulateCapacityFromScore,
+  simulateScoreFromCapacity,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

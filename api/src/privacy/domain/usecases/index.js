@@ -1,6 +1,3 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import * as authenticationMethodRepository from '../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { lastUserApplicationConnectionsRepository } from '../../../identity-access-management/infrastructure/repositories/last-user-application-connections.repository.js';
 import { refreshTokenRepository } from '../../../identity-access-management/infrastructure/repositories/refresh-token.repository.js';
@@ -12,15 +9,12 @@ import { featureToggles as featureTogglesService } from '../../../shared/infrast
 import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { certificationCenterMembershipRepository } from '../../../team/infrastructure/repositories/certification-center-membership.repository.js';
 import * as membershipRepository from '../../../team/infrastructure/repositories/membership.repository.js';
 import * as campaignParticipationsApiRepository from '../../infrastructure/repositories/campaign-participations-api.repository.js';
 import * as candidatesApiRepository from '../../infrastructure/repositories/candidates-api.repository.js';
 import * as learnersApiRepository from '../../infrastructure/repositories/learners-api.repository.js';
 import * as userTeamsApiRepository from '../../infrastructure/repositories/user-teams-api.repository.js';
-
-const path = dirname(fileURLToPath(import.meta.url));
 
 const repositories = {
   authenticationMethodRepository,
@@ -44,8 +38,12 @@ const services = {
   featureTogglesService,
 };
 
+import { anonymizeUser } from './anonymize-user.usecase.js';
+import { canSelfDeleteAccount } from './can-self-delete-account.usecase.js';
+
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({ path: join(path, './'), ignoredFileNames: ['index.js'] })),
+  anonymizeUser,
+  canSelfDeleteAccount,
 };
 
 const dependencies = Object.assign({}, repositories, services);

@@ -1,9 +1,4 @@
-// eslint-disable import/no-restricted-paths
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as informationBannerRepository from '../../infrastructure/repositories/information-banner-repository.js';
 
 /**
@@ -16,13 +11,10 @@ const dependencies = {
   informationBannerRepository,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { getInformationBanner } from './get-information-banner.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: 'index.js',
-  })),
+  getInformationBanner,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

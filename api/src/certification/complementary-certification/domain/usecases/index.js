@@ -1,9 +1,5 @@
 // eslint-disable import/no-restricted-paths
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import { importNamedExportsFromDirectory } from '../../../../shared/infrastructure/utils/import-named-exports-from-directory.js';
 import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
 import * as organizationRepository from '../../../complementary-certification/infrastructure/repositories/organization-repository.js';
 import { mailService } from '../../../shared/domain/services/mail-service.js';
@@ -31,13 +27,20 @@ const dependencies = {
   mailService,
 };
 
-const path = dirname(fileURLToPath(import.meta.url));
+import { attachBadges } from './attach-badges.js';
+import { getById } from './get-by-id.js';
+import { getByLabel } from './get-by-label.js';
+import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
+import { getComplementaryCertificationTargetProfileHistory } from './get-complementary-certification-target-profile-history.js';
+import { sendTargetProfileNotifications } from './send-target-profile-notifications.js';
 
 const usecasesWithoutInjectedDependencies = {
-  ...(await importNamedExportsFromDirectory({
-    path: join(path, './'),
-    ignoredFileNames: 'index.js',
-  })),
+  attachBadges,
+  getById,
+  getByLabel,
+  getComplementaryCertificationForTargetProfileAttachmentRepository,
+  getComplementaryCertificationTargetProfileHistory,
+  sendTargetProfileNotifications,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
