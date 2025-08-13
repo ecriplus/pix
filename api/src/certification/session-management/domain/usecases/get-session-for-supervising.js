@@ -61,7 +61,7 @@ function _computeTheoricalEndDateTime(candidate) {
 
   let theoricalEndDateTime = startDateTime.add(DEFAULT_SESSION_DURATION_MINUTES, 'minute');
 
-  if (candidate.isStillEligibleToComplementaryCertification) {
+  if (candidate.isStillEligibleToDoubleCertification) {
     const extraMinutes = candidate.enrolledComplementaryCertification.certificationExtraTime ?? 0;
     theoricalEndDateTime = theoricalEndDateTime.add(extraMinutes, 'minute');
   }

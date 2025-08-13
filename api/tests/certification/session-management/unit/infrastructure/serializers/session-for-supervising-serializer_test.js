@@ -46,7 +46,7 @@ describe('Unit | Serializer | JSONAPI | session-for-supervising-serializer', fun
                 'start-date-time': new Date('2022-10-01T13:37:00Z'),
                 'theorical-end-date-time': new Date('2022-10-01T16:01:00Z'),
                 'enrolled-complementary-certification-label': 'Super Certification Complémentaire',
-                'is-still-eligible-to-complementary-certification': true,
+                'is-still-eligible-to-double-certification': true,
                 'user-id': 6789,
                 'challenge-live-alert': null,
                 'companion-live-alert': null,
@@ -138,7 +138,7 @@ describe('Unit | Serializer | JSONAPI | session-for-supervising-serializer', fun
                 'start-date-time': new Date('2022-10-01T13:37:00Z'),
                 'theorical-end-date-time': new Date('2022-10-01T16:01:00Z'),
                 'enrolled-complementary-certification-label': 'Super Certification Complémentaire',
-                'is-still-eligible-to-complementary-certification': true,
+                'is-still-eligible-to-double-certification': true,
                 'user-id': 6789,
                 'challenge-live-alert': {
                   type: 'challenge',

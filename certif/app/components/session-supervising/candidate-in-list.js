@@ -47,7 +47,7 @@ export default class CandidateInList extends Component {
 
   _isNotEligibleToEnrolledComplementaryCertification() {
     return (
-      !this.args.candidate.isStillEligibleToComplementaryCertification &&
+      !this.args.candidate.isStillEligibleToDoubleCertification &&
       this.args.candidate.enrolledComplementaryCertificationLabel
     );
   }

@@ -40,7 +40,7 @@ class CertificationCandidateForSupervising {
     this.authorizedToStart = true;
   }
 
-  get isStillEligibleToComplementaryCertification() {
+  get isStillEligibleToDoubleCertification() {
     return this.stillValidBadgeAcquisitions.some(
       (stillValidBadgeAcquisition) =>
         stillValidBadgeAcquisition.complementaryCertificationKey === this.enrolledComplementaryCertification.key,

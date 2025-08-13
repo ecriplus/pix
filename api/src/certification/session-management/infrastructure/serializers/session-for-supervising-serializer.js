@@ -32,7 +32,7 @@ const serialize = function (sessions) {
         'startDateTime',
         'theoricalEndDateTime',
         'enrolledComplementaryCertificationLabel',
-        'isStillEligibleToComplementaryCertification',
+        'isStillEligibleToDoubleCertification',
         'challengeLiveAlert',
         'companionLiveAlert',
       ],
