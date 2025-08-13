@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
-module('Integration | Component | feedback-panel-v3', function (hooks) {
+module('Integration | Component | certification-feedback-panel', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('Default rendering', function () {
@@ -18,7 +18,7 @@ module('Integration | Component | feedback-panel-v3', function (hooks) {
       });
       this.set('assessment', mockAssessment);
 
-      const screen = await render(hbs`<FeedbackPanelV3 @assessment={{this.assessment}} />`);
+      const screen = await render(hbs`<CertificationFeedbackPanel @assessment={{this.assessment}} />`);
 
       // then
       assert.dom(screen.queryByText('Êtes-vous sûr(e) de vouloir signaler un problème ?')).doesNotExist();
@@ -35,7 +35,11 @@ module('Integration | Component | feedback-panel-v3', function (hooks) {
         this.set('assessment', mockAssessment);
         this.set('submitLiveAlert', submitLiveAlert);
         const screen = await render(
-          hbs`<FeedbackPanelV3 @submitLiveAlert={{this.submitLiveAlert}} @assessment={{this.assessment}} @isEnabled={{true}} />`,
+          hbs`<CertificationFeedbackPanel
+  @submitLiveAlert={{this.submitLiveAlert}}
+  @assessment={{this.assessment}}
+  @isEnabled={{true}}
+/>`,
         );
 
         // when
@@ -61,7 +65,7 @@ module('Integration | Component | feedback-panel-v3', function (hooks) {
           this.set('assessment', mockAssessment);
 
           const screen = await render(
-            hbs`<FeedbackPanelV3 @submitLiveAlert={{this.submitLiveAlert}} @assessment={{this.assessment}} />`,
+            hbs`<CertificationFeedbackPanel @submitLiveAlert={{this.submitLiveAlert}} @assessment={{this.assessment}} />`,
           );
 
           // then
@@ -82,7 +86,7 @@ module('Integration | Component | feedback-panel-v3', function (hooks) {
           this.set('assessment', mockAssessment);
 
           const screen = await render(
-            hbs`<FeedbackPanelV3 @submitLiveAlert={{this.submitLiveAlert}} @assessment={{this.assessment}} />`,
+            hbs`<CertificationFeedbackPanel @submitLiveAlert={{this.submitLiveAlert}} @assessment={{this.assessment}} />`,
           );
 
           // then

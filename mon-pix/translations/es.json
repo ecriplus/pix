@@ -944,12 +944,6 @@
         "banner": {
           "certification-number": "N.º de certificación"
         },
-        "feedback-panel": {
-          "certification-number": "tu número de certificación (parte superior derecha de la pantalla)",
-          "description": "Para informar de un problema, llama al supervisor y facilítale la siguiente información:",
-          "problem": "el problema encontrado",
-          "question-number": "el número de la pregunta (parte superior derecha de la pantalla)"
-        },
         "title": "Certificación {certificationNumber}"
       },
       "embed-simulator": {
@@ -961,7 +955,7 @@
         },
         "placeholder": "Cargando la aplicación"
       },
-      "feedback-panel-v3": {
+      "certification-feedback-panel": {
         "actions": {
           "no-send-feedback": "No, vuelvo a la prueba",
           "open-close": "Informar de un problema con la pregunta",

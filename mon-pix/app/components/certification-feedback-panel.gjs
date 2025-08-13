@@ -9,13 +9,13 @@ import { runTask } from 'ember-lifeline';
 import not from 'ember-truth-helpers/helpers/not';
 import LiveAlert from 'mon-pix/components/assessments/live-alert';
 
-export default class FeedbackPanelV3 extends Component {
+export default class CertificationFeedbackPanel extends Component {
   <template>
     {{! template-lint-disable require-input-label no-unknown-arguments-for-builtin-components }}
     {{#if this.isAssessmentPaused}}
       <LiveAlert @message={{t "pages.challenge.live-alerts.challenge.message"}} />
     {{else}}
-      <div class="feedback-panel-v3">
+      <div class="certification-feedback-panel">
         <h2 class="screen-reader-only">{{t "pages.challenge.parts.feedback-v3"}}</h2>
 
         {{#unless this.isToggleFeedbackFormHidden}}
@@ -26,23 +26,25 @@ export default class FeedbackPanelV3 extends Component {
             aria-expanded={{this.isAriaExpanded}}
             @iconBefore="flag"
           >
-            {{t "pages.challenge.feedback-panel-v3.actions.open-close"}}
+            {{t "pages.challenge.certification-feedback-panel.actions.open-close"}}
           </PixButton>
         {{/unless}}
 
         {{#if this.shouldBeExpanded}}
-          <div class="feedback-panel-v3__view">
-            {{t "pages.challenge.feedback-panel-v3.description"}}
-            <div class="feedback-panel-v3__action-buttons">
+          <div class="certification-feedback-panel__view">
+            {{t "pages.challenge.certification-feedback-panel.description"}}
+            <div class="certification-feedback-panel__action-buttons">
               <button type="button" {{on "click" this.submitLiveAlert}}>
-                {{t "pages.challenge.feedback-panel-v3.actions.send-feedback"}}
+                {{t "pages.challenge.certification-feedback-panel.actions.send-feedback"}}
               </button>
               <button type="button" {{on "click" this.toggleFeedbackForm}}>
-                {{t "pages.challenge.feedback-panel-v3.actions.no-send-feedback"}}
+                {{t "pages.challenge.certification-feedback-panel.actions.no-send-feedback"}}
               </button>
             </div>
           </div>
-          <p class="feedback-panel-v3__information">{{t "pages.challenge.feedback-panel-v3.information"}}</p>
+          <p class="certification-feedback-panel__information">{{t
+              "pages.challenge.certification-feedback-panel.information"
+            }}</p>
         {{/if}}
       </div>
     {{/if}}
@@ -96,7 +98,7 @@ export default class FeedbackPanelV3 extends Component {
 
   _scrollIntoFeedbackPanel() {
     runTask(this, function () {
-      const feedbackPanelElements = document.getElementsByClassName('feedback-panel-v3');
+      const feedbackPanelElements = document.getElementsByClassName('certification-feedback-panel');
       if (feedbackPanelElements && feedbackPanelElements[0]) {
         feedbackPanelElements[0].scrollIntoView();
       }

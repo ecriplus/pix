@@ -2,14 +2,14 @@ import { setupTest } from 'ember-qunit';
 import createGlimmerComponent from 'mon-pix/tests/helpers/create-glimmer-component';
 import { module, test } from 'qunit';
 
-module('Unit | Component | feedback-panel-v3', function (hooks) {
+module('Unit | Component | certification-feedback-panel', function (hooks) {
   let component;
 
   setupTest(hooks);
 
   hooks.beforeEach(function () {
     // given
-    component = createGlimmerComponent('feedback-panel-v3');
+    component = createGlimmerComponent('certification-feedback-panel');
   });
 
   module('#toggleFeedbackForm', function () {

@@ -1,6 +1,6 @@
 @use 'pix-design-tokens/fonts';
 
-.feedback-panel-v3 {
+.certification-feedback-panel {
   margin-bottom: var(--pix-spacing-10x);
   color: var(--pix-neutral-800);
   font-size: 0.875rem;
@@ -30,13 +30,13 @@
 
 /* "Link" view
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.feedback-panel-v3__view {
+.certification-feedback-panel__view {
   display: flex;
   gap: 24px;
   font-weight: var(--pix-font-bold);
 }
 
-.feedback-panel-v3__action-buttons {
+.certification-feedback-panel__action-buttons {
   display: flex;
   gap: 16px;
 
@@ -51,6 +51,6 @@
   }
 }
 
-.feedback-panel-v3__information {
+.certification-feedback-panel__information {
   margin-top: var(--pix-spacing-4x);
 }

@@ -499,59 +499,8 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
         });
       });
 
-      module('when passing a V2 certification', function () {
-        test('should display the V2 feedback panel', async function (assert) {
-          assert.timeout(5000);
-          // given
-          user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });
-
-          const challenge = server.create('challenge', 'forCertification');
-          const assessment = server.create('assessment', 'ofCertificationType', { nextChallenge: challenge });
-          this.server.create('certification-course', {
-            accessCode: 'ABCD12',
-            sessionId: 1,
-            nbChallenges: 1,
-            firstName: 'Laura',
-            lastName: 'Bravo',
-            version: 2,
-            assessment,
-          });
-          this.server.create('certification-candidate-subscription', {
-            id: '2',
-            sessionId: 1,
-            eligibleSubscriptions: null,
-            nonEligibleSubscription: null,
-          });
-
-          await authenticate(user);
-          const screen = await visit('/certifications');
-          await fillCertificationJoiner({
-            sessionId: '1',
-            firstName: 'Laura',
-            lastName: 'Bravo',
-            dayOfBirth: '04',
-            monthOfBirth: '01',
-            yearOfBirth: '1990',
-            t,
-          });
-          await fillCertificationStarter({ accessCode: 'ABCD12', t });
-
-          // when
-          await click(screen.getByRole('button', { name: 'Signaler un problème avec la question' }));
-
-          // then
-          assert
-            .dom(
-              screen.getByText(
-                'Pour signaler un problème, appelez votre surveillant et communiquez-lui les informations suivantes :',
-              ),
-            )
-            .exists();
-        });
-      });
-
-      module('when passing a V3 certification', function () {
-        test('should display the V3 feedback panel', async function (assert) {
+      module('when passing certification', function () {
+        test('should display the certification feedback panel', async function (assert) {
           assert.timeout(5000);
           // given
           user = server.create('user', 'withEmail', 'certifiable', { hasSeenOtherChallengesTooltip: true });

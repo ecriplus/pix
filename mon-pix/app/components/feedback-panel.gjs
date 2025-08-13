@@ -11,7 +11,6 @@ import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import { runTask } from 'ember-lifeline';
 import get from 'lodash/get';
-import FeedbackCertificationSection from 'mon-pix/components/feedback-certification-section';
 import { questions, topLevelLabels } from 'mon-pix/static-data/feedback-panel-issue-labels';
 import buttonStatusTypes from 'mon-pix/utils/button-status-types';
 
@@ -43,87 +42,83 @@ export default class FeedbackPanel extends Component {
           <div class="feedback-panel__view feedback-panel__view--form" id="feedback-panel">
             <div class="feedback-panel__form-description">
             </div>
-            {{#if @assessment.isCertification}}
-              <FeedbackCertificationSection />
-            {{else}}
-              <p>{{t "pages.challenge.feedback-panel.description"}}</p>
-              <div class="feedback-panel__form-wrapper">
-                <form id="feedback-form" class="feedback-panel__form" {{on "submit" this.sendFeedback}} novalidate>
-                  <div class="feedback-panel__group">
-                    <div class="feedback-panel__category-selection">
+            <p>{{t "pages.challenge.feedback-panel.description"}}</p>
+            <div class="feedback-panel__form-wrapper">
+              <form id="feedback-form" class="feedback-panel__form" {{on "submit" this.sendFeedback}} novalidate>
+                <div class="feedback-panel__group">
+                  <div class="feedback-panel__category-selection">
+                    <PixSelect
+                      @screenReaderOnly={{true}}
+                      @placeholder={{t "pages.challenge.feedback-panel.form.fields.category-selection.label"}}
+                      @options={{this.categories}}
+                      @onChange={{this.displayCategoryOptions}}
+                      @value={{this._currentMajorCategory}}
+                    >
+                      <:label>{{t "pages.challenge.feedback-panel.form.fields.detail-selection.aria-first"}}</:label>
+                    </PixSelect>
+                    {{#if this.displayQuestionDropdown}}
                       <PixSelect
                         @screenReaderOnly={{true}}
-                        @placeholder={{t "pages.challenge.feedback-panel.form.fields.category-selection.label"}}
-                        @options={{this.categories}}
-                        @onChange={{this.displayCategoryOptions}}
-                        @value={{this._currentMajorCategory}}
+                        @placeholder={{t "pages.challenge.feedback-panel.form.fields.detail-selection.label"}}
+                        @onChange={{this.showFeedback}}
+                        @options={{this.nextCategories}}
+                        @value={{this._currentNextCategory}}
                       >
-                        <:label>{{t "pages.challenge.feedback-panel.form.fields.detail-selection.aria-first"}}</:label>
+                        <:label>{{t
+                            "pages.challenge.feedback-panel.form.fields.detail-selection.aria-secondary"
+                          }}</:label>
                       </PixSelect>
-                      {{#if this.displayQuestionDropdown}}
-                        <PixSelect
-                          @screenReaderOnly={{true}}
-                          @placeholder={{t "pages.challenge.feedback-panel.form.fields.detail-selection.label"}}
-                          @onChange={{this.showFeedback}}
-                          @options={{this.nextCategories}}
-                          @value={{this._currentNextCategory}}
-                        >
-                          <:label>{{t
-                              "pages.challenge.feedback-panel.form.fields.detail-selection.aria-secondary"
-                            }}</:label>
-                        </PixSelect>
-                      {{/if}}
-                      {{#if this.quickHelpInstructions}}
-                        <div class="feedback-panel__quick-help">
-                          <PixIcon @name="error" @plainIcon={{true}} @ariaHidden={{true}} class="tuto-icon__warning" />
-                          <p>{{t this.quickHelpInstructions htmlSafe=true}}</p>
-                        </div>
-                      {{/if}}
-                    </div>
-                  </div>
-                  {{#if this.displayTextBox}}
-                    {{#if this.displayAddCommentButton}}
-                      <button type="button" class="feedback-panel__comment" onClick={{this.addComment}}>
-                        <PixIcon @name="edit" @ariaHidden={{true}} class="feedback-panel-comment__icon" />
-                        {{t "pages.challenge.feedback-panel.form.fields.detail-selection.add-comment"}}
-                      </button>
-                    {{else}}
-                      <div>
-                        <p class="feedback-panel__field-notice">
-                          {{t "pages.challenge.feedback-panel.form.status.error.max-characters"}}
-                        </p>
-                        <label class="screen-reader-only" for="feedback-panel__field">{{t
-                            "pages.challenge.feedback-panel.form.fields.detail-selection.problem-suggestion-description"
-                          }}</label>
-                        <PixTextarea
-                          class="feedback-panel__field--content"
-                          @value={{this.content}}
-                          @id="feedback-panel__field"
-                          @maxlength="10000"
-                          rows="5"
-                          placeholder={{t
-                            "pages.challenge.feedback-panel.form.fields.detail-selection.problem-suggestion-description"
-                          }}
-                          {{on "change" this.setContent}}
-                        />
+                    {{/if}}
+                    {{#if this.quickHelpInstructions}}
+                      <div class="feedback-panel__quick-help">
+                        <PixIcon @name="error" @plainIcon={{true}} @ariaHidden={{true}} class="tuto-icon__warning" />
+                        <p>{{t this.quickHelpInstructions htmlSafe=true}}</p>
                       </div>
                     {{/if}}
-                    <PixButton
-                      @triggerAction={{this.toggleModalVisibility}}
-                      @isDisabled={{this.isSendButtonDisabled}}
-                      aria-label={{t "pages.challenge.feedback-panel.form.actions.submit-aria-label"}}
-                    >
-                      {{t "pages.challenge.feedback-panel.form.actions.submit"}}
-                    </PixButton>
+                  </div>
+                </div>
+                {{#if this.displayTextBox}}
+                  {{#if this.displayAddCommentButton}}
+                    <button type="button" class="feedback-panel__comment" onClick={{this.addComment}}>
+                      <PixIcon @name="edit" @ariaHidden={{true}} class="feedback-panel-comment__icon" />
+                      {{t "pages.challenge.feedback-panel.form.fields.detail-selection.add-comment"}}
+                    </button>
+                  {{else}}
+                    <div>
+                      <p class="feedback-panel__field-notice">
+                        {{t "pages.challenge.feedback-panel.form.status.error.max-characters"}}
+                      </p>
+                      <label class="screen-reader-only" for="feedback-panel__field">{{t
+                          "pages.challenge.feedback-panel.form.fields.detail-selection.problem-suggestion-description"
+                        }}</label>
+                      <PixTextarea
+                        class="feedback-panel__field--content"
+                        @value={{this.content}}
+                        @id="feedback-panel__field"
+                        @maxlength="10000"
+                        rows="5"
+                        placeholder={{t
+                          "pages.challenge.feedback-panel.form.fields.detail-selection.problem-suggestion-description"
+                        }}
+                        {{on "change" this.setContent}}
+                      />
+                    </div>
                   {{/if}}
-                </form>
-              </div>
+                  <PixButton
+                    @triggerAction={{this.toggleModalVisibility}}
+                    @isDisabled={{this.isSendButtonDisabled}}
+                    aria-label={{t "pages.challenge.feedback-panel.form.actions.submit-aria-label"}}
+                  >
+                    {{t "pages.challenge.feedback-panel.form.actions.submit"}}
+                  </PixButton>
+                {{/if}}
+              </form>
+            </div>
 
-              <div class="feedback-panel__form-legal-notice">
-                {{t "pages.challenge.feedback-panel.information.guidance" htmlSafe=true}}
-                {{t "pages.challenge.feedback-panel.information.data-usage" htmlSafe=true}}
-              </div>
-            {{/if}}
+            <div class="feedback-panel__form-legal-notice">
+              {{t "pages.challenge.feedback-panel.information.guidance" htmlSafe=true}}
+              {{t "pages.challenge.feedback-panel.information.data-usage" htmlSafe=true}}
+            </div>
           </div>
         {{/if}}
       {{/if}}

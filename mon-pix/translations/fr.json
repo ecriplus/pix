@@ -949,13 +949,16 @@
         "banner": {
           "certification-number": "N° de certification"
         },
-        "feedback-panel": {
-          "certification-number": "votre numéro de certification (en haut à droite de l'écran)",
-          "description": "Pour signaler un problème, appelez votre surveillant et communiquez-lui les informations suivantes :",
-          "problem": "le problème rencontré",
-          "question-number": "le numéro de la question (en haut à droite de l'écran)"
-        },
         "title": "Certification {certificationNumber}"
+      },
+      "certification-feedback-panel": {
+        "actions": {
+          "no-send-feedback": "Non, je reviens à l'épreuve",
+          "open-close": "Signaler un problème avec la question",
+          "send-feedback": "Oui, je suis sûr(e)"
+        },
+        "description": "Êtes-vous sûr(e) de vouloir signaler un problème ?",
+        "information": "En signalant un problème, votre certification est mise en pause le temps que le surveillant intervienne pour valider ou invalider votre signalement."
       },
       "embed-simulator": {
         "actions": {
@@ -1065,15 +1068,6 @@
           "content": "'<p><strong>'Êtes-vous certain de vouloir signaler ce problème ?'</strong></p><p>'Nous vous remercions pour votre signalement qui sera examiné attentivement par l'équipe de Pix. Nous prenons en compte tous vos commentaires pour améliorer continuellement nos services et l'expérience utilisateur. Nous ne pourrons pas vous donner de réponse personnalisée. Merci pour votre collaboration.'</p>'",
           "title": "Confirmation du signalement"
         }
-      },
-      "feedback-panel-v3": {
-        "actions": {
-          "no-send-feedback": "Non, je reviens à l'épreuve",
-          "open-close": "Signaler un problème avec la question",
-          "send-feedback": "Oui, je suis sûr(e)"
-        },
-        "description": "Êtes-vous sûr(e) de vouloir signaler un problème ?",
-        "information": "En signalant un problème, votre certification est mise en pause le temps que le surveillant intervienne pour valider ou invalider votre signalement."
       },
       "has-focused-out-of-window": {
         "certification": "Nous avons détecté un changement de page. Votre réponse sera comptée comme fausse. Si vous avez été contraint de changer de page, prévenez votre surveillant et répondez à la question en sa présence.",

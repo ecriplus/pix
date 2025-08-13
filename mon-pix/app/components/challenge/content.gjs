@@ -4,11 +4,10 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
 
 import AssessmentsLiveAlert from '../assessments/live-alert';
+import CertificationFeedbackPanel from '../certification-feedback-panel';
 import FeedbackPanel from '../feedback-panel';
-import FeedbackPanelV3 from '../feedback-panel-v3';
 import ChallengeItem from './item';
 
 export default class ChallengeContent extends Component {
@@ -46,8 +45,8 @@ export default class ChallengeContent extends Component {
 
       {{#unless @assessment.hasOngoingCompanionLiveAlert}}
         <div class="challenge__feedback" role="complementary">
-          {{#if (eq @assessment.certificationCourse.version 3)}}
-            <FeedbackPanelV3
+          {{#if @assessment.isCertification}}
+            <CertificationFeedbackPanel
               @submitLiveAlert={{@submitLiveAlert}}
               @assessment={{@assessment}}
               @isEnabled={{this.isLiveAlertButtonEnabled}}

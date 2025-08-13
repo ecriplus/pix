@@ -358,30 +358,6 @@ module('Integration | Component | feedback-panel', function (hooks) {
     });
   });
 
-  module('When assessment is of type certification', function () {
-    test('should display the feedback certification section', async function (assert) {
-      // given
-      const assessment = {
-        isCertification: true,
-      };
-      this.set('assessment', assessment);
-
-      const screen = await render(hbs`<FeedbackPanel @assessment={{this.assessment}} @context={{this.context}} />`);
-
-      // when
-      await click(screen.getByRole('button', { name: 'Signaler un problème avec la question' }));
-
-      // then
-      assert
-        .dom(
-          screen.getByText(
-            'Pour signaler un problème, appelez votre surveillant et communiquez-lui les informations suivantes :',
-          ),
-        )
-        .exists();
-    });
-  });
-
   module('When FeedbackPanel is rendered initially opened (e.g. in a comparison-window)', function () {
     test('should display the "form" view', async function (assert) {
       // given
