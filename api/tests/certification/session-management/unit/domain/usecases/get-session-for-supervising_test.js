@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 
 import { getSessionForSupervising } from '../../../../../../src/certification/session-management/domain/usecases/get-session-for-supervising.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const START_DATETIME_STUB = new Date('2022-10-01T13:00:00Z');
@@ -125,12 +124,12 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
             it("returns the session with the candidates' eligibility", async function () {
               // given
               const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+                complementaryCertificationKey: 'aKey',
                 complementaryCertificationBadgeLabel: 'une certif complémentaire',
               });
 
               const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-                key: ComplementaryCertificationKeys.CLEA,
+                key: 'aKey',
                 label: 'une certif complémentaire',
                 certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
               });
@@ -140,7 +139,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
                   domainBuilder.buildCertificationCandidateForSupervising({
                     userId: 1234,
                     startDateTime: START_DATETIME_STUB,
-                    enrolledComplementaryCertification: complementaryCertification,
+                    enrolledComplementaryCertification: null,
+                    enrolledDoubleCertification: complementaryCertification,
                     stillValidBadgeAcquisitions: [],
                   }),
                 ],
@@ -173,7 +173,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
                         DEFAULT_SESSION_DURATION_MINUTES,
                         COMPLEMENTARY_EXTRATIME_STUB,
                       ]),
-                      enrolledComplementaryCertification: complementaryCertification,
+                      enrolledDoubleCertification: complementaryCertification,
+                      enrolledComplementaryCertification: null,
                       stillValidBadgeAcquisitions: [stillValidBadgeAcquisition],
                     }),
                   ],
@@ -183,11 +184,11 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
 
             it('gets a theorical end datetime with extra time', async function () {
               const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+                complementaryCertificationKey: 'aKey',
               });
 
               const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-                key: ComplementaryCertificationKeys.CLEA,
+                key: 'aKey',
                 certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
               });
 
@@ -202,7 +203,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
                     domainBuilder.buildCertificationCandidateForSupervising({
                       userId: 1234,
                       startDateTime: START_DATETIME_STUB,
-                      enrolledComplementaryCertification: complementaryCertification,
+                      enrolledComplementaryCertification: null,
+                      enrolledDoubleCertification: complementaryCertification,
                       stillValidBadgeAcquisitions: [stillValidBadgeAcquisition],
                     }),
                   ],
@@ -237,7 +239,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
                   domainBuilder.buildCertificationCandidateForSupervising({
                     userId: 1234,
                     startDateTime: START_DATETIME_STUB,
-                    enrolledComplementaryCertification: complementaryCertification,
+                    enrolledComplementaryCertification: null,
+                    enrolledDoubleCertification: complementaryCertification,
                     stillValidBadgeAcquisitions: [],
                   }),
                 ],
@@ -267,7 +270,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
                       theoricalEndDateTime: expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
                         DEFAULT_SESSION_DURATION_MINUTES,
                       ]),
-                      enrolledComplementaryCertification: complementaryCertification,
+                      enrolledComplementaryCertification: null,
+                      enrolledDoubleCertification: complementaryCertification,
                       stillValidBadgeAcquisitions: [],
                     }),
                   ],

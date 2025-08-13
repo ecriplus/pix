@@ -18,6 +18,7 @@ export default class CertificationCandidateForSupervising extends Model {
   @attr('date') startDateTime;
   @attr('date') theoricalEndDateTime;
   @attr('string') enrolledComplementaryCertificationLabel;
+  @attr('string') enrolledDoubleCertificationLabel;
   @attr('string') userId;
   @attr('boolean') isStillEligibleToDoubleCertification;
   @attr() challengeLiveAlert;

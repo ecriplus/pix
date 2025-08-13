@@ -14,6 +14,7 @@ class CertificationCandidateForSupervising {
     startDateTime,
     theoricalEndDateTime,
     enrolledComplementaryCertification,
+    enrolledDoubleCertification,
     stillValidBadgeAcquisitions = [],
     accessibilityAdjustmentNeeded,
     challengeLiveAlert,
@@ -30,6 +31,7 @@ class CertificationCandidateForSupervising {
     this.startDateTime = startDateTime;
     this.theoricalEndDateTime = theoricalEndDateTime;
     this.enrolledComplementaryCertification = enrolledComplementaryCertification;
+    this.enrolledDoubleCertification = enrolledDoubleCertification;
     this.stillValidBadgeAcquisitions = stillValidBadgeAcquisitions;
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.challengeLiveAlert = challengeLiveAlert?.status ? challengeLiveAlert : null;
@@ -43,7 +45,7 @@ class CertificationCandidateForSupervising {
   get isStillEligibleToDoubleCertification() {
     return this.stillValidBadgeAcquisitions.some(
       (stillValidBadgeAcquisition) =>
-        stillValidBadgeAcquisition.complementaryCertificationKey === this.enrolledComplementaryCertification.key,
+        stillValidBadgeAcquisition.complementaryCertificationKey === this.enrolledDoubleCertification?.key,
     );
   }
 }

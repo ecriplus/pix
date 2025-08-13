@@ -2,6 +2,7 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../shared/domain/models/CertificationCompanionLiveAlert.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidateForSupervising } from '../../domain/models/CertificationCandidateForSupervising.js';
 import { ComplementaryCertificationForSupervising } from '../../domain/models/ComplementaryCertificationForSupervising.js';
 import { SessionForSupervising } from '../../domain/read-models/SessionForSupervising.js';
@@ -97,9 +98,18 @@ function _toDomainComplementaryCertification(complementaryCertification) {
 }
 
 function _buildCertificationCandidateForSupervising(candidateDto) {
+  if (candidateDto.complementaryCertification?.key === ComplementaryCertificationKeys.CLEA) {
+    return new CertificationCandidateForSupervising({
+      ...candidateDto,
+      enrolledDoubleCertification: _toDomainComplementaryCertification(candidateDto.complementaryCertification),
+      enrolledComplementaryCertification: null,
+    });
+  }
+
   return new CertificationCandidateForSupervising({
     ...candidateDto,
     enrolledComplementaryCertification: _toDomainComplementaryCertification(candidateDto.complementaryCertification),
+    enrolledDoubleCertification: null,
   });
 }
 

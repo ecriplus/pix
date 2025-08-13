@@ -1,3 +1,4 @@
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Certification Candidate for supervising', function () {
@@ -21,14 +22,14 @@ describe('Unit | Domain | Models | Certification Candidate for supervising', fun
       it('returns true', function () {
         // given
         const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-          key: 'aKey',
+          key: ComplementaryCertificationKeys.CLEA,
         });
 
         const certificationCandidateForSupervising = domainBuilder.buildCertificationCandidateForSupervising({
-          enrolledComplementaryCertification: complementaryCertification,
+          enrolledDoubleCertification: complementaryCertification,
           stillValidBadgeAcquisitions: [
             domainBuilder.buildCertifiableBadgeAcquisition({
-              complementaryCertificationKey: 'aKey',
+              complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
             }),
           ],
         });
@@ -46,7 +47,7 @@ describe('Unit | Domain | Models | Certification Candidate for supervising', fun
       it('returns false', function () {
         // given
         const certificationCandidateForSupervising = domainBuilder.buildCertificationCandidateForSupervising({
-          enrolledComplementaryCertification: null,
+          enrolledDoubleCertification: null,
           stillValidBadgeAcquisitions: [],
         });
 

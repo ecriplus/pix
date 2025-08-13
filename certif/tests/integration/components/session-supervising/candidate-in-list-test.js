@@ -16,10 +16,23 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
     store = this.owner.lookup('service:store');
   });
 
-  test('should render the enrolled complementary certification name of the candidate if he passes one', async function (assert) {
+  test('renders the enrolled complementary certification name of the candidate if he passes one', async function (assert) {
     this.candidate = store.createRecord('certification-candidate-for-supervising', {
       id: '123',
       enrolledComplementaryCertificationLabel: 'Super Certification Complémentaire',
+    });
+
+    // when
+    const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+    // then
+    assert.dom(screen.getByText('Inscription à Super Certification Complémentaire')).exists();
+  });
+
+  test('renders the double certification name of the candidate if he passes one', async function (assert) {
+    this.candidate = store.createRecord('certification-candidate-for-supervising', {
+      id: '123',
+      enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
     });
 
     // when
@@ -200,7 +213,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
 
   module('when the candidate is reconciliated before starting the session', function () {
     module('when the candidate is no longer eligible to the complementary certification', function () {
-      test('should render a warning message', async function (assert) {
+      test('does not render a warning message', async function (assert) {
         // given
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '123',
@@ -215,20 +228,44 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // then
         assert
           .dom(
+            screen.queryByText(
+              t('pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'),
+            ),
+          )
+          .doesNotExist();
+      });
+    });
+
+    module('when the candidate is no longer eligible to the double certification', function () {
+      test('renders a warning message', async function (assert) {
+        // given
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '123',
+          enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
+          userId: 678,
+          isStillEligibleToDoubleCertification: false,
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert
+          .dom(
             screen.getByText(
-              'Candidat pas ou plus éligible à la certification complémentaire. Il passe la certification Pix.',
+              t('pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'),
             ),
           )
           .exists();
       });
     });
 
-    module('when the candidate is still eligible to the complementary certification', function () {
-      test('should not render a warning message', async function (assert) {
+    module('when the candidate is still eligible to the double certification', function () {
+      test('does not render a warning message', async function (assert) {
         // given
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '123',
-          enrolledComplementaryCertificationLabel: 'Super Certification Complémentaire',
+          enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
           userId: 678,
           isStillEligibleToDoubleCertification: true,
         });
@@ -240,7 +277,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         assert
           .dom(
             screen.queryByText(
-              'Candidat pas ou plus éligible à la certification complémentaire. Il passe la certification Pix.',
+              t('pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'),
             ),
           )
           .doesNotExist();
@@ -249,11 +286,11 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
   });
 
   module('when the candidate is not reconciliated before starting the session', function () {
-    test('should not render a warning message', async function (assert) {
+    test('does not render a warning message', async function (assert) {
       // given
       this.candidate = store.createRecord('certification-candidate-for-supervising', {
         id: '123',
-        enrolledComplementaryCertificationLabel: 'Super Certification Complémentaire',
+        enrolledCertificationLabel: 'Super Certification Complémentaire',
         isStillEligibleToDoubleCertification: false,
       });
 
@@ -264,7 +301,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       assert
         .dom(
           screen.queryByText(
-            'Candidat pas ou plus éligible à la certification complémentaire. Il passe la certification Pix.',
+            t('pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning'),
           ),
         )
         .doesNotExist();
