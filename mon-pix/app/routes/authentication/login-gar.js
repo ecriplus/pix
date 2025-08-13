@@ -6,7 +6,8 @@ export default class LoginGarRoute extends Route {
   @service session;
 
   async beforeModel() {
-    const token = decodeURIComponent(Location.getLocationHash().slice(1));
+    const { hash } = new URL(Location.getLocationHref());
+    const token = decodeURIComponent(hash.slice(1));
     await this.session.authenticate('authenticator:gar', token);
   }
 }

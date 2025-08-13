@@ -51,7 +51,7 @@ module('Integration | Component | download-session-results', function (hooks) {
     // given
     fileSaver.save.resolves();
     const tokenHash = 'mytoken';
-    sinon.stub(Location, 'getLocationHash').returns(`#${tokenHash}`);
+    sinon.stub(Location, 'getLocationHref').returns(`https://test.pix.fr#${tokenHash}`);
 
     // when
     const screen = await render(hbs`<DownloadSessionResults />`);
