@@ -1,3 +1,5 @@
+import { isFranceLocale } from '../../../shared/domain/services/locale-service.js';
+import { getPixWebsiteDomain, getPixWebsiteUrl, getSupportUrl } from '../../../shared/domain/services/url-service.js';
 import { EmailFactory } from '../../../shared/mail/domain/models/EmailFactory.js';
 import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 
@@ -13,17 +15,17 @@ import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 export function createSelfDeleteUserAccountEmail({ locale, email, firstName }) {
   const factory = new EmailFactory({ app: 'pix-app', locale });
 
-  const { i18n, defaultVariables } = factory;
+  const { i18n } = factory;
 
   return factory.buildEmail({
     template: mailer.selfAccountDeletionTemplateId,
     subject: i18n.__('self-account-deletion-email.subject'),
     to: email,
     variables: {
-      homeName: defaultVariables.homeName,
-      homeUrl: defaultVariables.homeUrl,
-      helpdeskUrl: defaultVariables.helpdeskUrl,
-      displayNationalLogo: defaultVariables.displayNationalLogo,
+      homeName: getPixWebsiteDomain(locale),
+      homeUrl: getPixWebsiteUrl(locale),
+      helpdeskUrl: getSupportUrl(locale),
+      displayNationalLogo: isFranceLocale(locale),
       doNotAnswer: i18n.__('common.email.doNotAnswer'),
       moreOn: i18n.__('common.email.moreOn'),
       pixPresentation: i18n.__('common.email.pixPresentation'),
@@ -33,6 +35,7 @@ export function createSelfDeleteUserAccountEmail({ locale, email, firstName }) {
       seeYouSoon: i18n.__('self-account-deletion-email.params.seeYouSoon'),
       signing: i18n.__('self-account-deletion-email.params.signing'),
       warning: i18n.__('self-account-deletion-email.params.warning'),
+      contactUs: i18n.__('self-account-deletion-email.params.contactUs'),
     },
   });
 }

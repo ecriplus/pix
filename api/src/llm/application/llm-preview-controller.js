@@ -1,4 +1,4 @@
-import { config } from '../../shared/config.js';
+import { getPixAppUrl } from '../../shared/domain/services/url-service.js';
 import { ChatForbiddenError } from '../domain/errors.js';
 import { Configuration } from '../domain/models/Configuration.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -9,10 +9,8 @@ export const llmPreviewController = {
   async startChat(request, h) {
     const configuration = new Configuration(request.payload.configuration);
     const chat = await usecases.startChat({ configuration });
-    return h
-      .response()
-      .header('Location', new URL(`/llm/preview/${chat.id}`, `${config.domain.pixApp}${config.domain.tldFr}`).href)
-      .code(201);
+    const location = getPixAppUrl('fr-FR', { pathname: `/llm/preview/${chat.id}` });
+    return h.response().header('Location', location).code(201);
   },
 
   async getChat(request) {

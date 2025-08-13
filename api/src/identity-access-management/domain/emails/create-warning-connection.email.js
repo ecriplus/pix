@@ -1,5 +1,11 @@
-import { FRENCH_FRANCE } from '../../../shared/domain/services/locale-service.js';
-import { urlBuilder } from '../../../shared/infrastructure/utils/url-builder.js';
+import { FRENCH_FRANCE, isFranceLocale } from '../../../shared/domain/services/locale-service.js';
+import {
+  getEmailValidationUrl,
+  getPixAppUrl,
+  getPixWebsiteDomain,
+  getPixWebsiteUrl,
+  getSupportUrl,
+} from '../../../shared/domain/services/url-service.js';
 import { EmailFactory } from '../../../shared/mail/domain/models/EmailFactory.js';
 import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
 
@@ -13,35 +19,22 @@ import { mailer } from '../../../shared/mail/infrastructure/services/mailer.js';
  * @param {string} params.validationToken - The token for email validation.
  * @returns {Email} The email object.
  */
-export function createWarningConnectionEmail({ locale, email, firstName, validationToken }) {
-  locale = locale || FRENCH_FRANCE;
-  const lang = new Intl.Locale(locale).language;
-  let localeSupport;
-  if (locale.toLowerCase() === FRENCH_FRANCE) {
-    localeSupport = FRENCH_FRANCE;
-  } else {
-    localeSupport = lang;
-  }
+export function createWarningConnectionEmail({ locale = FRENCH_FRANCE, email, firstName, validationToken }) {
+  const factory = new EmailFactory({ app: 'pix-app', locale });
 
-  const factory = new EmailFactory({ app: 'pix-app', locale: localeSupport });
+  const { i18n } = factory;
 
-  const { i18n, defaultVariables } = factory;
-  const pixAppUrl = urlBuilder.getPixAppBaseUrl(locale);
-  const resetUrl = `${pixAppUrl}/mot-de-passe-oublie?lang=${lang}&email=${encodeURIComponent(email)}`;
+  const resetUrl = getPixAppUrl(locale, { pathname: `/mot-de-passe-oublie`, queryParams: { email } });
 
   return factory.buildEmail({
     template: mailer.warningConnectionTemplateId,
     subject: i18n.__('warning-connection-email.subject'),
     to: email,
     variables: {
-      homeName: defaultVariables.homeName,
-      homeUrl: defaultVariables.homeUrl,
-      helpDeskUrl: urlBuilder.getEmailValidationUrl({
-        locale: localeSupport,
-        redirectUrl: defaultVariables.helpdeskUrl,
-        token: validationToken,
-      }),
-      displayNationalLogo: defaultVariables.displayNationalLogo,
+      homeName: getPixWebsiteDomain(locale),
+      homeUrl: getPixWebsiteUrl(locale),
+      helpDeskUrl: getEmailValidationUrl({ locale, redirectUrl: getSupportUrl(locale), token: validationToken }),
+      displayNationalLogo: isFranceLocale(locale),
       contactUs: i18n.__('common.email.contactUs'),
       doNotAnswer: i18n.__('common.email.doNotAnswer'),
       moreOn: i18n.__('common.email.moreOn'),
@@ -51,11 +44,7 @@ export function createWarningConnectionEmail({ locale, email, firstName, validat
       disclaimer: i18n.__('warning-connection-email.params.disclaimer'),
       warningMessage: i18n.__('warning-connection-email.params.warningMessage'),
       resetMyPassword: i18n.__('warning-connection-email.params.resetMyPassword'),
-      resetUrl: urlBuilder.getEmailValidationUrl({
-        locale: localeSupport,
-        redirectUrl: resetUrl,
-        token: validationToken,
-      }),
+      resetUrl: getEmailValidationUrl({ locale, redirectUrl: resetUrl, token: validationToken }),
       supportContact: i18n.__('warning-connection-email.params.supportContact'),
       thanks: i18n.__('warning-connection-email.params.thanks'),
       signing: i18n.__('warning-connection-email.params.signing'),

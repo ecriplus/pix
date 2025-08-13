@@ -33,7 +33,6 @@ describe('Unit | Identity Access Management | Domain | Email | create-reset-pass
     expect(variables).to.have.property('title').that.is.a('string');
     expect(variables).to.have.property('weCannotSendYourPassword').that.is.a('string');
 
-    expect(variables.locale).to.equal(emailParams.locale);
     expect(variables.resetUrl).to.contain(emailParams.temporaryKey);
   });
 });

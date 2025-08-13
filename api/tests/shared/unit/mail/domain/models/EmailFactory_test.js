@@ -35,7 +35,7 @@ describe('Unit | Email | Domain | Models | EmailFactory', function () {
         to: 'recipient@domain.com',
         template: 'test-template',
         variables: {
-          homeName: emailFactory.defaultVariables.homeName,
+          homeName: 'pix.fr',
         },
       };
 
@@ -58,7 +58,7 @@ describe('Unit | Email | Domain | Models | EmailFactory', function () {
         to: 'recipient@domain.com',
         template: 'test-template',
         variables: {
-          homeName: emailFactory.defaultVariables.homeName,
+          homeName: 'pix.org',
         },
       };
 

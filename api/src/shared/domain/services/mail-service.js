@@ -1,21 +1,25 @@
 import * as translations from '../../../../translations/index.js';
-import { config } from '../../config.js';
-import { getEmailDefaultVariables } from '../../mail/domain/emails-default-variables.js';
 import { mailer } from '../../mail/infrastructure/services/mailer.js';
 import {
   DUTCH_SPOKEN,
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
+  isFranceLocale,
   SPANISH_SPOKEN,
 } from '../services/locale-service.js';
+import {
+  getPixAppUrl,
+  getPixCertifUrl,
+  getPixOrgaUrl,
+  getPixWebsiteDomain,
+  getPixWebsiteUrl,
+  getSupportUrl,
+} from './url-service.js';
 
 const EMAIL_ADDRESS_NO_RESPONSE = 'ne-pas-repondre@pix.fr';
 const EMAIL_VERIFICATION_CODE_TAG = 'EMAIL_VERIFICATION_CODE';
 const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
-
-// FRENCH_FRANCE
-const PIX_APP_URL_FRENCH_FRANCE = `${config.domain.pixApp + config.domain.tldFr}`;
 
 /**
  * @param email
@@ -34,21 +38,21 @@ function sendOrganizationInvitationEmail({
   locale = FRENCH_FRANCE,
   tags,
 }) {
-  const mailerConfig = _getMailerConfig(locale);
+  const mailerConfig = _getMailerTranslation(locale);
 
   const pixOrgaName = mailerConfig.translation['email-sender-name']['pix-orga'];
   const sendOrganizationInvitationEmailSubject = mailerConfig.translation['organization-invitation-email'].subject;
 
   const templateVariables = {
     organizationName,
-    pixHomeName: mailerConfig.homeName,
-    pixHomeUrl: mailerConfig.homeUrl,
-    pixOrgaHomeUrl: _formatUrlWithLocale(mailerConfig.pixOrgaHomeUrl, locale),
-    redirectionUrl: _formatUrlWithLocale(
-      `${mailerConfig.pixOrgaHomeUrl}/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
-      locale,
-    ),
-    supportUrl: mailerConfig.helpdeskUrl,
+    pixHomeName: getPixWebsiteDomain(locale),
+    pixHomeUrl: getPixWebsiteUrl(locale),
+    pixOrgaHomeUrl: getPixOrgaUrl(locale),
+    redirectionUrl: getPixOrgaUrl(locale, {
+      pathname: '/rejoindre',
+      queryParams: { invitationId: organizationInvitationId, code },
+    }),
+    supportUrl: getSupportUrl(locale),
     ...mailerConfig.translation['organization-invitation-email'].params,
   };
 
@@ -84,17 +88,19 @@ function sendScoOrganizationInvitationEmail({
   locale = FRENCH_FRANCE,
   tags,
 }) {
-  const mailerConfig = _getMailerConfig(locale);
+  const mailerConfig = _getMailerTranslation(locale);
 
   const templateVariables = {
     organizationName,
     firstName,
     lastName,
-    pixHomeName: mailerConfig.homeName,
-    pixHomeUrl: mailerConfig.homeUrl,
-    pixOrgaHomeUrl: mailerConfig.pixOrgaHomeUrl,
-    redirectionUrl: `${mailerConfig.pixOrgaHomeUrl}/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
-    locale,
+    pixHomeName: getPixWebsiteDomain(locale),
+    pixHomeUrl: getPixWebsiteUrl(locale),
+    pixOrgaHomeUrl: getPixOrgaUrl(locale),
+    redirectionUrl: getPixOrgaUrl(locale, {
+      pathname: '/rejoindre',
+      queryParams: { invitationId: organizationInvitationId, code },
+    }),
   };
 
   return mailer.sendEmail({
@@ -123,20 +129,20 @@ function sendCertificationCenterInvitationEmail({
   code,
   locale = FRENCH_FRANCE,
 }) {
-  const mailerConfig = _getMailerConfig(locale);
+  const mailerConfig = _getMailerTranslation(locale);
 
   const subject = mailerConfig.translation['certification-center-invitation-email'].subject;
   const fromName = mailerConfig.translation['email-sender-name']['pix-certif'];
   const templateVariables = {
     certificationCenterName,
-    pixHomeName: mailerConfig.homeName,
-    pixHomeUrl: mailerConfig.homeUrl,
-    pixCertifHomeUrl: _formatUrlWithLocale(mailerConfig.pixCertifHomeUrl, locale),
-    redirectionUrl: _formatUrlWithLocale(
-      `${mailerConfig.pixCertifHomeUrl}/rejoindre?invitationId=${certificationCenterInvitationId}&code=${code}`,
-      locale,
-    ),
-    supportUrl: mailerConfig.helpdeskUrl,
+    pixHomeName: getPixWebsiteDomain(locale),
+    pixHomeUrl: getPixWebsiteUrl(locale),
+    pixCertifHomeUrl: getPixCertifUrl(locale),
+    redirectionUrl: getPixCertifUrl(locale, {
+      pathname: '/rejoindre',
+      queryParams: { invitationId: certificationCenterInvitationId, code },
+    }),
+    supportUrl: getSupportUrl(locale),
     ...mailerConfig.translation['certification-center-invitation-email'].params,
   };
 
@@ -157,13 +163,13 @@ function sendCertificationCenterInvitationEmail({
  * @returns {Promise<EmailingAttempt>}
  */
 function sendAccountRecoveryEmail({ email, firstName, temporaryKey }) {
-  const mailerConfig = _getMailerConfig(FRENCH_FRANCE);
+  const mailerConfig = _getMailerTranslation(FRENCH_FRANCE);
   const fromName = mailerConfig.translation['email-sender-name']['pix-app'];
-  const redirectionUrl = `${PIX_APP_URL_FRENCH_FRANCE}/recuperer-mon-compte/${temporaryKey}`;
+  const redirectionUrl = getPixAppUrl(FRENCH_FRANCE, { pathname: `/recuperer-mon-compte/${temporaryKey}` });
   const templateVariables = {
     firstName,
     redirectionUrl,
-    homeName: mailerConfig.homeName,
+    homeName: getPixWebsiteDomain(FRENCH_FRANCE),
     ...mailerConfig.translation['account-recovery-email'].params,
   };
 
@@ -186,7 +192,7 @@ function sendAccountRecoveryEmail({ email, firstName, temporaryKey }) {
  * @returns {Promise<EmailingAttempt>}
  */
 function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE, translate }) {
-  const mailerConfig = _getMailerConfig(locale);
+  const mailerConfig = _getMailerTranslation(locale);
 
   const options = {
     from: EMAIL_ADDRESS_NO_RESPONSE,
@@ -203,9 +209,9 @@ function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE, transl
     ),
     variables: {
       code,
-      homeName: mailerConfig.homeName,
-      homeUrl: mailerConfig.homeUrl,
-      displayNationalLogo: mailerConfig.displayNationalLogo,
+      homeName: getPixWebsiteDomain(locale),
+      homeUrl: getPixWebsiteUrl(locale),
+      displayNationalLogo: isFranceLocale(locale),
       ...mailerConfig.translation['verification-code-email'].body,
     },
   };
@@ -225,27 +231,8 @@ function sendCpfEmail({ email, generatedFiles }) {
   return mailer.sendEmail(options);
 }
 
-function sendNotificationToOrganizationMembersForTargetProfileDetached({ email, complementaryCertificationName }) {
-  const options = {
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: translations.fr['email-sender-name']['pix-app'],
-    to: email,
-    template: mailer.targetProfileNotCertifiableTemplateId,
-    variables: { complementaryCertificationName },
-  };
-
-  return mailer.sendEmail(options);
-}
-
 /**
  * @typedef {Object} mailerConfig
- * @property {string} homeName
- * @property {string} homeUrl
- * @property {string} pixOrgaHomeUrl
- * @property {string} pixCertifHomeUrl
- * @property {string} pixAppConnectionUrl
- * @property {string} helpdeskUrl
- * @property {boolean} displayNationalLogo
  * @property {JSON} translation
  */
 
@@ -254,40 +241,20 @@ function sendNotificationToOrganizationMembersForTargetProfileDetached({ email, 
  * @returns {mailerConfig}
  * @private
  */
-function _getMailerConfig(locale) {
-  const defaultVariables = getEmailDefaultVariables(locale);
-
+function _getMailerTranslation(locale) {
   switch (locale) {
     case FRENCH_SPOKEN:
     case SPANISH_SPOKEN:
     case ENGLISH_SPOKEN:
     case DUTCH_SPOKEN:
       return {
-        ...defaultVariables,
         translation: translations[locale],
       };
     default:
       return {
-        ...defaultVariables,
         translation: translations.fr,
       };
   }
-}
-
-/**
- * @param url
- * @param locale
- * @returns {string}
- * @private
- */
-function _formatUrlWithLocale(url, locale) {
-  const formattedUrl = new URL(url);
-
-  if (locale !== FRENCH_FRANCE) {
-    formattedUrl.searchParams.set('lang', locale);
-  }
-
-  return formattedUrl.toString();
 }
 
 const mailService = {
@@ -297,7 +264,6 @@ const mailService = {
   sendCertificationCenterInvitationEmail,
   sendVerificationCodeEmail,
   sendCpfEmail,
-  sendNotificationToOrganizationMembersForTargetProfileDetached,
 };
 
 /**
@@ -305,7 +271,6 @@ const mailService = {
  * @property {function} sendAccountRecoveryEmail
  * @property {function} sendCertificationCenterInvitationEmail
  * @property {function} sendCpfEmail
- * @property {function} sendNotificationToOrganizationMembersForTargetProfileDetached
  * @property {function} sendOrganizationInvitationEmail
  * @property {function} sendScoOrganizationInvitationEmail
  * @property {function} sendVerificationCodeEmail
@@ -315,7 +280,6 @@ export {
   sendAccountRecoveryEmail,
   sendCertificationCenterInvitationEmail,
   sendCpfEmail,
-  sendNotificationToOrganizationMembersForTargetProfileDetached,
   sendOrganizationInvitationEmail,
   sendScoOrganizationInvitationEmail,
   sendVerificationCodeEmail,

@@ -1,4 +1,4 @@
-import { config } from '../../../shared/config.js';
+import { getPixAppConnexionUrl } from '../../../shared/domain/services/url-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 
 /**
@@ -45,5 +45,5 @@ export const validateUserAccountEmail = async ({
 };
 
 function _getRedirectionUrl(redirectUrl) {
-  return redirectUrl || `${config.domain.pixApp + config.domain.tldFr}/connexion`;
+  return redirectUrl || getPixAppConnexionUrl('fr-FR');
 }
