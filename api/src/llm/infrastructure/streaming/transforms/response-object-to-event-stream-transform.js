@@ -8,8 +8,12 @@ export function getTransform(streamCapture) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
-      const { message, isValid, usage, wasModerated } = chunk;
+      const { message, isValid, usage, wasModerated, ping } = chunk;
       let data = '';
+
+      if (ping) {
+        data += getPingEvent();
+      }
 
       if (isValid) {
         streamCapture.haveVictoryConditionsBeenFulfilled = true;
@@ -48,4 +52,8 @@ function getVictoryConditionsSuccessEvent() {
 
 function getMessageModeratedEvent() {
   return 'event: user-message-moderated\ndata: \n\n';
+}
+
+function getPingEvent() {
+  return 'event: ping\ndata: \n\n';
 }
