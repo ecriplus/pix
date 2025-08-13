@@ -7,9 +7,10 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 export const saveCertificationScoringConfiguration = withTransaction(
   /**
    * @param {Object} params
+   * @param {Object} params.configuration
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
    */
-  async ({ data, scoringConfigurationRepository }) => {
-    return scoringConfigurationRepository.saveCertificationScoringConfiguration({ configuration: data });
+  async ({ configuration, scoringConfigurationRepository }) => {
+    return scoringConfigurationRepository.saveCertificationScoringConfiguration({ configuration });
   },
 );
