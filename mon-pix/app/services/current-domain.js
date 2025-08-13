@@ -1,12 +1,10 @@
-import Service, { service } from '@ember/service';
+import Service from '@ember/service';
 import last from 'lodash/last';
 import Location from 'mon-pix/utils/location';
 
 const FRANCE_TLD = 'fr';
 
 export default class CurrentDomainService extends Service {
-  @service location;
-
   getExtension() {
     return last(Location.getLocationHostname().split('.'));
   }
@@ -16,7 +14,7 @@ export default class CurrentDomainService extends Service {
   }
 
   get domain() {
-    const { host, hostname } = new URL(this.location.href);
+    const { host, hostname } = new URL(Location.getLocationHref());
 
     if (this.isLocalhost) return hostname;
 

@@ -183,7 +183,4 @@ function _stubWindowUrl(owner, url) {
   sinon.stub(Location, 'getLocationHref').returns(newUrl.href);
   sinon.stub(Location, 'reload');
   sinon.stub(Location, 'replace');
-
-  const locationService = owner.lookup('service:location');
-  sinon.stub(locationService, 'href').value(url);
 }
