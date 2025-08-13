@@ -15,617 +15,623 @@
     ],
     "tabletSupport": "obstructed"
   },
-  "grains": [
+  "sections": [
     {
-      "id": "106d2893-c04e-450c-acab-a85aa04d71ed",
-      "type": "transition",
-      "title": "",
-      "components": [
+      "id": "6ca1620e-846d-4a19-98b8-5ce20b84123d",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "a962681c-b603-4693-bd2f-fc5e3a36708c",
-            "type": "text",
-            "content": "<p>Vous avez peut-être déjà voulu trier les données d’un tableau à partir de plusieurs critères. Pour cela, il faut faire un tri multicritères. <br>Découvrons avec des exemples les cas où le tri multicritère est utile 👇</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "cffecfef-01d5-4ae5-839e-40752fe60017",
-      "type": "discovery",
-      "title": "Tri multicritère, filtre ou tri simple",
-      "components": [
+          "id": "106d2893-c04e-450c-acab-a85aa04d71ed",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a962681c-b603-4693-bd2f-fc5e3a36708c",
+                "type": "text",
+                "content": "<p>Vous avez peut-être déjà voulu trier les données d’un tableau à partir de plusieurs critères. Pour cela, il faut faire un tri multicritères. <br>Découvrons avec des exemples les cas où le tri multicritère est utile 👇</p>"
+              }
+            }
+          ]
+        },
         {
-          "type": "stepper",
-          "steps": [
+          "id": "cffecfef-01d5-4ae5-839e-40752fe60017",
+          "type": "discovery",
+          "title": "Tri multicritère, filtre ou tri simple",
+          "components": [
             {
-              "elements": [
+              "type": "stepper",
+              "steps": [
                 {
-                  "id": "1d9be377-24ae-49c6-8adc-980fd0e931e0",
-                  "type": "text",
-                  "content": "<p>Sarah a organisé un évènement pour des enfants. Voici le tableau qui présente leurs résultats aux 3 épreuves.</p>"
+                  "elements": [
+                    {
+                      "id": "1d9be377-24ae-49c6-8adc-980fd0e931e0",
+                      "type": "text",
+                      "content": "<p>Sarah a organisé un évènement pour des enfants. Voici le tableau qui présente leurs résultats aux 3 épreuves.</p>"
+                    },
+                    {
+                      "id": "f71cc4ee-e90c-43dc-ade2-2f94cc7a9444",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/SpFqjX9.jpeg",
+                      "alt": "Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.",
+                      "alternativeText": "<p>Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.</p>"
+                    },
+                    {
+                      "id": "eff4694f-d2a9-48f1-846d-9c9f88acccfa",
+                      "type": "text",
+                      "content": "<p><span aria-hidden=\"true\">🕹️</span> À vous de jouer&#8239;!</p><p>Dans chacune des situations suivantes, choisissez l’action adaptée entre&nbsp;:</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>un filtre,</li><li>un tri multicritère.</li></ul>"
+                    }
+                  ]
                 },
                 {
-                  "id": "f71cc4ee-e90c-43dc-ade2-2f94cc7a9444",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/SpFqjX9.jpeg",
-                  "alt": "Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.",
-                  "alternativeText": "<p>Feuille de calcul avec un tableau à 6 colonnes. Chaque ligne représente un enfant : son prénom, son nom, son équipe, le temps réalisé à la course d'orientation, le score aux fléchettes et la réponse apportée au quiz.</p>"
+                  "elements": [
+                    {
+                      "id": "5f84a71d-a48f-4746-8a9a-2f25d8340ad4",
+                      "type": "qcu",
+                      "instruction": "<p>Sarah souhaite afficher les enfants alphabétiquement par nom.</p><p>Que doit-elle appliquer&#8239;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Un tri à un critère</p>",
+                          "feedback": {
+                            "state": "Bonne réponse !",
+                            "diagnosis": "<p>Le tri doit être fait sur un seul critère : le nom des enfants.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Un filtre</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Un filtre ne permet par d’organiser le tableau, il permet d’afficher ou non une sélection d'enfants.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Un tri multicritère</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Un seul critère est en jeu dans cette situation : le nom des enfants.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
                 },
                 {
-                  "id": "eff4694f-d2a9-48f1-846d-9c9f88acccfa",
-                  "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">🕹️</span> À vous de jouer&#8239;!</p><p>Dans chacune des situations suivantes, choisissez l’action adaptée entre&nbsp;:</p><ul><li>un tri à un critère (sur une colonne uniquement),</li><li>un filtre,</li><li>un tri multicritère.</li></ul>"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "5f84a71d-a48f-4746-8a9a-2f25d8340ad4",
-                  "type": "qcu",
-                  "instruction": "<p>Sarah souhaite afficher les enfants alphabétiquement par nom.</p><p>Que doit-elle appliquer&#8239;?</p>",
-                  "proposals": [
+                  "elements": [
                     {
-                      "id": "1",
-                      "content": "<p>Un tri à un critère</p>",
-                      "feedback": {
-                        "state": "Bonne réponse !",
-                        "diagnosis": "<p>Le tri doit être fait sur un seul critère : le nom des enfants.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>Un filtre</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Un filtre ne permet par d’organiser le tableau, il permet d’afficher ou non une sélection d'enfants.</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>Un tri multicritère</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Un seul critère est en jeu dans cette situation : le nom des enfants.</p>"
-                      }
+                      "id": "01e76883-2f58-4ba2-8d4e-3cee40660c65",
+                      "type": "qcu",
+                      "instruction": "<p>Sarah veut afficher les scores d'une seule équipe. </p><p>Que doit-elle appliquer&#8239;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Un tri à un critère</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Le tri simple va permettre de regrouper les élèves par équipe, mais l’ensemble des enfants resteront affichés.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Un filtre</p>",
+                          "feedback": {
+                            "state": "Bonne réponse !",
+                            "diagnosis": "<p>Filtrer sur la colonne « Équipe » lui permettra d’afficher seulement les enfants de l'équipe de son choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Un tri multicritère</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Le tri multicritère peut permettre de regrouper les enfants par équipe et par score, mais l’ensemble des enfants resteront affichés.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
-                  ],
-                  "solution": "1"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "01e76883-2f58-4ba2-8d4e-3cee40660c65",
-                  "type": "qcu",
-                  "instruction": "<p>Sarah veut afficher les scores d'une seule équipe. </p><p>Que doit-elle appliquer&#8239;?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>Un tri à un critère</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Le tri simple va permettre de regrouper les élèves par équipe, mais l’ensemble des enfants resteront affichés.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>Un filtre</p>",
-                      "feedback": {
-                        "state": "Bonne réponse !",
-                        "diagnosis": "<p>Filtrer sur la colonne « Équipe » lui permettra d’afficher seulement les enfants de l'équipe de son choix.</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>Un tri multicritère</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Le tri multicritère peut permettre de regrouper les enfants par équipe et par score, mais l’ensemble des enfants resteront affichés.</p>"
-                      }
-                    }
-                  ],
-                  "solution": "2"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "a98472e5-2500-4a1c-99b9-a62cccb0015c",
-                  "type": "qcu",
-                  "instruction": "<p> Sarah veut réorganiser le tableau pour obtenir un classement des participants en prenant en compte l’ensemble de leurs résultats (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer&#8239;?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>Un tri à un critère</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Le tri simple peut ordonner les résultats des enfants pour une épreuve, mais il ne permet pas d’établir un classement prenant en compte les trois épreuves.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>Un filtre</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Filtrer ici ne permettrait pas d’afficher un classement, mais de restreindre l’affichage à certains scores.</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>Un tri multicritère</p>",
-                      "feedback": {
-                        "state": "Bonne réponse&#8239;!",
-                        "diagnosis": "<p>Plusieurs critères vont permettre de faire le classement final, le tri multicritère est donc recommandé.</p>"
-                      }
-                    }
-                  ],
-                  "solution": "3"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "3be17733-617d-4b6b-8a48-af3d3aaa636d",
-                  "type": "text",
-                  "content": "<p>Voici comment distinguer le tri multicritère du filtre et du tri sur une seule colonne.</p>"
+                  ]
                 },
                 {
-                  "id": "f37f93e5-8b78-40b1-9628-1b07e49de08d",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/0dvoxXo.jpeg",
-                  "alt": "",
-                  "alternativeText": "<p>Infographie des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre, pour afficher seulement certaines lignes.</li><li>Tri croissant et Tri décroissant, pour trier le tableau sur une seule colonne.</li><li>Tri multicritère, pour trier le tableau sur plusieurs colonnes.</li></ul>"
+                  "elements": [
+                    {
+                      "id": "a98472e5-2500-4a1c-99b9-a62cccb0015c",
+                      "type": "qcu",
+                      "instruction": "<p> Sarah veut réorganiser le tableau pour obtenir un classement des participants en prenant en compte l’ensemble de leurs résultats (orientation, fléchettes, quiz). </p><p>Que doit-elle appliquer&#8239;?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Un tri à un critère</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Le tri simple peut ordonner les résultats des enfants pour une épreuve, mais il ne permet pas d’établir un classement prenant en compte les trois épreuves.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Un filtre</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Filtrer ici ne permettrait pas d’afficher un classement, mais de restreindre l’affichage à certains scores.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Un tri multicritère</p>",
+                          "feedback": {
+                            "state": "Bonne réponse&#8239;!",
+                            "diagnosis": "<p>Plusieurs critères vont permettre de faire le classement final, le tri multicritère est donc recommandé.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3be17733-617d-4b6b-8a48-af3d3aaa636d",
+                      "type": "text",
+                      "content": "<p>Voici comment distinguer le tri multicritère du filtre et du tri sur une seule colonne.</p>"
+                    },
+                    {
+                      "id": "f37f93e5-8b78-40b1-9628-1b07e49de08d",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/0dvoxXo.jpeg",
+                      "alt": "",
+                      "alternativeText": "<p>Infographie des options de filtre et de tri dans les logiciel de tableurs :</p><ul><li>Filtre, pour afficher seulement certaines lignes.</li><li>Tri croissant et Tri décroissant, pour trier le tableau sur une seule colonne.</li><li>Tri multicritère, pour trier le tableau sur plusieurs colonnes.</li></ul>"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "9b5aa9e9-0016-4bc4-9122-10caa862a634",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "216c3b36-9ccd-4d47-a0fe-0c4bff845de8",
-            "type": "text",
-            "content": "<p>Pour réaliser un tri multicritère, les raccourcis de tri disponible sur l'en-tête de chaque colonne sont insuffisants.&nbsp;❌<br>Reprenons le cas du tableau de Sarah qui organise un grand jeu pour enfant et découvrez comment y appliquer un tri à plusieurs critères dans la vidéo suivante. 📺</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "52abc272-638f-48b1-900b-4dd2635bf9a7",
-      "type": "lesson",
-      "title": "Démonstration de tri multicritère",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "2d5100b3-7aad-4f95-969f-ae083361834d",
-            "type": "text",
-            "content": "<p>À la suite de cette vidéo, vous devrez appliquer un tri sur plusieurs colonnes dans un tableau.</p>"
-          }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "8707010a-2068-470f-a007-77f0e82005c1",
-            "type": "video",
-            "title": "Appliquer un tri multicritère dans un tableau",
-            "url": "https://assets.pix.org/modules/tri-multicritere-tableau/appliquer-un-tri-multicritere-dans-un-tableau.mp4",
-            "poster": "https://assets.pix.org/modules/tri-multicritere-tableau/appliquer-un-tri-multicritere-dans-un-tableau.jpg",
-            "subtitles": "",
-            "transcription": ""
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "a9911b60-31ba-48e0-8b32-f0dacc5befee",
-            "type": "text",
-            "content": "<p><em>Le logiciel utilisé dans cette vidéo est LibreOffice.</em></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "784fb1f2-8eed-4d49-95fb-e22984cc245a",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "eaaf4ff2-633f-4c6d-9016-9b9bb9e0fa3d",
-            "type": "text",
-            "content": "<p>Maintenant, à vous de jouer. Vous allez aider Sarah à réaliser le classement individuel de son grand jeu. Pour cela, vous allez réaliser un tri multicritère. </p><p>À vos marques, prêts, partez ! 🏃🏽‍♀️🏃‍♂️</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "257fa8da-a5f7-4dc7-8c42-f562f6c3d6ef",
-      "type": "activity",
-      "title": "Création d’un premier tri à 2 critères",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "9a6bb28f-563f-420f-9ea8-767e25af815b",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">📋</span> Sarah veut établir le classement des épreuves individuelles, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura le meilleur score aux fléchettes. <br>En cas d’ex æquo, on choisira le meilleur résultat au quiz.</em></blockquote>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "daf2f3dd-3b57-4d0a-a696-c6ef97a145d0",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "a0e426fd-ebcb-4b3f-90bd-bf34d682f3bd",
-            "type": "text",
-            "content": "<p>Téléchargez le fichier ci-dessous</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "0a4b543c-2e5c-45b2-a9d8-6cb6dfff8057",
-            "type": "download",
-            "files": [
-              {
-                "url": "https://dl.pix.fr/1733409605790/GWQOXGHJXY.ods",
-                "format": "ods"
-              },
-              {
-                "url": "https://dl.pix.fr/1733409605434/WYQWNRJXUQ.xlsx",
-                "format": "xlsx"
-              }
-            ]
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "52f7cabc-4752-41d0-8931-132d19ca34c4",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "2ed017f2-4c7e-4f64-b0d9-59cfcd9f3e38",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">👉</span> Appliquez le tri multicritère suivant&nbsp;:</p><ul><li>critère 1&nbsp;: par ordre <strong>décroissant</strong> de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2&nbsp;: par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "47e998c8-58a9-4c56-be09-1ca94a6afada",
-            "type": "qrocm",
-            "instruction": "<p>Qui est arrivé deuxième et quel est le lot offert aux vainqueurs ?</p>",
-            "proposals": [
-              {
+          "id": "9b5aa9e9-0016-4bc4-9122-10caa862a634",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "216c3b36-9ccd-4d47-a0fe-0c4bff845de8",
                 "type": "text",
-                "content": "<p>Le deuxième au classement est</p>"
-              },
-              {
-                "input": "prenom-activite",
-                "type": "input",
-                "inputType": "text",
-                "size": 12,
-                "display": "inline",
-                "placeholder": "prénom",
-                "ariaLabel": "écrivez le prénom ici",
-                "defaultValue": "",
-                "tolerances": ["t3"],
-                "solutions": ["emma"]
-              },
-              {
-                "type": "text",
-                "content": "<p>Les vainqueurs remportent une</p>"
-              },
-              {
-                "input": "lot-activite",
-                "type": "input",
-                "inputType": "text",
-                "size": 12,
-                "display": "inline",
-                "placeholder": "lot",
-                "ariaLabel": "écrivez le lot ici",
-                "defaultValue": "",
-                "tolerances": ["t3"],
-                "solutions": ["glace", "glaces"]
-              }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "Correct !",
-                "diagnosis": "<p>Vous avez obtenu le classement des meilleurs tireurs aux fléchettes et parmi eux, ceux qui ont aussi réussi le quiz.</p><p>En inversant l’ordre de ce tri, le classement aurait été différent.</p>"
-              },
-              "invalid": {
-                "state": "Mauvaise réponse.",
-                "diagnosis": "<p>Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.</p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider <span aria-hidden=\"true\">👆</span></p>"
+                "content": "<p>Pour réaliser un tri multicritère, les raccourcis de tri disponible sur l'en-tête de chaque colonne sont insuffisants.&nbsp;❌<br>Reprenons le cas du tableau de Sarah qui organise un grand jeu pour enfant et découvrez comment y appliquer un tri à plusieurs critères dans la vidéo suivante. 📺</p>"
               }
             }
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><img src=\"https://assets.pix.org/draft/modules/88.125.115.216-67530fa7a5525.gif\" alt=\"\" /></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "a1d3c0a0-d331-4d76-99ca-ec467da78afe",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "538cfc41-cf44-4a4f-9bcb-da4ddd18043f",
-            "type": "text",
-            "content": "<p>Vous savez désormais réaliser un tri sur deux critères.<br><br> Avant de réaliser un tri avancé sur encore plus de critères, découvrez quelques bonnes pratiques et astuces pour trier plus facilement vos tableaux. 🏆</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "6c869b4c-d44e-462b-98e2-21d063dfecda",
-      "type": "lesson",
-      "title": "Astuces pratiques de tri",
-      "components": [
-        {
-          "type": "stepper",
-          "steps": [
+          "id": "52abc272-638f-48b1-900b-4dd2635bf9a7",
+          "type": "lesson",
+          "title": "Démonstration de tri multicritère",
+          "components": [
             {
-              "elements": [
-                {
-                  "id": "05a44b3d-1c77-49fc-bab9-65e5f20c3d38",
-                  "type": "text",
-                  "content": "<p><strong>Une option permet de reconnaître les en-têtes ou étiquettes de colonnes.</strong> </p><p>Si les en-têtes de votre tableau sont correctement remplies, la plupart des logiciels les détectent automatiquement.&nbsp;</p><p>Cette option s’appelle « <span aria-hidden=\"true\">☑️</span> Mes données ont des en-têtes » ou « <span aria-hidden=\"true\">☑️</span> La plage contient des étiquettes de colonne ».&nbsp;</p><p>Avec une détection automatique, elle sera déjà cochée. Vous pouvez aussi la cocher manuellement <span aria-hidden=\"true\">👇</span></p>"
-                },
-                {
-                  "id": "f5142469-61c8-422e-9c26-5f408ce33992",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/xxKAMeR.gif",
-                  "alt": "",
-                  "alternativeText": "<p>Gif animé. Quand la case « La plage contient des étiquettes de colonne » n'est pas cochée, les colonnes proposées dans la liste déroulante sont A, B, C, etc. Quand la case est cochée, la liste déroulante propose les étiquettes de colonnes « Prénom », « Nom », « Equipe », etc.</p>"
-                },
-                {
-                  "id": "76563c87-ea9e-44d5-acbf-ad78a6da4220",
-                  "type": "text",
-                  "content": "<p><span aria-hidden=\"true\">⚠️</span> Si cette case n’est pas cochée, mais que votre tableau a des en-têtes, elles seront considérées comme des données à trier.</p>"
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "2d5100b3-7aad-4f95-969f-ae083361834d",
+                "type": "text",
+                "content": "<p>À la suite de cette vidéo, vous devrez appliquer un tri sur plusieurs colonnes dans un tableau.</p>"
+              }
             },
             {
-              "elements": [
-                {
-                  "id": "b8c69ed0-7388-4197-a700-19126f4c91d2",
-                  "type": "text",
-                  "content": "<p><strong>La sensibilité à la casse.</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensible à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. <span aria-hidden=\"true\">🔠</span></p>"
-                },
-                {
-                  "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/DJdRtpA.jpeg",
-                  "alt": "",
-                  "alternativeText": ""
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "8707010a-2068-470f-a007-77f0e82005c1",
+                "type": "video",
+                "title": "Appliquer un tri multicritère dans un tableau",
+                "url": "https://assets.pix.org/modules/tri-multicritere-tableau/appliquer-un-tri-multicritere-dans-un-tableau.mp4",
+                "poster": "https://assets.pix.org/modules/tri-multicritere-tableau/appliquer-un-tri-multicritere-dans-un-tableau.jpg",
+                "subtitles": "",
+                "transcription": ""
+              }
             },
             {
-              "elements": [
+              "type": "element",
+              "element": {
+                "id": "a9911b60-31ba-48e0-8b32-f0dacc5befee",
+                "type": "text",
+                "content": "<p><em>Le logiciel utilisé dans cette vidéo est LibreOffice.</em></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "784fb1f2-8eed-4d49-95fb-e22984cc245a",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "eaaf4ff2-633f-4c6d-9016-9b9bb9e0fa3d",
+                "type": "text",
+                "content": "<p>Maintenant, à vous de jouer. Vous allez aider Sarah à réaliser le classement individuel de son grand jeu. Pour cela, vous allez réaliser un tri multicritère. </p><p>À vos marques, prêts, partez ! 🏃🏽‍♀️🏃‍♂️</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "257fa8da-a5f7-4dc7-8c42-f562f6c3d6ef",
+          "type": "activity",
+          "title": "Création d’un premier tri à 2 critères",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9a6bb28f-563f-420f-9ea8-767e25af815b",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">📋</span> Sarah veut établir le classement des épreuves individuelles, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura le meilleur score aux fléchettes. <br>En cas d’ex æquo, on choisira le meilleur résultat au quiz.</em></blockquote>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "daf2f3dd-3b57-4d0a-a696-c6ef97a145d0",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a0e426fd-ebcb-4b3f-90bd-bf34d682f3bd",
+                "type": "text",
+                "content": "<p>Téléchargez le fichier ci-dessous</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0a4b543c-2e5c-45b2-a9d8-6cb6dfff8057",
+                "type": "download",
+                "files": [
+                  {
+                    "url": "https://dl.pix.fr/1733409605790/GWQOXGHJXY.ods",
+                    "format": "ods"
+                  },
+                  {
+                    "url": "https://dl.pix.fr/1733409605434/WYQWNRJXUQ.xlsx",
+                    "format": "xlsx"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "52f7cabc-4752-41d0-8931-132d19ca34c4",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2ed017f2-4c7e-4f64-b0d9-59cfcd9f3e38",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">👉</span> Appliquez le tri multicritère suivant&nbsp;:</p><ul><li>critère 1&nbsp;: par ordre <strong>décroissant</strong> de<strong> Score aux fléchettes</strong>&nbsp;</li><li>critère 2&nbsp;: par ordre <strong>croissant </strong>de <strong>Réponse au quiz</strong></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "47e998c8-58a9-4c56-be09-1ca94a6afada",
+                "type": "qrocm",
+                "instruction": "<p>Qui est arrivé deuxième et quel est le lot offert aux vainqueurs ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Le deuxième au classement est</p>"
+                  },
+                  {
+                    "input": "prenom-activite",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "prénom",
+                    "ariaLabel": "écrivez le prénom ici",
+                    "defaultValue": "",
+                    "tolerances": ["t3"],
+                    "solutions": ["emma"]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>Les vainqueurs remportent une</p>"
+                  },
+                  {
+                    "input": "lot-activite",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "lot",
+                    "ariaLabel": "écrivez le lot ici",
+                    "defaultValue": "",
+                    "tolerances": ["t3"],
+                    "solutions": ["glace", "glaces"]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Correct !",
+                    "diagnosis": "<p>Vous avez obtenu le classement des meilleurs tireurs aux fléchettes et parmi eux, ceux qui ont aussi réussi le quiz.</p><p>En inversant l’ordre de ce tri, le classement aurait été différent.</p>"
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "<p>Avez-vous bien utilisé un tri multicritère ?&nbsp; Vérifiez également l’ordre de vos critères de tri.</p><p>Pour réussir, utilisez les indices ci-dessous ou regardez à nouveau la vidéo pour vous aider <span aria-hidden=\"true\">👆</span></p>"
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "82815beb-6dc8-4caf-8c26-2454ffde5458",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>En fonction de votre logiciel, le vocabulaire de tri peut être différent :</p><ul><li>La fenêtre peut s’appeler «&nbsp;Trier&nbsp;», «&nbsp;Tri personnalisé&nbsp;» ou «&nbsp;Options avancées de tri&nbsp;».</li><li>Un critère de tri peut aussi s’appeler «&nbsp;Clé de tri&nbsp;» ou «&nbsp;Niveau de tri&nbsp;».</li><li>«&nbsp;Croissant&nbsp;» peut être écrit «&nbsp;Du plus petit au plus grand&nbsp;» ou «&nbsp;A-Z&nbsp;».</li></ul></details><details><summary>Indice 2</summary><p>Pour ouvrir la fenêtre de tri sur le logiciel LibreOffice, voici la manipulation à effectuer</p><img src=\"https://assets.pix.org/draft/modules/88.125.115.216-67530fa7a5525.gif\" alt=\"\" /></details><details><summary>Indice 3</summary><ul><li>Commencez par sélectionner «&nbsp;<strong>Score aux fléchettes</strong>&nbsp;» dans votre premier critère de tri. Attribuez-lui un classement <strong>«&nbsp;Décroissant&nbsp;»</strong>.</li><li>Puis, sélectionnez <strong>«&nbsp;Réponse au quiz&nbsp;»</strong> dans votre second critère de tri. Attribuez-lui le classement <strong>«&nbsp;Croissant&nbsp;»</strong> </li></ul></details>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a1d3c0a0-d331-4d76-99ca-ec467da78afe",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "538cfc41-cf44-4a4f-9bcb-da4ddd18043f",
+                "type": "text",
+                "content": "<p>Vous savez désormais réaliser un tri sur deux critères.<br><br> Avant de réaliser un tri avancé sur encore plus de critères, découvrez quelques bonnes pratiques et astuces pour trier plus facilement vos tableaux. 🏆</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6c869b4c-d44e-462b-98e2-21d063dfecda",
+          "type": "lesson",
+          "title": "Astuces pratiques de tri",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
                 {
-                  "id": "8536a080-79f8-4bc1-8cb7-5c3829dca8ca",
-                  "type": "text",
-                  "content": "<p><strong>L’ordre de tri personnalisé. </strong> </p><p>Il permet de trier automatiquement les jours de la semaine et les mois. Sans cette option, le tri sera alphabétique : jeudi sera donc avant lundi. <span aria-hidden=\"true\">📆</span> on trouvé également ce réglage dans l’onglet « Options » de la fenêtre de tri.</p>"
+                  "elements": [
+                    {
+                      "id": "05a44b3d-1c77-49fc-bab9-65e5f20c3d38",
+                      "type": "text",
+                      "content": "<p><strong>Une option permet de reconnaître les en-têtes ou étiquettes de colonnes.</strong> </p><p>Si les en-têtes de votre tableau sont correctement remplies, la plupart des logiciels les détectent automatiquement.&nbsp;</p><p>Cette option s’appelle « <span aria-hidden=\"true\">☑️</span> Mes données ont des en-têtes » ou « <span aria-hidden=\"true\">☑️</span> La plage contient des étiquettes de colonne ».&nbsp;</p><p>Avec une détection automatique, elle sera déjà cochée. Vous pouvez aussi la cocher manuellement <span aria-hidden=\"true\">👇</span></p>"
+                    },
+                    {
+                      "id": "f5142469-61c8-422e-9c26-5f408ce33992",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/xxKAMeR.gif",
+                      "alt": "",
+                      "alternativeText": "<p>Gif animé. Quand la case « La plage contient des étiquettes de colonne » n'est pas cochée, les colonnes proposées dans la liste déroulante sont A, B, C, etc. Quand la case est cochée, la liste déroulante propose les étiquettes de colonnes « Prénom », « Nom », « Equipe », etc.</p>"
+                    },
+                    {
+                      "id": "76563c87-ea9e-44d5-acbf-ad78a6da4220",
+                      "type": "text",
+                      "content": "<p><span aria-hidden=\"true\">⚠️</span> Si cette case n’est pas cochée, mais que votre tableau a des en-têtes, elles seront considérées comme des données à trier.</p>"
+                    }
+                  ]
                 },
                 {
-                  "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/pXPntis.jpeg",
-                  "alt": "",
-                  "alternativeText": ""
+                  "elements": [
+                    {
+                      "id": "b8c69ed0-7388-4197-a700-19126f4c91d2",
+                      "type": "text",
+                      "content": "<p><strong>La sensibilité à la casse.</strong> </p><p>L’onglet « Options » de la fenêtre de tri, permet de faire des réglages avancés. La case à cocher «Sensible à la casse» permet de prendre en compte ou d’ignorer les majuscules ou les minuscules. <span aria-hidden=\"true\">🔠</span></p>"
+                    },
+                    {
+                      "id": "37ac6388-e4b2-41ac-af3a-bc1219c0f23c",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/DJdRtpA.jpeg",
+                      "alt": "",
+                      "alternativeText": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8536a080-79f8-4bc1-8cb7-5c3829dca8ca",
+                      "type": "text",
+                      "content": "<p><strong>L’ordre de tri personnalisé. </strong> </p><p>Il permet de trier automatiquement les jours de la semaine et les mois. Sans cette option, le tri sera alphabétique : jeudi sera donc avant lundi. <span aria-hidden=\"true\">📆</span> on trouvé également ce réglage dans l’onglet « Options » de la fenêtre de tri.</p>"
+                    },
+                    {
+                      "id": "8dff7246-9c67-45c9-b5bd-801d12008587",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/pXPntis.jpeg",
+                      "alt": "",
+                      "alternativeText": ""
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "d35fe155-4e68-46e0-aa85-2f7903f49bcc",
-      "type": "challenge",
-      "title": "Création d’un tri à 3 critères ",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "cfcf3dde-1eed-4654-86bc-c1c9bc4868ef",
-            "type": "text",
-            "content": "<p>Sarah a préparé un nouveau fichier contenant les résultats des enfants à la chasse au trésor.&nbsp; <br>Elle veut établir un classement, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura découvert la cachette aux trésors. <br>Pour emporter le trésor, il faut avoir résolu un maximum d’énigmes.<br>En cas d’ex æquo, il faut sortir le plus vite possible du labyrinthe.</em></blockquote>"
-          }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "6fe45fc7-89a2-4bd8-aec8-c2ecd30f5c26",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "fde2db58-a735-418a-9063-a56652845965",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">👉</span> <strong>Téléchargez ce fichier et triez les données pour obtenir le classement de la chasse au trésor</strong></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "03dfe817-ca35-4881-a256-dc5d591bf288",
-            "type": "download",
-            "files": [
-              {
-                "url": "https://dl.pix.fr/1735566875829/WHJGVKLPWZ.ods",
-                "format": "ods"
-              },
-              {
-                "url": "https://dl.pix.fr/1735566875579/ERCNCLEXEW.xlsx",
-                "format": "xlsx"
-              }
-            ]
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "7b13a9b6-b8ae-4667-bfe6-02e45344db29",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d50c98d3-80b4-4cb5-a138-33d7526cd757",
-            "type": "qrocm",
-            "instruction": "<p>Quel enfant est deuxième ? <br>Quel est le contenu du trésor ?</p>",
-            "proposals": [
-              {
+          "id": "d35fe155-4e68-46e0-aa85-2f7903f49bcc",
+          "type": "challenge",
+          "title": "Création d’un tri à 3 critères ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cfcf3dde-1eed-4654-86bc-c1c9bc4868ef",
                 "type": "text",
-                "content": "<p>Le prénom du deuxième est :</p>"
-              },
-              {
-                "input": "prenom-boss",
-                "type": "input",
-                "inputType": "text",
-                "size": 12,
-                "display": "inline",
-                "placeholder": "prénom",
-                "ariaLabel": "écrivez ici le prénom",
-                "defaultValue": "",
-                "tolerances": ["t3"],
-                "solutions": ["inès"]
-              },
-              {
-                "type": "text",
-                "content": "<p>Le contenu du trésor est :</p>"
-              },
-              {
-                "input": "tresor-boss",
-                "type": "input",
-                "inputType": "text",
-                "size": 12,
-                "display": "inline",
-                "placeholder": "trésor",
-                "ariaLabel": "écrivez ici le contenu du trésor",
-                "defaultValue": "",
-                "tolerances": ["t3"],
-                "solutions": ["des bonbons", "bonbons"]
+                "content": "<p>Sarah a préparé un nouveau fichier contenant les résultats des enfants à la chasse au trésor.&nbsp; <br>Elle veut établir un classement, selon les règles suivantes :</p><blockquote><em>Le ou la gagnant(e) aura découvert la cachette aux trésors. <br>Pour emporter le trésor, il faut avoir résolu un maximum d’énigmes.<br>En cas d’ex æquo, il faut sortir le plus vite possible du labyrinthe.</em></blockquote>"
               }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "Bravo&#8239;!",
-                "diagnosis": "<p>Le tri avancé a bien permis de classer les enfants par découverte du trésor, puis par plus grand nombre d’énigmes résolues, puis par temps le plus court au labyrinthe.</p>"
-              },
-              "invalid": {
-                "state": "Mauvaise réponse.",
-                "diagnosis": "<p>Le classement de Sarah demande de trier selon trois critères.<br>Réessayez. Aidez-vous des indices au besoin.</p>"
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6fe45fc7-89a2-4bd8-aec8-c2ecd30f5c26",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fde2db58-a735-418a-9063-a56652845965",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">👉</span> <strong>Téléchargez ce fichier et triez les données pour obtenir le classement de la chasse au trésor</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "03dfe817-ca35-4881-a256-dc5d591bf288",
+                "type": "download",
+                "files": [
+                  {
+                    "url": "https://dl.pix.fr/1735566875829/WHJGVKLPWZ.ods",
+                    "format": "ods"
+                  },
+                  {
+                    "url": "https://dl.pix.fr/1735566875579/ERCNCLEXEW.xlsx",
+                    "format": "xlsx"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7b13a9b6-b8ae-4667-bfe6-02e45344db29",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d50c98d3-80b4-4cb5-a138-33d7526cd757",
+                "type": "qrocm",
+                "instruction": "<p>Quel enfant est deuxième ? <br>Quel est le contenu du trésor ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Le prénom du deuxième est :</p>"
+                  },
+                  {
+                    "input": "prenom-boss",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "prénom",
+                    "ariaLabel": "écrivez ici le prénom",
+                    "defaultValue": "",
+                    "tolerances": ["t3"],
+                    "solutions": ["inès"]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>Le contenu du trésor est :</p>"
+                  },
+                  {
+                    "input": "tresor-boss",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "trésor",
+                    "ariaLabel": "écrivez ici le contenu du trésor",
+                    "defaultValue": "",
+                    "tolerances": ["t3"],
+                    "solutions": ["des bonbons", "bonbons"]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bravo&#8239;!",
+                    "diagnosis": "<p>Le tri avancé a bien permis de classer les enfants par découverte du trésor, puis par plus grand nombre d’énigmes résolues, puis par temps le plus court au labyrinthe.</p>"
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "<p>Le classement de Sarah demande de trier selon trois critères.<br>Réessayez. Aidez-vous des indices au besoin.</p>"
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">❓</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><img src=\"https://assets.pix.org/draft/modules/88.125.115.216-67727d49bec01.png\" alt=\"\"></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
               }
             }
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "9c101788-40c6-4343-95e4-fcac920c96b7",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">❓</span> Si vous avez besoin d’aide, cliquez sur les indices ci-dessous :</p><p><br></p><details><summary>Indice 1</summary><p>Voici le résultat que vous devriez obtenir. Observez bien les colonnes pour trouver l'ordre des critères de tri.</p><img src=\"https://assets.pix.org/draft/modules/88.125.115.216-67727d49bec01.png\" alt=\"\"></details><details><summary>Indice 2</summary><p>Il y a 3 critères de tri nécessaires au classement de Sarah.<br>L’énoncé vous permet de trouver l’ordre des critères de tri suivant&nbsp;:</p> <ol> <li>L’étape la plus importante est bien sûr : la découverte du trésor</li> <li>La seconde épreuve est le nombre d’énigmes réussies</li> <li>Le troisième critère est le temps au labyrinthe</li> </ol><p>Ensuite, comparez l’ordre des critères de tri au tableau de l’indice 2 et déterminez le classement de chaque colonne.</p> </details>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "761402c5-41ec-44b1-b166-6f0b43300238",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "453fa79b-7a83-46f6-aca2-0cfd6409fa6d",
-            "type": "text",
-            "content": "<p>Vous savez désormais créer un tri multicritère sur un logiciel de tableur. <br>Grâce à ce tri, Sarah a pu donner leur classement à ses participants. 🏆</p><p>Voici un récapitulatif des grandes étapes de tri et quelques précisions.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "16df02e4-4dd0-4fa3-9be0-44e1f54a3217",
-      "type": "lesson",
-      "title": "Recap",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "e9ac9d81-41fc-48c2-b74c-7aee31373f39",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">✅</span> On a besoin d’<strong>un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.</p>"
-          }
+          "id": "761402c5-41ec-44b1-b166-6f0b43300238",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "453fa79b-7a83-46f6-aca2-0cfd6409fa6d",
+                "type": "text",
+                "content": "<p>Vous savez désormais créer un tri multicritère sur un logiciel de tableur. <br>Grâce à ce tri, Sarah a pu donner leur classement à ses participants. 🏆</p><p>Voici un récapitulatif des grandes étapes de tri et quelques précisions.</p>"
+              }
+            }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "106e6349-c768-4cbf-950a-e062facecaa7",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d5e3be8f-f65f-4786-bf16-1d8f13e1e94c",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🥇</span> <strong>L’ordre des critères de tri détermine le résultat du tri.</strong> <br>Le second critère s’applique toujours en fonction du premier. Si vous inversez les critères, vous obtiendrez un résultat visiblement différent.</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "066f86e4-9e42-4b92-8694-8d8f7326add3",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "920abeb8-99e2-4891-b002-840de3eb9152",
-            "type": "text",
-            "content": "<p><span aria-hidden=\"true\">🔠</span> <strong>Le vocabulaire peut varier en fonction de votre logiciel.</strong><br>La fenêtre de tri peut s’appeler autrement selon le logiciel utilisé, avoir un pictogramme différent et peut utiliser d’autres mots pour désigner les critères de tri.</p>"
-          }
+          "id": "16df02e4-4dd0-4fa3-9be0-44e1f54a3217",
+          "type": "lesson",
+          "title": "Recap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e9ac9d81-41fc-48c2-b74c-7aee31373f39",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">✅</span> On a besoin d’<strong>un tri multicritères sur plusieurs colonnes</strong> quand on doit<strong> cumuler plusieurs critères de tri</strong> (d’abord un premier critère, puis un second, puis un troisième, etc). <br>✔️Par exemple, quand on a besoin de discriminer des ex æquo sur un premier critère.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "106e6349-c768-4cbf-950a-e062facecaa7",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d5e3be8f-f65f-4786-bf16-1d8f13e1e94c",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">🥇</span> <strong>L’ordre des critères de tri détermine le résultat du tri.</strong> <br>Le second critère s’applique toujours en fonction du premier. Si vous inversez les critères, vous obtiendrez un résultat visiblement différent.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "066f86e4-9e42-4b92-8694-8d8f7326add3",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "920abeb8-99e2-4891-b002-840de3eb9152",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">🔠</span> <strong>Le vocabulaire peut varier en fonction de votre logiciel.</strong><br>La fenêtre de tri peut s’appeler autrement selon le logiciel utilisé, avoir un pictogramme différent et peut utiliser d’autres mots pour désigner les critères de tri.</p>"
+              }
+            }
+          ]
         }
       ]
     }

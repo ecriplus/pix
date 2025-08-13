@@ -54,41 +54,46 @@ export function getElements(modules) {
 
   const elements = [];
   for (const module of modules) {
+    let grainPosition = -1;
     let elementPosition = 0;
 
-    for (const grain of module.grains) {
-      for (const component of grain.components) {
-        if (component.type === 'element') {
-          if (!ELEMENT_TYPES.includes(component.element.type)) {
-            console.warn(`Ignored element ${component.element.id} with unknown type "${component.element.type}".`);
-            continue;
+    for (const section of module.sections) {
+      for (const grain of section.grains) {
+        grainPosition++;
+
+        for (const component of grain.components) {
+          if (component.type === 'element') {
+            if (!ELEMENT_TYPES.includes(component.element.type)) {
+              console.warn(`Ignored element ${component.element.id} with unknown type "${component.element.type}".`);
+              continue;
+            }
+
+            elements.push({
+              ...component.element,
+              moduleId: module.id,
+              elementPosition: elementPosition++,
+              grainPosition: grainPosition,
+              grainId: grain.id,
+              grainTitle: grain.title,
+            });
           }
 
-          elements.push({
-            ...component.element,
-            moduleId: module.id,
-            elementPosition: elementPosition++,
-            grainPosition: module.grains.indexOf(grain),
-            grainId: grain.id,
-            grainTitle: grain.title,
-          });
-        }
+          if (component.type === 'stepper') {
+            for (const step of component.steps) {
+              for (const element of step.elements) {
+                if (!ELEMENT_TYPES.includes(element.type)) {
+                  continue;
+                }
 
-        if (component.type === 'stepper') {
-          for (const step of component.steps) {
-            for (const element of step.elements) {
-              if (!ELEMENT_TYPES.includes(element.type)) {
-                continue;
+                elements.push({
+                  ...element,
+                  moduleId: module.id,
+                  elementPosition: elementPosition++,
+                  grainPosition: grainPosition,
+                  grainId: grain.id,
+                  grainTitle: grain.title,
+                });
               }
-
-              elements.push({
-                ...element,
-                moduleId: module.id,
-                elementPosition: elementPosition++,
-                grainPosition: module.grains.indexOf(grain),
-                grainId: grain.id,
-                grainTitle: grain.title,
-              });
             }
           }
         }

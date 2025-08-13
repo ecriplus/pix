@@ -15,547 +15,553 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "grains": [
+  "sections": [
     {
-      "id": "1ab1964a-9967-4739-9004-c5e2c9de36f0",
-      "type": "discovery",
-      "title": "Accroche",
-      "components": [
+      "id": "e0bf2631-4a43-46a1-8bbc-b06f11574719",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "09245327-cd08-4874-b006-1018c3b6b419",
-            "type": "custom",
-            "tagName": "message-conversation",
-            "props": {
-              "title": "Asso Yoga à Roulette",
-              "messages": [
-                {
-                  "userName": "Gustave",
-                  "direction": "incoming",
-                  "content": "J'ai du mal à trouver un nom pour mon association de yoga à roulettes. J’aimerais quelque chose d’original mais je n’ai pas d’inspiration... 🤯"
-                },
-                {
-                  "userName": "Maëlle",
-                  "direction": "outgoing",
-                  "content": "🤖 Tu devrais essayer avec un logiciel d'IA générative, ça peut vraiment t’aider à trouver des idées sympas ! 💡"
-                },
-                {
-                  "userName": "Gustave",
-                  "direction": "incoming",
-                  "content": "Vraiment ? 😮 Mais… Je fais comment ?"
-                },
-                {
-                  "userName": "Maëlle",
-                  "direction": "outgoing",
-                  "content": "C’est super simple ! 😄 Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
+          "id": "1ab1964a-9967-4739-9004-c5e2c9de36f0",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "09245327-cd08-4874-b006-1018c3b6b419",
+                "type": "custom",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Asso Yoga à Roulette",
+                  "messages": [
+                    {
+                      "userName": "Gustave",
+                      "direction": "incoming",
+                      "content": "J'ai du mal à trouver un nom pour mon association de yoga à roulettes. J’aimerais quelque chose d’original mais je n’ai pas d’inspiration... 🤯"
+                    },
+                    {
+                      "userName": "Maëlle",
+                      "direction": "outgoing",
+                      "content": "🤖 Tu devrais essayer avec un logiciel d'IA générative, ça peut vraiment t’aider à trouver des idées sympas ! 💡"
+                    },
+                    {
+                      "userName": "Gustave",
+                      "direction": "incoming",
+                      "content": "Vraiment ? 😮 Mais… Je fais comment ?"
+                    },
+                    {
+                      "userName": "Maëlle",
+                      "direction": "outgoing",
+                      "content": "C’est super simple ! 😄 Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
+                    }
+                  ]
                 }
-              ]
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "d94fdd26-ddf1-449e-b7ce-1aadc990b423",
-      "type": "transition",
-      "title": "texte de transition",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "f30fee84-9b24-4f58-b216-375817170298",
-            "type": "text",
-            "content": "<p>Gustave a suivi le conseil de Maëlle. Il a demandé à un logiciel d'IA générative de lui donner des idées de noms pour son association. Voici sa discussion avec le logiciel.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "94156810-5197-4cd7-b58c-86cde94d6323",
-      "type": "discovery",
-      "title": "Activité découverte",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "88af557c-e8f8-4bce-bc72-4f3aa35262fa",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
-            "instruction": "<p>Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>",
-            "height": 550
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
-            "type": "qcu",
-            "instruction": "<p>Parmi les messages de cette discussion, lequel est le prompt ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
-                "feedback": {
-                  "state": "<p>Bien vu !&nbsp;</p>",
-                  "diagnosis": "<p>En effet, le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.&nbsp;Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
-                "feedback": {
-                  "state": "<p>Et non !&nbsp;</p>",
-                  "diagnosis": "<p>C'est la réponse donnée par un logiciel d'IA générative. Le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Écrivez votre message ici.</p>",
-                "feedback": {
-                  "state": "<p>Et non !</p>",
-                  "diagnosis": "<p>C'est le champ de saisie, la zone pour écrire les prompts ! Le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
-                }
+          "id": "d94fdd26-ddf1-449e-b7ce-1aadc990b423",
+          "type": "transition",
+          "title": "texte de transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f30fee84-9b24-4f58-b216-375817170298",
+                "type": "text",
+                "content": "<p>Gustave a suivi le conseil de Maëlle. Il a demandé à un logiciel d'IA générative de lui donner des idées de noms pour son association. Voici sa discussion avec le logiciel.</p>"
               }
-            ],
-            "solution": "1"
-          }
-        }
-      ]
-    },
-    {
-      "id": "63c077cf-0a98-4526-b946-8ee3c28afeec",
-      "type": "lesson",
-      "title": "Leçon 1",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
-            "type": "text",
-            "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à un logiciel d'IA générative.🤖</li><li>Les réponses d'un logiciel d'IA générative s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour écrire le prompt suivant.</li></ul>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "d50b83d9-4966-4480-be2b-18c5063b5457",
-      "type": "transition",
-      "title": "texte de transition 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
-            "type": "text",
-            "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt&nbsp;!📝</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "29e32ca5-8ad5-49bf-a9bb-104d0172e662",
-      "type": "activity",
-      "title": "activité découverte 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
-            "instruction": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>",
-            "height": 500
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "d7c97543-452a-4777-9f6e-7d33e3d0d077",
-            "type": "qcu",
-            "instruction": "<p>D’après ce que vous venez de voir, laquelle de ces affirmations est vraie ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>On parle à un logiciel d'IA générative en langage informatique.</p>",
-                "feedback": {
-                  "state": "<p>Et non ! </p>",
-                  "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>On parle à un logiciel d'IA générative comme on parle avec une autre personne.</p>",
-                "feedback": {
-                  "state": "<p>Bravo !</p>",
-                  "diagnosis": "<p><br></p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>On parle à un logiciel d'IA générative avec des mots-clés uniquement.</p>",
-                "feedback": {
-                  "state": "<p>Et non&nbsp; !</p>",
-                  "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
-                }
-              }
-            ],
-            "solution": "2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "2f0b42f0-02a3-4133-8401-ec270f2ca315",
-      "type": "lesson",
-      "title": "Leçon 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
-            "type": "text",
-            "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme&nbsp;: «&nbsp;lister&nbsp;», «&nbsp;traduire&nbsp;», «&nbsp;résumer&nbsp;», etc.<br><br></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ba2c3789-f2bd-46e6-a1ca-38dd47088df8",
-      "type": "transition",
-      "title": "texte de transition 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
-            "type": "text",
-            "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas.😅 Il faut aussi donner des éléments qui décrivent le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "a39e914f-631d-491c-a4d8-14df1686de2c",
-      "type": "activity",
-      "title": "activité découverte 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
-            "type": "text",
-            "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
-            "instruction": "<p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>",
-            "height": 400
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
-            "type": "qcu",
-            "instruction": "<p>D'après vous, parmi ces prompts, lequel exprime au mieux le besoin de Gustave ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>écris une recette de gâteau</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse !</p>",
-                  "diagnosis": "<p>Le logiciel d'IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>écris une recette de gâteau pour 10 personnes</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse !</p>",
-                  "diagnosis": "<p>Le logiciel d'IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>écris une recette de gâteau pour 10 personnes sans chocolat</p>",
-                "feedback": {
-                  "state": "<p>Bonne réponse !</p>",
-                  "diagnosis": "<p>En effet, ce prompt contient des éléments précis&nbsp;:&nbsp;un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
-                }
-              }
-            ],
-            "solution": "3"
-          }
-        }
-      ]
-    },
-    {
-      "id": "8d975832-e974-4253-bb75-3a3d3636f52c",
-      "type": "lesson",
-      "title": "Leçon 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "29fbfaf4-e1f9-4f19-9bbb-38f8a712e352",
-            "type": "text",
-            "content": "<p>📌Une autre façon d’être précis, c’est de donner au logiciel d'IA générative autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "d6d77cc3-71d7-4b18-a74d-d39424ca6b0a",
-      "type": "activity",
-      "title": "activité découverte 4",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "1995ea30-4dc2-484a-8847-0cbf16d36902",
-            "type": "text",
-            "content": "<p>Regardez l'image puis répondez à la question ci-dessous&nbsp;: </p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "b001a5e6-0916-4aa2-b4e7-0ad3d412ed2c",
-            "type": "image",
-            "url": "https://assets.pix.org/modules/mon-premier-prompt/Crocodile.png",
-            "alt": "",
-            "alternativeText": "<p>Pix IA LLM</p><p>Bienvenue sur Pix IA LLM</p><p>Prompt&nbsp;: Je veux adopter un animal. J'habite en appartement. Quelles sont les 5 meilleures options ?</p><p>Réponse IA&nbsp;: Voici cinq options d'animaux adaptés à la vie en appartement&nbsp;:</p><p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p><p>Zone de saisie du prompt&nbsp;: Écrivez votre message ici</p><p>Bouton \"Envoyer\"</p>",
-            "legend": "",
-            "licence": ""
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "85194ba2-923f-4907-9842-381361271bdc",
-            "type": "qcu",
-            "instruction": "<p>Selon vous, la liste d’animaux donnée par le logiciel d'IA générative ci-dessus répond-elle bien au prompt ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>La réponse du logiciel d'IA générative est adaptée à la demande.</p>",
-                "feedback": {
-                  "state": "<p>Et non !</p>",
-                  "diagnosis": "<p>La réponse du logiciel d'IA générative ne respecte pas ce qui est demandé dans le prompt ! Le crocodile n'est pas l'animal le plus adapté pour un appartement, c'est dangereux et même illégal !</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>La réponse du logiciel d'IA générative n'est pas adaptée à la demande.</p>",
-                "feedback": {
-                  "state": "<p>Bien vu !</p>",
-                  "diagnosis": "<p>La réponse du logiciel d'IA générative n’est pas adaptée&nbsp;: adopter un crocodile n'est pas une bonne option pour quelqu’un qui habite en appartement, c'est dangereux et même illégal !<br><br></p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "state": "<p>Petit coup de pouce !</p>",
-                  "diagnosis": "<p>Regardez bien, la réponse du logiciel d'IA générative ne respecte pas ce qui est demandé dans le prompt&nbsp;: le crocodile n'est pas l'animal le plus adapté pour un appartement !</p>"
-                }
-              }
-            ],
-            "solution": "2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "7f3868a0-f259-4394-9bbb-d04b34c55366",
-      "type": "lesson",
-      "title": "Leçon 4",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
-            "type": "text",
-            "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>un logiciel d'IA générative peut se tromper</strong>.😓 Il faut TOUJOURS relire et vérifier la réponse.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "1ec0a8c6-ed7a-4e91-b886-7dc192490bb7",
-      "type": "summary",
-      "title": "Recap",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "33210c11-0e87-4d93-9190-089654d57ee4",
-            "type": "text",
-            "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt («&nbsp;instruction&nbsp;» ou «&nbsp;requête&nbsp;» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d'IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain.🗣️</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse du logiciel d'IA générative sera adaptée et pertinente.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «&nbsp;Traduis&nbsp;», «&nbsp;Liste&nbsp;», «&nbsp;Résume&nbsp;», etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner du contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> du logiciel d'IA générative pour vérifier qu'il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d'IA générative ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider le logiciel.📝</li></ul>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "227201e2-d165-401d-a9b2-2fc6294205db",
-      "type": "transition",
-      "title": "texte de transition 4",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "ae11054b-571a-4577-8554-c2731f729647",
-            "type": "text",
-            "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles&nbsp;!🙌</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "bdbe0b99-02d8-48a9-951f-1e85e2ea25d8",
-      "type": "activity",
-      "title": "activité application",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
-            "type": "custom-draft",
-            "title": "Élément interactif",
-            "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
-            "instruction": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.</p>",
-            "height": 500
-          }
-        }
-      ]
-    },
-    {
-      "id": "2078a0df-7a93-4dc1-97b8-33705eb70cac",
-      "type": "activity",
-      "title": "activité application 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "79e24dbc-b512-479b-913d-5df858490409",
-            "type": "qab",
-            "instruction": "<p>Classez chaque prompt ci-dessous selon sa précision dans une des catégories suivantes&nbsp;:&nbsp; «&nbsp;clair et précis&nbsp;» ou «&nbsp;flou et vague&nbsp;».</p>",
-            "cards": [
-              {
-                "id": "5ff6c7e9-b9c5-4b49-a6f9-b381075c2163",
-                "text": "Quels sont les meilleurs outils gratuits pour faire du montage vidéo niveau débutant sur smartphone ? 📹",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "A"
-              },
-              {
-                "id": "b4b01d06-618d-4195-b8a4-f564fc86d8b4",
-                "text": "Aide-moi dans mes projets. 💭",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "B"
-              },
-              {
-                "id": "b581e981-47db-4513-b05b-19cb219aac00",
-                "text": "Parle-moi d’histoire, j’ai envie d’apprendre. 📖",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "B"
-              },
-              {
-                "id": "ad6bccf7-ce67-47ff-a60a-dd9938d61715",
-                "text": "Donne-moi une recette rapide et végétarienne à base de carottes et pois chiches. 🍲",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "A"
-              },
-              {
-                "id": "1abb2292-e98c-4181-8d00-4e4f5e2f5f89",
-                "text": "Propose trois idées d’activités d'art plastique pour un atelier enfants (6–8 ans). 🧒",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "A"
-              },
-              {
-                "id": "03ab1311-5107-4ece-83b9-6146c92efad3",
-                "text": "Comment réussir dans la vie pour être heureux ? 🏆",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "Clair et précis",
-                "proposalB": "Flou et vague",
-                "solution": "B"
-              }
-            ],
-            "feedback": {
-              "diagnosis": ""
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "cea108c3-9bab-406c-be58-dd976b1680bc",
-      "type": "transition",
-      "title": "texte de transition 5",
-      "components": [
+          ]
+        },
         {
-          "type": "element",
-          "element": {
-            "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
-            "type": "text",
-            "content": "<p>Vous avez appris à parler à un logiciel d'IA générative.👏 Maintenant, place à la pratique&nbsp;: voyons si vous pouvez obtenir la réponse voulue !</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "140fd885-4562-4a9c-a19a-cae9cc0715b9",
-      "type": "challenge",
-      "title": "Activité défi",
-      "components": [
+          "id": "94156810-5197-4cd7-b58c-86cde94d6323",
+          "type": "discovery",
+          "title": "Activité découverte",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "88af557c-e8f8-4bce-bc72-4f3aa35262fa",
+                "type": "custom-draft",
+                "title": "Élément interactif",
+                "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
+                "instruction": "<p>Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>",
+                "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
+                "type": "qcu",
+                "instruction": "<p>Parmi les messages de cette discussion, lequel est le prompt ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
+                    "feedback": {
+                      "state": "<p>Bien vu !&nbsp;</p>",
+                      "diagnosis": "<p>En effet, le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.&nbsp;Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
+                    "feedback": {
+                      "state": "<p>Et non !&nbsp;</p>",
+                      "diagnosis": "<p>C'est la réponse donnée par un logiciel d'IA générative. Le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Écrivez votre message ici.</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>C'est le champ de saisie, la zone pour écrire les prompts ! Le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
         {
-          "type": "element",
-          "element": {
-            "id": "2d39db49-0ab2-4222-8911-abb459b16fef",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Utilisation d'un véritable LLM",
-            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
-            "instruction": "<p>Écrivez un prompt au logiciel d'IA générative ci-dessous pour qu’il crée un poème sur votre animal préféré.<br><br></p>",
-            "solution": "<p></p>",
-            "height": 500
-          }
+          "id": "63c077cf-0a98-4526-b946-8ee3c28afeec",
+          "type": "lesson",
+          "title": "Leçon 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
+                "type": "text",
+                "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à un logiciel d'IA générative.🤖</li><li>Les réponses d'un logiciel d'IA générative s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour écrire le prompt suivant.</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d50b83d9-4966-4480-be2b-18c5063b5457",
+          "type": "transition",
+          "title": "texte de transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
+                "type": "text",
+                "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt&nbsp;!📝</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "29e32ca5-8ad5-49bf-a9bb-104d0172e662",
+          "type": "activity",
+          "title": "activité découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
+                "type": "custom-draft",
+                "title": "Élément interactif",
+                "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
+                "instruction": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d7c97543-452a-4777-9f6e-7d33e3d0d077",
+                "type": "qcu",
+                "instruction": "<p>D’après ce que vous venez de voir, laquelle de ces affirmations est vraie ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>On parle à un logiciel d'IA générative en langage informatique.</p>",
+                    "feedback": {
+                      "state": "<p>Et non ! </p>",
+                      "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>On parle à un logiciel d'IA générative comme on parle avec une autre personne.</p>",
+                    "feedback": {
+                      "state": "<p>Bravo !</p>",
+                      "diagnosis": "<p><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>On parle à un logiciel d'IA générative avec des mots-clés uniquement.</p>",
+                    "feedback": {
+                      "state": "<p>Et non&nbsp; !</p>",
+                      "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2f0b42f0-02a3-4133-8401-ec270f2ca315",
+          "type": "lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
+                "type": "text",
+                "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme&nbsp;: «&nbsp;lister&nbsp;», «&nbsp;traduire&nbsp;», «&nbsp;résumer&nbsp;», etc.<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ba2c3789-f2bd-46e6-a1ca-38dd47088df8",
+          "type": "transition",
+          "title": "texte de transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
+                "type": "text",
+                "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas.😅 Il faut aussi donner des éléments qui décrivent le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a39e914f-631d-491c-a4d8-14df1686de2c",
+          "type": "activity",
+          "title": "activité découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
+                "type": "text",
+                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
+                "type": "custom-draft",
+                "title": "Élément interactif",
+                "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
+                "instruction": "<p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>",
+                "height": 400
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
+                "type": "qcu",
+                "instruction": "<p>D'après vous, parmi ces prompts, lequel exprime au mieux le besoin de Gustave ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>écris une recette de gâteau</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse !</p>",
+                      "diagnosis": "<p>Le logiciel d'IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>écris une recette de gâteau pour 10 personnes</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse !</p>",
+                      "diagnosis": "<p>Le logiciel d'IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>écris une recette de gâteau pour 10 personnes sans chocolat</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p>En effet, ce prompt contient des éléments précis&nbsp;:&nbsp;un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "8d975832-e974-4253-bb75-3a3d3636f52c",
+          "type": "lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "29fbfaf4-e1f9-4f19-9bbb-38f8a712e352",
+                "type": "text",
+                "content": "<p>📌Une autre façon d’être précis, c’est de donner au logiciel d'IA générative autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d6d77cc3-71d7-4b18-a74d-d39424ca6b0a",
+          "type": "activity",
+          "title": "activité découverte 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1995ea30-4dc2-484a-8847-0cbf16d36902",
+                "type": "text",
+                "content": "<p>Regardez l'image puis répondez à la question ci-dessous&nbsp;: </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b001a5e6-0916-4aa2-b4e7-0ad3d412ed2c",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/mon-premier-prompt/Crocodile.png",
+                "alt": "",
+                "alternativeText": "<p>Pix IA LLM</p><p>Bienvenue sur Pix IA LLM</p><p>Prompt&nbsp;: Je veux adopter un animal. J'habite en appartement. Quelles sont les 5 meilleures options ?</p><p>Réponse IA&nbsp;: Voici cinq options d'animaux adaptés à la vie en appartement&nbsp;:</p><p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p><p>Zone de saisie du prompt&nbsp;: Écrivez votre message ici</p><p>Bouton \"Envoyer\"</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "85194ba2-923f-4907-9842-381361271bdc",
+                "type": "qcu",
+                "instruction": "<p>Selon vous, la liste d’animaux donnée par le logiciel d'IA générative ci-dessus répond-elle bien au prompt ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>La réponse du logiciel d'IA générative est adaptée à la demande.</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>La réponse du logiciel d'IA générative ne respecte pas ce qui est demandé dans le prompt ! Le crocodile n'est pas l'animal le plus adapté pour un appartement, c'est dangereux et même illégal !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>La réponse du logiciel d'IA générative n'est pas adaptée à la demande.</p>",
+                    "feedback": {
+                      "state": "<p>Bien vu !</p>",
+                      "diagnosis": "<p>La réponse du logiciel d'IA générative n’est pas adaptée&nbsp;: adopter un crocodile n'est pas une bonne option pour quelqu’un qui habite en appartement, c'est dangereux et même illégal !<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "state": "<p>Petit coup de pouce !</p>",
+                      "diagnosis": "<p>Regardez bien, la réponse du logiciel d'IA générative ne respecte pas ce qui est demandé dans le prompt&nbsp;: le crocodile n'est pas l'animal le plus adapté pour un appartement !</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "7f3868a0-f259-4394-9bbb-d04b34c55366",
+          "type": "lesson",
+          "title": "Leçon 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
+                "type": "text",
+                "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>un logiciel d'IA générative peut se tromper</strong>.😓 Il faut TOUJOURS relire et vérifier la réponse.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1ec0a8c6-ed7a-4e91-b886-7dc192490bb7",
+          "type": "summary",
+          "title": "Recap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "33210c11-0e87-4d93-9190-089654d57ee4",
+                "type": "text",
+                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt («&nbsp;instruction&nbsp;» ou «&nbsp;requête&nbsp;» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d'IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain.🗣️</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse du logiciel d'IA générative sera adaptée et pertinente.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «&nbsp;Traduis&nbsp;», «&nbsp;Liste&nbsp;», «&nbsp;Résume&nbsp;», etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner du contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> du logiciel d'IA générative pour vérifier qu'il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d'IA générative ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider le logiciel.📝</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "227201e2-d165-401d-a9b2-2fc6294205db",
+          "type": "transition",
+          "title": "texte de transition 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ae11054b-571a-4577-8554-c2731f729647",
+                "type": "text",
+                "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles&nbsp;!🙌</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bdbe0b99-02d8-48a9-951f-1e85e2ea25d8",
+          "type": "activity",
+          "title": "activité application",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
+                "type": "custom-draft",
+                "title": "Élément interactif",
+                "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
+                "instruction": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.</p>",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "2078a0df-7a93-4dc1-97b8-33705eb70cac",
+          "type": "activity",
+          "title": "activité application 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "79e24dbc-b512-479b-913d-5df858490409",
+                "type": "qab",
+                "instruction": "<p>Classez chaque prompt ci-dessous selon sa précision dans une des catégories suivantes&nbsp;:&nbsp; «&nbsp;clair et précis&nbsp;» ou «&nbsp;flou et vague&nbsp;».</p>",
+                "cards": [
+                  {
+                    "id": "5ff6c7e9-b9c5-4b49-a6f9-b381075c2163",
+                    "text": "Quels sont les meilleurs outils gratuits pour faire du montage vidéo niveau débutant sur smartphone ? 📹",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "b4b01d06-618d-4195-b8a4-f564fc86d8b4",
+                    "text": "Aide-moi dans mes projets. 💭",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "b581e981-47db-4513-b05b-19cb219aac00",
+                    "text": "Parle-moi d’histoire, j’ai envie d’apprendre. 📖",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "ad6bccf7-ce67-47ff-a60a-dd9938d61715",
+                    "text": "Donne-moi une recette rapide et végétarienne à base de carottes et pois chiches. 🍲",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "1abb2292-e98c-4181-8d00-4e4f5e2f5f89",
+                    "text": "Propose trois idées d’activités d'art plastique pour un atelier enfants (6–8 ans). 🧒",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "03ab1311-5107-4ece-83b9-6146c92efad3",
+                    "text": "Comment réussir dans la vie pour être heureux ? 🏆",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Clair et précis",
+                    "proposalB": "Flou et vague",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "cea108c3-9bab-406c-be58-dd976b1680bc",
+          "type": "transition",
+          "title": "texte de transition 5",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "bd373d86-9859-4f63-a693-bec98c2e7300",
+                "type": "text",
+                "content": "<p>Vous avez appris à parler à un logiciel d'IA générative.👏 Maintenant, place à la pratique&nbsp;: voyons si vous pouvez obtenir la réponse voulue !</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "140fd885-4562-4a9c-a19a-cae9cc0715b9",
+          "type": "challenge",
+          "title": "Activité défi",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2d39db49-0ab2-4222-8911-abb459b16fef",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Utilisation d'un véritable LLM",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
+                "instruction": "<p>Écrivez un prompt au logiciel d'IA générative ci-dessous pour qu’il crée un poème sur votre animal préféré.<br><br></p>",
+                "solution": "<p></p>",
+                "height": 500
+              }
+            }
+          ]
         }
       ]
     }

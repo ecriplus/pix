@@ -14,530 +14,536 @@
     ],
     "tabletSupport": "inconvenient"
   },
-  "grains": [
+  "sections": [
     {
-      "id": "0fc5545d-f5f6-4d43-9c25-0f90906a185b",
-      "type": "transition",
-      "title": "",
-      "components": [
+      "id": "d9b35b02-b9ad-4341-8b94-486072b86ad2",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "8c6953c7-1ab8-4722-875f-f16556040f0f",
-            "type": "text",
-            "content": "<p>Cette année, Rayan veut prendre des cours de théâtre. <span aria-hidden=\"true\">🎭</span></p><p>Il est allé voir plusieurs écoles de théâtre à côté de chez lui.</p><p>Il a donné son numéro de téléphone et son adresse mail pour être contacté.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "0d72743d-8320-4992-8ec4-510c86e6eded",
-      "type": "discovery",
-      "title": "Mail, SMS ou WhatsApp ?",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "b787f04d-4cb8-459c-a2f4-abc040aae7d7",
-            "type": "text",
-            "content": "<p>Rayan a reçu les 3 propositions de cours de théâtre suivantes :<span aria-hidden=\"true\">👇</span></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "2dff88f4-99f0-4d05-a087-2a342f020165",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Carrousel d'images",
-            "url": "https://epreuves.pix.fr/fr/carousel/modulix_envoyer_mail.html",
-            "instruction": "<p></p>",
-            "height": 450
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "4d247dde-ef4f-4ee3-9d35-e7b8826f1b7a",
-            "type": "qcu",
-            "instruction": "<p>Quel théâtre a envoyé une proposition de cours par mail ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>le Studio Scène</p>",
-                "feedback": {
-                  "state": "Bonne réponse !🎉",
-                  "diagnosis": ""
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>le Théâtre Lumière</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>Ce théâtre a contacté Rayan par SMS. </p><p>Cherchez l’offre avec des adresses mail écrites et essayez à nouveau.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>le Théâtre Éclat</p>",
-                "feedback": {
-                  "state": "Mauvaise réponse.",
-                  "diagnosis": "<p>Ce théâtre a contacté Rayan avec une messagerie instantanée.</p><p>Cherchez l’offre avec des adresses mail écrites et essayez à nouveau.</p>"
-                }
+          "id": "0fc5545d-f5f6-4d43-9c25-0f90906a185b",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8c6953c7-1ab8-4722-875f-f16556040f0f",
+                "type": "text",
+                "content": "<p>Cette année, Rayan veut prendre des cours de théâtre. <span aria-hidden=\"true\">🎭</span></p><p>Il est allé voir plusieurs écoles de théâtre à côté de chez lui.</p><p>Il a donné son numéro de téléphone et son adresse mail pour être contacté.</p>"
               }
-            ],
-            "solution": "1"
-          }
-        }
-      ]
-    },
-    {
-      "id": "f2b377d1-d0d6-425c-846c-48a2e73cd327",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "d2bc6890-bae8-4930-b865-c13c68685cf9",
-            "type": "text",
-            "content": "<p>Rayan a choisi de s'inscrire au cours du <strong>Théâtre Lumière</strong>. Il doit envoyer un mail pour le premier cours.</p><p>Dans la vidéo suivante, voyons ensemble comment envoyer un mail ! <span aria-hidden=\"true\">📺</span></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "e5af3428-bd1d-46a2-901e-4b5684b60739",
-      "type": "lesson",
-      "title": "Les étapes pour envoyer un mail",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "2e2a41b6-5818-4b3b-b537-1aec1921aac3",
-            "type": "text",
-            "content": "<p>À la suite de cette vidéo, vous devrez</p><ul><li>suivre les étapes pour envoyer un mail,</li><li>répondre à des questions sur les champs <code>À</code> et <code>Objet</code> d’un mail.</li></ul>"
-          }
+            }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "fd39cc63-32f7-46eb-9f8a-55623878e0d1",
-            "type": "video",
-            "title": "Comment envoyer un mail ?",
-            "url": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.mp4",
-            "poster": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.jpg",
-            "subtitles": "",
-            "transcription": ""
-          }
-        }
-      ]
-    },
-    {
-      "id": "d82081bf-d14a-4795-9d0f-8faf3d884369",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "0d3b0a93-c832-483e-ac94-f8d6154d5d6d",
-            "type": "text",
-            "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "58d65e40-acd2-44e3-9829-634c9c358395",
-      "type": "activity",
-      "title": "Envoyer un mail",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "e67e0363-7de1-4408-9336-d2604895dcff",
-            "type": "text",
-            "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :<strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "dc699b80-4534-42fa-90a7-5d42600e0064",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "Simulateur PixMail",
-            "url": "https://epreuves.pix.fr/pixmail-envoi/pixmail-envoi.html?mode=modulix-mail",
-            "instruction": "<p></p>",
-            "height": 500
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
-            "type": "text",
-            "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><img src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\" alt=\"\" /></details>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "22bccab6-ec60-4be9-95a8-c9dc1cd48b53",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "be3d03c0-6679-4c38-9f64-cc19b04a6580",
-            "type": "text",
-            "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "3bfa2ae1-cf67-48ce-bc59-1dd129ca2366",
-      "type": "activity",
-      "title": "Vrai-faux : les champs d'un mail",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "30a8cbf6-1e08-4cd4-96e5-e006655aca83",
-            "type": "text",
-            "content": "<p>Pour chaque affirmation, choisissez si elle est vraie ou fausse.</p>"
-          }
-        },
-        {
-          "type": "stepper",
-          "steps": [
+          "id": "0d72743d-8320-4992-8ec4-510c86e6eded",
+          "type": "discovery",
+          "title": "Mail, SMS ou WhatsApp ?",
+          "components": [
             {
-              "elements": [
-                {
-                  "id": "48249fde-f3be-4692-b2ab-9e3385682236",
-                  "type": "qcu",
-                  "instruction": "<p>Pour pouvoir envoyer un mail, il faut obligatoirement compléter le champ <code>À</code>.</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>vrai</p>",
-                      "feedback": {
-                        "state": "Bonne réponse !🎉",
-                        "diagnosis": "<p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>faux</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
-                      }
-                    }
-                  ],
-                  "solution": "1"
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "b787f04d-4cb8-459c-a2f4-abc040aae7d7",
+                "type": "text",
+                "content": "<p>Rayan a reçu les 3 propositions de cours de théâtre suivantes :<span aria-hidden=\"true\">👇</span></p>"
+              }
             },
             {
-              "elements": [
-                {
-                  "id": "b8a48143-f1a0-4730-9912-bd737e29c243",
-                  "type": "qcu",
-                  "instruction": "<p>Le champ <code>Objet</code> sert à écrire le contenu du mail.</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>vrai</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>faux</p>",
-                      "feedback": {
-                        "state": "Bonne réponse !🎉",
-                        "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
-                      }
-                    }
-                  ],
-                  "solution": "2"
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "2dff88f4-99f0-4d05-a087-2a342f020165",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Carrousel d'images",
+                "url": "https://epreuves.pix.fr/fr/carousel/modulix_envoyer_mail.html",
+                "instruction": "<p></p>",
+                "height": 450
+              }
             },
             {
-              "elements": [
-                {
-                  "id": "7b209c62-1bf0-4fce-b424-dc54a4c045be",
-                  "type": "qcu",
-                  "instruction": "<p>Le champ <code>De</code> est complété automatiquement avec l’adresse mail de l’expéditeur.</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>vrai</p>",
-                      "feedback": {
-                        "state": "Bonne réponse !🎉",
-                        "diagnosis": "<p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>faux</p>",
-                      "feedback": {
-                        "state": "Mauvaise réponse.",
-                        "diagnosis": "<p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
-                      }
+              "type": "element",
+              "element": {
+                "id": "4d247dde-ef4f-4ee3-9d35-e7b8826f1b7a",
+                "type": "qcu",
+                "instruction": "<p>Quel théâtre a envoyé une proposition de cours par mail ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>le Studio Scène</p>",
+                    "feedback": {
+                      "state": "Bonne réponse !🎉",
+                      "diagnosis": ""
                     }
-                  ],
-                  "solution": "1"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>le Théâtre Lumière</p>",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "<p>Ce théâtre a contacté Rayan par SMS. </p><p>Cherchez l’offre avec des adresses mail écrites et essayez à nouveau.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>le Théâtre Éclat</p>",
+                    "feedback": {
+                      "state": "Mauvaise réponse.",
+                      "diagnosis": "<p>Ce théâtre a contacté Rayan avec une messagerie instantanée.</p><p>Cherchez l’offre avec des adresses mail écrites et essayez à nouveau.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f2b377d1-d0d6-425c-846c-48a2e73cd327",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d2bc6890-bae8-4930-b865-c13c68685cf9",
+                "type": "text",
+                "content": "<p>Rayan a choisi de s'inscrire au cours du <strong>Théâtre Lumière</strong>. Il doit envoyer un mail pour le premier cours.</p><p>Dans la vidéo suivante, voyons ensemble comment envoyer un mail ! <span aria-hidden=\"true\">📺</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e5af3428-bd1d-46a2-901e-4b5684b60739",
+          "type": "lesson",
+          "title": "Les étapes pour envoyer un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2e2a41b6-5818-4b3b-b537-1aec1921aac3",
+                "type": "text",
+                "content": "<p>À la suite de cette vidéo, vous devrez</p><ul><li>suivre les étapes pour envoyer un mail,</li><li>répondre à des questions sur les champs <code>À</code> et <code>Objet</code> d’un mail.</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fd39cc63-32f7-46eb-9f8a-55623878e0d1",
+                "type": "video",
+                "title": "Comment envoyer un mail ?",
+                "url": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.mp4",
+                "poster": "https://assets.pix.org/draft/modules/comment-envoyer-un-mail/comment-envoyer-un-mail.jpg",
+                "subtitles": "",
+                "transcription": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "d82081bf-d14a-4795-9d0f-8faf3d884369",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0d3b0a93-c832-483e-ac94-f8d6154d5d6d",
+                "type": "text",
+                "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "58d65e40-acd2-44e3-9829-634c9c358395",
+          "type": "activity",
+          "title": "Envoyer un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e67e0363-7de1-4408-9336-d2604895dcff",
+                "type": "text",
+                "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :<strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dc699b80-4534-42fa-90a7-5d42600e0064",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Simulateur PixMail",
+                "url": "https://epreuves.pix.fr/pixmail-envoi/pixmail-envoi.html?mode=modulix-mail",
+                "instruction": "<p></p>",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
+                "type": "text",
+                "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><img src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\" alt=\"\" /></details>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "22bccab6-ec60-4be9-95a8-c9dc1cd48b53",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "be3d03c0-6679-4c38-9f64-cc19b04a6580",
+                "type": "text",
+                "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3bfa2ae1-cf67-48ce-bc59-1dd129ca2366",
+          "type": "activity",
+          "title": "Vrai-faux : les champs d'un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "30a8cbf6-1e08-4cd4-96e5-e006655aca83",
+                "type": "text",
+                "content": "<p>Pour chaque affirmation, choisissez si elle est vraie ou fausse.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "48249fde-f3be-4692-b2ab-9e3385682236",
+                      "type": "qcu",
+                      "instruction": "<p>Pour pouvoir envoyer un mail, il faut obligatoirement compléter le champ <code>À</code>.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>vrai</p>",
+                          "feedback": {
+                            "state": "Bonne réponse !🎉",
+                            "diagnosis": "<p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>faux</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Le champ À sert à indiquer le destinataire du mail. Il est obligatoire de le compléter pour que le mail soit envoyé et qu'une personne le reçoive.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b8a48143-f1a0-4730-9912-bd737e29c243",
+                      "type": "qcu",
+                      "instruction": "<p>Le champ <code>Objet</code> sert à écrire le contenu du mail.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>vrai</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>faux</p>",
+                          "feedback": {
+                            "state": "Bonne réponse !🎉",
+                            "diagnosis": "<p>Le champ Objet sert à expliquer rapidement le contenu du mail. S’il n’est pas complété, le champ sera rempli automatiquement avec <code>(aucun objet)</code>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7b209c62-1bf0-4fce-b424-dc54a4c045be",
+                      "type": "qcu",
+                      "instruction": "<p>Le champ <code>De</code> est complété automatiquement avec l’adresse mail de l’expéditeur.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>vrai</p>",
+                          "feedback": {
+                            "state": "Bonne réponse !🎉",
+                            "diagnosis": "<p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>faux</p>",
+                          "feedback": {
+                            "state": "Mauvaise réponse.",
+                            "diagnosis": "<p>La personne qui envoie le mail (expéditeur) doit être connectée à un compte avec une adresse mail. C’est cette adresse qui est automatiquement écrite dans le champ <code>De</code>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "4ab8ff60-78f2-4e5c-a83b-0384b7e49938",
-      "type": "summary",
-      "title": "Récapitulatif",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "97e1108c-34ef-4772-a3ca-e385d6319bc6",
-            "type": "text",
-            "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h3><p>Pour envoyer un mail, il faut remplir ses différents champs avec les bonnes informations :</p>"
-          }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "b6014eed-5edc-4010-ad7a-1e5410044f6d",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/GXJ6ihZ.png",
-            "alt": "",
-            "alternativeText": "<p>Le champ Objet permet de donner un titre au mail. Il permet de vite connaître le sujet du mail. Le champ De indique la personne qui envoie le mail. Le champ À indique la personne qui reçoit le mail.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "667ebed8-cb72-4ac1-a9cd-7ae5f805f005",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "27281e03-bec3-43e3-985d-38b2eaec4c20",
-            "type": "text",
-            "content": "<p>Rayan vient de recevoir une réponse : le prochain cours est à 20 heures. <span aria-hidden=\"true\">✨</span></p><p>Maintenant, vous allez devoir analyser un autre mail.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "4159b20c-fe4b-41fd-80f9-eefdc6240e9e",
-      "type": "challenge",
-      "title": "Analyser un mail",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "e7288030-487b-4eb1-b256-7296fcd5c38b",
-            "type": "text",
-            "content": "<p>Voici un mail qui a été envoyé pour préparer les costumes du spectacle. </p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "2ddc4d66-3323-401b-b8ee-4f56bcd9c794",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/iQWPTJW.png",
-            "alt": "",
-            "alternativeText": "<ul><li>22 octobre 2024 (il y a 8 jours)</li> <li>De : michel@pixmail.com</li> <li>À :leo@laposte.net; anna@gmail.com; hamed@orange.fr</li><li> Objet : Costume pour le 27 octobre</li> <li>Bonjour à tous, Pensez à amener vos costumes de chevaliers pour la dernière scène. Pas besoin de prévenir Jennifer, Marine, Clément et Rayan : ils seront absents. Rendez-vous comme d'habitude au 7 rue Babylone à 18h.À bientôt ! Le Théâtre Lumière</li></ul>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "00b87f7f-b3b0-454c-98a1-1e027b95cd7c",
-            "type": "qrocm",
-            "instruction": "<p>Observez le mail pour répondre aux questions suivantes.</p>",
-            "proposals": [
-              {
+          "id": "4ab8ff60-78f2-4e5c-a83b-0384b7e49938",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "97e1108c-34ef-4772-a3ca-e385d6319bc6",
                 "type": "text",
-                "content": "<span>Qui a envoyé ce mail ?</span>"
-              },
-              {
-                "input": "a",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "- Sélectionner -",
-                "ariaLabel": "expéditeur mail",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "Michel"
-                  },
-                  {
-                    "id": "2",
-                    "content": "Léo"
-                  },
-                  {
-                    "id": "3",
-                    "content": "Anna"
-                  },
-                  {
-                    "id": "4",
-                    "content": "Rayan"
-                  }
-                ],
-                "solutions": ["1"]
-              },
-              {
-                "type": "text",
-                "content": "<span>Qui va recevoir ce mail ?</span>"
-              },
-              {
-                "input": "b",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "- Sélectionner - ",
-                "ariaLabel": "destinaire mail",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "Michel uniquement"
-                  },
-                  {
-                    "id": "2",
-                    "content": "Léo uniquement"
-                  },
-                  {
-                    "id": "3",
-                    "content": "Léo, Anna, Hamed"
-                  },
-                  {
-                    "id": "4",
-                    "content": "Jennifer, Marine, Clément, Rayan"
-                  }
-                ],
-                "solutions": ["3"]
-              },
-              {
-                "type": "text",
-                "content": "<span>Quel est l'objet de ce mail ?</span>"
-              },
-              {
-                "input": "c",
-                "type": "select",
-                "display": "inline",
-                "placeholder": "- Sélectionner -",
-                "ariaLabel": "objet mail",
-                "defaultValue": "",
-                "tolerances": [],
-                "options": [
-                  {
-                    "id": "1",
-                    "content": "michel@pixmail.com"
-                  },
-                  {
-                    "id": "2",
-                    "content": "leo@laposte.net"
-                  },
-                  {
-                    "id": "3",
-                    "content": "Bonjour à tous"
-                  },
-                  {
-                    "id": "4",
-                    "content": "Costumes pour le 27 octobre"
-                  }
-                ],
-                "solutions": ["4"]
+                "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h3><p>Pour envoyer un mail, il faut remplir ses différents champs avec les bonnes informations :</p>"
               }
-            ],
-            "feedbacks": {
-              "valid": {
-                "state": "Bonne réponse !🎉",
-                "diagnosis": ""
-              },
-              "invalid": {
-                "state": "Mauvaise réponse.",
-                "diagnosis": "<p>Observez à nouveau le mail et réessayez.</p>"
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b6014eed-5edc-4010-ad7a-1e5410044f6d",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/GXJ6ihZ.png",
+                "alt": "",
+                "alternativeText": "<p>Le champ Objet permet de donner un titre au mail. Il permet de vite connaître le sujet du mail. Le champ De indique la personne qui envoie le mail. Le champ À indique la personne qui reçoit le mail.</p>"
               }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "ea80ad36-bf10-4eb1-bc3b-3cf044306e16",
-      "type": "transition",
-      "title": "",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "41c881bd-3195-459e-b1bc-c3a21b349384",
-            "type": "text",
-            "content": "<p>Pour finir ce module, nous vous proposons d’envoyer un mail avec une vraie adresse à l'un de vos proches ! <span aria-hidden=\"true\">💫</span></p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "f4b87554-8177-409c-89b8-d0e99f3bac28",
-      "type": "challenge",
-      "title": "Envoyer un mail à un ami",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "e2eda86f-fcd2-4eba-922f-bf299ebddabd",
-            "type": "text",
-            "content": "<p>Envoyez un mail à une personne que vous connaissez avec votre adresse mail.</p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "7491dced-4c2d-40b4-a284-fd88b730b3db",
-            "type": "qcu",
-            "instruction": "<p>Avez-vous réussi à le faire ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>oui</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Bravo. Vous obtiendrez peut-être une réponse !</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>non</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Pour réussir, retournez voir la vidéo ou demandez de l'aide si vous êtes accompagné.<br>Si vous n'avez pas d'adresse mail, vous pouvez vous en créer une gratuitement sur internet.</p>"
+          "id": "667ebed8-cb72-4ac1-a9cd-7ae5f805f005",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "27281e03-bec3-43e3-985d-38b2eaec4c20",
+                "type": "text",
+                "content": "<p>Rayan vient de recevoir une réponse : le prochain cours est à 20 heures. <span aria-hidden=\"true\">✨</span></p><p>Maintenant, vous allez devoir analyser un autre mail.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4159b20c-fe4b-41fd-80f9-eefdc6240e9e",
+          "type": "challenge",
+          "title": "Analyser un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e7288030-487b-4eb1-b256-7296fcd5c38b",
+                "type": "text",
+                "content": "<p>Voici un mail qui a été envoyé pour préparer les costumes du spectacle. </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2ddc4d66-3323-401b-b8ee-4f56bcd9c794",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/iQWPTJW.png",
+                "alt": "",
+                "alternativeText": "<ul><li>22 octobre 2024 (il y a 8 jours)</li> <li>De : michel@pixmail.com</li> <li>À :leo@laposte.net; anna@gmail.com; hamed@orange.fr</li><li> Objet : Costume pour le 27 octobre</li> <li>Bonjour à tous, Pensez à amener vos costumes de chevaliers pour la dernière scène. Pas besoin de prévenir Jennifer, Marine, Clément et Rayan : ils seront absents. Rendez-vous comme d'habitude au 7 rue Babylone à 18h.À bientôt ! Le Théâtre Lumière</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "00b87f7f-b3b0-454c-98a1-1e027b95cd7c",
+                "type": "qrocm",
+                "instruction": "<p>Observez le mail pour répondre aux questions suivantes.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<span>Qui a envoyé ce mail ?</span>"
+                  },
+                  {
+                    "input": "a",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "expéditeur mail",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Michel"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Léo"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Anna"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Rayan"
+                      }
+                    ],
+                    "solutions": ["1"]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Qui va recevoir ce mail ?</span>"
+                  },
+                  {
+                    "input": "b",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner - ",
+                    "ariaLabel": "destinaire mail",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Michel uniquement"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Léo uniquement"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Léo, Anna, Hamed"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Jennifer, Marine, Clément, Rayan"
+                      }
+                    ],
+                    "solutions": ["3"]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Quel est l'objet de ce mail ?</span>"
+                  },
+                  {
+                    "input": "c",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "objet mail",
+                    "defaultValue": "",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "michel@pixmail.com"
+                      },
+                      {
+                        "id": "2",
+                        "content": "leo@laposte.net"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Bonjour à tous"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Costumes pour le 27 octobre"
+                      }
+                    ],
+                    "solutions": ["4"]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bonne réponse !🎉",
+                    "diagnosis": ""
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "<p>Observez à nouveau le mail et réessayez.</p>"
+                  }
                 }
               }
-            ],
-            "solution": "1"
-          }
+            }
+          ]
+        },
+        {
+          "id": "ea80ad36-bf10-4eb1-bc3b-3cf044306e16",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "41c881bd-3195-459e-b1bc-c3a21b349384",
+                "type": "text",
+                "content": "<p>Pour finir ce module, nous vous proposons d’envoyer un mail avec une vraie adresse à l'un de vos proches ! <span aria-hidden=\"true\">💫</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f4b87554-8177-409c-89b8-d0e99f3bac28",
+          "type": "challenge",
+          "title": "Envoyer un mail à un ami",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e2eda86f-fcd2-4eba-922f-bf299ebddabd",
+                "type": "text",
+                "content": "<p>Envoyez un mail à une personne que vous connaissez avec votre adresse mail.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7491dced-4c2d-40b4-a284-fd88b730b3db",
+                "type": "qcu",
+                "instruction": "<p>Avez-vous réussi à le faire ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>oui</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p>Bravo. Vous obtiendrez peut-être une réponse !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>non</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p>Pour réussir, retournez voir la vidéo ou demandez de l'aide si vous êtes accompagné.<br>Si vous n'avez pas d'adresse mail, vous pouvez vous en créer une gratuitement sur internet.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
         }
       ]
     }

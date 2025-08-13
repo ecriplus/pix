@@ -11,23 +11,29 @@
     "tabletSupport": "inconvenient",
     "objectives": ["Démonstration"]
   },
-  "grains": [
+  "sections": [
     {
-      "id": "ef9ce6eb-f3db-447f-808f-aa6a06b940c9",
-      "type": "lesson",
-      "title": "Démo LLM",
-      "components": [
+      "id": "9f652ffa-8129-48ee-a36f-407130c8664a",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "348a0dc3-4e8e-4cf9-ab37-3280931cbab7",
-            "type": "embed",
-            "isCompletionRequired": false,
-            "title": "ChatPix",
-            "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbeufuv30000wa013ztfk809",
-            "instruction": "<p>Vous pouvez discuter avec ChatPix :</p>",
-            "height": 600
-          }
+          "id": "ef9ce6eb-f3db-447f-808f-aa6a06b940c9",
+          "type": "lesson",
+          "title": "Démo LLM",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "348a0dc3-4e8e-4cf9-ab37-3280931cbab7",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "ChatPix",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbeufuv30000wa013ztfk809",
+                "instruction": "<p>Vous pouvez discuter avec ChatPix :</p>",
+                "height": 600
+              }
+            }
+          ]
         }
       ]
     }

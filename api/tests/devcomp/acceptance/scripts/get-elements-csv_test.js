@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 
 import { getElements, getElementsListAsCsv } from '../../../../scripts/modulix/get-elements-csv.js';
+import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
 import { expect } from '../../../test-helper.js';
 import moduleContent from './test-module.json' with { type: 'json' };
 
@@ -8,7 +9,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
   let modulesListAsJs;
 
   beforeEach(async function () {
-    modulesListAsJs = [moduleContent];
+    modulesListAsJs = [ModuleFactory.build(moduleContent)];
   });
 
   describe('#getElements', function () {
@@ -48,20 +49,26 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
           tabletSupport: 'inconvenient',
           objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
         },
-        grains: [
+        sections: [
           {
-            id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
-            type: 'discovery',
-            title: 'Voici une leçon',
-            components: [
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: '88fd4558-a3d5-41e9-a7f0-896076529e90',
-                  type: 'separatnor',
-                },
+                id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                type: 'discovery',
+                title: 'Voici une leçon',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: '88fd4558-a3d5-41e9-a7f0-896076529e90',
+                      type: 'separatnor',
+                    },
+                  },
+                  elementWithUnknownType,
+                ],
               },
-              elementWithUnknownType,
             ],
           },
         ],
@@ -102,7 +109,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"4ce2a31a-6584-4dae-87c6-d08b58d0f3b9"\t"c23436d4-6261-49f1-b50d-13a547529c29"\t"qrocm"\t"Connaissez-vous bien Pix"\t7\t14\t"<p>Compléter le texte suivant :</p>"
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb4"\t"0e3315fd-98ad-492f-9046-4aa867495d84"\t"embed"\t"Embed non-auto"\t8\t15\t"<p>Vous participez à la visioconférence ci-dessous.</p>"
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"f00133f5-0653-425b-a25f-3c9604820529"\t"custom-draft"\t"Elément custom"\t9\t16\t"<p>Retournez les cartes.</p>"
-"6282925d-4775-4bca-b513-4c3009ec5886"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"0e3315fd-98ad-492f-9046-4aa867495d85"\t"custom"\t"Elément custom"\t9\t17\t"<p>Vous visualisez un événement custom.</p>"
+"6282925d-4775-4bca-b513-4c3009ec5886"\t"46577fb1-aadb-49ba-b3fd-721a11da8eb5"\t"0e3315fd-98ad-492f-9046-4aa867495d85"\t"custom"\t"Elément custom"\t9\t17\t
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"cf436761-f56d-4b01-83f9-942afe9ce72c"\t"ed795d29-5f04-499c-a9c8-4019125c5cb1"\t"qab"\t"test qab"\t10\t18\t"<p><strong>Maintenant, entraînez-vous sur des exemples concrets !</strong> </p> <p> Pour chaque exemple, choisissez si l’affirmation est <strong>vraie</strong> ou <strong>fausse</strong>.</p>"
 "6282925d-4775-4bca-b513-4c3009ec5886"\t"cef7d350-008b-410b-8a6a-39b56efdbe8d"\t"0c397035-a940-441f-8936-050db7f997af"\t"qcu-discovery"\t"test qcu-discovery"\t11\t19\t"<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>"`);
     });

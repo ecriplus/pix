@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 
 import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import { getCsvContent } from '../../src/shared/infrastructure/utils/csv/write-csv-utils.js';
+import { getGrains } from './utils/get-grains.js';
 
 export async function getModulesListAsCsv(modules) {
   return await getCsvContent({
@@ -12,19 +13,19 @@ export async function getModulesListAsCsv(modules) {
       { label: 'ModuleSlug', value: 'slug' },
       { label: 'ModuleLevel', value: 'details.level' },
       { label: 'ModuleLink', value: (row) => `https://app.recette.pix.fr/modules/${row.slug}` },
-      { label: 'ModuleTotalGrains', value: 'grains.length' },
+      { label: 'ModuleTotalGrains', value: (row) => getGrains(row).length },
       {
         label: 'ModuleTotalActivities',
-        value: (row) => row.grains.filter((grain) => grain.type === 'activity').length,
+        value: (row) => getGrains(row).filter((grain) => grain.type === 'activity').length,
       },
       {
         label: 'ModuleTotalLessons',
-        value: (row) => row.grains.filter((grain) => grain.type === 'lesson').length,
+        value: (row) => getGrains(row).filter((grain) => grain.type === 'lesson').length,
       },
       { label: 'ModuleDuration', value: (row) => `=TEXT(${row.details.duration}/24/60; "mm:ss")` },
       {
         label: 'ModuleTotalElements',
-        value: (row) => _getTotalElementsCount(row.grains),
+        value: (row) => _getTotalElementsCount(getGrains(row)),
       },
     ],
   });

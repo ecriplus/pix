@@ -108,6 +108,14 @@ const grainSchema = Joi.object({
     }),
 }).required();
 
+const moduleSectionSchema = Joi.object({
+  id: uuidSchema,
+  type: Joi.string()
+    .valid('question-yourself', 'explore-to-understand', 'retain-the-essentials', 'practise', 'go-further', 'blank')
+    .required(),
+  grains: Joi.array().items(grainSchema).required(),
+});
+
 const moduleSchema = Joi.object({
   id: uuidSchema,
   slug: Joi.string()
@@ -116,7 +124,7 @@ const moduleSchema = Joi.object({
   title: htmlNotAllowedSchema.required(),
   isBeta: Joi.boolean().required(),
   details: moduleDetailsSchema.required(),
-  grains: Joi.array().items(grainSchema).required(),
+  sections: Joi.array().items(moduleSectionSchema).required(),
 }).required();
 
 export { grainSchema, moduleSchema };

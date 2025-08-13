@@ -624,19 +624,25 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
           tabletSupport: 'comfortable',
           objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
         },
-        grains: [
+        sections: [
           {
-            id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
-            type: 'lesson',
-            title: 'Voici une leçon',
-            components: [
+            id: '235c6394-5c43-4dc9-aa77-2895b642de7c',
+            type: 'blank',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: '84726001-1665-457d-8f13-4a74dc4768ea',
-                  type: 'text',
-                  content: '<h3>Content.</h3>',
-                },
+                id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                type: 'lesson',
+                title: 'Voici une leçon',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: '84726001-1665-457d-8f13-4a74dc4768ea',
+                      type: 'text',
+                      content: '<h3>Content.</h3>',
+                    },
+                  },
+                ],
               },
             ],
           },

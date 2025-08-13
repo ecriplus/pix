@@ -11,22 +11,27 @@
     "tabletSupport": "inconvenient",
     "objectives": ["Test parcours combiné"]
   },
-  "grains": [
+  "sections": [
     {
-      "id": "6728cc2c-7fef-48aa-8586-9c98f010d3be",
-      "type": "activity",
-      "title": "Grain de démo",
-      "components": [
+      "id": "33bb3827-c5df-4300-8fa0-aa78136a099c",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "760ed7fc-cad2-4771-86ff-00f856d557ec",
-            "type": "text",
-            "content": "<p>Bravo, le module 1 est terminé</p>"
-          }
+          "id": "6728cc2c-7fef-48aa-8586-9c98f010d3be",
+          "type": "activity",
+          "title": "Grain de démo",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "760ed7fc-cad2-4771-86ff-00f856d557ec",
+                "type": "text",
+                "content": "<p>Bravo, le module 1 est terminé</p>"
+              }
+            }
+          ]
         }
       ]
     }
-
   ]
 }

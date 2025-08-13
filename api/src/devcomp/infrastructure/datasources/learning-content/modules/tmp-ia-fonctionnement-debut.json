@@ -14,622 +14,628 @@
     ],
     "tabletSupport": "comfortable"
   },
-  "grains": [
+  "sections": [
     {
-      "id": "031b056a-0e5f-48f3-9a49-45688a354dea",
-      "type": "transition",
-      "title": "Accroche",
-      "components": [
+      "id": "49043434-a859-4873-83ef-0ac1c3b107a7",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "bf7e524d-cef5-4cbf-b15d-7a03cfb4195d",
-            "type": "text",
-            "content": "<p>Bob utilise ChatGPT pour organiser ses prochaines vacances.&nbsp;C’est un logiciel d'IA générative.<br>Voici sa demande&nbsp;:</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "aff736d6-2545-4e23-b5ec-e9551ec2bcb9",
-            "type": "image",
-            "url": "https://assets.pix.org/draft/modules/mZ5u4CJ.png",
-            "alt": "conversation décrite dans l'alternative textuelle",
-            "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 ChatGPT&nbsp;: ...</p>",
-            "legend": "",
-            "licence": ""
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
-            "type": "qcu",
-            "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que ce logiciel d'IA générative réponde à cette demande ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>« Bien sûr ! Tu veux la main gauche ou la main droite ? 👋 »</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p><strong>Vous voulez un peu d’humour !</strong> ChatGPT, lui, répondrait sûrement plus sérieusement à cette demande pour aider Bob.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>« Oui ! à partir de quand veux-tu partir ? ⛵ »</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p><strong>C’est une réponse que pourrait donner ChatGPT.</strong> En effet, il faut savoir quand commencent les vacances de Bob pour mieux l’aider !</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "state": "",
-                  "diagnosis": "<p>Vous avez eu du mal à vous décider ? En tout cas, ChatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
-                }
-              }
-            ],
-            "solution": "2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "e30e0e91-0983-48c4-8181-173b62f1b5b9",
-      "type": "transition",
-      "title": "Transition 1",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "6b3b7a1f-1245-43fe-bb96-2d5c01a4a30e",
-            "type": "text",
-            "content": "<p>Un logiciel d'IA générative comme ChatGPT répond souvent de manière pertinente aux demandes des utilisateurs, sur des sujets très variés.&nbsp; <br></p><p>Mais, qu’est ce qu’un logiciel d’IA générative ? Et comment arrivent-ils à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "c39f607d-e4fa-4b3c-a075-b75bb81dff3c",
-      "type": "discovery",
-      "title": "Découverte 1",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "81f44774-8b4d-4d91-b1c2-2a26044eb9df",
-            "type": "qcu-discovery",
-            "instruction": "<p>Comme ChatGPT, d’autres logiciels d’IA générative sont capables de produire du texte.</p><p> En reconnaissez-vous un ci-dessous ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Gemini</p>",
-                "feedback": {
-                  "diagnosis": "<p>Bien vu ! </p><p>En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Deepseek</p>",
-                "feedback": {
-                  "diagnosis": "<p>Bien vu ! </p><p> En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Mistral<br></p>",
-                "feedback": {
-                  "diagnosis": "<p>Bien vu ! </p><p>  En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>Je ne sais pas</p>",
-                "feedback": {
-                  "diagnosis": "<p>En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
-                }
-              }
-            ],
-            "solution": "1"
-          }
-        }
-      ]
-    },
-    {
-      "id": "1fce9705-da34-49c7-a7f2-c65db62018a6",
-      "type": "lesson",
-      "title": "Lesson 1",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
-            "type": "text",
-            "content": "<p><br></p><p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur <strong>des sujets très variés</strong> (transports, visites, cuisine…).</p><p><br>Il en existe de nombreux à disposition grand public : chatGPT, microsoft Copilot, Deepseek, Perplexity, Claude...</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "e02e013a-1153-4cd0-b6ca-19c8683607ce",
-            "type": "separator"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "984bbfce-c558-432a-9746-22fee645e643",
-            "type": "text",
-            "content": "<p>🤔 Bon à savoir<br>Certains logiciels d’Ia générative sont capables de générer des images, des vidéos ou des sons.</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "feb5f1c1-8cbb-4a7e-be2f-6a02608af3ad",
-      "type": "transition",
-      "title": "Transition 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "9a7f547c-7d63-4ece-b93e-96c92e48ae5a",
-            "type": "text",
-            "content": "<p>Mais comment un logiciel d'IA générative fait-il pour construire sa réponse quand un utilisateur lui écrit ?&nbsp; Voyons ça ensemble avec un jeu ! 🕹️</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "9b5aa09c-2fa9-4b70-9bf2-90181497e38e",
-      "type": "discovery",
-      "title": "Découverte 2",
-      "components": [
-        {
-          "type": "stepper",
-          "steps": [
+          "id": "031b056a-0e5f-48f3-9a49-45688a354dea",
+          "type": "transition",
+          "title": "Accroche",
+          "components": [
             {
-              "elements": [
-                {
-                  "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
-                  "type": "text",
-                  "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.&nbsp;</p><p><strong>👉 Cherchez un mot dans votre tête pour compléter ce texte.</strong></p><p><strong><br></strong></p><p><em>Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du…</em></p>"
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "bf7e524d-cef5-4cbf-b15d-7a03cfb4195d",
+                "type": "text",
+                "content": "<p>Bob utilise ChatGPT pour organiser ses prochaines vacances.&nbsp;C’est un logiciel d'IA générative.<br>Voici sa demande&nbsp;:</p>"
+              }
             },
             {
-              "elements": [
-                {
-                  "id": "8f59bf30-fa84-4114-9707-eabc9f648f9e",
-                  "type": "text",
-                  "content": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
-                },
-                {
-                  "id": "de590f05-252c-4110-859a-07a2e276ac80",
-                  "type": "qcu-discovery",
-                  "instruction": "<p>Comment avez-vous choisi votre mot ?<br></p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>J’ai choisi un mot au hasard.</p>",
-                      "feedback": {
-                        "diagnosis": "<p>C'est une méthode qui peut donner des résultats décalés, et parfois très drôles !</p><p>Les logiciels d'intelligence artificielle génératives, eux, utilisent une autre méthode.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>J’ai choisi un mot très probable.<br></p>",
-                      "feedback": {
-                        "diagnosis": "<p>C'est une bonne méthode ! </p><p>Et c'est aussi comme ça que fonctionne les logiciels d'IA génératives !</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>J’ai choisi un mot que je préfère.<br></p>",
-                      "feedback": {
-                        "diagnosis": "<p>C'est une bonne méthode, pour un humain !</p><p>Comme les machines n'ont pas de préférences, elles utilisent une autre méthode...</p>"
-                      }
+              "type": "element",
+              "element": {
+                "id": "aff736d6-2545-4e23-b5ec-e9551ec2bcb9",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/mZ5u4CJ.png",
+                "alt": "conversation décrite dans l'alternative textuelle",
+                "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 ChatGPT&nbsp;: ...</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
+                "type": "qcu",
+                "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que ce logiciel d'IA générative réponde à cette demande ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>« Bien sûr ! Tu veux la main gauche ou la main droite ? 👋 »</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p><strong>Vous voulez un peu d’humour !</strong> ChatGPT, lui, répondrait sûrement plus sérieusement à cette demande pour aider Bob.</p>"
                     }
-                  ],
-                  "solution": "2"
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "eb7f4031-119d-452b-8789-06f9fd19f56c",
-                  "type": "text",
-                  "content": "<p>Pour un logiciel d'IA générative c’est un peu le même principe : il construit sa réponse en complétant un texte mot après mot en choisissant des mots très probables. </p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
-                },
-                {
-                  "id": "4c59286a-4fe4-4991-a8a7-023fd736c3a5",
-                  "type": "custom-draft",
-                  "title": "Les probabilités que l'IA choisisse le mot suivant dans une conversation",
-                  "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-crepe-probabilite.html",
-                  "instruction": "<p><br></p>",
-                  "height": 550
-                },
-                {
-                  "id": "860fd8e3-4b25-4ffb-b813-a7c8ca794112",
-                  "type": "qcu-discovery",
-                  "instruction": "<p>D’après vous, quel mot va choisir l’IA à cette dernière étape ?</p>",
-                  "proposals": [
-                    {
-                      "id": "1",
-                      "content": "<p>sucre</p>",
-                      "feedback": {
-                        "diagnosis": "<p>En effet, c’est le mot le plus probable.</p>"
-                      }
-                    },
-                    {
-                      "id": "2",
-                      "content": "<p>miel</p>",
-                      "feedback": {
-                        "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir \"sucre\", qui est très probable...</p>"
-                      }
-                    },
-                    {
-                      "id": "3",
-                      "content": "<p>caramel</p>",
-                      "feedback": {
-                        "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir \"sucre\", qui est très probable...</p>"
-                      }
-                    },
-                    {
-                      "id": "4",
-                      "content": "<p>chocolat</p>",
-                      "feedback": {
-                        "diagnosis": "<p>Pas sûr...&nbsp;Il choisira sans doute un mot plus probable : sucre, miel ou caramel.</p>"
-                      }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>« Oui ! à partir de quand veux-tu partir ? ⛵ »</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p><strong>C’est une réponse que pourrait donner ChatGPT.</strong> En effet, il faut savoir quand commencent les vacances de Bob pour mieux l’aider !</p>"
                     }
-                  ],
-                  "solution": "1"
-                }
-              ]
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "state": "",
+                      "diagnosis": "<p>Vous avez eu du mal à vous décider ? En tout cas, ChatGPT répondrait sûrement quelque chose pour aider Bob à s’organiser.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "6a0ff61b-362d-41c4-8dd6-420eb60bf743",
-      "type": "lesson",
-      "title": "Lesson 2 - avec stepper",
-      "components": [
-        {
-          "type": "stepper",
-          "steps": [
-            {
-              "elements": [
-                {
-                  "id": "23d57d7e-2bea-4c79-83e8-3fa7bcc273d0",
-                  "type": "text",
-                  "content": "<p>Pour répondre, un logiciel d'<strong>IA générative</strong>,&nbsp;construit sa réponse comme s'il <strong>complétait la demande&nbsp;de l’utilisateur</strong>.</p><p> Pour compléter ce texte, il choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que le logiciel choississe ce mot. </p><p>Il répète cette méthode&nbsp;<strong>mot après m</strong><strong>ot</strong>.</p>"
-                },
-                {
-                  "id": "8759c6d1-0193-461f-9a51-3220ba255978",
-                  "type": "image",
-                  "url": "https://assets.pix.org/draft/modules/m1e42Vd.png",
-                  "alt": "Schéma concernant la probabilité des mots qui apparaissent",
-                  "alternativeText": "<p>à venir</p>",
-                  "legend": "",
-                  "licence": ""
-                }
-              ]
-            },
-            {
-              "elements": [
-                {
-                  "id": "956543e6-0094-44bb-b3f9-588542bc441c",
-                  "type": "text",
-                  "content": "<p>⚠️ Cette méthode a des<strong> limites</strong>. </p><p> Les réponses d’un logiciel d'IA générative sont une suite de mots très probables, mais les phrases produites ne sont <strong>pas toujours vraies</strong>&nbsp;: il peut y avoir des<strong> erreurs</strong>.&nbsp; </p><p> 🔍 Il faut donc <strong>toujours vérifier </strong>ce qu’un logiciel d'IA générative écrit.</p>"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "a61e19c3-a117-446d-bb94-487fcefdbf16",
-      "type": "transition",
-      "title": "Transition 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "4b21d13f-d359-4d81-8884-327703eea94c",
-            "type": "text",
-            "content": "<p>Vous connaissez maintenant la méthode utilisée par un logiciel d'IA générative pour écrire ses réponses. </p><p>Mais comment connaît-il tous ces mots ? Et comment sait-il si ces mots sont probables ou non ?</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "204bc632-d9ee-4794-9ce8-bd4626247e48",
-      "type": "discovery",
-      "title": "Découverte 3",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
-            "type": "text",
-            "content": "<p>Le secret : <strong>l'entraînement.</strong> </p><p>Entraîner une IA, c'est lui donner des textes pour qu'elle les analyse et s'entraîne à les réécrire.</p>"
-          }
         },
         {
-          "type": "element",
-          "element": {
-            "id": "4deeee7c-1c90-4753-8d89-8a0d86dac39b",
-            "type": "qcu-discovery",
-            "instruction": "<p>Si vous deviez entraîner une IA, quels textes disponibles sur internet lui donneriez-vous ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>tous les articles de Wikipedia</p>",
-                "feedback": {
-                  "diagnosis": "<p>C'est un bon début&nbsp;: les articles Wikipedia sont très nombreux, variés et souvent bien écrits.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>des discussions de forums</p>",
-                "feedback": {
-                  "diagnosis": "<p>C'est intéressant pour avoir des mots du quotidien ! Mais la précision du vocabulaire ne sera sûrement pas garantie.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>des articles scientifiques</p>",
-                "feedback": {
-                  "diagnosis": "<p>C'est utile pour avoir du vocabulaire scientifique, donc des mots très précis.</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>toutes ces réponses</p>",
-                "feedback": {
-                  "diagnosis": "<p>C'est l'idéal&nbsp;: plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
-                }
-              },
-              {
-                "id": "5",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "diagnosis": "<p>Plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
-                }
-              }
-            ],
-            "solution": "4"
-          }
-        }
-      ]
-    },
-    {
-      "id": "06a185df-1a0f-4709-abe7-953211e75a4f",
-      "type": "lesson",
-      "title": "Lesson 3 - avec stepper",
-      "components": [
-        {
-          "type": "stepper",
-          "steps": [
+          "id": "e30e0e91-0983-48c4-8181-173b62f1b5b9",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
             {
-              "elements": [
-                {
-                  "id": "fcac6dfc-fc03-49e2-af21-7356908e1094",
-                  "type": "text",
-                  "content": "<p>Si on donne à un logiciel d'IA générative des <strong>milliards de textes variés</strong> <strong>pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs.&nbsp; </p><p>\n✔️ Par exemple, ChatGPT ou Mistral sont entraînées sur des textes disponibles sur internet&nbsp;: articles Wikipédia, forums, blogs, revues scientifiques…</p>"
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "6b3b7a1f-1245-43fe-bb96-2d5c01a4a30e",
+                "type": "text",
+                "content": "<p>Un logiciel d'IA générative comme ChatGPT répond souvent de manière pertinente aux demandes des utilisateurs, sur des sujets très variés.&nbsp; <br></p><p>Mais, qu’est ce qu’un logiciel d’IA générative ? Et comment arrivent-ils à faire cela ? C’est ce que nous allons découvrir ensemble.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c39f607d-e4fa-4b3c-a075-b75bb81dff3c",
+          "type": "discovery",
+          "title": "Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "81f44774-8b4d-4d91-b1c2-2a26044eb9df",
+                "type": "qcu-discovery",
+                "instruction": "<p>Comme ChatGPT, d’autres logiciels d’IA générative sont capables de produire du texte.</p><p> En reconnaissez-vous un ci-dessous ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Gemini</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! </p><p>En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Deepseek</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! </p><p> En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Mistral<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! </p><p>  En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En fait, toutes les propositions étaient des IA génératives. Il en existe beaucoup !</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1fce9705-da34-49c7-a7f2-c65db62018a6",
+          "type": "lesson",
+          "title": "Lesson 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
+                "type": "text",
+                "content": "<p><br></p><p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur <strong>des sujets très variés</strong> (transports, visites, cuisine…).</p><p><br>Il en existe de nombreux à disposition grand public : chatGPT, microsoft Copilot, Deepseek, Perplexity, Claude...</p>"
+              }
             },
             {
-              "elements": [
+              "type": "element",
+              "element": {
+                "id": "e02e013a-1153-4cd0-b6ca-19c8683607ce",
+                "type": "separator"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "984bbfce-c558-432a-9746-22fee645e643",
+                "type": "text",
+                "content": "<p>🤔 Bon à savoir<br>Certains logiciels d’Ia générative sont capables de générer des images, des vidéos ou des sons.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feb5f1c1-8cbb-4a7e-be2f-6a02608af3ad",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9a7f547c-7d63-4ece-b93e-96c92e48ae5a",
+                "type": "text",
+                "content": "<p>Mais comment un logiciel d'IA générative fait-il pour construire sa réponse quand un utilisateur lui écrit ?&nbsp; Voyons ça ensemble avec un jeu ! 🕹️</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9b5aa09c-2fa9-4b70-9bf2-90181497e38e",
+          "type": "discovery",
+          "title": "Découverte 2",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
                 {
-                  "id": "1ff9ddc9-f270-4df1-a0d0-06e7d2ee325f",
-                  "type": "text",
-                  "content": "<p>⚠️ Attention&nbsp;: <strong>les textes sur internet ont parfois des</strong> <strong>erreurs</strong>. Et un logiciel d'IA générative ne repère&nbsp;pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs </strong>dans ses réponses.</p><p><br>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’un logiciel d'IA générative écrit.</p>"
+                  "elements": [
+                    {
+                      "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
+                      "type": "text",
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.&nbsp;</p><p><strong>👉 Cherchez un mot dans votre tête pour compléter ce texte.</strong></p><p><strong><br></strong></p><p><em>Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du…</em></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8f59bf30-fa84-4114-9707-eabc9f648f9e",
+                      "type": "text",
+                      "content": "<p>Votre crêpe est peut-être au « chocolat », « sucre », « fromage » ou autre !</p>"
+                    },
+                    {
+                      "id": "de590f05-252c-4110-859a-07a2e276ac80",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Comment avez-vous choisi votre mot ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>J’ai choisi un mot au hasard.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>C'est une méthode qui peut donner des résultats décalés, et parfois très drôles !</p><p>Les logiciels d'intelligence artificielle génératives, eux, utilisent une autre méthode.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>J’ai choisi un mot très probable.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>C'est une bonne méthode ! </p><p>Et c'est aussi comme ça que fonctionne les logiciels d'IA génératives !</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>J’ai choisi un mot que je préfère.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>C'est une bonne méthode, pour un humain !</p><p>Comme les machines n'ont pas de préférences, elles utilisent une autre méthode...</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "eb7f4031-119d-452b-8789-06f9fd19f56c",
+                      "type": "text",
+                      "content": "<p>Pour un logiciel d'IA générative c’est un peu le même principe : il construit sa réponse en complétant un texte mot après mot en choisissant des mots très probables. </p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
+                    },
+                    {
+                      "id": "4c59286a-4fe4-4991-a8a7-023fd736c3a5",
+                      "type": "custom-draft",
+                      "title": "Les probabilités que l'IA choisisse le mot suivant dans une conversation",
+                      "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-crepe-probabilite.html",
+                      "instruction": "<p><br></p>",
+                      "height": 550
+                    },
+                    {
+                      "id": "860fd8e3-4b25-4ffb-b813-a7c8ca794112",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>D’après vous, quel mot va choisir l’IA à cette dernière étape ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>sucre</p>",
+                          "feedback": {
+                            "diagnosis": "<p>En effet, c’est le mot le plus probable.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>miel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir \"sucre\", qui est très probable...</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>caramel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>C’est possible !&nbsp;Il peut aussi choisir \"sucre\", qui est très probable...</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>chocolat</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas sûr...&nbsp;Il choisira sans doute un mot plus probable : sucre, miel ou caramel.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "c8277aa6-d188-423d-b792-14cf19b50973",
-      "type": "summary",
-      "title": "Récap'",
-      "components": [
+        },
         {
-          "type": "element",
-          "element": {
-            "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
-            "type": "text",
-            "content": "<p>Résumons avant de passer à la suite&nbsp;:&nbsp; </p><ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "098df491-8249-4ded-bbad-446ee0adc80b",
-      "type": "transition",
-      "title": "Transition 4",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "8befd8fa-8fea-42f2-b8b9-a284f62e84f0",
-            "type": "text",
-            "content": "<p>Voyons si vous avez compris l’essentiel avec quelques questions !</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "8f44cbb1-a29d-4171-8386-589af0ee7482",
-      "type": "activity",
-      "title": "Exercice 1",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "58a0b8d9-30ce-4e62-95a6-b30a55a9c76d",
-            "type": "qcu",
-            "instruction": "<p>Parmi les propositions suivantes, laquelle définit le mieux ce qu’est un <strong>logiciel d’IA générative</strong> ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Un logiciel qui copie automatiquement des textes trouvés sur internet.</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse.<br></p>",
-                  "diagnosis": "<p>Le logiciel d'intelligence artificielle générative ne fait pas que copier des textes trouvés sur internet, il peut reformuler et en produire de nouveaux.</p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Un outil qui produit du texte, des images ou du son avec les consignes d’un utilisateur.</p>",
-                "feedback": {
-                  "state": "<p>Bonne réponse ! ✨</p>",
-                  "diagnosis": "<p>On appelle ces consignes données par l'utilisateur des prompts.</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Un programme qui connaît toutes les réponses à l’avance aux questions des utilisateurs.</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Contrairement à une FAQ sans intelligence artificielle, avec un logiciel d'IA générative, pas besoin de programmer à l'avance toutes les questions que vont poser les utilisateurs.</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>Un moteur de recherche qui affiche les meilleures pages web pour la recherche d’un utilisateur.</p>",
-                "feedback": {
-                  "state": "<p>Mauvaise réponse.</p>",
-                  "diagnosis": "<p>Un moteur de recherche, qui liste des résultats sur le web, est différent d'un logiciel d'intelligence artificielle générative, qui produit des réponses grâce aux probabilités.&nbsp;</p><p>Cependant, de plus en plus de moteurs de recherche utilisent l'intelligence artificielle pour proposer à leurs utilisateurs un résumé des principaux résultats de recherche.</p>"
-                }
-              }
-            ],
-            "solution": "2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "86673ff6-f7d9-41be-8455-33050d1329ec",
-      "type": "activity",
-      "title": "Exercice 2",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "9a953473-d7e1-4e85-af9f-b6ed6a43834e",
-            "type": "qab",
-            "instruction": "<p>Pour chaque affirmation ci-dessous, choisissez si elle est vraie ou fausse.</p>",
-            "cards": [
-              {
-                "id": "4959c494-cf94-4d05-b69c-4735e6b2c5eb",
-                "text": "Les logiciels d'IA générative sont entraînées uniquement sur les articles de Wikipédia.",
-                "image": {
-                  "url": "",
-                  "altText": ""
+          "id": "6a0ff61b-362d-41c4-8dd6-420eb60bf743",
+          "type": "lesson",
+          "title": "Lesson 2 - avec stepper",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "23d57d7e-2bea-4c79-83e8-3fa7bcc273d0",
+                      "type": "text",
+                      "content": "<p>Pour répondre, un logiciel d'<strong>IA générative</strong>,&nbsp;construit sa réponse comme s'il <strong>complétait la demande&nbsp;de l’utilisateur</strong>.</p><p> Pour compléter ce texte, il choisit le prochain mot selon sa probabilité d'apparaître : plus le mot est probable, plus il y a de chance que le logiciel choississe ce mot. </p><p>Il répète cette méthode&nbsp;<strong>mot après m</strong><strong>ot</strong>.</p>"
+                    },
+                    {
+                      "id": "8759c6d1-0193-461f-9a51-3220ba255978",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/m1e42Vd.png",
+                      "alt": "Schéma concernant la probabilité des mots qui apparaissent",
+                      "alternativeText": "<p>à venir</p>",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
                 },
-                "proposalA": "vrai",
-                "proposalB": "faux",
-                "solution": "B"
-              },
-              {
-                "id": "96297870-4f63-4dac-84f6-c9056e843c86",
-                "text": "Un logiciel d'IA générative construit sa réponse mot après mot, en partant du texte de l'utilisateur.",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "vrai",
-                "proposalB": "faux",
-                "solution": "A"
-              },
-              {
-                "id": "95665e37-f24c-4636-9518-a94032c7f9c8",
-                "text": "Les réponses d’un logiciel d'IA générative sont toujours correctes.",
-                "image": {
-                  "url": "",
-                  "altText": ""
-                },
-                "proposalA": "vrai",
-                "proposalB": "faux",
-                "solution": "B"
-              }
-            ],
-            "feedback": {
-              "diagnosis": ""
+                {
+                  "elements": [
+                    {
+                      "id": "956543e6-0094-44bb-b3f9-588542bc441c",
+                      "type": "text",
+                      "content": "<p>⚠️ Cette méthode a des<strong> limites</strong>. </p><p> Les réponses d’un logiciel d'IA générative sont une suite de mots très probables, mais les phrases produites ne sont <strong>pas toujours vraies</strong>&nbsp;: il peut y avoir des<strong> erreurs</strong>.&nbsp; </p><p> 🔍 Il faut donc <strong>toujours vérifier </strong>ce qu’un logiciel d'IA générative écrit.</p>"
+                    }
+                  ]
+                }
+              ]
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "44507da7-f25a-4e58-9019-7b5193b8dca6",
-      "type": "transition",
-      "title": "Transition 5",
-      "components": [
+          ]
+        },
         {
-          "type": "element",
-          "element": {
-            "id": "de48659c-5799-4a9f-9d74-3676e78c094b",
-            "type": "text",
-            "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de ChatGPT, Gemini, Le Chat ou d’un autre logiciel d'IA générative&nbsp;! 💫</p>"
-          }
-        }
-      ]
-    },
-    {
-      "id": "bbd7f431-1475-4f7a-8d53-99771395bb44",
-      "type": "challenge",
-      "title": "Défi",
-      "components": [
+          "id": "a61e19c3-a117-446d-bb94-487fcefdbf16",
+          "type": "transition",
+          "title": "Transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4b21d13f-d359-4d81-8884-327703eea94c",
+                "type": "text",
+                "content": "<p>Vous connaissez maintenant la méthode utilisée par un logiciel d'IA générative pour écrire ses réponses. </p><p>Mais comment connaît-il tous ces mots ? Et comment sait-il si ces mots sont probables ou non ?</p>"
+              }
+            }
+          ]
+        },
         {
-          "type": "element",
-          "element": {
-            "id": "546fcfcd-a7a8-4290-bde6-a8cc203013f3",
-            "type": "qcu-declarative",
-            "instruction": "<p>La prochaine fois que vous utiliserez un logiciel d'IA générative, que ferez-vous ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>J’utiliserai les réponses qu’elle me donne, sans les vérifier.</p>",
-                "feedback": {
-                  "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les logiciels d'IA générative répondent de manière souvent intéressante. </p><p>Mais ils ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
+          "id": "204bc632-d9ee-4794-9ce8-bd4626247e48",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
+                "type": "text",
+                "content": "<p>Le secret : <strong>l'entraînement.</strong> </p><p>Entraîner une IA, c'est lui donner des textes pour qu'elle les analyse et s'entraîne à les réécrire.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4deeee7c-1c90-4753-8d89-8a0d86dac39b",
+                "type": "qcu-discovery",
+                "instruction": "<p>Si vous deviez entraîner une IA, quels textes disponibles sur internet lui donneriez-vous ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>tous les articles de Wikipedia</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est un bon début&nbsp;: les articles Wikipedia sont très nombreux, variés et souvent bien écrits.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>des discussions de forums</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est intéressant pour avoir des mots du quotidien ! Mais la précision du vocabulaire ne sera sûrement pas garantie.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>des articles scientifiques</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est utile pour avoir du vocabulaire scientifique, donc des mots très précis.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>toutes ces réponses</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est l'idéal&nbsp;: plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Plus une IA est entraînée sur des textes nombreux et variés, plus elle connaîtra des mots et leurs probabilités.</p>"
+                    }
+                  }
+                ],
+                "solution": "4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "06a185df-1a0f-4709-abe7-953211e75a4f",
+          "type": "lesson",
+          "title": "Lesson 3 - avec stepper",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "fcac6dfc-fc03-49e2-af21-7356908e1094",
+                      "type": "text",
+                      "content": "<p>Si on donne à un logiciel d'IA générative des <strong>milliards de textes variés</strong> <strong>pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs.&nbsp; </p><p>\n✔️ Par exemple, ChatGPT ou Mistral sont entraînées sur des textes disponibles sur internet&nbsp;: articles Wikipédia, forums, blogs, revues scientifiques…</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "1ff9ddc9-f270-4df1-a0d0-06e7d2ee325f",
+                      "type": "text",
+                      "content": "<p>⚠️ Attention&nbsp;: <strong>les textes sur internet ont parfois des</strong> <strong>erreurs</strong>. Et un logiciel d'IA générative ne repère&nbsp;pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs </strong>dans ses réponses.</p><p><br>🔍 C’est important de le répéter&nbsp;: vérifiez toujours ce qu’un logiciel d'IA générative écrit.</p>"
+                    }
+                  ]
                 }
-              },
-              {
-                "id": "2",
-                "content": "<p>Je poserai plusieurs questions pendant la discussion.</p>",
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c8277aa6-d188-423d-b792-14cf19b50973",
+          "type": "summary",
+          "title": "Récap'",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
+                "type": "text",
+                "content": "<p>Résumons avant de passer à la suite&nbsp;:&nbsp; </p><ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "098df491-8249-4ded-bbad-446ee0adc80b",
+          "type": "transition",
+          "title": "Transition 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8befd8fa-8fea-42f2-b8b9-a284f62e84f0",
+                "type": "text",
+                "content": "<p>Voyons si vous avez compris l’essentiel avec quelques questions !</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "8f44cbb1-a29d-4171-8386-589af0ee7482",
+          "type": "activity",
+          "title": "Exercice 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "58a0b8d9-30ce-4e62-95a6-b30a55a9c76d",
+                "type": "qcu",
+                "instruction": "<p>Parmi les propositions suivantes, laquelle définit le mieux ce qu’est un <strong>logiciel d’IA générative</strong> ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Un logiciel qui copie automatiquement des textes trouvés sur internet.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.<br></p>",
+                      "diagnosis": "<p>Le logiciel d'intelligence artificielle générative ne fait pas que copier des textes trouvés sur internet, il peut reformuler et en produire de nouveaux.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Un outil qui produit du texte, des images ou du son avec les consignes d’un utilisateur.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse ! ✨</p>",
+                      "diagnosis": "<p>On appelle ces consignes données par l'utilisateur des prompts.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Un programme qui connaît toutes les réponses à l’avance aux questions des utilisateurs.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Contrairement à une FAQ sans intelligence artificielle, avec un logiciel d'IA générative, pas besoin de programmer à l'avance toutes les questions que vont poser les utilisateurs.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Un moteur de recherche qui affiche les meilleures pages web pour la recherche d’un utilisateur.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Un moteur de recherche, qui liste des résultats sur le web, est différent d'un logiciel d'intelligence artificielle générative, qui produit des réponses grâce aux probabilités.&nbsp;</p><p>Cependant, de plus en plus de moteurs de recherche utilisent l'intelligence artificielle pour proposer à leurs utilisateurs un résumé des principaux résultats de recherche.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "86673ff6-f7d9-41be-8455-33050d1329ec",
+          "type": "activity",
+          "title": "Exercice 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9a953473-d7e1-4e85-af9f-b6ed6a43834e",
+                "type": "qab",
+                "instruction": "<p>Pour chaque affirmation ci-dessous, choisissez si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "4959c494-cf94-4d05-b69c-4735e6b2c5eb",
+                    "text": "Les logiciels d'IA générative sont entraînées uniquement sur les articles de Wikipédia.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "96297870-4f63-4dac-84f6-c9056e843c86",
+                    "text": "Un logiciel d'IA générative construit sa réponse mot après mot, en partant du texte de l'utilisateur.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "95665e37-f24c-4636-9518-a94032c7f9c8",
+                    "text": "Les réponses d’un logiciel d'IA générative sont toujours correctes.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "B"
+                  }
+                ],
                 "feedback": {
-                  "diagnosis": "<p><strong>C’est un bon réflexe !</strong> </p><p> En demandant des précisions par exemple, vous pourrez avoir une réponse plus précise. </p><p> Vous pouvez aussi demander : «&nbsp;Est-ce que cela est vraiment exact ?&nbsp;».</p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres…).</p>",
-                "feedback": {
-                  "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>Un logiciel d'IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d'autres sources.</p>"
-                }
-              },
-              {
-                "id": "4",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d'IA générative peut faire des erreurs. Il faut donc toujours vérifier ses réponses.</p>"
+                  "diagnosis": ""
                 }
               }
-            ]
-          }
+            }
+          ]
+        },
+        {
+          "id": "44507da7-f25a-4e58-9019-7b5193b8dca6",
+          "type": "transition",
+          "title": "Transition 5",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "de48659c-5799-4a9f-9d74-3676e78c094b",
+                "type": "text",
+                "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de ChatGPT, Gemini, Le Chat ou d’un autre logiciel d'IA générative&nbsp;! 💫</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bbd7f431-1475-4f7a-8d53-99771395bb44",
+          "type": "challenge",
+          "title": "Défi",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "546fcfcd-a7a8-4290-bde6-a8cc203013f3",
+                "type": "qcu-declarative",
+                "instruction": "<p>La prochaine fois que vous utiliserez un logiciel d'IA générative, que ferez-vous ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>J’utiliserai les réponses qu’elle me donne, sans les vérifier.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>C’est risqué ! </strong></p><p>Les logiciels d'IA générative répondent de manière souvent intéressante. </p><p>Mais ils ne connaissent pas la signification des mots et il peut y avoir des erreurs dans leurs réponses.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Je poserai plusieurs questions pendant la discussion.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>C’est un bon réflexe !</strong> </p><p> En demandant des précisions par exemple, vous pourrez avoir une réponse plus précise. </p><p> Vous pouvez aussi demander : «&nbsp;Est-ce que cela est vraiment exact ?&nbsp;».</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je vérifierai les réponses avec d’autres outils (internet, livres…).</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Oui, c'est important !</strong> </p><p>Un logiciel d'IA générative permet de trouver très rapidement des informations. </p><p>Mais il est nécessaire de vérifier ces informations ailleurs, avec d'autres sources.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d'IA générative peut faire des erreurs. Il faut donc toujours vérifier ses réponses.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     }

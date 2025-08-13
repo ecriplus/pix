@@ -12,13 +12,15 @@ function serialize(module) {
         isBeta: module.isBeta,
         version: module.version,
         details: module.details,
-        grains: module.grains.map((grain) => {
-          return {
-            id: grain.id,
-            title: grain.title,
-            type: grain.type,
-            components: grain.components,
-          };
+        grains: module.sections.flatMap((section) => {
+          return section.grains.map((grain) => {
+            return {
+              id: grain.id,
+              title: grain.title,
+              type: grain.type,
+              components: grain.components,
+            };
+          });
         }),
       };
 
