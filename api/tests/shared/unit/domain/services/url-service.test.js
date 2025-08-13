@@ -143,6 +143,20 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
         expect(url).to.equal('https://test.app.pix.org/?lang=en#section');
       });
     });
+
+    context('when skipLangParam is true', function () {
+      it('does not add the "lang" query param', function () {
+        // given
+        const locale = 'en';
+        const pathname = '/api/hello';
+
+        // when
+        const url = getPixAppUrl(locale, { pathname, skipLangParam: true });
+
+        // then
+        expect(url).to.equal('https://test.app.pix.org/api/hello');
+      });
+    });
   });
 
   describe('getPixOrgaUrl', function () {
@@ -349,7 +363,7 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
 
         // then
         expect(url).to.equal(
-          `https://test.app.pix.org/api/users/validate-email?token=ABC&redirect_url=${encodeURIComponent(redirectUrl)}&lang=en`,
+          `https://test.app.pix.org/api/users/validate-email?token=ABC&redirect_url=${encodeURIComponent(redirectUrl)}`,
         );
       });
     });
@@ -373,7 +387,7 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
         const url = getEmailValidationUrl({ locale: 'fr', token: 'ABC' });
 
         // then
-        expect(url).to.equal('https://test.app.pix.org/api/users/validate-email?token=ABC&lang=fr');
+        expect(url).to.equal('https://test.app.pix.org/api/users/validate-email?token=ABC');
       });
     });
   });
