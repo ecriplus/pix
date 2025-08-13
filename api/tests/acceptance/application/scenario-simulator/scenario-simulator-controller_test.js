@@ -22,9 +22,17 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       role: SUPER_ADMIN,
     });
 
-    databaseBuilder.factory.buildFlashAlgorithmConfiguration({
+    // TODO: can be deleted when migrating getMostRecentBeforeDate()
+    const algo = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
       maximumAssessmentLength: 2,
       createdAt: new Date('2022-02-01'),
+    });
+
+    databaseBuilder.factory.buildCertificationConfiguration({
+      challengesConfiguration: {
+        ...algo,
+        maximumAssessmentLength: 2,
+      },
     });
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });

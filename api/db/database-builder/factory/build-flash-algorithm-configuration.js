@@ -1,5 +1,8 @@
 import { databaseBuffer } from '../database-buffer.js';
 
+/**
+ * @deprecated replaced by buildCertificationConfiguration
+ */
 const buildFlashAlgorithmConfiguration = function ({
   maximumAssessmentLength = 20,
   challengesBetweenSameCompetence = null,

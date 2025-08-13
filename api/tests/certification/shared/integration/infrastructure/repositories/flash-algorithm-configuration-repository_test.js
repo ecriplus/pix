@@ -10,16 +10,14 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
     describe('when there is a saved configuration', function () {
       it('should return a flash algorithm configuration', async function () {
         // given
-        const flashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 2,
-          challengesBetweenSameCompetence: 3,
-          variationPercent: 4,
-          limitToOneQuestionPerTube: true,
-          enablePassageByAllCompetences: false,
-        });
-
-        const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-          ...flashAlgorithmConfiguration,
+        databaseBuilder.factory.buildCertificationConfiguration({
+          challengesConfiguration: {
+            maximumAssessmentLength: 10,
+            challengesBetweenSameCompetence: 20,
+            limitToOneQuestionPerTube: true,
+            enablePassageByAllCompetences: true,
+            variationPercent: 0.8,
+          },
         });
 
         await databaseBuilder.commit();
@@ -28,34 +26,47 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         const configResult = await flashAlgorithmConfigurationRepository.getMostRecent();
 
         // then
-        expect(configResult.toDTO()).to.deep.equal(expectedFlashAlgorithmConfiguration.toDTO());
+        expect(configResult).to.deep.equal({
+          maximumAssessmentLength: 10,
+          challengesBetweenSameCompetence: 20,
+          limitToOneQuestionPerTube: true,
+          enablePassageByAllCompetences: true,
+          variationPercent: 0.8,
+          createdAt: undefined, // TODO: delete when deleting prop in domain model
+        });
       });
     });
 
     describe('when there are multiple saved configurations', function () {
       it('should return the latest', async function () {
         // given
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2020-01-01'),
+          expirationDate: new Date('2020-12-01'),
+          challengesConfiguration: {
+            maximumAssessmentLength: 1000,
+            challengesBetweenSameCompetence: 2000,
+            variationPercent: 3000,
+            limitToOneQuestionPerTube: false,
+            enablePassageByAllCompetences: true,
+          },
+        });
+
         const latestFlashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 2,
-          challengesBetweenSameCompetence: 3,
-          variationPercent: 4,
-          limitToOneQuestionPerTube: true,
-          enablePassageByAllCompetences: false,
-          createdAt: new Date('2021-01-01'),
+          startingDate: new Date('2020-12-01'),
+          expirationDate: null,
+          challengesConfiguration: {
+            maximumAssessmentLength: 2,
+            challengesBetweenSameCompetence: 3,
+            variationPercent: 4,
+            limitToOneQuestionPerTube: true,
+            enablePassageByAllCompetences: false,
+          },
         });
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 2,
-          challengesBetweenSameCompetence: 3,
-          variationPercent: 4,
-          limitToOneQuestionPerTube: true,
-          enablePassageByAllCompetences: false,
-          createdAt: new Date('2020-01-01'),
-        });
-
-        const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-          ...latestFlashAlgorithmConfiguration,
-        });
+        const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(
+          latestFlashAlgorithmConfiguration.challengesConfiguration,
+        );
 
         await databaseBuilder.commit();
 
@@ -63,7 +74,7 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         const configResult = await flashAlgorithmConfigurationRepository.getMostRecent();
 
         // then
-        expect(configResult.toDTO()).to.deep.equal(expectedFlashAlgorithmConfiguration.toDTO());
+        expect(configResult).to.deep.equal(expectedFlashAlgorithmConfiguration);
       });
     });
 

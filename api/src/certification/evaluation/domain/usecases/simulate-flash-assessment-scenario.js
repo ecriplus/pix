@@ -1,6 +1,7 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  * @typedef {import('./index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('./index.js').SharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  */
 
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
@@ -14,6 +15,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
+ * @param {SharedFlashAlgorithmConfigurationRepository} params.sharedFlashAlgorithmConfigurationRepository
  */
 export async function simulateFlashAssessmentScenario({
   locale,
@@ -101,6 +103,7 @@ async function _simulateComplementaryCertificationScenario({
 /**
  * @param {Object} params
  * @param {SharedChallengeRepository} params.challengeRepository
+ * @param {SharedFlashAlgorithmConfigurationRepository} params.sharedFlashAlgorithmConfigurationRepository
  */
 async function _simulateCoreCertificationScenario({
   pickChallenge,
@@ -184,5 +187,13 @@ function _simulation({
     strategy: singleMeasureStrategy,
   });
 
-  return simulator.run();
+  let run;
+
+  try {
+    run = simulator.run();
+  } catch (error) {
+    console.error(error);
+  }
+
+  return run;
 }

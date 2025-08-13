@@ -53,13 +53,17 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
 
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            createdAt: new Date('2020-01-01'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2020-01-01'),
+            expirationDate: new Date('2021-01-01'),
           });
 
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            createdAt: new Date('2021-01-01'),
-            enablePassageByAllCompetences,
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2021-01-01'),
+            expirationDate: null,
+            challengesConfiguration: {
+              enablePassageByAllCompetences: true,
+            },
           });
 
           await databaseBuilder.commit();
@@ -153,9 +157,10 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
 
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            variationPercent: 0.2,
-            createdAt: new Date('2020-01-01'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            challengesConfiguration: {
+              variationPercent: 0.2,
+            },
           });
 
           await databaseBuilder.commit();
@@ -174,13 +179,15 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
 
           // then
           expect(response.statusCode).to.equal(204);
+          const configuration = await knex('certification-configurations').orderBy('startingDate', 'asc');
 
-          const { count: configurationsCount } = await knex('flash-algorithm-configurations').count().first();
+          expect(configuration).to.have.lengthOf(2);
 
-          expect(configurationsCount).to.equal(2);
+          expect(configuration[0].challengesConfiguration.variationPercent).to.equal(0.2);
+          expect(configuration[0].expirationDate).to.not.be.null;
 
-          const configuration = await knex('flash-algorithm-configurations').orderBy('createdAt', 'desc').first();
-          expect(configuration.variationPercent).to.equal(0.5);
+          expect(configuration[1].challengesConfiguration.variationPercent).to.equal(0.5);
+          expect(configuration[1].expirationDate).to.be.null;
         });
       });
     });
