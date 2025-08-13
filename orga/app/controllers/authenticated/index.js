@@ -5,6 +5,6 @@ export default class IndexController extends Controller {
   @service currentUser;
 
   get canAccessMissionsPage() {
-    return this.currentUser.prescriber.canAccessMissionsPage;
+    return this.currentUser.canAccessMissionsPage;
   }
 }

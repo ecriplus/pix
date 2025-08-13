@@ -144,7 +144,7 @@ module('Unit | Service | url', function (hooks) {
   module('#pixJuniorSchoolUrl', function () {
     test('returns pix junior url for current organization', function (assert) {
       const service = this.owner.lookup('service:url');
-      service.pixJuniorUrl = 'https://junior.pix.fr';
+
       service.currentUser = { organization: { schoolCode: 'MINIPIXOU' } };
       service.currentDomain = { getJuniorBaseUrl: () => 'https://junior.pix.fr' };
 
@@ -154,12 +154,21 @@ module('Unit | Service | url', function (hooks) {
     });
     test('returns empty string if the current organization has not any school code', function (assert) {
       const service = this.owner.lookup('service:url');
-      service.pixJuniorUrl = 'https://junior.pix.fr';
       service.currentUser = { organization: {} };
+      service.currentDomain = { getJuniorBaseUrl: () => 'https://junior.pix.fr' };
 
       const pixJuniorSchoolUrl = service.pixJuniorSchoolUrl;
 
       assert.strictEqual(pixJuniorSchoolUrl, '');
+    });
+  });
+
+  module('#pixJuniorUrl', function () {
+    test('returns pix junior url for current organization', function (assert) {
+      const service = this.owner.lookup('service:url');
+      service.currentDomain = { getJuniorBaseUrl: () => 'https://junior.pix.fr' };
+
+      assert.strictEqual(service.pixJuniorUrl, 'https://junior.pix.fr');
     });
   });
 
