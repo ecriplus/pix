@@ -272,6 +272,31 @@ module('Integration | Component | certification-joiner', function (hooks) {
         assert.ok(screen.getByText(t('pages.certification-joiner.error-messages.generic.check-personal-info')));
       });
     });
+
+    module('when certification center has no habilitation to hold the session', function () {
+      test('should display an error message', async function (assert) {
+        // given
+        this.set('onStepChange', sinon.stub());
+        const screen = await render(hbs`<CertificationJoiner @onStepChange={{this.onStepChange}} />`);
+
+        await _fillInputsToJoinSession({ screen, t });
+
+        const store = this.owner.lookup('service:store');
+        const saveStub = sinon.stub();
+        saveStub
+          .withArgs({ adapterOptions: { joinSession: true, sessionId: '123456' } })
+          .throws({ errors: [{ status: '403', code: 'CENTER_HABILITATION_ERROR' }] });
+        const createRecordMock = sinon.mock();
+        createRecordMock.returns({ save: saveStub, deleteRecord: function () {} });
+        store.createRecord = createRecordMock;
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.certification-joiner.form.actions.submit') }));
+
+        // then
+        assert.ok(screen.getByText(t('pages.certification-joiner.error-messages.missing-center-habilitation')));
+      });
+    });
   });
 
   test('should display hint on session number input', async function (assert) {

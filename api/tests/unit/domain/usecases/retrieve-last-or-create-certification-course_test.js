@@ -1,7 +1,7 @@
-import { CenterHabilitationError } from '../../../../src/certification/evaluation/domain/errors.js';
 import { retrieveLastOrCreateCertificationCourse } from '../../../../src/certification/evaluation/domain/usecases/retrieve-last-or-create-certification-course.js';
 import { SessionNotAccessible } from '../../../../src/certification/session-management/domain/errors.js';
 import { ComplementaryCertificationCourse } from '../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
+import { CenterHabilitationError } from '../../../../src/certification/shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';

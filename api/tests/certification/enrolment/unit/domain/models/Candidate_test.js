@@ -1106,18 +1106,18 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
     });
   });
 
-  describe('hasCoreSubscription', function () {
+  describe('hasComplementarySubscription', function () {
     it('should return true', function () {
       // given
       const candidate = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData,
         subscriptions: [
-          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          domainBuilder.certification.enrolment.buildComplementarySubscription({ certificationCandidateId: null }),
         ],
       });
 
       // when
-      const hasCoreSubscription = candidate.hasCoreSubscription();
+      const hasCoreSubscription = candidate.hasComplementarySubscription();
 
       // when / then
       expect(hasCoreSubscription).to.be.true;
@@ -1128,12 +1128,12 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       const candidate = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData,
         subscriptions: [
-          domainBuilder.certification.enrolment.buildComplementarySubscription({ certificationCandidateId: null }),
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
         ],
       });
 
       // when
-      const hasCoreSubscription = candidate.hasCoreSubscription();
+      const hasCoreSubscription = candidate.hasComplementarySubscription();
 
       // when / then
       expect(hasCoreSubscription).to.be.false;

@@ -1,5 +1,6 @@
 import { certificationDomainErrorMappingConfiguration } from '../../../../../src/certification/shared/application/http-error-mapper-configuration.js';
 import {
+  CenterHabilitationError,
   CertificationCourseUpdateError,
   InvalidCertificationReportForFinalization,
 } from '../../../../../src/certification/shared/domain/errors.js';
@@ -18,7 +19,7 @@ describe('Unit | Certification | Shared | Application | HttpErrorMapperConfigura
   });
 
   context('when mapping "CertificationCourseUpdateError"', function () {
-    it('returns an UnauthorizedError Http Error', function () {
+    it('returns an BadRequestError Http Error', function () {
       //given
       const httpErrorMapper = certificationDomainErrorMappingConfiguration.find(
         (httpErrorMapper) => httpErrorMapper.name === CertificationCourseUpdateError.name,
@@ -32,22 +33,41 @@ describe('Unit | Certification | Shared | Application | HttpErrorMapperConfigura
       expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
       expect(error.message).to.equal(message);
     });
+  });
 
-    context('when mapping "InvalidCertificationReportForFinalization"', function () {
-      it('returns an UnauthorizedError Http Error', function () {
-        //given
-        const httpErrorMapper = certificationDomainErrorMappingConfiguration.find(
-          (httpErrorMapper) => httpErrorMapper.name === InvalidCertificationReportForFinalization.name,
-        );
-        const message = 'Test message error';
+  context('when mapping "InvalidCertificationReportForFinalization"', function () {
+    it('returns an BadRequestError Http Error', function () {
+      //given
+      const httpErrorMapper = certificationDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === InvalidCertificationReportForFinalization.name,
+      );
+      const message = 'Test message error';
 
-        //when
-        const error = httpErrorMapper.httpErrorFn(new InvalidCertificationReportForFinalization(message));
+      //when
+      const error = httpErrorMapper.httpErrorFn(new InvalidCertificationReportForFinalization(message));
 
-        //then
-        expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
-        expect(error.message).to.equal(message);
-      });
+      //then
+      expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
+      expect(error.message).to.equal(message);
+    });
+  });
+
+  context('when mapping "CenterHabilitationError"', function () {
+    it('returns a ForbiddenError Http Error', function () {
+      //given
+      const httpErrorMapper = certificationDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === CenterHabilitationError.name,
+      );
+
+      //when
+      const error = httpErrorMapper.httpErrorFn(new CenterHabilitationError());
+
+      //then
+      expect(error).to.be.instanceOf(HttpErrors.ForbiddenError);
+      expect(error.message).to.equal(
+        'This certification center has no habilitation for the given complementary certification.',
+      );
+      expect(error.code).to.equal('CENTER_HABILITATION_ERROR');
     });
   });
 });

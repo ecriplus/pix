@@ -10,6 +10,7 @@ import * as certificationCpfService from '../../../shared/domain/services/certif
 import * as sessionValidator from '../../../shared/domain/validators/session-validator.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
+import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import { enrolmentRepositories } from '../../infrastructure/repositories/index.js';
 import * as certificationCandidatesOdsService from '../services/certification-candidates-ods-service.js';
@@ -41,6 +42,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../../../shared/infrastructure/repositories/organization-repository.js')} organizationRepository
  * @typedef {import('../../../shared/infrastructure/repositories/certification-candidate-repository.js')} certificationCandidateRepository
  * @typedef {import('../../../../prescription/campaign/infrastructure/repositories/division-repository.js')} divisionRepository
+ * @typedef {import('../../../shared/infrastructure/repositories/certification-center-repository.js')} CertificationCenterRepository
  **/
 
 /**
@@ -93,6 +95,7 @@ const dependencies = {
   certificationCandidateRepository,
   certificationCourseRepository,
   certificationAssessmentRepository,
+  certificationCenterRepository,
 };
 
 import { addCandidateToSession } from './add-candidate-to-session.js';
@@ -121,8 +124,8 @@ import { reconcileCandidate } from './reconcile-candidate.js';
 import { updateEnrolledCandidate } from './update-enrolled-candidate.js';
 import { updateSession } from './update-session.js';
 import { validateSessions } from './validate-sessions.js';
-import { verifyCandidateCertificability } from './verify-candidate-certificability.js';
 import { verifyCandidateIdentity } from './verify-candidate-identity.js';
+import { verifyCandidateReconciliationRequirements } from './verify-candidate-reconciliation-requirements.js';
 
 const usecasesWithoutInjectedDependencies = {
   addCandidateToSession,
@@ -151,7 +154,7 @@ const usecasesWithoutInjectedDependencies = {
   updateEnrolledCandidate,
   updateSession,
   validateSessions,
-  verifyCandidateCertificability,
+  verifyCandidateReconciliationRequirements,
   verifyCandidateIdentity,
 };
 
