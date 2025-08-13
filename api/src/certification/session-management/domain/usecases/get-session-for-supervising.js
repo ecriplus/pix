@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../../shared/infrastructure/constants.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../shared/domain/constants.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 
 /**
  * @typedef {import('./index.js').SessionForSupervisingRepository} SessionForSupervisingRepository
@@ -23,7 +24,7 @@ const getSessionForSupervising = async function ({
 
   await PromiseUtils.map(
     sessionForSupervising.certificationCandidates,
-    _computeComplementaryCertificationEligibility(certificationBadgesService),
+    _computeDoubleCertificationEligibility(certificationBadgesService),
     { concurrency: CONCURRENCY_HEAVY_OPERATIONS },
   );
 
@@ -39,9 +40,9 @@ export { getSessionForSupervising };
 /**
  * @param {CertificationBadgesService} certificationBadgesService
  */
-function _computeComplementaryCertificationEligibility(certificationBadgesService) {
+function _computeDoubleCertificationEligibility(certificationBadgesService) {
   return async (candidate) => {
-    if (candidate.enrolledComplementaryCertification?.key) {
+    if (candidate.enrolledComplementaryCertification?.key === ComplementaryCertificationKeys.CLEA) {
       candidate.stillValidBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
         userId: candidate.userId,
       });
