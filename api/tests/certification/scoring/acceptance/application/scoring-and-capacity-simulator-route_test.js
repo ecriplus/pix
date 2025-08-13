@@ -457,31 +457,23 @@ describe('Acceptance | Application | scoring-and-capacity-simulator-route', func
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
 
-          databaseBuilder.factory.buildScoringConfiguration({
-            createdByUserId: superAdmin.id,
+          databaseBuilder.factory.buildCertificationConfiguration({
+            competencesScoringConfiguration: [
+              {
+                competence: '1.1',
+                values: [
+                  { bounds: { max: -2, min: -8 }, competenceLevel: 0 },
+                  { bounds: { max: -0.5, min: -2 }, competenceLevel: 1 },
+                  { bounds: { max: 0.6, min: -0.5 }, competenceLevel: 2 },
+                  { bounds: { max: 1.5, min: 0.6 }, competenceLevel: 3 },
+                  { bounds: { max: 2.25, min: 1.5 }, competenceLevel: 4 },
+                  { bounds: { max: 3.1, min: 2.25 }, competenceLevel: 5 },
+                  { bounds: { max: 4, min: 3.1 }, competenceLevel: 6 },
+                  { bounds: { max: 8, min: 4 }, competenceLevel: 7 },
+                ],
+              },
+            ],
           });
-
-          const competenceScoringConfiguration = [
-            {
-              competence: '1.1',
-              values: [
-                { bounds: { max: -2, min: -8 }, competenceLevel: 0 },
-                { bounds: { max: -0.5, min: -2 }, competenceLevel: 1 },
-                { bounds: { max: 0.6, min: -0.5 }, competenceLevel: 2 },
-                { bounds: { max: 1.5, min: 0.6 }, competenceLevel: 3 },
-                { bounds: { max: 2.25, min: 1.5 }, competenceLevel: 4 },
-                { bounds: { max: 3.1, min: 2.25 }, competenceLevel: 5 },
-                { bounds: { max: 4, min: 3.1 }, competenceLevel: 6 },
-                { bounds: { max: 8, min: 4 }, competenceLevel: 7 },
-              ],
-            },
-          ];
-
-          databaseBuilder.factory.buildCompetenceScoringConfiguration({
-            createdByUserId: superAdmin.id,
-            configuration: competenceScoringConfiguration,
-          });
-
           await databaseBuilder.commit();
 
           const options = {

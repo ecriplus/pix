@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
@@ -11,46 +10,46 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   // NOTE : only works for certification of core competencies
   const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
 
-  const competenceScoringConfiguration = await knexConn('competence-scoring-configurations')
-    .select('configuration')
-    .where('createdAt', '<=', date)
-    .orderBy('createdAt', 'desc')
+  const configuration = await knexConn('certification-configurations')
+    .select('id', 'globalScoringConfiguration', 'competencesScoringConfiguration')
+    .where('startingDate', '<=', date)
+    .andWhere((queryBuilder) => {
+      queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
+    })
+    .orderBy('startingDate', 'asc')
     .first();
 
-  if (!competenceScoringConfiguration) {
-    throw new NotFoundError(`No competence scoring configuration found for date ${date.toISOString()}`);
-  }
-
-  const certificationScoringConfiguration = await knexConn('certification-scoring-configurations')
-    .select('configuration')
-    .where('createdAt', '<=', date)
-    .orderBy('createdAt', 'desc')
-    .first();
-
-  if (!certificationScoringConfiguration) {
+  if (!configuration || !configuration.competencesScoringConfiguration || !configuration.globalScoringConfiguration) {
     throw new NotFoundError(`No certification scoring configuration found for date ${date.toISOString()}`);
   }
 
   return V3CertificationScoring.fromConfigurations({
-    competenceForScoringConfiguration: competenceScoringConfiguration.configuration,
-    certificationScoringConfiguration: certificationScoringConfiguration.configuration,
+    competenceForScoringConfiguration: configuration.competencesScoringConfiguration,
+    certificationScoringConfiguration: configuration.globalScoringConfiguration,
     allAreas,
     competenceList,
   });
 };
 
-export const saveCompetenceForScoringConfiguration = async ({ configuration, userId }) => {
-  const data = {
-    configuration: JSON.stringify(configuration),
-    createdByUserId: userId,
-  };
-  await knex('competence-scoring-configurations').insert(data);
+export const saveCompetenceForScoringConfiguration = async ({ configuration }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('certification-configurations')
+    .where({
+      expirationDate: null,
+    })
+    .update({
+      competencesScoringConfiguration: JSON.stringify(configuration),
+    });
 };
 
-export const saveCertificationScoringConfiguration = async ({ configuration, userId }) => {
-  const data = {
-    configuration: JSON.stringify(configuration),
-    createdByUserId: userId,
-  };
-  await knex('certification-scoring-configurations').insert(data);
+export const saveCertificationScoringConfiguration = async ({ configuration }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('certification-configurations')
+    .where({
+      expirationDate: null,
+    })
+    .update({
+      globalScoringConfiguration: JSON.stringify(configuration),
+    });
 };

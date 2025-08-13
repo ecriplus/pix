@@ -12,15 +12,6 @@ import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js
 describe('Integration | Repository | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {
     beforeEach(async function () {
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      const competenceScoringConfiguration = [
-        {
-          competence: '1.1',
-          values: [],
-        },
-      ];
-
       const secondCompetenceScoringConfiguration = [
         {
           competence: '1.1',
@@ -46,40 +37,27 @@ describe('Integration | Repository | scoring-configuration-repository', function
       buildFramework({ competenceIndex, origin: 'external' });
       buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
-      databaseBuilder.factory.buildCompetenceScoringConfiguration({
-        configuration: competenceScoringConfiguration,
-        createdAt: firstConfigurationDate,
-        createdByUserId: userId,
-      });
-      databaseBuilder.factory.buildScoringConfiguration({
-        createdAt: firstConfigurationDate,
-        createdByUserId: userId,
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: firstConfigurationDate,
+        expirationDate: secondConfigurationDate,
+        globalScoringConfiguration: null,
       });
 
-      databaseBuilder.factory.buildCompetenceScoringConfiguration({
-        configuration: secondCompetenceScoringConfiguration,
-        createdAt: secondConfigurationDate,
-        createdByUserId: userId,
-      });
-      databaseBuilder.factory.buildScoringConfiguration({
-        createdAt: secondConfigurationDate,
-        createdByUserId: userId,
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: secondConfigurationDate,
+        expirationDate: thirdConfigurationDate,
+        competencesScoringConfiguration: secondCompetenceScoringConfiguration,
       });
 
-      databaseBuilder.factory.buildCompetenceScoringConfiguration({
-        configuration: competenceScoringConfiguration,
-        createdAt: thirdConfigurationDate,
-        createdByUserId: userId,
-      });
-      databaseBuilder.factory.buildScoringConfiguration({
-        createdAt: thirdConfigurationDate,
-        createdByUserId: userId,
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: thirdConfigurationDate,
+        expirationDate: null,
       });
 
       await databaseBuilder.commit();
     });
 
-    describe('when the date is before the competence scoring configurations', function () {
+    describe('when the date is before the scoring configurations', function () {
       it('should throw a NotFoundError', async function () {
         // given
         const date = new Date('2018-06-01T08:00:00Z');
@@ -88,29 +66,20 @@ describe('Integration | Repository | scoring-configuration-repository', function
         const error = await catchErr(getLatestByDateAndLocale)({ locale: 'fr-fr', date });
 
         expect(error).to.be.instanceOf(NotFoundError);
-        expect(error.message).to.equal('No competence scoring configuration found for date 2018-06-01T08:00:00.000Z');
+        expect(error.message).to.equal(`No certification scoring configuration found for date ${date.toISOString()}`);
       });
     });
 
-    describe('when the date is before the certification scoring configurations', function () {
+    describe('when the configuration is missing a scoring value', function () {
       it('should throw a NotFoundError', async function () {
         // given
-        const date = new Date('2018-06-01T08:00:00Z');
-
-        databaseBuilder.factory.buildCompetenceScoringConfiguration({
-          configuration: { competence: '1.1', values: [] },
-          createdAt: new Date('2018-01-01T08:00:00Z'),
-          createdByUserId: databaseBuilder.factory.buildUser().id,
-        });
-        await databaseBuilder.commit();
+        const date = new Date('2019-04-12T08:00:00Z');
 
         // when
         const error = await catchErr(getLatestByDateAndLocale)({ locale: 'fr-fr', date });
 
         expect(error).to.be.instanceOf(NotFoundError);
-        expect(error.message).to.equal(
-          'No certification scoring configuration found for date 2018-06-01T08:00:00.000Z',
-        );
+        expect(error.message).to.equal(`No certification scoring configuration found for date ${date.toISOString()}`);
       });
     });
 
@@ -131,40 +100,66 @@ describe('Integration | Repository | scoring-configuration-repository', function
   });
 
   describe('#saveCompetenceForScoringConfiguration', function () {
-    it('should save a configuration for competence scoring', async function () {
+    it('should update latest configuration with new competence scoring', async function () {
       // given
-      const userId = 1000;
-      databaseBuilder.factory.buildUser({ id: userId });
-      const configuration = { some: 'data' };
+      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationConfiguration({
+        competencesScoringConfiguration: null,
+        expirationDate: null,
+      }).id;
+      const competencesConfigUntouched = { untouched: 'data' };
+      const configUntouchedId = databaseBuilder.factory.buildCertificationConfiguration({
+        competencesScoringConfiguration: competencesConfigUntouched,
+        expirationDate: new Date(),
+      }).id;
       await databaseBuilder.commit();
 
+      const newCompetencesScoringConfig = { some: 'data' };
+
       // when
-      await saveCompetenceForScoringConfiguration({ configuration, userId });
+      await saveCompetenceForScoringConfiguration({ configuration: newCompetencesScoringConfig });
 
       // then
-      const configurations = await knex('competence-scoring-configurations');
-      expect(configurations).to.have.lengthOf(1);
-      expect(configurations[0].configuration).to.deep.equal({ some: 'data' });
-      expect(configurations[0].createdByUserId).to.equal(userId);
+      const updatedConfiguration = await knex('certification-configurations')
+        .where({ id: configToBeUpdatedId })
+        .first();
+      expect(updatedConfiguration.competencesScoringConfiguration).to.deep.equal(newCompetencesScoringConfig);
+
+      const configurationUntouched = await knex('certification-configurations')
+        .where({ id: configUntouchedId })
+        .first();
+      expect(configurationUntouched.competencesScoringConfiguration).to.deep.equal(competencesConfigUntouched);
     });
   });
 
   describe('#saveCertificationScoringConfiguration', function () {
-    it('should save a configuration for competence scoring', async function () {
+    it('should update latest configuration with new global scoring configuration', async function () {
       // given
-      const userId = 1000;
-      databaseBuilder.factory.buildUser({ id: userId }).id;
-      const data = { some: 'data' };
+      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationConfiguration({
+        globalScoringConfiguration: null,
+        expirationDate: null,
+      }).id;
+      const globalScoringConfigUntouched = { untouched: 'data' };
+      const configUntouchedId = databaseBuilder.factory.buildCertificationConfiguration({
+        globalScoringConfiguration: globalScoringConfigUntouched,
+        expirationDate: new Date(),
+      }).id;
       await databaseBuilder.commit();
 
+      const newGlobalScoringConfig = { some: 'data' };
+
       // when
-      await saveCertificationScoringConfiguration({ configuration: data, userId });
+      await saveCertificationScoringConfiguration({ configuration: newGlobalScoringConfig });
 
       // then
-      const configurations = await knex('certification-scoring-configurations');
-      expect(configurations).to.have.lengthOf(1);
-      expect(configurations[0].configuration).to.deep.equal({ some: 'data' });
-      expect(configurations[0].createdByUserId).to.equal(userId);
+      const updatedConfiguration = await knex('certification-configurations')
+        .where({ id: configToBeUpdatedId })
+        .first();
+      expect(updatedConfiguration.globalScoringConfiguration).to.deep.equal(newGlobalScoringConfig);
+
+      const configurationUntouched = await knex('certification-configurations')
+        .where({ id: configUntouchedId })
+        .first();
+      expect(configurationUntouched.globalScoringConfiguration).to.deep.equal(globalScoringConfigUntouched);
     });
   });
 });

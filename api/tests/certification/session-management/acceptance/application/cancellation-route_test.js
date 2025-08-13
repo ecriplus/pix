@@ -216,12 +216,9 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         });
 
         databaseBuilder.factory.buildFlashAlgorithmConfiguration({});
-        databaseBuilder.factory.buildScoringConfiguration({
-          createdAt: new Date('2024-01-14'),
-          createdByUserId: juryMember.id,
-        });
-        databaseBuilder.factory.buildCompetenceScoringConfiguration({
-          configuration: [
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: new Date('2024-01-14'),
+          competencesScoringConfiguration: [
             {
               competence: 'index Compétence A',
               values: [
@@ -242,8 +239,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
               ],
             },
           ],
-          createdAt: new Date('2024-01-14'),
-          createdByUserId: juryMember.id,
         });
 
         const options = {
@@ -346,12 +341,9 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       });
 
       databaseBuilder.factory.buildFlashAlgorithmConfiguration({});
-      databaseBuilder.factory.buildScoringConfiguration({
-        createdAt: new Date('2024-01-14'),
-        createdByUserId: juryMember.id,
-      });
-      databaseBuilder.factory.buildCompetenceScoringConfiguration({
-        configuration: [
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: new Date('2024-01-14'),
+        competencesScoringConfiguration: [
           {
             competence: 'index Compétence A',
             values: [
@@ -372,8 +364,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
             ],
           },
         ],
-        createdAt: new Date('2024-01-14'),
-        createdByUserId: juryMember.id,
       });
 
       const options = {

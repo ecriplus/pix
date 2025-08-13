@@ -389,35 +389,8 @@ describe('Certification | Session Management | Acceptance | Application | Route 
       context('when session is v3', function () {
         beforeEach(async function () {
           ({ options, session } = await _createSession({ version: 3 }));
-
-          const configurationCreatorId = databaseBuilder.factory.buildUser().id;
-          databaseBuilder.factory.buildCompetenceScoringConfiguration({
-            createdByUserId: configurationCreatorId,
-            configuration: [
-              {
-                competence: '1.1',
-                values: [
-                  {
-                    bounds: {
-                      max: 0,
-                      min: -5,
-                    },
-                    competenceLevel: 0,
-                  },
-                  {
-                    bounds: {
-                      max: 5,
-                      min: 0,
-                    },
-                    competenceLevel: 1,
-                  },
-                ],
-              },
-            ],
-          });
-          databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
           databaseBuilder.factory.buildFlashAlgorithmConfiguration();
-
+          databaseBuilder.factory.buildCertificationConfiguration();
           await databaseBuilder.commit();
         });
 
@@ -574,35 +547,8 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             challengeId: certificationChallenge.challengeId,
             result: AnswerStatus.KO.status,
           });
-
-          const configurationCreatorId = databaseBuilder.factory.buildUser().id;
-          databaseBuilder.factory.buildCompetenceScoringConfiguration({
-            createdByUserId: configurationCreatorId,
-            configuration: [
-              {
-                competence: '1.1',
-                values: [
-                  {
-                    bounds: {
-                      max: 0,
-                      min: -5,
-                    },
-                    competenceLevel: 0,
-                  },
-                  {
-                    bounds: {
-                      max: 5,
-                      min: 0,
-                    },
-                    competenceLevel: 1,
-                  },
-                ],
-              },
-            ],
-          });
-          databaseBuilder.factory.buildScoringConfiguration({ createdByUserId: configurationCreatorId });
           databaseBuilder.factory.buildFlashAlgorithmConfiguration();
-
+          databaseBuilder.factory.buildCertificationConfiguration();
           await databaseBuilder.commit();
 
           options = {
@@ -970,15 +916,7 @@ const _createSessionWithoutChallenge = async () => {
   databaseBuilder.factory.buildFlashAlgorithmConfiguration({
     createdAt: new Date('2024-01-01'),
   });
-  databaseBuilder.factory.buildScoringConfiguration({
-    createdByUserId: userId,
-    createdAt: new Date('2024-01-01'),
-  });
-  databaseBuilder.factory.buildCompetenceScoringConfiguration({
-    createdByUserId: userId,
-    createdAt: new Date('2024-01-01'),
-    configuration: [],
-  });
+  databaseBuilder.factory.buildCertificationConfiguration();
   databaseBuilder.factory.buildCertificationCenterMembership({
     userId,
     certificationCenterId: session.certificationCenterId,
