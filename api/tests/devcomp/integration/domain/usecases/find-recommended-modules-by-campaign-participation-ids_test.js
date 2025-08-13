@@ -2,7 +2,7 @@ import { UserRecommendedModule } from '../../../../../src/devcomp/domain/read-mo
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByCampaignParticipationIds', function () {
+describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCampaignParticipationIds', function () {
   it('it returns recommended modules for given participation ids', async function () {
     // given
     const { id: campaignParticipationId1, userId } = databaseBuilder.factory.buildCampaignParticipation();

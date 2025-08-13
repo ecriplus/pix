@@ -1,7 +1,7 @@
-import { getAnswerableElements } from '../../../../../scripts/modulix/utils/get-answerable-elements.js';
+import { getGrains } from '../../../../../scripts/modulix/utils/get-grains.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('Acceptance | Script | Helper | Get Answerable Elements', function () {
+describe('Acceptance | Script | Helper | Get grains', function () {
   const modulesListAsJs = [
     {
       id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -19,7 +19,6 @@ describe('Acceptance | Script | Helper | Get Answerable Elements', function () {
         {
           id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
           type: 'practise',
-
           grains: [
             {
               id: '47cd065b-dbf2-4adc-b5c3-02fb69cb9ec2',
@@ -314,27 +313,15 @@ describe('Acceptance | Script | Helper | Get Answerable Elements', function () {
     },
   ];
 
-  describe('#getAnswerableElements', function () {
-    it('should filter out elements that are not activities', async function () {
+  describe('#getGrains', function () {
+    it('should return grains array', async function () {
       // When
-      const elementsListAsJs = await getAnswerableElements(modulesListAsJs);
+      const grainsListAsJs = await getGrains(modulesListAsJs[0]);
 
       // Then
-      expect(elementsListAsJs).to.be.an('array');
-      expect(elementsListAsJs.every((element) => ['qcm', 'qcu', 'qrocm'].includes(element.type))).to.be.true;
-    });
-
-    it('should add some meta info to elements', async function () {
-      // When
-      const elementsListAsJs = await getAnswerableElements(modulesListAsJs);
-
-      // Then
-      expect(elementsListAsJs).to.be.an('array');
-      expect(elementsListAsJs.every((element) => element.moduleSlug !== undefined)).to.be.true;
-      expect(elementsListAsJs.every((element) => element.activityElementPosition !== undefined)).to.be.true;
-      expect(elementsListAsJs.every((element) => element.grainPosition !== undefined)).to.be.true;
-      expect(elementsListAsJs.every((element) => element.grainId !== undefined)).to.be.true;
-      expect(elementsListAsJs.every((element) => element.grainTitle !== undefined)).to.be.true;
+      expect(grainsListAsJs).to.be.an('array');
+      expect(grainsListAsJs.every((grain) => grain.id !== undefined)).to.be.true;
+      expect(grainsListAsJs.every((grain) => grain.type !== undefined)).to.be.true;
     });
   });
 });

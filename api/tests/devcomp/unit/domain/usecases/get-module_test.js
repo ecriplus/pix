@@ -28,11 +28,11 @@ describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
       const slug = 'les-adresses-email';
       const title = 'Les adresses email';
       const isBeta = false;
-      const grains = [Symbol('text')];
+      const sections = [Symbol('text')];
       const details = Symbol('details');
       const version = Symbol('version');
 
-      const expectedModule = new Module({ id, slug, title, isBeta, grains, details, version });
+      const expectedModule = new Module({ id, slug, title, isBeta, sections, details, version });
       const moduleRepository = {
         getBySlug: sinon.stub(),
       };

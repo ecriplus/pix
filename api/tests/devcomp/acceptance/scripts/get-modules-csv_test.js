@@ -1,11 +1,12 @@
 import { getModulesListAsCsv } from '../../../../scripts/modulix/get-modules-csv.js';
+import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
 import { expect } from '../../../test-helper.js';
 import moduleContent from './test-module.json' with { type: 'json' };
 
 describe('Acceptance | Script | Get Modules as CSV', function () {
   it(`should return modules list as CSV`, async function () {
     // Given
-    const modulesListAsJs = [moduleContent];
+    const modulesListAsJs = [ModuleFactory.build(moduleContent)];
 
     // When
     const modulesListAsCsv = await getModulesListAsCsv(modulesListAsJs);

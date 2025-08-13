@@ -11,22 +11,27 @@
     "tabletSupport": "inconvenient",
     "objectives": ["Test parcours combiné 2"]
   },
-  "grains": [
+  "sections": [
     {
-      "id": "f585adba-3a6a-4a60-acef-e35b1c79b1e5",
-      "type": "activity",
-      "title": "Grain de démo",
-      "components": [
+      "id": "1f587873-25fb-45c9-89e0-f4be3ba21b42",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "0692109f-2ea3-4cf2-ad4f-9e05ec5e60d2",
-            "type": "text",
-            "content": "<p>Bravo, le module 2 est terminé</p>"
-          }
+          "id": "f585adba-3a6a-4a60-acef-e35b1c79b1e5",
+          "type": "activity",
+          "title": "Grain de démo",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0692109f-2ea3-4cf2-ad4f-9e05ec5e60d2",
+                "type": "text",
+                "content": "<p>Bravo, le module 2 est terminé</p>"
+              }
+            }
+          ]
         }
       ]
     }
-
   ]
 }

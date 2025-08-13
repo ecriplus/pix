@@ -31,20 +31,26 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             'Comprendre les fonctions des parties d’une adresse mail',
           ],
         },
-        grains: [
+        sections: [
           {
-            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-            type: 'lesson',
-            title: 'Explications : les parties d’une adresse mail',
-            components: [
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                  type: 'text',
-                  content:
-                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                },
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
               },
             ],
           },
@@ -64,20 +70,26 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           tabletSupport: 'inconvenient',
           objectives: ['Non régression fonctionnelle'],
         },
-        grains: [
+        sections: [
           {
-            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-            type: 'lesson',
-            title: 'Explications : les parties d’une adresse mail',
-            components: [
+            id: 'd2ad3253-7f0a-41f5-b10e-0fa0f49d0cc7',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                  type: 'text',
-                  content:
-                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                },
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
               },
             ],
           },
@@ -227,20 +239,26 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             'Comprendre les fonctions des parties d’une adresse mail',
           ],
         },
-        grains: [
+        sections: [
           {
-            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-            type: 'lesson',
-            title: 'Explications : les parties d’une adresse mail',
-            components: [
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                  type: 'text',
-                  content:
-                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                },
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
               },
             ],
           },
@@ -335,20 +353,26 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             'Comprendre les fonctions des parties d’une adresse mail',
           ],
         },
-        grains: [
+        sections: [
           {
-            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-            type: 'lesson',
-            title: 'Explications : les parties d’une adresse mail',
-            components: [
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                  type: 'text',
-                  content:
-                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                },
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
               },
             ],
           },
@@ -400,46 +424,53 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             }
             ids.push(module.id);
 
-            for (const grain of module.grains) {
-              if (ids.includes(grain.id)) {
-                duplicateIds.add(grain.id);
+            for (const section of module.sections) {
+              if (ids.includes(section.id)) {
+                duplicateIds.add(section.id);
               }
-              ids.push(grain.id);
+              ids.push(section.id);
 
-              for (const component of grain.components) {
-                switch (component.type) {
-                  case 'element':
-                    if (ids.includes(component.element.id)) {
-                      duplicateIds.add(component.element.id);
-                    }
-                    if (component.element.type === 'flashcards') {
-                      for (const card of component.element.cards) {
-                        if (ids.includes(card.id)) {
-                          duplicateIds.add(card.id);
-                        }
-                        ids.push(card.id);
+              for (const grain of section.grains) {
+                if (ids.includes(grain.id)) {
+                  duplicateIds.add(grain.id);
+                }
+                ids.push(grain.id);
+
+                for (const component of grain.components) {
+                  switch (component.type) {
+                    case 'element':
+                      if (ids.includes(component.element.id)) {
+                        duplicateIds.add(component.element.id);
                       }
-                    }
-                    ids.push(component.element.id);
-                    break;
-                  case 'stepper':
-                    for (const step of component.steps) {
-                      for (const element of step.elements) {
-                        if (ids.includes(element.id)) {
-                          duplicateIds.add(element.id);
-                        }
-                        if (element.type === 'flashcards') {
-                          for (const card of element.cards) {
-                            if (ids.includes(card.id)) {
-                              duplicateIds.add(card.id);
-                            }
-                            ids.push(card.id);
+                      if (component.element.type === 'flashcards') {
+                        for (const card of component.element.cards) {
+                          if (ids.includes(card.id)) {
+                            duplicateIds.add(card.id);
                           }
+                          ids.push(card.id);
                         }
-                        ids.push(element.id);
                       }
-                    }
-                    break;
+                      ids.push(component.element.id);
+                      break;
+                    case 'stepper':
+                      for (const step of component.steps) {
+                        for (const element of step.elements) {
+                          if (ids.includes(element.id)) {
+                            duplicateIds.add(element.id);
+                          }
+                          if (element.type === 'flashcards') {
+                            for (const card of element.cards) {
+                              if (ids.includes(card.id)) {
+                                duplicateIds.add(card.id);
+                              }
+                              ids.push(card.id);
+                            }
+                          }
+                          ids.push(element.id);
+                        }
+                      }
+                      break;
+                  }
                 }
               }
             }
@@ -470,20 +501,26 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             'Comprendre les fonctions des parties d’une adresse mail',
           ],
         },
-        grains: [
+        sections: [
           {
-            id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-            type: 'lesson',
-            title: 'Explications : les parties d’une adresse mail',
-            components: [
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
               {
-                type: 'element',
-                element: {
-                  id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                  type: 'text',
-                  content:
-                    "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                },
+                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                type: 'lesson',
+                title: 'Explications : les parties d’une adresse mail',
+                components: [
+                  {
+                    type: 'element',
+                    element: {
+                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                      type: 'text',
+                      content:
+                        "<h3 class='screen-reader-only'>L'arobase</h3><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                    },
+                  },
+                ],
               },
             ],
           },

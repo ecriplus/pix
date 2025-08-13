@@ -10,7 +10,7 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
     slug: 'slug',
     title: 'title',
     isBeta: true,
-    grains: [],
+    sections: [{ id: 8, type: 'none', grains: [] }],
     details: '',
     version: '',
   });

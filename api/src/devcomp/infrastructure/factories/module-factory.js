@@ -27,6 +27,7 @@ import { Video } from '../../domain/models/element/Video.js';
 import { Grain } from '../../domain/models/Grain.js';
 import { Details } from '../../domain/models/module/Details.js';
 import { Module } from '../../domain/models/module/Module.js';
+import { Section } from '../../domain/models/module/Section.js';
 import { QcmProposal } from '../../domain/models/QcmProposal.js';
 import { QcuProposal } from '../../domain/models/QcuProposal.js';
 
@@ -40,48 +41,54 @@ export class ModuleFactory {
         version: moduleData.version,
         isBeta: moduleData.isBeta,
         details: new Details(moduleData.details),
-        grains: moduleData.grains.map((grain) => {
-          return new Grain({
-            id: grain.id,
-            title: grain.title,
-            type: grain.type,
-            components: grain.components
-              .map((component) => {
-                switch (component.type) {
-                  case 'element': {
-                    const element = ModuleFactory.#buildElement(component.element, moduleData.isBeta);
-                    if (element) {
-                      return new ComponentElement({ element });
-                    } else {
-                      return undefined;
-                    }
-                  }
-                  case 'stepper':
-                    return new ComponentStepper({
-                      steps: component.steps.map((step) => {
-                        return new Step({
-                          elements: step.elements
-                            .map((element) => {
-                              const domainElement = ModuleFactory.#buildElement(element, moduleData.isBeta);
-                              if (domainElement) {
-                                return domainElement;
-                              } else {
-                                return undefined;
-                              }
-                            })
-                            .filter((element) => element !== undefined),
+        sections: moduleData.sections.map((section) => {
+          return new Section({
+            id: section.id,
+            type: section.type,
+            grains: section.grains.map((grain) => {
+              return new Grain({
+                id: grain.id,
+                title: grain.title,
+                type: grain.type,
+                components: grain.components
+                  .map((component) => {
+                    switch (component.type) {
+                      case 'element': {
+                        const element = ModuleFactory.#buildElement(component.element, moduleData.isBeta);
+                        if (element) {
+                          return new ComponentElement({ element });
+                        } else {
+                          return undefined;
+                        }
+                      }
+                      case 'stepper':
+                        return new ComponentStepper({
+                          steps: component.steps.map((step) => {
+                            return new Step({
+                              elements: step.elements
+                                .map((element) => {
+                                  const domainElement = ModuleFactory.#buildElement(element, moduleData.isBeta);
+                                  if (domainElement) {
+                                    return domainElement;
+                                  } else {
+                                    return undefined;
+                                  }
+                                })
+                                .filter((element) => element !== undefined),
+                            });
+                          }),
                         });
-                      }),
-                    });
-                  default:
-                    logger.warn({
-                      event: 'module_component_type_unknown',
-                      message: `Component inconnu: ${component.type}`,
-                    });
-                    return undefined;
-                }
-              })
-              .filter((component) => component !== undefined),
+                      default:
+                        logger.warn({
+                          event: 'module_component_type_unknown',
+                          message: `Component inconnu: ${component.type}`,
+                        });
+                        return undefined;
+                    }
+                  })
+                  .filter((component) => component !== undefined),
+              });
+            }),
           });
         }),
       });

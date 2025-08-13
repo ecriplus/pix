@@ -25,7 +25,8 @@ async function getByIdForAnswerVerification({ moduleId, elementId, moduleDatasou
 }
 
 function flattenModuleElements(moduleData) {
-  return moduleData.grains
+  return moduleData.sections
+    .flatMap(({ grains }) => grains)
     .flatMap(({ components }) => components)
     .flatMap((component) => {
       if (component.type === 'element') {

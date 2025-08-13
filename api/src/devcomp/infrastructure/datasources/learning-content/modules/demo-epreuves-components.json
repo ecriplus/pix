@@ -11,711 +11,720 @@
     "objectives": ["<p>Non régression sur les composants Pix Épreuves.</p>"],
     "tabletSupport": "comfortable"
   },
-  "grains": [
+  "sections": [
     {
-      "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
-      "type": "lesson",
-      "title": "message-conversation",
-      "components": [
+      "id": "be0a544c-99bd-4fbc-99b4-a52b5456a008",
+      "type": "blank",
+      "grains": [
         {
-          "type": "element",
-          "element": {
-            "id": "c61b2ffd-6cd0-4b69-a2c4-d00f04e4323b",
-            "type": "text",
-            "content": "<p>message-conversation</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "835cbd72-783a-4306-9317-74b39fcdc8a2",
-            "type": "custom",
-            "tagName": "message-conversation",
-            "props": {
-              "title": "Confessions nocturnes",
-              "messages": [
-                {
-                  "userName": "Mel",
-                  "direction": "outgoing",
-                  "content": "Ouais c'est qui là ?"
-                },
-                {
-                  "userName": "Vita",
-                  "direction": "incoming",
-                  "content": "Mel, c'est Vi ouvre moi."
-                },
-                {
-                  "userName": "Mel",
-                  "direction": "outgoing",
-                  "content": "Ça va Vi ?"
-                },
-                {
-                  "userName": "Mel",
-                  "direction": "outgoing",
-                  "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
-                },
-                {
-                  "userName": "Vita",
-                  "direction": "incoming",
-                  "content": "Non, ça va pas non."
-                },
-                {
-                  "userName": "Mel",
-                  "direction": "outgoing",
-                  "content": "Ben dis-moi, qu'est qu'il y a ?"
-                },
-                {
-                  "userName": "Vita",
-                  "direction": "incoming",
-                  "content": "Mel, assieds-toi faut que je te parle..."
-                },
-                {
-                  "userName": "Vita",
-                  "direction": "incoming",
-                  "content": "J'ai passé ma journée dans le noir."
-                },
-                {
-                  "userName": "Vita",
-                  "direction": "incoming",
-                  "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
-      "type": "lesson",
-      "title": "image-quiz simple",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "a1f5e147-ea8c-4046-8020-f21c28529389",
-            "type": "text",
-            "content": "<p>image-quiz à choix simple</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
-            "type": "custom",
-            "tagName": "image-quiz",
-            "props": {
-              "name": "nouveau_motdepasse.name",
-              "maxChoicesPerLine": 2,
-              "imageChoicesSize": "large",
-              "choices": [
-                {
-                  "name": "Rima : J’utilise un mot de passe fort. J’utilise ce mot de passe uniquement pour mon compte Papotix.",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/nouveau-mdp1.DeI6JOCC_1phss6.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 1000,
-                    "height": 527
-                  },
-                  "response": "different"
-                },
-                {
-                  "name": "Émilio : J’utilise le même mot de passe pour tous mes comptes. Ce mot de passe est fort.",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/nouveau-mdp2.AoNG9BXB_3dFjD.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 1000,
-                    "height": 527
-                  },
-                  "response": "identique"
-                },
-                {
-                  "name": "Mathilde : J’utilise le nom du site comme mot de passe : papotix.",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/nouveau-mdp3.Bz8igQ2L_Z2dxnC6.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 1000,
-                    "height": 527
-                  },
-                  "response": "nomsite"
-                },
-                {
-                  "name": "Lorris : J’utilise un mot de passe courant : bonjour.",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/nouveau-mdp4.C8nS-REk_10WA8f.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 1000,
-                    "height": 527
-                  },
-                  "response": "courant"
-                }
-              ],
-              "hideChoicesName": true,
-              "orderChoices": false
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "04f4ebb5-bf91-42c7-8f77-68aafbc76dcc",
-      "type": "lesson",
-      "title": "image-quiz multiple",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "ee24330e-5440-449a-916a-d017e32bc15e",
-            "type": "text",
-            "content": "<p>image-quiz à choix multiples<br></p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "02bacda6-2b76-49fd-a266-3a9bb16c20c9",
-            "type": "custom",
-            "tagName": "image-quiz",
-            "props": {
-              "name": "Liste d’applications santé",
-              "multiple": true,
-              "maxChoicesPerLine": 3,
-              "imageChoicesSize": "icon",
-              "choices": [
-                {
-                  "name": "Mapatho",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/mapatho.B95CsUwc_Z1FHkmX.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 460,
-                    "height": 460
-                  },
-                  "response": "1"
-                },
-                {
-                  "name": "Qare",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/qare.CZfqkUl6_1vm11I.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 460,
-                    "height": 460
-                  },
-                  "response": "2"
-                },
-                {
-                  "name": "Compte Améli",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/ameli.qk0BnFhS_ZAkmgE.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 460,
-                    "height": 460
-                  },
-                  "response": "3"
-                },
-                {
-                  "name": "Pharmavie",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/pharmavie.DVh5T9A4_zJs9s.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 460,
-                    "height": 460
-                  },
-                  "response": "4"
-                },
-                {
-                  "name": "Santé.fr",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/santepointfr.y2R1J8p0_y7LOJ.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 512,
-                    "height": 512
-                  },
-                  "response": "5"
-                },
-                {
-                  "name": "Malo",
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/malo.DYNYbgk-_ZiTqUq.webp",
-                    "loading": "lazy",
-                    "decoding": "async",
-                    "fetchpriority": "auto",
-                    "width": 460,
-                    "height": 460
-                  },
-                  "response": "6"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": "bf0a038c-08ee-4aba-8157-9522219b5b2a",
-      "type": "lesson",
-      "title": "image-quizzes",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "0115b2d7-83a4-4ee3-acff-7198f5172854",
-            "type": "text",
-            "content": "<p>Combinaison de plusieurs image-quiz (image-quizzes)</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef9",
-            "type": "custom",
-            "tagName": "image-quizzes",
-            "props": {
-              "quizzes": [
-                {
-                  "name": "Auprès de qui doit-elle faire la réservation du nom de domaine ?",
-                  "multiple": false,
-                  "maxChoicesPerLine": 3,
-                  "choices": [
+          "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
+          "type": "lesson",
+          "title": "message-conversation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c61b2ffd-6cd0-4b69-a2c4-d00f04e4323b",
+                "type": "text",
+                "content": "<p>message-conversation</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "835cbd72-783a-4306-9317-74b39fcdc8a2",
+                "type": "custom",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Confessions nocturnes",
+                  "messages": [
                     {
-                      "name": "l'ICANN (Internet Corporation for Assigned Names and Numbers)",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/ICANN.Rtf-bAh3_1cK6da.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 594,
-                        "height": 594
-                      },
-                      "response": "icann"
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "content": "Ouais c'est qui là ?"
                     },
                     {
-                      "name": "un bureau d'enregistrement en ligne (registrar)",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/registrar.B8_tXBWC_zYDU4.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1999,
-                        "height": 1435
-                      },
-                      "response": "registrar"
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "content": "Mel, c'est Vi ouvre moi."
                     },
                     {
-                      "name": "la mairie de son domicile",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/mairie.FjUSG1gx_1ew03e.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 127,
-                        "height": 138
-                      },
-                      "response": "mairie"
-                    }
-                  ]
-                },
-                {
-                  "name": "Parmi ces conditions de validité, laquelle est vraie pour un nom de domaine ?",
-                  "multiple": false,
-                  "maxChoicesPerLine": 3,
-                  "choices": [
-                    {
-                      "name": "il est valable à vie",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/relax.DVhXIHEX_Z1rm0lr.svg",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 883,
-                        "height": 612
-                      },
-                      "response": "vie"
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "content": "Ça va Vi ?"
                     },
                     {
-                      "name": "il est conditionné à la reconnaissance officielle de l'association",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/reconnaissance.DBIbgb2w_Z2qqhQa.svg",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 816,
-                        "height": 662
-                      },
-                      "response": "reconnaissance"
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
                     },
                     {
-                      "name": "il doit être renouvelé avant son expiration",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/time.BN2VzmIg_FYqno.svg",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 799,
-                        "height": 689
-                      },
-                      "response": "expiration"
-                    }
-                  ]
-                },
-                {
-                  "name": "Parmi ces informations, laquelle est obligatoire pour enregistrer un nom de domaine en .fr ?",
-                  "multiple": false,
-                  "maxChoicesPerLine": 3,
-                  "choices": [
-                    {
-                      "name": "une adresse mail",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/mail.Cbl4a3oC_1RT8BM.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1920,
-                        "height": 1920
-                      },
-                      "response": "mail"
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "content": "Non, ça va pas non."
                     },
                     {
-                      "name": "un extrait de K-bis",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/Kbis.xYfjHoh2_EqU1u.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 300,
-                        "height": 300
-                      },
-                      "response": "kbis"
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "content": "Ben dis-moi, qu'est qu'il y a ?"
                     },
                     {
-                      "name": "une adresse postale obligatoirement en France",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/adresse.BkRqNHvz_Z2gIKAX.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 600,
-                        "height": 600
-                      },
-                      "response": "adresse"
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "content": "Mel, assieds-toi faut que je te parle..."
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "content": "J'ai passé ma journée dans le noir."
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
                 }
-              ]
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "a0aaf8f3-27da-4130-90e0-264be24893ec",
-      "type": "lesson",
-      "title": "llm-compare-messages",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "eb31dfb9-26e6-49c3-bcff-0ef15faa1f58",
-            "type": "text",
-            "content": "<p>llm-compare-messages<br></p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "af2a348f-666c-4935-83df-eeb32224ddba",
-            "type": "custom",
-            "tagName": "llm-compare-messages",
-            "props": {
-              "conversation1": {
-                "title": "Conversation 1",
-                "llmName": "Nono"
-              },
-              "conversation2": {
-                "title": "Conversation 2",
-                "llmName": "Jaja"
-              },
-              "userName": "Bob",
-              "messages": [
-                {
-                  "direction": "outbound",
-                  "content": "Comment aller facilement de Rennes à Brest en train demain ?"
-                },
-                [
-                  {
-                    "direction": "inbound",
-                    "content": "Voici les itinéraires de demain :<br>Train OUIGO, durée 2h15 08h22 --> 10h37<br>TGV INOUI, durée 2h13 09h33 --> 11h46"
-                  },
-                  {
-                    "direction": "inbound",
-                    "content": "Pour aller facilement de Rennes à Brest en train demain, plusieurs options directes sont disponibles :<br>08h22 - 10h37 : OUIGO, direct, environ 2h15 ;<br>09h33 - 11h46 : TGV INOUI, direct, environ 2h13."
-                  }
-                ],
-                {
-                  "direction": "outbound",
-                  "content": "Et qu'est-ce que je peux visiter à Brest ?"
-                },
-                [
-                  {
-                    "direction": "inbound",
-                    "content": "Je ne peux pas vous aider désolé. Votre demande ne correspond pas aux services que je propose. Est-ce que vous voulez de l’aide pour réserver un billet de train ?"
-                  },
-                  {
-                    "direction": "inbound",
-                    "content": "Voici 3 endroits incontournables à Brest :<br>Océanopolis : grand aquarium dédié aux écosystèmes marins.<br>Château de Brest : forteresse avec musée maritime.<br>Ateliers des Capucins : espace culturel moderne accessible en téléphérique."
-                  }
-                ]
-              ]
+          "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
+          "type": "lesson",
+          "title": "image-quiz simple",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a1f5e147-ea8c-4046-8020-f21c28529389",
+                "type": "text",
+                "content": "<p>image-quiz à choix simple</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
+                "type": "custom",
+                "tagName": "image-quiz",
+                "props": {
+                  "name": "nouveau_motdepasse.name",
+                  "maxChoicesPerLine": 2,
+                  "imageChoicesSize": "large",
+                  "choices": [
+                    {
+                      "name": "Rima : J’utilise un mot de passe fort. J’utilise ce mot de passe uniquement pour mon compte Papotix.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp1.DeI6JOCC_1phss6.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "different"
+                    },
+                    {
+                      "name": "Émilio : J’utilise le même mot de passe pour tous mes comptes. Ce mot de passe est fort.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp2.AoNG9BXB_3dFjD.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "identique"
+                    },
+                    {
+                      "name": "Mathilde : J’utilise le nom du site comme mot de passe : papotix.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp3.Bz8igQ2L_Z2dxnC6.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "nomsite"
+                    },
+                    {
+                      "name": "Lorris : J’utilise un mot de passe courant : bonjour.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp4.C8nS-REk_10WA8f.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "courant"
+                    }
+                  ],
+                  "hideChoicesName": true,
+                  "orderChoices": false
+                }
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef8",
-      "type": "lesson",
-      "title": "llm-messages",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "a1f5e147-ea8c-4046-8020-f21c28529388",
-            "type": "text",
-            "content": "<p>llm-messages</p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "03bacda5-2b76-49fd-a266-3a9bb16c20c9",
-            "type": "custom",
-            "tagName": "llm-messages",
-            "props": {
-              "messages": [
-                {
-                  "direction": "outbound",
-                  "content": "Bonjour"
-                },
-                {
-                  "direction": "inbound",
-                  "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
-                },
-                {
-                  "direction": "outbound",
-                  "content": "Pourquoi pas..."
-                },
-                {
-                  "direction": "inbound",
-                  "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
-                },
-                {
-                  "direction": "outbound",
-                  "content": "Elle est bizarre ta recette."
-                },
-                {
-                  "direction": "inbound",
-                  "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
-                },
-                {
-                  "direction": "outbound",
-                  "content": "Non, je m'en vais."
+          "id": "04f4ebb5-bf91-42c7-8f77-68aafbc76dcc",
+          "type": "lesson",
+          "title": "image-quiz multiple",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ee24330e-5440-449a-916a-d017e32bc15e",
+                "type": "text",
+                "content": "<p>image-quiz à choix multiples<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "02bacda6-2b76-49fd-a266-3a9bb16c20c9",
+                "type": "custom",
+                "tagName": "image-quiz",
+                "props": {
+                  "name": "Liste d’applications santé",
+                  "multiple": true,
+                  "maxChoicesPerLine": 3,
+                  "imageChoicesSize": "icon",
+                  "choices": [
+                    {
+                      "name": "Mapatho",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/mapatho.B95CsUwc_Z1FHkmX.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 460,
+                        "height": 460
+                      },
+                      "response": "1"
+                    },
+                    {
+                      "name": "Qare",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/qare.CZfqkUl6_1vm11I.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 460,
+                        "height": 460
+                      },
+                      "response": "2"
+                    },
+                    {
+                      "name": "Compte Améli",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/ameli.qk0BnFhS_ZAkmgE.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 460,
+                        "height": 460
+                      },
+                      "response": "3"
+                    },
+                    {
+                      "name": "Pharmavie",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/pharmavie.DVh5T9A4_zJs9s.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 460,
+                        "height": 460
+                      },
+                      "response": "4"
+                    },
+                    {
+                      "name": "Santé.fr",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/santepointfr.y2R1J8p0_y7LOJ.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 512,
+                        "height": 512
+                      },
+                      "response": "5"
+                    },
+                    {
+                      "name": "Malo",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/malo.DYNYbgk-_ZiTqUq.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 460,
+                        "height": 460
+                      },
+                      "response": "6"
+                    }
+                  ]
                 }
-              ]
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "662434d8-5d88-4be6-a339-a81916933229",
-      "type": "lesson",
-      "title": "llm-prompt-select",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "a222ee0d-952a-4a0e-9ac6-ffaa3ecc510f",
-            "type": "text",
-            "content": "<p>llm-prompt-select</p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "11b959b2-1894-4dc4-bf09-7de6c6c156a3",
-            "type": "custom",
-            "tagName": "llm-prompt-select",
-            "props": {
-              "messages": [
-                {
-                  "direction": "inbound",
-                  "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+          "id": "bf0a038c-08ee-4aba-8157-9522219b5b2a",
+          "type": "lesson",
+          "title": "image-quizzes",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0115b2d7-83a4-4ee3-acff-7198f5172854",
+                "type": "text",
+                "content": "<p>Combinaison de plusieurs image-quiz (image-quizzes)</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef9",
+                "type": "custom",
+                "tagName": "image-quizzes",
+                "props": {
+                  "quizzes": [
+                    {
+                      "name": "Auprès de qui doit-elle faire la réservation du nom de domaine ?",
+                      "multiple": false,
+                      "maxChoicesPerLine": 3,
+                      "choices": [
+                        {
+                          "name": "l'ICANN (Internet Corporation for Assigned Names and Numbers)",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/ICANN.Rtf-bAh3_1cK6da.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 594,
+                            "height": 594
+                          },
+                          "response": "icann"
+                        },
+                        {
+                          "name": "un bureau d'enregistrement en ligne (registrar)",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/registrar.B8_tXBWC_zYDU4.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 1999,
+                            "height": 1435
+                          },
+                          "response": "registrar"
+                        },
+                        {
+                          "name": "la mairie de son domicile",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/mairie.FjUSG1gx_1ew03e.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 127,
+                            "height": 138
+                          },
+                          "response": "mairie"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Parmi ces conditions de validité, laquelle est vraie pour un nom de domaine ?",
+                      "multiple": false,
+                      "maxChoicesPerLine": 3,
+                      "choices": [
+                        {
+                          "name": "il est valable à vie",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/relax.DVhXIHEX_Z1rm0lr.svg",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 883,
+                            "height": 612
+                          },
+                          "response": "vie"
+                        },
+                        {
+                          "name": "il est conditionné à la reconnaissance officielle de l'association",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/reconnaissance.DBIbgb2w_Z2qqhQa.svg",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 816,
+                            "height": 662
+                          },
+                          "response": "reconnaissance"
+                        },
+                        {
+                          "name": "il doit être renouvelé avant son expiration",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/time.BN2VzmIg_FYqno.svg",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 799,
+                            "height": 689
+                          },
+                          "response": "expiration"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Parmi ces informations, laquelle est obligatoire pour enregistrer un nom de domaine en .fr ?",
+                      "multiple": false,
+                      "maxChoicesPerLine": 3,
+                      "choices": [
+                        {
+                          "name": "une adresse mail",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/mail.Cbl4a3oC_1RT8BM.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 1920,
+                            "height": 1920
+                          },
+                          "response": "mail"
+                        },
+                        {
+                          "name": "un extrait de K-bis",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/Kbis.xYfjHoh2_EqU1u.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 300,
+                            "height": 300
+                          },
+                          "response": "kbis"
+                        },
+                        {
+                          "name": "une adresse postale obligatoirement en France",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/_astro/adresse.BkRqNHvz_Z2gIKAX.webp",
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "fetchpriority": "auto",
+                            "width": 600,
+                            "height": 600
+                          },
+                          "response": "adresse"
+                        }
+                      ]
+                    }
+                  ]
                 }
-              ],
-              "prompts": [
-                {
-                  "prompt": "Traduis le mot racoon en français.",
-                  "response": "Le mot \"racoon\" se traduit par \"raton laveur\" en français."
-                },
-                {
-                  "prompt": "Écris un modèle de mail de remerciement.",
-                  "response": "Objet : Merci<br><br>Bonjour [Prénom],<br>Merci pour [votre aide / notre échange / votre temps].<br>Bien à vous,<br>[Votre prénom]"
-                },
-                {
-                  "prompt": "Liste-moi 10 noms de chiens.",
-                  "response": "1. Tokyo<br>2. Nala<br>3. Milou<br>4. Sushi<br>5. Luna<br>6. Apéro<br>7. Simba<br>8. Paco<br>9. Bart<br>10. Cookie"
-                }
-              ]
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "fc38e052-ed9f-4d68-b09f-515b7069ad86",
-      "type": "lesson",
-      "title": "pix-carousel",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "7c2efda7-1839-4b58-8673-ab32294cc788",
-            "type": "text",
-            "content": "<p>pix-carousel</p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "b04ef581-48f2-4543-9bf4-e1e87c4fa396",
-            "type": "custom",
-            "tagName": "pix-carousel",
-            "props": {
-              "aspectRatio": 1.84,
-              "titleLevel": 2,
-              "type": "image",
-              "randomSlides": false,
-              "disableAnimation": false,
-              "slides": [
-                {
-                  "title": "Situation A",
-                  "description": "Super description!",
-                  "displayWidth": 0,
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                    "alt": "une alternative A avec des \"double quotes\""
+          "id": "a0aaf8f3-27da-4130-90e0-264be24893ec",
+          "type": "lesson",
+          "title": "llm-compare-messages",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "eb31dfb9-26e6-49c3-bcff-0ef15faa1f58",
+                "type": "text",
+                "content": "<p>llm-compare-messages<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "af2a348f-666c-4935-83df-eeb32224ddba",
+                "type": "custom",
+                "tagName": "llm-compare-messages",
+                "props": {
+                  "conversation1": {
+                    "title": "Conversation 1",
+                    "llmName": "Nono"
                   },
-                  "license": {
-                    "name": "",
-                    "attribution": "",
-                    "url": ""
-                  }
-                },
-                {
-                  "title": "Situation B",
-                  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at imperdiet libero, eget suscipit enim. Proin in nibh id ligula tempus suscipit eu at dolor. Fusce tincidunt gravida turpis, a sagittis ex bibendum nec. Morbi hendrerit lectus sed libero tristique, non luctus diam ultricies. Cras in quam consectetur, tempor quam id, euismod turpis. Duis faucibus erat lectus, blandit mattis lectus euismod quis. Duis imperdiet volutpat metus at varius. Nunc vitae mattis leo, ac vehicula urna. Mauris euismod eleifend lorem quis porta. Quisque ac diam sollicitudin nisl convallis ullamcorper. Donec ut suscipit arcu.",
-                  "displayWidth": 0,
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                    "alt": "une alternative B"
+                  "conversation2": {
+                    "title": "Conversation 2",
+                    "llmName": "Jaja"
                   },
-                  "license": {
-                    "name": "",
-                    "attribution": "",
-                    "url": ""
-                  }
-                },
-                {
-                  "title": "Liste non ordonnée",
-                  "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zooma</li>\n         <li>Stela</li>\n       </ul>\n     ",
-                  "displayWidth": 0,
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                    "alt": "hehe je suis un alt"
-                  },
-                  "license": {
-                    "name": "",
-                    "attribution": "",
-                    "url": ""
-                  }
-                },
-                {
-                  "title": "Liste ordonnée",
-                  "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zooma</li>\n         <li>Stela</li>\n       </ol>\n",
-                  "displayWidth": 0,
-                  "image": {
-                    "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                    "alt": "halte là !"
-                  },
-                  "license": {
-                    "name": "name",
-                    "attribution": "attri",
-                    "url": "url"
-                  }
+                  "userName": "Bob",
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Comment aller facilement de Rennes à Brest en train demain ?"
+                    },
+                    [
+                      {
+                        "direction": "inbound",
+                        "content": "Voici les itinéraires de demain :<br>Train OUIGO, durée 2h15 08h22 --> 10h37<br>TGV INOUI, durée 2h13 09h33 --> 11h46"
+                      },
+                      {
+                        "direction": "inbound",
+                        "content": "Pour aller facilement de Rennes à Brest en train demain, plusieurs options directes sont disponibles :<br>08h22 - 10h37 : OUIGO, direct, environ 2h15 ;<br>09h33 - 11h46 : TGV INOUI, direct, environ 2h13."
+                      }
+                    ],
+                    {
+                      "direction": "outbound",
+                      "content": "Et qu'est-ce que je peux visiter à Brest ?"
+                    },
+                    [
+                      {
+                        "direction": "inbound",
+                        "content": "Je ne peux pas vous aider désolé. Votre demande ne correspond pas aux services que je propose. Est-ce que vous voulez de l’aide pour réserver un billet de train ?"
+                      },
+                      {
+                        "direction": "inbound",
+                        "content": "Voici 3 endroits incontournables à Brest :<br>Océanopolis : grand aquarium dédié aux écosystèmes marins.<br>Château de Brest : forteresse avec musée maritime.<br>Ateliers des Capucins : espace culturel moderne accessible en téléphérique."
+                      }
+                    ]
+                  ]
                 }
-              ]
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "id": "fc38e052-ed9f-4d68-b09f-515b7069ad00",
-      "type": "lesson",
-      "title": "pix-cursor",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "7c2efda7-1839-4b58-8673-ab32294cc799",
-            "type": "text",
-            "content": "<p>pix-cursor</p>"
-          }
+          ]
         },
         {
-          "type": "element",
-          "element": {
-            "id": "b04ef581-48f2-4543-9bf4-e1e8784fa396",
-            "type": "custom",
-            "tagName": "pix-cursor",
-            "props": {
-              "options": [
-                {
-                  "label": "Bon",
-                  "feedback": { "type": "good", "text": "OUI, ÇA SENT LA PATATE ! 🎉" }
-                },
-                {
-                  "label": "Presque",
-                  "feedback": { "type": "close", "text": "PATATE 🥔" }
-                },
-                {
-                  "label": "Neutre",
-                  "feedback": { "type": "neutral", "text": "Ça souffle dis donc 💨" }
-                },
-                {
-                  "label": "Incorrect",
-                  "feedback": { "type": "bad", "text": "❌ C'EST NON! Et voici pourquoi : <br>Quis elit cupidatat commodo adipisicing aliqua qui commodo proident ipsum dolore culpa in. Mollit eiusmod elit sint in aute nulla enim. Sit sint in sunt esse excepteur cupidatat et adipisicing nulla excepteur consectetur reprehenderit est ipsum. Cupidatat proident est pariatur minim labore excepteur culpa aliqua consectetur laboris voluptate consectetur enim nulla laboris. Aliquip occaecat irure sunt. Laboris eiusmod eu dolor veniam minim proident. Elit consequat est occaecat." }
+          "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef8",
+          "type": "lesson",
+          "title": "llm-messages",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a1f5e147-ea8c-4046-8020-f21c28529388",
+                "type": "text",
+                "content": "<p>llm-messages</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "03bacda5-2b76-49fd-a266-3a9bb16c20c9",
+                "type": "custom",
+                "tagName": "llm-messages",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Bonjour"
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "Pourquoi pas..."
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "Elle est bizarre ta recette."
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "Non, je m'en vais."
+                    }
+                  ]
                 }
-              ]
+              }
             }
-          }
+          ]
+        },
+        {
+          "id": "662434d8-5d88-4be6-a339-a81916933229",
+          "type": "lesson",
+          "title": "llm-prompt-select",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a222ee0d-952a-4a0e-9ac6-ffaa3ecc510f",
+                "type": "text",
+                "content": "<p>llm-prompt-select</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "11b959b2-1894-4dc4-bf09-7de6c6c156a3",
+                "type": "custom",
+                "tagName": "llm-prompt-select",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                    }
+                  ],
+                  "prompts": [
+                    {
+                      "prompt": "Traduis le mot racoon en français.",
+                      "response": "Le mot \"racoon\" se traduit par \"raton laveur\" en français."
+                    },
+                    {
+                      "prompt": "Écris un modèle de mail de remerciement.",
+                      "response": "Objet : Merci<br><br>Bonjour [Prénom],<br>Merci pour [votre aide / notre échange / votre temps].<br>Bien à vous,<br>[Votre prénom]"
+                    },
+                    {
+                      "prompt": "Liste-moi 10 noms de chiens.",
+                      "response": "1. Tokyo<br>2. Nala<br>3. Milou<br>4. Sushi<br>5. Luna<br>6. Apéro<br>7. Simba<br>8. Paco<br>9. Bart<br>10. Cookie"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fc38e052-ed9f-4d68-b09f-515b7069ad86",
+          "type": "lesson",
+          "title": "pix-carousel",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7c2efda7-1839-4b58-8673-ab32294cc788",
+                "type": "text",
+                "content": "<p>pix-carousel</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b04ef581-48f2-4543-9bf4-e1e87c4fa396",
+                "type": "custom",
+                "tagName": "pix-carousel",
+                "props": {
+                  "aspectRatio": 1.84,
+                  "titleLevel": 2,
+                  "type": "image",
+                  "randomSlides": false,
+                  "disableAnimation": false,
+                  "slides": [
+                    {
+                      "title": "Situation A",
+                      "description": "Super description!",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
+                        "alt": "une alternative A avec des \"double quotes\""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Situation B",
+                      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at imperdiet libero, eget suscipit enim. Proin in nibh id ligula tempus suscipit eu at dolor. Fusce tincidunt gravida turpis, a sagittis ex bibendum nec. Morbi hendrerit lectus sed libero tristique, non luctus diam ultricies. Cras in quam consectetur, tempor quam id, euismod turpis. Duis faucibus erat lectus, blandit mattis lectus euismod quis. Duis imperdiet volutpat metus at varius. Nunc vitae mattis leo, ac vehicula urna. Mauris euismod eleifend lorem quis porta. Quisque ac diam sollicitudin nisl convallis ullamcorper. Donec ut suscipit arcu.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
+                        "alt": "une alternative B"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Liste non ordonnée",
+                      "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zooma</li>\n         <li>Stela</li>\n       </ul>\n     ",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
+                        "alt": "hehe je suis un alt"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Liste ordonnée",
+                      "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zooma</li>\n         <li>Stela</li>\n       </ol>\n",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
+                        "alt": "halte là !"
+                      },
+                      "license": {
+                        "name": "name",
+                        "attribution": "attri",
+                        "url": "url"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fc38e052-ed9f-4d68-b09f-515b7069ad00",
+          "type": "lesson",
+          "title": "pix-cursor",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7c2efda7-1839-4b58-8673-ab32294cc799",
+                "type": "text",
+                "content": "<p>pix-cursor</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b04ef581-48f2-4543-9bf4-e1e8784fa396",
+                "type": "custom",
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "Bon",
+                      "feedback": { "type": "good", "text": "OUI, ÇA SENT LA PATATE ! 🎉" }
+                    },
+                    {
+                      "label": "Presque",
+                      "feedback": { "type": "close", "text": "PATATE 🥔" }
+                    },
+                    {
+                      "label": "Neutre",
+                      "feedback": { "type": "neutral", "text": "Ça souffle dis donc 💨" }
+                    },
+                    {
+                      "label": "Incorrect",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "❌ C'EST NON! Et voici pourquoi : <br>Quis elit cupidatat commodo adipisicing aliqua qui commodo proident ipsum dolore culpa in. Mollit eiusmod elit sint in aute nulla enim. Sit sint in sunt esse excepteur cupidatat et adipisicing nulla excepteur consectetur reprehenderit est ipsum. Cupidatat proident est pariatur minim labore excepteur culpa aliqua consectetur laboris voluptate consectetur enim nulla laboris. Aliquip occaecat irure sunt. Laboris eiusmod eu dolor veniam minim proident. Elit consequat est occaecat."
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     }
