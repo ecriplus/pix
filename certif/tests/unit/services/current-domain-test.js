@@ -1,19 +1,21 @@
 import { setupTest } from 'ember-qunit';
+import Location from 'pix-certif/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Service | currentDomain', function (hooks) {
   setupTest(hooks);
-
+  hooks.afterEach(function () {
+    Location.getHref.restore();
+  });
   module('#getExtension', function () {
     module('when location is FR TLD', function () {
       test(`returns fr`, function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('https://pix.fr/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('https://pix.fr/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const extension = service.getExtension();
 
         // then
@@ -24,11 +26,10 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is ORG TLD', function () {
       test(`returns org`, function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('https://pix.org/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('https://pix.org/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const extension = service.getExtension();
 
         // then
@@ -41,11 +42,10 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is FR TLD', function () {
       test('returns true', function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('https://pix.fr/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('https://pix.fr/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const isFranceDomain = service.isFranceDomain;
 
         // then
@@ -56,11 +56,10 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is ORG TLD', function () {
       test('returns false', function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('https://pix.org/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('https://pix.org/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const isFranceDomain = service.isFranceDomain;
 
         // then
@@ -71,13 +70,12 @@ module('Unit | Service | currentDomain', function (hooks) {
 
   module('#domain', function () {
     module('when location is localhost', function () {
-      test('returns locahost as domain', function (assert) {
+      test('returns localhost as domain', function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('http://localhost:4200/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('http://localhost:4200/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const domain = service.domain;
 
         // then
@@ -88,11 +86,10 @@ module('Unit | Service | currentDomain', function (hooks) {
     module('when location is not localhost', function () {
       test('returns the last 2-parts segment', function (assert) {
         // given
-        const locationService = this.owner.lookup('service:location');
-        sinon.stub(locationService, 'href').value('https://orga.pix.fr/foo?bar=baz');
+        sinon.stub(Location, 'getHref').returns('https://orga.pix.fr/foo?bar=baz');
+        const service = this.owner.lookup('service:currentDomain');
 
         // when
-        const service = this.owner.lookup('service:currentDomain');
         const domain = service.domain;
 
         // then
