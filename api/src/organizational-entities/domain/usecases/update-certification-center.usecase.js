@@ -5,7 +5,8 @@
  * @typedef {import('./index.js').DataProtectionOfficerRepository} DataProtectionOfficerRepository
  */
 
-import { ComplementaryCertificationHabilitation, DataProtectionOfficer } from '../../../shared/domain/models/index.js';
+import { ComplementaryCertificationHabilitation } from '../../../shared/domain/models/ComplementaryCertificationHabilitation.js';
+import { DataProtectionOfficer } from '../models/DataProtectionOfficer.js';
 import { CenterForAdminFactory } from '../models/factories/CenterForAdminFactory.js';
 import * as certificationCenterCreationValidator from '../validators/certification-center-creation.validator.js';
 

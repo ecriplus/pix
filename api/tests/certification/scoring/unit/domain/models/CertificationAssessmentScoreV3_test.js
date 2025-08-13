@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { CertificationAssessmentScoreV3 } from '../../../../../../src/certification/scoring/domain/models/CertificationAssessmentScoreV3.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { config } from '../../../../../../src/shared/config.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationAssessmentScoreV3 ', function () {

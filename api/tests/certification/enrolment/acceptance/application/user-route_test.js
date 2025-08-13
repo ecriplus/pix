@@ -1,5 +1,5 @@
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
   createServer,
   databaseBuilder,

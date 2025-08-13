@@ -1,7 +1,7 @@
 import { CertifiedProfile } from '../../../../../../src/certification/results/domain/read-models/CertifiedProfile.js';
 import * as certifiedProfileRepository from '../../../../../../src/certification/results/infrastructure/repositories/certified-profile-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Certified Profile', function () {

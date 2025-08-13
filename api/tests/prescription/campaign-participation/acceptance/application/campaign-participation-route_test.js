@@ -2,7 +2,7 @@ import times from 'lodash/times.js';
 
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,

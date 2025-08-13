@@ -3,7 +3,7 @@ import {
   ImpactfulCategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Session-Management | Domain | Models | JurySessionCounters', function () {

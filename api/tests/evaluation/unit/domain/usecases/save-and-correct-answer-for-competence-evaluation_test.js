@@ -5,7 +5,9 @@ import { AnswerJob } from '../../../../../src/quest/domain/models/AnwserJob.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-competence-evaluation', function () {

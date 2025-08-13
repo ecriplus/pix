@@ -5,6 +5,7 @@ import ms from 'ms';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
+import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
@@ -14,7 +15,7 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
-import { Assessment, TrainingTrigger } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';

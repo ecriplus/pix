@@ -1,6 +1,6 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { Assessment } from '../../../../shared/domain/models/index.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 
 const get = async function (id) {
   const knexConn = DomainTransaction.getConnection();

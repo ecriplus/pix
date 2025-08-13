@@ -1,6 +1,6 @@
 import { startEmbedLlmChat } from '../../../../../src/evaluation/domain/usecases/start-embed-llm-chat.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Eval | Domain | UseCases | start-embed-llm-chat', function () {

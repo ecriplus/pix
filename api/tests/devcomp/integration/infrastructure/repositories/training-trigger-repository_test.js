@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
+import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
+import { TrainingTriggerTube } from '../../../../../src/devcomp/domain/models/TrainingTriggerTube.js';
 import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-models/TrainingTriggerForAdmin.js';
 import * as trainingTriggerRepository from '../../../../../src/devcomp/infrastructure/repositories/training-trigger-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { TrainingTrigger, TrainingTriggerTube } from '../../../../../src/shared/domain/models/index.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import {
   catchErr,

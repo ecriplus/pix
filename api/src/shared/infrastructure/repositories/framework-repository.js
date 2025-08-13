@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../domain/errors.js';
-import { Framework } from '../../domain/models/index.js';
+import { Framework } from '../../domain/models/Framework.js';
 import { child, SCOPES } from '../utils/logger.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 

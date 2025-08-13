@@ -14,7 +14,7 @@ import {
   AssessmentNotCompletedError,
   CantImproveCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;

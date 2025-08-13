@@ -11,10 +11,10 @@ import {
   ImpactfulCategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | JurySession', function () {

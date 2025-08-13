@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { AssessmentResult } from '../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../src/shared/domain/models/AssessmentResult.js';
 
 const COMPETENCES = [
   {

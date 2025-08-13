@@ -1,5 +1,5 @@
 import { createPreviewAssessment } from '../../../../../src/school/domain/usecases/create-preview-assessment.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import { expect, knex } from '../../../../test-helper.js';
 

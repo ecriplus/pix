@@ -1,5 +1,5 @@
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
   databaseBuilder,

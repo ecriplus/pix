@@ -1,5 +1,5 @@
 import * as flash from '../../../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
-import { AnswerStatus } from '../../../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Integration | Domain | Algorithm-methods | Flash', function () {

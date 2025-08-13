@@ -1,6 +1,6 @@
 import uniqBy from 'lodash/uniqBy.js';
 
-import { KnowledgeElement } from '../../../shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../shared/domain/models/KnowledgeElement.js';
 
 export class Success {
   constructor({ knowledgeElements, campaignSkills = [], targetProfileSkills = [] }) {

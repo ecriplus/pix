@@ -7,7 +7,7 @@ import * as certificationAssessmentRepository from '../../../../../../../src/cer
 import * as certificationCourseRepository from '../../../../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../../../../../src/certification/shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../../../../../src/certification/shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import { AnswerStatus } from '../../../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../../../src/shared/domain/models/AnswerStatus.js';
 import * as assessmentResultRepository from '../../../../../../../src/shared/infrastructure/repositories/assessment-result-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../../../test-helper.js';
 

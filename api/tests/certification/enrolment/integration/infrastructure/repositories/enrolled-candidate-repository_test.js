@@ -1,7 +1,7 @@
 import * as enrolledCandidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/enrolled-candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Integration | Repository | EnrolledCandidate', function () {

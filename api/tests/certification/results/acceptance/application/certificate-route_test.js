@@ -3,7 +3,9 @@ import dayjs from 'dayjs';
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { Assessment, AssessmentResult, Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,

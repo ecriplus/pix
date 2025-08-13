@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { TargetProfile } from '../../../../../../src/shared/domain/models/index.js';
+import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Target-profile', function () {

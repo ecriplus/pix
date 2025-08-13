@@ -9,11 +9,13 @@ import {
   OrganizationTagNotFound,
   TargetProfileInvalidError,
 } from '../../../shared/domain/errors.js';
-import { Organization, OrganizationForAdmin, OrganizationTag } from '../../../shared/domain/models/index.js';
+import { OrganizationTag } from '../../../shared/domain/models/OrganizationTag.js';
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
+import { Organization } from '../models/Organization.js';
+import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 
 const SEPARATOR = '_';
 

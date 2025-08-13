@@ -5,7 +5,9 @@ import * as knowledgeElementSnapshotApi from '../../../../../src/prescription/ca
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.js';
-import { AnswerStatus, Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Evaluation | Integration | Usecase | Save and correct answer for campaign', function () {

@@ -1,5 +1,5 @@
 import { PixCertification } from '../../../../../../src/certification/enrolment/domain/models/PixCertification.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 
 const buildPixCertification = function ({
   pixScore = 123,

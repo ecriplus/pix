@@ -7,7 +7,7 @@ import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError, ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { BadgeCriterion, BadgeDetails, CappedTube, SCOPES } from '../../../../shared/domain/models/BadgeDetails.js';
-import { TargetProfile } from '../../../../shared/domain/models/index.js';
+import { TargetProfile } from '../../../../shared/domain/models/TargetProfile.js';
 import { FRENCH_FRANCE } from '../../../../shared/domain/services/locale-service.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';

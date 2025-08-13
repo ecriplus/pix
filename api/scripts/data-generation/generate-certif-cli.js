@@ -13,7 +13,7 @@ const { maxBy } = lodash;
 import { databaseBuffer } from '../../db/database-builder/database-buffer.js';
 import { DatabaseBuilder } from '../../db/database-builder/database-builder.js';
 import { getNewSessionCode } from '../../src/certification/enrolment/domain/services/session-code-service.js';
-import { CampaignParticipationStatuses } from '../../src/shared/domain/models/index.js';
+import { CampaignParticipationStatuses } from '../../src/prescription/shared/domain/constants.js';
 import { learningContentCache } from '../../src/shared/infrastructure/caches/learning-content-cache.js';
 import {
   informationBannersStorage,

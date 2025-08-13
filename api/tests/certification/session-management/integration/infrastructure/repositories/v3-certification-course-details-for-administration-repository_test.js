@@ -4,9 +4,9 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repository | v3-certification-course-details-for-administration', function () {

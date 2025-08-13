@@ -8,7 +8,7 @@ import { CertificationAnswerStatusChangeAttempt } from '../../../../../../src/ce
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { NeutralizationAttempt } from '../../../../../../src/certification/session-management/domain/models/NeutralizationAttempt.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { AnswerStatus } from '../../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationAssessment', function () {

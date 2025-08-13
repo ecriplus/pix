@@ -1,6 +1,6 @@
 import { Badge } from '../../../../evaluation/domain/models/Badge.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { TargetProfile } from '../../../../shared/domain/models/index.js';
+import { TargetProfile } from '../../../../shared/domain/models/TargetProfile.js';
 
 const getByCampaignId = async function ({ campaignId, targetProfileApi }) {
   const knexConn = DomainTransaction.getConnection();

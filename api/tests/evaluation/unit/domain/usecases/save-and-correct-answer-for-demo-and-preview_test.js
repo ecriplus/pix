@@ -3,7 +3,8 @@ import * as correctionService from '../../../../../src/evaluation/domain/service
 import { saveAndCorrectAnswerForDemoAndPreview } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-demo-and-preview.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-demo-and-preview', function () {

@@ -3,7 +3,7 @@ import { AlgorithmEngineVersion } from '../../../../../../src/certification/shar
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
   catchErr,
   databaseBuilder,

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { CertificationCompanionLiveAlertStatus } from '../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { Assessment } from '../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../src/shared/domain/models/Assessment.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAssessment } from './build-assessment.js';
 

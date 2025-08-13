@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
+import { Challenge } from '../../../shared/domain/models/Challenge.js';
+import { Correction } from '../../../shared/domain/models/Correction.js';
 import { Hint } from '../../../shared/domain/models/Hint.js';
-import { Challenge } from '../../../shared/domain/models/index.js';
-import { Correction } from '../../../shared/domain/models/index.js';
 import * as challengeRepository from '../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { Answer } from '../../domain/models/Answer.js';

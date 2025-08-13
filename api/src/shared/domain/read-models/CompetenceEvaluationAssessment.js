@@ -1,4 +1,5 @@
-import { Assessment, Progression } from '../models/index.js';
+import { Progression } from '../../../evaluation/domain/models/Progression.js';
+import { Assessment } from '../models/Assessment.js';
 
 class CompetenceEvaluationAssessment {
   constructor(assessment) {

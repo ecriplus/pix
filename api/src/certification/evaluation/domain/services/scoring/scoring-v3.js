@@ -16,11 +16,11 @@
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { config } from '../../../../../shared/config.js';
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
-import { CompetenceMark } from '../../../../../shared/domain/models/index.js';
 import { FlashAssessmentAlgorithm } from '../../../../evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { CertificationAssessmentHistory } from '../../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { CertificationAssessmentScoreV3 } from '../../../../scoring/domain/models/CertificationAssessmentScoreV3.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
+import { CompetenceMark } from '../../../../shared/domain/models/CompetenceMark.js';
 
 export const handleV3CertificationScoring = withTransaction(
   /**

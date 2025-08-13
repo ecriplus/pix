@@ -1,5 +1,6 @@
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment, CampaignTypes } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { CampaignAssessment } from '../../../../../../src/shared/domain/read-models/CampaignAssessment.js';
 import { CertificationAssessment } from '../../../../../../src/shared/domain/read-models/CertificationAssessment.js';
 import { CompetenceEvaluationAssessment } from '../../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';

@@ -1,6 +1,6 @@
 import { mailService } from '../../../../../../src/certification/session-management/domain/services/mail-service.js';
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session Management | Integration | Domain | UseCase | Publish Session ', function () {

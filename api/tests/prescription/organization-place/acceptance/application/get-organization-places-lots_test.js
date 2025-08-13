@@ -1,5 +1,5 @@
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,

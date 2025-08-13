@@ -7,7 +7,7 @@ import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 const { INVALIDATED, VALIDATED } = KnowledgeElement.StatusType;
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 
 describe('Integration | Quest | Domain | UseCases | check-user-quest-success', function () {
   it('should return undefined if userId not defined', async function () {

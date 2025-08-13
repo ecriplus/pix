@@ -1,6 +1,7 @@
 import { ValidatorAlwaysOK } from '../../../../../src/evaluation/domain/models/ValidatorAlwaysOK.js';
 import { correctPreviewAnswer } from '../../../../../src/school/domain/usecases/correct-preview-answer.js';
-import { AnswerStatus, Examiner } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import { domainBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';

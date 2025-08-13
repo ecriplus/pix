@@ -3,7 +3,7 @@ import { CertificationCompletedJob } from '../../../../../../src/certification/e
 import { scoreCompletedV2Certification } from '../../../../../../src/certification/evaluation/domain/usecases/score-completed-v2-certification.js';
 import { AssessmentResultFactory } from '../../../../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { CertificationCourse } from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | UseCases | scoreCompletedV2Certification', function () {

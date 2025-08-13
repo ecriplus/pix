@@ -5,7 +5,8 @@ import {
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../../../src/shared/domain/constants.js';
-import { Assessment, KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Prescription Integration | UseCase | get-user-campaign-assessment-result', function () {

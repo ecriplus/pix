@@ -1,4 +1,4 @@
-import { Assessment } from '../models/index.js';
+import { Assessment } from '../models/Assessment.js';
 
 class DemoAssessment {
   constructor(assessment) {

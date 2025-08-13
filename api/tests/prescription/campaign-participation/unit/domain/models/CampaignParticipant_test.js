@@ -6,7 +6,7 @@ import {
   NotEnoughDaysPassedBeforeResetCampaignParticipationError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { EntityValidationError, ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CampaignParticipant', function () {

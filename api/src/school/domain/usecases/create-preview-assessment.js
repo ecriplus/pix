@@ -1,4 +1,4 @@
-import { Assessment } from '../../../shared/domain/models/index.js';
+import { Assessment } from '../../../shared/domain/models/Assessment.js';
 
 const createPreviewAssessment = async function ({ assessmentRepository }) {
   const assessment = new Assessment({ type: Assessment.types.PREVIEW });

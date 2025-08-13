@@ -3,7 +3,7 @@ import { assessmentController } from '../../../../../src/shared/application/asse
 import * as moduleUnderTest from '../../../../../src/shared/application/assessments/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { config as settings } from '../../../../../src/shared/config.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | assessment-router', function () {

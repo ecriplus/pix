@@ -1,5 +1,6 @@
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { KnowledgeElement, Membership } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,

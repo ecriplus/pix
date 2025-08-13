@@ -1,5 +1,5 @@
 import { MissingQueryParamError } from '../../../../../src/shared/application/http-errors.js';
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { organizationInvitationController } from '../../../../../src/team/application/organization-invitations/organization-invitation.controller.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';

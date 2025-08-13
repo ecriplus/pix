@@ -1,11 +1,12 @@
 import _ from 'lodash';
 
 import { Tutorial } from '../../../../../src/devcomp/domain/models/Tutorial.js';
+import { TutorialEvaluation } from '../../../../../src/devcomp/domain/models/TutorialEvaluation.js';
 import { UserSavedTutorial } from '../../../../../src/devcomp/domain/models/UserSavedTutorial.js';
 import { TutorialForUser } from '../../../../../src/devcomp/domain/read-models/TutorialForUser.js';
 import * as tutorialRepository from '../../../../../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { KnowledgeElement, TutorialEvaluation } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { ENGLISH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 

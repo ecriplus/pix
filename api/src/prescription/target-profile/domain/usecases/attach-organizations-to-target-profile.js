@@ -1,4 +1,4 @@
-import { OrganizationsToAttachToTargetProfile } from '../../../../shared/domain/models/index.js';
+import { OrganizationsToAttachToTargetProfile } from '../models/OrganizationsToAttachToTargetProfile.js';
 
 const attachOrganizationsToTargetProfile = async function ({
   targetProfileId,

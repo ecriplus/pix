@@ -1,5 +1,5 @@
+import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
 import { evaluateAnswer } from '../../../../../src/evaluation/domain/services/correction-service.js';
-import { Answer } from '../../../../../src/shared/domain/models/index.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Service | correction-service', function () {

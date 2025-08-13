@@ -4,7 +4,7 @@ import * as skillRepository from '../../../shared/infrastructure/repositories/sk
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Accessibility } from '../../domain/models/Challenge.js';
-import { Challenge } from '../../domain/models/index.js';
+import { Challenge } from '../../domain/models/Challenge.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
 import { child, SCOPES } from '../utils/logger.js';
 import { LearningContentRepository } from './learning-content-repository.js';

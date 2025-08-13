@@ -1,6 +1,6 @@
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { KnowledgeElement } from '../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
   createMaddoServer,
   databaseBuilder,

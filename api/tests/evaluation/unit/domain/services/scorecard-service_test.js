@@ -1,10 +1,8 @@
+import { CompetenceEvaluation } from '../../../../../src/evaluation/domain/models/CompetenceEvaluation.js';
 import { Scorecard } from '../../../../../src/evaluation/domain/models/Scorecard.js';
 import * as scorecardService from '../../../../../src/evaluation/domain/services/scorecard-service.js';
-import {
-  Assessment,
-  CampaignParticipationStatuses,
-  CompetenceEvaluation,
-} from '../../../../../src/shared/domain/models/index.js';
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 

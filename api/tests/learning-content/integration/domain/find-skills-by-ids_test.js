@@ -1,5 +1,5 @@
 import { usecases } from '../../../../src/learning-content/domain/usecases/index.js';
-import { Skill } from '../../../../src/shared/domain/models/index.js';
+import { Skill } from '../../../../src/shared/domain/models/Skill.js';
 import { databaseBuilder, expect } from '../../../test-helper.js';
 
 describe('Learning Content | Integration | Domain | Usecase | Find skills by ids', function () {

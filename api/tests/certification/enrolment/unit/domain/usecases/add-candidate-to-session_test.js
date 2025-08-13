@@ -8,7 +8,7 @@ import {
   CertificationCandidateOnFinalizedSessionError,
   CertificationCandidatesError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session', function () {

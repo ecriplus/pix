@@ -7,7 +7,8 @@ import * as activityRepository from '../../../../../src/school/infrastructure/re
 import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
 import * as missionRepository from '../../../../../src/school/infrastructure/repositories/mission-repository.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
-import { Examiner, Validation } from '../../../../../src/shared/domain/models/index.js';
+import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
+import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import {

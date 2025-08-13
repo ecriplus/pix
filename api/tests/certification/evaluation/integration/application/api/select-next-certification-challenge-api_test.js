@@ -3,7 +3,8 @@ import { KnexTimeoutError } from 'knex/lib/util/timeout.js';
 import * as selectNextCertificationChallengeApi from '../../../../../../src/certification/evaluation/application/api/select-next-certification-challenge-api.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { Assessment, CertificationIssueReportCategory } from '../../../../../../src/shared/domain/models/index.js';
+import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 

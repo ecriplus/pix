@@ -1,5 +1,5 @@
 import { DomainError } from '../../../../shared/domain/errors.js';
-import { AreaForAdmin } from '../../../../shared/domain/models/index.js';
+import { AreaForAdmin } from '../../../../shared/domain/models/LearningContentForAdmin.js';
 import { categories } from '../../../../shared/domain/models/TargetProfile.js';
 
 class TargetProfileForAdmin {

@@ -1,6 +1,6 @@
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
   createServer,
   databaseBuilder,

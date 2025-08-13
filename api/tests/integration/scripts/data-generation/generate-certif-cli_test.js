@@ -5,7 +5,7 @@ import {
   databaseBuilder as databaseBuilderCli,
   main,
 } from '../../../../scripts/data-generation/generate-certif-cli.js';
-import { CampaignTypes } from '../../../../src/shared/domain/models/index.js';
+import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { expect, knex, mockLearningContent } from '../../../test-helper.js';
 
 // FIXME Too hard to edit \o/

@@ -1,5 +1,6 @@
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { CampaignParticipationStatuses, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { ENGLISH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 import * as placementProfileService from '../../../../../src/shared/domain/services/placement-profile-service.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';

@@ -5,7 +5,8 @@ import { KnowledgeElementSnapshot } from '../../../../../src/prescription/campai
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { repositories } from '../../../../../src/shared/infrastructure/repositories/index.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 

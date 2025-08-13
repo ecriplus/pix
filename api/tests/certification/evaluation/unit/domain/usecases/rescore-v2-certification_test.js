@@ -7,7 +7,7 @@ import { CertificationAssessment } from '../../../../../../src/certification/ses
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
-import { AssessmentResult } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | UseCases | rescore-v2-certification', function () {

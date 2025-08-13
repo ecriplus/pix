@@ -1,6 +1,6 @@
 import { CertificationChallengeLiveAlertStatus } from '../../../certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { Assessment } from '../models/index.js';
+import { Assessment } from '../models/Assessment.js';
 
 class CertificationAssessment {
   constructor(assessment) {

@@ -1,4 +1,4 @@
-import { AssessmentResult } from '../../../../shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
 /**

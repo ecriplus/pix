@@ -6,7 +6,7 @@ import { CandidateNotCertifiableEvent } from '../../../../../src/certification/e
 import { CandidateReconciledEvent } from '../../../../../src/certification/enrolment/domain/models/timeline/CandidateReconciledEvent.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationCandidate } from '../../../../../src/shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../../src/shared/domain/models/CertificationCandidate.js';
 import {
   createServer,
   databaseBuilder,

@@ -3,7 +3,7 @@ import * as targetProfileAdministrationRepository from '../../../../../../src/pr
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError, ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { TargetProfile } from '../../../../../../src/shared/domain/models/index.js';
+import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import {
   catchErr,
   databaseBuilder,

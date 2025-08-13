@@ -1,5 +1,5 @@
 import { CampaignAssessmentResultLine } from '../../../../../../../src/prescription/campaign/infrastructure/exports/campaigns/campaign-assessment-result-line.js';
-import { KnowledgeElement } from '../../../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 

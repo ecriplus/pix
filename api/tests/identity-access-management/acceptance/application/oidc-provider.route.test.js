@@ -3,7 +3,7 @@ import querystring from 'node:querystring';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
-import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/index.js';
+import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
 import {
   createServer,

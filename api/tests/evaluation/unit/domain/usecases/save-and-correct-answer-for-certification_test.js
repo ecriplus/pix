@@ -10,7 +10,8 @@ import {
   ChallengeNotAskedError,
 } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 const ANSWER_STATUS_FOCUSEDOUT = AnswerStatus.FOCUSEDOUT;
 const ANSWER_STATUS_OK = AnswerStatus.OK;

@@ -1,3 +1,4 @@
+import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import {
@@ -6,7 +7,8 @@ import {
   REQUIREMENT_TYPES,
 } from '../../../../src/quest/domain/models/Quest.js';
 import { config } from '../../../../src/shared/config.js';
-import { Assessment, CampaignParticipationStatuses, Membership } from '../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
+import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   AEFE_TAG,

@@ -1,4 +1,4 @@
-import { Examiner } from '../../../shared/domain/models/index.js';
+import { Examiner } from '../../../shared/domain/models/Examiner.js';
 import { AnswerEvaluationError } from '../errors.js';
 import { ValidatorAlwaysOK } from '../models/ValidatorAlwaysOK.js';
 
