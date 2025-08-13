@@ -13,7 +13,7 @@ export default class StartRoute extends Route {
 
     const hasSeenCertificationInstructions = certificationCandidate?.hasSeenCertificationInstructions;
 
-    if (!hasSeenCertificationInstructions && certificationCandidateSubscription.isSessionVersion3) {
+    if (!hasSeenCertificationInstructions) {
       this.router.replaceWith('authenticated.certifications.information', params.certification_candidate_id);
     }
 

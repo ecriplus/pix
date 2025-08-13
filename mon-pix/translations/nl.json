@@ -889,7 +889,6 @@
         },
         "info": "Door op \"Start mijn test\" te klikken, accepteer ik dat mijn identiteitsgegevens, het certificatienummer en de omstandigheden van de test zoals ingevoerd door de surveillant worden doorgegeven aan Pix. Pix zal deze informatie gebruiken tijdens de beraadslagingen van de jury om mijn resultaten te produceren en te archiveren en om mijn certificaat uit te reiken. Als dit certificaat is voorgeschreven door een organisatie, accepteer ik dat Pix mijn resultaten aan hen doorgeeft."
       },
-      "complementary-subscription": "Je bent geregistreerd voor de volgende aanvullende certificering:",
       "core-and-complementary-subscriptions": "Je bent geregistreerd voor de volgende aanvullende certificering naast de Pix-certificering:",
       "error-messages": {
         "access-code-error": "Deze code bestaat niet of is niet langer geldig.",
@@ -904,7 +903,7 @@
       },
       "first-title": "Je staat op het punt om aan je certificeringstest te beginnen",
       "link-to-user-certification": "Bekijk mijn certificaten",
-      "non-eligible-subscription": "Je komt niet in aanmerking voor {nonEligibleSubscriptionLabel}. Je kunt echter wel je Pix-certificering behalen.",
+      "non-eligible-subscription": "Je komt niet in aanmerking voor {complementarySubscriptionLabel}. Je kunt echter wel je Pix-certificering behalen.",
       "title": "Doe mee aan een certificeringssessie"
     },
     "certifications-list": {

@@ -890,7 +890,6 @@
         },
         "info": "En cliquant sur \"Commencer mon test\", j’accepte que mes données d’identité, le numéro de certification et les circonstances de la passation telles que renseignées par le surveillant soient communiquées à Pix. Pix les utilisera lors de la délibération du jury pour produire et archiver mes résultats et pour éditer mon certificat. Si cette certification m’a été prescrite par une organisation, j’accepte que Pix lui communique mes résultats."
       },
-      "complementary-subscription": "Vous êtes inscrit à la certification complémentaire suivante :",
       "core-and-complementary-subscriptions": "Vous êtes inscrit à la certification complémentaire suivante en plus de la certification Pix :",
       "error-messages": {
         "access-code-error": "Ce code n’existe pas ou n’est plus valide.",
@@ -905,7 +904,7 @@
       },
       "first-title": "Vous allez commencer votre test de certification",
       "link-to-user-certification": "Voir mes certifications",
-      "non-eligible-subscription": "Vous n'êtes pas éligible à {nonEligibleSubscriptionLabel}. Vous pouvez néanmoins passer votre certification Pix.",
+      "non-eligible-subscription": "Vous n'êtes pas éligible à {complementarySubscriptionLabel}. Vous pouvez néanmoins passer votre certification Pix.",
       "title": "Rejoindre une session de certification"
     },
     "certifications-list": {

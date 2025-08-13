@@ -890,7 +890,6 @@
         },
         "info": "By clicking on “Start my test”, I agree to my identifying data, certification number and the circumstances in which the test was taken, as reported by the invigilator, being sent to Pix. Pix will use this information during the board of examiners’ deliberation to produce and archive my results and create my certificate. If this certification was ordered by an organisation, I agree to Pix sharing my results with them."
       },
-      "complementary-subscription": "You are registered for the following additional certification :",
       "core-and-complementary-subscriptions": "You are registered for the following additional certification in combination with the Pix Certification:",
       "error-messages": {
         "access-code-error": "This code does not exist or is no longer valid.",
@@ -905,7 +904,7 @@
       },
       "first-title": "You are about to begin your certification test.",
       "link-to-user-certification": "See my certificates",
-      "non-eligible-subscription": "You are not eligible to {nonEligibleSubscriptionLabel}. However, you can still take your Pix Certification.",
+      "non-eligible-subscription": "You are not eligible to {complementarySubscriptionLabel}. However, you can still take your Pix Certification.",
       "title": "Join a certification session"
     },
     "certifications-list": {

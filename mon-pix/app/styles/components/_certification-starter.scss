@@ -46,39 +46,36 @@
 }
 
 .certification-starter-subscriptions {
-  margin-bottom: 32px;
-  color: var(--pix-neutral-900);
-  font-size: 0.875rem;
+  margin-bottom: var(--pix-spacing-8x);
 
   &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 16px 0;
     text-align: center;
     background-color: var(--pix-neutral-20);
 
     &-title {
-      font-size: 1rem;
+      @extend %pix-body-m;
     }
 
     &-items {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-
-      &__eligible-item,
-      &__non-eligible-item {
+      &__eligible,
+      &__non-eligible {
         display: flex;
         gap: var(--pix-spacing-1x);
         align-items: center;
         font-weight: 500;
+
+        @extend %pix-body-s;
       }
 
       &__eligible-icon {
-        width: 1rem;
-        height: 1rem;
         color: var(--pix-success-700);
       }
 
-      &__non-eligible-item,
+      &__non-eligible,
       &__non-eligible-icon {
         color: var(--pix-neutral-500);
       }
@@ -88,14 +85,6 @@
         width: 1rem;
         height: 1rem;
       }
-    }
-
-    &__non-eligible {
-      display: flex;
-      align-items: center;
-      padding: 10px 16px;
-      color: var(--pix-warning-700);
-      background-color: var(--pix-warning-50);
     }
   }
 }

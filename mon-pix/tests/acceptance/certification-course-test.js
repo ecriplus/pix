@@ -8,7 +8,11 @@ import { assessmentStates } from 'mon-pix/models/assessment';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
-import { fillCertificationJoiner, fillCertificationStarter } from '../helpers/certification';
+import {
+  fillCertificationJoiner,
+  fillCertificationStarter,
+  validateCertificationInstructions,
+} from '../helpers/certification';
 import setupIntl from '../helpers/setup-intl';
 
 module('Acceptance | Certification | Certification Course', function (hooks) {
@@ -164,12 +168,11 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               lastName: 'CandidatLiéUtilisateur',
               sessionId: 1,
               birthdate: '1990-01-04',
+              hasSeenCertificationInstructions: true,
             });
             this.server.create('certification-candidate-subscription', {
               id: '1',
               sessionId: 1,
-              eligibleSubscriptions: null,
-              nonEligibleSubscription: null,
             });
 
             // when
@@ -195,8 +198,6 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             this.server.create('certification-candidate-subscription', {
               id: '2',
               sessionId: 1,
-              eligibleSubscriptions: null,
-              nonEligibleSubscription: null,
             });
 
             // when
@@ -211,7 +212,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             });
 
             // then
-            assert.strictEqual(currentURL(), '/certifications/candidat/2');
+            assert.strictEqual(currentURL(), '/certifications/candidat/2/informations');
           });
         });
 
@@ -238,8 +239,6 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             this.server.create('certification-candidate-subscription', {
               id: '2',
               sessionId: 1,
-              eligibleSubscriptions: null,
-              nonEligibleSubscription: null,
             });
           });
 
@@ -257,6 +256,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
                 yearOfBirth: '1990',
                 t,
               });
+              await validateCertificationInstructions({ t });
 
               // when
               await fillCertificationStarter({ accessCode: 'ABCD12', t });
@@ -278,6 +278,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
                 yearOfBirth: '1990',
                 t,
               });
+              await validateCertificationInstructions({ t });
               await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
               // when
@@ -301,6 +302,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
                   yearOfBirth: '1990',
                   t,
                 });
+                await validateCertificationInstructions({ t });
                 await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
                 // when
@@ -327,6 +329,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
                 yearOfBirth: '1990',
                 t,
               });
+              await validateCertificationInstructions({ t });
               await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
               await click(screen.getByRole('button', { name: 'Je passe et je vais à la prochaine question' }));
@@ -363,8 +366,6 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
         this.server.create('certification-candidate-subscription', {
           id: '2',
           sessionId: 1,
-          eligibleSubscriptions: null,
-          nonEligibleSubscription: null,
         });
 
         await authenticate(user);
@@ -378,6 +379,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           yearOfBirth: '1990',
           t,
         });
+        await validateCertificationInstructions({ t });
         await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
         // when
@@ -439,6 +441,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             server.create('certification-candidate-subscription', {
               id: '2',
               sessionId: 1,
+              //
               eligibleSubscriptions: null,
               nonEligibleSubscription: null,
             });
@@ -454,6 +457,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               yearOfBirth: '2000',
               t,
             });
+            await validateCertificationInstructions({ t });
             await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
             // when
@@ -521,8 +525,6 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
           this.server.create('certification-candidate-subscription', {
             id: '2',
             sessionId: 1,
-            eligibleSubscriptions: null,
-            nonEligibleSubscription: null,
           });
 
           await authenticate(user);
@@ -536,6 +538,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             yearOfBirth: '1990',
             t,
           });
+          await validateCertificationInstructions({ t });
           await fillCertificationStarter({ accessCode: 'ABCD12', t });
 
           // when
@@ -569,8 +572,6 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
             this.server.create('certification-candidate-subscription', {
               id: '2',
               sessionId: 1,
-              eligibleSubscriptions: null,
-              nonEligibleSubscription: null,
             });
 
             const screen = await visit('/certifications');
@@ -583,6 +584,7 @@ module('Acceptance | Certification | Certification Course', function (hooks) {
               yearOfBirth: '1990',
               t,
             });
+            await validateCertificationInstructions({ t });
             await fillCertificationStarter({ accessCode: 'ABCD12', t });
             await click(screen.getByRole('button', { name: 'Signaler un problème avec la question' }));
 
