@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.182.0](https://github.com/1024pix/pix/compare/v5.181.0...v5.182.0) (2025-08-13)
+
+### :rocket: Amélioration
+
+- [#13156](https://github.com/1024pix/pix/pull/13156) Ajouter le support de l'événement `STEPPER_NEXT_STEP` (PIX-18365) 
+- [#13137](https://github.com/1024pix/pix/pull/13137) Create tmp-def-ia-supervise.json 
+- [#13159](https://github.com/1024pix/pix/pull/13159) Informer l'utilisateur qu'il a terminé son parcours combiné (PIX-18129) 
+- [#13171](https://github.com/1024pix/pix/pull/13171) Permettre de prévisualiser un module existant (PIX-19112) 
+
+### :bug: Correction
+
+- [#13169](https://github.com/1024pix/pix/pull/13169) Corriger la restriction du dépassement de place lors du changement d'organisation (PIX-18991). 
+
+### :building_construction: Tech
+
+- [#13176](https://github.com/1024pix/pix/pull/13176) Repasser les imports dynamiques en imports statiques 
+- [#13175](https://github.com/1024pix/pix/pull/13175) Valeurs par défaut des features toggle en RA et tests
+
 # [5.181.0](https://github.com/1024pix/pix/compare/v5.180.0...v5.181.0) (2025-08-12)
 
 ### :rocket: Amélioration
