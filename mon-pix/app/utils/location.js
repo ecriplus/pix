@@ -22,6 +22,10 @@ function reload() {
   window.location.reload(true);
 }
 
+function assign(url) {
+  window.location.assign(url);
+}
+
 const Location = {
   getLocationHash,
   getLocationHost,
@@ -29,6 +33,7 @@ const Location = {
   getLocationHref,
   replace,
   reload,
+  assign,
 };
 
 export default Location;

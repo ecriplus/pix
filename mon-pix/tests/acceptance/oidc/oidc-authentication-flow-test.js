@@ -3,6 +3,7 @@ import { click, currentURL, fillIn, settled } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -14,11 +15,12 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
   setupMirage(hooks);
   setupIntl(hooks);
 
-  let locationService;
+  hooks.beforeEach(function () {
+    sinon.stub(Location, 'assign');
+  });
 
-  hooks.beforeEach(async function () {
-    locationService = this.owner.lookup('service:location');
-    sinon.stub(locationService, 'assign');
+  hooks.afterEach(function () {
+    Location.assign.restore();
   });
 
   module('when the user has not performed an authentication to the OIDC Provider', function () {
@@ -38,7 +40,7 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
         await unabortedVisit('/connexion/oidc-partner');
 
         // then
-        assert.ok(locationService.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
+        assert.ok(Location.assign.calledWith('https://oidc/connexion/oauth2/authorize'));
       });
     });
   });

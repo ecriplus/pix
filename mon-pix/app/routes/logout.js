@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
+
+import Location from '../utils/location';
 const AUTHENTICATED_SOURCE_FROM_GAR = ENV.APP.AUTHENTICATED_SOURCE_FROM_GAR;
 
 export default class LogoutRoute extends Route {
@@ -9,7 +11,6 @@ export default class LogoutRoute extends Route {
   @service campaignStorage;
   @service accessStorage;
   @service router;
-  @service location;
 
   beforeModel() {
     this.session.revokeGarExternalUserToken();
@@ -28,6 +29,6 @@ export default class LogoutRoute extends Route {
   }
 
   _redirectToHomePage() {
-    this.location.replace(this.url.homeUrl);
+    Location.replace(this.url.homeUrl);
   }
 }
