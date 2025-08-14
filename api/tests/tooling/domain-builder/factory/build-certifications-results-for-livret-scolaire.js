@@ -1,5 +1,5 @@
+import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { status } from '../../../../src/shared/domain/models/AssessmentResult.js';
-import { Assessment } from '../../../../src/shared/domain/models/index.js';
 import { databaseBuilder } from '../../../test-helper.js';
 
 const assessmentCreatedDate = new Date('2020-04-19');

@@ -4,7 +4,7 @@ import { KnowledgeElementCollection } from '../../../../../src/prescription/shar
 import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {

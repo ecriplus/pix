@@ -4,7 +4,7 @@ import {
 } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import * as certificationChallengeLiveAlertRepository from '../../../../../src/certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCompanionAlertRepository from '../../../../../src/certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';

@@ -7,7 +7,7 @@ const { omit } = lodash;
 
 import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { OrganizationTag } from '../../../shared/domain/models/index.js';
+import { OrganizationTag } from '../../../shared/domain/models/OrganizationTag.js';
 import { Tag } from '../../domain/models/Tag.js';
 
 const create = async function (organizationTag) {

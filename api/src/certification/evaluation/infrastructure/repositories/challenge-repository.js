@@ -1,6 +1,6 @@
 import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
 import { config } from '../../../../shared/config.js';
-import { Challenge } from '../../../../shared/domain/models/index.js';
+import { Challenge } from '../../../../shared/domain/models/Challenge.js';
 import * as solutionAdapter from '../../../../shared/infrastructure/adapters/solution-adapter.js';
 import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';

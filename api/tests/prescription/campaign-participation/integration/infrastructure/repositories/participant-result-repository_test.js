@@ -1,11 +1,11 @@
 import * as participantResultRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/participant-result-repository.js';
-import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
-  KnowledgeElement,
-} from '../../../../../../src/shared/domain/models/index.js';
+} from '../../../../../../src/prescription/shared/domain/constants.js';
+import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;

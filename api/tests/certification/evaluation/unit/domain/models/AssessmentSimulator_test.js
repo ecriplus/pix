@@ -1,4 +1,6 @@
-import { Answer, AnswerStatus, AssessmentSimulator } from '../../../../../../src/shared/domain/models/index.js';
+import { AssessmentSimulator } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSimulator.js';
+import { Answer } from '../../../../../../src/evaluation/domain/models/Answer.js';
+import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | AssessmentSimulator', function () {

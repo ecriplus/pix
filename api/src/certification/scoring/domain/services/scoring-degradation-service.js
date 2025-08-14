@@ -1,4 +1,5 @@
-import { AnswerStatus, AssessmentSimulator } from '../../../../shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
+import { AssessmentSimulator } from '../../../evaluation/domain/models/AssessmentSimulator.js';
 import { AssessmentSimulatorSingleMeasureStrategy } from '../../../evaluation/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
 import pickChallengeService from '../../../evaluation/domain/services/pick-challenge-service.js';
 import { pickAnswerStatusService } from '../../../shared/domain/services/pick-answer-status-service.js';

@@ -1,4 +1,4 @@
-import { CertificationCandidate } from '../../../../src/shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../src/shared/domain/models/CertificationCandidate.js';
 import { getI18n } from '../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 

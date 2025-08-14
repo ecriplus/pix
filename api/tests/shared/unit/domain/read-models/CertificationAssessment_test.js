@@ -1,6 +1,6 @@
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { CertificationAssessment } from '../../../../../src/shared/domain/read-models/CertificationAssessment.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 

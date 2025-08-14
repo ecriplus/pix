@@ -3,12 +3,10 @@ import {
   ProfilesCollectionCampaignParticipation,
 } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipation.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
+import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import {
-  CampaignParticipationStatuses,
-  CampaignTypes,
-  KnowledgeElement,
-} from '../../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 

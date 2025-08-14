@@ -6,7 +6,7 @@ import { AlgorithmEngineVersion } from '../../../../../../src/certification/shar
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | SessionForSupervising', function () {

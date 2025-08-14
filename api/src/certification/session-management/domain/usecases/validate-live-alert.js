@@ -6,8 +6,9 @@
  */
 
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CertificationIssueReport, CertificationIssueReportCategory } from '../../../../shared/domain/models/index.js';
 import { ChallengeAlreadyAnsweredError } from '../../../evaluation/domain/errors.js';
+import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
+import { CertificationIssueReportCategory } from '../../../shared/domain/models/CertificationIssueReportCategory.js';
 
 /**
  * @param {Object} params

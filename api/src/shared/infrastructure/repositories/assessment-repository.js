@@ -3,7 +3,7 @@ import lodash from 'lodash';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
-import { Assessment } from '../../domain/models/index.js';
+import { Assessment } from '../../domain/models/Assessment.js';
 
 const { groupBy, map, head, uniqBy, omit } = lodash;
 

@@ -3,7 +3,7 @@ import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecase
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   databaseBuilder,
   domainBuilder,

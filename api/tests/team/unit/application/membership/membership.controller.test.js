@@ -1,4 +1,4 @@
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { membershipController } from '../../../../../src/team/application/membership/membership.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';

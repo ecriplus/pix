@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 

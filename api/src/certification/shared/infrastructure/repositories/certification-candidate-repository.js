@@ -1,6 +1,6 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CertificationCandidate } from '../../../../shared/domain/models/index.js';
+import { CertificationCandidate } from '../../../../shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertification } from '../../../enrolment/domain/models/ComplementaryCertification.js';
 import { Subscription } from '../../../enrolment/domain/models/Subscription.js';
 

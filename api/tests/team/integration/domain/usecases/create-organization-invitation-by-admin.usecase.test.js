@@ -1,4 +1,4 @@
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationArchivedError } from '../../../../../src/team/domain/errors.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';

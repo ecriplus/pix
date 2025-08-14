@@ -7,7 +7,8 @@ import {
   CampaignParticipationStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { Assessment, KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { getPlacementProfile } from '../../../../../src/shared/domain/services/placement-profile-service.js';
 import { FEATURE_CAMPAIGN_EXTERNAL_ID } from '../constants.js';
 import * as generic from './generic.js';

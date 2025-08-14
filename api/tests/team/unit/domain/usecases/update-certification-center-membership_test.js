@@ -1,4 +1,4 @@
-import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/index.js';
+import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
 import { updateCertificationCenterMembership } from '../../../../../src/team/domain/usecases/update-certification-center-membership.usecase.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 

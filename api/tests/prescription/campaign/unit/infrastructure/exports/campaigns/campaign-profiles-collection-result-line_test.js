@@ -1,5 +1,5 @@
 import { CampaignProfilesCollectionResultLine } from '../../../../../../../src/prescription/campaign/infrastructure/exports/campaigns/campaign-profiles-collection-result-line.js';
-import { PlacementProfile } from '../../../../../../../src/shared/domain/models/index.js';
+import { PlacementProfile } from '../../../../../../../src/shared/domain/models/PlacementProfile.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 

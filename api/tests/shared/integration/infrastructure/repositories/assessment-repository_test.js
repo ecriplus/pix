@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { Assessment, AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 

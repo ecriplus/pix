@@ -1,4 +1,4 @@
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationArchivedError } from '../../../../../src/team/domain/errors.js';
 import { createMembership } from '../../../../../src/team/domain/usecases/create-membership.usecase.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';

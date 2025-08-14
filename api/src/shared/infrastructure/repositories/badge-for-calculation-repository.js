@@ -2,8 +2,9 @@ import _ from 'lodash';
 
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
+import { BadgeCriterionForCalculation } from '../../domain/models/BadgeCriterionForCalculation.js';
 import { SCOPES } from '../../domain/models/BadgeDetails.js';
-import { BadgeCriterionForCalculation, BadgeForCalculation } from '../../domain/models/index.js';
+import { BadgeForCalculation } from '../../domain/models/BadgeForCalculation.js';
 
 export { findByCampaignId, findByCampaignParticipationId, getByCertifiableBadgeAcquisition };
 

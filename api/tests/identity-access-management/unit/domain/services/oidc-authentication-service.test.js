@@ -1,16 +1,14 @@
 import jsonwebtoken from 'jsonwebtoken';
 import ms from 'ms';
 
+import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { UserToCreate } from '../../../../../src/identity-access-management/domain/models/UserToCreate.js';
 import { OidcAuthenticationService } from '../../../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
 import { config as settings } from '../../../../../src/shared/config.js';
 import { OIDC_ERRORS } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { OidcError, OidcMissingFieldsError } from '../../../../../src/shared/domain/errors.js';
-import {
-  AuthenticationMethod,
-  AuthenticationSessionContent,
-  UserToCreate,
-} from '../../../../../src/shared/domain/models/index.js';
+import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, catchErrSync, expect, sinon } from '../../../../test-helper.js';
 import { createOpenIdClientMock } from '../../../../tooling/openid-client/openid-client-mocks.js';

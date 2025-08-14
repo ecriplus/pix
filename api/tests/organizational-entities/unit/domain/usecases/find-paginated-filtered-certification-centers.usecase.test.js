@@ -1,5 +1,5 @@
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { CertificationCenter } from '../../../../../src/shared/domain/models/index.js';
+import { CertificationCenter } from '../../../../../src/shared/domain/models/CertificationCenter.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | find-paginated-filtered-certification-centers', function () {

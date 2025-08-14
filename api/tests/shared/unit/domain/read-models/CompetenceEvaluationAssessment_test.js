@@ -1,4 +1,4 @@
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { CompetenceEvaluationAssessment } from '../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
 import { expect } from '../../../../test-helper.js';
 

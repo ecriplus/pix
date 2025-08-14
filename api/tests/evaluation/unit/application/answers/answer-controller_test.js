@@ -2,7 +2,7 @@ import { answerController } from '../../../../../src/evaluation/application/answ
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
-import { Assessment } from '../../../../../src/shared/domain/models/index.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 

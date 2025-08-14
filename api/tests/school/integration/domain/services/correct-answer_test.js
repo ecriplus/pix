@@ -5,7 +5,9 @@ import { correctAnswer } from '../../../../../src/school/domain/services/correct
 import * as activityAnswerRepository from '../../../../../src/school/infrastructure/repositories/activity-answer-repository.js';
 import * as activityRepository from '../../../../../src/school/infrastructure/repositories/activity-repository.js';
 import { ChallengeNotAskedError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { AnswerStatus, Examiner, Validation } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
+import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
 import {

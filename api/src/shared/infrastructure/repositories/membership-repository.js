@@ -1,5 +1,7 @@
+import { User } from '../../../identity-access-management/domain/models/User.js';
+import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
-import { Membership, Organization, User } from '../../domain/models/index.js';
+import { Membership } from '../../domain/models/Membership.js';
 
 const ORGANIZATION_TAGS_TABLE = 'organization-tags';
 const ORGANIZATIONS_TABLE = 'organizations';

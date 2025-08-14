@@ -2,15 +2,13 @@ import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import {
-  AssessmentResult,
-  CompetenceMark,
-  PrivateCertificate,
-  ResultCompetenceTree,
-  ShareableCertificate,
-} from '../../../../shared/domain/models/index.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
+import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { CertificationAttestation } from '../../domain/models/CertificationAttestation.js';
+import { PrivateCertificate } from '../../domain/models/PrivateCertificate.js';
+import { ResultCompetenceTree } from '../../domain/models/ResultCompetenceTree.js';
+import { ShareableCertificate } from '../../domain/models/ShareableCertificate.js';
 import { Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';

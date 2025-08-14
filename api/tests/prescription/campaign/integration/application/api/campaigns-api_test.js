@@ -6,7 +6,7 @@ import {
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { KnowledgeElement } from '../../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Application | campaign-api', function () {

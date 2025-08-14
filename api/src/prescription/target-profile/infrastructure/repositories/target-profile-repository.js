@@ -3,7 +3,7 @@ import { Badge } from '../../../../evaluation/domain/models/Badge.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
-import { TargetProfile } from '../../../../shared/domain/models/index.js';
+import { TargetProfile } from '../../../../shared/domain/models/TargetProfile.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 
 const TARGET_PROFILE_TABLE = 'target-profiles';

@@ -1,7 +1,7 @@
 import { Campaign } from '../../../../../src/maddo/domain/models/Campaign.js';
 import { findByOrganizationId } from '../../../../../src/maddo/infrastructure/repositories/campaign-repository.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Maddo | Infrastructure | Repositories | Integration | campaign', function () {

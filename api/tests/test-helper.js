@@ -28,7 +28,7 @@ import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { config } from '../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
-import { Membership } from '../src/shared/domain/models/index.js';
+import { Membership } from '../src/shared/domain/models/Membership.js';
 import * as tokenService from '../src/shared/domain/services/token-service.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';

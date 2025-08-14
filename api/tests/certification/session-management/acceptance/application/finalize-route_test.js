@@ -5,7 +5,9 @@ import {
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { config } from '../../../../../src/shared/config.js';
-import { AnswerStatus, Assessment, AssessmentResult } from '../../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
+import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
   createServer,
   databaseBuilder,

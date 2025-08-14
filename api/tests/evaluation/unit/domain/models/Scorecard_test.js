@@ -4,7 +4,7 @@ import {
   MAX_REACHABLE_LEVEL,
   MAX_REACHABLE_PIX_BY_COMPETENCE,
 } from '../../../../../src/shared/domain/constants.js';
-import { KnowledgeElement } from '../../../../../src/shared/domain/models/index.js';
+import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 const MINIMUM_DELAY_IN_DAYS_FOR_RESET = constants.MINIMUM_DELAY_IN_DAYS_FOR_RESET;

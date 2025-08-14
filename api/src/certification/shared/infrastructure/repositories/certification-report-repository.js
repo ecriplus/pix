@@ -1,6 +1,6 @@
 import { Assessment } from '../../../../school/domain/models/Assessment.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { Challenge } from '../../../../shared/domain/models/index.js';
+import { Challenge } from '../../../../shared/domain/models/Challenge.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourseUpdateError } from '../../domain/errors.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';

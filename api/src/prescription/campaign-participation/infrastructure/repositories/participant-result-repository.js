@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { convertLevelStagesIntoThresholds } from '../../../../evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { Assessment } from '../../../../shared/domain/models/index.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../shared/domain/read-models/participant-results/AssessmentResult.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';

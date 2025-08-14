@@ -1,4 +1,4 @@
-import { Skill } from '../../../shared/domain/models/index.js';
+import { Skill } from '../../../shared/domain/models/Skill.js';
 
 export const STEPS_NAMES = {
   DEFAULT_LEVEL: 'DEFAULT_LEVEL',

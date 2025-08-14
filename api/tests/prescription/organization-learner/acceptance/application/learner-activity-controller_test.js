@@ -1,4 +1,4 @@
-import { Membership } from '../../../../../src/shared/domain/models/index.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,

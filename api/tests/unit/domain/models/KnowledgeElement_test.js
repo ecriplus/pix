@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
-import { AnswerStatus, KnowledgeElement } from '../../../../src/shared/domain/models/index.js';
+import { AnswerStatus } from '../../../../src/shared/domain/models/AnswerStatus.js';
+import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import { domainBuilder, expect, sinon } from '../../../test-helper.js';
 
 const KE_STATUS_VALIDATED = KnowledgeElement.StatusType.VALIDATED;

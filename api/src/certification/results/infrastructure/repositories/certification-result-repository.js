@@ -1,5 +1,5 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { CertificationResult } from '../../../../shared/domain/models/index.js';
+import { CertificationResult } from '../../../../shared/domain/models/CertificationResult.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 
 const findBySessionId = async function ({ sessionId }) {
