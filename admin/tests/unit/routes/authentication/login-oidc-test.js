@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
+import Location from 'pix-admin/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -51,7 +52,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         test('redirects the user to authorization url', async function (assert) {
           // given
           const route = this.owner.lookup('route:authentication/login-oidc');
-          route.location.replace = sinon.stub();
+          const replaceStub = sinon.stub(Location, 'replace');
 
           // when
           await route.beforeModel({ to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } } });
@@ -61,8 +62,9 @@ module('Unit | Route | login-oidc', function (hooks) {
             fetchStub,
             'http://localhost:3000/api/oidc/authorization-url?identity_provider=OIDC_PARTNER',
           );
-          sinon.assert.calledWith(route.location.replace, 'https://oidc.example.net/connexion');
+          sinon.assert.calledWith(replaceStub, 'https://oidc.example.net/connexion');
           assert.ok(true);
+          sinon.restore();
         });
       });
     });
