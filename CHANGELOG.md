@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.183.0](https://github.com/1024pix/pix/compare/v5.182.0...v5.183.0) (2025-08-14)
+
+### :rocket: Amélioration
+
+- [#13180](https://github.com/1024pix/pix/pull/13180) Ajout d'un niveau "section" dans les contenus des modules (PIX-18992) 
+- [#13174](https://github.com/1024pix/pix/pull/13174) Ajout d'une route pour obtenir des statistiques de participation (PIX-18955) 
+- [#13172](https://github.com/1024pix/pix/pull/13172) Ajouter les bannières des typologies SCO / SCO-1D dans la page de presentation de l'organisation (PIX-18950). 
+- [#13173](https://github.com/1024pix/pix/pull/13173) Empêcher l'accès à une certification (complémentaire ou double) si le centre n'a plus l'habilitation (PIX-19111). 
+- [#13152](https://github.com/1024pix/pix/pull/13152) Permettre l'inscription d'une liste de candidats Pix+ via l'import d'une liste de candidats dans une session (.ods) (PIX-18595) 
+- [#13155](https://github.com/1024pix/pix/pull/13155) Script de reprise des locales des utilisateurs (PIX-18985) 
+- [#12901](https://github.com/1024pix/pix/pull/12901) Suppression de isCancelled pour CPF et LSU/LSL (PIX-16048). 
+
+### :bug: Correction
+
+- [#13187](https://github.com/1024pix/pix/pull/13187) Eviter les timeouts lors des épreuves de prompt avec le LLM en relayant les pings émis depuis l'API poc-llm (PIX-19139) 
+
+### :building_construction: Tech
+
+- [#13177](https://github.com/1024pix/pix/pull/13177) Migrer le scoring vers la nouvelle table de config flash (PIX-19067). 
+- [#13150](https://github.com/1024pix/pix/pull/13150) Suppression de la colonne isCancelled dans la table "certification-courses" (PIX-16049). 
+- [#13184](https://github.com/1024pix/pix/pull/13184) Supprimer l'usage de shared/models/index.js 
+- [#13165](https://github.com/1024pix/pix/pull/13165) Utiliser l'url-service dans l'API (PIX-18981) 
+
+### :arrow_up: Montée de version
+
+- [#13189](https://github.com/1024pix/pix/pull/13189) Lock file maintenance (orga) 
+- [#13188](https://github.com/1024pix/pix/pull/13188) Update dependency @1024pix/eslint-plugin to ^2.1.8 (orga)
+
 # [5.182.0](https://github.com/1024pix/pix/compare/v5.181.0...v5.182.0) (2025-08-13)
 
 ### :rocket: Amélioration
