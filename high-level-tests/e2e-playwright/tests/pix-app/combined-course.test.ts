@@ -1,7 +1,53 @@
 import { buildFreshPixAppUser, createOrganizationInDB, createTargetProfileInDB, knex } from '../../helpers/db.js';
 import { expect, test } from '../../helpers/fixtures.js';
+import { ReconciliationLoginPage } from '../../pages/pix-app/ReconciliationLoginPage.js';
+import { ReconciliationPage } from '../../pages/pix-app/ReconciliationPage.js';
 
 test('pass a combined course as sco user and see the final result', async ({ page }) => {
+  await createDataForCombinedCourse();
+
+  await page.goto('http://localhost:4200/parcours/COMBINIX1/');
+  await page.getByRole('button', { name: 'Se connecter' }).click();
+
+  const reconciliationLoginPage = new ReconciliationLoginPage(page);
+  await reconciliationLoginPage.login('alain.terieur@example.net', 'pix123');
+
+  const reconciliationPage = new ReconciliationPage(page);
+  await reconciliationPage.reconcile('Alain', 'Terieur', '10/07/2010');
+
+  await test.step('Start combined course', async function () {
+    await page.getByRole('button', { name: 'Commencer mon parcours' }).click();
+    await page.getByRole('link', { name: 'campagne diag' }).click();
+  });
+
+  await test.step('Run campaign', async function () {
+    await page.getByRole('button', { name: 'Je commence' }).click();
+    await page.getByRole('button', { name: 'Ignorer' }).click();
+    await page.getByRole('button', { name: 'Je passe et je vais à la' }).click();
+    //Le bouton "Voir mes résultats" existe deux fois à ce moment, on doit donc faire autrement en attendant de corriger cette page
+    await page.locator('#ember138').click();
+    await page.getByRole('button', { name: "J'envoie mes résultats" }).click();
+    await page.getByRole('button', { name: 'Fermer', exact: true }).click();
+    await page.getByRole('link', { name: 'Continuer' }).click();
+  });
+
+  await test.step('Run module', async function () {
+    await page.getByRole('link', { name: 'Demo combinix' }).click();
+    await page.getByRole('button', { name: 'Commencer le module' }).click();
+    await page.getByRole('button', { name: 'Terminer' }).click();
+    //Sera enlevé au prochain ticket pour passer l'url en relative, on aura plus les problèmes liés à l'host
+    await page.goto('http://localhost:4200/parcours/COMBINIX1/');
+  });
+
+  await test.step('End of combined course', async function () {
+    await expect(page.getByRole('heading', { name: 'Félicitations ! Vous avez terminé !' })).toBeVisible();
+  });
+});
+
+/*
+Creates a simple combined course with a campaign and an always recommended module
+ */
+async function createDataForCombinedCourse() {
   const TARGET_PROFILE_TUBES = [
     {
       id: 'recSqw34xWSLgEgt',
@@ -85,33 +131,4 @@ test('pass a combined course as sco user and see the final result', async ({ pag
   ]);
   const eligibilityRequirements = JSON.stringify([]);
   await knex('quests').insert({ code: 'COMBINIX1', organizationId, successRequirements, eligibilityRequirements });
-
-  await page.goto('http://localhost:4200/parcours/COMBINIX1/');
-  await page.getByRole('button', { name: 'Se connecter' }).click();
-  await page.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }).fill('alain.terieur@example.net');
-  await page.getByRole('textbox', { name: 'Mot de passe *' }).fill('pix123');
-  await page.getByRole('button', { name: 'Se connecter' }).click();
-  await page.getByRole('textbox', { name: 'Prénom' }).fill('Alain');
-  await page.getByRole('textbox', { name: 'Nom', exact: true }).fill('Terieur');
-  await page.getByRole('textbox', { name: 'jour de naissance' }).fill('10');
-  await page.getByRole('textbox', { name: 'mois de naissance' }).fill('07');
-  await page.getByRole('textbox', { name: 'année de naissance' }).fill('2010');
-  await page.getByRole('button', { name: "C'est parti !" }).click();
-  await page.getByRole('button', { name: 'Associer' }).click();
-  await page.getByRole('button', { name: 'Commencer mon parcours' }).click();
-  await page.getByRole('link', { name: 'campagne diag' }).click();
-  await page.getByRole('button', { name: 'Je commence' }).click();
-  await page.getByRole('button', { name: 'Ignorer' }).click();
-  await page.getByRole('button', { name: 'Je passe et je vais à la' }).click();
-  //Le bouton "Voir mes résultats" existe deux fois à ce moment, on doit donc faire autrement en attendant de corriger cette page
-  await page.locator('#ember138').click();
-  await page.getByRole('button', { name: "J'envoie mes résultats" }).click();
-  await page.getByRole('button', { name: 'Fermer', exact: true }).click();
-  await page.getByRole('link', { name: 'Continuer' }).click();
-  await page.getByRole('link', { name: 'Demo combinix' }).click();
-  await page.getByRole('button', { name: 'Commencer le module' }).click();
-  await page.getByRole('button', { name: 'Terminer' }).click();
-  //Sera enlevé au prochain ticket pour passer l'url en relative, on aura plus les problèmes liés à l'host
-  await page.goto('http://localhost:4200/parcours/COMBINIX1/');
-  await expect(page.getByRole('heading', { name: 'Félicitations ! Vous avez terminé !' })).toBeVisible();
-});
+}
