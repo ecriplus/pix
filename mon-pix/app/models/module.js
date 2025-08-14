@@ -7,5 +7,5 @@ export default class Module extends Model {
   @attr() details;
   @attr('string') version;
   @attr('string') redirectionUrl;
-  @hasMany('grain', { async: false, inverse: 'module' }) grains;
+  @hasMany('section', { async: false, inverse: 'module' }) sections;
 }

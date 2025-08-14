@@ -50,13 +50,18 @@ module('Acceptance | Module | Routes | verifyQrocm', function (hooks) {
       ],
     };
 
-    const grain = server.create('grain', {
-      id: 'grainId',
-      title: 'title',
-      components: [
+    const section = server.create('section', {
+      id: 'sectionId-1',
+      grains: [
         {
-          type: 'element',
-          element: qrocm1,
+          id: 'grainId',
+          title: 'title',
+          components: [
+            {
+              type: 'element',
+              element: qrocm1,
+            },
+          ],
         },
       ],
     });
@@ -65,7 +70,7 @@ module('Acceptance | Module | Routes | verifyQrocm', function (hooks) {
       id: 'bien-ecrire-son-adresse-mail',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
-      grains: [grain],
+      sections: [section],
     });
 
     server.create('correction-response', {

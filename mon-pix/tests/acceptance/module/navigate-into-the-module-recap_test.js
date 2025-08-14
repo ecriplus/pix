@@ -25,16 +25,19 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       };
       user = server.create('user', 'withEmail');
 
-      const grain = server.create('grain', {
-        id: 'grain1',
-        components: [{ type: 'element', element: text }],
+      const section = server.create('section', {
+        id: 'sectionId-1',
+        grains: {
+          id: 'grain1',
+          components: [{ type: 'element', element: text }],
+        },
       });
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
         isBeta: true,
-        grains: [grain],
+        sections: [section],
         details: {
           image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',

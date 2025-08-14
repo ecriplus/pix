@@ -12,15 +12,12 @@ function serialize(module) {
         isBeta: module.isBeta,
         version: module.version,
         details: module.details,
-        grains: module.sections.flatMap((section) => {
-          return section.grains.map((grain) => {
-            return {
-              id: grain.id,
-              title: grain.title,
-              type: grain.type,
-              components: grain.components,
-            };
-          });
+        sections: module.sections.map((section) => {
+          return {
+            id: section.id,
+            type: section.type,
+            grains: section.grains,
+          };
         }),
       };
 
@@ -30,15 +27,15 @@ function serialize(module) {
 
       return transformedModule;
     },
-    attributes: ['slug', 'title', 'isBeta', 'version', 'grains', 'details', 'redirectionUrl'],
-    grains: {
+    attributes: ['slug', 'title', 'isBeta', 'version', 'sections', 'details', 'redirectionUrl'],
+    sections: {
       ref: 'id',
       includes: true,
-      attributes: ['title', 'type', 'components'],
+      attributes: ['type', 'grains'],
     },
     typeForAttribute(attribute) {
-      if (attribute === 'grains') {
-        return 'grains';
+      if (attribute === 'sections') {
+        return 'sections';
       }
       if (attribute === 'module') {
         return 'modules';

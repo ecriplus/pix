@@ -10,19 +10,18 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when there are answerable elements in grain', function () {
       test('should return true', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const qcu = { type: 'qcu', isAnswerable: true };
         const qcm = { type: 'qcm', isAnswerable: true };
         const qrocm = { type: 'qrocm', isAnswerable: true };
         const text = { type: 'text', isAnswerable: false };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [
             { type: 'element', element: qcu },
             { type: 'element', element: qcm },
             { type: 'element', element: qrocm },
             { type: 'element', element: text },
           ],
-        });
+        };
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
         // when
@@ -36,11 +35,10 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when there are no answerable element in grain', function () {
       test('should return false', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const text = { type: 'text', isAnswerable: false };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'element', element: text }],
-        });
+        };
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
         // when
@@ -56,19 +54,18 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when there are answerable elements in elements', function () {
       test('should return only answerable elements', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const qcu = { type: 'qcu', isAnswerable: true };
         const qcm = { type: 'qcm', isAnswerable: true };
         const qrocm = { type: 'qrocm', isAnswerable: true };
         const text = { type: 'text', isAnswerable: false };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [
             { type: 'element', element: qcu },
             { type: 'element', element: qcm },
             { type: 'element', element: qrocm },
             { type: 'element', element: text },
           ],
-        });
+        };
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
         // when
@@ -83,11 +80,10 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when there are no answerable elements in elements', function () {
       test('should return an empty array', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const text = { type: 'text' };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'element', element: text }],
-        });
+        };
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
         // when
@@ -111,9 +107,9 @@ module('Unit | Component | Module | Grain', function (hooks) {
         const passage = store.createRecord('passage', {
           elementAnswers: [elementAnswer],
         });
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'element', element: qcu }],
-        });
+        };
 
         const component = createGlimmerComponent('module/grain/grain', { grain, passage });
 
@@ -130,9 +126,9 @@ module('Unit | Component | Module | Grain', function (hooks) {
         // given
         const store = this.owner.lookup('service:store');
         const qcu = { type: 'qcu', isAnswerable: true };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'element', element: qcu }],
-        });
+        };
         const passage = store.createRecord('passage');
         const component = createGlimmerComponent('module/grain/grain', { grain, passage });
 
@@ -149,11 +145,10 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when component.type is supported', function () {
       test('should return the displayable element', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const qcu = { id: 'qcu-id-1', type: 'qcu' };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'element', element: qcu }],
-        });
+        };
 
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
@@ -169,11 +164,10 @@ module('Unit | Component | Module | Grain', function (hooks) {
     module('when component.type is not supported', function () {
       test('should return an empty array', function (assert) {
         // given
-        const store = this.owner.lookup('service:store');
         const qcu = { id: 'qcu-id-1', type: 'qcu' };
-        const grain = store.createRecord('grain', {
+        const grain = {
           components: [{ type: 'toto', element: qcu }],
-        });
+        };
 
         const component = createGlimmerComponent('module/grain/grain', { grain });
 
