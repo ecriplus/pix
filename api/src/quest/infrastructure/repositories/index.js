@@ -20,6 +20,7 @@ import * as questRepository from './quest-repository.js';
 import * as recommendedModulesRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
 import * as successRepository from './success-repository.js';
+import * as targetProfileRepository from './target-profile-repository.js';
 import * as userRepository from './user-repository.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
@@ -36,6 +37,7 @@ const repositoriesWithoutInjectedDependencies = {
   combinedCourseParticipationRepository,
   userRepository,
   recommendedModulesRepository,
+  targetProfileRepository,
 };
 
 const dependencies = {
