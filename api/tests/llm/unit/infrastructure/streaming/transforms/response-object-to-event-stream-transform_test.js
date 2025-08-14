@@ -120,6 +120,26 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       );
     });
 
+    it('should return a Transform that is capable of convert information "ping" into event stream event', async function () {
+      // given
+      const input = [
+        { message: 'Coucou les amis comment ça va ?' },
+        { pasMessage: 'Ca va super' },
+        { message: 'Et toi ?', ping: true },
+      ];
+      const readable = Readable.from(input);
+      const transform = getTransform(streamCapture);
+      let result = '';
+
+      // when
+      readable.pipe(transform);
+      transform.on('data', (str) => (result = result + str));
+      await finished(transform);
+
+      // then
+      expect(result).to.equal('data: Coucou les amis comment ça va ?\n\nevent: ping\ndata: \n\ndata: Et toi ?\n\n');
+    });
+
     context('streamCapture', function () {
       it('should store all the LLM response message parts in the streamCapture object while transforming', async function () {
         // given
