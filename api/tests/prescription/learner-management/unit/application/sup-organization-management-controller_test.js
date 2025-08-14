@@ -1,6 +1,5 @@
 import { supOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sup-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | sup-organization-management-controller', function () {
@@ -189,7 +188,6 @@ describe('Unit | Controller | sup-organization-management-controller', function 
 
     it('should return a response with correct headers', async function () {
       // when
-      request.i18n = getI18n();
       hFake.request = {
         path: '/api/organizations/2/sup-organization-learners/csv-template',
       };
