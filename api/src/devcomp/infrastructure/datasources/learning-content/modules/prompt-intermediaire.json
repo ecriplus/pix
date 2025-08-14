@@ -266,105 +266,91 @@
           ]
         },
         {
-          "id": "0f81e6a6-c697-4c48-85bf-7b3e8c53f7bb",
-          "type": "activity",
-          "title": "Aide Gustave avec son prompt - identifie le format",
+          "id": "2649a70b-3c92-4be4-b729-f27784225c40",
+          "type": "discovery",
+          "title": "Découverte : Aide Gustave avec son prompt",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "16c152b9-5a18-48b5-a0f7-b1bfa1f8c41c",
-                "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi.<br>D’habitude, il prépare un document d'entraînement sous ce format.<br></p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "4fd08276-0da3-4726-aa83-8ac498dcd561",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/tableaumanchette/travailmanchette.png",
-                "alt": "Un tableau d'exercice pour travailler la manchette",
-                "alternativeText": "<p>Un tableau avec 3 exercices pour travailler la manchette selon son niveau (débutant, intermédiaire, avancé)</p>",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "29b0a00a-fb1e-4737-a84f-c154e3faff48",
-                "type": "qrocm",
-                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p><br>",
-                "proposals": [
-                  {
-                    "input": "CV1pzGeay4eJi1g7",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 8,
-                    "display": "inline",
-                    "placeholder": "un seul mot",
-                    "ariaLabel": "champs à remplir",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "tableau",
-                      "table",
-                      "tablo"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bien vu !&nbsp;<br></p>",
-                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l’IA, il faudra préciser le format.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Et non…&nbsp;<br></p>",
-                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l’IA, il faudra préciser le format, ici, un tableau.&nbsp;<br></p>"
-                  }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "6fa7a60c-e4bc-4dc4-adc3-438da9b1d428",
+                      "type": "text",
+                      "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
+                    },
+                    {
+                      "id": "b8786ceb-928f-4d8a-9fe1-9d8ff43882ec",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/tableaumanchette/travailmanchette.png",
+                      "alt": "Un tableau d'exercice pour travailler la manchette",
+                      "alternativeText": "<p>Un tableau avec 3 exercices pour travailler la manchette selon son niveau (débutant, intermédiaire, avancé)</p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "055c7956-d282-4d08-a0a3-3e51dc5a13c8",
+                      "type": "qrocm",
+                      "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
+                      "proposals": [
+                        {
+                          "input": "CV1pzGeay4eJi1g7",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 8,
+                          "display": "block",
+                          "placeholder": "un seul mot",
+                          "ariaLabel": "champs à remplir",
+                          "defaultValue": "",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "tableau"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien vu !</p>",
+                          "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Et non !</p>",
+                          "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format, ici, un tableau.</p>"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b4bfcb7b-9aaa-436a-8802-08f7f950bb53",
+                      "type": "text",
+                      "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>. </p><p>Utilisez l'<strong>IA de Pix</strong> pour répondre à sa demande.&nbsp;N'hésitez pas à préciser au fur et à mesure.</p>"
+                    },
+                    {
+                      "id": "311424f0-5265-4d68-b362-f903374798d7",
+                      "type": "embed",
+                      "isCompletionRequired": false,
+                      "title": "Simulateur LLM",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
+                      "instruction": "<p>À vous de jouer !</p>",
+                      "solution": "",
+                      "height": 550
+                    },
+                    {
+                      "id": "3302fb49-1e48-4f65-a075-423851735f8a",
+                      "type": "text",
+                      "content": "<details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>"
+                    }
+                  ]
                 }
-              }
-            }
-          ]
-        },
-        {
-          "id": "154ad788-50ff-4a8c-abf1-a22307d4d2f8",
-          "type": "activity",
-          "title": "Aide Gustave avec son prompt - utilise le LLM",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "07920aa5-5dd7-46e4-9d81-8c85b887e5f2",
-                "type": "text",
-                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.</p><p>Utilisez l'<strong>IA de Pix</strong> pour répondre à sa demande.&nbsp;N'hésitez pas à préciser au fur et à mesure.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "8bffec8d-b6c7-48ed-8d3d-5af8d094247e",
-                "type": "embed",
-                "isCompletionRequired": false,
-                "title": "Simulateur LLM",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "<p>À vous de jouer !</p>",
-                "solution": "<p></p>",
-                "height": 800
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "6ff09171-639a-4e55-a4d5-9beb8e4afea4",
-                "type": "text",
-                "content": "<p>\n    <br>\n</p>\n<p>\n</p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L’astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>\n</p><p></p><p></p><p></p><p></p>\n"
-              }
+              ]
             }
           ]
         },
@@ -645,7 +631,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>"
               }
             }
           ]
