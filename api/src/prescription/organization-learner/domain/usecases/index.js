@@ -40,6 +40,7 @@ import * as analysisRepository from '../../infrastructure/repositories/analysis-
 import { repositories } from '../../infrastructure/repositories/index.js';
 import * as organizationLearnerActivityRepository from '../../infrastructure/repositories/organization-learner-activity-repository.js';
 import * as organizationLearnerFeatureRepository from '../../infrastructure/repositories/organization-learner-feature-repository.js';
+import * as organizationLearnerStatisticsRepository from '../../infrastructure/repositories/organization-learner-statistics-repository.js';
 import * as organizationParticipantRepository from '../../infrastructure/repositories/organization-participant-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../infrastructure/repositories/registration-organization-learner-repository.js';
 import * as scoOrganizationParticipantRepository from '../../infrastructure/repositories/sco-organization-participant-repository.js';
@@ -85,6 +86,7 @@ const dependencies = {
   tokenService,
   passwordValidator,
   writeCsvUtils,
+  organizationLearnerStatisticsRepository,
 };
 
 import { createAndReconcileUserToOrganizationLearner } from './create-and-reconcile-user-to-organization-learner.js';
@@ -106,6 +108,7 @@ import { getAnalysisByTubes } from './get-analysis-by-tubes.js';
 import { getAttestationZipForDivisions } from './get-attestation-zip-for-divisions.js';
 import { getOrganizationLearner } from './get-organization-learner.js';
 import { getOrganizationLearnerActivity } from './get-organization-learner-activity.js';
+import { getOrganizationLearnerStatistics } from './get-organization-learner-statistics.js';
 import { getOrganizationLearnerWithParticipations } from './get-organization-learner-with-participations.js';
 import { getOrganizationToJoin } from './get-organization-to-join.js';
 import { updateOrganizationLearnerDependentUserPassword } from './update-organization-learner-dependent-user-password.js';
@@ -124,13 +127,14 @@ const usecasesWithoutInjectedDependencies = {
   findPaginatedOrganizationLearners,
   generateOrganizationLearnersUsernameAndTemporaryPassword,
   generateResetOrganizationLearnersPasswordCsvContent,
-  generateUsernameWithTemporaryPassword,
   generateUsername,
+  generateUsernameWithTemporaryPassword,
   getAnalysisByTubes,
   getAttestationZipForDivisions,
-  getOrganizationLearnerActivity,
-  getOrganizationLearnerWithParticipations,
   getOrganizationLearner,
+  getOrganizationLearnerActivity,
+  getOrganizationLearnerStatistics,
+  getOrganizationLearnerWithParticipations,
   getOrganizationToJoin,
   updateOrganizationLearnerDependentUserPassword,
 };
