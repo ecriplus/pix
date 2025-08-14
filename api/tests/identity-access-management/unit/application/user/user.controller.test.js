@@ -266,7 +266,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
             password,
             locale: localeFromHeader,
             redirectionUrl: null,
-            i18n: undefined,
+            i18n: getI18n(localeFromHeader),
           };
 
           dependencies.userSerializer.serialize.returns(expectedSerializedUser);

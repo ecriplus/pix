@@ -1,4 +1,5 @@
 import * as localeService from '../../../shared/domain/services/locale-service.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -133,10 +134,11 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  */
 const createUser = async function (request, h, dependencies = { userSerializer, requestResponseUtils, localeService }) {
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
+  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
   const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: localeFromCookie };
-  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
   const password = request.payload.data.attributes.password;
 
@@ -145,7 +147,7 @@ const createUser = async function (request, h, dependencies = { userSerializer, 
     password,
     redirectionUrl,
     locale: localeFromHeader,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h.response(dependencies.userSerializer.serialize(savedUser)).created();
@@ -217,7 +219,8 @@ const sendVerificationCode = async function (
   dependencies = { emailVerificationSerializer, requestResponseUtils },
 ) {
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-  const i18n = request.i18n;
+  const i18n = getI18nFromRequest(request);
+
   const userId = request.params.id;
   const { newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
 
