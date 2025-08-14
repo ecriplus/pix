@@ -26,7 +26,7 @@ export async function buildFreshPixAppUser(
   rawPassword: string,
   mustRevalidateCgu: boolean,
 ) {
-  await createUserInDB(firstName, lastName, email, rawPassword, true, false, mustRevalidateCgu, undefined);
+  return createUserInDB(firstName, lastName, email, rawPassword, true, false, mustRevalidateCgu, undefined);
 }
 
 export async function buildFreshPixCertifUser(firstName: string, lastName: string, email: string, rawPassword: string) {
@@ -232,7 +232,7 @@ async function createLegalDocumentVersionInDB() {
   return id;
 }
 
-async function createOrganizationInDB({
+export async function createOrganizationInDB({
   type,
   externalId,
   isManagingStudents,
@@ -324,7 +324,7 @@ async function createCertificationCenterMembershipInDB(userId: number, certifica
   });
 }
 
-async function createTargetProfileInDB(name: string) {
+export async function createTargetProfileInDB(name: string) {
   const someDate = new Date();
   const [{ id }] = await knex('target-profiles')
     .insert({

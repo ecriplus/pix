@@ -13,7 +13,7 @@ export default defineConfig({
   globalSetup: './global-setup',
   outputDir: `${playwrightFolder}/output`,
   forbidOnly: isCI,
-  retries: isCI ? 2 : 0,
+  retries: 0,
   workers: 1,
   fullyParallel: true,
   reporter: isCI ? [['junit', { outputFile: `${playwrightFolder}/junit/results.xml` }]] : 'list',
