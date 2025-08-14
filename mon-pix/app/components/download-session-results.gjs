@@ -21,7 +21,7 @@ export default class DownloadSessionResults extends Component {
     this.errorMessage = null;
 
     try {
-      const { hash } = new URL(Location.getLocationHref());
+      const { hash } = new URL(Location.getHref());
       const token = decodeURIComponent(hash.slice(1));
       await this.fileSaver.save({
         url: `${ENV.APP.API_HOST}/api/sessions/download-all-results`,

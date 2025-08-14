@@ -3,7 +3,7 @@ import Location from 'mon-pix/utils/location';
 const EMBER_SIMPLE_AUTH_LOCALSTORAGE_KEY = 'ember_simple_auth-session';
 
 export function initialize(/* applicationInstance */) {
-  const currentURL = Location.getLocationHref();
+  const currentURL = Location.getHref();
 
   const isGarAuthenticationURL = currentURL.includes('/connexion/gar');
   const isAuthenticatedExternalUser = currentURL.includes('externalUser=');

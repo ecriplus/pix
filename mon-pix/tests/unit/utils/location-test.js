@@ -7,14 +7,14 @@ module('Unit | Utility | location', function (hooks) {
     sinon.restore();
   });
 
-  module('#getLocationHref', function () {
+  module('#getHref', function () {
     test('should return the full URL', function (assert) {
       // given
       const expectedUrl = 'https://example.com/path?query=param#hash';
-      sinon.stub(Location, 'getLocationHref').returns(expectedUrl);
+      sinon.stub(Location, 'getHref').returns(expectedUrl);
 
       // when
-      const url = Location.getLocationHref();
+      const url = Location.getHref();
 
       // then
       assert.strictEqual(url, expectedUrl);

@@ -47,9 +47,8 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
       // given
       const garUser = server.create('user', 'external');
       server.create('authentication-method', 'withGarIdentityProvider', { user: garUser });
-      sinon
-        .stub(Location, 'getLocationHref')
-        .returns('https://pix.fr/' + '#' + generateGarAuthenticationURLHash(garUser));
+      sinon.stub(Location, 'getHref').returns(`https://pix.fr/#${generateGarAuthenticationURLHash(garUser)}`);
+
       await authenticateByGAR(garUser);
 
       // when

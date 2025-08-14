@@ -6,7 +6,7 @@ const FRANCE_TLD = 'fr';
 
 export default class CurrentDomainService extends Service {
   getExtension() {
-    const { hostname } = new URL(Location.getLocationHref());
+    const { hostname } = new URL(Location.getHref());
     return last(hostname.split('.'));
   }
 
@@ -15,7 +15,7 @@ export default class CurrentDomainService extends Service {
   }
 
   get domain() {
-    const { host, hostname } = new URL(Location.getLocationHref());
+    const { host, hostname } = new URL(Location.getHref());
 
     if (this.isLocalhost) return hostname;
 
@@ -23,17 +23,17 @@ export default class CurrentDomainService extends Service {
   }
 
   get isLocalhost() {
-    const { hostname } = new URL(Location.getLocationHref());
+    const { hostname } = new URL(Location.getHref());
 
     return hostname === 'localhost';
   }
 
   convertUrlToOrgDomain() {
     if (!this.isFranceDomain || this.isLocalhost) {
-      return Location.getLocationHref();
+      return Location.getHref();
     }
 
-    const url = new URL(Location.getLocationHref());
+    const url = new URL(Location.getHref());
     url.hostname = `${url.hostname.split('.fr')[0]}.org`;
     return url.toString();
   }

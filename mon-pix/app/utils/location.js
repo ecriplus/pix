@@ -1,4 +1,4 @@
-function getLocationHref() {
+function getHref() {
   return window.location.href;
 }
 
@@ -15,7 +15,7 @@ function assign(url) {
 }
 
 const Location = {
-  getLocationHref,
+  getHref,
   replace,
   reload,
   assign,

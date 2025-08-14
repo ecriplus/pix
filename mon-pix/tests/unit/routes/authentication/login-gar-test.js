@@ -20,7 +20,7 @@ module('Unit | Routes | authentication | login-gar', function (hooks) {
           authenticate: sinon.stub().resolves(),
         });
         route.set('session', sessionStub);
-        sinon.stub(Location, 'getLocationHref').returns(`https://test.pix.fr#access_token`);
+        sinon.stub(Location, 'getHref').returns(`https://test.pix.fr#access_token`);
 
         // when
         await route.beforeModel();

@@ -372,7 +372,7 @@ module('Unit | Route | Entry Point', function (hooks) {
 
 function _stubLocation(url) {
   const newUrl = new URL(url);
-  sinon.stub(Location, 'getLocationHref').returns(newUrl.href);
+  sinon.stub(Location, 'getHref').returns(newUrl.href);
   sinon.stub(Location, 'replace');
   sinon.stub(Location, 'reload');
 }
