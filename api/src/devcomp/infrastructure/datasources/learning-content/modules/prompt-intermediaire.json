@@ -17,8 +17,8 @@
   },
   "sections": [
     {
-      "id": "ca41f652-7dcc-468b-81a2-347086cd2bf7",
-      "type": "blank",
+      "id": "17a88370-d9c5-494e-85e5-a5b44025f537",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "005b3848-5cad-49fb-876b-1cc430854d71",
@@ -74,7 +74,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "044c1dcc-cd15-4650-834d-a45fbccb2c9d",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "61cd268c-d7d3-4387-abf7-9312a2d8ea6f",
           "type": "transition",
@@ -357,7 +363,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "8c11c368-76c4-4db1-b635-d5836a1a9f61",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "97606a38-68e2-427e-b8e5-65411cd7d5d5",
           "type": "summary",
@@ -372,7 +384,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "6982c388-afc1-4b87-9449-ad2d089b928a",
+      "type": "practise",
+      "grains": [
         {
           "id": "b6a9f4ed-057a-490f-9d81-a0687b5ee269",
           "type": "activity",
@@ -608,7 +626,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "a20e85e6-6ab6-4b08-b9b7-8d4dcf2a9e94",
+      "type": "go-further",
+      "grains": [
         {
           "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
           "type": "challenge",
