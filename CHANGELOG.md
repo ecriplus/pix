@@ -1,5 +1,16 @@
 # Pix Changelog
 
+# [5.184.0](https://github.com/1024pix/pix/compare/v5.183.0...v5.184.0) (2025-08-14)
+
+### :rocket: Amélioration
+
+- [#13192](https://github.com/1024pix/pix/pull/13192) Corriger la prévisualisation de modules (PIX-19148) 
+- [#13190](https://github.com/1024pix/pix/pull/13190) Tmp update prompt intermediaire 
+
+### :building_construction: Tech
+
+- [#13179](https://github.com/1024pix/pix/pull/13179) Supprimer l’utilitaire PixWindow des front et utiliser l'utilitaire Location (PIX-19109)
+
 # [5.183.0](https://github.com/1024pix/pix/compare/v5.182.0...v5.183.0) (2025-08-14)
 
 ### :rocket: Amélioration
