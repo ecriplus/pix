@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose.&nbsp;🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
+    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c'est-à-dire, des prompts qu'on leur donne.🤔 </p>\n<p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
@@ -295,7 +295,9 @@
                       "t3"
                     ],
                     "solutions": [
-                      "tableau"
+                      "tableau",
+                      "table",
+                      "tablo"
                     ]
                   }
                 ],
@@ -359,7 +361,7 @@
               "element": {
                 "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
                 "type": "text",
-                "content": "<p>➡️Sans indication, l'IA choisira elle-même un format, qui risque ne pas correspondre vos attentes.&nbsp;🤔​</p><p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </p><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.<br><br></p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.<br><br></p>"
+                "content": "<p>➡️Sans indication, l'IA choisira elle-même un format, qui risque de ne pas correspondre à vos attentes.&nbsp;🤔​</p><p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </p><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.<br><br></p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.<br><br></p>"
               }
             }
           ]
@@ -589,7 +591,7 @@
         },
         {
           "id": "bde3a9c6-8c31-465d-94ac-20276ea7a445",
-          "type": "lesson",
+          "type": "activity",
           "title": "Gustave organise les notes ",
           "components": [
             {
@@ -605,7 +607,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû présentes.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p>"
               }
             },
             {
@@ -616,7 +618,7 @@
                 "isCompletionRequired": false,
                 "title": "Simulateur de LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
-                "instruction": "<p>Discute avec l’IA de Pix jusqu'à obtenir un compte-rendu fidèle.<br></p>",
+                "instruction": "<p>Discutez avec l’IA de Pix jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.<br></p>",
                 "solution": "Pix",
                 "height": 800
               }
