@@ -19,7 +19,7 @@ module('Acceptance | Module | Routes | Preview', function (hooks) {
     await click(screen.getByRole('button', { name: 'Afficher le JSON' }));
     await fillByLabel(
       'Contenu du Module',
-      '{ "grains": [{ "id":"1", "type": "lesson", "title": "Preview", "components": [{ "type": "element", "element": {"type": "text", "content": "Preview du module" }}] }] }',
+      '{ "sections": [{ "id": "1", "type": "blank", "grains": [{ "id":"1", "type": "lesson", "title": "Preview", "components": [{ "type": "element", "element": {"type": "text", "content": "Preview du module" }}] }] }] }',
     );
 
     // then
