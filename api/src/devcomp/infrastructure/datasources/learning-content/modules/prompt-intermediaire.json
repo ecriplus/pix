@@ -52,7 +52,7 @@
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
+                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
                     },
                     {
                       "userName": "Emma",
@@ -137,7 +137,12 @@
                     "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -284,8 +289,14 @@
                     "placeholder": "un seul mot",
                     "ariaLabel": "champs à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
-                    "solutions": ["tableau"]
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "tableau"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -423,7 +434,11 @@
                           "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.<br></p>"
                         }
                       },
-                      "solutions": ["1", "2", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -466,7 +481,11 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.<br></p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -509,7 +528,10 @@
                           "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.<br></p>"
                         }
                       },
-                      "solutions": ["1", "4"]
+                      "solutions": [
+                        "1",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -552,7 +574,12 @@
                           "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 }
@@ -570,7 +597,7 @@
               "element": {
                 "id": "e90e7470-54a6-444d-bc77-39cfc9b0fad1",
                 "type": "text",
-                "content": "<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi :&nbsp;</p><p><br><em>- max 12 équipes. 5v5, équipes mixtes → tout le monde ok</em></p><p><em>- arbitres → bénévoles, relancer ceux du dernier tournoi-</em></p><p><em>- 2 sponsors ( eau+ salle de sport) ok, pizzeria en négos</em></p><p><em>- playlist en cours un peu d’ambiance, c’est gérésono ? </em></p><p><em>-&nbsp;pas clair → voir avec mairie pr matos</em></p><p><em>- si pluie → gymnase dispo ? ok ! :-)</em></p><p><em>- buvette : jus, sandwichs, fruits → pas de chaudrécompenses ? médailles → à chiffrer</em></p>"
+                "content": "\n<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi :&nbsp;</p>\n<p><br><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p>\n<p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p>\n<p><em>- musique : demander mairie pour sono </em></p>\n<p><em>- si pluie → gymnase dispo ? ok ! :-) </em></p>\n<p><em>- buvette : jus, sandwichs, fruits → pas de chaud </em></p>\n<p><em>- récompenses ? médailles → à chiffrer<br></em></p>"
               }
             },
             {
