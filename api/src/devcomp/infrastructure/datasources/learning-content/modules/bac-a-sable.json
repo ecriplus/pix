@@ -17,6 +17,27 @@
       "type": "blank",
       "grains": [
         {
+          "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
+                "type": "text",
+                "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "47d5fdea-8141-4184-a78e-c7f871de71fc",
+      "type": "question-yourself",
+      "grains": [
+        {
           "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
           "type": "discovery",
           "title": "test qcu-discovery",
@@ -184,7 +205,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2cb5a4fa-a54f-4d94-9b1f-5f504821846a",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "628bd37d-e5da-411f-9b06-1035b073411b",
           "type": "lesson",
@@ -244,7 +271,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "ea5ebe5d-f29f-4b03-8e9f-7c77606a014f",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "df111992-ff3a-4c3f-ae5a-78bc359af23c",
           "type": "lesson",
@@ -342,21 +375,6 @@
                 "alternativeText": "Dessin d'un ordinateur dans un univers spatial.",
                 "legend": "Faite avant le séminaire de juin 2023",
                 "licence": "©Pix Corporation & Fun, 2025, Challenge Accepted Inc. "
-              }
-            }
-          ]
-        },
-        {
-          "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
-                "type": "text",
-                "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
               }
             }
           ]
@@ -539,7 +557,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "b0d428ab-a4ae-45e0-83fd-786fbd9c03dc",
+      "type": "practise",
+      "grains": [
         {
           "id": "b14df125-82d5-4d55-a660-7b34cd9ea1ab",
           "type": "challenge",
@@ -760,7 +784,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "4a3c5230-3c60-4c1a-9395-7b65537dda25",
+      "type": "go-further",
+      "grains": [
         {
           "id": "0be0f5eb-4cb6-47c2-b9d3-cb2ceb4cd21c",
           "type": "summary",
