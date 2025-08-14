@@ -57,7 +57,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             version,
           },
           relationships: {
-            grains: {
+            sections: {
               data: [],
             },
           },
@@ -111,7 +111,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             version,
           },
           relationships: {
-            grains: {
+            sections: {
               data: [],
             },
           },
@@ -149,7 +149,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         details,
         slug,
         title,
-        sections: [{ id, type: 'none', grains: [] }],
+        sections: [{ id: 'section1', type: 'none', grains: [] }],
         isBeta,
         version,
       });
@@ -165,11 +165,26 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             version,
           },
           relationships: {
-            grains: {
-              data: [],
+            sections: {
+              data: [
+                {
+                  id: 'section1',
+                  type: 'sections',
+                },
+              ],
             },
           },
         },
+        included: [
+          {
+            attributes: {
+              grains: [],
+              type: 'none',
+            },
+            id: 'section1',
+            type: 'sections',
+          },
+        ],
       };
 
       // when
@@ -207,7 +222,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         details,
         sections: [
           {
-            id,
+            id: 'section1',
             type: 'none',
             grains: [
               {
@@ -231,11 +246,11 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           },
           id: 'id',
           relationships: {
-            grains: {
+            sections: {
               data: [
                 {
-                  id: '1',
-                  type: 'grains',
+                  id: 'section1',
+                  type: 'sections',
                 },
               ],
             },
@@ -245,12 +260,18 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         included: [
           {
             attributes: {
-              title: 'Grain 1',
-              components: getAttributesComponents(),
-              type: 'activity',
+              type: 'none',
+              grains: [
+                {
+                  id: '1',
+                  title: 'Grain 1',
+                  components: getAttributesComponents(),
+                  type: 'activity',
+                },
+              ],
             },
-            id: '1',
-            type: 'grains',
+            id: 'section1',
+            type: 'sections',
           },
         ],
       };
