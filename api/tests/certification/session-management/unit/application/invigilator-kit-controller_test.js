@@ -20,6 +20,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
           i18n,
           auth: { credentials: { userId } },
           params: { sessionId: sessionMainInfo.id },
+          headers: { 'accept-language': lang },
         };
 
         const invigilatorKitPdf = {
