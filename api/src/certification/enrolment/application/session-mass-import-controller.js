@@ -1,3 +1,4 @@
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import * as csvHelpers from '../../shared/application/helpers/csvHelpers.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -16,6 +17,8 @@ const createSessions = async function (request, h) {
 };
 
 const validateSessions = async function (request, h, dependencies = { csvHelpers, csvSerializer }) {
+  const i18n = getI18nFromRequest(request);
+
   const certificationCenterId = request.params.certificationCenterId;
   const authenticatedUserId = request.auth.credentials.userId;
   const parsedCsvData = await dependencies.csvHelpers.parseCsvWithHeader(request.payload.path);
@@ -32,7 +35,7 @@ const validateSessions = async function (request, h, dependencies = { csvHelpers
     sessionsData,
     certificationCenterId,
     userId: authenticatedUserId,
-    i18n: request.i18n,
+    i18n,
   });
   return h.response(sessionMassImportReport).code(200);
 };

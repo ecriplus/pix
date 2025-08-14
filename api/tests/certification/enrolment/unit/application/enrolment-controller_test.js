@@ -1,5 +1,6 @@
 import { enrolmentController } from '../../../../../src/certification/enrolment/application/enrolment-controller.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Controller | enrolment-controller', function () {
@@ -76,7 +77,7 @@ describe('Certification | Enrolment | Unit | Controller | enrolment-controller',
       expect(usecases.importCertificationCandidatesFromCandidatesImportSheet).to.have.been.calledWithExactly({
         sessionId,
         odsBuffer,
-        i18n: request.i18n,
+        i18n: getI18n(),
       });
     });
   });

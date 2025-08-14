@@ -1,17 +1,16 @@
 import { sessionMassImportController } from '../../../../../src/certification/enrolment/application/session-mass-import-controller.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | mass-import-controller', function () {
   describe('#validateSessions', function () {
     it('should call the usecase to validate sessions', async function () {
       // given
-      const i18n = Symbol('i18n');
       const request = {
         payload: { file: { path: 'csv-path' } },
         params: { certificationCenterId: 123 },
         auth: { credentials: { userId: 2 } },
-        i18n,
       };
       const cachedValidatedSessionsKey = 'uuid';
 
@@ -38,7 +37,7 @@ describe('Unit | Controller | mass-import-controller', function () {
         sessionsData: ['session'],
         certificationCenterId: 123,
         userId: 2,
-        i18n,
+        i18n: getI18n(),
       });
     });
 

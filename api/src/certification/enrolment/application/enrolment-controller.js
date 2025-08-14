@@ -1,3 +1,4 @@
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import { fillCandidatesImportSheet } from '../infrastructure/files/candidates-import/fill-candidates-import-sheet.js';
@@ -18,10 +19,11 @@ const enrolStudentsToSession = async function (
 };
 
 const getCandidatesImportSheet = async function (request, h, dependencies = { fillCandidatesImportSheet }) {
-  const translate = request.i18n.__;
+  const i18n = getI18nFromRequest(request);
+
   const sessionId = request.params.sessionId;
   const { userId } = request.auth.credentials;
-  const filename = translate('candidate-list-template.filename');
+  const filename = i18n.__('candidate-list-template.filename');
 
   const { session, enrolledCandidates, certificationCenterHabilitations, isScoCertificationCenter } =
     await usecases.getCandidateImportSheetData({
@@ -33,7 +35,7 @@ const getCandidatesImportSheet = async function (request, h, dependencies = { fi
     enrolledCandidates,
     certificationCenterHabilitations,
     isScoCertificationCenter,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h
@@ -43,9 +45,11 @@ const getCandidatesImportSheet = async function (request, h, dependencies = { fi
 };
 
 const importCertificationCandidatesFromCandidatesImportSheet = async function (request) {
+  const i18n = getI18nFromRequest(request);
+
   const sessionId = request.params.sessionId;
   const odsBuffer = request.payload;
-  const i18n = request.i18n;
+
   await usecases.importCertificationCandidatesFromCandidatesImportSheet({
     sessionId,
     odsBuffer,
