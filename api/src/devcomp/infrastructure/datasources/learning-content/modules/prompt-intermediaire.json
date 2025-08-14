@@ -174,7 +174,7 @@
                 {
                   "elements": [
                     {
-                      "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
+                      "id": "cb4a2c6a-a637-46bf-973a-f899a4b75a8b",
                       "type": "custom",
                       "tagName": "llm-prompt-select",
                       "props": {
@@ -210,7 +210,7 @@
                 {
                   "elements": [
                     {
-                      "id": "8f59bf30-fa84-4114-9707-eabc9f648f9e",
+                      "id": "cc04a60d-ee44-4f09-b999-e11e908121fd",
                       "type": "qcu-discovery",
                       "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?&nbsp;</p>",
                       "proposals": [
