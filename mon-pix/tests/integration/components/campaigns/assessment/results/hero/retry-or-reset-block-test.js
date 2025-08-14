@@ -83,7 +83,9 @@ module(
         );
         // then
         assert.ok(
-          screen.getByText(t('pages.skill-review.hero.retry.retryIn', { duration: '2 minutes' }), { exact: false }),
+          await screen.findByText(t('pages.skill-review.hero.retry.retryIn', { duration: '2 minutes' }), {
+            exact: false,
+          }),
         );
       });
     });
