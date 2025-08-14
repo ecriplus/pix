@@ -8,14 +8,13 @@ describe('Certification | Enrolment | Unit | Serializer | user-certification-eli
       const userCertificationEligibility = domainBuilder.certification.enrolment.buildUserCertificationEligibility({
         id: 123,
         isCertifiable: true,
-        certificationEligibilities: [
-          domainBuilder.certification.enrolment.buildV3CertificationEligibility({
+        doubleCertificationEligibility:
+          domainBuilder.certification.enrolment.buildCertificationEligibility({
             label: 'Un super label',
             imageUrl: 'Une super image',
-            isOutdated: false,
-            isAcquiredExpectedLevel: false,
+            isBadgeOutdated: false,
+            validatedDoubleCertification: false,
           }),
-        ],
       });
 
       // when
@@ -28,14 +27,13 @@ describe('Certification | Enrolment | Unit | Serializer | user-certification-eli
           type: 'isCertifiables',
           attributes: {
             'is-certifiable': true,
-            'complementary-certifications': [
+            'double-certification-eligibility':
               {
                 label: 'Un super label',
                 imageUrl: 'Une super image',
-                isOutdated: false,
-                isAcquiredExpectedLevel: false,
+                isBadgeOutdated: false,
+                validatedDoubleCertification: false,
               },
-            ],
           },
         },
       });

@@ -11,7 +11,7 @@ describe('Certification | Enrolment | Unit | Application | Controller | user-con
           id: 123,
           isCertifiable: true,
           certificationEligibilities: [
-            domainBuilder.certification.enrolment.buildV3CertificationEligibility({
+            domainBuilder.certification.enrolment.buildCertificationEligibility({
               label: 'Un super label',
               imageUrl: 'Une super image',
               isOutdated: false,

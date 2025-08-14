@@ -24,7 +24,7 @@ const register = async function (server) {
         handler: userController.isCertifiable,
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération des informations d'éligibilité à la certification Pix et certifications complémentaires\n" +
+            "- Récupération des informations de certificabilité Pix et d'éligibilité à une certification complémentaire\n" +
             '- L’id demandé doit correspondre à celui de l’utilisateur authentifié',
         ],
         tags: ['api', 'user'],

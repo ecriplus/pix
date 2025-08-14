@@ -1,17 +1,17 @@
 class UserCertificationEligibility {
-  constructor({ id, isCertifiable, certificationEligibilities = [] }) {
+  constructor({ id, isCertifiable, doubleCertificationEligibility }) {
     this.id = id;
     this.isCertifiable = isCertifiable;
-    this.certificationEligibilities = certificationEligibilities;
+    this.doubleCertificationEligibility = doubleCertificationEligibility;
   }
 }
 
 class CertificationEligibility {
-  constructor({ label, imageUrl, isOutdated, isAcquiredExpectedLevel }) {
+  constructor({ label, imageUrl, isBadgeOutdated, validatedDoubleCertification }) {
     this.label = label;
     this.imageUrl = imageUrl;
-    this.isOutdated = isOutdated;
-    this.isAcquiredExpectedLevel = isAcquiredExpectedLevel;
+    this.isBadgeOutdated = isBadgeOutdated;
+    this.validatedDoubleCertification = validatedDoubleCertification;
   }
 }
 

@@ -51,7 +51,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
           domainBuilder.certification.enrolment.buildUserCertificationEligibility({
             id: userId,
             isCertifiable: true,
-            certificationEligibilities: [],
+            doubleCertificationEligibility: {},
           }),
         );
       });
@@ -73,7 +73,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
           domainBuilder.certification.enrolment.buildUserCertificationEligibility({
             id: userId,
             isCertifiable: false,
-            certificationEligibilities: [],
+            doubleCertificationEligibility: {},
           }),
         );
       });
@@ -83,86 +83,79 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
   context('eligibility', function () {
     const complementaryCertificationBadgeId = 123;
 
-    context('when user has acquired a non double certification badge', function () {
-      it('should not be added in the eligibilities of the model', async function () {
-        const complementaryCertificationKey = 'NOT_DOUBLE_CERTIFICATION';
-        const isCertifiable = true;
-
-        placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
-          domainBuilder.buildPlacementProfile.buildCertifiable({
-            profileDate: limitDate,
-            userId,
-          }),
-        );
-
-        certificationBadgesService.findLatestBadgeAcquisitions
-          .withArgs({
-            userId,
-            limitDate,
-          })
-          .resolves([
-            domainBuilder.buildCertifiableBadgeAcquisition({
-              complementaryCertificationBadgeId,
-              complementaryCertificationKey,
-              complementaryCertificationBadgeImageUrl: 'monImageUrl',
-              complementaryCertificationBadgeLabel: 'monLabel',
-              isOutdated: false,
-            }),
-          ]);
-
-        const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-        expect(userCertificationEligibility).to.deep.equal(
-          domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-            id: userId,
-            isCertifiable,
-            certificationEligibilities: [],
-          }),
-        );
-      });
-    });
-
-    context('when user has acquired a double certification badge', function () {
-      let complementaryCertificationKey;
-      const requiredPixScore = 150;
-
-      beforeEach(function () {
-        complementaryCertificationKey = ComplementaryCertificationKeys.CLEA;
-      });
-
-      context('when acquired badge is outdated', function () {
-        const isOutdated = true;
-
-        beforeEach(function () {
-          complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
-            domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
-              id: '1234',
-              requiredPixScore,
-              offsetVersion: 0,
-            }),
-            domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
-              id: complementaryCertificationBadgeId,
-              requiredPixScore,
-              offsetVersion: 1,
-            }),
-          ]);
-        });
-
-        context('when user is certifiable', function () {
+    context('when user is certifiable', function () {
+      context('when user has acquired a non double certification badge', function () {
+        it('should not be added in the eligibilities of the model', async function () {
+          const complementaryCertificationKey = 'NOT_DOUBLE_CERTIFICATION';
           const isCertifiable = true;
 
-          beforeEach(function () {
-            placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
-              domainBuilder.buildPlacementProfile.buildCertifiable({
-                profileDate: limitDate,
-                userId,
+          placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
+            domainBuilder.buildPlacementProfile.buildCertifiable({
+              profileDate: limitDate,
+              userId,
+            }),
+          );
+
+          certificationBadgesService.findLatestBadgeAcquisitions
+            .withArgs({
+              userId,
+              limitDate,
+            })
+            .resolves([
+              domainBuilder.buildCertifiableBadgeAcquisition({
+                complementaryCertificationBadgeId,
+                complementaryCertificationKey,
+                complementaryCertificationBadgeImageUrl: 'monImageUrl',
+                complementaryCertificationBadgeLabel: 'monLabel',
+                isOutdated: false,
               }),
-            );
-          });
+            ]);
+
+          const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
+
+          expect(userCertificationEligibility).to.deep.equal(
+            domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+              id: userId,
+              isCertifiable,
+              doubleCertificationEligibility: {},
+            }),
+          );
+        });
+      });
+
+      context('when user has acquired a double certification badge', function () {
+        let complementaryCertificationKey;
+        const requiredPixScore = 150;
+
+        beforeEach(function () {
+          complementaryCertificationKey = ComplementaryCertificationKeys.CLEA;
+        });
+
+        context('when acquired badge is outdated', function () {
+          const isOutdated = true;
 
           context('when user has an acquired certification for this badge', function () {
             it('should not be added in the eligibilities of the model', async function () {
               // given
+              complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
+                domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                  id: '1234',
+                  requiredPixScore,
+                  offsetVersion: 0,
+                }),
+                domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                  id: complementaryCertificationBadgeId,
+                  requiredPixScore,
+                  offsetVersion: 1,
+                }),
+              ]);
+              placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
+                domainBuilder.buildPlacementProfile.buildCertifiable({
+                  profileDate: limitDate,
+                  userId,
+                }),
+              );
+
               complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
                 domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
                   complementaryCertificationBadgeId,
@@ -198,20 +191,36 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               expect(userCertificationEligibility).to.deep.equal(
                 domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                   id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [],
+                  isCertifiable: true,
+                  doubleCertificationEligibility: {},
                 }),
               );
             });
           });
 
           context('when user has not an acquired certification for this badge', function () {
-            beforeEach(function () {
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
-            });
-
             context('when badge is outdated by more than one version', function () {
-              beforeEach(function () {
+              it('should not be added in the eligibilities of the model', async function () {
+                // given
+                complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
+                  domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                    id: '1234',
+                    requiredPixScore,
+                    offsetVersion: 0,
+                  }),
+                  domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                    id: complementaryCertificationBadgeId,
+                    requiredPixScore,
+                    offsetVersion: 1,
+                  }),
+                ]);
+                placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
+                  domainBuilder.buildPlacementProfile.buildCertifiable({
+                    profileDate: limitDate,
+                    userId,
+                  }),
+                );
+                complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
                 complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
                   domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
                     id: '1234',
@@ -229,10 +238,6 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                     offsetVersion: 2,
                   }),
                 ]);
-              });
-
-              it('should not be added in the eligibilities of the model', async function () {
-                // given
                 certificationBadgesService.findLatestBadgeAcquisitions
                   .withArgs({
                     userId,
@@ -255,8 +260,8 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 expect(userCertificationEligibility).to.deep.equal(
                   domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                     id: userId,
-                    isCertifiable,
-                    certificationEligibilities: [],
+                    isCertifiable: true,
+                    doubleCertificationEligibility: {},
                   }),
                 );
               });
@@ -267,114 +272,26 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
 
               it('returns a UserCertificationEligibility model with the outdated eligibility inside', async function () {
                 // given
-                certificationBadgesService.findLatestBadgeAcquisitions
-                  .withArgs({
-                    userId,
-                    limitDate,
-                  })
-                  .resolves([
-                    domainBuilder.buildCertifiableBadgeAcquisition({
-                      complementaryCertificationBadgeId,
-                      complementaryCertificationKey,
-                      complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                      complementaryCertificationBadgeLabel: 'monLabel',
-                      isOutdated,
-                      offsetVersion,
-                    }),
-                  ]);
-
-                // when
-                const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-                // then
-                expect(userCertificationEligibility).to.deep.equal(
-                  domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                    id: userId,
-                    isCertifiable,
-                    certificationEligibilities: [
-                      domainBuilder.certification.enrolment.buildV3CertificationEligibility({
-                        label: 'monLabel',
-                        imageUrl: 'monImageUrl',
-                        isAcquiredExpectedLevel: false,
-                        isOutdated: true,
-                      }),
-                    ],
+                complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
+                  domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                    id: '1234',
+                    requiredPixScore,
+                    offsetVersion: 0,
                   }),
-                );
-              });
-            });
-          });
-        });
-
-        context('when user is not certifiable', function () {
-          const isCertifiable = false;
-
-          beforeEach(function () {
-            placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
-              domainBuilder.buildPlacementProfile({
-                profileDate: limitDate,
-                userId,
-                userCompetences: [domainBuilder.buildUserCompetence({ estimatedLevel: 1, pixScore: 1 })],
-              }),
-            );
-          });
-
-          context('when user has an acquired certification for this badge', function () {
-            it('should not be added in the eligibilities of the model', async function () {
-              // given
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
-                domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
-                  complementaryCertificationBadgeId,
-                  results: [
-                    {
-                      source: ComplementaryCertificationCourseResult.sources.PIX,
-                      acquired: true,
-                      complementaryCertificationBadgeId,
-                    },
-                  ],
-                }),
-              ]);
-
-              certificationBadgesService.findLatestBadgeAcquisitions
-                .withArgs({
-                  userId,
-                  limitDate,
-                })
-                .resolves([
-                  domainBuilder.buildCertifiableBadgeAcquisition({
-                    complementaryCertificationBadgeId,
-                    complementaryCertificationKey,
-                    complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                    complementaryCertificationBadgeLabel: 'monLabel',
-                    isOutdated: true,
+                  domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                    id: complementaryCertificationBadgeId,
+                    requiredPixScore,
                     offsetVersion: 1,
                   }),
                 ]);
+                placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
+                  domainBuilder.buildPlacementProfile.buildCertifiable({
+                    profileDate: limitDate,
+                    userId,
+                  }),
+                );
+                complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
 
-              // when
-              const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-              // then
-              expect(userCertificationEligibility).to.deep.equal(
-                domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                  id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [],
-                }),
-              );
-            });
-          });
-
-          context('when user has not an acquired certification for this badge', function () {
-            beforeEach(function () {
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
-            });
-
-            context('when badge is outdated by more than one version', function () {
-              const offsetVersion = 2;
-
-              it('should not be added in the eligibilities of the model', async function () {
-                // given
                 certificationBadgesService.findLatestBadgeAcquisitions
                   .withArgs({
                     userId,
@@ -398,277 +315,84 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 expect(userCertificationEligibility).to.deep.equal(
                   domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                     id: userId,
-                    isCertifiable,
-                    certificationEligibilities: [],
-                  }),
-                );
-              });
-            });
-
-            context('when badge is outdated by exactly one version', function () {
-              const offsetVersion = 1;
-
-              it('should not be added in the eligibilities of the model', async function () {
-                // given
-                certificationBadgesService.findLatestBadgeAcquisitions
-                  .withArgs({
-                    userId,
-                    limitDate,
-                  })
-                  .resolves([
-                    domainBuilder.buildCertifiableBadgeAcquisition({
-                      complementaryCertificationBadgeId,
-                      complementaryCertificationKey,
-                      complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                      complementaryCertificationBadgeLabel: 'monLabel',
-                      isOutdated,
-                      offsetVersion,
-                    }),
-                  ]);
-
-                // when
-                const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-                // then
-                expect(userCertificationEligibility).to.deep.equal(
-                  domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                    id: userId,
-                    isCertifiable,
-                    certificationEligibilities: [],
+                    isCertifiable: true,
+                    doubleCertificationEligibility:
+                      domainBuilder.certification.enrolment.buildCertificationEligibility({
+                        label: 'monLabel',
+                        imageUrl: 'monImageUrl',
+                        validatedDoubleCertification: false,
+                        isBadgeOutdated: true,
+                      }),
                   }),
                 );
               });
             });
           });
         });
-      });
 
-      context('when acquired badge is not outdated', function () {
-        const isOutdated = false;
+        context('when acquired badge is not outdated', function () {
+          const isOutdated = false;
 
-        beforeEach(function () {
-          complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
-            domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
-              id: complementaryCertificationBadgeId,
-              requiredPixScore,
-              offsetVersion: 0,
-            }),
-          ]);
-        });
-
-        context('when user is certifiable', function () {
-          const isCertifiable = true;
-
-          beforeEach(function () {
+          it('returns a UserCertificationEligibility model with the corresponding eligibility', async function () {
+            // given
+            complementaryCertificationBadgeWithOffsetVersionRepository.getAllWithSameTargetProfile.resolves([
+              domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({
+                id: complementaryCertificationBadgeId,
+                requiredPixScore,
+                offsetVersion: 0,
+              }),
+            ]);
             placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
               domainBuilder.buildPlacementProfile.buildCertifiable({
                 profileDate: limitDate,
                 userId,
               }),
             );
-          });
+            complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
+              domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
+                complementaryCertificationBadgeId,
+                results: [
+                  {
+                    source: ComplementaryCertificationCourseResult.sources.PIX,
+                    acquired: true,
+                    complementaryCertificationBadgeId,
+                  },
+                ],
+              }),
+            ]);
 
-          context('when user has an acquired certification for this badge', function () {
-            it('returns a UserCertificationEligibility model with the corresponding eligibility', async function () {
-              // given
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
-                domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
+            certificationBadgesService.findLatestBadgeAcquisitions
+              .withArgs({
+                userId,
+                limitDate,
+              })
+              .resolves([
+                domainBuilder.buildCertifiableBadgeAcquisition({
                   complementaryCertificationBadgeId,
-                  results: [
-                    {
-                      source: ComplementaryCertificationCourseResult.sources.PIX,
-                      acquired: true,
-                      complementaryCertificationBadgeId,
-                    },
-                  ],
+                  complementaryCertificationKey,
+                  complementaryCertificationBadgeImageUrl: 'monImageUrl',
+                  complementaryCertificationBadgeLabel: 'monLabel',
+                  isOutdated,
                 }),
               ]);
 
-              certificationBadgesService.findLatestBadgeAcquisitions
-                .withArgs({
-                  userId,
-                  limitDate,
-                })
-                .resolves([
-                  domainBuilder.buildCertifiableBadgeAcquisition({
-                    complementaryCertificationBadgeId,
-                    complementaryCertificationKey,
-                    complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                    complementaryCertificationBadgeLabel: 'monLabel',
-                    isOutdated,
+            // when
+            const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
+
+            // then
+            expect(userCertificationEligibility).to.deep.equal(
+              domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+                id: userId,
+                isCertifiable: true,
+                doubleCertificationEligibility:
+                  domainBuilder.certification.enrolment.buildCertificationEligibility({
+                    label: 'monLabel',
+                    imageUrl: 'monImageUrl',
+                    isAcquiredExpectedLevel: true,
+                    isBadgeOutdated: false,
                   }),
-                ]);
-
-              // when
-              const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-              // then
-              expect(userCertificationEligibility).to.deep.equal(
-                domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                  id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [
-                    domainBuilder.certification.enrolment.buildV3CertificationEligibility({
-                      label: 'monLabel',
-                      imageUrl: 'monImageUrl',
-                      isAcquiredExpectedLevel: true,
-                      isOutdated,
-                    }),
-                  ],
-                }),
-              );
-            });
-          });
-
-          context('when user has not an acquired certification for this badge', function () {
-            beforeEach(function () {
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
-            });
-
-            it('returns a UserCertificationEligibility model with the corresponding eligibility', async function () {
-              // given
-              certificationBadgesService.findLatestBadgeAcquisitions
-                .withArgs({
-                  userId,
-                  limitDate,
-                })
-                .resolves([
-                  domainBuilder.buildCertifiableBadgeAcquisition({
-                    complementaryCertificationBadgeId,
-                    complementaryCertificationKey,
-                    complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                    complementaryCertificationBadgeLabel: 'monLabel',
-                    isOutdated,
-                  }),
-                ]);
-
-              // when
-              const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-              // then
-              expect(userCertificationEligibility).to.deep.equal(
-                domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                  id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [
-                    domainBuilder.certification.enrolment.buildV3CertificationEligibility({
-                      label: 'monLabel',
-                      imageUrl: 'monImageUrl',
-                      isAcquiredExpectedLevel: false,
-                      isOutdated,
-                    }),
-                  ],
-                }),
-              );
-            });
-          });
-        });
-
-        context('when user is not certifiable', function () {
-          const isCertifiable = false;
-
-          beforeEach(function () {
-            placementProfileService.getPlacementProfile.withArgs({ userId, limitDate }).resolves(
-              domainBuilder.buildPlacementProfile({
-                profileDate: limitDate,
-                userId,
-                userCompetences: [domainBuilder.buildUserCompetence({ estimatedLevel: 1, pixScore: 1 })],
               }),
             );
-          });
-
-          context('when user has an acquired certification for this badge', function () {
-            it('should not be added in the eligibilities of the model', async function () {
-              // given
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
-                domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
-                  complementaryCertificationBadgeId,
-                  results: [
-                    {
-                      source: ComplementaryCertificationCourseResult.sources.PIX,
-                      acquired: true,
-                      complementaryCertificationBadgeId,
-                    },
-                  ],
-                }),
-              ]);
-
-              certificationBadgesService.findLatestBadgeAcquisitions
-                .withArgs({
-                  userId,
-                  limitDate,
-                })
-                .resolves([
-                  domainBuilder.buildCertifiableBadgeAcquisition({
-                    complementaryCertificationBadgeId,
-                    complementaryCertificationKey,
-                    complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                    complementaryCertificationBadgeLabel: 'monLabel',
-                    isOutdated,
-                  }),
-                ]);
-
-              // when
-              const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-              // then
-              expect(userCertificationEligibility).to.deep.equal(
-                domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                  id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [],
-                }),
-              );
-            });
-          });
-
-          context('when user has not an acquired certification for this badge', function () {
-            beforeEach(function () {
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([]);
-            });
-
-            it('should not be added in the eligibilities of the model', async function () {
-              // given
-              complementaryCertificationCourseRepository.findByUserId.withArgs({ userId }).resolves([
-                domainBuilder.certification.enrolment.buildComplementaryCertificationCourseWithResults({
-                  complementaryCertificationBadgeId,
-                  results: [
-                    {
-                      source: ComplementaryCertificationCourseResult.sources.PIX,
-                      acquired: true,
-                      complementaryCertificationBadgeId,
-                    },
-                  ],
-                }),
-              ]);
-
-              certificationBadgesService.findLatestBadgeAcquisitions
-                .withArgs({
-                  userId,
-                  limitDate,
-                })
-                .resolves([
-                  domainBuilder.buildCertifiableBadgeAcquisition({
-                    complementaryCertificationBadgeId,
-                    complementaryCertificationKey,
-                    complementaryCertificationBadgeImageUrl: 'monImageUrl',
-                    complementaryCertificationBadgeLabel: 'monLabel',
-                    isOutdated,
-                  }),
-                ]);
-
-              // when
-              const userCertificationEligibility = await getUserCertificationEligibility(dependencies);
-
-              // then
-              expect(userCertificationEligibility).to.deep.equal(
-                domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-                  id: userId,
-                  isCertifiable,
-                  certificationEligibilities: [],
-                }),
-              );
-            });
           });
         });
       });
