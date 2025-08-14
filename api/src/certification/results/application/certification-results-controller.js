@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as sessionResultsLinkService from '../domain/services/session-results-link-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certifiedProfileRepository from '../infrastructure/repositories/certified-profile-repository.js';
@@ -31,6 +32,8 @@ const getSessionResultsByRecipientEmail = async function (
   h,
   dependencies = { tokenService, getSessionCertificationResultsCsv },
 ) {
+  const i18n = getI18nFromRequest(request);
+
   const token = request.params.token;
 
   const { resultRecipientEmail, sessionId } =
@@ -42,7 +45,7 @@ const getSessionResultsByRecipientEmail = async function (
   const csvResult = await dependencies.getSessionCertificationResultsCsv({
     session,
     certificationResults,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h
@@ -56,13 +59,15 @@ const postSessionResultsToDownload = async function (
   h,
   dependencies = { tokenService, getSessionCertificationResultsCsv },
 ) {
+  const i18n = getI18nFromRequest(request);
+
   const { sessionId } = dependencies.tokenService.extractCertificationResultsLink(request.payload.token);
   const { session, certificationResults } = await usecases.getSessionResults({ sessionId });
 
   const csvResult = await dependencies.getSessionCertificationResultsCsv({
     session,
     certificationResults,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h
@@ -83,8 +88,9 @@ const getCertifiedProfile = async function (
 };
 
 const generateSessionResultsDownloadLink = async function (request, h, dependencies = { sessionResultsLinkService }) {
+  const i18n = getI18nFromRequest(request);
+
   const sessionId = request.params.sessionId;
-  const i18n = request.i18n;
   const sessionResultsLink = dependencies.sessionResultsLinkService.generateResultsLink({ sessionId, i18n });
 
   return h.response({ sessionResultsLink });

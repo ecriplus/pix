@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
 import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { Certificate } from '../domain/models/v3/Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -15,10 +16,11 @@ const getCertificateByVerificationCode = async function (
   h,
   dependencies = { requestResponseUtils, certificateSerializer },
 ) {
-  let certificate;
-  const i18n = request.i18n;
-  const verificationCode = request.payload.verificationCode;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const i18n = getI18nFromRequest(request);
+
+  let certificate;
+  const verificationCode = request.payload.verificationCode;
 
   const certificationCourse = await usecases.getCertificationCourseByVerificationCode({ verificationCode });
 
@@ -41,9 +43,10 @@ const getCertificate = async function (
   h,
   dependencies = { requestResponseUtils, certificateSerializer, privateCertificateSerializer },
 ) {
-  const certificationCourseId = request.params.certificationCourseId;
-  const translate = request.i18n.__;
   const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const i18n = getI18nFromRequest(request);
+
+  const certificationCourseId = request.params.certificationCourseId;
 
   const certificationCourse = await certificationSharedUsecases.getCertificationCourse({ certificationCourseId });
 
@@ -53,22 +56,23 @@ const getCertificate = async function (
       certificationCourseId: certificationCourse.getId(),
       locale,
     });
-    return dependencies.certificateSerializer.serialize({ certificate, translate });
+    return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
   } else {
     certificate = await usecases.getPrivateCertificate({
       certificationCourseId: certificationCourse.getId(),
       locale,
     });
-    return dependencies.privateCertificateSerializer.serialize(certificate, { translate });
+    return dependencies.privateCertificateSerializer.serialize(certificate, { translate: i18n.__ });
   }
 };
 
 const findUserCertificates = async function (request) {
+  const i18n = getI18nFromRequest(request);
+
   const userId = request.auth.credentials.userId;
-  const translate = request.i18n.__;
 
   const privateCertificates = await usecases.findUserPrivateCertificates({ userId });
-  return privateCertificateSerializer.serialize(privateCertificates, { translate });
+  return privateCertificateSerializer.serialize(privateCertificates, { translate: i18n.__ });
 };
 
 const getPDFCertificate = async function (
@@ -77,11 +81,10 @@ const getPDFCertificate = async function (
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
   const certificationCourseId = request.params.certificationCourseId;
-  const { i18n } = request;
   const { isFrenchDomainExtension } = request.query;
-  const locale = i18n.getLocale();
+  const i18n = getI18nFromRequest(request);
 
-  const certificate = await usecases.getCertificate({ certificationCourseId, locale });
+  const certificate = await usecases.getCertificate({ certificationCourseId, locale: i18n.getLocale() });
 
   const fileName = i18n.__('certification.certificate.file-name', {
     deliveredAt: dayjs(certificate.deliveredAt).format('YYYYMMDD'),
@@ -118,7 +121,7 @@ const getSessionCertificates = async function (
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
-  const { i18n } = request;
+  const i18n = getI18nFromRequest(request);
 
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
@@ -160,15 +163,15 @@ const downloadDivisionCertificates = async function (
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
+  const i18n = getI18nFromRequest(request);
+
   const organizationId = request.params.organizationId;
-  const { i18n } = request;
   const { division, isFrenchDomainExtension } = request.query;
-  const locale = i18n.getLocale();
 
   const certificates = await usecases.findCertificatesForDivision({
     organizationId,
     division,
-    locale,
+    locale: i18n.getLocale(),
   });
 
   if (certificates.some((certificate) => certificate instanceof Certificate)) {
