@@ -11,13 +11,13 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
   module('when user arrive on the module passage page', function () {
     test('should display only the first lesson grain', async function (assert) {
       // given
-      const grains = _createGrains(server);
+      const sections = _createSections(server);
 
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
-        grains,
+        sections,
       });
 
       server.create('passage', {
@@ -37,13 +37,13 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
     module('when the grain displayed is not the last', function () {
       test('should display the continue button', async function (assert) {
         // given
-        const grains = _createGrains(server);
+        const sections = _createSections(server);
 
         server.create('module', {
           id: 'bien-ecrire-son-adresse-mail',
           slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire son adresse mail',
-          grains,
+          sections,
         });
 
         // when
@@ -64,13 +64,13 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
     module('when the grain displayed is the last', function () {
       test('should not display continue button', async function (assert) {
         // given
-        const grains = _createGrains(server);
+        const sections = _createSections(server);
 
         server.create('module', {
           id: 'bien-ecrire-son-adresse-mail',
           slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire son adresse mail',
-          grains,
+          sections,
         });
 
         // when
@@ -95,13 +95,19 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         type: 'text',
         content: 'content-1',
       };
-      const grain1 = server.create('grain', {
-        id: 'grainId-1',
-        title: 'title grain 1',
-        components: [
+      const section1 = server.create('section', {
+        id: 'sectionId-1',
+        type: 'blank',
+        grains: [
           {
-            type: 'element',
-            element: text1,
+            id: 'grainId-1',
+            title: 'title grain 1',
+            components: [
+              {
+                type: 'element',
+                element: text1,
+              },
+            ],
           },
         ],
       });
@@ -109,7 +115,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         id: 'bien-ecrire-son-adresse-mail',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
-        grains: [grain1],
+        sections: [section1],
       });
       server.create('passage', {
         id: '122',
@@ -152,37 +158,49 @@ const text3 = {
   type: 'text',
   content: 'content-3',
 };
-function _createGrains(server) {
-  const grain1 = server.create('grain', {
-    id: 'grainId-1',
-    title: 'title grain 1',
-    components: [
+function _createSections(server) {
+  const section1 = server.create('section', {
+    id: 'sectionId-1',
+    type: 'blank',
+    grains: [
       {
-        type: 'element',
-        element: text1,
+        id: 'grainId-1',
+        title: 'title grain 1',
+        components: [
+          {
+            type: 'element',
+            element: text1,
+          },
+        ],
+      },
+      {
+        id: 'grainId-2',
+        title: 'title grain 2',
+        components: [
+          {
+            type: 'element',
+            element: text2,
+          },
+        ],
       },
     ],
   });
-  const grain2 = server.create('grain', {
-    id: 'grainId-2',
-    title: 'title grain 2',
-    components: [
+  const section2 = server.create('section', {
+    id: 'sectionId-2',
+    type: 'blank',
+    grains: [
       {
-        type: 'element',
-        element: text2,
-      },
-    ],
-  });
-  const grain3 = server.create('grain', {
-    id: 'grainId-3',
-    title: 'title grain 3',
-    components: [
-      {
-        type: 'element',
-        element: text3,
+        id: 'grainId-3',
+        title: 'title grain 3',
+        components: [
+          {
+            type: 'element',
+            element: text3,
+          },
+        ],
       },
     ],
   });
 
-  return [grain1, grain2, grain3];
+  return [section1, section2];
 }

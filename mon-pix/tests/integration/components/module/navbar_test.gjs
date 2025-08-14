@@ -86,12 +86,18 @@ module('Integration | Component | Module | Navbar', function (hooks) {
 
 function createModule(owner) {
   const store = owner.lookup('service:store');
-  const grain1 = store.createRecord('grain', { title: 'Grain title', type: 'discovery', id: '123-abc' });
-  const grain2 = store.createRecord('grain', { title: 'Grain title', type: 'activity', id: '234-abc' });
-  const grain3 = store.createRecord('grain', { title: 'Grain title', type: 'lesson', id: '345-abc' });
-  const grain4 = store.createRecord('grain', { title: 'Grain title', type: 'summary', id: '456-abc' });
+  const section = store.createRecord('section', {
+    id: 'section1',
+    type: 'blank',
+    grains: [
+      { title: 'Grain title', type: 'discovery', id: '123-abc' },
+      { title: 'Grain title', type: 'activity', id: '234-abc' },
+      { title: 'Grain title', type: 'lesson', id: '345-abc' },
+      { title: 'Grain title', type: 'summary', id: '456-abc' },
+    ],
+  });
   return store.createRecord('module', {
     title: 'Didacticiel',
-    grains: [grain1, grain2, grain3, grain4],
+    sections: [section],
   });
 }

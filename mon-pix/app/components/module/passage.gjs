@@ -17,7 +17,11 @@ export default class ModulePassage extends Component {
   @service modulixAutoScroll;
   @service passageEvents;
 
-  displayableGrains = this.args.module.grains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
+  get flatGrains() {
+    return this.args.module.sections.flatMap((section) => section.grains);
+  }
+
+  displayableGrains = this.flatGrains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
   @tracked grainsToDisplay = this.displayableGrains.length > 0 ? [this.displayableGrains[0]] : [];
 
   @action

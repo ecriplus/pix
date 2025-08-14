@@ -19,7 +19,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
         id: 'bien-ecrire-son-adresse-mail',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
-        grains: [],
+        sections: [],
         details: {
           image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',
@@ -38,15 +38,17 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleDetails', function (
 
     test('should navigate to passage page by clicking on start module button', async function (assert) {
       // given
-      const grain = server.create('grain', {
-        id: 'grain1',
+      const section = server.create('section', {
+        id: 'section1',
+        type: 'blank',
+        grains: [{ id: 'grain1', components: [] }],
       });
 
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
         slug: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire son adresse mail',
-        grains: [grain],
+        sections: [section],
         details: {
           image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
           description: '<p>Description</p>',

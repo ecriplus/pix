@@ -21,7 +21,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       ],
     };
 
-    const grain1 = server.create('grain', {
+    const grain1 = {
       id: 'grainId1',
       title: 'title',
       components: [
@@ -30,7 +30,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
           element: qcu,
         },
       ],
-    });
+    };
 
     const text = {
       id: 'elementId-1',
@@ -39,7 +39,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       isAnswerable: false,
     };
 
-    const grain2 = server.create('grain', {
+    const grain2 = {
       id: 'grainId2',
       title: 'title',
       components: [
@@ -48,6 +48,11 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
           element: text,
         },
       ],
+    };
+
+    const section = server.create('section', {
+      id: 'sectionId-1',
+      grains: [grain1, grain2],
     });
 
     server.create('module', {
@@ -55,7 +60,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       details: { tabletSupport: 'comfortable' },
-      grains: [grain1, grain2],
+      sections: [section],
     });
 
     server.create('correction-response', {

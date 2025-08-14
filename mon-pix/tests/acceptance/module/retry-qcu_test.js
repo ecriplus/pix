@@ -29,24 +29,28 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       ],
     };
 
-    const grain1 = server.create('grain', {
-      id: 'grainId1',
-      title: 'title',
-      components: [
+    const section = server.create('section', {
+      id: 'sectionId-1',
+      grains: [
         {
-          type: 'element',
-          element: qcu1,
+          id: 'grainId1',
+          title: 'title',
+          components: [
+            {
+              type: 'element',
+              element: qcu1,
+            },
+          ],
         },
-      ],
-    });
-
-    const grain2 = server.create('grain', {
-      id: 'grainId2',
-      title: 'title',
-      components: [
         {
-          type: 'element',
-          element: qcu2,
+          id: 'grainId2',
+          title: 'title',
+          components: [
+            {
+              type: 'element',
+              element: qcu2,
+            },
+          ],
         },
       ],
     });
@@ -56,7 +60,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: true,
-      grains: [grain1, grain2],
+      sections: [section],
     });
 
     server.create('correction-response', {
@@ -115,26 +119,30 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       ],
     };
 
-    const grain1 = server.create('grain', {
-      id: 'grainId1',
-      title: 'title',
-      type: 'activity',
-      components: [
+    const section = server.create('section', {
+      id: 'sectionId-1',
+      grains: [
         {
-          type: 'element',
-          element: qcu1,
+          id: 'grainId1',
+          title: 'title',
+          type: 'activity',
+          components: [
+            {
+              type: 'element',
+              element: qcu1,
+            },
+          ],
         },
-      ],
-    });
-
-    const grain2 = server.create('grain', {
-      id: 'grainId2',
-      title: 'title',
-      type: 'activity',
-      components: [
         {
-          type: 'element',
-          element: qcu2,
+          id: 'grainId2',
+          title: 'title',
+          type: 'activity',
+          components: [
+            {
+              type: 'element',
+              element: qcu2,
+            },
+          ],
         },
       ],
     });
@@ -144,7 +152,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       isBeta: true,
-      grains: [grain1, grain2],
+      sections: [section],
     });
 
     // look at mirage

@@ -66,8 +66,14 @@ module('Acceptance | Module | Routes | details', function (hooks) {
   });
   test('should redirect /modules/:slug to /modules/:slug/details', async function (assert) {
     // given
-    const grain = server.create('grain', {
-      id: 'grain1',
+    const section = server.create('section', {
+      id: 'sectionId-1',
+      grains: [
+        {
+          id: 'grain1',
+          components: [],
+        },
+      ],
     });
     server.create('module', {
       id: 'bien-ecrire-son-adresse-mail',
@@ -81,7 +87,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
         level: 'Débutant',
         objectives: ['Écrire une adresse mail correctement, en évitant les erreurs courantes'],
       },
-      grains: [grain],
+      sections: [section],
     });
 
     // when

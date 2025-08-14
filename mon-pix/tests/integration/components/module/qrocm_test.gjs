@@ -530,7 +530,6 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       correction: correctionResponse,
       elementId: qrocm.id,
     });
-    store.createRecord('grain', { id: 'id', components: [{ type: 'element', element: qrocm }] });
     store.createRecord('element-answer', {
       correction: correctionResponse,
       elementId: qrocm.id,
@@ -629,7 +628,6 @@ function prepareContextRecords(store, correctionResponse) {
     correction: correctionResponse,
     elementId: qrocm.id,
   });
-  store.createRecord('grain', { id: 'id', components: [{ type: 'element', element: qrocm }] });
   store.createRecord('element-answer', {
     correction: correctionResponse,
     elementId: qrocm.id,
