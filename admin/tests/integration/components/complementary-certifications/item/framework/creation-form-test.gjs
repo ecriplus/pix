@@ -43,6 +43,8 @@ module('Integration | Component | complementary-certifications/item/framework/cr
     await click(screen.getByLabelText('@tubeName1 : Tube 1'));
 
     // then
+    assert.ok(screen.getByRole('button', { name: 'Importer un fichier JSON' }));
+
     const table = screen.getByRole('table', { name: 'Sélection des sujets' });
     assert.ok(within(table).getByRole('columnheader', { name: 'Niveau' }));
     assert.ok(within(table).getByRole('columnheader', { name: 'Compatibilité' }));
