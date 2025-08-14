@@ -8,14 +8,16 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
-export async function getFrameworkReferential({ challengeIds }) {
+async function getFrameworkReferential({ challengeIds }) {
   const challenges = await challengeRepository.getMany(challengeIds, FRENCH_SPOKEN);
 
   const skillIds = challenges.map((challenge) => challenge.skill.id);
-  const skills = await skillRepository.findByRecordIds(skillIds);
+  const uniqSkillIds = _.uniq(skillIds);
+  const skills = await skillRepository.findByRecordIds(uniqSkillIds);
 
   const tubeIds = skills.map((skill) => skill.tubeId);
-  const tubes = await tubeRepository.findByRecordIds(tubeIds, FRENCH_SPOKEN);
+  const uniqTubeIds = _.uniq(tubeIds);
+  const tubes = await tubeRepository.findByRecordIds(uniqTubeIds, FRENCH_SPOKEN);
   tubes.forEach((tube) => {
     tube.skills = skills.filter((skill) => {
       return skill.tubeId === tube.id;
@@ -43,7 +45,7 @@ export async function getFrameworkReferential({ challengeIds }) {
   });
 
   const allAreaIds = competences.map((competence) => competence.areaId);
-  const uniqAreaIds = _.uniqBy(allAreaIds, 'id');
+  const uniqAreaIds = _.uniq(allAreaIds);
   const areas = await areaRepository.findByRecordIds({
     areaIds: uniqAreaIds,
     locale: FRENCH_SPOKEN,
@@ -56,3 +58,5 @@ export async function getFrameworkReferential({ challengeIds }) {
 
   return areas;
 }
+
+export { getFrameworkReferential };
