@@ -13,9 +13,17 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
     code = Symbol('code');
     expectedResult = {
       id: 1,
+      organizationId: 1,
       name: 'campagne',
       code: 'abc',
       targetProfileId: 123,
+      creatorId: 1,
+      type: 'type',
+      multipleSendings: true,
+      ownerId: 1,
+      title: 'titre campagne',
+      customResultPageButtonUrl: '/results',
+      customResultPageButtonText: 'Continuer',
     };
     campaignsApiStub = {
       get: sinon.stub(),
