@@ -32,41 +32,45 @@ export default class ModulixPreview extends Component {
       "Contribuer au contenu d'un Module"
     ]
   },
-  "grains": [
-    {
-      "id": "1111111a-1111-1bcd-e111-1f1111gh1111",
-      "type": "lesson",
-      "title": "Voici une leçon",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "2222222a-2222-2bcd-e222-2f2222gh2222",
-            "type": "text",
-            "content": "<h3>Voici une leçon</h3>"
+  "sections": [{
+    "id": "845b8985-6855-4d7a-9484-e160b573dba1",
+    "type": "blank",
+    "grains": [
+      {
+        "id": "1111111a-1111-1bcd-e111-1f1111gh1111",
+        "type": "lesson",
+        "title": "Voici une leçon",
+        "components": [
+          {
+            "type": "element",
+            "element": {
+              "id": "2222222a-2222-2bcd-e222-2f2222gh2222",
+              "type": "text",
+              "content": "<h3>Voici une leçon</h3>"
+            }
+          },
+          {
+            "type": "element",
+            "element": {
+              "id": "3333333a-3333-3bcd-e333-3f3333gh3333",
+              "type": "text",
+              "content": "<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden='true'>📚</span>.<br>Et là, voici une image&#8239;!</p>"
+            }
+          },
+          {
+            "type": "element",
+            "element": {
+              "id": "4444444a-4444-4bcd-e444-4f4444gh4444",
+              "type": "image",
+              "url": "https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg",
+              "alt": "Dessin détaillé dans l'alternative textuelle",
+              "alternativeText": "Dessin d'un ordinateur dans un univers spatial."
+            }
           }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "3333333a-3333-3bcd-e333-3f3333gh3333",
-            "type": "text",
-            "content": "<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden='true'>📚</span>.<br>Et là, voici une image&#8239;!</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "4444444a-4444-4bcd-e444-4f4444gh4444",
-            "type": "image",
-            "url": "https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg",
-            "alt": "Dessin détaillé dans l'alternative textuelle",
-            "alternativeText": "Dessin d'un ordinateur dans un univers spatial."
-          }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
+  }]
 }`;
   @tracked errorMessage = null;
 
@@ -97,14 +101,14 @@ export default class ModulixPreview extends Component {
     }
 
     if (!this.module || this.module === '') {
-      return { grains: [] };
+      return { sections: [] };
     }
 
     const module = JSON.parse(this.module);
 
     return {
       ...module,
-      grains: module.grains ?? [],
+      sections: module.sections ?? [],
     };
   }
 
@@ -116,7 +120,7 @@ export default class ModulixPreview extends Component {
     try {
       this.errorMessage = null;
       const parsedModule = JSON.parse(event.target.value);
-      if (!parsedModule.grains) {
+      if (!parsedModule.sections) {
         return;
       }
       this.module = JSON.stringify(parsedModule, null, 2);
@@ -156,24 +160,26 @@ export default class ModulixPreview extends Component {
         </div>
 
         <div class="module-preview-passage__content">
-          {{#each this.formattedModule.grains as |grain|}}
-            <ModulixGrain
-              @grain={{grain}}
-              @onElementRetry={{this.noop}}
-              @passage={{this.passage}}
-              @onImageAlternativeTextOpen={{this.noop}}
-              @onVideoTranscriptionOpen={{this.noop}}
-              @onElementAnswer={{this.noop}}
-              @onStepperNextStep={{this.noop}}
-              @canMoveToNextGrain={{false}}
-              @onGrainContinue={{this.noop}}
-              @onGrainSkip={{this.noop}}
-              @shouldDisplayTerminateButton={{false}}
-              @onModuleTerminate={{this.noop}}
-              @hasJustAppeared={{false}}
-              @onVideoPlay={{this.noop}}
-              @onFileDownload={{this.noop}}
-            />
+          {{#each this.formattedModule.sections as |section|}}
+            {{#each section.grains as |grain|}}
+              <ModulixGrain
+                @grain={{grain}}
+                @onElementRetry={{this.noop}}
+                @passage={{this.passage}}
+                @onImageAlternativeTextOpen={{this.noop}}
+                @onVideoTranscriptionOpen={{this.noop}}
+                @onElementAnswer={{this.noop}}
+                @onStepperNextStep={{this.noop}}
+                @canMoveToNextGrain={{false}}
+                @onGrainContinue={{this.noop}}
+                @onGrainSkip={{this.noop}}
+                @shouldDisplayTerminateButton={{false}}
+                @onModuleTerminate={{this.noop}}
+                @hasJustAppeared={{false}}
+                @onVideoPlay={{this.noop}}
+                @onFileDownload={{this.noop}}
+              />
+            {{/each}}
           {{/each}}
         </div>
       </aside>
