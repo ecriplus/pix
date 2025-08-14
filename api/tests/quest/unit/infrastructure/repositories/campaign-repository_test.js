@@ -54,4 +54,50 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
       expect(result).to.deep.equal(expectedResult);
     });
   });
+
+  describe('#save', function () {
+    it('should call save method from campaignsApi', async function () {
+      // given
+      const campaigns = [
+        {
+          creatorId: 2,
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+          name: 'campagne',
+          organizationId: 3,
+          targetProfileId: 123,
+          title: 'title',
+        },
+        {
+          creatorId: 2,
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+          name: 'campagne',
+          organizationId: 3,
+          targetProfileId: 123,
+          title: 'title',
+        },
+      ];
+
+      const campaignsApiStub = {
+        save: sinon.stub(),
+      };
+
+      const expectedCreatedCampaigns = campaigns.map((campaign, index) => ({
+        ...campaign,
+        id: index,
+        code: `code${index}`,
+      }));
+      campaignsApiStub.save.withArgs(campaigns).resolves(expectedCreatedCampaigns);
+
+      // when
+      const result = await campaignRepository.save({ campaigns, campaignsApi: campaignsApiStub });
+
+      // then
+      expect(result).to.deep.equal([
+        new Campaign({ ...expectedCreatedCampaigns[0], id: 0, code: 'code0' }),
+        new Campaign({ ...expectedCreatedCampaigns[1], id: 1, code: 'code1' }),
+      ]);
+    });
+  });
 });

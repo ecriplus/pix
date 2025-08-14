@@ -9,3 +9,8 @@ export const get = async function ({ id, campaignsApi }) {
   const campaign = await campaignsApi.get(id);
   return new Campaign(campaign);
 };
+
+export const save = async function ({ campaigns, campaignsApi }) {
+  const createdCampaigns = await campaignsApi.save(campaigns);
+  return createdCampaigns.map((campaign) => new Campaign(campaign));
+};
