@@ -52,22 +52,22 @@
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
+                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
                     },
                     {
                       "userName": "Emma",
                       "direction": "outgoing",
-                      "content": "Ah bon ? Quel prompt as-tu utilisé ? 🤖"
+                      "content": "Ah bon ? Quel prompt as-tu utilisé ? 🤖"
                     },
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Je voulais inviter les joueurs du tournoi. Mon prompt, c’était : « Écris une invitation au tournoi. »"
+                      "content": "Je voulais inviter les joueurs du tournoi. Mon prompt, c’était : « Écris une invitation au tournoi. »"
                     },
                     {
                       "userName": "Emma",
                       "direction": "outgoing",
-                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉 Il y a des techniques pour améliorer les résultats. 💡"
+                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉 Il y a des techniques pour améliorer les résultats. 💡"
                     }
                   ]
                 }
@@ -168,68 +168,85 @@
           "title": "Tester différents tons",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "77fa2e62-b572-40ed-ad92-2b6433efaf45",
-                "type": "text",
-                "content": "<p>Gustave a envoyé les invitations pour le tournoi. Il a hâte !&nbsp; </p><p>Mais certaines personnes ne lui ont pas encore répondu…&nbsp; <br>Il veut écrire un message de relance mais il hésite sur la manière de le formuler.🤔 <br></p>\n"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "4f35bf9d-e319-4a6d-b1f5-dc0a84f2139d",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/testerleton.html",
-                "instruction": "<p>Testez différents tons de messages avec l’IA.</p>",
-                "height": 450
-              }
-            }
-          ]
-        },
-        {
-          "id": "9fb0fcf7-6cd7-4524-af0c-b6aba8da9994",
-          "type": "activity",
-          "title": "Quel est ton ton préféré ?",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "267f28d2-4540-427a-a775-c15c380c3d4b",
-                "type": "qcu-declarative",
-                "instruction": "<p>Quel message de relance créé avec l’IA est votre préféré ?&nbsp;<br></p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>celui avec un ton festif</p>",
-                    "feedback": {
-                      "diagnosis": "<p><strong>Un choix sympa !</strong>&nbsp; Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
+                      "type": "custom",
+                      "tagName": "llm-prompt-select",
+                      "props": {
+                        "speed": 0,
+                        "messages": [
+                          {
+                            "direction": "outbound",
+                            "content": "Écris un message de relance pour participer à un tournoi de volley"
+                          },
+                          {
+                            "direction": "inbound",
+                            "content": "Salut à tous, Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
+                          }
+                        ],
+                        "prompts": [
+                          {
+                            "prompt": "adopte un ton festif",
+                            "response": "🎉 Hey la team ! Le tournoi de volley approche et il reste des places ! Viens smasher, rigoler et kiffer l'ambiance 🔥 Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! Surprises et bonne humeur garanties 🎊 On t'attend sur le terrain ! 💪"
+                          },
+                          {
+                            "prompt": "adopte un ton sérieux",
+                            "response": "Madame, Monsieur, Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley. Nous espérons vivement votre participation. Merci de bien vouloir nous répondre avant vendredi. Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                          },
+                          {
+                            "prompt": "adopte un ton drôle",
+                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. Le soleil a sorti ses lunettes rien que pour toi. Les ballons murmurent ton prénom la nuit. Alors… tu viens ? 😇 👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                          }
+                        ]
+                      }
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>celui avec un ton sérieux</p>",
-                    "feedback": {
-                      "diagnosis": "<p><strong>Un choix formel ! </strong>Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8f59bf30-fa84-4114-9707-eabc9f648f9e",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?&nbsp;<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>celui avec un ton festif</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Un choix sympa !</strong>&nbsp; Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>celui avec un ton sérieux.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>celui avec un ton drôle.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>aucun ne me plaît.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: enfantin, ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>celui avec un ton drôle</p>",
-                    "feedback": {
-                      "diagnosis": "<p><strong>Un choix original ! </strong>Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi. <br></p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>aucun ne me plait\t<br></p>",
-                    "feedback": {
-                      "diagnosis": "<p><strong>Pas de souci !</strong> Il existe beaucoup d’autres tons : enfantin, ironique, poétique… Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi ! </p>"
-                    }
-                  }
-                ]
-              }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -278,7 +295,7 @@
               "element": {
                 "id": "29b0a00a-fb1e-4737-a84f-c154e3faff48",
                 "type": "qrocm",
-                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p><br>",
+                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p><br>",
                 "proposals": [
                   {
                     "input": "CV1pzGeay4eJi1g7",
@@ -336,7 +353,7 @@
                 "isCompletionRequired": false,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "<p>À vous de jouer !</p>",
+                "instruction": "<p>À vous de jouer !</p>",
                 "solution": "<p></p>",
                 "height": 800
               }
@@ -346,7 +363,7 @@
               "element": {
                 "id": "6ff09171-639a-4e55-a4d5-9beb8e4afea4",
                 "type": "text",
-                "content": "<p>\n    <br>\n</p>\n<p>\n</p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L’astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>\n<p></p><p></p><p></p>\n<p><br></p>"
+                "content": "<p>\n    <br>\n</p>\n<p>\n</p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L’astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ? <br> <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>\n</details>\n</p><p></p><p></p><p></p><p></p>\n"
               }
             }
           ]
@@ -376,7 +393,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple : résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple : le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple : une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple : sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><br><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;</p><ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul><p></p>"
+                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple&nbsp;: résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple&nbsp;: le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple&nbsp;: une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><br><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;</p><ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul><p></p>"
               }
             }
           ]
@@ -449,7 +466,7 @@
                     {
                       "id": "f64e341e-4e3b-4088-827d-9f353b869749",
                       "type": "text",
-                      "content": "<p>« Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination des joueurs adultes loisirs. »</p>"
+                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination des joueurs adultes loisirs.&nbsp;»</p>"
                     },
                     {
                       "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
@@ -599,7 +616,7 @@
               "element": {
                 "id": "e90e7470-54a6-444d-bc77-39cfc9b0fad1",
                 "type": "text",
-                "content": "\n<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi :&nbsp;</p>\n<p><br><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p>\n<p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p>\n<p><em>- musique : demander mairie pour sono </em></p>\n<p><em>- si pluie → gymnase dispo ? ok ! :-) </em></p>\n<p><em>- buvette : jus, sandwichs, fruits → pas de chaud </em></p>\n<p><em>- récompenses ? médailles → à chiffrer<br></em></p>"
+                "content": "\n<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi&nbsp;:&nbsp;</p>\n<p><br><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p>\n<p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p>\n<p><em>- musique&nbsp;: demander mairie pour sono </em></p>\n<p><em>- si pluie → gymnase dispo ? ok !&nbsp;:-) </em></p>\n<p><em>- buvette&nbsp;: jus, sandwichs, fruits → pas de chaud </em></p>\n<p><em>- récompenses ? médailles → à chiffrer<br></em></p>"
               }
             },
             {
@@ -628,7 +645,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p></p><p></p><p></p><p></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>"
               }
             }
           ]
