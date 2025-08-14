@@ -1,8 +1,9 @@
-import PixWindow from 'pix-certif/utils/pix-window';
+import Location from 'pix-certif/utils/location';
 
 export function initialize(/* applicationInstance */) {
-  const location = PixWindow.getLocation();
-  const isJoinRoute = !!location.pathname.match(/^\/rejoindre/);
+  const { pathname } = new URL(Location.getHref());
+
+  const isJoinRoute = !!pathname.match(/^\/rejoindre/);
 
   if (isJoinRoute) {
     window.localStorage.removeItem('ember_simple_auth-session');

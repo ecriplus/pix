@@ -1,7 +1,7 @@
 import Application from '@ember/application';
 import Resolver from 'ember-resolver';
 import { initialize } from 'mon-pix/instance-initializers/session';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -19,7 +19,7 @@ module('Unit | Instance Initializer | session', function () {
         this.application = this.TestApplication.create({ autoboot: false, Resolver, modulePrefix: 'mon-pix-test' });
         this.instance = this.application.buildInstance();
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocationHref').returns('/connexion/gar#access_token');
+        sinon.stub(Location, 'getHref').returns('/connexion/gar#access_token');
         window.localStorage.setItem(
           key,
           JSON.stringify({
@@ -59,7 +59,7 @@ module('Unit | Instance Initializer | session', function () {
         this.application = this.TestApplication.create({ autoboot: false, Resolver, modulePrefix: 'mon-pix-test' });
         this.instance = this.application.buildInstance();
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocationHref').returns('/campagnes?externalUser=EXTERNAL_USER_TOKEN');
+        sinon.stub(Location, 'getHref').returns('/campagnes?externalUser=EXTERNAL_USER_TOKEN');
         window.localStorage.setItem(
           key,
           JSON.stringify({
@@ -101,7 +101,7 @@ module('Unit | Instance Initializer | session', function () {
         this.application = this.TestApplication.create({ autoboot: false, Resolver, modulePrefix: 'mon-pix-test' });
         this.instance = this.application.buildInstance();
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocationHref').returns('/campagnes');
+        sinon.stub(Location, 'getHref').returns('/campagnes');
         window.localStorage.setItem(
           key,
           JSON.stringify({
@@ -137,7 +137,7 @@ module('Unit | Instance Initializer | session', function () {
         this.application = this.TestApplication.create({ autoboot: false, Resolver, modulePrefix: 'mon-pix-test' });
         this.instance = this.application.buildInstance();
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocationHref').returns('/campagnes/SIMPLIFIE');
+        sinon.stub(Location, 'getHref').returns('/campagnes/SIMPLIFIE');
         window.localStorage.setItem(
           key,
           JSON.stringify({
@@ -173,7 +173,7 @@ module('Unit | Instance Initializer | session', function () {
         this.application = this.TestApplication.create({ autoboot: false, Resolver, modulePrefix: 'mon-pix-test' });
         this.instance = this.application.buildInstance();
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocationHref').returns('/campagnes/SIMPLIFIE/evaluation/didacticiel');
+        sinon.stub(Location, 'getHref').returns('/campagnes/SIMPLIFIE/evaluation/didacticiel');
         window.localStorage.setItem(
           key,
           JSON.stringify({

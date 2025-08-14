@@ -1,7 +1,7 @@
 import EmberObject from '@ember/object';
 import { setupTest } from 'ember-qunit';
 import ENV from 'mon-pix/config/environment';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -340,13 +340,13 @@ module('Unit | Route | Entry Point', function (hooks) {
           // given
           campaign.identityProvider = 'FWB';
 
-          _stubPixWindow('https://app.pix.fr/campaign/NEW_CODE');
+          _stubLocation('https://app.pix.fr/campaign/NEW_CODE');
 
           // when
           await route.afterModel(campaign, transition);
 
           // then
-          sinon.assert.calledWithExactly(PixWindow.replace, 'https://app.pix.org/campaign/NEW_CODE');
+          sinon.assert.calledWithExactly(Location.replace, 'https://app.pix.org/campaign/NEW_CODE');
           assert.ok(true);
         });
       });
@@ -356,13 +356,13 @@ module('Unit | Route | Entry Point', function (hooks) {
           // given
           campaign.identityProvider = 'FWB';
 
-          _stubPixWindow('https://app.pix.org/campaign/NEW_CODE');
+          _stubLocation('https://app.pix.org/campaign/NEW_CODE');
 
           // when
           await route.afterModel(campaign, transition);
 
           // then
-          sinon.assert.notCalled(PixWindow.replace);
+          sinon.assert.notCalled(Location.replace);
           assert.ok(true);
         });
       });
@@ -370,11 +370,9 @@ module('Unit | Route | Entry Point', function (hooks) {
   });
 });
 
-function _stubPixWindow(url) {
+function _stubLocation(url) {
   const newUrl = new URL(url);
-  sinon.stub(PixWindow, 'getLocationHash').returns(newUrl.hash);
-  sinon.stub(PixWindow, 'getLocationHostname').returns(newUrl.hostname);
-  sinon.stub(PixWindow, 'getLocationHref').returns(newUrl.href);
-  sinon.stub(PixWindow, 'replace');
-  sinon.stub(PixWindow, 'reload');
+  sinon.stub(Location, 'getHref').returns(newUrl.href);
+  sinon.stub(Location, 'replace');
+  sinon.stub(Location, 'reload');
 }

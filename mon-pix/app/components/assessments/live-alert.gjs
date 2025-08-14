@@ -5,14 +5,14 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 
 export default class LiveAlert extends Component {
   @service router;
 
   @action
   refreshPage() {
-    PixWindow.reload();
+    Location.reload();
   }
 
   <template>

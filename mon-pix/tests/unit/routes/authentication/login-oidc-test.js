@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { ApplicationError } from 'mon-pix/errors/application-error';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -80,7 +81,7 @@ module('Unit | Route | login-oidc', function (hooks) {
           });
           const route = this.owner.lookup('route:authentication/login-oidc');
           route.set('session', sessionStub);
-          route.location.assign = sinon.stub();
+          sinon.stub(Location, 'assign');
 
           const transition = {
             to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
@@ -104,7 +105,7 @@ module('Unit | Route | login-oidc', function (hooks) {
           });
           const route = this.owner.lookup('route:authentication/login-oidc');
           route.set('session', sessionStub);
-          route.location.assign = sinon.stub();
+          sinon.stub(Location, 'assign');
           route.router.urlFor = sinon.stub();
 
           const transition = {
@@ -130,7 +131,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         });
         const route = this.owner.lookup('route:authentication/login-oidc');
         route.set('session', sessionStub);
-        route.location.assign = sinon.stub();
+        sinon.stub(Location, 'assign');
 
         const transition = {
           to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
@@ -141,7 +142,7 @@ module('Unit | Route | login-oidc', function (hooks) {
         await route.beforeModel(transition);
 
         // then
-        assert.true(route.location.assign.calledWithMatch('https://oidc/connexion'));
+        assert.true(Location.assign.calledWithMatch('https://oidc/connexion'));
         assert.deepEqual(sessionStub.data, { nextURL: '/organisations/PIXOIDC01/acces' });
       });
     });

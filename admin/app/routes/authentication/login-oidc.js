@@ -3,11 +3,11 @@ import { service } from '@ember/service';
 import get from 'lodash/get';
 import ENV from 'pix-admin/config/environment';
 import JSONApiError from 'pix-admin/errors/json-api-error';
+import Location from 'pix-admin/utils/location';
 
 export default class LoginOidcRoute extends Route {
   @service session;
   @service router;
-  @service location;
   @service oidcIdentityProviders;
 
   beforeModel(transition) {
@@ -98,6 +98,6 @@ export default class LoginOidcRoute extends Route {
       `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
     const { redirectTarget } = await response.json();
-    this.location.replace(redirectTarget);
+    Location.replace(redirectTarget);
   }
 }

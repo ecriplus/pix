@@ -2,7 +2,7 @@ import Application from '@ember/application';
 import Resolver from 'ember-resolver';
 import config from 'pix-certif/config/environment';
 import { initialize } from 'pix-certif/instance-initializers/session';
-import PixWindow from 'pix-certif/utils/pix-window';
+import Location from 'pix-certif/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -31,7 +31,7 @@ module('Unit | Instance Initializer | session', function (hooks) {
       test('it should remove the current session before the application loads', async function (assert) {
         // given
         const key = 'ember_simple_auth-session';
-        sinon.stub(PixWindow, 'getLocation').returns({ pathname: '/rejoindre?invitationId=1&code=ABCDEF123' });
+        sinon.stub(Location, 'getHref').returns('https://pix.test.fr/rejoindre?invitationId=1&code=ABCDEF123');
         window.localStorage.setItem(
           key,
           JSON.stringify({

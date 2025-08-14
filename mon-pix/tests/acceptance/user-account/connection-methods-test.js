@@ -3,7 +3,7 @@ import { click, fillIn, settled, triggerEvent } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -47,7 +47,8 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
       // given
       const garUser = server.create('user', 'external');
       server.create('authentication-method', 'withGarIdentityProvider', { user: garUser });
-      sinon.stub(PixWindow, 'getLocationHash').returns(generateGarAuthenticationURLHash(garUser));
+      sinon.stub(Location, 'getHref').returns(`https://pix.fr/#${generateGarAuthenticationURLHash(garUser)}`);
+
       await authenticateByGAR(garUser);
 
       // when

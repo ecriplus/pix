@@ -1,5 +1,5 @@
 import { setupTest } from 'ember-qunit';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -177,13 +177,7 @@ module('Unit | Service | currentDomain', function (hooks) {
 
 function _stubWindowUrl(owner, url) {
   const newUrl = new URL(url);
-  sinon.stub(PixWindow, 'getLocationHash').returns(newUrl.hash);
-  sinon.stub(PixWindow, 'getLocationHost').returns(newUrl.host);
-  sinon.stub(PixWindow, 'getLocationHostname').returns(newUrl.hostname);
-  sinon.stub(PixWindow, 'getLocationHref').returns(newUrl.href);
-  sinon.stub(PixWindow, 'reload');
-  sinon.stub(PixWindow, 'replace');
-
-  const locationService = owner.lookup('service:location');
-  sinon.stub(locationService, 'href').value(url);
+  sinon.stub(Location, 'getHref').returns(newUrl.href);
+  sinon.stub(Location, 'reload');
+  sinon.stub(Location, 'replace');
 }

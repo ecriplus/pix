@@ -1,14 +1,13 @@
-import Service, { service } from '@ember/service';
+import Service from '@ember/service';
 import last from 'lodash/last';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 
 const FRANCE_TLD = 'fr';
 
 export default class CurrentDomainService extends Service {
-  @service location;
-
   getExtension() {
-    return last(PixWindow.getLocationHostname().split('.'));
+    const { hostname } = new URL(Location.getHref());
+    return last(hostname.split('.'));
   }
 
   get isFranceDomain() {
@@ -16,7 +15,7 @@ export default class CurrentDomainService extends Service {
   }
 
   get domain() {
-    const { host, hostname } = new URL(this.location.href);
+    const { host, hostname } = new URL(Location.getHref());
 
     if (this.isLocalhost) return hostname;
 
@@ -24,15 +23,17 @@ export default class CurrentDomainService extends Service {
   }
 
   get isLocalhost() {
-    return PixWindow.getLocationHostname() === 'localhost';
+    const { hostname } = new URL(Location.getHref());
+
+    return hostname === 'localhost';
   }
 
   convertUrlToOrgDomain() {
     if (!this.isFranceDomain || this.isLocalhost) {
-      return PixWindow.getLocationHref();
+      return Location.getHref();
     }
 
-    const url = new URL(PixWindow.getLocationHref());
+    const url = new URL(Location.getHref());
     url.hostname = `${url.hostname.split('.fr')[0]}.org`;
     return url.toString();
   }

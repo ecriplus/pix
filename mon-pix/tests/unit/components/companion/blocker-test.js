@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import createGlimmerComponent from 'mon-pix/tests/helpers/create-glimmer-component';
-import PixWindow from 'mon-pix/utils/pix-window';
+import Location from 'mon-pix/utils/location';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -149,7 +149,7 @@ module('Unit | Component | Companion | Blocker', function (hooks) {
     let reloadStub;
 
     hooks.beforeEach(function () {
-      reloadStub = sinon.stub(PixWindow, 'reload');
+      reloadStub = sinon.stub(Location, 'reload');
     });
 
     hooks.afterEach(function () {

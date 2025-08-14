@@ -5,13 +5,13 @@ import ENV from 'mon-pix/config/environment';
 import { createTranslatedApplicationError } from 'mon-pix/errors/factories/create-application-error';
 import JSONApiError from 'mon-pix/errors/json-api-error';
 
+import Location from '../../utils/location';
 import { SessionStorageEntry } from '../../utils/session-storage-entry';
 
 const oidcUserAuthenticationStorage = new SessionStorageEntry('oidcUserAuthentication');
 
 export default class LoginOidcRoute extends Route {
   @service intl;
-  @service location;
   @service oidcIdentityProviders;
   @service router;
   @service session;
@@ -93,7 +93,7 @@ export default class LoginOidcRoute extends Route {
       `${ENV.APP.API_HOST}/api/oidc/authorization-url?identity_provider=${identityProvider.code}`,
     );
     const { redirectTarget: authorizationUrl } = await response.json();
-    this.location.assign(authorizationUrl);
+    Location.assign(authorizationUrl);
   }
 
   async _handleOidcCallbackRequest({ identityProvider, code, state, iss }) {
