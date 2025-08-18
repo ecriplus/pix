@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.185.0](https://github.com/1024pix/pix/compare/v5.184.0...v5.185.0) (2025-08-18)
+
+### :rocket: Amélioration
+
+- [#13196](https://github.com/1024pix/pix/pull/13196) Envoyer les sections de module au client (PIX-19149) 
+- [#13182](https://github.com/1024pix/pix/pull/13182) Supprimer l'ancien feedback utilisateur lors de la certification sur Pix App (PIX-19133). 
+
+### :bug: Correction
+
+- [#13198](https://github.com/1024pix/pix/pull/13198) Ne pas afficher les boutons d'action lors de la prévisualisation de module existant (PIX-19127) 
+
+### :building_construction: Tech
+
+- [#13178](https://github.com/1024pix/pix/pull/13178) Ajouter un test e2e pour un parcours combiné (PIX-19121) 
+- [#13194](https://github.com/1024pix/pix/pull/13194) Corriger le test flaky affichant le moment ou l'utilisateur peut repasser son parcours (PIX-19150). 
+
+### :arrow_up: Montée de version
+
+- [#13193](https://github.com/1024pix/pix/pull/13193) Update dependency @1024pix/epreuves-components to 0.9.5
+
 # [5.184.0](https://github.com/1024pix/pix/compare/v5.183.0...v5.184.0) (2025-08-14)
 
 ### :rocket: Amélioration
