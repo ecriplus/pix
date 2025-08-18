@@ -149,7 +149,7 @@ class FeaturesSection extends Component {
   @service intl;
 
   attestationLabels = (attestations) => {
-    return attestations.map((name) =>
+    return attestations?.map((name) =>
       this.intl.t(`components.organizations.information-section-view.features.attestation-list.${name}`),
     );
   };
