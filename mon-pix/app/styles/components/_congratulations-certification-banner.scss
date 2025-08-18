@@ -31,7 +31,7 @@
   }
 }
 
-.congratulations-banner__complementary-certifications {
+.congratulations-banner__double-certification {
   display: flex;
   flex-direction: column;
   margin: var(--pix-spacing-2x);
@@ -40,13 +40,13 @@
   border-radius: 16px;
 }
 
-.congratulations-banner-complementary-certifications__icons {
+.congratulations-banner-double-certification__icons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.congratulations-banner-complementary-certifications__icons img {
+.congratulations-banner-double-certification__icons img {
   max-height: 64px;
   margin-right: 16px;
 
@@ -55,7 +55,7 @@
   }
 }
 
-.congratulations-banner-complementary-certifications__list {
+.congratulations-banner-double-certification__list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -68,13 +68,13 @@
   }
 }
 
-.congratulations-banner-complementary-certifications-list__message {
+.congratulations-banner-double-certification-list__message {
   margin: 0;
   font-size: 1rem;
   line-height: 22px;
 }
 
-.congratulations-banner-complementary-certifications-list__labels {
+.congratulations-banner-double-certification-list__labels {
   width: fit-content;
   margin: 0;
   font-size: 1rem;
@@ -115,7 +115,7 @@
   }
 }
 
-.oudated-complementary-certification-banner {
+.oudated-double-certification-banner {
   margin-top: var(--pix-spacing-4x);
 
   &__row {

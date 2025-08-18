@@ -797,9 +797,9 @@
     },
     "certification-joiner": {
       "congratulation-banner": {
-        "complementary-certification": {
-          "eligible": "También eres elegible { count, plural, =1 {a la certificación complementaria} other {a las certificaciones complementarias} }:",
-          "outdated": "<strong>Ya no eres elegible para la certificación {complementaryCertificationName} después de su evolución.</strong><br />Ponte de nuevo en contacto con tu centro o la organización que te ofreció el test para realizar de nuevo una campaña y volver a ser elegible. Tu progreso se ha conservado y solo tendrás que hacer las pruebas nuevas, debería ir rápido."
+        "double-certification": {
+          "eligible": "También eres elegible a la certificación complementaria :",
+          "outdated": "<strong>Ya no eres elegible para la certificación {doubleCertificationName} después de su evolución.</strong><br />Ponte de nuevo en contacto con tu centro o la organización que te ofreció el test para realizar de nuevo una campaña y volver a ser elegible. Tu progreso se ha conservado y solo tendrás que hacer las pruebas nuevas, debería ir rápido."
         },
         "link": {
           "text": "¿Cómo puedo obtener el certificado?",

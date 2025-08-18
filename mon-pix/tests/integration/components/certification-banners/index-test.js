@@ -7,25 +7,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Certification Banners | index.js', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when there are eligible complementary certifications', function () {
+  module('when there is eligible double certification', function () {
     test(`should render the complementary certification eligibility special message and picture`, async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const certificationEligibility = store.createRecord('is-certifiable', {
-        complementaryCertifications: [
-          {
-            label: 'CléA Numérique',
-            imageUrl: 'http://www.image-clea.com',
-            isOutdated: false,
-            isAcquiredExpectedLevel: false,
-          },
-          {
-            label: 'Pix+ Droit',
-            imageUrl: 'http://www.image-droit.com',
-            isOutdated: false,
-            isAcquiredExpectedLevel: true,
-          },
-        ],
+        doubleCertificationEligibility: {
+          label: 'CléA Numérique',
+          imageUrl: 'http://www.image-clea.com',
+          isBadgeValid: true,
+          validatedDoubleCertification: false,
+        },
       });
       this.set('certificationEligibility', certificationEligibility);
       this.set('fullName', 'Fifi Brindacier');
@@ -41,28 +33,24 @@ module('Integration | Component | Certification Banners | index.js', function (h
       );
 
       // then
-      assert.ok(screen.getByText('Vous êtes également éligible aux certifications complémentaires :'));
+      assert.ok(screen.getByText('Vous êtes également éligible à la certification complémentaire :'));
       assert.ok(screen.getByText('CléA Numérique'));
       assert.ok(screen.getByRole('img', { name: 'CléA Numérique' }));
-      assert.ok(screen.getByText('Pix+ Droit'));
-      assert.ok(screen.getByRole('img', { name: 'Pix+ Droit' }));
     });
   });
 
-  module('when there is an outdated complementary certification', function () {
+  module('when there is an outdated double certification', function () {
     module('when the outdated complementary certification is acquired', function () {
       test(`should not render the outdated complementary certification eligibility special message and picture`, async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
         const certificationEligibility = store.createRecord('is-certifiable', {
-          complementaryCertifications: [
-            {
-              label: 'CléA Numérique',
-              imageUrl: 'http://www.image-clea.com',
-              isOutdated: true,
-              isAcquiredExpectedLevel: true,
-            },
-          ],
+          doubleCertificationEligibility: {
+            label: 'CléA Numérique',
+            imageUrl: 'http://www.image-clea.com',
+            isBadgeValid: false,
+            validatedDoubleCertification: true,
+          },
         });
         this.set('certificationEligibility', certificationEligibility);
         this.set('fullName', 'Fifi Brindacier');
@@ -96,14 +84,12 @@ module('Integration | Component | Certification Banners | index.js', function (h
         // given
         const store = this.owner.lookup('service:store');
         const certificationEligibility = store.createRecord('is-certifiable', {
-          complementaryCertifications: [
-            {
-              label: 'CléA Numérique',
-              imageUrl: 'http://www.image-clea.com',
-              isOutdated: true,
-              isAcquiredExpectedLevel: false,
-            },
-          ],
+          doubleCertificationEligibility: {
+            label: 'CléA Numérique',
+            imageUrl: 'http://www.image-clea.com',
+            isBadgeValid: false,
+            validatedDoubleCertification: false,
+          },
         });
         this.set('certificationEligibility', certificationEligibility);
         this.set('fullName', 'Fifi Brindacier');

@@ -1,12 +1,16 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import t from 'ember-intl/helpers/t';
+import EligibleDoubleCertificationBanner from 'mon-pix/components/certification-banners/eligible-double-certification-banner';
+
 <template>
   <div class="congratulations-banner">
     <p class="congratulations-banner__message">
       {{t "pages.certification-joiner.congratulation-banner.message" fullName=@fullName htmlSafe=true}}
     </p>
-    {{yield to="eligibleComplementaryCertifications"}}
+    {{#if @doubleCertification.isBadgeValid}}
+      <EligibleDoubleCertificationBanner @doubleCertification={{@doubleCertification}} />
+    {{/if}}
     <div class="congratulations-banner__links">
       <PixButtonLink
         @href={{t "pages.certification-joiner.congratulation-banner.link.url"}}

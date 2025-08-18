@@ -802,9 +802,9 @@
     },
     "certification-joiner": {
       "congratulation-banner": {
-        "complementary-certification": {
-          "eligible": "Vous êtes également éligible { count, plural, =1 {à la certification complémentaire} other {aux certifications complémentaires} } :",
-          "outdated": "<strong>Vous n'êtes plus éligible à la certification {complementaryCertificationName} suite à son évolution.</strong><br />Recontactez votre établissement ou l’organisation vous ayant proposé le parcours afin de repasser une campagne et ainsi redevenir éligible. Votre progression a été conservée et vous n'aurez qu'à jouer les nouvelles épreuves, cela devrait être rapide."
+        "double-certification": {
+          "eligible": "Vous êtes également éligible à la certification complémentaire :",
+          "outdated": "<strong>Vous n'êtes plus éligible à la certification {doubleCertificationName} suite à son évolution.</strong><br />Recontactez votre établissement ou l’organisation vous ayant proposé le parcours afin de repasser une campagne et ainsi redevenir éligible. Votre progression a été conservée et vous n'aurez qu'à jouer les nouvelles épreuves, cela devrait être rapide."
         },
         "link": {
           "text": "Comment se certifier ?",
