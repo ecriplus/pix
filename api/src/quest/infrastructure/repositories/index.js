@@ -9,6 +9,7 @@ import * as targetProfilesApi from '../../../prescription/target-profile/applica
 import * as profileRewardApi from '../../../profile/application/api/profile-reward-api.js';
 import * as rewardApi from '../../../profile/application/api/reward-api.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
+import * as accessCodeRepository from '../../../shared/infrastructure/repositories/access-code-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import * as campaignRepository from './campaign-repository.js';
 import * as combinedCourseParticipantRepository from './combined-course-participant-repository.js';
@@ -26,6 +27,7 @@ import * as userRepository from './user-repository.js';
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
 const repositoriesWithoutInjectedDependencies = {
+  accessCodeRepository,
   eligibilityRepository,
   moduleRepository,
   successRepository,

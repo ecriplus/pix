@@ -1,8 +1,10 @@
+import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
 
 const dependencies = {
+  accessCodeRepository: repositories.accessCodeRepository,
   eligibilityRepository: repositories.eligibilityRepository,
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
@@ -14,10 +16,13 @@ const dependencies = {
   recommendedModulesRepository: repositories.recommendedModulesRepository,
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
+  targetProfileRepository: repositories.targetProfileRepository,
+  codeGenerator,
   logger,
 };
 
 import { checkUserQuest } from './check-user-quest-success.js';
+import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
 import { getCombinedCourseByCode } from './get-combined-course-by-code.js';
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
@@ -35,6 +40,7 @@ const usecasesWithoutInjectedDependencies = {
   rewardUser,
   startCombinedCourse,
   updateCombinedCourse,
+  createCombinedCourses,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
