@@ -1,7 +1,6 @@
-import dayjs from 'dayjs';
-
 import { knex } from '../../../../db/knex-database-connection.js';
 import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
+import { getVersionNumber } from '../../../certification/configuration/domain/services/get-version-number.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
@@ -118,7 +117,7 @@ export async function findActiveFlashCompatible({
   let challengeDtos;
 
   if (hasComplementaryReferential) {
-    const version = dayjs(date).format('YYYYMMDDHHmmss');
+    const version = getVersionNumber(date);
 
     challengeDtos = await _findChallengesForComplementaryCertification({
       complementaryCertificationKey,

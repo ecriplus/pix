@@ -1578,6 +1578,53 @@ describe('Integration | Repository | challenge-repository', function () {
       });
     });
 
+    context('when complementary certification given without date', function () {
+      it('returns the most recent flash compatible challenges that link to complementary ', async function () {
+        // given
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
+        const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.pixEdu1erDegre(
+          {},
+        );
+
+        challengesLC.push(domainBuilder.buildChallenge({ id: 'toto' }));
+
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[0].id,
+          version: '20250423125634',
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: otherComplementaryCertification.key,
+          challengeId: challengesLC[3].id,
+          version: '20250423125634',
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[1].id,
+          version: '20200423125634',
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
+          locale: 'fr',
+          complementaryCertificationKey: complementaryCertification.key,
+          hasComplementaryReferential: complementaryCertification.hasComplementaryReferential,
+        });
+
+        // then
+        expect(flashCompatibleChallenges).to.have.lengthOf(1);
+        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[0].id);
+        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
+        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
+      });
+    });
+
     context('when locale is not defined', function () {
       it('should throw an Error', async function () {
         // given
