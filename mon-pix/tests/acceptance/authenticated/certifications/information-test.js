@@ -26,9 +26,8 @@ module('Acceptance | Certifications | Information', function (hooks) {
       server.create('certification-candidate-subscription', {
         id: '2',
         sessionId: 123,
-        eligibleSubscriptions: null,
-        nonEligibleSubscription: null,
-        sessionVersion: 3,
+        enrolledDoubleCertificationLabel: null,
+        doubleCertificationEligibility: false,
       });
 
       await authenticateByEmail(user);
@@ -61,9 +60,8 @@ module('Acceptance | Certifications | Information', function (hooks) {
         server.create('certification-candidate-subscription', {
           id: '2',
           sessionId: 123,
-          eligibleSubscriptions: null,
-          nonEligibleSubscription: null,
-          sessionVersion: 3,
+          enrolledDoubleCertificationLabel: null,
+          doubleCertificationEligibility: false,
         });
 
         await authenticateByEmail(user);
@@ -102,9 +100,8 @@ module('Acceptance | Certifications | Information', function (hooks) {
         server.create('certification-candidate-subscription', {
           id: '2',
           sessionId: 123,
-          eligibleSubscriptions: null,
-          nonEligibleSubscription: null,
-          sessionVersion: 3,
+          enrolledDoubleCertificationLabel: null,
+          doubleCertificationEligibility: false,
         });
 
         const candidateLastName = 'hasSeenCertificationInstructions';
@@ -135,9 +132,8 @@ module('Acceptance | Certifications | Information', function (hooks) {
         server.create('certification-candidate-subscription', {
           id: '2',
           sessionId: 123,
-          eligibleSubscriptions: null,
-          nonEligibleSubscription: null,
-          sessionVersion: 3,
+          enrolledDoubleCertificationLabel: null,
+          doubleCertificationEligibility: false,
         });
         await authenticateByEmail(user);
         const screen = await visit('/certifications');

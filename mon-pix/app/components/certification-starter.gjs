@@ -9,55 +9,37 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
-import gt from 'ember-truth-helpers/helpers/gt';
 
 export default class CertificationStarter extends Component {
   <template>
     <section class="certification-starter">
       <h1 class="certification-start-page__title">{{t "pages.certification-start.first-title"}}</h1>
 
-      {{#if @certificationCandidateSubscription.hasSubscription}}
-        {{#unless @certificationCandidateSubscription.isV3CoreOnly}}
-          <div class="certification-starter-subscriptions">
-            <div class="certification-starter-subscriptions-container">
-              <p class="certification-starter-subscriptions-container-title">
-                {{this.subscriptionTitle}}
-              </p>
-              <div class="certification-starter-subscriptions-container-items">
-
-                {{#if (gt @certificationCandidateSubscription.eligibleSubscriptions.length 0)}}
-                  <span class="certification-starter-subscriptions-container-items__eligible-item">
-                    <PixIcon
-                      @name="checkCircle"
-                      @plainIcon={{true}}
-                      @ariaHidden={{true}}
-                      class="certification-starter-subscriptions-container-items__eligible-icon"
-                    />
-                    {{this.complementarySubscriptionLabel}}
-                  </span>
-                {{else}}
-                  <span class="certification-starter-subscriptions-container-items__non-eligible-item">
-                    <PixIcon
-                      @name="checkCircle"
-                      @plainIcon={{true}}
-                      @ariaHidden={{true}}
-                      class="certification-starter-subscriptions-container-items__non-eligible-icon"
-                    />
-                    {{@certificationCandidateSubscription.nonEligibleSubscription.label}}
-                  </span>
-                {{/if}}
-              </div>
-            </div>
-            {{#if @certificationCandidateSubscription.nonEligibleSubscription}}
-              <PixNotificationAlert @type="warning" @withIcon={{true}}>
-                {{t
-                  "pages.certification-start.non-eligible-subscription"
-                  nonEligibleSubscriptionLabel=@certificationCandidateSubscription.nonEligibleSubscription.label
-                }}
-              </PixNotificationAlert>
-            {{/if}}
+      {{#if @certificationCandidateSubscription.displaySubscriptionInformation}}
+        <div class="certification-starter-subscriptions">
+          <div class="certification-starter-subscriptions-container">
+            <p class="certification-starter-subscriptions-container-title">
+              {{t "pages.certification-start.core-and-complementary-subscriptions"}}
+            </p>
+            <span class="certification-starter-subscriptions-container-items__{{this.eligibilityState}}">
+              <PixIcon
+                @name="checkCircle"
+                @plainIcon={{true}}
+                @ariaHidden={{true}}
+                class="certification-starter-subscriptions-container-items__{{this.eligibilityState}}-icon"
+              />
+              {{this.complementarySubscriptionLabel}}
+            </span>
           </div>
-        {{/unless}}
+          {{#unless @certificationCandidateSubscription.isEligibleToDoubleCertification}}
+            <PixNotificationAlert @type="warning" @withIcon={{true}}>
+              {{t
+                "pages.certification-start.non-eligible-subscription"
+                complementarySubscriptionLabel=this.complementarySubscriptionLabel
+              }}
+            </PixNotificationAlert>
+          {{/unless}}
+        </div>
       {{/if}}
 
       <form class="certification-start-page__form" autocomplete="off">
@@ -76,7 +58,7 @@ export default class CertificationStarter extends Component {
         />
 
         {{#if this.apiErrorMessage}}
-          <PixNotificationAlert @type="error" @withIcon={{true}} class="certification-start-page__error-message">
+          <PixNotificationAlert @type="error" class="certification-start-page__error-message">
             {{this.apiErrorMessage}}
           </PixNotificationAlert>
         {{/if}}
@@ -125,17 +107,11 @@ export default class CertificationStarter extends Component {
   }
 
   get complementarySubscriptionLabel() {
-    return this.args.certificationCandidateSubscription.eligibleSubscriptions.find(
-      (subscription) => subscription.type === 'COMPLEMENTARY',
-    ).label;
+    return this.args.certificationCandidateSubscription.enrolledDoubleCertificationLabel;
   }
 
-  get subscriptionTitle() {
-    const { isV3CoreAndComplementary } = this.args.certificationCandidateSubscription;
-
-    const intlSuffix = isV3CoreAndComplementary ? 'core-and-complementary-subscriptions' : 'complementary-subscription';
-
-    return this.intl.t(`pages.certification-start.${intlSuffix}`);
+  get eligibilityState() {
+    return this.args.certificationCandidateSubscription.isEligibleToDoubleCertification ? 'eligible' : 'non-eligible';
   }
 
   @action
@@ -188,6 +164,8 @@ export default class CertificationStarter extends Component {
           this.apiErrorMessage = this.intl.t(
             'pages.certification-start.error-messages.candidate-not-authorized-to-resume',
           );
+        } else if (errorCode === 'CENTER_HABILITATION_ERROR') {
+          this.apiErrorMessage = this.intl.t('pages.certification-joiner.error-messages.missing-center-habilitation');
         }
       } else {
         // This should not happen, but in case it does, let give as much info as possible

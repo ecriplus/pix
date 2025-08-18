@@ -172,7 +172,6 @@ import { buildCenter as buildConfigurationCenter } from './certification/configu
 import { buildCertificationFrameworksChallenge } from './certification/configuration/build-certification-frameworks-challenge.js';
 import { buildConsolidatedFramework } from './certification/configuration/build-consolidated-framework.js';
 import { buildCandidate } from './certification/enrolment/build-candidate.js';
-import { buildCertificationEligibilityEnrolment } from './certification/enrolment/build-certification-eligibility.js';
 import { buildComplementaryCertificationBadgeWithOffsetVersion as buildComplementaryCertificationBadgeForEnrolment } from './certification/enrolment/build-complementary-certification-badge.js';
 import { buildComplementaryCertificationCourseWithResultsEnrolment } from './certification/enrolment/build-complementary-certification-course-with-results.js';
 import { buildEditedCandidate } from './certification/enrolment/build-edited-candidate.js';
@@ -257,7 +256,6 @@ const certification = {
     buildEditedCandidate,
     buildSubscription,
     buildUser: buildUserEnrolment,
-    buildCertificationEligibility: buildCertificationEligibilityEnrolment,
     buildComplementaryCertificationCourseWithResults: buildComplementaryCertificationCourseWithResultsEnrolment,
     buildUserCertificationEligibility,
     buildV3CertificationEligibility,

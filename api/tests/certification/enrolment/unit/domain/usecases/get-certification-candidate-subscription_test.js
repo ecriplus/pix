@@ -5,12 +5,11 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 describe('Certification | Enrolment | Unit | Domain | UseCase | get-certification-candidate-subscription', function () {
   let certificationBadgesService;
   let certificationCandidateRepository;
-  let centerRepository;
+  let certificationCenterRepository;
   let certificationCandidateData;
   const certificationCandidateId = 123;
   const userId = 456;
   const sessionId = 789;
-  let sessionRepository;
 
   beforeEach(function () {
     certificationBadgesService = {
@@ -20,8 +19,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
       getWithComplementaryCertification: sinon.stub(),
     };
 
-    centerRepository = {
-      getById: sinon.stub(),
+    certificationCenterRepository = {
+      getBySessionId: sinon.stub(),
     };
 
     certificationCandidateData = {
@@ -30,10 +29,6 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
       sessionId,
       subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
       reconciledAt: new Date('2024-10-09'),
-    };
-
-    sessionRepository = {
-      get: sinon.stub(),
     };
   });
 
@@ -50,20 +45,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
         .withArgs({ id: certificationCandidateId })
         .resolves(certificationCandidate);
 
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(
-        domainBuilder.certification.enrolment.buildSession({
-          certificationCenterId: 777,
-          version: 2,
-        }),
-      );
-
       // when
       const certificationCandidateSubscription = await getCertificationCandidateSubscription({
         certificationCandidateId,
         certificationBadgesService,
         certificationCandidateRepository,
-        centerRepository,
-        sessionRepository,
       });
 
       // then
@@ -101,20 +87,11 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
         .withArgs({ id: certificationCandidateId })
         .resolves(certificationCandidate);
 
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(
-        domainBuilder.certification.enrolment.buildSession({
-          certificationCenterId: 777,
-          version: 2,
-        }),
-      );
-
       // when
       const certificationCandidateSubscription = await getCertificationCandidateSubscription({
         certificationCandidateId,
         certificationBadgesService,
         certificationCandidateRepository,
-        centerRepository,
-        sessionRepository,
       });
 
       // then
@@ -130,81 +107,19 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
     });
   });
 
-  context('when the center is not habilitated for the candidate whatever complementary certification', function () {
-    it('returns an empty certification candidate subscription', async function () {
-      // given
-      const complementaryCertification = domainBuilder.buildComplementaryCertification({
-        key: ComplementaryCertificationKeys.CLEA,
-      });
-
-      const certificationCandidate = domainBuilder.buildCertificationCandidate({
-        ...certificationCandidateData,
-        complementaryCertification,
-        subscriptions: [
-          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId }),
-          domainBuilder.certification.enrolment.buildComplementarySubscription({
-            certificationCandidateId,
-            complementaryCertificationId: complementaryCertification.id,
-          }),
-        ],
-      });
-
-      const center = domainBuilder.certification.enrolment.buildCenter({
-        habilitations: [],
-      });
-
-      certificationCandidateRepository.getWithComplementaryCertification
-        .withArgs({ id: certificationCandidateId })
-        .resolves(certificationCandidate);
-
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(
-        domainBuilder.certification.enrolment.buildSession({
-          certificationCenterId: 777,
-          version: 2,
-        }),
-      );
-
-      centerRepository.getById.withArgs({ id: 777 }).resolves(center);
-
-      // when
-      const certificationCandidateSubscription = await getCertificationCandidateSubscription({
-        certificationCandidateId,
-        certificationBadgesService,
-        certificationCandidateRepository,
-        centerRepository,
-        sessionRepository,
-      });
-
-      // then
-      expect(certificationCandidateSubscription).to.deep.equal(
-        domainBuilder.buildCertificationCandidateSubscription({
-          id: certificationCandidateId,
-          sessionId,
-          eligibleSubscriptions: [],
-          nonEligibleSubscription: null,
-          sessionVersion: 2,
-        }),
-      );
-    });
-  });
-
-  context(
-    'when the candidate is enrolled to a simple certification but got the double certification badge',
-    function () {
+  context('when the candidate is enrolled to a double certification', function () {
+    context('when the center is not habilitated for the candidate complementary certification', function () {
       it('returns an empty certification candidate subscription', async function () {
         // given
         const complementaryCertification = domainBuilder.buildComplementaryCertification({
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-        });
-
-        const certifiableBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-          complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+          key: ComplementaryCertificationKeys.CLEA,
         });
 
         const certificationCandidate = domainBuilder.buildCertificationCandidate({
           ...certificationCandidateData,
           complementaryCertification,
           subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId }),
             domainBuilder.certification.enrolment.buildComplementarySubscription({
               certificationCandidateId,
               complementaryCertificationId: complementaryCertification.id,
@@ -213,33 +128,23 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
         });
 
         const center = domainBuilder.certification.enrolment.buildCenter({
-          habilitations: [complementaryCertification],
+          habilitations: [],
         });
 
         certificationCandidateRepository.getWithComplementaryCertification
           .withArgs({ id: certificationCandidateId })
           .resolves(certificationCandidate);
 
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(
-          domainBuilder.certification.enrolment.buildSession({
-            certificationCenterId: 777,
-            version: 2,
-          }),
-        );
-
-        centerRepository.getById.withArgs({ id: 777 }).resolves(center);
-
-        certificationBadgesService.findStillValidBadgeAcquisitions
-          .withArgs({ userId, limitDate: certificationCandidate.reconciledAt })
-          .resolves([certifiableBadgeAcquisition]);
+        certificationCenterRepository.getBySessionId
+          .withArgs({ sessionId: certificationCandidate.sessionId })
+          .resolves(center);
 
         // when
         const certificationCandidateSubscription = await getCertificationCandidateSubscription({
           certificationCandidateId,
           certificationBadgesService,
           certificationCandidateRepository,
-          centerRepository,
-          sessionRepository,
+          certificationCenterRepository,
         });
 
         // then
@@ -253,10 +158,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           }),
         );
       });
-    },
-  );
+    });
 
-  context('when the candidate is enrolled to a double certification', function () {
     context('but did not get the associated badge', function () {
       it('returns an uneligible double certification candidate subscription', async function () {
         // given
@@ -284,14 +187,9 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           .withArgs({ id: certificationCandidateId })
           .resolves(certificationCandidate);
 
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(
-          domainBuilder.certification.enrolment.buildSession({
-            certificationCenterId: 777,
-            version: 2,
-          }),
-        );
-
-        centerRepository.getById.withArgs({ id: 777 }).resolves(center);
+        certificationCenterRepository.getBySessionId
+          .withArgs({ sessionId: certificationCandidate.sessionId })
+          .resolves(center);
 
         certificationBadgesService.findStillValidBadgeAcquisitions
           .withArgs({ userId, limitDate: certificationCandidate.reconciledAt })
@@ -302,8 +200,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           certificationCandidateId,
           certificationBadgesService,
           certificationCandidateRepository,
-          centerRepository,
-          sessionRepository,
+          certificationCenterRepository,
         });
 
         // then
@@ -311,12 +208,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           domainBuilder.buildCertificationCandidateSubscription({
             id: certificationCandidateId,
             sessionId,
-            eligibleSubscriptions: [],
-            nonEligibleSubscription: {
-              label: 'Complementary certification name',
-              type: 'COMPLEMENTARY',
-            },
-            sessionVersion: 2,
+            enrolledDoubleCertificationLabel: 'Complementary certification name',
+            doubleCertificationEligibility: false,
           }),
         );
       });
@@ -368,14 +261,9 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           .withArgs({ id: certificationCandidateId })
           .resolves(certificationCandidate);
 
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(
-          domainBuilder.certification.enrolment.buildSession({
-            certificationCenterId: 777,
-            version: 2,
-          }),
-        );
-
-        centerRepository.getById.withArgs({ id: 777 }).resolves(center);
+        certificationCenterRepository.getBySessionId
+          .withArgs({ sessionId: certificationCandidate.sessionId })
+          .resolves(center);
 
         certificationBadgesService.findStillValidBadgeAcquisitions
           .withArgs({ userId, limitDate: certificationCandidate.reconciledAt })
@@ -386,8 +274,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           certificationCandidateId,
           certificationBadgesService,
           certificationCandidateRepository,
-          centerRepository,
-          sessionRepository,
+          certificationCenterRepository,
         });
 
         // then
@@ -395,18 +282,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
           domainBuilder.buildCertificationCandidateSubscription({
             id: certificationCandidateId,
             sessionId,
-            eligibleSubscriptions: [
-              {
-                label: null,
-                type: 'CORE',
-              },
-              {
-                label: 'Complementary certification name',
-                type: 'COMPLEMENTARY',
-              },
-            ],
-            nonEligibleSubscription: null,
-            sessionVersion: 2,
+            enrolledDoubleCertificationLabel: 'Complementary certification name',
+            doubleCertificationEligibility: true,
           }),
         );
       });

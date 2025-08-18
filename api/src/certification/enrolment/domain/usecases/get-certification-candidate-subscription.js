@@ -1,29 +1,25 @@
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidateSubscription } from '../read-models/CertificationCandidateSubscription.js';
 
 const getCertificationCandidateSubscription = async function ({
   certificationCandidateId,
   certificationBadgesService,
   certificationCandidateRepository,
-  centerRepository,
-  sessionRepository,
+  certificationCenterRepository,
 }) {
   const certificationCandidate = await certificationCandidateRepository.getWithComplementaryCertification({
     id: certificationCandidateId,
   });
 
-  const session = await sessionRepository.get({ id: certificationCandidate.sessionId });
-
   if (!certificationCandidate.isEnrolledToDoubleCertification()) {
-    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
+    return _emptyCertificationCandidateSubscription(certificationCandidate);
   }
 
-  const center = await centerRepository.getById({
-    id: session.certificationCenterId,
+  const center = await certificationCenterRepository.getBySessionId({
+    sessionId: certificationCandidate.sessionId,
   });
 
   if (!center.isHabilitated(certificationCandidate.complementaryCertification.key)) {
-    return _emptyCertificationCandidateSubscription(certificationCandidate, session);
+    return _emptyCertificationCandidateSubscription(certificationCandidate);
   }
 
   const certifiableBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
@@ -33,53 +29,41 @@ const getCertificationCandidateSubscription = async function ({
 
   const [doubleCertificationCertifiableBadgeAcquisition] = certifiableBadgeAcquisitions.filter(
     (certifiableBadgeAcquisition) =>
-      certifiableBadgeAcquisition.complementaryCertificationKey === ComplementaryCertificationKeys.CLEA,
+      certifiableBadgeAcquisition.complementaryCertificationKey ===
+      certificationCandidate.complementaryCertification.key,
   );
 
   if (!doubleCertificationCertifiableBadgeAcquisition) {
-    return _uneligibleCertificationCandidateSubscription(certificationCandidate, session);
+    return _uneligibleCertificationCandidateSubscription(certificationCandidate);
   }
 
-  return _eligibleCertificationCandidateSubscriptions(certificationCandidate, session);
+  return _eligibleCertificationCandidateSubscriptions(certificationCandidate);
 };
 
-function _emptyCertificationCandidateSubscription(candidate, session) {
+function _emptyCertificationCandidateSubscription(candidate) {
   return new CertificationCandidateSubscription({
     id: candidate.id,
     sessionId: candidate.sessionId,
-    eligibleSubscriptions: [],
-    nonEligibleSubscription: null,
-    sessionVersion: session.version,
+    enrolledDoubleCertificationLabel: null,
+    doubleCertificationEligibility: false,
   });
 }
 
-function _uneligibleCertificationCandidateSubscription(candidate, session) {
+function _uneligibleCertificationCandidateSubscription(candidate) {
   return new CertificationCandidateSubscription({
     id: candidate.id,
     sessionId: candidate.sessionId,
-    eligibleSubscriptions: [],
-    nonEligibleSubscription: {
-      label: candidate.complementaryCertification.label,
-      type: 'COMPLEMENTARY',
-    },
-    sessionVersion: session.version,
+    enrolledDoubleCertificationLabel: candidate.complementaryCertification.label,
+    doubleCertificationEligibility: false,
   });
 }
 
-function _eligibleCertificationCandidateSubscriptions(candidate, session) {
-  const eligibleSubscriptions = candidate.subscriptions.map((subscription) => {
-    return {
-      label: subscription.type === 'COMPLEMENTARY' ? candidate.complementaryCertification.label : null,
-      type: subscription.type,
-    };
-  });
-
+function _eligibleCertificationCandidateSubscriptions(candidate) {
   return new CertificationCandidateSubscription({
     id: candidate.id,
     sessionId: candidate.sessionId,
-    eligibleSubscriptions,
-    nonEligibleSubscription: null,
-    sessionVersion: session.version,
+    enrolledDoubleCertificationLabel: candidate.complementaryCertification.label,
+    doubleCertificationEligibility: true,
   });
 }
 
