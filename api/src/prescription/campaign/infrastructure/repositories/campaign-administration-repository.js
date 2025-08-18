@@ -97,7 +97,7 @@ const _update = async function (campaign, attributes) {
 const save = async function (campaigns, dependencies = { skillRepository }) {
   const trx = await knex.transaction();
   const campaignsToCreate = _.isArray(campaigns) ? campaigns : [campaigns];
-
+  const createdCampaigns = [];
   try {
     let latestCreatedCampaign;
     for (const campaign of campaignsToCreate) {
@@ -132,9 +132,11 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
         }
         await knex.batchInsert('campaign_skills', skillData).transacting(trx);
       }
+
+      createdCampaigns.push(latestCreatedCampaign);
     }
     await trx.commit();
-    return latestCreatedCampaign;
+    return createdCampaigns.length > 1 ? createdCampaigns : createdCampaigns[0];
   } catch (err) {
     await trx.rollback();
     throw err;

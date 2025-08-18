@@ -34,21 +34,29 @@ import { SavedCampaign } from './models/SavedCampaign.js';
  * @function
  * @name save
  *
- * @param {CampaignPayload} campaign
- * @returns {Promise<SavedCampaign>}
+ * @param {CampaignPayload|Array<CampaignPayload>} campaigns
+ * @returns {Promise<SavedCampaign|Array<CampaignPayload>>}
  * @throws {UserNotAuthorizedToCreateCampaignError} to be improved to handle different error types
  */
-export const save = async (campaign) => {
-  const savedCampaign = await usecases.createCampaign({
-    campaign: {
-      ...campaign,
-      type: 'ASSESSMENT',
-      ownerId: campaign.creatorId,
-      multipleSendings: false,
-    },
-  });
+export const save = async (campaigns) => {
+  if (Array.isArray(campaigns)) {
+    const savedCampaign = await usecases.createCampaigns({
+      campaignsToCreate: campaigns,
+    });
 
-  return new SavedCampaign(savedCampaign);
+    return savedCampaign.map((campaign) => new SavedCampaign(campaign));
+  } else {
+    const savedCampaign = await usecases.createCampaign({
+      campaign: {
+        ...campaigns,
+        type: 'ASSESSMENT',
+        ownerId: campaigns.creatorId,
+        multipleSendings: false,
+      },
+    });
+
+    return new SavedCampaign(savedCampaign);
+  }
 };
 
 /**
