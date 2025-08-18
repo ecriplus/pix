@@ -949,13 +949,16 @@
         "banner": {
           "certification-number": "Certification no."
         },
-        "feedback-panel": {
-          "certification-number": "your certification number (in the top-right of the screen)",
-          "description": "To report a problem, please call your invigilator and provide the following information:",
-          "problem": "the problem encountered",
-          "question-number": "the question number (in the top-right of the screen)"
-        },
         "title": "Certification {certificationNumber}"
+      },
+      "certification-feedback-panel": {
+        "actions": {
+          "no-send-feedback": "No, I'm coming back to the test",
+          "open-close": "Report a problem with the question",
+          "send-feedback": "Yes, I'm sure"
+        },
+        "description": "Are you sure you want to report a problem?",
+        "information": "By reporting a problem, your certification is paused while the invigilator intervenes to validate or invalidate your report"
       },
       "embed-simulator": {
         "actions": {
@@ -1065,15 +1068,6 @@
           "content": "'<p><strong>'Do you confirm this problem report?'</strong></p><p>'Thank you for this problem report, our team will review it soon. Every feedback helps us improve our services and the experience of all Pix users. Please note that we will not reach out to you on this topic. Thank you for your help.'</p>'",
           "title": "Report confirmation"
         }
-      },
-      "feedback-panel-v3": {
-        "actions": {
-          "no-send-feedback": "No, I'm coming back to the test",
-          "open-close": "Report a problem with the question",
-          "send-feedback": "Yes, I'm sure"
-        },
-        "description": "Are you sure you want to report a problem?",
-        "information": "By reporting a problem, your certification is paused while the invigilator intervenes to validate or invalidate your report"
       },
       "has-focused-out-of-window": {
         "certification": "We have detected a page switch. Your answer will not be validated. If you have been forced to change pages, please inform your invigilator and answer the question in their presence.",

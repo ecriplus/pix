@@ -948,12 +948,6 @@
         "banner": {
           "certification-number": "Certificeringsnummer"
         },
-        "feedback-panel": {
-          "certification-number": "je certificeringsnummer (rechtsboven in het scherm)",
-          "description": "Om een probleem te melden, bel je je supervisor en geef je hem de volgende informatie:",
-          "problem": "het ondervonden probleem",
-          "question-number": "het vraagnummer (rechtsboven in het scherm)"
-        },
         "title": "Certificering {certificationNumber}"
       },
       "embed-simulator": {
@@ -965,7 +959,7 @@
         },
         "placeholder": "De huidige toepassing laden"
       },
-      "feedback-panel-v3": {
+      "certification-feedback-panel": {
         "actions": {
           "no-send-feedback": "Nee, ik kom terug op de test",
           "open-close": "Een probleem met de vraag melden",
