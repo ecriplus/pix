@@ -91,12 +91,16 @@ export default class ModulixPreview extends Component {
     }
   }
 
+  get previewingExistingModule() {
+    return this.args.module !== undefined;
+  }
+
   get passage() {
     return this.store.createRecord('passage');
   }
 
   get formattedModule() {
-    if (this.args.module) {
+    if (this.previewingExistingModule) {
       return this.args.module;
     }
 
@@ -137,21 +141,23 @@ export default class ModulixPreview extends Component {
   <template>
     {{pageTitle this.formattedModule.title}}
 
-    <div class="module-preview__buttons">
-      <PixButton @triggerAction={{this.toggleModuleCodeEditor}}>
-        {{t "pages.modulix.preview.showJson"}}
-      </PixButton>
+    {{#unless this.previewingExistingModule}}
+      <div class="module-preview__buttons">
+        <PixButton @triggerAction={{this.toggleModuleCodeEditor}}>
+          {{t "pages.modulix.preview.showJson"}}
+        </PixButton>
 
-      <PixButtonLink
-        @variant="secondary"
-        @href="https://1024pix.github.io/modulix-editor/"
-        @size="small"
-        target="_blank"
-      >
-        {{! template-lint-disable "no-bare-strings" }}
-        Modulix Editor
-      </PixButtonLink>
-    </div>
+        <PixButtonLink
+          @variant="secondary"
+          @href="https://1024pix.github.io/modulix-editor/"
+          @size="small"
+          target="_blank"
+        >
+          {{! template-lint-disable "no-bare-strings" }}
+          Modulix Editor
+        </PixButtonLink>
+      </div>
+    {{/unless}}
 
     <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">
       <aside class="module-preview__passage">

@@ -51,5 +51,17 @@ module('Integration | Component | Module | Preview', function (hooks) {
       // then
       assert.dom(screen.getByRole('heading', { name: 'Existing module' })).exists();
     });
+
+    test('should not display the navbar', async function (assert) {
+      // given
+      const moduleData = { title: 'Existing module' };
+      const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+      // then
+      const linkToModulixEditor = screen.queryByRole('link', { name: 'Modulix Editor' });
+      assert.dom(linkToModulixEditor).doesNotExist();
+      const displayJsonButton = screen.queryByRole('button', { name: 'Afficher le JSON' });
+      assert.dom(displayJsonButton).doesNotExist();
+    });
   });
 });
