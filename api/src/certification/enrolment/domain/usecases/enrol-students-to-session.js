@@ -30,6 +30,9 @@ const enrolStudentsToSession = async function ({
   centerRepository,
   countryRepository,
   sessionRepository,
+  certificationCpfCityRepository,
+  certificationCpfCountryRepository,
+  certificationCpfService,
 } = {}) {
   const session = await sessionRepository.get({ id: sessionId });
   const center = await centerRepository.getById({ id: session.certificationCenterId });
@@ -44,30 +47,47 @@ const enrolStudentsToSession = async function ({
 
   const countries = await countryRepository.findAll();
 
-  const scoCertificationCandidates = students.map((student) => {
-    const studentInseeCountryCode = INSEE_PREFIX_CODE + student.birthCountryCode;
+  const scoCertificationCandidates = await Promise.all(
+    students.map(async (student) => {
+      const studentInseeCountryCode = INSEE_PREFIX_CODE + student.birthCountryCode;
+      const studentCountry = countries.find((country) => country.code === studentInseeCountryCode);
 
-    const studentCountry = countries.find((country) => country.code === studentInseeCountryCode);
+      if (!studentCountry) {
+        throw new UnknownCountryForStudentEnrolmentError({
+          firstName: student.firstName.trim(),
+          lastName: student.lastName.trim(),
+        });
+      }
 
-    if (!studentCountry)
-      throw new UnknownCountryForStudentEnrolmentError({
+      let birthCity = student.birthCity;
+
+      if (!student.birthCity && student.birthCityCode) {
+        const birthInformation = await certificationCpfService.getBirthInformation({
+          birthCountry: studentCountry.name,
+          birthINSEECode: student.birthCityCode,
+          birthCity: null,
+          birthPostalCode: null,
+          certificationCpfCountryRepository,
+          certificationCpfCityRepository,
+        });
+
+        birthCity = birthInformation.birthCity;
+      }
+
+      return new SCOCertificationCandidate({
         firstName: student.firstName.trim(),
         lastName: student.lastName.trim(),
+        birthdate: student.birthdate,
+        birthINSEECode: student.birthCityCode,
+        birthCity: birthCity,
+        birthCountry: studentCountry.name,
+        sex: student.sex,
+        sessionId,
+        organizationLearnerId: student.id,
+        subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
       });
-
-    return new SCOCertificationCandidate({
-      firstName: student.firstName.trim(),
-      lastName: student.lastName.trim(),
-      birthdate: student.birthdate,
-      birthINSEECode: student.birthCityCode,
-      birthCountry: studentCountry.name,
-      birthCity: student.birthCity,
-      sex: student.sex,
-      sessionId,
-      organizationLearnerId: student.id,
-      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-    });
-  });
+    }),
+  );
 
   await scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
     sessionId,
