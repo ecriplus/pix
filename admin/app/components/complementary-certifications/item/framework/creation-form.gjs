@@ -78,6 +78,7 @@ export default class CreationForm extends Component {
             @displaySkillDifficultyAvailability={{true}}
             @displaySkillDifficultySelection={{false}}
             @displayDeviceCompatibility={{true}}
+            @displayJsonImportButton={{true}}
           />
           <ul class="framework-creation-form__buttons">
             <li>
