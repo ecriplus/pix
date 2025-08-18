@@ -19,7 +19,7 @@ const getUserCertificationEligibility = async function ({
 }) {
   const placementProfile = await placementProfileService.getPlacementProfile({ userId, limitDate });
   const isCertifiable = placementProfile.isCertifiable();
-  let doubleCertificationEligibility = {};
+  let doubleCertificationEligibility = null;
 
   if (!isCertifiable) {
     return new UserCertificationEligibility({
@@ -53,14 +53,13 @@ const getUserCertificationEligibility = async function ({
       userId,
     });
 
-    const hasvalidatedDoubleCertification = _hasvalidatedDoubleCertification(
+    const hasValidatedDoubleCertification = _hasValidatedDoubleCertification(
       userComplementaryCertifications,
       acquiredComplementaryCertificationBadge,
     );
 
-
     const badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt =
-      acquiredComplementaryCertificationBadge?.offsetVersion === 1 && !hasvalidatedDoubleCertification;
+      acquiredComplementaryCertificationBadge?.offsetVersion === 1 && !hasValidatedDoubleCertification;
 
     if (
       _isEligible({
@@ -68,13 +67,12 @@ const getUserCertificationEligibility = async function ({
         badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt,
       })
     ) {
-      doubleCertificationEligibility =
-        new CertificationEligibility({
-          label: doubleCertificationBadge.complementaryCertificationBadgeLabel,
-          imageUrl: doubleCertificationBadge.complementaryCertificationBadgeImageUrl,
-          isBadgeOutdated: doubleCertificationBadge.isOutdated,
-          validatedDoubleCertification: hasvalidatedDoubleCertification,
-        });
+      doubleCertificationEligibility = new CertificationEligibility({
+        label: doubleCertificationBadge.complementaryCertificationBadgeLabel,
+        imageUrl: doubleCertificationBadge.complementaryCertificationBadgeImageUrl,
+        isBadgeValid: !doubleCertificationBadge.isOutdated,
+        validatedDoubleCertification: hasValidatedDoubleCertification,
+      });
     }
   }
 
@@ -89,10 +87,7 @@ function _isEligible({ badgeIsOutdated, badgeIsOutdatedByOneVersionAndUserHasNoC
   return !badgeIsOutdated || badgeIsOutdatedByOneVersionAndUserHasNoComplementaryCertificationForIt;
 }
 
-function _hasvalidatedDoubleCertification(
-  userComplementaryCertifications,
-  acquiredComplementaryCertificationBadge,
-) {
+function _hasValidatedDoubleCertification(userComplementaryCertifications, acquiredComplementaryCertificationBadge) {
   return userComplementaryCertifications.some(
     (userComplementaryCertification) =>
       userComplementaryCertification.isAcquiredExpectedLevelByPixSource() &&

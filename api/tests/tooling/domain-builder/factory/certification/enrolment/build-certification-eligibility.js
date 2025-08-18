@@ -3,13 +3,13 @@ import { CertificationEligibility } from '../../../../../../src/certification/en
 const buildCertificationEligibility = function ({
   label = "Label d'éligibilité",
   imageUrl = "url d'image",
-  isBadgeOutdated = false,
+  isBadgeValid = true,
   validatedDoubleCertification = true,
 } = {}) {
   return new CertificationEligibility({
     label,
     imageUrl,
-    isBadgeOutdated,
+    isBadgeValid,
     validatedDoubleCertification,
   });
 };

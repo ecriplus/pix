@@ -51,7 +51,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
           domainBuilder.certification.enrolment.buildUserCertificationEligibility({
             id: userId,
             isCertifiable: true,
-            doubleCertificationEligibility: {},
+            doubleCertificationEligibility: null,
           }),
         );
       });
@@ -73,7 +73,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
           domainBuilder.certification.enrolment.buildUserCertificationEligibility({
             id: userId,
             isCertifiable: false,
-            doubleCertificationEligibility: {},
+            doubleCertificationEligibility: null,
           }),
         );
       });
@@ -117,7 +117,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
             domainBuilder.certification.enrolment.buildUserCertificationEligibility({
               id: userId,
               isCertifiable,
-              doubleCertificationEligibility: {},
+              doubleCertificationEligibility: null,
             }),
           );
         });
@@ -192,7 +192,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                 domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                   id: userId,
                   isCertifiable: true,
-                  doubleCertificationEligibility: {},
+                  doubleCertificationEligibility: null,
                 }),
               );
             });
@@ -261,7 +261,7 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                   domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                     id: userId,
                     isCertifiable: true,
-                    doubleCertificationEligibility: {},
+                    doubleCertificationEligibility: null,
                   }),
                 );
               });
@@ -316,13 +316,14 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
                   domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                     id: userId,
                     isCertifiable: true,
-                    doubleCertificationEligibility:
-                      domainBuilder.certification.enrolment.buildCertificationEligibility({
+                    doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility(
+                      {
                         label: 'monLabel',
                         imageUrl: 'monImageUrl',
                         validatedDoubleCertification: false,
-                        isBadgeOutdated: true,
-                      }),
+                        isBadgeValid: false,
+                      },
+                    ),
                   }),
                 );
               });
@@ -384,13 +385,12 @@ describe('Certification | Enrolment | Unit | Usecases | get-user-certification-e
               domainBuilder.certification.enrolment.buildUserCertificationEligibility({
                 id: userId,
                 isCertifiable: true,
-                doubleCertificationEligibility:
-                  domainBuilder.certification.enrolment.buildCertificationEligibility({
-                    label: 'monLabel',
-                    imageUrl: 'monImageUrl',
-                    isAcquiredExpectedLevel: true,
-                    isBadgeOutdated: false,
-                  }),
+                doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility({
+                  label: 'monLabel',
+                  imageUrl: 'monImageUrl',
+                  validatedDoubleCertification: true,
+                  isBadgeValid: true,
+                }),
               }),
             );
           });

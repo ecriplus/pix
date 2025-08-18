@@ -172,6 +172,7 @@ import { buildCenter as buildConfigurationCenter } from './certification/configu
 import { buildCertificationFrameworksChallenge } from './certification/configuration/build-certification-frameworks-challenge.js';
 import { buildConsolidatedFramework } from './certification/configuration/build-consolidated-framework.js';
 import { buildCandidate } from './certification/enrolment/build-candidate.js';
+import { buildCertificationEligibility } from './certification/enrolment/build-certification-eligibility.js';
 import { buildComplementaryCertificationBadgeWithOffsetVersion as buildComplementaryCertificationBadgeForEnrolment } from './certification/enrolment/build-complementary-certification-badge.js';
 import { buildComplementaryCertificationCourseWithResultsEnrolment } from './certification/enrolment/build-complementary-certification-course-with-results.js';
 import { buildEditedCandidate } from './certification/enrolment/build-edited-candidate.js';
@@ -185,7 +186,6 @@ import {
 } from './certification/enrolment/build-subscription.js';
 import { buildUserEnrolment } from './certification/enrolment/build-user.js';
 import { buildUserCertificationEligibility } from './certification/enrolment/build-user-certification-eligibility.js';
-import { buildCertificationEligibility } from './certification/enrolment/build-certification-eligibility.js';
 import { buildEvaluationCandidate } from './certification/evaluation/build-candidate.js';
 import { buildComplementaryCertificationCourse } from './certification/evaluation/build-complementary-certification-course.js';
 import { buildComplementaryCertificationScoringCriteria } from './certification/evaluation/build-complementary-certification-scoring-criteria.js';

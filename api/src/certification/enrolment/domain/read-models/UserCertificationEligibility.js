@@ -7,10 +7,10 @@ class UserCertificationEligibility {
 }
 
 class CertificationEligibility {
-  constructor({ label, imageUrl, isBadgeOutdated, validatedDoubleCertification }) {
+  constructor({ label, imageUrl, isBadgeValid, validatedDoubleCertification }) {
     this.label = label;
     this.imageUrl = imageUrl;
-    this.isBadgeOutdated = isBadgeOutdated;
+    this.isBadgeValid = isBadgeValid;
     this.validatedDoubleCertification = validatedDoubleCertification;
   }
 }

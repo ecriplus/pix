@@ -273,13 +273,12 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
             type: 'isCertifiables',
             attributes: {
               'is-certifiable': true,
-              'double-certification-eligibility':
-                {
-                  imageUrl: 'http://my-badge-image-url.com',
-                  label: 'alt message',
-                  isBadgeOutdated: false,
-                  validatedDoubleCertification: false,
-                },
+              'double-certification-eligibility': {
+                imageUrl: 'http://my-badge-image-url.com',
+                label: 'alt message',
+                isBadgeValid: true,
+                validatedDoubleCertification: false,
+              },
             },
           },
         };

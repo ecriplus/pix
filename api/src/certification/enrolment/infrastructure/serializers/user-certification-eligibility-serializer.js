@@ -11,16 +11,23 @@ const { Serializer } = jsonapiSerializer;
 const serialize = function (userCertificationEligibility) {
   return new Serializer('isCertifiables', {
     transform(userCertificationEligibility) {
+      if (userCertificationEligibility.doubleCertificationEligibility) {
+        return {
+          id: userCertificationEligibility.id,
+          isCertifiable: userCertificationEligibility.isCertifiable,
+          doubleCertificationEligibility: {
+            label: userCertificationEligibility.doubleCertificationEligibility.label,
+            imageUrl: userCertificationEligibility.doubleCertificationEligibility.imageUrl,
+            isBadgeValid: userCertificationEligibility.doubleCertificationEligibility.isBadgeValid,
+            validatedDoubleCertification:
+              userCertificationEligibility.doubleCertificationEligibility.validatedDoubleCertification,
+          },
+        };
+      }
       return {
         id: userCertificationEligibility.id,
         isCertifiable: userCertificationEligibility.isCertifiable,
-        doubleCertificationEligibility: {
-          label: userCertificationEligibility.doubleCertificationEligibility.label,
-          imageUrl: userCertificationEligibility.doubleCertificationEligibility.imageUrl,
-          isBadgeOutdated: userCertificationEligibility.doubleCertificationEligibility.isBadgeOutdated,
-          validatedDoubleCertification: userCertificationEligibility.doubleCertificationEligibility.validatedDoubleCertification
-        }
-      }
+      };
     },
     attributes: ['isCertifiable', 'doubleCertificationEligibility'],
   }).serialize(userCertificationEligibility);

@@ -3,39 +3,64 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Serializer | user-certification-eligibility-serializer', function () {
   describe('#serialize()', function () {
-    it('should format certification eligibility model into into JSON API data', function () {
-      // given
-      const userCertificationEligibility = domainBuilder.certification.enrolment.buildUserCertificationEligibility({
-        id: 123,
-        isCertifiable: true,
-        doubleCertificationEligibility:
-          domainBuilder.certification.enrolment.buildCertificationEligibility({
+    context('when there is no double certification eligibility', function () {
+      it('should format certification eligibility model into into JSON API data without double certification information', function () {
+        // given
+        const userCertificationEligibility = domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+          id: 123,
+          isCertifiable: true,
+          doubleCertificationEligibility: null,
+        });
+
+        // when
+        const json = serializer.serialize(userCertificationEligibility);
+
+        // then
+        expect(json).to.deep.equal({
+          data: {
+            id: '123',
+            type: 'isCertifiables',
+            attributes: {
+              'is-certifiable': true,
+            },
+          },
+        });
+      });
+    });
+
+    context('when there is double certification eligibility', function () {
+      it('should format certification eligibility model into into JSON API data', function () {
+        // given
+        const userCertificationEligibility = domainBuilder.certification.enrolment.buildUserCertificationEligibility({
+          id: 123,
+          isCertifiable: true,
+          doubleCertificationEligibility: domainBuilder.certification.enrolment.buildCertificationEligibility({
             label: 'Un super label',
             imageUrl: 'Une super image',
-            isBadgeOutdated: false,
+            isBadgeValid: false,
             validatedDoubleCertification: false,
           }),
-      });
+        });
 
-      // when
-      const json = serializer.serialize(userCertificationEligibility);
+        // when
+        const json = serializer.serialize(userCertificationEligibility);
 
-      // then
-      expect(json).to.deep.equal({
-        data: {
-          id: '123',
-          type: 'isCertifiables',
-          attributes: {
-            'is-certifiable': true,
-            'double-certification-eligibility':
-              {
+        // then
+        expect(json).to.deep.equal({
+          data: {
+            id: '123',
+            type: 'isCertifiables',
+            attributes: {
+              'is-certifiable': true,
+              'double-certification-eligibility': {
                 label: 'Un super label',
                 imageUrl: 'Une super image',
-                isBadgeOutdated: false,
+                isBadgeValid: false,
                 validatedDoubleCertification: false,
               },
+            },
           },
-        },
+        });
       });
     });
   });
