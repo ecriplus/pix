@@ -28,6 +28,7 @@ import * as campaignAssessmentParticipationResultRepository from '../../infrastr
 import * as campaignParticipationOverviewRepository from '../../infrastructure/repositories/campaign-participation-overview-repository.js';
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import { campaignParticipationResultRepository } from '../../infrastructure/repositories/campaign-participation-result-repository.js';
+import * as campaignParticipationStatisticsRepository from '../../infrastructure/repositories/campaign-participation-statistics-repository.js';
 import * as campaignProfileRepository from '../../infrastructure/repositories/campaign-profile-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js'; // needed to includes organizationFeatureAPI from another BC
 import { participationResultCalculationJobRepository } from '../../infrastructure/repositories/jobs/participation-result-calculation-job-repository.js';
@@ -53,6 +54,7 @@ const dependencies = {
   campaignParticipationOverviewRepository,
   campaignParticipationRepository,
   campaignParticipationResultRepository,
+  campaignParticipationStatisticsRepository,
   campaignProfileRepository,
   targetProfileRepository,
   compareStagesAndAcquiredStages,
@@ -90,6 +92,7 @@ import { findUserAnonymisedCampaignAssessments } from './find-user-anonymised-ca
 import { findUserCampaignParticipationOverviews } from './find-user-campaign-participation-overviews.js';
 import { getCampaignAssessmentParticipation } from './get-campaign-assessment-participation.js';
 import { getCampaignAssessmentParticipationResult } from './get-campaign-assessment-participation-result.js';
+import { getCampaignParticipationStatistics } from './get-campaign-participation-statistics.js';
 import { getCampaignParticipationsForOrganizationLearner } from './get-campaign-participations-for-organization-learner.js';
 import { getCampaignProfile } from './get-campaign-profile.js';
 import { getPoleEmploiSendings } from './get-pole-emploi-sendings.js';
@@ -129,6 +132,7 @@ const usecasesWithoutInjectedDependencies = {
   shareCampaignResult,
   startCampaignParticipation,
   updateParticipantExternalId,
+  getCampaignParticipationStatistics,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
