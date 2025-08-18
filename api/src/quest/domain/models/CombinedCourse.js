@@ -7,21 +7,26 @@ import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
 export class CombinedCourse {
-  constructor({ id, code, organizationId, name } = {}) {
+  #quest;
+
+  constructor({ id, code, organizationId, name } = {}, quest) {
     this.id = id;
     this.code = code;
     this.organizationId = organizationId;
     this.name = name;
+    this.#quest = quest;
+  }
+
+  get quest() {
+    return this.#quest;
   }
 }
 
 export class CombinedCourseDetails extends CombinedCourse {
-  #quest;
   items = null;
 
   constructor({ id, code, organizationId, name }, quest, participation) {
-    super({ id, code, organizationId, name });
-    this.#quest = quest;
+    super({ id, code, organizationId, name }, quest);
     if (!participation) {
       this.status = CombinedCourseStatuses.NOT_STARTED;
     } else {
@@ -33,19 +38,19 @@ export class CombinedCourseDetails extends CombinedCourse {
   }
 
   get campaignIds() {
-    return this.#quest.successRequirements
+    return this.quest.successRequirements
       .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)
       .map(({ data }) => data.campaignId.data);
   }
 
   get moduleIds() {
-    return this.#quest.successRequirements
+    return this.quest.successRequirements
       .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.PASSAGES)
       .map(({ data }) => data.moduleId.data);
   }
 
   isCompleted(dataForQuest, recommendableModuleIds = [], recommendedModuleIdsForUser = []) {
-    const successRequirements = this.#quest.successRequirements.filter((req) => {
+    const successRequirements = this.quest.successRequirements.filter((req) => {
       if (req.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         return true;
       } else if (req.requirement_type === TYPES.OBJECT.PASSAGES) {
@@ -69,8 +74,8 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
 
     const questForUser = new Quest({
-      ...this.#quest,
-      eligibilityRequirements: this.#quest.eligibilityRequirements,
+      ...this.quest,
+      eligibilityRequirements: this.quest.eligibilityRequirements,
       successRequirements,
     });
 
@@ -79,7 +84,7 @@ export class CombinedCourseDetails extends CombinedCourse {
 
   generateItems(data, recommendableModuleIds = [], recommendedModuleIdsForUser = [], encryptedCombinedCourseUrl) {
     this.items = [];
-    for (const requirement of this.#quest.successRequirements) {
+    for (const requirement of this.quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = data.find(({ id }) => id === requirement.data.campaignId.data);
         this.items.push(
