@@ -118,10 +118,12 @@ export async function findActiveFlashCompatible({
   let challengeDtos;
 
   if (hasComplementaryReferential) {
+    const version = dayjs(date).format('YYYYMMDDHHmmss');
+
     challengeDtos = await _findChallengesForComplementaryCertification({
       complementaryCertificationKey,
       cacheKey,
-      date,
+      version,
     });
   } else {
     challengeDtos = await _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey });
@@ -132,12 +134,10 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, date }) {
-  const formattedDate = dayjs(date).format('YYYYMMDDHHmmss');
-
+async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, version }) {
   const { closestVersion } = await knex('certification-frameworks-challenges')
     .where({ complementaryCertificationKey })
-    .andWhere('version', '<=', formattedDate)
+    .andWhere('version', '<=', version)
     .max('version as closestVersion')
     .first();
 
