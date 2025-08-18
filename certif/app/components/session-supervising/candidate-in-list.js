@@ -38,17 +38,23 @@ export default class CandidateInList extends Component {
   }
 
   get shouldDisplayEnrolledComplementaryCertification() {
-    return this.args.candidate.enrolledComplementaryCertificationLabel;
+    return Boolean(this.enrolledCertificationLabel);
   }
 
   get shouldDisplayNonEligibilityWarning() {
-    return this._isReconciliated() && this._isNotEligibleToEnrolledComplementaryCertification();
+    return this._isReconciliated() && this._isNotEligibleToEnrolledDoubleCertification();
   }
 
-  _isNotEligibleToEnrolledComplementaryCertification() {
+  _isNotEligibleToEnrolledDoubleCertification() {
     return (
-      !this.args.candidate.isStillEligibleToComplementaryCertification &&
-      this.args.candidate.enrolledComplementaryCertificationLabel
+      !this.args.candidate.isStillEligibleToDoubleCertification && this.args.candidate.enrolledDoubleCertificationLabel
+    );
+  }
+
+  get enrolledCertificationLabel() {
+    return (
+      this.args.candidate.enrolledComplementaryCertificationLabel ??
+      this.args.candidate.enrolledDoubleCertificationLabel
     );
   }
 

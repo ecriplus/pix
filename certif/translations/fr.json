@@ -468,9 +468,9 @@
         },
         "candidate-options": "Options du candidat",
         "complementary-certification-enrolment": "Inscription à {complementaryCertification}",
-        "complementary-certification-non-eligibility-warning": "Candidat pas ou plus éligible à la certification complémentaire. Il passe la certification Pix.",
         "default-modal-title": "Information",
         "display-candidate-options": "Afficher les options du candidat",
+        "double-certification-non-eligibility-warning": "Candidat pas ou plus éligible à CléA Numérique. Il passe la certification Pix.",
         "end-date-time": "Fin théorique : ",
         "extratime": "+ temps majoré {extraTimePercentage}",
         "handle-live-alert-modal": {

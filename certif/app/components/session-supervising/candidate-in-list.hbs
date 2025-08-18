@@ -38,13 +38,13 @@
           />
           {{t
             "pages.session-supervising.candidate-in-list.complementary-certification-enrolment"
-            complementaryCertification=@candidate.enrolledComplementaryCertificationLabel
+            complementaryCertification=this.enrolledCertificationLabel
           }}
         </p>
       {{/if}}
       {{#if this.shouldDisplayNonEligibilityWarning}}
         <PixNotificationAlert @type="warning" @withIcon={{true}}>
-          {{t "pages.session-supervising.candidate-in-list.complementary-certification-non-eligibility-warning"}}
+          {{t "pages.session-supervising.candidate-in-list.double-certification-non-eligibility-warning"}}
         </PixNotificationAlert>
       {{/if}}
     </div>

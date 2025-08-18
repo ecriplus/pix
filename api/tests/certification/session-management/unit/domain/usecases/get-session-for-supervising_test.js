@@ -43,8 +43,8 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
         });
       });
 
-      context('when the candidates have no complementary certifications', function () {
-        context('when the session has started', function () {
+      context('when the session has started', function () {
+        context('when candidates are registered to a core certification', function () {
           it('should get certification candidates with theorical end datetime', async function () {
             // given
             const sessionId = 1;
@@ -52,8 +52,7 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
             const certificationCandidateWithNoComplementaryCertification =
               domainBuilder.buildCertificationCandidateForSupervising({
                 id: certificationCandidateId,
-                complementaryCertification: undefined,
-                complementaryCertificationKey: undefined,
+                enrolledComplementaryCertification: undefined,
               });
 
             const session = domainBuilder.buildSessionForSupervising({
@@ -81,200 +80,243 @@ describe('Unit | UseCase | get-session-for-supervising', function () {
             expect(certificationCandidate).to.have.deep.property('theoricalEndDateTime', expectedTheoricalEndDateTime);
           });
         });
-      });
 
-      context('when the candidates have complementary certifications', function () {
-        context('when some candidates are still eligible to complementary certifications', function () {
-          it("should return the session with the candidates' eligibility", async function () {
+        context('when candidates are registered to a complementary certification', function () {
+          it('should get certification candidates with theorical end datetime', async function () {
             // given
-            const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-              complementaryCertificationKey: 'aKey',
-              complementaryCertificationBadgeLabel: 'une certif complémentaire',
+            const sessionId = 1;
+            const certificationCandidateId = 51;
+            const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising();
+            const certificationCandidateWithComplementaryCertification =
+              domainBuilder.buildCertificationCandidateForSupervising({
+                id: certificationCandidateId,
+                enrolledComplementaryCertification: complementaryCertification,
+              });
+
+            const session = domainBuilder.buildSessionForSupervising({
+              sessionId,
+              certificationCandidates: [certificationCandidateWithComplementaryCertification],
             });
-
-            const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-              key: 'aKey',
-              label: 'une certif complémentaire',
-              certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
-            });
-
-            const retrievedSessionForSupervising = domainBuilder.buildSessionForSupervising({
-              certificationCandidates: [
-                domainBuilder.buildCertificationCandidateForSupervising({
-                  userId: 1234,
-                  startDateTime: START_DATETIME_STUB,
-                  enrolledComplementaryCertification: complementaryCertification,
-                  stillValidBadgeAcquisitions: [],
-                }),
-              ],
-            });
-
-            sessionForSupervisingRepository.get.resolves(retrievedSessionForSupervising);
-
-            const certificationBadgesService = {
-              findStillValidBadgeAcquisitions: sinon.stub(),
-            };
-            certificationBadgesService.findStillValidBadgeAcquisitions
-              .withArgs({ userId: 1234 })
-              .resolves([stillValidBadgeAcquisition]);
+            sessionForSupervisingRepository.get.resolves(session);
+            const expectedTheoricalEndDateTime = dayjs(
+              certificationCandidateWithComplementaryCertification.startDateTime,
+            )
+              .add(DEFAULT_SESSION_DURATION_MINUTES, 'minute')
+              .toDate();
 
             // when
-            const actualSession = await getSessionForSupervising({
-              sessionId: 1,
+            const { certificationCandidates } = await getSessionForSupervising({
+              sessionId,
               sessionForSupervisingRepository,
-              certificationBadgesService,
             });
-
             // then
-            expect(actualSession).to.deep.equal(
-              domainBuilder.buildSessionForSupervising({
-                certificationCandidates: [
-                  domainBuilder.buildCertificationCandidateForSupervising({
-                    userId: 1234,
-                    startDateTime: START_DATETIME_STUB,
-                    theoricalEndDateTime: expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
-                      DEFAULT_SESSION_DURATION_MINUTES,
-                      COMPLEMENTARY_EXTRATIME_STUB,
-                    ]),
-                    enrolledComplementaryCertification: complementaryCertification,
-                    stillValidBadgeAcquisitions: [stillValidBadgeAcquisition],
-                  }),
-                ],
-              }),
+            const [certificationCandidate] = certificationCandidates;
+            expect(certificationCandidate).to.have.deep.property(
+              'startDateTime',
+              certificationCandidateWithComplementaryCertification.startDateTime,
             );
-          });
-
-          it('should get a theorical end datetime with extra time', async function () {
-            const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
-              complementaryCertificationKey: 'aKey',
-            });
-
-            const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-              key: 'aKey',
-              certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
-            });
-
-            sessionForSupervisingRepository.get.resolves(
-              domainBuilder.buildSessionForSupervising({
-                certificationCandidates: [
-                  domainBuilder.buildCertificationCandidateForSupervising({
-                    userId: 1234,
-                    startDateTime: START_DATETIME_STUB,
-                    enrolledComplementaryCertification: complementaryCertification,
-                    stillValidBadgeAcquisitions: [],
-                  }),
-                ],
-              }),
-            );
-
-            const certificationBadgesService = { findStillValidBadgeAcquisitions: sinon.stub() };
-            certificationBadgesService.findStillValidBadgeAcquisitions
-              .withArgs({ userId: 1234 })
-              .resolves([stillValidBadgeAcquisition]);
-
-            // when
-            const actualSession = await getSessionForSupervising({
-              sessionId: 1,
-              sessionForSupervisingRepository,
-              certificationBadgesService,
-            });
-
-            // then
-            expect(actualSession.certificationCandidates).to.have.lengthOf(1);
-            expect(actualSession.certificationCandidates[0].startDateTime).to.deep.equal(START_DATETIME_STUB);
-            expect(actualSession.certificationCandidates[0].theoricalEndDateTime).to.deep.equal(
-              expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
-                DEFAULT_SESSION_DURATION_MINUTES,
-                COMPLEMENTARY_EXTRATIME_STUB,
-              ]),
-            );
+            expect(certificationCandidate).to.have.deep.property('theoricalEndDateTime', expectedTheoricalEndDateTime);
           });
         });
 
-        context('when some candidates are not eligible to complementary certifications', function () {
-          it("should return the session with the candidates' non eligibility", async function () {
-            // given
-            const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising();
-            const retrievedSessionForSupervising = domainBuilder.buildSessionForSupervising({
-              certificationCandidates: [
-                domainBuilder.buildCertificationCandidateForSupervising({
-                  userId: 1234,
-                  startDateTime: START_DATETIME_STUB,
-                  enrolledComplementaryCertification: complementaryCertification,
-                  stillValidBadgeAcquisitions: [],
-                }),
-              ],
-            });
+        context('when candidates are registered to a double certification', function () {
+          context('when some candidates are still eligible', function () {
+            it("returns the session with the candidates' eligibility", async function () {
+              // given
+              const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
+                complementaryCertificationKey: 'aKey',
+                complementaryCertificationBadgeLabel: 'une certif complémentaire',
+              });
 
-            sessionForSupervisingRepository.get.resolves(retrievedSessionForSupervising);
+              const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
+                key: 'aKey',
+                label: 'une certif complémentaire',
+                certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
+              });
 
-            const certificationBadgesService = {
-              findStillValidBadgeAcquisitions: sinon.stub(),
-            };
-            certificationBadgesService.findStillValidBadgeAcquisitions.withArgs({ userId: 1234 }).resolves([]);
-
-            // when
-            const actualSession = await getSessionForSupervising({
-              sessionId: 1,
-              sessionForSupervisingRepository,
-              certificationBadgesService,
-            });
-
-            // then
-            expect(actualSession).to.deep.equal(
-              domainBuilder.buildSessionForSupervising({
+              const retrievedSessionForSupervising = domainBuilder.buildSessionForSupervising({
                 certificationCandidates: [
                   domainBuilder.buildCertificationCandidateForSupervising({
                     userId: 1234,
                     startDateTime: START_DATETIME_STUB,
-                    theoricalEndDateTime: expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
-                      DEFAULT_SESSION_DURATION_MINUTES,
-                    ]),
-                    enrolledComplementaryCertification: complementaryCertification,
+                    enrolledComplementaryCertification: null,
+                    enrolledDoubleCertification: complementaryCertification,
                     stillValidBadgeAcquisitions: [],
                   }),
                 ],
-              }),
-            );
+              });
+
+              sessionForSupervisingRepository.get.resolves(retrievedSessionForSupervising);
+
+              const certificationBadgesService = {
+                findStillValidBadgeAcquisitions: sinon.stub(),
+              };
+              certificationBadgesService.findStillValidBadgeAcquisitions
+                .withArgs({ userId: 1234 })
+                .resolves([stillValidBadgeAcquisition]);
+
+              // when
+              const actualSession = await getSessionForSupervising({
+                sessionId: 1,
+                sessionForSupervisingRepository,
+                certificationBadgesService,
+              });
+
+              // then
+              expect(actualSession).to.deep.equal(
+                domainBuilder.buildSessionForSupervising({
+                  certificationCandidates: [
+                    domainBuilder.buildCertificationCandidateForSupervising({
+                      userId: 1234,
+                      startDateTime: START_DATETIME_STUB,
+                      theoricalEndDateTime: expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
+                        DEFAULT_SESSION_DURATION_MINUTES,
+                        COMPLEMENTARY_EXTRATIME_STUB,
+                      ]),
+                      enrolledDoubleCertification: complementaryCertification,
+                      enrolledComplementaryCertification: null,
+                      stillValidBadgeAcquisitions: [stillValidBadgeAcquisition],
+                    }),
+                  ],
+                }),
+              );
+            });
+
+            it('gets a theorical end datetime with extra time', async function () {
+              const stillValidBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
+                complementaryCertificationKey: 'aKey',
+              });
+
+              const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
+                key: 'aKey',
+                certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
+              });
+
+              const certificationBadgesService = { findStillValidBadgeAcquisitions: sinon.stub() };
+              certificationBadgesService.findStillValidBadgeAcquisitions
+                .withArgs({ userId: 1234 })
+                .resolves([stillValidBadgeAcquisition]);
+
+              sessionForSupervisingRepository.get.resolves(
+                domainBuilder.buildSessionForSupervising({
+                  certificationCandidates: [
+                    domainBuilder.buildCertificationCandidateForSupervising({
+                      userId: 1234,
+                      startDateTime: START_DATETIME_STUB,
+                      enrolledComplementaryCertification: null,
+                      enrolledDoubleCertification: complementaryCertification,
+                      stillValidBadgeAcquisitions: [stillValidBadgeAcquisition],
+                    }),
+                  ],
+                }),
+              );
+
+              // when
+              const actualSession = await getSessionForSupervising({
+                sessionId: 1,
+                sessionForSupervisingRepository,
+                certificationBadgesService,
+              });
+
+              // then
+              expect(actualSession.certificationCandidates).to.have.lengthOf(1);
+              expect(actualSession.certificationCandidates[0].startDateTime).to.deep.equal(START_DATETIME_STUB);
+              expect(actualSession.certificationCandidates[0].theoricalEndDateTime).to.deep.equal(
+                expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
+                  DEFAULT_SESSION_DURATION_MINUTES,
+                  COMPLEMENTARY_EXTRATIME_STUB,
+                ]),
+              );
+            });
           });
 
-          it('should not get a theorical end datetime with extra time', async function () {
-            // given
-            const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-              key: 'aKey',
-              label: 'une certif complémentaire',
-              certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
-            });
-
-            sessionForSupervisingRepository.get.resolves(
-              domainBuilder.buildSessionForSupervising({
+          context('when some candidates are not eligible to a double certification', function () {
+            it("returns the session with the candidates' non eligibility", async function () {
+              // given
+              const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising();
+              const retrievedSessionForSupervising = domainBuilder.buildSessionForSupervising({
                 certificationCandidates: [
                   domainBuilder.buildCertificationCandidateForSupervising({
                     userId: 1234,
                     startDateTime: START_DATETIME_STUB,
-                    enrolledComplementaryCertification: complementaryCertification,
+                    enrolledComplementaryCertification: null,
+                    enrolledDoubleCertification: complementaryCertification,
                     stillValidBadgeAcquisitions: [],
                   }),
                 ],
-              }),
-            );
+              });
 
-            const certificationBadgesService = { findStillValidBadgeAcquisitions: sinon.stub() };
-            certificationBadgesService.findStillValidBadgeAcquisitions.withArgs({ userId: 1234 }).resolves([]);
+              sessionForSupervisingRepository.get.resolves(retrievedSessionForSupervising);
 
-            // when
-            const actualSession = await getSessionForSupervising({
-              sessionId: 1,
-              sessionForSupervisingRepository,
-              certificationBadgesService,
+              const certificationBadgesService = {
+                findStillValidBadgeAcquisitions: sinon.stub(),
+              };
+              certificationBadgesService.findStillValidBadgeAcquisitions.withArgs({ userId: 1234 }).resolves([]);
+
+              // when
+              const actualSession = await getSessionForSupervising({
+                sessionId: 1,
+                sessionForSupervisingRepository,
+                certificationBadgesService,
+              });
+
+              // then
+              expect(actualSession).to.deep.equal(
+                domainBuilder.buildSessionForSupervising({
+                  certificationCandidates: [
+                    domainBuilder.buildCertificationCandidateForSupervising({
+                      userId: 1234,
+                      startDateTime: START_DATETIME_STUB,
+                      theoricalEndDateTime: expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [
+                        DEFAULT_SESSION_DURATION_MINUTES,
+                      ]),
+                      enrolledComplementaryCertification: null,
+                      enrolledDoubleCertification: complementaryCertification,
+                      stillValidBadgeAcquisitions: [],
+                    }),
+                  ],
+                }),
+              );
             });
 
-            // then
-            expect(actualSession.certificationCandidates).to.have.lengthOf(1);
-            expect(actualSession.certificationCandidates[0].startDateTime).to.deep.equal(START_DATETIME_STUB);
-            expect(actualSession.certificationCandidates[0].theoricalEndDateTime).to.deep.equal(
-              expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [DEFAULT_SESSION_DURATION_MINUTES]),
-            );
+            it('does not get a theorical end datetime with extra time', async function () {
+              // given
+              const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
+                key: 'aKey',
+                label: 'une certif complémentaire',
+                certificationExtraTime: COMPLEMENTARY_EXTRATIME_STUB,
+              });
+
+              sessionForSupervisingRepository.get.resolves(
+                domainBuilder.buildSessionForSupervising({
+                  certificationCandidates: [
+                    domainBuilder.buildCertificationCandidateForSupervising({
+                      userId: 1234,
+                      startDateTime: START_DATETIME_STUB,
+                      enrolledComplementaryCertification: complementaryCertification,
+                      stillValidBadgeAcquisitions: [],
+                    }),
+                  ],
+                }),
+              );
+
+              const certificationBadgesService = { findStillValidBadgeAcquisitions: sinon.stub() };
+              certificationBadgesService.findStillValidBadgeAcquisitions.withArgs({ userId: 1234 }).resolves([]);
+
+              // when
+              const actualSession = await getSessionForSupervising({
+                sessionId: 1,
+                sessionForSupervisingRepository,
+                certificationBadgesService,
+              });
+
+              // then
+              expect(actualSession.certificationCandidates).to.have.lengthOf(1);
+              expect(actualSession.certificationCandidates[0].startDateTime).to.deep.equal(START_DATETIME_STUB);
+              expect(actualSession.certificationCandidates[0].theoricalEndDateTime).to.deep.equal(
+                expectedSessionEndDateTimeFromStartDateTime(START_DATETIME_STUB, [DEFAULT_SESSION_DURATION_MINUTES]),
+              );
+            });
           });
         });
       });

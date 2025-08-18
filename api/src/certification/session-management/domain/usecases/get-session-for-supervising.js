@@ -23,7 +23,7 @@ const getSessionForSupervising = async function ({
 
   await PromiseUtils.map(
     sessionForSupervising.certificationCandidates,
-    _computeComplementaryCertificationEligibility(certificationBadgesService),
+    _computeDoubleCertificationEligibility(certificationBadgesService),
     { concurrency: CONCURRENCY_HEAVY_OPERATIONS },
   );
 
@@ -39,9 +39,9 @@ export { getSessionForSupervising };
 /**
  * @param {CertificationBadgesService} certificationBadgesService
  */
-function _computeComplementaryCertificationEligibility(certificationBadgesService) {
+function _computeDoubleCertificationEligibility(certificationBadgesService) {
   return async (candidate) => {
-    if (candidate.enrolledComplementaryCertification?.key) {
+    if (candidate.enrolledDoubleCertification?.key) {
       candidate.stillValidBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
         userId: candidate.userId,
       });
@@ -49,9 +49,6 @@ function _computeComplementaryCertificationEligibility(certificationBadgesServic
   };
 }
 
-/**
- * @param {CertificationCandidateForAd} certificationBadgesService
- */
 function _computeTheoricalEndDateTime(candidate) {
   const startDateTime = dayjs(candidate.startDateTime || null);
   if (!startDateTime.isValid()) {
@@ -60,8 +57,8 @@ function _computeTheoricalEndDateTime(candidate) {
 
   let theoricalEndDateTime = startDateTime.add(DEFAULT_SESSION_DURATION_MINUTES, 'minute');
 
-  if (candidate.isStillEligibleToComplementaryCertification) {
-    const extraMinutes = candidate.enrolledComplementaryCertification.certificationExtraTime ?? 0;
+  if (candidate.isStillEligibleToDoubleCertification) {
+    const extraMinutes = candidate.enrolledDoubleCertification.certificationExtraTime ?? 0;
     theoricalEndDateTime = theoricalEndDateTime.add(extraMinutes, 'minute');
   }
 
