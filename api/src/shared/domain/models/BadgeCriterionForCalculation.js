@@ -7,7 +7,7 @@ export class BadgeCriterionForCalculation {
   }
 
   getAcquisitionPercentage(knowledgeElements) {
-    const masteryPercentage = getMasteryPercentage(knowledgeElements, this.skillIds);
+    const masteryPercentage = getMasteryPercentage(knowledgeElements, this.skillIds, false);
     const acquisitionPercentage = Math.round((masteryPercentage / this.threshold) * 100);
     return acquisitionPercentage > 100 ? 100 : acquisitionPercentage;
   }

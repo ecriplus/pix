@@ -39,7 +39,7 @@ describe('Unit | Domain | Models | BadgeCriterionForCalculation', function () {
         const acquisitionPercentage = badgeCriterion.getAcquisitionPercentage(knowledgeElements);
 
         // then
-        expect(acquisitionPercentage).to.equal(84);
+        expect(acquisitionPercentage).to.equal(83);
       });
     });
 
