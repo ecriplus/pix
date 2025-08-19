@@ -14,7 +14,7 @@ const compiledOutputFiles = ['dist/*', 'tmp/*'];
 const dependenciesFiles = ['node_modules/*'];
 const miscFiles = ['coverage/*', '!**/.*', '**/.eslintcache'];
 const emberTryFiles = ['.node_modules.ember-try/*', 'bower.json.ember-try', 'package.json.ember-try'];
-const nonPhraseGeneratedFiles = ['translations/en.json', 'translations/fr.json'];
+const translationFiles = ['translations/*.json'];
 
 const nodeFiles = [
   'eslint.config.js',
@@ -107,7 +107,7 @@ export default [
     },
   },
   {
-    files: nonPhraseGeneratedFiles,
+    files: translationFiles,
     plugins: { 'i18n-json': i18nJsonPlugin },
     processor: {
       meta: { name: '.json' },
