@@ -611,7 +611,7 @@
             {
               "type": "element",
               "element": {
-                "id": "bcc71c8a-4954-4705-959e-3e0c4d65832b",
+                "id": "c9e931ea-9eba-4cd2-b2ff-a6812c4a88f8",
                 "type": "custom",
                 "tagName": "pix-carousel",
                 "props": {
@@ -734,7 +734,7 @@
             {
               "type": "element",
               "element": {
-                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "id": "7faccf2f-00e4-442a-b1ca-fe8cda7d82e2",
                 "type": "text",
                 "content": "<p>Arthur a été très inspiré par l’application de Lila. 🌱</p><p>Il a téléchargé une application pour reconnaître le chant des oiseaux, comme <a href=\"https://play.google.com/store/apps/details?id=de.tu_chemnitz.mi.kahst.birdnet&amp;hl=fr\" target=\"_blank\">celle-ci.</a>🐦</p>"
               }
