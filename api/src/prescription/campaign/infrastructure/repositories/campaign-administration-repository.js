@@ -136,7 +136,7 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
       createdCampaigns.push(latestCreatedCampaign);
     }
     await trx.commit();
-    return createdCampaigns.length > 1 ? createdCampaigns : createdCampaigns[0];
+    return Array.isArray(campaigns) ? createdCampaigns : createdCampaigns[0];
   } catch (err) {
     await trx.rollback();
     throw err;
