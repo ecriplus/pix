@@ -1,11 +1,13 @@
 import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
 import * as campaignApi from '../../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign/application/api/models/CampaignParticipation.js';
+import { SavedCampaign } from '../../../../../../src/prescription/campaign/application/api/models/SavedCampaign.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
@@ -225,6 +227,91 @@ describe('Integration | Application | campaign-api', function () {
 
       const deletedParticipations = await knex('campaign-participations').whereNotNull('deletedAt');
       expect(deletedParticipations).length(2);
+    });
+  });
+
+  describe('#save', function () {
+    let targetProfileId, organizationId, userId;
+
+    beforeEach(async function () {
+      userId = databaseBuilder.factory.buildUser().id;
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({
+        organizationId,
+        targetProfileId,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    describe('When one campaign is provided ( not an array )', function () {
+      it('should create ASSESSMENT Campaign', async function () {
+        databaseBuilder.factory.buildMembership({
+          organizationId,
+          userId,
+        });
+
+        await databaseBuilder.commit();
+
+        const campaign = await campaignApi.save({
+          name: 'name campaign',
+          title: 'title campaign',
+          targetProfileId,
+          organizationId,
+          creatorId: userId,
+        });
+
+        const campaignDb = await knex('campaigns').select('type').where('id', campaign.id).first();
+
+        expect(campaign).instanceOf(SavedCampaign);
+        expect(campaignDb.type).equal(CampaignTypes.ASSESSMENT);
+      });
+    });
+
+    describe('When mutliple campaign is provided ( an array )', function () {
+      it('should create multiple Campaign', async function () {
+        const featureId = databaseBuilder.factory.buildFeature({
+          key: ORGANIZATION_FEATURE.CAMPAIGN_WITHOUT_USER_PROFILE.key,
+        }).id;
+        databaseBuilder.factory.buildOrganizationFeature({ featureId, organizationId });
+        const externalUserId = databaseBuilder.factory.buildUser().id;
+
+        await databaseBuilder.commit();
+
+        const campaigns = await campaignApi.save([
+          {
+            name: 'name campaign',
+            title: 'title campaign',
+            targetProfileId,
+            organizationId,
+            creatorId: externalUserId,
+            ownerId: userId,
+            type: CampaignTypes.ASSESSMENT,
+          },
+          {
+            name: 'name campaign',
+            organizationId,
+            type: CampaignTypes.PROFILES_COLLECTION,
+            creatorId: externalUserId,
+            ownerId: userId,
+          },
+          {
+            name: 'name campaign',
+            title: 'title campaign',
+            organizationId,
+            type: CampaignTypes.EXAM,
+            creatorId: externalUserId,
+            ownerId: userId,
+            targetProfileId,
+          },
+        ]);
+
+        expect(campaigns).lengthOf(3);
+        expect(campaigns[0].targetProfileId).equal(targetProfileId);
+        expect(campaigns[1].targetProfileId).equal(null);
+        expect(campaigns[2].targetProfileId).equal(targetProfileId);
+      });
     });
   });
 });
