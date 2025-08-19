@@ -92,17 +92,7 @@ export default class List extends Component {
   }
 
   get hasActionColumn() {
-    return Boolean(this.actionsForParticipant().length);
-  }
-
-  get extraColumnRowInfo() {
-    if (!this.args.participant.extraColumns) {
-      return [];
-    }
-
-    return Object.keys(this.args.participant.extraColumns).map((extraColumnName) =>
-      this.getExtraColumnRowValue(extraColumnName, this.args.participant),
-    );
+    return Boolean(this.actionsForParticipant(this.args.participants[0]).length);
   }
 
   get onClickLearner() {
@@ -153,19 +143,17 @@ export default class List extends Component {
 
     if (this.currentUser.canActivateOralizationLearner) {
       const oralizationActivated = participant.extraColumns['ORALIZATION'];
-      actions.push([
-        {
-          label: oralizationActivated
-            ? this.intl.t('pages.organization-participants.table.actions.disable-oralization')
-            : this.intl.t('pages.organization-participants.table.actions.enable-oralization'),
-          onClick: () =>
-            this.args.toggleOralizationFeatureForParticipant(
-              participant.id,
-              this.currentUser.organization.id,
-              !oralizationActivated,
-            ),
-        },
-      ]);
+      actions.push({
+        label: oralizationActivated
+          ? this.intl.t('pages.organization-participants.table.actions.disable-oralization')
+          : this.intl.t('pages.organization-participants.table.actions.enable-oralization'),
+        onClick: () =>
+          this.args.toggleOralizationFeatureForParticipant(
+            participant.id,
+            this.currentUser.organization.id,
+            !oralizationActivated,
+          ),
+      });
     }
 
     if (this.currentUser.canEditLearnerName) {

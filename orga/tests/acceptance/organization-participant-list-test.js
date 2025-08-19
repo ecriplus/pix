@@ -96,5 +96,34 @@ module('Acceptance | Organization Participant List', function (hooks) {
         assert.notOk(screen.queryByText('Charles'));
       });
     });
+
+    module('when organization has oralization management feature', function (hooks) {
+      let user;
+
+      hooks.beforeEach(async function () {
+        user = createUserWithMembershipAndTermsOfServiceAccepted();
+        createPrescriberByUser({ user, features: { ORALIZATION: { active: true } } });
+        await authenticateSession(user.id);
+      });
+
+      test('should allow to deactivate oralization when feature is active', async function (assert) {
+        // given
+        const organizationId = user.memberships.models[0].organizationId;
+        server.create('organization-participant', {
+          organizationId,
+          firstName: 'Xavier',
+          lastName: 'Charles',
+          extraColumns: { ORALIZATION: true },
+        });
+
+        const screen = await visit('/participants');
+
+        // when
+        await clickByName(t('pages.sup-organization-participants.actions.show-actions'));
+
+        // then
+        assert.ok(screen.getByText(t('pages.organization-participants.table.actions.disable-oralization')));
+      });
+    });
   });
 });
