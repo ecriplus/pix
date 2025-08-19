@@ -8,7 +8,7 @@ function buildComplementaryCertification({
   createdAt = new Date('2020-01-01'),
   minimumReproducibilityRate = 70.0,
   minimumReproducibilityRateLowerLevel = 60.0,
-  hasComplementaryReferential = false,
+  hasComplementaryReferential = true,
   hasExternalJury = false,
   certificationExtraTime = 45,
 } = {}) {

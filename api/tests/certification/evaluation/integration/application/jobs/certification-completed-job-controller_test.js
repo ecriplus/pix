@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { CertificationCompletedJobController } from '../../../../../../src/certification/evaluation/application/jobs/certification-completed-job-controller.js';
 import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
@@ -525,9 +524,7 @@ describe('Certification | Evaluation | Integration | Application | Certification
           const limitDate = new Date('2020-01-01T00:00:00Z');
           certifiableUserId = databaseBuilder.factory.buildUser().id;
 
-          const cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-            key: ComplementaryCertificationKeys.CLEA,
-          });
+          const cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
 
           const badgeId = databaseBuilder.factory.buildBadge({ isCertifiable: true }).id;
           complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({

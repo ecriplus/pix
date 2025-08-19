@@ -7,6 +7,7 @@
  */
 
 import { FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
+import { getVersionNumber } from '../services/get-version-number.js';
 
 /**
  * @param {Object} params
@@ -38,17 +39,3 @@ export const createConsolidatedFramework = async ({
     version: getVersionNumber(),
   });
 };
-
-function getVersionNumber() {
-  const date = new Date();
-
-  const pad = (n) => String(n).padStart(2, '0');
-  return (
-    date.getUTCFullYear().toString() +
-    pad(date.getUTCMonth() + 1) +
-    pad(date.getUTCDate()) +
-    pad(date.getUTCHours()) +
-    pad(date.getUTCMinutes()) +
-    pad(date.getSeconds())
-  );
-}

@@ -1,5 +1,6 @@
 import { knex } from '../../../../db/knex-database-connection.js';
 import { httpAgent } from '../../../../src/shared/infrastructure/http-agent.js';
+import { getVersionNumber } from '../../../certification/configuration/domain/services/get-version-number.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
@@ -104,17 +105,25 @@ export async function findOperativeBySkills(skills, locale) {
 }
 
 export async function findActiveFlashCompatible({
+  date,
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
   complementaryCertificationKey,
+  hasComplementaryReferential,
 } = {}) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
   let challengeDtos;
 
-  if (complementaryCertificationKey) {
-    challengeDtos = await _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey });
+  if (hasComplementaryReferential) {
+    const version = getVersionNumber(date);
+
+    challengeDtos = await _findChallengesForComplementaryCertification({
+      complementaryCertificationKey,
+      cacheKey,
+      version,
+    });
   } else {
     challengeDtos = await _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNeeded, cacheKey });
   }
@@ -124,10 +133,17 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey }) {
+async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, version }) {
+  const { closestVersion } = await knex('certification-frameworks-challenges')
+    .where({ complementaryCertificationKey })
+    .andWhere('version', '<=', version)
+    .max('version as closestVersion')
+    .first();
+
   const complementaryCertificationChallenges = await knex
     .from('certification-frameworks-challenges')
-    .where({ complementaryCertificationKey });
+    .where({ complementaryCertificationKey })
+    .andWhere('version', '=', closestVersion);
 
   const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
     ({ challengeId }) => challengeId,

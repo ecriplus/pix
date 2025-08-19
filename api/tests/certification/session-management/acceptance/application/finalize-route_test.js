@@ -3,7 +3,6 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { config } from '../../../../../src/shared/config.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
@@ -604,9 +603,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             // given
             const userId = databaseBuilder.factory.buildUser().id;
 
-            const cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-              key: ComplementaryCertificationKeys.CLEA,
-            });
+            const cleaComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
 
             const badgeId = databaseBuilder.factory.buildBadge({ isCertifiable: true }).id;
             const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
