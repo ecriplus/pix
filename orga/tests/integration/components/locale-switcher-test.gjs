@@ -8,6 +8,7 @@ import LocaleSwitcher from 'pix-orga/components/locale-switcher';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { setCurrentLocale } from '../../helpers/setup-intl';
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | LocaleSwitcher', function (hooks) {
@@ -30,11 +31,11 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
   module('when component renders', function () {
     test('displays current locale', async function (assert) {
       // given
-      sinon.stub(localeService, 'currentLocale').value('en');
+      setCurrentLocale('en');
 
       // when
       const screen = await render(<template><LocaleSwitcher /></template>);
-      await click(screen.getByRole('button', { name: 'Sélectionnez une langue' }));
+      await click(screen.getByRole('button', { name: 'Select a language' }));
       await screen.findByRole('listbox');
 
       // then
@@ -44,7 +45,7 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
 
     test('displays a defaultValue', async function (assert) {
       // given
-      sinon.stub(localeService, 'currentLocale').value('fr');
+      setCurrentLocale('fr');
 
       // when
       const screen = await render(<template><LocaleSwitcher @defaultValue="en" /></template>);
