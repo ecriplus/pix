@@ -129,7 +129,7 @@
                     {
                       "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
                       "type": "text",
-                      "content": "<p>Pour apprendre à reconnaître des images, un logiciel d’IA fait un peu ce que vous avez fait&nbsp;:</p><ul><li>D'abord, on vous a donné <strong>plusieurs exemples</strong> de photographies de plantes.🌼</li><li>Chaque photographie était <strong>accompagnée de son nom</strong>.</li><li>Ensuite, on vous a demandé de <strong>reconnaître</strong> le nom de la plante sur chaque photographie. Pour cela, vous avez repéré les caractéristiques de chaque plante pour pouvoir les identifier par la suite. 🧐</li></ul>"
+                      "content": "<p>Pour apprendre à reconnaître des images, un logiciel d’IA fait un peu ce que vous avez fait :</p><ul><li>D'abord, on vous a donné <strong>plusieurs exemples</strong> de photographies de plantes.🌼</li><li>Chaque photographie était <strong>accompagnée de son nom</strong>.</li><li>Ensuite, on vous a demandé de <strong>reconnaître</strong> le nom de la plante sur chaque photographie. Pour cela, vous avez repéré les caractéristiques de chaque plante pour pouvoir les identifier par la suite. 🧐</li></ul>"
                     }
                   ]
                 },
@@ -138,7 +138,7 @@
                     {
                       "id": "e089a941-4bfb-473f-879a-892f1be410ce",
                       "type": "text",
-                      "content": "<p>C’est un peu pareil pour un logiciel d’IA&nbsp;: </p><ul><li>On lui donne <strong>beaucoup d’exemples </strong>de ce qu’il doit reconnaître. C’est ce que l’on appelle <strong>un jeu de données.</strong> </li><li>Chaque<strong> photographie </strong>est associé à une <strong>étiquette</strong>. Ce sont <strong>des données étiquetées</strong>.🏷️</li><li>Le logiciel d’IA<strong> analyse les caractéristiques</strong> de tous les exemples (forme, couleur, texture...) pour ensuite associer lui-même chaque exemple à son étiquette.🔍</li></ul>"
+                      "content": "<p>C’est un peu pareil pour un logiciel d’IA : </p><ul><li>On lui donne <strong>beaucoup d’exemples </strong>de ce qu’il doit reconnaître. C’est ce que l’on appelle <strong>un jeu de données.</strong> </li><li>Chaque<strong> photographie </strong>est associé à une <strong>étiquette</strong>. Ce sont <strong>des données étiquetées</strong>.🏷️</li><li>Le logiciel d’IA<strong> analyse les caractéristiques</strong> de tous les exemples (forme, couleur, texture...) pour ensuite associer lui-même chaque exemple à son étiquette.🔍</li></ul>"
                     }
                   ]
                 },
@@ -147,7 +147,7 @@
                     {
                       "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
                       "type": "text",
-                      "content": "<p>On parle alors d’<strong>apprentissage supervisé</strong>. </p><p>Pourquoi ? Parce qu’au départ, ce sont des humains qui attribuent les étiquettes aux données : ils “<strong>supervisent</strong>” ainsi l’apprentissage du logiciel.👨🏽‍💻 </p><br><p>L’apprentissage supervisé est <strong>l’une des méthodes de l’apprentissage automatique</strong>.</p><p>L’apprentissage automatique est une des techniques de l’intelligence artificielle.🤖</p>"
+                      "content": "<p>On parle alors d’<strong>apprentissage supervisé</strong>. </p><p>Pourquoi ? Parce qu’au départ, ce sont des humains qui attribuent les étiquettes aux données : ils “<strong>supervisent</strong>” ainsi l’apprentissage du logiciel.👨🏽‍💻 </p><br><p>💡Bon à savoir</p><p>L’apprentissage supervisé est <strong>l’une des méthodes de l’apprentissage automatique</strong>.</p><p>L’apprentissage automatique est une des techniques de <strong>l’intelligence artificielle</strong>.🤖</p>"
                     }
                   ]
                 }
