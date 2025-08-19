@@ -49,8 +49,19 @@ describe('Certification | Results | Unit | Domain | Use Cases | get-session-resu
       resultRecipientEmail: 'MATCHING@example.net',
       subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
+    const certificationCandidateWithoutRecipientEmail = domainBuilder.buildCertificationCandidate({
+      id: 988,
+      resultRecipientEmail: null,
+      subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+    });
+
     const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
-      certificationCandidates: [certificationCandidate1, certificationCandidate2, certificationCandidate3],
+      certificationCandidates: [
+        certificationCandidate1,
+        certificationCandidate2,
+        certificationCandidate3,
+        certificationCandidateWithoutRecipientEmail,
+      ],
       date: '2019-06-06',
       time: '12:05:30',
     });
