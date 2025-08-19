@@ -12,7 +12,7 @@
 import _ from 'lodash';
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { ReproducibilityRate } from '../../../../../shared/domain/models/ReproducibilityRate.js';
+import { ReproducibilityRate } from '../../../../../certification/shared/domain/models/ReproducibilityRate.js';
 import { CertificationAssessmentScore } from '../../../../scoring/domain/models/CertificationAssessmentScore.js';
 import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../shared/domain/models/AlgorithmEngineVersion.js';

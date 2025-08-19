@@ -19,3 +19,4 @@ export const SUBSCRIPTION_TYPES = Object.freeze({
 });
 
 export const DEFAULT_SESSION_DURATION_MINUTES = 105;
+export const MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED = 50;

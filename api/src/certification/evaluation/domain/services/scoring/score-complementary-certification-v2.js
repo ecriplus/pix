@@ -6,9 +6,9 @@
  * @typedef {import('../index.js').ComplementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  */
 
-import { ReproducibilityRate } from '../../../../../shared/domain/models/ReproducibilityRate.js';
 import { AnswerCollectionForScoring } from '../../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { ComplementaryCertificationCourseResult } from '../../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { ReproducibilityRate } from '../../../../shared/domain/models/ReproducibilityRate.js';
 import { ComplementaryCertificationScoringWithComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithComplementaryReferential.js';
 import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
 
