@@ -355,6 +355,37 @@
       "success": "De deelnemers zijn geïmporteerd op {date} door {firstName} {lastName}."
     },
     "index": {
+      "action-cards": {
+        "classic": {
+          "create-campaign": {
+            "buttonText": "Nieuwe campagne",
+            "description": "Kies het parcours waarmee u uw deelnemers wilt evalueren of verzamel hun Pix-profiel.",
+            "title": "Een campagne maken"
+          },
+          "follow-activity": {
+            "buttonText": "Mijn campagnes bekijken",
+            "description": "Bekijk de status en resultaten van uw deelnemers.",
+            "title": "Activiteit volgen"
+          }
+        },
+        "missions": {
+          "extend-session": {
+            "buttonText": "Sessie verlengen",
+            "description": "Sessie verlengen",
+            "title": "Sessie verlengen"
+          },
+          "follow-activity": {
+            "buttonText": "Missies bekijken",
+            "description": "Bekijk de status en resultaten van uw deelnemers.",
+            "title": "Activiteit volgen"
+          },
+          "launch-session": {
+            "buttonText": "Sessie activeren",
+            "description": "Deze actie moet worden uitgevoerd voordat u uw leerlingen uitnodigt om naar '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' te gaan en de schoolcode in te voeren om toegang te krijgen tot de missies.",
+            "title": "Een sessie starten"
+          }
+        }
+      },
       "organization-information": {
         "label": "Naam van uw organisatie",
         "title": "De informatie van uw organisatie"
