@@ -1,17 +1,17 @@
 import { CertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 
-const buildV3CertificationEligibility = function ({
+const buildCertificationEligibility = function ({
   label = "Label d'éligibilité",
   imageUrl = "url d'image",
-  isOutdated = false,
-  isAcquiredExpectedLevel = true,
+  isBadgeValid = true,
+  validatedDoubleCertification = true,
 } = {}) {
   return new CertificationEligibility({
     label,
     imageUrl,
-    isOutdated,
-    isAcquiredExpectedLevel,
+    isBadgeValid,
+    validatedDoubleCertification,
   });
 };
 
-export { buildV3CertificationEligibility };
+export { buildCertificationEligibility };

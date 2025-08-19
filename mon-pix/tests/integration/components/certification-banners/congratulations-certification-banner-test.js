@@ -24,4 +24,24 @@ module('Integration | Component | Certification Banners | Congratulations Certif
     // then
     assert.ok(screen.getByText('Bravo Fifi Brindacier, votre profil Pix est certifiable.'));
   });
+
+  module('when there is no double certification eligibility', function () {
+    test('should not display double certification information', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      this.set('fullName', 'Fifi Brindacier');
+      this.set('certificationEligibility', store.createRecord('is-certifiable', { 'is-certifiable': true }));
+
+      // when
+      const screen = await render(
+        hbs`<CertificationBanners::CongratulationsCertificationBanner
+  @fullName={{this.fullName}}
+  @certificationEligibility={{this.certificationEligibility}}
+/>`,
+      );
+
+      // then
+      assert.notOk(screen.queryByText('Vous êtes également éligible à la certification complémentaire :'));
+    });
+  });
 });

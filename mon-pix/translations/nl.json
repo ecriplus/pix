@@ -801,8 +801,8 @@
     "certification-joiner": {
       "congratulation-banner": {
         "complementary-certification": {
-          "eligible": "Je komt ook in aanmerking { count, plural, =1 {à la certification complémentaire} other {aux certifications complémentaires} } :",
-          "outdated": "<strong>Je komt niet langer in aanmerking voor de {complementaryCertificationName}-certificering na de evolutie ervan.</strong><br />Neem contact op met je school of de organisatie die je de cursus heeft aangeboden om opnieuw een campagne te doen en zo weer in aanmerking te komen. Je voortgang is bewaard gebleven en je hoeft alleen nog maar de nieuwe evenementen te spelen, wat snel zou moeten gaan."
+          "eligible": "Je komt ook in aanmerking voor de aanvullende certificering :",
+          "outdated": "<strong>Je komt niet langer in aanmerking voor de {doubleCertificationName}-certificering na de evolutie ervan.</strong><br />Neem contact op met je school of de organisatie die je de cursus heeft aangeboden om opnieuw een campagne te doen en zo weer in aanmerking te komen. Je voortgang is bewaard gebleven en je hoeft alleen nog maar de nieuwe evenementen te spelen, wat snel zou moeten gaan."
         },
         "link": {
           "text": "Hoe word ik gecertificeerd?",

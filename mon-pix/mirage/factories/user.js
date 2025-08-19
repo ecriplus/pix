@@ -321,7 +321,15 @@ export default Factory.extend({
   }),
   certifiable: trait({
     afterCreate(user, server) {
-      user.update({ isCertifiable: server.create('is-certifiable', { 'is-certifiable': true }) });
+      user.update({
+        isCertifiable: server.create('is-certifiable', {
+          'is-certifiable': true,
+          doubleCertificationEligibility: {
+            isBadgeValid: true,
+            validatedDoubleCertification: true,
+          },
+        }),
+      });
     },
   }),
   notCertifiable: trait({
