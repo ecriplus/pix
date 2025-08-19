@@ -135,7 +135,7 @@
                     {
                       "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
                       "type": "text",
-                      "content": "<p>Pour apprendre à reconnaître des images, un logiciel d’IA fait un peu ce que vous avez fait :</p><ul><li>D'abord, on vous a donné <strong>plusieurs exemples</strong> de photographies de plantes.🌼</li><li>Chaque photographie était <strong>accompagnée de son nom</strong>.</li><li>Ensuite, on vous a demandé de <strong>reconnaître</strong> le nom de la plante sur chaque photographie. Pour cela, vous avez repéré les caractéristiques de chaque plante pour pouvoir les identifier par la suite. 🧐</li></ul>"
+                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, on lui fait faire ce que vous venez de faire :</p><ul><li>D'abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données </strong>.🌼</li><li>Chaque exemple est associé - ou étiqueté - par le <strong>nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
                     }
                   ]
                 },
@@ -144,7 +144,7 @@
                     {
                       "id": "e089a941-4bfb-473f-879a-892f1be410ce",
                       "type": "text",
-                      "content": "<p>C’est un peu pareil pour un logiciel d’IA : </p><ul><li>On lui donne <strong>beaucoup d’exemples </strong>de ce qu’il doit reconnaître. C’est ce que l’on appelle <strong>un jeu de données.</strong> </li><li>Chaque<strong> photographie </strong>est associé à une <strong>étiquette</strong>. Ce sont <strong>des données étiquetées</strong>.🏷️</li><li>Le logiciel d’IA<strong> analyse les caractéristiques</strong> de tous les exemples (forme, couleur, texture...) pour ensuite associer lui-même chaque exemple à son étiquette.🔍</li></ul>"
+                      "content": "<p>Ensuite, le logiciel d’IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</li></ul>"
                     }
                   ]
                 },
@@ -153,11 +153,26 @@
                     {
                       "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
                       "type": "text",
-                      "content": "<p>On parle alors d’<strong>apprentissage supervisé</strong>. </p><p>Pourquoi ? Parce qu’au départ, ce sont des humains qui attribuent les étiquettes aux données : ils “<strong>supervisent</strong>” ainsi l’apprentissage du logiciel.👨🏽‍💻 </p><br><p>💡Bon à savoir</p><p>L’apprentissage supervisé est <strong>l’une des méthodes de l’apprentissage automatique</strong>.</p><p>L’apprentissage automatique est une des techniques de <strong>l’intelligence artificielle</strong>.🤖</p>"
+                      "content": "<p>Il s'agit d'une technique d’</strong>apprentissage automatique</strong> utilisée en intelligence artificielle. 🤖</p><p>On l’appelle l’apprentissage automatique <strong>supervisé</strong>. Pourquoi ? Cela met en avant le fait que les ingénieurs qui préparent le jeu d’exemples guident et supervisent le logiciel.👨🏽‍💻</p>"
                     }
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "395fc300-2668-4202-b874-8dbe7eb0c1f4",
+          "type": "transition",
+          "title": "transition n°1 ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
+                "type": "text",
+                "content": "<p>Voyons comment fait un logiciel d’IA pour analyser les photographies et apprendre à retrouver l’étiquette.</p>"
+              }
             }
           ]
         },
@@ -178,8 +193,7 @@
               }
             }
           ]
-        },
-        {
+        },{
           "id": "b0076163-02ae-4805-af3e-dd82781347ba",
           "type": "lesson",
           "title": "Lesson 2a : décomposition en valeurs numériques",
@@ -189,7 +203,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>En <strong>apprentissage automatique</strong>, on n'a pas besoin d'expliquer au logiciel comment associer une image à son étiquette&nbsp;: il <strong>analyse</strong> les pixels, détecte les caractéristiques visuelles et les convertit en <strong>valeurs numériques</strong>.🔢</p>"
+                "content": "<p>Pour être numérisée, une photographie est découpée en plusieurs points ou pixels. Chaque pixel est représenté par un nombre correspondant à l’intensité de sa couleur. Pour un ordinateur, une photographie est donc un tableau de nombres. 🖼️➡️🔢</p>"
               }
             }
           ]
@@ -197,14 +211,14 @@
         {
           "id": "3b2f5ec0-e70b-422a-9d55-84b741885c40",
           "type": "transition",
-          "title": "transition n°1 ",
+          "title": "transition n°2 ",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "bde3a389-1875-4e42-9c06-1cab0c51be96",
                 "type": "text",
-                "content": "<p>Maintenant, regardons de plus près&nbsp;: comment le logiciel fait le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
+                "content": "<p>Maintenant, regardons de plus près : comment le logiciel fait le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
               }
             }
           ]
