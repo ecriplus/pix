@@ -221,6 +221,94 @@ describe('Certification | Enrolment | Unit | UseCase | enrol-students-to-session
       expect(error.message).to.contains(`${organizationLearners[0].firstName} ${organizationLearners[0].lastName}`);
     });
 
+    context('when student birth city is missing', function () {
+      it('should get birth city from the student birth city code', async function () {
+        // given
+        const session = domainBuilder.certification.enrolment.buildSession();
+        const sessionId = session.id;
+
+        const organizationForReferent = domainBuilder.buildOrganization();
+        const country = domainBuilder.buildCountry({
+          code: '99100',
+          name: 'FRANCE',
+        });
+
+        const organizationLearner = domainBuilder.buildOrganizationLearner({
+          id: 1,
+          firstName: 'Sarah Michelle ',
+          lastName: ' Gellar',
+          birthdate: '2020-01-01',
+          sex: 'F',
+          birthCity: null,
+          birthCityCode: '75115',
+          organization: organizationForReferent,
+        });
+
+        const expectedCertificationCandidate = new SCOCertificationCandidate({
+          firstName: 'Sarah Michelle',
+          lastName: 'Gellar',
+          birthdate: organizationLearner.birthdate,
+          sex: organizationLearner.sex,
+          birthINSEECode: organizationLearner.birthCityCode,
+          birthCountry: country.name,
+          birthCity: 'expected city',
+          sessionId: sessionId,
+          organizationLearnerId: 1,
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+          ],
+        });
+
+        const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
+        const organizationLearnerRepository = { findByIds: sinon.stub() };
+        const countryRepository = { findAll: sinon.stub() };
+        countryRepository.findAll.resolves([country]);
+        organizationLearnerRepository.findByIds.withArgs({ ids: [1] }).resolves([organizationLearner]);
+        const sessionRepository = { get: sinon.stub() };
+        sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
+        const centerRepository = { getById: sinon.stub() };
+        centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
+          domainBuilder.certification.enrolment.buildCenter({
+            matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+              id: organizationForReferent.id,
+            }),
+          }),
+        );
+        const certificationCpfService = { getBirthInformation: sinon.stub() };
+        const certificationCpfCountryRepository = {};
+        const certificationCpfCityRepository = {};
+
+        certificationCpfService.getBirthInformation.resolves({ birthCity: expectedCertificationCandidate.birthCity });
+
+        // when
+        await enrolStudentsToSession({
+          sessionId,
+          studentIds: [1],
+          scoCertificationCandidateRepository,
+          organizationLearnerRepository,
+          sessionRepository,
+          countryRepository,
+          centerRepository,
+          certificationCpfCountryRepository,
+          certificationCpfCityRepository,
+          certificationCpfService,
+        });
+
+        // then
+        expect(certificationCpfService.getBirthInformation).to.have.been.calledOnceWithExactly({
+          birthCountry: country.name,
+          birthINSEECode: organizationLearner.birthCityCode,
+          birthCity: null,
+          birthPostalCode: null,
+          certificationCpfCountryRepository,
+          certificationCpfCityRepository,
+        });
+        expect(scoCertificationCandidateRepository.findBySessionId(sessionId)).to.deep.equal([
+          expectedCertificationCandidate,
+        ]);
+      });
+    });
+
     it('does nothing if no student ids is given as input', async function () {
       // given
       const session = domainBuilder.certification.enrolment.buildSession();
