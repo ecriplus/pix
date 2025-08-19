@@ -565,7 +565,7 @@
                           "content": "<p>oui</p>",
                           "feedback": {
                             "state": "<p>En effet.</p>",
-                            "diagnosis": ""
+                            "diagnosis": "La création vidéo est ce qui demande le plus de puissance de calcul. Le supercalculateur ne peut pas en traiter autant que du texte ou des images."
                           }
                         },
                         {
@@ -601,7 +601,7 @@
                           "content": "<p>non</p>",
                           "feedback": {
                             "state": "<p>En effet.</p>",
-                            "diagnosis": ""
+                            "diagnosis": "La création d'images demande plus de puissance de calcul que la création de texte. Le supercalculateur ne peut pas en traiter autant en même temps."
                           }
                         }
                       ],
@@ -621,7 +621,7 @@
                           "content": "<p>oui</p>",
                           "feedback": {
                             "state": "<p>En effet.</p>",
-                            "diagnosis": ""
+                            "diagnosis": "Le supercalculateur a une capacité de calcul suffisante pour traiter des dizaines de milliers de création de texte en même temps."
                           }
                         },
                         {
