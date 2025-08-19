@@ -7,7 +7,6 @@ import { DataForQuest } from '../models/DataForQuest.js';
 export async function getCombinedCourseByCode({
   userId,
   code,
-  hostURL,
   combinedCourseParticipationRepository,
   combinedCourseRepository,
   campaignRepository,
@@ -66,7 +65,7 @@ export async function getCombinedCourseByCode({
 
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
 
-  const combinedCourseUrl = hostURL + '/parcours/' + combinedCourseDetails.code;
+  const combinedCourseUrl = '/parcours/' + combinedCourseDetails.code;
   const encryptedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
   combinedCourseDetails.generateItems(
     [...campaigns, ...modules],
