@@ -5,11 +5,11 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>L’intelligence artificielle a de multiples applications&nbsp;: génération de texte, recommandation de contenus, reconnaissance d’image … 🖼️ </p><p>Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible&nbsp;: l’apprentissage automatique supervisé. 🤖<br><br></p>",
+    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé. 🤖</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage :&nbsp; de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces. 🖼️</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Décrire le fonctionnement de l’apprentissage automatique supervisé grâce à un exemple&nbsp;: la reconnaissance d’image (données étiquetées, entraînement, prédiction)<br><br></p>",
+      "<p>Décrire le fonctionnement de l’apprentissage automatique supervisé<br></p>",
       "<p>Identifier les limites de l’apprentissage automatique supervisé</p>"
     ],
     "tabletSupport": "comfortable"
@@ -596,6 +596,137 @@
           ]
         },
         {
+          "id": "7baa516e-9380-409f-915a-2bde0ffe9f87",
+          "type": "activity",
+          "title": "Trouver le bon jeu de données",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "type": "text",
+                "content": "<p>Observez ces différents jeux de données et répondez à la question ci-dessous.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "bcc71c8a-4954-4705-959e-3e0c4d65832b",
+                "type": "custom",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "jeux de données 1",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolflou.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 2",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolpasvarie.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 3",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolok.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 4",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tounesolmasetiquete.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "aspectRatio": 0,
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
+                "type": "qcu",
+                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel de reconnaissance d'image de tournesols ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Jeu de données 1</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>Plusiers photographies de ce jeu de données sont floues. Pour entraîner correctement un logiciel de reconnaissance d'image, les exemples fournis doivent être de bonne qualité.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Jeu de données 2</p>",
+                    "feedback": {
+                      "state": "<p>Et non !<br></p>",
+                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut donner des exemples très variés afin qu'il aprenne à généraliser.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Jeu de données 3</p>",
+                    "feedback": {
+                      "state": "<p>Bravo !<br></p>",
+                      "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d'image, il faut lui donner des exemples bien étiquetés, variés et de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Jeu de données 4</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>Plusiers photographies de ce jeu de données ne sont pas bien étiquétées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut lui donner des exemples accompagnés de la bonne étiquette.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
           "id": "3cfbafc0-3501-495f-af79-ca93b8c9668c",
           "type": "challenge",
           "title": "Défi : et pour l'exemple des oiseaux ?",
@@ -628,7 +759,11 @@
                     "placeholder": "",
                     "ariaLabel": "champ à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Chant d'oiseau",
                       "Des chants d'oiseaux",
@@ -650,8 +785,16 @@
                     "placeholder": "",
                     "ariaLabel": "champ à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
-                    "solutions": ["Nom d'oiseau", "Noms des oiseaux", "Le nom des oiseaux"]
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Nom d'oiseau",
+                      "Noms des oiseaux",
+                      "Le nom des oiseaux"
+                    ]
                   }
                 ],
                 "feedbacks": {
