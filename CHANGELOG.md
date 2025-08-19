@@ -1,5 +1,47 @@
 # Pix Changelog
 
+# [5.186.0](https://github.com/1024pix/pix/compare/v5.185.0...v5.186.0) (2025-08-19)
+
+### :rocket: Amélioration
+
+- [#13181](https://github.com/1024pix/pix/pull/13181) Afficher un message d'erreur à l'utilisateur sur la page du code candidat lorsque le centre n'a plus l'habilitation (PIX-19113). 
+- [#13191](https://github.com/1024pix/pix/pull/13191) Ajouter l'import JSON pour la création d'un référentiel cadre (PIX-19143). 
+- [#13207](https://github.com/1024pix/pix/pull/13207) Permettre la création de plusieurs campagne via la campaignAPI du contexte Prescription (PIX-19158). 
+- [#13185](https://github.com/1024pix/pix/pull/13185) Suppression du message de perte d'éligibilité hors CléA sur l'espace surveillant (PIX-18854). 
+
+### :bug: Correction
+
+- [#13226](https://github.com/1024pix/pix/pull/13226) Afficher correctement la liste des participants (PIX-19165). 
+- [#13210](https://github.com/1024pix/pix/pull/13210) Corriger la gestion des tags d'orga dans PixAdmin (PIX-19161) 
+- [#13213](https://github.com/1024pix/pix/pull/13213) Permettre de retourner un masteryPercentage sans arrondi pour des calculs complexe (PIX-17143). 
+
+### :building_construction: Tech
+
+- [#13026](https://github.com/1024pix/pix/pull/13026) :card_file_box: Ajoute une contrainte d'unicité dans la table `certif-frameworks-challenges` (pix-18680) 
+- [#13044](https://github.com/1024pix/pix/pull/13044) :truck: Déplace le modèle `ReproducibilityRate` vers le contexte de Certification 
+- [#13200](https://github.com/1024pix/pix/pull/13200) Ajout de la nouvelle version patchée de epreuves-components 
+
+### :arrow_up: Montée de version
+
+- [#13201](https://github.com/1024pix/pix/pull/13201) Lock file maintenance (orga) 
+- [#13221](https://github.com/1024pix/pix/pull/13221) Update adobe/s3mock Docker tag to v4.7.0 (.circleci) 
+- [#13222](https://github.com/1024pix/pix/pull/13222) Update adobe/s3mock Docker tag to v4.7.0 (docker) 
+- [#13223](https://github.com/1024pix/pix/pull/13223) Update adobe/s3mock Docker tag to v4.7.0 (dossier racine) 
+- [#13202](https://github.com/1024pix/pix/pull/13202) Update dependency @1024pix/eslint-plugin to ^2.1.8 (api) 
+- [#13203](https://github.com/1024pix/pix/pull/13203) Update dependency @1024pix/eslint-plugin to ^2.1.8 (audit-logger) 
+- [#13208](https://github.com/1024pix/pix/pull/13208) Update dependency @1024pix/eslint-plugin to ^2.1.8 (certif) 
+- [#13209](https://github.com/1024pix/pix/pull/13209) Update dependency @1024pix/eslint-plugin to ^2.1.8 (dossier racine) 
+- [#13211](https://github.com/1024pix/pix/pull/13211) Update dependency @1024pix/eslint-plugin to ^2.1.8 (e2e-playwright) 
+- [#13212](https://github.com/1024pix/pix/pull/13212) Update dependency @1024pix/eslint-plugin to ^2.1.8 (junior) 
+- [#13216](https://github.com/1024pix/pix/pull/13216) Update dependency @1024pix/eslint-plugin to ^2.1.8 (mon-pix) 
+- [#12987](https://github.com/1024pix/pix/pull/12987) Update dependency @1024pix/pix-ui to ^55.25.1 (admin) 
+- [#12991](https://github.com/1024pix/pix/pull/12991) Update dependency @1024pix/pix-ui to ^55.25.1 (junior) 
+- [#13073](https://github.com/1024pix/pix/pull/13073) Update dependency @1024pix/pix-ui to ^55.25.1 (mon-pix) 
+- [#13219](https://github.com/1024pix/pix/pull/13219) Update dependency @1024pix/pix-ui to ^55.25.2 (junior) 
+- [#13220](https://github.com/1024pix/pix/pull/13220) Update dependency @1024pix/pix-ui to ^55.25.2 (mon-pix) 
+- [#13199](https://github.com/1024pix/pix/pull/13199) Update dependency @1024pix/pix-ui to ^55.25.2 (orga) 
+- [#12937](https://github.com/1024pix/pix/pull/12937) Update Node.js to v22.17.1
+
 # [5.185.0](https://github.com/1024pix/pix/compare/v5.184.0...v5.185.0) (2025-08-18)
 
 ### :rocket: Amélioration
