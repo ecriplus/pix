@@ -22,9 +22,11 @@ export default class CurrentSessionService extends SessionService {
     const queryParams = transition?.to?.queryParams;
     this.locale.setBestLocale({ user: this.currentUser.prescriber, queryParams });
 
-    if (!this.featureToggles.featureToggles?.useLocale) {
+    if (!this.featureToggles.featureToggles?.useLocale && this.currentUser.prescriber) {
       // should not happen with new locale system because we dont rely on user lang anymore.
       this.data.localeNotSupported = !this.locale.isSupportedLocale(this.currentUser.prescriber?.lang);
+    } else {
+      this.data.localeNotSupported = false;
     }
   }
 
