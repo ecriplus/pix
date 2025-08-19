@@ -37,7 +37,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
         getBySlug: sinon.stub(),
       };
       moduleRepository.getBySlug.withArgs({ slug }).resolves(expectedModule);
-      const expectedUrl = 'https://app.pix.fr/parcours/COMBINIX1';
+      const expectedUrl = '/parcours/COMBINIX1';
       const encryptedRedirectionUrl = await cryptoService.encrypt(expectedUrl, config.module.secret);
 
       // when

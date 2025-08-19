@@ -153,26 +153,15 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       module = new Module({ id, slug, title, isBeta, sections, details, version });
     });
 
-    it('should set redirectionUrl when url is valid', function () {
+    it('should set redirectionUrl', function () {
       // given
-      const url = 'https://app.pix.fr/parcours/COMBINIX1';
+      const url = '/parcours/COMBINIX1';
 
       // when
       module.setRedirectionUrl(url);
 
       // then
       expect(module.redirectionUrl).to.equal(url);
-    });
-
-    it('should not set redirectionUrl when url is invalid', function () {
-      // given
-      const url = 'wrong';
-
-      // when
-      module.setRedirectionUrl(url);
-
-      // then
-      expect(module.redirectionUrl).to.be.undefined;
     });
   });
 });
