@@ -21,17 +21,22 @@ export async function create({ complementaryCertificationKey, challenges, versio
 export async function getCurrentFrameworkByComplementaryCertificationKey({ complementaryCertificationKey }) {
   const knexConn = DomainTransaction.getConnection();
 
+  const lastComplementaryFramework = await knexConn('certification-frameworks-challenges')
+    .select('version')
+    .where({ complementaryCertificationKey })
+    .orderBy('version', 'desc')
+    .first();
+
+  if (!lastComplementaryFramework) {
+    throw new NotFoundError(`There is no framework for complementary ${complementaryCertificationKey}`);
+  }
+
   const currentFrameworkChallengesDTO = await knexConn('certification-frameworks-challenges')
     .select('discriminant', 'difficulty', 'challengeId', 'version', 'calibrationId', 'complementaryCertificationKey')
     .where({
-      version: knexConn('certification-frameworks-challenges').select('version').orderBy('version', 'desc').first(),
+      version: lastComplementaryFramework.version,
       complementaryCertificationKey,
-    })
-    .select('*');
-
-  if (currentFrameworkChallengesDTO.length === 0) {
-    throw new NotFoundError(`There is no framework for complementary ${complementaryCertificationKey}`);
-  }
+    });
 
   return _toDomain({ certificationFrameworksChallengesDTO: currentFrameworkChallengesDTO });
 }
