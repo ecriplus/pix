@@ -1,7 +1,6 @@
 import { attestationController } from '../../../../src/profile/application/attestation-controller.js';
 import { usecases } from '../../../../src/profile/domain/usecases/index.js';
 import { FRENCH_FRANCE } from '../../../../src/shared/domain/services/locale-service.js';
-import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Profile | Unit | Controller | attestation-controller', function () {
@@ -37,7 +36,6 @@ describe('Profile | Unit | Controller | attestation-controller', function () {
       // when
       await attestationController.getUserAttestation(request, hFake, {
         pdfWithFormSerializer: pdfWithFormSerializerStub,
-        requestResponseUtils,
       });
 
       // then

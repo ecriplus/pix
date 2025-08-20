@@ -1,7 +1,6 @@
 import * as path from 'node:path';
 import * as url from 'node:url';
 
-import * as requestResponseUtils from '../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { FRENCH_FRANCE } from '../../shared/domain/services/locale-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as attestationSerializer from '../infrastructure/serializers/jsonapi/attestation-detail-serializer.js';
@@ -9,7 +8,7 @@ import * as pdfWithFormSerializer from '../infrastructure/serializers/pdf/pdf-wi
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const getUserAttestation = async function (request, h, dependencies = { pdfWithFormSerializer, requestResponseUtils }) {
+const getUserAttestation = async function (request, h, dependencies = { pdfWithFormSerializer }) {
   const userId = request.params.userId;
   const attestationKey = request.params.attestationKey;
 
