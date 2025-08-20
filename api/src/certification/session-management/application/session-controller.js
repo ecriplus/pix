@@ -48,13 +48,16 @@ const getJuryCertificationSummaries = async function (
 ) {
   const { sessionId } = request.params;
   const { page } = request.query;
+  const translate = request.i18n.__;
 
   const { juryCertificationSummaries, pagination } =
     await dependencies.juryCertificationSummaryRepository.findBySessionIdPaginated({
       sessionId,
       page,
     });
-  return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination);
+  return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination, {
+    translate,
+  });
 };
 
 const sessionController = {

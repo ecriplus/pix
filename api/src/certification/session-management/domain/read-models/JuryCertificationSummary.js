@@ -1,6 +1,9 @@
 import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 const STARTED = 'started';
 const ENDED_BY_SUPERVISOR = 'endedBySupervisor';
+const CORE_CERTIFICATION = 'CORE';
+const DOUBLE_CORE_CLEA_CERTIFICATION = 'DOUBLE_CORE_CLEA';
 
 class JuryCertificationSummary {
   constructor({
@@ -14,7 +17,8 @@ class JuryCertificationSummary {
     abortReason,
     isPublished,
     isEndedBySupervisor,
-    complementaryCertificationTakenLabel,
+    complementaryCertificationLabelObtained,
+    complementaryCertificationKeyObtained,
     certificationIssueReports,
   } = {}) {
     this.id = id;
@@ -23,7 +27,10 @@ class JuryCertificationSummary {
     this.status = _getStatus({ status, isEndedBySupervisor });
     this.pixScore = pixScore;
     this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
-    this.complementaryCertificationTakenLabel = complementaryCertificationTakenLabel;
+    this.certificationObtained = _getCertificationObtained({
+      complementaryCertificationLabelObtained,
+      complementaryCertificationKeyObtained,
+    });
     this.createdAt = createdAt;
     this.completedAt = completedAt;
     this.isPublished = isPublished;
@@ -41,6 +48,20 @@ class JuryCertificationSummary {
   hasCompletedAssessment() {
     return this.status !== JuryCertificationSummary.statuses.STARTED;
   }
+
+  getCertificationLabel(translate) {
+    return this.#shouldBeTranslated() ? translate(this.#getKeyToTranslate()) : this.certificationObtained;
+  }
+
+  #getKeyToTranslate() {
+    return `jury-certification-summary.comment.${this.certificationObtained}`;
+  }
+
+  #shouldBeTranslated() {
+    return !!(
+      this.certificationObtained === CORE_CERTIFICATION || this.certificationObtained === DOUBLE_CORE_CLEA_CERTIFICATION
+    );
+  }
 }
 
 function _getStatus({ status, isEndedBySupervisor }) {
@@ -54,8 +75,19 @@ function _getStatus({ status, isEndedBySupervisor }) {
 
   return status;
 }
+
+function _getCertificationObtained({ complementaryCertificationLabelObtained, complementaryCertificationKeyObtained }) {
+  if (!complementaryCertificationLabelObtained) {
+    return CORE_CERTIFICATION;
+  }
+  if (complementaryCertificationKeyObtained === ComplementaryCertificationKeys.CLEA) {
+    return DOUBLE_CORE_CLEA_CERTIFICATION;
+  }
+  return complementaryCertificationLabelObtained;
+}
+
 const statuses = { ...assessmentResultStatuses, STARTED, ENDED_BY_SUPERVISOR };
 
 JuryCertificationSummary.statuses = statuses;
 
-export { JuryCertificationSummary, statuses };
+export { CORE_CERTIFICATION, DOUBLE_CORE_CLEA_CERTIFICATION, JuryCertificationSummary, statuses };

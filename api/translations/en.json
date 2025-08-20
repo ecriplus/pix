@@ -451,6 +451,12 @@
       }
     }
   },
+  "jury-certification-summary": {
+    "comment": {
+      "CORE": "Pix certification",
+      "DOUBLE_CORE_CLEA": "Double Certification Pix/CléA Numérique"
+    }
+  },
   "organization-invitation-email": {
     "params": {
       "acceptInvitation": "Accept the invitation",

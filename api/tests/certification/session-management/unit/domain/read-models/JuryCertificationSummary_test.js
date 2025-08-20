@@ -1,7 +1,12 @@
 import lodash from 'lodash';
 
-import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import {
+  CORE_CERTIFICATION,
+  JuryCertificationSummary,
+} from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 const { forIn } = lodash;
 
@@ -12,7 +17,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       const notImpactfulIssueReport = domainBuilder.buildCertificationIssueReport.notImpactful({ resolvedAt: null });
       const data = {
         certificationIssueReports: [notImpactfulIssueReport],
-        complementaryCertificationTakenLabel: 'Pix+ Droit Expert',
+        certificationObtained: 'Pix+ Droit Expert',
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -30,7 +35,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       // then
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
-        complementaryCertificationTakenLabel: 'Pix+ Droit Expert',
+        certificationObtained: CORE_CERTIFICATION,
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -251,6 +256,59 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
           // then
           expect(hasCompletedAssessment).to.be.false;
         });
+      });
+    });
+  });
+
+  describe('#getCertificationLabel', function () {
+    context('when the certification taken is core', function () {
+      it('should return the translated comment matching the key', function () {
+        // given
+        const translate = getI18n().__;
+        const juryCertificationSummary = new JuryCertificationSummary({
+          complementaryCertificationLabelObtained: null,
+          complementaryCertificationKeyObtained: null,
+        });
+
+        // when
+        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
+
+        // then
+        expect(certificationLabel).to.equal(translate('jury-certification-summary.comment.CORE'));
+      });
+    });
+
+    context('when the certification taken is a double certification', function () {
+      it('should return the translated comment matching the key', function () {
+        // given
+        const translate = getI18n().__;
+        const juryCertificationSummary = new JuryCertificationSummary({
+          complementaryCertificationLabelObtained: 'CléA Numérique',
+          complementaryCertificationKeyObtained: ComplementaryCertificationKeys.CLEA,
+        });
+
+        // when
+        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
+
+        // then
+        expect(certificationLabel).to.equal(translate('jury-certification-summary.comment.DOUBLE_CORE_CLEA'));
+      });
+    });
+
+    context('when the certification taken is complementary', function () {
+      it('should return the label', function () {
+        // given
+        const translate = getI18n().__;
+        const juryCertificationSummary = new JuryCertificationSummary({
+          complementaryCertificationLabelObtained: 'Pix+ Droit',
+          complementaryCertificationKeyObtained: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        });
+
+        // when
+        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
+
+        // then
+        expect(certificationLabel).to.equal(translate('Pix+ Droit'));
       });
     });
   });

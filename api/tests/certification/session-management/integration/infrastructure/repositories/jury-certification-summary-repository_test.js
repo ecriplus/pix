@@ -1,10 +1,15 @@
-import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import {
+  CORE_CERTIFICATION,
+  DOUBLE_CORE_CLEA_CERTIFICATION,
+  JuryCertificationSummary,
+} from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import * as juryCertificationSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
@@ -98,7 +103,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
               hasBeenAutomaticallyResolved: null,
             }),
           ],
-          complementaryCertificationTakenLabel: null,
+          certificationObtained: null,
         });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);
@@ -230,38 +235,104 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
       });
     });
 
-    it(`should have an associated label when certification is taken`, async function () {
-      // given
-      const dbf = databaseBuilder.factory;
-      const sessionId = dbf.buildSession().id;
-      const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
-      const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
-      databaseBuilder.factory.buildComplementaryCertification({ id: 101 });
-      databaseBuilder.factory.buildComplementaryCertificationBadge({
-        id: 11,
-        label: 'PARTNER_LABEL',
-        badgeId,
-        complementaryCertificationId: 101,
-      });
-      dbf.buildComplementaryCertificationCourse({
-        id: 998,
-        complementaryCertificationId: 101,
-        certificationCourseId,
-        complementaryCertificationBadgeId: 11,
-      });
-      dbf.buildComplementaryCertificationCourseResult({
-        complementaryCertificationCourseId: 998,
-        complementaryCertificationBadgeId: 11,
-        acquired: true,
-      });
-      await databaseBuilder.commit();
+    describe('when complementary certification is taken', function () {
+      it(`should return the complementary certification label`, async function () {
+        // given
+        const dbf = databaseBuilder.factory;
+        const sessionId = dbf.buildSession().id;
+        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
+        const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
+        databaseBuilder.factory.buildComplementaryCertification({
+          id: 101,
+          label: 'Pix+ Droit',
+          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        });
+        databaseBuilder.factory.buildComplementaryCertificationBadge({
+          id: 11,
+          label: 'PARTNER_LABEL',
+          badgeId,
+          complementaryCertificationId: 101,
+        });
+        dbf.buildComplementaryCertificationCourse({
+          id: 998,
+          complementaryCertificationId: 101,
+          certificationCourseId,
+          complementaryCertificationBadgeId: 11,
+        });
+        dbf.buildComplementaryCertificationCourseResult({
+          complementaryCertificationCourseId: 998,
+          complementaryCertificationBadgeId: 11,
+          acquired: true,
+        });
+        await databaseBuilder.commit();
 
-      // when
-      const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
+        // when
+        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
 
-      // then
-      expect(juryCertificationSummaries).to.have.lengthOf(1);
-      expect(juryCertificationSummaries[0].complementaryCertificationTakenLabel).to.equal('PARTNER_LABEL');
+        // then
+        expect(juryCertificationSummaries).to.have.lengthOf(1);
+        expect(juryCertificationSummaries[0].certificationObtained).to.equal('Pix+ Droit');
+      });
+    });
+
+    describe('when double certification is taken', function () {
+      it(`should return a specific label`, async function () {
+        // given
+        const dbf = databaseBuilder.factory;
+        const sessionId = dbf.buildSession().id;
+        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
+        const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
+        databaseBuilder.factory.buildComplementaryCertification({
+          id: 101,
+          label: 'CléA Numérique',
+          key: ComplementaryCertificationKeys.CLEA,
+        });
+        databaseBuilder.factory.buildComplementaryCertificationBadge({
+          id: 11,
+          label: 'PARTNER_LABEL',
+          badgeId,
+          complementaryCertificationId: 101,
+        });
+        dbf.buildComplementaryCertificationCourse({
+          id: 998,
+          complementaryCertificationId: 101,
+          certificationCourseId,
+          complementaryCertificationBadgeId: 11,
+        });
+        dbf.buildComplementaryCertificationCourseResult({
+          complementaryCertificationCourseId: 998,
+          complementaryCertificationBadgeId: 11,
+          acquired: true,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
+
+        // then
+        expect(juryCertificationSummaries).to.have.lengthOf(1);
+        expect(juryCertificationSummaries[0].certificationObtained).to.equal(DOUBLE_CORE_CLEA_CERTIFICATION);
+      });
+    });
+
+    describe('when the taken certification is core', function () {
+      it(`should return a specific label`, async function () {
+        // given
+        const dbf = databaseBuilder.factory;
+        const sessionId = dbf.buildSession().id;
+        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
+        dbf.buildAssessmentResult({
+          certificationCourseId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
+
+        // then
+        expect(juryCertificationSummaries).to.have.lengthOf(1);
+        expect(juryCertificationSummaries[0].certificationObtained).to.equal(CORE_CERTIFICATION);
+      });
     });
   });
 
@@ -330,7 +401,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           hasBeenAutomaticallyResolved: false,
         });
         const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
-        dbf.buildComplementaryCertification({ id: 1, key: 'A' });
+        dbf.buildComplementaryCertification({ id: 1, label: 'Pix+ Droit' });
         dbf.buildComplementaryCertificationBadge({ id: 11, label, badgeId, complementaryCertificationId: 1 });
         dbf.buildComplementaryCertificationCourse({
           id: 998,
@@ -361,7 +432,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         expect(juryCertificationSummary.createdAt).to.deep.equal(manyAsrCertification.createdAt);
         expect(juryCertificationSummary.completedAt).to.deep.equal(manyAsrCertification.completedAt);
         expect(juryCertificationSummary.isPublished).to.equal(manyAsrCertification.isPublished);
-        expect(juryCertificationSummary.complementaryCertificationTakenLabel).to.equal(label);
+        expect(juryCertificationSummary.certificationObtained).to.equal('Pix+ Droit');
         expect(juryCertificationSummary.certificationIssueReports).to.deep.equal([
           domainBuilder.buildCertificationIssueReport({
             id: issueReport1.id,

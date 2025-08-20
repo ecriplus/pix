@@ -6,10 +6,11 @@ const { omit, get } = lodash;
 
 import jsonapiSerializer from 'jsonapi-serializer';
 
-const serialize = function (juryCertificationSummary, meta) {
+const serialize = function (juryCertificationSummary, meta, { translate }) {
   return new Serializer('jury-certification-summary', {
     transform(juryCertificationSummary) {
       const result = omit(juryCertificationSummary, 'certificationIssueReports');
+      result.certificationObtained = juryCertificationSummary.getCertificationLabel(translate);
       result.examinerComment = get(juryCertificationSummary, 'certificationIssueReports[0].description');
       result.numberOfCertificationIssueReports = juryCertificationSummary.certificationIssueReports.length;
       result.numberOfCertificationIssueReportsWithRequiredAction =
@@ -30,7 +31,7 @@ const serialize = function (juryCertificationSummary, meta) {
       'numberOfCertificationIssueReports',
       'numberOfCertificationIssueReportsWithRequiredAction',
       'isFlaggedAborted',
-      'complementaryCertificationTakenLabel',
+      'certificationObtained',
     ],
     meta,
   }).serialize(juryCertificationSummary);
