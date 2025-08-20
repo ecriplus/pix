@@ -158,11 +158,29 @@ const pixCursorPropsSchema = Joi.object({
   options: Joi.array().items(pixCursorOptions.required()).required(),
 });
 
+const completePhrasePropsSchema = Joi.object({
+  titleLevel: Joi.number().required(),
+  listOfProbabilityBarsLists: Joi.array()
+    .items(
+      Joi.array().items(
+        Joi.object({
+          name: Joi.string().required(),
+          percent: Joi.number().integer().required(),
+        }),
+      ),
+    )
+    .required(),
+  userMessage: Joi.string().required(),
+  llmMessage: Joi.string().required(),
+  wordsToAdd: Joi.array().items(Joi.string()).required(),
+});
+
 const customElementSchema = Joi.object({
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
   tagName: Joi.string()
     .valid(
+      'complete-phrase',
       'image-quiz',
       'image-quizzes',
       'llm-compare-messages',
@@ -177,6 +195,7 @@ const customElementSchema = Joi.object({
   props: Joi.alternatives()
     .conditional('tagName', {
       switch: [
+        { is: 'complete-phrase', then: completePhrasePropsSchema },
         { is: 'image-quiz', then: imageQuizPropsSchema },
         { is: 'image-quizzes', then: imageQuizzesPropsSchema },
         { is: 'llm-compare-messages', then: llmCompareMessagesPropsSchema },
