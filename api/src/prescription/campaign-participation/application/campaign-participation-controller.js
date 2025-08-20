@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as anonymisedCampaignAssessmentSerializer from '../infrastructure/serializers/jsonapi/anonymised-campaign-assessment-serializer.js';
 import * as availableCampaignParticipationsSerializer from '../infrastructure/serializers/jsonapi/available-campaign-participation-serializer.js';
@@ -38,7 +38,7 @@ const findPaginatedParticipationsForCampaignManagement = async function (request
 const getAnalysis = async function (request, h, dependencies = { campaignAnalysisSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignParticipationId } = request.params;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignAnalysis = await usecases.computeCampaignParticipationAnalysis({
     userId,
@@ -51,7 +51,7 @@ const getAnalysis = async function (request, h, dependencies = { campaignAnalysi
 const getCampaignProfile = async function (request, h, dependencies = { campaignProfileSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignId, campaignParticipationId } = request.params;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignProfile = await usecases.getCampaignProfile({ userId, campaignId, campaignParticipationId, locale });
   return dependencies.campaignProfileSerializer.serialize(campaignProfile);
@@ -102,7 +102,7 @@ const getCampaignAssessmentParticipationResult = async function (
 ) {
   const { userId } = request.auth.credentials;
   const { campaignId, campaignParticipationId } = request.params;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignAssessmentParticipationResult = await usecases.getCampaignAssessmentParticipationResult({
     userId,
@@ -176,12 +176,11 @@ const getUserCampaignAssessmentResult = async function (
   _,
   dependencies = {
     participantResultSerializer,
-    extractLocaleFromRequest,
   },
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const campaignId = request.params.campaignId;
-  const locale = dependencies.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignAssessmentResult = await usecases.getUserCampaignAssessmentResult({
     userId: authenticatedUserId,

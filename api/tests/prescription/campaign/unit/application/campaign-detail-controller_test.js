@@ -15,9 +15,9 @@ describe('Unit | Application | Controller | Campaign detail', function () {
       const locale = FRENCH_SPOKEN;
       const request = {
         query: { filter: { code } },
+        headers: { 'accept-language': locale },
       };
       dependencies = {
-        extractLocaleFromRequest: sinon.stub().returns(locale),
         campaignToJoinSerializer: { serialize: sinon.stub() },
       };
       sinon.stub(usecases, 'getCampaignByCode').withArgs({ code, locale }).resolves(campaignToJoin);

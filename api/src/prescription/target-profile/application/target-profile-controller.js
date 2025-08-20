@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as frameworkwithoutskillserializer from '../infrastructure/serializers/jsonapi/framework-without-skills-serializer.js';
 import * as targetProfileForSpecifierSerializer from '../infrastructure/serializers/jsonapi/target-profile-for-specifier-serializer.js';
@@ -12,9 +12,9 @@ const findTargetProfiles = async function (request, h, dependencies = { targetPr
 const getFrameworksForTargetProfileSubmission = async function (
   request,
   _,
-  dependencies = { extractLocaleFromRequest, frameworkwithoutskillserializer },
+  dependencies = { frameworkwithoutskillserializer },
 ) {
-  const locale = dependencies.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const learningContent = await usecases.getLearningContentForTargetProfileSubmission({ locale });
   return dependencies.frameworkwithoutskillserializer.serialize(learningContent.frameworks);
 };

@@ -38,7 +38,6 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
   describe('#getFrameworksForTargetProfileSubmission', function () {
     let frameworks;
     let frameworkwithoutskillserializer;
-    let requestResponseUtils;
     let serializedFrameworks;
 
     beforeEach(function () {
@@ -49,20 +48,16 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
       frameworkwithoutskillserializer = {
         serialize: sinon.stub().returns(serializedFrameworks),
       };
-      requestResponseUtils = { extractLocaleFromRequest: sinon.stub().returns('en') };
     });
 
     it('should fetch and return frameworks, serialized as JSONAPI', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        headers: { 'accept-language': 'en' },
       };
 
       // when
       const result = await targetProfileController.getFrameworksForTargetProfileSubmission(request, hFake, {
-        extractLocaleFromRequest: requestResponseUtils.extractLocaleFromRequest,
         frameworkwithoutskillserializer,
       });
 

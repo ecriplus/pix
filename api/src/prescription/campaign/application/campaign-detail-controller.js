@@ -1,7 +1,7 @@
 import stream from 'node:stream';
 
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignDetailsManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
@@ -16,12 +16,11 @@ const getByCode = async function (
   request,
   _,
   dependencies = {
-    extractLocaleFromRequest,
     campaignToJoinSerializer,
   },
 ) {
   const { code } = request.query.filter;
-  const locale = dependencies.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignToJoin = await usecases.getCampaignByCode({ code, locale });
   return dependencies.campaignToJoinSerializer.serialize(campaignToJoin);

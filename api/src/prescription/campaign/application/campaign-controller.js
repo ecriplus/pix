@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignResultLevelsPerTubesAndCompetencesSerializer from '../infrastructure/serializers/jsonapi/campaign-result-levels-per-tubes-and-competences-serializer.js';
 import * as divisionSerializer from '../infrastructure/serializers/jsonapi/division-serializer.js';
@@ -21,14 +21,10 @@ const getGroups = async function (request) {
   return groupSerializer.serialize(groups);
 };
 
-const getPresentationSteps = async function (
-  request,
-  _,
-  dependencies = { presentationStepsSerializer, extractLocaleFromRequest },
-) {
+const getPresentationSteps = async function (request, _, dependencies = { presentationStepsSerializer }) {
   const { userId } = request.auth.credentials;
   const campaignCode = request.params.campaignCode;
-  const locale = dependencies.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const presentationSteps = await usecases.getPresentationSteps({ userId, campaignCode, locale });
   return dependencies.presentationStepsSerializer.serialize(presentationSteps);
@@ -40,7 +36,7 @@ const getLevelPerTubesAndCompetences = async function (
   dependencies = { campaignResultLevelsPerTubesAndCompetencesSerializer },
 ) {
   const { campaignId } = request.params;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const campaignAnalysis = await usecases.getResultLevelsPerTubesAndCompetences({
     campaignId,
     locale,

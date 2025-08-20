@@ -14,7 +14,6 @@ describe('Unit | Application | Controller | Campaign', function () {
       sinon.stub(usecases, 'getPresentationSteps');
 
       const dependencies = {
-        extractLocaleFromRequestStub: sinon.stub().returns(locale),
         presentationStepsSerializerStub: {
           serialize: sinon.stub(),
         },
@@ -34,7 +33,6 @@ describe('Unit | Application | Controller | Campaign', function () {
 
       // when
       const response = await campaignController.getPresentationSteps(request, hFake, {
-        extractLocaleFromRequest: dependencies.extractLocaleFromRequestStub,
         presentationStepsSerializer: dependencies.presentationStepsSerializerStub,
       });
 

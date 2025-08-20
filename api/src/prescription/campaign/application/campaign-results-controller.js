@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { certificabilityByLabel } from '../../shared/application/helpers.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignAssessmentResultMinimalSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-result-minimal-serializer.js';
@@ -44,7 +44,7 @@ const findProfilesCollectionParticipations = async function (request) {
 const getCollectiveResult = async function (request, h, dependencies = { campaignCollectiveResultSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignId } = request.params;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const campaignCollectiveResult = await usecases.computeCampaignCollectiveResult({ userId, campaignId, locale });
   return dependencies.campaignCollectiveResultSerializer.serialize(campaignCollectiveResult);

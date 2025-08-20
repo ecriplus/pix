@@ -287,9 +287,6 @@ describe('Unit | Controller | admin-target-profile-controller', function () {
         deserializedPayload: { organizationIds },
         params: { targetProfileId: 1 },
         payload,
-        i18n: {
-          __: sinon.stub(),
-        },
       };
 
       sinon.stub(usecases, 'detachOrganizationsFromTargetProfile');

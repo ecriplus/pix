@@ -6,7 +6,7 @@ import {
 } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as scoOrganizationLearnerSerializer from '../../learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
 
@@ -38,15 +38,8 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
   return h.response(dependencies.scoOrganizationLearnerSerializer.serializeExternal(scoOrganizationLearner)).code(200);
 };
 
-const createAndReconcileUserToOrganizationLearner = async function (
-  request,
-  h,
-  dependencies = {
-    scoOrganizationLearnerSerializer,
-    requestResponseUtils,
-  },
-) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+const createAndReconcileUserToOrganizationLearner = async function (request, h) {
+  const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
   const payload = request.payload.data.attributes;

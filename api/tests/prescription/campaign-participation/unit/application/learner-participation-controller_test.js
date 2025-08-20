@@ -220,39 +220,30 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
   });
 
   describe('#getSharedCampaignParticipationProfile', function () {
-    let campaignId,
-      dependencies,
-      locale,
-      request,
-      requestResponseUtilsStub,
-      sharedProfileForCampaignSerializerStub,
-      userId;
+    let campaignId, dependencies, locale, request, sharedProfileForCampaignSerializerStub, userId;
 
     beforeEach(function () {
       sinon.stub(usecases, 'getSharedCampaignParticipationProfile');
       campaignId = Symbol('campaignId');
       userId = Symbol('userId');
-      locale = Symbol('locale');
+      locale = 'fr';
 
       sharedProfileForCampaignSerializerStub = {
         serialize: sinon.stub(),
       };
-      requestResponseUtilsStub = { extractUserIdFromRequest: sinon.stub(), extractLocaleFromRequest: sinon.stub() };
       dependencies = {
         sharedProfileForCampaignSerializer: sharedProfileForCampaignSerializerStub,
-        requestResponseUtils: requestResponseUtilsStub,
       };
 
       request = {
         params: { campaignId },
         auth: { credentials: { userId } },
+        headers: { 'accept-language': locale },
       };
     });
 
     it('should call the usecase to get learner shared profile', async function () {
       // given
-      requestResponseUtilsStub.extractUserIdFromRequest.returns(100);
-      requestResponseUtilsStub.extractLocaleFromRequest.returns(locale);
       usecases.getSharedCampaignParticipationProfile.resolves({});
       const serializedCampaignProfileShared = Symbol('campaignProfileShared');
       dependencies.sharedProfileForCampaignSerializer.serialize.resolves(serializedCampaignProfileShared);

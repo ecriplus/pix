@@ -4,7 +4,6 @@ import * as checkAdminMemberHasRoleSuperAdminUseCase from '../../../shared/appli
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as csvCampaignsIdsParser from '../infrastructure/serializers/csv/csv-campaigns-ids-parser.js';
@@ -28,8 +27,8 @@ const createCampaigns = async function (request, h, dependencies = { csvSerializ
   return h.response(null).code(204);
 };
 
-const save = async function (request, h, dependencies = { requestResponseUtils, campaignReportSerializer }) {
-  const creatorId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const save = async function (request, h, dependencies = { campaignReportSerializer }) {
+  const creatorId = extractUserIdFromRequest(request);
   const {
     name,
     type,

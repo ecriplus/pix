@@ -1,21 +1,22 @@
 import { campaignAdministrationController } from '../../../../../src/prescription/campaign/application/campaign-administration-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignExternalIdTypes } from '../../../../../src/prescription/shared/domain/constants.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import {
+  domainBuilder,
+  expect,
+  generateAuthenticatedUserRequestHeaders,
+  hFake,
+  sinon,
+} from '../../../../test-helper.js';
 
 describe('Unit | Application | Controller | Campaign administration', function () {
   describe('#save', function () {
     let campaignReportSerializerStub;
-    let requestResponseUtils;
 
     beforeEach(function () {
       sinon.stub(usecases, 'createCampaign');
       campaignReportSerializerStub = {
         serialize: sinon.stub(),
-      };
-
-      requestResponseUtils = {
-        extractUserIdFromRequest: sinon.stub(),
       };
     });
 
@@ -24,7 +25,7 @@ describe('Unit | Application | Controller | Campaign administration', function (
       const connectedUserId = 1;
       const ownerId = 4;
       const request = {
-        auth: { credentials: { userId: connectedUserId } },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUserId }),
         payload: {
           data: {
             attributes: {
@@ -43,9 +44,6 @@ describe('Unit | Application | Controller | Campaign administration', function (
             },
           },
         },
-        i18n: {
-          __: sinon.stub(),
-        },
       };
       const campaign = {
         name: 'name',
@@ -60,12 +58,11 @@ describe('Unit | Application | Controller | Campaign administration', function (
         ownerId: 4,
         multipleSendings: true,
       };
-      requestResponseUtils.extractUserIdFromRequest.withArgs(request).returns(connectedUserId);
       const expectedResult = Symbol('result');
       const createdCampaign = Symbol('created campaign');
       usecases.createCampaign.withArgs({ campaign }).resolves(createdCampaign);
       campaignReportSerializerStub.serialize.withArgs(createdCampaign).returns(expectedResult);
-      const dependencies = { requestResponseUtils, campaignReportSerializer: campaignReportSerializerStub };
+      const dependencies = { campaignReportSerializer: campaignReportSerializerStub };
 
       // when
       const response = await campaignAdministrationController.save(request, hFake, dependencies);
@@ -79,7 +76,7 @@ describe('Unit | Application | Controller | Campaign administration', function (
       // given
       const connectedUserId = 1;
       const request = {
-        auth: { credentials: { userId: connectedUserId } },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUserId }),
         payload: {
           data: {
             attributes: {
@@ -97,9 +94,6 @@ describe('Unit | Application | Controller | Campaign administration', function (
             },
           },
         },
-        i18n: {
-          __: sinon.stub(),
-        },
       };
       const campaign = {
         name: 'name',
@@ -115,12 +109,11 @@ describe('Unit | Application | Controller | Campaign administration', function (
         multipleSendings: true,
       };
 
-      requestResponseUtils.extractUserIdFromRequest.withArgs(request).returns(connectedUserId);
       const expectedResult = Symbol('result');
       const createdCampaign = Symbol('created campaign');
       usecases.createCampaign.withArgs({ campaign }).resolves(createdCampaign);
       campaignReportSerializerStub.serialize.withArgs(createdCampaign).returns(expectedResult);
-      const dependencies = { requestResponseUtils, campaignReportSerializer: campaignReportSerializerStub };
+      const dependencies = { campaignReportSerializer: campaignReportSerializerStub };
 
       // when
       const response = await campaignAdministrationController.save(request, hFake, dependencies);
