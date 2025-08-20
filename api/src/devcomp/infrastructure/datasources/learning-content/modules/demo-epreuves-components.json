@@ -17,6 +17,122 @@
       "type": "blank",
       "grains": [
         {
+          "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
+          "type": "lesson",
+          "title": "complete-phrase",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5a7f67f1-dd86-4cdb-a2b6-b5e4b51cb3dc",
+                "type": "text",
+                "content": "<p>complete-phrase</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9fb9c98c-50e1-4338-9128-521e48060ad7",
+                "type": "custom",
+                "tagName": "complete-phrase",
+                "props": {
+                  "titleLevel": 2,
+                  "listOfProbabilityBarsLists": [
+                    [
+                      {
+                        "name": "chocolat",
+                        "percent": 100
+                      },
+                      {
+                        "name": "beurre",
+                        "percent": 80
+                      },
+                      {
+                        "name": "sucre",
+                        "percent": 80
+                      },
+                      {
+                        "name": "sirop",
+                        "percent": 60
+                      },
+                      {
+                        "name": "caramel",
+                        "percent": 43
+                      },
+                      {
+                        "name": "miel",
+                        "percent": 25
+                      },
+                      {
+                        "name": "fromage",
+                        "percent": 20
+                      }
+                    ],
+                    [
+                      {
+                        "name": "et",
+                        "percent": 100
+                      },
+                      {
+                        "name": "avec",
+                        "percent": 80
+                      },
+                      {
+                        "name": "fondu",
+                        "percent": 80
+                      },
+                      {
+                        "name": "avec",
+                        "percent": 60
+                      },
+                      {
+                        "name": "dedans",
+                        "percent": 43
+                      }
+                    ],
+                    [
+                      {
+                        "name": "du",
+                        "percent": 100
+                      },
+                      {
+                        "name": "puis",
+                        "percent": 80
+                      }
+                    ],
+                    [
+                      {
+                        "name": "sucre",
+                        "percent": 100
+                      },
+                      {
+                        "name": "miel",
+                        "percent": 80
+                      },
+                      {
+                        "name": "caramel",
+                        "percent": 60
+                      },
+                      {
+                        "name": "chocolat",
+                        "percent": 20
+                      }
+                    ]
+                  ],
+                  "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
+                  "llmMessage": "On peut mettre du ",
+                  "wordsToAdd": [
+                    "beurre",
+                    "et",
+                    "du",
+                    "sucre"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
           "type": "lesson",
           "title": "message-conversation",
