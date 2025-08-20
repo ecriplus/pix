@@ -20,4 +20,21 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
     });
   });
+
+  describe('PUT /api/combined-course/{code}/start', function () {
+    it('should call prehandler', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
+      sinon.stub(combinedCourseController, 'start').callsFake((request, h) => h.response());
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(combinedCourseRoute);
+
+      // when
+      await httpTestServer.request('PUT', '/api/combined-courses/ABC/start');
+
+      // then
+      expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
+    });
+  });
 });

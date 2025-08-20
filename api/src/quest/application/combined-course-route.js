@@ -38,6 +38,11 @@ const register = async function (server) {
       method: 'PUT',
       path: '/api/combined-courses/{code}/start',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+          },
+        ],
         validate: {
           params: Joi.object({
             code: Joi.string().regex(/^[a-zA-Z0-9]*$/),

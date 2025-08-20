@@ -674,7 +674,7 @@ async function checkAuthorizationToAccessCombinedCourse(
   dependencies = { checkAuthorizationToAccessCombinedCourseUsecase },
 ) {
   const userId = request.auth.credentials.userId;
-  const code = request.query.filter.code;
+  const code = request.query?.filter?.code || request.params.code;
 
   const belongsToOrganization = await dependencies.checkAuthorizationToAccessCombinedCourseUsecase.execute({
     userId,

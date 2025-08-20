@@ -137,6 +137,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[]}";${userId}
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId });
       databaseBuilder.factory.buildQuest({ name: 'MA QUETE', organizationId, code: 'COMBINIX2' });
 
       await databaseBuilder.commit();
