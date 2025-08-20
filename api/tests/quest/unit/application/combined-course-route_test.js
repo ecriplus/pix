@@ -37,4 +37,21 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
     });
   });
+
+  describe('PATCH /api/combined-course/{code}/reassess-status', function () {
+    it('should call prehandler', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
+      sinon.stub(combinedCourseController, 'reassessStatus').callsFake((request, h) => h.response());
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(combinedCourseRoute);
+
+      // when
+      await httpTestServer.request('PATCH', '/api/combined-courses/ABC/reassess-status');
+
+      // then
+      expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
+    });
+  });
 });
