@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.187.0](https://github.com/1024pix/pix/compare/v5.186.0...v5.187.0) (2025-08-20)
+
+### :rocket: Amélioration
+
+- [#13232](https://github.com/1024pix/pix/pull/13232) Afficher la locale utilisée pour l'envoi des invitations à rejoindre un centre de certif dans pix-admin (PIX-17508) 
+- [#13229](https://github.com/1024pix/pix/pull/13229) Afficher le nombre d'organisations enfant dans le titre de l'onglet (PIX-17881) 
+- [#13236](https://github.com/1024pix/pix/pull/13236) Pouvoir passer une URL relative pour la redirection en fin de module (PIX-19130) 
+- [#13206](https://github.com/1024pix/pix/pull/13206) Récupérer la ville de naissance à partir du code INSEE à l'ajout d'un candidat à une session SCO (PIX-18170). 
+- [#13151](https://github.com/1024pix/pix/pull/13151) Récupérer le bon référentiel cadre lors de la sélection de l'épreuve (PIX-17885). 
+- [#13214](https://github.com/1024pix/pix/pull/13214) retours JRO - les-ia-generatives-consomment 
+
+### :bug: Correction
+
+- [#13234](https://github.com/1024pix/pix/pull/13234) Réparer l'affichage du bandeau de langue non supportée  (PIX-19174) 
+
+### :building_construction: Tech
+
+- [#13230](https://github.com/1024pix/pix/pull/13230) :bug: Ne pas bloquer si un `recipientEmail` n'est pas associé au candidat 
+- [#13170](https://github.com/1024pix/pix/pull/13170) Ne plus injecter request.i18n (PIX-18782) 
+- [#13205](https://github.com/1024pix/pix/pull/13205) Simplifier l'affichage de la bannière d'éligibilité sur Pix App (PIX-19145) 
+
+### :arrow_up: Montée de version
+
+- [#13217](https://github.com/1024pix/pix/pull/13217) Update dependency @1024pix/pix-ui to ^55.25.2 (admin)
+
 # [5.186.0](https://github.com/1024pix/pix/compare/v5.185.0...v5.186.0) (2025-08-19)
 
 ### :rocket: Amélioration
