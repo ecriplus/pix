@@ -21,7 +21,7 @@ import {
   UserNotMemberOfOrganizationError,
 } from '../../team/domain/errors.js';
 import * as SharedDomainErrors from '../domain/errors.js';
-import { extractLocaleFromRequest } from '../infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../infrastructure/utils/request-response-utils.js';
 import { domainErrorMapper } from './domain-error-mapper.js';
 import { HttpErrors } from './http-errors.js';
 
@@ -516,7 +516,7 @@ function _mapToHttpError(error) {
 
 function handle(request, h, error) {
   if (error instanceof SharedDomainErrors.EntityValidationError) {
-    const locale = extractLocaleFromRequest(request).split('-')[0];
+    const locale = getChallengeLocale(request).split('-')[0];
 
     const jsonApiError =
       error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, locale, error.meta)) ||

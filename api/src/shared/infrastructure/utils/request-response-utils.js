@@ -6,14 +6,6 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 const acceptedLanguages = getChallengeLocales();
 const defaultChallengeLocale = getDefaultChallengeLocale();
 
-const requestResponseUtils = {
-  escapeFileName,
-  extractUserIdFromRequest,
-  extractLocaleFromRequest,
-  extractTimestampFromRequest,
-  extractTLDFromRequest,
-};
-
 function extractTLDFromRequest(request) {
   const forwardedHost = request.headers['x-forwarded-host'];
   if (forwardedHost.includes('.fr')) return 'fr';
@@ -39,7 +31,7 @@ function extractUserIdFromRequest(request) {
   return null;
 }
 
-function extractLocaleFromRequest(request) {
+function getChallengeLocale(request) {
   const languageHeader = request.headers && request.headers['accept-language'];
   if (!languageHeader) {
     return defaultChallengeLocale;
@@ -54,9 +46,8 @@ function extractTimestampFromRequest(request) {
 
 export {
   escapeFileName,
-  extractLocaleFromRequest,
   extractTimestampFromRequest,
   extractTLDFromRequest,
   extractUserIdFromRequest,
-  requestResponseUtils,
+  getChallengeLocale,
 };

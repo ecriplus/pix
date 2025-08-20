@@ -8,7 +8,7 @@ import {
   getNearestSupportedLocale,
 } from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../utils/logger.js';
-import { extractLocaleFromRequest } from '../utils/request-response-utils.js';
+import { getChallengeLocale } from '../utils/request-response-utils.js';
 
 const __dirname = import.meta.dirname;
 const translationsFolder = path.resolve(path.join(__dirname, '../../../../translations'));
@@ -57,6 +57,6 @@ export function getI18n(locale) {
  * @returns the i18n instance according the locale extracted from the request
  */
 export function getI18nFromRequest(request) {
-  const locale = request.query?.lang || extractLocaleFromRequest(request);
+  const locale = request.query?.lang || getChallengeLocale(request);
   return getI18n(locale);
 }

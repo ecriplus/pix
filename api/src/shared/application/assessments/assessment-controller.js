@@ -10,10 +10,7 @@ import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
-import {
-  extractLocaleFromRequest,
-  extractUserIdFromRequest,
-} from '../../infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest, getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
 
 const save = async function (request, h, dependencies = { assessmentRepository }) {
   const assessment = assessmentSerializer.deserialize(request.payload);
@@ -25,7 +22,7 @@ const save = async function (request, h, dependencies = { assessmentRepository }
 
 const getAssessmentWithNextChallenge = async function (request) {
   const assessmentId = request.params.id;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const userId = extractUserIdFromRequest(request);
 
   const assessment = await DomainTransaction.execute(async () => {
@@ -62,7 +59,7 @@ const findCompetenceEvaluations = async function (request) {
 
 const autoValidateNextChallenge = async function (request, h) {
   const assessmentId = request.params.id;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
   const userId = assessment.userId;
   const fakeAnswer = new Answer({
