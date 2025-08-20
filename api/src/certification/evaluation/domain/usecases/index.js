@@ -82,8 +82,7 @@ import { neutralizeChallenge } from './neutralize-challenge.js';
 import { rescoreV2Certification } from './rescore-v2-certification.js';
 import { rescoreV3Certification } from './rescore-v3-certification.js';
 import { retrieveLastOrCreateCertificationCourse } from './retrieve-last-or-create-certification-course.js';
-import { scoreCompletedV2Certification } from './score-completed-v2-certification.js';
-import { scoreCompletedV3Certification } from './score-completed-v3-certification.js';
+import { scoreCompletedCertification } from './score-completed-certification.js';
 import { simulateFlashAssessmentScenario } from './simulate-flash-assessment-scenario.js';
 
 const usecasesWithoutInjectedDependencies = {
@@ -95,8 +94,7 @@ const usecasesWithoutInjectedDependencies = {
   rescoreV2Certification,
   rescoreV3Certification,
   retrieveLastOrCreateCertificationCourse,
-  scoreCompletedV2Certification,
-  scoreCompletedV3Certification,
+  scoreCompletedCertification,
   simulateFlashAssessmentScenario,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
