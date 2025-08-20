@@ -41,4 +41,34 @@ describe('Quest | Integration | Infrastructure | repositories | Combined Course 
       expect(learners[0].lastName).to.equal('Fonfek');
     });
   });
+  describe('#findOrganizationLearner', function () {
+    it('should return organization learner if exists', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      const result = await combinedCourseParticipantRepository.findOrganizationLearner({
+        userId: organizationLearner.userId,
+        organizationId,
+      });
+      expect(result).to.deep.equal(organizationLearner);
+    });
+    it('should return nothing otherwise', async function () {
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      const result = await combinedCourseParticipantRepository.findOrganizationLearner({
+        userId,
+        organizationId,
+      });
+
+      //then
+      expect(result).to.be.undefined;
+    });
+  });
 });

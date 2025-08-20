@@ -555,4 +555,60 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       expect(response.result).to.deep.equal(jsonApiError403);
     });
   });
+
+  describe('#checkAuthorizationToAccessCombinedCourse', function () {
+    let userId;
+    let organizationId;
+    let options;
+
+    beforeEach(async function () {
+      const code = 'COMBINIX1';
+      userId = databaseBuilder.factory.buildUser().id;
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+
+      server.route({
+        method: 'GET',
+        path: '/api/test-combined-course',
+        handler: (r, h) => h.response({}).code(200),
+        config: {
+          pre: [
+            {
+              method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+            },
+          ],
+        },
+      });
+
+      options = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        method: 'GET',
+        url: `/api/test-combined-course?filter[code]=${code}`,
+      };
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return true if connected user is allowed to access given combined course', async function () {
+      // given
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
+
+      await databaseBuilder.commit();
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('should return an error if connected user is not allowed to access given combined course', async function () {
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(response.result).to.deep.equal(jsonApiError403);
+    });
+  });
 });

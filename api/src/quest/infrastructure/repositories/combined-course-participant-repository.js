@@ -3,14 +3,9 @@ import { OrganizationLearnersCouldNotBeSavedError } from '../../../shared/domain
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
 
 export async function getOrCreateNewOrganizationLearner({ organizationLearner, userId, organizationId }) {
-  const knexConnection = DomainTransaction.getConnection();
+  const existingOrganizationLearner = await findOrganizationLearner({ userId, organizationId });
 
-  const existingOrganizationLearner = await knexConnection('view-active-organization-learners')
-    .where({
-      userId,
-      organizationId,
-    })
-    .first();
+  const knexConnection = DomainTransaction.getConnection();
 
   if (existingOrganizationLearner) {
     if (existingOrganizationLearner.isDisabled) {
@@ -43,4 +38,14 @@ export async function getOrCreateNewOrganizationLearner({ organizationLearner, u
       throw error;
     }
   }
+}
+
+export async function findOrganizationLearner({ userId, organizationId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  return knexConnection('view-active-organization-learners')
+    .where({
+      userId,
+      organizationId,
+    })
+    .first();
 }
