@@ -144,7 +144,7 @@
                     {
                       "id": "e089a941-4bfb-473f-879a-892f1be410ce",
                       "type": "text",
-                      "content": "<p>Ensuite, le logiciel d’IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</li></ul>"
+                      "content": "<p>Ensuite, le logiciel d’IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</p>"
                     }
                   ]
                 },
@@ -153,7 +153,7 @@
                     {
                       "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
                       "type": "text",
-                      "content": "<p>Il s'agit d'une technique d’</strong>apprentissage automatique</strong> utilisée en intelligence artificielle. 🤖</p><p>On l’appelle l’apprentissage automatique <strong>supervisé</strong>. Pourquoi ? Cela met en avant le fait que les ingénieurs qui préparent le jeu d’exemples guident et supervisent le logiciel.👨🏽‍💻</p>"
+                      "content": "<p>Il s'agit d'une technique d’apprentissage automatique utilisée en intelligence artificielle. 🤖</p><p>On l’appelle l’apprentissage automatique <strong>supervisé</strong>. Pourquoi ? Cela met en avant le fait que les ingénieurs qui préparent le jeu d’exemples guident et supervisent le logiciel.👨🏽‍💻</p>"
                     }
                   ]
                 }
@@ -193,7 +193,8 @@
               }
             }
           ]
-        },{
+        },
+        {
           "id": "b0076163-02ae-4805-af3e-dd82781347ba",
           "type": "lesson",
           "title": "Lesson 2a : décomposition en valeurs numériques",
@@ -473,7 +474,7 @@
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "custom-draft",
                 "title": "Un tableau interactif pour associez les bonnes données à la bonne IA",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-generalisation-texte.html",
+                "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-donnees-etiquettes.html",
                 "instruction": "<p>A vous de jouer, complétez le schéma avec les bonnes données pour le bon objectif !<br></p>",
                 "height": 550
               }
@@ -754,6 +755,103 @@
                   }
                 ],
                 "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "998d396d-bf2b-4e30-ae59-d49876402aa3",
+          "type": "activity",
+          "title": "As-tu compris comment fonctionne l’apprentissage supervisé ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "type": "qrocm",
+                "instruction": "",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Arthur a été inspiré par Lila.</p>\n<p><br>Il veut lui aussi créer une application, qui reconnaîtrait les chants d’oiseaux. 🐦</p>\n<br><p>Il constitue un <strong>jeu de données</strong> avec des chants d’oiseaux, et pour chacun, le nom de l’oiseau qui chante : ce sont des données</p>"
+                  },
+                  {
+                    "input": "7fe1c167-4710-48d8-a16e-b4eadaec6786",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "étiquetées"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>Le logiciel analyse tous les <strong>exemples </strong>et ajuste ses <strong>paramètres</strong>, il s'agit de la phase d'</p>"
+                  },
+                  {
+                    "input": "c78bbf32-0a3c-4cb9-b75d-d36a86b4b702",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "champ libre",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "entraînement"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>Après la <strong>phase de test</strong>, le logiciel arrive à <strong>prédire </strong>avec un faible taux d’erreur, le nom de l’oiseau qui chante avec un nouvel enregistrement : la</p>"
+                  },
+                  {
+                    "input": "3309b370-847b-467e-9a49-1387827fb5fd",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 12,
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "généralisation"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>a fonctionné !</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bravo !</p>",
+                    "diagnosis": "<p>Vous maîtrisez le vocabulaire de l'apprentissage automatique supervisé !</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas encore...</p>",
+                    "diagnosis": "<p>Avez-vous utilisé le vocabulaire spécifique de l'apprentissage automatique supervisé ?</p>"
+                  }
+                }
               }
             }
           ]
