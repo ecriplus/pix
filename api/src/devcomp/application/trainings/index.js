@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { getSupportedLocales } from '../../../shared/domain/services/locale-service.js';
-import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { identifiersType, optionalIdentifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { trainingController as trainingsController } from './training-controller.js';
 
 const lowerCaseSupportedLocales = getSupportedLocales().map((supportedLocale) => supportedLocale.toLowerCase());
@@ -337,7 +337,6 @@ const register = async function (server) {
         ],
       },
     },
-
     {
       method: 'DELETE',
       path: '/api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}',
@@ -363,6 +362,47 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
             '- Elle permet de détacher un contenu formatif d’un profil cible',
+        ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}/organizations',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            trainingId: identifiersType.trainingId,
+            targetProfileId: identifiersType.targetProfileId,
+          }),
+          query: Joi.object({
+            filter: Joi.object({
+              id: optionalIdentifiersType.organizationId,
+              name: Joi.string().empty('').allow(null).optional(),
+              type: Joi.string().empty('').allow(null).optional(),
+              'external-id': Joi.string().empty('').allow(null).optional(),
+            }).default({}),
+            page: {
+              number: Joi.number().integer().empty('').allow(null).optional(),
+              size: Joi.number().integer().empty('').allow(null).optional(),
+            },
+          }).options({ allowUnknown: true }),
+        },
+        handler: trainingsController.findPaginatedFilteredOrganizations,
+        tags: ['api', 'admin', 'target-profiles', 'trainings', 'organizations'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès**\n" +
+            '- Elle permet de récupérer les organisations reliées ou non à un contenu formatif via un profil cible',
         ],
       },
     },
