@@ -30,33 +30,33 @@
               "element": {
                 "id": "510015d3-8fb4-4024-8632-9b7ca6ec1187",
                 "type": "custom",
-                "tagName": "image-quiz",
+                "tagName": "message-conversation",
                 "props": {
                   "title": "Conversation à propos des biais",
                   "messages": [
                     {
                       "userName": "Léane",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "content": "Ça m'énerve, je veux une image de juge mais l'IA me sort toujours la même chose : mec blanc, âgé, avec une cravate, un vrai stéréotype. Regarde !"
                     },
                     {
                       "userName": "Léane",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "content": "[images à ajouter]"
                     },
                     {
                       "userName": "Adem",
-                      "direction": "outgoing",
+                      "direction": "incoming",
                       "content": "Ah oui y a même le drapeau américain, haha !  Je pense que là il y a un biais."
                     },
                     {
                       "userName": "Léane",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "content": "C’est quoi un biais ?"
                     },
                     {
                       "userName": "Adem",
-                      "direction": "outgoing",
+                      "direction": "incoming",
                       "content": "C’est quand l'IA donne des réponses qui ne représentent pas bien la réalité. Ici ça donne l’impression que tous les procès ont lieu aux Etats-Unis ou que tous les juges sont vieux. Alors que ce n’est pas le cas !"
                     }
                   ]
@@ -84,7 +84,7 @@
     },
     {
       "id": "91ee53dd-33a9-4202-b40f-54ca6dd77171",
-      "type": "question-yourself",
+      "type": "explore-to-understand",
       "grains": [
         {
           "id": "5e9ea7f9-b4b9-4202-9f2a-531e3ae0381b",
