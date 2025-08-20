@@ -7,8 +7,10 @@ export class ComplementaryCertificationSeed {
   }
 
   async create() {
-    const tubeIds = complementaryCertifications[0].tubeIds;
-    const complementaryCertificationKey = complementaryCertifications[0].complementaryCertificationKey;
-    certificationConfigurationUsecases.createConsolidatedFramework({ complementaryCertificationKey, tubeIds });
+    complementaryCertifications.forEach((complementaryCertification) => {
+      const tubeIds = complementaryCertification.tubeIds;
+      const complementaryCertificationKey = complementaryCertification.complementaryCertificationKey;
+      certificationConfigurationUsecases.createConsolidatedFramework({ complementaryCertificationKey, tubeIds });
+    });
   }
 }

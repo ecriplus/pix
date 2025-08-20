@@ -1,6 +1,8 @@
+import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+
 export const complementaryCertifications = [
   {
-    complementaryCertificationKey: 'DROIT',
+    complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
     tubeIds: ['recEYqDKNYKhfXs7M', 'recc0vehnd9CuepzP', 'recoPAkxe29Ru3r3h'],
     challengeIds: [
       'challengeZY89C3ZZfZ6N6',
@@ -28,6 +30,37 @@ export const complementaryCertifications = [
       'challenge18QhrAlZVkTQuG',
       'challenge15Io0EtHi4XFu7',
       'challenge12MWqz5iaP7oxu',
+    ],
+  },
+  {
+    complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+    tubeIds: ['recpz9gZET6VJFeen', 'recN4ik49NYTUUbVm', 'tube1hzZBLOmWp9KoP'],
+    challengeIds: [
+      'challenge1AJSksb8rKCc5c',
+      'challenge1AKdY0IQ7kQTvu',
+      'challenge1ApiwsKhcy161s',
+      'challenge1d8xmUAfTnuLxw',
+      'challenge1HQdNtRmmbmC1J',
+      'challenge1tmfj8m1aH5LB1',
+      'challenge1xPQcRo6zfob8b',
+      'challenge2A4wZw3l5VTWXj',
+      'challenge2cFByDXQzId5rh',
+      'challenge2cFByDXQzId5rh',
+      'challenge1kePEwPxUt2cUq',
+      'challenge28o4Ni5cyuQxP1',
+      'challenge1MbCa56paWZ0fw',
+      'challenge1QwCahzcNd0lgg',
+      'challenge1S41rBwHDRzV9x',
+      'challenge1SjV46yjQBT1zi',
+      'challenge1nfGptv25b90Uf',
+      'challenge29BBxW7OLNO3Hf',
+      'challenge2h9QT6lw7RZ2K0',
+      'challenge1WwsLREl2fWm6S',
+      'challenge1yTNIW0MacXHsk',
+      'challenge228Eq6zB5W28qp',
+      'challengePKjHXK30GoxSm',
+      'challenge162dBY6rEWusDs',
+      'challenge2jQxxPacmN4xw2',
     ],
   },
 ];
