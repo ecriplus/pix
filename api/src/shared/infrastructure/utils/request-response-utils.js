@@ -1,6 +1,11 @@
 import accept from '@hapi/accept';
 
-import { getChallengeLocales, getDefaultChallengeLocale } from '../../../shared/domain/services/locale-service.js';
+import {
+  getChallengeLocales,
+  getDefaultChallengeLocale,
+  getDefaultLocale,
+  getNearestSupportedLocale,
+} from '../../../shared/domain/services/locale-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 
 const acceptedLanguages = getChallengeLocales();
@@ -31,6 +36,15 @@ function extractUserIdFromRequest(request) {
   return null;
 }
 
+function getUserLocale(request = {}) {
+  const locale = request.query?.locale || request.query?.lang || request.state?.locale;
+  if (locale) {
+    return getNearestSupportedLocale(locale, acceptedLanguages);
+  }
+
+  return getDefaultLocale();
+}
+
 function getChallengeLocale(request) {
   const languageHeader = request.headers && request.headers['accept-language'];
   if (!languageHeader) {
@@ -50,4 +64,5 @@ export {
   extractTLDFromRequest,
   extractUserIdFromRequest,
   getChallengeLocale,
+  getUserLocale,
 };

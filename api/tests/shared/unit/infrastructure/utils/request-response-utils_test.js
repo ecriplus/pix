@@ -2,6 +2,7 @@ import {
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
+  getDefaultLocale,
 } from '../../../../../src/shared/domain/services/locale-service.js';
 import {
   escapeFileName,
@@ -9,6 +10,7 @@ import {
   extractTLDFromRequest,
   extractUserIdFromRequest,
   getChallengeLocale,
+  getUserLocale,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
@@ -84,6 +86,92 @@ describe('Unit | Utils | Request Utils', function () {
 
       // then
       expect(escapedFileName).to.equal('file-name_with_e_invalid_chars_.csv');
+    });
+  });
+
+  describe('getUserLocale', function () {
+    context('when the request has no cookie locale and no query param', function () {
+      it('should return the default locale', function () {
+        // when
+        const locale = getUserLocale();
+
+        // then
+        expect(locale).to.equal(getDefaultLocale());
+      });
+    });
+
+    context('when the request has a cookie locale', function () {
+      it('should return the locale from the cookie', function () {
+        // given
+        const request = { state: { locale: 'fr-FR' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal('fr-FR');
+      });
+    });
+
+    context('when the request has a query param locale', function () {
+      it('should return the locale from the query param', function () {
+        // given
+        const request = { query: { locale: 'fr-BE' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal('fr-BE');
+      });
+    });
+
+    context('when the request has a query param lang', function () {
+      it('should return the lang from the query param', function () {
+        // given
+        const request = { query: { lang: 'fr-BE' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal('fr-BE');
+      });
+    });
+
+    context('when the locale is not supported', function () {
+      it('should return the default locale for invalid locale', function () {
+        // given
+        const request = { query: { lang: 'unsupported-locale' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal(getDefaultLocale());
+      });
+
+      it('should return the default locale for empty locale', function () {
+        // given
+        const request = { query: { lang: '' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal(getDefaultLocale());
+      });
+
+      it('should return the nearest supported locale for invalid locale', function () {
+        // given
+        const request = { query: { lang: 'fr-CA' } };
+
+        // when
+        const locale = getUserLocale(request);
+
+        // then
+        expect(locale).to.equal('fr');
+      });
     });
   });
 
