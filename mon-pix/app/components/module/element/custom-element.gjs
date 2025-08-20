@@ -18,7 +18,8 @@ export default class ModulixCustomElement extends ModuleElement {
   @action
   mountCustomElement(container) {
     this.customElement = document.createElement(this.args.component.tagName);
-    Object.assign(this.customElement, this.args.component.props);
+    const props = new NormalizedProps(this.args.component.tagName, this.args.component.props);
+    Object.assign(this.customElement, props);
     container.append(this.customElement);
 
     if (this.customElement.reset !== undefined) {
@@ -65,4 +66,68 @@ export default class ModulixCustomElement extends ModuleElement {
       {{/if}}
     </div>
   </template>
+}
+
+export class NormalizedProps {
+  constructor(tagName, props) {
+    switch (tagName) {
+      case 'pix-carousel':
+        return this.normalizePixCarouselProps(props);
+      case 'image-quiz':
+      case 'qcu-image':
+        return this.normalizeImageQuizProps(props);
+      case 'image-quizzes':
+        return this.normalizeImageQuizzesProps(props);
+      default:
+        return props;
+    }
+  }
+
+  normalizePixCarouselProps(props) {
+    return {
+      ...props,
+      titleLevel: NormalizedProps.unsetNumber(props.titleLevel),
+      slides: props.slides.map((slide) => ({
+        ...slide,
+        displayWidth: NormalizedProps.unsetNumber(slide.displayWidth),
+        displayHeight: NormalizedProps.unsetNumber(slide.displayHeight),
+        license: NormalizedProps.unsetObject(slide.license),
+      })),
+    };
+  }
+
+  normalizeImageQuizProps(props) {
+    return {
+      ...props,
+      maxChoicesPerLine: NormalizedProps.unsetNumber(props.maxChoicesPerLine),
+      choices: props.choices.map((choice) => ({
+        ...choice,
+        image: NormalizedProps.unsetObject(choice.image),
+      })),
+    };
+  }
+
+  normalizeImageQuizzesProps(props) {
+    return {
+      quizzes: props.quizzes.map((quiz) => this.normalizeImageQuizProps(quiz)),
+    };
+  }
+
+  /**
+   * @param{number|undefined} number
+   */
+  static unsetNumber(number) {
+    return number === 0 ? undefined : number;
+  }
+
+  /**
+   * @param{object|undefined} object
+   */
+  static unsetObject(object) {
+    if (!object) return undefined;
+    for (const value of Object.values(object)) {
+      if (value) return object;
+    }
+    return undefined;
+  }
 }
