@@ -1,6 +1,12 @@
 import { certificationCenterMembershipAdminController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.admin.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import {
+  domainBuilder,
+  expect,
+  generateAuthenticatedUserRequestHeaders,
+  hFake,
+  sinon,
+} from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | CertificationCenterMembershipAdminController', function () {
   describe('#findCertificationCenterMembershipsByCertificationCenter', function () {
@@ -79,35 +85,29 @@ describe('Unit | Team | Application | Controller | CertificationCenterMembership
   });
 
   describe('#updateRole', function () {
-    const id = 1;
-    let certificationCenterMembership;
+    it('should call usecase and serializer and return 201 HTTP code', async function () {
+      // given
+      const id = 1;
 
-    const request = {
-      params: { id },
-      payload: {},
-    };
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId: 1234 }),
+        params: { id },
+        payload: {},
+      };
 
-    let certificationCenterMembershipSerializerStub;
-    let requestResponseUtilsStub;
-
-    beforeEach(function () {
-      sinon.stub(usecases, 'updateCertificationCenterMembership');
-      certificationCenterMembership = domainBuilder.buildCertificationCenterMembership();
-      certificationCenterMembershipSerializerStub = {
+      const certificationCenterMembership = domainBuilder.buildCertificationCenterMembership();
+      const certificationCenterMembershipSerializerStub = {
         deserialize: sinon.stub().returns(certificationCenterMembership),
         serializeForAdmin: sinon.stub(),
       };
-      requestResponseUtilsStub = {
-        extractUserIdFromRequest: sinon.stub().returns(1234),
-      };
-      usecases.updateCertificationCenterMembership.resolves();
-    });
 
-    it('should call usecase and serializer and return 201 HTTP code', async function () {
+      sinon.stub(usecases, 'updateCertificationCenterMembership');
+
+      usecases.updateCertificationCenterMembership.resolves();
+
       // when
       const response = await certificationCenterMembershipAdminController.updateRole(request, hFake, {
         certificationCenterMembershipSerializer: certificationCenterMembershipSerializerStub,
-        requestResponseUtils: requestResponseUtilsStub,
       });
 
       // then
@@ -122,29 +122,20 @@ describe('Unit | Team | Application | Controller | CertificationCenterMembership
   });
 
   describe('#disableFromPixAdmin', function () {
-    const id = 1;
-
-    const request = {
-      params: { id },
-      payload: {},
-    };
-
-    let requestResponseUtilsStub;
-
-    beforeEach(function () {
-      sinon.stub(usecases, 'disableCertificationCenterMembershipFromPixAdmin');
-
-      requestResponseUtilsStub = {
-        extractUserIdFromRequest: sinon.stub().returns(1234),
-      };
-      usecases.disableCertificationCenterMembershipFromPixAdmin.resolves();
-    });
-
     it('should call usecase and serializer and return 201 HTTP code', async function () {
+      // given
+      const id = 1;
+
+      const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId: 1234 }),
+        params: { id },
+        payload: {},
+      };
+
+      sinon.stub(usecases, 'disableCertificationCenterMembershipFromPixAdmin').resolves();
+
       // when
-      const response = await certificationCenterMembershipAdminController.disableFromPixAdmin(request, hFake, {
-        requestResponseUtils: requestResponseUtilsStub,
-      });
+      const response = await certificationCenterMembershipAdminController.disableFromPixAdmin(request, hFake);
 
       // then
       expect(usecases.disableCertificationCenterMembershipFromPixAdmin).calledWith({
