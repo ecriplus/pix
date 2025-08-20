@@ -1,4 +1,3 @@
-import { config } from '../../shared/config.js';
 import { requestResponseUtils } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
@@ -6,10 +5,7 @@ import * as combinedCourseSerializer from '../infrastructure/serializers/combine
 const getByCode = async function (request, _, dependencies = { requestResponseUtils, combinedCourseSerializer }) {
   const { code } = request.query.filter;
   const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
-  const TLD = dependencies.requestResponseUtils.extractTLDFromRequest(request);
-  const appDomain = config.domain.pixApp;
-  const hostURL = TLD ? `${appDomain}.${TLD}` : appDomain;
-  const combinedCourse = await usecases.getCombinedCourseByCode({ userId, code, hostURL });
+  const combinedCourse = await usecases.getCombinedCourseByCode({ userId, code });
   return dependencies.combinedCourseSerializer.serialize(combinedCourse);
 };
 

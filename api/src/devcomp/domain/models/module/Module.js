@@ -19,10 +19,7 @@ class Module {
   }
 
   setRedirectionUrl(url) {
-    const parsedUrl = URL.parse(url);
-    if (parsedUrl) {
-      this.redirectionUrl = parsedUrl.toString();
-    }
+    this.redirectionUrl = url;
   }
 }
 

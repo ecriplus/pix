@@ -7,12 +7,11 @@ import { cryptoService } from '../../../../../src/shared/domain/services/crypto-
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code', function () {
-  let hostURL, combinedCourseUrl, code;
+  let combinedCourseUrl, code;
 
   beforeEach(function () {
     code = 'SOMETHING';
-    hostURL = 'http://app.pix.fr';
-    combinedCourseUrl = hostURL + '/parcours/' + code;
+    combinedCourseUrl = '/parcours/' + code;
 
     sinon.stub(cryptoService, 'encrypt');
     cryptoService.encrypt.withArgs(combinedCourseUrl).resolves('encryptedUrl');
@@ -72,7 +71,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
 
     await databaseBuilder.commit();
 
-    const result = await usecases.getCombinedCourseByCode({ code, userId, hostURL });
+    const result = await usecases.getCombinedCourseByCode({ code, userId });
 
     expect(result).to.be.instanceOf(CombinedCourse);
     expect(result.items).to.be.deep.equal([
@@ -175,7 +174,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       ],
     });
 
-    databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId, hostURL });
+    databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId });
 
     await databaseBuilder.commit();
 
@@ -193,12 +192,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         reference: 'bac-a-sable',
         title: 'Bac à sable',
         type: ITEM_TYPE.MODULE,
+        redirection: 'encryptedUrl',
       }),
       new CombinedCourseItem({
         id: moduleId3,
         reference: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire une adresse mail',
         type: ITEM_TYPE.MODULE,
+        redirection: 'encryptedUrl',
       }),
     ]);
     expect(result).to.be.instanceOf(CombinedCourse);
