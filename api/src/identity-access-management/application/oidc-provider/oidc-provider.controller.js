@@ -1,7 +1,7 @@
 import { BadRequestError, UnauthorizedError } from '../../../shared/application/http-errors.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-serializer.js';
@@ -54,11 +54,11 @@ async function authenticateOidcUser(request, h) {
  * @param h
  * @return {Promise<{access_token: string, logout_url_uuid: string}>}
  */
-async function createUser(request, h, dependencies = { requestResponseUtils, localeService }) {
+async function createUser(request, h, dependencies = { localeService }) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const localeFromHeader = getChallengeLocale(request);
   const language = localeService.getBaseLocale(localeFromHeader);
 
   const origin = getForwardedOrigin(request.headers);

@@ -1,5 +1,5 @@
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const checkResetDemand = async function (request, h, dependencies = { userSerializer }) {
@@ -9,7 +9,7 @@ const checkResetDemand = async function (request, h, dependencies = { userSerial
 };
 const createResetPasswordDemand = async function (request, h) {
   const email = request.payload.email;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   await usecases.createResetPasswordDemand({ email, locale });
 
