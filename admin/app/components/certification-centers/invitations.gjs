@@ -46,6 +46,14 @@ export default class CertificationCenterInvitations extends Component {
             </PixTableColumn>
             <PixTableColumn @context={{context}}>
               <:header>
+                Locale
+              </:header>
+              <:cell>
+                {{invitation.language}}
+              </:cell>
+            </PixTableColumn>
+            <PixTableColumn @context={{context}}>
+              <:header>
                 Date de dernier envoi
               </:header>
               <:cell>

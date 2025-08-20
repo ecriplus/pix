@@ -36,10 +36,12 @@ module('Integration | Component | Certification Centers | Invitations', function
       const certificationCenterInvitation1 = store.createRecord('certification-center-invitation', {
         email: 'elo.dela@example.net',
         updatedAt: invitationUpdatedAt1,
+        language: 'fr-FR',
       });
       const certificationCenterInvitation2 = store.createRecord('certification-center-invitation', {
         email: 'alain.finis@example.net',
         updatedAt: invitationUpdatedAt2,
+        language: 'fr-BE',
       });
       const certificationCenterInvitations = [certificationCenterInvitation1, certificationCenterInvitation2];
       const cancelCertificationCenterInvitation = sinon.stub();
@@ -64,10 +66,13 @@ module('Integration | Component | Certification Centers | Invitations', function
       assert.dom(screen.getByRole('heading', { name: 'Invitations' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Adresse e-mail' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Date de dernier envoi' })).exists();
+      assert.dom(within(table).getByRole('columnheader', { name: 'Locale' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'elo.dela@example.net' })).exists();
       assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt1 })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'fr-FR' })).exists();
       assert.dom(within(table).getByRole('cell', { name: 'alain.finis@example.net' })).exists();
       assert.dom(within(table).getByRole('cell', { name: formattedInvitationUpdatedAt2 })).exists();
+      assert.dom(within(table).getByRole('cell', { name: 'fr-BE' })).exists();
     });
   });
 });
