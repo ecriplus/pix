@@ -59,15 +59,15 @@ describe('Certification | Configuration | Integration | Repository | consolidate
 
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: new Date('2023-01-11'),
-        calibrationId: 123,
+        createdAt: new Date('2025-11-21'),
+        calibrationId: 1,
         challengeId: challenge.id,
       });
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      const lastVersionCertificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
-        createdAt: new Date('2025-06-21'),
-        calibrationId: 123,
+        createdAt: new Date('2025-12-21'),
+        calibrationId: 2,
         challengeId: challenge.id,
       });
 
@@ -81,16 +81,35 @@ describe('Certification | Configuration | Integration | Repository | consolidate
 
       // then
       expect(currentConsolidatedFramework).to.deep.equal({
-        calibrationId: 123,
+        calibrationId: lastVersionCertificationFrameworkChallenge.calibrationId,
         complementaryCertificationKey: complementaryCertification.key,
-        version: '20250621000000',
+        version: lastVersionCertificationFrameworkChallenge.version,
         challenges: [
           {
-            challengeId: 'challengeId1234',
+            challengeId: lastVersionCertificationFrameworkChallenge.challengeId,
             difficulty: 3.5,
             discriminant: 2.2,
           },
         ],
+      });
+    });
+
+    context('when there is no existing framework version', function () {
+      it('should throw a not found error', async function () {
+        // given
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(
+          consolidatedFrameworkRepository.getCurrentFrameworkByComplementaryCertificationKey,
+        )({
+          complementaryCertificationKey: complementaryCertification.key,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+        expect(error.message).to.equal(`There is no framework for complementary ${complementaryCertification.key}`);
       });
     });
   });
