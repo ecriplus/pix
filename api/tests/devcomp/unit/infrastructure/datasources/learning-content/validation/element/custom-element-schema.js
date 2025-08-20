@@ -128,6 +128,7 @@ const commonFields = {
   randomSlides: Joi.boolean().required(),
   titleLevel: Joi.number().integer().min(0).max(6).optional(),
   disableAnimation: Joi.boolean().required(),
+  disableLoop: Joi.boolean().optional(),
 };
 
 const pixCarouselPropsSchema = Joi.object({
