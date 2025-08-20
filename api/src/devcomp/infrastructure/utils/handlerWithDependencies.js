@@ -1,4 +1,3 @@
-import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as elementAnswerSerializer from '../serializers/jsonapi/element-answer-serializer.js';
 import * as moduleSerializer from '../serializers/jsonapi/module-serializer.js';
@@ -11,7 +10,6 @@ const dependencies = {
   moduleSerializer,
   passageEventSerializer,
   passageSerializer,
-  extractUserIdFromRequest,
 };
 
 const handlerWithDependencies = (handler) => {

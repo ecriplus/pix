@@ -1,4 +1,4 @@
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as userSavedTutorialRepository from '../../infrastructure/repositories/user-saved-tutorial-repository.js';
 import * as tutorialSerializer from '../../infrastructure/serializers/jsonapi/tutorial-serializer.js';
@@ -14,10 +14,10 @@ const add = async function (request, h, dependencies = { userSavedTutorialSerial
   return h.response(dependencies.userSavedTutorialSerializer.serialize(createdUserSavedTutorial)).created();
 };
 
-const find = async function (request, h, dependencies = { requestResponseUtils, tutorialSerializer }) {
+const find = async function (request, h, dependencies = { tutorialSerializer }) {
   const { userId } = request.auth.credentials;
   const { page, filter: filters } = request.query;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const { tutorials, meta } = await usecases.findPaginatedFilteredTutorials({
     userId,
     filters,
