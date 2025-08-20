@@ -41,6 +41,7 @@
     {{/if}}
     <LinkTo @route="authenticated.organizations.get.children" @model={{@model}}>
       {{t "pages.organization.navbar.children"}}
+      ({{@model.children.length}})
     </LinkTo>
   </PixTabs>
 
