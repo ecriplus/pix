@@ -15,6 +15,11 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/combined-courses',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+          },
+        ],
         handler: combinedCourseController.getByCode,
         validate: {
           query: Joi.object({
