@@ -70,7 +70,7 @@ export default class CertificationsHeader extends Component {
               {{t "pages.certifications.table.headers.other-certification"}}
             </:header>
             <:cell>
-              {{certification.complementaryCertificationTakenLabel}}
+              {{certification.certificationObtained}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

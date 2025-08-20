@@ -40,7 +40,7 @@ module('Integration | Component | certifications/list', function (hooks) {
     // given
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
-        complementaryCertificationTakenLabel: 'Pix+ Droit Maître',
+        certificationObtained: 'Pix+ Droit',
       }),
     ];
     const pagination = {};
@@ -53,6 +53,6 @@ module('Integration | Component | certifications/list', function (hooks) {
     );
 
     // then
-    assert.dom(screen.getByText('Pix+ Droit Maître', { exact: false })).exists();
+    assert.dom(screen.getByText('Pix+ Droit', { exact: false })).exists();
   });
 });

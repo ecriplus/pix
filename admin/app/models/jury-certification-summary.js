@@ -20,7 +20,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() completedAt;
   @attr() isPublished;
   @attr() examinerComment;
-  @attr() complementaryCertificationTakenLabel;
+  @attr() certificationObtained;
   @attr() numberOfCertificationIssueReports;
   @attr() isFlaggedAborted;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
