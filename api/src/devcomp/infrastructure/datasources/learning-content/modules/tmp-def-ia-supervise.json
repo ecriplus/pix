@@ -5,19 +5,19 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>L’intelligence artificielle a de multiples applications&nbsp;: génération de texte, recommandation de contenus, reconnaissance d’image … 🖼️ </p><p>Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible&nbsp;: l’apprentissage automatique supervisé. 🤖<br><br></p>",
+    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé. 🤖</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage :&nbsp; de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces. 🖼️</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Décrire le fonctionnement de l’apprentissage automatique supervisé grâce à un exemple&nbsp;: la reconnaissance d’image (données étiquetées, entraînement, prédiction)<br><br></p>",
+      "<p>Décrire le fonctionnement de l’apprentissage automatique supervisé<br></p>",
       "<p>Identifier les limites de l’apprentissage automatique supervisé</p>"
     ],
     "tabletSupport": "comfortable"
   },
   "sections": [
     {
-      "id": "5d715660-2778-4800-b1cb-f76bc62a46d8",
-      "type": "blank",
+      "id": "549bc424-1f96-4034-ac5c-59211b6d023e",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "61f7db09-722e-442f-9aca-8fe39c425b41",
@@ -81,7 +81,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "5d715660-2778-4800-b1cb-f76bc62a46d8",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "0b6be806-422b-4281-a5c6-7b0bf89262ca",
           "type": "discovery",
@@ -129,7 +135,7 @@
                     {
                       "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
                       "type": "text",
-                      "content": "<p>Pour apprendre à reconnaître des images, un logiciel d’IA fait un peu ce que vous avez fait&nbsp;:</p><ul><li>D'abord, on vous a donné <strong>plusieurs exemples</strong> de photographies de plantes.🌼</li><li>Chaque photographie était <strong>accompagnée de son nom</strong>.</li><li>Ensuite, on vous a demandé de <strong>reconnaître</strong> le nom de la plante sur chaque photographie. Pour cela, vous avez repéré les caractéristiques de chaque plante pour pouvoir les identifier par la suite. 🧐</li></ul>"
+                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, on lui fait faire ce que vous venez de faire :</p><ul><li>D'abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données </strong>.🌼</li><li>Chaque exemple est associé - ou étiqueté - par le <strong>nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
                     }
                   ]
                 },
@@ -138,7 +144,7 @@
                     {
                       "id": "e089a941-4bfb-473f-879a-892f1be410ce",
                       "type": "text",
-                      "content": "<p>C’est un peu pareil pour un logiciel d’IA&nbsp;: </p><ul><li>On lui donne <strong>beaucoup d’exemples </strong>de ce qu’il doit reconnaître. C’est ce que l’on appelle <strong>un jeu de données.</strong> </li><li>Chaque<strong> photographie </strong>est associé à une <strong>étiquette</strong>. Ce sont <strong>des données étiquetées</strong>.🏷️</li><li>Le logiciel d’IA<strong> analyse les caractéristiques</strong> de tous les exemples (forme, couleur, texture...) pour ensuite associer lui-même chaque exemple à son étiquette.🔍</li></ul>"
+                      "content": "<p>Ensuite, le logiciel d’IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</li></ul>"
                     }
                   ]
                 },
@@ -147,11 +153,26 @@
                     {
                       "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
                       "type": "text",
-                      "content": "<p>On parle alors d’<strong>apprentissage supervisé</strong>. </p><p>Pourquoi ? Parce qu’au départ, ce sont des humains qui attribuent les étiquettes aux données : ils “<strong>supervisent</strong>” ainsi l’apprentissage du logiciel.👨🏽‍💻 </p><br><p>L’apprentissage supervisé est <strong>l’une des méthodes de l’apprentissage automatique</strong>.</p><p>L’apprentissage automatique est une des techniques de l’intelligence artificielle.🤖</p>"
+                      "content": "<p>Il s'agit d'une technique d’</strong>apprentissage automatique</strong> utilisée en intelligence artificielle. 🤖</p><p>On l’appelle l’apprentissage automatique <strong>supervisé</strong>. Pourquoi ? Cela met en avant le fait que les ingénieurs qui préparent le jeu d’exemples guident et supervisent le logiciel.👨🏽‍💻</p>"
                     }
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "395fc300-2668-4202-b874-8dbe7eb0c1f4",
+          "type": "transition",
+          "title": "transition n°1 ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
+                "type": "text",
+                "content": "<p>Voyons comment fait un logiciel d’IA pour analyser les photographies et apprendre à retrouver l’étiquette.</p>"
+              }
             }
           ]
         },
@@ -172,8 +193,7 @@
               }
             }
           ]
-        },
-        {
+        },{
           "id": "b0076163-02ae-4805-af3e-dd82781347ba",
           "type": "lesson",
           "title": "Lesson 2a : décomposition en valeurs numériques",
@@ -183,7 +203,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>En <strong>apprentissage automatique</strong>, on n'a pas besoin d'expliquer au logiciel comment associer une image à son étiquette&nbsp;: il <strong>analyse</strong> les pixels, détecte les caractéristiques visuelles et les convertit en <strong>valeurs numériques</strong>.🔢</p>"
+                "content": "<p>Pour être numérisée, une photographie est découpée en plusieurs points ou pixels. Chaque pixel est représenté par un nombre correspondant à l’intensité de sa couleur. Pour un ordinateur, une photographie est donc un tableau de nombres. 🖼️➡️🔢</p>"
               }
             }
           ]
@@ -191,14 +211,14 @@
         {
           "id": "3b2f5ec0-e70b-422a-9d55-84b741885c40",
           "type": "transition",
-          "title": "transition n°1 ",
+          "title": "transition n°2 ",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "bde3a389-1875-4e42-9c06-1cab0c51be96",
                 "type": "text",
-                "content": "<p>Maintenant, regardons de plus près&nbsp;: comment le logiciel fait le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
+                "content": "<p>Maintenant, regardons de plus près : comment le logiciel fait le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
               }
             }
           ]
@@ -504,7 +524,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "e5921a48-059e-4cc6-ac5c-a53722a1452f",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "4d0abb22-6ba4-4905-9f94-0a5ce818789e",
           "type": "summary",
@@ -519,7 +545,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "dec2d4fb-86ef-46ce-8989-64cc0627ea0f",
+      "type": "practise",
+      "grains": [
         {
           "id": "3320dd18-77d1-4272-8f3d-ff110466f288",
           "type": "activity",
@@ -596,6 +628,143 @@
           ]
         },
         {
+          "id": "7baa516e-9380-409f-915a-2bde0ffe9f87",
+          "type": "activity",
+          "title": "Trouver le bon jeu de données",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "type": "text",
+                "content": "<p>Observez ces différents jeux de données et répondez à la question ci-dessous.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c9e931ea-9eba-4cd2-b2ff-a6812c4a88f8",
+                "type": "custom",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "jeux de données 1",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolflou.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 2",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolpasvarie.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 3",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolok.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "jeux de données 4",
+                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tounesolmasetiquete.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "unsplash",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "aspectRatio": 0,
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
+                "type": "qcu",
+                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel de reconnaissance d'image de tournesols ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Jeu de données 1</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>Plusiers photographies de ce jeu de données sont floues. Pour entraîner correctement un logiciel de reconnaissance d'image, les exemples fournis doivent être de bonne qualité.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Jeu de données 2</p>",
+                    "feedback": {
+                      "state": "<p>Et non !<br></p>",
+                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut donner des exemples très variés afin qu'il aprenne à généraliser.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Jeu de données 3</p>",
+                    "feedback": {
+                      "state": "<p>Bravo !<br></p>",
+                      "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d'image, il faut lui donner des exemples bien étiquetés, variés et de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Jeu de données 4</p>",
+                    "feedback": {
+                      "state": "<p>Et non !</p>",
+                      "diagnosis": "<p>Plusiers photographies de ce jeu de données ne sont pas bien étiquétées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut lui donner des exemples accompagnés de la bonne étiquette.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "62147798-f1bf-42b4-baf5-44975474d7d3",
+      "type": "go-further",
+      "grains": [
+        {
           "id": "3cfbafc0-3501-495f-af79-ca93b8c9668c",
           "type": "challenge",
           "title": "Défi : et pour l'exemple des oiseaux ?",
@@ -603,7 +772,7 @@
             {
               "type": "element",
               "element": {
-                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "id": "7faccf2f-00e4-442a-b1ca-fe8cda7d82e2",
                 "type": "text",
                 "content": "<p>Arthur a été très inspiré par l’application de Lila. 🌱</p><p>Il a téléchargé une application pour reconnaître le chant des oiseaux, comme <a href=\"https://play.google.com/store/apps/details?id=de.tu_chemnitz.mi.kahst.birdnet&amp;hl=fr\" target=\"_blank\">celle-ci.</a>🐦</p>"
               }
@@ -628,7 +797,11 @@
                     "placeholder": "",
                     "ariaLabel": "champ à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Chant d'oiseau",
                       "Des chants d'oiseaux",
@@ -650,8 +823,16 @@
                     "placeholder": "",
                     "ariaLabel": "champ à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
-                    "solutions": ["Nom d'oiseau", "Noms des oiseaux", "Le nom des oiseaux"]
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "Nom d'oiseau",
+                      "Noms des oiseaux",
+                      "Le nom des oiseaux"
+                    ]
                   }
                 ],
                 "feedbacks": {
