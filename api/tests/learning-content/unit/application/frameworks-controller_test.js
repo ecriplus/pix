@@ -8,7 +8,6 @@ describe('Unit | Controller | frameworks-controller', function () {
   let serializedAreas;
   let frameworkAreasSerializer;
   let frameworkSerializer;
-  let requestResponseUtils;
   let serializedFrameworks;
 
   beforeEach(function () {
@@ -23,7 +22,6 @@ describe('Unit | Controller | frameworks-controller', function () {
     frameworkSerializer = {
       serialize: sinon.stub().returns(serializedFrameworks),
     };
-    requestResponseUtils = { extractLocaleFromRequest: sinon.stub().returns('en') };
   });
 
   describe('#getFrameworks', function () {
@@ -69,7 +67,6 @@ describe('Unit | Controller | frameworks-controller', function () {
 
       // when
       const result = await frameworksController.getPixFrameworkAreasWithoutThematics(request, hFake, {
-        extractLocaleFromRequest: requestResponseUtils.extractLocaleFromRequest,
         frameworkAreasSerializer,
       });
 

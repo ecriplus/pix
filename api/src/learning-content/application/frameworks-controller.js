@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as frameworkAreasSerializer from '../infrastructure/serializers/framework-areas-serializer.js';
 import * as frameworkSerializer from '../infrastructure/serializers/framework-serializer.js';
@@ -14,12 +14,8 @@ const getFrameworkAreas = async function (request, h, dependencies = { framework
   return dependencies.frameworkAreasSerializer.serialize(areas);
 };
 
-const getPixFrameworkAreasWithoutThematics = async function (
-  request,
-  h,
-  dependencies = { extractLocaleFromRequest, frameworkAreasSerializer },
-) {
-  const locale = dependencies.extractLocaleFromRequest(request);
+const getPixFrameworkAreasWithoutThematics = async function (request, h, dependencies = { frameworkAreasSerializer }) {
+  const locale = getChallengeLocale(request);
   const areas = await usecases.getFrameworkAreas({ frameworkName: 'Pix', locale });
   return dependencies.frameworkAreasSerializer.serialize(areas, { withoutThematics: true });
 };
