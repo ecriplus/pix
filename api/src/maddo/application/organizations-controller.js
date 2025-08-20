@@ -1,4 +1,4 @@
-import { extractLocaleFromRequest } from '../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 
 export async function getOrganizations(request, h, dependencies = { findOrganizations: usecases.findOrganizations }) {
@@ -8,7 +8,7 @@ export async function getOrganizations(request, h, dependencies = { findOrganiza
 
 export async function getOrganizationCampaigns(request, h, dependencies = { findCampaigns: usecases.findCampaigns }) {
   const { page } = request.query;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const requestedOrganizationId = request.params.organizationId;
   const result = await dependencies.findCampaigns({
     organizationId: requestedOrganizationId,
