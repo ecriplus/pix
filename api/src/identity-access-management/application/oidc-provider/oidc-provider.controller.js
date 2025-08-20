@@ -58,8 +58,9 @@ async function createUser(request, h, dependencies = { requestResponseUtils, loc
   const { identityProvider, authenticationKey } = request.deserializedPayload;
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  // todo(locale): really extract the language (use new Locale(locale).language)
-  const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const language = localeService.getBaseLocale(localeFromHeader);
+
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
 

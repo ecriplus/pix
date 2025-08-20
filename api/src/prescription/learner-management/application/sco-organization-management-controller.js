@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 
 import { FileValidationError } from '../../../../src/shared/domain/errors.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../infrastructure/serializers/csv/organization-learner-parser.js';
@@ -9,6 +10,8 @@ import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers
 const INVALID_FILE_EXTENSION_ERROR = 'INVALID_FILE_EXTENSION';
 
 const importOrganizationLearnersFromSIECLE = async function (request, h, dependencies = { logger }) {
+  const i18n = getI18nFromRequest(request);
+
   const authenticatedUserId = request.auth.credentials.userId;
   const organizationId = request.params.id;
   const userId = request.auth.credentials.userId;
@@ -30,7 +33,7 @@ const importOrganizationLearnersFromSIECLE = async function (request, h, depende
         organizationId,
         userId,
         type: 'FREGATA',
-        i18n: request.i18n,
+        i18n,
       });
     }
   } catch (error) {

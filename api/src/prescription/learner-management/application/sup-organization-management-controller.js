@@ -1,18 +1,14 @@
 import fs from 'node:fs';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../domain/usecases/index.js';
 import { SupOrganizationLearnerParser } from '../infrastructure/serializers/csv/sup-organization-learner-parser.js';
 
-const importSupOrganizationLearners = async function (
-  request,
-  h,
-  dependencies = {
-    logger,
-    unlink: fs.unlink,
-  },
-) {
+const importSupOrganizationLearners = async function (request, h, dependencies = { logger, unlink: fs.unlink }) {
+  const i18n = getI18nFromRequest(request);
+
   const organizationId = request.params.organizationId;
   const userId = request.auth.credentials.userId;
 
@@ -22,7 +18,7 @@ const importSupOrganizationLearners = async function (
       payload: request.payload,
       organizationId,
       userId,
-      i18n: request.i18n,
+      i18n,
       type: 'ADDITIONAL_STUDENT',
     });
   } catch (error) {
@@ -40,14 +36,9 @@ const importSupOrganizationLearners = async function (
   return h.response().code(204);
 };
 
-const replaceSupOrganizationLearners = async function (
-  request,
-  h,
-  dependencies = {
-    logger,
-    unlink: fs.unlink,
-  },
-) {
+const replaceSupOrganizationLearners = async function (request, h, dependencies = { logger, unlink: fs.unlink }) {
+  const i18n = getI18nFromRequest(request);
+
   const userId = request.auth.credentials.userId;
   const organizationId = request.params.organizationId;
 
@@ -57,7 +48,7 @@ const replaceSupOrganizationLearners = async function (
       payload: request.payload,
       organizationId,
       userId,
-      i18n: request.i18n,
+      i18n,
       type: 'REPLACE_STUDENT',
     });
   } catch (error) {
@@ -78,19 +69,21 @@ const replaceSupOrganizationLearners = async function (
 };
 
 const getOrganizationLearnersCsvTemplate = async function (request, h, dependencies = { tokenService }) {
+  const i18n = getI18nFromRequest(request);
+
   const organizationId = request.params.organizationId;
   const token = request.query.accessToken;
   const userId = dependencies.tokenService.extractUserId(token);
   const template = await usecases.getOrganizationLearnersCsvTemplate({
     userId,
     organizationId,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h
     .response(template)
     .header('Content-Type', 'text/csv;charset=utf-8')
-    .header('Content-Disposition', `attachment; filename=${request.i18n.__('csv-template.template-name')}.csv`);
+    .header('Content-Disposition', `attachment; filename=${i18n.__('csv-template.template-name')}.csv`);
 };
 
 const updateStudentNumber = async function (request, h) {

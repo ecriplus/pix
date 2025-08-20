@@ -5,11 +5,8 @@ import { expect, hFake, sinon } from '../../../../test-helper.js';
 describe('Unit | Controller | healthcheckController', function () {
   describe('#get', function () {
     it('should reply with the API description', async function () {
-      // given
-      const mockedRequest = { i18n: { getLocale: sinon.stub() } };
-
-      // when
-      const response = await healthcheckController.get(mockedRequest, hFake);
+      // given / when
+      const response = await healthcheckController.get({}, hFake);
 
       // then
       expect(response).to.include.keys('name', 'version', 'description');
@@ -18,6 +15,7 @@ describe('Unit | Controller | healthcheckController', function () {
         "Plateforme d'évaluation et de certification des compétences numériques",
       );
       expect(response['environment']).to.equal('test');
+      expect(response['current-lang']).to.equal('fr');
     });
   });
 

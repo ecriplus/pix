@@ -19,7 +19,6 @@ describe('Certification | Course | Unit | Application | Organizations | organiza
     it('should return a response with CSV results', async function () {
       // given
       const request = {
-        i18n: getI18n(),
         params: {
           organizationId: 1,
         },
@@ -41,7 +40,7 @@ describe('Certification | Course | Unit | Application | Organizations | organiza
 
       const dependencies = { getDivisionCertificationResultsCsv: sinon.stub() };
       dependencies.getDivisionCertificationResultsCsv
-        .withArgs({ division: '3èmeA', certificationResults, i18n: request.i18n })
+        .withArgs({ division: '3èmeA', certificationResults, i18n: getI18n() })
         .resolves({ content: 'csv-string', filename: '20190101_resultats_3èmeA.csv' });
 
       // when

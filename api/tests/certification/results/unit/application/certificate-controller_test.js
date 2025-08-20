@@ -12,9 +12,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when certification course version is V3', function () {
       it('should return serialized V3 certificate data', async function () {
         // given
+        const locale = 'fr-fr';
         const i18n = getI18n();
         const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
-        const locale = 'fr-fr';
 
         const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
         requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
@@ -262,6 +262,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           query: { lang: 'fr' },
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: request.params.certificationCourseId,
           userId,
@@ -285,6 +288,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getPDFCertificate(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -313,6 +317,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           query: { isFrenchDomainExtension: true, lang: 'fr' },
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: request.params.certificationCourseId,
           userId,
@@ -338,6 +345,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getPDFCertificate(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -371,6 +379,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           query: { isFrenchDomainExtension: true },
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         sinon
           .stub(usecases, 'getCertificatesForSession')
           .withArgs({
@@ -384,6 +395,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getSessionCertificates(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -435,6 +447,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           i18n,
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         sinon
           .stub(usecases, 'getCertificatesForSession')
           .withArgs({
@@ -448,6 +463,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getSessionCertificates(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -499,6 +515,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           query: { division, isFrenchDomainExtension: true, lang: 'fr' },
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         sinon
           .stub(usecases, 'findCertificatesForDivision')
           .withArgs({
@@ -514,6 +533,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.downloadDivisionCertificates(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
@@ -550,6 +570,9 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           query: { division, isFrenchDomainExtension: true, lang },
         };
 
+        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
+
         sinon
           .stub(usecases, 'findCertificatesForDivision')
           .withArgs({
@@ -565,6 +588,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.downloadDivisionCertificates(request, hFake, {
+          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 

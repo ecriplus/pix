@@ -5,6 +5,7 @@ import {
   RequestedApplication,
 } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as scoOrganizationLearnerSerializer from '../../learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -45,6 +46,9 @@ const createAndReconcileUserToOrganizationLearner = async function (
     requestResponseUtils,
   },
 ) {
+  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const i18n = getI18nFromRequest(request);
+
   const payload = request.payload.data.attributes;
   const userAttributes = {
     firstName: payload['first-name'],
@@ -54,7 +58,6 @@ const createAndReconcileUserToOrganizationLearner = async function (
     username: payload.username,
     withUsername: payload['with-username'],
   };
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
 
   await usecases.createAndReconcileUserToOrganizationLearner({
     userAttributes,
@@ -62,7 +65,7 @@ const createAndReconcileUserToOrganizationLearner = async function (
     organizationId: payload['organization-id'],
     redirectionUrl: payload['redirection-url'],
     locale,
-    i18n: request.i18n,
+    i18n,
   });
 
   return h.response().code(204);

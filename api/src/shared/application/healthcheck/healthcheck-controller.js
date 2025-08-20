@@ -4,9 +4,13 @@ import { databaseConnections } from '../../../../db/database-connections.js';
 import packageJSON from '../../../../package.json' with { type: 'json' };
 import * as network from '../../../identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../config.js';
+import { getBaseLocale } from '../../domain/services/locale-service.js';
 import { redisMonitor } from '../../infrastructure/utils/redis-monitor.js';
+import { extractLocaleFromRequest } from '../../infrastructure/utils/request-response-utils.js';
 
 const get = function (request) {
+  const locale = extractLocaleFromRequest(request);
+
   return {
     name: packageJSON.name,
     version: packageJSON.version,
@@ -16,7 +20,7 @@ const get = function (request) {
     'container-version': process.env.CONTAINER_VERSION,
 
     'container-app-name': process.env.APP,
-    'current-lang': request.i18n.getLocale(),
+    'current-lang': getBaseLocale(locale),
   };
 };
 
