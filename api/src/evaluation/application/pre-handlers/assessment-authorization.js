@@ -1,13 +1,9 @@
 import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as validationErrorSerializer from '../../../shared/infrastructure/serializers/jsonapi/validation-error-serializer.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 
-const verify = function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, assessmentRepository, validationErrorSerializer },
-) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const verify = function (request, h, dependencies = { assessmentRepository, validationErrorSerializer }) {
+  const userId = extractUserIdFromRequest(request);
 
   const assessmentId = parseInt(request.params.id) || parseInt(request.params.assessmentId);
 

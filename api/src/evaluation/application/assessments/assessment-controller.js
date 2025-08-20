@@ -3,12 +3,12 @@ import { usecases as questUsecases } from '../../../quest/domain/usecases/index.
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 
 const completeAssessment = async function (request) {
   const assessmentId = request.params.id;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   await DomainTransaction.execute(async () => {
     const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });

@@ -2,7 +2,6 @@ import { usecases as devCompUsecases } from '../../../../../src/devcomp/domain/u
 import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
 import { Scorecard } from '../../../../../src/evaluation/domain/models/Scorecard.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import * as requestResponseUtils from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | scorecard-controller', function () {
@@ -43,10 +42,7 @@ describe('Unit | Controller | scorecard-controller', function () {
       };
 
       // when
-      const result = await scorecardController.getScorecard(request, hFake, {
-        scorecardSerializer,
-        requestResponseUtils,
-      });
+      const result = await scorecardController.getScorecard(request, hFake, { scorecardSerializer });
 
       // then
       expect(result).to.be.equal(scorecard);
@@ -82,10 +78,7 @@ describe('Unit | Controller | scorecard-controller', function () {
       };
 
       // when
-      const result = await scorecardController.findTutorials(request, hFake, {
-        tutorialSerializer,
-        requestResponseUtils,
-      });
+      const result = await scorecardController.findTutorials(request, hFake, { tutorialSerializer });
 
       // then
       expect(result).to.be.equal(tutorials);
@@ -120,7 +113,7 @@ describe('Unit | Controller | scorecard-controller', function () {
       };
 
       // when
-      await scorecardController.resetScorecard(request, hFake, { scorecardSerializer, requestResponseUtils });
+      await scorecardController.resetScorecard(request, hFake, { scorecardSerializer });
 
       // then
       expect(evaluationUsecases.resetScorecard).to.have.been.calledWithExactly({ userId, competenceId, locale });

@@ -3,13 +3,13 @@ import { usecases as devCompUsecases } from '../../../devcomp/domain/usecases/in
 // TODO Bounded context violation
 import * as tutorialSerializer from '../../../devcomp/infrastructure/serializers/jsonapi/tutorial-serializer.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../shared/domain/errors.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { Scorecard } from '../../domain/models/Scorecard.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 import * as scorecardSerializer from '../../infrastructure/serializers/jsonapi/scorecard-serializer.js';
 
-const getScorecard = function (request, h, dependencies = { requestResponseUtils, scorecardSerializer }) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+const getScorecard = function (request, h, dependencies = { scorecardSerializer }) {
+  const locale = getChallengeLocale(request);
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
@@ -22,8 +22,8 @@ const getScorecard = function (request, h, dependencies = { requestResponseUtils
     .then(dependencies.scorecardSerializer.serialize);
 };
 
-const findTutorials = async function (request, h, dependencies = { requestResponseUtils, tutorialSerializer }) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+const findTutorials = async function (request, h, dependencies = { tutorialSerializer }) {
+  const locale = getChallengeLocale(request);
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
@@ -39,10 +39,10 @@ const findTutorials = async function (request, h, dependencies = { requestRespon
   return dependencies.tutorialSerializer.serialize(tutorials);
 };
 
-const resetScorecard = function (request, h, dependencies = { scorecardSerializer, requestResponseUtils }) {
+const resetScorecard = function (request, h, dependencies = { scorecardSerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
   const competenceId = request.params.competenceId;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   return evaluationUsecases
     .resetScorecard({ userId: authenticatedUserId, competenceId, locale })
