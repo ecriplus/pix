@@ -636,7 +636,7 @@
             {
               "type": "element",
               "element": {
-                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
+                "id": "5c755500-52ba-4689-bb50-d1849909f856",
                 "type": "text",
                 "content": "<p>Observez ces différents jeux de données et répondez à la question ci-dessous.</p>"
               }
@@ -769,7 +769,7 @@
               "element": {
                 "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
                 "type": "qrocm",
-                "instruction": "",
+                "instruction": "<p>Complètez le texte suivant.</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -782,7 +782,7 @@
                     "size": 12,
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "champ à remplir",
                     "defaultValue": "",
                     "tolerances": [
                       "t1",
@@ -826,7 +826,7 @@
                     "size": 12,
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "champ à remplir",
                     "defaultValue": "",
                     "tolerances": [
                       "t1",
