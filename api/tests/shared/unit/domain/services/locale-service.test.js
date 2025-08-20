@@ -136,4 +136,39 @@ describe('Unit | Shared | Domain | Service | Locale', function () {
       });
     });
   });
+
+  describe('getNearestChallengeLocale', function () {
+    context('when no locale is provided', function () {
+      it('returns the default locale', function () {
+        // given
+        const locale = null;
+
+        // when
+        const challengeLocale = localeService.getNearestChallengeLocale(locale);
+
+        // then
+        expect(challengeLocale).to.equal(localeService.getDefaultChallengeLocale());
+      });
+    });
+
+    context('when locale is supported', function () {
+      [
+        { locale: 'fr-FR', expectedChallengeLocale: 'fr-fr' },
+        { locale: 'fr-BE', expectedChallengeLocale: 'fr' },
+        { locale: 'en', expectedChallengeLocale: 'en' },
+        { locale: 'nl', expectedChallengeLocale: 'nl' },
+        { locale: 'nl-BE', expectedChallengeLocale: 'nl' },
+        { locale: 'es', expectedChallengeLocale: 'es' },
+        { locale: 'tlh', expectedChallengeLocale: 'fr-fr' },
+      ].forEach(({ locale, expectedChallengeLocale }) => {
+        it(`returns the challenge locale: ${expectedChallengeLocale} for locale: ${locale}`, function () {
+          // when
+          const challengeLocale = localeService.getNearestChallengeLocale(locale);
+
+          // then
+          expect(challengeLocale).to.equal(expectedChallengeLocale);
+        });
+      });
+    });
+  });
 });

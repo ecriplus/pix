@@ -1,9 +1,5 @@
-import {
-  ENGLISH_SPOKEN,
-  FRENCH_FRANCE,
-  FRENCH_SPOKEN,
-  getDefaultLocale,
-} from '../../../../../src/shared/domain/services/locale-service.js';
+import { getDefaultLocale } from '../../../../../src/shared/domain/services/locale-service.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   escapeFileName,
   extractTimestampFromRequest,
@@ -176,37 +172,84 @@ describe('Unit | Utils | Request Utils', function () {
   });
 
   describe('#getChallengeLocale', function () {
-    it('should return fr-fr locale when there is no header (to ensure retro-compat)', function () {
-      // given
-      const request = {};
+    context('When feature toggle useCookieLocaleInApi is disabled, it uses the accept-language header', function () {
+      beforeEach(async function () {
+        await featureToggles.set('useCookieLocaleInApi', false);
+      });
 
-      // when
-      const locale = getChallengeLocale(request);
-
-      // then
-      expect(locale).to.equal(FRENCH_FRANCE);
-    });
-
-    [
-      { header: 'fr-FR', expectedLocale: FRENCH_FRANCE },
-      { header: 'fr', expectedLocale: FRENCH_SPOKEN },
-      { header: 'en', expectedLocale: ENGLISH_SPOKEN },
-      { header: 'tlh', expectedLocale: FRENCH_FRANCE }, // tlh: Klingon locale
-      { header: 'fr-BE', expectedLocale: FRENCH_FRANCE },
-    ].forEach(function (data) {
-      it(`should return ${data.expectedLocale} locale when header is ${data.header}`, function () {
+      it('should return fr-fr locale when there is no header (to ensure retro-compat)', async function () {
         // given
-        const request = {
-          headers: { 'accept-language': data.header },
-        };
+        const request = {};
 
         // when
-        const locale = getChallengeLocale(request);
+        const locale = await getChallengeLocale(request);
 
         // then
-        expect(locale).to.equal(data.expectedLocale);
+        expect(locale).to.equal('fr-fr');
+      });
+
+      [
+        { header: 'fr-FR', expectedLocale: 'fr-fr' },
+        { header: 'fr', expectedLocale: 'fr' },
+        { header: 'en', expectedLocale: 'en' },
+        { header: 'tlh', expectedLocale: 'fr-fr' }, // tlh: Klingon locale not found, so returns default locale
+        { header: 'fr-BE', expectedLocale: 'fr-fr' }, // fr-BE not found, so returns default locale
+      ].forEach(function (data) {
+        it(`should return ${data.expectedLocale} locale when header is ${data.header}`, async function () {
+          // given
+          const request = {
+            headers: { 'accept-language': data.header },
+          };
+
+          // when
+          const locale = await getChallengeLocale(request);
+
+          // then
+          expect(locale).to.equal(data.expectedLocale);
+        });
       });
     });
+
+    context(
+      'When feature toggle useCookieLocaleInApi is enabled, it uses the user locale from the cookie',
+      function () {
+        beforeEach(async function () {
+          await featureToggles.set('useCookieLocaleInApi', true);
+        });
+
+        it('should return fr-fr locale when there is no header (to ensure retro-compat)', async function () {
+          // given
+          const request = {};
+
+          // when
+          const locale = await getChallengeLocale(request);
+
+          // then
+          expect(locale).to.equal('fr-fr');
+        });
+
+        [
+          { userLocale: 'fr-FR', challengeLocale: 'fr-fr' },
+          { userLocale: 'fr', challengeLocale: 'fr' },
+          { userLocale: 'en', challengeLocale: 'en' },
+          { userLocale: 'en-US', challengeLocale: 'en' },
+          { userLocale: 'fr-BE', challengeLocale: 'fr' },
+          { userLocale: 'nl-BE', challengeLocale: 'nl' },
+          { userLocale: 'tlh', challengeLocale: 'fr-fr' }, // tlh: Klingon locale not found, so returns default locale
+        ].forEach(function ({ userLocale, challengeLocale }) {
+          it(`should return ${challengeLocale} when user locale is ${userLocale}`, async function () {
+            // given
+            const request = { state: { locale: userLocale } };
+
+            // when
+            const locale = await getChallengeLocale(request);
+
+            // then
+            expect(locale).to.equal(challengeLocale);
+          });
+        });
+      },
+    );
   });
 
   describe('#extractTimestampFromRequest', function () {
