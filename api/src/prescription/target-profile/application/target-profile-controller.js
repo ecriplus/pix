@@ -14,7 +14,7 @@ const getFrameworksForTargetProfileSubmission = async function (
   _,
   dependencies = { frameworkwithoutskillserializer },
 ) {
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const learningContent = await usecases.getLearningContentForTargetProfileSubmission({ locale });
   return dependencies.frameworkwithoutskillserializer.serialize(learningContent.frameworks);
 };

@@ -10,7 +10,7 @@ import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers
 const INVALID_FILE_EXTENSION_ERROR = 'INVALID_FILE_EXTENSION';
 
 const importOrganizationLearnersFromSIECLE = async function (request, h, dependencies = { logger }) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const authenticatedUserId = request.auth.credentials.userId;
   const organizationId = request.params.id;

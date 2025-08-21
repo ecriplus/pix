@@ -32,7 +32,7 @@ const getSessionResultsByRecipientEmail = async function (
   h,
   dependencies = { tokenService, getSessionCertificationResultsCsv },
 ) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const token = request.params.token;
 
@@ -59,7 +59,7 @@ const postSessionResultsToDownload = async function (
   h,
   dependencies = { tokenService, getSessionCertificationResultsCsv },
 ) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const { sessionId } = dependencies.tokenService.extractCertificationResultsLink(request.payload.token);
   const { session, certificationResults } = await usecases.getSessionResults({ sessionId });
@@ -88,7 +88,7 @@ const getCertifiedProfile = async function (
 };
 
 const generateSessionResultsDownloadLink = async function (request, h, dependencies = { sessionResultsLinkService }) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionId = request.params.sessionId;
   const sessionResultsLink = dependencies.sessionResultsLinkService.generateResultsLink({ sessionId, i18n });

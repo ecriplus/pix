@@ -14,7 +14,7 @@ const enrolStudentsToSession = async function (request, h, dependencies = { enro
 };
 
 const getCandidatesImportSheet = async function (request, h, dependencies = { fillCandidatesImportSheet }) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionId = request.params.sessionId;
   const { userId } = request.auth.credentials;
@@ -40,7 +40,7 @@ const getCandidatesImportSheet = async function (request, h, dependencies = { fi
 };
 
 const importCertificationCandidatesFromCandidatesImportSheet = async function (request) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionId = request.params.sessionId;
   const odsBuffer = request.payload;

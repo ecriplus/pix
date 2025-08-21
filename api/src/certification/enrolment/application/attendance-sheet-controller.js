@@ -5,7 +5,7 @@ const getAttendanceSheet = async function (request, h) {
   const sessionId = request.params.sessionId;
   const { userId } = request.auth.credentials;
 
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const { attendanceSheet, fileName } = await usecases.getAttendanceSheet({ sessionId, userId, i18n });
   return h

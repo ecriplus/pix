@@ -38,7 +38,7 @@ const findPaginatedParticipationsForCampaignManagement = async function (request
 const getAnalysis = async function (request, h, dependencies = { campaignAnalysisSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignParticipationId } = request.params;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignAnalysis = await usecases.computeCampaignParticipationAnalysis({
     userId,
@@ -51,7 +51,7 @@ const getAnalysis = async function (request, h, dependencies = { campaignAnalysi
 const getCampaignProfile = async function (request, h, dependencies = { campaignProfileSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignId, campaignParticipationId } = request.params;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignProfile = await usecases.getCampaignProfile({ userId, campaignId, campaignParticipationId, locale });
   return dependencies.campaignProfileSerializer.serialize(campaignProfile);
@@ -102,7 +102,7 @@ const getCampaignAssessmentParticipationResult = async function (
 ) {
   const { userId } = request.auth.credentials;
   const { campaignId, campaignParticipationId } = request.params;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignAssessmentParticipationResult = await usecases.getCampaignAssessmentParticipationResult({
     userId,
@@ -180,7 +180,7 @@ const getUserCampaignAssessmentResult = async function (
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const campaignId = request.params.campaignId;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignAssessmentResult = await usecases.getUserCampaignAssessmentResult({
     userId: authenticatedUserId,

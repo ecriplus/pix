@@ -6,7 +6,7 @@ const getInvigilatorKitPdf = async function (request, h, dependencies = { invigi
   const sessionId = request.params.sessionId;
   const { userId } = request.auth.credentials;
 
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionForInvigilatorKit = await usecases.getInvigilatorKitSessionInfo({ sessionId, userId });
 

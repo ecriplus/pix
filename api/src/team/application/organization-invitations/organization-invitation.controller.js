@@ -80,7 +80,7 @@ const getOrganizationInvitation = async function (request, h, dependencies = { o
 const sendScoInvitation = async function (request, h, dependencies = { scoOrganizationInvitationSerializer }) {
   const { uai, 'first-name': firstName, 'last-name': lastName } = request.payload.data.attributes;
 
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const organizationScoInvitation = await usecases.sendScoInvitation({
     uai,
@@ -95,7 +95,7 @@ const sendScoInvitation = async function (request, h, dependencies = { scoOrgani
 const sendInvitations = async function (request, h) {
   const organizationId = request.params.id;
   const emails = request.payload.data.attributes.email.split(',');
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const organizationInvitations = await usecases.createOrganizationInvitations({ organizationId, emails, locale });
   return h.response(organizationInvitationSerializer.serialize(organizationInvitations)).created();

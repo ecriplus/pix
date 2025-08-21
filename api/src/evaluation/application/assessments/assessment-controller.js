@@ -8,7 +8,7 @@ import { evaluationUsecases } from '../../domain/usecases/index.js';
 
 const completeAssessment = async function (request) {
   const assessmentId = request.params.id;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   await DomainTransaction.execute(async () => {
     const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });

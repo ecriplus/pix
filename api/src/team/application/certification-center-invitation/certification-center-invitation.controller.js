@@ -43,7 +43,7 @@ const getCertificationCenterInvitation = async function (request) {
 const sendInvitations = async function (request, h) {
   const certificationCenterId = request.params.certificationCenterId;
   const emails = request.payload.data.attributes.emails;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   await usecases.createOrUpdateCertificationCenterInvitation({ certificationCenterId, emails, locale });
 
@@ -52,7 +52,7 @@ const sendInvitations = async function (request, h) {
 
 const resendCertificationCenterInvitation = async function (request, h) {
   const certificationCenterInvitationId = request.params.certificationCenterInvitationId;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const certificationCenterInvitation = await usecases.resendCertificationCenterInvitation({
     certificationCenterInvitationId,

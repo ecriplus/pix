@@ -7,7 +7,7 @@ const save = async function (request, h, dependencies = { certificationCourseSer
   const userId = request.auth.credentials.userId;
   const accessCode = request.payload.data.attributes['access-code'];
   const sessionId = request.payload.data.attributes['session-id'];
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const { created, certificationCourse } = await usecases.retrieveLastOrCreateCertificationCourse({
     sessionId,

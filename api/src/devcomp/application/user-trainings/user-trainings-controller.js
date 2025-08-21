@@ -10,7 +10,7 @@ const findPaginatedUserRecommendedTrainings = async function (
     devcompUsecases,
   },
 ) {
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const { page } = request.query;
   const { userRecommendedTrainings, meta } = await dependencies.devcompUsecases.findPaginatedUserRecommendedTrainings({
     userId: request.auth.credentials.userId,

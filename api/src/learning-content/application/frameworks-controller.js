@@ -15,7 +15,7 @@ const getFrameworkAreas = async function (request, h, dependencies = { framework
 };
 
 const getPixFrameworkAreasWithoutThematics = async function (request, h, dependencies = { frameworkAreasSerializer }) {
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const areas = await usecases.getFrameworkAreas({ frameworkName: 'Pix', locale });
   return dependencies.frameworkAreasSerializer.serialize(areas, { withoutThematics: true });
 };

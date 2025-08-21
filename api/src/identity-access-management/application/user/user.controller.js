@@ -133,8 +133,8 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  */
 const createUser = async function (request, h, dependencies = { userSerializer, localeService }) {
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
-  const localeFromHeader = getChallengeLocale(request);
-  const i18n = getI18nFromRequest(request);
+  const localeFromHeader = await getChallengeLocale(request);
+  const i18n = await getI18nFromRequest(request);
 
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
   const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: localeFromCookie };
@@ -205,7 +205,7 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
 
 const selfDeleteUserAccount = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   await usecases.selfDeleteUserAccount({ userId: authenticatedUserId, locale });
 
@@ -213,8 +213,8 @@ const selfDeleteUserAccount = async function (request, h) {
 };
 
 const sendVerificationCode = async function (request, h, dependencies = { emailVerificationSerializer }) {
-  const locale = getChallengeLocale(request);
-  const i18n = getI18nFromRequest(request);
+  const locale = await getChallengeLocale(request);
+  const i18n = await getI18nFromRequest(request);
 
   const userId = request.params.id;
   const { newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
@@ -261,7 +261,7 @@ const upgradeToRealUser = async function (request, h, dependencies = { userSeria
 
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  const language = getChallengeLocale(request);
+  const language = await getChallengeLocale(request);
 
   const userAttributes = {
     firstName: request.payload.data.attributes['first-name'],

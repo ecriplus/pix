@@ -58,7 +58,7 @@ async function createUser(request, h, dependencies = { localeService }) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  const localeFromHeader = getChallengeLocale(request);
+  const localeFromHeader = await getChallengeLocale(request);
   const language = localeService.getBaseLocale(localeFromHeader);
 
   const origin = getForwardedOrigin(request.headers);
