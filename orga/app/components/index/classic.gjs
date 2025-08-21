@@ -6,12 +6,12 @@ import ScoBanner from 'pix-orga/components/banner/sco-banner';
 import ActionCardsList from 'pix-orga/components/index/action-cards-list';
 import ActionCardsListItem from 'pix-orga/components/index/action-cards-list-item';
 import OrganizationInfo from 'pix-orga/components/index/organization-information';
+import ParticipationStatistics from 'pix-orga/components/index/participation-statistics';
 import Welcome from 'pix-orga/components/index/welcome';
 
 export default class IndexClassic extends Component {
   @service currentUser;
   @service intl;
-  @service router;
 
   get description() {
     return this.intl.t('components.index.welcome.description.classic');
@@ -46,5 +46,7 @@ export default class IndexClassic extends Component {
       </ActionCardsListItem>
 
     </ActionCardsList>
+
+    <ParticipationStatistics />
   </template>
 }

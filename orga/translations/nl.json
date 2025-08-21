@@ -390,6 +390,20 @@
         "label": "Naam van uw organisatie",
         "title": "De informatie van uw organisatie"
       },
+      "participation-statistics": {
+        "completed-participations": {
+          "description": "Deelnames voltooid in de laatste 30 dagen.",
+          "info": "Het aantal voltooide deelnames in de laatste 30 dagen houdt rekening met actieve campagnes waarvan u eigenaar bent.",
+          "no-completed-participations": "Geen voltooide deelnames in de laatste 30 dagen.",
+          "title": "Voltooide deelnames"
+        },
+        "completion-rate": {
+          "description": "{completed} voltooide deelnames van {started} gestarte deelnames.",
+          "info": "Het voltooiingspercentage wordt berekend op basis van actieve campagnes waarvan u eigenaar bent.",
+          "no-activity": "Geen activiteit op dit moment",
+          "title": "Voltooiingspercentage"
+        }
+      },
       "welcome": {
         "description": {
           "classic": "Welkom op uw platform voor de evaluatie van digitale vaardigheden! Configureer en verspreid uw evaluatiecampagnes onder uw deelnemers. Volg hun voortgang en analyseer hun resultaten om hen begeleiding op maat aan te bieden die aangepast is aan hun behoeften of hen te begeleiden naar Pix-certificering.",
