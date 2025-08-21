@@ -33,6 +33,17 @@ function _createAccessToken({ userId, source, expirationDelaySeconds, audience }
 }
 
 /**
+ * Encode and sign a payload into a JWT token (using jsonwebtoken library)
+ * @param {Record<string, any>} payload Token payload
+ * @param {string} secret Secret for the signature
+ * @param {Record<string, any>} options Sign options (ex: { expiresIn })
+ * @returns The encoded and signed token
+ */
+function encodeToken(payload, secret, options) {
+  return jsonwebtoken.sign(payload, secret, options);
+}
+
+/**
  * @param {string} clientId
  * @param {string} source
  * @param {string | string[]} scope
@@ -209,6 +220,7 @@ const tokenService = {
   createPasswordResetToken,
   decodeIfValid,
   getDecodedToken,
+  encodeToken,
   extractExternalUserFromIdToken,
   extractCertificationResultsByRecipientEmailLink,
   extractSamlId,
