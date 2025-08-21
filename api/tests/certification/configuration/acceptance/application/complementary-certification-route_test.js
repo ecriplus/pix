@@ -267,6 +267,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         discriminant: 2.1,
         difficulty: 3.4,
         status: 'validé',
+        locales: ['fr-fr'],
       });
 
       await databaseBuilder.commit();

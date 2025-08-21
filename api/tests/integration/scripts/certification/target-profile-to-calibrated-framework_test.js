@@ -14,7 +14,7 @@ describe('Integration | Scripts | Certification | target-profile-to-calibrated-f
     const learningContent = {
       tubes: [{ id: 'tube1', skillIds: ['skill1'] }],
       skills: [{ id: 'skill1', status: 'actif', tubeId: 'tube1' }],
-      challenges: [{ id: 'challenge1', skillId: 'skill1', locales: ['fr'] }],
+      challenges: [{ id: 'challenge1', skillId: 'skill1', locales: ['fr-fr'] }],
     };
     await mockLearningContent(learningContent);
 
