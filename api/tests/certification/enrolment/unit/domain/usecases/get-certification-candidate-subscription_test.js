@@ -228,7 +228,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
         });
 
         const complementaryCertificationBadge =
-          domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
             badgeId: badge.id,
             complementaryCertificationId: complementaryCertification.id,
           });
