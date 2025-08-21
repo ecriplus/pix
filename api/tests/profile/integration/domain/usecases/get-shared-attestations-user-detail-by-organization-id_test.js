@@ -5,7 +5,7 @@ import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 import { buildAttestationUserDetail } from '../../../../tooling/domain-builder/factory/index.js';
 
-describe('Profile | Integration | Domain | get-shared-attestations-user-detail-for-organization-by-user-ids', function () {
+describe('Profile | Integration | Domain | get-shared-attestations-user-detail-by-organization-id', function () {
   let clock;
   const now = new Date('2022-12-25');
 
@@ -20,8 +20,8 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-f
     clock.restore();
   });
 
-  describe('#getSharedAttestationsUserDetailForOrganizationByUserIds', function () {
-    it('should return array of AttestationUserDetail for given userIds', async function () {
+  describe('#getSharedAttestationsUserDetailByOrganizationId', function () {
+    it('should return array of AttestationUserDetail by organizationId', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
@@ -49,10 +49,9 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-f
 
       await databaseBuilder.commit();
 
-      const results = await usecases.getSharedAttestationsUserDetailForOrganizationByUserIds({
+      const results = await usecases.getSharedAttestationsUserDetailByOrganizationId({
         attestationKey: attestation.key,
         organizationId,
-        userIds: [firstUser.id],
         locale,
       });
 
@@ -63,56 +62,13 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-f
           obtainedAt: firstProfileReward.createdAt,
           userId: firstUser.id,
         }),
+        buildAttestationUserDetail({
+          attestationKey: attestation.key,
+          obtainedAt: secondProfileReward.createdAt,
+          userId: secondUser.id,
+        }),
       ]);
       expect(results[0].obtainedAt).to.deep.equal(firstProfileReward.createdAt);
-    });
-
-    it('should not return attestations for anonymous userIds', async function () {
-      const locale = 'FR-fr';
-      const attestation = databaseBuilder.factory.buildAttestation();
-      const firstUser = databaseBuilder.factory.buildUser({
-        firstName: 'alex',
-        lastName: 'Terieur',
-        isAnonymous: true,
-        hasBeenAnonymised: false,
-      });
-      const secondUser = databaseBuilder.factory.buildUser({
-        firstName: 'theo',
-        lastName: 'Courant',
-        isAnonymous: false,
-        hasBeenAnonymised: true,
-      });
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: firstUser.id });
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: secondUser.id });
-
-      const firstProfileReward = databaseBuilder.factory.buildProfileReward({
-        rewardId: attestation.id,
-        userId: firstUser.id,
-      });
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
-        organizationId,
-        profileRewardId: firstProfileReward.id,
-      });
-      const secondProfileReward = databaseBuilder.factory.buildProfileReward({
-        rewardId: attestation.id,
-        userId: secondUser.id,
-      });
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
-        organizationId,
-        profileRewardId: secondProfileReward.id,
-      });
-
-      await databaseBuilder.commit();
-
-      const results = await usecases.getSharedAttestationsUserDetailForOrganizationByUserIds({
-        attestationKey: attestation.key,
-        organizationId,
-        userIds: [firstUser.id, secondUser.id],
-        locale,
-      });
-
-      expect(results).to.deep.equal([]);
     });
 
     it('should return AttestationNotFound error if attestation does not exist', async function () {
@@ -128,7 +84,6 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-f
       //when
       const error = await catchErr(usecases.getSharedAttestationsForOrganizationByUserIds)({
         attestationKey: 'NOT_EXISTING_ATTESTATION',
-        userIds: [firstUser.id],
         organizationId: 1,
         locale,
       });
@@ -151,9 +106,8 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-f
       await databaseBuilder.commit();
 
       //when
-      const results = await usecases.getSharedAttestationsUserDetailForOrganizationByUserIds({
+      const results = await usecases.getSharedAttestationsUserDetailByOrganizationId({
         attestationKey: attestation.key,
-        userIds: [firstUser.id],
         organizationId,
         locale,
       });

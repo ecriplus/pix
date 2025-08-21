@@ -33,7 +33,7 @@ export default class AttestationList extends Component {
       @title={{t "common.filters.title"}}
       class="participant-filter-banner hide-on-mobile"
       aria-label={{t "pages.attestations.table.filter.legend"}}
-      @details={{t "pages.attestations.table.filter.results" total=@participantStatuses.length}}
+      @details={{t "pages.attestations.table.filter.results" total=@participantStatuses.meta.rowCount}}
       @clearFiltersLabel={{t "common.filters.actions.clear"}}
       @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
       @onClearFilters={{@clearFilters}}

@@ -44,7 +44,6 @@ describe('Profile | Unit | Application | Api | attestations', function () {
   describe('#getAttestationsUserDetail', function () {
     it('should return users attestations', async function () {
       const attestationKey = Symbol('attestationKey');
-      const userIds = Symbol('userIds');
       const organizationId = Symbol('organizationId');
       const data = Symbol('data');
       const locale = FRENCH_FRANCE;
@@ -55,13 +54,13 @@ describe('Profile | Unit | Application | Api | attestations', function () {
         },
       };
 
-      sinon.stub(usecases, 'getSharedAttestationsUserDetailForOrganizationByUserIds');
+      sinon.stub(usecases, 'getSharedAttestationsUserDetailByOrganizationId');
 
-      usecases.getSharedAttestationsUserDetailForOrganizationByUserIds
-        .withArgs({ attestationKey, userIds, organizationId, locale })
+      usecases.getSharedAttestationsUserDetailByOrganizationId
+        .withArgs({ attestationKey, organizationId, locale })
         .resolves(data);
 
-      const result = await getAttestationsUserDetail({ attestationKey, userIds, organizationId, dependencies });
+      const result = await getAttestationsUserDetail({ attestationKey, organizationId, dependencies });
 
       expect(result).to.equal(data);
     });
