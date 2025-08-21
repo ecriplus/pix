@@ -2,7 +2,7 @@
   "id": "a1eea948-2125-488f-8006-9f85e646830d",
   "slug": "tmp-ia-bias-ind",
   "title": "Les biais des lA",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions comportent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais dans les réponses des IA génératives.🔍<br><br></p>",
