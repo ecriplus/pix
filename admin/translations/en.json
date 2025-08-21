@@ -141,6 +141,14 @@
         "title": "Archiving of certification centers in batch",
         "upload-button": "Import a CSV file"
       },
+      "create-combined-courses": {
+        "description": "Ask for expert help if needed",
+        "notifications": {
+          "success": "Combined courses have been created, and campaign as well if included in courses."
+        },
+        "title": "Create combined courses",
+        "upload-button": "Import CSV file"
+      },
       "oidc-providers-import": {
         "description": "Note: Trying to import already existing OIDC Providers would produce an error.",
         "notifications": {

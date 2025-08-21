@@ -13,9 +13,17 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
     code = Symbol('code');
     expectedResult = {
       id: 1,
+      organizationId: 1,
       name: 'campagne',
       code: 'abc',
       targetProfileId: 123,
+      creatorId: 1,
+      type: 'type',
+      multipleSendings: true,
+      ownerId: 1,
+      title: 'titre campagne',
+      customResultPageButtonUrl: '/results',
+      customResultPageButtonText: 'Continuer',
     };
     campaignsApiStub = {
       get: sinon.stub(),
@@ -44,6 +52,52 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
       // then
       expect(result).to.be.an.instanceof(Campaign);
       expect(result).to.deep.equal(expectedResult);
+    });
+  });
+
+  describe('#save', function () {
+    it('should call save method from campaignsApi', async function () {
+      // given
+      const campaigns = [
+        {
+          creatorId: 2,
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+          name: 'campagne',
+          organizationId: 3,
+          targetProfileId: 123,
+          title: 'title',
+        },
+        {
+          creatorId: 2,
+          customResultPageButtonText: 'customResultPageButtonText',
+          customResultPageButtonUrl: 'customResultPageButtonUrl',
+          name: 'campagne',
+          organizationId: 3,
+          targetProfileId: 123,
+          title: 'title',
+        },
+      ];
+
+      const campaignsApiStub = {
+        save: sinon.stub(),
+      };
+
+      const expectedCreatedCampaigns = campaigns.map((campaign, index) => ({
+        ...campaign,
+        id: index,
+        code: `code${index}`,
+      }));
+      campaignsApiStub.save.withArgs(campaigns).resolves(expectedCreatedCampaigns);
+
+      // when
+      const result = await campaignRepository.save({ campaigns, campaignsApi: campaignsApiStub });
+
+      // then
+      expect(result).to.deep.equal([
+        new Campaign({ ...expectedCreatedCampaigns[0], id: 0, code: 'code0' }),
+        new Campaign({ ...expectedCreatedCampaigns[1], id: 1, code: 'code1' }),
+      ]);
     });
   });
 });

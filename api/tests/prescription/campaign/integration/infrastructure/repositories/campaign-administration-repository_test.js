@@ -669,6 +669,32 @@ describe('Integration | Repository | Campaign Administration', function () {
           ]),
         );
       });
+
+      it('should returns an array even if the length is 1', async function () {
+        const campaignsToSave = [
+          {
+            name: 'Evaluation niveau 1 recherche internet',
+            code: 'ACTERD153',
+            customLandingPageText: 'Parcours évaluatif concernant la recherche internet',
+            creatorId: userId,
+            ownerId,
+            organizationId,
+            multipleSendings: true,
+            type: CampaignTypes.ASSESSMENT,
+            targetProfileId,
+            title: 'Parcours recherche internet',
+            customResultPageText: null,
+            customResultPageButtonText: null,
+            customResultPageButtonUrl: null,
+          },
+        ];
+
+        // when
+        const savedCampaigns = await campaignAdministrationRepository.save(campaignsToSave);
+
+        // then
+        expect(savedCampaigns).to.be.an('array');
+      });
     });
 
     context('when the campaign have an externalIdLabel', function () {

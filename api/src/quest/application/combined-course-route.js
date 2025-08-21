@@ -1,5 +1,12 @@
 import Joi from 'joi';
 
+const ERRORS = {
+  PAYLOAD_TOO_LARGE: 'PAYLOAD_TOO_LARGE',
+};
+
+import { PayloadTooLargeError, sendJsonApiError } from '../../shared/application/http-errors.js';
+import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
+import { MAX_FILE_SIZE_UPLOAD } from '../../shared/domain/constants.js';
 import { combinedCourseController } from './combined-course-controller.js';
 
 const register = async function (server) {
@@ -48,6 +55,38 @@ const register = async function (server) {
         handler: combinedCourseController.reassessStatus,
         notes: ["- Mets à jour le statut du parcours combiné pour l'utilisateur connecté."],
         tags: ['api', 'combined-courses'],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/api/admin/combined-courses',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            assign: 'hasRoleSuperAdmin',
+          },
+        ],
+        payload: {
+          maxBytes: MAX_FILE_SIZE_UPLOAD,
+          output: 'file',
+          parse: 'gunzip',
+          failAction: (_, h) => {
+            return sendJsonApiError(
+              new PayloadTooLargeError('An error occurred, payload is too large', ERRORS.PAYLOAD_TOO_LARGE, {
+                maxSize: '20',
+              }),
+              h,
+            );
+          },
+        },
+        handler: combinedCourseController.createCombinedCourses,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés ayant pour rôle SUPER_ADMIN**\n' +
+            '- Elle permet de créer des parcours combinés à partir d‘un fichier au format CSV\n' +
+            '- Elle ne retourne aucune valeur',
+        ],
+        tags: ['api', 'admin', 'combined-course'],
       },
     },
   ]);

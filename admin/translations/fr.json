@@ -141,6 +141,14 @@
         "title": "Archivage des centres de certification en masse",
         "upload-button": "Importer un fichier CSV"
       },
+      "create-combined-courses": {
+        "description": "Sollicitez un spécialiste des parcours combinés",
+        "notifications": {
+          "success": "Les parcours combinés ont été créés, ainsi que les campagnes si les parcours en contiennent."
+        },
+        "title": "Création de parcours combinés",
+        "upload-button": "Importer un fichier CSV"
+      },
       "oidc-providers-import": {
         "description": "Note: Chercher à importer à nouveau des OIDC Providers déjà existants renverrait une erreur.",
         "notifications": {

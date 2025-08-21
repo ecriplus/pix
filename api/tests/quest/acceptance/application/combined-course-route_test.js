@@ -1,16 +1,85 @@
+import iconv from 'iconv-lite';
+
+import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { CombinedCourseParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  knex,
 } from '../../../test-helper.js';
+
+const ROLES = PIX_ADMIN.ROLES;
 
 describe('Quest | Acceptance | Application | Combined course Route ', function () {
   let server;
 
   beforeEach(async function () {
     server = await createServer();
+  });
+
+  describe('POST /api/admin/combined-courses', function () {
+    context('when user is SuperAdmin', function () {
+      let userId;
+
+      beforeEach(async function () {
+        userId = databaseBuilder.factory.buildUser.withRole({ role: ROLES.SUPER_ADMIN }).id;
+        await databaseBuilder.commit();
+      });
+
+      it('creates combined courses', async function () {
+        // given
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+        await databaseBuilder.commit();
+
+        const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
+${organizationId};"{""name"":""Combinix"",""successRequirements"":[]}";${userId}`;
+
+        const options = {
+          method: 'POST',
+          url: '/api/admin/combined-courses',
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          payload: iconv.encode(input, 'UTF-8'),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const createdQuest = await knex('quests').where('organizationId', organizationId).first();
+
+        expect(response.statusCode).to.equal(204);
+
+        expect(createdQuest.code).not.to.be.null;
+        expect(createdQuest.name).to.equal('Combinix');
+        expect(createdQuest.successRequirements).to.deep.equal([]);
+      });
+    });
+    context('when user is not SuperAdmin', function () {
+      it('should return 403 status code', async function () {
+        // given
+        const notAdminUserId = databaseBuilder.factory.buildUser.withRole({ role: ROLES.SUPPORT }).id;
+        await databaseBuilder.commit();
+
+        // when
+        const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
+100;"{""name"":""Combinix"",""successRequirements"":[]}";${notAdminUserId}`;
+
+        const options = {
+          method: 'POST',
+          url: '/api/admin/combined-courses',
+          headers: generateAuthenticatedUserRequestHeaders({ userId: notAdminUserId }),
+          payload: iconv.encode(input, 'UTF-8'),
+        };
+
+        // when
+        const response = await server.inject(options);
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
+    });
   });
 
   describe('GET /api/combined-courses', function () {

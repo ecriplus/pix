@@ -1,3 +1,6 @@
+import { createReadStream } from 'node:fs';
+
+import { getDataBuffer } from '../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
 import { requestResponseUtils } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
@@ -33,10 +36,19 @@ const reassessStatus = async function (request, h, dependencies = { requestRespo
   return h.response().code(204);
 };
 
+const createCombinedCourses = async function (request, h) {
+  const filePath = request.payload.path;
+  const stream = createReadStream(filePath);
+  const payload = await getDataBuffer(stream);
+  await usecases.createCombinedCourses({ payload });
+  return h.response(null).code(204);
+};
+
 const combinedCourseController = {
   getByCode,
   start,
   reassessStatus,
+  createCombinedCourses,
 };
 
 export { combinedCourseController };

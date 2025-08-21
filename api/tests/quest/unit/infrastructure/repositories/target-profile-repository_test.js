@@ -1,0 +1,36 @@
+import { TargetProfile } from '../../../../../src/quest/domain/models/TargetProfile.js';
+import * as targetProfileRepository from '../../../../../src/quest/infrastructure/repositories/target-profile-repository.js';
+import { expect, sinon } from '../../../../test-helper.js';
+
+describe('Quest | Unit | Infrastructure | Repositories | target-profile', function () {
+  describe('#findByIds', function () {
+    it('should call getById method from targetProfileApi', async function () {
+      // given
+      const firstTargetProfileId = 1;
+      const secondTargetProfileId = 2;
+      const expectedFirstTargetProfile = new TargetProfile({
+        id: firstTargetProfileId,
+        name: 'targetProfileName',
+        internalName: 'targetProfileInternalName',
+      });
+      const expectedSecondTargetProfile = new TargetProfile({
+        id: secondTargetProfileId,
+        name: 'targetProfileName2',
+        internalName: 'targetProfileInternalName2',
+      });
+      const targetProfilesApiStub = {
+        getById: sinon.stub(),
+      };
+      targetProfilesApiStub.getById.withArgs(firstTargetProfileId).resolves(expectedFirstTargetProfile);
+      targetProfilesApiStub.getById.withArgs(secondTargetProfileId).resolves(expectedSecondTargetProfile);
+      // when
+      const result = await targetProfileRepository.findByIds({
+        ids: [firstTargetProfileId, secondTargetProfileId],
+        targetProfilesApi: targetProfilesApiStub,
+      });
+
+      // then
+      expect(result).to.deep.equal([expectedFirstTargetProfile, expectedSecondTargetProfile]);
+    });
+  });
+});

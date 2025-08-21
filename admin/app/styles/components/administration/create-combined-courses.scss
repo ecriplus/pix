@@ -1,0 +1,25 @@
+.create-combined-courses {
+  &__actions {
+    display: block;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+  }
+
+  &__errors {
+    margin-top: var(--pix-spacing-4x);
+
+    & > span {
+      width: 100%;
+    }
+  }
+
+  &__error {
+    & > span {
+      font-weight: var(--pix-font-bold);
+    }
+  }
+
+}
