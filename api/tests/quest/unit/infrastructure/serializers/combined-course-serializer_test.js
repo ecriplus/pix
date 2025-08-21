@@ -40,6 +40,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             reference: 'ABCDIAG1',
             type: ITEM_TYPE.CAMPAIGN,
             redirection: undefined,
+            'is-completed': false,
           },
         },
         {
@@ -50,6 +51,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             reference: 'slug',
             type: ITEM_TYPE.MODULE,
             redirection: 'encryptedCombinedCourseUrl',
+            'is-completed': false,
           },
         },
       ],
