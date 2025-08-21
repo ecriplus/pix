@@ -192,7 +192,7 @@ export default class RegisterForm extends Component {
           @id="password"
           @value={{this.password}}
           @subLabel={{t "pages.login-or-register.register-form.fields.password.help"}}
-          {{on "focusout" (fn this.triggerInputPasswordValidation "password" this.email)}}
+          {{on "focusout" (fn this.triggerInputPasswordValidation "password" this.password)}}
           {{on "input" this.handlePasswordInput}}
           @validationStatus={{this.validation.password.status}}
           @errorMessage={{this.validation.password.message}}

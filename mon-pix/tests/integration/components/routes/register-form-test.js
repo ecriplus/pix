@@ -244,6 +244,24 @@ module('Integration | Component | routes/register-form', function (hooks) {
           assert.dom(screen.getByText(INCORRECT_PASSWORD_FORMAT_ERROR_MESSAGE)).exists();
         });
       });
+
+      module('when the password is correctly filled', function () {
+        test('should not display an error message on password field', async function (assert) {
+          // given
+          const screen = await render(hbs`<Routes::RegisterForm />`);
+          const correctPassword = '12345678Ab!';
+
+          await fillInputReconciliationForm({ screen, t });
+          await click(screen.getByRole('button', { name: t('pages.login-or-register.register-form.button-form') }));
+
+          // when
+          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), correctPassword);
+          await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'focusout');
+
+          // then
+          assert.dom(screen.queryByText(INCORRECT_PASSWORD_FORMAT_ERROR_MESSAGE)).doesNotExist();
+        });
+      });
     });
 
     test('should not call api when email is invalid', async function (assert) {
