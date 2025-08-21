@@ -1,4 +1,4 @@
-{
+   {
   "id": "a1eea948-2125-488f-8006-9f85e646830d",
   "slug": "tmp-ia-bias-ind",
   "title": "Les biais des lA",
@@ -42,7 +42,7 @@
                     {
                       "userName": "Léane",
                       "direction": "outgoing",
-                      "content": <img src="https://assets.pix.org/draft/modules/ia-biais-independant/juge1et2.jpg" height="130" alt="images de juges créés par IA générative">
+                      "content": "<img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/juge1et2.jpg\" height=\"130\" alt=\"images de juges créés par IA générative\">"
                     },
                     {
                       "userName": "Adem",
