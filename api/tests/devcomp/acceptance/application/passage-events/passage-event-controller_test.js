@@ -1,6 +1,6 @@
 import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
-describe('Acceptance | Controller | passage-events-controller', function () {
+describe('Acceptance | Controller | passage-event-controller', function () {
   let server;
 
   beforeEach(async function () {

@@ -5,7 +5,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
 } from '../../../../test-helper.js';
 
-describe('Acceptance | Controller | users-controller-find-paginated-user-recommended-trainings', function () {
+describe('Acceptance | Routes | UserTrainingsRoute', function () {
   let options;
   let server;
   let userId;

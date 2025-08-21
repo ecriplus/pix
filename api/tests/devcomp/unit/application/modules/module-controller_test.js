@@ -1,5 +1,5 @@
-import { modulesController } from '../../../../../src/devcomp/application/modules/controller.js';
-import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/index.js';
+import { modulesController } from '../../../../../src/devcomp/application/modules/module-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/module-route.js';
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 

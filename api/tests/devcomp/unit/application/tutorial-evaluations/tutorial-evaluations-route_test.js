@@ -1,5 +1,5 @@
-import * as moduleUnderTest from '../../../../../src/devcomp/application/tutorial-evaluations/index.js';
 import { tutorialEvaluationsController } from '../../../../../src/devcomp/application/tutorial-evaluations/tutorial-evaluations-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/tutorial-evaluations/tutorial-evaluations-route.js';
 import { TutorialEvaluation } from '../../../../../src/devcomp/domain/models/TutorialEvaluation.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 

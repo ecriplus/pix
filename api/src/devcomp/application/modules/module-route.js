@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
-import { modulesController } from './controller.js';
+import { modulesController } from './module-controller.js';
 
 const register = async function (server) {
   server.route([

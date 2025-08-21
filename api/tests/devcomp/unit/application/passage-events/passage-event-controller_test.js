@@ -1,4 +1,4 @@
-import { passageEventsController } from '../../../../../src/devcomp/application/passage-events/passage-events-controller.js';
+import { passageEventsController } from '../../../../../src/devcomp/application/passage-events/passage-event-controller.js';
 import { BadRequestError } from '../../../../../src/shared/application/http-errors.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';

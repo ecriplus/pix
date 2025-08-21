@@ -1,4 +1,4 @@
-import { passageController } from '../../../../../src/devcomp/application/passages/controller.js';
+import { passageController } from '../../../../../src/devcomp/application/passages/passage-controller.js';
 import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, sinon } from '../../../../test-helper.js';
 

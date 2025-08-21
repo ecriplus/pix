@@ -1,9 +1,9 @@
-import { modulesController } from '../../../../../src/devcomp/application/modules/controller.js';
-import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/index.js';
+import { modulesController } from '../../../../../src/devcomp/application/modules/module-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/modules/module-route.js';
 import { ElementInstantiationError, ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Devcomp | Application | Module | Router | modules-router', function () {
+describe('Integration | Devcomp | Application | Module | Router | module-router', function () {
   describe('GET /api/modules/{slug}', function () {
     describe('when controller throws a ModuleInstantiationError', function () {
       it('should return an HTTP 502 error', async function () {

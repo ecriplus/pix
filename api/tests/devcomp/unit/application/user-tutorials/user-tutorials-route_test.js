@@ -1,5 +1,5 @@
-import * as moduleUnderTest from '../../../../../src/devcomp/application/user-tutorials/index.js';
 import { userTutorialsController } from '../../../../../src/devcomp/application/user-tutorials/user-tutorials-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/user-tutorials/user-tutorials-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
