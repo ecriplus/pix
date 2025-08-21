@@ -355,6 +355,37 @@
       "success": "Participants have been imported on {date} by {firstName} {lastName}."
     },
     "index": {
+      "action-cards": {
+        "classic": {
+          "create-campaign": {
+            "buttonText": "New campaign",
+            "description": "Choose the test on which you want to evaluate your participants or collect their Pix profile",
+            "title": "Create a campaign"
+          },
+          "follow-activity": {
+            "buttonText": "View my campaigns",
+            "description": "View the status and results of your participants.",
+            "title": "Follow activity"
+          }
+        },
+        "missions": {
+          "extend-session": {
+            "buttonText": "Extend session",
+            "description": "Extend session",
+            "title": "Extend session"
+          },
+          "follow-activity": {
+            "buttonText": "View missions",
+            "description": "View the status and results of your participants.",
+            "title": "Follow activity"
+          },
+          "launch-session": {
+            "buttonText": "Activate session",
+            "description": "This action should be performed before inviting your students to go to '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' and enter the school code to access the missions.",
+            "title": "Launch a session"
+          }
+        }
+      },
       "organization-information": {
         "label": "Name of your organisation",
         "title": "Your organisation's information"
@@ -409,7 +440,7 @@
         "confirmation-checkbox": "I confirm that I have understood the impacts of the {count} deletions"
       },
       "edit-participant-name-modal": {
-        "error-messages":{
+        "error-messages": {
           "first-name": "The user's first name cannot be empty.",
           "last-name": "The user's name cannot be empty."
         },

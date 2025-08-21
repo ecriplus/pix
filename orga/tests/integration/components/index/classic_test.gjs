@@ -73,4 +73,31 @@ module('Integration | Component | Index::Classic', function (hooks) {
       assert.notOk(screen.queryByText(t('banners.import.message')));
     });
   });
+
+  test('should display action cards', async function (assert) {
+    class CurrentUserStub extends Service {
+      prescriber = {
+        firstName: 'Jean',
+      };
+      organization = {
+        name: 'Ma super organization',
+      };
+    }
+    this.owner.register('service:current-user', CurrentUserStub);
+    const screen = await render(<template><IndexClassic /></template>);
+
+    // then
+    assert.ok(screen.getByRole('heading', { name: t('components.index.action-cards.classic.create-campaign.title') }));
+    assert.ok(screen.getByText(t('components.index.action-cards.classic.create-campaign.description')));
+
+    assert.ok(
+      screen.getByRole('link', { name: t('components.index.action-cards.classic.create-campaign.buttonText') }),
+    );
+
+    assert.ok(screen.getByRole('heading', { name: t('components.index.action-cards.classic.follow-activity.title') }));
+    assert.ok(screen.getByText(t('components.index.action-cards.classic.follow-activity.description')));
+    assert.ok(
+      screen.getByRole('link', { name: t('components.index.action-cards.classic.follow-activity.buttonText') }),
+    );
+  });
 });

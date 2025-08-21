@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.188.0](https://github.com/1024pix/pix/compare/v5.187.0...v5.188.0) (2025-08-21)
+
+### :rocket: Amélioration
+
+- [#13186](https://github.com/1024pix/pix/pull/13186) Ajouter des liens à la page d'accueil de Pix Orga (PIX-18949) 
+- [#13243](https://github.com/1024pix/pix/pull/13243) Ajouter le nouveau POI complete-phrase à modulix (relatif à pix-18766 | pix epreuves) 
+- [#13244](https://github.com/1024pix/pix/pull/13244) Ajouter un endpoint pour récupérer les profils cibles filtrés par orga (PIX-19100) 
+- [#13228](https://github.com/1024pix/pix/pull/13228) WIP module apprentissage supervise avec carousel 
+
+### :bug: Correction
+
+- [#13231](https://github.com/1024pix/pix/pull/13231) Les props des custom elements ne sont pas normalisés sur la page de prévisualisation de module (PIX-19169) 
+- [#13239](https://github.com/1024pix/pix/pull/13239) Récupérer la dernière version d'un référentiel cadre de façon asynchrone (PIX-19187). 
+
+### :building_construction: Tech
+
+- [#13246](https://github.com/1024pix/pix/pull/13246) monté de version du package webcomponent 
+- [#13227](https://github.com/1024pix/pix/pull/13227) Revoir les tests d'intégration du locale-switcher (PIX-19152) 
+
+### :arrow_up: Montée de version
+
+- [#13249](https://github.com/1024pix/pix/pull/13249) Update dependency @1024pix/pix-ui to ^55.25.3 (admin) 
+- [#13250](https://github.com/1024pix/pix/pull/13250) Update dependency @1024pix/pix-ui to ^55.25.3 (junior) 
+- [#13251](https://github.com/1024pix/pix/pull/13251) Update dependency @1024pix/pix-ui to ^55.25.3 (mon-pix)
+
 # [5.187.0](https://github.com/1024pix/pix/compare/v5.186.0...v5.187.0) (2025-08-20)
 
 ### :rocket: Amélioration

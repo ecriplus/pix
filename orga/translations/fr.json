@@ -355,6 +355,37 @@
       "success": "Les participants ont bien été importés le {date} par {firstname} {lastname}."
     },
     "index": {
+      "action-cards": {
+        "classic": {
+          "create-campaign": {
+            "buttonText": "Nouvelle campagne",
+            "description": "Choisissez le parcours sur lequel vous souhaitez évaluer vos participants ou collectez leur profil Pix.",
+            "title": "Créer une campagne"
+          },
+          "follow-activity": {
+            "buttonText": "Voir mes campagnes",
+            "description": "Visualisez le statut et les résultats de vos participants.",
+            "title": "Suivre l'activité"
+          }
+        },
+        "missions": {
+          "extend-session": {
+            "buttonText": "Prolonger la session",
+            "description": "Prolonger la session",
+            "title": "Prolonger la session"
+          },
+          "follow-activity": {
+            "buttonText": "Voir les missions",
+            "description": "Visualisez le statut et les résultats de vos participants.",
+            "title": "Suivre l'activité"
+          },
+          "launch-session": {
+            "buttonText": "Activer la session",
+            "description": "Cette action est à réaliser avant d'inviter vos élèves à se rendre sur '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' et à renseigner le code école pour accéder aux missions.",
+            "title": "Lancer une session"
+          }
+        }
+      },
       "organization-information": {
         "label": "Nom de votre organisation",
         "title": "Les informations de votre organisation"
@@ -409,7 +440,7 @@
         "confirmation-checkbox": "Je confirme avoir bien compris les impacts des {count} suppressions"
       },
       "edit-participant-name-modal": {
-        "error-messages":{
+        "error-messages": {
           "first-name": "Le prénom de l'utilisateur ne peut pas être vide.",
           "last-name": "Le nom de l'utilisateur ne peut pas être vide."
         },

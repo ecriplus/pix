@@ -1,4 +1,4 @@
-import * as targetProfileTrainingOrganizationRepository from '../../../../../src/devcomp/infrastructure/repositories/training-profile-training-organization-repository.js';
+import * as targetProfileTrainingOrganizationRepository from '../../../../../src/devcomp/infrastructure/repositories/target-profile-training-organization-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | target-profile-training-organization', function () {

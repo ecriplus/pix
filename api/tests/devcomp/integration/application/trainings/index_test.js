@@ -1762,4 +1762,74 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
       });
     });
   });
+
+  describe('GET /api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}/organizations', function () {
+    const method = 'GET';
+    const url = '/api/admin/trainings/1/target-profiles/2/organizations';
+
+    context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
+      it('should return a response with an HTTP status code 200', async function () {
+        // given
+        const prehandlersStub = sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .callsFake(
+            () => (request, h) =>
+              h
+                .response({ errors: new Error('forbidden') })
+                .code(403)
+                .takeover(),
+          )
+          .withArgs([
+            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            securityPreHandlers.checkAdminMemberHasRoleSupport,
+            securityPreHandlers.checkAdminMemberHasRoleMetier,
+          ])
+          .callsFake(() => (request, h) => h.response(true));
+
+        sinon
+          .stub(trainingController, 'findPaginatedFilteredOrganizations')
+          .callsFake((request, h) => h.response('ok').code(200));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+
+        const response = await httpTestServer.request(method, url);
+
+        // then
+        expect(prehandlersStub).to.have.been.calledOnce;
+        expect(response.statusCode).to.equal(200);
+      });
+    });
+
+    context('when user has role "CERTIF"', function () {
+      it('should return a response with an HTTP status code 403', async function () {
+        // given
+        const prehandlersStub = sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .withArgs([
+            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+            securityPreHandlers.checkAdminMemberHasRoleSupport,
+            securityPreHandlers.checkAdminMemberHasRoleMetier,
+          ])
+          .callsFake(
+            () => (request, h) =>
+              h
+                .response({ errors: new Error('forbidden') })
+                .code(403)
+                .takeover(),
+          );
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const { statusCode } = await httpTestServer.request(method, url);
+
+        // then
+        expect(prehandlersStub).to.have.been.calledOnce;
+        expect(statusCode).to.equal(403);
+      });
+    });
+  });
 });
