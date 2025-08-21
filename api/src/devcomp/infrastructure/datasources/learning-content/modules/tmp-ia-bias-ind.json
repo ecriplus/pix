@@ -324,14 +324,14 @@
                     "id": "1",
                     "content": "<p>taboulé à la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse, c’est que votre sélection a montré.<br>Mais en réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-résultat final.png\" height=\"130\" alt=\"images du resultat\"></p>"
+                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse, c’est que votre sélection a montré.<br>Mais en réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"130\" alt=\"images du resultat\"></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>taboulé au persil<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien pensé, vous avez cru à un piège ?<br>En réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-résultat final.png\" height=\"130\" alt=\"images du resultat\"></p>"
+                      "diagnosis": "<p>Bien pensé, vous avez cru à un piège ?<br>En réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"130\" alt=\"images du resultat\"></p>"
                     }
                   }
                 ],
@@ -406,7 +406,7 @@
                     {
                       "id": "0acc6d61-54b6-4a88-a5bb-c86ee663745f",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-résultat final.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
                       "alt": "",
                       "alternativeText": "<p>image à changer</p>",
                       "legend": "",
@@ -455,7 +455,7 @@
                     {
                       "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-résultat final.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
                       "alt": "",
                       "alternativeText": "<p>image à changer</p>",
                       "legend": "",
@@ -504,7 +504,7 @@
                     {
                       "id": "dd63f76b-cc9c-4dcd-a8e8-5aa2f349c29b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-résultat final.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
                       "alt": "",
                       "alternativeText": "<p>image à changer</p>",
                       "legend": "",
