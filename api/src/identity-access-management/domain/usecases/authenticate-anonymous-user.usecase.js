@@ -1,4 +1,5 @@
 import { UserCantBeCreatedError } from '../errors.js';
+import { UserAccessToken } from '../models/UserAccessToken.js';
 import { UserToCreate } from '../models/UserToCreate.js';
 
 /**
@@ -20,7 +21,6 @@ export const authenticateAnonymousUser = async function ({
   campaignToJoinRepository,
   userToCreateRepository,
   anonymousUserTokenRepository,
-  tokenService,
 }) {
   const campaign = await campaignToJoinRepository.getByCode({ code: campaignCode });
   if (!campaign.isSimplifiedAccess) {
@@ -32,5 +32,6 @@ export const authenticateAnonymousUser = async function ({
   const anonymousUser = await userToCreateRepository.create({ user: userToCreate });
   await anonymousUserTokenRepository.save(anonymousUser.id);
 
-  return tokenService.createAccessTokenFromAnonymousUser({ userId: anonymousUser.id, audience });
+  const { accessToken } = UserAccessToken.generateAnonymousUserToken({ userId: anonymousUser.id, audience });
+  return accessToken;
 };

@@ -436,25 +436,4 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal({ user_id: userId });
     });
   });
-
-  describe('#createAccessTokenFromAnonymousUser', function () {
-    it('should create and return an access token and an expiration delay in seconds', function () {
-      // given
-      const userId = 1;
-      sinon.stub(settings.authentication, 'secret').value('SECRET_KEY');
-      sinon.stub(settings.anonymous, 'accessTokenLifespanMs').value(10000);
-      const audience = 'https://app.pix.fr';
-      const payload = { user_id: userId, source: 'pix', aud: audience };
-      const secret = 'SECRET_KEY';
-      const options = { expiresIn: 10 };
-      sinon.stub(jsonwebtoken, 'sign').returns('VALID_ACCESS_TOKEN');
-
-      // when
-      const result = tokenService.createAccessTokenFromAnonymousUser({ userId, audience });
-
-      // then
-      expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);
-      expect(result).to.equal('VALID_ACCESS_TOKEN');
-    });
-  });
 });
