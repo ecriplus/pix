@@ -176,4 +176,36 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
     expect(createdCampaignForSecondOrganization.name).to.equal(targetProfile.internalName);
     expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
   });
+
+  it('should save same date for each quest in same row, but not for the other rows', async function () {
+    // given
+    const userId = databaseBuilder.factory.buildUser().id;
+    const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
+    const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+    await databaseBuilder.commit();
+
+    const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
+${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
+${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
+`;
+
+    const payload = iconv.encode(input, 'UTF-8');
+
+    // when
+    await usecases.createCombinedCourses({ payload });
+
+    // then
+    const [firstCreatedQuestForFirstOrganization, secondCreatedQuestForFirstOrganization] = await knex('quests')
+      .where('organizationId', firstOrganizationId)
+      .orderBy('id');
+    const createdQuestForSecondOrganization = await knex('quests')
+      .where('organizationId', secondOrganizationId)
+      .first();
+
+    expect(firstCreatedQuestForFirstOrganization.createdAt).to.deep.equal(createdQuestForSecondOrganization.createdAt);
+    expect(firstCreatedQuestForFirstOrganization.createdAt).not.to.deep.equal(
+      secondCreatedQuestForFirstOrganization.createdAt,
+    );
+  });
 });
