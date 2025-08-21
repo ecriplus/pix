@@ -76,22 +76,22 @@ describe('Integration | Certification | Session | Repository | Complementary cer
 
         // then
         const expectedComplementaryCertifications = [
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.enrolment.buildComplementaryCertification({
             id: 1,
             key: 'EDU_1ER_DEGRE',
             label: 'Pix+ Édu 1er degré',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.enrolment.buildComplementaryCertification({
             id: 2,
             key: 'EDU_2ND_DEGRE',
             label: 'Pix+ Édu 2nd degré',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.enrolment.buildComplementaryCertification({
             id: 3,
             key: 'DROIT',
             label: 'Pix+ Droit',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.enrolment.buildComplementaryCertification({
             id: 4,
             key: 'CLEA',
             label: 'CléA Numérique',

@@ -74,6 +74,7 @@ import { buildCompetenceMark } from './build-competence-mark.js';
 import { buildCompetenceResult } from './build-competence-result.js';
 import { buildCompetenceTree } from './build-competence-tree.js';
 import { buildComplementaryCertification } from './certification/complementary-certification/build-complementary-certification.js';
+import { buildComplementaryCertification as buildEnrolmentComplementaryCertification } from './certification/enrolment/build-complementary-certification.js';
 import { buildComplementaryCertificationBadge } from './certification/complementary-certification/build-complementary-certification-badge.js';
 import { buildComplementaryCertificationBadgeForAdmin } from './build-complementary-certification-badge-for-admin.js';
 import { buildComplementaryCertificationCourseResult } from './build-complementary-certification-course-result.js';
@@ -263,6 +264,7 @@ const certification = {
     buildCertificationEligibility,
     buildPixCertification,
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadgeForEnrolment,
+    buildComplementaryCertification: buildEnrolmentComplementaryCertification,
   },
   evaluation: {
     buildCandidate: buildEvaluationCandidate,

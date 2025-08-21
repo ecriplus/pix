@@ -68,7 +68,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
   context('when the candidate is enrolled to a "simple" complementary certification', function () {
     it('returns an empty certification candidate subscription', async function () {
       // given
-      const complementaryCertification = domainBuilder.buildComplementaryCertification({
+      const complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification({
         key: 'PIX+SOMETHING',
       });
 
@@ -111,7 +111,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
     context('when the center is not habilitated for the candidate complementary certification', function () {
       it('returns an empty certification candidate subscription', async function () {
         // given
-        const complementaryCertification = domainBuilder.buildComplementaryCertification({
+        const complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification({
           key: ComplementaryCertificationKeys.CLEA,
         });
 
@@ -163,7 +163,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
     context('but did not get the associated badge', function () {
       it('returns an uneligible double certification candidate subscription', async function () {
         // given
-        const complementaryCertification = domainBuilder.buildComplementaryCertification({
+        const complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification({
           key: ComplementaryCertificationKeys.CLEA,
         });
 
@@ -218,7 +218,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-certificatio
     context('and got the associated badge', function () {
       it('returns an eligible double certification candidate subscription', async function () {
         // given
-        const complementaryCertification = domainBuilder.buildComplementaryCertification({
+        const complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification({
           key: ComplementaryCertificationKeys.CLEA,
         });
 

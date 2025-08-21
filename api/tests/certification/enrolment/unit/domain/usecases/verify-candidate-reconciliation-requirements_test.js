@@ -117,7 +117,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCases | verify-candidat
         const userId = 123;
         const sessionId = 123;
         const reconciledAt = new Date();
-        const complementaryCertification = domainBuilder.buildComplementaryCertification({
+        const complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification({
           label: 'Pix+Droit',
           key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         });
