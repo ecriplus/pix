@@ -10,17 +10,6 @@ import {
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
-function createAccessTokenForSaml({ userId, audience }) {
-  const expirationDelaySeconds = config.saml.accessTokenLifespanMs / 1000;
-  return _createAccessToken({ userId, source: 'external', expirationDelaySeconds, audience });
-}
-
-function _createAccessToken({ userId, source, expirationDelaySeconds, audience }) {
-  return jsonwebtoken.sign({ user_id: userId, source, aud: audience }, config.authentication.secret, {
-    expiresIn: expirationDelaySeconds,
-  });
-}
-
 /**
  * Encode and sign a payload into a JWT token (using jsonwebtoken library)
  * @param {Record<string, any>} payload Token payload
@@ -199,7 +188,6 @@ async function extractExternalUserFromIdToken(token) {
   };
 }
 const tokenService = {
-  createAccessTokenForSaml,
   createAccessTokenFromApplication,
   createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
@@ -222,7 +210,6 @@ const tokenService = {
  */
 
 export {
-  createAccessTokenForSaml,
   createAccessTokenFromApplication,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,

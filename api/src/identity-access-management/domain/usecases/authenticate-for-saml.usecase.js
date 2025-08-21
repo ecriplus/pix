@@ -6,6 +6,7 @@ import {
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
+import { UserAccessToken } from '../models/UserAccessToken.js';
 
 /**
  * @param {Object} params
@@ -66,7 +67,7 @@ async function authenticateForSaml({
       throw new UserShouldChangePasswordError(undefined, passwordResetToken);
     }
 
-    const token = tokenService.createAccessTokenForSaml({ userId: userFromCredentials.id, audience });
+    const { accessToken } = UserAccessToken.generateSamlUserToken({ userId: userFromCredentials.id, audience });
 
     await _updateLastLoggedDates({
       user: userFromCredentials,
@@ -76,7 +77,7 @@ async function authenticateForSaml({
       lastUserApplicationConnectionsRepository,
     });
 
-    return token;
+    return accessToken;
   } catch (error) {
     if (error instanceof UserNotFoundError) {
       throw new MissingOrInvalidCredentialsError();

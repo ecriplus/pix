@@ -100,30 +100,6 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
     });
   });
 
-  describe('#createAccessTokenForSaml', function () {
-    it('returns a valid json web token', function () {
-      // given
-      const secret = 'a secret';
-      const userId = 123;
-      const source = 'external';
-
-      sinon.stub(settings.authentication, 'secret').value(secret);
-      sinon.stub(settings.saml, 'accessTokenLifespanMs').value(1000);
-      const accessToken = 'valid access token';
-      const audience = 'https://app.pix.fr';
-      const payload = { user_id: userId, source, aud: audience };
-      const secretOrPrivateKey = secret;
-      const options = { expiresIn: 1 };
-      sinon.stub(jsonwebtoken, 'sign').withArgs(payload, secretOrPrivateKey, options).returns(accessToken);
-
-      // when
-      const result = tokenService.createAccessTokenForSaml({ userId, audience });
-
-      // then
-      expect(result).to.be.deep.equal(accessToken);
-    });
-  });
-
   describe('#extractExternalUserFromIdToken', function () {
     it('should return external user if the idToken is valid', async function () {
       // given
