@@ -39,8 +39,8 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
 };
 
 const createAndReconcileUserToOrganizationLearner = async function (request, h) {
-  const locale = getChallengeLocale(request);
-  const i18n = getI18nFromRequest(request);
+  const locale = await getChallengeLocale(request);
+  const i18n = await getI18nFromRequest(request);
 
   const payload = request.payload.data.attributes;
   const userAttributes = {

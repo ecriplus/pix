@@ -56,7 +56,7 @@ export function getI18n(locale) {
  * @param {*} request HAPI request
  * @returns the i18n instance according the locale extracted from the request
  */
-export function getI18nFromRequest(request) {
-  const locale = request.query?.lang || getChallengeLocale(request);
+export async function getI18nFromRequest(request) {
+  const locale = request.query?.lang || (await getChallengeLocale(request));
   return getI18n(locale);
 }

@@ -44,7 +44,7 @@ const findProfilesCollectionParticipations = async function (request) {
 const getCollectiveResult = async function (request, h, dependencies = { campaignCollectiveResultSerializer }) {
   const { userId } = request.auth.credentials;
   const { campaignId } = request.params;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignCollectiveResult = await usecases.computeCampaignCollectiveResult({ userId, campaignId, locale });
   return dependencies.campaignCollectiveResultSerializer.serialize(campaignCollectiveResult);

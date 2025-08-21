@@ -20,7 +20,7 @@ const getByCode = async function (
   },
 ) {
   const { code } = request.query.filter;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   const campaignToJoin = await usecases.getCampaignByCode({ code, locale });
   return dependencies.campaignToJoinSerializer.serialize(campaignToJoin);
@@ -71,7 +71,7 @@ const findPaginatedFilteredCampaigns = async function (request, _, dependencies 
 };
 
 const getCsvAssessmentResults = async function (request, h) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const { campaignId } = request.params;
 
@@ -96,7 +96,7 @@ const getCsvAssessmentResults = async function (request, h) {
 };
 
 const getCsvProfilesCollectionResults = async function (request, h) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const { campaignId } = request.params;
 

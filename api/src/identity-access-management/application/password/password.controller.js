@@ -9,7 +9,7 @@ const checkResetDemand = async function (request, h, dependencies = { userSerial
 };
 const createResetPasswordDemand = async function (request, h) {
   const email = request.payload.email;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
 
   await usecases.createResetPasswordDemand({ email, locale });
 

@@ -3,8 +3,8 @@ import lodash from 'lodash';
 import { config } from '../config.js';
 
 const { get, update } = lodash;
+import { tokenService } from '../domain/services/token-service.js';
 import { asyncLocalStorage, getContext, getInContext, setInContext } from './async-local-storage.js';
-import * as requestResponseUtils from './utils/request-response-utils.js';
 
 function getRequestId() {
   if (!config.hapi.enableRequestMonitoring) {
@@ -33,7 +33,12 @@ function getCorrelationContext() {
 
 function extractUserIdFromRequest(request) {
   let userId = get(request, 'auth.credentials.userId');
-  if (!userId && get(request, 'headers.authorization')) userId = requestResponseUtils.extractUserIdFromRequest(request);
+
+  if (!userId && get(request, 'headers.authorization')) {
+    const token = tokenService.extractTokenFromAuthChain(request.headers.authorization);
+    userId = tokenService.extractUserId(token);
+  }
+
   return userId || '-';
 }
 

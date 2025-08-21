@@ -22,7 +22,7 @@ const save = async function (request, h, dependencies = { assessmentRepository }
 
 const getAssessmentWithNextChallenge = async function (request) {
   const assessmentId = request.params.id;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const userId = extractUserIdFromRequest(request);
 
   const assessment = await DomainTransaction.execute(async () => {
@@ -59,7 +59,7 @@ const findCompetenceEvaluations = async function (request) {
 
 const autoValidateNextChallenge = async function (request, h) {
   const assessmentId = request.params.id;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
   const userId = assessment.userId;
   const fakeAnswer = new Answer({

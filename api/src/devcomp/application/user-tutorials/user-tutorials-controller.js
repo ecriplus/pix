@@ -17,7 +17,7 @@ const add = async function (request, h, dependencies = { userSavedTutorialSerial
 const find = async function (request, h, dependencies = { tutorialSerializer }) {
   const { userId } = request.auth.credentials;
   const { page, filter: filters } = request.query;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const { tutorials, meta } = await usecases.findPaginatedFilteredTutorials({
     userId,
     filters,

@@ -64,12 +64,14 @@ export default {
     type: 'boolean',
     description: 'Enable usage of cookie locale in Frontend apps keeping retro-compatibility with the backend.',
     defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
     tags: ['frontend', 'team-acces'],
   },
   useCookieLocaleInApi: {
     type: 'boolean',
     description: 'Enable usage of cookie locale in the API to get the user or challenge locales.',
     defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
     tags: ['team-acces'],
   },
 };

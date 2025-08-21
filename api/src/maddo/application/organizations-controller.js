@@ -8,7 +8,7 @@ export async function getOrganizations(request, h, dependencies = { findOrganiza
 
 export async function getOrganizationCampaigns(request, h, dependencies = { findCampaigns: usecases.findCampaigns }) {
   const { page } = request.query;
-  const locale = getChallengeLocale(request);
+  const locale = await getChallengeLocale(request);
   const requestedOrganizationId = request.params.organizationId;
   const result = await dependencies.findCampaigns({
     organizationId: requestedOrganizationId,

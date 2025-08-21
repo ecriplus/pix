@@ -5,7 +5,7 @@ import { usecases } from '../domain/usecases/index.js';
 import * as sessionManagementSerializer from '../infrastructure/serializers/session-serializer.js';
 
 const publish = async function (request, h, dependencies = { sessionManagementSerializer }) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionId = request.params.id;
 
@@ -23,7 +23,7 @@ const unpublish = async function (request, h, dependencies = { sessionManagement
 };
 
 const publishInBatch = async function (request, h) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const sessionIds = request.payload.data.attributes.ids;
 

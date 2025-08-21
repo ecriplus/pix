@@ -100,6 +100,35 @@ function isFranceLocale(locale) {
   return supportedLocale === FRENCH_FRANCE_LOCALE;
 }
 
+/**
+ * @param {string} locale
+ * @returns {string} - returns the nearest challenge locale according to the given locale
+ */
+function getNearestChallengeLocale(locale) {
+  if (!locale) {
+    return getDefaultChallengeLocale();
+  }
+
+  try {
+    const intlLocale = new Intl.Locale(locale);
+
+    if (intlLocale.toString() === FRENCH_FRANCE_LOCALE) {
+      return FRENCH_FRANCE;
+    }
+
+    if (CHALLENGE_LOCALES.includes(intlLocale.toString())) {
+      return intlLocale.toString();
+    }
+
+    const localeMatch = CHALLENGE_LOCALES.find((l) => new Intl.Locale(l).language === intlLocale.language);
+    if (localeMatch) return localeMatch;
+
+    return DEFAULT_CHALLENGE_LOCALE;
+  } catch {
+    return DEFAULT_CHALLENGE_LOCALE;
+  }
+}
+
 export {
   coerceLanguage,
   DUTCH_SPOKEN,
@@ -110,6 +139,7 @@ export {
   getChallengeLocales,
   getDefaultChallengeLocale,
   getDefaultLocale,
+  getNearestChallengeLocale,
   getNearestSupportedLocale,
   getSupportedLanguages,
   getSupportedLocales,

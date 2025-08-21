@@ -8,8 +8,8 @@ import { getBaseLocale } from '../../domain/services/locale-service.js';
 import { redisMonitor } from '../../infrastructure/utils/redis-monitor.js';
 import { getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
 
-const get = function (request) {
-  const locale = getChallengeLocale(request);
+const get = async function (request) {
+  const locale = await getChallengeLocale(request);
 
   return {
     name: packageJSON.name,

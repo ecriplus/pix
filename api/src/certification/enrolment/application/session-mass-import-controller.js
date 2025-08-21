@@ -17,7 +17,7 @@ const createSessions = async function (request, h) {
 };
 
 const validateSessions = async function (request, h, dependencies = { csvHelpers, csvSerializer }) {
-  const i18n = getI18nFromRequest(request);
+  const i18n = await getI18nFromRequest(request);
 
   const certificationCenterId = request.params.certificationCenterId;
   const authenticatedUserId = request.auth.credentials.userId;
