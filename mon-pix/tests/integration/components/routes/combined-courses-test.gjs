@@ -140,7 +140,6 @@ module('Integration | Component | combined course', function (hooks) {
         router.urlFor('campaigns', { code: combinedCourseItem.reference }),
       );
     });
-
     test('should display modules with with related link', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
@@ -184,6 +183,33 @@ module('Integration | Component | combined course', function (hooks) {
           },
         ),
       );
+    });
+    test('should display completed status for finished items', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+        isCompleted: true,
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'STARTED',
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(combinedCourseItem);
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+    <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(screen.getByText(t('pages.combined-courses.items.completed')));
     });
   });
   module('when participation is completed', function () {

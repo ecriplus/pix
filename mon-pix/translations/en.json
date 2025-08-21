@@ -1196,6 +1196,9 @@
       },
       "content": {
         "start-button": "Start course"
+      },
+      "items": {
+        "completed": "Completed!"
       }
     },
     "comparison-window": {
