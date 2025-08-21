@@ -1,5 +1,4 @@
 import * as useCase from '../../../../../src/shared/application/usecases/checkAdminMemberHasRoleCertif.js';
-import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkAdminMemberHasRoleCertifUseCase', function () {
@@ -7,10 +6,7 @@ describe('Unit | Application | Use Case | checkAdminMemberHasRoleCertifUseCase',
   let adminMemberRepositoryStub;
 
   beforeEach(function () {
-    sinon.stub(tokenService, 'extractUserId').resolves(userId);
-    adminMemberRepositoryStub = {
-      get: sinon.stub(),
-    };
+    adminMemberRepositoryStub = { get: sinon.stub() };
   });
 
   it('should resolve true when the admin member has role certif', async function () {

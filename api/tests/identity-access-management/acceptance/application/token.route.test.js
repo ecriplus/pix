@@ -1,10 +1,10 @@
 import querystring from 'node:querystring';
 
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 const { ROLES } = PIX_ADMIN;
+import { UserAccessToken } from '../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { config } from '../../../../src/shared/config.js';
 
 describe('Acceptance | Identity Access Management | Route | Token', function () {
@@ -49,10 +49,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
       expect(response.statusCode).to.equal(200);
       expect(result.token_type).to.equal('bearer');
       expect(result.access_token).to.exist;
-      const decodedAccessToken = await decodeIfValid(result.access_token);
-      expect(decodedAccessToken).to.include({
-        aud: 'https://orga.pix.fr',
-      });
+      const decodedAccessToken = UserAccessToken.decode(result.access_token);
+      expect(decodedAccessToken).to.include({ audience: 'https://orga.pix.fr' });
       expect(result.user_id).to.equal(userId);
       expect(result.refresh_token).to.exist;
     });
@@ -114,10 +112,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         expect(response.statusCode).to.equal(200);
         expect(result.token_type).to.equal('bearer');
         expect(result.access_token).to.exist;
-        const decodedAccessToken = await decodeIfValid(result.access_token);
-        expect(decodedAccessToken).to.include({
-          aud: 'https://orga.pix.fr',
-        });
+        const decodedAccessToken = UserAccessToken.decode(result.access_token);
+        expect(decodedAccessToken).to.include({ audience: 'https://orga.pix.fr' });
         expect(result.user_id).to.equal(userId);
         expect(result.refresh_token).to.exist;
       });
@@ -179,10 +175,9 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         const result = response.result;
         expect(result.token_type).to.equal('bearer');
         expect(result.access_token).to.exist;
-        const decodedAccessToken = await decodeIfValid(result.access_token);
-        expect(decodedAccessToken).to.include({
-          aud: 'https://certif.pix.fr',
-        });
+
+        const decodedAccessToken = UserAccessToken.decode(result.access_token);
+        expect(decodedAccessToken).to.include({ audience: 'https://certif.pix.fr' });
         expect(result.user_id).to.equal(userId);
       });
     });
@@ -409,10 +404,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
 
         expect(result.token_type).to.equal('bearer');
         expect(result.access_token).to.exist;
-        const decodedToken = await decodeIfValid(result.access_token);
-        expect(decodedToken).to.include({
-          aud: 'https://app.pix.fr',
-        });
+        const decodedAccessToken = UserAccessToken.decode(result.access_token);
+        expect(decodedAccessToken).to.include({ audience: 'https://app.pix.fr' });
       });
 
       it('creates an anonymous user', async function () {

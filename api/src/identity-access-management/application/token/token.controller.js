@@ -1,4 +1,4 @@
-import { tokenService } from '../../../shared/domain/services/token-service.js';
+import { UserAccessToken } from '../../domain/models/UserAccessToken.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
 
@@ -23,7 +23,7 @@ const authenticateAnonymousUser = async function (request, h) {
  * }} dependencies
  * @return {Promise<*>}
  */
-const createToken = async function (request, h, dependencies = { tokenService }) {
+const createToken = async function (request, h) {
   let accessToken, refreshToken;
   let expirationDelaySeconds;
 
@@ -58,7 +58,7 @@ const createToken = async function (request, h, dependencies = { tokenService })
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;
   }
 
-  const userId = dependencies.tokenService.extractUserId(accessToken);
+  const { userId } = UserAccessToken.decode(accessToken);
 
   return h
     .response({
