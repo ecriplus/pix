@@ -22,8 +22,8 @@ const findPaginatedUserRecommendedTrainings = async function (
   return dependencies.trainingSerializer.serialize(userRecommendedTrainings, meta);
 };
 
-const userController = {
+const userTrainingsController = {
   findPaginatedUserRecommendedTrainings,
 };
 
-export { userController };
+export { userTrainingsController };

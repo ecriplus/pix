@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { checkLLMChatIsEnabled } from '../../../llm/application/pre-handlers/index.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
-import { passageController } from './controller.js';
+import { passageController } from './passage-controller.js';
 
 const ARBITRARY_MIN_TIMESTAMP = new Date('2025-04-30').getTime();
 

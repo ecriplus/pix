@@ -1,8 +1,8 @@
-import { userController } from '../../../../../src/devcomp/application/user-trainings/user-controller.js';
+import { userTrainingsController } from '../../../../../src/devcomp/application/user-trainings/user-trainings-controller.js';
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Controller | user-controller', function () {
+describe('Unit | Controller | user-trainings-controller', function () {
   describe('#findPaginatedUserRecommendedTrainings', function () {
     it('should call the appropriate use-case', async function () {
       // given
@@ -27,7 +27,7 @@ describe('Unit | Controller | user-controller', function () {
       trainingSerializer.serialize.returns(expectedResult);
 
       // when
-      const response = await userController.findPaginatedUserRecommendedTrainings(request, hFake, {
+      const response = await userTrainingsController.findPaginatedUserRecommendedTrainings(request, hFake, {
         requestResponseUtils,
         devcompUsecases,
         trainingSerializer,

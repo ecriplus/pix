@@ -1,11 +1,11 @@
 import * as campaignParticipationRoute from './application/campaign-participations/campaign-participation-route.js';
-import * as modulesRoutes from './application/modules/index.js';
-import * as passageEvents from './application/passage-events/index.js';
-import * as passages from './application/passages/index.js';
-import * as trainings from './application/trainings/index.js';
-import * as evaluationTutorials from './application/tutorial-evaluations/index.js';
-import * as userTrainings from './application/user-trainings/index.js';
-import * as userTutorials from './application/user-tutorials/index.js';
+import * as modulesRoutes from './application/modules/module-route.js';
+import * as passageEvents from './application/passage-events/passage-event-route.js';
+import * as passages from './application/passages/passage-route.js';
+import * as trainings from './application/trainings/training-route.js';
+import * as tutorialEvaluations from './application/tutorial-evaluations/tutorial-evaluations-route.js';
+import * as userTrainings from './application/user-trainings/user-trainings-route.js';
+import * as userTutorials from './application/user-tutorials/user-tutorials-route.js';
 
 const devcompRoutes = [
   campaignParticipationRoute,
@@ -14,7 +14,7 @@ const devcompRoutes = [
   passageEvents,
   trainings,
   userTutorials,
-  evaluationTutorials,
+  tutorialEvaluations,
   userTrainings,
 ];
 

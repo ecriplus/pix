@@ -1,5 +1,5 @@
-import * as moduleUnderTest from '../../../../../src/devcomp/application/user-trainings/index.js';
-import { userController } from '../../../../../src/devcomp/application/user-trainings/user-controller.js';
+import { userTrainingsController } from '../../../../../src/devcomp/application/user-trainings/user-trainings-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/user-trainings/user-trainings-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
@@ -9,7 +9,7 @@ describe('Unit | Router | user-router', function () {
 
     it('returns 200', async function () {
       // given
-      sinon.stub(userController, 'findPaginatedUserRecommendedTrainings').returns('ok');
+      sinon.stub(userTrainingsController, 'findPaginatedUserRecommendedTrainings').returns('ok');
       const securityPreHandlersStub = sinon
         .stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser')
         .callsFake((request, h) => h.response(true));

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { handlerWithDependencies } from '../../infrastructure/utils/handlerWithDependencies.js';
-import { passageEventsController } from './passage-events-controller.js';
+import { passageEventsController } from './passage-event-controller.js';
 
 const register = async function (server) {
   server.route([

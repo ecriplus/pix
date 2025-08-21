@@ -1,4 +1,4 @@
-import * as moduleUnderTest from '../../../../../src/devcomp/application/passage-events/index.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/passage-events/passage-event-route.js';
 import { expect } from '../../../../test-helper.js';
 import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 

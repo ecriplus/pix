@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
-import { userController } from './user-controller.js';
+import { userTrainingsController } from './user-trainings-controller.js';
 
 const register = async function (server) {
   server.route([
@@ -21,7 +21,7 @@ const register = async function (server) {
             assign: 'requestedUserIsAuthenticatedUser',
           },
         ],
-        handler: userController.findPaginatedUserRecommendedTrainings,
+        handler: userTrainingsController.findPaginatedUserRecommendedTrainings,
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
             "- Elle permet la récupération des contenus formatifs de l'utilisateur courant.",

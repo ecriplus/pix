@@ -1,5 +1,5 @@
-import { passageController } from '../../../../../src/devcomp/application/passages/controller.js';
-import * as moduleUnderTest from '../../../../../src/devcomp/application/passages/index.js';
+import { passageController } from '../../../../../src/devcomp/application/passages/passage-controller.js';
+import * as moduleUnderTest from '../../../../../src/devcomp/application/passages/passage-route.js';
 import {
   ModuleDoesNotExistError,
   PassageDoesNotExistError,
