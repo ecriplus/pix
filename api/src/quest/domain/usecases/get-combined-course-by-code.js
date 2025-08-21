@@ -29,15 +29,6 @@ export async function getCombinedCourseByCode({
 
   const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, participation);
 
-  const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
-    userId,
-    organizationId: combinedCourse.organizationId,
-  });
-
-  const dataForQuest = new DataForQuest({ eligibility });
-
-  const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
-
   const campaignIds = combinedCourseDetails.campaignIds;
   const campaigns = [];
   const targetProfileIds = [];
@@ -54,14 +45,24 @@ export async function getCombinedCourseByCode({
     });
   }
 
+  const moduleIds = combinedCourseDetails.moduleIds;
+
+  const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
+    userId,
+    organizationId: combinedCourse.organizationId,
+    moduleIds,
+  });
+
+  const dataForQuest = new DataForQuest({ eligibility });
+
+  const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
   let recommendedModuleIdsForUser = [];
   if (campaignParticipationIds.length > 0) {
     recommendedModuleIdsForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
       campaignParticipationIds,
     });
   }
-
-  const moduleIds = combinedCourseDetails.moduleIds;
 
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });
 
@@ -72,6 +73,7 @@ export async function getCombinedCourseByCode({
     recommendableModuleIds,
     recommendedModuleIdsForUser,
     encryptedCombinedCourseUrl,
+    dataForQuest,
   );
 
   return combinedCourseDetails;
