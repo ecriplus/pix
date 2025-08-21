@@ -62,6 +62,7 @@ async function updateUsernameAndAddPassword({
  * @param samlId
  * @param organizationLearnerId
  * @param user
+ * @param locale
  * @param authenticationMethodRepository
  * @param organizationLearnerRepository
  * @param userToCreateRepository
@@ -72,11 +73,12 @@ async function createAndReconcileUserToOrganizationLearner({
   samlId,
   organizationLearnerId,
   user,
+  locale,
   authenticationMethodRepository,
   organizationLearnerRepository,
   userToCreateRepository,
 }) {
-  const userToAdd = UserToCreate.create(user);
+  const userToAdd = UserToCreate.create({ ...user, locale });
 
   return DomainTransaction.execute(async () => {
     let authenticationMethod;
