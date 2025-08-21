@@ -6,7 +6,7 @@
  * @typedef {import ('./index.js').ConsolidatedFrameworkRepository} ConsolidatedFrameworkRepository
  */
 
-import { FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
+import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
 import { getVersionNumber } from '../services/get-version-number.js';
 
 /**
@@ -31,7 +31,7 @@ export const createConsolidatedFramework = async ({
   const skillIds = tubes.flatMap((tube) => tube.skillIds);
   const skills = await skillRepository.findActiveByRecordIds(skillIds);
 
-  const challenges = await challengeRepository.findOperativeBySkills(skills, FRENCH_SPOKEN);
+  const challenges = await challengeRepository.findOperativeBySkills(skills, FRENCH_FRANCE);
 
   return consolidatedFrameworkRepository.create({
     complementaryCertificationKey,

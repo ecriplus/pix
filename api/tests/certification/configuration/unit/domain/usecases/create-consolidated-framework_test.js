@@ -1,6 +1,6 @@
 import { createConsolidatedFramework } from '../../../../../../src/certification/configuration/domain/usecases/create-consolidated-framework.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
+import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | create-consolidated-framework', function () {
@@ -33,14 +33,17 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
     const tubeIds = [tube1.id, tube2.id];
 
     const challenges = [
-      domainBuilder.buildChallenge({ id: 'challenge1' }),
-      domainBuilder.buildChallenge({ id: 'challenge2' }),
-      domainBuilder.buildChallenge({ id: 'challenge3' }),
+      domainBuilder.buildChallenge({ id: 'challenge1', locales: ['fr-fr'] }),
+      domainBuilder.buildChallenge({ id: 'challenge2', locales: ['fr-fr', 'fr-be'] }),
+      domainBuilder.buildChallenge({ id: 'challenge3', locales: ['fr', 'fr-fr'] }),
+      domainBuilder.buildChallenge({ id: 'challenge4', locales: ['fr'] }),
+      domainBuilder.buildChallenge({ id: 'challenge5', locales: ['fr-be'] }),
     ];
+    const frFrChallenges = challenges.filter((challenge) => challenge.locales.includes(FRENCH_FRANCE));
 
     tubeRepository.findActiveByRecordIds.resolves([tube1, tube2]);
     skillRepository.findActiveByRecordIds.resolves([...tube1.skills, ...tube2.skills]);
-    challengeRepository.findOperativeBySkills.resolves(challenges);
+    challengeRepository.findOperativeBySkills.resolves(frFrChallenges);
     consolidatedFrameworkRepository.create.resolves();
     sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
     const version = '20190101050607';
@@ -63,11 +66,11 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
     ]);
     expect(challengeRepository.findOperativeBySkills).to.have.been.calledOnceWithExactly(
       [...tube1.skills, ...tube2.skills],
-      FRENCH_SPOKEN,
+      FRENCH_FRANCE,
     );
     expect(consolidatedFrameworkRepository.create).to.have.been.calledOnceWithExactly({
       complementaryCertificationKey,
-      challenges,
+      challenges: frFrChallenges,
       version,
     });
   });
