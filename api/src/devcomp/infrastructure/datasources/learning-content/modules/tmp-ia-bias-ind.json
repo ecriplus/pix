@@ -749,7 +749,7 @@
                     "content": "<p>Elle a un biais en faveur de</p>"
                   },
                   {
-                    "input": "",
+                    "input": "biais-du-llm",
                     "type": "input",
                     "inputType": "text",
                     "size": 20,
