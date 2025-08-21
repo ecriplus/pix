@@ -10,12 +10,6 @@ import {
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
-function createAccessTokenFromUser({ userId, source, audience }) {
-  const expirationDelaySeconds = config.authentication.accessTokenLifespanMs / 1000;
-  const accessToken = _createAccessToken({ userId, source, expirationDelaySeconds, audience });
-  return { accessToken, expirationDelaySeconds };
-}
-
 function createAccessTokenFromAnonymousUser({ userId, audience }) {
   const expirationDelaySeconds = config.anonymous.accessTokenLifespanMs / 1000;
   return _createAccessToken({ userId, source: 'pix', expirationDelaySeconds, audience });
@@ -210,7 +204,6 @@ async function extractExternalUserFromIdToken(token) {
   };
 }
 const tokenService = {
-  createAccessTokenFromUser,
   createAccessTokenForSaml,
   createAccessTokenFromApplication,
   createAccessTokenFromAnonymousUser,
@@ -238,7 +231,6 @@ export {
   createAccessTokenForSaml,
   createAccessTokenFromAnonymousUser,
   createAccessTokenFromApplication,
-  createAccessTokenFromUser,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
   createIdTokenForUserReconciliation,

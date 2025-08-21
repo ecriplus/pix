@@ -1,6 +1,6 @@
+import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import * as tokenService from '../../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import {
   createServer,
@@ -233,7 +233,7 @@ describe('Acceptance | Application | organization-controller-sup-organization-le
 
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
-      accessToken = tokenService.createAccessTokenFromUser({
+      accessToken = UserAccessToken.generateUserToken({
         userId,
         source: 'pix',
         audience: 'https://orga.pix.org',

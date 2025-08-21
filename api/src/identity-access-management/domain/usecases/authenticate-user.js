@@ -10,6 +10,7 @@ import {
   UserShouldChangePasswordError,
 } from '../errors.js';
 import { RefreshToken } from '../models/RefreshToken.js';
+import { UserAccessToken } from '../models/UserAccessToken.js';
 
 /**
  * typedef { function } authenticateUser
@@ -71,7 +72,7 @@ const authenticateUser = async function ({
     const refreshToken = RefreshToken.generate({ userId: user.id, source, audience });
     await refreshTokenRepository.save({ refreshToken });
 
-    const { accessToken, expirationDelaySeconds } = await tokenService.createAccessTokenFromUser({
+    const { accessToken, expirationDelaySeconds } = UserAccessToken.generateUserToken({
       userId: user.id,
       source,
       audience,
