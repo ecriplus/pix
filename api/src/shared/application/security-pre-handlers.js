@@ -6,6 +6,7 @@ import * as checkUserIsCandidateUseCase from '../../certification/enrolment/appl
 import * as certificationIssueReportRepository from '../../certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import { Organization } from '../../organizational-entities/domain/models/Organization.js';
 import * as checkCampaignParticipationBelongsToUserUsecase from '../../prescription/campaign/application/usecases/checkCampaignParticipationBelongsToUser.js';
+import * as checkAuthorizationToAccessCombinedCourseUsecase from '../../quest/application/usecases/check-authorization-to-access-combined-course.js';
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
 import { ForbiddenAccess, NotFoundError } from '../domain/errors.js';
 import * as organizationRepository from '../infrastructure/repositories/organization-repository.js';
@@ -38,6 +39,7 @@ import * as checkUserIsMemberOfCertificationCenterUsecase from './usecases/check
 import * as checkUserIsMemberOfCertificationCenterSessionUsecase from './usecases/checkUserIsMemberOfCertificationCenterSession.js';
 import * as checkUserOwnsCertificationCourseUseCase from './usecases/checkUserOwnsCertificationCourse.js';
 import * as checkUserIsMemberOfAnOrganizationUseCase from './validator/checkUserIsMemberOfAnOrganization.js';
+
 const { Error: JSONAPIError } = jsonapiSerializer;
 const { has } = lodash;
 
@@ -666,6 +668,23 @@ async function checkAuthorizationToAccessCampaign(
   return _replyForbiddenError(h);
 }
 
+async function checkAuthorizationToAccessCombinedCourse(
+  request,
+  h,
+  dependencies = { checkAuthorizationToAccessCombinedCourseUsecase },
+) {
+  const userId = request.auth.credentials.userId;
+  const code = request.query?.filter?.code || request.params.code;
+
+  const belongsToOrganization = await dependencies.checkAuthorizationToAccessCombinedCourseUsecase.execute({
+    userId,
+    code,
+  });
+
+  if (belongsToOrganization) return h.response(true);
+  return _replyForbiddenError(h);
+}
+
 function hasAtLeastOneAccessOf(securityChecks) {
   return async (request, h) => {
     const responses = await PromiseUtils.map(securityChecks, (securityCheck) => securityCheck(request, h));
@@ -870,6 +889,7 @@ const securityPreHandlers = {
   checkAdminMemberHasRoleSupport,
   checkAuthorizationToManageCampaign,
   checkAuthorizationToAccessCampaign,
+  checkAuthorizationToAccessCombinedCourse,
   checkCertificationCenterIsNotScoManagingStudents,
   checkIfUserIsBlocked,
   checkOrganizationHasFeature,

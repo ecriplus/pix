@@ -9,7 +9,7 @@ export async function startCombinedCourse({
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
   const user = await userRepository.findById({ userId });
 
-  const organizationLearnerId = await combinedCourseParticipantRepository.getOrCreateNewOrganizationLearner({
+  const { id: organizationLearnerId } = await combinedCourseParticipantRepository.getOrCreateNewOrganizationLearner({
     userId,
     organizationId: combinedCourse.organizationId,
     organizationLearner: { firstName: user.firstName, lastName: user.lastName },

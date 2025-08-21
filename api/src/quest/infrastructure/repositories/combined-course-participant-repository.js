@@ -1,16 +1,12 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { OrganizationLearnersCouldNotBeSavedError } from '../../../shared/domain/errors.js';
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
+import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
 
 export async function getOrCreateNewOrganizationLearner({ organizationLearner, userId, organizationId }) {
-  const knexConnection = DomainTransaction.getConnection();
+  const existingOrganizationLearner = await findOrganizationLearner({ userId, organizationId });
 
-  const existingOrganizationLearner = await knexConnection('view-active-organization-learners')
-    .where({
-      userId,
-      organizationId,
-    })
-    .first();
+  const knexConnection = DomainTransaction.getConnection();
 
   if (existingOrganizationLearner) {
     if (existingOrganizationLearner.isDisabled) {
@@ -20,7 +16,7 @@ export async function getOrCreateNewOrganizationLearner({ organizationLearner, u
         .returning('id');
     }
 
-    return existingOrganizationLearner.id;
+    return _toDomain({ id: existingOrganizationLearner.id });
   } else {
     try {
       const [{ id }] = await knexConnection('organization-learners').insert(
@@ -32,7 +28,7 @@ export async function getOrCreateNewOrganizationLearner({ organizationLearner, u
         },
         ['id'],
       );
-      return id;
+      return _toDomain({ id });
     } catch (error) {
       if (knexUtils.isUniqConstraintViolated(error) && error.constraint === 'one_active_organization_learner') {
         throw new OrganizationLearnersCouldNotBeSavedError(
@@ -44,3 +40,17 @@ export async function getOrCreateNewOrganizationLearner({ organizationLearner, u
     }
   }
 }
+
+export async function findOrganizationLearner({ userId, organizationId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const result = await knexConnection('view-active-organization-learners')
+    .where({
+      userId,
+      organizationId,
+    })
+    .first();
+
+  return result ? _toDomain(result) : null;
+}
+
+const _toDomain = (organizationLearner) => new OrganizationLearner(organizationLearner);

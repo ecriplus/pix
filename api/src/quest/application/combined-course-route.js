@@ -15,6 +15,11 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/combined-courses',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+          },
+        ],
         handler: combinedCourseController.getByCode,
         validate: {
           query: Joi.object({
@@ -33,6 +38,11 @@ const register = async function (server) {
       method: 'PUT',
       path: '/api/combined-courses/{code}/start',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+          },
+        ],
         validate: {
           params: Joi.object({
             code: Joi.string().regex(/^[a-zA-Z0-9]*$/),
@@ -47,6 +57,11 @@ const register = async function (server) {
       method: 'PATCH',
       path: '/api/combined-courses/{code}/reassess-status',
       config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+          },
+        ],
         validate: {
           params: Joi.object({
             code: Joi.string().regex(/^[a-zA-Z0-9]*$/),
