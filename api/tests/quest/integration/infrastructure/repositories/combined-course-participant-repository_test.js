@@ -1,3 +1,4 @@
+import { OrganizationLearner } from '../../../../../src/quest/domain/models/OrganizationLearner.js';
 import * as combinedCourseParticipantRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-participant-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
@@ -17,7 +18,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined Course 
         userId: organizationLearner.userId,
         organizationId,
       });
-      expect(result).to.be.equal(organizationLearner.id);
+      expect(result.id).to.be.equal(organizationLearner.id);
     });
     it('should create a new organization learner if organization learner does not exist', async function () {
       const organizationLearner = { firstName: 'Sophie', lastName: 'Fonfek' };
@@ -55,7 +56,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined Course 
         userId: organizationLearner.userId,
         organizationId,
       });
-      expect(result).to.deep.equal(organizationLearner);
+      expect(result).to.deep.equal(new OrganizationLearner(organizationLearner));
     });
     it('should return nothing otherwise', async function () {
       const userId = databaseBuilder.factory.buildUser().id;
@@ -68,7 +69,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined Course 
       });
 
       //then
-      expect(result).to.be.undefined;
+      expect(result).to.be.null;
     });
   });
 });
