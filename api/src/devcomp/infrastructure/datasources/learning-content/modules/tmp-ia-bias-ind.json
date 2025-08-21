@@ -612,6 +612,18 @@
                 "type": "text",
                 "content": "<ul> <li>Dans les <strong>données d’entraînement </strong>de l’IA, il y a des opinions, des expériences, des stéréotypes, des situations discriminantes, des préférences culturelles, qui peuvent <strong>être sur-représentées</strong>.<br><br></li>\n    <li>L’IA générative génère ses réponses en s’appuyant sur les mots ou les images <strong>les plus fréquents</strong> dans ses données d’entraînement, sans avoir de regard critique.<br><br> </li>\n    <li>Cela peut l’amener à <strong>produire des réponses contenant des biais</strong>. En conséquence, elle peut renforcer des idées toutes faites, des stéréotypes ou des situations discriminantes.<br><br> </li>\n    <li>Pour faire preuve de vigilance, il faut avoir conscience de nos <strong>biais de confirmation</strong>, qui nous poussent à croire les choses que nous pensons déjà. </li>\n</ul>"
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ea91bf36-4238-4866-b97a-097f7c158608",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-biais-independant/recap-chat-lait.jpg",
+                "alt": "",
+                "alternativeText": "<p>Schéma en plusieurs étapes :</p><ul><li>Étape 1 : Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2 : L’IA répond que le chat boit du lait. Le propriétaire du chat a un doute.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit le propriétaire a suivi le conseil de l’IA. Maintenant le chat est malade.<br></li></ul></li></ul><br>",
+                "legend": "",
+                "licence": ""
+              }
             }
           ]
         }
