@@ -99,7 +99,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
 
       const request = {
         method: 'GET',
-        url: `/api/organizations/${organizationId}/attestations/${attestation.key}/statuses?filter[statuses][]=OBTAINED`,
+        url: `/api/organizations/${organizationId}/attestations/${attestation.key}/statuses?page[size]=1&filter[statuses][]=OBTAINED`,
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
@@ -127,7 +127,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         meta: {
           page: 1,
           pageCount: 1,
-          pageSize: 10,
+          pageSize: 1,
           rowCount: 1,
         },
       };
