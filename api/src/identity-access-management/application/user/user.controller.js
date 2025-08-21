@@ -1,7 +1,7 @@
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
-import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale, getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { authenticationMethodsSerializer } from '../../infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
 import * as certificationPointOfContactSerializer from '../../infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
@@ -132,12 +132,11 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  * @return {Promise<*>}
  */
 const createUser = async function (request, h, dependencies = { userSerializer, localeService }) {
-  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
-  const localeFromHeader = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
   const i18n = await getI18nFromRequest(request);
 
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
-  const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: localeFromCookie };
+  const user = dependencies.userSerializer.deserialize(request.payload);
 
   const password = request.payload.data.attributes.password;
 
@@ -145,7 +144,7 @@ const createUser = async function (request, h, dependencies = { userSerializer, 
     user,
     password,
     redirectionUrl,
-    locale: localeFromHeader,
+    locale,
     i18n,
   });
 

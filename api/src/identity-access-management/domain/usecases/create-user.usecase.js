@@ -52,6 +52,7 @@ const createUser = withTransaction(async function ({
 
   const savedUser = await userService.createUserWithPassword({
     user,
+    locale,
     hashedPassword,
     userToCreateRepository,
     authenticationMethodRepository,

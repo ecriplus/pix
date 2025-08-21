@@ -5,6 +5,7 @@ import { DomainTransaction } from '../DomainTransaction.js';
 
 /**
  * @param user
+ * @param locale
  * @param hashedPassword
  * @param userToCreateRepository
  * @param authenticationMethodRepository
@@ -12,11 +13,12 @@ import { DomainTransaction } from '../DomainTransaction.js';
  */
 async function createUserWithPassword({
   user,
+  locale,
   hashedPassword,
   userToCreateRepository,
   authenticationMethodRepository,
 }) {
-  const userToAdd = UserToCreate.create(user);
+  const userToAdd = UserToCreate.create({ ...user, locale });
   const savedUser = await userToCreateRepository.create({ user: userToAdd });
 
   const authenticationMethod = _buildPasswordAuthenticationMethod({

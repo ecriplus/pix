@@ -250,20 +250,9 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       describe('when there is a locale cookie', function () {
         it('returns a serialized user with "locale" attribute and a 201 status code', async function () {
           // given
-          const localeFromHeader = 'fr-fr';
           const locale = 'fr-FR';
-          const expectedSerializedUser = { message: 'serialized user', locale };
           const savedUser = new User({ email, locale });
 
-          const useCaseParameters = {
-            user: { ...deserializedUser, locale },
-            password,
-            locale: localeFromHeader,
-            redirectionUrl: null,
-            i18n: getI18n(localeFromHeader),
-          };
-
-          dependencies.userSerializer.serialize.returns(expectedSerializedUser);
           usecases.createUser.resolves(savedUser);
 
           // when
@@ -289,7 +278,13 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
           );
 
           // then
-          expect(usecases.createUser).to.have.been.calledWithExactly(useCaseParameters);
+          expect(usecases.createUser).to.have.been.calledWithExactly({
+            user: deserializedUser,
+            password,
+            locale,
+            redirectionUrl: null,
+            i18n: getI18n(locale),
+          });
           expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(savedUser);
           expect(response.statusCode).to.equal(201);
         });
