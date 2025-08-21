@@ -1,0 +1,35 @@
+@use 'pix-design-tokens/typography';
+
+.action-cards-list {
+  display: flex;
+  gap: var(--pix-spacing-4x);
+  width: 100%;
+
+  .action-cards-list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: var(--pix-spacing-4x);
+    text-align: center;
+
+    h2{
+      @extend %pix-title-xxs;
+    }
+
+    p{
+      @extend %pix-body-s;
+
+      margin-top: var(--pix-spacing-4x);
+
+      a{
+        text-decoration: underline;
+      }
+    }
+
+    .pix-button{
+      width: 50%;
+      margin: var(--pix-spacing-4x) auto 0;
+    }
+  }
+}
