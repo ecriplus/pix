@@ -8,10 +8,10 @@ import {
 } from '../../../../../../src/certification/session-management/domain/models/JurySession.js';
 import * as jurySessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-session-repository.js';
 import {
+  CertificationIssueReportCategory,
   ImpactfulCategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
