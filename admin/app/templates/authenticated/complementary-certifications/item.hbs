@@ -6,9 +6,11 @@
   class="complementary-certification__tabs"
   @ariaLabel={{t "components.complementary-certifications.item.navigation.aria-label"}}
 >
-  <LinkTo @route="authenticated.complementary-certifications.item.framework">
-    {{t "components.complementary-certifications.item.framework.tab"}}
-  </LinkTo>
+  {{#if @model.hasComplementaryReferential}}
+    <LinkTo @route="authenticated.complementary-certifications.item.framework">
+      {{t "components.complementary-certifications.item.framework.tab"}}
+    </LinkTo>
+  {{/if}}
   <LinkTo @route="authenticated.complementary-certifications.item.target-profile">
     {{t "components.complementary-certifications.item.target-profile"}}
   </LinkTo>
