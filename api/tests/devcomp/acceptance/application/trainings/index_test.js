@@ -617,4 +617,71 @@ describe('Acceptance | Controller | training-controller', function () {
       expect(response.result.data).to.deep.equal(expectedData);
     });
   });
+
+  describe('GET /api/admin/trainings/{trainingId}/target-profiles/{targetProfileId}/organizations', function () {
+    it('should return 200', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser.withRole();
+      const { id: trainingId } = databaseBuilder.factory.buildTraining();
+      const excludedOrganization = databaseBuilder.factory.buildOrganization({
+        type: 'SCO',
+        name: 'Orga 1',
+        externalId: 'SCO_Orga 1',
+      });
+      const includedOrganization = databaseBuilder.factory.buildOrganization({
+        type: 'SCO',
+        name: 'Orga 2',
+        externalId: 'SCO_Orga 2',
+      });
+      const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile();
+      const { id: targetProfileTrainingId } = databaseBuilder.factory.buildTargetProfileTraining({
+        trainingId,
+        targetProfileId,
+      });
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId: excludedOrganization.id });
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId: includedOrganization.id });
+      databaseBuilder.factory.buildTargetProfileTrainingOrganization({
+        targetProfileTrainingId,
+        organizationId: excludedOrganization.id,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/trainings/${trainingId}/target-profiles/${targetProfileId}/organizations?pageNumber=1&pageSize=10`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const expectedData = [
+        {
+          type: 'training-target-profile-organizations',
+          id: `${targetProfileTrainingId}-${excludedOrganization.id}`,
+          attributes: {
+            name: excludedOrganization.name,
+            type: excludedOrganization.type,
+            'external-id': excludedOrganization.externalId,
+            'is-excluded': true,
+            'organization-id': excludedOrganization.id,
+          },
+        },
+        {
+          type: 'training-target-profile-organizations',
+          id: `${targetProfileTrainingId}-${includedOrganization.id}`,
+          attributes: {
+            name: includedOrganization.name,
+            type: includedOrganization.type,
+            'external-id': includedOrganization.externalId,
+            'is-excluded': false,
+            'organization-id': includedOrganization.id,
+          },
+        },
+      ];
+      expect(response.result.data).to.deep.equal(expectedData);
+    });
+  });
 });
