@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
+ * @typedef {import('../../../../shared/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
  * @typedef {import('../../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
  * @typedef {import('i18n')} i18n
  */

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { ComplementaryCertification } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertification.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { ComplementaryCertification } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertification.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import * as certificationCandidateRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-candidate-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';

@@ -1,7 +1,7 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCenter } from '../../../../shared/domain/models/CertificationCenter.js';
-import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
+import { ComplementaryCertification } from '../../../shared/domain/models/ComplementaryCertification.js';
 
 const getComplementaryCertifications = async (knexConnection, certificationCenter) =>
   await knexConnection('complementary-certifications')

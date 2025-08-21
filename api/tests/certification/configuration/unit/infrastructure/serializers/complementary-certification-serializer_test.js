@@ -6,12 +6,12 @@ describe('Certification | Configuration | Unit | Serializer | complementary-cert
     it('should convert a ComplementaryCertification model object into JSON API data', function () {
       // given
       const complementaryCertifications = [
-        domainBuilder.buildComplementaryCertification({
+        domainBuilder.certification.shared.buildComplementaryCertification({
           id: 11,
           label: 'Pix+Edu',
           key: 'EDU',
         }),
-        domainBuilder.buildComplementaryCertification({
+        domainBuilder.certification.shared.buildComplementaryCertification({
           id: 22,
           label: 'Cléa Numérique',
           key: 'CLEA',

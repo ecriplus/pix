@@ -73,9 +73,6 @@ import { buildCompetenceEvaluation } from './build-competence-evaluation.js';
 import { buildCompetenceMark } from './build-competence-mark.js';
 import { buildCompetenceResult } from './build-competence-result.js';
 import { buildCompetenceTree } from './build-competence-tree.js';
-import { buildComplementaryCertification } from './certification/complementary-certification/build-complementary-certification.js';
-import { buildComplementaryCertification as buildEnrolmentComplementaryCertification } from './certification/enrolment/build-complementary-certification.js';
-import { buildComplementaryCertificationBadge } from './certification/complementary-certification/build-complementary-certification-badge.js';
 import { buildComplementaryCertificationBadgeForAdmin } from './build-complementary-certification-badge-for-admin.js';
 import { buildComplementaryCertificationCourseResult } from './build-complementary-certification-course-result.js';
 import { buildComplementaryCertificationCourseResultForJuryCertification } from './build-complementary-certification-course-result-for-certification.js';
@@ -168,6 +165,8 @@ import { buildV3CertificationChallengeLiveAlertForAdministration } from './build
 import { buildV3CertificationCourseDetailsForAdministration } from './build-v3-certification-course-details-for-administration.js';
 import { buildValidation } from './build-validation.js';
 import { buildValidator } from './build-validator.js';
+import { buildComplementaryCertification } from './certification/complementary-certification/build-complementary-certification.js';
+import { buildComplementaryCertificationBadge } from './certification/complementary-certification/build-complementary-certification-badge.js';
 import { buildActiveCalibratedChallenge } from './certification/configuration/build-active-calibrated-challenge.js';
 import { buildCenter as buildConfigurationCenter } from './certification/configuration/build-center.js';
 import { buildCertificationFrameworksChallenge } from './certification/configuration/build-certification-frameworks-challenge.js';
@@ -208,6 +207,7 @@ import { buildCertificationSessionComplementaryCertification } from './certifica
 import { buildJurySessionCounters } from './certification/session-management/build-jury-session-counters.js';
 import { buildSessionManagement } from './certification/session-management/build-session.js';
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
+import { buildComplementaryCertification as buildSharedComplementaryCertification } from './certification/shared/build-complementary-certification.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
 import {
@@ -240,7 +240,7 @@ const certification = {
   },
   complementaryCertification: {
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadge,
-    buildComplementaryCertification:  buildComplementaryCertification,
+    buildComplementaryCertification: buildComplementaryCertification,
   },
   scoring: {
     buildAssessmentResult: buildCertificationScoringAssessmentResult,
@@ -264,7 +264,6 @@ const certification = {
     buildCertificationEligibility,
     buildPixCertification,
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadgeForEnrolment,
-    buildComplementaryCertification: buildEnrolmentComplementaryCertification,
   },
   evaluation: {
     buildCandidate: buildEvaluationCandidate,
@@ -284,6 +283,7 @@ const certification = {
   shared: {
     buildCertificationCompanionLiveAlert,
     buildJuryComment: buildJuryComment,
+    buildComplementaryCertification: buildSharedComplementaryCertification,
   },
   lib: {
     buildComplementaryCertificationVersioning,

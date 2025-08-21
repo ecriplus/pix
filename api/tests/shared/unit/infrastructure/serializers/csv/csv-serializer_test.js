@@ -206,17 +206,17 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             },
           ];
           const habilitationsWithoutCleA = [
-            domainBuilder.buildComplementaryCertification({
+            domainBuilder.certification.shared.buildComplementaryCertification({
               id: 53,
               label: 'Pix+ Droit',
               key: 'DROIT',
             }),
-            domainBuilder.buildComplementaryCertification({
+            domainBuilder.certification.shared.buildComplementaryCertification({
               id: 54,
               label: 'Pix+ Édu 1er degré',
               key: 'EDU_1ER_DEGRE',
             }),
-            domainBuilder.buildComplementaryCertification({
+            domainBuilder.certification.shared.buildComplementaryCertification({
               id: 55,
               label: 'Pix+ Édu 2nd degré',
               key: 'EDU_2ND_DEGRE',
@@ -815,7 +815,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         ];
 
         const habilitations = [
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.shared.buildComplementaryCertification({
             id: 52,
             label: 'CléA Numérique',
             key: 'CLEA',

@@ -52,8 +52,10 @@ describe('Integration | Infrastructure | Repository | Certification | Shared | c
           // when
           const results = await complementaryCertificationBadgeRepository.getAllWithSameTargetProfile(ccBadge2.id);
 
-          const ccbadge1 = domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge(ccBadge1);
-          const ccbadge2 = domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge(ccBadge2);
+          const ccbadge1 =
+            domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge(ccBadge1);
+          const ccbadge2 =
+            domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge(ccBadge2);
           expect(results).to.deepEqualInstance([ccbadge1, ccbadge2]);
         });
       },

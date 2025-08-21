@@ -79,12 +79,12 @@ describe('Integration | Repository | Certification Center', function () {
           complementaryCertificationId: 6789,
         });
 
-        const expectedComplementaryCertification1 = domainBuilder.buildComplementaryCertification({
+        const expectedComplementaryCertification1 = domainBuilder.certification.shared.buildComplementaryCertification({
           id: 12345,
           label: 'Complementary certification test 1',
           key: 'COMP_1',
         });
-        const expectedComplementaryCertification2 = domainBuilder.buildComplementaryCertification({
+        const expectedComplementaryCertification2 = domainBuilder.certification.shared.buildComplementaryCertification({
           id: 6789,
           label: 'Complementary certification test 2',
           key: 'COMP_2',
@@ -176,7 +176,7 @@ describe('Integration | Repository | Certification Center', function () {
           complementaryCertificationId: 1234,
         });
 
-        const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
+        const expectedComplementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification({
           id: 1234,
           label: 'Complementary certification name',
           key: 'COMP',
@@ -276,7 +276,7 @@ describe('Integration | Repository | Certification Center', function () {
           certificationCenterId: 1,
           complementaryCertificationId: 123,
         });
-        const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
+        const expectedComplementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification({
           id: 123,
           label: 'Complementary certification name',
           key: 'COMP',

@@ -654,9 +654,11 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               context('when certification center is habilitated', function () {
                 it('should save complementary certification info', async function () {
                   // given
-                  const complementaryCertification = domainBuilder.buildComplementaryCertification({
-                    key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-                  });
+                  const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification(
+                    {
+                      key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+                    },
+                  );
 
                   const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                     id: 1,
@@ -751,9 +753,11 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               context('when certification center is not habilitated anymore', function () {
                 it('should throw an CenterHabilitationError error', async function () {
                   // given
-                  const complementaryCertification = domainBuilder.buildComplementaryCertification({
-                    key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-                  });
+                  const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification(
+                    {
+                      key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+                    },
+                  );
 
                   const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                     id: 1,
@@ -816,7 +820,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 context('when user has acquired corresponding badge', function () {
                   it('should save complementary certification info', async function () {
                     // given
-                    const cleaCertification = domainBuilder.buildComplementaryCertification({
+                    const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                       key: ComplementaryCertificationKeys.CLEA,
                     });
 
@@ -923,7 +927,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   context('when user has no certifiable badges', function () {
                     it('should save a certification course but not a complementary course', async function () {
                       // given
-                      const cleaCertification = domainBuilder.buildComplementaryCertification({
+                      const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                         key: ComplementaryCertificationKeys.CLEA,
                       });
 
@@ -1014,9 +1018,11 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               context('when certification center is not habilitated anymore', function () {
                 it('should throw an CenterHabilitationError error', async function () {
                   // given
-                  const complementaryCertification = domainBuilder.buildComplementaryCertification({
-                    key: ComplementaryCertificationKeys.CLEA,
-                  });
+                  const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification(
+                    {
+                      key: ComplementaryCertificationKeys.CLEA,
+                    },
+                  );
 
                   const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
                     id: 1,

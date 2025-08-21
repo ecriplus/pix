@@ -1,5 +1,5 @@
 import { getById } from '../../../../../../src/certification/complementary-certification/application/api/complementary-certification-api.js';
-import { ComplementaryCertification } from '../../../../../../src/certification/complementary-certification/application/api/models/ComplementaryCertification.js';
+import { ComplementaryCertification } from '../../../../../../src/certification/complementary-certification/domain/models/ComplementaryCertification.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 

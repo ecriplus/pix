@@ -9,7 +9,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Subscription', fu
 
   beforeEach(function () {
     certificationCandidate = domainBuilder.buildCertificationCandidate();
-    complementaryCertification = domainBuilder.certification.enrolment.buildComplementaryCertification();
+    complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification();
   });
 
   describe('When the subscription is core', function () {

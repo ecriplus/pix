@@ -44,11 +44,11 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
     certificationCpfCityRepository = Symbol('certificationCpfCityRepository');
     complementaryCertificationRepository = {
       findAll: sinon.stub().resolves([
-        domainBuilder.certification.enrolment.buildComplementaryCertification({
+        domainBuilder.certification.shared.buildComplementaryCertification({
           id: cleaCertificationId,
           key: ComplementaryCertificationKeys.CLEA,
         }),
-        domainBuilder.certification.enrolment.buildComplementaryCertification({
+        domainBuilder.certification.shared.buildComplementaryCertification({
           id: cleaCertificationId + 5000,
           key: 'someOtherComplementaryCertification',
         }),

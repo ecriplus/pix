@@ -5,7 +5,7 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
   describe('#serialize', function () {
     it('should convert a Certification Center model object into JSON API data', function () {
       // given
-      const complementaryCertification = domainBuilder.buildComplementaryCertification({
+      const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification({
         id: 1,
         label: 'Pix+surf',
         key: 'SURF',

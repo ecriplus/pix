@@ -48,7 +48,7 @@ describe('Unit | Domain | Models | CertificationCenter', function () {
 
     it('should return true when the certification center has complementary certification', function () {
       // given
-      const cleaComplementaryCertification = domainBuilder.buildComplementaryCertification({
+      const cleaComplementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification({
         key: 'PIX+',
       });
       const certificationCenter = domainBuilder.buildCertificationCenter({

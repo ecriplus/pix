@@ -35,22 +35,22 @@ describe('Integration | Certification | Repository | complementary-certification
 
         // then
         const expectedComplementaryCertifications = [
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
             id: 1,
             key: 'EDU_1ER_DEGRE',
             label: 'Pix+ Édu 1er degré',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
             id: 2,
             key: 'EDU_2ND_DEGRE',
             label: 'Pix+ Édu 2nd degré',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
             id: 3,
             key: 'DROIT',
             label: 'Pix+ Droit',
           }),
-          domainBuilder.buildComplementaryCertification({
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
             id: 4,
             key: 'CLEA',
             label: 'CléA Numérique',
@@ -110,11 +110,12 @@ describe('Integration | Certification | Repository | complementary-certification
       const complementaryCertification = await complementaryCertificationRepository.getByLabel({ label });
 
       // then
-      const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
-        id: 1,
-        key: 'EDU_1ER_DEGRE',
-        label: 'Pix+ Édu 1er degré',
-      });
+      const expectedComplementaryCertification =
+        domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
+          id: 1,
+          key: 'EDU_1ER_DEGRE',
+          label: 'Pix+ Édu 1er degré',
+        });
       expect(complementaryCertification).to.deep.equal(expectedComplementaryCertification);
     });
   });
@@ -139,10 +140,11 @@ describe('Integration | Certification | Repository | complementary-certification
     it('should return the complementary certification by its key', async function () {
       // given
       const keyToSearch = 'EDU_1ER_DEGRE';
-      const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
-        id: 1,
-        key: keyToSearch,
-      });
+      const expectedComplementaryCertification =
+        domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
+          id: 1,
+          key: keyToSearch,
+        });
       databaseBuilder.factory.buildComplementaryCertification(expectedComplementaryCertification);
 
       databaseBuilder.factory.buildComplementaryCertification({
@@ -194,11 +196,12 @@ describe('Integration | Certification | Repository | complementary-certification
       });
 
       // then
-      const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
-        id: complementaryCertificationId,
-        key: 'EDU_1ER_DEGRE',
-        label: 'Pix+ Édu 1er degré',
-      });
+      const expectedComplementaryCertification =
+        domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
+          id: complementaryCertificationId,
+          key: 'EDU_1ER_DEGRE',
+          label: 'Pix+ Édu 1er degré',
+        });
       expect(result).to.deep.equal(expectedComplementaryCertification);
     });
   });

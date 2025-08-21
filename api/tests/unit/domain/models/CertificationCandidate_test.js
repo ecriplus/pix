@@ -136,7 +136,7 @@ describe('Unit | Domain | Models | Certification Candidate', function () {
       // given
       const certificationCandidate = domainBuilder.buildCertificationCandidate({
         ...rawData,
-        complementaryCertification: domainBuilder.buildComplementaryCertification({ key: 'PIX+' }),
+        complementaryCertification: domainBuilder.certification.shared.buildComplementaryCertification({ key: 'PIX+' }),
       });
 
       // when/then
@@ -147,7 +147,7 @@ describe('Unit | Domain | Models | Certification Candidate', function () {
       // given
       const certificationCandidate = domainBuilder.buildCertificationCandidate({
         ...rawData,
-        complementaryCertification: domainBuilder.buildComplementaryCertification({ key: 'toto' }),
+        complementaryCertification: domainBuilder.certification.shared.buildComplementaryCertification({ key: 'toto' }),
       });
 
       // when/then

@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ * @typedef {import ('./ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  */
 
 export class ComplementaryCertification {

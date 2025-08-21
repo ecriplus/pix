@@ -37,11 +37,12 @@ describe('Integration | Certification | Complementary | UseCase | get-by-id', fu
       });
 
       // then
-      const expectedComplementaryCertification = domainBuilder.buildComplementaryCertification({
-        id: complementaryCertificationId,
-        label: 'UneSuperCertifComplémentaire',
-        key: 'DROIT',
-      });
+      const expectedComplementaryCertification =
+        domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
+          id: complementaryCertificationId,
+          label: 'UneSuperCertifComplémentaire',
+          key: 'DROIT',
+        });
       expect(complementaryCertification).to.deep.equal(expectedComplementaryCertification);
     });
   });

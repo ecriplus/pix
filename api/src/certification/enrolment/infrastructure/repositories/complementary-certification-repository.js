@@ -2,7 +2,7 @@
  * @typedef {import ('./index.js').ComplementaryCertificationApi} ComplementaryCertificationApi
  */
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
+import { ComplementaryCertification } from '../../../shared/domain/models/ComplementaryCertification.js';
 
 /**
  * @function

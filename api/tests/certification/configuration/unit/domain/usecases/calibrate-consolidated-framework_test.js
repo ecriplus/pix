@@ -10,7 +10,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
   beforeEach(async function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
 
-    complementaryCertification = domainBuilder.buildComplementaryCertification({
+    complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification({
       complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
     });
 
