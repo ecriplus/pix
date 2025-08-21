@@ -1,5 +1,5 @@
 import { BadRequestError } from '../../../shared/application/http-errors.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as certificationCenterMembershipSerializer from '../../../team/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
 
@@ -16,16 +16,12 @@ const findCertificationCenterMembershipsByCertificationCenter = async function (
   return dependencies.certificationCenterMembershipSerializer.serialize(certificationCenterMemberships);
 };
 
-const updateRole = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, certificationCenterMembershipSerializer },
-) {
+const updateRole = async function (request, h, dependencies = { certificationCenterMembershipSerializer }) {
   const certificationCenterMembershipId = request.params.id;
   const certificationCenterMembership = dependencies.certificationCenterMembershipSerializer.deserialize(
     request.payload,
   );
-  const pixAgentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const pixAgentUserId = extractUserIdFromRequest(request);
 
   if (certificationCenterMembershipId !== certificationCenterMembership.id) {
     throw new BadRequestError();
@@ -42,9 +38,9 @@ const updateRole = async function (
   );
 };
 
-const disableFromPixAdmin = async function (request, h, dependencies = { requestResponseUtils }) {
+const disableFromPixAdmin = async function (request, h) {
   const certificationCenterMembershipId = request.params.id;
-  const pixAgentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const pixAgentUserId = extractUserIdFromRequest(request);
 
   await usecases.disableCertificationCenterMembershipFromPixAdmin({
     certificationCenterMembershipId,

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { usecases as certificationSharedUsecases } from '../../../../src/certification/shared/domain/usecases/index.js';
-import * as requestResponseUtils from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { Certificate } from '../domain/models/v3/Certificate.js';
@@ -11,12 +11,8 @@ import * as privateCertificateSerializer from '../infrastructure/serializers/pri
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-pdf-certificate.js';
 import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 
-const getCertificateByVerificationCode = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, certificateSerializer },
-) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+const getCertificateByVerificationCode = async function (request, h, dependencies = { certificateSerializer }) {
+  const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
   let certificate;
@@ -41,9 +37,9 @@ const getCertificateByVerificationCode = async function (
 const getCertificate = async function (
   request,
   h,
-  dependencies = { requestResponseUtils, certificateSerializer, privateCertificateSerializer },
+  dependencies = { certificateSerializer, privateCertificateSerializer },
 ) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
   const certificationCourseId = request.params.certificationCourseId;

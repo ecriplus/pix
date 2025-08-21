@@ -6,7 +6,6 @@ import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '.
 
 describe('Unit | Controller | certification-course-controller', function () {
   let certificationCourseSerializer;
-  let requestResponseUtils;
 
   beforeEach(function () {
     certificationCourseSerializer = {
@@ -14,7 +13,6 @@ describe('Unit | Controller | certification-course-controller', function () {
       serializeFromCertificationCourse: sinon.stub(),
       deserializeCertificationCandidateModificationCommand: sinon.stub(),
     };
-    requestResponseUtils = { extractLocaleFromRequest: sinon.stub() };
   });
 
   describe('#save', function () {
@@ -32,9 +30,9 @@ describe('Unit | Controller | certification-course-controller', function () {
             },
           },
         },
+        headers: { 'accept-language': 'fr' },
       };
       sinon.stub(usecases, 'retrieveLastOrCreateCertificationCourse');
-      requestResponseUtils.extractLocaleFromRequest.returns('fr');
       certificationCourseSerializer.serialize.returns('ok');
     });
 
@@ -48,10 +46,7 @@ describe('Unit | Controller | certification-course-controller', function () {
         .resolves({ created: true, certificationCourse: retrievedCertificationCourse });
 
       // when
-      await certificationCourseController.save(request, hFake, {
-        extractLocaleFromRequest: requestResponseUtils.extractLocaleFromRequest,
-        certificationCourseSerializer,
-      });
+      await certificationCourseController.save(request, hFake, { certificationCourseSerializer });
 
       // then
       expect(usecases.retrieveLastOrCreateCertificationCourse).to.have.been.calledOnce;
@@ -67,10 +62,7 @@ describe('Unit | Controller | certification-course-controller', function () {
       certificationCourseSerializer.serialize.resolves(serializedCertificationCourse);
 
       // when
-      const response = await certificationCourseController.save(request, hFake, {
-        extractLocaleFromRequest: requestResponseUtils.extractLocaleFromRequest,
-        certificationCourseSerializer,
-      });
+      const response = await certificationCourseController.save(request, hFake, { certificationCourseSerializer });
 
       // then
       expect(response.source).to.equal(serializedCertificationCourse);

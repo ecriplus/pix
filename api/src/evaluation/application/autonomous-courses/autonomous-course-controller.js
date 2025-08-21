@@ -1,10 +1,10 @@
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { evaluationUsecases as usecases } from '../../domain/usecases/index.js';
 import * as autonomousCoursePaginatedListSerializer from '../../infrastructure/serializers/jsonapi/autonomous-course-paginated-list-serializer.js';
 import * as autonomousCourseSerializer from '../../infrastructure/serializers/jsonapi/autonomous-course-serializer.js';
 
-const save = async (request, h, dependencies = { requestResponseUtils, usecases, autonomousCourseSerializer }) => {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const save = async (request, h, dependencies = { usecases, autonomousCourseSerializer }) => {
+  const userId = extractUserIdFromRequest(request);
 
   const deserializedPayload = await dependencies.autonomousCourseSerializer.deserialize(request.payload);
 

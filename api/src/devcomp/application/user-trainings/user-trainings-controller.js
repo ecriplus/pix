@@ -1,4 +1,4 @@
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases as devcompUsecases } from '../../domain/usecases/index.js';
 import * as trainingSerializer from '../../infrastructure/serializers/jsonapi/training-serializer.js';
 
@@ -7,11 +7,10 @@ const findPaginatedUserRecommendedTrainings = async function (
   h,
   dependencies = {
     trainingSerializer,
-    requestResponseUtils,
     devcompUsecases,
   },
 ) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
   const { page } = request.query;
   const { userRecommendedTrainings, meta } = await dependencies.devcompUsecases.findPaginatedUserRecommendedTrainings({
     userId: request.auth.credentials.userId,

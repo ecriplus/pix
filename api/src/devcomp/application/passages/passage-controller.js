@@ -1,5 +1,5 @@
 import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 
 const create = async function (request, h, { usecases, passageSerializer }) {
   const {
@@ -8,7 +8,7 @@ const create = async function (request, h, { usecases, passageSerializer }) {
     'occurred-at': occurredAt,
     'sequence-number': sequenceNumber,
   } = request.payload.data.attributes;
-  const userId = requestResponseUtils.extractUserIdFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
   const passage = await usecases.createPassage({
     moduleId,
     userId,

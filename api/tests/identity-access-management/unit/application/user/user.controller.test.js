@@ -3,7 +3,6 @@ import { User } from '../../../../../src/identity-access-management/domain/model
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import * as localeService from '../../../../../src/shared/domain/services/locale-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import * as requestResponseUtils from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Controller | User', function () {
@@ -210,12 +209,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         hashPassword: sinon.stub(),
       };
 
-      dependencies = {
-        userSerializer,
-        cryptoService,
-        localeService,
-        requestResponseUtils,
-      };
+      dependencies = { userSerializer, cryptoService, localeService };
 
       sinon.stub(usecases, 'createUser').returns(savedUser);
     });
@@ -325,11 +319,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         serialize: sinon.stub().returns(expectedSerializedUser),
       };
 
-      const requestResponseUtils = {
-        extractLocaleFromRequest: sinon.stub().returns(language),
-      };
-
-      dependencies = { userSerializer, requestResponseUtils, localeService };
+      dependencies = { userSerializer, localeService };
     });
 
     afterEach(function () {
@@ -354,13 +344,13 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
               },
             },
           },
+          headers: { 'accept-language': language },
         },
         hFake,
         dependencies,
       );
 
       // then
-      expect(dependencies.requestResponseUtils.extractLocaleFromRequest).to.have.been.called;
       expect(usecases.upgradeToRealUser).to.have.been.calledWithExactly({
         userId,
         userAttributes: {

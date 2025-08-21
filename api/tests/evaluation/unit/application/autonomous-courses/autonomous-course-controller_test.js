@@ -1,11 +1,12 @@
 import { autonomousCourseController } from '../../../../../src/evaluation/application/autonomous-courses/autonomous-course-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | autonomous-course-controller', function () {
   describe('#save', function () {
     it('should return autonomous course created Id', async function () {
       // given
+      const userId = '123';
       const autonomousCourseAttributes = {
         'internal-title': 'Titre pour usage interne',
         'public-title': 'Titre pour usage public',
@@ -19,17 +20,14 @@ describe('Unit | Controller | autonomous-course-controller', function () {
         },
       };
       const request = {
-        headers: { 'user-agent': 'Mozilla' },
+        headers: {
+          ...generateAuthenticatedUserRequestHeaders({ userId }),
+          'user-agent': 'Mozilla',
+        },
         payload: payload,
       };
       const h = {
         ...hFake,
-      };
-
-      const userId = '123';
-
-      const requestResponseUtils = {
-        extractUserIdFromRequest: sinon.stub().returns(userId),
       };
 
       const expectedAutonomousCourseId = 123;
@@ -51,17 +49,12 @@ describe('Unit | Controller | autonomous-course-controller', function () {
         serializeId: sinon.stub().returns(serializedAutonomousCourseId),
         deserialize: sinon.stub().returns(expectedDeserializedPayloadAttributes),
       };
-      const dependencies = {
-        requestResponseUtils,
-        usecases,
-        autonomousCourseSerializer,
-      };
+      const dependencies = { usecases, autonomousCourseSerializer };
 
       // when
       await autonomousCourseController.save(request, h, dependencies);
 
       // then
-      expect(requestResponseUtils.extractUserIdFromRequest).to.have.been.called;
       expect(usecases.saveAutonomousCourse).to.have.been.calledWithExactly({
         autonomousCourse: { ...expectedDeserializedPayloadAttributes, ownerId: userId },
       });

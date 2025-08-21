@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
 import { MissingQueryParamError } from '../../../shared/application/http-errors.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
-import { extractLocaleFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationInvitationSerializer } from '../../infrastructure/serializers/jsonapi/organization-invitation.serializer.js';
 import { serializer as scoOrganizationInvitationSerializer } from '../../infrastructure/serializers/jsonapi/sco-organization-invitation.serializer.js';
@@ -78,14 +77,10 @@ const getOrganizationInvitation = async function (request, h, dependencies = { o
  * @param dependencies
  * @returns {Promise<void>}
  */
-const sendScoInvitation = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, scoOrganizationInvitationSerializer },
-) {
+const sendScoInvitation = async function (request, h, dependencies = { scoOrganizationInvitationSerializer }) {
   const { uai, 'first-name': firstName, 'last-name': lastName } = request.payload.data.attributes;
 
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const organizationScoInvitation = await usecases.sendScoInvitation({
     uai,
@@ -100,7 +95,7 @@ const sendScoInvitation = async function (
 const sendInvitations = async function (request, h) {
   const organizationId = request.params.id;
   const emails = request.payload.data.attributes.email.split(',');
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const organizationInvitations = await usecases.createOrganizationInvitations({ organizationId, emails, locale });
   return h.response(organizationInvitationSerializer.serialize(organizationInvitations)).created();

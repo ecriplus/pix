@@ -1,7 +1,7 @@
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { authenticationMethodsSerializer } from '../../infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
 import * as certificationPointOfContactSerializer from '../../infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
@@ -128,13 +128,12 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  * @param h
  * @param {Object} dependencies
  * @param {LocaleService} dependencies.localeService
- * @param {RequestResponseUtils} dependencies.requestResponseUtils
  * @param {UserSerializer} dependencies.userSerializer
  * @return {Promise<*>}
  */
-const createUser = async function (request, h, dependencies = { userSerializer, requestResponseUtils, localeService }) {
+const createUser = async function (request, h, dependencies = { userSerializer, localeService }) {
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
-  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const localeFromHeader = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
@@ -204,21 +203,17 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
   return dependencies.userSerializer.serialize(updatedUser);
 };
 
-const selfDeleteUserAccount = async function (request, h, dependencies = { requestResponseUtils }) {
+const selfDeleteUserAccount = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   await usecases.selfDeleteUserAccount({ userId: authenticatedUserId, locale });
 
   return h.response().code(204);
 };
 
-const sendVerificationCode = async function (
-  request,
-  h,
-  dependencies = { emailVerificationSerializer, requestResponseUtils },
-) {
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+const sendVerificationCode = async function (request, h, dependencies = { emailVerificationSerializer }) {
+  const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
   const userId = request.params.id;
@@ -258,20 +253,15 @@ const rememberUserHasSeenChallengeTooltip = async function (request, h, dependen
  * @param h
  * @param {Object} dependencies
  * @param {LocaleService} dependencies.localeService
- * @param {RequestResponseUtils} dependencies.requestResponseUtils
  * @param {UserSerializer} dependencies.userSerializer
  * @return {Promise<*>}
  */
-const upgradeToRealUser = async function (
-  request,
-  h,
-  dependencies = { userSerializer, requestResponseUtils, localeService },
-) {
+const upgradeToRealUser = async function (request, h, dependencies = { userSerializer, localeService }) {
   const anonymousUserId = request.auth.credentials.userId;
 
   const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  const language = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const language = getChallengeLocale(request);
 
   const userAttributes = {
     firstName: request.payload.data.attributes['first-name'],

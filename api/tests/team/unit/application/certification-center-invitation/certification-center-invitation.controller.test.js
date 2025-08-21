@@ -1,4 +1,3 @@
-import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { certificationCenterInvitationController } from '../../../../../src/team/application/certification-center-invitation/certification-center-invitation.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { certificationCenterInvitationSerializer } from '../../../../../src/team/infrastructure/serializers/jsonapi/certification-center-invitation-serializer.js';
@@ -45,7 +44,7 @@ describe('Unit | Team | Application | Controller | Certification-center-invitati
       const certificationCenterInvitation = domainBuilder.buildCertificationCenterInvitation({
         id: certificationCenterInvitationId,
       });
-      const locale = 'nl-BE';
+      const locale = 'nl';
       const serializerResult = {
         type: 'certification-center-invitation',
         id: certificationCenterInvitation.id,
@@ -56,14 +55,9 @@ describe('Unit | Team | Application | Controller | Certification-center-invitati
         },
       };
 
-      sinon.stub(requestResponseUtils, 'extractLocaleFromRequest').returns(locale);
-
       sinon.stub(usecases, 'resendCertificationCenterInvitation');
       usecases.resendCertificationCenterInvitation
-        .withArgs({
-          certificationCenterInvitationId,
-          locale,
-        })
+        .withArgs({ certificationCenterInvitationId, locale })
         .resolves(certificationCenterInvitation);
 
       sinon.stub(certificationCenterInvitationSerializer, 'serializeForAdmin');
@@ -76,12 +70,12 @@ describe('Unit | Team | Application | Controller | Certification-center-invitati
         {
           auth: { credentials: { userId: 1 } },
           params: { certificationCenterInvitationId },
+          headers: { 'accept-language': locale },
         },
         hFake,
       );
 
       // then
-      expect(requestResponseUtils.extractLocaleFromRequest).to.have.been.called;
       expect(usecases.resendCertificationCenterInvitation).to.have.been.called;
       expect(response.statusCode).to.equal(200);
       expect(response.source).to.deep.equal(serializerResult);

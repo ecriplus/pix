@@ -1,7 +1,4 @@
-import {
-  extractLocaleFromRequest,
-  requestResponseUtils,
-} from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterInvitationSerializer } from '../../infrastructure/serializers/jsonapi/certification-center-invitation-serializer.js';
 
@@ -46,7 +43,7 @@ const getCertificationCenterInvitation = async function (request) {
 const sendInvitations = async function (request, h) {
   const certificationCenterId = request.params.certificationCenterId;
   const emails = request.payload.data.attributes.emails;
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   await usecases.createOrUpdateCertificationCenterInvitation({ certificationCenterId, emails, locale });
 
@@ -55,7 +52,7 @@ const sendInvitations = async function (request, h) {
 
 const resendCertificationCenterInvitation = async function (request, h) {
   const certificationCenterInvitationId = request.params.certificationCenterInvitationId;
-  const locale = requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const certificationCenterInvitation = await usecases.resendCertificationCenterInvitation({
     certificationCenterInvitationId,

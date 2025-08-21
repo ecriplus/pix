@@ -1,7 +1,7 @@
 import { usecases as profileUsecases } from '../../../profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
 import * as sharedProfileForCampaignSerializer from '../infrastructure/serializers/jsonapi/shared-profile-for-campaign-serializer.js';
@@ -64,12 +64,11 @@ const getSharedCampaignParticipationProfile = async function (
   h,
   dependencies = {
     sharedProfileForCampaignSerializer,
-    requestResponseUtils,
   },
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const campaignId = request.params.campaignId;
-  const locale = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   const sharedProfileForCampaign = await usecases.getSharedCampaignParticipationProfile({
     userId: authenticatedUserId,

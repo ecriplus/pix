@@ -344,7 +344,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
 
     it('should call usecase and serializer with expected parameters', async function () {
       //given
-      const locale = Symbol('locale');
+      const locale = 'fr';
       const userId = Symbol('userId');
       const campaignId = Symbol('campaignId');
 
@@ -354,13 +354,12 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { campaignId },
+        headers: { 'accept-language': locale },
       };
       const dependencies = {
-        extractLocaleFromRequest: sinon.stub(),
         participantResultSerializer: { serialize: sinon.stub() },
       };
       usecases.getUserCampaignAssessmentResult.withArgs({ locale, userId, campaignId }).returns(expectedResult);
-      dependencies.extractLocaleFromRequest.withArgs(request).returns(locale);
       dependencies.participantResultSerializer.serialize.withArgs(expectedResult).returns(serializedResult);
 
       // when

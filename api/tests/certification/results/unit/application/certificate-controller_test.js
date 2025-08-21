@@ -13,11 +13,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return serialized V3 certificate data', async function () {
         // given
         const locale = 'fr-fr';
-        const i18n = getI18n();
-        const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
+        const request = { payload: { verificationCode: 'P-123456BB' }, headers: { 'accept-language': locale } };
 
         const certificateSerializerStub = { serialize: sinon.stub() };
 
@@ -34,7 +30,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         await certificateController.getCertificateByVerificationCode(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           certificateSerializer: certificateSerializerStub,
         });
 
@@ -53,10 +48,8 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when certification course version is V2', function () {
       it('should return a serialized shareable certificate given by verification code', async function () {
         // given
-        const i18n = getI18n();
-        const request = { i18n, payload: { verificationCode: 'P-123456BB' } };
         const locale = 'fr-fr';
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
+        const request = { payload: { verificationCode: 'P-123456BB' }, headers: { 'accept-language': locale } };
         const certificateSerializerStub = { serialize: sinon.stub() };
         sinon.stub(usecases, 'getShareableCertificate');
         sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
@@ -64,13 +57,11 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         usecases.getShareableCertificate
           .withArgs({ verificationCode: 'P-123456BB', locale })
           .resolves(Symbol('certificate'));
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
         const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
         usecases.getCertificationCourseByVerificationCode.resolves(certificationCourse);
 
         // when
         await certificateController.getCertificateByVerificationCode(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           certificateSerializer: certificateSerializerStub,
         });
 
@@ -93,12 +84,12 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // given
         const userId = 1;
         const certificationCourseId = 2;
+        const locale = 'fr-fr';
         const request = {
           auth: { credentials: { userId } },
           params: { certificationCourseId },
-          i18n: getI18n(),
+          headers: { 'accept-language': locale },
         };
-        const locale = 'fr-fr';
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: certificationCourseId,
           version: AlgorithmEngineVersion.V2,
@@ -115,13 +106,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           serialize: sinon.stub(),
         };
 
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
-
-        const dependencies = {
-          requestResponseUtils: requestResponseUtilsStub,
-          privateCertificateSerializer: privateCertificateSerializerStub,
-        };
+        const dependencies = { privateCertificateSerializer: privateCertificateSerializerStub };
 
         // when
         await certificateController.getCertificate(request, hFake, dependencies);
@@ -139,15 +124,12 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         // given
         const userId = 1;
         const certificationCourseId = 2;
+        const locale = 'fr-fr';
         const request = {
           auth: { credentials: { userId } },
           params: { certificationCourseId },
-          i18n: getI18n(),
+          headers: { 'accept-language': locale },
         };
-
-        const locale = 'fr-fr';
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
 
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: certificationCourseId,
@@ -167,10 +149,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           serialize: sinon.stub(),
         };
 
-        const dependencies = {
-          requestResponseUtils: requestResponseUtilsStub,
-          certificateSerializer: certificateSerializerStub,
-        };
+        const dependencies = { certificateSerializer: certificateSerializerStub };
 
         // when
         await certificateController.getCertificate(request, hFake, dependencies);
@@ -189,7 +168,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     it('should return the serialized private certificates of the user', async function () {
       // given
       const userId = 1;
-      const request = { auth: { credentials: { userId } }, i18n: getI18n() };
+      const request = { auth: { credentials: { userId } } };
       const privateCertificate1 = domainBuilder.buildPrivateCertificate.validated({
         id: 123,
         firstName: 'Dorothé',
@@ -253,17 +232,12 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return attestation in PDF binary format', async function () {
         // given
         const userId = 1;
-        const i18n = getI18n();
 
         const request = {
-          i18n,
           auth: { credentials: { userId } },
           params: { certificationCourseId: 9 },
           query: { lang: 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: request.params.certificationCourseId,
@@ -288,14 +262,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getPDFCertificate(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3CertificationAttestation],
-          i18n,
+          i18n: getI18n(),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -308,17 +281,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return attestation in PDF binary format', async function () {
         // given
         const userId = 1;
-        const i18n = getI18n();
 
         const request = {
-          i18n,
           auth: { credentials: { userId } },
           params: { certificationCourseId: 9 },
           query: { isFrenchDomainExtension: true, lang: 'fr' },
+          headers: { 'accept-language': 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: request.params.certificationCourseId,
@@ -345,14 +314,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getPDFCertificate(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [certificationAttestation],
-          i18n,
+          i18n: getI18n(),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);
@@ -366,21 +334,17 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return attestation in PDF binary format', async function () {
         // given
         const userId = 1;
-        const i18n = getI18n();
 
         const v3CertificationAttestation = domainBuilder.certification.results.buildCertificate();
         const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
         const generatedPdf = Symbol('Stream');
 
         const request = {
-          i18n,
           auth: { credentials: { userId } },
           params: { sessionId: session.id },
           query: { isFrenchDomainExtension: true },
+          headers: { 'accept-language': 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         sinon
           .stub(usecases, 'getCertificatesForSession')
@@ -395,14 +359,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getSessionCertificates(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3CertificationAttestation, v3CertificationAttestation],
-          i18n,
+          i18n: getI18n(),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -437,18 +400,14 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const certification2 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 2 });
         const certification3 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 3 });
         const userId = 1;
-        const i18n = getI18n();
         const generatedPdf = Symbol('Stream');
 
         const request = {
           auth: { credentials: { userId } },
           params: { sessionId: session.id },
           query: { isFrenchDomainExtension: true },
-          i18n,
+          headers: { 'accept-language': 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         sinon
           .stub(usecases, 'getCertificatesForSession')
@@ -463,14 +422,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.getSessionCertificates(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [certification1, certification2, certification3],
-          i18n,
+          i18n: getI18n(),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);
@@ -497,7 +455,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return only v3 division attestations in PDF binary format', async function () {
         // given
         const userId = 1;
-        const i18n = getI18n();
 
         const v3Certificate = domainBuilder.certification.results.buildCertificate();
         const v2Certificate = domainBuilder.buildCertificationAttestation({
@@ -509,14 +466,11 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const division = '3ème b';
 
         const request = {
-          i18n,
           auth: { credentials: { userId } },
           params: { organizationId },
           query: { division, isFrenchDomainExtension: true, lang: 'fr' },
+          headers: { 'accept-language': 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         sinon
           .stub(usecases, 'findCertificatesForDivision')
@@ -533,14 +487,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.downloadDivisionCertificates(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v3CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates: [v3Certificate, v3Certificate],
-          i18n,
+          i18n: getI18n(),
         });
         expect(response.source).to.deep.equal(generatedPdf);
         expect(response.headers['Content-Disposition']).to.contains(
@@ -561,17 +514,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const division = '3b';
         const userId = 1;
         const lang = 'fr';
-        const i18n = getI18n();
 
         const request = {
-          i18n,
           auth: { credentials: { userId } },
           params: { organizationId },
           query: { division, isFrenchDomainExtension: true, lang },
+          headers: { 'accept-language': 'fr' },
         };
-
-        const requestResponseUtilsStub = { extractLocaleFromRequest: sinon.stub() };
-        requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns('fr');
 
         sinon
           .stub(usecases, 'findCertificatesForDivision')
@@ -588,14 +537,13 @@ describe('Certification | Results | Unit | Application | certificate-controller'
 
         // when
         const response = await certificateController.downloadDivisionCertificates(request, hFake, {
-          requestResponseUtils: requestResponseUtilsStub,
           v2CertificationAttestationPdf: generatePdfStub,
         });
 
         // then
         expect(generatePdfStub.generate).calledOnceWithExactly({
           certificates,
-          i18n,
+          i18n: getI18n(),
           isFrenchDomainExtension: true,
         });
         expect(response.source).to.deep.equal(generatedPdf);

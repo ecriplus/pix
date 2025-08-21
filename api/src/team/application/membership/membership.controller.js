@@ -1,6 +1,6 @@
 import { BadRequestError } from '../../../shared/application/http-errors.js';
 import * as membershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/membership.serializer.js';
-import * as requestResponseUtils from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const create = async function (request, h, dependencies = { membershipSerializer }) {
@@ -15,7 +15,7 @@ const create = async function (request, h, dependencies = { membershipSerializer
 
 const disable = async function (request, h) {
   const membershipId = request.params.id;
-  const userId = requestResponseUtils.extractUserIdFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
 
   await usecases.disableMembership({ membershipId, userId });
   return h.response().code(204);
@@ -23,16 +23,16 @@ const disable = async function (request, h) {
 
 const disableOwnOrganizationMembership = async function (request, h) {
   const organizationId = request.payload.organizationId;
-  const userId = requestResponseUtils.extractUserIdFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
 
   await usecases.disableOwnOrganizationMembership({ organizationId, userId });
 
   return h.response().code(204);
 };
 
-const update = async function (request, h, dependencies = { requestResponseUtils, membershipSerializer }) {
+const update = async function (request, h, dependencies = { membershipSerializer }) {
   const membershipId = request.params.id;
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
   const membership = dependencies.membershipSerializer.deserialize(request.payload);
 
   const membershipIdFromPayload = parseInt(membership.id);
@@ -59,8 +59,8 @@ const findPaginatedFilteredMemberships = async function (request) {
   return membershipSerializer.serialize(memberships, pagination);
 };
 
-async function updateLastAccessedAt(request, h, dependencies = { requestResponseUtils }) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+async function updateLastAccessedAt(request, h) {
+  const userId = extractUserIdFromRequest(request);
   const membershipId = request.params.membershipId;
 
   await usecases.updateMembershipLastAccessedAt({

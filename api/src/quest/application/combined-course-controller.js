@@ -1,19 +1,19 @@
 import { createReadStream } from 'node:fs';
 
 import { getDataBuffer } from '../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
-import { requestResponseUtils } from '../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 
-const getByCode = async function (request, _, dependencies = { requestResponseUtils, combinedCourseSerializer }) {
+const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
   const { code } = request.query.filter;
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const userId = extractUserIdFromRequest(request);
   const combinedCourse = await usecases.getCombinedCourseByCode({ userId, code });
   return dependencies.combinedCourseSerializer.serialize(combinedCourse);
 };
 
-const start = async function (request, h, dependencies = { requestResponseUtils }) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const start = async function (request, h) {
+  const userId = extractUserIdFromRequest(request);
   const code = request.params.code;
 
   await usecases.startCombinedCourse({
@@ -24,8 +24,8 @@ const start = async function (request, h, dependencies = { requestResponseUtils 
   return h.response().code(204);
 };
 
-const reassessStatus = async function (request, h, dependencies = { requestResponseUtils }) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const reassessStatus = async function (request, h) {
+  const userId = extractUserIdFromRequest(request);
   const code = request.params.code;
 
   await usecases.updateCombinedCourse({

@@ -1,9 +1,10 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
-import * as requestResponseUtils from '../../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../../shared/infrastructure/utils/request-response-utils.js';
 import * as sessionRepository from '../../../session-management/infrastructure/repositories/session-repository.js';
 import * as supervisorAccessRepository from '../../infrastructure/repositories/supervisor-access-repository.js';
+
 const { Error: JSONAPIError } = jsonapiSerializer;
 
 const FORBIDDEN_ERROR_MESSAGE = 'User is not allowed to access to this resource.';
@@ -40,12 +41,8 @@ async function checkUserHaveCertificationCenterMembershipForSession(request, h, 
   }
 }
 
-async function checkUserHaveInvigilatorAccessForSession(
-  request,
-  h,
-  dependencies = { supervisorAccessRepository, requestResponseUtils },
-) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+async function checkUserHaveInvigilatorAccessForSession(request, h, dependencies = { supervisorAccessRepository }) {
+  const userId = extractUserIdFromRequest(request);
   const sessionId = request.params.sessionId;
 
   try {

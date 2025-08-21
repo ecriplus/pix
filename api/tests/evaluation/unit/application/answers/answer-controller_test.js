@@ -4,20 +4,21 @@ import { usecases as questUsecases } from '../../../../../src/quest/domain/useca
 import { config } from '../../../../../src/shared/config.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import {
+  domainBuilder,
+  expect,
+  generateAuthenticatedUserRequestHeaders,
+  hFake,
+  sinon,
+} from '../../../../test-helper.js';
 
 describe('Unit | Controller | answer-controller', function () {
   let answerSerializerStub;
-  let requestResponseUtilsStub;
 
   beforeEach(function () {
     answerSerializerStub = {
       serialize: sinon.stub(),
       deserialize: sinon.stub(),
-    };
-    requestResponseUtilsStub = {
-      extractUserIdFromRequest: sinon.stub(),
-      extractLocaleFromRequest: sinon.stub(),
     };
     sinon.stub(questUsecases, 'rewardUser');
   });
@@ -67,9 +68,7 @@ describe('Unit | Controller | answer-controller', function () {
 
     beforeEach(function () {
       request = {
-        headers: {
-          'accept-language': locale,
-        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
         payload: {
           data: {
             attributes: {
@@ -111,8 +110,6 @@ describe('Unit | Controller | answer-controller', function () {
       deserializedAnswer.timeSpent = undefined;
       answerSerializerStub.serialize.returns(serializedAnswer);
       answerSerializerStub.deserialize.returns(deserializedAnswer);
-      requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(userId);
-      requestResponseUtilsStub.extractLocaleFromRequest.withArgs(request).returns(locale);
       sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCompetenceEvaluation');
       sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCampaign');
       sinon.stub(evaluationUsecases, 'saveAndCorrectAnswerForCertification');
@@ -131,7 +128,6 @@ describe('Unit | Controller | answer-controller', function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
           assessmentRepository,
         });
 
@@ -155,7 +151,6 @@ describe('Unit | Controller | answer-controller', function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
           assessmentRepository,
         });
 
@@ -179,7 +174,6 @@ describe('Unit | Controller | answer-controller', function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
           assessmentRepository,
         });
 
@@ -203,7 +197,6 @@ describe('Unit | Controller | answer-controller', function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
           assessmentRepository,
         });
 
@@ -227,7 +220,6 @@ describe('Unit | Controller | answer-controller', function () {
         // when
         response = await answerController.save(request, hFake, {
           answerSerializer: answerSerializerStub,
-          requestResponseUtils: requestResponseUtilsStub,
           assessmentRepository,
         });
 
@@ -260,7 +252,6 @@ describe('Unit | Controller | answer-controller', function () {
           // when
           await answerController.save(request, hFake, {
             answerSerializer: answerSerializerStub,
-            requestResponseUtils: requestResponseUtilsStub,
             assessmentRepository,
           });
 
@@ -278,7 +269,6 @@ describe('Unit | Controller | answer-controller', function () {
           // when
           await answerController.save(request, hFake, {
             answerSerializer: answerSerializerStub,
-            requestResponseUtils: requestResponseUtilsStub,
             assessmentRepository,
           });
 
@@ -294,7 +284,6 @@ describe('Unit | Controller | answer-controller', function () {
           // when
           await answerController.save(request, hFake, {
             answerSerializer: answerSerializerStub,
-            requestResponseUtils: requestResponseUtilsStub,
             assessmentRepository,
           });
 
@@ -306,12 +295,11 @@ describe('Unit | Controller | answer-controller', function () {
           // given
           await featureToggles.set('isQuestEnabled', true);
           await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', false);
-          requestResponseUtilsStub.extractUserIdFromRequest.withArgs(request).returns(null);
+          request.headers = { 'accept-language': locale }; // userId is not provided
 
           // when
           await answerController.save(request, hFake, {
             answerSerializer: answerSerializerStub,
-            requestResponseUtils: requestResponseUtilsStub,
             assessmentRepository,
           });
 
@@ -325,7 +313,7 @@ describe('Unit | Controller | answer-controller', function () {
   describe('#getCorrection', function () {
     const answerId = 1;
     const userId = 'userId';
-    const locale = 'lang-country';
+    const locale = 'fr';
     let correctionSerializerStub;
 
     beforeEach(function () {
@@ -335,16 +323,18 @@ describe('Unit | Controller | answer-controller', function () {
 
     it('should return ok', async function () {
       // given
-      requestResponseUtilsStub.extractUserIdFromRequest.returns(userId);
-      requestResponseUtilsStub.extractLocaleFromRequest.returns(locale);
       evaluationUsecases.getCorrectionForAnswer.withArgs({ answerId, userId, locale }).resolves({});
       correctionSerializerStub.serialize.withArgs({}).returns('ok');
 
       // when
-      const response = await answerController.getCorrection({ params: { id: answerId } }, hFake, {
-        correctionSerializer: correctionSerializerStub,
-        requestResponseUtils: requestResponseUtilsStub,
-      });
+      const response = await answerController.getCorrection(
+        {
+          params: { id: answerId },
+          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
+        },
+        hFake,
+        { correctionSerializer: correctionSerializerStub },
+      );
 
       // then
       expect(response).to.be.equal('ok');

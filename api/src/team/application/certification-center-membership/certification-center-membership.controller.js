@@ -1,12 +1,12 @@
 import { ForbiddenError } from '../../../shared/application/http-errors.js';
-import { requestResponseUtils } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as certificationCenterMembershipSerializer from '../../../team/infrastructure/serializers/jsonapi/certification-center-membership.serializer.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../infrastructure/repositories/certification-center-membership.repository.js';
 
-const disableFromPixCertif = async function (request, h, dependencies = { requestResponseUtils }) {
+const disableFromPixCertif = async function (request, h) {
   const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
-  const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const currentUserId = extractUserIdFromRequest(request);
 
   await usecases.disableCertificationCenterMembershipFromPixCertif({
     certificationCenterMembershipId,
@@ -28,17 +28,13 @@ const findCertificationCenterMemberships = async function (
   return dependencies.certificationCenterMembershipSerializer.serializeMembers(certificationCenterMemberships);
 };
 
-const updateFromPixCertif = async function (
-  request,
-  h,
-  dependencies = { requestResponseUtils, certificationCenterMembershipSerializer },
-) {
+const updateFromPixCertif = async function (request, h, dependencies = { certificationCenterMembershipSerializer }) {
   const certificationCenterId = request.params.certificationCenterId;
   const certificationCenterMembershipId = request.params.id;
   const certificationCenterMembership = dependencies.certificationCenterMembershipSerializer.deserialize(
     request.payload,
   );
-  const currentUserId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+  const currentUserId = extractUserIdFromRequest(request);
 
   const foundCertificationCenterId = await certificationCenterMembershipRepository.getCertificationCenterId(
     certificationCenterMembershipId,
@@ -70,8 +66,8 @@ const updateReferer = async function (request, h) {
   return h.response().code(204);
 };
 
-const updateLastAccessedAt = async function (request, h, dependencies = { requestResponseUtils }) {
-  const userId = dependencies.requestResponseUtils.extractUserIdFromRequest(request);
+const updateLastAccessedAt = async function (request, h) {
+  const userId = extractUserIdFromRequest(request);
   const certificationCenterMembershipId = request.params.certificationCenterMembershipId;
 
   await usecases.updateCertificationCenterMembershipLastAccessedAt({

@@ -1,6 +1,5 @@
 import { passageController } from '../../../../../src/devcomp/application/passages/passage-controller.js';
-import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passages | Controller', function () {
   describe('#create', function () {
@@ -15,7 +14,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       const passage = {
         id: Symbol('passageId'),
       };
-      const userId = Symbol('user-id');
+      const userId = 123;
       const passageSerializer = {
         serialize: sinon.stub(),
       };
@@ -27,6 +26,7 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
       hStub.response.withArgs(serializedPassage).returns({ created });
 
       const request = {
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             attributes: {
@@ -38,9 +38,6 @@ describe('Unit | Devcomp | Application | Passages | Controller', function () {
           },
         },
       };
-
-      const extractUserIdFromRequestStub = sinon.stub(requestResponseUtils, 'extractUserIdFromRequest');
-      extractUserIdFromRequestStub.withArgs(request).returns(userId);
 
       const passageStartedEvent = {
         occurredAt: occurredAtDate,

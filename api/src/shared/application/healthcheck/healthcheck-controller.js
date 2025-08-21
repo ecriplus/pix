@@ -6,10 +6,10 @@ import * as network from '../../../identity-access-management/infrastructure/uti
 import { config } from '../../config.js';
 import { getBaseLocale } from '../../domain/services/locale-service.js';
 import { redisMonitor } from '../../infrastructure/utils/redis-monitor.js';
-import { extractLocaleFromRequest } from '../../infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
 
 const get = function (request) {
-  const locale = extractLocaleFromRequest(request);
+  const locale = getChallengeLocale(request);
 
   return {
     name: packageJSON.name,

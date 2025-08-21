@@ -5,10 +5,10 @@ import {
 } from '../../../../../src/shared/domain/services/locale-service.js';
 import {
   escapeFileName,
-  extractLocaleFromRequest,
   extractTimestampFromRequest,
   extractTLDFromRequest,
   extractUserIdFromRequest,
+  getChallengeLocale,
 } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
@@ -87,13 +87,13 @@ describe('Unit | Utils | Request Utils', function () {
     });
   });
 
-  describe('#extractLocaleFromRequest', function () {
+  describe('#getChallengeLocale', function () {
     it('should return fr-fr locale when there is no header (to ensure retro-compat)', function () {
       // given
       const request = {};
 
       // when
-      const locale = extractLocaleFromRequest(request);
+      const locale = getChallengeLocale(request);
 
       // then
       expect(locale).to.equal(FRENCH_FRANCE);
@@ -113,7 +113,7 @@ describe('Unit | Utils | Request Utils', function () {
         };
 
         // when
-        const locale = extractLocaleFromRequest(request);
+        const locale = getChallengeLocale(request);
 
         // then
         expect(locale).to.equal(data.expectedLocale);

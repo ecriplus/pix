@@ -81,15 +81,12 @@ describe('Unit | Controller | User-tutorials', function () {
             size: '200',
           },
         },
+        headers: { 'accept-language': 'fr' },
       };
 
-      const expectedLocale = Symbol('locale');
       const expectedFilters = request.query.filter;
       const expectedPage = request.query.page;
       const expectedTutorials = Symbol('tutorials');
-
-      const requestResponseUtils = { extractLocaleFromRequest: sinon.stub() };
-      requestResponseUtils.extractLocaleFromRequest.withArgs(request).returns(expectedLocale);
 
       const returnedTutorials = Symbol('returned-tutorials');
       const returnedMeta = Symbol('returned-meta');
@@ -104,10 +101,7 @@ describe('Unit | Controller | User-tutorials', function () {
       tutorialSerializer.serialize.returns(expectedTutorials);
 
       // when
-      const result = await userTutorialsController.find(request, hFake, {
-        tutorialSerializer,
-        requestResponseUtils,
-      });
+      const result = await userTutorialsController.find(request, hFake, { tutorialSerializer });
 
       // then
       expect(tutorialSerializer.serialize).to.have.been.calledWithExactly(returnedTutorials, returnedMeta);
@@ -115,7 +109,7 @@ describe('Unit | Controller | User-tutorials', function () {
         userId,
         filters: expectedFilters,
         page: expectedPage,
-        locale: expectedLocale,
+        locale: 'fr',
       });
       expect(result).to.equal(expectedTutorials);
     });

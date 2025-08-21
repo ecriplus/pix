@@ -1,8 +1,7 @@
 import { passageEventsController } from '../../../../../src/devcomp/application/passage-events/passage-event-controller.js';
 import { BadRequestError } from '../../../../../src/shared/application/http-errors.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { requestResponseUtils } from '../../../../../src/shared/infrastructure/utils/request-response-utils.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passage-Events | Controller', function () {
   describe('#create', function () {
@@ -19,13 +18,17 @@ describe('Unit | Devcomp | Application | Passage-Events | Controller', function 
       usecases.recordPassageEvents.resolves();
       const code = sinon.stub();
       const userId = 123;
-      sinon.stub(requestResponseUtils, 'extractUserIdFromRequest').returns(userId);
       const hStub = {
         response: () => ({ code }),
       };
 
+      const request = {
+        payload: serializedPayload,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
       // when
-      await passageEventsController.create({ payload: serializedPayload }, hStub, {
+      await passageEventsController.create(request, hStub, {
         usecases,
         passageEventSerializer,
       });
