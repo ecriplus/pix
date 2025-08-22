@@ -34,23 +34,19 @@ export default class AuthenticatedAttestationsRoute extends Route {
   async model(params) {
     const attestationKey = this.currentUser.prescriber.availableAttestations[0];
     const organizationId = this.currentUser.organization.id;
-    const attestationParticipantStatuses = await this.store.query(
-      'attestation-participant-status',
-      {
-        organizationId,
-        attestationKey,
-        filter: {
-          statuses: params.statuses,
-          divisions: params.divisions,
-          search: params.search,
-        },
-        page: {
-          number: params.pageNumber,
-          size: params.pageSize,
-        },
+    const attestationParticipantStatuses = await this.store.query('attestation-participant-status', {
+      organizationId,
+      attestationKey,
+      filter: {
+        statuses: params.statuses,
+        divisions: params.divisions,
+        search: params.search,
       },
-      { reload: true },
-    );
+      page: {
+        number: params.pageNumber,
+        size: params.pageSize,
+      },
+    });
 
     if (this.currentUser.organization.isManagingStudents) {
       const divisions = await this.currentUser.organization.divisions;
@@ -74,5 +70,10 @@ export default class AuthenticatedAttestationsRoute extends Route {
   @action
   refreshModel() {
     this.refresh();
+  }
+
+  @action
+  loading() {
+    return false;
   }
 }
