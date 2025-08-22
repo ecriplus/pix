@@ -1,22 +1,22 @@
-import { retrieveLastOrCreateCertificationCourse } from '../../../../src/certification/evaluation/domain/usecases/retrieve-last-or-create-certification-course.js';
-import { SessionNotAccessible } from '../../../../src/certification/session-management/domain/errors.js';
-import { ComplementaryCertificationCourse } from '../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
-import { CenterHabilitationError } from '../../../../src/certification/shared/domain/errors.js';
-import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { ComplementaryCertificationKeys } from '../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
-import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
+import { retrieveLastOrCreateCertificationCourse } from '../../../../../../src/certification/evaluation/domain/usecases/retrieve-last-or-create-certification-course.js';
+import { SessionNotAccessible } from '../../../../../../src/certification/session-management/domain/errors.js';
+import { ComplementaryCertificationCourse } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
+import { CenterHabilitationError } from '../../../../../../src/certification/shared/domain/errors.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
+import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { MAX_REACHABLE_LEVEL } from '../../../../../../src/shared/domain/constants.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
   CandidateNotAuthorizedToResumeCertificationTestError,
   LanguageNotSupportedError,
   NotFoundError,
   UnexpectedUserAccountError,
-} from '../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { FRENCH_SPOKEN } from '../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../../src/shared/domain/errors.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | retrieve-last-or-create-certification-course', function () {
   let clock;
