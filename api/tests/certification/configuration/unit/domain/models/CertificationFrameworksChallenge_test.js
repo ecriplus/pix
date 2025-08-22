@@ -5,7 +5,7 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 describe('Certification | Configuration | Unit | Domain | Models | CertificationFrameworksChallenge', function () {
   describe('#calibrate', function () {
     it('updates discriminant and difficulty of a certificaitonFrameworksChallenge', function () {
-      const complementaryCertification = domainBuilder.buildComplementaryCertification();
+      const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification();
       const certificationFrameworksChallenge = new CertificationFrameworksChallenge({
         discriminant: null,
         difficulty: null,

@@ -1,4 +1,4 @@
-import { ComplementaryCertification } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertification.js';
+import { ComplementaryCertification } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertification.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Session-Management | Domain | Models | ComplementaryCertification', function () {

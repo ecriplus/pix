@@ -33,7 +33,7 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
       sessionId: undefined,
       subscriptions: [
         domainBuilder.certification.enrolment.buildCoreSubscription(),
-        domainBuilder.buildComplementaryCertification({
+        domainBuilder.certification.shared.buildComplementaryCertification({
           id: 1,
           label: 'Pix+Droit',
           key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,

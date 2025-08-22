@@ -13,11 +13,11 @@ describe('Certification | Configuration | Unit | UseCase | find-complementary-ce
   it('should find the complementary certifications', async function () {
     // given
     const complementaryCertifications = [
-      domainBuilder.buildComplementaryCertification({
+      domainBuilder.certification.shared.buildComplementaryCertification({
         id: 11,
         name: 'Pix+Edu',
       }),
-      domainBuilder.buildComplementaryCertification({
+      domainBuilder.certification.shared.buildComplementaryCertification({
         id: 22,
         name: 'Cléa Numérique',
       }),

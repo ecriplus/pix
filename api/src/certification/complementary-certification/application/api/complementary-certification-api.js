@@ -1,8 +1,8 @@
 /**
  * @typedef {import ('../../../../shared/domain/errors.js').NotFoundError} NotFoundError
  */
+import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 import { usecases } from '../../domain/usecases/index.js';
-import { ComplementaryCertification } from './models/ComplementaryCertification.js';
 
 /**
  * @function

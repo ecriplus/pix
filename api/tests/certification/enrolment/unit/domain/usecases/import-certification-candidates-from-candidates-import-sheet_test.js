@@ -92,11 +92,11 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
         it('should add the certification candidates', async function () {
           // given
           const odsBuffer = 'buffer';
-          const complementaryCertification = domainBuilder.buildComplementaryCertification();
+          const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification();
           const candidate = domainBuilder.certification.enrolment.buildCandidate({
             subscriptions: [
               domainBuilder.certification.enrolment.buildCoreSubscription(),
-              domainBuilder.buildComplementaryCertification({ ...complementaryCertification }),
+              domainBuilder.certification.shared.buildComplementaryCertification({ ...complementaryCertification }),
             ],
           });
           const candidates = [candidate];

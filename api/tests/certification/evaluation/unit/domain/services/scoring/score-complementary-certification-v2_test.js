@@ -317,17 +317,17 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             });
 
             const availableComplementaryCertificationBadges = [
-              domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+              domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                 id: 666,
                 level: level1.level,
                 minimumEarnedPix: level1.minimumEarnedPix,
               }),
-              domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+              domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                 id: 777,
                 level: lowerLevel.level,
                 minimumEarnedPix: lowerLevel.minimumEarnedPix,
               }),
-              domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+              domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                 id: 888,
                 level: currentLevel.level,
                 minimumEarnedPix: currentLevel.minimumEarnedPix,
@@ -653,12 +653,12 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                   .resolves(domainBuilder.buildCertificationCourse());
 
                 complementaryCertificationBadgesRepository.getAllWithSameTargetProfile.withArgs(888).resolves([
-                  domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+                  domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                     id: 777,
                     level: 1,
                     minimumEarnedPix: 50,
                   }),
-                  domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+                  domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                     id: 888,
                     level: 2,
                     minimumEarnedPix: 60,
@@ -738,7 +738,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                   .resolves(domainBuilder.buildCertificationCourse());
 
                 complementaryCertificationBadgesRepository.getAllWithSameTargetProfile.withArgs(888).resolves([
-                  domainBuilder.certification.complementary.buildComplementaryCertificationBadge({
+                  domainBuilder.certification.complementaryCertification.buildComplementaryCertificationBadge({
                     id: 888,
                     level: 1,
                     minimumEarnedPix: 60,
