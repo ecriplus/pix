@@ -311,7 +311,7 @@
                 "id": "a261de69-d395-4657-a4a3-759bceee4297",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
+                "title": "POI ressources biais",
                 "url": "https://github.com/1024pix/atelier-contenus/blob/master/PCH/POI_persil_semoule_base.html",
                 "instruction": "<p>Suivez les étapes pour découvrir avec quelles ressources l’IA générative est entraînée. Répondez ensuite à la question ci-dessous.</p>",
                 "solution": "",
@@ -411,9 +411,9 @@
                     {
                       "id": "0acc6d61-54b6-4a88-a5bb-c86ee663745f",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
-                      "alt": "",
-                      "alternativeText": "<p>image à changer</p>",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Captain-America.jpg",
+                      "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
+                      "alternativeText": "<p>Captain America :&nbsp;<br>Pourquoi l'Amérique est le meilleur pays du monde ?<br><br></p><p>Réponse de l'IA générative :&nbsp;<br>Beaucoup considèrent l’Amérique comme le meilleur pays du monde pour plusieurs raisons : </p><ul><li><strong>Un pays de liberté</strong>, où chacun peut réaliser son rêve s’il travaille dur.</li><li><strong>Une puissance économique et militaire</strong>, qui donne une image de force et de sécurité.</li><li><strong>Un mode de vie très attractif, avec les fast-foods</strong>, les grandes maisons et les grosses voitures.</li><li><strong>Une culture populaire mondiale</strong>, grâce à Hollywood, la musique et le sport.</li></ul><p>L’Amérique est un modèle pour les autres pays.</p><br>",
                       "legend": "",
                       "licence": ""
                     },
@@ -458,11 +458,11 @@
                 {
                   "elements": [
                     {
-                      "id": "23c02c4b-6dec-43ba-aeaf-f35f0367442c",
+                      "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
-                      "alt": "",
-                      "alternativeText": "<p>image à changer</p>",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Sato-couple-fran%C3%A7ais.jpg",
+                      "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
+                      "alternativeText": "<p>Satô :&nbsp;<br>Génère deux images d’un couple français.</p><p> Réponse de l'IA générative :<br>Première image :&nbsp;Illustration de style vintage représentant un couple français caricatural devant la tour Eiffel. L’homme porte un béret noir, une marinière à rayures rouges et blanches, un foulard rouge autour du cou et tient une baguette sous le bras. La femme, coiffée d’un béret noir, porte une robe noire et tient un verre de vin rouge à la main. Ils sourient, côte à côte, avec la tour Eiffel en arrière-plan.</p><p>Seconde image :&nbsp;<br>Photographie d'un jeune couple qui se tient ensemble dans une rue de Paris, avec la tour Eiffel en arrière-plan. L’homme porte un trench beige, un béret bleu marine et une écharpe à carreaux rouges et bleus. La femme, à ses côtés, sourit et porte un manteau crème clair, une écharpe noire et un béret noir. Tous deux posent côte à côte, l’air complice, devant les immeubles haussmanniens et le ciel gris d’automne.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -507,11 +507,11 @@
                 {
                   "elements": [
                     {
-                      "id": "efade8a1-7c8c-48f9-a9fa-8cb45f24e770",
+                      "id": "dd63f76b-cc9c-4dcd-a8e8-5aa2f349c29b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Svetlana-hotesse-de-l-air.jpg",
                       "alt": "",
-                      "alternativeText": "<p>image à changer</p>",
+                      "alternativeText": "<p>Svetlana :<br>Quel est l’uniforme obligatoire des hôtesses de l’air ?<br><br></p><p>Réponse de l'IA générative :<br>L’uniforme des hôtesses de l’air est très reconnaissable : </p><ol><li><strong>Une tenue élégante </strong>composée d’une jupe ou parfois d’un pantalon.</li><li><strong>Des </strong><strong>chaussures à talons</strong> qui donnent une allure soignée.</li><li><strong>Un foulard ou un </strong><strong>accessoire coloré</strong> pour distinguer la compagnie aérienne.</li><li><strong>Une apparence toujours impeccable</strong>, maquillage et coiffure compris.</li></ol><p>Cet uniforme est pensé pour refléter à la fois le professionnalisme et une image accueillante.</p><br>",
                       "legend": "",
                       "licence": ""
                     },
