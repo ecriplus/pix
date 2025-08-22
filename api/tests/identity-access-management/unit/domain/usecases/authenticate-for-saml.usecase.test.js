@@ -5,6 +5,7 @@ import {
   UserShouldChangePasswordError,
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { authenticateForSaml } from '../../../../../src/identity-access-management/domain/usecases/authenticate-for-saml.usecase.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import {
@@ -27,7 +28,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
 
   beforeEach(function () {
     tokenService = {
-      createAccessTokenForSaml: sinon.stub(),
       extractExternalUserFromIdToken: sinon.stub(),
       createPasswordResetToken: sinon.stub(),
     };
@@ -73,7 +73,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
+
+      sinon
+        .stub(UserAccessToken, 'generateSamlUserToken')
+        .withArgs({ userId: user.id, audience })
+        .returns({ accessToken: expectedToken });
 
       // when
       const token = await authenticateForSaml({
@@ -119,7 +123,11 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
       });
 
       const expectedToken = 'expected returned token';
-      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(expectedToken);
+
+      sinon
+        .stub(UserAccessToken, 'generateSamlUserToken')
+        .withArgs({ userId: user.id, audience })
+        .returns({ accessToken: expectedToken });
 
       // when
       await authenticateForSaml({

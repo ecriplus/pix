@@ -1,6 +1,7 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
+import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { getSamlAuthenticationRedirectionUrl } from '../../../../../src/identity-access-management/domain/usecases/get-saml-authentication-redirection-url.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
@@ -32,7 +33,6 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
 
     tokenService = {
       createIdTokenForUserReconciliation: sinon.stub(),
-      createAccessTokenForSaml: sinon.stub(),
     };
 
     samlSettings = {
@@ -107,7 +107,11 @@ describe('Unit | UseCase | get-external-authentication-redirection-url', functio
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(
         domainBuilder.buildAuthenticationMethod.withGarAsIdentityProvider(),
       );
-      tokenService.createAccessTokenForSaml.withArgs({ userId: 1, audience }).returns('access-token');
+
+      sinon
+        .stub(UserAccessToken, 'generateSamlUserToken')
+        .withArgs({ userId: 1, audience })
+        .returns({ accessToken: 'access-token' });
 
       // when
       const result = await getSamlAuthenticationRedirectionUrl({

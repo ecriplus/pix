@@ -1,6 +1,7 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod } from '../../../../identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../identity-access-management/domain/models/User.js';
+import { UserAccessToken } from '../../../../identity-access-management/domain/models/UserAccessToken.js';
 import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
@@ -120,7 +121,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
     userLoginRepository,
   });
 
-  const accessToken = tokenService.createAccessTokenForSaml({ userId: tokenUserId, audience });
+  const { accessToken } = UserAccessToken.generateSamlUserToken({ userId: tokenUserId, audience });
 
   return accessToken;
 };

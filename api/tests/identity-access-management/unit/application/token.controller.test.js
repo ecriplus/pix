@@ -1,4 +1,5 @@
 import { tokenController } from '../../../../src/identity-access-management/application/token/token.controller.js';
+import { UserAccessToken } from '../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { expect, hFake, sinon } from '../../../test-helper.js';
@@ -74,13 +75,10 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           .withArgs({ username, password, source, locale, audience, requestedApplication })
           .resolves({ accessToken, refreshToken, expirationDelaySeconds });
 
-        const tokenServiceStub = { extractUserId: sinon.stub() };
-        tokenServiceStub.extractUserId.withArgs(accessToken).returns(userId);
-
-        const dependencies = { tokenService: tokenServiceStub };
+        sinon.stub(UserAccessToken, 'decode').withArgs(accessToken).returns({ userId });
 
         // when
-        const response = await tokenController.createToken(request, hFake, dependencies);
+        const response = await tokenController.createToken(request, hFake);
 
         // then
         const expectedResponseResult = {
@@ -119,13 +117,10 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           .withArgs({ refreshToken, audience })
           .resolves({ accessToken, expirationDelaySeconds });
 
-        const tokenServiceStub = { extractUserId: sinon.stub() };
-        tokenServiceStub.extractUserId.withArgs(accessToken).returns(userId);
-
-        const dependencies = { tokenService: tokenServiceStub };
+        sinon.stub(UserAccessToken, 'decode').withArgs(accessToken).returns({ userId });
 
         // when
-        const response = await tokenController.createToken(request, hFake, dependencies);
+        const response = await tokenController.createToken(request, hFake);
 
         // then
         const expectedResponseResult = {

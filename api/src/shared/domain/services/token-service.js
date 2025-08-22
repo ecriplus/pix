@@ -10,26 +10,15 @@ import {
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
-function createAccessTokenFromUser({ userId, source, audience }) {
-  const expirationDelaySeconds = config.authentication.accessTokenLifespanMs / 1000;
-  const accessToken = _createAccessToken({ userId, source, expirationDelaySeconds, audience });
-  return { accessToken, expirationDelaySeconds };
-}
-
-function createAccessTokenFromAnonymousUser({ userId, audience }) {
-  const expirationDelaySeconds = config.anonymous.accessTokenLifespanMs / 1000;
-  return _createAccessToken({ userId, source: 'pix', expirationDelaySeconds, audience });
-}
-
-function createAccessTokenForSaml({ userId, audience }) {
-  const expirationDelaySeconds = config.saml.accessTokenLifespanMs / 1000;
-  return _createAccessToken({ userId, source: 'external', expirationDelaySeconds, audience });
-}
-
-function _createAccessToken({ userId, source, expirationDelaySeconds, audience }) {
-  return jsonwebtoken.sign({ user_id: userId, source, aud: audience }, config.authentication.secret, {
-    expiresIn: expirationDelaySeconds,
-  });
+/**
+ * Encode and sign a payload into a JWT token (using jsonwebtoken library)
+ * @param {Record<string, any>} payload Token payload
+ * @param {string} secret Secret for the signature
+ * @param {Record<string, any>} options Sign options (ex: { expiresIn })
+ * @returns The encoded and signed token
+ */
+function encodeToken(payload, secret, options) {
+  return jsonwebtoken.sign(payload, secret, options);
 }
 
 /**
@@ -199,16 +188,14 @@ async function extractExternalUserFromIdToken(token) {
   };
 }
 const tokenService = {
-  createAccessTokenFromUser,
-  createAccessTokenForSaml,
   createAccessTokenFromApplication,
-  createAccessTokenFromAnonymousUser,
   createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
   createPasswordResetToken,
   decodeIfValid,
   getDecodedToken,
+  encodeToken,
   extractExternalUserFromIdToken,
   extractCertificationResultsByRecipientEmailLink,
   extractSamlId,
@@ -223,10 +210,7 @@ const tokenService = {
  */
 
 export {
-  createAccessTokenForSaml,
-  createAccessTokenFromAnonymousUser,
   createAccessTokenFromApplication,
-  createAccessTokenFromUser,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
   createIdTokenForUserReconciliation,

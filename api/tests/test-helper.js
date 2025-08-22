@@ -25,6 +25,7 @@ import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
+import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { config } from '../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
@@ -126,7 +127,7 @@ function generateAuthenticatedUserRequestHeaders({
   const url = new URL(audience);
   const protoHeader = url.protocol.slice(0, -1);
   const hostHeader = url.hostname;
-  const accessToken = tokenService.createAccessTokenFromUser({ userId, source, audience }).accessToken;
+  const accessToken = UserAccessToken.generateUserToken({ userId, source, audience }).accessToken;
 
   return {
     authorization: `Bearer ${accessToken}`,

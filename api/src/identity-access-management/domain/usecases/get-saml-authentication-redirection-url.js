@@ -1,5 +1,6 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
+import { UserAccessToken } from '../models/UserAccessToken.js';
 
 const getSamlAuthenticationRedirectionUrl = async function ({
   userAttributes,
@@ -35,28 +36,14 @@ const getSamlAuthenticationRedirectionUrl = async function ({
       externalUser,
     });
 
-    return _getUrlWithAccessToken({
-      user,
-      audience,
-      externalUser,
-      tokenService,
-      userLoginRepository,
-      authenticationMethodRepository,
-      lastUserApplicationConnectionsRepository,
-      requestedApplication,
-    });
+    const { accessToken } = UserAccessToken.generateSamlUserToken({ userId: user.id, audience });
+    return `/connexion/gar#${encodeURIComponent(accessToken)}`;
   }
 
   return _getUrlForReconciliationPage({ tokenService, externalUser });
 };
 
 export { getSamlAuthenticationRedirectionUrl };
-
-async function _getUrlWithAccessToken({ user, audience, tokenService }) {
-  const token = tokenService.createAccessTokenForSaml({ userId: user.id, audience });
-
-  return `/connexion/gar#${encodeURIComponent(token)}`;
-}
 
 function _externalUserFirstAndLastNameMatchesAuthenticationMethodFirstAndLastName({
   authenticationMethod,

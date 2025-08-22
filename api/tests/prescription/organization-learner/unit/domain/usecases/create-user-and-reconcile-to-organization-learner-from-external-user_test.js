@@ -1,4 +1,5 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { UserAccessToken } from '../../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { RequestedApplication } from '../../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { createUserAndReconcileToOrganizationLearnerFromExternalUser } from '../../../../../../src/prescription/organization-learner/domain/usecases/create-user-and-reconcile-to-organization-learner-from-external-user.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -21,7 +22,6 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
   beforeEach(function () {
     tokenService = {
       extractExternalUserFromIdToken: sinon.stub(),
-      createAccessTokenForSaml: sinon.stub(),
     };
     userReconciliationService = {
       findMatchingOrganizationLearnerForGivenOrganizationIdAndReconciliationInfo: sinon.stub(),
@@ -102,7 +102,11 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
         organizationLearner,
       );
       userRepository.getBySamlId.resolves(user);
-      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(token);
+
+      sinon
+        .stub(UserAccessToken, 'generateSamlUserToken')
+        .withArgs({ userId: user.id, audience })
+        .returns({ accessToken: token });
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({
@@ -177,7 +181,11 @@ describe('Unit | UseCase | create-user-and-reconcile-to-organization-learner-fro
       );
       userRepository.getBySamlId.resolves(null);
       userService.createAndReconcileUserToOrganizationLearner.resolves(user.id);
-      tokenService.createAccessTokenForSaml.withArgs({ userId: user.id, audience }).resolves(token);
+
+      sinon
+        .stub(UserAccessToken, 'generateSamlUserToken')
+        .withArgs({ userId: user.id, audience })
+        .returns({ accessToken: token });
 
       // when
       const result = await createUserAndReconcileToOrganizationLearnerFromExternalUser({
