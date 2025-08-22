@@ -312,7 +312,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "POI ressources biais",
-                "url": "https://github.com/1024pix/atelier-contenus/blob/master/PCH/POI_persil_semoule_base.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/POI_persil_semoule_base.html",
                 "instruction": "<p>Suivez les étapes pour découvrir avec quelles ressources l’IA générative est entraînée. Répondez ensuite à la question ci-dessous.</p>",
                 "solution": "",
                 "height": 500
