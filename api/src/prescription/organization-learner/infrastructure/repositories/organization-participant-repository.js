@@ -103,8 +103,11 @@ function _buildWithQuery({ organizationId, extraColumns, withImport }) {
   const withQuery = knex.select(selectElement).from('view-active-organization-learners');
 
   if (!withImport) {
-    withQuery.join('users', function () {
-      this.on('view-active-organization-learners.userId', 'users.id').andOnVal('users.isAnonymous', false);
+    withQuery.leftJoin('users', function () {
+      this.on('view-active-organization-learners.userId', 'users.id');
+    });
+    withQuery.where(function () {
+      this.where('users.isAnonymous', false).orWhereNull('users.isAnonymous');
     });
   }
 
@@ -120,18 +123,19 @@ async function _countOrganizationParticipant({ organizationId, withImport = true
 
   if (!withImport) {
     countParticipationQuery
-      .join('users', function () {
-        this.on('users.id', 'view-active-organization-learners.userId').andOn(
-          'users.isAnonymous',
-          knex.raw('IS'),
-          knex.raw('false'),
-        );
+      .leftJoin('users', function () {
+        this.on('users.id', 'view-active-organization-learners.userId');
       })
       .join('campaign-participations', function () {
-        this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id')
-          .andOn('campaign-participations.userId', 'view-active-organization-learners.userId')
-          .andOnVal('campaign-participations.deletedAt', knex.raw('IS'), knex.raw('NULL'));
+        this.on('campaign-participations.organizationLearnerId', 'view-active-organization-learners.id').andOnVal(
+          'campaign-participations.deletedAt',
+          knex.raw('IS'),
+          knex.raw('NULL'),
+        );
       });
+    countParticipationQuery.where(function () {
+      this.where('users.isAnonymous', false).orWhereNull('users.isAnonymous');
+    });
   }
 
   countParticipationQuery.where({ organizationId: organizationId, isDisabled: false }).first();

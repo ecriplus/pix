@@ -98,7 +98,10 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
         it('from participant with anonymous users linked', async function () {
           // given
           const anonymousUserId = databaseBuilder.factory.buildUser({ isAnonymous: true }).id;
-          buildLearnerWithParticipation({ organizationId, learnerAttributes: { userId: anonymousUserId } });
+          buildLearnerWithParticipation({
+            organizationId,
+            learnerAttributes: { userId: anonymousUserId },
+          });
 
           await databaseBuilder.commit();
 
@@ -110,6 +113,22 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
 
           // then
           expect(organizationParticipants).to.have.lengthOf(0);
+        });
+
+        it('from participant with anonymised users linked', async function () {
+          // given
+          buildLearnerWithParticipation({ organizationId, learnerAttributes: { userId: null } });
+
+          await databaseBuilder.commit();
+
+          // when
+          const { organizationParticipants } =
+            await organizationParticipantRepository.findPaginatedFilteredParticipants({
+              organizationId,
+            });
+
+          // then
+          expect(organizationParticipants).to.have.lengthOf(1);
         });
       });
 
@@ -232,6 +251,23 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
 
         // then
         expect(participantCount).to.equal(0);
+      });
+
+      it('should take into account anonymised users', async function () {
+        // given
+        buildLearnerWithParticipation({ userId: null, organizationId, learnerAttributes: { userId: null } });
+
+        await databaseBuilder.commit();
+
+        // when
+        const {
+          meta: { participantCount },
+        } = await organizationParticipantRepository.findPaginatedFilteredParticipants({
+          organizationId,
+        });
+
+        // then
+        expect(participantCount).to.equal(1);
       });
     });
 
