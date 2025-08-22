@@ -33,13 +33,13 @@
     {
       "plan": "postgresql:postgresql-sandbox",
       "options": {
-        "version": "16.6"
+        "version": "16.9"
       }
     },
     {
       "plan": "redis:redis-sandbox",
       "options": {
-        "version": "7.2.5"
+        "version": "7.2.9"
       }
     }
   ],
