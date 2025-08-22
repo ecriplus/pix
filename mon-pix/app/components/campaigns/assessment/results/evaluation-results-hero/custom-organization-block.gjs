@@ -2,6 +2,7 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import Location from 'mon-pix/utils/location';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
 
@@ -66,14 +67,19 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
   </template>
 }
 
-function buildUrl(baseUrl, params) {
-  const Url = new URL(baseUrl);
-  const urlParams = new URLSearchParams(Url.search);
+function buildUrl(customUrl, params) {
+  let url;
+  try {
+    url = new URL(customUrl);
+  } catch {
+    url = new URL(customUrl, Location.getOrigin());
+  }
+  const urlParams = new URLSearchParams(url.search);
   for (const key in params) {
     if (params[key] !== undefined) {
       urlParams.set(key, params[key]);
     }
   }
-  Url.search = urlParams.toString();
-  return Url.toString();
+  url.search = urlParams.toString();
+  return url.toString();
 }
