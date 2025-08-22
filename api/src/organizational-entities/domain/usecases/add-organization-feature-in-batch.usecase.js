@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../usecases/index.js').OrganizationFeatureRepository} OrganizationFeatureRepository
+ * @typedef {import ('./index.js').OrganizationFeatureRepository} OrganizationFeatureRepository
  */
 
 import { createReadStream } from 'node:fs';
@@ -34,11 +34,14 @@ export const addOrganizationFeatureInBatch = withTransaction(
       }
     });
 
-    data.forEach(async ({ organizationId, deleteLearner }) => {
-      if (deleteLearner) {
-        await learnersApi.deleteOrganizationLearnerBeforeImportFeature({ userId, organizationId });
+    for (const learner of data) {
+      if (learner.deleteLearner) {
+        await learnersApi.deleteOrganizationLearnerBeforeImportFeature({
+          userId,
+          organizationId: learner.organizationId,
+        });
       }
-    });
+    }
 
     return organizationFeatureRepository.saveInBatch(data);
   },

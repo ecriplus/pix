@@ -60,7 +60,7 @@ const repositories = {
 
 const dependencies = Object.assign({}, repositories);
 
-import { addOrganizationFeatureInBatch } from './add-organization-feature-in-batch.js';
+import { addOrganizationFeatureInBatch } from './add-organization-feature-in-batch.usecase.js';
 import { addTagsToOrganizations } from './add-tags-to-organizations.usecase.js';
 import { archiveCertificationCenter } from './archive-certification-center.usecase.js';
 import { archiveCertificationCentersInBatch } from './archive-certification-centers-in-batch.usecase.js';
