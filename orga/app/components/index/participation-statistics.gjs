@@ -13,13 +13,29 @@ export default class ParticipationStatistics extends Component {
     return this.intl.t('components.index.participation-statistics.completion-rate.info');
   }
 
+  get completedParticipationsCount() {
+    return this.args.participationStatistics?.completedParticipationCount || 0;
+  }
+
+  get sharedParticipationCountLastThirtyDays() {
+    return this.args.participationStatistics?.sharedParticipationCountLastThirtyDays || 0;
+  }
+
+  get totalParticipationCount() {
+    return this.args.participationStatistics?.totalParticipationCount || 0;
+  }
+
   get completionRateDescription() {
-    const completed = 12;
-    const started = 20;
     return this.intl.t('components.index.participation-statistics.completion-rate.description', {
-      completed,
-      started,
+      completed: this.completedParticipationsCount,
+      started: this.totalParticipationCount,
     });
+  }
+
+  get completionRatePercentage() {
+    return this.totalParticipationCount === 0
+      ? '0%'
+      : Math.round((this.completedParticipationsCount / this.totalParticipationCount) * 100) + '%';
   }
 
   get completedParticipationsTitle() {
@@ -42,11 +58,8 @@ export default class ParticipationStatistics extends Component {
         @color="success"
         @iconName="speed"
         @info={{this.completionRateInfo}}
-        @infoLabel={{this.infoLabel}}
-        @isLoading={{this.isLoading}}
-        @loadingMessage={{this.loadingMessage}}
       >
-        <:default>78%</:default>
+        <:default>{{this.completionRatePercentage}}</:default>
         <:sub>
           {{this.completionRateDescription}}
         </:sub>
@@ -57,11 +70,8 @@ export default class ParticipationStatistics extends Component {
         @color="tertiary"
         @iconName="inboxIn"
         @info={{this.completedParticipationsInfo}}
-        @infoLabel={{this.infoLabel}}
-        @isLoading={{this.isLoading}}
-        @loadingMessage={{this.loadingMessage}}
       >
-        <:default>78</:default>
+        <:default>{{this.sharedParticipationCountLastThirtyDays}}</:default>
         <:sub>
           {{this.completedParticipationsDescription}}
         </:sub>

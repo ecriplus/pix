@@ -47,6 +47,6 @@ export default class IndexClassic extends Component {
 
     </ActionCardsList>
 
-    <ParticipationStatistics />
+    <ParticipationStatistics @participationStatistics={{@participationStatistics}} />
   </template>
 }

@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class IndexRoute extends Route {
+  @service('store') store;
   @service router;
   @service currentUser;
 
@@ -14,5 +15,11 @@ export default class IndexRoute extends Route {
       return;
     }
     return this.router.replaceWith(this.currentUser.homePage);
+  }
+
+  async model() {
+    return await this.store.queryRecord('participation-statistic', {
+      organizationId: this.currentUser.organization.id,
+    });
   }
 }
