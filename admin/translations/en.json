@@ -941,15 +941,15 @@
       "table": {
         "caption": "Table listing the certifications for a session. It shows the unique identifier, the first and last name of the candidate, the status and score of the certification, the impacting alerts to be resolved, the presence of another past certification and the start and end dates of the session.",
         "headers": {
-          "finished-certification-date": "Fin",
-          "first-name": "Prénom",
+          "finished-certification-date": "End",
+          "first-name": "First name",
           "id": "ID",
-          "last-name": "Nom",
-          "other-certification": "Autre certification",
+          "last-name": "Last name",
+          "other-certification": "Certification passed",
           "pix-score": "Score",
-          "started-certification-date": "Début",
-          "status": "Statut",
-          "unresolved-reports": "Signalements impactants non résolus"
+          "started-certification-date": "Start",
+          "status": "Status",
+          "unresolved-reports": "Unresolved reports"
         }
       },
       "title": "Certifications"

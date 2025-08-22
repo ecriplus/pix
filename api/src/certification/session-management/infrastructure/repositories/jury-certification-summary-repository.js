@@ -4,7 +4,6 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
-import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { JuryCertificationSummary } from '../../domain/read-models/JuryCertificationSummary.js';
 
 const findBySessionId = async function ({ sessionId }) {
@@ -14,8 +13,7 @@ const findBySessionId = async function ({ sessionId }) {
 
   const juryCertificationSummaryDTOs = await _getJuryCertificationSummaries(orderResults);
 
-  const juryCertificationSummaries = _.map(juryCertificationSummaryDTOs, _toDomain);
-  return juryCertificationSummaries;
+  return _.map(juryCertificationSummaryDTOs, _toDomain);
 };
 
 const findBySessionIdPaginated = async function ({ page, sessionId }) {
@@ -59,7 +57,10 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       assessmentResultStatus: 'assessment-results.status',
       assessmentState: 'assessments.state',
     })
-    .select({ complementaryCertificationTakenLabel: 'complementary-certification-badges.label' })
+    .select({
+      complementaryCertificationLabelObtained: 'complementary-certifications.label',
+      complementaryCertificationKeyObtained: 'complementary-certifications.key',
+    })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
     .leftJoin(
@@ -77,19 +78,10 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       'complementary-certification-courses.certificationCourseId',
       'certification-courses.id',
     )
-    .leftJoin('complementary-certification-course-results', function () {
-      this.on(
-        'complementary-certification-course-results.complementaryCertificationCourseId',
-        'complementary-certification-courses.id',
-      ).andOnVal(
-        'complementary-certification-course-results.source',
-        ComplementaryCertificationCourseResult.sources.PIX,
-      );
-    })
     .leftJoin(
-      'complementary-certification-badges',
-      'complementary-certification-badges.id',
-      'complementary-certification-course-results.complementaryCertificationBadgeId',
+      'complementary-certifications',
+      'complementary-certifications.id',
+      'complementary-certification-courses.complementaryCertificationId',
     )
     .whereIn('certification-courses.id', orderedCertificationCourseIds);
 

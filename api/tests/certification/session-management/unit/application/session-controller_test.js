@@ -1,5 +1,6 @@
 import { sessionController } from '../../../../../src/certification/session-management/application/session-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
+import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Session', function () {
@@ -105,6 +106,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
   describe('#getJuryCertificationSummaries ', function () {
     it('should return jury certification summaries', async function () {
       // given
+      const i18n = getI18n();
       const sessionId = 1;
       const juryCertificationSummaries = { juryCertificationSummaries: 'tactac', pagination: {} };
       const juryCertificationSummariesJSONAPI = 'someSummariesJSONApi';
@@ -112,6 +114,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       const pagination = Symbol('pagination');
 
       const request = {
+        i18n,
         params: { sessionId },
         query: { page: { size: 30, number: 3 } },
         auth: {

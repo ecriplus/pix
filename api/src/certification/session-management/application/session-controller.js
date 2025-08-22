@@ -1,3 +1,4 @@
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as sessionValidator from '../../shared/domain/validators/session-validator.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as juryCertificationSummaryRepository from '../infrastructure/repositories/jury-certification-summary-repository.js';
@@ -48,13 +49,16 @@ const getJuryCertificationSummaries = async function (
 ) {
   const { sessionId } = request.params;
   const { page } = request.query;
+  const i18n = await getI18nFromRequest(request);
 
   const { juryCertificationSummaries, pagination } =
     await dependencies.juryCertificationSummaryRepository.findBySessionIdPaginated({
       sessionId,
       page,
     });
-  return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination);
+  return dependencies.juryCertificationSummarySerializer.serialize(juryCertificationSummaries, pagination, {
+    translate: i18n.__,
+  });
 };
 
 const sessionController = {
