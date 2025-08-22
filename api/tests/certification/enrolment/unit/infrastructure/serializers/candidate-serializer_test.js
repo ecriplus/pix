@@ -1,7 +1,7 @@
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/candidate-serializer.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { CertificationCandidate } from '../../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Serializer | candidate', function () {

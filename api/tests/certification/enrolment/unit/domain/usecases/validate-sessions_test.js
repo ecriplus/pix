@@ -4,9 +4,9 @@ import { validateSessions } from '../../../../../../src/certification/enrolment/
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { CERTIFICATION_SESSIONS_ERRORS } from '../../../../../../src/certification/shared/domain/constants/sessions-errors.js';
+import { CertificationCandidate } from '../../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
 import { CpfBirthInformationValidation } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 

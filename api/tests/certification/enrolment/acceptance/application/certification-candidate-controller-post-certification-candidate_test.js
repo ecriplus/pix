@@ -1,6 +1,6 @@
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
+import { CertificationCandidate } from '../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationCandidate } from '../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
 import {
   createServer,

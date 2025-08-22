@@ -8,7 +8,7 @@ import * as url from 'node:url';
 
 import _ from 'lodash';
 
-import { CertificationCandidate } from '../../../../../shared/domain/models/CertificationCandidate.js';
+import { CertificationCandidate } from '../../../../shared/domain/models/CertificationCandidate.js';
 import * as readOdsUtils from '../../utils/ods/read-ods-utils.js';
 import { OdsUtilsBuilder } from '../../utils/ods/write-ods-utils.js';
 import { CandidateData } from './CandidateData.js';
