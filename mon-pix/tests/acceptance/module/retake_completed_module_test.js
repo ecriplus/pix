@@ -16,9 +16,14 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       instruction: 'instruction',
       isAnswerable: true,
       proposals: [
-        { id: 'qcu-1-proposal-1', content: 'I am the wrong answer!' },
-        { id: 'qcu-1-proposal-2', content: 'I am the right answer!' },
+        { id: 'qcu-1-proposal-1', content: 'I am the wrong answer!', feedback: { state: 'wrong answer' } },
+        {
+          id: 'qcu-1-proposal-2',
+          content: 'I am the right answer!',
+          feedback: { state: "Bravo ! C'est la bonne réponse." },
+        },
       ],
+      solution: 'qcu-1-proposal-2',
     };
 
     const grain1 = {
@@ -78,7 +83,6 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     await click(verifyButton);
 
     assert.dom(screen.queryByText("Bravo ! C'est la bonne réponse.")).exists();
-
     const continueButton = screen.getByRole('button', { name: 'Continuer' });
     await click(continueButton);
 
@@ -98,6 +102,6 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     assert.dom(screen.queryByText("Bravo ! C'est la bonne réponse.")).doesNotExist();
 
     assert.dom(screen.queryByRole('button', { name: 'Continuer' })).doesNotExist();
-    assert.dom(screen.queryByRole('button', { name: 'Passer l‘activité' })).exists();
+    assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).exists();
   });
 });
