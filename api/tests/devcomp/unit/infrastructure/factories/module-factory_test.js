@@ -1775,7 +1775,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
         expect(module.sections[0].grains[0].components[0].steps[0]).to.be.an.instanceOf(Step);
-        expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QCU);
+        expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QCUDeclarative);
       });
 
       it('should instantiate a Module with a ComponentStepper which contains a QCM Element', function () {

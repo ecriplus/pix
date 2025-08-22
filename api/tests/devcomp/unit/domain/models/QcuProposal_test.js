@@ -42,4 +42,18 @@ describe('Unit | Devcomp | Domain | Models | QcuProposal', function () {
       expect(error.message).to.equal('The content is required for a QCU proposal.');
     });
   });
+
+  describe('A QCU proposal without feedback', function () {
+    it('should throw an error', function () {
+      // given
+      const content = 'vrai';
+
+      // when
+      const error = catchErrSync(() => new QcuProposal({ id: '1', content }))();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The feedback is required for a QCU proposal.');
+    });
+  });
 });

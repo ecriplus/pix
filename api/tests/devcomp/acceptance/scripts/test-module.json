@@ -211,17 +211,16 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vrai"
+                          "content": "Vrai",
+                          "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
                         },
                         {
                           "id": "2",
-                          "content": "Faux"
+                          "content": "Faux",
+                          "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
                         }
                       ],
-                      "feedbacks": {
-                        "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>",
-                        "invalid": "<span class=\"feedback__state\">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
-                      },
+
                       "solution": "1"
                     }
                   ]
@@ -235,17 +234,15 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vrai"
+                          "content": "Vrai",
+                          "feedback": "<span class=\"feedback__state\">Incorrect.</span><p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
                         },
                         {
                           "id": "2",
-                          "content": "Faux"
+                          "content": "Faux",
+                          "feedback": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Bien vu !</p>"
                         }
                       ],
-                      "feedbacks": {
-                        "valid": "<span class=\"feedback__state\">Correct&#8239;!</span><p> Bien vu !</p>",
-                        "invalid": "<span class=\"feedback__state\">Incorrect.</span><p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
-                      },
                       "solution": "2"
                     }
                   ]
@@ -259,11 +256,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vrai"
+                          "content": "Vrai",
+                          "feedback": { "diagnosis": "Bonne réponse !" }
                         },
                         {
                           "id": "2",
-                          "content": "Faux"
+                          "content": "Faux",
+                          "feedback": { "diagnosis": "Mauvaise réponse !" }
+
                         }
                       ]
                     }

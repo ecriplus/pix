@@ -10,12 +10,10 @@ import { QCU } from './QCU.js';
 class QCUForAnswerVerification extends QCU {
   userResponse;
   constructor({ id, instruction, locales, proposals, solution, validator }) {
-    super({ id, instruction, locales, proposals });
+    super({ id, instruction, locales, proposals, solution: { value: solution } });
 
     assertNotNullOrUndefined(solution, 'The solution is required for a verification QCU');
     this.#assertSolutionIsAnExistingProposal(solution, proposals);
-
-    this.solution = { value: solution };
 
     if (validator) {
       this.validator = validator;

@@ -338,8 +338,9 @@ function getComponents() {
     new ComponentElement({
       element: new QCU({
         id: '2',
-        proposals: [{ id: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6', content: 'toto' }],
+        proposals: [{ id: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6', content: 'toto', feedback: 'Bonne réponse !' }],
         instruction: 'hello',
+        solution: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6',
       }),
     }),
     new ComponentElement({
@@ -518,9 +519,11 @@ function getAttributesComponents() {
           {
             content: 'toto',
             id: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6',
+            feedback: 'Bonne réponse !',
           },
         ],
         type: 'qcu',
+        solution: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6',
       },
     },
     {
@@ -529,7 +532,6 @@ function getAttributesComponents() {
         id: 'af447a7b-6790-4b3b-b83e-296e6618ca31',
         instruction: 'question declarative',
         isAnswerable: true,
-        locales: undefined,
         proposals: [
           {
             content: 'plop',

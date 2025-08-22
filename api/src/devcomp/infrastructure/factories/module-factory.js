@@ -253,8 +253,10 @@ export class ModuleFactory {
         return new QcuProposal({
           id: proposal.id,
           content: proposal.content,
+          feedback: proposal.feedback,
         });
       }),
+      solution: element.solution,
     });
   }
 

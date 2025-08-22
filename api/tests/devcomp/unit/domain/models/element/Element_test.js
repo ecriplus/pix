@@ -13,6 +13,7 @@ describe('Unit | Devcomp | Domain | Models | Element', function () {
         instruction: 'instruction',
         locales: ['fr-FR'],
         proposals: [Symbol('proposal1'), Symbol('proposal2')],
+        solution: 'proposal1',
       });
 
       const qrocm = new QROCM({
