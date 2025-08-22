@@ -36,8 +36,6 @@ export const createCombinedCourses = withTransaction(
             targetProfileId: targetProfile.id,
             creatorId: parseInt(creatorId),
             ownerId: parseInt(creatorId),
-            type: 'ASSESSMENT',
-            multipleSendings: false,
             name: targetProfile.internalName,
             title: targetProfile.name,
             customResultPageButtonUrl: combinedCourseUrl,

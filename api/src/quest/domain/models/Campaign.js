@@ -7,9 +7,7 @@ export class Campaign {
     organizationId,
     creatorId,
     ownerId,
-    type,
     title,
-    multipleSendings,
     customResultPageButtonUrl,
     customResultPageButtonText,
   }) {
@@ -20,8 +18,6 @@ export class Campaign {
     this.organizationId = organizationId;
     this.creatorId = creatorId;
     this.ownerId = ownerId;
-    this.type = type;
-    this.multipleSendings = multipleSendings;
     this.title = title;
     this.customResultPageButtonUrl = customResultPageButtonUrl;
     this.customResultPageButtonText = customResultPageButtonText;
