@@ -1,6 +1,6 @@
 import { PasswordNotMatching } from '../../../../../src/identity-access-management/domain/errors.js';
+import { ApplicationAccessToken } from '../../../../../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { authenticateApplication } from '../../../../../src/identity-access-management/domain/usecases/authenticate-application.js';
-import { config } from '../../../../../src/shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidCredentialsError,
@@ -121,23 +121,18 @@ describe('Unit | Usecase | authenticate-application', function () {
             .withArgs({ password: payload.clientSecret, passwordHash: application.clientSecret })
             .resolves();
 
-          const tokenService = {
-            createAccessTokenFromApplication: sinon.stub(),
-          };
-          const expectedToken = Symbol('Mon Super token');
-          tokenService.createAccessTokenFromApplication
-            .withArgs(
-              application.clientId,
-              application.name,
-              payload.scope,
-              config.authentication.secret,
-              config.authentication.accessTokenLifespanMs,
-            )
-            .resolves(expectedToken);
+          const expectedToken = 'Mon Super token';
+          sinon
+            .stub(ApplicationAccessToken, 'generate')
+            .withArgs({
+              clientId: application.clientId,
+              source: application.name,
+              scope: payload.scope,
+            })
+            .returns(expectedToken);
 
           const token = await authenticateApplication({
             ...payload,
-            tokenService,
             clientApplicationRepository,
             cryptoService,
           });

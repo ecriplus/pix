@@ -21,32 +21,6 @@ function encodeToken(payload, secret, options) {
   return jsonwebtoken.sign(payload, secret, options);
 }
 
-/**
- * @param {string} clientId
- * @param {string} source
- * @param {string | string[]} scope
- * @param {string} secret
- * @param {number | string} expiresIn
- * @returns {string}
- */
-function createAccessTokenFromApplication(
-  clientId,
-  source,
-  scope,
-  secret = config.authentication.secret,
-  expiresIn = config.authentication.accessTokenLifespanMs,
-) {
-  return jsonwebtoken.sign(
-    {
-      client_id: clientId,
-      source,
-      scope: Array.isArray(scope) ? scope.join(' ') : scope,
-    },
-    secret,
-    { expiresIn },
-  );
-}
-
 function createIdTokenForUserReconciliation(externalUser) {
   return jsonwebtoken.sign(
     {
@@ -167,11 +141,6 @@ function extractUserId(token) {
   return decoded.user_id || null;
 }
 
-function extractClientId(token, secret = config.authentication.secret) {
-  const decoded = getDecodedToken(token, secret);
-  return decoded.client_id || null;
-}
-
 async function extractExternalUserFromIdToken(token) {
   const externalUser = getDecodedToken(token);
 
@@ -188,7 +157,6 @@ async function extractExternalUserFromIdToken(token) {
   };
 }
 const tokenService = {
-  createAccessTokenFromApplication,
   createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
@@ -202,7 +170,6 @@ const tokenService = {
   extractCertificationResultsLink,
   extractTokenFromAuthChain,
   extractUserId,
-  extractClientId,
 };
 
 /**
@@ -210,7 +177,6 @@ const tokenService = {
  */
 
 export {
-  createAccessTokenFromApplication,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
   createIdTokenForUserReconciliation,
@@ -218,7 +184,6 @@ export {
   decodeIfValid,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,
-  extractClientId,
   extractExternalUserFromIdToken,
   extractSamlId,
   extractTokenFromAuthChain,

@@ -10,73 +10,11 @@ import {
   InvalidTemporaryKeyError,
 } from '../../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, expect } from '../../../../test-helper.js';
 
 const { omit } = lodash;
 
 describe('Unit | Shared | Domain | Services | Token Service', function () {
-  describe('#createAccessTokenFromApplication', function () {
-    it('should create access token with client id, source and scope', function () {
-      // given
-      const clientId = 'client id';
-      const source = 'client application';
-      const scope = 'organizations';
-      const secret = 'a secret';
-      const accessTokenLifespanMs = 1000;
-
-      const payload = { client_id: clientId, source, scope };
-      const options = { expiresIn: accessTokenLifespanMs };
-
-      const expectedAccessToken = Symbol('expectedAccessToken');
-
-      sinon.stub(jsonwebtoken, 'sign').returns(expectedAccessToken);
-
-      // when
-      const result = tokenService.createAccessTokenFromApplication(
-        clientId,
-        source,
-        scope,
-        secret,
-        accessTokenLifespanMs,
-      );
-
-      // then
-      expect(result).to.be.equal(expectedAccessToken);
-      expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);
-    });
-
-    describe('when scope contains an array of several', function () {
-      it('should join scopes separated by spaces', function () {
-        // given
-        const clientId = 'client id';
-        const source = 'client application';
-        const scope = ['organizations', 'campaigns'];
-        const secret = 'a secret';
-        const accessTokenLifespanMs = 1000;
-
-        const payload = { client_id: clientId, source, scope: 'organizations campaigns' };
-        const options = { expiresIn: accessTokenLifespanMs };
-
-        const expectedAccessToken = Symbol('expectedAccessToken');
-
-        sinon.stub(jsonwebtoken, 'sign').returns(expectedAccessToken);
-
-        // when
-        const result = tokenService.createAccessTokenFromApplication(
-          clientId,
-          source,
-          scope,
-          secret,
-          accessTokenLifespanMs,
-        );
-
-        // then
-        expect(result).to.be.equal(expectedAccessToken);
-        expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);
-      });
-    });
-  });
-
   describe('#createIdTokenForUserReconciliation', function () {
     it('should return a valid idToken with firstName, lastName, samlId', function () {
       // given
