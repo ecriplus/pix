@@ -38,6 +38,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         id: 2,
         label: 'Cléa Numérique',
         key: ComplementaryCertificationKeys.CLEA,
+        hasComplementaryReferential: false,
       });
       await databaseBuilder.commit();
 
@@ -54,6 +55,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
             attributes: {
               label: 'Pix+ Edu 1er degré',
               key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+              'has-complementary-referential': true,
             },
           },
           {
@@ -62,6 +64,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
             attributes: {
               label: 'Cléa Numérique',
               key: ComplementaryCertificationKeys.CLEA,
+              'has-complementary-referential': false,
             },
           },
         ],

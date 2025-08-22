@@ -30,7 +30,14 @@ export default class List extends Component {
             {{t "components.complementary-certifications.list.name"}}
           </:header>
           <:cell>
-            <LinkTo @route="authenticated.complementary-certifications.item.framework" @model={{row.id}}>
+            <LinkTo
+              @route={{if
+                row.hasComplementaryReferential
+                "authenticated.complementary-certifications.item.framework"
+                "authenticated.complementary-certifications.item.target-profile"
+              }}
+              @model={{row.id}}
+            >
               {{row.label}}
             </LinkTo>
           </:cell>

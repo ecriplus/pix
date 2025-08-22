@@ -61,6 +61,7 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
         id: 1,
         key: 'AN',
         label: 'TOINE',
+        hasComplementaryReferential: true,
         targetProfilesHistory: [
           {
             id: 52,

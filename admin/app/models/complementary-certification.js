@@ -5,6 +5,7 @@ export default class ComplementaryCertification extends Model {
   @attr() label;
   @attr() hasExternalJury;
   @attr() targetProfilesHistory;
+  @attr() hasComplementaryReferential;
 
   @hasMany('complementary-certification-badge', { async: false, inverse: 'complementaryCertification' })
   complementaryCertificationBadges;

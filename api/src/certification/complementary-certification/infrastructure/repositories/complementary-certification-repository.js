@@ -14,7 +14,10 @@ function _toDomain(row) {
 }
 
 const findAll = async function () {
-  const result = await knex.from('complementary-certifications').select('id', 'label', 'key').orderBy('id', 'asc');
+  const result = await knex
+    .from('complementary-certifications')
+    .select('id', 'label', 'key', 'hasComplementaryReferential')
+    .orderBy('id', 'asc');
 
   return result.map(_toDomain);
 };

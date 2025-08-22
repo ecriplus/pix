@@ -26,6 +26,7 @@ describe('Integration | Certification | Repository | complementary-certification
           id: 4,
           key: 'CLEA',
           label: 'CléA Numérique',
+          hasComplementaryReferential: false,
         });
 
         await databaseBuilder.commit();
@@ -54,6 +55,7 @@ describe('Integration | Certification | Repository | complementary-certification
             id: 4,
             key: 'CLEA',
             label: 'CléA Numérique',
+            hasComplementaryReferential: false,
           }),
         ];
 
