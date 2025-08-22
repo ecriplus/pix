@@ -52,7 +52,7 @@ const schema = Joi.object({
     is: Joi.string().required().valid(CampaignTypes.PROFILES_COLLECTION),
     then: Joi.valid(null),
     otherwise: Joi.when('customResultPageButtonText', {
-      then: Joi.string().uri().required(),
+      then: Joi.string().uri({ allowRelative: true }).required(),
       otherwise: Joi.string().allow(null).default(null),
     }),
   }).messages({
