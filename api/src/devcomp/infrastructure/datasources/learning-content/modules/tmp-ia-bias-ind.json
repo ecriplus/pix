@@ -329,14 +329,14 @@
                     "id": "1",
                     "content": "<p>taboulé à la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse, c’est que votre sélection a montré.<br>Mais en réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"130\" alt=\"images du resultat\"></p>"
+                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse, c’est que votre sélection a montré.<br>Mais en réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"400\" alt=\"images du resultat\"></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>taboulé au persil<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien pensé, vous avez cru à un piège ?<br>En réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"130\" alt=\"images du resultat\"></p>"
+                      "diagnosis": "<p>Bien pensé, vous avez cru à un piège ?<br>En réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.png\" height=\"400\" alt=\"images du resultat\"></p>"
                     }
                   }
                 ],
