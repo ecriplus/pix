@@ -458,7 +458,7 @@
                 {
                   "elements": [
                     {
-                      "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
+                      "id": "274394d5-c33a-4e93-9889-c770f5e039d9",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Sato-couple-fran%C3%A7ais.jpg",
                       "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
@@ -467,7 +467,7 @@
                       "licence": ""
                     },
                     {
-                      "id": "dd63f76b-cc9c-4dcd-a8e8-5aa2f349c29b",
+                      "id": "2969727b-55aa-4661-a720-9749780b3924",
                       "type": "qcu-discovery",
                       "instruction": "<p>Pourquoi Satô est d’accord avec la réponse de l’IA ?</p>",
                       "proposals": [
