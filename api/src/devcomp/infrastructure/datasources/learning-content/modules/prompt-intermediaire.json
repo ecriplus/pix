@@ -287,13 +287,9 @@
                       "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
                     },
                     {
-                      "id": "b8786ceb-928f-4d8a-9fe1-9d8ff43882ec",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/tableaumanchette/travailmanchette.png",
-                      "alt": "Un tableau d'exercice pour travailler la manchette",
-                      "alternativeText": "<p>Un tableau avec 3 exercices pour travailler la manchette selon son niveau (débutant, intermédiaire, avancé)</p>",
-                      "legend": "",
-                      "licence": ""
+                      "id": "5bdf0bdf-44fa-463f-8e35-ebc08328d39a",
+                      "type": "text",
+                      "content": "<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">Niveau</th>\n      <th scope=\"col\">Exercice</th>\n      <th scope=\"col\">Description</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>Débutant</th>\n      <td>Manchette contre le mur</td>\n      <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n    </tr>\n    <tr>\n      <th>Intermédiaire</th>\n      <td>Triangle manchettes</td>\n      <td>Trois joueurs forment un triange et se passent le ballon en manchette</td>\n    </tr>\n    <tr>\n      <th>Avancé</th>\n      <td>Réception de service réél</td>\n      <td>Un joueur reçoit des services puissants en manchette</td>\n    </tr>\n  </tbody>\n</table>"
                     },
                     {
                       "id": "055c7956-d282-4d08-a0a3-3e51dc5a13c8",
