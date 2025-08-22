@@ -64,16 +64,6 @@ function createCertificationResultsLinkToken({ sessionId }) {
   );
 }
 
-function createPasswordResetToken(userId) {
-  return jsonwebtoken.sign(
-    {
-      user_id: userId,
-    },
-    config.authentication.secret,
-    { expiresIn: config.authentication.passwordResetTokenLifespan },
-  );
-}
-
 function extractTokenFromAuthChain(authChain) {
   if (!authChain) {
     return authChain;
@@ -160,7 +150,6 @@ const tokenService = {
   createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  createPasswordResetToken,
   decodeIfValid,
   getDecodedToken,
   encodeToken,
@@ -180,7 +169,6 @@ export {
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
   createIdTokenForUserReconciliation,
-  createPasswordResetToken,
   decodeIfValid,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,

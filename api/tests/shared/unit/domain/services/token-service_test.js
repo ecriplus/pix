@@ -336,18 +336,4 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal(expectedTokenAttributes);
     });
   });
-
-  describe('#createPasswordResetToken', function () {
-    it('should return a valid token with userId', function () {
-      // given
-      const userId = 1;
-
-      // when
-      const token = tokenService.createPasswordResetToken(userId);
-
-      // then
-      const decodedToken = jsonwebtoken.verify(token, settings.authentication.secret);
-      expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal({ user_id: userId });
-    });
-  });
 });

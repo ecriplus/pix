@@ -76,7 +76,7 @@ describe('Unit | Identity Access Management | Application | Controller | passwor
         payload: {
           data: {
             attributes: {
-              'password-reset-token': 'PASSWORD_RESET_TOKEN',
+              'password-reset-token': 'PASSWORD_EXPIRATION_TOKEN',
               'new-password': 'Password123',
             },
           },
@@ -85,7 +85,7 @@ describe('Unit | Identity Access Management | Application | Controller | passwor
       sinon.stub(usecases, 'updateExpiredPassword');
       usecases.updateExpiredPassword
         .withArgs({
-          passwordResetToken: 'PASSWORD_RESET_TOKEN',
+          passwordExpirationToken: 'PASSWORD_EXPIRATION_TOKEN',
           newPassword: 'Password123',
         })
         .resolves('beth.rave1221');

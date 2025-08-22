@@ -1,6 +1,6 @@
+import { PasswordExpirationToken } from '../../../../../src/identity-access-management/domain/models/PasswordExpirationToken.js';
 import { resetPasswordService } from '../../../../../src/identity-access-management/domain/services/reset-password.service.js';
 import { config } from '../../../../../src/shared/config.js';
-import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Application | Route | password', function () {
@@ -157,19 +157,17 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
     context('Success cases', function () {
       it('returns 201 HTTP status code', async function () {
         // given
-        const user = databaseBuilder.factory.buildUser.withRawPassword({
-          shouldChangePassword: true,
-        });
+        const user = databaseBuilder.factory.buildUser.withRawPassword({ shouldChangePassword: true });
         await databaseBuilder.commit();
-        const passwordResetToken = tokenService.createPasswordResetToken(user.id);
 
+        const passwordExpirationToken = PasswordExpirationToken.generate({ userId: user.id });
         const options = {
           method: 'POST',
           url: '/api/expired-password-updates',
           payload: {
             data: {
               attributes: {
-                'password-reset-token': passwordResetToken,
+                'password-reset-token': passwordExpirationToken,
                 'new-password': 'Password02',
               },
             },
@@ -188,19 +186,17 @@ describe('Acceptance | Identity Access Management | Application | Route | passwo
       context('when shouldChangePassword is false', function () {
         it('responds 403 HTTP status code', async function () {
           // given
-          const user = databaseBuilder.factory.buildUser.withRawPassword({
-            shouldChangePassword: false,
-          });
+          const user = databaseBuilder.factory.buildUser.withRawPassword({ shouldChangePassword: false });
           await databaseBuilder.commit();
-          const passwordResetToken = tokenService.createPasswordResetToken(user.id);
 
+          const passwordExpirationToken = PasswordExpirationToken.generate({ userId: user.id });
           const options = {
             method: 'POST',
             url: '/api/expired-password-updates',
             payload: {
               data: {
                 attributes: {
-                  'password-reset-token': passwordResetToken,
+                  'password-reset-token': passwordExpirationToken,
                   'new-password': 'Password02',
                 },
               },
