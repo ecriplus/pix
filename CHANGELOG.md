@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.189.0](https://github.com/1024pix/pix/compare/v5.188.0...v5.189.0) (2025-08-22)
+
+### :rocket: Amélioration
+
+- [#13241](https://github.com/1024pix/pix/pull/13241) Ajouter des vérifications sur les routes des parcours combinés (PIX-19104) 
+- [#13215](https://github.com/1024pix/pix/pull/13215) Ajouter la statistique des participations partagées les 30 derniers jours (PIX-18956) 
+- [#13261](https://github.com/1024pix/pix/pull/13261) Créer un helper pour les tests de rôles sur les endpoints (PIX-19205) 
+- [#13197](https://github.com/1024pix/pix/pull/13197) Permettre de créer des parcours combinés depuis PixAdmin (PIX-18162) 
+- [#13247](https://github.com/1024pix/pix/pull/13247) Récupérer la locale depuis le cookie sous FT (PIX-18980) 
+- [#13253](https://github.com/1024pix/pix/pull/13253) Renommer les fichiers index.js de route (PIX-19201) 
+
+### :bug: Correction
+
+- [#13254](https://github.com/1024pix/pix/pull/13254) Récupérer les épreuves fr-FR à la création d'un référentiel cadre (PIX-19208). 
+- [#13257](https://github.com/1024pix/pix/pull/13257) Réparer la validation de mot de passe lors de création de compte sco (PIX-19209) 
+- [#13258](https://github.com/1024pix/pix/pull/13258) Utiliser les challenges des référentiels cadres en cas de simulation de complémentaire (PIX-19189). 
+
+### :building_construction: Tech
+
+- [#12926](https://github.com/1024pix/pix/pull/12926) :broom: Nettoyage de plusieurs imports 
+- [#13268](https://github.com/1024pix/pix/pull/13268) Mettre à jour les versions de postgresql et redis des review apps 
+- [#13237](https://github.com/1024pix/pix/pull/13237) Renommer extractLocaleFromRequest en getChallengeLocale 
+
+### :arrow_up: Montée de version
+
+- [#13275](https://github.com/1024pix/pix/pull/13275) Lock file maintenance (orga) 
+- [#13252](https://github.com/1024pix/pix/pull/13252) Update dependency @1024pix/pix-ui to ^55.25.3 (orga) 
+- [#13225](https://github.com/1024pix/pix/pull/13225) Update dependency webpack to v5.101.0 (junior) 
+- [#13272](https://github.com/1024pix/pix/pull/13272) Update dependency webpack to v5.101.2 (junior) 
+- [#13235](https://github.com/1024pix/pix/pull/13235) Update nginx Docker tag to v1.29.1
+
 # [5.188.0](https://github.com/1024pix/pix/compare/v5.187.0...v5.188.0) (2025-08-21)
 
 ### :rocket: Amélioration
