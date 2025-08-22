@@ -1,7 +1,9 @@
+import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { trainingController } from '../../../../../src/devcomp/application/trainings/training-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/trainings/training-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { getAdminRoleStub } from '../../../../tooling/security-pre-handlers-helpers.js';
 
 describe('Integration | Devcomp | Application | Trainings | Router | training-router', function () {
   describe('GET /api/admin/trainings/${trainingId}', function () {
@@ -9,15 +11,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
       it('should allow user if its role is SUPER_ADMIN', async function () {
         // given
         sinon.stub(trainingController, 'getById').returns('ok');
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-          .callsFake((request, h) => h.response(true));
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.SUPER_ADMIN);
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -25,19 +19,14 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         await httpTestServer.request('GET', '/api/admin/trainings/1');
 
         // then
-        sinon.assert.calledOnce(trainingController.getById);
+        expect(preHandlerStub).to.have.been.calledOnce;
+        expect(trainingController.getById).to.have.been.calledOnce;
       });
 
       it('should allow user if the role is METIER', async function () {
         // given
         sinon.stub(trainingController, 'getById').returns('ok');
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.METIER);
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -45,19 +34,14 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         await httpTestServer.request('GET', '/api/admin/trainings/1');
 
         // then
-        sinon.assert.calledOnce(trainingController.getById);
+        expect(preHandlerStub).to.have.been.calledOnce;
+        expect(trainingController.getById).to.have.been.calledOnce;
       });
 
       it('should allow user if the role is SUPPORT', async function () {
         // given
         sinon.stub(trainingController, 'getById').returns('ok');
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport').callsFake((request, h) => h.response(true));
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.SUPPORT);
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -65,21 +49,14 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         await httpTestServer.request('GET', '/api/admin/trainings/1');
 
         // then
-        sinon.assert.calledOnce(trainingController.getById);
+        expect(preHandlerStub).to.have.been.calledOnce;
+        expect(trainingController.getById).to.have.been.calledOnce;
       });
 
       it('should return 403 it if the role is not allowed', async function () {
         // given
         sinon.stub(trainingController, 'getById').returns('not ok');
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
-        sinon
-          .stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier')
-          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.CERTIF);
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -88,7 +65,8 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
 
         // then
         expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(trainingController.getById);
+        expect(preHandlerStub).not.to.have.been.calledOnce;
+        expect(trainingController.getById).not.to.have.been.calledOnce;
       });
     });
 
@@ -1767,24 +1745,31 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
     const method = 'GET';
     const url = '/api/admin/trainings/1/target-profiles/2/organizations';
 
-    context('when user has role "SUPER_ADMIN", "SUPPORT" or "METIER"', function () {
-      it('should return a response with an HTTP status code 200', async function () {
+    context('when role is "SUPER_ADMIN"', function () {
+      it('should allow access', async function () {
         // given
-        const prehandlersStub = sinon
-          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-          .callsFake(
-            () => (request, h) =>
-              h
-                .response({ errors: new Error('forbidden') })
-                .code(403)
-                .takeover(),
-          )
-          .withArgs([
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-            securityPreHandlers.checkAdminMemberHasRoleSupport,
-            securityPreHandlers.checkAdminMemberHasRoleMetier,
-          ])
-          .callsFake(() => (request, h) => h.response(true));
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.SUPER_ADMIN);
+
+        sinon
+          .stub(trainingController, 'findPaginatedFilteredOrganizations')
+          .callsFake((request, h) => h.response('ok').code(200));
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(method, url);
+
+        // then
+        expect(preHandlerStub).to.have.been.calledOnce;
+        expect(response.statusCode).to.equal(200);
+      });
+    });
+
+    context('when role is "SUPPORT"', function () {
+      it('should allow access', async function () {
+        // given
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.SUPPORT);
 
         sinon
           .stub(trainingController, 'findPaginatedFilteredOrganizations')
@@ -1793,42 +1778,48 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         await httpTestServer.register(moduleUnderTest);
 
         // when
-
         const response = await httpTestServer.request(method, url);
 
         // then
-        expect(prehandlersStub).to.have.been.calledOnce;
+        expect(preHandlerStub).to.have.been.calledOnce;
         expect(response.statusCode).to.equal(200);
       });
     });
 
-    context('when user has role "CERTIF"', function () {
+    context('when role is "METIER"', function () {
+      it('should allow access', async function () {
+        // given
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.METIER);
+
+        sinon
+          .stub(trainingController, 'findPaginatedFilteredOrganizations')
+          .callsFake((request, h) => h.response('ok').code(200));
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(method, url);
+
+        // then
+        expect(preHandlerStub).to.have.been.calledOnce;
+        expect(response.statusCode).to.equal(200);
+      });
+    });
+
+    context('when role IS "CERTIF"', function () {
       it('should return a response with an HTTP status code 403', async function () {
         // given
-        const prehandlersStub = sinon
-          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-          .withArgs([
-            securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-            securityPreHandlers.checkAdminMemberHasRoleSupport,
-            securityPreHandlers.checkAdminMemberHasRoleMetier,
-          ])
-          .callsFake(
-            () => (request, h) =>
-              h
-                .response({ errors: new Error('forbidden') })
-                .code(403)
-                .takeover(),
-          );
+        const preHandlerStub = getAdminRoleStub(PIX_ADMIN.ROLES.CERTIF);
 
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
         // when
-        const { statusCode } = await httpTestServer.request(method, url);
+        const response = await httpTestServer.request(method, url);
 
         // then
-        expect(prehandlersStub).to.have.been.calledOnce;
-        expect(statusCode).to.equal(403);
+        expect(preHandlerStub).not.to.have.been.calledOnce;
+        expect(response.statusCode).to.equal(403);
       });
     });
   });
