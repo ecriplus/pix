@@ -64,12 +64,14 @@ const acceptPixOrgaTermsOfService = async function (request, h) {
  * }} dependencies
  * @return {Promise<*>}
  */
-const changeUserLanguage = async function (request, h, dependencies = { userSerializer }) {
+const changeUserLocale = async function (request, h, dependencies = { userSerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
   const language = request.params.lang;
-  const updatedUser = await usecases.changeUserLanguage({
+  const locale = getUserLocale(request);
+  const updatedUser = await usecases.changeUserLocale({
     userId: authenticatedUserId,
     language,
+    locale,
   });
 
   return dependencies.userSerializer.serialize(updatedUser);
@@ -287,7 +289,7 @@ export const userController = {
   acceptPixCertifTermsOfService,
   acceptPixLastTermsOfService,
   acceptPixOrgaTermsOfService,
-  changeUserLanguage,
+  changeUserLocale,
   getCertificationPointOfContact,
   getCurrentUser,
   getCurrentUserAccountInfo,

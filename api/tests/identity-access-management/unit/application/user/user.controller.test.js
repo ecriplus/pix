@@ -87,7 +87,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
     });
   });
 
-  describe('#changeUserLanguage', function () {
+  describe('#changeUserLocale', function () {
     let request;
     const userId = 1;
     const lang = 'en';
@@ -96,21 +96,22 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       request = {
         auth: { credentials: { userId } },
         params: { id: userId, lang },
+        state: { locale: 'en' },
       };
 
-      sinon.stub(usecases, 'changeUserLanguage');
+      sinon.stub(usecases, 'changeUserLocale');
     });
 
     it('updates user language', async function () {
       // given
-      usecases.changeUserLanguage.resolves({});
+      usecases.changeUserLocale.resolves({});
       userSerializer.serialize.withArgs({}).returns('ok');
 
       // when
-      await userController.changeUserLanguage(request, hFake, { userSerializer });
+      await userController.changeUserLocale(request, hFake, { userSerializer });
 
       // then
-      sinon.assert.calledWith(usecases.changeUserLanguage, { userId, language: lang });
+      sinon.assert.calledWith(usecases.changeUserLocale, { userId, language: lang, locale: 'en' });
     });
   });
 
