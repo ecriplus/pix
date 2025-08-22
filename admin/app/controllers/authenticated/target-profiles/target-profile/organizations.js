@@ -8,7 +8,7 @@ import config from 'pix-admin/config/environment';
 const DEFAULT_PAGE_NUMBER = 1;
 
 export default class TargetProfileOrganizationsController extends Controller {
-  queryParams = ['pageNumber', 'pageSize', 'id', 'name', 'type', 'externalId'];
+  queryParams = ['pageNumber', 'pageSize', 'id', 'name', 'type', 'externalId', 'hideArchived'];
   DEBOUNCE_MS = config.pagination.debounce;
   @service router;
   @service pixToast;
@@ -17,6 +17,7 @@ export default class TargetProfileOrganizationsController extends Controller {
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
   @tracked pageSize = 10;
   @tracked id = null;
+  @tracked hideArchived = false;
   @tracked name = null;
   @tracked type = null;
   @tracked externalId = null;

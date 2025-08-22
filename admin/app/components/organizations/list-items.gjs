@@ -49,9 +49,15 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   }
 
   @action
-  filter(value) {
+  filterType(value) {
     const event = { target: { value } };
     this.args.triggerFiltering('type', event);
+  }
+
+  @action
+  filterHideArchived(value) {
+    const event = { target: { value } };
+    this.args.triggerFiltering('hideArchived', event);
   }
 
   <template>
@@ -66,7 +72,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
         @id="type"
         @hideDefaultOption={{true}}
         @options={{this.optionType}}
-        @onChange={{this.filter}}
+        @onChange={{this.filterType}}
         @value={{@type}}
       >
         <:label>Type</:label>
@@ -74,7 +80,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
       <PixInput value={{this.searchedExternalId}} oninput={{fn @triggerFiltering "externalId"}}>
         <:label>Identifiant externe</:label>
       </PixInput>
-      <PixToggleButton @onChange={{@toggleArchived}} @toggled={{@hideArchived}}>
+      <PixToggleButton @onChange={{this.filterHideArchived}} @toggled={{@hideArchived}}>
         <:label>Masquer les organisations archivées</:label>
         <:viewA>Oui</:viewA>
         <:viewB>Non</:viewB>

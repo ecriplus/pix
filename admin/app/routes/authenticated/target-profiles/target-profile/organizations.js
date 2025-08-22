@@ -12,6 +12,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
     name: { refreshModel: true },
     type: { refreshModel: true },
     externalId: { refreshModel: true },
+    hideArchived: { refreshModel: true },
   };
 
   beforeModel() {
@@ -32,6 +33,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
         name: params.name,
         type: params.type,
         externalId: params.externalId,
+        hideArchived: params.hideArchived,
       },
     };
     try {
@@ -54,6 +56,7 @@ export default class TargetProfileOrganizationsRoute extends Route {
       controller.name = null;
       controller.type = null;
       controller.externalId = null;
+      controller.hideArchived = false;
     }
   }
 }
