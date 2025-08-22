@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import CustomOrganizationBlock from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/custom-organization-block';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
@@ -15,14 +15,12 @@ module(
           // given
           const customResultPageText = 'My custom result page text';
 
-          this.set('campaign', {
+          const campaign = {
             customResultPageText,
-          });
+          };
 
           // when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock @campaign={{this.campaign}} />`,
-          );
+          const screen = await render(<template><CustomOrganizationBlock @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(customResultPageText)).exists();
@@ -32,14 +30,12 @@ module(
       module('when organization custom text is not defined', function () {
         test('not display organization custom text', async function (assert) {
           // given
-          this.set('campaign', {
+          const campaign = {
             customResultPageText: null,
-          });
+          };
 
           // when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock @campaign={{this.campaign}} />`,
-          );
+          const screen = await render(<template><CustomOrganizationBlock @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByRole('paragraph')).doesNotExist();
@@ -54,21 +50,23 @@ module(
           const customResultPageButtonUrl = 'https://pix.org/';
           const customResultPageButtonText = 'My custom button';
 
-          this.set('campaign', {
+          const campaign = {
             customResultPageButtonUrl,
             customResultPageButtonText,
-          });
+          };
 
-          this.set('campaignParticipationResult', {
+          const campaignParticipationResult = {
             masteryRate: 0.75,
-          });
+          };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+            <template>
+              <CustomOrganizationBlock
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
           );
 
           // then
@@ -84,14 +82,12 @@ module(
           // given
           const customResultPageButtonUrl = 'https://pix.org/';
 
-          this.set('campaign', {
+          const campaign = {
             customResultPageButtonUrl,
-          });
+          };
 
           // when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock @campaign={{this.campaign}} />`,
-          );
+          const screen = await render(<template><CustomOrganizationBlock @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByRole('link')).doesNotExist();
@@ -102,15 +98,13 @@ module(
         test('not display organization custom link', async function (assert) {
           // given
 
-          this.set('campaign', {
+          const campaign = {
             customResultPageButtonUrl: null,
             customResultPageButtonText: 'Some custom button text',
-          });
+          };
 
           // when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::CustomOrganizationBlock @campaign={{this.campaign}} />`,
-          );
+          const screen = await render(<template><CustomOrganizationBlock @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByRole('link')).doesNotExist();
