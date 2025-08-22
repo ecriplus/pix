@@ -13,24 +13,21 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       const elementId = '71de6394-ff88-4de3-8834-a40057a50ff4';
       const element = new QCUForAnswerVerification({
         id: elementId,
-        type: 'qcu',
         instruction: '<p>Pix évalue 16 compétences numériques différentes.</p>',
         proposals: [
           {
             id: '1',
             content: 'Vrai',
+            feedback:
+              '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
           },
           {
             id: '2',
             content: 'Faux',
+            feedback:
+              '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
           },
         ],
-        feedbacks: {
-          valid:
-            '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-          invalid:
-            '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-        },
         solution: '1',
       });
       const moduleDatasourceStub = {
@@ -69,18 +66,16 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
                         {
                           id: '1',
                           content: 'Vrai',
+                          feedback:
+                            '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
                         },
                         {
                           id: '2',
                           content: 'Faux',
+                          feedback:
+                            '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
                         },
                       ],
-                      feedbacks: {
-                        valid:
-                          '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                        invalid:
-                          '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-                      },
                       solution: '1',
                     },
                   },
@@ -109,24 +104,21 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
       const elementId = '71de6394-ff88-4de3-8834-a40057a50ff4';
       const element = new QCUForAnswerVerification({
         id: elementId,
-        type: 'qcu',
         instruction: '<p>Pix évalue 16 compétences numériques différentes.</p>',
         proposals: [
           {
             id: '1',
             content: 'Vrai',
+            feedback:
+              '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
           },
           {
             id: '2',
             content: 'Faux',
+            feedback:
+              '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
           },
         ],
-        feedbacks: {
-          valid:
-            '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-          invalid:
-            '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
-        },
         solution: '1',
       });
       const moduleDatasourceStub = {
@@ -168,18 +160,16 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
                               {
                                 id: '1',
                                 content: 'Vrai',
+                                feedback:
+                                  '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
                               },
                               {
                                 id: '2',
                                 content: 'Faux',
+                                feedback:
+                                  '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
                               },
                             ],
-                            feedbacks: {
-                              valid:
-                                '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                              invalid:
-                                '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
-                            },
                             solution: '1',
                           },
                         ],
@@ -196,18 +186,16 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
                         {
                           id: '1',
                           content: 'Vrai',
+                          feedback:
+                            '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
                         },
                         {
                           id: '2',
                           content: 'Faux',
+                          feedback:
+                            '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
                         },
                       ],
-                      feedbacks: {
-                        valid:
-                          '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                        invalid:
-                          '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>️!</p>',
-                      },
                       solution: '1',
                     },
                   },
@@ -305,18 +293,16 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
                         {
                           id: '1',
                           content: 'Vrai',
+                          feedback:
+                            '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
                         },
                         {
                           id: '2',
                           content: 'Faux',
+                          feedback:
+                            '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
                         },
                       ],
-                      feedbacks: {
-                        valid:
-                          '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-                        invalid:
-                          '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-                      },
                       solution: '1',
                     },
                   },
@@ -337,18 +323,16 @@ describe('Integration | DevComp | Repositories | ElementRepository', function ()
             {
               id: '1',
               content: 'Vrai',
+              feedback:
+                '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
             },
             {
               id: '2',
               content: 'Faux',
+              feedback:
+                '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
             },
           ],
-          feedbacks: {
-            valid:
-              '<span class="feedback__state">Correct&#8239;!</span><p> Ces 16 compétences sont rangées dans 5 domaines.</p>',
-            invalid:
-              '<span class="feedback__state">Incorrect.</span><p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden="true">👆</span>!</p>',
-          },
           solution: '1',
         },
       ]);

@@ -2,7 +2,7 @@
   "id": "1b33d6ab-ebfe-49fa-8568-8c40471b4baa",
   "slug": "galerie",
   "title": "Galerie Modulix",
-  "isBeta": false,
+  "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il permet de visualiser tous les modules existants.</p>",

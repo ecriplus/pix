@@ -3,16 +3,18 @@ import { ModuleInstantiationError } from '../../errors.js';
 import { Element } from './Element.js';
 
 class QCU extends Element {
-  constructor({ id, instruction, locales, proposals, type = 'qcu' }) {
+  constructor({ id, instruction, locales, proposals, solution, type = 'qcu' }) {
     super({ id, type });
 
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCU');
     this.#assertProposalsIsAnArray(proposals);
     this.#assertProposalsAreNotEmpty(proposals);
+    assertNotNullOrUndefined(solution, 'The solution is required for a QCU');
 
     this.instruction = instruction;
     this.locales = locales;
     this.proposals = proposals;
+    this.solution = solution;
     this.isAnswerable = true;
   }
 

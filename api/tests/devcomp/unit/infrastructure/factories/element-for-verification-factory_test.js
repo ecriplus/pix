@@ -12,10 +12,9 @@ describe('Unit | Devcomp | Infrastructure | Factories | ElementForVerification',
     describe('when data is incorrect', function () {
       it('should throw an ElementInstantiationError', function () {
         // given
-        const feedbacks = { valid: 'valid', invalid: 'invalid' };
         const proposals = [
-          { id: '1', content: 'toto' },
-          { id: '2', content: 'foo' },
+          { id: '1', content: 'toto', feedback: 'ok' },
+          { id: '2', content: 'foo', feedback: 'ko' },
         ];
 
         const dataWithMissingSolutionForQCU = {
@@ -23,7 +22,6 @@ describe('Unit | Devcomp | Infrastructure | Factories | ElementForVerification',
           instruction: 'instruction',
           locales: ['fr-FR'],
           proposals,
-          feedbacks,
           type: 'qcu',
         };
 

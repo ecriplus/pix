@@ -2,7 +2,7 @@ import { QCU } from './QCU.js';
 
 class QCUDiscovery extends QCU {
   constructor({ id, instruction, proposals, solution }) {
-    super({ id, instruction, proposals, type: 'qcu-discovery' });
+    super({ id, instruction, proposals, solution, type: 'qcu-discovery' });
 
     this.solution = solution;
   }
