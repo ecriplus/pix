@@ -7,6 +7,7 @@ import { UserToCreate } from '../models/UserToCreate.js';
  *   campaignCode: string,
  *   audience: string,
  *   lang: string,
+ *   locale: string,
  *   campaignToJoinRepository,
  *   userToCreateRepository,
  *   tokenService
@@ -17,6 +18,7 @@ import { UserToCreate } from '../models/UserToCreate.js';
 export const authenticateAnonymousUser = async function ({
   campaignCode,
   lang = 'fr',
+  locale,
   audience,
   campaignToJoinRepository,
   userToCreateRepository,
@@ -27,7 +29,7 @@ export const authenticateAnonymousUser = async function ({
     throw new UserCantBeCreatedError();
   }
 
-  const userToCreate = UserToCreate.createAnonymous({ lang });
+  const userToCreate = UserToCreate.createAnonymous({ lang, locale });
 
   const anonymousUser = await userToCreateRepository.create({ user: userToCreate });
   await anonymousUserTokenRepository.save(anonymousUser.id);

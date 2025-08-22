@@ -1,3 +1,4 @@
+import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { UserAccessToken } from '../../domain/models/UserAccessToken.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
@@ -5,7 +6,8 @@ import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/u
 const authenticateAnonymousUser = async function (request, h) {
   const { campaign_code: campaignCode, lang } = request.payload;
   const origin = getForwardedOrigin(request.headers);
-  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang, audience: origin });
+  const locale = getUserLocale(request);
+  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang, locale, audience: origin });
 
   const response = {
     token_type: 'bearer',
