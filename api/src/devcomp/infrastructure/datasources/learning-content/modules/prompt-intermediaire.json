@@ -143,7 +143,12 @@
                     "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -304,8 +309,14 @@
                           "placeholder": "un seul mot",
                           "ariaLabel": "champs à remplir",
                           "defaultValue": "",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["tableau"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "tableau"
+                          ]
                         }
                       ],
                       "feedbacks": {
@@ -446,7 +457,11 @@
                           "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -489,7 +504,11 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -532,7 +551,10 @@
                           "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.</p>"
                         }
                       },
-                      "solutions": ["1", "4"]
+                      "solutions": [
+                        "1",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -575,7 +597,12 @@
                           "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 }
@@ -660,9 +687,55 @@
             {
               "type": "element",
               "element": {
+                "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
+                "type": "custom",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Le tournoi de l’automne 🍂",
+                      "description": "Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br><br>  Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
+                        "alt": "Bravo à l'équipe Patata Smash !"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Le tournoi du printemps 🌷",
+                      "description": "Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br><br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
+                        "alt": "Félicitations à l'équipe Filets mignons !"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "aspectRatio": 0,
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableLoop": false
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "52c9f208-8f95-4926-a64e-214041a834d2",
                 "type": "text",
-                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur la photo illustrant le tournoi.</p>"
+                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l'image illustrant le tournoi.</p>"
               }
             },
             {
@@ -670,7 +743,7 @@
               "element": {
                 "id": "9fb1cf79-a154-4b71-a1e5-cea6803b950b",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/volleyraptor.png",
+                "url": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
                 "alt": "Une affiche concernant le tournoi de volley - lire l'alternative textuelle",
                 "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l'équipe des volley-raptors vainqueur !&nbsp;</p>",
                 "legend": "",
@@ -695,7 +768,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details></p>"
               }
             }
           ]
