@@ -576,7 +576,7 @@
                       "id": "a5fd2b0e-1241-4919-8eaa-3788aab941f9",
                       "type": "expand",
                       "title": "Par exemple",
-                      "content": "<p>Alfredo pense que les tout petits chiens c’est plutôt pour les filles.&nbsp; Si quand il demande «&nbsp;une image d’une femme avec son chien&nbsp;», le logiciel d’IA générative lui propose une image de femme avec un chihuahua, il ne va probablement pas voir le biais.<br></p> <img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/Alfredochihuahua.jpg\" height=\"130\" alt=\"images d'alfredo\">"
+                      "content": "<p>Alfredo pense que les tout petits chiens c’est plutôt pour les filles.&nbsp; Si quand il demande «&nbsp;une image d’une femme avec son chien&nbsp;», le logiciel d’IA générative lui propose une image de femme avec un chihuahua, il ne va probablement pas voir le biais.<br></p> <img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/Alfredochihuahua.jpg\" height=\"400\" alt=\"images d'alfredo\">"
                     }
                   ]
                 },
