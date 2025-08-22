@@ -1,8 +1,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CertificationCandidate } from '../../../../shared/domain/models/CertificationCandidate.js';
 import { SessionManagement } from '../../../session-management/domain/models/SessionManagement.js';
+import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertification } from '../../../shared/domain/models/ComplementaryCertification.js';
 
 const getWithCertificationCandidates = async function ({ id }) {

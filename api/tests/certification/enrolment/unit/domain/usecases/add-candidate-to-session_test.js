@@ -1,5 +1,6 @@
 import { addCandidateToSession } from '../../../../../../src/certification/enrolment/domain/usecases/add-candidate-to-session.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
+import { CertificationCandidate } from '../../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { CpfBirthInformationValidation } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
@@ -8,7 +9,6 @@ import {
   CertificationCandidateOnFinalizedSessionError,
   CertificationCandidatesError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { CertificationCandidate } from '../../../../../../src/shared/domain/models/CertificationCandidate.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session', function () {

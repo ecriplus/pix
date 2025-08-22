@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 
-import { BILLING_MODES } from '../../../certification/shared/domain/constants.js';
+import { BILLING_MODES } from '../constants.js';
 
 const { isNil } = lodash;
 
