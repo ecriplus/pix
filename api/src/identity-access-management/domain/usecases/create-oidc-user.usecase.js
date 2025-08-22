@@ -53,7 +53,7 @@ async function createOidcUser({
   const user = UserToCreate.createWithTermsOfServiceAccepted({
     firstName: userInfo.firstName,
     lastName: userInfo.lastName,
-    locale: locale,
+    locale,
     lang: language,
   });
 
