@@ -302,15 +302,20 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Aujourd’hui, on entraîne une IA générative sur le thème du taboulé et <strong>l’IA c'est vous </strong>!<br>Découvrez avec quelles ressources l’IA est entraînée. Répondez ensuite à la question ci-dessous.<br></p>"
+                "content": "<p>Aujourd’hui, on entraîne une IA générative sur le thème du taboulé et <strong>l’IA c'est vous </strong>!<br><br></p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "a261de69-d395-4657-a4a3-759bceee4297",
-                "type": "text",
-                "content": "<p>[POI à venir]</p>"
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "",
+                "url": "https://github.com/1024pix/atelier-contenus/blob/master/PCH/POI_persil_semoule_base.html",
+                "instruction": "<p>Suivez les étapes pour découvrir avec quelles ressources l’IA générative est entraînée. Répondez ensuite à la question ci-dessous.</p>",
+                "solution": "",
+                "height": 0
               }
             },
             {
