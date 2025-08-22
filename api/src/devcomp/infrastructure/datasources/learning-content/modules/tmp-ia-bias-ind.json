@@ -1,0 +1,940 @@
+{
+  "id": "a1eea948-2125-488f-8006-9f85e646830d",
+  "slug": "tmp-ia-bias-ind",
+  "title": "Les biais des lA",
+  "isBeta": true,
+  "details": {
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions comportent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais dans les réponses des IA génératives.🔍<br><br></p>",
+    "duration": 10,
+    "level": "Intermédiaire",
+    "objectives": [
+      "<p>Repérer des biais ou des stéréotypes présents dans les contenus. <br></p>",
+      "<p>Expliquer comment une IA générative reproduit les biais présents dans les textes de son entraînement.<br></p>",
+      "<p>Utiliser l’IA en étant vigilant sur ses propres biais de confirmation.</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "041ce35d-bd0f-4347-99e1-7edbfa465cbc",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "a6d26fb3-fa6e-4ec0-8d7c-183c2bb3b87c",
+          "type": "discovery",
+          "title": "Discussion d'accroche (photo procès)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "510015d3-8fb4-4024-8632-9b7ca6ec1187",
+                "type": "custom",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Conversation à propos des biais",
+                  "messages": [
+                    {
+                      "userName": "Léane",
+                      "direction": "outgoing",
+                      "content": "Ça m'énerve, je veux une image de juge mais l'IA me sort toujours la même chose : mec blanc, âgé, avec une cravate, un vrai stéréotype. Regarde !"
+                    },
+                    {
+                      "userName": "Léane",
+                      "direction": "outgoing",
+                      "content": "<img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/juge1et2.jpg\" height=\"130\" alt=\"images de juges créés par IA générative\">"
+                    },
+                    {
+                      "userName": "Adem",
+                      "direction": "incoming",
+                      "content": "Ah oui y a même le drapeau américain, haha !  Je pense que là il y a un biais."
+                    },
+                    {
+                      "userName": "Léane",
+                      "direction": "outgoing",
+                      "content": "C’est quoi un biais ?"
+                    },
+                    {
+                      "userName": "Adem",
+                      "direction": "incoming",
+                      "content": "C’est quand l'IA donne des réponses qui ne représentent pas bien la réalité. Ici ça donne l’impression que tous les procès ont lieu aux Etats-Unis ou que tous les juges sont vieux. Alors que ce n’est pas le cas !"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "5470c148-13c9-484c-8794-9206896013b4",
+          "type": "transition",
+          "title": "transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1fa1fc4c-90c4-456c-bd19-f2b83ff07856",
+                "type": "text",
+                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde dans lequel nous vivons et de ses évolutions en cours.&nbsp;🌍</p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "91ee53dd-33a9-4202-b40f-54ca6dd77171",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "5e9ea7f9-b4b9-4202-9f2a-531e3ae0381b",
+          "type": "discovery",
+          "title": "Les biais dans les données d’entraînement ",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "c78b70a0-63e5-4c12-a5fa-121bbc5907e1",
+                      "type": "text",
+                      "content": "<p>Voici des exemples issus du web, donnés à l’IA générative pour s’entraîner. <br>Observez chaque document et répondez à la question. </p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "ffffaa3c-0d3c-4297-898b-a235c3dd2118",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/wikipedia-tiersmonde.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "7230c256-05dd-43be-b855-b799ca0bbe2d",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, si l’IA s’entraîne sur cet article, ses réponses pourront-elles contenir des biais ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Oui</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Non</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Et pourtant, si !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5b556fb0-98ae-491d-b9d4-4ec8a71311e4",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/extraitreddit-chatlait.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "5f842916-e037-4232-aca1-ea73a63474c4",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, si l’IA s’entraîne sur cet extrait de forum, ses réponses pourront-elles contenir des biais ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Oui</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Sur les forums, les contributeurs peuvent donner leurs avis sur un sujet, sans avoir aucune expertise ou source qui soutiendrait leurs propos. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Non</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Et pourtant si !</strong> <br>Sur les forums, les contributeurs peuvent donner leurs avis sur un sujet, sans avoir aucune expertise ou source qui soutiendrait leurs propos. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "62696b7c-23ac-45de-bee9-62bdbd1fd48f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/rapport-VIH.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "e7221438-eda2-4b5f-a587-ec525317070d",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, si l’IA s’entraîne sur ce rapport, ses réponses pourront-elles contenir des biais ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Oui</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Dans ce rapport, on observe une inégalité entre les tests sur les hommes et les femmes. L’étude elle-même, ainsi que ses résultats comportent donc un biais que l’IA peut reproduire en utilisant cette source dans ses données d’entraînements.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Non</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Et pourtant si </strong><strong>! <br></strong>Dans ce rapport, on observe une inégalité entre les tests sur les hommes et les femmes. L’étude elle-même, ainsi que ses résultats comportent donc un biais que l’IA peut reproduire en utilisant cette source dans ses données d’entraînements.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5639627c-b470-41b4-81c3-7ee116d03760",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/twitterX-agismerap.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "7c9d3a8f-df7b-4302-ac78-40eb27ac3dff",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, si l’IA s’entraîne sur cet extrait de réseau social, ses réponses pourront-elles contenir des biais ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Oui</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu ! <br></strong>Sur les réseaux sociaux, les contributeurs donnent leurs avis personnels, ces avis sont teintés de leurs préférences et de leurs expériences. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que les vieux n’aiment pas le rap alors qu’il s’agit ici de l'expérience d'une seule personne.<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Non</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Et pourtant si !</strong> <br>Sur les réseaux sociaux, les contributeurs donnent leurs avis personnels, ces avis sont teintés de leurs préférences et de leurs expériences. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que les vieux n’aiment pas le rap alors qu’il s’agit ici de l'expérience d'une seule personne.<br><br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5c345832-9595-4be9-91cc-d792d6ef7bbe",
+          "type": "lesson",
+          "title": "Des biais sont présents dans les données du Web",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "57c8eb66-a1ff-40d1-adfb-ca3e8a9e2bda",
+                      "type": "text",
+                      "content": "<p>Les IA génératives sont <strong>entraînées sur une très grande quantité de données</strong>. Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐<br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5c146c79-a201-4784-82ca-8e9d280987d9",
+                      "type": "text",
+                      "content": "<p>Ces données peuvent&nbsp;: </p><ul><li>Révéler des <strong>situations de discrimination</strong> généralisées et <strong>existantes&nbsp;</strong></li><li><p>Refléter les <strong>expériences</strong>, ou les <strong>opinions des contributeurs</strong> qui les ont produites. Elles peuvent donc contenir &nbsp;: </p><ul><li>des <strong>idées reçues </strong>ou des <strong>stéréotypes</strong>, </li><li>des <strong>discriminations</strong>, </li><li>des <strong>différences culturelles</strong>.</li></ul></li></ul>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "26645807-ddfe-475d-b597-e00630a01809",
+          "type": "transition",
+          "title": "transition vers la découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7aa3b4e6-abfb-4878-bef9-1eb88e601bfa",
+                "type": "text",
+                "content": "<p>Mais alors comment ces informations et opinions influencent-elles les réponses des IA génératives ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fc0f34d7-882d-48da-b89a-57786e9c54df",
+          "type": "discovery",
+          "title": "Comprendre comment les biais se retrouvent dans la réponse de l’IA",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "99ea3082-9f59-435a-9da5-9cca98021669",
+                "type": "text",
+                "content": "<p>Aujourd’hui, on entraîne une IA générative sur le thème du taboulé et <strong>l’IA c'est vous </strong>!<br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a261de69-d395-4657-a4a3-759bceee4297",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "POI ressources biais",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/POI_persil_semoule_base.html",
+                "instruction": "<p>Suivez les étapes pour découvrir avec quelles ressources l’IA générative est entraînée. Répondez ensuite à la question ci-dessous.</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
+                "type": "qcu-discovery",
+                "instruction": "<p>D’après vos observations, sur l’ensemble des données qu'a l'IA pour s’entraîner, il y a plus de&nbsp;:<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>taboulé à la semoule</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse, c’est que votre sélection a montré.<br>Mais en réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg\" height=\"400\" alt=\"images du resultat\"></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>taboulé au persil<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien pensé, vous avez cru à un piège ?<br>En réalité, il y en avait exactement le même nombre ! C’est la sélection de données observées qui introduit un biais, on peut donc être induit en erreur.<br></p><p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg\" height=\"400\" alt=\"images du resultat\"></p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "050a3f37-3b40-415e-ba36-d64a398025dc",
+          "type": "lesson",
+          "title": "L’IA reproduit les biais qu’elle trouve dans les contenus",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "4ec1233f-0134-4e3e-82b0-2e0529be6182",
+                      "type": "text",
+                      "content": "<p>L’IA générative génère ses réponses sur un sujet en <strong>s’appuyant sur les mots ou les images les plus fréquents </strong>et <strong>donc les plus probables</strong> dans ses données d’entraînement.<br><br>La plupart du temps, avec cette méthode, l’IA produit des résultats très pertinents. 👍</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "783dbbb2-bf4d-468b-bac6-f0fe146c188f",
+                      "type": "text",
+                      "content": "<p>Les données d'entraînement de l’IA, issues du web, <strong>sur-représentent ou sous-représentent</strong> certains faits, points de vue ou opinions.</p><p><br>L’IA générative aura tendance à produire des résultats qui <strong>comportent des biais</strong>. C’est-à-dire qu’elle peut véhiculer dans ses réponses des idées reçues, des discrimination, des biais culturels ou des stéréotypes.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "649a682e-ffd5-4bd2-9388-1b68db386140",
+          "type": "transition",
+          "title": "transition vers la découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f363fc36-1c2e-4cc0-b915-5afc4357db2b",
+                "type": "text",
+                "content": "<p>Les utilisateurs voient-ils les biais dans les réponses des logiciels d’IA génératives ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e1b375ab-1b1d-4e90-8630-45df40a0c0e6",
+          "type": "discovery",
+          "title": "Découvrir le biais de confirmation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "733394bb-1755-4f0e-a450-f1d3edb87c42",
+                "type": "text",
+                "content": "<p>Étudiez chacun des cas ci-dessous et répondez à la question.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "0acc6d61-54b6-4a88-a5bb-c86ee663745f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Captain-America.jpg",
+                      "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
+                      "alternativeText": "<p>Captain America :&nbsp;<br>Pourquoi l'Amérique est le meilleur pays du monde ?<br><br></p><p>Réponse de l'IA générative :&nbsp;<br>Beaucoup considèrent l’Amérique comme le meilleur pays du monde pour plusieurs raisons : </p><ul><li><strong>Un pays de liberté</strong>, où chacun peut réaliser son rêve s’il travaille dur.</li><li><strong>Une puissance économique et militaire</strong>, qui donne une image de force et de sécurité.</li><li><strong>Un mode de vie très attractif, avec les fast-foods</strong>, les grandes maisons et les grosses voitures.</li><li><strong>Une culture populaire mondiale</strong>, grâce à Hollywood, la musique et le sport.</li></ul><p>L’Amérique est un modèle pour les autres pays.</p><br>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "54e415d3-a447-4c30-821d-75a54ecaff56",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Pourquoi Captain America est d’accord avec la réponse de l’IA ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Car l’IA a confirmé ce qu’il pensait déjà.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu !</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Car l’IA la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !<br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "4"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "274394d5-c33a-4e93-9889-c770f5e039d9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Sato-couple-fran%C3%A7ais.jpg",
+                      "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
+                      "alternativeText": "<p>Satô :&nbsp;<br>Génère deux images d’un couple français.</p><p> Réponse de l'IA générative :<br>Première image :&nbsp;Illustration de style vintage représentant un couple français caricatural devant la tour Eiffel. L’homme porte un béret noir, une marinière à rayures rouges et blanches, un foulard rouge autour du cou et tient une baguette sous le bras. La femme, coiffée d’un béret noir, porte une robe noire et tient un verre de vin rouge à la main. Ils sourient, côte à côte, avec la tour Eiffel en arrière-plan.</p><p>Seconde image :&nbsp;<br>Photographie d'un jeune couple qui se tient ensemble dans une rue de Paris, avec la tour Eiffel en arrière-plan. L’homme porte un trench beige, un béret bleu marine et une écharpe à carreaux rouges et bleus. La femme, à ses côtés, sourit et porte un manteau crème clair, une écharpe noire et un béret noir. Tous deux posent côte à côte, l’air complice, devant les immeubles haussmanniens et le ciel gris d’automne.</p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "2969727b-55aa-4661-a720-9749780b3924",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Pourquoi Satô est d’accord avec la réponse de l’IA ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Car il n’y a pas de biais dans la création de l’IA.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas exactement.<br>Ici la vision stéréotypée des parisiens proposée par le logiciel d’IA générative peut convenir à Satô car il n’en a jamais rencontré, et il identifie le béret et la marinière comme des vêtements iconiques français.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Car l’IA a confirmé ce qu’il pensait déjà.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !<br>Ici la vision stéréotypée des parisiens proposée par le logiciel d’IA générative peut convenir à Satô car il n’en a jamais rencontré, et il identifie le béret et la marinière comme des vêtements iconiques français.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Car l’IA la création de l’IA est réaliste, ça l’a convaincu.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la vision stéréotypée des parisiens proposée par le logiciel d’IA générative peut convenir à Satô car il n’en a jamais rencontré, et il identifie le béret et la marinière comme des vêtements iconiques français.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Car la demande du prompt comportait déjà un biais.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la vision stéréotypée des parisiens proposée par le logiciel d’IA générative peut convenir à Satô car il n’en a jamais rencontré, et il identifie le béret et la marinière comme des vêtements iconiques français.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "dd63f76b-cc9c-4dcd-a8e8-5aa2f349c29b",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Svetlana-hotesse-de-l-air.jpg",
+                      "alt": "",
+                      "alternativeText": "<p>Svetlana :<br>Quel est l’uniforme obligatoire des hôtesses de l’air ?<br><br></p><p>Réponse de l'IA générative :<br>L’uniforme des hôtesses de l’air est très reconnaissable : </p><ol><li><strong>Une tenue élégante </strong>composée d’une jupe ou parfois d’un pantalon.</li><li><strong>Des </strong><strong>chaussures à talons</strong> qui donnent une allure soignée.</li><li><strong>Un foulard ou un </strong><strong>accessoire coloré</strong> pour distinguer la compagnie aérienne.</li><li><strong>Une apparence toujours impeccable</strong>, maquillage et coiffure compris.</li></ol><p>Cet uniforme est pensé pour refléter à la fois le professionnalisme et une image accueillante.</p><br>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Pourquoi Svetlana est d’accord avec la réponse de l’IA ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Car l’IA a confirmé ce qu’elle pensait déjà.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Bien vu !</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Car l’IA la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement, mais ça a pu contribuer.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "e3eb29db-3138-466a-8a34-4258779a1b82",
+          "type": "lesson",
+          "title": "Le biais de confirmation",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "daae6feb-1f70-440a-9d27-0b2e4acb5d3c",
+                      "type": "text",
+                      "content": "<p>Un biais présent dans une réponse d’IA générative peut sauter aux yeux ou passer inaperçu. 👀<br>Pour les repérer, il faut d’abord avoir conscience des biais chez les humains ! <br>On a tendance à <strong>croire des choses que nous pensons déjà </strong>et à <strong>exclure des informations qui nous contredisent</strong>.<br> <br>👉 Cela s’appelle le <strong>biais de confirmation</strong>.</p>"
+                    },
+                    {
+                      "id": "a5fd2b0e-1241-4919-8eaa-3788aab941f9",
+                      "type": "expand",
+                      "title": "Par exemple",
+                      "content": "<p>Alfredo pense que les tout petits chiens c’est plutôt pour les filles.&nbsp; Si quand il demande «&nbsp;une image d’une femme avec son chien&nbsp;», le logiciel d’IA générative lui propose une image de femme avec un chihuahua, il ne va probablement pas voir le biais.<br></p> <img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/Alfredochihuahua.jpg\" height=\"400\" alt=\"images d'alfredo\">"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "83deebb0-87c4-41fd-a26c-91ef18f66299",
+                      "type": "text",
+                      "content": "<p>Un logiciel d’IA générative a tendance à générer des réponses <strong>pour nous plaire</strong> et à ne <strong>pas nous contredire</strong>. Si le contexte de notre prompt exprime une opinion ou une préférence, l’IA est plus encline à la confirmer.<br><br>Il faut donc faire preuve d’une grande vigilance, garder un <strong>regard critique</strong> et <strong>éviter de réutiliser les productions de l’IA telles quelles.</strong> 🕵️</p>"
+                    },
+                    {
+                      "id": "4848930f-0095-4d42-88a4-604a8daafea2",
+                      "type": "expand",
+                      "title": "💡Quelques astuces pour détecter des biais",
+                      "content": "<p>Voici des points de vigilances pour repérer les biais dans les réponses de l’IA générative&nbsp;: </p><ul><li>Une <strong>vision limitée</strong> (âge, origine, physique) pour un groupe donné.</li><li>Un parti <strong>sans nuance</strong> (ex. «&nbsp;X est meilleur que Y&nbsp;»).</li><li>Une<strong> absence de mise en contexte</strong> ou de mention de perspectives multiples.</li><li>Des exemples <strong>trop homogènes</strong>&nbsp;et présentés comme <strong>«&nbsp;normaux&nbsp;» ou universels</strong> sans préciser leur contexte culturel.</li></ul>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5dd52fd9-372b-4443-b2e8-5aa8be6ddfa9",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "82edf18e-0f2e-4eb1-8b5a-6726f60a91ce",
+          "type": "summary",
+          "title": "Récap'",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "32fa1627-38dc-4699-9a71-c14e8e6412df",
+                "type": "text",
+                "content": "<ul> <li>Dans les <strong>données d’entraînement </strong>de l’IA, il y a des opinions, des expériences, des stéréotypes, des situations discriminantes, des préférences culturelles, qui peuvent <strong>être sur-représentées</strong>.<br><br></li>\n    <li>L’IA générative génère ses réponses en s’appuyant sur les mots ou les images <strong>les plus fréquents</strong> dans ses données d’entraînement, sans avoir de regard critique.<br><br> </li>\n    <li>Cela peut l’amener à <strong>produire des réponses contenant des biais</strong>. En conséquence, elle peut renforcer des idées toutes faites, des stéréotypes ou des situations discriminantes.<br><br> </li>\n    <li>Pour faire preuve de vigilance, il faut avoir conscience de nos <strong>biais de confirmation</strong>, qui nous poussent à croire les choses que nous pensons déjà. </li>\n</ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ea91bf36-4238-4866-b97a-097f7c158608",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-biais-independant/recap-chat-lait.jpg",
+                "alt": "",
+                "alternativeText": "<p>Schéma en plusieurs étapes :</p><ul><li>Étape 1 : Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2 : L’IA répond que le chat boit du lait. Le propriétaire du chat a un doute.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit le propriétaire a suivi le conseil de l’IA. Maintenant le chat est malade.<br></li></ul></li></ul><br>",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7d8dc1c3-8c46-49b3-9b2a-557639961f91",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "09d59a09-c38d-4794-a461-51b4ebc71b4a",
+          "type": "transition",
+          "title": "transition vers entraînement",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c7f36d45-34f2-44bd-b77b-543782c79884",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f465c173-28a7-4e91-b17f-4a8179ad448b",
+          "type": "activity",
+          "title": "Compréhension de l’entraînement",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4c89c7d9-ef38-4102-8812-da922236057a",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des affirmations suivantes, choisissez si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "f2b777fe-bacd-4021-b828-c56421f2f0e5",
+                    "text": "Les biais dans les réponses de l’IA peuvent venir des opinions et expériences personnelles sur lesquelles on l’a entraînée. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "75ba25d8-2111-4e3a-bf81-7718285997aa",
+                    "text": "Une opinion très répandue qui comporte un stéréotype ne va pas être prise en compte par l’IA dans son entraînement.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "272f2f9b-e300-49ce-b6ff-318aa3d1e63b",
+                    "text": "Les biais dans les réponses de l’IA peuvent renforcer des discriminations préexistantes.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "ea3fc5a8-ea7b-4b7c-8c92-39c245a26747",
+                    "text": "L’IA sait quand sa réponse comprend un biais et s’auto-corrige.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "6a20c1ac-b231-4b8c-b1ce-c9a8abbf9183",
+                    "text": "Les réponses (même avec des biais) des IA peuvent nous sembler crédibles si elles viennent confirmer des choses que nous pensons déjà.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "vrai",
+                    "proposalB": "faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "9ba55d2f-149f-4305-846a-c3abdd150d6f",
+          "type": "activity",
+          "title": "Repérer un biais ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b5a2256e-17da-4d27-93df-6ccc6defc85e",
+                "type": "text",
+                "content": "<p>Le logiciel d'IA générative ci-dessous comporte un biais.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "cc1559a4-2f33-45b3-9c07-bdf018e9fafb",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "LLM biais",
+                "url": "https://app.recette.pix.fr/llm/preview/9729c0b4-d81e-43ea-9a23-f3ad6fcaf196",
+                "instruction": "<p>Échangez avec ce logiciel d'IA générative pour trouver son biais.</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "70fe1d8d-fc25-4f6e-9d45-96b4a06c8714",
+                "type": "qrocm",
+                "instruction": "<p>Quel est le biais principal de cette IA ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Elle a un biais en faveur de</p>"
+                  },
+                  {
+                    "input": "biais-du-llm",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 20,
+                    "display": "inline",
+                    "placeholder": "écrivez ici",
+                    "ariaLabel": "biais de l'IA à compléter",
+                    "defaultValue": "écrivez ici",
+                    "tolerances": [
+                      "t3"
+                    ],
+                    "solutions": [
+                      "la Grèce",
+                      "le pays Grec",
+                      "Les choses grecques"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                    "diagnosis": "<p>Vous avez trouvé le biais de cette IA générative. Celle-ci est un peu trafiquée pour le bien de cet exercice. Mais vous avez su garder les bizarreries, redondances et incohérences à l'œil.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>N'hésitez pas à réessayer. Vous pouvez continuer à échanger avec le logiciel d'IA générative, ou réinitialiser. <br>Si vous êtes bloqué, aidez-vous des indices ci-dessous.</p>"
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7ee85156-aeb6-4ded-96e9-b1ed6815f392",
+                "type": "expand",
+                "title": "Indice 1 ",
+                "content": "<p>Vous pouvez commencer par lui poser des questions générales, par exemple&nbsp;:</p><ul><li>“Propose moi une recette de cuisine”</li><li>“Parle-moi d’une personne inspirante”</li><li>“Que faire pour être heureux ?”</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ced01f73-a2b1-4a77-b39b-bf0faca85364",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "<p>Avez-vous réussi à voir des liens ou des ressemblances entre les différentes réponses de ce logiciel d’intelligence artificielle ?</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "622effc6-8c32-43c1-a419-fa5d3f6de269",
+                "type": "expand",
+                "title": "Indice 3",
+                "content": "<p>Ce logiciel d’intelligence artificielle semble avoir été programmé pour mettre en valeur un pays en particulier, avez-vous trouvé lequel ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "771c7157-e634-45f1-994e-1b8d4dc9c2f7",
+          "type": "activity",
+          "title": "Les biais de confirmation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "707cf2da-0e1c-4225-ba2c-9d80b5d06cbe",
+                "type": "qcm",
+                "instruction": "<p>Parmi ces attitudes, lesquelles illustrent <strong>le biais de confirmation</strong> lors de l’utilisation d’un logiciel d’IA générative ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Jeanne demande à un logiciel d’IA générative&nbsp;: «&nbsp;Explique-moi pourquoi il faut investir dans le bitcoin.&nbsp;»</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Ali demande à un logiciel d’IA générative&nbsp;: «&nbsp;Quels investissements sont les plus rentables et les plus sûrs ?&nbsp;»</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Marceau interroge un logiciel d’IA générative sur le bitcoin mais ne retient que les aspects positifs et ignore les mises en garde.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Khaïs pense investir dans le bitcoin et demande à un logiciel d’IA générative&nbsp;: «&nbsp;Quels sont les inconvénients à investir dans le bitcoin ?&nbsp;»</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Lyna demande à un logiciel d’IA générative les sources qui lui permettent d’affirmer les avantages et les inconvénients du bitcoin.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>Vous avez parfaitement identifié les cas qui ont été victimes de leurs propres biais de confirmation.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "3"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a0b1b2e9-b93c-4d70-af6d-c11b443964c0",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "8c45f2de-cc42-4102-9d63-d62702055454",
+          "type": "summary",
+          "title": "Quelle bonne résolution prends-tu pour éviter les biais ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "efee2fc9-aeeb-4a32-956f-3b4b943f5491",
+                "type": "qcu-declarative",
+                "instruction": "<p>Avec ce que vous avez appris, quelle stratégie aimeriez-vous utiliser à l’avenir pour limiter les biais en utilisant les IA ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>J’essaierai de formuler des prompts neutres et testerai différentes formulations de questions.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée ! Vous pouvez par exemple demander&nbsp;: “Quels sont les arguments pour et contre …”<br>Et toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>J'explorerai les perspectives opposées.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée, vous pouvez par exemple demander&nbsp;: «&nbsp;Peux-tu maintenant me donner le point de vue inverse, avec des arguments solides ?&nbsp;».</p><p>Et toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je vérifierai avec d’autres sources.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée, vous pouvez faire une recherche sur internet ou dans des documents papiers ( livres, journaux, magazines…)<br>Et toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>J'analyserai mes propres biais et motivations avant d’utiliser l’IA.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée, vous pouvez essayer d’identifier vos propres biais lorsque vous posez une question à un logiciel d’IA.<br>Et toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>J’analyserai les réponses du logiciel d’IA avec un regard critique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée, pour rappel, voici quelques points de vigilance&nbsp;:</p><ul><li>Une vision limitée (âge, origine, physique) pour un groupe donné.&nbsp;</li><li>Un parti sans nuance (ex. «&nbsp;X est meilleur que Y&nbsp;»).</li><li>Une absence de mise en contexte ou de mention de perspectives multiples.</li><li>Des exemples trop homogènes&nbsp;et présentés comme «&nbsp;normaux&nbsp;» ou universels sans préciser leur contexte culturel.</li></ul><p>Et toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
