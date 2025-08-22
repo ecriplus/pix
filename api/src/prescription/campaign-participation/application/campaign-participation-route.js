@@ -159,6 +159,29 @@ const register = async function (server) {
       },
     },
     {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/participation-statistics',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToOrganization,
+            assign: 'checkUserBelongsToOrganization',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        handler: campaignParticipationController.getParticipationStatistics,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
+            '- Cette route retourne les statistiques des participations de campagnes appartenant au prescripteur connecté',
+        ],
+        tags: ['api', 'prescription', 'organization', 'participations', 'statistics'],
+      },
+    },
+    {
       method: 'PATCH',
       path: '/api/admin/campaign-participations/{id}',
       config: {

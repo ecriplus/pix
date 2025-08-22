@@ -7,9 +7,11 @@ import * as campaignAssessmentParticipationResultSerializer from '../infrastruct
 import * as campaignAssessmentParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-serializer.js';
 import * as campaignParticipationOverviewSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
 import * as campaignParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-serializer.js';
+import * as campaignParticipationStatisticsSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-statistics-serializer.js';
 import * as campaignProfileSerializer from '../infrastructure/serializers/jsonapi/campaign-profile-serializer.js';
 import * as participantResultSerializer from '../infrastructure/serializers/jsonapi/participant-result-serializer.js';
 import * as participationForCampaignManagementSerializer from '../infrastructure/serializers/jsonapi/participation-for-campaign-management-serializer.js';
+
 const getUserCampaignParticipationToCampaign = function (
   request,
   h,
@@ -191,6 +193,20 @@ const getUserCampaignAssessmentResult = async function (
   return dependencies.participantResultSerializer.serialize(campaignAssessmentResult);
 };
 
+const getParticipationStatistics = async function (
+  request,
+  h,
+  dependencies = { campaignParticipationStatisticsSerializer },
+) {
+  const ownerId = request.auth.credentials.userId;
+  const { organizationId } = request.params;
+  const result = await usecases.getCampaignParticipationStatistics({ organizationId, ownerId });
+
+  return h
+    .response(dependencies.campaignParticipationStatisticsSerializer.serialize({ ...result, id: organizationId }))
+    .code(200);
+};
+
 const campaignParticipationController = {
   deleteParticipation,
   deleteParticipationFromAdmin,
@@ -202,6 +218,7 @@ const campaignParticipationController = {
   getCampaignParticipationOverviews,
   getCampaignParticipationsForOrganizationLearner,
   getCampaignProfile,
+  getParticipationStatistics,
   getUserCampaignAssessmentResult,
   getUserCampaignParticipationToCampaign,
   updateParticipantExternalId,

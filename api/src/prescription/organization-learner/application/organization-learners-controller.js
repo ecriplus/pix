@@ -2,7 +2,6 @@ import { NoProfileRewardsFoundError } from '../../../profile/domain/errors.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as analysisByTubesSerializer from '../infrastructure/serializers/jsonapi/analysis-by-tubes-serializer.js';
 import * as attestationParticipantStatusSerializer from '../infrastructure/serializers/jsonapi/attestation-participants-status-serializer.js';
-import * as organizationParticipationsStatisticsSerializer from '../infrastructure/serializers/jsonapi/organization-participation-statistics-serializer.js';
 
 const getAttestationZipForDivisions = async function (request, h) {
   const organizationId = request.params.organizationId;
@@ -43,21 +42,8 @@ const getAttestationParticipantsStatus = async function (
   return h.response(dependencies.attestationParticipantStatusSerializer.serialize(result)).code(200);
 };
 
-const getParticipationStatistics = async function (
-  request,
-  h,
-  dependencies = { organizationParticipationsStatisticsSerializer },
-) {
-  const ownerId = request.auth.credentials.userId;
-  const { organizationId } = request.params;
-  const result = await usecases.getOrganizationLearnerStatistics({ organizationId, ownerId });
-
-  return h.response(dependencies.organizationParticipationsStatisticsSerializer.serialize(result)).code(200);
-};
-
 const organizationLearnersController = {
   getAnalysisByTubes,
-  getParticipationStatistics,
   getAttestationZipForDivisions,
   getAttestationParticipantsStatus,
 };

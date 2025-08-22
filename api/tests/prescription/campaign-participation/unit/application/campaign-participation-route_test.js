@@ -387,4 +387,57 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       expect(result.statusCode).to.equal(400);
     });
   });
+
+  describe('GET /api/organizations/{organizationId}/participation-statistics', function () {
+    const method = 'GET';
+
+    it('should throw 403 if user is not admin in organization', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) =>
+        h
+          .response({ errors: new Error('forbidden') })
+          .code(403)
+          .takeover(),
+      );
+
+      const organizationPlacesStatisticsStub = sinon.stub(
+        campaignParticipationController,
+        'getParticipationStatistics',
+      );
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const url = '/api/organizations/1/participation-statistics';
+
+      // when
+      const response = await httpTestServer.request(method, url);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(organizationPlacesStatisticsStub.called).to.be.false;
+    });
+
+    it('should call prehandlers before calling controller method', async function () {
+      // given
+      sinon
+        .stub(campaignParticipationController, 'getParticipationStatistics')
+        .callsFake((request, h) => h.response('ok').code(200));
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      const url = '/api/organizations/1/participation-statistics';
+
+      // when
+      const response = await httpTestServer.request(method, url);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.calledBefore(
+        campaignParticipationController.getParticipationStatistics,
+      );
+    });
+  });
 });
