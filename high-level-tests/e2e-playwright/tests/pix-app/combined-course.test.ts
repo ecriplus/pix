@@ -129,5 +129,11 @@ async function createDataForCombinedCourse() {
     },
   ]);
   const eligibilityRequirements = JSON.stringify([]);
-  await knex('quests').insert({ code: 'COMBINIX1', organizationId, successRequirements, eligibilityRequirements });
+  await knex('quests').insert({
+    name: 'Mon parcours combiné',
+    code: 'COMBINIX1',
+    organizationId,
+    successRequirements,
+    eligibilityRequirements,
+  });
 }
