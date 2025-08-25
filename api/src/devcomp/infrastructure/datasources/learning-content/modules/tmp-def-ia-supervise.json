@@ -655,7 +655,7 @@
                       "description": "jeux de données pour logiciel de reconnaissance d'images ",
                       "displayWidth": 624,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolflou.png",
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%203.png",
                         "alt": "Jeu de données"
                       },
                       "license": {
@@ -669,7 +669,7 @@
                       "description": "jeux de données pour logiciel de reconnaissance d'images ",
                       "displayWidth": 624,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolpasvarie.png",
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%202.png",
                         "alt": "Jeu de données"
                       },
                       "license": {
@@ -683,21 +683,7 @@
                       "description": "jeux de données pour logiciel de reconnaissance d'images ",
                       "displayWidth": 624,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tournesolok.png",
-                        "alt": "Jeu de données"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "unsplash",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "jeux de données 4",
-                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
-                      "displayWidth": 624,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/tounesolmasetiquete.png",
+                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%201.png",
                         "alt": "Jeu de données"
                       },
                       "license": {
@@ -743,14 +729,6 @@
                     "feedback": {
                       "state": "<p>Bravo !<br></p>",
                       "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d'image, il faut lui donner des exemples bien étiquetés, variés et de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Jeu de données 4</p>",
-                    "feedback": {
-                      "state": "<p>Et non !</p>",
-                      "diagnosis": "<p>Plusiers photographies de ce jeu de données ne sont pas bien étiquétées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut lui donner des exemples accompagnés de la bonne étiquette.</p>"
                     }
                   }
                 ],
