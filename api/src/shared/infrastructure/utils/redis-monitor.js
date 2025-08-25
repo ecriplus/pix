@@ -16,7 +16,7 @@ class RedisMonitor {
   }
 
   async quit() {
-    await this._client.quit();
+    await this._client?.quit();
   }
 }
 
