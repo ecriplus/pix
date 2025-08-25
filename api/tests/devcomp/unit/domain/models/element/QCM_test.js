@@ -9,6 +9,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       // Given
       const proposal1 = Symbol('proposal1');
       const proposal2 = Symbol('proposal2');
+      const feedbacks = { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') };
 
       // When
       const qcm = new QCM({
@@ -16,6 +17,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
         instruction: 'instruction',
         locales: ['fr-FR'],
         proposals: [proposal1, proposal2],
+        feedbacks,
       });
 
       // Then
@@ -24,7 +26,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       expect(qcm.type).equal('qcm');
       expect(qcm.locales).deep.equal(['fr-FR']);
       expect(qcm.proposals).deep.equal([proposal1, proposal2]);
-      expect(qcm.feedbacks).to.be.undefined;
+      expect(qcm.feedbacks).deep.equal(feedbacks);
     });
   });
 
