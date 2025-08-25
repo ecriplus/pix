@@ -1768,6 +1768,13 @@
         "subtitle": "Has trabajado en los siguientes objetivos:",
         "title": "¡Módulo completado!"
       },
+      "section": {
+        "question-yourself": "Pregúntate a ti mismo",
+        "explore-to-understand": "Explora para comprender",
+        "retain-the-essentials": "Retén lo esencial",
+        "practise": "Practica",
+        "go-further": "Ve más allá"
+      },
       "sidebar": {
         "button": "Visualizar los pasos del módulo"
       },

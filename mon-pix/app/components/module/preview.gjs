@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -8,11 +9,21 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
+import { notEq } from 'ember-truth-helpers';
 import ModulixGrain from 'mon-pix/components/module/grain/grain';
+
+const SECTION_TITLE_ICONS = {
+  'question-yourself': 'think',
+  'explore-to-understand': 'signpost',
+  'retain-the-essentials': 'doorOpen',
+  practise: 'mountain',
+  'go-further': 'lightBulb',
+};
 
 export default class ModulixPreview extends Component {
   @service store;
   @service modulixPreviewMode;
+  @service intl;
 
   @tracked moduleCodeDisplayed = false;
 
@@ -117,6 +128,16 @@ export default class ModulixPreview extends Component {
   }
 
   @action
+  sectionTitle(section) {
+    return this.intl.t(`pages.modulix.section.${section.type}`);
+  }
+
+  @action
+  sectionTitleIcon(section) {
+    return SECTION_TITLE_ICONS[section.type];
+  }
+
+  @action
   noop() {}
 
   @action
@@ -167,6 +188,12 @@ export default class ModulixPreview extends Component {
 
         <div class="module-preview-passage__content">
           {{#each this.formattedModule.sections as |section|}}
+            {{#if (notEq section.type "blank")}}
+              <div class="module-preview-passage-content-section">
+                <PixIcon @name={{this.sectionTitleIcon section}} @ariaHidden={{true}} />
+                <h2>{{this.sectionTitle section}}</h2>
+              </div>
+            {{/if}}
             {{#each section.grains as |grain|}}
               <ModulixGrain
                 @grain={{grain}}
