@@ -22,7 +22,7 @@ describe('Unit | Domain | Models | ParticipationForCampaignManagement', function
       });
 
       // then
-      expect(participationForCampaignManagement.userFullName).to.equal('(Anonymised)');
+      expect(participationForCampaignManagement.userFullName).to.equal('-');
     });
   });
 
