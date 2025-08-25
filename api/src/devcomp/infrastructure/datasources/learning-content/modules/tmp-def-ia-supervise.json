@@ -171,7 +171,7 @@
               "element": {
                 "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
                 "type": "text",
-                "content": "<p>Voyons comment fait un logiciel d’IA pour analyser les photographies et apprendre à retrouver l’étiquette.</p>"
+                "content": "<p>Mais au fait, un logiciel d’IA ne voit pas les images comme nous. 👁️ Découvrons ensemble ce qu'est vraiment une image en informatique. </p>"
               }
             }
           ]
@@ -204,7 +204,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>Pour être numérisée, une photographie est découpée en plusieurs points ou pixels. Chaque pixel est représenté par un nombre correspondant à l’intensité de sa couleur. Pour un ordinateur, une photographie est donc un tableau de nombres. 🖼️➡️🔢</p>"
+                "content": "<p>Pour un logiciel d’IA, une image est un ensemble de pixels, c’est-à-dire de tous les petits points qui composent l’image.🟢🟣 </p><p>Chaque pixel est représenté par un nombre qui indique l’intensité de sa couleur. On appelle ces nombres des valeurs numériques</p><p>Une image en informatique est donc un teableau de valeurs numériques. 🖼️➡️🔢</p>"
               }
             }
           ]
@@ -318,69 +318,22 @@
                 {
                   "elements": [
                     {
-                      "id": "9d1e71cd-8787-439d-9dc7-d9b395435fad",
-                      "type": "text",
-                      "content": "<p>Elle veut maintenant tester son programme sur une nouvelle photographie d'ail des ours.<br></p>"
-                    },
-                    {
-                      "id": "4fc2b7dc-0cc9-4e29-bb93-9c7ab25bcc60",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailoursbulbe.jpg",
-                      "alt": "Une photo de bulbes d'ail des ours",
-                      "alternativeText": "<p>Une photo de bulbes d'ail des ours</p>",
-                      "legend": "",
-                      "licence": ""
-                    },
-                    {
-                      "id": "9f0116d7-03e8-4657-ac04-9b310c4562f1",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>A votre avis, cette IA va-t-elle reconnaître que cette image est de l'ail des ours ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Probablement oui.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Bien vu ! Mais savez-vous pourquoi ?</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Probablement non<br></p>",
-                          "feedback": {
-                            "diagnosis": "<p>Et non ! Et savez-vous pourquoi ?</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "a990944f-d268-4eac-99cc-8f4e88123baa",
                       "type": "qcu-discovery",
                       "instruction": "<p>A votre avis, pourquoi ce logiciel n'est pas capable de dire que cette photographie est de l'ail des ours ?  <br></p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Les images d'entraînement ne comportent pas de photos de bulbes.<br></p>",
+                          "content": "<p>Les images d'entraînement ne comportent pas de photos de pousses de l'ail des ours.<br></p>",
                           "feedback": {
                             "diagnosis": "<p>Et oui ! Ces données ne sont pas suffisamment variées, elles manquent de diversité.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Les images ne sont pas d’assez bonne qualité&nbsp;: elles sont souvent flous.<br></p>",
-                          "feedback": {
-                            "diagnosis": "<p>Si les images étaient flous, ça serait un problème ! </p><p> Mais ce n’est pas le cas ici, le problème principal est que les photos d'entraînement ne comportent pas de bulbes !</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Plusieurs photos d’ail des ours ont été étiquetées comme étant du muguet.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien sûr, si les images étaient mal étiquetées, ça serait un problème !<br>Mais ce n’est pas le cas ici, le problème principal est que les photos d'entraînement ne contiennent pas de bulbes !<br></p>"
+                            "diagnosis": "<p>Bien sûr, si les images étaient mal étiquetées, ça serait un problème !<br>Mais ce n’est pas le cas ici, le problème principal est que les photos d'entraînement ne contiennent pas de pousses d'ail des ours !<br></p>"
                           }
                         }
                       ],
@@ -666,7 +619,7 @@
                     },
                     {
                       "title": "jeux de données 2",
-                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "description": "jeux de données pour logiciel de reconnaissance d’images ",
                       "displayWidth": 624,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%202.png",
@@ -680,7 +633,7 @@
                     },
                     {
                       "title": "jeux de données 3",
-                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "description": "jeux de données pour logiciel de reconnaissance d’images ",
                       "displayWidth": 624,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%201.png",
@@ -705,14 +658,14 @@
               "element": {
                 "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
                 "type": "qcu",
-                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel de reconnaissance d'image de tournesols ?</p>",
+                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel de reconnaissance d’image de tournesols ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Jeu de données 1</p>",
                     "feedback": {
                       "state": "<p>Et non !</p>",
-                      "diagnosis": "<p>Plusiers photographies de ce jeu de données sont floues. Pour entraîner correctement un logiciel de reconnaissance d'image, les exemples fournis doivent être de bonne qualité.</p>"
+                      "diagnosis": "<p>Plusiers photographies de ce jeu de données sont mal étiquetées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés pour qu’il apprenne à les identifier correctement.</p>"
                     }
                   },
                   {
@@ -720,7 +673,7 @@
                     "content": "<p>Jeu de données 2</p>",
                     "feedback": {
                       "state": "<p>Et non !<br></p>",
-                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d'image, il faut donner des exemples très variés afin qu'il aprenne à généraliser.</p>"
+                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut donner des exemples très variés afin qu’il aprenne à généraliser.</p>"
                     }
                   },
                   {
@@ -728,108 +681,11 @@
                     "content": "<p>Jeu de données 3</p>",
                     "feedback": {
                       "state": "<p>Bravo !<br></p>",
-                      "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d'image, il faut lui donner des exemples bien étiquetés, variés et de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
+                      "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés et variés, c’est-à-dire de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
                     }
                   }
                 ],
                 "solution": "3"
-              }
-            }
-          ]
-        },
-        {
-          "id": "998d396d-bf2b-4e30-ae59-d49876402aa3",
-          "type": "activity",
-          "title": "As-tu compris comment fonctionne l’apprentissage supervisé ?",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "c4b4a5c3-265e-4387-839b-73a27c0ecf34",
-                "type": "qrocm",
-                "instruction": "<p>Complètez le texte suivant.</p>",
-                "proposals": [
-                  {
-                    "type": "text",
-                    "content": "<p>Arthur a été inspiré par Lila.</p>\n<p><br>Il veut lui aussi créer une application, qui reconnaîtrait les chants d’oiseaux. 🐦</p>\n<br><p>Il constitue un <strong>jeu de données</strong> avec des chants d’oiseaux, et pour chacun, le nom de l’oiseau qui chante : ce sont des données</p>"
-                  },
-                  {
-                    "input": "7fe1c167-4710-48d8-a16e-b4eadaec6786",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 12,
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "champ à remplir",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "étiquetées"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>Le logiciel analyse tous les <strong>exemples </strong>et ajuste ses <strong>paramètres</strong>, il s'agit de la phase d'</p>"
-                  },
-                  {
-                    "input": "c78bbf32-0a3c-4cb9-b75d-d36a86b4b702",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 12,
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "champ libre",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "entraînement"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>Après la <strong>phase de test</strong>, le logiciel arrive à <strong>prédire </strong>avec un faible taux d’erreur, le nom de l’oiseau qui chante avec un nouvel enregistrement : la</p>"
-                  },
-                  {
-                    "input": "3309b370-847b-467e-9a49-1387827fb5fd",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 12,
-                    "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "champ à remplir",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "généralisation"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>a fonctionné !</p>"
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bravo !</p>",
-                    "diagnosis": "<p>Vous maîtrisez le vocabulaire de l'apprentissage automatique supervisé !</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas encore...</p>",
-                    "diagnosis": "<p>Avez-vous utilisé le vocabulaire spécifique de l'apprentissage automatique supervisé ?</p>"
-                  }
-                }
               }
             }
           ]
@@ -840,147 +696,6 @@
       "id": "62147798-f1bf-42b4-baf5-44975474d7d3",
       "type": "go-further",
       "grains": [
-        {
-          "id": "47f58784-0b44-4880-81ba-0488ae7016f9",
-          "type": "challenge",
-          "title": "Peut-on résoudre ces problèmes avec l’apprentissage automatique supervisé ?",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "bcc71c8a-4954-4705-959e-3e0c4d65832b",
-                "type": "text",
-                "content": "<p>Avec ce que vous avez appris sur l’<strong>apprentissage automatique supervisé</strong>, à votre avis, est-ce une bonne idée d’utiliser cette technique pour résoudre les problèmes suivants ?</p>"
-              }
-            },
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "1e15bdb4-b27e-47a6-bddd-6b7797be20ac",
-                      "type": "qcu",
-                      "instruction": "<p>Identifier des cancers sur des imageries médicales<br></p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Oui</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu !</p>",
-                            "diagnosis": "<p> En entraînant des logiciels d’IA sur beaucoup d’imagerie avec le bon diagnostic, on peut s’en saisir pour aider les médecins à faire un diagnostic.<br><br></p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Non</p>",
-                          "feedback": {
-                            "state": "<p>Et pourtant si !</p>",
-                            "diagnosis": "<p>En entraînant des logiciels d’IA sur beaucoup d’imagerie avec le bon diagnostic, on peut s’en saisir pour aider les médecins à faire un diagnostic.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "5e03d70b-b0b8-4e2d-915a-981892bd2b3a",
-                      "type": "qcu",
-                      "instruction": "<p>Classer des coureurs sur la base de leur temps à une course.<br></p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Oui</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu !<br><br></p>",
-                            "diagnosis": "<p>Dans ce cas, il est beaucoup plus simple et efficace de faire un <strong>tri simple</strong> sur le temps de la course des candidats, que d’utiliser un logiciel d’intelligence artificielle pour le faire, qui introduit en plus un risque d’erreur.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Non</p>",
-                          "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>Dans ce cas, il est beaucoup plus simple et efficace de faire un <strong>tri simple</strong> sur le temps de la course des candidats, que d’utiliser un logiciel d’intelligence artificielle pour le faire, qui introduit en plus un risque d’erreur.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "d417481b-4fb2-45d4-83dc-60bc04daf04b",
-                      "type": "qcu",
-                      "instruction": "<p>Trier automatiquement les mails qui semblent être de l’arnaque dans un dossier “indésirable” </p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Oui</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu !</p>",
-                            "diagnosis": "<p>En entraînant des logiciels d’IA sur beaucoup de mails en précisant s’il s’agit de mails d’arnaque ou pas, on peut trier automatiquement les mails suspects. </p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Non</p>",
-                          "feedback": {
-                            "state": "<p>Et pourtant si !</p>",
-                            "diagnosis": "<p>En entraînant des logiciels d’IA sur beaucoup de mails en précisant s’il s’agit de mails d’arnaque ou pas, on peut trier automatiquement les mails suspects. </p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "dc6b06b8-edd8-4040-8f52-ad0f8f7d6445",
-                      "type": "qcu",
-                      "instruction": "<p>Identifier des groupes de clients d’un magasin en ligne, selon leurs habitudes d’achat, sans connaître le nombre ou les caractéristiques de chaque groupe</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Oui</p>",
-                          "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>Dans ce cas, nous n'avons pas d'étiquette qui précise à quel groupe appartient chaque client. L’apprentissage automatique supervisé ne fonctionnera pas mais d’autres techniques d’intelligence artificielle peuvent résoudre ce problème.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Non</p>",
-                          "feedback": {
-                            "state": "<p>Bien vu !</p>",
-                            "diagnosis": "<p>Dans ce cas, nous n'avons pas d'étiquette qui précise à quel groupe appartient chaque client. L’apprentissage automatique supervisé ne fonctionnera pas mais d’autres techniques d’intelligence artificielle peuvent résoudre ce problème.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "63d534fb-cc20-4256-b303-0ae9e369c01b",
-                      "type": "text",
-                      "content": "<p> L’<strong>approche par apprentissage supervisé</strong> est très pratique, elle est <strong>très utilisée</strong> en intelligence artificielle mais elle ne convient pas à tous les problèmes.&nbsp;Souvent, elle utilisée <strong>combinée avec d’autres méthodes</strong>.<br><br></p>"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
         {
           "id": "cf267c26-284c-4848-8a3a-c05657c85d57",
           "type": "challenge",
