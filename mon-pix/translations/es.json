@@ -1188,9 +1188,12 @@
       "content": {
         "start-button": "Iniciar el curso"
       },
-      "completed" : {
+      "completed": {
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
         "description": "¡Bien hecho! Ha dado un paso importante para navegar con seguridad por el mundo digital."
+      },
+      "items": {
+        "completed": "¡Completado!"
       }
     },
     "comparison-window": {

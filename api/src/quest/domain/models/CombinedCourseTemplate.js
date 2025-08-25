@@ -27,11 +27,11 @@ export class CombinedCourseTemplate {
   }
 
   toCombinedCourse(code, organizationId, campaigns) {
-    const quest = this.#toCombinedCourseQuestFormat(campaigns);
+    const quest = this.toCombinedCourseQuestFormat(campaigns);
     return new CombinedCourse({ name: this.#name, code, organizationId }, quest);
   }
 
-  #toCombinedCourseQuestFormat(campaigns) {
+  toCombinedCourseQuestFormat(campaigns) {
     const successRequirements = this.#quest.successRequirements.map((requirement) => {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const requirementTargetProfileId = requirement.data.targetProfileId.data;

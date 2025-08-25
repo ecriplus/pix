@@ -4,14 +4,14 @@
   padding: var(--pix-spacing-12x) 80px;
 
   &-completed {
-      display: flex;
-      gap: var(--pix-spacing-4x);
-      align-items: center;
-      padding: var(--pix-spacing-6x);
-      background: var(--pix-secondary-100);
-      border: 1px solid var(--pix-secondary-500);
-      border-radius: 16px;
-      box-shadow: 2px 6px 0 1px var(--pix-secondary-700);
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+    padding: var(--pix-spacing-6x);
+    background: var(--pix-secondary-100);
+    border: 1px solid var(--pix-secondary-500);
+    border-radius: 16px;
+    box-shadow: 2px 6px 0 1px var(--pix-secondary-700);
 
     .completed-text {
       display: flex;
@@ -51,5 +51,23 @@
 
   &__title {
     @extend %pix-title-xxs;
+  }
+
+
+  &__indicator {
+    &--completed {
+      @extend %pix-body-m;
+
+      display: flex;
+      gap: var(--pix-spacing-2x);
+      align-items: center;
+      color: var(--pix-primary-300);
+      font-weight: var(--pix-font-bold);
+
+      .combined-course-item__icon {
+        width: var(--pix-spacing-8x);
+        height: var(--pix-spacing-8x);
+      }
+    }
   }
 }

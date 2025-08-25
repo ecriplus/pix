@@ -1192,9 +1192,12 @@
       "content": {
         "start-button": "Cursus starten"
       },
-      "completed" : {
+      "completed": {
         "title": "Gefeliciteerd! Je bent klaar!",
         "description": "Goed gedaan! Je hebt een belangrijke stap gezet om veilig door de digitale wereld te navigeren."
+      },
+      "items": {
+        "completed": "Voltooid!"
       }
     },
     "comparison-window": {

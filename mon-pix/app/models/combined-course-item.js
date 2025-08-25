@@ -5,6 +5,7 @@ export default class CombinedCourseItem extends Model {
   @attr('string') reference;
   @attr('string') type;
   @attr('string') redirection;
+  @attr('boolean') isCompleted;
 
   get route() {
     return this.type === 'CAMPAIGN' ? 'campaigns' : 'module';
