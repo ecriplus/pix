@@ -77,10 +77,7 @@ const authenticateUser = async function ({
       audience,
     });
 
-    user.changeLocale(locale);
-    if (user.hasBeenModified) {
-      await userRepository.update({ id: user.id, locale: user.locale });
-    }
+    await _updateUserLocaleIfNeeded({ user, locale, userRepository });
 
     const userLogin = await userLoginRepository.findByUserId(user.id);
     if (user.email && userLogin?.shouldSendConnectionWarning()) {
@@ -116,6 +113,13 @@ const authenticateUser = async function ({
     }
   }
 };
+
+async function _updateUserLocaleIfNeeded({ user, locale, userRepository }) {
+  const localeChanged = user.changeLocale(locale);
+  if (localeChanged) {
+    await userRepository.update({ id: user.id, locale: user.locale });
+  }
+}
 
 async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
   if (requestedApplication.isPixOrga && !user.isLinkedToOrganizations()) {
