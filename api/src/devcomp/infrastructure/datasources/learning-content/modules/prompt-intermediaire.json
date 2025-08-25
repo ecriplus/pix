@@ -272,87 +272,99 @@
           ]
         },
         {
+          "id": "1fbe2256-2436-497e-815e-374021a81b20",
+          "type": "discovery",
+          "title": "Quel est le format ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
+                "type": "text",
+                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
+                "type": "text",
+                "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchettes</td>\n            <td>Trois joueurs forment un triange et se passent le ballon en manchette</td>\n        </tr>\n        <tr>\n            <th>Avancé</th>\n            <td>Réception de service réél</td>\n            <td>Un joueur reçoit des services puissants en manchette</td>\n        </tr>\n    </tbody>\n</table>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1a04f4c4-2cc1-4898-ba5e-4c2ea788b764",
+                "type": "qrocm",
+                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
+                "proposals": [
+                  {
+                    "input": "",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 8,
+                    "display": "inline",
+                    "placeholder": "un seul mot",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "tableau"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !<br></p>",
+                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Et non !</p>",
+                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format, ici, un tableau.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "2649a70b-3c92-4be4-b729-f27784225c40",
           "type": "discovery",
           "title": "Découverte : Aide Gustave avec son prompt",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "6fa7a60c-e4bc-4dc4-adc3-438da9b1d428",
-                      "type": "text",
-                      "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
-                    },
-                    {
-                      "id": "5bdf0bdf-44fa-463f-8e35-ebc08328d39a",
-                      "type": "text",
-                      "content": "<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">Niveau</th>\n      <th scope=\"col\">Exercice</th>\n      <th scope=\"col\">Description</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>Débutant</th>\n      <td>Manchette contre le mur</td>\n      <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n    </tr>\n    <tr>\n      <th>Intermédiaire</th>\n      <td>Triangle manchettes</td>\n      <td>Trois joueurs forment un triange et se passent le ballon en manchette</td>\n    </tr>\n    <tr>\n      <th>Avancé</th>\n      <td>Réception de service réél</td>\n      <td>Un joueur reçoit des services puissants en manchette</td>\n    </tr>\n  </tbody>\n</table>"
-                    },
-                    {
-                      "id": "055c7956-d282-4d08-a0a3-3e51dc5a13c8",
-                      "type": "qrocm",
-                      "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
-                      "proposals": [
-                        {
-                          "input": "CV1pzGeay4eJi1g7",
-                          "type": "input",
-                          "inputType": "text",
-                          "size": 8,
-                          "display": "block",
-                          "placeholder": "un seul mot",
-                          "ariaLabel": "champs à remplir",
-                          "defaultValue": "",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "tableau"
-                          ]
-                        }
-                      ],
-                      "feedbacks": {
-                        "valid": {
-                          "state": "<p>Bien vu !</p>",
-                          "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format.</p>"
-                        },
-                        "invalid": {
-                          "state": "<p>Et non !</p>",
-                          "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format, ici, un tableau.</p>"
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "b4bfcb7b-9aaa-436a-8802-08f7f950bb53",
-                      "type": "text",
-                      "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>. </p><p>Utilisez l'<strong>IA de Pix</strong> pour répondre à sa demande.&nbsp;N'hésitez pas à préciser au fur et à mesure.</p>"
-                    },
-                    {
-                      "id": "311424f0-5265-4d68-b362-f903374798d7",
-                      "type": "embed",
-                      "isCompletionRequired": false,
-                      "title": "Simulateur LLM",
-                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                      "instruction": "<p>À vous de jouer !</p>",
-                      "solution": "",
-                      "height": 550
-                    },
-                    {
-                      "id": "3302fb49-1e48-4f65-a075-423851735f8a",
-                      "type": "text",
-                      "content": "<details>    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?  <span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p></details>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
+                "type": "text",
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.<br><br>À vous de jouer !</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1a04f4c4-2cc1-4898-ba5e-4c2ea788b764",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Simulateur LLM",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
+                "instruction": "",
+                "solution": "",
+                "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
+                "type": "text",
+                "content": "<p>\n</p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n</p><p></p><p></p><p></p><p></p>"
+              }
             }
           ]
         },
@@ -672,17 +684,6 @@
             {
               "type": "element",
               "element": {
-                "id": "c992a84d-933f-4a33-8485-5b64cacd6aea",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/actualitestournoi.html",
-                "instruction": "",
-                "height": 550
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
                 "type": "custom",
                 "tagName": "pix-carousel",
@@ -691,7 +692,7 @@
                   "slides": [
                     {
                       "title": "Le tournoi de l’automne 🍂",
-                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br><br>  Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
+                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br>Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
@@ -705,7 +706,7 @@
                     },
                     {
                       "title": "Le tournoi du printemps 🌷",
-                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br><br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.</p>",
+                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
@@ -764,7 +765,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details></p><p></p><p></p>"
               }
             }
           ]
