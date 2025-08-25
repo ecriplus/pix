@@ -30,6 +30,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
       expect(qcm.instruction).equal('instruction');
       expect(qcm.locales).deep.equal(['fr-FR']);
       expect(qcm.proposals).deep.equal([proposal1, proposal2]);
+      expect(qcm.solutions).deep.equal(solutions);
       expect(qcm.solution).deep.equal(expectedSolution);
       expect(qcm.feedbacks).to.be.instanceof(Feedbacks);
       expect(qcm.type).to.be.equal('qcm');
@@ -51,7 +52,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
 
         // then
         expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The solutions are required for a QCM for verification');
+        expect(error.message).to.equal('The solutions should be in a list');
       });
     });
   });
@@ -159,7 +160,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
         const qcm = new QCMForAnswerVerification({
           id: 'qcm-id',
           instruction: '',
-          proposals: [{}],
+          proposals: [{ id: qcmSolution1 }, { id: qcmSolution2 }, { id: '3' }],
           feedbacks: { valid: { state: 'OK' }, invalid: { state: 'KO' } },
           solutions: qcmSolutions,
         });
@@ -211,7 +212,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
           const qcm = new QCMForAnswerVerification({
             id: 'qcm-id',
             instruction: '',
-            proposals: [{}],
+            proposals: [{ id: qcmSolution1 }, { id: qcmSolution2 }, { id: '3' }],
             feedbacks: { valid: { state: 'OK' }, invalid: { state: 'KO' } },
             solutions: qcmSolutions,
           });

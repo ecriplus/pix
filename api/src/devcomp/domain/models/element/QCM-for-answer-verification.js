@@ -10,7 +10,7 @@ class QCMForAnswerVerification extends QCM {
   userResponse;
 
   constructor({ id, instruction, locales, proposals, feedbacks, solutions, validator }) {
-    super({ id, instruction, locales, proposals, feedbacks });
+    super({ id, instruction, locales, proposals, feedbacks, solutions });
 
     assertNotNullOrUndefined(solutions, 'The solutions are required for a QCM for verification');
 

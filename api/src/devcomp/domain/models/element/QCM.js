@@ -11,6 +11,9 @@ class QCM extends Element {
     assertIsArray(proposals, 'The proposals should be in a list');
     this.#assertProposalsAreNotEmpty(proposals);
     assertNotNullOrUndefined(feedbacks, 'The feedbacks is required for a QCM');
+    assertIsArray(solutions, 'The solutions should be in a list');
+    this.#assertSolutionsAreNotEmpty(solutions);
+    this.#assertSolutionsAreExistingProposals(solutions, proposals);
 
     this.instruction = instruction;
     this.locales = locales;
@@ -18,11 +21,12 @@ class QCM extends Element {
     this.isAnswerable = true;
 
     this.feedbacks = new Feedbacks(feedbacks);
+    this.solutions = solutions;
+  }
 
-    if (solutions) {
-      assertIsArray(solutions, 'The solutions should be in a list');
-      this.#assertSolutionsAreExistingProposals(solutions, proposals);
-      this.solutions = solutions;
+  #assertSolutionsAreNotEmpty(solutions) {
+    if (solutions.length === 0) {
+      throw new ModuleInstantiationError('The solutions are required for a QCM');
     }
   }
 
