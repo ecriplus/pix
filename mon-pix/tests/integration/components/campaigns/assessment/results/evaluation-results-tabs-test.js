@@ -164,4 +164,49 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       assert.notOk(screen.queryByRole('tablist', { name: t('pages.skill-review.tabs.aria-label') }));
     });
   });
+  module('when in a combined course context', function (hooks) {
+    let screen;
+    let onResultsSharedStub;
+
+    hooks.beforeEach(async function () {
+      // given
+      const store = this.owner.lookup('service:store');
+      this.set('campaignParticipationResult', {
+        campaignParticipationBadges: [],
+        isShared: false,
+        competenceResults: [],
+      });
+
+      const training = store.createRecord('training', { duration: { days: 2 } });
+      this.set('trainings', [training]);
+
+      onResultsSharedStub = sinon.stub();
+      this.set('onResultsShared', onResultsSharedStub);
+
+      // when
+      screen = await render(
+        hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @trainings={{this.trainings}}
+  @onResultsShared={{this.onResultsShared}}
+  @isSharableCampaign={{true}}
+/>`,
+      );
+    });
+    test('it should not display trainings', async function (assert) {
+      // given
+      this.set('trainings', []);
+
+      // when
+      const screen = await render(
+        hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+  @trainings={{this.trainings}}
+/>`,
+      );
+
+      // then
+      assert.notOk(screen.queryByRole('tab', { name: t('pages.skill-review.tabs.trainings.tab-label') }));
+    });
+  });
 });
