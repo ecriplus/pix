@@ -15,18 +15,20 @@ module('Acceptance | Module | Routes | verifyQcu', function (hooks) {
       type: 'qcu',
       instruction: 'instruction',
       proposals: [
-        { id: '1', content: 'I am the wrong answer!' },
-        { id: '2', content: 'I am the right answer!' },
+        { id: '1', content: 'I am the wrong answer!', feedback: { state: 'Faux' } },
+        { id: '2', content: 'I am the right answer!', feedback: { state: "Bravo ! C'est la bonne réponse." } },
       ],
+      solution: '2',
     };
     const qcu2 = {
       id: 'elementId-2',
       type: 'qcu',
       instruction: 'instruction',
       proposals: [
-        { id: '1', content: 'Vrai' },
-        { id: '2', content: 'Faux' },
+        { id: '1', content: 'Vrai', feedback: { state: 'Vrai' } },
+        { id: '2', content: 'Faux', feedback: { state: 'Pas ouf' } },
       ],
+      solution: '1',
     };
 
     const section = server.create('section', {
@@ -54,20 +56,6 @@ module('Acceptance | Module | Routes | verifyQcu', function (hooks) {
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       sections: [section],
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: "Bravo ! C'est la bonne réponse." },
-      status: 'ok',
-      solution: qcu1.proposals[1].id,
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-2',
-      feedback: { state: 'Pas ouf' },
-      status: 'ko',
-      solution: qcu2.proposals[0].id,
     });
 
     // when

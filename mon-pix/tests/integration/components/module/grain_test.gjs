@@ -637,7 +637,21 @@ module('Integration | Component | Module | Grain', function (hooks) {
     test('should call onElementRetry pass in argument', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const element = { id: 'qcu-id', type: 'qcu', isAnswerable: true };
+      const passageEvents = this.owner.lookup('service:passage-events');
+      const element = {
+        id: 'qcu-id',
+        type: 'qcu',
+        isAnswerable: true,
+        proposals: [
+          { id: 'qcu-1-proposal-1', content: 'I am the wrong answer!', feedback: { state: 'ko' } },
+          {
+            id: 'qcu-1-proposal-2',
+            content: 'I am the right answer!',
+            feedback: { state: "Bravo ! C'est la bonne réponse." },
+          },
+        ],
+        solution: 'qcu-1-proposal-2',
+      };
       const grain = { components: [{ type: 'element', element }] };
       this.set('grain', grain);
       const passage = store.createRecord('passage');
@@ -646,13 +660,21 @@ module('Integration | Component | Module | Grain', function (hooks) {
       const onElementRetryStub = sinon.stub().withArgs({ element });
       this.set('onElementRetry', onElementRetryStub);
 
-      const correction = store.createRecord('correction-response', { status: 'ko' });
-      store.createRecord('element-answer', { elementId: element.id, correction, passage });
+      const onElementAnswerStub = sinon.stub().withArgs({ element });
+      this.set('onElementAnswer', onElementAnswerStub);
+
+      passageEvents.record = sinon.stub();
+      store.createRecord = sinon.stub().returns({
+        save: sinon.stub(),
+      });
 
       // when
-      await render(hbs`
-        <Module::Grain::Grain @grain={{this.grain}} @onElementRetry={{this.onElementRetry}} @canMoveToNextGrain={{true}}
+      const screen = await render(hbs`
+        <Module::Grain::Grain @grain={{this.grain}} @onElementAnswer={{this.onElementAnswer}} @onElementRetry={{this.onElementRetry}} @canMoveToNextGrain={{true}}
                        @passage={{this.passage}} />`);
+      await click(screen.getByLabelText('I am the wrong answer!'));
+      const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+      await click(verifyButton);
       await clickByName(t('pages.modulix.buttons.activity.retry'));
 
       // then
@@ -743,6 +765,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
     module('When we retry an answerable element', function () {
       test('should call the onElementRetry action', async function (assert) {
         // given
+        const passageEvents = this.owner.lookup('service:passage-events');
         const steps = [
           {
             elements: [
@@ -750,11 +773,12 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 id: 'd0690f26-978c-41c3-9a21-da931857739c',
                 instruction: 'Instruction',
                 proposals: [
-                  { id: '1', content: 'radio1' },
-                  { id: '2', content: 'radio2' },
+                  { id: '1', content: 'radio1', feedback: { state: 'wrong answer' } },
+                  { id: '2', content: 'radio2', feedback: { state: 'right answer' } },
                 ],
                 isAnswerable: true,
                 type: 'qcu',
+                solution: '2',
               },
             ],
           },
@@ -769,6 +793,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
             ],
           },
         ];
+        const onElementAnswerStub = sinon.stub();
+        this.set('onElementAnswer', onElementAnswerStub);
+
         const onElementRetryStub = sinon.stub();
         const store = this.owner.lookup('service:store');
         const grain = {
@@ -780,26 +807,19 @@ module('Integration | Component | Module | Grain', function (hooks) {
           ],
         };
         const passage = store.createRecord('passage');
-        const correctionResponse = store.createRecord('correction-response', {
-          feedback: { state: 'Too bad!' },
-          status: 'ko',
-          solution: '1',
-        });
-        store.createRecord('element-answer', {
-          correction: correctionResponse,
-          elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
-          passage,
-        });
         this.set('grain', grain);
         this.set('passage', passage);
         this.set('onElementRetry', onElementRetryStub);
+        passageEvents.record = sinon.stub();
 
         // when
-        await render(hbs`
-          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}}  @onElementRetry={{this.onElementRetry}} />`);
+        const screen = await render(hbs`
+          <Module::Grain::Grain @grain={{this.grain}} @passage={{this.passage}} @onElementAnswer={{this.onElementAnswer}} @onElementRetry={{this.onElementRetry}} />`);
 
         // then
         await clickByName('radio1');
+        const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+        await click(verifyButton);
         await clickByName(t('pages.modulix.buttons.activity.retry'));
         sinon.assert.calledOnce(onElementRetryStub);
         assert.ok(true);

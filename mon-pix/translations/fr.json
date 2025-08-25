@@ -1663,7 +1663,7 @@
         "grain": {
           "continue": "Continuer",
           "skip": "Passer",
-          "skipActivity": "Passer l‘activité",
+          "skipActivity": "Passer l’activité",
           "terminate": "Terminer"
         },
         "interactive-element": {

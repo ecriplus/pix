@@ -15,18 +15,20 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       type: 'qcu',
       instruction: 'instruction',
       proposals: [
-        { id: '1', content: 'I am the wrong answer!' },
-        { id: '2', content: 'I am the right answer!' },
+        { id: '1', content: 'I am the wrong answer!', feedback: { state: 'Faux' } },
+        { id: '2', content: 'I am the right answer!', feedback: { state: 'Vrai' } },
       ],
+      solution: '2',
     };
     const qcu2 = {
       id: 'elementId-2',
       type: 'qcu',
       instruction: 'instruction',
       proposals: [
-        { id: '1', content: 'Vrai' },
-        { id: '2', content: 'Faux' },
+        { id: '1', content: 'Vrai', feedback: { state: 'Vrai' } },
+        { id: '2', content: 'Faux', feedback: { state: 'Faux' } },
       ],
+      solution: '1',
     };
 
     const section = server.create('section', {
@@ -63,13 +65,6 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
       sections: [section],
     });
 
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: 'Faux' },
-      status: 'ko',
-      solution: qcu1.proposals[1].id,
-    });
-
     const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
 
     const firstQcuVerifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
@@ -92,7 +87,7 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     assert.false(wrongAnswerRadio.checked);
     assert.false(rightAnswerRadio.checked);
 
-    const firstQcuVerifyButtonCameBack = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+    const firstQcuVerifyButtonCameBack = await screen.findByRole('button', { name: 'Vérifier ma réponse' });
     await click(wrongAnswerRadio);
     await click(firstQcuVerifyButtonCameBack);
     assert.strictEqual(screen.queryByRole('status').innerText, 'Faux');

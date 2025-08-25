@@ -1,5 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixStepper from 'mon-pix/components/module/component/stepper';
 import { module, test } from 'qunit';
@@ -157,6 +158,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       module('When we retry an answerable element', function () {
         test('should call the onElementRetry action', async function (assert) {
           // given
+          const passageEventService = this.owner.lookup('service:passage-events');
           const steps = [
             {
               elements: [
@@ -164,10 +166,11 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                   id: 'd0690f26-978c-41c3-9a21-da931857739c',
                   instruction: 'Instruction',
                   proposals: [
-                    { id: '1', content: 'radio1' },
-                    { id: '2', content: 'radio2' },
+                    { id: '1', content: 'radio1', feedback: { state: 'ok' } },
+                    { id: '2', content: 'radio2', feedback: { state: 'ko' } },
                   ],
                   isAnswerable: true,
+                  solution: '1',
                   type: 'qcu',
                 },
               ],
@@ -184,31 +187,24 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             },
           ];
           const onElementRetryStub = sinon.stub();
+          const onElementAnswerStub = sinon.stub();
           const store = this.owner.lookup('service:store');
           const passage = store.createRecord('passage');
-          const correctionResponse = store.createRecord('correction-response', {
-            feedback: { state: 'Too bad!' },
-            status: 'ko',
-            solution: '1',
-          });
-          store.createRecord('element-answer', {
-            correction: correctionResponse,
-            elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
-            passage,
-          });
+          sinon.stub(passageEventService, 'record');
           function getLastCorrectionForElementStub(element) {
             if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
-              return correctionResponse;
+              return {};
             }
             return undefined;
           }
 
           // when
-          await render(
+          const screen = await render(
             <template>
               <ModulixStepper
                 @passage={{passage}}
                 @steps={{steps}}
+                @onElementAnswer={{onElementAnswerStub}}
                 @onElementRetry={{onElementRetryStub}}
                 @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
               />
@@ -216,7 +212,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           );
 
           // then
-          await clickByName('radio1');
+          await clickByName('radio2');
+          const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+          await click(verifyButton);
           await clickByName(t('pages.modulix.buttons.activity.retry'));
           sinon.assert.calledOnce(onElementRetryStub);
           assert.ok(true);

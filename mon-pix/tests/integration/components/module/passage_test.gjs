@@ -533,10 +533,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
         id: 'element-id',
         instruction: 'instruction',
         proposals: [
-          { id: '1', content: 'radio1' },
-          { id: '2', content: 'radio2' },
+          { id: '1', content: 'radio1', feedback: { state: 'Correct!', diagnosis: '<p>Good job!</p>' } },
+          { id: '2', content: 'radio2', feedback: { state: 'Wrong!', diagnosis: '<p>Try again!</p>' } },
         ],
         type: 'qcu',
+        solution: '1',
         isAnswerable: true,
       };
       const section = store.createRecord('section', {
@@ -578,7 +579,16 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // given
       const store = this.owner.lookup('service:store');
-      const element = { id: 'qcu-id', type: 'qcu', isAnswerable: true };
+      const element = {
+        id: 'qcu-id',
+        type: 'qcu',
+        proposals: [
+          { id: '1', content: 'radio1', feedback: { state: 'Correct!', diagnosis: '<p>Good job!</p>' } },
+          { id: '2', content: 'radio2', feedback: { state: 'Wrong!', diagnosis: '<p>Try again!</p>' } },
+        ],
+        solution: '1',
+        isAnswerable: true,
+      };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -592,11 +602,16 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       const passage = store.createRecord('passage');
 
-      const correction = store.createRecord('correction-response', { status: 'ko' });
-      store.createRecord('element-answer', { elementId: element.id, correction, passage });
+      // We are adding a stub for create record to avoid calling
+      // answers API in an integration test
+      store.createRecord = sinon.stub().returns({
+        save: sinon.stub(),
+      });
 
       // when
-      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      await click(screen.getByLabelText('radio2'));
+      await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
       await clickByName(t('pages.modulix.buttons.activity.retry'));
 
       // then
