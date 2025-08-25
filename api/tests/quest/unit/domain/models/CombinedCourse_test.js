@@ -689,7 +689,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
         });
         // when
-        combinedCourse.generateItems([campaign], null, null, null, dataForQuest);
+        combinedCourse.generateItems({ itemDetails: [campaign], dataForQuest });
 
         // then
         expect(combinedCourse.items).to.deep.equal([
@@ -726,7 +726,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
         });
         // when
-        combinedCourse.generateItems([campaign], [], [], encryptedCombinedCourseUrl, dataForQuest);
+        combinedCourse.generateItems({ itemDetails: [campaign], encryptedCombinedCourseUrl, dataForQuest });
 
         // then
         expect(combinedCourse.items).to.deep.equal([
@@ -775,13 +775,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             }),
           });
           // when
-          combinedCourse.generateItems(
-            [module],
+          combinedCourse.generateItems({
+            itemDetails: [module],
             recommendableModuleIds,
             recommendedModuleIdsForUser,
             encryptedCombinedCourseUrl,
             dataForQuest,
-          );
+          });
 
           // then
           expect(combinedCourse.items).to.deep.equal([
@@ -841,13 +841,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
 
           // when
-          combinedCourse.generateItems(
-            [campaign, module],
+          combinedCourse.generateItems({
+            itemDetails: [campaign, module],
             recommendableModuleIds,
             recommendedModuleIdsForUser,
-            null,
             dataForQuest,
-          );
+          });
 
           // then
           expect(combinedCourse.items).to.deep.equal([
@@ -907,13 +906,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
 
           // when
-          combinedCourse.generateItems(
-            [campaign, module],
+          combinedCourse.generateItems({
+            itemDetails: [campaign, module],
             recommendableModuleIds,
             recommendedModuleIdsForUser,
             encryptedCombinedCourseUrl,
             dataForQuest,
-          );
+          });
 
           // then
           expect(combinedCourse.items).to.deep.equal([
@@ -964,7 +963,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
 
         // when
-        combinedCourse.generateItems([campaign1, campaign2], null, null, null, dataForQuest);
+        combinedCourse.generateItems({ itemDetails: [campaign1, campaign2], dataForQuest });
 
         // then
         expect(combinedCourse.items).to.deep.equal([
@@ -1029,7 +1028,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         const redirectionUrl = 'redirectionUrl';
 
         // when
-        combinedCourse.generateItems([campaign1, campaign2, module], [], null, redirectionUrl, dataForQuest);
+        combinedCourse.generateItems({
+          itemDetails: [campaign1, campaign2, module],
+          encryptedCombinedCourseUrl: redirectionUrl,
+          dataForQuest,
+        });
 
         // then
         expect(combinedCourse.items).to.deep.equal([
@@ -1084,7 +1087,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
 
         // when
-        combinedCourse.generateItems([module], [], null, 'redirectionUrl', dataForQuest);
+        combinedCourse.generateItems({
+          itemDetails: [module],
+          encryptedCombinedCourseUrl: 'redirectionUrl',
+          dataForQuest,
+        });
         const [moduleItem] = combinedCourse.items;
 
         // then
@@ -1117,7 +1124,11 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
 
         // when
-        combinedCourse.generateItems([campaign], [], null, 'redirectionUrl', dataForQuest);
+        combinedCourse.generateItems({
+          itemDetails: [campaign],
+          encryptedCombinedCourseUrl: 'redirectionUrl',
+          dataForQuest,
+        });
         const [campaignItem] = combinedCourse.items;
 
         // then

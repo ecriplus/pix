@@ -58,7 +58,11 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
       passages: [],
     }),
   });
-  combinedCourseDetails.generateItems(items ?? [campaign, module], [], [], encryptedCombinedCourseUrl, dataForQuest);
+  combinedCourseDetails.generateItems({
+    itemDetails: items ?? [campaign, module],
+    encryptedCombinedCourseUrl,
+    dataForQuest,
+  });
 
   return combinedCourseDetails;
 }

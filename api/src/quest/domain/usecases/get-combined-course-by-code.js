@@ -68,13 +68,13 @@ export async function getCombinedCourseByCode({
 
   const combinedCourseUrl = '/parcours/' + combinedCourseDetails.code;
   const encryptedCombinedCourseUrl = await cryptoService.encrypt(combinedCourseUrl, config.module.secret);
-  combinedCourseDetails.generateItems(
-    [...campaigns, ...modules],
+  combinedCourseDetails.generateItems({
+    itemDetails: [...campaigns, ...modules],
     recommendableModuleIds,
     recommendedModuleIdsForUser,
     encryptedCombinedCourseUrl,
     dataForQuest,
-  );
+  });
 
   return combinedCourseDetails;
 }

@@ -82,17 +82,17 @@ export class CombinedCourseDetails extends CombinedCourse {
     return questForUser.isSuccessful(dataForQuest);
   }
 
-  generateItems(
-    data,
+  generateItems({
+    itemDetails,
     recommendableModuleIds = [],
     recommendedModuleIdsForUser = [],
     encryptedCombinedCourseUrl,
     dataForQuest,
-  ) {
+  }) {
     this.items = [];
     for (const requirement of this.quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        const campaign = data.find(({ id }) => id === requirement.data.campaignId.data);
+        const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
         const isCompleted = requirement.isFulfilled(dataForQuest);
         this.items.push(
           new CombinedCourseItem({
@@ -104,7 +104,7 @@ export class CombinedCourseDetails extends CombinedCourse {
           }),
         );
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
-        const module = data.find(({ id }) => id === requirement.data.moduleId.data);
+        const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
 
         const isRecommandable = recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
