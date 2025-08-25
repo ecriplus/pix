@@ -1,5 +1,5 @@
+import { CampaignParticipationOverview } from '../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { CampaignParticipationOverview } from '../../../../src/shared/domain/read-models/CampaignParticipationOverview.js';
 const { SHARED } = CampaignParticipationStatuses;
 
 const buildCampaignParticipationOverview = function ({
