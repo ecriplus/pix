@@ -35,13 +35,7 @@ const acceptCertificationCenterInvitation = async function ({
     );
   }
 
-  if (locale) {
-    const user = await userRepository.get(userId);
-    user.setLocaleIfNotAlreadySet(locale);
-    if (user.hasBeenModified) {
-      await userRepository.update({ id: user.id, locale: user.locale });
-    }
-  }
+  await _updateUserLocaleIfNeeded({ locale, userRepository, userId });
 
   certificationCenterInvitedUser.acceptInvitation(code);
 
@@ -49,3 +43,13 @@ const acceptCertificationCenterInvitation = async function ({
 };
 
 export { acceptCertificationCenterInvitation };
+
+async function _updateUserLocaleIfNeeded({ locale, userRepository, userId }) {
+  if (locale) {
+    const user = await userRepository.get(userId);
+    const localeChanged = user.changeLocale(locale);
+    if (localeChanged) {
+      await userRepository.update({ id: user.id, locale: user.locale });
+    }
+  }
+}

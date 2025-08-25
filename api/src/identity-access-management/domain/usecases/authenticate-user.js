@@ -77,7 +77,7 @@ const authenticateUser = async function ({
       audience,
     });
 
-    user.setLocaleIfNotAlreadySet(locale);
+    user.changeLocale(locale);
     if (user.hasBeenModified) {
       await userRepository.update({ id: user.id, locale: user.locale });
     }
