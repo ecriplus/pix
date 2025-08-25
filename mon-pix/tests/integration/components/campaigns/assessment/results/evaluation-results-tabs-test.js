@@ -198,7 +198,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       this.set('trainings', []);
 
       // when
-      const screen = await render(
+      screen = await render(
         hbs`<Campaigns::Assessment::Results::EvaluationResultsTabs
   @campaignParticipationResult={{this.campaignParticipationResult}}
   @trainings={{this.trainings}}
