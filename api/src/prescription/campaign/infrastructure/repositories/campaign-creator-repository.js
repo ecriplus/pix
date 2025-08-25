@@ -3,10 +3,11 @@ import { CampaignCreator } from '../../domain/models/CampaignCreator.js';
 
 async function get(organizationId) {
   const availableTargetProfileIds = await knex('target-profiles')
-    .leftJoin('target-profile-shares', 'targetProfileId', 'target-profiles.id')
     .where({ outdated: false })
     .andWhere((queryBuilder) => {
-      queryBuilder.where({ ownerOrganizationId: organizationId }).orWhere({ organizationId });
+      queryBuilder
+        .where({ ownerOrganizationId: organizationId })
+        .orWhere('id', 'in', knex.select('targetProfileId').from('target-profile-shares').where({ organizationId }));
     })
     .pluck('target-profiles.id');
 
