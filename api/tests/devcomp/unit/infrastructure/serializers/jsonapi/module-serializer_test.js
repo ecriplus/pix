@@ -407,6 +407,7 @@ function getComponents() {
         title: 'title',
         url: 'https://assets.pix.org/modules/mavideo.mp4',
         subtitles: 'https://assets.pix.org/modules/mavideo.vtt',
+        poster: 'https://assets.pix.org/modules/mavideo.jpg',
         transcription: 'transcription',
       }),
     }),
@@ -613,7 +614,7 @@ function getAttributesComponents() {
       element: {
         id: '4',
         isAnswerable: false,
-        poster: null,
+        poster: 'https://assets.pix.org/modules/mavideo.jpg',
         subtitles: 'https://assets.pix.org/modules/mavideo.vtt',
         title: 'title',
         transcription: 'transcription',
