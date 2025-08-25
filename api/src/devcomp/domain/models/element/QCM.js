@@ -4,7 +4,7 @@ import { Feedbacks } from '../Feedbacks.js';
 import { Element } from './Element.js';
 
 class QCM extends Element {
-  constructor({ id, instruction, locales, proposals, feedbacks }) {
+  constructor({ id, instruction, locales, proposals, feedbacks, solutions }) {
     super({ id, type: 'qcm' });
 
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCM');
@@ -19,11 +19,24 @@ class QCM extends Element {
     if (feedbacks) {
       this.feedbacks = new Feedbacks(feedbacks);
     }
+
+    if (solutions) {
+      assertIsArray(solutions, 'The solutions should be in a list');
+      this.#assertSolutionsAreExistingProposals(solutions, proposals);
+      this.solutions = solutions;
+    }
   }
 
   #assertProposalsAreNotEmpty(proposals) {
     if (proposals.length === 0) {
       throw new ModuleInstantiationError('The proposals are required for a QCM');
+    }
+  }
+
+  #assertSolutionsAreExistingProposals(solutions, proposals) {
+    const proposalIds = proposals.map((proposal) => proposal.id);
+    if (!solutions.every((solution) => proposalIds.includes(solution))) {
+      throw new ModuleInstantiationError('At least one QCM solution is not an existing proposal');
     }
   }
 }

@@ -9,10 +9,10 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
   describe('#constructor', function () {
     it('should instanciate a QCM For Verification with right attributes', function () {
       // Given
-      const proposal1 = Symbol('proposal1');
-      const proposal2 = Symbol('proposal2');
+      const proposal1 = { id: Symbol('proposal1') };
+      const proposal2 = { id: Symbol('proposal2') };
       const feedbacks = { valid: { state: 'valid' }, invalid: { state: 'invalid' } };
-      const solutions = Symbol('solutions');
+      const solutions = [proposal1.id];
       const expectedSolution = { value: solutions };
 
       // When

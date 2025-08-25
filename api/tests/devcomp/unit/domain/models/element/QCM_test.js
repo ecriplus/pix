@@ -7,9 +7,10 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
   describe('#constructor', function () {
     it('should instanciate a QCM with right properties', function () {
       // Given
-      const proposal1 = Symbol('proposal1');
-      const proposal2 = Symbol('proposal2');
+      const proposal1 = { id: Symbol('proposal1') };
+      const proposal2 = { id: Symbol('proposal2') };
       const feedbacks = { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') };
+      const solutions = [proposal1.id];
 
       // When
       const qcm = new QCM({
@@ -18,6 +19,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
         locales: ['fr-FR'],
         proposals: [proposal1, proposal2],
         feedbacks,
+        solutions,
       });
 
       // Then
@@ -27,6 +29,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       expect(qcm.locales).deep.equal(['fr-FR']);
       expect(qcm.proposals).deep.equal([proposal1, proposal2]);
       expect(qcm.feedbacks).deep.equal(feedbacks);
+      expect(qcm.solutions).deep.equal(solutions);
     });
   });
 
@@ -71,6 +74,48 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The proposals should be in a list');
+    });
+  });
+
+  describe('A QCM does not have a list of solutions', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: 'toto' }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The solutions should be in a list');
+    });
+  });
+
+  describe('A QCM with an empty list of solutions', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: [] }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The solutions are required for a QCM');
+    });
+  });
+
+  describe('A QCM solution is not in proposals', function () {
+    it('should throw an error', function () {
+      // given
+      const proposal = { id: Symbol('proposal1') };
+
+      // when
+      const error = catchErrSync(
+        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: ['toto'] }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('At least one QCM solution is not an existing proposal');
     });
   });
 });
