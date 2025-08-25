@@ -5,6 +5,7 @@ import {
   UserShouldChangePasswordError,
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
+import { PasswordExpirationToken } from '../../../../../src/identity-access-management/domain/models/PasswordExpirationToken.js';
 import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { authenticateForSaml } from '../../../../../src/identity-access-management/domain/usecases/authenticate-for-saml.usecase.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
@@ -29,7 +30,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
   beforeEach(function () {
     tokenService = {
       extractExternalUserFromIdToken: sinon.stub(),
-      createPasswordResetToken: sinon.stub(),
     };
     pixAuthenticationService = {
       getUserByUsernameAndPassword: sinon.stub(),
@@ -347,7 +347,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
 
       it('creates and return password reset token', async function () {
         // given
-        tokenService.createPasswordResetToken.returns('token');
+        sinon.stub(PasswordExpirationToken, 'generate').returns('token');
+
         const oneTimePassword = 'Azerty123*';
         const user = createUserWithValidCredentialsWhoShouldChangePassword({
           oneTimePassword,
