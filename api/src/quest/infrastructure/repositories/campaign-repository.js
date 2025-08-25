@@ -11,6 +11,15 @@ export const get = async function ({ id, campaignsApi }) {
 };
 
 export const save = async function ({ campaigns, campaignsApi }) {
-  const createdCampaigns = await campaignsApi.save(campaigns);
+  const campaignToCreate = campaigns.map(_toDTO);
+  const createdCampaigns = await campaignsApi.save(campaignToCreate);
   return createdCampaigns.map((campaign) => new Campaign(campaign));
+};
+
+const _toDTO = (campaign) => {
+  return {
+    ...campaign,
+    type: 'ASSESSMENT',
+    multipleSendings: false,
+  };
 };

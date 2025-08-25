@@ -29,16 +29,13 @@ export const createCombinedCourses = withTransaction(
       for (const organizationId of organizationIds) {
         const code = await codeGenerator.generate(accessCodeRepository, pendingCodes);
         pendingCodes.push(code);
-        // TODO: Plus tard avoir une url relative -> Futur ticket PIX-19131
-        const combinedCourseUrl = 'http://localhost:4200' + '/parcours/' + code;
+        const combinedCourseUrl = '/parcours/' + code;
         const campaigns = targetProfiles.map((targetProfile) => {
           return new Campaign({
             organizationId: parseInt(organizationId),
             targetProfileId: targetProfile.id,
             creatorId: parseInt(creatorId),
             ownerId: parseInt(creatorId),
-            type: 'ASSESSMENT',
-            multipleSendings: false,
             name: targetProfile.internalName,
             title: targetProfile.name,
             customResultPageButtonUrl: combinedCourseUrl,

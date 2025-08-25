@@ -2,6 +2,10 @@ function getHref() {
   return window.location.href;
 }
 
+function getOrigin() {
+  return window.location.origin;
+}
+
 function replace(url) {
   window.location.replace(url);
 }
@@ -16,6 +20,7 @@ function assign(url) {
 
 const Location = {
   getHref,
+  getOrigin,
   replace,
   reload,
   assign,
