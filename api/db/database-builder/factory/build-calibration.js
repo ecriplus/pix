@@ -1,7 +1,7 @@
-import { datamartBuffer } from '../datamart-buffer.js';
+import { databaseBuffer } from '../database-buffer.js';
 
 const buildCalibration = function ({
-  id = datamartBuffer.getNextId(),
+  id = databaseBuffer.getNextId(),
   calibration_date = new Date(),
   scope = 'COEUR',
   status = 'TO_VALIDATE',
@@ -13,8 +13,8 @@ const buildCalibration = function ({
     status,
   };
 
-  return datamartBuffer.pushInsertable({
-    tableName: 'data_calibrations',
+  return databaseBuffer.pushInsertable({
+    tableName: 'certification-data-calibrations',
     values,
   });
 };

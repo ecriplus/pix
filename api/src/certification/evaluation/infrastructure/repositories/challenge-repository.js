@@ -1,5 +1,4 @@
-import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
-import { config } from '../../../../shared/config.js';
+import { knex } from '../../../../../db/knex-database-connection.js';
 import { Challenge } from '../../../../shared/domain/models/Challenge.js';
 import * as solutionAdapter from '../../../../shared/infrastructure/adapters/solution-adapter.js';
 import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
@@ -15,15 +14,12 @@ const VALIDATED_STATUS = 'validé';
 const ARCHIVED_STATUS = 'archivé';
 const OPERATIVE_STATUSES = [VALIDATED_STATUS, ARCHIVED_STATUS];
 
-const PIX_CORE_DATAMART_SCOPE = 'COEUR';
-const PIX_CORE_CHALLENGES_DATAMART_STATUS = 'VALIDATED';
-
 export async function findFlashCompatibleWithoutLocale({
   useObsoleteChallenges,
   fromArchivedCalibration = false,
 } = {}) {
   if (fromArchivedCalibration) {
-    return _findFlashCompatibleWithoutLocaleFromDatamart();
+    return _findFlashCompatibleWithoutLocaleFromArchive();
   }
   return _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges });
 }
@@ -38,22 +34,19 @@ async function _findFlashCompatibleWithoutLocaleFromLCMS({ useObsoleteChallenges
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-async function _findFlashCompatibleWithoutLocaleFromDatamart() {
-  const certificationCoreCalibration2024Id = config.v3Certification.certificationCoreCalibration2024Id;
-  const datamartChallenges = await datamartKnex('data_active_calibrated_challenges')
-    .join('data_calibrations', 'data_calibrations.id', certificationCoreCalibration2024Id)
-    .where({ scope: PIX_CORE_DATAMART_SCOPE, status: PIX_CORE_CHALLENGES_DATAMART_STATUS });
+async function _findFlashCompatibleWithoutLocaleFromArchive() {
+  const archivedChallenges = await knex('certification-data-active-calibrated-challenges');
 
-  const challengesIds = datamartChallenges.map(({ challenge_id }) => challenge_id);
+  const challengesIds = archivedChallenges.map(({ challengeId }) => challengeId);
   const challengeDtos = await getInstance().getMany(challengesIds);
 
-  const calibratedChallenges = datamartChallenges.map((datamartChallenge) => {
+  const calibratedChallenges = archivedChallenges.map((archivedChallenge) => {
     const correspondingChallenge = challengeDtos.find(
-      (challengeDto) => datamartChallenge.challenge_id === challengeDto.id,
+      (challengeDto) => archivedChallenge.challengeId === challengeDto.id,
     );
 
-    correspondingChallenge.alpha = datamartChallenge.alpha;
-    correspondingChallenge.delta = datamartChallenge.delta;
+    correspondingChallenge.alpha = archivedChallenge.alpha;
+    correspondingChallenge.delta = archivedChallenge.delta;
 
     return correspondingChallenge;
   });
