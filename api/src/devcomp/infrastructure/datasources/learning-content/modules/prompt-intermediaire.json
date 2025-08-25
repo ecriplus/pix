@@ -691,7 +691,7 @@
                   "slides": [
                     {
                       "title": "Le tournoi de l’automne 🍂",
-                      "description": "Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br><br>  Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.",
+                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br><br>  Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
@@ -705,7 +705,7 @@
                     },
                     {
                       "title": "Le tournoi du printemps 🌷",
-                      "description": "Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br><br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.",
+                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br><br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
