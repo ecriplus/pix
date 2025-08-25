@@ -173,7 +173,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.result).to.have.property('data');
-        expect(response.result.data).to.have.property('type', 'campaign-participation-statistics');
+        expect(response.result.data).to.have.property('type', 'participation-statistics');
         expect(response.result.data).to.have.property('attributes');
         expect(response.result.data.attributes).to.have.property('total-participation-count');
         expect(response.result.data.attributes).to.have.property('completed-participation-count');
