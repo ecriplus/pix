@@ -1,4 +1,4 @@
-import { CertificationChallengeWithType } from '../../../../src/shared/domain/models/CertificationChallengeWithType.js';
+import { CertificationChallengeWithType } from '../../../../src/certification/shared/domain/models/CertificationChallengeWithType.js';
 import { Type } from '../../../../src/shared/domain/models/Challenge.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 

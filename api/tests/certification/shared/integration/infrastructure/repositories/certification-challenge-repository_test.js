@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { CertificationChallenge } from '../../../../../../src/certification/shared/domain/models/CertificationChallenge.js';
 import * as certificationChallengeRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-challenge-repository.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
-import { CertificationChallenge } from '../../../../../../src/shared/domain/models/CertificationChallenge.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Certification Challenge', function () {

@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../../shared/domain/models/CertificationChallengeWithType.js').CertificationChallengeWithType} CertificationChallengeWithType
+ * @typedef {import('../../../shared/domain/models/CertificationChallengeWithType.js').CertificationChallengeWithType} CertificationChallengeWithType
  * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
  */
 import JoiDate from '@joi/date';
