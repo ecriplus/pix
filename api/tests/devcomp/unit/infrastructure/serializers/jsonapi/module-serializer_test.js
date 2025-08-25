@@ -363,7 +363,6 @@ function getComponents() {
           },
         ],
         instruction: 'question declarative',
-        isAnswerable: true,
       }),
     }),
     new ComponentElement({
