@@ -45,6 +45,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification'
               id: '123',
               instruction: 'toto',
               proposals: [Symbol('proposal1')],
+              feedbacks: { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') },
             }),
         )();
 

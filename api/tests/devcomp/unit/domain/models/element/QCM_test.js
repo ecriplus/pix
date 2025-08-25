@@ -77,11 +77,36 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
     });
   });
 
+  describe('A QCM does not have feedbacks', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () =>
+          new QCM({
+            id: '123',
+            instruction: 'toto',
+            proposals: [Symbol('proposal1')],
+          }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The feedbacks is required for a QCM');
+    });
+  });
+
   describe('A QCM does not have a list of solutions', function () {
     it('should throw an error', function () {
       // when
       const error = catchErrSync(
-        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: 'toto' }),
+        () =>
+          new QCM({
+            id: '123',
+            instruction: 'toto',
+            proposals: [Symbol('proposal1')],
+            feedbacks: { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') },
+            solutions: 'toto',
+          }),
       )();
 
       // then
@@ -94,7 +119,14 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
     it('should throw an error', function () {
       // when
       const error = catchErrSync(
-        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: [] }),
+        () =>
+          new QCM({
+            id: '123',
+            instruction: 'toto',
+            proposals: [Symbol('proposal1')],
+            feedbacks: { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') },
+            solutions: [],
+          }),
       )();
 
       // then
@@ -110,7 +142,14 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
 
       // when
       const error = catchErrSync(
-        () => new QCM({ id: '123', instruction: 'toto', proposals: [Symbol('proposal1')], solutions: ['toto'] }),
+        () =>
+          new QCM({
+            id: '123',
+            instruction: 'toto',
+            proposals: [proposal],
+            feedbacks: { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') },
+            solutions: [Symbol('invalid-proposal-id')],
+          }),
       )();
 
       // then

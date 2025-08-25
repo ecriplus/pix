@@ -10,15 +10,14 @@ class QCM extends Element {
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCM');
     assertIsArray(proposals, 'The proposals should be in a list');
     this.#assertProposalsAreNotEmpty(proposals);
+    assertNotNullOrUndefined(feedbacks, 'The feedbacks is required for a QCM');
 
     this.instruction = instruction;
     this.locales = locales;
     this.proposals = proposals;
     this.isAnswerable = true;
 
-    if (feedbacks) {
-      this.feedbacks = new Feedbacks(feedbacks);
-    }
+    this.feedbacks = new Feedbacks(feedbacks);
 
     if (solutions) {
       assertIsArray(solutions, 'The solutions should be in a list');
