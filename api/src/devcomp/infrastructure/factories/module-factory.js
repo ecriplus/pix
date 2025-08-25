@@ -241,6 +241,8 @@ export class ModuleFactory {
           content: proposal.content,
         });
       }),
+      feedbacks: element.feedbacks,
+      solutions: element.solutions,
     });
   }
 

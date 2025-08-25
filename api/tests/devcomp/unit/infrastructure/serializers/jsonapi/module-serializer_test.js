@@ -375,6 +375,8 @@ function getComponents() {
           { id: '3', content: 'titi' },
         ],
         instruction: 'hello',
+        feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
+        solutions: ['1', '2'],
       }),
     }),
     new ComponentElement({
@@ -572,6 +574,8 @@ function getAttributesComponents() {
             id: '3',
           },
         ],
+        feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
+        solutions: ['1', '2'],
         type: 'qcm',
       },
     },
