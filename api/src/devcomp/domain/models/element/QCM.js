@@ -1,4 +1,4 @@
-import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
+import { assertIsArray, assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 import { ModuleInstantiationError } from '../../errors.js';
 import { Element } from './Element.js';
 
@@ -7,7 +7,7 @@ class QCM extends Element {
     super({ id, type: 'qcm' });
 
     assertNotNullOrUndefined(instruction, 'The instruction is required for a QCM');
-    this.#assertProposalsIsAnArray(proposals);
+    assertIsArray(proposals, 'The proposals should be in a list');
     this.#assertProposalsAreNotEmpty(proposals);
 
     this.instruction = instruction;
@@ -19,12 +19,6 @@ class QCM extends Element {
   #assertProposalsAreNotEmpty(proposals) {
     if (proposals.length === 0) {
       throw new ModuleInstantiationError('The proposals are required for a QCM');
-    }
-  }
-
-  #assertProposalsIsAnArray(proposals) {
-    if (!Array.isArray(proposals)) {
-      throw new ModuleInstantiationError('The proposals should be in a list');
     }
   }
 }

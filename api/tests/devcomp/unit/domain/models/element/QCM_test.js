@@ -67,7 +67,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QCM', function () {
       const error = catchErrSync(() => new QCM({ id: '123', instruction: 'toto', proposals: 'toto' }))();
 
       // then
-      expect(error).to.be.instanceOf(ModuleInstantiationError);
+      expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The proposals should be in a list');
     });
   });
