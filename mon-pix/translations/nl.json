@@ -1772,6 +1772,13 @@
         "subtitle": "Je hebt aan de volgende doelstellingen gewerkt:",
         "title": "Module voltooid!"
       },
+      "section": {
+        "question-yourself": "Stel jezelf vragen",
+        "explore-to-understand": "Onderzoek om te begrijpen",
+        "retain-the-essentials": "Onthoud de essentie",
+        "practise": "Oefen",
+        "go-further": "Ga verder"
+      },
       "sidebar": {
         "button": "De modulestappen weergeven"
       },

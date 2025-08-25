@@ -1782,6 +1782,13 @@
         "subtitle": "Vous avez travaillé les objectifs suivants :",
         "title": "Module terminé !"
       },
+      "section": {
+        "explore-to-understand": "Explorer pour comprendre",
+        "go-further": "Aller plus loin",
+        "practise": "S’exercer",
+        "question-yourself": "Se questionner",
+        "retain-the-essentials": "Retenir l’essentiel"
+      },
       "sidebar": {
         "button": "Afficher les étapes du module"
       },

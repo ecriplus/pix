@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import ModulixPreview from 'mon-pix/components/module/preview';
 import { module, test } from 'qunit';
 
@@ -62,6 +63,56 @@ module('Integration | Component | Module | Preview', function (hooks) {
       assert.dom(linkToModulixEditor).doesNotExist();
       const displayJsonButton = screen.queryByRole('button', { name: 'Afficher le JSON' });
       assert.dom(displayJsonButton).doesNotExist();
+    });
+
+    module('when has a section', function () {
+      module('when section is type "blank"', function () {
+        test('should not display section title', async function (assert) {
+          // given
+          const moduleData = { title: 'Existing module', sections: [{ type: 'blank' }] };
+          const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+          // then
+          const h2 = screen.queryByRole('heading', { level: 2 });
+          assert.dom(h2).doesNotExist();
+        });
+      });
+
+      module('when section is type "question-yourself"', function () {
+        test('should display section title', async function (assert) {
+          // given
+          const moduleData = {
+            title: 'Existing module',
+            sections: [{ type: 'question-yourself' }],
+          };
+          const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+          // then
+          const h2 = screen.queryByRole('heading', {
+            level: 2,
+            name: t(`pages.modulix.section.${moduleData.sections[0].type}`),
+          });
+          assert.dom(h2).exists();
+        });
+      });
+
+      module('when section is type "practise"', function () {
+        test('should display section title', async function (assert) {
+          // given
+          const moduleData = {
+            title: 'Existing module',
+            sections: [{ type: 'practise' }],
+          };
+          const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+          // then
+          const h2 = screen.queryByRole('heading', {
+            level: 2,
+            name: t(`pages.modulix.section.${moduleData.sections[0].type}`),
+          });
+          assert.dom(h2).exists();
+        });
+      });
     });
   });
 });
