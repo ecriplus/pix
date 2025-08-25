@@ -1,6 +1,6 @@
 @use 'pix-design-tokens/typography';
-@use './module';
-@use '../components/module/passage';
+@use '../../styles/pages/module';
+@use './passage';
 
 .module-preview {
   @extend .modulix;
