@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.190.0](https://github.com/1024pix/pix/compare/v5.189.0...v5.190.0) (2025-08-25)
+
+### :rocket: Amélioration
+
+- [#13238](https://github.com/1024pix/pix/pull/13238) Afficher la certification passée par le candidat sur Pix Admin (PIX-19090). 
+- [#13263](https://github.com/1024pix/pix/pull/13263) Cacher l'onglet Référentiel Cadre pour CléA sur Pix Admin (PIX-19144) 
+- [#13248](https://github.com/1024pix/pix/pull/13248) Create tmp-ia-bias-ind.json 
+- [#13276](https://github.com/1024pix/pix/pull/13276) Envoyer la solution et les feedbacks des QCU à la récupération des données du module (PIX-19220) 
+- [#13280](https://github.com/1024pix/pix/pull/13280) Vérifier le QCU des modules côté client (PIX-19219) 
+
+### :bug: Correction
+
+- [#13269](https://github.com/1024pix/pix/pull/13269) Résoudre le crash API lors de l'activation de la feature Import avec Suppression de Learner (PIX-17414). 
+
+### :building_construction: Tech
+
+- [#13267](https://github.com/1024pix/pix/pull/13267) :truck: Déplace des tests dans leurs contextes spécifiques. 
+- [#13277](https://github.com/1024pix/pix/pull/13277) Ajout de log de debug pour les erreurs d'api (PIX-18983) 
+- [#13245](https://github.com/1024pix/pix/pull/13245) Ajout de seed pour avoir un centre de certification SUP avec habilitations à des Pix+ (PIX-19096). 
+- [#13262](https://github.com/1024pix/pix/pull/13262) Ajouter les builders manquants pour ComplementaryCertification (PIX-19213) 
+- [#13255](https://github.com/1024pix/pix/pull/13255) Séparer les responsabilités du token service (partie 1) (PIX-19215)
+
 # [5.189.0](https://github.com/1024pix/pix/compare/v5.188.0...v5.189.0) (2025-08-22)
 
 ### :rocket: Amélioration
