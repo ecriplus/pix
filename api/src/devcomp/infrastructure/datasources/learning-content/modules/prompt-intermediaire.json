@@ -287,7 +287,7 @@
             {
               "type": "element",
               "element": {
-                "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
+                "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
                 "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchettes</td>\n            <td>Trois joueurs forment un triange et se passent le ballon en manchette</td>\n        </tr>\n        <tr>\n            <th>Avancé</th>\n            <td>Réception de service réél</td>\n            <td>Un joueur reçoit des services puissants en manchette</td>\n        </tr>\n    </tbody>\n</table>"
               }
@@ -295,7 +295,7 @@
             {
               "type": "element",
               "element": {
-                "id": "1a04f4c4-2cc1-4898-ba5e-4c2ea788b764",
+                "id": "e9451c2c-bb3e-40e1-8d55-798a5c9e6b64",
                 "type": "qrocm",
                 "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
                 "proposals": [
