@@ -300,7 +300,7 @@
                 "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
                 "proposals": [
                   {
-                    "input": "",
+                    "input": "df1b0582-20d7-4401-b70a-f121881e7772",
                     "type": "input",
                     "inputType": "text",
                     "size": 8,
@@ -353,7 +353,7 @@
                 "isCompletionRequired": false,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "",
+                "instruction": "À vous de jouer !",
                 "solution": "",
                 "height": 550
               }
