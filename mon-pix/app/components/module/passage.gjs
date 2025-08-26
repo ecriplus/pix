@@ -9,6 +9,7 @@ import didInsert from '../../modifiers/modifier-did-insert';
 import ModuleGrain from './grain/grain';
 import BetaBanner from './layout/beta-banner';
 import ModuleNavbar from './layout/navbar';
+import ModuleSectionTitle from './section-title';
 
 export default class ModulePassage extends Component {
   @service router;
@@ -16,6 +17,27 @@ export default class ModulePassage extends Component {
   @service store;
   @service modulixAutoScroll;
   @service passageEvents;
+
+  get sectionsWithFirstGrain() {
+    return this.args.module.sections.map((section) => {
+      return {
+        firstGrainId: section.grains[0].id,
+        sectionType: section.type,
+      };
+    });
+  }
+
+  @action
+  getSectionTypeForGrain(grain) {
+    return this.sectionsWithFirstGrain.find((section) => section.firstGrainId === grain.id).sectionType;
+  }
+
+  @action
+  shouldDisplaySectionTitle(grain) {
+    return this.sectionsWithFirstGrain.some(
+      (section) => section.firstGrainId === grain.id && section.sectionType !== 'blank',
+    );
+  }
 
   get flatGrains() {
     return this.args.module.sections.flatMap((section) => section.grains);
@@ -231,6 +253,9 @@ export default class ModulePassage extends Component {
         {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
       >
         {{#each this.grainsToDisplay as |grain index|}}
+          {{#if (this.shouldDisplaySectionTitle grain)}}
+            <ModuleSectionTitle @sectionType={{this.getSectionTypeForGrain grain}} />
+          {{/if}}
           <ModuleGrain
             @grain={{grain}}
             @currentStep={{inc index}}
