@@ -18,8 +18,7 @@ export default class IndexRoute extends Route {
   }
 
   async model() {
-    return await this.store.queryRecord('participation-statistic', {
-      organizationId: this.currentUser.organization.id,
-    });
+    const organization = this.currentUser.organization;
+    return await organization.participationStatistics;
   }
 }
