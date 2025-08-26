@@ -171,7 +171,7 @@
               "element": {
                 "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
                 "type": "text",
-                "content": "<p>Mais au fait, un logiciel d’IA ne voit pas les images comme nous. 👁️ Découvrons ensemble ce qu'est vraiment une image en informatique. </p>"
+                "content": "<p>Mais au fait, un logiciel d’IA ne 'voit' pas comme nous. Alors, comment est-ce qu'il traite une image ? 👁️ Découvrons cela ensemble. </p>"
               }
             }
           ]
@@ -312,6 +312,24 @@
                       "alternativeText": "<p>On voit des photos d'ail des ours (avec des fleurs, avec des feuilles) et de muguet (avec des feuilles, avec des fleurs)</p>",
                       "legend": "Une photo de bulbes d'ail des ours",
                       "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "df83f537-de47-43da-8087-480f5b44bc8f",
+                      "type": "text",
+                      "content": "<p>Elle veut maintenant tester son programme sur une nouvelle photographie d'ail des ours.  <br></p>"
+                    },
+                    {
+                      "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeunepousseAdO.jpg",
+                      "alt": "",
+                      "alternativeText": "<p>Une photo d'une jeune pousse d'ail des ours.</p>",
+                      "legend": "",
+                      "licence": "Unsplash"
                     }
                   ]
                 },
