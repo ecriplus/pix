@@ -253,7 +253,7 @@
               "element": {
                 "id": "7aa3b4e6-abfb-4878-bef9-1eb88e601bfa",
                 "type": "text",
-                "content": "<p>Mais alors comment ces informations et opinions influencent-elles les réponses des IA génératives ?</p>"
+                "content": "<p>Mais alors comment ces données influencent-elles les réponses des IA génératives ?</p>"
               }
             }
           ]
@@ -268,7 +268,7 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Aujourd’hui, on entraîne une IA générative sur le thème du taboulé et <strong>l’IA c'est vous </strong>!<br><br></p>"
+                "content": "<p>Pour comprendre comment l’IA utilise ses données d’entraînement, <strong>mettez-vous à sa place</strong>. Aujourd’hui on va étudier le taboulé, à partir des données de tout le web en français.<br></p>"
               }
             },
             {
@@ -279,7 +279,7 @@
                 "isCompletionRequired": false,
                 "title": "POI ressources biais",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/POI_persil_semoule_base.html",
-                "instruction": "<p>Suivez les étapes pour découvrir avec quelles ressources l’IA générative est entraînée. Répondez ensuite à la question ci-dessous.</p>",
+                "instruction": "<p>Découvrez avec quels exemples l’IA générative est entraînée. <br>Répondez ensuite à la question ci-dessous.</p>",
                 "solution": "",
                 "height": 500
               }
@@ -324,7 +324,7 @@
                     {
                       "id": "4ec1233f-0134-4e3e-82b0-2e0529be6182",
                       "type": "text",
-                      "content": "<p>L’IA générative construit ses réponses en <strong>s’appuyant sur les mots ou les images les plus fréquents </strong>et <strong>donc les plus probables</strong> dans ses données d’entraînement.<br><br>La plupart du temps, cette méthode produit des résultats pertinents. 👍</p>"
+                      "content": "<p>L’IA générative construit ses réponses en <strong>s’appuyant sur les mots ou les images les plus fréquents </strong>et <strong>donc les plus probables</strong> dans ses données d’entraînement. Comme ici avec le taboulé à la semoule.<br><br>La plupart du temps, cette méthode produit des résultats pertinents. 👍</p>"
                     }
                   ]
                 },
@@ -333,7 +333,7 @@
                     {
                       "id": "783dbbb2-bf4d-468b-bac6-f0fe146c188f",
                       "type": "text",
-                      "content": "<p>Les données collectées sur le web, ne reflètent pas toujours la réalité de manière équilibrée. Certains faits, points de vue ou opinions y sont <strong>sur-représentés ou au contraire sous-représentés</strong>.</p><p><br>En conséquence, l’IA générative peut produire des réponses avec <strong>des biais</strong>. C’est-à-dire qu’elle peut transmettre des idées reçues, des discriminations, des stéréotypes ou encore des biais culturels.</p>"
+                      "content": "<p>Les données collectées sur le web ne reflètent pas toujours la réalité de manière équilibrée. Certains faits, points de vue ou opinions y sont <strong>sur-représentés ou au contraire sous-représentés</strong>.<br>Dans notre exemple en français, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins, et le taboulé au persil, qui vient du Liban et de Syrie, est moins connu. 🥗</p><p><br>En conséquence, l’IA générative peut produire des réponses avec <strong>des biais</strong>. C’est-à-dire qu’elle peut transmettre des idées reçues, des discriminations, des stéréotypes ou encore des biais culturels.</p>"
                     }
                   ]
                 }
