@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../../../src/shared/domain/models/CertifiableBadgeAcquisition.js').CertifiableBadgeAcquisition} CertifiableBadgeAcquisition
+ * @typedef {import ('../models/CertifiableBadgeAcquisition.js').CertifiableBadgeAcquisition} CertifiableBadgeAcquisition
  */
 import _ from 'lodash';
 
