@@ -15,14 +15,12 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube = false,
     enablePassageByAllCompetences = false,
     variationPercent,
-    createdAt,
   } = {}) {
     this.maximumAssessmentLength = maximumAssessmentLength;
     this.challengesBetweenSameCompetence = challengesBetweenSameCompetence;
     this.limitToOneQuestionPerTube = limitToOneQuestionPerTube;
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
     this.variationPercent = variationPercent;
-    this.createdAt = createdAt;
   }
 
   /**
@@ -35,7 +33,6 @@ export class FlashAssessmentAlgorithmConfiguration {
       limitToOneQuestionPerTube: this.limitToOneQuestionPerTube,
       enablePassageByAllCompetences: this.enablePassageByAllCompetences,
       variationPercent: this.variationPercent,
-      createdAt: this.createdAt,
     };
   }
 
@@ -48,7 +45,6 @@ export class FlashAssessmentAlgorithmConfiguration {
     limitToOneQuestionPerTube,
     enablePassageByAllCompetences,
     variationPercent,
-    createdAt,
   }) {
     return new FlashAssessmentAlgorithmConfiguration({
       maximumAssessmentLength,
@@ -56,7 +52,6 @@ export class FlashAssessmentAlgorithmConfiguration {
       limitToOneQuestionPerTube,
       enablePassageByAllCompetences,
       variationPercent,
-      createdAt,
     });
   }
 }
