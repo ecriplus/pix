@@ -1,9 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
-import { InvalidResultRecipientTokenError } from '../errors.js';
-
-const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
+import { InvalidTemporaryKeyError } from '../errors.js';
 
 /**
  * Encode and sign a payload into a JWT token (using jsonwebtoken library)
@@ -30,24 +28,6 @@ function getDecodedToken(token, secret = config.authentication.secret) {
   }
 }
 
-function createCertificationResultsByRecipientEmailLinkToken({
-  sessionId,
-  resultRecipientEmail,
-  daysBeforeExpiration,
-}) {
-  return jsonwebtoken.sign(
-    {
-      session_id: sessionId,
-      result_recipient_email: resultRecipientEmail,
-      scope: CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE,
-    },
-    config.authentication.secret,
-    {
-      expiresIn: `${daysBeforeExpiration}d`,
-    },
-  );
-}
-
 function extractTokenFromAuthChain(authChain) {
   if (!authChain) {
     return authChain;
@@ -59,20 +39,11 @@ function extractTokenFromAuthChain(authChain) {
   return authChain.replace(/Bearer /g, '');
 }
 
-function extractCertificationResultsByRecipientEmailLink(token) {
-  const decoded = getDecodedToken(token);
-  if (!decoded.session_id || !decoded.result_recipient_email) {
-    throw new InvalidResultRecipientTokenError();
-  }
-
-  if (decoded.scope !== CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE) {
-    throw new InvalidResultRecipientTokenError();
-  }
-
-  return {
-    resultRecipientEmail: decoded.result_recipient_email,
-    sessionId: decoded.session_id,
-  };
+function decodeIfValid(token) {
+  return new Promise((resolve, reject) => {
+    const decoded = getDecodedToken(token);
+    return !decoded ? reject(new InvalidTemporaryKeyError()) : resolve(decoded);
+  });
 }
 
 function extractUserId(token) {
@@ -81,10 +52,9 @@ function extractUserId(token) {
 }
 
 const tokenService = {
-  createCertificationResultsByRecipientEmailLinkToken,
+  decodeIfValid,
   getDecodedToken,
   encodeToken,
-  extractCertificationResultsByRecipientEmailLink,
   extractTokenFromAuthChain,
   extractUserId,
 };
@@ -93,11 +63,4 @@ const tokenService = {
  * @typedef TokenService
  */
 
-export {
-  createCertificationResultsByRecipientEmailLinkToken,
-  extractCertificationResultsByRecipientEmailLink,
-  extractTokenFromAuthChain,
-  extractUserId,
-  getDecodedToken,
-  tokenService,
-};
+export { decodeIfValid, extractTokenFromAuthChain, extractUserId, getDecodedToken, tokenService };

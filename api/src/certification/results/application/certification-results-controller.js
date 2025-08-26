@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
+import { CertificationResultsLinkByEmailToken } from '../domain/models/tokens/CertificationResultsLinkByEmailToken.js';
 import { CertificationResultsLinkToken } from '../domain/models/tokens/CertificationResultsLinkToken.js';
 import * as sessionResultsLinkService from '../domain/services/session-results-link-service.js';
 import { usecases } from '../domain/usecases/index.js';
@@ -31,14 +31,13 @@ const getCleaCertifiedCandidateDataCsv = async function (request, h, dependencie
 const getSessionResultsByRecipientEmail = async function (
   request,
   h,
-  dependencies = { tokenService, getSessionCertificationResultsCsv },
+  dependencies = { getSessionCertificationResultsCsv },
 ) {
   const i18n = await getI18nFromRequest(request);
 
   const token = request.params.token;
 
-  const { resultRecipientEmail, sessionId } =
-    dependencies.tokenService.extractCertificationResultsByRecipientEmailLink(token);
+  const { resultRecipientEmail, sessionId } = CertificationResultsLinkByEmailToken.decode(token);
   const { session, certificationResults } = await usecases.getSessionResultsByResultRecipientEmail({
     sessionId,
     resultRecipientEmail,

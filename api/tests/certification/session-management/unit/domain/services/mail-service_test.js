@@ -1,6 +1,6 @@
+import { CertificationResultsLinkByEmailToken } from '../../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkByEmailToken.js';
 import * as mailService from '../../../../../../src/certification/session-management/domain/services/mail-service.js';
 import { ENGLISH_SPOKEN, FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { mailer } from '../../../../../../src/shared/mail/infrastructure/services/mailer.js';
 import { expect, sinon } from '../../../../../test-helper.js';
@@ -44,9 +44,12 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
       const certificationCenterName = 'Vincennes';
       const resultRecipientEmail = 'email1@example.net';
       const daysBeforeExpiration = 30;
-      const tokenServiceStub = sinon.stub(tokenService, 'createCertificationResultsByRecipientEmailLinkToken');
-      tokenServiceStub.withArgs({ sessionId, resultRecipientEmail, daysBeforeExpiration }).returns('token-1');
       const link = 'https://test.app.pix.org/api/sessions/download-results/token-1';
+
+      sinon
+        .stub(CertificationResultsLinkByEmailToken, 'generate')
+        .withArgs({ sessionId, resultRecipientEmail, daysBeforeExpiration })
+        .returns('token-1');
 
       // when
       await mailService.sendCertificationResultEmail({

@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
-import { tokenService } from '../../../../shared/domain/services/token-service.js';
 import { getPixAppUrl, getPixWebsiteDomain, getPixWebsiteUrl } from '../../../../shared/domain/services/url-service.js';
 import { getI18n } from '../../../../shared/infrastructure/i18n/i18n.js';
 import { mailer } from '../../../../shared/mail/infrastructure/services/mailer.js';
+import { CertificationResultsLinkByEmailToken } from '../../../results/domain/models/tokens/CertificationResultsLinkByEmailToken.js';
 
 const EMAIL_ADDRESS_NO_RESPONSE = 'ne-pas-repondre@pix.fr';
 
@@ -31,7 +31,7 @@ function sendCertificationResultEmail({
   resultRecipientEmail,
   daysBeforeExpiration,
 }) {
-  const token = tokenService.createCertificationResultsByRecipientEmailLinkToken({
+  const token = CertificationResultsLinkByEmailToken.generate({
     sessionId,
     resultRecipientEmail,
     daysBeforeExpiration,
