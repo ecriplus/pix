@@ -16,14 +16,14 @@ Fonctionnalité: Gestion des membres d'une organisation
     Et je clique sur "Je m'inscris"
     Alors je suis redirigé vers la page "cgu"
     Lorsque j'accepte les CGU de Pix Orga
-    Alors je suis redirigé vers le compte Orga de "Aemon Targaryen"
+    Alors je suis redirigé vers le compte Orga de "Aemon"
 
   Scénario: Je rejoins une organisation et j'ai déjà un compte
     Lorsque je saisis l'URL de l'invitation
     Alors je suis redirigé vers la page pour rejoindre l'organisation
     Lorsque je clique sur "Se connecter"
     Et je me connecte avec le compte "daenerys.targaryen@pix.fr"
-    Alors je suis redirigé vers le compte Orga de "Daenerys Targaryen"
+    Alors je suis redirigé vers le compte Orga de "Daenerys"
 
   Scénario: Je rejoins une organisation en étant déjà authentifié
     Lorsque je suis connecté à Pix Orga

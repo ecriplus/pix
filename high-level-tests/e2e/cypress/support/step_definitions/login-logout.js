@@ -68,11 +68,9 @@ Then(`je suis redirigé vers le profil de {string}`, (firstName) => {
   });
 });
 
-Then(`je suis redirigé vers le compte Orga de {string}`, (fullName) => {
-  cy.url().should("include", "/campagnes");
-  cy.contains(fullName).should("be.visible");
-  cy.get(".list-campaigns-page").should((list) => {
-    expect(list).to.exist;
+Then(`je suis redirigé vers le compte Orga de {string}`, (firstName) => {
+  cy.get(".page-title__title").should((title) => {
+    expect(title.text()).to.contains(`Bonjour ${firstName}`);
   });
 });
 
