@@ -41,13 +41,15 @@ const register = async function (server) {
                   Joi.object({
                     id: Joi.number().description('ID de la participation à la campagne'),
                     createdAt: Joi.date().description('Date de début de participation'),
+                    participantId: Joi.number().description('ID du participant'),
+                    participantFirstName: Joi.string().description('Prénom du participant'),
+                    participantLastName: Joi.string().description('Nom du participant'),
                     participantExternalId: Joi.string().description(
                       'Identifiant Externe rempli en début de participation',
                     ),
                     status: Joi.string().description('Statut de la participation : STARTED, TO_SHARE, SHARED'),
                     sharedAt: Joi.date().description('Date de participation'),
                     campaignId: Joi.number().description('ID de la campagne liée à la participation'),
-                    userId: Joi.number().description('ID utilisateur du participant'),
                     organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),
                     pixScore: Joi.number().description(
                       'Score en pix pour une participation à une campagne de collecte de profil',
