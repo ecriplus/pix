@@ -24,22 +24,19 @@ export const getMostRecent = async () => {
 
 export const getMostRecentBeforeDate = async (date) => {
   const knexConn = DomainTransaction.getConnection();
-  const flashAlgorithmConfiguration = await knexConn(TABLE_NAME)
-    .where('createdAt', '<=', date)
-    .orderBy('createdAt', 'desc')
+  const flashAlgorithmConfiguration = await knexConn('certification-configurations')
+    .where('startingDate', '<=', date)
+    .andWhere((queryBuilder) => {
+      queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
+    })
+    .orderBy('startingDate', 'asc')
     .first();
 
-  if (flashAlgorithmConfiguration) {
-    return FlashAssessmentAlgorithmConfiguration.fromDTO(flashAlgorithmConfiguration);
-  }
-
-  const firstFlashAlgoConfiguration = await knexConn(TABLE_NAME).orderBy('createdAt', 'asc').first();
-
-  if (!firstFlashAlgoConfiguration) {
+  if (!flashAlgorithmConfiguration) {
     throw new NotFoundError('Configuration not found');
   }
 
-  return FlashAssessmentAlgorithmConfiguration.fromDTO(firstFlashAlgoConfiguration);
+  return _toDomain({ ...flashAlgorithmConfiguration.challengesConfiguration });
 };
 
 /**
