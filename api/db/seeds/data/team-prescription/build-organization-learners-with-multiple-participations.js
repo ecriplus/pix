@@ -126,7 +126,7 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     userId: secondUser.id,
     campaignId: CAMPAIGN_PROASSMUL_ID,
     masteryRate: 0.1,
-    isImproved: true,
+    isImproved: false,
     createdAt: '2024-03-12T15:07:57.376Z',
     sharedAt: '2024-03-24T15:07:57.376Z',
   });
@@ -183,7 +183,7 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     userId: thirdUser.id,
     campaignId: CAMPAIGN_PROASSMUL_ID,
     masteryRate: 0.5,
-    isImproved: true,
+    isImproved: false,
     createdAt: '2024-03-12T15:07:57.376Z',
     sharedAt: '2024-03-24T15:07:57.376Z',
   });
