@@ -4,7 +4,7 @@ import { t } from 'ember-intl';
 
 import CompetenceRow from './competence-row';
 
-export default class EvaluationResultsDetailsTab extends Component {
+export default class ResultsDetails extends Component {
   @service pixMetrics;
 
   constructor() {
