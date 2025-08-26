@@ -42,12 +42,14 @@
 
   &__resend {
     display: flex;
+    align-items: baseline;
     margin-bottom: var(--pix-spacing-3x);
     opacity: 0;
     transition: opacity 0.2s ease-in;
 
     p {
       margin: 0;
+      font-size: 0.875rem;
     }
 
     &.visible {
@@ -58,6 +60,7 @@
       margin-left: 0.125rem;
       padding: 0;
       color: var(--pix-primary-500);
+      font-size: 0.875rem;
       background-color: transparent;
       border: none;
       cursor: pointer;
