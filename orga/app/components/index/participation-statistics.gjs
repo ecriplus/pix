@@ -26,15 +26,17 @@ export default class ParticipationStatistics extends Component {
   }
 
   get completionRateDescription() {
-    return this.intl.t('components.index.participation-statistics.completion-rate.description', {
-      completed: this.completedParticipationsCount,
-      started: this.totalParticipationCount,
-    });
+    return this.totalParticipationCount === 0
+      ? this.intl.t('components.index.participation-statistics.completion-rate.no-activity')
+      : this.intl.t('components.index.participation-statistics.completion-rate.description', {
+          completed: this.completedParticipationsCount,
+          started: this.totalParticipationCount,
+        });
   }
 
   get completionRatePercentage() {
     return this.totalParticipationCount === 0
-      ? '0%'
+      ? '-'
       : Math.round((this.completedParticipationsCount / this.totalParticipationCount) * 100) + '%';
   }
 
@@ -47,7 +49,9 @@ export default class ParticipationStatistics extends Component {
   }
 
   get completedParticipationsDescription() {
-    return this.intl.t('components.index.participation-statistics.completed-participations.description');
+    return this.totalParticipationCount === 0
+      ? this.intl.t('components.index.participation-statistics.completed-participations.no-completed-participations')
+      : this.intl.t('components.index.participation-statistics.completed-participations.description');
   }
 
   <template>

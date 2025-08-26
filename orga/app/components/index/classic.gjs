@@ -25,6 +25,9 @@ export default class IndexClassic extends Component {
     {{/if}}
 
     <OrganizationInfo @organizationName={{this.currentUser.organization.name}} />
+
+    <ParticipationStatistics @participationStatistics={{@participationStatistics}} />
+
     <ActionCardsList>
 
       <ActionCardsListItem
@@ -46,7 +49,5 @@ export default class IndexClassic extends Component {
       </ActionCardsListItem>
 
     </ActionCardsList>
-
-    <ParticipationStatistics @participationStatistics={{@participationStatistics}} />
   </template>
 }

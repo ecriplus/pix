@@ -61,14 +61,8 @@ module('Integration | Component | Index::ParticipationStatistics', function (hoo
     );
 
     // then
-    assert.dom(screen.getByText('0%')).exists();
-    assert
-      .dom(
-        screen.getByText(
-          t('components.index.participation-statistics.completion-rate.description', { completed: 0, started: 0 }),
-        ),
-      )
-      .exists();
+    assert.dom(screen.getByText('-')).exists();
+    assert.dom(screen.getByText(t('components.index.participation-statistics.completion-rate.no-activity'))).exists();
     assert.dom(screen.getByText('0')).exists();
   });
 
@@ -83,14 +77,8 @@ module('Integration | Component | Index::ParticipationStatistics', function (hoo
 
     // then
     // Should display default values when data is null
-    assert.dom(screen.getByText('0%')).exists();
-    assert
-      .dom(
-        screen.getByText(
-          t('components.index.participation-statistics.completion-rate.description', { completed: 0, started: 0 }),
-        ),
-      )
-      .exists();
+    assert.dom(screen.getByText('-')).exists();
+    assert.dom(screen.getByText(t('components.index.participation-statistics.completion-rate.no-activity'))).exists();
     assert.dom(screen.getByText('0')).exists();
 
     // Check that titles and info are still displayed
