@@ -1,11 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
-import {
-  InvalidResultRecipientTokenError,
-  InvalidSessionResultTokenError,
-  InvalidTemporaryKeyError,
-} from '../errors.js';
+import { InvalidResultRecipientTokenError, InvalidSessionResultTokenError } from '../errors.js';
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
@@ -62,13 +58,6 @@ function extractTokenFromAuthChain(authChain) {
   return authChain.replace(/Bearer /g, '');
 }
 
-function decodeIfValid(token) {
-  return new Promise((resolve, reject) => {
-    const decoded = getDecodedToken(token);
-    return !decoded ? reject(new InvalidTemporaryKeyError()) : resolve(decoded);
-  });
-}
-
 function getDecodedToken(token, secret = config.authentication.secret) {
   try {
     return jsonwebtoken.verify(token, secret);
@@ -116,7 +105,6 @@ function extractUserId(token) {
 const tokenService = {
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  decodeIfValid,
   getDecodedToken,
   encodeToken,
   extractCertificationResultsByRecipientEmailLink,
@@ -132,7 +120,6 @@ const tokenService = {
 export {
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  decodeIfValid,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,
   extractTokenFromAuthChain,
