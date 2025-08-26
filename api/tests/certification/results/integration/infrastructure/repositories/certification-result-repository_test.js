@@ -1,8 +1,8 @@
+import { CertificationResult } from '../../../../../../src/certification/results/domain/models/CertificationResult.js';
 import * as certificationResultRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-result-repository.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { CertificationResult } from '../../../../../../src/shared/domain/models/CertificationResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Results | Integration | Infrastructure | Repository | Certification Result', function () {
