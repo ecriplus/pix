@@ -50,12 +50,12 @@ module('Acceptance | Student Import', function (hooks) {
       await authenticateSession(user.id);
     });
 
-    test('it should redirect to default page', async function (assert) {
+    test('it should redirect to home page', async function (assert) {
       // when
       await visit('/import-participants');
 
       // then
-      assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+      assert.strictEqual(currentURL(), '/');
     });
   });
 });

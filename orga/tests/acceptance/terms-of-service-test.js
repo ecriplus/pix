@@ -57,7 +57,7 @@ module('Acceptance | terms-of-service', function (hooks) {
       await clickByName('Accepter et continuer');
 
       // then
-      assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+      assert.strictEqual(currentURL(), '/');
     });
 
     test('blocks the visit of another page if cgu are not accepted', async function (assert) {
@@ -84,7 +84,7 @@ module('Acceptance | terms-of-service', function (hooks) {
       await visit('/cgu');
 
       // then
-      assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+      assert.strictEqual(currentURL(), '/');
     });
   });
 });

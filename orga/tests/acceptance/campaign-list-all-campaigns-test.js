@@ -268,7 +268,7 @@ module('Acceptance | campaigns/all-campaigns', function (hooks) {
         await visit('missions');
 
         // then
-        assert.deepEqual(currentURL(), '/campagnes/les-miennes');
+        assert.deepEqual(currentURL(), '/');
       });
     });
   });

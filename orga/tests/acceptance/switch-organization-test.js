@@ -84,7 +84,7 @@ module('Acceptance | Switch Organization', function (hooks) {
       });
 
       module('When prescriber is on campaign page with pagination', function () {
-        test('it should reset the queryParams when redirecting', async function (assert) {
+        test('it should redirect to homepage', async function (assert) {
           // given
           const screen = await visit('/campagnes/les-miennes?pageNumber=2&pageSize=10&name=test&status=archived');
 
@@ -95,7 +95,7 @@ module('Acceptance | Switch Organization', function (hooks) {
           await click(oldOrganization);
 
           // then
-          assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+          assert.strictEqual(currentURL(), '/');
         });
       });
 
