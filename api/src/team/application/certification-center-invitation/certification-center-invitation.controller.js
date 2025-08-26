@@ -1,4 +1,4 @@
-import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale, getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterInvitationSerializer } from '../../infrastructure/serializers/jsonapi/certification-center-invitation-serializer.js';
 
@@ -11,14 +11,14 @@ import { certificationCenterInvitationSerializer } from '../../infrastructure/se
 const acceptCertificationCenterInvitation = async function (request, h) {
   const certificationCenterInvitationId = request.params.id;
   const { code, email: rawEmail } = request.deserializedPayload;
-  const localeFromCookie = request.state?.locale;
+  const locale = getUserLocale(request);
   const email = rawEmail.trim().toLowerCase();
 
   await usecases.acceptCertificationCenterInvitation({
     certificationCenterInvitationId,
     code,
     email,
-    locale: localeFromCookie,
+    locale,
   });
   return h.response({}).code(204);
 };
