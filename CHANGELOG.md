@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.191.0](https://github.com/1024pix/pix/compare/v5.190.0...v5.191.0) (2025-08-26)
+
+### :rocket: Amélioration
+
+- [#13266](https://github.com/1024pix/pix/pull/13266) Affichage du statut terminé sur les éléments d'un parcours combiné (PIX-19077) 
+- [#13281](https://github.com/1024pix/pix/pull/13281) Afficher dans PixOrga les organization-learners associés à des utilisateurs anonymisés (PIX-19192) 
+- [#13297](https://github.com/1024pix/pix/pull/13297) Ajouter les titres de section dans la preview (PIX-19230) 
+- [#13299](https://github.com/1024pix/pix/pull/13299) remplacer le wording anonymised par un tiret (PIX-19198) 
+
+### :bug: Correction
+
+- [#13270](https://github.com/1024pix/pix/pull/13270) Réparer la pagination de la page attestation (PIX-19193). 
+
+### :building_construction: Tech
+
+- [#13291](https://github.com/1024pix/pix/pull/13291) :truck: Déplace le modèle `CertifiableBadgeAcquisition` vers un contexte de certification 
+- [#13296](https://github.com/1024pix/pix/pull/13296) :truck: Déplace le modèle `CertificationResult` vers le contexte `certification/results` 
+- [#13289](https://github.com/1024pix/pix/pull/13289) :truck: Déplace le modèle en lecture seule `SharedProfileForCampaign` vers un contexte de la prescription 
+- [#13295](https://github.com/1024pix/pix/pull/13295) Améliorer la performance de la requête qui remonte les targetProfiles à disposition d'une organisation 
+- [#13292](https://github.com/1024pix/pix/pull/13292) Quitter le redis uniquement quand il existe 
+- [#13284](https://github.com/1024pix/pix/pull/13284) Séparer les responsabilités du token service (partie 2) (PIX-19217) 
+- [#13278](https://github.com/1024pix/pix/pull/13278) Utilisation d'URL relatives pour la redirection post-campagne (PIX-19131)
+
 # [5.190.0](https://github.com/1024pix/pix/compare/v5.189.0...v5.190.0) (2025-08-25)
 
 ### :rocket: Amélioration
