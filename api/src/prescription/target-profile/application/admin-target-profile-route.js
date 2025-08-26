@@ -394,6 +394,7 @@ const register = async function (server) {
               name: Joi.string().empty('').allow(null).optional(),
               type: Joi.string().empty('').allow(null).optional(),
               'external-id': Joi.string().empty('').allow(null).optional(),
+              hideArchived: Joi.boolean().optional(),
             }).default({}),
             page: {
               number: Joi.number().integer().empty('').allow(null).optional(),
