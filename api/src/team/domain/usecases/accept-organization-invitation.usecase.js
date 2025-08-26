@@ -1,5 +1,17 @@
 import { AlreadyExistingMembershipError } from '../../../shared/domain/errors.js';
 
+/**
+ * @typedef {function} acceptOrganizationInvitation
+ * @param {Object} params
+ * @param {string} params.organizationInvitationId
+ * @param {string} params.code
+ * @param {string} params.email
+ * @param {string} [params.locale]
+ * @param {OrganizationInvitationRepository} params.organizationInvitationRepository
+ * @param {OrganizationInvitedUserRepository} params.organizationInvitedUserRepository
+ * @param {UserRepository} params.userRepository
+ * @returns {Promise<{id: string, isAdmin: boolean}>}
+ */
 const acceptOrganizationInvitation = async function ({
   organizationInvitationId,
   code,
