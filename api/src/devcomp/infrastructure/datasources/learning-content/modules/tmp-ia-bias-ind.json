@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions comportent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais dans les réponses des IA génératives.🔍<br><br></p>",
+    "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions comportent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais dans les réponses des IA génératives.🔍</p>",
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
@@ -47,7 +47,7 @@
                     {
                       "userName": "Adem",
                       "direction": "incoming",
-                      "content": "Ah oui y a même le drapeau américain, haha !  Je pense que là il y a un biais."
+                      "content": "Ah oui y a même le drapeau américain, haha ! Tu es tombée sur un biais."
                     },
                     {
                       "userName": "Léane",
@@ -278,7 +278,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "POI ressources biais",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/POI_persil_semoule_base.html",
+                "url": "https://1024pix.github.io/atelier-contenus/PCH/POI_module_biais_taboule_2.html",
                 "instruction": "<p>Découvrez avec quels exemples l’IA générative est entraînée. <br>Répondez ensuite à la question ci-dessous.</p>",
                 "solution": "",
                 "height": 500
