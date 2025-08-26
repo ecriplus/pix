@@ -16,6 +16,20 @@ function encodeToken(payload, secret, options) {
   return jsonwebtoken.sign(payload, secret, options);
 }
 
+/**
+ * Decode a token with the given secret
+ * @param {string} token
+ * @param {string} secret Secret for the signature
+ * @returns The decoded token, otherwise false when cannot be decoded
+ */
+function getDecodedToken(token, secret = config.authentication.secret) {
+  try {
+    return jsonwebtoken.verify(token, secret);
+  } catch {
+    return false;
+  }
+}
+
 function createCertificationResultsByRecipientEmailLinkToken({
   sessionId,
   resultRecipientEmail,
@@ -56,14 +70,6 @@ function extractTokenFromAuthChain(authChain) {
     return false;
   }
   return authChain.replace(/Bearer /g, '');
-}
-
-function getDecodedToken(token, secret = config.authentication.secret) {
-  try {
-    return jsonwebtoken.verify(token, secret);
-  } catch {
-    return false;
-  }
 }
 
 function extractCertificationResultsByRecipientEmailLink(token) {
