@@ -191,21 +191,21 @@
                           },
                           {
                             "direction": "inbound",
-                            "content": "Salut à tous, Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
+                            "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
                           }
                         ],
                         "prompts": [
                           {
                             "prompt": "adopte un ton festif",
-                            "response": "🎉 Hey la team ! Le tournoi de volley approche et il reste des places ! Viens smasher, rigoler et kiffer l'ambiance 🔥 Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! Surprises et bonne humeur garanties 🎊 On t'attend sur le terrain ! 💪"
+                            "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
                           },
                           {
                             "prompt": "adopte un ton sérieux",
-                            "response": "Madame, Monsieur, Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley. Nous espérons vivement votre participation. Merci de bien vouloir nous répondre avant vendredi. Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                            "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                           },
                           {
                             "prompt": "adopte un ton drôle",
-                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. Le soleil a sorti ses lunettes rien que pour toi. Les ballons murmurent ton prénom la nuit. Alors… tu viens ? 😇 👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
                           }
                         ]
                       }
@@ -342,7 +342,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.<br><br>À vous de jouer !</p>"
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
               }
             },
             {
