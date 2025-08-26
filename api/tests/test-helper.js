@@ -25,12 +25,12 @@ import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
 import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
+import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
+import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
-import { config } from '../src/shared/config.js';
 import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
 import { Membership } from '../src/shared/domain/models/Membership.js';
-import * as tokenService from '../src/shared/domain/services/token-service.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../src/shared/infrastructure/repositories/challenge-repository.js';
@@ -138,17 +138,12 @@ function generateAuthenticatedUserRequestHeaders({
 }
 
 function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope = '') {
-  const accessToken = tokenService.createAccessTokenFromApplication(
-    clientId,
-    source,
-    scope,
-    config.authentication.secret,
-  );
+  const accessToken = ApplicationAccessToken.generate({ clientId, source, scope });
   return `Bearer ${accessToken}`;
 }
 
 function generateIdTokenForExternalUser(externalUser) {
-  return tokenService.createIdTokenForUserReconciliation(externalUser);
+  return UserReconciliationSamlIdToken.generate(externalUser);
 }
 
 async function insertUserWithRoleSuperAdmin() {

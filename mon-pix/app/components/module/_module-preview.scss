@@ -1,6 +1,6 @@
 @use 'pix-design-tokens/typography';
-@use './module';
-@use '../components/module/passage';
+@use '../../styles/pages/module';
+@use './passage';
 
 .module-preview {
   @extend .modulix;
@@ -53,4 +53,16 @@
   &__textarea {
     height: 100%;
   }
+}
+
+.module-preview-passage-content-section {
+  @extend %pix-title-xs;
+
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
+  width: 100%;
+  padding: var(--pix-spacing-4x);
+  background-color: var(--pix-primary-100);
+  border-radius: var(--pix-spacing-4x);
 }

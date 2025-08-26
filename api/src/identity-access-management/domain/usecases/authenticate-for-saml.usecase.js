@@ -6,7 +6,9 @@ import {
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { MissingOrInvalidCredentialsError, PasswordNotMatching, UserShouldChangePasswordError } from '../errors.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
+import { PasswordExpirationToken } from '../models/PasswordExpirationToken.js';
 import { UserAccessToken } from '../models/UserAccessToken.js';
+import { UserReconciliationSamlIdToken } from '../models/UserReconciliationSamlIdToken.js';
 
 /**
  * @param {Object} params
@@ -63,8 +65,8 @@ async function authenticateForSaml({
     });
 
     if (userFromCredentials.shouldChangePassword) {
-      const passwordResetToken = tokenService.createPasswordResetToken(userFromCredentials.id);
-      throw new UserShouldChangePasswordError(undefined, passwordResetToken);
+      const passwordExpirationToken = PasswordExpirationToken.generate({ userId: userFromCredentials.id });
+      throw new UserShouldChangePasswordError(undefined, passwordExpirationToken);
     }
 
     const { accessToken } = UserAccessToken.generateSamlUserToken({ userId: userFromCredentials.id, audience });
@@ -92,11 +94,10 @@ async function authenticateForSaml({
 async function _addGarAuthenticationMethod({
   userId,
   externalUserToken,
-  tokenService,
   authenticationMethodRepository,
   userRepository,
 }) {
-  const { samlId, firstName, lastName } = await tokenService.extractExternalUserFromIdToken(externalUserToken);
+  const { samlId, firstName, lastName } = UserReconciliationSamlIdToken.decode(externalUserToken);
   await _checkIfSamlIdIsNotReconciledWithAnotherUser({ samlId, userId, userRepository });
 
   const garAuthenticationMethod = new AuthenticationMethod({

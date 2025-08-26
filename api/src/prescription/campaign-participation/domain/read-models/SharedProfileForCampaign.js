@@ -2,7 +2,7 @@ import lodash from 'lodash';
 
 const { map, isEmpty } = lodash;
 
-import { Scorecard } from '../../../evaluation/domain/models/Scorecard.js';
+import { Scorecard } from '../../../../evaluation/domain/models/Scorecard.js';
 
 class SharedProfileForCampaign {
   constructor({

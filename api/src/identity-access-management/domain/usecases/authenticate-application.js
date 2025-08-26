@@ -1,18 +1,16 @@
-import { config } from '../../../shared/config.js';
 import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidCredentialsError,
 } from '../../../shared/domain/errors.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
+import { ApplicationAccessToken } from '../models/ApplicationAccessToken.js';
 
-const { authentication } = config;
 const logger = child('iam:applicationauth', { event: SCOPES.IAM });
 
 export async function authenticateApplication({
   clientId,
   clientSecret,
   scope,
-  tokenService,
   clientApplicationRepository,
   cryptoService,
 }) {
@@ -21,13 +19,7 @@ export async function authenticateApplication({
   await _checkClientSecret(application, clientSecret, cryptoService);
   _checkAppScope(application, scope);
 
-  return tokenService.createAccessTokenFromApplication(
-    clientId,
-    application.name,
-    scope,
-    authentication.secret,
-    authentication.accessTokenLifespanMs,
-  );
+  return ApplicationAccessToken.generate({ clientId, source: application.name, scope });
 }
 
 function _checkApplication(application, clientId) {

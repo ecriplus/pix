@@ -14,7 +14,7 @@ import ModuleElement from './module-element';
 
 export default class ModuleQcu extends ModuleElement {
   @tracked selectedAnswerId = null;
-
+  @tracked currentCorrection;
   @service passageEvents;
 
   @action
@@ -55,15 +55,39 @@ export default class ModuleQcu extends ModuleElement {
     return this.correction?.isOk ? 'success' : 'error';
   }
 
+  get answerIsValid() {
+    return this.selectedAnswerId === this.element.solution;
+  }
+
+  get correction() {
+    if (this.isOnRetryMode) {
+      return null;
+    }
+    return this.currentCorrection;
+  }
+
   @action
-  async onAnswer(event) {
-    await super.onAnswer(event);
+  onAnswer(event) {
+    super.onAnswer(event);
+    if (this.shouldDisplayRequiredMessage === true) {
+      return;
+    }
 
     const status = this.answerIsValid ? 'ok' : 'ko';
+    this.currentCorrection = {
+      status,
+      feedback: this.selectedProposalFeedback,
+      isOk: this.answerIsValid,
+      isKo: !this.answerIsValid,
+    };
     this.passageEvents.record({
       type: 'QCU_ANSWERED',
       data: { answer: this.selectedAnswerId, elementId: this.element.id, status },
     });
+  }
+
+  get selectedProposalFeedback() {
+    return this.element.proposals.find((proposal) => proposal.id === this.selectedAnswerId).feedback;
   }
 
   <template>

@@ -2,7 +2,6 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
 import {
-  InvalidExternalUserTokenError,
   InvalidResultRecipientTokenError,
   InvalidSessionResultTokenError,
   InvalidTemporaryKeyError,
@@ -19,44 +18,6 @@ const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResult
  */
 function encodeToken(payload, secret, options) {
   return jsonwebtoken.sign(payload, secret, options);
-}
-
-/**
- * @param {string} clientId
- * @param {string} source
- * @param {string | string[]} scope
- * @param {string} secret
- * @param {number | string} expiresIn
- * @returns {string}
- */
-function createAccessTokenFromApplication(
-  clientId,
-  source,
-  scope,
-  secret = config.authentication.secret,
-  expiresIn = config.authentication.accessTokenLifespanMs,
-) {
-  return jsonwebtoken.sign(
-    {
-      client_id: clientId,
-      source,
-      scope: Array.isArray(scope) ? scope.join(' ') : scope,
-    },
-    secret,
-    { expiresIn },
-  );
-}
-
-function createIdTokenForUserReconciliation(externalUser) {
-  return jsonwebtoken.sign(
-    {
-      first_name: externalUser.firstName,
-      last_name: externalUser.lastName,
-      saml_id: externalUser.samlId,
-    },
-    config.authentication.secret,
-    { expiresIn: config.authentication.tokenForStudentReconciliationLifespan },
-  );
 }
 
 function createCertificationResultsByRecipientEmailLinkToken({
@@ -90,16 +51,6 @@ function createCertificationResultsLinkToken({ sessionId }) {
   );
 }
 
-function createPasswordResetToken(userId) {
-  return jsonwebtoken.sign(
-    {
-      user_id: userId,
-    },
-    config.authentication.secret,
-    { expiresIn: config.authentication.passwordResetTokenLifespan },
-  );
-}
-
 function extractTokenFromAuthChain(authChain) {
   if (!authChain) {
     return authChain;
@@ -124,11 +75,6 @@ function getDecodedToken(token, secret = config.authentication.secret) {
   } catch {
     return false;
   }
-}
-
-function extractSamlId(token) {
-  const decoded = getDecodedToken(token);
-  return decoded.saml_id || null;
 }
 
 function extractCertificationResultsByRecipientEmailLink(token) {
@@ -167,42 +113,16 @@ function extractUserId(token) {
   return decoded.user_id || null;
 }
 
-function extractClientId(token, secret = config.authentication.secret) {
-  const decoded = getDecodedToken(token, secret);
-  return decoded.client_id || null;
-}
-
-async function extractExternalUserFromIdToken(token) {
-  const externalUser = getDecodedToken(token);
-
-  if (!externalUser) {
-    throw new InvalidExternalUserTokenError(
-      'Une erreur est survenue. Veuillez réessayer de vous connecter depuis le médiacentre.',
-    );
-  }
-
-  return {
-    firstName: externalUser['first_name'],
-    lastName: externalUser['last_name'],
-    samlId: externalUser['saml_id'],
-  };
-}
 const tokenService = {
-  createAccessTokenFromApplication,
-  createIdTokenForUserReconciliation,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  createPasswordResetToken,
   decodeIfValid,
   getDecodedToken,
   encodeToken,
-  extractExternalUserFromIdToken,
   extractCertificationResultsByRecipientEmailLink,
-  extractSamlId,
   extractCertificationResultsLink,
   extractTokenFromAuthChain,
   extractUserId,
-  extractClientId,
 };
 
 /**
@@ -210,17 +130,11 @@ const tokenService = {
  */
 
 export {
-  createAccessTokenFromApplication,
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  createIdTokenForUserReconciliation,
-  createPasswordResetToken,
   decodeIfValid,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,
-  extractClientId,
-  extractExternalUserFromIdToken,
-  extractSamlId,
   extractTokenFromAuthChain,
   extractUserId,
   getDecodedToken,

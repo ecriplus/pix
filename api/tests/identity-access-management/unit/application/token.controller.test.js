@@ -204,10 +204,6 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           scope,
         },
       };
-      const tokenServiceStub = { extractUserId: sinon.stub() };
-      tokenServiceStub.extractUserId.returns(client_id);
-
-      const dependencies = { tokenService: tokenServiceStub };
 
       sinon
         .stub(usecases, 'authenticateApplication')
@@ -215,7 +211,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         .resolves(access_token);
 
       // when
-      const response = await tokenController.authenticateApplication(request, hFake, dependencies);
+      const response = await tokenController.authenticateApplication(request, hFake);
 
       // then
       const expectedResponseSource = {

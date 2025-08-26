@@ -27,7 +27,6 @@ test('pass a combined course as sco user and see the final result', async ({ pag
     //Le bouton "Voir mes résultats" existe deux fois à ce moment, on doit donc faire autrement en attendant de corriger cette page
     await page.locator('#ember138').click();
     await page.getByRole('button', { name: "J'envoie mes résultats" }).click();
-    await page.getByRole('button', { name: 'Fermer', exact: true }).click();
     await page.getByRole('link', { name: 'Continuer' }).click();
   });
 

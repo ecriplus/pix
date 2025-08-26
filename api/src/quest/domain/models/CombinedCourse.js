@@ -82,21 +82,29 @@ export class CombinedCourseDetails extends CombinedCourse {
     return questForUser.isSuccessful(dataForQuest);
   }
 
-  generateItems(data, recommendableModuleIds = [], recommendedModuleIdsForUser = [], encryptedCombinedCourseUrl) {
+  generateItems({
+    itemDetails,
+    recommendableModuleIds = [],
+    recommendedModuleIdsForUser = [],
+    encryptedCombinedCourseUrl,
+    dataForQuest,
+  }) {
     this.items = [];
     for (const requirement of this.quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        const campaign = data.find(({ id }) => id === requirement.data.campaignId.data);
+        const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
+        const isCompleted = requirement.isFulfilled(dataForQuest);
         this.items.push(
           new CombinedCourseItem({
             id: campaign.id,
             reference: campaign.code,
             title: campaign.name,
             type: ITEM_TYPE.CAMPAIGN,
+            isCompleted,
           }),
         );
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
-        const module = data.find(({ id }) => id === requirement.data.moduleId.data);
+        const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
 
         const isRecommandable = recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
@@ -111,6 +119,7 @@ export class CombinedCourseDetails extends CombinedCourse {
           }
         }
 
+        const isCompleted = requirement.isFulfilled(dataForQuest);
         this.items.push(
           new CombinedCourseItem({
             id: module.id,
@@ -118,6 +127,7 @@ export class CombinedCourseDetails extends CombinedCourse {
             title: module.title,
             type: ITEM_TYPE.MODULE,
             redirection: encryptedCombinedCourseUrl,
+            isCompleted,
           }),
         );
       }

@@ -44,7 +44,11 @@ describe('Integration | Repository | CampaignCreatorRepository', function () {
         const { id: targetProfileSharedId } = databaseBuilder.factory.buildTargetProfile({
           outdated: false,
         });
+        const { id: targetProfileSharedId2 } = databaseBuilder.factory.buildTargetProfile({
+          outdated: false,
+        });
         databaseBuilder.factory.buildTargetProfileShare({ targetProfileId: targetProfileSharedId, organizationId });
+        databaseBuilder.factory.buildTargetProfileShare({ targetProfileId: targetProfileSharedId2, organizationId });
         databaseBuilder.factory.buildTargetProfile({
           outdated: false,
         });
@@ -52,7 +56,7 @@ describe('Integration | Repository | CampaignCreatorRepository', function () {
         await databaseBuilder.commit();
 
         const creator = await campaignCreatorRepository.get(organizationId);
-        expect(creator.availableTargetProfileIds).to.exactlyContain([targetProfileSharedId]);
+        expect(creator.availableTargetProfileIds).to.exactlyContain([targetProfileSharedId, targetProfileSharedId2]);
       });
 
       it('returns the target profiles is owned by the organization', async function () {

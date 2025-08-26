@@ -44,6 +44,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
               data: campaign.id,
               comparison: 'equal',
             },
+            status: {
+              data: 'SHARED',
+              comparison: 'equal',
+            },
           },
         },
         {
@@ -54,6 +58,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
               data: moduleId1,
               comparison: 'equal',
             },
+            isTerminated: {
+              data: true,
+              comparison: 'equal',
+            },
           },
         },
         {
@@ -62,6 +70,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           data: {
             moduleId: {
               data: moduleId2,
+              comparison: 'equal',
+            },
+            isTerminated: {
+              data: true,
               comparison: 'equal',
             },
           },
@@ -80,6 +92,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         reference: campaign.code,
         title: campaign.name,
         type: ITEM_TYPE.CAMPAIGN,
+        isCompleted: false,
       }),
       new CombinedCourseItem({
         id: moduleId1,
@@ -87,6 +100,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         title: 'Bac à sable',
         type: ITEM_TYPE.MODULE,
         redirection: 'encryptedUrl',
+        isCompleted: false,
       }),
       new CombinedCourseItem({
         id: moduleId2,
@@ -94,6 +108,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         title: 'Les bases du clavier sur ordinateur 1/2',
         type: ITEM_TYPE.MODULE,
         redirection: 'encryptedUrl',
+        isCompleted: false,
       }),
     ]);
     expect(result.id).to.equal(questId);
@@ -126,6 +141,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       trainingId: training1.id,
       campaignParticipationId: campaignParticipation.id,
     });
+    databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
 
     const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
       code,
@@ -139,6 +155,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
               data: campaign.id,
               comparison: 'equal',
             },
+            status: {
+              data: 'SHARED',
+              comparison: 'equal',
+            },
           },
         },
         {
@@ -147,6 +167,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           data: {
             moduleId: {
               data: moduleId1,
+              comparison: 'equal',
+            },
+            isTerminated: {
+              data: true,
               comparison: 'equal',
             },
           },
@@ -159,6 +183,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
               data: moduleId2,
               comparison: 'equal',
             },
+            isTerminated: {
+              data: true,
+              comparison: 'equal',
+            },
           },
         },
         {
@@ -167,6 +195,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           data: {
             moduleId: {
               data: moduleId3,
+              comparison: 'equal',
+            },
+            isTerminated: {
+              data: true,
               comparison: 'equal',
             },
           },
@@ -186,6 +218,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         reference: campaign.code,
         title: campaign.name,
         type: ITEM_TYPE.CAMPAIGN,
+        isCompleted: true,
       }),
       new CombinedCourseItem({
         id: moduleId1,
@@ -193,6 +226,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         title: 'Bac à sable',
         type: ITEM_TYPE.MODULE,
         redirection: 'encryptedUrl',
+        isCompleted: true,
       }),
       new CombinedCourseItem({
         id: moduleId3,
@@ -200,6 +234,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         title: 'Bien écrire une adresse mail',
         type: ITEM_TYPE.MODULE,
         redirection: 'encryptedUrl',
+        isCompleted: false,
       }),
     ]);
     expect(result).to.be.instanceOf(CombinedCourse);

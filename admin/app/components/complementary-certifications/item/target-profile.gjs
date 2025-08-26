@@ -1,4 +1,3 @@
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -12,7 +11,6 @@ export default class TargetProfile extends Component {
   @service store;
 
   @tracked complementaryCertification;
-  @tracked isToggleSwitched = true;
   @tracked targetProfileId;
 
   constructor() {
@@ -35,22 +33,14 @@ export default class TargetProfile extends Component {
     return this.complementaryCertification?.currentTargetProfiles?.find(({ id }) => id === this.targetProfileId);
   }
 
-  @action
-  switchTargetProfile() {
-    this.isToggleSwitched = !this.isToggleSwitched;
-    this.targetProfileId = this.complementaryCertification.currentTargetProfiles?.find(
-      ({ id }) => id !== this.targetProfileId,
-    ).id;
-  }
-
   <template>
-    <Information
-      @complementaryCertification={{this.complementaryCertification}}
-      @currentTargetProfile={{this.currentTargetProfile}}
-      @switchTargetProfile={{this.switchTargetProfile}}
-      @switchToggle={{this.isToggleSwitched}}
-    />
-    <BadgesList @currentTargetProfile={{this.currentTargetProfile}} />
+    {{#unless this.complementaryCertification.hasComplementaryReferential}}
+      <Information
+        @complementaryCertification={{this.complementaryCertification}}
+        @currentTargetProfile={{this.currentTargetProfile}}
+      />
+      <BadgesList @currentTargetProfile={{this.currentTargetProfile}} />
+    {{/unless}}
     <History @targetProfilesHistory={{this.complementaryCertification.targetProfilesHistory}} />
   </template>
 }

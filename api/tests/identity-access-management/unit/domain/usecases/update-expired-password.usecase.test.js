@@ -1,4 +1,5 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { PasswordExpirationToken } from '../../../../../src/identity-access-management/domain/models/PasswordExpirationToken.js';
 import { updateExpiredPassword } from '../../../../../src/identity-access-management/domain/usecases/update-expired-password.usecase.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
@@ -6,13 +7,13 @@ import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-expired-password', function () {
-  const passwordResetToken = 'PASSWORD_RESET_TOKEN';
+  const passwordExpirationToken = 'PASSWORD_RESET_TOKEN';
   const newPassword = 'Password02';
   const hashedPassword = 'ABCDEF123';
 
   let user;
 
-  let cryptoService, tokenService;
+  let cryptoService;
   let authenticationMethodRepository, userRepository;
 
   beforeEach(function () {
@@ -30,33 +31,31 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
     cryptoService = {
       hashPassword: sinon.stub(),
     };
-    tokenService = {
-      extractUserId: sinon.stub(),
-    };
     authenticationMethodRepository = {
       updatePassword: sinon.stub(),
       findOneByUserIdAndIdentityProvider: sinon.stub(),
     };
 
-    tokenService.extractUserId.resolves(user.id);
     userRepository.get.resolves(user);
     authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(authenticationMethod);
     cryptoService.hashPassword.resolves(hashedPassword);
   });
 
   it('updates user password with a hashed password and return username', async function () {
+    // given
+    sinon.stub(PasswordExpirationToken, 'decode').returns({ userId: user.id });
+
     // when
     const login = await updateExpiredPassword({
-      passwordResetToken,
+      passwordExpirationToken,
       newPassword,
-      tokenService,
       cryptoService,
       authenticationMethodRepository,
       userRepository,
     });
 
     // then
-    expect(tokenService.extractUserId).to.have.been.calledOnceWith(passwordResetToken);
+    expect(PasswordExpirationToken.decode).to.have.been.calledOnceWith(passwordExpirationToken);
     expect(userRepository.get).to.have.been.calledOnceWith(user.id);
     expect(cryptoService.hashPassword).to.have.been.calledOnceWith(newPassword);
     expect(authenticationMethodRepository.findOneByUserIdAndIdentityProvider).to.have.been.calledOnceWith({
@@ -75,12 +74,12 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
       // given
       const user = domainBuilder.buildUser({ username: null, email: 'armand.talo@example.net' });
       userRepository.get.resolves(user);
+      sinon.stub(PasswordExpirationToken, 'decode').returns({ userId: user.id });
 
       // when
       const login = await updateExpiredPassword({
-        passwordResetToken,
+        passwordExpirationToken,
         newPassword,
-        tokenService,
         cryptoService,
         authenticationMethodRepository,
         userRepository,
@@ -97,11 +96,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
       userRepository.get.rejects(new UserNotFoundError());
 
       // when
-      const error = await catchErr(updateExpiredPassword)({
-        passwordResetToken,
-        tokenService,
-        userRepository,
-      });
+      const error = await catchErr(updateExpiredPassword)({ passwordExpirationToken, userRepository });
 
       // then
       expect(error).to.be.instanceOf(UserNotFoundError);
@@ -113,11 +108,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
       sinon.stub(logger, 'warn');
 
       // when
-      await catchErr(updateExpiredPassword)({
-        passwordResetToken,
-        tokenService,
-        userRepository,
-      });
+      await catchErr(updateExpiredPassword)({ passwordExpirationToken, userRepository });
 
       // then
       expect(logger.warn).to.have.been.calledWithExactly('Trying to change his password with incorrect user id');
@@ -132,15 +123,14 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
         shouldChangePassword: false,
       });
       const user = domainBuilder.buildUser({ id: 100, authenticationMethods: [authenticationMethod] });
+      sinon.stub(PasswordExpirationToken, 'decode').returns({ userId: user.id });
 
-      tokenService.extractUserId.resolves(user.id);
       userRepository.get.resolves(user);
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(authenticationMethod);
 
       // when
       const error = await catchErr(updateExpiredPassword)({
-        passwordResetToken,
-        tokenService,
+        passwordExpirationToken,
         authenticationMethodRepository,
         userRepository,
       });

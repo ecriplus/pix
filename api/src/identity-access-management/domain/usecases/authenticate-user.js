@@ -9,6 +9,7 @@ import {
   PixAdminLoginFromPasswordDisabledError,
   UserShouldChangePasswordError,
 } from '../errors.js';
+import { PasswordExpirationToken } from '../models/PasswordExpirationToken.js';
 import { RefreshToken } from '../models/RefreshToken.js';
 import { UserAccessToken } from '../models/UserAccessToken.js';
 
@@ -22,7 +23,6 @@ import { UserAccessToken } from '../models/UserAccessToken.js';
  * @param {string} params.locale
  * @param {RefreshTokenRepository} params.refreshTokenRepository
  * @param {PixAuthenticationService} params.pixAuthenticationService
- * @param {TokenService} params.tokenService
  * @param {UserRepository} params.userRepository
  * @param {UserLoginRepository} params.userLoginRepository
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
@@ -41,7 +41,6 @@ const authenticateUser = async function ({
   locale,
   refreshTokenRepository,
   pixAuthenticationService,
-  tokenService,
   userRepository,
   userLoginRepository,
   authenticationMethodRepository,
@@ -63,8 +62,8 @@ const authenticateUser = async function ({
     });
 
     if (user.shouldChangePassword) {
-      const passwordResetToken = tokenService.createPasswordResetToken(user.id);
-      throw new UserShouldChangePasswordError(undefined, passwordResetToken);
+      const passwordExpirationToken = PasswordExpirationToken.generate({ userId: user.id });
+      throw new UserShouldChangePasswordError(undefined, passwordExpirationToken);
     }
 
     await _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository });

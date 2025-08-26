@@ -569,15 +569,15 @@
           "legend": "Filtres pour le tableau des attestations, des champs de saisie permettent de filtrer le tableau par le nom ou prénom d'un élève et par classes. Des boutons permettent de filtrer les attestations obtenues ou non.",
           "results": "{total, plural, =0 {0 résultat} =1 {1 résultat} other {{total, number} résultats}}",
           "status": {
-            "empty-option": "Obtenu / Non obtenu",
+            "empty-option": "Obtenue / Non obtenue",
             "label": "Obtention",
-            "not-obtained": "Non obtenu",
-            "obtained": "Obtenu"
+            "not-obtained": "Non obtenue",
+            "obtained": "Obtenue"
           }
         },
         "status": {
-          "not-obtained": "Non obtenu",
-          "obtained": "Obtenu le {date}"
+          "not-obtained": "Non obtenue",
+          "obtained": "Obtenue le {date}"
         }
       },
       "title": "Attestations"

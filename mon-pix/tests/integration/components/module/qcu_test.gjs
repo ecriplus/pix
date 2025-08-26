@@ -24,15 +24,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should display a QCU', async function (assert) {
     // given
-    const qcuElement = {
-      id: 'd0690f26-978c-41c3-9a21-da931857739c',
-      instruction: 'Instruction',
-      proposals: [
-        { id: '1', content: 'radio1' },
-        { id: '2', content: 'radio2' },
-      ],
-      type: 'qcu',
-    };
+    const qcuElement = _getQcuElement();
     const onAnswerSpy = sinon.spy();
     const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
 
@@ -56,13 +48,8 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should call action and send an event when verify button is clicked', async function (assert) {
     // given
-    const answeredProposal = { id: '1', content: 'radio1' };
-    const qcuElement = {
-      id: 'qcu-id-1',
-      instruction: 'Instruction',
-      proposals: [answeredProposal, { id: '2', content: 'radio2' }],
-      type: 'qcu',
-    };
+    const qcuElement = _getQcuElement();
+    const answeredProposal = qcuElement.proposals[1];
     const userResponse = [answeredProposal.id];
     const onAnswerSpy = sinon.spy();
 
@@ -88,15 +75,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should display an error message if QCU is validated without response', async function (assert) {
     // given
-    const qcuElement = {
-      id: 'd0690f26-978c-41c3-9a21-da931857739c',
-      instruction: 'Instruction',
-      proposals: [
-        { id: '1', content: 'radio1' },
-        { id: '2', content: 'radio2' },
-      ],
-      type: 'qcu',
-    };
+    const qcuElement = _getQcuElement();
     const onAnswerSpy = sinon.spy();
     const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
 
@@ -110,15 +89,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should hide the error message when QCU is validated with response', async function (assert) {
     // given
-    const qcuElement = {
-      id: 'd0690f26-978c-41c3-9a21-da931857739c',
-      instruction: 'Instruction',
-      proposals: [
-        { id: '1', content: 'radio1' },
-        { id: '2', content: 'radio2' },
-      ],
-      type: 'qcu',
-    };
+    const qcuElement = _getQcuElement();
     const onAnswerSpy = sinon.spy();
     const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
 
@@ -133,23 +104,13 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should display an ok feedback when exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct!', diagnosis: '<p>Good job!</p>' },
-      status: 'ok',
-      solution: 'solution',
-    });
-
     const onAnswerSpy = sinon.spy();
-    const { qcuElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcuElement = _getQcuElement();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio1' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.getByText('Correct!')).exists();
@@ -161,26 +122,17 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should display a ko feedback when exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
     const onAnswerSpy = sinon.spy();
-    const { qcuElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcuElement = _getQcuElement();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio2' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.getByText('Wrong!')).exists();
-    assert.dom(screen.getByText('Too Bad!')).exists();
+    assert.dom(screen.getByText('Try again!')).exists();
     assert.ok(screen.getByRole('radio', { name: 'radio1', disabled: true }));
     assert.ok(screen.getByRole('radio', { name: 'radio2', disabled: true }));
     assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).doesNotExist();
@@ -188,22 +140,13 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should display retry button when a ko feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: '<p>Try again!</p>' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
     const onAnswerSpy = sinon.spy();
-    const { qcuElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcuElement = _getQcuElement();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio2' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
@@ -211,22 +154,13 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should be able to focus back to proposals when feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct!', diagnosis: '<p>Good job!</p>' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
     const onAnswerSpy = sinon.spy();
-    const { qcuElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcuElement = _getQcuElement();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio1' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     const radio1 = screen.getByRole('radio', { name: 'radio1', disabled: true });
@@ -236,45 +170,30 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
   test('should not display retry button when an ok feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct!', diagnosis: '<p>Nice!</p>' },
-      status: 'ok',
-      solution: 'solution',
-    });
-
     const onAnswerSpy = sinon.spy();
-    const { qcuElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcuElement = _getQcuElement();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio1' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
   });
 });
 
-function prepareContextRecords(store, correctionResponse) {
+function _getQcuElement() {
   const qcuElement = {
     id: 'd0690f26-978c-41c3-9a21-da931857739c',
     instruction: 'Instruction',
     proposals: [
-      { id: '1', content: 'radio1' },
-      { id: '2', content: 'radio2' },
+      { id: '1', content: 'radio1', feedback: { state: 'Correct!', diagnosis: '<p>Good job!</p>' } },
+      { id: '2', content: 'radio2', feedback: { state: 'Wrong!', diagnosis: '<p>Try again!</p>' } },
     ],
+    solution: '1',
     type: 'qcu',
   };
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qcuElement.id,
-  });
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qcuElement.id,
-  });
-  return { qcuElement };
+
+  return qcuElement;
 }

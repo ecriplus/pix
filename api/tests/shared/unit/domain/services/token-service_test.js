@@ -4,133 +4,16 @@ import lodash from 'lodash';
 import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { config, config as settings } from '../../../../../src/shared/config.js';
 import {
-  InvalidExternalUserTokenError,
   InvalidResultRecipientTokenError,
   InvalidSessionResultTokenError,
   InvalidTemporaryKeyError,
 } from '../../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, expect } from '../../../../test-helper.js';
 
 const { omit } = lodash;
 
 describe('Unit | Shared | Domain | Services | Token Service', function () {
-  describe('#createAccessTokenFromApplication', function () {
-    it('should create access token with client id, source and scope', function () {
-      // given
-      const clientId = 'client id';
-      const source = 'client application';
-      const scope = 'organizations';
-      const secret = 'a secret';
-      const accessTokenLifespanMs = 1000;
-
-      const payload = { client_id: clientId, source, scope };
-      const options = { expiresIn: accessTokenLifespanMs };
-
-      const expectedAccessToken = Symbol('expectedAccessToken');
-
-      sinon.stub(jsonwebtoken, 'sign').returns(expectedAccessToken);
-
-      // when
-      const result = tokenService.createAccessTokenFromApplication(
-        clientId,
-        source,
-        scope,
-        secret,
-        accessTokenLifespanMs,
-      );
-
-      // then
-      expect(result).to.be.equal(expectedAccessToken);
-      expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);
-    });
-
-    describe('when scope contains an array of several', function () {
-      it('should join scopes separated by spaces', function () {
-        // given
-        const clientId = 'client id';
-        const source = 'client application';
-        const scope = ['organizations', 'campaigns'];
-        const secret = 'a secret';
-        const accessTokenLifespanMs = 1000;
-
-        const payload = { client_id: clientId, source, scope: 'organizations campaigns' };
-        const options = { expiresIn: accessTokenLifespanMs };
-
-        const expectedAccessToken = Symbol('expectedAccessToken');
-
-        sinon.stub(jsonwebtoken, 'sign').returns(expectedAccessToken);
-
-        // when
-        const result = tokenService.createAccessTokenFromApplication(
-          clientId,
-          source,
-          scope,
-          secret,
-          accessTokenLifespanMs,
-        );
-
-        // then
-        expect(result).to.be.equal(expectedAccessToken);
-        expect(jsonwebtoken.sign).to.have.been.calledWithExactly(payload, secret, options);
-      });
-    });
-  });
-
-  describe('#createIdTokenForUserReconciliation', function () {
-    it('should return a valid idToken with firstName, lastName, samlId', function () {
-      // given
-      const externalUser = {
-        firstName: 'Adèle',
-        lastName: 'Lopez',
-        samlId: 'IDO-for-adele',
-      };
-      const expectedTokenAttributes = {
-        first_name: 'Adèle',
-        last_name: 'Lopez',
-        saml_id: 'IDO-for-adele',
-      };
-
-      // when
-      const idToken = tokenService.createIdTokenForUserReconciliation(externalUser);
-
-      // then
-      const decodedToken = jsonwebtoken.verify(idToken, settings.authentication.secret);
-      expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal(expectedTokenAttributes);
-    });
-  });
-
-  describe('#extractExternalUserFromIdToken', function () {
-    it('should return external user if the idToken is valid', async function () {
-      // given
-      const externalUser = {
-        firstName: 'Saml',
-        lastName: 'Jackson',
-        samlId: 'SamlId',
-      };
-
-      const idToken = tokenService.createIdTokenForUserReconciliation(externalUser);
-
-      // when
-      const result = await tokenService.extractExternalUserFromIdToken(idToken);
-
-      // then
-      expect(result).to.deep.equal(externalUser);
-    });
-
-    it('should throw an InvalidExternalUserTokenError if the idToken is invalid', async function () {
-      // given
-      const idToken = 'WRONG_DATA';
-
-      // when
-      const error = await catchErr(tokenService.extractExternalUserFromIdToken)(idToken);
-      expect(error).to.be.an.instanceof(InvalidExternalUserTokenError);
-      expect(error.message).to.be.equal(
-        'Une erreur est survenue. Veuillez réessayer de vous connecter depuis le médiacentre.',
-      );
-    });
-  });
-
   describe('#extractUserId', function () {
     it('should return userId if the accessToken is valid', function () {
       // given
@@ -168,36 +51,6 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
 
       // then
       expect(error).to.be.an.instanceof(InvalidTemporaryKeyError);
-    });
-  });
-
-  describe('#extractSamlId', function () {
-    it('should return samlId if the idToken is valid', function () {
-      // given
-      const expectedSamlId = 'SAMLID';
-      const userAttributes = {
-        firstName: 'firstName',
-        lastName: 'lastName',
-        samlId: expectedSamlId,
-      };
-      const idToken = tokenService.createIdTokenForUserReconciliation(userAttributes);
-
-      // when
-      const samlId = tokenService.extractSamlId(idToken);
-
-      // then
-      expect(samlId).to.equal(expectedSamlId);
-    });
-
-    it('should return null if the idToken is invalid', function () {
-      // given
-      const invalidIdToken = 'ABCD';
-
-      // when
-      const result = tokenService.extractSamlId(invalidIdToken);
-
-      // then
-      expect(result).to.equal(null);
     });
   });
 
@@ -396,20 +249,6 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
       // then
       const decodedToken = jsonwebtoken.verify(linkToken, settings.authentication.secret);
       expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal(expectedTokenAttributes);
-    });
-  });
-
-  describe('#createPasswordResetToken', function () {
-    it('should return a valid token with userId', function () {
-      // given
-      const userId = 1;
-
-      // when
-      const token = tokenService.createPasswordResetToken(userId);
-
-      // then
-      const decodedToken = jsonwebtoken.verify(token, settings.authentication.secret);
-      expect(omit(decodedToken, ['iat', 'exp'])).to.deep.equal({ user_id: userId });
     });
   });
 });

@@ -26,11 +26,10 @@ export const generateAttestations = async function ({
   return dependencies.pdfWithFormSerializer.serialize(templatePath, data);
 };
 
-export const getAttestationsUserDetail = async function ({ attestationKey, userIds, organizationId }) {
+export const getAttestationsUserDetail = async function ({ attestationKey, organizationId }) {
   const locale = FRENCH_FRANCE;
-  const attestations = await usecases.getSharedAttestationsUserDetailForOrganizationByUserIds({
+  const attestations = await usecases.getSharedAttestationsUserDetailByOrganizationId({
     attestationKey,
-    userIds,
     organizationId,
     locale,
   });

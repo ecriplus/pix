@@ -22,7 +22,7 @@ class ParticipationForCampaignManagement {
     if (userFirstName && userLastName) {
       this.userFullName = `${userFirstName} ${userLastName}`;
     } else {
-      this.userFullName = '(Anonymised)';
+      this.userFullName = '-';
     }
     this.participantExternalId = participantExternalId;
     this.status = status;

@@ -1188,9 +1188,12 @@
       "content": {
         "start-button": "Iniciar el curso"
       },
-      "completed" : {
+      "completed": {
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
         "description": "¡Bien hecho! Ha dado un paso importante para navegar con seguridad por el mundo digital."
+      },
+      "items": {
+        "completed": "¡Completado!"
       }
     },
     "comparison-window": {
@@ -1764,6 +1767,13 @@
         "goToForm": "Responder al cuestionario",
         "subtitle": "Has trabajado en los siguientes objetivos:",
         "title": "¡Módulo completado!"
+      },
+      "section": {
+        "question-yourself": "Pregúntate a ti mismo",
+        "explore-to-understand": "Explora para comprender",
+        "retain-the-essentials": "Retén lo esencial",
+        "practise": "Practica",
+        "go-further": "Ve más allá"
       },
       "sidebar": {
         "button": "Visualizar los pasos del módulo"

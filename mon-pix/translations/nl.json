@@ -1192,9 +1192,12 @@
       "content": {
         "start-button": "Cursus starten"
       },
-      "completed" : {
+      "completed": {
         "title": "Gefeliciteerd! Je bent klaar!",
         "description": "Goed gedaan! Je hebt een belangrijke stap gezet om veilig door de digitale wereld te navigeren."
+      },
+      "items": {
+        "completed": "Voltooid!"
       }
     },
     "comparison-window": {
@@ -1768,6 +1771,13 @@
         "goToForm": "Beantwoord de vragenlijst",
         "subtitle": "Je hebt aan de volgende doelstellingen gewerkt:",
         "title": "Module voltooid!"
+      },
+      "section": {
+        "question-yourself": "Stel jezelf vragen",
+        "explore-to-understand": "Onderzoek om te begrijpen",
+        "retain-the-essentials": "Onthoud de essentie",
+        "practise": "Oefen",
+        "go-further": "Ga verder"
       },
       "sidebar": {
         "button": "De modulestappen weergeven"

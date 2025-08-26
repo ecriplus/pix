@@ -154,32 +154,98 @@ async function getAttestationsForOrganizationLearnersAndKey({
   });
 }
 
-async function getAttestationStatusForOrganizationLearnersAndKey({
+async function findPaginatedAttestationStatusForOrganizationLearnersAndKey({
   attestationKey,
-  organizationLearners,
   organizationId,
+  filter,
+  page,
   attestationsApi,
 }) {
-  const isRealLearner = (learner) =>
-    learner.firstName !== '' && learner.lastName !== '' && learner.firstName !== null && learner.lastName !== null;
-  const realOrganizationLearners = organizationLearners.filter(isRealLearner);
-  const userIds = realOrganizationLearners.map((learner) => learner.userId);
+  const query = knex
+    .select(
+      'view-active-organization-learners.id',
+      'userId',
+      'view-active-organization-learners.firstName',
+      'view-active-organization-learners.lastName',
+      'organizationId',
+      'division',
+      'attributes',
+    )
+    .from('view-active-organization-learners')
+    .join('users', 'users.id', 'view-active-organization-learners.userId')
+    .where({ isDisabled: false, organizationId, isAnonymous: false, hasBeenAnonymised: false })
+    .orderByRaw('LOWER("view-active-organization-learners"."firstName") ASC')
+    .orderByRaw('LOWER("view-active-organization-learners"."lastName") ASC');
+
+  if (filter) {
+    const { name, divisions } = filter;
+    if (name) {
+      filterByFullName(
+        query,
+        name,
+        'view-active-organization-learners.firstName',
+        'view-active-organization-learners.lastName',
+      );
+    }
+    if (divisions?.length > 0) {
+      query.whereIn('division', divisions);
+    }
+  }
+
+  const organizationLearners = await query;
   const attestations = await attestationsApi.getAttestationsUserDetail({
     attestationKey,
-    userIds,
     organizationId,
   });
 
-  return realOrganizationLearners.filter(isRealLearner).map((organizationLearner) => {
-    const attestation = attestations.find(({ userId }) => userId === organizationLearner.userId);
-    return new AttestationParticipantStatus({
-      attestationKey,
-      organizationLearnerId: organizationLearner.id,
-      obtainedAt: attestation?.createdAt,
-      ...attestation,
-      ...organizationLearner,
-    });
+  let attestationParticipantsStatus = organizationLearners.map((organizationLearner) =>
+    _toAttestationParticipantStatus(organizationLearner, attestationKey, attestations),
+  );
+
+  if (filter?.statuses?.length > 0) {
+    attestationParticipantsStatus = attestationParticipantsStatus.filter((attestationParticipantStatus) =>
+      _filterByStatuses(attestationParticipantStatus, filter.statuses),
+    );
+  }
+
+  const { results, pagination } = _getPage(attestationParticipantsStatus, page);
+  return {
+    attestationParticipantsStatus: results,
+    pagination,
+  };
+}
+
+function _toAttestationParticipantStatus(organizationLearner, attestationKey, attestations) {
+  const attestation = attestations.find(({ userId }) => userId === organizationLearner.userId);
+  return new AttestationParticipantStatus({
+    attestationKey,
+    organizationLearnerId: organizationLearner.id,
+    obtainedAt: attestation?.createdAt,
+    ...attestation,
+    ...organizationLearner,
   });
+}
+
+function _filterByStatuses(attestationParticipantStatus, filterStatuses) {
+  const isFilteredByObtained = filterStatuses.includes('OBTAINED') && Boolean(attestationParticipantStatus.obtainedAt);
+  const isFilteredByNotObtained = filterStatuses.includes('NOT_OBTAINED') && !attestationParticipantStatus.obtainedAt;
+  return isFilteredByObtained || isFilteredByNotObtained;
+}
+
+function _getPage(results, page = { number: 1, size: 10 }) {
+  const pageNumber = page.number ?? 1;
+  const pageSize = page.size ?? 10;
+  const start = (pageNumber - 1) * pageSize;
+  const end = pageNumber * pageSize;
+  return {
+    results: results.slice(start, end),
+    pagination: {
+      page: pageNumber,
+      pageCount: Math.ceil(results.length / pageSize),
+      pageSize,
+      rowCount: results.length,
+    },
+  };
 }
 
 async function getIdByUserIdAndOrganizationId({ organizationId, userId }) {
@@ -463,10 +529,10 @@ export {
   findByOrganizationsWhichNeedToComputeCertificability,
   findByUserId,
   findOrganizationLearnersByDivisions,
+  findPaginatedAttestationStatusForOrganizationLearnersAndKey,
   findPaginatedLearners,
   get,
   getAttestationsForOrganizationLearnersAndKey,
-  getAttestationStatusForOrganizationLearnersAndKey,
   getIdByUserIdAndOrganizationId,
   getLatestOrganizationLearner,
   isActive,
