@@ -55,7 +55,7 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
       assert.dom(screen.getByText('TOINE')).exists({ count: 1 });
     });
 
-    test('it should redirect to complementary certification framework details on click ', async function (assert) {
+    test('it should redirect to complementary certification framework details on click if not double certification', async function (assert) {
       // given
       server.create('complementary-certification', {
         id: 1,
@@ -80,6 +80,33 @@ module('Acceptance | Complementary certifications | list ', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/complementary-certifications/1/framework');
+    });
+
+    test('it should redirect to complementary certification target profile details on click if double certification', async function (assert) {
+      // given
+      server.create('complementary-certification', {
+        id: 1,
+        key: 'AN',
+        label: 'TOINE',
+        hasComplementaryReferential: false,
+        targetProfilesHistory: [
+          {
+            id: 52,
+            name: 'Stephen target',
+            badges: [],
+          },
+        ],
+      });
+
+      server.create('target-profile', { id: 'AN' });
+
+      const screen = await visit('/complementary-certifications/list');
+
+      // when
+      await click(screen.getByRole('link', { name: 'TOINE' }));
+
+      // then
+      assert.strictEqual(currentURL(), '/complementary-certifications/1/target-profile');
     });
   });
 });

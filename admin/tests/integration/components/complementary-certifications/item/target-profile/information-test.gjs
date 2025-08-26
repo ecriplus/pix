@@ -31,65 +31,6 @@ module('Integration | Component | complementary-certifications/item/target-profi
     assert.dom(screen.getByRole('link', { name: 'ALEX TARGET' })).exists();
   });
 
-  module('when there is multiple current target profiles', function () {
-    test('it should display the target profile toggle', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const currentUser = this.owner.lookup('service:currentUser');
-      currentUser.adminMember = { isSuperAdmin: true };
-      const complementaryCertification = store.createRecord('complementary-certification', {
-        label: 'MARIANNE CERTIF',
-        targetProfilesHistory: [
-          { name: 'ALEX TARGET', id: 3 },
-          { name: 'JUDE TARGET', id: 4 },
-        ],
-      });
-      const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
-
-      // when
-      const screen = await render(
-        <template>
-          <Information
-            @complementaryCertification={{complementaryCertification}}
-            @currentTargetProfile={{currentTargetProfile}}
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom(screen.getByRole('button', { name: 'Accéder aux détails des profils cibles courants' })).exists();
-    });
-  });
-
-  module('when there is only one current target profile', function () {
-    test('it should not display the target profile toggle', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const currentUser = this.owner.lookup('service:currentUser');
-      currentUser.adminMember = { isSuperAdmin: true };
-      const complementaryCertification = store.createRecord('complementary-certification', {
-        label: 'MARIANNE CERTIF',
-        targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3 }],
-      });
-      const currentTargetProfile = complementaryCertification.currentTargetProfiles[0];
-
-      // when
-      const screen = await render(
-        <template>
-          <Information
-            @complementaryCertification={{complementaryCertification}}
-            @currentTargetProfile={{currentTargetProfile}}
-          />
-        </template>,
-      );
-
-      // then
-      assert
-        .dom(screen.queryByRole('button', { name: 'Accéder aux détails des profils cibles courants' }))
-        .doesNotExist();
-    });
-  });
-
   module('when admin member has role "CERTIF", "METIER" and "SUPPORT"', function () {
     test('it should not display the button to attach new target profile', async function (assert) {
       // given
