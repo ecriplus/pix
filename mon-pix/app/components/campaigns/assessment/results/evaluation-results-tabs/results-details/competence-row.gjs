@@ -4,7 +4,7 @@ import { t } from 'ember-intl';
 
 import ShowMoreText from '../../../../../../components/show-more-text';
 
-export default class EvaluationResultsDetailsTab extends Component {
+export default class CompetenceRow extends Component {
   getIcon(competenceId) {
     return competencesIcons[competenceId] || competencesIcons.pixplus;
   }
