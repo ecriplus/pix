@@ -9,6 +9,7 @@ test('creates an account from GAR', async ({ page, pixOrgaMemberContext }) => {
     const pixOrgaPage = await pixOrgaMemberContext.newPage();
     await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
     await test.step('creates the campaign', async () => {
+      await pixOrgaPage.getByRole('link', { name: 'Campagnes' }).click();
       await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();
       const createCampaignPage = new PixOrgaPage(pixOrgaPage);
       await createCampaignPage.createEvaluationCampaign({
