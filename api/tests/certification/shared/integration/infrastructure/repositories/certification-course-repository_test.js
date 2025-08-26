@@ -14,7 +14,7 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
       userId = databaseBuilder.factory.buildUser().id;
       sessionId = databaseBuilder.factory.buildSession({ version: 3 }).id;
 
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+      databaseBuilder.factory.buildCertificationConfiguration();
 
       databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
       certificationCourse = domainBuilder.buildCertificationCourse.unpersisted({
@@ -189,21 +189,27 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
           });
 
           // Active configuration on the certification day
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            maximumAssessmentLength,
-            createdAt: new Date('2022-01-02'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2022-01-02'),
+            challengesConfiguration: {
+              maximumAssessmentLength: maximumAssessmentLength,
+            },
           });
 
           // Older configuration
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            maximumAssessmentLength: 5,
-            createdAt: new Date('2022-01-01'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2022-01-01'),
+            challengesConfiguration: {
+              maximumAssessmentLength: 5,
+            },
           });
 
           // Newer configuration
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            maximumAssessmentLength: 15,
-            createdAt: new Date('2022-01-04'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2022-01-04'),
+            challengesConfiguration: {
+              maximumAssessmentLength: 15,
+            },
           });
 
           await databaseBuilder.commit();
@@ -291,6 +297,13 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         databaseBuilder.factory.buildFlashAlgorithmConfiguration({
           maximumAssessmentLength: numberOfQuestionsForV3,
           createdAt: v3ConfigurationCreationDate,
+        });
+
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: v3ConfigurationCreationDate,
+          challengesConfiguration: {
+            maximumAssessmentLength: numberOfQuestionsForV3,
+          },
         });
 
         return databaseBuilder.commit();

@@ -3,8 +3,6 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../domain/models/FlashAssessmentAlgorithmConfiguration.js';
 
-const TABLE_NAME = 'flash-algorithm-configurations';
-
 /**
  * @returns {Promise<FlashAssessmentAlgorithmConfiguration>}
  */
@@ -29,7 +27,7 @@ export const getMostRecentBeforeDate = async (date) => {
     .andWhere((queryBuilder) => {
       queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
     })
-    .orderBy('startingDate', 'asc')
+    .orderBy('startingDate', 'desc')
     .first();
 
   if (!flashAlgorithmConfiguration) {

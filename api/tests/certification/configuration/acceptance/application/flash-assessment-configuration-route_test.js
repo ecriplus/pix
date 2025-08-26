@@ -48,7 +48,6 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
       describe('when there is an available configuration', function () {
         it('should return a 200', async function () {
           // given
-          const enablePassageByAllCompetences = true;
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });

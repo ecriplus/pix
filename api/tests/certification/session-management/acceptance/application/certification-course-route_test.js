@@ -385,9 +385,11 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
     beforeEach(async function () {
       certificationCourse = databaseBuilder.factory.buildCertificationCourse({ version: 3 });
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-        maximumAssessmentLength: 10,
-        createdAt: new Date('2020-01-01'),
+      databaseBuilder.factory.buildCertificationConfiguration({
+        challengesConfiguration: {
+          maximumAssessmentLength: 10,
+        },
+        startingAt: new Date('2020-01-01'),
       });
 
       const user = await insertUserWithRoleSuperAdmin();

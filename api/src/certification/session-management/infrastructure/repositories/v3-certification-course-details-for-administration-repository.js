@@ -1,6 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
+import { getMostRecentBeforeDate } from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import { V3CertificationChallengeForAdministration } from '../../domain/models/V3CertificationChallengeForAdministration.js';
 import { V3CertificationChallengeLiveAlertForAdministration } from '../../domain/models/V3CertificationChallengeLiveAlertForAdministration.js';
 import { V3CertificationCourseDetailsForAdministration } from '../../domain/models/V3CertificationCourseDetailsForAdministration.js';
@@ -55,10 +56,9 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
     })
     .first();
 
-  const { maximumAssessmentLength: numberOfChallenges } = await knex('flash-algorithm-configurations')
-    .where('createdAt', '<=', certificationCourseDTO.createdAt)
-    .orderBy('createdAt', 'desc')
-    .first();
+  const { maximumAssessmentLength: numberOfChallenges } = await getMostRecentBeforeDate(
+    certificationCourseDTO.createdAt,
+  );
 
   const certificationChallengesDetailsDTO = await knex
     .select({

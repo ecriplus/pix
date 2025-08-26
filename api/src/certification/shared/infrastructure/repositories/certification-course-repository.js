@@ -7,6 +7,7 @@ import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
+import { getMostRecentBeforeDate } from './flash-algorithm-configuration-repository.js';
 
 async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
@@ -64,10 +65,7 @@ async function get({ id }) {
 
   let accessibilityAdjustmentNeeded;
   if (certificationCourseDTO.version === 3) {
-    const configuration = await _getV3ConfigurationForCertificationCreationDate(
-      certificationCourseDTO.createdAt,
-      knexConn,
-    );
+    const configuration = await getMostRecentBeforeDate(certificationCourseDTO.createdAt);
 
     certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
 
@@ -118,13 +116,6 @@ function _toDomain({
   });
 }
 
-async function _getV3ConfigurationForCertificationCreationDate(createdAt, knexConn) {
-  return knexConn('flash-algorithm-configurations')
-    .where('createdAt', '<=', createdAt)
-    .orderBy('createdAt', 'desc')
-    .first();
-}
-
 async function getSessionId({ id }) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -153,10 +144,7 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   const challengesDTO = await _findAllChallenges(certificationCourseDTO.id, knexConn);
 
   if (certificationCourseDTO.version === 3) {
-    const configuration = await _getV3ConfigurationForCertificationCreationDate(
-      certificationCourseDTO.createdAt,
-      knexConn,
-    );
+    const configuration = await getMostRecentBeforeDate(certificationCourseDTO.createdAt);
 
     certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
   }

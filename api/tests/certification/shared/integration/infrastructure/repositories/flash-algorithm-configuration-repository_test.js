@@ -32,7 +32,6 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           limitToOneQuestionPerTube: true,
           enablePassageByAllCompetences: true,
           variationPercent: 0.8,
-          createdAt: undefined, // TODO: delete when deleting prop in domain model
         });
       });
     });
