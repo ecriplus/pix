@@ -153,7 +153,7 @@
                     {
                       "id": "a7118db8-ea1e-4b7d-b2e9-12903eaa12b3",
                       "type": "text",
-                      "content": "<p>Il s'agit d'une technique d’apprentissage automatique utilisée en intelligence artificielle. 🤖</p><p>On l’appelle l’apprentissage automatique <strong>supervisé</strong>. Pourquoi ? Cela met en avant le fait que les ingénieurs qui préparent le jeu d’exemples guident et supervisent le logiciel.👨🏽‍💻</p>"
+                      "content": "<p>Il s'agit d'une technique d’apprentissage automatique utilisée en intelligence artificielle. 🤖</p><p>On l’appelle <strong>l’apprentissage automatique supervisé</strong>.</p><p>Pourquoi ce nom ? Parce que les ingénieurs fournissent au logiciel un jeu d’exemples annotés, soigneusement préparés, qui guident et encadrent son apprentissage.👨🏽‍💻</p>"
                     }
                   ]
                 }
@@ -310,7 +310,7 @@
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/jeudedonne-sanslegende.png",
                       "alt": "Une illustration du jeu de données avec des exemples",
                       "alternativeText": "<p>On voit des photos d'ail des ours (avec des fleurs, avec des feuilles) et de muguet (avec des feuilles, avec des fleurs)</p>",
-                      "legend": "Une photo de bulbes d'ail des ours",
+                      "legend": "",
                       "licence": ""
                     }
                   ]
@@ -338,7 +338,7 @@
                     {
                       "id": "a990944f-d268-4eac-99cc-8f4e88123baa",
                       "type": "qcu-discovery",
-                      "instruction": "<p>A votre avis, pourquoi ce logiciel n'est pas capable de dire que cette photographie est de l'ail des ours ?  <br></p>",
+                      "instruction": "<p>À votre avis, pourquoi ce logiciel n'est pas capable de dire avec certitude que cette photographie est de l'ail des ours ?  <br></p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -735,7 +735,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>J’ai confiance car ils ont été entraînés sur beaucoup d’exemples.<br></p>",
+                    "content": "<p>J’ai confiance car les logiciels d'intelligence artificielle sont entraînés sur beaucoup d’exemples.<br></p>",
                     "feedback": {
                       "diagnosis": "<p>Gardez de la prudence, car le nombre d’exemples n’empêche pas les erreurs.<br></p>"
                     }
