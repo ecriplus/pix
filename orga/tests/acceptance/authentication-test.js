@@ -12,7 +12,6 @@ import setupIntl from '../helpers/setup-intl';
 import {
   createPrescriberByUser,
   createPrescriberForOrganization,
-  createUserMembershipWithRole,
   createUserWithMembership,
   createUserWithMembershipAndTermsOfServiceAccepted,
 } from '../helpers/test-init';
@@ -181,6 +180,27 @@ module('Acceptance | authentication', function (hooks) {
           // then
           assert.ok(screen.getByRole('link', { name: 'Team' }));
         });
+      });
+    });
+
+    module('When organization has credits management feature', function (hooks) {
+      let user;
+      hooks.beforeEach(async () => {
+        user = createPrescriberForOrganization({ lang: 'fr' }, {}, 'MEMBER', {
+          PLACES_MANAGEMENT: { active: true, params: null },
+        });
+        await authenticateSession(user.id);
+      });
+
+      test('it should display available places in sidebar', async function (assert) {
+        // given
+        server.create('organization-place-statistic', { id: user.userOrgaSettings.organization.id, available: 120 });
+
+        // when
+        const screen = await visit('/');
+
+        // then
+        assert.ok(screen.getByText(t('navigation.places.number', { count: 120 })));
       });
     });
 

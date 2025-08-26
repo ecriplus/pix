@@ -16,7 +16,7 @@ export default class AuthenticatedPlacesRoute extends Route {
     const placesLots = await this.store.query('organization-places-lot', {
       filter: { organizationId: this.currentUser.organization.id },
     });
-    const statistics = await this.modelFor('authenticated');
+    const statistics = await this.currentUser.organizationPlaceStatistics;
     return {
       statistics,
       placesLots,

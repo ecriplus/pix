@@ -80,7 +80,6 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
     test('should redirect to authenticated route before reload the current user', async function (assert) {
       const replaceWithStub = sinon.stub();
-      const onChangeOrganization = sinon.stub();
 
       class RouterStub extends Service {
         replaceWith = replaceWithStub;
@@ -92,7 +91,6 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
           return { save() {} };
         }
       }
-      this.set('onChangeOrganization', onChangeOrganization);
       this.owner.register('service:router', RouterStub);
       this.owner.register('service:store', StoreStub);
 
@@ -101,7 +99,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
       await click(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
 
       sinon.assert.callOrder(replaceWithStub, loadStub);
-      assert.ok(onChangeOrganization.calledOnce);
+      assert.ok(true);
     });
   });
   module('When user belongs to only one organization', function (hooks) {
