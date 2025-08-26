@@ -56,7 +56,7 @@
 
   <PixCheckbox @size="small" required={{true}} aria-required={{true}} {{on "click" this.validateCgu}}>
     <:label>
-      <p>
+      <p class="register-form__cgu-label">
         {{t "pages.login-or-register.register-form.fields.cgu.accept"}}
         <a href={{this.cguUrl}} class="link" target="_blank" rel="noopener noreferrer">
           {{t "pages.login-or-register.register-form.fields.cgu.terms-of-use"}}
