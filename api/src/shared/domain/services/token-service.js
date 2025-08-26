@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
-import { InvalidResultRecipientTokenError, InvalidSessionResultTokenError } from '../errors.js';
+import { InvalidResultRecipientTokenError } from '../errors.js';
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
@@ -48,19 +48,6 @@ function createCertificationResultsByRecipientEmailLinkToken({
   );
 }
 
-function createCertificationResultsLinkToken({ sessionId }) {
-  return jsonwebtoken.sign(
-    {
-      session_id: sessionId,
-      scope: config.jwtConfig.certificationResults.scope,
-    },
-    config.authentication.secret,
-    {
-      expiresIn: `${config.jwtConfig.certificationResults.tokenLifespan}`,
-    },
-  );
-}
-
 function extractTokenFromAuthChain(authChain) {
   if (!authChain) {
     return authChain;
@@ -88,21 +75,6 @@ function extractCertificationResultsByRecipientEmailLink(token) {
   };
 }
 
-function extractCertificationResultsLink(token) {
-  const decoded = getDecodedToken(token);
-  if (!decoded.session_id) {
-    throw new InvalidSessionResultTokenError();
-  }
-
-  if (decoded.scope !== config.jwtConfig.certificationResults.scope) {
-    throw new InvalidSessionResultTokenError();
-  }
-
-  return {
-    sessionId: decoded.session_id,
-  };
-}
-
 function extractUserId(token) {
   const decoded = getDecodedToken(token);
   return decoded.user_id || null;
@@ -110,11 +82,9 @@ function extractUserId(token) {
 
 const tokenService = {
   createCertificationResultsByRecipientEmailLinkToken,
-  createCertificationResultsLinkToken,
   getDecodedToken,
   encodeToken,
   extractCertificationResultsByRecipientEmailLink,
-  extractCertificationResultsLink,
   extractTokenFromAuthChain,
   extractUserId,
 };
@@ -125,9 +95,7 @@ const tokenService = {
 
 export {
   createCertificationResultsByRecipientEmailLinkToken,
-  createCertificationResultsLinkToken,
   extractCertificationResultsByRecipientEmailLink,
-  extractCertificationResultsLink,
   extractTokenFromAuthChain,
   extractUserId,
   getDecodedToken,

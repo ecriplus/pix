@@ -1,8 +1,8 @@
-import { tokenService } from '../../../../shared/domain/services/token-service.js';
 import { getPixAppUrl } from '../../../../shared/domain/services/url-service.js';
+import { CertificationResultsLinkToken } from '../models/tokens/CertificationResultsLinkToken.js';
 
 export const generateResultsLink = function ({ sessionId, i18n }) {
-  const token = tokenService.createCertificationResultsLinkToken({ sessionId });
+  const token = CertificationResultsLinkToken.generate({ sessionId });
   const locale = i18n.getLocale();
   return getPixAppUrl(locale, {
     pathname: '/resultats-session',
