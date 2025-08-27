@@ -39,6 +39,11 @@ export default class ModulePassage extends Component {
     );
   }
 
+  @action
+  shouldFocusAndScrollToGrain(grain) {
+    return !this.shouldDisplaySectionTitle(grain);
+  }
+
   get flatGrains() {
     return this.args.module.sections.flatMap((section) => section.grains);
   }
@@ -246,6 +251,7 @@ export default class ModulePassage extends Component {
           {{/if}}
           <ModuleGrain
             @grain={{grain}}
+            @shouldFocusAndScroll={{this.shouldFocusAndScrollToGrain grain}}
             @currentStep={{inc index}}
             @totalSteps={{this.displayableGrains.length}}
             @onElementRetry={{this.onElementRetry}}

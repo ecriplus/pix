@@ -160,6 +160,10 @@ export default class ModuleGrain extends Component {
 
   @action
   focusAndScroll(htmlElement) {
+    if (!this.args.shouldFocusAndScroll) {
+      return;
+    }
+
     if (!this.args.hasJustAppeared) {
       return;
     }
