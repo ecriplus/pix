@@ -1193,6 +1193,10 @@
         "description": "¡Bien hecho! Ha dado un paso importante para navegar con seguridad por el mundo digital."
       },
       "items": {
+        "formation": {
+          "title": "Me estoy formando",
+          "description": "¡Completa tu prueba y desbloquea módulos de formación personalizados! Su número dependerá de tus resultados."
+        },
         "completed": "¡Completado!"
       }
     },

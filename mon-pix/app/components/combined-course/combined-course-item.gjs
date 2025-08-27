@@ -2,12 +2,27 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { hash } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
 
 const Content = <template>
-  <div class="combined-course-item">
-    <div class="combined-course-item__title">{{@title}}</div>
+  <div class="combined-course-item" ...attributes>
+    <div class="combined-course-item__content">
+      <div class="combined-course-item__icon">
+        {{#if @iconUrl}}
+          <img class="campaign-step__image" role="presentation" src={{@iconUrl}} width="100%" />
+        {{/if}}
+      </div>
+      <div class="combined-course-item__text">
+        <div class="combined-course-item__title">{{@title}}</div>
+        <div class="combined-course-item__description">
+          {{yield}}
+        </div>
+      </div>
+    </div>
     {{#if @isLocked}}
-      <PixIcon @name="lock" @plainIcon={{true}} />
+      <div class="combined-course-item__indicator--locked">
+        <PixIcon @name="lock" @plainIcon={{true}} />
+      </div>
     {{/if}}
     {{#if @isCompleted}}
       <div class="combined-course-item__indicator--completed">
@@ -20,11 +35,22 @@ const Content = <template>
 </template>;
 
 <template>
-  {{#if @isLocked}}
-    <Content @title={{@item.title}} @isLocked={{true}} />
+  {{#if (eq @item.type "FORMATION")}}
+    <Content
+      @title={{t "pages.combined-courses.items.formation.title"}}
+      @isLocked={{true}}
+      @iconUrl="/images/formation-book.svg"
+      class="combined-course-item--formation"
+    >
+      <p>{{t "pages.combined-courses.items.formation.description"}}</p>
+    </Content>
   {{else}}
-    <LinkTo @route={{@item.route}} @model={{@item.reference}} @query={{hash redirection=@item.redirection}} disabled>
-      <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} />
-    </LinkTo>
+    {{#if @isLocked}}
+      <Content @title={{@item.title}} @isLocked={{true}} />
+    {{else}}
+      <LinkTo @route={{@item.route}} @model={{@item.reference}} @query={{hash redirection=@item.redirection}} disabled>
+        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} />
+      </LinkTo>
+    {{/if}}
   {{/if}}
 </template>

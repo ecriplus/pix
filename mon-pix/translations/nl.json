@@ -1197,6 +1197,10 @@
         "description": "Goed gedaan! Je hebt een belangrijke stap gezet om veilig door de digitale wereld te navigeren."
       },
       "items": {
+        "formation": {
+          "title": "Ik volg een opleiding",
+          "description": "Voltooi uw test en ontgrendel op maat gemaakte trainingsmodules! Het aantal modules hangt af van uw resultaten."
+        },
         "completed": "Voltooid!"
       }
     },

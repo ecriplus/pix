@@ -1,8 +1,8 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class CombinedCourseItem extends Model {
-  @attr('string') title;
   @attr('string') reference;
+  @attr('string') title;
   @attr('string') type;
   @attr('string') redirection;
   @attr('boolean') isCompleted;
