@@ -16,7 +16,7 @@ function _isFeatureEnabled(environmentVariable) {
 }
 
 module.exports = function (environment) {
-  const analyticsEnabled = _isFeatureEnabled(process.env.WEB_ANALYTICS_ENABLED);
+  const analyticsEnabled = _isFeatureEnabled(process.env.ANALYTICS_ENABLED);
   const ENV = {
     modulePrefix: 'pix-orga',
     environment,
