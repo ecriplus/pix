@@ -3,10 +3,10 @@ import _ from 'lodash';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Answer } from '../../../../evaluation/domain/models/Answer.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { CertificationChallengeWithType } from '../../../../shared/domain/models/CertificationChallengeWithType.js';
 import * as answerStatusDatabaseAdapter from '../../../../shared/infrastructure/adapters/answer-status-database-adapter.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { CertificationAssessment } from '../../../session-management/domain/models/CertificationAssessment.js';
+import { CertificationChallengeWithType } from '../../domain/models/CertificationChallengeWithType.js';
 
 async function _getCertificationChallenges(certificationCourseId, knexConn) {
   const certificationChallengeRows = await knexConn('certification-challenges')

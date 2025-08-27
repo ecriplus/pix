@@ -14,7 +14,7 @@
 import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
-import { CertificationChallenge } from '../../../../shared/domain/models/CertificationChallenge.js';
+import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-challenge');
