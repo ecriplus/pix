@@ -30,11 +30,8 @@ export default class ModulixStep extends Component {
   <template>
     {{#if this.hasDisplayableElements}}
       <section class="stepper__step" tabindex="-1" {{didInsert this.focusAndScroll}}>
-        <h3
-          class="stepper__step__position"
-          aria-label="{{t 'pages.modulix.stepper.step.position' currentStep=@currentStep totalSteps=@totalSteps}}"
-        >
-          {{@currentStep}}/{{@totalSteps}}
+        <h3 class="stepper__step__position screen-reader-only">
+          {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}
         </h3>
         {{#each this.displayableElements as |element|}}
           <div class="grain-card-content__element">
