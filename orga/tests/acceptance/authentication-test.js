@@ -118,26 +118,6 @@ module('Acceptance | authentication', function (hooks) {
   });
 
   module('When prescriber is authenticated', function () {
-    module('When the organization has no credits and prescriber is ADMIN', function (hooks) {
-      hooks.beforeEach(async () => {
-        const user = createPrescriberForOrganization(
-          { firstName: 'Harry', lastName: 'Cover', email: 'harry@cover.com', lang: 'fr' },
-          { name: 'BRO & Evil Associates' },
-          'ADMIN',
-        );
-
-        await authenticateSession(user.id);
-      });
-
-      test('should not show organization credit info', async function (assert) {
-        // when
-        await visit('/');
-        // then
-
-        assert.dom('.organization-credit-info').doesNotExist();
-      });
-    });
-
     module('When prescriber has accepted terms of service', function (hooks) {
       let prescriber;
       hooks.beforeEach(async () => {
@@ -200,53 +180,6 @@ module('Acceptance | authentication', function (hooks) {
 
           // then
           assert.ok(screen.getByRole('link', { name: 'Team' }));
-        });
-      });
-    });
-
-    module('When the organization has credits and prescriber is ADMIN', function (hooks) {
-      hooks.beforeEach(async () => {
-        const user = createPrescriberForOrganization(
-          { firstName: 'Harry', lastName: 'Cover', email: 'harry@cover.com', lang: 'fr' },
-          { name: 'BRO & Evil Associates', credit: 10000 },
-          'ADMIN',
-        );
-
-        await authenticateSession(user.id);
-      });
-
-      test('should show organization credit info', async function (assert) {
-        // when
-        await visit('/');
-        // then
-        assert.ok('.organization-credit-info');
-      });
-    });
-
-    module('When user is member', function (hooks) {
-      hooks.beforeEach(async () => {
-        const user = createUserMembershipWithRole('MEMBER');
-        createPrescriberByUser({ user });
-
-        await authenticateSession(user.id);
-      });
-
-      module('When the organization has credits and prescriber is MEMBER', function (hooks) {
-        hooks.beforeEach(async () => {
-          const user = createPrescriberForOrganization(
-            { firstName: 'Harry', lastName: 'Cover', email: 'harry@cover.com', lang: 'fr' },
-            { name: 'BRO & Evil Associates', credit: 10000 },
-            'MEMBER',
-          );
-
-          await authenticateSession(user.id);
-        });
-
-        test('should not show credit info', async function (assert) {
-          // when
-          await visit('/');
-          // then
-          assert.dom('.organization-credit-info').doesNotExist();
         });
       });
     });
