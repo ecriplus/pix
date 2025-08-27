@@ -8,6 +8,6 @@ import IndexMissions from 'pix-orga/components/index/missions';
   {{#if @controller.canAccessMissionsPage}}
     <IndexMissions />
   {{else}}
-    <IndexClassic />
+    <IndexClassic @participationStatistics={{@model}} />
   {{/if}}
 </template>
