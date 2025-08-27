@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
-import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
+import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import {
   createServer,
   databaseBuilder,
@@ -139,7 +139,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.access_token).to.exist;
-      const decodedAccessToken = await decodeIfValid(response.result.access_token);
+      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
       expect(decodedAccessToken).to.include({
         aud: 'https://admin.pix.fr',
       });

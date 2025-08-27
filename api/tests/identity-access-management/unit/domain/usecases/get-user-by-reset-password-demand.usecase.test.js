@@ -16,16 +16,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | get-user-by-res
 
   beforeEach(function () {
     resetPasswordDemandRepository = sinon.stub();
-    resetPasswordService = {
-      verifyDemand: sinon.stub(),
-    };
-    tokenService = {
-      decodeIfValid: sinon.stub(),
-    };
-    userRepository = {
-      getByEmail: sinon.stub(),
-    };
-
+    resetPasswordService = { verifyDemand: sinon.stub(), assertTemporaryKey: sinon.stub() };
+    userRepository = { getByEmail: sinon.stub() };
     resetPasswordService.verifyDemand.resolves({ email });
   });
 
@@ -49,13 +41,13 @@ describe('Unit | Identity Access Management | Domain | UseCase | get-user-by-res
       temporaryKey,
       resetPasswordDemandRepository,
     );
-    expect(tokenService.decodeIfValid).to.have.been.calledWithExactly(temporaryKey);
+    expect(resetPasswordService.assertTemporaryKey).to.have.been.calledWithExactly(temporaryKey);
     expect(userRepository.getByEmail).to.have.been.calledWithExactly(email);
   });
 
   it('should throw InvalidTemporaryKeyError if TemporaryKey is invalid', async function () {
     // given
-    tokenService.decodeIfValid.rejects(new InvalidTemporaryKeyError());
+    resetPasswordService.assertTemporaryKey.throwsException(new InvalidTemporaryKeyError());
 
     // when
     const error = await catchErr(getUserByResetPasswordDemand)({
