@@ -1,6 +1,7 @@
 export const ITEM_TYPE = {
   CAMPAIGN: 'CAMPAIGN',
   MODULE: 'MODULE',
+  FORMATION: 'FORMATION',
 };
 
 export class CombinedCourseItem {

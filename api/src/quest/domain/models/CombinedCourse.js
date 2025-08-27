@@ -82,6 +82,54 @@ export class CombinedCourseDetails extends CombinedCourse {
     return questForUser.isSuccessful(dataForQuest);
   }
 
+  #createCampaignCombinedCourseItem(campaign, isCompleted) {
+    return new CombinedCourseItem({
+      id: campaign.id,
+      reference: campaign.code,
+      title: campaign.name,
+      type: ITEM_TYPE.CAMPAIGN,
+      isCompleted,
+    });
+  }
+
+  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted) {
+    return new CombinedCourseItem({
+      id: module.id,
+      reference: module.slug,
+      title: module.title,
+      type: ITEM_TYPE.MODULE,
+      redirection: encryptedCombinedCourseUrl,
+      isCompleted,
+    });
+  }
+
+  #createFormationCombinedCourseItem(targetProfileId) {
+    return new CombinedCourseItem({
+      id: 'formation_' + this.quest.id + '_' + targetProfileId,
+      reference: targetProfileId,
+      type: ITEM_TYPE.FORMATION,
+    });
+  }
+
+  #createFormationCombinedCourseItemIfNeeded(recommandableModule, targetProfileIdsThatNeedAFormationItem) {
+    const targetProfileId = recommandableModule.targetProfileIds.find((t) =>
+      targetProfileIdsThatNeedAFormationItem.includes(t),
+    );
+    const shouldBeInFormationItem = Boolean(targetProfileId);
+    const hasFormationItem = this.items.find((item) => {
+      if (item.type !== ITEM_TYPE.FORMATION) return false;
+      if (item.reference === targetProfileId) return true;
+      return false;
+    });
+    if (shouldBeInFormationItem) {
+      if (!hasFormationItem) {
+        return this.#createFormationCombinedCourseItem(targetProfileId);
+      } else {
+        return undefined;
+      }
+    }
+  }
+
   generateItems({
     itemDetails,
     recommendableModuleIds = [],
@@ -90,46 +138,53 @@ export class CombinedCourseDetails extends CombinedCourse {
     dataForQuest,
   }) {
     this.items = [];
+    const targetProfileIdsThatNeedAFormationItem = [];
     for (const requirement of this.quest.successRequirements) {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
+
         const isCompleted = requirement.isFulfilled(dataForQuest);
-        this.items.push(
-          new CombinedCourseItem({
-            id: campaign.id,
-            reference: campaign.code,
-            title: campaign.name,
-            type: ITEM_TYPE.CAMPAIGN,
-            isCompleted,
-          }),
-        );
+
+        const doesCampaignRecommendModules =
+          recommendableModuleIds.find((recommandableModule) => {
+            if (!this.moduleIds.includes(recommandableModule.moduleId)) return false;
+            return recommandableModule.targetProfileIds.includes(campaign.targetProfileId);
+          }) ?? [];
+        if (doesCampaignRecommendModules && !isCompleted) {
+          targetProfileIdsThatNeedAFormationItem.push(campaign.targetProfileId);
+        }
+        this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted));
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
+        const isCompleted = requirement.isFulfilled(dataForQuest);
         const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
 
-        const isRecommandable = recommendableModuleIds.find(
+        const recommandableModule = recommendableModuleIds.find(
           (potentiallyRecommendedModule) => potentiallyRecommendedModule.moduleId === module.id,
         );
+        const isRecommandable = Boolean(recommandableModule);
 
-        if (isRecommandable) {
-          const isRecommended = recommendedModuleIdsForUser.find(
-            (recommendedModule) => recommendedModule.moduleId === module.id,
-          );
-          if (!isRecommended) {
-            continue;
-          }
+        if (!isRecommandable) {
+          this.items.push(this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted));
+          continue;
         }
 
-        const isCompleted = requirement.isFulfilled(dataForQuest);
-        this.items.push(
-          new CombinedCourseItem({
-            id: module.id,
-            reference: module.slug,
-            title: module.title,
-            type: ITEM_TYPE.MODULE,
-            redirection: encryptedCombinedCourseUrl,
-            isCompleted,
-          }),
+        const isRecommended = recommendedModuleIdsForUser.find(
+          (recommendedModule) => recommendedModule.moduleId === module.id,
         );
+
+        if (isRecommended) {
+          this.items.push(this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted));
+          continue;
+        }
+
+        const formationCombinedCourseItem = this.#createFormationCombinedCourseItemIfNeeded(
+          recommandableModule,
+          targetProfileIdsThatNeedAFormationItem,
+        );
+
+        if (formationCombinedCourseItem) {
+          this.items.push(formationCombinedCourseItem);
+        }
       }
     }
   }
