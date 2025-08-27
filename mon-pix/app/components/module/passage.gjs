@@ -210,18 +210,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  async goToGrain(grainId) {
-    const element = document.getElementById(`grain_${grainId}`);
-    this.modulixAutoScroll.focusAndScroll(element);
-
-    this.pixMetrics.trackEvent(`Click sur le grain ${grainId} de la barre de navigation`, {
-      disabled: true,
-      category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
-    });
-  }
-
-  @action
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
     this.pixMetrics.trackEvent(`${eventToggle} de l'élément Expand : ${elementId}`, {
