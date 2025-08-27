@@ -33,17 +33,17 @@ const createToken = async function (request, h) {
   const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const grantType = request.payload.grant_type;
+  const locale = getUserLocale(request);
 
   if (grantType === 'password') {
     const { username, password } = request.payload;
-    const localeFromCookie = request.state?.locale;
     const source = 'pix';
 
     const tokensInfo = await usecases.authenticateUser({
       username,
       password,
       source,
-      locale: localeFromCookie,
+      locale,
       audience: origin,
       requestedApplication,
     });
@@ -54,7 +54,7 @@ const createToken = async function (request, h) {
   } else if (grantType === 'refresh_token') {
     refreshToken = request.payload.refresh_token;
 
-    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, audience: origin });
+    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, audience: origin, locale });
 
     accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;

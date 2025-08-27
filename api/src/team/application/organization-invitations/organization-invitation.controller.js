@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { MissingQueryParamError } from '../../../shared/application/http-errors.js';
-import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale, getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationInvitationSerializer } from '../../infrastructure/serializers/jsonapi/organization-invitation.serializer.js';
 import { serializer as scoOrganizationInvitationSerializer } from '../../infrastructure/serializers/jsonapi/sco-organization-invitation.serializer.js';
@@ -9,14 +9,14 @@ import { serializer as scoOrganizationInvitationSerializer } from '../../infrast
 const acceptOrganizationInvitation = async function (request) {
   const organizationInvitationId = request.params.id;
   const { code, email: rawEmail } = request.payload.data.attributes;
-  const localeFromCookie = request.state?.locale;
+  const locale = getUserLocale(request);
   const email = rawEmail?.trim().toLowerCase();
 
   const membership = await usecases.acceptOrganizationInvitation({
     organizationInvitationId,
     code,
     email,
-    locale: localeFromCookie,
+    locale,
   });
   await usecases.createCertificationCenterMembershipForScoOrganizationAdminMember({ membership });
   return null;

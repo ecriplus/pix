@@ -103,12 +103,17 @@ class User {
     return dayjs(parsedDate).isBefore(dayjs(config.dataProtectionPolicy.updateDate)) && isNotOrganizationLearner;
   }
 
-  setLocaleIfNotAlreadySet(newLocale, dependencies = { localeService }) {
-    this.hasBeenModified = false;
-    if (newLocale && !this.locale) {
-      this.locale = dependencies.localeService.getNearestSupportedLocale(newLocale);
-      this.hasBeenModified = true;
+  changeLocale(newLocale, dependencies = { localeService }) {
+    if (!newLocale) {
+      this.locale = dependencies.localeService.getDefaultLocale();
+      return true;
     }
+    if (!this.locale || this.locale !== newLocale) {
+      this.locale = dependencies.localeService.getNearestSupportedLocale(newLocale);
+      return true;
+    }
+
+    return false;
   }
 
   isLinkedToOrganizations() {

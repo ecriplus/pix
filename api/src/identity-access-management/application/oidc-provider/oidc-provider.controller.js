@@ -17,6 +17,7 @@ async function authenticateOidcUser(request, h) {
   const { code, state, iss, identityProvider: identityProviderCode } = request.deserializedPayload;
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
+  const locale = getUserLocale(request);
 
   const sessionState = request.yar.get('state', true);
   const nonce = request.yar.get('nonce', true);
@@ -30,6 +31,7 @@ async function authenticateOidcUser(request, h) {
     code,
     state,
     iss,
+    locale,
     identityProviderCode,
     nonce,
     sessionState,

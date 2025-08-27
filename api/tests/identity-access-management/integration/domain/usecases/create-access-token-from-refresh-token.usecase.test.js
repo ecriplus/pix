@@ -3,13 +3,14 @@ import { usecases } from '../../../../../src/identity-access-management/domain/u
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCases | create-access-token-from-refresh-token', function () {
   let userId;
+  const locale = 'fr-FR';
 
   beforeEach(async function () {
-    userId = databaseBuilder.factory.buildUser().id;
+    userId = databaseBuilder.factory.buildUser({ locale }).id;
     databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
     await databaseBuilder.commit();
     await temporaryStorage.flushAll();
@@ -28,6 +29,7 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
       const { accessToken, expirationDelaySeconds } = await usecases.createAccessTokenFromRefreshToken({
         refreshToken: refreshToken.value,
         audience,
+        locale,
       });
 
       // then
@@ -46,6 +48,7 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
       const error = await catchErr(usecases.createAccessTokenFromRefreshToken)({
         refreshToken: unknownRefreshToken,
         audience,
+        locale,
       });
 
       // then
@@ -69,12 +72,59 @@ describe('Integration | Identity Access Management | Domain | UseCases | create-
       const error = await catchErr(usecases.createAccessTokenFromRefreshToken)({
         refreshToken: refreshToken.value,
         audience: badAudience,
+        locale,
       });
 
       // then
       expect(error).to.instanceOf(UnauthorizedError);
       expect(error.message).to.equal('Refresh token is invalid');
       expect(error.code).to.equal('INVALID_REFRESH_TOKEN');
+    });
+  });
+
+  context('when the user locale is different from the given locale', function () {
+    it('updates the user locale with the formatted value', async function () {
+      // given
+      const source = 'pix';
+      const audience = 'https://app.pix.fr';
+      const newLocale = 'fr-BE';
+
+      const refreshToken = RefreshToken.generate({ userId, source, audience });
+      await refreshTokenRepository.save({ refreshToken });
+
+      // when
+      await usecases.createAccessTokenFromRefreshToken({
+        refreshToken: refreshToken.value,
+        audience,
+        locale: newLocale,
+      });
+
+      // then
+      const user = await knex('users').where({ id: userId }).first();
+      expect(user.locale).to.equal(newLocale);
+    });
+  });
+
+  context('when the user locale is the same as the given locale', function () {
+    it("doesn't update the user locale", async function () {
+      // given
+      const source = 'pix';
+      const audience = 'https://app.pix.fr';
+      const initialLocale = 'fr-FR';
+
+      const refreshToken = RefreshToken.generate({ userId, source, audience });
+      await refreshTokenRepository.save({ refreshToken });
+
+      // when
+      await usecases.createAccessTokenFromRefreshToken({
+        refreshToken: refreshToken.value,
+        audience,
+        locale: initialLocale,
+      });
+
+      // then
+      const user = await knex('users').where({ id: userId }).first();
+      expect(user.locale).to.equal(initialLocale);
     });
   });
 });
