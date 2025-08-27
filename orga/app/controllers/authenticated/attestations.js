@@ -67,11 +67,10 @@ export default class AuthenticatedAttestationsController extends Controller {
   }
 
   sendMetrics() {
-    this.pixMetrics.trackEvent({
-      event: 'custom-event',
+    this.pixMetrics.trackEvent('Clic sur le bouton Télécharger (attestations)', {
+      disabled: true,
       'pix-event-category': 'Attestations',
       'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
-      'pix-event-name': 'Clic sur le bouton Télécharger (attestations)',
     });
   }
 }

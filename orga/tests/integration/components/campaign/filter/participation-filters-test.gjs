@@ -581,11 +581,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
+        sinon.assert.calledWithExactly(metrics.trackEvent, 'Utilisation du filtre "Badges non obtenus"', {
+          disabled: true,
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
-          'pix-event-name': 'Utilisation du filtre "Badges non obtenus"',
         });
       });
 
@@ -627,11 +626,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
+        sinon.assert.calledWithExactly(metrics.trackEvent, 'Usage du filtre par Badges', {
+          disabled: true,
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
-          'pix-event-name': 'Usage du filtre par Badges',
         });
       });
     });
@@ -741,11 +739,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
+        sinon.assert.calledWithExactly(metrics.trackEvent, 'Utilisation du filtre "Badges non obtenus"', {
+          disabled: true,
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
-          'pix-event-name': 'Utilisation du filtre "Badges non obtenus"',
         });
       });
 
@@ -787,11 +784,10 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
 
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
+        sinon.assert.calledWithExactly(metrics.trackEvent, 'Usage du filtre par Badges', {
+          disabled: true,
           'pix-event-category': 'Campagnes',
           'pix-event-action': 'Filtrer les participations',
-          'pix-event-name': 'Usage du filtre par Badges',
         });
       });
     });
