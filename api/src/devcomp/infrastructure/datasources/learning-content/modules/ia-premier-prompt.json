@@ -153,7 +153,7 @@
               "element": {
                 "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
                 "type": "text",
-                "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt&nbsp;!📝</p>"
+                "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt !📝</p>"
               }
             }
           ]
@@ -167,11 +167,38 @@
               "type": "element",
               "element": {
                 "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
-                "instruction": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>",
-                "height": 500
+                "type": "text",
+                "content": "<p>Cliquer sur chaque prompt et observez la réponse du logiciel d'IA générative.</p>"
+              }
+            },
+            {
+              "type": "element",
+               "element": {
+                "id": "14db3b92-0b6a-4bf7-966a-17798f0bedd1",
+                "type": "custom",
+                "tagName": "llm-prompt-select",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                    }
+                  ],
+                  "prompts": [
+                    {
+                      "prompt": "Nom chien",
+                      "response": "Tu cherches un nom pour un chien ? Si oui, quel type de chien ou de personnalité a-t-il ? Cela peut m’aider à te proposer quelque chose de sympa !"
+                    },
+                    {
+                      "prompt": "Donne moi des idées de noms de chiens.",
+                      "response": "Avec plaisir ! 🐶 Voici une liste de noms de chien : 1. Tokyo 2. Nala 3. Milou 4. Sushi 5. Luna 6. Apéro 7. Simba 8. Paco 9. Bart 10. Cookie"
+                    },
+                    {
+                      "prompt": "Liste-moi 10 noms de chiens pour m'aider à choisir un nom pour mon beagle de 4 mois.",
+                      "response": "Avec plaisir ! 🎉 Voici 10 idées de noms qui iraient super bien pour un beagle de 4 mois, à la fois mignons, joueurs et un peu espiègles (comme le sont souvent les beagles)🐾 : 1.Scout — pour son côté explorateur et curieux 2.Happy — car il sera toujours joyeux 3.Charlie — un classique tendre et facile à appeler 4. Mojo — plein d’énergie et de bonne humeur 5.Oreo — pour un petit loulou tricolore 6.Flash — s’il court partout comme un fou 7. Biscuit — doux et gourmand 8. Lucky — parce qu’il a la chance d’être avec toi (et toi avec lui) 9. Marley — comme dans le film, fidèle et un peu canaille 10. Jazz — dynamique et musical, pour un chien plein de vie"
+                    }
+                  ]
+                }
               }
             },
             {
@@ -185,7 +212,7 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d'IA générative en langage informatique.</p>",
                     "feedback": {
-                      "state": "<p>Et non ! </p>",
+                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
                     }
                   },
@@ -201,7 +228,7 @@
                     "id": "3",
                     "content": "<p>On parle à un logiciel d'IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "state": "<p>Et non&nbsp; !</p>",
+                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
                     }
                   }
@@ -221,7 +248,7 @@
               "element": {
                 "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
                 "type": "text",
-                "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme&nbsp;: «&nbsp;lister&nbsp;», «&nbsp;traduire&nbsp;», «&nbsp;résumer&nbsp;», etc.<br><br></p>"
+                "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme : «lister», «traduire», «résumer», etc.<br><br></p>"
               }
             }
           ]
@@ -251,18 +278,37 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
-                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p>"
+                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d'IA générative.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
-                "instruction": "<p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>",
-                "height": 400
+                "type": "custom",
+                "tagName": "llm-prompt-select",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                    }
+                  ],
+                  "prompts": [
+                    {
+                      "prompt": "Écris une recette de gâteau.",
+                      "response": "Voici une recette de gâteau pour 6 personnes :  Préchauffe le four à 180°C.  Fais fondre 200 g de chocolat noir avec 100 g de beurre.  Ajoute 100 g de sucre, 3 œufs, puis 50 g de farine, en mélangeant bien.  Verse la pâte dans un moule beurré.  Enfourne 20 à 25 minutes, laisse tiédir avant de démouler."
+                    },
+                    {
+                      "prompt": "Écris une recette de gâteau pour 10 personnes.",
+                      "response": "Voici une recette de gâteau au chocolat pour 10 personnes :  Préchauffe le four à 180°C.  Fais fondre 300 g de chocolat noir avec 150 g de beurre.  Incorpore 150 g de sucre, 5 œufs, puis 100 g de farine.  Verse dans un grand moule beurré et fariné.  Enfourne 30 à 35 minutes, laisse refroidir avant de démouler."
+                    },
+                    {
+                      "prompt": "Écris une recette de gâteau pour 10 personnes sans chocolat.",
+                      "response": "Voici une recette de gâteau à la pistache pour 10 personnes :  Préchauffe le four à 180°C.  Mélange 5 œufs avec 150 g de sucre jusqu’à ce que le mélange blanchisse.  Ajoute 150 g de poudre d’amandes, 100 g de pâte de pistache et 100 g de beurre fondu.  Incorpore 100 g de farine et 1 sachet de levure.  Verse dans un moule beurré, enfourne 35 min, laisse refroidir."
+                    }
+                  ]
+                }  
               }
             },
             {
@@ -432,12 +478,10 @@
             {
               "type": "element",
               "element": {
-                "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
-                "instruction": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.</p>",
-                "height": 500
+                 "id": "3fe45d3e-1c1b-46f0-845d-0c2233d9e340",
+                "type": "text",
+                "content": "<p>Il manque un mot au début de chaque prompt ci dessous. Choisissez le verbe adapté pour compléter chaque prompt.</p>"
+
               }
             }
           ]
