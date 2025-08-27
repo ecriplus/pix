@@ -392,8 +392,115 @@ describe('Integration | Certification | Application | jobs | CertificationComple
   });
 
   describe('#handle', function () {
-    context('when certification is v3', function () {
-      describe('when user answers are normal', function () {
+    describe('when user answers are normal', function () {
+      it('should complete the certification assessment', async function () {
+        // given
+        const limitDate = new Date('2020-01-01T00:00:00Z');
+        const certifiableUserId = databaseBuilder.factory.buildUser().id;
+
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+          userId: certifiableUserId,
+          createdAt: limitDate,
+          version: 3,
+        });
+
+        databaseBuilder.factory.buildCertificationCandidate({
+          userId: certifiableUserId,
+          sessionId: certificationCourse.sessionId,
+        });
+
+        const certificationAssessment = databaseBuilder.factory.buildAssessment({
+          certificationCourseId: certificationCourse.id,
+          userId: certifiableUserId,
+          state: Assessment.states.STARTED,
+          type: Assessment.types.CERTIFICATION,
+          createdAt: limitDate,
+        });
+
+        _buildValidAnswersAndCertificationChallenges({
+          assessmentId: certificationAssessment.id,
+          certificationCourseId: certificationCourse.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const data = new CertificationCompletedJob({
+          assessmentId: certificationAssessment.id,
+          certificationCourseId: certificationCourse.id,
+          userId: certifiableUserId,
+          locale: FRENCH_FRANCE,
+        });
+
+        // when
+        await certificationCompletedJobController.handle({ data });
+
+        // then
+
+        const assessmentResult = await knex('assessment-results')
+          .where({
+            assessmentId: certificationAssessment.id,
+          })
+          .first();
+
+        expect(assessmentResult.pixScore).to.exist;
+      });
+
+      it('should register the certification challenge capacities', async function () {
+        // given
+        const limitDate = new Date('2020-01-01T00:00:00Z');
+        const certifiableUserId = databaseBuilder.factory.buildUser().id;
+
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+          userId: certifiableUserId,
+          createdAt: limitDate,
+          version: 3,
+        });
+
+        databaseBuilder.factory.buildCertificationCandidate({
+          userId: certifiableUserId,
+          sessionId: certificationCourse.sessionId,
+        });
+
+        const certificationAssessment = databaseBuilder.factory.buildAssessment({
+          certificationCourseId: certificationCourse.id,
+          userId: certifiableUserId,
+          state: Assessment.states.STARTED,
+          type: Assessment.types.CERTIFICATION,
+          createdAt: limitDate,
+        });
+
+        _buildValidAnswersAndCertificationChallenges({
+          assessmentId: certificationAssessment.id,
+          certificationCourseId: certificationCourse.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const data = new CertificationCompletedJob({
+          assessmentId: certificationAssessment.id,
+          certificationCourseId: certificationCourse.id,
+          userId: certifiableUserId,
+          locale: FRENCH_FRANCE,
+        });
+
+        // when
+        await certificationCompletedJobController.handle({ data });
+
+        // then
+        const certificationChallengeCapacities = await knex('certification-challenge-capacities')
+          .join(
+            'certification-challenges',
+            'certification-challenges.id',
+            'certification-challenge-capacities.certificationChallengeId',
+          )
+          .where({
+            courseId: certificationCourse.id,
+          });
+
+        expect(certificationChallengeCapacities).to.have.lengthOf(9);
+      });
+
+      describe('when user estimatedLevel is too high', function () {
         it('should complete the certification assessment', async function () {
           // given
           const limitDate = new Date('2020-01-01T00:00:00Z');
@@ -421,6 +528,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
           _buildValidAnswersAndCertificationChallenges({
             assessmentId: certificationAssessment.id,
             certificationCourseId: certificationCourse.id,
+            difficulty: 9,
           });
 
           await databaseBuilder.commit();
@@ -444,126 +552,16 @@ describe('Integration | Certification | Application | jobs | CertificationComple
             .first();
 
           expect(assessmentResult.pixScore).to.exist;
-        });
 
-        it('should register the certification challenge capacities', async function () {
-          // given
-          const limitDate = new Date('2020-01-01T00:00:00Z');
-          const certifiableUserId = databaseBuilder.factory.buildUser().id;
-
-          const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-            userId: certifiableUserId,
-            createdAt: limitDate,
-            version: 3,
-          });
-
-          databaseBuilder.factory.buildCertificationCandidate({
-            userId: certifiableUserId,
-            sessionId: certificationCourse.sessionId,
-          });
-
-          const certificationAssessment = databaseBuilder.factory.buildAssessment({
-            certificationCourseId: certificationCourse.id,
-            userId: certifiableUserId,
-            state: Assessment.states.STARTED,
-            type: Assessment.types.CERTIFICATION,
-            createdAt: limitDate,
-          });
-
-          _buildValidAnswersAndCertificationChallenges({
-            assessmentId: certificationAssessment.id,
-            certificationCourseId: certificationCourse.id,
-          });
-
-          await databaseBuilder.commit();
-
-          const data = new CertificationCompletedJob({
-            assessmentId: certificationAssessment.id,
-            certificationCourseId: certificationCourse.id,
-            userId: certifiableUserId,
-            locale: FRENCH_FRANCE,
-          });
-
-          // when
-          await certificationCompletedJobController.handle({ data });
-
-          // then
-          const certificationChallengeCapacities = await knex('certification-challenge-capacities')
-            .join(
-              'certification-challenges',
-              'certification-challenges.id',
-              'certification-challenge-capacities.certificationChallengeId',
-            )
+          const competenceMarks = await knex('competence-marks')
             .where({
-              courseId: certificationCourse.id,
-            });
+              assessmentResultId: assessmentResult.id,
+            })
+            .orderBy('competenceId');
 
-          expect(certificationChallengeCapacities).to.have.lengthOf(9);
-        });
+          expect(competenceMarks).to.have.lengthOf(1);
 
-        describe('when user estimatedLevel is too high', function () {
-          it('should complete the certification assessment', async function () {
-            // given
-            const limitDate = new Date('2020-01-01T00:00:00Z');
-            const certifiableUserId = databaseBuilder.factory.buildUser().id;
-
-            const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-              userId: certifiableUserId,
-              createdAt: limitDate,
-              version: 3,
-            });
-
-            databaseBuilder.factory.buildCertificationCandidate({
-              userId: certifiableUserId,
-              sessionId: certificationCourse.sessionId,
-            });
-
-            const certificationAssessment = databaseBuilder.factory.buildAssessment({
-              certificationCourseId: certificationCourse.id,
-              userId: certifiableUserId,
-              state: Assessment.states.STARTED,
-              type: Assessment.types.CERTIFICATION,
-              createdAt: limitDate,
-            });
-
-            _buildValidAnswersAndCertificationChallenges({
-              assessmentId: certificationAssessment.id,
-              certificationCourseId: certificationCourse.id,
-              difficulty: 9,
-            });
-
-            await databaseBuilder.commit();
-
-            const data = new CertificationCompletedJob({
-              assessmentId: certificationAssessment.id,
-              certificationCourseId: certificationCourse.id,
-              userId: certifiableUserId,
-              locale: FRENCH_FRANCE,
-            });
-
-            // when
-            await certificationCompletedJobController.handle({ data });
-
-            // then
-
-            const assessmentResult = await knex('assessment-results')
-              .where({
-                assessmentId: certificationAssessment.id,
-              })
-              .first();
-
-            expect(assessmentResult.pixScore).to.exist;
-
-            const competenceMarks = await knex('competence-marks')
-              .where({
-                assessmentResultId: assessmentResult.id,
-              })
-              .orderBy('competenceId');
-
-            expect(competenceMarks).to.have.lengthOf(1);
-
-            expect(competenceMarks[0].level).to.equal(1);
-          });
+          expect(competenceMarks[0].level).to.equal(1);
         });
       });
     });
