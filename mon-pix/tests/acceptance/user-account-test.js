@@ -110,12 +110,14 @@ module('Acceptance | User account page', function (hooks) {
         });
       });
 
-      module('When in France domain', () => {
-        test('it does not display language menu link', async function (assert) {
-          // given
+      module('When in France domain', (hooks) => {
+        hooks.beforeEach(function () {
           const domainService = this.owner.lookup('service:currentDomain');
           sinon.stub(domainService, 'getExtension').returns('fr');
+        });
 
+        test('it does not display language menu link', async function (assert) {
+          // given
           const screen = await visit('/mon-compte');
 
           // when / then
@@ -124,6 +126,16 @@ module('Acceptance | User account page', function (hooks) {
           });
 
           assert.dom(languageMenuLink).doesNotExist();
+        });
+
+        module('When trying to access language route', function () {
+          test('it redirects to account main page', async function (assert) {
+            // when
+            await visit('/mon-compte/langue');
+
+            // then
+            assert.strictEqual(currentURL(), '/mon-compte/informations-personnelles');
+          });
         });
       });
     });
