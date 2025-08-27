@@ -30,7 +30,7 @@
               "element": {
                 "id": "12937b3b-7031-45e3-9aeb-6d3a6ea6533a",
                 "type": "text",
-                "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école&nbsp;: Dragon’s Kingdom. 🎮</p>"
+                "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école avec ses amis : Dragon’s Kingdom. 🎮</p>"
               }
             }
           ]
@@ -134,7 +134,7 @@
                           "id": "1",
                           "content": "<p>Le jeu est trop difficile pour les enfants de moins de 12 ans.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non ! Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Par exemple un jeu avec le pictogramme PEGI 3 peut être trop compliqué pour un enfant de 4 ans. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
+                            "diagnosis": "<p>Et non ! Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Par exemple un jeu avec le pictogramme PEGI 7 peut être trop compliqué pour un enfant de 8 ans. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
                           }
                         },
                         {
