@@ -13,8 +13,8 @@ import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js
 const i18n = getI18n();
 
 describe('Integration | UseCases | create-and-reconcile-user-to-organization-learner', function () {
-  const pickUserAttributes = ['firstName', 'lastName', 'email', 'username', 'cgu'];
-  const locale = 'fr';
+  const pickUserAttributes = ['firstName', 'lastName', 'email', 'username', 'cgu', 'locale'];
+  let locale = 'fr';
 
   let organizationId;
   let password;
@@ -178,6 +178,7 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           // given
           const email = 'user@organization.org';
           userAttributes.email = email;
+          locale = 'fr-FR';
 
           // when
           const result = await usecases.createAndReconcileUserToOrganizationLearner({
@@ -195,6 +196,7 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
             email,
             username: null,
             cgu: false,
+            locale: 'fr-FR',
           });
         });
       });
@@ -259,6 +261,7 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
           const username =
             organizationLearner.firstName.toLowerCase() + '.' + organizationLearner.lastName.toLowerCase() + '0112';
           userAttributes.username = username;
+          locale = 'fr-BE';
 
           const expectedUser = {
             firstName: userAttributes.firstName,
@@ -266,6 +269,7 @@ describe('Integration | UseCases | create-and-reconcile-user-to-organization-lea
             username,
             email: null,
             cgu: false,
+            locale,
           };
 
           // when

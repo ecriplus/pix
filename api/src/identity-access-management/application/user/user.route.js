@@ -333,7 +333,7 @@ export const userRoutes = [
           assign: 'requestedUserIsAuthenticatedUser',
         },
       ],
-      handler: (request, h) => userController.changeUserLanguage(request, h),
+      handler: (request, h) => userController.changeUserLocale(request, h),
       notes: [
         '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
           "- Modifie la langue de l'utilisateur\n" +

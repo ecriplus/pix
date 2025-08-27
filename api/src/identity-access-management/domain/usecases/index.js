@@ -119,7 +119,7 @@ import { authenticateApplication } from './authenticate-application.js';
 import { authenticateForSaml } from './authenticate-for-saml.usecase.js';
 import { authenticateOidcUser } from './authenticate-oidc-user.usecase.js';
 import { authenticateUser } from './authenticate-user.js';
-import { changeUserLanguage } from './change-user-language.usecase.js';
+import { changeUserLocale } from './change-user-locale.usecase.js';
 import { checkScoAccountRecovery } from './check-sco-account-recovery.usecase.js';
 import { createAccessTokenFromRefreshToken } from './create-access-token-from-refresh-token.usecase.js';
 import { createOidcUser } from './create-oidc-user.usecase.js';
@@ -178,7 +178,7 @@ const usecasesWithoutInjectedDependencies = {
   authenticateForSaml,
   authenticateOidcUser,
   authenticateUser,
-  changeUserLanguage,
+  changeUserLocale,
   checkScoAccountRecovery,
   createAccessTokenFromRefreshToken,
   createOidcUser,

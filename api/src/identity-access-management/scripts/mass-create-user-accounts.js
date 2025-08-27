@@ -46,6 +46,7 @@ export class MassCreateUserAccountsScript extends Script {
           updatedAt: now,
           cgu: true,
           lang: 'fr',
+          locale: 'fr-FR',
         };
         const hashedPassword = await cryptoService.hashPassword(userDTO.password);
 
