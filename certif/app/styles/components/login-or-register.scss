@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: var(--pix-spacing-4x);
     padding: var(--pix-spacing-6x) 0 var(--pix-spacing-8x);
 
     @include breakpoints.device-is('tablet') {
