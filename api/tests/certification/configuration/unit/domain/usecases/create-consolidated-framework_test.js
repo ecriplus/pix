@@ -14,7 +14,7 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
       findActiveByRecordIds: sinon.stub(),
     };
     challengeRepository = {
-      findOperativeBySkills: sinon.stub(),
+      findValidatedBySkills: sinon.stub(),
     };
     consolidatedFrameworkRepository = {
       create: sinon.stub(),
@@ -43,7 +43,7 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
 
     tubeRepository.findActiveByRecordIds.resolves([tube1, tube2]);
     skillRepository.findActiveByRecordIds.resolves([...tube1.skills, ...tube2.skills]);
-    challengeRepository.findOperativeBySkills.resolves(frFrChallenges);
+    challengeRepository.findValidatedBySkills.resolves(frFrChallenges);
     consolidatedFrameworkRepository.create.resolves();
     sinon.useFakeTimers({ now: new Date('2019-01-01T05:06:07Z'), toFake: ['Date'] });
     const version = '20190101050607';
@@ -64,7 +64,7 @@ describe('Certification | Configuration | Unit | UseCase | create-consolidated-f
       ...tube1.skillIds,
       ...tube2.skillIds,
     ]);
-    expect(challengeRepository.findOperativeBySkills).to.have.been.calledOnceWithExactly(
+    expect(challengeRepository.findValidatedBySkills).to.have.been.calledOnceWithExactly(
       [...tube1.skills, ...tube2.skills],
       FRENCH_FRANCE,
     );

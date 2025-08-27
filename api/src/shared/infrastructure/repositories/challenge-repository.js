@@ -104,6 +104,21 @@ export async function findOperativeBySkills(skills, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
+export async function findValidatedBySkills(skills, locale) {
+  _assertLocaleIsDefined(locale);
+  const skillIds = skills.map((skill) => skill.id);
+  const cacheKey = `findOperativeBySkillIds([${skillIds.sort()}], ${locale})`;
+  const findOperativeByLocaleBySkillIdsCallback = (knex) =>
+    knex
+      .whereRaw('?=ANY(??)', [locale, 'locales'])
+      .where('status', VALIDATED_STATUS)
+      .whereIn('skillId', skillIds)
+      .orderBy('id');
+  const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
+  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
+  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
+}
+
 export async function findActiveFlashCompatible({
   date,
   locale,
