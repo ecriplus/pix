@@ -42,6 +42,13 @@ export default class ModuleGrain extends Component {
 
   @tracked isStepperFinished = this.hasStepper === false;
 
+  get stepperDirection() {
+    if(['challenge', 'activity', 'discovery'].includes(this.grainType)) {
+      return "horizontal";
+    }
+    return 'vertical';
+  }
+
   get hasStepper() {
     return this.args.grain.components.some((component) => component.type === 'stepper');
   }
@@ -290,6 +297,7 @@ export default class ModuleGrain extends Component {
                   @onVideoPlay={{@onVideoPlay}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
+                  @direction={{this.stepperDirection}}
                 />
               </div>
             {{/if}}

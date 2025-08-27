@@ -1,5 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import { click, findAll } from '@ember/test-helpers';
+import { click, find, findAll } from "@ember/test-helpers";
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
@@ -684,6 +684,132 @@ module('Integration | Component | Module | Grain', function (hooks) {
   });
 
   module('when grain contains a stepper', function () {
+    module('when grain is type activity', function() {
+      test('it should set direction param to horizontal', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'activity',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--horizontal')).exists();
+      });
+    });
+
+    module('when grain is type discovery', function() {
+      test('it should set direction param to horizontal', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'discovery',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--horizontal')).exists();
+      });
+    });
+
+    module('when grain is type challenge', function() {
+      test('it should set direction param to horizontal', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'challenge',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--horizontal')).exists();
+      });
+    });
+
+    module('when grain is type lesson', function() {
+      test('it should set direction param to vertical', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'lesson',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--vertical')).exists();
+      });
+    });
+
+    module('when grain is type summary', function() {
+      test('it should set direction param to vertical', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'summary',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--vertical')).exists();
+      });
+    });
+
+    module('when grain is type transition', function() {
+      test('it should set direction param to vertical', async function(assert) {
+        // given
+        const textElement = {
+          content: 'element content',
+          type: 'text',
+          isAnswerable: false,
+        };
+        const grain = {
+          type: 'transition',
+          components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom(find('.stepper--vertical')).exists();
+      });
+    });
+
     test('should display the stepper', async function (assert) {
       // given
       const textElement = {

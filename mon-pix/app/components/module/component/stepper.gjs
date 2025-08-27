@@ -75,7 +75,7 @@ export default class ModulixStepper extends Component {
 
   <template>
     <div
-      class="stepper"
+      class="stepper stepper--{{@direction}}"
       aria-live="assertive"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
@@ -94,6 +94,7 @@ export default class ModulixStepper extends Component {
             @onVideoPlay={{@onVideoPlay}}
             @onFileDownload={{@onFileDownload}}
             @onExpandToggle={{@onExpandToggle}}
+            @isDisabled={{false}}
           />
         {{/each}}
         {{#if this.shouldDisplayNextButton}}

@@ -1,6 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
+import { click, find } from "@ember/test-helpers";
 import { t } from 'ember-intl/test-support';
 import ModulixStepper from 'mon-pix/components/module/component/stepper';
 import { module, test } from 'qunit';
@@ -13,6 +13,36 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
   module('When stepper is vertical', function () {
     module('A Stepper with 2 steps', function () {
+      test('it should set vertical class', async function(assert) {
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
+
+
+        // then
+        assert.dom(find('.stepper--vertical')).exists();
+      });
+
       test('should display the first step with the button Next', async function (assert) {
         // given
         const steps = [
@@ -633,6 +663,36 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
   module('When stepper is horizontal', function () {
     module('A Stepper with 2 steps', function () {
+      test('it should set horizontal class', async function(assert) {
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+
+
+        // then
+        assert.dom(find('.stepper--horizontal')).exists();
+      });
+
       test('should display the first step with the button Next', async function (assert) {
         // given
         const steps = [
