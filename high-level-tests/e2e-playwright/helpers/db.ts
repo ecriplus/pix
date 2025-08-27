@@ -165,13 +165,16 @@ async function buildBaseDataForCertification() {
     INSEECode: '66136',
     isActualName: true,
   });
-  await knex('flash-algorithm-configurations').insert({
-    maximumAssessmentLength: 32,
-    challengesBetweenSameCompetence: null,
-    limitToOneQuestionPerTube: true,
-    enablePassageByAllCompetences: true,
-    variationPercent: 0.5,
-    createdAt: new Date('1977-10-19'),
+  await knex('certification-configurations').insert({
+    startingDate: new Date('1980-01-01'),
+    expirationDate: null,
+    challengesConfiguration: JSON.stringify({
+      maximumAssessmentLength: 32,
+      challengesBetweenSameCompetence: null,
+      limitToOneQuestionPerTube: true,
+      enablePassageByAllCompetences: true,
+      variationPercent: 0.5,
+    }),
   });
 }
 
