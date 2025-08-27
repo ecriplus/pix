@@ -1,5 +1,6 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import { click, find, findAll } from "@ember/test-helpers";
+// eslint-disable-next-line no-restricted-imports
+import { click, find, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
@@ -684,8 +685,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
   });
 
   module('when grain contains a stepper', function () {
-    module('when grain is type activity', function() {
-      test('it should set direction param to horizontal', async function(assert) {
+    module('when grain is type activity', function () {
+      test('it should set direction param to horizontal', async function (assert) {
         // given
         const textElement = {
           content: 'element content',
@@ -705,8 +706,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('when grain is type discovery', function() {
-      test('it should set direction param to horizontal', async function(assert) {
+    module('when grain is type discovery', function () {
+      test('it should set direction param to horizontal', async function (assert) {
         // given
         const textElement = {
           content: 'element content',
@@ -726,8 +727,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('when grain is type challenge', function() {
-      test('it should set direction param to horizontal', async function(assert) {
+    module('when grain is type challenge', function () {
+      test('it should set direction param to horizontal', async function (assert) {
         // given
         const textElement = {
           content: 'element content',
@@ -747,8 +748,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('when grain is type lesson', function() {
-      test('it should set direction param to vertical', async function(assert) {
+    module('when grain is type lesson', function () {
+      test('it should set direction param to vertical', async function (assert) {
         // given
         const textElement = {
           content: 'element content',
@@ -768,8 +769,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('when grain is type summary', function() {
-      test('it should set direction param to vertical', async function(assert) {
+    module('when grain is type summary', function () {
+      test('it should set direction param to vertical', async function (assert) {
         // given
         const textElement = {
           content: 'element content',
@@ -789,8 +790,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('when grain is type transition', function() {
-      test('it should set direction param to vertical', async function(assert) {
+    module('when grain is type transition', function () {
+      test('it should set direction param to vertical', async function (assert) {
         // given
         const textElement = {
           content: 'element content',

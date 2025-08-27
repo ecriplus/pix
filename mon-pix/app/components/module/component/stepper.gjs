@@ -26,10 +26,6 @@ export default class ModulixStepper extends Component {
 
   @action
   hasStepJustAppeared(index) {
-    if (this.stepsToDisplay.length === 1) {
-      return false;
-    }
-
     return this.stepsToDisplay.length - 1 === index;
   }
 
@@ -94,7 +90,6 @@ export default class ModulixStepper extends Component {
             @onVideoPlay={{@onVideoPlay}}
             @onFileDownload={{@onFileDownload}}
             @onExpandToggle={{@onExpandToggle}}
-            @isDisabled={{false}}
           />
         {{/each}}
         {{#if this.shouldDisplayNextButton}}

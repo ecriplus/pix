@@ -58,7 +58,7 @@ module('Integration | Component | Module | Step', function (hooks) {
       assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).exists();
     });
 
-    module('when isDisabled attribute is true', function () {
+    module('when hasJustAppeared attribute is false', function () {
       test('should disabled all interactions in the step', async function (assert) {
         // given
         const element = {
@@ -75,7 +75,7 @@ module('Integration | Component | Module | Step', function (hooks) {
         await render(
           <template>
             <ModulixStep
-              @isDisabled={{true}}
+              @hasJustAppeared={{false}}
               @step={{step}}
               @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
             />

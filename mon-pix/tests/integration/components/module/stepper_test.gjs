@@ -1,6 +1,7 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click, find } from "@ember/test-helpers";
+// eslint-disable-next-line no-restricted-imports
+import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixStepper from 'mon-pix/components/module/component/stepper';
 import { module, test } from 'qunit';
@@ -13,7 +14,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
   module('When stepper is vertical', function () {
     module('A Stepper with 2 steps', function () {
-      test('it should set vertical class', async function(assert) {
+      test('it should set vertical class', async function (assert) {
         const steps = [
           {
             elements: [
@@ -37,7 +38,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
         // when
         await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
-
 
         // then
         assert.dom(find('.stepper--vertical')).exists();
@@ -663,7 +663,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
   module('When stepper is horizontal', function () {
     module('A Stepper with 2 steps', function () {
-      test('it should set horizontal class', async function(assert) {
+      test('it should set horizontal class', async function (assert) {
         const steps = [
           {
             elements: [
@@ -687,7 +687,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
         // when
         await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
-
 
         // then
         assert.dom(find('.stepper--horizontal')).exists();

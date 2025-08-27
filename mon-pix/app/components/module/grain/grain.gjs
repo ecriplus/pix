@@ -43,8 +43,8 @@ export default class ModuleGrain extends Component {
   @tracked isStepperFinished = this.hasStepper === false;
 
   get stepperDirection() {
-    if(['challenge', 'activity', 'discovery'].includes(this.grainType)) {
-      return "horizontal";
+    if (['challenge', 'activity', 'discovery'].includes(this.grainType)) {
+      return 'horizontal';
     }
     return 'vertical';
   }
