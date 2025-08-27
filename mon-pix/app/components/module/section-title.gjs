@@ -4,11 +4,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
 const SECTION_TITLE_ICONS = {
-  'question-yourself': 'think',
+  'question-yourself': 'doorOpen',
   'explore-to-understand': 'signpost',
-  'retain-the-essentials': 'doorOpen',
-  practise: 'mountain',
-  'go-further': 'lightBulb',
+  'retain-the-essentials': 'lightBulb',
+  practise: 'think',
+  'go-further': 'mountain',
 };
 
 export default class ModuleSectionTitle extends Component {
