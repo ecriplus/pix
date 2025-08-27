@@ -29,7 +29,7 @@ export default class ModulixStep extends Component {
 
   <template>
     {{#if this.hasDisplayableElements}}
-      <section class="stepper__step" tabindex="-1" {{didInsert this.focusAndScroll}}>
+      <section class="stepper__step" tabindex="-1" {{didInsert this.focusAndScroll}} inert={{@isDisabled}}>
         <h3 class="stepper__step__position screen-reader-only">
           {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}
         </h3>
