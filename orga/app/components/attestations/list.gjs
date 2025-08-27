@@ -24,7 +24,7 @@ export default class AttestationList extends Component {
     ];
   }
 
-  get shouldShowDivisionColumn() {
+  get shouldShowDivisions() {
     return this.args.participantStatuses?.some((participantStatus) => Boolean(participantStatus.division));
   }
 
@@ -48,14 +48,16 @@ export default class AttestationList extends Component {
       >
         <:label>{{t "common.filters.fullname.label"}}</:label>
       </PixSearchInput>
-      <MultiSelectFilter
-        @field="divisions"
-        @label={{t "pages.attestations.table.filter.divisions.label"}}
-        @onSelect={{@onFilter}}
-        @selectedOption={{@divisionsFilter}}
-        @options={{@divisionsOptions}}
-        @placeholder={{t "pages.attestations.table.filter.divisions.empty-option"}}
-      />
+      {{#if this.shouldShowDivisions}}
+        <MultiSelectFilter
+          @field="divisions"
+          @label={{t "pages.attestations.table.filter.divisions.label"}}
+          @onSelect={{@onFilter}}
+          @selectedOption={{@divisionsFilter}}
+          @options={{@divisionsOptions}}
+          @placeholder={{t "pages.attestations.table.filter.divisions.empty-option"}}
+        />
+      {{/if}}
 
       <MultiSelectFilter
         @field="statuses"
@@ -85,7 +87,7 @@ export default class AttestationList extends Component {
             {{participantStatus.firstName}}
           </:cell>
         </PixTableColumn>
-        {{#if this.shouldShowDivisionColumn}}
+        {{#if this.shouldShowDivisions}}
           <PixTableColumn @context={{context}}>
             <:header>
               {{t "pages.attestations.table.column.division"}}
