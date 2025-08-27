@@ -27,10 +27,12 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
 
       const section = server.create('section', {
         id: 'sectionId-1',
-        grains: {
-          id: 'grain1',
-          components: [{ type: 'element', element: text }],
-        },
+        grains: [
+          {
+            id: 'grain1',
+            components: [{ type: 'element', element: text }],
+          },
+        ],
       });
       server.create('module', {
         id: 'bien-ecrire-son-adresse-mail',
