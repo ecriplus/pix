@@ -1,5 +1,5 @@
-import { CompetenceResult } from '../../../../src/shared/domain/models/CompetenceResult.js';
-import { expect } from '../../../test-helper.js';
+import { CompetenceResult } from '../../../../../../src/prescription/campaign-participation/domain/models/CompetenceResult.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CompetenceResult', function () {
   describe('#masteryPercentage', function () {
