@@ -61,7 +61,39 @@
                   ]
                 }
               }
-            }
+            },
+            {
+          "type": "element",
+          "element": {
+            "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
+            "type": "qcu-discovery",
+            "instruction": "<p>Qu’est-ce qui vous paraît le plus remarquable à propos de ce logiciel d'IA générative de texte ?</p>",
+            "proposals": [
+              {
+                "id": "1",
+                "content": "<p>Il a l’air incollable.</p>",
+                "feedback": {
+                  "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
+                }
+              },
+              {
+                "id": "2",
+                "content": "<p>Il s’exprime comme un humain.</p>",
+                "feedback": {
+                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
+                }
+              },
+              {
+                "id": "3",
+                "content": "<p>Je ne sais pas.</p>",
+                "feedback": {
+                  "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
+                }
+              }
+            ],
+            "solution": "1"
+          }
+          }
           ]
         },
         {
