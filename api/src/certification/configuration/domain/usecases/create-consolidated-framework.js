@@ -31,7 +31,7 @@ export const createConsolidatedFramework = async ({
   const skillIds = tubes.flatMap((tube) => tube.skillIds);
   const skills = await skillRepository.findActiveByRecordIds(skillIds);
 
-  const challenges = await challengeRepository.findOperativeBySkills(skills, FRENCH_FRANCE);
+  const challenges = await challengeRepository.findValidatedBySkills(skills, FRENCH_FRANCE);
 
   return consolidatedFrameworkRepository.create({
     complementaryCertificationKey,
