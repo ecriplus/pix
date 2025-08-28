@@ -214,13 +214,12 @@ const selfDeleteUserAccount = async function (request, h) {
 };
 
 const sendVerificationCode = async function (request, h, dependencies = { emailVerificationSerializer }) {
-  const locale = await getChallengeLocale(request);
-  const i18n = await getI18nFromRequest(request);
+  const locale = getUserLocale(request);
 
-  const userId = request.params.id;
+  const userId = request.auth.credentials.userId;
   const { newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
 
-  await usecases.sendVerificationCode({ i18n, locale, newEmail, password, userId });
+  await usecases.sendVerificationCode({ locale, newEmail, password, userId });
   return h.response().code(204);
 };
 

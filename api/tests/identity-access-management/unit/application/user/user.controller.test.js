@@ -370,30 +370,18 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       // given
       sinon.stub(usecases, 'sendVerificationCode');
       usecases.sendVerificationCode.resolves();
-      const i18n = getI18n();
       const userId = 1;
-      const locale = 'fr';
+      const locale = 'fr-FR';
       const newEmail = 'user@example.net';
       const password = 'Password123';
 
       const request = {
-        headers: { 'accept-language': locale },
-        i18n,
-        auth: {
-          credentials: {
-            userId,
-          },
-        },
-        params: {
-          id: userId,
-        },
+        state: { locale },
+        auth: { credentials: { userId } },
         payload: {
           data: {
             type: 'users',
-            attributes: {
-              newEmail,
-              password,
-            },
+            attributes: { newEmail, password },
           },
         },
       };
@@ -402,13 +390,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       await userController.sendVerificationCode(request, hFake);
 
       // then
-      expect(usecases.sendVerificationCode).to.have.been.calledWithExactly({
-        i18n,
-        locale,
-        newEmail,
-        password,
-        userId,
-      });
+      expect(usecases.sendVerificationCode).to.have.been.calledWithExactly({ locale, newEmail, password, userId });
     });
   });
 

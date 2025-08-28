@@ -10,13 +10,11 @@ import {
   publishSession,
 } from '../../../../../../src/certification/session-management/domain/services/session-publication-service.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { EmailingAttempt } from '../../../../../../src/shared/mail/domain/models/EmailingAttempt.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Domain | Services | session-publication-service', function () {
   const sessionId = 123;
-  let i18n;
   let certificationRepository,
     sessionRepository,
     sharedSessionRepository,
@@ -214,7 +212,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
   describe('#manageEmails', function () {
     beforeEach(function () {
-      i18n = getI18n();
       sessionRepository = {
         hasSomeCleaAcquired: sinon.stub(),
         flagResultsAsSentToPrescriber: sinon.stub(),
@@ -235,7 +232,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
       // when
       await manageEmails({
-        i18n,
         session: originalSession,
         certificationCenterRepository,
         sessionRepository,
@@ -267,7 +263,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           sessionId,
           resultRecipientEmail: 'email1@example.net',
           daysBeforeExpiration: 30,
-          translate: i18n,
         })
         .returns('token-1');
       mailService.sendCertificationResultEmail
@@ -275,7 +270,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           sessionId,
           resultRecipientEmail: 'email2@example.net',
           daysBeforeExpiration: 30,
-          translate: i18n,
         })
         .returns('token-2');
       mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
@@ -283,7 +277,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
       // when
       await manageEmails({
-        i18n,
         session: originalSession,
         certificationCenterRepository,
         sessionRepository,
@@ -317,7 +310,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
         // when
         await manageEmails({
-          i18n,
           session: originalSession,
           publishedAt: now,
           certificationCenterRepository,
@@ -351,7 +343,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
         // when
         await manageEmails({
-          i18n,
           session: updatedSessionWithPublishedAt,
           certificationCenterRepository,
           sessionRepository,
@@ -391,7 +382,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
           // when
           await manageEmails({
-            i18n,
             session: updatedSessionWithPublishedAt,
             certificationCenterRepository,
             sessionRepository,
@@ -436,7 +426,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
             // when
             const error = await catchErr(manageEmails)({
-              i18n,
               session: updatedSessionWithPublishedAt,
               certificationCenterRepository,
               sessionRepository,
@@ -463,7 +452,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
           // when
           await manageEmails({
-            i18n,
             session: originalSession,
             certificationCenterRepository,
             sessionRepository,
@@ -487,7 +475,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
         // when
         const error = await catchErr(manageEmails)({
-          i18n,
           session: originalSession,
           certificationCenterRepository,
           sessionRepository,
@@ -502,7 +489,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           certificationCenterName: 'certificationCenter',
           sessionDate: originalSession.date,
           email: 'email1@example.net',
-          translate: i18n.__,
         });
         expect(mailService.sendCertificationResultEmail).to.have.been.calledWithExactly({
           sessionId,
@@ -511,7 +497,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           certificationCenterName: 'certificationCenter',
           sessionDate: originalSession.date,
           email: 'email2@example.net',
-          translate: i18n.__,
         });
         expect(sessionRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
         expect(error).to.be.an.instanceOf(SendingEmailToResultRecipientError);

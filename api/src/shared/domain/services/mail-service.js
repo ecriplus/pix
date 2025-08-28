@@ -1,13 +1,6 @@
-import * as translations from '../../../../translations/index.js';
+import { getI18n } from '../../infrastructure/i18n/i18n.js';
 import { mailer } from '../../mail/infrastructure/services/mailer.js';
-import {
-  DUTCH_SPOKEN,
-  ENGLISH_SPOKEN,
-  FRENCH_FRANCE,
-  FRENCH_SPOKEN,
-  isFranceLocale,
-  SPANISH_SPOKEN,
-} from '../services/locale-service.js';
+import { FRENCH_FRANCE, isFranceLocale } from '../services/locale-service.js';
 import {
   getPixAppUrl,
   getPixCertifUrl,
@@ -38,32 +31,36 @@ function sendOrganizationInvitationEmail({
   locale = FRENCH_FRANCE,
   tags,
 }) {
-  const mailerConfig = _getMailerTranslation(locale);
-
-  const pixOrgaName = mailerConfig.translation['email-sender-name']['pix-orga'];
-  const sendOrganizationInvitationEmailSubject = mailerConfig.translation['organization-invitation-email'].subject;
-
-  const templateVariables = {
-    organizationName,
-    pixHomeName: getPixWebsiteDomain(locale),
-    pixHomeUrl: getPixWebsiteUrl(locale),
-    pixOrgaHomeUrl: getPixOrgaUrl(locale),
-    redirectionUrl: getPixOrgaUrl(locale, {
-      pathname: '/rejoindre',
-      queryParams: { invitationId: organizationInvitationId, code },
-    }),
-    supportUrl: getSupportUrl(locale),
-    ...mailerConfig.translation['organization-invitation-email'].params,
-  };
+  const i18n = getI18n(locale);
 
   return mailer.sendEmail({
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: pixOrgaName,
+    fromName: i18n.__('email-sender-name.pix-orga'),
     to: email,
-    subject: sendOrganizationInvitationEmailSubject,
+    subject: i18n.__('organization-invitation-email.subject'),
     template: mailer.organizationInvitationTemplateId,
-    variables: templateVariables,
     tags: tags || null,
+    variables: {
+      organizationName,
+      pixHomeName: getPixWebsiteDomain(locale),
+      pixHomeUrl: getPixWebsiteUrl(locale),
+      pixOrgaHomeUrl: getPixOrgaUrl(locale),
+      redirectionUrl: getPixOrgaUrl(locale, {
+        pathname: '/rejoindre',
+        queryParams: { invitationId: organizationInvitationId, code },
+      }),
+      supportUrl: getSupportUrl(locale),
+      acceptInvitation: i18n.__('organization-invitation-email.params.acceptInvitation'),
+      doNotAnswer: i18n.__('organization-invitation-email.params.doNotAnswer'),
+      here: i18n.__('organization-invitation-email.params.here'),
+      moreAbout: i18n.__('organization-invitation-email.params.moreAbout'),
+      needHelp: i18n.__('organization-invitation-email.params.needHelp'),
+      oneTimeLink: i18n.__('organization-invitation-email.params.oneTimeLink'),
+      pixPresentation: i18n.__('organization-invitation-email.params.pixPresentation'),
+      subtitle: i18n.__('organization-invitation-email.params.subtitle'),
+      title: i18n.__('organization-invitation-email.params.title'),
+      yourOrganization: i18n.__('organization-invitation-email.params.yourOrganization'),
+    },
   });
 }
 
@@ -88,29 +85,27 @@ function sendScoOrganizationInvitationEmail({
   locale = FRENCH_FRANCE,
   tags,
 }) {
-  const mailerConfig = _getMailerTranslation(locale);
-
-  const templateVariables = {
-    organizationName,
-    firstName,
-    lastName,
-    pixHomeName: getPixWebsiteDomain(locale),
-    pixHomeUrl: getPixWebsiteUrl(locale),
-    pixOrgaHomeUrl: getPixOrgaUrl(locale),
-    redirectionUrl: getPixOrgaUrl(locale, {
-      pathname: '/rejoindre',
-      queryParams: { invitationId: organizationInvitationId, code },
-    }),
-  };
+  const i18n = getI18n(locale);
 
   return mailer.sendEmail({
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: mailerConfig.translation['email-sender-name']['pix-orga'],
+    fromName: i18n.__('email-sender-name.pix-orga'),
     to: email,
     subject: 'Accès à votre espace Pix Orga',
     template: mailer.organizationInvitationScoTemplateId,
-    variables: templateVariables,
     tags: tags || null,
+    variables: {
+      organizationName,
+      firstName,
+      lastName,
+      pixHomeName: getPixWebsiteDomain(locale),
+      pixHomeUrl: getPixWebsiteUrl(locale),
+      pixOrgaHomeUrl: getPixOrgaUrl(locale),
+      redirectionUrl: getPixOrgaUrl(locale, {
+        pathname: '/rejoindre',
+        queryParams: { invitationId: organizationInvitationId, code },
+      }),
+    },
   });
 }
 
@@ -129,30 +124,34 @@ function sendCertificationCenterInvitationEmail({
   code,
   locale = FRENCH_FRANCE,
 }) {
-  const mailerConfig = _getMailerTranslation(locale);
-
-  const subject = mailerConfig.translation['certification-center-invitation-email'].subject;
-  const fromName = mailerConfig.translation['email-sender-name']['pix-certif'];
-  const templateVariables = {
-    certificationCenterName,
-    pixHomeName: getPixWebsiteDomain(locale),
-    pixHomeUrl: getPixWebsiteUrl(locale),
-    pixCertifHomeUrl: getPixCertifUrl(locale),
-    redirectionUrl: getPixCertifUrl(locale, {
-      pathname: '/rejoindre',
-      queryParams: { invitationId: certificationCenterInvitationId, code },
-    }),
-    supportUrl: getSupportUrl(locale),
-    ...mailerConfig.translation['certification-center-invitation-email'].params,
-  };
+  const i18n = getI18n(locale);
 
   return mailer.sendEmail({
-    subject,
+    subject: i18n.__('certification-center-invitation-email.subject'),
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName,
+    fromName: i18n.__('email-sender-name.pix-certif'),
     to: email,
     template: mailer.certificationCenterInvitationTemplateId,
-    variables: templateVariables,
+    variables: {
+      certificationCenterName,
+      pixHomeName: getPixWebsiteDomain(locale),
+      pixHomeUrl: getPixWebsiteUrl(locale),
+      pixCertifHomeUrl: getPixCertifUrl(locale),
+      redirectionUrl: getPixCertifUrl(locale, {
+        pathname: '/rejoindre',
+        queryParams: { invitationId: certificationCenterInvitationId, code },
+      }),
+      supportUrl: getSupportUrl(locale),
+      acceptInvitation: i18n.__('certification-center-invitation-email.params.acceptInvitation'),
+      doNotAnswer: i18n.__('certification-center-invitation-email.params.doNotAnswer'),
+      here: i18n.__('certification-center-invitation-email.params.here'),
+      moreAbout: i18n.__('certification-center-invitation-email.params.moreAbout'),
+      needHelp: i18n.__('certification-center-invitation-email.params.needHelp'),
+      oneTimeLink: i18n.__('certification-center-invitation-email.params.oneTimeLink'),
+      pixCertifPresentation: i18n.__('certification-center-invitation-email.params.pixCertifPresentation'),
+      title: i18n.__('certification-center-invitation-email.params.title'),
+      yourCertificationCenter: i18n.__('certification-center-invitation-email.params.yourCertificationCenter'),
+    },
   });
 }
 
@@ -163,24 +162,28 @@ function sendCertificationCenterInvitationEmail({
  * @returns {Promise<EmailingAttempt>}
  */
 function sendAccountRecoveryEmail({ email, firstName, temporaryKey }) {
-  const mailerConfig = _getMailerTranslation(FRENCH_FRANCE);
-  const fromName = mailerConfig.translation['email-sender-name']['pix-app'];
-  const redirectionUrl = getPixAppUrl(FRENCH_FRANCE, { pathname: `/recuperer-mon-compte/${temporaryKey}` });
-  const templateVariables = {
-    firstName,
-    redirectionUrl,
-    homeName: getPixWebsiteDomain(FRENCH_FRANCE),
-    ...mailerConfig.translation['account-recovery-email'].params,
-  };
+  const i18nFr = getI18n(FRENCH_FRANCE);
 
   return mailer.sendEmail({
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName,
+    fromName: i18nFr.__('email-sender-name.pix-app'),
     to: email,
     subject: 'Récupération de votre compte Pix',
     template: mailer.accountRecoveryTemplateId,
     tags: [SCO_ACCOUNT_RECOVERY_TAG],
-    variables: templateVariables,
+    variables: {
+      firstName,
+      redirectionUrl: getPixAppUrl(FRENCH_FRANCE, { pathname: `/recuperer-mon-compte/${temporaryKey}` }),
+      homeName: getPixWebsiteDomain(FRENCH_FRANCE),
+      choosePassword: i18nFr.__('account-recovery-email.params.choosePassword'),
+      context: i18nFr.__('account-recovery-email.params.context'),
+      doNotAnswer: i18nFr.__('account-recovery-email.params.doNotAnswer'),
+      instruction: i18nFr.__('account-recovery-email.params.instruction'),
+      linkValidFor: i18nFr.__('account-recovery-email.params.linkValidFor'),
+      moreOn: i18nFr.__('account-recovery-email.params.moreOn'),
+      pixPresentation: i18nFr.__('account-recovery-email.params.pixPresentation'),
+      signing: i18nFr.__('account-recovery-email.params.signing'),
+    },
   });
 }
 
@@ -188,31 +191,31 @@ function sendAccountRecoveryEmail({ email, firstName, temporaryKey }) {
  * @param code
  * @param email
  * @param locale
- * @param translate
  * @returns {Promise<EmailingAttempt>}
  */
-function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE, translate }) {
-  const mailerConfig = _getMailerTranslation(locale);
+function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE }) {
+  const i18n = getI18n(locale);
 
   const options = {
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: mailerConfig.translation['email-sender-name']['pix-app'],
+    fromName: i18n.__('email-sender-name.pix-app'),
     to: email,
     template: mailer.emailVerificationCodeTemplateId,
     tags: [EMAIL_VERIFICATION_CODE_TAG],
-    subject: translate(
-      {
-        phrase: 'verification-code-email.subject',
-        locale: locale === FRENCH_FRANCE ? 'fr' : locale,
-      },
-      { code },
-    ),
+    subject: i18n.__('verification-code-email.subject', { code }),
     variables: {
       code,
       homeName: getPixWebsiteDomain(locale),
       homeUrl: getPixWebsiteUrl(locale),
       displayNationalLogo: isFranceLocale(locale),
-      ...mailerConfig.translation['verification-code-email'].body,
+      context: i18n.__('verification-code-email.body.context'),
+      doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+      greeting: i18n.__('verification-code-email.body.greeting'),
+      moreOn: i18n.__('verification-code-email.body.moreOn'),
+      pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+      seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+      signing: i18n.__('verification-code-email.body.signing'),
+      warningMessage: i18n.__('verification-code-email.body.warningMessage'),
     },
   };
 
@@ -220,41 +223,15 @@ function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE, transl
 }
 
 function sendCpfEmail({ email, generatedFiles }) {
-  const options = {
+  const i18nFr = getI18n(FRENCH_FRANCE);
+
+  return mailer.sendEmail({
     from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: translations.fr['email-sender-name']['pix-app'],
+    fromName: i18nFr.__('email-sender-name.pix-app'),
     to: email,
     template: mailer.cpfEmailTemplateId,
     variables: { generatedFiles },
-  };
-
-  return mailer.sendEmail(options);
-}
-
-/**
- * @typedef {Object} mailerConfig
- * @property {JSON} translation
- */
-
-/**
- * @param locale
- * @returns {mailerConfig}
- * @private
- */
-function _getMailerTranslation(locale) {
-  switch (locale) {
-    case FRENCH_SPOKEN:
-    case SPANISH_SPOKEN:
-    case ENGLISH_SPOKEN:
-    case DUTCH_SPOKEN:
-      return {
-        translation: translations[locale],
-      };
-    default:
-      return {
-        translation: translations.fr,
-      };
-  }
+  });
 }
 
 const mailService = {

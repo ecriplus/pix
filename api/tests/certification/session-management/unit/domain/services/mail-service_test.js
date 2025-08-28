@@ -3,20 +3,7 @@ import { ENGLISH_SPOKEN, FRENCH_FRANCE } from '../../../../../../src/shared/doma
 import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { mailer } from '../../../../../../src/shared/mail/infrastructure/services/mailer.js';
-import en from '../../../../../../translations/en.json' with { type: 'json' };
-import fr from '../../../../../../translations/fr.json' with { type: 'json' };
-import { es } from '../../../../../../translations/index.js';
-import nl from '../../../../../../translations/nl.json' with { type: 'json' };
 import { expect, sinon } from '../../../../../test-helper.js';
-
-const mainTranslationsMapping = {
-  fr,
-  en,
-  nl,
-  es,
-};
-
-const i18n = getI18n();
 
 describe('Unit | Certification | Session-Management | Domain | Services | MailService', function () {
   beforeEach(function () {
@@ -51,7 +38,6 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
   describe('#sendCertificationResultEmail', function () {
     it(`should call sendEmail with from, to, template, tags, ${FRENCH_FRANCE} and ${ENGLISH_SPOKEN} translations`, async function () {
       // given
-      const translate = i18n.__;
       const sessionDate = '2020-10-03';
       const sessionId = '3';
       const userEmailAddress = 'user@example.net';
@@ -70,11 +56,13 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
         certificationCenterName,
         resultRecipientEmail,
         daysBeforeExpiration,
-        translate,
       });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
+
+      const i18nFr = getI18n('fr');
+      const i18nEn = getI18n('en');
 
       expect(options).to.deep.equal({
         from: 'ne-pas-repondre@pix.fr',
@@ -83,20 +71,46 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
         template: 'test-certification-result-template-id',
         variables: {
           fr: {
-            ...mainTranslationsMapping.fr['certification-result-email'].params,
-            title: translate('certification-result-email.title', { sessionId }),
             homeName: 'pix.fr',
             homeUrl: 'https://pix.fr',
             homeNameInternational: 'pix.org',
             homeUrlInternational: 'https://pix.org/fr',
             link: `${link}?lang=fr`,
+            title: i18nFr.__('certification-result-email.title', { sessionId }),
+            doNotReply: i18nFr.__('certification-result-email.params.doNotReply'),
+            download: i18nFr.__('certification-result-email.params.download'),
+            emailValidFor: i18nFr.__('certification-result-email.params.emailValidFor'),
+            findOutMore: i18nFr.__('certification-result-email.params.findOutMore'),
+            findOutMoreFranceSuffix: i18nFr.__('certification-result-email.params.findOutMoreFranceSuffix'),
+            findOutMoreInternationalSuffix: i18nFr.__(
+              'certification-result-email.params.findOutMoreInternationalSuffix',
+            ),
+            guidelines: i18nFr.__('certification-result-email.params.guidelines'),
+            guidelinesLinkName: i18nFr.__('certification-result-email.params.guidelinesLinkName'),
+            overviewText: i18nFr.__('certification-result-email.params.overviewText'),
+            resultsAvailable: i18nFr.__('certification-result-email.params.resultsAvailable'),
+            subject: i18nFr.__('certification-result-email.params.subject'),
+            viewResultsInProfile: i18nFr.__('certification-result-email.params.viewResultsInProfile'),
           },
           en: {
-            ...mainTranslationsMapping.en['certification-result-email'].params,
-            title: translate({ phrase: 'certification-result-email.title', locale: 'en' }, { sessionId }),
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/en',
             link: `${link}?lang=en`,
+            title: i18nEn.__('certification-result-email.title', { sessionId }),
+            doNotReply: i18nEn.__('certification-result-email.params.doNotReply'),
+            download: i18nEn.__('certification-result-email.params.download'),
+            emailValidFor: i18nEn.__('certification-result-email.params.emailValidFor'),
+            findOutMore: i18nEn.__('certification-result-email.params.findOutMore'),
+            findOutMoreFranceSuffix: i18nEn.__('certification-result-email.params.findOutMoreFranceSuffix'),
+            findOutMoreInternationalSuffix: i18nEn.__(
+              'certification-result-email.params.findOutMoreInternationalSuffix',
+            ),
+            guidelines: i18nEn.__('certification-result-email.params.guidelines'),
+            guidelinesLinkName: i18nEn.__('certification-result-email.params.guidelinesLinkName'),
+            overviewText: i18nEn.__('certification-result-email.params.overviewText'),
+            resultsAvailable: i18nEn.__('certification-result-email.params.resultsAvailable'),
+            subject: i18nEn.__('certification-result-email.params.subject'),
+            viewResultsInProfile: i18nEn.__('certification-result-email.params.viewResultsInProfile'),
           },
           sessionId,
           sessionDate: '03/10/2020',

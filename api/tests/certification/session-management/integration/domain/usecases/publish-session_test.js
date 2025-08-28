@@ -73,7 +73,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
       await databaseBuilder.commit();
 
       await usecases.publishSession({
-        i18n: { __: sinon.stub() },
         sessionId: session.id,
         publishedAt: new Date('2020-01-02'),
       });
