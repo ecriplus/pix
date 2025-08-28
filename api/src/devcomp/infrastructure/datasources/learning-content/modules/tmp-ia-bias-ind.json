@@ -99,7 +99,7 @@
                     {
                       "id": "c78b70a0-63e5-4c12-a5fa-121bbc5907e1",
                       "type": "text",
-                      "content": "<p>Voici des exemples issus du web. On les donne àl'IA générative pour s'entraîner. <br>Observez chaque document et répondez à la question. </p>"
+                      "content": "<p>Voici des exemples issus du web. On les donne à l'IA générative pour s'entraîner. <br>Observez chaque document et répondez à la question. </p>"
                     }
                   ]
                 },
@@ -179,7 +179,7 @@
                     {
                       "id": "62696b7c-23ac-45de-bee9-62bdbd1fd48f",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/rapport-VIH.jpg",
+                      "url": "https://assets.pix.org/draft/modules/ia-biais-independant/prix_nobels.jpg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -721,8 +721,8 @@
                       "description": "",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg",
-                        "alt": ""
+                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/exo-hockey.jpg",
+                        "alt": "Exemple 1 : un logo pour une boutique de hockey"
                       },
                       "license": {
                         "name": "",
@@ -735,8 +735,8 @@
                       "description": "",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg",
-                        "alt": ""
+                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/exo-photo-indien.jpg",
+                        "alt": "Exemple 2 : une image d'un indien à cheval"
                       },
                       "license": {
                         "name": "",
@@ -749,8 +749,8 @@
                       "description": "",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg",
-                        "alt": ""
+                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/exo-cigognes.jpg",
+                        "alt": "Exemple 3 : l'explication de la migration des cigognes"
                       },
                       "license": {
                         "name": "",
@@ -763,8 +763,8 @@
                       "description": "",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/POI-resultat-final.jpg",
-                        "alt": ""
+                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/exo-sport%20enfants.jpg",
+                        "alt": "Exemple 4 : des conseils d'activité sportives pour 4 enfants"
                       },
                       "license": {
                         "name": "",
@@ -777,8 +777,8 @@
                       "description": "",
                       "displayWidth": 0,
                       "image": {
-                        "src": "",
-                        "alt": ""
+                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/exo-constellations.jpg",
+                        "alt": "Exemple 5 : la liste des 10 plus grandes constellations"
                       },
                       "license": {
                         "name": "",
