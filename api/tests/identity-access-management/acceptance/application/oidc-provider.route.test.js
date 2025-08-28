@@ -4,7 +4,7 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
 import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/AuthenticationSessionContent.js';
-import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
+import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import {
   createServer,
   databaseBuilder,
@@ -233,7 +233,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
         expect(response.result.access_token).to.exist;
 
-        const decodedAccessToken = await decodeIfValid(response.result.access_token);
+        const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
         expect(decodedAccessToken).to.include({ aud: 'https://orga.pix.fr' });
         expect(response.statusCode).to.equal(200);
         expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
@@ -328,7 +328,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
           expect(openIdClientMock.authorizationCodeGrant).to.have.been.calledOnce;
           expect(response.result.access_token).to.exist;
 
-          const decodedAccessToken = await decodeIfValid(response.result.access_token);
+          const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
           expect(decodedAccessToken).to.include({ aud: 'https://admin.pix.fr' });
           expect(response.statusCode).to.equal(200);
         });
@@ -383,7 +383,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.access_token).to.exist;
-      const decodedAccessToken = await decodeIfValid(response.result.access_token);
+      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
       expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
 
       const createdUser = await knex('users').first();
@@ -518,7 +518,7 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       expect(response.statusCode).to.equal(200);
       expect(response.result.access_token).to.exist;
 
-      const decodedAccessToken = await decodeIfValid(response.result.access_token);
+      const decodedAccessToken = tokenService.getDecodedToken(response.result.access_token);
       expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
       expect(response.result['logout_url_uuid']).to.match(UUID_PATTERN);
     });

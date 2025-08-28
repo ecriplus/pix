@@ -18,7 +18,7 @@ describe('Integration | Domain | Services | user-service', function () {
   let authenticationMethod;
 
   describe('#createUserWithPassword', function () {
-    const userPickedAttributes = ['firstName', 'lastName', 'email', 'username', 'cgu'];
+    const userPickedAttributes = ['firstName', 'lastName', 'email', 'username', 'cgu', 'locale'];
     const authenticationMethodPickedAttributes = ['authenticationComplement', 'externalIdentifier', 'identityProvider'];
 
     beforeEach(function () {
@@ -31,12 +31,13 @@ describe('Integration | Domain | Services | user-service', function () {
 
     it('should return saved user and authenticationMethod', async function () {
       // given
-      const expectedUser = pick(user, userPickedAttributes);
+      const locale = 'fr-BE';
       const expectedAuthenticationMethod = pick(authenticationMethod, authenticationMethodPickedAttributes);
 
       // when
       const foundUser = await userService.createUserWithPassword({
         user,
+        locale,
         hashedPassword,
         userRepository,
         userToCreateRepository,
@@ -44,7 +45,14 @@ describe('Integration | Domain | Services | user-service', function () {
       });
 
       // then
-      expect(pick(foundUser, userPickedAttributes)).to.deep.equal(expectedUser);
+      expect(pick(foundUser, userPickedAttributes)).to.deep.equal({
+        cgu: true,
+        email: 'jeseraila@example.net',
+        firstName: 'Lorie',
+        lastName: 'MeilleureAmie',
+        locale: 'fr-BE',
+        username: null,
+      });
 
       const foundAuthenticationMethod = await authenticationMethodRepository.findOneByUserIdAndIdentityProvider({
         userId: foundUser.id,

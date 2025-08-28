@@ -6,7 +6,7 @@ import {
 } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
-import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import * as scoOrganizationLearnerSerializer from '../../learner-management/infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
 
@@ -21,6 +21,8 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
     'external-user-token': token,
   } = request.payload.data.attributes;
 
+  const locale = getUserLocale(request);
+
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
   const accessToken = await usecases.createUserAndReconcileToOrganizationLearnerFromExternalUser({
@@ -29,6 +31,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
     token,
     audience: origin,
     requestedApplication,
+    locale,
   });
 
   const scoOrganizationLearner = {
@@ -39,7 +42,7 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
 };
 
 const createAndReconcileUserToOrganizationLearner = async function (request, h) {
-  const locale = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
   const i18n = await getI18nFromRequest(request);
 
   const payload = request.payload.data.attributes;

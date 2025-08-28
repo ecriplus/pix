@@ -68,6 +68,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
     hashedPassword,
     organizationLearnerId: matchedOrganizationLearner.id,
     user: domainUser,
+    locale,
     authenticationMethodRepository,
     organizationLearnerRepository: libOrganizationLearnerRepository,
     userToCreateRepository,

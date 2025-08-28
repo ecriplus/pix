@@ -307,12 +307,15 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         it('does not update the user locale', async function () {
           // given
           const locale = 'fr-BE';
-          const userLocale = 'fr';
+          const userLocale = 'fr-BE';
           const email = 'user-with-locale@example.net';
+          const creationDate = new Date('2020-01-01');
           const userWithLocale = databaseBuilder.factory.buildUser.withRawPassword({
             email,
             rawPassword: userPassword,
             locale: userLocale,
+            createdAt: creationDate,
+            updatedAt: creationDate,
           });
           await databaseBuilder.commit();
 
@@ -333,8 +336,8 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           // then
           expect(response.statusCode).to.equal(200);
           const user = await knex('users').where({ id: userWithLocale.id }).first();
-          expect(user.locale).to.not.equal(locale);
           expect(user.locale).to.equal(userLocale);
+          expect(user.updatedAt).to.deep.equal(creationDate);
         });
       });
     });

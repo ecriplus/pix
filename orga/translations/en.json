@@ -290,14 +290,14 @@
       }
     },
     "analysis-per-tube": {
-      "cover-rate-gauge-label": "On the subject your participants have obtained a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
+      "cover-rate-gauge-label": "On the topic your participants have obtained a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
       "description": "Below are the campaign topics and their descriptions, as well as the positioning of the participants.",
       "table": {
         "caption": "{index} - {name}",
         "column": {
           "level": "Level",
           "positioning": "Positioning",
-          "tubes": "Subject name and description"
+          "tubes": "Topic name and description"
         }
       }
     },
@@ -306,7 +306,7 @@
       "toggle": {
         "label": "View by:",
         "label-competences": "Competences",
-        "label-tubes": "Subjects"
+        "label-tubes": "Topics"
       }
     },
     "campaign": {
@@ -389,6 +389,20 @@
       "organization-information": {
         "label": "Name of your organisation",
         "title": "Your organisation's information"
+      },
+      "participation-statistics": {
+        "completed-participations": {
+          "description": "Participations completed in the last 30 days.",
+          "info": "The number of completed participations in the last 30 days takes into account active campaigns you own.",
+          "no-completed-participations": "No completed participations in the last 30 days.",
+          "title": "Completed participations"
+        },
+        "completion-rate": {
+          "description": "{completed} completed participations out of {started} started participations.",
+          "info": "The completion rate is calculated from active campaigns you own.",
+          "no-activity": "No activity at the moment",
+          "title": "Completion rate"
+        }
       },
       "welcome": {
         "description": {
@@ -662,7 +676,7 @@
       "description": {
         "explanation": "Each test assesses a selection of digital skills from the Pix reference framework. Positioning reflects the average level achieved by participants in relation to the maximum level achievable on the test.",
         "nota-bene": "All the data presented comes from shared and undeleted participation in assessment campaigns, and is updated in real time.",
-        "resume": "Analyse by topic or skill, the positioning of your participants in this campaign, which covers a selection of subjects from the Pix reference framework."
+        "resume": "Analyse by topic or skill, the positioning of your participants in this campaign, which covers a selection of topics from the Pix reference framework."
       },
       "levels-correspondence": {
         "infos": {
@@ -671,7 +685,7 @@
         },
         "levels": {
           "advanced": "5 or 6: Advanced level",
-          "beginner": "1 or 2: Novice level",
+          "beginner": "1 or 2: Beginner level",
           "expert": "7 or 8: Expert level",
           "independent": "3 or 4: Independent level"
         },
@@ -727,7 +741,7 @@
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
         "exam": "Interrogation mode [beta]",
-        "exam-info": "A ‘interrogation mode’ campaign enables participants to be tested on specific subjects, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
+        "exam-info": "A ‘interrogation mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
         "profiles-collection": "Collect the participants' Pix profiles",
         "profiles-collection-info": "A profile collection campaign retrieves the participants’ Pix profile: their level for each competence and their pix score.",
@@ -1639,13 +1653,13 @@
     },
     "statistics": {
       "before-date": "on",
-      "description": "The table below shows how your participants are positioned by subject.'<br>' Positioning reflects the average level of your participants in relation to the maximum level they could have reached.'<br>' This data takes into account all participations shared as part of your organisation's evaluation campaigns that have not been deleted.",
+      "description": "The table below shows how your participants are positioned by topic.'<br>' Positioning reflects the average level of your participants in relation to the maximum level they could have reached.'<br>' This data takes into account all participations shared as part of your organisation's evaluation campaigns that have not been deleted.",
       "empty-state": "No data available",
       "level": {
         "advanced": "Advanced",
         "expert": "Expert",
         "independent": "Independent",
-        "novice": "Novice"
+        "novice": "Beginner"
       },
       "select-label": "Domain",
       "table": {

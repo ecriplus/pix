@@ -1,11 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
-import {
-  InvalidResultRecipientTokenError,
-  InvalidSessionResultTokenError,
-  InvalidTemporaryKeyError,
-} from '../errors.js';
+import { InvalidResultRecipientTokenError, InvalidSessionResultTokenError } from '../errors.js';
 
 const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResultsByRecipientEmailLink';
 
@@ -18,6 +14,20 @@ const CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE = 'certificationResult
  */
 function encodeToken(payload, secret, options) {
   return jsonwebtoken.sign(payload, secret, options);
+}
+
+/**
+ * Decode a token with the given secret
+ * @param {string} token
+ * @param {string} secret Secret for the signature
+ * @returns The decoded token, otherwise false when cannot be decoded
+ */
+function getDecodedToken(token, secret = config.authentication.secret) {
+  try {
+    return jsonwebtoken.verify(token, secret);
+  } catch {
+    return false;
+  }
 }
 
 function createCertificationResultsByRecipientEmailLinkToken({
@@ -62,21 +72,6 @@ function extractTokenFromAuthChain(authChain) {
   return authChain.replace(/Bearer /g, '');
 }
 
-function decodeIfValid(token) {
-  return new Promise((resolve, reject) => {
-    const decoded = getDecodedToken(token);
-    return !decoded ? reject(new InvalidTemporaryKeyError()) : resolve(decoded);
-  });
-}
-
-function getDecodedToken(token, secret = config.authentication.secret) {
-  try {
-    return jsonwebtoken.verify(token, secret);
-  } catch {
-    return false;
-  }
-}
-
 function extractCertificationResultsByRecipientEmailLink(token) {
   const decoded = getDecodedToken(token);
   if (!decoded.session_id || !decoded.result_recipient_email) {
@@ -116,7 +111,6 @@ function extractUserId(token) {
 const tokenService = {
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  decodeIfValid,
   getDecodedToken,
   encodeToken,
   extractCertificationResultsByRecipientEmailLink,
@@ -132,7 +126,6 @@ const tokenService = {
 export {
   createCertificationResultsByRecipientEmailLinkToken,
   createCertificationResultsLinkToken,
-  decodeIfValid,
   extractCertificationResultsByRecipientEmailLink,
   extractCertificationResultsLink,
   extractTokenFromAuthChain,

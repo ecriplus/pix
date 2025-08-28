@@ -4,7 +4,7 @@ import samlify from 'samlify';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { UserReconciliationSamlIdToken } from '../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { config as settings } from '../../../../src/shared/config.js';
-import { decodeIfValid } from '../../../../src/shared/domain/services/token-service.js';
+import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import { createServer, databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
 const testCertificate = `MIICCzCCAXQCCQD2MlHh/QmGmjANBgkqhkiG9w0BAQsFADBKMQswCQYDVQQGEwJG
@@ -246,10 +246,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
 
       // then
       expect(response.statusCode).to.equal(302);
-      const decodedAccessToken = await _getDecodedAccessToken(response);
-      expect(decodedAccessToken).to.include({
-        aud: 'https://app.pix.fr',
-      });
+      const decodedAccessToken = _getDecodedAccessToken(response);
+      expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
       expect(response.headers.location).to.match(/^\/connexion\/gar#[-_a-zA-Z0-9.]+$/);
     });
   });
@@ -301,10 +299,8 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
         expect(response.statusCode).to.equal(200);
         const token = response.result.data.attributes['access-token'];
         expect(token).to.exist;
-        const decodedAccessToken = await decodeIfValid(token);
-        expect(decodedAccessToken).to.include({
-          aud: 'https://app.pix.fr',
-        });
+        const decodedAccessToken = tokenService.getDecodedToken(token);
+        expect(decodedAccessToken).to.include({ aud: 'https://app.pix.fr' });
       });
 
       it('adds a GAR authentication method', async function () {
@@ -509,10 +505,9 @@ describe('Acceptance | Identity Access Management | Route | Saml', function () {
   });
 });
 
-async function _getDecodedAccessToken(response) {
+function _getDecodedAccessToken(response) {
   const token = _extractAccessTokenFromUrl(response.headers.location);
-  const decodedAccessToken = await decodeIfValid(token);
-  return decodedAccessToken;
+  return tokenService.getDecodedToken(token);
 }
 
 function _extractAccessTokenFromUrl(url) {

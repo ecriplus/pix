@@ -14,6 +14,10 @@
     @extend %pix-body-s;
   }
 
+  &__cgu-label .link{
+    display: inline;
+  }
+
   &__cgu-error {
     color: var(--pix-error-700);
     font-size: 0.75rem;

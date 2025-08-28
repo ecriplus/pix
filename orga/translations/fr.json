@@ -390,6 +390,20 @@
         "label": "Nom de votre organisation",
         "title": "Les informations de votre organisation"
       },
+      "participation-statistics": {
+        "completed-participations": {
+          "description": "Participations terminées ces 30 derniers jours.",
+          "info": "Le nombre de participations terminées sur les 30 derniers jours prend en compte les campagnes actives dont vous êtes propriétaire.",
+          "no-completed-participations": "Aucune participation terminée ces 30 derniers jours.",
+          "title": "Participations terminées"
+        },
+        "completion-rate": {
+          "description": "{completed} participations terminées sur {started} participations démarrées.",
+          "info": "Le taux de complétion est calculé à partir des campagnes actives dont vous êtes propriétaire.",
+          "no-activity": "Aucune activité pour le moment",
+          "title": "Taux de complétion"
+        }
+      },
       "welcome": {
         "description": {
           "classic": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins.",

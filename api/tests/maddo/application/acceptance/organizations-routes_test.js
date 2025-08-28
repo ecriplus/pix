@@ -20,8 +20,14 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
   describe('GET /api/organizations', function () {
     it('returns the list of all organizations of the client jurisdiction with an HTTP status code 200', async function () {
       // given
-      const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-in-jurisdiction' });
-      const orgaAlsoInJurisdiction = databaseBuilder.factory.buildOrganization({ name: 'orga-also-in-jurisdiction' });
+      const orgaInJurisdiction = databaseBuilder.factory.buildOrganization({
+        name: 'orga-in-jurisdiction',
+        externalId: 'external-id1',
+      });
+      const orgaAlsoInJurisdiction = databaseBuilder.factory.buildOrganization({
+        name: 'orga-also-in-jurisdiction',
+        externalId: 'external-id2',
+      });
       databaseBuilder.factory.buildOrganization({ name: 'orga-not-in-jurisdiction' });
 
       const tag = databaseBuilder.factory.buildTag();
@@ -50,8 +56,12 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result).to.deep.equal([
-        new Organization({ id: orgaInJurisdiction.id, name: orgaInJurisdiction.name }),
-        new Organization({ id: orgaAlsoInJurisdiction.id, name: orgaAlsoInJurisdiction.name }),
+        new Organization({ id: orgaInJurisdiction.id, name: orgaInJurisdiction.name, externalId: 'external-id1' }),
+        new Organization({
+          id: orgaAlsoInJurisdiction.id,
+          name: orgaAlsoInJurisdiction.name,
+          externalId: 'external-id2',
+        }),
       ]);
     });
   });

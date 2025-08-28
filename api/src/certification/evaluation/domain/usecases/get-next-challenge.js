@@ -14,10 +14,10 @@
 import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
-import { CertificationChallenge } from '../../../../shared/domain/models/CertificationChallenge.js';
+import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
-const debugGetNextChallengeForV3Certification = Debug('pix:certif:v3:get-next-challenge');
+const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
 
 /**
  * @param {Object} params
@@ -63,7 +63,7 @@ const getNextChallenge = async function ({
   const excludedChallengeIds = [...alreadyAnsweredChallengeIds, ...validatedLiveAlertChallengeIds];
 
   const lastNonAnsweredCertificationChallenge =
-    await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseIdForV3(
+    await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId(
       assessment.certificationCourseId,
       excludedChallengeIds,
     );
@@ -97,7 +97,7 @@ const getNextChallenge = async function ({
   const challengesForCandidate = candidate.accessibilityAdjustmentNeeded
     ? challengesWithoutSkillsWithAValidatedLiveAlert.filter((challenge) => challenge.isAccessible)
     : challengesWithoutSkillsWithAValidatedLiveAlert;
-  debugGetNextChallengeForV3Certification(
+  debugGetNextChallenge(
     candidate.accessibilityAdjustmentNeeded
       ? `Candidate needs accessibility adjustment, possible challenges have been filtered (${challengesForCandidate.length} out of ${challengesWithoutSkillsWithAValidatedLiveAlert.length} selected`
       : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,

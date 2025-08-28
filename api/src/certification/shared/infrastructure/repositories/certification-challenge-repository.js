@@ -1,11 +1,10 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
-import { CertificationChallenge } from '../../../../shared/domain/models/CertificationChallenge.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import { CertificationChallenge } from '../../domain/models/CertificationChallenge.js';
 
 const logContext = {
-  zone: 'certificationChallengeRepository.getNextNonAnsweredChallengeByCourseId',
+  zone: 'certificationChallengeRepository.getNextChallengeByCourseId',
   type: 'repository',
 };
 
@@ -28,26 +27,7 @@ const save = async function ({ certificationChallenge }) {
   return new CertificationChallenge(savedCertificationChallenge);
 };
 
-const getNextNonAnsweredChallengeByCourseId = async function (assessmentId, courseId) {
-  const answeredChallengeIds = knex('answers').select('challengeId').where({ assessmentId });
-
-  const certificationChallenge = await knex('certification-challenges')
-    .where({ courseId })
-    .whereNotIn('challengeId', answeredChallengeIds)
-    .orderBy('id', 'asc')
-    .first();
-
-  if (!certificationChallenge) {
-    logger.info(logContext, `no found challenges for certificationCourseId : ${courseId}`);
-    throw new AssessmentEndedError();
-  }
-
-  logContext.challengeId = certificationChallenge.id;
-  logger.trace(logContext, 'found challenge');
-  return new CertificationChallenge(certificationChallenge);
-};
-
-const getNextChallengeByCourseIdForV3 = async function (courseId, ignoredChallengeIds) {
+const getNextChallengeByCourseId = async function (courseId, ignoredChallengeIds) {
   const certificationChallenge = await knex('certification-challenges')
     .where({ courseId })
     .whereNotIn('challengeId', ignoredChallengeIds)
@@ -64,4 +44,4 @@ const getNextChallengeByCourseIdForV3 = async function (courseId, ignoredChallen
   return new CertificationChallenge(certificationChallenge);
 };
 
-export { getNextChallengeByCourseIdForV3, getNextNonAnsweredChallengeByCourseId, save };
+export { getNextChallengeByCourseId, save };

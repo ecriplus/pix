@@ -10,6 +10,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
       // given
       const campaignCode = 'SIMPLIFIE';
       const lang = 'fr';
+      const locale = 'fr-FR';
       const request = {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
@@ -17,6 +18,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           'x-forwarded-host': 'app.pix.fr',
         },
         payload: { campaign_code: campaignCode, lang },
+        state: { locale },
       };
       sinon
         .stub(usecases, 'authenticateAnonymousUser')
@@ -24,6 +26,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
           campaignCode,
           audience: 'https://app.pix.fr',
           lang,
+          locale,
         })
         .resolves('valid access token');
 
@@ -103,6 +106,7 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
         // given
         const expirationDelaySeconds = 6666;
         const refreshToken = 'refresh.token';
+        const locale = 'fr-FR';
         const request = {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
@@ -110,11 +114,14 @@ describe('Unit | Identity Access Management | Application | Controller | Token',
             'x-forwarded-host': 'app.pix.fr',
           },
           payload: { grant_type: 'refresh_token', refresh_token: refreshToken },
+          state: {
+            locale,
+          },
         };
 
         sinon
           .stub(usecases, 'createAccessTokenFromRefreshToken')
-          .withArgs({ refreshToken, audience })
+          .withArgs({ refreshToken, audience, locale })
           .resolves({ accessToken, expirationDelaySeconds });
 
         sinon.stub(UserAccessToken, 'decode').withArgs(accessToken).returns({ userId });

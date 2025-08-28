@@ -141,6 +141,7 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         lastName,
         organizationId,
       });
+      const locale = 'fr-FR';
       organizationLearner.userId = undefined;
       await databaseBuilder.commit();
 
@@ -154,6 +155,7 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
         tokenService,
         audience,
         requestedApplication,
+        locale,
       });
 
       // then
@@ -172,6 +174,11 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
       expect(authenticationMethod.identityProvider).to.equal(NON_OIDC_IDENTITY_PROVIDERS.GAR.code);
       expect(lastUserApplicationConnection.userId).to.equal(authenticationMethod.userId);
       expect(lastUserApplicationConnection.application).to.equal(requestedApplication.applicationName);
+      expect(usersAfter[1]).to.deep.include({
+        firstName: organizationLearner.firstName,
+        lastName: organizationLearner.lastName,
+        locale: 'fr-FR',
+      });
     });
 
     context('When the external user is already reconciled to another account', function () {
@@ -238,6 +245,7 @@ describe('Integration | UseCases | create-user-and-reconcile-to-organization-lea
               birthdate: organizationLearner.birthdate,
               audience,
               requestedApplication,
+              locale: 'fr-BE',
             });
 
             // then

@@ -6,6 +6,7 @@ import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 describe('Integration | Identity Access Management | Domain | UseCase | anonymousUserTokenRepository', function () {
   const lang = 'en';
   const audience = 'https://app.pix.fr';
+  const locale = 'fr-FR';
 
   it('creates an anonymous user for simplified access campaign', async function () {
     // given
@@ -14,7 +15,12 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymou
     await databaseBuilder.commit();
 
     // when
-    const accessToken = await usecases.authenticateAnonymousUser({ campaignCode: campaign.code, audience, lang });
+    const accessToken = await usecases.authenticateAnonymousUser({
+      campaignCode: campaign.code,
+      audience,
+      locale,
+      lang,
+    });
 
     // then
     expect(accessToken).to.be.a('string');
@@ -23,6 +29,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymou
     expect(user.firstName).to.equal('');
     expect(user.lastName).to.equal('');
     expect(user.lang).to.equal(lang);
+    expect(user.locale).to.equal(locale);
     expect(user.cgu).to.be.false;
     expect(user.isAnonymous).to.be.true;
     expect(user.hasSeenAssessmentInstructions).to.be.false;

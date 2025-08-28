@@ -1,7 +1,7 @@
 import { BadRequestError, UnauthorizedError } from '../../../shared/application/http-errors.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as oidcProviderSerializer from '../../infrastructure/serializers/jsonapi/oidc-identity-providers.serializer.js';
 import * as oidcSerializer from '../../infrastructure/serializers/jsonapi/oidc-serializer.js';
@@ -17,6 +17,7 @@ async function authenticateOidcUser(request, h) {
   const { code, state, iss, identityProvider: identityProviderCode } = request.deserializedPayload;
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
+  const locale = getUserLocale(request);
 
   const sessionState = request.yar.get('state', true);
   const nonce = request.yar.get('nonce', true);
@@ -30,6 +31,7 @@ async function authenticateOidcUser(request, h) {
     code,
     state,
     iss,
+    locale,
     identityProviderCode,
     nonce,
     sessionState,
@@ -54,12 +56,11 @@ async function authenticateOidcUser(request, h) {
  * @param h
  * @return {Promise<{access_token: string, logout_url_uuid: string}>}
  */
-async function createUser(request, h, dependencies = { localeService }) {
+async function createUser(request, h) {
   const { identityProvider, authenticationKey } = request.deserializedPayload;
-  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
 
-  const localeFromHeader = await getChallengeLocale(request);
-  const language = localeService.getBaseLocale(localeFromHeader);
+  const locale = getUserLocale(request);
+  const language = localeService.getBaseLocale(locale);
 
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
@@ -67,7 +68,7 @@ async function createUser(request, h, dependencies = { localeService }) {
   const { accessToken: access_token, logoutUrlUUID: logout_url_uuid } = await usecases.createOidcUser({
     authenticationKey,
     identityProvider,
-    locale: localeFromCookie,
+    locale,
     language,
     audience: origin,
     requestedApplication,

@@ -86,6 +86,11 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
                 related: `/api/organizations/${organization.id}/invitations`,
               },
             },
+            'participation-statistics': {
+              links: {
+                related: `/api/organizations/${organization.id}/participation-statistics`,
+              },
+            },
             'target-profiles': {
               links: {
                 related: `/api/organizations/${organization.id}/target-profiles`,

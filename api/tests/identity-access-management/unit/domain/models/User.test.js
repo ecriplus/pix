@@ -103,17 +103,16 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     });
   });
 
-  describe('setLocaleIfNotAlreadySet', function () {
+  describe('changeLocale', function () {
     it('deals with empty locale', function () {
       // given
       const user = new User(undefined);
 
       // when
-      user.setLocaleIfNotAlreadySet(null, { localeService });
+      user.changeLocale(null, { localeService });
 
       // then
-      expect(user.locale).to.be.undefined;
-      expect(user.hasBeenModified).to.be.false;
+      expect(user.locale).to.equal(localeService.getDefaultLocale());
     });
 
     context('when user has no locale', function () {
@@ -127,31 +126,40 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
         const locale3 = 'fr-BE';
 
         // when
-        user1.setLocaleIfNotAlreadySet(locale1, { localeService });
-        user2.setLocaleIfNotAlreadySet(locale2, { localeService });
-        user3.setLocaleIfNotAlreadySet(locale3, { localeService });
+        user1.changeLocale(locale1, { localeService });
+        user2.changeLocale(locale2, { localeService });
+        user3.changeLocale(locale3, { localeService });
 
         // then
         expect(user1.locale).to.equal('fr');
-        expect(user1.hasBeenModified).to.be.true;
         expect(user2.locale).to.equal('fr-FR');
-        expect(user2.hasBeenModified).to.be.true;
         expect(user3.locale).to.equal('fr-BE');
-        expect(user3.hasBeenModified).to.be.true;
       });
     });
 
-    context('when user has a locale', function () {
+    context('when user has already the same locale', function () {
       it('does not set a new locale', function () {
         // given
-        const user = new User({ locale: 'en' });
+        const user = new User({ locale: 'fr-FR' });
 
         // when
-        user.setLocaleIfNotAlreadySet('fr-FR');
+        user.changeLocale('fr-FR');
 
         // then
-        expect(user.locale).to.equal('en');
-        expect(user.hasBeenModified).to.be.false;
+        expect(user.locale).to.equal('fr-FR');
+      });
+    });
+
+    context('when user has a different locale', function () {
+      it('validates and sets the new locale', function () {
+        // given
+        const user = new User({ locale: 'nl-BE' });
+
+        // when
+        user.changeLocale('fr-FR', { localeService });
+
+        // then
+        expect(user.locale).to.equal('fr-FR');
       });
     });
   });

@@ -191,6 +191,7 @@ export default class Organizations extends Component {
         @goToOrganizationPage={{@goToOrganizationPage}}
         @detachOrganizations={{@detachOrganizations}}
         @targetProfileName={{@targetProfile.internalName}}
+        @hideArchived={{@hideArchived}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
       />
     </section>

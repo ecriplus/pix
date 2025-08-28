@@ -28,6 +28,7 @@ const register = async function (server) {
                 Joi.object({
                   id: Joi.number().description("ID de l'organisation"),
                   name: Joi.string().description("Nom de l'organisation"),
+                  externalId: Joi.string().description("ID externe de l'organisation"),
                 }).label('Organization'),
               )
               .label('Organizations'),

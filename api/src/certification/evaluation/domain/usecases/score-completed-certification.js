@@ -14,8 +14,10 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {Services} params.services
  */
-export const scoreCompletedV3Certification = withTransaction(
-  async ({ certificationAssessment, locale, certificationCourseRepository, services }) => {
+export const scoreCompletedCertification = withTransaction(
+  async ({ assessmentId, locale, certificationCourseRepository, certificationAssessmentRepository, services }) => {
+    const certificationAssessment = await certificationAssessmentRepository.get(assessmentId);
+
     if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
       return;
     }

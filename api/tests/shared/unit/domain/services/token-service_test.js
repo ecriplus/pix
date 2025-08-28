@@ -6,7 +6,6 @@ import { config, config as settings } from '../../../../../src/shared/config.js'
 import {
   InvalidResultRecipientTokenError,
   InvalidSessionResultTokenError,
-  InvalidTemporaryKeyError,
 } from '../../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
 import { catchErr, expect } from '../../../../test-helper.js';
@@ -37,20 +36,6 @@ describe('Unit | Shared | Domain | Services | Token Service', function () {
 
       // then
       expect(result).to.equal(null);
-    });
-  });
-
-  describe('#decodeIfValid', function () {
-    it('should throw an Invalid token error, when token is not valid', async function () {
-      // given
-      const token =
-        'eyJhbGciOiJIUzI1NiIsIgR5cCI6IkpXVCJ9.eyJ1c2VyX2lPIjoxMjMsImlhdCI6MTQ5OTA3Nzg2Mn0.FRAAoowTA8Bc6BOzD7wWh2viVN47VrPcGgLuHi_NmKw';
-
-      // when
-      const error = await catchErr(tokenService.decodeIfValid)(token);
-
-      // then
-      expect(error).to.be.an.instanceof(InvalidTemporaryKeyError);
     });
   });
 
