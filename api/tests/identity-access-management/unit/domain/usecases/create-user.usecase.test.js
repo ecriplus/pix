@@ -415,7 +415,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           userToCreateRepository,
           cryptoService,
           userService,
-
           userValidator,
           passwordValidator,
         });
@@ -423,6 +422,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // then
         expect(userService.createUserWithPassword).to.have.been.calledWithExactly({
           user,
+          locale,
           hashedPassword,
           userToCreateRepository,
           authenticationMethodRepository,

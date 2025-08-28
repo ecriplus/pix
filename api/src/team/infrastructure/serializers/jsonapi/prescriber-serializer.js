@@ -64,6 +64,7 @@ const serialize = function (prescriber) {
           'divisions',
           'organizationInvitations',
           'documentationUrl',
+          'participationStatistics',
           'groups',
           'schoolCode',
           'sessionExpirationDate',
@@ -118,6 +119,16 @@ const serialize = function (prescriber) {
                 return `/api/pix1d/schools/${parent.id}/divisions`;
               }
               return `/api/organizations/${parent.id}/divisions`;
+            },
+          },
+        },
+        participationStatistics: {
+          ref: 'id',
+          ignoreRelationshipData: true,
+          nullIfMissing: true,
+          relationshipLinks: {
+            related: function (record, current, parent) {
+              return `/api/organizations/${parent.id}/participation-statistics`;
             },
           },
         },

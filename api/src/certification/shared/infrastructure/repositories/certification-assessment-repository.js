@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Answer } from '../../../../evaluation/domain/models/Answer.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as answerStatusDatabaseAdapter from '../../../../shared/infrastructure/adapters/answer-status-database-adapter.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';

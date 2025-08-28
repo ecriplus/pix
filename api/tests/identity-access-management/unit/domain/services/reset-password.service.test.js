@@ -1,34 +1,49 @@
-import jsonwebtoken from 'jsonwebtoken';
-
 import { resetPasswordService } from '../../../../../src/identity-access-management/domain/services/reset-password.service.js';
-import { config as settings } from '../../../../../src/shared/config.js';
-import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
+import { config } from '../../../../../src/shared/config.js';
+import { InvalidTemporaryKeyError } from '../../../../../src/shared/domain/errors.js';
+import { tokenService } from '../../../../../src/shared/domain/services/token-service.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Service | reset-password', function () {
   describe('#generateTemporaryKey', function () {
-    let randomGeneratedString;
-
-    beforeEach(function () {
-      sinon.stub(jsonwebtoken, 'sign');
-      randomGeneratedString = 'aaaaaa';
-      sinon.stub(cryptoService, 'randomBytes').resolves(randomGeneratedString);
-    });
-
-    it('calls sign function from jwt', async function () {
-      // given
-      const signParams = {
-        payload: { data: randomGeneratedString },
-        secret: settings.temporaryKey.secret,
-        expiration: { expiresIn: settings.temporaryKey.tokenLifespan },
-      };
-
+    it('creates a token that can be decoded and contains a base64 data property', async function () {
       // when
-      await resetPasswordService.generateTemporaryKey();
+      const temporaryKey = await resetPasswordService.generateTemporaryKey();
 
       // then
-      sinon.assert.calledOnce(jsonwebtoken.sign);
-      sinon.assert.calledWith(jsonwebtoken.sign, signParams.payload, signParams.secret, signParams.expiration);
+      expect(temporaryKey).to.be.a('string');
+
+      const decoded = tokenService.getDecodedToken(temporaryKey, config.temporaryKey.secret);
+      expect(decoded).to.have.property('data');
+      expect(decoded.data).to.be.a('string');
+      expect(decoded.data.length).to.equal(24);
+    });
+
+    it('generates different temporaryKeys', async function () {
+      // when
+      const temporaryKeyUser1 = await resetPasswordService.generateTemporaryKey();
+      const temporaryKeyUser2 = await resetPasswordService.generateTemporaryKey();
+
+      // then
+      expect(temporaryKeyUser1).to.not.equal(temporaryKeyUser2);
+    });
+  });
+
+  describe('#assertTemporaryKey', function () {
+    it('does not throw for a valid temporary key', async function () {
+      // given
+      const temporaryKey = await resetPasswordService.generateTemporaryKey();
+
+      // when / then
+      expect(() => resetPasswordService.assertTemporaryKey(temporaryKey)).to.not.throw();
+    });
+
+    it('throws InvalidTemporaryKeyError for an invalid token', function () {
+      // given
+      const invalidToken = 'not.a.valid.token';
+
+      // when / then
+      expect(() => resetPasswordService.assertTemporaryKey(invalidToken)).to.throw(InvalidTemporaryKeyError);
     });
   });
 

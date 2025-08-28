@@ -1,18 +1,21 @@
-import jsonwebtoken from 'jsonwebtoken';
-
 import { config } from '../../../shared/config.js';
+import { InvalidTemporaryKeyError } from '../../../shared/domain/errors.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
+import { tokenService } from '../../../shared/domain/services/token-service.js';
 
 const generateTemporaryKey = async function () {
   const randomBytesBuffer = await cryptoService.randomBytes(16);
   const base64RandomBytes = randomBytesBuffer.toString('base64');
-  return jsonwebtoken.sign(
-    {
-      data: base64RandomBytes,
-    },
-    config.temporaryKey.secret,
-    { expiresIn: config.temporaryKey.tokenLifespan },
-  );
+  return tokenService.encodeToken({ data: base64RandomBytes }, config.temporaryKey.secret, {
+    expiresIn: config.temporaryKey.tokenLifespan,
+  });
+};
+
+const assertTemporaryKey = function (token) {
+  const decoded = tokenService.getDecodedToken(token, config.temporaryKey.secret);
+  if (!decoded) {
+    throw new InvalidTemporaryKeyError();
+  }
 };
 
 const invalidateOldResetPasswordDemandsByEmail = function (userEmail, resetPasswordDemandRepository) {
@@ -36,12 +39,14 @@ const invalidateResetPasswordDemand = function (email, temporaryKey, resetPasswo
 
 /**
  * @typedef {Object} ResetPasswordService
+ * @property assertTemporaryKey
  * @property generateTemporaryKey
  * @property invalidateResetPasswordDemand
  * @property invalidateOldResetPasswordDemandsByEmail
  * @property verifyDemand
  */
 const resetPasswordService = {
+  assertTemporaryKey,
   generateTemporaryKey,
   invalidateResetPasswordDemand,
   invalidateOldResetPasswordDemandsByEmail,

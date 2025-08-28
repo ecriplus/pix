@@ -87,7 +87,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
     });
   });
 
-  describe('#changeUserLanguage', function () {
+  describe('#changeUserLocale', function () {
     let request;
     const userId = 1;
     const lang = 'en';
@@ -96,21 +96,22 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       request = {
         auth: { credentials: { userId } },
         params: { id: userId, lang },
+        state: { locale: 'en' },
       };
 
-      sinon.stub(usecases, 'changeUserLanguage');
+      sinon.stub(usecases, 'changeUserLocale');
     });
 
     it('updates user language', async function () {
       // given
-      usecases.changeUserLanguage.resolves({});
+      usecases.changeUserLocale.resolves({});
       userSerializer.serialize.withArgs({}).returns('ok');
 
       // when
-      await userController.changeUserLanguage(request, hFake, { userSerializer });
+      await userController.changeUserLocale(request, hFake, { userSerializer });
 
       // then
-      sinon.assert.calledWith(usecases.changeUserLanguage, { userId, language: lang });
+      sinon.assert.calledWith(usecases.changeUserLocale, { userId, language: lang, locale: 'en' });
     });
   });
 
@@ -250,20 +251,9 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       describe('when there is a locale cookie', function () {
         it('returns a serialized user with "locale" attribute and a 201 status code', async function () {
           // given
-          const localeFromHeader = 'fr-fr';
           const locale = 'fr-FR';
-          const expectedSerializedUser = { message: 'serialized user', locale };
           const savedUser = new User({ email, locale });
 
-          const useCaseParameters = {
-            user: { ...deserializedUser, locale },
-            password,
-            locale: localeFromHeader,
-            redirectionUrl: null,
-            i18n: getI18n(localeFromHeader),
-          };
-
-          dependencies.userSerializer.serialize.returns(expectedSerializedUser);
           usecases.createUser.resolves(savedUser);
 
           // when
@@ -289,7 +279,13 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
           );
 
           // then
-          expect(usecases.createUser).to.have.been.calledWithExactly(useCaseParameters);
+          expect(usecases.createUser).to.have.been.calledWithExactly({
+            user: deserializedUser,
+            password,
+            locale,
+            redirectionUrl: null,
+            i18n: getI18n(locale),
+          });
           expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(savedUser);
           expect(response.statusCode).to.equal(201);
         });

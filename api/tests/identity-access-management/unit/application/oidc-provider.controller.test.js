@@ -16,6 +16,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
     const pixAccessToken = 'pixAccessToken';
     const audience = 'https://app.pix.fr';
     const requestedApplication = new RequestedApplication('app');
+    const locale = 'fr-FR';
 
     let request;
 
@@ -32,6 +33,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
           state: identityProviderState,
           iss,
         },
+        state: { locale },
         yar: { get: sinon.stub(), commit: sinon.stub() },
       };
 
@@ -60,6 +62,7 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         sessionState: state,
         state: identityProviderState,
         iss,
+        locale,
         audience,
         requestedApplication,
       });

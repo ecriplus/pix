@@ -108,6 +108,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         expect(response.result.campaignParticipations).to.deep.members([
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation1,
+            participantFirstName: organizationLearner1.firstName,
+            participantLastName: organizationLearner1.lastName,
             clientId,
             tubes: [
               domainBuilder.maddo.buildTubeCoverage({
@@ -122,6 +124,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation2,
+            participantFirstName: organizationLearner2.firstName,
+            participantLastName: organizationLearner2.lastName,
             clientId,
           }),
         ]);
@@ -183,6 +187,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         expect(response.result.campaignParticipations).to.deep.members([
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation,
+            participantFirstName: organizationLearner.firstName,
+            participantLastName: organizationLearner.lastName,
             clientId,
           }),
         ]);
@@ -286,6 +292,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           domainBuilder.maddo.buildCampaignParticipation({
             ...participation1,
             clientId,
+            participantFirstName: organizationLearner1.firstName,
+            participantLastName: organizationLearner1.lastName,
             tubes: [
               domainBuilder.maddo.buildTubeCoverage({
                 id: tube.id,
@@ -386,6 +394,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
 
       it('should returns only participation created or updated after a given date', async function () {
         // given
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
         databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           status: CampaignParticipationStatuses.STARTED,
@@ -398,6 +407,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           participantExternalId: 'started after 1',
           masteryRate: null,
           createdAt: new Date('2025-01-03'),
+          organizationLearnerId: organizationLearner.id,
         });
 
         const participationSharedBefore = databaseBuilder.factory.buildCampaignParticipation({
@@ -427,6 +437,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           participantExternalId: 'shared after 1',
           createdAt: new Date('2025-01-04'),
           sharedAt: new Date('2025-01-05'),
+          organizationLearner: organizationLearner.id,
         });
 
         databaseBuilder.factory.buildKnowledgeElementSnapshot({
@@ -466,6 +477,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
         expect(response.result.campaignParticipations).to.deep.members([
           domainBuilder.maddo.buildCampaignParticipation({
             ...participationSharedAfterDate,
+            participantFirstName: organizationLearner.firstName,
+            participantLastName: organizationLearner.lastName,
             clientId,
             tubes: [
               domainBuilder.maddo.buildTubeCoverage({
@@ -480,6 +493,8 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
           }),
           domainBuilder.maddo.buildCampaignParticipation({
             ...participationCreatedAfterDate,
+            participantFirstName: organizationLearner.firstName,
+            participantLastName: organizationLearner.lastName,
             clientId,
           }),
         ]);

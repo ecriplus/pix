@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.192.0](https://github.com/1024pix/pix/compare/v5.191.0...v5.192.0) (2025-08-27)
+
+### :rocket: Amélioration
+
+- [#13271](https://github.com/1024pix/pix/pull/13271) Afficher les statistiques de participations sur la page d'accueil de PixOrga (PIX-18959) 
+- [#13300](https://github.com/1024pix/pix/pull/13300) Cacher les contenus recommandés à l'issue d'une campagne dans le cadre d'un parcours combiné 
+- [#13301](https://github.com/1024pix/pix/pull/13301) Cacher les sections Profils cibles actuels et Badges d'une complémentaire dans Pix Admin (PIX-19089) 
+- [#13260](https://github.com/1024pix/pix/pull/13260) Écrire la locale dans users.locale quand on modifie users.lang (PIX-18932) 
+- [#13304](https://github.com/1024pix/pix/pull/13304) Module biais independant - v2 après point d'etape 
+
+### :bug: Correction
+
+- [#13279](https://github.com/1024pix/pix/pull/13279) Corriger le toggle "Cacher les organisations archivées" sur PixAdmin dans les profils cible (PIX-19182). 
+- [#13305](https://github.com/1024pix/pix/pull/13305) Corriger les problèmes d'affichage sur la double mire Pix Certif (PIX-16112) 
+
+### :building_construction: Tech
+
+- [#13294](https://github.com/1024pix/pix/pull/13294) :truck: Déplace deux modèles en lecture seul vers le contexte partagé de la certification 
+- [#13290](https://github.com/1024pix/pix/pull/13290) :truck: Déplace le modèle en lecture seul `CampaignParticipationOverview` vers un contexte de la prescription 
+- [#13303](https://github.com/1024pix/pix/pull/13303) Séparer les responsabilités du token service (partie 3) (PIX-19242)
+
 # [5.191.0](https://github.com/1024pix/pix/compare/v5.190.0...v5.191.0) (2025-08-26)
 
 ### :rocket: Amélioration

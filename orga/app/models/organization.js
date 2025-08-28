@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class Organization extends Model {
   @attr('string') name;
@@ -17,6 +17,7 @@ export default class Organization extends Model {
   @hasMany('organization-invitation', { async: true, inverse: 'organization' }) organizationInvitations;
   @hasMany('group', { async: true, inverse: null }) groups;
   @hasMany('division', { async: true, inverse: null }) divisions;
+  @belongsTo('participation-statistic', { async: true, inverse: null }) participationStatistics;
 
   get hasGarIdentityProvider() {
     return this.isScoAndManagingStudents && this.identityProviderForCampaigns === 'GAR';

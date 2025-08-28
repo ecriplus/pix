@@ -5,7 +5,7 @@ import { RequestedApplication } from '../../../../../src/identity-access-managem
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oidc-user', function () {
   context('when identityProvider is generic', function () {
@@ -41,7 +41,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       authenticationSessionService = {
         save: sinon.stub(),
       };
-      userRepository = { findByExternalIdentifier: sinon.stub() };
+      userRepository = { findByExternalIdentifier: sinon.stub(), update: sinon.stub() };
       adminMemberRepository = {
         get: sinon.stub(),
       };
@@ -272,7 +272,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         it('updates the authentication method', async function () {
           // given
           _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
-          userRepository.findByExternalIdentifier.resolves({ id: 10 });
+          const user = domainBuilder.buildUser({ id: 10 });
+          userRepository.findByExternalIdentifier.resolves(user);
           const authenticationComplement = undefined;
           oidcAuthenticationService.createAuthenticationComplement.returns(authenticationComplement);
 
@@ -282,6 +283,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             requestedApplication,
             stateReceived: 'state',
             stateSent: 'state',
+            locale: 'fr-FR',
             identityProviderCode: 'OIDC_EXAMPLE_NET',
             oidcAuthenticationServiceRegistry,
             authenticationSessionService,
@@ -316,7 +318,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           // given
           const requestedApplication = new RequestedApplication('app');
           _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
-          userRepository.findByExternalIdentifier.resolves({ id: 10 });
+          const user = domainBuilder.buildUser({ id: 10 });
+          userRepository.findByExternalIdentifier.resolves(user);
           const authenticationComplement = new AuthenticationMethod.OidcAuthenticationComplement({
             family_name: 'TITEGOUTTE',
             given_name: 'Mélusine',
@@ -328,6 +331,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
             requestedApplication,
             stateReceived: 'state',
             stateSent: 'state',
+            locale: 'fr-FR',
             identityProviderCode: 'OIDC_EXAMPLE_NET',
             oidcAuthenticationServiceRegistry,
             authenticationSessionService,
@@ -395,7 +399,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         save: sinon.stub(),
       };
 
-      userRepository = { findByExternalIdentifier: sinon.stub() };
+      userRepository = { findByExternalIdentifier: sinon.stub(), update: sinon.stub() };
       userLoginRepository = {
         updateLastLoggedAt: sinon.stub().resolves(),
       };
@@ -409,7 +413,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         // given
         const requestedApplication = new RequestedApplication('app');
         const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
-        userRepository.findByExternalIdentifier.resolves({ id: 1 });
+        const user = domainBuilder.buildUser({ id: 1 });
+        userRepository.findByExternalIdentifier.resolves(user);
         const authenticationComplement = new AuthenticationMethod.PoleEmploiOidcAuthenticationComplement({
           accessToken: sessionContent.accessToken,
           refreshToken: sessionContent.refreshToken,
@@ -422,6 +427,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
+          locale: 'fr-FR',
           identityProviderCode: POLE_EMPLOI.code,
           oidcAuthenticationServiceRegistry,
           authenticationSessionService,
@@ -454,9 +460,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
       it('returns an access token, the logout url uuid and update the last logged date with the existing external user id', async function () {
         // given
         const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
+        const user = domainBuilder.buildUser({ id: 10 });
         userRepository.findByExternalIdentifier
           .withArgs({ externalIdentityId, identityProvider: oidcAuthenticationService.identityProvider })
-          .resolves({ id: 10 });
+          .resolves(user);
         oidcAuthenticationService.createAuthenticationComplement.returns(undefined);
         oidcAuthenticationService.createAccessToken
           .withArgs({ userId: 10, audience })
@@ -470,6 +477,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
+          locale: 'fr-FR',
           identityProviderCode: POLE_EMPLOI.code,
           oidcAuthenticationServiceRegistry,
           authenticationSessionService,
@@ -496,9 +504,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         // given
         const requestedApplication = new RequestedApplication('app');
         const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
+        const user = domainBuilder.buildUser({ id: 10 });
         userRepository.findByExternalIdentifier
           .withArgs({ externalIdentityId, identityProvider: oidcAuthenticationService.identityProvider })
-          .resolves({ id: 10 });
+          .resolves(user);
         const authenticationComplement = new AuthenticationMethod.PoleEmploiOidcAuthenticationComplement({
           accessToken: sessionContent.accessToken,
           refreshToken: sessionContent.refreshToken,
@@ -512,6 +521,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           requestedApplication,
           stateReceived: 'state',
           stateSent: 'state',
+          locale: 'fr-FR',
           identityProviderCode: POLE_EMPLOI.code,
           oidcAuthenticationServiceRegistry,
           authenticationSessionService,
@@ -539,6 +549,82 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
           lastLoggedAt: sinon.match.instanceOf(Date),
         });
       });
+    });
+  });
+
+  context('when the provided locale is different from the one in found user', function () {
+    let oidcAuthenticationService;
+    let authenticationSessionService;
+    let authenticationMethodRepository;
+    let userRepository;
+    let userLoginRepository;
+    let lastUserApplicationConnectionsRepository;
+    let oidcAuthenticationServiceRegistry;
+    const externalIdentityId = '094b83ac-2e20-4aa8-b438-0bc91748e4a6';
+
+    beforeEach(function () {
+      oidcAuthenticationService = {
+        identityProvider: POLE_EMPLOI.code,
+        createAccessToken: sinon.stub(),
+        shouldCloseSession: true,
+        saveIdToken: sinon.stub(),
+        createAuthenticationComplement: sinon.stub(),
+        exchangeCodeForTokens: sinon.stub(),
+        getUserInfo: sinon.stub(),
+      };
+      oidcAuthenticationServiceRegistry = {
+        loadOidcProviderServices: sinon.stub().resolves(),
+        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
+        getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
+      };
+      authenticationMethodRepository = {
+        updateAuthenticationComplementByUserIdAndIdentityProvider: sinon.stub(),
+        updateLastLoggedAtByIdentityProvider: sinon.stub(),
+      };
+      authenticationSessionService = {
+        save: sinon.stub(),
+      };
+      userRepository = { findByExternalIdentifier: sinon.stub(), update: sinon.stub() };
+
+      userLoginRepository = {
+        updateLastLoggedAt: sinon.stub().resolves(),
+      };
+      lastUserApplicationConnectionsRepository = {
+        upsert: sinon.stub().resolves(),
+      };
+    });
+
+    it('updates the user locale', async function () {
+      // given
+      const locale = 'fr-FR';
+      const { sessionContent } = _fakeOidcAPI({ oidcAuthenticationService, externalIdentityId });
+      const user = domainBuilder.buildUser({ id: 1, locale: 'fr-BE' });
+      userRepository.findByExternalIdentifier.resolves(user);
+      const authenticationComplement = new AuthenticationMethod.PoleEmploiOidcAuthenticationComplement({
+        accessToken: sessionContent.accessToken,
+        refreshToken: sessionContent.refreshToken,
+        expiredDate: new Date(),
+      });
+      oidcAuthenticationService.createAuthenticationComplement.returns(authenticationComplement);
+      const requestedApplication = new RequestedApplication('app');
+
+      // when
+      await authenticateOidcUser({
+        requestedApplication,
+        stateReceived: 'state',
+        stateSent: 'state',
+        locale,
+        identityProviderCode: POLE_EMPLOI.code,
+        oidcAuthenticationServiceRegistry,
+        authenticationSessionService,
+        authenticationMethodRepository,
+        userRepository,
+        userLoginRepository,
+        lastUserApplicationConnectionsRepository,
+      });
+
+      // then
+      expect(userRepository.update).to.have.been.calledWithExactly({ id: 1, locale });
     });
   });
 });

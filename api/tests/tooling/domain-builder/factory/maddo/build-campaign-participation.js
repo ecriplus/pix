@@ -3,6 +3,8 @@ import { CampaignParticipation } from '../../../../../src/maddo/domain/models/Ca
 export function buildCampaignParticipation({
   id,
   createdAt,
+  participantFirstName,
+  participantLastName,
   participantExternalId,
   status,
   sharedAt,
@@ -16,6 +18,8 @@ export function buildCampaignParticipation({
   return new CampaignParticipation({
     id,
     createdAt,
+    participantFirstName,
+    participantLastName,
     participantExternalId,
     status,
     sharedAt,

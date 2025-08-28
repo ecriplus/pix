@@ -8,8 +8,8 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient un exemple d’intégration de ChatPix.</p>",
     "duration": 2,
     "level": "Débutant",
-    "tabletSupport": "inconvenient",
-    "objectives": ["Démonstration"]
+    "objectives": ["<p>Démonstration</p>"],
+    "tabletSupport": "inconvenient"
   },
   "sections": [
     {
@@ -19,12 +19,32 @@
         {
           "id": "ef9ce6eb-f3db-447f-808f-aa6a06b940c9",
           "type": "lesson",
-          "title": "Démo LLM",
+          "title": "Démo LLM auto-valid",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "348a0dc3-4e8e-4cf9-ab37-3280931cbab7",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "ChatPix",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmetxlll80000vr019lhpwzmg",
+                "instruction": "<p>Demander un poème sur votre animal préféré à ChatPix. C’est mieux si c’est le chien. Vous avez droits à 5 prompts.</p>",
+                "height": 600,
+                "solution": "pix-llm-success"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5f760201-eba1-490e-8a30-c940a7f9eb03",
+          "type": "lesson",
+          "title": "Démo LLM",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4e54cf83-4e05-42fb-9852-017836043d9a",
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "ChatPix",

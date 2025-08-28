@@ -1,3 +1,4 @@
+import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { UserAccessToken } from '../../domain/models/UserAccessToken.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/utils/network.js';
@@ -5,7 +6,8 @@ import { getForwardedOrigin, RequestedApplication } from '../../infrastructure/u
 const authenticateAnonymousUser = async function (request, h) {
   const { campaign_code: campaignCode, lang } = request.payload;
   const origin = getForwardedOrigin(request.headers);
-  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang, audience: origin });
+  const locale = getUserLocale(request);
+  const accessToken = await usecases.authenticateAnonymousUser({ campaignCode, lang, locale, audience: origin });
 
   const response = {
     token_type: 'bearer',
@@ -31,17 +33,17 @@ const createToken = async function (request, h) {
   const requestedApplication = RequestedApplication.fromOrigin(origin);
 
   const grantType = request.payload.grant_type;
+  const locale = getUserLocale(request);
 
   if (grantType === 'password') {
     const { username, password } = request.payload;
-    const localeFromCookie = request.state?.locale;
     const source = 'pix';
 
     const tokensInfo = await usecases.authenticateUser({
       username,
       password,
       source,
-      locale: localeFromCookie,
+      locale,
       audience: origin,
       requestedApplication,
     });
@@ -52,7 +54,7 @@ const createToken = async function (request, h) {
   } else if (grantType === 'refresh_token') {
     refreshToken = request.payload.refresh_token;
 
-    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, audience: origin });
+    const tokensInfo = await usecases.createAccessTokenFromRefreshToken({ refreshToken, audience: origin, locale });
 
     accessToken = tokensInfo.accessToken;
     expirationDelaySeconds = tokensInfo.expirationDelaySeconds;

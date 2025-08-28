@@ -10,12 +10,14 @@ describe('Unit | Team | Application | Controller | Certification-center-invitati
       const code = 'ABCDEFGH01';
       const notValidEmail = '   RANDOM@email.com   ';
       const certificationCenterInvitationId = '1234';
+      const locale = 'fr-FR';
       const request = {
         params: { id: certificationCenterInvitationId },
         deserializedPayload: {
           code,
           email: notValidEmail,
         },
+        state: { locale },
       };
 
       sinon.stub(usecases, 'acceptCertificationCenterInvitation').resolves();
@@ -31,7 +33,7 @@ describe('Unit | Team | Application | Controller | Certification-center-invitati
         certificationCenterInvitationId,
         code,
         email: notValidEmail.trim().toLowerCase(),
-        locale: undefined,
+        locale,
       });
       expect(response.statusCode).to.equal(204);
     });

@@ -11,6 +11,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
       // given
       const code = 'ABCDEFGH01';
       const email = 'random@email.com';
+      const locale = 'fr-FR';
       const organizationInvitation = domainBuilder.buildOrganizationInvitation({ code, email });
       const request = {
         params: { id: organizationInvitation.id },
@@ -20,6 +21,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
             attributes: { code, email: email.toUpperCase() },
           },
         },
+        state: { locale },
       };
 
       sinon.stub(usecases, 'acceptOrganizationInvitation').resolves();
@@ -33,7 +35,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
         organizationInvitationId: organizationInvitation.id,
         code,
         email,
-        locale: undefined,
+        locale,
       });
     });
 

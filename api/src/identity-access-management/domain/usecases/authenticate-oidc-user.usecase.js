@@ -14,6 +14,8 @@ const { omit } = lodash;
  * @param {string} params.sessionState
  * @param {string} params.state
  * @param {string} params.audience
+ * @param {string} params.iss
+ * @param {string} params.locale
  * @param {RequestedApplication} params.requestedApplication
  * @param {AuthenticationSessionService} params.authenticationSessionService
  * @param {OidcAuthenticationServiceRegistry} params.oidcAuthenticationServiceRegistry
@@ -28,6 +30,7 @@ async function authenticateOidcUser({
   code,
   state,
   iss,
+  locale,
   identityProviderCode,
   nonce,
   sessionState,
@@ -99,6 +102,8 @@ async function authenticateOidcUser({
     userLoginRepository,
   });
 
+  await _updateUserLocaleIfNeeded({ user, locale, userRepository });
+
   const pixAccessToken = oidcAuthenticationService.createAccessToken({ userId: user.id, audience });
 
   let logoutUrlUUID;
@@ -113,6 +118,13 @@ async function authenticateOidcUser({
 }
 
 export { authenticateOidcUser };
+
+async function _updateUserLocaleIfNeeded({ user, locale, userRepository }) {
+  const localeChanged = user.changeLocale(locale);
+  if (localeChanged) {
+    await userRepository.update({ id: user.id, locale: user.locale });
+  }
+}
 
 async function _assertUserHasAccessToApplication({ requestedApplication, user, adminMemberRepository }) {
   if (requestedApplication.isPixAdmin) {

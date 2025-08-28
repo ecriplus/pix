@@ -17,9 +17,10 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
 
   context('when authentication succeeds', function () {
     let clock;
+    const now = new Date('2001-01-01');
 
     beforeEach(function () {
-      clock = sinon.useFakeTimers({ now: new Date('2001-01-01'), toFake: ['Date'] });
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
     });
 
     afterEach(function () {
@@ -98,47 +99,22 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
 
     describe('user locale', function () {
       context('when user has a locale', function () {
-        it('does not update the user locale', async function () {
-          // given
-          const email = 'user_with_a_locale@example.net';
-          const password = 'some password';
-          const initialLocale = 'fr-BE';
-          const userId = databaseBuilder.factory.buildUser.withRawPassword({
-            email,
-            rawPassword: password,
-            locale: initialLocale,
-          }).id;
-          await databaseBuilder.commit();
-
-          const locale = 'nl-BE';
-          const audience = 'https://app.pix.fr';
-          const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-          // when
-          await usecases.authenticateUser({
-            username: email,
-            password,
-            locale,
-            requestedApplication,
-            audience,
-          });
-
-          // then
-          const user = await knex('users').where({ id: userId }).first();
-          expect(user.locale).to.equal(initialLocale);
-        });
-      });
-
-      context('when user does not have a locale', function () {
-        context('when there is a locale cookie ', function () {
-          it('updates the user locale with the formatted value', async function () {
+        context('when the given locale is the same as the user locale', function () {
+          it('does not change the user locale', async function () {
             // given
-            const email = 'user_with_no_locale@example.net';
+            const email = 'user_with_a_locale@example.net';
             const password = 'some password';
-            const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
+            const initialLocale = 'fr-BE';
+            const userId = databaseBuilder.factory.buildUser.withRawPassword({
+              email,
+              rawPassword: password,
+              locale: initialLocale,
+              createdAt: new Date('2000-01-01'),
+              updatedAt: new Date('2000-01-01'),
+            }).id;
             await databaseBuilder.commit();
 
-            const locale = 'nl-BE';
+            const locale = 'fr-BE';
             const audience = 'https://app.pix.fr';
             const requestedApplication = RequestedApplication.fromOrigin(audience);
 
@@ -153,41 +129,151 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
 
             // then
             const user = await knex('users').where({ id: userId }).first();
-            expect(user.locale).to.equal('nl-BE');
+            expect(user.locale).to.equal(initialLocale);
+            expect(user.updatedAt).to.deep.equal(new Date('2000-01-01'));
           });
         });
 
-        context('when there is no locale cookie', function () {
-          it('does not update the user locale', async function () {
+        context('when the given locale is different from the user locale', function () {
+          it('updates the user locale with the formatted value', async function () {
             // given
-            const email = 'user_with_no_locale@example.net';
+            const email = 'user_with_a_locale@example.net';
             const password = 'some password';
-            const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
+            const initialLocale = 'fr-BE';
+            const userId = databaseBuilder.factory.buildUser.withRawPassword({
+              email,
+              rawPassword: password,
+              locale: initialLocale,
+              createdAt: new Date('2000-01-01'),
+              updatedAt: new Date('2000-01-01'),
+            }).id;
             await databaseBuilder.commit();
 
+            const newLocale = 'nl-BE';
             const audience = 'https://app.pix.fr';
             const requestedApplication = RequestedApplication.fromOrigin(audience);
 
             // when
-            await usecases.authenticateUser({ username: email, password, requestedApplication, audience });
+            await usecases.authenticateUser({
+              username: email,
+              password,
+              locale: newLocale,
+              requestedApplication,
+              audience,
+            });
 
             // then
             const user = await knex('users').where({ id: userId }).first();
-            expect(user.locale).to.be.null;
+            expect(user.locale).to.equal(newLocale);
+            expect(user.updatedAt).to.deep.equal(now);
+          });
+        });
+
+        context('when user does not have a locale', function () {
+          context('when there is a locale cookie ', function () {
+            it('updates the user locale with the formatted value', async function () {
+              // given
+              const email = 'user_with_no_locale@example.net';
+              const password = 'some password';
+              const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
+              await databaseBuilder.commit();
+
+              const locale = 'nl-BE';
+              const audience = 'https://app.pix.fr';
+              const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+              // when
+              await usecases.authenticateUser({
+                username: email,
+                password,
+                locale,
+                requestedApplication,
+                audience,
+              });
+
+              // then
+              const user = await knex('users').where({ id: userId }).first();
+              expect(user.locale).to.equal('nl-BE');
+            });
+          });
+
+          context('when there is no locale cookie', function () {
+            it('update the user locale to default', async function () {
+              // given
+              const email = 'user_with_no_locale@example.net';
+              const password = 'some password';
+              const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
+              await databaseBuilder.commit();
+
+              const audience = 'https://app.pix.fr';
+              const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+              // when
+              await usecases.authenticateUser({ username: email, password, requestedApplication, audience });
+
+              // then
+              const user = await knex('users').where({ id: userId }).first();
+              expect(user.locale).to.equal('fr');
+            });
           });
         });
       });
-    });
 
-    describe('connection warning email', function () {
-      context('when user has connected beyond the connection warning period', function () {
-        context('when user has an email', function () {
-          it('sends a connection warning email', async function () {
+      describe('connection warning email', function () {
+        context('when user has connected beyond the connection warning period', function () {
+          context('when user has an email', function () {
+            it('sends a connection warning email', async function () {
+              // given
+              const email = 'user_last_connection_too_far@example.net';
+              const password = 'some password';
+              const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
+              databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date('1991-01-01') });
+              await databaseBuilder.commit();
+
+              const audience = 'https://app.pix.fr';
+              const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+              // when
+              await usecases.authenticateUser({ username: email, password, requestedApplication, audience });
+
+              // then
+              await expect('SendEmailJob').to.have.been.performed.withJobsCount(1);
+            });
+          });
+
+          context('when user has no email', function () {
+            it('does not send a connection warning email', async function () {
+              // given
+              const email = null;
+              const username = 'user_last_connection_too_far';
+              const password = 'some password';
+              const userId = databaseBuilder.factory.buildUser.withRawPassword({
+                email,
+                username,
+                rawPassword: password,
+              }).id;
+              databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date('1991-01-01') });
+              await databaseBuilder.commit();
+
+              const audience = 'https://app.pix.fr';
+              const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+              // when
+              await usecases.authenticateUser({ username, password, requestedApplication, audience });
+
+              // then
+              await expect('SendEmailJob').to.have.been.performed.withJobsCount(0);
+            });
+          });
+        });
+
+        context('when user has connected within the connection warning period', function () {
+          it('does not send a connection warning email', async function () {
             // given
-            const email = 'user_last_connection_too_far@example.net';
+            const email = 'user_last_connection_recent@example.net';
             const password = 'some password';
             const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
-            databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date('1991-01-01') });
+            databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date() });
             await databaseBuilder.commit();
 
             const audience = 'https://app.pix.fr';
@@ -195,162 +281,97 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
 
             // when
             await usecases.authenticateUser({ username: email, password, requestedApplication, audience });
-
-            // then
-            await expect('SendEmailJob').to.have.been.performed.withJobsCount(1);
-          });
-        });
-
-        context('when user has no email', function () {
-          it('does not send a connection warning email', async function () {
-            // given
-            const email = null;
-            const username = 'user_last_connection_too_far';
-            const password = 'some password';
-            const userId = databaseBuilder.factory.buildUser.withRawPassword({
-              email,
-              username,
-              rawPassword: password,
-            }).id;
-            databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date('1991-01-01') });
-            await databaseBuilder.commit();
-
-            const audience = 'https://app.pix.fr';
-            const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-            // when
-            await usecases.authenticateUser({ username, password, requestedApplication, audience });
 
             // then
             await expect('SendEmailJob').to.have.been.performed.withJobsCount(0);
           });
         });
       });
+    });
 
-      context('when user has connected within the connection warning period', function () {
-        it('does not send a connection warning email', async function () {
+    describe('error cases', function () {
+      context('when given username/email does not exist', function () {
+        it('throws a MissingOrInvalidCredentialsError', async function () {
           // given
-          const email = 'user_last_connection_recent@example.net';
+          const unknownUserEmail = 'unknown_user_email@example.net';
           const password = 'some password';
-          const userId = databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password }).id;
-          databaseBuilder.factory.buildUserLogin({ userId, lastLoggedAt: new Date() });
+          const audience = 'https://app.pix.fr';
+
+          // when & then
+          await expect(
+            usecases.authenticateUser({ username: unknownUserEmail, password, audience }),
+          ).to.be.rejectedWith(MissingOrInvalidCredentialsError);
+        });
+      });
+
+      context('when given password does not match', function () {
+        it('throws a MissingOrInvalidCredentialsError', async function () {
+          // given
+          const email = 'user_exists@example.net';
+          const password = 'some password';
+          databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
           await databaseBuilder.commit();
 
+          const wrongPassword = 'a wrong password';
           const audience = 'https://app.pix.fr';
+
+          // when & then
+          await expect(
+            usecases.authenticateUser({ username: email, password: wrongPassword, audience }),
+          ).to.be.rejectedWith(MissingOrInvalidCredentialsError);
+        });
+      });
+
+      context('when authentication from pix admin is disabled', function () {
+        beforeEach(function () {
+          config.authentication.permitPixAdminLoginFromPassword = false;
+        });
+
+        it('throws a PixAdmiLoginFromPasswordDisabledError', async function () {
+          // given
+          const email = 'user_exists@example.net';
+          const password = 'some password';
+          databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
+          await databaseBuilder.commit();
+
+          const audience = 'https://admin.pix.fr';
           const requestedApplication = RequestedApplication.fromOrigin(audience);
 
-          // when
-          await usecases.authenticateUser({ username: email, password, requestedApplication, audience });
-
-          // then
-          await expect('SendEmailJob').to.have.been.performed.withJobsCount(0);
-        });
-      });
-    });
-  });
-
-  describe('error cases', function () {
-    context('when given username/email does not exist', function () {
-      it('throws a MissingOrInvalidCredentialsError', async function () {
-        // given
-        const unknownUserEmail = 'unknown_user_email@example.net';
-        const password = 'some password';
-        const audience = 'https://app.pix.fr';
-
-        // when & then
-        await expect(usecases.authenticateUser({ username: unknownUserEmail, password, audience })).to.be.rejectedWith(
-          MissingOrInvalidCredentialsError,
-        );
-      });
-    });
-
-    context('when given password does not match', function () {
-      it('throws a MissingOrInvalidCredentialsError', async function () {
-        // given
-        const email = 'user_exists@example.net';
-        const password = 'some password';
-        databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
-        await databaseBuilder.commit();
-
-        const wrongPassword = 'a wrong password';
-        const audience = 'https://app.pix.fr';
-
-        // when & then
-        await expect(
-          usecases.authenticateUser({ username: email, password: wrongPassword, audience }),
-        ).to.be.rejectedWith(MissingOrInvalidCredentialsError);
-      });
-    });
-
-    context('when authentication from pix admin is disabled', function () {
-      beforeEach(function () {
-        config.authentication.permitPixAdminLoginFromPassword = false;
-      });
-
-      it('throws a PixAdmiLoginFromPasswordDisabledError', async function () {
-        // given
-        const email = 'user_exists@example.net';
-        const password = 'some password';
-        databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
-        await databaseBuilder.commit();
-
-        const audience = 'https://admin.pix.fr';
-        const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-        // when & then
-        await expect(
-          usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
-        ).to.be.rejectedWith(PixAdminLoginFromPasswordDisabledError);
-      });
-    });
-
-    describe('user access to applications', function () {
-      context('when requestedApplication is Pix Orga', function () {
-        context('when user is not linked to any organization', function () {
-          it('throws a ForbiddenAccess', async function () {
-            // given
-            const email = 'user_wants_to_go_to_orga@example.net';
-            const password = 'some password';
-            databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
-            await databaseBuilder.commit();
-
-            const audience = 'https://orga.pix.fr';
-            const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-            // when & then
-            await expect(
-              usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
-            ).to.be.rejectedWith(ForbiddenAccess);
-          });
+          // when & then
+          await expect(
+            usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
+          ).to.be.rejectedWith(PixAdminLoginFromPasswordDisabledError);
         });
       });
 
-      context('when requestedApplication is Pix Admin', function () {
-        context('when user has no admin member role', function () {
-          it('throws a ForbiddenAccess', async function () {
-            // given
-            const email = 'user_wants_to_go_to_admin@example.net';
-            const password = 'some password';
-            databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
-            await databaseBuilder.commit();
-
-            const audience = 'https://admin.pix.fr';
-            const requestedApplication = RequestedApplication.fromOrigin(audience);
-
-            // when & then
-            await expect(
-              usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
-            ).to.be.rejectedWith(ForbiddenAccess);
-          });
-        });
-
-        context('when user has an admin member role', function () {
-          context('when user admin member role is disabled', function () {
+      describe('user access to applications', function () {
+        context('when requestedApplication is Pix Orga', function () {
+          context('when user is not linked to any organization', function () {
             it('throws a ForbiddenAccess', async function () {
               // given
-              const email = 'user_is_admin_member_but_disabled@example.net';
+              const email = 'user_wants_to_go_to_orga@example.net';
               const password = 'some password';
-              databaseBuilder.factory.buildUser.withRole({ email, rawPassword: password, disabledAt: new Date() });
+              databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
+              await databaseBuilder.commit();
+
+              const audience = 'https://orga.pix.fr';
+              const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+              // when & then
+              await expect(
+                usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
+              ).to.be.rejectedWith(ForbiddenAccess);
+            });
+          });
+        });
+
+        context('when requestedApplication is Pix Admin', function () {
+          context('when user has no admin member role', function () {
+            it('throws a ForbiddenAccess', async function () {
+              // given
+              const email = 'user_wants_to_go_to_admin@example.net';
+              const password = 'some password';
+              databaseBuilder.factory.buildUser.withRawPassword({ email, rawPassword: password });
               await databaseBuilder.commit();
 
               const audience = 'https://admin.pix.fr';
@@ -360,6 +381,26 @@ describe('Integration | Identity Access Management | Domain | UseCase | authenti
               await expect(
                 usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
               ).to.be.rejectedWith(ForbiddenAccess);
+            });
+          });
+
+          context('when user has an admin member role', function () {
+            context('when user admin member role is disabled', function () {
+              it('throws a ForbiddenAccess', async function () {
+                // given
+                const email = 'user_is_admin_member_but_disabled@example.net';
+                const password = 'some password';
+                databaseBuilder.factory.buildUser.withRole({ email, rawPassword: password, disabledAt: new Date() });
+                await databaseBuilder.commit();
+
+                const audience = 'https://admin.pix.fr';
+                const requestedApplication = RequestedApplication.fromOrigin(audience);
+
+                // when & then
+                await expect(
+                  usecases.authenticateUser({ username: email, password, requestedApplication, audience }),
+                ).to.be.rejectedWith(ForbiddenAccess);
+              });
             });
           });
         });

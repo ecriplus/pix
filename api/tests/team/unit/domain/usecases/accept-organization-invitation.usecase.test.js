@@ -102,7 +102,7 @@ describe('Unit | Domain | UseCases | accept-organization-invitation', function (
           const { organizationInvitationId, code, email, locale } = createContext({
             organizationInvitedUserRepository,
             userRepository,
-            userLocale: 'fr-FR',
+            userLocale: 'fr-BE',
           });
 
           // when
