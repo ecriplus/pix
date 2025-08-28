@@ -9,14 +9,12 @@ import { databaseBuilder, domainBuilder, expect, hFake, HttpTestServer, sinon } 
 describe('Integration | Identity Access Management | Application | Controller | password', function () {
   describe('#createResetPasswordDemand', function () {
     const email = 'user@example.net';
-    const headers = {
-      'accept-language': 'fr',
-    };
+    const state = { locale: 'fr-FR' };
     const payload = { email };
 
     it('returns a 204 HTTP status code', async function () {
       // given
-      const request = { headers, payload };
+      const request = { state, payload };
 
       const userId = databaseBuilder.factory.buildUser({ email }).id;
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({ userId });
@@ -32,7 +30,7 @@ describe('Integration | Identity Access Management | Application | Controller | 
     context('when user account does not exist with given email', function () {
       it('returns a 204 HTTP status code', async function () {
         // given
-        const request = { headers, payload };
+        const request = { state, payload };
 
         // when
         const response = await passwordController.createResetPasswordDemand(request, hFake);

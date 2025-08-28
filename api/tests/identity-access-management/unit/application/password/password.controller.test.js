@@ -35,13 +35,11 @@ describe('Unit | Identity Access Management | Application | Controller | passwor
 
   describe('#createResetPasswordDemand', function () {
     const email = 'user@example.net';
-    const locale = 'fr';
+    const locale = 'fr-FR';
     const temporaryKey = 'ABCDEF123';
     const request = {
-      headers: {
-        'accept-language': locale,
-      },
       payload: { email },
+      state: { locale },
     };
     const resetPasswordDemand = {
       id: 1,
