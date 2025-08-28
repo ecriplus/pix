@@ -24,6 +24,8 @@ export default class ModulixStepper extends Component {
     return this.modulixPreviewMode.isEnabled ? this.displayableSteps : [firstDisplayableStep];
   }
 
+  @tracked displayedStepIndex = 0;
+
   @action
   hasStepJustAppeared(index) {
     return this.stepsToDisplay.length - 1 === index;
@@ -44,6 +46,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.args.onStepperNextStep(currentStepPosition);
+    this.displayedStepIndex = currentStepPosition;
   }
 
   get currentStepIndex() {
@@ -69,36 +72,86 @@ export default class ModulixStepper extends Component {
     return this.hasNextStep && this.allAnswerableElementsAreAnsweredInCurrentStep;
   }
 
+  get totalSteps() {
+    return this.displayableSteps.length;
+  }
+
+  get isHorizontalDirection() {
+    return this.args.direction === 'horizontal';
+  }
+
   <template>
     <div
       class="stepper stepper--{{@direction}}"
       aria-live="assertive"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
-      {{#if this.hasDisplayableSteps}}
-        {{#each this.stepsToDisplay as |step index|}}
-          <Step
-            @step={{step}}
-            @currentStep={{inc index}}
-            @totalSteps={{this.displayableSteps.length}}
-            @onElementAnswer={{@onElementAnswer}}
-            @onElementRetry={{@onElementRetry}}
-            @getLastCorrectionForElement={{@getLastCorrectionForElement}}
-            @hasJustAppeared={{this.hasStepJustAppeared index}}
-            @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
-            @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-            @onVideoPlay={{@onVideoPlay}}
-            @onFileDownload={{@onFileDownload}}
-            @onExpandToggle={{@onExpandToggle}}
-          />
-        {{/each}}
-        {{#if this.shouldDisplayNextButton}}
-          <PixButton
-            aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
-            @variant="primary"
-            @triggerAction={{this.displayNextStep}}
-            class="stepper__next-button"
-          >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+      {{#if this.isHorizontalDirection}}
+        <div class="stepper__control">
+          <p
+            aria-label="{{t
+              'pages.modulix.stepper.step.position'
+              currentStep=(inc this.displayedStepIndex)
+              totalSteps=this.totalSteps
+            }}"
+          >
+            {{inc this.displayedStepIndex}}/{{this.totalSteps}}
+          </p>
+        </div>
+        <div class="stepper__steps">
+          {{#if this.hasDisplayableSteps}}
+            {{#each this.stepsToDisplay as |step index|}}
+              <Step
+                @step={{step}}
+                @currentStep={{inc index}}
+                @totalSteps={{this.totalSteps}}
+                @onElementAnswer={{@onElementAnswer}}
+                @onElementRetry={{@onElementRetry}}
+                @getLastCorrectionForElement={{@getLastCorrectionForElement}}
+                @hasJustAppeared={{this.hasStepJustAppeared index}}
+                @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
+                @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
+                @onVideoPlay={{@onVideoPlay}}
+                @onFileDownload={{@onFileDownload}}
+                @onExpandToggle={{@onExpandToggle}}
+              />
+            {{/each}}
+            {{#if this.shouldDisplayNextButton}}
+              <PixButton
+                aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
+                @variant="primary"
+                @triggerAction={{this.displayNextStep}}
+                class="stepper__next-button"
+              >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+            {{/if}}
+          {{/if}}
+        </div>
+      {{else}}
+        {{#if this.hasDisplayableSteps}}
+          {{#each this.stepsToDisplay as |step index|}}
+            <Step
+              @step={{step}}
+              @currentStep={{inc index}}
+              @totalSteps={{this.totalSteps}}
+              @onElementAnswer={{@onElementAnswer}}
+              @onElementRetry={{@onElementRetry}}
+              @getLastCorrectionForElement={{@getLastCorrectionForElement}}
+              @hasJustAppeared={{this.hasStepJustAppeared index}}
+              @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
+              @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
+              @onVideoPlay={{@onVideoPlay}}
+              @onFileDownload={{@onFileDownload}}
+              @onExpandToggle={{@onExpandToggle}}
+            />
+          {{/each}}
+          {{#if this.shouldDisplayNextButton}}
+            <PixButton
+              aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
+              @variant="primary"
+              @triggerAction={{this.displayNextStep}}
+              class="stepper__next-button"
+            >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+          {{/if}}
         {{/if}}
       {{/if}}
     </div>
