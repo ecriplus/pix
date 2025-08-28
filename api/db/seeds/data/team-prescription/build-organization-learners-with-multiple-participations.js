@@ -17,6 +17,7 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     lastName: 'Terieur',
     userId: firstUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
 
   const { id: firstUserFirstCampaignParticipationId, createdAt } =
@@ -99,6 +100,7 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     lastName: 'Yoyo',
     userId: secondUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
   const { id: secondUserFirstCampaignParticipationId } = await databaseBuilder.factory.buildCampaignParticipation({
     campaignId: CAMPAIGN_PROASSMUL_ID,
@@ -156,6 +158,7 @@ async function _buildMultipleParticipationsForPROASSMULCampaign(databaseBuilder)
     lastName: 'Croche',
     userId: thirdUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
   const { id: thirdUserFirstCampaignParticipationId } = await databaseBuilder.factory.buildCampaignParticipation({
     campaignId: CAMPAIGN_PROASSMUL_ID,
@@ -215,6 +218,7 @@ async function _buildMultipleParticipationsForPROCOLMULCampaign(databaseBuilder)
     lastName: 'Sapin',
     userId: firstUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
 
   await databaseBuilder.factory.buildCampaignParticipation({
@@ -252,6 +256,7 @@ async function _buildMultipleParticipationsForPROCOLMULCampaign(databaseBuilder)
     lastName: 'Lopez',
     userId: secondUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
 
   await databaseBuilder.factory.buildCampaignParticipation({
@@ -289,6 +294,7 @@ async function _buildMultipleParticipationsForPROCOLMULCampaign(databaseBuilder)
     lastName: 'Quiroule',
     userId: thirdUser.id,
     organizationId: PRO_ORGANIZATION_ID,
+    division: null,
   });
 
   await databaseBuilder.factory.buildCampaignParticipation({
