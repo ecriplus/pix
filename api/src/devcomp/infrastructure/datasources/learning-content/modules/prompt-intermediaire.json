@@ -191,21 +191,21 @@
                           },
                           {
                             "direction": "inbound",
-                            "content": "Salut à tous, Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
+                            "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
                           }
                         ],
                         "prompts": [
                           {
                             "prompt": "adopte un ton festif",
-                            "response": "🎉 Hey la team ! Le tournoi de volley approche et il reste des places ! Viens smasher, rigoler et kiffer l'ambiance 🔥 Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! Surprises et bonne humeur garanties 🎊 On t'attend sur le terrain ! 💪"
+                            "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
                           },
                           {
                             "prompt": "adopte un ton sérieux",
-                            "response": "Madame, Monsieur, Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley. Nous espérons vivement votre participation. Merci de bien vouloir nous répondre avant vendredi. Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                            "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                           },
                           {
                             "prompt": "adopte un ton drôle",
-                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. Le soleil a sorti ses lunettes rien que pour toi. Les ballons murmurent ton prénom la nuit. Alors… tu viens ? 😇 👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
                           }
                         ]
                       }
@@ -342,7 +342,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.<br><br>À vous de jouer !</p>"
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
               }
             },
             {
@@ -350,11 +350,11 @@
               "element": {
                 "id": "1a04f4c4-2cc1-4898-ba5e-4c2ea788b764",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
                 "instruction": "À vous de jouer !",
-                "solution": "",
+                "solution": "pix-llm-success",
                 "height": 550
               }
             },
@@ -363,7 +363,7 @@
               "element": {
                 "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
                 "type": "text",
-                "content": "<p>\n</p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n</p><p></p><p></p><p></p><p></p>"
+                "content": "<p>\n</p><p></p><p></p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n<p></p><p></p><p></p><p></p><p></p>"
               }
             }
           ]
@@ -644,11 +644,11 @@
               "element": {
                 "id": "db74d65f-dcbf-493d-aeb9-818e0f5f13a8",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "Simulateur de LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
                 "instruction": "<p>Discutez avec l’IA de Pix jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>",
-                "solution": "Pix",
+                "solution": "pix-llm-success",
                 "height": 800
               }
             },
@@ -752,11 +752,11 @@
               "element": {
                 "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
                 "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire, à vous de jouer !</p>",
-                "solution": "",
+                "solution": "pix-llm-success",
                 "height": 800
               }
             },
@@ -765,7 +765,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details><p></p><p></p><p></p>"
               }
             }
           ]
