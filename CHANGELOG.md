@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.193.0](https://github.com/1024pix/pix/compare/v5.192.0...v5.193.0) (2025-08-28)
+
+### :rocket: Amélioration
+
+- [#13330](https://github.com/1024pix/pix/pull/13330) Affiche un bloc de formation dans les parcours combiné quand il y a une campagne de diagnostique (PIX-18909) 
+- [#13321](https://github.com/1024pix/pix/pull/13321) Ajout d’un test d’autovalidation dans le module demo-llm 
+- [#13307](https://github.com/1024pix/pix/pull/13307) Ajouter des champs à l'API Maddo (PIX-19247). 
+- [#13319](https://github.com/1024pix/pix/pull/13319) Ajouter les titres de section dans le passage de module (PIX-19231) 
+- [#13316](https://github.com/1024pix/pix/pull/13316) Améliorer le wording EN sur la page statistiques, analyse de campagne (PIX-18975) 
+- [#13288](https://github.com/1024pix/pix/pull/13288) Écrire la locale dans users.locale, à la connexion d'un utilisateur (PIX-19079) 
+- [#13326](https://github.com/1024pix/pix/pull/13326) Update controle-parental.json 
+
+### :bug: Correction
+
+- [#13313](https://github.com/1024pix/pix/pull/13313) Corriger l'affichage sur la page de changement d'email (PIX-14089) 
+- [#13318](https://github.com/1024pix/pix/pull/13318) Corriger UrlBaseService.pixAppForgottenPasswordUrl (PIX-19264) 
+- [#13312](https://github.com/1024pix/pix/pull/13312) Empêcher l'accès au language switch depuis le compte sur domaine fr (PIX-7933) 
+
+### :building_construction: Tech
+
+- [#13233](https://github.com/1024pix/pix/pull/13233) :card_file_box: Ajoute une structure de donnée  pour accueillir les anciennes calibrations 
+- [#13322](https://github.com/1024pix/pix/pull/13322) Récupérer les challenges actifs pour la création des référentiels cadres (PIX -19274) 
+- [#13264](https://github.com/1024pix/pix/pull/13264) Suppression du scoring (completed) et du getNextChallenge en V2 (PIX-19199). 
+- [#13311](https://github.com/1024pix/pix/pull/13311) Supprimer decodeIfValid du token-service
+
 # [5.192.0](https://github.com/1024pix/pix/compare/v5.191.0...v5.192.0) (2025-08-27)
 
 ### :rocket: Amélioration
