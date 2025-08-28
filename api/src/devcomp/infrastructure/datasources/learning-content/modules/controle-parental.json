@@ -129,7 +129,7 @@
                     {
                       "id": "2b0cfa3f-700e-4ab4-b8bd-613aa91c89d1",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Tim, 9 ans, utilise une tablette pour regarder des vidéos. Son parent remarque qu’il est parfois redirigé vers des vidéos inappropriées.&nbsp;😨</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
+                      "instruction": "<p>Tim, 13 ans, utilise une tablette pour regarder des vidéos. Son parent remarque qu’il est parfois redirigé vers des vidéos inappropriées.&nbsp;😨</p><p><br>À votre avis, un outil de contrôle parental est-il une solution adaptée ?&nbsp;</p>",
                       "proposals": [
                         {
                           "id": "1",
