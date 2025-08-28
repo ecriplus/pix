@@ -1,4 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
+// eslint-disable-next-line no-restricted-imports
+import { find } from '@ember/test-helpers';
 import ModulixStep from 'mon-pix/components/module/component/step';
 import { module, test } from 'qunit';
 
@@ -54,6 +56,35 @@ module('Integration | Component | Module | Step', function (hooks) {
 
       // then
       assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).exists();
+    });
+
+    module('when hasJustAppeared attribute is false', function () {
+      test('should disabled all interactions in the step', async function (assert) {
+        // given
+        const element = {
+          id: 'd0690f26-978c-41c3-9a21-da931857739c',
+          content: '<button type="button">Mon bouton</button>',
+          type: 'text',
+        };
+        const step = {
+          elements: [element],
+        };
+        const getLastCorrectionForElementStub = () => {};
+
+        // when
+        await render(
+          <template>
+            <ModulixStep
+              @hasJustAppeared={{false}}
+              @step={{step}}
+              @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
+            />
+          </template>,
+        );
+
+        // then
+        assert.dom(find('.stepper__step[inert]')).exists();
+      });
     });
   });
 

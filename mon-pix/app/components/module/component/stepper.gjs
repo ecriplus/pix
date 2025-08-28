@@ -26,10 +26,6 @@ export default class ModulixStepper extends Component {
 
   @action
   hasStepJustAppeared(index) {
-    if (this.stepsToDisplay.length === 1) {
-      return false;
-    }
-
     return this.stepsToDisplay.length - 1 === index;
   }
 
@@ -75,7 +71,7 @@ export default class ModulixStepper extends Component {
 
   <template>
     <div
-      class="stepper"
+      class="stepper stepper--{{@direction}}"
       aria-live="assertive"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >

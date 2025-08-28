@@ -30,6 +30,150 @@
               }
             }
           ]
+        },
+        {
+          "id": "533c69b8-a836-41be-8ffc-8d4636e31224",
+          "type": "activity",
+          "title": "Voici un vrai-faux",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "71de6394-ff88-4de3-8834-a40057a50ff4",
+                      "type": "qcu",
+                      "instruction": "<p>Pix évalue 16 compétences numériques différentes.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vrai",
+                          "feedback": {
+                            "state": "Correct&#8239;!",
+                            "diagnosis": "<p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Faux",
+                          "feedback": {
+                            "state": "Incorrect.",
+                            "diagnosis": "<p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "79dc17f9-142b-4e19-bcbe-bfde4e170d3f",
+                      "type": "qcu",
+                      "instruction": "<p>Pix est découpé en 6 domaines.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vrai",
+                          "feedback": {
+                            "state": "Incorrect.",
+                            "diagnosis": "<p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Faux",
+                          "feedback": {
+                            "state": "Correct&#8239;!",
+                            "diagnosis": "<p> Bien vu !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "9c73500d-abd9-4cc4-ab2d-a3876285b13c",
+                      "type": "qcu",
+                      "instruction": "<p>Les compétences de Pix sont sur 8 niveaux.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vrai",
+                          "feedback": {
+                            "state": "Correct&#8239;!",
+                            "diagnosis": "<p> Et oui ! A noter, seulement 7 sont actifs aujourd’hui.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Faux",
+                          "feedback": {
+                            "state": "Incorrect.",
+                            "diagnosis": "<p> Incorrect ! Il existe 8 niveaux par compétence.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1dc50ca6-355c-4d7f-941b-608788faa4db",
+          "type": "lesson",
+          "title": "Exemple de stepper leçon",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "868a2c39-d70b-45ba-847d-76d11a83a6fd",
+                      "type": "text",
+                      "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui fait analyser des milliards de textes variés. 📚</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3875f579-e152-4309-a630-cd91196381f5",
+                      "type": "text",
+                      "content": "<p>L’IA générative s’entraîne à masquer puis&nbsp;deviner&nbsp;des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore&nbsp;: elle apprend quels mots apparaissent&nbsp;souvent&nbsp;ensemble. 🐈 🐁</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7b58e24b-b751-4000-b3b6-554e548b9dd9",
+                      "type": "text",
+                      "content": "<p>Ainsi à partir d'un début de phrase, l'IA générative&nbsp;prédit le mot suivant&nbsp;📝.<br>Puis elle recommence depuis le début de la phrase pour trouver le mot qui suit.<br>Et ... elle recommence encore et encore ! 🔁</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "1687e720-8346-4821-b60a-79937bdda1cb",
+                      "type": "text",
+                      "content": "<p>À la fin de cette étape, l'IA générative est capable de prolonger ou compléter des débuts de texte. 😮</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -671,102 +815,6 @@
                 "type": "text",
                 "content": "<p>Vous allez faire votre première activité. Les activités servent à vérifier que vous avez compris l'essentiel des leçons.<br>Dans les activités Modulix, vous avez votre résultat immédiatement. À vous de jouer&nbsp;<span aria-hidden=\"true\">🚀</span></p>"
               }
-            }
-          ]
-        },
-        {
-          "id": "533c69b8-a836-41be-8ffc-8d4636e31224",
-          "type": "activity",
-          "title": "Voici un vrai-faux",
-          "components": [
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "71de6394-ff88-4de3-8834-a40057a50ff4",
-                      "type": "qcu",
-                      "instruction": "<p>Pix évalue 16 compétences numériques différentes.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai",
-                          "feedback": {
-                            "state": "Correct&#8239;!",
-                            "diagnosis": "<p> Ces 16 compétences sont rangées dans 5 domaines.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux",
-                          "feedback": {
-                            "state": "Incorrect.",
-                            "diagnosis": "<p> Retourner voir la vidéo si besoin&nbsp;<span aria-hidden=\"true\">👆</span>!</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "79dc17f9-142b-4e19-bcbe-bfde4e170d3f",
-                      "type": "qcu",
-                      "instruction": "<p>Pix est découpé en 6 domaines.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai",
-                          "feedback": {
-                            "state": "Incorrect.",
-                            "diagnosis": "<p> Et non ! Il y a seulement 5 domaines sur Pix.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux",
-                          "feedback": {
-                            "state": "Correct&#8239;!",
-                            "diagnosis": "<p> Bien vu !</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "9c73500d-abd9-4cc4-ab2d-a3876285b13c",
-                      "type": "qcu",
-                      "instruction": "<p>Les compétences de Pix sont sur 8 niveaux.</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai",
-                          "feedback": {
-                            "state": "Correct&#8239;!",
-                            "diagnosis": "<p> Et oui ! A noter, seulement 7 sont actifs aujourd’hui.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux",
-                          "feedback": {
-                            "state": "Incorrect.",
-                            "diagnosis": "<p> Incorrect ! Il existe 8 niveaux par compétence.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },

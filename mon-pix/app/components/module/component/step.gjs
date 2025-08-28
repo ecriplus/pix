@@ -18,6 +18,10 @@ export default class ModulixStep extends Component {
     return this.displayableElements.length > 0;
   }
 
+  get isLastStep() {
+    return this.args.currentStep === this.args.totalSteps;
+  }
+
   @action
   focusAndScroll(htmlElement) {
     if (!this.args.hasJustAppeared) {
@@ -29,12 +33,16 @@ export default class ModulixStep extends Component {
 
   <template>
     {{#if this.hasDisplayableElements}}
-      <section class="stepper__step" tabindex="-1" {{didInsert this.focusAndScroll}}>
-        <h3
-          class="stepper__step__position"
-          aria-label="{{t 'pages.modulix.stepper.step.position' currentStep=@currentStep totalSteps=@totalSteps}}"
-        >
-          {{@currentStep}}/{{@totalSteps}}
+      <section
+        class="stepper__step
+          {{if @hasJustAppeared 'stepper-step__active'}}
+          {{if this.isLastStep 'stepper-step--last-step'}}"
+        tabindex="-1"
+        {{didInsert this.focusAndScroll}}
+        inert={{unless @hasJustAppeared true}}
+      >
+        <h3 class="stepper__step__position screen-reader-only">
+          {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}
         </h3>
         {{#each this.displayableElements as |element|}}
           <div class="grain-card-content__element">
