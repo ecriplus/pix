@@ -146,6 +146,36 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       });
     });
 
+    it('should fallback to the message if the translation is not found with special chars', async function () {
+      // given
+      const request = {
+        headers: {
+          'accept-language': 'en',
+        },
+      };
+      const error = new EntityValidationError({
+        invalidAttributes: [{ attribute: 'name', message: 'special-:{%}/_chars' }],
+      });
+
+      // when
+      const response = await handle(request, hFake, error);
+
+      // then
+      expect(response.statusCode).to.equal(422);
+      expect(response.source).to.deep.equal({
+        errors: [
+          {
+            detail: 'special-:{%}/_chars',
+            source: {
+              pointer: '/data/attributes/name',
+            },
+            status: '422',
+            title: 'Invalid data attribute "name"',
+          },
+        ],
+      });
+    });
+
     it('should translate EntityValidationError even if invalidAttributes is undefined', async function () {
       // given
       const request = {

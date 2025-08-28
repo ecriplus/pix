@@ -25,7 +25,6 @@ async function getAttendanceSheetPdfBuffer({
   session,
   i18n,
 } = {}) {
-  const translate = i18n.__;
   const lang = i18n.getLocale();
 
   const templatePath = `${dirname}/files/attendance-sheet.pdf`;
@@ -55,22 +54,22 @@ async function getAttendanceSheetPdfBuffer({
     page.drawPage(templatePage);
     const pagesCount = certificationCandidatesSplitByPage.length;
 
-    _drawHeaderLabels({ page, titleFont, pageInformationFont, translate });
+    _drawHeaderLabels({ page, titleFont, pageInformationFont, i18n });
     _drawCertificationInformationLabels({
       page,
       titleFont,
       sessionLabelsAndCandidatesInformationFont,
-      translate,
+      i18n,
       lang,
     });
-    _drawExaminerSectionLabels({ page, titleFont, sessionLabelsAndCandidatesInformationFont, translate });
+    _drawExaminerSectionLabels({ page, titleFont, sessionLabelsAndCandidatesInformationFont, i18n });
     _drawCandidatesTableLabels({
       page,
       session,
       titleFont,
       sessionLabelsAndCandidatesInformationFont,
       tableLabelsFont,
-      translate,
+      i18n,
       lang,
     });
 
@@ -105,7 +104,7 @@ async function getAttendanceSheetPdfBuffer({
 
   const pdfBytes = await pdfDoc.save();
 
-  const fileName = `${translate('attendance-sheet.file-name')}${session.id}.pdf`;
+  const fileName = `${i18n.__('attendance-sheet.file-name')}${session.id}.pdf`;
   const attendanceSheet = Buffer.from(pdfBytes);
 
   return { fileName, attendanceSheet };
@@ -116,9 +115,9 @@ async function _embedFontIntoPdf({ pdfDoc, dirname, font }) {
   return pdfDoc.embedFont(fontFile, { subset: true });
 }
 
-function _drawHeaderLabels({ page, titleFont, pageInformationFont, translate }) {
-  const pageLabel = translate('attendance-sheet.header.page');
-  const titleLabel = translate('attendance-sheet.header.title');
+function _drawHeaderLabels({ page, titleFont, pageInformationFont, i18n }) {
+  const pageLabel = i18n.__('attendance-sheet.header.page');
+  const titleLabel = i18n.__('attendance-sheet.header.title');
   [
     [42, 807, pageLabel, SESSION_DETAIL_FONT_SIZE, pageInformationFont],
     [42, 784, titleLabel, 24, titleFont],
@@ -137,15 +136,15 @@ function _drawCertificationInformationLabels({
   page,
   titleFont,
   sessionLabelsAndCandidatesInformationFont,
-  translate,
+  i18n,
   lang,
 }) {
-  const certificationSessionLabel = translate('attendance-sheet.certification-information.session');
-  const numberLabel = translate('attendance-sheet.certification-information.number');
-  const dateLabel = translate('attendance-sheet.certification-information.date');
-  const localTimeLabel = translate('attendance-sheet.certification-information.local-time');
-  const locationNameLabel = translate('attendance-sheet.certification-information.location-name');
-  const roomNameLabel = translate('attendance-sheet.certification-information.room-name');
+  const certificationSessionLabel = i18n.__('attendance-sheet.certification-information.session');
+  const numberLabel = i18n.__('attendance-sheet.certification-information.number');
+  const dateLabel = i18n.__('attendance-sheet.certification-information.date');
+  const localTimeLabel = i18n.__('attendance-sheet.certification-information.local-time');
+  const locationNameLabel = i18n.__('attendance-sheet.certification-information.location-name');
+  const roomNameLabel = i18n.__('attendance-sheet.certification-information.room-name');
 
   const labels = [
     [
@@ -191,10 +190,10 @@ function _drawCertificationInformationLabels({
   );
 }
 
-function _drawExaminerSectionLabels({ page, titleFont, sessionLabelsAndCandidatesInformationFont, translate }) {
-  const titleLabel = translate('attendance-sheet.examiner-information.title');
-  const invigilatedByLabel = translate('attendance-sheet.examiner-information.invigilated-by');
-  const signatureLabel = translate('attendance-sheet.examiner-information.signature');
+function _drawExaminerSectionLabels({ page, titleFont, sessionLabelsAndCandidatesInformationFont, i18n }) {
+  const titleLabel = i18n.__('attendance-sheet.examiner-information.title');
+  const invigilatedByLabel = i18n.__('attendance-sheet.examiner-information.invigilated-by');
+  const signatureLabel = i18n.__('attendance-sheet.examiner-information.signature');
 
   [
     [356, 739, titleLabel, 9, titleFont],
@@ -217,16 +216,16 @@ function _drawCandidatesTableLabels({
   titleFont,
   sessionLabelsAndCandidatesInformationFont,
   tableLabelsFont,
-  translate,
+  i18n,
   lang,
 }) {
   const divisionOrExternalIdLabel = session.isSco
-    ? translate('attendance-sheet.table.division')
-    : translate('attendance-sheet.table.external-id');
-  const titleLabel = translate('attendance-sheet.table.title');
-  const birthNameLabel = translate('attendance-sheet.table.birth-name');
-  const firstNameLabel = translate('attendance-sheet.table.first-name');
-  const signatureLabel = translate('attendance-sheet.table.signature');
+    ? i18n.__('attendance-sheet.table.division')
+    : i18n.__('attendance-sheet.table.external-id');
+  const titleLabel = i18n.__('attendance-sheet.table.title');
+  const birthNameLabel = i18n.__('attendance-sheet.table.birth-name');
+  const firstNameLabel = i18n.__('attendance-sheet.table.first-name');
+  const signatureLabel = i18n.__('attendance-sheet.table.signature');
 
   [
     [26, 660, titleLabel, 12, titleFont],
@@ -244,12 +243,12 @@ function _drawCandidatesTableLabels({
     });
   });
 
-  _drawDateOfBirthLabel({ page, tableLabelsFont, sessionLabelsAndCandidatesInformationFont, translate, lang });
+  _drawDateOfBirthLabel({ page, tableLabelsFont, sessionLabelsAndCandidatesInformationFont, i18n, lang });
 }
 
-function _drawDateOfBirthLabel({ page, tableLabelsFont, sessionLabelsAndCandidatesInformationFont, translate, lang }) {
-  const dateOfBirthExampleLabel = translate('attendance-sheet.table.date-of-birth.example');
-  const dateOfBirthLabel = translate('attendance-sheet.table.date-of-birth.label');
+function _drawDateOfBirthLabel({ page, tableLabelsFont, sessionLabelsAndCandidatesInformationFont, i18n, lang }) {
+  const dateOfBirthExampleLabel = i18n.__('attendance-sheet.table.date-of-birth.example');
+  const dateOfBirthLabel = i18n.__('attendance-sheet.table.date-of-birth.label');
 
   const dateParts = _getDateOfBirthPartsByLang({
     lang,

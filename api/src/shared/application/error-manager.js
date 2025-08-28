@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as translations from '../../../translations/index.js';
 import { AdminMemberError } from '../../authorization/domain/errors.js';
 import { ChallengeAlreadyAnsweredError } from '../../certification/evaluation/domain/errors.js';
 import { CertificateGenerationError } from '../../certification/results/domain/errors.js';
@@ -22,6 +21,7 @@ import {
 } from '../../team/domain/errors.js';
 import * as SharedDomainErrors from '../domain/errors.js';
 import { getBaseLocale } from '../domain/services/locale-service.js';
+import { getI18n } from '../infrastructure/i18n/i18n.js';
 import { getChallengeLocale } from '../infrastructure/utils/request-response-utils.js';
 import { domainErrorMapper } from './domain-error-mapper.js';
 import { HttpErrors } from './http-errors.js';
@@ -29,10 +29,17 @@ import { HttpErrors } from './http-errors.js';
 const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];
 
 function translateMessage(locale, key) {
-  if (translations[locale]['entity-validation-errors'][key]) {
-    return translations[locale]['entity-validation-errors'][key];
-  }
-  return key;
+  const i18n = getI18n(locale);
+  if (!key) return key;
+
+  // use regexp to remove i18n key special chars from key
+  const i18nKey = `entity-validation-errors.${key}`.replace(/[:{}%]/g, '');
+  const translation = i18n.__(i18nKey);
+
+  // when the i18n key is returned, so the translation does not exist
+  if (translation === i18nKey) return key;
+
+  return translation;
 }
 
 function _formatUndefinedAttribute({ message, locale, meta }) {
