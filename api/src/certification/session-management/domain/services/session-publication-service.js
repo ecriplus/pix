@@ -78,7 +78,6 @@ async function manageEmails({
   const prescribersEmailingAttempts = await _managerPrescriberEmails({
     session,
     mailService: dependencies.mailService,
-    i18n,
   });
 
   if (_someHaveSucceeded(prescribersEmailingAttempts) && _noneHaveFailed(prescribersEmailingAttempts)) {
@@ -135,7 +134,7 @@ async function _manageCleaEmails({ session, certificationCenterRepository, sessi
  * @param {Object} params
  * @param {MailService} params.mailService
  */
-async function _managerPrescriberEmails({ session, mailService, i18n }) {
+async function _managerPrescriberEmails({ session, mailService }) {
   const recipientEmails = _distinctCandidatesResultRecipientEmails(session.certificationCandidates);
 
   const emailingAttempts = [];
@@ -147,7 +146,6 @@ async function _managerPrescriberEmails({ session, mailService, i18n }) {
       certificationCenterName: session.certificationCenter,
       resultRecipientEmail: recipientEmail,
       daysBeforeExpiration: 30,
-      translate: i18n.__,
     });
     emailingAttempts.push(emailingAttempt);
   }

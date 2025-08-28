@@ -502,7 +502,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           certificationCenterName: 'certificationCenter',
           sessionDate: originalSession.date,
           email: 'email1@example.net',
-          translate: i18n.__,
         });
         expect(mailService.sendCertificationResultEmail).to.have.been.calledWithExactly({
           sessionId,
@@ -511,7 +510,6 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           certificationCenterName: 'certificationCenter',
           sessionDate: originalSession.date,
           email: 'email2@example.net',
-          translate: i18n.__,
         });
         expect(sessionRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
         expect(error).to.be.an.instanceOf(SendingEmailToResultRecipientError);
