@@ -14,7 +14,7 @@ export async function findIdsByTagNames(tagNames) {
 
 export async function findByIds(organizationIds) {
   const rawOrganizations = await knex
-    .select('id', 'name')
+    .select('id', 'name', 'externalId')
     .from('organizations')
     .whereIn('id', organizationIds)
     .orderBy('id');

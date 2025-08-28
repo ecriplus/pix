@@ -15,6 +15,8 @@ function toDomain(rawCampaignParticipation, clientId, campaignId) {
   return new CampaignParticipation({
     id: rawCampaignParticipation.campaignParticipationId,
     status: rawCampaignParticipation.status,
+    participantFirstName: rawCampaignParticipation.participantFirstName,
+    participantLastName: rawCampaignParticipation.participantLastName,
     participantExternalId: rawCampaignParticipation.participantExternalId,
     createdAt: rawCampaignParticipation.createdAt,
     sharedAt: rawCampaignParticipation.sharedAt,

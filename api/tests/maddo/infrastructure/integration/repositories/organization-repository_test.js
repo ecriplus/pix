@@ -43,8 +43,8 @@ describe('Maddo | Infrastructure | Repositories | Integration | organization', f
   describe('#findByIds', function () {
     it('find organizations for given ids', async function () {
       //given
-      const organization1 = databaseBuilder.factory.buildOrganization();
-      const organization2 = databaseBuilder.factory.buildOrganization();
+      const organization1 = databaseBuilder.factory.buildOrganization({ externalId: 'external-id1' });
+      const organization2 = databaseBuilder.factory.buildOrganization({ externalId: 'external-id2' });
       databaseBuilder.factory.buildOrganization();
       await databaseBuilder.commit();
 
@@ -53,10 +53,11 @@ describe('Maddo | Infrastructure | Repositories | Integration | organization', f
 
       //then
       expect(organizations).to.deep.equal([
-        new Organization({ id: organization1.id, name: organization1.name }),
+        new Organization({ id: organization1.id, name: organization1.name, externalId: 'external-id1' }),
         new Organization({
           id: organization2.id,
           name: organization2.name,
+          externalId: 'external-id2',
         }),
       ]);
     });
