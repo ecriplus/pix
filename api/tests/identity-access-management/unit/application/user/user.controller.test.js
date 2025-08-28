@@ -365,6 +365,27 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
     });
   });
 
+  describe('#selfDeleteUserAccount', function () {
+    it('calls the usecase to delete user account', async function () {
+      // given
+      sinon.stub(usecases, 'selfDeleteUserAccount');
+      usecases.selfDeleteUserAccount.resolves();
+      const userId = 1;
+      const locale = 'fr-FR';
+
+      const request = {
+        state: { locale },
+        auth: { credentials: { userId } },
+      };
+
+      // when
+      await userController.selfDeleteUserAccount(request, hFake);
+
+      // then
+      expect(usecases.selfDeleteUserAccount).to.have.been.calledWithExactly({ locale, userId });
+    });
+  });
+
   describe('#sendVerificationCode', function () {
     it('calls the usecase to send verification code with code, email and locale', async function () {
       // given

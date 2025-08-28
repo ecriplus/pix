@@ -206,7 +206,7 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
 
 const selfDeleteUserAccount = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const locale = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
 
   await usecases.selfDeleteUserAccount({ userId: authenticatedUserId, locale });
 
