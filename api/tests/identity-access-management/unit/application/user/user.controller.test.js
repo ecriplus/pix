@@ -378,7 +378,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       const request = {
         state: { locale },
         auth: { credentials: { userId } },
-        params: { id: userId },
         payload: {
           data: {
             type: 'users',

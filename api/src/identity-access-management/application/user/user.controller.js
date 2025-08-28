@@ -216,7 +216,7 @@ const selfDeleteUserAccount = async function (request, h) {
 const sendVerificationCode = async function (request, h, dependencies = { emailVerificationSerializer }) {
   const locale = getUserLocale(request);
 
-  const userId = request.params.id;
+  const userId = request.auth.credentials.userId;
   const { newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
 
   await usecases.sendVerificationCode({ locale, newEmail, password, userId });
