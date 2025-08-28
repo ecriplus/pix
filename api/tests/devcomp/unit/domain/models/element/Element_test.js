@@ -1,4 +1,5 @@
 import { Image } from '../../../../../../src/devcomp/domain/models/element/Image.js';
+import { QCM } from '../../../../../../src/devcomp/domain/models/element/QCM.js';
 import { QCU } from '../../../../../../src/devcomp/domain/models/element/QCU.js';
 import { QROCM } from '../../../../../../src/devcomp/domain/models/element/QROCM.js';
 import { Text } from '../../../../../../src/devcomp/domain/models/element/Text.js';
@@ -16,6 +17,16 @@ describe('Unit | Devcomp | Domain | Models | Element', function () {
         solution: 'proposal1',
       });
 
+      const qcmProposal1 = Symbol('proposal1');
+      const qcm = new QCM({
+        id: '1',
+        instruction: '',
+        locales: ['fr-FR'],
+        proposals: [{ id: qcmProposal1 }],
+        feedbacks: { valid: '', invalid: '' },
+        solutions: [qcmProposal1],
+      });
+
       const qrocm = new QROCM({
         id: '1',
         instruction: '',
@@ -23,7 +34,7 @@ describe('Unit | Devcomp | Domain | Models | Element', function () {
         proposals: [Symbol('block')],
       });
 
-      const answerableElements = [qcu, qrocm];
+      const answerableElements = [qcu, qcm, qrocm];
 
       // Then
       answerableElements.forEach((element) => expect(element.isAnswerable).to.be.true);

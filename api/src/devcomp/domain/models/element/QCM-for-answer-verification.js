@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
-import { Feedbacks } from '../Feedbacks.js';
 import { QcmCorrectionResponse } from '../QcmCorrectionResponse.js';
 import { ValidatorQCM } from '../validator/ValidatorQCM.js';
 import { QCM } from './QCM.js';
@@ -10,18 +9,14 @@ import { QCM } from './QCM.js';
 class QCMForAnswerVerification extends QCM {
   userResponse;
 
-  constructor({ id, instruction, locales, proposals, solutions, feedbacks, validator }) {
-    super({ id, instruction, locales, proposals });
+  constructor({ id, instruction, locales, proposals, feedbacks, solutions, validator }) {
+    super({ id, instruction, locales, proposals, feedbacks, solutions });
 
     assertNotNullOrUndefined(solutions, 'The solutions are required for a QCM for verification');
 
     this.solution = {
       value: solutions,
     };
-
-    if (feedbacks) {
-      this.feedbacks = new Feedbacks(feedbacks);
-    }
 
     if (validator) {
       this.validator = validator;

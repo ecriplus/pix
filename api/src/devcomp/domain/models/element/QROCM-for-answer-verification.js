@@ -10,8 +10,8 @@ import { QROCM } from './QROCM.js';
 class QROCMForAnswerVerification extends QROCM {
   userResponse;
 
-  constructor({ id, instruction, feedbacks, proposals, locales, validator }) {
-    super({ id, instruction, proposals, locales });
+  constructor({ id, instruction, locales, proposals, feedbacks, validator }) {
+    super({ id, instruction, locales, proposals, feedbacks });
 
     assertNotNullOrUndefined(feedbacks, 'The feedbacks are required for a verification QROCM.');
 

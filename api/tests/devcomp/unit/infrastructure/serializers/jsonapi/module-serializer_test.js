@@ -363,7 +363,6 @@ function getComponents() {
           },
         ],
         instruction: 'question declarative',
-        isAnswerable: true,
       }),
     }),
     new ComponentElement({
@@ -375,6 +374,8 @@ function getComponents() {
           { id: '3', content: 'titi' },
         ],
         instruction: 'hello',
+        feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
+        solutions: ['1', '2'],
       }),
     }),
     new ComponentElement({
@@ -406,6 +407,7 @@ function getComponents() {
         title: 'title',
         url: 'https://assets.pix.org/modules/mavideo.mp4',
         subtitles: 'https://assets.pix.org/modules/mavideo.vtt',
+        poster: 'https://assets.pix.org/modules/mavideo.jpg',
         transcription: 'transcription',
       }),
     }),
@@ -572,6 +574,8 @@ function getAttributesComponents() {
             id: '3',
           },
         ],
+        feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
+        solutions: ['1', '2'],
         type: 'qcm',
       },
     },
@@ -610,7 +614,7 @@ function getAttributesComponents() {
       element: {
         id: '4',
         isAnswerable: false,
-        poster: null,
+        poster: 'https://assets.pix.org/modules/mavideo.jpg',
         subtitles: 'https://assets.pix.org/modules/mavideo.vtt',
         title: 'title',
         transcription: 'transcription',
