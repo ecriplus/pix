@@ -5,7 +5,6 @@ import {
   InvalidPasswordForUpdateEmailError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../../../src/shared/domain/errors.js';
-import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | send-verification-code', function () {
@@ -47,7 +46,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | send-verificati
     const password = 'pix123';
     const passwordHash = 'ABCD';
     const locale = 'fr';
-    const i18n = getI18n();
 
     userRepository.get.withArgs(userId).resolves({ email: 'oldEmail@example.net' });
     userRepository.checkIfEmailIsAvailable.withArgs(newEmail).resolves(newEmail);
@@ -66,7 +64,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | send-verificati
 
     // when
     await usecases.sendVerificationCode({
-      i18n,
       locale,
       newEmail,
       password,
@@ -91,8 +88,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | send-verificati
     const passwordHash = 'ABCD';
     const code = '999999';
     const locale = 'fr';
-    const i18n = getI18n();
-    const translate = i18n.__;
 
     userRepository.get.withArgs(userId).resolves({ email: 'oldEmail@example.net' });
     userRepository.checkIfEmailIsAvailable.withArgs(newEmail).resolves(newEmail);
@@ -111,7 +106,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | send-verificati
 
     // when
     await usecases.sendVerificationCode({
-      i18n,
       locale,
       newEmail,
       password,
@@ -129,7 +123,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | send-verificati
       code,
       locale,
       email: newEmail,
-      translate,
     });
   });
 

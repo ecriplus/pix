@@ -8,15 +8,7 @@ import {
 import * as mailService from '../../../../../src/shared/domain/services/mail-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { mailer } from '../../../../../src/shared/mail/infrastructure/services/mailer.js';
-import en from '../../../../../translations/en.json' with { type: 'json' };
-import fr from '../../../../../translations/fr.json' with { type: 'json' };
-import { es } from '../../../../../translations/index.js';
-import nl from '../../../../../translations/nl.json' with { type: 'json' };
 import { expect, sinon } from '../../../../test-helper.js';
-
-const mainTranslationsMapping = { fr, en, nl, es };
-
-const i18n = getI18n();
 
 describe('Unit | Service | MailService', function () {
   const senderEmailAddress = 'ne-pas-repondre@pix.fr';
@@ -102,98 +94,150 @@ describe('Unit | Service | MailService', function () {
     context('according to locale', function () {
       context('should call sendEmail with localized variable options', function () {
         it(`when locale is ${FRENCH_SPOKEN}`, async function () {
+          // given
+          const locale = FRENCH_SPOKEN;
+          const i18n = getI18n(locale);
+
           // when
           await mailService.sendOrganizationInvitationEmail({
             email: userEmailAddress,
             organizationName,
             organizationInvitationId,
             code,
-            locale: FRENCH_SPOKEN,
+            locale,
           });
 
           // then
           const options = mailer.sendEmail.firstCall.args[0];
           expect(options.fromName).to.equal('Pix Orga - Ne pas répondre');
-          expect(options.subject).to.equal(mainTranslationsMapping.fr['organization-invitation-email'].subject);
+          expect(options.subject).to.equal(i18n.__('organization-invitation-email.subject'));
           expect(options.variables).to.include({
             pixHomeName: 'pix.org',
             pixHomeUrl: 'https://pix.org/fr',
             pixOrgaHomeUrl: 'https://orga.pix.org/?lang=fr',
             redirectionUrl: `https://orga.pix.org/rejoindre?invitationId=${organizationInvitationId}&code=${code}&lang=fr`,
             supportUrl: 'https://pix.org/fr/support',
-            ...mainTranslationsMapping.fr['organization-invitation-email'].params,
+            acceptInvitation: i18n.__('organization-invitation-email.params.acceptInvitation'),
+            doNotAnswer: i18n.__('organization-invitation-email.params.doNotAnswer'),
+            here: i18n.__('organization-invitation-email.params.here'),
+            moreAbout: i18n.__('organization-invitation-email.params.moreAbout'),
+            needHelp: i18n.__('organization-invitation-email.params.needHelp'),
+            oneTimeLink: i18n.__('organization-invitation-email.params.oneTimeLink'),
+            pixPresentation: i18n.__('organization-invitation-email.params.pixPresentation'),
+            subtitle: i18n.__('organization-invitation-email.params.subtitle'),
+            title: i18n.__('organization-invitation-email.params.title'),
+            yourOrganization: i18n.__('organization-invitation-email.params.yourOrganization'),
           });
         });
 
         it(`when locale is ${FRENCH_FRANCE}`, async function () {
+          // given
+          const locale = FRENCH_FRANCE;
+          const i18n = getI18n(locale);
+
           // when
           await mailService.sendOrganizationInvitationEmail({
             email: userEmailAddress,
             organizationName,
             organizationInvitationId,
             code,
-            locale: FRENCH_FRANCE,
+            locale,
           });
 
           // then
           const options = mailer.sendEmail.firstCall.args[0];
           expect(options.fromName).to.equal('Pix Orga - Ne pas répondre');
-          expect(options.subject).to.equal(mainTranslationsMapping.fr['organization-invitation-email'].subject);
+          expect(options.subject).to.equal(i18n.__('organization-invitation-email.subject'));
           expect(options.variables).to.include({
             pixHomeName: 'pix.fr',
             pixHomeUrl: 'https://pix.fr',
             pixOrgaHomeUrl: 'https://orga.pix.fr/',
             redirectionUrl: `https://orga.pix.fr/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
             supportUrl: 'https://pix.fr/support',
-            ...mainTranslationsMapping.fr['organization-invitation-email'].params,
+            acceptInvitation: i18n.__('organization-invitation-email.params.acceptInvitation'),
+            doNotAnswer: i18n.__('organization-invitation-email.params.doNotAnswer'),
+            here: i18n.__('organization-invitation-email.params.here'),
+            moreAbout: i18n.__('organization-invitation-email.params.moreAbout'),
+            needHelp: i18n.__('organization-invitation-email.params.needHelp'),
+            oneTimeLink: i18n.__('organization-invitation-email.params.oneTimeLink'),
+            pixPresentation: i18n.__('organization-invitation-email.params.pixPresentation'),
+            subtitle: i18n.__('organization-invitation-email.params.subtitle'),
+            title: i18n.__('organization-invitation-email.params.title'),
+            yourOrganization: i18n.__('organization-invitation-email.params.yourOrganization'),
           });
         });
 
         it('when locale is undefined', async function () {
+          // given
+          const locale = undefined;
+          const i18n = getI18n(locale);
+
           // when
           await mailService.sendOrganizationInvitationEmail({
             email: userEmailAddress,
             organizationName,
             organizationInvitationId,
             code,
-            locale: undefined,
+            locale,
           });
 
           // then
           const options = mailer.sendEmail.firstCall.args[0];
           expect(options.fromName).to.equal('Pix Orga - Ne pas répondre');
-          expect(options.subject).to.equal(mainTranslationsMapping.fr['organization-invitation-email'].subject);
+          expect(options.subject).to.equal(i18n.__('organization-invitation-email.subject'));
           expect(options.variables).to.include({
             pixHomeName: 'pix.fr',
             pixHomeUrl: 'https://pix.fr',
             pixOrgaHomeUrl: 'https://orga.pix.fr/',
             redirectionUrl: `https://orga.pix.fr/rejoindre?invitationId=${organizationInvitationId}&code=${code}`,
             supportUrl: 'https://pix.fr/support',
-            ...mainTranslationsMapping.fr['organization-invitation-email'].params,
+            acceptInvitation: i18n.__('organization-invitation-email.params.acceptInvitation'),
+            doNotAnswer: i18n.__('organization-invitation-email.params.doNotAnswer'),
+            here: i18n.__('organization-invitation-email.params.here'),
+            moreAbout: i18n.__('organization-invitation-email.params.moreAbout'),
+            needHelp: i18n.__('organization-invitation-email.params.needHelp'),
+            oneTimeLink: i18n.__('organization-invitation-email.params.oneTimeLink'),
+            pixPresentation: i18n.__('organization-invitation-email.params.pixPresentation'),
+            subtitle: i18n.__('organization-invitation-email.params.subtitle'),
+            title: i18n.__('organization-invitation-email.params.title'),
+            yourOrganization: i18n.__('organization-invitation-email.params.yourOrganization'),
           });
         });
 
         it(`when locale is ${ENGLISH_SPOKEN}`, async function () {
+          // given
+          const locale = ENGLISH_SPOKEN;
+          const i18n = getI18n(locale);
+
           // when
           await mailService.sendOrganizationInvitationEmail({
             email: userEmailAddress,
             organizationName,
             organizationInvitationId,
             code,
-            locale: ENGLISH_SPOKEN,
+            locale,
           });
 
           // then
           const options = mailer.sendEmail.firstCall.args[0];
           expect(options.fromName).to.equal('Pix Orga - Noreply');
-          expect(options.subject).to.equal(mainTranslationsMapping.en['organization-invitation-email'].subject);
+          expect(options.subject).to.equal(i18n.__('organization-invitation-email.subject'));
           expect(options.variables).to.include({
             pixHomeName: 'pix.org',
             pixHomeUrl: 'https://pix.org/en',
             pixOrgaHomeUrl: 'https://orga.pix.org/?lang=en',
             redirectionUrl: `https://orga.pix.org/rejoindre?invitationId=${organizationInvitationId}&code=${code}&lang=en`,
             supportUrl: 'https://pix.org/en/support',
-            ...mainTranslationsMapping.en['organization-invitation-email'].params,
+            acceptInvitation: i18n.__('organization-invitation-email.params.acceptInvitation'),
+            doNotAnswer: i18n.__('organization-invitation-email.params.doNotAnswer'),
+            here: i18n.__('organization-invitation-email.params.here'),
+            moreAbout: i18n.__('organization-invitation-email.params.moreAbout'),
+            needHelp: i18n.__('organization-invitation-email.params.needHelp'),
+            oneTimeLink: i18n.__('organization-invitation-email.params.oneTimeLink'),
+            pixPresentation: i18n.__('organization-invitation-email.params.pixPresentation'),
+            subtitle: i18n.__('organization-invitation-email.params.subtitle'),
+            title: i18n.__('organization-invitation-email.params.title'),
+            yourOrganization: i18n.__('organization-invitation-email.params.yourOrganization'),
           });
         });
       });
@@ -243,21 +287,23 @@ describe('Unit | Service | MailService', function () {
 
   describe('#sendCertificationCenterInvitationEmail', function () {
     it('should send an email and set subject, sender, receiver in french as default', async function () {
-      // given & when
+      // given
+      const locale = undefined;
+      const i18n = getI18n(locale);
+
+      // when
       await mailService.sendCertificationCenterInvitationEmail({
         email: 'invited@example.net',
         certificationCenterName: 'Centre Pixou',
         certificationCenterInvitationId: 7,
         code: 'ABCDEFGH01',
-        locale: undefined,
+        locale,
       });
 
       // then
       const sendEmailParameters = mailer.sendEmail.firstCall.args[0];
 
-      expect(sendEmailParameters.subject).to.equal(
-        mainTranslationsMapping.fr['certification-center-invitation-email'].subject,
-      );
+      expect(sendEmailParameters.subject).to.equal(i18n.__('certification-center-invitation-email.subject'));
       expect(sendEmailParameters.from).to.equal(senderEmailAddress);
       expect(sendEmailParameters.fromName).to.equal('Pix Certif - Ne pas répondre');
       expect(sendEmailParameters.to).to.equal('invited@example.net');
@@ -269,7 +315,15 @@ describe('Unit | Service | MailService', function () {
         pixCertifHomeUrl: 'https://certif.pix.fr/',
         redirectionUrl: `https://certif.pix.fr/rejoindre?invitationId=7&code=ABCDEFGH01`,
         supportUrl: 'https://pix.fr/support',
-        ...mainTranslationsMapping.fr['certification-center-invitation-email'].params,
+        acceptInvitation: i18n.__('certification-center-invitation-email.params.acceptInvitation'),
+        doNotAnswer: i18n.__('certification-center-invitation-email.params.doNotAnswer'),
+        here: i18n.__('certification-center-invitation-email.params.here'),
+        moreAbout: i18n.__('certification-center-invitation-email.params.moreAbout'),
+        needHelp: i18n.__('certification-center-invitation-email.params.needHelp'),
+        oneTimeLink: i18n.__('certification-center-invitation-email.params.oneTimeLink'),
+        pixCertifPresentation: i18n.__('certification-center-invitation-email.params.pixCertifPresentation'),
+        title: i18n.__('certification-center-invitation-email.params.title'),
+        yourCertificationCenter: i18n.__('certification-center-invitation-email.params.yourCertificationCenter'),
       });
     });
 
@@ -277,6 +331,7 @@ describe('Unit | Service | MailService', function () {
       it('should call sendEmail with localized variable options', async function () {
         // given
         const locale = FRENCH_SPOKEN;
+        const i18n = getI18n(locale);
 
         // when
         await mailService.sendCertificationCenterInvitationEmail({
@@ -289,9 +344,7 @@ describe('Unit | Service | MailService', function () {
 
         // then
         const sendEmailParameters = mailer.sendEmail.firstCall.args[0];
-        expect(sendEmailParameters.subject).to.equal(
-          mainTranslationsMapping.fr['certification-center-invitation-email'].subject,
-        );
+        expect(sendEmailParameters.subject).to.equal(i18n.__('certification-center-invitation-email.subject'));
         expect(sendEmailParameters.fromName).to.equal('Pix Certif - Ne pas répondre');
         expect(sendEmailParameters.variables).to.include({
           certificationCenterName: 'Centre Pixi',
@@ -300,7 +353,15 @@ describe('Unit | Service | MailService', function () {
           pixCertifHomeUrl: 'https://certif.pix.org/?lang=fr',
           redirectionUrl: `https://certif.pix.org/rejoindre?invitationId=7&code=AAABBBCCC7&lang=fr`,
           supportUrl: 'https://pix.org/fr/support',
-          ...mainTranslationsMapping.fr['certification-center-invitation-email'].params,
+          acceptInvitation: i18n.__('certification-center-invitation-email.params.acceptInvitation'),
+          doNotAnswer: i18n.__('certification-center-invitation-email.params.doNotAnswer'),
+          here: i18n.__('certification-center-invitation-email.params.here'),
+          moreAbout: i18n.__('certification-center-invitation-email.params.moreAbout'),
+          needHelp: i18n.__('certification-center-invitation-email.params.needHelp'),
+          oneTimeLink: i18n.__('certification-center-invitation-email.params.oneTimeLink'),
+          pixCertifPresentation: i18n.__('certification-center-invitation-email.params.pixCertifPresentation'),
+          title: i18n.__('certification-center-invitation-email.params.title'),
+          yourCertificationCenter: i18n.__('certification-center-invitation-email.params.yourCertificationCenter'),
         });
       });
     });
@@ -309,6 +370,7 @@ describe('Unit | Service | MailService', function () {
       it('should call sendEmail with localized variable options', async function () {
         // given
         const locale = ENGLISH_SPOKEN;
+        const i18n = getI18n(locale);
 
         // when
         await mailService.sendCertificationCenterInvitationEmail({
@@ -321,9 +383,7 @@ describe('Unit | Service | MailService', function () {
 
         // then
         const sendEmailParameters = mailer.sendEmail.firstCall.args[0];
-        expect(sendEmailParameters.subject).to.equal(
-          mainTranslationsMapping.en['certification-center-invitation-email'].subject,
-        );
+        expect(sendEmailParameters.subject).to.equal(i18n.__('certification-center-invitation-email.subject'));
         expect(sendEmailParameters.fromName).to.equal('Pix Certif - Noreply');
         expect(sendEmailParameters.variables).to.include({
           certificationCenterName: 'Centre Pixi',
@@ -332,7 +392,15 @@ describe('Unit | Service | MailService', function () {
           pixCertifHomeUrl: 'https://certif.pix.org/?lang=en',
           redirectionUrl: `https://certif.pix.org/rejoindre?invitationId=777&code=LLLJJJVVV1&lang=en`,
           supportUrl: 'https://pix.org/en/support',
-          ...mainTranslationsMapping.en['certification-center-invitation-email'].params,
+          acceptInvitation: i18n.__('certification-center-invitation-email.params.acceptInvitation'),
+          doNotAnswer: i18n.__('certification-center-invitation-email.params.doNotAnswer'),
+          here: i18n.__('certification-center-invitation-email.params.here'),
+          moreAbout: i18n.__('certification-center-invitation-email.params.moreAbout'),
+          needHelp: i18n.__('certification-center-invitation-email.params.needHelp'),
+          oneTimeLink: i18n.__('certification-center-invitation-email.params.oneTimeLink'),
+          pixCertifPresentation: i18n.__('certification-center-invitation-email.params.pixCertifPresentation'),
+          title: i18n.__('certification-center-invitation-email.params.title'),
+          yourCertificationCenter: i18n.__('certification-center-invitation-email.params.yourCertificationCenter'),
         });
       });
     });
@@ -341,7 +409,8 @@ describe('Unit | Service | MailService', function () {
   describe('#sendAccountRecoveryEmail', function () {
     it('calls sendEmail with from, to, template, tags', async function () {
       // given
-      const translationsMapping = mainTranslationsMapping.fr['account-recovery-email'];
+      const locale = FRENCH_FRANCE;
+      const i18n = getI18n(locale);
 
       const firstName = 'Carla';
       const temporaryKey = 'a-temporary-key';
@@ -349,11 +418,7 @@ describe('Unit | Service | MailService', function () {
       const redirectionUrl = `https://test.app.pix.fr/recuperer-mon-compte/${temporaryKey}`;
 
       // when
-      await mailService.sendAccountRecoveryEmail({
-        email,
-        firstName,
-        temporaryKey,
-      });
+      await mailService.sendAccountRecoveryEmail({ email, firstName, temporaryKey });
 
       // then
       const expectedOptions = {
@@ -366,7 +431,14 @@ describe('Unit | Service | MailService', function () {
           firstName,
           redirectionUrl,
           homeName: 'pix.fr',
-          ...translationsMapping.params,
+          choosePassword: i18n.__('account-recovery-email.params.choosePassword'),
+          context: i18n.__('account-recovery-email.params.context'),
+          doNotAnswer: i18n.__('account-recovery-email.params.doNotAnswer'),
+          instruction: i18n.__('account-recovery-email.params.instruction'),
+          linkValidFor: i18n.__('account-recovery-email.params.linkValidFor'),
+          moreOn: i18n.__('account-recovery-email.params.moreOn'),
+          pixPresentation: i18n.__('account-recovery-email.params.pixPresentation'),
+          signing: i18n.__('account-recovery-email.params.signing'),
         },
       };
       const options = mailer.sendEmail.firstCall.args[0];
@@ -377,21 +449,17 @@ describe('Unit | Service | MailService', function () {
   describe('#sendVerificationCodeEmail', function () {
     it(`calls sendEmail with from, to, template, tags and locale ${FRENCH_SPOKEN}`, async function () {
       // given
-      const translate = i18n.__;
+      const locale = FRENCH_SPOKEN;
+      const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      await mailService.sendVerificationCodeEmail({
-        code,
-        email: userEmail,
-        locale: FRENCH_SPOKEN,
-        translate,
-      });
+      await mailService.sendVerificationCodeEmail({ code, email: userEmail, locale });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
-      expect(options.subject).to.equal(translate('verification-code-email.subject', { code }));
+      expect(options.subject).to.equal(i18n.__('verification-code-email.subject', { code }));
       expect(options.fromName).to.equal('PIX - Ne pas répondre');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
@@ -399,27 +467,30 @@ describe('Unit | Service | MailService', function () {
         homeUrl: 'https://pix.org/fr',
         displayNationalLogo: false,
         code,
-        ...mainTranslationsMapping.fr['verification-code-email'].body,
+        context: i18n.__('verification-code-email.body.context'),
+        doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+        greeting: i18n.__('verification-code-email.body.greeting'),
+        moreOn: i18n.__('verification-code-email.body.moreOn'),
+        pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+        seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+        signing: i18n.__('verification-code-email.body.signing'),
+        warningMessage: i18n.__('verification-code-email.body.warningMessage'),
       });
     });
 
     it(`calls sendEmail with from, to, template, tags and locale ${FRENCH_FRANCE}`, async function () {
       // given
-      const translate = i18n.__;
+      const locale = FRENCH_FRANCE;
+      const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      await mailService.sendVerificationCodeEmail({
-        code,
-        email: userEmail,
-        locale: FRENCH_FRANCE,
-        translate,
-      });
+      await mailService.sendVerificationCodeEmail({ code, email: userEmail, locale });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
-      expect(options.subject).to.equal(translate('verification-code-email.subject', { code }));
+      expect(options.subject).to.equal(i18n.__('verification-code-email.subject', { code }));
       expect(options.fromName).to.equal('PIX - Ne pas répondre');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
@@ -427,29 +498,30 @@ describe('Unit | Service | MailService', function () {
         homeUrl: 'https://pix.fr',
         displayNationalLogo: true,
         code,
-        ...mainTranslationsMapping.fr['verification-code-email'].body,
+        context: i18n.__('verification-code-email.body.context'),
+        doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+        greeting: i18n.__('verification-code-email.body.greeting'),
+        moreOn: i18n.__('verification-code-email.body.moreOn'),
+        pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+        seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+        signing: i18n.__('verification-code-email.body.signing'),
+        warningMessage: i18n.__('verification-code-email.body.warningMessage'),
       });
     });
 
     it(`calls sendEmail with from, to, template, tags and locale ${ENGLISH_SPOKEN}`, async function () {
       // given
-      const translate = i18n.__;
+      const locale = ENGLISH_SPOKEN;
+      const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      await mailService.sendVerificationCodeEmail({
-        code,
-        email: userEmail,
-        locale: ENGLISH_SPOKEN,
-        translate,
-      });
+      await mailService.sendVerificationCodeEmail({ code, email: userEmail, locale });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
-      expect(options.subject).to.equal(
-        translate({ phrase: 'verification-code-email.subject', locale: 'en' }, { code }),
-      );
+      expect(options.subject).to.equal(i18n.__('verification-code-email.subject', { code }));
       expect(options.fromName).to.equal('PIX - Noreply');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
@@ -457,29 +529,30 @@ describe('Unit | Service | MailService', function () {
         homeUrl: 'https://pix.org/en',
         displayNationalLogo: false,
         code,
-        ...mainTranslationsMapping.en['verification-code-email'].body,
+        context: i18n.__('verification-code-email.body.context'),
+        doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+        greeting: i18n.__('verification-code-email.body.greeting'),
+        moreOn: i18n.__('verification-code-email.body.moreOn'),
+        pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+        seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+        signing: i18n.__('verification-code-email.body.signing'),
+        warningMessage: i18n.__('verification-code-email.body.warningMessage'),
       });
     });
 
     it(`calls sendEmail with from, to, template, tags and locale ${DUTCH_SPOKEN}`, async function () {
       // given
-      const translate = i18n.__;
+      const locale = DUTCH_SPOKEN;
+      const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      await mailService.sendVerificationCodeEmail({
-        code,
-        email: userEmail,
-        locale: DUTCH_SPOKEN,
-        translate,
-      });
+      await mailService.sendVerificationCodeEmail({ code, email: userEmail, locale });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
-      expect(options.subject).to.equal(
-        translate({ phrase: 'verification-code-email.subject', locale: 'nl' }, { code }),
-      );
+      expect(options.subject).to.equal(i18n.__('verification-code-email.subject', { code }));
       expect(options.fromName).to.equal('PIX - Niet beantwoorden');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
@@ -487,29 +560,30 @@ describe('Unit | Service | MailService', function () {
         homeUrl: 'https://pix.org/nl-be',
         displayNationalLogo: false,
         code,
-        ...mainTranslationsMapping.nl['verification-code-email'].body,
+        context: i18n.__('verification-code-email.body.context'),
+        doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+        greeting: i18n.__('verification-code-email.body.greeting'),
+        moreOn: i18n.__('verification-code-email.body.moreOn'),
+        pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+        seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+        signing: i18n.__('verification-code-email.body.signing'),
+        warningMessage: i18n.__('verification-code-email.body.warningMessage'),
       });
     });
 
     it(`calls sendEmail with from, to, template, tags and locale ${SPANISH_SPOKEN}`, async function () {
       // given
-      const translate = i18n.__;
+      const locale = SPANISH_SPOKEN;
+      const i18n = getI18n(locale);
       const userEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      await mailService.sendVerificationCodeEmail({
-        code,
-        email: userEmail,
-        locale: SPANISH_SPOKEN,
-        translate,
-      });
+      await mailService.sendVerificationCodeEmail({ code, email: userEmail, locale });
 
       // then
       const options = mailer.sendEmail.firstCall.args[0];
-      expect(options.subject).to.equal(
-        translate({ phrase: 'verification-code-email.subject', locale: 'es' }, { code }),
-      );
+      expect(options.subject).to.equal(i18n.__('verification-code-email.subject', { code }));
       expect(options.fromName).to.equal('PIX - No responder');
       expect(options.template).to.equal('test-email-verification-code-template-id');
       expect(options.variables).to.include({
@@ -517,7 +591,14 @@ describe('Unit | Service | MailService', function () {
         homeUrl: 'https://pix.org/en',
         displayNationalLogo: false,
         code,
-        ...mainTranslationsMapping.es['verification-code-email'].body,
+        context: i18n.__('verification-code-email.body.context'),
+        doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
+        greeting: i18n.__('verification-code-email.body.greeting'),
+        moreOn: i18n.__('verification-code-email.body.moreOn'),
+        pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
+        seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
+        signing: i18n.__('verification-code-email.body.signing'),
+        warningMessage: i18n.__('verification-code-email.body.warningMessage'),
       });
     });
   });

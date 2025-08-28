@@ -13,7 +13,6 @@ const { get } = lodash;
 /**
  * @param {Object} params
  *
- * @param {*} params.i18n
  * @param {*} params.locale
  * @param {string} params.newEmail
  * @param {string} params.password
@@ -27,7 +26,6 @@ const { get } = lodash;
  */
 
 const sendVerificationCode = async function ({
-  i18n,
   locale,
   newEmail,
   password,
@@ -69,7 +67,7 @@ const sendVerificationCode = async function ({
   const code = codeUtils.generateNumericalString(6);
 
   await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail });
-  await mailService.sendVerificationCodeEmail({ code, locale, translate: i18n.__, email: newEmail });
+  await mailService.sendVerificationCodeEmail({ code, locale, email: newEmail });
 };
 
 function _manageError(error, errorType, attribute, message) {
