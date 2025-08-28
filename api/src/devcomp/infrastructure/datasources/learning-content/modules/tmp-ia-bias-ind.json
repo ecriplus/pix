@@ -591,8 +591,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/ia-biais-independant/recap-chat-laitv2.jpg",
                 "alt": "",
-                "alternativeText": "<p>Schéma en plusieurs étapes :</p><ul><li>Étape 1 : Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2 : L’IA répond que le chat boit du lait.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire du chat a un doute. Il cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit l'IA a confirmé ce que pensait le propriétaire. Il a donné du lait au chat. Maintenant le chat est malade.
-.<br></li></ul></li></ul><br>",
+                "alternativeText": "<p>Schéma en plusieurs étapes :</p><ul><li>Étape 1 : Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2 : L’IA répond que le chat boit du lait.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire du chat a un doute. Il cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit l'IA a confirmé ce que pensait le propriétaire. Il a donné du lait au chat. Maintenant le chat est malade.</li></ul></li></ul><br>",
                 "legend": "",
                 "licence": ""
               }
