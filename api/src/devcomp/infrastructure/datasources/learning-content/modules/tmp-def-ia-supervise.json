@@ -1,7 +1,7 @@
 {
   "id": "bc6d164f-26bd-4f58-9925-8cf5365e2ca6",
   "slug": "tmp-ia-def-ind",
-  "title": "Une IA apprentie botaniste : l'histoire d'un apprentissage supervisé 🌱",
+  "title": "Une IA apprentie botaniste : un cas d'un apprentissage supervisé 🌱",
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
@@ -563,18 +563,95 @@
               "element": {
                 "id": "5ec6e39a-0852-4ee9-b892-5a4b66b890e3",
                 "type": "text",
-                "content": "<p>Lila se dit qu’elle pourrait générer le texte de description de ces plantes.<br>Mais l’apprentissage sur du texte ne nécessite pas les mêmes données.<br></p>"
+                "content": "<p>Lila se dit qu’elle pourrait  <strong>générer le texte de description</strong> de ces plantes.</p><p>Pour cela, elle veut entraîner un autre logiciel d'intelligence artificielle.<br>Mais l’apprentissage sur du texte ne nécessite pas les mêmes données !<br></p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
-                "type": "custom-draft",
-                "title": "Un tableau interactif pour associez les bonnes données à la bonne IA",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-donnees-etiquettes.html",
-                "instruction": "<p>A vous de jouer, complétez le schéma avec les bonnes données pour le bon objectif !<br></p>",
-                "height": 550
+                "type": "qrocm",
+                "instruction": "<p>Quel serait un bon exemple de couple \"données\" et \"étiquette\" à fournir au logiciel d'intellgience artificielle pour qu'il s'entraine à générer du texte ?<br></p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>📥Données :&nbsp;</p>"
+                  },
+                  {
+                    "input": "627e8063-9059-4bd6-9492-396cfb983c48",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "defaultValue": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Une photo d'ail des ours"
+                      },
+                      {
+                        "id": "2",
+                        "content": "\"L'ail des ours peut se manger en _____\""
+                      },
+                      {
+                        "id": "3",
+                        "content": "salade"
+                      },
+                      {
+                        "id": "4",
+                        "content": "ail des ours"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>🏷️Etiquette :&nbsp;</p>"
+                  },
+                  {
+                    "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionner",
+                    "ariaLabel": "Sélectionner",
+                    "defaultValue": "Sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Une photo d'ail des ours"
+                      },
+                      {
+                        "id": "2",
+                        "content": "\"L'ail des ours peut se manger en ____\""
+                      },
+                      {
+                        "id": "3",
+                        "content": "salade"
+                      },
+                      {
+                        "id": "4",
+                        "content": "ail des ours"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !&nbsp;</p>",
+                    "diagnosis": "<p><br></p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Et non !</p>",
+                    "diagnosis": ""
+                  }
+                }
               }
             }
           ]
@@ -589,7 +666,7 @@
               "element": {
                 "id": "136e86b1-cc7d-4e9c-a5f4-a3f1e5808757",
                 "type": "text",
-                "content": "<p>Lila est contente, son logiciel est terminé.🚀  Elle va pouvoir le faire tester à Arthur !</p>"
+                "content": "<p>Lila peut maintenant entraîner son nouveau logiciel d'Intelligence artificielle.</p><p>Plus rien ne l'arrête !🚀&nbsp;&nbsp;</p>"
               }
             }
           ]
@@ -851,7 +928,7 @@
               "element": {
                 "id": "8a3c8142-e5fc-4135-9826-c4a404f4a644",
                 "type": "qcu-declarative",
-                "instruction": "<p>[Proposition alternative pour le transfert] </p><p>Et maintenant, auriez-vous confiance dans une application qui reconnaît les champignons et dit s’ils sont comestibles ? 🍄‍🟫</p>",
+                "instruction": "<p>Et maintenant, auriez-vous confiance dans une application qui reconnaît les champignons et dit s’ils sont comestibles ? 🍄‍🟫</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -874,6 +951,7 @@
                       "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, une erreur peut être dangereuse !</p>"
                     }
                   },
+                  {
                     "id": "4",
                     "content": "<p>Je n’ai pas du tout confiance car les logiciels d’IA ne peuvent pas goûter les champignons.<br></p>",
                     "feedback": {
