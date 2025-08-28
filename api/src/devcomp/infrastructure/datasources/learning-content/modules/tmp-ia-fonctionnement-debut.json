@@ -250,8 +250,6 @@
                       "content": "<p>Pour un logiciel d'IA générative c’est un peu le même principe : il construit sa réponse en complétant un texte mot après mot en choisissant des mots très probables. </p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
                     },
                     {
-                  "elements": [
-                    {
                       "id": "4c1b444d-2e5a-4e50-926f-8a73b8259181",
                       "type": "custom",
                       "tagName": "complete-phrase",
@@ -348,9 +346,7 @@
                           "sucre"
                         ]
                       }
-                    }
-                  ]
-                },
+                    },
                     {
                       "id": "860fd8e3-4b25-4ffb-b813-a7c8ca794112",
                       "type": "qcu-discovery",
