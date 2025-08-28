@@ -239,7 +239,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       };
       const section = store.createRecord('section', {
         id: 'section1',
-        type: 'blank',
+        type: 'practise',
         grains: [
           { components: [{ type: 'element', element: textElement }] },
           { components: [{ type: 'element', element: qcuElement }] },
@@ -254,6 +254,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // then
       assert.ok(screen.getByRole('heading', { name: module.title, level: 1 }));
+      assert.dom(screen.getByRole('heading', { name: 'S’exercer', level: 2 })).exists();
       assert.strictEqual(findAll('.element-text').length, 1);
       assert.strictEqual(findAll('.element-qcu').length, 0);
 
