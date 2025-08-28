@@ -67,11 +67,10 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
         //when
         await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
 
-        sinon.assert.calledWithExactly(metrics.trackEvent, {
-          event: 'custom-event',
+        sinon.assert.calledWithExactly(metrics.trackEvent, 'Clic sur le bouton Télécharger (attestations)', {
+          disabled: true,
           'pix-event-category': 'Attestations',
           'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
-          'pix-event-name': 'Clic sur le bouton Télécharger (attestations)',
         });
         assert.ok(true);
       });

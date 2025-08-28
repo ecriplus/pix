@@ -25,12 +25,7 @@ export default class CampaignTabs extends Component {
     try {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url: this.args.campaign.urlToResult, token });
-      this.pixMetrics.trackEvent({
-        event: 'custom-event',
-        'pix-event-category': 'Campagnes',
-        'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",
-        'pix-event-name': "Clic sur le bouton d'export",
-      });
+      this.pixMetrics.trackEvent('exportCampaignResultClic');
     } catch {
       this.notifications.sendError(this.intl.t('api-error-messages.global'));
     }

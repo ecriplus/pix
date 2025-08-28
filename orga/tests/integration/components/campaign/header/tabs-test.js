@@ -188,12 +188,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       // when
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
-      sinon.assert.calledWithExactly(pixMetrics.trackEvent, {
-        event: 'custom-event',
-        'pix-event-category': 'Campagnes',
-        'pix-event-action': "Cliquer sur le bouton d'export des résultats d'une campagne",
-        'pix-event-name': "Clic sur le bouton d'export",
-      });
+      sinon.assert.calledWithExactly(pixMetrics.trackEvent, 'exportCampaignResultClic');
       assert.ok(true);
     });
 
