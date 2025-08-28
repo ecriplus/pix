@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 @use '../passage';
 
 .stepper--horizontal {
@@ -7,7 +8,7 @@
   gap: 8px;
 
   .stepper__step {
-    --previous-slide-visible-width: 100px;
+    --previous-slide-visible-width: 10px;
 
     grid-row: 1 / 1;
     grid-column: 1 / 1;
@@ -95,4 +96,20 @@
   justify-self: start;
   width: fit-content;
   min-width: 140px;
+}
+
+@include breakpoints.device-is('tablet') {
+  .stepper--horizontal {
+    .stepper__step {
+      --previous-slide-visible-width: 20px;
+    }
+  }
+}
+
+@include breakpoints.device-is('desktop') {
+  .stepper--horizontal {
+    .stepper__step {
+      --previous-slide-visible-width: 100px;
+    }
+  }
 }
