@@ -263,7 +263,7 @@ module('Integration | Component | ChallengeStatement', function (hooks) {
             });
 
             module('when user clicks on text-to-speech button', function () {
-              test('should push matomo event', async function (assert) {
+              test('should push analytics event', async function (assert) {
                 // given
                 addAssessmentToContext(this, { id: '267567' });
                 addChallengeToContext(this, {

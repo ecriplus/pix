@@ -19,7 +19,7 @@ function _isFeatureEnabled(environmentVariable) {
 
 /* eslint max-statements: off */
 module.exports = function (environment) {
-  const analyticsEnabled = _isFeatureEnabled(process.env.WEB_ANALYTICS_ENABLED);
+  const analyticsEnabled = _isFeatureEnabled(process.env.ANALYTICS_ENABLED);
   const ENV = {
     modulePrefix: 'mon-pix',
     environment: environment,
