@@ -38,7 +38,7 @@ class EmbedForAnswerVerification extends Embed {
 
   #validateUserResponseFormat(userResponse) {
     const embedSchema = Joi.string()
-      .pattern(/^[a-z]+$/)
+      .pattern(/^[a-z-]+$/)
       .required();
 
     const validUserResponseSchema = Joi.array().items(embedSchema).min(1).max(1).required();

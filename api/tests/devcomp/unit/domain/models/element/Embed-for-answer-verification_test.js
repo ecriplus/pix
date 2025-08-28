@@ -146,14 +146,14 @@ describe('Unit | Devcomp | Domain | Models | Element | EmbedForAnswerVerificatio
           height: 800,
           url: 'https://embed.example.net',
           instruction: '',
-          solution: 'toto',
+          solution: 'toto-with-dash',
         });
 
         // when
-        embed.setUserResponse(['toto']);
+        embed.setUserResponse(['toto-with-dash']);
 
         // then
-        expect(embed.userResponse).to.deep.equal('toto');
+        expect(embed.userResponse).to.deep.equal('toto-with-dash');
       });
     });
 
