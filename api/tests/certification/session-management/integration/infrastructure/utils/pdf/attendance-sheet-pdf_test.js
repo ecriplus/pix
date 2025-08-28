@@ -1,8 +1,6 @@
 import { writeFile } from 'node:fs/promises';
-import path from 'node:path';
 import * as url from 'node:url';
 
-import i18n from 'i18n';
 import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
 
 import { getAttendanceSheetPdfBuffer } from '../../../../../../../src/certification/enrolment/infrastructure/utils/pdf/attendance-sheet-pdf.js';
@@ -10,8 +8,6 @@ import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../../tooling/binary-comparator.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const directory = path.resolve(path.join(__dirname, '../../../../../../../translations'));
 
 describe('Integration | Infrastructure | Utils | Pdf | Attendance sheet Pdf', function () {
   beforeEach(function () {
@@ -185,12 +181,7 @@ describe('Integration | Infrastructure | Utils | Pdf | Attendance sheet Pdf', fu
     });
     const outputFilename = '/attendance-sheet-EN_expected.pdf';
 
-    i18n.configure({
-      defaultLocale: 'en',
-      directory,
-      objectNotation: true,
-      updateFiles: false,
-    });
+    const i18n = getI18n('en');
 
     // when
     const { attendanceSheet: buffer } = await getAttendanceSheetPdfBuffer({
