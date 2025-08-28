@@ -30,7 +30,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
     const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
     const publishedAt = Symbol('a publication date');
-    const i18n = Symbol('i18n');
 
     sessionPublicationService.publishSession.onCall(0).resolves(session1);
     sessionPublicationService.publishSession.onCall(1).resolves(session2);
@@ -40,7 +39,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       sessionIds: [session1.id, session2.id],
       batchId: 'batch id',
       publishedAt,
-      i18n,
       certificationRepository,
       certificationCenterRepository,
       finalizedSessionRepository,
@@ -59,7 +57,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       sharedSessionRepository,
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
-      i18n,
       session: session1,
       publishedAt,
       certificationCenterRepository,
@@ -75,7 +72,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       sessionRepository,
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
-      i18n,
       session: session2,
       publishedAt,
       certificationCenterRepository,
@@ -86,7 +82,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
   context('when one or many session publication fail', function () {
     it('should continue', async function () {
       // given
-      const i18n = Symbol('i18n');
       const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
       const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
       const publishedAt = Symbol('a publication date');
@@ -108,7 +103,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         sessionIds: [session1.id, session2.id],
         publishedAt,
         batchId: 'batch id',
-        i18n,
         certificationCenterRepository,
         certificationRepository,
         finalizedSessionRepository,
@@ -126,7 +120,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         sharedSessionRepository,
       });
       expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
-        i18n,
         session: session2,
         publishedAt,
         certificationCenterRepository,
@@ -139,7 +132,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       const sessionId1 = Symbol('first session id');
       const sessionId2 = Symbol('second session id');
       const publishedAt = Symbol('a publication date');
-      const i18n = Symbol('i18n');
 
       const error1 = new Error('an error');
       const error2 = new Error('another error');
@@ -166,7 +158,6 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
 
       // when
       const result = await publishSessionsInBatch({
-        i18n,
         sessionIds: [sessionId1, sessionId2],
         publishedAt,
         batchId: 'batch id',

@@ -1,9 +1,6 @@
 import 'dotenv/config';
 
-import path from 'node:path';
 import * as url from 'node:url';
-
-import i18n from 'i18n';
 
 import { databaseConnections } from '../../db/database-connections.js';
 import { manageEmails } from '../../src/certification/session-management/domain/services/session-publication-service.js';
@@ -11,7 +8,6 @@ import * as certificationCenterRepository from '../../src/certification/shared/i
 import * as sharedSessionRepository from '../../src/certification/shared/infrastructure/repositories/session-repository.js';
 import * as mailService from '../../src/shared/domain/services/mail-service.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * Usage: LOG_LEVEL=info NODE_TLS_REJECT_UNAUTHORIZED='0' PGSSLMODE=require node scripts/certification/send-certification-result-emails.js 1234,5678,9012
@@ -25,15 +21,6 @@ async function main() {
     );
     return;
   }
-
-  const directory = path.resolve(path.join(__dirname, '../../translations'));
-  i18n.configure({
-    locales: ['fr', 'en'],
-    defaultLocale: 'fr',
-    directory,
-    objectNotation: true,
-    updateFiles: false,
-  });
 
   const sessionIds = process.argv[2].split(',');
   let successes = 0;
@@ -57,7 +44,6 @@ async function main() {
 
     try {
       await manageEmails({
-        i18n,
         session,
         publishedAt,
         certificationCenterRepository,

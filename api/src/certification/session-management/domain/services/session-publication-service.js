@@ -60,7 +60,6 @@ async function publishSession({
  * @param {mailService} params.dependencies.mailService
  */
 async function manageEmails({
-  i18n,
   session,
   publishedAt,
   certificationCenterRepository,
@@ -72,7 +71,6 @@ async function manageEmails({
     sessionRepository,
     certificationCenterRepository,
     mailService: dependencies.mailService,
-    i18n,
   });
 
   const prescribersEmailingAttempts = await _managerPrescriberEmails({

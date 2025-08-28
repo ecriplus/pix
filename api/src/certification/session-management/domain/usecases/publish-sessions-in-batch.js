@@ -4,7 +4,6 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { SessionPublicationBatchResult } from '../models/SessionPublicationBatchResult.js';
 
 const publishSessionsInBatch = async function ({
-  i18n,
   sessionIds,
   publishedAt = new Date(),
   batchId = randomUUID(),
@@ -29,7 +28,6 @@ const publishSessionsInBatch = async function ({
         });
 
         await sessionPublicationService.manageEmails({
-          i18n,
           session,
           publishedAt,
           certificationCenterRepository,

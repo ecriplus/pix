@@ -14,7 +14,6 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
  * @param {SessionPublicationService} params.sessionPublicationService
  */
 const publishSession = async function ({
-  i18n,
   sessionId,
   publishedAt = new Date(),
   certificationRepository,
@@ -35,7 +34,6 @@ const publishSession = async function ({
     });
 
     await sessionPublicationService.manageEmails({
-      i18n,
       session,
       publishedAt,
       certificationCenterRepository,

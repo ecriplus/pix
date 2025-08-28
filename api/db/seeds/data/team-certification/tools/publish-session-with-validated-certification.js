@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import i18n from 'i18n';
 
 import { usecases as enrolmentUseCases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import pickChallengeService from '../../../../../src/certification/evaluation/domain/services/pick-challenge-service.js';
@@ -118,5 +117,5 @@ export default async function publishSessionWithValidatedCertification({
 
   await databaseBuilder.commit();
 
-  await sessionManagementUseCases.publishSession({ sessionId, i18n });
+  await sessionManagementUseCases.publishSession({ sessionId });
 }
