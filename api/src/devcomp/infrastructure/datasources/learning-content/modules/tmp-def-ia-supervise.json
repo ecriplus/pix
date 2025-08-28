@@ -261,15 +261,63 @@
           "title": "Découverte 2a - décomposition en valeurs numérique",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "0021ca26-1ddb-4a0f-a3de-2c9a5ad6b9f0",
-                "type": "custom-draft",
-                "title": "Décomposition de l'image en valeur numérique",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-decomposition-image.html",
-                "instruction": "",
-                "height": 550
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "79bcc080-6067-4921-9cd7-7fff4903bc85",
+                      "type": "text",
+                      "content": "<p>Nous voyons une photographie.</p>"
+                    },
+                    {
+                      "id": "e549531a-3326-4bc5-bc84-2d04288916b0",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet1.jpg",
+                      "alt": "Une photographie de plante",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "4c380d32-3c56-4235-9d3e-8c1497575b07",
+                      "type": "text",
+                      "content": "<p>Mais, le logiciel d'intelligence artificielle, lui, ne peut pas \"voir\".&nbsp;</p><p>Mais il a une information concernant chaque pixel.</p>"
+                    },
+                    {
+                      "id": "ee4a85c2-59a0-4541-acb3-bbbbb0a055ca",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/pixelplante.png",
+                      "alt": "Les pixels d'une photographie avec une plante.",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b6763b47-e272-480d-b735-3aea9528acbf",
+                      "type": "text",
+                      "content": "<p>Cette information concernant chaque pixel est une valeur numérique.</p><p>Cette valeur numérique code sa couleur.</p>"
+                    },
+                    {
+                      "id": "333f5d88-b336-487b-a45c-c3e38269b1fa",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/matricepixelplante.png",
+                      "alt": "Un tableau avec des nombres représentant la couleur de la plante",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -283,7 +331,7 @@
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>Pour un logiciel d’IA, une image est une multitude de petits points appelés <strong>pixels</strong>.🟢🟣 </p><p>Chaque pixel est représenté par un nombre qui indique l’intensité de sa couleur. On appelle ces nombres des <strong>valeurs numériques</strong></p><p>Une image en informatique est donc un teableau de valeurs numériques. 🖼️➡️🔢</p>"
+                "content": "<p>Pour un logiciel d’IA, une image est une multitude de petits points appelés <strong>pixels</strong>.🟢🟣 </p><p>Chaque pixel est représenté par un nombre qui indique l’intensité de sa couleur. On appelle ces nombres des <strong>valeurs numériques</strong></p><p>Une image en informatique est donc un tableau de valeurs numériques. 🖼️➡️🔢</p>"
               }
             }
           ]
@@ -826,7 +874,6 @@
                       "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, une erreur peut être dangereuse !</p>"
                     }
                   },
-                  {
                     "id": "4",
                     "content": "<p>Je n’ai pas du tout confiance car les logiciels d’IA ne peuvent pas goûter les champignons.<br></p>",
                     "feedback": {
