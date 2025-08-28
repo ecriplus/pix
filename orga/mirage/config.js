@@ -84,6 +84,7 @@ function routes() {
       firstName: user.firstName,
       lastName: user.lastName,
       lang: 'fr',
+      features: {},
     });
 
     return user;
@@ -632,5 +633,10 @@ function routes() {
 
   this.patch('/organizations/:organizationId/organization-learners/:learnerId', function () {
     return new Response(204);
+  });
+
+  this.get('/organizations/:organizationId/place-statistics', function (schema, request) {
+    const organizationId = request.params.organizationId;
+    return schema.organizationPlaceStatistics.find(organizationId);
   });
 }

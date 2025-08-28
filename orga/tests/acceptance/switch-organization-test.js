@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -114,6 +115,83 @@ module('Acceptance | Switch Organization', function (hooks) {
           });
         },
       );
+
+      module('When organization has credits management feature', function (hooks) {
+        let firstOrganization, secondOrganization, thirdOrganization, user;
+        hooks.beforeEach(async () => {
+          user = server.create('user', {
+            firstName: 'Harry',
+            lastName: 'Cover',
+            email: 'harry@cover.com',
+            lang: 'fr',
+            pixOrgaTermsOfServiceStatus: 'accepted',
+          });
+
+          firstOrganization = server.create('organization', {
+            name: 'First',
+          });
+
+          secondOrganization = server.create('organization', {
+            name: 'Second',
+          });
+
+          thirdOrganization = server.create('organization', {
+            name: 'Third',
+          });
+
+          const firstMembership = server.create('membership', {
+            organizationId: firstOrganization.id,
+            userId: user.id,
+          });
+
+          const secondMembership = server.create('membership', {
+            organizationId: secondOrganization.id,
+            userId: user.id,
+          });
+
+          const thirdMembership = server.create('membership', {
+            organizationId: thirdOrganization.id,
+            userId: user.id,
+          });
+
+          user.memberships = [firstMembership, secondMembership, thirdMembership];
+          user.userOrgaSettings = server.create('user-orga-setting', { organization: thirdOrganization, user });
+          createPrescriberByUser({
+            user,
+          });
+          await authenticateSession(user.id);
+        });
+
+        test('it should display available places in sidebar for current organization', async function (assert) {
+          // given
+          server.create('organization-place-statistic', { id: firstOrganization.id, available: 120 });
+          server.create('organization-place-statistic', { id: secondOrganization.id, available: 240 });
+
+          // when
+          const screen = await visit('/');
+
+          assert.notOk(screen.queryByText(t('navigation.places.number', { count: 0 })));
+
+          const prescriber = server.schema.prescribers.find(user.id);
+          prescriber.update({
+            features: {
+              PLACES_MANAGEMENT: { active: true, params: null },
+            },
+          });
+
+          const button = screen.getByRole('button', { name: "Changer d'organisation" });
+          await click(button);
+          await click(screen.getByText('First'));
+
+          assert.ok(screen.getByText(t('navigation.places.number', { count: 120 })));
+
+          await click(button);
+          await click(screen.getByText('Second'));
+
+          // then
+          assert.ok(screen.getByText(t('navigation.places.number', { count: 240 })));
+        });
+      });
     });
   });
 });

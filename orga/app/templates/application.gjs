@@ -23,10 +23,7 @@ import Sidebar from 'pix-orga/components/layout/sidebar';
     </:banner>
     <:navigation>
       {{#if @controller.isAuthenticatedRoute}}
-        <Sidebar
-          @placesCount={{@model.placeStatistics.available}}
-          @onChangeOrganization={{@controller.onChangeOrganization}}
-        />
+        <Sidebar />
       {{/if}}
     </:navigation>
     <:main>

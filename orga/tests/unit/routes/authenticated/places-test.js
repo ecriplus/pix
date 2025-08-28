@@ -17,11 +17,9 @@ module('Unit | Route | authenticated/places', function (hooks) {
       const placesLots = Symbol('placesLots');
 
       route.currentUser = { organization: { id: organizationId } };
-
-      const modelForStub = sinon.stub(route, 'modelFor');
+      route.currentUser.organizationPlaceStatistics = statistics;
       const query = sinon.stub(store, 'query');
 
-      modelForStub.withArgs('authenticated').resolves(statistics);
       query
         .withArgs('organization-places-lot', {
           filter: { organizationId },

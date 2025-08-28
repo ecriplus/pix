@@ -61,6 +61,10 @@ export default class SidebarMenu extends Component {
     return this.shouldDisplayMissionsEntry || this.shouldDisplayPlacesEntry || this.canShowCredit;
   }
 
+  get getOrganizationPlacesStatistics() {
+    return this.currentUser.placeStatistics?.available;
+  }
+
   get organizationLearnersList() {
     if (this.currentUser.isSCOManagingStudents) {
       return {
@@ -157,12 +161,15 @@ export default class SidebarMenu extends Component {
         {{/if}}
       </:navElements>
       <:footer>
-        <OrganizationPlacesOrCreditInfo @placesCount={{@placesCount}} @onCanShowCredit={{this.handleCanShowCredit}} />
+        <OrganizationPlacesOrCreditInfo
+          @placesCount={{this.getOrganizationPlacesStatistics}}
+          @onCanShowCredit={{this.handleCanShowCredit}}
+        />
         <SchoolSessionManagement />
         {{#if this.shouldDisplaySeparator}}
           <PixNavigationSeparator />
         {{/if}}
-        <UserLoggedMenu @onChangeOrganization={{@onChangeOrganization}} />
+        <UserLoggedMenu />
       </:footer>
     </PixNavigation>
   </template>

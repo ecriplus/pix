@@ -13,6 +13,7 @@ export default class CurrentUserService extends Service {
   @tracked isSUPManagingStudents;
   @tracked isAgriculture;
   @tracked isGarAuthenticationMethod;
+  @tracked organizationPlaceStatistics;
 
   get homePage() {
     if (this.canAccessMissionsPage) {
@@ -60,6 +61,18 @@ export default class CurrentUserService extends Service {
     return this.isAdminInOrganization && !this.hasLearnerImportFeature && !this.organization.isManagingStudents;
   }
 
+  get placeStatistics() {
+    return this.organizationPlaceStatistics;
+  }
+
+  async loadPlaceStatistics() {
+    if (this.prescriber?.placesManagement) {
+      this.organizationPlaceStatistics = await this.store.queryRecord('organization-place-statistic', {
+        organizationId: this.organization.id,
+      });
+    }
+  }
+
   async load() {
     if (this.session.isAuthenticated) {
       try {
@@ -105,5 +118,6 @@ export default class CurrentUserService extends Service {
     this.isGarAuthenticationMethod = organization.identityProviderForCampaigns === 'GAR';
     this.isAgriculture = organization.isAgriculture;
     this.organization = organization;
+    await this.loadPlaceStatistics();
   }
 }

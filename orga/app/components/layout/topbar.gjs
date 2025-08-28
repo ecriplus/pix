@@ -6,6 +6,6 @@ import UserLoggedMenu from './user-logged-menu';
   <div class="topbar">
     <OrganizationPlacesOrCreditInfo @placesCount={{@placesCount}} />
     <SchoolSessionManagement />
-    <UserLoggedMenu class="topbar__user-logged-menu" @onChangeOrganization={{@onChangeOrganization}} />
+    <UserLoggedMenu class="topbar__user-logged-menu" />
   </div>
 </template>
