@@ -1,7 +1,7 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Sidebar from 'pix-orga/components/layout/sidebar';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -23,7 +23,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      await render(hbs`<Layout::Sidebar />`);
+      await render(<template><Sidebar /></template>);
 
       // then
       assert.dom('a[href="https://pix.fr"]').exists();
@@ -39,11 +39,25 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       const logoLink = screen.getByRole('link', { name: t('common.home-page') });
 
-      assert.dom(logoLink).hasAttribute('href', '/campagnes');
+      assert.dom(logoLink).hasAttribute('href', '/');
+    });
+
+    test('should display a home entry', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: 5 });
+        canAccessCampaignsPage = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+
+      const screen = await render(<template><Sidebar /></template>);
+      const navigation = screen.getByRole('navigation');
+      const logoLink = within(navigation).getByRole('link', { name: t('navigation.main.home') });
+
+      assert.dom(logoLink).hasAttribute('href', '/');
     });
 
     test('should display Campagne, Équipe, Se déconnecter in menu for all organisation members', async function (assert) {
@@ -52,7 +66,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessCampaignsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.dom(screen.getByText('Campagnes')).exists();
       assert.dom(screen.getByText('Équipe')).exists();
@@ -64,7 +78,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         organization = Object.create({ id: '1', documentationUrl: 'www.amazing-doc.fr' });
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.dom(screen.getByText('Documentation')).exists();
     });
@@ -76,7 +90,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.ok(screen.getByText(t('navigation.main.places')));
     });
@@ -88,7 +102,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.notOk(screen.queryByText(t('navigation.main.places')));
     });
@@ -99,7 +113,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = false;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.dom(screen.queryByRole('link', { name: t('navigation.main.support') })).doesNotExist();
     });
@@ -115,7 +129,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Participants')).exists();
@@ -133,7 +147,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Étudiants')).exists();
@@ -149,7 +163,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Participants')).exists();
@@ -168,7 +182,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Élèves')).exists();
@@ -184,7 +198,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Participants')).exists();
@@ -201,7 +215,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.getByText('Certifications')).exists();
@@ -218,7 +232,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       // then
       assert.dom(screen.queryByLabelText('Certifications')).isNotVisible();
@@ -233,10 +247,10 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       const logoLink = screen.getByRole('link', { name: t('common.home-page') });
-      assert.dom(logoLink).hasAttribute('href', '/missions');
+      assert.dom(logoLink).hasAttribute('href', '/');
     });
 
     test('should display Mission menu', async function (assert) {
@@ -246,7 +260,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.dom(screen.getByText('Missions')).exists();
     });
@@ -258,7 +272,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.strictEqual(
         screen.getByRole('link', { name: t('navigation.main.support') }).href,
@@ -272,7 +286,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       assert.dom(screen.queryByText('Campagnes')).doesNotExist();
       assert.dom(screen.queryByText('Étudiants')).doesNotExist();
@@ -287,7 +301,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       const attestationsLink = screen.getByRole('link', { name: t('navigation.main.attestations') });
       assert.dom(attestationsLink).hasAttribute('href', '/attestations');
@@ -302,7 +316,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       }
       this.owner.register('service:current-user', CurrentUserStub);
 
-      const screen = await render(hbs`<Layout::Sidebar />`);
+      const screen = await render(<template><Sidebar /></template>);
 
       const statisticsLink = screen.getByRole('link', { name: t('navigation.main.statistics') });
       assert.dom(statisticsLink).hasAttribute('href', '/statistiques');
@@ -317,7 +331,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
 
     // when
-    const screen = await render(hbs`<Layout::Sidebar />`);
+    const screen = await render(<template><Sidebar /></template>);
 
     // then
     assert.dom(screen.getByLabelText('Navigation principale')).exists();
