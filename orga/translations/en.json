@@ -370,9 +370,7 @@
         },
         "missions": {
           "extend-session": {
-            "buttonText": "Extend session",
-            "description": "Extend session",
-            "title": "Extend session"
+            "buttonText": "Extend session"
           },
           "follow-activity": {
             "buttonText": "View missions",
@@ -381,7 +379,7 @@
           },
           "launch-session": {
             "buttonText": "Activate session",
-            "description": "This action should be performed before inviting your students to go to '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' and enter the school code to access the missions.",
+            "description": "Activate the session to allow students to access the missions by entering the school code at '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>', or extend the session if you need more time.",
             "title": "Launch a session"
           }
         }

@@ -51,8 +51,8 @@ export default class IndexMissions extends Component {
       {{#if this.isSessionActive}}
 
         <ActionCardsListItem
-          @title={{t "components.index.action-cards.missions.extend-session.title"}}
-          @description={{t "components.index.action-cards.missions.extend-session.description" htmlSafe=true}}
+          @title={{t "components.index.action-cards.missions.launch-session.title"}}
+          @description={{t "components.index.action-cards.missions.launch-session.description" htmlSafe=true}}
         >
           <PixButton @variant="secondary" type="button" @triggerAction={{this.activateSession}}>
             {{t "components.index.action-cards.missions.extend-session.buttonText"}}

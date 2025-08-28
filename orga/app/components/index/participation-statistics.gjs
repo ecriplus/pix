@@ -49,7 +49,7 @@ export default class ParticipationStatistics extends Component {
   }
 
   get completedParticipationsDescription() {
-    return this.totalParticipationCount === 0
+    return this.sharedParticipationCountLastThirtyDays === 0
       ? this.intl.t('components.index.participation-statistics.completed-participations.no-completed-participations')
       : this.intl.t('components.index.participation-statistics.completed-participations.description');
   }

@@ -370,9 +370,7 @@
         },
         "missions": {
           "extend-session": {
-            "buttonText": "Sessie verlengen",
-            "description": "Sessie verlengen",
-            "title": "Sessie verlengen"
+            "buttonText": "Sessie verlengen"
           },
           "follow-activity": {
             "buttonText": "Missies bekijken",
@@ -381,7 +379,7 @@
           },
           "launch-session": {
             "buttonText": "Sessie activeren",
-            "description": "Deze actie moet worden uitgevoerd voordat u uw leerlingen uitnodigt om naar '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' te gaan en de schoolcode in te voeren om toegang te krijgen tot de missies.",
+            "description": "Activeer de sessie zodat de leerlingen toegang krijgen tot de opdracht door de schoolcode in te voeren op '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' of verleng de sessie als u meer tijd nodig heeft.",
             "title": "Een sessie starten"
           }
         }
