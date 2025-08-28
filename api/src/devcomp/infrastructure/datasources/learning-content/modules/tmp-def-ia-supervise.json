@@ -98,26 +98,105 @@
               "element": {
                 "id": "365d0e92-7b9e-406a-920b-4d12e08c7a28",
                 "type": "text",
-                "content": "<p>Mettez-vous un instant à la place du logiciel de Lila. 🤖 </p>"
+                "content": "<p>Mettez-vous un instant à la place du logiciel de Lila. 🤖</p><p>Vous allez observez des photographies d’ail des ours et de muguets. </p><p>Vous devrez ensuite les reconnaître.👀 Vous êtes prêt ?</p>"
               }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "514a883c-0533-4006-ad57-46539a338cfc",
+                      "type": "text",
+                      "content": "<p>Voici&nbsp;des photographies d'ail des ours.</p>"
+                    },
+                    {
+                      "id": "fa51f717-e730-4296-ad83-ed91814c29ff",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/PlusieursAilOurs.png",
+                      "alt": "Plusieurs photographies d'ail des ours",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3ae25cff-f570-4f63-9b81-05cff2fba4d5",
+                      "type": "text",
+                      "content": "<p>Voici des photographies de muguet.<br></p>"
+                    },
+                    {
+                      "id": "39681dab-c586-4194-bdf2-fe570b088714",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/PlusieursMuguet.png",
+                      "alt": "Plusieurs photographies de muguet",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "element",
               "element": {
-                "id": "21c10c6e-591b-43f5-8894-6818ffdf5581",
-                "type": "custom-draft",
-                "title": "Elément interactif où il faut apprendre à reconnaître l’ail des ours du muguet",
-                "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-ailours-ou-muguet.html",
-                "instruction": "<p>Observez ces photographies d’ail des ours et de muguet. Vous devrez ensuite les reconnaître.👀 Vous êtes prêt ?</p>",
-                "height": 550
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "5f687ff0-e980-4b61-bbdb-33b89e5beffe",
-                "type": "text",
-                "content": "<p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p><p></p>"
+                "id": "891b484d-67e2-4c3c-a1aa-71b4c65a104e",
+                "type": "qab",
+                "instruction": "<p>Regardez l’image et identifiez si c’est de l’ail des ours ou du muguet.<br></p>",
+                "cards": [
+                  {
+                    "id": "a89c761c-71eb-47cd-a23a-f35a4fc2f8a1",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours2.jpg",
+                      "altText": "Une photographie d'une plante"
+                    },
+                    "proposalA": "Ail des ours",
+                    "proposalB": "Muguet",
+                    "solution": "1"
+                  },
+                  {
+                    "id": "3f861f65-65a1-415b-bb67-76c84872da45",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet2.jpg",
+                      "altText": "Une photographie d'une plante"
+                    },
+                    "proposalA": "Ail des ours",
+                    "proposalB": "Muguet",
+                    "solution": "2"
+                  },
+                  {
+                    "id": "1344f1c9-ad1e-44a4-bae2-139ff737d395",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet4.jpg",
+                      "altText": "Une photographie d'une plante"
+                    },
+                    "proposalA": "Ail des ours",
+                    "proposalB": "Muguet",
+                    "solution": "2"
+                  },
+                  {
+                    "id": "342ed35e-14a7-4d5d-9868-09de495511ab",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours4.jpg",
+                      "altText": "Une photographie d'une plante"
+                    },
+                    "proposalA": "Ail des ours",
+                    "proposalB": "Muguet",
+                    "solution": "1"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p>"
+                }
               }
             }
           ]
