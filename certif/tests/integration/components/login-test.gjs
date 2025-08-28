@@ -114,9 +114,8 @@ module('Integration | Component | login', function (hooks) {
         errors: [{ status: '401', code: 'SHOULD_CHANGE_PASSWORD' }],
       },
     };
-    const service = this.owner.lookup('service:url');
-    service.currentDomain = { getExtension: sinon.stub().returns('fr') };
-
+    const currentDomainService = this.owner.lookup('service:current-domain');
+    sinon.stub(currentDomainService, 'getExtension').returns('fr');
     sessionStub.authenticate.callsFake(() => reject(errorResponse));
     const screen = await render(<template><Login /></template>);
     await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), 'pix@example.net');

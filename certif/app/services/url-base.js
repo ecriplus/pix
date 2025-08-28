@@ -30,7 +30,7 @@ export default class UrlBaseService extends Service {
   get pixAppForgottenPasswordUrl() {
     const url = `${this.pixAppUrl}/mot-de-passe-oublie`;
     const currentLocale = this.locale.currentLocale;
-    return currentLocale === 'fr' ? url : `${url}?lang=${currentLocale}`;
+    return this.currentDomain.isFranceDomain ? url : `${url}?lang=${currentLocale}`;
   }
 
   getPixWebsiteUrl(pathname = '') {

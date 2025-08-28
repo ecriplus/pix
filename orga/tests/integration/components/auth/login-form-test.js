@@ -195,7 +195,8 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         errors: [{ status: '401', code: 'SHOULD_CHANGE_PASSWORD' }],
       },
     };
-
+    const currentDomainService = this.owner.lookup('service:current-domain');
+    sinon.stub(currentDomainService, 'getExtension').returns('fr');
     sinon.stub(sessionService, 'authenticate');
     sessionService.authenticate.rejects(errorResponse);
 
@@ -208,7 +209,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
     // then
     const expectedErrorMessage = t('pages.login-form.errors.should-change-password', {
-      url: 'https://app.pix.localhost/mot-de-passe-oublie',
+      url: 'https://app.pix.fr/mot-de-passe-oublie',
       htmlSafe: true,
     });
     assert

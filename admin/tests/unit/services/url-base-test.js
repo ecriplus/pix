@@ -97,7 +97,7 @@ module('Unit | Service | url-base', function (hooks) {
       sinon.stub(ENV, 'APP').value({ PIX_APP_URL_WITHOUT_EXTENSION: 'https://app.pix.' });
 
       const domainService = this.owner.lookup('service:current-domain');
-      sinon.stub(domainService, 'getExtension').returns('fr');
+      sinon.stub(domainService, 'getExtension').returns('org');
 
       await setCurrentLocale('en');
 
@@ -105,7 +105,7 @@ module('Unit | Service | url-base', function (hooks) {
       const homeUrl = service.pixAppForgottenPasswordUrl;
 
       // then
-      assert.strictEqual(homeUrl, 'https://app.pix.fr/mot-de-passe-oublie?lang=en');
+      assert.strictEqual(homeUrl, 'https://app.pix.org/mot-de-passe-oublie?lang=en');
     });
   });
 
