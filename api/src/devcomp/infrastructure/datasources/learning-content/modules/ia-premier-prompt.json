@@ -713,11 +713,786 @@
               "element": {
                 "id": "2d39db49-0ab2-4222-8911-abb459b16fef",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "Utilisation d'un véritable LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
                 "instruction": "<p>Écrivez un prompt au logiciel d'IA générative ci-dessous pour qu’il crée un poème sur votre animal préféré.<br><br></p>",
-                "solution": "<p></p>",
+                "solution": "{
+  "id": "7a38c90d-9937-4497-bee3-fe58541af420",
+  "slug": "tmp-prompt-intermediaire",
+  "title": "J'améliore mes prompts !",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c'est-à-dire, des prompts qu'on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
+    "duration": 10,
+    "level": "Intermédiaire",
+    "objectives": [
+      "<p>Écrire des prompts efficaces</p>",
+      "<p> Évaluer de manière critique la réponse de l’IA générative</p>",
+      "<p>Améliorer progressivement le résultat</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "17a88370-d9c5-494e-85e5-a5b44025f537",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "005b3848-5cad-49fb-876b-1cc430854d71",
+          "type": "transition",
+          "title": "Introduction",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "339e443a-9eb7-476c-8689-9a7714c31607",
+                "type": "text",
+                "content": "<p>Gustave organise un tournoi de volley. 🏐</p><p>Il veut gagner du temps et demande à une IA générative d’écrire à sa place l’invitation aux participants. </p><p>Mais il est déçu du résultat… </p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "92f571ad-1a64-4b64-ba8f-782337e61713",
+          "type": "discovery",
+          "title": "Conversation d'introduction",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f49a0fed-c65d-467e-a30d-73445381c61c",
+                "type": "custom",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Conversation d'introduction",
+                  "messages": [
+                    {
+                      "userName": "Gustave",
+                      "direction": "incoming",
+                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
+                    },
+                    {
+                      "userName": "Emma",
+                      "direction": "outgoing",
+                      "content": "Ah bon ? Quel prompt as-tu utilisé ? 🤖"
+                    },
+                    {
+                      "userName": "Gustave",
+                      "direction": "incoming",
+                      "content": "Je voulais inviter les joueurs du tournoi. Mon prompt, c’était : « Écris une invitation au tournoi. »"
+                    },
+                    {
+                      "userName": "Emma",
+                      "direction": "outgoing",
+                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉 Il y a des techniques pour améliorer les résultats. 💡"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "044c1dcc-cd15-4650-834d-a45fbccb2c9d",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "61cd268c-d7d3-4387-abf7-9312a2d8ea6f",
+          "type": "transition",
+          "title": "Transition : La qualité de la réponse de l’IA dépend de la qualité du prompt !",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "052ed96d-d123-49a0-b7aa-fb8c2d220ca8",
+                "type": "text",
+                "content": "<p>La réponse de l’IA dépend de la qualité du prompt. Voyons comment faire un prompt efficace.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0f187da9-1bbc-407f-bb5d-c29b09f2c950",
+          "type": "discovery",
+          "title": "Améliore le prompt de Gustave",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3f36edd3-42cd-4cf3-9063-1ad75166871c",
+                "type": "text",
+                "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Écris une invitation au tournoi.&nbsp;»</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
+                "type": "qcm",
+                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>l’objet&nbsp;: «&nbsp;le tournoi de volley&nbsp;»</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>la date&nbsp;: «&nbsp;samedi prochain&nbsp;»</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>le lieu&nbsp;: «&nbsp;le gymnase des 3 sapins&nbsp;»</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>les destinataires&nbsp;: «&nbsp;les membres du club&nbsp;»</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !</p>",
+                    "diagnosis": "<p>Le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas tout à fait !</p>",
+                    "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "417ba69e-c96c-445a-b4dc-1107fd18c4cd",
+          "type": "lesson",
+          "title": "Le contexte du prompt",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
+                "type": "text",
+                "content": "<p>➡️Un prompt bien formulé donne toujours à l’IA un contexte, c’est-à-dire des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif, etc.&nbsp; Sans contexte, l'IA risque de répondre de façon vague ou hors sujet.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a0f82875-61f3-4a6a-ad1a-dc30f40cf405",
+          "type": "discovery",
+          "title": "Tester différents tons",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "cb4a2c6a-a637-46bf-973a-f899a4b75a8b",
+                      "type": "custom",
+                      "tagName": "llm-prompt-select",
+                      "props": {
+                        "speed": 0,
+                        "messages": [
+                          {
+                            "direction": "outbound",
+                            "content": "Écris un message de relance pour participer à un tournoi de volley"
+                          },
+                          {
+                            "direction": "inbound",
+                            "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
+                          }
+                        ],
+                        "prompts": [
+                          {
+                            "prompt": "adopte un ton festif",
+                            "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
+                          },
+                          {
+                            "prompt": "adopte un ton sérieux",
+                            "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                          },
+                          {
+                            "prompt": "adopte un ton drôle",
+                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "cc04a60d-ee44-4f09-b999-e11e908121fd",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>celui avec un ton festif</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Un choix sympa !</strong>&nbsp; Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>celui avec un ton sérieux.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>celui avec un ton drôle.</p>",
+                          "feedback": {
+                            "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>aucun ne me plaît.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: enfantin, ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ac059738-54bc-4682-bc96-af014c8f6705",
+          "type": "lesson",
+          "title": "Le ton dans un prompt",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
+                "type": "text",
+                "content": "<p>➡️ On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;</li><li>de quelle manière (avec humour, de manière brève, pédagogue, professionnelle, etc.),</li><li>un rôle à jouer («&nbsp;tu es un poète&nbsp;», «&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1fbe2256-2436-497e-815e-374021a81b20",
+          "type": "discovery",
+          "title": "Quel est le format ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
+                "type": "text",
+                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
+                "type": "text",
+                "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchettes</td>\n            <td>Trois joueurs forment un triange et se passent le ballon en manchette</td>\n        </tr>\n        <tr>\n            <th>Avancé</th>\n            <td>Réception de service réél</td>\n            <td>Un joueur reçoit des services puissants en manchette</td>\n        </tr>\n    </tbody>\n</table>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e9451c2c-bb3e-40e1-8d55-798a5c9e6b64",
+                "type": "qrocm",
+                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
+                "proposals": [
+                  {
+                    "input": "df1b0582-20d7-4401-b70a-f121881e7772",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 8,
+                    "display": "inline",
+                    "placeholder": "un seul mot",
+                    "ariaLabel": "champs à remplir",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "tableau"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !<br></p>",
+                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Et non !</p>",
+                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format, ici, un tableau.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2649a70b-3c92-4be4-b729-f27784225c40",
+          "type": "discovery",
+          "title": "Découverte : Aide Gustave avec son prompt",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
+                "type": "text",
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1a04f4c4-2cc1-4898-ba5e-4c2ea788b764",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "Simulateur LLM",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
+                "instruction": "À vous de jouer !",
+                "solution": "pix-llm-success",
+                "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
+                "type": "text",
+                "content": "<p>\n</p><p></p><p></p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n<p></p><p></p><p></p><p></p><p></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a280f603-3c78-4b98-a858-c2e0119a19af",
+          "type": "lesson",
+          "title": "L'importance du format et de l'itération dans les prompts",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
+                "type": "text",
+                "content": "<p>➡️Sans indication, l'IA choisira elle-même un format, qui risque de ne pas correspondre à vos attentes.&nbsp;🤔​</p><p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </p><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.</p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8c11c368-76c4-4db1-b635-d5836a1a9f61",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "97606a38-68e2-427e-b8e5-65411cd7d5d5",
+          "type": "summary",
+          "title": "Récap' : l'essentiel pour faire des bons prompts",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "17178f53-901f-4547-9f8a-bfc40990214d",
+                "type": "text",
+                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple&nbsp;: résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple&nbsp;: le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple&nbsp;: une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;</p><ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6982c388-afc1-4b87-9449-ad2d089b928a",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "b6a9f4ed-057a-490f-9d81-a0687b5ee269",
+          "type": "activity",
+          "title": "Analyse les prompts",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "bfd964cd-dcb6-4bf6-8bde-182a05b75795",
+                "type": "text",
+                "content": "<p>Grâce à ces conseils, Gustave a amélioré ses techniques pour parler à l’IA.&nbsp;</p><p>Pour chaque prompt, sélectionnez tous les éléments qui rendent le prompt clair.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "ae9cf536-d7b2-423f-872d-b20fc1217716",
+                      "type": "text",
+                      "content": "<p>«&nbsp;En tant que coach de volley, propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
+                    },
+                    {
+                      "id": "90b420d2-029d-4718-b865-8636cbb2daab",
+                      "type": "qcm",
+                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>le contexte</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>le format</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>le ton à adopter</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>le rôle à jouer</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien joué ! 🎉</p>",
+                          "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "2",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f64e341e-4e3b-4088-827d-9f353b869749",
+                      "type": "text",
+                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination des joueurs adultes loisirs.&nbsp;»</p>"
+                    },
+                    {
+                      "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
+                      "type": "qcm",
+                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>le contexte</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>le format</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>le ton à adopter</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>le rôle à jouer</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bravo ! 🎉</p>",
+                          "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
+                      "type": "text",
+                      "content": "<p>«&nbsp;Décris un match de volley à la plage, comme si tu étais le célèbre écrivain Molière.&nbsp;»</p>"
+                    },
+                    {
+                      "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
+                      "type": "qcm",
+                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>le contexte</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>le format</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>le ton à adopter</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>le rôle à jouer</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bonne réponse ! 🎉</p>",
+                          "diagnosis": "<p>Ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5176e4d0-394a-4e27-a754-f675ee325595",
+                      "type": "text",
+                      "content": "<p>«&nbsp;En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville. Inclus ses grandes qualités (humour, adresse, leadership) et ses petits défauts (impatient et bavard).&nbsp;»</p>"
+                    },
+                    {
+                      "id": "bf5ec9f6-31ce-44ad-b880-5694072cd0e4",
+                      "type": "qcm",
+                      "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>le contexte</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>le format</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>le ton à adopter</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>le rôle à jouer</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien joué !</p>",
+                          "diagnosis": "<p>Tous ces éléments rendent ce prompt clair. Mais il n’est pas toujours nécessaire de les mettre tous.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bde3a9c6-8c31-465d-94ac-20276ea7a445",
+          "type": "activity",
+          "title": "Gustave organise les notes ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e90e7470-54a6-444d-bc77-39cfc9b0fad1",
+                "type": "text",
+                "content": "<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi&nbsp;:&nbsp;</p><p><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p><p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p><p><em>- musique&nbsp;: demander mairie pour sono </em></p><p><em>- si pluie → gymnase dispo ? ok !&nbsp;:-) </em></p><p><em>- buvette&nbsp;: jus, sandwichs, fruits → pas de chaud </em></p><p><em>- récompenses ? médailles → à chiffrer</em></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
+                "type": "text",
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "db74d65f-dcbf-493d-aeb9-818e0f5f13a8",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "Simulateur de LLM",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
+                "instruction": "<p>Discutez avec l’IA de Pix jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>",
+                "solution": "pix-llm-success",
+                "height": 800
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a20e85e6-6ab6-4b08-b9b7-8d4dcf2a9e94",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
+          "type": "challenge",
+          "title": "Défi : l'actualité du tournoi",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dd2cf906-b77f-4c4d-8f11-9aa53a606d03",
+                "type": "text",
+                "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée une publication sur le site du gymnase, à sa manière…</p><p>Ses précédentes publications sont disponibles ci-dessous&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
+                "type": "custom",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Le tournoi de l’automne 🍂",
+                      "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les Patata Smash sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br>Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
+                        "alt": "Bravo à l'équipe Patata Smash !"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Le tournoi du printemps 🌷",
+                      "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les Filets Mignons. <br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers Filets Mignons.</p>",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
+                        "alt": "Félicitations à l'équipe Filets mignons !"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "aspectRatio": 0,
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableLoop": false
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "52c9f208-8f95-4926-a64e-214041a834d2",
+                "type": "text",
+                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l'image illustrant le tournoi.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9fb1cf79-a154-4b71-a1e5-cea6803b950b",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
+                "alt": "Une affiche concernant le tournoi de volley - lire l'alternative textuelle",
+                "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l'équipe des volley-raptors vainqueur !&nbsp;</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fbe1b91f-a423-45f5-8329-1cd50f436944",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "Simulateur LLM",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
+                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire, à vous de jouer !</p>",
+                "solution": "pix-llm-success",
+                "height": 800
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
+                "type": "text",
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details><p></p><p></p><p></p>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}",
                 "height": 500
               }
             }
