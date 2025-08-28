@@ -102,15 +102,15 @@
                     "id": "1",
                     "content": "<p>Des idées de noms pour une association de yoga à roulettes ?</p>",
                     "feedback": {
-                      "state": "<p>Bien vu !&nbsp;</p>",
+                      "state": "<p>Bien vu !</p>",
                       "diagnosis": "<p>En effet, le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.&nbsp;Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
+                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga&nbsp;:</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
                     "feedback": {
-                      "state": "<p>Et non !&nbsp;</p>",
+                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>C'est la réponse donnée par un logiciel d'IA générative. Le prompt, c'est la question posée ou la consigne donnée au logiciel d'IA générative.</p>"
                     }
                   },
@@ -138,7 +138,7 @@
               "element": {
                 "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
                 "type": "text",
-                "content": "<ul><li>Le prompt est la question posée ou la consigne donnée à un logiciel d'IA générative.🤖</li><li>Les réponses d'un logiciel d'IA générative s'affichent comme dans une conversation de messagerie instantanée.&nbsp;</li><li>Il y a toujours une zone pour écrire le prompt suivant.</li></ul>"
+                "content": "<ul><li>Le prompt est <strong>la question posée</strong> ou <strong>la consigne donnée</strong> à un logiciel d'IA générative.🤖</li><li><strong>Les réponses</strong> d'un logiciel d'IA générative s'affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</li><li>Il y a toujours <strong>une zone pour écrire</strong> le prompt suivant.</li></ul>"
               }
             }
           ]
@@ -153,7 +153,7 @@
               "element": {
                 "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
                 "type": "text",
-                "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt&nbsp;!📝</p>"
+                "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d'IA générative, nous allons voir comment rédiger un prompt !📝</p>"
               }
             }
           ]
@@ -167,11 +167,38 @@
               "type": "element",
               "element": {
                 "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/observationreponseia.html",
-                "instruction": "<p>Glissez et déposez chaque prompt dans la zone où l'on écrit les prompts.</p><p>Observez la réponse du logiciel d'IA générative.</p>",
-                "height": 500
+                "type": "text",
+                "content": "<p>Cliquer sur chaque prompt et observez la réponse du logiciel d'IA générative.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "14db3b92-0b6a-4bf7-966a-17798f0bedd1",
+                "type": "custom",
+                "tagName": "llm-prompt-select",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                    }
+                  ],
+                  "prompts": [
+                    {
+                      "prompt": "Nom chien",
+                      "response": "Tu cherches un nom pour un chien ? Si oui, quel type de chien ou de personnalité a-t-il ? Cela peut m’aider à te proposer quelque chose de sympa !"
+                    },
+                    {
+                      "prompt": "Donne moi des idées de noms de chiens.",
+                      "response": "<p>Avec plaisir ! 🐶 Voici une liste de noms de chien :</p> <p>1. Tokyo</p><p>2. Nala</p><p>3. Milou</p><p>4. Sushi</p><p>5. Luna</p><p>6. Apéro</p><p>7. Simba</p><p>8. Paco</p><p>9. Bart</p><p>10. Cookie<p>"
+                    },
+                    {
+                      "prompt": "Liste-moi 10 noms de chiens pour m'aider à choisir un nom pour mon beagle de 4 mois.",
+                      "response": "<p>Avec plaisir ! 🎉</p><p>Voici 10 idées de noms qui iraient super bien pour un beagle de 4 mois, à la fois mignons, joueurs et un peu espiègles (comme le sont souvent les beagles)🐾 :</p><p>1.Scout — pour son côté explorateur et curieux</p><p>2.Happy — car il sera toujours joyeux</p><p>3.Charlie — un classique tendre et facile à appeler</p><p>4. Mojo — plein d’énergie et de bonne humeur</p><p>5.Oreo — pour un petit loulou tricolore</p><p>6.Flash — s’il court partout comme un fou</p><p>7. Biscuit — doux et gourmand</p><p>8. Lucky — parce qu’il a la chance d’être avec toi (et toi avec lui)</p><p>9. Marley — comme dans le film, fidèle et un peu canaille</p><p>10. Jazz — dynamique et musical, pour un chien plein de vie</p>"
+                    }
+                  ]
+                }
               }
             },
             {
@@ -185,7 +212,7 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d'IA générative en langage informatique.</p>",
                     "feedback": {
-                      "state": "<p>Et non ! </p>",
+                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
                     }
                   },
@@ -193,15 +220,15 @@
                     "id": "2",
                     "content": "<p>On parle à un logiciel d'IA générative comme on parle avec une autre personne.</p>",
                     "feedback": {
-                      "state": "<p>Bravo !</p>",
-                      "diagnosis": "<p><br></p>"
+                      "state": "<p>Bravo !</p>",
+                      "diagnosis": ""
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>On parle à un logiciel d'IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "state": "<p>Et non&nbsp; !</p>",
+                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d'IA générative comme on parle à une autre personne.</p>"
                     }
                   }
@@ -221,7 +248,7 @@
               "element": {
                 "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
                 "type": "text",
-                "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme&nbsp;: «&nbsp;lister&nbsp;», «&nbsp;traduire&nbsp;», «&nbsp;résumer&nbsp;», etc.<br><br></p>"
+                "content": "<p>Comme vous avez pu le voir, on fait des demandes en <strong>langage courant</strong> à un logiciel d'IA générative, pas besoin de connaître des commandes spéciales ! 💬 <br>En revanche, pour que le logiciel d'IA générative comprenne bien la demande, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme&nbsp;: «lister», «traduire», «résumer», etc.<br><br></p>"
               }
             }
           ]
@@ -251,18 +278,37 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
-                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p>"
+                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d'IA générative.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/Promptgateaupistache.html",
-                "instruction": "<p>Glissez et déposez les prompts suivants dans le champ de saisie et observez les réponses du logiciel d'IA générative.</p>",
-                "height": 400
+                "type": "custom",
+                "tagName": "llm-prompt-select",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                    }
+                  ],
+                  "prompts": [
+                    {
+                      "prompt": "Écris une recette de gâteau.",
+                      "response": "<p>Voici une recette de gâteau pour 6 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Fais fondre 200 g de chocolat noir avec 100 g de beurre.</p><p>3. Ajoute 100 g de sucre, 3 œufs, puis 50 g de farine, en mélangeant bien./p><p>4. Verse la pâte dans un moule beurré.</p><p>5. Enfourne 20 à 25 minutes, laisse tiédir avant de démouler.</p>"
+                    },
+                    {
+                      "prompt": "Écris une recette de gâteau pour 10 personnes.",
+                      "response": "<p>Voici une recette de gâteau au chocolat pour 10 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Fais fondre 300 g de chocolat noir avec 150 g de beurre.</p><p>3. Incorpore 150 g de sucre, 5 œufs, puis 100 g de farine.</p><p>4. Verse dans un grand moule beurré et fariné.</p><p>5. Enfourne 30 à 35 minutes, laisse refroidir avant de démouler.</p>"
+                    },
+                    {
+                      "prompt": "Écris une recette de gâteau pour 10 personnes sans chocolat.",
+                      "response": "<p>Voici une recette de gâteau à la pistache pour 10 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Mélange 5 œufs avec 150 g de sucre jusqu’à ce que le mélange blanchisse.</p><p>3. Ajoute 150 g de poudre d’amandes, 100 g de pâte de pistache et 100 g de beurre fondu.</p><p>4. Incorpore 100 g de farine et 1 sachet de levure.</p><p>5. Verse dans un moule beurré, enfourne 35 min, laisse refroidir.</p>"
+                    }
+                  ]
+                }
               }
             },
             {
@@ -293,7 +339,7 @@
                     "content": "<p>écris une recette de gâteau pour 10 personnes sans chocolat</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !</p>",
-                      "diagnosis": "<p>En effet, ce prompt contient des éléments précis&nbsp;:&nbsp;un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                      "diagnosis": "<p>En effet, ce prompt contient des éléments précis&nbsp;: un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
                     }
                   }
                 ],
@@ -404,7 +450,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
-                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt («&nbsp;instruction&nbsp;» ou «&nbsp;requête&nbsp;» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d'IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain.🗣️</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse du logiciel d'IA générative sera adaptée et pertinente.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «&nbsp;Traduis&nbsp;», «&nbsp;Liste&nbsp;», «&nbsp;Résume&nbsp;», etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner du contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> du logiciel d'IA générative pour vérifier qu'il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d'IA générative ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider le logiciel.📝</li></ul>"
+                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: <br></p><ul><li>Un prompt («instruction&nbsp;» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d'IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, comme si on parlait à un autre être humain.🗣️</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse du logiciel d'IA générative sera adaptée et pertinente.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «Traduis», «Liste», «Résume», etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner du contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> du logiciel d'IA générative pour vérifier qu'il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d'IA générative ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider le logiciel.📝</li></ul>"
               }
             }
           ]
@@ -419,7 +465,7 @@
               "element": {
                 "id": "ae11054b-571a-4577-8554-c2731f729647",
                 "type": "text",
-                "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles&nbsp;!🙌</p>"
+                "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles !🙌</p>"
               }
             }
           ]
@@ -432,13 +478,127 @@
             {
               "type": "element",
               "element": {
-                "id": "63c7f73f-b9b1-4c9b-a983-29b5dc8030b9",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/glisserdeposerlesbonsverbes.html",
-                "instruction": "<p>Glissez et déposez le verbe qui convient le plus pour compléter chaque prompt ci-dessous en fonction des réponses de l'IA générative.</p>",
-                "height": 500
+                "id": "3fe45d3e-1c1b-46f0-845d-0c2233d9e340",
+                "type": "text",
+                "content": "<p>Lisez attentivement les affirmations suivantes et indiquez, pour chacune d’elles, si elle est vraie ou fausse.</p>"
               }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "8ea206f3-5bb2-49b6-b35e-cee8da3fefdd",
+                      "type": "qcu",
+                      "instruction": "<p>Le prompt, c'est la réponse donnée par le logiciel d'IA à la question ou consigne de&nbsp;l'utilisateur.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vrai</p>",
+                          "feedback": {
+                            "state": "<p>Et non !</p>",
+                            "diagnosis": "<p>Le prompt, c'est&nbsp;la question posée ou la consigne donnée&nbsp;au logiciel d'IA par&nbsp;l'utilisateur.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faux</p>",
+                          "feedback": {
+                            "state": "<p>Bravo !</p>",
+                            "diagnosis": "<p>En effet, le prompt c'est bien la demande que l'utilisateur fait au logiciel d'IA.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6913b0ac-2a75-4c6a-9f6a-f8d230dd211f",
+                      "type": "qcu",
+                      "instruction": "<p>On parle en langage courant avec un logiciel d'IA, comme si on parlait avec une autre personne.</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vrai</p>",
+                          "feedback": {
+                            "state": "<p>Bravo !</p>",
+                            "diagnosis": "<p>En effet, pas besoin d'un langage spécial pour fair eune demande à l'IA ! On lui parle comme si on parlait avec une autre personne, c'est-à-dire, en langage courant.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faux</p>",
+                          "feedback": {
+                            "state": "<p>Et non !</p>",
+                            "diagnosis": "<p>En effet, on parle à un logiciel d'IA comme si on parlait avec une autre personne. On utilise donc le langage couran.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "546936ad-8781-4048-9d73-019b49211677",
+                      "type": "qcu",
+                      "instruction": "<p>Pour être précis, il suffit d'utiliser un verbe d'action quand on fait une demande au logiciel d'IA.<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vrai</p>",
+                          "feedback": {
+                            "state": "<p>Et non !</p>",
+                            "diagnosis": "<p>En plus du verbe d'action, il faut aussi fournir au logiciel d'IA des informations supplementaires pour lui donner du contexte.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faux</p>",
+                          "feedback": {
+                            "state": "<p>Bravo !</p>",
+                            "diagnosis": "<p>En effet, en plus du verbe d'action, il faut fournir au logiciel d'IA des informations supplementaires pour lui donner du contexte.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "21e81315-16db-4b75-ba3a-65fa73d247dd",
+                      "type": "qcu",
+                      "instruction": "<p>On peut faire une confiance aveugle aux réponses d'un logiciel d'IA.&nbsp;</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Vrai</p>",
+                          "feedback": {
+                            "state": "<p>Et non !&nbsp;</p>",
+                            "diagnosis": "<p>Il faut toujours relire la réponse du logiciel d'IA. Si elle ne convient pas, il faut reformuler la demande pour mieux le guider !</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faux</p>",
+                          "feedback": {
+                            "state": "<p>Bravo !</p>",
+                            "diagnosis": "<p>En effet, il faut toujours relire la réponse du logiciel d'IA. Si elle ne convient pas, il faut reformuler la demande pour mieux le guider !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -452,7 +612,7 @@
               "element": {
                 "id": "79e24dbc-b512-479b-913d-5df858490409",
                 "type": "qab",
-                "instruction": "<p>Classez chaque prompt ci-dessous selon sa précision dans une des catégories suivantes&nbsp;:&nbsp; «&nbsp;clair et précis&nbsp;» ou «&nbsp;flou et vague&nbsp;».</p>",
+                "instruction": "<p>Classez chaque prompt ci-dessous selon sa précision dans une des catégories suivantes&nbsp;: «clair et précis» ou «flou et vague».</p>",
                 "cards": [
                   {
                     "id": "5ff6c7e9-b9c5-4b49-a6f9-b381075c2163",
@@ -553,11 +713,11 @@
               "element": {
                 "id": "2d39db49-0ab2-4222-8911-abb459b16fef",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "Utilisation d'un véritable LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cma2ihhoa000bwg011i86qb30",
                 "instruction": "<p>Écrivez un prompt au logiciel d'IA générative ci-dessous pour qu’il crée un poème sur votre animal préféré.<br><br></p>",
-                "solution": "<p></p>",
+                "solution": "pix-llm-success",
                 "height": 500
               }
             }
