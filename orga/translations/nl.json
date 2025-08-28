@@ -379,8 +379,8 @@
           },
           "launch-session": {
             "buttonText": "Sessie activeren",
-            "description": "Activeer de sessie zodat de leerlingen toegang krijgen tot de opdracht door de schoolcode in te voeren op '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>' of verleng de sessie als u meer tijd nodig heeft.",
-            "title": "Een sessie starten"
+            "description": "De sessie geeft leerlingen gedurende 4 uur toegang tot Pix Junior. Zodra de sessie is geactiveerd, kan deze worden verlengd.",
+            "title": "Sessie beheren"
           }
         }
       },

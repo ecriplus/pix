@@ -379,8 +379,8 @@
           },
           "launch-session": {
             "buttonText": "Activate session",
-            "description": "Activate the session to allow students to access the missions by entering the school code at '<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://junior.pix.fr\">junior.pix.fr</a>', or extend the session if you need more time.",
-            "title": "Launch a session"
+            "description": "The session allows students to access Pix Junior for a period of 4 hours. Once the session has been activated, it is possible to extend its duration.",
+            "title": "Manage session"
           }
         }
       },
