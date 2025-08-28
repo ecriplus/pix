@@ -622,7 +622,7 @@
               "element": {
                 "id": "5415e701-d81a-4f5e-b0e4-a0db67d83e18",
                 "type": "text",
-                "content": "<p>Voici un autre exemple de web component, le QCU Image :</p>"
+                "content": "<p>Voici un autre exemple de web component, le Quiz Image :</p>"
               }
             },
             {
@@ -630,7 +630,7 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae38",
                 "type": "custom",
-                "tagName": "qcu-image",
+                "tagName": "image-quiz",
                 "props": {
                   "name": "Liste d'applications",
                   "maxChoicesPerLine": 3,
