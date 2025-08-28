@@ -1198,7 +1198,11 @@
         "start-button": "Start course"
       },
       "items": {
-        "completed": "Completed!"
+        "completed": "Completed!",
+        "formation": {
+          "description": "Complete your test and unlock customised training modules! The number of modules will depend on your results.",
+          "title": "I am training myself"
+        }
       }
     },
     "comparison-window": {

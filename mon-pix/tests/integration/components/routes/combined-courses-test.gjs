@@ -10,6 +10,36 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering.js';
 module('Integration | Component | combined course', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  module('when there is a formation item', function () {
+    test('should display formation item', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 'formation_1_2',
+        reference: 2,
+        type: 'FORMATION',
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'NOT_STARTED',
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(combinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(screen.getByText(t('pages.combined-courses.items.formation.title')));
+      assert.ok(screen.getByText(t('pages.combined-courses.items.formation.description')));
+    });
+  });
+
   module('when participation has not been started yet', function () {
     test('should display start button', async function (assert) {
       // given

@@ -20,17 +20,12 @@
 
       &__title {
         @extend %pix-title-s;
-
       }
 
       &__description {
         @extend %pix-body-m;
-
       }
-
     }
-
-
   }
 
   &__divider {
@@ -41,6 +36,7 @@
 
 .combined-course-item {
   display: flex;
+  gap: var(--pix-spacing-4x);
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--pix-spacing-10x);
@@ -49,12 +45,42 @@
   border: 1px solid var(--pix-primary-100);
   border-radius: var(--pix-spacing-4x);
 
+  &--formation {
+    background: color-mix(in srgb, var(--pix-primary-100) 20%, transparent);
+  }
+
+  &__content {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--pix-spacing-12x);
+  }
+
   &__title {
     @extend %pix-title-xxs;
   }
 
+  &__description {
+    @extend %pix-body-s;
+  }
 
   &__indicator {
+    &--locked {
+      display: flex;
+      justify-content: center;
+      min-width: var(--pix-spacing-8x);
+      max-width: var(--pix-spacing-8x);
+
+      svg {
+        fill: var(--pix-primary-500);
+      }
+    }
+
     &--completed {
       @extend %pix-body-m;
 

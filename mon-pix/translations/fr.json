@@ -1198,7 +1198,11 @@
         "start-button": "Commencer mon parcours"
       },
       "items": {
-        "completed": "Complété !"
+        "completed": "Complété !",
+        "formation": {
+          "description": "Terminez votre test et débloquez des modules de formation sur mesure ! Leur nombre dépendra de vos résultats.",
+          "title": "Je me forme"
+        }
       }
     },
     "comparison-window": {
