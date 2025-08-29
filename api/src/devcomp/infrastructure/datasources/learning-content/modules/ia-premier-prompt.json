@@ -509,22 +509,22 @@
                     {
                       "id": "8ea206f3-5bb2-49b6-b35e-cee8da3fefdd",
                       "type": "qcu",
-                      "instruction": "<p>Le prompt, c'est la réponse donnée par le logiciel d'IA à la question ou consigne de l'utilisateur.</p>",
+                      "instruction": "<p>Le prompt, c'est la réponse donnée par le logiciel d'IA générative à la question ou consigne de l'utilisateur.</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>Le prompt, ce n'est pas la réponse que donne un logiciel d'IA ! C'est la demande que l'utilisateur fait au logiciel d'IA sous forme de question ou de consigne.</p>"
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Le prompt, ce n'est pas la réponse que donne un logiciel d'IA générative ! C'est la demande que l'utilisateur fait au logiciel d'IA générative sous forme de question ou de consigne.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faux</p>",
                           "feedback": {
-                            "state": "<p>Bravo !</p>",
-                            "diagnosis": "<p>Le prompt, ce n'est pas la réponse que donne un logiciel d'IA ! C'est la demande que l'utilisateur fait au logiciel d'IA sous forme de question ou de consigne. </p>"
+                            "state": "<p>Bonne réponse !🎉</p>",
+                            "diagnosis": "<p>Le prompt, ce n'est pas la réponse que donne un logiciel d'IA générative ! C'est la demande que l'utilisateur fait au logiciel d'IA générative sous forme de question ou de consigne. </p>"
                           }
                         }
                       ],
@@ -543,16 +543,16 @@
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
-                            "state": "<p>Bravo !</p>",
-                            "diagnosis": "<p>En effet, pas besoin d'un langage spécial pour faire une demande à l'IA ! On lui parle comme si on parlait avec une autre personne, c'est-à-dire, en langage courant.<br></p>"
+                            "state": "<p>Bonne réponse !🎉</p>",
+                            "diagnosis": "<p>En effet, pas besoin de formulation spéciale pour faire une demande à l'IA générative ! On lui parle en langage courant, comme si on parlait avec une autre personne<br></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faux</p>",
                           "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>On n'utilise pas de langage spécial pour parler à un logiciel d'IA. On lui parle en langage courant, comme si on parlait avec une autre personne.</p>"
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>On n'utilise pas de formulation spéciale pour parler à un logiciel d'IA générative. On lui parle en langage courant, comme si on parlait avec une autre personne.</p>"
                           }
                         }
                       ],
@@ -565,22 +565,22 @@
                     {
                       "id": "546936ad-8781-4048-9d73-019b49211677",
                       "type": "qcu",
-                      "instruction": "<p>Quand on fait une demande au logiciel d'IA, il suffit d'utiliser un verbe d'action pour être précis.<br></p>",
+                      "instruction": "<p>Quand on fait une demande au logiciel d'IA générative, il suffit d'utiliser un verbe d'action pour être précis.<br></p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>En plus du verbe d'action, il faut aussi fournir au logiciel d'IA des informations supplementaires pour lui donner du contexte.</p>"
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>En plus du verbe d'action, il faut aussi fournir au logiciel d'IA générative des informations supplementaires pour lui donner du contexte.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faux</p>",
                           "feedback": {
-                            "state": "<p>Bravo !</p>",
-                            "diagnosis": "<p>En effet, en plus du verbe d'action, il faut fournir au logiciel d'IA des informations supplementaires pour lui donner du contexte.</p>"
+                            "state": "<p>Bonne réponse !🎉</p>",
+                            "diagnosis": "<p>En effet, en plus du verbe d'action, il faut fournir au logiciel d'IA générative des informations supplementaires pour lui donner du contexte.</p>"
                           }
                         }
                       ],
@@ -599,16 +599,16 @@
                           "id": "1",
                           "content": "<p>Vrai</p>",
                           "feedback": {
-                            "state": "<p>Et non !</p>",
-                            "diagnosis": "<p>Il faut toujours relire la réponse du logiciel d'IA en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d'IA !</p>"
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Il faut toujours relire la réponse du logiciel d'IA générative en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d'IA générative !</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Faux</p>",
                           "feedback": {
-                            "state": "<p>Bravo !</p>",
-                            "diagnosis": "<p>En effet, il faut toujours relire la réponse du logiciel d'IA en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d'IA !</p>"
+                            "state": "<p>Bonne réponse !🎉</p>",
+                            "diagnosis": "<p>En effet, il faut toujours relire la réponse du logiciel d'IA générative en gardant un regard critique. Si elle ne convient pas, on peut reformuler la demande pour mieux guider le logiciel d'IA générative !</p>"
                           }
                         }
                       ],
