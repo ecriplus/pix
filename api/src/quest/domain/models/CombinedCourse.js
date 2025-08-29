@@ -1,11 +1,20 @@
+import Joi from 'joi';
+
 import {
   CombinedCourseParticipationStatuses,
   CombinedCourseStatuses,
 } from '../../../prescription/shared/domain/constants.js';
+import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { CombinedCourseItem, ITEM_TYPE } from './CombinedCourseItem.js';
 import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
+const schema = Joi.object({
+  id: Joi.number().allow(null),
+  code: Joi.string().required(),
+  organizationId: Joi.number().required(),
+  name: Joi.string().required(),
+});
 export class CombinedCourse {
   #quest;
 
@@ -14,11 +23,21 @@ export class CombinedCourse {
     this.code = code;
     this.organizationId = organizationId;
     this.name = name;
+
+    this.#validate({ id, code, organizationId, name });
+
     this.#quest = quest;
   }
 
   get quest() {
     return this.#quest;
+  }
+
+  #validate(combinedCourse) {
+    const { error } = schema.validate(combinedCourse);
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details, undefined, { data: combinedCourse });
+    }
   }
 }
 

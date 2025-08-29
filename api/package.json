@@ -186,6 +186,7 @@
     "start:job:fast:watch": "nodemon worker.js fast",
     "test": "npm run test:db:reset && npm run test:api",
     "test:db:reset": "NODE_ENV=test run-p db:prepare datamart:prepare datawarehouse:prepare",
+    "test:db:empty": "NODE_ENV=test run-p db:empty",
     "test:api": "for testType in 'unit' 'integration' 'acceptance'; do npm run test:api:$testType || status=1 ; done ; exit $status",
     "test:api:path": "NODE_ENV=test mocha --exit --recursive --reporter=${MOCHA_REPORTER:-dot}",
     "test:api:scripts": "npm run test:api:path -- tests/integration/scripts",
