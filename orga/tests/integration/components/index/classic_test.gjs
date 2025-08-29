@@ -1,8 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import IndexClassic from 'pix-orga/components/index/classic';
+import { EVENT_NAME } from 'pix-orga/helpers/metrics-event-name';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -71,6 +74,56 @@ module('Integration | Component | Index::Classic', function (hooks) {
 
       // then
       assert.notOk(screen.queryByText(t('banners.import.message')));
+    });
+  });
+
+  module('metrics', function () {
+    test('should call trackEvent on campaign creation click', async function (assert) {
+      class CurrentUserStub extends Service {
+        prescriber = {
+          firstName: 'Jean',
+        };
+      }
+
+      const router = this.owner.lookup('service:-routing');
+      sinon.stub(router, 'transitionTo');
+      this.owner.register('service:current-user', CurrentUserStub);
+      const pixMetrics = this.owner.lookup('service:pix-metrics');
+      const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
+      const screen = await render(<template><IndexClassic /></template>);
+
+      const createCampaignButton = screen.getByRole('link', {
+        name: t('components.index.action-cards.classic.create-campaign.buttonText'),
+      });
+      await click(createCampaignButton);
+
+      // then
+      sinon.assert.calledWith(trackEventStub, EVENT_NAME.HOMEPAGE.CREATE_CAMPAIGN_CLICK);
+      assert.ok(true);
+    });
+
+    test('should call trackEvent on campaigns list click', async function (assert) {
+      class CurrentUserStub extends Service {
+        prescriber = {
+          firstName: 'Jean',
+        };
+      }
+
+      const router = this.owner.lookup('service:-routing');
+      sinon.stub(router, 'transitionTo');
+      this.owner.register('service:current-user', CurrentUserStub);
+      const pixMetrics = this.owner.lookup('service:pix-metrics');
+      const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
+      const screen = await render(<template><IndexClassic /></template>);
+
+      const createCampaignButton = screen.getByRole('link', {
+        name: t('components.index.action-cards.classic.follow-activity.buttonText'),
+      });
+      await click(createCampaignButton);
+
+      // then
+      sinon.assert.calledWith(trackEventStub, EVENT_NAME.HOMEPAGE.LIST_CAMPAIGNS_CLICK);
+      assert.ok(true);
     });
   });
 

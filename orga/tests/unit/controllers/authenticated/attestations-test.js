@@ -59,21 +59,6 @@ module('Unit | Controller | authenticated/attestations', function (hooks) {
           }),
         );
       });
-      test('should call send metrics when download button is clicked', async function (assert) {
-        const metrics = this.owner.lookup('service:pix-metrics');
-        const controller = this.owner.lookup('controller:authenticated/attestations');
-        const selectedDivision = ['3èmea'];
-
-        //when
-        await controller.downloadAttestations(SIXTH_GRADE_ATTESTATION_KEY, selectedDivision);
-
-        sinon.assert.calledWithExactly(metrics.trackEvent, 'Clic sur le bouton Télécharger (attestations)', {
-          disabled: true,
-          'pix-event-category': 'Attestations',
-          'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
-        });
-        assert.ok(true);
-      });
     });
 
     module('when selected divisions is empty', function () {

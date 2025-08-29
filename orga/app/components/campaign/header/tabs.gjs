@@ -7,6 +7,8 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { or } from 'ember-truth-helpers';
 
+import { EVENT_NAME } from '../../../helpers/metrics-event-name';
+
 export default class CampaignTabs extends Component {
   @service intl;
   @service notifications;
@@ -25,7 +27,7 @@ export default class CampaignTabs extends Component {
     try {
       const token = this.session.data.authenticated.access_token;
       await this.fileSaver.save({ url: this.args.campaign.urlToResult, token });
-      this.pixMetrics.trackEvent('exportCampaignResultClic');
+      this.pixMetrics.trackEvent(EVENT_NAME.CAMPAIGN.EXPORT_DATA_CLICK);
     } catch {
       this.notifications.sendError(this.intl.t('api-error-messages.global'));
     }

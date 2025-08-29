@@ -553,9 +553,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedUnacquiredBadges = [];
         const selectedBadges = [];
 
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
-
         // when
         const screen = await render(
           <template>
@@ -580,12 +577,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
-
-        sinon.assert.calledWithExactly(metrics.trackEvent, 'Utilisation du filtre "Badges non obtenus"', {
-          disabled: true,
-          'pix-event-category': 'Campagnes',
-          'pix-event-action': 'Filtrer les participations',
-        });
       });
 
       test('it triggers the filter when an acquired badge is selected', async function (assert) {
@@ -600,9 +591,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const triggerFiltering = sinon.stub();
         const selectedBadges = [];
         const selectedUnacquiredBadges = [];
-
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -625,12 +613,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
-
-        sinon.assert.calledWithExactly(metrics.trackEvent, 'Usage du filtre par Badges', {
-          disabled: true,
-          'pix-event-category': 'Campagnes',
-          'pix-event-action': 'Filtrer les participations',
-        });
       });
     });
 
@@ -711,9 +693,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const selectedUnacquiredBadges = [];
         const selectedBadges = [];
 
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
-
         // when
         const screen = await render(
           <template>
@@ -738,12 +717,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
         // then
         assert.ok(triggerFiltering.calledWith('unacquiredBadges', ['badge1']));
-
-        sinon.assert.calledWithExactly(metrics.trackEvent, 'Utilisation du filtre "Badges non obtenus"', {
-          disabled: true,
-          'pix-event-category': 'Campagnes',
-          'pix-event-action': 'Filtrer les participations',
-        });
       });
 
       test('it triggers the filter when an acquired badge is selected', async function (assert) {
@@ -758,9 +731,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
         const triggerFiltering = sinon.stub();
         const selectedBadges = [];
         const selectedUnacquiredBadges = [];
-
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
 
         // when
         const screen = await render(
@@ -783,12 +753,6 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
 
         // then
         assert.ok(triggerFiltering.calledWith('badges', ['badge1']));
-
-        sinon.assert.calledWithExactly(metrics.trackEvent, 'Usage du filtre par Badges', {
-          disabled: true,
-          'pix-event-category': 'Campagnes',
-          'pix-event-action': 'Filtrer les participations',
-        });
       });
     });
 
