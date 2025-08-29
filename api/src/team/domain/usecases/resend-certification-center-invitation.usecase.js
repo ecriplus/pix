@@ -1,6 +1,5 @@
 const resendCertificationCenterInvitation = async function ({
   certificationCenterInvitationId,
-  locale,
   certificationCenterRepository,
   certificationCenterInvitationRepository,
   certificationCenterInvitationService,
@@ -16,7 +15,6 @@ const resendCertificationCenterInvitation = async function ({
   })({
     certificationCenter,
     certificationCenterInvitation,
-    locale,
   });
 
   return certificationCenterInvitationRepository.get(certificationCenterInvitationId);

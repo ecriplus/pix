@@ -291,13 +291,14 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           });
           const code = 'AZERTY007';
           const email = 'dick.cionère@example.net';
-          const locale = 'fr-fr';
+          const locale = 'fr-FR';
           const certificationCenterInvitation = new CertificationCenterInvitation({
             certificationCenterId: certificationCenter.id,
             code,
             createdAt: new Date('2023-10-10'),
             email,
             updatedAt: new Date('2023-10-11'),
+            locale,
           });
 
           certificationCenterInvitationRepository.get.resolves(certificationCenterInvitation);
@@ -312,7 +313,6 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           })({
             certificationCenter,
             certificationCenterInvitation,
-            locale,
           });
 
           // then
