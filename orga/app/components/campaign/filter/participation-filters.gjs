@@ -152,23 +152,11 @@ export default class ParticipationFilters extends Component {
   @action
   onSelectBadge(badges) {
     this.args.onFilter('badges', badges);
-
-    this.pixMetrics.trackEvent('Usage du filtre par Badges', {
-      disabled: true,
-      'pix-event-category': 'Campagnes',
-      'pix-event-action': 'Filtrer les participations',
-    });
   }
 
   @action
   onSelectUnacquiredBadge(unacquiredBadges) {
     this.args.onFilter('unacquiredBadges', unacquiredBadges);
-
-    this.pixMetrics.trackEvent('Utilisation du filtre "Badges non obtenus"', {
-      disabled: true,
-      'pix-event-category': 'Campagnes',
-      'pix-event-action': 'Filtrer les participations',
-    });
   }
 
   @action
