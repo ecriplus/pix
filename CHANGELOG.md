@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.194.0](https://github.com/1024pix/pix/compare/v5.193.0...v5.194.0) (2025-08-29)
+
+### :rocket: Amélioration
+
+- [#13336](https://github.com/1024pix/pix/pull/13336) Afficher le numéro d'étape courante dans le Stepper horizontal (PIX-19287) 
+- [#13339](https://github.com/1024pix/pix/pull/13339) Ajout du POI pix-article 
+- [#13325](https://github.com/1024pix/pix/pull/13325) Ajouter le mode horizontal du stepper (PIX-19272) 
+- [#13298](https://github.com/1024pix/pix/pull/13298) Envoyer les solutions et les feedbacks des QCM à la récupération des données du module (PIX-19240) 
+- [#13327](https://github.com/1024pix/pix/pull/13327) Mettre a jour les traductions (PIX-19281) 
+- [#13344](https://github.com/1024pix/pix/pull/13344) Modifier les trads du bloc pour gérer la session pix1D sur la page d'accueil (PIX-19294) 
+- [#13328](https://github.com/1024pix/pix/pull/13328) Ne pas afficher le filtre sur les classes dans la page attestations si les participants n'ont pas de classe (PIX-19168) 
+
+### :bug: Correction
+
+- [#13334](https://github.com/1024pix/pix/pull/13334) ajouter un param par défault pour trackEvent 
+- [#13309](https://github.com/1024pix/pix/pull/13309) Corriger l'affichage des places disponible sur la navigation de PixOrga (PIX-19261) 
+- [#13346](https://github.com/1024pix/pix/pull/13346) Gerer l'erreur dans le cas ou un link de training est absolu (PIX-19308) 
+
+### :building_construction: Tech
+
+- [#13323](https://github.com/1024pix/pix/pull/13323)  rendre le nom de l'évènement obligatoire dans la fonction trackEvent de pixMetrics (PIX-19276) 
+- [#13331](https://github.com/1024pix/pix/pull/13331) Suppression des imports de 'translations' dans l'API 
+- [#13329](https://github.com/1024pix/pix/pull/13329) Utiliser getI18n dans les emails (PIX-18984) 
+- [#13324](https://github.com/1024pix/pix/pull/13324) Utiliser la variable d'env `ANALYTICS_ENABLED` (PIX-19277)
+
 # [5.193.0](https://github.com/1024pix/pix/compare/v5.192.0...v5.193.0) (2025-08-28)
 
 ### :rocket: Amélioration
