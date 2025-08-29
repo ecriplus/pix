@@ -3,4 +3,7 @@ export const EVENT_NAME = {
     CREATE_CAMPAIGN_CLICK: 'homepageCreateCampaignClick',
     LIST_CAMPAIGNS_CLICK: 'homepageListCampaignsClick',
   },
+  CAMPAIGN: {
+    EXPORT_DATA_CLICK: 'campaignExportDataResultClick',
+  },
 };

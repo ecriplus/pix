@@ -4,6 +4,7 @@ import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import ENV from 'pix-orga/config/environment';
+import { EVENT_NAME } from 'pix-orga/helpers/metrics-event-name';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -188,7 +189,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       // when
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
-      sinon.assert.calledWithExactly(pixMetrics.trackEvent, 'exportCampaignResultClic');
+      sinon.assert.calledWithExactly(pixMetrics.trackEvent, EVENT_NAME.CAMPAIGN.EXPORT_DATA_CLICK);
       assert.ok(true);
     });
 
