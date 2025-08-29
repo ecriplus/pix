@@ -233,7 +233,7 @@
                 {
                   "elements": [
                     {
-                      "id": "0e479354-152f-8597-acad-35ce025eec12",
+                      "id": "dac60e1e-dce0-4c4f-9862-071fd607acec",
                       "type": "custom",
                       "tagName": "llm-messages",
                       "props": {
@@ -313,7 +313,7 @@
                       }
                     },
                     {
-                      "id": "99933780-p785-4aeb-a718-9344a809e839",
+                      "id": "72d76f56-e5a6-489e-bca5-1301bbd5608c",
                       "type": "text",
                       "content": "<p><strong>Cette réponse d’un logiciel d’IA générative vous inspire-t-elle confiance ?</strong></p>"
                     },
