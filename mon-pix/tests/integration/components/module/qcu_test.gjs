@@ -2,7 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import ModulixQcu from 'mon-pix/components/module/element/qcu';
+import ModulixQcu, { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -11,14 +11,18 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QCU', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let passageEventService, passageEventRecordStub;
+  let clock;
+  let passageEventService;
+  let passageEventRecordStub;
 
   hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers();
     passageEventService = this.owner.lookup('service:passageEvents');
     passageEventRecordStub = sinon.stub(passageEventService, 'record');
   });
 
   hooks.afterEach(function () {
+    clock.restore();
     passageEventRecordStub.restore();
   });
 
@@ -113,6 +117,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     assert.dom(screen.getByText('Correct!')).exists();
     assert.dom(screen.getByText('Good job!')).exists();
     assert.ok(screen.getByRole('radio', { name: 'radio1', disabled: true }));
@@ -131,6 +136,7 @@ module('Integration | Component | Module | QCU', function (hooks) {
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     assert.dom(screen.getByText('Wrong!')).exists();
     assert.dom(screen.getByText('Try again!')).exists();
     assert.ok(screen.getByRole('radio', { name: 'radio1', disabled: true }));
@@ -149,7 +155,8 @@ module('Integration | Component | Module | QCU', function (hooks) {
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
-    assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+    assert.dom(screen.getByRole('button', { name: 'Réessayer' })).exists();
   });
 
   test('should be able to focus back to proposals when feedback appears', async function (assert) {

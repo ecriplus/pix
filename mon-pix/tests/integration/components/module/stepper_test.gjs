@@ -4,6 +4,7 @@ import Service from '@ember/service';
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixStepper from 'mon-pix/components/module/component/stepper';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -75,7 +76,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
-      module('When step contains answerable elements', function () {
+      module('When step contains answerable elements', function (hooks) {
+        let clock;
+
+        hooks.beforeEach(function () {
+          clock = sinon.useFakeTimers();
+        });
+
+        hooks.afterEach(function () {
+          clock.restore();
+        });
         module('When the only answerable element is unanswered', function () {
           test('should not display the Next button', async function (assert) {
             // given
@@ -249,7 +259,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             await clickByName('radio2');
             const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
             await click(verifyButton);
-            await clickByName(t('pages.modulix.buttons.activity.retry'));
+            await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+            const retryButton = screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') });
+            await click(retryButton);
             sinon.assert.calledOnce(onElementRetryStub);
             assert.ok(true);
           });
@@ -896,7 +908,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           });
         });
 
-        module('When we retry an answerable element', function () {
+        module('When we retry an answerable element', function (hooks) {
+          let clock;
+
+          hooks.beforeEach(function () {
+            clock = sinon.useFakeTimers();
+          });
+
+          hooks.afterEach(function () {
+            clock.restore();
+          });
           test('should call the onElementRetry action', async function (assert) {
             // given
             const passageEventService = this.owner.lookup('service:passage-events');
@@ -957,7 +978,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             await clickByName('radio2');
             const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
             await click(verifyButton);
-            await clickByName(t('pages.modulix.buttons.activity.retry'));
+            await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+            const retryButton = screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') });
+            await click(retryButton);
             sinon.assert.calledOnce(onElementRetryStub);
             assert.ok(true);
           });

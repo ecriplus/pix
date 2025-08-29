@@ -68,13 +68,13 @@ module('Acceptance | Module | Routes | verifyQcu', function (hooks) {
     await click(firstQcuVerifyButton);
 
     // then
-    assert.dom(screen.getByText("Bravo ! C'est la bonne réponse.")).exists();
+    assert.dom(await screen.findByText("Bravo ! C'est la bonne réponse.")).exists();
 
     // when
     await click(screen.getByLabelText('Faux'));
     await click(nextQcuVerifyButton);
 
     // then
-    assert.dom(screen.getByText('Pas ouf')).exists();
+    assert.dom(await screen.findByText('Pas ouf')).exists();
   });
 });

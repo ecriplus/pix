@@ -3,6 +3,7 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { click, find, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ApplicationAdapter from 'mon-pix/adapters/application';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import ModulePassage from 'mon-pix/components/module/passage';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -572,7 +573,16 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
-  module('when user clicks on an answerable element retry button', function () {
+  module('when user clicks on an answerable element retry button', function (hooks) {
+    let clock;
+
+    hooks.beforeEach(function () {
+      clock = sinon.useFakeTimers();
+    });
+
+    hooks.afterEach(function () {
+      clock.restore();
+    });
     test('should push metrics event', async function (assert) {
       // given
       const metrics = this.owner.lookup('service:pix-metrics');
@@ -613,7 +623,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       await click(screen.getByLabelText('radio2'));
       await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
-      await clickByName(t('pages.modulix.buttons.activity.retry'));
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+      const retryButton = screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') });
+      await click(retryButton);
 
       // then
       sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton réessayer de l'élément : ${element.id}`, {

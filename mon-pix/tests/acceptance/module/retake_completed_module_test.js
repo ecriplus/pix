@@ -82,7 +82,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
     const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     await click(verifyButton);
 
-    assert.dom(screen.queryByText("Bravo ! C'est la bonne réponse.")).exists();
+    assert.dom(await screen.findByText("Bravo ! C'est la bonne réponse.")).exists();
     const continueButton = screen.getByRole('button', { name: 'Continuer' });
     await click(continueButton);
 
