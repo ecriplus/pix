@@ -1673,6 +1673,14 @@
           "next": {
             "ariaLabel": "Ga naar de volgende stap",
             "name": "Volgende"
+          },
+          "controls": {
+            "next": {
+              "ariaLabel": "Volgende stap"
+            },
+            "previous": {
+              "ariaLabel": "Vorige stap"
+            }
           }
         }
       },

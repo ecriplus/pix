@@ -795,6 +795,41 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
+      test('should display disabled controls buttons', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+
+        // then
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+          .hasAria('disabled', 'true');
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+          .hasAria('disabled', 'true');
+      });
+
       module('When step contains answerable elements', function () {
         module('When the only answerable element is unanswered', function () {
           test('should not display the Next button', async function (assert) {

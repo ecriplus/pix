@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -97,6 +98,11 @@ export default class ModulixStepper extends Component {
     >
       {{#if this.isHorizontalDirection}}
         <div class="stepper__controls">
+          <PixIconButton
+            @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
+            @iconName="chevronLeft"
+            aria-disabled="true"
+          />
           <p
             class="stepper-controls__position"
             aria-label="{{t
@@ -107,6 +113,11 @@ export default class ModulixStepper extends Component {
           >
             {{inc this.displayedStepIndex}}/{{this.totalSteps}}
           </p>
+          <PixIconButton
+            @ariaLabel={{t "pages.modulix.buttons.stepper.controls.next.ariaLabel"}}
+            @iconName="chevronRight"
+            aria-disabled="true"
+          />
         </div>
         <div class="stepper__steps">
           {{#if this.hasDisplayableSteps}}

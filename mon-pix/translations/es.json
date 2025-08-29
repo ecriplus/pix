@@ -1669,6 +1669,14 @@
           "next": {
             "ariaLabel": "Ir al paso siguiente",
             "name": "Siguiente"
+          },
+          "controls": {
+            "next": {
+              "ariaLabel": "Paso siguiente"
+            },
+            "previous": {
+              "ariaLabel": "Paso anterior"
+            }
           }
         }
       },
