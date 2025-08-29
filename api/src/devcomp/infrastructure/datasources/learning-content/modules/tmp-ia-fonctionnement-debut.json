@@ -250,12 +250,102 @@
                       "content": "<p>Pour un logiciel d'IA générative c’est un peu le même principe : il construit sa réponse en complétant un texte mot après mot en choisissant des mots très probables. </p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
                     },
                     {
-                      "id": "4c59286a-4fe4-4991-a8a7-023fd736c3a5",
-                      "type": "custom-draft",
-                      "title": "Les probabilités que l'IA choisisse le mot suivant dans une conversation",
-                      "url": "https://1024pix.github.io/atelier-contenus/JTE/poi-crepe-probabilite.html",
-                      "instruction": "<p><br></p>",
-                      "height": 550
+                      "id": "4c1b444d-2e5a-4e50-926f-8a73b8259181",
+                      "type": "custom",
+                      "tagName": "complete-phrase",
+                      "props": {
+                        "titleLevel":  2,
+                        "listOfProbabilityBarsLists": [
+                          [
+                            {
+                              "name": "chocolat",
+                              "percent": 100
+                            },
+                            {
+                              "name": "beurre",
+                              "percent": 80
+                            },
+                            {
+                              "name": "sucre",
+                              "percent": 80
+                            },
+                            {
+                              "name": "sirop",
+                              "percent": 60
+                            },
+                            {
+                              "name": "caramel",
+                              "percent": 43
+                            },
+                            {
+                              "name": "miel",
+                              "percent": 25
+                            },
+                            {
+                              "name": "fromage",
+                              "percent": 20
+                            }
+                          ],
+                          [
+                            {
+                              "name": "et",
+                              "percent": 100
+                            },
+                            {
+                              "name": "avec",
+                              "percent": 80
+                            },
+                            {
+                              "name": "fondu",
+                              "percent": 80
+                            },
+                            {
+                              "name": "avec",
+                              "percent": 60
+                            },
+                            {
+                              "name": "dedans",
+                              "percent": 43
+                            }
+                          ],
+                          [
+                            {
+                              "name": "du",
+                              "percent": 100
+                            },
+                            {
+                              "name": "puis",
+                              "percent": 80
+                            }
+                          ],
+                          [
+                            {
+                              "name": "sucre",
+                              "percent": 100
+                            },
+                            {
+                              "name": "miel",
+                              "percent": 80
+                            },
+                            {
+                              "name": "caramel",
+                              "percent": 60
+                            },
+                            {
+                              "name": "chocolat",
+                              "percent": 20
+                            }
+                          ]
+                        ],
+                        "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
+                        "llmMessage": "On peut mettre du ",
+                        "wordsToAdd": [
+                          "beurre",
+                          "et",
+                          "du",
+                          "sucre"
+                        ]
+                      }
                     },
                     {
                       "id": "860fd8e3-4b25-4ffb-b813-a7c8ca794112",
@@ -454,7 +544,7 @@
               "element": {
                 "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
                 "type": "text",
-                "content": "<p>Résumons avant de passer à la suite&nbsp;:&nbsp; </p><ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
+                "content": "<ul><li>Un logiciel d'IA générative est un outil qui permet de discuter facilement avec un utilisateur, sur des sujets très variés. 💬</li><li>Il utilise un programme qui est entraîné avec énormément de textes disponibles sur internet. Cela va lui permettre de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qui sont données. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
               }
             }
           ]
