@@ -295,14 +295,14 @@
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est normal que vous ayez fait cette hypothèse.<br> Les données observées ici ont un biais dans leur nombre : il y a bien plus de taboulés à la semoule dans le web français.<br></p><p>En réalité, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins. Le taboulé au persil est simplement moins connu en Europe. 🥗 En s'entraînant avec des données internationales, la proportion de taboulé à la semoule aurait été différente.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Les données observées ici ont un biais dans leur nombre : il y a bien plus de taboulés à la semoule dans le web français.<br></p><p>En réalité, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins. Le taboulé au persil est simplement moins connu en Europe. 🥗 En s'entraînant avec des données internationales, la proportion de taboulé à la semoule aurait été différente.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Vous avez cru à un piège ?<br>Les données observées ici ont un biais dans leur nombre : il y a bien plus de taboulés à la semoule dans le web français.<br></p><p>En réalité, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins. Le taboulé au persil est simplement moins connu en Europe. 🥗 En s'entraînant avec des données internationales, la proportion de taboulé à la semoule aurait été différente.</p>"
+                      "diagnosis": "<p><strong>Vous avez cru à un piège ?</strong><br>Les données observées ici ont un biais dans leur nombre : il y a bien plus de taboulés à la semoule dans le web français.<br></p><p>En réalité, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins. Le taboulé au persil est simplement moins connu en Europe. 🥗 En s'entraînant avec des données internationales, la proportion de taboulé à la semoule aurait été différente.</p>"
                     }
                   }
                 ],
