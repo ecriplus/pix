@@ -89,6 +89,7 @@ export default class ModulixStepper extends Component {
       {{#if this.isHorizontalDirection}}
         <div class="stepper__control">
           <p
+            class="stepper-control__position"
             aria-label="{{t
               'pages.modulix.stepper.step.position'
               currentStep=(inc this.displayedStepIndex)

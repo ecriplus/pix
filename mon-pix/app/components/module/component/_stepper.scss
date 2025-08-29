@@ -2,59 +2,78 @@
 @use 'pix-design-tokens/breakpoints';
 @use '../passage';
 
-.stepper__steps {
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 8px;
+.stepper {
+  &__control {
+    @extend %pix-cta-s;
 
-  .stepper__step {
-    --previous-slide-visible-width: 10px;
-
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+    display: flex;
+    display: inline-flex;
+    gap: var(--pix-spacing-2x);
     align-items: center;
-    padding: var(--pix-spacing-4x);
+    margin-bottom: var(--pix-spacing-2x);
+    padding: var(--pix-spacing-1x) var(--pix-spacing-4x) var(--pix-spacing-1x) var(--pix-spacing-2x);
     border: 1px solid var(--pix-neutral-100);
     border-radius: 8px;
 
-    &:not(.stepper-step__active) {
-      position: relative;
-      transform: translateX(calc((-50vw - 50%) + var(--previous-slide-visible-width)));
-      pointer-events: none;
-
-      &::after {
-        position: absolute;
-        top: 50%;
-        left: calc(100% + 4px);
-        width: calc(50vw - 50% - var(--previous-slide-visible-width) - 8px);
-        border-bottom: 1px solid var(--pix-neutral-500);
-        opacity: 0.3;
-        content: '';
-      }
+    .stepper-control__position {
+      margin: 0;
     }
+  }
 
-    &.stepper-step__active:not(.stepper-step--last-step) {
-      position: relative;
+  &__steps {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 8px;
 
-      &::after {
-        position: absolute;
-        top: 50%;
-        left: calc(100% + 4px);
-        width: calc(50vw - 50% - var(--previous-slide-visible-width) - 8px);
-        border-bottom: 1px solid var(--pix-neutral-500);
-        opacity: 0.3;
-        content: '';
+    .stepper__step {
+      --previous-slide-visible-width: 10px;
+
+      grid-row: 1 / 1;
+      grid-column: 1 / 1;
+      align-items: center;
+      padding: var(--pix-spacing-4x);
+      border: 1px solid var(--pix-neutral-100);
+      border-radius: 8px;
+
+      &:not(.stepper-step__active) {
+        position: relative;
+        transform: translateX(calc((-50vw - 50%) + var(--previous-slide-visible-width)));
+        pointer-events: none;
+
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: calc(100% + 4px);
+          width: calc(50vw - 50% - var(--previous-slide-visible-width) - 8px);
+          border-bottom: 1px solid var(--pix-neutral-500);
+          opacity: 0.3;
+          content: '';
+        }
       }
 
-      &::before {
-        position: absolute;
-        top: 0;
-        left: calc((50vw + 50%) - var(--previous-slide-visible-width));
-        width: 100%;
-        height: 100%;
-        border: 1px solid var(--pix-neutral-100);
-        border-radius: 8px;
-        content: '';
+      &.stepper-step__active:not(.stepper-step--last-step) {
+        position: relative;
+
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: calc(100% + 4px);
+          width: calc(50vw - 50% - var(--previous-slide-visible-width) - 8px);
+          border-bottom: 1px solid var(--pix-neutral-500);
+          opacity: 0.3;
+          content: '';
+        }
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: calc((50vw + 50%) - var(--previous-slide-visible-width));
+          width: 100%;
+          height: 100%;
+          border: 1px solid var(--pix-neutral-100);
+          border-radius: 8px;
+          content: '';
+        }
       }
     }
   }
