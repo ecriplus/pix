@@ -709,6 +709,41 @@
           ]
         },
         {
+          "id": "6425a4f1-8fcf-4a03-9cef-fc298318e742",
+          "type": "lesson",
+          "title": "pix-article",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cc6a19dd-d3a4-43d4-9b9e-151c4c43001a",
+                "type": "text",
+                "content": "<p>pix-article</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9cf6927d-a2a0-4eab-9a64-013630397b85",
+                "type": "custom",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 2,
+                  "title": "\uD83D\uDD34 Une vidéo de la maire de la capitale crée la polémique",
+                  "author": "Rédaction Locale",
+                  "date": "14 mai 2025",
+                  "paragraphs": [
+                    "Une vidéo diffusée ce matin montre la maire de la capitale, Claire Durand, déclarant : « Il faut faire de la place aux jeunes. À partir de l’an prochain, les personnes âgées n’auront plus accès aux parcs municipaux ».",
+                    "Relayée massivement sur les réseaux, la séquence suscite de vives réactions, dénonçant des propos « discriminatoires ». Certains demandent la démission immédiate de la maire. Mais l’après-midi même, la mairie réagit : {{highlightedSentence}}, affirme le service communication. La vidéo a été retirée des réseaux sociaux, à la demande de la mairie. Une plainte a été déposée."
+                  ],
+                  "highlightedSentence": "« Il s’agit d’un deepfake »",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "fc38e052-ed9f-4d68-b09f-515b7069ad86",
           "type": "lesson",
           "title": "pix-carousel",
