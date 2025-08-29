@@ -23,7 +23,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
       // when
       const screen = await render(
-        <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} /></template>,
+        <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} @isHidden={{false}} /></template>,
       );
 
       // then
@@ -50,7 +50,11 @@ module('Integration | Component | Module | Step', function (hooks) {
       // when
       const screen = await render(
         <template>
-          <ModulixStep @step={{step}} @getLastCorrectionForElement={{getLastCorrectionForElementStub}} />
+          <ModulixStep
+            @step={{step}}
+            @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
+            @isHidden={{false}}
+          />
         </template>,
       );
 
@@ -58,8 +62,8 @@ module('Integration | Component | Module | Step', function (hooks) {
       assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).exists();
     });
 
-    module('when hasJustAppeared attribute is false', function () {
-      test('should disabled all interactions in the step', async function (assert) {
+    module('when isHidden attribute is false', function () {
+      test('should disable all interactions in the step', async function (assert) {
         // given
         const element = {
           id: 'd0690f26-978c-41c3-9a21-da931857739c',
@@ -69,21 +73,32 @@ module('Integration | Component | Module | Step', function (hooks) {
         const step = {
           elements: [element],
         };
-        const getLastCorrectionForElementStub = () => {};
 
         // when
-        await render(
-          <template>
-            <ModulixStep
-              @hasJustAppeared={{false}}
-              @step={{step}}
-              @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
-            />
-          </template>,
-        );
+        await render(<template><ModulixStep @isHidden={{true}} @step={{step}} /></template>);
 
         // then
         assert.dom(find('.stepper__step[inert]')).exists();
+      });
+
+      test('should set aria-hidden="true" in the step', async function (assert) {
+        // given
+        const element = {
+          id: 'd0690f26-978c-41c3-9a21-da931857739c',
+          content: '<button type="button">Mon bouton</button>',
+          type: 'text',
+        };
+        const step = {
+          elements: [element],
+        };
+
+        // when
+        await render(<template><ModulixStep @isHidden={{true}} @step={{step}} /></template>);
+
+        // then
+        const stepElement = find('.stepper__step');
+        assert.dom(stepElement).exists();
+        assert.dom(stepElement).hasAttribute('aria-hidden', 'true');
       });
     });
   });
@@ -103,7 +118,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
         // when
         const screen = await render(
-          <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} /></template>,
+          <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} @isHidden={{false}} /></template>,
         );
 
         // then
@@ -131,7 +146,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
         // when
         const screen = await render(
-          <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} /></template>,
+          <template><ModulixStep @step={{step}} @currentStep={{1}} @totalSteps={{4}} @isHidden={{false}} /></template>,
         );
 
         // then

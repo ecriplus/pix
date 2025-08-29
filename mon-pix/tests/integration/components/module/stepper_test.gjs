@@ -1234,7 +1234,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
+          assert.strictEqual(screen.getAllByRole('heading', { level: 3, disabled: true }).length, 1);
+          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
         });
 
         test('should not display the Next button when there are no steps left', async function (assert) {
