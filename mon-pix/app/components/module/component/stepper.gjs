@@ -96,9 +96,9 @@ export default class ModulixStepper extends Component {
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
       {{#if this.isHorizontalDirection}}
-        <div class="stepper__control">
+        <div class="stepper__controls">
           <p
-            class="stepper-control__position"
+            class="stepper-controls__position"
             aria-label="{{t
               'pages.modulix.stepper.step.position'
               currentStep=(inc this.displayedStepIndex)
