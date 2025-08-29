@@ -106,7 +106,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           data: {
             attributes: {
               email: 'some.user@example.net',
-              lang: 'fr-fr',
+              language: 'fr-fr',
               role: CertificationCenterInvitation.Roles.ADMIN,
             },
           },
@@ -122,7 +122,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
         'updated-at': now,
         email: 'some.user@example.net',
         role: 'ADMIN',
-        language: 'fr',
+        language: 'fr-FR',
       });
     });
   });

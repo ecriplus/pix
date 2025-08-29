@@ -50,7 +50,7 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
     it('should return 201 HTTP status code with data if there isn’t an already pending invitation', async function () {
       // given
       const email = 'some.user@example.net';
-      const language = 'fr-fr';
+      const language = 'fr-FR';
       const role = null;
       const certificationCenterId = 7;
       const payload = {

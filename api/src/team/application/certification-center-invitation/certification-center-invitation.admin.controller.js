@@ -1,3 +1,4 @@
+import { getNearestSupportedLocale } from '../../../shared/domain/services/locale-service.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { certificationCenterInvitationSerializer } from '../../infrastructure/serializers/jsonapi/certification-center-invitation-serializer.js';
 
@@ -22,7 +23,7 @@ const sendInvitationForAdmin = async function (request, h, dependencies = { cert
     await usecases.createOrUpdateCertificationCenterInvitationForAdmin({
       certificationCenterId,
       email: invitationInformation.email,
-      locale: invitationInformation.language,
+      locale: getNearestSupportedLocale(invitationInformation.language),
       role: invitationInformation.role,
     });
 
