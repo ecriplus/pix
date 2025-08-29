@@ -10,7 +10,7 @@ export const findRecommendedModulesByCampaignParticipationIds = async function (
   });
   const userRecommendedModules = await Promise.all(
     userRecommendedTrainings.map(async ({ id, link }) => {
-      const regexp = /^\/modules\/([a-z0-9-]*)/;
+      const regexp = /\/modules\/([a-z0-9-]*)/;
 
       const result = regexp.exec(link);
       const slug = result[1];
