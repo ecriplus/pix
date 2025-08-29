@@ -39,7 +39,8 @@ export default class ModulixStep extends Component {
           {{if this.isLastStep 'stepper-step--last-step'}}"
         tabindex="-1"
         {{didInsert this.focusAndScroll}}
-        inert={{unless @hasJustAppeared true}}
+        inert={{if @isHidden true}}
+        aria-hidden={{if @isHidden "true"}}
       >
         <h3 class="stepper__step__position screen-reader-only">
           {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}

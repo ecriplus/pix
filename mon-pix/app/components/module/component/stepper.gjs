@@ -31,6 +31,15 @@ export default class ModulixStepper extends Component {
     return this.stepsToDisplay.length - 1 === index;
   }
 
+  @action
+  stepIsHidden(index) {
+    if (this.modulixPreviewMode.isEnabled) {
+      return false;
+    }
+
+    return !this.hasStepJustAppeared(index);
+  }
+
   get hasDisplayableSteps() {
     return this.displayableSteps.length > 0;
   }
@@ -87,8 +96,9 @@ export default class ModulixStepper extends Component {
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
       {{#if this.isHorizontalDirection}}
-        <div class="stepper__control">
+        <div class="stepper__controls">
           <p
+            class="stepper-controls__position"
             aria-label="{{t
               'pages.modulix.stepper.step.position'
               currentStep=(inc this.displayedStepIndex)
@@ -109,6 +119,7 @@ export default class ModulixStepper extends Component {
                 @onElementRetry={{@onElementRetry}}
                 @getLastCorrectionForElement={{@getLastCorrectionForElement}}
                 @hasJustAppeared={{this.hasStepJustAppeared index}}
+                @isHidden={{this.stepIsHidden index}}
                 @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                 @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                 @onVideoPlay={{@onVideoPlay}}
@@ -137,6 +148,7 @@ export default class ModulixStepper extends Component {
               @onElementRetry={{@onElementRetry}}
               @getLastCorrectionForElement={{@getLastCorrectionForElement}}
               @hasJustAppeared={{this.hasStepJustAppeared index}}
+              @isHidden={{false}}
               @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
               @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
               @onVideoPlay={{@onVideoPlay}}
