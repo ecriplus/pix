@@ -423,11 +423,12 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
 
       user1 = databaseBuilder.factory.buildUser();
       user2 = databaseBuilder.factory.buildUser();
+      const locale = 'fr-FR';
 
       options = {
         method: 'POST',
         url: `/api/organizations/${organization.id}/invitations`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
+        headers: { ...generateAuthenticatedUserRequestHeaders({ userId: adminUserId }), cookie: `locale=${locale}` },
         payload: {
           data: {
             type: 'organization-invitations',
@@ -453,7 +454,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user1.email,
               status,
               role: null,
-              lang: 'fr-fr',
+              lang: 'fr-FR',
             },
           },
           {
@@ -463,7 +464,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user2.email,
               status,
               role: null,
-              lang: 'fr-fr',
+              lang: 'fr-FR',
             },
           },
         ];

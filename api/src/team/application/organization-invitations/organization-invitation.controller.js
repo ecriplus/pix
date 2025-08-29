@@ -95,7 +95,7 @@ const sendScoInvitation = async function (request, h, dependencies = { scoOrgani
 const sendInvitations = async function (request, h) {
   const organizationId = request.params.id;
   const emails = request.payload.data.attributes.email.split(',');
-  const locale = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
 
   const organizationInvitations = await usecases.createOrganizationInvitations({ organizationId, emails, locale });
   return h.response(organizationInvitationSerializer.serialize(organizationInvitations)).created();

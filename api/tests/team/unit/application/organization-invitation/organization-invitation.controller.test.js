@@ -192,7 +192,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
     let invitation;
     let organizationId;
     let emails;
-    const locale = 'fr-fr';
+    const locale = 'fr-FR';
 
     beforeEach(function () {
       invitation = domainBuilder.buildOrganizationInvitation();
@@ -209,6 +209,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
             },
           },
         },
+        state: { locale },
       };
     });
 

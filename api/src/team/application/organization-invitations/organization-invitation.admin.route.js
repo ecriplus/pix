@@ -90,7 +90,7 @@ export const organizationInvitationAdminRoutes = [
           data: {
             attributes: {
               email: Joi.string().email().required(),
-              lang: Joi.string().valid('fr-fr', 'fr', 'en'),
+              lang: Joi.string().valid('fr-fr', 'fr-FR', 'fr-BE', 'fr', 'nl', 'nl-BE', 'en'),
               role: Joi.string().valid('ADMIN', 'MEMBER').allow(null),
             },
           },
