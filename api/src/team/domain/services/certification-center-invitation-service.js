@@ -6,6 +6,11 @@ import {
 } from '../../../shared/domain/errors.js';
 import { CertificationCenterInvitation } from '../models/CertificationCenterInvitation.js';
 
+/**
+ * @param certificationCenterInvitationRepository
+ * @param mailService
+ * @returns {function({certificationCenter: *, email: *, locale: *}): Promise<void>}
+ */
 const createOrUpdateCertificationCenterInvitation = function ({
   certificationCenterInvitationRepository,
   mailService = maillingService,
@@ -21,6 +26,7 @@ const createOrUpdateCertificationCenterInvitation = function ({
       const certificationCenterInvitationToCreate = CertificationCenterInvitation.create({
         certificationCenterId: certificationCenter.id,
         email,
+        locale,
       });
 
       certificationCenterInvitation = await certificationCenterInvitationRepository.create(

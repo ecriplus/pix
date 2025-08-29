@@ -43,7 +43,7 @@ const getCertificationCenterInvitation = async function (request) {
 const sendInvitations = async function (request, h) {
   const certificationCenterId = request.params.certificationCenterId;
   const emails = request.payload.data.attributes.emails;
-  const locale = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
 
   await usecases.createOrUpdateCertificationCenterInvitation({ certificationCenterId, emails, locale });
 

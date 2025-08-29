@@ -52,11 +52,12 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
       it('returns 204 HTTP status code', async function () {
         const emails = ['dev@example.net', 'com@example.net'];
         databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId, role: 'ADMIN' });
+        const locale = 'fr-FR';
 
         await databaseBuilder.commit();
 
         request = {
-          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          headers: { ...generateAuthenticatedUserRequestHeaders({ userId }), cookie: `locale=${locale}` },
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: {
@@ -77,6 +78,8 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
           .whereIn('email', emails);
         expect(response.statusCode).to.equal(204);
         expect(certificationCenterInvitations).to.have.lengthOf(2);
+        expect(certificationCenterInvitations[0].locale).to.equal(locale);
+        expect(certificationCenterInvitations[1].locale).to.equal(locale);
       });
     });
   });
