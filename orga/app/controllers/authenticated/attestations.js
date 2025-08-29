@@ -23,7 +23,6 @@ export default class AuthenticatedAttestationsController extends Controller {
   @action
   async downloadAttestations(attestationKey, selectedDivisions) {
     try {
-      this.sendMetrics();
       let url;
       const organizationId = this.currentUser.organization.id;
       const baseUrl = `/api/organizations/${organizationId}/attestations/${attestationKey}`;
@@ -64,13 +63,5 @@ export default class AuthenticatedAttestationsController extends Controller {
   triggerFiltering(fieldName, value) {
     this[fieldName] = value || undefined;
     this.pageNumber = 1;
-  }
-
-  sendMetrics() {
-    this.pixMetrics.trackEvent('Clic sur le bouton Télécharger (attestations)', {
-      disabled: true,
-      'pix-event-category': 'Attestations',
-      'pix-event-action': 'Cliquer sur le bouton Télécharger sur la page Attestations',
-    });
   }
 }
