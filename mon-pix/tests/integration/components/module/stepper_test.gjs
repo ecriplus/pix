@@ -1343,6 +1343,54 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             .hasAria('disabled', 'false');
         });
 
+        module('when user clicks the controls previous button', function() {
+          test('should go back to previous step', async function (assert) {
+            // given
+            const steps = [
+              {
+                elements: [
+                  {
+                    id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                    type: 'text',
+                    content: '<p>Text 1</p>',
+                  },
+                ],
+              },
+              {
+                elements: [
+                  {
+                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                    type: 'text',
+                    content: '<p>Text 2</p>',
+                  },
+                ],
+              },
+            ];
+
+            function stepperIsFinished() {}
+
+            function onStepperNextStepStub() {}
+
+            const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @steps={{steps}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+              />
+            </template>,
+            );
+
+            // when
+            await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+            await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }));
+
+            // then
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+          });
+        });
+
         test('should not display the Next button when there are no steps left', async function (assert) {
           // given
           const steps = [

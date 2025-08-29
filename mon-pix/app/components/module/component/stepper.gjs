@@ -47,6 +47,11 @@ export default class ModulixStepper extends Component {
   }
 
   @action
+  displayPreviousStep() {
+    this.displayedStepIndex -= 1;
+  }
+
+  @action
   displayNextStep() {
     const currentStepPosition = this.lastDisplayedStepIndex + 1;
     const nextStep = this.displayableSteps[currentStepPosition];
@@ -107,6 +112,7 @@ export default class ModulixStepper extends Component {
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
             aria-disabled="{{this.isPreviousButtonDisabled}}"
+            @triggerAction={{this.displayPreviousStep}}
           />
           <p
             class="stepper-controls__position"
