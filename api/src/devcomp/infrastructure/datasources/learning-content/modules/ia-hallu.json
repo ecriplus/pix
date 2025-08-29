@@ -107,7 +107,7 @@
                 {
                   "elements": [
                     {
-                      "id": "a2082653-6928-4931-b9e3-da97a0c799ed",
+                      "id": "a2084553-6928-4931-b9e3-da97a0c799ed",
                       "type": "custom",
                       "tagName": "llm-messages",
                       "props": {
@@ -170,7 +170,7 @@
                 {
                   "elements": [
                     {
-                      "id": "7610cfd4-cf56-45ae-8700-c7abc8d256a3",
+                      "id": "7658ffd4-cf56-45ae-8700-c7abc8d256a3",
                       "type": "custom",
                       "tagName": "llm-messages",
                       "props": {
@@ -233,7 +233,7 @@
                 {
                   "elements": [
                     {
-                      "id": "0e479354-152f-4245-acad-35ce025eec12",
+                      "id": "0e479354-152f-8597-acad-35ce025eec12",
                       "type": "custom",
                       "tagName": "llm-messages",
                       "props": {
@@ -313,7 +313,7 @@
                       }
                     },
                     {
-                      "id": "99933780-e248-4aeb-a718-9344a809e839",
+                      "id": "99933780-p785-4aeb-a718-9344a809e839",
                       "type": "text",
                       "content": "<p><strong>Cette réponse d’un logiciel d’IA générative vous inspire-t-elle confiance ?</strong></p>"
                     },
