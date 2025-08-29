@@ -13,9 +13,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCU',
     solution: 'solution challengeId00',
     solutionToDisplay: 'solutionToDisplay challengeId00',
-    t1Status: true,
-    t2Status: false,
-    t3Status: true,
+    tStatus: 0b101,
     status: 'validé',
     genealogy: 'genealogy challengeId00',
     accessibility1: 'accessibility1 challengeId00',
@@ -54,9 +52,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCU',
     solution: 'solution challengeId01',
     solutionToDisplay: 'solutionToDisplay challengeId01',
-    t1Status: false,
-    t2Status: true,
-    t3Status: true,
+    tStatus: 0b110,
     status: 'validé',
     genealogy: 'genealogy challengeId01',
     accessibility1: 'accessibility1 challengeId01',
@@ -95,9 +91,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCM',
     solution: 'solution challengeId02',
     solutionToDisplay: 'solutionToDisplay challengeId02',
-    t1Status: false,
-    t2Status: true,
-    t3Status: false,
+    tStatus: 0b010,
     status: 'archivé',
     genealogy: 'genealogy challengeId02',
     accessibility1: 'accessibility1 challengeId02',
@@ -134,9 +128,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCM',
     solution: 'solution challengeId03',
     solutionToDisplay: 'solutionToDisplay challengeId03',
-    t1Status: true,
-    t2Status: true,
-    t3Status: false,
+    tStatus: 0b011,
     status: 'validé',
     genealogy: 'genealogy challengeId03',
     accessibility1: 'accessibility1 challengeId03',
@@ -187,9 +179,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCU',
     solution: 'solution challengeId04',
     solutionToDisplay: 'solutionToDisplay challengeId04',
-    t1Status: true,
-    t2Status: false,
-    t3Status: false,
+    tStatus: 0b001,
     status: 'validé',
     genealogy: 'genealogy challengeId04',
     accessibility1: 'accessibility1 challengeId04',
@@ -240,9 +230,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCM',
     solution: 'solution challengeId05',
     solutionToDisplay: 'solutionToDisplay challengeId05',
-    t1Status: true,
-    t2Status: false,
-    t3Status: true,
+    tStatus: 0b101,
     status: 'périmé',
     genealogy: 'genealogy challengeId05',
     accessibility1: 'accessibility1 challengeId05',
@@ -279,9 +267,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCM',
     solution: 'solution challengeId06',
     solutionToDisplay: 'solutionToDisplay challengeId06',
-    t1Status: true,
-    t2Status: false,
-    t3Status: true,
+    tStatus: 0b101,
     status: 'périmé',
     genealogy: 'genealogy challengeId06',
     accessibility1: 'accessibility1 challengeId06',
@@ -332,9 +318,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCM',
     solution: 'solution challengeId07',
     solutionToDisplay: 'solutionToDisplay challengeId07',
-    t1Status: true,
-    t2Status: true,
-    t3Status: true,
+    tStatus: 0b111,
     status: 'validé',
     genealogy: 'genealogy challengeId07',
     accessibility1: 'accessibility1 challengeId07',
@@ -371,9 +355,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCU',
     solution: 'solution challengeId08',
     solutionToDisplay: 'solutionToDisplay challengeId08',
-    t1Status: false,
-    t2Status: false,
-    t3Status: true,
+    tStatus: 0b10,
     status: 'archivé',
     genealogy: 'genealogy challengeId08',
     accessibility1: 'accessibility1 challengeId08',
@@ -410,9 +392,7 @@ describe('Integration | Repository | challenge-repository', function () {
     type: 'QCU',
     solution: 'solution challengeId09',
     solutionToDisplay: 'solutionToDisplay challengeId09',
-    t1Status: false,
-    t2Status: false,
-    t3Status: false,
+    tStatus: 0b000,
     status: 'archivé',
     genealogy: 'genealogy challengeId09',
     accessibility1: 'accessibility1 challengeId09',
@@ -521,9 +501,9 @@ describe('Integration | Repository | challenge-repository', function () {
                     id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                     type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                     value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                    isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                    isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                    isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                    tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                      .toString(2)
+                      .padStart(32, '0'),
                     qrocBlocksTypes: {},
                   }),
                 }),
@@ -580,9 +560,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
                   type: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.type,
                   value: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
-                  isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+                  tEnabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -611,9 +591,9 @@ describe('Integration | Repository | challenge-repository', function () {
             solution: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
             solutionToDisplay: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solutionToDisplay,
             proposals: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.proposals,
-            t1Status: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
-            t2Status: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
-            t3Status: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+            tStatus: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.tStatus
+              .toString(2)
+              .padStart(32, '0'),
           });
         });
       });
@@ -654,9 +634,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
                   type: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.type,
                   value: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
-                  isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+                  tEnabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -679,9 +659,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -714,9 +694,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
                   type: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.type,
                   value: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
-                  isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+                  tEnabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -739,9 +719,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -764,9 +744,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -817,9 +797,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -842,9 +822,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -903,9 +883,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -928,9 +908,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -954,9 +934,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -980,9 +960,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.id,
                   type: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.type,
                   value: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.solution,
-                  isT1Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.t3Status,
+                  tEnabled: challengeData05_skill02_qcm_perime_flashCompatible_fren_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1006,9 +986,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.id,
                   type: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.type,
                   value: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.solution,
-                  isT1Enabled: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.t3Status,
+                  tEnabled: challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1067,9 +1047,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
                   type: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.type,
                   value: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
-                  isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+                  tEnabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1092,9 +1072,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.id,
                   type: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.type,
                   value: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.solution,
-                  isT1Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.t3Status,
+                  tEnabled: challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1118,9 +1098,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1144,9 +1124,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.id,
                   type: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.type,
                   value: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.solution,
-                  isT1Enabled: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.t3Status,
+                  tEnabled: challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1205,9 +1185,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1231,9 +1211,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1318,9 +1298,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1343,9 +1323,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1369,9 +1349,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1428,9 +1408,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1453,9 +1433,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
                   type: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.type,
                   value: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.solution,
-                  isT1Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.t3Status,
+                  tEnabled: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1479,9 +1459,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1566,9 +1546,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1592,9 +1572,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1651,9 +1631,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1677,9 +1657,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.id,
                   type: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.type,
                   value: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.solution,
-                  isT1Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t1Status,
-                  isT2Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t2Status,
-                  isT3Enabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.t3Status,
+                  tEnabled: challengeData04_skill01_qcu_valide_flashCompatible_ennl_noEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1687,6 +1667,227 @@ describe('Integration | Repository | challenge-repository', function () {
                 ...skillData01_tube01competence00_actif,
                 difficulty: skillData01_tube01competence00_actif.level,
                 hint: skillData01_tube01competence00_actif.hint_i18n.fr,
+              }),
+            }),
+          ]);
+        });
+      });
+    });
+  });
+
+  describe('#findActiveFlashCompatible', function () {
+    let defaultSuccessProbabilityThreshold;
+    let skillsLC = [];
+    let challengesLC = [];
+
+    beforeEach(async function () {
+      defaultSuccessProbabilityThreshold = config.features.successProbabilityThreshold;
+      await knex('learningcontent.challenges').truncate();
+      await knex('learningcontent.skills').truncate();
+      skillsLC = [];
+      challengesLC = [];
+      skillsLC.push(skillData02_tube02competence01_perime);
+      skillsLC.push(skillData03_tube02competence01_actif);
+      skillsLC.push(skillData00_tube00competence00_actif);
+      challengesLC.push(challengeData06_skill02_qcm_perime_notFlashCompatible_fren_noEmbedJson);
+      challengesLC.push(challengeData07_skill03_qcm_valide_notFlashCompatible_frnl_noEmbedJson);
+      challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
+    });
+
+    it('returns only valid calibrated flash compatible challenges', async function () {
+      // given
+      const candidateReconciliationDate = new Date('2025-01-01');
+
+      const version = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
+      const otherVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: Frameworks.CORE,
+      });
+
+      challengesLC.push(
+        domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
+      );
+      challengesLC.push(
+        domainBuilder.buildChallenge({
+          id: 'otherChallengeForComplementaryCertification',
+          status: 'validé',
+        }),
+      );
+      challengesLC.push(domainBuilder.buildChallenge({ id: 'toto', status: 'archivé' }));
+
+      databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+      const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        challengeId: challengesLC[3].id,
+        versionId: version.id,
+      });
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        challengeId: challengesLC[4].id,
+        versionId: otherVersion.Id,
+      });
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        challengeId: challengesLC[0].id,
+        versionId: otherVersion.id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
+        date: candidateReconciliationDate,
+        locale: 'fr',
+        version,
+      });
+
+      // then
+      expect(flashCompatibleChallenges).to.have.lengthOf(1);
+      expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[3].id);
+      expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
+      expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
+    });
+
+    context('when locale is not defined', function () {
+      it('should throw an Error', async function () {
+        // given
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+        await databaseBuilder.commit();
+
+        // when
+        const err = await catchErr(challengeRepository.findActiveFlashCompatible)();
+
+        // then
+        expect(err.message).to.equal('Locale shall be defined');
+      });
+    });
+
+    context('when locale is defined', function () {
+      context('when no active flash compatible challenges found', function () {
+        it('should return an empty array', async function () {
+          // given
+          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
+          await databaseBuilder.commit();
+
+          // when
+          const challenges = await challengeRepository.findActiveFlashCompatible({
+            locale: 'fr',
+            version,
+          });
+
+          // then
+          expect(challenges).to.deep.equal([]);
+        });
+      });
+
+      context('when active flash compatible challenges found', function () {
+        it('should return the challenges', async function () {
+          // given
+          challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
+          challengesLC.push(challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson);
+          challengesLC.push(challengeData03_skill00_qcm_valide_flashCompatible_nl_noEmbedJson);
+          challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
+          challengesLC.push(challengeData09_skill03_qcu_archive_flashCompatible_fr_noEmbedJson);
+          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[3].id,
+            versionId: version.id,
+          });
+
+          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[4].id,
+            versionId: version.id,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const challenges = await challengeRepository.findActiveFlashCompatible({
+            locale: 'nl',
+            version,
+          });
+
+          // then
+          expect(challenges).to.deep.equal([
+            domainBuilder.buildChallenge({
+              ...challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson,
+              successProbabilityThreshold: defaultSuccessProbabilityThreshold,
+              blindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
+              focused: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.focusable,
+              discriminant: certificationFrameworkChallenge.discriminant,
+              difficulty: certificationFrameworkChallenge.difficulty,
+              validator: new ValidatorQCU({
+                solution: domainBuilder.buildSolution({
+                  id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
+                  type: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.type,
+                  value: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.solution,
+                  isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
+                  isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
+                  isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
+                  qrocBlocksTypes: {},
+                }),
+              }),
+              skill: domainBuilder.buildSkill({
+                ...skillData00_tube00competence00_actif,
+                difficulty: skillData00_tube00competence00_actif.level,
+                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
+              }),
+            }),
+          ]);
+        });
+      });
+
+      context('when successProbabilityThreshold is passed in parameters', function () {
+        it('should override default successProbabilityThreshold with the one given in parameter', async function () {
+          // given
+          challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
+          databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
+          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[3].id,
+            versionId: version.id,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const challenges = await challengeRepository.findActiveFlashCompatible({
+            locale: 'fr',
+            successProbabilityThreshold: 0.75,
+            version,
+          });
+
+          // then
+          expect(challenges).to.deep.equal([
+            domainBuilder.buildChallenge({
+              ...challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson,
+              successProbabilityThreshold: 0.75,
+              blindnessCompatibility:
+                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility1,
+              colorBlindnessCompatibility:
+                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
+              focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
+              discriminant: certificationFrameworkChallenge.discriminant,
+              difficulty: certificationFrameworkChallenge.difficulty,
+              validator: new ValidatorQCU({
+                solution: domainBuilder.buildSolution({
+                  id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
+                  type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
+                  value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
+                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
+                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
+                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  qrocBlocksTypes: {},
+                }),
+              }),
+              skill: domainBuilder.buildSkill({
+                ...skillData00_tube00competence00_actif,
+                difficulty: skillData00_tube00competence00_actif.level,
+                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
               }),
             }),
           ]);
@@ -1738,9 +1939,9 @@ describe('Integration | Repository | challenge-repository', function () {
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
                   type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
                   value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
+                  tEnabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.tStatus
+                    .toString(2)
+                    .padStart(32, '0'),
                   qrocBlocksTypes: {},
                 }),
               }),
