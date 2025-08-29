@@ -41,4 +41,31 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     expect(recommendedModules[1]).to.be.an.instanceOf(UserRecommendedModule);
     expect(recommendedModules[1]).to.be.deep.equal({ id: secondTraining.id, moduleId: secondModuleId });
   });
+
+  it('it returns recommended modules for given participation ids even if link is absolute', async function () {
+    // given
+    const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+
+    const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
+    const training = databaseBuilder.factory.buildTraining({
+      type: 'modulix',
+      link: 'https://app.pix.fr/modules/adresse-ip-publique-et-vous/details',
+    });
+
+    databaseBuilder.factory.buildUserRecommendedTraining({
+      userId,
+      trainingId: training.id,
+      campaignParticipationId: campaignParticipationId,
+    }).id;
+
+    await databaseBuilder.commit();
+
+    const recommendedModules = await usecases.findRecommendedModulesByCampaignParticipationIds({
+      campaignParticipationIds: [campaignParticipationId],
+    });
+
+    expect(recommendedModules).to.have.lengthOf(1);
+    expect(recommendedModules[0]).to.be.an.instanceOf(UserRecommendedModule);
+    expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId });
+  });
 });
