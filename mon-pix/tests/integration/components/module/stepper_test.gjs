@@ -1296,6 +1296,53 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
         });
 
+        test('should enable the controls previous button', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
+
+          function stepperIsFinished() {}
+
+          function onStepperNextStepStub() {}
+
+          const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @steps={{steps}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+              />
+            </template>,
+          );
+
+          // when
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+
+          // then
+          assert
+            .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+            .hasAria('disabled', 'false');
+        });
+
         test('should not display the Next button when there are no steps left', async function (assert) {
           // given
           const steps = [

@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import { concat } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -90,6 +91,10 @@ export default class ModulixStepper extends Component {
     return this.args.direction === 'horizontal';
   }
 
+  get isPreviousButtonDisabled() {
+    return this.displayedStepIndex === 0;
+  }
+
   <template>
     <div
       class="stepper stepper--{{@direction}}"
@@ -101,7 +106,7 @@ export default class ModulixStepper extends Component {
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
-            aria-disabled="true"
+            aria-disabled="{{this.isPreviousButtonDisabled}}"
           />
           <p
             class="stepper-controls__position"
