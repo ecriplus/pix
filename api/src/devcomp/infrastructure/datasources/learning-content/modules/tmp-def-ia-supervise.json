@@ -204,7 +204,7 @@
         {
           "id": "3fd6303e-499d-4ace-a5a6-8882a118726d",
           "type": "lesson",
-          "title": "Lesson n°1  : données étiquetées",
+          "title": "Lesson n°1 : données étiquetées",
           "components": [
             {
               "type": "stepper",
@@ -214,7 +214,7 @@
                     {
                       "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
                       "type": "text",
-                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, on lui fait faire ce que vous venez de faire :</p><ul><li>D'abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données </strong>.🌼</li><li>Chaque exemple est accompagné d’une étiquette indiquant <strong>le nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit alors que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
+                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, on lui fait faire ce que vous venez de faire :</p><ul><li>D'abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données</strong>.🌼</li><li>Chaque exemple est accompagné d’une étiquette indiquant <strong>le nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit alors que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
                     }
                   ]
                 },
@@ -250,7 +250,7 @@
               "element": {
                 "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
                 "type": "text",
-                "content": "<p>Mais au fait, un logiciel d’IA ne 'voit' pas comme nous. Alors, comment est-ce qu'il traite une image ? 👁️ Découvrons cela ensemble. </p>"
+                "content": "<p>Mais au fait, un logiciel d’IA ne 'voit' pas comme nous. Alors, comment est-ce qu'il traite une image ? 👁️ Découvrons cela ensemble. </p>"
               }
             }
           ]
