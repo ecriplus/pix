@@ -429,7 +429,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       options = {
         method: 'POST',
         url: `/api/organizations/${organization.id}/invitations`,
-        headers: { ...generateAuthenticatedUserRequestHeaders({ userId: adminUserId }), cookie: `locale=${locale}` },
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId, locale }),
         payload: {
           data: {
             type: 'organization-invitations',

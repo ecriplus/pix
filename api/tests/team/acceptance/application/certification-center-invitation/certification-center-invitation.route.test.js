@@ -57,7 +57,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
         await databaseBuilder.commit();
 
         request = {
-          headers: { ...generateAuthenticatedUserRequestHeaders({ userId }), cookie: `locale=${locale}` },
+          headers: generateAuthenticatedUserRequestHeaders({ userId, locale }),
           method: 'POST',
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
           payload: {
