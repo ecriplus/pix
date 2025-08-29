@@ -490,28 +490,28 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Car l’IA a confirmé ce qu’elle pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong><br>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Car l’IA la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement, mais ça a pu contribuer.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
+                            "diagnosis": "<p><strong>Pas exactement, mais ça a pu contribuer.</strong><br>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films. </p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesse de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
                           }
                         }
                       ],
