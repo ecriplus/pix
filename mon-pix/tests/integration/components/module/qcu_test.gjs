@@ -106,6 +106,35 @@ module('Integration | Component | Module | QCU', function (hooks) {
     assert.dom(screen.queryByRole('alert', { name: 'Pour valider, sélectionnez une réponse.' })).doesNotExist();
   });
 
+  test('should disable proposals during validation', async function (assert) {
+    // given
+    const onAnswerSpy = sinon.spy();
+    const qcuElement = _getQcuElement();
+
+    // when
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio1' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+
+    // then
+    assert.ok(screen.getByRole('radio', { name: 'radio1', disabled: true }));
+    assert.ok(screen.getByRole('radio', { name: 'radio2', disabled: true }));
+  });
+
+  test('should disable verification button during validation', async function (assert) {
+    // given
+    const onAnswerSpy = sinon.spy();
+    const qcuElement = _getQcuElement();
+
+    // when
+    const screen = await render(<template><ModulixQcu @element={{qcuElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByRole('radio', { name: 'radio1' }));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+
+    // then
+    assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).doesNotExist();
+  });
+
   test('should display an ok feedback when exists', async function (assert) {
     // given
     const onAnswerSpy = sinon.spy();
@@ -117,6 +146,9 @@ module('Integration | Component | Module | QCU', function (hooks) {
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
+    assert.dom(screen.queryByText('Correct!')).doesNotExist();
+    assert.dom(screen.queryByText('Good job!')).doesNotExist();
+
     await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     assert.dom(screen.getByText('Correct!')).exists();
     assert.dom(screen.getByText('Good job!')).exists();
@@ -136,6 +168,9 @@ module('Integration | Component | Module | QCU', function (hooks) {
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
+    assert.dom(screen.queryByText('Wrong!')).doesNotExist();
+    assert.dom(screen.queryByText('Try again!')).doesNotExist();
+
     await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     assert.dom(screen.getByText('Wrong!')).exists();
     assert.dom(screen.getByText('Try again!')).exists();
