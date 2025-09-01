@@ -41,27 +41,35 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     expect(recommendedModules[1]).to.be.an.instanceOf(UserRecommendedModule);
     expect(recommendedModules[1]).to.be.deep.equal({ id: secondTraining.id, moduleId: secondModuleId });
   });
-
-  it('it returns recommended modules for given participation ids even if link is absolute', async function () {
+  it('ignores module when its slug does not pass regex', async function () {
     // given
-    const { id: campaignParticipationId, userId } = databaseBuilder.factory.buildCampaignParticipation();
+    const { id: campaignParticipationId1, userId } = databaseBuilder.factory.buildCampaignParticipation();
+    const { id: campaignParticipationId2 } = databaseBuilder.factory.buildCampaignParticipation({ userId });
 
     const moduleId = '5df14039-803b-4db4-9778-67e4b84afbbd';
     const training = databaseBuilder.factory.buildTraining({
       type: 'modulix',
-      link: 'https://app.pix.fr/modules/adresse-ip-publique-et-vous/details',
+      link: '/modules/adresse-ip-publique-et-vous/details',
+    });
+    const secondTraining = databaseBuilder.factory.buildTraining({
+      type: 'modulix',
+      link: '/campagnes/module123',
     });
 
     databaseBuilder.factory.buildUserRecommendedTraining({
       userId,
       trainingId: training.id,
-      campaignParticipationId: campaignParticipationId,
+      campaignParticipationId: campaignParticipationId1,
     }).id;
-
+    databaseBuilder.factory.buildUserRecommendedTraining({
+      userId,
+      trainingId: secondTraining.id,
+      campaignParticipationId: campaignParticipationId2,
+    }).id;
     await databaseBuilder.commit();
 
     const recommendedModules = await usecases.findRecommendedModulesByCampaignParticipationIds({
-      campaignParticipationIds: [campaignParticipationId],
+      campaignParticipationIds: [campaignParticipationId1, campaignParticipationId2],
     });
 
     expect(recommendedModules).to.have.lengthOf(1);
