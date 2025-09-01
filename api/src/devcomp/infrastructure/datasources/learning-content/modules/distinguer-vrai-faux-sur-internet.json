@@ -48,7 +48,7 @@
                     {
                       "id": "7254a4fe-b11d-492f-985c-20a94f454a4d",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">🎮</span> Commençons par un jeu</h3><p>Sans chercher sur internet, essayez de deviner si chaque information proposée dans ces articles de journaux est <strong>plutôt vraie</strong> ou <strong>plutôt fausse</strong>.<br>Bonne chance&#8239;!</p>"
+                      "content": "<h4><span aria-hidden=\"true\">🎮</span> Commençons par un jeu</h4><p>Sans chercher sur internet, essayez de deviner si chaque information proposée dans ces articles de journaux est <strong>plutôt vraie</strong> ou <strong>plutôt fausse</strong>.<br>Bonne chance&#8239;!</p>"
                     }
                   ]
                 },
@@ -216,7 +216,7 @@
                     {
                       "id": "5c6ec12a-f5b4-4683-ae7a-11b79fddd0a5",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">&nbsp;🕹️</span> À vous de jouer !</h3>Dans chacune des situations suivantes, trouvez s'il s'agit d'une opinion, d'une rumeur, d'une anecdote ou d'une information."
+                      "content": "<h4><span aria-hidden=\"true\">&nbsp;🕹️</span> À vous de jouer !</h4>Dans chacune des situations suivantes, trouvez s'il s'agit d'une opinion, d'une rumeur, d'une anecdote ou d'une information."
                     }
                   ]
                 },
@@ -428,7 +428,7 @@
                     {
                       "id": "332d9e96-d12e-4809-9d25-173a57ed93be",
                       "type": "text",
-                      "content": "<h3>Question n°1&nbsp;: <i>qui</i> est la personne qui partage cette information&#8239;?&nbsp;<span aria-hidden=\"true\">💬</span></h3><p>Demandez-vous si vous connaissez cette personne, si elle est reconnue ou encore si elle a un intérêt particulier à ce que cette information circule.</p>"
+                      "content": "<h4>Question n°1&nbsp;: <i>qui</i> est la personne qui partage cette information&#8239;?&nbsp;<span aria-hidden=\"true\">💬</span></h4><p>Demandez-vous si vous connaissez cette personne, si elle est reconnue ou encore si elle a un intérêt particulier à ce que cette information circule.</p>"
                     }
                   ]
                 },
@@ -437,7 +437,7 @@
                     {
                       "id": "8aa4a733-4a92-4007-897d-ab884a7add85",
                       "type": "text",
-                      "content": "<h3>Question n°2&nbsp;: de <i>quand</i> date l’information&#8239;?&nbsp;<span aria-hidden=\"true\">📅</span></h3><p>C’est simple à vérifier et très important&#8239;! Des informations vraies un jour peuvent être fausses le lendemain. <br>Par exemple, une alerte inondation ou une promotion dans un magasin.</p>"
+                      "content": "<h4>Question n°2&nbsp;: de <i>quand</i> date l’information&#8239;?&nbsp;<span aria-hidden=\"true\">📅</span></h4><p>C’est simple à vérifier et très important&#8239;! Des informations vraies un jour peuvent être fausses le lendemain. <br>Par exemple, une alerte inondation ou une promotion dans un magasin.</p>"
                     }
                   ]
                 },
@@ -446,7 +446,7 @@
                     {
                       "id": "36577421-d9d0-4f49-ac43-b4e804ba5635",
                       "type": "text",
-                      "content": "<h3>Question n°3&nbsp;: <i>d’où</i> provient cette information&#8239;?&nbsp;<span aria-hidden=\"true\">🤔</span></h3><p>Cherchez à connaître l’origine de cette information, c’est-à-dire sa source : un témoignage direct, le résultat d'expériences scientifiques ou l'enquête d'un journal, etc.<br>Regardez également si l’auteur a partagé ses sources et si vous pouvez vérifier cette information par vous-même, en cherchant d’autres sources pour les comparer.</p>"
+                      "content": "<h4>Question n°3&nbsp;: <i>d’où</i> provient cette information&#8239;?&nbsp;<span aria-hidden=\"true\">🤔</span></h4><p>Cherchez à connaître l’origine de cette information, c’est-à-dire sa source : un témoignage direct, le résultat d'expériences scientifiques ou l'enquête d'un journal, etc.<br>Regardez également si l’auteur a partagé ses sources et si vous pouvez vérifier cette information par vous-même, en cherchant d’autres sources pour les comparer.</p>"
                     }
                   ]
                 },
@@ -539,7 +539,7 @@
                     {
                       "id": "613bd45d-8e88-4ca5-bfa0-368be2336027",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le « Qui ? Quand ? D'où ? »</h3><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au « Qui ? Quand ? D'où ? » présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème.</p>"
+                      "content": "<h4><span aria-hidden=\"true\">🔎</span> C'est l'heure d'utiliser le « Qui ? Quand ? D'où ? »</h4><p>Dans les exemples suivants, les informations publiées sont sûrement fausses.<br>En effet, une des réponses au « Qui ? Quand ? D'où ? » présente un problème.<br>Trouvez dans chaque exemple où se situe ce problème.</p>"
                     }
                   ]
                 },

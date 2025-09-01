@@ -63,7 +63,7 @@
               "element": {
                 "id": "c785bfd1-e8b8-42a0-8354-333d5acf6555",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">🔎</span> Observez : votre souris a-t-elle un fil ?</h3>"
+                "content": "<h4><span aria-hidden=\"true\">🔎</span> Observez : votre souris a-t-elle un fil ?</h4>"
               }
             }
           ]
@@ -135,7 +135,7 @@
               "element": {
                 "id": "6b6eeef4-bb9b-4769-906d-47e72db93543",
                 "type": "text",
-                "content": "<p>Pour l'instant, regardez votre souris. Ne regardez pas ce qu'il se passe à l'écran.<br></p><h3><span aria-hidden=\"true\">👉</span> Déplacez votre souris, en suivant ces étapes :</h3><ul><li>Étape 1 : Posez votre main confortablement sur la souris.</li><li>Étape 2 : Faites glissez la souris doucement sur la table.</li></ul>"
+                "content": "<p>Pour l'instant, regardez votre souris. Ne regardez pas ce qu'il se passe à l'écran.<br></p><h4><span aria-hidden=\"true\">👉</span> Déplacez votre souris, en suivant ces étapes :</h4><ul><li>Étape 1 : Posez votre main confortablement sur la souris.</li><li>Étape 2 : Faites glissez la souris doucement sur la table.</li></ul>"
               }
             },
             {
@@ -222,7 +222,7 @@
               "element": {
                 "id": "0dc90047-776b-48cd-944e-72ca51c69cfc",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur de votre souris.</h3><p>Pour découvrir l'image cachée, passez le pointeur de votre souris dans toute la zone.</p>"
+                "content": "<h4><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur de votre souris.</h4><p>Pour découvrir l'image cachée, passez le pointeur de votre souris dans toute la zone.</p>"
               }
             },
             {
@@ -264,7 +264,7 @@
               "element": {
                 "id": "a33ac061-ab23-4e94-b60e-904e701e7d76",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur sur chacun des éléments qui apparaissent. </h3><p>Vous pouvez essayer autant de fois que vous voulez.</p>"
+                "content": "<h4><span aria-hidden=\"true\">👉</span> Dans la zone ci-dessous, déplacez le pointeur sur chacun des éléments qui apparaissent. </h4><p>Vous pouvez essayer autant de fois que vous voulez.</p>"
               }
             },
             {
@@ -283,7 +283,7 @@
               "element": {
                 "id": "9c1c4342-96a6-4c14-a5b0-5ed0d202fb8f",
                 "type": "text",
-                "content": "<h3> <span aria-hidden=\"true\">💡</span> Astuce si vous ne voyez plus le pointeur sur votre écran :&nbsp;</h3> <p> Bougez de gauche à droite votre souris doucement sur la table.<br> Vous verrez le pointeur bouger à l'écran.</p>"
+                "content": "<h4> <span aria-hidden=\"true\">💡</span> Astuce si vous ne voyez plus le pointeur sur votre écran :&nbsp;</h4> <p> Bougez de gauche à droite votre souris doucement sur la table.<br> Vous verrez le pointeur bouger à l'écran.</p>"
               }
             }
           ]
@@ -369,7 +369,7 @@
               "element": {
                 "id": "e45a32cf-2ab9-4464-85d0-ae4f0ca897cb",
                 "type": "text",
-                "content": "<h3>D'abord, pourquoi est-ce qu'on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h3><p>C'est le bruit que fait une souris d'ordinateur quand on appuie sur un de ses boutons.</p>"
+                "content": "<h4>D'abord, pourquoi est-ce qu'on dit «&nbsp;<strong>clic&nbsp;</strong>»&nbsp;?</h4><p>C'est le bruit que fait une souris d'ordinateur quand on appuie sur un de ses boutons.</p>"
               }
             },
             {
@@ -549,7 +549,7 @@
                     {
                       "id": "734ef21d-3850-40db-840e-e16253d8817b",
                       "type": "text",
-                      "content": "<h3>Faites un clic gauche sur «&nbsp;Play&nbsp;» <span aria-hidden=\"true\">▶️</span> au centre de l'image ci-dessous.</h3><br><p> Ce clic gauche va faire démarrer la vidéo.</p>"
+                      "content": "<h4>Faites un clic gauche sur «&nbsp;Play&nbsp;» <span aria-hidden=\"true\">▶️</span> au centre de l'image ci-dessous.</h4><br><p> Ce clic gauche va faire démarrer la vidéo.</p>"
                     },
                     {
                       "id": "b0f296c2-a295-4424-8eb1-76e3fbcc1ebb",
@@ -631,7 +631,7 @@
               "element": {
                 "id": "72a98ef7-1052-4f70-bfe8-a77ff4279f61",
                 "type": "text",
-                "content": "<h3>Les 5 points à retenir <span aria-hidden=\"true\">📌</span></h3>"
+                "content": "<h4>Les 5 points à retenir <span aria-hidden=\"true\">📌</span></h4>"
               }
             },
             {

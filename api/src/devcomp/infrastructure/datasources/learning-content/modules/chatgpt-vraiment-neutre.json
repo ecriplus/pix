@@ -213,7 +213,7 @@
                     {
                       "id": "be70c1be-d6d1-4b6e-bcee-de1ab8859ee0",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">&nbsp;🕹️</span> À vous de jouer</h3><p>Vous allez maintenant devoir analyser trois situations avec des résultats visiblement biaisés.</p><p>Pour chaque situation, trouvez la cause principale des résultats biaisés.<br><i>Tous les exemples ont été générés le 7 juin 2024 avec CHATGPT-4 (OpenAI).</i></p>"
+                      "content": "<h4><span aria-hidden=\"true\">&nbsp;🕹️</span> À vous de jouer</h4><p>Vous allez maintenant devoir analyser trois situations avec des résultats visiblement biaisés.</p><p>Pour chaque situation, trouvez la cause principale des résultats biaisés.<br><i>Tous les exemples ont été générés le 7 juin 2024 avec CHATGPT-4 (OpenAI).</i></p>"
                     }
                   ]
                 },
@@ -375,7 +375,7 @@
               "element": {
                 "id": "d7c949fb-9fac-400d-990a-a6cb8144c653",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h3><p>Les biais dans les LLM peuvent avoir différentes origines&nbsp;:</p><ul><li>Les <strong>données d'entraînement</strong> comportent déjà des stéréotypes et des biais, qui se retrouvent par la suite dans les modèles.</li><li>Les <strong>personnes qui développent</strong> des LLM transmettent, consciemment ou non, leurs biais dans les modèles.</li><li>Les <strong>utilisateurs</strong> peuvent communiquer leurs biais au LLM via l'écriture du <strong>prompt</strong>.</li></ul>"
+                "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h4><p>Les biais dans les LLM peuvent avoir différentes origines&nbsp;:</p><ul><li>Les <strong>données d'entraînement</strong> comportent déjà des stéréotypes et des biais, qui se retrouvent par la suite dans les modèles.</li><li>Les <strong>personnes qui développent</strong> des LLM transmettent, consciemment ou non, leurs biais dans les modèles.</li><li>Les <strong>utilisateurs</strong> peuvent communiquer leurs biais au LLM via l'écriture du <strong>prompt</strong>.</li></ul>"
               }
             }
           ]
@@ -408,7 +408,7 @@
                     {
                       "id": "4c5bad43-7a4b-4535-8951-dc2b98e1de54",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">🔧&nbsp;</span>Et si on essayait ?</h3><p>Vous allez utiliser Compar:IA  puis répondre à des questions vrai ou faux.</p>"
+                      "content": "<h4><span aria-hidden=\"true\">🔧&nbsp;</span>Et si on essayait ?</h4><p>Vous allez utiliser Compar:IA  puis répondre à des questions vrai ou faux.</p>"
                     }
                   ]
                 },

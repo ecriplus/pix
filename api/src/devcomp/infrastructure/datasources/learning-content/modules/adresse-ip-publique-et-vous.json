@@ -393,7 +393,7 @@
               "element": {
                 "id": "27fc867a-7258-4f85-b8cc-bdd1ab2d26a5",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h3><ul><li>Votre adresse IP publique est celle de votre box internet.</li><li>Les personnes connectées à la même box internet ont la même adresse IP publique.</li><li>L’adresse IP publique donne une information sur la zone géographique de connexion : le pays, voire la ville.</li></ul>"
+                "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h4><ul><li>Votre adresse IP publique est celle de votre box internet.</li><li>Les personnes connectées à la même box internet ont la même adresse IP publique.</li><li>L’adresse IP publique donne une information sur la zone géographique de connexion : le pays, voire la ville.</li></ul>"
               }
             }
           ]
@@ -525,7 +525,7 @@
                     {
                       "id": "9bc62c21-dfd4-40a8-9497-680a7e1c13d9",
                       "type": "text",
-                      "content": "<h3><span aria-hidden=\"true\">🕹️</span> À vous de jouer !</h3><p>À l'aide du schéma ci-dessus, trouvez pour chaque question si elle correspond à une IP privée ou à une IP publique.</p>"
+                      "content": "<h4><span aria-hidden=\"true\">🕹️</span> À vous de jouer !</h4><p>À l'aide du schéma ci-dessus, trouvez pour chaque question si elle correspond à une IP privée ou à une IP publique.</p>"
                     }
                   ]
                 },

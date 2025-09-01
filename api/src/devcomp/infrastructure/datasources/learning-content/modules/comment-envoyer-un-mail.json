@@ -317,7 +317,7 @@
               "element": {
                 "id": "97e1108c-34ef-4772-a3ca-e385d6319bc6",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h3><p>Pour envoyer un mail, il faut remplir ses différents champs avec les bonnes informations :</p>"
+                "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h4><p>Pour envoyer un mail, il faut remplir ses différents champs avec les bonnes informations :</p>"
               }
             },
             {
