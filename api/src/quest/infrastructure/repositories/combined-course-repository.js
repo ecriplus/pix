@@ -13,6 +13,16 @@ const getByCode = async ({ code }) => {
   return new CombinedCourse(quest);
 };
 
+const findByCampaignId = async ({ campaignId }) => {
+  const knexConn = DomainTransaction.getConnection();
+  const quests = await knexConn('quests')
+    .select('id', 'organizationId', 'code', 'name')
+    .whereNotNull('code')
+    .whereJsonSupersetOf('successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
+
+  return quests.map((quest) => new CombinedCourse(quest));
+};
+
 const saveInBatch = async ({ combinedCourses }) => {
   const knexConn = DomainTransaction.getConnection();
   const combinedCoursesToSave = combinedCourses.map(_toDTO);
@@ -32,4 +42,4 @@ const _toDTO = (combinedCourse) => {
   };
 };
 
-export { getByCode, saveInBatch };
+export { findByCampaignId, getByCode, saveInBatch };

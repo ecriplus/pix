@@ -34,6 +34,64 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
+  describe('#getByCampaignId', function () {
+    let organizationId, quest, campaignId;
+
+    beforeEach(async function () {
+      // given
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+      const code = 'ABCDE1234';
+      const name = 'Mon parcours Combiné';
+      quest = databaseBuilder.factory.buildQuestForCombinedCourse({
+        code,
+        name,
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignId,
+                comparison: 'equal',
+              },
+              status: {
+                data: 'SHARED',
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      await databaseBuilder.commit();
+    });
+
+    it('should return a combinedCourse that include a given campaignId', async function () {
+      // when
+      const combinedCourseResult = await combinedCourseRepository.findByCampaignId({ campaignId });
+
+      // then
+      expect(combinedCourseResult).lengthOf(1);
+      expect(combinedCourseResult[0]).instanceof(CombinedCourse);
+      expect(combinedCourseResult[0]).deep.equal(new CombinedCourse(quest));
+    });
+
+    it('should return empty array if no combined course match campaignId', async function () {
+      // given
+      const campaignIdNotInQuest = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourseResult = await combinedCourseRepository.findByCampaignId({
+        campaignId: campaignIdNotInQuest,
+      });
+
+      // then
+      expect(combinedCourseResult).deep.equal([]);
+    });
+  });
+
   describe('#saveInBatch', function () {
     it('should save given combined course', async function () {
       // given
