@@ -71,8 +71,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
         // then
-        assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
-        assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
+        assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
+        assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
@@ -440,8 +440,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 1' })).exists();
+            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .doesNotExist();
@@ -489,8 +489,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.queryAllByRole('heading', { level: 3 }).length, 0);
-            assert.dom(screen.queryByRole('heading', { level: 3, name: 'Étape 1 sur 1' })).doesNotExist();
+            assert.strictEqual(screen.queryAllByRole('heading', { level: 4 }).length, 0);
+            assert.dom(screen.queryByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).doesNotExist();
           });
         });
       });
@@ -538,7 +538,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
+          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
         });
 
         test('should not display the Next button when there are no steps left', async function (assert) {
@@ -619,9 +619,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
-          assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
-          assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 2 sur 2' })).exists();
+          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
+          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
         });
 
         module('when has unsupported elements', function () {
@@ -664,9 +664,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 2 sur 2' })).exists();
+            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
           });
         });
       });
@@ -790,8 +790,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
         // then
-        assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
-        assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
+        assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
+        assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
@@ -1159,8 +1159,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 1' })).exists();
+            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .doesNotExist();
@@ -1208,8 +1208,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.queryAllByRole('heading', { level: 3 }).length, 0);
-            assert.dom(screen.queryByRole('heading', { level: 3, name: 'Étape 1 sur 1' })).doesNotExist();
+            assert.strictEqual(screen.queryAllByRole('heading', { level: 4 }).length, 0);
+            assert.dom(screen.queryByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).doesNotExist();
           });
         });
       });
@@ -1257,8 +1257,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3, disabled: true }).length, 1);
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 1);
+          assert.strictEqual(screen.getAllByRole('heading', { level: 4, disabled: true }).length, 1);
+          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
         });
 
         test('should not display the Next button when there are no steps left', async function (assert) {
@@ -1339,9 +1339,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
-          assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
-          assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 2 sur 2' })).exists();
+          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
+          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
         });
 
         module('when has unsupported elements', function () {
@@ -1386,9 +1386,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 3 }).length, 2);
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 1 sur 2' })).exists();
-            assert.dom(screen.getByRole('heading', { level: 3, name: 'Étape 2 sur 2' })).exists();
+            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
           });
         });
       });
