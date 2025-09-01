@@ -535,7 +535,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                       element: {
                         id: '84726001-1665-457d-8f13-4a74dc4768ea',
                         type: 'text',
-                        content: '<h3>Content</h3>',
+                        content: '<h4>Content</h4>',
                       },
                     },
                   ],
@@ -2242,7 +2242,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                     element: {
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
-                      content: '<h3>Content</h3>',
+                      content: '<h4>Content</h4>',
                     },
                   },
                   {
@@ -2250,7 +2250,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                     unknown: {
                       id: '16ad694a-848f-456d-95a6-c488350c3ed7',
                       type: 'text',
-                      content: '<h3>Content</h3>',
+                      content: '<h4>Content</h4>',
                     },
                   },
                 ],
@@ -2300,7 +2300,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
                     element: {
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
-                      content: '<h3>Content</h3>',
+                      content: '<h4>Content</h4>',
                     },
                   },
                   {
