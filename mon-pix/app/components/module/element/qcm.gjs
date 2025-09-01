@@ -11,6 +11,8 @@ import ModulixFeedback from 'mon-pix/components/module/feedback';
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import ModuleElement from './module-element';
 
+export const VERIFY_RESPONSE_DELAY = 500;
+
 export default class ModuleQcm extends ModuleElement {
   @service passageEvents;
 
@@ -56,13 +58,19 @@ export default class ModuleQcm extends ModuleElement {
 
   @action
   async onAnswer(event) {
+    event.preventDefault();
+    await this.waitFor(VERIFY_RESPONSE_DELAY);
     await super.onAnswer(event);
 
-    const status = this.answerIsValid ? 'ok' : 'ko';
+    const status = this.answerIsValid ? "ok" : "ko";
     this.passageEvents.record({
       type: 'QCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
+  }
+
+  waitFor(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
   <template>

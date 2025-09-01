@@ -85,7 +85,7 @@ module('Acceptance | Module | Routes | verifyQcm', function (hooks) {
     await click(firstQcmVerifyButton);
 
     // then
-    assert.dom(screen.getByText("Bravo ! C'est la bonne réponse.")).exists();
+    assert.dom(await screen.findByText("Bravo ! C'est la bonne réponse.")).exists();
 
     // when
     await click(screen.getByLabelText('I am the first wrong answer!'));
@@ -93,6 +93,6 @@ module('Acceptance | Module | Routes | verifyQcm', function (hooks) {
     await click(nextQcmVerifyButton);
 
     // then
-    assert.dom(screen.getByText('Pas ouf')).exists();
+    assert.dom(await screen.findByText('Pas ouf')).exists();
   });
 });

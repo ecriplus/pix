@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -63,10 +63,10 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     await click(wrongAnswerCheckbox);
     await click(qcmVerifyButton);
 
-    assert.dom(screen.getByRole('status')).exists();
+    const feedback = await screen.findByRole('status');
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
@@ -79,7 +79,7 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     await click(wrongAnswerCheckbox);
     await click(rightAnswerCheckbox);
     await click(qcmVerifyButtonCameBack);
-    assert.strictEqual(screen.queryByRole('status').innerText, 'Faux');
+    await within(feedback).findByText('Faux');
   });
 
   test('after retrying a QCM, it display an error message if QCM is validated without response', async function (assert) {
@@ -116,7 +116,7 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
       id: 'bien-ecrire-son-adresse-mail',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
-      isBeta: true,
+      isBeta: false,
       sections: [section],
     });
 
@@ -141,7 +141,7 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
     assert.dom(screen.getByRole('status')).exists();
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
@@ -152,8 +152,7 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
 
     const qcmVerifyButtonCameBack = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     await click(qcmVerifyButtonCameBack);
-    const validationAlert = screen.queryAllByRole('alert')[1];
-
+    const validationAlert = await screen.findByRole('alert');
     assert.strictEqual(validationAlert.innerText, 'Pour valider, sélectionnez au moins deux réponses.');
   });
 });
