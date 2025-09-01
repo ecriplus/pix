@@ -45,6 +45,32 @@ describe('Unit | Shared | Infrastructure | Serializer | CsvParser', function () 
     });
   });
 
+  context('when the header has some trailing whitespaces in the column names', function () {
+    it('trims the header column names and then does the standard parsing', async function () {
+      const header = {
+        columns: [
+          new CsvColumn({ property: 'col1', name: 'Column 1' }),
+          new CsvColumn({ property: 'col2', name: 'Column 2' }),
+          new CsvColumn({ property: 'col3', name: 'Column 3' }),
+        ],
+      };
+
+      const column1NameWithWhitespaces = 'Column 1   ';
+      const column2NameWithWhitespaces = '   Column 2';
+      const column3NameWithWhitespaces = '  Column 3  ';
+      const input = `${column1NameWithWhitespaces};${column2NameWithWhitespaces};${column3NameWithWhitespaces}
+      Sylvia;Amelia;Olivia`;
+      const encodedInput = iconv.encode(input, 'utf8');
+
+      const parser = new CsvParser(encodedInput, header);
+      const [result] = parser.parse();
+
+      expect(result.col1).to.equal('Sylvia');
+      expect(result.col2).to.equal('Amelia');
+      expect(result.col3).to.equal('Olivia');
+    });
+  });
+
   context('File does not match requirements', function () {
     let header;
 
