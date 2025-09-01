@@ -6,7 +6,7 @@ import pageTitle from 'ember-page-title/helpers/page-title';
 <template>
   {{pageTitle (t "navigation.error")}}
 
-  <div class="error-page">
+  <main class="error-page">
     <PixBlock class="error-page__body-section">
       <div class="error-page__main-content">
         <h1 class="error-page__main-content__title">{{t "pages.error.first-title"}}</h1>
@@ -27,5 +27,5 @@ import pageTitle from 'ember-page-title/helpers/page-title';
         <p>{{@controller.errorMessage}}</p>
       </div>
     </PixBlock>
-  </div>
+  </main>
 </template>
