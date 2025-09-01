@@ -48,6 +48,10 @@ export default class ModulixStepper extends Component {
 
   @action
   displayPreviousStep() {
+    if (this.displayedStepIndex === 0) {
+      return;
+    }
+
     this.displayedStepIndex -= 1;
   }
 

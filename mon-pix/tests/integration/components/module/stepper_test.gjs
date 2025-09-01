@@ -830,6 +830,48 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           .hasAria('disabled', 'true');
       });
 
+      test('should not be able to navigate to negative step', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+
+        // then
+        await click(
+          screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+        );
+        assert
+          .dom(
+            screen.getByLabelText(
+              t('pages.modulix.stepper.step.position', {
+                currentStep: 1,
+                totalSteps: 2,
+              }),
+            ),
+          )
+          .exists();
+      });
+
       module('When step contains answerable elements', function () {
         module('When the only answerable element is unanswered', function () {
           test('should not display the Next button', async function (assert) {
