@@ -17,8 +17,8 @@
   },
   "sections": [
     {
-      "id": "6a735ee1-07d6-4034-acb8-e10a16d84f01",
-      "type": "blank",
+      "id": "ab1a4d59-a6aa-4051-8370-670937bf4031",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "6311f17f-b02c-4f22-a10e-c349d962218e",
@@ -57,11 +57,76 @@
               "type": "element",
               "element": {
                 "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html",
-                "instruction": "<p> À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</p>",
-                "height": 325
+                "type": "text",
+                "content": "<p><strong>À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8ac18d0a-b0ec-4fa0-8107-3c655ddfe845",
+                "type": "custom",
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "1946",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1956",
+                      "feedback": {
+                        "type": "good",
+                        "text": "✅ Oui, en effet l’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1966",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1976",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1986",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1996",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "2006",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "2016",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -80,7 +145,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2fcc0d2c-1c6e-4eaf-b5cd-308973e1209d",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "0010b969-e9a0-4ed4-957d-5fe365c6ce56",
           "type": "discovery",
@@ -224,7 +295,9 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -296,7 +369,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "68923cb0-6a9f-45cb-afad-c718314000c3",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "2b67c7bb-cda3-4923-9c3b-4225e082bc57",
           "type": "summary",
@@ -311,7 +390,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "03602dca-a0c2-45b2-a8b0-8b7331605a61",
+      "type": "practise",
+      "grains": [
         {
           "id": "7a4f925d-782c-40aa-812c-01278b60caee",
           "type": "activity",
@@ -535,7 +620,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "916ecd01-c313-4310-8858-9282990d434d",
+      "type": "go-further",
+      "grains": [
         {
           "id": "6589bd5c-b120-4f5f-a089-62922f54de59",
           "type": "activity",
