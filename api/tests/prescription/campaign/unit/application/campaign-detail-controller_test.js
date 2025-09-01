@@ -20,7 +20,7 @@ describe('Unit | Application | Controller | Campaign detail', function () {
       dependencies = {
         campaignToJoinSerializer: { serialize: sinon.stub() },
       };
-      sinon.stub(usecases, 'getCampaignByCode').withArgs({ code, locale }).resolves(campaignToJoin);
+      sinon.stub(usecases, 'getCampaignByCode').withArgs({ code }).resolves(campaignToJoin);
 
       dependencies.campaignToJoinSerializer.serialize.withArgs(campaignToJoin).returns(serializedCampaignToJoin);
       // when

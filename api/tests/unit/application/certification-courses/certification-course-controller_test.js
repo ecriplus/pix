@@ -40,7 +40,7 @@ describe('Unit | Controller | certification-course-controller', function () {
 
     it('should call the use case with the right arguments', async function () {
       // given
-      const usecaseArgs = { sessionId: '12345', accessCode: 'ABCD12', userId: 'userId', locale: 'fr' };
+      const usecaseArgs = { sessionId: '12345', accessCode: 'ABCD12', userId: 'userId' };
       usecases.retrieveLastOrCreateCertificationCourse
         .withArgs(usecaseArgs)
         .resolves({ created: true, certificationCourse: retrievedCertificationCourse });
@@ -55,7 +55,7 @@ describe('Unit | Controller | certification-course-controller', function () {
     it('should reply the certification course serialized', async function () {
       // given
       const serializedCertificationCourse = Symbol('a serialized certification course');
-      const usecaseArgs = { sessionId: '12345', accessCode: 'ABCD12', userId: 'userId', locale: 'fr' };
+      const usecaseArgs = { sessionId: '12345', accessCode: 'ABCD12', userId: 'userId' };
       usecases.retrieveLastOrCreateCertificationCourse
         .withArgs(usecaseArgs)
         .resolves({ created: true, certificationCourse: retrievedCertificationCourse });
