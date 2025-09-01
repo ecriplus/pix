@@ -25,7 +25,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
     );
 
     // then
-    assert.ok(screen.getByRole('heading', { name: `Étape ${currentStep} sur ${totalSteps}`, level: 2 }));
+    assert.ok(screen.getByRole('heading', { name: `Étape ${currentStep} sur ${totalSteps}`, level: 3 }));
     assert.dom('.grain').hasAttribute('id', 'grain_12345-abcdef');
   });
 

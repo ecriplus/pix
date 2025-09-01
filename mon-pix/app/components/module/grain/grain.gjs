@@ -249,11 +249,11 @@ export default class ModuleGrain extends Component {
       tabindex="-1"
       {{didInsert this.focusAndScroll}}
     >
-      <h2 class="screen-reader-only">{{t
+      <h3 class="screen-reader-only">{{t
           "pages.modulix.flashcards.navigation.longCurrentStep"
           current=@currentStep
           total=@totalSteps
-        }}</h2>
+        }}</h3>
       <div class="grain__card grain-card--{{this.grainType}}">
         {{#if this.isGrainTypeWithTag}}
           <PixTag class="grain-card-tag" @color="grey">
@@ -261,8 +261,8 @@ export default class ModuleGrain extends Component {
           </PixTag>
         {{/if}}
         {{#if this.isGrainTypeWithTitle}}
-          <h2 class="grain-card-title">
-            {{this.grainTitle}}</h2>
+          <h3 class="grain-card-title">
+            {{this.grainTitle}}</h3>
         {{/if}}
         <div class="grain-card__content">
           <!-- eslint-disable-next-line no-unused-vars -->

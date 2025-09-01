@@ -56,7 +56,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         await clickByName('Continuer');
 
         // then
-        assert.dom(screen.getByRole('heading', { name: 'Étape 2 sur 3', level: 2 })).exists();
+        assert.dom(screen.getByRole('heading', { name: 'Étape 2 sur 3', level: 3 })).exists();
         assert.dom(screen.queryByRole('button', { name: 'Continuer' })).exists();
       });
     });
