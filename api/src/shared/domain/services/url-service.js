@@ -3,7 +3,7 @@
  */
 
 import { config } from '../../config.js';
-import { getBaseLocale, getDefaultLocale, getNearestSupportedLocale, isFranceLocale } from './locale-service.js';
+import { getDefaultLocale, getNearestSupportedLocale, isFranceLocale } from './locale-service.js';
 
 const PIX_WEBSITE_DOMAIN_FR = `${config.domain.pix}${config.domain.tldFr}`;
 const PIX_WEBSITE_DOMAIN_ORG = `${config.domain.pix}${config.domain.tldOrg}`;
@@ -45,7 +45,7 @@ export function getPixWebsiteDomain(locale) {
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add lang param
+ * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix App URL according the locale
  */
 export function getPixAppUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
@@ -62,7 +62,7 @@ export function getPixAppUrl(locale, { pathname, queryParams, hash, skipLangPara
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add lang param
+ * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix Orga URL according the locale
  */
 export function getPixOrgaUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
@@ -79,7 +79,7 @@ export function getPixOrgaUrl(locale, { pathname, queryParams, hash, skipLangPar
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add lang param
+ * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix Certif URL according the locale
  */
 export function getPixCertifUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
@@ -153,10 +153,10 @@ function _buildUrlWithLocale({ rootUrl, pathname, queryParams, locale, hash, ski
     url.hash = hash;
   }
 
-  // automaticaly add the "lang" attribute on org domain (except when overriden or skipLangParam pass)
-  if (!isFranceLocale(locale) && !queryParams?.lang && !skipLangParam) {
+  // Adding the "locale" query param on .org domain (except when overriden or skipLangParam)
+  if (!isFranceLocale(locale) && !(queryParams?.locale || queryParams?.lang) && !skipLangParam) {
     const supportedLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
-    url.searchParams.set('lang', getBaseLocale(supportedLocale));
+    url.searchParams.set('locale', supportedLocale);
   }
 
   return url.toString();

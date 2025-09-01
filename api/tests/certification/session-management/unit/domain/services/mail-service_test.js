@@ -78,7 +78,7 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
             homeUrl: 'https://pix.fr',
             homeNameInternational: 'pix.org',
             homeUrlInternational: 'https://pix.org/fr',
-            link: `${link}?lang=fr`,
+            link: `${link}?locale=fr`,
             title: i18nFr.__('certification-result-email.title', { sessionId }),
             doNotReply: i18nFr.__('certification-result-email.params.doNotReply'),
             download: i18nFr.__('certification-result-email.params.download'),
@@ -98,7 +98,7 @@ describe('Unit | Certification | Session-Management | Domain | Services | MailSe
           en: {
             homeName: 'pix.org',
             homeUrl: 'https://pix.org/en',
-            link: `${link}?lang=en`,
+            link: `${link}?locale=en`,
             title: i18nEn.__('certification-result-email.title', { sessionId }),
             doNotReply: i18nEn.__('certification-result-email.params.doNotReply'),
             download: i18nEn.__('certification-result-email.params.download'),
