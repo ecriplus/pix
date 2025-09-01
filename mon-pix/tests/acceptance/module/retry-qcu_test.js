@@ -1,4 +1,4 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -75,14 +75,14 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     await click(wrongAnswerRadio);
     await click(firstQcuVerifyButton);
 
-    assert.dom(screen.getByRole('status')).exists();
+    const feedback = await screen.findByRole('status');
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
-    assert.strictEqual(screen.queryByRole('status').innerText, '');
+    assert.strictEqual(feedback.innerText, '');
     assert.false(firstQcuForm.disabled);
     assert.false(wrongAnswerRadio.checked);
     assert.false(rightAnswerRadio.checked);
@@ -90,7 +90,8 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     const firstQcuVerifyButtonCameBack = await screen.findByRole('button', { name: 'Vérifier ma réponse' });
     await click(wrongAnswerRadio);
     await click(firstQcuVerifyButtonCameBack);
-    assert.strictEqual(screen.queryByRole('status').innerText, 'Faux');
+
+    await within(feedback).findByText('Faux');
   });
 
   test('after retrying a QCU, it display an error message if QCU is validated without response', async function (assert) {
@@ -168,14 +169,14 @@ module('Acceptance | Module | Routes | retryQcu', function (hooks) {
     await click(wrongAnswerRadio);
     await click(firstQcuVerifyButton);
 
-    assert.dom(screen.getByRole('status')).exists();
+    const feedback = await screen.findByRole('status');
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
-    assert.strictEqual(screen.queryByRole('status').innerText, '');
+    assert.strictEqual(feedback.innerText, '');
     assert.false(firstQcuForm.disabled);
     assert.false(wrongAnswerRadio.checked);
     assert.false(rightAnswerRadio.checked);

@@ -3,6 +3,7 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { click, find, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -634,7 +635,16 @@ module('Integration | Component | Module | Grain', function (hooks) {
     });
   });
 
-  module('when onElementRetry is called', function () {
+  module('when onElementRetry is called', function (hooks) {
+    let clock;
+
+    hooks.beforeEach(function () {
+      clock = sinon.useFakeTimers();
+    });
+
+    hooks.afterEach(function () {
+      clock.restore();
+    });
     test('should call onElementRetry pass in argument', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
@@ -676,7 +686,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
       await click(screen.getByLabelText('I am the wrong answer!'));
       const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
       await click(verifyButton);
-      await clickByName(t('pages.modulix.buttons.activity.retry'));
+      await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+      const retryButton = screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') });
+      await click(retryButton);
 
       // then
       sinon.assert.calledOnce(onElementRetryStub);
@@ -889,7 +901,17 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
-    module('When we retry an answerable element', function () {
+    module('When we retry an answerable element', function (hooks) {
+      let clock;
+
+      hooks.beforeEach(function () {
+        clock = sinon.useFakeTimers();
+      });
+
+      hooks.afterEach(function () {
+        clock.restore();
+      });
+
       test('should call the onElementRetry action', async function (assert) {
         // given
         const passageEvents = this.owner.lookup('service:passage-events');
@@ -947,7 +969,8 @@ module('Integration | Component | Module | Grain', function (hooks) {
         await clickByName('radio1');
         const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
         await click(verifyButton);
-        await clickByName(t('pages.modulix.buttons.activity.retry'));
+        await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+        await click(screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') }));
         sinon.assert.calledOnce(onElementRetryStub);
         assert.ok(true);
       });

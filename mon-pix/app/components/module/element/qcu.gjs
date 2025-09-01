@@ -12,10 +12,13 @@ import ModulixFeedback from 'mon-pix/components/module/feedback';
 import { htmlUnsafe } from '../../../helpers/html-unsafe';
 import ModuleElement from './module-element';
 
+export const VERIFY_RESPONSE_DELAY = 500;
+
 export default class ModuleQcu extends ModuleElement {
   @tracked selectedAnswerId = null;
   @tracked currentCorrection;
   @service passageEvents;
+  @tracked displayFeedbackState = false;
 
   @action
   radioClicked(proposalId) {
@@ -38,17 +41,13 @@ export default class ModuleQcu extends ModuleElement {
     return [this.selectedAnswerId];
   }
 
-  get disableInput() {
-    return super.disableInput ? true : null;
-  }
-
   @action
   getProposalState(proposalId) {
     if (!this.correction) {
       return null;
     }
 
-    if (this.selectedAnswerId !== proposalId) {
+    if (this.selectedAnswerId !== proposalId || !this.displayFeedbackState) {
       return 'neutral';
     }
 
@@ -63,7 +62,16 @@ export default class ModuleQcu extends ModuleElement {
     if (this.isOnRetryMode) {
       return null;
     }
+
+    if (!this.displayFeedbackState) {
+      return undefined;
+    }
+
     return this.currentCorrection;
+  }
+
+  get disableInput() {
+    return !this.isOnRetryMode && (this.displayFeedbackState || !!this.currentCorrection);
   }
 
   @action
@@ -84,6 +92,20 @@ export default class ModuleQcu extends ModuleElement {
       type: 'QCU_ANSWERED',
       data: { answer: this.selectedAnswerId, elementId: this.element.id, status },
     });
+
+    return new Promise((resolve, _) => {
+      window.setTimeout(() => {
+        this.displayFeedbackState = true;
+        resolve();
+      }, VERIFY_RESPONSE_DELAY);
+    });
+  }
+
+  @action
+  retry(event) {
+    super.retry(event);
+    this.currentCorrection = null;
+    this.displayFeedbackState = false;
   }
 
   get selectedProposalFeedback() {
