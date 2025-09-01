@@ -27,8 +27,10 @@ const dependencies = {
   skillRepository,
   userRepository,
   llmApi,
+  logger,
 };
 
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { addTutorialEvaluation } from './add-tutorial-evaluation.js';
 import { addTutorialToUser } from './add-tutorial-to-user.js';
 import { attachTargetProfilesToTraining } from './attach-target-profiles-to-training.js';
