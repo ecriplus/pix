@@ -30,11 +30,11 @@ describe('Unit | UseCase | find-paginated-filtered-tutorials', function () {
       // given
       const userId = 123;
       const filters = {};
-      const locale = Symbol('locale');
+      const lang = Symbol('lang');
       const page = Symbol('page');
 
       // when
-      const result = await findPaginatedFilteredTutorials({ userId, filters, page, locale, tutorialRepository });
+      const result = await findPaginatedFilteredTutorials({ userId, filters, page, lang, tutorialRepository });
 
       // then
       expect(tutorialRepository.findPaginatedFilteredRecommendedByUserId).to.have.not.been.called;
@@ -52,11 +52,11 @@ describe('Unit | UseCase | find-paginated-filtered-tutorials', function () {
       // given
       const userId = 123;
       const filters = { type: Tutorial.TYPES.SAVED };
-      const locale = Symbol('locale');
+      const lang = Symbol('lang');
       const page = Symbol('page');
 
       // when
-      const result = await findPaginatedFilteredTutorials({ userId, filters, page, locale, tutorialRepository });
+      const result = await findPaginatedFilteredTutorials({ userId, filters, page, lang, tutorialRepository });
 
       // then
       expect(tutorialRepository.findPaginatedFilteredRecommendedByUserId).to.have.not.been.called;
@@ -74,18 +74,18 @@ describe('Unit | UseCase | find-paginated-filtered-tutorials', function () {
       // given
       const userId = 123;
       const filters = { type: Tutorial.TYPES.RECOMMENDED };
-      const locale = Symbol('locale');
+      const lang = Symbol('lang');
       const page = Symbol('page');
 
       // when
-      const result = await findPaginatedFilteredTutorials({ userId, filters, page, locale, tutorialRepository });
+      const result = await findPaginatedFilteredTutorials({ userId, filters, page, lang, tutorialRepository });
 
       // then
       expect(tutorialRepository.findPaginatedFilteredForCurrentUser).to.have.not.been.called;
       expect(tutorialRepository.findPaginatedFilteredRecommendedByUserId).to.have.been.calledWithExactly({
         userId,
         filters,
-        locale,
+        lang,
         page,
       });
       expect(result).to.deep.equal({ tutorials: expectedRecommendedTutorials, meta: expectedMeta });

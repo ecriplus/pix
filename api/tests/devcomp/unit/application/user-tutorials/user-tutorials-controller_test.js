@@ -69,6 +69,7 @@ describe('Unit | Controller | User-tutorials', function () {
     it('should call the expected usecase and return serialized tutorials', async function () {
       // given
       const userId = 'userId';
+      const locale = 'fr-FR';
       const request = {
         auth: { credentials: { userId } },
         query: {
@@ -81,7 +82,7 @@ describe('Unit | Controller | User-tutorials', function () {
             size: '200',
           },
         },
-        headers: { 'accept-language': 'fr' },
+        state: { locale },
       };
 
       const expectedFilters = request.query.filter;
@@ -109,7 +110,7 @@ describe('Unit | Controller | User-tutorials', function () {
         userId,
         filters: expectedFilters,
         page: expectedPage,
-        locale: 'fr',
+        lang: 'fr',
       });
       expect(result).to.equal(expectedTutorials);
     });
