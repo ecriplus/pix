@@ -158,7 +158,7 @@
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
-                    "solution": "1"
+                    "solution": "A"
                   },
                   {
                     "id": "3f861f65-65a1-415b-bb67-76c84872da45",
@@ -169,7 +169,7 @@
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
-                    "solution": "2"
+                    "solution": "B"
                   },
                   {
                     "id": "1344f1c9-ad1e-44a4-bae2-139ff737d395",
@@ -180,7 +180,7 @@
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
-                    "solution": "2"
+                    "solution": "B"
                   },
                   {
                     "id": "342ed35e-14a7-4d5d-9868-09de495511ab",
@@ -191,7 +191,7 @@
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
-                    "solution": "1"
+                    "solution": "A"
                   }
                 ],
                 "feedback": {
