@@ -1,4 +1,6 @@
 import { certificationResultsController } from '../../../../../src/certification/results/application/certification-results-controller.js';
+import { CertificationResultsLinkByEmailToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkByEmailToken.js';
+import { CertificationResultsLinkToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkToken.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
@@ -52,13 +54,10 @@ describe('Certification | Results | Unit | Controller | certification results', 
       // given
       const i18n = getI18n();
       const session = { id: 1, date: '2020/01/01', time: '12:00' };
-      const dependencies = {
-        getSessionCertificationResultsCsv: sinon.stub(),
-        tokenService: {
-          extractCertificationResultsByRecipientEmailLink: sinon.stub(),
-        },
-      };
-      dependencies.tokenService.extractCertificationResultsByRecipientEmailLink
+      const dependencies = { getSessionCertificationResultsCsv: sinon.stub() };
+
+      sinon
+        .stub(CertificationResultsLinkByEmailToken, 'decode')
         .withArgs('abcd1234')
         .returns({ sessionId: 1, resultRecipientEmail: 'user@example.net' });
 
@@ -104,15 +103,12 @@ describe('Certification | Results | Unit | Controller | certification results', 
       };
       const dependencies = {
         getSessionCertificationResultsCsv: sinon.stub(),
-        tokenService: {
-          extractCertificationResultsLink: sinon.stub(),
-        },
       };
-      dependencies.tokenService.extractCertificationResultsLink.withArgs(token).returns({ sessionId });
       dependencies.getSessionCertificationResultsCsv
         .withArgs({ session, certificationResults, i18n: getI18n() })
         .returns({ content: 'csv-string', filename: fileName });
       sinon.stub(usecases, 'getSessionResults').withArgs({ sessionId }).resolves({ session, certificationResults });
+      sinon.stub(CertificationResultsLinkToken, 'decode').withArgs(token).returns({ sessionId });
 
       // when
       const response = await certificationResultsController.postSessionResultsToDownload(request, hFake, dependencies);

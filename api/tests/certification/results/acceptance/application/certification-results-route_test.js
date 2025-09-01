@@ -1,8 +1,7 @@
-import jsonwebtoken from 'jsonwebtoken';
-
+import { CertificationResultsLinkByEmailToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkByEmailToken.js';
+import { CertificationResultsLinkToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkToken.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { config as settings } from '../../../../../src/shared/config.js';
 import {
   createServer,
   databaseBuilder,
@@ -103,15 +102,11 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         dbf.buildAssessmentResult({ assessmentId: assessmentId1, createdAt: new Date('2018-04-15T00:00:00Z') });
 
-        const token = jsonwebtoken.sign(
-          {
-            scope: 'certificationResultsByRecipientEmailLink',
-            result_recipient_email: 'recipientEmail@example.net',
-            session_id: sessionId,
-          },
-          settings.authentication.secret,
-          { expiresIn: '30d' },
-        );
+        const token = CertificationResultsLinkByEmailToken.generate({
+          sessionId,
+          resultRecipientEmail: 'recipientEmail@example.net',
+          daysBeforeExpiration: 30,
+        });
 
         const request = {
           method: 'GET',
@@ -175,14 +170,7 @@ describe('Certification | Results | Acceptance | Application | Routes | certific
 
         dbf.buildAssessmentResult({ assessmentId: assessmentId1, createdAt: new Date('2018-04-15T00:00:00Z') });
 
-        const token = jsonwebtoken.sign(
-          {
-            scope: 'certificationResultsLink',
-            session_id: sessionId,
-          },
-          settings.authentication.secret,
-          { expiresIn: '30d' },
-        );
+        const token = CertificationResultsLinkToken.generate({ sessionId });
 
         const request = {
           method: 'POST',

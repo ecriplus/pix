@@ -52,7 +52,7 @@ function extractUserIdFromRequest(request) {
 function getUserLocale(request = {}) {
   const locale = request.query?.locale || request.query?.lang || request.state?.locale;
   if (locale) {
-    return getNearestSupportedLocale(locale, acceptedLanguages);
+    return getNearestSupportedLocale(locale);
   }
 
   return getDefaultLocale();
@@ -64,7 +64,7 @@ function getUserLocale(request = {}) {
  * When no locale found, return the default challenge locale.
  *
  * @param {*} request - http request
- * @returns {string} - locale of a challenge (ie. fr-fr, fr, nl...)
+ * @returns {Promise<string>} - locale of a challenge (ie. fr-fr, fr, nl...)
  */
 async function getChallengeLocale(request) {
   const useCookieLocaleInApi = await featureToggles.get('useCookieLocaleInApi');
