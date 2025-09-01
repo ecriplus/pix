@@ -1,6 +1,7 @@
 import { knex } from '../../db/knex-database-connection.js';
 import * as certificationCpfCityRepository from '../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 import * as certificationCpfCountryRepository from '../../src/certification/enrolment/infrastructure/repositories/certification-cpf-country-repository.js';
+// import { CERTIFICATION_CANDIDATES_ERRORS } from '../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { getBirthInformation } from '../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
@@ -46,41 +47,44 @@ export class FixBirthPlaceFromInseeCode extends Script {
     let cursorId = 0;
 
     do {
-      await await knex.transaction(async (transaction) => {
-        try {
-          const candidatesWithoutBirthCity = await this.#getCandidatesToUpdate({ cursorId, batchSize, transaction });
+      const transaction = await knex.transaction();
+      try {
+        const candidatesWithoutBirthCity = await this.#getCandidatesToUpdate({ cursorId, batchSize, transaction });
 
-          for (const candidate of candidatesWithoutBirthCity) {
-            const birthInformation = await getBirthInformation({
-              birthCountry: candidate.birthCountry,
-              birthINSEECode: candidate.birthINSEECode,
-              birthCity: null,
-              birthPostalCode: null,
-              certificationCpfCountryRepository,
-              certificationCpfCityRepository,
-            });
+        for (const candidate of candidatesWithoutBirthCity) {
+          const birthInformation = await getBirthInformation({
+            birthCountry: candidate.birthCountry,
+            birthINSEECode: candidate.birthINSEECode,
+            birthCity: null,
+            birthPostalCode: null,
+            certificationCpfCountryRepository,
+            certificationCpfCityRepository,
+          });
 
-            const birthCity = birthInformation.birthCity;
+          const birthCity = birthInformation.birthCity;
 
+          if (birthInformation.errors.length === 0) {
             await transaction('certification-candidates').update({ birthCity }).where({ id: candidate.id });
-          }
-
-          if (dryRun) {
-            this.logger.info('Rollback !');
-            await transaction.rollback();
           } else {
-            this.logger.info('Commit !');
-            await transaction.commit();
+            this.logger.warn({ errors: birthInformation.errors });
           }
-          // Prepare for next batch
-          hasNext = candidatesWithoutBirthCity.length > 0;
-          cursorId = candidatesWithoutBirthCity.at(-1)?.id;
-          await this.delay(delayInMs);
-        } catch (error) {
-          await transaction.rollback();
-          throw error;
         }
-      });
+
+        if (dryRun) {
+          this.logger.info('Rollback !');
+          await transaction.rollback();
+        } else {
+          this.logger.info('Commit !');
+          await transaction.commit();
+        }
+        // Prepare for next batch
+        hasNext = candidatesWithoutBirthCity.length > 0;
+        cursorId = candidatesWithoutBirthCity.at(-1)?.id;
+        await this.delay(delayInMs);
+      } catch (error) {
+        await transaction.rollback();
+        throw error;
+      }
     } while (hasNext);
   }
 
@@ -91,6 +95,7 @@ export class FixBirthPlaceFromInseeCode extends Script {
       .from('certification-candidates')
       .whereNull('birthCity')
       .whereNotNull('birthINSEECode')
+      .whereNotNull('birthCountry')
       .where('birthINSEECode', '<>', excludedINSEECode)
       .where('id', '>', cursorId)
       .orderBy('id')

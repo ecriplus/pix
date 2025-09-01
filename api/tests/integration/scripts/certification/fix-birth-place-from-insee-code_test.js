@@ -5,6 +5,7 @@ import { databaseBuilder, expect, sinon } from '../../../test-helper.js';
 describe('Integration | Scripts | Certification | fix-birth-place-from-insee-code', function () {
   it('should update all candidates with birthCityCode but without birthcity but with birtCityCode', async function () {
     const excludedINSEECode = '99999';
+    const nonExistingINSEECode = '75000';
 
     // given
     const options = {
@@ -15,6 +16,7 @@ describe('Integration | Scripts | Certification | fix-birth-place-from-insee-cod
     const logger = {
       info: sinon.stub(),
       debug: sinon.stub(),
+      warn: sinon.stub(),
     };
 
     databaseBuilder.factory.buildCertificationCandidate({ birthCity: 'Paris' });
@@ -25,6 +27,10 @@ describe('Integration | Scripts | Certification | fix-birth-place-from-insee-cod
     databaseBuilder.factory.buildCertificationCandidate({
       birthCity: null,
       birthINSEECode: null,
+    });
+    databaseBuilder.factory.buildCertificationCandidate({
+      birthCity: null,
+      birthINSEECode: nonExistingINSEECode,
     });
     databaseBuilder.factory.buildCertificationCandidate({
       birthCity: null,
