@@ -5,6 +5,7 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
 
@@ -15,6 +16,8 @@ export const VERIFY_RESPONSE_DELAY = 500;
 
 export default class ModuleQcm extends ModuleElement {
   @service passageEvents;
+
+  @tracked isAnswering = false;
 
   selectedAnswerIds = new Set();
 
@@ -27,7 +30,7 @@ export default class ModuleQcm extends ModuleElement {
   }
 
   get disableInput() {
-    return super.disableInput ? true : null;
+    return super.disableInput || this.isAnswering;
   }
 
   resetAnswers() {
@@ -58,11 +61,13 @@ export default class ModuleQcm extends ModuleElement {
 
   @action
   async onAnswer(event) {
+    this.isAnswering = true;
     event.preventDefault();
     await this.waitFor(VERIFY_RESPONSE_DELAY);
     await super.onAnswer(event);
+    this.isAnswering = false;
 
-    const status = this.answerIsValid ? "ok" : "ko";
+    const status = this.answerIsValid ? 'ok' : 'ko';
     this.passageEvents.record({
       type: 'QCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
