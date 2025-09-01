@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.195.0](https://github.com/1024pix/pix/compare/v5.194.0...v5.195.0) (2025-09-01)
+
+### :rocket: Amélioration
+
+- [#13332](https://github.com/1024pix/pix/pull/13332) Ajout POI module Romain 
+- [#13342](https://github.com/1024pix/pix/pull/13342) Ajouter des indicateurs pour suivre les clics sur la nouvelle page d'accueil (PIX-19007) 
+- [#13351](https://github.com/1024pix/pix/pull/13351) Animation des feedbacks (PIX-19326) 
+- [#13335](https://github.com/1024pix/pix/pull/13335) Gestion de la locale dans les emails d'accès (PIX-19266). 
+- [#13350](https://github.com/1024pix/pix/pull/13350) Modification module hallu  
+- [#13343](https://github.com/1024pix/pix/pull/13343) Permettre enregistrement des réponses aux embed LLM autovalidés (PIX-19285) 
+- [#13314](https://github.com/1024pix/pix/pull/13314) retours et modifs - Module biais independant 
+- [#13345](https://github.com/1024pix/pix/pull/13345) Stepper horizontal ajouter un `aria-hidden="true"` sur les étapes cachés et une bordure sur les contrôles (PIX-19295) 
+- [#13340](https://github.com/1024pix/pix/pull/13340) update module ia botaniste 
+
+### :building_construction: Tech
+
+- [#13317](https://github.com/1024pix/pix/pull/13317) :truck: Déplace le modèle `CompetenceResults` dans le contexte `prescription/campaign-participation` 
+- [#13302](https://github.com/1024pix/pix/pull/13302) Ajouter de la validation au model back Combined Course 
+- [#13310](https://github.com/1024pix/pix/pull/13310) Séparer les responsabilités du token service (partie 4) 
+
+### :arrow_up: Montée de version
+
+- [#13273](https://github.com/1024pix/pix/pull/13273) Update actions/checkout action to v5 (workflows) 
+- [#13353](https://github.com/1024pix/pix/pull/13353) Update dependency @1024pix/stylelint-config to ^5.1.35 (admin) 
+- [#13354](https://github.com/1024pix/pix/pull/13354) Update dependency @1024pix/stylelint-config to ^5.1.35 (certif) 
+- [#13355](https://github.com/1024pix/pix/pull/13355) Update dependency @1024pix/stylelint-config to ^5.1.35 (junior) 
+- [#13357](https://github.com/1024pix/pix/pull/13357) Update dependency @1024pix/stylelint-config to ^5.1.35 (mon-pix) 
+- [#13358](https://github.com/1024pix/pix/pull/13358) Update dependency @1024pix/stylelint-config to ^5.1.35 (orga) 
+- [#13224](https://github.com/1024pix/pix/pull/13224) Update dependency ember-source to ~6.6.0 (junior)
+
 # [5.194.0](https://github.com/1024pix/pix/compare/v5.193.0...v5.194.0) (2025-08-29)
 
 ### :rocket: Amélioration
