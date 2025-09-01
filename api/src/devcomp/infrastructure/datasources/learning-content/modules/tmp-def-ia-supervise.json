@@ -571,7 +571,7 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Quel serait un bon exemple de couple \"données\" et \"étiquette\" à fournir au logiciel d'intellgience artificielle pour qu'il s'entraine à générer du texte ?<br></p>",
+                "instruction": "<p>Quel serait un bon exemple de couple \"données\" et \"étiquette\" à fournir au logiciel d'intelligence artificielle pour qu'il s'entraine à générer du texte ?<br></p>",
                 "proposals": [
                   {
                     "type": "text",
