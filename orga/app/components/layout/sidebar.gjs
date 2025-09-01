@@ -102,8 +102,8 @@ export default class SidebarMenu extends Component {
         </LinkTo>
       </:brand>
       <:navElements>
-        <PixNavigationButton @route="authenticated.index" @icon="conversionPath">
-            {{t "navigation.main.home"}}</PixNavigationButton>
+        <PixNavigationButton @route="authenticated.index" @icon="home">
+          {{t "navigation.main.home"}}</PixNavigationButton>
 
         {{#if this.shouldDisplayCampaignsEntry}}
           <PixNavigationButton @route={{this.redirectionRoute}} @icon="conversionPath">
