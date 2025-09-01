@@ -9,6 +9,7 @@ import { t } from 'ember-intl';
 import Step from 'mon-pix/components/module/component/step';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { inc } from 'mon-pix/helpers/inc';
+import { guidFor } from '@ember/object/internals';
 
 import didInsert from '../../../modifiers/modifier-did-insert';
 
@@ -117,6 +118,10 @@ export default class ModulixStepper extends Component {
    return this.displayedStepIndex === this.stepsToDisplay.length - 1;
   }
 
+  get id() {
+    return this.args.id || `pix-tabs-${guidFor(this)}`;
+  }
+
   <template>
     <div
       class="stepper stepper--{{@direction}}"
@@ -130,6 +135,7 @@ export default class ModulixStepper extends Component {
             @iconName="chevronLeft"
             aria-disabled="{{this.isPreviousButtonControlDisabled}}"
             @triggerAction={{this.displayPreviousStep}}
+            aria-controls={{this.id}}
           />
           <p
             class="stepper-controls__position"
@@ -146,9 +152,10 @@ export default class ModulixStepper extends Component {
             @iconName="chevronRight"
             aria-disabled="{{this.isNextButtonControlDisabled}}"
             @triggerAction={{this.goBackToNextStep}}
+            aria-controls={{this.id}}
           />
         </div>
-        <div class="stepper__steps">
+        <div id={{this.id}} class="stepper__steps">
           {{#if this.hasDisplayableSteps}}
             {{#each this.stepsToDisplay as |step index|}}
               <Step

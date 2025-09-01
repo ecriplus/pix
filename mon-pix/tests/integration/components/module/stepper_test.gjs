@@ -704,6 +704,37 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert.dom(find('.stepper--horizontal')).exists();
       });
 
+      test('it should set accessible control buttons', async function (assert) {
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(<template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>);
+
+        // then
+        assert.dom(find('#stepper-container-id-1')).exists();
+        assert.dom(screen.getByRole('button', {name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel')})).hasAria('controls', 'stepper-container-id-1');
+        assert.dom(screen.getByRole('button', {name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel')})).hasAria('controls', 'stepper-container-id-1');
+      });
+
       test('it should display current step number', async function (assert) {
         // given
         const steps = [
@@ -1476,7 +1507,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
             // then
             assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel')})).hasAria('disabled', 'false')
-
           });
 
           module('when user clicks the controls next button', function() {
