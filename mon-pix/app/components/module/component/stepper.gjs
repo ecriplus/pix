@@ -100,8 +100,12 @@ export default class ModulixStepper extends Component {
     return this.args.direction === 'horizontal';
   }
 
-  get isPreviousButtonDisabled() {
+  get isPreviousButtonControlDisabled() {
     return this.displayedStepIndex === 0;
+  }
+
+  get isNextButtonControlDisabled() {
+   return this.displayedStepIndex === this.stepsToDisplay.length - 1;
   }
 
   <template>
@@ -115,7 +119,7 @@ export default class ModulixStepper extends Component {
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
-            aria-disabled="{{this.isPreviousButtonDisabled}}"
+            aria-disabled="{{this.isPreviousButtonControlDisabled}}"
             @triggerAction={{this.displayPreviousStep}}
           />
           <p
@@ -131,7 +135,7 @@ export default class ModulixStepper extends Component {
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.next.ariaLabel"}}
             @iconName="chevronRight"
-            aria-disabled="true"
+            aria-disabled="{{this.isNextButtonControlDisabled}}"
           />
         </div>
         <div class="stepper__steps">
