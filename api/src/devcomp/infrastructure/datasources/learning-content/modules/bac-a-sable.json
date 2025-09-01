@@ -14,7 +14,7 @@
   "sections": [
     {
       "id": "cfaefec9-e185-43b8-8258-e8beff6dd56b",
-      "type": "blank",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
@@ -174,13 +174,7 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "47d5fdea-8141-4184-a78e-c7f871de71fc",
-      "type": "question-yourself",
-      "grains": [
+        },
         {
           "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
           "type": "discovery",
