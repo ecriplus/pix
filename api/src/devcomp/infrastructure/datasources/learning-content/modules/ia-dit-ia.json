@@ -130,13 +130,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "2fcc0d2c-1c6e-4eaf-b5cd-308973e1209d",
-      "type": "explore-to-understand",
-      "grains": [
+        },
         {
           "id": "dbbff46a-197e-4663-950a-81b4f4fa532a",
           "type": "transition",
@@ -151,7 +145,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2fcc0d2c-1c6e-4eaf-b5cd-308973e1209d",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "0010b969-e9a0-4ed4-957d-5fe365c6ce56",
           "type": "discovery",
