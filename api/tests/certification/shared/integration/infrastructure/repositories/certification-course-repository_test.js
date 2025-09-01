@@ -188,19 +188,21 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
             createdAt: new Date('2022-01-03'),
           });
 
-          // Active configuration on the certification day
-          databaseBuilder.factory.buildCertificationConfiguration({
-            startingDate: new Date('2022-01-02'),
-            challengesConfiguration: {
-              maximumAssessmentLength: maximumAssessmentLength,
-            },
-          });
-
           // Older configuration
           databaseBuilder.factory.buildCertificationConfiguration({
             startingDate: new Date('2022-01-01'),
+            expirationDate: new Date('2022-01-02'),
             challengesConfiguration: {
               maximumAssessmentLength: 5,
+            },
+          });
+
+          // Active configuration on the certification day
+          databaseBuilder.factory.buildCertificationConfiguration({
+            startingDate: new Date('2022-01-02'),
+            expirationDate: new Date('2022-01-04'),
+            challengesConfiguration: {
+              maximumAssessmentLength: maximumAssessmentLength,
             },
           });
 

@@ -4,7 +4,6 @@
  * @typedef {import('./index.js').SharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  */
 
-import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { AssessmentSimulator } from '../models/AssessmentSimulator.js';
@@ -188,13 +187,5 @@ function _simulation({
     strategy: singleMeasureStrategy,
   });
 
-  let run;
-
-  try {
-    run = simulator.run();
-  } catch (error) {
-    logger.error(error);
-  }
-
-  return run;
+  return simulator.run();
 }

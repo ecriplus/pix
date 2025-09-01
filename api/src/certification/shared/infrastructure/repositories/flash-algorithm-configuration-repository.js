@@ -27,7 +27,6 @@ export const getMostRecentBeforeDate = async (date) => {
     .andWhere((queryBuilder) => {
       queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
     })
-    .orderBy('startingDate', 'desc')
     .first();
 
   if (!flashAlgorithmConfiguration) {

@@ -11,7 +11,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 export const save = async (flashAlgorithmConfiguration) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const currentActiveConfiguration = await knexConn('certification-configurations')
+  const existingActiveConfigurationBeforeInsert = await knexConn('certification-configurations')
     .select('id')
     .whereNull('expirationDate')
     .first();
@@ -30,8 +30,10 @@ export const save = async (flashAlgorithmConfiguration) => {
     })
     .returning('startingDate');
 
-  if (currentActiveConfiguration?.id) {
-    await knexConn('certification-configurations').where({ id: currentActiveConfiguration.id }).update({
+  const mustExpirePreviousConfiguration = !!existingActiveConfigurationBeforeInsert?.id;
+
+  if (mustExpirePreviousConfiguration) {
+    await knexConn('certification-configurations').where({ id: existingActiveConfigurationBeforeInsert.id }).update({
       expirationDate: dateOfConfigurationSwitching,
     });
   }

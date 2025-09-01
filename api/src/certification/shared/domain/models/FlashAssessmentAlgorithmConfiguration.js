@@ -22,36 +22,4 @@ export class FlashAssessmentAlgorithmConfiguration {
     this.enablePassageByAllCompetences = enablePassageByAllCompetences;
     this.variationPercent = variationPercent;
   }
-
-  /**
-   * @deprecated
-   */
-  toDTO() {
-    return {
-      maximumAssessmentLength: this.maximumAssessmentLength,
-      challengesBetweenSameCompetence: this.challengesBetweenSameCompetence,
-      limitToOneQuestionPerTube: this.limitToOneQuestionPerTube,
-      enablePassageByAllCompetences: this.enablePassageByAllCompetences,
-      variationPercent: this.variationPercent,
-    };
-  }
-
-  /**
-   * @deprecated
-   */
-  static fromDTO({
-    maximumAssessmentLength,
-    challengesBetweenSameCompetence,
-    limitToOneQuestionPerTube,
-    enablePassageByAllCompetences,
-    variationPercent,
-  }) {
-    return new FlashAssessmentAlgorithmConfiguration({
-      maximumAssessmentLength,
-      challengesBetweenSameCompetence,
-      limitToOneQuestionPerTube,
-      enablePassageByAllCompetences,
-      variationPercent,
-    });
-  }
 }
