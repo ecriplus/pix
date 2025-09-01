@@ -69,11 +69,6 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           skillId: 'recSkill0_0',
         });
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 1,
-          createdAt: new Date('2010-02-01'),
-        });
-
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2009-02-01'),
           expirationDate: new Date('2010-02-01'),
@@ -200,14 +195,14 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           delta: 4.4,
         });
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 1,
-          createdAt: new Date('2010-02-01'),
-        });
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2010-02-01'),
           expirationDate: new Date('2024-02-01'),
+          challengesConfiguration: {
+            maximumAssessmentLength: 1,
+          },
         });
+
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2024-02-01'),
           expirationDate: null,

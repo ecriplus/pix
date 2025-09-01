@@ -51,7 +51,7 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
           },
         });
 
-        const latestFlashAlgorithmConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
+        const latestFlashAlgorithmConfiguration = databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2020-12-01'),
           expirationDate: null,
           challengesConfiguration: {
@@ -64,7 +64,7 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | F
         });
 
         const expectedFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration(
-          latestFlashAlgorithmConfiguration.challengesConfiguration,
+          JSON.parse(latestFlashAlgorithmConfiguration.challengesConfiguration),
         );
 
         await databaseBuilder.commit();

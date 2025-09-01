@@ -383,7 +383,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
         await mockLearningContent(learningContentObjects);
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration();
         databaseBuilder.factory.buildCertificationConfiguration();
         await databaseBuilder.commit();
       });

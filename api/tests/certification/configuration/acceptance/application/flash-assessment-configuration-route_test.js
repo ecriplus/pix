@@ -125,9 +125,11 @@ describe('Acceptance | Application | flash-assessment-configuration-route', func
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,
           });
 
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-            variationPercent: 0.2,
-            createdAt: new Date('2020-01-01'),
+          databaseBuilder.factory.buildCertificationConfiguration({
+            challengesConfiguration: {
+              variationPercent: 0.2,
+            },
+            startingDate: new Date('2020-01-01'),
           });
 
           await databaseBuilder.commit();

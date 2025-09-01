@@ -181,8 +181,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         // given
         const userId = (await insertUserWithRoleSuperAdmin()).id;
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration();
-
         const session = databaseBuilder.factory.buildSession({
           finalizedAt: new Date('2018-12-01T01:02:03Z'),
           version: 3,
@@ -272,7 +270,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         version: AlgorithmEngineVersion.V3,
       });
 
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration();
       databaseBuilder.factory.buildCertificationConfiguration();
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({

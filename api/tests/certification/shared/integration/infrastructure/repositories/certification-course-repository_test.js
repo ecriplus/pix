@@ -296,11 +296,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         databaseBuilder.factory.buildCertificationCourse({ sessionId });
         databaseBuilder.factory.buildCertificationCourse({ userId });
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: numberOfQuestionsForV3,
-          createdAt: v3ConfigurationCreationDate,
-        });
-
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: v3ConfigurationCreationDate,
           challengesConfiguration: {

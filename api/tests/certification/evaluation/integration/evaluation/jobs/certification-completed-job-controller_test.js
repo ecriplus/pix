@@ -386,7 +386,6 @@ describe('Integration | Certification | Application | jobs | CertificationComple
 
     certificationCompletedJobController = new CertificationCompletedJobController();
 
-    databaseBuilder.factory.buildFlashAlgorithmConfiguration();
     databaseBuilder.factory.buildCertificationConfiguration();
     await databaseBuilder.commit();
   });
