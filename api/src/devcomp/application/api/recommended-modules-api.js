@@ -1,7 +1,7 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
+import { RecommendableModule } from './models/RecommendableModule.js';
 import { RecommendedModule } from './models/RecommendedModule.js';
-import { UserRecommendedModule } from './models/UserRecommendedModule.js';
 
 const findByCampaignParticipationIds = async ({ campaignParticipationIds }) => {
   if (campaignParticipationIds.length === 0) {
@@ -12,7 +12,7 @@ const findByCampaignParticipationIds = async ({ campaignParticipationIds }) => {
     campaignParticipationIds,
   });
 
-  return recommendedModules.map((recommendedModule) => new UserRecommendedModule(recommendedModule));
+  return recommendedModules.map((recommendedModule) => new RecommendedModule(recommendedModule));
 };
 
 const findByTargetProfileIds = async ({ targetProfileIds }) => {
@@ -20,11 +20,11 @@ const findByTargetProfileIds = async ({ targetProfileIds }) => {
     throw new DomainError('targetProfileIds can not be empty');
   }
 
-  const recommendedModules = await usecases.findRecommendedModulesByTargetProfileIds({
+  const recommendableModules = await usecases.findRecommendableModulesByTargetProfileIds({
     targetProfileIds,
   });
 
-  return recommendedModules.map((recommendedModule) => new RecommendedModule(recommendedModule));
+  return recommendableModules.map((recommendableModule) => new RecommendableModule(recommendableModule));
 };
 
 export { findByCampaignParticipationIds, findByTargetProfileIds };

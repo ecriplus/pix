@@ -1,5 +1,5 @@
+import { RecommendableModule } from '../../../../../src/devcomp/application/api/models/RecommendableModule.js';
 import { RecommendedModule } from '../../../../../src/devcomp/application/api/models/RecommendedModule.js';
-import { UserRecommendedModule } from '../../../../../src/devcomp/application/api/models/UserRecommendedModule.js';
 import * as recommendedModulesApi from '../../../../../src/devcomp/application/api/recommended-modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
@@ -29,7 +29,7 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
 
       // then
       const expectedResult = [
-        new UserRecommendedModule({ id: trainingId, moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd' }),
+        new RecommendedModule({ id: trainingId, moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd' }),
       ];
 
       expect(result).to.deep.equal(expectedResult);
@@ -77,23 +77,23 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
 
       // then
       const expectedResult = [
-        new RecommendedModule({
+        new RecommendableModule({
           id: trainingId,
           moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd',
           targetProfileIds: [targetProfileId],
         }),
-        new RecommendedModule({
+        new RecommendableModule({
           id: trainingId2,
           moduleId: '9beb922f-4d8e-495d-9c85-0e7265ca78d6',
           targetProfileIds: [targetProfileId2],
         }),
       ];
 
-      expect(results[0]).to.be.an.instanceOf(RecommendedModule);
+      expect(results[0]).to.be.an.instanceOf(RecommendableModule);
       expect(results[0].targetProfileIds[0]).to.deep.equal(expectedResult[0].targetProfileIds[0]);
       expect(results[0].moduleId).to.deep.equal(expectedResult[0].moduleId);
       expect(results[0].id).to.deep.equal(expectedResult[0].id);
-      expect(results[1]).to.be.an.instanceOf(RecommendedModule);
+      expect(results[1]).to.be.an.instanceOf(RecommendableModule);
       expect(results[1].targetProfileIds[0]).to.deep.equal(expectedResult[1].targetProfileIds[0]);
       expect(results[1].moduleId).to.deep.equal(expectedResult[1].moduleId);
       expect(results[1].id).to.deep.equal(expectedResult[1].id);
