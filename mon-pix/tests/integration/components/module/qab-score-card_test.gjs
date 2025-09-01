@@ -16,7 +16,7 @@ module('Integration | Component | Module | QabScoreCard', function (hooks) {
     const screen = await render(<template><QabScoreCard @score={{score}} @total={{total}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('heading', { name: 'Série terminée' })).exists();
-    assert.dom(screen.getByRole('heading', { name: 'Votre score : 4/5' })).exists();
+    assert.dom(screen.getByRole('heading', { name: 'Série terminée', level: 4 })).exists();
+    assert.dom(screen.getByText('Votre score : 4/5')).exists();
   });
 });
