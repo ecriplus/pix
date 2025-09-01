@@ -1,9 +1,9 @@
-import { RecommendedModule } from '../../../../../src/devcomp/domain/read-models/RecommendedModule.js';
+import { RecommendableModule } from '../../../../../src/devcomp/domain/read-models/RecommendableModule.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByTargetProfileIds', function () {
+describe('DevComp | Integration | Domain | Usecases | findRecommendableModulesByTargetProfileIds', function () {
   it('it returns recommended modules for given target-profile ids', async function () {
     // given
     const targetProfileId1 = databaseBuilder.factory.buildTargetProfile().id;
@@ -18,12 +18,12 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByTa
     databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfileId2, trainingId: training.id });
     await databaseBuilder.commit();
 
-    const recommendedModules = await usecases.findRecommendedModulesByTargetProfileIds({
+    const recommendedModules = await usecases.findRecommendableModulesByTargetProfileIds({
       targetProfileIds: [targetProfileId1, targetProfileId2],
     });
 
     expect(recommendedModules).to.have.lengthOf(1);
-    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
+    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendableModule);
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training.id,
       moduleId,
@@ -43,13 +43,13 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByTa
     await databaseBuilder.commit();
 
     //when
-    const recommendedModules = await usecases.findRecommendedModulesByTargetProfileIds({
+    const recommendedModules = await usecases.findRecommendableModulesByTargetProfileIds({
       targetProfileIds: [targetProfileId1],
     });
 
     //then
     expect(recommendedModules).to.have.lengthOf(1);
-    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
+    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendableModule);
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training.id,
       moduleId,
@@ -78,7 +78,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByTa
     await databaseBuilder.commit();
 
     // when
-    const recommendedModules = await usecases.findRecommendedModulesByTargetProfileIds({
+    const recommendedModules = await usecases.findRecommendableModulesByTargetProfileIds({
       targetProfileIds: [targetProfileId1],
     });
     // then
@@ -86,7 +86,7 @@ describe('DevComp | Integration | Domain | Usecases | findRecommendedModulesByTa
       message: `Erreur sur le lien de la ressource : ${training.link}`,
     });
     expect(recommendedModules).to.have.lengthOf(1);
-    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
+    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendableModule);
     expect(recommendedModules[0]).to.be.deep.equal({
       id: training2.id,
       moduleId: module2Id,

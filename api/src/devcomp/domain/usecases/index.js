@@ -45,8 +45,8 @@ import { findPaginatedFilteredTutorials } from './find-paginated-filtered-tutori
 import { findPaginatedTargetProfileTrainingSummaries } from './find-paginated-target-profile-training-summaries.js';
 import { findPaginatedTrainingSummaries } from './find-paginated-training-summaries.js';
 import { findPaginatedUserRecommendedTrainings } from './find-paginated-user-recommended-trainings.js';
+import { findRecommendableModulesByTargetProfileIds } from './find-recommendable-modules-by-target-profile-ids.js';
 import { findRecommendedModulesByCampaignParticipationIds } from './find-recommended-modules-by-campaign-participation-ids.js';
-import { findRecommendedModulesByTargetProfileIds } from './find-recommended-modules-by-target-profile-ids.js';
 import { findTargetProfileSummariesForTraining } from './find-target-profile-summaries-for-training.js';
 import { findTutorials } from './find-tutorials.js';
 import { getModule } from './get-module.js';
@@ -77,7 +77,7 @@ const usecasesWithoutInjectedDependencies = {
   findPaginatedTrainingSummaries,
   findPaginatedUserRecommendedTrainings,
   findRecommendedModulesByCampaignParticipationIds,
-  findRecommendedModulesByTargetProfileIds,
+  findRecommendableModulesByTargetProfileIds,
   findTargetProfileSummariesForTraining,
   findTutorials,
   getModuleMetadataList,

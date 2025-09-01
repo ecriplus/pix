@@ -1,7 +1,7 @@
-import { RecommendedModule } from '../read-models/RecommendedModule.js';
+import { RecommendableModule } from '../read-models/RecommendableModule.js';
 import moduleService from '../services/module-service.js';
 
-const findRecommendedModulesByTargetProfileIds = async function ({
+const findRecommendableModulesByTargetProfileIds = async function ({
   targetProfileIds,
   trainingRepository,
   moduleRepository,
@@ -21,7 +21,7 @@ const findRecommendedModulesByTargetProfileIds = async function ({
     }),
   );
 
-  return recommendedModules.filter((module) => module !== undefined).map((module) => new RecommendedModule(module));
+  return recommendedModules.filter((module) => module !== undefined).map((module) => new RecommendableModule(module));
 };
 
-export { findRecommendedModulesByTargetProfileIds };
+export { findRecommendableModulesByTargetProfileIds };

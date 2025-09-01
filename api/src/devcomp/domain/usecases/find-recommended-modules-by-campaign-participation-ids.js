@@ -1,4 +1,4 @@
-import { UserRecommendedModule } from '../read-models/UserRecommendedModule.js';
+import { RecommendedModule } from '../read-models/RecommendedModule.js';
 import moduleService from '../services/module-service.js';
 
 export const findRecommendedModulesByCampaignParticipationIds = async function ({
@@ -22,7 +22,5 @@ export const findRecommendedModulesByCampaignParticipationIds = async function (
     }),
   );
 
-  return userRecommendedModules
-    .filter((module) => module !== undefined)
-    .map((module) => new UserRecommendedModule(module));
+  return userRecommendedModules.filter((module) => module !== undefined).map((module) => new RecommendedModule(module));
 };

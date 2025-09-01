@@ -1,4 +1,4 @@
-import { UserRecommendedModule } from '../../../../../src/devcomp/domain/read-models/UserRecommendedModule.js';
+import { RecommendedModule } from '../../../../../src/devcomp/domain/read-models/RecommendedModule.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
@@ -36,9 +36,9 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     });
 
     expect(recommendedModules).to.have.lengthOf(2);
-    expect(recommendedModules[0]).to.be.an.instanceOf(UserRecommendedModule);
+    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
     expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId });
-    expect(recommendedModules[1]).to.be.an.instanceOf(UserRecommendedModule);
+    expect(recommendedModules[1]).to.be.an.instanceOf(RecommendedModule);
     expect(recommendedModules[1]).to.be.deep.equal({ id: secondTraining.id, moduleId: secondModuleId });
   });
   it('ignores module when its slug does not pass regex', async function () {
@@ -73,7 +73,7 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
     });
 
     expect(recommendedModules).to.have.lengthOf(1);
-    expect(recommendedModules[0]).to.be.an.instanceOf(UserRecommendedModule);
+    expect(recommendedModules[0]).to.be.an.instanceOf(RecommendedModule);
     expect(recommendedModules[0]).to.be.deep.equal({ id: training.id, moduleId });
   });
 });

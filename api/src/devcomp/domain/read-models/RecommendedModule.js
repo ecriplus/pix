@@ -1,8 +1,7 @@
 class RecommendedModule {
-  constructor({ id, moduleId, targetProfileIds } = {}) {
+  constructor({ id, moduleId } = {}) {
     this.id = id;
     this.moduleId = moduleId;
-    this.targetProfileIds = targetProfileIds;
   }
 }
 
