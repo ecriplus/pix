@@ -14,6 +14,7 @@ export default class CurrentUserService extends Service {
   @tracked isAgriculture;
   @tracked isGarAuthenticationMethod;
   @tracked organizationPlaceStatistics;
+  @tracked participationStatistics;
 
   get homePage() {
     if (this.canAccessMissionsPage) {
@@ -73,6 +74,10 @@ export default class CurrentUserService extends Service {
     }
   }
 
+  async loadParticipationStatistics() {
+    this.participationStatistics = await this.organization.participationStatistics;
+  }
+
   async load() {
     if (this.session.isAuthenticated) {
       try {
@@ -119,5 +124,6 @@ export default class CurrentUserService extends Service {
     this.isAgriculture = organization.isAgriculture;
     this.organization = organization;
     await this.loadPlaceStatistics();
+    await this.loadParticipationStatistics();
   }
 }

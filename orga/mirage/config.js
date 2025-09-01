@@ -639,4 +639,18 @@ function routes() {
     const organizationId = request.params.organizationId;
     return schema.organizationPlaceStatistics.find(organizationId);
   });
+
+  this.get('/organizations/:organizationId/participation-statistics', function (schema, request) {
+    const organizationId = request.params.organizationId;
+    const data = schema.participationStatistics.find(organizationId);
+
+    if (data === null) {
+      return schema.participationStatistics.create({
+        totalParticipationCount: 0,
+        sharedParticipationCountLastThirtyDays: 0,
+        completedParticipationCount: 0,
+      });
+    }
+    return data;
+  });
 }

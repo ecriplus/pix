@@ -16,9 +16,4 @@ export default class IndexRoute extends Route {
     }
     return this.router.replaceWith(this.currentUser.homePage);
   }
-
-  async model() {
-    const organization = this.currentUser.organization;
-    return await organization.participationStatistics;
-  }
 }
