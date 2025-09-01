@@ -57,11 +57,76 @@
               "type": "element",
               "element": {
                 "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-frise.html",
-                "instruction": "<p> À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</p>",
-                "height": 325
+                "type": "text",
+                "content": "<p><strong>À votre avis, de quand date l'expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8ac18d0a-b0ec-4fa0-8107-3c655ddfe845",
+                "type": "custom",
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "1946",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1956",
+                      "feedback": {
+                        "type": "good",
+                        "text": "✅ Oui, en effet l’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1966",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1976",
+                      "feedback": {
+                        "type": "close",
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1986",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "1996",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "2006",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    },
+                    {
+                      "label": "2016",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -224,7 +289,9 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
