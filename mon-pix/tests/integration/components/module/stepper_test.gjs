@@ -727,12 +727,18 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         ];
 
         // when
-        const screen = await render(<template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>);
+        const screen = await render(
+          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+        );
 
         // then
         assert.dom(find('#stepper-container-id-1')).exists();
-        assert.dom(screen.getByRole('button', {name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel')})).hasAria('controls', 'stepper-container-id-1');
-        assert.dom(screen.getByRole('button', {name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel')})).hasAria('controls', 'stepper-container-id-1');
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+          .hasAria('controls', 'stepper-container-id-1');
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+          .hasAria('controls', 'stepper-container-id-1');
       });
 
       test('it should display current step number', async function (assert) {
@@ -1416,7 +1422,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             .hasAria('disabled', 'false');
         });
 
-        module('when user clicks the controls previous button', function() {
+        module('when user clicks the controls previous button', function () {
           test('should go back to previous step', async function (assert) {
             // given
             const steps = [
@@ -1445,19 +1451,21 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             function onStepperNextStepStub() {}
 
             const screen = await render(
-            <template>
-              <ModulixStepper
-                @direction="horizontal"
-                @steps={{steps}}
-                @stepperIsFinished={{stepperIsFinished}}
-                @onStepperNextStep={{onStepperNextStepStub}}
-              />
-            </template>,
+              <template>
+                <ModulixStepper
+                  @direction="horizontal"
+                  @steps={{steps}}
+                  @stepperIsFinished={{stepperIsFinished}}
+                  @onStepperNextStep={{onStepperNextStepStub}}
+                />
+              </template>,
             );
 
             // when
             await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
-            await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }));
+            await click(
+              screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+            );
 
             // then
             assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
@@ -1491,25 +1499,29 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             function onStepperNextStepStub() {}
 
             const screen = await render(
-            <template>
-              <ModulixStepper
-                @direction="horizontal"
-                @steps={{steps}}
-                @stepperIsFinished={{stepperIsFinished}}
-                @onStepperNextStep={{onStepperNextStepStub}}
-              />
-            </template>,
+              <template>
+                <ModulixStepper
+                  @direction="horizontal"
+                  @steps={{steps}}
+                  @stepperIsFinished={{stepperIsFinished}}
+                  @onStepperNextStep={{onStepperNextStepStub}}
+                />
+              </template>,
             );
 
             // when
             await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
-            await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }));
+            await click(
+              screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+            );
 
             // then
-            assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel')})).hasAria('disabled', 'false')
+            assert
+              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+              .hasAria('disabled', 'false');
           });
 
-          module('when user clicks the controls next button', function() {
+          module('when user clicks the controls next button', function () {
             test('should go back to next step', async function (assert) {
               // given
               const steps = [
@@ -1538,25 +1550,28 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               function onStepperNextStepStub() {}
 
               const screen = await render(
-              <template>
-                <ModulixStepper
-                  @direction="horizontal"
-                  @steps={{steps}}
-                  @stepperIsFinished={{stepperIsFinished}}
-                  @onStepperNextStep={{onStepperNextStepStub}}
-                />
-              </template>,
+                <template>
+                  <ModulixStepper
+                    @direction="horizontal"
+                    @steps={{steps}}
+                    @stepperIsFinished={{stepperIsFinished}}
+                    @onStepperNextStep={{onStepperNextStepStub}}
+                  />
+                </template>,
               );
 
               // when
               await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
-              await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }));
-              await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }));
+              await click(
+                screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+              );
+              await click(
+                screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }),
+              );
 
               // then
               assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
             });
-
           });
         });
 

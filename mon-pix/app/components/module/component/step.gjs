@@ -34,9 +34,7 @@ export default class ModulixStep extends Component {
   <template>
     {{#if this.hasDisplayableElements}}
       <section
-        class="stepper__step
-          {{if @hasJustAppeared 'stepper-step__active'}}
-          {{if this.isLastStep 'stepper-step--last-step'}}"
+        class="stepper__step {{if this.isLastStep 'stepper-step--last-step'}}"
         tabindex="-1"
         {{didInsert this.focusAndScroll}}
         inert={{if @isHidden true}}
