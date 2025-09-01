@@ -39,7 +39,7 @@ module('Integration | Component | Module | Flashcards', function (hooks) {
     const screen = await render(<template><ModulixFlashcards @flashcards={{flashcards}} /></template>);
 
     // then
-    assert.ok(screen.getByRole('heading', { name: "Introduction à l'adresse e-mail" }));
+    assert.ok(screen.getByRole('heading', { name: "Introduction à l'adresse e-mail", level: 4 }));
     assert.strictEqual(
       screen.getByRole('presentation').getAttribute('src'),
       'https://images.pix.fr/modulix/flashcards-intro.png',

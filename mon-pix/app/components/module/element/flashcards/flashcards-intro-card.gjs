@@ -9,7 +9,7 @@ import { t } from 'ember-intl';
       </div>
     {{/if}}
 
-    <h3 class="element-flashcards-intro-card__title">{{@title}}</h3>
+    <h4 class="element-flashcards-intro-card__title">{{@title}}</h4>
 
     <div class="element-flashcards-intro-card__footer">
       <PixButton @triggerAction={{@onStart}} @variant="primary" @size="small">
