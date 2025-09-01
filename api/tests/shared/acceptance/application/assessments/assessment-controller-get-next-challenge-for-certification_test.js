@@ -91,7 +91,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,
           }).id;
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+          databaseBuilder.factory.buildCertificationConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             isPublished: false,
             version: AlgorithmEngineVersion.V3,
@@ -157,7 +157,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,
           }).id;
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+          databaseBuilder.factory.buildCertificationConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             isPublished: false,
             version: AlgorithmEngineVersion.V3,
@@ -212,7 +212,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,
           }).id;
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+          databaseBuilder.factory.buildCertificationConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             isPublished: false,
             version: AlgorithmEngineVersion.V3,
@@ -260,7 +260,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
         it('should return the last challenge the user has seen before leaving the session', async function () {
           const user = databaseBuilder.factory.buildUser({ id: userId });
           const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+          databaseBuilder.factory.buildCertificationConfiguration();
           const sessionId = databaseBuilder.factory.buildSession({
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,

@@ -386,7 +386,6 @@ describe('Certification | Evaluation | Integration | Application | Certification
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
       await mockLearningContent(learningContentObjects);
 
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration();
       databaseBuilder.factory.buildCertificationConfiguration();
 
       await databaseBuilder.commit();

@@ -22,9 +22,11 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       role: SUPER_ADMIN,
     });
 
-    databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-      maximumAssessmentLength: 2,
-      createdAt: new Date('2022-02-01'),
+    databaseBuilder.factory.buildCertificationConfiguration({
+      challengesConfiguration: {
+        maximumAssessmentLength: 2,
+      },
+      startingDate: new Date('2022-02-01'),
     });
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });

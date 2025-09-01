@@ -337,7 +337,7 @@ describe('Acceptance | API | Certification Course', function () {
           const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
           expect(certificationCourse.version).to.equal(AlgorithmEngineVersion.V3);
           expect(response.result.data.attributes).to.include({
-            'nb-challenges': flashConfiguration.maximumAssessmentLength,
+            'nb-challenges': JSON.parse(flashConfiguration.challengesConfiguration).maximumAssessmentLength,
           });
         });
 
@@ -448,7 +448,7 @@ function _createRequestOptions(
 function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userId }) {
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
   databaseBuilder.factory.learningContent.build(learningContentObjects);
-  const flashConfiguration = databaseBuilder.factory.buildFlashAlgorithmConfiguration();
+  const flashConfiguration = databaseBuilder.factory.buildCertificationConfiguration();
   const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId,
     userId,

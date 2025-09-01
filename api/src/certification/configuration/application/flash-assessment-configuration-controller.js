@@ -1,3 +1,4 @@
+//@ts-check
 import { usecases } from '../domain/usecases/index.js';
 import * as flashAlgorithmConfigurationSerializer from '../infrastructure/serializers/flash-algorithm-configuration-serializer.js';
 
@@ -12,11 +13,10 @@ const getActiveFlashAssessmentConfiguration = async (
     .code(200);
 };
 
-const createFlashAssessmentConfiguration = async (req, h) => {
+const createFlashAssessmentConfiguration = async (req, h, dependencies = { flashAlgorithmConfigurationSerializer }) => {
   const { payload } = req;
-  await usecases.createFlashAssessmentConfiguration({
-    configuration: payload,
-  });
+  const configuration = dependencies.flashAlgorithmConfigurationSerializer.deserialize(payload);
+  await usecases.createFlashAssessmentConfiguration({ configuration });
   return h.response().code(204);
 };
 

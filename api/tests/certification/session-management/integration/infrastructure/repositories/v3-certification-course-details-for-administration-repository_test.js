@@ -63,9 +63,14 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         lastAssessmentResultId,
       });
 
-      const { maximumAssessmentLength: numberOfChallenges } = databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-        maximumAssessmentLength: 1,
-        createdAt: flashAlgorithmConfigurationCreationDate,
+      const numberOfChallenges = 1;
+
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: flashAlgorithmConfigurationCreationDate,
+        expirationDate: null,
+        challengesConfiguration: {
+          maximumAssessmentLength: numberOfChallenges,
+        },
       });
 
       const answer = databaseBuilder.factory.buildAnswer({
@@ -117,9 +122,12 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const flashAlgorithmConfigurationCreationDate = new Date('2020-01-01');
       const assessmentId = 78;
 
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-        maximumAssessmentLength: 3,
-        createdAt: flashAlgorithmConfigurationCreationDate,
+      databaseBuilder.factory.buildCertificationConfiguration({
+        startingDate: flashAlgorithmConfigurationCreationDate,
+        expirationDate: null,
+        challengesConfiguration: {
+          maximumAssessmentLength: 3,
+        },
       });
 
       databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
@@ -264,10 +272,14 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         const flashAlgorithmConfigurationCreationDate = new Date('2020-01-01');
         const assessmentId = 78;
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength: 3,
-          createdAt: flashAlgorithmConfigurationCreationDate,
+        databaseBuilder.factory.buildCertificationConfiguration({
+          startingDate: flashAlgorithmConfigurationCreationDate,
+          expirationDate: null,
+          challengesConfiguration: {
+            maximumAssessmentLength: 3,
+          },
         });
+
         databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
         databaseBuilder.factory.buildAssessment({
           id: assessmentId,

@@ -215,7 +215,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           earnedPix: 16,
         });
 
-        databaseBuilder.factory.buildFlashAlgorithmConfiguration({});
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2024-01-14'),
           competencesScoringConfiguration: [
@@ -340,7 +339,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         earnedPix: 16,
       });
 
-      databaseBuilder.factory.buildFlashAlgorithmConfiguration({});
       databaseBuilder.factory.buildCertificationConfiguration({
         startingDate: new Date('2024-01-14'),
         competencesScoringConfiguration: [

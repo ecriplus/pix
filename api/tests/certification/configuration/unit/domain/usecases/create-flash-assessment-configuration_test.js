@@ -1,9 +1,16 @@
 import _ from 'lodash';
 
 import { createFlashAssessmentConfiguration } from '../../../../../../src/certification/configuration/domain/usecases/create-flash-assessment-configuration.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | UseCases | create-flash-assessment-configuration', function () {
+  beforeEach(function () {
+    sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
+      return callback();
+    });
+  });
+
   it('should create an active flash assessment configuration', async function () {
     // given
     const flashAlgorithmConfigurationRepository = {
