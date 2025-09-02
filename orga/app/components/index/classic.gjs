@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import ScoBanner from 'pix-orga/components/banner/sco-banner';
 import ActionCardsList from 'pix-orga/components/index/action-cards-list';
 import ActionCardsListItem from 'pix-orga/components/index/action-cards-list-item';
 import OrganizationInfo from 'pix-orga/components/index/organization-information';
@@ -29,11 +28,11 @@ export default class IndexClassic extends Component {
   }
 
   <template>
-    <Welcome @firstName={{this.currentUser.prescriber.firstName}} @description={{this.description}} />
-
-    {{#if this.currentUser.isSCOManagingStudents}}
-      <ScoBanner />
-    {{/if}}
+    <Welcome
+      @firstName={{this.currentUser.prescriber.firstName}}
+      @description={{this.description}}
+      @displayScoBanner={{this.currentUser.isSCOManagingStudents}}
+    />
 
     <OrganizationInfo @organizationName={{this.currentUser.organization.name}} />
 

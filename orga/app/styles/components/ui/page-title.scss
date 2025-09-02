@@ -2,7 +2,12 @@
 @use 'pix-design-tokens/breakpoints';
 
 .page-title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-3x);
   width: 100%;
+  margin-bottom: var(--pix-spacing-8x);
+
 
   &--center {
     @include breakpoints.device-is('mobile') {
@@ -14,7 +19,7 @@
     display: flex;
     gap: var(--pix-spacing-2x);
     justify-content: space-between;
-    margin-bottom: var(--pix-spacing-8x);
+
 
     &--center {
       justify-content: center;
@@ -33,10 +38,6 @@
     text-overflow: ellipsis;
   }
 
-  &__sub-title {
-    margin-bottom: var(--pix-spacing-6x);
-  }
-
   &__title {
     @extend %pix-title-m;
 
@@ -53,7 +54,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--pix-spacing-2x);
-    margin-bottom: var(--pix-spacing-6x);
   }
 }
 
