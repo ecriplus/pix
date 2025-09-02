@@ -454,21 +454,21 @@
                     "id": "1",
                     "content": "<p>la réponse 1</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien joué ! 🎉</p><p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Bien joué !</strong> 🎉<br>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>la réponse 2</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non.</p><p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Et non.</strong><br>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>la réponse 3</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas vraiment.</p><p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
                   }
                 ],
@@ -743,7 +743,16 @@
               "element": {
                 "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
                 "type": "text",
-                "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+                "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong><br></strong></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
+                "type": "expand",
+                "title": "Indice",
+                "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
               }
             },
             {
@@ -768,15 +777,6 @@
                     }
                   }
                 ]
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
-                "type": "expand",
-                "title": "Indice",
-                "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
               }
             }
           ]
