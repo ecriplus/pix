@@ -149,6 +149,10 @@ const IMPORT_CANDIDATES_TEMPLATE_VALUES = [
     placeholder: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
     propertyName: 'pixPlusProSante',
   },
+  {
+    placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
+    propertyName: 'pixPlusEduCPE',
+  },
 ];
 
 const EXTRA_EMPTY_CANDIDATE_ROWS = 20;
