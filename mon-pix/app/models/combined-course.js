@@ -7,4 +7,10 @@ export default class CombinedCourse extends Model {
   @attr('string') status;
 
   @hasMany('combined-course-item', { async: false, inverse: 'combinedCourse' }) items;
+
+  get nextCombinedCourseItem() {
+    return this.hasMany('items')
+      .value()
+      .find((item) => !item.isCompleted);
+  }
 }

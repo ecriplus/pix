@@ -1195,6 +1195,7 @@
         "title": "Congratulations! You're done!"
       },
       "content": {
+        "resume-button": "Resume course",
         "start-button": "Start course"
       },
       "items": {

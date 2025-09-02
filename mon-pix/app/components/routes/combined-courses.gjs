@@ -33,6 +33,11 @@ export default class CombinedCourses extends Component {
           @size="large"
         >{{t "pages.combined-courses.content.start-button"}}
         </PixButton>
+      {{else if (eq @combinedCourse.status "STARTED")}}
+        <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
+            "pages.combined-courses.content.resume-button"
+          }}
+        </PixButton>
       {{/if}}
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
@@ -46,11 +51,18 @@ export default class CombinedCourses extends Component {
   @service featureToggles;
   @service intl;
   @service store;
+  @service router;
 
   @action
   async startQuestParticipation() {
     const combinedCourseAdapter = this.store.adapterFor('combined-course');
     await combinedCourseAdapter.start(this.args.combinedCourse.code);
-    this.args.combinedCourse.reload();
+    this.goToNextItem();
+  }
+
+  @action
+  goToNextItem() {
+    const item = this.args.combinedCourse.nextCombinedCourseItem;
+    this.router.transitionTo(item.route, item.reference, { queryParams: { redirection: item.redirection } });
   }
 }
