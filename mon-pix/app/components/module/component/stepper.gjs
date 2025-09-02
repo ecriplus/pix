@@ -48,7 +48,7 @@ export default class ModulixStepper extends Component {
 
   @action
   displayNextStep() {
-    const currentStepPosition = this.currentStepIndex + 1;
+    const currentStepPosition = this.lastDisplayedStepIndex + 1;
     const nextStep = this.displayableSteps[currentStepPosition];
     this.stepsToDisplay = [...this.stepsToDisplay, nextStep];
 
@@ -60,7 +60,7 @@ export default class ModulixStepper extends Component {
     this.displayedStepIndex = currentStepPosition;
   }
 
-  get currentStepIndex() {
+  get lastDisplayedStepIndex() {
     return this.stepsToDisplay.length - 1;
   }
 
