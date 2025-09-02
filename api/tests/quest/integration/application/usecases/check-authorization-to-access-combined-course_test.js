@@ -1,7 +1,7 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../src/quest/application/usecases/check-authorization-to-access-combined-course.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Unit | Application | Usecases | checkAuthorizationToAccessCombinedCourse', function () {
+describe('Integration | Application | Usecases | checkAuthorizationToAccessCombinedCourse', function () {
   it('should return true if user belongs to combined course organization', async function () {
     // given
     const code = 'COMBINIX1';
