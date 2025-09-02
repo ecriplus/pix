@@ -24,13 +24,18 @@ export class ImportActiveCalibratedChallengesCsv extends Script {
           demandOption: true,
           coerce: csvFileParser(columnSchemas),
         },
+        dryRun: {
+          type: 'boolean',
+          describe: 'Run the script without making any database changes',
+          default: false,
+        },
       },
     });
   }
 
   async handle({ logger, options }) {
-    const { file: calibratedChallengesFromDatawarehouse } = options;
-    logger.info(calibratedChallengesFromDatawarehouse);
+    const { file: calibratedChallengesFromDatawarehouse, dryRun } = options;
+    logger.debug(calibratedChallengesFromDatawarehouse);
     const calibratedChallengesToInsert = [];
 
     for (const calibratedChallenge of calibratedChallengesFromDatawarehouse) {
@@ -40,7 +45,27 @@ export class ImportActiveCalibratedChallengesCsv extends Script {
         alpha: calibratedChallenge.alpha,
       });
     }
-    return knex.batchInsert('certification-data-active-calibrated-challenges', calibratedChallengesToInsert);
+
+    const trx = await knex.transaction();
+    try {
+      const result = await trx.batchInsert(
+        'certification-data-active-calibrated-challenges',
+        calibratedChallengesToInsert,
+      );
+
+      if (dryRun) {
+        await trx.rollback();
+        logger.info(`Dry run: ${calibratedChallengesToInsert.length} challenges would be inserted`);
+        return { processed: calibratedChallengesToInsert.length, inserted: 0 };
+      }
+
+      await trx.commit();
+      logger.info(`Inserted ${calibratedChallengesToInsert.length} calibrated challenges`);
+      return result;
+    } catch (error) {
+      await trx.rollback();
+      throw error;
+    }
   }
 }
 

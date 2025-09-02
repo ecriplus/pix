@@ -20,7 +20,7 @@ describe('Integration | Scripts | Certification | import-active-calibrated-chall
 
   it('should insert the active calibrated challenges', async function () {
     const script = new ImportActiveCalibratedChallengesCsv();
-    const logger = { info: sinon.spy(), error: sinon.spy() };
+    const logger = { info: sinon.spy(), debug: sinon.spy(), error: sinon.spy() };
     const file = [
       { challenge_id: '123', delta: 1, alpha: 2 },
       { challenge_id: '456', delta: 4, alpha: 5 },
@@ -28,7 +28,7 @@ describe('Integration | Scripts | Certification | import-active-calibrated-chall
     ];
 
     // when
-    await script.handle({ logger, options: { file } });
+    await script.handle({ logger, options: { file, dryRun: false } });
 
     // then
     const [{ count: addedChallenges }] = await knex('certification-data-active-calibrated-challenges').count();
