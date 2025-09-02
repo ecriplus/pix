@@ -85,8 +85,18 @@ class CampaignTypeError extends DomainError {
   }
 }
 
+class CampaignBelongsToCombinedCourseError extends DomainError {
+  constructor() {
+    super(
+      'This campaign belongs to a combined course. Some operations are blocked',
+      'CAMPAIGN_BELONGS_TO_COMBINED_COURSE',
+    );
+  }
+}
+
 export {
   ArchivedCampaignError,
+  CampaignBelongsToCombinedCourseError,
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,
   CampaignTypeError,
