@@ -104,38 +104,6 @@
   }
 }
 
-.stepper--vertical {
-  display: flex;
-  flex-direction: column;
-
-  /* stylelint-disable-next-line no-descending-specificity */
-  .stepper__step {
-    margin-bottom: var(--pix-spacing-6x);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &--active {
-      @extend .auto-scroll;
-
-      outline: none;
-    }
-
-    &__position {
-      display: inline-block;
-
-      @extend %pix-body-m;
-
-      margin: var(--pix-spacing-1x) 0 var(--pix-spacing-4x) 0;
-      padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
-      color: var(--pix-neutral-800);
-      background: var(--pix-neutral-20);
-      border-radius: var(--modulix-radius-l);
-    }
-  }
-}
-
 .stepper__next-button {
   justify-self: start;
   width: fit-content;
