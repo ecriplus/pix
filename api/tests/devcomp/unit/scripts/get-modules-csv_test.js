@@ -14,7 +14,7 @@ describe('Unit | Scripts | Get Modules as CSV', function () {
                 id: '84726001-1665-457d-8f13-4a74dc4768ea',
                 type: 'text',
                 content:
-                  '<h3>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h3>',
+                  '<h4>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h4>',
               },
             },
             {

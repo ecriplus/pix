@@ -49,7 +49,7 @@ export default class ModulixPreview extends Component {
             "element": {
               "id": "2222222a-2222-2bcd-e222-2f2222gh2222",
               "type": "text",
-              "content": "<h3>Voici une leçon</h3>"
+              "content": "<h4>Voici une leçon</h4>"
             }
           },
           {

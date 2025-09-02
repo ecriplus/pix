@@ -21,7 +21,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       const text = {
         id: '84726001-1665-457d-8f13-4a74dc4768ea',
         type: 'text',
-        content: '<h3>content</h3>',
+        content: '<h4>content</h4>',
       };
       user = server.create('user', 'withEmail');
 

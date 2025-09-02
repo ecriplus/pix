@@ -490,7 +490,7 @@
                     {
                       "id": "05a30b10-ac62-40a5-961b-9f3f3e831da0",
                       "type": "qcu",
-                      "instruction": "<h4>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>🗣️ 🎤 Une application retrouve le titre d'une musique que vous lui chantez.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -534,7 +534,7 @@
                     {
                       "id": "d6644a42-0b76-4e9c-8595-43c2da89cb9b",
                       "type": "qcu",
-                      "instruction": "<h4>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>🎬 ▶️ Un site vous propose de nouveaux contenus suite au visionnage d’une vidéo.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -578,7 +578,7 @@
                     {
                       "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                       "type": "qcu",
-                      "instruction": "<h4>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h4><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",

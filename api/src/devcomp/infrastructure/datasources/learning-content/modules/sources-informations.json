@@ -146,7 +146,7 @@
               "element": {
                 "id": "81f2c1af-aeef-4d68-93a9-f4dd3cf1f8bc",
                 "type": "text",
-                "content": "<h3>C'est quoi une source d'information&#8239;?</h3><p><span aria-hidden=\"true\">👉</span> La source est l’origine de l’information. C’est quelqu’un qui donne des détails sur une information.</p><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: si ma voisine Madame Sarah me dit qu'il y a une soucoupe volante dans le ciel, c'est elle la source de cette information.</p>"
+                "content": "<h4>C'est quoi une source d'information&#8239;?</h4><p><span aria-hidden=\"true\">👉</span> La source est l’origine de l’information. C’est quelqu’un qui donne des détails sur une information.</p><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: si ma voisine Madame Sarah me dit qu'il y a une soucoupe volante dans le ciel, c'est elle la source de cette information.</p>"
               }
             },
             {
@@ -162,7 +162,7 @@
               "element": {
                 "id": "e3ebd36a-c8b9-4990-af63-061329824708",
                 "type": "text",
-                "content": "<h3>Comment savoir si on peut croire une source&#8239;?</h3><span aria-hidden=\"true\">👉</span> Il faut se poser quelques questions sur cette source&nbsp;: <ul><li>la source est-elle experte du sujet&#8239;?</li><li>la source est-elle influencée par ses émotions ou ses intérêts&#8239;?</li></ul><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: Madame Sarah a l'impression d'avoir vu une soucoupe dans le ciel. Elle a interprété ce qu'elle a vu. Ce n'est peut-être pas une source fiable.</p>"
+                "content": "<h4>Comment savoir si on peut croire une source&#8239;?</h4><span aria-hidden=\"true\">👉</span> Il faut se poser quelques questions sur cette source&nbsp;: <ul><li>la source est-elle experte du sujet&#8239;?</li><li>la source est-elle influencée par ses émotions ou ses intérêts&#8239;?</li></ul><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: Madame Sarah a l'impression d'avoir vu une soucoupe dans le ciel. Elle a interprété ce qu'elle a vu. Ce n'est peut-être pas une source fiable.</p>"
               }
             }
           ]
@@ -349,7 +349,7 @@
               "element": {
                 "id": "9723333b-6378-4dbd-84a2-92a8fc1cc41a",
                 "type": "text",
-                "content": "<h3>Certaines sources d'information sont <strong>fiables</strong>.&nbsp;<span aria-hidden=\"true\">👍</span></h3><p>Le but de ces sources est d'informer et de partager des informations vérifiées, qui ont donc beaucoup de chances d'être vraies.</p>"
+                "content": "<h4>Certaines sources d'information sont <strong>fiables</strong>.&nbsp;<span aria-hidden=\"true\">👍</span></h4><p>Le but de ces sources est d'informer et de partager des informations vérifiées, qui ont donc beaucoup de chances d'être vraies.</p>"
               }
             },
             {
@@ -365,7 +365,7 @@
               "element": {
                 "id": "0c5bf4bb-989c-4c60-a54c-ae1f842bc8fe",
                 "type": "text",
-                "content": "<h3>Certaines sources d'information sont <strong>humoristiques</strong>.&nbsp;<span aria-hidden=\"true\">🤹</span></h3><p>Le but de ces sources est de faire rire et de partager des informations qui ont beaucoup de chances d'être fausses.</p>"
+                "content": "<h4>Certaines sources d'information sont <strong>humoristiques</strong>.&nbsp;<span aria-hidden=\"true\">🤹</span></h4><p>Le but de ces sources est de faire rire et de partager des informations qui ont beaucoup de chances d'être fausses.</p>"
               }
             },
             {
@@ -381,7 +381,7 @@
               "element": {
                 "id": "e22b6b68-a154-4b5a-a896-5b36eb6127a3",
                 "type": "text",
-                "content": "<h3>Certaines sources d'information sont <strong>contestables</strong>.&nbsp;<span aria-hidden=\"true\">🤨</span></h3><p>Le but de ces sources est d'influencer ou de manipuler les gens. Mais le partage de ces informations a pour principal objectif de gagner de l'argent ou du pouvoir. Ces informations peuvent donc être remises en question.</p>"
+                "content": "<h4>Certaines sources d'information sont <strong>contestables</strong>.&nbsp;<span aria-hidden=\"true\">🤨</span></h4><p>Le but de ces sources est d'influencer ou de manipuler les gens. Mais le partage de ces informations a pour principal objectif de gagner de l'argent ou du pouvoir. Ces informations peuvent donc être remises en question.</p>"
               }
             }
           ]

@@ -42,9 +42,9 @@ export default class ModulixStep extends Component {
         inert={{if @isHidden true}}
         aria-hidden={{if @isHidden "true"}}
       >
-        <h3 class="stepper__step__position screen-reader-only">
+        <h4 class="stepper__step__position screen-reader-only">
           {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}
-        </h3>
+        </h4>
         {{#each this.displayableElements as |element|}}
           <div class="grain-card-content__element">
             <Element

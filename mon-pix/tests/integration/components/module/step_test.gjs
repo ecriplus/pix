@@ -28,7 +28,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
       // then
       assert.dom(screen.getByText(element.content)).exists();
-      assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 3 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 4 })).exists();
     });
 
     test('should display a step with a qcu element', async function (assert) {
@@ -123,7 +123,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
         // then
         assert.dom(screen.queryByText(element.content)).doesNotExist();
-        assert.dom(screen.queryByRole('heading', { name: 'Étape 1 sur 4', level: 3 })).doesNotExist();
+        assert.dom(screen.queryByRole('heading', { name: 'Étape 1 sur 4', level: 4 })).doesNotExist();
       });
     });
 
@@ -152,7 +152,7 @@ module('Integration | Component | Module | Step', function (hooks) {
         // then
         assert.dom(screen.getByText(textElement.content)).exists();
         assert.dom(screen.queryByText(unknownElement.content)).doesNotExist();
-        assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 3 })).exists();
+        assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 4 })).exists();
       });
     });
   });

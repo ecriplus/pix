@@ -14,7 +14,7 @@
   "sections": [
     {
       "id": "cfaefec9-e185-43b8-8258-e8beff6dd56b",
-      "type": "blank",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "d6ed29e2-fb0b-4f03-9e26-61029ecde2e3",
@@ -174,13 +174,7 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "47d5fdea-8141-4184-a78e-c7f871de71fc",
-      "type": "question-yourself",
-      "grains": [
+        },
         {
           "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
           "type": "discovery",
@@ -475,7 +469,7 @@
               "element": {
                 "id": "e9aef60c-f18a-471e-85c7-e50b4731b86b",
                 "type": "text",
-                "content": "<h3>Pour afficher mon texte sur plusieurs colonnes, je peux utiliser la classe <em>modulix-two-columns</em>.</h3><p>Des noms d'artistes de musique très sympas:</p><ol class=\"modulix-two-columns\"> <li>Dylan</li> <li>The Beatles</li> <li>The Who</li><li>Blondie</li><li>Joan Baez</li><li>Supertramp</li><li>Kraftwerk</li> <li>Queen</li><li>David Bowie</li><li>Céline Dion</li></ol>"
+                "content": "<h4>Pour afficher mon texte sur plusieurs colonnes, je peux utiliser la classe <em>modulix-two-columns</em>.</h4><p>Des noms d'artistes de musique très sympas:</p><ol class=\"modulix-two-columns\"> <li>Dylan</li> <li>The Beatles</li> <li>The Who</li><li>Blondie</li><li>Joan Baez</li><li>Supertramp</li><li>Kraftwerk</li> <li>Queen</li><li>David Bowie</li><li>Céline Dion</li></ol>"
               }
             },
             {
@@ -483,7 +477,7 @@
               "element": {
                 "id": "84726001-1665-457d-8f13-4a74dc4768ea",
                 "type": "text",
-                "content": "<h3>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h3>"
+                "content": "<h4>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h4>"
               }
             },
             {

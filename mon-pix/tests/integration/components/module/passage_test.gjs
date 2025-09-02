@@ -137,7 +137,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should not display the non existing elements but display the existing ones', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const existingElement = { content: '<h3>existing element content</h3>', type: 'text' };
+      const existingElement = { content: '<h4>existing element content</h4>', type: 'text' };
       const nonExistingElement1 = { type: 'non-existing-element-type' };
       const nonExistingElement2 = {
         type: 'non-existing-element-type',
@@ -169,7 +169,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // when
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
       // then
-      assert.ok(screen.queryByRole('heading', { name: 'existing element content', level: 3 }));
+      assert.ok(screen.queryByRole('heading', { name: 'existing element content', level: 4 }));
       assert.dom('.grain-card-content__element').exists({ count: 1 });
     });
   });

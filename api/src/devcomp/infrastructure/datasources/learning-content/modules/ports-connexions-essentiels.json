@@ -391,14 +391,14 @@
                     {
                       "id": "fdbfa739-e38f-41d6-ba98-6660fe729e16",
                       "type": "text",
-                      "content": "<h3>Une clé USB ou un clavier sans-fil (avec récepteur USB)</h3>"
+                      "content": "<h4>Une clé USB ou un clavier sans-fil (avec récepteur USB)</h4>"
                     },
                     {
                       "id": "34aee94d-4bdb-4923-8111-69a46ce158dd",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/JUTKL4Q.jpeg",
                       "alt": "Photographie d'une clé USB et d'un clavier sans-fil et son récepteur USB",
-                      "alternativeText": "<h3>Une clé USB</h3><p>La clé USB comporte une prise USB. Elle se branche toute entière à l'ordinateur, sans besoin de cable.</p><h3>Un clavier sans-fil (avec récepteur USB)&nbsp;</h3>\n<p>Le clavier se branche à l'ordinateur grâce au récepteur USB. C'est une petite prise USB qui n'est pas reliée par un fil au clavier.</p>"
+                      "alternativeText": "<h4>Une clé USB</h4><p>La clé USB comporte une prise USB. Elle se branche toute entière à l'ordinateur, sans besoin de cable.</p><h4>Un clavier sans-fil (avec récepteur USB)&nbsp;</h4>\n<p>Le clavier se branche à l'ordinateur grâce au récepteur USB. C'est une petite prise USB qui n'est pas reliée par un fil au clavier.</p>"
                     }
                   ]
                 },
@@ -407,14 +407,14 @@
                     {
                       "id": "b91728f4-a8f2-403b-81bc-520db8b8cbf0",
                       "type": "text",
-                      "content": "\n<h3>Une souris filaire ou une manette de jeux vidéos</h3>"
+                      "content": "\n<h4>Une souris filaire ou une manette de jeux vidéos</h4>"
                     },
                     {
                       "id": "b7f8feb2-b355-4fbd-99ec-48511303536f",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/SAWzPl8.jpeg",
                       "alt": "Photo d'une souris filaire et d'une manette de jeu vidéo à connexion USB",
-                      "alternativeText": "<h3>Une souris filaire </h3><p>La souris est reliée à un cable, au bout de celui-ci on voit une prise USB.</p><h3>Une manette de jeux vidéos </h3><p>La manette est reliée à un cable, au bout de celui-ci on voit une prise USB.</p>"
+                      "alternativeText": "<h4>Une souris filaire </h4><p>La souris est reliée à un cable, au bout de celui-ci on voit une prise USB.</p><h4>Une manette de jeux vidéos </h4><p>La manette est reliée à un cable, au bout de celui-ci on voit une prise USB.</p>"
                     }
                   ]
                 },
@@ -423,14 +423,14 @@
                     {
                       "id": "07bc0dd7-c121-4f6d-8e3a-ba45faffc93c",
                       "type": "text",
-                      "content": "<h3>Un cable de chargeur de téléphone portable ou une webcam</h3>"
+                      "content": "<h4>Un cable de chargeur de téléphone portable ou une webcam</h4>"
                     },
                     {
                       "id": "06160ea0-d7dd-41ba-b455-c3078de15be6",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/EJKVD5d.jpeg",
                       "alt": "Photo d'un câble de chargeur de téléphone portable à connexion USB, et d'une webcam à connexion USB",
-                      "alternativeText": "<h3>Un câble de téléphone portable </h3>\n<p>Le cable de chargeur de téléphone portable est muni d'une prise USB (pour le port de l'ordinateur), et d'une prise USB-C (pour le port du téléphone).</p><h3>Une webcam</h3><p>La webcam est reliée à un cable, au bout de celui-ci on voit une prise USB.</p>"
+                      "alternativeText": "<h4>Un câble de téléphone portable </h4>\n<p>Le cable de chargeur de téléphone portable est muni d'une prise USB (pour le port de l'ordinateur), et d'une prise USB-C (pour le port du téléphone).</p><h4>Une webcam</h4><p>La webcam est reliée à un cable, au bout de celui-ci on voit une prise USB.</p>"
                     }
                   ]
                 }

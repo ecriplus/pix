@@ -149,7 +149,7 @@
                     {
                       "id": "c1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d",
                       "type": "text",
-                      "content": "<h3 class=\"screen-reader-only\">L'identifiant</h3><h4><u>Partie 1&nbsp;: l’identifiant</u>. Cette partie est choisie par Mickaël.</h4><p>Tous les identifiants sont possibles, ou presque.</p><p><span aria-hidden=\"true\">✔️</span> Par exemple&nbsp;: <code>mickael.aubert123</code> ou <code>mika671</code> ou <code>g3odu671</code></p><p><span aria-hidden=\"true\">✖️</span> Certains caractères sont interdits (<code>&amp;</code> <code>@</code>  <code>$</code> <code>*</code> <code>€</code>) ou à éviter (accents, majuscules).</p><p><br><span aria-hidden=\"true\">📖</span> Un conseil : si vous voulez envoyer des mails importants, il vaut mieux créer une adresse mail avec un identifiant classique, par exemple <code>prenom.nom</code>.</p>"
+                      "content": "<h4 class=\"screen-reader-only\">L'identifiant</h4><h5><u>Partie 1&nbsp;: l’identifiant</u>. Cette partie est choisie par Mickaël.</h5><p>Tous les identifiants sont possibles, ou presque.</p><p><span aria-hidden=\"true\">✔️</span> Par exemple&nbsp;: <code>mickael.aubert123</code> ou <code>mika671</code> ou <code>g3odu671</code></p><p><span aria-hidden=\"true\">✖️</span> Certains caractères sont interdits (<code>&amp;</code> <code>@</code>  <code>$</code> <code>*</code> <code>€</code>) ou à éviter (accents, majuscules).</p><p><br><span aria-hidden=\"true\">📖</span> Un conseil : si vous voulez envoyer des mails importants, il vaut mieux créer une adresse mail avec un identifiant classique, par exemple <code>prenom.nom</code>.</p>"
                     }
                   ]
                 },
@@ -165,7 +165,7 @@
                     {
                       "id": "ad8ad08a-3ff7-4228-8233-6cd5ce0f4812",
                       "type": "text",
-                      "content": "<h3 class=\"screen-reader-only\">L'arobase</h3><h4><u>Au centre, l’arobase</u> (@) sépare l’identifiant du fournisseur d’adresse mail.</h4><p>En anglais, ce symbole se lit <i lang=\"en\">“at”</i> et veut dire “chez”.</p><p><br><span aria-hidden=\"true\">💡</span> L'arobase est un symbole qui était utilisé avant l’informatique. En 1970, il a été choisi pour écrire les adresses mail car il était très peu utilisé et facile à repérer.</p>"
+                      "content": "<h4 class=\"screen-reader-only\">L'arobase</h4><h5><u>Au centre, l’arobase</u> (@) sépare l’identifiant du fournisseur d’adresse mail.</h5><p>En anglais, ce symbole se lit <i lang=\"en\">“at”</i> et veut dire “chez”.</p><p><br><span aria-hidden=\"true\">💡</span> L'arobase est un symbole qui était utilisé avant l’informatique. En 1970, il a été choisi pour écrire les adresses mail car il était très peu utilisé et facile à repérer.</p>"
                     }
                   ]
                 },
@@ -181,7 +181,7 @@
                     {
                       "id": "1fd829f8-1799-4779-a28d-5d26fba31b8b",
                       "type": "text",
-                      "content": "<h3 class=\"screen-reader-only\">Le fournisseur d’adresse mail</h3><h4><u>Partie 2&nbsp;: le fournisseur d’adresse mail</u>. Cette partie de l’adresse est donnée par le fournisseur.</h4><p><span aria-hidden=\"true\">✔️</span> Voici des exemples de fournisseurs d’adresses mail&nbsp;: </p><ul><li>La Poste (laposte.net)</li><li>Google (gmail.com)</li><li>Yahoo (yahoo.com, yahoo.fr)</li><li>Microsoft (hotmail.com, live.fr)</li></ul><p><br>Quand vous écrivez une adresse mail, soyez attentifs à l'extension (<code>.fr</code>, <code>.com</code>, etc.). C'est important pour que le mail soit envoyé à la bonne adresse. <span aria-hidden=\"true\">🧐</span></p>"
+                      "content": "<h4 class=\"screen-reader-only\">Le fournisseur d’adresse mail</h4><h5><u>Partie 2&nbsp;: le fournisseur d’adresse mail</u>. Cette partie de l’adresse est donnée par le fournisseur.</h5><p><span aria-hidden=\"true\">✔️</span> Voici des exemples de fournisseurs d’adresses mail&nbsp;: </p><ul><li>La Poste (laposte.net)</li><li>Google (gmail.com)</li><li>Yahoo (yahoo.com, yahoo.fr)</li><li>Microsoft (hotmail.com, live.fr)</li></ul><p><br>Quand vous écrivez une adresse mail, soyez attentifs à l'extension (<code>.fr</code>, <code>.com</code>, etc.). C'est important pour que le mail soit envoyé à la bonne adresse. <span aria-hidden=\"true\">🧐</span></p>"
                     }
                   ]
                 }
@@ -477,7 +477,7 @@
               "element": {
                 "id": "b0fcb950-b5b1-4384-886e-79fb852d5bb7",
                 "type": "text",
-                "content": "<h3><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h3><ul><li>C'est l'<strong>utilisateur qui choisit son identifiant</strong> d'adresse mail. Il peut utiliser des <strong>chiffres</strong> ou des <strong>majuscules</strong>.<br><span aria-hidden=\"true\">✔️</span> Exemples&nbsp;: <code>mickael.aubert123</code> ; <code>M3g4Cool1415</code>, etc.<br></li><li>Il y a une <strong>arobase</strong> (@) dans une adresse mail. Elle permet de <strong>séparer l’identifiant et le fournisseur</strong> d’adresse mail.<br></li><li>Après l'arobase, les adresses mail <strong>se terminent de différentes manières</strong>, selon le <strong>fournisseur d’adresse</strong> mail.<br><span aria-hidden=\"true\">✔️</span> Exemples&nbsp;: laposte.net, free.fr, gmail.com, yahoo.com, etc.</li></ul>"
+                "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h4><ul><li>C'est l'<strong>utilisateur qui choisit son identifiant</strong> d'adresse mail. Il peut utiliser des <strong>chiffres</strong> ou des <strong>majuscules</strong>.<br><span aria-hidden=\"true\">✔️</span> Exemples&nbsp;: <code>mickael.aubert123</code> ; <code>M3g4Cool1415</code>, etc.<br></li><li>Il y a une <strong>arobase</strong> (@) dans une adresse mail. Elle permet de <strong>séparer l’identifiant et le fournisseur</strong> d’adresse mail.<br></li><li>Après l'arobase, les adresses mail <strong>se terminent de différentes manières</strong>, selon le <strong>fournisseur d’adresse</strong> mail.<br><span aria-hidden=\"true\">✔️</span> Exemples&nbsp;: laposte.net, free.fr, gmail.com, yahoo.com, etc.</li></ul>"
               }
             }
           ]

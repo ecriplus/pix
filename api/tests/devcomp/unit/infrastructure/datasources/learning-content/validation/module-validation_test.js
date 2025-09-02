@@ -639,7 +639,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
                     element: {
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
-                      content: '<h3>Content.</h3>',
+                      content: '<h4>Content.</h4>',
                     },
                   },
                 ],
