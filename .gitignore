@@ -86,5 +86,5 @@ high-level-tests/e2e/cypress/snapshots/actual/**
 # Docker-compose config
 docker/data/
 
-# Claude Code local development guidance
+# Claude Code documentation
 CLAUDE.md
