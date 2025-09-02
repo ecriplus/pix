@@ -3,10 +3,9 @@
 .proposal-button {
   @extend %pix-body-m;
 
-  display: flex;
-  align-items: center;
   width: 100%;
   padding: var(--pix-spacing-3x) var(--pix-spacing-4x);
+  text-align: left;
   background: var(--pix-neutral-0);
   border: 1px solid var(--pix-neutral-500);
   border-radius: 8px;
