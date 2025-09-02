@@ -876,6 +876,36 @@
               }
             }
           ]
+        },
+        {
+          "id": "27ab0dd6-61d7-4cd9-8f43-f5e4c13f7f30",
+          "type": "lesson",
+          "title": "qcm-deepfake",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "af0aa765-13d3-4a18-8dd2-e78028ebbde4",
+                "type": "text",
+                "content": "<p>qcm-deepfake</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d58e3796-5c02-4587-9d19-39f7b808a82f",
+                "type": "custom",
+                "tagName": "qcm-deepfake",
+                "props": {
+                  "titleLevel": 2,
+                  "successImage": "https://epreuves.pix.fr/images/camtasia.png",
+                  "failImage": "https://epreuves.pix.fr/images/icones/actu.jpg",
+                  "infoImage": "https://epreuves.pix.fr/images/icones/avg.png",
+                  "searchImage": "https://epreuves.pix.fr/images/icones/avira.svg"
+                }
+              }
+            }
+          ]
         }
       ]
     }

@@ -78,6 +78,8 @@ export class NormalizedProps {
         return this.normalizeImageQuizProps(props);
       case 'image-quizzes':
         return this.normalizeImageQuizzesProps(props);
+      case 'qcm-deepfake':
+        return this.normalizeQcmDeepfakeProps(props);
       default:
         return props;
     }
@@ -93,6 +95,13 @@ export class NormalizedProps {
         displayHeight: NormalizedProps.unsetNumber(slide.displayHeight),
         license: NormalizedProps.unsetObject(slide.license),
       })),
+    };
+  }
+
+  normalizeQcmDeepfakeProps(props) {
+    return {
+      ...props,
+      titleLevel: NormalizedProps.unsetNumber(props.titleLevel),
     };
   }
 
