@@ -17,6 +17,32 @@
       "type": "blank",
       "grains": [
         {
+          "id": "5161dd9c-0ed3-43a8-b550-ced9e2c539ba",
+          "type": "lesson",
+          "title": "calcul-impact",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "db7caf2c-1e0f-4748-85d9-e33be7cbeb73",
+                "type": "text",
+                "content": "<p>calcul-impact</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6251f379-2a39-4731-a19a-fde17151c889",
+                "type": "custom",
+                "tagName": "calcul-impact",
+                "props": {
+                  "titleLevel": 2
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
           "type": "lesson",
           "title": "complete-phrase",
