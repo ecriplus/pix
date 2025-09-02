@@ -42,20 +42,20 @@
                   "messages": [
                     {
                       "direction": "inbound",
-                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?"
                     }
                   ],
                   "prompts": [
                     {
                       "prompt": "Explique-moi le cycle de l'eau comme si j'étais un enfant de 7 ans.",
-                      "response": "L'eau voyage tout le temps : elle s'évapore dans le ciel, forme des nuages, retombe en pluie, puis retourne dans les rivières et la mer pour recommencer !"
+                      "response": "L'eau voyage tout le temps : elle s'évapore dans le ciel, forme des nuages, retombe en pluie, puis retourne dans les rivières et la mer pour recommencer !"
                     },
                     {
                       "prompt": "Aide-moi à rédiger une fiche de lecture pour le livre Des souris et des hommes.",
                       "response": "Des souris et des hommes est un roman de John Steinbeck qui raconte l'histoire touchante de deux amis, George et Lennie, cherchant du travail pendant la Grande Dépression en Amérique. Leur rêve de posséder une ferme s'effondre tragiquement à cause de la naïveté de Lennie et de la dureté du monde qui les entoure."
                     },
                     {
-                      "prompt": "Pourquoi la natation est-elle une excellente activité de rééducation après une blessure ?",
+                      "prompt": "Pourquoi la natation est-elle une excellente activité de rééducation après une blessure ?",
                       "response": "La natation est une excellente activité de rééducation après une blessure car elle permet de renforcer les muscles et d'améliorer la mobilité sans exercer de pression excessive sur les articulations."
                     }
                   ]
@@ -63,37 +63,37 @@
               }
             },
             {
-          "type": "element",
-          "element": {
-            "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
-            "type": "qcu-discovery",
-            "instruction": "<p>Qu’est-ce qui vous paraît le plus remarquable à propos de ce logiciel d'IA générative de texte ?</p>",
-            "proposals": [
-              {
-                "id": "1",
-                "content": "<p>Il a l’air incollable.</p>",
-                "feedback": {
-                  "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
-                }
-              },
-              {
-                "id": "2",
-                "content": "<p>Il s’exprime comme un humain.</p>",
-                "feedback": {
-                  "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
-                }
-              },
-              {
-                "id": "3",
-                "content": "<p>Je ne sais pas.</p>",
-                "feedback": {
-                  "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
-                }
+              "type": "element",
+              "element": {
+                "id": "cc7708a8-c68a-44a9-ac54-6f1d5b1b6f4e",
+                "type": "qcu-discovery",
+                "instruction": "<p>Qu’est-ce qui vous paraît le plus remarquable à propos de ce logiciel d'IA générative de texte ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Il a l’air incollable.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Il s’exprime comme un humain.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, on pourrait penser qu'on discute avec un humain ! On peut aussi remarquer que ses réponses sont pertinentes sur des sujets très divers. 🏊‍♀️ </p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce logiciel d'IA générative permet de discuter comme on le ferait avec un humain. On remarque aussi que les réponses sont pertinentes sur des sujets très variés.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
               }
-            ],
-            "solution": "1"
-          }
-          }
+            }
           ]
         },
         {
@@ -106,7 +106,7 @@
               "element": {
                 "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
                 "type": "text",
-                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?</p>"
+                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Grâce à<strong> trois étapes</strong>.&nbsp;Découvrez la première.</p>"
               }
             }
           ]
@@ -121,73 +121,46 @@
               "element": {
                 "id": "2d943050-b29c-4398-a336-143f3173c51a",
                 "type": "text",
-                "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à <strong>produire du texte</strong> qui ressemble à ce que des humains auraient pu écrire.&nbsp;</p><p>Découvrez en vidéo comment fonctionne cette première étape : le « pré-entraînement ». 🤔</p>"
+                "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à produire du texte qui ressemble à ce que des humains auraient pu écrire.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/placeholder-video2.jpg",
-                "alt": "placeholder",
-                "alternativeText": "Vidéo bientôt",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "CD154C09-0017-40A5-8B98-6F556DE893CC",
-                "type": "text",
-                "content": "<p>À la fin de cette étape, l'IA sait prolonger un texte sur des sujets variés. En général, ce texte ressemble à un texte qu'un humain aurait pu écrire.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "87e8de3c-dfa9-4a5d-91d8-ae8a703d7772",
-                "type": "qab",
-                "instruction": "<p>Répondez aux affirmations suivantes. <br></p>",
-                "cards": [
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, comment on entraîne une IA générative à parler comme un humain ?</p>",
+                "proposals": [
                   {
-                    "id": "c47a6882-9ceb-436d-b157-88e22926620d",
-                    "text": "Après le pré-entraînement, l'IA générative sait écrire du texte sur de nombreux sujets.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "A"
+                    "id": "1",
+                    "content": "<p>Elle apprend par cœur les phrases à répondre à chaque question.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                    }
                   },
                   {
-                    "id": "eee8c179-041b-4cc3-812a-f87b9d71d43f",
-                    "text": "Après le pré-entraînement, l'IA générative sait produire du texte qui ressemble à ce qu'un humain aurait pu écrire.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "A"
+                    "id": "2",
+                    "content": "<p>Elle s'entraîne à parler grâce à des prédictions statistiques.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Exactement !&nbsp;</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.<br><br></p>"
+                    }
                   },
                   {
-                    "id": "04db4a05-57bf-42ca-bc2b-7999051a5ebb",
-                    "text": "Après le pré-entraînement, l'IA générative sait comment interagir avec un utilisateur.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "B"
+                    "id": "3",
+                    "content": "<p>Elle s’entraîne en remplissant des milliards de textes à trous.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Exactement !</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Elle retient toutes les expressions humaines avec des moyens mnémotechniques.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Eh non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.<br><br></p>"
+                    }
                   }
                 ],
-                "feedback": {
-                  "diagnosis": ""
-                }
+                "solution": "2"
               }
             }
           ]
@@ -198,45 +171,24 @@
           "title": "Dec 1 Lesson 1",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "4386b458-46cb-45e9-8d1b-1e840cb2f7c3",
-                      "type": "text",
-                      "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui fait <strong>analyser des milliards de textes</strong> variés. 📚 </p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "93d127a7-e179-40cd-9273-ce7a23007a39",
-                      "type": "text",
-                      "content": "<p>L’IA générativetransforme ces textes en <strong>textes à trous</strong> et s’entraîne à deviner les mots cachés. 🙈</p><p>Au début, elle propose des mots <strong>au hasard</strong>, puis elle se corrige et <strong>recommence</strong>. Petit à petit elle s'améliore.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "3cdf627f-2ad0-42e8-a529-696936905830",
-                      "type": "text",
-                      "content": "<p>En répétant cet exercice sur beaucoup de textes, elle enrichit son vocabulaire et apprend quels mots <strong> apparaissent souvent ensemble.</strong>  🐈 🐁</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "94b60d31-b5dc-4621-a38f-de8eb5553813",
-                      "type": "text",
-                      "content": "<p>À la fin de cette étape de <strong>pré-entraînement</strong>, l'IA générative est capable de <strong>prolonger ou compléter des débuts de texte</strong> en prédisant les mots suivants. 😮</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "f493cff1-da55-4c4d-8e50-45be71aff362",
+                "type": "text",
+                "content": "<p>Découvrez en vidéo comment fonctionne cette première étape&nbsp;de&nbsp;<strong>pré-entraînement,</strong> qui permet à l’IA de parler comme un humain. 🤔</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0acbffc6-34cc-414a-a148-194e2af62b37",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/placeholder-video2.jpg",
+                "alt": "place holder",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
             }
           ]
         },
@@ -250,7 +202,7 @@
               "element": {
                 "id": "3e76071c-b053-42a3-8145-c7defd93f748",
                 "type": "text",
-                "content": "<p>Prédire la suite d’un texte, c'est bien. 🔮 Mais ce n’est pas la même chose que de discuter ou rédiger une lettre de motivation.</p><p>Comment l'IA générative apprend-elle à faire tout ça ?🤔</p>"
+                "content": "<p>Prédire la suite d’un texte, c'est bien. 🔮 Mais ce n’est pas la même chose que de discuter ou rédiger une lettre de motivation.</p><p>Comment l'IA générative apprend-elle à faire tout ça ? Découvrez la deuxième étape.</p>"
               }
             }
           ]
@@ -265,7 +217,7 @@
               "element": {
                 "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
                 "type": "text",
-                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p>\n<p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
+                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p>\n<p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
               }
             },
             {
@@ -284,23 +236,21 @@
                     },
                     {
                       "id": "cbe3a835-f4b9-480c-bdd4-cef61b7774f3",
-                      "type": "qcu",
-                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA génératives à simuler des conversations.</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Utile</p>",
+                          "content": "<p>utile</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>&nbsp;Effectivement, un forum en ligne est très utile ! Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.<br></p>"
+                            "diagnosis": "<p> <strong>Effectivement, un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.<br></p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Pas utile</p>",
+                          "content": "<p>pas utile</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Et non, un forum en ligne est très utile ! Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
+                            "diagnosis": "<p><strong>Et non, un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
                           }
                         }
                       ],
@@ -321,23 +271,21 @@
                     },
                     {
                       "id": "cbcc364d-25a7-445e-b6cc-746fc3d35c69",
-                      "type": "qcu",
-                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA&nbsp;génératives à simuler des conversations.</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Utile</p>",
+                          "content": "<p>utile</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Et non, une page de contact d'une entreprise n'est pas vraiment utile ! Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
+                            "diagnosis": "<p><strong>Et non, une page de contact d'une entreprise n'est pas vraiment utile !</strong> <br>Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Pas utile</p>",
+                          "content": "<p>pas utile</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, une page de contact d'une entreprise n'est pas vraiment utile ! Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
+                            "diagnosis": "<p><strong>Effectivement, une page de contact d'une entreprise n'est pas vraiment utile !</strong> <br>Ce type de données contient des adresses, des numéros de téléphone, rien de bien utile pour simuler une conversation.</p>"
                           }
                         }
                       ],
@@ -351,30 +299,28 @@
                       "id": "7fdc0205-db66-4003-b8e4-df3bb53cd3b4",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
-                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses).",
+                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses).",
                       "alternativeText": "",
                       "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "77c7655b-d9e2-478d-af60-fd877d23d5d9",
-                      "type": "qcu",
-                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA génératives à simuler des conversations.</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Utile</p>",
+                          "content": "<p>utile</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, une page de questions fréquentes contient principalement des questions et des réponses ! Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
+                            "diagnosis": "<p><strong>Effectivement !&nbsp;</strong><br>Une page de questions fréquentes contient principalement des questions et des réponses. Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Pas utile</p>",
+                          "content": "<p>pas utile</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Et non, une page de questions fréquentes contient en général des questions et des réponses ! Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
+                            "diagnosis": "<p><strong>Et non !&nbsp;<br></strong>Une page de questions fréquentes contient en général des questions et des réponses. Ce type de données est particulièrement utile pour simuler une conversation de qualité.</p>"
                           }
                         }
                       ],
@@ -395,23 +341,21 @@
                     },
                     {
                       "id": "5b4086cb-0a9a-4d69-8abd-e97e8c0b1f6e",
-                      "type": "qcu",
-                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA à simuler des conversations.</p>",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Observez l'image et déterminez si ce type de données est utile ou non pour apprendre aux IA&nbsp;génératives à simuler des conversations.</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Utile</p>",
+                          "content": "<p>utile</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Et non, les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
+                            "diagnosis": "<p><strong>Et non.</strong><br>Les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Pas utile</p>",
+                          "content": "<p>pas utile</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
+                            "diagnosis": "<p><strong>Effectivement !</strong><br>Lles articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                           }
                         }
                       ],
@@ -438,7 +382,7 @@
                       "type": "text",
                       "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation. C’est de l’apprentissage supervisé.</p>"
                     },
-                     {
+                    {
                       "id": "a5fd2b0e-1241-4919-8eaa-3788aab741f9",
                       "type": "expand",
                       "title": "💡 Le saviez-vous ?",
@@ -484,7 +428,7 @@
               "element": {
                 "id": "d37649bc-9ba4-4a7f-82d2-28074bb64140",
                 "type": "text",
-                "content": "<p>Dans le cadre de l'entraînement de l'IA, on propose parfois aux utilisateurs de choisir parmis plusieurs réponses. On recueille ainsi les préférences des utilisateurs pour que l'IA s'améliore<br></p> <p><strong>Observez les trois réponses proposées par un logiciel d'IA générative, puis répondez à la question ci-dessous.</strong></p>"
+                "content": "<p>Dans le cadre de l'entraînement de l'IA, on propose parfois aux utilisateurs de choisir parmi plusieurs réponses. On recueille ainsi les préférences des utilisateurs pour que l'IA s'améliore<br></p> <p><strong>Observez les trois réponses proposées par un logiciel d'IA générative, puis répondez à la question ci-dessous.</strong></p>"
               }
             },
             {
@@ -494,7 +438,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/ia-int-mgo/Choix-utilisateur-alignement.jpg",
                 "alt": "conversation avec une IA générative, détaillé dans l'alternative textuelle",
-                "alternativeText": "<p>Prompt :<br>Mon chat est patraque ce matin. Pourtant hier soir j’ai été très sympa avec lui j’ai même partagé mon carré de chocolat du soir avec lui ! Pourquoi est-ce qu’il ne veut pas jouer avec moi ? Aurais-tu un conseil à me donner ?</p><p>Réponse 1 :<br>Oh c’est une grande qualité de vouloir partager ! Mais malheureusement, le chocolat est toxique pour les animaux de compagnie … Je te conseille d’amener ton chat chez le vétérinaire, il saura te conseiller. Et en plus tu pourras garder la totalité de ton chocolat ! 😋 </p><p>Réponse 2 :<br>Mais quelle idée idiote ! Tu devrais savoir que le chocolat est toxique pour les animaux. On confie vraiment des animaux à n’importe qui … 🙄🤨</p><p>Réponse 3 :<br>Tu fais bien de t’en soucier, le changement de comportement de ton chat peut en dire long sur ses états d’âme. De mon expérience, tu devrais lui proposer une séance de yoga, tout rentrera dans l’ordre. 🧘</p>",
+                "alternativeText": "<p>Prompt&nbsp;:<br>Mon chat est patraque ce matin. Pourtant hier soir j’ai été très sympa avec lui j’ai même partagé mon carré de chocolat du soir avec lui ! Pourquoi est-ce qu’il ne veut pas jouer avec moi ? Aurais-tu un conseil à me donner ?</p><p>Réponse 1&nbsp;:<br>Oh c’est une grande qualité de vouloir partager ! Mais malheureusement, le chocolat est toxique pour les animaux de compagnie … Je te conseille d’amener ton chat chez le vétérinaire, il saura te conseiller. Et en plus tu pourras garder la totalité de ton chocolat ! 😋 </p><p>Réponse 2&nbsp;:<br>Mais quelle idée idiote ! Tu devrais savoir que le chocolat est toxique pour les animaux. On confie vraiment des animaux à n’importe qui … 🙄🤨</p><p>Réponse 3&nbsp;:<br>Tu fais bien de t’en soucier, le changement de comportement de ton chat peut en dire long sur ses états d’âme. De mon expérience, tu devrais lui proposer une séance de yoga, tout rentrera dans l’ordre. 🧘</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -510,7 +454,7 @@
                     "id": "1",
                     "content": "<p>la réponse 1</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien joué ! 🎉</p><p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p>Bien joué ! 🎉</p><p>Et oui ! Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
                   },
                   {
@@ -546,7 +490,7 @@
                     {
                       "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
                       "type": "text",
-                      "content": "<p>La phase d'<strong>alignement</strong>, c'est apprendre à l’IA générative à faire des réponses satisfaisantes. On utilise un système de <strong>récompense</strong>.<br>Chacune des réponses de l’IA Gen est évaluée&nbsp;: 👍 ou 👎. Le logiciel essaie d’obtenir le plus de 👍 . C’est de l’apprentissage par renforcement.</p>"
+                      "content": "<p>La phase d'<strong>alignement</strong>, c'est apprendre à l’IA générative à faire des réponses satisfaisantes. On utilise un système de <strong>récompense</strong>.Chacune des réponses de l’IA Gen est évaluée&nbsp;: «👍» ou  «👎». <br>Le logiciel essaie d’obtenir le plus de «👍». <br>C’est de l’apprentissage par renforcement.</p>"
                     }
                   ]
                 },
@@ -555,7 +499,7 @@
                     {
                       "id": "40570e09-028c-40e3-bc93-47d81f572c33",
                       "type": "text",
-                      "content": "<p>Cette évaluation est faite par des humains. C’est un travail mal rémunéré et peu valorisé. 😔<br><strong>Bon à savoir :</strong><br>Vous faites parfois ce travail gratuitement. Quand vous cliquez sur le pouce en dessous de la réponse.</p>"
+                      "content": "<p>Cette évaluation est faite par des humains. C’est un travail mal rémunéré et peu valorisé. 😔<br><strong></strong></p><p><strong>Bon à savoir&nbsp;:</strong><br>Vous faites parfois ce travail gratuitement. Quand vous cliquez sur le pouce en dessous de la réponse.</p>"
                     }
                   ]
                 },
@@ -686,15 +630,15 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Des milliards de textes très variés.</p>",
+                          "content": "<p>des milliards de textes très variés</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Une liste des phrases les plus appréciées par les utilisateurs.</p>",
+                          "content": "<p>une liste des phrases les plus appréciées par les utilisateurs</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
@@ -702,7 +646,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Un dictionnaire et une encyclopédie.</p>",
+                          "content": "<p>un dictionnaire et une encyclopédie</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte contient des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
@@ -718,11 +662,11 @@
                     {
                       "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
                       "type": "qcu",
-                      "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p></p>",
+                      "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Des milliards de conversations tirées des réseaux sociaux.</p>",
+                          "content": "<p>des milliards de conversations tirées des réseaux sociaux</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche sélectionnés pour leur qualité.</p>"
@@ -730,7 +674,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Une liste de règles de grammaire.</p>",
+                          "content": "<p>une liste de règles de grammaire</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
@@ -738,9 +682,9 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Des textes spécifiques sélectionnés par des humains.</p>",
+                          "content": "<p>des textes spécifiques sélectionnés par des humains</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés pour leur qualité.</p>"
                           }
                         }
@@ -758,7 +702,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Une liste de mots vulgaires à ne pas dire.</p>",
+                          "content": "<p>une liste de mots vulgaires à ne pas dire</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
@@ -766,15 +710,15 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Des données sur les préférences des utilisateurs.</p>",
+                          "content": "<p>des données sur les préférences des utilisateurs</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>La liste des règles universelles de la politesse.</p>",
+                          "content": "<p>la liste des règles universelles de la politesse</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
@@ -799,7 +743,7 @@
               "element": {
                 "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
                 "type": "text",
-                "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie : c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong>Pour cela :</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+                "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
               }
             },
             {
@@ -813,14 +757,14 @@
                     "id": "1",
                     "content": "<p>oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bravo ! À vous d'y faire attention à l'avenir ! 😉</p>"
+                      "diagnosis": "<p>Bravo ! À vous d'y faire attention à l'avenir ! 😉</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Essayez encore, et inspirez-vous de l'exemple dans l'indice ci-dessous !&nbsp;🍬</p>"
+                      "diagnosis": "<p>Essayez encore, et inspirez-vous de l'exemple dans l'indice ci-dessous !&nbsp;🍬</p>"
                     }
                   }
                 ]
@@ -832,7 +776,7 @@
                 "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
                 "type": "expand",
                 "title": "Indice",
-                "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant : « Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner » 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
+                "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
               }
             }
           ]
