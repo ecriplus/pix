@@ -37,7 +37,7 @@ export default class IndexClassic extends Component {
 
     <OrganizationInfo @organizationName={{this.currentUser.organization.name}} />
 
-    <ParticipationStatistics @participationStatistics={{@participationStatistics}} />
+    <ParticipationStatistics @participationStatistics={{this.currentUser.participationStatistics}} />
 
     <ActionCardsList>
 

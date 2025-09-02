@@ -26,6 +26,9 @@ export default ApplicationSerializer.extend({
       divisions: {
         related: divisionUrl,
       },
+      participationStatistics: {
+        related: `/api/organizations/${organization.id}/participation-statistics`,
+      },
     };
   },
 });
