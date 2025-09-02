@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.196.0](https://github.com/1024pix/pix/compare/v5.195.0...v5.196.0) (2025-09-02)
+
+### :rocket: Amélioration
+
+- [#13356](https://github.com/1024pix/pix/pull/13356) Ajouter une api pour les parcours combinés (PIX-19311) 
+- [#13370](https://github.com/1024pix/pix/pull/13370) Module IA vous avez dit IA : Ajout des sections et du POI  cursor 
+- [#13374](https://github.com/1024pix/pix/pull/13374) Rendre le parser CSV résistant aussi aux espaces dans les en-têtes (PIX-19357) 
+
+### :bug: Correction
+
+- [#13349](https://github.com/1024pix/pix/pull/13349) Rattrapage des lieux de naissance absents des certificats PDF pour certains candidats inscrits par INSEE code (PIX-19191) 
+
+### :building_construction: Tech
+
+- [#13315](https://github.com/1024pix/pix/pull/13315) Ajouter de la gestion d'erreur si le lien d'un contenu formatif "modulix" recommandé ne passe pas la regex 
+- [#13183](https://github.com/1024pix/pix/pull/13183) Chercher l'algo de déroulé dans la nouvelle table de configurations des certifications (PIX-19066). 
+- [#13367](https://github.com/1024pix/pix/pull/13367) Corriger une erreur d'accessibilité Cypress 
+- [#13371](https://github.com/1024pix/pix/pull/13371) Mise à jour du package epreuves-components 
+- [#13341](https://github.com/1024pix/pix/pull/13341) Suppression de la table `certification-data-calibrations` (PIX-19296). 
+
+### :arrow_up: Montée de version
+
+- [#13375](https://github.com/1024pix/pix/pull/13375) Update dependency @1024pix/epreuves-components to ^1.1.0 (api) 
+- [#13376](https://github.com/1024pix/pix/pull/13376) Update dependency @1024pix/epreuves-components to ^1.1.0 (junior) 
+- [#13377](https://github.com/1024pix/pix/pull/13377) Update dependency @1024pix/epreuves-components to ^1.1.0 (mon-pix) 
+- [#13365](https://github.com/1024pix/pix/pull/13365) Update dependency @badeball/cypress-cucumber-preprocessor to v23 (e2e) 
+- [#13378](https://github.com/1024pix/pix/pull/13378) Update dependency @faker-js/faker to v10 (load-testing) 
+- [#13361](https://github.com/1024pix/pix/pull/13361) Update dependency iconv-lite to ^0.7.0 (api) 
+- [#13359](https://github.com/1024pix/pix/pull/13359) Update dependency webpack to v5.101.3 (junior)
+
 # [5.195.0](https://github.com/1024pix/pix/compare/v5.194.0...v5.195.0) (2025-09-01)
 
 ### :rocket: Amélioration
