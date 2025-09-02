@@ -36,26 +36,26 @@ describe('Certification | Configuration | Integration | Repository | active-cali
         status: 'TO_VALIDATE',
       });
 
-      const secondActiveCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
+      const secondActiveCalibratedChallenge = datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec4567',
         calibrationId: calibration.id,
       });
-      const firstActiveCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
+      const firstActiveCalibratedChallenge = datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec1234',
         calibrationId: calibration.id,
       });
       // from CLEA scope
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec1234',
         calibrationId: cleaCalibration.id,
       });
       // with other calibrationId
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec4567',
         calibrationId: otherCalibration.id,
       });
       // with calibration to validate
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec6789',
         calibrationId: toValidateCalibration.id,
       });
@@ -93,7 +93,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
         status: 'VALIDATED',
       });
 
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec1234',
         calibrationId: calibration.id,
       });
@@ -117,7 +117,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
         status: 'TO_VALIDATE',
       });
 
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         challengeId: 'rec6789',
         calibrationId: toValidateCalibration.id,
       });
