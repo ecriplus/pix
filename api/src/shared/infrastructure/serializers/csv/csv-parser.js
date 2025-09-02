@@ -76,7 +76,13 @@ class CsvParser {
       const decodedInput = iconv.decode(this._input, encoding);
       const {
         meta: { fields },
-      } = papa.parse(decodedInput, { ...PARSING_OPTIONS, preview: 1 });
+      } = papa.parse(decodedInput, {
+        ...PARSING_OPTIONS,
+        transformHeader: (value) => {
+          return value.trim();
+        },
+        preview: 1,
+      });
       if (fields.some((value) => checkedColumns.includes(value))) {
         inputEncoding = encoding;
         break;
@@ -104,9 +110,10 @@ class CsvParser {
     } = papa.parse(decodedInput, {
       ...PARSING_OPTIONS,
       transformHeader: (value) => {
-        const column = this._columns.find((column) => column.name === value);
+        const trimmedValue = value.trim();
+        const column = this._columns.find((column) => column.name === trimmedValue);
 
-        return column ? column.property : value;
+        return column ? column.property : trimmedValue;
       },
     });
 
