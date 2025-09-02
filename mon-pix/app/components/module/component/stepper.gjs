@@ -31,8 +31,8 @@ export default class ModulixStepper extends Component {
   @tracked displayedStepIndex = 0;
 
   @action
-  hasStepJustAppeared(index) {
-    return this.lastDisplayedStepIndex === index;
+  stepIsActive(index) {
+    return this.displayedStepIndex === index;
   }
 
   @action
@@ -41,7 +41,7 @@ export default class ModulixStepper extends Component {
       return false;
     }
 
-    return !this.hasStepJustAppeared(index);
+    return !this.stepIsActive(index);
   }
 
   get hasDisplayableSteps() {
@@ -170,6 +170,7 @@ export default class ModulixStepper extends Component {
                 @onElementAnswer={{@onElementAnswer}}
                 @onElementRetry={{@onElementRetry}}
                 @getLastCorrectionForElement={{@getLastCorrectionForElement}}
+                @isActive={{this.stepIsActive index}}
                 @isHidden={{this.stepIsHidden index}}
                 @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                 @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
@@ -199,7 +200,7 @@ export default class ModulixStepper extends Component {
               @onElementAnswer={{@onElementAnswer}}
               @onElementRetry={{@onElementRetry}}
               @getLastCorrectionForElement={{@getLastCorrectionForElement}}
-              @hasJustAppeared={{this.hasStepJustAppeared index}}
+              @isActive={{this.stepIsActive index}}
               @isHidden={{false}}
               @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
               @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
