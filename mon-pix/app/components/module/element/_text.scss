@@ -11,6 +11,12 @@
     padding: 1rem;
     vertical-align: top;
     border-bottom: 1px solid var(--pix-neutral-100);
+
+    &.width-auto { width: auto; }
+    &.width-15 { width: 15%; }
+    &.width-20 { width: 20%; }
+    &.width-30 { width: 30%; }
+    &.width-full { width: 100%; }
   }
 
   th {
