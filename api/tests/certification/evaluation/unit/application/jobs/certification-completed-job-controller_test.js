@@ -12,15 +12,14 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
   });
 
   context('when assessment is of type CERTIFICATION', function () {
-    const assessmentId = 1214;
+    const certificationCourseId = 123;
     const userId = 4567;
     let data;
 
     beforeEach(function () {
       data = new CertificationCompletedJob({
-        assessmentId,
+        certificationCourseId,
         userId,
-        certificationCourseId: 123,
         locale: FRENCH_SPOKEN,
       });
     });
@@ -36,7 +35,7 @@ describe('Unit | Certification | Application | jobs | CertificationCompletedJobC
 
       // then
       expect(usecases.scoreCompletedCertification).to.have.been.calledWithExactly({
-        assessmentId: data.assessmentId,
+        certificationCourseId: data.certificationCourseId,
         locale: FRENCH_SPOKEN,
       });
     });
