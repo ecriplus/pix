@@ -101,17 +101,18 @@ export class CombinedCourseDetails extends CombinedCourse {
     return questForUser.isSuccessful(dataForQuest);
   }
 
-  #createCampaignCombinedCourseItem(campaign, isCompleted) {
+  #createCampaignCombinedCourseItem(campaign, isCompleted, isLocked) {
     return new CombinedCourseItem({
       id: campaign.id,
       reference: campaign.code,
       title: campaign.name,
       type: ITEM_TYPE.CAMPAIGN,
       isCompleted,
+      isLocked,
     });
   }
 
-  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted) {
+  #createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked) {
     return new CombinedCourseItem({
       id: module.id,
       reference: module.slug,
@@ -119,6 +120,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       type: ITEM_TYPE.MODULE,
       redirection: encryptedCombinedCourseUrl,
       isCompleted,
+      isLocked,
     });
   }
 
@@ -149,6 +151,17 @@ export class CombinedCourseDetails extends CombinedCourse {
     }
   }
 
+  #isCombinedCourseItemLocked(previousItem) {
+    if (!previousItem) {
+      return false;
+    }
+    if (previousItem.isLocked) {
+      return true;
+    } else {
+      return previousItem.isCompleted ? false : true;
+    }
+  }
+
   generateItems({
     itemDetails,
     recommendableModuleIds = [],
@@ -159,6 +172,8 @@ export class CombinedCourseDetails extends CombinedCourse {
     this.items = [];
     const targetProfileIdsThatNeedAFormationItem = [];
     for (const requirement of this.quest.successRequirements) {
+      const previousItem = this.items[this.items.length - 1];
+      const isLocked = this.#isCombinedCourseItemLocked(previousItem);
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
 
@@ -172,7 +187,7 @@ export class CombinedCourseDetails extends CombinedCourse {
         if (doesCampaignRecommendModules && !isCompleted) {
           targetProfileIdsThatNeedAFormationItem.push(campaign.targetProfileId);
         }
-        this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted));
+        this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted, isLocked));
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const isCompleted = requirement.isFulfilled(dataForQuest);
         const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
@@ -183,7 +198,9 @@ export class CombinedCourseDetails extends CombinedCourse {
         const isRecommandable = Boolean(recommandableModule);
 
         if (!isRecommandable) {
-          this.items.push(this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted));
+          this.items.push(
+            this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked),
+          );
           continue;
         }
 
@@ -192,7 +209,9 @@ export class CombinedCourseDetails extends CombinedCourse {
         );
 
         if (isRecommended) {
-          this.items.push(this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted));
+          this.items.push(
+            this.#createModuleCombinedCourseItem(module, encryptedCombinedCourseUrl, isCompleted, isLocked),
+          );
           continue;
         }
 

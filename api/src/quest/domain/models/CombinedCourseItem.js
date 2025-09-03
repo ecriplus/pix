@@ -5,12 +5,13 @@ export const ITEM_TYPE = {
 };
 
 export class CombinedCourseItem {
-  constructor({ id, title, reference, type, redirection, isCompleted }) {
+  constructor({ id, title, reference, type, redirection, isCompleted, isLocked = true }) {
     this.id = id;
     this.title = title;
     this.reference = reference;
     this.redirection = redirection;
     this.type = type;
     this.isCompleted = isCompleted;
+    this.isLocked = isLocked;
   }
 }

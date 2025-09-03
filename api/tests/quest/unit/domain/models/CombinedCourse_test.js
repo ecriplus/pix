@@ -733,6 +733,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             title: campaign.name,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: true,
+            isLocked: false,
           }),
         ]);
       });
@@ -774,6 +775,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             type: ITEM_TYPE.CAMPAIGN,
             redirection: undefined,
             isCompleted: true,
+            isLocked: false,
           }),
         ]);
       });
@@ -832,6 +834,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               type: ITEM_TYPE.MODULE,
               redirection: encryptedCombinedCourseUrl,
               isCompleted: false,
+              isLocked: false,
             }),
           ]);
         });
@@ -899,6 +902,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               title: campaign.name,
               type: ITEM_TYPE.CAMPAIGN,
               isCompleted: true,
+              isLocked: false,
             }),
           ]);
         });
@@ -968,6 +972,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               title: campaign.name,
               type: ITEM_TYPE.CAMPAIGN,
               isCompleted: true,
+              isLocked: false,
             }),
             new CombinedCourseItem({
               id: module.id,
@@ -976,6 +981,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               type: ITEM_TYPE.MODULE,
               redirection: encryptedCombinedCourseUrl,
               isCompleted: false,
+              isLocked: false,
             }),
           ]);
         });
@@ -1067,11 +1073,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 title: campaign.name,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
+                isLocked: false,
               }),
               new CombinedCourseItem({
                 id: 'formation_' + combinedCourse.quest.id + '_' + campaign.targetProfileId,
                 reference: campaign.targetProfileId,
                 type: ITEM_TYPE.FORMATION,
+                isLocked: true,
               }),
             ]);
           });
@@ -1173,11 +1181,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 title: campaign.name,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
+                isLocked: false,
               }),
               new CombinedCourseItem({
                 id: 'formation_' + combinedCourse.quest.id + '_' + campaign.targetProfileId,
                 reference: campaign.targetProfileId,
                 type: ITEM_TYPE.FORMATION,
+                isLocked: true,
               }),
               new CombinedCourseItem({
                 id: secondCampaign.id,
@@ -1185,11 +1195,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 title: secondCampaign.name,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
+                isLocked: true,
               }),
               new CombinedCourseItem({
                 id: 'formation_' + combinedCourse.quest.id + '_' + secondCampaign.targetProfileId,
                 reference: secondCampaign.targetProfileId,
                 type: ITEM_TYPE.FORMATION,
+                isLocked: true,
               }),
             ]);
           });
@@ -1277,11 +1289,13 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 title: campaign.name,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
+                isLocked: false,
               }),
               new CombinedCourseItem({
                 id: 'formation_' + combinedCourse.quest.id + '_' + campaign.targetProfileId,
                 reference: campaign.targetProfileId,
                 type: ITEM_TYPE.FORMATION,
+                isLocked: true,
               }),
               new CombinedCourseItem({
                 id: moduleFromQuest.id,
@@ -1290,6 +1304,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
                 type: ITEM_TYPE.MODULE,
                 redirection: encryptedCombinedCourseUrl,
                 isCompleted: false,
+                isLocked: true,
               }),
             ]);
           });
@@ -1337,6 +1352,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             title: campaign1.name,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: false,
+            isLocked: false,
           }),
         ]);
       });
@@ -1388,7 +1404,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         );
         const dataForQuest = new DataForQuest({
           eligibility: new Eligibility({
-            campaignParticipations: [{ campaignId: campaign1.id, status: 'STARTED' }],
+            campaignParticipations: [
+              { campaignId: campaign1.id, status: 'STARTED' },
+              { campaignId: campaign2.id, status: 'SHARED' },
+            ],
             passages: [],
           }),
         });
@@ -1408,7 +1427,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             reference: campaign2.code,
             title: campaign2.name,
             type: ITEM_TYPE.CAMPAIGN,
-            isCompleted: false,
+            isCompleted: true,
+            isLocked: false,
           }),
           new CombinedCourseItem({
             id: campaign1.id,
@@ -1416,6 +1436,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             title: campaign1.name,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: false,
+            isLocked: false,
           }),
           new CombinedCourseItem({
             id: module.id,
@@ -1424,6 +1445,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             type: ITEM_TYPE.MODULE,
             redirection: redirectionUrl,
             isCompleted: false,
+            isLocked: true,
           }),
         ]);
       });
