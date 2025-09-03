@@ -40,6 +40,10 @@ const register = async function (server) {
             method: securityPreHandlers.checkAuthorizationToManageCampaign,
             assign: 'isAdminOrCreatorFromTheCampaign',
           },
+          {
+            method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
+            assign: 'campaignBelongsToCombinedCourse',
+          },
         ],
         validate: {
           params: Joi.object({
