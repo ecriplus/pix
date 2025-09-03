@@ -88,7 +88,7 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
         });
 
         organizationInvitationRepository.findOnePendingByOrganizationIdAndEmail.resolves(organizationInvitation);
-        organizationInvitationRepository.update.resolves({ id: 123456 });
+        organizationInvitationRepository.update.resolves({ ...organizationInvitation, locale });
         organizationRepository.get.resolves(organization);
 
         // when
@@ -106,7 +106,7 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
           email: userEmailAddress,
           organizationName: organization.name,
           organizationInvitationId: organizationInvitation.id,
-          code: undefined,
+          code,
           locale,
           tags,
         };
