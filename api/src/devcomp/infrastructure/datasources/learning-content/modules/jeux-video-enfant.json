@@ -16,9 +16,9 @@
     "tabletSupport": "comfortable"
   },
   "sections": [
-    {
-      "id": "5d2a1259-f8eb-4bbf-b95d-3ebf7a592ee3",
-      "type": "blank",
+        {
+      "id": "3674b05b-28d2-4aae-9aef-29c3f917d36e",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "d46bad0c-2cf2-4f48-81d6-b97be61cfe32",
@@ -30,7 +30,7 @@
               "element": {
                 "id": "12937b3b-7031-45e3-9aeb-6d3a6ea6533a",
                 "type": "text",
-                "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler à l’école avec ses amis : Dragon’s Kingdom. 🎮</p>"
+                "content": "<p>Franck a une fille de 8 ans, Marilou. Pour son anniversaire, elle voudrait un jeu vidéo dont elle a entendu parler dans la cour de récréation : Dragon’s Kingdom. 🎮</p>"
               }
             }
           ]
@@ -99,7 +99,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "a6733f48-0dce-4b56-9f32-98920c6a3aa0",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "9a521207-4957-4512-8d24-b6e0f3d21226",
           "type": "discovery",
@@ -134,7 +140,7 @@
                           "id": "1",
                           "content": "<p>Le jeu est trop difficile pour les enfants de moins de 12 ans.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non ! Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Par exemple un jeu avec le pictogramme PEGI 7 peut être trop compliqué pour un enfant de 8 ans. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
+                            "diagnosis": "<p>Et non ! Le pictogramme âge PEGI n’indique pas la difficulté d’un jeu. Par exemple un jeu avec le pictogramme PEGI 3 peut être trop compliqué pour un enfant de 7 ans. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
                           }
                         },
                         {
@@ -568,7 +574,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "0402133b-7c8a-416e-b99b-b9dac04ecd6b",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "4a349720-15b7-4c86-a431-344410332fd5",
           "type": "summary",
@@ -601,7 +613,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2dc1e683-a504-4bac-a595-201afd7faedb",
+      "type": "practise",
+      "grains": [
         {
           "id": "aaa9d376-b55d-437f-91ca-bb6ba7505b06",
           "type": "activity",
@@ -673,7 +691,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "00425e43-3e11-401c-b0e3-2a904f453653",
+      "type": "go-further",
+      "grains": [
         {
           "id": "5e318a39-c2ef-4b2a-8a86-acf86092490b",
           "type": "transition",
@@ -801,7 +825,7 @@
         {
           "id": "e48264b9-a0b5-4783-a78a-9844b9a6e77f",
           "type": "transition",
-          "title": "",
+          "title": "Transition",
           "components": [
             {
               "type": "element",
