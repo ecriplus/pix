@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.198.0](https://github.com/1024pix/pix/compare/v5.197.0...v5.198.0) (2025-09-03)
+
+### :rocket: Amélioration
+
+- [#13373](https://github.com/1024pix/pix/pull/13373) Désactiver les propositions des QCM lors de la vérification des réponses (PIX-18932) 
+
+### :bug: Correction
+
+- [#13392](https://github.com/1024pix/pix/pull/13392) Réparer l'affichage du pendant des places disponibles lors d'un changement d'organisation (PIX-19380) 
+
+### :building_construction: Tech
+
+- [#13390](https://github.com/1024pix/pix/pull/13390) Corrige le mapping de la colonne PIX_PLUS_EDU_CPE dans l'import ODS candidats (PIX-19377)
+
 # [5.197.0](https://github.com/1024pix/pix/compare/v5.196.0...v5.197.0) (2025-09-03)
 
 ### :rocket: Amélioration
