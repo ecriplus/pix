@@ -362,6 +362,114 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             );
           });
 
+          describe('when certification has a zero pix score', function () {
+            it('should save the score with rejected status due to zero pix score', async function () {
+              const certificationCourseStartDate = new Date('2022-01-01');
+              // given
+              const certificationAssessment = domainBuilder.buildCertificationAssessment({
+                version: AlgorithmEngineVersion.V3,
+              });
+              const certificationCourse = domainBuilder.buildCertificationCourse({
+                createdAt: certificationCourseStartDate,
+              });
+              const answeredChallenges = allChallenges.slice(0, -1);
+              const { answers, challengeCalibrationsWithoutLiveAlerts } =
+                _buildDataFromAnsweredChallenges(answeredChallenges);
+              const expectedCapacity = -5;
+              const zeroPixScore = 0;
+              const { certificationCourseId } = certificationAssessment;
+              const capacityHistory = [
+                domainBuilder.buildCertificationChallengeCapacity({
+                  certificationChallengeId: challengeCalibrationsWithoutLiveAlerts[0].certificationChallengeId,
+                  capacity: expectedCapacity,
+                }),
+              ];
+              const certificationAssessmentHistory = domainBuilder.buildCertificationAssessmentHistory({
+                capacityHistory,
+              });
+              dependencies.findByCertificationCourseIdAndAssessmentId.resolves({
+                allChallenges: answeredChallenges,
+                askedChallengesWithoutLiveAlerts: answeredChallenges,
+                challengeCalibrationsWithoutLiveAlerts,
+              });
+              scoringConfigurationRepository.getLatestByDateAndLocale
+                .withArgs({ locale: 'fr', date: certificationCourse.getStartDate() })
+                .resolves(scoringConfiguration);
+              flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
+                .withArgs(certificationCourseStartDate)
+                .resolves(baseFlashAlgorithmConfig);
+              answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
+              certificationCourseRepository.get
+                .withArgs({ id: certificationAssessment.certificationCourseId })
+                .resolves(certificationCourse);
+              flashAlgorithmService.getCapacityAndErrorRate
+                .withArgs({
+                  challenges: answeredChallenges,
+                  allAnswers: answers,
+                  capacity: sinon.match.number,
+                  variationPercent: undefined,
+                })
+                .returns({
+                  capacity: expectedCapacity,
+                });
+              flashAlgorithmService.getCapacityAndErrorRateHistory
+                .withArgs({
+                  challenges: challengeCalibrationsWithoutLiveAlerts,
+                  allAnswers: answers,
+                  capacity: sinon.match.number,
+                  variationPercent: undefined,
+                })
+                .returns([
+                  {
+                    capacity: expectedCapacity,
+                  },
+                ]);
+              const event = new CertificationCompletedJob({
+                assessmentId: certificationAssessment.id,
+                userId: 4567,
+                certificationCourseId,
+              });
+
+              // when
+              await handleV3CertificationScoring({
+                event,
+                certificationAssessment,
+                locale: 'fr',
+                answerRepository,
+                assessmentResultRepository,
+                certificationAssessmentHistoryRepository,
+                certificationCourseRepository,
+                competenceMarkRepository,
+                flashAlgorithmConfigurationRepository,
+                flashAlgorithmService,
+                scoringConfigurationRepository,
+                dependencies,
+              });
+
+              // then
+              const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+                pixScore: zeroPixScore,
+                reproducibilityRate: 0,
+                status: AssessmentResult.status.REJECTED,
+                assessmentId: certificationAssessment.id,
+                competenceMarks: [],
+                commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+                  commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+                }),
+                commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+                  commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+                }),
+              });
+              expect(assessmentResultRepository.save).to.have.been.calledWith({
+                certificationCourseId,
+                assessmentResult: expectedAssessmentResult,
+              });
+              expect(certificationAssessmentHistoryRepository.save).to.have.been.calledWithExactly(
+                certificationAssessmentHistory,
+              );
+            });
+          });
+
           describe('when the certification would reach a very high score', function () {
             it('should return the score capped based on the maximum available level when the certification was done', async function () {
               // given

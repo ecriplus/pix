@@ -148,6 +148,16 @@ function _createV3AssessmentResult({
     });
   }
 
+  if (certificationAssessmentScore.nbPix === 0) {
+    return AssessmentResultFactory.buildRejectedDueToZeroPixScore({
+      pixScore: certificationAssessmentScore.nbPix,
+      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      assessmentId: certificationAssessment.id,
+      juryId,
+      competenceMarks: certificationAssessmentScore.competenceMarks,
+    });
+  }
+
   if (_shouldRejectWhenV3CertificationCandidateDidNotAnswerToEnoughQuestions({ allAnswers, certificationCourse })) {
     return AssessmentResultFactory.buildLackOfAnswers({
       pixScore: certificationAssessmentScore.nbPix,
