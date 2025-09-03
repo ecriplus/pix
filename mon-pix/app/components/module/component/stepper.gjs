@@ -1,11 +1,15 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import { concat } from '@ember/helper';
 import { action } from '@ember/object';
+import { guidFor } from '@ember/object/internals';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import Step from 'mon-pix/components/module/component/step';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
+import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import { inc } from 'mon-pix/helpers/inc';
 
 import didInsert from '../../../modifiers/modifier-did-insert';
@@ -27,8 +31,8 @@ export default class ModulixStepper extends Component {
   @tracked displayedStepIndex = 0;
 
   @action
-  hasStepJustAppeared(index) {
-    return this.stepsToDisplay.length - 1 === index;
+  stepIsActive(index) {
+    return this.displayedStepIndex === index;
   }
 
   @action
@@ -37,7 +41,7 @@ export default class ModulixStepper extends Component {
       return false;
     }
 
-    return !this.hasStepJustAppeared(index);
+    return !this.stepIsActive(index);
   }
 
   get hasDisplayableSteps() {
@@ -45,8 +49,17 @@ export default class ModulixStepper extends Component {
   }
 
   @action
+  displayPreviousStep() {
+    if (this.displayedStepIndex === 0) {
+      return;
+    }
+
+    this.displayedStepIndex -= 1;
+  }
+
+  @action
   displayNextStep() {
-    const currentStepPosition = this.currentStepIndex + 1;
+    const currentStepPosition = this.lastDisplayedStepIndex + 1;
     const nextStep = this.displayableSteps[currentStepPosition];
     this.stepsToDisplay = [...this.stepsToDisplay, nextStep];
 
@@ -58,7 +71,16 @@ export default class ModulixStepper extends Component {
     this.displayedStepIndex = currentStepPosition;
   }
 
-  get currentStepIndex() {
+  @action
+  goBackToNextStep() {
+    if (this.isNextButtonControlDisabled) {
+      return;
+    }
+
+    this.displayedStepIndex++;
+  }
+
+  get lastDisplayedStepIndex() {
     return this.stepsToDisplay.length - 1;
   }
 
@@ -67,7 +89,7 @@ export default class ModulixStepper extends Component {
   }
 
   get answerableElementsInCurrentStep() {
-    const currentStep = this.stepsToDisplay[this.stepsToDisplay.length - 1];
+    const currentStep = this.stepsToDisplay[this.lastDisplayedStepIndex];
     return currentStep.elements.filter((element) => element.isAnswerable);
   }
 
@@ -89,6 +111,18 @@ export default class ModulixStepper extends Component {
     return this.args.direction === 'horizontal';
   }
 
+  get isPreviousButtonControlDisabled() {
+    return this.displayedStepIndex === 0;
+  }
+
+  get isNextButtonControlDisabled() {
+    return this.displayedStepIndex === this.lastDisplayedStepIndex;
+  }
+
+  get id() {
+    return this.args.id || `pix-tabs-${guidFor(this)}`;
+  }
+
   <template>
     <div
       class="stepper stepper--{{@direction}}"
@@ -97,6 +131,13 @@ export default class ModulixStepper extends Component {
     >
       {{#if this.isHorizontalDirection}}
         <div class="stepper__controls">
+          <PixIconButton
+            @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
+            @iconName="chevronLeft"
+            aria-disabled="{{this.isPreviousButtonControlDisabled}}"
+            @triggerAction={{this.displayPreviousStep}}
+            aria-controls={{this.id}}
+          />
           <p
             class="stepper-controls__position"
             aria-label="{{t
@@ -107,8 +148,19 @@ export default class ModulixStepper extends Component {
           >
             {{inc this.displayedStepIndex}}/{{this.totalSteps}}
           </p>
+          <PixIconButton
+            @ariaLabel={{t "pages.modulix.buttons.stepper.controls.next.ariaLabel"}}
+            @iconName="chevronRight"
+            aria-disabled="{{this.isNextButtonControlDisabled}}"
+            @triggerAction={{this.goBackToNextStep}}
+            aria-controls={{this.id}}
+          />
         </div>
-        <div class="stepper__steps">
+        <div
+          id={{this.id}}
+          class="stepper__steps"
+          style={{htmlUnsafe (concat "--current-step-index:" this.displayedStepIndex)}}
+        >
           {{#if this.hasDisplayableSteps}}
             {{#each this.stepsToDisplay as |step index|}}
               <Step
@@ -118,7 +170,7 @@ export default class ModulixStepper extends Component {
                 @onElementAnswer={{@onElementAnswer}}
                 @onElementRetry={{@onElementRetry}}
                 @getLastCorrectionForElement={{@getLastCorrectionForElement}}
-                @hasJustAppeared={{this.hasStepJustAppeared index}}
+                @isActive={{this.stepIsActive index}}
                 @isHidden={{this.stepIsHidden index}}
                 @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                 @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
@@ -127,16 +179,17 @@ export default class ModulixStepper extends Component {
                 @onExpandToggle={{@onExpandToggle}}
               />
             {{/each}}
-            {{#if this.shouldDisplayNextButton}}
-              <PixButton
-                aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
-                @variant="primary"
-                @triggerAction={{this.displayNextStep}}
-                class="stepper__next-button"
-              >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
-            {{/if}}
+
           {{/if}}
         </div>
+        {{#if this.shouldDisplayNextButton}}
+          <PixButton
+            aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
+            @variant="primary"
+            @triggerAction={{this.displayNextStep}}
+            class="stepper__next-button"
+          >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+        {{/if}}
       {{else}}
         {{#if this.hasDisplayableSteps}}
           {{#each this.stepsToDisplay as |step index|}}
@@ -147,7 +200,7 @@ export default class ModulixStepper extends Component {
               @onElementAnswer={{@onElementAnswer}}
               @onElementRetry={{@onElementRetry}}
               @getLastCorrectionForElement={{@getLastCorrectionForElement}}
-              @hasJustAppeared={{this.hasStepJustAppeared index}}
+              @isActive={{this.stepIsActive index}}
               @isHidden={{false}}
               @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
               @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}

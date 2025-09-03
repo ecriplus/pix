@@ -1680,6 +1680,14 @@
           }
         },
         "stepper": {
+          "controls": {
+            "next": {
+              "ariaLabel": "Étape suivante"
+            },
+            "previous": {
+              "ariaLabel": "Étape précédente"
+            }
+          },
           "next": {
             "ariaLabel": "Aller à l'étape suivante",
             "name": "Suivant"
