@@ -4,15 +4,14 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 export default class MaximumPlacesExceeded extends Component {
-  @service store;
+  @service currentUser;
 
-  get displayMaximumPlacesExceededBanner() {
-    const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachedMaximumPlacesLimit;
+  get displayMaximumPlacesLimitBanner() {
+    return this.currentUser.placeStatistics?.hasReachedMaximumPlacesLimit;
   }
 
   <template>
-    {{#if this.displayMaximumPlacesExceededBanner}}
+    {{#if this.displayMaximumPlacesLimitBanner}}
       <PixBannerAlert @type="error">
         {{t
           "banners.maximum-places-exceeded.message"

@@ -28,10 +28,8 @@ module('Integration | Component | Campaign | ListHeader', function (hooks) {
     module('when places limit is not reached', function () {
       test('it displays a create link', async function (assert) {
         // given
-        const storeService = this.owner.lookup('service:store');
-        sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: false }]);
-
+        const currentUser = this.owner.lookup('service:current-user');
+        sinon.stub(currentUser, 'organizationPlaceStatistics').value({ hasReachedMaximumPlacesLimit: false });
         // when
         const screen = await render(<template><ListHeader /></template>);
 
@@ -43,9 +41,8 @@ module('Integration | Component | Campaign | ListHeader', function (hooks) {
     module('when places limit is reached', function () {
       test('it displays a disabled link', async function (assert) {
         // given
-        const storeService = this.owner.lookup('service:store');
-        sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
+        const currentUser = this.owner.lookup('service:current-user');
+        sinon.stub(currentUser, 'organizationPlaceStatistics').value({ hasReachedMaximumPlacesLimit: true });
 
         // when
         const screen = await render(<template><ListHeader /></template>);
