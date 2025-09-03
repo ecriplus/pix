@@ -89,7 +89,7 @@
   },
   "devDependencies": {
     "@1024pix/epreuves-components": "^1.2.0",
-    "@1024pix/eslint-plugin": "^2.1.8",
+    "@1024pix/eslint-plugin": "^2.1.10",
     "@babel/eslint-parser": "^7.18.2",
     "@babel/plugin-syntax-import-attributes": "^7.24.1",
     "@eslint/compat": "^1.0.1",
