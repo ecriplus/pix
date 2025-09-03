@@ -48,7 +48,7 @@ module('Acceptance | Team Creation', function (hooks) {
 
         // then
 
-        assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+        assert.strictEqual(currentURL(), '/');
       });
     });
 

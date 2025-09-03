@@ -1,4 +1,4 @@
-import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
@@ -82,7 +82,7 @@ module('Acceptance | authentication', function (hooks) {
         createPrescriberByUser({ user });
       });
 
-      test('it should redirect user to the campaigns list', async function (assert) {
+      test('it should redirect user to the homepage', async function (assert) {
         // given
         server.create('campaign');
 
@@ -94,7 +94,7 @@ module('Acceptance | authentication', function (hooks) {
         await clickByName('Je me connecte');
 
         // then
-        assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+        assert.strictEqual(currentURL(), '/');
         assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       });
 
@@ -127,22 +127,22 @@ module('Acceptance | authentication', function (hooks) {
       });
 
       module('When the prescriber has the missions management feature', function () {
-        test('it should redirect prescriber to missions page', async function (assert) {
+        test('it should redirect prescriber to homepage', async function (assert) {
           prescriber.features = { ...prescriber.features, MISSIONS_MANAGEMENT: { active: true, params: null } };
           // when
           await visit('/connexion');
 
           // then
-          assert.strictEqual(currentURL(), '/missions');
+          assert.strictEqual(currentURL(), '/');
           assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
         });
       });
-      test('it should redirect prescriber to campaign list page', async function (assert) {
+      test('it should redirect prescriber to homepage', async function (assert) {
         // when
         await visit('/connexion');
 
         // then
-        assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+        assert.strictEqual(currentURL(), '/');
         assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       });
 
@@ -161,14 +161,6 @@ module('Acceptance | authentication', function (hooks) {
 
         // then
         assert.ok(screen.getByText('BRO & Evil Associates (EXTBRO)'));
-      });
-
-      test('it should redirect prescriber to the campaigns list on root url', async function (assert) {
-        // when
-        await visit('/');
-
-        // then
-        assert.strictEqual(currentURL(), '/campagnes/les-miennes');
       });
 
       module('when a lang query param is present', function () {
@@ -218,7 +210,7 @@ module('Acceptance | authentication', function (hooks) {
       await visit('/certifications');
 
       // then
-      assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+      assert.strictEqual(currentURL(), '/');
     });
 
     module('When prescriber can access missions', function (hooks) {
@@ -269,8 +261,8 @@ module('Acceptance | authentication', function (hooks) {
         await authenticateSession(user.id);
 
         const screen = await visit('/');
-
-        const activateButton = await screen.findByRole('button', {
+        const navigation = await screen.getByRole('complementary');
+        const activateButton = await within(navigation).findByRole('button', {
           name: t('navigation.school-sessions.activate-button'),
         });
         await click(activateButton);

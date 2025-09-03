@@ -48,6 +48,7 @@ test(
     await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
     let campaignCode: string | null;
     await test.step('creates the campaign', async () => {
+      await pixOrgaPage.getByRole('link', { name: 'Campagnes', exact: true }).click();
       await pixOrgaPage.getByRole('link', { name: 'Créer une campagne' }).click();
       const createCampaignPage = new PixOrgaPage(pixOrgaPage);
       await createCampaignPage.createEvaluationCampaign({

@@ -238,7 +238,7 @@ module('Acceptance | join', function (hooks) {
         }).id;
       });
 
-      test('redirects user to the campaigns list that contains prescriber name', async function (assert) {
+      test('redirects user to the homepage that contains prescriber name', async function (assert) {
         // given
         server.create('campaign');
 
@@ -251,7 +251,7 @@ module('Acceptance | join', function (hooks) {
         await clickByName(loginButton);
 
         // then
-        assert.strictEqual(currentURL(), '/campagnes/les-miennes');
+        assert.strictEqual(currentURL(), '/');
         assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
         assert.ok(screen.getByText('Harry Cover'));
       });

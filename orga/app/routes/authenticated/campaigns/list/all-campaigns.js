@@ -28,7 +28,7 @@ export default class AuthenticatedCampaignsListAllCampaignsRoute extends Route {
 
   beforeModel() {
     if (!this.currentUser.canAccessCampaignsPage) {
-      return this.router.replaceWith(this.currentUser.homePage);
+      return this.router.replaceWith('authenticated.index');
     }
   }
 

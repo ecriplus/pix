@@ -169,7 +169,7 @@ module('Acceptance | Missions List', function (hooks) {
       await visit('/campagnes/les-miennes');
 
       // then
-      assert.deepEqual(currentURL(), '/missions');
+      assert.deepEqual(currentURL(), '/');
     });
 
     test('should not access to all-campaigns page', async function (assert) {
@@ -183,7 +183,7 @@ module('Acceptance | Missions List', function (hooks) {
       await visit('/campagnes/toutes');
 
       // then
-      assert.deepEqual(currentURL(), '/missions');
+      assert.deepEqual(currentURL(), '/');
     });
   });
 });

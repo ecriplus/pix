@@ -97,11 +97,14 @@ export default class SidebarMenu extends Component {
       @closeLabel={{t "navigation.main.close"}}
     >
       <:brand>
-        <LinkTo @route={{this.redirectionRoute}}>
+        <LinkTo @route="authenticated.index">
           <img src="{{this.rootUrl}}/pix-orga.svg" class="pix-orga-logo" alt="{{t 'common.home-page'}}" />
         </LinkTo>
       </:brand>
       <:navElements>
+        <PixNavigationButton @route="authenticated.index" @icon="home">
+          {{t "navigation.main.home"}}</PixNavigationButton>
+
         {{#if this.shouldDisplayCampaignsEntry}}
           <PixNavigationButton @route={{this.redirectionRoute}} @icon="conversionPath">
             {{t "navigation.main.campaigns"}}</PixNavigationButton>

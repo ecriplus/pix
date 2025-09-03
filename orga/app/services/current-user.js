@@ -16,13 +16,6 @@ export default class CurrentUserService extends Service {
   @tracked organizationPlaceStatistics;
   @tracked participationStatistics;
 
-  get homePage() {
-    if (this.canAccessMissionsPage) {
-      return 'authenticated.missions';
-    }
-    return 'authenticated.campaigns';
-  }
-
   get canAccessImportPage() {
     return Boolean(
       (this.isSCOManagingStudents || this.isSUPManagingStudents || this.hasLearnerImportFeature) &&

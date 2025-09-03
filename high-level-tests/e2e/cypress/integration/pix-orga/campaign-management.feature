@@ -7,6 +7,7 @@ Fonctionnalité: Gestion des Campagnes
 
   Scénario: Je consulte le détail d'une campagne de collecte de profils
     Étant donné que je suis connecté à Pix Orga
+    Et je clique sur "Campagnes"
     Lorsque je clique sur "Envoi profils Lannister"
     Alors je vois le détail de la campagne "Envoi profils Lannister"
     Lorsque je clique sur "Activité"
@@ -16,6 +17,7 @@ Fonctionnalité: Gestion des Campagnes
 
   Scénario: Je créé une campagne de collecte de profils
     Étant donné que je suis connecté à Pix Orga
+    Et je clique sur "Campagnes"
     Lorsque je clique sur "Créer une campagne"
     Alors je suis redirigé vers la page "creation"
     Lorsque je saisis "Campagne de l'Ouest" dans le champ "Nom de la campagne"
