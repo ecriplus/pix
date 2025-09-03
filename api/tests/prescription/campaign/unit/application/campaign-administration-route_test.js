@@ -398,6 +398,21 @@ describe('Unit | Application | Router | campaign-administration-router', functio
     });
   });
 
+  it('should call checkCampaignBelongsToCombinedCourse pre-handler', async function () {
+    // given
+    sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
+    sinon.stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse').callsFake((request, h) => h.response(true));
+
+    const httpTestServer = new HttpTestServer();
+    await httpTestServer.register(moduleUnderTest);
+
+    // when
+    await httpTestServer.request('PUT', '/api/campaigns/123/archive');
+
+    // then
+    expect(securityPreHandlers.checkCampaignBelongsToCombinedCourse).called;
+  });
+
   describe('DELETE /api/campaigns/{campaignId}/archive', function () {
     it('should return 400 with an invalid campaign id', async function () {
       // given
