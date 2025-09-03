@@ -19,9 +19,10 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     ENV.APP.API_HOST = originalAppHost;
   });
 
-  let store, screen, fileSaver, notifications, access_token;
+  let store, screen, fileSaver, notifications, access_token, currentUser;
 
   hooks.beforeEach(function () {
+    currentUser = this.owner.lookup('service:current-user');
     class sessionService extends Service {
       isAuthenticated = true;
       data = {
@@ -38,7 +39,6 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     ENV.APP.API_HOST = 'https://myapp.com';
     access_token = Symbol('ACCESS_TOKEN');
     store = this.owner.lookup('service:store');
-    this.owner.lookup('service:current-user');
     fileSaver = this.owner.lookup('service:file-saver');
     notifications = this.owner.lookup('service:notifications');
     this.owner.setupRouter();
@@ -116,9 +116,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
 
     module('when has reached maximum places limit is true', function (hooks) {
       hooks.beforeEach(function () {
-        const storeService = this.owner.lookup('service:store');
-        sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
+        sinon.stub(currentUser, 'organizationPlaceStatistics').value({ hasReachedMaximumPlacesLimit: true });
       });
 
       test('it should display disabled evaluation results item', async function (assert) {
@@ -195,9 +193,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
 
     module('when has reach maximum places is true', function (hooks) {
       hooks.beforeEach(function () {
-        const storeService = this.owner.lookup('service:store');
-        sinon.stub(storeService, 'peekAll');
-        storeService.peekAll.returns([{ hasReachedMaximumPlacesLimit: true }]);
+        sinon.stub(currentUser, 'organizationPlaceStatistics').value({ hasReachedMaximumPlacesLimit: true });
       });
 
       test('it should display disabled profile results item', async function (assert) {

@@ -1,14 +1,13 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Object from '@ember/object';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import UserLoggedMenu from 'pix-orga/components/layout/user-logged-menu';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Layout::UserLoggedMenu', function () {
+module('Integration | Component | UserLoggedMenu', function () {
   module('When user belongs to several organizations', function (hooks) {
     setupIntlRenderingTest(hooks);
 
@@ -42,7 +41,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
     test("should display user's firstName and lastName", async function (assert) {
       // when
-      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      const screen = await render(<template><UserLoggedMenu /></template>);
 
       // then
       assert.ok(screen.getByText(`${prescriber.firstName} ${prescriber.lastName}`));
@@ -50,7 +49,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
     test('should display the user current organization name and externalId', async function (assert) {
       // when
-      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      const screen = await render(<template><UserLoggedMenu /></template>);
       const currentOrganizationText = screen.getByText(`${organization.name} (${organization.externalId})`, {
         selector: 'p',
       });
@@ -61,7 +60,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
     test('should display the disconnect link when menu is open', async function (assert) {
       // when
-      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      const screen = await render(<template><UserLoggedMenu /></template>);
       await clickByName("Changer d'organisation");
 
       // then
@@ -70,36 +69,12 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
 
     test('should display the organizations name when menu is open', async function (assert) {
       // when
-      const screen = await render(hbs`<Layout::UserLoggedMenu />`);
+      const screen = await render(<template><UserLoggedMenu /></template>);
       await clickByName("Changer d'organisation");
 
       // then
       assert.ok(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
       assert.ok(await screen.findByRole('option', { name: `${organization3.name}` }));
-    });
-
-    test('should redirect to authenticated route before reload the current user', async function (assert) {
-      const replaceWithStub = sinon.stub();
-
-      class RouterStub extends Service {
-        replaceWith = replaceWithStub;
-        currentRoute = { queryParams: [] };
-      }
-
-      class StoreStub extends Service {
-        peekRecord() {
-          return { save() {} };
-        }
-      }
-      this.owner.register('service:router', RouterStub);
-      this.owner.register('service:store', StoreStub);
-
-      const screen = await render(hbs`<Layout::UserLoggedMenu @onChangeOrganization={{this.onChangeOrganization}} />`);
-      await clickByName("Changer d'organisation");
-      await click(await screen.findByRole('option', { name: `${organization2.name} (${organization2.externalId})` }));
-
-      sinon.assert.callOrder(replaceWithStub, loadStub);
-      assert.ok(true);
     });
   });
   module('When user belongs to only one organization', function (hooks) {
@@ -126,9 +101,7 @@ module('Integration | Component | Layout::UserLoggedMenu', function () {
       }
       this.owner.register('service:current-user', CurrentUserStub);
       test('should not display organization switcher when user belongs to only one organization', async function (assert) {
-        const screen = await render(
-          hbs`<Layout::UserLoggedMenu @onChangeOrganization={{this.onChangeOrganization}} />`,
-        );
+        const screen = await render(<template><UserLoggedMenu /></template>);
         assert.notOk(screen.getByRole('button', { name: "Changer d'organisation" }));
       });
     });

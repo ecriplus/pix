@@ -55,9 +55,7 @@ export default class UserLoggedMenu extends Component {
     userOrgaSettings.organization = selectedOrganization;
     await userOrgaSettings.save({ adapterOptions: { userId: prescriber.id } });
 
-    const queryParams = {};
-    Object.keys(this.router.currentRoute.queryParams).forEach((key) => (queryParams[key] = undefined));
-    this.router.replaceWith('authenticated', { queryParams });
+    this.router.replaceWith('authenticated.index');
 
     await this.currentUser.load();
   }

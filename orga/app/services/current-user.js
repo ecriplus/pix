@@ -64,6 +64,8 @@ export default class CurrentUserService extends Service {
       this.organizationPlaceStatistics = await this.store.queryRecord('organization-place-statistic', {
         organizationId: this.organization.id,
       });
+    } else {
+      this.organizationPlaceStatistics = null;
     }
   }
 

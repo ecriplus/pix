@@ -16,10 +16,10 @@ export default class CampaignTabs extends Component {
   @service session;
   @service pixMetrics;
   @service store;
+  @service currentUser;
 
   get hasReachedPlacesLimit() {
-    const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachedMaximumPlacesLimit;
+    return this.currentUser.placeStatistics?.hasReachedMaximumPlacesLimit;
   }
 
   @action

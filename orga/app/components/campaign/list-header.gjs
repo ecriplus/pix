@@ -8,11 +8,10 @@ import { t } from 'ember-intl';
 import PageTitle from '../ui/page-title';
 
 export default class List extends Component {
-  @service store;
+  @service currentUser;
 
   get hasReachedPlacesLimit() {
-    const statistics = this.store.peekAll('organization-place-statistic')?.[0];
-    return statistics?.hasReachedMaximumPlacesLimit;
+    return this.currentUser.placeStatistics?.hasReachedMaximumPlacesLimit;
   }
 
   get campaignCreationRoute() {
