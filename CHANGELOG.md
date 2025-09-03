@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.197.0](https://github.com/1024pix/pix/compare/v5.196.0...v5.197.0) (2025-09-03)
+
+### :rocket: Amélioration
+
+- [#13364](https://github.com/1024pix/pix/pull/13364) Abaisser les niveaux de titre des modules (PIX-19233) 
+- [#13308](https://github.com/1024pix/pix/pull/13308) Afficher la page d'accueil de Pix Orga par défaut (PIX-18958) 
+- [#13352](https://github.com/1024pix/pix/pull/13352) Ajouter les contrôles précédent/suivant au stepper horizontal (PIX-19293) 
+- [#13387](https://github.com/1024pix/pix/pull/13387) Module PPN ENT - Ajout sections et modifs ministère 
+- [#13388](https://github.com/1024pix/pix/pull/13388) Module PPN JV - ajout sections et modifs ministère 
+- [#13381](https://github.com/1024pix/pix/pull/13381) Permettre de définir la taille des colonnes de tableau dans les modules (PIX-19381) 
+
+### :bug: Correction
+
+- [#13384](https://github.com/1024pix/pix/pull/13384) Dans le QCU déclaratif, aligner les phrases longues à gauche (PIX-19371) 
+- [#13369](https://github.com/1024pix/pix/pull/13369) Recharger les statistiques de participation de la page d'accueil (PIX-19350) 
+
+### :building_construction: Tech
+
+- [#13379](https://github.com/1024pix/pix/pull/13379) Améliorer les espacements entre les élements du composant PageTitle (PIX-19386). 
+- [#13347](https://github.com/1024pix/pix/pull/13347) Gestion des locales dans les emails (partie 3) (PIX-19267) 
+- [#13382](https://github.com/1024pix/pix/pull/13382) Upgrade du package pour ajouter nouveau POI calcul-impact 
+
+### :arrow_up: Montée de version
+
+- [#13391](https://github.com/1024pix/pix/pull/13391) Lock file maintenance (orga) 
+- [#13380](https://github.com/1024pix/pix/pull/13380) Update dependency @faker-js/faker to v10 (orga)
+
 # [5.196.0](https://github.com/1024pix/pix/compare/v5.195.0...v5.196.0) (2025-09-02)
 
 ### :rocket: Amélioration
