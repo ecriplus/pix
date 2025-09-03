@@ -2,7 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import ModulixQcm from 'mon-pix/components/module/element/qcm';
+import ModulixQcm, { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcm';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -13,12 +13,16 @@ module('Integration | Component | Module | QCM', function (hooks) {
 
   let passageEventService, passageEventRecordStub;
 
+  let clock;
+
   hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers();
     passageEventService = this.owner.lookup('service:passageEvents');
     passageEventRecordStub = sinon.stub(passageEventService, 'record');
   });
 
   hooks.afterEach(function () {
+    clock.restore();
     passageEventRecordStub.restore();
   });
 
@@ -54,7 +58,7 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.dom(verifyButton).exists();
   });
 
-  test('should call action and send an event when verify button is clicked', async function (assert) {
+  test('should disable interaction, call action and send an event when verify button is clicked', async function (assert) {
     // given
     const answeredProposal = [
       { id: '1', content: 'select1' },
@@ -75,13 +79,20 @@ module('Integration | Component | Module | QCM', function (hooks) {
 
     // when
     const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
-    await click(screen.getByLabelText(answeredProposal[0].content));
-    await click(screen.getByLabelText(answeredProposal[1].content));
+    const proposal1Element = screen.getByLabelText(qcmElement.proposals[0].content);
+    const proposal2Element = screen.getByLabelText(qcmElement.proposals[1].content);
+    const proposal3Element = screen.getByLabelText(qcmElement.proposals[2].content);
+    await click(proposal1Element);
+    await click(proposal2Element);
 
     const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
     await click(verifyButton);
 
     // then
+    assert.dom(proposal1Element).hasAria('disabled', 'true');
+    assert.dom(proposal2Element).hasAria('disabled', 'true');
+    assert.dom(proposal3Element).hasAria('disabled', 'true');
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     sinon.assert.calledWith(onAnswerSpy, { userResponse, element: qcmElement });
     sinon.assert.calledWithExactly(passageEventRecordStub, {
       type: 'QCM_ANSWERED',
@@ -112,6 +123,7 @@ module('Integration | Component | Module | QCM', function (hooks) {
     // when
     await click(screen.getByLabelText('checkbox1'));
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
 
     // then
     assert.dom(screen.getByRole('alert')).exists();
@@ -135,8 +147,10 @@ module('Integration | Component | Module | QCM', function (hooks) {
 
     // when
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
     await click(screen.getByLabelText('checkbox1'));
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
 
     // then
     assert.dom(screen.queryByRole('alert', { name: 'Pour valider, sélectionnez une réponse.' })).doesNotExist();
