@@ -10,7 +10,7 @@ function todayDate() {
 }
 
 <template>
-  <PageTitle @spaceBetweenTools={{true}}>
+  <PageTitle @spaceBetweenTools={{true}} @displayNotificationAlert={{true}}>
     <:title>
       {{t "pages.places.title"}}
     </:title>

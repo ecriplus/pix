@@ -1,9 +1,7 @@
 @use 'pix-design-tokens/typography';
 
 .attestations-page {
-  display: flex;
-  flex-direction: column;
-  padding: var(--pix-spacing-8x) 0;
+  margin-bottom: var(--pix-spacing-8x) 0;
 
   &__title {
     @extend %pix-title-m;

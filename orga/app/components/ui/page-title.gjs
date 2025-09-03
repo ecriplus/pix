@@ -1,3 +1,5 @@
+import { and } from 'ember-truth-helpers';
+
 function setTitleClasses(spaceBetweenTools, centerTitle) {
   const classes = ['page-title__main'];
 
@@ -19,15 +21,15 @@ function setTitleClasses(spaceBetweenTools, centerTitle) {
       {{/if}}
     </div>
 
-    {{#if (has-block "notificationAlert")}}
-      <div class="page-title__notification-alert">
-        {{yield to="notificationAlert"}}
+    {{#if (has-block "subtitle")}}
+      <div>
+        {{yield to="subtitle"}}
       </div>
     {{/if}}
 
-    {{#if (has-block "subtitle")}}
-      <div class="page-title__sub-title">
-        {{yield to="subtitle"}}
+    {{#if (and (has-block "notificationAlert") @displayNotificationAlert)}}
+      <div class="page-title__notification-alert">
+        {{yield to="notificationAlert"}}
       </div>
     {{/if}}
 
