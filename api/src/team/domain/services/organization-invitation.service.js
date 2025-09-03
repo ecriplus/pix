@@ -59,7 +59,7 @@ const createOrUpdateOrganizationInvitation = async ({
     organizationName: organization.name,
     organizationInvitationId: organizationInvitation.id,
     code: organizationInvitation.code,
-    locale,
+    locale: locale || organizationInvitation.locale,
     tags,
   });
   if (emailingAttempt.hasFailed()) {

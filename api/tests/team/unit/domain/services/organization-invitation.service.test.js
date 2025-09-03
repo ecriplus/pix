@@ -113,6 +113,47 @@ describe('Unit | Team | Domain | Service | organization-invitation', function ()
 
         expect(mailService.sendOrganizationInvitationEmail).to.has.been.calledWithExactly(expectedParameters);
       });
+
+      context('when locale is undefined', function () {
+        it('should re-send an email with previous locale', async function () {
+          // given
+          const tags = undefined;
+          const organization = domainBuilder.buildOrganization();
+          const organizationInvitation = new OrganizationInvitation({
+            id: 123456,
+            role: Membership.roles.MEMBER,
+            status: 'pending',
+            locale: 'fr-FR',
+            code,
+          });
+
+          organizationInvitationRepository.findOnePendingByOrganizationIdAndEmail.resolves(organizationInvitation);
+          organizationInvitationRepository.update.resolves(organizationInvitation);
+          organizationRepository.get.resolves(organization);
+
+          // when
+          await organizationInvitationService.createOrUpdateOrganizationInvitation({
+            organizationRepository,
+            organizationInvitationRepository,
+            organizationId: organization.id,
+            email: userEmailAddress,
+            locale: undefined,
+            dependencies: { mailService },
+          });
+
+          // then
+          const expectedParameters = {
+            email: userEmailAddress,
+            organizationName: organization.name,
+            organizationInvitationId: organizationInvitation.id,
+            code,
+            locale: 'fr-FR',
+            tags,
+          };
+
+          expect(mailService.sendOrganizationInvitationEmail).to.has.been.calledWithExactly(expectedParameters);
+        });
+      });
     });
 
     context('when mailing provider returns an invalid email error', function () {
