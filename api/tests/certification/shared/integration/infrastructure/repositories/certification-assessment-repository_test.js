@@ -86,79 +86,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
     await mockLearningContent(learningContent);
   });
 
-  describe('#get', function () {
-    let certificationAssessmentId;
-    let expectedCertificationCourseId;
-    let expectedUserId;
-    let expectedState;
-    let expectedCreatedAt;
-    let expectedCompletedAt;
-    let expectedEndedAt;
-
-    context('when the certification assessment exists', function () {
-      beforeEach(function () {
-        expectedState = CertificationAssessment.states.COMPLETED;
-        expectedCreatedAt = new Date('2020-01-01T00:00:00Z');
-        expectedCompletedAt = new Date('2020-01-03T00:00:00Z');
-        expectedEndedAt = new Date('2020-01-02T00:00:00Z');
-
-        const dbf = databaseBuilder.factory;
-        expectedUserId = dbf.buildUser().id;
-        expectedCertificationCourseId = dbf.buildCertificationCourse({
-          userId: expectedUserId,
-          createdAt: expectedCreatedAt,
-          completedAt: expectedCompletedAt,
-          endedAt: expectedEndedAt,
-        }).id;
-        certificationAssessmentId = dbf.buildAssessment({
-          userId: expectedUserId,
-          certificationCourseId: expectedCertificationCourseId,
-          state: expectedState,
-        }).id;
-        dbf.buildAnswer({ assessmentId: certificationAssessmentId, challengeId: 'recChalA' });
-        dbf.buildAnswer({ assessmentId: certificationAssessmentId, challengeId: 'recChalB' });
-        dbf.buildAnswer({ assessmentId: certificationAssessmentId, challengeId: 'recChalB' });
-        dbf.buildCertificationChallenge({
-          challengeId: 'recChalA',
-          courseId: expectedCertificationCourseId,
-          isNeutralized: true,
-        });
-        dbf.buildCertificationChallenge({ challengeId: 'recChalB', courseId: expectedCertificationCourseId });
-
-        return databaseBuilder.commit();
-      });
-
-      it('should return the certification assessment with certification challenges and answers', async function () {
-        // when
-        const certificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
-
-        // then
-        expect(certificationAssessment).to.be.an.instanceOf(CertificationAssessment);
-        expect(certificationAssessment.id).to.equal(certificationAssessmentId);
-        expect(certificationAssessment.userId).to.equal(expectedUserId);
-        expect(certificationAssessment.certificationCourseId).to.equal(expectedCertificationCourseId);
-        expect(certificationAssessment.state).to.equal(expectedState);
-        expect(certificationAssessment.version).to.equal(2);
-        expect(dayjs(certificationAssessment.endedAt).toISOString()).to.equal(dayjs(expectedEndedAt).toISOString());
-
-        expect(certificationAssessment.certificationAnswersByDate).to.have.lengthOf(2);
-        expect(certificationAssessment.certificationChallenges).to.have.lengthOf(2);
-        expect(certificationAssessment.certificationChallenges[0].isNeutralized).to.be.true;
-        expect(certificationAssessment.certificationChallenges[0].type).to.equal(Challenge.Type.QCU);
-      });
-    });
-
-    context('when the assessment does not exist', function () {
-      it('should throw a NotFoundError', async function () {
-        // when
-        const error = await catchErr(certificationAssessmentRepository.get)(12345);
-
-        // then
-        expect(error).to.be.instanceOf(NotFoundError);
-      });
-    });
-  });
-
   describe('#getByCertificationCourseId', function () {
     let expectedCertificationAssessmentId;
     let certificationCourseId;
@@ -311,7 +238,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
 
       await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
 
       // when
       certificationAssessmentToBeSaved.neutralizeChallengeByRecId(certificationChallenge1RecId);
@@ -319,7 +248,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
 
       // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       expect(persistedCertificationAssessment.certificationChallenges[0].isNeutralized).to.be.true;
       expect(persistedCertificationAssessment.certificationChallenges[1].isNeutralized).to.be.true;
       expect(persistedCertificationAssessment.certificationChallenges[2].isNeutralized).to.be.false;
@@ -352,7 +283,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
 
       await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
 
       // when
       certificationAssessmentToBeSaved.certificationChallenges.map((certificationChallenge) => {
@@ -363,7 +296,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
 
       // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       expect(persistedCertificationAssessment.certificationChallenges[0].hasBeenSkippedAutomatically).to.be.false;
       expect(persistedCertificationAssessment.certificationChallenges[1].hasBeenSkippedAutomatically).to.be.true;
     });
@@ -402,7 +337,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
 
       await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
 
       certificationAssessmentToBeSaved.validateAnswerByNumberIfFocusedOut(1);
       certificationAssessmentToBeSaved.validateAnswerByNumberIfFocusedOut(2);
@@ -411,7 +348,9 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
 
       // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       expect(persistedCertificationAssessment.certificationAnswersByDate[0].result).to.deep.equal(AnswerStatus.OK);
       expect(persistedCertificationAssessment.certificationAnswersByDate[1].result).to.deep.equal(AnswerStatus.SKIPPED);
     });
@@ -421,7 +360,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       const dbf = databaseBuilder.factory;
       const userId = dbf.buildUser().id;
       const certificationCourseId = dbf.buildCertificationCourse({ userId }).id;
-      const certificationAssessmentId = dbf.buildAssessment({
+      dbf.buildAssessment({
         userId,
         certificationCourseId,
         state: 'started',
@@ -435,14 +374,18 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
 
       await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       certificationAssessmentToBeSaved.state = CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION;
 
       // when
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
 
       // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       expect(persistedCertificationAssessment.state).to.deep.equal(
         CertificationAssessment.states.ENDED_DUE_TO_FINALIZATION,
       );
@@ -454,7 +397,7 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       const dbf = databaseBuilder.factory;
       const userId = dbf.buildUser().id;
       const certificationCourseId = dbf.buildCertificationCourse({ userId }).id;
-      const certificationAssessmentId = dbf.buildAssessment({
+      dbf.buildAssessment({
         userId,
         certificationCourseId,
         state: 'started',
@@ -468,14 +411,18 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
 
       await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       certificationAssessmentToBeSaved.endedAt = endedAt;
 
       // when
       await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
 
       // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.get(certificationAssessmentId);
+      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+        certificationCourseId,
+      });
       expect(persistedCertificationAssessment.endedAt).to.deep.equal(endedAt);
     });
   });

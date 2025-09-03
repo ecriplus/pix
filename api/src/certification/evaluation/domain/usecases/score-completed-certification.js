@@ -3,20 +3,30 @@
  * @typedef {import('../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  * @typedef {import('./index.js').Services} Services
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
+ * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-/**
- * @param {Object} params
- * @param {CertificationAssessment} params.certificationAssessment
- * @param {string} params.locale
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {Services} params.services
- */
 export const scoreCompletedCertification = withTransaction(
-  async ({ assessmentId, locale, certificationCourseRepository, certificationAssessmentRepository, services }) => {
-    const certificationAssessment = await certificationAssessmentRepository.get(assessmentId);
+  /**
+   * @param {Object} params
+   * @param {number} params.certificationCourseId
+   * @param {string} params.locale
+   * @param {CertificationCourseRepository} params.certificationCourseRepository
+   * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
+   * @param {Services} params.services
+   */
+  async ({
+    certificationCourseId,
+    locale,
+    certificationCourseRepository,
+    certificationAssessmentRepository,
+    services,
+  }) => {
+    const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
+      certificationCourseId,
+    });
 
     if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
       return;

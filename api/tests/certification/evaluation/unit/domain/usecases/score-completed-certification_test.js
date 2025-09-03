@@ -33,7 +33,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
       getCreationDate: sinon.stub(),
     };
     certificationAssessmentRepository = {
-      get: sinon.stub(),
+      getByCertificationCourseId: sinon.stub(),
     };
   });
 
@@ -59,7 +59,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
     describe('when the candidate has passed a complementary certification', function () {
       it('should do nothing', async function () {
         // given
-        certificationAssessmentRepository.get.resolves(
+        certificationAssessmentRepository.getByCertificationCourseId.resolves(
           domainBuilder.buildCertificationAssessment({
             id: assessmentId,
             certificationCourseId,
@@ -79,7 +79,11 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
         };
 
         // when
-        await scoreCompletedCertification({ ...dependencies });
+        await scoreCompletedCertification({
+          certificationCourseId,
+          locale: 'fr-FR',
+          ...dependencies,
+        });
 
         // then
         expect(certificationCourseRepository.update).to.not.have.been.called;
@@ -97,7 +101,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
             abortReason: ABORT_REASONS.CANDIDATE,
           });
 
-          certificationAssessmentRepository.get.resolves(
+          certificationAssessmentRepository.getByCertificationCourseId.resolves(
             domainBuilder.buildCertificationAssessment({
               id: assessmentId,
               certificationCourseId,
@@ -115,7 +119,11 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
           };
 
           // when
-          await scoreCompletedCertification({ ...dependencies });
+          await scoreCompletedCertification({
+            certificationCourseId,
+            locale: 'fr-FR',
+            ...dependencies,
+          });
 
           // then
           expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
@@ -142,7 +150,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
             completedAt: null,
           });
 
-          certificationAssessmentRepository.get.resolves(
+          certificationAssessmentRepository.getByCertificationCourseId.resolves(
             domainBuilder.buildCertificationAssessment({
               id: assessmentId,
               certificationCourseId,
@@ -160,7 +168,11 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
           };
 
           // when
-          await scoreCompletedCertification({ ...dependencies });
+          await scoreCompletedCertification({
+            certificationCourseId,
+            locale: 'fr-FR',
+            ...dependencies,
+          });
 
           // then
           expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
@@ -187,7 +199,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
               abortReason,
             });
 
-            certificationAssessmentRepository.get.resolves(
+            certificationAssessmentRepository.getByCertificationCourseId.resolves(
               domainBuilder.buildCertificationAssessment({
                 id: assessmentId,
                 certificationCourseId,
@@ -205,7 +217,11 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
             };
 
             // when
-            await scoreCompletedCertification({ ...dependencies });
+            await scoreCompletedCertification({
+              certificationCourseId,
+              locale: 'fr-FR',
+              ...dependencies,
+            });
 
             // then
             expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
@@ -232,7 +248,7 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
               abortReason,
             });
 
-            certificationAssessmentRepository.get.resolves(
+            certificationAssessmentRepository.getByCertificationCourseId.resolves(
               domainBuilder.buildCertificationAssessment({
                 id: assessmentId,
                 certificationCourseId,
@@ -250,7 +266,11 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
             };
 
             // when
-            await scoreCompletedCertification({ ...dependencies });
+            await scoreCompletedCertification({
+              certificationCourseId,
+              locale: 'fr-FR',
+              ...dependencies,
+            });
 
             // then
             expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
