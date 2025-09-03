@@ -36,12 +36,13 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           });
           const code = 'AZERTY007';
           const email = 'dick.cionère@example.net';
-          const locale = 'fr-fr';
+          const locale = 'fr-FR';
 
           const certificationCenterInvitationToCreate = CertificationCenterInvitation.create({
             certificationCenterId: certificationCenter.id,
             code,
             email,
+            locale,
           });
           const createdCertificationCenterInvitation = new CertificationCenterInvitation({
             ...certificationCenterInvitationToCreate,
@@ -141,13 +142,14 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
             name: 'Best Certification Center',
           });
           const code = 'AZERTY005';
-          const locale = 'fr-fr';
+          const locale = 'fr-FR';
           const certificationCenterInvitation = new CertificationCenterInvitation({
             certificationCenterId: certificationCenter.id,
             code,
             createdAt: new Date('2023-10-10'),
             email: emailWithInvalidDomain,
             updatedAt: new Date('2023-10-11'),
+            locale,
           });
 
           certificationCenterInvitationRepository.findOnePendingByEmailAndCertificationCenterId.resolves(
@@ -186,13 +188,14 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           name: 'Best Certification Center',
         });
         const code = 'AZERTY006';
-        const locale = 'fr-fr';
+        const locale = 'fr-FR';
         const certificationCenterInvitation = new CertificationCenterInvitation({
           certificationCenterId: certificationCenter.id,
           code,
           createdAt: new Date('2023-10-10'),
           email: invalidEmail,
           updatedAt: new Date('2023-10-11'),
+          locale,
         });
 
         certificationCenterInvitationRepository.findOnePendingByEmailAndCertificationCenterId.resolves(
@@ -230,13 +233,14 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
         });
         const code = 'AZERTY007';
         const email = 'dick.cionère@example.net';
-        const locale = 'fr-fr';
+        const locale = 'fr-FR';
         const certificationCenterInvitation = new CertificationCenterInvitation({
           certificationCenterId: certificationCenter.id,
           code,
           createdAt: new Date('2023-10-10'),
           email,
           updatedAt: new Date('2023-10-11'),
+          locale,
         });
 
         certificationCenterInvitationRepository.findOnePendingByEmailAndCertificationCenterId.resolves(
@@ -287,13 +291,14 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           });
           const code = 'AZERTY007';
           const email = 'dick.cionère@example.net';
-          const locale = 'fr-fr';
+          const locale = 'fr-FR';
           const certificationCenterInvitation = new CertificationCenterInvitation({
             certificationCenterId: certificationCenter.id,
             code,
             createdAt: new Date('2023-10-10'),
             email,
             updatedAt: new Date('2023-10-11'),
+            locale,
           });
 
           certificationCenterInvitationRepository.get.resolves(certificationCenterInvitation);
@@ -308,7 +313,6 @@ describe('Unit | Team | Domain | Services | CertificationCenterInvitationService
           })({
             certificationCenter,
             certificationCenterInvitation,
-            locale,
           });
 
           // then

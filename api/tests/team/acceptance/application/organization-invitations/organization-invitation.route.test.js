@@ -8,6 +8,7 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertOrganizationUserWithRoleAdmin,
+  knex,
   sinon,
 } from '../../../../../tests/test-helper.js';
 
@@ -423,11 +424,12 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
 
       user1 = databaseBuilder.factory.buildUser();
       user2 = databaseBuilder.factory.buildUser();
+      const locale = 'fr-FR';
 
       options = {
         method: 'POST',
         url: `/api/organizations/${organization.id}/invitations`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId }),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId, locale }),
         payload: {
           data: {
             type: 'organization-invitations',
@@ -453,7 +455,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user1.email,
               status,
               role: null,
-              lang: 'fr-fr',
+              lang: 'fr-FR',
             },
           },
           {
@@ -463,7 +465,7 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
               email: user2.email,
               status,
               role: null,
-              lang: 'fr-fr',
+              lang: 'fr-FR',
             },
           },
         ];
@@ -612,6 +614,44 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
 
       // then
       expect(response.statusCode).to.equal(204);
+    });
+  });
+
+  describe('POST /api/organization-invitations/sco', function () {
+    it('creates an organization invitation with the right locale', async function () {
+      // given
+      const locale = 'fr-FR';
+      const organization = databaseBuilder.factory.buildOrganization({
+        id: 12345,
+        externalId: '0751234X',
+        type: 'SCO',
+        email: 'contact@ecole.fr',
+        isActive: true,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'POST',
+        url: '/api/organization-invitations/sco',
+        headers: { cookie: `locale=${locale}` },
+        payload: {
+          data: {
+            attributes: {
+              uai: organization.externalId,
+              'first-name': 'Jean',
+              'last-name': 'Dupont',
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      const organizationInvitation = await knex('organization-invitations').where({ organizationId: 12345 }).first();
+      expect(response.statusCode).to.equal(201);
+      expect(organizationInvitation.locale).to.equal(locale);
     });
   });
 });

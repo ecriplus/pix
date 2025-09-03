@@ -6,6 +6,11 @@ import {
 } from '../../../shared/domain/errors.js';
 import { CertificationCenterInvitation } from '../models/CertificationCenterInvitation.js';
 
+/**
+ * @param certificationCenterInvitationRepository
+ * @param mailService
+ * @returns {function({certificationCenter: *, email: *, locale: *}): Promise<void>}
+ */
 const createOrUpdateCertificationCenterInvitation = function ({
   certificationCenterInvitationRepository,
   mailService = maillingService,
@@ -21,6 +26,7 @@ const createOrUpdateCertificationCenterInvitation = function ({
       const certificationCenterInvitationToCreate = CertificationCenterInvitation.create({
         certificationCenterId: certificationCenter.id,
         email,
+        locale,
       });
 
       certificationCenterInvitation = await certificationCenterInvitationRepository.create(
@@ -28,43 +34,48 @@ const createOrUpdateCertificationCenterInvitation = function ({
       );
     }
 
-    await _sendInvitationEmail(
+    await _sendInvitationEmail({
       mailService,
       certificationCenterInvitation,
       certificationCenter,
       email,
       locale,
       certificationCenterInvitationRepository,
-    );
+    });
   };
 };
 
+/**
+ * @param certificationCenterInvitationRepository
+ * @param mailService
+ * @returns {function({certificationCenterInvitation: *, certificationCenter: *}): Promise<void>}
+ */
 const resendCertificationCenterInvitation = function ({
   certificationCenterInvitationRepository,
   mailService = maillingService,
 }) {
-  return async function ({ certificationCenter, certificationCenterInvitation, locale }) {
-    await _sendInvitationEmail(
+  return async function ({ certificationCenter, certificationCenterInvitation }) {
+    await _sendInvitationEmail({
       mailService,
       certificationCenterInvitation,
       certificationCenter,
-      certificationCenterInvitation.email,
-      locale,
+      email: certificationCenterInvitation.email,
+      locale: certificationCenterInvitation.locale,
       certificationCenterInvitationRepository,
-    );
+    });
   };
 };
 
 export { createOrUpdateCertificationCenterInvitation, resendCertificationCenterInvitation };
 
-async function _sendInvitationEmail(
+async function _sendInvitationEmail({
   mailService,
   certificationCenterInvitation,
   certificationCenter,
   email,
   locale,
   certificationCenterInvitationRepository,
-) {
+}) {
   const emailingAttempt = await mailService.sendCertificationCenterInvitationEmail({
     certificationCenterInvitationId: certificationCenterInvitation.id,
     certificationCenterName: certificationCenter.name,

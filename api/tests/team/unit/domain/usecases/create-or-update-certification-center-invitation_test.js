@@ -8,7 +8,7 @@ describe('Unit | Domain | UseCases | CreateOrUpdateCertificationCenterInvitation
       const certificationCenterInvitationRepository = {};
       const certificationCenterId = 1;
       const emails = ['   naruto@e    xample.net   '];
-      const locale = 'fr-fr';
+      const locale = 'fr-FR';
       const certificationCenter = domainBuilder.buildCertificationCenter({
         id: 1,
         name: 'Konoha Certification Center',
@@ -54,7 +54,7 @@ describe('Unit | Domain | UseCases | CreateOrUpdateCertificationCenterInvitation
       const certificationCenterInvitationRepository = {};
       const certificationCenterId = 1;
       const emails = ['naruto@example.net', 'jiraya@example.net'];
-      const locale = 'fr-fr';
+      const locale = 'fr-FR';
       const certificationCenter = domainBuilder.buildCertificationCenter({
         id: 1,
         name: 'Konoha Certification Center',
