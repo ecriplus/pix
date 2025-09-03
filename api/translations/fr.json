@@ -452,6 +452,10 @@
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
         "candidate": "Le nombre de questions répondues pendant votre test de certification est insuffisant et ne nous permet pas de vous délivrer une certification Pix.",
         "organization": "Le nombre de questions répondues par le candidat pendant son test de certification est insuffisant et ne nous permet pas de lui délivrer une certification Pix."
+      },
+      "REJECTED_DUE_TO_ZERO_PIX_SCORE": {
+        "candidate": "Les résultats obtenus ne permettent pas encore la délivrance de la certification Pix. Vous avez besoin de progresser pour être plus à l'aise avec votre environnement numérique et pouvoir valoriser vos compétences.",
+        "organization": "Les résultats obtenus par ce candidat ne permettent pas la délivrance de la certification Pix. Il a besoin de progresser pour être plus à l'aise avec son environnement numérique et pouvoir valoriser ses compétences."
       }
     }
   },

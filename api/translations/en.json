@@ -448,6 +448,10 @@
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
         "candidate": "The number of questions answered during your certification exam is too low to allow us to deliver a Pix certification.",
         "organization": "The number of questions answered by the candidate during their certification exam is too low to allow us to deliver a Pix certification."
+      },
+      "REJECTED_DUE_TO_ZERO_PIX_SCORE": {
+        "candidate": "Your results are not yet sufficient to obtain the Pix certification. You need to make some progress to feel more confident with your digital environment and to be able to give value to your skills.",
+        "organization": "This candidate’s results are not sufficient to obtain the Pix certification. They need to make some progress to feel more confident with their digital environment and to be able to give value to their skills."
       }
     }
   },
