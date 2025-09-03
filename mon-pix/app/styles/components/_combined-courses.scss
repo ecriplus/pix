@@ -25,6 +25,7 @@
       &__description {
         @extend %pix-body-m;
       }
+
     }
   }
 
@@ -32,6 +33,20 @@
     margin: var(--pix-spacing-6x) 0;
     border-top: 1px solid var(--pix-neutral-100);
   }
+
+  &__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-2x);
+  align-items: flex-start;
+  align-self: stretch;
+  padding: var(--pix-spacing-10x) 0 var(--pix-spacing-6x) 0;
+
+    h1 {
+      @extend %pix-title-m;
+  }
+  }
+
 }
 
 .combined-course-item {
