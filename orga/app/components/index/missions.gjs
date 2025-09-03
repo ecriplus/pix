@@ -76,7 +76,7 @@ export default class IndexMissions extends Component {
         @title={{t "components.index.action-cards.missions.follow-activity.title"}}
         @description={{t "components.index.action-cards.missions.follow-activity.description"}}
       >
-        <PixButtonLink @variant="secondary" type="button" @route="authenticated.campaigns.list.my-campaigns">
+        <PixButtonLink @variant="secondary" type="button" @route="authenticated.missions.list">
           {{t "components.index.action-cards.missions.follow-activity.buttonText"}}
         </PixButtonLink>
       </ActionCardsListItem>
