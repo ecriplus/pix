@@ -17,8 +17,8 @@
   },
   "sections": [
     {
-      "id": "a59de89a-a093-4e57-88ec-3c5dc77701a1",
-      "type": "blank",
+      "id": "a70f44e7-1677-445a-bb5f-8d374d86cb08",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "682c0e09-e3d6-4db3-8680-ad0973715cc4",
@@ -92,7 +92,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "cc0842bc-7045-499b-802c-d72917ca76dd",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "1a062483-a1cd-4cef-bb5a-40bfda85caf4",
           "type": "discovery",
@@ -332,6 +338,13 @@
                           "feedback": {
                             "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
                           }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>😕 Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                          }
                         }
                       ],
                       "solution": "2"
@@ -365,6 +378,13 @@
                           "feedback": {
                             "diagnosis": "<p>Effectivement, créer une fausse déclaration permet de manipuler le public.</p>"
                           }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>😕 Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Créer une fausse déclaration permet de manipuler le public.</p>"
+                          }
                         }
                       ],
                       "solution": "3"
@@ -395,6 +415,13 @@
                         {
                           "id": "3",
                           "content": "<p>🧠 Manipuler.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ce type de message vocal est souvent utilisé pour arnaquer.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>😕 Je ne sais pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>Ce type de message vocal est souvent utilisé pour arnaquer.</p>"
                           }
@@ -530,6 +557,13 @@
                     "feedback": {
                       "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
                     }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                    }
                   }
                 ],
                 "solution": "4"
@@ -575,7 +609,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "e6b8564e-a4b1-4049-be54-c2de4d03eac0",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "23bdff2a-73ce-4df2-8d7c-38e6f31a7f9f",
           "type": "summary",
@@ -590,7 +630,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "da39dfb8-cb31-4696-9937-2d83d489e2a7",
+      "type": "practise",
+      "grains": [
         {
           "id": "d4254b9a-b078-4c7b-aa9f-3449bd16806e",
           "type": "activity",
@@ -678,12 +724,29 @@
             {
               "type": "element",
               "element": {
-                "id": "941ea25d-7b42-46fc-8a96-d35762dfd07b",
-                "type": "custom-draft",
-                "title": "Article",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-articlemaire.html",
-                "instruction": "<p>Lisez l’article ci-dessous, puis répondez aux questions.</p>",
-                "height": 550
+                "id": "97fc69e7-1028-4b41-a97e-a4a9954c15d2",
+                "type": "text",
+                "content": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "97fc69e7-1028-4b41-a97e-a4a9954c15d2",
+                "type": "custom",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 2,
+                  "title": "🔴 Une vidéo de la maire de la capitale crée la polémique",
+                  "author": "Rédaction locale",
+                  "date": "14 mai 2025",
+                  "paragraphs": [
+                    "Une vidéo diffusée ce matin montre la maire de la capitale, Claire Durand, déclarant : « Il faut faire de la place aux jeunes. À partir de l’an prochain, les personnes âgées n’auront plus accès aux parcs municipaux ».",
+                    "Relayée massivement sur les réseaux, la séquence suscite de vives réactions, dénonçant des propos « discriminatoires ». Certains demandent la démission immédiate de la maire. Mais l’après-midi même, la mairie réagit : {{highlightedSentence}}, affirme le service communication. La vidéo a été retirée des réseaux sociaux, à la demande de la mairie. Une plainte a été déposée."
+                  ],
+                  "highlightedSentence": "« Il s’agit d’un deepfake »",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
               }
             },
             {
@@ -763,7 +826,10 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": ["1", "3"]
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -806,7 +872,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "71dc06a4-8e3d-4e70-8889-5821d6850b09",
+      "type": "go-further",
+      "grains": [
         {
           "id": "4a311602-d54d-47c9-810f-2ce52bd6b526",
           "type": "activity",
