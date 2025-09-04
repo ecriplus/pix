@@ -1198,7 +1198,8 @@
           "title": "Me estoy formando",
           "description": "¡Completa tu prueba y desbloquea módulos de formación personalizados! Su número dependerá de tus resultados."
         },
-        "completed": "¡Completado!"
+        "completed": "¡Completado!",
+        "tagText": "¡Ya estás ahí!"
       }
     },
     "comparison-window": {
