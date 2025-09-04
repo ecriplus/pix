@@ -10,7 +10,16 @@ import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-renderi
 module(
   'Integration | Components | Campaigns | Assessment | Results | Evaluation Results Hero | Retry or reset block',
   function (hooks) {
+    let clock;
+
     setupIntlRenderingTest(hooks);
+
+    hooks.beforeEach(function () {
+      clock = sinon.useFakeTimers({ toFake: ['Date'] });
+    });
+    hooks.afterEach(function () {
+      clock.restore();
+    });
 
     test('displays a title, a description and a message', async function (assert) {
       // given
