@@ -9,8 +9,8 @@
     "duration": 10,
     "level": "Intermédiaire",
     "objectives": [
-      "<p>Repérer des biais ou des stéréotypes présents dans les contenus. <br></p>",
-      "<p>Expliquer comment une IA générative reproduit les biais présents dans les textes de son entraînement.<br></p>",
+      "<p>Repérer des biais ou des stéréotypes présents dans les contenus. </p>",
+      "<p>Expliquer comment une IA générative reproduit les biais présents dans les textes de son entraînement.</p>",
       "<p>Utiliser l’IA en étant vigilant sur ses propres biais de confirmation.</p>"
     ],
     "tabletSupport": "comfortable"
@@ -75,7 +75,7 @@
               "element": {
                 "id": "1fa1fc4c-90c4-456c-bd19-f2b83ff07856",
                 "type": "text",
-                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde actuel.&nbsp;🌍</p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?<br></p>"
+                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde actuel.&nbsp;🌍</p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?</p>"
               }
             }
           ]
@@ -116,7 +116,7 @@
                     {
                       "id": "5f842916-e037-4232-aca1-ea73a63474c4",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des forums et des réseaux sociaux, ses réponses pourront-elles contenir des biais ?<br></p>",
+                      "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des forums et des réseaux sociaux, ses réponses pourront-elles contenir des biais ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -178,7 +178,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C'était oui.<br></strong>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.<br></p>"
+                            "diagnosis": "<p><strong>C'était oui.<br></strong>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
                           }
                         }
                       ],
@@ -200,7 +200,7 @@
                     {
                       "id": "e7221438-eda2-4b5f-a587-ec525317070d",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des sources à propos des prix Nobels, comme celle-ci, ses réponses pourront-elles contenir des biais ?<br></p>",
+                      "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des sources à propos des prix Nobels, comme celle-ci, ses réponses pourront-elles contenir des biais ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -220,7 +220,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C'était oui.<br></strong>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA est entraînée sur ces données, elle pourrait en déduire que d’autres catégories de personnes ne peuvent pas recevoir de prix Nobel.<br></p>"
+                            "diagnosis": "<p><strong>C'était oui.<br></strong>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA est entraînée sur ces données, elle pourrait en déduire que d’autres catégories de personnes ne peuvent pas recevoir de prix Nobel.</p>"
                           }
                         }
                       ],
@@ -245,7 +245,7 @@
                     {
                       "id": "57c8eb66-a1ff-40d1-adfb-ca3e8a9e2bda",
                       "type": "text",
-                      "content": "<p>Les IA génératives sont <strong>entraînées sur une très grande quantité de données</strong>. Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐<br></p>"
+                      "content": "<p>Les IA génératives sont <strong>entraînées sur une très grande quantité de données</strong>. Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p>"
                     }
                   ]
                 },
@@ -287,7 +287,7 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Pour comprendre comment l’IA utilise ses données d’entraînement, <strong>mettez-vous à sa place</strong>. Aujourd’hui on va étudier le taboulé, à partir des données de tout le web en français.<br></p>"
+                "content": "<p>Pour comprendre comment l’IA utilise ses données d’entraînement, <strong>mettez-vous à sa place</strong>. Aujourd’hui on va étudier le taboulé, à partir des données de tout le web en français.</p>"
               }
             },
             {
@@ -308,7 +308,7 @@
               "element": {
                 "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vos observations sur les données précédentes, l'ingrédient principal de la recette du taboulé est&nbsp;:<br></p>",
+                "instruction": "<p>D’après vos observations sur les données précédentes, l'ingrédient principal de la recette du taboulé est&nbsp;:</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -319,7 +319,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>le persil<br></p>",
+                    "content": "<p>le persil</p>",
                     "feedback": {
                       "diagnosis": "<p><strong>Vous avez cru à un piège ?</strong><br>Les données observées ici ont un biais dans leur nombre&nbsp;: il y a bien plus de taboulés à la semoule dans le web français.<br></p><p>En réalité, le taboulé à la semoule est plus présent dans les pays européens ou maghrébins. Le taboulé au persil est simplement moins connu en Europe. 🥗 En s'entraînant avec des données internationales, la proportion de taboulé à la semoule aurait été différente.</p>"
                     }
@@ -398,7 +398,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Captain-America.jpg",
                       "alt": "Conversation avec une IA générative détaillée dans l'alternative textuelle",
-                      "alternativeText": "<p>Captain America&nbsp;:&nbsp;<br>Pourquoi l'Amérique est le meilleur pays du monde ?<br><br></p><p>Réponse de l'IA générative&nbsp;:&nbsp;<br>Beaucoup considèrent l’Amérique comme le meilleur pays du monde pour plusieurs raisons&nbsp;: </p><ul><li><strong>Un pays de liberté</strong>, où chacun peut réaliser son rêve s’il travaille dur.</li><li><strong>Une puissance économique et militaire</strong>, qui donne une image de force et de sécurité.</li><li><strong>Un mode de vie très attractif, avec les fast-foods</strong>, les grandes maisons et les grosses voitures.</li><li><strong>Une culture populaire mondiale</strong>, grâce à Hollywood, la musique et le sport.</li></ul><p>L’Amérique est un modèle pour les autres pays.</p><br>",
+                      "alternativeText": "<p>Captain America&nbsp;:&nbsp;<br>Pourquoi l'Amérique est le meilleur pays du monde ?<br><br></p><p>Réponse de l'IA générative&nbsp;:&nbsp;<br>Beaucoup considèrent l’Amérique comme le meilleur pays du monde pour plusieurs raisons&nbsp;: </p><ul><li><strong>Un pays de liberté</strong>, où chacun peut réaliser son rêve s’il travaille dur.</li><li><strong>Une puissance économique et militaire</strong>, qui donne une image de force et de sécurité.</li><li><strong>Un mode de vie très attractif, avec les fast-foods</strong>, les grandes maisons et les grosses voitures.</li><li><strong>Une culture populaire mondiale</strong>, grâce à Hollywood, la musique et le sport.</li></ul><p>L’Amérique est un modèle pour les autres pays.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -496,7 +496,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/ia-biais-independant/Svetlana-hotesse-de-l-air.jpg",
                       "alt": "",
-                      "alternativeText": "<p>Svetlana&nbsp;:<br>Quel est l’uniforme obligatoire des hôtesses de l’air ?<br><br></p><p>Réponse de l'IA générative&nbsp;:<br>L’uniforme des hôtesses de l’air est très reconnaissable&nbsp;: </p><ol><li><strong>Une tenue élégante </strong>composée d’une jupe ou parfois d’un pantalon.</li><li><strong>Des </strong><strong>chaussures à talons</strong> qui donnent une allure soignée.</li><li><strong>Un foulard ou un </strong><strong>accessoire coloré</strong> pour distinguer la compagnie aérienne.</li><li><strong>Une apparence toujours impeccable</strong>, maquillage et coiffure compris.</li></ol><p>Cet uniforme est pensé pour refléter à la fois le professionnalisme et une image accueillante.</p><br>",
+                      "alternativeText": "<p>Svetlana&nbsp;:<br>Quel est l’uniforme obligatoire des hôtesses de l’air ?<br><br></p><p>Réponse de l'IA générative&nbsp;:<br>L’uniforme des hôtesses de l’air est très reconnaissable&nbsp;: </p><ol><li><strong>Une tenue élégante </strong>composée d’une jupe ou parfois d’un pantalon.</li><li><strong>Des </strong><strong>chaussures à talons</strong> qui donnent une allure soignée.</li><li><strong>Un foulard ou un </strong><strong>accessoire coloré</strong> pour distinguer la compagnie aérienne.</li><li><strong>Une apparence toujours impeccable</strong>, maquillage et coiffure compris.</li></ol><p>Cet uniforme est pensé pour refléter à la fois le professionnalisme et une image accueillante.</p>",
                       "legend": "",
                       "licence": ""
                     },
