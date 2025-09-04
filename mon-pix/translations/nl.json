@@ -1190,7 +1190,8 @@
     },
     "combined-courses": {
       "content": {
-        "start-button": "Cursus starten"
+        "start-button": "Cursus starten",
+        "resume-button": "Cursus hervatten"
       },
       "completed": {
         "title": "Gefeliciteerd! Je bent klaar!",

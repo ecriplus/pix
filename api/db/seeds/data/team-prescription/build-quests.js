@@ -19,8 +19,10 @@ import {
 import { QUEST_OFFSET, TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
-const firstTrainingId = QUEST_OFFSET + 1;
-const secondTrainingId = QUEST_OFFSET + 2;
+const firstTrainingfrFRId = QUEST_OFFSET + 1;
+const secondTrainingfrFRId = QUEST_OFFSET + 2;
+const firstTrainingFRId = QUEST_OFFSET + 3;
+const secondTrainingFRId = QUEST_OFFSET + 4;
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
   const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
@@ -39,18 +41,36 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
     }),
   );
   databaseBuilder.factory.buildTraining({
-    id: firstTrainingId,
+    id: firstTrainingfrFRId,
     type: 'modulix',
     title: 'Demo combinix 1',
     link: '/modules/demo-combinix-1',
     locale: 'fr-fr',
   });
   databaseBuilder.factory.buildTraining({
-    id: secondTrainingId,
+    id: secondTrainingfrFRId,
     type: 'modulix',
     title: 'Demo combinix 2',
     link: '/modules/demo-combinix-2',
     locale: 'fr-fr',
+  });
+
+  // For now, we make doubles of the previous trainings because training does not accept multiple locales
+  // The behaviour is the same in production
+
+  databaseBuilder.factory.buildTraining({
+    id: firstTrainingFRId,
+    type: 'modulix',
+    title: 'Demo combinix 1',
+    link: '/modules/demo-combinix-1',
+    locale: 'fr',
+  });
+  databaseBuilder.factory.buildTraining({
+    id: secondTrainingFRId,
+    type: 'modulix',
+    title: 'Demo combinix 2',
+    link: '/modules/demo-combinix-2',
+    locale: 'fr',
   });
 
   databaseBuilder.factory.buildQuestForCombinedCourse({
@@ -120,12 +140,30 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
     ],
   });
   const trainingTriggerIds = [
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingId, threshold: 0, type: 'prerequisite' })
-      .id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingId, threshold: 50, type: 'goal' }).id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingId, threshold: 50, type: 'prerequisite' })
-      .id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingId, threshold: 100, type: 'goal' }).id,
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: firstTrainingfrFRId,
+      threshold: 0,
+      type: 'prerequisite',
+    }).id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingfrFRId, threshold: 50, type: 'goal' }).id,
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: secondTrainingfrFRId,
+      threshold: 50,
+      type: 'prerequisite',
+    }).id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingfrFRId, threshold: 100, type: 'goal' }).id,
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: firstTrainingFRId,
+      threshold: 0,
+      type: 'prerequisite',
+    }).id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingFRId, threshold: 50, type: 'goal' }).id,
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: secondTrainingFRId,
+      threshold: 51,
+      type: 'prerequisite',
+    }).id,
+    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingFRId, threshold: 100, type: 'goal' }).id,
   ];
   trainingTriggerIds.forEach((trainingTriggerId) =>
     TARGET_PROFILE_TUBES[0].map((tube) =>
@@ -386,11 +424,19 @@ const buildTargetProfile = (databaseBuilder, organization, index, tubes) => {
   });
   databaseBuilder.factory.buildTargetProfileTraining({
     targetProfileId: targetProfile.id,
-    trainingId: firstTrainingId,
+    trainingId: firstTrainingfrFRId,
   });
   databaseBuilder.factory.buildTargetProfileTraining({
     targetProfileId: targetProfile.id,
-    trainingId: secondTrainingId,
+    trainingId: secondTrainingfrFRId,
+  });
+  databaseBuilder.factory.buildTargetProfileTraining({
+    targetProfileId: targetProfile.id,
+    trainingId: firstTrainingFRId,
+  });
+  databaseBuilder.factory.buildTargetProfileTraining({
+    targetProfileId: targetProfile.id,
+    trainingId: secondTrainingFRId,
   });
 
   tubes.map(({ id, level }) =>

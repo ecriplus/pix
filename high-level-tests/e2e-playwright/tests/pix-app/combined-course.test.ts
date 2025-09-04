@@ -17,25 +17,25 @@ test('pass a combined course as sco user and see the final result', async ({ pag
 
   await test.step('Start combined course', async function () {
     await page.getByRole('button', { name: 'Commencer mon parcours' }).click();
-    await page.getByRole('link', { name: 'campagne diag' }).click();
   });
 
   await test.step('Run campaign', async function () {
     await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Ignorer' }).click();
     await page.getByRole('button', { name: 'Je passe et je vais à la' }).click();
-    //Le bouton "Voir mes résultats" existe deux fois à ce moment, on doit donc faire autrement en attendant de corriger cette page
-    await page.locator('#ember138').click();
+    await page.getByRole('link', { name: 'Voir mes résultats' }).first().click();
     await page.getByRole('button', { name: "J'envoie mes résultats" }).click();
     await page.getByRole('link', { name: 'Continuer' }).click();
   });
 
+  await test.step('Resume combined course', async function () {
+    await page.getByRole('button', { name: 'Reprendre mon parcours' }).click();
+  });
+
   await test.step('Run module', async function () {
-    await page.getByRole('link', { name: 'Demo combinix' }).click();
     await page.getByRole('button', { name: 'Commencer le module' }).click();
     await page.getByRole('button', { name: 'Terminer' }).click();
-    //Sera enlevé au prochain ticket pour passer l'url en relative, on aura plus les problèmes liés à l'host
-    await page.goto('http://localhost:4200/parcours/COMBINIX1/');
+    await page.getByRole('link', { name: 'Continuer' }).click();
   });
 
   await test.step('End of combined course', async function () {

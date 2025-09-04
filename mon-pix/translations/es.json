@@ -1186,7 +1186,8 @@
     },
     "combined-courses": {
       "content": {
-        "start-button": "Iniciar el curso"
+        "start-button": "Iniciar el curso",
+        "resume-course": "Reanudar mi curso"
       },
       "completed": {
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
