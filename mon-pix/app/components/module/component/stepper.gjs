@@ -134,7 +134,7 @@ export default class ModulixStepper extends Component {
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
-            aria-disabled="{{this.isPreviousButtonControlDisabled}}"
+            @isDisabled={{this.isPreviousButtonControlDisabled}}
             @triggerAction={{this.displayPreviousStep}}
             aria-controls={{this.id}}
           />
@@ -151,7 +151,7 @@ export default class ModulixStepper extends Component {
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.next.ariaLabel"}}
             @iconName="chevronRight"
-            aria-disabled="{{this.isNextButtonControlDisabled}}"
+            @isDisabled={{this.isNextButtonControlDisabled}}
             @triggerAction={{this.goBackToNextStep}}
             aria-controls={{this.id}}
           />

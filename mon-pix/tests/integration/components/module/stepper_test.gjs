@@ -1419,7 +1419,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           // then
           assert
             .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
-            .hasAria('disabled', 'false');
+            .doesNotHaveAria('disabled');
         });
 
         module('when user clicks the controls previous button', function () {
@@ -1518,7 +1518,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             assert
               .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
-              .hasAria('disabled', 'false');
+              .doesNotHaveAria('disabled');
           });
 
           module('when user clicks the controls next button', function () {
