@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
@@ -16,7 +17,7 @@ const Content = <template>
       <div class="combined-course-item__text">
         <div class="combined-course-item__title">{{@title}}</div>
         <div class="combined-course-item__description">
-          {{yield}}
+          {{yield to="description"}}
         </div>
       </div>
     </div>
@@ -32,6 +33,9 @@ const Content = <template>
       </div>
 
     {{/if}}
+    {{#if (has-block "blockEnd")}}
+      {{yield to="blockEnd"}}
+    {{/if}}
   </div>
 </template>;
 
@@ -43,7 +47,9 @@ const Content = <template>
       @iconUrl="/images/formation-book.svg"
       class="combined-course-item--formation"
     >
-      <p>{{t "pages.combined-courses.items.formation.description"}}</p>
+      <:description>
+        <p>{{t "pages.combined-courses.items.formation.description"}}</p>
+      </:description>
     </Content>
   {{else}}
     {{#if @isLocked}}
@@ -56,7 +62,17 @@ const Content = <template>
         @query={{hash redirection=@item.redirection}}
         disabled
       >
-        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} />
+        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}}>
+          <:blockEnd>
+            {{#if @isNextItemToComplete}}
+              <PixTag @color="purple-light" class="combined-course-item__current-item-tag">{{t
+                  "pages.combined-courses.items.tagText"
+                }}
+                <PixIcon @name="distance" /></PixTag>
+            {{/if}}
+          </:blockEnd>
+        </Content>
+
       </LinkTo>
     {{/if}}
   {{/if}}
