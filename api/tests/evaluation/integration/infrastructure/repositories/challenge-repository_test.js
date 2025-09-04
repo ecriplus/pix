@@ -1,7 +1,6 @@
 import * as challengeRepository from '../../../../../src/certification/evaluation/infrastructure/repositories/challenge-repository.js';
 import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/ValidatorQCM.js';
-import { config } from '../../../../../src/shared/config.js';
-import { databaseBuilder, datamartBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | challenge-repository', function () {
   const challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson = {
@@ -517,15 +516,7 @@ describe('Integration | Repository | challenge-repository', function () {
       context('when flash compatible challenges found', function () {
         it('should return the challenges', async function () {
           // given
-          const certificationCoreCalibration2024Id = config.v3Certification.certificationCoreCalibration2024Id;
-          datamartBuilder.factory.buildCalibration({
-            id: certificationCoreCalibration2024Id,
-            calibration_date: new Date('2024-10-23'),
-            scope: 'COEUR',
-            status: 'VALIDATED',
-          });
-          const datamartChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
-            calibrationId: certificationCoreCalibration2024Id,
+          const archivedChallenge = databaseBuilder.factory.buildActiveCalibratedChallenge({
             challengeId: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,
             alpha: 456,
             delta: 567,
@@ -535,7 +526,6 @@ describe('Integration | Repository | challenge-repository', function () {
           challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           await databaseBuilder.commit();
-          await datamartBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findFlashCompatibleWithoutLocale({
@@ -551,8 +541,8 @@ describe('Integration | Repository | challenge-repository', function () {
               colorBlindnessCompatibility:
                 challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.accessibility2,
               focused: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.focusable,
-              discriminant: datamartChallenge.alpha,
-              difficulty: datamartChallenge.delta,
+              discriminant: archivedChallenge.alpha,
+              difficulty: archivedChallenge.delta,
               validator: new ValidatorQCM({
                 solution: domainBuilder.buildSolution({
                   id: challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson.id,

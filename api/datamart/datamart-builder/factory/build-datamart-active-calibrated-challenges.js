@@ -1,6 +1,11 @@
 import { datamartBuffer } from '../datamart-buffer.js';
 
-const buildActiveCalibratedChallenge = function ({ calibrationId, challengeId, alpha = 1.3, delta = 4.1 } = {}) {
+const buildDatamartActiveCalibratedChallenge = function ({
+  calibrationId,
+  challengeId,
+  alpha = 1.3,
+  delta = 4.1,
+} = {}) {
   const values = {
     calibration_id: calibrationId,
     challenge_id: challengeId,
@@ -14,4 +19,4 @@ const buildActiveCalibratedChallenge = function ({ calibrationId, challengeId, a
   });
 };
 
-export { buildActiveCalibratedChallenge };
+export { buildDatamartActiveCalibratedChallenge };

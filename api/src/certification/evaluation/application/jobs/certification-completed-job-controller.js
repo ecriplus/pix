@@ -8,7 +8,7 @@ export class CertificationCompletedJobController extends JobController {
   }
 
   async handle({ data }) {
-    const { assessmentId, locale } = data;
-    await usecases.scoreCompletedCertification({ assessmentId, locale });
+    const { certificationCourseId, locale } = data;
+    await usecases.scoreCompletedCertification({ certificationCourseId, locale });
   }
 }

@@ -188,7 +188,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           scope: 'COEUR',
           status: 'VALIDATED',
         });
-        datamartBuilder.factory.buildActiveCalibratedChallenge({
+        datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
           calibrationId: calibrationId,
           challengeId: 'recChallenge0_0_0',
           alpha: 3.3,

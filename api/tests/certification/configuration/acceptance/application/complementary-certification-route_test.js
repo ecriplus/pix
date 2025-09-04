@@ -335,13 +335,13 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         scope: 'DROIT',
         status: 'VALIDATED',
       });
-      const activeCalibratedChallenge = datamartBuilder.factory.buildActiveCalibratedChallenge({
+      const activeCalibratedChallenge = datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         calibrationId: calibration.id,
         challengeId: 'recChallengeId',
         alpha: 3.3,
         delta: 4.4,
       });
-      datamartBuilder.factory.buildActiveCalibratedChallenge({
+      datamartBuilder.factory.buildDatamartActiveCalibratedChallenge({
         calibrationId: otherCalibration.id,
         challengeId: 'recChallengeId',
         alpha: 3.1,

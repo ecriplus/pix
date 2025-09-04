@@ -38,40 +38,6 @@ async function _getCertificationAnswersByDate(certificationAssessmentId, knexCon
   );
 }
 
-const get = async function (id) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const certificationAssessmentRows = await knexConn('assessments')
-    .join('certification-courses', 'certification-courses.id', 'assessments.certificationCourseId')
-    .select({
-      id: 'assessments.id',
-      userId: 'assessments.userId',
-      certificationCourseId: 'certification-courses.id',
-      createdAt: 'certification-courses.createdAt',
-      completedAt: 'certification-courses.completedAt',
-      endedAt: 'certification-courses.endedAt',
-      state: 'assessments.state',
-      version: 'certification-courses.version',
-    })
-    .where('assessments.id', '=', id)
-    .limit(1);
-  if (!certificationAssessmentRows[0]) {
-    throw new NotFoundError(`L'assessment de certification ${id} n'existe pas ou son accès est restreint`);
-  }
-  const certificationChallenges = await _getCertificationChallenges(
-    certificationAssessmentRows[0].certificationCourseId,
-    knexConn,
-  );
-  const certificationAnswersByDate = await _getCertificationAnswersByDate(certificationAssessmentRows[0].id, knexConn);
-
-  return new CertificationAssessment({
-    ...certificationAssessmentRows[0],
-    version: certificationAssessmentRows[0].version,
-    certificationChallenges,
-    certificationAnswersByDate,
-  });
-};
-
 const getByCertificationCourseId = async function ({ certificationCourseId }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationAssessmentRow = await knexConn('assessments')
@@ -171,4 +137,4 @@ const save = async function (certificationAssessment) {
     .update({ endedAt: certificationAssessment.endedAt });
 };
 
-export { get, getByCertificationCandidateId, getByCertificationCourseId, save };
+export { getByCertificationCandidateId, getByCertificationCourseId, save };
