@@ -17,8 +17,8 @@
   },
   "sections": [
     {
-      "id": "2cedcc1a-3fb4-4d68-b61f-cd271bb684a8",
-      "type": "blank",
+      "id": "17fd7d63-6427-41b4-9201-05f7fe0bc5a2",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "0e993f27-5189-47d4-ba37-efd4b466dd9d",
@@ -30,7 +30,7 @@
               "element": {
                 "id": "474c3482-deb8-44ca-91f0-15575c0f1f37",
                 "type": "text",
-                "content": "<p>Max va bientôt entrer au collège. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺</p>"
+                "content": "<p>Max va bientôt faire sa rentrée en 4e. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺</p>"
               }
             }
           ]
@@ -49,7 +49,7 @@
                 "url": "https://assets.pix.org/modules/controle-parental/intro_ppn2/intro_ppn2.mp4",
                 "poster": "https://assets.pix.org/modules/controle-parental/intro_ppn2/vignette_intro_ppn2.jpg",
                 "subtitles": "",
-                "transcription": "<p>Discussion du groupe <strong>Les gentils copains</strong> (notamment Nina, Tao, Caroline, etc.) sur une application de messagerie instantanée&nbsp;:</p><p>Nina&nbsp;:&nbsp;Salut ! Ça y est ! Pour sa rentrée en 6e, j’achète un smartphone à Max. J’ai peur qu’il tombe sur des trucs pas top pour son âge. Un conseil ?</p><p>Tao&nbsp;:&nbsp;Ha moi, Inès a pas encore de smartphone. Elle le réclame mais c’est encore trop jeune !</p><p>Caroline :&nbsp;Nous on n’a pas hésité. Le collège est loin et Théo prend le bus.</p><p>Nina&nbsp;:&nbsp;Et du coup, vous avez fait comment ?</p><p>Caroline :&nbsp;On a beaucoup discuté avec Théo et son père pour fixer quelques règles. En plus, on a activé le contrôle parental du smartphone.</p><p>Tao&nbsp;:&nbsp;Le contrôle parental ? C’est utile ?</p><p>Caroline :&nbsp;Oui oui. Tu peux paramétrer le temps d'utilisation, les sites visités et plein d'autres choses. Le mieux, si tu veux que ton enfant joue le jeu, c'est de discuter du paramétrage avec lui !</p>"
+                "transcription": "<p>Discussion du groupe <strong>Les gentils copains</strong> (notamment Nina, Tao, Caroline, etc.) sur une application de messagerie instantanée&nbsp;:</p><p>Nina&nbsp;:&nbsp;Salut ! Ça y est ! Pour sa rentrée en 4e, j’achète un smartphone à Max. J’ai peur qu’il tombe sur des trucs pas top pour son âge. Un conseil ?</p><p>Tao&nbsp;:&nbsp;Ha moi, Inès a pas encore de smartphone. Elle le réclame mais c’est encore trop jeune !</p><p>Caroline :&nbsp;Nous on n’a pas hésité. Le collège est loin et Théo prend le bus.</p><p>Nina&nbsp;:&nbsp;Et du coup, vous avez fait comment ?</p><p>Caroline :&nbsp;On a beaucoup discuté avec Théo et son père pour fixer quelques règles. En plus, on a activé le contrôle parental du smartphone.</p><p>Tao&nbsp;:&nbsp;Le contrôle parental ? C’est utile ?</p><p>Caroline :&nbsp;Oui oui. Tu peux paramétrer le temps d'utilisation, les sites visités et plein d'autres choses. Le mieux, si tu veux que ton enfant joue le jeu, c'est de discuter du paramétrage avec lui !</p>"
               }
             },
             {
@@ -92,7 +92,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "de33309d-0c8a-464d-941e-c33493dd4a6d",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "464204ad-c607-4bdd-abe6-2cbebdfa3cf8",
           "type": "transition",
@@ -254,7 +260,7 @@
                 "url": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/fonctionnalit%C3%A9s_controle_parental_ppn2.mp4",
                 "poster": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/vignette_fonctionnalit%C3%A9s_ppn2.jpg",
                 "subtitles": "https://assets.pix.org/modules/controle-parental/fonctionnalit%C3%A9s_controle_parental_ppn2/fonctionnalit%C3%A9s_controle_parental_ppn2.vtt",
-                "transcription": "<p><strong>Les fonctionnalités du contrôle parental</strong> <br>Comme Max entre au collège, ses parents pensent lui offrir son premier smartphone. Sa mère, Nina, s'inquiète… Comment accompagner Max dans ses premiers pas ? <br>Les outils de contrôle parental permettent d'aider les parents à protéger leurs enfants en ligne.&nbsp;Explorons ensemble leurs fonctionnalités les plus courantes.</p><ul>    <li>Gestion du temps d'écran</li></ul><p>Grâce aux options de gestion du temps d’écran, un parent peut définir des limites de temps pour chaque jour ou chaque application et des plages horaires d'utilisation. <br>Par exemple, un parent peut paramétrer le blocage d’un appareil après l’heure du coucher de son enfant</p><ul>    <li>Filtrage de contenu</li></ul><p>Grâce aux options de filtrage de contenu, en fonction de l’âge de son enfant,&nbsp;un parent peut choisir de bloquer certaines catégories de contenus (applications, vidéos, jeux).&nbsp; <br>Il est souvent possible de définir une liste de blocage de sites et de services ou encore de désactiver certaines options (telles que les achats en ligne ou l’échange de messages avec d’autres utilisateurs). </p><ul>    <li>Suivi de l'activité en ligne</li></ul><p>Avec le suivi de l’activité en ligne, un parent peut consulter le temps passé par son enfant sur un appareil et sur les différentes applications ou jeux installés. <br> Cela lui permet de suivre régulièrement l’usage numérique de son enfant, de discuter avec lui et d’adapter les limites qu’il lui fixe.</p><ul>    <li>Options avancées</li></ul><p>Certains outils de contrôle parental proposent des options plus poussées.&nbsp;Par exemple, consulter l’historique de navigation de son enfant, suivre ses déplacements en temps réel ou accéder aux messages qu’il envoie.&nbsp;<br>Attention, ces options ne sont pas toutes respectueuses de la vie privée de l’enfant. Utilisées sans discussion, elles peuvent nuire à la confiance entre l’enfant et son parent. </p>    <p>Les outils de contrôle parental ont de nombreuses fonctionnalités. Comme Nina, chaque parent peut les adapter aux besoins de son enfant et au fil du temps.</p>"
+                "transcription": "<p><strong>Les fonctionnalités du contrôle parental</strong> <br>Maintenant que Max entre en 4e, ses parents pensent lui offrir son premier smartphone. Sa mère, Nina, s'inquiète… Comment accompagner Max dans ses premiers pas ? <br>Les outils de contrôle parental permettent d'aider les parents à protéger leurs enfants en ligne.&nbsp;Explorons ensemble leurs fonctionnalités les plus courantes.</p><ul>    <li>Gestion du temps d'écran</li></ul><p>Grâce aux options de gestion du temps d’écran, un parent peut définir des limites de temps pour chaque jour ou chaque application et des plages horaires d'utilisation. <br>Par exemple, un parent peut paramétrer le blocage d’un appareil après l’heure du coucher de son enfant</p><ul>    <li>Filtrage de contenu</li></ul><p>Grâce aux options de filtrage de contenu, en fonction de l’âge de son enfant,&nbsp;un parent peut choisir de bloquer certaines catégories de contenus (applications, vidéos, jeux).&nbsp; <br>Il est souvent possible de définir une liste de blocage de sites et de services ou encore de désactiver certaines options (telles que les achats en ligne ou l’échange de messages avec d’autres utilisateurs). </p><ul>    <li>Suivi de l'activité en ligne</li></ul><p>Avec le suivi de l’activité en ligne, un parent peut consulter le temps passé par son enfant sur un appareil et sur les différentes applications ou jeux installés. <br> Cela lui permet de suivre régulièrement l’usage numérique de son enfant, de discuter avec lui et d’adapter les limites qu’il lui fixe.</p><ul>    <li>Options avancées</li></ul><p>Certains outils de contrôle parental proposent des options plus poussées.&nbsp;Par exemple, consulter l’historique de navigation de son enfant, suivre ses déplacements en temps réel ou accéder aux messages qu’il envoie.&nbsp;<br>Attention, ces options ne sont pas toutes respectueuses de la vie privée de l’enfant. Utilisées sans discussion, elles peuvent nuire à la confiance entre l’enfant et son parent. </p>    <p>Les outils de contrôle parental ont de nombreuses fonctionnalités. Comme Nina, chaque parent peut les adapter aux besoins de son enfant et au fil du temps.</p>"
               }
             }
           ]
@@ -371,7 +377,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "b6f42e5a-8c0c-4126-8bbc-f17428a07e64",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "e9b51c11-8a5e-42bb-9563-e06ffce4221e",
           "type": "summary",
@@ -386,7 +398,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2eba2df7-d1f2-4c3b-84ff-ebecb7983e30",
+      "type": "practise",
+      "grains": [
         {
           "id": "b6f2605d-2704-4597-aa90-0b4fd0a904b3",
           "type": "activity",
@@ -582,7 +600,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "efb4ec4a-0b18-4d2d-84a5-7c0b4f2fbeec",
+      "type": "go-further",
+      "grains": [
         {
           "id": "d7f90547-b24d-47d1-9383-2dc360ea6a28",
           "type": "transition",
