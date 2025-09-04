@@ -16,7 +16,7 @@
     "tabletSupport": "comfortable"
   },
   "sections": [
-        {
+    {
       "id": "748c51a1-006f-44b0-95c3-a9da978b4010",
       "type": "question-yourself",
       "grains": [
@@ -156,6 +156,13 @@
                           "feedback": {
                             "diagnosis": "<p>Et non ! Le pictogramme âge PEGI est indicatif, il n’empêche pas la vente en fonction de l’âge. Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué.</p>"
                           }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le pictogramme âge PEGI indique la présence de contenus inadaptés aux enfants en dessous de l’âge indiqué. Il n’indique pas la difficulté du jeu.</p>"
+                          }
                         }
                       ],
                       "solution": "2"
@@ -195,6 +202,13 @@
                           "content": "<p>Le jeu est déconseillé aux enfants de moins de 7 ans.</p>",
                           "feedback": {
                             "diagnosis": "<p>Pas tout à fait. Le pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs.&nbsp;Il peut donc y avoir des contenus non adaptés aux enfants ! Il convient d’accompagner les enfants dans leur utilisation.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ce pictogramme «&nbsp;!&nbsp;» signale des jeux ou applications qui contiennent une grande variété de contenus créés par les utilisateurs. Il peut donc y avoir des contenus non adaptés aux enfants ! Il convient donc d’accompagner les enfants dans leur utilisation.</p>"
                           }
                         }
                       ],
@@ -279,6 +293,13 @@
                     "content": "<p>les deux</p>",
                     "feedback": {
                       "diagnosis": "<p>Et oui ! En&nbsp;fait, tous les jeux, qu'ils soient gratuits ou payants, peuvent proposer des achats en cours de jeu.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En&nbsp;fait, tous les jeux, qu'ils soient gratuits ou payants, peuvent proposer des achats en cours de jeu.</p>"
                     }
                   }
                 ],
@@ -525,6 +546,13 @@
                     "content": "<p>Certains jeux vidéo permettent de discuter en ligne avec d'autres joueurs quel que soit l'équipement utilisé.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, quel que soit l'équipement (smartphone, tablette, console, ordinateur) de nombreux jeux vidéo permettent de discuter entre joueurs.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En fait, quel que soit l'équipement (smartphone, tablette, console, ordinateur) de nombreux jeux vidéo permettent de discuter entre joueurs.</p>"
                     }
                   }
                 ],
