@@ -18,6 +18,7 @@ export default class ComplementaryCertificationAdapter extends ApplicationAdapte
       delete payload.data.attributes['label'];
       delete payload.data.attributes['has-external-jury'];
       delete payload.data.attributes['target-profiles-history'];
+      delete payload.data.attributes['has-complementary-referential'];
 
       const { targetProfileId, notifyOrganizations } = snapshot.adapterOptions;
       payload.data.attributes['target-profile-id'] = targetProfileId;
