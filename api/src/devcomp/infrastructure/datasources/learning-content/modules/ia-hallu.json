@@ -17,8 +17,8 @@
   },
   "sections": [
     {
-      "id": "4cfda631-617e-4c41-a338-0029aedada5d",
-      "type": "blank",
+      "id": "1dfa887d-6dab-4060-a5fd-72217f062286",
+      "type": "question-yourself",
       "grains": [
         {
           "id": "545e7548-7ab7-4cfa-924e-2c683ee69c2a",
@@ -87,7 +87,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "2a4435db-c055-41eb-82d0-d530c86d23a6",
+      "type": "explore-to-understand",
+      "grains": [
         {
           "id": "1c338346-67e9-48b3-a9c1-f704ba38389b",
           "type": "discovery",
@@ -420,65 +426,64 @@
           "title": "Activité découverte - 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
-                      "type": "text",
-                      "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
-                    },
-                    {
-                      "id": "f4df02e1-bebf-4557-9226-18e38cfbb6b2",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/hallucinations/capturetennis.png",
-                      "alt": "Capture d'écran d'une conversation avec un logiciel d'IA générative décrit dans l'alternative textuelle",
-                      "alternativeText": "",
-                      "legend": "",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "21e1f6a8-8ea2-4b0c-8a6c-e68a1f875920",
-                      "type": "text",
-                      "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcaraz a bien remporté le tournoi de Roland-Garros deux fois&nbsp;: une fois en 2024 et une fois en 2025.</p>"
-                    },
-                    {
-                      "id": "ceed2a7c-76f9-44f1-be34-a2285cd1aa4d",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, qu’est ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2025.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
+                  "type": "text",
+                  "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f4df02e1-bebf-4557-9226-18e38cfbb6b2",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/hallucinations/capturetennis.png",
+                "alt": "Capture d'écran d'une conversation avec un logiciel d'IA générative décrit dans l'alternative textuelle",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "21e1f6a8-8ea2-4b0c-8a6c-e68a1f875920",
+                "type": "text",
+                "content": "<p>Ici le logiciel d’IA générative a fait une erreur. Carlos Alcaraz a bien remporté le tournoi de Roland-Garros deux fois&nbsp;: une fois en 2024 et une fois en 2025.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ceed2a7c-76f9-44f1-be34-a2285cd1aa4d",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, qu’est ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                     }
+                   },
+                   {
+                    "id": "2",
+                    "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2025.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                     }
+                   },
+                   {
+                    "id": "3",
+                    "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
+                    "feedback": {
+                     "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                     }
+                   }
+                 ],
+                "solution": "2"
+              }
             }
           ]
         },
@@ -863,7 +868,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "0a7a9e9a-a364-4b77-8dac-0b770544b4d5",
+      "type": "retain-the-essentials",
+      "grains": [
         {
           "id": "987668e7-59a9-438d-ad54-4723abc701d8",
           "type": "summary",
@@ -878,7 +889,13 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "25b2dfd4-8a62-4689-8004-1a2588dc0376",
+      "type": "practise",
+      "grains": [
         {
           "id": "a5db0e26-49fc-457c-943a-cc24d3aa1551",
           "type": "activity",
@@ -1112,7 +1129,13 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "92ae9dc5-89c2-454b-9caa-2fed53be4383",
+      "type": "go-further",
+      "grains": [
         {
           "id": "76a59954-f4c5-49af-8236-2424e33b67ea",
           "type": "activity",
