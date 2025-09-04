@@ -5,6 +5,7 @@ import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import { CombinedCourseStatuses } from '../../../../models/combined-course.js';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering.js';
 
 module('Integration | Component | combined course', function (hooks) {
@@ -44,7 +45,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'NOT_STARTED',
+        status: CombinedCourseStatuses.NOT_STARTED,
         code: 'COMBINIX9',
       });
 
@@ -66,7 +67,11 @@ module('Integration | Component | combined course', function (hooks) {
     test('should display start button', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'NOT_STARTED', code: 'COMBINIX9' });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.NOT_STARTED,
+        code: 'COMBINIX9',
+      });
 
       this.setProperties({ combinedCourse });
 
@@ -83,7 +88,11 @@ module('Integration | Component | combined course', function (hooks) {
       const store = this.owner.lookup('service:store');
       const router = this.owner.lookup('service:router');
 
-      const combinedCourse = store.createRecord('combined-course', { id: 1, status: 'NOT_STARTED', code: 'COMBINIX9' });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.NOT_STARTED,
+        code: 'COMBINIX9',
+      });
       const combinedCourseItem = store.createRecord('combined-course-item', {
         id: 1,
         reference: 'CAMPAIGN1',
@@ -122,7 +131,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'NOT_STARTED',
+        status: CombinedCourseStatuses.NOT_STARTED,
         code: 'COMBINIX9',
       });
 
@@ -151,7 +160,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'NOT_STARTED',
+        status: CombinedCourseStatuses.NOT_STARTED,
         code: 'COMBINIX9',
       });
 
@@ -184,7 +193,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'STARTED',
+        status: CombinedCourseStatuses.STARTED,
         code: 'COMBINIX9',
       });
 
@@ -218,7 +227,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'STARTED',
+        status: CombinedCourseStatuses.STARTED,
         code: 'COMBINIX9',
       });
 
@@ -260,7 +269,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
-        status: 'STARTED',
+        status: CombinedCourseStatuses.STARTED,
         code: 'COMBINIX9',
       });
 
@@ -301,7 +310,7 @@ module('Integration | Component | combined course', function (hooks) {
 
     const combinedCourse = store.createRecord('combined-course', {
       id: 1,
-      status: 'STARTED',
+      status: CombinedCourseStatuses.STARTED,
       code: 'COMBINIX9',
     });
 
@@ -319,26 +328,25 @@ module('Integration | Component | combined course', function (hooks) {
       router.transitionTo.calledWith('module', 'mon-module', { queryParams: { redirection: 'une+url+chiffree' } }),
     );
   });
-});
+  module('when participation is completed', function () {
+    test('should display that combined course is finished', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
 
-module('when participation is completed', function () {
-  test('should display that combined course is finished', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+      });
 
-    const combinedCourse = store.createRecord('combined-course', {
-      id: 1,
-      status: 'COMPLETED',
-      code: 'COMBINIX9',
-    });
+      this.setProperties({ combinedCourse });
 
-    this.setProperties({ combinedCourse });
-
-    // when
-    const screen = await render(hbs`
+      // when
+      const screen = await render(hbs`
         <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
-    // then
-    assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
+      // then
+      assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
+    });
   });
 });

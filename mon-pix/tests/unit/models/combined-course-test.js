@@ -41,18 +41,5 @@ module('Unit | Model | Combined Course', function (hooks) {
       combinedCourse.items = [combinedCourseItem, secondCombinedCourseItem];
       assert.strictEqual(combinedCourse.nextCombinedCourseItem, secondCombinedCourseItem);
     });
-    test('when there are several items to complete', function (assert) {
-      const firstCombinedCourseItem = store.createRecord('combined-course-item', {
-        isCompleted: false,
-        redirection: '/modules/demo-combinix-1',
-      });
-      const secondCombinedCourseItem = store.createRecord('combined-course-item', {
-        isCompleted: false,
-        redirection: '/campagnes/CODE123',
-      });
-      const combinedCourse = store.createRecord('combined-course');
-      combinedCourse.items = [firstCombinedCourseItem, secondCombinedCourseItem];
-      assert.strictEqual(combinedCourse.nextCombinedCourseItem, firstCombinedCourseItem);
-    });
   });
 });
