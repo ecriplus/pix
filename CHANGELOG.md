@@ -1,5 +1,54 @@
 # Pix Changelog
 
+# [5.199.0](https://github.com/1024pix/pix/compare/v5.198.0...v5.199.0) (2025-09-04)
+
+### :rocket: Amélioration
+
+- [#13393](https://github.com/1024pix/pix/pull/13393) Afficher le titre du Combinix 
+
+### :bug: Correction
+
+- [#13428](https://github.com/1024pix/pix/pull/13428) Corriger les tests flaky (PIX-19407) 
+
+### :building_construction: Tech
+
+- [#13287](https://github.com/1024pix/pix/pull/13287)  Utilise la base de donnée de l'API plutôt que le datamart pour les calibrations archivées (PIX-19164) 
+- [#13338](https://github.com/1024pix/pix/pull/13338) Ajoute script pour importer les challenges calibrés (PIX-19279) 
+
+### :arrow_up: Montée de version
+
+- [#13417](https://github.com/1024pix/pix/pull/13417) Update dependency @1024pix/ember-testing-library to ^3.0.8 (admin) 
+- [#13418](https://github.com/1024pix/pix/pull/13418) Update dependency @1024pix/ember-testing-library to ^3.0.8 (certif) 
+- [#13419](https://github.com/1024pix/pix/pull/13419) Update dependency @1024pix/ember-testing-library to ^3.0.8 (junior) 
+- [#13420](https://github.com/1024pix/pix/pull/13420) Update dependency @1024pix/ember-testing-library to ^3.0.8 (mon-pix) 
+- [#13421](https://github.com/1024pix/pix/pull/13421) Update dependency @1024pix/ember-testing-library to ^3.0.8 (orga) 
+- [#13398](https://github.com/1024pix/pix/pull/13398) Update dependency @1024pix/eslint-plugin to ^2.1.10 (api) 
+- [#13411](https://github.com/1024pix/pix/pull/13411) Update dependency @1024pix/eslint-plugin to ^2.1.10 (audit-logger) 
+- [#13412](https://github.com/1024pix/pix/pull/13412) Update dependency @1024pix/eslint-plugin to ^2.1.10 (certif) 
+- [#13399](https://github.com/1024pix/pix/pull/13399) Update dependency @1024pix/eslint-plugin to ^2.1.10 (dossier racine) 
+- [#13413](https://github.com/1024pix/pix/pull/13413) Update dependency @1024pix/eslint-plugin to ^2.1.10 (e2e-playwright) 
+- [#13414](https://github.com/1024pix/pix/pull/13414) Update dependency @1024pix/eslint-plugin to ^2.1.10 (junior) 
+- [#13415](https://github.com/1024pix/pix/pull/13415) Update dependency @1024pix/eslint-plugin to ^2.1.10 (mon-pix) 
+- [#13416](https://github.com/1024pix/pix/pull/13416) Update dependency @1024pix/eslint-plugin to ^2.1.10 (orga) 
+- [#13401](https://github.com/1024pix/pix/pull/13401) Update dependency @1024pix/pix-ui to ^55.25.14 (mon-pix) 
+- [#13402](https://github.com/1024pix/pix/pull/13402) Update dependency @1024pix/pix-ui to ^55.25.15 (mon-pix) 
+- [#13422](https://github.com/1024pix/pix/pull/13422) Update dependency @1024pix/pix-ui to ^55.26.2 (admin) 
+- [#13423](https://github.com/1024pix/pix/pull/13423) Update dependency @1024pix/pix-ui to ^55.26.2 (junior) 
+- [#13424](https://github.com/1024pix/pix/pull/13424) Update dependency @1024pix/pix-ui to ^55.26.2 (orga) 
+- [#13425](https://github.com/1024pix/pix/pull/13425) Update dependency @1024pix/pix-ui to ^55.26.3 (admin) 
+- [#13426](https://github.com/1024pix/pix/pull/13426) Update dependency @1024pix/pix-ui to ^55.26.3 (junior) 
+- [#13427](https://github.com/1024pix/pix/pull/13427) Update dependency @1024pix/pix-ui to ^55.26.3 (orga) 
+- [#13434](https://github.com/1024pix/pix/pull/13434) Update dependency @1024pix/pix-ui to ^55.26.5 (admin) 
+- [#13436](https://github.com/1024pix/pix/pull/13436) Update dependency @1024pix/pix-ui to ^55.26.5 (certif) 
+- [#13438](https://github.com/1024pix/pix/pull/13438) Update dependency @1024pix/pix-ui to ^55.26.5 (junior) 
+- [#13435](https://github.com/1024pix/pix/pull/13435) Update dependency @1024pix/pix-ui to ^55.26.5 (mon-pix) 
+- [#13407](https://github.com/1024pix/pix/pull/13407) Update dependency @1024pix/stylelint-config to ^5.1.37 (admin) 
+- [#13408](https://github.com/1024pix/pix/pull/13408) Update dependency @1024pix/stylelint-config to ^5.1.37 (certif) 
+- [#13409](https://github.com/1024pix/pix/pull/13409) Update dependency @1024pix/stylelint-config to ^5.1.37 (junior) 
+- [#13400](https://github.com/1024pix/pix/pull/13400) Update dependency @1024pix/stylelint-config to ^5.1.37 (mon-pix) 
+- [#13410](https://github.com/1024pix/pix/pull/13410) Update dependency @1024pix/stylelint-config to ^5.1.37 (orga) 
+- [#13366](https://github.com/1024pix/pix/pull/13366) Update dependency @faker-js/faker to v10 (api)
+
 # [5.198.0](https://github.com/1024pix/pix/compare/v5.197.0...v5.198.0) (2025-09-03)
 
 ### :rocket: Amélioration
