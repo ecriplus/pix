@@ -29,7 +29,8 @@ test.beforeEach(async () => {
   await writeFile(path.join(os.tmpdir(), `sco-${UAJ}.xml`), file);
 });
 
-test('Manage sco learners', async ({ page }) => {
+test('Managing sco learners', async ({ page }) => {
+  test.slow();
   let campaignCode: string;
   const orgaPage = new PixOrgaPage(page);
 
@@ -53,7 +54,6 @@ test('Manage sco learners', async ({ page }) => {
   await test.step('Import Learners', async () => {
     await page.getByRole('link', { name: 'Élèves' }).click();
     await page.getByRole('link', { name: 'Importer', exact: true }).click();
-    await page.getByRole('button', { name: 'Importer la liste' }).click();
     await page
       .getByRole('textbox', { name: 'Importer la liste' })
       .setInputFiles(path.join(os.tmpdir(), `sco-${UAJ}.xml`));

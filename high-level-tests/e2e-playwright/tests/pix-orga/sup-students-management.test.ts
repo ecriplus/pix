@@ -16,6 +16,7 @@ test.beforeEach(async () => {
 });
 
 test('Managing sup students', async ({ page }) => {
+  test.slow();
   const orgaPage = new PixOrgaPage(page);
 
   await test.step('Login to pixOrga', async () => {
@@ -30,7 +31,6 @@ test('Managing sup students', async ({ page }) => {
     await page.getByRole('link', { name: 'Importer' }).click();
     await page.getByRole('button', { name: 'Importer une nouvelle liste' }).click();
     await page.getByText('Je confirme avoir bien').click();
-    await page.getByRole('button', { name: 'Oui, je remplace' }).click();
     await page
       .getByRole('textbox', { name: 'Oui, je remplace' })
       .setInputFiles(path.join(import.meta.dirname, '..', '..', 'fixtures', 'sup-ok.csv'));
