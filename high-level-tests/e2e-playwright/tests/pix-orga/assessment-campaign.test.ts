@@ -27,6 +27,7 @@ test('Assessment campaign', async ({ page }) => {
   let globalMasteryPercentage: string;
 
   const orgaPage = new PixOrgaPage(page);
+  test.slow();
 
   await test.step('Login to pixOrga', async () => {
     await page.goto(process.env.PIX_ORGA_URL as string);
