@@ -10,6 +10,28 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering.js';
 module('Integration | Component | combined course', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  module('in all cases', function () {
+    test('should display Combinix title', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'NOT_STARTED',
+        code: 'COMBINIX9',
+        name: 'Combinix',
+      });
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(screen.getByRole('heading', { name: 'Combinix' }));
+    });
+  });
   module('when there is a formation item', function () {
     test('should display formation item', async function (assert) {
       // given

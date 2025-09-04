@@ -17,6 +17,9 @@ const CompletedText = <template>
 export default class CombinedCourses extends Component {
   <template>
     <div class="combined-course">
+      <div class="combined-course__header">
+        <h1>{{@combinedCourse.name}} </h1>
+      </div>
       {{#if (eq @combinedCourse.status "COMPLETED")}}
         <section class="combined-course-completed">
           <img src="/images/illustrations/combined-course/completed.svg" />
