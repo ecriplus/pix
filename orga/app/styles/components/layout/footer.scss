@@ -7,6 +7,7 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
+  margin-top: var(--pix-spacing-4x);
   line-height: 1;
 
   @include breakpoints.device-is('desktop') {
@@ -35,7 +36,7 @@
   }
 
   &__copyrights {
-    color: var(--pix-neutral-20)0;
+    color: var(--pix-neutral-20) 0;
     font-size: 0.75rem;
     font-family: fonts.$font-roboto;
     cursor: default;
@@ -60,7 +61,7 @@
     }
 
     &:focus {
-      color: var(--pix-neutral-20)0;
+      color: var(--pix-neutral-20) 0;
     }
 
     &:hover {

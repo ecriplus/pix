@@ -1,2 +1,6 @@
 @use 'organization-information';
 @use 'participation-statistics';
+
+.welcome__title {
+  margin-bottom: var(--pix-spacing-4x);
+}

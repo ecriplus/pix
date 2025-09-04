@@ -59,6 +59,7 @@
 @use 'pages/join' as *;
 @use 'pages/join-request' as *;
 @use 'pages/authenticated' as *;
+@use 'pages/authenticated/index' as *;
 @use 'pages/authenticated/attestations' as *;
 @use 'pages/authenticated/campaigns/campaign' as *;
 @use 'pages/authenticated/campaigns/campaign/analysis' as *;
