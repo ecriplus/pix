@@ -123,10 +123,13 @@ export default class ModulixStepper extends Component {
     return this.args.id || `pix-tabs-${guidFor(this)}`;
   }
 
+
+
   <template>
     <div
       class="stepper stepper--{{@direction}}"
-      aria-live="assertive"
+      aria-live="polite"
+      aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
       {{#if this.isHorizontalDirection}}

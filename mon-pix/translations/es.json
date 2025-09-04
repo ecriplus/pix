@@ -1793,8 +1793,10 @@
         "button": "Visualizar los pasos del módulo"
       },
       "stepper": {
+        "aria-role-description": "Secuencia de etapas",
         "step": {
-          "position": "{currentStep} Paso a paso {totalSteps}"
+          "aria-role-description": "etapa",
+          "aria-label": "{currentStep} de {totalSteps}"
         }
       },
       "verification-precondition-failed-alert": {

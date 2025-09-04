@@ -1807,8 +1807,10 @@
         "button": "Afficher les étapes du module"
       },
       "stepper": {
+        "aria-role-description": "suite d'étapes",
         "step": {
-          "position": "Étape {currentStep} sur {totalSteps}"
+          "aria-label": "{currentStep} sur {totalSteps}",
+          "aria-role-description": "étape"
         }
       },
       "verification-precondition-failed-alert": {

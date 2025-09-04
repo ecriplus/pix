@@ -1797,8 +1797,10 @@
         "button": "De modulestappen weergeven"
       },
       "stepper": {
+        "aria-role-description": "reeks stappen",
         "step": {
-          "position": "{currentStep} Stap op {totalSteps}"
+          "aria-role-description": "stap",
+          "aria-label": "{currentStep} op {totalSteps}"
         }
       },
       "verification-precondition-failed-alert": {

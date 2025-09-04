@@ -23,6 +23,7 @@ export default class ModulixStep extends Component {
     return this.args.currentStep === this.args.totalSteps;
   }
 
+
   @action
   focusAndScroll(htmlElement) {
     if (!this.args.isActive) {
@@ -40,10 +41,9 @@ export default class ModulixStep extends Component {
         {{didInsert this.focusAndScroll}}
         inert={{if @isHidden true}}
         aria-hidden={{if @isHidden "true"}}
+        aria-roledescription={{t "pages.modulix.stepper.step.aria-role-description"}}
+        aria-label={{t "pages.modulix.stepper.step.aria-label" currentStep=@currentStep totalSteps=@totalSteps}}
       >
-        <h4 class="stepper__step__position screen-reader-only">
-          {{t "pages.modulix.stepper.step.position" currentStep=@currentStep totalSteps=@totalSteps}}
-        </h4>
         {{#each this.displayableElements as |element|}}
           <div class="grain-card-content__element">
             <Element
