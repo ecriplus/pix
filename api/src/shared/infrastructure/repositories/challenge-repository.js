@@ -168,8 +168,10 @@ async function _findChallengesForComplementaryCertification({ complementaryCerti
     return knex.whereIn('id', complementaryCertificationChallengesIds).orderBy('id');
   };
 
+  const challengeDtos = await getInstance().find(cacheKey, findCallback);
+
   return decorateWithCertificationCalibration({
-    challengeDtos: await getInstance().find(cacheKey, findCallback),
+    challengeDtos,
     complementaryCertificationChallenges,
   });
 }
