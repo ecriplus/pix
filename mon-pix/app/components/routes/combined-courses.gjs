@@ -41,7 +41,11 @@ export default class CombinedCourses extends Component {
       {{/if}}
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
-        <CombinedCourseItem @item={{item}} @isLocked={{eq @combinedCourse.status "NOT_STARTED"}} />
+        <CombinedCourseItem
+          @item={{item}}
+          @isLocked={{item.isLocked}}
+          @onClick={{if (eq @combinedCourse.status "NOT_STARTED") this.startQuestParticipation noop}}
+        />
       {{/each}}
     </div>
   </template>
@@ -54,7 +58,8 @@ export default class CombinedCourses extends Component {
   @service router;
 
   @action
-  async startQuestParticipation() {
+  async startQuestParticipation(e) {
+    e.preventDefault();
     const combinedCourseAdapter = this.store.adapterFor('combined-course');
     await combinedCourseAdapter.start(this.args.combinedCourse.code);
     this.goToNextItem();
@@ -66,3 +71,4 @@ export default class CombinedCourses extends Component {
     this.router.transitionTo(item.route, item.reference, { queryParams: { redirection: item.redirection } });
   }
 }
+function noop() {}
