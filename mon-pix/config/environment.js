@@ -125,6 +125,7 @@ module.exports = function (environment) {
       COMBINIX_SURVEY_LINK:
         process.env.COMBINIX_SURVEY_LINK ||
         'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms',
+      MODULIX_QROCM_VERIFICATION_DELAY: 500,
     },
 
     fontawesome: {
@@ -214,6 +215,8 @@ module.exports = function (environment) {
       enabled: true,
       usingProxy: false,
     };
+
+    ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = 0;
   }
 
   if (environment === 'production') {

@@ -11,6 +11,7 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import ModuleElement from 'mon-pix/components/module/element/module-element';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
+import ENV from 'mon-pix/config/environment';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModuleQrocm extends ModuleElement {
@@ -98,6 +99,8 @@ export default class ModuleQrocm extends ModuleElement {
       return;
     }
 
+    await this.#waitFor(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY);
+
     const answerIsValid = this.answerIsValid;
     const status = answerIsValid ? 'ok' : 'ko';
 
@@ -112,6 +115,10 @@ export default class ModuleQrocm extends ModuleElement {
       type: 'QROCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
+  }
+
+  #waitFor(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
   #updateSelectedValues(block, value) {

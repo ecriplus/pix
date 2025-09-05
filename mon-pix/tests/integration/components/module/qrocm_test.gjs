@@ -4,6 +4,7 @@ import Service from '@ember/service';
 import { click, fillIn, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModuleQrocm from 'mon-pix/components/module/element/qrocm';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
