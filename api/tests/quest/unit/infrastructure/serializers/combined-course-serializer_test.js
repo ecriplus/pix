@@ -41,6 +41,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             type: ITEM_TYPE.CAMPAIGN,
             redirection: undefined,
             'is-completed': false,
+            'is-locked': false,
           },
         },
         {
@@ -52,6 +53,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             type: ITEM_TYPE.MODULE,
             redirection: 'encryptedCombinedCourseUrl',
             'is-completed': false,
+            'is-locked': true,
           },
         },
       ],

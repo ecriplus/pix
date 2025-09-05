@@ -41,6 +41,7 @@ module('Integration | Component | combined course', function (hooks) {
         id: 'formation_1_2',
         reference: 2,
         type: 'FORMATION',
+        isLocked: true,
       });
 
       const combinedCourse = store.createRecord('combined-course', {
@@ -119,7 +120,7 @@ module('Integration | Component | combined course', function (hooks) {
       assert.ok(router.transitionTo.calledWith('campaigns', 'CAMPAIGN1'));
     });
 
-    test('should display diagnostic campaign with no link', async function (assert) {
+    test('should display diagnostic campaign with link', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const combinedCourseItem = store.createRecord('combined-course-item', {
@@ -127,6 +128,7 @@ module('Integration | Component | combined course', function (hooks) {
         title: 'ma campagne',
         reference: 'ABCDIAG1',
         type: 'CAMPAIGN',
+        isLocked: false,
       });
 
       const combinedCourse = store.createRecord('combined-course', {
@@ -145,7 +147,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       // then
       assert.ok(screen.getByText('ma campagne'));
-      assert.notOk(screen.queryByRole('link', { name: 'ma campagne' }));
+      assert.ok(screen.queryByRole('link', { name: 'ma campagne' }));
     });
 
     test('should display modules with no link', async function (assert) {
@@ -156,6 +158,7 @@ module('Integration | Component | combined course', function (hooks) {
         title: 'mon module',
         reference: 'mon-module',
         type: 'MODULE',
+        isLocked: true,
       });
 
       const combinedCourse = store.createRecord('combined-course', {
@@ -327,6 +330,43 @@ module('Integration | Component | combined course', function (hooks) {
     assert.ok(
       router.transitionTo.calledWith('module', 'mon-module', { queryParams: { redirection: 'une+url+chiffree' } }),
     );
+  });
+  test('when an item is locked, its link does not exist', async function (assert) {
+    const store = this.owner.lookup('service:store');
+
+    const campaignCombinedCourseItem = store.createRecord('combined-course-item', {
+      id: 1,
+      title: 'ma campagne',
+      reference: 'ABCDIAG1',
+      type: 'CAMPAIGN',
+      isCompleted: false,
+      isLocked: false,
+    });
+
+    const moduleCombinedCourseItem = store.createRecord('combined-course-item', {
+      id: 2,
+      title: 'mon module',
+      reference: 'ABCMODU1',
+      type: 'MODULE',
+      isCompleted: true,
+      isLocked: true,
+    });
+
+    const combinedCourse = store.createRecord('combined-course', {
+      id: 1,
+      status: 'STARTED',
+      code: 'COMBINIX9',
+    });
+    combinedCourse.items.push(campaignCombinedCourseItem, moduleCombinedCourseItem);
+    this.setProperties({ combinedCourse });
+
+    // when
+    const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+    // then
+    assert.ok(screen.getByRole('button', { name: 'Reprendre mon parcours' }));
+    assert.notOk(screen.queryByRole('link', { name: 'mon module' }));
   });
   module('when participation is completed', function () {
     test('should display that combined course is finished', async function (assert) {

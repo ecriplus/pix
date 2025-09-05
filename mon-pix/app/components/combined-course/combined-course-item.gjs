@@ -1,5 +1,6 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { hash } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
@@ -48,7 +49,13 @@ const Content = <template>
     {{#if @isLocked}}
       <Content @title={{@item.title}} @isLocked={{true}} />
     {{else}}
-      <LinkTo @route={{@item.route}} @model={{@item.reference}} @query={{hash redirection=@item.redirection}} disabled>
+      <LinkTo
+        {{on "click" @onClick}}
+        @route={{@item.route}}
+        @model={{@item.reference}}
+        @query={{hash redirection=@item.redirection}}
+        disabled
+      >
         <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} />
       </LinkTo>
     {{/if}}

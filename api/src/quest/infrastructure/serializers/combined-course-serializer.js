@@ -8,7 +8,7 @@ const serialize = function (combinedCourse) {
     items: {
       ref: 'id',
       included: true,
-      attributes: ['title', 'reference', 'type', 'redirection', 'isCompleted'],
+      attributes: ['title', 'reference', 'type', 'redirection', 'isCompleted', 'isLocked'],
     },
     typeForAttribute: (attribute) => {
       if (attribute === 'items') return 'combined-course-items';
