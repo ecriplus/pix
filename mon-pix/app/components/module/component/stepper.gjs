@@ -49,7 +49,7 @@ export default class ModulixStepper extends Component {
   }
 
   @action
-  displayPreviousStep() {
+  goBackToPreviousStep() {
     if (this.displayedStepIndex === 0) {
       return;
     }
@@ -123,8 +123,6 @@ export default class ModulixStepper extends Component {
     return this.args.id || `pix-tabs-${guidFor(this)}`;
   }
 
-
-
   <template>
     <div
       class="stepper stepper--{{@direction}}"
@@ -138,7 +136,7 @@ export default class ModulixStepper extends Component {
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
             @isDisabled={{this.isPreviousButtonControlDisabled}}
-            @triggerAction={{this.displayPreviousStep}}
+            @triggerAction={{this.goBackToPreviousStep}}
             aria-controls={{this.id}}
           />
           <p
