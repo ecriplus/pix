@@ -3,10 +3,17 @@ import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/pres
 import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Campaign | Application | Usecases | checkCampaignBelongsToCombinedCourse', function () {
+  let organizationId, campaignId;
+
+  beforeEach(async function () {
+    organizationId = databaseBuilder.factory.buildOrganization().id;
+    campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+
+    await databaseBuilder.commit();
+  });
+
   it('should throw if a campaign belongs to combined course', async function () {
     // given
-    const organizationId = databaseBuilder.factory.buildOrganization().id;
-    const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     databaseBuilder.factory.buildQuestForCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
@@ -33,7 +40,28 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
     expect(error).instanceOf(CampaignBelongsToCombinedCourseError);
   });
 
-  // it('should not throw if campaign does not belongs to combined course', async function () {
+  it('should not throw if campaign does not belongs to combined course', async function () {
+    const anotherCampaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
 
-  // });
+    databaseBuilder.factory.buildQuestForCombinedCourse({
+      code: 'ABCDE1234',
+      name: 'Mon parcours Combiné',
+      organizationId,
+      successRequirements: [
+        {
+          requirement_type: 'campaignParticipations',
+          comparison: 'all',
+          data: {
+            campaignId: {
+              data: anotherCampaignId,
+              comparison: 'equal',
+            },
+          },
+        },
+      ],
+    });
+    await databaseBuilder.commit();
+
+    await expect(checkAuthorizationToAccessCombinedCourse.execute({ campaignId })).fulfilled;
+  });
 });
