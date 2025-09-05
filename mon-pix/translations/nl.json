@@ -1202,7 +1202,8 @@
           "title": "Ik volg een opleiding",
           "description": "Voltooi uw test en ontgrendel op maat gemaakte trainingsmodules! Het aantal modules hangt af van uw resultaten."
         },
-        "completed": "Voltooid!"
+        "completed": "Voltooid!",
+        "tagText": "U bent er nu!"
       }
     },
     "comparison-window": {

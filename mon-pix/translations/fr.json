@@ -1203,7 +1203,8 @@
         "formation": {
           "description": "Terminez votre test et débloquez des modules de formation sur mesure ! Leur nombre dépendra de vos résultats.",
           "title": "Je me forme"
-        }
+        },
+        "tagText": "Vous en êtes là !"
       }
     },
     "comparison-window": {

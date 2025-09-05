@@ -111,4 +111,13 @@
       }
     }
   }
+
+  &__current-item-tag {
+  display: flex;
+  gap: var(--pix-spacing-1x);
+  align-items: center;
+  padding: 6px var(--pix-spacing-4x);
+  background: var(--pix-tertiary-100);
+  border-radius: 50px;
+  }
 }

@@ -128,6 +128,7 @@ module('Integration | Component | combined course', function (hooks) {
         title: 'ma campagne',
         reference: 'ABCDIAG1',
         type: 'CAMPAIGN',
+        isCompleted: false,
         isLocked: false,
       });
 
@@ -147,7 +148,8 @@ module('Integration | Component | combined course', function (hooks) {
 
       // then
       assert.ok(screen.getByText('ma campagne'));
-      assert.ok(screen.queryByRole('link', { name: 'ma campagne' }));
+      assert.ok(screen.getByRole('link', { name: /ma campagne/ }));
+      assert.ok(screen.getByText(t('pages.combined-courses.items.tagText')));
     });
 
     test('should display modules with no link', async function (assert) {
@@ -177,7 +179,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       // then
       assert.ok(screen.getByText('mon module'));
-      assert.notOk(screen.queryByRole('link', { name: 'mon module' }));
+      assert.notOk(screen.queryByRole('link', { name: /mon module/ }));
     });
   });
 
@@ -211,7 +213,7 @@ module('Integration | Component | combined course', function (hooks) {
       // then
       assert.ok(screen.getByText('ma campagne'));
       assert.strictEqual(
-        screen.getByRole('link', { name: 'ma campagne' }).getAttribute('href'),
+        screen.getByRole('link', { name: /ma campagne/ }).getAttribute('href'),
         router.urlFor('campaigns', { code: combinedCourseItem.reference }),
       );
     });
@@ -245,7 +247,7 @@ module('Integration | Component | combined course', function (hooks) {
       // then
       assert.ok(screen.getByText('mon module'));
       assert.strictEqual(
-        screen.getByRole('link', { name: 'mon module' }).getAttribute('href'),
+        screen.getByRole('link', { name: /mon module/ }).getAttribute('href'),
         router.urlFor(
           'module',
           {
@@ -387,6 +389,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
+      assert.notOk(screen.queryByText(t('pages.combined-courses.items.tagText')));
     });
   });
 });
