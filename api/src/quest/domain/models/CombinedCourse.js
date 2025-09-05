@@ -121,6 +121,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       redirection: encryptedCombinedCourseUrl,
       isCompleted,
       isLocked,
+      duration: module?.duration,
     });
   }
 

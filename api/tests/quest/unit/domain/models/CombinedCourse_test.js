@@ -805,7 +805,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             new CombinedCourse({ id, organizationId, name, code }),
             combinedCourseQuestFormat,
           );
-          const module = new Module({ id: 7, title: 'module' });
+          const module = new Module({ id: 7, title: 'module', duration: 10 });
           const dataForQuest = new DataForQuest({
             eligibility: new Eligibility({
               passages: [
@@ -835,6 +835,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               redirection: encryptedCombinedCourseUrl,
               isCompleted: false,
               isLocked: false,
+              duration: 10,
             }),
           ]);
         });
