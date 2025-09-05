@@ -36,7 +36,7 @@
   }
 
   &__copyrights {
-    color: var(--pix-neutral-20) 0;
+    color: var(--pix-neutral-500);
     font-size: 0.75rem;
     font-family: fonts.$font-roboto;
     cursor: default;
@@ -61,7 +61,7 @@
     }
 
     &:focus {
-      color: var(--pix-neutral-20) 0;
+      color: var(--pix-neutral-800);
     }
 
     &:hover {
