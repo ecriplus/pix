@@ -375,7 +375,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               const answeredChallenges = allChallenges.slice(0, -1);
               const { answers, challengeCalibrationsWithoutLiveAlerts } =
                 _buildDataFromAnsweredChallenges(answeredChallenges);
-              const expectedCapacity = -5;
+              const expectedCapacity = -10;
               const zeroPixScore = 0;
               const { certificationCourseId } = certificationAssessment;
               const capacityHistory = [
@@ -449,10 +449,18 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               // then
               const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
                 pixScore: zeroPixScore,
-                reproducibilityRate: 0,
+                reproducibilityRate: 100,
                 status: AssessmentResult.status.REJECTED,
                 assessmentId: certificationAssessment.id,
-                competenceMarks: [],
+                competenceMarks: [
+                  domainBuilder.buildCompetenceMark({
+                    area_code: '1',
+                    competenceId: 'recCompetenceId',
+                    competence_code: '1.1',
+                    level: 0,
+                    score: 0,
+                  }),
+                ],
                 commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
                   commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
                 }),
@@ -460,7 +468,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                   commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
                 }),
               });
-              expect(assessmentResultRepository.save).to.have.been.calledWith({
+              expectedAssessmentResult.id = undefined;
+              expectedAssessmentResult.createdAt = undefined;
+              expectedAssessmentResult.juryId = undefined;
+              expect(assessmentResultRepository.save).to.have.been.calledWithExactly({
                 certificationCourseId,
                 assessmentResult: expectedAssessmentResult,
               });
