@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
-    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux, ou encore des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.<br></p>",
+    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux, ou encore des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
     "duration": 10,
     "level": "Débutant",
     "objectives": [
@@ -29,7 +29,7 @@
               "element": {
                 "id": "35a9be34-9b63-4cf5-b984-432010aff74e",
                 "type": "text",
-                "content": "<p>Enzo a produit sur son ordinateur un texte à l’aide d’un logiciel d‘intelligence artificielle générative. </p><p>Il ne pensait pas que son ordinateur était si puissant. <br></p>"
+                "content": "<p>Enzo a produit sur son ordinateur un texte à l’aide d’un logiciel d‘intelligence artificielle générative. </p><p>Il ne pensait pas que son ordinateur était si puissant.</p>"
               }
             }
           ]
@@ -264,7 +264,7 @@
                     "content": "<p>dans notre appareil personnel</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.<br></p>"
+                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
                     }
                   },
                   {
@@ -272,7 +272,7 @@
                     "content": "<p>dans un supercalculateur</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                      "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du monde !</p><br>"
+                      "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du monde !</p>"
                     }
                   },
                   {
@@ -280,7 +280,7 @@
                     "content": "<p>sur internet</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p><br>"
+                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
                     }
                   }
                 ],
@@ -299,7 +299,7 @@
               "element": {
                 "id": "140817f0-531a-44a6-83bb-2a7b094848c8",
                 "type": "text",
-                "content": "<p>🚀<strong> Un long voyage</strong></p><p>Quand on interroge un logiciel d’IA générative, la requête (le prompt) est <strong>envoyée par le réseau internet dans un immense centre informatique, un supercalculateur</strong>, quelque part dans le monde.&nbsp; </p><p>La réponse nous est ensuite renvoyée.</p><br>"
+                "content": "<p>🚀<strong> Un long voyage</strong></p><p>Quand on interroge un logiciel d’IA générative, la requête (le prompt) est <strong>envoyée par le réseau internet dans un immense centre informatique, un supercalculateur</strong>, quelque part dans le monde.&nbsp; </p><p>La réponse nous est ensuite renvoyée.</p>"
               }
             }
           ]
@@ -670,7 +670,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>la création&nbsp;de vidéo</p>",
+                          "content": "<p>la création de vidéo</p>",
                           "feedback": {
                             "state": "<p>Exactement.</p>",
                             "diagnosis": "<p>Ce sont bien <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
@@ -695,7 +695,7 @@
               "element": {
                 "id": "74be751a-51ef-4ed3-a8d4-a2e7e7b464a8",
                 "type": "text",
-                "content": "<p>💻 <strong>⚡ Beaucoup d’utilisateurs, beaucoup d’énergie !</strong> </p><p>Un supercalculateur reçoit <strong>des milliers de requêtes en même temps</strong>.&nbsp;Pour la fabrication d’images haute définition ou de vidéos, les calculs sont beaucoup plus importants que pour produire du texte.&nbsp; </p><p>Le supercalculateur fait l’ensemble des calculs en même temps pour répondre aux demandes qu’il reçoit. Cela consomme <strong>une énorme quantité d’énergie. </strong></p><br>"
+                "content": "<p>💻 <strong>⚡ Beaucoup d’utilisateurs, beaucoup d’énergie !</strong> </p><p>Un supercalculateur reçoit <strong>des milliers de requêtes en même temps</strong>.&nbsp;Pour la fabrication d’images haute définition ou de vidéos, les calculs sont beaucoup plus importants que pour produire du texte.&nbsp; </p><p>Le supercalculateur fait l’ensemble des calculs en même temps pour répondre aux demandes qu’il reçoit. Cela consomme <strong>une énorme quantité d’énergie. </strong></p>"
               }
             }
           ]
@@ -1057,7 +1057,7 @@
                     "content": "<p>Créer&nbsp;<strong>une</strong> <strong>vidéo de 15 secondes</strong>.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
-                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>,&nbsp;et donc qui consommera le <strong>plus d’énergie</strong>.<br></p>"
+                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>,&nbsp;et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
                     }
                   },
                   {
