@@ -77,7 +77,7 @@ export default class InviteForm extends Component {
       >
         <:content>
           <p>{{t "pages.team-new.invite-form-modal.warning"}}</p>
-          <p>{{t "pages.team-new.invite-form-modal.question"}}</p>
+          <p class="invite-form__question">{{t "pages.team-new.invite-form-modal.question"}}</p>
         </:content>
 
         <:footer>

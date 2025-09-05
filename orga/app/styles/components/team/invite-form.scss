@@ -1,6 +1,9 @@
 @use 'pix-design-tokens/typography';
 
 .invite-form {
+  &__question {
+    margin-top: var(--pix-spacing-2x);;
+  }
 
   &__email-field {
     min-height: 70px;

@@ -1856,10 +1856,10 @@
         }
       },
       "invite-form-modal": {
-        "confirm": "Confirm",
-        "question": "Do you want to continue? ",
-        "title": "Confirm the addition of new team members",
-        "warning": "Members you add will have access to participant results and campaign analytics."
+        "confirm": "Bevestigen",
+        "question": "Wilt u doorgaan?",
+        "title": "Bevestig de toevoeging van nieuwe teamleden",
+        "warning": "Leden die u toevoegt, krijgen toegang tot de resultaten van deelnemers en campagneanalyses."
       },
       "invited-members": "Als gasten de e-mail ontvangen, kunnen ze kiezen of ze een Pix-account willen aanmaken of willen inloggen met een bestaand Pix-account.",
       "several-email-requirement": "Je kunt meerdere leden uitnodigen door e-mailadressen te scheiden met komma's.",
