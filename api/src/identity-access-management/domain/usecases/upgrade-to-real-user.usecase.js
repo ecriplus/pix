@@ -10,7 +10,7 @@ const upgradeToRealUser = withTransaction(async function ({
   userAttributes,
   password,
   anonymousUserToken,
-  language,
+  locale,
   anonymousUserTokenRepository,
   userRepository,
   authenticationMethodRepository,
@@ -50,7 +50,7 @@ const upgradeToRealUser = withTransaction(async function ({
   const token = await emailValidationDemandRepository.save(realUser.id);
   await emailRepository.sendEmailAsync(
     createAccountCreationEmail({
-      locale: language,
+      locale,
       email: realUser.email,
       firstName: realUser.firstName,
       token,

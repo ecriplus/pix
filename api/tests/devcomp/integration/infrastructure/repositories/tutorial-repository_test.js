@@ -734,7 +734,7 @@ describe('Integration | Repository | tutorial-repository', function () {
 
       it('should return tutorial related to user locale', async function () {
         // given
-        const locale = 'en-us';
+        const lang = 'en';
         const tutorials = [
           {
             id: 'tuto1',
@@ -778,7 +778,7 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId, locale });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId, lang });
 
         // then
         expect(results.map((tutorial) => tutorial.id)).to.exactlyContain(['tuto2', 'tuto1']);

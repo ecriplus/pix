@@ -1,11 +1,11 @@
 import { Tutorial } from '../models/Tutorial.js';
 
-const findPaginatedFilteredTutorials = async function ({ userId, filters, page, locale, tutorialRepository }) {
+const findPaginatedFilteredTutorials = async function ({ userId, filters, page, lang, tutorialRepository }) {
   if (filters?.type === Tutorial.TYPES.RECOMMENDED) {
     const { results: tutorials, pagination } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
       userId,
       filters,
-      locale,
+      lang,
       page,
     });
     return { tutorials, meta: { pagination } };

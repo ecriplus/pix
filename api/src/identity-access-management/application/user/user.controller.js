@@ -1,7 +1,7 @@
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import * as userSerializer from '../../../shared/infrastructure/serializers/jsonapi/user-serializer.js';
-import { getChallengeLocale, getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { authenticationMethodsSerializer } from '../../infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
 import * as certificationPointOfContactSerializer from '../../infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
@@ -258,17 +258,14 @@ const rememberUserHasSeenChallengeTooltip = async function (request, h, dependen
  */
 const upgradeToRealUser = async function (request, h, dependencies = { userSerializer, localeService }) {
   const anonymousUserId = request.auth.credentials.userId;
-
-  const localeFromCookie = dependencies.localeService.getNearestSupportedLocale(request.state?.locale);
-
-  const language = await getChallengeLocale(request);
+  const locale = getUserLocale(request);
 
   const userAttributes = {
     firstName: request.payload.data.attributes['first-name'],
     lastName: request.payload.data.attributes['last-name'],
     email: request.payload.data.attributes.email,
     cgu: request.payload.data.attributes.cgu,
-    locale: localeFromCookie,
+    locale,
   };
 
   const password = request.payload.data.attributes.password;
@@ -279,7 +276,7 @@ const upgradeToRealUser = async function (request, h, dependencies = { userSeria
     userAttributes,
     password,
     anonymousUserToken,
-    language,
+    locale,
   });
   return h.response(dependencies.userSerializer.serialize(realUser));
 };

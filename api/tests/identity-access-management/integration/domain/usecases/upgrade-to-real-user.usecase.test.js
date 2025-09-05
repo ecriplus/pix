@@ -25,7 +25,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
     const anonymousUserToken = await anonymousUserTokenRepository.save(anonymousUser.id);
 
     const password = 'P@ssW0rd';
-    const language = 'fr';
+    const locale = 'fr';
     const userAttributes = {
       firstName: 'First',
       lastName: 'Last',
@@ -40,7 +40,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
       userAttributes,
       password,
       anonymousUserToken,
-      language,
+      locale,
     });
 
     // then
@@ -74,7 +74,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
         },
         password: 'P@ssW0rd',
         anonymousUserToken: 'anonymous-token',
-        language: 'fr',
+        locale: 'fr',
       });
 
       // then
@@ -102,7 +102,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
         },
         password: 'P@ssW0rd',
         anonymousUserToken: 'anonymous-token',
-        language: 'fr',
+        locale: 'fr',
       });
 
       // then
@@ -128,7 +128,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
         },
         password: 'P@ssW0rd',
         anonymousUserToken: 'invalid-anonymous-token',
-        language: 'fr',
+        locale: 'fr',
       });
 
       // then

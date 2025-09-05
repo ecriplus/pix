@@ -358,7 +358,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         },
         password,
         anonymousUserToken,
-        language,
+        locale,
       });
       expect(dependencies.userSerializer.serialize).to.have.been.calledWithExactly(realUser);
       expect(response.source).to.deep.equal(expectedSerializedUser);

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { FRENCH_FRANCE } from '../../../shared/domain/services/locale-service.js';
+import { FRENCH_FRANCE, FRENCH_SPOKEN, getBaseLocale } from '../../../shared/domain/services/locale-service.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
@@ -17,8 +17,8 @@ export async function findByRecordIdsForCurrentUser({ ids, userId, locale }) {
   let tutorialDtos = await getInstance().getMany(ids);
   tutorialDtos = tutorialDtos.filter((tutorialDto) => tutorialDto);
   if (locale) {
-    const lang = extractLangFromLocale(locale);
-    tutorialDtos = tutorialDtos.filter((tutorialDto) => extractLangFromLocale(tutorialDto.locale) === lang);
+    const lang = getBaseLocale(locale);
+    tutorialDtos = tutorialDtos.filter((tutorialDto) => getBaseLocale(tutorialDto.locale) === lang);
   }
   tutorialDtos.sort(byId);
   const tutorials = tutorialDtos.map(toDomain);
@@ -66,7 +66,7 @@ export async function get({ tutorialId }) {
 
 export async function list({ locale = FRENCH_FRANCE }) {
   const cacheKey = `list({ locale: ${locale} })`;
-  const lang = extractLangFromLocale(locale);
+  const lang = getBaseLocale(locale);
   const listByLangCallback = (knex) => knex.whereLike('locale', `${lang}%`).orderBy('id');
   const tutorialDtos = await getInstance().find(cacheKey, listByLangCallback);
   return tutorialDtos.map(toDomain);
@@ -76,7 +76,7 @@ export async function findPaginatedFilteredRecommendedByUserId({
   userId,
   filters = {},
   page,
-  locale = FRENCH_FRANCE,
+  lang = FRENCH_SPOKEN,
 } = {}) {
   const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({ userId });
 
@@ -95,9 +95,8 @@ export async function findPaginatedFilteredRecommendedByUserId({
     filteredSkills.map(async (skill) => {
       let tutorialDtos = await getInstance().loadMany(skill.tutorialIds);
       tutorialDtos = tutorialDtos.map((tutorialDto) => tutorialDto);
-      if (locale) {
-        const lang = extractLangFromLocale(locale);
-        tutorialDtos = tutorialDtos.filter((tutorialDto) => extractLangFromLocale(tutorialDto.locale) === lang);
+      if (lang) {
+        tutorialDtos = tutorialDtos.filter((tutorialDto) => getBaseLocale(tutorialDto.locale) === lang);
       }
       tutorialDtos.sort(byId);
       const tutorials = tutorialDtos.map(toDomain);
@@ -150,10 +149,6 @@ function toTutorialsForUserForRecommandation({ tutorials, tutorialEvaluations, u
     const tutorialEvaluation = tutorialEvaluations.find(({ tutorialId }) => tutorialId === tutorial.id);
     return new TutorialForUser({ ...tutorial, userSavedTutorial, tutorialEvaluation, skillId });
   });
-}
-
-function extractLangFromLocale(locale) {
-  return locale && locale.split('-')[0];
 }
 
 export function clearCache(id) {
