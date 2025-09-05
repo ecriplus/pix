@@ -287,7 +287,7 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Pour comprendre comment l’IA générative utilise ses données d’entraînement pour répondre aux utilisateurs, <strong>vous allez incarner l’IA</strong>.&nbsp;<br>Aujourd’hui vous allez vous entraîner sur l’exemple de la recette du taboulé.</p><p><br>En tant qu’IA générative, vous allez vous entraîner <strong>avec les données du web</strong>. Voici les données avec lesquelles vous allez être entraîné.</p>"
+                "content": "<p>Pour comprendre comment l’IA générative utilise ses données d’entraînement pour répondre aux utilisateurs, aujourd’hui vous allez entraîner l'IA générative sur l’exemple de la recette du taboulé.</p><p><br>Voici les données d'entraînement de l'IA générative <strong>venues du web</strong>. Voici les données avec lesquelles vous allez être entraîné.</p>"
               }
             },
             {
@@ -307,7 +307,7 @@
               "element": {
                 "id": "651eef5d-0510-4fb7-b57d-841d618f61e4",
                 "type": "text",
-                "content": "<p>Vous êtes toujours une IA générative. Vous avez consulté vos données d’entraînement venues du web.<br></p>"
+                "content": "<p> À partir de l'étude des données d’entraînement, répondez à la question suivante.<br></p>"
               }
             },
             {
@@ -315,20 +315,20 @@
               "element": {
                 "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
                 "type": "qcu-discovery",
-                "instruction": "<p>Que répondez-vous à l’utilisateur qui vous demande « Quel est l'ingrédient principal de la recette du taboulé » ?</p>",
+                "instruction": "<p>Que va répondre l'IA générative à la demande « Quel est l'ingrédient principal de la recette du taboulé » ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, en tant qu’IA générative, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, en tant qu’IA générative, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
+                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
                     }
                   }
                 ],
