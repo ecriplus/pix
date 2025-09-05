@@ -23,10 +23,9 @@ export default class ModulixStep extends Component {
     return this.args.currentStep === this.args.totalSteps;
   }
 
-
   @action
   focusAndScroll(htmlElement) {
-    if (!this.args.isActive) {
+    if (!this.args.isActive || this.args.preventScrollAndFocus) {
       return;
     }
 

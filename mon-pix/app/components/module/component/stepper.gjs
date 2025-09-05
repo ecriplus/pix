@@ -30,6 +30,9 @@ export default class ModulixStepper extends Component {
 
   @tracked displayedStepIndex = 0;
 
+  @tracked
+  preventScrollAndFocus = false;
+
   @action
   stepIsActive(index) {
     return this.displayedStepIndex === index;
@@ -55,6 +58,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.displayedStepIndex -= 1;
+    this.preventScrollAndFocus = true;
   }
 
   @action
@@ -69,6 +73,7 @@ export default class ModulixStepper extends Component {
 
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
+    this.preventScrollAndFocus = false;
   }
 
   @action
@@ -78,6 +83,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.displayedStepIndex++;
+    this.preventScrollAndFocus = true;
   }
 
   get lastDisplayedStepIndex() {
@@ -180,6 +186,7 @@ export default class ModulixStepper extends Component {
                 @onExpandToggle={{@onExpandToggle}}
                 @onNextButtonClick={{this.displayNextStep}}
                 @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
+                @preventScrollAndFocus={{this.preventScrollAndFocus}}
               />
             {{/each}}
           {{/if}}
