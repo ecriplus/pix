@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.200.0](https://github.com/1024pix/pix/compare/v5.199.0...v5.200.0) (2025-09-05)
+
+### :rocket: Amélioration
+
+- [#13429](https://github.com/1024pix/pix/pull/13429) Afficher les cadenas sur les items bloqués sur un parcours combiné (PIX-19020) 
+- [#13372](https://github.com/1024pix/pix/pull/13372) Ajout du bouton "Reprendre mon parcours" sur les parcours combinés (PIX-19017) 
+- [#13453](https://github.com/1024pix/pix/pull/13453) Modifications du module biais-inde suite à validation 
+- [#13285](https://github.com/1024pix/pix/pull/13285) Modifs module ia-apprend-discussion-intermediaire 
+- [#13450](https://github.com/1024pix/pix/pull/13450) Module Deepfakes - ajout sections et pix-articles 
+- [#13455](https://github.com/1024pix/pix/pull/13455) Module IA hallu - ajout de sections et modifs mineures 
+- [#13444](https://github.com/1024pix/pix/pull/13444) Module PPN CP- sections et retours ministère 
+- [#13447](https://github.com/1024pix/pix/pull/13447) Module PPN JV - modifs de qcu découverte 
+
+### :bug: Correction
+
+- [#13431](https://github.com/1024pix/pix/pull/13431) Attendre l'instanciation du LearningContentRepository pour les certifs Pix+ (PIX-19410). 
+- [#13445](https://github.com/1024pix/pix/pull/13445) Suppression de la propriété `has-complementary-referential` dans l'update d'une certif. complémentaire (PIX-19411). 
+
+### :building_construction: Tech
+
+- [#13385](https://github.com/1024pix/pix/pull/13385) Supprimer les anciennes tables de configurations de certification (PIX-19068) 
+
+### :arrow_up: Montée de version
+
+- [#13463](https://github.com/1024pix/pix/pull/13463) Update dependency @1024pix/ember-testing-library to ^3.0.9 (certif) 
+- [#13464](https://github.com/1024pix/pix/pull/13464) Update dependency @1024pix/ember-testing-library to ^3.0.9 (junior) 
+- [#13465](https://github.com/1024pix/pix/pull/13465) Update dependency @1024pix/ember-testing-library to ^3.0.9 (mon-pix) 
+- [#13466](https://github.com/1024pix/pix/pull/13466) Update dependency @1024pix/ember-testing-library to ^3.0.9 (orga) 
+- [#13446](https://github.com/1024pix/pix/pull/13446) Update dependency @1024pix/epreuves-components to ^1.2.1 (api) 
+- [#13448](https://github.com/1024pix/pix/pull/13448) Update dependency @1024pix/epreuves-components to ^1.2.1 (junior) 
+- [#13449](https://github.com/1024pix/pix/pull/13449) Update dependency @1024pix/epreuves-components to ^1.2.1 (mon-pix) 
+- [#13439](https://github.com/1024pix/pix/pull/13439) Update dependency @1024pix/pix-ui to ^55.26.5 (orga)
+
 # [5.199.0](https://github.com/1024pix/pix/compare/v5.198.0...v5.199.0) (2025-09-04)
 
 ### :rocket: Amélioration
