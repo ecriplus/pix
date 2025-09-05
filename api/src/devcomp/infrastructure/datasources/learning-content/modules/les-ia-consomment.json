@@ -487,14 +487,14 @@
         {
           "id": "67ffb9ff-0a27-4ef4-aefe-ea406e053988",
           "type": "lesson",
-          "title": "L’IA, ça calcule, ça chauffe, ça consomme",
+          "title": "L’IA, ça calcule, ça chauffe, ça consomme.",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "40de84e9-fc48-40c3-9d3f-499f6454d46a",
                 "type": "text",
-                "content": "<p><strong>⚡L’IA, ça calcule, ça chauffe, ça consomme.</strong></p><p>Le traitement d’une requête demande de <strong>nombreux calculs</strong>. Pour effectuer ces calculs, il faut du <strong>matériel très complexe</strong>, qui <strong>consomme de l’électricité</strong> et qui a <strong>besoin d’être refroidi</strong> en permanence avec <strong>de l‘eau</strong>.</p>"
+                "content": "<p><strong>⚡L’IA, ça calcule, ça chauffe, ça consomme.</strong></p><p>Le traitement d’une requête demande de <strong>nombreux calculs</strong>. Pour faire ces calculs, il faut du <strong>matériel très complexe</strong>, qui <strong>consomme de l’électricité</strong> et qui a <strong>besoin d’être refroidi</strong> en permanence avec <strong>de l‘eau</strong>.</p>"
               }
             }
           ]
@@ -566,7 +566,7 @@
                     {
                       "id": "43d66e84-554c-4750-8658-7329c4a4f759",
                       "type": "qcu",
-                      "instruction": "<p>Si on envoie&nbsp;<strong>800 demandes</strong> de <strong>création de vidéo</strong>, le supercalculateur peut-il les traiter ?</p>",
+                      "instruction": "<p>Si on envoie <strong>800 demandes</strong> de <strong>création de vidéo</strong>, le supercalculateur peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -626,7 +626,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "<p>oui</p>",
                           "feedback": {
                             "state": "<p>En effet.</p>",
                             "diagnosis": "<p>Le supercalculateur a une capacité de calcul suffisante pour traiter des dizaines de milliers de création de texte en même temps.</p>"
@@ -634,9 +634,9 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "<p>non</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse</p>",
+                            "state": "<p>Et si !</p>",
                             "diagnosis": "<p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à  90 000 pour visualiser le résultat.</p>"
                           }
                         }
@@ -664,7 +664,7 @@
                           "id": "1",
                           "content": "<p>la création d‘image</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment</p>",
+                            "state": "<p>Pas vraiment.</p>",
                             "diagnosis": "<p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
                           }
                         },
