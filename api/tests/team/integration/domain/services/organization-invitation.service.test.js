@@ -94,6 +94,81 @@ describe('Integration | Team | Domain | Service | organizationInvitationService'
         };
         expect(_.omit(result, 'organizationName')).to.deep.equal(expectedOrganizationInvitation);
       });
+
+      context('when locale is defined', function () {
+        it('sends an email with given locale', async function () {
+          // given
+          const role = Membership.roles.MEMBER;
+          const newLocale = 'nl-BE';
+          const organization = databaseBuilder.factory.buildOrganization();
+          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+            organizationId: organization.id,
+            status: OrganizationInvitation.StatusType.PENDING,
+            role,
+            locale: 'fr-FR',
+          });
+          await databaseBuilder.commit();
+          sinon.stub(mailService, 'sendOrganizationInvitationEmail');
+          mailService.sendOrganizationInvitationEmail.resolves(EmailingAttempt.success());
+
+          // when
+          await organizationInvitationService.createOrUpdateOrganizationInvitation({
+            organizationId: organizationInvitation.organizationId,
+            email: organizationInvitation.email,
+            organizationRepository,
+            organizationInvitationRepository,
+            locale: newLocale,
+            dependencies: { mailService },
+          });
+
+          // then
+          expect(mailService.sendOrganizationInvitationEmail).to.have.been.calledOnceWithExactly({
+            email: organizationInvitation.email,
+            organizationName: organization.name,
+            organizationInvitationId: organizationInvitation.id,
+            code: organizationInvitation.code,
+            locale: 'nl-BE',
+            tags: undefined,
+          });
+        });
+      });
+
+      context('when locale is undefined', function () {
+        it('sends an email with existing invitation locale', async function () {
+          // given
+          const role = Membership.roles.MEMBER;
+          const organization = databaseBuilder.factory.buildOrganization();
+          const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+            organizationId: organization.id,
+            status: OrganizationInvitation.StatusType.PENDING,
+            role,
+            locale: 'fr-FR',
+          });
+          await databaseBuilder.commit();
+          sinon.stub(mailService, 'sendOrganizationInvitationEmail');
+          mailService.sendOrganizationInvitationEmail.resolves(EmailingAttempt.success());
+
+          // when
+          await organizationInvitationService.createOrUpdateOrganizationInvitation({
+            organizationId: organizationInvitation.organizationId,
+            email: organizationInvitation.email,
+            locale: undefined,
+            organizationRepository,
+            organizationInvitationRepository,
+            dependencies: { mailService },
+          });
+
+          // then
+          expect(mailService.sendOrganizationInvitationEmail).to.have.been.calledOnceWithExactly({
+            email: organizationInvitation.email,
+            organizationName: organization.name,
+            organizationInvitationId: organizationInvitation.id,
+            code: organizationInvitation.code,
+            locale: 'fr-FR',
+            tags: undefined,
+          });
+        });
+      });
     });
 
     context('when recipient email has an invalid domain', function () {
