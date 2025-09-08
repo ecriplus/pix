@@ -18,6 +18,7 @@ const serialize = function (jurySessions, meta) {
       'status',
       'description',
       'examinerGlobalComment',
+      'createdAt',
       'finalizedAt',
       'resultsSentToPrescriberAt',
       'publishedAt',

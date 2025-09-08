@@ -20,6 +20,7 @@ class JurySession {
    * @param {string} props.accessCode
    * @param {string} props.description
    * @param {string} props.examinerGlobalComment
+   * @param {Date} props.createdAt
    * @param {Date} props.finalizedAt
    * @param {Date} props.resultsSentToPrescriberAt
    * @param {Date} props.publishedAt
@@ -46,6 +47,7 @@ class JurySession {
     accessCode,
     description,
     examinerGlobalComment,
+    createdAt,
     finalizedAt,
     resultsSentToPrescriberAt,
     publishedAt,
@@ -71,6 +73,7 @@ class JurySession {
     this.accessCode = accessCode;
     this.description = description;
     this.examinerGlobalComment = examinerGlobalComment;
+    this.createdAt = createdAt;
     this.finalizedAt = finalizedAt;
     this.resultsSentToPrescriberAt = resultsSentToPrescriberAt;
     this.publishedAt = publishedAt;
