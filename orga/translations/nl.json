@@ -382,7 +382,8 @@
             "description": "De sessie geeft leerlingen gedurende 4 uur toegang tot Pix Junior. Zodra de sessie is geactiveerd, kan deze worden verlengd.",
             "title": "Sessie beheren"
           }
-        }
+        },
+        "title": "Wilt u dat doen?"
       },
       "organization-information": {
         "label": "Naam van uw organisatie",

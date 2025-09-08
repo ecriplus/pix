@@ -5,9 +5,11 @@ import IndexMissions from 'pix-orga/components/index/missions';
 
 <template>
   {{pageTitle (t "pages.index.title")}}
-  {{#if @controller.canAccessMissionsPage}}
-    <IndexMissions />
-  {{else}}
-    <IndexClassic />
-  {{/if}}
+  <div class="index-page">
+    {{#if @controller.canAccessMissionsPage}}
+      <IndexMissions />
+    {{else}}
+      <IndexClassic />
+    {{/if}}
+  </div>
 </template>

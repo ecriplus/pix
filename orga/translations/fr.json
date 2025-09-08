@@ -382,7 +382,8 @@
             "description": "La session permet aux élèves d'accéder à Pix Junior pour une durée de 4h. Une fois la session activée, il est possible de prolonger son ouverture.",
             "title": "Gérer une session"
           }
-        }
+        },
+        "title": "Que souhaitez-vous faire ?"
       },
       "organization-information": {
         "label": "Nom de votre organisation",
@@ -405,7 +406,7 @@
       "welcome": {
         "description": {
           "classic": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins.",
-          "missions": "Bienvenue sur votre plateforme d'évaluation et de développement des compétences numériques ! Configurez et diffusez des campagnes auprès de vos participants. Suivez leur progression et analysez leurs résultats afin de leur proposer un accompagnement adapté à leurs besoins."
+          "missions": "Bienvenue sur votre plateforme de suivi pédagogique des compétences numériques de vos élèves ! Sélectionnez les missions et suivez leurs progressions."
         },
         "title": "Bonjour {name},"
       }

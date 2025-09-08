@@ -382,7 +382,8 @@
             "description": "The session allows students to access Pix Junior for a period of 4 hours. Once the session has been activated, it is possible to extend its duration.",
             "title": "Manage session"
           }
-        }
+        },
+        "title": "What would you like to do?"
       },
       "organization-information": {
         "label": "Name of your organisation",
