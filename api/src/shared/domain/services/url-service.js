@@ -45,15 +45,15 @@ export function getPixWebsiteDomain(locale) {
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
+ * @param {boolean} [options.skipLocaleParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix App URL according the locale
  */
-export function getPixAppUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
+export function getPixAppUrl(locale, { pathname, queryParams, hash, skipLocaleParam } = {}) {
   const rootUrl = isFranceLocale(locale)
     ? `${config.domain.pixApp}${config.domain.tldFr}`
     : `${config.domain.pixApp}${config.domain.tldOrg}`;
 
-  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLangParam });
+  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLocaleParam });
 }
 
 /**
@@ -62,15 +62,15 @@ export function getPixAppUrl(locale, { pathname, queryParams, hash, skipLangPara
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
+ * @param {boolean} [options.skipLocaleParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix Orga URL according the locale
  */
-export function getPixOrgaUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
+export function getPixOrgaUrl(locale, { pathname, queryParams, hash, skipLocaleParam } = {}) {
   const rootUrl = isFranceLocale(locale)
     ? `${config.domain.pixOrga}${config.domain.tldFr}`
     : `${config.domain.pixOrga}${config.domain.tldOrg}`;
 
-  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLangParam });
+  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLocaleParam });
 }
 
 /**
@@ -79,15 +79,15 @@ export function getPixOrgaUrl(locale, { pathname, queryParams, hash, skipLangPar
  * @param {string} [options.pathname] - optional pathname to append to the URL
  * @param {Object} [options.queryParams] - optional query parameters to append to the URL
  * @param {string} [options.hash] - optional hash to append to the URL
- * @param {boolean} [options.skipLangParam] - optional when true, does not automatically add a locale query param
+ * @param {boolean} [options.skipLocaleParam] - optional when true, does not automatically add a locale query param
  * @returns {string} - Pix Certif URL according the locale
  */
-export function getPixCertifUrl(locale, { pathname, queryParams, hash, skipLangParam } = {}) {
+export function getPixCertifUrl(locale, { pathname, queryParams, hash, skipLocaleParam } = {}) {
   const rootUrl = isFranceLocale(locale)
     ? `${config.domain.pixCertif}${config.domain.tldFr}`
     : `${config.domain.pixCertif}${config.domain.tldOrg}`;
 
-  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLangParam });
+  return _buildUrlWithLocale({ rootUrl, locale, pathname, queryParams, hash, skipLocaleParam });
 }
 
 /**
@@ -110,7 +110,7 @@ export function getEmailValidationUrl({ locale, redirectUrl, token } = {}) {
   const queryParams = { token };
   if (redirectUrl) queryParams['redirect_url'] = redirectUrl;
 
-  return getPixAppUrl(locale, { pathname: '/api/users/validate-email', queryParams, skipLangParam: true });
+  return getPixAppUrl(locale, { pathname: '/api/users/validate-email', queryParams, skipLocaleParam: true });
 }
 
 // Pix website paths for each supported locales
@@ -136,7 +136,7 @@ export function getSupportUrl(locale) {
   return `${websiteRootUrl}/${PIX_WEBSITE_PATHS.SUPPORT[supportedLocale]}`;
 }
 
-function _buildUrlWithLocale({ rootUrl, pathname, queryParams, locale, hash, skipLangParam } = {}) {
+function _buildUrlWithLocale({ rootUrl, pathname, queryParams, locale, hash, skipLocaleParam } = {}) {
   const url = new URL(rootUrl);
 
   if (pathname) {
@@ -153,8 +153,8 @@ function _buildUrlWithLocale({ rootUrl, pathname, queryParams, locale, hash, ski
     url.hash = hash;
   }
 
-  // Adding the "locale" query param on .org domain (except when overriden or skipLangParam)
-  if (!isFranceLocale(locale) && !(queryParams?.locale || queryParams?.lang) && !skipLangParam) {
+  // Adding the "locale" query param on .org domain (except when overriden or skipLocaleParam)
+  if (!isFranceLocale(locale) && !(queryParams?.locale || queryParams?.lang) && !skipLocaleParam) {
     const supportedLocale = getNearestSupportedLocale(locale) || getDefaultLocale();
     url.searchParams.set('locale', supportedLocale);
   }

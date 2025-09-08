@@ -160,14 +160,14 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
       });
     });
 
-    context('when skipLangParam is true', function () {
+    context('when skipLocaleParam is true', function () {
       it('does not add the locale queryParam', function () {
         // given
         const locale = 'en';
         const pathname = '/api/hello';
 
         // when
-        const url = getPixAppUrl(locale, { pathname, skipLangParam: true });
+        const url = getPixAppUrl(locale, { pathname, skipLocaleParam: true });
 
         // then
         expect(url).to.equal('https://test.app.pix.org/api/hello');
