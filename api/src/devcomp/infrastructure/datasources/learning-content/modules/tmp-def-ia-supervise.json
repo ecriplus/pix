@@ -141,53 +141,60 @@
                   ]
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "8832f25f-422e-4e09-9790-8cff61d7b27f",
+          "type": "discovery",
+          "title": "Découverte n°1bis - Données étiquetées : le jeu",
+          "components": [
             {
               "type": "element",
               "element": {
-                "id": "891b484d-67e2-4c3c-a1aa-71b4c65a104e",
+                "id": "365d0e92-7b9e-406a-920b-4d12e08c7a28",
                 "type": "qab",
                 "instruction": "<p>Regardez l’image et identifiez si c’est de l’ail des ours ou du muguet.<br></p>",
                 "cards": [
                   {
-                    "id": "a89c761c-71eb-47cd-a23a-f35a4fc2f8a1",
+                    "id": "993c38a2-b94e-42e8-966c-28b2ce8376f7",
                     "text": "",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours2.jpg",
-                      "altText": "Une photographie d'une plante"
+                      "altText": "Une photo d'une plante"
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
                     "solution": "A"
                   },
                   {
-                    "id": "3f861f65-65a1-415b-bb67-76c84872da45",
+                    "id": "dba2358a-c5d9-4d46-a026-f1266ae270b7",
                     "text": "",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet2.jpg",
-                      "altText": "Une photographie d'une plante"
+                      "altText": "Une photo d'une plante"
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
                     "solution": "B"
                   },
                   {
-                    "id": "1344f1c9-ad1e-44a4-bae2-139ff737d395",
+                    "id": "f222d212-cf40-4d56-b582-f7f30893fb00",
                     "text": "",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet4.jpg",
-                      "altText": "Une photographie d'une plante"
+                      "altText": "Une photo d'une plante"
                     },
-                    "proposalA": "Ail des ours",
+                    "proposalA": "Ail des ours ",
                     "proposalB": "Muguet",
                     "solution": "B"
                   },
                   {
-                    "id": "342ed35e-14a7-4d5d-9868-09de495511ab",
+                    "id": "24bebede-539b-44d3-a5a3-fe75a2181aef",
                     "text": "",
                     "image": {
                       "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours4.jpg",
-                      "altText": "Une photographie d'une plante"
+                      "altText": "Une photo d'une plante"
                     },
                     "proposalA": "Ail des ours",
                     "proposalB": "Muguet",
@@ -198,6 +205,76 @@
                   "diagnosis": "<p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p>"
                 }
               }
+            }
+          ]
+        },
+        {
+          "id": "d11b5bf5-bd63-40d2-92dd-d03b5d5b7bf2",
+          "type": "discovery",
+          "title": "Découverte 3 : Généralisation",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "7f771c91-272f-42e9-875c-97640fcb7809",
+                      "type": "text",
+                      "content": "<p>Lila a donné à son logiciel des centaines de photographies ressemblant à celles ci-dessous.</p><p>Elle se demande si cet entrainement suffit pour qu'il reconnaisse l’ail des ours. 🥕</p>"
+                    },
+                    {
+                      "id": "1b67fab0-9ad4-45a6-aded-160b77b24993",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/jeudedonne-sanslegende.png",
+                      "alt": "Une illustration du jeu de données avec des exemples",
+                      "alternativeText": "<p>On voit des photos d'ail des ours (avec des fleurs, avec des feuilles) et de muguet (avec des feuilles, avec des fleurs)</p>",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "df83f537-de47-43da-8087-480f5b44bc8f",
+                      "type": "text",
+                      "content": "<p>Lila veut maintenant tester son logiciel sur une nouvelle photographie d'ail des ours.  <br></p>"
+                    },
+                    {
+                      "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeunepousseaildesours.jpg",
+                      "alt": "",
+                      "alternativeText": "<p>Une photo d'une jeune pousse d'ail des ours.</p>",
+                      "legend": "",
+                      "licence": "Unsplash"
+                    },
+                    {
+                      "id": "7ab7d47a-3c75-40ee-87ca-e487493f2ffc",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, pourquoi ce logiciel n'est pas capable de dire avec certitude que cette photographie est de l'ail des ours ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Les images d'entraînement ne comportent pas de photos de pousses de l'ail des ours.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Et oui ! Ces données ne sont pas suffisamment variées, elles manquent de diversité.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Plusieurs photos d’ail des ours ont été étiquetées comme étant du muguet.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien sûr, si les images étaient mal étiquetées, ça serait un problème !<br>Mais ce n’est pas le cas ici, le problème principal est que les photos d'entraînement ne contiennent pas de pousses d'ail des ours !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -409,76 +486,6 @@
                       "id": "b3d22c1d-d09e-4f92-8691-5cf7bcddcb96",
                       "type": "text",
                       "content": "<p>🤔 Le saviez-vous ?</p><p><br> Ce type de modèle de calcul s’appelle un “<strong>réseau de neurones</strong>” car les chercheurs se sont inspirés du fonctionnement des neurones dans le cerveau humain.🧠<br></p>"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "d11b5bf5-bd63-40d2-92dd-d03b5d5b7bf2",
-          "type": "discovery",
-          "title": "Découverte 3 : Généralisation",
-          "components": [
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "7f771c91-272f-42e9-875c-97640fcb7809",
-                      "type": "text",
-                      "content": "<p>Lila a donné à son logiciel des centaines de photographies ressemblant à celles ci-dessous.</p><p>Elle se demande si cet entrainement suffit pour qu'il reconnaisse l’ail des ours. 🥕</p>"
-                    },
-                    {
-                      "id": "1b67fab0-9ad4-45a6-aded-160b77b24993",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/jeudedonne-sanslegende.png",
-                      "alt": "Une illustration du jeu de données avec des exemples",
-                      "alternativeText": "<p>On voit des photos d'ail des ours (avec des fleurs, avec des feuilles) et de muguet (avec des feuilles, avec des fleurs)</p>",
-                      "legend": "",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "df83f537-de47-43da-8087-480f5b44bc8f",
-                      "type": "text",
-                      "content": "<p>Lila veut maintenant tester son logiciel sur une nouvelle photographie d'ail des ours.  <br></p>"
-                    },
-                    {
-                      "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeunepousseaildesours.jpg",
-                      "alt": "",
-                      "alternativeText": "<p>Une photo d'une jeune pousse d'ail des ours.</p>",
-                      "legend": "",
-                      "licence": "Unsplash"
-                    },
-                    {
-                      "id": "7ab7d47a-3c75-40ee-87ca-e487493f2ffc",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, pourquoi ce logiciel n'est pas capable de dire avec certitude que cette photographie est de l'ail des ours ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Les images d'entraînement ne comportent pas de photos de pousses de l'ail des ours.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Et oui ! Ces données ne sont pas suffisamment variées, elles manquent de diversité.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Plusieurs photos d’ail des ours ont été étiquetées comme étant du muguet.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Bien sûr, si les images étaient mal étiquetées, ça serait un problème !<br>Mais ce n’est pas le cas ici, le problème principal est que les photos d'entraînement ne contiennent pas de pousses d'ail des ours !</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
                     }
                   ]
                 }
