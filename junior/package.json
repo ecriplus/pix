@@ -45,7 +45,7 @@
     }
   },
   "devDependencies": {
-    "@1024pix/ember-testing-library": "^3.0.9",
+    "@1024pix/ember-testing-library": "^3.0.13",
     "@1024pix/epreuves-components": "^1.2.1",
     "@1024pix/eslint-plugin": "^2.1.10",
     "@1024pix/pix-ui": "^55.26.5",
