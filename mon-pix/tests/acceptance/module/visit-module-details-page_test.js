@@ -22,7 +22,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Écrire une adresse mail correctement, en évitant les erreurs courantes'],
       },
       grains: [],
@@ -51,7 +51,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
           description:
             'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
           duration: 12,
-          level: 'Débutant',
+          level: 'novice',
           objectives: ['Écrire une adresse mail correctement, en évitant les erreurs courantes'],
         },
         grains: [],
@@ -84,7 +84,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Écrire une adresse mail correctement, en évitant les erreurs courantes'],
       },
       sections: [section],

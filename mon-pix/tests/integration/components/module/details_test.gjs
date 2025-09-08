@@ -19,7 +19,7 @@ module('Integration | Component | Module | Details', function (hooks) {
       image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
       description: `<p>${descriptionContent}</p>`,
       duration: 12,
-      level: 'Débutant',
+      level: 'novice',
       objectives: ['Objectif 1'],
     };
     const module = store.createRecord('module', { slug: 'module-slug', title: 'Module title', details });
@@ -32,7 +32,7 @@ module('Integration | Component | Module | Details', function (hooks) {
     assert.ok(screen.getByRole('presentation').hasAttribute('src', module.details.image));
     assert.ok(screen.getByText(descriptionContent));
     assert.ok(screen.getByText(`${module.details.duration} min`));
-    assert.ok(screen.getByText(module.details.level));
+    assert.ok(screen.getByText(t(`pages.modulix.details.levels.${module.details.level}`)));
     assert.ok(screen.getByText(module.details.objectives[0]));
     assert.ok(screen.getByRole('heading', { name: t('pages.modulix.details.explanationTitle'), level: 2 }));
     assert.ok(findAll('.module-details-infos-explanation__title').length > 0);
@@ -258,7 +258,7 @@ function prepareDetailsComponentContext(tabletSupport, breakpoint = 'desktop') {
     image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
     description: '<p>Description</p>',
     duration: 12,
-    level: 'Débutant',
+    level: 'novice',
     objectives: ['Objectif 1'],
     tabletSupport,
   };

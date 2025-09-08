@@ -1689,6 +1689,12 @@
         "explanationText2": "Estos módulos de aprendizaje se encuentran actualmente en fase de prueba beta. Puede enviarnos sus sugerencias de mejora a través del cuestionario que figura al final de cada módulo.",
         "explanationTitle": "¿Qué es un módulo?",
         "level": "Nivel",
+        "levels": {
+          "advanced": "Avanzado",
+          "expert": "Experto",
+          "independent": "Independiente",
+          "novice": "Principiante"
+        },
         "objectives": "Objetivos",
         "smallScreenModal": {
           "cancel": "Volver a los detalles",
