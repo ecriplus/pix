@@ -1199,7 +1199,9 @@
         "start-button": "Start course"
       },
       "items": {
+        "approximatelySymbol": "≈",
         "completed": "Completed!",
+        "durationUnit": "min",
         "formation": {
           "description": "Complete your test and unlock customised training modules! The number of modules will depend on your results.",
           "title": "I am training myself"

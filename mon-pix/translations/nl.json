@@ -1203,7 +1203,9 @@
           "description": "Voltooi uw test en ontgrendel op maat gemaakte trainingsmodules! Het aantal modules hangt af van uw resultaten."
         },
         "completed": "Voltooid!",
-        "tagText": "U bent er nu!"
+        "tagText": "U bent er nu!",
+        "durationUnit": "min",
+        "approximatelySymbol": "≈"
       }
     },
     "comparison-window": {

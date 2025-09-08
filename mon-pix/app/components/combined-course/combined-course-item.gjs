@@ -20,6 +20,9 @@ const Content = <template>
           {{yield to="description"}}
         </div>
       </div>
+      <div class="combined-course-item__duration">
+        {{yield to="duration"}}
+      </div>
     </div>
     {{#if @isLocked}}
       <div class="combined-course-item__indicator--locked">
@@ -39,6 +42,13 @@ const Content = <template>
   </div>
 </template>;
 
+const Duration = <template>
+  <PixIcon @name="time" class="combined-course-item__duration__icon" /><span>{{t
+      "pages.combined-courses.items.approximatelySymbol"
+    }}{{@item.duration}}
+    {{t "pages.combined-courses.items.durationUnit"}}</span>
+</template>;
+
 <template>
   {{#if (eq @item.type "FORMATION")}}
     <Content
@@ -53,7 +63,11 @@ const Content = <template>
     </Content>
   {{else}}
     {{#if @isLocked}}
-      <Content @title={{@item.title}} @isLocked={{true}} />
+      <Content @title={{@item.title}} @isLocked={{true}}>
+        <:duration>
+          {{#if @item.duration}}<Duration @item={{@item}} />{{/if}}
+        </:duration>
+      </Content>
     {{else}}
       <LinkTo
         {{on "click" @onClick}}
@@ -63,6 +77,11 @@ const Content = <template>
         disabled
       >
         <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}}>
+          <:duration>
+            {{#if @item.duration}}
+              <Duration @item={{@item}} />
+            {{/if}}
+          </:duration>
           <:blockEnd>
             {{#if @isNextItemToComplete}}
               <PixTag @color="purple-light" class="combined-course-item__current-item-tag">{{t

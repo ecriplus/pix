@@ -7,6 +7,7 @@ export default class CombinedCourseItem extends Model {
   @attr('string') redirection;
   @attr('boolean') isCompleted;
   @attr('boolean') isLocked;
+  @attr('number') duration;
 
   get route() {
     return this.type === 'CAMPAIGN' ? 'campaigns' : 'module';

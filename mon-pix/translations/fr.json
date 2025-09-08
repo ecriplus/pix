@@ -1199,7 +1199,9 @@
         "start-button": "Commencer mon parcours"
       },
       "items": {
+        "approximatelySymbol": "≈",
         "completed": "Complété !",
+        "durationUnit": "min",
         "formation": {
           "description": "Terminez votre test et débloquez des modules de formation sur mesure ! Leur nombre dépendra de vos résultats.",
           "title": "Je me forme"

@@ -120,4 +120,18 @@
   background: var(--pix-tertiary-100);
   border-radius: 50px;
   }
+
+  &__duration {
+    display: flex;
+    gap: var(--pix-spacing-1x);
+    align-self: center;
+    color: var(--pix-neutral-500);
+    font-size: 13px;
+    line-height: 18px;
+
+      &__icon {
+      width: 16px;
+      height: 16px;
+  }
+  }
 }
