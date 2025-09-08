@@ -2016,9 +2016,9 @@
             "reset": "Poner a cero y volver a intentarlo todo",
             "retry": "Repetir el test"
           },
-          "description": "Su organizador le pedirá que repita el curso.",
+          "description": "Tu organizador te pedira que repites la prueba.",
           "retryIn": "Aún no puede retomar este curso. Vuelva dentro de {duration}.",
-          "title": "Mejore sus resultados"
+          "title": "Mejora tus resultados"
         },
         "see-trainings": "Ver los cursos",
         "shared-message": "Tus resultados se enviaron el {date} a las {time}."
@@ -2050,7 +2050,7 @@
         "button": "Repetir el test",
         "message": "{organizationName} te invita a repetir este test para mejorar tus resultados y seguir progresando.",
         "notification": "Vuelva a realizar las preguntas fallidas para mejorar su resultado y seguir progresando. Deberá enviar de nuevo sus resultados para que el organizador pueda contabilizarlos. El organizador seguirá teniendo acceso a tus resultados enviados anteriormente.",
-        "notification-with-auto-share": "Repita las preguntas fallidas para mejorar su resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
+        "notification-with-auto-share": "Repite las preguntas fallidas para mejorar tu resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
       },
       "send-results": "No olvides enviar tus resultados al organizador del test.",
       "send-status": {
@@ -2066,7 +2066,7 @@
       "tabs": {
         "aria-label": "3 pestañas con los resultados",
         "results-details": {
-          "description": "Descubra sus competencias en detalle, organizadas por áreas específicas, para comprender mejor sus puntos fuertes y sus áreas de mejora. Identifica tus puntos fuertes y las áreas en las que puedes centrar tus esfuerzos para seguir progresando.",
+          "description": "Descubra tus competencias en detalle, organizadas por áreas específicas, para comprender mejor tus puntos fuertes y tus áreas de mejora. Identifica tus puntos fuertes y las áreas en las que puedes centrar tus esfuerzos para seguir progresando.",
           "tab-label": "Detalle de los resultados",
           "title": "Detalle de los resultados"
         },
