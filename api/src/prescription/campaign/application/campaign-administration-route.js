@@ -40,6 +40,10 @@ const register = async function (server) {
             method: securityPreHandlers.checkAuthorizationToManageCampaign,
             assign: 'isAdminOrCreatorFromTheCampaign',
           },
+          {
+            method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
+            assign: 'campaignBelongsToCombinedCourse',
+          },
         ],
         validate: {
           params: Joi.object({
@@ -73,7 +77,13 @@ const register = async function (server) {
       method: 'PUT',
       path: '/api/campaigns/{campaignId}/archive',
       config: {
-        pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
+        pre: [
+          { method: securityPreHandlers.checkAuthorizationToManageCampaign },
+          {
+            method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
+            assign: 'campaignBelongsToCombinedCourse',
+          },
+        ],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,

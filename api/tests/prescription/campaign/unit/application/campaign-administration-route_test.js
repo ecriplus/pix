@@ -9,7 +9,7 @@ import {
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Application | Router | campaign-administration-router ', function () {
+describe('Unit | Application | Router | campaign-administration-router', function () {
   describe('POST /api/campaigns', function () {
     it('should not call controller method when security prehandler failed', async function () {
       // given
@@ -37,6 +37,24 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
 
       // then
       expect(response.statusCode).to.equal(400);
+    });
+    it('should call checkCampaignBelongsToCombinedCourse pre-handler', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse')
+        .callsFake((request, h) => h.response(true));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('PATCH', '/api/campaigns/1234', {
+        data: { attributes: { name: 'io', title: 'io', 'custom-landing-page-text': null, 'owner-id': 12 } },
+      });
+
+      // then
+      expect(securityPreHandlers.checkCampaignBelongsToCombinedCourse).called;
     });
   });
 
@@ -378,6 +396,21 @@ describe('Unit | Application | Router | campaign-administration-router ', functi
       // then
       expect(response.statusCode).to.equal(400);
     });
+  });
+
+  it('should call checkCampaignBelongsToCombinedCourse pre-handler', async function () {
+    // given
+    sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
+    sinon.stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse').callsFake((request, h) => h.response(true));
+
+    const httpTestServer = new HttpTestServer();
+    await httpTestServer.register(moduleUnderTest);
+
+    // when
+    await httpTestServer.request('PUT', '/api/campaigns/123/archive');
+
+    // then
+    expect(securityPreHandlers.checkCampaignBelongsToCombinedCourse).called;
   });
 
   describe('DELETE /api/campaigns/{campaignId}/archive', function () {

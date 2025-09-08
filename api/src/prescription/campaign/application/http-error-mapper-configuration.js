@@ -1,5 +1,6 @@
 import { HttpErrors } from '../../../shared/application/http-errors.js';
 import {
+  CampaignBelongsToCombinedCourseError,
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,
   CampaignUniqueCodeError,
@@ -54,6 +55,10 @@ const campaignDomainErrorMappingConfiguration = [
   {
     name: OrganizationNotAuthorizedToCreateCampaignError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message),
+  },
+  {
+    name: CampaignBelongsToCombinedCourseError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code),
   },
 ];
 

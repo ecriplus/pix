@@ -25,6 +25,61 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
     server = await createServer();
   });
 
+  describe('#checkCampaignBelongsToCombinedCourse', function () {
+    let campaignId;
+    beforeEach(async function () {
+      server.route({
+        method: 'GET',
+        path: '/api/pate-de-campagne/{campaignId}',
+        handler: (r, h) => h.response({}).code(200),
+        config: {
+          auth: false,
+          pre: [
+            {
+              method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
+            },
+          ],
+        },
+      });
+
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignId,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      await databaseBuilder.commit();
+    });
+
+    it('should return a well formed JSON API error when campaign belongs to a combined course', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        url: `/api/pate-de-campagne/${campaignId}`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(response.result.errors[0].code).equal('CAMPAIGN_BELONGS_TO_COMBINED_COURSE');
+    });
+  });
+
   describe('#checkAdminMemberHasRoleSuperAdmin', function () {
     it('should return a well formed JSON API error when user is not authorized', async function () {
       // given

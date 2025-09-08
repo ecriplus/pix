@@ -5,6 +5,7 @@ import { PIX_ADMIN } from '../../authorization/domain/constants.js';
 import * as checkUserIsCandidateUseCase from '../../certification/enrolment/application/usecases/check-user-is-candidate.js';
 import * as certificationIssueReportRepository from '../../certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import { Organization } from '../../organizational-entities/domain/models/Organization.js';
+import * as checkCampaignBelongsToCombinedCourseUsecase from '../../prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import * as checkCampaignParticipationBelongsToUserUsecase from '../../prescription/campaign/application/usecases/checkCampaignParticipationBelongsToUser.js';
 import * as checkAuthorizationToAccessCombinedCourseUsecase from '../../quest/application/usecases/check-authorization-to-access-combined-course.js';
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
@@ -876,6 +877,17 @@ async function checkOrganizationLearnerBelongsToOrganization(
   }
 }
 
+async function checkCampaignBelongsToCombinedCourse(
+  request,
+  h,
+  dependencies = { checkCampaignBelongsToCombinedCourseUsecase },
+) {
+  const campaignId = parseInt(request.params.campaignId);
+
+  await dependencies.checkCampaignBelongsToCombinedCourseUsecase.execute({ campaignId });
+  return h.response(true);
+}
+
 function _noOrganizationFound(error) {
   return error instanceof NotFoundError;
 }
@@ -890,6 +902,7 @@ const securityPreHandlers = {
   checkAuthorizationToManageCampaign,
   checkAuthorizationToAccessCampaign,
   checkAuthorizationToAccessCombinedCourse,
+  checkCampaignBelongsToCombinedCourse,
   checkCertificationCenterIsNotScoManagingStudents,
   checkIfUserIsBlocked,
   checkOrganizationHasFeature,
