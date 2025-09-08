@@ -131,28 +131,23 @@
       }
     },
     "submitted-count": {
-      "information": "Hier vind je de resultaten die door je deelnemers zijn verzonden. Dit aantal omvat alle deelnemers die klaar zijn en op de knop \"Ik verstuur mijn resultaten\" of \"Ik verstuur mijn profiel\" hebben geklikt.",
       "loader": "Ontvangen resultaten of profielen laden",
-      "title": "Ontvangen resultaten",
-      "title-profiles": "Ontvangen profielen"
+      "title": "Patcipaties voltooid"
     }
   },
   "charts": {
     "participants-by-day": {
       "captions": {
-        "shared": "Totaal aantal deelnemers per dag die hun resultaten instuurden",
-        "shared-profile": "Totaal aantal deelnemers dat per dag hun profiel instuurde",
+        "shared": "Voltooide deelnames per dag",
         "started": "Totaal aantal deelnemers per dag"
       },
       "labels-a11y": {
         "date": "Datum",
-        "shared": "Totaal aantal deelnemers die hun resultaten hebben ingestuurd",
-        "shared-profile": "Totaal aantal deelnemers die hun profiel hebben ingestuurd",
+        "shared": "Voltooide deelnames",
         "started": "Totaal aantal deelnemers"
       },
       "labels-legend": {
-        "shared": "Ontvangen resultaten",
-        "shared-profile": "Ontvangen profielen",
+        "shared": "Voltooide deelnames",
         "started": "Totaal aantal deelnemers"
       },
       "loader": "Deelnemersactiviteit laden",
@@ -176,29 +171,16 @@
     "participants-by-status": {
       "a11y-title": "Detail per status",
       "labels-a11y": {
-        "completed": "{count, plural, =0 {0 deelnemer} =1 {1 deelnemer} other {{count, number} deelnemers}} in afwachting van insturen",
         "shared": "{count, plural, =0 {0 deelnemer} =1 {1 deelnemer} other {{count, number} deelnemers}} die hun resultaten hebben ingestuurd",
-        "shared-profile": "{count, plural, =0 {0 deelnemer} =1 {1 deelnemer} other {{count, number} deelnemers}} die hun profiel hebben ingestuurd",
         "started": "{count, plural, =0 {0 deelnemer} =1 {1 deelnemer} other {{count, number} deelnemers}} bezig met test"
       },
       "labels-legend": {
-        "completed-assessment": "In afwachting van verzending ({count})",
-        "completed-assessment-tooltip": "In afwachting van verzending: Deze deelnemers hebben hun test afgerond maar hun resultaten nog niet ingestuurd.",
-        "completed-profile": "In afwachting van verzending ({count})",
-        "completed-profile-tooltip": "In afwachting van verzending: Deze deelnemers hebben hun profiel nog niet ingestuurd.",
-        "shared": "Ontvangen resultaten ({count})",
-        "shared-profile": "Ontvangen profielen ({count})",
-        "shared-profile-tooltip": "Ontvangen profielen: Deze deelnemers hebben hun profiel ingestuurd.",
-        "shared-tooltip": "Resultaten ontvangen: Deze deelnemers hebben hun test afgerond en hun resultaten ingestuurd.",
-        "started": "Bezig ({count})",
-        "started-tooltip": "Bezig: Deze deelnemers hebben hun test nog niet voltooid."
+        "shared": "Deelnames voltooid ({count})",
+        "started": "Bezig ({count})"
       },
       "labels-tooltip": {
-        "completed-assessment": "In afwachting van verzending: {percentage, number, ::percent .0}",
-        "completed-profile": "In afwachting van verzending: {percentage, number, ::percent .0}",
-        "shared": "Ontvangen resultaten: {percentage, number, ::percent .0}",
-        "shared-profile": "Ontvangen profielen: {percentage, number, ::percent .0}",
-        "started": "Bezig: {percentage, number, ::procent .0}"
+        "shared": "Deelnames voltooid: {percentage, number, ::percent .0}",
+        "started": "Bezig: {percentage, number, ::percent .0}"
       },
       "loader": "Laden verhoudingen per status",
       "title": "Statussen"
@@ -426,11 +408,8 @@
       "title": "{count, plural, =0 {Deelnemer} =1 {Deelnemer ({count})} other {Deelnemers ({count})}}"
     },
     "participation-status": {
-      "SHARED-ASSESSMENT": "Ontvangen resultaten",
-      "SHARED-PROFILES_COLLECTION": "Profiel ontvangen",
-      "STARTED-ASSESSMENT": "Bezig",
-      "TO_SHARE-ASSESSMENT": "In afwachting van verzending",
-      "TO_SHARE-PROFILES_COLLECTION": "In afwachting van verzending"
+      "SHARED": "Voltooid",
+      "STARTED": "Bezig"
     },
     "terms-of-service": {
       "actions": {
@@ -647,12 +626,10 @@
         "warning": {
           "assessment-campaign-participation": {
             "shared-participation": "De deelnemer heeft geen toegang meer tot de resultaten van deze test.",
-            "started-participation": "De deelnemer kan deze test niet voltooien.",
-            "to-share-participation": "The Participant will not be able to send in their results."
+            "started-participation": "De deelnemer kan deze test niet voltooien."
           },
           "profiles-collection-campaign-participation": {
-            "shared-participation": "De deelnemer zal niet langer kunnen deelnemen aan deze profielverzameling.",
-            "to-share-participation": "Deelnemers kunnen hun profiel niet verzenden."
+            "shared-participation": "De deelnemer zal niet langer kunnen deelnemen aan deze profielverzameling."
           }
         }
       },
@@ -1249,8 +1226,7 @@
           "title": {
             "assessment": "Beoordelingen",
             "profiles-collection": "Verzamelingen van profielen"
-          },
-          "to-share": "In afwachting van: {count}"
+          }
         },
         "empty-state": "Momenteel geen activiteit! Stuur een campagne naar {organizationLearnerFirstName} {organizationLearnerLastName} en begin met het bijhouden van de voortgang.",
         "participation-list": {
@@ -1416,9 +1392,7 @@
         "campaign-status": "Status:",
         "campaign-type": "Type:",
         "participation-SHARED-status": "Ontvangen",
-        "participation-STARTED-status": "Bezig",
-        "participation-TO_SHARE-status": "In afwachting van verzending"
-      }
+        "participation-STARTED-status": "Bezig"      }
     },
     "places": {
       "before-date": "op",
