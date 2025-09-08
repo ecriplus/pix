@@ -24,7 +24,7 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
     await cgu.waitFor();
     await loginPage.acceptCGU();
 
-    await expect(page).toHaveURL(/campagnes\/les-miennes$/);
+    await expect(page).toHaveURL('http://localhost:4201/');
   });
 
   await test.step('Logout and login, without having to accept CGU', async function () {
@@ -35,6 +35,6 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
     const loginPage = new PixOrgaPage(page);
     await loginPage.login(email, 'Coucoulesdevs66');
 
-    await expect(page).toHaveURL(/campagnes\/les-miennes$/);
+    await expect(page).toHaveURL('http://localhost:4201/');
   });
 });
