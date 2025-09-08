@@ -29,6 +29,7 @@ export default class Session extends Model {
   @attr() status;
   @attr() description;
   @attr() examinerGlobalComment;
+  @attr() createdAt;
   @attr() finalizedAt;
   @attr() resultsSentToPrescriberAt;
   @attr() publishedAt;

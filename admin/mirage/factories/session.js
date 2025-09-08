@@ -64,6 +64,10 @@ export default Factory.extend({
     return '';
   },
 
+  createdAt() {
+    return new Date('2020-01-01');
+  },
+
   withResultsSentToPrescriber: trait({
     resultsSentToPrescriberAt: '2023-05-28',
   }),

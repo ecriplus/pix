@@ -22,7 +22,7 @@ function getFormattedDate(param) {
 
       <ul class="session-info__list">
         <li class="session-info__list-item">
-          <span>Centre :</span>
+          <span>Centre de certification :</span>
           <span>
             <LinkTo @route="authenticated.certification-centers.get" @model={{@sessionModel.certificationCenterId}}>
               {{@sessionModel.certificationCenterName}}
@@ -30,24 +30,21 @@ function getFormattedDate(param) {
           </span>
         </li>
         <li class="session-info__list-item">
-          <span>Adresse :</span>
+          <span>Nom du site :</span>
           <span>{{@sessionModel.address}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Pièce :</span>
+          <span>Nom de la salle :</span>
           <span>{{@sessionModel.room}}</span>
+        </li>
+
+        <li class="session-info__list-item">
+          <span>Date et heure de la session :</span>
+          <span>{{getFormattedDate @sessionModel.date}} à {{@sessionModel.time}}</span>
         </li>
         <li class="session-info__list-item">
           <span>Surveillant :</span>
           <span>{{@sessionModel.examiner}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>Date :</span>
-          <span>{{getFormattedDate @sessionModel.date}}</span>
-        </li>
-        <li class="session-info__list-item">
-          <span>Heure :</span>
-          <span>{{@sessionModel.time}}</span>
         </li>
         <li class="session-info__list-item">
           <span>Description :</span>
@@ -57,11 +54,16 @@ function getFormattedDate(param) {
           <span>Code d'accès :</span>
           <span>{{@sessionModel.accessCode}}</span>
         </li>
+      </ul>
+      <ul class="session-info__list">
         <li class="session-info__list-item">
           <span>Statut :</span>
           <span>{{@sessionModel.displayStatus}}</span>
         </li>
-
+        <li class="session-info__list-item">
+          <span>Date de création :</span>
+          <span>{{getFormattedDate @sessionModel.createdAt}}</span>
+        </li>
         {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
             <span>Date de finalisation :</span>

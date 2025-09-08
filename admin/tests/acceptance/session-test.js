@@ -36,7 +36,7 @@ module('Acceptance | Session pages', function (hooks) {
         certificationCenterName: 'Centre des Staranne',
         certificationCenterId: 1234,
         status: FINALIZED,
-        finalizedAt: new Date('2020-01-01'),
+        finalizedAt: new Date('2020-02-01'),
         examinerGlobalComment: 'Commentaire du surveillant',
       });
     });
@@ -106,6 +106,7 @@ module('Acceptance | Session pages', function (hooks) {
           // then
           assert.dom(screen.getByRole('link', { name: session.certificationCenterName })).exists();
           assert.dom(screen.getByText('01/01/2020')).exists();
+          assert.dom(screen.getByText('01/02/2020')).exists();
           assert.dom(screen.getByText(session.examinerGlobalComment)).exists();
         });
 
