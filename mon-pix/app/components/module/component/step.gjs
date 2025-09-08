@@ -23,6 +23,10 @@ export default class ModulixStep extends Component {
     return this.args.currentStep === this.args.totalSteps;
   }
 
+  get shouldAppearToRight() {
+    return this.args.isActive && this.args.shouldAppearToRight;
+  }
+
   @action
   focusAndScroll(htmlElement) {
     if (!this.args.isActive || this.args.preventScrollAndFocus) {
@@ -35,7 +39,9 @@ export default class ModulixStep extends Component {
   <template>
     {{#if this.hasDisplayableElements}}
       <section
-        class="stepper__step {{if this.isLastStep 'stepper-step--last-step'}}"
+        class="stepper__step
+          {{if this.isLastStep 'stepper-step--last-step'}}
+          {{if this.shouldAppearToRight 'stepper__step--from-right'}}"
         tabindex="-1"
         {{didInsert this.focusAndScroll}}
         inert={{if @isHidden true}}

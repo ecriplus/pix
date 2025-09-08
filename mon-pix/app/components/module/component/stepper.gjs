@@ -33,6 +33,8 @@ export default class ModulixStepper extends Component {
   @tracked
   preventScrollAndFocus = false;
 
+  @tracked shouldAppearToRight = false;
+
   @action
   stepIsActive(index) {
     return this.displayedStepIndex === index;
@@ -74,6 +76,10 @@ export default class ModulixStepper extends Component {
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
     this.preventScrollAndFocus = false;
+    this.shouldAppearToRight = true;
+    setTimeout(() => {
+      this.shouldAppearToRight = false;
+    }, 0);
   }
 
   @action
@@ -187,6 +193,7 @@ export default class ModulixStepper extends Component {
                 @onNextButtonClick={{this.displayNextStep}}
                 @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
                 @preventScrollAndFocus={{this.preventScrollAndFocus}}
+                @shouldAppearToRight={{this.shouldAppearToRight}}
               />
             {{/each}}
           {{/if}}
