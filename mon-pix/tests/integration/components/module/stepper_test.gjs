@@ -71,8 +71,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
         // then
-        assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
-        assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+        assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
@@ -115,6 +114,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -234,6 +234,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             const store = this.owner.lookup('service:store');
             const passage = store.createRecord('passage');
             sinon.stub(passageEventService, 'record');
+
             function getLastCorrectionForElementStub(element) {
               if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
                 return {};
@@ -306,6 +307,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub(element) {
               if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
                 return Symbol('Correction');
@@ -366,6 +368,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -422,6 +425,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -440,8 +444,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).exists();
+            assert.strictEqual(screen.getAllByLabelText('1 sur 1').length, 1);
+
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .doesNotExist();
@@ -471,6 +475,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -489,8 +494,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.queryAllByRole('heading', { level: 4 }).length, 0);
-            assert.dom(screen.queryByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).doesNotExist();
+            assert.dom(screen.queryByLabelText('1 sur 1')).doesNotExist();
           });
         });
       });
@@ -538,7 +542,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
+          assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
         });
 
         test('should not display the Next button when there are no steps left', async function (assert) {
@@ -610,18 +615,19 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               ],
             },
           ];
+
           class PreviewModeServiceStub extends Service {
             isEnabled = true;
           }
+
           this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
 
           // when
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
-          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
-          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
+          assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
         });
 
         module('when has unsupported elements', function () {
@@ -655,18 +661,19 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             class PreviewModeServiceStub extends Service {
               isEnabled = true;
             }
+
             this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
 
             // when
             const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
+            assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+            assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
           });
         });
       });
@@ -675,36 +682,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
   module('When stepper is horizontal', function () {
     module('A Stepper with 2 steps', function () {
-      test('it should set horizontal class', async function (assert) {
-        const steps = [
-          {
-            elements: [
-              {
-                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                type: 'text',
-                content: '<p>Text 1</p>',
-              },
-            ],
-          },
-          {
-            elements: [
-              {
-                id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                type: 'text',
-                content: '<p>Text 2</p>',
-              },
-            ],
-          },
-        ];
-
-        // when
-        await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
-
-        // then
-        assert.dom(find('.stepper--horizontal')).exists();
-      });
-
-      test('it should set accessible control buttons', async function (assert) {
+      test('it should set accessible stepper', async function (assert) {
         const steps = [
           {
             elements: [
@@ -739,6 +717,12 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert
           .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
           .hasAria('controls', 'stepper-container-id-1');
+        assert
+          .dom(find('.stepper--horizontal'))
+          .hasAria('roleDescription', t('pages.modulix.stepper.aria-role-description'));
+        assert
+          .dom(screen.getByLabelText('1 sur 2'))
+          .hasAria('roleDescription', t('pages.modulix.stepper.step.aria-role-description'));
       });
 
       test('it should display current step number', async function (assert) {
@@ -763,6 +747,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             ],
           },
         ];
+
         function stepperIsFinished() {}
 
         function onStepperNextStepStub() {}
@@ -827,8 +812,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
         // then
-        assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
-        assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+        assert.dom(screen.getByLabelText('1 sur 2'));
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
@@ -939,6 +923,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -1067,6 +1052,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             const store = this.owner.lookup('service:store');
             const passage = store.createRecord('passage');
             sinon.stub(passageEventService, 'record');
+
             function getLastCorrectionForElementStub(element) {
               if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
                 return {};
@@ -1139,6 +1125,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub(element) {
               if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
                 return Symbol('Correction');
@@ -1199,6 +1186,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -1255,6 +1243,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
@@ -1273,8 +1262,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).exists();
+            assert.dom(screen.getByLabelText('1 sur 1')).exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .doesNotExist();
@@ -1283,7 +1271,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
         module('When there are no supported elements at all', function () {
           test('should not display the Stepper', async function (assert) {
-            // given
             const steps = [
               {
                 elements: [
@@ -1304,11 +1291,11 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             function getLastCorrectionForElementStub() {}
 
             const store = this.owner.lookup('service:store');
             const passage = store.createRecord('passage');
-
             // when
             const screen = await render(
               <template>
@@ -1322,15 +1309,13 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.queryAllByRole('heading', { level: 4 }).length, 0);
-            assert.dom(screen.queryByRole('heading', { level: 4, name: 'Étape 1 sur 1' })).doesNotExist();
+            assert.dom(screen.queryByLabelText('1 sur 1')).doesNotExist();
           });
         });
       });
 
       module('When user clicks on the Next button', function () {
         test('should display the next step', async function (assert) {
-          // given
           const steps = [
             {
               elements: [
@@ -1371,12 +1356,12 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 4, disabled: true }).length, 1);
-          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 1);
+          assert.strictEqual(screen.getAllByLabelText('1 sur 2', { disabled: true }).length, 1);
+          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
+          assert.dom(screen.getByLabelText('2 sur 2')).isFocused();
         });
 
         test('should enable the controls previous button', async function (assert) {
-          // given
           const steps = [
             {
               elements: [
@@ -1415,7 +1400,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
           // when
           await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
-
           // then
           assert
             .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
@@ -1424,7 +1408,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
         module('when user clicks the controls previous button', function () {
           test('should go back to previous step', async function (assert) {
-            // given
             const steps = [
               {
                 elements: [
@@ -1465,14 +1448,15 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
             await click(
               screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
-            );
-
-            // then
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
+            ),
+              // then
+              assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+            assert
+              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+              .isFocused();
           });
 
           test('should enable next button', async function (assert) {
-            // given
             const steps = [
               {
                 elements: [
@@ -1523,7 +1507,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
           module('when user clicks the controls next button', function () {
             test('should go back to next step', async function (assert) {
-              // given
               const steps = [
                 {
                   elements: [
@@ -1570,13 +1553,15 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               );
 
               // then
-              assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
+              assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
+              assert
+                .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+                .isFocused();
             });
           });
         });
 
         test('should not display the Next button when there are no steps left', async function (assert) {
-          // given
           const steps = [
             {
               elements: [
@@ -1615,6 +1600,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
           // when
           await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
+
+          //then
           assert
             .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
             .doesNotExist();
@@ -1623,7 +1610,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
       module('when preview mode is enabled', function () {
         test('should display all the steps', async function (assert) {
-          // given
           const steps = [
             {
               elements: [
@@ -1644,23 +1630,22 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               ],
             },
           ];
+
           class PreviewModeServiceStub extends Service {
             isEnabled = true;
           }
-          this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
 
+          this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
           // when
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
           // then
-          assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
-          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
-          assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
+          assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
         });
 
         module('when has unsupported elements', function () {
           test('should display all the steps but filter out unsupported element', async function (assert) {
-            // given
             const steps = [
               {
                 elements: [
@@ -1689,9 +1674,11 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 ],
               },
             ];
+
             class PreviewModeServiceStub extends Service {
               isEnabled = true;
             }
+
             this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
 
             // when
@@ -1700,9 +1687,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByRole('heading', { level: 4 }).length, 2);
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 1 sur 2' })).exists();
-            assert.dom(screen.getByRole('heading', { level: 4, name: 'Étape 2 sur 2' })).exists();
+            assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+            assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
           });
         });
       });

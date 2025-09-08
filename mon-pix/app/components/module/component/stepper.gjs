@@ -30,6 +30,9 @@ export default class ModulixStepper extends Component {
 
   @tracked displayedStepIndex = 0;
 
+  @tracked
+  preventScrollAndFocus = false;
+
   @action
   stepIsActive(index) {
     return this.displayedStepIndex === index;
@@ -49,12 +52,13 @@ export default class ModulixStepper extends Component {
   }
 
   @action
-  displayPreviousStep() {
+  goBackToPreviousStep() {
     if (this.displayedStepIndex === 0) {
       return;
     }
 
     this.displayedStepIndex -= 1;
+    this.preventScrollAndFocus = true;
   }
 
   @action
@@ -69,6 +73,7 @@ export default class ModulixStepper extends Component {
 
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
+    this.preventScrollAndFocus = false;
   }
 
   @action
@@ -78,6 +83,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.displayedStepIndex++;
+    this.preventScrollAndFocus = true;
   }
 
   get lastDisplayedStepIndex() {
@@ -126,7 +132,8 @@ export default class ModulixStepper extends Component {
   <template>
     <div
       class="stepper stepper--{{@direction}}"
-      aria-live="assertive"
+      aria-live="polite"
+      aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
       {{#if this.isHorizontalDirection}}
@@ -135,7 +142,7 @@ export default class ModulixStepper extends Component {
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
             @iconName="chevronLeft"
             @isDisabled={{this.isPreviousButtonControlDisabled}}
-            @triggerAction={{this.displayPreviousStep}}
+            @triggerAction={{this.goBackToPreviousStep}}
             aria-controls={{this.id}}
           />
           <p
@@ -179,6 +186,7 @@ export default class ModulixStepper extends Component {
                 @onExpandToggle={{@onExpandToggle}}
                 @onNextButtonClick={{this.displayNextStep}}
                 @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
+                @preventScrollAndFocus={{this.preventScrollAndFocus}}
               />
             {{/each}}
           {{/if}}

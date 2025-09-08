@@ -29,7 +29,7 @@ module('Integration | Component | Module | Step', function (hooks) {
 
       // then
       assert.dom(screen.getByText(element.content)).exists();
-      assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 4 })).exists();
+      assert.strictEqual(screen.getAllByLabelText('1 sur 4').length, 1);
     });
 
     test('should display a step with a qcu element', async function (assert) {
@@ -132,7 +132,7 @@ module('Integration | Component | Module | Step', function (hooks) {
           );
 
           // then
-          assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 3', level: 4 })).exists();
+          assert.strictEqual(screen.getAllByLabelText('1 sur 3').length, 1);
           assert.dom(screen.getByRole('button', { name: "Aller à l'étape suivante" })).exists();
 
           //when
@@ -194,7 +194,7 @@ module('Integration | Component | Module | Step', function (hooks) {
         // then
         assert.dom(screen.getByText(textElement.content)).exists();
         assert.dom(screen.queryByText(unknownElement.content)).doesNotExist();
-        assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 4', level: 4 })).exists();
+        assert.strictEqual(screen.getAllByLabelText('1 sur 4').length, 1);
       });
     });
   });
