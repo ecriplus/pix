@@ -1,5 +1,39 @@
 # Pix Changelog
 
+# [5.201.0](https://github.com/1024pix/pix/compare/v5.200.0...v5.201.0) (2025-09-08)
+
+### :rocket: Amélioration
+
+- [#13458](https://github.com/1024pix/pix/pull/13458) Afficher un indicateur "Vous en êtes là" sur un item de parcours combiné (PIX-19018) 
+- [#13467](https://github.com/1024pix/pix/pull/13467) Ajout module IA discute sections 
+- [#13403](https://github.com/1024pix/pix/pull/13403) Corriger les problèmes remontés suite à la MEP de la page d'accueil (PIX-19401) 
+- [#13441](https://github.com/1024pix/pix/pull/13441) Gérer le bouton suivant dans le stepper horizontal (PIX-19388) 
+
+### :bug: Correction
+
+- [#13397](https://github.com/1024pix/pix/pull/13397) Afficher la modale de confirmation en néerlandais si l'invitation à une organisation est en néerlandais (PIX-19395) 
+- [#13396](https://github.com/1024pix/pix/pull/13396) Renvoyer l'invitation à une organisation dans la langue de l'invitation initiale depuis pix-orga (PIX-19392) 
+- [#13443](https://github.com/1024pix/pix/pull/13443) Résolution du problème pour l'affichage des cartes mission (PIX-19413) 
+
+### :building_construction: Tech
+
+- [#13483](https://github.com/1024pix/pix/pull/13483) Mettre à jour les tests Playwright pour prendre en compte la nouvelle page d'accueil (PIX-19417) 
+- [#13360](https://github.com/1024pix/pix/pull/13360) Remplacer la challenge locale par la user locale quand nécessaire (PIX-19136) 
+- [#13430](https://github.com/1024pix/pix/pull/13430) Utiliser le champ isDisabled de PixIconButton sur les contrôles du stepper (PIX-19399) 
+
+### :arrow_up: Montée de version
+
+- [#13471](https://github.com/1024pix/pix/pull/13471) Update dependency @1024pix/ember-testing-library to ^3.0.13 (admin) 
+- [#13472](https://github.com/1024pix/pix/pull/13472) Update dependency @1024pix/ember-testing-library to ^3.0.13 (certif) 
+- [#13473](https://github.com/1024pix/pix/pull/13473) Update dependency @1024pix/ember-testing-library to ^3.0.13 (junior) 
+- [#13474](https://github.com/1024pix/pix/pull/13474) Update dependency @1024pix/ember-testing-library to ^3.0.13 (mon-pix) 
+- [#13476](https://github.com/1024pix/pix/pull/13476) Update dependency @1024pix/ember-testing-library to ^3.0.13 (orga) 
+- [#13477](https://github.com/1024pix/pix/pull/13477) Update dependency @1024pix/eslint-plugin to ^2.1.11 (api) 
+- [#13479](https://github.com/1024pix/pix/pull/13479) Update dependency @1024pix/eslint-plugin to ^2.1.11 (audit-logger) 
+- [#13480](https://github.com/1024pix/pix/pull/13480) Update dependency @1024pix/eslint-plugin to ^2.1.11 (certif) 
+- [#13389](https://github.com/1024pix/pix/pull/13389) Update dependency @getbrevo/brevo to v3 (api) 
+- [#13451](https://github.com/1024pix/pix/pull/13451) Update dependency @sentry/ember to v10 (mon-pix)
+
 # [5.200.0](https://github.com/1024pix/pix/compare/v5.199.0...v5.200.0) (2025-09-05)
 
 ### :rocket: Amélioration
