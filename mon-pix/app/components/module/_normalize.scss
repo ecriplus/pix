@@ -2,14 +2,16 @@
 
 .module-passage {
   /** Revert Pix UI styles for Modulix */
-  h3,
   h4,
+  h5,
+  h6,
   p {
     margin: var(--pix-spacing-1x) 0;
   }
 
-  h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     font-weight: var(--pix-font-medium);
   }
 
