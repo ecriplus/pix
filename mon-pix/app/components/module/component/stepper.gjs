@@ -53,6 +53,11 @@ export default class ModulixStepper extends Component {
     return this.displayableSteps.length > 0;
   }
 
+  get userPrefersReducedMotion() {
+    const userPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    return userPrefersReducedMotion.matches;
+  }
+
   @action
   goBackToPreviousStep() {
     if (this.displayedStepIndex === 0) {
@@ -76,10 +81,13 @@ export default class ModulixStepper extends Component {
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
     this.preventScrollAndFocus = false;
-    this.shouldAppearToRight = true;
-    setTimeout(() => {
-      this.shouldAppearToRight = false;
-    }, 0);
+
+    if (!this.userPrefersReducedMotion) {
+      this.shouldAppearToRight = true;
+      setTimeout(() => {
+        this.shouldAppearToRight = false;
+      }, 0);
+    }
   }
 
   @action
