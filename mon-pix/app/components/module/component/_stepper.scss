@@ -61,7 +61,7 @@
     --stepper-previous-slide-visible-width: 10px;
     --stepper-gap-between-steps: calc(50vw - 50% - var(--stepper-previous-slide-visible-width));
     --stepper-gap-between-steps-with-step-width: calc(var(--stepper-gap-between-steps) + 100%);
-    --stepper-gap-between-line-and-step: 4px;
+    --stepper-gap-between-line-and-step: 14px;
 
     flex: 0 0 100%;
     align-items: center;
@@ -70,6 +70,15 @@
     border: 1px solid var(--pix-neutral-100);
     border-radius: 8px;
     transform: translateX(calc(-1 * var(--stepper-gap-between-steps-with-step-width) * var(--current-step-index)));
+
+    @media (not (prefers-reduced-motion: reduce)) {
+      transition: transform .5s ease-in-out;
+    }
+
+    &--from-right {
+      /* calcule la position de la slide pour qu'elle apparaisse à droite en désincrémentant son index */
+      transform: translateX(calc(-1 * var(--stepper-gap-between-steps-with-step-width) * (var(--current-step-index) - 1)));
+    }
 
     /* Line between steps */
     &:not(.stepper-step--last-step) {

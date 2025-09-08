@@ -33,6 +33,8 @@ export default class ModulixStepper extends Component {
   @tracked
   preventScrollAndFocus = false;
 
+  @tracked shouldAppearToRight = false;
+
   @action
   stepIsActive(index) {
     return this.displayedStepIndex === index;
@@ -49,6 +51,11 @@ export default class ModulixStepper extends Component {
 
   get hasDisplayableSteps() {
     return this.displayableSteps.length > 0;
+  }
+
+  get userPrefersReducedMotion() {
+    const userPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    return userPrefersReducedMotion.matches;
   }
 
   @action
@@ -74,6 +81,13 @@ export default class ModulixStepper extends Component {
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
     this.preventScrollAndFocus = false;
+
+    if (!this.userPrefersReducedMotion) {
+      this.shouldAppearToRight = true;
+      setTimeout(() => {
+        this.shouldAppearToRight = false;
+      }, 0);
+    }
   }
 
   @action
@@ -187,6 +201,7 @@ export default class ModulixStepper extends Component {
                 @onNextButtonClick={{this.displayNextStep}}
                 @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
                 @preventScrollAndFocus={{this.preventScrollAndFocus}}
+                @shouldAppearToRight={{this.shouldAppearToRight}}
               />
             {{/each}}
           {{/if}}
