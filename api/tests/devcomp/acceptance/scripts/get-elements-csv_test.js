@@ -45,7 +45,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
           image: 'https://images.pix.fr/modulix/placeholder-details.svg',
           description: '<p>Découvrez avec ce didacticiel comment fonctionne Modulix !</p>',
           duration: 5,
-          level: 'Débutant',
+          level: 'novice',
           tabletSupport: 'inconvenient',
           objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
         },

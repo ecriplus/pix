@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes (ou hypertrucages en français) sont créés et pourquoi.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Savoir que des médias en ligne peuvent être créés avec l'intelligence artificielle (IA)</p>",
       "<p>Connaître la notion de deepfake (hypertrucage)</p>",
@@ -826,10 +826,7 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "3"
-                      ]
+                      "solutions": ["1", "3"]
                     }
                   ]
                 },

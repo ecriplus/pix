@@ -11,7 +11,7 @@ describe('Acceptance | Script | Helper | Get Answerable Elements', function () {
         image: 'https://images.pix.fr/modulix/placeholder-details.svg',
         description: 'Découvrez avec ce didacticiel comment fonctionne Modulix !',
         duration: 5,
-        level: 'Débutant',
+        level: 'novice',
         tabletSupport: 'comfortable',
         objectives: ['Naviguer dans Modulix', 'Découvrir les leçons et les activités'],
       },

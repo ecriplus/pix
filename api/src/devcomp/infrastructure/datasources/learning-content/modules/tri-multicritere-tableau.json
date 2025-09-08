@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Trier des données dans une feuille de calcul peut permettre de trouver efficacement des informations. Parfois, un tri sur une seule colonne ne suffit pas. <br>Dans ce module, vous allez apprendre à trier vos données en combinant plusieurs critères.<br></p>",
     "duration": 10,
-    "level": "Avancé",
+    "level": "advanced",
     "objectives": [
       "<p>Identifier des situations qui nécessitent un tri multicritère</p>",
       "<p>Trier des données sur tableur selon plusieurs critères</p>",

@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Code reçu par SMS, empreinte digitale, reconnaissance faciale… De plus en plus de moyens existent pour prouver son identité en ligne. <br>Dans ce module, vous allez découvrir les différentes façons de s’authentifier et pourquoi elles renforcent la sécurité de vos comptes. 🔐</p>",
     "duration": 5,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Comprendre le principe et l’intérêt d’une double authentification</p>",
       "<p>Effectuer en pratique une double authentification</p>"

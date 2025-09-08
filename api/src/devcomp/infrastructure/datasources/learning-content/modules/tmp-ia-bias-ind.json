@@ -7,7 +7,7 @@
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions contiennent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.🔍</p>",
     "duration": 10,
-    "level": "Intermédiaire",
+    "level": "independent",
     "objectives": [
       "<p>Repérer des biais ou des stéréotypes présents dans les contenus. </p>",
       "<p>Expliquer comment une IA générative reproduit les biais présents dans les textes de son entraînement.</p>",
@@ -852,10 +852,7 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple, ou bien vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "4"
-                ]
+                "solutions": ["2", "4"]
               }
             }
           ]
@@ -903,10 +900,7 @@
                     "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
+                "solutions": ["1", "3"]
               }
             }
           ]

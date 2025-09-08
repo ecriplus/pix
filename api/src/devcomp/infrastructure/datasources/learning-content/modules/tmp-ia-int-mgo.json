@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les logiciels d'IA génératives&nbsp;de texte sont capables de tenir des conversations étonnamment naturelles. Mais comment en sont-ils arrivés là ? Ce module vous emmène dans les coulisses de leur apprentissage&nbsp;: des montagnes de textes analysés aux techniques d’entraînement sophistiquées qui leur ont permis de comprendre, prédire et générer le langage humain.</p>",
     "duration": 10,
-    "level": "Intermédiaire",
+    "level": "independent",
     "objectives": [
       "<p>Savoir expliquer les 3 étapes de l'entraînement des IA génératives de texte</p>",
       "<p>Identifier les interventions des humains dans chacune de ces étapes</p>"

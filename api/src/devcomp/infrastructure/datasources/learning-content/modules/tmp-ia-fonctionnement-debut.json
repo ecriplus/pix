@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>ChatGPT, Gemini ou encore Le Chat sont des logiciels d'Intelligences Artificielles (IA) génératives&nbsp;: un utilisateur peut discuter avec ces IA et avoir des réponses à ses demandes.&nbsp; <br>Ces IA peuvent résumer un texte, inventer des histoires, etc. Et ça, sur presque tous les sujets !</p><p><br>Dans ce module, vous allez découvrir comment un logiciel d'IA générative réussit toujours à donner une réponse à un utilisateur… mais pas forcément la bonne.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Définir simplement un logiciel d'IA générative</p>",
       "<p>Expliquer comment un logiciel d'IA générative construit ses réponses</p>"
@@ -345,12 +345,7 @@
                         ],
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": [
-                          "beurre",
-                          "et",
-                          "du",
-                          "sucre"
-                        ]
+                        "wordsToAdd": ["beurre", "et", "du", "sucre"]
                       }
                     },
                     {

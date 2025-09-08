@@ -43,7 +43,7 @@ const moduleDetailsSchema = Joi.object({
   image: Joi.string().uri().required(),
   description: htmlSchema.required(),
   duration: Joi.number().integer().min(0).max(120).required(),
-  level: Joi.string().valid('Débutant', 'Intermédiaire', 'Avancé', 'Expert').required(),
+  level: Joi.string().valid('novice', 'independent', 'advanced', 'expert').required(),
   objectives: Joi.array().items(htmlSchema).min(1).required(),
   tabletSupport: Joi.string().valid('comfortable', 'inconvenient', 'obstructed').required(),
 });

@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il permet de visualiser tous les modules existants.</p>",
     "duration": 0,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": ["<p>Découvrir les éléments de la galerie Modulix</p>"],
     "tabletSupport": "comfortable"
   },

@@ -35,7 +35,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: [
           'Écrire une adresse mail correctement, en évitant les erreurs courantes',
           'Connaître les parties d’une adresse mail et les identifier sur des exemples',
@@ -83,7 +83,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: [
           'Écrire une adresse mail correctement, en évitant les erreurs courantes',
           'Connaître les parties d’une adresse mail et les identifier sur des exemples',
@@ -137,7 +137,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: [
           'Écrire une adresse mail correctement, en évitant les erreurs courantes',
           'Connaître les parties d’une adresse mail et les identifier sur des exemples',
@@ -206,7 +206,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: [
           'Écrire une adresse mail correctement, en évitant les erreurs courantes',
           'Connaître les parties d’une adresse mail et les identifier sur des exemples',

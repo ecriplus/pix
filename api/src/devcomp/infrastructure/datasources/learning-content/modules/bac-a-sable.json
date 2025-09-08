@@ -7,11 +7,142 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
     "duration": 5,
-    "level": "Débutant",
+    "level": "novice",
     "tabletSupport": "inconvenient",
     "objectives": ["Non régression fonctionnelle"]
   },
   "sections": [
+    {
+      "id": "b0d428ab-a4ae-45e0-83fd-786fbd9c03dc",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "b14df125-82d5-4d55-a660-7b34cd9ea1ab",
+          "type": "challenge",
+          "title": "Un fichier à télécharger",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "901ccbaa-f4e6-4322-b863-8e8eab08a33a",
+                "type": "download",
+                "files": [
+                  { "url": "https://dl.pix.fr/1641899675462/Pix_velos.xlsx", "format": ".xlsx" },
+                  { "url": "https://dl.pix.fr/1641899675463/Pix_velos.ods", "format": ".ods" }
+                ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "31106aeb-8346-44a6-8ed4-ebaa2106a373",
+                "type": "qcu",
+                "instruction": "<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Des recettes de lasagne",
+                    "feedback": {
+                      "state": "Incorrect.",
+                      "diagnosis": "<p>Erreur, ce ne sont pas des lasagnes</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Des recettes de pâté en croûte",
+                    "feedback": {
+                      "state": "Incorrect.",
+                      "diagnosis": "<p>Non, ce ne sont pas des recettes de pâté en croûte</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Des recettes végétariennes",
+                    "feedback": {
+                      "state": "Correct&#8239;!",
+                      "diagnosis": "<p>Bonne réponse ! Ce sont bien des recettes végétariennes</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "8147aced-4150-4a5d-afed-54c7a9dff056",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5da6a142-c66b-42d4-9afd-86d369ebd2b5",
+                "type": "text",
+                "content": "<p>Chaque leçon a un objectif pédagogique précis.</p><p>Dans la prochaine leçon, nous vous proposons de découvrir Pix avec une courte vidéo&nbsp;<span aria-hidden=\"true\">📺</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "73ac3644-7637-4cee-86d4-1a75f53f0b9c",
+          "type": "lesson",
+          "title": "Vidéo de présentation de Pix",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "342183f7-af51-4e4e-ab4c-ebed1e195063",
+                "type": "text",
+                "content": "<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3a9f2269-99ba-4631-b6fd-6802c88d5c26",
+                "type": "video",
+                "title": "Vidéo de présentation de Pix",
+                "url": "https://assets.pix.org/modules/bac-a-sable/presentation.mp4",
+                "subtitles": "",
+                "transcription": "<p>Le numérique évolue en permanence, vos compétences aussi, pour travailler, communiquer et s'informer, se déplacer, réaliser des démarches, un enjeu tout au long de la vie.</p><p>Sur <a href=\"https://pix.fr\" target=\"blank\">pix.fr</a>, testez-vous et cultivez vos compétences numériques.</p><p>Les tests Pix sont personnalisés, les questions s'adaptent à votre niveau, réponse après réponse.</p><p>Évaluez vos connaissances et savoir-faire sur 16 compétences, dans 5 domaines, sur 5 niveaux de débutants à confirmer, avec des mises en situation ludiques, recherches en ligne, manipulation de fichiers et de données, culture numérique...</p><p>Allez à votre rythme, vous pouvez arrêter et reprendre quand vous le voulez.</p><p>Toutes les 5 questions, découvrez vos résultats et progressez grâce aux astuces et aux tutos.</p><p>En relevant les défis Pix, vous apprendrez de nouvelles choses et aurez envie d'aller plus loin.</p><p>Vous pensez pouvoir faire mieux&#8239;?</p><p>Retentez les tests et améliorez votre score.</p><p>Faites reconnaître officiellement votre niveau en passant la certification Pix, reconnue par l'État et le monde professionnel.</p><p>Pix&nbsp;: le service public en ligne pour évaluer, développer et certifier ses compétences numériques.</p>",
+                "poster": "https://assets.pix.org/modules/bac-a-sable/ordi-spatial.svg"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6566cc3a-9d74-4bd9-bda0-3dcb37129a26",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1df5f2eb-f8f9-4a07-ab56-2c001541306b",
+                "type": "text",
+                "content": "<p>Vous allez faire votre première activité. Les activités servent à vérifier que vous avez compris l'essentiel des leçons.<br>Dans les activités Modulix, vous avez votre résultat immédiatement. À vous de jouer&nbsp;<span aria-hidden=\"true\">🚀</span></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "358e6d74-4adf-463a-9bf4-69ddca521d87",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "41186193-1c38-4827-84b7-e70848367d42",
+                "type": "text",
+                "content": "<p>Vous l’aurez compris, on aime varier les plaisirs et proposer différents types d’activité, après le questionnaire à choix unique on vous laisse découvrir le QCM&#8239;!</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "cfaefec9-e185-43b8-8258-e8beff6dd56b",
       "type": "question-yourself",
@@ -692,137 +823,6 @@
                 "url": "https://epreuves.pix.fr/fr/qcu_image/1d_iconewriter.html",
                 "instruction": "<p>Instruction</p>",
                 "height": 600
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "b0d428ab-a4ae-45e0-83fd-786fbd9c03dc",
-      "type": "practise",
-      "grains": [
-        {
-          "id": "b14df125-82d5-4d55-a660-7b34cd9ea1ab",
-          "type": "challenge",
-          "title": "Un fichier à télécharger",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "901ccbaa-f4e6-4322-b863-8e8eab08a33a",
-                "type": "download",
-                "files": [
-                  { "url": "https://dl.pix.fr/1641899675462/Pix_velos.xlsx", "format": ".xlsx" },
-                  { "url": "https://dl.pix.fr/1641899675463/Pix_velos.ods", "format": ".ods" }
-                ]
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "31106aeb-8346-44a6-8ed4-ebaa2106a373",
-                "type": "qcu",
-                "instruction": "<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "Des recettes de lasagne",
-                    "feedback": {
-                      "state": "Incorrect.",
-                      "diagnosis": "<p>Erreur, ce ne sont pas des lasagnes</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "Des recettes de pâté en croûte",
-                    "feedback": {
-                      "state": "Incorrect.",
-                      "diagnosis": "<p>Non, ce ne sont pas des recettes de pâté en croûte</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "Des recettes végétariennes",
-                    "feedback": {
-                      "state": "Correct&#8239;!",
-                      "diagnosis": "<p>Bonne réponse ! Ce sont bien des recettes végétariennes</p>"
-                    }
-                  }
-                ],
-                "solution": "3"
-              }
-            }
-          ]
-        },
-        {
-          "id": "8147aced-4150-4a5d-afed-54c7a9dff056",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "5da6a142-c66b-42d4-9afd-86d369ebd2b5",
-                "type": "text",
-                "content": "<p>Chaque leçon a un objectif pédagogique précis.</p><p>Dans la prochaine leçon, nous vous proposons de découvrir Pix avec une courte vidéo&nbsp;<span aria-hidden=\"true\">📺</span></p>"
-              }
-            }
-          ]
-        },
-        {
-          "id": "73ac3644-7637-4cee-86d4-1a75f53f0b9c",
-          "type": "lesson",
-          "title": "Vidéo de présentation de Pix",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "342183f7-af51-4e4e-ab4c-ebed1e195063",
-                "type": "text",
-                "content": "<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "3a9f2269-99ba-4631-b6fd-6802c88d5c26",
-                "type": "video",
-                "title": "Vidéo de présentation de Pix",
-                "url": "https://assets.pix.org/modules/bac-a-sable/presentation.mp4",
-                "subtitles": "",
-                "transcription": "<p>Le numérique évolue en permanence, vos compétences aussi, pour travailler, communiquer et s'informer, se déplacer, réaliser des démarches, un enjeu tout au long de la vie.</p><p>Sur <a href=\"https://pix.fr\" target=\"blank\">pix.fr</a>, testez-vous et cultivez vos compétences numériques.</p><p>Les tests Pix sont personnalisés, les questions s'adaptent à votre niveau, réponse après réponse.</p><p>Évaluez vos connaissances et savoir-faire sur 16 compétences, dans 5 domaines, sur 5 niveaux de débutants à confirmer, avec des mises en situation ludiques, recherches en ligne, manipulation de fichiers et de données, culture numérique...</p><p>Allez à votre rythme, vous pouvez arrêter et reprendre quand vous le voulez.</p><p>Toutes les 5 questions, découvrez vos résultats et progressez grâce aux astuces et aux tutos.</p><p>En relevant les défis Pix, vous apprendrez de nouvelles choses et aurez envie d'aller plus loin.</p><p>Vous pensez pouvoir faire mieux&#8239;?</p><p>Retentez les tests et améliorez votre score.</p><p>Faites reconnaître officiellement votre niveau en passant la certification Pix, reconnue par l'État et le monde professionnel.</p><p>Pix&nbsp;: le service public en ligne pour évaluer, développer et certifier ses compétences numériques.</p>",
-                "poster": "https://assets.pix.org/modules/bac-a-sable/ordi-spatial.svg"
-              }
-            }
-          ]
-        },
-        {
-          "id": "6566cc3a-9d74-4bd9-bda0-3dcb37129a26",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "1df5f2eb-f8f9-4a07-ab56-2c001541306b",
-                "type": "text",
-                "content": "<p>Vous allez faire votre première activité. Les activités servent à vérifier que vous avez compris l'essentiel des leçons.<br>Dans les activités Modulix, vous avez votre résultat immédiatement. À vous de jouer&nbsp;<span aria-hidden=\"true\">🚀</span></p>"
-              }
-            }
-          ]
-        },
-        {
-          "id": "358e6d74-4adf-463a-9bf4-69ddca521d87",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "41186193-1c38-4827-84b7-e70848367d42",
-                "type": "text",
-                "content": "<p>Vous l’aurez compris, on aime varier les plaisirs et proposer différents types d’activité, après le questionnaire à choix unique on vous laisse découvrir le QCM&#8239;!</p>"
               }
             }
           ]
