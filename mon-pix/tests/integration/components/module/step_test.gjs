@@ -1,8 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { find } from '@ember/test-helpers';
+import { click, find } from '@ember/test-helpers';
 import ModulixStep from 'mon-pix/components/module/component/step';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -99,6 +100,47 @@ module('Integration | Component | Module | Step', function (hooks) {
         const stepElement = find('.stepper__step');
         assert.dom(stepElement).exists();
         assert.dom(stepElement).hasAttribute('aria-hidden', 'true');
+      });
+    });
+
+    module('when shouldDisplayNextButton attribute is true', function () {
+      module('when user clicks on next button', function () {
+        test('should call the method onNextButtonClick', async function (assert) {
+          // given
+          const onNextButtonClickSpy = sinon.stub();
+          const element = {
+            id: 'd0690f26-978c-41c3-9a21-da931857739c',
+            content: '<button type="button">Mon bouton</button>',
+            type: 'text',
+          };
+          const step = {
+            elements: [element],
+          };
+
+          // when
+          const screen = await render(
+            <template>
+              <ModulixStep
+                @isHidden={{false}}
+                @currentStep={{1}}
+                @totalSteps={{3}}
+                @step={{step}}
+                @shouldDisplayNextButton={{true}}
+                @onNextButtonClick={{onNextButtonClickSpy}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.getByRole('heading', { name: 'Étape 1 sur 3', level: 4 })).exists();
+          assert.dom(screen.getByRole('button', { name: "Aller à l'étape suivante" })).exists();
+
+          //when
+          await click(screen.getByRole('button', { name: "Aller à l'étape suivante" }));
+
+          // then
+          assert.true(onNextButtonClickSpy.calledOnce);
+        });
       });
     });
   });

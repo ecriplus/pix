@@ -1,3 +1,4 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -58,6 +59,14 @@ export default class ModulixStep extends Component {
             />
           </div>
         {{/each}}
+        {{#if @shouldDisplayNextButton}}
+          <PixButton
+            aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
+            @variant="primary"
+            @triggerAction={{@onNextButtonClick}}
+            class="stepper__next-button"
+          >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+        {{/if}}
       </section>
     {{/if}}
   </template>

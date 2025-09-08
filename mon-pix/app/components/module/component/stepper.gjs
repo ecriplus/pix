@@ -177,19 +177,12 @@ export default class ModulixStepper extends Component {
                 @onVideoPlay={{@onVideoPlay}}
                 @onFileDownload={{@onFileDownload}}
                 @onExpandToggle={{@onExpandToggle}}
+                @onNextButtonClick={{this.displayNextStep}}
+                @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
               />
             {{/each}}
-
           {{/if}}
         </div>
-        {{#if this.shouldDisplayNextButton}}
-          <PixButton
-            aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
-            @variant="primary"
-            @triggerAction={{this.displayNextStep}}
-            class="stepper__next-button"
-          >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
-        {{/if}}
       {{else}}
         {{#if this.hasDisplayableSteps}}
           {{#each this.stepsToDisplay as |step index|}}
