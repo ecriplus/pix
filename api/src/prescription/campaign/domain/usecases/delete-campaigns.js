@@ -1,5 +1,7 @@
+import * as CombinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { MembershipNotFound } from '../../../../team/application/api/errors/MembershipNotFound.js';
+import { CampaignBelongsToCombinedCourseError } from '../errors.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
 const deleteCampaigns = async ({
@@ -26,6 +28,13 @@ const deleteCampaigns = async ({
     }
   }
   const pixAdminMember = await adminMemberRepository.get({ userId });
+
+  for (const campaignId of campaignIds) {
+    const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
+    if (combinedCourses.length > 0) {
+      throw new CampaignBelongsToCombinedCourseError();
+    }
+  }
 
   const campaignsToDelete = await campaignAdministrationRepository.getByIds(campaignIds);
   const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds);
