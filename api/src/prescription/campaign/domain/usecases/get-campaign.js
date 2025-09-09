@@ -1,4 +1,4 @@
-import * as injectedCombinedCourseApi from '../../../../quest/application/api/combined-course-api.js';
+import { findByCampaignId } from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 
 const getCampaign = async function ({
   campaignId,
@@ -6,12 +6,11 @@ const getCampaign = async function ({
   campaignReportRepository,
   stageCollectionRepository,
   stageAcquisitionRepository,
-  combinedCourseApi = injectedCombinedCourseApi,
 }) {
   const campaignReport = await campaignReportRepository.get(campaignId);
 
-  const existingCombinedCourse = await combinedCourseApi.getByCampaignId(campaignId);
-  campaignReport.setIsFromCombinedCourse(Boolean(existingCombinedCourse));
+  const existingCombinedCourse = await findByCampaignId({ campaignId });
+  campaignReport.setIsFromCombinedCourse(existingCombinedCourse.length > 0);
 
   if (campaignReport.isAssessment || campaignReport.isExam) {
     const [badges, stageCollection, masteryRates] = await Promise.all([
