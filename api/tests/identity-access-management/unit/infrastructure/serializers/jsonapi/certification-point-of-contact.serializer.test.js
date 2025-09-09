@@ -10,8 +10,10 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
       const habilitation2 = { id: 2, label: 'Certif comp 2', key: 'CERTIF_COMP_2' };
       sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateCollege').value('2022-06-01');
       sinon.stub(settings.features, 'pixCertifScoBlockedAccessDateLycee').value('2022-08-01');
+      sinon.stub(settings.features, 'pixCertifBlockedAccessUntilDate').value('2022-07-01');
 
       settings.features.pixCertifScoBlockedAccessDateLycee = '2022-08-01';
+      settings.features.pixCertifBlockedAccessUntilDate = '2022-07-01';
 
       const allowedCertificationCenterAccess1 = domainBuilder.buildAllowedCertificationCenterAccess({
         id: 123,
@@ -113,8 +115,10 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
               'is-access-blocked-lycee': false,
               'is-access-blocked-aefe': false,
               'is-access-blocked-agri': false,
+              'is-access-blocked-until-date': false,
               'pix-certif-sco-blocked-access-date-college': '2022-06-01',
               'pix-certif-sco-blocked-access-date-lycee': '2022-08-01',
+              'pix-certif-blocked-access-until-date': '2022-07-01',
               'related-organization-tags': [],
               habilitations: [habilitation1, habilitation2],
             },
@@ -131,8 +135,10 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | certificati
               'is-access-blocked-lycee': false,
               'is-access-blocked-aefe': false,
               'is-access-blocked-agri': false,
+              'is-access-blocked-until-date': false,
               'pix-certif-sco-blocked-access-date-college': '2022-06-01',
               'pix-certif-sco-blocked-access-date-lycee': '2022-08-01',
+              'pix-certif-blocked-access-until-date': '2022-07-01',
               'related-organization-tags': ['tag1'],
               habilitations: [],
             },

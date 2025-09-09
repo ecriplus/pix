@@ -38,6 +38,10 @@ class AllowedCertificationCenterAccess {
     return this.isAgri() && !this.isInWhitelist() && new Date() < new Date(features.pixCertifScoBlockedAccessDateLycee);
   }
 
+  isAccessBlockedUntilDate() {
+    return new Date() < new Date(features.pixCertifBlockedAccessUntilDate);
+  }
+
   hasTag(tagName) {
     return this.relatedOrganizationTags.includes(tagName);
   }
@@ -72,6 +76,10 @@ class AllowedCertificationCenterAccess {
 
   get pixCertifScoBlockedAccessDateCollege() {
     return features.pixCertifScoBlockedAccessDateCollege ?? null;
+  }
+
+  get pixCertifBlockedAccessUntilDate() {
+    return features.pixCertifBlockedAccessUntilDate ?? null;
   }
 }
 

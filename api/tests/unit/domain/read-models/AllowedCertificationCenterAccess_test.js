@@ -636,6 +636,67 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     });
   });
 
+  context('#isAccessBlockedUntilDate', function () {
+    let validData, clock, pixCertifBlockedAccessUntilDateBeforeTest;
+
+    beforeEach(function () {
+      pixCertifBlockedAccessUntilDateBeforeTest = settings.features.pixCertifBlockedAccessUntilDate;
+      validData = {
+        externalId: 'NOT_WHITELISTED',
+        type: 'SCO',
+        isRelatedToManagingStudentsOrganization: true,
+        relatedOrganizationTags: ['some_other_tag'],
+      };
+    });
+
+    afterEach(function () {
+      clock.restore();
+      settings.features.pixCertifBlockedAccessUntilDate = pixCertifBlockedAccessUntilDateBeforeTest;
+    });
+
+    it('should return true when certification center is whitelisted', function () {
+      // given
+      clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+      settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
+      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+        ...validData,
+        isInWhitelist: true,
+      });
+
+      // when
+      const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+
+      // then
+      expect(isAccessBlockedUntilDate).to.be.true;
+    });
+
+    it('should return false when current date is before the date limit', function () {
+      // given
+      clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+      settings.features.pixCertifBlockedAccessUntilDate = '2021-01-01';
+      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess(validData);
+
+      // when
+      const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+
+      // then
+      expect(isAccessBlockedUntilDate).to.be.false;
+    });
+
+    it('should return false when current date is after the date limit', function () {
+      // given
+      clock = sinon.useFakeTimers({ now: new Date('2022-01-03'), toFake: ['Date'] });
+      settings.features.pixCertifBlockedAccessUntilDate = '2022-01-08';
+      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess(validData);
+
+      // when
+      const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+
+      // then
+      expect(isAccessBlockedUntilDate).to.be.true;
+    });
+  });
+
   context('#isScoManagingStudents', function () {
     it('should return false when certification center is not of type SCO', function () {
       // given
@@ -743,6 +804,40 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
 
         // when
         const result = allowedCertificationCenterAccess.pixCertifScoBlockedAccessDateCollege;
+
+        // then
+        expect(result).to.be.null;
+      });
+    });
+  });
+
+  context('#pixCertifBlockedAccessUntilDate', function () {
+    describe('when pixCertifBlockedAccessUntilDate is defined', function () {
+      it('should return the french formated pixCertifBlockedAccessUntilDate', function () {
+        // given
+        sinon.stub(settings.features, 'pixCertifBlockedAccessUntilDate').value('2022-02-01');
+        const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+          id: 1,
+        });
+
+        // when
+        const result = allowedCertificationCenterAccess.pixCertifBlockedAccessUntilDate;
+
+        // then
+        expect(result).to.be.equal('2022-02-01');
+      });
+    });
+
+    describe('when pixCertifBlockedAccessUntilDate is not defined', function () {
+      it('should return null', function () {
+        // given
+        sinon.stub(settings.features, 'pixCertifBlockedAccessUntilDate').value(undefined);
+        const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+          id: 1,
+        });
+
+        // when
+        const result = allowedCertificationCenterAccess.pixCertifBlockedAccessUntilDate;
 
         // then
         expect(result).to.be.null;
