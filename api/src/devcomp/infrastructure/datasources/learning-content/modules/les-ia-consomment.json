@@ -7,7 +7,7 @@
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux, ou encore des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Identifier le matériel utilisé par les IA génératives</p>",
       "<p>Expliquer l‘énergie consommée par les IA génératives</p>"

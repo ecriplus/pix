@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps : les majuscules ou la ponctuation par exemple.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Taper du texte comprenant des majuscules, chiffres et caractères spéciaux</p>",
       "<p>Comprendre la place des caractères sur les touches</p>",

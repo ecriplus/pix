@@ -15,6 +15,7 @@ export default class ModulixDetails extends Component {
   @service router;
   @service pixMetrics;
   @service media;
+  @service intl;
 
   @tracked isSmallScreenModalOpen = false;
 
@@ -60,6 +61,10 @@ export default class ModulixDetails extends Component {
       action: `Détails du module : ${this.args.module.slug}`,
     });
     this.isSmallScreenModalOpen = false;
+  }
+
+  get moduleLevel() {
+    return this.intl.t(`pages.modulix.details.levels.${this.args.module.details.level}`);
   }
 
   <template>
@@ -147,7 +152,7 @@ export default class ModulixDetails extends Component {
                 @ariaHidden={{true}}
               />{{t "pages.modulix.details.level"}}
             </div>
-            <p>{{@module.details.level}}</p>
+            <p>{{this.moduleLevel}}</p>
           </div>
         </div>
 

@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Pour savoir ce qu'on peut brancher ou non à un ordinateur, il faut bien connaître les principaux ports de connexion !</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Reconnaître les ports de connexion essentiels d’un ordinateur</p>",
       "<p>Connaître la fonction de chaque port de connexion</p>"

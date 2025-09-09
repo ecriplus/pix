@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les logiciels d'IA générative sont de plus en plus utilisés au quotidien. Mais leurs réponses sont-elles toujours correctes ? Et s'il y a des erreurs, d'où viennent-elles ?&nbsp;<br>C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Savoir que les IA génératives peuvent faire des erreurs</p>",
       "<p>Connaître les causes principales des erreurs des IA génératives</p>",
@@ -429,8 +429,8 @@
               "type": "element",
               "element": {
                 "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
-                  "type": "text",
-                  "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
+                "type": "text",
+                "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
               }
             },
             {
@@ -465,23 +465,23 @@
                     "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
                     "feedback": {
                       "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                     }
-                   },
-                   {
+                    }
+                  },
+                  {
                     "id": "2",
                     "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2025.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                     }
-                   },
-                   {
+                    }
+                  },
+                  {
                     "id": "3",
                     "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
                     "feedback": {
-                     "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
-                     }
-                   }
-                 ],
+                      "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                    }
+                  }
+                ],
                 "solution": "2"
               }
             }

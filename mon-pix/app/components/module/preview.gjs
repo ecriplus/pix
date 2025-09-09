@@ -28,7 +28,7 @@ export default class ModulixPreview extends Component {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "Découvrez la page de prévisualisation pour contribuer à Modulix !",
     "duration": 5,
-    "level": "Débutant",
+    "level": "novice",
     "tabletSupport": "comfortable",
     "objectives": [
       "Prévisualiser un Module",

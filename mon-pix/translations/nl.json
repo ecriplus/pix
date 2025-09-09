@@ -1693,6 +1693,12 @@
         "explanationText2": "Deze leermodules bevinden zich momenteel in de bètatestfase. Je kunt ons suggesties voor verbetering sturen via de vragenlijst aan het einde van elke module.",
         "explanationTitle": "Wat is een module?",
         "level": "Niveau",
+        "levels": {
+          "advanced": "Gevorderd",
+          "expert": "Expert",
+          "independent": "Onafhankelijk",
+          "novice": "Beginner"
+        },
         "objectives": "Doelstellingen",
         "smallScreenModal": {
           "cancel": "Terug naar details",

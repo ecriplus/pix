@@ -7,7 +7,7 @@
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé. 🤖</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage : de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces. 🖼️</p>",
     "duration": 10,
-    "level": "Intermédiaire",
+    "level": "independent",
     "objectives": [
       "<p>Décrire le fonctionnement de l’apprentissage automatique supervisé<br></p>",
       "<p>Identifier les limites de l’apprentissage automatique supervisé</p>"
@@ -624,9 +624,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {

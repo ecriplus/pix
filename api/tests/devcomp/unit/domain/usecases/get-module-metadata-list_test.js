@@ -17,7 +17,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
         description:
           'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         tabletSupport: 'comfortable',
         objectives: [
           'Écrire une adresse mail correctement, en évitant les erreurs courantes',
@@ -54,7 +54,7 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
         description:
           "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
         duration: 5,
-        level: 'Débutant',
+        level: 'novice',
         tabletSupport: 'inconvenient',
         objectives: ['Non régression fonctionnelle'],
       },

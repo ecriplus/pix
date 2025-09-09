@@ -1703,6 +1703,12 @@
         "explanationText2": "These learning modules are currently in beta test phase. You can send us your suggestions for improvement in the questionnaire at the end of each module.",
         "explanationTitle": "What is a module?",
         "level": "Level",
+        "levels": {
+          "advanced": "Advanced",
+          "expert": "Expert",
+          "independent": "Independent",
+          "novice": "Novice"
+        },
         "objectives": "Objectives",
         "smallScreenModal": {
           "cancel": "Return to details",

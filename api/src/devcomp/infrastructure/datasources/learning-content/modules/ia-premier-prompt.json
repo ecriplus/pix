@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les logiciels d'IA générative comme Le Chat, ChatGPT, Gemini ou encore DeepSeek, vous en avez déjà entendu parler. Mais, savez-vous comment on les utilise ? Le secret tient en un mot : prompt. Mais, c’est quoi au juste un prompt ? C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Savoir ce qu’est un prompt</p>",
       "<p>Formuler des prompts clairs et précis pour des tâches de base</p>",
@@ -66,7 +66,7 @@
       "id": "059b85ae-5516-4114-b726-7864f33e6eb2",
       "type": "explore-to-understand",
       "grains": [
-       {
+        {
           "id": "d94fdd26-ddf1-449e-b7ce-1aadc990b423",
           "type": "transition",
           "title": "texte de transition",

@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Aujourd’hui, le numérique fait partie du quotidien des familles, à la maison comme à l’école ! <span aria-hidden=\"true\">🎒</span></p><p>Dans ce module, partez à la découverte de l’espace numérique de travail (ENT), l’outil numérique utilisé dans les établissements scolaires.</p>",
     "duration": 10,
-    "level": "Débutant",
+    "level": "novice",
     "objectives": [
       "<p>Savoir ce qu’est un ENT</p>",
       "<p>Connaître les fonctionnalités principales d’un ENT</p>",
@@ -196,10 +196,7 @@
                     "diagnosis": "<p>Pas tout à fait ! Grâce à l'ENT, Martin peut consulter des informations qui concernent sa fille&nbsp;: ses notes, son emploi du temps, ses devoirs. Par contre, il ne peut pas modifier l'emploi du temps de la classe.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2"
-                ]
+                "solutions": ["1", "2"]
               }
             }
           ]

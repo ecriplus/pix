@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les <i lang=\"en\">Large Language Models</i> (LLM) sont des systèmes d'intelligence artificielle générative. Ils donnent l'impression d’avoir réponse à tout mais, du fait de leurs biais, leurs productions sont parfois stéréotypées ou discriminantes. Dans ce module, vous allez découvrir les origines de ces biais et interroger directement des LLM pour les repérer !</p>",
     "duration": 10,
-    "level": "Avancé",
+    "level": "advanced",
     "objectives": [
       "<p>Connaître les origines des biais des LLM</p>",
       "<p>Générer et analyser des résultats biaisés de LLM</p>",

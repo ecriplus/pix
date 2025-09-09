@@ -16,7 +16,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description: '<p>Description</p>',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Objectif 1'],
       };
       const module = store.createRecord('module', { title: 'Module title', isBeta: true, details });
@@ -35,7 +35,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description: '<p>Description</p>',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Objectif 1'],
       };
       const module = store.createRecord('module', { title: 'Module title', isBeta: true, details });
@@ -56,7 +56,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description: '<p>Description</p>',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Objectif 1'],
       };
       const module = store.createRecord('module', { title: 'Module title', isBeta: false, details });
@@ -75,7 +75,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
         image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
         description: '<p>Description</p>',
         duration: 12,
-        level: 'Débutant',
+        level: 'novice',
         objectives: ['Objectif 1'],
       };
       const module = store.createRecord('module', { title: 'Module title', isBeta: false, details });
@@ -95,7 +95,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
       image: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-details.svg',
       description: '<p>Description</p>',
       duration: 12,
-      level: 'Débutant',
+      level: 'novice',
       objectives: ['Objectif 1'],
     };
     const module = store.createRecord('module', { title: 'Module title', details });

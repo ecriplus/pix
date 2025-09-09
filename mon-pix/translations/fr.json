@@ -1703,6 +1703,12 @@
         "explanationText2": "Ces modules apprenants sont actuellement en phase de bêta-test. Vous pouvez nous envoyer toutes vos suggestions d’amélioration dans le questionnaire de fin de module.",
         "explanationTitle": "C'est quoi un module ?",
         "level": "Niveau",
+        "levels": {
+          "advanced": "Avancé",
+          "expert": "Expert",
+          "independent": "Indépendant",
+          "novice": "Novice"
+        },
         "objectives": "Objectifs",
         "smallScreenModal": {
           "cancel": "Revenir aux détails",

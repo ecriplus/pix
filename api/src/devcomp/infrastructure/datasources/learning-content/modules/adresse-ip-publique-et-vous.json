@@ -7,7 +7,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Quand vous naviguez sur internet, vous partagez des informations et laissez ainsi de nombreuses traces : adresse IP, cookies, historique, etc. Dans ce module, découvrez ce qu'est une adresse IP publique et ce qu’elle dévoile sur vous.</p>",
     "duration": 10,
-    "level": "Intermédiaire",
+    "level": "independent",
     "objectives": [
       "Comprendre la fonction des adresses IP publiques",
       "Connaître les informations personnelles dévoilées par l'adresse IP publique (IPv4)",
