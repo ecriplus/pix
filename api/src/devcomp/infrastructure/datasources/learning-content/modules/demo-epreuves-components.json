@@ -18,7 +18,7 @@
       "grains": [
         {
           "id": "5161dd9c-0ed3-43a8-b550-ced9e2c539ba",
-          "type": "lesson",
+          "type": "discovery",
           "title": "calcul-impact",
           "components": [
             {
@@ -44,7 +44,7 @@
         },
         {
           "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
-          "type": "lesson",
+          "type": "discovery",
           "title": "complete-phrase",
           "components": [
             {
@@ -147,12 +147,7 @@
                   ],
                   "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                   "llmMessage": "On peut mettre du ",
-                  "wordsToAdd": [
-                    "beurre",
-                    "et",
-                    "du",
-                    "sucre"
-                  ]
+                  "wordsToAdd": ["beurre", "et", "du", "sucre"]
                 }
               }
             }
@@ -160,7 +155,7 @@
         },
         {
           "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
-          "type": "lesson",
+          "type": "discovery",
           "title": "message-conversation",
           "components": [
             {
@@ -233,7 +228,7 @@
         },
         {
           "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
-          "type": "lesson",
+          "type": "discovery",
           "title": "image-quiz simple",
           "components": [
             {
@@ -313,7 +308,7 @@
         },
         {
           "id": "04f4ebb5-bf91-42c7-8f77-68aafbc76dcc",
-          "type": "lesson",
+          "type": "discovery",
           "title": "image-quiz multiple",
           "components": [
             {
@@ -416,7 +411,7 @@
         },
         {
           "id": "bf0a038c-08ee-4aba-8157-9522219b5b2a",
-          "type": "lesson",
+          "type": "discovery",
           "title": "image-quizzes",
           "components": [
             {
@@ -572,7 +567,7 @@
         },
         {
           "id": "a0aaf8f3-27da-4130-90e0-264be24893ec",
-          "type": "lesson",
+          "type": "discovery",
           "title": "llm-compare-messages",
           "components": [
             {
@@ -636,7 +631,7 @@
         },
         {
           "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef8",
-          "type": "lesson",
+          "type": "discovery",
           "title": "llm-messages",
           "components": [
             {
@@ -691,7 +686,7 @@
         },
         {
           "id": "662434d8-5d88-4be6-a339-a81916933229",
-          "type": "lesson",
+          "type": "discovery",
           "title": "llm-prompt-select",
           "components": [
             {
@@ -736,7 +731,7 @@
         },
         {
           "id": "6425a4f1-8fcf-4a03-9cef-fc298318e742",
-          "type": "lesson",
+          "type": "discovery",
           "title": "pix-article",
           "components": [
             {
@@ -771,7 +766,7 @@
         },
         {
           "id": "fc38e052-ed9f-4d68-b09f-515b7069ad86",
-          "type": "lesson",
+          "type": "discovery",
           "title": "pix-carousel",
           "components": [
             {
@@ -859,7 +854,7 @@
         },
         {
           "id": "fc38e052-ed9f-4d68-b09f-515b7069ad00",
-          "type": "lesson",
+          "type": "discovery",
           "title": "pix-cursor",
           "components": [
             {
@@ -905,7 +900,7 @@
         },
         {
           "id": "27ab0dd6-61d7-4cd9-8f43-f5e4c13f7f30",
-          "type": "lesson",
+          "type": "discovery",
           "title": "qcm-deepfake",
           "components": [
             {
