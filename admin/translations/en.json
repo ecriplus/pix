@@ -1020,6 +1020,39 @@
           "download-certificates": "Download certificates"
         },
         "assignment-confirmation-modal": "This session is already assigned to the user {fullName}.'<br/>'Do you still want to assign it to yourself?",
+        "buttons": {
+          "assign-session": "Assign me to the session",
+          "assigned-to-session": "You are assigned to this session",
+          "copy-results-link": "Results download link",
+          "unfinalize-session": "Unfinalize the session"
+        },
+        "labels": {
+          "access-code": "Access code:",
+          "certification-center": "Certification center:",
+          "complementary-info": "Additional information:",
+          "creation-date": "Creation date:",
+          "description": "Description:",
+          "examiner": "Examiner:",
+          "finalization-date": "Finalization date:",
+          "global-comment": "Global comment:",
+          "impactful-issues": "Number of unresolved impactful issue report(s):",
+          "publication-date": "Publication date:",
+          "results-sent-date": "Results sent to prescriber date:",
+          "room-name": "Room name:",
+          "scoring-errors": "Number of certification(s) with scoring error:",
+          "session-date-time": "Session date and time:",
+          "site-name": "Site name:",
+          "started-certifications": "Number of started certification(s):",
+          "status": "Status:",
+          "total-issues": "Number of issue report(s):"
+        },
+        "messages": {
+          "incident-info": "Despite an incident during the session, candidates were able to complete their certification test. Additional time was granted to one or more candidates.",
+          "joining-issue-info": "One or more candidates were present at the certification session but were unable to join the session."
+        },
+        "tooltips": {
+          "cannot-unfinalize-published": "You cannot unfinalize a published session. Please unpublish the session before unfinalizing it."
+        },
         "unfinalization-confirmation-modal": "Are you sure you want to unfinalize this session ? Click on confirm to process."
       },
       "list": {

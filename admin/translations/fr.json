@@ -1021,6 +1021,39 @@
           "download-certificates": "Télécharger les certificats"
         },
         "assignment-confirmation-modal": "L'utilisateur {fullName} s'est déjà assigné cette session.'<br/>'Voulez-vous vous quand même vous assigner cette session ?",
+        "buttons": {
+          "assign-session": "M'assigner la session",
+          "assigned-to-session": "Vous êtes assigné à cette session",
+          "copy-results-link": "Lien de téléchargement des résultats",
+          "unfinalize-session": "Définaliser la session"
+        },
+        "labels": {
+          "access-code": "Code d'accès :",
+          "certification-center": "Centre de certification :",
+          "complementary-info": "Informations complémentaires :",
+          "creation-date": "Date de création :",
+          "description": "Description :",
+          "examiner": "Surveillant :",
+          "finalization-date": "Date de finalisation :",
+          "global-comment": "Commentaire global :",
+          "impactful-issues": "Nombre de signalement(s) impactant(s) non résolu(s) :",
+          "publication-date": "Date de publication :",
+          "results-sent-date": "Date d'envoi des résultats au prescripteur :",
+          "room-name": "Nom de la salle :",
+          "scoring-errors": "Nombre de certification(s) en erreur :",
+          "session-date-time": "Date et heure de la session :",
+          "site-name": "Nom du site :",
+          "started-certifications": "Nombre de certification(s) démarrée(s) :",
+          "status": "Statut :",
+          "total-issues": "Nombre de signalement(s) :"
+        },
+        "messages": {
+          "incident-info": "Malgré un incident survenu pendant la session, les candidats ont pu terminer leur test de certification. Un temps supplémentaire a été accordé à un ou plusieurs candidats.",
+          "joining-issue-info": "Un ou plusieurs candidats étaient présents en session de certification mais n'ont pas pu rejoindre la session."
+        },
+        "tooltips": {
+          "cannot-unfinalize-published": "Vous ne pouvez pas définaliser une session publiée. Merci de dépublier la session avant de la définaliser."
+        },
         "unfinalization-confirmation-modal": "Êtes-vous sûr.e de vouloir définaliser cette session ? Cliquez sur confirmer pour poursuivre."
       },
       "list": {

@@ -22,7 +22,7 @@ function getFormattedDate(param) {
 
       <ul class="session-info__list">
         <li class="session-info__list-item">
-          <span>Centre de certification :</span>
+          <span>{{t "pages.sessions.informations.labels.certification-center"}}</span>
           <span>
             <LinkTo @route="authenticated.certification-centers.get" @model={{@sessionModel.certificationCenterId}}>
               {{@sessionModel.certificationCenterName}}
@@ -30,55 +30,55 @@ function getFormattedDate(param) {
           </span>
         </li>
         <li class="session-info__list-item">
-          <span>Nom du site :</span>
+          <span>{{t "pages.sessions.informations.labels.site-name"}}</span>
           <span>{{@sessionModel.address}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Nom de la salle :</span>
+          <span>{{t "pages.sessions.informations.labels.room-name"}}</span>
           <span>{{@sessionModel.room}}</span>
         </li>
 
         <li class="session-info__list-item">
-          <span>Date et heure de la session :</span>
+          <span>{{t "pages.sessions.informations.labels.session-date-time"}}</span>
           <span>{{getFormattedDate @sessionModel.date}} à {{@sessionModel.time}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Surveillant :</span>
+          <span>{{t "pages.sessions.informations.labels.examiner"}}</span>
           <span>{{@sessionModel.examiner}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Description :</span>
+          <span>{{t "pages.sessions.informations.labels.description"}}</span>
           <span>{{@sessionModel.description}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Code d'accès :</span>
+          <span>{{t "pages.sessions.informations.labels.access-code"}}</span>
           <span>{{@sessionModel.accessCode}}</span>
         </li>
       </ul>
       <ul class="session-info__list">
         <li class="session-info__list-item">
-          <span>Statut :</span>
+          <span>{{t "pages.sessions.informations.labels.status"}}</span>
           <span>{{@sessionModel.displayStatus}}</span>
         </li>
         <li class="session-info__list-item">
-          <span>Date de création :</span>
+          <span>{{t "pages.sessions.informations.labels.creation-date"}}</span>
           <span>{{getFormattedDate @sessionModel.createdAt}}</span>
         </li>
         {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
-            <span>Date de finalisation :</span>
+            <span>{{t "pages.sessions.informations.labels.finalization-date"}}</span>
             <span>{{getFormattedDate @sessionModel.finalizedAt}}</span>
           </li>
         {{/if}}
         {{#if @sessionModel.publishedAt}}
           <li class="session-info__list-item">
-            <span>Date de publication :</span>
+            <span>{{t "pages.sessions.informations.labels.publication-date"}}</span>
             <span>{{getFormattedDate @sessionModel.publishedAt}}</span>
           </li>
         {{/if}}
         {{#if @sessionModel.resultsSentToPrescriberAt}}
           <li class="session-info__list-item">
-            <span>Date d'envoi des résultats au prescripteur :</span>
+            <span>{{t "pages.sessions.informations.labels.results-sent-date"}}</span>
             <span>{{getFormattedDate @sessionModel.resultsSentToPrescriberAt}}</span>
           </li>
         {{/if}}
@@ -86,38 +86,36 @@ function getFormattedDate(param) {
 
       <ul class="session-info__list">
         <li class="session-info__list-item">
-          <span>Nombre de certification(s) démarrée(s) :</span>
+          <span>{{t "pages.sessions.informations.labels.started-certifications"}}</span>
           <span>{{@sessionModel.numberOfStartedCertifications}}</span>
         </li>
         {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
-            <span>Nombre de signalement(s) impactant(s) non résolu(s) :</span>
+            <span>{{t "pages.sessions.informations.labels.impactful-issues"}}</span>
             <span>{{@sessionModel.numberOfImpactfullIssueReports}}</span>
           </li>
           <li class="session-info__list-item">
-            <span>Nombre de signalement(s) :</span>
+            <span>{{t "pages.sessions.informations.labels.total-issues"}}</span>
             <span>{{@sessionModel.totalNumberOfIssueReports}}</span>
           </li>
           <li class="session-info__list-item">
-            <span>Nombre de certification(s) en erreur :</span>
+            <span>{{t "pages.sessions.informations.labels.scoring-errors"}}</span>
             <span>{{@sessionModel.numberOfScoringErrors}}</span>
           </li>
           {{#if @sessionModel.hasComplementaryInfo}}
             <li class="session-info__list-item">
-              <span>Informations complémentaires :</span>
+              <span>{{t "pages.sessions.informations.labels.complementary-info"}}</span>
               {{#if @sessionModel.hasIncident}}
-                <span>Malgré un incident survenu pendant la session, les candidats ont pu terminer leur test de
-                  certification. Un temps supplémentaire a été accordé à un ou plusieurs candidats.</span>
+                <span>{{t "pages.sessions.informations.messages.incident-info"}}</span>
               {{/if}}
               {{#if @sessionModel.hasJoiningIssue}}
-                <span>Un ou plusieurs candidats étaient présents en session de certification mais n'ont pas pu rejoindre
-                  la session.</span>
+                <span>{{t "pages.sessions.informations.messages.joining-issue-info"}}</span>
               {{/if}}
             </li>
           {{/if}}
           {{#if @sessionModel.hasExaminerGlobalComment}}
             <li class="session-info__list-item">
-              <span>Commentaire global :</span>
+              <span>{{t "pages.sessions.informations.labels.global-comment"}}</span>
               <span>{{@sessionModel.examinerGlobalComment}}</span>
             </li>
           {{/if}}
@@ -128,9 +126,13 @@ function getFormattedDate(param) {
         <div class="session-info__actions">
           {{#if @sessionModel.finalizedAt}}
             {{#if @isCurrentUserAssignedToSession}}
-              <PixButton @size="large" @isDisabled={{true}}>Vous êtes assigné à cette session</PixButton>
+              <PixButton @size="large" @isDisabled={{true}}>{{t
+                  "pages.sessions.informations.buttons.assigned-to-session"
+                }}</PixButton>
             {{else}}
-              <PixButton @size="large" @triggerAction={{@checkForAssignment}}>M'assigner la session</PixButton>
+              <PixButton @size="large" @triggerAction={{@checkForAssignment}}>{{t
+                  "pages.sessions.informations.buttons.assign-session"
+                }}</PixButton>
             {{/if}}
             {{#if @sessionModel.isPublished}}
               <PixTooltip @position="right" @isWide={{true}}>
@@ -140,17 +142,17 @@ function getFormattedDate(param) {
                     @isDisabled={{true}}
                     @triggerAction={{@onUnfinalizeSessionButtonClick}}
                     @variant="error"
-                  >Définaliser la session
+                  >{{t "pages.sessions.informations.buttons.unfinalize-session"}}
                   </PixButton>
                 </:triggerElement>
 
-                <:tooltip>Vous ne pouvez pas définaliser une session publiée. Merci de dépublier la session avant de la
-                  définaliser.
+                <:tooltip>{{t "pages.sessions.informations.tooltips.cannot-unfinalize-published"}}
                 </:tooltip>
               </PixTooltip>
             {{else}}
-              <PixButton @size="large" @triggerAction={{@onUnfinalizeSessionButtonClick}} @variant="error">Définaliser
-                la session
+              <PixButton @size="large" @triggerAction={{@onUnfinalizeSessionButtonClick}} @variant="error">{{t
+                  "pages.sessions.informations.buttons.unfinalize-session"
+                }}
               </PixButton>
             {{/if}}
           {{/if}}
@@ -167,7 +169,7 @@ function getFormattedDate(param) {
               @iconBefore="copy"
               @plainIconBefore={{true}}
             >
-              Lien de téléchargement des résultats
+              {{t "pages.sessions.informations.buttons.copy-results-link"}}
             </PixButton>
           </div>
 

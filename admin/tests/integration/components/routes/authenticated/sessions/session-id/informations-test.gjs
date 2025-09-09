@@ -48,7 +48,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
 
       // when
       const screen = await visit(`/sessions/${session.id}`);
-
       // then
       assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
       assert.dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :')).doesNotExist();
