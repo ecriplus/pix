@@ -16,15 +16,19 @@ export default class CertificationCenterInvitationsAction extends Component {
 
   localeOptions = [
     {
-      label: 'Français',
+      label: 'Français (France)',
       value: 'fr-FR',
     },
     {
-      label: 'Francophone',
+      label: 'Français (Belgique)',
+      value: 'fr-BE',
+    },
+    {
+      label: 'Français (International)',
       value: 'fr',
     },
     {
-      label: 'Anglais',
+      label: 'English (International)',
       value: 'en',
     },
   ];

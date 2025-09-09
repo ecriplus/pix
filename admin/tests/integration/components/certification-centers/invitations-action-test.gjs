@@ -48,7 +48,7 @@ module('Integration | Component | certification-center-invitations-action', func
 
     await click(screen.getByRole('button', { name: 'Choisir la langue de l’email d’invitation' }));
     await screen.findByRole('listbox');
-    await click(screen.getByRole('option', { name: 'Anglais' }));
+    await click(screen.getByRole('option', { name: 'English (International)' }));
     await waitForElementToBeRemoved(() => screen.queryByRole('listbox'));
 
     await click(screen.getByRole('button', { name: 'Choisir le rôle du membre' }));
