@@ -26,6 +26,7 @@ class CampaignReport {
     multipleSendings,
     targetProfileName,
   } = {}) {
+    this.isFromCombinedCourse = false;
     this.targetProfileName = targetProfileName;
     this.id = id;
     this.name = name;
@@ -69,6 +70,10 @@ class CampaignReport {
 
   get isArchived() {
     return Boolean(this.archivedAt);
+  }
+
+  setIsFromCombinedCourse(isFromCombinedCourse) {
+    this.isFromCombinedCourse = isFromCombinedCourse;
   }
 
   setTargetProfileInformation(targetProfile) {
