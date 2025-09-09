@@ -81,20 +81,22 @@ export default class Header extends Component {
               </dd>
             </div>
           {{/if}}
-          <div class="campaign-header-title__detail-item">
-            <dt class="label-text">
-              {{t "pages.campaign.code"}}
-            </dt>
-            <dd class="campaign-header-title__campaign-code">
-              <span>{{@campaign.code}}</span>
-              <CopyPasteButton
-                @clipBoardtext={{@campaign.code}}
-                @successMessage={{t "pages.campaign.copy.code.success"}}
-                @defaultMessage={{t "pages.campaign.copy.code.default"}}
-                class="hide-on-mobile"
-              />
-            </dd>
-          </div>
+          {{#unless @campaign.isFromCombinedCourse}}
+            <div class="campaign-header-title__detail-item">
+              <dt class="label-text">
+                {{t "pages.campaign.code"}}
+              </dt>
+              <dd class="campaign-header-title__campaign-code">
+                <span>{{@campaign.code}}</span>
+                <CopyPasteButton
+                  @clipBoardtext={{@campaign.code}}
+                  @successMessage={{t "pages.campaign.copy.code.success"}}
+                  @defaultMessage={{t "pages.campaign.copy.code.default"}}
+                  class="hide-on-mobile"
+                />
+              </dd>
+            </div>
+          {{/unless}}
         </dl>
       </:tools>
     </PageTitle>

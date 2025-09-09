@@ -25,6 +25,7 @@ export default class Campaign extends Model {
   @attr('number') targetProfileThematicResultCount;
   @attr('boolean') targetProfileHasStage;
   @attr('boolean') targetProfileAreKnowledgeElementsResettable;
+  @attr('boolean') isFromCombinedCourse;
   @attr('number') participationsCount;
   @attr('number') sharedParticipationsCount;
   @attr('number') averageResult;
