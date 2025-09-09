@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.202.0](https://github.com/1024pix/pix/compare/v5.201.0...v5.202.0) (2025-09-09)
+
+### :rocket: Amélioration
+
+- [#13494](https://github.com/1024pix/pix/pull/13494) Ajouter l'animation au défilement des étapes (PIX-19286) 
+- [#13386](https://github.com/1024pix/pix/pull/13386) Ajouter un pre-handler pour limiter l'accès des campagne de parcours combiné (PIX-19315). 
+- [#13470](https://github.com/1024pix/pix/pull/13470) Améliorer accessibilité du Stepper et de la Step (PIX-19415) 
+- [#13485](https://github.com/1024pix/pix/pull/13485) Enlever le fond de couleur sur les grains "défi" (PIX-19043) 
+- [#13468](https://github.com/1024pix/pix/pull/13468) Passer les grains de démo de composants en type discovery (PIX-19427) 
+- [#13484](https://github.com/1024pix/pix/pull/13484) Revoir la typo des titres de grain (leçon...) (PIX-19434) 
+- [#13508](https://github.com/1024pix/pix/pull/13508) Supprimer la mention des 4 jours avant de repasser dans PixOrga (PIX-19464) 
+- [#13495](https://github.com/1024pix/pix/pull/13495) Supprimer le statut "TO_SHARE" de PixOrga (PIX-19288) 
+- [#13503](https://github.com/1024pix/pix/pull/13503) Tmp update module ia supervise 
+
+### :arrow_up: Montée de version
+
+- [#13487](https://github.com/1024pix/pix/pull/13487) Update dependency @1024pix/eslint-plugin to ^2.1.11 (dossier racine) 
+- [#13488](https://github.com/1024pix/pix/pull/13488) Update dependency @1024pix/eslint-plugin to ^2.1.11 (e2e-playwright) 
+- [#13490](https://github.com/1024pix/pix/pull/13490) Update dependency @1024pix/eslint-plugin to ^2.1.11 (junior) 
+- [#13491](https://github.com/1024pix/pix/pull/13491) Update dependency @1024pix/eslint-plugin to ^2.1.11 (mon-pix) 
+- [#13496](https://github.com/1024pix/pix/pull/13496) Update dependency @1024pix/eslint-plugin to ^2.1.11 (orga) 
+- [#13501](https://github.com/1024pix/pix/pull/13501) Update dependency @1024pix/pix-ui to ^55.26.12 (certif) 
+- [#13502](https://github.com/1024pix/pix/pull/13502) Update dependency @1024pix/pix-ui to ^55.26.12 (junior) 
+- [#13504](https://github.com/1024pix/pix/pull/13504) Update dependency @1024pix/pix-ui to ^55.26.12 (mon-pix) 
+- [#13505](https://github.com/1024pix/pix/pull/13505) Update dependency @1024pix/pix-ui to ^55.26.12 (orga)
+
 # [5.201.0](https://github.com/1024pix/pix/compare/v5.200.0...v5.201.0) (2025-09-08)
 
 ### :rocket: Amélioration
