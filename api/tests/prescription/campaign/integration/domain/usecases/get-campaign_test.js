@@ -6,6 +6,62 @@ import {
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign', function () {
+  context('Campaign on Combined Course', function () {
+    let campaign, organizationId, targetProfileId;
+
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      campaign = databaseBuilder.factory.buildCampaign({
+        name: 'TroTro',
+        targetProfileId,
+        organizationId,
+        type: CampaignTypes.ASSESSMENT,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should defined isFromCombinedCourse to true when campaign register on combined course', async function () {
+      // given
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaign.id,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const resultCampaign = await usecases.getCampaign({
+        campaignId: campaign.id,
+      });
+
+      // then
+      expect(resultCampaign.isFromCombinedCourse).true;
+    });
+
+    it('should defined isFromCombinedCourse to false when campaign is not register on combined course', async function () {
+      // when
+      const resultCampaign = await usecases.getCampaign({
+        campaignId: campaign.id,
+      });
+
+      // then
+      expect(resultCampaign.isFromCombinedCourse).false;
+    });
+  });
   context('Type ASSESSMENT', function () {
     let campaign;
     let targetProfileId;
