@@ -62,9 +62,11 @@ export default class CampaignTabs extends Component {
           </LinkTo>
         {{/if}}
 
-        <LinkTo @route="authenticated.campaigns.campaign.settings" @model={{@campaign}}>
-          {{t "pages.campaign.tab.settings"}}
-        </LinkTo>
+        {{#unless @campaign.isFromCombinedCourse}}
+          <LinkTo @route="authenticated.campaigns.campaign.settings" @model={{@campaign}}>
+            {{t "pages.campaign.tab.settings"}}
+          </LinkTo>
+        {{/unless}}
       </PixTabs>
 
       <div class="campaign-header-tabs__export-button hide-on-mobile">
