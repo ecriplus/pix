@@ -63,7 +63,7 @@ export const certificationCenterInvitationAdminRoutes = [
           data: {
             attributes: {
               email: Joi.string().email().required(),
-              language: Joi.string().valid('fr-fr', 'fr-FR', 'fr-BE', 'fr', 'nl', 'nl-BE', 'en'),
+              locale: Joi.string().valid('fr-fr', 'fr-FR', 'fr-BE', 'fr', 'nl', 'nl-BE', 'en'),
               role: Joi.string().valid('ADMIN', 'MEMBER').allow(null),
             },
           },

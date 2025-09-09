@@ -49,7 +49,7 @@ export default class CertificationCenterInvitations extends Component {
                 Locale
               </:header>
               <:cell>
-                {{invitation.language}}
+                {{invitation.locale}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}}>

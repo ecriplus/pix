@@ -36,12 +36,12 @@ module('Integration | Component | Certification Centers | Invitations', function
       const certificationCenterInvitation1 = store.createRecord('certification-center-invitation', {
         email: 'elo.dela@example.net',
         updatedAt: invitationUpdatedAt1,
-        language: 'fr-FR',
+        locale: 'fr-FR',
       });
       const certificationCenterInvitation2 = store.createRecord('certification-center-invitation', {
         email: 'alain.finis@example.net',
         updatedAt: invitationUpdatedAt2,
-        language: 'fr-BE',
+        locale: 'fr-BE',
       });
       const certificationCenterInvitations = [certificationCenterInvitation1, certificationCenterInvitation2];
       const cancelCertificationCenterInvitation = sinon.stub();
@@ -63,6 +63,7 @@ module('Integration | Component | Certification Centers | Invitations', function
       const table = screen.getByRole('table', {
         name: t('components.certification-centers.invitations.table.caption'),
       });
+
       assert.dom(screen.getByRole('heading', { name: 'Invitations' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Adresse e-mail' })).exists();
       assert.dom(within(table).getByRole('columnheader', { name: 'Date de dernier envoi' })).exists();

@@ -26,7 +26,7 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
   }
 
   @action
-  async createInvitation(language, role) {
+  async createInvitation(locale, role) {
     const email = this.userEmailToInvite?.trim();
     if (!this._isEmailToInviteValid(email)) {
       return;
@@ -35,7 +35,7 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
     try {
       await this.store.queryRecord('certification-center-invitation', {
         email,
-        language,
+        locale,
         role,
         certificationCenterId: this.model.certificationCenterId,
       });
@@ -49,11 +49,12 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
 
   @action
   async sendNewCertificationCenterInvitation(certificationCenterInvitation) {
-    const { email, language, role } = certificationCenterInvitation;
+    const { email, locale, role } = certificationCenterInvitation;
+
     try {
       await this.store.queryRecord('certification-center-invitation', {
         email,
-        language,
+        locale,
         role,
         certificationCenterId: this.model.certificationCenterId,
       });

@@ -11,7 +11,7 @@ module('Integration | Component | certification-center-invitations-action', func
   setupRenderingTest(hooks);
   setupIntl(hooks);
 
-  test('it should create certification-center invitation with default language', async function (assert) {
+  test('it should create certification-center invitation with default locale', async function (assert) {
     // given
     const createInvitationStub = sinon.stub();
     const onChangeUserEmailToInvite = () => {};
@@ -28,10 +28,10 @@ module('Integration | Component | certification-center-invitations-action', func
     await click(screen.getByRole('button', { name: 'Inviter un membre' }));
 
     // then
-    assert.ok(createInvitationStub.calledWith('fr-fr'));
+    assert.ok(createInvitationStub.calledWith('fr-FR'));
   });
 
-  test('it creates a certification-center invitation with choosen language and choosen role', async function (assert) {
+  test('it creates a certification-center invitation with choosen locale and choosen role', async function (assert) {
     // given
     const createInvitationStub = sinon.stub();
     const onChangeUserEmailToInvite = () => {};

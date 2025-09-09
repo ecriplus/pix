@@ -56,7 +56,7 @@ describe('Unit | Team | Serializer | JSONAPI | certification-center-invitation-s
             email: 'anne.atole@example.net',
             'updated-at': now,
             role: 'MEMBER',
-            language: 'fr',
+            locale: 'fr',
           },
         },
       });
@@ -70,7 +70,7 @@ describe('Unit | Team | Serializer | JSONAPI | certification-center-invitation-s
         data: {
           type: 'certification-center-invitations',
           attributes: {
-            language: 'fr-fr',
+            locale: 'fr-FR',
             email: 'email@example.net',
             role: 'ADMIN',
           },
@@ -82,7 +82,7 @@ describe('Unit | Team | Serializer | JSONAPI | certification-center-invitation-s
 
       // then
       expect(json).to.deep.equal({
-        language: 'fr-fr',
+        locale: 'fr-FR',
         email: 'email@example.net',
         role: 'ADMIN',
       });

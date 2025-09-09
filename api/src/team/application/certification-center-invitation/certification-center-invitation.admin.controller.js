@@ -23,7 +23,7 @@ const sendInvitationForAdmin = async function (request, h, dependencies = { cert
     await usecases.createOrUpdateCertificationCenterInvitationForAdmin({
       certificationCenterId,
       email: invitationInformation.email,
-      locale: getNearestSupportedLocale(invitationInformation.language),
+      locale: getNearestSupportedLocale(invitationInformation.locale),
       role: invitationInformation.role,
     });
 

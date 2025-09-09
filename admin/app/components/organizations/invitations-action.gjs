@@ -10,10 +10,10 @@ import { tracked } from '@glimmer/tracking';
 
 export default class OrganizationInvitationsAction extends Component {
   @service intl;
-  @tracked organizationInvitationLang = this.languagesOptions[0].value;
+  @tracked organizationInvitationLang = this.localeOptions[0].value;
   @tracked organizationInvitationRole = this.rolesOptions[0].value;
 
-  get languagesOptions() {
+  get localeOptions() {
     return [
       {
         label: 'Français',
@@ -78,7 +78,7 @@ export default class OrganizationInvitationsAction extends Component {
             </PixInput>
 
             <PixSelect
-              @options={{this.languagesOptions}}
+              @options={{this.localeOptions}}
               @value={{this.organizationInvitationLang}}
               @onChange={{this.changeOrganizationInvitationLang}}
               @placeholder="Langue"
