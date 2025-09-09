@@ -185,6 +185,41 @@ describe('Certification | Scoring | Unit | Domain | Factories | AssessmentResult
     });
   });
 
+  describe('#buildRejectedDueToZeroPixScore', function () {
+    it('should return a rejected AssessmentResult due to zero pix score', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
+      // when
+      const actualAssessmentResult = AssessmentResultFactory.buildRejectedDueToZeroPixScore({
+        pixScore: 0,
+        reproducibilityRate: 25,
+        assessmentId: 123,
+        juryId: 456,
+        competenceMarks,
+      });
+
+      // then
+      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+        status: AssessmentResult.status.REJECTED,
+        pixScore: 0,
+        reproducibilityRate: 25,
+        assessmentId: 123,
+        juryId: 456,
+        competenceMarks,
+        commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+        }),
+        commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+        }),
+      });
+      expectedAssessmentResult.id = undefined;
+      expectedAssessmentResult.createdAt = undefined;
+      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+  });
+
   describe('#buildLackOfAnswersForTechnicalReason', function () {
     it('should return a cancelled AssessmentResult', function () {
       // when

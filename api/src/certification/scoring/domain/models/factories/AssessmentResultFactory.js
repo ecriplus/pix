@@ -151,4 +151,27 @@ export class AssessmentResultFactory {
       juryId,
     });
   }
+
+  static buildRejectedDueToZeroPixScore({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+    const commentForCandidate = new JuryComment({
+      context: JuryCommentContexts.CANDIDATE,
+      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+    });
+
+    const commentForOrganization = new JuryComment({
+      context: JuryCommentContexts.ORGANIZATION,
+      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+    });
+
+    return new AssessmentResult({
+      commentForCandidate,
+      commentForOrganization,
+      pixScore,
+      reproducibilityRate,
+      status: AssessmentResult.status.REJECTED,
+      assessmentId,
+      juryId,
+      competenceMarks,
+    });
+  }
 }
