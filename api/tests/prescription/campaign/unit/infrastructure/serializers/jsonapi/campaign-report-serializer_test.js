@@ -129,6 +129,7 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
             'average-result': report.averageResult,
             'reached-stage': report.reachedStage,
             'total-stage': report.totalStage,
+            'is-from-combined-course': report.isFromCombinedCourse,
           },
         },
         included: [
