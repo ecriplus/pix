@@ -32,6 +32,62 @@ module('Integration | Component | combined course', function (hooks) {
       // then
       assert.ok(screen.getByRole('heading', { name: 'Combinix' }));
     });
+    test('should display duration on item if exists', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+        isLocked: false,
+        duration: 10,
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.NOT_STARTED,
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(combinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      //then
+      assert.ok(screen.getByText(/10 min/));
+    });
+    test('should not display duration on item if it does not exists', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.NOT_STARTED,
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(combinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      //then
+      assert.notOk(screen.queryByText(t('pages.combined-courses.items.durationUnit')));
+    });
   });
   module('when there is a formation item', function () {
     test('should display formation item', async function (assert) {

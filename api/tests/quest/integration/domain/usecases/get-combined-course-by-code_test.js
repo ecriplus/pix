@@ -103,6 +103,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         redirection: 'encryptedUrl',
         isCompleted: false,
         isLocked: true,
+        duration: 5,
       }),
       new CombinedCourseItem({
         id: moduleId2,
@@ -112,6 +113,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         redirection: 'encryptedUrl',
         isCompleted: false,
         isLocked: true,
+        duration: 10,
       }),
     ]);
     expect(result.id).to.equal(questId);
@@ -232,6 +234,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         redirection: 'encryptedUrl',
         isCompleted: true,
         isLocked: false,
+        duration: 5,
       }),
       new CombinedCourseItem({
         id: moduleId3,
@@ -241,6 +244,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         redirection: 'encryptedUrl',
         isCompleted: false,
         isLocked: false,
+        duration: 10,
       }),
     ]);
     expect(result).to.be.instanceOf(CombinedCourse);

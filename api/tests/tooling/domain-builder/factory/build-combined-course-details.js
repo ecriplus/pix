@@ -1,7 +1,7 @@
-import { Module } from '../../../../src/devcomp/domain/models/module/Module.js';
 import { CombinedCourse, CombinedCourseDetails } from '../../../../src/quest/domain/models/CombinedCourse.js';
 import { DataForQuest } from '../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../src/quest/domain/models/Eligibility.js';
+import { Module } from '../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder } from '../domain-builder.js';
 
@@ -11,9 +11,7 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
     id: 7,
     slug: 'slug',
     title: 'title',
-    isBeta: true,
-    sections: [{ id: 8, type: 'none', grains: [] }],
-    details: '',
+    duration: 10,
     version: '',
   });
   quest =

@@ -1199,7 +1199,9 @@
           "description": "¡Completa tu prueba y desbloquea módulos de formación personalizados! Su número dependerá de tus resultados."
         },
         "completed": "¡Completado!",
-        "tagText": "¡Ya estás ahí!"
+        "tagText": "¡Ya estás ahí!",
+        "durationUnit": "min",
+        "approximatelySymbol": "≈"
       }
     },
     "comparison-window": {
