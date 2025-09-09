@@ -38,7 +38,10 @@ import AssessmentList from 'pix-orga/components/campaign/results/assessment-list
     {{#if @controller.isGarAuthenticationMethod}}
       <EmptyState />
     {{else}}
-      <EmptyState @campaignCode={{@model.campaign.code}} />
+      <EmptyState
+        @campaignCode={{@model.campaign.code}}
+        @isFromCombinedCourse={{@model.campaign.isFromCombinedCourse}}
+      />
     {{/if}}
   {{/if}}
 </template>

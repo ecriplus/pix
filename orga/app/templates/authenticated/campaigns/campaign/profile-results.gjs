@@ -20,6 +20,6 @@ import ProfileList from 'pix-orga/components/campaign/results/profile-list';
       class="profile-results__list"
     />
   {{else}}
-    <EmptyState @campaignCode={{@model.campaign.code}} />
+    <EmptyState @campaignCode={{@model.campaign.code}} @isFromCombinedCourse={{@model.campaign.isFromCombinedCourse}} />
   {{/if}}
 </template>
