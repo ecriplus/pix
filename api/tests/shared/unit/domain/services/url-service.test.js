@@ -117,16 +117,32 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
         expect(url).to.equal('https://test.app.pix.org/?code=123%2B&locale=en');
       });
 
-      it('overrides the locale parameter if it is provided in queryParams', function () {
-        // given
-        const locale = 'fr';
-        const queryParams = { locale: 'en' };
+      context('when locale is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { locale: 'en' };
 
-        // when
-        const url = getPixAppUrl(locale, { queryParams });
+          // when
+          const url = getPixAppUrl(locale, { queryParams });
 
-        // then
-        expect(url).to.equal('https://test.app.pix.org/?locale=en');
+          // then
+          expect(url).to.equal('https://test.app.pix.org/?locale=en');
+        });
+      });
+
+      context('when lang is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { lang: 'en' };
+
+          // when
+          const url = getPixAppUrl(locale, { queryParams });
+
+          // then
+          expect(url).to.equal('https://test.app.pix.org/?lang=en');
+        });
       });
     });
 
@@ -219,16 +235,32 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
         expect(url).to.equal('https://orga.pix.org/?code=123%2B&locale=en');
       });
 
-      it('overrides the locale parameter if it is provided in queryParams', function () {
-        // given
-        const locale = 'fr';
-        const queryParams = { locale: 'en' };
+      context('when locale is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { locale: 'en' };
 
-        // when
-        const url = getPixOrgaUrl(locale, { queryParams });
+          // when
+          const url = getPixOrgaUrl(locale, { queryParams });
 
-        // then
-        expect(url).to.equal('https://orga.pix.org/?locale=en');
+          // then
+          expect(url).to.equal('https://orga.pix.org/?locale=en');
+        });
+      });
+
+      context('when lang is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { lang: 'en' };
+
+          // when
+          const url = getPixOrgaUrl(locale, { queryParams });
+
+          // then
+          expect(url).to.equal('https://orga.pix.org/?lang=en');
+        });
       });
     });
 
@@ -307,16 +339,32 @@ describe('Unit | Shared | Domain | Services | url-service', function () {
         expect(url).to.equal('https://certif.pix.org/?code=123%2B&locale=en');
       });
 
-      it('overrides the locale parameter if it is provided in queryParams', function () {
-        // given
-        const locale = 'fr';
-        const queryParams = { locale: 'en' };
+      context('when locale is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { locale: 'en' };
 
-        // when
-        const url = getPixCertifUrl(locale, { queryParams });
+          // when
+          const url = getPixCertifUrl(locale, { queryParams });
 
-        // then
-        expect(url).to.equal('https://certif.pix.org/?locale=en');
+          // then
+          expect(url).to.equal('https://certif.pix.org/?locale=en');
+        });
+      });
+
+      context('when lang is provided in the queryParams', function () {
+        it('overrides the locale parameter', function () {
+          // given
+          const locale = 'fr';
+          const queryParams = { lang: 'en' };
+
+          // when
+          const url = getPixCertifUrl(locale, { queryParams });
+
+          // then
+          expect(url).to.equal('https://certif.pix.org/?lang=en');
+        });
       });
     });
 
