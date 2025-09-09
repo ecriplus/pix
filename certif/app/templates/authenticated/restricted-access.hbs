@@ -2,8 +2,7 @@
   <img class="restricted-access-content__image" src="/images/calendar_blocked_access_sco.svg" alt="" role="none" />
   <h1 class="restricted-access-content__opening-title">
     {{#if this.model.isAccessBlockedUntilDate}}
-      {{t "restricted-access"}}
-      {{dayjs-format this.model.pixCertifBlockedAccessUntilDate "DD/MM/YYYY"}}
+      {{this.accessBlockedLabel}}
     {{else}}
       {{t "pages.sco.restricted-access.title"}}
       {{dayjs-format this.certificationOpeningDate "DD/MM/YYYY"}}
