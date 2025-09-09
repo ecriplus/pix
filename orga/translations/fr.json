@@ -692,7 +692,7 @@
       "legal-warning": "* En vertu de la loi Informatique et libertés, et en tant que responsable de traitement, soyez attentifs à ne pas demander de donnée particulièrement identifiante ou signifiante si ce n’est pas absolument indispensable. Le numéro de sécurité sociale (NIR) est à proscrire ainsi que toute donnée sensible.",
       "multiple-sendings": {
         "assessments": {
-          "info": "Si vous choisissez l’envoi multiple, le participant pourra repasser la campagne 4 jours après et envoyer ses résultats plusieurs fois, en saisissant à nouveau le code.",
+          "info": "Si vous choisissez l’envoi multiple, le participant pourra repasser la campagne plusieurs fois, en saisissant à nouveau le code. Vous aurez accès à tous les résultats.",
           "question-label": "Souhaitez-vous permettre aux participants d’envoyer plusieurs fois leurs résultats ?"
         },
         "info-title": "Envoi multiple",
@@ -909,7 +909,7 @@
         "title": "Envoi multiple",
         "tooltip": {
           "aria-label": "Description de l'envoi multiple",
-          "text": "Si l’envoi multiple est activé, le participant peut envoyer plusieurs fois sa participation en saisissant à nouveau le code campagne. Au sein de Pix Orga, vous trouverez la dernière envoyée."
+          "text": "Si l’envoi multiple est activé, le participant peut envoyer plusieurs fois sa participation en saisissant à nouveau le code campagne."
         }
       },
       "personalised-test-title": "Titre du parcours",

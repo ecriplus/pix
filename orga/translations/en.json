@@ -295,12 +295,12 @@
       "type": {
         "explanation": {
           "ASSESSMENT": "Campaign of type assessment",
-          "EXAM": "Interrogation mode [beta]",
+          "EXAM": "Exam mode [beta]",
           "PROFILES_COLLECTION": "Campaign of type profiles collection"
         },
         "information": {
           "ASSESSMENT": "Assessment",
-          "EXAM": "Interrogation mode [beta]",
+          "EXAM": "Exam mode [beta]",
           "PROFILES_COLLECTION": "Profiles collection"
         }
       }
@@ -692,7 +692,7 @@
       "legal-warning": "*In accordance with the French law governing computer technology and freedoms (“Informatique et Libertés”), and as data controller, please be careful not to ask for significant or identifying personal data unless it is absolutely necessary. Asking for social security numbers, as well as any sensitive data, is strictly prohibited.",
       "multiple-sendings": {
         "assessments": {
-          "info": "If you choose to allow multiple submissions, the participants will be able to take the test again 4 days after and submit their results several times by re-entering the campaign code.",
+          "info": "If you choose to allow multiple submissions, participants will be able to take the test several times by re-entering the campaign code. You will have access to all the results.",
           "question-label": "Do you want to allow participants to submit their results more than once?"
         },
         "info-title": "Multiple submissions",
@@ -716,8 +716,8 @@
       "purpose": {
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
-        "exam": "Interrogation mode [beta]",
-        "exam-info": "A ‘interrogation mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
+        "exam": "Exam mode [beta]",
+        "exam-info": "A ‘exam mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
         "profiles-collection": "Collect the participants' Pix profiles",
         "profiles-collection-info": "A profile collection campaign retrieves the participants’ Pix profile: their level for each competence and their pix score.",
@@ -909,7 +909,7 @@
         "title": "Multiple Sendings",
         "tooltip": {
           "aria-label": "Description of multiple sendings",
-          "text": "If you choose to allow multiple submissions, the participants will be able to submit their participation several times by re-entering the campaign code. Within Pix Orga you will find the latest sent."
+          "text": "If you choose to allow multiple submissions, the participants will be able to submit their participation several times by re-entering the campaign code."
         }
       },
       "personalised-test-title": "Title of the customised test",
