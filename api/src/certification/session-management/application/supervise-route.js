@@ -31,7 +31,7 @@ const register = async function (server) {
         tags: ['api', 'sessions', 'supervising'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés',
-          "Elle valide l'accès du'un surveillant à l'espace surveillant",
+          "Elle permet l'accès à l'espace surveillant",
         ],
       },
     },

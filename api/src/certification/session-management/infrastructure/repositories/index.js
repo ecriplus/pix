@@ -1,5 +1,6 @@
 import * as certificationIssueReportRepository from '../../../../certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import * as issueReportCategoryRepository from '../../../../certification/shared/infrastructure/repositories/issue-report-category-repository.js';
+import * as certificationPointOfContactRepository from '../../../../identity-access-management/infrastructure/repositories/certification-point-of-contact.repository.js';
 import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
@@ -78,6 +79,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {typeof certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {certificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {certificationPointOfContactRepository} CertificationPointOfContactRepository
  */
 const repositoriesWithoutInjectedDependencies = {
   assessmentRepository,
@@ -113,6 +115,7 @@ const repositoriesWithoutInjectedDependencies = {
   certificationCandidateRepository,
   certificationCompanionAlertRepository,
   certificationRescoringRepository,
+  certificationPointOfContactRepository,
 };
 
 /**

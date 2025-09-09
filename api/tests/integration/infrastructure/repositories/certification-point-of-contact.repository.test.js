@@ -97,8 +97,9 @@ describe('Integration | Identity Access Management |  Repository | Certification
         authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
       );
 
-      const allowedCertificationCenterAccesses =
-        await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+      const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses({
+        centerList,
+      });
 
       // then
       const expectedAllowedCertificationCenterAccesses = [
@@ -140,8 +141,9 @@ describe('Integration | Identity Access Management |  Repository | Certification
         authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
       );
 
-      const allowedCertificationCenterAccesses =
-        await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+      const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses({
+        centerList,
+      });
 
       // then
       expect(
@@ -161,8 +163,9 @@ describe('Integration | Identity Access Management |  Repository | Certification
       const centerList = await Promise.all(
         authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
       );
-      const allowedCertificationCenterAccesses =
-        await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+      const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses({
+        centerList,
+      });
       const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
         userId: userWithMembership.id,
         certificationPointOfContactDTO,
@@ -212,7 +215,7 @@ describe('Integration | Identity Access Management |  Repository | Certification
             authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
           );
           const allowedCertificationCenterAccesses =
-            await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+            await certificationPointOfContactRepository.getAllowedCenterAccesses({ centerList });
           const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
             userId: userWithMembership.id,
             certificationPointOfContactDTO,
@@ -346,8 +349,9 @@ describe('Integration | Identity Access Management |  Repository | Certification
         const centerList = await Promise.all(
           authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
         );
-        const allowedCertificationCenterAccesses =
-          await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+        const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses(
+          { centerList },
+        );
         const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
           userId: userWithoutMembership.id,
           certificationPointOfContactDTO,
@@ -472,8 +476,9 @@ describe('Integration | Identity Access Management |  Repository | Certification
         const centerList = await Promise.all(
           authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
         );
-        const allowedCertificationCenterAccesses =
-          await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+        const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses(
+          { centerList },
+        );
         const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
           userId: userWithoutMembership.id,
           certificationPointOfContactDTO,
@@ -590,7 +595,7 @@ describe('Integration | Identity Access Management |  Repository | Certification
             authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
           );
           const allowedCertificationCenterAccesses =
-            await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+            await certificationPointOfContactRepository.getAllowedCenterAccesses({ centerList });
           const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
             userId: userWithMembership.id,
             certificationPointOfContactDTO,
@@ -679,7 +684,7 @@ describe('Integration | Identity Access Management |  Repository | Certification
             authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
           );
           const allowedCertificationCenterAccesses =
-            await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+            await certificationPointOfContactRepository.getAllowedCenterAccesses({ centerList });
           const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
             userId: userWithoutMembership.id,
             certificationPointOfContactDTO,
@@ -719,7 +724,7 @@ describe('Integration | Identity Access Management |  Repository | Certification
             authorizedCenterIds.map((authorizedCenterId) => centerRepository.getById({ id: authorizedCenterId })),
           );
           const allowedCertificationCenterAccesses =
-            await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+            await certificationPointOfContactRepository.getAllowedCenterAccesses({ centerList });
           const certificationPointOfContact = await certificationPointOfContactRepository.getPointOfContact({
             userId: userWithoutMembership.id,
             certificationPointOfContactDTO,

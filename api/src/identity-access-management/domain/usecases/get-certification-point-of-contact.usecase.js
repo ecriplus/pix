@@ -22,8 +22,9 @@ const getCertificationPointOfContact = async function ({
 
   const centerList = await _getCenters({ authorizedCenterIds, centerRepository });
 
-  const allowedCertificationCenterAccesses =
-    await certificationPointOfContactRepository.getAllowedCenterAccesses(centerList);
+  const allowedCertificationCenterAccesses = await certificationPointOfContactRepository.getAllowedCenterAccesses({
+    centerList,
+  });
 
   return certificationPointOfContactRepository.getPointOfContact({
     userId,

@@ -13,7 +13,7 @@ const CERTIFICATION_CENTER_MEMBERSHIPS_TABLE_NAME = 'certification-center-member
  * @param {Array} centerList - List of certification centers.
  * @returns {Promise<Array>} - List of allowed center accesses.
  */
-const getAllowedCenterAccesses = async function (centerList) {
+const getAllowedCenterAccesses = async function ({ centerList }) {
   const allowedCenterIdList = centerList.map((center) => center.id);
 
   const allowedAccessDTOs = await knex

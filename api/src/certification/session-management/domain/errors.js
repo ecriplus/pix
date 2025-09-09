@@ -83,8 +83,11 @@ class InvalidSessionSupervisingLoginError extends DomainError {
 }
 
 class SessionNotAccessible extends DomainError {
-  constructor(message = "La session de certification n'est plus accessible.") {
-    super(message);
+  constructor(blockedAccessDate) {
+    super('Certification session is not accessible', 'SESSION_NOT_ACCESSIBLE');
+    if (blockedAccessDate) {
+      this.meta = { blockedAccessDate };
+    }
   }
 }
 
