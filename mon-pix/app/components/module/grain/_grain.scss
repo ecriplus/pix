@@ -70,11 +70,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     background: var(--modulix-summary-card-background);
   }
 
-  &--challenge {
-    padding: var(--pix-spacing-6x);
-    background: var(--modulix-challenge-card-background);
-  }
-
   &--lesson {
     padding: var(--pix-spacing-6x);
     background: var(--pix-primary-10);
