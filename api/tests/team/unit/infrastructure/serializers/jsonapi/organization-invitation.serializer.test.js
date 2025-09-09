@@ -22,7 +22,7 @@ describe('Unit | Serializer | JSONAPI | organization-invitation-serializer', fun
             status: invitationObject.status,
             'updated-at': invitationObject.updatedAt,
             role: invitationObject.role,
-            lang: invitationObject.locale,
+            locale: invitationObject.locale,
           },
         },
       };
@@ -38,7 +38,7 @@ describe('Unit | Serializer | JSONAPI | organization-invitation-serializer', fun
         data: {
           type: 'organization-invitations',
           attributes: {
-            lang: 'fr-fr',
+            locale: 'fr-fr',
             email: 'email@example.net',
             role: null,
           },
@@ -51,7 +51,7 @@ describe('Unit | Serializer | JSONAPI | organization-invitation-serializer', fun
 
       // then
       const expectedJsonApi = {
-        lang: 'fr-fr',
+        locale: 'fr-fr',
         email: 'email@example.net',
         role: null,
       };
@@ -64,7 +64,7 @@ describe('Unit | Serializer | JSONAPI | organization-invitation-serializer', fun
         data: {
           type: 'organization-invitations',
           attributes: {
-            lang: 'fr-fr',
+            locale: 'fr-fr',
             email: '    EMAIL@example.net    ',
             role: null,
           },

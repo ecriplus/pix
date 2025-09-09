@@ -10,7 +10,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class OrganizationInvitationsAction extends Component {
   @service intl;
-  @tracked organizationInvitationLang = this.localeOptions[0].value;
+  @tracked organizationInvitationLocale = this.localesOptions[0].value;
   @tracked organizationInvitationRole = this.rolesOptions[0].value;
 
   get localeOptions() {
@@ -57,8 +57,8 @@ export default class OrganizationInvitationsAction extends Component {
   }
 
   @action
-  changeOrganizationInvitationLang(value) {
-    this.organizationInvitationLang = value;
+  changeOrganizationInvitationLocale(value) {
+    this.organizationInvitationLocale = value;
   }
 
   <template>
@@ -80,7 +80,7 @@ export default class OrganizationInvitationsAction extends Component {
             <PixSelect
               @options={{this.localeOptions}}
               @value={{this.organizationInvitationLang}}
-              @onChange={{this.changeOrganizationInvitationLang}}
+              @onChange={{this.changeOrganizationInvitationLocale}}
               @placeholder="Langue"
               class="organization-invitations__select"
             >
