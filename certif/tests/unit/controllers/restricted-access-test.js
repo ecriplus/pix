@@ -20,7 +20,6 @@ module('Unit | Controller | authenticated/restricted-access', function (hooks) {
         assert.strictEqual(controller.certificationOpeningDate, '2020-12-12');
       });
     });
-
     module('when isAccessBlockedLycee is true', function () {
       test('should return a the pixCertifScoBlockedAccessDateLycee', function (assert) {
         // given
@@ -36,7 +35,6 @@ module('Unit | Controller | authenticated/restricted-access', function (hooks) {
         assert.strictEqual(controller.certificationOpeningDate, '2020-12-12');
       });
     });
-
     module('when isAccessBlockedAgri is true', function () {
       test('should return a the pixCertifScoBlockedAccessDateLycee', function (assert) {
         // given

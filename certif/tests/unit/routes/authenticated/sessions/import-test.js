@@ -18,6 +18,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
         class CurrentUserStub extends Service {
           currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+          checkRestrictedAccess = () => {};
         }
         class CurrentDomainStub extends Service {
           getExtension = sinon.stub().returns('org');
@@ -54,6 +55,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
         class CurrentUserStub extends Service {
           currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+          checkRestrictedAccess = () => {};
         }
         class CurrentDomainStub extends Service {
           getExtension = sinon.stub().returns('org');
@@ -91,6 +93,7 @@ module('Unit | Route | authenticated/sessions/import', function (hooks) {
 
       class CurrentUserStub extends Service {
         currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+        checkRestrictedAccess = () => {};
       }
       class CurrentDomainStub extends Service {
         getExtension = sinon.stub().returns('fr');
