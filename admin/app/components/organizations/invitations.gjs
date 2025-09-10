@@ -50,7 +50,7 @@ export default class OrganizationInvitations extends Component {
                 {{t "common.invitations.invitation-locale"}}
               </:header>
               <:cell>
-                {{invitation.lang}}
+                {{invitation.locale}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}}>

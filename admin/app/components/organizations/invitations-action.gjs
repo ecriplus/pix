@@ -10,22 +10,34 @@ import { tracked } from '@glimmer/tracking';
 
 export default class OrganizationInvitationsAction extends Component {
   @service intl;
-  @tracked organizationInvitationLocale = this.localesOptions[0].value;
+  @tracked organizationInvitationLocale = this.localeOptions[0].value;
   @tracked organizationInvitationRole = this.rolesOptions[0].value;
 
   get localeOptions() {
     return [
       {
-        label: 'Français',
-        value: 'fr-fr',
+        label: 'Français (France)',
+        value: 'fr-FR',
       },
       {
-        label: 'Francophone',
+        label: 'Français (Belgique)',
+        value: 'fr-BE',
+      },
+      {
+        label: 'Français (International)',
         value: 'fr',
       },
       {
-        label: 'Anglais',
+        label: 'English (International)',
         value: 'en',
+      },
+      {
+        label: 'Nederlands (Belgïe)',
+        value: 'nl-BE',
+      },
+      {
+        label: 'Nederlands (International)',
+        value: 'nl',
       },
     ];
   }
@@ -57,7 +69,7 @@ export default class OrganizationInvitationsAction extends Component {
   }
 
   @action
-  changeOrganizationInvitationLocale(value) {
+  changeInvitationLocale(value) {
     this.organizationInvitationLocale = value;
   }
 
@@ -79,8 +91,8 @@ export default class OrganizationInvitationsAction extends Component {
 
             <PixSelect
               @options={{this.localeOptions}}
-              @value={{this.organizationInvitationLang}}
-              @onChange={{this.changeOrganizationInvitationLocale}}
+              @value={{this.organizationInvitationLocale}}
+              @onChange={{this.changeInvitationLocale}}
               @placeholder="Langue"
               class="organization-invitations__select"
             >
@@ -101,7 +113,7 @@ export default class OrganizationInvitationsAction extends Component {
               @size="small"
               @triggerAction={{fn
                 @createOrganizationInvitation
-                this.organizationInvitationLang
+                this.organizationInvitationLocale
                 this.organizationInvitationRoleValue
               }}
               aria-label="Inviter un membre"

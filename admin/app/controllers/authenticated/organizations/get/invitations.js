@@ -22,7 +22,7 @@ export default class InvitationsController extends Controller {
   };
 
   @action
-  async createOrganizationInvitation(lang, role) {
+  async createOrganizationInvitation(locale, role) {
     this.isLoading = true;
     const email = this.userEmailToInvite?.trim();
     if (!this._isEmailToInviteValid(email)) {
@@ -33,7 +33,7 @@ export default class InvitationsController extends Controller {
     try {
       const organizationInvitation = await this.store.queryRecord('organization-invitation', {
         email,
-        lang,
+        locale,
         role,
         organizationId: this.model.organization.id,
       });
@@ -54,7 +54,7 @@ export default class InvitationsController extends Controller {
     try {
       await this.store.queryRecord('organization-invitation', {
         email: organizationInvitation.email,
-        lang: organizationInvitation.lang,
+        locale: organizationInvitation.locale,
         role: organizationInvitation.role,
         organizationId: this.model.organization.id,
       });

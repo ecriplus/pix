@@ -9,7 +9,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | organization-invitations-action', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('it should create organization invitation with default language and default role value', async function (assert) {
+  test('it should create organization invitation with default locale and default role value', async function (assert) {
     // given
     const createOrganizationInvitationStub = sinon.stub();
     const createOrganizationInvitation = createOrganizationInvitationStub;
@@ -27,7 +27,7 @@ module('Integration | Component | organization-invitations-action', function (ho
     await clickByText('Inviter');
 
     // then
-    sinon.assert.calledWith(createOrganizationInvitationStub, 'fr-fr', null);
+    sinon.assert.calledWith(createOrganizationInvitationStub, 'fr-FR', null);
     assert.ok(true);
   });
 });
