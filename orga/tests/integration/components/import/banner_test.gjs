@@ -21,6 +21,25 @@ module('Integration | Component | Import::Banner', function (hooks) {
       assert.ok(screen.getByText(t('pages.organization-participants-import.banner.upload-in-progress')));
     });
 
+    test('it should display loading message when upload is finished but job has not started', async function (assert) {
+      // when
+      const store = this.owner.lookup('service:store');
+      const organizationImportDetail = store.createRecord('organization-import-detail', {
+        status: 'UPLOADING',
+        createdAt: new Date(2023, 10, 2),
+        createdBy: { firstName: 'Obi', lastName: 'Wan' },
+      });
+      const isLoading = false;
+      const screen = await render(
+        <template>
+          <ImportBanner @isLoading={{isLoading}} @organizationImportDetail={{organizationImportDetail}} />
+        </template>,
+      );
+
+      // then
+      assert.ok(screen.getByText(t('pages.organization-participants-import.banner.upload-in-progress')));
+    });
+
     test('it should display loading message when there is already an import', async function (assert) {
       // when
       const store = this.owner.lookup('service:store');

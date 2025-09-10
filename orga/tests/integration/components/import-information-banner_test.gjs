@@ -45,7 +45,7 @@ module('Integration | Component | ImportInformationBanner', function (hooks) {
     assert.notOk(screen.queryByText(t('components.import-information-banner.error')));
     assert.notOk(screen.queryByText(t('components.import-information-banner.in-progress')));
   });
-  ['UPLOADED', 'VALIDATED'].forEach(async function (status) {
+  ['UPLOADING', 'UPLOADED', 'VALIDATED'].forEach(async function (status) {
     test(`display import in progress banner when status is ${status}`, async function (assert) {
       //given
       const store = this.owner.lookup('service:store');
