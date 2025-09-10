@@ -70,6 +70,7 @@ export default class ModuleQab extends ModuleElement {
       this.displayedCards.shift();
       this.currentCardStatus = '';
       this.selectedOption = null;
+      document.activeElement.blur();
 
       if (this.displayedCards.length === 0) {
         this.currentStep = 'score';

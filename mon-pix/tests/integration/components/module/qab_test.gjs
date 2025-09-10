@@ -106,6 +106,8 @@ module('Integration | Component | Module | QAB', function (hooks) {
           .doesNotHaveClass('qab-proposal-button--selected');
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasAttribute('aria-disabled');
         assert.dom(screen.getByRole('status')).hasText('Bonne réponse !');
+        await clock.tickAsync(NEXT_CARD_DELAY);
+        assert.notEqual(document.activeElement, screen.getByRole('button', { name: 'Option A: Vrai' }));
       });
     });
 
@@ -126,6 +128,8 @@ module('Integration | Component | Module | QAB', function (hooks) {
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasClass('qab-proposal-button--selected');
         assert.dom(screen.getByRole('button', { name: 'Option B: Faux' })).hasAttribute('aria-disabled');
         assert.dom(screen.getByRole('status')).hasText('Mauvaise réponse.');
+        await clock.tickAsync(NEXT_CARD_DELAY);
+        assert.notEqual(document.activeElement, screen.getByRole('button', { name: 'Option B: Faux' }));
       });
     });
 
