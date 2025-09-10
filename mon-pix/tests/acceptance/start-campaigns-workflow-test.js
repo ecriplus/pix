@@ -11,6 +11,7 @@ import { module, test } from 'qunit';
 import { authenticate, authenticateByGAR } from '../helpers/authentication';
 import { startCampaignByCode, startCampaignByCodeAndExternalId } from '../helpers/campaign';
 import setupIntl from '../helpers/setup-intl';
+import { unabortedVisit } from '../helpers/unaborted-visit';
 
 const AUTHENTICATED_SOURCE_FROM_GAR = ENV.APP.AUTHENTICATED_SOURCE_FROM_GAR;
 
@@ -444,6 +445,24 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           // then
           assert.strictEqual(currentURL(), '/campagnes');
           assert.dom(screen.getByText(t('pages.fill-in-campaign-code.errors.not-found'))).exists();
+        });
+      });
+      module('When verified code type is combined course', function () {
+        test('should redirect to combined course', async function (assert) {
+          // given
+          await authenticate(prescritUser);
+          server.create('combined-course', {
+            code: 'COMBINIX1',
+            organizationId: 1,
+            items: [],
+          });
+          server.create('verified-code', { id: 'COMBINIX1', type: 'combined-course' });
+
+          // when
+          await unabortedVisit('/campagnes/COMBINIX1');
+
+          // then
+          assert.strictEqual(currentURL(), '/parcours/COMBINIX1');
         });
       });
 

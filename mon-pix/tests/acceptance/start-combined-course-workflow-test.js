@@ -186,6 +186,22 @@ module('Acceptance | Combined course | Start Combined course workflow', function
           });
         });
       });
+      module('When verified code type is campaign', function () {
+        test('should redirect to campaign', async function (assert) {
+          // given
+          server.create('campaign', {
+            code: 'CAMPAIGN',
+            organizationId: 1,
+            items: [],
+          });
+
+          // when
+          await unabortedVisit('/parcours/CAMPAIGN');
+
+          // then
+          assert.strictEqual(currentURL(), '/campagnes/CAMPAIGN/evaluation/didacticiel');
+        });
+      });
     });
   });
 });
