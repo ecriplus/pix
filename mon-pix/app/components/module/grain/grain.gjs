@@ -303,31 +303,31 @@ export default class ModuleGrain extends Component {
             {{/if}}
           {{/each}}
         </div>
-
-        {{#if this.shouldDisplaySkipButton}}
-          <footer class="grain-card__footer">
-            <PixButton @variant="tertiary" @triggerAction={{@onGrainSkip}} @iconAfter="arrowBottom">
-              {{this.skipButtonLabel}}
-            </PixButton>
-          </footer>
-        {{/if}}
-
-        {{#if this.shouldDisplayContinueButton}}
-          <footer class="grain-card__footer">
-            <PixButton @variant="primary" @triggerAction={{@onGrainContinue}}>
-              {{t "pages.modulix.buttons.grain.continue"}}
-            </PixButton>
-          </footer>
-        {{/if}}
-
-        {{#if @shouldDisplayTerminateButton}}
-          <footer class="grain-card__footer">
-            <PixButton @variant="primary" @triggerAction={{this.onModuleTerminate}}>
-              {{t "pages.modulix.buttons.grain.terminate"}}
-            </PixButton>
-          </footer>
-        {{/if}}
       </div>
+
+      {{#if this.shouldDisplaySkipButton}}
+        <footer class="grain-card__footer">
+          <PixButton @variant="tertiary" @triggerAction={{@onGrainSkip}} @iconAfter="arrowBottom">
+            {{this.skipButtonLabel}}
+          </PixButton>
+        </footer>
+      {{/if}}
+
+      {{#if this.shouldDisplayContinueButton}}
+        <footer class="grain-card__footer">
+          <PixButton @variant="primary" @triggerAction={{@onGrainContinue}}>
+            {{t "pages.modulix.buttons.grain.continue"}}
+          </PixButton>
+        </footer>
+      {{/if}}
+
+      {{#if @shouldDisplayTerminateButton}}
+        <footer class="grain-card__footer">
+          <PixButton @variant="primary" @triggerAction={{this.onModuleTerminate}}>
+            {{t "pages.modulix.buttons.grain.terminate"}}
+          </PixButton>
+        </footer>
+      {{/if}}
     </article>
   </template>
 }
