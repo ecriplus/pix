@@ -1,6 +1,5 @@
 import * as CombinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
-import { MembershipNotFound } from '../../../../team/application/api/errors/MembershipNotFound.js';
 import { CampaignBelongsToCombinedCourseError } from '../errors.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
@@ -19,15 +18,11 @@ const deleteCampaigns = async ({
   eventLoggingJobRepository,
 }) => {
   let membership;
-
-  try {
-    membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
-  } catch (error) {
-    if (!(error instanceof MembershipNotFound)) {
-      throw error;
-    }
-  }
   const pixAdminMember = await adminMemberRepository.get({ userId });
+
+  if (!pixAdminMember) {
+    membership = await organizationMembershipRepository.getByUserIdAndOrganizationId({ userId, organizationId });
+  }
 
   for (const campaignId of campaignIds) {
     const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
