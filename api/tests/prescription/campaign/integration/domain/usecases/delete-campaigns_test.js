@@ -1,13 +1,15 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
+import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
 import { featureToggles } from '../../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
   buildAssessment,
@@ -39,11 +41,25 @@ describe('Integration | UseCases | delete-campaign', function () {
       clock.restore();
     });
 
+    it('should not throw when user is admin of the organization', async function () {
+      // given
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
+      const campaignId = buildCampaign({ organizationId }).id;
+      buildCampaignParticipation({ campaignId });
+
+      await databaseBuilder.commit();
+
+      // when & then
+      await expect(usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] })).fulfilled;
+    });
+
     it('should not throw when user is owner of the campaign', async function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;
-      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.MEMBER });
       const campaignId = buildCampaign({ ownerId: userId, organizationId }).id;
       buildCampaignParticipation({ campaignId });
 
@@ -61,7 +77,7 @@ describe('Integration | UseCases | delete-campaign', function () {
 
         const userId = buildUser().id;
         const organizationId = buildOrganization().id;
-        buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+        buildMembership({ userId, organizationId, organizationRole: Membership.roles.MEMBER });
 
         const campaignId = buildCampaign({ ownerId: userId, organizationId }).id;
         buildCampaignParticipation({ campaignId });
@@ -78,7 +94,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;
-      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.MEMBER });
       const campaignId = buildCampaign({
         ownerId: userId,
         organizationId,
@@ -108,7 +124,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;
-      buildMembership({ userId, organizationId, organizationRole: 'MEMBER' });
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.MEMBER });
       const campaignId = buildCampaign({
         ownerId: userId,
         organizationId,
@@ -622,6 +638,41 @@ describe('Integration | UseCases | delete-campaign', function () {
           expect(results[0].params).to.not.have.property('label');
         });
       });
+    });
+  });
+  describe('error case', function () {
+    it('should throw when one campaign belongs to a combined course', async function () {
+      // given
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
+      const campaignId = buildCampaign({ organizationId }).id;
+
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignId,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+
+      buildCampaignParticipation({ campaignId });
+
+      await databaseBuilder.commit();
+
+      // when & then
+      const error = await catchErr(usecases.deleteCampaigns)({ userId, organizationId, campaignIds: [campaignId] });
+      expect(error).instanceOf(CampaignBelongsToCombinedCourseError);
     });
   });
 });
