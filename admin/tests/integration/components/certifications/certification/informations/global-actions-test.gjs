@@ -36,7 +36,31 @@ module('Integration | Component | Certifications | Certification | Information |
   });
 
   module('cancel button', function () {
-    module('when the certification is not cancelled, not published and the session is finalized', function (hooks) {
+    module('when the certification status is rejected', function () {
+      test('should not display a cancel button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          status: assessmentResultStatus.REJECTED,
+          isPublished: false,
+        });
+        const session = store.createRecord('session', {
+          finalizedAt: new Date(),
+        });
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert.dom(screen.queryByRole('button', { name: 'Annuler la certification' })).doesNotExist();
+      });
+    });
+
+    module('when the certification is validated, not cancelled, not published and the session is finalized', function (hooks) {
       let screen;
 
       const modalTitle = "Confirmer l'annulation de la certification";
@@ -261,6 +285,27 @@ module('Integration | Component | Certifications | Certification | Information |
   });
 
   module('reject button', function () {
+    module('when the certification status is cancelled', function () {
+      test('should not display a reject button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          status: assessmentResultStatus.CANCELLED,
+        });
+        const session = store.createRecord('session', {});
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert.dom(screen.queryByRole('button', { name: 'Rejeter la certification' })).doesNotExist();
+      });
+    });
+
     module('when the certification is already rejected', function () {
       test('should not display a reject button', async function (assert) {
         // given
@@ -532,6 +577,54 @@ module('Integration | Component | Certifications | Certification | Information |
   });
 
   module('rescore button', function () {
+    module('when the certification status is cancelled', function () {
+      test('should not display a rescoring button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          status: assessmentResultStatus.CANCELLED,
+          isPublished: false,
+        });
+        const session = store.createRecord('session', { finalizedAt: new Date() });
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+          .doesNotExist();
+      });
+    });
+
+    module('when the certification status is rejected', function () {
+      test('should not display a rescoring button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          userId: 1,
+          status: assessmentResultStatus.REJECTED,
+          isPublished: false,
+        });
+        const session = store.createRecord('session', { finalizedAt: new Date() });
+
+        // when
+        const screen = await render(
+          <template>
+            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+          </template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
+          .doesNotExist();
+      });
+    });
+
     module('when the certification is already published', function () {
       test('should not display a rescoring button', async function (assert) {
         // given
@@ -578,11 +671,12 @@ module('Integration | Component | Certifications | Certification | Information |
       });
     });
 
-    module('when the certification is finalized but not published yet', function () {
+    module('when the certification is validated, finalized but not published yet', function () {
       test('should display a rescoring button', async function (assert) {
         // given
         const certification = store.createRecord('certification', {
           userId: 1,
+          status: assessmentResultStatus.VALIDATED,
           isPublished: false,
         });
         const session = store.createRecord('session', { finalizedAt: new Date('2020-01-01') });

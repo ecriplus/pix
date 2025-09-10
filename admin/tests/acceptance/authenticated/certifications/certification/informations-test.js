@@ -45,7 +45,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
       birthInseeCode: '99217',
       birthPostalCode: null,
       version: 2,
-      status: assessmentResultStatus.REJECTED,
+      status: assessmentResultStatus.VALIDATED,
       competencesWithMark: [
         {
           id: 152825,
@@ -497,7 +497,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
           'common-complementary-certification-course-result',
           {
             label: 'CléA Numérique',
-            status: 'Validée',
+            status: 'Annulée',
           },
         );
 
@@ -512,7 +512,7 @@ module('Acceptance | Route | routes/authenticated/certifications/certification |
         assert.dom(screen.getByText('Certification complémentaire')).exists();
         assert.dom(screen.queryByText('Résultats de la certification complémentaire Pix+ Edu :')).doesNotExist();
         assert.dom(screen.getByText('CléA Numérique :')).exists();
-        assert.dom(screen.getByText('Validée')).exists();
+        assert.dom(screen.getByText('Annulée')).exists();
       });
 
       test('it displays external complementary certifications', async function (assert) {
