@@ -1670,16 +1670,21 @@
           }
         },
         "stepper": {
-          "next": {
-            "ariaLabel": "Ir al paso siguiente",
-            "name": "Siguiente"
-          },
           "controls": {
             "next": {
               "ariaLabel": "Paso siguiente"
             },
             "previous": {
               "ariaLabel": "Paso anterior"
+            }
+          },
+          "next": {
+            "ariaLabel": "Ir al paso siguiente",
+            "horizontal": {
+              "name": "Siguiente"
+            },
+            "vertical": {
+              "name": "Leer más"
             }
           }
         }

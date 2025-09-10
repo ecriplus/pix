@@ -1694,7 +1694,12 @@
           },
           "next": {
             "ariaLabel": "Go to the next step",
-            "name": "Next"
+            "horizontal": {
+              "name": "Next"
+            },
+            "vertical": {
+              "name": "Read more"
+            }
           }
         }
       },
