@@ -1,4 +1,3 @@
-import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import { concat } from '@ember/helper';
 import { action } from '@ember/object';
@@ -119,8 +118,13 @@ export default class ModulixStepper extends Component {
     });
   }
 
-  get shouldDisplayNextButton() {
+  get shouldDisplayHorizontalNextButton() {
     return this.hasNextStep && this.allAnswerableElementsAreAnsweredInCurrentStep;
+  }
+
+  @action
+  shouldDisplayVerticalNextButton(currentIndex) {
+    return this.shouldDisplayHorizontalNextButton && this.stepIsActive(currentIndex);
   }
 
   get totalSteps() {
@@ -199,9 +203,10 @@ export default class ModulixStepper extends Component {
                 @onFileDownload={{@onFileDownload}}
                 @onExpandToggle={{@onExpandToggle}}
                 @onNextButtonClick={{this.displayNextStep}}
-                @shouldDisplayNextButton={{this.shouldDisplayNextButton}}
+                @shouldDisplayNextButton={{this.shouldDisplayHorizontalNextButton}}
                 @preventScrollAndFocus={{this.preventScrollAndFocus}}
                 @shouldAppearToRight={{this.shouldAppearToRight}}
+                @nextButtonName={{t "pages.modulix.buttons.stepper.next.horizontal.name"}}
               />
             {{/each}}
           {{/if}}
@@ -223,16 +228,11 @@ export default class ModulixStepper extends Component {
               @onVideoPlay={{@onVideoPlay}}
               @onFileDownload={{@onFileDownload}}
               @onExpandToggle={{@onExpandToggle}}
+              @onNextButtonClick={{this.displayNextStep}}
+              @shouldDisplayNextButton={{this.shouldDisplayVerticalNextButton index}}
+              @nextButtonName={{t "pages.modulix.buttons.stepper.next.vertical.name"}}
             />
           {{/each}}
-          {{#if this.shouldDisplayNextButton}}
-            <PixButton
-              aria-label="{{t 'pages.modulix.buttons.stepper.next.ariaLabel'}}"
-              @variant="primary"
-              @triggerAction={{this.displayNextStep}}
-              class="stepper__next-button"
-            >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
-          {{/if}}
         {{/if}}
       {{/if}}
     </div>

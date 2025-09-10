@@ -70,7 +70,7 @@ export default class ModulixStep extends Component {
             @variant="primary"
             @triggerAction={{@onNextButtonClick}}
             class="stepper__next-button"
-          >{{t "pages.modulix.buttons.stepper.next.name"}}</PixButton>
+          >{{@nextButtonName}}</PixButton>
         {{/if}}
       </section>
     {{/if}}

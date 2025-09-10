@@ -1674,16 +1674,21 @@
           }
         },
         "stepper": {
-          "next": {
-            "ariaLabel": "Ga naar de volgende stap",
-            "name": "Volgende"
-          },
           "controls": {
             "next": {
               "ariaLabel": "Volgende stap"
             },
             "previous": {
               "ariaLabel": "Vorige stap"
+            }
+          },
+          "next": {
+            "ariaLabel": "Ga naar de volgende stap",
+            "horizontal": {
+              "name": "Volgende"
+            },
+            "vertical": {
+              "name": "Lees verder"
             }
           }
         }
