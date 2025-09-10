@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import * as categories from '../../../../../../src/prescription/organization-place/domain/constants/organization-places-categories.js';
 import { OrganizationPlacesLotForManagement } from '../../../../../../src/prescription/organization-place/domain/models/OrganizationPlacesLotForManagement.js';
@@ -407,19 +409,6 @@ describe('Integration | Repository | Organization Places Lot', function () {
   });
 
   describe('#findAllByOrganizationId when we filter out deleted places lots', function () {
-    let clock;
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({
-        now: new Date('2024-09-10'),
-        toFake: ['Date'],
-      });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
     it('should return organization places for given id', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -501,7 +490,7 @@ describe('Integration | Repository | Organization Places Lot', function () {
           organizationId,
           count: 22,
           activationDate: new Date('2023-09-10'),
-          expirationDate: new Date('2025-09-10'),
+          expirationDate: dayjs().add(30, 'days').toDate(),
         });
 
         const organizationPlaceExpired = databaseBuilder.factory.buildOrganizationPlace({
@@ -514,8 +503,8 @@ describe('Integration | Repository | Organization Places Lot', function () {
         const organizationPlacePending = databaseBuilder.factory.buildOrganizationPlace({
           organizationId,
           count: 22,
-          activationDate: new Date('2025-09-10'),
-          expirationDate: new Date('2026-09-10'),
+          activationDate: dayjs().add(30, 'days').toDate(),
+          expirationDate: dayjs().add(120, 'days').toDate(),
         });
 
         await databaseBuilder.commit();
