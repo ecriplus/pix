@@ -15,6 +15,17 @@ module('Integration | Component | Campaign::EmptyState', function (hooks) {
       assert.dom(screen.getByText(t('pages.campaign.empty-state-with-copy-link'))).exists();
       assert.dom(screen.getByRole('button', { name: t('pages.campaign.copy.link.default') })).exists();
     });
+
+    module('When campaign is From combined course', function () {
+      test('displays the empty message without copy button', async function (assert) {
+        // when
+        const screen = await render(hbs`<Campaign::EmptyState @campaignCode='ACDC' @isFromCombinedCourse={{true}} />`);
+
+        // then
+        assert.dom(screen.getByText(t('pages.campaign.empty-state'))).exists();
+        assert.dom(screen.queryByRole('button', { name: t('pages.campaign.copy.link.default') })).doesNotExist();
+      });
+    });
   });
 
   module('when no campaign code is given', function () {

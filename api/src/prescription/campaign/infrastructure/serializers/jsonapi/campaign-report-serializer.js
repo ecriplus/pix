@@ -43,6 +43,7 @@ const serialize = function (campaignReports, meta) {
       'groups',
       'multipleSendings',
       'targetProfile',
+      'isFromCombinedCourse',
     ],
     stages: {
       ref: 'id',

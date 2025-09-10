@@ -8,12 +8,12 @@ import CopyPasteButton from '../copy-paste-button';
 export default class EmptyState extends Component {
   @service url;
 
-  get campaignCode() {
-    return this.args.campaignCode;
+  get displayCopyPasteButton() {
+    return this.args.campaignCode && !this.args.isFromCombinedCourse;
   }
 
   get campaignUrl() {
-    return `${this.url.campaignsRootUrl}${this.campaignCode}`;
+    return `${this.url.campaignsRootUrl}${this.args.campaignCode}`;
   }
 
   <template>
@@ -21,7 +21,7 @@ export default class EmptyState extends Component {
       <img src="{{this.rootURL}}/images/empty-state.svg" alt="" role="none" />
 
       <div class="empty-state__text">
-        {{#if this.campaignCode}}
+        {{#if this.displayCopyPasteButton}}
           <p>{{t "pages.campaign.empty-state-with-copy-link"}}</p>
 
           <CopyPasteButton

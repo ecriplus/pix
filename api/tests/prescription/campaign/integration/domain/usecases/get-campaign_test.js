@@ -1,7 +1,4 @@
-import * as badgeRepository from '../../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import * as campaignReportRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-report-repository.js';
-import * as campaignRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
@@ -9,14 +6,11 @@ import {
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign', function () {
-  context('Type ASSESSMENT', function () {
-    let userId;
-    let campaign;
-    let targetProfileId;
+  context('Campaign on Combined Course', function () {
+    let campaign, organizationId, targetProfileId;
 
     beforeEach(async function () {
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      userId = databaseBuilder.factory.buildUser().id;
+      organizationId = databaseBuilder.factory.buildOrganization().id;
       targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       campaign = databaseBuilder.factory.buildCampaign({
         name: 'TroTro',
@@ -25,9 +19,61 @@ describe('Integration | UseCase | get-campaign', function () {
         type: CampaignTypes.ASSESSMENT,
       });
 
-      databaseBuilder.factory.buildMembership({
+      await databaseBuilder.commit();
+    });
+
+    it('should defined isFromCombinedCourse to true when campaign register on combined course', async function () {
+      // given
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
         organizationId,
-        userId,
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaign.id,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const resultCampaign = await usecases.getCampaign({
+        campaignId: campaign.id,
+      });
+
+      // then
+      expect(resultCampaign.isFromCombinedCourse).true;
+    });
+
+    it('should defined isFromCombinedCourse to false when campaign is not register on combined course', async function () {
+      // when
+      const resultCampaign = await usecases.getCampaign({
+        campaignId: campaign.id,
+      });
+
+      // then
+      expect(resultCampaign.isFromCombinedCourse).false;
+    });
+  });
+  context('Type ASSESSMENT', function () {
+    let campaign;
+    let targetProfileId;
+
+    beforeEach(async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      campaign = databaseBuilder.factory.buildCampaign({
+        name: 'TroTro',
+        targetProfileId,
+        organizationId,
+        type: CampaignTypes.ASSESSMENT,
       });
 
       await databaseBuilder.commit();
@@ -37,9 +83,6 @@ describe('Integration | UseCase | get-campaign', function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId: campaign.id,
-        badgeRepository,
-        campaignRepository,
-        campaignReportRepository,
       });
 
       // then
@@ -59,10 +102,6 @@ describe('Integration | UseCase | get-campaign', function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId: campaign.id,
-        userId,
-        badgeRepository,
-        campaignRepository,
-        campaignReportRepository,
       });
 
       // then
@@ -78,10 +117,6 @@ describe('Integration | UseCase | get-campaign', function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId: campaign.id,
-        userId,
-        badgeRepository,
-        campaignRepository,
-        campaignReportRepository,
       });
 
       // then
@@ -122,10 +157,6 @@ describe('Integration | UseCase | get-campaign', function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId: campaign.id,
-        userId,
-        badgeRepository,
-        campaignRepository,
-        campaignReportRepository,
       });
 
       // then
@@ -152,9 +183,6 @@ describe('Integration | UseCase | get-campaign', function () {
         // when
         const resultCampaign = await usecases.getCampaign({
           campaignId: campaign.id,
-          badgeRepository,
-          campaignRepository,
-          campaignReportRepository,
         });
 
         // then
@@ -167,14 +195,12 @@ describe('Integration | UseCase | get-campaign', function () {
     });
 
     context('when there are participations', function () {
-      let userId;
       let targetProfileId;
       let campaign;
       let resultCampaign;
 
       before(async function () {
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        userId = databaseBuilder.factory.buildUser().id;
         targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
         databaseBuilder.factory.buildBadge({ targetProfileId });
         const stageId = databaseBuilder.factory.buildStage({ targetProfileId }).id;
@@ -184,10 +210,7 @@ describe('Integration | UseCase | get-campaign', function () {
           organizationId,
           type: CampaignTypes.EXAM,
         });
-        databaseBuilder.factory.buildMembership({
-          organizationId,
-          userId,
-        });
+
         const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           masteryRate: 0.3,
@@ -211,9 +234,6 @@ describe('Integration | UseCase | get-campaign', function () {
 
         resultCampaign = await usecases.getCampaign({
           campaignId: campaign.id,
-          badgeRepository,
-          campaignRepository,
-          campaignReportRepository,
         });
       });
 
@@ -237,7 +257,6 @@ describe('Integration | UseCase | get-campaign', function () {
     it('should not set average Result', async function () {
       //given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const userId = databaseBuilder.factory.buildUser().id;
       const campaignId = databaseBuilder.factory.buildCampaign({
         name: 'NO_SE',
         organizationId,
@@ -246,11 +265,6 @@ describe('Integration | UseCase | get-campaign', function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
       }).id;
-
-      databaseBuilder.factory.buildMembership({
-        organizationId,
-        userId,
-      });
 
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
@@ -262,9 +276,6 @@ describe('Integration | UseCase | get-campaign', function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId,
-        badgeRepository,
-        campaignRepository,
-        campaignReportRepository,
       });
 
       // then

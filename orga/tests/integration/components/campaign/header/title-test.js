@@ -16,6 +16,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
       createdAt: new Date('2021-04-14'),
       ownerFullName: 'Mulan Fa',
       type: 'ASSESSMENT',
+      isFromCombinedCourse: false,
     };
 
     // when
@@ -29,6 +30,46 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     assert.ok(screen.getByText('1234PixTest'));
     assert.ok(screen.getByText('Mulan Fa'));
     assert.ok(screen.getByText('14/04/2021'));
+  });
+
+  module('campaign code display', function () {
+    test('it should display campaign code when campaign is not from combined course', async function (assert) {
+      // given
+      this.campaign = {
+        name: 'campagne 1',
+        code: '1234PixTest',
+        createdAt: new Date('2021-04-14'),
+        ownerFullName: 'Mulan Fa',
+        type: 'ASSESSMENT',
+        isFromCombinedCourse: false,
+      };
+
+      // when
+      const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+      // then
+      assert.ok(screen.getByText('1234PixTest'));
+      assert.ok(screen.getByText(t('pages.campaign.code')));
+    });
+
+    test('it should not display campaign code when campaign is from combined course', async function (assert) {
+      // given
+      this.campaign = {
+        name: 'campagne 1',
+        code: '1234PixTest',
+        createdAt: new Date('2021-04-14'),
+        ownerFullName: 'Mulan Fa',
+        type: 'ASSESSMENT',
+        isFromCombinedCourse: true,
+      };
+
+      // when
+      const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+      // then
+      assert.notOk(screen.queryByText('1234PixTest'));
+      assert.notOk(screen.queryByText(t('pages.campaign.code')));
+    });
   });
 
   module('multiple sending display', function (hooks) {

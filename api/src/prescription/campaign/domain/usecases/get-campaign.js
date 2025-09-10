@@ -1,3 +1,5 @@
+import { findByCampaignId } from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
+
 const getCampaign = async function ({
   campaignId,
   badgeRepository,
@@ -6,6 +8,9 @@ const getCampaign = async function ({
   stageAcquisitionRepository,
 }) {
   const campaignReport = await campaignReportRepository.get(campaignId);
+
+  const existingCombinedCourse = await findByCampaignId({ campaignId });
+  campaignReport.setIsFromCombinedCourse(existingCombinedCourse.length > 0);
 
   if (campaignReport.isAssessment || campaignReport.isExam) {
     const [badges, stageCollection, masteryRates] = await Promise.all([

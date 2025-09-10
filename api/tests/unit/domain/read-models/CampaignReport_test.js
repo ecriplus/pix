@@ -1,3 +1,4 @@
+import { CampaignReport } from '../../../../src/prescription/campaign/domain/read-models/CampaignReport.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 
@@ -116,6 +117,30 @@ describe('Unit | Domain | Models | CampaignReport', function () {
       campaignReport.computeAverageResult([0.13, 0.52]);
 
       expect(campaignReport.averageResult).to.equal(0.325);
+    });
+  });
+
+  describe('#setIsFromCombinedCourse', function () {
+    it('should define isFromCombinedCourse to false by default', function () {
+      const campaignReport = new CampaignReport();
+
+      expect(campaignReport.isFromCombinedCourse).false;
+    });
+
+    it('should define isFromCombinedCourse to false when not combined course defined', function () {
+      const campaignReport = new CampaignReport();
+
+      campaignReport.setIsFromCombinedCourse(false);
+
+      expect(campaignReport.isFromCombinedCourse).false;
+    });
+
+    it('should define isFromCombinedCourse to true when combined course defined', function () {
+      const campaignReport = new CampaignReport();
+
+      campaignReport.setIsFromCombinedCourse(true);
+
+      expect(campaignReport.isFromCombinedCourse).true;
     });
   });
 });
