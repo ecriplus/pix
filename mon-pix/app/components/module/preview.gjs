@@ -69,6 +69,14 @@ export default class ModulixPreview extends Component {
               "alt": "Dessin détaillé dans l'alternative textuelle",
               "alternativeText": "Dessin d'un ordinateur dans un univers spatial."
             }
+          },
+          {
+            "type": "element",
+            "element": {
+              "id": "5555555a-5555-5bcd-e555-5f5555gh5555",
+              "type": "text",
+              "content": "<p>Quelques objets sont visibles dans l'image :</p><ul><li>Un ordinateur</li><li>Un satellite</li><li>Des étoiles</li></ul>"
+            }
           }
         ]
       }
@@ -163,7 +171,7 @@ export default class ModulixPreview extends Component {
     {{/unless}}
 
     <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">
-      <aside class="module-preview__passage">
+      <aside class="module-preview__passage module-passage">
         <div class="module-preview-passage__title">
           <h1>{{this.formattedModule.title}}</h1>
         </div>
