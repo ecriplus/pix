@@ -1028,7 +1028,7 @@
           "unfinalize-session": "Définaliser la session"
         },
         "labels": {
-          "access-code": "Code d'accès :",
+          "access-code": "Code d'accès candidat:",
           "certification-center": "Centre de certification :",
           "complementary-info": "Informations complémentaires :",
           "creation-date": "Date de création :",

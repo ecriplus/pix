@@ -1027,7 +1027,7 @@
           "unfinalize-session": "Unfinalize the session"
         },
         "labels": {
-          "access-code": "Access code:",
+          "access-code": "Candidate access code:",
           "certification-center": "Certification center:",
           "complementary-info": "Additional information:",
           "creation-date": "Creation date:",
