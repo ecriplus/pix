@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.203.0](https://github.com/1024pix/pix/compare/v5.202.0...v5.203.0) (2025-09-10)
+
+### :rocket: Amélioration
+
+- [#13478](https://github.com/1024pix/pix/pull/13478) Ajouter la durée estimée d'un module au sein d'un parcours combiné (PIX-19027) 
+- [#13492](https://github.com/1024pix/pix/pull/13492) Référencer les niveaux par énumération (PIX-19246) 
+
+### :bug: Correction
+
+- [#13406](https://github.com/1024pix/pix/pull/13406) Rejet d'une certification avec un score de 0 (PIX-17345) 
+
+### :building_construction: Tech
+
+- [#13514](https://github.com/1024pix/pix/pull/13514) Corriger l'usage de dates fixe dans le temps pour le test des organisation places lots (PIX-19468).
+
 # [5.202.0](https://github.com/1024pix/pix/compare/v5.201.0...v5.202.0) (2025-09-09)
 
 ### :rocket: Amélioration
