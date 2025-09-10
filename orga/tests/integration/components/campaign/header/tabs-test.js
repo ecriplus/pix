@@ -49,28 +49,44 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     fileSaver.save.resolves();
   });
 
-  module('Common campaign navigation', function (hooks) {
-    hooks.beforeEach(async function () {
-      this.campaign = store.createRecord('campaign', { id: '12' });
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
-    });
+  module('Common campaign navigation', function () {
+    module('settings item', function () {
+      test('it should display campaign settings item', async function (assert) {
+        this.campaign = store.createRecord('campaign', { id: '12' });
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const settingsLink = screen.getByRole('link', { name: t('pages.campaign.tab.settings') });
 
-    test('it should display campaign settings item', async function (assert) {
-      const settingsLink = screen.getByRole('link', { name: t('pages.campaign.tab.settings') });
+        assert.dom(settingsLink).hasAttribute('href', '/campagnes/12/parametres');
+      });
 
-      assert.dom(settingsLink).hasAttribute('href', '/campagnes/12/parametres');
+      test('should not display campaign settings item on combined course', async function (assert) {
+        this.campaign = store.createRecord('campaign', { id: '12', isFromCombinedCourse: true });
+        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const settingsLink = screen.queryByRole('link', { name: t('pages.campaign.tab.settings') });
+
+        assert.dom(settingsLink).doesNotExist();
+      });
     });
 
     test('it should display activity item', async function (assert) {
+      this.campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+
       const activityLink = screen.getByRole('link', { name: t('pages.campaign.tab.activity') });
       assert.dom(activityLink).hasAttribute('href', '/campagnes/12');
     });
 
     test('it should display export button result', async function (assert) {
+      this.campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+
       assert.ok(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
     });
 
     test('dipslay notification error on data export', async function (assert) {
+      this.campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+
       fileSaver.save.rejects();
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
