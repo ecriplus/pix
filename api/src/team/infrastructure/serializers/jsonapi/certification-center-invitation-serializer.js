@@ -10,13 +10,7 @@ const serialize = function (invitations) {
 
 const serializeForAdmin = function (invitations) {
   return new Serializer('certification-center-invitations', {
-    transform: (invitation) => {
-      return {
-        ...invitation,
-        language: invitation.locale,
-      };
-    },
-    attributes: ['email', 'updatedAt', 'role', 'language'],
+    attributes: ['email', 'updatedAt', 'role', 'locale'],
   }).serialize(invitations);
 };
 
@@ -24,7 +18,7 @@ const deserializeForAdmin = function (payload) {
   return new Deserializer().deserialize(payload).then((record) => {
     return {
       email: record.email,
-      language: record.language,
+      locale: record.locale,
       role: record.role,
     };
   });

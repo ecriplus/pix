@@ -11,20 +11,24 @@ import { tracked } from '@glimmer/tracking';
 export default class CertificationCenterInvitationsAction extends Component {
   @service intl;
 
-  @tracked invitationLanguage = this.languagesOptions[0].value;
+  @tracked invitationLocale = this.localeOptions[0].value;
   @tracked invitationRole = this.rolesOptions[0].value;
 
-  languagesOptions = [
+  localeOptions = [
     {
-      label: 'Français',
-      value: 'fr-fr',
+      label: 'Français (France)',
+      value: 'fr-FR',
     },
     {
-      label: 'Francophone',
+      label: 'Français (Belgique)',
+      value: 'fr-BE',
+    },
+    {
+      label: 'Français (International)',
       value: 'fr',
     },
     {
-      label: 'Anglais',
+      label: 'English (International)',
       value: 'en',
     },
   ];
@@ -54,8 +58,8 @@ export default class CertificationCenterInvitationsAction extends Component {
   }
 
   @action
-  changeInvitationLanguage(value) {
-    this.invitationLanguage = value;
+  changeInvitationLocale(value) {
+    this.invitationLocale = value;
   }
 
   <template>
@@ -74,9 +78,9 @@ export default class CertificationCenterInvitationsAction extends Component {
           </PixInput>
 
           <PixSelect
-            @options={{this.languagesOptions}}
-            @value={{this.invitationLanguage}}
-            @onChange={{this.changeInvitationLanguage}}
+            @options={{this.localeOptions}}
+            @value={{this.invitationLocale}}
+            @onChange={{this.changeInvitationLocale}}
             @placeholder="Choix de la langue"
             @hideDefaultOption={{true}}
           >
@@ -95,7 +99,7 @@ export default class CertificationCenterInvitationsAction extends Component {
 
           <PixButton
             @size="small"
-            @triggerAction={{fn @createInvitation this.invitationLanguage this.certificationCenterRoleValue}}
+            @triggerAction={{fn @createInvitation this.invitationLocale this.certificationCenterRoleValue}}
             aria-label="Inviter un membre"
             class="certification-center-invitations-form-container__button"
             name="Inviter"

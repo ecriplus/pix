@@ -50,7 +50,7 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
     it('should return 201 HTTP status code with data if there isn’t an already pending invitation', async function () {
       // given
       const email = 'some.user@example.net';
-      const language = 'fr-FR';
+      const locale = 'fr-FR';
       const role = null;
       const certificationCenterId = 7;
       const payload = {
@@ -58,7 +58,7 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
           type: 'certification-center-invitations',
           attributes: {
             email,
-            language,
+            locale,
             role,
           },
         },
@@ -66,12 +66,12 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
 
       certificationCenterInvitationSerializerStub.deserializeForAdmin.withArgs(payload).resolves({
         email,
-        language,
+        locale,
       });
       usecases.createOrUpdateCertificationCenterInvitationForAdmin
         .withArgs({
           email,
-          locale: language,
+          locale,
           role,
           certificationCenterId,
         })
@@ -102,10 +102,10 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
     it('should return 200 HTTP status code with data if there is already a pending existing invitation', async function () {
       // given
       const email = 'some.user@example.net';
-      const language = 'fr-fr';
+      const locale = 'fr-fr';
       const role = 'ADMIN';
 
-      certificationCenterInvitationSerializerStub.deserializeForAdmin.resolves({ email, language });
+      certificationCenterInvitationSerializerStub.deserializeForAdmin.resolves({ email, locale });
       usecases.createOrUpdateCertificationCenterInvitationForAdmin.resolves({
         certificationCenterInvitation: 'an invitation',
         isInvitationCreated: false,
@@ -122,7 +122,7 @@ describe('Unit | Team | Application | Controller | Admin | Certification Center 
               type: 'certification-center-invitations',
               attributes: {
                 email,
-                language,
+                locale,
                 role,
               },
             },

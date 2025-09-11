@@ -59,7 +59,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           attributes: {
             email: 'alex.terieur@example.net',
             role: 'MEMBER',
-            language: 'fr',
+            locale: 'fr',
             'updated-at': now,
           },
         },
@@ -69,7 +69,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           attributes: {
             email: 'sarah.pelle@example.net',
             role: 'ADMIN',
-            language: 'fr',
+            locale: 'fr',
             'updated-at': now,
           },
         },
@@ -106,7 +106,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
           data: {
             attributes: {
               email: 'some.user@example.net',
-              language: 'fr-fr',
+              locale: 'fr-FR',
               role: CertificationCenterInvitation.Roles.ADMIN,
             },
           },
@@ -122,7 +122,7 @@ describe('Acceptance | Team | Application | Route | Admin | Certification Center
         'updated-at': now,
         email: 'some.user@example.net',
         role: 'ADMIN',
-        language: 'fr-FR',
+        locale: 'fr-FR',
       });
     });
   });

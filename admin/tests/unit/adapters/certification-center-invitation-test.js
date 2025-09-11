@@ -26,7 +26,7 @@ module('Unit | Adapter | certification-center-invitation', function (hooks) {
       const adapter = this.owner.lookup('adapter:certification-center-invitation');
       const store = this.owner.lookup('service:store');
       sinon.stub(adapter, 'ajax');
-      const query = { certificationCenterId: 666, email: 'super@example.net', language: 'fr-fr', role: 'MEMBER' };
+      const query = { certificationCenterId: 666, email: 'super@example.net', locale: 'fr-fr', role: 'MEMBER' };
 
       // when
       adapter.queryRecord(store, 'certification-center-invitation', query);
@@ -34,7 +34,7 @@ module('Unit | Adapter | certification-center-invitation', function (hooks) {
       // then
       const expectedUrl = `${ENV.APP.API_HOST}/api/admin/certification-centers/666/invitations`;
       const expectedPayload = {
-        data: { data: { attributes: { email: 'super@example.net', language: 'fr-fr', role: 'MEMBER' } } },
+        data: { data: { attributes: { email: 'super@example.net', locale: 'fr-fr', role: 'MEMBER' } } },
       };
       sinon.assert.calledWith(adapter.ajax, expectedUrl, 'POST', expectedPayload);
       assert.ok(adapter); /* required because QUnit wants at least one expect (and does not accept Sinon's one) */

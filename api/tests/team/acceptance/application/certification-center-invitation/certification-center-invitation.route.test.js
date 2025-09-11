@@ -227,7 +227,7 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
             attributes: {
               email: updatedCertificationCenterInvitation.email,
               role: updatedCertificationCenterInvitation.role,
-              language: updatedCertificationCenterInvitation.locale,
+              locale: updatedCertificationCenterInvitation.locale,
               'updated-at': updatedCertificationCenterInvitation.updatedAt,
             },
           },

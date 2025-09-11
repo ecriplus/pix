@@ -43,17 +43,17 @@ module('Unit | Controller | authenticated/certification-centers/get/invitations'
         store.queryRecord = queryRecordStub;
 
         controller.userEmailToInvite = 'yuno@clover.net';
-        const language = 'fr';
+        const locale = 'fr';
         const role = 'MEMBER';
 
         // when
-        await controller.createInvitation(language, role);
+        await controller.createInvitation(locale, role);
 
         //then
         assert.ok(
           queryRecordStub.calledWith('certification-center-invitation', {
             email: 'yuno@clover.net',
-            language,
+            locale,
             role,
             certificationCenterId: 1,
           }),
@@ -96,7 +96,7 @@ module('Unit | Controller | authenticated/certification-centers/get/invitations'
         store.queryRecord = queryRecordStub;
         const certificationCenterInvitation = {
           email: 'test@example.net',
-          language: 'en',
+          locale: 'en',
           role: 'member',
           certificationCenterId: 1,
         };
@@ -126,7 +126,7 @@ module('Unit | Controller | authenticated/certification-centers/get/invitations'
         controller.CUSTOM_ERROR_MESSAGES = customErrors;
         const certificationCenterInvitation = {
           email: 'test@example.net',
-          language: 'en',
+          locale: 'en',
           role: 'member',
           certificationCenterId: 1,
         };
