@@ -3,7 +3,7 @@
 .element-download {
   &__intro {
     margin-bottom: var(--pix-spacing-2x);
-    font-weight: var(--pix-font-medium);
+    font-weight: var(--pix-font-bold);
   }
 
   &__description {
@@ -48,7 +48,7 @@
     @extend %pix-body-m;
 
     margin-bottom: var(--pix-spacing-2x);
-    font-weight: var(--pix-font-medium);
+    font-weight: var(--pix-font-bold);
   }
 
   &__button {
