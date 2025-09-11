@@ -7,6 +7,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
   let codeGeneratorStub;
   let campaignsToCreate;
   let campaignAdministrationRepositoryStub;
+  const accessCodeRepository = Symbol('accessCodeRepository');
   let campaignCreatorRepositoryStub;
   let userRepositoryStub;
   let organizationRepositoryStub;
@@ -31,7 +32,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
     codeGeneratorStub = {
       generate: sinon
         .stub()
-        .withArgs(campaignAdministrationRepositoryStub)
+        .withArgs(accessCodeRepository)
         .onFirstCall()
         .resolves(code1)
         .onSecondCall()
@@ -101,6 +102,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
 
       const result = await createCampaigns({
         campaignsToCreate,
+        accessCodeRepository,
         campaignAdministrationRepository: campaignAdministrationRepositoryStub,
         codeGenerator: codeGeneratorStub,
         campaignCreatorRepository: campaignCreatorRepositoryStub,
@@ -119,6 +121,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
 
       const error = await catchErr(createCampaigns)({
         campaignsToCreate,
+        accessCodeRepository,
         campaignAdministrationRepository: campaignAdministrationRepositoryStub,
         codeGenerator: codeGeneratorStub,
         campaignCreatorRepository: campaignCreatorRepositoryStub,
@@ -135,6 +138,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
 
       const error = await catchErr(createCampaigns)({
         campaignsToCreate,
+        accessCodeRepository,
         campaignAdministrationRepository: campaignAdministrationRepositoryStub,
         codeGenerator: codeGeneratorStub,
         campaignCreatorRepository: campaignCreatorRepositoryStub,

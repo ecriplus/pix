@@ -1,6 +1,11 @@
 import { CampaignUniqueCodeError, UnknownCampaignId } from './../errors.js';
 
-const updateCampaignCode = async function ({ campaignId, campaignCode, campaignAdministrationRepository }) {
+const updateCampaignCode = async function ({
+  campaignId,
+  campaignCode,
+  campaignAdministrationRepository,
+  accessCodeRepository,
+}) {
   const campaign = await campaignAdministrationRepository.get(campaignId);
   if (!campaign) {
     throw new UnknownCampaignId();
@@ -8,7 +13,7 @@ const updateCampaignCode = async function ({ campaignId, campaignCode, campaignA
 
   campaign.updateFields({ code: campaignCode });
 
-  const isCodeAvailable = await campaignAdministrationRepository.isCodeAvailable({ code: campaignCode });
+  const isCodeAvailable = await accessCodeRepository.isCodeAvailable({ code: campaignCode });
   if (!isCodeAvailable) {
     throw new CampaignUniqueCodeError();
   }

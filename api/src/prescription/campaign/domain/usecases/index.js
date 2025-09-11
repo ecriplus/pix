@@ -9,6 +9,7 @@ import * as organizationFeatureApi from '../../../../organizational-entities/app
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
+import * as accessCodeRepository from '../../../../shared/infrastructure/repositories/access-code-repository.js';
 import { adminMemberRepository } from '../../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
@@ -76,6 +77,7 @@ const dependencies = {
   organizationRepository,
   placementProfileService,
   stageRepository,
+  accessCodeRepository,
   stageCollectionRepository,
   stageAcquisitionRepository,
   targetProfileRepository: campaignRepositories.targetProfileRepository, // TODO

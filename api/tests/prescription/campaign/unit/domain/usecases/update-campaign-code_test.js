@@ -6,10 +6,13 @@ import { updateCampaignCode } from '../../../../../../src/prescription/campaign/
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | update-campaign-code', function () {
-  let campaignAdministrationRepository, codeGenerator, campaignStub;
+  let campaignAdministrationRepository, codeGenerator, campaignStub, accessCodeRepository;
 
   beforeEach(function () {
-    campaignAdministrationRepository = { get: sinon.stub(), isCodeAvailable: sinon.stub(), update: sinon.stub() };
+    campaignAdministrationRepository = { get: sinon.stub(), update: sinon.stub() };
+    accessCodeRepository = {
+      isCodeAvailable: sinon.stub(),
+    };
     codeGenerator = { validate: sinon.stub() };
     campaignStub = { updateFields: sinon.stub() };
   });
@@ -21,10 +24,16 @@ describe('Unit | UseCase | update-campaign-code', function () {
 
     codeGenerator.validate.withArgs(campaignCode).returns(true);
     campaignAdministrationRepository.get.withArgs(campaignId).resolves(campaignStub);
-    campaignAdministrationRepository.isCodeAvailable.withArgs({ code: campaignCode }).resolves(true);
+    accessCodeRepository.isCodeAvailable.withArgs({ code: campaignCode }).resolves(true);
 
     // when
-    await updateCampaignCode({ campaignId, campaignCode, campaignAdministrationRepository, codeGenerator });
+    await updateCampaignCode({
+      campaignId,
+      campaignCode,
+      campaignAdministrationRepository,
+      codeGenerator,
+      accessCodeRepository,
+    });
 
     // then
     expect(campaignAdministrationRepository.update).to.have.been.calledOnceWithExactly(campaignStub);
@@ -38,7 +47,12 @@ describe('Unit | UseCase | update-campaign-code', function () {
       campaignAdministrationRepository.get.withArgs(campaignId).resolves(null);
 
       // when
-      const error = await catchErr(updateCampaignCode)({ campaignId, campaignCode, campaignAdministrationRepository });
+      const error = await catchErr(updateCampaignCode)({
+        campaignId,
+        campaignCode,
+        campaignAdministrationRepository,
+        accessCodeRepository,
+      });
 
       expect(error).to.be.an.instanceOf(UnknownCampaignId);
     });
@@ -51,9 +65,10 @@ describe('Unit | UseCase | update-campaign-code', function () {
       const campaignCode = Symbol('campaign-code');
       campaignAdministrationRepository.get.withArgs(campaignId).resolves(campaignStub);
       codeGenerator.validate.withArgs(campaignCode).returns(true);
-      campaignAdministrationRepository.isCodeAvailable.withArgs({ code: campaignCode }).resolves(false);
+      accessCodeRepository.isCodeAvailable.withArgs({ code: campaignCode }).resolves(false);
       // when
       const error = await catchErr(updateCampaignCode)({
+        accessCodeRepository,
         campaignId,
         campaignCode,
         campaignAdministrationRepository,
