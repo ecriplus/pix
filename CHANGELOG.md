@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.204.0](https://github.com/1024pix/pix/compare/v5.203.0...v5.204.0) (2025-09-11)
+
+### :rocket: Amélioration
+
+- [#13486](https://github.com/1024pix/pix/pull/13486) Ajouter la date de création dans la page d'information de session admin (PIX-19282) 
+- [#13510](https://github.com/1024pix/pix/pull/13510) Ajouter le template d'attestation MINARM (PIX-19463) 
+- [#13512](https://github.com/1024pix/pix/pull/13512) Bloquer l'accès à la page paramètre de PixOrga d'une campagne appartenant à un Parcours Combiné (PIX-19314). 
+- [#13515](https://github.com/1024pix/pix/pull/13515) Bloquer la suppression d'une campagne appartenant à un parcours combiné pour les prescripteurs (PIX-19352) 
+- [#13511](https://github.com/1024pix/pix/pull/13511) Cacher le code campagne lorsque celle ci est intégré à un parcours combiné (PIX-19312). 
+- [#13475](https://github.com/1024pix/pix/pull/13475) Changement de couleur des cartes mission pour le domaine 5 (PIX-19431) 
+- [#13520](https://github.com/1024pix/pix/pull/13520) Changement de wording stepper vertical (PIX-19435) (PIX-19472) 
+- [#13518](https://github.com/1024pix/pix/pull/13518) Empêcher de supprimer les quêtes dont l'id correspond à un parcours combiné (PIX-19017) 
+- [#13527](https://github.com/1024pix/pix/pull/13527) Empêcher la création d'une campagne avec un code qui existe déjà sur un parcours combiné (PIX-19467) 
+- [#13521](https://github.com/1024pix/pix/pull/13521) Faire en sorte que la preview soit ISO design (PIX-19473) 
+- [#13499](https://github.com/1024pix/pix/pull/13499) Redirection de l'utilisateur s'il tape un code de parcours combiné après /campagnes dans l'URL (PIX-18781) 
+
+### :bug: Correction
+
+- [#13519](https://github.com/1024pix/pix/pull/13519) Afficher le message correspondant au statut UPLOADING dans la bannière d'import des prescrits 
+- [#13513](https://github.com/1024pix/pix/pull/13513) L'état du bouton de réponse des QAB n'est pas réinitialisé (PIX-19466) 
+
+### :building_construction: Tech
+
+- [#13509](https://github.com/1024pix/pix/pull/13509) Modifier le libellé des locales des invitations aux centres de certification dans pix-admin (PIX-19344) 
+
+### :arrow_up: Montée de version
+
+- [#13506](https://github.com/1024pix/pix/pull/13506) Update adobe/s3mock Docker tag to v4.8.0 (.circleci) 
+- [#13497](https://github.com/1024pix/pix/pull/13497) Update dependency @1024pix/pix-ui to ^55.26.12 (admin)
+
 # [5.203.0](https://github.com/1024pix/pix/compare/v5.202.0...v5.203.0) (2025-09-10)
 
 ### :rocket: Amélioration
