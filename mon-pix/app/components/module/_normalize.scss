@@ -9,10 +9,13 @@
     margin: var(--pix-spacing-1x) 0;
   }
 
-  h4,
+  h4 {
+    @extend %pix-title-xs;
+  }
+
   h5,
   h6 {
-    font-weight: var(--pix-font-medium);
+    @extend %pix-title-xxs;
   }
 
   a:not([class]) {
