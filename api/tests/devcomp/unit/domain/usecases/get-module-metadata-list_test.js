@@ -93,22 +93,26 @@ describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list', functi
 
     // then
     const expectedModuleMetadataList = [
-      new ModuleMetadata({
+      {
         id: firstModule.id,
         slug: firstModule.slug,
         title: firstModule.title,
         isBeta: firstModule.isBeta,
         duration: firstModule.details.duration,
-      }),
-      new ModuleMetadata({
+        image: firstModule.details.image,
+      },
+      {
         id: secondModule.id,
         slug: secondModule.slug,
         title: secondModule.title,
         isBeta: secondModule.isBeta,
         duration: secondModule.details.duration,
-      }),
+        image: secondModule.details.image,
+      },
     ];
     expect(moduleMetadataList).to.deep.equal(expectedModuleMetadataList);
+    expect(moduleMetadataList[0]).instanceOf(ModuleMetadata);
+    expect(moduleMetadataList[1]).instanceOf(ModuleMetadata);
   });
 
   context('when a module id does not exist', function () {

@@ -3,7 +3,7 @@ import { DomainError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function () {
-  let id, isBeta, slug, title, duration;
+  let id, isBeta, slug, title, duration, image;
 
   beforeEach(function () {
     id = '12a3a2b4-e873-4789-ae1c-57f6f2b99890';
@@ -11,11 +11,12 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     title = "Test d'un module";
     isBeta = false;
     duration = 10;
+    image = 'emile';
   });
 
   it('should init and keep attributes', function () {
     // when
-    const module = new ModuleMetadata({ id, slug, title, isBeta, duration });
+    const module = new ModuleMetadata({ id, slug, title, isBeta, duration, image });
 
     // then
     expect(module.id).to.equal(id);
@@ -23,6 +24,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
     expect(module.title).to.equal(title);
     expect(module.isBeta).to.equal(isBeta);
     expect(module.duration).to.equal(duration);
+    expect(module.image).to.equal(image);
   });
 
   describe('if a module does not have an id', function () {
@@ -35,6 +37,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             isBeta,
             duration,
+            image,
           }),
       )();
 
@@ -54,6 +57,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             isBeta,
             duration,
+            image,
           }),
       )();
 
@@ -73,6 +77,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             slug,
             isBeta,
             duration,
+            image,
           }),
       )();
 
@@ -92,6 +97,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             slug,
             duration,
+            image,
           }),
       )();
 
@@ -111,6 +117,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             slug,
             isBeta,
+            image,
           }),
       )();
 
@@ -134,6 +141,7 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             slug,
             isBeta,
+            image,
           }),
       )();
 
@@ -157,12 +165,33 @@ describe('Unit | Devcomp | Domain | Models | Module | ModuleMetadata', function 
             title,
             slug,
             isBeta,
+            image,
           }),
       )();
 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The duration must be a positive integer for a module metadata');
+    });
+  });
+
+  describe('if the module does not have an image', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () =>
+          new ModuleMetadata({
+            duration,
+            id,
+            title,
+            slug,
+            isBeta,
+          }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The image is required for a module metadata');
     });
   });
 });
