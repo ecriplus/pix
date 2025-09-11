@@ -41,6 +41,18 @@ export async function getCurrentFrameworkByComplementaryCertificationKey({ compl
   return _toDomain({ certificationFrameworksChallengesDTO: currentFrameworkChallengesDTO });
 }
 
+export async function getFrameworkHistory({ complementaryCertificationKey }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const frameworks = await knexConn('certification-frameworks-challenges')
+    .select('version')
+    .distinct('version')
+    .where({ complementaryCertificationKey })
+    .orderBy('version', 'desc');
+
+  return frameworks.map(({ version }) => version);
+}
+
 /**
  * @param {Object} params
  * @param {String} params.version
