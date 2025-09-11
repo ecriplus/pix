@@ -24,7 +24,8 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 
   &__card,
-  &-card__tag {
+  &-card__tag,
+  &-card__footer {
     @media (not (prefers-reduced-motion: reduce)) {
       animation: 0.8s fade-in ease-in-out;
 
