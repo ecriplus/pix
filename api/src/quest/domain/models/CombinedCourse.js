@@ -122,6 +122,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       isCompleted,
       isLocked,
       duration: module?.duration,
+      image: module.image,
     });
   }
 
