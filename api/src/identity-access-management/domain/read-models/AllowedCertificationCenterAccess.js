@@ -39,7 +39,7 @@ class AllowedCertificationCenterAccess {
   }
 
   isAccessBlockedUntilDate() {
-    return new Date() < new Date(features.pixCertifBlockedAccessUntilDate);
+    return !this.isInAccessBlockingWhitelist() && new Date() < new Date(features.pixCertifBlockedAccessUntilDate);
   }
 
   hasTag(tagName) {
@@ -68,6 +68,14 @@ class AllowedCertificationCenterAccess {
 
   isInWhitelist() {
     return this.#isInWhitelist;
+  }
+
+  isInAccessBlockingWhitelist() {
+    if (!features.pixCertifBlockedAccessWhitelist) {
+      return false;
+    }
+    const whitelistedIds = features.pixCertifBlockedAccessWhitelist.split(',').map((id) => parseInt(id));
+    return whitelistedIds.includes(this.id);
   }
 
   get pixCertifScoBlockedAccessDateLycee() {

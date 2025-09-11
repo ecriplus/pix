@@ -637,10 +637,11 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
   });
 
   context('#isAccessBlockedUntilDate', function () {
-    let validData, clock, pixCertifBlockedAccessUntilDateBeforeTest;
+    let validData, clock, pixCertifBlockedAccessUntilDateBeforeTest, pixCertifBlockedAccessWhitelistBeforeTest;
 
     beforeEach(function () {
       pixCertifBlockedAccessUntilDateBeforeTest = settings.features.pixCertifBlockedAccessUntilDate;
+      pixCertifBlockedAccessWhitelistBeforeTest = settings.features.pixCertifBlockedAccessWhitelist;
       validData = {
         externalId: 'NOT_WHITELISTED',
         type: 'SCO',
@@ -652,15 +653,16 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
     afterEach(function () {
       clock.restore();
       settings.features.pixCertifBlockedAccessUntilDate = pixCertifBlockedAccessUntilDateBeforeTest;
+      settings.features.pixCertifBlockedAccessWhitelist = pixCertifBlockedAccessWhitelistBeforeTest;
     });
 
-    it('should return true when certification center is whitelisted', function () {
+    it('should return true when current date is before the date limit', function () {
       // given
       clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
       settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
       const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
         ...validData,
-        isInWhitelist: true,
+        id: 123,
       });
 
       // when
@@ -670,11 +672,14 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       expect(isAccessBlockedUntilDate).to.be.true;
     });
 
-    it('should return false when current date is before the date limit', function () {
+    it('should return false when current date is after the date limit', function () {
       // given
-      clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
-      settings.features.pixCertifBlockedAccessUntilDate = '2021-01-01';
-      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess(validData);
+      clock = sinon.useFakeTimers({ now: new Date('2021-01-13'), toFake: ['Date'] });
+      settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
+      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+        ...validData,
+        id: 123,
+      });
 
       // when
       const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
@@ -683,17 +688,59 @@ describe('Unit | Domain | Read-Models | AllowedCertificationCenterAccess', funct
       expect(isAccessBlockedUntilDate).to.be.false;
     });
 
-    it('should return false when current date is after the date limit', function () {
-      // given
-      clock = sinon.useFakeTimers({ now: new Date('2022-01-03'), toFake: ['Date'] });
-      settings.features.pixCertifBlockedAccessUntilDate = '2022-01-08';
-      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess(validData);
+    context('when certification center is in whitelist', function () {
+      it('should return false even when current date is before the date limit', function () {
+        // given
+        clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+        settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
+        settings.features.pixCertifBlockedAccessWhitelist = '123,456,789';
+        const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+          ...validData,
+          id: 123,
+        });
 
-      // when
-      const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+        // when
+        const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
 
-      // then
-      expect(isAccessBlockedUntilDate).to.be.true;
+        // then
+        expect(isAccessBlockedUntilDate).to.be.false;
+      });
+
+      it('should return true when certification center is not in whitelist', function () {
+        // given
+        clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+        settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
+        settings.features.pixCertifBlockedAccessWhitelist = '456,789,101112';
+        const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+          ...validData,
+          id: 123,
+        });
+
+        // when
+        const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+
+        // then
+        expect(isAccessBlockedUntilDate).to.be.true;
+      });
+    });
+
+    context('when whitelist is not configured', function () {
+      it('should return true when current date is before the date limit', function () {
+        // given
+        clock = sinon.useFakeTimers({ now: new Date('2021-01-02'), toFake: ['Date'] });
+        settings.features.pixCertifBlockedAccessUntilDate = '2021-01-12';
+        settings.features.pixCertifBlockedAccessWhitelist = null;
+        const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
+          ...validData,
+          id: 123,
+        });
+
+        // when
+        const isAccessBlockedUntilDate = allowedCertificationCenterAccess.isAccessBlockedUntilDate();
+
+        // then
+        expect(isAccessBlockedUntilDate).to.be.true;
+      });
     });
   });
 
