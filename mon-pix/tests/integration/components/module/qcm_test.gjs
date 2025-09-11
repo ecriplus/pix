@@ -12,7 +12,6 @@ module('Integration | Component | Module | QCM', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let passageEventService, passageEventRecordStub;
-
   let clock;
 
   hooks.beforeEach(function () {
@@ -72,6 +71,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
         { id: '2', content: 'select2' },
         { id: '3', content: 'select3' },
       ],
+      feedbacks: {
+        valid: 'Bravo',
+        invalid: 'Pas bravo',
+      },
+      solutions: ['1', '3'],
       type: 'qcm',
     };
     const userResponse = [answeredProposal[0].id, answeredProposal[1].id];
@@ -115,6 +119,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
         { id: '2', content: 'checkbox2' },
         { id: '3', content: 'checkbox3' },
       ],
+      feedbacks: {
+        valid: 'Bravo',
+        invalid: 'Pas bravo',
+      },
+      solutions: ['1', '2'],
       type: 'qcm',
     };
     const onAnswerSpy = sinon.spy();
@@ -140,6 +149,17 @@ module('Integration | Component | Module | QCM', function (hooks) {
         { id: '2', content: 'checkbox2' },
         { id: '3', content: 'checkbox3' },
       ],
+      feedbacks: {
+        valid: {
+          state: 'Correct&#8239;!',
+          diagnosis: '<p>Vous nous avez bien cernés&nbsp;:)</p>',
+        },
+        invalid: {
+          state: 'Pas Bravo!',
+          diagnosis: '<p>Vous nous avez mal cernés</p>',
+        },
+      },
+      solutions: ['1', '2'],
       type: 'qcm',
     };
     const onAnswerSpy = sinon.spy();
@@ -156,25 +176,37 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.dom(screen.queryByRole('alert', { name: 'Pour valider, sélectionnez une réponse.' })).doesNotExist();
   });
 
-  test('should display an ok feedback when exists', async function (assert) {
+  test('should display an ok feedback with no retry button, when feedback exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct!', diagnosis: 'Good job!' },
-      status: 'ok',
-      solution: ['1', '4'],
-    });
-
-    const { qcmElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcmElement = {
+      id: 'a6838f8e-05ee-42e0-9820-13a9977cf5dc',
+      instruction: 'Instruction',
+      proposals: [
+        { id: '1', content: 'checkbox1' },
+        { id: '2', content: 'checkbox2' },
+        { id: '3', content: 'checkbox3' },
+      ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: '<p>Good job!</p>',
+        },
+        invalid: {
+          state: 'Pas Bravo!',
+          diagnosis: '<p>Vous nous avez mal cernés</p>',
+        },
+      },
+      solutions: ['1', '2'],
+      type: 'qcm',
+    };
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByLabelText('checkbox1'));
+    await click(screen.getByLabelText('checkbox2'));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
 
     // then
     assert.dom(screen.getByText('Correct!')).exists();
@@ -183,26 +215,40 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox2', disabled: true }));
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox3', disabled: true }));
     assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).doesNotExist();
+    assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
   });
 
-  test('should display a ko feedback when exists', async function (assert) {
+  test('should display a ko feedback and Retry button, when feedback exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: ['1', '4'],
-    });
-
-    const { qcmElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcmElement = {
+      id: 'a6838f8e-05ee-42e0-9820-13a9977cf5dc',
+      instruction: 'Instruction',
+      proposals: [
+        { id: '1', content: 'checkbox1' },
+        { id: '2', content: 'checkbox2' },
+        { id: '3', content: 'checkbox3' },
+      ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: '<p>Good job!</p>',
+        },
+        invalid: {
+          state: 'Wrong!',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['1', '2'],
+      type: 'qcm',
+    };
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    await click(screen.getByLabelText('checkbox1'));
+    await click(screen.getByLabelText('checkbox3'));
+    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await clock.tickAsync(VERIFY_RESPONSE_DELAY);
 
     // then
     assert.dom(screen.getByText('Wrong!')).exists();
@@ -211,98 +257,40 @@ module('Integration | Component | Module | QCM', function (hooks) {
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox2', disabled: true }));
     assert.ok(screen.getByRole('checkbox', { name: 'checkbox3', disabled: true }));
     assert.dom(screen.queryByRole('button', { name: 'Vérifier ma réponse' })).doesNotExist();
-  });
-
-  test('should display retry button when a ko feedback appears', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
-    const { qcmElement } = prepareContextRecords.call(this, store, correctionResponse);
-    const onAnswerSpy = sinon.spy();
-
-    // when
-    const screen = await render(
-      <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
-
-    // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
   });
 
   test('should be able to focus back to proposals when feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
-    const { qcmElement } = prepareContextRecords.call(this, store, correctionResponse);
+    const qcmElement = {
+      id: 'a6838f8e-05ee-42e0-9820-13a9977cf5dc',
+      instruction: 'Instruction',
+      proposals: [
+        { id: '1', content: 'checkbox1' },
+        { id: '2', content: 'checkbox2' },
+        { id: '3', content: 'checkbox3' },
+      ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: '<p>Good job!</p>',
+        },
+        invalid: {
+          state: 'Wrong!',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['1', '2'],
+      type: 'qcm',
+    };
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(
-      <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
 
     // then
     const checkbox1 = screen.getByRole('checkbox', { name: 'checkbox1', disabled: true });
     checkbox1.focus();
     assert.deepEqual(document.activeElement, checkbox1);
   });
-
-  test('should not display retry button when an ok feedback appears', async function (assert) {
-    // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct', diagnosis: 'Nice!' },
-      status: 'ok',
-      solution: 'solution',
-    });
-
-    const { qcmElement } = prepareContextRecords.call(this, store, correctionResponse);
-    const onAnswerSpy = sinon.spy();
-
-    // when
-    const screen = await render(
-      <template>
-        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @correction={{correctionResponse}} />
-      </template>,
-    );
-
-    // then
-    assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
-  });
 });
-
-function prepareContextRecords(store, correctionResponse) {
-  const qcmElement = {
-    id: 'a6838f8e-05ee-42e0-9820-13a9977cf5dc',
-    instruction: 'Instruction',
-    proposals: [
-      { id: '1', content: 'checkbox1' },
-      { id: '2', content: 'checkbox2' },
-      { id: '3', content: 'checkbox3' },
-    ],
-    type: 'qcm',
-  };
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qcmElement.id,
-  });
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qcmElement.id,
-  });
-  return { qcmElement };
-}

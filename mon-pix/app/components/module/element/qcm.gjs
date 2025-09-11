@@ -18,6 +18,8 @@ export default class ModuleQcm extends ModuleElement {
   @service passageEvents;
 
   @tracked isAnswering = false;
+  @tracked currentCorrection;
+  @tracked answerIsValid = false;
 
   selectedAnswerIds = new Set();
 
@@ -31,6 +33,19 @@ export default class ModuleQcm extends ModuleElement {
 
   get disableInput() {
     return super.disableInput || this.isAnswering;
+  }
+
+  validAnswer() {
+    const solutions = new Set(this.element.solutions);
+    const answers = this.selectedAnswerIds;
+    this.answerIsValid = solutions.size === answers.size && [...solutions].every((solution) => answers.has(solution));
+  }
+
+  get correction() {
+    if (this.isOnRetryMode) {
+      return null;
+    }
+    return this.currentCorrection;
   }
 
   resetAnswers() {
@@ -63,15 +78,28 @@ export default class ModuleQcm extends ModuleElement {
   async onAnswer(event) {
     this.isAnswering = true;
     event.preventDefault();
-    await this.waitFor(VERIFY_RESPONSE_DELAY);
-    await super.onAnswer(event);
-    this.isAnswering = false;
 
+    super.onAnswer(event);
+    if (this.shouldDisplayRequiredMessage === true) {
+      this.isAnswering = false;
+      return;
+    }
+    this.validAnswer();
     const status = this.answerIsValid ? 'ok' : 'ko';
+    this.currentCorrection = {
+      status,
+      feedback: this.answerIsValid ? this.element.feedbacks.valid : this.element.feedbacks.invalid,
+      solution: this.element.solutions,
+      isOk: this.answerIsValid,
+      isKo: !this.answerIsValid,
+    };
+
     this.passageEvents.record({
       type: 'QCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
+    await this.waitFor(VERIFY_RESPONSE_DELAY);
+    this.isAnswering = false;
   }
 
   waitFor(duration) {
