@@ -55,40 +55,25 @@
                     "id": "1",
                     "content": "<p>oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
+                      "diagnosis": "<p>Et non ! Cette vidéo est <strong>fausse</strong>. C'est ce qu’on appelle un <strong>deepfake ou un hypertrucage, en français</strong>. Voyons de quoi il s’agit.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake&nbsp;ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
+                      "diagnosis": "<p>Bien vu ! Cette vidéo est <strong>fausse</strong>. C'est ce qu’on appelle un <strong>deepfake&nbsp;ou un hypertrucage, en français</strong>. Voyons de quoi il s’agit.<br></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. Voyons de quoi il s’agit.<br></p>"
+                      "diagnosis": "<p>Cette vidéo est <strong>fausse</strong>. C'est ce qu’on appelle un <strong>deepfake ou un hypertrucage, en français</strong>. Voyons de quoi il s’agit.<br></p>"
                     }
                   }
                 ],
                 "solution": "2"
-              }
-            }
-          ]
-        },
-        {
-          "id": "fd80af1f-4e44-4200-b337-cf6f1abb9edc",
-          "type": "transition",
-          "title": "Transition 1",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "be27c10e-48ee-40cd-a7ed-83479ba36099",
-                "type": "text",
-                "content": "<p>Même en ouvrant l'œil, il est parfois difficile de savoir si une image ou une vidéo est vraie ou fausse.</p>"
               }
             }
           ]
@@ -146,7 +131,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>En fait, ces trois personnes n'existent pas ! Avant, on pouvait facilement détecter les fausses images à cause de flous ou de détails ratés, mais c'est devenu très difficile.</p>"
+                  "diagnosis": "<p>En fait, ces trois personnes n'existent pas, ce sont des <strong>deepkakes</strong>  ! Avant, on pouvait facilement détecter les fausses images à cause de flous ou de détails ratés comme, par exemple, des doigts en trop, mais c'est devenu très difficile.</p>"
                 }
               }
             }
@@ -154,49 +139,16 @@
         },
         {
           "id": "3be25655-da30-4575-ad97-63c7d28a37c4",
-          "type": "lesson",
+          "type": "transition",
           "title": "Leçon 1",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "f9466906-f64a-402f-976f-bcb773b4b3ff",
-                      "type": "text",
-                      "content": "<p>Ces 3 images sont <strong>hyperréalistes </strong>mais fausses&nbsp;: ce sont des deepfakes.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "aa9f82e9-3e4e-444b-a8ce-c10b8d07e6c7",
-                      "type": "text",
-                      "content": "<p>Les deepfakes peuvent être&nbsp;:&nbsp;<br></p><ul>    <li>des vidéos▶️</li>    <li>des images&nbsp;🖼️</li>    <li>des sons&nbsp;🎙️</li>    <li>des textes&nbsp;🗒️</li></ul>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "21ddc90b-7145-4e1d-9e29-1eeedc7be704",
-                      "type": "text",
-                      "content": "<p>Les deepfakes, hypertrucages en français, sont créés <strong>grâce à l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake </strong>!</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "3ee0f7d8-b042-490c-8c53-036fd0078dc8",
-                      "type": "text",
-                      "content": "<p> 👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;<br>🔎 Mais, <strong>observer</strong> une image, une vidéo ou écouter attentivement un son <strong>ne suffit pas pour détecter un deepfake.</strong></p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "658ce4f9-ec90-4e79-911a-94909cecdfc2",
+                "type": "text",
+                "content": "<p>Les deepfakes, hypertrucages en français, sont créés grâce à <strong>l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake </strong>!</p>"
+              }
             }
           ]
         },
@@ -243,40 +195,16 @@
         },
         {
           "id": "53ce4351-7009-4a25-b7f8-cc134dcacc10",
-          "type": "lesson",
+          "type": "transition",
           "title": "Leçon 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "70c20e08-e620-43b1-9012-582be199dfd8",
-                      "type": "text",
-                      "content": "<p>Pour créer un deepfake, un logiciel d’intelligence artificielle n’a <strong>pas besoin de beaucoup d’informations</strong> en entrée (une photo, un son, une courte vidéo…).</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "d45164d6-6737-4959-b3ff-3848f1406285",
-                      "type": "text",
-                      "content": "<p>Par exemple, avec une photo et un enregistrement de quelques phrases, on peut fabriquer une vidéo d’une personne qui fait un discours. 🗣️</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "c0c30bab-b295-4b93-a5c0-a2c6678a3a23",
-                      "type": "text",
-                      "content": "<p><strong>Comme ils sont faciles à fabriquer, beaucoup de deepfakes circulent en ligne.&nbsp;⚠️</strong></p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "a1ea847f-741e-41d6-b3a7-1e483cb3f421",
+                "type": "text",
+                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong> : une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️ </p><p>⚠️ Comme ils sont faciles à fabriquer, beaucoup de deepfakes circulent en ligne. <br></p>"
+              }
             }
           ]
         },
@@ -437,49 +365,16 @@
         },
         {
           "id": "e3bfe080-6bb2-4f37-9920-2c328cee9755",
-          "type": "lesson",
+          "type": "transition",
           "title": "Leçon 3",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "e91e7efd-a663-4436-bb84-d4b4de1d1989",
-                      "type": "text",
-                      "content": "<p>😱Les deepfakes sont souvent utilisés pour <strong>faire circuler de fausses informations</strong>. Dans ce cas, leurs créateurs veulent faire croire à des faits qui n’ont pas eu lieu.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "efb2fb08-79c0-4afe-8d8a-361000c0d0a8",
-                      "type": "text",
-                      "content": "<p>Dans quel but ? <strong>Manipuler la population</strong> pour gagner des élections, arnaquer ou <strong>cyberharceler </strong>des personnes. Toutes ces actions sont illégales.<br><strong>Quand ils sont créés avec de mauvaises intentions, les deepfakes peuvent avoir des conséquences graves.</strong></p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "3fdf70ca-0e6a-4c96-ac70-14158761aae1",
-                      "type": "text",
-                      "content": "<p>Des deepfakes sont aussi utilisés dans l’art ou le divertissement, sans but malveillant&nbsp;: par exemple, pour continuer de faire apparaître dans un film un acteur absent ou décédé pendant le tournage.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "1d3b8e1e-87b4-4b2e-bd57-8f00de4ed029",
-                      "type": "text",
-                      "content": "<p>⚠️ Attention, dans tous les cas, il faut <strong>respecter le droit à l’image</strong> de la personne qui apparaît dans le deepfake.<br>Par exemple faire une vidéo humoristique en utilisant la photo d'un ami sans son autorisation ne respecte pas son droit à l'image.</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "76124dcf-b249-4e0a-a0b9-6b0ab605e6ef",
+                "type": "text",
+                "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces usages sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p>Cependant, ils sont aussi utilisés sans intention malveillante, dans l’art ou le divertissement, par exemple pour faire apparaître un acteur absent ou décédé dans un film.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, le <strong>droit à l’image</strong> doit être respecté.<br></p>"
+              }
             }
           ]
         },
@@ -534,28 +429,28 @@
                     "id": "1",
                     "content": "<p>Liker le message de Brian.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! </p><p>Vérifier la source d’une information avant de la partager, c’est le bon réflexe ! </p><p>La diffuser, comme le suggère Brian, pourrait relever du <strong>cyberharcèlement</strong> et avoir de graves conséquences pour Mme Martin, qui pourrait <strong>porter plainte</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Partager la photo à ses contacts.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! </p><p>Vérifier la source d’une information avant de la partager, c’est le bon réflexe !</p><p>La diffuser, comme le suggère Brian, pourrait relever du <strong>cyberharcèlement </strong>et avoir de graves conséquences pour Mme Martin, qui pourrait <strong>porter plainte</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement.</p><p>Vérifier la source d’une information avant de la partager, c’est le bon réflexe ! </p><p>La diffuser, comme le suggère Brian, pourrait relever du <strong>cyberharcèlement</strong> et avoir de graves conséquences pour Mme Martin, qui pourrait <strong>porter plainte</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Chercher la source de l'image sur internet.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement.</p><p>Vérifier la source d’une information avant de la partager, c’est le bon réflexe ! </p><p>La diffuser, comme le suggère Brian, pourrait relever du <strong>cyberharcèlement</strong> et avoir de graves conséquences pour Mme Martin, qui pourrait <strong>porter plainte</strong>.</p>"
                     }
                   },
                   {
@@ -573,40 +468,16 @@
         },
         {
           "id": "862d0165-40a7-4106-a191-94e3182eb156",
-          "type": "lesson",
+          "type": "transition",
           "title": "Leçon 4",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "08889a3c-0fd9-45db-bab2-ffe4a9df0778",
-                      "type": "text",
-                      "content": "<p>Quand vous recevez un message avec un média surprenant (trop beau pour être vrai, énervant ou inquiétant),<strong> prenez le temps avant de le liker ou de le partager</strong>. C’est peut-être un deepfake !</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "ef89f877-b8a8-4279-b63a-eb1761e48d84",
-                      "type": "text",
-                      "content": "<p>Si vous partagez un deepfake créé avec de mauvaises intentions, vous pouvez répandre de <strong>fausses informations </strong>ou participer au <strong>cyberharcèlement </strong>d’une personne.<br>👉 Cela peut aussi enfreindre le droit à l’image et mener à un dépôt de plainte contre vous.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "bb9de561-f5e8-4c81-91a5-d9b8e570b5d0",
-                      "type": "text",
-                      "content": "<p>🔎 <strong>Au moindre doute, ne partagez pas l'information. Mais vérifiez l'information et sa source.</strong></p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "c56b454a-a807-4f51-a93d-30a23bb35bbf",
+                "type": "text",
+                "content": "<p>Quand vous recevez un média surprenant (trop beau pour être vrai, choquant ou inquiétant), <strong>n’agissez pas trop vite</strong> : ne likez pas, ne partagez pas immédiatement. C’est peut-être un <strong>deepfake&nbsp;</strong>! </p><p>Partager un deepfake malveillant peut propager de fausses informations ou contribuer au cyberharcèlement d’une personne. </p><p>👉 Cela peut aussi violer le droit à l’image et entraîner une plainte contre vous. </p><p>🔎 <strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.<br><br></p>"
+              }
             }
           ]
         }
@@ -626,7 +497,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<ul> <li>Un deepfake est un <strong>média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle</strong>. Un deepfake est difficile à détecter. 🔎</li><li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc<strong> beaucoup qui circulent</strong> en ligne. ⚠️</li><li>Un deepfake est <strong>souvent créé avec une intention malveillante</strong>&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, il ne faut pas le partager immédiatement. <strong>Vérifiez d'abord sa source et s'il est vrai</strong>. ℹ️</li>   </ul><p><br>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake, évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle. </p><ul><li>Il est souvent difficile à détecter. 🔎</li> <li>Il demande <strong>peu de matériel et de compétence</strong> pour être produite qui explique pourquoi il circule beaucoup en ligne</li><li>La plupart du temps, un deepfake est  créé avec une <strong>intention malveillante</strong> : diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à média, <strong>il ne faut pas le partager immédiatement</strong>. Vérifiez d'abord sa source et sa fiabilité. ℹ️</li>   </ul>"
               }
             }
           ]
@@ -826,7 +697,10 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": ["1", "3"]
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },
