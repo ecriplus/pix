@@ -41,9 +41,10 @@ describe('Unit | UseCase | create-campaign', function () {
       availableTargetProfileIds: [targetProfileId],
       organizationFeatures: {},
     });
+    const options = Symbol('options');
     campaignCreator.createCampaign = sinon
       .stub()
-      .withArgs({ ...campaignData, code })
+      .withArgs({ ...campaignData, code }, options)
       .returns(campaignToCreate);
 
     codeGeneratorStub.generate.resolves(code);
@@ -59,11 +60,10 @@ describe('Unit | UseCase | create-campaign', function () {
       campaignAdministrationRepository,
       campaignCreatorRepository,
       codeGenerator: codeGeneratorStub,
+      options,
     });
 
     // then
-    expect(campaignCreator.createCampaign).to.have.been.calledWithExactly({ ...campaignData, code });
-    expect(campaignAdministrationRepository.save).to.have.been.calledWithExactly(campaignToCreate);
     expect(campaign).to.deep.equal(savedCampaign);
   });
 

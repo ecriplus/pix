@@ -12,7 +12,7 @@ export const get = async function ({ id, campaignsApi }) {
 
 export const save = async function ({ campaigns, campaignsApi }) {
   const campaignToCreate = campaigns.map(_toDTO);
-  const createdCampaigns = await campaignsApi.save(campaignToCreate);
+  const createdCampaigns = await campaignsApi.save(campaignToCreate, { allowCreationWithoutTargetProfileShare: true });
   return createdCampaigns.map((campaign) => new Campaign(campaign));
 };
 

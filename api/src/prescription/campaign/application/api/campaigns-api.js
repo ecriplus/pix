@@ -31,17 +31,25 @@ import { SavedCampaign } from './models/SavedCampaign.js';
  */
 
 /**
+ * @typedef CampaignCreationOptions
+ * @type {object}
+ * @property {boolean} allowCreationWithoutTargetProfileShare
+ */
+
+/**
  * @function
  * @name save
  *
  * @param {CampaignPayload|Array<CampaignPayload>} campaigns
+ * @param {CampaignCreationOptions} options
  * @returns {Promise<SavedCampaign|Array<CampaignPayload>>}
  * @throws {UserNotAuthorizedToCreateCampaignError} to be improved to handle different error types
  */
-export const save = async (campaigns) => {
+export const save = async (campaigns, options) => {
   if (Array.isArray(campaigns)) {
     const savedCampaign = await usecases.createCampaigns({
       campaignsToCreate: campaigns,
+      options,
     });
 
     return savedCampaign.map((campaign) => new SavedCampaign(campaign));
@@ -53,6 +61,7 @@ export const save = async (campaigns) => {
         ownerId: campaigns.creatorId,
         multipleSendings: false,
       },
+      options,
     });
 
     return new SavedCampaign(savedCampaign);

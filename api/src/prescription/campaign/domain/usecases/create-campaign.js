@@ -7,6 +7,7 @@ const createCampaign = async function ({
   accessCodeRepository,
   campaignCreatorRepository,
   codeGenerator,
+  options,
 }) {
   const userId = campaign.creatorId;
   const ownerId = campaign.ownerId;
@@ -18,8 +19,13 @@ const createCampaign = async function ({
   const generatedCampaignCode = await codeGenerator.generate(accessCodeRepository);
 
   const campaignCreator = await campaignCreatorRepository.get(organizationId);
-
-  const campaignForCreation = campaignCreator.createCampaign({ ...campaign, code: generatedCampaignCode });
+  const campaignForCreation = campaignCreator.createCampaign(
+    {
+      ...campaign,
+      code: generatedCampaignCode,
+    },
+    options,
+  );
 
   return campaignAdministrationRepository.save(campaignForCreation);
 };

@@ -10,6 +10,7 @@ describe('Unit | API | Campaigns', function () {
   describe('#save', function () {
     describe('When creator is not in organization or has no right to use target profile', function () {
       it('should throw an error', async function () {
+        const options = Symbol('abc');
         const createCampaignStub = sinon.stub(usecases, 'createCampaign');
         createCampaignStub
           .withArgs({
@@ -24,18 +25,22 @@ describe('Unit | API | Campaigns', function () {
               organizationId: 1,
               multipleSendings: false,
             },
+            options,
           })
           .rejects(new UserNotAuthorizedToCreateCampaignError());
 
         // when
-        const error = await catchErr(campaignApi.save)({
-          name: 'ABCDiag',
-          title: 'Mon diagnostic Pix',
-          targetProfileId: 1,
-          organizationId: 1,
-          creatorId: 2,
-          customLandingPageText: 'Bienvenue',
-        });
+        const error = await catchErr(campaignApi.save)(
+          {
+            name: 'ABCDiag',
+            title: 'Mon diagnostic Pix',
+            targetProfileId: 1,
+            organizationId: 1,
+            creatorId: 2,
+            customLandingPageText: 'Bienvenue',
+          },
+          options,
+        );
 
         // then
         expect(error).is.instanceOf(UserNotAuthorizedToCreateCampaignError);

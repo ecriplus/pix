@@ -26,6 +26,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
     campaignsApiStub = {
       get: sinon.stub(),
       getByCode: sinon.stub(),
+      save: sinon.stub(),
     };
     campaignsApiStub.get.withArgs(id).resolves(new Campaign(expectedResult));
     campaignsApiStub.getByCode.withArgs(code).resolves(new Campaign(expectedResult));
@@ -81,19 +82,20 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign', function () 
         },
       ];
 
-      const campaignsApiStub = {
-        save: sinon.stub(),
-      };
-
       const expectedCreatedCampaigns = campaigns.map((campaign, index) => ({
         ...campaign,
         id: index,
         code: `code${index}`,
       }));
-      campaignsApiStub.save.withArgs(campaigns).resolves(expectedCreatedCampaigns);
+      campaignsApiStub.save
+        .withArgs(campaigns, { allowCreationWithoutTargetProfileShare: true })
+        .resolves(expectedCreatedCampaigns);
 
       // when
-      const result = await campaignRepository.save({ campaigns, campaignsApi: campaignsApiStub });
+      const result = await campaignRepository.save(
+        { campaigns, campaignsApi: campaignsApiStub },
+        { allowCreationWithoutTargetProfileShare: true },
+      );
 
       // then
       expect(result).to.deep.equal([
