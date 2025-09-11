@@ -8,8 +8,8 @@ import * as campaignCreatorRepository from '../../../../../../src/prescription/c
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import * as codeGenerator from '../../../../../../src/shared/domain/services/code-generator.js';
+import * as accessCodeRepository from '../../../../../../src/shared/infrastructure/repositories/access-code-repository.js';
 import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
-
 describe('Integration | UseCases | create-campaign', function () {
   let userId;
   let organizationId;
@@ -61,6 +61,7 @@ describe('Integration | UseCases | create-campaign', function () {
       campaignAdministrationRepository,
       campaignCreatorRepository,
       codeGenerator,
+      accessCodeRepository,
     });
 
     // then
@@ -97,6 +98,7 @@ describe('Integration | UseCases | create-campaign', function () {
       campaignAdministrationRepository,
       campaignCreatorRepository,
       codeGenerator,
+      accessCodeRepository,
     });
 
     // then
@@ -125,6 +127,7 @@ describe('Integration | UseCases | create-campaign', function () {
       campaignAdministrationRepository,
       campaignCreatorRepository,
       codeGenerator,
+      accessCodeRepository,
     });
 
     // then

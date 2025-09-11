@@ -1,6 +1,7 @@
 const createCampaigns = async function ({
   campaignsToCreate,
   campaignAdministrationRepository,
+  accessCodeRepository,
   campaignCreatorRepository,
   codeGenerator,
   userRepository,
@@ -11,7 +12,7 @@ const createCampaigns = async function ({
     await _checkIfOwnerIsExistingUser(userRepository, campaign.ownerId);
     await _checkIfOrganizationExists(organizationRepository, campaign.organizationId);
 
-    const generatedCampaignCode = await codeGenerator.generate(campaignAdministrationRepository);
+    const generatedCampaignCode = await codeGenerator.generate(accessCodeRepository);
     const campaignCreator = await campaignCreatorRepository.get(campaign.organizationId);
 
     const campaignToCreate = await campaignCreator.createCampaign({

@@ -9,11 +9,11 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
-import * as campaignAdministrationRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import * as campaignRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { CampaignParticipationStatuses } from '../../src/prescription/shared/domain/constants.js';
-import { generate } from '../../src/shared/domain/services/code-generator.js';
+import * as codeGenerator from '../../src/shared/domain/services/code-generator.js';
 import { learningContentCache as cache } from '../../src/shared/infrastructure/caches/learning-content-cache.js';
+import * as accessCodeRepository from '../../src/shared/infrastructure/repositories/access-code-repository.js';
 import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
 import * as skillRepository from '../../src/shared/infrastructure/repositories/skill-repository.js';
 import { computeParticipantResultsShared as computeParticipationResults } from '../prod/compute-participation-results.js';
@@ -238,7 +238,7 @@ async function _createCampaign({ organizationId, campaignType, targetProfileId, 
   if (!adminMemberId) {
     throw new Error(`Organisation ${organizationId} n'a pas de membre ADMIN.`);
   }
-  const code = await generate(campaignAdministrationRepository);
+  const code = await codeGenerator.generate(accessCodeRepository);
   const [{ id: campaignId }] = await knex('campaigns')
     .returning('id')
     .insert({

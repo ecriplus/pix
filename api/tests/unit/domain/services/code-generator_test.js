@@ -5,18 +5,18 @@ import { expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Domain | Services | code generator', function () {
   describe('#createCode', function () {
-    const campaignRepository = {
+    const accessCodeRepository = {
       isCodeAvailable: () => undefined,
     };
 
     beforeEach(function () {
-      sinon.stub(campaignRepository, 'isCodeAvailable');
-      campaignRepository.isCodeAvailable.resolves(true);
+      sinon.stub(accessCodeRepository, 'isCodeAvailable');
+      accessCodeRepository.isCodeAvailable.resolves(true);
     });
 
     it('should create a code with a length of 9 characters', function () {
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then((code) => {
@@ -26,7 +26,7 @@ describe('Unit | Domain | Services | code generator', function () {
 
     it('should create a code beginning with 6 letters', function () {
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then((code) => {
@@ -37,7 +37,7 @@ describe('Unit | Domain | Services | code generator', function () {
 
     it('should create a code finishing with 3 numbers', function () {
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then((code) => {
@@ -48,17 +48,17 @@ describe('Unit | Domain | Services | code generator', function () {
 
     it('should not be already assigned', function () {
       // given
-      campaignRepository.isCodeAvailable.onCall(0).resolves(false);
-      campaignRepository.isCodeAvailable.onCall(1).resolves(true);
+      accessCodeRepository.isCodeAvailable.onCall(0).resolves(false);
+      accessCodeRepository.isCodeAvailable.onCall(1).resolves(true);
 
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then((generatedCode) => {
-        expect(campaignRepository.isCodeAvailable).to.have.been.called;
+        expect(accessCodeRepository.isCodeAvailable).to.have.been.called;
 
-        const existingCampaignCode = campaignRepository.isCodeAvailable.callsArg(0);
+        const existingCampaignCode = accessCodeRepository.isCodeAvailable.callsArg(0);
         expect(generatedCode).to.not.equal(existingCampaignCode);
       });
     });
@@ -67,7 +67,7 @@ describe('Unit | Domain | Services | code generator', function () {
       sinon.spy(randomString, 'generate');
 
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then(() => {
@@ -80,7 +80,7 @@ describe('Unit | Domain | Services | code generator', function () {
       sinon.spy(randomString, 'generate');
 
       // when
-      const promise = codeGenerator.generate(campaignRepository);
+      const promise = codeGenerator.generate(accessCodeRepository);
 
       // then
       return promise.then(() => {
@@ -105,7 +105,7 @@ describe('Unit | Domain | Services | code generator', function () {
       randomString.generate.onCall(3).returns('543');
 
       // when
-      const promise = codeGenerator.generate(campaignRepository, [pendingCode]);
+      const promise = codeGenerator.generate(accessCodeRepository, [pendingCode]);
 
       // then
       return promise.then((generatedCode) => {

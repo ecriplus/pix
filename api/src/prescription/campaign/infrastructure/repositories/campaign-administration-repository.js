@@ -143,10 +143,6 @@ const save = async function (campaigns, dependencies = { skillRepository }) {
   }
 };
 
-const isCodeAvailable = async function ({ code }) {
-  return !(await knex('campaigns').first('id').where({ code }));
-};
-
 const swapCampaignCodes = async function ({ firstCampaignId, secondCampaignId }) {
   const trx = await knex.transaction();
   const randomBytesBuffer = await cryptoService.randomBytes(16);
@@ -206,15 +202,4 @@ export const deleteExternalIdLabelFromCampaigns = (campaignIds) => {
     .whereIn('campaign-features.campaignId', campaignIds);
 };
 
-export {
-  archiveCampaigns,
-  get,
-  getByCode,
-  getByIds,
-  isCodeAvailable,
-  isFromSameOrganization,
-  remove,
-  save,
-  swapCampaignCodes,
-  update,
-};
+export { archiveCampaigns, get, getByCode, getByIds, isFromSameOrganization, remove, save, swapCampaignCodes, update };

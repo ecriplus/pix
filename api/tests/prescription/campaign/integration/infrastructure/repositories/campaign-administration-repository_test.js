@@ -9,29 +9,6 @@ import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants
 import { catchErr, databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Campaign Administration', function () {
-  describe('#isCodeAvailable', function () {
-    beforeEach(async function () {
-      databaseBuilder.factory.buildCampaign({ code: 'BADOIT710' });
-      await databaseBuilder.commit();
-    });
-
-    it('should resolve true if the code is available', async function () {
-      // when
-      const isCodeAvailable = await campaignAdministrationRepository.isCodeAvailable({ code: 'FRANCE998' });
-
-      // then
-      expect(isCodeAvailable).to.be.true;
-    });
-
-    it('should resolve false if the code is not available', async function () {
-      // when
-      const isCodeAvailable = await campaignAdministrationRepository.isCodeAvailable({ code: 'BADOIT710' });
-
-      // then
-      expect(isCodeAvailable).to.be.false;
-    });
-  });
-
   describe('#getByIds', function () {
     it('should return null if campaigns does not exists', async function () {
       // given & when

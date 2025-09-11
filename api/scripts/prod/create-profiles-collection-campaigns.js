@@ -2,9 +2,9 @@ import * as url from 'node:url';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';
 import * as campaignUpdateValidator from '../../src/prescription/campaign/domain/validators/campaign-update-validator.js';
-import * as campaignRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignTypes } from '../../src/prescription/shared/domain/constants.js';
 import * as codeGenerator from '../../src/shared/domain/services/code-generator.js';
+import * as accessCodeRepository from '../../src/shared/infrastructure/repositories/access-code-repository.js';
 import { PromiseUtils } from '../../src/shared/infrastructure/utils/promise-utils.js';
 import { parseCsvWithHeader } from '../helpers/csvHelpers.js';
 
@@ -41,7 +41,7 @@ async function prepareCampaigns(campaignsData) {
       };
 
       campaignUpdateValidator.validate(campaign);
-      campaign.code = await codeGenerator.generate(campaignRepository, generatedList);
+      campaign.code = await codeGenerator.generate(accessCodeRepository, generatedList);
       generatedList.push(campaign.code);
 
       if (isLaunchedFromCommandLine)
