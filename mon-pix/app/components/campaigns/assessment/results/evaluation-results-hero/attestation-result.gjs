@@ -19,6 +19,7 @@ export default class AttestationResult extends Component {
   }
 
   get resultTitle() {
+    if (this.result.reward.key === 'MINARM') return `components.campaigns.attestation-result.title.minarm`;
     return `components.campaigns.attestation-result.title.digital-awarness`;
   }
 

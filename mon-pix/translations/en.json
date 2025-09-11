@@ -268,7 +268,8 @@
         "not-obtained": "Attestation not obtained",
         "obtained": "Attestation obtained",
         "title": {
-          "digital-awarness": "Digital awareness"
+          "digital-awarness": "Digital awareness",
+          "minarm": "Digital base"
         }
       },
       "results-loader": {
