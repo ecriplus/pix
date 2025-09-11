@@ -24,7 +24,8 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   }
 
   &__card,
-  &-card__tag {
+  &-card__tag,
+  &-card__footer {
     @media (not (prefers-reduced-motion: reduce)) {
       animation: 0.8s fade-in ease-in-out;
 
@@ -61,8 +62,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 .grain-card {
   &__footer {
     padding: var(--pix-spacing-2x) 0;
-    border-top: 0 solid var(--pix-neutral-100);
-    border-radius: 0 0 $grain-card-border-radius $grain-card-border-radius;
   }
 
   &--summary {
@@ -73,7 +72,6 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   &--lesson {
     padding: var(--pix-spacing-6x);
     background: var(--pix-primary-10);
-    border-radius: var(--pix-spacing-4x);
   }
 }
 
