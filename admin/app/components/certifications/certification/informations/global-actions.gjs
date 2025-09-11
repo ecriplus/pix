@@ -64,7 +64,9 @@ export default class CertificationInformationGlobalActions extends Component {
       await this.args.certification.save({ adapterOptions: { isCertificationCancel: true } });
       await this.args.certification.reload();
     } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.global-actions.cancel.error-message'),
+      });
     }
 
     this.displayConfirm = false;
@@ -72,10 +74,9 @@ export default class CertificationInformationGlobalActions extends Component {
 
   @action
   onCancelCertificationButtonClick() {
-    this.modalTitle = "Confirmer l'annulation de la certification";
+    this.modalTitle = this.intl.t('components.certifications.global-actions.cancel.modal-title');
     this.confirmAction = this.onCancelCertificationConfirmation;
-    this.confirmMessage =
-      'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.';
+    this.confirmMessage = this.intl.t('components.certifications.global-actions.cancel.modal-message');
     this.displayConfirm = true;
   }
 
@@ -85,7 +86,9 @@ export default class CertificationInformationGlobalActions extends Component {
       await this.args.certification.save({ adapterOptions: { isCertificationUncancel: true } });
       await this.args.certification.reload();
     } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.global-actions.uncancel.error-message'),
+      });
     }
 
     this.displayConfirm = false;
@@ -93,10 +96,9 @@ export default class CertificationInformationGlobalActions extends Component {
 
   @action
   onUncancelCertificationButtonClick() {
-    this.modalTitle = 'Confirmer la désannulation de la certification';
+    this.modalTitle = this.intl.t('components.certifications.global-actions.uncancel.modal-title');
     this.confirmAction = this.onUncancelCertificationConfirmation;
-    this.confirmMessage =
-      'Êtes-vous sûr·e de vouloir désannuler cette certification ? Cliquez sur confirmer pour poursuivre.';
+    this.confirmMessage = this.intl.t('components.certifications.global-actions.uncancel.modal-message');
     this.displayConfirm = true;
   }
 
@@ -106,7 +108,9 @@ export default class CertificationInformationGlobalActions extends Component {
       await this.args.certification.save({ adapterOptions: { isCertificationReject: true } });
       await this.args.certification.reload();
     } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.global-actions.reject.error-message'),
+      });
     }
 
     this.displayConfirm = false;
@@ -114,10 +118,9 @@ export default class CertificationInformationGlobalActions extends Component {
 
   @action
   onRejectCertificationButtonClick() {
-    this.modalTitle = 'Confirmer le rejet de la certification';
+    this.modalTitle = this.intl.t('components.certifications.global-actions.reject.modal-title');
     this.confirmAction = this.onRejectCertificationConfirmation;
-    this.confirmMessage =
-      'Êtes-vous sûr·e de vouloir rejeter cette certification ? Cliquez sur confirmer pour poursuivre.';
+    this.confirmMessage = this.intl.t('components.certifications.global-actions.reject.modal-message');
     this.displayConfirm = true;
   }
 
@@ -127,7 +130,9 @@ export default class CertificationInformationGlobalActions extends Component {
       await this.args.certification.save({ adapterOptions: { isCertificationUnreject: true } });
       await this.args.certification.reload();
     } catch {
-      this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.global-actions.unreject.error-message'),
+      });
     }
 
     this.displayConfirm = false;
@@ -135,10 +140,9 @@ export default class CertificationInformationGlobalActions extends Component {
 
   @action
   onUnrejectCertificationButtonClick() {
-    this.modalTitle = "Confirmer l'annulation du rejet de la certification";
+    this.modalTitle = this.intl.t('components.certifications.global-actions.unreject.modal-title');
     this.confirmAction = this.onUnrejectCertificationConfirmation;
-    this.confirmMessage =
-      'Êtes-vous sûr·e de vouloir annuler le rejet de cette certification ? Cliquez sur confirmer pour poursuivre.';
+    this.confirmMessage = this.intl.t('components.certifications.global-actions.unreject.modal-message');
     this.displayConfirm = true;
   }
 
@@ -162,23 +166,23 @@ export default class CertificationInformationGlobalActions extends Component {
 
   <template>
     <PixButtonLink @route="authenticated.users.get" @size="small" @model={{@certification.userId}}>
-      Voir les détails de l'utilisateur
+      {{t "components.certifications.global-actions.user-details-link"}}
     </PixButtonLink>
 
     <div class="certification-informations__row__actions">
       {{#if this.displayCancelCertificationButton}}
         <PixButton @variant="secondary" @size="small" @triggerAction={{this.onCancelCertificationButtonClick}}>
-          Annuler la certification
+          {{t "components.certifications.global-actions.cancel.button"}}
         </PixButton>
       {{/if}}
       {{#if this.displayUncancelCertificationButton}}
         <PixButton @variant="error" @size="small" @triggerAction={{this.onUncancelCertificationButtonClick}}>
-          Désannuler la certification
+          {{t "components.certifications.global-actions.uncancel.button"}}
         </PixButton>
       {{/if}}
       {{#if this.displayUnrejectCertificationButton}}
         <PixButton @variant="error" @size="small" @triggerAction={{this.onUnrejectCertificationButtonClick}}>
-          Annuler le rejet
+          {{t "components.certifications.global-actions.unreject.button"}}
         </PixButton>
       {{/if}}
       {{#if this.displayRejectCertificationButton}}
@@ -191,18 +195,17 @@ export default class CertificationInformationGlobalActions extends Component {
                 @triggerAction={{this.onRejectCertificationButtonClick}}
                 @isDisabled={{true}}
               >
-                Rejeter la certification
+                {{t "components.certifications.global-actions.reject.button"}}
               </PixButton>
             </:triggerElement>
 
             <:tooltip>
-              Vous ne pouvez pas rejeter une certification publiée. Merci de dépublier la session avant de rejeter cette
-              certification.
+              {{t "components.certifications.global-actions.reject.tooltip-published"}}
             </:tooltip>
           </PixTooltip>
         {{else}}
           <PixButton @variant="error" @size="small" @triggerAction={{this.onRejectCertificationButtonClick}}>
-            Rejeter la certification
+            {{t "components.certifications.global-actions.reject.button"}}
           </PixButton>
         {{/if}}
       {{/if}}

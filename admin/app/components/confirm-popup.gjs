@@ -7,7 +7,7 @@ export default class ConfirmPopup extends Component {
   @service() intl;
 
   get title() {
-    return this.args.title || 'Merci de confirmer';
+    return this.args.title || this.intl.t('common.actions.confirm-title');
   }
 
   get closeTitle() {
@@ -15,7 +15,7 @@ export default class ConfirmPopup extends Component {
   }
 
   get submitTitle() {
-    return this.args.submitTitle || 'Confirmer';
+    return this.args.submitTitle || this.intl.t('common.actions.confirm');
   }
 
   get size() {

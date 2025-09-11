@@ -6,6 +6,7 @@
       "cancel": "Annuler",
       "close": "Fermer",
       "confirm": "Confirmer",
+      "confirm-title": "Merci de confirmer",
       "deactivate": "Désactiver",
       "download-template": "Télécharger le template",
       "edit": "Modifier",
@@ -392,11 +393,37 @@
         "UNSET": "En attente"
       },
       "global-actions": {
+        "cancel": {
+          "button": "Annuler la certification",
+          "error-message": "Une erreur est survenue.",
+          "modal-message": "Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.",
+          "modal-title": "Confirmer l'annulation de la certification"
+        },
+        "reject": {
+          "button": "Rejeter la certification",
+          "error-message": "Une erreur est survenue.",
+          "modal-message": "Êtes-vous sûr·e de vouloir rejeter cette certification ? Cliquez sur confirmer pour poursuivre.",
+          "modal-title": "Confirmer le rejet de la certification",
+          "tooltip-published": "Vous ne pouvez pas rejeter une certification publiée. Merci de dépublier la session avant de rejeter cette certification."
+        },
         "rescoring": {
           "button": "Re-scorer la certification",
           "error-message": "Une erreur est survenue lors du rescoring de la certification.",
           "success-message": "La certification a bien été rescorée."
-        }
+        },
+        "uncancel": {
+          "button": "Désannuler la certification",
+          "error-message": "Une erreur est survenue.",
+          "modal-message": "Êtes-vous sûr·e de vouloir désannuler cette certification ? Cliquez sur confirmer pour poursuivre.",
+          "modal-title": "Confirmer la désannulation de la certification"
+        },
+        "unreject": {
+          "button": "Annuler le rejet",
+          "error-message": "Une erreur est survenue.",
+          "modal-message": "Êtes-vous sûr·e de vouloir annuler le rejet de cette certification ? Cliquez sur confirmer pour poursuivre.",
+          "modal-title": "Confirmer l'annulation du rejet de la certification"
+        },
+        "user-details-link": "Voir les détails de l'utilisateur"
       }
     },
     "complementary-certifications": {

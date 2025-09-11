@@ -1,6 +1,5 @@
 import { fireEvent, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { t } from 'ember-intl/test-support';
 import CertificationInformationGlobalActions from 'pix-admin/components/certifications/certification/informations/global-actions';
 import { assessmentResultStatus } from 'pix-admin/models/certification';
 import { module, test } from 'qunit';
@@ -60,114 +59,117 @@ module('Integration | Component | Certifications | Certification | Information |
       });
     });
 
-    module('when the certification is validated, not cancelled, not published and the session is finalized', function (hooks) {
-      let screen;
+    module(
+      'when the certification is validated, not cancelled, not published and the session is finalized',
+      function (hooks) {
+        let screen;
 
-      const modalTitle = "Confirmer l'annulation de la certification";
-      const modalMessage =
-        'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.';
+        const modalTitle = "Confirmer l'annulation de la certification";
+        const modalMessage =
+          'Êtes-vous sûr·e de vouloir annuler cette certification ? Cliquez sur confirmer pour poursuivre.';
 
-      hooks.beforeEach(async function () {
-        // given
-        const certification = store.createRecord('certification', {
-          id: 1,
-          userId: 1,
-          status: assessmentResultStatus.VALIDATED,
-          isPublished: false,
-          save: sinon.stub(),
-          reload: sinon.stub(),
-        });
-        const session = store.createRecord('session', {
-          finalizedAt: new Date(),
-        });
-
-        // when
-        screen = await render(
-          <template>
-            <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
-          </template>,
-        );
-      });
-
-      test('should display a cancel button', async function (assert) {
-        // then
-        assert.dom(screen.getByRole('button', { name: 'Annuler la certification' })).exists();
-      });
-
-      test('on cancel button click, should display a confirmation modal', async function (assert) {
-        // when
-        await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
-
-        await screen.findByRole('dialog');
-
-        // then
-        assert.dom(screen.getByText(modalTitle)).exists();
-        assert.dom(screen.getByText(modalMessage)).exists();
-        assert.dom(screen.getByRole('button', { name: 'Confirmer' })).exists();
-        assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
-      });
-
-      module('on modal confirmation', function () {
-        test('on success, should cancel the certification and close the modal', async function (assert) {
+        hooks.beforeEach(async function () {
           // given
-          const currentCertification = store.peekRecord('certification', 1);
-
-          // when
-          await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
-          await screen.findByRole('dialog');
-          await fireEvent.click(screen.getByRole('button', { name: 'Confirmer' }));
-          await waitForDialogClose();
-
-          // then
-          sinon.assert.calledWith(currentCertification.save, {
-            adapterOptions: { isCertificationCancel: true },
+          const certification = store.createRecord('certification', {
+            id: 1,
+            userId: 1,
+            status: assessmentResultStatus.VALIDATED,
+            isPublished: false,
+            save: sinon.stub(),
+            reload: sinon.stub(),
           });
-          assert.ok(currentCertification.reload.calledOnce);
-          assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
+          const session = store.createRecord('session', {
+            finalizedAt: new Date(),
+          });
+
+          // when
+          screen = await render(
+            <template>
+              <CertificationInformationGlobalActions @certification={{certification}} @session={{session}} />
+            </template>,
+          );
         });
 
-        test('on error, should display a notification and close the modal', async function (assert) {
-          // given
-          const notificationStub = sinon.stub();
-          class NotificationsStub extends Service {
-            sendErrorNotification = notificationStub;
-          }
-          this.owner.register('service:pixToast', NotificationsStub);
+        test('should display a cancel button', async function (assert) {
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Annuler la certification' })).exists();
+        });
 
+        test('on cancel button click, should display a confirmation modal', async function (assert) {
+          // when
+          await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
+
+          await screen.findByRole('dialog');
+
+          // then
+          assert.dom(screen.getByText(modalTitle)).exists();
+          assert.dom(screen.getByText(modalMessage)).exists();
+          assert.dom(screen.getByRole('button', { name: 'Confirmer' })).exists();
+          assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
+        });
+
+        module('on modal confirmation', function () {
+          test('on success, should cancel the certification and close the modal', async function (assert) {
+            // given
+            const currentCertification = store.peekRecord('certification', 1);
+
+            // when
+            await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
+            await screen.findByRole('dialog');
+            await fireEvent.click(screen.getByRole('button', { name: 'Confirmer' }));
+            await waitForDialogClose();
+
+            // then
+            sinon.assert.calledWith(currentCertification.save, {
+              adapterOptions: { isCertificationCancel: true },
+            });
+            assert.ok(currentCertification.reload.calledOnce);
+            assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
+          });
+
+          test('on error, should display a notification and close the modal', async function (assert) {
+            // given
+            const notificationStub = sinon.stub();
+            class NotificationsStub extends Service {
+              sendErrorNotification = notificationStub;
+            }
+            this.owner.register('service:pixToast', NotificationsStub);
+
+            const currentCertification = store.peekRecord('certification', 1);
+            currentCertification.save.rejects();
+
+            // when
+            await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
+            await screen.findByRole('dialog');
+            await fireEvent.click(screen.getByRole('button', { name: 'Confirmer' }));
+            await waitForDialogClose();
+
+            // then
+            sinon.assert.calledWith(notificationStub, { message: 'Une erreur est survenue.' });
+            assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
+          });
+        });
+
+        test('on modal cancellation, should close the modal', async function (assert) {
+          // given
           const currentCertification = store.peekRecord('certification', 1);
-          currentCertification.save.rejects();
 
           // when
           await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
+
           await screen.findByRole('dialog');
-          await fireEvent.click(screen.getByRole('button', { name: 'Confirmer' }));
+
+          await fireEvent.click(screen.getByRole('button', { name: 'Annuler' }));
+
           await waitForDialogClose();
 
           // then
-          sinon.assert.calledWith(notificationStub, { message: 'Une erreur est survenue.' });
-          assert.dom(screen.queryByRole('button', { name: 'Confirmer' })).doesNotExist();
+          assert.ok(currentCertification.save.notCalled);
+          assert.ok(currentCertification.reload.notCalled);
+          assert.dom(screen.queryByRole('button', { name: 'Annuler' })).doesNotExist();
         });
-      });
-
-      test('on modal cancellation, should close the modal', async function (assert) {
-        // given
-        const currentCertification = store.peekRecord('certification', 1);
-
-        // when
-        await fireEvent.click(screen.getByRole('button', { name: 'Annuler la certification' }));
-
-        await screen.findByRole('dialog');
-
-        await fireEvent.click(screen.getByRole('button', { name: 'Annuler' }));
-
-        await waitForDialogClose();
-
-        // then
-        assert.ok(currentCertification.save.notCalled);
-        assert.ok(currentCertification.reload.notCalled);
-        assert.dom(screen.queryByRole('button', { name: 'Annuler' })).doesNotExist();
-      });
-    });
+      },
+    );
   });
 
   module('uncancel button', function () {
@@ -595,9 +597,7 @@ module('Integration | Component | Certifications | Certification | Information |
         );
 
         // then
-        assert
-          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
-          .doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Re-scorer la certification' })).doesNotExist();
       });
     });
 
@@ -619,9 +619,7 @@ module('Integration | Component | Certifications | Certification | Information |
         );
 
         // then
-        assert
-          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
-          .doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Re-scorer la certification' })).doesNotExist();
       });
     });
 
@@ -642,9 +640,7 @@ module('Integration | Component | Certifications | Certification | Information |
         );
 
         // then
-        assert
-          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
-          .doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Re-scorer la certification' })).doesNotExist();
       });
     });
 
@@ -665,9 +661,7 @@ module('Integration | Component | Certifications | Certification | Information |
         );
 
         // then
-        assert
-          .dom(screen.queryByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
-          .doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: 'Re-scorer la certification' })).doesNotExist();
       });
     });
 
@@ -689,9 +683,7 @@ module('Integration | Component | Certifications | Certification | Information |
         );
 
         // then
-        assert
-          .dom(screen.getByRole('button', { name: t('components.certifications.global-actions.rescoring.button') }))
-          .exists();
+        assert.dom(screen.getByRole('button', { name: 'Re-scorer la certification' })).exists();
       });
     });
   });

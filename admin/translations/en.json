@@ -6,6 +6,7 @@
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
+      "confirm-title": "Please confirm",
       "deactivate": "Deactivate",
       "download-template": "Download template",
       "edit": "Edit",
@@ -392,11 +393,37 @@
         "UNSET": "Waiting"
       },
       "global-actions": {
+        "cancel": {
+          "button": "Cancel certification",
+          "error-message": "An error occurred.",
+          "modal-message": "Are you sure you want to cancel this certification? Click confirm to proceed.",
+          "modal-title": "Confirm certification cancellation"
+        },
+        "reject": {
+          "button": "Reject certification",
+          "error-message": "An error occurred.",
+          "modal-message": "Are you sure you want to reject this certification? Click confirm to proceed.",
+          "modal-title": "Confirm certification rejection",
+          "tooltip-published": "You cannot reject a published certification. Please unpublish the session before rejecting this certification."
+        },
         "rescoring": {
           "button": "Rescore certification",
           "error-message": "An error occurred during certification rescoring.",
           "success-message": "Certification has successfully been rescored."
-        }
+        },
+        "uncancel": {
+          "button": "Uncancel certification",
+          "error-message": "An error occurred.",
+          "modal-message": "Are you sure you want to uncancel this certification? Click confirm to proceed.",
+          "modal-title": "Confirm certification uncancellation"
+        },
+        "unreject": {
+          "button": "Unreject certification",
+          "error-message": "An error occurred.",
+          "modal-message": "Are you sure you want to unreject this certification? Click confirm to proceed.",
+          "modal-title": "Confirm certification unrejection"
+        },
+        "user-details-link": "See user details"
       }
     },
     "complementary-certifications": {
