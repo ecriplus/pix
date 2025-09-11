@@ -175,6 +175,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
               status: 'in_process',
               description: 'La session se déroule dans le jardin',
               'examiner-global-comment': '',
+              'created-at': new Date('2020-01-01'),
               'finalized-at': null,
               'results-sent-to-prescriber-at': null,
               'published-at': null,

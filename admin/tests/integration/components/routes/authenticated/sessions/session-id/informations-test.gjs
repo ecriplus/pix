@@ -20,7 +20,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
 
       // when
       const screen = await visit(`/sessions/${session.id}`);
-
       // then
       assert.strictEqual(currentURL(), `/sessions/${session.id}`);
 
@@ -31,11 +30,13 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
       assert.dom(screen.getByText(session.address)).exists();
       assert.dom(screen.getByText(session.room)).exists();
       assert.dom(screen.getByText(session.examiner)).exists();
-      assert.dom(screen.getByText(dayjs(session.date, 'YYYY-MM-DD').format('DD/MM/YYYY'))).exists();
-      assert.dom(screen.getByText(session.time)).exists();
+      assert
+        .dom(screen.getByText(`${dayjs(session.date, 'YYYY-MM-DD').format('DD/MM/YYYY')} à ${session.time}`))
+        .exists();
       assert.dom(screen.getByText(session.description)).exists();
       assert.dom(screen.getByText(session.accessCode)).exists();
       assert.dom(screen.getByText(statusToDisplayName[session.status])).exists();
+      assert.dom(screen.getByText(dayjs(session.createdAt, 'YYYY-MM-DD').format('DD/MM/YYYY'))).exists();
     });
   });
 
@@ -47,7 +48,6 @@ module('Integration | Component | routes/authenticated/sessions/session | inform
 
       // when
       const screen = await visit(`/sessions/${session.id}`);
-
       // then
       assert.dom(screen.queryByText('Commentaire global :')).doesNotExist();
       assert.dom(screen.queryByText('Nombre de signalement(s) impactant(s) non résolu(s) :')).doesNotExist();

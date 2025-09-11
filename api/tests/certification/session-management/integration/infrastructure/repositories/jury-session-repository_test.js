@@ -67,6 +67,7 @@ describe('Integration | Repository | JurySession', function () {
           examinerGlobalComment: '',
           hasIncident: true,
           hasJoiningIssue: true,
+          createdAt: new Date('2020-01-01'),
           finalizedAt: null,
           resultsSentToPrescriberAt: null,
           publishedAt: null,
