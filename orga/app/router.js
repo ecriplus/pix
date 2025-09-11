@@ -73,7 +73,10 @@ Router.map(function () {
         this.route('activity', { path: '/' });
         this.route('assessment-results', { path: '/resultats-evaluation' });
         this.route('profile-results', { path: '/profils' });
-        this.route('analysis', { path: '/analyse' });
+        this.route('analysis', { path: '/analyse' }, function () {
+          this.route('tubes', { path: '/sujets' });
+          this.route('competences');
+        });
         this.route('settings', { path: '/parametres' });
       });
     });

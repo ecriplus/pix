@@ -1,4 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -44,6 +45,17 @@ module('Acceptance | Campaign Analysis', function (hooks) {
         name: t('components.analysis-per-tube-or-competence.title'),
       }),
     );
+  });
+
+  test('it should scroll to details anchor when toggling display', async function (assert) {
+    // given
+    const screen = await visit('/campagnes/1/analyse');
+
+    // when
+    await click(screen.getByText(t('components.analysis-per-tube-or-competence.toggle.label-competences')));
+
+    // then
+    assert.strictEqual(window.location.hash, '#details', 'The page should scroll to the details anchor');
   });
 
   module('when organization uses "GAR" as identity provider for campaigns', function () {

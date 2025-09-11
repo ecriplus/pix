@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import Analysis from 'pix-orga/templates/authenticated/campaigns/campaign/analysis';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -17,6 +18,9 @@ module('Integration | Template | analysis', function (hooks) {
   module('display analysis', function () {
     test('it should display new page description', async function (assert) {
       // given
+      const router = this.owner.lookup('service:router');
+      sinon.stub(router, 'currentRouteName').value('');
+
       const screen = await render(<template><Analysis @model={{model}} /></template>);
 
       // then
