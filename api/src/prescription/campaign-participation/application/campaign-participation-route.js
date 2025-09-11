@@ -224,6 +224,9 @@ const register = async function (server) {
                 securityPreHandlers.checkAdminMemberHasRoleSupport,
               ])(request, h),
           },
+          {
+            method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
+          },
         ],
         validate: {
           params: Joi.object({
