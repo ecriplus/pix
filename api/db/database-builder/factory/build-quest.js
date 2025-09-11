@@ -9,6 +9,8 @@ const buildQuest = function ({
   id = databaseBuffer.getNextId(),
   code = null,
   name = 'Ma quête',
+  description = null,
+  illustration = null,
   organizationId = null,
   createdAt = new Date(),
   updatedAt,
@@ -25,6 +27,8 @@ const buildQuest = function ({
     id,
     code,
     name,
+    description,
+    illustration,
     organizationId,
     createdAt,
     updatedAt: updatedAt ?? createdAt,
@@ -49,11 +53,12 @@ const buildQuestForCombinedCourse = function ({
   code = 'COMBINIX1',
   name = 'Mon parcours combiné',
   organizationId,
+  description = 'Le but de ma quête',
+  illustration = 'images/illustration.svg',
   ...args
 } = {}) {
   organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
-
-  return buildQuest({ ...args, code, name, organizationId });
+  return buildQuest({ ...args, code, name, organizationId, description, illustration });
 };
 
 export { buildQuest, buildQuestForCombinedCourse };

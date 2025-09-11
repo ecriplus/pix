@@ -5,7 +5,10 @@ import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
 const getByCode = async ({ code }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quest = await knexConn('quests').select('id', 'organizationId', 'code', 'name').where('code', code).first();
+  const quest = await knexConn('quests')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+    .where('code', code)
+    .first();
   if (!quest) {
     throw new NotFoundError(`Le parcours combiné portant le code ${code} n'existe pas`);
   }
@@ -17,7 +20,7 @@ const getById = async ({ id }) => {
   const knexConn = DomainTransaction.getConnection();
 
   const quest = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
     .where('id', id)
     .whereNotNull('organizationId')
     .whereNotNull('code')
@@ -32,7 +35,7 @@ const getById = async ({ id }) => {
 const findByCampaignId = async ({ campaignId }) => {
   const knexConn = DomainTransaction.getConnection();
   const quests = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
     .whereNotNull('code')
     .whereJsonSupersetOf('successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
 

@@ -14,17 +14,21 @@ const schema = Joi.object({
   code: Joi.string().required(),
   organizationId: Joi.number().required(),
   name: Joi.string().required(),
+  description: Joi.string().allow(null),
+  illustration: Joi.string().allow(null),
 });
 export class CombinedCourse {
   #quest;
 
-  constructor({ id, code, organizationId, name } = {}, quest) {
+  constructor({ id, code, organizationId, name, description, illustration } = {}, quest) {
     this.id = id;
     this.code = code;
     this.organizationId = organizationId;
     this.name = name;
+    this.description = description;
+    this.illustration = illustration;
 
-    this.#validate({ id, code, organizationId, name });
+    this.#validate({ id, code, organizationId, name, description, illustration });
 
     this.#quest = quest;
   }
@@ -44,8 +48,8 @@ export class CombinedCourse {
 export class CombinedCourseDetails extends CombinedCourse {
   items = null;
 
-  constructor({ id, code, organizationId, name }, quest, participation) {
-    super({ id, code, organizationId, name }, quest);
+  constructor({ id, code, organizationId, name, description, illustration }, quest, participation) {
+    super({ id, code, organizationId, name, description, illustration }, quest);
     if (!participation) {
       this.status = CombinedCourseStatuses.NOT_STARTED;
     } else {

@@ -47,7 +47,15 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
     });
 
   combinedCourse =
-    combinedCourse ?? new CombinedCourse({ id: 1, code: 'COMBINIX1', organizationId: 1, name: 'Mon parcours' });
+    combinedCourse ??
+    new CombinedCourse({
+      id: 1,
+      code: 'COMBINIX1',
+      organizationId: 1,
+      name: 'Mon parcours',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      illustration: '/illustrations/image.svg',
+    });
 
   const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
   const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest);

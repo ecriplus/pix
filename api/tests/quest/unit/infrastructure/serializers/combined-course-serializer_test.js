@@ -19,6 +19,8 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           code: 'COMBINIX1',
           'organization-id': 1,
           status: CombinedCourseStatuses.NOT_STARTED,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          illustration: '/illustrations/image.svg',
         },
         type: 'combined-courses',
         id: '1',

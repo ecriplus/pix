@@ -39,7 +39,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // given
       const id = 1;
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const quest = databaseBuilder.factory.buildQuest({ id: 1, code: 'COMBINIX1', organizationId });
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse({ id: 1, code: 'COMBINIX1', organizationId });
       await databaseBuilder.commit();
 
       // when
@@ -72,10 +72,14 @@ describe('Quest | Integration | Repository | combined-course', function () {
       campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
       const code = 'ABCDE1234';
       const name = 'Mon parcours Combiné';
+      const description = 'Le but de ma quête';
+      const illustration = 'images/illustration.svg';
       quest = databaseBuilder.factory.buildQuestForCombinedCourse({
         code,
         name,
         organizationId,
+        description,
+        illustration,
         successRequirements: [
           {
             requirement_type: 'campaignParticipations',
