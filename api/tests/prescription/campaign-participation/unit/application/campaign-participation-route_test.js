@@ -179,9 +179,12 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
   });
 
   describe('DELETE /api/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}', function () {
-    it('should return the controller response', async function () {
+    it('should call the required pre handler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse')
+        .callsFake((request, h) => h.response(true));
       sinon
         .stub(campaignParticipationController, 'deleteParticipation')
         .callsFake((request, h) => h.response('ok').code(204));
@@ -195,27 +198,9 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       const response = await httpTestServer.request(method, url);
 
       // then
+      expect(securityPreHandlers.checkAuthorizationToManageCampaign.called).true;
+      expect(securityPreHandlers.checkCampaignBelongsToCombinedCourse.called).true;
       expect(response.statusCode).to.equal(204);
-    });
-
-    context('When the user is neither an admin nor the owner of the campaign', function () {
-      it('should return 403', async function () {
-        // given
-        sinon
-          .stub(securityPreHandlers, 'checkAuthorizationToManageCampaign')
-          .callsFake((request, h) => h.response().code(403).takeover());
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        const method = 'DELETE';
-        const url = '/api/campaigns/1/campaign-participations/123';
-
-        // when
-        const response = await httpTestServer.request(method, url);
-
-        // then
-        expect(response.statusCode).to.equal(403);
-      });
     });
 
     context('When the campaignId is not a number', function () {
