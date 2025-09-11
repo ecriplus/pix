@@ -2009,7 +2009,7 @@
       "error": "Oeps, er is een fout gemaakt!",
       "hero": {
         "acquired-badges-title": "Gewonnen prijzen",
-        "bravo": "{name} Goed gedaan!",
+        "thanks": "Bedankt {name} voor je deelname!",
         "explanations": {
           "improve": "Als je je score wilt verbeteren, kun je bepaalde vragen opnieuw proberen.",
           "send-results": "Stuur je resultaten naar de cursusorganisator en ga verder met de aanbevolen cursussen.",

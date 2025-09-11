@@ -2019,7 +2019,6 @@
       "error": "Oups, une erreur est survenue !",
       "hero": {
         "acquired-badges-title": "Récompenses obtenues",
-        "bravo": "Bravo {name} !",
         "explanations": {
           "improve": "Si vous voulez améliorer votre score, vous pouvez retenter certaines questions.",
           "send-results": "Envoyez vos résultats à l’organisateur du parcours et continuez à progresser avec les formations recommandées.",
@@ -2036,7 +2035,8 @@
           "title": "Améliorez vos résultats"
         },
         "see-trainings": "Voir les formations",
-        "shared-message": "Vos résultats ont été envoyés le {date} à {time}."
+        "shared-message": "Vos résultats ont été envoyés le {date} à {time}.",
+        "thanks": "Merci {name} pour votre participation !"
       },
       "improve": {
         "description": "Vous pouvez retenter certaines questions",

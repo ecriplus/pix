@@ -2005,7 +2005,7 @@
       "error": "¡Uy, se ha producido un error!",
       "hero": {
         "acquired-badges-title": "Premios obtenidos",
-        "bravo": "¡ {name} bien hecho!",
+        "thanks": "¡Gracias, {name}, por participar!",
         "explanations": {
           "improve": "Si quieres mejorar tu puntuación, puedes volver a intentar algunas preguntas.",
           "send-results": "Envíe sus resultados al organizador del curso y siga avanzando con los cursos recomendados.",
