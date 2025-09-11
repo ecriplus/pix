@@ -1,7 +1,7 @@
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
-import { createTempFile, expect, removeTempFile, sinon } from '../../../../test-helper.js';
+import { createTempFile, databaseBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-batch', function () {
   let filePath;
@@ -40,6 +40,46 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
     });
   });
 
+  it('should not delete the passed quests in file if they correspond to a combined course', async function () {
+    // given
+    const id = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    await databaseBuilder.commit();
+
+    filePath = await createTempFile(
+      'test.csv',
+      `Quest ID;Json configuration for quest;deleteQuest
+    ${id};{"rewardType":"","rewardId":,"eligibilityRequirements":[],"successRequirements":[]};OUI
+
+    `,
+    );
+    const spyDelete = sinon.spy(repositories.questRepository, 'deleteByIds');
+
+    // when
+    await usecases.createOrUpdateQuestsInBatch({ filePath });
+
+    // then
+    expect(spyDelete).to.not.have.been.called;
+  });
+  it('should not update the passed quests in file if they correspond to a combined course', async function () {
+    // given
+    const id = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    await databaseBuilder.commit();
+
+    filePath = await createTempFile(
+      'test.csv',
+      `Quest ID;Json configuration for quest;deleteQuest
+    ${id};{"rewardType":"","rewardId":,"eligibilityRequirements":[],"successRequirements":[]};NON
+
+    `,
+    );
+    const saveDelete = sinon.spy(repositories.questRepository, 'saveInBatch');
+
+    // when
+    await usecases.createOrUpdateQuestsInBatch({ filePath });
+
+    // then
+    expect(saveDelete).to.not.have.been.called;
+  });
   it('should delete the passed quests in file only when there is a "Oui" in the column, else it will pass it as to update', async function () {
     // given
     filePath = await createTempFile(

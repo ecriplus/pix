@@ -34,6 +34,35 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
+  describe('#getById', function () {
+    it('should return a quest if quest id exists', async function () {
+      // given
+      const id = 1;
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization();
+      const quest = databaseBuilder.factory.buildQuest({ id: 1, code: 'COMBINIX1', organizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourseResult = await combinedCourseRepository.getById({ id });
+
+      // then
+      expect(combinedCourseResult).to.be.an.instanceof(CombinedCourse);
+      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(quest));
+    });
+
+    it('should throw NotFoundError if quest does not exist', async function () {
+      // given
+      const id = 1;
+
+      // when
+      const error = await catchErr(combinedCourseRepository.getById)({ id });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error.message).to.equal(`Le parcours combiné pour l'id ${id} n'existe pas`);
+    });
+  });
+
   describe('#getByCampaignId', function () {
     let organizationId, quest, campaignId;
 

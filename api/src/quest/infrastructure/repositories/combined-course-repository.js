@@ -13,6 +13,22 @@ const getByCode = async ({ code }) => {
   return new CombinedCourse(quest);
 };
 
+const getById = async ({ id }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const quest = await knexConn('quests')
+    .select('id', 'organizationId', 'code', 'name')
+    .where('id', id)
+    .whereNotNull('organizationId')
+    .whereNotNull('code')
+    .first();
+  if (!quest) {
+    throw new NotFoundError(`Le parcours combiné pour l'id ${id} n'existe pas`);
+  }
+
+  return new CombinedCourse(quest);
+};
+
 const findByCampaignId = async ({ campaignId }) => {
   const knexConn = DomainTransaction.getConnection();
   const quests = await knexConn('quests')
@@ -42,4 +58,4 @@ const _toDTO = (combinedCourse) => {
   };
 };
 
-export { findByCampaignId, getByCode, saveInBatch };
+export { findByCampaignId, getByCode, getById, saveInBatch };
