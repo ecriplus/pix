@@ -14,6 +14,15 @@
 
   &__proposals {
     margin: var(--pix-spacing-4x) 0;
+
+    @media (not (prefers-reduced-motion: reduce)) {
+      .pix-label-wrapped--state-success,
+      .pix-label-wrapped--state-error {
+        transition:
+          border 0.25s 0.25s,
+          color 0.25s 0.25s;
+      }
+    }
   }
 
   &__required-field-missing {
