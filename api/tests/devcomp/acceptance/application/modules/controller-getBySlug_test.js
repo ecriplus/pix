@@ -1,6 +1,6 @@
 import { config } from '../../../../../src/shared/config.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { createServer, expect } from '../../../../test-helper.js';
+import { createServer, expect, nock } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | modules-controller-getBySlug', function () {
   let server;
@@ -12,6 +12,7 @@ describe('Acceptance | Controller | modules-controller-getBySlug', function () {
   describe('GET /api/modules/:slug', function () {
     context('when module exists', function () {
       it('should return module', async function () {
+        nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
         const options = {
           method: 'GET',
           url: `/api/modules/bien-ecrire-son-adresse-mail`,
@@ -24,6 +25,7 @@ describe('Acceptance | Controller | modules-controller-getBySlug', function () {
       });
 
       it('should return module with redirectionUrl', async function () {
+        nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
         const expectedUrl = 'https://app.pix.fr/parcours/COMBINIX1';
         const encryptedRedirectionUrl = await cryptoService.encrypt(expectedUrl, config.module.secret);
         const options = {

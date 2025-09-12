@@ -389,6 +389,7 @@ function getComponents() {
         alternativeText: 'alternativeText',
         licence: 'mon copyright',
         legend: 'ma légende',
+        infos: { width: 400, height: 200 },
       }),
     }),
     new ComponentElement({
@@ -594,6 +595,10 @@ function getAttributesComponents() {
         url: 'https://assets.pix.org/modules/placeholder-details.svg',
         legend: 'ma légende',
         licence: 'mon copyright',
+        infos: {
+          width: 400,
+          height: 200,
+        },
       },
     },
     {

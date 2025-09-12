@@ -19,7 +19,7 @@ import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factories/module-factory.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 import { validateFlashcards } from '../../../shared/validateFlashcards.js';
 
 describe('Integration | Devcomp | Infrastructure | Factories | Module ', function () {
@@ -200,6 +200,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
     it('should instantiate a Module with a grain containing components', async function () {
       // given
+      nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
       const version = Symbol('version');
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -405,6 +406,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
       it('should instantiate a Module with a ComponentElement which contains an Image Element', async function () {
         // given
+        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1287,6 +1289,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
     describe('With ComponentStepper', function () {
       it('should instantiate a Module with a ComponentStepper which contains an Image Element', async function () {
         // given
+        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',

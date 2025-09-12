@@ -2,11 +2,15 @@ import moduleDatasource from '../../../src/devcomp/infrastructure/datasources/le
 import { ElementForVerificationFactory } from '../../../src/devcomp/infrastructure/factories/element-for-verification-factory.js';
 import { ModuleFactory } from '../../../src/devcomp/infrastructure/factories/module-factory.js';
 import * as elementRepository from '../../../src/devcomp/infrastructure/repositories/element-repository.js';
-import { expect } from '../../test-helper.js';
+import { expect, nock } from '../../test-helper.js';
 
 const modules = await moduleDatasource.list();
 
 describe('Acceptance | Modules', function () {
+  beforeEach(function () {
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
+  });
+
   describe('Verify modules', function () {
     modules.forEach((moduleData) => {
       it(`module ${moduleData.slug} should respect the domain`, async function () {

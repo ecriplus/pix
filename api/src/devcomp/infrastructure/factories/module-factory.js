@@ -1,3 +1,4 @@
+import { getAssetInfos } from '../../../shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { ModuleInstantiationError } from '../../domain/errors.js';
 import { BlockInput } from '../../domain/models/block/BlockInput.js';
@@ -124,7 +125,7 @@ export class ModuleFactory {
       case 'expand':
         return ModuleFactory.#buildExpand(element);
       case 'image':
-        return ModuleFactory.#buildImage(element);
+        return await ModuleFactory.#buildImage(element);
       case 'separator':
         return ModuleFactory.#buildSeparator(element);
       case 'text':
@@ -198,7 +199,7 @@ export class ModuleFactory {
     });
   }
 
-  static #buildImage(element) {
+  static async #buildImage(element) {
     return new Image({
       id: element.id,
       url: element.url,
@@ -206,6 +207,7 @@ export class ModuleFactory {
       alternativeText: element.alternativeText,
       legend: element.legend,
       licence: element.licence,
+      infos: await getAssetInfos(element.url),
     });
   }
 

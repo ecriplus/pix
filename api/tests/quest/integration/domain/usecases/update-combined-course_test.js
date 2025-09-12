@@ -4,7 +4,7 @@ import {
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | update-combined-course', function () {
   let clock;
@@ -18,6 +18,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     clock.restore();
   });
   it('should update combined course if it is completed', async function () {
+    nock('https://assets.pix.org').head('/modules/bac-a-sable/ordi-spatial.svg').reply(200, {});
     const code = 'SOMETHING';
     const moduleId = '6282925d-4775-4bca-b513-4c3009ec5886';
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();

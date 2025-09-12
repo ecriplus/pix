@@ -1,6 +1,6 @@
 import { RecommendedModule } from '../../../../../src/devcomp/domain/read-models/RecommendedModule.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect, nock } from '../../../../test-helper.js';
 
 describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCampaignParticipationIds', function () {
   it('it returns recommended modules for given participation ids', async function () {
@@ -43,6 +43,7 @@ describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCa
   });
   it('ignores module when its slug does not pass regex', async function () {
     // given
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
     const { id: campaignParticipationId1, userId } = databaseBuilder.factory.buildCampaignParticipation();
     const { id: campaignParticipationId2 } = databaseBuilder.factory.buildCampaignParticipation({ userId });
 
