@@ -54,7 +54,7 @@ export class ModuleFactory {
                   .map((component) => {
                     switch (component.type) {
                       case 'element': {
-                        const element = ModuleFactory.#buildElement(component.element, moduleData.isBeta);
+                        const element = ModuleFactory.#buildElement(component.element);
                         if (element) {
                           return new ComponentElement({ element });
                         } else {
@@ -67,7 +67,7 @@ export class ModuleFactory {
                             return new Step({
                               elements: step.elements
                                 .map((element) => {
-                                  const domainElement = ModuleFactory.#buildElement(element, moduleData.isBeta);
+                                  const domainElement = ModuleFactory.#buildElement(element);
                                   if (domainElement) {
                                     return domainElement;
                                   } else {
@@ -97,7 +97,7 @@ export class ModuleFactory {
     }
   }
 
-  static #buildElement(element, isBeta) {
+  static #buildElement(element) {
     switch (element.type) {
       case 'custom':
         return ModuleFactory.#buildCustom(element);
@@ -110,7 +110,7 @@ export class ModuleFactory {
       case 'expand':
         return ModuleFactory.#buildExpand(element);
       case 'image':
-        return ModuleFactory.#buildImage(element, isBeta);
+        return ModuleFactory.#buildImage(element);
       case 'separator':
         return ModuleFactory.#buildSeparator(element);
       case 'text':
@@ -184,7 +184,7 @@ export class ModuleFactory {
     });
   }
 
-  static #buildImage(element, isBeta) {
+  static #buildImage(element) {
     return new Image({
       id: element.id,
       url: element.url,
@@ -192,7 +192,6 @@ export class ModuleFactory {
       alternativeText: element.alternativeText,
       legend: element.legend,
       licence: element.licence,
-      isBeta,
     });
   }
 
