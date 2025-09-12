@@ -11,7 +11,7 @@
 
   &__instruction {
     padding-bottom: var(--pix-spacing-6x);
-    font-weight: var(--pix-font-medium);
+    font-weight: var(--pix-font-bold);
   }
 
   &__recto-verso {
@@ -58,7 +58,7 @@
 
     &__question {
       color: var(--pix-neutral-900);
-      font-weight: var(--pix-font-medium);
+      font-weight: var(--pix-font-bold);
     }
 
     &__answer {
@@ -73,7 +73,9 @@
         font-weight: var(--pix-font-bold);
         line-height: 24px;
         border-radius: var(--modulix-radius-s);
-        transition: color 400ms, box-shadow 400ms;
+        transition:
+          color 400ms,
+          box-shadow 400ms;
 
         &--no {
           color: var(--pix-error-500);
