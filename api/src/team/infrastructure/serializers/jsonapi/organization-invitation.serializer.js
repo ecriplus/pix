@@ -4,13 +4,7 @@ const { Serializer, Deserializer } = jsonapiSerializer;
 
 const serialize = function (invitations) {
   return new Serializer('organization-invitations', {
-    transform: (invitations) => {
-      return {
-        ...invitations,
-        lang: invitations.locale,
-      };
-    },
-    attributes: ['organizationId', 'organizationName', 'email', 'status', 'updatedAt', 'role', 'lang'],
+    attributes: ['organizationId', 'organizationName', 'email', 'status', 'updatedAt', 'role', 'locale'],
   }).serialize(invitations);
 };
 
@@ -18,7 +12,7 @@ const deserializeForCreateOrganizationInvitationAndSendEmail = function (payload
   return new Deserializer().deserialize(payload).then((record) => {
     return {
       role: record.role,
-      lang: record.lang,
+      locale: record.locale,
       email: record.email?.trim().toLowerCase(),
     };
   });

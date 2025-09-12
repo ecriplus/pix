@@ -114,7 +114,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
           type: 'organization-invitations',
           attributes: {
             email: 'user1@organization.org',
-            lang: 'fr',
+            locale: 'fr',
             role: Membership.roles.ADMIN,
           },
         },

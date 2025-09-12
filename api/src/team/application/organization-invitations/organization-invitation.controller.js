@@ -118,7 +118,7 @@ const resendInvitation = async function (request, h) {
  * @param dependencies
  * @returns {Promise<any>}
  */
-const sendInvitationByLangAndRole = async function (request, h, dependencies = { organizationInvitationSerializer }) {
+const sendInvitationByLocaleAndRole = async function (request, h, dependencies = { organizationInvitationSerializer }) {
   const organizationId = request.params.id;
   const invitationInformation =
     await dependencies.organizationInvitationSerializer.deserializeForCreateOrganizationInvitationAndSendEmail(
@@ -128,7 +128,7 @@ const sendInvitationByLangAndRole = async function (request, h, dependencies = {
   const organizationInvitation = await usecases.createOrganizationInvitationByAdmin({
     organizationId,
     email: invitationInformation.email,
-    locale: invitationInformation.lang,
+    locale: invitationInformation.locale,
     role: invitationInformation.role,
   });
   return h.response(dependencies.organizationInvitationSerializer.serialize(organizationInvitation)).created();
@@ -142,5 +142,5 @@ export const organizationInvitationController = {
   resendInvitation,
   sendInvitations,
   sendScoInvitation,
-  sendInvitationByLangAndRole,
+  sendInvitationByLocaleAndRole,
 };

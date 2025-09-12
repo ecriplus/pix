@@ -52,7 +52,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
       });
       this.server.create('organization-invitation', {
         email: 'kabuki@example.net',
-        lang: 'fr',
+        locale: 'fr',
         organization,
       });
 
@@ -78,7 +78,7 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
         const organizationInvitation = this.server.create('organization-invitation', {
           id: 10,
           email: 'kabuki@example.net',
-          lang: 'fr',
+          locale: 'fr',
           updatedAt,
           organization,
         });

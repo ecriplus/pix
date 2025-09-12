@@ -98,7 +98,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
       // given
       sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
       sinon
-        .stub(organizationInvitationController, 'sendInvitationByLangAndRole')
+        .stub(organizationInvitationController, 'sendInvitationByLocaleAndRole')
         .callsFake((request, h) => h.response().created());
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(teamRoutes);
@@ -108,7 +108,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitations',
           attributes: {
             email: 'user1@organization.org',
-            lang: 'fr',
+            locale: 'fr',
           },
         },
       };
@@ -130,7 +130,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitations',
           attributes: {
             email: '',
-            lang: 'fr',
+            locale: 'fr',
           },
         },
       };
@@ -152,7 +152,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitations',
           attributes: {
             email: 'azerty',
-            lang: 'fr',
+            locale: 'fr',
           },
         },
       };
@@ -164,7 +164,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
       expect(response.statusCode).to.equal(400);
     });
 
-    it('should reject request with HTTP code 400, when lang is unknown', async function () {
+    it('should reject request with HTTP code 400, when locale is unknown', async function () {
       // given
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(teamRoutes);
@@ -174,7 +174,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitations',
           attributes: {
             email: 'user1@organization.org',
-            lang: 'pt',
+            locale: 'pt',
           },
         },
       };
@@ -207,7 +207,7 @@ describe('Integration | Team | Application | Route | Admin | organization-invita
           type: 'organization-invitations',
           attributes: {
             email: 'user1@organization.org',
-            lang: 'fr',
+            locale: 'fr',
           },
         },
       };

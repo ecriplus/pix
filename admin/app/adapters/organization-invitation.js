@@ -29,7 +29,7 @@ export default class OrganizationInvitation extends ApplicationAdapter {
     if (query.organizationId) {
       const url = `${this.host}/${this.namespace}/organizations/${query.organizationId}/invitations`;
       return this.ajax(url, 'POST', {
-        data: { data: { attributes: { email: query.email, lang: query.lang, role: query.role } } },
+        data: { data: { attributes: { email: query.email, locale: query.locale, role: query.role } } },
       });
     }
 

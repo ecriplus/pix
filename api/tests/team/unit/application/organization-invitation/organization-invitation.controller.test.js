@@ -228,15 +228,15 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
     });
   });
 
-  describe('#sendInvitationByLangAndRole', function () {
-    it('should call the usecase to create invitation with organizationId, email, role and lang', async function () {
+  describe('#sendInvitationByLocaleAndRole', function () {
+    it('should call the usecase to create invitation with organizationId, email, role and locale', async function () {
       //given
       const userId = 1;
       const invitation = domainBuilder.buildOrganizationInvitation();
 
       const organizationId = invitation.organizationId;
       const email = invitation.email;
-      const lang = 'en';
+      const locale = 'en';
       const role = Membership.roles.ADMIN;
       const serializedInvitation = Symbol();
 
@@ -248,7 +248,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
             type: 'organization-invitations',
             attributes: {
               email: invitation.email,
-              lang,
+              locale,
               role,
             },
           },
@@ -261,7 +261,7 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
       };
       organizationInvitationSerializerStub.deserializeForCreateOrganizationInvitationAndSendEmail
         .withArgs(request.payload)
-        .returns({ lang, role, email });
+        .returns({ locale, role, email });
 
       organizationInvitationSerializerStub.serialize.withArgs(invitation).returns(serializedInvitation);
       const dependencies = {
@@ -273,13 +273,17 @@ describe('Unit | Team | Application | Controller | organization-invitation', fun
         .withArgs({
           organizationId,
           email: email,
-          locale: lang,
+          locale,
           role,
         })
         .resolves(invitation);
 
       // when
-      const response = await organizationInvitationController.sendInvitationByLangAndRole(request, hFake, dependencies);
+      const response = await organizationInvitationController.sendInvitationByLocaleAndRole(
+        request,
+        hFake,
+        dependencies,
+      );
 
       // then
       expect(response.statusCode).to.be.equal(201);

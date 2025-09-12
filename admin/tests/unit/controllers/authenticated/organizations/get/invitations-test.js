@@ -22,17 +22,17 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.model = { organization: { id: 1 } };
 
       controller.userEmailToInvite = 'test@example.net';
-      const lang = 'en';
+      const locale = 'en';
       const role = 'MEMBER';
 
       // when
-      controller.createOrganizationInvitation(lang, role);
+      controller.createOrganizationInvitation(locale, role);
 
       // then
       assert.ok(
         queryRecordStub.calledWith('organization-invitation', {
           email: 'test@example.net',
-          lang,
+          locale,
           role,
           organizationId: 1,
         }),
@@ -103,7 +103,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       const queryRecordStub = sinon.stub();
       store.queryRecord = queryRecordStub;
       controller.model = { organization: { id: 1 } };
-      const organizationInvitation = { email: 'test@example.net', lang: 'en', role: 'MEMBER' };
+      const organizationInvitation = { email: 'test@example.net', locale: 'en', role: 'MEMBER' };
 
       // when
       controller.sendNewInvitation(organizationInvitation);
@@ -131,7 +131,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       const customErrors = Symbol('custom errors');
       controller.CUSTOM_ERROR_MESSAGES = customErrors;
       controller.model = { organization: { id: 1 } };
-      const organizationInvitation = { email: 'test@example.net', lang: 'en', role: 'MEMBER' };
+      const organizationInvitation = { email: 'test@example.net', locale: 'en', role: 'MEMBER' };
 
       // when
       await controller.sendNewInvitation(organizationInvitation);

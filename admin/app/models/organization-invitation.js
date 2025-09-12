@@ -7,7 +7,7 @@ export default class OrganizationInvitation extends Model {
   @attr status;
   @attr createdAt;
   @attr organizationName;
-  @attr lang;
+  @attr locale;
   @attr role;
   @attr('date') updatedAt;
 

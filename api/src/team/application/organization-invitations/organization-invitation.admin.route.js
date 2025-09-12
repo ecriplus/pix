@@ -78,7 +78,7 @@ export const organizationInvitationAdminRoutes = [
           assign: 'hasAuthorizationToAccessAdminScope',
         },
       ],
-      handler: (request, h) => organizationInvitationController.sendInvitationByLangAndRole(request, h),
+      handler: (request, h) => organizationInvitationController.sendInvitationByLocaleAndRole(request, h),
       validate: {
         params: Joi.object({
           id: identifiersType.organizationId,
@@ -90,7 +90,7 @@ export const organizationInvitationAdminRoutes = [
           data: {
             attributes: {
               email: Joi.string().email().required(),
-              lang: Joi.string().valid('fr-fr', 'fr-FR', 'fr-BE', 'fr', 'nl', 'nl-BE', 'en'),
+              locale: Joi.string().valid('fr-fr', 'fr-FR', 'fr-BE', 'fr', 'nl', 'nl-BE', 'en'),
               role: Joi.string().valid('ADMIN', 'MEMBER').allow(null),
             },
           },
