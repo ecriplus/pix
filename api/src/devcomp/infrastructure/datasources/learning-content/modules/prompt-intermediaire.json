@@ -174,85 +174,78 @@
           "title": "Tester différents tons",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
+              "type": "element",
+              "element": {
+                "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
+                "type": "custom",
+                "tagName": "calcul-impact",
+                "props": {
+                  "speed": 0,
+                  "messages": [
                     {
-                      "id": "cb4a2c6a-a637-46bf-973a-f899a4b75a8b",
-                      "type": "custom",
-                      "tagName": "llm-prompt-select",
-                      "props": {
-                        "speed": 0,
-                        "messages": [
-                          {
-                            "direction": "outbound",
-                            "content": "Écris un message de relance pour participer à un tournoi de volley"
-                          },
-                          {
-                            "direction": "inbound",
-                            "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
-                          }
-                        ],
-                        "prompts": [
-                          {
-                            "prompt": "adopte un ton festif",
-                            "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
-                          },
-                          {
-                            "prompt": "adopte un ton sérieux",
-                            "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
-                          },
-                          {
-                            "prompt": "adopte un ton drôle",
-                            "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
-                          }
-                        ]
-                      }
+                      "direction": "outbound",
+                      "content": "Écris un message de relance pour participer à un tournoi de volley"
+                    },
+                    {
+                      "direction": "inbound",
+                      "content": "Salut à tous,<br> Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! <br> On compte sur vous pour former des équipes et venir passer un super moment sportif et convivial."
                     }
-                  ]
-                },
-                {
-                  "elements": [
+                  ],
+                  "prompts": [
                     {
-                      "id": "cc04a60d-ee44-4f09-b999-e11e908121fd",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?&nbsp;</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>celui avec un ton festif</p>",
-                          "feedback": {
-                            "diagnosis": "<p><strong>Un choix sympa !</strong>&nbsp; Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>celui avec un ton sérieux.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>celui avec un ton drôle.</p>",
-                          "feedback": {
-                            "diagnosis": "<p><strong>Un choix original !</strong> Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>aucun ne me plaît.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: enfantin, ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
+                      "prompt": "adopte un ton festif",
+                      "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
+                    },
+                    {
+                      "prompt": "adopte un ton sérieux",
+                      "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                    },
+                    {
+                      "prompt": "adopte un ton drôle",
+                      "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
                     }
                   ]
                 }
-              ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
+                "type": "qcu-discovery",
+                "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>celui avec un ton festif</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Un choix sympa !&nbsp; Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>celui avec un ton sérieux.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Un choix formel ! </strong>Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>celui avec un ton drôle.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Un choix original ! </strong>Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>aucun ne me plaît.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Pas de souci ! </strong>Il existe beaucoup d'autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
             }
           ]
         },
