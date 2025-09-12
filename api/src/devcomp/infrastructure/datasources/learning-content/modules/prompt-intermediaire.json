@@ -178,7 +178,7 @@
               "element": {
                 "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
                 "type": "custom",
-                "tagName": "calcul-impact",
+                "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
                   "messages": [
