@@ -857,6 +857,102 @@ describe('Acceptance | API | Campaign Participations', function () {
       const participationIds = response.result.data.map(({ id }) => Number(id));
       expect(participationIds).to.deep.equals([sharableCampaignParticipation.id, startedCampaignParticipation.id]);
     });
+
+    it('should not return participation related to combined course', async function () {
+      // given
+      sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
+
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        name: 'Combinix',
+        rewardType: null,
+        rewardId: null,
+        code: 'COMBINIX1',
+        organizationId: campaignInCombinedCourse.organizationId,
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignInCombinedCourse.id,
+                comparison: 'equal',
+              },
+              status: {
+                data: 'SHARED',
+                comparison: 'equal',
+              },
+            },
+          },
+          {
+            requirement_type: 'passages',
+            comparison: 'all',
+            data: {
+              moduleId: {
+                data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+                comparison: 'equal',
+              },
+              isTerminated: {
+                data: true,
+                comparison: 'equal',
+              },
+            },
+          },
+          {
+            requirement_type: 'passages',
+            comparison: 'all',
+            data: {
+              moduleId: {
+                data: 'f32a2238-4f65-4698-b486-15d51935d335',
+                comparison: 'equal',
+              },
+              isTerminated: {
+                data: true,
+                comparison: 'equal',
+              },
+            },
+          },
+          {
+            requirement_type: 'passages',
+            comparison: 'all',
+            data: {
+              moduleId: {
+                data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
+                comparison: 'equal',
+              },
+              isTerminated: {
+                data: true,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      databaseBuilder.factory.campaignParticipationOverviewFactory.build({
+        userId,
+        campaignId: campaignInCombinedCourse.id,
+      });
+      const sharableCampaignParticipation = databaseBuilder.factory.campaignParticipationOverviewFactory.buildOnGoing({
+        userId,
+        campaignSkills: ['recSkillId1'],
+      });
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'GET',
+        url: `/api/users/${userId}/campaign-participation-overviews?filter[states][]=ONGOING`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const participationIds = response.result.data.map(({ id }) => Number(id));
+      expect(participationIds).to.deep.equals([sharableCampaignParticipation.id]);
+    });
   });
 
   describe('GET /users/{userId}/anonymised-campaign-assessments', function () {
