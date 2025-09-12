@@ -30,7 +30,7 @@
               "element": {
                 "id": "3253ef34-0f94-4d65-aa02-a710b0969020",
                 "type": "text",
-                "content": "<p>Voici&nbsp; la discussion de Nathan avec son amie, Asma&nbsp;:</p>"
+                "content": "<p>Voici la discussion de Nathan avec son amie, Asma&nbsp;:</p>"
               }
             },
             {
@@ -440,7 +440,7 @@
                     "id": "1",
                     "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                      "diagnosis": "<p>Eh non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                     }
                   },
                   {
@@ -454,7 +454,7 @@
                     "id": "3",
                     "content": "<p>Le logiciel ne compte pas la victoire de 2025 car il était pour l’autre finaliste, Jannik Sinner.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                      "diagnosis": "<p>Eh non, le logiciel d'IA générative n'a pas de préférence pour un joueur plutôt qu'un autre. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                     }
                   }
                 ],
@@ -552,14 +552,14 @@
                     "id": "1",
                     "content": "<p>ChatGPT 3 n’était pas encore disponible dans ces 4 pays, il ne les a pas comptés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
+                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>En 2023, il n’y avait aucun pays commençant par la lettre V.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
+                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. Ces mises à jour permettent de corriger des erreurs.</p>"
                     }
                   },
                   {
@@ -640,14 +640,14 @@
                           "id": "1",
                           "content": "<p>bon réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non, c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
+                            "diagnosis": "<p>Eh non, c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>mauvais réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et oui, c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
+                            "diagnosis": "<p>Eh oui, c'est un mauvais réflexe ! Il faut toujours lire l’ensemble des réponses données par un logiciel d’IA générative.</p>"
                           }
                         }
                       ],
@@ -666,14 +666,14 @@
                           "id": "1",
                           "content": "<p>bon réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et oui, c'est un bon réflexe ! Poursuivre la discussion avec l’IA permet parfois d’avoir une réponse plus claire ou même une correction.</p>"
+                            "diagnosis": "<p>Eh oui, c'est un bon réflexe ! Poursuivre la discussion avec l’IA permet parfois d’avoir une réponse plus claire ou même une correction.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>mauvais réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non, c'est un bon réflexe ! Poursuivre la discussion avec l’IA permet parfois d’avoir une réponse plus claire ou même une correction.</p>"
+                            "diagnosis": "<p>Eh non, c'est un bon réflexe ! Poursuivre la discussion avec l’IA permet parfois d’avoir une réponse plus claire ou même une correction.</p>"
                           }
                         }
                       ],
@@ -692,14 +692,14 @@
                           "id": "1",
                           "content": "<p>bon réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et oui, c'est un bon réflexe ! Dans tous les cas, vérifier et croiser les sources permet d’éviter de relayer une erreur ou une fausse information.</p>"
+                            "diagnosis": "<p>Eh oui, c'est un bon réflexe ! Dans tous les cas, vérifier et croiser les sources permet d’éviter de relayer une erreur ou une fausse information.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>mauvais réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non, c'est bon réflexe ! Dans tous les cas, vérifier et croiser les sources permet d’éviter de relayer une erreur ou une fausse information.</p>"
+                            "diagnosis": "<p>Eh non, c'est bon réflexe ! Dans tous les cas, vérifier et croiser les sources permet d’éviter de relayer une erreur ou une fausse information.</p>"
                           }
                         }
                       ],
@@ -718,14 +718,14 @@
                           "id": "1",
                           "content": "<p>bon réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et non, c'est un mauvais réflexe ! Une réponse bien écrite n’est pas forcément correcte. Il faut garder un regard critique, même quand le ton est convaincant.</p>"
+                            "diagnosis": "<p>Eh non, c'est un mauvais réflexe ! Une réponse bien écrite n’est pas forcément correcte. Il faut garder un regard critique, même quand le ton est convaincant.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>mauvais réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Et oui, c'est un mauvais réflexe ! Une réponse bien écrite n’est pas forcément correcte. Il faut garder un regard critique, même quand le ton est convaincant.</p>"
+                            "diagnosis": "<p>Eh oui, c'est un mauvais réflexe ! Une réponse bien écrite n’est pas forcément correcte. Il faut garder un regard critique, même quand le ton est convaincant.</p>"
                           }
                         }
                       ],
