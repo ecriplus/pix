@@ -372,17 +372,6 @@
           "title": "Leçon - 1 ",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": []
-                },
-                {
-                  "elements": []
-                }
-              ]
-            },
-            {
               "type": "element",
               "element": {
                 "id": "3221be57-21ba-45f9-a2c3-9457446f10cb",
