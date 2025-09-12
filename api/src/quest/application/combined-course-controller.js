@@ -7,7 +7,9 @@ import * as combinedCourseSerializer from '../infrastructure/serializers/combine
 
 const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
   const { code } = request.query.filter;
-  const userId = extractUserIdFromRequest(request);
+
+  const { userId } = request.auth.credentials;
+
   const combinedCourse = await usecases.getCombinedCourseByCode({ userId, code });
   return dependencies.combinedCourseSerializer.serialize(combinedCourse);
 };

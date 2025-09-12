@@ -38,7 +38,7 @@ const getUserModuleStatuses = async ({ userId, moduleIds }) => {
   });
 
   return userModuleStatus.map((userModuleStatus) => {
-    const { id, slug, title, duration } = moduleMetadataId.get(userModuleStatus.moduleId);
+    const { id, slug, title, duration, image } = moduleMetadataId.get(userModuleStatus.moduleId);
 
     return new ModuleStatus({
       id,
@@ -46,6 +46,7 @@ const getUserModuleStatuses = async ({ userId, moduleIds }) => {
       title,
       status: userModuleStatus.status,
       duration,
+      image,
     });
   });
 };

@@ -8,9 +8,17 @@ export default class CombinedCourseItem extends Model {
   @attr('boolean') isCompleted;
   @attr('boolean') isLocked;
   @attr('number') duration;
+  @attr('string') image;
 
   get route() {
     return this.type === 'CAMPAIGN' ? 'campaigns' : 'module';
+  }
+
+  get iconUrl() {
+    if (this.type === 'CAMPAIGN') return '/images/combined-course/campaign-icon.svg';
+    if (this.type === 'FORMATION') return '/images/formation-book.svg';
+
+    return this.image;
   }
 
   @belongsTo('combined-course', { async: false, inverse: 'items' }) combinedCourse;

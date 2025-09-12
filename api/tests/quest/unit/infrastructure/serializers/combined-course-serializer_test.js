@@ -43,6 +43,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             'is-completed': false,
             'is-locked': false,
             duration: undefined,
+            image: undefined,
           },
         },
         {
@@ -56,6 +57,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             'is-completed': false,
             'is-locked': true,
             duration: 10,
+            image: 'emile',
           },
         },
       ],

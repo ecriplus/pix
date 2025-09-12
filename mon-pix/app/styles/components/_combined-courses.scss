@@ -67,6 +67,7 @@
   &__content {
     display: flex;
     gap: var(--pix-spacing-4x);
+    align-items: center;
   }
 
   &__icon {

@@ -87,15 +87,18 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
 
     expect(result).to.be.instanceOf(CombinedCourse);
     expect(result.items).to.be.deep.equal([
-      new CombinedCourseItem({
+      {
         id: campaign.id,
         reference: campaign.code,
         title: campaign.name,
         type: ITEM_TYPE.CAMPAIGN,
+        redirection: undefined,
         isCompleted: false,
         isLocked: false,
-      }),
-      new CombinedCourseItem({
+        duration: undefined,
+        image: undefined,
+      },
+      {
         id: moduleId1,
         reference: 'bac-a-sable',
         title: 'Bac à sable',
@@ -104,8 +107,9 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         isCompleted: false,
         isLocked: true,
         duration: 5,
-      }),
-      new CombinedCourseItem({
+        image: 'https://assets.pix.org/modules/placeholder-details.svg',
+      },
+      {
         id: moduleId2,
         reference: 'bases-clavier-1',
         title: 'Les bases du clavier sur ordinateur 1/2',
@@ -114,10 +118,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         isCompleted: false,
         isLocked: true,
         duration: 10,
-      }),
+        image: 'https://assets.pix.org/modules/placeholder-details.svg',
+      },
     ]);
     expect(result.id).to.equal(questId);
     expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
+    expect(result.items[0]).instanceOf(CombinedCourseItem);
+    expect(result.items[1]).instanceOf(CombinedCourseItem);
+    expect(result.items[2]).instanceOf(CombinedCourseItem);
   });
 
   it('should return started combined course for given userId', async function () {
@@ -218,15 +226,18 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
     const result = await usecases.getCombinedCourseByCode({ code, userId });
 
     expect(result.items).to.be.deep.equal([
-      new CombinedCourseItem({
+      {
         id: campaign.id,
         reference: campaign.code,
         title: campaign.name,
         type: ITEM_TYPE.CAMPAIGN,
+        redirection: undefined,
         isCompleted: true,
         isLocked: false,
-      }),
-      new CombinedCourseItem({
+        duration: undefined,
+        image: undefined,
+      },
+      {
         id: moduleId1,
         reference: 'bac-a-sable',
         title: 'Bac à sable',
@@ -235,8 +246,9 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         isCompleted: true,
         isLocked: false,
         duration: 5,
-      }),
-      new CombinedCourseItem({
+        image: 'https://assets.pix.org/modules/placeholder-details.svg',
+      },
+      {
         id: moduleId3,
         reference: 'bien-ecrire-son-adresse-mail',
         title: 'Bien écrire une adresse mail',
@@ -245,11 +257,15 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         isCompleted: false,
         isLocked: false,
         duration: 10,
-      }),
+        image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+      },
     ]);
     expect(result).to.be.instanceOf(CombinedCourse);
     expect(result.id).to.equal(questId);
     expect(result.status).to.equal(CombinedCourseStatuses.STARTED);
+    expect(result.items[0]).instanceOf(CombinedCourseItem);
+    expect(result.items[1]).instanceOf(CombinedCourseItem);
+    expect(result.items[2]).instanceOf(CombinedCourseItem);
   });
 
   it('should throw an error if CombinedCourse does not exist', async function () {

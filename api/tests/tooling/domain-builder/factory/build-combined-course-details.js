@@ -13,6 +13,7 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
     title: 'title',
     duration: 10,
     version: '',
+    image: 'emile',
   });
   quest =
     quest ??

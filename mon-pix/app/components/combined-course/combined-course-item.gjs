@@ -11,7 +11,7 @@ const Content = <template>
     <div class="combined-course-item__content">
       <div class="combined-course-item__icon">
         {{#if @iconUrl}}
-          <img class="campaign-step__image" role="presentation" src={{@iconUrl}} width="100%" />
+          <img class="campaign-step__image" role="presentation" src={{@iconUrl}} alt="" />
         {{/if}}
       </div>
       <div class="combined-course-item__text">
@@ -26,13 +26,13 @@ const Content = <template>
     </div>
     {{#if @isLocked}}
       <div class="combined-course-item__indicator--locked">
-        <PixIcon @name="lock" @plainIcon={{true}} />
+        <PixIcon @name="lock" @plainIcon={{true}} @ariaHidden={{true}} />
       </div>
     {{/if}}
     {{#if @isCompleted}}
       <div class="combined-course-item__indicator--completed">
         <span>{{t "pages.combined-courses.items.completed"}}</span>
-        <PixIcon @name="checkCircle" @plainIcon={{true}} class="combined-course-item__icon" />
+        <PixIcon @name="checkCircle" @plainIcon={{true}} class="combined-course-item__icon" @ariaHidden={{true}} />
       </div>
 
     {{/if}}
@@ -54,7 +54,7 @@ const Duration = <template>
     <Content
       @title={{t "pages.combined-courses.items.formation.title"}}
       @isLocked={{true}}
-      @iconUrl="/images/formation-book.svg"
+      @iconUrl={{@item.iconUrl}}
       class="combined-course-item--formation"
     >
       <:description>
@@ -63,7 +63,7 @@ const Duration = <template>
     </Content>
   {{else}}
     {{#if @isLocked}}
-      <Content @title={{@item.title}} @isLocked={{true}}>
+      <Content @title={{@item.title}} @isLocked={{true}} @iconUrl={{@item.iconUrl}}>
         <:duration>
           {{#if @item.duration}}<Duration @item={{@item}} />{{/if}}
         </:duration>
@@ -76,7 +76,7 @@ const Duration = <template>
         @query={{hash redirection=@item.redirection}}
         disabled
       >
-        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}}>
+        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} @iconUrl={{@item.iconUrl}}>
           <:duration>
             {{#if @item.duration}}
               <Duration @item={{@item}} />
@@ -87,7 +87,7 @@ const Duration = <template>
               <PixTag @color="purple-light" class="combined-course-item__current-item-tag">{{t
                   "pages.combined-courses.items.tagText"
                 }}
-                <PixIcon @name="distance" /></PixTag>
+                <PixIcon @name="distance" @ariaHidden={{true}} /></PixTag>
             {{/if}}
           </:blockEnd>
         </Content>

@@ -9,6 +9,7 @@ describe('Unit | Devcomp | Application | Api | Models | ModuleStatus', function 
     const title = 'Bien écrire une adresse mail';
     const duration = 10;
     const status = 'NOT_STARTED';
+    const image = 'emile';
 
     // when
     const moduleStatus = new ModuleStatus({
@@ -17,6 +18,7 @@ describe('Unit | Devcomp | Application | Api | Models | ModuleStatus', function 
       status,
       title,
       duration,
+      image,
     });
 
     // then
@@ -25,5 +27,6 @@ describe('Unit | Devcomp | Application | Api | Models | ModuleStatus', function 
     expect(moduleStatus.status).to.equal(status);
     expect(moduleStatus.title).to.equal(title);
     expect(moduleStatus.duration).to.equal(duration);
+    expect(moduleStatus.image).to.equal(image);
   });
 });

@@ -43,30 +43,34 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
 
       // then
       const expectedResult = [
-        new ModuleStatus({
+        {
           id: existingModuleIdWithoutRelatedPassage,
           slug: 'bac-a-sable',
           title: 'Bac à sable',
           duration: 5,
           status: 'NOT_STARTED',
-        }),
-        new ModuleStatus({
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+        },
+        {
           id: existingModuleId2,
           slug: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire une adresse mail',
           duration: 10,
           status: 'IN_PROGRESS',
-        }),
-        new ModuleStatus({
+          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+        },
+        {
           id: existingModuleId3,
           slug: 'adresse-ip-publique-et-vous',
           title: "L'adresse IP publique : ce qu'elle révèle sur vous !",
           duration: 10,
           status: 'COMPLETED',
-        }),
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+        },
       ];
 
       expect(result).to.deep.equal(expectedResult);
+      expect(result[0]).instanceOf(ModuleStatus);
     });
 
     context('if userId passed is not defined', function () {

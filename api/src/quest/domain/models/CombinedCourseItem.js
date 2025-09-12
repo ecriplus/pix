@@ -5,7 +5,7 @@ export const ITEM_TYPE = {
 };
 
 export class CombinedCourseItem {
-  constructor({ id, title, reference, type, redirection, isCompleted, duration, isLocked = true }) {
+  constructor({ id, title, reference, type, redirection, isCompleted, duration, image, isLocked = true }) {
     this.id = id;
     this.title = title;
     this.reference = reference;
@@ -14,5 +14,6 @@ export class CombinedCourseItem {
     this.isCompleted = isCompleted;
     this.isLocked = isLocked;
     this.duration = duration;
+    this.image = image;
   }
 }

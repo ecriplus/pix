@@ -5,7 +5,7 @@ async function getModuleMetadataList({ ids, moduleRepository }) {
 
   return modules.map(
     ({ id, slug, title, isBeta, details }) =>
-      new ModuleMetadata({ id, slug, title, isBeta, duration: details.duration }),
+      new ModuleMetadata({ id, slug, title, isBeta, duration: details.duration, image: details.image }),
   );
 }
 
