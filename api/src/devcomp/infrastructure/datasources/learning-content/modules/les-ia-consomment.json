@@ -576,21 +576,21 @@
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>La création vidéo  demande beaucoup de puissance de calcul, mais&nbsp;le supercalculateur  peut  en traiter plusieurs centaines en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p>La création vidéo demande beaucoup de puissance de calcul, mais le supercalculateur peut en traiter plusieurs centaines en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si.</p><p>La création vidéo  demande beaucoup de puissance de calcul, mais&nbsp;le supercalculateur  peut  en traiter plusieurs centaines en même temps.</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>La création vidéo demande beaucoup de puissance de calcul, mais le supercalculateur peut en traiter plusieurs centaines en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à  800 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -609,21 +609,21 @@
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si. Le supercalculateur  peut   créer des milliers d'images en même temps.</p>"
+                            "diagnosis": "<p>En fait, si. Le supercalculateur peut créer des milliers d'images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> Le supercalculateur  peut   créer des milliers d'images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> Le supercalculateur peut créer des milliers d'images en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à  25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -675,28 +675,28 @@
                           "id": "1",
                           "content": "<p>La création de texte</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p> Ce sont  <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En fait non. </p><p> Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "<p>La création d‘image</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p>Ce sont  <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
+                            "diagnosis": "<p>En fait non. </p><p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>La création de vidéo</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>Ce sont  <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
+                            "diagnosis": "<p>En effet !</p><p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ce sont  <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
+                            "diagnosis": "<p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
                           }
                         }
                       ],
@@ -1030,14 +1030,14 @@
                     "content": "<p>la connexion internet et le chauffage du bâtiment</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider. ☝️</p>"
+                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider.☝️</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>les calculs et le refroidissement des machines</p>",
                     "feedback": {
-                      "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
+                      "state": "<p>Bonne réponse ! 🎉</p>",
                       "diagnosis": "<p>Ce sont bien les calculs effectués par le supercalculateur et le refroidissement des machines qui consomment beaucoup d’énergie.</p>"
                     }
                   },
@@ -1046,7 +1046,7 @@
                     "content": "<p>l’éclairage et la vidéo-surveillance</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider. ☝️</p>"
+                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider.☝️</p>"
                     }
                   }
                 ],
@@ -1079,8 +1079,8 @@
                     "id": "2",
                     "content": "<p>Créer&nbsp;<strong>une</strong> <strong>vidéo de 15 secondes</strong>.</p>",
                     "feedback": {
-                      "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
-                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>,&nbsp;et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
+                      "state": "<p>Bonne réponse ! 🎉</p>",
+                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>, et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
                     }
                   },
                   {
