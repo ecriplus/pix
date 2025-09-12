@@ -141,7 +141,7 @@
               "element": {
                 "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
                 "type": "text",
-                "content": "<p>À cause de la récente popularité de chatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! 🦣&nbsp;</p>"
+                "content": "<p>Avec la récente popularité de chatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! 🦣&nbsp;</p>"
               }
             }
           ]
@@ -155,7 +155,7 @@
         {
           "id": "0010b969-e9a0-4ed4-957d-5fe365c6ce56",
           "type": "discovery",
-          "title": "Découverte - 1 : Que peut faire un ordinateur ? ",
+          "title": "Découverte - 1 : Que peut faire un ordinateur ? ",
           "components": [
             {
               "type": "element",
@@ -227,7 +227,7 @@
         {
           "id": "bd0e1d7a-2538-439e-ab8c-006393e03efb",
           "type": "lesson",
-          "title": "Leçon - 1 : Que peut faire un ordinateur ? ",
+          "title": "Leçon - 1 : Que peut faire un ordinateur ? ",
           "components": [
             {
               "type": "element",
@@ -257,7 +257,7 @@
         {
           "id": "c1f654a7-5476-43d7-bf07-22d11b30337a",
           "type": "discovery",
-          "title": "Découverte - 2 : Où trouver des utilisations de l'IA ? ",
+          "title": "Découverte - 2 : Où trouver des utilisations de l'IA ? ",
           "components": [
             {
               "type": "element",
@@ -295,7 +295,9 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -315,7 +317,7 @@
         {
           "id": "16244191-1e74-4396-b9bd-d27ace391181",
           "type": "lesson",
-          "title": "Leçon - 2 : Où trouver des utilisations de l'IA",
+          "title": "Leçon - 2 : Où trouver des utilisations de l'IA",
           "components": [
             {
               "type": "element",
@@ -330,7 +332,7 @@
         {
           "id": "7ee0c174-9a2b-413c-adee-682dc5ed1c70",
           "type": "discovery",
-          "title": "Découverte - 3 : IA et secteurs d'activité",
+          "title": "Découverte - 3 : IA et secteurs d'activité",
           "components": [
             {
               "type": "element",
@@ -356,7 +358,7 @@
         {
           "id": "fdf3c015-b354-4f35-a463-76cfc0de4b03",
           "type": "lesson",
-          "title": "Leçon - 3 : IA et secteurs d'activité",
+          "title": "Leçon - 3 : IA et secteurs d'activité",
           "components": [
             {
               "type": "element",
@@ -384,7 +386,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
-                "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
+                "content": "<ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
               }
             }
           ]
@@ -398,7 +400,7 @@
         {
           "id": "7a4f925d-782c-40aa-812c-01278b60caee",
           "type": "activity",
-          "title": "Activité d'application - 1 : Vrai ou faux ?",
+          "title": "Activité d'application - 1 : Vrai ou faux ?",
           "components": [
             {
               "type": "element",
@@ -470,7 +472,7 @@
         {
           "id": "24445c57-5f45-4ead-8767-936c43913403",
           "type": "activity",
-          "title": " Activité d'application - 2 : Types d'IA",
+          "title": " Activité d'application - 2 : Types d'IA",
           "components": [
             {
               "type": "element",
