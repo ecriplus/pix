@@ -2,11 +2,6 @@
   "application": {
     "description": "La plateforme dédiée à l'organisation de sessions de Certification Pix. Votre espace Pix Certif vous permet de créer et administrer des sessions de certification."
   },
-  "banners": {
-    "language-availability": {
-      "message": "Votre langue n'est pas encore disponible sur Pix Certif. Pour votre confort, l'application sera présentée en anglais. Toute l'équipe de Pix travaille à l'ajout de votre langue."
-    }
-  },
   "common": {
     "actions": {
       "add": "Ajouter",

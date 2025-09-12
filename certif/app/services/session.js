@@ -23,8 +23,6 @@ export default class CurrentSessionService extends SessionService {
 
     const queryParams = transition?.to?.queryParams;
     this.locale.setBestLocale({ queryParams });
-
-    this.data.localeNotSupported = false;
   }
 
   handleInvalidation() {

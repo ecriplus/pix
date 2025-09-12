@@ -52,7 +52,7 @@ module('Unit | Service | session', function (hooks) {
 
   module('#loadCurrentUserAndSetLocale', function () {
     module('when locale is supported', function () {
-      test('loads the current user, sets locale sets data.localeNotSupported to false', async function (assert) {
+      test('loads the current user, sets locale', async function (assert) {
         // given
         const queryParams = { lang: 'fr' };
 
@@ -62,12 +62,12 @@ module('Unit | Service | session', function (hooks) {
         // then
         sinon.assert.calledOnce(service.currentUser.load);
         sinon.assert.calledWith(service.locale.setBestLocale, { queryParams });
-        assert.false(service.data.localeNotSupported);
+        assert.ok(true);
       });
     });
 
     module('when locale is not supported', function () {
-      test('loads the current user, sets locale sets data.localeNotSupported to false', async function (assert) {
+      test('loads the current user, sets locale', async function (assert) {
         // given
         const queryParams = { lang: 'es' };
 
@@ -79,7 +79,7 @@ module('Unit | Service | session', function (hooks) {
         // then
         sinon.assert.calledOnce(service.currentUser.load);
         sinon.assert.calledWith(service.locale.setBestLocale, { queryParams });
-        assert.false(service.data.localeNotSupported);
+        assert.ok(true);
       });
     });
   });
