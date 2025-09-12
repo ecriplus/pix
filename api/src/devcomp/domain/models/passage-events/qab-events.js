@@ -18,7 +18,6 @@ class QABCardAnsweredEvent extends PassageEventWithElementAnswered {
     });
 
     assertNotNullOrUndefined(cardId, 'The cardId is required for a QABCardAnsweredEvent');
-    assertNotNullOrUndefined(chosenProposal, 'The chosenProposal is required for a QABCardAnsweredEvent');
   }
 }
 
