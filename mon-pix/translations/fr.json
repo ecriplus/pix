@@ -268,7 +268,8 @@
         "not-obtained": "Attestation non obtenue :",
         "obtained": "Attestation obtenue",
         "title": {
-          "digital-awarness": "Sensibilisation au numérique"
+          "digital-awarness": "Sensibilisation au numérique",
+          "minarm": "Socle numérique"
         }
       },
       "results-loader": {

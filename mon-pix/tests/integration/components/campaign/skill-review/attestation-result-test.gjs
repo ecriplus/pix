@@ -26,17 +26,31 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       assert.dom(screen.getByText(obtainedTitle)).exists();
     });
 
-    test('it should display the attestation title', async function (assert) {
-      const result = [
-        {
-          reward: { key: 'SIXTH_GRADE' },
-          obtained: true,
-        },
-      ];
+    module('attestation title', function () {
+      test('it should display sixth grade attestation title', async function (assert) {
+        const result = [
+          {
+            reward: { key: 'SIXTH_GRADE' },
+            obtained: true,
+          },
+        ];
 
-      const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-      const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
-      assert.dom(screen.getByText(rewardTitle)).exists();
+        const screen = await render(<template><AttestationResult @results={{result}} /></template>);
+        const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
+        assert.dom(screen.getByText(rewardTitle)).exists();
+      });
+      test('it should display minarm attestation title', async function (assert) {
+        const result = [
+          {
+            reward: { key: 'MINARM' },
+            obtained: true,
+          },
+        ];
+
+        const screen = await render(<template><AttestationResult @results={{result}} /></template>);
+        const rewardTitle = t(`components.campaigns.attestation-result.title.minarm`);
+        assert.dom(screen.getByText(rewardTitle)).exists();
+      });
     });
 
     test('it should display the download button', async function (assert) {
