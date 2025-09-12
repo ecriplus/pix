@@ -386,7 +386,7 @@
                     {
                       "id": "ae9cf536-d7b2-423f-872d-b20fc1217716",
                       "type": "text",
-                      "content": "<p>«&nbsp;En tant que coach de volley, propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
+                      "content": "<p>« Propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
                     },
                     {
                       "id": "90b420d2-029d-4718-b865-8636cbb2daab",
@@ -404,10 +404,6 @@
                         {
                           "id": "3",
                           "content": "<p>le ton à adopter</p>"
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>le rôle à jouer</p>"
                         }
                       ],
                       "feedbacks": {
@@ -417,13 +413,12 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
+                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
                         }
                       },
                       "solutions": [
                         "1",
-                        "2",
-                        "4"
+                        "2"
                       ]
                     }
                   ]
@@ -451,10 +446,6 @@
                         {
                           "id": "3",
                           "content": "<p>le ton à adopter</p>"
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>le rôle à jouer</p>"
                         }
                       ],
                       "feedbacks": {
@@ -480,7 +471,7 @@
                     {
                       "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
                       "type": "text",
-                      "content": "<p>«&nbsp;Décris un match de volley à la plage, comme si tu étais le célèbre écrivain Molière.&nbsp;»</p>"
+                      "content": "<p>«Ecris un dialogue entre des spectacteurs d'un match de volley.»</p>"
                     },
                     {
                       "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
@@ -498,10 +489,6 @@
                         {
                           "id": "3",
                           "content": "<p>le ton à adopter</p>"
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>le rôle à jouer</p>"
                         }
                       ],
                       "feedbacks": {
@@ -511,12 +498,12 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.</p>"
+                          "diagnosis": "<p>Ici, le format est le dialogue et le contexte, celui du match de volley.</p>"
                         }
                       },
                       "solutions": [
                         "1",
-                        "4"
+                        "2"
                       ]
                     }
                   ]
