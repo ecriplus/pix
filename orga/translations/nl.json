@@ -532,6 +532,7 @@
       "title": "Resultaten voor {firstName} {lastName}"
     },
     "attestations": {
+      "MINARM": "Socle numérique",
       "PARENTHOOD": "Attestation de sensibilisation au numérique",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
       "basic-description": "Alle attesten exporteren",
@@ -1389,7 +1390,8 @@
         "campaign-status": "Status:",
         "campaign-type": "Type:",
         "participation-SHARED-status": "Ontvangen",
-        "participation-STARTED-status": "Bezig"      }
+        "participation-STARTED-status": "Bezig"
+      }
     },
     "places": {
       "before-date": "op",
