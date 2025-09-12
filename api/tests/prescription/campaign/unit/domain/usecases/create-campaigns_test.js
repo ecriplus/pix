@@ -12,6 +12,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
   let userRepositoryStub;
   let organizationRepositoryStub;
   let createdCampaignsSymbol;
+  let options;
 
   beforeEach(function () {
     campaignAdministrationRepositoryStub = {
@@ -74,12 +75,12 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
     const campaignCreatorPOJO = {
       createCampaign: sinon.stub(),
     };
-
+    options = Symbol('options');
     campaignCreatorPOJO.createCampaign
-      .withArgs({ ...campaignsToCreate[0], type: CampaignTypes.ASSESSMENT, code: code1, ownerId: someoneId })
+      .withArgs({ ...campaignsToCreate[0], type: CampaignTypes.ASSESSMENT, code: code1, ownerId: someoneId }, options)
       .resolves(campaignsWithAllData[0]);
     campaignCreatorPOJO.createCampaign
-      .withArgs({ ...campaignsToCreate[1], type: CampaignTypes.ASSESSMENT, code: code2, ownerId: someoneId })
+      .withArgs({ ...campaignsToCreate[1], type: CampaignTypes.ASSESSMENT, code: code2, ownerId: someoneId }, options)
       .resolves(campaignsWithAllData[1]);
 
     campaignCreatorRepositoryStub = {
@@ -102,6 +103,7 @@ describe('Unit | UseCase | campaign-administration | create-campaigns', function
 
       const result = await createCampaigns({
         campaignsToCreate,
+        options,
         accessCodeRepository,
         campaignAdministrationRepository: campaignAdministrationRepositoryStub,
         codeGenerator: codeGeneratorStub,

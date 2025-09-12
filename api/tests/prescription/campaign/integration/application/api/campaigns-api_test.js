@@ -2,6 +2,7 @@ import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.
 import * as campaignApi from '../../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign/application/api/models/CampaignParticipation.js';
 import { SavedCampaign } from '../../../../../../src/prescription/campaign/application/api/models/SavedCampaign.js';
+import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
@@ -9,7 +10,7 @@ import {
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Application | campaign-api', function () {
   describe('#findAllForOrganization', function () {
@@ -244,7 +245,6 @@ describe('Integration | Application | campaign-api', function () {
 
       await databaseBuilder.commit();
     });
-
     describe('When one campaign is provided ( not an array )', function () {
       it('should create ASSESSMENT Campaign', async function () {
         databaseBuilder.factory.buildMembership({
@@ -266,6 +266,58 @@ describe('Integration | Application | campaign-api', function () {
 
         expect(campaign).instanceOf(SavedCampaign);
         expect(campaignDb.type).equal(CampaignTypes.ASSESSMENT);
+      });
+      describe('When organization does not have target profile share', function () {
+        it('should allow creation if allowCreationWithoutTargetProfileShare is true', async function () {
+          const organizationWithoutProfileShareId = databaseBuilder.factory.buildOrganization().id;
+          const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+
+          databaseBuilder.factory.buildMembership({
+            organizationId: organizationWithoutProfileShareId,
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const campaign = await campaignApi.save(
+            {
+              name: 'name campaign',
+              title: 'title campaign',
+              targetProfileId: otherTargetProfileId,
+              organizationId: organizationWithoutProfileShareId,
+              creatorId: userId,
+            },
+            {
+              allowCreationWithoutTargetProfileShare: true,
+            },
+          );
+
+          const campaignDb = await knex('campaigns').select('type').where('id', campaign.id).first();
+
+          expect(campaign).instanceOf(SavedCampaign);
+          expect(campaignDb.type).equal(CampaignTypes.ASSESSMENT);
+        });
+        it('should throw an error if allowCreationWithoutTargetProfileShare is not defined', async function () {
+          const organizationWithoutProfileShareId = databaseBuilder.factory.buildOrganization().id;
+          const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+
+          databaseBuilder.factory.buildMembership({
+            organizationId: organizationWithoutProfileShareId,
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const error = await catchErr(campaignApi.save)({
+            name: 'name campaign',
+            title: 'title campaign',
+            targetProfileId: otherTargetProfileId,
+            organizationId: organizationWithoutProfileShareId,
+            creatorId: userId,
+          });
+
+          expect(error).to.be.instanceof(UserNotAuthorizedToCreateCampaignError);
+        });
       });
     });
 
@@ -311,6 +363,83 @@ describe('Integration | Application | campaign-api', function () {
         expect(campaigns[0].targetProfileId).equal(targetProfileId);
         expect(campaigns[1].targetProfileId).equal(null);
         expect(campaigns[2].targetProfileId).equal(targetProfileId);
+      });
+      describe('When organization does not have target profile share', function () {
+        it('should allow creation if allowCreationWithoutTargetProfileShare is true', async function () {
+          const organizationWithoutProfileShareId = databaseBuilder.factory.buildOrganization().id;
+          const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+          const externalUserId = databaseBuilder.factory.buildUser().id;
+
+          databaseBuilder.factory.buildMembership({
+            organizationId: organizationWithoutProfileShareId,
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const campaigns = await campaignApi.save(
+            [
+              {
+                name: 'name campaign 1',
+                title: 'title campaign 1',
+                targetProfileId: targetProfileId,
+                organizationId: organizationWithoutProfileShareId,
+                creatorId: externalUserId,
+                ownerId: userId,
+                type: CampaignTypes.ASSESSMENT,
+              },
+              {
+                name: 'name campaign 2',
+                title: 'title campaign 2',
+                targetProfileId: otherTargetProfileId,
+                organizationId: organizationWithoutProfileShareId,
+                creatorId: externalUserId,
+                ownerId: userId,
+                type: CampaignTypes.ASSESSMENT,
+              },
+            ],
+            {
+              allowCreationWithoutTargetProfileShare: true,
+            },
+          );
+
+          expect(campaigns).lengthOf(2);
+        });
+        it('should throw an error if allowCreationWithoutTargetProfileShare is not defined', async function () {
+          const organizationWithoutProfileShareId = databaseBuilder.factory.buildOrganization().id;
+          const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+          const externalUserId = databaseBuilder.factory.buildUser().id;
+
+          databaseBuilder.factory.buildMembership({
+            organizationId: organizationWithoutProfileShareId,
+            userId,
+          });
+
+          await databaseBuilder.commit();
+
+          const error = await catchErr(campaignApi.save)([
+            {
+              name: 'name campaign 1',
+              title: 'title campaign 1',
+              targetProfileId: targetProfileId,
+              organizationId: organizationWithoutProfileShareId,
+              creatorId: externalUserId,
+              ownerId: userId,
+              type: CampaignTypes.ASSESSMENT,
+            },
+            {
+              name: 'name campaign 2',
+              title: 'title campaign 2',
+              targetProfileId: otherTargetProfileId,
+              organizationId: organizationWithoutProfileShareId,
+              creatorId: externalUserId,
+              ownerId: userId,
+              type: CampaignTypes.ASSESSMENT,
+            },
+          ]);
+
+          expect(error).to.be.instanceof(UserNotAuthorizedToCreateCampaignError);
+        });
       });
     });
   });

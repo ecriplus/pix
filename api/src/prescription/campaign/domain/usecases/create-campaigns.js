@@ -1,5 +1,6 @@
 const createCampaigns = async function ({
   campaignsToCreate,
+  options,
   campaignAdministrationRepository,
   accessCodeRepository,
   campaignCreatorRepository,
@@ -15,10 +16,13 @@ const createCampaigns = async function ({
     const generatedCampaignCode = await codeGenerator.generate(accessCodeRepository);
     const campaignCreator = await campaignCreatorRepository.get(campaign.organizationId);
 
-    const campaignToCreate = await campaignCreator.createCampaign({
-      ...campaign,
-      code: generatedCampaignCode,
-    });
+    const campaignToCreate = await campaignCreator.createCampaign(
+      {
+        ...campaign,
+        code: generatedCampaignCode,
+      },
+      options,
+    );
     enrichedCampaignsData.push(campaignToCreate);
   }
   return campaignAdministrationRepository.save(enrichedCampaignsData);
