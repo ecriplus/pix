@@ -20,6 +20,17 @@ module('Acceptance | Module | Routes | verifyQcm', function (hooks) {
         { id: '3', content: 'I am the second right answer!' },
         { id: '4', content: 'I am one of the wrong answers!' },
       ],
+      feedbacks: {
+        valid: {
+          state: "Bravo ! C'est la bonne réponse.",
+          diagnosis: '<p>Félicitations</p>',
+        },
+        invalid: {
+          state: 'Pas ouf',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['2', '3'],
     };
     const qcm2 = {
       id: 'elementId-2',
@@ -31,6 +42,17 @@ module('Acceptance | Module | Routes | verifyQcm', function (hooks) {
         { id: '3', content: 'Click Me!' },
         { id: '4', content: 'I am the second wrong answer!' },
       ],
+      feedbacks: {
+        valid: {
+          state: "Bravo ! C'est la bonne réponse.",
+          diagnosis: '<p>Félicitations</p>',
+        },
+        invalid: {
+          state: 'Pas ouf',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['1', '3'],
     };
 
     const section = server.create('section', {

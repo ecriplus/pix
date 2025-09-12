@@ -20,6 +20,17 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
         { id: '3', content: 'I am the second right answer!' },
         { id: '4', content: 'I am the second wrong answer!' },
       ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: '<p>Good job!</p>',
+        },
+        invalid: {
+          state: 'Faux',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['2', '3'],
     };
 
     const section = server.create('section', {
@@ -43,13 +54,6 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
       sections: [section],
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: 'Faux' },
-      status: 'ko',
-      solution: [qcm.proposals[1].id, qcm.proposals[2].id],
     });
 
     const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
@@ -94,6 +98,17 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
         { id: '3', content: 'I am the second right answer!' },
         { id: '4', content: 'I am the second wrong answer!' },
       ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: '<p>Good job!</p>',
+        },
+        invalid: {
+          state: 'Faux',
+          diagnosis: '<p>Too Bad!</p>',
+        },
+      },
+      solutions: ['2', '3'],
     };
 
     const section = server.create('section', {
@@ -118,13 +133,6 @@ module('Acceptance | Module | Routes | retryQcm', function (hooks) {
       title: 'Bien écrire son adresse mail',
       isBeta: false,
       sections: [section],
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: 'Faux' },
-      status: 'ko',
-      solution: [qcm.proposals[1].id, qcm.proposals[2].id],
     });
 
     const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
