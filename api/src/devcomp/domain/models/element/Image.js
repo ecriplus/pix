@@ -11,8 +11,8 @@ class Image extends Element {
    * @param{string} params.url
    * @param{string} params.alt
    * @param{string} params.alternativeText
-   * @param{string} params.legend
-   * @param{string} params.licence
+   * @param{string} [params.legend]
+   * @param{string} [params.licence]
    */
   constructor({ id, url, alt, alternativeText, legend, licence }) {
     super({ id, type: 'image' });
