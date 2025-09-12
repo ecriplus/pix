@@ -143,7 +143,12 @@
                     "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -200,7 +205,7 @@
                           },
                           {
                             "prompt": "adopte un ton drôle",
-                            "response": "🏐 On a interrogé une huître médium : elle te voit au tournoi de volley. <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                            "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
                           }
                         ]
                       }
@@ -303,8 +308,14 @@
                     "placeholder": "un seul mot",
                     "ariaLabel": "champs à remplir",
                     "defaultValue": "",
-                    "tolerances": ["t1", "t2", "t3"],
-                    "solutions": ["tableau"]
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "tableau"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -454,7 +465,11 @@
                           "diagnosis": "<p>Ici, le format est le plan détaillé, le rôle est le coach de volley et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -497,7 +512,11 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -540,7 +559,10 @@
                           "diagnosis": "<p>Ici, le rôle est Molière et le contexte, celui du match de volley à la plage.</p>"
                         }
                       },
-                      "solutions": ["1", "4"]
+                      "solutions": [
+                        "1",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -583,7 +605,12 @@
                           "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 }
