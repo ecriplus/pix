@@ -434,7 +434,7 @@
               "element": {
                 "id": "ceed2a7c-76f9-44f1-be34-a2285cd1aa4d",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, qu’est ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
+                "instruction": "<p>À votre avis, qu’est-ce qui peut expliquer l’erreur du logiciel d’IA générative ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -445,9 +445,9 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Les données avec lesquelles le logiciel a été entraîné datent d’avant 2025.</p>",
+                    "content": "<p>Les données d'entraînement du logiciel datent d’avant 2025.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                      "diagnosis": "<p>Effectivement, l'erreur peut venir des données d'entraînement du logiciel. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                     }
                   },
                   {
