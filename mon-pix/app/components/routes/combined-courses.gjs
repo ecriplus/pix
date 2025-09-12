@@ -1,4 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -17,6 +18,12 @@ const CompletedText = <template>
 export default class CombinedCourses extends Component {
   <template>
     <section class="combined-course">
+      <div class="combined-course__exit">
+        <PixButtonLink @variant="tertiary" @route="authenticated" @iconAfter="doorOpen">
+          {{t "common.actions.quit"}}
+        </PixButtonLink>
+      </div>
+
       <header class="combined-course__header">
         <div>
           <h1>{{@combinedCourse.name}}</h1>
@@ -82,4 +89,5 @@ export default class CombinedCourses extends Component {
     this.router.transitionTo(item.route, item.reference, { queryParams: { redirection: item.redirection } });
   }
 }
+
 function noop() {}

@@ -49,6 +49,28 @@ module('Integration | Component | combined course', function (hooks) {
         <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
       assert.ok(screen.getByText('Le but de ma quête'));
     });
+    test('should display exit button', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      this.owner.lookup('service:router');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: 'NOT_STARTED',
+        code: 'COMBINIX9',
+        name: 'Combinix',
+      });
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      const link = screen.getByRole('link', { name: t('common.actions.quit') });
+      assert.dom(link).hasAttribute('href', '/');
+    });
   });
 
   module('when there is a formation item', function () {
@@ -301,7 +323,7 @@ module('Integration | Component | combined course', function (hooks) {
 
       // when
       const screen = await render(hbs`
-    <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
       // then
       assert.ok(screen.getByText(t('pages.combined-courses.items.completed')));
@@ -343,7 +365,7 @@ module('Integration | Component | combined course', function (hooks) {
 
     // when
     const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
     // then
     await click(screen.getByRole('button', { name: 'Reprendre mon parcours' }));
@@ -382,7 +404,7 @@ module('Integration | Component | combined course', function (hooks) {
 
     // when
     const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
     // then
     assert.ok(screen.getByRole('button', { name: 'Reprendre mon parcours' }));
