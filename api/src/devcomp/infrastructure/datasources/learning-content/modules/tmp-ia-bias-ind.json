@@ -122,14 +122,14 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Sur les forums, les contributeurs peuvent donner leurs avis sur un sujet, même sans avoir de sources ou de connaissances solides pour les appuyer. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Sur les forums, les contributeurs peuvent donner leur avis sur un sujet, même sans avoir de sources ou de connaissances solides pour les appuyer. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>non</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant si !</strong> <br>Sur les forums, les contributeurs peuvent donner leurs avis sur un sujet, sans avoir aucune expertise ou source qui soutiendrait leurs propos. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
+                            "diagnosis": "<p><strong>Et pourtant si !</strong> <br>Sur les forums, les contributeurs peuvent donner leur avis sur un sujet, sans avoir aucune expertise ou source qui soutiendrait leurs propos. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait vous répondre que le lait est bon pour les chats alors que c’est faux, ils le digèrent plutôt mal.</p>"
                           }
                         },
                         {
@@ -254,7 +254,7 @@
                     {
                       "id": "5c146c79-a201-4784-82ca-8e9d280987d9",
                       "type": "text",
-                      "content": "<p>Ces données peuvent&nbsp;: </p><ul><li>Montrer des <strong>situations de discrimination dejà existantes&nbsp;</strong></li><li><p>Exprimer les <strong>expériences</strong>, ou les <strong>opinions des contributeurs</strong> qui les ont produites. Elles peuvent donc contenir &nbsp;: </p><ul><li>des <strong>idées reçues </strong>ou des <strong>stéréotypes</strong>, </li><li>des <strong>discriminations</strong>, </li><li>des <strong>différences culturelles</strong>.</li></ul></li></ul>"
+                      "content": "<p>Ces données peuvent&nbsp;: </p><ul><li>Montrer des <strong>situations de discrimination déjà existantes&nbsp;</strong></li><li><p>Exprimer les <strong>expériences</strong>, ou les <strong>opinions des contributeurs</strong> qui les ont produites. Elles peuvent donc contenir &nbsp;: </p><ul><li>des <strong>idées reçues </strong>ou des <strong>stéréotypes</strong>, </li><li>des <strong>discriminations</strong>, </li><li>des <strong>différences culturelles</strong>.</li></ul></li></ul>"
                     }
                   ]
                 }
@@ -287,27 +287,20 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Pour comprendre comment l’IA générative utilise ses données d’entraînement pour répondre aux utilisateurs, aujourd’hui vous allez entraîner l'IA générative sur l’exemple de la recette du taboulé.</p><p><br>Voici les données d'entraînement de l'IA générative <strong>venues du web</strong>. Voici les données avec lesquelles vous allez être entraîné.</p>"
+                "content": "<p>Pour comprendre comment l’IA générative utilise ses données d’entraînement pour répondre aux utilisateurs, aujourd’hui vous allez entraîner l'IA générative sur l’exemple de la recette du taboulé.</p><p><br>Voilà à quoi ressemblent les données d’entraînement d’une IA générative.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "a261de69-d395-4657-a4a3-759bceee4297",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-biais-independant/types-de-taboule.jpg",
-                "alt": "",
-                "alternativeText": "<h5><br>Recettes</h5><ul><li>(photo de taboulé à la semoule) Taboulé la meilleure recette,<em>&nbsp;Journal des Femmes Cuisiner</em>,&nbsp;4,4✶✶✶✶✶ (313)</li><li>(photo de taboulé à la semoule) Recette Taboulé maison,&nbsp;<em>MaSpatule</em>,&nbsp;4,9✶✶✶✶✶ (102) 15 min</li><li>(photo de taboulé à la semoule) Taboulé de Thon Marie- Galante,&nbsp;<em>La Belle-Iloise</em>, Aucun avis</li><li>(photo de taboulé à la semoule) Taboulé menthe citron à l'italienne,&nbsp;<em>Tipiak</em>,&nbsp;Aucun avis</li><li>(photo de taboulé à la semoule) Taboulé rapide,&nbsp;<em>Marmiton</em>,&nbsp;4,5✶✶✶✶✶ (41),&nbsp;20 min, sans cuisson</li><li>(photo de taboulé à la semoule) Taboulé Recette facile,&nbsp;<em>Encore un gâteau</em>,&nbsp;4,9✶✶✶✶✶ (10)</li><li>(photo de taboulé au persil)Le vrai taboulé libanais traditionnel : la recette, <em>nutriting</em>, 5,0✶✶✶✶✶ (1)</li><li>(photo de taboulé à la semoule) Taboulé express, <em>La petite cuisine de Nat</em>,&nbsp; 5,0✶✶✶✶✶ (2)<br></li></ul>",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "651eef5d-0510-4fb7-b57d-841d618f61e4",
-                "type": "text",
-                "content": "<p> À partir de l'étude des données d’entraînement, répondez à la question suivante.<br></p>"
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "taboule",
+                "url": "https://epreuves.pix.fr/fr/recherche/modulix-gh85y7.html",
+                "instruction": "<p>Voilà à quoi ressemblent les données d’entraînement d’une IA générative. Consultez les données puis répondez à la question ci-dessous.</p>",
+                "solution": "",
+                "height": 500
               }
             },
             {
@@ -315,20 +308,20 @@
               "element": {
                 "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
                 "type": "qcu-discovery",
-                "instruction": "<p>Que va répondre l'IA générative à la demande « Quel est l'ingrédient principal de la recette du taboulé » ?</p>",
+                "instruction": "<p>À votre avis, que va répondre l'IA générative à la demande «&nbsp;Quel est l'ingrédient principal de la recette du taboulé&nbsp;» ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais : les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
+                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
                     }
                   }
                 ],
@@ -583,7 +576,7 @@
                       "id": "4848930f-0095-4d42-88a4-604a8daafea2",
                       "type": "expand",
                       "title": "💡Quelques astuces pour détecter des biais",
-                      "content": "<p>Voici quelques questions à se poser pour repérer les biais dans les réponses de l’IA générative. Si la réponse est «&nbsp;oui&nbsp;», attention.&nbsp;👀</p><ul><li>Est-ce que la réponse comprend des <strong>clichés</strong> ou <strong>stéréotypes</strong> ?😕</li><li>Est-ce qu’elle présente <strong>un seul point de vue</strong> et oublie les autres ? 🙈</li><li>Est-ce qu’elle donne surtout des <strong>opinions</strong> et pas des faits ?  💭</li><li>Est-ce qu’elle montre des <strong>exemples trop semblables</strong> ? 🌍</li></ul>"
+                      "content": "<p>Voici quelques questions à se poser pour repérer les biais dans les réponses de l’IA générative. Si la réponse est «&nbsp;oui&nbsp;», attention.&nbsp;👀</p><ul><li>Est-ce que la réponse comprend des <strong>clichés</strong> ou <strong>stéréotypes</strong> ?😕</li><li>Est-ce qu’elle présente <strong>un seul point de vue</strong> et oublie les autres ? 🙈</li><li>Est-ce qu’elle donne surtout des <strong>opinions</strong> et pas des faits ?  💭</li><li>Est-ce qu’elle montre des <strong>exemples trop semblables</strong> ? 🌍</li></ul>"
                     }
                   ]
                 }
