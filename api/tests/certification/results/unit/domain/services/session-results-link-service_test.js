@@ -16,7 +16,7 @@ describe('Certification | Results | Unit | Domain | Service | Session Results Li
       const link = sessionResultsLinkService.generateResultsLink({ sessionId, i18n });
 
       // then
-      expect(link).to.deep.equal('https://test.app.pix.org/resultats-session?lang=fr#a_valid_token');
+      expect(link).to.deep.equal('https://test.app.pix.org/resultats-session?locale=fr#a_valid_token');
     });
   });
 });
