@@ -5,13 +5,13 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les logiciels d'IA générative sont de plus en plus utilisés au quotidien. Mais leurs réponses sont-elles toujours correctes ? Et s'il y a des erreurs, d'où viennent-elles ?&nbsp;<br>C'est ce que vous allez découvrir dans ce module.</p>",
+    "description": "<p>Les logiciels d'IA générative sont de plus en plus utilisés au quotidien. Mais leurs réponses sont-elles toujours correctes ? Et quand il y a des erreurs, d’où est-ce qu’elles viennent ?<br>C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
       "<p>Savoir que les IA génératives peuvent faire des erreurs</p>",
       "<p>Connaître les causes principales des erreurs des IA génératives</p>",
-      "<p>Connaître les bonnes pratiques face à une réponse de l'IA générative</p>"
+      "<p>Connaître les bonnes pratiques face aux réponses des IA génératives</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -30,7 +30,7 @@
               "element": {
                 "id": "3253ef34-0f94-4d65-aa02-a710b0969020",
                 "type": "text",
-                "content": "<p>Nathan a utilisé un logiciel d’IA générative pour préparer une sortie pour l'anniversaire de sa sœur. Il n’est pas content du résultat. Voici sa discussion avec son amie, Asma&nbsp;:</p>"
+                "content": "<p>Voici&nbsp; la discussion de Nathan avec son amie, Asma&nbsp;:</p>"
               }
             },
             {
@@ -83,7 +83,7 @@
               "element": {
                 "id": "659f8b1c-5e64-44f3-ae18-0fc89e093fa1",
                 "type": "text",
-                "content": "<p>Nathan n’est pas le premier à recevoir une information fausse de la part d’un logiciel d'IA générative…<br> Les IA génératives font-elles vraiment des erreurs ? 🤨</p>"
+                "content": "<p>Nathan n’est pas le premier à recevoir une information fausse de la part d’un logiciel d'IA générative…<br> Est-il facile de reconnapitre une erreur de l'IA générative ?&nbsp;🤨</p>"
               }
             }
           ]
@@ -104,7 +104,7 @@
               "element": {
                 "id": "3147aedb-8fc2-4510-aad8-fa7f35e77dd7",
                 "type": "text",
-                "content": "<p>Découvrez ci-dessous plusieurs exemples de réponses données par des logiciels d'IA générative. Ces exemples sont inspirés de réponses réelles.<br>Dans certains cas, le logiciel d'IA générative donne une réponse juste, dans d'autres, il donne une réponse contenant des erreurs.</p><p><strong>Pour chacun des exemples, indiquez votre niveau de confiance en la réponse donnée par un logiciel d'IA générative en cliquant sur la jauge.</strong><br>Il ne s'agit pas de deviner si la réponse donnée est juste ou non.</p><p></p>"
+                "content": "<p>Observez, ci-dessous, chaque réponse donnée par un logiciel d'IA générative.<br></p><p><strong>Utilisez la jauge pour indiquer à quel point vous lui faites confiance.</strong> <br>💡 Pas besoin de savoir si la réponse est vraie ou fausse.</p>\n"
               }
             },
             {
@@ -375,33 +375,20 @@
               "type": "stepper",
               "steps": [
                 {
-                  "elements": [
-                    {
-                      "id": "0e9f94cd-7236-4f68-a50e-b079cc0f9c9d",
-                      "type": "text",
-                      "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses ou erronées et les présenter comme des faits, de vraies informations</strong>.</p>"
-                    }
-                  ]
+                  "elements": []
                 },
                 {
-                  "elements": [
-                    {
-                      "id": "f51cf525-1be0-4a0b-8a88-13e7d5af0f9d",
-                      "type": "text",
-                      "content": "<p>L’IA générative peut, par exemple, donner une mauvaise date, inventer des événements, faire une erreur mathématique ou indiquer une information scientifique fausse.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "03c80544-03eb-4d77-a592-f91c68ecb91a",
-                      "type": "text",
-                      "content": "<p><strong>Les réponses des IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp;C’est pourquoi il n'est<strong> pas facile de repérer les erreurs</strong> des IA génératives. 🔎</p>"
-                    }
-                  ]
+                  "elements": []
                 }
               ]
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3221be57-21ba-45f9-a2c3-9457446f10cb",
+                "type": "text",
+                "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses  et les présenter comme des faits</strong>, de vraies informations.</p>\n<p><br>L’IA générative peut, par exemple, donner une mauvaise date, inventer des événements, faire une erreur mathématique ou indiquer une fausse information sicentifique.</p>\n<p><br>Les réponses des <strong>IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp;C’est pourquoi il n'est<strong> pas facile de repérer les erreurs</strong> des IA génératives. 🔎</p>"
+              }
             }
           ]
         },
@@ -430,7 +417,7 @@
               "element": {
                 "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
                 "type": "text",
-                "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur ses années de victoire.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
+                "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur les années de ses victoires.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
               }
             },
             {
@@ -495,47 +482,10 @@
             {
               "type": "element",
               "element": {
-                "id": "f4ed67e2-662f-4f88-8730-d6e3669c6f0a",
+                "id": "35919435-ce60-4e65-847e-c0315d42a3c3",
                 "type": "text",
-                "content": "<p>Une IA générative a été conçue pour <strong>répondre aux demandes des utilisateurs</strong>, pas pour dire la vérité !</p>"
+                "content": "<p>Une IA générative est conçue pour <strong>répondre aux demandes des utilisateurs</strong>, pas pour dire la vérité !<br></p>\n<p>Les erreurs d'une IA générative peuvent venir de plusieurs causes&nbsp;: </p>\n<ul>\n    <li><strong>Les </strong><strong>données d’entraînement</strong>&nbsp;: elles peuvent contenir des erreurs ou ne plus être d'actualité. </li>\n    <li><strong>Le</strong><strong>s p</strong><strong>rédictions </strong>: l’IA générative répond souvent  «&nbsp;sans savoir&nbsp;» et&nbsp;par prédiction&nbsp;: elle génère la réponse qui lui paraît la plus probable.<br>On appelle ces erreurs&nbsp;<strong>des </strong><strong>hallucinations</strong>.&nbsp;Par exemple&nbsp;: elle peut attribuer une citation au mauvais auteur. 🤷 </li>\n    <li><strong>Les questions des utilisateurs</strong>&nbsp;: si elles contiennent des erreurs ou sont farfelues, l’IA peut inventer une information pour y répondre. </li>\n</ul>\n<p><br>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont aussi capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
               }
-            },
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "52714cef-23e1-49d0-99ed-19880ba569ca",
-                      "type": "text",
-                      "content": "<p>Certaines erreurs dans les réponses des IA génératives viennent des données qu’on leur a transmises pour s’entraîner. Les <strong>données d'entraînement </strong>peuvent contenir <strong>des erreurs ou ne&nbsp;</strong><strong>plus être d’actualité</strong>.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "a2f3a3ca-b439-472e-86bb-69af0c01f178",
-                      "type": "text",
-                      "content": "<p>D’autres erreurs sont inventées par l’IA. L’IA générative répond souvent  «&nbsp;sans savoir&nbsp;» et <strong>par prédiction</strong>&nbsp;: elle génère la réponse qui lui paraît la plus probable. On appelle ces erreurs <strong>des hallucinations</strong>.<br>Par exemple, quand on demande à un logiciel d’IA générative de nous donner l’auteur d’une citation, il peut l’attribuer à quelqu’un d’autre. 🤷</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "7c22a815-14fb-4bba-aa7f-d292f9708aaf",
-                      "type": "text",
-                      "content": "<p>Certaines <strong>demandes d’utilisateurs</strong> peuvent <strong>contenir des erreurs ou être farfelues</strong>.<br>Par exemple, en 2024 ChatGPT a répondu à la question «&nbsp;Quel est le record du monde de traversée de la Manche à pied ?&nbsp;» en citant un nageur allemand et en inventant un temps de 14 heures et 51 minutes.</p>"
-                    },
-                    {
-                      "id": "dfbbd712-d034-4c91-819a-4431aec8beb2",
-                      "type": "text",
-                      "content": "<p>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont aussi capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -564,7 +514,7 @@
               "element": {
                 "id": "337317e2-a1cf-471b-8182-4914fa6b7360",
                 "type": "text",
-                "content": "<p>Au fil du temps, la réponse d'un logiciel d'IA générative à une même question peut évoluer.<br>Observez les deux discussions ci-dessous et répondez à la question.</p>"
+                "content": "<p>Au fil du temps, la réponse d'un logiciel d'IA générative à une même question peut évoluer.<br><strong>Observez les deux discussions ci-dessous et répondez à la question.</strong></p>"
               }
             },
             {
@@ -642,27 +592,12 @@
           "title": "Leçon - 3",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "36e95488-a2db-4463-9b0f-5d5252cb38b2",
-                      "type": "text",
-                      "content": "<p>Grâce à des mises à jour régulières, les ingénieurs essaient en continu de <strong>réduire les erreurs</strong> que les IA génératives produisent. Ainsi, les IA génératives <strong>s’améliorent d’années en années</strong> !</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "5360a6aa-999e-4d02-b3cb-20421fae3ab2",
-                      "type": "text",
-                      "content": "<p>Mais, c’est une <strong>tâche difficile</strong>&nbsp;:&nbsp;il n'y a pas de différence de forme entre une réponse contenant une erreur et une qui n'en contient pas. <br>Il n’existe donc <strong>pas de méthode technique pour détecter les erreurs </strong>et les éviter complètement.</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "cb97a8ff-93bf-4fb7-afae-58716ed3b4f7",
+                "type": "text",
+                "content": "<p>Grâce à des<strong> mises à jour régulières</strong>, les ingénieurs améliorent en continu les IA génératives. Elles progressent d’années en années !</p>\n\n<p><br>Mais certaines erreurs restent inévitables&nbsp;: une réponse fausse peut avoir exactement la même apparence qu’une réponse correcte. Pour l’instant, il n’existe<strong> pas de méthode fiable pour toutes les éviter</strong>.</p>"
+              }
             }
           ]
         },
@@ -691,7 +626,7 @@
               "element": {
                 "id": "ecffdbbe-78c7-4da7-9b7d-2426eb9daf3c",
                 "type": "text",
-                "content": "<p>Depuis sa dernière utilisation de l'IA, Nathan n'utilise plus l'IA générative. Asma veut laisser encore une chance à l'IA, mais pour elle, pas question de se laisser avoir !&nbsp;<br>Pour la préparation d'un document important, elle interroge un logiciel d'IA générative.</p>"
+                "content": "<p> Nathan n'a plus confiance et n'utilise plus l'IA générative. Asma, elle, veut laisser encore une chance à l'IA, mais pour elle, pas question de se laisser avoir !&nbsp;<br>Pour la préparation d'un document important, elle interroge un logiciel d'IA générative.</p>"
               }
             },
             {
@@ -699,7 +634,7 @@
               "element": {
                 "id": "0b9a3ac4-f723-45ea-bfcd-c31200474bee",
                 "type": "text",
-                "content": "<p><strong>Parmi les réactions suivantes, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe pour Asma face à la réponse du logiciel d'IA générative.</strong></p>"
+                "content": "<p><strong>Pour chaque réaction suivante, sélectionnez s’il s’agit d’un bon réflexe ou d’un mauvais réflexe.</strong></p>"
               }
             },
             {
@@ -762,7 +697,7 @@
                     {
                       "id": "ff81face-e51c-4bf6-8b49-50c9abd5cfdd",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Réflexe 3&nbsp;: Asma cherche la source de l’information sur internet pour comparer avec l’information donnée par le logiciel d'IA générative.</p>",
+                      "instruction": "<p>Réflexe 3&nbsp;: Asma cherche la source de l’information sur le web pour comparer avec l’information donnée par le logiciel d'IA générative.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -821,51 +756,10 @@
             {
               "type": "element",
               "element": {
-                "id": "3a72064b-2d02-47ef-b524-18d51dcc6be8",
+                "id": "3dd1bded-9854-42b0-9c40-3d306aa940fc",
                 "type": "text",
-                "content": "<p>Il faut toujours garder en tête qu’une IA générative peut faire une erreur ou halluciner dans ses réponses. Mais vous pouvez apprendre à repérer ces erreurs… à condition d’adopter les bons réflexes&nbsp;:</p>"
+                "content": "<p>Une IA générative peut faire une erreur ou halluciner dans ses réponses. Vous pouvez apprendre à repérer ces erreurs… à condition d’adopter <strong>les bons réflexes</strong>&nbsp;: </p>\n<p><br>🔍 Avoir un&nbsp;<strong>regard critique&nbsp;</strong>et se poser des questions sur ce qu'on lit.</p>\n<p>📖 Prendre le temps de&nbsp;<strong>lire les réponses en entier</strong>. Parfois, l’erreur ne saute pas aux yeux. </p>\n<p>🧭&nbsp;<strong>Vérifier les informations</strong>&nbsp;en les comparant avec d’autres sources.</p>\n<p>💬&nbsp;<strong>Poursuivre la discussion</strong>. Si vous détectez une erreur, vous pouvez la signaler à l'IA générative et lui demander de se corriger.</p>"
               }
-            },
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "491608fe-ec87-4e10-b98a-c1c6f67a500c",
-                      "type": "text",
-                      "content": "<p>🔍 Avoir un <strong>regard critique</strong> sur les réponses de l’IA générative et se poser des questions sur ce qu'on lit.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "910d0bec-69e4-4a7f-818c-eab90643959b",
-                      "type": "text",
-                      "content": "<p>📖 Prendre le temps de <strong>lire les réponses en entier</strong>. Parfois, l’erreur ne saute pas aux yeux. Elle peut se cacher dans un détail&nbsp;: une date, un chiffre, un exemple, etc.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "495a2819-756c-415c-993d-ad37eaa4fecf",
-                      "type": "text",
-                      "content": "<p>🧭&nbsp;<strong>Vérifier les informations </strong> en les comparant avec d’autres sources.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "eba1acf6-d04c-4d74-85a0-05b4a9dc488f",
-                      "type": "text",
-                      "content": "<p>💬 <strong>Poursuivre la discussion</strong>. Si vous détectez une erreur dans la réponse d’une IA générative, vous pouvez lui signaler et lui demander de se corriger.</p>"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         }
@@ -885,7 +779,7 @@
               "element": {
                 "id": "d889292f-a892-4ad8-b7e8-0ef529fe13cf",
                 "type": "text",
-                "content": "<ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme vraies. ❌</li><br><li>Les développeurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations pour les vérifier. 🔎</li><br></ul>"
+                "content": "<ul><li>L'objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter des affirmations fausses comme étant vraies. ❌</li><br><li>Les développeurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique</strong> et de <strong>croiser les sources</strong> d’informations pour les vérifier. 🔎</li><br></ul>"
               }
             }
           ]
@@ -1040,7 +934,7 @@
                     {
                       "id": "9c2ddfdc-0dc9-435c-b3be-1ea4bf999895",
                       "type": "text",
-                      "content": "<p>L'IA n'a pas donné de réponse satisfaisante à Darius.<br>Darius a donc vérifié par ailleurs et il a découvert que l'émoji hippocampe n'existe pas. et il a découvert que l'émoji hippocampe n'existe pas.</p>"
+                      "content": "<p>L'IA n'a pas donné de réponse satisfaisante à Darius.<br>Darius a donc vérifié par ailleurs et il a découvert que l'émoji hippocampe n'existe pas. </p>"
                     },
                     {
                       "id": "9d16a295-07ca-493c-a8a3-c0265390b17a",
@@ -1164,7 +1058,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Vous cherchez sur internet une confirmation. 🔎</p>",
+                    "content": "<p>Vous cherchez sur le web une confirmation. 🔎</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, c'est un bon réflexe en cas de doute !</p>"
                     }
