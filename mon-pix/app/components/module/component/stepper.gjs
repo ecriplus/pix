@@ -48,6 +48,11 @@ export default class ModulixStepper extends Component {
     return !this.stepIsActive(index);
   }
 
+  @action
+  stepBarIsDisabled(index) {
+    return index > this.stepsToDisplay.length - 1;
+  }
+
   get hasDisplayableSteps() {
     return this.displayableSteps.length > 0;
   }
@@ -180,6 +185,16 @@ export default class ModulixStepper extends Component {
             @triggerAction={{this.goBackToNextStep}}
             aria-controls={{this.id}}
           />
+          <div class="stepper-controls__step-bars" aria-hidden="true">
+            {{#each this.displayableSteps as |_ index|}}
+              <div
+                class="stepper-controls__step-bar
+                  {{if (this.stepIsActive index) 'active'}}
+                  {{if (this.stepBarIsDisabled index) 'disable'}}"
+              >
+              </div>
+            {{/each}}
+          </div>
         </div>
         <div
           id={{this.id}}
