@@ -1,24 +1,27 @@
 import { Session } from '../../../../../../src/certification/evaluation/domain/models/Session.js';
 
-const buildSession = function ({ id = 123, isFinalized = false, isPublished = false } = {}) {
+const buildSession = function ({ id = 123, accessCode = 'FMKP39', isFinalized = false, isPublished = false } = {}) {
   return new Session({
     id,
+    accessCode,
     finalizedAt: isFinalized ? new Date('2020-01-01') : null,
     publishedAt: isPublished ? new Date('2020-01-01') : null,
   });
 };
 
-buildSession.finalized = ({ id = 123 } = {}) => {
+buildSession.finalized = ({ id = 123, accessCode = 'FMKP39' } = {}) => {
   return new Session({
     id,
+    accessCode,
     finalizedAt: new Date('2020-01-01'),
     publishedAt: null,
   });
 };
 
-buildSession.published = ({ id = 123 } = {}) => {
+buildSession.published = ({ id = 123, accessCode = 'FMKP39' } = {}) => {
   return new Session({
     id,
+    accessCode,
     finalizedAt: new Date('2020-01-01'),
     publishedAt: new Date('2020-01-01'),
   });

@@ -1,28 +1,46 @@
+//@ts-check
+/**
+ * @typedef {import('./index.js').SessionRepository} SessionRepository
+ * @typedef {import('./index.js').SupervisorAccessRepository} SupervisorAccessRepository
+ * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
+ * @typedef {import('./index.js').CertificationCenterAccessRepository} CertificationCenterAccessRepository
+ */
+
 import {
   CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
   SessionNotAccessible,
 } from '../errors.js';
 
-const superviseSession = async function ({
+/**
+ * @param {Object} params
+ * @param {number} params.sessionId
+ * @param {string} params.invigilatorPassword
+ * @param {number} params.userId
+ * @param {SessionRepository} params.sessionRepository
+ * @param {SupervisorAccessRepository} params.supervisorAccessRepository
+ * @param {CertificationCenterRepository} params.certificationCenterRepository
+ * @param {CertificationCenterAccessRepository} params.certificationCenterAccessRepository
+ */
+export const superviseSession = async ({
   sessionId,
   invigilatorPassword,
   userId,
   sessionRepository,
   supervisorAccessRepository,
   certificationCenterRepository,
-  certificationPointOfContactRepository,
-}) {
+  certificationCenterAccessRepository,
+}) => {
   // should use a specific get from sessionRepository instead
   const session = await sessionRepository.get({ id: sessionId });
 
   const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId });
 
-  const [certificationCenterAccess] = await certificationPointOfContactRepository.getAllowedCenterAccesses({
-    centerList: [certificationCenter],
+  const certificationCenterAccess = await certificationCenterAccessRepository.getCertificationCenterAccess({
+    certificationCenterId: certificationCenter.id,
   });
 
-  if (certificationCenterAccess.isAccessBlockedUntilDate()) {
+  if (certificationCenterAccess.isAccessBlockedUntilDate) {
     throw new SessionNotAccessible(certificationCenterAccess.pixCertifBlockedAccessUntilDate);
   }
 
@@ -40,5 +58,3 @@ const superviseSession = async function ({
 
   await supervisorAccessRepository.create({ sessionId, userId });
 };
-
-export { superviseSession };

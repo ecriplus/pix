@@ -11,7 +11,7 @@ describe('Unit | UseCase | supervise-session', function () {
   let sessionRepository;
   let supervisorAccessRepository;
   let certificationCenterRepository;
-  let certificationPointOfContactRepository;
+  let certificationCenterAccessRepository;
   let pixCertifBlockedAccessUntilDateBeforeTest;
 
   beforeEach(function () {
@@ -24,8 +24,8 @@ describe('Unit | UseCase | supervise-session', function () {
     certificationCenterRepository = {
       getBySessionId: sinon.stub(),
     };
-    certificationPointOfContactRepository = {
-      getAllowedCenterAccesses: sinon.stub(),
+    certificationCenterAccessRepository = {
+      getCertificationCenterAccess: sinon.stub(),
     };
 
     pixCertifBlockedAccessUntilDateBeforeTest = settings.features.pixCertifBlockedAccessUntilDate;
@@ -38,7 +38,7 @@ describe('Unit | UseCase | supervise-session', function () {
   describe('when pix certif access is blocked', function () {
     it('should throw a SessionNotAccessible error', async function () {
       // given
-      sinon.stub(settings.features, 'pixCertifBlockedAccessUntilDate').value('2322-07-01');
+      settings.features.pixCertifBlockedAccessUntilDate = '2322-07-01';
       const sessionId = 123;
       const certificationCenter = domainBuilder.buildCertificationCenter();
       const session = domainBuilder.certification.sessionManagement.buildSession({
@@ -47,12 +47,13 @@ describe('Unit | UseCase | supervise-session', function () {
       });
       const invigilatorPassword = session.invigilatorPassword;
       const userId = 434;
-      const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-        id: certificationCenter.id,
-      });
+      const allowedCertificationCenterAccess =
+        domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess.blocked({
+          pixCertifBlockedAccessUntilDate: '2322-07-01',
+        });
 
       sessionRepository.get.resolves(session);
-      certificationPointOfContactRepository.getAllowedCenterAccesses.resolves([allowedCertificationCenterAccess]);
+      certificationCenterAccessRepository.getCertificationCenterAccess.resolves(allowedCertificationCenterAccess);
       certificationCenterRepository.getBySessionId.resolves(certificationCenter);
 
       // when
@@ -63,7 +64,7 @@ describe('Unit | UseCase | supervise-session', function () {
         sessionRepository,
         supervisorAccessRepository,
         certificationCenterRepository,
-        certificationPointOfContactRepository,
+        certificationCenterAccessRepository,
       });
 
       // then
@@ -82,12 +83,11 @@ describe('Unit | UseCase | supervise-session', function () {
       certificationCenterId: certificationCenter.id,
     });
     const userId = 434;
-    const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-      id: certificationCenter.id,
-    });
+    const allowedCertificationCenterAccess =
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess();
 
     sessionRepository.get.resolves(session);
-    certificationPointOfContactRepository.getAllowedCenterAccesses.resolves([allowedCertificationCenterAccess]);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(allowedCertificationCenterAccess);
     certificationCenterRepository.getBySessionId.resolves(certificationCenter);
 
     // when
@@ -98,7 +98,7 @@ describe('Unit | UseCase | supervise-session', function () {
       sessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
-      certificationPointOfContactRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
@@ -108,16 +108,16 @@ describe('Unit | UseCase | supervise-session', function () {
 
   it('should throw a SessionNotAccessible when the session is not accessible', async function () {
     // given
+    settings.features.pixCertifBlockedAccessUntilDate = null;
     const sessionId = 123;
     const certificationCenter = domainBuilder.buildCertificationCenter();
     const session = domainBuilder.certification.sessionManagement.buildSession.processed({ id: sessionId });
     const userId = 434;
-    const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-      id: certificationCenter.id,
-    });
+    const allowedCertificationCenterAccess =
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess();
 
     sessionRepository.get.resolves(session);
-    certificationPointOfContactRepository.getAllowedCenterAccesses.resolves([allowedCertificationCenterAccess]);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(allowedCertificationCenterAccess);
     certificationCenterRepository.getBySessionId.resolves(certificationCenter);
 
     // when
@@ -128,7 +128,7 @@ describe('Unit | UseCase | supervise-session', function () {
       sessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
-      certificationPointOfContactRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
@@ -137,18 +137,15 @@ describe('Unit | UseCase | supervise-session', function () {
 
   it('should a Certification center is archived error when certification center is archived', async function () {
     // given
-    // given
     const sessionId = 123;
-    const certificationCenter = domainBuilder.buildCertificationCenter();
     const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
     const userId = 434;
-    const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-      id: certificationCenter.id,
-    });
+    const allowedCertificationCenterAccess =
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess();
 
     sessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves({ archivedAt: new Date(), archivedBy: 1234 });
-    certificationPointOfContactRepository.getAllowedCenterAccesses.resolves([allowedCertificationCenterAccess]);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(allowedCertificationCenterAccess);
 
     // when
     const error = await catchErr(superviseSession)({
@@ -158,7 +155,7 @@ describe('Unit | UseCase | supervise-session', function () {
       sessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
-      certificationPointOfContactRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
@@ -169,13 +166,11 @@ describe('Unit | UseCase | supervise-session', function () {
     // given
     const sessionId = 123;
     const userId = 434;
-    const certificationCenter = domainBuilder.buildCertificationCenter();
-    const allowedCertificationCenterAccess = domainBuilder.buildAllowedCertificationCenterAccess({
-      id: certificationCenter.id,
-    });
+    const allowedCertificationCenterAccess =
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess();
     const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
 
-    certificationPointOfContactRepository.getAllowedCenterAccesses.resolves([allowedCertificationCenterAccess]);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(allowedCertificationCenterAccess);
     sessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves({ archivedAt: null, archivedBy: null });
 
@@ -187,7 +182,7 @@ describe('Unit | UseCase | supervise-session', function () {
       sessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
-      certificationPointOfContactRepository,
+      certificationCenterAccessRepository,
     });
 
     // then

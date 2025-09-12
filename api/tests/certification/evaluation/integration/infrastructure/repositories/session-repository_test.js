@@ -3,6 +3,37 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Integration | Infrastructure | Repositories | Session', function () {
+  describe('#get', function () {
+    context('when the session exists', function () {
+      it('should return a session', async function () {
+        // given
+        const sessionId = databaseBuilder.factory.buildSession({ id: 123 }).id;
+        await databaseBuilder.commit();
+
+        // when
+        const session = await sessionRepository.get({ id: sessionId });
+
+        // then
+        const expectedSession = domainBuilder.certification.evaluation.buildResultsSession({
+          id: session.id,
+          isFinalized: session.isFinalized,
+          isPublished: session.isPublished,
+        });
+        expect(session).to.deepEqualInstance(expectedSession);
+      });
+    });
+
+    context('when the session does not exist', function () {
+      it('should throw a not found error', async function () {
+        // given, when
+        const error = await catchErr(sessionRepository.get)({ id: 999 });
+
+        // then
+        expect(error).to.be.an.instanceof(NotFoundError);
+      });
+    });
+  });
+
   describe('#getByCertificationCourseId', function () {
     context('when the certification course exists', function () {
       it('should return a session', async function () {
@@ -21,7 +52,7 @@ describe('Certification | Evaluation | Integration | Infrastructure | Repositori
         });
 
         // then
-        const expectedSession = domainBuilder.certification.results.buildResultsSession({
+        const expectedSession = domainBuilder.certification.evaluation.buildResultsSession({
           id: session.id,
           isFinalized: session.isFinalized,
           isPublished: session.isPublished,

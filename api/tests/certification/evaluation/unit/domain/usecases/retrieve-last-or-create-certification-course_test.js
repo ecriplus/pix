@@ -23,7 +23,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   let reconciledAt;
   let verificationCode;
 
-  const sessionRepository = {};
+  const evaluationSessionRepository = {};
   const assessmentRepository = {};
   const competenceRepository = {};
   const sharedCertificationCandidateRepository = {};
@@ -39,7 +39,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     competenceRepository,
     sharedCertificationCandidateRepository,
     certificationCourseRepository,
-    sessionRepository,
+    evaluationSessionRepository,
     certificationCenterRepository,
     certificationBadgesService,
     placementProfileService,
@@ -59,7 +59,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     sharedCertificationCandidateRepository.update = sinon.stub();
     certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId = sinon.stub();
     certificationCourseRepository.save = sinon.stub();
-    sessionRepository.get = sinon.stub();
+    evaluationSessionRepository.get = sinon.stub();
     userRepository.get = sinon.stub();
     placementProfileService.getPlacementProfile = sinon.stub();
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
@@ -79,7 +79,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
       const foundSession = domainBuilder.certification.sessionManagement.buildSession({
         accessCode: 'differentAccessCode',
       });
-      sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+      evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
       // when
       const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -105,7 +105,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
           id: 1,
           accessCode: 'accessCode',
         });
-        sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+        evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
         // when
         const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -132,7 +132,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               id: 1,
               accessCode: 'accessCode',
             });
-            sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+            evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
             const candidateNotAuthorizedToStart = domainBuilder.buildCertificationCandidate({
               userId: 2,
@@ -165,7 +165,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               id: 1,
               accessCode: 'accessCode',
             });
-            sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+            evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
             const candidateNotAuthorizedToStart = domainBuilder.buildCertificationCandidate({
               userId: 2,
@@ -205,7 +205,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               id: 1,
               accessCode: 'accessCode',
             });
-            sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
+            evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
 
             const foundCertificationCandidateId = 2;
             domainBuilder.buildCertificationCourse({
@@ -245,7 +245,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               id: 1,
               accessCode: 'accessCode',
             });
-            sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+            evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
             const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
               userId: 2,
@@ -304,7 +304,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 id: 1,
                 accessCode: 'accessCode',
               });
-              sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+              evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
               const certificationCandidate = domainBuilder.buildCertificationCandidate({
                 userId: user.id,
                 sessionId: foundSession.id,
@@ -366,7 +366,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 id: 1,
                 accessCode: 'accessCode',
               });
-              sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
+              evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
 
               const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                 userId: user.id,
@@ -444,7 +444,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   accessCode: 'accessCode',
                   version: 3,
                 });
-                sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId,
@@ -493,7 +493,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   accessCode: 'accessCode',
                   version: 3,
                 });
-                sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId,
@@ -580,7 +580,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   id: 1,
                   accessCode: 'accessCode',
                 });
-                sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId: 2,
@@ -664,7 +664,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     id: 1,
                     accessCode: 'accessCode',
                   });
-                  sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
+                  evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
 
                   certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId
                     .withArgs({ userId: user.id, sessionId: foundSession.id })
@@ -763,7 +763,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     id: 1,
                     accessCode: 'accessCode',
                   });
-                  sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                  evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                   const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                     userId: 2,
@@ -835,7 +835,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       id: 1,
                       accessCode: 'accessCode',
                     });
-                    sessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
+                    evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
 
                     certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId
                       .withArgs({ userId: user.id, sessionId: foundSession.id })
@@ -935,7 +935,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         id: 1,
                         accessCode: 'accessCode',
                       });
-                      sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                      evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                       certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId
                         .withArgs({ userId: 2, sessionId: 1 })
@@ -1028,7 +1028,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     id: 1,
                     accessCode: 'accessCode',
                   });
-                  sessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                  evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                   const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                     userId: 2,
