@@ -36,17 +36,33 @@
 
   &__header {
   display: flex;
-  flex-direction: column;
-  gap: var(--pix-spacing-2x);
-  align-items: flex-start;
-  align-self: stretch;
   padding: var(--pix-spacing-10x) 0 var(--pix-spacing-6x) 0;
+
 
     h1 {
       @extend %pix-title-m;
+
+      margin-bottom: var(--pix-spacing-4x);
   }
   }
 
+}
+
+.combined-course-header {
+    &__info {
+      display: flex;
+    }
+}
+
+.combined-course-info {
+  &__description {
+  display: flex;
+  align-self: stretch;
+
+  @extend %pix-body-l;
+
+  margin-bottom: var(--pix-spacing-4x);
+  }
 }
 
 .combined-course-item {

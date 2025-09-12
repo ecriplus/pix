@@ -18,27 +18,39 @@ export default class CombinedCourses extends Component {
   <template>
     <div class="combined-course">
       <div class="combined-course__header">
-        <h1>{{@combinedCourse.name}} </h1>
+        <div>
+          <h1>{{@combinedCourse.name}}</h1>
+          <div class="combined-course-header__info">
+            <div class="combined-course-info__description">
+              {{@combinedCourse.description}}
+            </div>
+          </div>
+          {{#if (eq @combinedCourse.status "COMPLETED")}}
+            <section class="combined-course-completed">
+              <img src="/images/illustrations/combined-course/completed.svg" />
+              <CompletedText />
+            </section>
+          {{else if (eq @combinedCourse.status "NOT_STARTED")}}
+            <div>
+              <PixButton
+                @type="submit"
+                @triggerAction={{this.startQuestParticipation}}
+                @loading-color="white"
+                @size="large"
+              >{{t "pages.combined-courses.content.start-button"}}
+              </PixButton>
+            </div>
+          {{else if (eq @combinedCourse.status "STARTED")}}
+            <div>
+              <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
+                  "pages.combined-courses.content.resume-button"
+                }}
+              </PixButton>
+            </div>
+          {{/if}}
+        </div>
+        <img alt="" role="presentation" src={{@combinedCourse.illustration}} />
       </div>
-      {{#if (eq @combinedCourse.status "COMPLETED")}}
-        <section class="combined-course-completed">
-          <img src="/images/illustrations/combined-course/completed.svg" />
-          <CompletedText />
-        </section>
-      {{else if (eq @combinedCourse.status "NOT_STARTED")}}
-        <PixButton
-          @type="submit"
-          @triggerAction={{this.startQuestParticipation}}
-          @loading-color="white"
-          @size="large"
-        >{{t "pages.combined-courses.content.start-button"}}
-        </PixButton>
-      {{else if (eq @combinedCourse.status "STARTED")}}
-        <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
-            "pages.combined-courses.content.resume-button"
-          }}
-        </PixButton>
-      {{/if}}
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
         <CombinedCourseItem
