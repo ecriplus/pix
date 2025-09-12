@@ -43,6 +43,71 @@
           ]
         },
         {
+          "id": "ccba5524-57fd-41d4-94d7-732b0e4d6612",
+          "type": "discovery",
+          "title": "clickable-image",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "35ff5487-dd88-4574-a575-1689a5aaefee",
+                "type": "text",
+                "content": "<p>clickable-image</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dfa8ac80-86ba-4278-9e02-a160b9c38c3b",
+                "type": "custom",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/salon-connecte.webp",
+                    "alt": "Salon connecté",
+                    "width": 1536,
+                    "height": 1024
+                  },
+                  "areas": [
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 390, "y1": 120, "x2": 842, "y2": 400 },
+                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 510, "y1": 588, "x2": 702, "y2": 635 },
+                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 248, "y1": 398, "x2": 325, "y2": 492 },
+                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 828, "y1": 560, "x2": 1042, "y2": 725 },
+                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 122, "y1": 796, "x2": 318, "y2": 916 },
+                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 986, "y1": 148, "x2": 1100, "y2": 230 },
+                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
           "type": "discovery",
           "title": "complete-phrase",
