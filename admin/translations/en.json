@@ -412,6 +412,12 @@
           "details": {
             "title": "Current consolidated framework details"
           },
+          "history": {
+            "table": {
+              "caption": "Versions list in descending order"
+            },
+            "title": "Framework versions history"
+          },
           "no-current-framework": "No consolidated framework is currently used.",
           "tab": "Consolidated framework"
         },

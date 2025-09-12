@@ -7,11 +7,13 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import FrameworkDetails from './framework/framework-details';
+import FrameworkHistory from './framework/framework-history';
 
 export default class ComplementaryCertificationFramework extends Component {
   @service store;
   @service router;
   @tracked currentConsolidatedFramework;
+  @tracked frameworkHistory;
 
   constructor() {
     super(...arguments);
@@ -31,6 +33,9 @@ export default class ComplementaryCertificationFramework extends Component {
       'certification-consolidated-framework',
       complementaryCertification.key,
     );
+
+    const frameworkHistory = await this.store.queryRecord('framework-history', complementaryCertification.key);
+    this.frameworkHistory = frameworkHistory?.history;
   }
 
   <template>
@@ -52,6 +57,10 @@ export default class ComplementaryCertificationFramework extends Component {
 
     {{#if this.currentConsolidatedFramework}}
       <FrameworkDetails @currentConsolidatedFramework={{this.currentConsolidatedFramework}} />
+    {{/if}}
+
+    {{#if this.frameworkHistory.length}}
+      <FrameworkHistory @history={{this.frameworkHistory}} />
     {{/if}}
   </template>
 }

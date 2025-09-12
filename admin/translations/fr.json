@@ -413,6 +413,12 @@
             "empty-current-framework": "Le référentiel cadre actuel est vide.",
             "title": "Détails du référentiel cadre actuel"
           },
+          "history": {
+            "table": {
+              "caption": "Liste des versions par ordre décroissant"
+            },
+            "title": "Historique des versions du référentiel"
+          },
           "no-current-framework": "Aucun référentiel cadre n'est utilisé actuellement.",
           "tab": "Référentiel cadre"
         },

@@ -28,6 +28,7 @@ module('Integration | Component | complementary-certifications/item/framework', 
     });
 
     store.peekRecord = sinon.stub().resolves('complementary-certification-key');
+    store.queryRecord = sinon.stub().resolves({});
   });
 
   test('it should display a creation form button for framework', async function (assert) {
@@ -84,6 +85,56 @@ module('Integration | Component | complementary-certifications/item/framework', 
           }),
         )
         .doesNotExist();
+    });
+  });
+
+  module('#frameworkHistory', function () {
+    module('when there is no existing framework history', function () {
+      test('it should not display the framework history', async function (assert) {
+        // given
+        store.findRecord = sinon.stub().resolves({
+          hasMany: sinon.stub().returns({
+            value: sinon.stub().returns([]),
+          }),
+        });
+        store.queryRecord = sinon.stub().resolves({ history: [] });
+
+        // when
+        const screen = await render(<template><Framework /></template>);
+
+        // then
+        assert
+          .dom(
+            screen.queryByRole('heading', {
+              name: t('components.complementary-certifications.item.framework.history.title'),
+            }),
+          )
+          .doesNotExist();
+      });
+    });
+
+    module('when there are existing framework versions', function () {
+      test('it should display the framework history', async function (assert) {
+        // given
+        store.findRecord = sinon.stub().resolves({
+          hasMany: sinon.stub().returns({
+            value: sinon.stub().returns([]),
+          }),
+        });
+        store.queryRecord = sinon.stub().resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
+
+        // when
+        const screen = await render(<template><Framework /></template>);
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: t('components.complementary-certifications.item.framework.history.title'),
+            }),
+          )
+          .exists();
+      });
     });
   });
 });
