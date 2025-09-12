@@ -34,19 +34,13 @@ const COOKIE_LOCALE = 'locale';
 export default class LocaleService extends Service {
   @service cookies;
   @service currentDomain;
-  @service featureToggles;
   @service intl;
   @service dayjs;
 
   @tracked __currentLocale = DEFAULT_LOCALE;
 
   get currentLocale() {
-    const localeCookieEnabled = this.featureToggles.featureToggles?.useLocale;
-    if (localeCookieEnabled) {
-      return this.__currentLocale;
-    }
-
-    return this.intl.primaryLocale;
+    return this.__currentLocale;
   }
 
   get currentLanguage() {
@@ -104,14 +98,9 @@ export default class LocaleService extends Service {
   }
 
   setCurrentLocale(locale) {
-    let nearestLocale = locale;
-
-    const localeCookieEnabled = this.featureToggles.featureToggles?.useLocale;
-    if (localeCookieEnabled) {
-      nearestLocale = this.#getNearestSupportedLocale(locale);
-      this.#setCookieLocale(nearestLocale);
-      this.__currentLocale = nearestLocale;
-    }
+    const nearestLocale = this.#getNearestSupportedLocale(locale);
+    this.#setCookieLocale(nearestLocale);
+    this.__currentLocale = nearestLocale;
 
     const language = this.#getLanguageFromLocale(nearestLocale);
     this.intl.setLocale(language);
@@ -124,33 +113,9 @@ export default class LocaleService extends Service {
     }
   }
 
-  setBestLocale({ user, queryParams }) {
-    const localeCookieEnabled = this.featureToggles.featureToggles?.useLocale;
-
-    let locale;
-    if (localeCookieEnabled) {
-      locale = this.#detectBestLocale({ queryParams });
-    } else {
-      locale = this.#detectBestLocaleLegacy({ user, queryParams });
-    }
+  setBestLocale({ queryParams }) {
+    const locale = this.#detectBestLocale({ queryParams });
     this.setCurrentLocale(locale);
-  }
-
-  #detectBestLocaleLegacy({ user, queryParams }) {
-    if (this.currentDomain.isFranceDomain) {
-      this.#setCookieLocale(FRENCH_FRANCE_LOCALE);
-      return FRENCH_INTERNATIONAL_LOCALE;
-    }
-
-    if (queryParams?.lang) {
-      return this.#getNearestSupportedLanguage(queryParams?.lang);
-    }
-
-    if (user?.lang) {
-      return this.#getNearestSupportedLanguage(user.lang);
-    }
-
-    return DEFAULT_LOCALE;
   }
 
   #detectBestLocale({ queryParams }) {
