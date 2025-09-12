@@ -267,14 +267,14 @@
         {
           "id": "1fbe2256-2436-497e-815e-374021a81b20",
           "type": "discovery",
-          "title": "Quel est le format ?",
+          "title": "Prompter avec le bon format",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. D'habitude, il prépare un document d'entraînement sous ce format.</p>"
+                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela , il prépare un document d'entraînement sous la forme d'un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -283,44 +283,6 @@
                 "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
                 "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\" class=\"width-15\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchettes</td>\n            <td>Trois joueurs forment un triangle et se passent le ballon en manchette</td>\n        </tr>\n        <tr>\n            <th>Avancé</th>\n            <td>Réception de service réel</td>\n            <td>Un joueur reçoit des services puissants en manchette</td>\n        </tr>\n    </tbody>\n</table>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "e9451c2c-bb3e-40e1-8d55-798a5c9e6b64",
-                "type": "qrocm",
-                "instruction": "<p>Quel est le format utilisé habituellement par Gustave ?</p>",
-                "proposals": [
-                  {
-                    "input": "df1b0582-20d7-4401-b70a-f121881e7772",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 8,
-                    "display": "inline",
-                    "placeholder": "un seul mot",
-                    "ariaLabel": "champs à remplir",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "tableau"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bien vu !<br></p>",
-                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Et non !</p>",
-                    "diagnosis": "<p>Si vous voulez avoir un résultat similaire en demandant à l'IA, il faudra préciser le format, ici, un tableau.</p>"
-                  }
-                }
               }
             }
           ]
@@ -392,7 +354,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>📌 Résumons l’essentiel avant de passer à la suite&nbsp;: </p><ul><li>Utiliser un verbe d’<strong>action</strong> dans son prompt aide à décrire la tâche à l’IA.<ul><li>Par exemple&nbsp;: résume, décris, traduis, analyse…</li></ul></li><li>Un prompt efficace donne du <strong>contexte.</strong>&nbsp;Il donne à l'IA des précisions sur la situation.<ul><li>Par exemple&nbsp;: le lieu, le moment, l’objectif... 🎯</li></ul></li><li>Préciser le <strong>format attendu</strong> aide l'IA à structurer sa réponse selon vos besoins. <ul><li>Par exemple&nbsp;: une liste, un paragraphe, un tableau, un plan détaillé...&nbsp;📋</li></ul></li><li>Le <strong>ton </strong>d’un prompt guide le style de la réponse.<ul><li>Par exemple&nbsp;: sérieux, amical, professionnel, humoristique… 💬</li></ul></li><li>Attribuer un <strong>rôle </strong>ou une identité à l'IA peut aider à obtenir des réponses plus ciblées &nbsp;🤠</li></ul><p>Travailler avec une IA se fait le plus souvent par étape, vous pouvez préciser votre demande au fur et à mesure, et demander des corrections. 🔄</p><p><strong>⚠️</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.&nbsp;</p><ul><li><strong>Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.🔍</li></ul>"
+                "content": "<p>Quelques conseils pour écrire un prompt efficace :&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte </strong>pour donner&nbsp;des <strong>précisions </strong>sur la situation.</li>\n    <li>Préciser le <strong>format </strong>pour <strong>s</strong><strong>tructurer </strong>la réponse selon vos besoins.</li>\n    <li>Donner le <strong>ton </strong>pour définir le <strong>style </strong>de la réponse. </li>\n    <li>Attribuer un <strong>rôle </strong>ou une identité pour à obtenir des <strong>réponses plus ciblée.</strong>&nbsp;</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
               }
             }
           ]
