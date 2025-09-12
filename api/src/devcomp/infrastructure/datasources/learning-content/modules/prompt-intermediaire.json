@@ -82,21 +82,6 @@
       "type": "explore-to-understand",
       "grains": [
         {
-          "id": "61cd268c-d7d3-4387-abf7-9312a2d8ea6f",
-          "type": "transition",
-          "title": "Transition : La qualité de la réponse de l’IA dépend de la qualité du prompt !",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "052ed96d-d123-49a0-b7aa-fb8c2d220ca8",
-                "type": "text",
-                "content": "<p>La réponse de l’IA dépend de la qualité du prompt. Voyons comment faire un prompt efficace.</p>"
-              }
-            }
-          ]
-        },
-        {
           "id": "0f187da9-1bbc-407f-bb5d-c29b09f2c950",
           "type": "discovery",
           "title": "Améliore le prompt de Gustave",
@@ -114,7 +99,7 @@
               "element": {
                 "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
                 "type": "qcm",
-                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave ?</p>",
+                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l'améliorer ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -136,11 +121,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien vu !</p>",
-                    "diagnosis": "<p>Le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
+                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse. <br></p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait !</p>",
-                    "diagnosis": "<p>Il faut donner plus de précisions&nbsp;: le contexte donne du sens au prompt. Plus l'IA a des informations sur la situation, meilleure sera sa réponse.</p>"
+                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
                 "solutions": [
@@ -163,7 +148,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<p>➡️Un prompt bien formulé donne toujours à l’IA un contexte, c’est-à-dire des précisions sur la situation&nbsp;: le lieu, le moment, l’objectif, etc.&nbsp; Sans contexte, l'IA risque de répondre de façon vague ou hors sujet.</p>"
+                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation : </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l'IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -226,21 +211,21 @@
                     "id": "2",
                     "content": "<p>celui avec un ton sérieux.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Un choix formel ! </strong>Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                      "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>celui avec un ton drôle.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Un choix original ! </strong>Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                      "diagnosis": "<p>Un choix original ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>aucun ne me plaît.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas de souci ! </strong>Il existe beaucoup d'autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
+                      "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
                     }
                   }
                 ],
@@ -259,7 +244,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<p>➡️ On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;</li><li>de quelle manière (avec humour, de manière brève, pédagogue, professionnelle, etc.),</li><li>un rôle à jouer («&nbsp;tu es un poète&nbsp;», «&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).</li></ul>"
+                "content": "<p>On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;👥</li><li>de quelle manière (de manière brève, pédagogue, professionnelle, etc.),💬</li><li>un rôle à jouer («en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).🎭</li></ul>"
               }
             }
           ]
@@ -318,7 +303,7 @@
               "element": {
                 "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
                 "type": "text",
-                "content": "<p>\n</p><p></p><p></p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n<p></p><p></p><p></p><p></p><p></p>"
+                "content": "<p>\n</p><p></p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n</p><p></p><p></p><p></p><p></p><p></p>"
               }
             }
           ]
@@ -333,7 +318,7 @@
               "element": {
                 "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
                 "type": "text",
-                "content": "<p>➡️Sans indication, l'IA choisira elle-même un format, qui risque de ne pas correspondre à vos attentes.&nbsp;🤔​</p><p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><p>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </p><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.</p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.</p>"
+                "content": "<p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><ul><li>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </li></ul><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.</p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.</p>"
               }
             }
           ]
@@ -354,7 +339,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>Quelques conseils pour écrire un prompt efficace :&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte </strong>pour donner&nbsp;des <strong>précisions </strong>sur la situation.</li>\n    <li>Préciser le <strong>format </strong>pour <strong>s</strong><strong>tructurer </strong>la réponse selon vos besoins.</li>\n    <li>Donner le <strong>ton </strong>pour définir le <strong>style </strong>de la réponse. </li>\n    <li>Attribuer un <strong>rôle </strong>ou une identité pour à obtenir des <strong>réponses plus ciblée.</strong>&nbsp;</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
+                "content": "<p>Quelques conseils pour écrire un prompt efficace :&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l'IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
               }
             }
           ]
