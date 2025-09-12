@@ -11,7 +11,7 @@ const Content = <template>
     <div class="combined-course-item__content">
       <div class="combined-course-item__icon">
         {{#if @iconUrl}}
-          <img class="campaign-step__image" role="presentation" src={{@iconUrl}} alt="" />
+          <img role="presentation" src={{@iconUrl}} alt="" height="42" />
         {{/if}}
       </div>
       <div class="combined-course-item__text">
