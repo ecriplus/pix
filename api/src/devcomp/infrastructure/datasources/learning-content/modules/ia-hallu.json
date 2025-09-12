@@ -376,7 +376,7 @@
               "element": {
                 "id": "3221be57-21ba-45f9-a2c3-9457446f10cb",
                 "type": "text",
-                "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses  et les présenter comme des faits</strong>, de vraies informations.</p>\n<p><br>L’IA générative peut, par exemple, donner une mauvaise date, inventer des événements, faire une erreur mathématique ou indiquer une fausse information sicentifique.</p>\n<p><br>Les réponses des <strong>IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp;C’est pourquoi il n'est<strong> pas facile de repérer les erreurs</strong> des IA génératives. 🔎</p>"
+                "content": "<p>L'IA générative peut faire des erreurs. Elle peut <strong>générer des affirmations fausses  et les présenter comme des faits</strong>, de vraies informations.</p>\n<p><br>L’IA générative peut, par exemple, donner une mauvaise date, inventer des événements, faire une erreur mathématique ou indiquer une fausse information sicentifique.</p>\n<p><br>Les réponses des <strong>IA génératives</strong> sont souvent bien écrites et vraisemblables, présentées avec assurance&nbsp;: elles<strong> inspirent confiance</strong>.&nbsp;C’est pourquoi il n'est<strong> pas facile de repérer leurs erreurs</strong>. 🔎</p>"
               }
             }
           ]
@@ -440,7 +440,7 @@
                     "id": "1",
                     "content": "<p>L'ordinateur d’Irène n'est pas assez puissant, il a provoqué un bug.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, la réponse donnée par le logiciel d'IA générative ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
+                      "diagnosis": "<p>Eh non, la réponse donnée ne dépend pas de la puissance de l'ordinateur d'Irène. <br>Par contre, l'erreur peut venir des données avec lesquelles le logiciel a été entraîné. Si ces données datent d'avant 2025, le logiciel ne connaît qu'une seule victoire de Carlos Alcaraz à Roland-Garros.</p>"
                     }
                   },
                   {
@@ -473,7 +473,7 @@
               "element": {
                 "id": "35919435-ce60-4e65-847e-c0315d42a3c3",
                 "type": "text",
-                "content": "<p>Une IA générative est conçue pour <strong>répondre aux demandes des utilisateurs</strong>, pas pour dire la vérité !<br></p>\n<p>Les erreurs d'une IA générative peuvent venir de plusieurs causes&nbsp;: </p>\n<ul>\n    <li><strong>Les </strong><strong>données d’entraînement</strong>&nbsp;: elles peuvent contenir des erreurs ou ne plus être d'actualité. </li>\n    <li><strong>Le</strong><strong>s p</strong><strong>rédictions </strong>: l’IA générative répond souvent  «&nbsp;sans savoir&nbsp;» et&nbsp;par prédiction&nbsp;: elle génère la réponse qui lui paraît la plus probable.<br>On appelle ces erreurs&nbsp;<strong>des </strong><strong>hallucinations</strong>.&nbsp;Par exemple&nbsp;: elle peut attribuer une citation au mauvais auteur. 🤷 </li>\n    <li><strong>Les questions des utilisateurs</strong>&nbsp;: si elles contiennent des erreurs ou sont farfelues, l’IA peut inventer une information pour y répondre. </li>\n</ul>\n<p><br>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont aussi capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
+                "content": "<p>Une IA générative est conçue pour <strong>répondre aux demandes des utilisateurs</strong>, pas pour dire la vérité !<br></p>\n<p>Leurs erreurs peuvent venir de plusieurs causes&nbsp;: </p>\n<ul>\n    <li><strong>Les </strong><strong>données d’entraînement</strong>&nbsp;: elles peuvent contenir des erreurs ou ne plus être d'actualité. </li>\n    <li><strong>Le</strong><strong>s p</strong><strong>rédictions </strong>: l’IA générative répond souvent  «&nbsp;sans savoir&nbsp;» et&nbsp;par prédiction&nbsp;: elle génère la réponse qui lui paraît la plus probable.<br>On appelle ces erreurs&nbsp;<strong>des </strong><strong>hallucinations</strong>.&nbsp;Par exemple&nbsp;: elle peut attribuer une citation au mauvais auteur. 🤷 </li>\n    <li><strong>Les questions des utilisateurs</strong>&nbsp;: si elles contiennent des erreurs ou sont farfelues, l’IA peut inventer une information pour y répondre. </li>\n</ul>\n<p><br>🤔<strong> Bon à savoir</strong> <br>Les IA génératives sont aussi capables d’inventer des choses, à la demande des utilisateurs (écrire un poème, dessiner une vache rose). Dans ce cas, ce ne sont pas des erreurs !</p>"
               }
             }
           ]
@@ -488,7 +488,7 @@
               "element": {
                 "id": "8456e440-7043-4a73-aac3-bd7de3f44dcc",
                 "type": "text",
-                "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Mais que font les développeurs d’IA génératives pour empêcher ça ? 😱</p>"
+                "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Mais que font leurs développeurs pour empêcher ça ? 😱</p>"
               }
             }
           ]
@@ -634,7 +634,7 @@
                     {
                       "id": "81eb63dc-b909-461d-bea3-e32cf2637240",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Réflexe 1&nbsp;: Asma copie et colle la réponse du logiciel d'IA générative dans son document, sans la lire.</p>",
+                      "instruction": "<p>Réflexe 1&nbsp;: Asma copie et colle la réponse de l'IA dans son document, sans la lire.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -660,7 +660,7 @@
                     {
                       "id": "079936fa-826a-46da-903c-32dfd0089327",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Réflexe 2&nbsp;:&nbsp;Asma lit toute la réponse et s’interroge sur une partie de la réponse de l'IA. Elle demande au logiciel d'IA générative de préciser sa réponse en donnant sa source.</p>",
+                      "instruction": "<p>Réflexe 2&nbsp;:&nbsp;Asma lit toute la réponse et s’interroge sur une partie de la réponse. Elle demande au logiciel d'IA générative de préciser sa réponse en donnant sa source.</p>",
                       "proposals": [
                         {
                           "id": "1",
