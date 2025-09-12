@@ -585,7 +585,7 @@
               "element": {
                 "id": "cb97a8ff-93bf-4fb7-afae-58716ed3b4f7",
                 "type": "text",
-                "content": "<p>Grâce à des<strong> mises à jour régulières</strong>, les ingénieurs améliorent en continu les IA génératives. Elles progressent d’années en années !</p>\n\n<p><br>Mais certaines erreurs restent inévitables&nbsp;: une réponse fausse peut avoir exactement la même apparence qu’une réponse correcte. Pour l’instant, il n’existe<strong> pas de méthode fiable pour toutes les éviter</strong>.</p>"
+                "content": "<p>Grâce à des<strong> mises à jour régulières</strong>, les développeurs améliorent en continu les IA génératives. Elles progressent d’années en années !</p>\n\n<p><br>Mais certaines erreurs restent inévitables&nbsp;: une réponse fausse peut avoir exactement la même apparence qu’une réponse correcte. Pour l’instant, il n’existe<strong> pas de méthode fiable pour toutes les éviter</strong>.</p>"
               }
             }
           ]
@@ -853,7 +853,7 @@
               "element": {
                 "id": "ac09a36f-6446-4ced-9c4b-8ab544e113d9",
                 "type": "text",
-                "content": "<p>Voici ci-dessous des exemples d’erreurs dans des réponses données par des logiciels d’IA génératives. Pour chaque exemple, indiquez quelle est la source d'erreur correspondante.</p>"
+                "content": "<p>Voici ci-dessous des exemples d’erreurs dans des réponses données par des logiciels d’IA générative. Pour chaque exemple, indiquez quelle est la source d'erreur correspondante.</p>"
               }
             },
             {
@@ -923,7 +923,7 @@
                     {
                       "id": "9c2ddfdc-0dc9-435c-b3be-1ea4bf999895",
                       "type": "text",
-                      "content": "<p>L'IA n'a pas donné de réponse satisfaisante à Darius.<br>Darius a donc vérifié par ailleurs et il a découvert que l'émoji hippocampe n'existe pas. </p>"
+                      "content": "<p>L'IA n'a pas donné de réponse satisfaisante à Darius.<br>Darius a donc vérifié par ailleurs et il a découvert que l'émoji hippocampe n'existait pas. </p>"
                     },
                     {
                       "id": "9d16a295-07ca-493c-a8a3-c0265390b17a",
@@ -950,7 +950,7 @@
                           "id": "3",
                           "content": "<p>Les données d’entraînement de l’IA sont fausses ou trop anciennes.</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse</p>",
+                            "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Il est vrai que de nouveaux émojis sont régulièrement créés. Mais ce n’est pas la source de l’erreur de l’IA ici.<br>N'hésitez pas à réessayer.</p>"
                           }
                         }
@@ -966,7 +966,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/hallucinations/erreursia7-source.jpg",
                       "alt": "Extrait d'un échange sur un logiciel d'IA générative, contenu détaillé dans l'alternative textuelle.",
-                      "alternativeText": "<p>Question utilisateur&nbsp;: Donne moi un article en français sur le traitement des eaux pluviales, d’une revue scientifique, rédigée au format APA 7e édition.</p><p>Réponse de l'IA&nbsp;:&nbsp;Voici un article traitant du traitement des eaux pluviales, formaté selon APA 7e.<br><strong>Barra, M., Houeix, K., Hemminki, J., &amp; Grandin, G. </strong>(2019).&nbsp;<em>Gestion des eaux pluviales et biodiversité urbaine&nbsp;: état de la contamination et préconisations</em>.&nbsp;<strong>Annales de la Floristique Régionale Île‑de‑France</strong>, 10–33.</p>",
+                      "alternativeText": "<p>Question utilisateur&nbsp;: Donne-moi un article en français sur le traitement des eaux pluviales, d’une revue scientifique, rédigée au format APA 7e édition.</p><p>Réponse de l'IA&nbsp;:&nbsp;Voici un article traitant du traitement des eaux pluviales, formaté selon APA 7e.<br><strong>Barra, M., Houeix, K., Hemminki, J., &amp; Grandin, G. </strong>(2019).&nbsp;<em>Gestion des eaux pluviales et biodiversité urbaine&nbsp;: état de la contamination et préconisations</em>.&nbsp;<strong>Annales de la Floristique Régionale Île‑de‑France</strong>, 10–33.</p>",
                       "legend": "",
                       "licence": ""
                     },
