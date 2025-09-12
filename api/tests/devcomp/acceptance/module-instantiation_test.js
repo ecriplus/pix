@@ -9,9 +9,9 @@ const modules = await moduleDatasource.list();
 describe('Acceptance | Modules', function () {
   describe('Verify modules', function () {
     modules.forEach((moduleData) => {
-      it(`module ${moduleData.slug} should respect the domain`, function () {
+      it(`module ${moduleData.slug} should respect the domain`, async function () {
         try {
-          ModuleFactory.build(moduleData);
+          await ModuleFactory.build(moduleData);
 
           const elements = elementRepository.flattenModuleElements(moduleData);
           elements.forEach((element) => {

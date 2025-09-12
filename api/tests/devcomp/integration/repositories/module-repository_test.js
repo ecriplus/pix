@@ -136,7 +136,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
       };
       moduleDatasourceStub.getAllByIds
         .withArgs(notExistingModuleIds)
-        .throws(new ModuleDoesNotExistError(expectedErrorMessage));
+        .rejects(new ModuleDoesNotExistError(expectedErrorMessage));
 
       // when
       const error = await catchErr(moduleRepository.getAllByIds)({

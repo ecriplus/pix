@@ -9,7 +9,7 @@ describe('Acceptance | Script | Get Elements as CSV', function () {
   let modulesListAsJs;
 
   beforeEach(async function () {
-    modulesListAsJs = [ModuleFactory.build(moduleContent)];
+    modulesListAsJs = [await ModuleFactory.build(moduleContent)];
   });
 
   describe('#getElements', function () {
