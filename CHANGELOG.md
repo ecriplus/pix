@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.205.1](https://github.com/1024pix/pix/compare/v5.205.0...v5.205.1) (2025-09-12)
+
+### :building_construction: Tech
+
+- [#13482](https://github.com/1024pix/pix/pull/13482) Supprimer le feature toggle Use Locale dans les applications front (PIX-19273).
+
 # [5.205.0](https://github.com/1024pix/pix/compare/v5.204.0...v5.205.0) (2025-09-12)
 
 ### :rocket: Amélioration
