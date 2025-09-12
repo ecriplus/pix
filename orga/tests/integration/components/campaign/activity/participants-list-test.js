@@ -210,6 +210,34 @@ module('Integration | Component | Campaign::Activity::ParticipantsList', functio
   });
 
   module('#deleteParticipation', function () {
+    module('when the campaign is linked to a combined course', function () {
+      test('should not display delete participation button', async function (assert) {
+        class CurrentUserStub extends Service {
+          isAdminInOrganization = true;
+        }
+        this.owner.register('service:current-user', CurrentUserStub);
+
+        this.campaign = { externalIdLabel: 'id', type: 'ASSESSMENT', isFromCombinedCourse: true };
+        this.participations = [
+          {
+            firstName: 'Joe',
+            lastName: 'La frite',
+            status: 'TO_SHARE',
+            participantExternalId: 'patate',
+          },
+        ];
+
+        const screen = await render(hbs`<Campaign::Activity::ParticipantsList
+  @campaign={{this.campaign}}
+  @participations={{this.participations}}
+  @onClickParticipant={{this.noop}}
+  @onFilter={{this.noop}}
+/>`);
+
+        assert.notOk(screen.queryByRole('button', { name: 'Supprimer la participation' }));
+      });
+    });
+
     module('when the user is admin', function () {
       test('it should display the trash to delete the participation', async function (assert) {
         class CurrentUserStub extends Service {

@@ -25,7 +25,11 @@ export default class ParticipantsList extends Component {
   @tracked participationToDelete;
 
   get canDeleteParticipation() {
-    return this.currentUser.isAdminInOrganization || this.args.campaign.ownerId == this.currentUser.prescriber?.id;
+    const isCampaignFromCombinedCourse = this.args.campaign.isFromCombinedCourse;
+    const hasDeletionPermission =
+      this.currentUser.isAdminInOrganization || this.args.campaign.ownerId == this.currentUser.prescriber?.id;
+
+    return !isCampaignFromCombinedCourse && hasDeletionPermission;
   }
 
   @action
