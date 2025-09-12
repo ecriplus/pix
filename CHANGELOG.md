@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.205.0](https://github.com/1024pix/pix/compare/v5.204.0...v5.205.0) (2025-09-12)
+
+### :rocket: Amélioration
+
+- [#13538](https://github.com/1024pix/pix/pull/13538) Afficher le bon titre pour l'attestation pour le ministère des armées (PIX-19503) 
+- [#13525](https://github.com/1024pix/pix/pull/13525) Extraire les boutons d'action des grains de la carte (PIX-19491) 
+- [#13536](https://github.com/1024pix/pix/pull/13536) Module alternatif deepfakes 
+- [#13526](https://github.com/1024pix/pix/pull/13526) Module IA Hallu : correction coquille titre 
+- [#13498](https://github.com/1024pix/pix/pull/13498) Passage du vouvoiement au tutoiement sur certains textes espagnols (PIX-19458) 
+
+### :building_construction: Tech
+
+- [#13516](https://github.com/1024pix/pix/pull/13516) Modifier le libellé des locales des invitations aux organisations dans pix-admin (PIX-16379) 
+- [#13460](https://github.com/1024pix/pix/pull/13460) Utiliser deux routes pour séparer sujets/compétences dans les visualisation Plausible (PIX-16891). 
+
+### :coffee: Autre
+
+- [#13489](https://github.com/1024pix/pix/pull/13489) Modifier la génération des liens de l’urlService pour utiliser un queryParam locale à la place de queryParam lang  (PIX-19304)
+
 # [5.204.0](https://github.com/1024pix/pix/compare/v5.203.0...v5.204.0) (2025-09-11)
 
 ### :rocket: Amélioration
