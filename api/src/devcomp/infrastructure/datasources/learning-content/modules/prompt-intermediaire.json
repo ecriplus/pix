@@ -176,7 +176,7 @@
             {
               "type": "element",
               "element": {
-                "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
+                "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
                 "tagName": "llm-prompt-select",
                 "props": {
