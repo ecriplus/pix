@@ -1,6 +1,9 @@
 import { cancel } from '../../../../../../src/certification/session-management/domain/usecases/cancel.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
+import {
+  CertificationCancelNotAllowedError,
+  NotFinalizedSessionError,
+} from '../../../../../../src/shared/domain/errors.js';
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -28,9 +31,13 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationRescoringRepository = {
           rescoreV2Certification: sinon.stub(),
         };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationRescoringRepository.rescoreV2Certification.resolves();
         sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         await cancel({
@@ -39,6 +46,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseRepository,
           sessionRepository,
           certificationRescoringRepository,
+          courseAssessmentResultRepository,
         });
 
         // then
@@ -70,8 +78,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const sessionRepository = {
           get: sinon.stub(),
         };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         const error = await catchErr(cancel)({
@@ -79,6 +91,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseRepository,
           sessionRepository,
           juryId,
+          courseAssessmentResultRepository,
         });
 
         // then
@@ -110,9 +123,13 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationRescoringRepository = {
           rescoreV3Certification: sinon.stub(),
         };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationRescoringRepository.rescoreV3Certification.resolves();
         sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         await cancel({
@@ -121,6 +138,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseRepository,
           sessionRepository,
           certificationRescoringRepository,
+          courseAssessmentResultRepository,
         });
 
         // then
@@ -152,8 +170,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const sessionRepository = {
           get: sinon.stub(),
         };
+        const courseAssessmentResultRepository = {
+          getLatestAssessmentResult: sinon.stub(),
+        };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
+        courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         const error = await catchErr(cancel)({
@@ -161,11 +183,58 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseRepository,
           sessionRepository,
           juryId,
+          courseAssessmentResultRepository,
         });
 
         // then
         expect(error).to.be.instanceOf(NotFinalizedSessionError);
       });
+    });
+  });
+
+  describe('when certification is rejected', function () {
+    it('should not cancel the certification and throw CertificationCancelNotAllowedError', async function () {
+      // given
+      const juryId = 123;
+      const session = domainBuilder.certification.sessionManagement.buildSession({
+        finalizedAt: new Date('2020-01-01'),
+        version: AlgorithmEngineVersion.V2,
+      });
+      const certificationCourse = domainBuilder.buildCertificationCourse({
+        id: 123,
+        sessionId: session.id,
+        version: AlgorithmEngineVersion.V2,
+      });
+      const certificationCourseRepository = {
+        get: sinon.stub(),
+      };
+      const sessionRepository = {
+        get: sinon.stub(),
+      };
+      const certificationRescoringRepository = {
+        rescoreV2Certification: sinon.stub(),
+      };
+      const courseAssessmentResultRepository = {
+        getLatestAssessmentResult: sinon.stub(),
+      };
+
+      certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
+      sessionRepository.get.withArgs({ id: certificationCourse.getSessionId() }).resolves(session);
+      courseAssessmentResultRepository.getLatestAssessmentResult.resolves({ status: 'rejected' });
+
+      // when
+      const error = await catchErr(cancel)({
+        certificationCourseId: 123,
+        juryId,
+        certificationCourseRepository,
+        sessionRepository,
+        certificationRescoringRepository,
+        courseAssessmentResultRepository,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(CertificationCancelNotAllowedError);
+      expect(certificationRescoringRepository.rescoreV2Certification).to.not.have.been.called;
     });
   });
 });
