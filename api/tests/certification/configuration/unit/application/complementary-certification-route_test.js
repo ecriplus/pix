@@ -151,4 +151,53 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
       });
     });
   });
+
+  describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history', function () {
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(complementaryCertificationController, 'getFrameworkHistory').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(
+          'GET',
+          `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/framework-history`,
+        );
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(complementaryCertificationController.getFrameworkHistory);
+      });
+    });
+
+    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier'];
+
+    authorizedRoles.forEach((role) => {
+      describe(`when the user has ${role} role`, function () {
+        it('should return 200 HTTP status code', async function () {
+          // given
+          sinon.stub(securityPreHandlers, `checkAdminMemberHasRole${role}`).returns(true);
+          sinon.stub(complementaryCertificationController, 'getFrameworkHistory').returns('ok');
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request(
+            'GET',
+            `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/framework-history`,
+          );
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          sinon.assert.calledOnce(complementaryCertificationController.getFrameworkHistory);
+        });
+      });
+    });
+  });
 });

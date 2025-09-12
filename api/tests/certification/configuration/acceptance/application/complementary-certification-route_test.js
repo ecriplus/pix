@@ -537,4 +537,54 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       ]);
     });
   });
+
+  describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history', function () {
+    it('should return the framework history for given complementaryCertificationKey', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+      const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: complementaryCertification.key,
+        challengeId: 'rec123',
+        createdAt: new Date('2024-01-11'),
+      });
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: complementaryCertification.key,
+        challengeId: 'rec123',
+        createdAt: new Date('2025-01-11'),
+      });
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        complementaryCertificationKey: otherComplementaryCertification.key,
+        challengeId: 'rec123',
+        createdAt: new Date('2023-01-11'),
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/complementary-certifications/${complementaryCertification.key}/framework-history`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.deep.equal({
+        id: complementaryCertification.key,
+        type: 'framework-histories',
+        attributes: {
+          'complementary-certification-key': complementaryCertification.key,
+          history: ['20250111000000', '20240111000000'],
+        },
+      });
+    });
+  });
 });
