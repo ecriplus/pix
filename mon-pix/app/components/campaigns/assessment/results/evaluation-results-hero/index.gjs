@@ -206,7 +206,7 @@ export default class EvaluationResultsHero extends Component {
       </div>
       <div class="evaluation-results-hero__details">
         <h2 class="evaluation-results-hero-details__title">
-          {{t "pages.skill-review.hero.bravo" name=this.currentUser.user.firstName}}
+          {{t "pages.skill-review.hero.thanks" name=this.currentUser.user.firstName}}
         </h2>
 
         {{#if @campaignParticipationResult.hasReachedStage}}

@@ -2019,7 +2019,6 @@
       "error": "Oops, an error occurred!",
       "hero": {
         "acquired-badges-title": "Awards received",
-        "bravo": "Congratulations {name}!",
         "explanations": {
           "improve": "If you want to improve your score, you can retry certain questions.",
           "send-results": "Send your results to the customised test organiser and continue with the recommended training.",
@@ -2036,7 +2035,8 @@
           "title": "Improve your results"
         },
         "see-trainings": "See trainings",
-        "shared-message": "Your results were sent on {date} at {time}."
+        "shared-message": "Your results were sent on {date} at {time}.",
+        "thanks": "Thank you, {name}, for participating!"
       },
       "improve": {
         "description": "You can retake some of the questions",

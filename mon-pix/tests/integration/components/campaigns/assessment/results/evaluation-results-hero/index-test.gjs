@@ -4,8 +4,8 @@ import { click } from '@ember/test-helpers';
 import dayjs from 'dayjs';
 import CustomParseFormat from 'dayjs/plugin/customParseFormat';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import EvaluationResultsHero from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/index';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -31,25 +31,26 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
     hooks.beforeEach(async function () {
       // given
+      const campaign = { organizationId: 1 };
+      const campaignParticipationResult = { masteryRate: 0.755, sharedAt: new Date('2024-01-01T14:03:00Z') };
       stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
-
-      this.set('campaign', { organizationId: 1 });
-      this.set('campaignParticipationResult', { masteryRate: 0.755, sharedAt: new Date('2024-01-01T14:03:00Z') });
 
       // when
       screen = await render(
-        hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+        <template>
+          <EvaluationResultsHero
+            @campaign={{campaign}}
+            @campaignParticipationResult={{campaignParticipationResult}}
+            @isSharableCampaign={{true}}
+          />
+        </template>,
       );
     });
 
     test('it should display a congratulation title', async function (assert) {
       // then
       const title = screen.getByRole('heading', {
-        name: t('pages.skill-review.hero.bravo', { name: 'Hermione' }),
+        name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }),
       });
       assert.dom(title).exists();
     });
@@ -72,35 +73,35 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           const featureToggles = this.owner.lookup('service:featureToggles');
           sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: false });
 
-          this.set('campaign', {
+          const campaign = {
             customResultPageText: 'My custom result page text',
             organizationId: 1,
-          });
-
-          this.set('campaignParticipationResult', {
+          };
+          const campaignParticipationResult = {
             campaignParticipationBadges: [],
             isShared: false,
             canImprove: false,
             masteryRate: 0.75,
             reachedStage: { acquired: 4, total: 5 },
-          });
-
-          this.set('questResults', [
+          };
+          const questResults = [
             {
               obtained: true,
               profileRewardId: 12,
               reward: { key: 'SIXTH_GRADE' },
             },
-          ]);
+          ];
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @questResults={{questResults}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
 
           // then
@@ -121,35 +122,35 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             const featureToggles = this.owner.lookup('service:featureToggles');
             sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: true });
 
-            this.set('campaign', {
+            const campaign = {
               customResultPageText: 'My custom result page text',
               organizationId: 1,
-            });
-
-            this.set('campaignParticipationResult', {
+            };
+            const campaignParticipationResult = {
               campaignParticipationBadges: [],
               isShared: false,
               canImprove: false,
               masteryRate: 0.75,
               reachedStage: { acquired: 4, total: 5 },
-            });
-
-            this.set('questResults', [
+            };
+            const questResults = [
               {
                 obtained: true,
                 profileRewardId: 12,
                 reward: { key: 'SIXTH_GRADE' },
               },
-            ]);
+            ];
 
             // when
             const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+              <template>
+                <EvaluationResultsHero
+                  @campaign={{campaign}}
+                  @questResults={{questResults}}
+                  @campaignParticipationResult={{campaignParticipationResult}}
+                  @isSharableCampaign={{true}}
+                />
+              </template>,
             );
 
             // then
@@ -161,34 +162,36 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             const featureToggles = this.owner.lookup('service:featureToggles');
             sinon.stub(featureToggles, 'featureToggles').value({ isQuestEnabled: true });
 
-            this.set('campaign', {
+            const campaign = {
               customResultPageText: 'My custom result page text',
               organizationId: 1,
-            });
+            };
 
-            this.set('campaignParticipationResult', {
+            const campaignParticipationResult = {
               campaignParticipationBadges: [],
               isShared: false,
               canImprove: false,
               masteryRate: 0.75,
               reachedStage: { acquired: 4, total: 5 },
-            });
-            this.set('questResults', [
+            };
+            const questResults = [
               {
                 obtained: true,
                 profileRewardId: 12,
                 reward: { key: 'SIXTH_GRADE' },
               },
-            ]);
+            ];
 
             // when
             const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+              <template>
+                <EvaluationResultsHero
+                  @campaign={{campaign}}
+                  @questResults={{questResults}}
+                  @campaignParticipationResult={{campaignParticipationResult}}
+                  @isSharableCampaign={{true}}
+                />
+              </template>,
             );
 
             // then
@@ -216,26 +219,28 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when results are not shared', function () {
       test('it should display specific explanation and button', async function (assert) {
         // given
-        this.set('campaign', {
+        const campaign = {
           customResultPageText: 'My custom result page text',
           organizationId: 1,
-        });
+        };
 
-        this.set('campaignParticipationResult', {
+        const campaignParticipationResult = {
           campaignParticipationBadges: [],
           isShared: false,
           canImprove: false,
           masteryRate: 0.75,
           reachedStage: { acquired: 4, total: 5 },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -245,27 +250,29 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
       test('it should display disabled notation', async function (assert) {
         // given
-        this.set('campaign', {
+        const campaign = {
           customResultPageText: 'My custom result page text',
           organizationId: 1,
-        });
+        };
 
-        this.set('campaignParticipationResult', {
+        const campaignParticipationResult = {
           campaignParticipationBadges: [],
           isShared: false,
           isDisabled: true,
           canImprove: false,
           masteryRate: 0.75,
           reachedStage: { acquired: 4, total: 5 },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -278,27 +285,29 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         test('it should not display a sign in button', async function (assert) {
           //given
           stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
-          this.set('campaign', {
+          const campaign = {
             customResultPageText: 'My custom result page text',
             organizationId: 1,
-          });
+          };
 
-          this.set('campaignParticipationResult', {
+          const campaignParticipationResult = {
             campaignParticipationBadges: [],
             isShared: false,
             canImprove: false,
             masteryRate: 0.75,
             reachedStage: { acquired: 4, total: 5 },
-          });
+          };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @questResults={{this.questResults}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
 
           // then
@@ -308,70 +317,81 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         });
       });
 
-      module('on click on the share button', function (hooks) {
-        let campaignParticipationResult, onResultsSharedStub, screen, shareStub;
+      module('on click on the share button', function () {
+        let shareStub;
 
-        hooks.beforeEach(async function () {
-          // given
-          const store = this.owner.lookup('service:store');
-
-          const adapter = store.adapterFor('campaign-participation-result');
-          shareStub = sinon.stub(adapter, 'share');
-
-          this.set('campaign', {
-            id: 1,
-            customResultPageText: 'My custom result page text',
-            organizationId: 1,
-          });
-
-          campaignParticipationResult = store.createRecord('campaign-participation-result', {
-            campaignParticipationBadges: [],
-            isShared: false,
-            canImprove: true,
-            masteryRate: 0.75,
-          });
-          sinon.stub(campaignParticipationResult, 'reload').resolves();
-          campaignParticipationResult.id = 'campaignParticipationResultId';
-          this.set('campaignParticipationResult', campaignParticipationResult);
-
-          onResultsSharedStub = sinon.stub().resolves();
-          this.set('onResultsShared', onResultsSharedStub);
-
-          // when
-          screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-  @onResultsShared={{this.onResultsShared}}
-/>`,
-          );
-        });
+        const campaign = {
+          id: 1,
+          customResultPageText: 'My custom result page text',
+          organizationId: 1,
+        };
 
         test('on success, it should display a notification and hide improve elements', async function (assert) {
           // given
-          campaignParticipationResult.sharedAt = now;
-          campaignParticipationResult.isShared = true;
-          campaignParticipationResult.canImprove = false;
-          this.set('campaignParticipationResult', campaignParticipationResult);
+          const store = this.owner.lookup('service:store');
+          const adapter = store.adapterFor('campaign-participation-result');
+          shareStub = sinon.stub(adapter, 'share');
+          const onResultsSharedStub = sinon.stub().resolves();
+          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
+            campaignParticipationBadges: [],
+            isShared: true,
+            canImprove: false,
+            masteryRate: 0.75,
+            sharedAt: now,
+            id: 'campaignParticipationResultId',
+          });
+          sinon.stub(campaignParticipationResult, 'reload').resolves();
 
-          // when & then
+          // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+                @onResultsShared={{onResultsSharedStub}}
+              />
+            </template>,
+          );
+
+          // then
           assert.ok(
             screen.queryByText(
               t('pages.skill-review.hero.shared-message', { date: sharedAtDate(now), time: sharedAtTime(now) }),
             ),
           );
           assert.dom(screen.queryByText(t('pages.skill-review.error'))).doesNotExist();
-
           assert.dom(screen.queryByText(t('pages.skill-review.hero.explanations.improve'))).doesNotExist();
           assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.actions.improve') })).doesNotExist();
         });
 
         test('on success, it should call the onResultsShared function', async function (assert) {
           // given
+          const store = this.owner.lookup('service:store');
+          const adapter = store.adapterFor('campaign-participation-result');
+          shareStub = sinon.stub(adapter, 'share');
+          const onResultsSharedStub = sinon.stub().resolves();
+          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
+            campaignParticipationBadges: [],
+            isShared: false,
+            canImprove: true,
+            masteryRate: 0.75,
+            id: 'campaignParticipationResultId',
+          });
+          sinon.stub(campaignParticipationResult, 'reload').resolves();
           shareStub.resolves();
 
           // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+                @onResultsShared={{onResultsSharedStub}}
+              />
+            </template>,
+          );
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
 
           // then
@@ -380,9 +400,31 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
         test('on fail, it should display an error', async function (assert) {
           // given
+          const store = this.owner.lookup('service:store');
+          const adapter = store.adapterFor('campaign-participation-result');
+          shareStub = sinon.stub(adapter, 'share');
+          const onResultsSharedStub = sinon.stub().resolves();
+          const campaignParticipationResult = store.createRecord('campaign-participation-result', {
+            campaignParticipationBadges: [],
+            isShared: false,
+            canImprove: true,
+            masteryRate: 0.75,
+            id: 'campaignParticipationResultId',
+          });
+          sinon.stub(campaignParticipationResult, 'reload').resolves();
           shareStub.rejects();
 
           // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+                @onResultsShared={{onResultsSharedStub}}
+              />
+            </template>,
+          );
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.send') }));
 
           // then
@@ -397,27 +439,28 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when results are shared', function () {
       test('it should not display disabled notation', async function (assert) {
         // given
-        this.set('campaign', {
+        const campaign = {
           customResultPageText: 'My custom result page text',
           organizationId: 1,
-        });
-
-        this.set('campaignParticipationResult', {
+        };
+        const campaignParticipationResult = {
           campaignParticipationBadges: [],
           isShared: true,
           isDisabled: true,
           canImprove: false,
           masteryRate: 0.75,
           reachedStage: { acquired: 4, total: 5 },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -426,23 +469,25 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
       test('it should display the shared date', async function (assert) {
         // given
-        this.set('campaign', {
+        const campaign = {
           customResultPageText: 'My custom result page text',
           organizationId: 1,
-        });
+        };
 
-        this.set('campaignParticipationResult', {
+        const campaignParticipationResult = {
           campaignParticipationBadges: [],
           isShared: true,
           sharedAt: now,
-        });
+        };
 
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -456,16 +501,18 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when there are no trainings and no custom link', function () {
         test('it should display a message and a homepage link', async function (assert) {
           // given
-          this.set('campaign', { organizationId: 1 });
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
 
           // the
@@ -481,19 +528,21 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when there are no trainings and a custom link', function () {
         test('it should display a message but no homepage link', async function (assert) {
           // given
-          this.set('campaign', {
+          const campaign = {
             organizationId: 1,
             hasCustomResultPageButton: true,
-          });
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+          };
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
 
           // then
@@ -507,27 +556,26 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       });
 
       module('when there are trainings', function (hooks) {
-        let screen, showTrainings;
+        let screen;
+        const showTrainingsStub = sinon.stub();
 
         hooks.beforeEach(async function () {
           // given
-          this.set('hasTrainings', true);
-
-          showTrainings = sinon.stub();
-          this.set('showTrainings', showTrainings);
-
-          this.set('campaign', { organizationId: 1 });
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+          const hasTrainings = true;
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
           // when
           screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @hasTrainings={{this.hasTrainings}}
-  @showTrainings={{this.showTrainings}}
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @hasTrainings={{hasTrainings}}
+                @showTrainings={{showTrainingsStub}}
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
         });
 
@@ -541,36 +589,37 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           // then
           await click(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') }));
 
-          sinon.assert.calledOnce(showTrainings);
+          sinon.assert.calledOnce(showTrainingsStub);
           assert.ok(true);
         });
       });
 
-      module('when user is anonymous', function (hooks) {
-        hooks.beforeEach(async function () {
+      module('when user is anonymous', function () {
+        test('it should display a sign in button', async function (assert) {
+          // given
           stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione', isAnonymous: true });
-          this.set('campaign', {
+          const campaign = {
             customResultPageText: 'My custom result page text',
             organizationId: 1,
-          });
-          this.set('campaignParticipationResult', {
+          };
+          const campaignParticipationResult = {
             campaignParticipationBadges: [],
             isShared: true,
             canImprove: false,
             masteryRate: 0.75,
             reachedStage: { acquired: 4, total: 5 },
-          });
-        });
+          };
 
-        test('it should display a sign in button', async function (assert) {
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @questResults={{this.questResults}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @questResults={{this.questResults}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{true}}
+              />
+            </template>,
           );
           // then
           assert.ok(screen.queryByText(t('pages.sign-up.save-progress-message')));
@@ -587,16 +636,18 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           // given
           stubCurrentUserService(this.owner, { isAnonymous: true });
 
-          this.set('campaign', { hasCustomResultPageButton: false });
-          this.set('campaignParticipationResult', { masteryRate: 0.75 });
+          const campaign = { hasCustomResultPageButton: false };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{false}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{false}}
+              />
+            </template>,
           );
 
           // then
@@ -613,16 +664,18 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           // given
           stubCurrentUserService(this.owner, { firstName: 'Hermione' });
 
-          this.set('campaign', { hasCustomResultPageButton: false });
-          this.set('campaignParticipationResult', { masteryRate: 0.75 });
+          const campaign = { hasCustomResultPageButton: false };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{false}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+                @isSharableCampaign={{false}}
+              />
+            </template>,
           );
 
           // then
@@ -639,16 +692,18 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when there is a custom link', function () {
       test('it should not display a homepage link', async function (assert) {
         // given
-        this.set('campaign', { hasCustomResultPageButton: true });
-        this.set('campaignParticipationResult', { masteryRate: 0.75 });
+        const campaign = { hasCustomResultPageButton: true };
+        const campaignParticipationResult = { masteryRate: 0.75 };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{false}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{false}}
+            />
+          </template>,
         );
 
         // then
@@ -663,7 +718,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
 
   module('improve results', function () {
     module('when user can improve results', function (hooks) {
-      let beginImprovementStub, campaign, campaignParticipationResult, router, screen, shareStub;
+      let beginImprovementStub, router, screen, shareStub;
+      const onResultsShared = sinon.stub();
+      const campaignCode = 'ABC';
+      const campaignParticipationResultId = 'campaignParticipationResultId';
 
       hooks.beforeEach(async function () {
         // given
@@ -677,42 +735,28 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         shareStub = sinon.stub(adapter, 'share');
         beginImprovementStub = sinon.stub(adapter, 'beginImprovement');
 
-        campaignParticipationResult = store.createRecord('campaign-participation-result', {
+        const campaign = { organizationId: 1, code: campaignCode };
+        const campaignParticipationResult = store.createRecord('campaign-participation-result', {
           masteryRate: 0.75,
           canImprove: true,
+          id: campaignParticipationResultId,
         });
         sinon.stub(campaignParticipationResult, 'reload').resolves();
-        campaignParticipationResult.id = 'campaignParticipationResultId';
-        this.set('campaignParticipationResult', campaignParticipationResult);
-        this.set('onResultsShared', sinon.stub());
-
-        campaign = this.set('campaign', { organizationId: 1, code: 'ABC' });
 
         // when
         screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-  @onResultsShared={{this.onResultsShared}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+              @isSharableCampaign={{true}}
+              @onResultsShared={{onResultsShared}}
+            />
+          </template>,
         );
       });
 
       test('it should display specific explanation and button', async function (assert) {
-        // given
-        this.set('campaign', { organizationId: 1 });
-        this.set('campaignParticipationResult', { masteryRate: 0.75, canImprove: true });
-
-        // when
-        const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-  @isSharableCampaign={{true}}
-/>`,
-        );
-
         // then
         assert.dom(screen.getByText(t('pages.skill-review.hero.explanations.improve'))).exists();
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') })).exists();
@@ -752,10 +796,10 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
           await click(screen.getByRole('button', { name: t('pages.skill-review.actions.improve') }));
 
           // then
-          sinon.assert.calledWithExactly(beginImprovementStub, campaignParticipationResult.id);
+          sinon.assert.calledWithExactly(beginImprovementStub, campaignParticipationResultId);
           assert.ok(beginImprovementStub.calledOnce);
 
-          sinon.assert.calledWithExactly(router.transitionTo, 'campaigns.entry-point', campaign.code);
+          sinon.assert.calledWithExactly(router.transitionTo, 'campaigns.entry-point', campaignCode);
           assert.ok(router.transitionTo.calledOnce);
         });
 
@@ -779,15 +823,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when user can not improve results', function () {
       test('it should not display specific explanation and button', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1 });
-        this.set('campaignParticipationResult', { masteryRate: 0.75, canImprove: false });
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = { masteryRate: 0.75, canImprove: false };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
@@ -801,74 +847,80 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when there are stages', function () {
       test('displays reached stage stars and message', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1 });
-        this.set('campaignParticipationResult', {
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = {
           hasReachedStage: true,
           reachedStage: { reachedStage: 4, totalStage: 5, message: 'lorem ipsum dolor sit amet' },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
         const stars = {
-          acquired: this.campaignParticipationResult.reachedStage.reachedStage - 1,
-          total: this.campaignParticipationResult.reachedStage.totalStage - 1,
+          acquired: campaignParticipationResult.reachedStage.reachedStage - 1,
+          total: campaignParticipationResult.reachedStage.totalStage - 1,
         };
         assert.strictEqual(screen.getAllByText(t('pages.skill-review.stage.starsAcquired', stars)).length, 2);
 
-        assert.dom(screen.getByText(this.campaignParticipationResult.reachedStage.message)).exists();
+        assert.dom(screen.getByText(campaignParticipationResult.reachedStage.message)).exists();
       });
     });
 
     module('when there is only one stage', function () {
       test('displays the stage 0 message but no stars', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1 });
-        this.set('campaignParticipationResult', {
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = {
           hasReachedStage: true,
           reachedStage: { reachedStage: 1, totalStage: 1, message: 'Stage 0 message' },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
         const stars = {
-          acquired: this.campaignParticipationResult.reachedStage.reachedStage - 1,
-          total: this.campaignParticipationResult.reachedStage.totalStage - 1,
+          acquired: campaignParticipationResult.reachedStage.reachedStage - 1,
+          total: campaignParticipationResult.reachedStage.totalStage - 1,
         };
         assert.dom(screen.queryByText(t('pages.skill-review.stage.starsAcquired', stars))).doesNotExist();
 
-        assert.dom(screen.getByText(this.campaignParticipationResult.reachedStage.message)).exists();
+        assert.dom(screen.getByText(campaignParticipationResult.reachedStage.message)).exists();
       });
     });
 
     module('when there is no stage', function () {
       test('not display stars and message', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1 });
-        this.set('campaignParticipationResult', {
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = {
           hasReachedStage: false,
           reachedStage: { message: 'not existing message' },
-        });
+        };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
@@ -889,16 +941,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         const campaignParticipationResult = store.createRecord('campaign-participation-result', {
           campaignParticipationBadges: [acquiredBadge],
         });
-        this.set('campaignParticipationResult', campaignParticipationResult);
 
-        this.set('campaign', { organizationId: 1 });
+        const campaign = { organizationId: 1 };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
@@ -917,16 +970,16 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         const campaignParticipationResult = store.createRecord('campaign-participation-result', {
           campaignParticipationBadges: [notAquiredBadge],
         });
-        this.set('campaignParticipationResult', campaignParticipationResult);
-
-        this.set('campaign', { organizationId: 1 });
+        const campaign = { organizationId: 1 };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
@@ -943,20 +996,21 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when customResultPageText if defined', function () {
         test('displays the organization block with the text', async function (assert) {
           // given
-          this.set('campaign', {
+          const campaign = {
             customResultPageText: 'My custom result page text',
             organizationId: 1,
             isSimplifiedAccess: true,
-          });
-
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: false });
+          };
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: false };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
           );
 
           // then
@@ -973,15 +1027,16 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
             customResultPageButtonText: 'Custom result page button text',
             organizationId: 1,
           });
-          this.set('campaign', campaign);
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
           );
 
           // then
@@ -992,15 +1047,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when campaign has no custom result page button or text', function () {
         test('no display the organization block', async function (assert) {
           // given
-          this.set('campaign', { organizationId: 1 });
-          this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
           );
 
           // then
@@ -1013,15 +1070,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
       module('when results are not shared', function () {
         test('it should not display the organization block', async function (assert) {
           // given
-          this.set('campaign', { organizationId: 1 });
-          this.set('campaignParticipationResult', { masteryRate: 0.75 });
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.75 };
 
           // when
           const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+            <template>
+              <EvaluationResultsHero
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
           );
 
           // then
@@ -1033,19 +1092,21 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when customResultPageText if defined', function () {
           test('displays the organization block with the text', async function (assert) {
             // given
-            this.set('campaign', {
+            const campaign = {
               customResultPageText: 'My custom result page text',
               organizationId: 1,
-            });
+            };
 
-            this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
             // when
             const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+              <template>
+                <EvaluationResultsHero
+                  @campaign={{campaign}}
+                  @campaignParticipationResult={{campaignParticipationResult}}
+                />
+              </template>,
             );
 
             // then
@@ -1062,15 +1123,16 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
               customResultPageButtonText: 'Custom result page button text',
               organizationId: 1,
             });
-            this.set('campaign', campaign);
-            this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
             // when
             const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+              <template>
+                <EvaluationResultsHero
+                  @campaign={{campaign}}
+                  @campaignParticipationResult={{campaignParticipationResult}}
+                />
+              </template>,
             );
 
             // then
@@ -1081,15 +1143,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
         module('when campaign has no custom result page button or text', function () {
           test('no display the organization block', async function (assert) {
             // given
-            this.set('campaign', { organizationId: 1 });
-            this.set('campaignParticipationResult', { masteryRate: 0.75, isShared: true });
+            const campaign = { organizationId: 1 };
+            const campaignParticipationResult = { masteryRate: 0.75, isShared: true };
 
             // when
             const screen = await render(
-              hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+              <template>
+                <EvaluationResultsHero
+                  @campaign={{campaign}}
+                  @campaignParticipationResult={{campaignParticipationResult}}
+                />
+              </template>,
             );
 
             // then
@@ -1104,15 +1168,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when the user can retry the campaign', function () {
       test('displays the retry or reset block', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1, multipleSendings: true });
-        this.set('campaignParticipationResult', { masteryRate: 0.1, canRetry: true, canReset: true });
+        const campaign = { organizationId: 1, multipleSendings: true };
+        const campaignParticipationResult = { masteryRate: 0.1, canRetry: true, canReset: true };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
@@ -1123,15 +1189,17 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     module('when the user can not retry the campaign', function () {
       test('not display the retry or reset block', async function (assert) {
         // given
-        this.set('campaign', { organizationId: 1, multipleSendings: false });
-        this.set('campaignParticipationResult', { masteryRate: 0.1, canRetry: false, canReset: true });
+        const campaign = { organizationId: 1, multipleSendings: false };
+        const campaignParticipationResult = { masteryRate: 0.1, canRetry: false, canReset: true };
 
         // when
         const screen = await render(
-          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
+          <template>
+            <EvaluationResultsHero
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
         );
 
         // then
