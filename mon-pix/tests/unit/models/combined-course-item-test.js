@@ -26,7 +26,7 @@ module('Unit | Model | Combined Course Item', function (hooks) {
     });
   });
 
-  module('Type is module', function () {
+  module('Type is MODULE', function () {
     test('return route campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
         type: 'MODULE',
@@ -40,6 +40,16 @@ module('Unit | Model | Combined Course Item', function (hooks) {
         image: 'my-module-url',
       });
       assert.strictEqual(combinedCourseItem.iconUrl, 'my-module-url');
+    });
+  });
+
+  module('Type is FORMATION', function () {
+    test('return iconUrl related for campaign', function (assert) {
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        type: 'FORMATION',
+        image: 'my-module-url',
+      });
+      assert.strictEqual(combinedCourseItem.iconUrl, '/images/formation-book.svg');
     });
   });
 });

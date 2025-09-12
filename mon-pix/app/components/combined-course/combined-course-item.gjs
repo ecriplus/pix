@@ -54,7 +54,7 @@ const Duration = <template>
     <Content
       @title={{t "pages.combined-courses.items.formation.title"}}
       @isLocked={{true}}
-      @iconUrl="/images/formation-book.svg"
+      @iconUrl={{@item.iconUrl}}
       class="combined-course-item--formation"
     >
       <:description>
