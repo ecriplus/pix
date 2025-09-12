@@ -708,6 +708,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(
           <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
         );
+        // await this.pauseTest();
 
         // then
         assert.dom(find('#stepper-container-id-1')).exists();
@@ -721,7 +722,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           .dom(find('.stepper--horizontal'))
           .hasAria('roleDescription', t('pages.modulix.stepper.aria-role-description'));
         assert
-          .dom(screen.getByLabelText('1 sur 2'))
+          .dom(screen.getByRole('group'))
           .hasAria('roleDescription', t('pages.modulix.stepper.step.aria-role-description'));
       });
 
@@ -765,22 +766,22 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         );
 
         // then
-        const title = screen.getByLabelText(
-          t('pages.modulix.stepper.step.position', {
+        const title = screen.getByRole('paragraph', {
+          name: t('pages.modulix.stepper.step.aria-label', {
             currentStep: 1,
             totalSteps: 2,
           }),
-        );
+        });
         assert.dom(title).exists();
         await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
         assert
           .dom(
-            screen.getByLabelText(
-              t('pages.modulix.stepper.step.position', {
+            screen.getByRole('paragraph', {
+              name: t('pages.modulix.stepper.step.aria-label', {
                 currentStep: 2,
                 totalSteps: 2,
               }),
-            ),
+            }),
           )
           .exists();
       });
@@ -812,7 +813,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
         // then
-        assert.dom(screen.getByLabelText('1 sur 2'));
+        assert
+          .dom(
+            screen.getByRole('group', {
+              name: t('pages.modulix.stepper.step.aria-label', {
+                currentStep: 1,
+                totalSteps: 2,
+              }),
+            }),
+          )
+          .exists();
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
@@ -883,12 +893,12 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         );
         assert
           .dom(
-            screen.getByLabelText(
-              t('pages.modulix.stepper.step.position', {
+            screen.getByRole('group', {
+              name: t('pages.modulix.stepper.step.aria-label', {
                 currentStep: 1,
                 totalSteps: 2,
               }),
-            ),
+            }),
           )
           .exists();
       });
@@ -1262,7 +1272,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.dom(screen.getByLabelText('1 sur 1')).exists();
+            assert
+              .dom(
+                screen.getByRole('group', {
+                  name: t('pages.modulix.stepper.step.aria-label', {
+                    currentStep: 1,
+                    totalSteps: 1,
+                  }),
+                }),
+              )
+              .exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .doesNotExist();
@@ -1357,8 +1376,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
           // then
           assert.strictEqual(screen.getAllByLabelText('1 sur 2', { disabled: true }).length, 1);
-          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
-          assert.dom(screen.getByLabelText('2 sur 2')).isFocused();
+          assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
+          assert.dom(screen.getByRole('group', { name: '2 sur 2' })).isFocused();
         });
 
         test('should enable the controls previous button', async function (assert) {
@@ -1450,7 +1469,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
             ),
               // then
-              assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
+              assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
             assert
               .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
               .isFocused();
@@ -1553,7 +1572,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               );
 
               // then
-              assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
+              assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
               assert
                 .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
                 .isFocused();
@@ -1640,8 +1659,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
           // then
-          assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
-          assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
+          assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
+          assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
         });
 
         module('when has unsupported elements', function () {
@@ -1687,8 +1706,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             );
 
             // then
-            assert.strictEqual(screen.getAllByLabelText('1 sur 2').length, 1);
-            assert.strictEqual(screen.getAllByLabelText('2 sur 2').length, 1);
+            assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
+            assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
           });
         });
       });

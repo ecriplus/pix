@@ -48,6 +48,7 @@ export default class ModulixStep extends Component {
         aria-hidden={{if @isHidden "true"}}
         aria-roledescription={{t "pages.modulix.stepper.step.aria-role-description"}}
         aria-label={{t "pages.modulix.stepper.step.aria-label" currentStep=@currentStep totalSteps=@totalSteps}}
+        role="group"
       >
         {{#each this.displayableElements as |element|}}
           <div class="grain-card-content__element">
