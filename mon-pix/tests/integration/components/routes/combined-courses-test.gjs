@@ -32,6 +32,23 @@ module('Integration | Component | combined course', function (hooks) {
       // then
       assert.ok(screen.getByRole('heading', { name: 'Combinix' }));
     });
+    test('should display description on course if they exist', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.NOT_STARTED,
+        code: 'COMBINIX9',
+        description: 'Le but de ma quête',
+      });
+
+      this.setProperties({ combinedCourse });
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      assert.ok(screen.getByText('Le but de ma quête'));
+    });
   });
 
   module('when there is a formation item', function () {

@@ -8,7 +8,7 @@ import eq from 'ember-truth-helpers/helpers/eq';
 import CombinedCourseItem from '../combined-course/combined-course-item';
 
 const CompletedText = <template>
-  <div class="completed-text" ...attributes>
+  <div class="completed-text">
     <h2 class="completed-text__title">{{t "pages.combined-courses.completed.title"}}</h2>
     <p class="completed-text__description">{{t "pages.combined-courses.completed.description"}}</p>
   </div>
@@ -16,29 +16,39 @@ const CompletedText = <template>
 
 export default class CombinedCourses extends Component {
   <template>
-    <div class="combined-course">
-      <div class="combined-course__header">
-        <h1>{{@combinedCourse.name}} </h1>
-      </div>
-      {{#if (eq @combinedCourse.status "COMPLETED")}}
-        <section class="combined-course-completed">
-          <img src="/images/illustrations/combined-course/completed.svg" />
-          <CompletedText />
-        </section>
-      {{else if (eq @combinedCourse.status "NOT_STARTED")}}
-        <PixButton
-          @type="submit"
-          @triggerAction={{this.startQuestParticipation}}
-          @loading-color="white"
-          @size="large"
-        >{{t "pages.combined-courses.content.start-button"}}
-        </PixButton>
-      {{else if (eq @combinedCourse.status "STARTED")}}
-        <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
-            "pages.combined-courses.content.resume-button"
-          }}
-        </PixButton>
-      {{/if}}
+    <section class="combined-course">
+      <header class="combined-course__header">
+        <div>
+          <h1>{{@combinedCourse.name}}</h1>
+
+          {{#if (eq @combinedCourse.status "COMPLETED")}}
+            <div class="combined-course-completed">
+              <img src="/images/illustrations/combined-course/completed.svg" alt="" role="presentation" />
+              <CompletedText />
+            </div>
+          {{/if}}
+
+          <div class={{unless (eq @combinedCourse.status "COMPLETED") "combined-course__description"}}>
+            {{@combinedCourse.description}}
+          </div>
+
+          {{#if (eq @combinedCourse.status "NOT_STARTED")}}
+            <PixButton
+              @type="submit"
+              @triggerAction={{this.startQuestParticipation}}
+              @loading-color="white"
+              @size="large"
+            >{{t "pages.combined-courses.content.start-button"}}
+            </PixButton>
+          {{else if (eq @combinedCourse.status "STARTED")}}
+            <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
+                "pages.combined-courses.content.resume-button"
+              }}
+            </PixButton>
+          {{/if}}
+        </div>
+        <img alt="" role="presentation" src={{@combinedCourse.illustration}} />
+      </header>
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
         <CombinedCourseItem
@@ -48,7 +58,7 @@ export default class CombinedCourses extends Component {
           @onClick={{if (eq @combinedCourse.status "NOT_STARTED") this.startQuestParticipation noop}}
         />
       {{/each}}
-    </div>
+    </section>
   </template>
 
   @service currentUser;

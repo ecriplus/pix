@@ -11,6 +11,8 @@ export default class CombinedCourse extends Model {
   @attr('string') code;
   @attr() organizationId;
   @attr('string') status;
+  @attr('string') description;
+  @attr('string') illustration;
 
   @hasMany('combined-course-item', { async: false, inverse: 'combinedCourse' }) items;
 
