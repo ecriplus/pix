@@ -2,11 +2,6 @@
   "application": {
     "description": "The platform dedicated to the organisation of Pix Certification sessions. Pix Certif allows you to create and manage certification sessions."
   },
-  "banners": {
-    "language-availability": {
-      "message": "Your language is not yet available on Pix Certif. For your convenience, the application will be presented in English. The entire Pix team is working to add your language."
-    }
-  },
   "common": {
     "actions": {
       "add": "Add",
