@@ -273,7 +273,8 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
           elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f98',
           type: 'QAB_CARD_ANSWERED',
           cardId: '34b916b9-9103-4060-818d-98b2dc67111d',
-          chosenProposal: 'A',
+          answer: 'A',
+          status: 'ko',
         };
         // when
         const builtEvent = PassageEventFactory.build(rawEvent);
