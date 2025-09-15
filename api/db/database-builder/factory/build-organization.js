@@ -21,6 +21,7 @@ const buildOrganization = function buildOrganization({
   archivedAt = null,
   identityProviderForCampaigns = null,
   parentOrganizationId = null,
+  pixTeamId = null,
 } = {}) {
   const values = {
     id,
@@ -43,6 +44,7 @@ const buildOrganization = function buildOrganization({
     archivedAt,
     identityProviderForCampaigns,
     parentOrganizationId,
+    pixTeamId,
   };
 
   return databaseBuffer.pushInsertable({
