@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.206.0](https://github.com/1024pix/pix/compare/v5.205.1...v5.206.0) (2025-09-15)
+
+### :rocket: Amélioration
+
+- [#13541](https://github.com/1024pix/pix/pull/13541) Affichage des icônes de modules dans les parcours combinés (PIX-19414) 
+- [#13532](https://github.com/1024pix/pix/pull/13532) Afficher un message de remerciement neutre en fin de parcours (PIX-19172) 
+- [#13557](https://github.com/1024pix/pix/pull/13557) Ajout d'un lien de sortie sur les parcours combinés (PIX-19504) 
+- [#13540](https://github.com/1024pix/pix/pull/13540) Ajouter une illustration et une description aux parcours combinés (PIX-19016) 
+- [#13534](https://github.com/1024pix/pix/pull/13534) Autoriser la création de campagnes de parcours combinés sur des profils cibles non rattachés (PIX-19490). 
+- [#13554](https://github.com/1024pix/pix/pull/13554) Créer la table pix-teams (PIX-19494) 
+- [#13546](https://github.com/1024pix/pix/pull/13546) Module IA Hallucinations - suite panel Contenu 
+- [#13547](https://github.com/1024pix/pix/pull/13547) Module les ia consomment modifs qcu et poi 
+- [#13533](https://github.com/1024pix/pix/pull/13533) Récupération de l'historique des référentiels de certification d'une complémentaire (PIX-18345). 
+- [#13530](https://github.com/1024pix/pix/pull/13530) Retirer la possibilité de supprimer une participation d'un campagne lié à un Parcours combiné (PIX-19322). 
+- [#13537](https://github.com/1024pix/pix/pull/13537) Revoir les typo des modules (PIX-19502) 
+- [#13544](https://github.com/1024pix/pix/pull/13544) Supprimer les bannières rendues inutiles par la nouvelle gestion des locales (PIX-19500) 
+- [#13555](https://github.com/1024pix/pix/pull/13555) Tmp modif prompt ind 
+- [#13535](https://github.com/1024pix/pix/pull/13535) Vérifier côté client le QCM (PIX-19335)
+
 ## [5.205.1](https://github.com/1024pix/pix/compare/v5.205.0...v5.205.1) (2025-09-12)
 
 ### :building_construction: Tech
