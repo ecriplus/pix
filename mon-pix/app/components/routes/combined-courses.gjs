@@ -54,7 +54,7 @@ export default class CombinedCourses extends Component {
             </PixButton>
           {{/if}}
         </div>
-        <img alt="" role="presentation" src={{@combinedCourse.illustration}} />
+        <img alt="" role="presentation" src={{@combinedCourse.illustration}} width="320" />
       </header>
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
