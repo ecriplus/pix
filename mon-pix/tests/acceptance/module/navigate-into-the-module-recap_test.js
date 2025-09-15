@@ -60,22 +60,6 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
       assert.ok(screen.getByRole('heading', { level: 1, name: t('pages.modulix.recap.title') }));
     });
 
-    module('when module has status beta', function () {
-      test('should display the links to homepage button and to form builder', async function (assert) {
-        // when
-        const formLink = screen.getByRole('link', { name: t('pages.modulix.recap.goToForm') });
-
-        // then
-        const passage = server.schema.passages.all().models[0];
-        assert.ok(formLink);
-        assert.ok(screen.queryByRole('link', { name: t('pages.modulix.recap.goToHomepage') }));
-        assert.strictEqual(
-          formLink.getAttribute('href'),
-          `https://form-eu.123formbuilder.com/82940/votre-avis-sur-les-modules-de-formation-pix?3285978=${passage.id}`,
-        );
-      });
-    });
-
     test('should navigate to homepage by clicking on go to homepage button', async function (assert) {
       // when
       await click(screen.getByRole('link', { name: t('pages.modulix.recap.goToHomepage') }));

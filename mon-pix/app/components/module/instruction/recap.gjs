@@ -42,18 +42,5 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
       {{/if}}
 
     </div>
-
-    {{#if @module.isBeta}}
-      <div class="module-recap__link-form">
-        <PixButtonLink
-          @size="large"
-          @variant="tertiary"
-          target="_blank"
-          @href="https://form-eu.123formbuilder.com/82940/votre-avis-sur-les-modules-de-formation-pix?3285978={{@passage.id}}"
-        >
-          {{t "pages.modulix.recap.goToForm"}}
-        </PixButtonLink>
-      </div>
-    {{/if}}
   </main>
 </template>
