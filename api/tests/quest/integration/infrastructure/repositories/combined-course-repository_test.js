@@ -153,6 +153,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           name: 'firstCombinedCourse',
           code: 'firstCode',
           organizationId: firstOrganizationId,
+          illustration: 'mon_illu.svg',
+          description: 'ma description',
         },
         quest,
       );
@@ -174,9 +176,13 @@ describe('Quest | Integration | Repository | combined-course', function () {
 
       expect(firstSavedCombinedCourse.name).to.equal('firstCombinedCourse');
       expect(firstSavedCombinedCourse.successRequirements).to.deep.equal(successRequirements);
+      expect(firstSavedCombinedCourse.description).equal('ma description');
+      expect(firstSavedCombinedCourse.illustration).equal('mon_illu.svg');
 
       expect(secondSavedCombinedCourse.name).to.equal('secondCombinedCourse');
       expect(secondSavedCombinedCourse.successRequirements).to.deep.equal(successRequirements);
+      expect(secondSavedCombinedCourse.description).null;
+      expect(secondSavedCombinedCourse.illustration).null;
     });
   });
 });
