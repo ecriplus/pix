@@ -13,6 +13,8 @@ export default class ApplicationRoute extends Route {
   @service pixMetrics;
   @service store;
   @service router;
+  @service currentUser;
+  @service locale;
 
   constructor() {
     super(...arguments);
@@ -31,15 +33,13 @@ export default class ApplicationRoute extends Route {
   }
 
   async beforeModel(transition) {
+    const queryParams = transition?.to?.queryParams;
+    this.locale.setBestLocale({ queryParams });
     await this.session.setup();
-
     await this.featureToggles.load().catch();
-
     await this.oidcIdentityProviders.load().catch();
-
     await this.authentication.handleAnonymousAuthentication(transition);
-
-    await this.session.handleUserLanguageAndLocale(transition);
+    await this.currentUser.load();
   }
 
   async model() {

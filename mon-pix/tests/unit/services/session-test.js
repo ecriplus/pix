@@ -139,23 +139,6 @@ module('Unit | Services | session', function (hooks) {
     });
   });
 
-  module('#handleUserLanguageAndLocale', function () {
-    test('loads the current user and sets the language from query param', async function (assert) {
-      // given
-      const user = { id: 1 };
-      sessionService.currentUser.user = user;
-      const transition = { to: { queryParams: { lang: 'es' } } };
-
-      // when
-      await sessionService.handleUserLanguageAndLocale(transition);
-
-      // then
-      sinon.assert.calledOnce(sessionService.currentUser.load);
-      sinon.assert.calledWith(sessionService.locale.setBestLocale, { queryParams: { lang: 'es' }, user });
-      assert.ok(true);
-    });
-  });
-
   module('#requireAuthenticationAndApprovedTermsOfService', function () {
     module('when user is authenticated and must validate the terms of service', function () {
       test('should redirect user to terms of service page', async function (assert) {

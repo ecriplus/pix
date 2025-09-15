@@ -53,11 +53,6 @@ export default class CurrentSessionService extends SessionService {
     super.handleInvalidation(routeAfterInvalidation);
   }
 
-  async handleUserLanguageAndLocale(transition = null) {
-    const queryParams = transition?.to?.queryParams;
-    await this._loadCurrentUserAndLocale(queryParams);
-  }
-
   get redirectionUrl() {
     const baseUrl = window.location.protocol + '//' + window.location.host;
 
