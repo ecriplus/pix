@@ -315,6 +315,64 @@
           ]
         },
         {
+          "id": "4581ec80-3ac1-4226-9e70-b8c9e3527873",
+          "type": "discovery",
+          "title": "flip-cards",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aae71cdd-6420-4c38-871e-aace67aa8392",
+                "type": "text",
+                "content": "<p>flip-cards</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c1af1c71-cde4-47bb-9880-dfb0f4118ee1",
+                "type": "custom",
+                "tagName": "flip-cards",
+                "props": {
+                  "name": "Exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité",
+                  "cardList": [
+                    {
+                      "name": "Transport",
+                      "description": "Lecture de plaques d’immatriculation pour automatiser les péages",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-truck.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Santé",
+                      "description": "Analyse de radios pour détecter des signes de cancer",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Culture",
+                      "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Agriculture",
+                      "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Sécurité",
+                      "description": "Reconnaissance des visages pour identifier des personnes autorisées",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
           "type": "discovery",
           "title": "message-conversation",
