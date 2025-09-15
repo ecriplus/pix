@@ -71,11 +71,12 @@ export default class ModulixDetails extends Component {
     {{pageTitle @module.title}}
 
     <main id="main" class="module-details" role="main">
-      <div class="module-details__image">
-        <img alt="" class="module-details-image__illustration" src={{@module.details.image}} height="150" />
-      </div>
 
       <div class="module-details__content">
+        <div class="module-details__content__image">
+          <img alt="" class="module-details-image__illustration" src={{@module.details.image}} height="150" />
+        </div>
+
         <div class="module-details-content__layout">
           <h1 class="module-details-content-layout__title">{{@module.title}}</h1>
 
