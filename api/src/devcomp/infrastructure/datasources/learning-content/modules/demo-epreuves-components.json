@@ -17,6 +17,54 @@
       "type": "blank",
       "grains": [
         {
+          "id": "5f7badec-9ffd-4e99-99d6-05aa3d978343",
+          "type": "discovery",
+          "title": "capacity-calculation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5335cbac-503c-4aa0-a984-8c07897ff8e4",
+                "type": "text",
+                "content": "<p>capacity-calculation</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4b7eb96e-134c-4b65-9513-cd57d9ed1e89",
+                "type": "custom",
+                "tagName": "capacity-calculation",
+                "props": {
+                  "titleLevel": 2,
+                  "images": {
+                    "initial": {
+                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-initial.svg"
+                    },
+                    "normal_weak": {
+                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
+                    },
+                    "normal_medium": {
+                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
+                    },
+                    "warning": {
+                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-warning.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-warning.svg"
+                    },
+                    "error": {
+                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-error.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-error.svg"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
           "id": "5161dd9c-0ed3-43a8-b550-ced9e2c539ba",
           "type": "discovery",
           "title": "calcul-impact",
@@ -37,6 +85,71 @@
                 "tagName": "calcul-impact",
                 "props": {
                   "titleLevel": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "ccba5524-57fd-41d4-94d7-732b0e4d6612",
+          "type": "discovery",
+          "title": "clickable-image",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "35ff5487-dd88-4574-a575-1689a5aaefee",
+                "type": "text",
+                "content": "<p>clickable-image</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dfa8ac80-86ba-4278-9e02-a160b9c38c3b",
+                "type": "custom",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/salon-connecte.webp",
+                    "alt": "Salon connecté",
+                    "width": 1536,
+                    "height": 1024
+                  },
+                  "areas": [
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 390, "y1": 120, "x2": 842, "y2": 400 },
+                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 510, "y1": 588, "x2": 702, "y2": 635 },
+                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 248, "y1": 398, "x2": 325, "y2": 492 },
+                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 828, "y1": 560, "x2": 1042, "y2": 725 },
+                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 122, "y1": 796, "x2": 318, "y2": 916 },
+                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": { "x1": 986, "y1": 148, "x2": 1100, "y2": 230 },
+                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
                 }
               }
             }
@@ -148,6 +261,64 @@
                   "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                   "llmMessage": "On peut mettre du ",
                   "wordsToAdd": ["beurre", "et", "du", "sucre"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "4581ec80-3ac1-4226-9e70-b8c9e3527873",
+          "type": "discovery",
+          "title": "flip-cards",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "aae71cdd-6420-4c38-871e-aace67aa8392",
+                "type": "text",
+                "content": "<p>flip-cards</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c1af1c71-cde4-47bb-9880-dfb0f4118ee1",
+                "type": "custom",
+                "tagName": "flip-cards",
+                "props": {
+                  "name": "Exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité",
+                  "cardList": [
+                    {
+                      "name": "Transport",
+                      "description": "Lecture de plaques d’immatriculation pour automatiser les péages",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-truck.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Santé",
+                      "description": "Analyse de radios pour détecter des signes de cancer",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Culture",
+                      "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Agriculture",
+                      "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    },
+                    {
+                      "name": "Sécurité",
+                      "description": "Reconnaissance des visages pour identifier des personnes autorisées",
+                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
+                      "image": "https://assets.pix.org/modules/flip-cards/transport.png"
+                    }
+                  ]
                 }
               }
             }
