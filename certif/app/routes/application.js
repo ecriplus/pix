@@ -6,13 +6,17 @@ import ENV from 'pix-certif/config/environment';
 export default class ApplicationRoute extends Route {
   @service featureToggles;
   @service currentDomain;
+  @service currentUser;
+  @service locale;
   @service session;
   @service store;
 
   async beforeModel(transition) {
+    const queryParams = transition?.to?.queryParams;
+    this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load();
-    await this.session.loadCurrentUserAndSetLocale(transition);
+    await this.currentUser.load();
   }
 
   async model() {
