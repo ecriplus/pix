@@ -4,22 +4,14 @@ import SessionService from 'ember-simple-auth/services/session';
 
 export default class CurrentSessionService extends SessionService {
   @service currentUser;
-  @service locale;
   @service url;
 
   routeAfterAuthentication = 'authenticated';
 
   async handleAuthentication() {
-    await this.loadCurrentUserAndSetLocale();
-
-    super.handleAuthentication(this.routeAfterAuthentication);
-  }
-
-  async loadCurrentUserAndSetLocale(transition) {
     await this.currentUser.load();
 
-    const queryParams = transition?.to?.queryParams;
-    this.locale.setBestLocale({ queryParams });
+    super.handleAuthentication(this.routeAfterAuthentication);
   }
 
   handleInvalidation() {
