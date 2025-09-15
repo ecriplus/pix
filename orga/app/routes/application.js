@@ -27,9 +27,11 @@ export default class ApplicationRoute extends Route {
   }
 
   async beforeModel(transition) {
+    const queryParams = transition?.to?.queryParams;
+    this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load();
-    await this.session.loadCurrentUserAndSetLocale(transition);
+    await this.currentUser.load();
   }
 
   async model() {
