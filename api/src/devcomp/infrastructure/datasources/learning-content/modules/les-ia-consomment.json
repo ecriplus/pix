@@ -1,7 +1,7 @@
 {
   "id": "8343e9c1-5b46-4500-ab85-54061e0c4712",
   "slug": "les-ia-generatives-consomment",
-  "title": "Les IA génératives, ça consomme !",
+  "title": "L‘IA générative, ça consomme !",
   "isBeta": true,
   "details": {
     "image": "https://images.pix.fr/modulix/placeholder-details.svg",
@@ -256,31 +256,35 @@
               "type": "element",
               "element": {
                 "id": "6a585a2a-9d17-4307-befd-906559ec80b1",
-                "type": "qcu",
+                "type": "qcu-discovery",
                 "instruction": "<p>Lorsqu’on fait une demande à un logiciel d’IA générative, la réponse est calculée&nbsp;:</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>dans notre appareil personnel</p>",
+                    "content": "<p>Dans notre appareil personnel</p>",
                     "feedback": {
-                      "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
+                      "diagnosis": "<p>En fait, non.</p><p>Votre demande voyage depuis votre ordinateur via internet <strong>jusqu’à un supercalculateur</strong>, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>dans un supercalculateur</p>",
+                    "content": "<p>Dans un supercalculateur</p>",
                     "feedback": {
-                      "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                      "diagnosis": "<p>Ce supercalculateur est peut-être situé à l’autre bout du monde !</p>"
+                      "diagnosis": "<p>En effet !</p><p>Votre demande voyage depuis votre ordinateur via internet <strong>jusqu’à un supercalculateur</strong>, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>sur internet</p>",
+                    "content": "<p>Sur internet</p>",
                     "feedback": {
-                      "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet jusqu’à un supercalculateur, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
+                      "diagnosis": "<p>En fait, non.</p><p>Votre demande voyage depuis votre ordinateur via internet <strong>jusqu’à un supercalculateur</strong>, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Votre demande voyage depuis votre ordinateur via internet <strong>jusqu’à un supercalculateur</strong>, peut-être situé à l’autre bout du monde. C’est là-bas que la réponse est calculée.</p>"
                     }
                   }
                 ],
@@ -364,7 +368,7 @@
                     {
                       "title": "Une requête est reçue par le supercalculateur.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape1.svg",
                         "alt": "Une requête est reçue par le supercalculateur."
@@ -378,7 +382,7 @@
                     {
                       "title": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l‘IA.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape2.svg",
                         "alt": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l‘IA."
@@ -392,7 +396,7 @@
                     {
                       "title": "Les serveurs calculent la réponse. Ils consomment de l‘énergie.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape3.svg",
                         "alt": "Les serveurs calculent la réponse. Ils consomment de l‘énergie."
@@ -406,7 +410,7 @@
                     {
                       "title": "Les serveurs dégagent de la chaleur.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape4.svg",
                         "alt": "Les serveurs dégagent de la chaleur."
@@ -420,7 +424,7 @@
                     {
                       "title": "Un système de refroidissement est nécessaire. Il consomme de l‘énergie supplémentaire et de l‘eau.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape5.svg",
                         "alt": "Un système de refroidissement est nécessaire. Il consomme de l‘énergie supplémentaire et de l‘eau."
@@ -434,7 +438,7 @@
                     {
                       "title": "Les serveurs poursuivent les calculs et préparent la réponse.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape6.svg",
                         "alt": "Les serveurs poursuivent les calculs et préparent la réponse."
@@ -448,7 +452,7 @@
                     {
                       "title": "La réponse est prête et sort des serveurs.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape7.svg",
                         "alt": "La réponse est prête et sort des serveurs."
@@ -462,7 +466,7 @@
                     {
                       "title": "La réponse sort du supercalculateur et est envoyée sur internet.",
                       "description": "",
-                      "displayWidth": 600,
+                      "displayWidth": 400,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape8.svg",
                         "alt": "La réponse sort du supercalculateur et est envoyée sur internet."
@@ -565,23 +569,28 @@
                   "elements": [
                     {
                       "id": "43d66e84-554c-4750-8658-7329c4a4f759",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Si on envoie <strong>800 demandes</strong> de <strong>création de vidéo</strong>, le supercalculateur peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "state": "<p>En effet.&nbsp;</p>",
-                            "diagnosis": "<p>La création vidéo est ce qui demande le plus de puissance de calcul. Le supercalculateur ne peut pas en traiter autant que du texte ou des images.</p>"
+                            "diagnosis": "<p>En effet !</p><p>La création vidéo demande beaucoup de puissance de calcul, mais le supercalculateur peut en traiter plusieurs centaines en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "state": "<p>Et si !</p>",
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à  800 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>La création vidéo demande beaucoup de puissance de calcul, mais le supercalculateur peut en traiter plusieurs centaines en même temps.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -593,23 +602,28 @@
                   "elements": [
                     {
                       "id": "541dc2cc-dd98-43cd-ba10-a81adb041750",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Si on envoie <strong> 25 000 demandes</strong> de <strong>création de dessin</strong>, le supercalculateur peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "state": "<p>C‘était non !</p>",
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à  25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>En fait, si. Le supercalculateur peut créer des milliers d'images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "state": "<p>En effet.</p>",
-                            "diagnosis": "<p>La création d‘images demande plus de puissance de calcul que la création de texte. Le supercalculateur ne peut pas en traiter autant en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> Le supercalculateur peut créer des milliers d'images en même temps.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -621,23 +635,28 @@
                   "elements": [
                     {
                       "id": "83a69884-2d96-4bd9-99b3-a28cdf11c90c",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Si on envoie <strong> 90 000 demandes</strong> de <strong>création de texte</strong>, le supercalculateur peut-il les traiter ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>oui</p>",
+                          "content": "<p>Oui</p>",
                           "feedback": {
-                            "state": "<p>En effet.</p>",
-                            "diagnosis": "<p>Le supercalculateur a une capacité de calcul suffisante pour traiter des dizaines de milliers de création de texte en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p>Le supercalculateur a une capacité de calcul suffisante pour créer des dizaines de milliers de textes en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>non</p>",
+                          "content": "<p>Non</p>",
                           "feedback": {
-                            "state": "<p>Et si !</p>",
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à  90 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>Le supercalculateur a une capacité de calcul suffisante pour créer des dizaines de milliers de textes en même temps.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à 90 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -649,31 +668,35 @@
                   "elements": [
                     {
                       "id": "4dc8f82c-9470-4b3f-8a62-2379fb66bcab",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Quel type de requête demande le plus de puissance de calcul ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la création de texte</p>",
+                          "content": "<p>La création de texte</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment.</p>",
-                            "diagnosis": "<p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
+                            "diagnosis": "<p>En fait non. </p><p> Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>la création d‘image</p>",
+                          "content": "<p>La création d‘image</p>",
                           "feedback": {
-                            "state": "<p>Pas vraiment.</p>",
-                            "diagnosis": "<p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
+                            "diagnosis": "<p>En fait non. </p><p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>la création de vidéo</p>",
+                          "content": "<p>La création de vidéo</p>",
                           "feedback": {
-                            "state": "<p>Exactement.</p>",
-                            "diagnosis": "<p>Ce sont bien <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
+                            "diagnosis": "<p>En effet !</p><p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ce sont <strong>les vidéos qui demandent la plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
                           }
                         }
                       ],
@@ -879,7 +902,7 @@
               "element": {
                 "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
                 "type": "text",
-                "content": "<p><strong>🌱Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin :</p><ul><li>éviter les requêtes inutiles ou répétées</li><li>privilégier des solutions plus efficaces quand elles existent</li><li>éviter les demandes d‘images ou de vidéos</li></ul><p><strong>🤔Bon à savoir</strong>&nbsp; </p><p>Les concepteurs des IA génératives peuvent aussi faire des efforts  comme améliorer les logiciels, améliorer les machines ou choisir des énergies renouvelables.&nbsp;</p>"
+                "content": "<p><strong>🌱Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin :</p><ul><li>éviter les requêtes inutiles ou répétées</li><li>privilégier des solutions plus efficaces quand elles existent</li><li>éviter les demandes d‘images ou de vidéos</li></ul><p><strong>🤔Bon à savoir</strong> </p><p>Les concepteurs des IA génératives peuvent aussi faire des efforts comme améliorer les logiciels, améliorer les machines ou choisir des énergies renouvelables.</p>"
               }
             }
           ]
@@ -1007,14 +1030,14 @@
                     "content": "<p>la connexion internet et le chauffage du bâtiment</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider. ☝️</p>"
+                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider.☝️</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>les calculs et le refroidissement des machines</p>",
                     "feedback": {
-                      "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
+                      "state": "<p>Bonne réponse ! 🎉</p>",
                       "diagnosis": "<p>Ce sont bien les calculs effectués par le supercalculateur et le refroidissement des machines qui consomment beaucoup d’énergie.</p>"
                     }
                   },
@@ -1023,7 +1046,7 @@
                     "content": "<p>l’éclairage et la vidéo-surveillance</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider. ☝️</p>"
+                      "diagnosis": "<p>N‘hésitez pas à consulter le récapitulatif ou les parties précédentes du module pour vous aider.☝️</p>"
                     }
                   }
                 ],
@@ -1056,8 +1079,8 @@
                     "id": "2",
                     "content": "<p>Créer&nbsp;<strong>une</strong> <strong>vidéo de 15 secondes</strong>.</p>",
                     "feedback": {
-                      "state": "<p>Bonne réponse !&nbsp; 🎉</p>",
-                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>,&nbsp;et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
+                      "state": "<p>Bonne réponse ! 🎉</p>",
+                      "diagnosis": "<p>Tout à fait, c’est bien la création vidéo qui demande le plus de <strong>puissance de calcul</strong>, et donc qui consommera le <strong>plus d’énergie</strong>.</p>"
                     }
                   },
                   {
@@ -1096,12 +1119,20 @@
             {
               "type": "element",
               "element": {
-                "id": "98bf1662-2985-452d-ba51-1d625f43bebb",
-                "type": "custom-draft",
-                "title": "Calculatrice d‘impact environnemental des usages de l‘IA générative",
-                "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementTransfert04.html",
-                "instruction": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA.</strong></p>",
-                "height": 550
+                "id": "ad8d2726-a384-42e4-9fcc-e229a742003e",
+                "type": "text",
+                "content": "<p>Maintenant, essayons de voir à quoi correspond la consommation d’énergie de <strong>votre utilisation de l’IA</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6a18255a-eb6c-411f-9989-78fb97cf69e7",
+                "type": "custom",
+                "tagName": "calcul-impact",
+                "props": {
+                  "titleLevel": 0
+                }
               }
             }
           ]
