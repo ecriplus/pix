@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.207.0](https://github.com/1024pix/pix/compare/v5.206.0...v5.207.0) (2025-09-15)
+
+### :rocket: Amélioration
+
+- [#13548](https://github.com/1024pix/pix/pull/13548) Afficher l'historique des versions du référentiel d'une complémentaire (PIX-18347). 
+- [#13553](https://github.com/1024pix/pix/pull/13553) Ajouter le statut dans l'event QABCardAnsweredEvent (PIX-18918) 
+- [#13563](https://github.com/1024pix/pix/pull/13563) Améliorer la position de l'illustration dans les détails du module (PIX-19520) 
+- [#13565](https://github.com/1024pix/pix/pull/13565) Autoriser l'ajout d'une description et d'une illustration dans la création de Parcours Combiné (PIX-19525). 
+- [#13556](https://github.com/1024pix/pix/pull/13556) Ne pas remonter les campagnes liées à des parcours combinés sur la page d'accueil et mes-parcours (PIX-19478). 
+
+### :bug: Correction
+
+- [#13566](https://github.com/1024pix/pix/pull/13566) Corriger une coquille dans la consigne du QCU découverte (PIX-19526) 
+- [#13552](https://github.com/1024pix/pix/pull/13552) Réparer la page d'analyse de résultat d'une campagne (PIX-19515). 
+
+### :building_construction: Tech
+
+- [#13559](https://github.com/1024pix/pix/pull/13559) Ajouter la relation pixTeamId dans la table organizations (PIX-19513) 
+
+### :arrow_up: Montée de version
+
+- [#13539](https://github.com/1024pix/pix/pull/13539) Mise à jour de @1024pix/epreuves-components
+
 # [5.206.0](https://github.com/1024pix/pix/compare/v5.205.1...v5.206.0) (2025-09-15)
 
 ### :rocket: Amélioration
