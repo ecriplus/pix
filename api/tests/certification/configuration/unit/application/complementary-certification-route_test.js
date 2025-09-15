@@ -150,6 +150,30 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         sinon.assert.notCalled(complementaryCertificationController.getCurrentConsolidatedFramework);
       });
     });
+
+    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier', 'Support'];
+    authorizedRoles.forEach((role) => {
+      describe(`when the user has ${role} role`, function () {
+        it('should return 200 HTTP status code', async function () {
+          // given
+          sinon.stub(securityPreHandlers, `checkAdminMemberHasRole${role}`).returns(true);
+          sinon.stub(complementaryCertificationController, 'getCurrentConsolidatedFramework').returns('ok');
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request(
+            'GET',
+            `/api/admin/complementary-certifications/${ComplementaryCertificationKeys.PIX_PLUS_DROIT}/current-consolidated-framework`,
+          );
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          sinon.assert.calledOnce(complementaryCertificationController.getCurrentConsolidatedFramework);
+        });
+      });
+    });
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history', function () {
@@ -175,8 +199,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
       });
     });
 
-    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier'];
-
+    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier', 'Support'];
     authorizedRoles.forEach((role) => {
       describe(`when the user has ${role} role`, function () {
         it('should return 200 HTTP status code', async function () {
