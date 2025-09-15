@@ -576,6 +576,18 @@ function routes() {
     return schema.certificationConsolidatedFrameworks.find(request.params.key);
   });
 
+  this.get('admin/complementary-certifications/:key/framework-history', (schema, request) => {
+    return {
+      data: {
+        id: request.params.key,
+        type: 'framework-histories',
+        attributes: {
+          history: [],
+        },
+      },
+    };
+  });
+
   this.put('/admin/sessions/:id/comment', (schema, request) => {
     const sessionToUpdate = schema.sessions.find(request.params.id);
     const params = JSON.parse(request.requestBody);
