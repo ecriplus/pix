@@ -3,7 +3,7 @@ import EmptyState from 'pix-orga/components/campaign/empty-state';
 
 <template>
   {{#if @model.campaign.hasSharedParticipations}}
-    <AnalysisHeader />
+    <AnalysisHeader @model={{@model}} />
     {{outlet}}
   {{else}}
     {{#if @controller.isGarAuthenticationMethod}}
