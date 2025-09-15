@@ -96,11 +96,13 @@ export default class ModuleQab extends ModuleElement {
 
     this.cardStatuses.set(this.currentCard.id, this.currentCardStatus);
     window.setTimeout(async () => await this.goToNextCard(), NEXT_CARD_TRANSITION_DELAY);
+    const status = this.currentCardStatus === 'success' ? 'ok' : 'ko';
     this.passageEvents.record({
       type: 'QAB_CARD_ANSWERED',
       data: {
         cardId: this.currentCard.id,
-        chosenProposal: event.submitter.value,
+        answer: event.submitter.value,
+        status,
         elementId: this.element.id,
       },
     });

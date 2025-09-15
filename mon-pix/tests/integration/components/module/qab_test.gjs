@@ -81,7 +81,8 @@ module('Integration | Component | Module | QAB', function (hooks) {
         type: 'QAB_CARD_ANSWERED',
         data: {
           cardId: qabElement.cards[0].id,
-          chosenProposal: 'A',
+          answer: 'A',
+          status: 'ok',
           elementId: qabElement.id,
         },
       });
@@ -112,7 +113,7 @@ module('Integration | Component | Module | QAB', function (hooks) {
     });
 
     module('when user chooses proposal B', function () {
-      test('should display proposal B as selected and card status as error', async function (assert) {
+      test('should display proposal B as selected and card status as error, and send an event with ko status', async function (assert) {
         // given
         const qabElement = _getQabElement();
 
@@ -121,6 +122,15 @@ module('Integration | Component | Module | QAB', function (hooks) {
         await click(screen.getByRole('button', { name: 'Option B: Faux' }));
 
         // then
+        sinon.assert.calledWithExactly(passageEventRecordStub, {
+          type: 'QAB_CARD_ANSWERED',
+          data: {
+            cardId: qabElement.cards[0].id,
+            answer: 'B',
+            status: 'ko',
+            elementId: qabElement.id,
+          },
+        });
         assert
           .dom(screen.getByRole('button', { name: 'Option A: Vrai' }))
           .doesNotHaveClass('qab-proposal-button--selected');
