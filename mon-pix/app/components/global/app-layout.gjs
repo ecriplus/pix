@@ -12,7 +12,6 @@ import AppMainHeader from './app-main-header';
 import AppNavigation from './app-navigation';
 
 export default class AppLayout extends Component {
-  @service router;
   @service session;
   @service currentUser;
   @service media;
@@ -21,13 +20,25 @@ export default class AppLayout extends Component {
     return this.args.displayFullLayout && this.session.isAuthenticated && this.currentUser.user && !this.media.isMobile;
   }
 
+  get appLayoutClass() {
+    const cssClass = [];
+
+    if (!this.args.displayFullLayout) cssClass.push('page-without-navbar ');
+
+    if (this.args.isLoginPages) cssClass.push('page-without-navbar--login-page');
+
+    if (this.args.isFullWidth) cssClass.push('page-without-navbar--force-max-width');
+
+    return cssClass.join(' ');
+  }
+
   <template>
     {{#if @displayFullLayout}}
       <Skiplink @href="#main" @label={{t "common.skip-links.skip-to-content"}} />
       <Skiplink @href="#footer" @label={{t "common.skip-links.skip-to-footer"}} />
     {{/if}}
 
-    <PixAppLayout class="{{unless @displayFullLayout 'unauthenticated-page'}}">
+    <PixAppLayout class="{{this.appLayoutClass}}">
       <:banner>
         {{#if @displayFullLayout}}
           <DataProtectionPolicyInformationBanner />
