@@ -279,7 +279,7 @@ module('Integration | Component | Module | Element', function (hooks) {
     const screen = await render(<template><ModulixElement @element={{element}} /></template>);
 
     // then
-    assert.deepEqual(screen.getAllByText('Sélectionner la réponse qui vous semble la plus juste.').length, 2);
+    assert.deepEqual(screen.getAllByText('Sélectionnez la réponse qui vous semble la plus juste.').length, 2);
     assert.ok(screen.getByRole('button', { name: element.proposals[0].content }));
   });
 

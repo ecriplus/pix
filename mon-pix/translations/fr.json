@@ -1798,7 +1798,7 @@
         "direction": "Sélectionnez une seule réponse."
       },
       "qcuDiscovery": {
-        "direction": "Sélectionner la réponse qui vous semble la plus juste."
+        "direction": "Sélectionnez la réponse qui vous semble la plus juste."
       },
       "qrocm": {
         "direction": "Remplissez {count, plural, =1 {le champ vide} other {les champs vides}}."
