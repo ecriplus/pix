@@ -4,14 +4,9 @@ import { LinkTo } from '@ember/routing';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import CampaignCodeForm from 'mon-pix/components/campaign-code-form';
-import DataProtectionPolicyInformationBanner from 'mon-pix/components/data-protection-policy-information-banner';
 
 <template>
   {{pageTitle (t "pages.fill-in-campaign-code.title")}}
-
-  <div class="pix-communication-banner">
-    <DataProtectionPolicyInformationBanner />
-  </div>
 
   <main id="main" class="main global-page-container" role="main">
     <CampaignCodeForm
