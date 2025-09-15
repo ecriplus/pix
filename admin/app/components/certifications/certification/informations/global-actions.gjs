@@ -1,6 +1,5 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
-import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -20,13 +19,16 @@ export default class CertificationInformationGlobalActions extends Component {
   @tracked displayConfirm = false;
   @tracked modalTitle = null;
 
-  get displayCancelCertificationButton() {
+  get canPerformCertificationActions() {
     return Boolean(
-      !this.args.certification.isCertificationCancelled &&
-        !this.args.certification.isPublished &&
+      !this.args.certification.isPublished &&
         this.args.session.finalizedAt &&
-        this.args.certification.status === 'validated',
+        (this.args.certification.status === 'validated' || this.args.certification.status === 'error'),
     );
+  }
+
+  get displayCancelCertificationButton() {
+    return this.canPerformCertificationActions;
   }
 
   get displayUncancelCertificationButton() {
@@ -38,7 +40,7 @@ export default class CertificationInformationGlobalActions extends Component {
   }
 
   get displayRejectCertificationButton() {
-    return this.args.certification.status === 'validated';
+    return this.canPerformCertificationActions;
   }
 
   get displayUnrejectCertificationButton() {
@@ -46,11 +48,7 @@ export default class CertificationInformationGlobalActions extends Component {
   }
 
   get displayRescoringCertificationButton() {
-    return Boolean(
-      !this.args.certification.isPublished &&
-        this.args.session.finalizedAt &&
-        this.args.certification.status === 'validated',
-    );
+    return this.canPerformCertificationActions;
   }
 
   @action
@@ -186,28 +184,9 @@ export default class CertificationInformationGlobalActions extends Component {
         </PixButton>
       {{/if}}
       {{#if this.displayRejectCertificationButton}}
-        {{#if @certification.isPublished}}
-          <PixTooltip @position="left" @isWide={{true}}>
-            <:triggerElement>
-              <PixButton
-                @variant="error"
-                @size="small"
-                @triggerAction={{this.onRejectCertificationButtonClick}}
-                @isDisabled={{true}}
-              >
-                {{t "components.certifications.global-actions.reject.button"}}
-              </PixButton>
-            </:triggerElement>
-
-            <:tooltip>
-              {{t "components.certifications.global-actions.reject.tooltip-published"}}
-            </:tooltip>
-          </PixTooltip>
-        {{else}}
-          <PixButton @variant="error" @size="small" @triggerAction={{this.onRejectCertificationButtonClick}}>
-            {{t "components.certifications.global-actions.reject.button"}}
-          </PixButton>
-        {{/if}}
+        <PixButton @variant="error" @size="small" @triggerAction={{this.onRejectCertificationButtonClick}}>
+          {{t "components.certifications.global-actions.reject.button"}}
+        </PixButton>
       {{/if}}
       {{#if this.displayRescoringCertificationButton}}
         <PixButton @size="small" @triggerAction={{this.rescoreCertification}}>
