@@ -185,6 +185,13 @@ export default class ModulePassage extends Component {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
+
+    this.passageEvents.record({
+      type: 'IMAGE_ALTERNATIVE_TEXT_OPENED',
+      data: {
+        elementId: imageElementId,
+      },
+    });
   }
 
   @action
