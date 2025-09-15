@@ -6,8 +6,14 @@ import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/do
 import { CampaignParticipationOverview } from '../../domain/read-models/CampaignParticipationOverview.js';
 
 const findByUserIdWithFilters = async function ({ userId, states, page }) {
-  const queryBuilder = _getQueryBuilder((qb) => {
-    qb.where('campaign-participations.userId', userId);
+  const queryBuilder = _getQueryBuilder(function (qb) {
+    qb.where('campaign-participations.userId', userId).whereNotExists(function () {
+      this.select(knex.raw('1'))
+        .from('quests')
+        .crossJoin(knex.raw('jsonb_array_elements("successRequirements") as success_elem'))
+        .whereNotNull('successRequirements')
+        .andWhereRaw("(success_elem->'data'->'campaignId'->>'data')::integer = \"campaigns\".\"id\"");
+    });
   });
 
   if (states && states.length > 0) {

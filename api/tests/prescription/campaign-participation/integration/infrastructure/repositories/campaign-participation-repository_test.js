@@ -1440,6 +1440,116 @@ describe('Integration | Repository | Campaign Participation', function () {
       // then
       expect(result).to.equal(true);
     });
+    it('should return false if assessments are all linked to a combined course', async function () {
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaignInCombinedCourse.id,
+        userId,
+      });
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        name: 'Combinix',
+        rewardType: null,
+        rewardId: null,
+        code: 'COMBINIX1',
+        organizationId: campaignInCombinedCourse.organizationId,
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignInCombinedCourse.id,
+                comparison: 'equal',
+              },
+              status: {
+                data: 'SHARED',
+                comparison: 'equal',
+              },
+            },
+          },
+          {
+            requirement_type: 'passages',
+            comparison: 'all',
+            data: {
+              moduleId: {
+                data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+                comparison: 'equal',
+              },
+              isTerminated: {
+                data: true,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        type: Assessment.types.CAMPAIGN,
+        createdAt: participation.createdAt,
+        userId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.hasAssessmentParticipations(userId);
+
+      // then
+      expect(result).to.be.false;
+    });
+    it('should return true if at least one assessment is not linked to a combined course', async function () {
+      const campaign = databaseBuilder.factory.buildCampaign();
+
+      const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+
+      const participationInCombinedCourse = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaignInCombinedCourse.id,
+        userId,
+      });
+      const participation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId,
+      });
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          {
+            requirement_type: 'campaignParticipations',
+            comparison: 'all',
+            data: {
+              campaignId: {
+                data: campaignInCombinedCourse.id,
+                comparison: 'equal',
+              },
+            },
+          },
+        ],
+      });
+
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participation.id,
+        type: Assessment.types.CAMPAIGN,
+        createdAt: participation.createdAt,
+        userId,
+      });
+
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participationInCombinedCourse.id,
+        type: Assessment.types.CAMPAIGN,
+        createdAt: participationInCombinedCourse.createdAt,
+        userId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.hasAssessmentParticipations(userId);
+
+      // then
+      expect(result).to.be.true;
+    });
   });
 
   describe('#getCodeOfLastParticipationToProfilesCollectionCampaignForUser', function () {

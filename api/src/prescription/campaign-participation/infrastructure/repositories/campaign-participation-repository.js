@@ -1,5 +1,6 @@
 import lodash from 'lodash';
 
+import { knex } from '../../../../../db/knex-database-connection.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -225,6 +226,13 @@ const hasAssessmentParticipations = async function (userId) {
     .leftJoin('campaigns', 'campaigns.id', 'campaignId')
     .where('assessments.type', '=', Assessment.types.CAMPAIGN)
     .where({ 'assessments.userId': userId })
+    .whereNotExists(function () {
+      this.select(knex.raw('1'))
+        .from('quests')
+        .crossJoin(knex.raw('jsonb_array_elements("successRequirements") as success_elem'))
+        .whereNotNull('quests.successRequirements')
+        .andWhereRaw("(success_elem->'data'->'campaignId'->>'data')::integer = \"campaigns\".\"id\"");
+    })
     .where(function () {
       this.whereNot('campaigns.organizationId', constants.AUTONOMOUS_COURSES_ORGANIZATION_ID).orWhereNull(
         'campaigns.organizationId',

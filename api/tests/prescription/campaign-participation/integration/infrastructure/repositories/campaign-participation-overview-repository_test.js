@@ -913,6 +913,69 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       });
     });
 
+    context('when campaign is related to combined-course', function () {
+      it('should not return them', async function () {
+        const campaign = databaseBuilder.factory.buildCampaign();
+
+        const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
+        databaseBuilder.factory.buildQuestForCombinedCourse({
+          name: 'Combinix',
+          rewardType: null,
+          rewardId: null,
+          code: 'COMBINIX1',
+          organizationId: campaignInCombinedCourse.organizationId,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: campaignInCombinedCourse.id,
+                  comparison: 'equal',
+                },
+                status: {
+                  data: 'SHARED',
+                  comparison: 'equal',
+                },
+              },
+            },
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+                  comparison: 'equal',
+                },
+                isTerminated: {
+                  data: true,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        databaseBuilder.factory.campaignParticipationOverviewFactory.build({
+          userId,
+          campaignId: campaignInCombinedCourse.id,
+        });
+        databaseBuilder.factory.campaignParticipationOverviewFactory.build({
+          userId,
+          campaignId: campaign.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipationOverviews } =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+
+        // then
+        expect(campaignParticipationOverviews).to.have.lengthOf(1);
+      });
+    });
+
     context('canRetry computation', function () {
       it('should compute canRetry as true when all conditions are met', async function () {
         // given
