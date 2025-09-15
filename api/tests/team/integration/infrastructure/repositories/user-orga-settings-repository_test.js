@@ -32,6 +32,7 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
     'parentOrganizationId',
     'schoolCode',
     'sessionExpirationDate',
+    'pixTeamId',
   ];
 
   let clock;
