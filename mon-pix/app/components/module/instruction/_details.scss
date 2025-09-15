@@ -1,3 +1,4 @@
+@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/shadows';
 
@@ -5,15 +6,23 @@
   margin: 0 auto;
   padding-bottom: var(--pix-spacing-12x);
 
-  &__image {
-    background-color: var(--pix-primary-100);
-  }
-
   &__content {
     @extend %pix-shadow-sm;
 
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     background-color: var(--pix-primary-10);
+
+    &__image {
+      width: 100%;
+      padding: var(--pix-spacing-8x);
+
+      @include breakpoints.device-is('tablet') {
+        width: auto;
+      }
+    }
   }
 
   &__infos {
@@ -29,14 +38,12 @@
     width: auto;
     max-height: 100%;
     margin: 0 auto;
-    padding-top: var(--pix-spacing-6x);
   }
 }
 
 .module-details-content {
   &__layout {
     max-width: var(--modulix-max-content-width);
-    margin: 0 auto;
     padding: var(--pix-spacing-10x) var(--pix-spacing-6x);
   }
 }
