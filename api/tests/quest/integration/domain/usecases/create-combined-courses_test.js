@@ -22,7 +22,7 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     await databaseBuilder.commit();
 
     const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
-${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfile.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
+${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfile.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}
 ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfile.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
 `;
 
@@ -94,6 +94,8 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
         },
         ...expectedModules,
       ],
+      description: 'ma description',
+      illustration: 'mon_illu.svg',
     };
     const expectedSecondQuestForFirstOrganization = {
       name: 'Combinix',
@@ -142,6 +144,8 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
         },
         ...expectedModules,
       ],
+      description: 'ma description',
+      illustration: 'mon_illu.svg',
     };
 
     // then
@@ -152,27 +156,45 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
       .where('organizationId', secondOrganizationId)
       .first();
 
+    // 1st Organization
+    // Quest
     expect(firstCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(firstCreatedQuestForFirstOrganization.name).to.equal(expectedFirstQuestForFirstOrganization.name);
     expect(firstCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
       expectedFirstQuestForFirstOrganization.successRequirements,
     );
+    expect(firstCreatedQuestForFirstOrganization.description).to.equal(
+      expectedFirstQuestForFirstOrganization.description,
+    );
+    expect(firstCreatedQuestForFirstOrganization.illustration).to.equal(
+      expectedFirstQuestForFirstOrganization.illustration,
+    );
+    //Campaign
     expect(firstCreatedCampaignForFirstOrganization.name).to.equal(targetProfile.internalName);
     expect(firstCreatedCampaignForFirstOrganization.title).to.equal(targetProfile.name);
 
+    // Quest
     expect(secondCreatedQuestForFirstOrganization.code).not.to.be.null;
     expect(secondCreatedQuestForFirstOrganization.name).to.equal(expectedSecondQuestForFirstOrganization.name);
     expect(secondCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
       secondCreatedQuestForFirstOrganization.successRequirements,
     );
+    expect(secondCreatedQuestForFirstOrganization.description).null;
+    expect(secondCreatedQuestForFirstOrganization.illustration).null;
+    //Campaign
     expect(secondCreatedCampaignForFirstOrganization.name).to.equal(targetProfile.internalName);
     expect(secondCreatedCampaignForFirstOrganization.title).to.equal(targetProfile.name);
 
+    // 2nd Organization
+    // Quest
     expect(createdQuestForSecondOrganization.code).not.to.be.null;
     expect(createdQuestForSecondOrganization.name).to.equal(expectedQuestForSecondOrganization.name);
     expect(createdQuestForSecondOrganization.successRequirements).to.deep.equal(
       expectedQuestForSecondOrganization.successRequirements,
     );
+    expect(createdQuestForSecondOrganization.description).to.equal(expectedQuestForSecondOrganization.description);
+    expect(createdQuestForSecondOrganization.illustration).to.equal(expectedQuestForSecondOrganization.illustration);
+    // Campaign
     expect(createdCampaignForSecondOrganization.name).to.equal(targetProfile.internalName);
     expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
   });
