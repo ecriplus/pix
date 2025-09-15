@@ -16,7 +16,8 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
       const sequenceNumber = 3;
       const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
       const cardId = 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6';
-      const chosenProposal = 'A';
+      const answer = 'A';
+      const status = 'ok';
 
       // when
       const qabCardAnsweredEvent = new QABCardAnsweredEvent({
@@ -27,7 +28,8 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
         sequenceNumber,
         elementId,
         cardId,
-        chosenProposal,
+        answer,
+        status,
       });
 
       // then
@@ -37,7 +39,7 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
       expect(qabCardAnsweredEvent.createdAt).to.equal(createdAt);
       expect(qabCardAnsweredEvent.passageId).to.equal(passageId);
       expect(qabCardAnsweredEvent.sequenceNumber).to.equal(sequenceNumber);
-      expect(qabCardAnsweredEvent.data).to.deep.equal({ cardId, chosenProposal, elementId });
+      expect(qabCardAnsweredEvent.data).to.deep.equal({ cardId, answer, elementId, status });
     });
 
     describe('when cardId is not given', function () {
@@ -49,7 +51,8 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
         const passageId = 2;
         const sequenceNumber = 3;
         const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
-        const chosenProposal = 'A';
+        const answer = 'A';
+        const status = 'ok';
 
         // when
         const error = catchErrSync(
@@ -61,44 +64,14 @@ describe('Integration | Devcomp | Domain | Models | passage-events | qab-events'
               passageId,
               sequenceNumber,
               elementId,
-              chosenProposal,
+              answer,
+              status,
             }),
         )();
 
         // then
         expect(error).to.be.instanceOf(DomainError);
         expect(error.message).to.equal('The cardId is required for a QABCardAnsweredEvent');
-      });
-    });
-
-    describe('when chosenProposal is not given', function () {
-      it('should throw an error', function () {
-        // given
-        const id = Symbol('id');
-        const occurredAt = new Date();
-        const createdAt = new Date();
-        const passageId = 2;
-        const sequenceNumber = 3;
-        const elementId = '05112f63-0b47-4774-b638-6669c4e3a26d';
-        const cardId = 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6';
-
-        // when
-        const error = catchErrSync(
-          () =>
-            new QABCardAnsweredEvent({
-              id,
-              occurredAt,
-              createdAt,
-              passageId,
-              sequenceNumber,
-              elementId,
-              cardId,
-            }),
-        )();
-
-        // then
-        expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The chosenProposal is required for a QABCardAnsweredEvent');
       });
     });
   });
