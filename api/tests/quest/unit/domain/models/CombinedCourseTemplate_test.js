@@ -104,11 +104,15 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
           },
         },
       ];
+      const description = 'bla bla bla';
+      const illustration = 'illu.svg';
 
       // when
       const combinedCourseTemplate = new CombinedCourseTemplate({
         name,
         successRequirements,
+        description,
+        illustration,
       });
       const combinedCourse = combinedCourseTemplate.toCombinedCourse(code, organizationId, campaigns);
 
@@ -166,6 +170,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
 
       expect(combinedCourse.quest.toDTO().successRequirements).to.deep.equal(questDTO.successRequirements);
       expect(combinedCourse.name).to.equal(name);
+      expect(combinedCourse.description).to.equal(description);
+      expect(combinedCourse.illustration).to.equal(illustration);
       expect(combinedCourse.code).to.equal(code);
       expect(combinedCourse.organizationId).to.equal(organizationId);
     });

@@ -13,6 +13,7 @@
   &__header {
     display: flex;
     gap: var(--pix-spacing-8x);
+    justify-content: space-between;
 
     h1 {
       @extend %pix-title-m;

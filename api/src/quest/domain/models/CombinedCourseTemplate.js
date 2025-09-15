@@ -6,8 +6,10 @@ import { buildRequirement, COMPARISONS, TYPES } from './Requirement.js';
 export class CombinedCourseTemplate {
   #quest;
   #name;
+  #description;
+  #illustration;
 
-  constructor({ name, successRequirements }) {
+  constructor({ name, successRequirements, description, illustration }) {
     const now = new Date();
     this.#name = name;
     this.#quest = new Quest({
@@ -18,6 +20,8 @@ export class CombinedCourseTemplate {
       eligibilityRequirements: [],
       successRequirements,
     });
+    this.#description = description;
+    this.#illustration = illustration;
   }
 
   get targetProfileIds() {
@@ -28,7 +32,10 @@ export class CombinedCourseTemplate {
 
   toCombinedCourse(code, organizationId, campaigns) {
     const quest = this.toCombinedCourseQuestFormat(campaigns);
-    return new CombinedCourse({ name: this.#name, code, organizationId }, quest);
+    return new CombinedCourse(
+      { name: this.#name, code, organizationId, description: this.#description, illustration: this.#illustration },
+      quest,
+    );
   }
 
   toCombinedCourseQuestFormat(campaigns) {

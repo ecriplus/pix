@@ -58,6 +58,8 @@ const _toDTO = (combinedCourse) => {
     name: combinedCourse.name,
     eligibilityRequirements: JSON.stringify([]),
     successRequirements: JSON.stringify(questDTO.successRequirements),
+    description: combinedCourse.description,
+    illustration: combinedCourse.illustration,
   };
 };
 
