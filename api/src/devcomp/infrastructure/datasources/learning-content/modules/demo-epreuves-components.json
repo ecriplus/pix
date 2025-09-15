@@ -13,54 +13,6 @@
   },
   "sections": [
     {
-      "id": "5f7badec-9ffd-4e99-99d6-05aa3d978343",
-      "type": "discovery",
-      "title": "capacity-calculation",
-      "components": [
-        {
-          "type": "element",
-          "element": {
-            "id": "5335cbac-503c-4aa0-a984-8c07897ff8e4",
-            "type": "text",
-            "content": "<p>capacity-calculation</p>"
-          }
-        },
-        {
-          "type": "element",
-          "element": {
-            "id": "4b7eb96e-134c-4b65-9513-cd57d9ed1e89",
-            "type": "custom",
-            "tagName": "capacity-calculation",
-            "props": {
-              "titleLevel": 2,
-              "images": {
-                "initial": {
-                  "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg",
-                  "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-initial.svg"
-                },
-                "normal_weak": {
-                  "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
-                  "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                },
-                "normal_medium": {
-                  "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
-                  "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                },
-                "warning": {
-                  "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-warning.svg",
-                  "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-warning.svg"
-                },
-                "error": {
-                  "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-error.svg",
-                  "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-error.svg"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
       "id": "be0a544c-99bd-4fbc-99b4-a52b5456a008",
       "type": "blank",
       "grains": [
