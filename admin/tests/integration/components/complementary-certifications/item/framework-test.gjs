@@ -12,7 +12,7 @@ module('Integration | Component | complementary-certifications/item/framework', 
 
   hooks.beforeEach(function () {
     const currentUser = this.owner.lookup('service:currentUser');
-    currentUser.adminMember = { isSuperAdmin: true };
+    currentUser.adminMember = { isCertif: true };
 
     store = this.owner.lookup('service:store');
 
@@ -31,42 +31,49 @@ module('Integration | Component | complementary-certifications/item/framework', 
     store.queryRecord = sinon.stub().resolves({});
   });
 
-  test('it should display a creation form button for framework', async function (assert) {
-    // given
-    store.findRecord = sinon.stub().returns();
+  module('when user has a super admin role', function (hooks) {
+    hooks.beforeEach(function () {
+      const currentUser = this.owner.lookup('service:currentUser');
+      currentUser.adminMember = { isSuperAdmin: true, isCertif: false };
+    });
 
-    // when
-    const screen = await render(<template><Framework /></template>);
-
-    // then
-    assert.dom(screen.getByText(t('components.complementary-certifications.item.framework.create-button'))).exists();
-  });
-
-  module('when a current consolidated framework exists', function () {
-    test('it should display the details component', async function (assert) {
+    test('it should display a framework creation button', async function (assert) {
       // given
-      store.findRecord = sinon.stub().resolves({
-        hasMany: sinon.stub().returns({
-          value: sinon.stub().returns([]),
-        }),
-      });
+      store.findRecord = sinon.stub().returns();
 
       // when
       const screen = await render(<template><Framework /></template>);
 
       // then
-      assert
-        .dom(
-          screen.getByRole('heading', {
-            name: t('components.complementary-certifications.item.framework.details.title'),
-          }),
-        )
-        .exists();
+      assert.dom(screen.getByText(t('components.complementary-certifications.item.framework.create-button'))).exists();
+    });
+
+    module('when there is no current consolidated framework', function () {
+      test('it should display the information and not the details component', async function (assert) {
+        // given
+        store.findRecord = sinon.stub().returns();
+
+        // when
+        const screen = await render(<template><Framework /></template>);
+
+        // then
+        assert
+          .dom(screen.getByText(t('components.complementary-certifications.item.framework.no-current-framework')))
+          .exists();
+
+        assert
+          .dom(
+            screen.queryByRole('heading', {
+              name: t('components.complementary-certifications.item.framework.details.title'),
+            }),
+          )
+          .doesNotExist();
+      });
     });
   });
 
-  module('when there is no current consolidated framework', function () {
-    test('it should display the information and not the details component', async function (assert) {
+  module('when user has another accepted role', function () {
+    test('it should not display a framework creation button', async function (assert) {
       // given
       store.findRecord = sinon.stub().returns();
 
@@ -75,53 +82,20 @@ module('Integration | Component | complementary-certifications/item/framework', 
 
       // then
       assert
-        .dom(screen.getByText(t('components.complementary-certifications.item.framework.no-current-framework')))
-        .exists();
-
-      assert
-        .dom(
-          screen.queryByRole('heading', {
-            name: t('components.complementary-certifications.item.framework.details.title'),
-          }),
-        )
+        .dom(screen.queryByText(t('components.complementary-certifications.item.framework.create-button')))
         .doesNotExist();
     });
   });
 
-  module('#frameworkHistory', function () {
-    module('when there is no existing framework history', function () {
-      test('it should not display the framework history', async function (assert) {
+  module('for all accepted roles', function () {
+    module('when a current consolidated framework exists', function () {
+      test('it should display the details component', async function (assert) {
         // given
         store.findRecord = sinon.stub().resolves({
           hasMany: sinon.stub().returns({
             value: sinon.stub().returns([]),
           }),
         });
-        store.queryRecord = sinon.stub().resolves({ history: [] });
-
-        // when
-        const screen = await render(<template><Framework /></template>);
-
-        // then
-        assert
-          .dom(
-            screen.queryByRole('heading', {
-              name: t('components.complementary-certifications.item.framework.history.title'),
-            }),
-          )
-          .doesNotExist();
-      });
-    });
-
-    module('when there are existing framework versions', function () {
-      test('it should display the framework history', async function (assert) {
-        // given
-        store.findRecord = sinon.stub().resolves({
-          hasMany: sinon.stub().returns({
-            value: sinon.stub().returns([]),
-          }),
-        });
-        store.queryRecord = sinon.stub().resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
 
         // when
         const screen = await render(<template><Framework /></template>);
@@ -130,10 +104,62 @@ module('Integration | Component | complementary-certifications/item/framework', 
         assert
           .dom(
             screen.getByRole('heading', {
-              name: t('components.complementary-certifications.item.framework.history.title'),
+              name: t('components.complementary-certifications.item.framework.details.title'),
             }),
           )
           .exists();
+      });
+    });
+
+    module('#frameworkHistory', function () {
+      module('when there is no existing framework history', function () {
+        test('it should not display the framework history', async function (assert) {
+          // given
+          store.findRecord = sinon.stub().resolves({
+            hasMany: sinon.stub().returns({
+              value: sinon.stub().returns([]),
+            }),
+          });
+          store.queryRecord = sinon.stub().resolves({ history: [] });
+
+          // when
+          const screen = await render(<template><Framework /></template>);
+
+          // then
+          assert
+            .dom(
+              screen.queryByRole('heading', {
+                name: t('components.complementary-certifications.item.framework.history.title'),
+              }),
+            )
+            .doesNotExist();
+        });
+      });
+
+      module('when there are existing framework versions', function () {
+        test('it should display the framework history', async function (assert) {
+          // given
+          store.findRecord = sinon.stub().resolves({
+            hasMany: sinon.stub().returns({
+              value: sinon.stub().returns([]),
+            }),
+          });
+          store.queryRecord = sinon
+            .stub()
+            .resolves({ history: ['20250101080000', '20240101080000', '20230101080000'] });
+
+          // when
+          const screen = await render(<template><Framework /></template>);
+
+          // then
+          assert
+            .dom(
+              screen.getByRole('heading', {
+                name: t('components.complementary-certifications.item.framework.history.title'),
+              }),
+            )
+            .exists();
+        });
       });
     });
   });
