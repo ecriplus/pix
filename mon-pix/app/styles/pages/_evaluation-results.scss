@@ -217,8 +217,8 @@
 }
 
 .evaluation-results-hero-organization-block__link {
-  display: inline-flex;
-  margin-top: var(--pix-spacing-4x);
+  width: fit-content;
+  margin: 0 auto var(--pix-spacing-4x);
 }
 
 // Retry or reset block
