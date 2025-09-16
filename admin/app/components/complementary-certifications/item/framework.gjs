@@ -10,6 +10,7 @@ import FrameworkDetails from './framework/framework-details';
 import FrameworkHistory from './framework/framework-history';
 
 export default class ComplementaryCertificationFramework extends Component {
+  @service currentUser;
   @service store;
   @service router;
   @tracked currentConsolidatedFramework;
@@ -39,21 +40,23 @@ export default class ComplementaryCertificationFramework extends Component {
   }
 
   <template>
-    <PixBlock @variant="admin">
-      {{#unless this.currentConsolidatedFramework}}
-        <PixNotificationAlert @withIcon={{true}} class="framework__no-current">
-          {{t "components.complementary-certifications.item.framework.no-current-framework"}}
-        </PixNotificationAlert>
-        <br />
-      {{/unless}}
+    {{#if this.currentUser.adminMember.isSuperAdmin}}
+      <PixBlock @variant="admin">
+        {{#unless this.currentConsolidatedFramework}}
+          <PixNotificationAlert @withIcon={{true}} class="framework__no-current">
+            {{t "components.complementary-certifications.item.framework.no-current-framework"}}
+          </PixNotificationAlert>
+          <br />
+        {{/unless}}
 
-      <PixButtonLink
-        class="framework__creation-button"
-        @route="authenticated.complementary-certifications.item.framework.new"
-      >
-        {{t "components.complementary-certifications.item.framework.create-button"}}
-      </PixButtonLink>
-    </PixBlock>
+        <PixButtonLink
+          class="framework__creation-button"
+          @route="authenticated.complementary-certifications.item.framework.new"
+        >
+          {{t "components.complementary-certifications.item.framework.create-button"}}
+        </PixButtonLink>
+      </PixBlock>
+    {{/if}}
 
     {{#if this.currentConsolidatedFramework}}
       <FrameworkDetails @currentConsolidatedFramework={{this.currentConsolidatedFramework}} />

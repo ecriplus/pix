@@ -138,11 +138,13 @@ const register = async function (server) {
         pre: [
           {
             method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
-                request,
-                h,
-              ),
-            assign: 'hasRoleSuperAdmin',
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
         validate: {
@@ -153,7 +155,7 @@ const register = async function (server) {
         handler: complementaryCertificationController.getCurrentConsolidatedFramework,
         tags: ['api', 'admin'],
         notes: [
-          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
+          'Cette route est restreinte aux utilisateurs authentifiés avec un rôle Super Admin, Certif, Support ou Métier',
           'Elle permet de récupérer le référentiel cadre courant pour une complémentaire',
         ],
       },
@@ -169,6 +171,7 @@ const register = async function (server) {
                 securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
                 securityPreHandlers.checkAdminMemberHasRoleCertif,
                 securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
               ])(request, h),
             assign: 'hasAuthorizationToAccessAdminScope',
           },
@@ -181,7 +184,7 @@ const register = async function (server) {
         handler: complementaryCertificationController.getFrameworkHistory,
         tags: ['api', 'admin'],
         notes: [
-          'Cette route est restreinte aux utilisateurs authentifiés avec un de ces rôles : Super Admin, Certif ou Métier',
+          'Cette route est restreinte aux utilisateurs authentifiés avec un rôle Super Admin, Certif, Support ou Métier',
           "Elle permet de récupérer l'historique des référentiels d'une complémentaire",
         ],
       },

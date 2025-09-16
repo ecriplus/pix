@@ -4,6 +4,10 @@ import { service } from '@ember/service';
 export default class ItemRoute extends Route {
   @service store;
 
+  beforeModel() {
+    return this.store.findAll('complementary-certification');
+  }
+
   model(params) {
     return this.store.findRecord('complementary-certification', params.complementary_certification_id, {
       reload: true,
