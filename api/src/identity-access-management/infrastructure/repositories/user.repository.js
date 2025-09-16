@@ -11,7 +11,6 @@ import {
   AlreadyRegisteredUsernameError,
   UserNotFoundError,
 } from '../../../shared/domain/errors.js';
-import { CertificationCenter } from '../../../shared/domain/models/CertificationCenter.js';
 import { CertificationCenterMembership } from '../../../shared/domain/models/CertificationCenterMembership.js';
 import { Membership } from '../../../shared/domain/models/Membership.js';
 import { fetchPage, isUniqConstraintViolated } from '../../../shared/infrastructure/utils/knex-utils.js';
@@ -209,34 +208,19 @@ const getWithMemberships = async function (userId) {
   return _toDomainFromDTO({ userDTO, membershipsDTO });
 };
 
-const getWithCertificationCenterMemberships = async function (userId) {
+const isUserCanAccededToThisCertificationCenter = async function (userId, certificationCenterId) {
   const user = await knex('users').where({ id: userId }).first();
   if (!user) throw new UserNotFoundError(`User not found for ID ${userId}`);
 
-  const certificationCenterMemberships = await knex('certification-center-memberships')
-    .where({ userId })
-    .whereNull('disabledAt');
-  const certificationCenters = await knex('certification-centers').whereIn(
-    'id',
-    certificationCenterMemberships.map(
-      (certificationCenterMembership) => certificationCenterMembership.certificationCenterId,
-    ),
-  );
+  const userIsMemberOfThisCertificationCenter = await knex('certification-center-memberships')
+    .where({
+      userId,
+      certificationCenterId,
+    })
+    .whereNull('disabledAt')
+    .first();
 
-  return new User({
-    ...user,
-    certificationCenterMemberships: certificationCenterMemberships.map(
-      (certificationCenterMembership) =>
-        new CertificationCenterMembership({
-          ...certificationCenterMembership,
-          certificationCenter: new CertificationCenter(
-            certificationCenters.find(
-              (certificationCenter) => certificationCenter.id === certificationCenterMembership.certificationCenterId,
-            ),
-          ),
-        }),
-    ),
-  });
+  return !!userIsMemberOfThisCertificationCenter;
 };
 
 const getBySamlId = async function (samlId) {
@@ -456,7 +440,7 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  * @property {function} getForObfuscation
  * @property {function} getFullById
  * @property {function} getUserDetailsForAdmin
- * @property {function} getWithCertificationCenterMemberships
+ * @property {function} isUserCanAccededToThisCertificationCenter
  * @property {function} getWithMemberships
  * @property {function} isUserExistingByEmail
  * @property {function} isUsernameAvailable
@@ -489,8 +473,8 @@ export {
   getForObfuscation,
   getFullById,
   getUserDetailsForAdmin,
-  getWithCertificationCenterMemberships,
   getWithMemberships,
+  isUserCanAccededToThisCertificationCenter,
   isUserExistingByEmail,
   isUsernameAvailable,
   update,

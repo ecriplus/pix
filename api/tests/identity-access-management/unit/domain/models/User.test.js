@@ -258,67 +258,6 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     });
   });
 
-  describe('hasAccessToCertificationCenter', function () {
-    it('should be false if user has no access to given certification center', function () {
-      // given
-      const user = new User(undefined);
-      const certificationCenterId = 12345;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      // then
-      expect(hasAccess).to.be.false;
-    });
-
-    it('should be false if user has access to many CertificationCenters, but not the given one', function () {
-      // given
-      const certificationCenterId = 12345;
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships.push(domainBuilder.buildCertificationCenterMembership());
-      user.certificationCenterMemberships[0].certificationCenter.id = 93472;
-      user.certificationCenterMemberships[1].certificationCenter.id = 74569;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.false;
-    });
-
-    it('should be true if the user has an access to the given CertificationCenterId', function () {
-      // given
-      const certificationCenterId = 12345;
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships[0].certificationCenter.id = 12345;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.true;
-    });
-
-    it('should be false if the user has a disabled access to the given CertificationCenterId', function () {
-      // given
-      const certificationCenterId = 12345;
-      const now = new Date();
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships = [
-        domainBuilder.buildCertificationCenterMembership({
-          certificationCenter: { id: certificationCenterId },
-          disabledAt: now,
-        }),
-      ];
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.false;
-    });
-  });
-
   describe('#email', function () {
     it('should normalize email', function () {
       // given

@@ -6,7 +6,7 @@ import * as localeService from '../../../shared/domain/services/locale-service.j
 import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/date-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 
-const { toLower, isNil } = lodash;
+const { toLower } = lodash;
 
 class User {
   constructor(
@@ -126,14 +126,6 @@ class User {
 
   hasAccessToOrganization(organizationId) {
     return this.memberships.some((membership) => membership.organization.id === organizationId);
-  }
-
-  hasAccessToCertificationCenter(certificationCenterId) {
-    return this.certificationCenterMemberships.some(
-      (certificationCenterMembership) =>
-        certificationCenterMembership.certificationCenter.id === certificationCenterId &&
-        isNil(certificationCenterMembership.disabledAt),
-    );
   }
 
   markEmailAsValid() {
