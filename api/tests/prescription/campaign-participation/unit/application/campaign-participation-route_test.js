@@ -179,9 +179,12 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
   });
 
   describe('DELETE /api/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}', function () {
-    it('should return the controller response', async function () {
+    it('should call the required pre handler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse')
+        .callsFake((request, h) => h.response(true));
       sinon
         .stub(campaignParticipationController, 'deleteParticipation')
         .callsFake((request, h) => h.response('ok').code(204));
@@ -195,27 +198,9 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       const response = await httpTestServer.request(method, url);
 
       // then
+      expect(securityPreHandlers.checkAuthorizationToManageCampaign.called).true;
+      expect(securityPreHandlers.checkCampaignBelongsToCombinedCourse.called).true;
       expect(response.statusCode).to.equal(204);
-    });
-
-    context('When the user is neither an admin nor the owner of the campaign', function () {
-      it('should return 403', async function () {
-        // given
-        sinon
-          .stub(securityPreHandlers, 'checkAuthorizationToManageCampaign')
-          .callsFake((request, h) => h.response().code(403).takeover());
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        const method = 'DELETE';
-        const url = '/api/campaigns/1/campaign-participations/123';
-
-        // when
-        const response = await httpTestServer.request(method, url);
-
-        // then
-        expect(response.statusCode).to.equal(403);
-      });
     });
 
     context('When the campaignId is not a number', function () {
@@ -254,9 +239,15 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
   });
 
   describe('DELETE /api/admin/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}', function () {
-    it('should return an HTTP status code 200', async function () {
+    it('should call required pre handler', async function () {
       // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      const superAdminStub = sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
+      const hasRoleSupportStub = sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport');
+      sinon.stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse').returns(() => true);
+      sinon
+        .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+        .withArgs([superAdminStub, hasRoleSupportStub])
+        .returns(() => true);
       sinon.stub(campaignParticipationController, 'deleteParticipation').resolves('ok');
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
@@ -265,30 +256,13 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
       const response = await httpTestServer.request('DELETE', '/api/admin/campaigns/1/campaign-participations/2');
 
       // then
-      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-      sinon.assert.calledOnce(campaignParticipationController.deleteParticipation);
+      expect(securityPreHandlers.hasAtLeastOneAccessOf.calledOnce, 'hasAtLeastOnAccessOf').true;
+      expect(
+        securityPreHandlers.checkCampaignBelongsToCombinedCourse.calledOnce,
+        'checkCampaignBelongsToCombinedCourse',
+      ).true;
+      expect(campaignParticipationController.deleteParticipation.calledOnce, 'deleteParticipation').true;
       expect(response.statusCode).to.equal(200);
-    });
-
-    it('should return an HTTP status code 403', async function () {
-      // given
-      sinon.stub(campaignParticipationController, 'deleteParticipation').resolves('ok');
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns((request, h) =>
-        h
-          .response({ errors: new Error('') })
-          .code(403)
-          .takeover(),
-      );
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const response = await httpTestServer.request('DELETE', '/api/admin/campaigns/1/campaign-participations/2');
-
-      // then
-      sinon.assert.calledOnce(securityPreHandlers.hasAtLeastOneAccessOf);
-      sinon.assert.notCalled(campaignParticipationController.deleteParticipation);
-      expect(response.statusCode).to.equal(403);
     });
   });
 

@@ -75,7 +75,7 @@ describe('Acceptance | API | Campaign Participations', function () {
     });
   });
 
-  describe('DELETE /api/admin/campaigns/{campaignId/campaign-participations/{campaignParticipationId}', function () {
+  describe('DELETE /api/admin/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}', function () {
     it('should return 204 HTTP status code', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();

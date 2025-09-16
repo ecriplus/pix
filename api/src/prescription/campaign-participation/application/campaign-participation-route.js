@@ -64,7 +64,10 @@ const register = async function (server) {
       method: 'DELETE',
       path: '/api/campaigns/{campaignId}/campaign-participations/{campaignParticipationId}',
       config: {
-        pre: [{ method: securityPreHandlers.checkAuthorizationToManageCampaign }],
+        pre: [
+          { method: securityPreHandlers.checkAuthorizationToManageCampaign },
+          { method: securityPreHandlers.checkCampaignBelongsToCombinedCourse },
+        ],
         validate: {
           params: Joi.object({
             campaignId: identifiersType.campaignId,
@@ -220,6 +223,9 @@ const register = async function (server) {
                 securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
                 securityPreHandlers.checkAdminMemberHasRoleSupport,
               ])(request, h),
+          },
+          {
+            method: securityPreHandlers.checkCampaignBelongsToCombinedCourse,
           },
         ],
         validate: {
