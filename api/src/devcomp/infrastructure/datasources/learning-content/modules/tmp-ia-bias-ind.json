@@ -237,27 +237,12 @@
           "title": "Des biais sont présents dans les données du Web",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "57c8eb66-a1ff-40d1-adfb-ca3e8a9e2bda",
-                      "type": "text",
-                      "content": "<p>Les IA génératives sont <strong>entraînées sur une très grande quantité de données</strong>. Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "5c146c79-a201-4784-82ca-8e9d280987d9",
-                      "type": "text",
-                      "content": "<p>Ces données peuvent&nbsp;: </p><ul><li>Montrer des <strong>situations de discrimination déjà existantes&nbsp;</strong></li><li><p>Exprimer les <strong>expériences</strong>, ou les <strong>opinions des contributeurs</strong> qui les ont produites. Elles peuvent donc contenir &nbsp;: </p><ul><li>des <strong>idées reçues </strong>ou des <strong>stéréotypes</strong>, </li><li>des <strong>discriminations</strong>, </li><li>des <strong>différences culturelles</strong>.</li></ul></li></ul>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "7e8ef97e-9782-4eba-bc2c-806c4020caa3",
+                "type": "text",
+                "content": "<p>Les IA génératives sont <strong>entraînées </strong>sur une très <strong>grande quantité</strong> de données.</p><p> Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p><p><br></p><p>Ces données peuvent&nbsp;:</p><ul><li>Montrer des <strong>situations de discrimination </strong>déjà <strong>existantes&nbsp;</strong></li><li>Exprimer les <strong>expériences</strong>, ou les <strong>opinions </strong>des contributeurs qui les ont produites. Elles peuvent donc contenir &nbsp;: <ul><li> des <strong>idées reçues</strong> ou des <strong>stéréotypes</strong>, </li><li>des <strong>discriminations</strong>, </li><li>des <strong>différences culturelles</strong>.</li></ul></li></ul>"
+              }
             }
           ]
         },
@@ -335,27 +320,12 @@
           "title": "L’IA reproduit les biais qu’elle trouve dans les contenus",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "4ec1233f-0134-4e3e-82b0-2e0529be6182",
-                      "type": "text",
-                      "content": "<p>L’IA générative construit ses réponses en <strong>s’appuyant sur les mots ou les images les plus fréquents </strong>dans ses données d’entraînement. Comme ici avec le taboulé à la semoule.<br><br>La plupart du temps, cette méthode produit des résultats pertinents. 👍</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "783dbbb2-bf4d-468b-bac6-f0fe146c188f",
-                      "type": "text",
-                      "content": "<p>Les données collectées sur le web ne reflètent pas toujours la réalité de manière équilibrée. Certains faits, points de vue ou opinions y sont <strong>sur-représentés, ou au contraire sous-représentés</strong>.</p><p><br>En conséquence, l’IA générative peut <strong>produire des réponses avec des biais</strong>. C’est-à-dire qu’elle peut transmettre des idées reçues, des discriminations, des stéréotypes ou encore des biais culturels.</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "aba8fd9b-a0fd-42db-abfc-89ebc37fa983",
+                "type": "text",
+                "content": "<p>L’IA générative construit ses réponses à partir des éléments les plus fréquents dans ses données d’entraînement.</p><p><br>Cette méthode donne souvent de bons résultats 👍 mais les données du web sont déséquilibrées : certains faits ou opinions sont sur-représentés, d’autres sous-représentés.</p><p><br>L’IA peut donc produire des réponses biaisées : idées reçues, stéréotypes, discriminations ou biais culturels.<br></p>"
+              }
             }
           ]
         },
@@ -547,39 +517,21 @@
           "title": "Le biais de confirmation",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "daae6feb-1f70-440a-9d27-0b2e4acb5d3c",
-                      "type": "text",
-                      "content": "<p>Un biais dans une réponse d’IA générative peut sauter aux yeux ou passer inaperçu. 👀<br>Il faut savoir que les humains ont un point faible&nbsp;: on a tendance à <strong>croire des choses que nous pensons déjà </strong>et à ignorer des informations qui nous contredisent. 😰<br> <br>👉 Cela s’appelle le <strong>biais de confirmation</strong>.</p>"
-                    },
-                    {
-                      "id": "a5fd2b0e-1241-4919-8eaa-3788aab941f9",
-                      "type": "expand",
-                      "title": "Par exemple",
-                      "content": "<p>Alfredo pense que les tout petits chiens c’est plutôt un accessoire féminin.&nbsp;Quand il demande «&nbsp;une image d’une femme avec son chien&nbsp;», le logiciel d’IA générative lui propose une image de femme avec un chihuahua. Il ne va sûrement pas voir le biais.<br></p>\n<p><img src=\"https://assets.pix.org/draft/modules/ia-biais-independant/Alfredochihuahua2.jpg\" height=\"300\" alt=\"images d'alfredo\"></p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "83deebb0-87c4-41fd-a26c-91ef18f66299",
-                      "type": "text",
-                      "content": "<p>Souvent, un logiciel d’IA générative va générer des réponses <strong>pour nous plaire</strong> et ne <strong>pas nous contredire</strong>. Si le contexte de notre prompt exprime une opinion ou une préférence, l’IA aura tendance à la confirmer.<br><br>Il faut donc être vigilant, garder un <strong>regard critique</strong> et <strong>éviter de réutiliser les productions de l’IA telles quelles.</strong> 🕵️</p>"
-                    },
-                    {
-                      "id": "4848930f-0095-4d42-88a4-604a8daafea2",
-                      "type": "expand",
-                      "title": "💡Quelques astuces pour détecter des biais",
-                      "content": "<p>Voici quelques questions à se poser pour repérer les biais dans les réponses de l’IA générative. Si la réponse est «&nbsp;oui&nbsp;», attention.&nbsp;👀</p><ul><li>Est-ce que la réponse comprend des <strong>clichés</strong> ou <strong>stéréotypes</strong> ?😕</li><li>Est-ce qu’elle présente <strong>un seul point de vue</strong> et oublie les autres ? 🙈</li><li>Est-ce qu’elle donne surtout des <strong>opinions</strong> et pas des faits ?  💭</li><li>Est-ce qu’elle montre des <strong>exemples trop semblables</strong> ? 🌍</li></ul>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "a901737a-8a58-4d58-afd5-2547711002d8",
+                "type": "text",
+                "content": "<p>Un biais dans une réponse d’IA générative peut sauter aux yeux ou passer inaperçu. 👀<br>Il faut savoir que les humains ont un point faible : nous croyons plus facilement ce qui confirme nos idées et ignorons ce qui les contredit.</p><p>👉 Cela s’appelle le <strong>biais de confirmation</strong>.</p><p><br></p><p>Souvent, un logiciel d’IA générative va générer des réponses pour nous plaire et ne pas nous contredire. Si le contexte de notre prompt exprime une opinion ou une préférence, l’IA aura tendance à la confirmer.<br><br>Il faut donc être vigilant, garder un <strong>regard critique</strong> et éviter de réutiliser les productions de l’IA telles quelles. 🕵️</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c6784bf2-ccc5-4f4e-bf03-3789da7c38a4",
+                "type": "expand",
+                "title": "💡Quelques astuces pour détecter des biais",
+                "content": "<p> Posez-vous ces questions (si la réponse est « oui », attention 👀) : </p><ul><li> Y a-t-il des clichés ou stéréotypes ? 😕</li><li>Est-ce qu’un seul point de vue est présenté ? 🙈</li><li>Est-ce surtout des opinions plutôt que des faits ? 💭</li><li>Les exemples sont-ils trop semblables ? 🌍</li></ul>"
+              }
             }
           ]
         }
@@ -851,7 +803,10 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple, ou bien vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": ["2", "4"]
+                "solutions": [
+                  "2",
+                  "4"
+                ]
               }
             }
           ]
@@ -899,7 +854,10 @@
                     "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
                   }
                 },
-                "solutions": ["1", "3"]
+                "solutions": [
+                  "1",
+                  "3"
+                ]
               }
             }
           ]
