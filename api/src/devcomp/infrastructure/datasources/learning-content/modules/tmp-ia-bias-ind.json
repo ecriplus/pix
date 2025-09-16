@@ -380,28 +380,35 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici, la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Car l’IA a confirmé ce que Captain America pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong><br>Ici, la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Car la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici, la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong><br>Ici la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong><br>Ici, la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ici, la question posée par Captain America comportait déjà un biais «&nbsp;l'Amérique est le meilleur pays du monde&nbsp;». Donc le logiciel d’IA générative a confirmé ce biais en lui répondant.</p>"
                           }
                         }
                       ],
@@ -429,7 +436,7 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la création de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong><br>Ici la vision stéréotypée des parisiens proposée par le logiciel d’IA générative peut convenir à Satô car il n’en a jamais rencontré. Il identifie le béret et la marinière comme des vêtements iconiques français.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d'IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n'a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.<br></p>"
                           }
                         },
                         {
@@ -451,6 +458,13 @@
                           "content": "<p>Car la demande du prompt comportait déjà un biais.</p>",
                           "feedback": {
                             "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d'IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n'a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Ici, le logiciel d'IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n'a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         }
                       ],
@@ -500,6 +514,13 @@
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
                             "diagnosis": "<p><strong>Pas exactement.</strong><br>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas remarqué le biais dans la réponse de l’IA car elle a le souvenir de voir des hôtesses de l’air qui portaient des talons représentées dans des publicités, des séries ou des films.</p>"
                           }
                         }
                       ],
