@@ -532,6 +532,7 @@
       "title": "Résultats de {firstName} {lastName}"
     },
     "attestations": {
+      "MINARM": "Socle numérique",
       "PARENTHOOD": "Attestation de sensibilisation au numérique",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
       "basic-description": "Exportez toutes les attestations",
