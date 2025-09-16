@@ -1,11 +1,10 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticipationOverview } from '../../domain/read-models/CampaignParticipationOverview.js';
 
-const findByUserIdWithFilters = async function ({ userId, states, page }) {
+const findByUserIdWithFilters = async function ({ userId, states }) {
   const queryBuilder = _getQueryBuilder(function (qb) {
     qb.where('campaign-participations.userId', userId).whereNotExists(function () {
       this.select(knex.raw('1'))
@@ -20,16 +19,10 @@ const findByUserIdWithFilters = async function ({ userId, states, page }) {
     _filterByStates(queryBuilder, states);
   }
 
-  const { results, pagination } = await fetchPage({
-    queryBuilder,
-    paginationParams: page,
-  });
-  return {
-    campaignParticipationOverviews: results.map(
-      (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),
-    ),
-    pagination,
-  };
+  const results = await queryBuilder;
+  return results.map(
+    (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),
+  );
 };
 
 const findByOrganizationLearnerId = async ({ organizationLearnerId }) => {

@@ -149,12 +149,9 @@ const getCampaignParticipationOverviews = async function (
   const userCampaignParticipationOverviews = await usecases.findUserCampaignParticipationOverviews({
     userId: authenticatedUserId,
     states: query.filter.states,
-    page: query.page,
   });
 
-  return dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList(
-    userCampaignParticipationOverviews,
-  );
+  return dependencies.campaignParticipationOverviewSerializer.serialize(userCampaignParticipationOverviews);
 };
 
 const getAnonymisedCampaignAssessments = async function (

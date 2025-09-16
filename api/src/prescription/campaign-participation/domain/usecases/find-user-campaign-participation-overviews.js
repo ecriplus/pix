@@ -1,7 +1,6 @@
 const findUserCampaignParticipationOverviews = async function ({
   userId,
   states,
-  page,
   stageRepository,
   stageAcquisitionRepository,
   campaignParticipationOverviewRepository,
@@ -9,12 +8,10 @@ const findUserCampaignParticipationOverviews = async function ({
 }) {
   const concatenatedStates = states ? [].concat(states) : undefined;
 
-  const { campaignParticipationOverviews, pagination } =
-    await campaignParticipationOverviewRepository.findByUserIdWithFilters({
-      userId,
-      states: concatenatedStates,
-      page,
-    });
+  const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+    userId,
+    states: concatenatedStates,
+  });
 
   // We deduplicate targetProfileIds in the case where several campaigns belong to the same target profile
   const targetProfileIds = [...new Set(campaignParticipationOverviews.map(({ targetProfileId }) => targetProfileId))];
@@ -45,7 +42,7 @@ const findUserCampaignParticipationOverviews = async function ({
     },
   );
 
-  return { campaignParticipationOverviews: campaignParticipationOverviewsWithStages, pagination };
+  return campaignParticipationOverviewsWithStages;
 };
 
 export { findUserCampaignParticipationOverviews };

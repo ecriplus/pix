@@ -2,12 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serializeForPaginatedList = function (userCampaignParticipationOverviewsPaginatedList) {
-  const { campaignParticipationOverviews, pagination } = userCampaignParticipationOverviewsPaginatedList;
-  return this.serialize(campaignParticipationOverviews, pagination);
-};
-
-const serialize = function (campaignParticipationOverview, meta) {
+const serialize = function (campaignParticipationOverviews) {
   return new Serializer('campaign-participation-overview', {
     attributes: [
       'isShared',
@@ -23,8 +18,7 @@ const serialize = function (campaignParticipationOverview, meta) {
       'totalStagesCount',
       'canRetry',
     ],
-    meta,
-  }).serialize(campaignParticipationOverview);
+  }).serialize(campaignParticipationOverviews);
 };
 
-export { serialize, serializeForPaginatedList };
+export { serialize };

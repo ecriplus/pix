@@ -1,21 +1,22 @@
+import _ from 'lodash';
+
+import * as campaignParticipationOverviewRepository
+  from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes
+} from '../../../../../../src/prescription/shared/domain/constants.js';
+import { constants } from '../../../../../../src/shared/domain/constants.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import {
   databaseBuilder,
   expect,
   learningContentBuilder,
   mockLearningContent,
-  sinon,
+  sinon
 } from '../../../../../test-helper.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
-import _ from 'lodash';
-
-import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
-import {
-  CampaignParticipationStatuses,
-  CampaignTypes,
-} from '../../../../../../src/prescription/shared/domain/constants.js';
-import { constants } from '../../../../../../src/shared/domain/constants.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 
 let userId;
 
@@ -351,9 +352,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const {
-          campaignParticipationOverviews: [campaignParticipation],
-        } = await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const [campaignParticipation] = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipation).to.deep.include({
           id: participationId,
@@ -387,8 +388,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         campaignParticipationOverviewFactory.build();
         await databaseBuilder.commit();
 
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
         const campaignParticipationUserIds = _.map(campaignParticipationOverviews, 'id');
 
         expect(campaignParticipationUserIds).to.exactlyContain([participation1Id, participation2Id]);
@@ -412,8 +414,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
         await databaseBuilder.commit();
 
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
         const campaignParticipationUserIds = _.map(campaignParticipationOverviews, 'id');
 
         expect(campaignParticipationUserIds).to.exactlyContain([participation1Id, participation2Id]);
@@ -443,9 +446,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const {
-          campaignParticipationOverviews: [campaignParticipation],
-        } = await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const [campaignParticipation] = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipation.id).to.equal(participationId);
       });
@@ -475,9 +478,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const {
-          campaignParticipationOverviews: [campaignParticipation],
-        } = await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const [campaignParticipation] = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipation.status).to.equal(CampaignParticipationStatuses.TO_SHARE);
       });
@@ -500,9 +503,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const {
-          campaignParticipationOverviews: [campaignParticipation],
-        } = await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const [campaignParticipation] = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipation.disabledAt).to.deep.equal(deletedAt);
       });
@@ -525,37 +528,11 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const {
-          campaignParticipationOverviews: [campaignParticipation],
-        } = await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const [campaignParticipation] = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipation.disabledAt).to.deep.equal(archivedAt);
-      });
-
-      it('retrieves pagination information', async function () {
-        const { id: oldestParticipation } = campaignParticipationOverviewFactory.buildOnGoing({
-          userId,
-          createdAt: new Date('2020-01-01'),
-          campaignSkills: ['recSkillId1'],
-        });
-        campaignParticipationOverviewFactory.buildOnGoing({
-          userId,
-          createdAt: new Date('2020-01-02'),
-          campaignSkills: ['recSkillId1'],
-        });
-        await databaseBuilder.commit();
-        const page = { number: 2, size: 1 };
-
-        const { campaignParticipationOverviews, pagination } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, page });
-
-        expect(campaignParticipationOverviews[0].id).to.equal(oldestParticipation);
-        expect(pagination).to.deep.equal({
-          page: 2,
-          pageSize: 1,
-          rowCount: 2,
-          pageCount: 2,
-        });
       });
     });
 
@@ -610,8 +587,10 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       context('the filter is ONGOING', function () {
         it('returns participation with a started assessment', async function () {
           const states = ['ONGOING'];
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, states });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+            states,
+          });
 
           expect(campaignParticipationOverviews[0].id).to.equal(onGoingParticipation.id);
           expect(campaignParticipationOverviews).to.have.lengthOf(1);
@@ -621,8 +600,10 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       context('the filter is TO_SHARE', function () {
         it('returns participation with a completed assessment', async function () {
           const states = ['TO_SHARE'];
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, states });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+            states,
+          });
 
           expect(campaignParticipationOverviews[0].id).to.equal(toShareParticipation.id);
           expect(campaignParticipationOverviews).to.have.lengthOf(1);
@@ -632,8 +613,10 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       context('the filter is ENDED', function () {
         it('returns shared participation', async function () {
           const states = ['ENDED'];
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, states });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+            states,
+          });
 
           expect(campaignParticipationOverviews[0].id).to.equal(endedParticipation.id);
           expect(campaignParticipationOverviews).to.have.lengthOf(1);
@@ -643,8 +626,10 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       context('the filter is DISABLED', function () {
         it('returns participation where the campaign is archived or the participation deleted', async function () {
           const states = ['DISABLED'];
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, states });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+            states,
+          });
 
           expect(campaignParticipationOverviews).to.have.lengthOf(2);
           expect(campaignParticipationOverviews.map(({ id }) => id)).to.exactlyContain([
@@ -657,8 +642,10 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       context('when there are several statuses given for the status filter', function () {
         it('returns only participations which matches with the given statuses', async function () {
           const states = ['ONGOING', 'TO_SHARE'];
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId, states });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+            states,
+          });
 
           expect(_.map(campaignParticipationOverviews, 'id')).to.exactlyContain([
             onGoingParticipation.id,
@@ -689,8 +676,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           });
           await databaseBuilder.commit();
 
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+          });
           const campaignParticipationIds = _.map(campaignParticipationOverviews, 'id');
 
           expect(campaignParticipationIds).to.exactlyContainInOrder([
@@ -716,8 +704,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           });
           await databaseBuilder.commit();
 
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+          });
           const campaignParticipationIds = _.map(campaignParticipationOverviews, 'id');
 
           expect(campaignParticipationIds).to.exactlyContainInOrder([newestParticipation, oldestParticipation]);
@@ -747,8 +736,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
           await databaseBuilder.commit();
 
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+          });
           const campaignParticipationIds = _.map(campaignParticipationOverviews, 'id');
 
           expect(campaignParticipationIds).to.exactlyContainInOrder([
@@ -782,8 +772,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
           await databaseBuilder.commit();
 
-          const { campaignParticipationOverviews } =
-            await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+          const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+          });
           const campaignParticipationIds = _.map(campaignParticipationOverviews, 'id');
 
           expect(campaignParticipationIds).to.exactlyContainInOrder([
@@ -819,8 +810,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         });
         await databaseBuilder.commit();
 
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         expect(campaignParticipationOverviews).to.deep.equal([]);
       });
@@ -848,8 +840,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews).to.have.lengthOf(0);
@@ -876,8 +869,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews).to.have.lengthOf(0);
@@ -905,8 +899,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews).to.have.lengthOf(1);
@@ -968,8 +963,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews).to.have.lengthOf(1);
@@ -1007,8 +1003,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.true;
@@ -1043,8 +1040,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
@@ -1080,8 +1078,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
@@ -1117,8 +1116,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
@@ -1153,8 +1153,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.true;
@@ -1189,8 +1190,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
@@ -1225,8 +1227,9 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         await databaseBuilder.commit();
 
         // when
-        const { campaignParticipationOverviews } =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({ userId });
+        const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
