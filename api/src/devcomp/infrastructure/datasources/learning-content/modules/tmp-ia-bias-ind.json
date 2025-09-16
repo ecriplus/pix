@@ -796,7 +796,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                    "diagnosis": "<p>Vous avez repéré que la photo générée avec l’IA suppose qu’un indien est nécessairement un amérindien, représenté de façon stéréotypique.&nbsp;<br>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre.</p>"
+                    "diagnosis": "<p>Vous avez repéré les biais du logiciel d'IA. Il suppose que le terme \"indien\" désigne une personne native d'Amérique, qu'il représenté de façon stéréotypique.&nbsp;<br>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
