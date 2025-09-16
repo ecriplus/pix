@@ -22,7 +22,7 @@ module('Unit | Model | Combined Course Item', function (hooks) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
         type: 'CAMPAIGN',
       });
-      assert.strictEqual(combinedCourseItem.iconUrl, '/images/combined-course/campaign-icon.svg');
+      assert.strictEqual(combinedCourseItem.iconUrl, 'https://assets.pix.org/combined-courses/campaign-icon.svg');
     });
   });
 
@@ -49,7 +49,10 @@ module('Unit | Model | Combined Course Item', function (hooks) {
         type: 'FORMATION',
         image: 'my-module-url',
       });
-      assert.strictEqual(combinedCourseItem.iconUrl, '/images/formation-book.svg');
+      assert.strictEqual(
+        combinedCourseItem.iconUrl,
+        'https://assets.pix.org/combined-courses/picto_formation_vector.svg',
+      );
     });
   });
 });
