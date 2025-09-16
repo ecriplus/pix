@@ -15,8 +15,8 @@ export default class AttestationContent extends Component {
   @service pixMetrics;
   @service intl;
 
-  get resultTitle() {
-    return `components.campaigns.attestation-result.title.digital-awarness`;
+  getFilename(type) {
+    return `components.campaigns.attestation-result.title.${type}`;
   }
 
   @action
@@ -24,7 +24,7 @@ export default class AttestationContent extends Component {
     const { access_token: token, user_id: userId } = this.session.data.authenticated;
     this.sendMetrics();
     const url = `/api/users/${userId}/attestations/${type}`;
-    const fileName = kebabCase(deburr(this.intl.t(this.resultTitle)));
+    const fileName = 'attestation-' + kebabCase(deburr(this.intl.t(this.getFilename(type))));
 
     await this.fileSaver.save({ url, token, fileName });
   }
@@ -46,11 +46,13 @@ export default class AttestationContent extends Component {
 
       <ul class="attestation-list">
         {{#each this.currentUser.attestationsDetails as |attestationDetail|}}
-          <li><AttestationCard
+          <li>
+            <AttestationCard
               @type={{attestationDetail.type}}
               @obtainedAt={{attestationDetail.obtainedAt}}
               @downloadAttestation={{this.onClick}}
-            /></li>
+            />
+          </li>
         {{/each}}
       </ul>
     </main>

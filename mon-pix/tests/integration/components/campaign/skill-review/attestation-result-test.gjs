@@ -27,29 +27,34 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
     });
 
     module('attestation title', function () {
-      test('it should display sixth grade attestation title', async function (assert) {
-        const result = [
-          {
-            reward: { key: 'SIXTH_GRADE' },
-            obtained: true,
-          },
-        ];
+      const attestationKeys = [
+        'EDUCOLLAB',
+        'EDUCULTURENUM',
+        'EDUDOC',
+        'EDUIA',
+        'EDUINCONTOURNABLES',
+        'EDURESSOURCES',
+        'EDUSECU',
+        'EDUSUPPORT',
+        'EDUVEILLE',
+        'MINARM',
+        'PARENTHOOD',
+        'SIXTH_GRADE',
+      ];
 
-        const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-        const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
-        assert.dom(screen.getByText(rewardTitle)).exists();
-      });
-      test('it should display minarm attestation title', async function (assert) {
-        const result = [
-          {
-            reward: { key: 'MINARM' },
-            obtained: true,
-          },
-        ];
+      attestationKeys.forEach((key) => {
+        test(`it should display ${key} attestation title`, async function (assert) {
+          const result = [
+            {
+              reward: { key },
+              obtained: true,
+            },
+          ];
 
-        const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-        const rewardTitle = t(`components.campaigns.attestation-result.title.minarm`);
-        assert.dom(screen.getByText(rewardTitle)).exists();
+          const screen = await render(<template><AttestationResult @results={{result}} /></template>);
+          const rewardTitle = t(`components.campaigns.attestation-result.title.${key}`);
+          assert.dom(screen.getByText(rewardTitle)).exists();
+        });
       });
     });
 
@@ -171,7 +176,7 @@ module('Integration | Component | Campaign | Skill Review | attestation-result',
       ];
 
       const screen = await render(<template><AttestationResult @results={{result}} /></template>);
-      const rewardTitle = t(`components.campaigns.attestation-result.title.digital-awarness`);
+      const rewardTitle = t(`components.campaigns.attestation-result.title.SIXTH_GRADE`);
       assert.dom(screen.getByText(rewardTitle)).exists();
     });
 

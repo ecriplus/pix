@@ -4,29 +4,12 @@ import { fn } from '@ember/helper';
 import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
-const ATTESTATION_TYPES = {
-  PARENTHOOD: 'PARENTHOOD',
-  SIXTH_GRADE: 'SIXTH_GRADE',
-};
-
 function attestationTitle(type) {
-  if ([ATTESTATION_TYPES.PARENTHOOD, ATTESTATION_TYPES.SIXTH_GRADE].includes(type))
-    return 'components.attestations.title.numeric-sensivity';
+  return `components.campaigns.attestation-result.title.${type}`;
 }
 
 function attestationDelivery(obtainedAt) {
   return dayjs(obtainedAt).format('D MMM YYYY');
-}
-
-function getAttesttationIcon(type) {
-  switch (type) {
-    case ATTESTATION_TYPES.PARENTHOOD:
-      return 'digital-awerness-parenthood.svg';
-    case ATTESTATION_TYPES.SIXTH_GRADE:
-      return 'digital-awerness-sixth-grade.svg';
-    default:
-      return null;
-  }
 }
 
 <template>
@@ -39,7 +22,7 @@ function getAttesttationIcon(type) {
             date=(attestationDelivery @obtainedAt)
           }}</p>
       </div>
-      <img src="/images/illustrations/attestations/{{getAttesttationIcon @type}}" alt="" />
+      <img src="/images/illustrations/attestations/{{@type}}.svg" alt="" />
     </header>
 
     <PixButton

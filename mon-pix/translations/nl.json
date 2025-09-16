@@ -268,8 +268,18 @@
         "not-obtained": "Certificaat niet verkregen :",
         "obtained": "Verkregen certificaat",
         "title": {
-          "minarm": "Digitale sokkel",
-          "digital-awarness": "Digitaal bewustzijn"
+          "EDUCOLLAB": "Communiceren samenwerken",
+          "EDUCULTURENUM": "Digitale cultuur",
+          "EDUDOC": "Documenten aanpassen",
+          "EDUIA": "Data, algoritmen en AI",
+          "EDUINCONTOURNABLES": "Het essentiële",
+          "EDURESSOURCES": "Beheer en delen van bronnen",
+          "EDUSECU": "Digitaal en veiligheid",
+          "EDUSUPPORT": "Educatieve materialen maken",
+          "EDUVEILLE": "Monitoring uitvoeren",
+          "MINARM": "Digitale sokkel",
+          "PARENTHOOD": "Digitaal bewustzijn",
+          "SIXTH_GRADE": "Digitaal bewustzijn"
         }
       },
       "results-loader": {

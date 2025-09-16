@@ -532,6 +532,15 @@
       "title": "Resultaten voor {firstName} {lastName}"
     },
     "attestations": {
+      "EDUCOLLAB": "Pix+Edu - Communiceren en samenwerken",
+      "EDUCULTURENUM": "Pix+Edu - Digitale cultuur",
+      "EDUDOC": "Pix+Edu - Documenten aanpassen",
+      "EDUIA": "Pix+Edu - Data, algoritmes en AI",
+      "EDUINCONTOURNABLES": "Pix+Edu - De essentiële elementen",
+      "EDURESSOURCES": "Pix+Edu - Beheer en delen van bronnen",
+      "EDUSECU": "Pix+Edu - Digitaal en veiligheid",
+      "EDUSUPPORT": "Pix+Edu - Educatieve materialen maken",
+      "EDUVEILLE": "Pix+Edu - Onderzoek en monitoring",
       "MINARM": "Socle numérique",
       "PARENTHOOD": "Attestation de sensibilisation au numérique",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
@@ -1390,8 +1399,7 @@
         "campaign-status": "Status:",
         "campaign-type": "Type:",
         "participation-SHARED-status": "Ontvangen",
-        "participation-STARTED-status": "Bezig"
-      }
+        "participation-STARTED-status": "Bezig"      }
     },
     "places": {
       "before-date": "op",

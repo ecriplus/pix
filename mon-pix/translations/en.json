@@ -268,8 +268,18 @@
         "not-obtained": "Attestation not obtained",
         "obtained": "Attestation obtained",
         "title": {
-          "digital-awarness": "Digital awareness",
-          "minarm": "Digital base"
+          "EDUCOLLAB": "Communicate collaborate",
+          "EDUCULTURENUM": "Digital culture",
+          "EDUDOC": "Adapt documents",
+          "EDUIA": "Data, algorithms and AI",
+          "EDUINCONTOURNABLES": "The essentials",
+          "EDURESSOURCES": "Resource management and sharing",
+          "EDUSECU": "Digital and security",
+          "EDUSUPPORT": "Create educational materials",
+          "EDUVEILLE": "Conduct monitoring",
+          "MINARM": "Digital base",
+          "PARENTHOOD": "Digital awareness",
+          "SIXTH_GRADE": "Digital awareness"
         }
       },
       "results-loader": {

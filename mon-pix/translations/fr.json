@@ -268,8 +268,18 @@
         "not-obtained": "Attestation non obtenue :",
         "obtained": "Attestation obtenue",
         "title": {
-          "digital-awarness": "Sensibilisation au numérique",
-          "minarm": "Socle numérique"
+          "EDUCOLLAB": "Communiquer collaborer",
+          "EDUCULTURENUM": "Culture numérique",
+          "EDUDOC": "Adapter les documents",
+          "EDUIA": "Données, algorithmes et IA",
+          "EDUINCONTOURNABLES": "Les incontournables",
+          "EDURESSOURCES": "Gestion et partage de ressources",
+          "EDUSECU": "Numérique et sécurité",
+          "EDUSUPPORT": "Créer des supports pédagogiques",
+          "EDUVEILLE": "Réaliser une veille",
+          "MINARM": "Socle numérique",
+          "PARENTHOOD": "Sensibilisation au numérique",
+          "SIXTH_GRADE": "Sensibilisation au numérique"
         }
       },
       "results-loader": {

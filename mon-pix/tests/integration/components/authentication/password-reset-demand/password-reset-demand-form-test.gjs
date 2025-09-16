@@ -21,10 +21,12 @@ const I18N_KEYS = {
 module('Integration | Component | Authentication | PasswordResetDemand | password-reset-demand-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  let requestManagerService;
+  let requestManagerService, storage;
 
   hooks.beforeEach(function () {
     requestManagerService = this.owner.lookup('service:requestManager');
+    storage = this.owner.lookup('service:storage');
+    sinon.stub(storage, 'getLogin').returns(null);
     sinon.stub(requestManagerService, 'request');
   });
 

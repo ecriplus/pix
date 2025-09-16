@@ -268,8 +268,18 @@
         "not-obtained": "Certificado no obtenido :",
         "obtained": "Certificado obtenido",
         "title": {
-          "minarm": "Base digital",
-          "digital-awarness": "Conciencia digital"
+          "EDUCOLLAB": "Comunicar colaborar",
+          "EDUCULTURENUM": "Cultura digital",
+          "EDUDOC": "Adaptar documentos",
+          "EDUIA": "Datos, algoritmos e IA",
+          "EDUINCONTOURNABLES": "Lo esencial",
+          "EDURESSOURCES": "Gestión e intercambio de recursos",
+          "EDUSECU": "Digital y seguridad",
+          "EDUSUPPORT": "Crear materiales educativos",
+          "EDUVEILLE": "Realizar seguimiento",
+          "MINARM": "Base digital",
+          "PARENTHOOD": "Conciencia digital",
+          "SIXTH_GRADE": "Conciencia digital"
         }
       },
       "results-loader": {

@@ -532,6 +532,15 @@
       "title": "Results of {firstName} {lastName}"
     },
     "attestations": {
+      "EDUCOLLAB": "Pix+Edu - Communicate and collaborate",
+      "EDUCULTURENUM": "Pix+Edu - Digital culture",
+      "EDUDOC": "Pix+Edu - Adapt documents",
+      "EDUIA": "Pix+Edu - Data, algorithms and AI",
+      "EDUINCONTOURNABLES": "Pix+Edu - The essentials",
+      "EDURESSOURCES": "Pix+Edu - Resource management and sharing",
+      "EDUSECU": "Pix+Edu - Digital and security",
+      "EDUSUPPORT": "Pix+Edu - Create educational materials",
+      "EDUVEILLE": "Pix+Edu - Conduct research watch",
       "MINARM": "Socle numérique",
       "PARENTHOOD": "Attestation de sensibilisation au numérique",
       "SIXTH_GRADE": "Attestation de sensibilisation au numérique",
