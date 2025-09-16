@@ -370,30 +370,24 @@
           "title": "Lesson 2 - avec stepper",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "23d57d7e-2bea-4c79-83e8-3fa7bcc273d0",
-                      "type": "text",
-                      "content": "<p>Il cherche un <strong>mot très probable</strong> pour continuer la phrase. Il répète cette méthode <strong>mot après mot</strong>.&nbsp;🔁</p>"
-                    },
-                    {
-                      "id": "8759c6d1-0193-461f-9a51-3220ba255978",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v3.png",
-                      "alt": "Schéma concernant la probabilité des mots qui apparaissent",
-                      "alternativeText": "<p>L’image montre un schéma en 4 étapes expliquant comment un modèle de langage prédit mot par mot la suite d’une phrase.</p><ol><li>\n\n\n«&nbsp;On peut y …&nbsp;» → propositions&nbsp;: aller, arriver, passer, parvenir.\n</li><li>\n\n«&nbsp;On peut y aller …&nbsp;» → propositions&nbsp;: en, avec, à, quand.\n</li><li>\n\n«&nbsp;On peut y aller en …&nbsp;» → propositions&nbsp;: train, voiture, covoiturage, avion.\n</li><li>\n\nPhrase finale générée&nbsp;: «&nbsp;On peut y aller en train.&nbsp;» ✅</li></ol>",
-                      "legend": "",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": []
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "7d0771bd-5a31-45ab-8cad-1f6bbda5d3a9",
+                "type": "text",
+                "content": "<p>Pour répondre, un logiciel d'<strong>IA générative</strong>, construit sa réponse comme s'il<strong> complétait la demande de l’utilisateur.</strong></p><p>Il cherche un <strong>mot très probable</strong> pour continuer la phrase. Il répète cette méthode<strong> mot après mot.</strong><br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7d0771bd-5a31-45ab-8cad-1f6bbda5d3a9",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v3.png",
+                "alt": "",
+                "alternativeText": "<p>L’image montre un schéma en 4 étapes expliquant comment un modèle de langage prédit mot par mot la suite d’une phrase.</p><ol><li>« On peut y … » → propositions : aller, arriver, passer, parvenir.\n</li><li>\n\n« On peut y aller … » → propositions : en, avec, à, quand.\n</li><li>\n\n« On peut y aller en … » → propositions : train, voiture, covoiturage, avion.\n</li><li>\n\nPhrase finale générée : « On peut y aller en train. » ✅</li></ol>",
+                "legend": "",
+                "licence": ""
+              }
             },
             {
               "type": "element",
