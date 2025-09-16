@@ -1,7 +1,6 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 import { QrocmCorrectionResponse } from '../QrocmCorrectionResponse.js';
 import { QrocmSolutions } from '../QrocmSolutions.js';
 import { ValidatorQROCMInd } from '../validator/ValidatorQROCMInd.js';
@@ -12,9 +11,6 @@ class QROCMForAnswerVerification extends QROCM {
 
   constructor({ id, instruction, locales, proposals, feedbacks, validator }) {
     super({ id, instruction, locales, proposals, feedbacks });
-
-    assertNotNullOrUndefined(feedbacks, 'The feedbacks are required for a verification QROCM.');
-
     this.feedbacks = feedbacks;
 
     this.solution = new QrocmSolutions(proposals);

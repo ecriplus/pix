@@ -93,7 +93,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QrocMForAnswerVerificatio
 
         // then
         expect(error).to.be.instanceOf(DomainError);
-        expect(error.message).to.equal('The feedbacks are required for a verification QROCM.');
+        expect(error.message).to.equal('The feedbacks are required for a QROCM.');
       });
     });
   });

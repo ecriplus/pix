@@ -32,6 +32,7 @@ describe('Unit | Devcomp | Domain | Models | Element', function () {
         instruction: '',
         locales: ['fr-FR'],
         proposals: [Symbol('block')],
+        feedbacks: { valid: '', invalid: '' },
       });
 
       const answerableElements = [qcu, qcm, qrocm];
