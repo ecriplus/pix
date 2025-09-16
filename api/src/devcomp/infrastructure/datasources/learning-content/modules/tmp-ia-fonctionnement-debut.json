@@ -191,7 +191,7 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
-                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p>👉 <strong>Cherchez un mot dans votre tête pour compléter ce texte.</strong></p>\n\n<p><em>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du… [_________]\"</em></p><p><br></p>"
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p>👉 <strong>Cherchez un mot dans votre tête pour compléter ce texte.</strong></p><p><em>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du… [_________]\"</em></p><p><br></p>"
                     }
                   ]
                 },
@@ -384,7 +384,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-schema-v3.png",
                 "alt": "",
-                "alternativeText": "<p>L’image montre un schéma en 4 étapes expliquant comment un modèle de langage prédit mot par mot la suite d’une phrase.</p><ol><li>« On peut y … » → propositions : aller, arriver, passer, parvenir.\n</li><li>\n\n« On peut y aller … » → propositions : en, avec, à, quand.\n</li><li>\n\n« On peut y aller en … » → propositions : train, voiture, covoiturage, avion.\n</li><li>\n\nPhrase finale générée : « On peut y aller en train. » ✅</li></ol>",
+                "alternativeText": "<p>L’image montre un schéma en 4 étapes expliquant comment un modèle de langage prédit mot par mot la suite d’une phrase.</p><ol><li>« On peut y … » → propositions : aller, arriver, passer, parvenir.</li><li>« On peut y aller … » → propositions : en, avec, à, quand.</li><li>« On peut y aller en … » → propositions : train, voiture, covoiturage, avion.</li><li>Phrase finale générée : « On peut y aller en train. » ✅</li></ol>",
                 "legend": "",
                 "licence": ""
               }
@@ -424,7 +424,7 @@
               "element": {
                 "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
                 "type": "text",
-                "content": "<p>Le secret&nbsp;: <strong>l’entraînement </strong>🏋️‍♀️.</p><p>\nPour qu’elle s’entraîne à écrire ✍️, l’IA a besoin de beaucoup d’exemples de textes 📚📄.</p>"
+                "content": "<p>Le secret&nbsp;: <strong>l’entraînement </strong>🏋️‍♀️.</p><p>Pour qu’elle s’entraîne à écrire ✍️, l’IA a besoin de beaucoup d’exemples de textes 📚📄.</p>"
               }
             },
             {
