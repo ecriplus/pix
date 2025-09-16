@@ -234,7 +234,7 @@
               "element": {
                 "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
                 "type": "text",
-                "content": "<p>Aujourd’hui, les ordinateurs sont capables de réaliser <strong>toutes sortes de tâches</strong>&nbsp;:</p><ul><li>Des tâches que nous faisons sans y penser comme, par exemple, reconnaître un chien dans une image.&nbsp;👀</li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, résoudre des problèmes de mathématiques.&nbsp;🧠</li></ul><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès est celui de&nbsp;<strong>l’intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’<strong>imiter les mécanismes de l’intelligence</strong>.&nbsp;🔬</p>"
+                "content": "<p>Aujourd’hui, les ordinateurs sont capables de réaliser <strong>toutes sortes de tâches</strong>&nbsp;:</p>\n<ul>\n    <li>Des tâches que nous faisons sans y penser comme, par exemple, reconnaître un chien dans une image.&nbsp;👀</li>\n    <li>Et des tâches qui nous demandent plus de concentration comme, par exemple, résoudre des problèmes de mathématiques.&nbsp;🧠</li>\n</ul>\n<p>Le <strong>domaine scientifique</strong> qui a permis ces progrès est celui de&nbsp;<strong>l’intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’<strong>imiter les mécanismes de l’intelligence</strong>.&nbsp;🔬</p>"
               }
             }
           ]
@@ -324,7 +324,7 @@
               "element": {
                 "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
                 "type": "text",
-                "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de mathématiques, etc.&nbsp;📝<br></p>"
+                "content": "\n<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p>\n<p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p>\n<p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de mathématiques, etc.&nbsp;📝<br></p>"
               }
             }
           ]
@@ -345,12 +345,49 @@
             {
               "type": "element",
               "element": {
-                "id": "c4a0562d-60f8-48b3-8489-2c8c195597b8",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html",
-                "instruction": "<p>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</p>",
-                "height": 550
+                "id": "aeeaae8f-72c4-4940-8163-49036e578b1e",
+                "type": "custom",
+                "tagName": "flip-cards",
+                "props": {
+                  "name": "flip card ia dit ia ",
+                  "cardList": [
+                    {
+                      "name": "Agriculture",
+                      "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-champs.svg",
+                      "titleLevel": ""
+                    },
+                    {
+                      "name": "Transport",
+                      "description": "Lecture de plaques d’immatriculation pour automatiser les péages",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-truck.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-peage.svg",
+                      "titleLevel": ""
+                    },
+                    {
+                      "name": "Santé",
+                      "description": "Analyse de radios pour détecter des signes de cancer",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-medecine.svg",
+                      "titleLevel": ""
+                    },
+                    {
+                      "name": "Culture",
+                      "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-livre.svg",
+                      "titleLevel": ""
+                    },
+                    {
+                      "name": "Sécurité",
+                      "description": "Reconnaissance des visages pour identifier des personnes autorisées",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg",
+                      "titleLevel": ""
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -365,7 +402,7 @@
               "element": {
                 "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
                 "type": "text",
-                "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul><li>Certaines maladies comme les cancers sont mieux dépistées depuis qu'on utilise l'IA pour détecter les tumeurs.</li><li>Les effets du changement climatique sont mieux compris depuis qu'on utilise l'IA pour analyser ses impacts.</li></ul>"
+                "content": "\n<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p>\n<p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p>\n<ul>\n    <li>Certaines maladies comme les cancers sont mieux dépistées depuis qu'on utilise l'IA pour détecter les tumeurs.</li>\n    <li>Les effets du changement climatique sont mieux compris depuis qu'on utilise l'IA pour analyser ses impacts.</li>\n</ul>"
               }
             }
           ]
@@ -386,7 +423,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
-                "content": "<ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
+                "content": "\n<ul>\n    <li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li>\n    <li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li>\n    <li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li>\n    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li>\n</ul>"
               }
             }
           ]
