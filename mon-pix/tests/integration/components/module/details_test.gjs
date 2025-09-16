@@ -1,5 +1,5 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { click, findAll } from '@ember/test-helpers';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import ModulixDetails from 'mon-pix/components/module/instruction/details';
@@ -34,8 +34,6 @@ module('Integration | Component | Module | Details', function (hooks) {
     assert.ok(screen.getByText(`${module.details.duration} min`));
     assert.ok(screen.getByText(t(`pages.modulix.details.levels.${module.details.level}`)));
     assert.ok(screen.getByText(module.details.objectives[0]));
-    assert.ok(screen.getByRole('heading', { name: t('pages.modulix.details.explanationTitle'), level: 2 }));
-    assert.ok(findAll('.module-details-infos-explanation__title').length > 0);
   });
 
   module('When on desktop', function () {

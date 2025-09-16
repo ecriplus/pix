@@ -108,20 +108,11 @@
   }
 }
 
-.module-details-infos-objectives,
-.module-details-infos-explanation {
+.module-details-infos-objectives {
   &__title {
     @extend %pix-title-s;
 
     margin-bottom: var(--pix-spacing-4x);
-  }
-}
-
-.module-details-infos-explanation {
-  &__text {
-    &:not(:last-child) {
-      margin-bottom: var(--pix-spacing-4x);
-    }
   }
 }
 
