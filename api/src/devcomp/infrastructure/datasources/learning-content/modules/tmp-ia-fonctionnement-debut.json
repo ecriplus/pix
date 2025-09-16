@@ -191,7 +191,7 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
-                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot. .</p>\n\n<p><em>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du… [_________]\"</em></p><p>👉 <strong>Cherchez un mot dans votre tête pour compléter ce texte.</strong></p>"
+                      "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.</p><p>👉 <strong>Cherchez un mot dans votre tête pour compléter ce texte.</strong></p>\n\n<p><em>\"Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du… [_________]\"</em></p><p><br></p>"
                     }
                   ]
                 },
@@ -424,7 +424,7 @@
               "element": {
                 "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
                 "type": "text",
-                "content": "<p>Le secret&nbsp;: <strong>l’entraînement </strong>🏋️‍♀️🤖.</p><p>\nPour qu’elle s’entraîne à écrire ✍️, l’IA a besoin de beaucoup d’exemples de textes 📚📄.</p>"
+                "content": "<p>Le secret&nbsp;: <strong>l’entraînement </strong>🏋️‍♀️.</p><p>\nPour qu’elle s’entraîne à écrire ✍️, l’IA a besoin de beaucoup d’exemples de textes 📚📄.</p>"
               }
             },
             {
@@ -485,7 +485,7 @@
               "element": {
                 "id": "b0fd9eb1-ca19-4052-b5a3-6f1b83b33fca",
                 "type": "text",
-                "content": "<p>Si on donne à un logiciel d'IA générative 🤖 <strong>des milliards de textes variés pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs. </p><p>⚠️ Mais attention&nbsp;: l<strong>es textes sur internet ont parfois des erreurs</strong> ❌</p><p>Et un logiciel d'IA générative ne repère pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs</strong> dans ses réponses.<br><br></p>"
+                "content": "<p>Si on donne à un logiciel d'IA générative  <strong>des milliards de textes variés pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs. </p><p>⚠️ Mais attention&nbsp;: l<strong>es textes sur internet ont parfois des erreurs</strong> ❌</p><p>Et un logiciel d'IA générative ne repère pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs</strong> dans ses réponses.<br><br></p>"
               }
             }
           ]
