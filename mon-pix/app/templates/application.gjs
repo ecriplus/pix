@@ -25,6 +25,20 @@ export default class ApplicationTemplate extends Component {
     );
   }
 
+  get isLoginPages() {
+    return this.router.currentRouteName.startsWith('authentication.');
+  }
+
+  get isFullWidth() {
+    return (
+      this.router.currentRouteName.startsWith('assessments.') ||
+      this.router.currentRouteName === 'campaigns.assessment.tutorial' ||
+      this.router.currentRouteName.startsWith('module.') ||
+      this.router.currentRouteName === 'module-preview-existing' ||
+      this.router.currentRouteName === 'module-preview'
+    );
+  }
+
   <template>
     {{! template-lint-disable no-inline-styles }}
     {{pageTitle (t "navigation.pix")}}
@@ -35,7 +49,12 @@ export default class ApplicationTemplate extends Component {
     {{/in-element}}
 
     <div id="app">
-      <AppLayout @displayFullLayout={{this.displayFullLayout}} @banners={{@controller.model.informationBanner.banners}}>
+      <AppLayout
+        @displayFullLayout={{this.displayFullLayout}}
+        @isLoginPages={{this.isLoginPages}}
+        @isFullWidth={{this.isFullWidth}}
+        @banners={{@controller.model.informationBanner.banners}}
+      >
         {{outlet}}
       </AppLayout>
 
