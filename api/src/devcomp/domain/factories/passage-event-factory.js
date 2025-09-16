@@ -8,6 +8,7 @@ import {
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
+  FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
   VideoPlayedEvent,
   VideoTranscriptionOpenedEvent,
@@ -29,6 +30,8 @@ class PassageEventFactory {
     switch (eventData.type) {
       case 'EMBED_ANSWERED':
         return new EmbedAnsweredEvent(eventData);
+      case 'FILE_DOWNLOADED':
+        return new FileDownloadedEvent(eventData);
       case 'FLASHCARDS_CARD_AUTO_ASSESSED':
         return new FlashcardsCardAutoAssessedEvent(eventData);
       case 'FLASHCARDS_RECTO_REVIEWED':

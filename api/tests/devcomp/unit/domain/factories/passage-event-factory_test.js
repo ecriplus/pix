@@ -10,6 +10,7 @@ import {
   QROCMAnsweredEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
 import {
+  FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
   VideoPlayedEvent,
   VideoTranscriptionOpenedEvent,
@@ -457,6 +458,27 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(VideoPlayedEvent);
+      });
+    });
+
+    describe('when given a FILE_DOWNLOADED event', function () {
+      it('should return an FileDownloadedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 9,
+          sequenceNumber: 34,
+          elementId: 'd905e7c9-327e-4be5-9c62-ce4627b85f44',
+          type: 'FILE_DOWNLOADED',
+          filename: 'my-file.pdf',
+          format: '.pdf',
+        };
+
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(FileDownloadedEvent);
       });
     });
   });
