@@ -271,7 +271,7 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
-                "content": "<p>Pour comprendre comment l’IA générative utilise ses données d’entraînement pour répondre aux utilisateurs, aujourd’hui vous allez entraîner l'IA générative sur l’exemple de la recette du taboulé.</p><p><br>Voilà à quoi ressemblent les données d’entraînement d’une IA générative.</p>"
+                "content": "<p>Pour comprendre, vous allez observer les données fournies à une IA générative sur l’exemple de la recette du taboulé.</p>"
               }
             },
             {
@@ -282,7 +282,7 @@
                 "isCompletionRequired": false,
                 "title": "taboule",
                 "url": "https://epreuves.pix.fr/fr/recherche/modulix-gh85y7.html",
-                "instruction": "<p>Voilà à quoi ressemblent les données d’entraînement d’une IA générative. Consultez les données puis répondez à la question ci-dessous.</p>",
+                "instruction": "<p>Voilà à quoi ressemblent les données d’entraînement de cette IA générative.</p>",
                 "solution": "",
                 "height": 500
               }
@@ -292,7 +292,7 @@
               "element": {
                 "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, que va répondre l'IA générative à la demande «&nbsp;Quel est l'ingrédient principal de la recette du taboulé&nbsp;» ?</p>",
+                "instruction": "<p>À votre avis, que va répondre cette IA générative à la demande «&nbsp;Quel est l'ingrédient principal de la recette du taboulé&nbsp;» ?</p>",
                 "proposals": [
                   {
                     "id": "1",
