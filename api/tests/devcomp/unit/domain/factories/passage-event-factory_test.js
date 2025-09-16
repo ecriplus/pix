@@ -9,6 +9,7 @@ import {
   QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
+import { ImageAlternativeTextOpenedEvent } from '../../../../../src/devcomp/domain/models/passage-events/events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -398,6 +399,24 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(QCUDiscoveryAnsweredEvent);
+      });
+    });
+
+    describe('when given an IMAGE_ALTERNATIVE_TEXT_OPENED event', function () {
+      it('should return an ImageAlternativeTextOpenedEvent instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f44',
+          type: 'IMAGE_ALTERNATIVE_TEXT_OPENED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(ImageAlternativeTextOpenedEvent);
       });
     });
   });

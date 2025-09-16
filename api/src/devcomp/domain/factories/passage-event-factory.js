@@ -7,6 +7,7 @@ import {
   QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
+import { ImageAlternativeTextOpenedEvent } from '../models/passage-events/events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -38,6 +39,8 @@ class PassageEventFactory {
         return new GrainContinuedEvent(eventData);
       case 'GRAIN_SKIPPED':
         return new GrainSkippedEvent(eventData);
+      case 'IMAGE_ALTERNATIVE_TEXT_OPENED':
+        return new ImageAlternativeTextOpenedEvent(eventData);
       case 'STEPPER_NEXT_STEP':
         return new StepperNextStepEvent(eventData);
       case 'PASSAGE_STARTED':
