@@ -641,4 +641,41 @@ export const buildQuests = async (databaseBuilder) => {
     organizationId: SCO_ORGANIZATION_ID,
     profileRewardId: otherUserProfileRewardId,
   });
+
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-incontournables-attestation-template',
+    key: 'EDUINCONTOURNABLES',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-documents-attestation-template',
+    key: 'EDUDOC',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-veille-attestation-template',
+    key: 'EDUVEILLE',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-culture-numerique-attestation-template',
+    key: 'EDUCULTURENUM',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-ressources-attestation-template',
+    key: 'EDURESSOURCES',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-supports-attestation-template',
+    key: 'EDUSUPPORT',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-securite-attestation-template',
+    key: 'EDUSECU',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-collaborer-attestation-template',
+    key: 'EDUCOLLAB',
+  });
+  databaseBuilder.factory.buildAttestation({
+    templateName: 'edu-ia-attestation-template',
+    key: 'EDUIA',
+  });
 };
