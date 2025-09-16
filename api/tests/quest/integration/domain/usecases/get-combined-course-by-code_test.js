@@ -91,7 +91,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       {
         id: campaign.id,
         reference: campaign.code,
-        title: campaign.name,
+        title: campaign.title,
         type: ITEM_TYPE.CAMPAIGN,
         redirection: undefined,
         isCompleted: false,
@@ -231,7 +231,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       {
         id: campaign.id,
         reference: campaign.code,
-        title: campaign.name,
+        title: campaign.title,
         type: ITEM_TYPE.CAMPAIGN,
         redirection: undefined,
         isCompleted: true,

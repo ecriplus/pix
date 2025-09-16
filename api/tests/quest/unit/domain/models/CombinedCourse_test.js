@@ -109,8 +109,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       describe('when items are type campaignParticipations', function () {
         it('returns true when every participations are shared', function () {
           // given
-          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
-          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
+          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2' });
 
           const quest = new Quest({
             id: 1,
@@ -175,8 +175,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         it('returns false when some participations are not shared', function () {
           // given
-          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
-          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
+          const secondCampaign = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2' });
 
           const quest = new Quest({
             id: 1,
@@ -376,7 +376,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       describe('when items are mixed', function () {
         it('returns true when all modules and campaignParticipations are done', function () {
           // given
-          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
           const moduleId = 1;
 
           const quest = new Quest({
@@ -443,7 +443,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         it('returns false when some modules and campaignParticipations are not done', function () {
           // given
-          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
           const moduleId = 1;
 
           const quest = new Quest({
@@ -512,7 +512,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         describe('when there are recommandable modules', function () {
           it('returns true when recommended modules are done', function () {
             // given
-            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
             const moduleId = 1;
             const notRecommendedModuleId = 2;
 
@@ -602,7 +602,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           it('returns false when recommended modules are not done', function () {
             // given
-            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique' });
+            const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique' });
             const moduleId = 1;
             const notRecommendedModuleId = 2;
 
@@ -697,7 +697,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
     describe('#generateItems', function () {
       it('returns a combined course item for provided campaign', function () {
         // given
-        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique', targetProfileId: 7 });
+        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           successRequirements: [
@@ -730,7 +730,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           new CombinedCourseItem({
             id: campaign.id,
             reference: campaign.code,
-            title: campaign.name,
+            title: campaign.title,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: true,
             isLocked: false,
@@ -740,7 +740,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       it('should not take encryptedCombinedCourseUrl if item type is campaign', function () {
         // given
         const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique', targetProfileId: 7 });
+        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
         const combinedCourseTemplate = new CombinedCourseTemplate({
           successRequirements: [
             {
@@ -771,7 +771,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           new CombinedCourseItem({
             id: campaign.id,
             reference: campaign.code,
-            title: campaign.name,
+            title: campaign.title,
             type: ITEM_TYPE.CAMPAIGN,
             redirection: undefined,
             isCompleted: true,
@@ -900,7 +900,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             new CombinedCourseItem({
               id: campaign.id,
               reference: campaign.code,
-              title: campaign.name,
+              title: campaign.title,
               type: ITEM_TYPE.CAMPAIGN,
               isCompleted: true,
               isLocked: false,
@@ -970,7 +970,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             new CombinedCourseItem({
               id: campaign.id,
               reference: campaign.code,
-              title: campaign.name,
+              title: campaign.title,
               type: ITEM_TYPE.CAMPAIGN,
               isCompleted: true,
               isLocked: false,
@@ -1071,7 +1071,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               new CombinedCourseItem({
                 id: campaign.id,
                 reference: campaign.code,
-                title: campaign.name,
+                title: campaign.title,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
                 isLocked: false,
@@ -1179,7 +1179,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               new CombinedCourseItem({
                 id: campaign.id,
                 reference: campaign.code,
-                title: campaign.name,
+                title: campaign.title,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
                 isLocked: false,
@@ -1193,7 +1193,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               new CombinedCourseItem({
                 id: secondCampaign.id,
                 reference: secondCampaign.code,
-                title: secondCampaign.name,
+                title: secondCampaign.title,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
                 isLocked: true,
@@ -1287,7 +1287,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               new CombinedCourseItem({
                 id: campaign.id,
                 reference: campaign.code,
-                title: campaign.name,
+                title: campaign.title,
                 type: ITEM_TYPE.CAMPAIGN,
                 isCompleted: false,
                 isLocked: false,
@@ -1314,8 +1314,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
       it('should not take into account data that are not related to the quest', function () {
         // given
-        const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique', targetProfileId: 888 });
-        const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2' });
+        const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
+        const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           successRequirements: [
@@ -1350,7 +1350,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           new CombinedCourseItem({
             id: campaign1.id,
             reference: campaign1.code,
-            title: campaign1.name,
+            title: campaign1.title,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: false,
             isLocked: false,
@@ -1360,8 +1360,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
       it('should keep success requirements order', function () {
         // given
-        const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique', targetProfileId: 888 });
-        const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', name: 'diagnostique2', targetProfileId: 999 });
+        const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
+        const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2', targetProfileId: 999 });
         const module = new Module({ id: 7, title: 'title', slug: 'abcdef' });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
@@ -1426,7 +1426,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           new CombinedCourseItem({
             id: campaign2.id,
             reference: campaign2.code,
-            title: campaign2.name,
+            title: campaign2.title,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: true,
             isLocked: false,
@@ -1434,7 +1434,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           new CombinedCourseItem({
             id: campaign1.id,
             reference: campaign1.code,
-            title: campaign1.name,
+            title: campaign1.title,
             type: ITEM_TYPE.CAMPAIGN,
             isCompleted: false,
             isLocked: false,
@@ -1492,7 +1492,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       });
       it('should evaluates if campaign is completed', function () {
         // given
-        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', name: 'diagnostique', targetProfileId: 888 });
+        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
 
         const combinedCourseTemplate = new CombinedCourseTemplate({
           successRequirements: [

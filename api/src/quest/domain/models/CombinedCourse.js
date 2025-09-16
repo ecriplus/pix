@@ -109,7 +109,7 @@ export class CombinedCourseDetails extends CombinedCourse {
     return new CombinedCourseItem({
       id: campaign.id,
       reference: campaign.code,
-      title: campaign.name,
+      title: campaign.title,
       type: ITEM_TYPE.CAMPAIGN,
       isCompleted,
       isLocked,
