@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import eq from 'ember-truth-helpers/helpers/eq';
 import Step from 'mon-pix/components/module/component/step';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
@@ -46,6 +47,11 @@ export default class ModulixStepper extends Component {
     }
 
     return !this.stepIsActive(index);
+  }
+
+  @action
+  stepBarIsDisabled(index) {
+    return index > this.stepsToDisplay.length - 1;
   }
 
   get hasDisplayableSteps() {
@@ -150,7 +156,7 @@ export default class ModulixStepper extends Component {
   <template>
     <div
       class="stepper stepper--{{@direction}}"
-      aria-live="polite"
+      aria-live="{{if (eq @direction 'vertical') 'polite'}}"
       aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
@@ -166,7 +172,7 @@ export default class ModulixStepper extends Component {
           <p
             class="stepper-controls__position"
             aria-label="{{t
-              'pages.modulix.stepper.step.position'
+              'pages.modulix.stepper.step.aria-label'
               currentStep=(inc this.displayedStepIndex)
               totalSteps=this.totalSteps
             }}"
@@ -180,10 +186,21 @@ export default class ModulixStepper extends Component {
             @triggerAction={{this.goBackToNextStep}}
             aria-controls={{this.id}}
           />
+          <div class="stepper-controls__step-bars" aria-hidden="true">
+            {{#each this.displayableSteps as |_ index|}}
+              <div
+                class="stepper-controls__step-bar
+                  {{if (this.stepIsActive index) 'active'}}
+                  {{if (this.stepBarIsDisabled index) 'disable'}}"
+              >
+              </div>
+            {{/each}}
+          </div>
         </div>
         <div
           id={{this.id}}
           class="stepper__steps"
+          aria-live="polite"
           style={{htmlUnsafe (concat "--current-step-index:" this.displayedStepIndex)}}
         >
           {{#if this.hasDisplayableSteps}}
