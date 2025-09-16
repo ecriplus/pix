@@ -37,7 +37,7 @@ export class ScoManagingStudent {
   async create() {
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
-    const organizationLearner = await this.#addCertifiableUser({ organization });
+    const organizationLearners = await this.#addCertifiableUsers({ organization });
 
     /**
      * Session with candidat ready to start his certification
@@ -46,7 +46,12 @@ export class ScoManagingStudent {
       certificationCenterMember: organizationMember,
       certificationCenter,
     });
-    await this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart });
+
+    await Promise.all(
+      organizationLearners.map((organizationLearner) =>
+        this.#addCandidateToSession({ organizationLearner, session: sessionReadyToStart }),
+      ),
+    );
 
     /**
      * Session with a published certification
@@ -55,15 +60,20 @@ export class ScoManagingStudent {
       certificationCenterMember: organizationMember,
       certificationCenter,
     });
-    const candidateToPublish = await this.#addCandidateToSession({
-      organizationLearner,
-      session: sessionToPublish,
-    });
+
+    const candidatesToPublish = await Promise.all(
+      organizationLearners.map((organizationLearner) =>
+        this.#addCandidateToSession({
+          organizationLearner,
+          session: sessionToPublish,
+        }),
+      ),
+    );
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,
       sessionId: PUBLISHED_SCO_SESSION,
-      candidateId: candidateToPublish.id,
+      candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 550,
     });
   }
@@ -96,32 +106,39 @@ export class ScoManagingStudent {
     return { certificationCenter, certificationCenterMember };
   }
 
-  async #addCertifiableUser({ organization }) {
-    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+  async #addCertifiableUsers({ organization }) {
+    const organizationLearners = [];
 
-    await this.databaseBuilder.factory.buildOrganizationLearner({
-      userId: certifiableUser.id,
-      organizationId: organization.id,
-      nationalStudentId: 'INE1234',
-      firstName: certifiableUser.firstName,
-      lastName: certifiableUser.lastName,
-      email: certifiableUser.email,
-      division: 'Terminale',
-      sex: 'F',
-      birthdate: '2000-01-01',
-      isCertifiable: true,
-      isDisabled: false,
-      certifiableAt: new Date('2022-01-30'),
-    });
-    await this.databaseBuilder.commit();
+    const { certifiableUsers } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
 
-    const organizationLearner =
-      await prescriptionLearnerManagementUsecases.reconcileScoOrganizationLearnerAutomatically({
-        organizationId: organization.id,
+    for (const certifiableUser of certifiableUsers) {
+      await this.databaseBuilder.factory.buildOrganizationLearner({
         userId: certifiableUser.id,
+        organizationId: organization.id,
+        nationalStudentId: 'INE' + certifiableUser.id,
+        firstName: certifiableUser.firstName,
+        lastName: certifiableUser.lastName,
+        email: certifiableUser.email,
+        division: 'Terminale',
+        sex: 'F',
+        birthdate: '2000-01-01',
+        isCertifiable: true,
+        isDisabled: false,
+        certifiableAt: new Date('2022-01-30'),
       });
 
-    return organizationLearner;
+      await this.databaseBuilder.commit();
+
+      const organizationLearner =
+        await prescriptionLearnerManagementUsecases.reconcileScoOrganizationLearnerAutomatically({
+          organizationId: organization.id,
+          userId: certifiableUser.id,
+        });
+
+      organizationLearners.push(organizationLearner);
+    }
+
+    return organizationLearners;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {

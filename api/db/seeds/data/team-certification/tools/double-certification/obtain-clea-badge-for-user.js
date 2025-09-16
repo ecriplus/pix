@@ -23,65 +23,67 @@ export default async function obtainCleaBadgeForUser({
   databaseBuilder,
   organizationId,
   organizationMemberId,
-  certifiableUserId,
+  certifiableUsersIds,
 }) {
   assertNotNullOrUndefined(organizationId);
   assertNotNullOrUndefined(organizationMemberId);
-  assertNotNullOrUndefined(certifiableUserId);
+  assertNotNullOrUndefined(certifiableUsersIds);
 
   const campaign = await _createCampaign({ organizationId, organizationMemberId });
 
-  const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
-    campaignId: campaign.id,
-    userId: certifiableUserId,
-    status: CampaignParticipationStatuses.SHARED,
-    isCertifiable: true,
-  });
+  for (const certifiableUserId of certifiableUsersIds) {
+    const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
+      campaignId: campaign.id,
+      userId: certifiableUserId,
+      status: CampaignParticipationStatuses.SHARED,
+      isCertifiable: true,
+    });
 
-  const assessmentDb = databaseBuilder.factory.buildAssessment({
-    userId: certifiableUserId,
-    type: Assessment.types.CAMPAIGN,
-    state: Assessment.states.COMPLETED,
-    isImproving: false,
-    lastQuestionDate: new Date(),
-    lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
-    competenceId: null,
-    campaignParticipationId,
-  });
+    const assessmentDb = databaseBuilder.factory.buildAssessment({
+      userId: certifiableUserId,
+      type: Assessment.types.CAMPAIGN,
+      state: Assessment.states.COMPLETED,
+      isImproving: false,
+      lastQuestionDate: new Date(),
+      lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
+      competenceId: null,
+      campaignParticipationId,
+    });
 
-  const keDataForSnapshot = [];
-  const answersAndKnowledgeElements = await profileTooling.getAnswersAndKnowledgeElementsForPerfectProfile();
+    const keDataForSnapshot = [];
+    const answersAndKnowledgeElements = await profileTooling.getAnswersAndKnowledgeElementsForPerfectProfile();
 
-  for (const { answerData, keData } of answersAndKnowledgeElements) {
-    const answerId = databaseBuilder.factory.buildAnswer({
-      assessmentId: assessmentDb.id,
-      answerData,
-    }).id;
-
-    keDataForSnapshot.push(
-      databaseBuilder.factory.buildKnowledgeElement({
+    for (const { answerData, keData } of answersAndKnowledgeElements) {
+      const answerId = databaseBuilder.factory.buildAnswer({
         assessmentId: assessmentDb.id,
-        answerId,
-        userId: certifiableUserId,
-        ...keData,
-        createdAt: dayjs().subtract(1, 'day'),
-      }),
-    );
+        answerData,
+      }).id;
+
+      keDataForSnapshot.push(
+        databaseBuilder.factory.buildKnowledgeElement({
+          assessmentId: assessmentDb.id,
+          answerId,
+          userId: certifiableUserId,
+          ...keData,
+          createdAt: dayjs().subtract(1, 'day'),
+        }),
+      );
+    }
+
+    databaseBuilder.factory.buildKnowledgeElementSnapshot({
+      snapshot: new KnowledgeElementCollection(keDataForSnapshot).toSnapshot(),
+      campaignParticipationId,
+    });
+
+    await databaseBuilder.commit();
+
+    const assessment = await sharedUsecases.getAssessment({
+      assessmentId: assessmentDb.id,
+      locale: FRENCH_FRANCE,
+    });
+
+    await evaluationUsecases.handleBadgeAcquisition({ assessment });
   }
-
-  databaseBuilder.factory.buildKnowledgeElementSnapshot({
-    snapshot: new KnowledgeElementCollection(keDataForSnapshot).toSnapshot(),
-    campaignParticipationId,
-  });
-
-  await databaseBuilder.commit();
-
-  const assessment = await sharedUsecases.getAssessment({
-    assessmentId: assessmentDb.id,
-    locale: FRENCH_FRANCE,
-  });
-
-  await evaluationUsecases.handleBadgeAcquisition({ assessment });
 }
 
 /**

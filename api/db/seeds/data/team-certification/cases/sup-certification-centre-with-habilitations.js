@@ -40,7 +40,7 @@ export class SupWithHabilitationsSeed {
 
   async create() {
     const { certificationCenter, certificationCenterMember } = await this.#addCertificationCenter();
-    const certifiableUser = await this.#addCertifiableUser();
+    const certifiableUsers = await this.#addCertifiableUsers();
 
     /**
      * Session Pix+Edu 1er degré with candidate ready to start his certification
@@ -52,16 +52,21 @@ export class SupWithHabilitationsSeed {
       description: 'Pix+Edu 1er degré session with candidate ready to start',
       forceSessionId: STARTED_PIX_EDU_1ER_DEGRE_CERTIFICATION_SESSION,
     });
-    await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
-      session: sessionDroitReadyToStart,
-      subscriptions: [
-        Subscription.buildComplementary({
-          certificationCandidateId: null,
-          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+
+    await Promise.all(
+      certifiableUsers.map((certifiableUser) =>
+        this.#addCandidateToSession({
+          pixAppUser: certifiableUser,
+          session: sessionDroitReadyToStart,
+          subscriptions: [
+            Subscription.buildComplementary({
+              certificationCandidateId: null,
+              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+            }),
+          ],
         }),
-      ],
-    });
+      ),
+    );
 
     /**
      * Session Pix+Droit with candidate ready to start his certification
@@ -73,16 +78,20 @@ export class SupWithHabilitationsSeed {
       description: 'Pix+Droit session with candidate ready to start',
       forceSessionId: STARTED_PIX_DROIT_CERTIFICATION_SESSION,
     });
-    await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
-      session: sessionEduReadyToStart,
-      subscriptions: [
-        Subscription.buildComplementary({
-          certificationCandidateId: null,
-          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+    await Promise.all(
+      certifiableUsers.map((certifiableUser) =>
+        this.#addCandidateToSession({
+          pixAppUser: certifiableUser,
+          session: sessionEduReadyToStart,
+          subscriptions: [
+            Subscription.buildComplementary({
+              certificationCandidateId: null,
+              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            }),
+          ],
         }),
-      ],
-    });
+      ),
+    );
   }
 
   async #addCertificationCenter() {
@@ -112,9 +121,9 @@ export class SupWithHabilitationsSeed {
     return { certificationCenter, certificationCenterMember };
   }
 
-  async #addCertifiableUser() {
-    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
-    return certifiableUser;
+  async #addCertifiableUsers() {
+    const { certifiableUsers } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUsers;
   }
 
   async #addReadyToStartSession({

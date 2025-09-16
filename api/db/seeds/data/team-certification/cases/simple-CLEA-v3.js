@@ -49,33 +49,42 @@ export class CleaV3Seed {
     const { organization, organizationMember } = await this.#addOrganization();
 
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
-    const certifiableUser = await this.#addCertifiableUser();
+    const certifiableUsers = await this.#addCertifiableUsers();
+
     await obtainCleaBadgeForUser({
       databaseBuilder: this.databaseBuilder,
       organizationId: organization.id,
       organizationMemberId: organizationMember.id,
-      certifiableUserId: certifiableUser.id,
+      certifiableUsersIds: certifiableUsers.map((user) => user.id),
     });
 
     /**
      * Session with candidat ready to start his certification
      */
     const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
-    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+
+    await Promise.all(
+      certifiableUsers.map((user) => this.#addCandidateToSession({ pixAppUser: user, session: sessionReadyToStart })),
+    );
 
     /**
      * Session with a published certification
      */
     const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
-    const candidateToPublish = await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
-      session: sessionToPublish,
-    });
+
+    const candidatesToPublish = await Promise.all(
+      certifiableUsers.map((user) =>
+        this.#addCandidateToSession({
+          pixAppUser: user,
+          session: sessionToPublish,
+        }),
+      ),
+    );
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,
       sessionId: PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
-      candidateId: candidateToPublish.id,
+      candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 350,
     });
   }
@@ -89,7 +98,7 @@ export class CleaV3Seed {
       targetProfileId: CLEA_V2_TARGET_PROFILE_ID,
     });
 
-    prescriptionTargetProfilesUsecases.attachTargetProfilesToOrganization({
+    await prescriptionTargetProfilesUsecases.attachTargetProfilesToOrganization({
       organizationId: organization.id,
       targetProfileIds: [cleaTargetProfile.id],
     });
@@ -118,9 +127,9 @@ export class CleaV3Seed {
     return { certificationCenter, certificationCenterMember };
   }
 
-  async #addCertifiableUser() {
-    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
-    return certifiableUser;
+  async #addCertifiableUsers() {
+    const { certifiableUsers } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUsers;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {

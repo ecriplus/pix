@@ -40,27 +40,37 @@ export class ProSeed {
       organization,
       organizationMember,
     });
-    const certifiableUser = await this.#addCertifiableUser();
+    const certifiableUsers = await this.#addCertifiableUsers();
 
     /**
      * Session with candidat ready to start his certification
      */
     const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
-    await this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart });
+
+    await Promise.all(
+      certifiableUsers.map((certifiableUser) =>
+        this.#addCandidateToSession({ pixAppUser: certifiableUser, session: sessionReadyToStart }),
+      ),
+    );
 
     /**
      * Session with a published certification
      */
     const sessionToPublish = await this.#addSessionToPublish({ certificationCenterMember, certificationCenter });
-    const candidateToPublish = await this.#addCandidateToSession({
-      pixAppUser: certifiableUser,
-      session: sessionToPublish,
-    });
+
+    const candidatesToPublish = await Promise.all(
+      certifiableUsers.map(async (certifiableUser) => {
+        return this.#addCandidateToSession({
+          pixAppUser: certifiableUser,
+          session: sessionToPublish,
+        });
+      }),
+    );
 
     await publishSessionWithValidatedCertification({
       databaseBuilder: this.databaseBuilder,
       sessionId: PUBLISHED_PRO_SESSION,
-      candidateId: candidateToPublish.id,
+      candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 250,
     });
   }
@@ -93,9 +103,9 @@ export class ProSeed {
     return { certificationCenter, certificationCenterMember };
   }
 
-  async #addCertifiableUser() {
-    const { certifiableUser } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
-    return certifiableUser;
+  async #addCertifiableUsers() {
+    const { certifiableUsers } = await CommonCertifiableUser.getInstance({ databaseBuilder: this.databaseBuilder });
+    return certifiableUsers;
   }
 
   async #addReadyToStartSession({ certificationCenterMember, certificationCenter }) {
