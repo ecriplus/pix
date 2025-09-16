@@ -18,10 +18,7 @@ const rescoreCertification = async function (
   const latestAssessmentResult = await dependencies.courseAssessmentResultRepository.getLatestAssessmentResult({
     certificationCourseId,
   });
-  if (
-    latestAssessmentResult &&
-    (latestAssessmentResult.status === 'cancelled' || latestAssessmentResult.status === 'rejected')
-  ) {
+  if (_isAssessmentResultNotRescorable(latestAssessmentResult)) {
     throw new CertificationRescoringNotAllowedError();
   }
 
@@ -38,6 +35,13 @@ const rescoreCertification = async function (
   }
 
   return h.response().code(201);
+};
+
+const _isAssessmentResultNotRescorable = (latestAssessmentResult) => {
+  return (
+    latestAssessmentResult &&
+    (latestAssessmentResult.status === 'cancelled' || latestAssessmentResult.status === 'rejected')
+  );
 };
 
 const certificationRescoringController = {

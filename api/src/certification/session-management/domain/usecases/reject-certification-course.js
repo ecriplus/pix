@@ -15,7 +15,7 @@ export const rejectCertificationCourse = async ({
     const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
       certificationCourseId,
     });
-    if (latestAssessmentResult && latestAssessmentResult.status === 'cancelled') {
+    if (_isAssessmentResultNotRejectable(latestAssessmentResult)) {
       throw new CertificationRejectNotAllowedError();
     }
   } catch (error) {
@@ -36,4 +36,8 @@ export const rejectCertificationCourse = async ({
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
     return certificationRescoringRepository.rescoreV2Certification({ event });
   }
+};
+
+const _isAssessmentResultNotRejectable = (latestAssessmentResult) => {
+  return latestAssessmentResult && latestAssessmentResult.status === 'cancelled';
 };
