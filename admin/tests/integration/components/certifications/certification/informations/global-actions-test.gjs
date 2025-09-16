@@ -254,7 +254,9 @@ module('Integration | Component | Certifications | Certification | Information |
           await waitForDialogClose();
 
           // then
-          sinon.assert.calledWith(notificationStub, { message: t('components.certifications.global-actions.cancel.error-message') });
+          sinon.assert.calledWith(notificationStub, {
+            message: t('components.certifications.global-actions.cancel.error-message'),
+          });
           assert.dom(screen.queryByRole('button', { name: t('common.actions.confirm') })).doesNotExist();
         });
       });
@@ -365,7 +367,9 @@ module('Integration | Component | Certifications | Certification | Information |
           await waitForDialogClose();
 
           // then
-          sinon.assert.calledWith(notificationStub, { message: t('components.certifications.global-actions.uncancel.error-message') });
+          sinon.assert.calledWith(notificationStub, {
+            message: t('components.certifications.global-actions.uncancel.error-message'),
+          });
           assert.dom(screen.queryByRole('button', { name: t('common.actions.confirm') })).doesNotExist();
         });
       });
@@ -590,7 +594,9 @@ module('Integration | Component | Certifications | Certification | Information |
           await waitForDialogClose();
 
           // then
-          sinon.assert.calledWith(notificationStub, { message: t('components.certifications.global-actions.reject.error-message') });
+          sinon.assert.calledWith(notificationStub, {
+            message: t('components.certifications.global-actions.reject.error-message'),
+          });
           assert.dom(screen.queryByRole('button', { name: t('common.actions.confirm') })).doesNotExist();
         });
       });
@@ -701,7 +707,9 @@ module('Integration | Component | Certifications | Certification | Information |
           await waitForDialogClose();
 
           // then
-          sinon.assert.calledWith(notificationStub, { message: t('components.certifications.global-actions.unreject.error-message') });
+          sinon.assert.calledWith(notificationStub, {
+            message: t('components.certifications.global-actions.unreject.error-message'),
+          });
           assert.dom(screen.queryByRole('button', { name: t('common.actions.confirm') })).doesNotExist();
         });
       });
@@ -890,7 +898,9 @@ module('Integration | Component | Certifications | Certification | Information |
           // then
           sinon.assert.calledOnce(rescoreCertificationStub);
           sinon.assert.calledWith(rescoreCertificationStub, { certificationCourseId: '123' });
-          sinon.assert.calledWith(notificationStub, { message: t('components.certifications.global-actions.rescoring.success-message') });
+          sinon.assert.calledWith(notificationStub, {
+            message: t('components.certifications.global-actions.rescoring.success-message'),
+          });
           assert.ok(certification.reload.calledOnce);
         } finally {
           store.adapterFor = originalAdapterFor;
@@ -926,7 +936,7 @@ module('Integration | Component | Certifications | Certification | Information |
           );
 
           // Wait for async error handling
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise((resolve) => setTimeout(resolve, 100));
 
           // then
           assert.ok(notificationStub.called, 'notification should have been called');
