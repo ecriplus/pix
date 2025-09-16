@@ -8,10 +8,12 @@ async function getAllByIds({ ids, moduleDatasource }) {
   try {
     const modules = await moduleDatasource.getAllByIds(ids);
 
-    return modules.map((moduleData) => {
-      const version = _computeModuleVersion(moduleData);
-      return ModuleFactory.build({ ...moduleData, version });
-    });
+    return await Promise.all(
+      modules.map(async (moduleData) => {
+        const version = _computeModuleVersion(moduleData);
+        return await ModuleFactory.build({ ...moduleData, version });
+      }),
+    );
   } catch (error) {
     throw new NotFoundError(error.message);
   }
@@ -27,7 +29,7 @@ async function getBySlug({ slug, moduleDatasource }) {
 
 async function list({ moduleDatasource }) {
   const modulesData = await moduleDatasource.list();
-  return modulesData.map((moduleData) => ModuleFactory.build(moduleData));
+  return Promise.all(modulesData.map(async (moduleData) => await ModuleFactory.build(moduleData)));
 }
 
 export { getAllByIds, getById, getBySlug, list };
@@ -44,7 +46,7 @@ async function _getModule({ ref, moduleDatasource, query }) {
     const moduleData = await method(query);
     const version = _computeModuleVersion(moduleData);
 
-    return ModuleFactory.build({ ...moduleData, version });
+    return await ModuleFactory.build({ ...moduleData, version });
   } catch (e) {
     if (e instanceof LearningContentResourceNotFound) {
       throw new NotFoundError();

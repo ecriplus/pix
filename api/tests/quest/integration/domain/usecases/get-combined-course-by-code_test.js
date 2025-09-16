@@ -4,7 +4,7 @@ import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/m
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, nock, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code', function () {
   let combinedCourseUrl, code;
@@ -18,6 +18,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
   });
 
   it('should return CombinedCourse for provided code', async function () {
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
@@ -129,6 +130,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
   });
 
   it('should return started combined course for given userId', async function () {
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });

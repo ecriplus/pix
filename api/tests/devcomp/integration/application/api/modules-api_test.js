@@ -1,7 +1,7 @@
 import { ModuleStatus } from '../../../../../src/devcomp/application/api/models/ModuleStatus.js';
 import * as modulesApi from '../../../../../src/devcomp/application/api/modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, nock, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Devcomp | Application | Api | Modules', function () {
   let clock, now;
@@ -18,6 +18,7 @@ describe('Integration | Devcomp | Application | Api | Modules', function () {
   describe('#getModuleStatuses', function () {
     it('should return a list of Module statuses', async function () {
       // given
+      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
       const { id: userId } = databaseBuilder.factory.buildUser();
       const existingModuleIdWithoutRelatedPassage = '6282925d-4775-4bca-b513-4c3009ec5886';
       const existingModuleId2 = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';

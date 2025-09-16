@@ -2,7 +2,7 @@ import { RecommendableModule } from '../../../../../src/devcomp/application/api/
 import { RecommendedModule } from '../../../../../src/devcomp/application/api/models/RecommendedModule.js';
 import * as recommendedModulesApi from '../../../../../src/devcomp/application/api/recommended-modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, nock } from '../../../../test-helper.js';
 
 describe('Integration | Devcomp | Application | Api | RecommendedModules', function () {
   describe('#findByCampaignParticipationIds', function () {
@@ -52,6 +52,7 @@ describe('Integration | Devcomp | Application | Api | RecommendedModules', funct
   describe('#findByTargetProfileIds', function () {
     it('should return a list recommended modules', async function () {
       // given
+      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const trainingId = databaseBuilder.factory.buildTraining({
         type: 'modulix',

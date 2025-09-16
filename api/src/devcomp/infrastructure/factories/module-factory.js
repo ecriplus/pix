@@ -1,3 +1,4 @@
+import { getAssetInfos } from '../../../shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { ModuleInstantiationError } from '../../domain/errors.js';
 import { BlockInput } from '../../domain/models/block/BlockInput.js';
@@ -32,7 +33,7 @@ import { QcmProposal } from '../../domain/models/QcmProposal.js';
 import { QcuProposal } from '../../domain/models/QcuProposal.js';
 
 export class ModuleFactory {
-  static build(moduleData) {
+  static async build(moduleData) {
     try {
       return new Module({
         id: moduleData.id,
@@ -41,63 +42,77 @@ export class ModuleFactory {
         version: moduleData.version,
         isBeta: moduleData.isBeta,
         details: new Details(moduleData.details),
-        sections: moduleData.sections.map((section) => {
-          return new Section({
-            id: section.id,
-            type: section.type,
-            grains: section.grains.map((grain) => {
-              return new Grain({
-                id: grain.id,
-                title: grain.title,
-                type: grain.type,
-                components: grain.components
-                  .map((component) => {
-                    switch (component.type) {
-                      case 'element': {
-                        const element = ModuleFactory.#buildElement(component.element, moduleData.isBeta);
-                        if (element) {
-                          return new ComponentElement({ element });
-                        } else {
-                          return undefined;
-                        }
-                      }
-                      case 'stepper':
-                        return new ComponentStepper({
-                          steps: component.steps.map((step) => {
-                            return new Step({
-                              elements: step.elements
-                                .map((element) => {
-                                  const domainElement = ModuleFactory.#buildElement(element, moduleData.isBeta);
-                                  if (domainElement) {
-                                    return domainElement;
+        sections: await Promise.all(
+          await Promise.all(
+            moduleData.sections.map(async (section) => {
+              return new Section({
+                id: section.id,
+                type: section.type,
+                grains: await Promise.all(
+                  await Promise.all(
+                    section.grains.map(async (grain) => {
+                      return new Grain({
+                        id: grain.id,
+                        title: grain.title,
+                        type: grain.type,
+                        components: (
+                          await Promise.all(
+                            grain.components.map(async (component) => {
+                              switch (component.type) {
+                                case 'element': {
+                                  const element = await ModuleFactory.#buildElement(component.element);
+                                  if (element) {
+                                    return new ComponentElement({ element });
                                   } else {
                                     return undefined;
                                   }
-                                })
-                                .filter((element) => element !== undefined),
-                            });
-                          }),
-                        });
-                      default:
-                        logger.warn({
-                          event: 'module_component_type_unknown',
-                          message: `Component inconnu: ${component.type}`,
-                        });
-                        return undefined;
-                    }
-                  })
-                  .filter((component) => component !== undefined),
+                                }
+                                case 'stepper':
+                                  return new ComponentStepper({
+                                    steps: await Promise.all(
+                                      component.steps.map(async (step) => {
+                                        return new Step({
+                                          elements: (
+                                            await Promise.all(
+                                              step.elements.map(async (element) => {
+                                                const domainElement = await ModuleFactory.#buildElement(element);
+                                                if (domainElement) {
+                                                  return domainElement;
+                                                } else {
+                                                  return undefined;
+                                                }
+                                              }),
+                                            )
+                                          ).filter((element) => element !== undefined),
+                                        });
+                                      }),
+                                    ),
+                                  });
+                                default:
+                                  logger.warn({
+                                    event: 'module_component_type_unknown',
+                                    message: `Component inconnu: ${component.type}`,
+                                  });
+                                  return undefined;
+                              }
+                            }),
+                          )
+                        ).filter((component) => component !== undefined),
+                      });
+                    }),
+                  ),
+                ),
               });
             }),
-          });
-        }),
+          ),
+        ),
       });
     } catch (e) {
       throw new ModuleInstantiationError(e.message);
     }
   }
 
-  static #buildElement(element, isBeta) {
+  static async #buildElement(element) {
     switch (element.type) {
       case 'custom':
         return ModuleFactory.#buildCustom(element);
@@ -110,7 +125,7 @@ export class ModuleFactory {
       case 'expand':
         return ModuleFactory.#buildExpand(element);
       case 'image':
-        return ModuleFactory.#buildImage(element, isBeta);
+        return await ModuleFactory.#buildImage(element);
       case 'separator':
         return ModuleFactory.#buildSeparator(element);
       case 'text':
@@ -184,7 +199,7 @@ export class ModuleFactory {
     });
   }
 
-  static #buildImage(element, isBeta) {
+  static async #buildImage(element) {
     return new Image({
       id: element.id,
       url: element.url,
@@ -192,7 +207,7 @@ export class ModuleFactory {
       alternativeText: element.alternativeText,
       legend: element.legend,
       licence: element.licence,
-      isBeta,
+      infos: await getAssetInfos(element.url),
     });
   }
 

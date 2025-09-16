@@ -1,5 +1,6 @@
 import { Image } from '../../../../../../src/devcomp/domain/models/element/Image.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
+import { PixAssetImageInfos } from '../../../../../../src/shared/domain/models/PixAssetImageInfos.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
@@ -13,6 +14,7 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
         alternativeText: 'alternativeText',
         legend: 'legend',
         licence: 'licence',
+        infos: new PixAssetImageInfos({ width: 400, height: 200 }),
       });
 
       // then
@@ -23,6 +25,31 @@ describe('Unit | Devcomp | Domain | Models | Element | Image', function () {
       expect(image.legend).to.equal('legend');
       expect(image.licence).to.equal('licence');
       expect(image.type).to.equal('image');
+      expect(image.infos).to.deep.equal({ width: 400, height: 200 });
+    });
+
+    describe('without infos', function () {
+      it('should create an image and keep attributes', function () {
+        // when
+        const image = new Image({
+          id: 'id',
+          url: 'https://assets.pix.org/modules/placeholder-details.svg',
+          alt: 'alt',
+          alternativeText: 'alternativeText',
+          legend: 'legend',
+          licence: 'licence',
+        });
+
+        // then
+        expect(image.id).to.equal('id');
+        expect(image.url).to.equal('https://assets.pix.org/modules/placeholder-details.svg');
+        expect(image.alt).to.equal('alt');
+        expect(image.alternativeText).to.equal('alternativeText');
+        expect(image.legend).to.equal('legend');
+        expect(image.licence).to.equal('licence');
+        expect(image.type).to.equal('image');
+        expect(image.infos).to.be.undefined;
+      });
     });
   });
 

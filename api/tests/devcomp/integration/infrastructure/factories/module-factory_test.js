@@ -19,14 +19,14 @@ import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factories/module-factory.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErrSync, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 import { validateFlashcards } from '../../../shared/validateFlashcards.js';
 
-describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
+describe('Integration | Devcomp | Infrastructure | Factories | Module ', function () {
   describe('#toDomain', function () {
     describe('when data is incorrect', function () {
       describe('when a component has an unknown type', function () {
-        it('should log the error', function () {
+        it('should log the error', async function () {
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -70,7 +70,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           sinon.stub(logger, 'warn').returns();
 
           // when
-          ModuleFactory.build(moduleData);
+          await ModuleFactory.build(moduleData);
 
           // then
           expect(logger.warn).to.have.been.calledWithExactly({
@@ -81,7 +81,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       });
 
       describe('when an element has an unknown type', function () {
-        it('should log the error', function () {
+        it('should log the error', async function () {
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -125,7 +125,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           sinon.stub(logger, 'warn').returns();
 
           // when
-          ModuleFactory.build(moduleData);
+          await ModuleFactory.build(moduleData);
 
           // then
           expect(logger.warn).to.have.been.calledWithExactly({
@@ -136,7 +136,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       });
 
       describe('when a qrocm has an unknown proposal type', function () {
-        it('should log the error', function () {
+        it('should log the error', async function () {
           // given
           const moduleData = {
             id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -190,7 +190,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
           sinon.stub(logger, 'warn').returns();
 
           // when
-          ModuleFactory.build(moduleData);
+          await ModuleFactory.build(moduleData);
 
           // then
           expect(logger.warn).to.have.been.calledWithExactly('Type de proposal inconnu: unknown');
@@ -198,8 +198,9 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       });
     });
 
-    it('should instantiate a Module with a grain containing components', function () {
+    it('should instantiate a Module with a grain containing components', async function () {
       // given
+      nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
       const version = Symbol('version');
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -243,7 +244,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       };
 
       // when
-      const module = ModuleFactory.build(moduleData);
+      const module = await ModuleFactory.build(moduleData);
 
       // then
       expect(module).to.be.an.instanceOf(Module);
@@ -256,7 +257,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
     });
 
     describe('With ComponentElement', function () {
-      it('should instantiate a Module with a ComponentElement which contains a Custom Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Custom Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -347,13 +348,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(CustomElement);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a CustomDraft Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a CustomDraft Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -397,14 +398,15 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(CustomDraft);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains an Image Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains an Image Element', async function () {
         // given
+        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -448,13 +450,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Image);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Separator Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Separator Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -494,7 +496,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Separator);
@@ -505,7 +507,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         });
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Text Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Text Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -546,13 +548,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Text);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Video Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Video Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -597,7 +599,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Video);
@@ -613,7 +615,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         });
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Download Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Download Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -659,13 +661,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Download);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains an Embed Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains an Embed Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -709,13 +711,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Embed);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QCU Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QCU Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -770,13 +772,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(QCU);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QCUDeclarative Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QCUDeclarative Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -840,13 +842,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(QCUDeclarative);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QCUDiscovery Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QCUDiscovery Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -922,13 +924,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(QCUDiscovery);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QCM Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QCM Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -997,13 +999,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(QCM);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QROCM Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QROCM Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1087,13 +1089,13 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(QROCM);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1155,7 +1157,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         const flashcards = module.sections[0].grains[0].components[0].element;
@@ -1163,7 +1165,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         validateFlashcards(flashcards, expectedFlashcards);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Expand Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Expand Element', async function () {
         // given
         const givenData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1205,7 +1207,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(givenData);
+        const module = await ModuleFactory.build(givenData);
 
         // then
         const expand = module.sections[0].grains[0].components[0].element;
@@ -1216,7 +1218,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(expand.type).to.equal(expectedExpand.type);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a QAB Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a QAB Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1277,7 +1279,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.instanceOf(QAB);
@@ -1285,8 +1287,9 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
     });
 
     describe('With ComponentStepper', function () {
-      it('should instantiate a Module with a ComponentStepper which contains an Image Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains an Image Element', async function () {
         // given
+        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1334,7 +1337,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1342,7 +1345,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Image);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a Separator Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a Separator Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1388,7 +1391,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1396,7 +1399,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Separator);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a Text Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a Text Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1444,7 +1447,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1452,7 +1455,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Text);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a Video Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a Video Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1503,7 +1506,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1511,7 +1514,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Video);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a Download Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a Download Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1563,7 +1566,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1571,7 +1574,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Download);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains an Embed Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains an Embed Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1622,7 +1625,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1630,7 +1633,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Embed);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a QCU Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a QCU Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1692,7 +1695,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1700,7 +1703,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QCU);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a QCUDeclarative Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a QCUDeclarative Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1770,7 +1773,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1778,7 +1781,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QCUDeclarative);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a QCM Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a QCM Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1853,7 +1856,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1861,7 +1864,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QCM);
       });
 
-      it('should instantiate a Module with a ComponentStepper which contains a QROCM Element', function () {
+      it('should instantiate a Module with a ComponentStepper which contains a QROCM Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -1947,7 +1950,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -1955,7 +1958,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(QROCM);
       });
 
-      it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', function () {
+      it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2023,7 +2026,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         const flashcards = module.sections[0].grains[0].components[0].steps[0].elements[0];
@@ -2031,7 +2034,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         validateFlashcards(flashcards, expectedFlashcards);
       });
 
-      it('should filter out unknown element type', function () {
+      it('should filter out unknown element type', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2084,7 +2087,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const module = ModuleFactory.build(moduleData);
+        const module = await ModuleFactory.build(moduleData);
 
         // then
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
@@ -2093,7 +2096,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Text);
       });
 
-      it('should filter out steps with only unknown element type', function () {
+      it('should filter out steps with only unknown element type', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2150,14 +2153,14 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const error = catchErrSync(ModuleFactory.build)(moduleData);
+        const error = await catchErr(ModuleFactory.build)(moduleData);
 
         // then
         expect(error).to.be.an.instanceOf(ModuleInstantiationError);
         expect(error.message).to.deep.equal('A step should contain at least one element');
       });
 
-      it('should filter out stepper with only unknown element type', function () {
+      it('should filter out stepper with only unknown element type', async function () {
         // given
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2204,7 +2207,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
         };
 
         // when
-        const error = catchErrSync(ModuleFactory.build)(moduleData);
+        const error = await catchErr(ModuleFactory.build)(moduleData);
 
         // then
         expect(error).to.be.an.instanceOf(ModuleInstantiationError);
@@ -2212,7 +2215,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       });
     });
 
-    it('should filter out unknown component types', function () {
+    it('should filter out unknown component types', async function () {
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2261,7 +2264,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       };
 
       // when
-      const module = ModuleFactory.build(moduleData);
+      const module = await ModuleFactory.build(moduleData);
 
       // then
       expect(module).to.be.an.instanceOf(Module);
@@ -2270,7 +2273,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       expect(module.sections[0].grains[0].components[0].element).not.to.be.empty;
     });
 
-    it('should filter out component if element type is unknown', function () {
+    it('should filter out component if element type is unknown', async function () {
       // given
       const moduleData = {
         id: '6282925d-4775-4bca-b513-4c3009ec5886',
@@ -2319,7 +2322,7 @@ describe('Unit | Devcomp | Infrastructure | Factories | Module ', function () {
       };
 
       // when
-      const module = ModuleFactory.build(moduleData);
+      const module = await ModuleFactory.build(moduleData);
 
       // then
       expect(module).to.be.an.instanceOf(Module);

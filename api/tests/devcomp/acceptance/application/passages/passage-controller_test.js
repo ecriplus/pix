@@ -29,6 +29,7 @@ describe('Acceptance | Controller | passage-controller', function () {
     describe('when user is not authenticated', function () {
       it('should create a new passage and response with a 201', async function () {
         // given
+        nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
         const expectedResponse = {
           type: 'passages',
           attributes: {
@@ -64,6 +65,7 @@ describe('Acceptance | Controller | passage-controller', function () {
     describe('when user is authenticated', function () {
       it('should create a new passage and response with a 201', async function () {
         // given
+        nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
         const user = databaseBuilder.factory.buildUser();
         await databaseBuilder.commit();
         const moduleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
