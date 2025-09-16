@@ -33,7 +33,6 @@ class User {
       locale,
       isAnonymous,
       memberships = [],
-      certificationCenterMemberships = [],
       pixScore,
       scorecards = [],
       updatedAt,
@@ -68,7 +67,6 @@ class User {
     this.isAnonymous = isAnonymous;
     this.pixScore = pixScore;
     this.memberships = memberships;
-    this.certificationCenterMemberships = certificationCenterMemberships;
     this.scorecards = scorecards;
     this.updatedAt = updatedAt;
     this.campaignParticipations = campaignParticipations;

@@ -11,7 +11,6 @@ import {
   AlreadyRegisteredUsernameError,
   UserNotFoundError,
 } from '../../../shared/domain/errors.js';
-import { CertificationCenterMembership } from '../../../shared/domain/models/CertificationCenterMembership.js';
 import { Membership } from '../../../shared/domain/models/Membership.js';
 import { fetchPage, isUniqConstraintViolated } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../domain/constants/identity-providers.js';
@@ -41,16 +40,12 @@ const getFullById = async function (userId) {
   }
 
   const membershipsDTO = await knex('memberships').where({ userId: userDTO.id, disabledAt: null });
-  const certificationCenterMembershipsDTO = await knex('certification-center-memberships').where({
-    userId: userDTO.id,
-    disabledAt: null,
-  });
   const authenticationMethodsDTO = await knex('authentication-methods').where({
     userId: userDTO.id,
     identityProvider: 'PIX',
   });
 
-  return _toDomainFromDTO({ userDTO, membershipsDTO, certificationCenterMembershipsDTO, authenticationMethodsDTO });
+  return _toDomainFromDTO({ userDTO, membershipsDTO, authenticationMethodsDTO });
 };
 
 const getByUsernameOrEmailWithRolesAndPassword = async function (username) {
@@ -64,16 +59,12 @@ const getByUsernameOrEmailWithRolesAndPassword = async function (username) {
   }
 
   const membershipsDTO = await knex('memberships').where({ userId: userDTO.id, disabledAt: null });
-  const certificationCenterMembershipsDTO = await knex('certification-center-memberships').where({
-    userId: userDTO.id,
-    disabledAt: null,
-  });
   const authenticationMethodsDTO = await knex('authentication-methods').where({
     userId: userDTO.id,
     identityProvider: 'PIX',
   });
 
-  return _toDomainFromDTO({ userDTO, membershipsDTO, certificationCenterMembershipsDTO, authenticationMethodsDTO });
+  return _toDomainFromDTO({ userDTO, membershipsDTO, authenticationMethodsDTO });
 };
 
 /**
@@ -579,17 +570,11 @@ function _fromKnexDTOToUserDetailsForAdmin({
 /**
  * @param userDTO
  * @param membershipsDTO
- * @param certificationCenterMembershipsDTO
  * @param authenticationMethodsDTO
  * @return {User}
  * @private
  */
-function _toDomainFromDTO({
-  userDTO,
-  membershipsDTO = [],
-  certificationCenterMembershipsDTO = [],
-  authenticationMethodsDTO = [],
-}) {
+function _toDomainFromDTO({ userDTO, membershipsDTO = [], authenticationMethodsDTO = [] }) {
   const memberships = membershipsDTO.map((membershipDTO) => {
     let organization;
     if (membershipDTO.organizationName) {
@@ -603,9 +588,6 @@ function _toDomainFromDTO({
     }
     return new Membership({ ...membershipDTO, organization });
   });
-  const certificationCenterMemberships = certificationCenterMembershipsDTO.map(
-    (certificationCenterMembershipDTO) => new CertificationCenterMembership(certificationCenterMembershipDTO),
-  );
   return new User({
     id: userDTO.id,
     cgu: userDTO.cgu,
@@ -630,7 +612,6 @@ function _toDomainFromDTO({
     scorecards: userDTO.scorecards,
     campaignParticipations: userDTO.campaignParticipations,
     memberships,
-    certificationCenterMemberships,
     authenticationMethods: authenticationMethodsDTO,
   });
 }

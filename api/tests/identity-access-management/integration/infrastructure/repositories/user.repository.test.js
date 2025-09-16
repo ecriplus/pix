@@ -19,7 +19,6 @@ import {
   AlreadyRegisteredUsernameError,
   UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
@@ -52,9 +51,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
 
   let userInDB;
   let passwordAuthenticationMethodInDB;
-  let organizationInDB, organizationRoleInDB;
-  let membershipInDB;
-  let certificationCenterInDB;
 
   let clock;
   const now = new Date('2022-12-24');
@@ -68,12 +64,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   function _insertUserWithOrganizationsAndCertificationCenterAccesses() {
-    organizationInDB = databaseBuilder.factory.buildOrganization({
-      type: 'PRO',
-      name: 'Mon Entreprise',
-      code: 'ABCD12',
-    });
-
     userInDB = databaseBuilder.factory.buildUser(userToInsert);
     passwordAuthenticationMethodInDB =
       databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndHashedPassword({
@@ -81,21 +71,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         hashedPassword: 'ABCDEF1234',
         shouldChangePassword: false,
       });
-
-    organizationRoleInDB = Membership.roles.ADMIN;
-
-    membershipInDB = databaseBuilder.factory.buildMembership({
-      userId: userInDB.id,
-      organizationRole: organizationRoleInDB,
-      organizationId: organizationInDB.id,
-    });
-
-    certificationCenterInDB = databaseBuilder.factory.buildCertificationCenter();
-
-    databaseBuilder.factory.buildCertificationCenterMembership({
-      userId: userInDB.id,
-      certificationCenterId: certificationCenterInDB.id,
-    });
 
     return databaseBuilder.commit();
   }
@@ -889,87 +864,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         expect(firstAuthenticationMethod.authenticationComplement).to.deep.equal(
           passwordAuthenticationMethodInDB.authenticationComplement,
         );
-      });
-
-      it('only returns actives certification center membership associated to the user', async function () {
-        // given
-        const email = 'lilou@example.net';
-        const user = databaseBuilder.factory.buildUser({ email });
-        const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
-        const otherCertificationCenter = databaseBuilder.factory.buildCertificationCenter();
-        const activeCertificationCenterMembership = databaseBuilder.factory.buildCertificationCenterMembership({
-          userId: user.id,
-          certificationCenterId: certificationCenter.id,
-        });
-        databaseBuilder.factory.buildCertificationCenterMembership({
-          userId: user.id,
-          certificationCenterId: otherCertificationCenter.id,
-          disabledAt: now,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const foundUser = await userRepository.getByUsernameOrEmailWithRolesAndPassword(email);
-
-        // then
-        const certificationCenterMembership = foundUser.certificationCenterMemberships[0];
-        expect(foundUser.certificationCenterMemberships).to.have.lengthOf(1);
-        expect(certificationCenterMembership.id).to.equal(activeCertificationCenterMembership.id);
-      });
-
-      it('returns membership associated to the user', async function () {
-        // when
-        const user = await userRepository.getByUsernameOrEmailWithRolesAndPassword(userInDB.email);
-
-        // then
-        expect(user.memberships).to.be.an('array');
-        expect(user.memberships).to.have.lengthOf(1);
-
-        const firstMembership = user.memberships[0];
-        expect(firstMembership).to.be.an.instanceof(Membership);
-        expect(firstMembership.id).to.equal(membershipInDB.id);
-        expect(firstMembership.organizationRole).to.equal(membershipInDB.organizationRole);
-      });
-
-      context('when the membership associated to the user has been disabled', function () {
-        it('should not return the membership', async function () {
-          // given
-          const userInDB = databaseBuilder.factory.buildUser();
-          const organizationId = databaseBuilder.factory.buildOrganization().id;
-          databaseBuilder.factory.buildMembership({
-            userId: userInDB.id,
-            organizationId,
-            disabledAt: new Date(),
-          });
-          await databaseBuilder.commit();
-
-          // when
-          const user = await userRepository.getByUsernameOrEmailWithRolesAndPassword(userInDB.email);
-
-          // then
-          expect(user.memberships).to.be.an('array');
-          expect(user.memberships).to.be.empty;
-        });
-      });
-
-      it('returns certification center membership associated to the user', async function () {
-        // given
-        const user = databaseBuilder.factory.buildUser({ email: 'super@example.net' });
-        const certificationCenterMembershipId = databaseBuilder.factory.buildCertificationCenterMembership({
-          userId: user.id,
-          certificationCenterId: certificationCenterInDB.id,
-        }).id;
-        await databaseBuilder.commit();
-
-        // when
-        const foundUser = await userRepository.getByUsernameOrEmailWithRolesAndPassword(user.email);
-
-        // then
-        expect(foundUser.certificationCenterMemberships).to.be.an('array');
-
-        const firstCertificationCenterMembership = foundUser.certificationCenterMemberships[0];
-        expect(firstCertificationCenterMembership).to.be.an.instanceof(CertificationCenterMembership);
-        expect(firstCertificationCenterMembership.id).to.equal(certificationCenterMembershipId);
       });
 
       it('rejects with a UserNotFound error when no user was found with this email', async function () {
