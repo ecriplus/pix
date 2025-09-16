@@ -4,7 +4,7 @@
   "title": "Les biais des lA",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/IAGenBiais_IND/picto_moduleIA_biais.svg",
     "description": "<p>Les logiciels d’IA générative donnent l'impression d’avoir réponse à tout. Parfois, leurs productions contiennent des maladresses. Ce ne sont pas forcément des erreurs, mais des raccourcis, des stéréotypes ou des discriminations. 🚩 </p><p>On dit que ces résultats comportent des biais. Découvrez dans ce module d’où viennent les biais des réponses des IA génératives.🔍</p>",
     "duration": 10,
     "level": "independent",
