@@ -17,6 +17,7 @@ const serialize = function (campaignParticipationOverviews) {
       'validatedStagesCount',
       'totalStagesCount',
       'canRetry',
+      'campaignType',
     ],
   }).serialize(campaignParticipationOverviews);
 };

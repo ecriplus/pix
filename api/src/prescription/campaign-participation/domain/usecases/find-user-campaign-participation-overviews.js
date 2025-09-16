@@ -12,9 +12,14 @@ const findUserCampaignParticipationOverviews = async function ({
     userId,
     states: concatenatedStates,
   });
-
   // We deduplicate targetProfileIds in the case where several campaigns belong to the same target profile
-  const targetProfileIds = [...new Set(campaignParticipationOverviews.map(({ targetProfileId }) => targetProfileId))];
+  const targetProfileIds = [
+    ...new Set(
+      campaignParticipationOverviews
+        .filter((participation) => participation.campaignType !== 'COMBINED_COURSE')
+        .map(({ targetProfileId }) => targetProfileId),
+    ),
+  ];
   const campaignParticipationIds = campaignParticipationOverviews.map(({ id }) => id);
 
   const [stages, acquiredStages] = await Promise.all([

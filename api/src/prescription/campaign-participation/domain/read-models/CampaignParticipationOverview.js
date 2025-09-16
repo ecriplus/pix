@@ -27,6 +27,7 @@ class CampaignParticipationOverview {
     isCampaignMultipleSendings,
     isOrganizationLearnerDisabled,
     campaignType,
+    updatedAt,
   } = {}) {
     this.id = id;
     this.createdAt = createdAt;
@@ -49,6 +50,7 @@ class CampaignParticipationOverview {
     this.isCampaignMultipleSendings = isCampaignMultipleSendings;
     this.isOrganizationLearnerDisabled = isOrganizationLearnerDisabled;
     this.campaignType = campaignType;
+    this.updatedAt = updatedAt;
     this.canRetry = this.computeCanRetry();
   }
 

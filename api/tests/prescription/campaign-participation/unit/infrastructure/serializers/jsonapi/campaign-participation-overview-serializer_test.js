@@ -1,11 +1,8 @@
-import {
-  CampaignParticipationOverview
-} from '../../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
-import * as serializer
-  from '../../../../../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
+import { CampaignParticipationOverview } from '../../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
+import * as serializer from '../../../../../../../src/prescription/campaign-participation/infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
 import {
   CampaignParticipationStatuses,
-  CampaignTypes
+  CampaignTypes,
 } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -50,6 +47,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
             'validated-stages-count': 2,
             'total-stages-count': 3,
             'can-retry': false,
+            'campaign-type': CampaignTypes.ASSESSMENT,
           },
         },
       };

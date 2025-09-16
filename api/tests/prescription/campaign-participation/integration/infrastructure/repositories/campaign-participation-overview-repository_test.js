@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import * as campaignParticipationOverviewRepository
-  from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
+import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
 import {
   CampaignParticipationStatuses,
-  CampaignTypes
+  CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -13,7 +13,7 @@ import {
   expect,
   learningContentBuilder,
   mockLearningContent,
-  sinon
+  sinon,
 } from '../../../../../test-helper.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
@@ -1233,6 +1233,66 @@ describe('Integration | Repository | Campaign Participation Overview', function 
 
         // then
         expect(campaignParticipationOverviews[0].canRetry).to.be.false;
+      });
+    });
+
+    context('when there are combined course participations', function () {
+      it('retrieves information about combined course participation and organization', async function () {
+        const organizationId = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' }).id;
+        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+          userId,
+          organizationId,
+        }).id;
+        const combinedCourse = databaseBuilder.factory.buildQuestForCombinedCourse({
+          name: 'Combinix1',
+          code: 'ABCD',
+          organizationId,
+        });
+        const secondCombinedCourse = databaseBuilder.factory.buildQuestForCombinedCourse({
+          name: 'Combinix2',
+          code: 'EFGH',
+          organizationId,
+        });
+        const expectedFirstParticipation = databaseBuilder.factory.buildCombinedCourseParticipation({
+          questId: combinedCourse.id,
+          organizationLearnerId,
+          userId,
+          updatedAt: new Date('2022-01-01'),
+          status: CombinedCourseParticipationStatuses.STARTED,
+        });
+        const expectedSecondParticipation = databaseBuilder.factory.buildCombinedCourseParticipation({
+          questId: secondCombinedCourse.id,
+          organizationLearnerId,
+          userId,
+          updatedAt: new Date('2022-02-02'),
+          status: CombinedCourseParticipationStatuses.COMPLETED,
+        });
+
+        await databaseBuilder.commit();
+
+        const [firstParticipation, secondParticipation] =
+          await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+            userId,
+          });
+
+        expect(firstParticipation).to.deep.include({
+          id: expectedFirstParticipation.id,
+          campaignCode: combinedCourse.code,
+          campaignTitle: combinedCourse.name,
+          status: 'STARTED',
+          organizationName: 'Organization ABCD',
+          createdAt: expectedFirstParticipation.createdAt,
+          updatedAt: expectedFirstParticipation.updatedAt,
+        });
+        expect(secondParticipation).to.deep.include({
+          id: expectedSecondParticipation.id,
+          campaignCode: secondCombinedCourse.code,
+          campaignTitle: secondCombinedCourse.name,
+          status: 'COMPLETED',
+          organizationName: 'Organization ABCD',
+          createdAt: expectedSecondParticipation.createdAt,
+          updatedAt: expectedSecondParticipation.updatedAt,
+        });
       });
     });
   });
