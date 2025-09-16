@@ -17,17 +17,15 @@ module('Unit | Service | session', function (hooks) {
 
     service = this.owner.lookup('service:session');
     service.currentUser = { load: sinon.stub(), certificationPointOfContact: user };
-    service.locale = { setBestLocale: sinon.stub(), isSupportedLocale: sinon.stub().returns(true) };
   });
 
   module('#handleAuthentication', function () {
-    test('loads current user and sets locale', async function (assert) {
+    test('loads current user', async function (assert) {
       // when
       await service.handleAuthentication();
 
       // then
       sinon.assert.calledOnce(service.currentUser.load);
-      sinon.assert.calledWith(service.locale.setBestLocale, { queryParams: undefined });
       assert.ok(true);
     });
   });
@@ -47,40 +45,6 @@ module('Unit | Service | session', function (hooks) {
 
       // then
       assert.true(service.store.clear.calledOnce);
-    });
-  });
-
-  module('#loadCurrentUserAndSetLocale', function () {
-    module('when locale is supported', function () {
-      test('loads the current user, sets locale', async function (assert) {
-        // given
-        const queryParams = { lang: 'fr' };
-
-        // when
-        await service.loadCurrentUserAndSetLocale({ to: { queryParams } });
-
-        // then
-        sinon.assert.calledOnce(service.currentUser.load);
-        sinon.assert.calledWith(service.locale.setBestLocale, { queryParams });
-        assert.ok(true);
-      });
-    });
-
-    module('when locale is not supported', function () {
-      test('loads the current user, sets locale', async function (assert) {
-        // given
-        const queryParams = { lang: 'es' };
-
-        service.locale.isSupportedLocale = sinon.stub().returns(false);
-
-        // when
-        await service.loadCurrentUserAndSetLocale({ to: { queryParams } });
-
-        // then
-        sinon.assert.calledOnce(service.currentUser.load);
-        sinon.assert.calledWith(service.locale.setBestLocale, { queryParams });
-        assert.ok(true);
-      });
     });
   });
 

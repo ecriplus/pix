@@ -26,7 +26,11 @@ module('Unit | Route | application', function (hooks) {
   });
 
   module('#beforeModel', function (hooks) {
-    let featureTogglesServiceStub, sessionServiceStub, oidcIdentityProvidersStub;
+    let localeServiceStub,
+      currentUserServiceStub,
+      featureTogglesServiceStub,
+      sessionServiceStub,
+      oidcIdentityProvidersStub;
 
     hooks.beforeEach(function () {
       const catchStub = sinon.stub();
@@ -36,8 +40,16 @@ module('Unit | Route | application', function (hooks) {
       });
       sessionServiceStub = Service.create({
         setup: sinon.stub().resolves(),
-        handleUserLanguageAndLocale: sinon.stub().resolves(),
       });
+
+      localeServiceStub = Service.create({
+        setBestLocale: sinon.stub().resolves(),
+      });
+
+      currentUserServiceStub = Service.create({
+        load: sinon.stub().resolves(),
+      });
+
       oidcIdentityProvidersStub = Service.create({
         load: sinon.stub().resolves(),
       });
@@ -45,11 +57,31 @@ module('Unit | Route | application', function (hooks) {
       this.intl = this.owner.lookup('service:intl');
     });
 
-    test('should setup the session', async function (assert) {
+    test('sets best locale', async function (assert) {
       // given
       const route = this.owner.lookup('route:application');
       route.set('featureToggles', featureTogglesServiceStub);
       route.set('session', sessionServiceStub);
+      route.set('currentUser', currentUserServiceStub);
+      route.set('locale', localeServiceStub);
+      route.set('oidcIdentityProviders', oidcIdentityProvidersStub);
+      const transition = { to: { queryParams: { lang: 'fr' } } };
+
+      // when
+      await route.beforeModel(transition);
+
+      // then
+      sinon.assert.calledWith(localeServiceStub.setBestLocale, { queryParams: { lang: 'fr' } });
+      assert.ok(true);
+    });
+
+    test('sets up the session', async function (assert) {
+      // given
+      const route = this.owner.lookup('route:application');
+      route.set('featureToggles', featureTogglesServiceStub);
+      route.set('session', sessionServiceStub);
+      route.set('currentUser', currentUserServiceStub);
+      route.set('locale', localeServiceStub);
       route.set('oidcIdentityProviders', oidcIdentityProvidersStub);
 
       // when
@@ -60,11 +92,13 @@ module('Unit | Route | application', function (hooks) {
       assert.ok(true);
     });
 
-    test('should get feature toogles', async function (assert) {
+    test('gets feature toggles', async function (assert) {
       // given
       const route = this.owner.lookup('route:application');
       route.set('featureToggles', featureTogglesServiceStub);
       route.set('session', sessionServiceStub);
+      route.set('currentUser', currentUserServiceStub);
+      route.set('locale', localeServiceStub);
       route.set('oidcIdentityProviders', oidcIdentityProvidersStub);
 
       // when
@@ -75,18 +109,20 @@ module('Unit | Route | application', function (hooks) {
       assert.ok(true);
     });
 
-    test('should get language and local of user', async function (assert) {
+    test('gets current user', async function (assert) {
       // given
       const route = this.owner.lookup('route:application');
       route.set('featureToggles', featureTogglesServiceStub);
       route.set('session', sessionServiceStub);
+      route.set('currentUser', currentUserServiceStub);
+      route.set('locale', localeServiceStub);
       route.set('oidcIdentityProviders', oidcIdentityProvidersStub);
-      const transition = { from: 'inscription' };
+
       // when
-      await route.beforeModel(transition);
+      await route.beforeModel();
 
       // then
-      sinon.assert.calledWith(sessionServiceStub.handleUserLanguageAndLocale, transition);
+      sinon.assert.calledOnce(currentUserServiceStub.load);
       assert.ok(true);
     });
   });

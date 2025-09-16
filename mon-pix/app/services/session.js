@@ -11,7 +11,6 @@ export default class CurrentSessionService extends SessionService {
   @service url;
   @service router;
   @service oidcIdentityProviders;
-  @service locale;
 
   routeAfterAuthentication = 'authenticated.user-dashboard';
 
@@ -23,7 +22,7 @@ export default class CurrentSessionService extends SessionService {
   }
 
   async handleAuthentication() {
-    await this._loadCurrentUserAndLocale();
+    await this.currentUser.load();
 
     const nextURL = this.data.nextURL;
     const isFromIdentityProviderLoginPage = this.oidcIdentityProviders.list.some((identityProvider) => {
@@ -51,11 +50,6 @@ export default class CurrentSessionService extends SessionService {
 
     const routeAfterInvalidation = this._getRouteAfterInvalidation();
     super.handleInvalidation(routeAfterInvalidation);
-  }
-
-  async handleUserLanguageAndLocale(transition = null) {
-    const queryParams = transition?.to?.queryParams;
-    await this._loadCurrentUserAndLocale(queryParams);
   }
 
   get redirectionUrl() {
@@ -114,11 +108,6 @@ export default class CurrentSessionService extends SessionService {
   revokeGarAuthenticationContext() {
     externalUserTokenFromGarStorage.remove();
     userIdForLearnerAssociationStorage.remove();
-  }
-
-  async _loadCurrentUserAndLocale(queryParams) {
-    await this.currentUser.load();
-    this.locale.setBestLocale({ user: this.currentUser.user, queryParams });
   }
 
   _getRouteAfterInvalidation() {

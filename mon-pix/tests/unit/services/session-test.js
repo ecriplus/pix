@@ -14,7 +14,6 @@ module('Unit | Services | session', function (hooks) {
   hooks.beforeEach(function () {
     sessionService = this.owner.lookup('service:session');
     sessionService.currentUser = { load: sinon.stub(), user: null };
-    sessionService.locale = { setBestLocale: sinon.stub() };
     sessionService._getRouteAfterInvalidation = sinon.stub();
 
     routerService = this.owner.lookup('service:router');
@@ -83,17 +82,12 @@ module('Unit | Services | session', function (hooks) {
       this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     });
 
-    test('loads current user and sets user locale', async function (assert) {
-      // given
-      const user = { id: 1 };
-      sessionService.currentUser.user = user;
-
-      // when
+    test('loads current user', async function (assert) {
+      // given // when
       await sessionService.handleAuthentication();
 
       // then
       sinon.assert.calledOnce(sessionService.currentUser.load);
-      sinon.assert.calledWith(sessionService.locale.setBestLocale, { user, queryParams: undefined });
       assert.ok(true);
     });
 
@@ -136,23 +130,6 @@ module('Unit | Services | session', function (hooks) {
         sinon.assert.notCalled(sessionService._getRouteAfterInvalidation);
         assert.ok(true);
       });
-    });
-  });
-
-  module('#handleUserLanguageAndLocale', function () {
-    test('loads the current user and sets the language from query param', async function (assert) {
-      // given
-      const user = { id: 1 };
-      sessionService.currentUser.user = user;
-      const transition = { to: { queryParams: { lang: 'es' } } };
-
-      // when
-      await sessionService.handleUserLanguageAndLocale(transition);
-
-      // then
-      sinon.assert.calledOnce(sessionService.currentUser.load);
-      sinon.assert.calledWith(sessionService.locale.setBestLocale, { queryParams: { lang: 'es' }, user });
-      assert.ok(true);
     });
   });
 
