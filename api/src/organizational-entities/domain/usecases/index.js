@@ -5,6 +5,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
+import * as administrationTeamRepository from '../../infrastructure/repositories/administration-team-repository.js';
 import * as certificationCenterRepository from '../../infrastructure/repositories/certification-center.repository.js';
 import { certificationCenterApiRepository } from '../../infrastructure/repositories/certification-center-api.repository.js';
 import * as certificationCenterForAdminRepository from '../../infrastructure/repositories/certification-center-for-admin.repository.js';
@@ -31,13 +32,14 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
  * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
-
+ * @typedef {import ('../../infrastructure/repositories/pix-team-repository.js')} PixTeamRepository
  * @typedef {import ('../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
  */
 
 const repositories = {
+  administrationTeamRepository,
   adminMemberRepository,
   organizationValidator,
   organizationCreationValidator,
@@ -71,6 +73,7 @@ import { createCertificationCenter } from './create-certification-center.usecase
 import { createOrganization } from './create-organization.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizations-with-tags-and-target-profiles.usecase.js';
 import { createTag } from './create-tag.js';
+import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
 import { findAllTags } from './find-all-tags.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
 import { findOrganizationFeatures } from './find-organization-features.js';
@@ -102,6 +105,7 @@ const usecasesWithoutInjectedDependencies = {
   findOrganizationFeatures,
   findPaginatedFilteredCertificationCenters,
   findPaginatedFilteredOrganizations,
+  findAllAdministrationTeams,
   getCenterForAdmin,
   getOrganizationById,
   getOrganizationDetails,
