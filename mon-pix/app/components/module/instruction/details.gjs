@@ -161,16 +161,6 @@ export default class ModulixDetails extends Component {
           <h2 class="module-details-infos-objectives__title">{{t "pages.modulix.details.objectives"}}</h2>
           <ModuleObjectives @objectives={{@module.details.objectives}} />
         </div>
-
-        <div class="module-details-infos__explanation">
-          <div class="module-details-infos-explanation__title">
-            <h2>{{t "pages.modulix.details.explanationTitle"}}</h2>
-          </div>
-          <p class="module-details-infos-explanation__text">{{t "pages.modulix.details.explanationText1"}}</p>
-          {{#if @module.isBeta}}
-            <p class="module-details-infos-explanation__text">{{t "pages.modulix.details.explanationText2"}}</p>
-          {{/if}}
-        </div>
       </div>
     </main>
   </template>

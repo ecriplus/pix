@@ -1697,9 +1697,6 @@
       "details": {
         "duration": "Duur",
         "durationValue": "≈{duration} min",
-        "explanationText1": "De Pix leermodules bestaan uit lessen en activiteiten om je digitale vaardigheden te oefenen en te ontwikkelen. De lessen bestaan uit video's, audio, afbeeldingen en tekst. Met de activiteiten kun je direct oefenen en je antwoorden controleren. Elke module duurt ongeveer 10 minuten, gaat over een specifiek onderwerp en heeft een moeilijkheidsgraad van beginner tot expert.",
-        "explanationText2": "Deze leermodules bevinden zich momenteel in de bètatestfase. Je kunt ons suggesties voor verbetering sturen via de vragenlijst aan het einde van elke module.",
-        "explanationTitle": "Wat is een module?",
         "level": "Niveau",
         "levels": {
           "advanced": "Gevorderd",
