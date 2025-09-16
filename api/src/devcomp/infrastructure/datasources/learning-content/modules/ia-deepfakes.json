@@ -4,7 +4,7 @@
   "title": "Les deepfakes : c’est quoi ?",
   "isBeta": true,
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/deepfakes/picto-deepfakes.svg",
     "description": "<p>Sur internet, on trouve des images, des vidéos et des sons. Certains sont vrais mais d'autres sont faux&nbsp;: ils sont créés pour ressembler à la réalité.<br>Dans ce module, vous allez découvrir comment les deepfakes (ou hypertrucages en français) sont créés et pourquoi.</p>",
     "duration": 10,
     "level": "novice",
