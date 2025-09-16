@@ -17,14 +17,10 @@ module('Unit | Adapters | campaign-participation-overviews', function (hooks) {
       // given
       const params = {
         userId: 1,
-        'page[number]': 1,
-        'page[size]': 5,
         'filter[states][]': 'ONGOING',
       };
 
       const paramsAfterQuery = {
-        'page[number]': 1,
-        'page[size]': 5,
         'filter[states][]': 'ONGOING',
       };
 

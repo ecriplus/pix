@@ -3,6 +3,8 @@ import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
+import { eq } from 'ember-truth-helpers';
+
 <template>
   <PixBlock class="campaign-participation-overview-card" role="article">
     <div class="campaign-participation-overview-card__header">
@@ -21,7 +23,7 @@ import t from 'ember-intl/helpers/t';
     <section class="campaign-participation-overview-card-content">
       <PixButtonLink
         class="campaign-participation-overview-card-content__action"
-        @route="campaigns.entry-point"
+        @route={{if (eq @model.campaignType "COMBINED_COURSE") "combined-courses" "campaigns.entry-point"}}
         @model={{@model.campaignCode}}
         @variant="success"
         aria-label={{t
