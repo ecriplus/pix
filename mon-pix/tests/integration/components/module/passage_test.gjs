@@ -809,6 +809,44 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.ok(true);
     });
 
+    test('should record a passage event', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const element = {
+        id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
+        type: 'video',
+        title: 'Vidéo de présentation de Pix',
+        url: 'https://videos.pix.fr/modulix/didacticiel/presentation.mp4',
+        subtitles: '',
+        transcription: '<p>transcription</p>',
+      };
+      const section = store.createRecord('section', {
+        id: 'section1',
+        type: 'blank',
+        grains: [{ title: 'Grain title', components: [{ type: 'element', element }] }],
+      });
+      const module = store.createRecord('module', {
+        id: 'module-id',
+        slug: 'module-slug',
+        title: 'Module title',
+        sections: [section],
+      });
+      const passage = store.createRecord('passage');
+
+      // when
+      const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      await click(screen.getByRole('button', { name: 'Afficher la transcription' }));
+
+      // then
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'VIDEO_TRANSCRIPTION_OPENED',
+        data: {
+          elementId: element.id,
+        },
+      });
+      assert.ok(true);
+    });
+
     module('when video is in a stepper', function () {
       test('should push metrics event', async function (assert) {
         // given
