@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.209.0](https://github.com/1024pix/pix/compare/v5.208.0...v5.209.0) (2025-09-16)
+
+### :rocket: Amélioration
+
+- [#13561](https://github.com/1024pix/pix/pull/13561) Ajout des attestations Pix+Edu (PIX-19512) 
+- [#13517](https://github.com/1024pix/pix/pull/13517) Ajouter une indication de progression au stepper horizontal (PIX-19432) 
+- [#13571](https://github.com/1024pix/pix/pull/13571) Améliorer la gestion de la locale lors de l'initialisation des applications (PIX-19511) 
+- [#13573](https://github.com/1024pix/pix/pull/13573) Copier l'event IMAGE_ALTERNATIVE_TEXT_OPENED du service metrics vers un passageEvent (PIX-18367) 
+- [#13577](https://github.com/1024pix/pix/pull/13577) Supprimer la description d'un module sur Pix App (PIX-19538).
+
 # [5.208.0](https://github.com/1024pix/pix/compare/v5.207.0...v5.208.0) (2025-09-16)
 
 ### :rocket: Amélioration
