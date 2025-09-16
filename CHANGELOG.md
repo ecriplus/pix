@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.208.0](https://github.com/1024pix/pix/compare/v5.207.0...v5.208.0) (2025-09-16)
+
+### :rocket: Amélioration
+
+- [#13531](https://github.com/1024pix/pix/pull/13531) Ajouter les pre handler sur les deux routes de suppression de campagnes PixOrga et PixAdmin (PIX-19321). 
+- [#13558](https://github.com/1024pix/pix/pull/13558) Renvoyer les `width`/`height` et type des éléments images si elles sont disponibles (PIX-19461) 
+- [#13568](https://github.com/1024pix/pix/pull/13568) Supprimer le lien questionnaire de fin de module (PIX-19510) 
+
+### :building_construction: Tech
+
+- [#13564](https://github.com/1024pix/pix/pull/13564) :card_file_box: Autorise la valeur `null` pour la colonne `hasComplementaryReferential` de la table `complementary-certifications` (PIX-19527) 
+- [#13549](https://github.com/1024pix/pix/pull/13549) Ajout I18N MINARM (PIX-XXX) 
+- [#13560](https://github.com/1024pix/pix/pull/13560) Corriger le style de la page des Parcours Combiné sur PixApp (PIX-19521). 
+- [#13576](https://github.com/1024pix/pix/pull/13576) epreuves-components: update du package 
+
+### :coffee: Autre
+
+- [#13572](https://github.com/1024pix/pix/pull/13572) Changement de slug pour expé
+
 # [5.207.0](https://github.com/1024pix/pix/compare/v5.206.0...v5.207.0) (2025-09-15)
 
 ### :rocket: Amélioration
