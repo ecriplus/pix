@@ -206,11 +206,14 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  async onFileDownload({ elementId, downloadedFormat }) {
-    this.pixMetrics.trackEvent(`Click sur le bouton Télécharger au format ${downloadedFormat} de ${elementId}`, {
-      disabled: true,
-      category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+  async onFileDownload({ elementId, format, filename }) {
+    this.passageEvents.record({
+      type: 'FILE_DOWNLOADED',
+      data: {
+        elementId,
+        format,
+        filename,
+      },
     });
   }
 
