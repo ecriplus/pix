@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.210.0](https://github.com/1024pix/pix/compare/v5.209.0...v5.210.0) (2025-09-17)
+
+### :rocket: Amélioration
+
+- [#13575](https://github.com/1024pix/pix/pull/13575) Ajouter une carte pour reprendre un parcours combiné dans "Mes parcours" (PIX-19479) 
+- [#13578](https://github.com/1024pix/pix/pull/13578) Copier l'event VIDEO_TRANSCRIPTION_OPENED du service metrics vers un passageEvent (PIX-18368) 
+- [#13582](https://github.com/1024pix/pix/pull/13582) Modification suite panel interne IAGenFonction NOV 
+- [#13456](https://github.com/1024pix/pix/pull/13456) Module biais indé - Scenario 1 (taboule + image) 
+- [#13579](https://github.com/1024pix/pix/pull/13579) Rendre visible le bouton continuer dans les Parcours Combiné de type campagne (PIX-19537). 
+
+### :bug: Correction
+
+- [#13562](https://github.com/1024pix/pix/pull/13562) Rectifier l'affichage d'infos de complémentaire en fonction des rôles (PIX-19514). 
+- [#13585](https://github.com/1024pix/pix/pull/13585) Utiliser le title de la campagne au lieu du nom utiliser pour PixOrga (PIX-19549).
+
 # [5.209.0](https://github.com/1024pix/pix/compare/v5.208.0...v5.209.0) (2025-09-16)
 
 ### :rocket: Amélioration
