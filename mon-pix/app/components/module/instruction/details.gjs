@@ -26,7 +26,6 @@ export default class ModulixDetails extends Component {
   @action
   onModuleStart() {
     this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage`, {
-      disabled: true,
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });
@@ -36,7 +35,6 @@ export default class ModulixDetails extends Component {
   @action
   onModuleStartUsingSmallScreen() {
     this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage en petit écran`, {
-      disabled: true,
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });
@@ -46,7 +44,6 @@ export default class ModulixDetails extends Component {
   @action
   onSmallScreenModalOpen() {
     this.pixMetrics.trackEvent(`Ouvre la modale d'alerte de largeur d'écran`, {
-      disabled: true,
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });
@@ -56,7 +53,6 @@ export default class ModulixDetails extends Component {
   @action
   onSmallScreenModalClose() {
     this.pixMetrics.trackEvent(`Ferme la modale d'alerte de largeur d'écran`, {
-      disabled: true,
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });
