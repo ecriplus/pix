@@ -12,6 +12,7 @@ import { temporaryStorage } from '../../../../src/shared/infrastructure/key-valu
 import {
   AEFE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
+  PRO_ORGANIZATION_ID,
   SCO_ORGANIZATION_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
@@ -23,6 +24,8 @@ const firstTrainingfrFRId = QUEST_OFFSET + 1;
 const secondTrainingfrFRId = QUEST_OFFSET + 2;
 const firstTrainingFRId = QUEST_OFFSET + 3;
 const secondTrainingFRId = QUEST_OFFSET + 4;
+const firstProTrainingfrFRId = QUEST_OFFSET + 5;
+const firstProTrainingFRId = QUEST_OFFSET + 6;
 
 function buildCombinedCourseQuest(databaseBuilder, organizationId) {
   const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
@@ -167,6 +170,126 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
       type: 'prerequisite',
     }).id,
     databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingFRId, threshold: 100, type: 'goal' }).id,
+  ];
+  trainingTriggerIds.forEach((trainingTriggerId) =>
+    TARGET_PROFILE_TUBES[0].map((tube) =>
+      databaseBuilder.factory.buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
+    ),
+  );
+}
+
+function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
+  const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
+  const campaign = databaseBuilder.factory.buildCampaign({
+    name: 'Je teste mes compétences',
+    organizationId,
+    code: 'CODEABC',
+    targetProfileId: targetProfile.id,
+    customResultPageButtonText: 'Continuer',
+    customResultPageButtonUrl: '/parcours/COMBINIX2',
+  });
+  CAMPAIGN_SKILLS[0].map((skillId) =>
+    databaseBuilder.factory.buildCampaignSkill({
+      campaignId: campaign.id,
+      skillId,
+    }),
+  );
+
+  databaseBuilder.factory.buildQuestForCombinedCourse({
+    name: 'Combinix',
+    rewardType: null,
+    rewardId: null,
+    code: 'COMBINIX2',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
+    organizationId,
+    eligibilityRequirements: [],
+    successRequirements: [
+      {
+        requirement_type: 'campaignParticipations',
+        comparison: 'all',
+        data: {
+          campaignId: {
+            data: campaign.id,
+            comparison: 'equal',
+          },
+          status: {
+            data: 'SHARED',
+            comparison: 'equal',
+          },
+        },
+      },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
+            comparison: 'equal',
+          },
+        },
+      },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: 'f32a2238-4f65-4698-b486-15d51935d335',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
+            comparison: 'equal',
+          },
+        },
+      },
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
+            comparison: 'equal',
+          },
+        },
+      },
+    ],
+  });
+
+  databaseBuilder.factory.buildTraining({
+    id: firstProTrainingfrFRId,
+    type: 'modulix',
+    title: 'Demo combinix 1',
+    link: '/modules/demo-combinix-1',
+    locale: 'fr-fr',
+  });
+  databaseBuilder.factory.buildTraining({
+    id: firstProTrainingFRId,
+    type: 'modulix',
+    title: 'Demo combinix 1',
+    link: '/modules/demo-combinix-1',
+    locale: 'FR',
+  });
+  const trainingTriggerIds = [
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: firstProTrainingfrFRId,
+      threshold: 0,
+      type: 'prerequisite',
+    }).id,
+    databaseBuilder.factory.buildTrainingTrigger({
+      trainingId: firstProTrainingFRId,
+      threshold: 0,
+      type: 'prerequisite',
+    }).id,
   ];
   trainingTriggerIds.forEach((trainingTriggerId) =>
     TARGET_PROFILE_TUBES[0].map((tube) =>
@@ -592,6 +715,8 @@ export const buildQuests = async (databaseBuilder) => {
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
   const parenthoodAttestationId = buildParenthoodQuest(databaseBuilder);
+  buildParenthoodQuest(databaseBuilder);
+  buildProCombinedCourseQuest(databaseBuilder, PRO_ORGANIZATION_ID);
   buildCombinedCourseQuest(databaseBuilder, organization.id);
 
   // Create reward for success user
