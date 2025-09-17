@@ -13,7 +13,7 @@
       "<p>Identifier des types de tâches que font les logiciels d’IA</p>",
       "<p>Repérer l’utilisation de l'IA dans des services numériques quotidiens</p>"
     ],
-    "tabletSupport": "comfortable"
+    "tabletSupport": "inconvenient"
   },
   "sections": [
     {
@@ -30,19 +30,7 @@
               "element": {
                 "id": "e0a5a488-113c-4c30-89e0-354e874aa534",
                 "type": "text",
-                "content": "<p>Peut-être avez vous vu ces dernières années de nombreux titres de presse parlant d'<strong>IA</strong> ?</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "16b6fdf3-4aee-4e4f-86b1-6a7f69241289",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-dit-ia/couvia.png",
-                "alt": "4 unes de la presse francophone décrites dans l'alternative textuelle",
-                "alternativeText": "<p>Image montrant quatre couvertures de magazines français consacrées à l’intelligence artificielle (IA)&nbsp;:</p><ul>    <li>        Le Nouvel Obs – Titre&nbsp;: «&nbsp;Nos vies sous IA&nbsp;» avec une main robotique tenant une figurine humaine.    </li>    <li> Philosophie Magazine (Hors-série) – Titre&nbsp;: «&nbsp;IA, le mythe du XXIe siècle&nbsp;», avec un visage humain partiellement robotisé.    </li>    <li> Courrier International – Titre&nbsp;: «&nbsp;L’IA en roue libre&nbsp;», illustré d’un cerveau humanoïde aux commandes d’un corps.    </li>    <li> Sciences et Avenir – Titre&nbsp;: «&nbsp;IA, ce qu’elle change&nbsp;», avec une couverture bleue illustrant un réseau neuronal.</li></ul>",
-                "legend": "",
-                "licence": ""
+                "content": "<p>Peut-être avez vous vu ces dernières années de nombreux titres d'articles parlant d'<strong>IA</strong> ?</p>"
               }
             },
             {
@@ -73,56 +61,56 @@
                       "label": "1946",
                       "feedback": {
                         "type": "close",
-                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1956",
                       "feedback": {
                         "type": "good",
-                        "text": "✅ Oui, en effet l’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "✅ Oui, en effet l’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1966",
                       "feedback": {
                         "type": "close",
-                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1976",
                       "feedback": {
                         "type": "close",
-                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "🧐 Presque ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1986",
                       "feedback": {
                         "type": "neutral",
-                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "1996",
                       "feedback": {
                         "type": "bad",
-                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "😐 Pas mal, mais c'est encore plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "2006",
                       "feedback": {
                         "type": "bad",
-                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     },
                     {
                       "label": "2016",
                       "feedback": {
                         "type": "bad",
-                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
+                        "text": "❌ Et non, c'est beaucoup plus ancien ! L’expression « intelligence artificielle » naît en 1956. À cette époque, Alan Turing imagine un test pour décider si un logiciel tient une conversation aussi bien qu’un humain."
                       }
                     }
                   ]
@@ -141,7 +129,7 @@
               "element": {
                 "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
                 "type": "text",
-                "content": "<p>À cause de la récente popularité de chatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! 🦣&nbsp;</p>"
+                "content": "<p>Avec la récente popularité de chatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! 🦣&nbsp;</p>"
               }
             }
           ]
@@ -234,7 +222,7 @@
               "element": {
                 "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
                 "type": "text",
-                "content": "<p>Aujourd’hui, les ordinateurs sont capables de réaliser <strong>toutes sortes de tâches</strong>&nbsp;:</p><ul><li>Des tâches que nous faisons sans y penser comme, par exemple, reconnaître un chien dans une image.&nbsp;👀</li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, résoudre des problèmes de mathématiques.&nbsp;🧠</li></ul><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès est celui de&nbsp;<strong>l’intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’<strong>imiter les mécanismes de l’intelligence</strong>.&nbsp;🔬</p>"
+                "content": "<p>Aujourd’hui, les ordinateurs sont capables de réaliser <strong>toutes sortes de tâches</strong>&nbsp;:</p><ul>    <li>Des tâches que nous faisons sans y penser comme, par exemple, reconnaître un chien dans une image.&nbsp;👀</li>    <li>Et des tâches qui nous demandent plus de concentration comme, par exemple, résoudre des problèmes de mathématiques.&nbsp;🧠</li></ul><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès est celui de&nbsp;<strong>l’intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’<strong>imiter les mécanismes de l’intelligence</strong>.&nbsp;🔬</p>"
               }
             }
           ]
@@ -264,18 +252,87 @@
               "element": {
                 "id": "8dba133c-906f-4793-939f-015df7d2acce",
                 "type": "text",
-                "content": "<p>Mariam est équipée de nombreux appareils électroniques.</p>"
+                "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</strong></p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "a066ebc9-7f82-439b-85c3-aa2e8686e52a",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-image-interactive.html",
-                "instruction": "<p><strong>Survolez l'image pour explorer son salon pour trouver les appareils et les services qui utilisent des logiciels d'intelligence artificielle.</strong></p>",
-                "height": 520
+                "id": "a74745c7-0e8c-4024-9e4e-ab014c843f8d",
+                "type": "custom",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/salon-connecte.webp",
+                    "alt": "Salon connecté",
+                    "width": 1536,
+                    "height": 1024
+                  },
+                  "areas": [
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 390,
+                        "y1": 120,
+                        "x2": 842,
+                        "y2": 400
+                      },
+                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 510,
+                        "y1": 588,
+                        "x2": 702,
+                        "y2": 635
+                      },
+                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 248,
+                        "y1": 398,
+                        "x2": 325,
+                        "y2": 492
+                      },
+                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 828,
+                        "y1": 560,
+                        "x2": 1042,
+                        "y2": 725
+                      },
+                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 122,
+                        "y1": 796,
+                        "x2": 318,
+                        "y2": 916
+                      },
+                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 986,
+                        "y1": 148,
+                        "x2": 1100,
+                        "y2": 230
+                      },
+                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                }
               }
             },
             {
@@ -295,7 +352,9 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -343,12 +402,44 @@
             {
               "type": "element",
               "element": {
-                "id": "c4a0562d-60f8-48b3-8489-2c8c195597b8",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-dit-ia-cartes.html",
-                "instruction": "<p>Retournez les cartes ci-dessous pour des exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité.</p>",
-                "height": 550
+                "id": "aeeaae8f-72c4-4940-8163-49036e578b1e",
+                "type": "custom",
+                "tagName": "flip-cards",
+                "props": {
+                  "name": "flip card ia dit ia ",
+                  "cardList": [
+                    {
+                      "name": "Agriculture",
+                      "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-champs.svg"
+                    },
+                    {
+                      "name": "Transport",
+                      "description": "Lecture de plaques d’immatriculation pour automatiser les péages",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-truck.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-peage.svg"
+                    },
+                    {
+                      "name": "Santé",
+                      "description": "Analyse de radios pour détecter des signes de cancer",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-medecine.svg"
+                    },
+                    {
+                      "name": "Culture",
+                      "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-livre.svg"
+                    },
+                    {
+                      "name": "Sécurité",
+                      "description": "Reconnaissance des visages pour identifier des personnes autorisées",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg"
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -363,7 +454,7 @@
               "element": {
                 "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
                 "type": "text",
-                "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul><li>Certaines maladies comme les cancers sont mieux dépistées depuis qu'on utilise l'IA pour détecter les tumeurs.</li><li>Les effets du changement climatique sont mieux compris depuis qu'on utilise l'IA pour analyser ses impacts.</li></ul>"
+                "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Certaines maladies comme les cancers sont mieux dépistées depuis qu'on utilise l'IA pour détecter les tumeurs.</li>    <li>Les effets du changement climatique sont mieux compris depuis qu'on utilise l'IA pour analyser ses impacts.</li></ul>"
               }
             }
           ]
@@ -384,7 +475,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
-                "content": "<p>Voici les points principaux à retenir&nbsp;:&nbsp;</p><ul><li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li><li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li><li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li><li>L’utilisation de l’IA  permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
+                "content": "<ul>    <li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li>    <li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li>    <li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
               }
             }
           ]
