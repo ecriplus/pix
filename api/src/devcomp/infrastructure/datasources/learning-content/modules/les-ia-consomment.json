@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/les-ia-consomment/picto_moduleIA_conso.svg",
-    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux, ou encore des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
+    "description": "<p>Quand vous échangez avec un logiciel d‘IA générative, vous ne voyez que l‘écran de discussion. </p><p>Pourtant, d‘immenses ordinateurs appelés supercalculateurs, des réseaux et des bâtiments, situés partout dans le monde, sont utilisés pour répondre à vos demandes.</p><p>Dans ce module, vous allez découvrir les ressources que consomme l’utilisation des intelligences artificielles génératives.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -90,7 +90,7 @@
               "element": {
                 "id": "fdf4e875-c31c-4637-b9e1-62a9b77046e7",
                 "type": "text",
-                "content": "<p>Même avec un ordinateur peu puissant, ou un smartphone basique, on peut obtenir des réponses à toutes nos demandes grâce à l’IA. </p><p><strong>Mais comment est-ce possible ?</strong></p><p>Voyons où sont produites les réponses à nos demandes.</p>"
+                "content": "<p>Même avec un ordinateur peu puissant, ou un smartphone basique, on peut obtenir des réponses à beaucoup de nos demandes grâce à l’IA. </p><p><strong>Mais comment est-ce possible ?</strong></p><p>Voyons où sont produites les réponses à nos demandes.</p>"
               }
             }
           ]
@@ -368,7 +368,7 @@
                     {
                       "title": "Une requête est reçue par le supercalculateur.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape1.svg",
                         "alt": "Une requête est reçue par le supercalculateur."
@@ -382,7 +382,7 @@
                     {
                       "title": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l‘IA.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape2.svg",
                         "alt": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l‘IA."
@@ -396,7 +396,7 @@
                     {
                       "title": "Les serveurs calculent la réponse. Ils consomment de l‘énergie.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape3.svg",
                         "alt": "Les serveurs calculent la réponse. Ils consomment de l‘énergie."
@@ -410,7 +410,7 @@
                     {
                       "title": "Les serveurs dégagent de la chaleur.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape4.svg",
                         "alt": "Les serveurs dégagent de la chaleur."
@@ -424,7 +424,7 @@
                     {
                       "title": "Un système de refroidissement est nécessaire. Il consomme de l‘énergie supplémentaire et de l‘eau.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape5.svg",
                         "alt": "Un système de refroidissement est nécessaire. Il consomme de l‘énergie supplémentaire et de l‘eau."
@@ -438,7 +438,7 @@
                     {
                       "title": "Les serveurs poursuivent les calculs et préparent la réponse.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape6.svg",
                         "alt": "Les serveurs poursuivent les calculs et préparent la réponse."
@@ -452,7 +452,7 @@
                     {
                       "title": "La réponse est prête et sort des serveurs.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape7.svg",
                         "alt": "La réponse est prête et sort des serveurs."
@@ -466,7 +466,7 @@
                     {
                       "title": "La réponse sort du supercalculateur et est envoyée sur internet.",
                       "description": "",
-                      "displayWidth": 400,
+                      "displayWidth": 300,
                       "image": {
                         "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape8.svg",
                         "alt": "La réponse sort du supercalculateur et est envoyée sur internet."
@@ -554,12 +554,34 @@
             {
               "type": "element",
               "element": {
-                "id": "a44b87c8-ecf4-45dd-9cf7-1dc90492ef91",
-                "type": "custom-draft",
-                "title": "Test de la capacité de calcul d‘un superclculateur",
-                "url": "https://1024pix.github.io/atelier-contenus/FRI/IAEnvironnementInferenceSpinner02.html",
-                "instruction": "",
-                "height": 450
+                "id": "c0e5914e-2508-4b40-aae1-2797c0247b8c",
+                "type": "custom",
+                "tagName": "capacity-calculation",
+                "props": {
+                  "titleLevel": 0,
+                  "images": {
+                    "initial": {
+                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-initial.svg"
+                    },
+                    "normal_weak": {
+                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity2.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
+                    },
+                    "normal_medium": {
+                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity3.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
+                    },
+                    "warning": {
+                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity4.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-warning.svg"
+                    },
+                    "error": {
+                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity5.svg",
+                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-error.svg"
+                    }
+                  }
+                }
               }
             },
             {
@@ -590,7 +612,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La création vidéo demande beaucoup de puissance de calcul, mais le supercalculateur peut en traiter plusieurs centaines en même temps.</p><p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -609,21 +631,21 @@
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si. Le supercalculateur peut créer des milliers d'images en même temps.</p>"
+                            "diagnosis": "<p>Eh non.</p><p>La création d'images demande beaucoup de calculs. Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> Le supercalculateur peut créer des milliers d'images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> La création d'images demande beaucoup de calculs. Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La création d'images demande beaucoup de calculs. Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -656,7 +678,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à 90 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>Le supercalculateur a une capacité de calcul suffisante pour créer des dizaines de milliers de textes en même temps.</p><p>Sélectionnez la demande de création d‘un poème et ajustez la quantité à 90 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -902,7 +924,7 @@
               "element": {
                 "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
                 "type": "text",
-                "content": "<p><strong>🌱Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin :</p><ul><li>éviter les requêtes inutiles ou répétées</li><li>privilégier des solutions plus efficaces quand elles existent</li><li>éviter les demandes d‘images ou de vidéos</li></ul><p><strong>🤔Bon à savoir</strong> </p><p>Les concepteurs des IA génératives peuvent aussi faire des efforts comme améliorer les logiciels, améliorer les machines ou choisir des énergies renouvelables.</p>"
+                "content": "<p><strong>🌱Agir pour réduire la consommation d’énergie</strong></p><p> Pour réduire les coûts énergétiques des supercalculateurs, on peut essayer collectivement d’utiliser les IA génératives à un juste besoin&nbsp;:</p><ul><li>éviter les requêtes inutiles ou répétées</li><li>privilégier des solutions plus efficaces quand elles existent</li><li>éviter les demandes d‘images ou de vidéos</li></ul><p><strong>🤔Bon à savoir</strong> </p><p>Les concepteurs des IA génératives peuvent aussi faire des efforts comme améliorer les logiciels, améliorer les machines ou choisir des énergies renouvelables.</p>"
               }
             }
           ]
