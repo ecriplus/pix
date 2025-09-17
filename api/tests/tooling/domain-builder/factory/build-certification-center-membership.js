@@ -1,5 +1,5 @@
 import { User } from '../../../../src/identity-access-management/domain/models/User.js';
-import { CertificationCenterMembership } from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { CertificationCenterMembership } from '../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { buildCertificationCenter } from './build-certification-center.js';
 
 function _buildUser() {

@@ -1,6 +1,6 @@
 import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';

@@ -11,7 +11,7 @@ import { CertificationCenter } from '../../../../../src/shared/domain/models/Cer
 import {
   CERTIFICATION_CENTER_MEMBERSHIP_ROLES,
   CertificationCenterMembership,
-} from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+} from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
