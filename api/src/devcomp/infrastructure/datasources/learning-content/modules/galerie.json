@@ -64,6 +64,7 @@
               "element": {
                 "id": "fe68ec1f-acca-4bb5-902b-9f9a6a5b3ca9",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Confessions nocturnes",

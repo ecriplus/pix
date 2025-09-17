@@ -243,6 +243,7 @@
                     {
                       "id": "4c1b444d-2e5a-4e50-926f-8a73b8259181",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "complete-phrase",
                       "props": {
                         "titleLevel": 2,
@@ -314,12 +315,7 @@
                         ],
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": [
-                          "beurre",
-                          "et",
-                          "du",
-                          "sucre"
-                        ]
+                        "wordsToAdd": ["beurre", "et", "du", "sucre"]
                       }
                     },
                     {

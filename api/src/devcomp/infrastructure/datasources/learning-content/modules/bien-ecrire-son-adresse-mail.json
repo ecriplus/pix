@@ -45,6 +45,7 @@
               "element": {
                 "id": "2ef9874d-e137-40e0-bc64-1210ff66b9c0",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Conversation entre Naomi et Mickaël à propos d’une adresse mail",

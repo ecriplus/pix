@@ -8,6 +8,7 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomElement', function 
       // given
       const attributes = {
         id: '5ce0ddf1-8620-43b5-9e43-cd9b2ffaca17',
+        instruction: 'Instruction',
         tagName: 'qcu-image',
         props: {
           name: "Liste d'applications",
@@ -63,9 +64,24 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomElement', function 
 
       // then
       expect(result.id).to.equal(attributes.id);
+      expect(result.instruction).to.equal(attributes.instruction);
       expect(result.tagName).to.equal(attributes.tagName);
       expect(result.props).to.deep.equal(attributes.props);
       expect(result.type).to.equal('custom');
+    });
+  });
+
+  describe('A CustomElement without a instruction', function () {
+    it('should throw an error', function () {
+      const attributes = {
+        id: '5ce0ddf1-8620-43b5-9e43-cd9b2ffaca17',
+      };
+      // when
+      const error = catchErrSync(() => new CustomElement(attributes))();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The instruction is required for a CustomElement element');
     });
   });
 
@@ -73,6 +89,7 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomElement', function 
     it('should throw an error', function () {
       const attributes = {
         id: '5ce0ddf1-8620-43b5-9e43-cd9b2ffaca17',
+        instruction: 'Instruction',
       };
       // when
       const error = catchErrSync(() => new CustomElement(attributes))();
@@ -87,6 +104,7 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomElement', function 
     it('should throw an error', function () {
       const attributes = {
         id: '5ce0ddf1-8620-43b5-9e43-cd9b2ffaca17',
+        instruction: 'Instruction',
         tagName: 'qcu-image',
       };
       // when

@@ -759,6 +759,7 @@
               "element": {
                 "id": "c7e69b60-f1ae-41b8-9cbc-80f22c6f634a",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",

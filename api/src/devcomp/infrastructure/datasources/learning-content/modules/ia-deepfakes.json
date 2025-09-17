@@ -200,6 +200,7 @@
               "element": {
                 "id": "7a1b82fa-1e06-468d-922a-07b8f004f144",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "qcm-deepfake",
                 "props": {
                   "titleLevel": 0,
@@ -624,6 +625,7 @@
               "element": {
                 "id": "97fc69e7-1028-4b41-a97e-a4a9954c15d2",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
@@ -716,10 +718,7 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "3"
-                      ]
+                      "solutions": ["1", "3"]
                     }
                   ]
                 },

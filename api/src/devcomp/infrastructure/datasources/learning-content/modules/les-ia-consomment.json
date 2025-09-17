@@ -44,6 +44,7 @@
               "element": {
                 "id": "d6a611ae-9e90-402b-8b35-03dcdc5e3faf",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Discussion intro",
@@ -113,6 +114,7 @@
               "element": {
                 "id": "f2081d5f-2054-477d-86d8-942e2b72c511",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -318,6 +320,7 @@
               "element": {
                 "id": "92f6e0bb-fa86-4734-be11-d8f3d016e005",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Discussion ressources",
@@ -361,6 +364,7 @@
               "element": {
                 "id": "d281c4c1-9718-4e6d-a6b0-508f4489fcae",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -513,6 +517,7 @@
               "element": {
                 "id": "9fc41408-a61d-4e6c-aee4-7f0ede9102a4",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Discussion supercalculateurs",
@@ -556,6 +561,7 @@
               "element": {
                 "id": "c0e5914e-2508-4b40-aae1-2797c0247b8c",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 0,
@@ -755,6 +761,7 @@
               "element": {
                 "id": "9cddd982-33fa-4b0f-8283-16daf5666a7b",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "transition bons usages",
@@ -1151,6 +1158,7 @@
               "element": {
                 "id": "6a18255a-eb6c-411f-9989-78fb97cf69e7",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "calcul-impact",
                 "props": {
                   "titleLevel": 0

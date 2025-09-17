@@ -37,6 +37,7 @@
               "element": {
                 "id": "dad28e9d-425d-4637-b848-052231cb225f",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Arthur demande à Lila comment reconnaître l'ail des ours",
@@ -598,9 +599,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -806,6 +805,7 @@
               "element": {
                 "id": "c9e931ea-9eba-4cd2-b2ff-a6812c4a88f8",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",

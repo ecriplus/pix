@@ -287,6 +287,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                       element: {
                         id: 'cfec5a0e-2ed5-462f-8974-e5ca25faae39',
                         type: 'custom',
+                        instruction: 'Instruction',
                         tagName: 'message-conversation',
                         props: {
                           title: 'Confessions nocturnes',

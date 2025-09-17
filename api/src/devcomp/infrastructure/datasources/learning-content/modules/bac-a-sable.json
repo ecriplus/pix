@@ -666,6 +666,7 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae39",
                 "type": "custom",
+                "instruction": "Extrait de conversation",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Confessions nocturnes",
@@ -755,6 +756,7 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae38",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "image-quiz",
                 "props": {
                   "name": "Liste d'applications",

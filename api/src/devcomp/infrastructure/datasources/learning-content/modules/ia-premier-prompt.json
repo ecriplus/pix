@@ -30,6 +30,7 @@
               "element": {
                 "id": "09245327-cd08-4874-b006-1018c3b6b419",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Asso Yoga à Roulette",
@@ -182,6 +183,7 @@
               "element": {
                 "id": "14db3b92-0b6a-4bf7-966a-17798f0bedd1",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "messages": [
@@ -292,6 +294,7 @@
               "element": {
                 "id": "19a2c102-618f-497d-b68f-48a9bb72d1d7",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "messages": [

@@ -38,6 +38,7 @@
               "element": {
                 "id": "35c7d03b-8c62-40e6-a31d-5111e8dcc46a",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Nathan et Asma",
@@ -115,6 +116,7 @@
                     {
                       "id": "a2084553-6928-4931-b9e3-da97a0c799ed",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -137,6 +139,7 @@
                     {
                       "id": "665456ec-39dd-4caa-babc-ef3be6a778ea",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -178,6 +181,7 @@
                     {
                       "id": "7658ffd4-cf56-45ae-8700-c7abc8d256a3",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -200,6 +204,7 @@
                     {
                       "id": "9980a9f9-2ab7-40f1-81d5-c20054bf47dd",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -241,6 +246,7 @@
                     {
                       "id": "dac60e1e-dce0-4c4f-9862-071fd607acec",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -263,6 +269,7 @@
                     {
                       "id": "32dbbfcb-22ee-469f-8ca8-58b1a8d69bae",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -304,6 +311,7 @@
                     {
                       "id": "558833ee-bd2e-400c-8da2-9479b29f30c9",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -326,6 +334,7 @@
                     {
                       "id": "99933780-e248-4aeb-a718-9344a809e839",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -511,6 +520,7 @@
               "element": {
                 "id": "4a6674be-8c5a-4c01-852e-ccc1c9c80138",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-compare-messages",
                 "props": {
                   "conversation1": {
