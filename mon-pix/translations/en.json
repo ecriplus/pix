@@ -1654,7 +1654,7 @@
       "title": "Create your Account"
     },
     "modulix": {
-      "beta-banner": "This module is in beta version. You can send us your feedback at the end of this module to help us improve it.",
+      "beta-banner": "This module is in beta version. Changes may be made over time.",
       "buttons": {
         "activity": {
           "retry": "Retry",

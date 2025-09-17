@@ -1640,7 +1640,7 @@
       "title": "Conectarse a Pix"
     },
     "modulix": {
-      "beta-banner": "Este módulo está en versión beta. Puede enviarnos sus comentarios al final de este módulo para ayudarnos a mejorarlo.",
+      "beta-banner": "Este módulo está en versión beta. Se podrán realizar modificaciones a lo largo del tiempo.",
       "buttons": {
         "activity": {
           "retry": "Volver a intentarlo",
