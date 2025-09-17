@@ -1,5 +1,10 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
+export const CombinedCourseItemTypes = {
+  CAMPAIGN: 'CAMPAIGN',
+  FORMATION: 'FORMATION',
+  MODULE: 'MODULE',
+};
 export default class CombinedCourseItem extends Model {
   @attr('string') reference;
   @attr('string') title;
@@ -11,12 +16,14 @@ export default class CombinedCourseItem extends Model {
   @attr('string') image;
 
   get route() {
-    return this.type === 'CAMPAIGN' ? 'campaigns' : 'module';
+    return this.type === CombinedCourseItemTypes.CAMPAIGN ? 'campaigns' : 'module';
   }
 
   get iconUrl() {
-    if (this.type === 'CAMPAIGN') return 'https://assets.pix.org/combined-courses/campaign-icon.svg';
-    if (this.type === 'FORMATION') return 'https://assets.pix.org/combined-courses/picto_formation_vector.svg';
+    if (this.type === CombinedCourseItemTypes.CAMPAIGN)
+      return 'https://assets.pix.org/combined-courses/campaign-icon.svg';
+    if (this.type === CombinedCourseItemTypes.FORMATION)
+      return 'https://assets.pix.org/combined-courses/picto_formation_vector.svg';
 
     return this.image;
   }
