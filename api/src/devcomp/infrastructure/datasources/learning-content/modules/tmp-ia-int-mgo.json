@@ -29,7 +29,7 @@
               "element": {
                 "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
                 "type": "text",
-                "content": "<p>Voici un logiciel d’IA générative de texte. ✨<br>Testez et observez ses réponses à différents prompts. 🔍</p>"
+                "content": "<p>Observez les réponses de ce logiciel d'IA générative. 🔍</p>"
               }
             },
             {
@@ -107,7 +107,7 @@
               "element": {
                 "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
                 "type": "text",
-                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Grâce à<strong> trois étapes</strong>.&nbsp;Découvrez la première.</p>"
+                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Son apprentissage se fait pas à pas… en 3 étapes. \uD83D\uDC63 </p>"
               }
             }
           ]
@@ -142,28 +142,28 @@
                     "id": "1",
                     "content": "<p>Elle apprend par cœur les phrases à répondre à chaque question.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Elle s'entraîne à parler grâce à des prédictions statistiques.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Exactement !&nbsp;</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Exactement !&nbsp;</strong><br>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Elle s’entraîne en remplissant des milliards de textes à trous.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Exactement !</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Exactement !</strong><br>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Elle retient toutes les expressions humaines avec des moyens mnémotechniques.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Eh non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   }
                 ],
@@ -188,13 +188,13 @@
             {
               "type": "element",
               "element": {
-                "id": "0acbffc6-34cc-414a-a148-194e2af62b37",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/placeholder-video2.jpg",
-                "alt": "place holder",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
+                "id": "8f401707-6e99-46d9-a6b7-1efa74412d91",
+                "type": "video",
+                "title": "Le pré entraînement des IA génératives",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/video_IAGenFonction_IND.mp4",
+                "poster": "https://assets.pix.org/modules/IAGenFonction_IND/vdo-poster-IAGenFonction_IND.jpg",
+                "subtitles": "https://assets.pix.org/modules/IAGenFonction_IND/vdo-subs-IAGenFonction_IND.vtt",
+                "transcription": "<p>Pour entraîner une IA générative, la première étape s’appelle le « pré-entraînement ».</p><p>On commence par faire lire à l'IA générative des milliards de textes, venant de toutes sortes de sources : des livres, des sites web, des encyclopédies, des articles scientifiques, etc.</p><p>L’IA générative transforme ces textes en textes à trous en cachant des mots, comme ici dans la phrase : « Les pyramides de Gizeh se trouvent en... ? » <br>Au début, l’IA générative essaie de trouver le mot manquant au hasard.</p><p>Si elle se trompe, pas de problème : elle se corrige et recommence, jusqu’à réussir. Elle s’entraîne dur ! Petit à petit, elle devient très douée à ce jeu.<br>En faisant cet exercice encore et encore, l’IA enrichit son vocabulaire sur le monde. Elle retient les mots, et elle apprend à les relier entre eux, comme dans les textes qu’elle a utilisés. <br>Elle comprend peu à peu quels mots vont bien ensemble, comment former des phrases correctes, et comment rester dans le sujet.</p><p>En revanche, elle ne vérifie pas si ce qu’elle écrit est vrai. Elle se contente de reproduire ce qui semble cohérent d’après ce qu’elle a lu.<br>À la fin du pré-entraînement, l’IA générative est capable de prolonger un texte en choisissant les mots les plus probables, pour qu’il ressemble à ce qu’un humain aurait pu écrire.</p>"
               }
             }
           ]
@@ -224,7 +224,7 @@
               "element": {
                 "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
                 "type": "text",
-                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p>\n<p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
+                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p><p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
               }
             },
             {
@@ -645,7 +645,7 @@
                     {
                       "id": "7f96ac82-49dc-4f78-9b07-a573201f251c",
                       "type": "qcu",
-                      "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
+                      "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -681,7 +681,7 @@
                     {
                       "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
                       "type": "qcu",
-                      "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
+                      "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -717,7 +717,7 @@
                     {
                       "id": "dbf20a47-869f-4580-ac66-60b640f40f21",
                       "type": "qcu",
-                      "instruction": "<p>Pendant l'étape d'alignement, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
+                      "instruction": "<p>Pendant l'étape d'alignement, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
                       "proposals": [
                         {
                           "id": "1",
