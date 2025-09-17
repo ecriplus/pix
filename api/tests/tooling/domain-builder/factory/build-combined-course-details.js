@@ -6,7 +6,7 @@ import { Quest } from '../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder } from '../domain-builder.js';
 
 function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
-  const campaign = domainBuilder.buildCampaign({ name: 'diagnostique', code: 'ABCDIAG1' });
+  const campaign = domainBuilder.buildCampaign({ title: 'diagnostique', code: 'ABCDIAG1' });
   const module = new Module({
     id: 7,
     slug: 'slug',
