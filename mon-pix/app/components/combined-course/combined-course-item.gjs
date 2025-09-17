@@ -20,13 +20,14 @@ const Content = <template>
       </div>
       <div class="combined-course-item__text">
         <div class="combined-course-item__title">{{@title}}</div>
-        <div class="combined-course-item__description">
-          <span>{{yield to="description"}}</span>
-          <span class="combined-course-item__duration">
-            {{yield to="duration"}}
-          </span>
-        </div>
-
+        {{#if @displayDuration}}
+          <div class="combined-course-item__description">
+            <span>{{yield to="description"}}</span>
+            <span class="combined-course-item__duration">
+              {{yield to="duration"}}
+            </span>
+          </div>
+        {{/if}}
       </div>
 
     </div>
@@ -49,7 +50,7 @@ const Content = <template>
 </template>;
 
 const Duration = <template>
-  <PixIcon @name="time" class="combined-course-item__duration__icon" /><span>{{t
+  <PixIcon @name="acute" class="combined-course-item__duration__icon" /><span>{{t
       "pages.combined-courses.items.approximatelySymbol"
     }}{{@item.duration}}
     {{t "pages.combined-courses.items.durationUnit"}}</span>
@@ -62,6 +63,7 @@ const Duration = <template>
       @isLocked={{true}}
       @iconUrl={{@item.iconUrl}}
       class="combined-course-item--formation"
+      @displayDuration={{true}}
     >
       <:description>
         <p>{{t "pages.combined-courses.items.formation.description"}}</p>
@@ -69,7 +71,12 @@ const Duration = <template>
     </Content>
   {{else}}
     {{#if @isLocked}}
-      <Content @title={{@item.title}} @isLocked={{true}} @iconUrl={{@item.iconUrl}}>
+      <Content
+        @title={{@item.title}}
+        @isLocked={{true}}
+        @iconUrl={{@item.iconUrl}}
+        @displayDuration={{eq @item.type "MODULE"}}
+      >
         <:duration>
           {{#if @item.duration}}<Duration @item={{@item}} />{{/if}}
         </:duration>
@@ -82,7 +89,12 @@ const Duration = <template>
         @query={{hash redirection=@item.redirection}}
         disabled
       >
-        <Content @title={{@item.title}} @isCompleted={{@item.isCompleted}} @iconUrl={{@item.iconUrl}}>
+        <Content
+          @title={{@item.title}}
+          @isCompleted={{@item.isCompleted}}
+          @iconUrl={{@item.iconUrl}}
+          @displayDuration={{eq @item.type "MODULE"}}
+        >
           <:duration>
             {{#if @item.duration}}
               <Duration @item={{@item}} />
@@ -90,7 +102,7 @@ const Duration = <template>
           </:duration>
           <:blockEnd>
             {{#if @isNextItemToComplete}}
-              <PixTag @color="purple-light" class="combined-course-item__current-item-tag">{{t
+              <PixTag @color="purple-light" @plainIcon={{true}} class="combined-course-item__current-item-tag">{{t
                   "pages.combined-courses.items.tagText"
                 }}
                 <PixIcon @name="distance" @ariaHidden={{true}} /></PixTag>

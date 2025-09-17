@@ -368,7 +368,7 @@ module('Integration | Component | combined course', function (hooks) {
       <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
     // then
-    await click(screen.getByRole('button', { name: 'Reprendre mon parcours' }));
+    await click(screen.getByRole('button', { name: t('pages.combined-courses.content.resume-button') }));
     assert.ok(
       router.transitionTo.calledWith('module', 'mon-module', { queryParams: { redirection: 'une+url+chiffree' } }),
     );
@@ -407,7 +407,7 @@ module('Integration | Component | combined course', function (hooks) {
       <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
 
     // then
-    assert.ok(screen.getByRole('button', { name: 'Reprendre mon parcours' }));
+    assert.ok(screen.getByRole('button', { name: t('pages.combined-courses.content.resume-button') }));
     assert.notOk(screen.queryByRole('link', { name: 'mon module' }));
   });
   module('when participation is completed', function () {
