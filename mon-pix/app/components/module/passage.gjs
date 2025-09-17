@@ -115,7 +115,6 @@ export default class ModulePassage extends Component {
     this.pixMetrics.trackEvent(
       `Click sur le bouton suivant de l'étape ${currentStepPosition} du stepper dans le grain : ${currentGrain.id}`,
       {
-        disabled: true,
         category: 'Modulix',
         action: `Passage du module : ${this.args.module.slug}`,
       },
@@ -146,7 +145,6 @@ export default class ModulePassage extends Component {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
     this.pixMetrics.trackEvent(`Click sur le bouton Terminer du grain : ${grainId}`, {
-      disabled: true,
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
@@ -172,7 +170,6 @@ export default class ModulePassage extends Component {
   @action
   async onElementRetry(answerData) {
     this.pixMetrics.trackEvent(`Click sur le bouton réessayer de l'élément : ${answerData.element.id}`, {
-      disabled: true,
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
@@ -181,7 +178,6 @@ export default class ModulePassage extends Component {
   @action
   async onImageAlternativeTextOpen(imageElementId) {
     this.pixMetrics.trackEvent(`Click sur le bouton alternative textuelle : ${imageElementId}`, {
-      disabled: true,
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
@@ -197,7 +193,6 @@ export default class ModulePassage extends Component {
   @action
   async onVideoTranscriptionOpen(videoElementId) {
     this.pixMetrics.trackEvent(`Click sur le bouton transcription : ${videoElementId}`, {
-      disabled: true,
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
@@ -232,7 +227,6 @@ export default class ModulePassage extends Component {
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
     this.pixMetrics.trackEvent(`${eventToggle} de l'élément Expand : ${elementId}`, {
-      disabled: true,
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
