@@ -7,7 +7,7 @@ import {
   QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
-import { ImageAlternativeTextOpenedEvent } from '../models/passage-events/events.js';
+import { ImageAlternativeTextOpenedEvent, VideoTranscriptionOpenedEvent } from '../models/passage-events/events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -61,6 +61,8 @@ class PassageEventFactory {
         return new QCUDeclarativeAnsweredEvent(eventData);
       case 'QCU_DISCOVERY_ANSWERED':
         return new QCUDiscoveryAnsweredEvent(eventData);
+      case 'VIDEO_TRANSCRIPTION_OPENED':
+        return new VideoTranscriptionOpenedEvent(eventData);
       default:
         throw new DomainError(`Passage event with type ${eventData.type} does not exist`);
     }
