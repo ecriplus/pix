@@ -412,36 +412,31 @@
                       "name": "Agriculture",
                       "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-champs.svg",
-                      "titleLevel": "1"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-champs.svg"
                     },
                     {
                       "name": "Transport",
                       "description": "Lecture de plaques d’immatriculation pour automatiser les péages",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-truck.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-peage.svg",
-                      "titleLevel": "1"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-peage.svg"
                     },
                     {
                       "name": "Santé",
                       "description": "Analyse de radios pour détecter des signes de cancer",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-medecine.svg",
-                      "titleLevel": "1"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-medecine.svg"
                     },
                     {
                       "name": "Culture",
                       "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-livre.svg",
-                      "titleLevel": "1"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-livre.svg"
                     },
                     {
                       "name": "Sécurité",
                       "description": "Reconnaissance des visages pour identifier des personnes autorisées",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg",
-                      "titleLevel": "1"
+                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg"
                     }
                   ]
                 }
