@@ -201,6 +201,13 @@ export default class ModulePassage extends Component {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
     });
+
+    this.passageEvents.record({
+      type: 'VIDEO_TRANSCRIPTION_OPENED',
+      data: {
+        elementId: videoElementId,
+      },
+    });
   }
 
   @action

@@ -9,7 +9,10 @@ import {
   QCUDiscoveryAnsweredEvent,
   QROCMAnsweredEvent,
 } from '../../../../../src/devcomp/domain/models/passage-events/answerable-element-events.js';
-import { ImageAlternativeTextOpenedEvent } from '../../../../../src/devcomp/domain/models/passage-events/events.js';
+import {
+  ImageAlternativeTextOpenedEvent,
+  VideoTranscriptionOpenedEvent,
+} from '../../../../../src/devcomp/domain/models/passage-events/events.js';
 import {
   FlashcardsCardAutoAssessedEvent,
   FlashcardsRectoReviewedEvent,
@@ -417,6 +420,24 @@ describe('Unit | Devcomp | Domain | Models | Block | BlockInput', function () {
 
         // then
         expect(builtEvent).to.be.instanceOf(ImageAlternativeTextOpenedEvent);
+      });
+    });
+
+    describe('when given an VIDEO_TRANSCRIPTION_OPENED event', function () {
+      it('should return an VideoTranscriptionOpened instance', function () {
+        // given
+        const rawEvent = {
+          occurredAt: new Date(),
+          passageId: 2,
+          sequenceNumber: 3,
+          elementId: 'c505e7c9-327e-4be5-9c62-ce4627b85f44',
+          type: 'VIDEO_TRANSCRIPTION_OPENED',
+        };
+        // when
+        const builtEvent = PassageEventFactory.build(rawEvent);
+
+        // then
+        expect(builtEvent).to.be.instanceOf(VideoTranscriptionOpenedEvent);
       });
     });
   });
