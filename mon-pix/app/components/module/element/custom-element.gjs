@@ -80,6 +80,8 @@ export class NormalizedProps {
         return this.normalizeImageQuizzesProps(props);
       case 'qcm-deepfake':
         return this.normalizeQcmDeepfakeProps(props);
+      case 'flip-cards':
+        return this.normalizeFlipCards(props);
       default:
         return props;
     }
@@ -99,6 +101,13 @@ export class NormalizedProps {
   }
 
   normalizeQcmDeepfakeProps(props) {
+    return {
+      ...props,
+      titleLevel: NormalizedProps.unsetNumber(props.titleLevel),
+    };
+  }
+
+  normalizeFlipCards(props) {
     return {
       ...props,
       titleLevel: NormalizedProps.unsetNumber(props.titleLevel),
