@@ -5,6 +5,11 @@ export const CombinedCourseItemTypes = {
   FORMATION: 'FORMATION',
   MODULE: 'MODULE',
 };
+
+export const CombinedCourseAssets = {
+  CAMPAIGN_ICON: 'https://assets.pix.org/combined-courses/campaign-icon.svg',
+  FORMATION_ICON: 'https://assets.pix.org/combined-courses/picto_formation_vector.svg',
+};
 export default class CombinedCourseItem extends Model {
   @attr('string') reference;
   @attr('string') title;
@@ -20,10 +25,8 @@ export default class CombinedCourseItem extends Model {
   }
 
   get iconUrl() {
-    if (this.type === CombinedCourseItemTypes.CAMPAIGN)
-      return 'https://assets.pix.org/combined-courses/campaign-icon.svg';
-    if (this.type === CombinedCourseItemTypes.FORMATION)
-      return 'https://assets.pix.org/combined-courses/picto_formation_vector.svg';
+    if (this.type === CombinedCourseItemTypes.CAMPAIGN) return CombinedCourseAssets.CAMPAIGN_ICON;
+    if (this.type === CombinedCourseItemTypes.FORMATION) return CombinedCourseAssets.FORMATION_ICON;
 
     return this.image;
   }

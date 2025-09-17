@@ -1,5 +1,5 @@
 import { setupTest } from 'ember-qunit';
-import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
+import { CombinedCourseAssets, CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 import { module, test } from 'qunit';
 
 module('Unit | Model | Combined Course Item', function (hooks) {
@@ -23,7 +23,7 @@ module('Unit | Model | Combined Course Item', function (hooks) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
         type: CombinedCourseItemTypes.CAMPAIGN,
       });
-      assert.strictEqual(combinedCourseItem.iconUrl, 'https://assets.pix.org/combined-courses/campaign-icon.svg');
+      assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.CAMPAIGN_ICON);
     });
   });
 
@@ -50,10 +50,7 @@ module('Unit | Model | Combined Course Item', function (hooks) {
         type: CombinedCourseItemTypes.FORMATION,
         image: 'my-module-url',
       });
-      assert.strictEqual(
-        combinedCourseItem.iconUrl,
-        'https://assets.pix.org/combined-courses/picto_formation_vector.svg',
-      );
+      assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.FORMATION_ICON);
     });
   });
 });

@@ -5,8 +5,7 @@ import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
-
-import { CombinedCourseItemTypes } from '../../models/combined-course-item';
+import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 const Content = <template>
   <div class="combined-course-item" ...attributes>
