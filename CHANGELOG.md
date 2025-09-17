@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.211.0](https://github.com/1024pix/pix/compare/v5.210.0...v5.211.0) (2025-09-17)
+
+### :rocket: Amélioration
+
+- [#13593](https://github.com/1024pix/pix/pull/13593) Module IA conso POI capacity-calculation et quelques modifs
+
 # [5.210.0](https://github.com/1024pix/pix/compare/v5.209.0...v5.210.0) (2025-09-17)
 
 ### :rocket: Amélioration
