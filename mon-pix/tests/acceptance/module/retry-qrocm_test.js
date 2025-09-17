@@ -36,8 +36,19 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
               content: "le fournisseur d'adresse mail",
             },
           ],
+          solutions: ['1'],
         },
       ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: 'Good job!',
+        },
+        invalid: {
+          state: 'Wrong!',
+          diagnosis: 'Too Bad!',
+        },
+      },
     };
 
     const section = server.create('section', {
@@ -62,13 +73,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
       title: 'Bien écrire son adresse mail',
       isBeta: true,
       sections: [section],
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: 'Faux' },
-      status: 'ko',
-      solution: { 'premiere-partie': '2' },
     });
 
     // when
@@ -121,7 +125,7 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
     );
     await click(qrocmVerifyButtonCameBack);
 
-    assert.strictEqual(screen.queryByRole('status').innerText, 'Faux');
+    assert.strictEqual(screen.queryByRole('status').innerText, 'Wrong!\nToo Bad!');
   });
 
   test('after retrying a Qrocm, it display an error message if Qrocm is validated without response', async function (assert) {
@@ -144,6 +148,7 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
           placeholder: '',
           ariaLabel: 'Réponse 1',
           defaultValue: '',
+          solutions: ['@'],
         },
         {
           input: 'premiere-partie',
@@ -162,8 +167,19 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
               content: "le fournisseur d'adresse mail",
             },
           ],
+          solutions: ['1'],
         },
       ],
+      feedbacks: {
+        valid: {
+          state: 'Correct!',
+          diagnosis: 'Good job!',
+        },
+        invalid: {
+          state: 'Wrong!',
+          diagnosis: 'Too Bad!',
+        },
+      },
     };
 
     const section = server.create('section', {
@@ -188,13 +204,6 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
       title: 'Bien écrire son adresse mail',
       isBeta: true,
       sections: [section],
-    });
-
-    server.create('correction-response', {
-      id: 'elementId-1',
-      feedback: { state: 'Faux' },
-      status: 'ko',
-      solution: { symbole: '@', 'premiere-partie': '2' },
     });
 
     // when

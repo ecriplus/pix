@@ -15,7 +15,7 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
-
+  @tracked currentCorrection;
   @service passageEvents;
 
   constructor() {
@@ -26,6 +26,10 @@ export default class ModuleQrocm extends ModuleElement {
         this.selectedValues[proposal.input] = proposal.defaultValue;
       }
     });
+  }
+
+  get correction() {
+    return this.currentCorrection;
   }
 
   get canValidateElement() {
@@ -47,6 +51,7 @@ export default class ModuleQrocm extends ModuleElement {
 
   resetAnswers() {
     this.selectedValues = {};
+    this.currentCorrection = null;
   }
 
   get formattedProposals() {
@@ -75,11 +80,32 @@ export default class ModuleQrocm extends ModuleElement {
     this.#updateSelectedValues(block, value);
   }
 
+  get answerIsValid() {
+    const proposalsWithSolution = this.element.proposals.filter(({ type }) => ['input', 'select'].includes(type));
+    return this.userResponse.every((response) => {
+      const matchingInput = proposalsWithSolution.find((proposal) => proposal.input === response.input);
+      return matchingInput && matchingInput.solutions.includes(response.answer);
+    });
+  }
+
   @action
   async onAnswer(event) {
-    await super.onAnswer(event);
+    super.onAnswer(event);
 
-    const status = this.answerIsValid ? 'ok' : 'ko';
+    if (this.shouldDisplayRequiredMessage === true) {
+      return;
+    }
+
+    const answerIsValid = this.answerIsValid;
+    const status = answerIsValid ? 'ok' : 'ko';
+
+    this.currentCorrection = {
+      feedback: answerIsValid ? this.element.feedbacks.valid : this.element.feedbacks.invalid,
+      solution: this.element.solutions,
+      isOk: answerIsValid,
+      isKo: !answerIsValid,
+    };
+
     this.passageEvents.record({
       type: 'QROCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
