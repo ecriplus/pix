@@ -12,10 +12,7 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
       compare: sinon.stub().returns([]),
     };
     campaignParticipationOverviewRepository = {
-      findByUserIdWithFilters: sinon.stub().resolves({
-        campaignParticipationOverviews: [],
-        pagination: {},
-      }),
+      findByUserIdWithFilters: sinon.stub().resolves([]),
     };
     stageRepository = { getByTargetProfileIds: sinon.stub().resolves([]) };
     stageAcquisitionRepository = { getByCampaignParticipations: sinon.stub().resolves([]) };
@@ -39,7 +36,6 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
 
       // then
       sinon.assert.calledWith(campaignParticipationOverviewRepository.findByUserIdWithFilters, {
-        page: undefined,
         userId,
         states,
       });
@@ -51,13 +47,11 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
       // given
       const states = 'ONGOING';
       const userId = 1;
-      const page = {};
 
       // when
       await findUserCampaignParticipationOverviews({
         userId,
         states,
-        page,
         compareStagesAndAcquiredStages,
         campaignParticipationOverviewRepository,
         stageRepository,
@@ -66,7 +60,6 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
 
       // then
       sinon.assert.calledWith(campaignParticipationOverviewRepository.findByUserIdWithFilters, {
-        page,
         userId,
         states: ['ONGOING'],
       });
@@ -78,13 +71,11 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
       // given
       const states = ['ONGOING'];
       const userId = 1;
-      const page = {};
 
       // when
       await findUserCampaignParticipationOverviews({
         userId,
         states,
-        page,
         compareStagesAndAcquiredStages,
         campaignParticipationOverviewRepository,
         stageRepository,
@@ -93,7 +84,6 @@ describe('Unit | UseCase | find-user-campaign-participation-overviews', function
 
       // then
       sinon.assert.calledWith(campaignParticipationOverviewRepository.findByUserIdWithFilters, {
-        page,
         userId,
         states: ['ONGOING'],
       });

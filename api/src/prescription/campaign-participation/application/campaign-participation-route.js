@@ -282,10 +282,6 @@ const register = async function (server) {
             filter: Joi.object({
               states: Joi.array().required(),
             }).required(),
-            page: Joi.object({
-              number: Joi.number().integer().empty('').allow(null).optional(),
-              size: Joi.number().integer().max(200).empty('').allow(null).optional(),
-            }).default({}),
           }),
         },
         handler: campaignParticipationController.getCampaignParticipationOverviews,

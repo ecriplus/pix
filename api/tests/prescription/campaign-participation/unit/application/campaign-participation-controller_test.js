@@ -54,7 +54,6 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
     beforeEach(function () {
       const campaignParticipationOverviewSerializer = {
         serialize: sinon.stub(),
-        serializeForPaginatedList: sinon.stub(),
       };
       sinon.stub(usecases, 'findUserCampaignParticipationOverviews');
       dependencies = {
@@ -73,10 +72,10 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
         params: {
           id: userId,
         },
-        query: { filter: {}, page: {} },
+        query: { filter: {} },
       };
-      usecases.findUserCampaignParticipationOverviews.withArgs({ userId, states: undefined, page: {} }).resolves([]);
-      dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList.withArgs([]).returns({
+      usecases.findUserCampaignParticipationOverviews.withArgs({ userId, states: undefined }).resolves([]);
+      dependencies.campaignParticipationOverviewSerializer.serialize.withArgs([]).returns({
         id: 'campaignParticipationOverviews',
       });
 
@@ -91,7 +90,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       expect(response).to.deep.equal({
         id: 'campaignParticipationOverviews',
       });
-      expect(dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList).to.have.been.calledOnce;
+      expect(dependencies.campaignParticipationOverviewSerializer.serialize).to.have.been.calledOnce;
     });
 
     it('should forward state and page query parameters', async function () {
@@ -109,13 +108,10 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
           filter: {
             states: 'ONGOING',
           },
-          page: { number: 1, size: 10 },
         },
       };
-      usecases.findUserCampaignParticipationOverviews
-        .withArgs({ userId, states: 'ONGOING', page: { number: 1, size: 10 } })
-        .resolves([]);
-      dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList.withArgs([]).returns({
+      usecases.findUserCampaignParticipationOverviews.withArgs({ userId, states: 'ONGOING' }).resolves([]);
+      dependencies.campaignParticipationOverviewSerializer.serialize.withArgs([]).returns({
         id: 'campaignParticipationOverviews',
       });
 
@@ -130,7 +126,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       expect(response).to.deep.equal({
         id: 'campaignParticipationOverviews',
       });
-      expect(dependencies.campaignParticipationOverviewSerializer.serializeForPaginatedList).to.have.been.calledOnce;
+      expect(dependencies.campaignParticipationOverviewSerializer.serialize).to.have.been.calledOnce;
     });
   });
 

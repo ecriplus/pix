@@ -1,9 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
@@ -38,6 +36,60 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
       assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.tag.finished')));
       assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.see-more')));
       assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.finished-at', { date: '18/12/2020' })));
+    });
+
+    module('Conditional Button', function () {
+      test('should redirect to campaigns', async function (assert) {
+        // given
+        this.owner.lookup('service:router');
+        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
+          isShared: true,
+          createdAt: '2020-12-10T15:16:20.109Z',
+          sharedAt: '2020-12-18T15:16:20.109Z',
+          status: 'SHARED',
+          campaignTitle: 'My campaign',
+          campaignType: 'CAMPAIGN',
+          campaignCode: '12345',
+          organizationName: 'My organization',
+        });
+        this.set('campaignParticipationOverview', campaignParticipationOverview);
+
+        // when
+        const screen = await render(
+          hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('link', { name: t('pages.campaign-participation-overview.card.see-more') }))
+          .hasAttribute('href', '/campagnes/12345');
+      });
+
+      test('should redirect to combined courses', async function (assert) {
+        // given
+        this.owner.lookup('service:router');
+        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
+          isShared: true,
+          createdAt: '2020-12-10T15:16:20.109Z',
+          sharedAt: '2020-12-18T15:16:20.109Z',
+          status: 'SHARED',
+          campaignTitle: 'My campaign',
+          campaignType: 'COMBINED_COURSE',
+          campaignCode: '12345',
+          organizationName: 'My organization',
+        });
+        this.set('campaignParticipationOverview', campaignParticipationOverview);
+
+        // when
+        const screen = await render(
+          hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
+        );
+
+        // then
+        assert
+          .dom(screen.getByRole('link', { name: t('pages.campaign-participation-overview.card.see-more') }))
+          .hasAttribute('href', '/parcours/12345');
+      });
     });
 
     module('when the campaign has no stages', function () {
@@ -134,44 +186,6 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
 
         // then
         assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.see-more')));
-      });
-    });
-
-    module('#onClick', function () {
-      test('should push event on click', async function (assert) {
-        // given
-        const router = this.owner.lookup('service:router');
-        router.transitionTo = sinon.stub();
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
-
-        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
-          isShared: true,
-          createdAt: '2020-12-10T15:16:20.109Z',
-          sharedAt: '2020-12-18T15:16:20.109Z',
-          status: 'SHARED',
-          campaignTitle: 'My campaign',
-          campaignCode: 'qwertyui',
-          masteryRate: '0.70',
-          validatedStagesCount: 5,
-          totalStagesCount: 7,
-        });
-        this.set('campaignParticipationOverview', campaignParticipationOverview);
-
-        // when
-        const screen = await render(
-          hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
-        );
-
-        await click(screen.getByRole('button', { name: 'Voir le détail' }));
-
-        // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Voir le détail d'une participation partagée`, {
-          category: 'Campaign participation',
-          action: `Voir le détail d'une participation partagée`,
-          disabled: true,
-        });
-        assert.ok(true);
       });
     });
   });

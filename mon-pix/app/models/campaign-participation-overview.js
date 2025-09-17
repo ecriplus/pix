@@ -14,9 +14,10 @@ export default class CampaignParticipationOverviews extends Model {
   @attr('number') totalStagesCount;
   @attr('number') validatedStagesCount;
   @attr('boolean') canRetry;
+  @attr('string') campaignType;
 
   get cardStatus() {
-    if (this.isShared) return 'ENDED';
+    if (this.isShared || this.status === 'COMPLETED') return 'ENDED';
     else if (this.disabledAt) return 'DISABLED';
     else if (this.status === 'TO_SHARE') return 'TO_SHARE';
     else return 'ONGOING';

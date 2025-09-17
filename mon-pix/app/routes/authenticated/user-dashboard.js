@@ -8,11 +8,8 @@ export default class UserDashboard extends Route {
 
   async model() {
     const user = this.currentUser.user;
-    const maximumDisplayed = 9;
     const queryParams = {
       userId: user.id,
-      'page[number]': 1,
-      'page[size]': maximumDisplayed,
       'filter[states]': ['ONGOING', 'TO_SHARE'],
     };
     const campaignParticipationOverviews = await this.store.query('campaign-participation-overview', queryParams);

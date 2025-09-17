@@ -1,12 +1,12 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
-import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
+import { eq } from 'ember-truth-helpers';
 
 export default class Ended extends Component {
   <template>
@@ -25,31 +25,34 @@ export default class Ended extends Component {
         </time>
       </div>
       <section class="campaign-participation-overview-card-content">
-        <div class="campaign-participation-overview-card-content__content">
-          {{#if this.hasStages}}
-            <PixStars
-              @count={{this.count}}
-              @total={{this.total}}
-              @alt={{t "pages.campaign-participation-overview.card.stages" count=this.count total=this.total}}
-              @color="yellow"
-            />
-          {{else}}
-            <p>
-              {{t "pages.campaign-participation-overview.card.results" result=@model.masteryRate}}
-            </p>
-          {{/if}}
-        </div>
-        <PixButton
+        {{#unless (eq @model.campaignType "COMBINED_COURSE")}}
+          <div class="campaign-participation-overview-card-content__content">
+            {{#if this.hasStages}}
+              <PixStars
+                @count={{this.count}}
+                @total={{this.total}}
+                @alt={{t "pages.campaign-participation-overview.card.stages" count=this.count total=this.total}}
+                @color="yellow"
+              />
+            {{else}}
+              <p>
+                {{t "pages.campaign-participation-overview.card.results" result=@model.masteryRate}}
+              </p>
+            {{/if}}
+          </div>
+        {{/unless}}
+        <PixButtonLink
           class="campaign-participation-overview-card-content__action"
+          @route={{if (eq @model.campaignType "COMBINED_COURSE") "combined-courses" "campaigns.entry-point"}}
+          @model={{@model.campaignCode}}
           @variant={{if @model.canRetry "primary" "secondary"}}
-          @triggerAction={{this.onClick}}
         >
           {{#if @model.canRetry}}
             {{t "pages.campaign-participation-overview.card.retry"}}
           {{else}}
             {{t "pages.campaign-participation-overview.card.see-more"}}
           {{/if}}
-        </PixButton>
+        </PixButtonLink>
       </section>
     </PixBlock>
   </template>
@@ -66,15 +69,5 @@ export default class Ended extends Component {
 
   get total() {
     return this.args.model.totalStagesCount - 1;
-  }
-
-  @action
-  onClick() {
-    this.pixMetrics.trackEvent(`Voir le détail d'une participation partagée`, {
-      disabled: true,
-      category: 'Campaign participation',
-      action: `Voir le détail d'une participation partagée`,
-    });
-    this.router.transitionTo('campaigns.entry-point', this.args.model.campaignCode);
   }
 }

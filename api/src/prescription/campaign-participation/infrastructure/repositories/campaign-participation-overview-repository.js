@@ -1,12 +1,14 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { CombinedCourseParticipationStatuses } from '../../../../prescription/shared/domain/constants.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticipationOverview } from '../../domain/read-models/CampaignParticipationOverview.js';
 
-const findByUserIdWithFilters = async function ({ userId, states, page }) {
-  const queryBuilder = _getQueryBuilder(function (qb) {
+const findByUserIdWithFilters = async function ({ userId, states }) {
+  const combinedCourseQueryBuilder = _getCombinedCoursesParticipations({ userId });
+
+  const campaignQueryBuilder = _getQueryBuilder(function (qb) {
     qb.where('campaign-participations.userId', userId).whereNotExists(function () {
       this.select(knex.raw('1'))
         .from('quests')
@@ -17,19 +19,15 @@ const findByUserIdWithFilters = async function ({ userId, states, page }) {
   });
 
   if (states && states.length > 0) {
-    _filterByStates(queryBuilder, states);
+    _filterByStates(campaignQueryBuilder, states);
+    _filterByStates(combinedCourseQueryBuilder, states);
   }
-
-  const { results, pagination } = await fetchPage({
-    queryBuilder,
-    paginationParams: page,
-  });
-  return {
-    campaignParticipationOverviews: results.map(
-      (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),
-    ),
-    pagination,
-  };
+  const campaignResults = await campaignQueryBuilder;
+  const combinedCourseResults = await combinedCourseQueryBuilder;
+  const results = [...combinedCourseResults, ...campaignResults];
+  return results.map(
+    (campaignParticipationOverview) => new CampaignParticipationOverview(campaignParticipationOverview),
+  );
 };
 
 const findByOrganizationLearnerId = async ({ organizationLearnerId }) => {
@@ -86,6 +84,32 @@ function _getQueryBuilder(callback) {
     .orderBy('createdAt', 'DESC');
 }
 
+function _getCombinedCoursesParticipations({ userId }) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
+    .with('combined_course_participation_overviews', (qb) => {
+      qb.select({
+        id: 'combined_course_participations.id',
+        campaignCode: 'quests.code',
+        campaignTitle: 'quests.name',
+        organizationName: 'organizations.name',
+        status: 'combined_course_participations.status',
+        createdAt: 'combined_course_participations.createdAt',
+        participationState: _computeCombinedCourseParticipationState(),
+        updatedAt: 'combined_course_participations.updatedAt',
+        campaignType: knexConn.raw(`'COMBINED_COURSE'`),
+      })
+        .from('combined_course_participations')
+        .join('quests', 'combined_course_participations.questId', 'quests.id')
+        .join('organizations', 'quests.organizationId', 'organizations.id')
+        .whereIn('combined_course_participations.organizationLearnerId', function () {
+          this.select('id').from('organization-learners').where('userId', userId);
+        });
+    })
+    .from('combined_course_participation_overviews')
+    .orderByRaw(_computeCombinedCourseParticipationOrder());
+}
+
 function _computeCampaignParticipationState() {
   return knex.raw(
     `
@@ -100,6 +124,17 @@ function _computeCampaignParticipationState() {
   );
 }
 
+function _computeCombinedCourseParticipationState() {
+  return knex.raw(
+    `
+  CASE
+    WHEN combined_course_participations.status = ? THEN 'ONGOING'
+    WHEN combined_course_participations.status = ?  THEN 'ENDED'
+  END`,
+    [CombinedCourseParticipationStatuses.STARTED, CombinedCourseParticipationStatuses.COMPLETED],
+  );
+}
+
 function _computeCampaignParticipationOrder() {
   return `
   CASE
@@ -107,6 +142,14 @@ function _computeCampaignParticipationOrder() {
     WHEN "participationState" = 'ONGOING'  THEN 2
     WHEN "participationState" = 'ENDED'    THEN 3
     WHEN "participationState" = 'DISABLED' THEN 4
+  END`;
+}
+
+function _computeCombinedCourseParticipationOrder() {
+  return `
+  CASE
+    WHEN "participationState" = 'ONGOING'  THEN 1
+    WHEN "participationState" = 'ENDED'    THEN 2
   END`;
 }
 

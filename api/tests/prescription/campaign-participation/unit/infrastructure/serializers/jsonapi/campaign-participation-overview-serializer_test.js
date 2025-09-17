@@ -6,7 +6,7 @@ import {
 } from '../../../../../../../src/prescription/shared/domain/constants.js';
 import { expect } from '../../../../../../test-helper.js';
 
-const { SHARED, STARTED } = CampaignParticipationStatuses;
+const { SHARED } = CampaignParticipationStatuses;
 
 describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializer', function () {
   describe('#serialize', function () {
@@ -47,6 +47,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
             'validated-stages-count': 2,
             'total-stages-count': 3,
             'can-retry': false,
+            'campaign-type': CampaignTypes.ASSESSMENT,
           },
         },
       };
@@ -100,105 +101,6 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-overview-serializ
 
       // then
       expect(json.data.attributes['can-retry']).to.be.false;
-    });
-  });
-
-  describe('#serializeForPaginatedList', function () {
-    it('should call serialize method by destructuring passed parameter', function () {
-      // given
-      const campaignParticipationOverviews = [
-        new CampaignParticipationOverview({
-          id: 6,
-          status: STARTED,
-          sharedAt: new Date('2018-02-07T17:15:44Z'),
-          createdAt: new Date('2018-02-06T17:15:44Z'),
-          organizationName: 'My organization 1',
-          campaignCode: '4567',
-          campaignTitle: 'My campaign 1',
-          campaignArchivedAt: null,
-          masteryRate: null,
-          totalStagesCount: 0,
-          validatedStagesCount: null,
-          isCampaignMultipleSendings: false,
-          isOrganizationLearnerActive: true,
-          campaignType: CampaignTypes.ASSESSMENT,
-        }),
-
-        new CampaignParticipationOverview({
-          id: 7,
-          status: STARTED,
-          sharedAt: new Date('2018-02-10T17:30:44Z'),
-          createdAt: new Date('2018-02-09T13:15:44Z'),
-          organizationName: 'My organization 2',
-          campaignCode: '4567',
-          campaignTitle: 'My campaign 2',
-          campaignArchivedAt: null,
-          masteryRate: null,
-          totalStagesCount: 0,
-          validatedStagesCount: null,
-          isCampaignMultipleSendings: false,
-          isOrganizationLearnerActive: true,
-          campaignType: CampaignTypes.ASSESSMENT,
-        }),
-      ];
-      const pagination = {
-        page: {
-          number: 1,
-          pageSize: 2,
-        },
-      };
-      const parameters = { campaignParticipationOverviews, pagination };
-
-      // when
-      const result = serializer.serializeForPaginatedList(parameters);
-
-      // then
-      expect(result).to.deep.equal({
-        data: [
-          {
-            attributes: {
-              status: STARTED,
-              'campaign-code': '4567',
-              'campaign-title': 'My campaign 1',
-              'created-at': new Date('2018-02-06T17:15:44Z'),
-              'is-shared': false,
-              'organization-name': 'My organization 1',
-              'shared-at': new Date('2018-02-07T17:15:44Z'),
-              'mastery-rate': null,
-              'disabled-at': null,
-              'validated-stages-count': null,
-              'total-stages-count': 0,
-              'can-retry': false,
-            },
-            id: '6',
-            type: 'campaign-participation-overviews',
-          },
-          {
-            attributes: {
-              status: STARTED,
-              'campaign-code': '4567',
-              'campaign-title': 'My campaign 2',
-              'created-at': new Date('2018-02-09T13:15:44Z'),
-              'is-shared': false,
-              'organization-name': 'My organization 2',
-              'shared-at': new Date('2018-02-10T17:30:44Z'),
-              'mastery-rate': null,
-              'disabled-at': null,
-              'validated-stages-count': null,
-              'total-stages-count': 0,
-              'can-retry': false,
-            },
-            id: '7',
-            type: 'campaign-participation-overviews',
-          },
-        ],
-        meta: {
-          page: {
-            number: 1,
-            pageSize: 2,
-          },
-        },
-      });
     });
   });
 });

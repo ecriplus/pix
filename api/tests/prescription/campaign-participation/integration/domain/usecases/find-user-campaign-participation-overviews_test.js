@@ -57,7 +57,7 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       });
 
       // then
-      expect(result.campaignParticipationOverviews).to.have.lengthOf(2);
+      expect(result).to.have.lengthOf(2);
     });
 
     it('should return acquired stages', async function () {
@@ -67,10 +67,10 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       });
 
       // then
-      expect(result.campaignParticipationOverviews[0].totalStagesCount).to.equal(3);
-      expect(result.campaignParticipationOverviews[0].validatedStagesCount).to.equal(1);
-      expect(result.campaignParticipationOverviews[1].totalStagesCount).to.equal(5);
-      expect(result.campaignParticipationOverviews[1].validatedStagesCount).to.equal(1);
+      expect(result[0].totalStagesCount).to.equal(3);
+      expect(result[0].validatedStagesCount).to.equal(1);
+      expect(result[1].totalStagesCount).to.equal(5);
+      expect(result[1].validatedStagesCount).to.equal(1);
     });
   });
 
@@ -126,7 +126,7 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       });
 
       // then
-      expect(result.campaignParticipationOverviews).to.have.lengthOf(2);
+      expect(result).to.have.lengthOf(2);
     });
 
     it('should return acquired stages', async function () {
@@ -136,10 +136,10 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       });
 
       // then
-      expect(result.campaignParticipationOverviews[0].totalStagesCount).to.equal(3);
-      expect(result.campaignParticipationOverviews[0].validatedStagesCount).to.equal(1);
-      expect(result.campaignParticipationOverviews[1].totalStagesCount).to.equal(3);
-      expect(result.campaignParticipationOverviews[1].validatedStagesCount).to.equal(2);
+      expect(result[0].totalStagesCount).to.equal(3);
+      expect(result[0].validatedStagesCount).to.equal(1);
+      expect(result[1].totalStagesCount).to.equal(3);
+      expect(result[1].validatedStagesCount).to.equal(2);
     });
   });
 });
