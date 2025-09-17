@@ -198,12 +198,16 @@
             {
               "type": "element",
               "element": {
-                "id": "c5a52a17-163e-4969-8704-fab8f5ee500a",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/ia-deepfakes-videoCaroline.html",
-                "instruction": "",
-                "height": 550
+                "id": "658f3722-cf66-4fe0-9dcc-ee4ce1b6a673",
+                "type": "custom",
+                "tagName": "qcm-deepfake",
+                "props": {
+                  "titleLevel": 0,
+                  "successImage": "https://assets.pix.org/modules/deepfakes/successimage.svg",
+                  "failImage": "https://assets.pix.org/modules/deepfakes/failimage.svg",
+                  "infoImage": "https://assets.pix.org/modules/deepfakes/infoimage.svg",
+                  "searchImage": "https://assets.pix.org/modules/deepfakes/POI_deepfake.gif"
+                }
               }
             }
           ]
