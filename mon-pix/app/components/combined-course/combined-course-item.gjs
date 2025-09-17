@@ -4,11 +4,14 @@ import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
+import { eq, or } from 'ember-truth-helpers';
 import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 const Content = <template>
-  <div class="combined-course-item" ...attributes>
+  <div
+    class="combined-course-item {{if (or @isCompleted @isLocked) 'combined-course-item--ended-locked-state'}}"
+    ...attributes
+  >
     <div class="combined-course-item__content">
       <div class="combined-course-item__icon">
         {{#if @iconUrl}}
@@ -18,12 +21,14 @@ const Content = <template>
       <div class="combined-course-item__text">
         <div class="combined-course-item__title">{{@title}}</div>
         <div class="combined-course-item__description">
-          {{yield to="description"}}
+          <span>{{yield to="description"}}</span>
+          <span class="combined-course-item__duration">
+            {{yield to="duration"}}
+          </span>
         </div>
+
       </div>
-      <div class="combined-course-item__duration">
-        {{yield to="duration"}}
-      </div>
+
     </div>
     {{#if @isLocked}}
       <div class="combined-course-item__indicator--locked">
