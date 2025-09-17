@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
@@ -13,6 +14,8 @@ import player_fr from '../plyr-translation/player_fr';
 
 export default class ModulixVideoElement extends Component {
   @tracked modalIsOpen = false;
+  @service passageEvents;
+
   videoWasStarted = false;
 
   get hasSubtitles() {
@@ -52,6 +55,13 @@ export default class ModulixVideoElement extends Component {
     }
     this.videoWasStarted = true;
     this.args.onPlay({ elementId: this.args.video.id });
+
+    this.passageEvents.record({
+      type: 'VIDEO_PLAYED',
+      data: {
+        elementId: this.args.video.id,
+      },
+    });
   }
 
   <template>
