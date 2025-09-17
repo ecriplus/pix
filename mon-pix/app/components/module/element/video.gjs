@@ -54,7 +54,6 @@ export default class ModulixVideoElement extends Component {
       return;
     }
     this.videoWasStarted = true;
-    this.args.onPlay({ elementId: this.args.video.id });
 
     this.passageEvents.record({
       type: 'VIDEO_PLAYED',

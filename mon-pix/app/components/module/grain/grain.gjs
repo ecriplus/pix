@@ -276,7 +276,6 @@ export default class ModuleGrain extends Component {
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onElementAnswer={{this.onElementAnswer}}
                   @onElementRetry={{@onElementRetry}}
-                  @onVideoPlay={{@onVideoPlay}}
                   @getLastCorrectionForElement={{this.getLastCorrectionForElement}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
@@ -294,7 +293,6 @@ export default class ModuleGrain extends Component {
                   @onStepperNextStep={{@onStepperNextStep}}
                   @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-                  @onVideoPlay={{@onVideoPlay}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
                   @direction={{this.stepperDirection}}

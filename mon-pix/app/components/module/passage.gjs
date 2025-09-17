@@ -206,15 +206,6 @@ export default class ModulePassage extends Component {
   }
 
   @action
-  async onVideoPlay({ elementId }) {
-    this.pixMetrics.trackEvent(`Click sur le bouton Play : ${elementId}`, {
-      disabled: true,
-      category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
-    });
-  }
-
-  @action
   async onFileDownload({ elementId, downloadedFormat }) {
     this.pixMetrics.trackEvent(`Click sur le bouton Télécharger au format ${downloadedFormat} de ${elementId}`, {
       disabled: true,
@@ -274,7 +265,6 @@ export default class ModulePassage extends Component {
             @shouldDisplayTerminateButton={{this.grainShouldDisplayTerminateButton index}}
             @hasJustAppeared={{this.hasGrainJustAppeared index}}
             @onModuleTerminate={{this.onModuleTerminate}}
-            @onVideoPlay={{this.onVideoPlay}}
             @onFileDownload={{this.onFileDownload}}
             @onExpandToggle={{this.onExpandToggle}}
           />

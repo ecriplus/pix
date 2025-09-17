@@ -196,7 +196,6 @@ export default class ModulixPreview extends Component {
                 @shouldDisplayTerminateButton={{false}}
                 @onModuleTerminate={{this.noop}}
                 @hasJustAppeared={{false}}
-                @onVideoPlay={{this.noop}}
                 @onFileDownload={{this.noop}}
               />
             {{/each}}

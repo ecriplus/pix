@@ -144,58 +144,6 @@ module('Integration | Component | Module | Video', function (hooks) {
   });
 
   module('when the video is played', function () {
-    test('should call onPlay prop with right argument', async function (assert) {
-      // given
-      const videoElement = {
-        id: 'id',
-        url: 'https://videos.pix.fr/modulix/placeholder-video.mp4',
-        title: 'title',
-        subtitles: 'subtitles',
-        transcription: '',
-        poster: 'https://example.org/modulix/video-poster.jpg',
-      };
-      const onVideoPlayStub = sinon.stub();
-      await render(<template><ModulixVideoElement @video={{videoElement}} @onPlay={{onVideoPlayStub}} /></template>);
-      const video = find(`#${videoElement.id}`);
-
-      //  when
-      const event = new Event('play');
-      video.dispatchEvent(event);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // then
-      sinon.assert.calledWithExactly(onVideoPlayStub, {
-        elementId: videoElement.id,
-      });
-      assert.ok(true);
-    });
-
-    test('should call onPlay prop only once', async function (assert) {
-      // given
-      const videoElement = {
-        id: 'id',
-        url: 'https://videos.pix.fr/modulix/placeholder-video.mp4',
-        title: 'title',
-        subtitles: 'subtitles',
-        transcription: '',
-        poster: 'https://example.org/modulix/video-poster.jpg',
-      };
-      const onVideoPlayStub = sinon.stub();
-      await render(<template><ModulixVideoElement @video={{videoElement}} @onPlay={{onVideoPlayStub}} /></template>);
-      const video = find(`#${videoElement.id}`);
-
-      //  when
-      const event = new Event('play');
-      video.dispatchEvent(event);
-      video.dispatchEvent(event);
-      video.dispatchEvent(event);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // then
-      sinon.assert.calledOnce(onVideoPlayStub);
-      assert.ok(true);
-    });
-
     test('should record a passage event', async function (assert) {
       // given
       const videoElement = {
@@ -206,8 +154,7 @@ module('Integration | Component | Module | Video', function (hooks) {
         transcription: '',
         poster: 'https://example.org/modulix/video-poster.jpg',
       };
-      const onVideoPlayStub = sinon.stub();
-      await render(<template><ModulixVideoElement @video={{videoElement}} @onPlay={{onVideoPlayStub}} /></template>);
+      await render(<template><ModulixVideoElement @video={{videoElement}} /></template>);
       const video = find(`#${videoElement.id}`);
 
       //  when
@@ -218,6 +165,7 @@ module('Integration | Component | Module | Video', function (hooks) {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       // then
+      sinon.assert.calledOnce(passageEventRecordStub);
       sinon.assert.calledWithExactly(passageEventRecordStub, {
         type: 'VIDEO_PLAYED',
         data: {

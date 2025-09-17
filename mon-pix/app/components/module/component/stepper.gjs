@@ -216,7 +216,6 @@ export default class ModulixStepper extends Component {
                 @isHidden={{this.stepIsHidden index}}
                 @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
                 @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-                @onVideoPlay={{@onVideoPlay}}
                 @onFileDownload={{@onFileDownload}}
                 @onExpandToggle={{@onExpandToggle}}
                 @onNextButtonClick={{this.displayNextStep}}
@@ -242,7 +241,6 @@ export default class ModulixStepper extends Component {
               @isHidden={{false}}
               @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
               @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-              @onVideoPlay={{@onVideoPlay}}
               @onFileDownload={{@onFileDownload}}
               @onExpandToggle={{@onExpandToggle}}
               @onNextButtonClick={{this.displayNextStep}}
