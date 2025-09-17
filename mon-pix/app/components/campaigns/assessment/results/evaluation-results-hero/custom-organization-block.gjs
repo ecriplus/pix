@@ -57,7 +57,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
         <PixButtonLink
           class="evaluation-results-hero-organization-block__link"
           @href={{this.customButtonUrl}}
-          @variant="secondary"
+          @variant="primary"
           onclick={{this.handleCustomButtonClick}}
         >
           {{@campaign.customResultPageButtonText}}

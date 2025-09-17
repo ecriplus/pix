@@ -15,8 +15,8 @@ export default class CombinedCourseItem extends Model {
   }
 
   get iconUrl() {
-    if (this.type === 'CAMPAIGN') return '/images/combined-course/campaign-icon.svg';
-    if (this.type === 'FORMATION') return '/images/formation-book.svg';
+    if (this.type === 'CAMPAIGN') return 'https://assets.pix.org/combined-courses/campaign-icon.svg';
+    if (this.type === 'FORMATION') return 'https://assets.pix.org/combined-courses/picto_formation_vector.svg';
 
     return this.image;
   }
