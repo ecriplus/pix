@@ -571,7 +571,7 @@
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
                 "instruction": "<p>Discutez avec l’IA de Pix jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>",
                 "solution": "pix-llm-success",
-                "height": 800
+                "height": 550
               }
             },
             {
@@ -679,7 +679,7 @@
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
                 "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire, à vous de jouer !</p>",
                 "solution": "pix-llm-success",
-                "height": 800
+                "height": 550
               }
             },
             {
