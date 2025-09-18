@@ -99,7 +99,7 @@
               "element": {
                 "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
                 "type": "qcm",
-                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l'améliorer ?</p>",
+                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l'améliorer ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -148,7 +148,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation : </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l'IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
+                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation&nbsp;: </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l'IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -187,7 +187,7 @@
                     },
                     {
                       "prompt": "adopte un ton drôle",
-                      "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                      "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
                     }
                   ]
                 }
@@ -293,7 +293,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !</p>",
+                "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -301,9 +301,10 @@
             {
               "type": "element",
               "element": {
-                "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
-                "type": "text",
-                "content": "<p>\n</p><p></p><p></p><p></p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n<p></p><p></p><p></p><p></p><p></p><p></p>"
+                "id": "2a32ee79-570f-447f-b0c1-b56534d4f670",
+                "type": "expand",
+                "title": "💡 L'astuce pratique",
+                "content": "<p>❌ Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
               }
             }
           ]
@@ -339,7 +340,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>Quelques conseils pour écrire un prompt efficace :&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l'IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
+                "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l'IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
               }
             }
           ]
@@ -371,7 +372,7 @@
                     {
                       "id": "ae9cf536-d7b2-423f-872d-b20fc1217716",
                       "type": "text",
-                      "content": "<p>« Propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
+                      "content": "<p>«&nbsp;Propose un plan détaillé avec des exercices pour un entraînement d’une heure pour des enfants de 6 à 8 ans qui sont débutants.&nbsp;»</p>"
                     },
                     {
                       "id": "90b420d2-029d-4718-b865-8636cbb2daab",
@@ -569,7 +570,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur de LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
-                "instruction": "<p>Vous avez 5 prompts pour réussir !</p>",
+                "instruction": "<p>Vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -613,12 +614,12 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Le tournoi de l’automne 🍂",
+                      "title": "Le tournoi de l’automne 🍂",
                       "description": "<p> Sous les feuilles d’automne aux teintes dorées, <br> Les <strong>Patata Smash</strong> sont venus briller,<br> Le sable volait sous leurs sauts précis,<br> Chaque smash un cri, chaque point un défi.<br>Le vent frisquet dansait avec passion,<br> Mais rien n’arrêtait leur détermination.<br> Victoire éclatante sous le ciel vermeil, <br>Champions d’automne, au souffle du soleil.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
-                        "alt": "Bravo à l'équipe Patata Smash !"
+                        "alt": "Bravo à l'équipe Patata Smash !"
                       },
                       "license": {
                         "name": "",
@@ -627,12 +628,12 @@
                       }
                     },
                     {
-                      "title": "Le tournoi du printemps 🌷",
+                      "title": "Le tournoi du printemps 🌷",
                       "description": "<p> Au printemps naissant, sur un terrain léger, <br> Fleurissait le tournoi, vibrant et enjoué. <br> Les balles dansaient sous les chants des pinsons, <br> Et dominaient le jeu, les <strong>Filets Mignons</strong>. <br> Leurs passes étaient douces comme un souffle d’avril, <br> Chaque smash éclatait comme un bourgeon fragile. <br> Couronnés de soleil, de cris et de frissons, <br> Ils ont levé la coupe, fiers <strong>Filets Mignons</strong>.</p>",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
-                        "alt": "Félicitations à l'équipe Filets mignons !"
+                        "alt": "Félicitations à l'équipe Filets mignons !"
                       },
                       "license": {
                         "name": "",
@@ -677,7 +678,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire : vous avez 5 prompts pour réussir !</p>",
+                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
