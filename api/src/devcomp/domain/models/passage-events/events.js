@@ -42,4 +42,25 @@ class VideoTranscriptionOpenedEvent extends PassageEventWithElement {
   }
 }
 
-export { ImageAlternativeTextOpenedEvent, VideoTranscriptionOpenedEvent };
+/**
+ * @class VideoPlayedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user plays a video.
+ *
+ * */
+class VideoPlayedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'VIDEO_PLAYED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+export { ImageAlternativeTextOpenedEvent, VideoPlayedEvent, VideoTranscriptionOpenedEvent };

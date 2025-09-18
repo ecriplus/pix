@@ -59,7 +59,6 @@ export default class ModulixStep extends Component {
               @getLastCorrectionForElement={{@getLastCorrectionForElement}}
               @onImageAlternativeTextOpen={{@onImageAlternativeTextOpen}}
               @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
-              @onVideoPlay={{@onVideoPlay}}
               @onFileDownload={{@onFileDownload}}
               @onExpandToggle={{@onExpandToggle}}
             />

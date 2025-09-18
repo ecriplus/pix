@@ -1,6 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-// eslint-disable-next-line no-restricted-imports
-import { click, find, findAll } from '@ember/test-helpers';
+import { click, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ApplicationAdapter from 'mon-pix/adapters/application';
 import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
@@ -1149,110 +1148,6 @@ module('Integration | Component | Module | Passage', function (hooks) {
           // then
           assert.dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.terminate') })).exists();
         });
-      });
-    });
-  });
-
-  module('when a video element is played', function () {
-    test('should push an event', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const metrics = this.owner.lookup('service:pix-metrics');
-      metrics.trackEvent = sinon.stub();
-
-      const videoElement = {
-        id: 'id',
-        url: 'https://videos.pix.fr/modulix/placeholder-video.mp4',
-        title: 'title',
-        subtitles: 'subtitles',
-        type: 'video',
-        transcription: '',
-      };
-      const section = store.createRecord('section', {
-        id: 'section1',
-        type: 'blank',
-        grains: [
-          {
-            id: '123',
-            components: [{ type: 'element', element: videoElement }],
-          },
-        ],
-      });
-
-      const module = store.createRecord('module', {
-        id: '1',
-        slug: 'module-slug',
-        title: 'Module title',
-        sections: [section],
-      });
-      const passage = store.createRecord('passage');
-
-      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-      const video = find(`#${videoElement.id}`);
-
-      //  when
-      const event = new Event('play');
-      video.dispatchEvent(event);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Play : ${videoElement.id}`, {
-        category: 'Modulix',
-        disabled: true,
-        action: `Passage du module : ${module.slug}`,
-      });
-      assert.ok(true);
-    });
-
-    module('when video is in a stepper', function () {
-      test('should push metrics event', async function (assert) {
-        // given
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
-
-        // given
-        const store = this.owner.lookup('service:store');
-        const videoElement = {
-          id: 'a9f2269-99ba-4631-b6fd-6802c88d5c26',
-          type: 'video',
-          title: 'Vidéo de présentation de Pix',
-          url: 'https://videos.pix.fr/modulix/didacticiel/presentation.mp4',
-          subtitles: '',
-          transcription: '<p>transcription</p>',
-        };
-        const section = store.createRecord('section', {
-          id: 'section1',
-          type: 'blank',
-          grains: [
-            {
-              title: 'Grain title',
-              components: [{ type: 'element', element: videoElement }],
-            },
-          ],
-        });
-        const module = store.createRecord('module', {
-          id: 'module-id',
-          slug: 'module-slug',
-          title: 'Module title',
-          sections: [section],
-        });
-        const passage = store.createRecord('passage');
-        await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
-        const video = find(`#${videoElement.id}`);
-
-        //  when
-        const event = new Event('play');
-        video.dispatchEvent(event);
-        await new Promise((resolve) => setTimeout(resolve, 0));
-
-        // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Play : ${videoElement.id}`, {
-          category: 'Modulix',
-          disabled: true,
-
-          action: `Passage du module : ${module.slug}`,
-        });
-        assert.ok(true);
       });
     });
   });

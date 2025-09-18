@@ -10,6 +10,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Video', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  let passageEventService, passageEventRecordStub;
+
+  hooks.beforeEach(function () {
+    passageEventService = this.owner.lookup('service:passageEvents');
+    passageEventRecordStub = sinon.stub(passageEventService, 'record');
+  });
+
+  hooks.afterEach(function () {
+    passageEventRecordStub.restore();
+  });
+
   test('should display a video', async function (assert) {
     // given
     const url = 'https://videos.pix.fr/modulix/placeholder-video.mp4';
@@ -133,7 +144,7 @@ module('Integration | Component | Module | Video', function (hooks) {
   });
 
   module('when the video is played', function () {
-    test('should call onPlay prop with right argument', async function (assert) {
+    test('should record a passage event', async function (assert) {
       // given
       const videoElement = {
         id: 'id',
@@ -143,45 +154,24 @@ module('Integration | Component | Module | Video', function (hooks) {
         transcription: '',
         poster: 'https://example.org/modulix/video-poster.jpg',
       };
-      const onVideoPlayStub = sinon.stub();
-      await render(<template><ModulixVideoElement @video={{videoElement}} @onPlay={{onVideoPlayStub}} /></template>);
+      await render(<template><ModulixVideoElement @video={{videoElement}} /></template>);
       const video = find(`#${videoElement.id}`);
 
       //  when
       const event = new Event('play');
       video.dispatchEvent(event);
+      video.dispatchEvent(event);
+      video.dispatchEvent(event);
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       // then
-      sinon.assert.calledWithExactly(onVideoPlayStub, {
-        elementId: videoElement.id,
+      sinon.assert.calledOnce(passageEventRecordStub);
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'VIDEO_PLAYED',
+        data: {
+          elementId: videoElement.id,
+        },
       });
-      assert.ok(true);
-    });
-
-    test('should call onPlay prop only once', async function (assert) {
-      // given
-      const videoElement = {
-        id: 'id',
-        url: 'https://videos.pix.fr/modulix/placeholder-video.mp4',
-        title: 'title',
-        subtitles: 'subtitles',
-        transcription: '',
-        poster: 'https://example.org/modulix/video-poster.jpg',
-      };
-      const onVideoPlayStub = sinon.stub();
-      await render(<template><ModulixVideoElement @video={{videoElement}} @onPlay={{onVideoPlayStub}} /></template>);
-      const video = find(`#${videoElement.id}`);
-
-      //  when
-      const event = new Event('play');
-      video.dispatchEvent(event);
-      video.dispatchEvent(event);
-      video.dispatchEvent(event);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // then
-      sinon.assert.calledOnce(onVideoPlayStub);
       assert.ok(true);
     });
   });

@@ -30,7 +30,7 @@ export default class ModulixElement extends Component {
     {{else if (eq @element.type "image")}}
       <ImageElement @image={{@element}} @onAlternativeTextOpen={{@onImageAlternativeTextOpen}} />
     {{else if (eq @element.type "video")}}
-      <VideoElement @video={{@element}} @onTranscriptionOpen={{@onVideoTranscriptionOpen}} @onPlay={{@onVideoPlay}} />
+      <VideoElement @video={{@element}} @onTranscriptionOpen={{@onVideoTranscriptionOpen}} />
     {{else if (eq @element.type "download")}}
       <DownloadElement @download={{@element}} @onDownload={{@onFileDownload}} />
     {{else if (eq @element.type "embed")}}
