@@ -120,27 +120,35 @@ describe('Unit | Domain | Models | CampaignReport', function () {
     });
   });
 
-  describe('#setIsFromCombinedCourse', function () {
-    it('should define isFromCombinedCourse to false by default', function () {
+  describe('isFromCombinedCourse', function () {
+    it('should return false by default', function () {
       const campaignReport = new CampaignReport();
 
       expect(campaignReport.isFromCombinedCourse).false;
     });
 
-    it('should define isFromCombinedCourse to false when not combined course defined', function () {
+    it('should be false when there is no combined course defined', function () {
       const campaignReport = new CampaignReport();
 
-      campaignReport.setIsFromCombinedCourse(false);
+      campaignReport.setCombinedCourse();
 
       expect(campaignReport.isFromCombinedCourse).false;
     });
 
-    it('should define isFromCombinedCourse to true when combined course defined', function () {
+    it('should be true when a combined course is set', function () {
       const campaignReport = new CampaignReport();
 
-      campaignReport.setIsFromCombinedCourse(true);
+      campaignReport.setCombinedCourse({ id: 123, name: 'combinix' });
 
       expect(campaignReport.isFromCombinedCourse).true;
+    });
+
+    it('should return combined course info when a combined course is set', function () {
+      const campaignReport = new CampaignReport();
+
+      campaignReport.setCombinedCourse({ id: 123, name: 'combinix' });
+
+      expect(campaignReport.combinedCourse).deep.equal({ id: 123, name: 'combinix' });
     });
   });
 });
