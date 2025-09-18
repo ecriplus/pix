@@ -6,7 +6,7 @@ import { CERTIFIABLE_SUCCESS_USER_ID } from './constants.js';
  *    - Pix Orga user   : certif-success@example.net
  */
 export class CommonCertifiableUser {
-  certifiableUser;
+  certifiableUsers = [];
 
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
@@ -21,22 +21,24 @@ export class CommonCertifiableUser {
   }
 
   async #init() {
-    const user = this.databaseBuilder.factory.buildUser.withRawPassword({
-      id: CERTIFIABLE_SUCCESS_USER_ID,
-      firstName: 'Max',
-      lastName: 'Lagagne',
-      email: 'certif-success@example.net',
-      cgu: true,
-      lang: 'fr',
-      lastTermsOfServiceValidatedAt: new Date(),
-    });
+    for (let i = 0; i < 3; i++) {
+      const user = this.databaseBuilder.factory.buildUser.withRawPassword({
+        id: CERTIFIABLE_SUCCESS_USER_ID + i,
+        firstName: ['Max', 'Maxime', 'Maxou'][i],
+        lastName: 'Lagagne',
+        email: `certif-success${i > 0 ? `-${i}` : ''}@example.net`,
+        cgu: true,
+        lang: 'fr',
+        lastTermsOfServiceValidatedAt: new Date(),
+      });
 
-    await createCertifiableProfile({
-      databaseBuilder: this.databaseBuilder,
-      userId: user.id,
-    });
+      await createCertifiableProfile({
+        databaseBuilder: this.databaseBuilder,
+        userId: user.id,
+      });
 
-    this.certifiableUser = user;
+      this.certifiableUsers = [...this.certifiableUsers, user];
+    }
 
     return this;
   }
