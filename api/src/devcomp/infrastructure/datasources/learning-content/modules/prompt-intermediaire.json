@@ -303,7 +303,7 @@
               "element": {
                 "id": "2d6bce0d-5778-49e7-aa5d-80da9520b0c1",
                 "type": "text",
-                "content": "<p>\n</p><p></p><p></p><p></p><p></p><p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n</p><p></p><p></p><p></p><p></p><p></p>"
+                "content": "<p>\n</p><p></p><p></p><p></p><p></p><p></p><details>\n    <summary><span aria-hidden=\"true\">💡</span> L'astuce pratique</summary>\n    <p><span aria-hidden=\"true\">❌</span>Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p>\n    <p> </p><span aria-hidden=\"true\">✅</span> Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée <p></p>\n</details>\n<p></p><p></p><p></p><p></p><p></p><p></p>"
               }
             }
           ]
@@ -516,10 +516,6 @@
                         {
                           "id": "3",
                           "content": "<p>le ton à adopter</p>"
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>le rôle à jouer</p>"
                         }
                       ],
                       "feedbacks": {
@@ -529,14 +525,13 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, l’humoriste est le rôle, le format est un court discours, le ton est amusant. Le contexte est le pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
+                          "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
                       "solutions": [
                         "1",
                         "2",
-                        "3",
-                        "4"
+                        "3"
                       ]
                     }
                   ]
