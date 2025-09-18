@@ -37,7 +37,7 @@
               "element": {
                 "id": "aff736d6-2545-4e23-b5ec-e9551ec2bcb9",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-illu-bob-v2.png",
+                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-illu-bob-v3.png",
                 "alt": "conversation décrite dans l'alternative textuelle",
                 "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 ChatGPT&nbsp;: ...</p>",
                 "legend": "",
@@ -48,31 +48,28 @@
               "type": "element",
               "element": {
                 "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
-                "type": "qcu",
+                "type": "qcu-discovery",
                 "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que chatGPT générative réponde à cette demande ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>« Plutôt mer du nord ou mer Méditerranée ? 🌊 »</p>",
                     "feedback": {
-                      "state": "",
-                      "diagnosis": "<p>Une intelligence artificielle sert à ça&nbsp;: on pose une question, elle donne une réponse.</p>"
+                      "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>« Oui ! à partir de quand veux-tu partir ? ⛵ »</p>",
                     "feedback": {
-                      "state": "",
-                      "diagnosis": "<p>Une intelligence artificielle sert à ça&nbsp;: on pose une question, elle donne une réponse.</p>"
+                      "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "state": "",
-                      "diagnosis": "<p>Une intelligence artificielle sert à ça&nbsp;: on pose une question, elle donne une réponse.</p>"
+                      "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   }
                 ],
@@ -103,28 +100,28 @@
                     "id": "1",
                     "content": "<p>Gemini</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong> Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
+                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Deepseek</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong> Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
+                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Mistral<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong> Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
+                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong> Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
+                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
                   }
                 ],
@@ -143,7 +140,7 @@
               "element": {
                 "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
                 "type": "text",
-                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine…).</p><p>Il en existe de nombreux à disposition du grand public&nbsp;: chatGPT, microsoft Copilot, Deepseek, Perplexity, Claude...  </p>"
+                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine…).</p><p>Il en existe de nombreux à disposition du grand public&nbsp;: chatGPT, microsoft Copilot, Le Chat (Mistral) Deepseek, Perplexity, Claude...  </p>"
               }
             },
             {
@@ -259,7 +256,7 @@
                             },
                             {
                               "name": "sucre",
-                              "percent": 80
+                              "percent": 75
                             },
                             {
                               "name": "sirop",
@@ -280,8 +277,8 @@
                               "percent": 80
                             },
                             {
-                              "name": "dedans",
-                              "percent": 43
+                              "name": "avec",
+                              "percent": 60
                             }
                           ],
                           [
@@ -304,18 +301,22 @@
                               "percent": 80
                             },
                             {
-                              "name": "caramel ",
-                              "percent": 43
+                              "name": "caramel",
+                              "percent": 47
                             },
                             {
                               "name": "chocolat",
-                              "percent": 20
+                              "percent": 22
                             }
                           ]
                         ],
-                        "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
+                        "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": ["beurre", "et", "du", "sucre"]
+                        "wordsToAdd": [
+                          "beurre",
+                          "et",
+                          "du ?"
+                        ]
                       }
                     },
                     {
@@ -481,7 +482,7 @@
               "element": {
                 "id": "b0fd9eb1-ca19-4052-b5a3-6f1b83b33fca",
                 "type": "text",
-                "content": "<p>Si on donne à un logiciel d'IA générative  <strong>des milliards de textes variés pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs. </p><p>⚠️ Mais attention&nbsp;: l<strong>es textes sur internet ont parfois des erreurs</strong> ❌</p><p>Et un logiciel d'IA générative ne repère pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs</strong> dans ses réponses.<br><br></p>"
+                "content": "<p>Si on donne à un logiciel d'IA générative  <strong>des milliards de textes variés pour s’entraîner</strong>, il pourra apporter des réponses pertinentes à presque toutes les demandes des utilisateurs. </p><p>⚠️ Mais attention&nbsp;: <strong>l</strong><strong>es textes sur internet ont parfois des erreurs</strong> ❌</p><p>Et un logiciel d'IA générative ne repère pas ces erreurs pendant l’entraînement. Il peut donc <strong>reproduire ces erreurs</strong> dans ses réponses.<br><br></p>"
               }
             }
           ]
