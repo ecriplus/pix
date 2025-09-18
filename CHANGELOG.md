@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.212.0](https://github.com/1024pix/pix/compare/v5.211.0...v5.212.0) (2025-09-18)
+
+### :rocket: Amélioration
+
+- [#13599](https://github.com/1024pix/pix/pull/13599) Ajouter un champ `instruction` au custom elements (PIX-18990) 
+- [#13522](https://github.com/1024pix/pix/pull/13522) Désactiver les boutons en fonctions du statut de la certification (PIX-17763) 
+- [#13595](https://github.com/1024pix/pix/pull/13595) IA Hallu - remplacement img par custom LLM-messages 
+- [#13587](https://github.com/1024pix/pix/pull/13587) Migrer l'évènement VIDEO_PLAYED du service metrics vers un passageEvent (PIX-18369) 
+- [#13604](https://github.com/1024pix/pix/pull/13604) Modif leçons retours PYO Les biais intermédiaires 
+- [#13545](https://github.com/1024pix/pix/pull/13545) Modif suite panel interne ia dit ia  
+- [#13550](https://github.com/1024pix/pix/pull/13550) Modification suite panel interne deepfakes 
+- [#13590](https://github.com/1024pix/pix/pull/13590) Modifier le contenu de la bannière sur Pix App (PIX-19554). 
+- [#13598](https://github.com/1024pix/pix/pull/13598) Réactiver le tracking des events modulix/contenu formatif/tuto sur Pix App (PIX-18995). 
+- [#13603](https://github.com/1024pix/pix/pull/13603) Tmp prompt ind retour panels 
+- [#13605](https://github.com/1024pix/pix/pull/13605) update titre du module deepfake 
+
+### :building_construction: Tech
+
+- [#13594](https://github.com/1024pix/pix/pull/13594) Ajouter des candidats aux certifications des seeds (PIX-18448). 
+- [#13588](https://github.com/1024pix/pix/pull/13588) Renommer la table "pix-teams" en "administration-teams" (PIX-19553) 
+
+### :arrow_up: Montée de version
+
+- [#13592](https://github.com/1024pix/pix/pull/13592) Mise à jour de @1024pix/epreuves-components 
+- [#13600](https://github.com/1024pix/pix/pull/13600) Mise à jour du package epreuves-components
+
 # [5.211.0](https://github.com/1024pix/pix/compare/v5.210.0...v5.211.0) (2025-09-17)
 
 ### :rocket: Amélioration
