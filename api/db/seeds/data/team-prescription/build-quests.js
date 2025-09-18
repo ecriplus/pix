@@ -202,6 +202,7 @@ function buildParenthoodQuest(databaseBuilder) {
       },
     ],
   });
+  return rewardId;
 }
 
 const USERS = [
@@ -590,7 +591,7 @@ export const buildQuests = async (databaseBuilder) => {
 
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
-  buildParenthoodQuest(databaseBuilder);
+  const parenthoodAttestationId = buildParenthoodQuest(databaseBuilder);
   buildCombinedCourseQuest(databaseBuilder, organization.id);
 
   // Create reward for success user
@@ -642,40 +643,124 @@ export const buildQuests = async (databaseBuilder) => {
     profileRewardId: otherUserProfileRewardId,
   });
 
-  databaseBuilder.factory.buildAttestation({
+  const eduIncontournablesAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-incontournables-attestation-template',
     key: 'EDUINCONTOURNABLES',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduDocAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-documents-attestation-template',
     key: 'EDUDOC',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduVeilleAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-veille-attestation-template',
     key: 'EDUVEILLE',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduCultureNumAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-culture-numerique-attestation-template',
     key: 'EDUCULTURENUM',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduRessourcesAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-ressources-attestation-template',
     key: 'EDURESSOURCES',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduSupportAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-supports-attestation-template',
     key: 'EDUSUPPORT',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduSecuAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-securite-attestation-template',
     key: 'EDUSECU',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduCollabAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-collaborer-attestation-template',
     key: 'EDUCOLLAB',
   });
-  databaseBuilder.factory.buildAttestation({
+  const eduIaAttestation = databaseBuilder.factory.buildAttestation({
     templateName: 'edu-ia-attestation-template',
     key: 'EDUIA',
+  });
+  const minarmAttestation = databaseBuilder.factory.buildAttestation({
+    templateName: 'minarm-attestation-template',
+    key: 'MINARM',
+  });
+
+  // Create user with all available attestations
+  const allAttestationsUser = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'All',
+    lastName: 'Attestations',
+    email: 'all-attestations@example.net',
+  });
+
+  // Create profile rewards for all available attestation types using existing attestations
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId, // sixth-grade attestation already created above
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: parenthoodAttestationId, // parenthood attestation already created above
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduIncontournablesAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduDocAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduVeilleAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduCultureNumAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduRessourcesAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduSupportAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduSecuAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduCollabAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: eduIaAttestation.id,
+  });
+
+  databaseBuilder.factory.buildProfileReward({
+    userId: allAttestationsUser.id,
+    rewardType: REWARD_TYPES.ATTESTATION,
+    rewardId: minarmAttestation.id,
   });
 };
