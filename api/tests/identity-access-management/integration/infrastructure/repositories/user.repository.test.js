@@ -971,7 +971,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       });
     });
 
-    describe('#isUserCanAccededToThisCertificationCenter', function () {
+    describe('#isUserAllowedToAccessThisCertificationCenter', function () {
       it('returns true when user has access to the certification center', async function () {
         // given
         const userInDB = databaseBuilder.factory.buildUser(userToInsert);
@@ -983,7 +983,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
 
         // when
-        const hasAccess = await userRepository.isUserCanAccededToThisCertificationCenter(
+        const hasAccess = await userRepository.isUserAllowedToAccessThisCertificationCenter(
           userInDB.id,
           certificationCenter.id,
         );
@@ -999,7 +999,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
 
         // when
-        const hasAccess = await userRepository.isUserCanAccededToThisCertificationCenter(
+        const hasAccess = await userRepository.isUserAllowedToAccessThisCertificationCenter(
           userInDB.id,
           certificationCenter.id,
         );
@@ -1020,7 +1020,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
 
         // when
-        const hasAccess = await userRepository.isUserCanAccededToThisCertificationCenter(
+        const hasAccess = await userRepository.isUserAllowedToAccessThisCertificationCenter(
           userInDB.id,
           certificationCenter.id,
         );
@@ -1036,7 +1036,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
         await databaseBuilder.commit();
 
         // when
-        const result = await catchErr(userRepository.isUserCanAccededToThisCertificationCenter)(
+        const result = await catchErr(userRepository.isUserAllowedToAccessThisCertificationCenter)(
           unknownUserId,
           certificationCenter.id,
         );

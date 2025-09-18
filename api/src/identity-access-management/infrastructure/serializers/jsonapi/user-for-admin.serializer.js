@@ -21,7 +21,6 @@ const serialize = function (users, meta) {
       'lang',
       'isAnonymous',
       'memberships',
-      'certificationCenterMemberships',
       'pixScore',
       'scorecards',
       'profile',
@@ -33,10 +32,6 @@ const serialize = function (users, meta) {
       'hasSeenOtherChallengesTooltip',
     ],
     memberships: {
-      ref: 'id',
-      ignoreRelationshipData: true,
-    },
-    certificationCenterMemberships: {
       ref: 'id',
       ignoreRelationshipData: true,
     },
