@@ -54,6 +54,7 @@
               "element": {
                 "id": "8ac18d0a-b0ec-4fa0-8107-3c655ddfe845",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
@@ -260,6 +261,7 @@
               "element": {
                 "id": "a74745c7-0e8c-4024-9e4e-ab014c843f8d",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
@@ -352,9 +354,7 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [
-                      6
-                    ]
+                    "solutions": [6]
                   }
                 ],
                 "feedbacks": {
@@ -404,6 +404,7 @@
               "element": {
                 "id": "aeeaae8f-72c4-4940-8163-49036e578b1e",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "flip-cards",
                 "props": {
                   "name": "flip card ia dit ia ",

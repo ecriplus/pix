@@ -37,6 +37,7 @@
               "element": {
                 "id": "55bb2043-0489-4faa-81cf-de3c39286c2d",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "messages": [

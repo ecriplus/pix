@@ -4,6 +4,7 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import didInsert from 'mon-pix/modifiers/modifier-did-insert';
 
 import ModuleElement from './module-element';
@@ -40,8 +41,18 @@ export default class ModulixCustomElement extends ModuleElement {
     }
   }
 
+  get hasInstruction() {
+    return this.args.component.instruction?.length > 0;
+  }
+
   <template>
     <div class="element-custom">
+      {{#if this.hasInstruction}}
+        <div class="element-custom__instruction">
+          {{htmlUnsafe @component.instruction}}
+        </div>
+      {{/if}}
+
       {{#if this.isInteractive}}
         <fieldset class="element-custom__container">
           <legend class="element-custom__legend">

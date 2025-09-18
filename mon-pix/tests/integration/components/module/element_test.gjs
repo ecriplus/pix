@@ -14,6 +14,7 @@ module('Integration | Component | Module | Element', function (hooks) {
     const element = {
       id: '8d7687c8-4a02-4d7e-bf6c-693a6d481c78',
       type: 'custom',
+      instruction: 'Instruction',
       tagName: 'qcu-image',
       props: {
         name: "Liste d'applications",

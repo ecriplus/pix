@@ -45,6 +45,7 @@
               "element": {
                 "id": "f49a0fed-c65d-467e-a30d-73445381c61c",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Conversation d'introduction",
@@ -128,12 +129,7 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2",
-                  "3",
-                  "4"
-                ]
+                "solutions": ["1", "2", "3", "4"]
               }
             }
           ]
@@ -163,6 +159,7 @@
               "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
@@ -402,10 +399,7 @@
                           "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2"
-                      ]
+                      "solutions": ["1", "2"]
                     }
                   ]
                 },
@@ -444,11 +438,7 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
-                      ]
+                      "solutions": ["1", "2", "3"]
                     }
                   ]
                 },
@@ -487,10 +477,7 @@
                           "diagnosis": "<p>Ici, le format est le dialogue et le contexte, celui du match de volley.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2"
-                      ]
+                      "solutions": ["1", "2"]
                     }
                   ]
                 },
@@ -529,10 +516,7 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": [
-                        "1",
-                        "2",
-                        "3"
+                      "solutions": ["1", "2", "3"
                       ]
                     }
                   ]
@@ -609,6 +593,7 @@
               "element": {
                 "id": "0fffc82c-48f2-40b4-9a75-335ea9f62f82",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",

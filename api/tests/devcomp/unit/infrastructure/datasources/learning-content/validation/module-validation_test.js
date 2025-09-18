@@ -26,6 +26,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
           const sample = {
             id: randomUUID(),
             type: 'custom',
+            instruction: 'Hello world',
             tagName: 'message-conversation',
             props: {
               title: 'Conversation entre Naomi et Mickaël à propos d’une adresse mail',

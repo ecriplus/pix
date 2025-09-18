@@ -407,6 +407,7 @@
               "element": {
                 "id": "0e3315fd-98ad-492f-9046-4aa867495d85",
                 "type": "custom",
+                "instruction": "Voici un extrait de conversation",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Confessions nocturnes",

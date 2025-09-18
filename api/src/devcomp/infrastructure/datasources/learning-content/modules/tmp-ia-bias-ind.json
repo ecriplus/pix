@@ -30,6 +30,7 @@
               "element": {
                 "id": "510015d3-8fb4-4024-8632-9b7ca6ec1187",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Conversation à propos des biais",
@@ -703,6 +704,7 @@
               "element": {
                 "id": "cc1559a4-2f33-45b3-9c07-bdf018e9fafb",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -824,10 +826,7 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple, ou bien vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "4"
-                ]
+                "solutions": ["2", "4"]
               }
             }
           ]
@@ -875,10 +874,7 @@
                     "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
                   }
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
+                "solutions": ["1", "3"]
               }
             }
           ]

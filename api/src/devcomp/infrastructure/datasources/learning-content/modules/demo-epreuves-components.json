@@ -34,6 +34,7 @@
               "element": {
                 "id": "4b7eb96e-134c-4b65-9513-cd57d9ed1e89",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 2,
@@ -82,6 +83,7 @@
               "element": {
                 "id": "6251f379-2a39-4731-a19a-fde17151c889",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "calcul-impact",
                 "props": {
                   "titleLevel": 2
@@ -108,6 +110,7 @@
               "element": {
                 "id": "dfa8ac80-86ba-4278-9e02-a160b9c38c3b",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
@@ -173,6 +176,7 @@
               "element": {
                 "id": "9fb9c98c-50e1-4338-9128-521e48060ad7",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "complete-phrase",
                 "props": {
                   "titleLevel": 2,
@@ -284,6 +288,7 @@
               "element": {
                 "id": "c1af1c71-cde4-47bb-9880-dfb0f4118ee1",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "flip-cards",
                 "props": {
                   "name": "Exemples d’utilisation de la reconnaissance d'image dans différents secteurs d'activité",
@@ -297,25 +302,25 @@
                     {
                       "name": "Santé",
                       "description": "Analyse de radios pour détecter des signes de cancer",
-                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-heart.svg",
                       "image": "https://assets.pix.org/modules/flip-cards/transport.png"
                     },
                     {
                       "name": "Culture",
                       "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
-                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
                       "image": "https://assets.pix.org/modules/flip-cards/transport.png"
                     },
                     {
                       "name": "Agriculture",
                       "description": "Survol de champs et prise de photos pour détecter un manque d’eau",
-                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-tractor.svg",
                       "image": "https://assets.pix.org/modules/flip-cards/transport.png"
                     },
                     {
                       "name": "Sécurité",
                       "description": "Reconnaissance des visages pour identifier des personnes autorisées",
-                      "icon":  "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
+                      "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
                       "image": "https://assets.pix.org/modules/flip-cards/transport.png"
                     }
                   ]
@@ -342,6 +347,7 @@
               "element": {
                 "id": "835cbd72-783a-4306-9317-74b39fcdc8a2",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Confessions nocturnes",
@@ -415,6 +421,7 @@
               "element": {
                 "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "image-quiz",
                 "props": {
                   "name": "nouveau_motdepasse.name",
@@ -495,6 +502,7 @@
               "element": {
                 "id": "02bacda6-2b76-49fd-a266-3a9bb16c20c9",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "image-quiz",
                 "props": {
                   "name": "Liste d’applications santé",
@@ -598,6 +606,7 @@
               "element": {
                 "id": "6fe94e2e-11db-4858-98ab-0466a9f49ef9",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "image-quizzes",
                 "props": {
                   "quizzes": [
@@ -754,6 +763,7 @@
               "element": {
                 "id": "af2a348f-666c-4935-83df-eeb32224ddba",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-compare-messages",
                 "props": {
                   "conversation1": {
@@ -818,6 +828,7 @@
               "element": {
                 "id": "03bacda5-2b76-49fd-a266-3a9bb16c20c9",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
@@ -873,6 +884,7 @@
               "element": {
                 "id": "11b959b2-1894-4dc4-bf09-7de6c6c156a3",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "messages": [
@@ -918,6 +930,7 @@
               "element": {
                 "id": "9cf6927d-a2a0-4eab-9a64-013630397b85",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
@@ -953,6 +966,7 @@
               "element": {
                 "id": "b04ef581-48f2-4543-9bf4-e1e87c4fa396",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "aspectRatio": 1.84,
@@ -1041,6 +1055,7 @@
               "element": {
                 "id": "b04ef581-48f2-4543-9bf4-e1e8784fa396",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
@@ -1087,6 +1102,7 @@
               "element": {
                 "id": "d58e3796-5c02-4587-9d19-39f7b808a82f",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "qcm-deepfake",
                 "props": {
                   "titleLevel": 2,
