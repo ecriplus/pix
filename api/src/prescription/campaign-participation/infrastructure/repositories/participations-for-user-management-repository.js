@@ -1,13 +1,18 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
+import * as combinedCourseApi from '../../../../quest/application/api/combined-course-api.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignParticipationForUserManagement } from '../../domain/models/CampaignParticipationForUserManagement.js';
 
 const findByUserId = async function (userId) {
-  const campaignParticipations = await knex
+  const knexConnection = DomainTransaction.getConnection();
+
+  const campaignParticipations = await knexConnection
     .with(
       'participations',
-      knex('assessments')
+      knexConnection('assessments')
         .select({
           campaignParticipationId: 'campaign-participations.id',
           participantExternalId: 'campaign-participations.participantExternalId',
@@ -74,7 +79,14 @@ const findByUserId = async function (userId) {
     .orderBy('campaignCode', 'asc')
     .orderBy('sharedAt', 'desc');
 
-  return campaignParticipations.map((attributes) => new CampaignParticipationForUserManagement(attributes));
+  return PromiseUtils.mapSeries(campaignParticipations, async (attributes) => {
+    const participation = new CampaignParticipationForUserManagement(attributes);
+    if (participation.campaignId) {
+      const combinedCourseInfo = await combinedCourseApi.getByCampaignId(participation.campaignId);
+      participation.setIsFromCombinedCourse(combinedCourseInfo !== null);
+    }
+    return participation;
+  });
 };
 
 export { findByUserId };

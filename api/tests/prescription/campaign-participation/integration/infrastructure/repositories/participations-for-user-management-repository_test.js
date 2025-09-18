@@ -74,6 +74,98 @@ describe('Integration | Repository | Participations-For-User-Management', functi
         );
       });
 
+      it('return participations with belongsToCampaignParticipation', async function () {
+        // given
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          firstName: 'Blanche',
+          lastName: 'Isserie',
+          userId,
+        });
+        const combinedCourseCampaign = databaseBuilder.factory.buildCampaign();
+        databaseBuilder.factory.buildQuestForCombinedCourse({
+          code: 'ABCDE1234',
+          name: 'Mon parcours Combiné',
+          organizationId: combinedCourseCampaign.organizationId,
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: combinedCourseCampaign.id,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+
+        const combinedCourseCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          organizationLearnerId: organizationLearner.id,
+          campaignId: combinedCourseCampaign.id,
+          participantExternalId: 'special',
+        });
+
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: combinedCourseCampaignParticipation.id,
+          type: Assessment.types.CAMPAIGN,
+          createdAt: new Date('2025-10-12'),
+          userId,
+        });
+        const campaign = databaseBuilder.factory.buildCampaign();
+
+        const participation = databaseBuilder.factory.buildCampaignParticipation({
+          userId,
+          campaignId: campaign.id,
+          participantExternalId: 'yoo',
+          organizationLearnerId: organizationLearner.id,
+        });
+
+        databaseBuilder.factory.buildAssessment({
+          campaignParticipationId: participation.id,
+          type: Assessment.types.CAMPAIGN,
+          createdAt: new Date('2025-10-10'),
+
+          userId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
+
+        // then
+        expect(participationsForUserManagement).lengthOf(2);
+        expect(participationsForUserManagement).deep.members([
+          {
+            id: 1234,
+            campaignParticipationId: combinedCourseCampaignParticipation.id,
+            participantExternalId: combinedCourseCampaignParticipation.participantExternalId,
+            status: combinedCourseCampaignParticipation.status,
+            createdAt: combinedCourseCampaignParticipation.createdAt,
+            sharedAt: combinedCourseCampaignParticipation.sharedAt,
+            campaignId: combinedCourseCampaign.id,
+            campaignCode: combinedCourseCampaign.code,
+            organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+            isFromCombinedCourse: true,
+            deletedAt: null,
+          },
+          {
+            id: 1234,
+            campaignParticipationId: participation.id,
+            participantExternalId: participation.participantExternalId,
+            status: participation.status,
+            createdAt: participation.createdAt,
+            sharedAt: participation.sharedAt,
+            campaignId: campaign.id,
+            campaignCode: campaign.code,
+            organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+            isFromCombinedCourse: false,
+            deletedAt: null,
+          },
+        ]);
+      });
+
       it('should return both assessment and profiles collection participations with all attributes', async function () {
         // given
         const campaign = databaseBuilder.factory.buildCampaign({ code: 'FUNCODE' });
@@ -116,29 +208,35 @@ describe('Integration | Repository | Participations-For-User-Management', functi
 
         // then
         expect(participationsForUserManagement[0]).to.be.instanceOf(CampaignParticipationForUserManagement);
-        expect(participationsForUserManagement[0]).to.deep.includes({
-          id: 1234,
-          campaignParticipationId: profilesCollectionParticipation.id,
-          participantExternalId: profilesCollectionParticipation.participantExternalId,
-          status: profilesCollectionParticipation.status,
-          createdAt: profilesCollectionParticipation.createdAt,
-          sharedAt: profilesCollectionParticipation.sharedAt,
-          campaignId: profilesCollectionCampaign.id,
-          campaignCode: profilesCollectionCampaign.code,
-          organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
-        });
         expect(participationsForUserManagement[1]).to.be.instanceOf(CampaignParticipationForUserManagement);
-        expect(participationsForUserManagement[1]).to.deep.includes({
-          id: 1234,
-          campaignParticipationId: campaignParticipation.id,
-          participantExternalId: campaignParticipation.participantExternalId,
-          status: campaignParticipation.status,
-          createdAt: campaignParticipation.createdAt,
-          sharedAt: campaignParticipation.sharedAt,
-          campaignId: campaign.id,
-          campaignCode: campaign.code,
-          organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
-        });
+        expect(participationsForUserManagement).deep.members([
+          {
+            id: 1234,
+            campaignParticipationId: profilesCollectionParticipation.id,
+            participantExternalId: profilesCollectionParticipation.participantExternalId,
+            status: profilesCollectionParticipation.status,
+            createdAt: profilesCollectionParticipation.createdAt,
+            sharedAt: profilesCollectionParticipation.sharedAt,
+            campaignId: profilesCollectionCampaign.id,
+            campaignCode: profilesCollectionCampaign.code,
+            organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+            isFromCombinedCourse: false,
+            deletedAt: null,
+          },
+          {
+            id: 1234,
+            campaignParticipationId: campaignParticipation.id,
+            participantExternalId: campaignParticipation.participantExternalId,
+            status: campaignParticipation.status,
+            createdAt: campaignParticipation.createdAt,
+            sharedAt: campaignParticipation.sharedAt,
+            campaignId: campaign.id,
+            campaignCode: campaign.code,
+            organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+            isFromCombinedCourse: false,
+            deletedAt: null,
+          },
+        ]);
       });
 
       it('should return only one participation where assessment isImproving', async function () {
@@ -182,7 +280,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
 
         expect(participationsForUserManagement).lengthOf(1);
         expect(participationsForUserManagement[0]).to.be.instanceOf(CampaignParticipationForUserManagement);
-        expect(participationsForUserManagement[0]).to.deep.includes({
+        expect(participationsForUserManagement[0]).deep.equal({
           id: 1234,
           campaignParticipationId: campaignParticipation.id,
           participantExternalId: campaignParticipation.participantExternalId,
@@ -192,6 +290,8 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           campaignId: campaign.id,
           campaignCode: campaign.code,
           organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+          isFromCombinedCourse: false,
+          deletedAt: null,
         });
       });
 
@@ -228,7 +328,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
 
           // then
-          expect(participationsForUserManagement[0]).to.deep.includes({
+          expect(participationsForUserManagement[0]).deep.equal({
             id: 1234,
             campaignParticipationId: campaignParticipation.id,
             participantExternalId: campaignParticipation.participantExternalId,
@@ -239,6 +339,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             campaignCode: campaign.code,
             deletedAt: campaignParticipation.deletedAt,
             organizationLearnerFullName: `${organizationLearner.firstName} ${organizationLearner.lastName}`,
+            isFromCombinedCourse: false,
           });
         });
       });
@@ -257,7 +358,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           const participationsForUserManagement = await participationsForUserManagementRepository.findByUserId(userId);
 
           // then
-          expect(participationsForUserManagement[0]).to.deep.includes({
+          expect(participationsForUserManagement[0]).deep.equal({
             id: 1234,
             campaignParticipationId: null,
             participantExternalId: null,
@@ -268,6 +369,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
             campaignCode: null,
             deletedAt: assessment.updatedAt,
             organizationLearnerFullName: '-',
+            isFromCombinedCourse: null,
           });
         });
 
@@ -316,6 +418,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
               campaignCode: null,
               deletedAt: otherAssessment.updatedAt,
               organizationLearnerFullName: '-',
+              isFromCombinedCourse: null,
             },
             {
               id: 1234,
@@ -328,6 +431,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
               campaignCode: null,
               deletedAt: assessment.updatedAt,
               organizationLearnerFullName: '-',
+              isFromCombinedCourse: null,
             },
           ]);
         });
