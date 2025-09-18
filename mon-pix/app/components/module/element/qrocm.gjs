@@ -17,6 +17,7 @@ export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
   @tracked currentCorrection;
   @service passageEvents;
+  @service qrocmSolutionVerification;
 
   constructor() {
     super(...arguments);
@@ -82,9 +83,9 @@ export default class ModuleQrocm extends ModuleElement {
 
   get answerIsValid() {
     const proposalsWithSolution = this.element.proposals.filter(({ type }) => ['input', 'select'].includes(type));
-    return this.userResponse.every((response) => {
-      const matchingInput = proposalsWithSolution.find((proposal) => proposal.input === response.input);
-      return matchingInput && matchingInput.solutions.includes(response.answer);
+    return this.qrocmSolutionVerification.match({
+      userResponses: this.userResponse,
+      proposals: proposalsWithSolution,
     });
   }
 
