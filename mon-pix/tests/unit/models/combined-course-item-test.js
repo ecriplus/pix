@@ -1,4 +1,5 @@
 import { setupTest } from 'ember-qunit';
+import { CombinedCourseAssets, CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 import { module, test } from 'qunit';
 
 module('Unit | Model | Combined Course Item', function (hooks) {
@@ -13,30 +14,30 @@ module('Unit | Model | Combined Course Item', function (hooks) {
   module('Type is CAMPAIGN', function () {
     test('return route campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
-        type: 'CAMPAIGN',
+        type: CombinedCourseItemTypes.CAMPAIGN,
       });
       assert.strictEqual(combinedCourseItem.route, 'campaigns');
     });
 
     test('return iconUrl related for campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
-        type: 'CAMPAIGN',
+        type: CombinedCourseItemTypes.CAMPAIGN,
       });
-      assert.strictEqual(combinedCourseItem.iconUrl, 'https://assets.pix.org/combined-courses/campaign-icon.svg');
+      assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.CAMPAIGN_ICON);
     });
   });
 
   module('Type is MODULE', function () {
     test('return route campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
-        type: 'MODULE',
+        type: CombinedCourseItemTypes.MODULE,
       });
       assert.strictEqual(combinedCourseItem.route, 'module');
     });
 
     test('return iconUrl related for campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
-        type: 'MODULE',
+        type: CombinedCourseItemTypes.MODULE,
         image: 'my-module-url',
       });
       assert.strictEqual(combinedCourseItem.iconUrl, 'my-module-url');
@@ -46,13 +47,10 @@ module('Unit | Model | Combined Course Item', function (hooks) {
   module('Type is FORMATION', function () {
     test('return iconUrl related for campaign', function (assert) {
       const combinedCourseItem = store.createRecord('combined-course-item', {
-        type: 'FORMATION',
+        type: CombinedCourseItemTypes.FORMATION,
         image: 'my-module-url',
       });
-      assert.strictEqual(
-        combinedCourseItem.iconUrl,
-        'https://assets.pix.org/combined-courses/picto_formation_vector.svg',
-      );
+      assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.FORMATION_ICON);
     });
   });
 });

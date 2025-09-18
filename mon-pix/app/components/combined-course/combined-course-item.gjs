@@ -5,6 +5,7 @@ import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
+import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 const Content = <template>
   <div class="combined-course-item" ...attributes>
@@ -50,7 +51,7 @@ const Duration = <template>
 </template>;
 
 <template>
-  {{#if (eq @item.type "FORMATION")}}
+  {{#if (eq @item.type CombinedCourseItemTypes.FORMATION)}}
     <Content
       @title={{t "pages.combined-courses.items.formation.title"}}
       @isLocked={{true}}
