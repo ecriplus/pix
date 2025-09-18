@@ -37,7 +37,7 @@
               "element": {
                 "id": "aff736d6-2545-4e23-b5ec-e9551ec2bcb9",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-illu-bob-v2.png",
+                "url": "https://assets.pix.org/modules/IAGenFonction%20NOV/pix-modulix-ia-generatives-illu-bob-v3.png",
                 "alt": "conversation décrite dans l'alternative textuelle",
                 "alternativeText": "<p>👱 Bob&nbsp;: Je veux organiser des vacances à la mer pour 10 jours. J'habite à Rennes. Donne-moi un coup de main ! </p><p>🤖 ChatGPT&nbsp;: ...</p>",
                 "legend": "",
@@ -48,14 +48,13 @@
               "type": "element",
               "element": {
                 "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
-                "type": "qcu",
+                "type": "qcu-discovery",
                 "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que chatGPT générative réponde à cette demande ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>« Plutôt mer du nord ou mer Méditerranée ? 🌊 »</p>",
                     "feedback": {
-                      "state": "",
                       "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   },
@@ -63,7 +62,6 @@
                     "id": "2",
                     "content": "<p>« Oui ! à partir de quand veux-tu partir ? ⛵ »</p>",
                     "feedback": {
-                      "state": "",
                       "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   },
@@ -71,7 +69,6 @@
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "state": "",
                       "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
                   }
@@ -259,7 +256,7 @@
                             },
                             {
                               "name": "sucre",
-                              "percent": 80
+                              "percent": 75
                             },
                             {
                               "name": "sirop",
@@ -280,8 +277,8 @@
                               "percent": 80
                             },
                             {
-                              "name": "dedans",
-                              "percent": 43
+                              "name": "avec",
+                              "percent": 60
                             }
                           ],
                           [
@@ -304,18 +301,22 @@
                               "percent": 80
                             },
                             {
-                              "name": "caramel ",
-                              "percent": 43
+                              "name": "caramel",
+                              "percent": 47
                             },
                             {
                               "name": "chocolat",
-                              "percent": 20
+                              "percent": 22
                             }
                           ]
                         ],
-                        "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
+                        "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": ["beurre", "et", "du", "sucre"]
+                        "wordsToAdd": [
+                          "beurre",
+                          "et",
+                          "du ?"
+                        ]
                       }
                     },
                     {
