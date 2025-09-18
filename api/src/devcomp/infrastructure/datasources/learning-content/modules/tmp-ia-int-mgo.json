@@ -235,9 +235,9 @@
                     {
                       "id": "67fa3de4-9ca8-48a7-9863-368283d7db16",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
-                      "alt": "Capture d'écran d'un forum de discussions en ligne.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/forum-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'un forum de discussions en ligne décrit dans l'alternative textuelle.",
+                      "alternativeText": "<p>[Question] Comment démonter la roue arrière d’un vélo ?</p><p>MaximeB<br>Bonjour, j'ai crevé ma roue arrière de vélo et je ne sais pas comment la démonter pour changer la chambre à air. Quelqu'un pourrait m'expliquer les étapes ?</p><p>CycleFan42<br>Salut ! Tu dois d'abord retourner le vélo, puis desserrer les boulons de la roue avec une clé. Ensuite, retire le pneu avec des démonte-pneus pour accéder à la chambre à air.</p><p>JulieMecano<br>N'oublie pas de vérifier si tu as une attache rapide, ça facilite le démontage. Et pense à inspecter le pneu pour éviter une nouvelle crevaison après remplacement.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -270,9 +270,9 @@
                     {
                       "id": "7bad080b-6f84-435a-b1f9-a894648939f1",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
-                      "alt": "Page de contact d'un site web d'entreprise.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/contact-IAGenFonction_IND.png",
+                      "alt": "Page de contact d'un site web d'entreprise décrite dans l'alternative textuelle.",
+                      "alternativeText": "<p>Contactez-nous</p><p>+33 5 59 00 00 00</p><p>www.velobayonne.fr</p><p>contact@velobayonne.fr</p><p>5 rue des Cyclistes, 64100 Bayonne</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -305,9 +305,9 @@
                     {
                       "id": "7fdc0205-db66-4003-b8e4-df3bb53cd3b4",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
-                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses).",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/faq-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses) décrite dans l'alternative textuelle.",
+                      "alternativeText": "<p>FAQ</p><p>Que comprend la location d’un vélo ?</p><p>Puis-je louer un vélo pour plusieurs jours ?</p><p>Que faire en cas de crevaison ?</p><p>Est-ce que les vélos sont adaptés aux enfants ?</p><p>Oui, nous proposons des vélos pour enfants ainsi que des sièges bébé et des remorques familiales.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -340,9 +340,9 @@
                     {
                       "id": "1c85c83e-ab95-40de-8067-409fc62d6efc",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
-                      "alt": "Capture d'écran d'un article de presse illustré.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/article-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'un article de presse illustré décrit dans l'alternative textuelle.",
+                      "alternativeText": "<p>Les vélos en libre-service font le plein</p><p>Publié le 25 juin 2025 • Par Rédaction VéloActu<p><p>Le service de vélos en libre-service connaît un succès grandissant. De plus en plus d’usagers se tournent vers ce mode de transport pratique, économique et respectueux de l’environnement pour leurs trajets quotidiens. Les opérateurs annoncent une forte augmentation du nombre de trajets enregistrés, en particulier sur les lignes interquartiers et aux abords des zones d’activité. Les vélos sont désormais plébiscités comme une alternative crédible à la voiture pour les déplacements urbains.\"Nous assistons à une transformation des habitudes de mobilité\", souligne un porte-parole du secteur. \"Les utilisateurs veulent de la simplicité, de la flexibilité et un impact réduit sur l’environnement.\"</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -422,7 +422,7 @@
               "element": {
                 "id": "227a574b-c8b4-4c52-b339-423a2e676ed8",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/Choix-utilisateur-alignement.jpg",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/pref-users-IAGenFonction_IND.png",
                 "alt": "conversation avec une IA générative, détaillé dans l'alternative textuelle",
                 "alternativeText": "<p>Prompt&nbsp;:<br>Mon chat est patraque ce matin. Pourtant hier soir j’ai été très sympa avec lui j’ai même partagé mon carré de chocolat du soir avec lui ! Pourquoi est-ce qu’il ne veut pas jouer avec moi ? Aurais-tu un conseil à me donner ?</p><p>Réponse 1&nbsp;:<br>Oh c’est une grande qualité de vouloir partager ! Mais malheureusement, le chocolat est toxique pour les animaux de compagnie … Je te conseille d’amener ton chat chez le vétérinaire, il saura te conseiller. Et en plus tu pourras garder la totalité de ton chocolat ! 😋 </p><p>Réponse 2&nbsp;:<br>Mais quelle idée idiote ! Tu devrais savoir que le chocolat est toxique pour les animaux. On confie vraiment des animaux à n’importe qui … 🙄🤨</p><p>Réponse 3&nbsp;:<br>Tu fais bien de t’en soucier, le changement de comportement de ton chat peut en dire long sur ses états d’âme. De mon expérience, tu devrais lui proposer une séance de yoga, tout rentrera dans l’ordre. 🧘</p>",
                 "legend": "",
