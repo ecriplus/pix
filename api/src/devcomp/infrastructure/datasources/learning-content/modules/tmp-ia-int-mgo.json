@@ -728,7 +728,7 @@
                   "element": {
                     "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
                     "type": "text",
-                    "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables …<br><br></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix ou utilisez le prompt suivant : «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» \uD83C\uDF6D</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+                    "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables …<br><br></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix ou utilisez le prompt suivant : «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;»&nbsp;\uD83C\uDF6C</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
                   }
                 },
                 {
@@ -749,7 +749,7 @@
                         "id": "2",
                         "content": "<p>non</p>",
                         "feedback": {
-                          "diagnosis": "<p>Essayez encore, et inspirez-vous de l'exemple dans l'indice ci-dessous !&nbsp;🍬</p>"
+                          "diagnosis": "<p>Essayez encore, et n'hésitez pas à jouer avec les différents modes de comparaison proposés par ComparIA !</p>"
                         }
                       }
                     ]
