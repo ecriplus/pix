@@ -602,6 +602,7 @@
       "created-on": "Créée le",
       "empty-state": "Aucun participant pour l’instant !",
       "empty-state-with-copy-link": "Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.",
+      "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours {name}.",
       "multiple-sendings": {
         "status": {
           "disabled": "Non",

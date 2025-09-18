@@ -602,6 +602,7 @@
       "created-on": "Gemaakt op",
       "empty-state": "Geen deelnemers op het moment",
       "empty-state-with-copy-link": "Geen deelnemers op het moment! Stuur ze de volgende link om mee te doen aan je campagne.",
+      "included-in-combined-course": "Deze evaluatiecampagne maakt deel uit van het {name}-traject.",
       "multiple-sendings": {
         "status": {
           "disabled": "Nee",
@@ -1399,7 +1400,8 @@
         "campaign-status": "Status:",
         "campaign-type": "Type:",
         "participation-SHARED-status": "Ontvangen",
-        "participation-STARTED-status": "Bezig"      }
+        "participation-STARTED-status": "Bezig"
+      }
     },
     "places": {
       "before-date": "op",

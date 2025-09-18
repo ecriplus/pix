@@ -52,6 +52,14 @@ export default class Header extends Component {
         <CampaignType @big={{true}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
         <span class="page-title__name">{{@campaign.name}}</span>
       </:title>
+      <:subtitle>
+        {{#if @campaign.isFromCombinedCourse}}
+          <p class="campaign-page__page-subtext">{{t
+              "pages.campaign.included-in-combined-course"
+              name=@campaign.combinedCourse.name
+            }}</p>
+        {{/if}}
+      </:subtitle>
       <:tools>
         <dl class="campaign-header-title__details">
           <div class="campaign-header-title__detail-item hide-on-mobile">
