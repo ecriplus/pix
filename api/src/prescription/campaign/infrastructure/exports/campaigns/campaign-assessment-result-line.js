@@ -9,8 +9,10 @@ import _ from 'lodash';
 
 const STATS_COLUMNS_COUNT = 3;
 
+import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import * as campaignParticipationService from '../../../domain/services/campaign-participation-service.js';
+
 class CampaignAssessmentResultLine {
   constructor({
     organization,
@@ -25,7 +27,7 @@ class CampaignAssessmentResultLine {
     participantKnowledgeElementsByCompetenceId,
     acquiredBadges,
     acquiredStages,
-    translate,
+    locale,
   }) {
     this.organization = organization;
     this.additionalHeaders = additionalHeaders;
@@ -43,9 +45,9 @@ class CampaignAssessmentResultLine {
     this.acquiredStages = acquiredStages;
     this.acquiredBadges = acquiredBadges;
     this.campaignParticipationService = campaignParticipationService;
-    this.translate = translate;
+    this.i18n = getI18n(locale);
 
-    this.emptyContent = translate('campaign-export.common.not-available');
+    this.emptyContent = this.i18n.__('campaign-export.common.not-available');
 
     // To have the good `this` in _getStatsForCompetence, it is necessary to bind it
     this._getStatsForCompetence = this._getStatsForCompetence.bind(this);
@@ -158,7 +160,7 @@ class CampaignAssessmentResultLine {
   }
 
   _makeYesNoColumns(isTrue) {
-    return isTrue ? this.translate('campaign-export.common.yes') : this.translate('campaign-export.common.no');
+    return isTrue ? this.i18n.__('campaign-export.common.yes') : this.i18n.__('campaign-export.common.no');
   }
 
   _makeNotSharedColumns() {
@@ -181,9 +183,9 @@ class CampaignAssessmentResultLine {
 
     return knowledgeElementForSkill
       ? knowledgeElementForSkill.isValidated
-        ? this.translate('campaign-export.assessment.status.ok')
-        : this.translate('campaign-export.assessment.status.ko')
-      : this.translate('campaign-export.assessment.status.not-tested');
+        ? this.i18n.__('campaign-export.assessment.status.ok')
+        : this.i18n.__('campaign-export.assessment.status.ko')
+      : this.i18n.__('campaign-export.assessment.status.not-tested');
   }
 
   _countValidatedKnowledgeElementsForCompetence(competenceId) {

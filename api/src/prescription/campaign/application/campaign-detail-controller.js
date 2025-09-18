@@ -1,7 +1,6 @@
 import stream from 'node:stream';
 
-import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
-import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { escapeFileName, getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { CampaignParticipationStatuses } from '../../shared/domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignDetailsManagementSerializer from '../infrastructure/serializers/jsonapi/campaign-management-serializer.js';
@@ -71,7 +70,7 @@ const findPaginatedFilteredCampaigns = async function (request, _, dependencies 
 };
 
 const getCsvAssessmentResults = async function (request, h) {
-  const i18n = await getI18nFromRequest(request);
+  const locale = getUserLocale(request);
 
   const { campaignId } = request.params;
 
@@ -80,7 +79,7 @@ const getCsvAssessmentResults = async function (request, h) {
   const { fileName } = await usecases.startWritingCampaignAssessmentResultsToStream({
     campaignId,
     writableStream,
-    i18n,
+    locale,
   });
   const escapedFileName = escapeFileName(fileName);
 
@@ -96,7 +95,7 @@ const getCsvAssessmentResults = async function (request, h) {
 };
 
 const getCsvProfilesCollectionResults = async function (request, h) {
-  const i18n = await getI18nFromRequest(request);
+  const locale = getUserLocale(request);
 
   const { campaignId } = request.params;
 
@@ -105,7 +104,7 @@ const getCsvProfilesCollectionResults = async function (request, h) {
   const { fileName } = await usecases.startWritingCampaignProfilesCollectionResultsToStream({
     campaignId,
     writableStream,
-    i18n,
+    locale,
   });
   const escapedFileName = escapeFileName(fileName);
 

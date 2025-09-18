@@ -4,18 +4,20 @@ import {
   CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
   CONCURRENCY_HEAVY_OPERATIONS,
 } from '../../../../../shared/infrastructure/constants.js';
+import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { PromiseUtils } from '../../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignProfilesCollectionResultLine } from '../../exports/campaigns/campaign-profiles-collection-result-line.js';
 
 class CampaignProfilesCollectionExport {
-  constructor({ outputStream, organization, campaign, competences, translate, additionalHeaders = [] }) {
+  constructor({ outputStream, organization, campaign, competences, locale, additionalHeaders = [] }) {
     this.stream = outputStream;
     this.organization = organization;
     this.campaign = campaign;
     this.externalIdLabel = campaign.externalIdLabel;
     this.competences = competences;
-    this.translate = translate;
+    this.locale = locale;
+    this.i18n = getI18n(locale);
     this.additionalHeaders = additionalHeaders;
   }
 
@@ -54,22 +56,22 @@ class CampaignProfilesCollectionExport {
     const extraHeaders = this.additionalHeaders.map((header) => header.columnName);
 
     const header = [
-      this.translate('campaign-export.common.organization-name'),
-      this.translate('campaign-export.common.campaign-id'),
-      this.translate('campaign-export.common.campaign-code'),
-      this.translate('campaign-export.common.campaign-name'),
-      this.translate('campaign-export.common.participant-lastname'),
-      this.translate('campaign-export.common.participant-firstname'),
+      this.i18n.__('campaign-export.common.organization-name'),
+      this.i18n.__('campaign-export.common.campaign-id'),
+      this.i18n.__('campaign-export.common.campaign-code'),
+      this.i18n.__('campaign-export.common.campaign-name'),
+      this.i18n.__('campaign-export.common.participant-lastname'),
+      this.i18n.__('campaign-export.common.participant-firstname'),
       ...extraHeaders,
-      displayGroup && this.translate('campaign-export.common.participant-group'),
-      displayDivision && this.translate('campaign-export.common.participant-division'),
-      displayStudentNumber && this.translate('campaign-export.common.participant-student-number'),
+      displayGroup && this.i18n.__('campaign-export.common.participant-group'),
+      displayDivision && this.i18n.__('campaign-export.common.participant-division'),
+      displayStudentNumber && this.i18n.__('campaign-export.common.participant-student-number'),
       this.externalIdLabel,
-      this.translate('campaign-export.profiles-collection.is-sent'),
-      this.translate('campaign-export.profiles-collection.sent-on'),
-      this.translate('campaign-export.profiles-collection.pix-score'),
-      this.translate('campaign-export.profiles-collection.is-certifiable'),
-      this.translate('campaign-export.profiles-collection.certifiable-skills'),
+      this.i18n.__('campaign-export.profiles-collection.is-sent'),
+      this.i18n.__('campaign-export.profiles-collection.sent-on'),
+      this.i18n.__('campaign-export.profiles-collection.pix-score'),
+      this.i18n.__('campaign-export.profiles-collection.is-certifiable'),
+      this.i18n.__('campaign-export.profiles-collection.certifiable-skills'),
       ...this._competenceColumnHeaders(),
     ];
 
@@ -114,7 +116,7 @@ class CampaignProfilesCollectionExport {
         additionalHeaders: this.additionalHeaders,
         competences: this.competences,
         placementProfile,
-        translate: this.translate,
+        locale: this.locale,
       });
 
       return line.toCsvLine();
@@ -125,8 +127,8 @@ class CampaignProfilesCollectionExport {
 
   _competenceColumnHeaders() {
     return _.flatMap(this.competences, (competence) => [
-      this.translate('campaign-export.profiles-collection.skill-level', { name: competence.name }),
-      this.translate('campaign-export.profiles-collection.skill-ranking', { name: competence.name }),
+      this.i18n.__('campaign-export.profiles-collection.skill-level', { name: competence.name }),
+      this.i18n.__('campaign-export.profiles-collection.skill-ranking', { name: competence.name }),
     ]);
   }
 }

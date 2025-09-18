@@ -4,6 +4,7 @@ import {
   CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
   CONCURRENCY_HEAVY_OPERATIONS,
 } from '../../../../../shared/infrastructure/constants.js';
+import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { PromiseUtils } from '../../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignAssessmentResultLine } from '../../exports/campaigns/campaign-assessment-result-line.js';
@@ -16,7 +17,7 @@ class CampaignAssessmentExport {
     learningContent,
     stageCollection,
     campaign,
-    translate,
+    locale,
     additionalHeaders = [],
   }) {
     this.stream = outputStream;
@@ -28,7 +29,8 @@ class CampaignAssessmentExport {
     this.externalIdLabel = campaign.externalIdLabel;
     this.competences = learningContent.competences;
     this.areas = learningContent.areas;
-    this.translate = translate;
+    this.locale = locale;
+    this.i18n = getI18n(locale);
     this.additionalHeaders = additionalHeaders;
   }
 
@@ -88,33 +90,33 @@ class CampaignAssessmentExport {
     const extraHeaders = this.additionalHeaders.map((header) => header.columnName);
 
     const headers = [
-      this.translate('campaign-export.common.organization-name'),
-      this.translate('campaign-export.common.campaign-id'),
-      this.translate('campaign-export.common.campaign-code'),
-      this.translate('campaign-export.common.campaign-name'),
-      this.translate('campaign-export.assessment.target-profile-name'),
-      this.translate('campaign-export.common.participant-lastname'),
-      this.translate('campaign-export.common.participant-firstname'),
+      this.i18n.__('campaign-export.common.organization-name'),
+      this.i18n.__('campaign-export.common.campaign-id'),
+      this.i18n.__('campaign-export.common.campaign-code'),
+      this.i18n.__('campaign-export.common.campaign-name'),
+      this.i18n.__('campaign-export.assessment.target-profile-name'),
+      this.i18n.__('campaign-export.common.participant-lastname'),
+      this.i18n.__('campaign-export.common.participant-firstname'),
       ...extraHeaders,
-      ...(displayDivision ? [this.translate('campaign-export.common.participant-division')] : []),
-      ...(forSupStudents ? [this.translate('campaign-export.common.participant-group')] : []),
-      ...(forSupStudents ? [this.translate('campaign-export.common.participant-student-number')] : []),
+      ...(displayDivision ? [this.i18n.__('campaign-export.common.participant-division')] : []),
+      ...(forSupStudents ? [this.i18n.__('campaign-export.common.participant-group')] : []),
+      ...(forSupStudents ? [this.i18n.__('campaign-export.common.participant-student-number')] : []),
       ...(this.campaign.externalIdLabel ? [this.campaign.externalIdLabel] : []),
 
-      ...(this.campaign.isAssessment ? [this.translate('campaign-export.assessment.progress')] : []),
-      this.translate('campaign-export.assessment.started-on'),
-      this.translate('campaign-export.assessment.is-shared'),
-      this.translate('campaign-export.assessment.shared-on'),
+      ...(this.campaign.isAssessment ? [this.i18n.__('campaign-export.assessment.progress')] : []),
+      this.i18n.__('campaign-export.assessment.started-on'),
+      this.i18n.__('campaign-export.assessment.is-shared'),
+      this.i18n.__('campaign-export.assessment.shared-on'),
 
       ...(this.stageCollection.hasStage
-        ? [this.translate('campaign-export.assessment.success-rate', { value: this.stageCollection.totalStages - 1 })]
+        ? [this.i18n.__('campaign-export.assessment.success-rate', { value: this.stageCollection.totalStages - 1 })]
         : []),
 
       ..._.flatMap(this.targetProfile.badges, (badge) => [
-        this.translate('campaign-export.assessment.thematic-result-name', { name: badge.title }),
+        this.i18n.__('campaign-export.assessment.thematic-result-name', { name: badge.title }),
       ]),
 
-      this.translate('campaign-export.assessment.mastery-percentage-target-profile'),
+      this.i18n.__('campaign-export.assessment.mastery-percentage-target-profile'),
 
       ...this.#competenceColumnHeaders(),
       ...this.#areaColumnHeaders(),
@@ -130,17 +132,17 @@ class CampaignAssessmentExport {
 
   #competenceColumnHeaders() {
     return _.flatMap(this.competences, (competence) => [
-      this.translate('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
-      this.translate('campaign-export.assessment.skill.total-items', { name: competence.name }),
-      this.translate('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
+      this.i18n.__('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
+      this.i18n.__('campaign-export.assessment.skill.total-items', { name: competence.name }),
+      this.i18n.__('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
     ]);
   }
 
   #areaColumnHeaders() {
     return _.flatMap(this.areas, (area) => [
-      this.translate('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
-      this.translate('campaign-export.assessment.competence-area.total-items', { name: area.title }),
-      this.translate('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
+      this.i18n.__('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
+      this.i18n.__('campaign-export.assessment.competence-area.total-items', { name: area.title }),
+      this.i18n.__('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
     ]);
   }
 
@@ -179,7 +181,7 @@ class CampaignAssessmentExport {
         acquiredBadges && acquiredBadges[campaignParticipationInfo.campaignParticipationId]
           ? acquiredBadges[campaignParticipationInfo.campaignParticipationId].map((badge) => badge.title)
           : [],
-      translate: this.translate,
+      locale: this.locale,
     }).toCsvLine();
   }
 

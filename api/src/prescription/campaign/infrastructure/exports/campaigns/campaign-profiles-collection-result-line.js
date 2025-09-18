@@ -5,6 +5,7 @@ import utc from 'dayjs/plugin/utc.js';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import * as csvSerializer from '../../../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 
 const EMPTY_ARRAY = [];
@@ -16,7 +17,7 @@ class CampaignProfilesCollectionResultLine {
     campaignParticipationResult,
     competences,
     placementProfile,
-    translate,
+    locale,
     additionalHeaders,
   }) {
     this.organization = organization;
@@ -24,10 +25,10 @@ class CampaignProfilesCollectionResultLine {
     this.campaignParticipationResult = campaignParticipationResult;
     this.competences = competences;
     this.placementProfile = placementProfile;
-    this.translate = translate;
+    this.i18n = getI18n(locale);
     this.additionalHeaders = additionalHeaders;
 
-    this.notShared = translate('campaign-export.common.not-available');
+    this.notShared = this.i18n.__('campaign-export.common.not-available');
   }
 
   toCsvLine() {
@@ -110,7 +111,7 @@ class CampaignProfilesCollectionResultLine {
   }
 
   _yesOrNo(value) {
-    return this.translate(`campaign-export.common.${value ? 'yes' : 'no'}`);
+    return this.i18n.__(`campaign-export.common.${value ? 'yes' : 'no'}`);
   }
 
   _competenceColumns() {
