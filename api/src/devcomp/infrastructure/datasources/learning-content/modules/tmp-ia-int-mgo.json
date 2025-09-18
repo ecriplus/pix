@@ -29,7 +29,7 @@
               "element": {
                 "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
                 "type": "text",
-                "content": "<p>Voici un logiciel d’IA générative de texte. ✨<br>Testez et observez ses réponses à différents prompts. 🔍</p>"
+                "content": "<p>Observez les réponses de ce logiciel d'IA générative. 🔍</p>"
               }
             },
             {
@@ -74,7 +74,7 @@
                     "id": "1",
                     "content": "<p>Il a l’air incollable.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On peut aussi remarquer qu'il est possible de lui poser des questions et d'obtenir des réponses comme si on discutait avec un humain. 💬 </p>"
+                      "diagnosis": "<p>Effectivement, ce logiciel d'IA générative est capable de répondre de façon pertinente sur des sujets très divers ! On pourrait aussi avoir l'impression qu'on discute avec un humain. 💬 </p>"
                     }
                   },
                   {
@@ -107,7 +107,7 @@
               "element": {
                 "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
                 "type": "text",
-                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Grâce à<strong> trois étapes</strong>.&nbsp;Découvrez la première.</p>"
+                "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Son apprentissage se fait pas à pas… en 3 étapes. \uD83D\uDC63 </p>"
               }
             }
           ]
@@ -136,34 +136,41 @@
               "element": {
                 "id": "575b7423-919a-4e5c-9bc9-4c98c30bdc2f",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, comment on entraîne une IA générative à parler comme un humain ?</p>",
+                "instruction": "<p>À votre avis, comment entraîne-t-on une IA générative à parler comme un humain ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Elle apprend par cœur les phrases à répondre à chaque question.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Elle s'entraîne à parler grâce à des prédictions statistiques.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Exactement !&nbsp;</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Exactement !&nbsp;</strong><br>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Elle s’entraîne en remplissant des milliards de textes à trous.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Exactement !</strong><br>Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Exactement !</strong><br>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Elle retient toutes les expressions humaines avec des moyens mnémotechniques.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des prédictions statistiques et elle s’entraîne sur des textes à trous.</p>"
+                      "diagnosis": "<p><strong>Et non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   }
                 ],
@@ -188,13 +195,13 @@
             {
               "type": "element",
               "element": {
-                "id": "0acbffc6-34cc-414a-a148-194e2af62b37",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/placeholder-video2.jpg",
-                "alt": "place holder",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
+                "id": "8f401707-6e99-46d9-a6b7-1efa74412d91",
+                "type": "video",
+                "title": "Le pré entraînement des IA génératives",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/video_IAGenFonction_IND.mp4",
+                "poster": "https://assets.pix.org/modules/IAGenFonction_IND/vdo-poster-IAGenFonction_IND.jpg",
+                "subtitles": "https://assets.pix.org/modules/IAGenFonction_IND/vdo-subs-IAGenFonction_IND.vtt",
+                "transcription": "<p>Pour entraîner une IA générative, la première étape s’appelle le « pré-entraînement ».</p><p>On commence par faire lire à l'IA générative des milliards de textes, venant de toutes sortes de sources : des livres, des sites web, des encyclopédies, des articles scientifiques, etc.</p><p>L’IA générative transforme ces textes en textes à trous en cachant des mots, comme ici dans la phrase : « Les pyramides de Gizeh se trouvent en... ? » <br>Au début, l’IA générative essaie de trouver le mot manquant au hasard.</p><p>Si elle se trompe, pas de problème : elle se corrige et recommence, jusqu’à réussir. Elle s’entraîne dur ! Petit à petit, elle devient très douée à ce jeu.<br>En faisant cet exercice encore et encore, l’IA enrichit son vocabulaire sur le monde. Elle retient les mots, et elle apprend à les relier entre eux, comme dans les textes qu’elle a utilisés. <br>Elle comprend peu à peu quels mots vont bien ensemble, comment former des phrases correctes, et comment rester dans le sujet.</p><p>En revanche, elle ne vérifie pas si ce qu’elle écrit est vrai. Elle se contente de reproduire ce qui semble cohérent d’après ce qu’elle a lu.<br>À la fin du pré-entraînement, l’IA générative est capable de prolonger un texte en choisissant les mots les plus probables, pour qu’il ressemble à ce qu’un humain aurait pu écrire.</p>"
               }
             }
           ]
@@ -224,7 +231,7 @@
               "element": {
                 "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
                 "type": "text",
-                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p>\n<p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
+                "content": "<p>Pour que l'IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer des exemples de très bonnes discussions avec des questions et des réponses.</p><p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape de l'entraînement ? 🤔 </p>"
               }
             },
             {
@@ -235,9 +242,9 @@
                     {
                       "id": "67fa3de4-9ca8-48a7-9863-368283d7db16",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/forum.png",
-                      "alt": "Capture d'écran d'un forum de discussions en ligne.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/forum-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'un forum de discussions en ligne décrit dans l'alternative textuelle.",
+                      "alternativeText": "<p>[Question] Comment démonter la roue arrière d’un vélo ?</p><p>MaximeB<br>Bonjour, j'ai crevé ma roue arrière de vélo et je ne sais pas comment la démonter pour changer la chambre à air. Quelqu'un pourrait m'expliquer les étapes ?</p><p>CycleFan42<br>Salut ! Tu dois d'abord retourner le vélo, puis desserrer les boulons de la roue avec une clé. Ensuite, retire le pneu avec des démonte-pneus pour accéder à la chambre à air.</p><p>JulieMecano<br>N'oublie pas de vérifier si tu as une attache rapide, ça facilite le démontage. Et pense à inspecter le pneu pour éviter une nouvelle crevaison après remplacement.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -257,7 +264,7 @@
                           "id": "2",
                           "content": "<p>pas utile</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et non, un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
+                            "diagnosis": "<p><strong>Un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
                           }
                         }
                       ],
@@ -270,9 +277,9 @@
                     {
                       "id": "7bad080b-6f84-435a-b1f9-a894648939f1",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/contact.png",
-                      "alt": "Page de contact d'un site web d'entreprise.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/contact-IAGenFonction_IND.png",
+                      "alt": "Page de contact d'un site web d'entreprise décrite dans l'alternative textuelle.",
+                      "alternativeText": "<p>Contactez-nous</p><p>+33 5 59 00 00 00</p><p>www.velobayonne.fr</p><p>contact@velobayonne.fr</p><p>5 rue des Cyclistes, 64100 Bayonne</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -305,9 +312,9 @@
                     {
                       "id": "7fdc0205-db66-4003-b8e4-df3bb53cd3b4",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/faq.png",
-                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses).",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/faq-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'une page « Questions fréquentes » (FAQ avec questions et réponses) décrite dans l'alternative textuelle.",
+                      "alternativeText": "<p>FAQ</p><p>Que comprend la location d’un vélo ?</p><p>Puis-je louer un vélo pour plusieurs jours ?</p><p>Que faire en cas de crevaison ?</p><p>Est-ce que les vélos sont adaptés aux enfants ?</p><p>Oui, nous proposons des vélos pour enfants ainsi que des sièges bébé et des remorques familiales.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -340,9 +347,9 @@
                     {
                       "id": "1c85c83e-ab95-40de-8067-409fc62d6efc",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-int-mgo/article.png",
-                      "alt": "Capture d'écran d'un article de presse illustré.",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/IAGenFonction_IND/article-IAGenFonction_IND.png",
+                      "alt": "Capture d'écran d'un article de presse illustré décrit dans l'alternative textuelle.",
+                      "alternativeText": "<p>Les vélos en libre-service font le plein</p><p>Publié le 25 juin 2025 • Par Rédaction VéloActu<p><p>Le service de vélos en libre-service connaît un succès grandissant. De plus en plus d’usagers se tournent vers ce mode de transport pratique, économique et respectueux de l’environnement pour leurs trajets quotidiens. Les opérateurs annoncent une forte augmentation du nombre de trajets enregistrés, en particulier sur les lignes interquartiers et aux abords des zones d’activité. Les vélos sont désormais plébiscités comme une alternative crédible à la voiture pour les déplacements urbains.\"Nous assistons à une transformation des habitudes de mobilité\", souligne un porte-parole du secteur. \"Les utilisateurs veulent de la simplicité, de la flexibilité et un impact réduit sur l’environnement.\"</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -362,7 +369,7 @@
                           "id": "2",
                           "content": "<p>pas utile</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Effectivement !</strong><br>Lles articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
+                            "diagnosis": "<p><strong>Effectivement !</strong><br>Les articles de presse en ligne contiennent principalement du texte et des images, et ne comportent généralement que très peu de conversations ! Ce type de données n'est donc pas très utile pour simuler une conversation.</p>"
                           }
                         }
                       ],
@@ -380,33 +387,12 @@
           "title": "Dec 2 Lesson 2",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "9e50b0f7-2936-46af-8171-4793c5cc65a1",
-                      "type": "text",
-                      "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs qui entraînent les IA génératives sélectionnent des <strong>lots de questions et réponses</strong> d'excellente qualité.<br> Ils les donnent ensuite à l'IA générative pour qu'elle apprenne à simuler une conversation. C’est de l’apprentissage supervisé.</p>"
-                    },
-                    {
-                      "id": "a5fd2b0e-1241-4919-8eaa-3788aab741f9",
-                      "type": "expand",
-                      "title": "💡 Le saviez-vous ?",
-                      "content": "<p> Wikipédia a été réécrit sous la forme de questions et de réponses pour entraîner les IA génératives !</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "466b79fe-f4f0-4dde-824f-33c17e4420b1",
-                      "type": "text",
-                      "content": "<p>On applique le même principe pour que l'IA générative apprenne à faire d’autres types de tâches comme&nbsp;: résumer un texte, écrire une lettre de motivation, etc.</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "cfeb8a41-f755-4e9f-ad30-d103d9530837",
+                "type": "text",
+                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi à lui apprendre d’autres tâches : résumer un texte, rédiger une lettre de motivation, etc.</p>"
+              }
             }
           ]
         },
@@ -435,7 +421,7 @@
               "element": {
                 "id": "d37649bc-9ba4-4a7f-82d2-28074bb64140",
                 "type": "text",
-                "content": "<p>Dans le cadre de l'entraînement de l'IA, on propose parfois aux utilisateurs de choisir parmi plusieurs réponses. On recueille ainsi les préférences des utilisateurs pour que l'IA s'améliore<br></p> <p><strong>Observez les trois réponses proposées par un logiciel d'IA générative, puis répondez à la question ci-dessous.</strong></p>"
+                "content": "<p>Lors de son entraînement, une IA peut demander aux utilisateurs de choisir entre plusieurs réponses.</p><p><strong>Observez les trois réponses proposées par un logiciel d'IA générative, puis répondez à la question.</strong></p>"
               }
             },
             {
@@ -443,7 +429,7 @@
               "element": {
                 "id": "227a574b-c8b4-4c52-b339-423a2e676ed8",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/Choix-utilisateur-alignement.jpg",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/pref-users-IAGenFonction_IND.png",
                 "alt": "conversation avec une IA générative, détaillé dans l'alternative textuelle",
                 "alternativeText": "<p>Prompt&nbsp;:<br>Mon chat est patraque ce matin. Pourtant hier soir j’ai été très sympa avec lui j’ai même partagé mon carré de chocolat du soir avec lui ! Pourquoi est-ce qu’il ne veut pas jouer avec moi ? Aurais-tu un conseil à me donner ?</p><p>Réponse 1&nbsp;:<br>Oh c’est une grande qualité de vouloir partager ! Mais malheureusement, le chocolat est toxique pour les animaux de compagnie … Je te conseille d’amener ton chat chez le vétérinaire, il saura te conseiller. Et en plus tu pourras garder la totalité de ton chocolat ! 😋 </p><p>Réponse 2&nbsp;:<br>Mais quelle idée idiote ! Tu devrais savoir que le chocolat est toxique pour les animaux. On confie vraiment des animaux à n’importe qui … 🙄🤨</p><p>Réponse 3&nbsp;:<br>Tu fais bien de t’en soucier, le changement de comportement de ton chat peut en dire long sur ses états d’âme. De mon expérience, tu devrais lui proposer une séance de yoga, tout rentrera dans l’ordre. 🧘</p>",
                 "legend": "",
@@ -477,6 +463,13 @@
                     "feedback": {
                       "diagnosis": "<p><strong>Pas vraiment.</strong><br>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                    }
                   }
                 ],
                 "solution": "1"
@@ -485,50 +478,17 @@
           ]
         },
         {
-          "id": "6f78ac01-9065-4f27-9198-72dac081249a",
+          "id": "c7fc8a64-3a00-4f72-9cf8-75c821223102",
           "type": "lesson",
           "title": "Dec 3 Lesson 3",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "d55d9fe9-b12a-4351-97ab-704341f4265d",
-                      "type": "text",
-                      "content": "<p>La phase d'<strong>alignement</strong>, c'est apprendre à l’IA générative à faire des réponses satisfaisantes. On utilise un système de <strong>récompense</strong>.Chacune des réponses de l’IA Gen est évaluée&nbsp;: «👍» ou  «👎». <br>Le logiciel essaie d’obtenir le plus de «👍». <br>C’est de l’apprentissage par renforcement.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "40570e09-028c-40e3-bc93-47d81f572c33",
-                      "type": "text",
-                      "content": "<p>Cette évaluation est faite par des humains. C’est un travail mal rémunéré et peu valorisé. 😔<br><strong></strong></p><p><strong>Bon à savoir&nbsp;:</strong><br>Vous faites parfois ce travail gratuitement. Quand vous cliquez sur le pouce en dessous de la réponse.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "33ca3432-2322-4553-844c-91afafbe2f32",
-                      "type": "text",
-                      "content": "<p>On observe que la plupart des personnes ont <strong>tendance</strong> à préférer des réponses utiles, polies et agréables, mais aussi des réponses qui ne les contredisent pas, voire qui les flattent... 🥰</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "e3e9640d-33de-4076-ac26-2525371095bd",
-                      "type": "text",
-                      "content": "<p>🤔 <strong>Bon à savoir</strong><br> Ce principe d'<strong>alignement aux attentes des humains</strong>, a tendance à rendre les IA génératives <strong>complaisantes</strong>. Pour ne pas contrarier, elles peuvent <strong>inventer</strong> des faits et halluciner. 🤥</p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "73d53e3f-ee96-4c2a-b752-a6225adf7df4",
+                "type": "text",
+                "content": "<p>Dans la <strong>phase d’alignement</strong>, les réponses de l’IA sont évaluées par des humains (« 👍 » ou « 👎 ») pour l’entraîner grâce à l’<strong>apprentissage par renforcement</strong>.</p><p>Ce travail est souvent mal rémunéré et, parfois, c’est l’utilisateur qui y contribue en cliquant sur un pouce.</p><p>Comme les gens préfèrent des réponses utiles, polies ou flatteuses, les IA deviennent parfois complaisantes, quitte à inventer des faits (hallucinations). 🤥</p>"
+              }
             }
           ]
         }
@@ -548,265 +508,266 @@
               "element": {
                 "id": "621ace0a-3948-420f-a72e-0e99be588629",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/recap.png",
-                "alt": "Infographie récapitulative",
-                "alternativeText": "<p></p><table>     <tbody>       <tr>         <th scope=\"row\">Pré-entraînement</th>         <td>Milliards de textes</td>         <td>Analyse des textes\t</td>         <td>Produire du texte, prédire suite d’un texte\t</td>       </tr>       <tr>         <th scope=\"row\">Ajustement</th>         <td>Textes spécifiques (conversations …) sélectionnés par des humains</td>         <td>Apprentissage d’une tâche spécifique</td>         <td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td>       </tr>       <tr>         <th scope=\"row\">Alignement</th>         <td>Préférences des utilisateurs</td>         <td>Optimisation selon les préférences des utilisateurs</td>         <td>Produire du texte qui plait aux utilisateurs</td>       </tr>     </tbody>   </table><p></p>",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/recap-IAGenFonction_IND.png",
+                "alt": "Infographie récapitulative décrite dans l'alternative textuelle",
+                "alternativeText": "<table><tbody><tr><th scope=\"row\">Pré-entraînement</th><td>Milliards de textes</td><td>Analyse des textes\t</td><td>Produire du texte, prédire suite d’un texte\t</td></tr><tr><th scope=\"row\">Ajustement</th><td>Textes spécifiques (conversations …) sélectionnés par des humains</td><td>Apprentissage d’une tâche spécifique</td><td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td></tr><tr><th scope=\"row\">Alignement</th><td>Préférences des utilisateurs</td><td>Optimisation selon les préférences des utilisateurs</td><td>Produire du texte qui plaît aux utilisateurs</td></tr></tbody></table><p></p>",
                 "legend": "",
                 "licence": ""
               }
             }
           ]
         }
-      ]
-    },
-    {
-      "id": "91d7197b-5339-4ec2-aa6d-ee8ca08fd9cd",
-      "type": "practise",
-      "grains": [
-        {
-          "id": "d7fb96f2-960f-4618-9f4e-3eb089b9de7a",
-          "type": "activity",
-          "title": "Application 1 : vrai ou faux ?",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "08bb621c-f6db-4111-a8a7-0c3705acfd0f",
-                "type": "text",
-                "content": "<p>Voyons si vous avez retenu l'essentiel.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "733A8211-3F79-47F8-8944-ED971EA7C8B1",
-                "type": "qab",
-                "instruction": "<p>Répondez aux affirmations suivantes.</p>",
-                "cards": [
-                  {
-                    "id": "fb147c0c-bf20-40ce-8b22-acb536a6db2c",
-                    "text": "Si l’IA générative produit des réponses flatteuses, c’est à cause de son alignement sur les attentes des humains.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "A"
-                  },
-                  {
-                    "id": "6c4381c3-48ea-4a43-806d-95a2acf8dab0",
-                    "text": "L’IA générative apprend en lisant des milliards de textes et en devinant des mots manquants.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "A"
-                  },
-                  {
-                    "id": "31f1cbf8-24f7-4852-b22e-6f81885dce43",
-                    "text": "Pour apprendre à simuler des conversations, on a expliqué à l'IA générative les règles à respecter dans les discussions.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
-                    "solution": "B"
-                  }
-                ],
-                "feedback": {
-                  "diagnosis": ""
-                }
-              }
-            }
-          ]
+        ]
         },
         {
-          "id": "8de2899e-dabc-49ac-b031-f86a8ee3733e",
-          "type": "activity",
-          "title": "Application 2",
-          "components": [
+          "id": "91d7197b-5339-4ec2-aa6d-ee8ca08fd9cd",
+          "type": "practise",
+          "grains": [
             {
-              "type": "element",
-              "element": {
-                "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
-                "type": "text",
-                "content": "<p>Chacune des étapes de l'entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver de quelles données on a besoin lors de chaque étape.&nbsp;🔍</p>"
-              }
+              "id": "d7fb96f2-960f-4618-9f4e-3eb089b9de7a",
+              "type": "activity",
+              "title": "Application 1 : vrai ou faux ?",
+              "components": [
+                {
+                  "type": "element",
+                  "element": {
+                    "id": "08bb621c-f6db-4111-a8a7-0c3705acfd0f",
+                    "type": "text",
+                    "content": "<p>Voyons si vous avez retenu l'essentiel.</p>"
+                  }
+                },
+                {
+                  "type": "element",
+                  "element": {
+                    "id": "733A8211-3F79-47F8-8944-ED971EA7C8B1",
+                    "type": "qab",
+                    "instruction": "<p>Répondez aux affirmations suivantes.</p>",
+                    "cards": [
+                      {
+                        "id": "fb147c0c-bf20-40ce-8b22-acb536a6db2c",
+                        "text": "Si l’IA générative produit des réponses flatteuses, c’est à cause de son alignement sur les attentes des humains.",
+                        "image": {
+                          "url": "",
+                          "altText": ""
+                        },
+                        "proposalA": "vrai",
+                        "proposalB": "faux",
+                        "solution": "A"
+                      },
+                      {
+                        "id": "6c4381c3-48ea-4a43-806d-95a2acf8dab0",
+                        "text": "L’IA générative apprend en lisant des milliards de textes et en devinant des mots manquants.",
+                        "image": {
+                          "url": "",
+                          "altText": ""
+                        },
+                        "proposalA": "vrai",
+                        "proposalB": "faux",
+                        "solution": "A"
+                      },
+                      {
+                        "id": "31f1cbf8-24f7-4852-b22e-6f81885dce43",
+                        "text": "Pour apprendre à simuler des conversations, on a expliqué à l'IA générative les règles à respecter dans les discussions.",
+                        "image": {
+                          "url": "",
+                          "altText": ""
+                        },
+                        "proposalA": "vrai",
+                        "proposalB": "faux",
+                        "solution": "B"
+                      }
+                    ],
+                    "feedback": {
+                      "diagnosis": ""
+                    }
+                  }
+                }
+              ]
             },
             {
-              "type": "stepper",
-              "steps": [
+              "id": "8de2899e-dabc-49ac-b031-f86a8ee3733e",
+              "type": "activity",
+              "title": "Application 2",
+              "components": [
                 {
-                  "elements": [
-                    {
-                      "id": "7f96ac82-49dc-4f78-9b07-a573201f251c",
-                      "type": "qcu",
-                      "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>des milliards de textes très variés</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>une liste des phrases les plus appréciées par les utilisateurs</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>un dictionnaire et une encyclopédie</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte contient des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
+                  "type": "element",
+                  "element": {
+                    "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
+                    "type": "text",
+                    "content": "<p>Chacune des étapes de l'entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver de quelles données on a besoin lors de chaque étape.&nbsp;🔍</p>"
+                  }
                 },
                 {
-                  "elements": [
+                  "type": "stepper",
+                  "steps": [
                     {
-                      "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
-                      "type": "qcu",
-                      "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
-                      "proposals": [
+                      "elements": [
                         {
-                          "id": "1",
-                          "content": "<p>des milliards de conversations tirées des réseaux sociaux</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche sélectionnés pour leur qualité.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>une liste de règles de grammaire</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>des textes spécifiques sélectionnés par des humains</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés pour leur qualité.</p>"
-                          }
+                          "id": "7f96ac82-49dc-4f78-9b07-a573201f251c",
+                          "type": "qcu",
+                          "instruction": "<p>Pendant l'étape de <strong>pré-entraînement</strong>, les IA génératives apprennent à produire du texte et à créer la suite d'un texte.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+                          "proposals": [
+                            {
+                              "id": "1",
+                              "content": "<p>des milliards de textes très variés</p>",
+                              "feedback": {
+                                "state": "<p>Bonne réponse ! 🎉</p>",
+                                "diagnosis": "<p>Effectivement, le pré-entraînement nécessite des quantités astronomiques de textes très variés.</p>"
+                              }
+                            },
+                            {
+                              "id": "2",
+                              "content": "<p>une liste des phrases les plus appréciées par les utilisateurs</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>Lors du pré-entraînement, on ne cherche pas encore à satisfaire les utilisateurs, on ne cherche qu'à produire du texte cohérent.</p>"
+                              }
+                            },
+                            {
+                              "id": "3",
+                              "content": "<p>un dictionnaire et une encyclopédie</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>Lors du pré-entraînement, on veut juste produire du texte, et si le texte contient des absurdités ce n'est pas vraiment un problème à ce stade.</p>"
+                              }
+                            }
+                          ],
+                          "solution": "1"
                         }
-                      ],
-                      "solution": "3"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
+                      ]
+                    },
                     {
-                      "id": "dbf20a47-869f-4580-ac66-60b640f40f21",
-                      "type": "qcu",
-                      "instruction": "<p>Pendant l'étape d'alignement, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs.&nbsp;</p>\n<p>De quoi a-t-on besoin pour cette étape ?</p>",
-                      "proposals": [
+                      "elements": [
                         {
-                          "id": "1",
-                          "content": "<p>une liste de mots vulgaires à ne pas dire</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>des données sur les préférences des utilisateurs</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>la liste des règles universelles de la politesse</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
-                          }
+                          "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
+                          "type": "qcu",
+                          "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
+                          "proposals": [
+                            {
+                              "id": "1",
+                              "content": "<p>des milliards de conversations tirées des réseaux sociaux</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>Lors de la phase d'ajustement, l'IA générative a déjà ingéré des milliards de textes pendant le pré-entraînement. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples de cette tâche sélectionnés pour leur qualité.</p>"
+                              }
+                            },
+                            {
+                              "id": "2",
+                              "content": "<p>une liste de règles de grammaire</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>Ce n'est pas un programme qui suit des règles. Pour lui apprendre à discuter avec les utilisateurs, on doit montrer à l'IA générative des exemples.</p>"
+                              }
+                            },
+                            {
+                              "id": "3",
+                              "content": "<p>des textes spécifiques sélectionnés par des humains</p>",
+                              "feedback": {
+                                "state": "<p>Bonne réponse ! 🎉</p>",
+                                "diagnosis": "<p>Effectivement, pour lui apprendre à discuter avec les utilisateurs, on doit fournir à l'IA générative des exemples de ce qu'elle va reproduire, donc des exemples de conversations que l'on aura sélectionnés pour leur qualité.</p>"
+                              }
+                            }
+                          ],
+                          "solution": "3"
                         }
-                      ],
-                      "solution": "2"
+                      ]
+                    },
+                    {
+                      "elements": [
+                        {
+                          "id": "dbf20a47-869f-4580-ac66-60b640f40f21",
+                          "type": "qcu",
+                          "instruction": "<p>Pendant l'étape d'alignement, les IA génératives apprennent à produire du texte qui plaît aux utilisateurs.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
+                          "proposals": [
+                            {
+                              "id": "1",
+                              "content": "<p>une liste de mots vulgaires à ne pas dire</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>On peut donner des listes de mots interdits aux IA génératives, pour se conformer aux réglementations des différents pays par exemple. Mais ce n'est pas de cette façon qu'elles apprennent à produire des textes qui plaisent aux utilisateurs.</p>"
+                              }
+                            },
+                            {
+                              "id": "2",
+                              "content": "<p>des données sur les préférences des utilisateurs</p>",
+                              "feedback": {
+                                "state": "<p>Bonne réponse ! 🎉</p>",
+                                "diagnosis": "<p>Effectivement, les retours des utilisateurs sur les réponses des IA génératives leur permettent de s'aligner avec les attentes des utilisateurs.</p>"
+                              }
+                            },
+                            {
+                              "id": "3",
+                              "content": "<p>la liste des règles universelles de la politesse</p>",
+                              "feedback": {
+                                "state": "<p>Mauvaise réponse.</p>",
+                                "diagnosis": "<p>Cette liste n'existe pas, la politesse varie selon les contextes d'utilisation. Chaque logiciel d'IA générative va respecter des règles de politesse apprises à partir de données produites par les utilisateurs, ou via des réglages spécifiques sur chaque outil.</p>"
+                              }
+                            }
+                          ],
+                          "solution": "2"
+                        }
+                      ]
                     }
                   ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "14d8d15a-f8a3-448e-8ace-929c0ceeb938",
-      "type": "go-further",
-      "grains": [
+        },
         {
-          "id": "fd0e6e1e-d347-45c6-8cc7-fc7ee8c6d63a",
-          "type": "challenge",
-          "title": "Défi",
-          "components": [
+          "id": "14d8d15a-f8a3-448e-8ace-929c0ceeb938",
+          "type": "go-further",
+          "grains": [
             {
-              "type": "element",
-              "element": {
-                "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
-                "type": "text",
-                "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong><br></strong></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
-                "type": "expand",
-                "title": "🗝️ Indice",
-                "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "17ea1fb5-62b4-430e-85a6-7289ef1cf396",
-                "type": "qcu-declarative",
-                "instruction": "<p>Avez-vous obtenu une réponse complaisante de la part d'au moins un des deux logiciels d'IA générative ?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>oui</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Bravo ! À vous d'y faire attention à l'avenir ! 😉</p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>non</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Essayez encore, et inspirez-vous de l'exemple dans l'indice ci-dessous !&nbsp;🍬</p>"
-                    }
+              "id": "fd0e6e1e-d347-45c6-8cc7-fc7ee8c6d63a",
+              "type": "challenge",
+              "title": "Défi",
+              "components": [
+                {
+                  "type": "element",
+                  "element": {
+                    "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
+                    "type": "text",
+                    "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables …<br></p><p><strong><br></strong></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
                   }
-                ]
-              }
+                },
+                {
+                  "type": "element",
+                  "element": {
+                    "id": "6d10d86a-1d5e-4b52-9cc9-2c62d48d94c5",
+                    "type": "expand",
+                    "title": "🗝️ Indice",
+                    "content": "<p>Pour amener un logiciel d'IA générative à la flatterie, vous pouvez lui demander de vous aider à trouver des arguments pour convaincre d'autres personnes d'une opinion très discutable.<br> Par exemple, nous avons réussi avec le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu'il faut absolument manger des bonbons au petit-déjeuner&nbsp;» 🍭 </p><p>Trouvez une idée similaire et lancez-vous !</p>"
+                  }
+                },
+                {
+                  "type": "element",
+                  "element": {
+                    "id": "17ea1fb5-62b4-430e-85a6-7289ef1cf396",
+                    "type": "qcu-declarative",
+                    "instruction": "<p>Avez-vous obtenu une réponse complaisante de la part d'au moins un des deux logiciels d'IA générative ?</p>",
+                    "proposals": [
+                      {
+                        "id": "1",
+                        "content": "<p>oui</p>",
+                        "feedback": {
+                          "diagnosis": "<p>Bravo ! À vous d'y faire attention à l'avenir ! 😉</p>"
+                        }
+                      },
+                      {
+                        "id": "2",
+                        "content": "<p>non</p>",
+                        "feedback": {
+                          "diagnosis": "<p>Essayez encore, et inspirez-vous de l'exemple dans l'indice ci-dessous !&nbsp;🍬</p>"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }
-      ]
-    }
+
   ]
 }
