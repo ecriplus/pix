@@ -2,10 +2,11 @@
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').SessionRepository} SessionRepository
  * @typedef {import('./index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {import('./index.js').CourseAssessmentResultRepository} CourseAssessmentResultRepository
  */
 
 import CertificationCancelled from '../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
+import { CertificationCancelNotAllowedError, NotFinalizedSessionError } from '../../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 /**
@@ -14,6 +15,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SessionRepository} params.sessionRepository
  * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ * @param {CourseAssessmentResultRepository} params.courseAssessmentResultRepository
  */
 export const cancel = async function ({
   certificationCourseId,
@@ -21,11 +23,19 @@ export const cancel = async function ({
   certificationCourseRepository,
   sessionRepository,
   certificationRescoringRepository,
+  courseAssessmentResultRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   const session = await sessionRepository.get({ id: certificationCourse.getSessionId() });
   if (!session.isFinalized) {
     throw new NotFinalizedSessionError();
+  }
+
+  const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
+    certificationCourseId,
+  });
+  if (_isAssessmentResultNotCancellable(latestAssessmentResult)) {
+    throw new CertificationCancelNotAllowedError();
   }
 
   const event = new CertificationCancelled({
@@ -40,4 +50,8 @@ export const cancel = async function ({
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
     await certificationRescoringRepository.rescoreV2Certification({ event });
   }
+};
+
+const _isAssessmentResultNotCancellable = (latestAssessmentResult) => {
+  return latestAssessmentResult && latestAssessmentResult.status === 'rejected';
 };

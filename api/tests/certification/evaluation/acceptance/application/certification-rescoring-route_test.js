@@ -119,10 +119,15 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           challengeId: certificationChallenge.challengeId,
           result: AnswerStatus.KO.status,
         });
-        databaseBuilder.factory.buildAssessmentResult({
+        const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
           assessmentId: assessment.id,
           pixScore: 200,
         });
+        databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+          certificationCourseId: certificationCourse.id,
+          lastAssessmentResultId: assessmentResult.id,
+        });
+        databaseBuilder.factory.buildCompetenceMark({ assessmentResultId: assessmentResult.id });
 
         await databaseBuilder.commit();
 
@@ -251,10 +256,15 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           challengeId: certificationChallenge.challengeId,
           result: AnswerStatus.KO.status,
         });
-        databaseBuilder.factory.buildAssessmentResult({
+        const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
           assessmentId: assessment.id,
           pixScore: 200,
         });
+        databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+          certificationCourseId: certificationCourse.id,
+          lastAssessmentResultId: assessmentResult.id,
+        });
+        databaseBuilder.factory.buildCompetenceMark({ assessmentResultId: assessmentResult.id });
 
         await databaseBuilder.commit();
         await datamartBuilder.commit();

@@ -1,3 +1,4 @@
+import { CertificationRejectNotAllowedError } from '../../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourseRejected } from '../events/CertificationCourseRejected.js';
 
@@ -6,8 +7,23 @@ export const rejectCertificationCourse = async ({
   juryId,
   certificationCourseRepository,
   certificationRescoringRepository,
+  courseAssessmentResultRepository,
 }) => {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+
+  try {
+    const latestAssessmentResult = await courseAssessmentResultRepository.getLatestAssessmentResult({
+      certificationCourseId,
+    });
+    if (_isAssessmentResultNotRejectable(latestAssessmentResult)) {
+      throw new CertificationRejectNotAllowedError();
+    }
+  } catch (error) {
+    if (error.message !== 'No assessment result found') {
+      throw error;
+    }
+  }
+
   certificationCourse.rejectForFraud();
   await certificationCourseRepository.update({ certificationCourse });
 
@@ -20,4 +36,8 @@ export const rejectCertificationCourse = async ({
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
     return certificationRescoringRepository.rescoreV2Certification({ event });
   }
+};
+
+const _isAssessmentResultNotRejectable = (latestAssessmentResult) => {
+  return latestAssessmentResult && latestAssessmentResult.status === 'cancelled';
 };
