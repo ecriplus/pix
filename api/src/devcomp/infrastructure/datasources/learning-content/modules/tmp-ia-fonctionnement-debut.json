@@ -49,11 +49,11 @@
               "element": {
                 "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
                 "type": "qcu-discovery",
-                "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que chatGPT générative réponde à cette demande ?</p>",
+                "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que chatGPT réponde à cette demande ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>« Plutôt mer du nord ou mer Méditerranée ? 🌊 »</p>",
+                    "content": "<p>« Plutôt mer du Nord ou mer Méditerranée ? 🌊 »</p>",
                     "feedback": {
                       "diagnosis": "<p>C’est le rôle d’une intelligence artificielle&nbsp;: on pose une question, elle fournit une réponse.</p>"
                     }
@@ -140,7 +140,7 @@
               "element": {
                 "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
                 "type": "text",
-                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine…).</p><p>Il en existe de nombreux à disposition du grand public&nbsp;: chatGPT, microsoft Copilot, Le Chat (Mistral) Deepseek, Perplexity, Claude...  </p>"
+                "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine…).</p><p>Il en existe de nombreux à disposition du grand public&nbsp;: chatGPT, microsoft Copilot, Le Chat (Mistral), Deepseek, Perplexity, Claude...  </p>"
               }
             },
             {
@@ -235,7 +235,7 @@
                     {
                       "id": "eb7f4031-119d-452b-8789-06f9fd19f56c",
                       "type": "text",
-                      "content": "<p>Pour un logiciel d'IA générative c’est un peu le même principe&nbsp;: il construit sa réponse en complétant un texte mot après mot en choisissant des mots très probables. </p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
+                      "content": "<p>Un logiciel d'IA générative construit sa réponse&nbsp;complétant un texte <strong>mot après mot</strong> en choisissant des <strong>mots très probables</strong>.</p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
                     },
                     {
                       "id": "4c1b444d-2e5a-4e50-926f-8a73b8259181",
@@ -442,7 +442,7 @@
                     "id": "2",
                     "content": "<p>des discussions de forums</p>",
                     "feedback": {
-                      "diagnosis": "<p>C'est intéressant pour avoir des mots du quotidien ! Mais la précision du vocabulaire ne sera sûrement pas garantie.&nbsp;Mais les autres types de textes proposés ici sont également utiles.<br></p>"
+                      "diagnosis": "<p>C'est intéressant pour avoir des mots du quotidien ! Mais la précision du vocabulaire ne sera sûrement pas garantie.&nbsp;Les autres types de textes proposés ici sont également utiles.<br></p>"
                     }
                   },
                   {
