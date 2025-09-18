@@ -63,4 +63,25 @@ class VideoPlayedEvent extends PassageEventWithElement {
   }
 }
 
-export { ImageAlternativeTextOpenedEvent, VideoPlayedEvent, VideoTranscriptionOpenedEvent };
+/**
+ * @class FileDownloadedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user downloads a file.
+ * */
+class FileDownloadedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, filename, format }) {
+    super({
+      type: 'FILE_DOWNLOADED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+      data: { filename, format },
+    });
+  }
+}
+
+export { FileDownloadedEvent, ImageAlternativeTextOpenedEvent, VideoPlayedEvent, VideoTranscriptionOpenedEvent };

@@ -1153,12 +1153,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
   });
 
   module('when a download element file is downloaded', function () {
-    test('should push an event', async function (assert) {
+    test('should send a passage-event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const metrics = this.owner.lookup('service:pix-metrics');
-      metrics.trackEvent = sinon.stub();
-
       const downloadedFormat = '.pdf';
       const downloadElement = {
         id: 'id',
@@ -1186,7 +1183,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-      //  when
+      // when
       const downloadLink = await screen.getByRole('link', {
         name: t('pages.modulix.download.label', { format: downloadedFormat }),
       });
@@ -1196,72 +1193,67 @@ module('Integration | Component | Module | Passage', function (hooks) {
       downloadLink.click();
 
       // then
-      sinon.assert.calledWithExactly(
-        metrics.trackEvent,
-        `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
-        {
-          category: 'Modulix',
-          disabled: true,
-
-          action: `Passage du module : ${module.slug}`,
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'FILE_DOWNLOADED',
+        data: {
+          elementId: downloadElement.id,
+          format: downloadedFormat,
+          filename: 'placeholder-doc.pdf',
         },
-      );
+      });
       assert.ok(true);
     });
 
     module('when download is in a stepper', function () {
-      test('should push metrics event', async function (assert) {
-        // given
-        const metrics = this.owner.lookup('service:pix-metrics');
-        metrics.trackEvent = sinon.stub();
-
+      test('should send a passage-event', async function (assert) {
         // given
         const store = this.owner.lookup('service:store');
         const downloadedFormat = '.pdf';
         const downloadElement = {
-          id: 'id',
+          id: 'downloaded-element-id',
           type: 'download',
           files: [{ format: downloadedFormat, url: 'https://example.org/modulix/placeholder-doc.pdf' }],
         };
+        const step = { elements: [downloadElement] };
         const section = store.createRecord('section', {
           id: 'section1',
           type: 'blank',
           grains: [
             {
-              title: 'Grain title',
-              components: [{ type: 'element', element: downloadElement }],
+              id: '123-stepper',
+              components: [{ type: 'stepper', steps: [step] }],
             },
           ],
         });
+
         const module = store.createRecord('module', {
-          id: 'module-id',
+          id: '1',
           slug: 'module-slug',
-          title: 'Module title',
+          title: 'Module title with stepper',
           sections: [section],
         });
         const passage = store.createRecord('passage');
+
         const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
 
-        //  when
-        const link = await screen.getByRole('link', {
+        // when
+        const downloadLink = await screen.getByRole('link', {
           name: t('pages.modulix.download.label', { format: downloadedFormat }),
         });
-        link.addEventListener('click', (event) => {
+        downloadLink.addEventListener('click', (event) => {
           event.preventDefault();
         });
-        link.click();
+        downloadLink.click();
 
         // then
-        sinon.assert.calledWithExactly(
-          metrics.trackEvent,
-          `Click sur le bouton Télécharger au format ${downloadedFormat} de ${downloadElement.id}`,
-          {
-            category: 'Modulix',
-            disabled: true,
-
-            action: `Passage du module : ${module.slug}`,
+        sinon.assert.calledWithExactly(passageEventRecordStub, {
+          type: 'FILE_DOWNLOADED',
+          data: {
+            elementId: downloadElement.id,
+            format: downloadedFormat,
+            filename: 'placeholder-doc.pdf',
           },
-        );
+        });
         assert.ok(true);
       });
     });

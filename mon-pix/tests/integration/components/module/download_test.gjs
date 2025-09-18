@@ -98,7 +98,8 @@ module('Integration | Component | Module | Element | Download', function (hooks)
       // then
       sinon.assert.calledWithExactly(onDownloadStub, {
         elementId: downloadElement.id,
-        downloadedFormat,
+        format: downloadedFormat,
+        filename: 'placeholder-doc.pdf',
       });
       assert.ok(true);
     });
