@@ -129,7 +129,12 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -206,21 +211,21 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>celui avec un ton sérieux.</p>",
+                    "content": "<p>celui avec un ton sérieux</p>",
                     "feedback": {
                       "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>celui avec un ton drôle.</p>",
+                    "content": "<p>celui avec un ton drôle</p>",
                     "feedback": {
                       "diagnosis": "<p>Un choix original ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>aucun ne me plaît.</p>",
+                    "content": "<p>Aucun ne me plaît.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
                     }
@@ -256,7 +261,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela , il prépare un document d'entraînement sous la forme d'un <strong>tableau</strong>.</p>"
+                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela, il prépare un document d'entraînement sous la forme d'un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -279,7 +284,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
               }
             },
             {
@@ -396,10 +401,13 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
+                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutants.</p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -408,7 +416,7 @@
                     {
                       "id": "f64e341e-4e3b-4088-827d-9f353b869749",
                       "type": "text",
-                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination des joueurs adultes loisirs.&nbsp;»</p>"
+                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination de joueurs adultes.&nbsp;»</p>"
                     },
                     {
                       "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
@@ -438,7 +446,11 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -477,7 +489,10 @@
                           "diagnosis": "<p>Ici, le format est le dialogue et le contexte, celui du match de volley.</p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -516,7 +531,10 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
                       ]
                     }
                   ]
@@ -663,7 +681,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
+                "instruction": "<p>Utilisez&nbsp;<strong>l'IA</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
