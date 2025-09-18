@@ -384,7 +384,7 @@
               "element": {
                 "id": "cfeb8a41-f755-4e9f-ad30-d103d9530837",
                 "type": "text",
-                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br> L’IA apprend ainsi, par apprentissage supervisé, à simuler une conversation.</p><p> Le saviez-vous ?</p><p>Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi à lui apprendre d’autres tâches : résumer un texte, rédiger une lettre de motivation, etc.</p>"
+                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi à lui apprendre d’autres tâches : résumer un texte, rédiger une lettre de motivation, etc.</p>"
               }
             }
           ]
@@ -473,7 +473,7 @@
               "element": {
                 "id": "73d53e3f-ee96-4c2a-b752-a6225adf7df4",
                 "type": "text",
-                "content": "<p>Dans la <strong>phase d’alignement</strong>, les réponses de l’IA sont évaluées par des humains (« 👍 » ou « 👎 ») pour l’entraîner grâce à l’apprentissage par renforcement.</p><p>Ce travail est souvent mal rémunéré et, parfois, c’est l’utilisateur qui y contribue en cliquant sur un pouce.</p><p>Comme les gens préfèrent des réponses utiles, polies ou flatteuses, les IA deviennent parfois complaisantes, quitte à inventer des faits (hallucinations). 🤥</p>"
+                "content": "<p>Dans la <strong>phase d’alignement</strong>, les réponses de l’IA sont évaluées par des humains (« 👍 » ou « 👎 ») pour l’entraîner grâce à l’<strong>apprentissage par renforcement</strong>.</p><p>Ce travail est souvent mal rémunéré et, parfois, c’est l’utilisateur qui y contribue en cliquant sur un pouce.</p><p>Comme les gens préfèrent des réponses utiles, polies ou flatteuses, les IA deviennent parfois complaisantes, quitte à inventer des faits (hallucinations). 🤥</p>"
               }
             }
           ]
@@ -494,9 +494,9 @@
               "element": {
                 "id": "621ace0a-3948-420f-a72e-0e99be588629",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-int-mgo/recap.png",
-                "alt": "Infographie récapitulative",
-                "alternativeText": "<p></p><table>     <tbody>       <tr>         <th scope=\"row\">Pré-entraînement</th>         <td>Milliards de textes</td>         <td>Analyse des textes\t</td>         <td>Produire du texte, prédire suite d’un texte\t</td>       </tr>       <tr>         <th scope=\"row\">Ajustement</th>         <td>Textes spécifiques (conversations …) sélectionnés par des humains</td>         <td>Apprentissage d’une tâche spécifique</td>         <td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td>       </tr>       <tr>         <th scope=\"row\">Alignement</th>         <td>Préférences des utilisateurs</td>         <td>Optimisation selon les préférences des utilisateurs</td>         <td>Produire du texte qui plait aux utilisateurs</td>       </tr>     </tbody>   </table><p></p>",
+                "url": "https://assets.pix.org/modules/IAGenFonction_IND/recap-IAGenFonction_IND.png",
+                "alt": "Infographie récapitulative décrite dans l'alternative textuelle",
+                "alternativeText": "<table><tbody><tr><th scope=\"row\">Pré-entraînement</th><td>Milliards de textes</td><td>Analyse des textes\t</td><td>Produire du texte, prédire suite d’un texte\t</td></tr><tr><th scope=\"row\">Ajustement</th><td>Textes spécifiques (conversations …) sélectionnés par des humains</td><td>Apprentissage d’une tâche spécifique</td><td>Savoir créer du texte avec des contraintes de style, forme, etc (conversation, …)</td></tr><tr><th scope=\"row\">Alignement</th><td>Préférences des utilisateurs</td><td>Optimisation selon les préférences des utilisateurs</td><td>Produire du texte qui plaît aux utilisateurs</td></tr></tbody></table><p></p>",
                 "legend": "",
                 "licence": ""
               }
@@ -714,7 +714,7 @@
                   "element": {
                     "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
                     "type": "text",
-                    "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables...<br></p><p><strong><br></strong></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
+                    "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Il existe plusieurs logiciels d'IA générative. Ils ont été entraînés de différentes manières, avec différents types de données.</p><p>Nous allons essayer d'observer la tendance des IA génératives à la complaisance, à la flatterie&nbsp;: c'est-à-dire à ne pas remettre en question ce que vous leur dites, même si vous écrivez des choses très discutables …<br></p><p><strong><br></strong></p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a></li><li>Posez une question de votre choix</li><li>Observez les réponses des 2 logiciels d'IA générative</li><li>Essayez de voir les différences, quelle réponse est la plus complaisante avec vous.</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
                   }
                 },
                 {
