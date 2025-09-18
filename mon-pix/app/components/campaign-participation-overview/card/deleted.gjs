@@ -5,6 +5,7 @@ import { t } from 'ember-intl';
 function getStatusWording(state) {
   const statusKey = {
     started: 'started-at',
+    aborted: 'started-at',
     completed: 'finished-at',
   };
   return `pages.campaign-participation-overview.card.${statusKey[state]}`;
