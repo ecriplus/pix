@@ -228,7 +228,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
     assert.ok(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
   });
 
-  test('should display an error message if QROCM is validated without response', async function (assert) {
+  test('should display an error message, and no feedback, if QROCM is validated without response', async function (assert) {
     // given
     const qrocm = prepareQrocm();
     const screen = await render(<template><ModuleQrocm @element={{qrocm}} /></template>);
@@ -238,6 +238,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('alert')).exists();
+    assert.dom(screen.queryByText('Correct!')).doesNotExist();
   });
 
   test('should hide the error message when QROCM is validated with response', async function (assert) {
