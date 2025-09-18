@@ -22,9 +22,9 @@ describe('Integration | UseCase | get-campaign', function () {
       await databaseBuilder.commit();
     });
 
-    it('should defined isFromCombinedCourse to true when campaign register on combined course', async function () {
+    it('should return combinedCourse info when a combined course is associated with a campaign', async function () {
       // given
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      const combinedCourseId = databaseBuilder.factory.buildQuestForCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
@@ -40,7 +40,7 @@ describe('Integration | UseCase | get-campaign', function () {
             },
           },
         ],
-      });
+      }).id;
       await databaseBuilder.commit();
 
       // when
@@ -49,17 +49,20 @@ describe('Integration | UseCase | get-campaign', function () {
       });
 
       // then
-      expect(resultCampaign.isFromCombinedCourse).true;
+      expect(resultCampaign.combinedCourse).deep.equal({
+        id: combinedCourseId,
+        name: 'Mon parcours Combiné',
+      });
     });
 
-    it('should defined isFromCombinedCourse to false when campaign is not register on combined course', async function () {
+    it('should not return combinedCourse info when a combined course is not associated with a campaign', async function () {
       // when
       const resultCampaign = await usecases.getCampaign({
         campaignId: campaign.id,
       });
 
       // then
-      expect(resultCampaign.isFromCombinedCourse).false;
+      expect(resultCampaign.combinedCourse).undefined;
     });
   });
   context('Type ASSESSMENT', function () {

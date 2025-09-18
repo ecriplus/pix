@@ -145,7 +145,7 @@ const findPaginatedFilteredByOrganizationId = async function ({
   const campaignReports = await PromiseUtils.mapSeries(results, async (attributes) => {
     const campaignReport = new CampaignReport(attributes);
     const combinedCourseInfo = await combinedCourseRepo.findByCampaignId({ campaignId: campaignReport.id });
-    campaignReport.setIsFromCombinedCourse(combinedCourseInfo.length > 0);
+    campaignReport.setCombinedCourse(combinedCourseInfo[0]);
     return campaignReport;
   });
   return { models: campaignReports, meta: { ...pagination, hasCampaigns } };

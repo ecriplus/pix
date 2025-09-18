@@ -10,7 +10,11 @@ const getCampaign = async function ({
   const campaignReport = await campaignReportRepository.get(campaignId);
 
   const existingCombinedCourse = await findByCampaignId({ campaignId });
-  campaignReport.setIsFromCombinedCourse(existingCombinedCourse.length > 0);
+
+  if (existingCombinedCourse.length > 0) {
+    const { id, name } = existingCombinedCourse[0];
+    campaignReport.setCombinedCourse({ id, name });
+  }
 
   if (campaignReport.isAssessment || campaignReport.isExam) {
     const [badges, stageCollection, masteryRates] = await Promise.all([
