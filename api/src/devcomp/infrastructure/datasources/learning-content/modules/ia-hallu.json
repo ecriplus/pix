@@ -423,6 +423,7 @@
               "element": {
                 "id": "99a8eb7c-6642-40e8-b6b5-c38af3bd5283",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
@@ -882,6 +883,7 @@
                     {
                       "id": "66180f4b-6038-4ae6-b743-defdf3649d1f",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -940,6 +942,7 @@
                     {
                       "id": "0935e0be-6a22-432b-82df-973b685d1f94",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -1006,6 +1009,7 @@
                     {
                       "id": "dc534328-51cc-4686-9d59-13809c4015d8",
                       "type": "custom",
+                      "instruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
