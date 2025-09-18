@@ -36,6 +36,8 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
         ],
       });
 
+      report.setCombinedCourse({ id: 123, name: 'Mon combinix' });
+
       report.setTargetProfileInformation({
         tubeCount: 3,
         thematicResultCount: 2,
@@ -130,6 +132,7 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
             'reached-stage': report.reachedStage,
             'total-stage': report.totalStage,
             'is-from-combined-course': report.isFromCombinedCourse,
+            'combined-course': report.combinedCourse,
           },
         },
         included: [
