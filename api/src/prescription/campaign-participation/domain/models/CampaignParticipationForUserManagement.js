@@ -23,6 +23,7 @@ class CampaignParticipationForUserManagement {
     this.campaignCode = null;
     this.sharedAt = null;
     this.deletedAt = null;
+    this.isFromCombinedCourse = null;
 
     if (campaignParticipationId) {
       this.organizationLearnerFullName = `${organizationLearnerFirstName} ${organizationLearnerLastName}`;
@@ -36,6 +37,10 @@ class CampaignParticipationForUserManagement {
       this.organizationLearnerFullName = '-';
       this.deletedAt = updatedAt;
     }
+  }
+
+  setIsFromCombinedCourse(isFromCombinedCourse) {
+    this.isFromCombinedCourse = isFromCombinedCourse === true;
   }
 }
 
