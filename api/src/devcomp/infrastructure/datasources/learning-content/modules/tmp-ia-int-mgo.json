@@ -163,7 +163,14 @@
                     "id": "4",
                     "content": "<p>Elle retient toutes les expressions humaines avec des moyens mnémotechniques.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
+                      "diagnosis": "<p><strong>Et non.</strong><br>Les moyens mnémotechniques sont utiles pour les humains, pas pour les machines. Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pour parler comme un humain, l’IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   }
                 ],
@@ -455,6 +462,13 @@
                     "content": "<p>la réponse 3</p>",
                     "feedback": {
                       "diagnosis": "<p><strong>Pas vraiment.</strong><br>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Les gens ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
                     }
                   }
                 ],
