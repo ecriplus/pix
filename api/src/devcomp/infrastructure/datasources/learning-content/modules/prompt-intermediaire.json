@@ -293,7 +293,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbyvhypt0007wa01s7k2wl8k",
-                "instruction": "À vous de jouer !",
+                "instruction": "<p>À vous de jouer : vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -558,7 +558,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p><p>Discutez avec l’IA&nbsp;jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
               }
             },
             {
@@ -569,7 +569,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur de LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbux83260005wa011nxx2c6n",
-                "instruction": "<p>Discutez avec l’IA de Pix jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>",
+                "instruction": "<p>Vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -677,7 +677,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire, à vous de jouer !</p>",
+                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire : vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
