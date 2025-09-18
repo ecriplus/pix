@@ -162,7 +162,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
-                "content": "<p>Ces 3 images sont&nbsp;<strong>hyperréalistes</strong>&nbsp;mais fausses&nbsp;: ce sont des deepfakes.    Les deepfakes peuvent être&nbsp;:&nbsp;</p><br><ul>    <li>        des vidéos▶️    </li>    <li> des images&nbsp;🖼️</li>    <li>        des sons&nbsp;🎙️    </li>    <li> des textes&nbsp;🗒️    </li></ul><p>    Les deepfakes, hypertrucages en français, sont créés&nbsp;<strong>grâce à l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus&nbsp;<strong>difficile de reconnaître un deepfake </strong>!     </p><p>👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;</p><p>🔎 Mais,&nbsp;observer&nbsp;une image, une vidéo ou écouter attentivement un son<strong>&nbsp;n</strong><strong>e suffit pas pour détecter un deepfake.</strong></p>"
+                "content": "<p>Ces 3 images sont&nbsp;<strong>hyperréalistes</strong>&nbsp;mais fausses&nbsp;: ce sont des deepfakes.    Les deepfakes peuvent être&nbsp;:&nbsp;</p><ul>    <li>        des vidéos▶️    </li>    <li> des images&nbsp;🖼️</li>    <li>        des sons&nbsp;🎙️    </li>    <li> des textes&nbsp;🗒️    </li></ul><p>    Les deepfakes, hypertrucages en français, sont créés&nbsp;<strong>grâce à l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus&nbsp;<strong>difficile de reconnaître un deepfake </strong>!     </p><p>👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;</p><p>🔎 Mais,&nbsp;observer&nbsp;une image, une vidéo ou écouter attentivement un son<strong>&nbsp;n</strong><strong>e suffit pas pour détecter un deepfake.</strong></p>"
               }
             }
           ]
@@ -718,7 +718,10 @@
                           "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
                         }
                       },
-                      "solutions": ["1", "3"]
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },
