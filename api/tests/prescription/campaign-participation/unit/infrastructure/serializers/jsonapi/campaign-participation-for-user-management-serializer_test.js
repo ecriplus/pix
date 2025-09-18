@@ -17,6 +17,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-for-user-manageme
         organizationLearnerFirstName: 'Some',
         organizationLearnerLastName: 'Learner',
       });
+      participationForUserManagement.setIsFromCombinedCourse(true);
 
       // when
       const json = serializer.serialize([participationForUserManagement]);
@@ -37,6 +38,7 @@ describe('Unit | Serializer | JSONAPI | campaign-participation-for-user-manageme
               'shared-at': participationForUserManagement.sharedAt,
               'deleted-at': participationForUserManagement.deletedAt,
               'organization-learner-full-name': participationForUserManagement.organizationLearnerFullName,
+              'is-from-combined-course': participationForUserManagement.isFromCombinedCourse,
             },
           },
         ],

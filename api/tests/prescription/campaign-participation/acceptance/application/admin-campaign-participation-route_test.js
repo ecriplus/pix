@@ -60,6 +60,7 @@ describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations
             'campaign-id': campaign.id,
             'created-at': campaignParticipation.createdAt,
             'deleted-at': null,
+            'is-from-combined-course': false,
             'participant-external-id': campaignParticipation.participantExternalId,
             'shared-at': campaignParticipation.sharedAt,
             status: campaignParticipation.status,
