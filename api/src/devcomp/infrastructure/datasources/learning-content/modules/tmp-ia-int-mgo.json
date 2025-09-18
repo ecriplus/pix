@@ -567,7 +567,7 @@
                       },
                       {
                         "id": "31f1cbf8-24f7-4852-b22e-6f81885dce43",
-                        "text": "Pour apprendre à simuler des conversations, on a expliqué à l'IA générative les règles à respecter dans les discussions.",
+                        "text": "On rémunère des millions de personnes pour discuter avec des IA en vue de leur apprendre à simuler des conversations.",
                         "image": {
                           "url": "",
                           "altText": ""
@@ -641,7 +641,7 @@
                         {
                           "id": "f8e1674d-4d8e-45d5-9436-227ae64021a7",
                           "type": "qcu",
-                          "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p><p></p>",
+                          "instruction": "<p>Pendant l'étape d'<strong>ajustement</strong>, les IA génératives apprennent à produire du texte avec un certain style ou format, comme une conversation ou une lettre de motivation.&nbsp;</p><p>De quoi a-t-on besoin pour cette étape ?</p>",
                           "proposals": [
                             {
                               "id": "1",
