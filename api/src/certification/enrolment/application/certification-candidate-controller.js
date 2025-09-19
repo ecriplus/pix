@@ -1,5 +1,4 @@
 import { normalize } from '../../../shared/infrastructure/utils/string-utils.js';
-import * as certificationCandidateSerializer from '../../shared/infrastructure/serializers/jsonapi/certification-candidate-serializer.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as candidateSerializer from '../infrastructure/serializers/candidate-serializer.js';
 import * as enrolledCandidateSerializer from '../infrastructure/serializers/enrolled-candidate-serializer.js';
@@ -54,18 +53,14 @@ const updateEnrolledCandidate = async function (request, h, dependencies = { enr
   return h.response().code(204);
 };
 
-const validateCertificationInstructions = async function (
-  request,
-  h,
-  dependencies = { certificationCandidateSerializer },
-) {
+const validateCertificationInstructions = async function (request, h, dependencies = { candidateSerializer }) {
   const certificationCandidateId = request.params.certificationCandidateId;
 
   const candidate = await usecases.candidateHasSeenCertificationInstructions({
     certificationCandidateId,
   });
 
-  return dependencies.certificationCandidateSerializer.serialize(candidate);
+  return dependencies.candidateSerializer.serializeForParticipation(candidate);
 };
 
 const getCandidate = async function (request, h, dependencies = { candidateSerializer }) {
