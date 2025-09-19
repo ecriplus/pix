@@ -150,4 +150,9 @@ export class Candidate {
   getComplementarySubscription() {
     return this.subscriptions.find((subscription) => subscription.type === SUBSCRIPTION_TYPES.COMPLEMENTARY);
   }
+
+  get complementaryCertificationKey() {
+    const complementarySubscription = this.getComplementarySubscription();
+    return complementarySubscription?.complementaryCertificationKey || null;
+  }
 }

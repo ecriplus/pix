@@ -30,7 +30,14 @@ export async function deserialize(json) {
 
 export const serializeForParticipation = function (candidate) {
   return new Serializer('certification-candidate', {
-    attributes: ['firstName', 'lastName', 'birthdate', 'sessionId', 'hasSeenCertificationInstructions'],
+    attributes: [
+      'firstName',
+      'lastName',
+      'birthdate',
+      'sessionId',
+      'hasSeenCertificationInstructions',
+      'complementaryCertificationKey',
+    ],
   }).serialize(candidate);
 };
 

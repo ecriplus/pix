@@ -3,6 +3,13 @@ const { Serializer } = jsonapiSerializer;
 
 export function serialize(certificationCandidate) {
   return new Serializer('certification-candidate', {
-    attributes: ['firstName', 'lastName', 'birthdate', 'sessionId', 'hasSeenCertificationInstructions'],
+    attributes: [
+      'firstName',
+      'lastName',
+      'birthdate',
+      'sessionId',
+      'hasSeenCertificationInstructions',
+      'complementaryCertificationKey',
+    ],
   }).serialize(certificationCandidate);
 }
