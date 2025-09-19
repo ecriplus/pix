@@ -1,35 +1,73 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../src/quest/application/usecases/check-authorization-to-access-combined-course.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Application | Usecases | checkAuthorizationToAccessCombinedCourse', function () {
-  it('should return true if user belongs to combined course organization', async function () {
-    // given
-    const code = 'COMBINIX1';
-    const userId = databaseBuilder.factory.buildUser().id;
-    const organizationId = databaseBuilder.factory.buildOrganization().id;
-    databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
-    databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
-    await databaseBuilder.commit();
+  context('when user has organization learner in combined course organization', function () {
+    it('should return true', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
+      await databaseBuilder.commit();
 
-    // when
-    const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
+      // when
+      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
 
-    // then
-    expect(authorized).to.be.true;
+      // then
+      expect(authorized).to.be.true;
+    });
   });
 
-  it('should return false otherwise', async function () {
-    // given
-    const code = 'COMBINIX1';
-    const userId = databaseBuilder.factory.buildUser().id;
-    const organizationId = databaseBuilder.factory.buildOrganization().id;
-    databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
-    await databaseBuilder.commit();
+  context('when user does not have any organization learner in combined course organization', function () {
+    it('should return true when the organization has no import feature and is not managing students ', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      await databaseBuilder.commit();
 
-    // when
-    const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
+      // when
+      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
 
-    // then
-    expect(authorized).to.be.false;
+      // then
+      expect(authorized).to.be.true;
+    });
+    it('should return false when the organization is managing students', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization({ isManagingStudents: true }).id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
+
+      // then
+      expect(authorized).to.be.false;
+    });
+    it('should return false when the organization has import feature', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const importFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId,
+        featureId: importFeature.id,
+      });
+      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
+
+      // then
+      expect(authorized).to.be.false;
+    });
   });
 });

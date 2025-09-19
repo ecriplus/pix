@@ -658,6 +658,14 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
     });
 
     it('should return an error if connected user is not allowed to access given combined course', async function () {
+      // given
+      const importFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId,
+        featureId: importFeature.id,
+      });
+
+      await databaseBuilder.commit();
       // when
       const response = await server.inject(options);
 
