@@ -1,6 +1,27 @@
 import { PassageEventWithElement } from './PassageEventWithElement.js';
 
 /**
+ * @class ExpandOpenedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user opens a fold-out text.
+ *
+ * */
+class ExpandOpenedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'EXPAND_OPENED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+/**
  * @class ImageAlternativeTextOpenedEvent
  * See PassageEventWithElement for more info.
  *
@@ -84,4 +105,10 @@ class FileDownloadedEvent extends PassageEventWithElement {
   }
 }
 
-export { FileDownloadedEvent, ImageAlternativeTextOpenedEvent, VideoPlayedEvent, VideoTranscriptionOpenedEvent };
+export {
+  ExpandOpenedEvent,
+  FileDownloadedEvent,
+  ImageAlternativeTextOpenedEvent,
+  VideoPlayedEvent,
+  VideoTranscriptionOpenedEvent,
+};
