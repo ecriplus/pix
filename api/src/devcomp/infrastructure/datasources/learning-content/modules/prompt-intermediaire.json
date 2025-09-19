@@ -1,11 +1,11 @@
 {
   "id": "7a38c90d-9937-4497-bee3-fe58541af420",
   "slug": "tmp-prompt-intermediaire",
-  "title": "J'améliore mes prompts !",
+  "title": "J’améliore mes prompts !",
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
-    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c'est-à-dire, des prompts qu'on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
+    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -38,7 +38,7 @@
         {
           "id": "92f571ad-1a64-4b64-ba8f-782337e61713",
           "type": "discovery",
-          "title": "Conversation d'introduction",
+          "title": "Conversation d’introduction",
           "components": [
             {
               "type": "element",
@@ -48,12 +48,12 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation d'introduction",
+                  "title": "Conversation d’introduction",
                   "messages": [
                     {
                       "userName": "Gustave",
                       "direction": "incoming",
-                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l'IA. Mais avec moi, ça ne marche pas !😒"
+                      "content": "Emma, je ne comprends pas... Tu arrives à faire plein de choses avec l’IA. Mais avec moi, ça ne marche pas !😒"
                     },
                     {
                       "userName": "Emma",
@@ -100,7 +100,7 @@
               "element": {
                 "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
                 "type": "qcm",
-                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l'améliorer ?</p>",
+                "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l’améliorer ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -122,14 +122,19 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien vu !</p>",
-                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse. <br></p>"
+                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse. <br></p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait !</p>",
-                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l'IA a d'informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
+                    "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -144,7 +149,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation&nbsp;: </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l'IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
+                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation&nbsp;: </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -176,15 +181,15 @@
                   "prompts": [
                     {
                       "prompt": "adopte un ton festif",
-                      "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l'ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t'es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t'attend sur le terrain ! 💪"
+                      "response": "🎉 Hey la team !<br> Le tournoi de volley approche et il reste des places ! <br> Viens smasher, rigoler et kiffer l’ambiance 🔥<br> Que tu sois pro ou juste là pour le fun, t’es le·la bienvenu·e 😎 Inscris-toi vite avant vendredi ! <br> Surprises et bonne humeur garanties 🎊 <br>On t’attend sur le terrain ! 💪"
                     },
                     {
                       "prompt": "adopte un ton sérieux",
-                      "response": "Madame, Monsieur,<br> Nous n'avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
+                      "response": "Madame, Monsieur,<br> Nous n’avons pas encore reçu votre confirmation pour le tournoi de volley.<br> Nous espérons vivement votre participation.<br> Merci de bien vouloir nous répondre avant vendredi. <br>Restant à votre disposition, nous vous adressons nos salutations distinguées."
                     },
                     {
                       "prompt": "adopte un ton drôle",
-                      "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu'on t'envoie un ballon par la poste."
+                      "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
                 }
@@ -195,34 +200,34 @@
               "element": {
                 "id": "44028e11-c07a-4920-b1c1-f487f04525e9",
                 "type": "qcu-discovery",
-                "instruction": "<p>Quel message de relance créé avec l'IA est votre préféré ?</p>",
+                "instruction": "<p>Quel message de relance créé avec l’IA est votre préféré ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>celui avec un ton festif</p>",
                     "feedback": {
-                      "diagnosis": "<p>Un choix sympa !&nbsp; Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                      "diagnosis": "<p>Un choix sympa !&nbsp; Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>celui avec un ton sérieux.</p>",
+                    "content": "<p>celui avec un ton sérieux</p>",
                     "feedback": {
-                      "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                      "diagnosis": "<p>Un choix formel ! Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>celui avec un ton drôle.</p>",
+                    "content": "<p>celui avec un ton drôle</p>",
                     "feedback": {
-                      "diagnosis": "<p>Un choix original ! Au final, Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi.</p>"
+                      "diagnosis": "<p>Un choix original ! Au final, Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>aucun ne me plaît.</p>",
+                    "content": "<p>Aucun ne me plaît.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas de souci ! Il existe beaucoup d'autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c'est lui qui connaît le mieux les participants du tournoi !</p>"
+                      "diagnosis": "<p>Pas de souci ! Il existe beaucoup d’autres tons&nbsp;: ironique, poétique… Gustave choisira le ton approprié car c’est lui qui connaît le mieux les participants du tournoi !</p>"
                     }
                   }
                 ],
@@ -256,7 +261,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela , il prépare un document d'entraînement sous la forme d'un <strong>tableau</strong>.</p>"
+                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela, il prépare un document d’entraînement sous la forme d’un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -279,7 +284,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>'IA de Pix</strong> pour répondre à sa demande. N'hésitez pas à préciser au fur et à mesure.</p>"
+                "content": "<p>Gustave souhaite faire un <strong>tableau </strong>similaire, mais pour travailler les <strong>smashs</strong>.<br><br>Utilisez l<strong>’IA</strong> pour répondre à sa demande. N’hésitez pas à préciser au fur et à mesure.</p>"
               }
             },
             {
@@ -300,8 +305,8 @@
               "element": {
                 "id": "2a32ee79-570f-447f-b0c1-b56534d4f670",
                 "type": "expand",
-                "title": "💡 L'astuce pratique",
-                "content": "<p>❌ Il vous arrive d'envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
+                "title": "💡 L’astuce pratique",
+                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️)et Entrée </p>"
               }
             }
           ]
@@ -309,7 +314,7 @@
         {
           "id": "a280f603-3c78-4b98-a858-c2e0119a19af",
           "type": "lesson",
-          "title": "L'importance du format et de l'itération dans les prompts",
+          "title": "L’importance du format et de l’itération dans les prompts",
           "components": [
             {
               "type": "element",
@@ -330,14 +335,14 @@
         {
           "id": "97606a38-68e2-427e-b8e5-65411cd7d5d5",
           "type": "summary",
-          "title": "Récap' : l'essentiel pour faire des bons prompts",
+          "title": "Récap’ : l’essentiel pour faire des bons prompts",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l'IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
+                "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l’IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
               }
             }
           ]
@@ -396,10 +401,13 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d'entraînement pour des enfants de 6 à 8 ans débutant.</p>"
+                          "diagnosis": "<p>Ici, le format est le plan détaillé et le contexte correspond à l’heure d’entraînement pour des enfants de 6 à 8 ans débutants.</p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -408,7 +416,7 @@
                     {
                       "id": "f64e341e-4e3b-4088-827d-9f353b869749",
                       "type": "text",
-                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination des joueurs adultes loisirs.&nbsp;»</p>"
+                      "content": "<p>«&nbsp;Rédige un formulaire d’inscription formel pour une association de volley-ball qui fait des cours tous les jeudi de 18h à 20h à destination de joueurs adultes.&nbsp;»</p>"
                     },
                     {
                       "id": "63e08249-f5bf-4ba0-93c1-9c864caab99b",
@@ -438,7 +446,11 @@
                           "diagnosis": "<p>Ici, le format est le formulaire d’inscription, le ton est formel et le contexte correspond à toutes les informations sur l’association, son public et la fréquence des cours.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -447,7 +459,7 @@
                     {
                       "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
                       "type": "text",
-                      "content": "<p>«Ecris un dialogue entre des spectacteurs d'un match de volley.»</p>"
+                      "content": "<p>«Ecris un dialogue entre des spectacteurs d’un match de volley.»</p>"
                     },
                     {
                       "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
@@ -477,7 +489,10 @@
                           "diagnosis": "<p>Ici, le format est le dialogue et le contexte, celui du match de volley.</p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -516,7 +531,10 @@
                           "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
                       ]
                     }
                   ]
@@ -543,7 +561,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p><p>Discutez avec l’IA&nbsp;jusqu'à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p><p>Discutez avec l’IA&nbsp;jusqu’à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
               }
             },
             {
@@ -564,7 +582,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details>"
               }
             }
           ]
@@ -578,7 +596,7 @@
         {
           "id": "d2f8112e-2fcf-4ccd-a1e5-1879c6987de9",
           "type": "challenge",
-          "title": "Défi : l'actualité du tournoi",
+          "title": "Défi : l’actualité du tournoi",
           "components": [
             {
               "type": "element",
@@ -604,7 +622,7 @@
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-1-illu.svg",
-                        "alt": "Bravo à l'équipe Patata Smash !"
+                        "alt": "Bravo à l’équipe Patata Smash !"
                       },
                       "license": {
                         "name": "",
@@ -618,7 +636,7 @@
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-carrousel-2-illu.svg",
-                        "alt": "Félicitations à l'équipe Filets mignons !"
+                        "alt": "Félicitations à l’équipe Filets mignons !"
                       },
                       "license": {
                         "name": "",
@@ -640,7 +658,7 @@
               "element": {
                 "id": "52c9f208-8f95-4926-a64e-214041a834d2",
                 "type": "text",
-                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l'image illustrant le tournoi.</p>"
+                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l’image illustrant le tournoi.</p>"
               }
             },
             {
@@ -649,8 +667,8 @@
                 "id": "9fb1cf79-a154-4b71-a1e5-cea6803b950b",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
-                "alt": "Une affiche concernant le tournoi de volley - lire l'alternative textuelle",
-                "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l'équipe des volley-raptors vainqueur !&nbsp;</p>",
+                "alt": "Une affiche concernant le tournoi de volley - lire l’alternative textuelle",
+                "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l’équipe des volley-raptors vainqueur !&nbsp;</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -663,7 +681,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbuxyoa30006wa01agdl8qu1",
-                "instruction": "<p>Utilisez&nbsp;<strong>l'IA de Pix</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
+                "instruction": "<p>Utilisez&nbsp;<strong>l’IA</strong> pour le faire&nbsp;: vous avez 5 prompts pour réussir !</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -673,7 +691,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l'équipe vainqueur ?</p></details><p></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details><p></p><p></p><p></p>"
               }
             }
           ]
