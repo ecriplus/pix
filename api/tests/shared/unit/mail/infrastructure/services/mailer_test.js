@@ -14,7 +14,7 @@ describe('Unit | Infrastructure | Mailers | mailer', function () {
 
   beforeEach(function () {
     mailCheck = {
-      checkDomainIsValid: sinon.stub(),
+      assertEmailDomainHasMx: sinon.stub(),
     };
     sinon.stub(mailing, 'provider').value('brevo');
   });
@@ -80,7 +80,7 @@ describe('Unit | Infrastructure | Mailers | mailer', function () {
         it('should send email and return a success status', async function () {
           // given
           _enableMailing();
-          mailCheck.checkDomainIsValid.withArgs(recipient).resolves();
+          mailCheck.assertEmailDomainHasMx.withArgs(recipient).resolves();
 
           const from = 'no-reply@example.net';
           const options = {
@@ -108,7 +108,7 @@ describe('Unit | Infrastructure | Mailers | mailer', function () {
           _enableMailing();
 
           const expectedError = new Error('fail');
-          mailCheck.checkDomainIsValid.withArgs(recipient).rejects(expectedError);
+          mailCheck.assertEmailDomainHasMx.withArgs(recipient).rejects(expectedError);
 
           sinon.stub(logger, 'warn');
           const mailer = new Mailer({ dependencies: { mailCheck } });
@@ -132,7 +132,7 @@ describe('Unit | Infrastructure | Mailers | mailer', function () {
         it('should log a warning and return an error status', async function () {
           // given
           _enableMailing();
-          mailCheck.checkDomainIsValid.withArgs(recipient).resolves();
+          mailCheck.assertEmailDomainHasMx.withArgs(recipient).resolves();
 
           sinon.stub(logger, 'warn');
           const mailer = new Mailer({ dependencies: { mailCheck } });
@@ -157,7 +157,7 @@ describe('Unit | Infrastructure | Mailers | mailer', function () {
             // Given
             _enableMailing();
             const invalidEmailRecipient = 'invalid@email.net';
-            mailCheck.checkDomainIsValid.withArgs(invalidEmailRecipient).resolves();
+            mailCheck.assertEmailDomainHasMx.withArgs(invalidEmailRecipient).resolves();
 
             const mailer = new Mailer({ dependencies: { mailCheck } });
             const mailingProvider = _mockMailingProvider(mailer);

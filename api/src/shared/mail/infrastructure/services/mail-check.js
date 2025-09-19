@@ -6,7 +6,7 @@ const resolver = new Resolver();
 
 let resolveMx = resolver.resolveMx.bind(resolver);
 
-const checkDomainIsValid = function (emailAddress) {
+const assertEmailDomainHasMx = function (emailAddress) {
   const domain = emailAddress.replace(/.*@/g, '');
   return resolveMx(domain).then(() => true);
 };
@@ -19,4 +19,4 @@ const clearResolveMx = function () {
   resolveMx = resolver.resolveMx.bind(resolver);
 };
 
-export { checkDomainIsValid, clearResolveMx, setResolveMx };
+export { assertEmailDomainHasMx, clearResolveMx, setResolveMx };

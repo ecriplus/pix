@@ -95,7 +95,7 @@ export async function addCandidateToSession({
 
   if (candidate.resultRecipientEmail) {
     try {
-      await mailCheck.checkDomainIsValid(candidate.resultRecipientEmail);
+      await mailCheck.assertEmailDomainHasMx(candidate.resultRecipientEmail);
     } catch {
       throw new CertificationCandidatesError({
         code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_RESULT_RECIPIENT_EMAIL_NOT_VALID.code,
@@ -105,7 +105,7 @@ export async function addCandidateToSession({
   }
   if (candidate.email) {
     try {
-      await mailCheck.checkDomainIsValid(candidate.email);
+      await mailCheck.assertEmailDomainHasMx(candidate.email);
     } catch {
       throw new CertificationCandidatesError({
         code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_EMAIL_NOT_VALID.code,

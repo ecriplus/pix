@@ -418,7 +418,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         // given
         const certificationCandidate = _buildValidCandidateData();
         const mailCheckStub = {
-          checkDomainIsValid: sinon.stub().throws(),
+          assertEmailDomainHasMx: sinon.stub().throws(),
         };
 
         // when
@@ -441,7 +441,7 @@ describe('Unit | Service | sessions import validation Service', function () {
         // given
         const certificationCandidate = _buildValidCandidateData();
         const mailCheckStub = {
-          checkDomainIsValid: sinon.stub().resolves(),
+          assertEmailDomainHasMx: sinon.stub().resolves(),
         };
 
         // when
