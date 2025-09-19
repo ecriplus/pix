@@ -28,8 +28,18 @@ export default class Steps extends Component {
     return classOfPages;
   }
 
+  get certificationName() {
+    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
+    if (complementaryKey && complementaryKey !== 'CLEA') {
+      return this.intl.t(`pages.complementary-certification-names.${complementaryKey}`);
+    }
+    return 'Pix';
+  }
+
   get title() {
-    return this.intl.t(`pages.certification-instructions.steps.${this.pageId}.title`);
+    return this.intl.t(`pages.certification-instructions.steps.${this.pageId}.title`, {
+      certificationName: this.certificationName,
+    });
   }
 
   get paging() {
@@ -99,7 +109,7 @@ export default class Steps extends Component {
     </h2>
 
     {{#if (eq this.pageId 1)}}
-      <StepOne />
+      <StepOne @certificationName={{this.certificationName}} />
     {{/if}}
     {{#if (eq this.pageId 2)}}
       <StepTwo />
@@ -111,7 +121,7 @@ export default class Steps extends Component {
       <StepFour />
     {{/if}}
     {{#if (eq this.pageId 5)}}
-      <StepFive />
+      <StepFive @certificationName={{this.certificationName}} />
       <PixCheckbox {{on "change" this.onChange}}>
         <:label>{{t "pages.certification-instructions.steps.5.checkbox-label"}}</:label>
       </PixCheckbox>

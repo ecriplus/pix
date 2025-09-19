@@ -54,4 +54,57 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       });
     });
   });
+
+  module('#certificationName', function () {
+    test('should return Pix when no complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: null,
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix');
+    });
+
+    test('should return complementary certification name when has key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'DROIT',
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix+ Droit');
+    });
+
+    test('should return Pix when has CLEA key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix');
+    });
+  });
+
+  module('#title', function () {
+    test('should use Pix when CLEA complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+      component.pageId = 1;
+
+      // then
+      assert.strictEqual(component.title, 'Bienvenue à la certification Pix');
+    });
+  });
 });

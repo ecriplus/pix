@@ -20,7 +20,10 @@ module('Integration | Component | steps', function (hooks) {
         assert
           .dom(
             screen.getByRole('heading', {
-              name: `${t('pages.certification-instructions.steps.1.title')} Page 1 sur 5`,
+              name: `${t('pages.certification-instructions.steps.1.title', { certificationName: 'Pix' })} ${t(
+                'pages.certification-instructions.vocal-step-identifier',
+                { pageId: 1, pageCount: 5 },
+              )}`,
               level: 2,
             }),
           )
@@ -62,7 +65,10 @@ module('Integration | Component | steps', function (hooks) {
         assert
           .dom(
             screen.getByRole('heading', {
-              name: `${t('pages.certification-instructions.steps.2.title')} Page 2 sur 5`,
+              name: `${t('pages.certification-instructions.steps.2.title')} ${t(
+                'pages.certification-instructions.vocal-step-identifier',
+                { pageId: 2, pageCount: 5 },
+              )}`,
               level: 2,
             }),
           )
@@ -88,7 +94,17 @@ module('Integration | Component | steps', function (hooks) {
         );
 
         // then
-        assert.dom(screen.getByRole('heading', { name: 'Deux modes de questions Page 3 sur 5', level: 2 })).exists();
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: `${t('pages.certification-instructions.steps.3.title')} ${t(
+                'pages.certification-instructions.vocal-step-identifier',
+                { pageId: 3, pageCount: 5 },
+              )}`,
+              level: 2,
+            }),
+          )
+          .exists();
         assert.dom(screen.getByText(t('pages.certification-instructions.steps.3.paragraphs.1.title'))).exists();
         assert.dom(screen.getByText(t('pages.certification-instructions.steps.3.paragraphs.2.title'))).exists();
 
@@ -117,9 +133,17 @@ module('Integration | Component | steps', function (hooks) {
 
         // then
         assert
-          .dom(screen.getByRole('heading', { name: 'Que faire en cas de problème ? Page 4 sur 5', level: 2 }))
+          .dom(
+            screen.getByRole('heading', {
+              name: `${t('pages.certification-instructions.steps.4.title')} ${t(
+                'pages.certification-instructions.vocal-step-identifier',
+                { pageId: 4, pageCount: 5 },
+              )}`,
+              level: 2,
+            }),
+          )
           .exists();
-        assert.dom(screen.getByText('En cas de problème technique')).exists();
+        assert.dom(screen.getByText(t('pages.certification-instructions.steps.4.title'))).exists();
       });
     });
 
@@ -131,7 +155,17 @@ module('Integration | Component | steps', function (hooks) {
         await _goToLastPage(screen);
 
         // then
-        assert.dom(screen.getByRole('heading', { name: 'Règles à respecter Page 5 sur 5', level: 2 })).exists();
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: `${t('pages.certification-instructions.steps.5.title')} ${t(
+                'pages.certification-instructions.vocal-step-identifier',
+                { pageId: 5, pageCount: 5 },
+              )}`,
+              level: 2,
+            }),
+          )
+          .exists();
         assert.dom(screen.getByText(t('pages.certification-instructions.steps.5.text'))).exists();
         assert
           .dom(

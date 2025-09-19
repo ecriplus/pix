@@ -9,7 +9,11 @@ import { t } from 'ember-intl';
       <li>{{t "pages.certification-instructions.steps.5.list.3" htmlSafe=true}}</li>
       <li>{{t "pages.certification-instructions.steps.5.list.4" htmlSafe=true}}</li>
       <li>{{t "pages.certification-instructions.steps.5.list.5" htmlSafe=true}}</li>
-      <li>{{t "pages.certification-instructions.steps.5.list.6" htmlSafe=true}}</li>
+      <li>{{t
+          "pages.certification-instructions.steps.5.list.6"
+          certificationName=@certificationName
+          htmlSafe=true
+        }}</li>
       <li>{{t "pages.certification-instructions.steps.5.list.7" htmlSafe=true}}</li>
     </ul>
     <p class="instructions-content__paragraph--light">
