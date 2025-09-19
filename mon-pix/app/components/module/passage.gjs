@@ -220,6 +220,16 @@ export default class ModulePassage extends Component {
   @action
   async onExpandToggle({ elementId, isOpen }) {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
+
+    if (isOpen) {
+      this.passageEvents.record({
+        type: 'EXPAND_OPENED',
+        data: {
+          elementId,
+        },
+      });
+    }
+
     this.pixMetrics.trackEvent(`${eventToggle} de l'élément Expand : ${elementId}`, {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
