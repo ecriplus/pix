@@ -1,6 +1,6 @@
 .attestation-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--pix-spacing-6x);
   max-width: 100vw;
 }

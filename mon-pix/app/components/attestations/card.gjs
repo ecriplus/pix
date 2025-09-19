@@ -15,14 +15,14 @@ function attestationDelivery(obtainedAt) {
 <template>
   <PixBlock class="attestation-card">
     <header class="attestation-card__header">
-      <div>
+      <div class="attestation-card__content">
         <h2 class="attestation-card__title">{{t (attestationTitle @type)}}</h2>
         <p class="attestation-card__subtitle">{{t
             "components.attestations.obtainedAt"
             date=(attestationDelivery @obtainedAt)
           }}</p>
       </div>
-      <img src="/images/illustrations/attestations/{{@type}}.svg" alt="" />
+      <img src="/images/illustrations/attestations/{{@type}}.svg" alt="" class="attestation-card__illustration" />
     </header>
 
     <PixButton
