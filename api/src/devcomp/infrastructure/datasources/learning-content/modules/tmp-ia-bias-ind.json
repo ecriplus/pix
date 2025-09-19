@@ -573,7 +573,7 @@
               "element": {
                 "id": "32fa1627-38dc-4699-9a71-c14e8e6412df",
                 "type": "text",
-                "content": "<ul> <li>Dans les <strong>données d’entraînement </strong>de l’IA générative, il y a des opinions, des expériences, des stéréotypes, des situations discriminantes ou des préférences culturelles, qui peuvent <strong>être sur-représentées</strong>.<br><br></li><li>L’IA générative génère ses réponses en s’appuyant sur les mots ou les images <strong>les plus fréquents</strong> dans ses données d’entraînement. Elle n’a pas de regard critique. Cela peut l’amener à <strong>produire des réponses contenant des biais</strong>.<br><br></li><li> Les réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes</strong> ou des <strong>situations discriminantes</strong>.<br><br> </li><li>Il faut garder à l’esprit que nous avons des <strong>biais de confirmation</strong>. Ils nous poussent à croire les choses que nous pensons déjà. C'est pourquoi, il faut <strong>faire preuve d'esprit critique</strong>.</li></ul>"
+                "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative contiennent des opinions,  des stéréotypes ou des préférences culturelles, parfois <strong>surreprésentés</strong>.&nbsp;📊\n</li><li>\n\nComme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>\n\n\nLes réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️\n</li><li>\n\nIl faut aussi garder à l’esprit que nous avons nos propres <strong>biais de confirmation</strong>, qui nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
               }
             },
             {
@@ -819,7 +819,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                    "diagnosis": "<p>Vous avez repéré les biais du logiciel d'IA. Il suppose que le terme \"indien\" désigne une personne native d'Amérique, qu'il représenté de façon stéréotypique.&nbsp;<br>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre.</p>"
+                    "diagnosis": "<p>Vous avez repéré les biais du logiciel d'IA. Il suppose que le terme \"indien\" désigne une personne native d'Amérique, qu'il représente de façon stéréotypique.&nbsp;<br>Vous avez aussi remarqué que les sports associés aux prénoms étaient liés à des préjugés correspondant à leur genre.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
@@ -864,7 +864,7 @@
                   },
                   {
                     "id": "5",
-                    "content": "<p>Lyna demande à un logiciel d’IA générative les sources qui lui permettent d’affirmer les avantages et les inconvénients du bitcoin.</p>"
+                    "content": "<p>Lyna demande à une IA générative ses sources sur les avantages et les inconvénients du bitcoin.</p>"
                   }
                 ],
                 "feedbacks": {
@@ -901,7 +901,7 @@
               "element": {
                 "id": "dedd40de-89dd-479e-a79e-ea1ba6b98646",
                 "type": "text",
-                "content": "<p>Pour finir, nous vous encourageons à prendre une bonne résolution pour limiter vos biais en utilisant les IA génératives !</p>"
+                "content": "<p>Enfin, nous vous invitons à rester attentif aux biais lorsque vous utilisez l’IA. </p><p>Quelle bonne résolution souhaitez-vous prendre ?</p>"
               }
             },
             {
