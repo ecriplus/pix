@@ -25,18 +25,30 @@ export default class ApplicationTemplate extends Component {
     );
   }
 
-  get isLoginPages() {
-    return this.router.currentRouteName.startsWith('authentication.');
-  }
-
   get isFullWidth() {
-    return (
+    const isAccessPages =
+      this.router.currentRouteName.startsWith('authentication.') ||
+      this.router.currentRouteName.startsWith('inscription.') ||
+      this.router.currentRouteName.startsWith('account-recovery.') ||
+      ['not-connected', 'cgu', 'reset-password', 'password-reset-demand', 'update-expired-password'].includes(
+        this.router.currentRouteName,
+      );
+
+    const isEvaluationPages =
       this.router.currentRouteName.startsWith('assessments.') ||
       this.router.currentRouteName === 'campaigns.assessment.tutorial' ||
+      this.router.currentRouteName.startsWith('organizations.');
+
+    const isModulePages =
       this.router.currentRouteName.startsWith('module.') ||
       this.router.currentRouteName === 'module-preview-existing' ||
-      this.router.currentRouteName === 'module-preview'
+      this.router.currentRouteName === 'module-preview';
+
+    const isCertificationsPages = ['authenticated.certifications.information', 'companion'].includes(
+      this.router.currentRouteName,
     );
+
+    return isAccessPages || isEvaluationPages || isModulePages || isCertificationsPages;
   }
 
   <template>
@@ -51,7 +63,6 @@ export default class ApplicationTemplate extends Component {
     <div id="app">
       <AppLayout
         @displayFullLayout={{this.displayFullLayout}}
-        @isLoginPages={{this.isLoginPages}}
         @isFullWidth={{this.isFullWidth}}
         @banners={{@controller.model.informationBanner.banners}}
       >

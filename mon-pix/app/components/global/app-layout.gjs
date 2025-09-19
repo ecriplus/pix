@@ -23,9 +23,7 @@ export default class AppLayout extends Component {
   get appLayoutClass() {
     const cssClass = [];
 
-    if (!this.args.displayFullLayout) cssClass.push('page-without-navbar ');
-
-    if (this.args.isLoginPages) cssClass.push('page-without-navbar--login-page');
+    if (!this.args.displayFullLayout) cssClass.push('page-without-navbar');
 
     if (this.args.isFullWidth) cssClass.push('page-without-navbar--force-max-width');
 
