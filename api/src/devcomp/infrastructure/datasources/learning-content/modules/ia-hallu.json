@@ -226,14 +226,14 @@
                             "label": "Un peu",
                             "feedback": {
                               "type": "neutral",
-                              "text": "Effectivement, vous pouviez avoir confiance en cette réponse, elle est juste."
+                              "text": "Ici, la réponse est correcte. Mais rien, dans sa présentation, ne permettait de le savoir sans vérifier, il est préférable de rester vigilant."
                             }
                           },
                           {
                             "label": "Complètement",
                             "feedback": {
                               "type": "neutral",
-                              "text": "Effectivement, vous pouviez avoir confiance en cette réponse, elle est juste."
+                              "text": "Ici, la réponse est correcte. Mais rien, dans sa présentation, ne permettait de le savoir sans vérifier, il est préférable de rester vigilant"
                             }
                           }
                         ]
@@ -901,7 +901,7 @@
                     {
                       "id": "4973d664-0caf-4e10-9ea9-7fae95bf0164",
                       "type": "text",
-                      "content": "<p>Léonie a vérifié&nbsp;: le jour où elle a posé sa question au logiciel d'IA générative, le sportif s’était gravement blessé la veille.</p>"
+                      "content": "<p>🔎 Léonie a vérifié : le jour où elle a posé sa question au logiciel d'IA générative, le sportif s’était gravement blessé la veille.</p>"
                     },
                     {
                       "id": "113b842e-f66b-43cf-a82a-d5484b37fe22",
@@ -910,7 +910,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
+                          "content": "<p>L’IA générative  génère une hallucination.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>La réponse de l’IA ne comporte pas d'éléments inventés. La vérification de Léonie montre que le sportif s’était gravement blessé la veille de la question à l’IA.<br>N'hésitez pas à réessayer.</p>"
@@ -940,73 +940,6 @@
                 {
                   "elements": [
                     {
-                      "id": "0935e0be-6a22-432b-82df-973b685d1f94",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "llm-messages",
-                      "props": {
-                        "messages": [
-                          {
-                            "direction": "outbound",
-                            "content": "Peux-tu me montrer l'émoji hippocampe ?"
-                          },
-                          {
-                            "direction": "inbound",
-                            "content": "🦞"
-                          },
-                          {
-                            "direction": "outbound",
-                            "content": "Tu es sûr ?"
-                          },
-                          {
-                            "direction": "inbound",
-                            "content": "Oups c'est un homard. Voici l'émoji hippocampe 🦑"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "id": "9c2ddfdc-0dc9-435c-b3be-1ea4bf999895",
-                      "type": "text",
-                      "content": "<p>L'IA n'a pas donné de réponse satisfaisante à Darius.<br>Darius a donc vérifié par ailleurs et il a découvert que l'émoji hippocampe n'existait pas. </p>"
-                    },
-                    {
-                      "id": "9d16a295-07ca-493c-a8a3-c0265390b17a",
-                      "type": "qcu",
-                      "instruction": "<p>Quelle est la source de l'erreur du logiciel d'IA générative ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p></p><p>Les réponses de l’IA tentent de répondre correctement à la question de Darius. Ce ne sont pas des hallucinations.<br>N'hésitez pas à réessayer.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>La demande de Darius comporte une erreur que l’IA n’a pas corrigée.</p>",
-                          "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>La demande est impossible, il n’existe pas d’émoji hippocampe.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Les données d’entraînement de l’IA sont fausses ou trop anciennes.</p>",
-                          "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Il est vrai que de nouveaux émojis sont régulièrement créés. Mais ce n’est pas la source de l’erreur de l’IA ici.<br>N'hésitez pas à réessayer.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "dc534328-51cc-4686-9d59-13809c4015d8",
                       "type": "custom",
                       "instruction": "",
@@ -1027,7 +960,7 @@
                     {
                       "id": "53332773-3d53-4d86-8ab3-7af01a291d1d",
                       "type": "text",
-                      "content": "<p>Amalia a vérifié la réponse de l'IA&nbsp;: ces auteurs n’ont rien écrit ensemble et l'article est introuvable.</p>"
+                      "content": "<p>❌ Amalia a vérifié la réponse de l'IA : ces auteurs n’ont rien écrit ensemble et l'article est introuvable.</p>"
                     },
                     {
                       "id": "a8a788a2-f80a-4a3e-bd05-88fc46a64469",
@@ -1036,7 +969,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>L’IA générative répond par prédiction et génère une hallucination.</p>",
+                          "content": "<p>L’IA générative génère une hallucination.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>L’IA générative a rassemblé des auteurs, un titre et une revue scientifique pour créer une source d’apparence crédible. C’est une hallucination, l’article n’existe pas.</p>"
