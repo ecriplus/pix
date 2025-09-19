@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.213.0](https://github.com/1024pix/pix/compare/v5.212.0...v5.213.0) (2025-09-19)
+
+### :rocket: Amélioration
+
+- [#13615](https://github.com/1024pix/pix/pull/13615) Ajout de l'illustration MINARM et amélioration des cartes d'attestation (PIX-19580) 
+- [#13616](https://github.com/1024pix/pix/pull/13616) Biais ind - derniers retours 
+- [#13621](https://github.com/1024pix/pix/pull/13621) Changement feedback découverte 1 
+- [#13596](https://github.com/1024pix/pix/pull/13596) IAGenFonctionnement NOV correction coquille et média 
+- [#13613](https://github.com/1024pix/pix/pull/13613) Intégration retours typo IAGENFonct Nov 
+- [#13584](https://github.com/1024pix/pix/pull/13584) Migrer l'event FILE_DOWNLOADED du service metrics vers un passageEvent (PIX-18370) 
+- [#13610](https://github.com/1024pix/pix/pull/13610) Modification leçon 1 deepfake 
+- [#13612](https://github.com/1024pix/pix/pull/13612) modifs IAGenFonction_IND section4 section5 
+- [#13617](https://github.com/1024pix/pix/pull/13617) Module prompt independant dernière modif 
+- [#13608](https://github.com/1024pix/pix/pull/13608) Update module biais indépendant images 
+
+### :bug: Correction
+
+- [#13611](https://github.com/1024pix/pix/pull/13611) Correction clé de traduction manquante sur la cartes de la page Mes Parcours (PIX-19582) 
+- [#13597](https://github.com/1024pix/pix/pull/13597) Retours design Combinix (PIX-19559) 
+
+### :building_construction: Tech
+
+- [#13570](https://github.com/1024pix/pix/pull/13570) :recycle: Arrête d'utiliser l'attribut `hasComplementaryReferential` pour définir une certification CLEA (pix-19159) 
+- [#13591](https://github.com/1024pix/pix/pull/13591) Ajouter des constantes pour les types d'item des parcours combinés et pour les urls des assets (PIX-19550) 
+
+### :coffee: Autre
+
+- [#13580](https://github.com/1024pix/pix/pull/13580) Modifs IAGenFonction_IND
+
 # [5.212.0](https://github.com/1024pix/pix/compare/v5.211.0...v5.212.0) (2025-09-18)
 
 ### :rocket: Amélioration
