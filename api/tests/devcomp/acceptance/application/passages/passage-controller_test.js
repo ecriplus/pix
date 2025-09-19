@@ -266,6 +266,9 @@ describe('Acceptance | Controller | passage-controller', function () {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
               context: 'modulix',
+              victoryConditions: {
+                expectations: ['super_victory_condition'],
+              },
             },
             attachment: {
               name: 'file.txt',
@@ -290,6 +293,7 @@ describe('Acceptance | Controller | passage-controller', function () {
             inputMaxChars: 456,
             inputMaxPrompts: 788,
             attachmentName: 'file.txt',
+            hasVictoryConditions: true,
             context: 'modulix',
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;

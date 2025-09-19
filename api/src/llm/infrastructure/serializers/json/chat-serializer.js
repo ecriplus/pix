@@ -35,6 +35,7 @@ export function serialize(chat) {
     context: chat.configuration.context,
     totalInputTokens: chat.totalInputTokens,
     totalOutputTokens: chat.totalOutputTokens,
+    hasVictoryConditions: chat.hasVictoryConditions,
     messages: messagesForPreview.map(
       ({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled, wasModerated }) => ({
         content,

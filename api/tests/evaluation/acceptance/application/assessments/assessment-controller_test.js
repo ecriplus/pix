@@ -755,6 +755,9 @@ describe('Acceptance | Controller | assessment-controller', function () {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
               context: 'evaluation',
+              victoryConditions: {
+                expectations: ['super_victory_condition'],
+              },
             },
             attachment: {
               name: 'file.txt',
@@ -779,6 +782,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
             inputMaxChars: 456,
             inputMaxPrompts: 788,
             attachmentName: 'file.txt',
+            hasVictoryConditions: true,
             context: 'evaluation',
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;

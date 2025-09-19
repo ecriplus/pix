@@ -35,6 +35,38 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
     });
   });
+  describe('#get hasVictoryConditions', function () {
+    context('when chat has victory conditions', function () {
+      it('should return true', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({
+            challenge: { victoryConditions: { expectations: ['super_victory_condition'] } },
+          }),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('hasVictoryConditions', true);
+      });
+    });
+    context('when chat has no victory conditions', function () {
+      it('should return false', function () {
+        // given
+        const chat = new Chat({
+          id: 'some-chat-id',
+          configuration: new Configuration({}),
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        });
+
+        // then
+        expect(chat).to.have.property('hasVictoryConditions', false);
+      });
+    });
+  });
 
   describe('#addUserMessage', function () {
     it('should append a message as user message when message has content', function () {

@@ -53,6 +53,10 @@ export class Chat {
     return !this.userId;
   }
 
+  get hasVictoryConditions() {
+    return this.configuration.hasVictoryConditions;
+  }
+
   /**
    * @param {string=} message
    * @param {boolean=} shouldBeCountedAsAPrompt

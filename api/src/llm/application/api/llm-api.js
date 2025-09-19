@@ -13,11 +13,13 @@ export async function startChat({ configId, userId }) {
     throw new NoUserIdProvidedError();
   }
   const { id, configuration } = await usecases.startChat({ configurationId: configId, userId });
+
   return new LLMChatDTO({
     id,
     attachmentName: configuration.attachmentName,
     inputMaxChars: configuration.inputMaxChars,
     inputMaxPrompts: configuration.inputMaxPrompts,
+    hasVictoryConditions: configuration.hasVictoryConditions,
     context: configuration.context,
   });
 }

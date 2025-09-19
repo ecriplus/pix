@@ -25,6 +25,10 @@ export class Configuration {
     return this.#dto.attachment != undefined;
   }
 
+  get hasVictoryConditions() {
+    return !!this.#dto.challenge?.victoryConditions?.expectations?.length;
+  }
+
   get attachmentName() {
     return this.#dto.attachment?.name;
   }
