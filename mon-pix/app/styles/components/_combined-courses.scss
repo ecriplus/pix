@@ -25,6 +25,8 @@
   &__description {
     @extend %pix-body-l;
 
+    display: flex;
+    align-items: center;
     margin-bottom: var(--pix-spacing-6x);
   }
 
@@ -71,11 +73,16 @@
   margin-bottom: var(--pix-spacing-4x);
   padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
   background: var(--pix-neutral-0);
-  border: 1px solid var(--pix-primary-100);
+  border: 6px solid var(--pix-primary-300);
   border-radius: var(--pix-spacing-4x);
 
   &--formation {
     background: color-mix(in srgb, var(--pix-primary-100) 20%, transparent);
+  }
+
+  &--ended-locked-state {
+  background: rgb(var(--pix-primary-100-inline), 0.20);
+  border: 1px solid var(--pix-primary-100);
   }
 
   &__content {
@@ -88,7 +95,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--pix-spacing-12x);
   }
 
   &__title {
@@ -97,6 +103,11 @@
 
   &__description {
     @extend %pix-body-s;
+
+    display: inline-flex;
+    gap: var(--pix-spacing-2x);
+    align-items: center;
+    color: var(--pix-neutral-500);
   }
 
   &__indicator {
@@ -117,7 +128,7 @@
       display: flex;
       gap: var(--pix-spacing-2x);
       align-items: center;
-      color: var(--pix-primary-300);
+      color: var(--pix-primary-500);
       font-weight: var(--pix-font-bold);
 
       .combined-course-item__icon {
@@ -137,16 +148,22 @@
   }
 
   &__duration {
-    display: flex;
+    display: inline-flex;
     gap: var(--pix-spacing-1x);
-    align-self: center;
-    color: var(--pix-neutral-500);
-    font-size: 13px;
-    line-height: 18px;
+
+    @extend %pix-body-s;
+
+    align-items:center;
 
     &__icon {
       width: 16px;
       height: 16px;
     }
+  }
+
+  .combined-course-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-1x);
   }
 }

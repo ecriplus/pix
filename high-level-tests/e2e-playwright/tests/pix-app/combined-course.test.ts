@@ -29,7 +29,7 @@ test('pass a combined course as sco user and see the final result', async ({ pag
   });
 
   await test.step('Resume combined course', async function () {
-    await page.getByRole('button', { name: 'Reprendre mon parcours' }).click();
+    await page.getByRole('button', { name: 'Continuer mon parcours' }).click();
   });
 
   await test.step('Run module', async function () {
