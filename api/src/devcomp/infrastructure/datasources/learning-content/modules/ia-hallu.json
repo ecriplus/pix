@@ -146,28 +146,28 @@
                           {
                             "label": "Pas du tout",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, il vaut mieux être vigilant car même si cette réponse est bien écrite, avec des mots en gras, et présentée avec assurance, elle est fausse !"
                             }
                           },
                           {
                             "label": "Pas trop",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, il vaut mieux être vigilant car même si cette réponse est bien écrite, avec des mots en gras, et présentée avec assurance, elle est fausse !"
                             }
                           },
                           {
                             "label": "Un peu",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "En fait, il vaut mieux être vigilant car même si cette réponse est bien écrite, avec des mots en gras, et présentée avec assurance, elle est fausse !"
                             }
                           },
                           {
                             "label": "Complètement",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "En fait, il vaut mieux être vigilant car même si cette réponse est bien écrite, avec des mots en gras, et présentée avec assurance, elle est fausse !"
                             }
                           }
@@ -211,28 +211,28 @@
                           {
                             "label": "Pas du tout",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "En fait, vous pouviez avoir confiance en cette réponse, elle est juste. Mais il n'y a pas de moyen de le savoir juste en la lisant."
                             }
                           },
                           {
                             "label": "Pas trop",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "En fait, vous pouviez avoir confiance en cette réponse, elle est juste. Mais il n'y a pas de moyen de le savoir juste en la lisant."
                             }
                           },
                           {
                             "label": "Un peu",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, vous pouviez avoir confiance en cette réponse, elle est juste."
                             }
                           },
                           {
                             "label": "Complètement",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, vous pouviez avoir confiance en cette réponse, elle est juste."
                             }
                           }
@@ -276,28 +276,28 @@
                           {
                             "label": "Pas du tout",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, vous faites bien d'être méfiant ! La source est inventée."
                             }
                           },
                           {
                             "label": "Pas trop",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement, vous faites bien d'être méfiant ! La source est inventée."
                             }
                           },
                           {
                             "label": "Un peu",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "En fait, même si cette source peut sembler réaliste, elle est inventée."
                             }
                           },
                           {
                             "label": "Complètement",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "En fait, même si cette source peut sembler réaliste, elle est inventée."
                             }
                           }
@@ -341,28 +341,28 @@
                           {
                             "label": "Pas du tout",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement ! Même si la réponse de l'IA confirme le raisonnement de la personne, cette réponse n'est pas correcte."
                             }
                           },
                           {
                             "label": "Pas trop",
                             "feedback": {
-                              "type": "good",
+                              "type": "neutral",
                               "text": "Effectivement ! Même si la réponse de l'IA confirme le raisonnement de la personne, cette réponse n'est pas correcte."
                             }
                           },
                           {
                             "label": "Un peu",
                             "feedback": {
-                              "type": "close",
+                              "type": "neutral",
                               "text": "En fait, même si la réponse de l'IA confirme le raisonnement de la personne, cette réponse n'est pas correcte."
                             }
                           },
                           {
                             "label": "Complètement",
                             "feedback": {
-                              "type": "bad",
+                              "type": "neutral",
                               "text": "En fait, même si la réponse de l'IA confirme le raisonnement de la personne, cette réponse n'est pas correcte."
                             }
                           }
