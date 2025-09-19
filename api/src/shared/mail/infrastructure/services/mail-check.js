@@ -7,8 +7,8 @@ const resolver = new Resolver();
 let resolveMx = resolver.resolveMx.bind(resolver);
 
 const assertEmailDomainHasMx = function (emailAddress) {
-  const domain = emailAddress.replace(/.*@/g, '');
-  return resolveMx(domain).then(() => true);
+  const domainName = emailAddress.replace(/.*@/g, '');
+  return resolveMx(domainName).then(() => true);
 };
 
 const setResolveMx = function (resolveMxFn) {
