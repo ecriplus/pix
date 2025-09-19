@@ -69,4 +69,51 @@ describe('Unit | Domain | Models | CampaignParticipationForUserManagement', func
       expect(campaignParticipation.organizationLearnerFullName).to.be.equals('Jean Meuh');
     });
   });
+
+  describe('#setIsFromCombinedCourse', function () {
+    it('should set the value to true', function () {
+      // given
+      const campaignParticipation = new CampaignParticipationForUserManagement({
+        campaignParticipationId: null,
+        participantExternalId: 'externalId',
+        status: 'TOTO',
+        campaignId: 3,
+        campaignCode: 'AZERTY',
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+        deletedAt: new Date('2023-01-01'),
+        organizationLearnerFirstName: 'Jean',
+        organizationLearnerLastName: 'Meuh',
+      });
+
+      // when
+      campaignParticipation.setIsFromCombinedCourse(true);
+
+      // then
+      expect(campaignParticipation.isFromCombinedCourse).true;
+    });
+    it('should set the value to false', function () {
+      // given
+      const campaignParticipation = new CampaignParticipationForUserManagement({
+        campaignParticipationId: null,
+        participantExternalId: 'externalId',
+        status: 'TOTO',
+        campaignId: 3,
+        campaignCode: 'AZERTY',
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
+        deletedAt: new Date('2023-01-01'),
+        organizationLearnerFirstName: 'Jean',
+        organizationLearnerLastName: 'Meuh',
+      });
+
+      // when
+      campaignParticipation.setIsFromCombinedCourse(false);
+
+      // then
+      expect(campaignParticipation.isFromCombinedCourse).false;
+    });
+  });
 });

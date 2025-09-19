@@ -14,6 +14,7 @@ const serialize = function (campaignParticipation) {
       'sharedAt',
       'deletedAt',
       'organizationLearnerFullName',
+      'isFromCombinedCourse',
     ],
   }).serialize(campaignParticipation);
 };

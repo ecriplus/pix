@@ -18,6 +18,7 @@ export default class UserParticipation extends Model {
   @attr deletedBy;
   @attr('string') deletedByFullName;
   @attr('string') organizationLearnerFullName;
+  @attr('boolean') isFromCombinedCourse;
 
   get displayedStatus() {
     return campaignParticipationStatuses[this.status];

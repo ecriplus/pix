@@ -211,5 +211,31 @@ module('Integration | Component | users | campaign-participation', function (hoo
 
       sinon.assert.calledWith(removeParticipation, participation);
     });
+
+    test('it should not be able to delete participation from a campaign in a combined course', async function (assert) {
+      // Given
+      const removeParticipation = sinon.stub();
+      const participation = {
+        deletedAt: null,
+        isFromCombinedCourse: true,
+      };
+
+      class AccessControlStub extends Service {
+        hasAccessToUsersActionsScope = true;
+      }
+      const participations = [participation];
+
+      this.owner.register('service:access-control', AccessControlStub);
+
+      // When
+      const screen = await render(
+        <template>
+          <CampaignParticipations @participations={{participations}} @removeParticipation={{removeParticipation}} />
+        </template>,
+      );
+
+      // Then
+      assert.dom(screen.queryByRole('button', { name: 'Supprimer' })).doesNotExist();
+    });
   });
 });

@@ -24,7 +24,7 @@ const dependencies = {
 import { checkUserQuest } from './check-user-quest-success.js';
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
-import { findCombinedCourseByCampaignId } from './get-combined-course-by-campaign-id.js';
+import { findCombinedCourseByCampaignId } from './find-combined-course-by-campaign-id.js';
 import { getCombinedCourseByCode } from './get-combined-course-by-code.js';
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
 import { getVerifiedCode } from './get-verified-code.js';

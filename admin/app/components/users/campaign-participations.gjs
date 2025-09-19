@@ -9,6 +9,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import { and, not } from 'ember-truth-helpers';
 
 import ConfirmPopup from '../confirm-popup';
 
@@ -114,7 +115,7 @@ export default class CampaignParticipation extends Component {
               {{/if}}
             </:cell>
           </PixTableColumn>
-          {{#if this.accessControl.hasAccessToUsersActionsScope}}
+          {{#if (and this.accessControl.hasAccessToUsersActionsScope (not participation.isFromCombinedCourse))}}
             <PixTableColumn @context={{context}}>
               <:header>
                 Actions
