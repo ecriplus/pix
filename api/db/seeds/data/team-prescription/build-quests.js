@@ -715,7 +715,6 @@ export const buildQuests = async (databaseBuilder) => {
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
   const parenthoodAttestationId = buildParenthoodQuest(databaseBuilder);
-  buildParenthoodQuest(databaseBuilder);
   buildProCombinedCourseQuest(databaseBuilder, PRO_ORGANIZATION_ID);
   buildCombinedCourseQuest(databaseBuilder, organization.id);
 
