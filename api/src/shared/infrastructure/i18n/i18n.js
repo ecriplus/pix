@@ -45,6 +45,19 @@ export function getI18n(locale) {
     i18n.setLocale = () => {
       logger.warn('Cannot change i18n locale instance, use getI18n(locale) instead.');
     };
+    const originalI18nTranslate = i18n.__;
+    i18n.__ = (param1, param2) => {
+      if (_isTranslationKeyOnly(param1, param2)) {
+        return originalI18nTranslate({ phrase: param1, locale: baseLocale });
+      }
+
+      if (_hasTranslationParameter(param1, param2)) {
+        return originalI18nTranslate({ phrase: param1, locale: baseLocale }, param2);
+      }
+
+      return originalI18nTranslate(param1, param2);
+    };
+
     i18nInstances[baseLocale] = i18n;
   }
 
@@ -59,4 +72,12 @@ export function getI18n(locale) {
 export async function getI18nFromRequest(request) {
   const locale = request.query?.lang || (await getChallengeLocale(request));
   return getI18n(locale);
+}
+
+function _isTranslationKeyOnly(translationKey, translationParameter) {
+  return typeof translationKey === 'string' && translationParameter === undefined;
+}
+
+function _hasTranslationParameter(translationKey, translationParameter) {
+  return typeof translationKey === 'string' && translationParameter !== undefined;
 }

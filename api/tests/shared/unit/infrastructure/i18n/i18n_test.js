@@ -37,6 +37,14 @@ describe('Unit | Shared | Infrastucture | i18n', function () {
       // then
       expect(result).to.equal('Hello Bob');
     });
+
+    it('interpolates parameter with single mustach when first argument is an object with explicit locale', async function () {
+      // when
+      const result = getI18n().__({ phrase: 'Hello {name}', locale: 'fr' }, { name: 'Bob' });
+
+      // then
+      expect(result).to.equal('Hello Bob');
+    });
   });
 
   describe('getI18n', function () {
