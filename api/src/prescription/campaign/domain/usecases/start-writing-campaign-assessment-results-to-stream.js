@@ -5,6 +5,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 import { CampaignTypeError } from '../../../../shared/domain/errors.js';
+import { getI18n } from '../../../../shared/infrastructure/i18n/i18n.js';
 import { CampaignAssessmentExport } from '../../infrastructure/serializers/csv/campaign-assessment-export.js';
 
 /**
@@ -26,7 +27,7 @@ import { CampaignAssessmentExport } from '../../infrastructure/serializers/csv/c
  * @param {Object} params
  * @param {Number} params.campaignId
  * @param {Object} params.writableStream
- * @param {Object} params.i18n
+ * @param {string} locale
  * @param {CampaignRepository} params.campaignRepository
  * @param {CampaignParticipationInfoRepository} params.campaignParticipationInfoRepository
  * @param {OrganizationRepository} params.organizationRepository
@@ -43,7 +44,7 @@ import { CampaignAssessmentExport } from '../../infrastructure/serializers/csv/c
 const startWritingCampaignAssessmentResultsToStream = async function ({
   campaignId,
   writableStream,
-  i18n,
+  locale,
   campaignRepository,
   campaignParticipationInfoRepository,
   organizationRepository,
@@ -59,14 +60,13 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
 }) {
   let additionalHeaders = [];
   const campaign = await campaignRepository.get(campaignId);
-  const translate = i18n.__;
 
   if (!campaign.isAssessment && !campaign.isExam) {
     throw new CampaignTypeError();
   }
 
   const targetProfile = await targetProfileRepository.getByCampaignId({ campaignId: campaign.id });
-  const learningContent = await learningContentRepository.findByCampaignId(campaign.id, i18n.getLocale());
+  const learningContent = await learningContentRepository.findByCampaignId(campaign.id, locale);
   const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
 
   const organization = await organizationRepository.get(campaign.organizationId);
@@ -85,7 +85,7 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
     learningContent,
     stageCollection,
     campaign,
-    translate,
+    locale,
     additionalHeaders,
   });
 
@@ -109,7 +109,8 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
       throw error;
     });
 
-  const fileName = translate('campaign-export.common.file-name', {
+  const i18n = getI18n(locale);
+  const fileName = i18n.__('campaign-export.common.file-name', {
     name: campaign.name,
     id: campaign.id,
     date: dayjs().tz('Europe/Berlin').format('YYYY-MM-DD-HHmm'),

@@ -5,12 +5,13 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 import { CampaignTypeError } from '../../../../shared/domain/errors.js';
+import { getI18n } from '../../../../shared/infrastructure/i18n/i18n.js';
 import { CampaignProfilesCollectionExport } from '../../infrastructure/serializers/csv/campaign-profiles-collection-export.js';
 
 const startWritingCampaignProfilesCollectionResultsToStream = async function ({
   campaignId,
   writableStream,
-  i18n,
+  locale,
   campaignRepository,
   competenceRepository,
   campaignParticipationRepository,
@@ -20,7 +21,7 @@ const startWritingCampaignProfilesCollectionResultsToStream = async function ({
   organizationLearnerImportFormatRepository,
 }) {
   const campaign = await campaignRepository.get(campaignId);
-  const translate = i18n.__;
+  const i18n = getI18n(locale);
   let additionalHeaders = [];
 
   if (!campaign.isProfilesCollection) {
@@ -47,7 +48,7 @@ const startWritingCampaignProfilesCollectionResultsToStream = async function ({
     organization,
     campaign,
     competences: allPixCompetences,
-    translate,
+    locale,
     additionalHeaders,
   });
 
@@ -65,7 +66,7 @@ const startWritingCampaignProfilesCollectionResultsToStream = async function ({
       throw error;
     });
 
-  const fileName = translate('campaign-export.common.file-name', {
+  const fileName = i18n.__('campaign-export.common.file-name', {
     name: campaign.name,
     id: campaign.id,
     date: dayjs().tz('Europe/Berlin').format('YYYY-MM-DD-HHmm'),
