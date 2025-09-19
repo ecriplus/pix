@@ -1,6 +1,26 @@
 import { PassageEventWithElement } from './PassageEventWithElement.js';
 
 /**
+ * @class ExpandClosedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user closes an expand.
+ */
+class ExpandClosedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'EXPAND_CLOSED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+/**
  * @class ExpandOpenedEvent
  * See PassageEventWithElement for more info.
  *
@@ -88,7 +108,6 @@ class VideoPlayedEvent extends PassageEventWithElement {
  * @class FileDownloadedEvent
  * See PassageEventWithElement for more info.
  *
- * This event is generated when the user downloads a file.
  * */
 class FileDownloadedEvent extends PassageEventWithElement {
   constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId, filename, format }) {
@@ -106,6 +125,7 @@ class FileDownloadedEvent extends PassageEventWithElement {
 }
 
 export {
+  ExpandClosedEvent,
   ExpandOpenedEvent,
   FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
