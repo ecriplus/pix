@@ -1,6 +1,4 @@
-import { promises } from 'node:dns';
-
-const { Resolver } = promises;
+import { Resolver } from 'node:dns/promises';
 
 const resolver = new Resolver();
 
