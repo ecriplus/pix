@@ -203,9 +203,10 @@ module('Unit | Component | Training | card', function (hooks) {
       component.trackAccess();
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le cf : ${trainingTitle}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le cf`, {
         category: 'Accès Contenu Formatif',
         action: `Click depuis : ${currentRouteName}`,
+        title: trainingTitle,
       });
       assert.ok(true);
     });
