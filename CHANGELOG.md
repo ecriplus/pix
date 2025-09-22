@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.215.0](https://github.com/1024pix/pix/compare/v5.214.0...v5.215.0) (2025-09-22)
+
+### :rocket: Amélioration
+
+- [#13630](https://github.com/1024pix/pix/pull/13630) Cacher le code campagne lorsqu'elles sont liées à un parcours combiné (PIX-19611).
+
 # [5.214.0](https://github.com/1024pix/pix/compare/v5.213.0...v5.214.0) (2025-09-22)
 
 ### :rocket: Amélioration
