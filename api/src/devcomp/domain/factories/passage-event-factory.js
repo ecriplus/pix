@@ -8,6 +8,7 @@ import {
   QROCMAnsweredEvent,
 } from '../models/passage-events/answerable-element-events.js';
 import {
+  ExpandClosedEvent,
   ExpandOpenedEvent,
   FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
@@ -33,6 +34,8 @@ class PassageEventFactory {
         return new EmbedAnsweredEvent(eventData);
       case 'EXPAND_OPENED':
         return new ExpandOpenedEvent(eventData);
+      case 'EXPAND_CLOSED':
+        return new ExpandClosedEvent(eventData);
       case 'FILE_DOWNLOADED':
         return new FileDownloadedEvent(eventData);
       case 'FLASHCARDS_CARD_AUTO_ASSESSED':

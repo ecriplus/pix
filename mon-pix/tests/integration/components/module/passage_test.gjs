@@ -1506,5 +1506,50 @@ module('Integration | Component | Module | Passage', function (hooks) {
       });
       assert.ok(true);
     });
+
+    test('should send a passage-event', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const expandElement = {
+        id: 'f5e7ce21-b71d-4054-8886-a4e9a17016ff',
+        type: 'expand',
+        isAnswerable: false,
+        title: 'Mon Expand',
+        content: "<p>Ceci est le contenu d'un expand dans mon module</p>",
+      };
+      const section = store.createRecord('section', {
+        id: 'section1',
+        type: 'blank',
+        grains: [
+          {
+            title: 'Grain title',
+            type: 'discovery',
+            id: '123-abc',
+            components: [{ type: 'element', element: expandElement }],
+          },
+        ],
+      });
+      const module = store.createRecord('module', {
+        title: 'Didacticiel',
+        slug: 'module-slug',
+        sections: [section],
+      });
+      const passage = store.createRecord('passage');
+
+      //  when
+      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+      const expandSummarySelector = '.modulix-expand__title';
+      await click(expandSummarySelector);
+      await click(expandSummarySelector);
+
+      // then
+      sinon.assert.calledWithExactly(passageEventRecordStub, {
+        type: 'EXPAND_CLOSED',
+        data: {
+          elementId: expandElement.id,
+        },
+      });
+      assert.ok(true);
+    });
   });
 });
