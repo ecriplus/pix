@@ -20,7 +20,7 @@ const PIX_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'
 
 // Currently the challenge locales are not in canonical locales, thus the "fr-fr" value.
 // This cannot be changed without migrating the challenges content.
-const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
+const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de'];
 
 const PIX_LANGUAGES = [
   { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },

@@ -310,7 +310,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixChallengeLocales = localeService.pixChallengeLocales;
 
       // then
-      assert.deepEqual(pixChallengeLocales, ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de']);
+      assert.deepEqual(pixChallengeLocales, ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de']);
     });
   });
 
