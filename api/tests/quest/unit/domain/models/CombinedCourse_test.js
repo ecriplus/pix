@@ -695,89 +695,130 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
     });
 
     describe('#generateItems', function () {
-      it('returns a combined course item for provided campaign', function () {
-        // given
-        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
+      describe('when item is type campaign', function () {
+        it('returns a combined course item for provided campaign', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
 
-        const combinedCourseTemplate = new CombinedCourseTemplate({
-          successRequirements: [
-            {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
-              data: {
-                targetProfileId: {
-                  data: campaign.targetProfileId,
-                  comparison: 'equal',
+          const combinedCourseTemplate = new CombinedCourseTemplate({
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  targetProfileId: {
+                    data: campaign.targetProfileId,
+                    comparison: 'equal',
+                  },
                 },
               },
-            },
-          ],
-        });
-        const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
-        const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
-          combinedCourseQuestFormat,
-        );
+            ],
+          });
+          const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
+          const combinedCourse = new CombinedCourseDetails(
+            new CombinedCourse({ id, organizationId, name, code }),
+            combinedCourseQuestFormat,
+          );
 
-        const dataForQuest = new DataForQuest({
-          eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
-        });
-        // when
-        combinedCourse.generateItems({ itemDetails: [campaign], dataForQuest });
+          const dataForQuest = new DataForQuest({
+            eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
+          });
+          // when
+          combinedCourse.generateItems({ itemDetails: [campaign], dataForQuest });
 
-        // then
-        expect(combinedCourse.items).to.deep.equal([
-          new CombinedCourseItem({
-            id: campaign.id,
-            reference: campaign.code,
-            title: campaign.title,
-            type: ITEM_TYPE.CAMPAIGN,
-            isCompleted: true,
-            isLocked: false,
-          }),
-        ]);
-      });
-      it('should not take encryptedCombinedCourseUrl if item type is campaign', function () {
-        // given
-        const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
-        const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
-        const combinedCourseTemplate = new CombinedCourseTemplate({
-          successRequirements: [
-            {
-              requirement_type: 'campaignParticipations',
-              comparison: 'all',
-              data: {
-                targetProfileId: {
-                  data: campaign.targetProfileId,
-                  comparison: 'equal',
+          // then
+          expect(combinedCourse.items).to.deep.equal([
+            new CombinedCourseItem({
+              id: campaign.id,
+              reference: campaign.code,
+              title: campaign.title,
+              type: ITEM_TYPE.CAMPAIGN,
+              isCompleted: true,
+              isLocked: false,
+            }),
+          ]);
+        });
+        it('should not take encryptedCombinedCourseUrl if item type is campaign', function () {
+          // given
+          const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
+          const combinedCourseTemplate = new CombinedCourseTemplate({
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  targetProfileId: {
+                    data: campaign.targetProfileId,
+                    comparison: 'equal',
+                  },
                 },
               },
-            },
-          ],
-        });
-        const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
-        const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
-          combinedCourseQuestFormat,
-        );
-        const dataForQuest = new DataForQuest({
-          eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
-        });
-        // when
-        combinedCourse.generateItems({ itemDetails: [campaign], encryptedCombinedCourseUrl, dataForQuest });
+            ],
+          });
+          const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
+          const combinedCourse = new CombinedCourseDetails(
+            new CombinedCourse({ id, organizationId, name, code }),
+            combinedCourseQuestFormat,
+          );
+          const dataForQuest = new DataForQuest({
+            eligibility: new Eligibility({ campaignParticipations: [{ campaignId: campaign.id, status: 'SHARED' }] }),
+          });
+          // when
+          combinedCourse.generateItems({ itemDetails: [campaign], encryptedCombinedCourseUrl, dataForQuest });
 
-        // then
-        expect(combinedCourse.items).to.deep.equal([
-          new CombinedCourseItem({
-            id: campaign.id,
-            reference: campaign.code,
-            title: campaign.title,
-            type: ITEM_TYPE.CAMPAIGN,
-            redirection: undefined,
-            isCompleted: true,
-            isLocked: false,
-          }),
-        ]);
+          // then
+          expect(combinedCourse.items).to.deep.equal([
+            new CombinedCourseItem({
+              id: campaign.id,
+              reference: campaign.code,
+              title: campaign.title,
+              type: ITEM_TYPE.CAMPAIGN,
+              redirection: undefined,
+              isCompleted: true,
+              isLocked: false,
+            }),
+          ]);
+        });
+        it('should return a combined course item even if data for quest is empty', function () {
+          // given
+          const campaign = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 7 });
+
+          const combinedCourseTemplate = new CombinedCourseTemplate({
+            successRequirements: [
+              {
+                requirement_type: 'campaignParticipations',
+                comparison: 'all',
+                data: {
+                  targetProfileId: {
+                    data: campaign.targetProfileId,
+                    comparison: 'equal',
+                  },
+                },
+              },
+            ],
+          });
+          const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
+          const combinedCourse = new CombinedCourseDetails(
+            new CombinedCourse({ id, organizationId, name, code }),
+            combinedCourseQuestFormat,
+          );
+
+          // when
+          combinedCourse.generateItems({ itemDetails: [campaign] });
+
+          // then
+          expect(combinedCourse.items).to.deep.equal([
+            new CombinedCourseItem({
+              id: campaign.id,
+              reference: campaign.code,
+              title: campaign.title,
+              type: ITEM_TYPE.CAMPAIGN,
+              isCompleted: false,
+              isLocked: false,
+            }),
+          ]);
+        });
       });
 
       describe('when items are type module', function () {
@@ -1201,6 +1242,84 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               new CombinedCourseItem({
                 id: 'formation_' + combinedCourse.quest.id + '_' + secondCampaign.targetProfileId,
                 reference: secondCampaign.targetProfileId,
+                type: ITEM_TYPE.FORMATION,
+                isLocked: true,
+              }),
+            ]);
+          });
+          it('should return a combined course item even if data for quest is empty', function () {
+            // given
+            const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';
+            const firstModule = new Module({ id: 1, title: 'module' });
+            const secondModule = new Module({ id: 2, title: 'module' });
+            const campaign = domainBuilder.buildCampaign({ id: 777, targetProfileId: 888 });
+
+            const recommendableModuleIds = [
+              { moduleId: firstModule.id, targetProfileIds: [campaign.targetProfileId] },
+              { moduleId: secondModule.id, targetProfileIds: [campaign.targetProfileId] },
+            ];
+            const recommendedModuleIdsForUser = [];
+            const combinedCourseTemplate = new CombinedCourseTemplate({
+              successRequirements: [
+                {
+                  requirement_type: 'campaignParticipations',
+                  comparison: 'all',
+                  data: {
+                    targetProfileId: {
+                      data: campaign.targetProfileId,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: firstModule.id,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+                {
+                  requirement_type: 'passages',
+                  comparison: 'all',
+                  data: {
+                    moduleId: {
+                      data: secondModule.id,
+                      comparison: 'equal',
+                    },
+                  },
+                },
+              ],
+            });
+            const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
+            const combinedCourse = new CombinedCourseDetails(
+              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1' }),
+              combinedCourseQuestFormat,
+            );
+
+            // when
+            combinedCourse.generateItems({
+              itemDetails: [campaign, firstModule, secondModule],
+              recommendableModuleIds,
+              recommendedModuleIdsForUser,
+              encryptedCombinedCourseUrl,
+            });
+
+            // then
+            expect(combinedCourse.items).to.deep.equal([
+              new CombinedCourseItem({
+                id: campaign.id,
+                reference: campaign.code,
+                title: campaign.title,
+                type: ITEM_TYPE.CAMPAIGN,
+                isCompleted: false,
+                isLocked: false,
+              }),
+              new CombinedCourseItem({
+                id: 'formation_' + combinedCourse.quest.id + '_' + campaign.targetProfileId,
+                reference: campaign.targetProfileId,
                 type: ITEM_TYPE.FORMATION,
                 isLocked: true,
               }),
