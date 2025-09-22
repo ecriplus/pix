@@ -31,10 +31,12 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       const campaign1Participation1 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign1.id,
         userId: user.id,
+        createdAt: new Date('2025-02-01'),
       });
       const campaign2Participation2 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign2.id,
         userId: user.id,
+        createdAt: new Date('2025-01-01'),
       });
 
       databaseBuilder.factory.buildStageAcquisition({
@@ -95,10 +97,12 @@ describe('Integration | UseCase | find-user-campaign-participation-overviews_tes
       const campaign1Participation1 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign1.id,
         userId: user.id,
+        createdAt: new Date('2025-02-01'),
       });
       const campaign2Participation2 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign2.id,
         userId: user.id,
+        createdAt: new Date('2025-01-01'),
       });
 
       databaseBuilder.factory.buildStageAcquisition({
