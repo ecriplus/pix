@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.214.0](https://github.com/1024pix/pix/compare/v5.213.0...v5.214.0) (2025-09-22)
+
+### :rocket: Amélioration
+
+- [#13601](https://github.com/1024pix/pix/pull/13601) Autoriser tous les utilisateurs connectés n'appartenant pas à une orga à import, à accéder aux parcours combinés (PIX-19228) 
+- [#13622](https://github.com/1024pix/pix/pull/13622) Copier l'event EXPAND_CLOSED du service metrics vers un passageEvent (PIX-18372) 
+- [#13619](https://github.com/1024pix/pix/pull/13619) Copier l'event EXPAND_OPENED en passageEvent (PIX-18371). 
+- [#13567](https://github.com/1024pix/pix/pull/13567) Créer une route pour récupérer toutes les équipes d'administration (PIX-19495) 
+- [#13586](https://github.com/1024pix/pix/pull/13586) Empêcher de supprimer une participation à une campagne dans une quête depuis PixAdmin (pix-19496) 
+- [#13623](https://github.com/1024pix/pix/pull/13623) Modification feedback 
+- [#13624](https://github.com/1024pix/pix/pull/13624) Rajout d'un mot manquant iagenfonction-nov 
+
+### :bug: Correction
+
+- [#13607](https://github.com/1024pix/pix/pull/13607) Correction de l'export CSV avec gestion des locales (PIX-19551) 
+- [#13606](https://github.com/1024pix/pix/pull/13606) Corriger les marges sur les pages de PixApp (PIX-19568). 
+- [#13629](https://github.com/1024pix/pix/pull/13629) Supprimer l'appel dupliqué à buildParenthoodQuest dans build-quests.js 
+
+### :building_construction: Tech
+
+- [#13627](https://github.com/1024pix/pix/pull/13627) Renommer checkDomainIsValid en assertEmailDomainHasMx pour indiquer clairement ce qui est fait 
+
+### :arrow_up: Montée de version
+
+- [#13507](https://github.com/1024pix/pix/pull/13507) Update adobe/s3mock Docker tag to v4.8.0 (docker) 
+- [#13528](https://github.com/1024pix/pix/pull/13528) Update adobe/s3mock Docker tag to v4.8.0 (dossier racine) 
+- [#13631](https://github.com/1024pix/pix/pull/13631) Update dependency @1024pix/ember-testing-library to ^3.0.15 (admin) 
+- [#13632](https://github.com/1024pix/pix/pull/13632) Update dependency @1024pix/ember-testing-library to ^3.0.15 (certif) 
+- [#13633](https://github.com/1024pix/pix/pull/13633) Update dependency @1024pix/ember-testing-library to ^3.0.15 (junior) 
+- [#13634](https://github.com/1024pix/pix/pull/13634) Update dependency @1024pix/ember-testing-library to ^3.0.15 (mon-pix) 
+
+### :coffee: Autre
+
 # [5.213.0](https://github.com/1024pix/pix/compare/v5.212.0...v5.213.0) (2025-09-19)
 
 ### :rocket: Amélioration
