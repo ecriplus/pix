@@ -155,7 +155,7 @@ export default class Card extends Component {
   trackAccess() {
     this.pixMetrics.trackEvent(`Ouvre le tutoriel`, {
       category: 'Accès tuto',
-      action: `Click depuis : ${this.router.currentRouteName}`,
+      action: `Clic depuis : ${this.router.currentRouteName}`,
       title: this.args.tutorial.title,
     });
   }

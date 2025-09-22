@@ -106,7 +106,7 @@ export default class Card extends Component {
   trackAccess() {
     this.pixMetrics.trackEvent(`Ouvre le cf`, {
       category: 'Accès Contenu Formatif',
-      action: `Click depuis : ${this.router.currentRouteName}`,
+      action: `Clic depuis : ${this.router.currentRouteName}`,
       title: this.args.training.title,
     });
   }

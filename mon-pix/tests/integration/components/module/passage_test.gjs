@@ -627,7 +627,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(retryButton);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton réessayer`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton réessayer`, {
         category: 'Modulix',
         action: `Passage du module : ${module.slug}`,
         elementId: element.id,
@@ -669,7 +669,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName("Afficher l'alternative textuelle");
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton alternative textuelle`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton alternative textuelle`, {
         category: 'Modulix',
         action: `Passage du module : ${module.slug}`,
         elementId: element.id,
@@ -752,15 +752,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName("Afficher l'alternative textuelle");
 
         // then
-        sinon.assert.calledWithExactly(
-          metrics.trackEvent,
-          `Click sur le bouton alternative textuelle`,
-          {
-            category: 'Modulix',
-            action: `Passage du module : ${module.slug}`,
-            elementId: imageElement.id,
-          },
-        );
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton alternative textuelle`, {
+          category: 'Modulix',
+          action: `Passage du module : ${module.slug}`,
+          elementId: imageElement.id,
+        });
         assert.ok(true);
       });
     });
@@ -800,7 +796,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName('Afficher la transcription');
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton transcription`, {
         category: 'Modulix',
         action: `Passage du module : ${module.slug}`,
         elementId: element.id,
@@ -886,7 +882,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName('Afficher la transcription');
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription`, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton transcription`, {
           category: 'Modulix',
           action: `Passage du module : ${module.slug}`,
           elementId: videoElement.id,
@@ -932,16 +928,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(onStepperNextStepButtonName);
 
       // then
-      sinon.assert.calledWithExactly(
-        metrics.trackEvent,
-        `Click sur le bouton suivant du stepper`,
-        {
-          category: 'Modulix',
-          action: `Passage du module : ${module.slug}`,
-          grainId: grain.id,
-          step: 1,
-        },
-      );
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton suivant du stepper`, {
+        category: 'Modulix',
+        action: `Passage du module : ${module.slug}`,
+        grainId: grain.id,
+        step: 1,
+      });
       assert.ok(true);
     });
 
@@ -1311,7 +1303,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(t('pages.modulix.buttons.grain.terminate'));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Terminer`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton Terminer`, {
         category: 'Modulix',
         action: `Passage du module : ${module.slug}`,
         grainId: grain.id,

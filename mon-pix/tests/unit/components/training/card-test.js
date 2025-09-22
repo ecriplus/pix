@@ -205,7 +205,7 @@ module('Unit | Component | Training | card', function (hooks) {
       // then
       sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le cf`, {
         category: 'Accès Contenu Formatif',
-        action: `Click depuis : ${currentRouteName}`,
+        action: `Clic depuis : ${currentRouteName}`,
         title: trainingTitle,
       });
       assert.ok(true);

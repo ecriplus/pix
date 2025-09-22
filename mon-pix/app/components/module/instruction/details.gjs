@@ -25,7 +25,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStart() {
-    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton Commencer un passage`, {
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });
@@ -34,7 +34,7 @@ export default class ModulixDetails extends Component {
 
   @action
   onModuleStartUsingSmallScreen() {
-    this.pixMetrics.trackEvent(`Click sur le bouton Commencer un passage en petit écran`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton Commencer un passage en petit écran`, {
       category: 'Modulix',
       action: `Détails du module : ${this.args.module.slug}`,
     });

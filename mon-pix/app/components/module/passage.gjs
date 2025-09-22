@@ -112,15 +112,12 @@ export default class ModulePassage extends Component {
       },
     });
 
-    this.pixMetrics.trackEvent(
-      `Click sur le bouton suivant du stepper`,
-      {
-        category: 'Modulix',
-        action: `Passage du module : ${this.args.module.slug}`,
-        grainId: currentGrain.id,
-        step: currentStepPosition,
-      },
-    );
+    this.pixMetrics.trackEvent(`Clic sur le bouton suivant du stepper`, {
+      category: 'Modulix',
+      action: `Passage du module : ${this.args.module.slug}`,
+      grainId: currentGrain.id,
+      step: currentStepPosition,
+    });
   }
 
   addNextGrainToDisplay() {
@@ -146,7 +143,7 @@ export default class ModulePassage extends Component {
   async onModuleTerminate({ grainId }) {
     const adapter = this.store.adapterFor('passage');
     await adapter.terminate({ passageId: this.args.passage.id });
-    this.pixMetrics.trackEvent(`Click sur le bouton Terminer`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton Terminer`, {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
       grainId: grainId,
@@ -172,7 +169,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onElementRetry(answerData) {
-    this.pixMetrics.trackEvent(`Click sur le bouton réessayer`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton réessayer`, {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
       elementId: answerData.element.id,
@@ -181,7 +178,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onImageAlternativeTextOpen(imageElementId) {
-    this.pixMetrics.trackEvent(`Click sur le bouton alternative textuelle`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton alternative textuelle`, {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
       elementId: imageElementId,
@@ -197,7 +194,7 @@ export default class ModulePassage extends Component {
 
   @action
   async onVideoTranscriptionOpen(videoElementId) {
-    this.pixMetrics.trackEvent(`Click sur le bouton transcription`, {
+    this.pixMetrics.trackEvent(`Clic sur le bouton transcription`, {
       category: 'Modulix',
       action: `Passage du module : ${this.args.module.slug}`,
       elementId: videoElementId,
