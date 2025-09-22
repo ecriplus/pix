@@ -65,7 +65,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLocales = localeService.pixLocales;
 
       // then
-      assert.deepEqual(pixLocales, ['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
+      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
     });
   });
 
