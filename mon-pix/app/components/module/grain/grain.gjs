@@ -18,6 +18,11 @@ export default class ModuleGrain extends Component {
 
   grain = this.args.grain;
 
+  static STEPPER_DIRECTION = {
+    HORIZONTAL: 'horizontal',
+    VERTICAL: 'vertical',
+  };
+
   static AVAILABLE_ELEMENT_TYPES = [
     'custom',
     'custom-draft',
@@ -44,9 +49,9 @@ export default class ModuleGrain extends Component {
 
   get stepperDirection() {
     if (['challenge', 'activity', 'discovery'].includes(this.grainType)) {
-      return 'horizontal';
+      return ModuleGrain.STEPPER_DIRECTION.HORIZONTAL;
     }
-    return 'vertical';
+    return ModuleGrain.STEPPER_DIRECTION.VERTICAL;
   }
 
   get hasStepper() {

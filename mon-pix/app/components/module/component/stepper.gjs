@@ -138,7 +138,7 @@ export default class ModulixStepper extends Component {
   }
 
   get isHorizontalDirection() {
-    return this.args.direction === 'horizontal';
+    return this.args.direction === ModuleGrain.STEPPER_DIRECTION.HORIZONTAL && !this.modulixPreviewMode.isEnabled;
   }
 
   get isPreviousButtonControlDisabled() {
@@ -153,9 +153,15 @@ export default class ModulixStepper extends Component {
     return this.args.id || `pix-tabs-${guidFor(this)}`;
   }
 
+  get direction() {
+    return this.isHorizontalDirection
+      ? ModuleGrain.STEPPER_DIRECTION.HORIZONTAL
+      : ModuleGrain.STEPPER_DIRECTION.VERTICAL;
+  }
+
   <template>
     <div
-      class="stepper stepper--{{@direction}}"
+      class="stepper stepper--{{this.direction}}"
       aria-live="{{if (eq @direction 'vertical') 'polite'}}"
       aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
