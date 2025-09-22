@@ -1,11 +1,13 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import * as injectedCombinedCourseRepo from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { TargetProfileForSpecifier } from '../../../target-profile/domain/read-models/TargetProfileForSpecifier.js';
 import { CampaignReport } from '../../domain/read-models/CampaignReport.js';
@@ -97,7 +99,13 @@ const findMasteryRates = async (campaignId) =>
       .where({ campaignId })
   ).map(({ masteryRate }) => Number(masteryRate));
 
-const findPaginatedFilteredByOrganizationId = async function ({ organizationId, filter = {}, page, userId }) {
+const findPaginatedFilteredByOrganizationId = async function ({
+  organizationId,
+  filter = {},
+  page,
+  userId,
+  combinedCourseRepo = injectedCombinedCourseRepo,
+}) {
   const query = knex('campaigns')
     .distinct('campaigns.id')
     .select(
@@ -134,7 +142,12 @@ const findPaginatedFilteredByOrganizationId = async function ({ organizationId, 
     .first(1);
   const hasCampaigns = Boolean(atLeastOneCampaign);
 
-  const campaignReports = results.map((result) => new CampaignReport(result));
+  const campaignReports = await PromiseUtils.mapSeries(results, async (attributes) => {
+    const campaignReport = new CampaignReport(attributes);
+    const combinedCourseInfo = await combinedCourseRepo.findByCampaignId({ campaignId: campaignReport.id });
+    campaignReport.setIsFromCombinedCourse(combinedCourseInfo.length > 0);
+    return campaignReport;
+  });
   return { models: campaignReports, meta: { ...pagination, hasCampaigns } };
 };
 
