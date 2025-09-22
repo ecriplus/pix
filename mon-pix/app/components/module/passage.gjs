@@ -114,7 +114,7 @@ export default class ModulePassage extends Component {
 
     this.pixMetrics.trackEvent(`Clic sur le bouton suivant du stepper`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       grainId: currentGrain.id,
       step: currentStepPosition,
     });
@@ -145,7 +145,7 @@ export default class ModulePassage extends Component {
     await adapter.terminate({ passageId: this.args.passage.id });
     this.pixMetrics.trackEvent(`Clic sur le bouton Terminer`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       grainId: grainId,
     });
     this.passageEvents.record({
@@ -171,7 +171,7 @@ export default class ModulePassage extends Component {
   async onElementRetry(answerData) {
     this.pixMetrics.trackEvent(`Clic sur le bouton réessayer`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       elementId: answerData.element.id,
     });
   }
@@ -180,7 +180,7 @@ export default class ModulePassage extends Component {
   async onImageAlternativeTextOpen(imageElementId) {
     this.pixMetrics.trackEvent(`Clic sur le bouton alternative textuelle`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       elementId: imageElementId,
     });
 
@@ -196,7 +196,7 @@ export default class ModulePassage extends Component {
   async onVideoTranscriptionOpen(videoElementId) {
     this.pixMetrics.trackEvent(`Clic sur le bouton transcription`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       elementId: videoElementId,
     });
 
@@ -225,7 +225,7 @@ export default class ModulePassage extends Component {
     const eventToggle = isOpen ? 'Ouverture' : 'Fermeture';
     this.pixMetrics.trackEvent(`${eventToggle} de l'élément Expand`, {
       category: 'Modulix',
-      action: `Passage du module : ${this.args.module.slug}`,
+      moduleId: this.args.module.id,
       elementId: elementId,
     });
 
