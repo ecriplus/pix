@@ -274,7 +274,7 @@ function _hasSessionInfo(session) {
 async function _validateEmail({ email, mailCheck, errorCode, certificationCandidateErrors, line }) {
   if (email) {
     try {
-      await mailCheck.checkDomainIsValid(email);
+      await mailCheck.assertEmailDomainHasMx(email);
     } catch {
       return _addToErrorList({
         errorList: certificationCandidateErrors,

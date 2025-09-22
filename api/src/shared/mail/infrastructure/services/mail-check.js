@@ -1,14 +1,12 @@
-import { promises } from 'node:dns';
-
-const { Resolver } = promises;
+import { Resolver } from 'node:dns/promises';
 
 const resolver = new Resolver();
 
 let resolveMx = resolver.resolveMx.bind(resolver);
 
-const checkDomainIsValid = function (emailAddress) {
-  const domain = emailAddress.replace(/.*@/g, '');
-  return resolveMx(domain).then(() => true);
+const assertEmailDomainHasMx = function (emailAddress) {
+  const domainName = emailAddress.replace(/.*@/g, '');
+  return resolveMx(domainName).then(() => true);
 };
 
 const setResolveMx = function (resolveMxFn) {
@@ -19,4 +17,4 @@ const clearResolveMx = function () {
   resolveMx = resolver.resolveMx.bind(resolver);
 };
 
-export { checkDomainIsValid, clearResolveMx, setResolveMx };
+export { assertEmailDomainHasMx, clearResolveMx, setResolveMx };

@@ -54,7 +54,7 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
         }),
       ]),
     };
-    mailCheck = { checkDomainIsValid: sinon.stub() };
+    mailCheck = { assertEmailDomainHasMx: sinon.stub() };
     centerRepository.getById.resolves(domainBuilder.certification.enrolment.buildCenter());
     normalizeStringFnc = (str) => str;
     dependencies = {
@@ -229,8 +229,8 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
                   email: 'jesuisunemail@incorrect.fr',
                   resultRecipientEmail: 'jesuisunemail@correct.fr',
                 });
-                mailCheck.checkDomainIsValid.withArgs('jesuisunemail@incorrect.fr').throws();
-                mailCheck.checkDomainIsValid.withArgs('jesuisunemail@correct.fr').resolves();
+                mailCheck.assertEmailDomainHasMx.withArgs('jesuisunemail@incorrect.fr').throws();
+                mailCheck.assertEmailDomainHasMx.withArgs('jesuisunemail@correct.fr').resolves();
 
                 // when
                 const error = await catchErr(addCandidateToSession)({
@@ -257,8 +257,8 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
                   email: 'jesuisunemail@correct.fr',
                   resultRecipientEmail: 'jesuisunemail@incorrect.fr',
                 });
-                mailCheck.checkDomainIsValid.withArgs('jesuisunemail@incorrect.fr').throws();
-                mailCheck.checkDomainIsValid.withArgs('jesuisunemail@correct.fr').resolves();
+                mailCheck.assertEmailDomainHasMx.withArgs('jesuisunemail@incorrect.fr').throws();
+                mailCheck.assertEmailDomainHasMx.withArgs('jesuisunemail@correct.fr').resolves();
 
                 // when
                 const error = await catchErr(addCandidateToSession)({
@@ -281,7 +281,7 @@ describe('Certification | Enrolment | Unit | UseCase | add-candidate-to-session'
 
           context('when emails validations succeed', function () {
             beforeEach(function () {
-              mailCheck.checkDomainIsValid.resolves();
+              mailCheck.assertEmailDomainHasMx.resolves();
             });
 
             it('should insert the candidate and return the ID', async function () {

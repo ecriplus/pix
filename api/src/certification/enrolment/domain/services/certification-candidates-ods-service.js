@@ -88,7 +88,7 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
 
     if (resultRecipientEmail) {
       try {
-        await mailCheck.checkDomainIsValid(resultRecipientEmail);
+        await mailCheck.assertEmailDomainHasMx(resultRecipientEmail);
       } catch {
         throw new CertificationCandidatesError({
           code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_RESULT_RECIPIENT_EMAIL_NOT_VALID.code,
@@ -99,7 +99,7 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
 
     if (email) {
       try {
-        await mailCheck.checkDomainIsValid(email);
+        await mailCheck.assertEmailDomainHasMx(email);
       } catch {
         throw new CertificationCandidatesError({
           code: CERTIFICATION_CANDIDATES_ERRORS.CANDIDATE_EMAIL_NOT_VALID.code,

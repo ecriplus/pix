@@ -63,7 +63,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
     await databaseBuilder.commit();
 
-    mailCheck = { checkDomainIsValid: sinon.stub() };
+    mailCheck = { assertEmailDomainHasMx: sinon.stub() };
 
     candidateList = _buildCandidateList({ sessionId });
   });
@@ -72,7 +72,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     // given
     const odsFilePath = `${__dirname}/attendance_sheet_extract_mandatory_ko_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
-    mailCheck.checkDomainIsValid.resolves();
+    mailCheck.assertEmailDomainHasMx.resolves();
 
     // when
     const error = await catchErr(
@@ -99,7 +99,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     // given
     const odsFilePath = `${__dirname}/attendance_sheet_extract_birth_ko_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
-    mailCheck.checkDomainIsValid.resolves();
+    mailCheck.assertEmailDomainHasMx.resolves();
 
     // when
     const error = await catchErr(
@@ -125,7 +125,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     // given
     const odsFilePath = `${__dirname}/attendance_sheet_extract_recipient_email_ko_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
-    mailCheck.checkDomainIsValid.withArgs('jack@d.it').throws();
+    mailCheck.assertEmailDomainHasMx.withArgs('jack@d.it').throws();
 
     // when
     const error = await catchErr(
@@ -211,7 +211,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
   context('when certification center has habilitations', function () {
     it('should return extracted and validated certification candidates with complementary certification', async function () {
       // given
-      mailCheck.checkDomainIsValid.resolves();
+      mailCheck.assertEmailDomainHasMx.resolves();
 
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
       databaseBuilder.factory.buildComplementaryCertificationHabilitation({
@@ -263,7 +263,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
     it('should throw an error if candidate is registered for multiple complementary certifications', async function () {
       // given
-      mailCheck.checkDomainIsValid.resolves();
+      mailCheck.assertEmailDomainHasMx.resolves();
 
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter({}).id;
       databaseBuilder.factory.buildComplementaryCertificationHabilitation({
@@ -309,7 +309,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
   it('should return extracted and validated certification candidates with billing information', async function () {
     // given
-    mailCheck.checkDomainIsValid.resolves();
+    mailCheck.assertEmailDomainHasMx.resolves();
     const isSco = false;
 
     const odsFilePath = `${__dirname}/attendance_sheet_extract_with_billing_ok_test.ods`;
@@ -340,7 +340,7 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     const isSco = true;
     const odsFilePath = `${__dirname}/attendance_sheet_extract_ok_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
-    mailCheck.checkDomainIsValid.resolves();
+    mailCheck.assertEmailDomainHasMx.resolves();
 
     // when
     const actualCandidates =

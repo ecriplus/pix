@@ -35,7 +35,7 @@ class Mailer {
     }
 
     try {
-      await this.dependencies.mailCheck.checkDomainIsValid(options.to);
+      await this.dependencies.mailCheck.assertEmailDomainHasMx(options.to);
     } catch (err) {
       logger.warn({ err }, `Email is not valid '${options.to}'`);
       return EmailingAttempt.failure(options.to, EmailingAttempt.errorCode.INVALID_DOMAIN);
