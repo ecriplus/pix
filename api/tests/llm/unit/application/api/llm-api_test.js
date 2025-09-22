@@ -31,6 +31,9 @@ describe('LLM | Unit | Application | API | llm', function () {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
               context: 'modulix',
+              victoryConditions: {
+                expectations: ['expectation'],
+              },
             },
             attachment: {
               name: 'file.txt',
@@ -46,7 +49,6 @@ describe('LLM | Unit | Application | API | llm', function () {
 
         // when
         const chat = await llmApi.startChat({ configId, userId });
-
         // then
         expect(chat).to.deepEqualInstance(
           new LLMChatDTO({
@@ -54,6 +56,7 @@ describe('LLM | Unit | Application | API | llm', function () {
             attachmentName: newChat.configuration.attachmentName,
             inputMaxChars: newChat.configuration.inputMaxChars,
             inputMaxPrompts: newChat.configuration.inputMaxPrompts,
+            hasVictoryConditions: newChat.hasVictoryConditions,
             context: newChat.configuration.context,
           }),
         );

@@ -259,6 +259,9 @@ describe('Acceptance | Route | llm-preview', function () {
               inputMaxChars: 500,
               inputMaxPrompts: 4,
               context: 'modulix',
+              victoryConditions: {
+                expectations: ['expectation'],
+              },
             },
             attachment: {
               name: 'expected_file.txt',
@@ -314,6 +317,7 @@ describe('Acceptance | Route | llm-preview', function () {
         context: 'modulix',
         totalInputTokens: 2_000,
         totalOutputTokens: 5_000,
+        hasVictoryConditions: true,
         messages: [
           {
             content: 'coucou user1',

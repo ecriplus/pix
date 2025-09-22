@@ -139,6 +139,9 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               challenge: {
                 inputMaxChars: 500,
                 inputMaxPrompts: 4,
+                victoryConditions: {
+                  expectations: ['super_expectations'],
+                },
               },
               attachment: {
                 name: 'test.csv',
@@ -162,7 +165,15 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
             id: 'someChatId',
             userId: 123,
             configurationId: 'some-config-id',
-            configuration: new Configuration({}), // configuration properties are not enumerable
+            configuration: new Configuration({
+              configuration: {
+                challenge: {
+                  victoryConditions: {
+                    expectations: ['super_expectations'],
+                  },
+                },
+              },
+            }), // configuration properties are not enumerable
             hasAttachmentContextBeenAdded: false,
             messages: [
               new Message({ content: 'je suis user', isFromUser: true }),
@@ -177,6 +188,9 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           challenge: {
             inputMaxChars: 500,
             inputMaxPrompts: 4,
+            victoryConditions: {
+              expectations: ['super_expectations'],
+            },
           },
           attachment: {
             name: 'test.csv',

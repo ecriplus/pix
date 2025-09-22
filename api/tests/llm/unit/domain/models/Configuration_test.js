@@ -3,6 +3,34 @@ import { expect } from '../../../../test-helper.js';
 
 describe('LLM | Unit | Domain | Models | Configuration', function () {
   describe('property getters', function () {
+    context('#hasVictoryConditions', function () {
+      it('should return false when dto has no victory conditions', function () {
+        // given
+        const configuration = new Configuration({
+          challenge: {
+            victoryConditions: {
+              expectations: [],
+            },
+          },
+        });
+
+        // then
+        expect(configuration.hasVictoryConditions).to.be.false;
+      });
+      it('should return true when dto has victory conditions', function () {
+        // given
+        const configuration = new Configuration({
+          challenge: {
+            victoryConditions: {
+              expectations: ['condition_victoire'],
+            },
+          },
+        });
+
+        // then
+        expect(configuration.hasVictoryConditions).to.be.true;
+      });
+    });
     context('when dto has attachment', function () {
       it('return property values', function () {
         // given
