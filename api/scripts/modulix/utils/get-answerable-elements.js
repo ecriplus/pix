@@ -3,10 +3,13 @@ export function getAnswerableElements(modules) {
 
   const elements = [];
   for (const module of modules) {
+    let sectionPosition = -1;
     let grainPosition = -1;
     let activityElementPosition = 0;
 
     for (const section of module.sections) {
+      sectionPosition++;
+
       for (const grain of section.grains) {
         grainPosition++;
 
@@ -19,7 +22,9 @@ export function getAnswerableElements(modules) {
             elements.push({
               ...component.element,
               moduleId: module.id,
+              sectionId: section.id,
               moduleSlug: module.slug,
+              sectionPosition: sectionPosition,
               activityElementPosition: activityElementPosition++,
               grainPosition: grainPosition,
               grainId: grain.id,
@@ -37,7 +42,9 @@ export function getAnswerableElements(modules) {
                 elements.push({
                   ...element,
                   moduleId: module.id,
+                  sectionId: section.id,
                   moduleSlug: module.slug,
+                  sectionPosition: sectionPosition,
                   activityElementPosition: activityElementPosition++,
                   grainPosition: grainPosition,
                   grainId: grain.id,

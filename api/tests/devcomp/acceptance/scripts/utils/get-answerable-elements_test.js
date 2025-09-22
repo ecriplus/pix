@@ -331,7 +331,9 @@ describe('Acceptance | Script | Helper | Get Answerable Elements', function () {
       // Then
       expect(elementsListAsJs).to.be.an('array');
       expect(elementsListAsJs.every((element) => element.moduleSlug !== undefined)).to.be.true;
+      expect(elementsListAsJs.every((element) => element.sectionId !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.activityElementPosition !== undefined)).to.be.true;
+      expect(elementsListAsJs.every((element) => element.sectionPosition !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainPosition !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainId !== undefined)).to.be.true;
       expect(elementsListAsJs.every((element) => element.grainTitle !== undefined)).to.be.true;
