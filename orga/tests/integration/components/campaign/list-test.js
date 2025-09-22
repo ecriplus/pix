@@ -267,8 +267,40 @@ module('Integration | Component | Campaign::List', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByText('AAAAAA111')).exists();
-      assert.dom(screen.getByText('BBBBBB222')).exists();
+      assert.ok(screen.getByText('AAAAAA111'));
+      assert.ok(screen.getByText('BBBBBB222'));
+    });
+
+    test('it should not display the code when campaign is from combined course', async function (assert) {
+      const store = this.owner.lookup('service:store');
+
+      const campaign1 = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+        code: 'AAAAAA111',
+        type: 'PROFILES_COLLECTION',
+      });
+      const campaign2 = store.createRecord('campaign', {
+        id: '2',
+        name: 'campagne 2',
+        code: 'BBBBBB222',
+        type: 'ASSESSMENT',
+        isFromCombinedCourse: true,
+      });
+      const campaigns = [campaign1, campaign2];
+      campaigns.meta = {
+        rowCount: 2,
+      };
+      this.set('campaigns', campaigns);
+
+      // when
+      const screen = await render(
+        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+      );
+
+      // then
+      assert.ok(screen.getByText('AAAAAA111'));
+      assert.notOk(screen.queryByText('BBBBBB222'));
     });
 
     test('should hide campaign owner', async function (assert) {

@@ -129,7 +129,9 @@ export default class List extends Component {
                 {{t "pages.campaigns-list.table.column.code"}}
               </:header>
               <:cell>
-                <span {{on "click" stopPropagation}}>{{campaign.code}}</span>
+                {{#unless campaign.isFromCombinedCourse}}
+                  <span {{on "click" stopPropagation}}>{{campaign.code}}</span>
+                {{/unless}}
               </:cell>
             </PixTableColumn>
 

@@ -1066,5 +1066,50 @@ describe('Integration | Repository | Campaign-Report', function () {
         });
       });
     });
+
+    context('when campaigns are related to combine course', function () {
+      it('should set isFromCombineCourse', async function () {
+        // given
+        const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
+        const campaignNotInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
+        databaseBuilder.factory.buildQuestForCombinedCourse({
+          code: 'ABCDE1234',
+          name: 'Mon parcours Combiné',
+          organizationId,
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: campaignInQuest.id,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { models } = await campaignReportRepository.findPaginatedFilteredByOrganizationId({
+          organizationId,
+          filter,
+          page,
+        });
+
+        // then
+        expect(models.map(({ id, isFromCombinedCourse }) => ({ id, isFromCombinedCourse }))).to.have.deep.members([
+          {
+            id: campaignInQuest.id,
+            isFromCombinedCourse: true,
+          },
+          {
+            id: campaignNotInQuest.id,
+            isFromCombinedCourse: false,
+          },
+        ]);
+      });
+    });
   });
 });
