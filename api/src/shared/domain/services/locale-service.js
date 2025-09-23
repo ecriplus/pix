@@ -9,7 +9,7 @@ const DEFAULT_CHALLENGE_LOCALE = 'fr-fr';
 const CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
 
 const DEFAULT_LOCALE = 'fr';
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'];
+const SUPPORTED_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'];
 
 const SUPPORTED_LANGUAGES = Array.from(new Set(SUPPORTED_LOCALES.map((locale) => new Intl.Locale(locale).language)));
 
