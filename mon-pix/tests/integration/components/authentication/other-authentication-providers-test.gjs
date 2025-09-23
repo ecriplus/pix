@@ -116,39 +116,42 @@ module('Integration | Component | Authentication | other-authentication-provider
       this.owner.register('service:oidcIdentityProviders', OneFeaturedNoOthersOidcIdentityProvidersServiceStub);
     });
 
-    module('when it’s for login');
-    test('it displays a login featured identity provider link', async function (assert) {
-      // when
-      const screen = await render(<template><OtherAuthenticationProviders /></template>);
+    module('when it’s for login', function () {
+      test('it displays a login featured identity provider link', async function (assert) {
+        // when
+        const screen = await render(<template><OtherAuthenticationProviders /></template>);
 
-      // then
-      const link = await screen.findByRole('link', {
-        name: t(
-          'components.authentication.other-authentication-providers.login.login-with-featured-identity-provider-link',
-          {
-            featuredIdentityProvider: 'Some Identity Provider',
-          },
-        ),
+        // then
+        const link = await screen.findByRole('link', {
+          name: t(
+            'components.authentication.other-authentication-providers.login.login-with-featured-identity-provider-link',
+            {
+              featuredIdentityProvider: 'Some Identity Provider',
+            },
+          ),
+        });
+        assert.dom(link).exists();
+        assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
       });
-      assert.dom(link).exists();
-      assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
     });
-    module('when it’s for signup');
-    test('it displays a signup featured identity provider link', async function (assert) {
-      // when
-      const screen = await render(<template><OtherAuthenticationProviders @isForSignup="true" /></template>);
 
-      // then
-      const link = await screen.findByRole('link', {
-        name: t(
-          'components.authentication.other-authentication-providers.signup.signup-with-featured-identity-provider-link',
-          {
-            featuredIdentityProvider: 'Some Identity Provider',
-          },
-        ),
+    module('when it’s for signup', function () {
+      test('it displays a signup featured identity provider link', async function (assert) {
+        // when
+        const screen = await render(<template><OtherAuthenticationProviders @isForSignup="true" /></template>);
+
+        // then
+        const link = await screen.findByRole('link', {
+          name: t(
+            'components.authentication.other-authentication-providers.signup.signup-with-featured-identity-provider-link',
+            {
+              featuredIdentityProvider: 'Some Identity Provider',
+            },
+          ),
+        });
+        assert.dom(link).exists();
+        assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
       });
-      assert.dom(link).exists();
-      assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
     });
   });
 
