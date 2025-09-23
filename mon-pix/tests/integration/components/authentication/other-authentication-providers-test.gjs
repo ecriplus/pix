@@ -1,51 +1,29 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import OtherAuthenticationProviders from 'mon-pix/components/authentication/other-authentication-providers';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
+import { stubOidcIdentityProvidersService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-
-class NoOidcIdentityProvidersServiceStub extends Service {
-  get hasIdentityProviders() {
-    return false;
-  }
-
-  get featuredIdentityProvider() {
-    return null;
-  }
-
-  get hasOtherIdentityProviders() {
-    return false;
-  }
-
-  load() {
-    return Promise.resolve();
-  }
-}
-
-class OneFeaturedNoOthersOidcIdentityProvidersServiceStub extends NoOidcIdentityProvidersServiceStub {
-  get hasIdentityProviders() {
-    return true;
-  }
-
-  get featuredIdentityProvider() {
-    return { organizationName: 'Some Identity Provider', slug: 'some-identity-provider' };
-  }
-}
-
-class OneFeaturedOthersOidcIdentityProvidersServiceStub extends OneFeaturedNoOthersOidcIdentityProvidersServiceStub {
-  get hasOtherIdentityProviders() {
-    return true;
-  }
-}
 
 module('Integration | Component | Authentication | other-authentication-providers', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('when there are identity providers', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', OneFeaturedNoOthersOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner, {
+        oidcIdentityProviders: [
+          {
+            id: 'some-identity-provider',
+            slug: 'some-identity-provider',
+            code: 'SOME_IDENTITY_PROVIDER',
+            organizationName: 'Some Identity Provider',
+          },
+        ],
+        featuredIdentityProviderCode: 'SOME_IDENTITY_PROVIDER',
+      });
     });
 
     module('when it’s for login', function () {
@@ -83,7 +61,7 @@ module('Integration | Component | Authentication | other-authentication-provider
 
   module('when there are no identity providers', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', NoOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner);
     });
 
     module('when it’s for login', function () {
@@ -113,16 +91,29 @@ module('Integration | Component | Authentication | other-authentication-provider
 
   module('when there is a featured identity provider', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', OneFeaturedNoOthersOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner, {
+        oidcIdentityProviders: [
+          {
+            id: 'some-identity-provider',
+            slug: 'some-identity-provider',
+            code: 'SOME_IDENTITY_PROVIDER',
+            organizationName: 'Some Identity Provider',
+          },
+        ],
+        featuredIdentityProviderCode: 'SOME_IDENTITY_PROVIDER',
+      });
+
+      const router = this.owner.lookup('service:router');
+      sinon.stub(router, 'transitionTo');
     });
 
     module('when it’s for login', function () {
-      test('it displays a login featured identity provider link', async function (assert) {
+      test('it displays a login featured identity provider button, disabled when clicked', async function (assert) {
         // when
         const screen = await render(<template><OtherAuthenticationProviders /></template>);
 
         // then
-        const link = await screen.findByRole('link', {
+        const button = await screen.findByRole('button', {
           name: t(
             'components.authentication.other-authentication-providers.login.login-with-featured-identity-provider-link',
             {
@@ -130,18 +121,23 @@ module('Integration | Component | Authentication | other-authentication-provider
             },
           ),
         });
-        assert.dom(link).exists();
-        assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
+        assert.dom(button).exists();
+
+        // when
+        await click(button);
+
+        // then
+        assert.strictEqual(button.getAttribute('aria-disabled'), 'true');
       });
     });
 
     module('when it’s for signup', function () {
-      test('it displays a signup featured identity provider link', async function (assert) {
+      test('it displays a signup featured identity provider button', async function (assert) {
         // when
         const screen = await render(<template><OtherAuthenticationProviders @isForSignup="true" /></template>);
 
         // then
-        const link = await screen.findByRole('link', {
+        const button = await screen.findByRole('button', {
           name: t(
             'components.authentication.other-authentication-providers.signup.signup-with-featured-identity-provider-link',
             {
@@ -149,15 +145,14 @@ module('Integration | Component | Authentication | other-authentication-provider
             },
           ),
         });
-        assert.dom(link).exists();
-        assert.strictEqual(link.getAttribute('href'), '/connexion/some-identity-provider');
+        assert.dom(button).exists();
       });
     });
   });
 
   module('when there is no featured identity provider', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', NoOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner);
     });
 
     test('it doesn’t display a continue featured identity provider link', async function (assert) {
@@ -194,7 +189,18 @@ module('Integration | Component | Authentication | other-authentication-provider
 
   module('when there are other identity providers', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', OneFeaturedOthersOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner, {
+        oidcIdentityProviders: [
+          {
+            id: 'some-identity-provider',
+            slug: 'some-identity-provider',
+            code: 'SOME_IDENTITY_PROVIDER',
+            organizationName: 'Some Identity Provider',
+          },
+          { id: 'cem', slug: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi' },
+        ],
+        featuredIdentityProviderCode: 'SOME_IDENTITY_PROVIDER',
+      });
     });
 
     module('when it’s for login', function () {
@@ -224,11 +230,55 @@ module('Integration | Component | Authentication | other-authentication-provider
         assert.strictEqual(link.getAttribute('href'), '/inscription/sso-selection');
       });
     });
+
+    module('when the featured identity provider button is clicked', function (hooks) {
+      hooks.beforeEach(function () {
+        const router = this.owner.lookup('service:router');
+        sinon.stub(router, 'transitionTo');
+      });
+
+      test('it disables the other identity providers button link', async function (assert) {
+        // when
+        const screen = await render(<template><OtherAuthenticationProviders /></template>);
+
+        // then
+        const button = await screen.findByRole('button', {
+          name: t(
+            'components.authentication.other-authentication-providers.login.login-with-featured-identity-provider-link',
+            {
+              featuredIdentityProvider: 'Some Identity Provider',
+            },
+          ),
+        });
+        assert.dom(button).exists();
+
+        const link = await screen.findByRole('link', {
+          name: t('components.authentication.other-authentication-providers.select-another-organization-link'),
+        });
+        assert.dom(link).exists();
+
+        // when
+        await click(button);
+
+        // then
+        assert.strictEqual(link.getAttribute('aria-disabled'), 'true');
+      });
+    });
   });
 
   module('when there are no other identity providers', function (hooks) {
     hooks.beforeEach(function () {
-      this.owner.register('service:oidcIdentityProviders', OneFeaturedNoOthersOidcIdentityProvidersServiceStub);
+      stubOidcIdentityProvidersService(this.owner, {
+        oidcIdentityProviders: [
+          {
+            id: 'some-identity-provider',
+            slug: 'some-identity-provider',
+            code: 'SOME_IDENTITY_PROVIDER',
+            organizationName: 'Some Identity Provider',
+          },
+        ],
+        featuredIdentityProviderCode: 'SOME_IDENTITY_PROVIDER',
+      });
     });
 
     test('it doesn’t display a select another organization link', async function (assert) {
