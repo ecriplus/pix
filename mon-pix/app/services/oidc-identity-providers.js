@@ -1,4 +1,5 @@
 import Service, { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 // TODO: Manage this through the API
 const FR_FEATURED_IDENTITY_PROVIDER_CODE = 'POLE_EMPLOI';
@@ -10,6 +11,8 @@ const USER_ACCOUNT_RECOVERY_FOR_IDENTITY_PROVIDER_CODES = [FER_IDENTITY_PROVIDER
 export default class OidcIdentityProviders extends Service {
   @service store;
   @service currentDomain;
+
+  @tracked isOidcProviderAuthenticationInProgress = false;
 
   get list() {
     return this.store.peekAll('oidc-identity-provider');
