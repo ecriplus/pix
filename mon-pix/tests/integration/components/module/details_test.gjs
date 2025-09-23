@@ -47,9 +47,9 @@ module('Integration | Component | Module | Details', function (hooks) {
         await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Commencer un passage`, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton Commencer un passage`, {
           category: 'Modulix',
-          action: `Détails du module : ${module.slug}`,
+          moduleId: module.id,
         });
         assert.ok(true);
       });
@@ -81,9 +81,9 @@ module('Integration | Component | Module | Details', function (hooks) {
           await click(screen.getByRole('button', { name: t('pages.modulix.details.startModule') }));
 
           // then
-          sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Commencer un passage`, {
+          sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton Commencer un passage`, {
             category: 'Modulix',
-            action: `Détails du module : ${module.slug}`,
+            moduleId: module.id,
           });
           assert.ok(true);
         });
@@ -116,7 +116,7 @@ module('Integration | Component | Module | Details', function (hooks) {
           // then
           sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre la modale d'alerte de largeur d'écran`, {
             category: 'Modulix',
-            action: `Détails du module : ${module.slug}`,
+            moduleId: module.id,
           });
           assert.ok(true);
         });
@@ -161,10 +161,10 @@ module('Integration | Component | Module | Details', function (hooks) {
             // then
             sinon.assert.calledWithExactly(
               metrics.trackEvent,
-              `Click sur le bouton Commencer un passage en petit écran`,
+              `Clic sur le bouton Commencer un passage en petit écran`,
               {
                 category: 'Modulix',
-                action: `Détails du module : ${module.slug}`,
+                moduleId: module.id,
               },
             );
             assert.ok(true);
@@ -210,7 +210,7 @@ module('Integration | Component | Module | Details', function (hooks) {
             // then
             sinon.assert.calledWithExactly(metrics.trackEvent, `Ferme la modale d'alerte de largeur d'écran`, {
               category: 'Modulix',
-              action: `Détails du module : ${module.slug}`,
+              moduleId: module.id,
             });
             assert.ok(true);
           });

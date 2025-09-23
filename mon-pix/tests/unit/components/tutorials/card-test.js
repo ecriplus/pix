@@ -222,9 +222,10 @@ module('Unit | Component | Tutorial | card item', function (hooks) {
       component.trackAccess();
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le tutoriel : ${tutorialTitle}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouvre le tutoriel`, {
         category: 'Accès tuto',
-        action: `Click depuis : ${currentRouteName}`,
+        action: `Clic depuis : ${currentRouteName}`,
+        title: tutorialTitle,
       });
       assert.ok(true);
     });

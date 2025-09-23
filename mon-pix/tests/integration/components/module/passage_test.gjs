@@ -627,9 +627,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(retryButton);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton réessayer de l'élément : ${element.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton réessayer`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        elementId: element.id,
       });
       assert.ok(true);
     });
@@ -668,9 +669,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName("Afficher l'alternative textuelle");
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton alternative textuelle : ${element.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton alternative textuelle`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        elementId: element.id,
       });
       assert.ok(true);
     });
@@ -750,14 +752,11 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName("Afficher l'alternative textuelle");
 
         // then
-        sinon.assert.calledWithExactly(
-          metrics.trackEvent,
-          `Click sur le bouton alternative textuelle : ${imageElement.id}`,
-          {
-            category: 'Modulix',
-            action: `Passage du module : ${module.slug}`,
-          },
-        );
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton alternative textuelle`, {
+          category: 'Modulix',
+          moduleId: module.id,
+          elementId: imageElement.id,
+        });
         assert.ok(true);
       });
     });
@@ -797,9 +796,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName('Afficher la transcription');
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription : ${element.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton transcription`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        elementId: element.id,
       });
       assert.ok(true);
     });
@@ -882,9 +882,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await clickByName('Afficher la transcription');
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton transcription : ${videoElement.id}`, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton transcription`, {
           category: 'Modulix',
-          action: `Passage du module : ${module.slug}`,
+          moduleId: module.id,
+          elementId: videoElement.id,
         });
         assert.ok(true);
       });
@@ -892,7 +893,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   });
 
   module('when user clicks on next step button', function () {
-    test('should push event', async function (assert) {
+    test('should push metrics event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const text1Element = { content: 'content', type: 'text' };
@@ -927,14 +928,12 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(onStepperNextStepButtonName);
 
       // then
-      sinon.assert.calledWithExactly(
-        metrics.trackEvent,
-        `Click sur le bouton suivant de l'étape 1 du stepper dans le grain : ${grain.id}`,
-        {
-          category: 'Modulix',
-          action: `Passage du module : ${module.slug}`,
-        },
-      );
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton suivant du stepper`, {
+        category: 'Modulix',
+        moduleId: module.id,
+        grainId: grain.id,
+        step: 1,
+      });
       assert.ok(true);
     });
 
@@ -1304,9 +1303,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await clickByName(t('pages.modulix.buttons.grain.terminate'));
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Click sur le bouton Terminer du grain : ${grain.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Clic sur le bouton Terminer`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        grainId: grain.id,
       });
       sinon.assert.calledWithExactly(passageEventsService.record, {
         type: 'PASSAGE_TERMINATED',
@@ -1399,9 +1399,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(expandSummarySelector);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand : ${expandElement.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        elementId: expandElement.id,
       });
       assert.ok(true);
     });
@@ -1448,9 +1449,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
         await click(expandSummarySelector);
 
         // then
-        sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand : ${expandElement.id}`, {
+        sinon.assert.calledWithExactly(metrics.trackEvent, `Ouverture de l'élément Expand`, {
           category: 'Modulix',
-          action: `Passage du module : ${module.slug}`,
+          moduleId: module.id,
+          elementId: expandElement.id,
         });
         assert.ok(true);
       });
@@ -1500,9 +1502,10 @@ module('Integration | Component | Module | Passage', function (hooks) {
       await click(expandSummarySelector);
 
       // then
-      sinon.assert.calledWithExactly(metrics.trackEvent, `Fermeture de l'élément Expand : ${expandElement.id}`, {
+      sinon.assert.calledWithExactly(metrics.trackEvent, `Fermeture de l'élément Expand`, {
         category: 'Modulix',
-        action: `Passage du module : ${module.slug}`,
+        moduleId: module.id,
+        elementId: expandElement.id,
       });
       assert.ok(true);
     });
