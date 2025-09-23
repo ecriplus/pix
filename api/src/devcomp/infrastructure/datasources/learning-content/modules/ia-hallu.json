@@ -212,14 +212,14 @@
                             "label": "Pas du tout",
                             "feedback": {
                               "type": "neutral",
-                              "text": "En fait, vous pouviez avoir confiance en cette réponse, elle est juste. Mais il n'y a pas de moyen de le savoir juste en la lisant."
+                              "text": "Cette réponse était juste, mais vous avez raison de rester vigilant, il n'y a pas de moyen de le savoir juste en la lisant."
                             }
                           },
                           {
                             "label": "Pas trop",
                             "feedback": {
                               "type": "neutral",
-                              "text": "En fait, vous pouviez avoir confiance en cette réponse, elle est juste. Mais il n'y a pas de moyen de le savoir juste en la lisant."
+                              "text": "Cette réponse était juste, mais vous avez raison de rester vigilant, il n'y a pas de moyen de le savoir juste en la lisant."
                             }
                           },
                           {
