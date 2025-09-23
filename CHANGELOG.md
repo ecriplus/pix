@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.216.0](https://github.com/1024pix/pix/compare/v5.215.0...v5.216.0) (2025-09-23)
+
+### :rocket: Amélioration
+
+- [#13642](https://github.com/1024pix/pix/pull/13642) Ajouter la locale es-419 à Pix App (PIX-19592) 
+- [#13644](https://github.com/1024pix/pix/pull/13644) Créer script d'export CSV des sections de module (PIX-19605) 
+- [#13625](https://github.com/1024pix/pix/pull/13625) Mise à jour du wording dans le bloc "Formation" des parcours combinés 
+- [#13626](https://github.com/1024pix/pix/pull/13626) Nous avons besoin de savoir si une configuration LLM possède des conditions de victoire. (PIX- 19601) 
+- [#13614](https://github.com/1024pix/pix/pull/13614) Remonter le nom du parcours combiné sur la page d'une campagne (PIX-19317) 
+
+### :building_construction: Tech
+
+- [#13569](https://github.com/1024pix/pix/pull/13569) :card_file_box:  Suppression de la colonne `hasComplementaryReferential` de la table `complementary-certifications` (Pix-19530) 
+- [#13635](https://github.com/1024pix/pix/pull/13635) Corriger deux tests flaky sur le campaign participation overviews (PIX-XXXX). 
+- [#13649](https://github.com/1024pix/pix/pull/13649) Rapatrier la logic dans le usecase et non dans le repository d'eligibilité (Pix-19633). 
+- [#13628](https://github.com/1024pix/pix/pull/13628) Traduire les textes français dans le ficher de traduction anglais (PIX-19608) 
+
+### :arrow_up: Montée de version
+
+- [#13647](https://github.com/1024pix/pix/pull/13647) Update actions/setup-node action to v5 (workflows) 
+- [#13636](https://github.com/1024pix/pix/pull/13636) Update dependency @1024pix/ember-testing-library to ^3.0.15 (orga) 
+- [#13637](https://github.com/1024pix/pix/pull/13637) Update dependency @1024pix/pix-ui to ^55.28.0 (admin) 
+- [#13639](https://github.com/1024pix/pix/pull/13639) Update dependency @1024pix/pix-ui to ^55.28.0 (certif) 
+- [#13645](https://github.com/1024pix/pix/pull/13645) Update dependency @1024pix/pix-ui to ^55.28.0 (mon-pix) 
+- [#13646](https://github.com/1024pix/pix/pull/13646) Update dependency @1024pix/pix-ui to ^55.28.0 (orga)
+
 # [5.215.0](https://github.com/1024pix/pix/compare/v5.214.0...v5.215.0) (2025-09-22)
 
 ### :rocket: Amélioration
