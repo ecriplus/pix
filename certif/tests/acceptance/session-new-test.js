@@ -1,7 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn, triggerEvent } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { setFlatpickrDate } from 'ember-flatpickr/test-support/helpers';
 import { setupIntl, t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -154,11 +153,8 @@ module('Acceptance | Session creation', function (hooks) {
         screen.getByRole('textbox', { name: t('common.forms.session-labels.observations') }),
         'My description',
       );
-      await setFlatpickrDate('#session-date', sessionDate);
-      await setFlatpickrDate(
-        screen.getByRole('textbox', { name: `${t('common.forms.session-labels.time-start')} *` }),
-        sessionTime,
-      );
+      await fillIn('#session-date', sessionDate);
+      await fillIn('#session-time', sessionTime);
       await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
 
       // then
