@@ -4,7 +4,8 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import eq from 'ember-truth-helpers/helpers/eq';
+import { and, eq } from 'ember-truth-helpers';
+import ENV from 'mon-pix/config/environment';
 
 import CombinedCourseItem from '../combined-course/combined-course-item';
 
@@ -15,6 +16,55 @@ const CompletedText = <template>
   </div>
 </template>;
 
+const Header = <template>
+  <header class="combined-course-header">
+    <div class="combined-course-header__text">
+      <h1>{{@combinedCourse.name}}</h1>
+
+      {{#if (eq @combinedCourse.status "COMPLETED")}}
+        <div class="combined-course-completed">
+          <img src="/images/illustrations/combined-course/completed.svg" alt="" role="presentation" />
+          <CompletedText />
+        </div>
+      {{/if}}
+
+      <div class={{unless (eq @combinedCourse.status "COMPLETED") "combined-course__description"}}>
+        {{@combinedCourse.description}}
+      </div>
+
+      {{#if (eq @combinedCourse.status "NOT_STARTED")}}
+        <PixButton @type="submit" @triggerAction={{@startQuestParticipation}} @loading-color="white" @size="large">{{t
+            "pages.combined-courses.content.start-button"
+          }}
+        </PixButton>
+      {{else if (eq @combinedCourse.status "STARTED")}}
+        <PixButton @type="submit" @triggerAction={{@goToNextItem}} @loading-color="white" @size="large">{{t
+            "pages.combined-courses.content.resume-button"
+          }}
+        </PixButton>
+      {{/if}}
+      {{#if (and (eq @combinedCourse.status "COMPLETED") @isSurveyEnabled)}}
+        <PixTooltip @id="tooltip-satisfaction-survey" @position="right" @isWide={{true}}>
+          <:triggerElement>
+            <PixButtonLink
+              @href={{@surveyLink}}
+              target="_blank"
+              rel="noopener noreferrer"
+              @size="large"
+              class="survey-button"
+            >{{t "pages.combined-courses.completed.survey-button"}}</PixButtonLink>
+          </:triggerElement>
+          <:tooltip>
+            <span>{{t "pages.combined-courses.completed.survey-button-description"}}</span>
+          </:tooltip>
+        </PixTooltip>
+
+      {{/if}}
+    </div>
+    <img alt="" role="presentation" src={{@combinedCourse.illustration}} width="320" />
+  </header>
+</template>;
+
 export default class CombinedCourses extends Component {
   <template>
     <section class="combined-course">
@@ -23,39 +73,13 @@ export default class CombinedCourses extends Component {
           {{t "common.actions.quit"}}
         </PixButtonLink>
       </div>
-
-      <header class="combined-course__header">
-        <div>
-          <h1>{{@combinedCourse.name}}</h1>
-
-          {{#if (eq @combinedCourse.status "COMPLETED")}}
-            <div class="combined-course-completed">
-              <img src="/images/illustrations/combined-course/completed.svg" alt="" role="presentation" />
-              <CompletedText />
-            </div>
-          {{/if}}
-
-          <div class={{unless (eq @combinedCourse.status "COMPLETED") "combined-course__description"}}>
-            {{@combinedCourse.description}}
-          </div>
-
-          {{#if (eq @combinedCourse.status "NOT_STARTED")}}
-            <PixButton
-              @type="submit"
-              @triggerAction={{this.startQuestParticipation}}
-              @loading-color="white"
-              @size="large"
-            >{{t "pages.combined-courses.content.start-button"}}
-            </PixButton>
-          {{else if (eq @combinedCourse.status "STARTED")}}
-            <PixButton @type="submit" @triggerAction={{this.goToNextItem}} @loading-color="white" @size="large">{{t
-                "pages.combined-courses.content.resume-button"
-              }}
-            </PixButton>
-          {{/if}}
-        </div>
-        <img alt="" role="presentation" src={{@combinedCourse.illustration}} width="320" />
-      </header>
+      <Header
+        @combinedCourse={{@combinedCourse}}
+        @startQuestParticipation={{this.startQuestParticipation}}
+        @goToNextItem={{this.goToNextItem}}
+        @isSurveyEnabled={{this.isSurveyEnabled}}
+        @surveyLink={{this.surveyLink}}
+      />
       <div class="combined-course__divider" />
       {{#each @combinedCourse.items as |item|}}
         <CombinedCourseItem
@@ -87,6 +111,14 @@ export default class CombinedCourses extends Component {
   goToNextItem() {
     const item = this.args.combinedCourse.nextCombinedCourseItem;
     this.router.transitionTo(item.route, item.reference, { queryParams: { redirection: item.redirection } });
+  }
+
+  get isSurveyEnabled() {
+    return this.featureToggles.featureToggles?.isSurveyEnabledForCombinedCourses;
+  }
+
+  get surveyLink() {
+    return ENV.APP.COMBINIX_SURVEY_LINK;
   }
 }
 

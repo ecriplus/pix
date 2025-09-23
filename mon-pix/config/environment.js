@@ -123,6 +123,7 @@ module.exports = function (environment) {
       AUTO_SHARE_AFTER_DATE: process.env.AUTO_SHARE_AFTER_DATE || '2025-07-18',
       AUTO_SHARE_DISABLED_ORGANIZATION_IDS: JSON.parse(process.env.AUTO_SHARE_DISABLED_ORGANIZATION_IDS || '[]'),
       COMBINIX_SURVEY_LINK:
+        process.env.COMBINIX_SURVEY_LINK ||
         'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms',
     },
 
