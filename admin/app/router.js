@@ -35,6 +35,7 @@ Router.map(function () {
   this.route('authenticated', { path: '' }, function () {
     // all routes that require the session to be authenticated
     this.route('quest-creator');
+    this.route('combined-course-creator');
     this.route('quest-new-or-edit-snippet');
     this.route('organizations', function () {
       this.route('new');

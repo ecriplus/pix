@@ -1,0 +1,36 @@
+@use 'pix-design-tokens/typography';
+
+.combined-course-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-6x);
+
+  &__title {
+    @extend %pix-title-m;
+  }
+
+  &__form {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-6x);
+  }
+
+  &__input {
+    max-width: 30rem;
+  }
+
+  &__button {
+    width: fit-content;
+  }
+
+  &__separator {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-3x);
+  }
+}
