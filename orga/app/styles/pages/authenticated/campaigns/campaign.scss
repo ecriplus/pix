@@ -1,6 +1,12 @@
+@use 'pix-design-tokens/typography';
+
 .campaign-page {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
+
+  &__page-subtext {
+    @extend %pix-body-s;
+  }
 }

@@ -26,6 +26,7 @@ export default class Campaign extends Model {
   @attr('boolean') targetProfileHasStage;
   @attr('boolean') targetProfileAreKnowledgeElementsResettable;
   @attr('boolean') isFromCombinedCourse;
+  @attr() combinedCourse;
   @attr('number') participationsCount;
   @attr('number') sharedParticipationsCount;
   @attr('number') averageResult;

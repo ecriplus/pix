@@ -4,11 +4,6 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (campaignReports, meta) {
   return new Serializer('campaign', {
-    transform: (record) => {
-      const campaign = Object.assign({}, record);
-      campaign.isArchived = record.isArchived;
-      return campaign;
-    },
     attributes: [
       'name',
       'code',
@@ -44,6 +39,7 @@ const serialize = function (campaignReports, meta) {
       'multipleSendings',
       'targetProfile',
       'isFromCombinedCourse',
+      'combinedCourse',
     ],
     stages: {
       ref: 'id',

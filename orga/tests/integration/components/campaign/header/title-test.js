@@ -32,6 +32,44 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     assert.ok(screen.getByText('14/04/2021'));
   });
 
+  test('it should display combined course name if campaign is from combined course', async function (assert) {
+    // given
+    this.campaign = {
+      name: 'campagne 1',
+      code: '1234PixTest',
+      createdAt: new Date('2021-04-14'),
+      ownerFullName: 'Mulan Fa',
+      type: 'ASSESSMENT',
+      isFromCombinedCourse: true,
+      combinedCourse: { id: '1', name: 'COMBINIX' },
+    };
+
+    // when
+    const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+    // then
+    assert.ok(screen.getByText(t('pages.campaign.included-in-combined-course', { name: 'COMBINIX' })));
+  });
+
+  test('it should not display combined course name if campaign is not from combined course', async function (assert) {
+    // given
+    this.campaign = {
+      name: 'campagne 1',
+      code: '1234PixTest',
+      createdAt: new Date('2021-04-14'),
+      ownerFullName: 'Mulan Fa',
+      type: 'ASSESSMENT',
+      isFromCombinedCourse: false,
+      combinedCourse: { id: '1', name: 'ABC123' },
+    };
+
+    // when
+    const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+
+    // then
+    assert.notOk(screen.queryByText(t('pages.campaign.included-in-combined-course', { name: 'ABC123' })));
+  });
+
   module('campaign code display', function () {
     test('it should display campaign code when campaign is not from combined course', async function (assert) {
       // given

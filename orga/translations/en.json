@@ -602,6 +602,7 @@
       "created-on": "Created on",
       "empty-state": "No participants yet!",
       "empty-state-with-copy-link": "No participants yet! Share with them the following link to join this campaign.",
+      "included-in-combined-course": "This assessment campaign is included in the {name} course.",
       "multiple-sendings": {
         "status": {
           "disabled": "No",
