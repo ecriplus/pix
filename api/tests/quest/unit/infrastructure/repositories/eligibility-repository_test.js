@@ -2,7 +2,6 @@ import sinon from 'sinon';
 
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | repositories | eligibility', function () {
@@ -83,29 +82,6 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       expect(result.organizationLearner.id).to.equal(organizationLearnerId);
       expect(result.campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
       expect(result.passages).to.deep.equal([{ moduleId: 1, isTerminated: true }]);
-    });
-    it('should ignore not found error', async function () {
-      // given
-      const organizationId = 1;
-      const userId = 2;
-      const organizationLearnerWithParticipationApi = {
-        getByUserIdAndOrganizationId: sinon.stub(),
-      };
-      organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId
-        .withArgs({ userId, organizationId })
-        .rejects(new NotFoundError());
-
-      const modulesApi = { getUserModuleStatuses: sinon.stub() };
-      modulesApi.getUserModuleStatuses.withArgs({ userId, moduleIds: [] }).resolves([{ id: 1, status: 'COMPLETED' }]);
-
-      // when
-      const result = await repositories.eligibilityRepository.findByUserIdAndOrganizationId({
-        userId,
-        organizationId,
-        organizationLearnerWithParticipationApi,
-        modulesApi,
-      });
-      expect(result).to.be.an.instanceof(Eligibility);
     });
   });
 });

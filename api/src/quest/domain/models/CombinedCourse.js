@@ -183,7 +183,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
 
-        const isCompleted = requirement.isFulfilled(dataForQuest);
+        const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
 
         const doesCampaignRecommendModules =
           recommendableModuleIds.find((recommandableModule) => {
@@ -195,7 +195,7 @@ export class CombinedCourseDetails extends CombinedCourse {
         }
         this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted, isLocked));
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
-        const isCompleted = requirement.isFulfilled(dataForQuest);
+        const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
         const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);
 
         const recommandableModule = recommendableModuleIds.find(

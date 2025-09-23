@@ -47,21 +47,25 @@ export async function getCombinedCourseByCode({
 
   const moduleIds = combinedCourseDetails.moduleIds;
 
-  const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
-    userId,
-    organizationId: combinedCourse.organizationId,
-    moduleIds,
-  });
-
-  const dataForQuest = new DataForQuest({ eligibility });
-
-  const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
-
   let recommendedModuleIdsForUser = [];
-  if (campaignParticipationIds.length > 0) {
-    recommendedModuleIdsForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
-      campaignParticipationIds,
+  let dataForQuest;
+
+  if (participation) {
+    const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
+      userId,
+      organizationId: combinedCourse.organizationId,
+      moduleIds,
     });
+
+    dataForQuest = new DataForQuest({ eligibility });
+
+    const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
+    if (campaignParticipationIds.length > 0) {
+      recommendedModuleIdsForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
+        campaignParticipationIds,
+      });
+    }
   }
 
   const modules = await moduleRepository.getByUserIdAndModuleIds({ userId, moduleIds });

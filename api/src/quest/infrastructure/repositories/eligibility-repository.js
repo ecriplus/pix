@@ -1,4 +1,3 @@
-import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Eligibility } from '../../domain/models/Eligibility.js';
 
 export const find = async ({ userId, organizationLearnerWithParticipationApi }) => {
@@ -14,17 +13,10 @@ export const findByUserIdAndOrganizationId = async ({
   moduleIds = [],
 }) => {
   const passages = await modulesApi.getUserModuleStatuses({ userId, moduleIds });
-  let result = { campaignParticipations: [] };
-  try {
-    result = await organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId({
-      userId,
-      organizationId,
-    });
-  } catch (err) {
-    if (!(err instanceof NotFoundError)) {
-      throw err;
-    }
-  }
+  const result = await organizationLearnerWithParticipationApi.getByUserIdAndOrganizationId({
+    userId,
+    organizationId,
+  });
   return toDomain({ ...result, passages });
 };
 
