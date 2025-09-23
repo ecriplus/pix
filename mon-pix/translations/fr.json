@@ -1783,6 +1783,7 @@
       },
       "preview": {
         "showJson": "Afficher le JSON",
+        "stepper": "Preview : stepper {direction}",
         "textarea-label": "Contenu du Module"
       },
       "qab": {

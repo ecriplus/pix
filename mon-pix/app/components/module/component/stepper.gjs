@@ -1,4 +1,5 @@
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { concat } from '@ember/helper';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
@@ -160,6 +161,11 @@ export default class ModulixStepper extends Component {
   }
 
   <template>
+    {{#if this.modulixPreviewMode.isEnabled}}
+      <PixTag @color="dark">
+        {{t "pages.modulix.preview.stepper" direction=@direction}}
+      </PixTag>
+    {{/if}}
     <div
       class="stepper stepper--{{this.direction}}"
       aria-live="{{if (eq @direction 'vertical') 'polite'}}"

@@ -593,6 +593,42 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       });
 
       module('when preview mode is enabled', function () {
+        test('should display preview information', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
+
+          class PreviewModeServiceStub extends Service {
+            isEnabled = true;
+          }
+
+          this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+          // when
+          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
+
+          // then
+          assert.dom(screen.getByText('Preview : stepper vertical')).exists();
+        });
+
         test('should display all the steps', async function (assert) {
           // given
           const steps = [
@@ -1628,6 +1664,43 @@ module('Integration | Component | Module | Stepper', function (hooks) {
     });
 
     module('when in preview mode', function () {
+      test('should display preview information', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        class PreviewModeServiceStub extends Service {
+          isEnabled = true;
+        }
+        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByText('Preview : stepper horizontal')).exists();
+      });
+
       test('should display all steps (becomes vertical stepper)', async function (assert) {
         // given
         const steps = [

@@ -1773,7 +1773,8 @@
       },
       "preview": {
         "showJson": "Show JSON",
-        "textarea-label": "Inhoud module"
+        "textarea-label": "Inhoud module",
+        "stepper" : "Preview : stepper {direction}"
       },
       "qab": {
         "correct-answer": "Correct antwoord",
