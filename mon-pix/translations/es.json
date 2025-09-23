@@ -1202,7 +1202,8 @@
       },
       "completed": {
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
-        "description": "¡Bien hecho! Ha dado un paso importante para navegar por el mundo digital."
+        "description": "¡Bien hecho! Ha dado un paso importante para navegar por el mundo digital.",
+        "survey-button": "Responder a la encuesta de satisfacción"
       },
       "items": {
         "formation": {

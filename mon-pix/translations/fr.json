@@ -1203,6 +1203,7 @@
     "combined-courses": {
       "completed": {
         "description": "Bien joué ! Vous avez franchi une étape importante pour naviguer dans le monde numérique.",
+        "survey-button": "Répondre au questionnaire",
         "title": "Félicitations ! Vous avez terminé !"
       },
       "content": {
