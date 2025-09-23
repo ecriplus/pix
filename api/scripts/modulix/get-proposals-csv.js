@@ -13,8 +13,10 @@ export async function getProposalsListAsCsv(modules) {
     delimiter: '\t',
     fileHeaders: [
       { label: 'ProposalModule', value: 'moduleId' },
+      { label: 'ProposalSectionId', value: 'sectionId' },
       { label: 'ProposalGrainTitle', value: 'grainTitle' },
       { label: 'ProposalGrainId', value: 'grainId' },
+      { label: 'ProposalSectionPosition', value: (row) => row.sectionPosition + 1 },
       { label: 'ProposalGrainPosition', value: (row) => row.grainPosition + 1 },
       { label: 'ProposalElementId', value: 'id' },
       { label: 'ProposalElementType', value: 'type' },
