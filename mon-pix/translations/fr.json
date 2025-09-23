@@ -747,7 +747,8 @@
             "1": "La Certification {certificationName} est un '<strong>'test adaptatif'</strong>' permettant d'évaluer votre niveau sur l’'<strong>'ensemble des 16 compétences numériques du référentiel Pix'</strong>'.",
             "2": "La '<strong>'difficulté des questions s’adapte en temps réel'</strong>' en fonction des réponses apportées.",
             "3": "Si certaines questions vous semblent difficiles, c’est parce que le test de certification cherche à mesurer votre niveau maximum. '<strong>'Si vous ne savez pas répondre à une question, vous avez la possibilité de la \"passer\"'</strong>' : celle-ci ne sera pas proposée à nouveau au cours de cette certification et ne sera pas validée.",
-            "4": "Pour obtenir un score au plus proche de votre capacité '<strong>'il est nécessaire d'aller au bout du test'</strong>'."
+            "4": "Pour obtenir un score au plus proche de votre capacité '<strong>'il est nécessaire d'aller au bout du test'</strong>'.",
+            "pix-plus-1": "La Certification {certificationName} est un '<strong>'test adaptatif'</strong>' permettant d'évaluer votre niveau sur l’'<strong>'ensemble des compétences du référentiel de certification {certificationName}'</strong>'."
           },
           "question": "Comment se déroule le test ?",
           "title": "Bienvenue à la certification {certificationName}"

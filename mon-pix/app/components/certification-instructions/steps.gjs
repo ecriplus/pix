@@ -28,12 +28,33 @@ export default class Steps extends Component {
     return classOfPages;
   }
 
-  get certificationName() {
+  _isPixPlus() {
     const complementaryKey = this.args.candidate?.complementaryCertificationKey;
     if (complementaryKey && complementaryKey !== 'CLEA') {
+      return true;
+    }
+    return false;
+  }
+
+  get certificationName() {
+    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
+    if (this._isPixPlus()) {
       return this.intl.t(`pages.complementary-certification-names.${complementaryKey}`);
     }
     return 'Pix';
+  }
+
+  get certificationInstructionStep1Paragraph1() {
+    if (this._isPixPlus()) {
+      return this.intl.t('pages.certification-instructions.steps.1.paragraphs.pix-plus-1', {
+        certificationName: this.certificationName,
+        htmlSafe: true,
+      });
+    }
+    return this.intl.t('pages.certification-instructions.steps.1.paragraphs.1', {
+      certificationName: this.certificationName,
+      htmlSafe: true,
+    });
   }
 
   get title() {
@@ -109,7 +130,10 @@ export default class Steps extends Component {
     </h2>
 
     {{#if (eq this.pageId 1)}}
-      <StepOne @certificationName={{this.certificationName}} />
+      <StepOne
+        @certificationName={{this.certificationName}}
+        @step1Paragraph1={{this.certificationInstructionStep1Paragraph1}}
+      />
     {{/if}}
     {{#if (eq this.pageId 2)}}
       <StepTwo />

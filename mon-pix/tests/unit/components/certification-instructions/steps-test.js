@@ -107,4 +107,54 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       assert.strictEqual(component.title, 'Bienvenue à la certification Pix');
     });
   });
+
+  module('#certificationInstructionStep1Paragraph1', function () {
+    test('should return default text when no complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: null,
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des 16 compétences numériques du référentiel Pix'),
+      );
+    });
+
+    test('should return default text when CLEA complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des 16 compétences numériques du référentiel Pix'),
+      );
+    });
+
+    test('should return Pix+ specific text when has complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'DROIT',
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des compétences du référentiel de certification Pix+ Droit'),
+      );
+    });
+  });
 });
