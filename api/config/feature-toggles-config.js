@@ -74,4 +74,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['team-acces'],
   },
+  isSurveyEnabledForCombinedCourses: {
+    type: 'boolean',
+    description: 'Enables survey button at the end of the combined courses',
+    defaultValue: false,
+    devDefaultValues: { test: true, reviewApp: true },
+    tags: ['frontend', 'team-prescription'],
+  },
 };

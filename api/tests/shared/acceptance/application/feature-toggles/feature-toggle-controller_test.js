@@ -24,6 +24,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-async-quest-rewarding-calculation-enabled': false,
             'is-auto-share-enabled': false,
             'is-filtering-recommended-training-by-organizations-enabled': false,
+            'is-survey-enabled-for-combined-courses': true,
             'is-quest-enabled': true,
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': true,
