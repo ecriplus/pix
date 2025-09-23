@@ -51,9 +51,9 @@ const addOrganizationFeatureInBatch = async function (request, h) {
 };
 
 const create = async function (request) {
-  const superAdminUserId = extractUserIdFromRequest(request);
+  const { userId } = request.auth.credentials;
   const organization = organizationForAdminSerializer.deserialize(request.payload);
-  organization.createdBy = superAdminUserId;
+  organization.createdBy = userId;
 
   const createdOrganization = await usecases.createOrganization({ organization });
   const serializedOrganization = organizationForAdminSerializer.serialize(createdOrganization);
