@@ -22,13 +22,13 @@
       "CANDIDATE_NOT_ALLOWED_FOR_FINALIZED_SESSION": "This session has already been finalised and no new candidates may be added.",
       "CANDIDATE_NOT_FOUND": "An error has occurred, the candidate {firstName} {lastName} hasn't been found.",
       "INVALID_DOCUMENT": "This version of the document is unknown.<br />Please download and import the candidate list template again",
-      "SESSION_ALREADY_FINALIZED": "Cannot finalize session more than once.",
+      "SESSION_ALREADY_FINALIZED": "Cannot finalise session more than once.",
       "SESSION_CANNOT_BE_FINALIZED": "Error during the finalisation of the session.",
       "SESSION_DOES_NOT_EXIST_OR_ACCESS_RESTRICTED": "The session doesn't exist or it's access is restricted.",
       "SESSION_STARTED_CANDIDATE_ALREADY_LINKED_TO_USER": "The session has begun, you can’t upload a candidates' list anymore.<br />If you want to edit the list, you can enrol a candidate directly in the table below.",
       "SESSION_WITHOUT_STARTED_CERTIFICATION": "This session hasn't started, you can't finalise it. However, you may delete it.",
       "SESSION_WITH_ABORT_REASON_ON_COMPLETED_CERTIFICATION_COURSE": "The field \"Reason for abandonment\" has been filled in for a candidate who has finished their certification exam in between. The session therefore can't be finalised. Please refresh the page before finalising.",
-      "UNTERMINATED_CERTIFICATION_WITHOUT_ABORT_REASON": "One or more unterminated certifications have missing \"Abandon reason\". The session cannot be finalized",
+      "UNTERMINATED_CERTIFICATION_WITHOUT_ABORT_REASON": "One or more unterminated certifications have missing \"Abandon reason\". The session cannot be finalised",
       "authorize-resume-error": "An error has occurred, {firstName} {lastName} couldn't be allowed to resume his/her Pix certification exam.",
       "bad-request-error": "The data entered was not in the correct format.",
       "certification-candidate": {
@@ -209,7 +209,7 @@
         "label": "Change center"
       },
       "documentation": "Documentation",
-      "extra-information": "Navigation principale",
+      "extra-information": "Main navigation",
       "logout": "Log out",
       "menu-labels": {
         "close": "Close menu",
@@ -292,35 +292,35 @@
       "enrol-candidates-in-session": {
         "certification-candidates-sco": {
           "actions": {
-            "enrol-candidates": "Inscrire des candidats"
+            "enrol-candidates": "Enrol candidates"
           },
-          "information": "Inscrivez des élèves et c'est partix !"
+          "information": "Enrol students and you're readix to go !"
         },
-        "information": "Si certain(e)s élèves n’apparaissent pas dans cette liste, merci de ré-importer le fichier élèves dans Pix Orga.'<br>' Si malgré tout des élèves ne sont pas visibles, merci de contacter",
+        "information": "If some students don't appear in this list, please re-import the student file in Pix Orga.'<br>' If students are still not visible, please contact",
         "link-label": "pix.org/en/support",
         "list": {
           "action-bar": {
-            "candidate-already-enrolled": "candidat(s) déjà inscrit(s) à la session",
-            "candidate-selected": "candidat(s) sélectionné(s)",
-            "no-candidate-selected": "Aucun candidat sélectionné"
+            "candidate-already-enrolled": "candidate(s) already enrolled in the session",
+            "candidate-selected": "candidate(s) selected",
+            "no-candidate-selected": "No candidate selected"
           },
           "table": {
-            "birthdate": "Date de naissance",
-            "division": "Classe",
+            "birthdate": "Date of birth",
+            "division": "Class",
             "filter": {
-              "extra-information": "Filtrer la liste des élèves en cochant la ou les classes souhaitées",
-              "placeholder": "Chercher une classe ...",
-              "title": "Filtrer"
+              "extra-information": "Filter the student list by checking the desired class(es)",
+              "placeholder": "Search for a class...",
+              "title": "Filter"
             },
-            "first-name": "Prénom",
-            "last-name": "Nom"
+            "first-name": "First name",
+            "last-name": "Last name"
           }
         },
-        "page-title": "Inscription des candidats",
-        "title": "Inscrire des candidats"
+        "page-title": "Candidate enrollment",
+        "title": "Enrol candidates"
       },
       "restricted-access": {
-        "title": "Ouverture de votre espace PixCertif le"
+        "title": "Opening of your PixCertif space on"
       }
     },
     "session-finalization": {
@@ -470,23 +470,23 @@
         "extratime": "+ extra time {extraTimePercentage}",
         "handle-live-alert-modal": {
           "ask": {
-            "description": "Refuser le signalement permet la reprise de la question en cours.<br />Sélectionnez un motif pour valider le signalement et permettre le changement de question.",
-            "dismiss-alert-button": "Refuser le signalement",
-            "validate-alert-button": "Valider le signalement"
+            "description": "Rejecting the report allows resuming the current question.<br />Select a reason to validate the report and allow question change.",
+            "dismiss-alert-button": "Reject the report",
+            "validate-alert-button": "Validate the report"
           },
           "error-handling": {
             "challenge-already-answered": "The candidate has already answered this question. This alert will therefore be ignored.",
             "miscellaneous": "An error occured. Please try again later."
           },
           "handled": {
-            "close-button-label": "Fermer la fenêtre de confirmation",
-            "close-button-text": "Fermer",
-            "description": "Indiquez au candidat de rafraîchir sa page.",
-            "rejected-banner": "Le signalement a bien été refusé.",
-            "validated-banner": "Le signalement a bien été validé."
+            "close-button-label": "Close confirmation window",
+            "close-button-text": "Close",
+            "description": "Tell the candidate to refresh their page.",
+            "rejected-banner": "The report has been properly rejected.",
+            "validated-banner": "The report has been properly validated."
           },
-          "no-current-live-alert": "Aucun signalement en cours pour ce candidat",
-          "title": "Signalement du candidat : {candidateFullName}"
+          "no-current-live-alert": "No current report for this candidate",
+          "title": "Candidate report: {candidateFullName}"
         },
         "modals": {
           "live-alerts": {
@@ -698,11 +698,11 @@
         },
         "page-title": "Details | Session {sessionId} | Pix Certif",
         "panel-clea": {
-          "description": "Pour générer les certificats CléA numérique, téléchargez la liste des candidats, complétez-la, enregistrez-la au format .xlsx puis importez-la sur la ",
-          "download-button": "Télécharger la liste des candidats",
-          "error-message": "Une erreur est survenue lors du téléchargement du fichier. Veuillez réessayer ou contacter certif@pix.fr en indiquant le numéro de la session concernée.",
-          "link-text": "plateforme du CléA numérique.",
-          "title": "Des candidats ont obtenu le certificat CléA numérique"
+          "description": "To generate CléA Numérique certificates, download the candidate list, complete it, save it in .xlsx format then import it on the ",
+          "download-button": "Download candidate list",
+          "error-message": "An error occurred while downloading the file. Please try again or contact certif@pix.fr indicating the session number concerned.",
+          "link-text": "CléA Numérique platform.",
+          "title": "Candidates have obtained the CléA Numérique certificate"
         },
         "parameters": {
           "access-code": {
@@ -740,119 +740,119 @@
         "step-one": {
           "actions": {
             "cancel": {
-              "label": "Annuler l'import"
+              "label": "Cancel import"
             },
             "session-import-template": {
-              "extra-information": "Télécharger le modèle vierge",
-              "information": "Attention à ne modifier ni les noms des colonnes ni leur ordre afin de ne pas altérer le modèle. '<br>' Vous pouvez ouvrir le fichier .csv téléchargé soit dans un logiciel tableur soit dans un éditeur de code (valeurs séparées par des points virgules).",
-              "label": "Télécharger (.csv)"
+              "extra-information": "Download blank template",
+              "information": "Be careful not to modify either the column names or their order so as not to alter the template. '<br>' You can open the downloaded .csv file either in spreadsheet software or in a code editor (values separated by semicolons).",
+              "label": "Download (.csv)"
             },
             "session-import-upload": {
-              "extra-information": "Importer le modèle complété",
-              "information": "Sélectionnez le modèle préalablement rempli. Seul un fichier .csv pourra être importé.",
-              "label": "Importer (.csv)"
+              "extra-information": "Import completed template",
+              "information": "Select the previously filled template. Only a .csv file can be imported.",
+              "label": "Import (.csv)"
             }
           },
           "errors": {
-            "CSV_DATA_REQUIRED": "Le modèle importé n'a pas été rempli, merci de le compléter avant de l'importer à nouveau",
-            "CSV_HEADERS_NOT_VALID": "Le modèle a été altéré, merci de le télécharger à nouveau",
-            "download": "Une erreur s'est produite pendant le téléchargement",
-            "forbidden": "La création et l'édition de plusieurs sessions à la fois n'est pas disponible pour votre centre de certification. Veuillez utiliser la création et l'édition individuelle de session."
+            "CSV_DATA_REQUIRED": "The imported template has not been filled in, please complete it before importing it again",
+            "CSV_HEADERS_NOT_VALID": "The template has been altered, please download it again",
+            "download": "An error occurred during download",
+            "forbidden": "Creating and editing multiple sessions at once is not available for your certification centre. Please use individual session creation and editing."
           },
           "instructions": {
             "creation": {
-              "list": "Vous pouvez créer des sessions :",
-              "list-with-candidates": "'<'span class=\"content-text--bold\"'>'Avec candidats'</span>', complétez le modèle dans son intégralité,",
-              "list-without-candidates": "'<'span class=\"content-text--bold\"'>'Sans candidat'</span>', complétez uniquement les informations des sessions.",
-              "title": "Pour créer des sessions ?"
+              "list": "You can create sessions:",
+              "list-with-candidates": "'<'span class=\"content-text--bold\"'>'With candidates'</span>', complete the template in its entirety,",
+              "list-without-candidates": "'<'span class=\"content-text--bold\"'>'Without candidates'</span>', complete only the session information.",
+              "title": "To create sessions?"
             },
             "edition": {
-              "replace": "'<'span class=\"content-text--bold\"'>'Pour remplacer'</span>' une liste pré-existante dans le fichier modèle,",
-              "subscription": "'<'span class=\"content-text--bold\"'>'Pour inscrire'</span>' des candidats dans une session vide.",
-              "title": "Pour éditer la liste des candidats de sessions déjà créées ?",
-              "warning": "Attention à renseigner le numéro de session sans les autres informations de sessions (ex: date, heure, etc.) pour éviter les doublons lors de la création."
+              "replace": "'<'span class=\"content-text--bold\"'>'To replace'</span>' a pre-existing list in the template file,",
+              "subscription": "'<'span class=\"content-text--bold\"'>'To enrol'</span>' candidates in an empty session.",
+              "title": "To edit the candidate list of already created sessions?",
+              "warning": "Be careful to enter the session number without the other session information (e.g.: date, time, etc.) to avoid duplicates during creation."
             }
           },
-          "title": "Import du modèle"
+          "title": "Template import"
         },
         "step-two": {
           "actions": {
             "confirm": {
-              "label": "Finaliser la création/édition"
+              "label": "Finalise creation/editing"
             },
             "confirm-with-warning": {
-              "label": "Créer/éditer les sessions"
+              "label": "Create/edit sessions"
             },
             "import-again": {
-              "label": "Importer un nouveau fichier (.csv)",
-              "title": "Importer à nouveau"
+              "label": "Import new file (.csv)",
+              "title": "Import again"
             }
           },
           "blocking-errors": {
             "errors": {
-              "CANDIDATE_BILLING_MODE_NOT_VALID": "Donnée du champ \"Tarification part Pix\" invalide (formats acceptés \"Gratuite\", \"Payante\" ou \"Prépayée\")",
-              "CANDIDATE_BILLING_MODE_REQUIRED": "Champ obligatoire \"Tarification part Pix\" manquant",
-              "CANDIDATE_BIRTHDATE_FORMAT_NOT_VALID": "Donnée du champ \"Date de naissance\" invalide (format accepté JJ/MM/AAAA)",
-              "CANDIDATE_BIRTHDATE_MUST_BE_GREATER": "Champ \"Date de naissance\" doit être supérieur à 01/01/1900",
-              "CANDIDATE_BIRTHDATE_REQUIRED": "Champ obligatoire \"Date de naissance\" manquant",
-              "CANDIDATE_BIRTH_CITY_REQUIRED": "Champ obligatoire \"Nom de la commune\" manquant",
-              "CANDIDATE_BIRTH_COUNTRY_NOT_FOUND": "Champ \"Pays de naissance\" non trouvé",
-              "CANDIDATE_BIRTH_COUNTRY_REQUIRED": "Champ obligatoire \"Pays de naissance\" manquant",
-              "CANDIDATE_BIRTH_INFORMATION_REQUIRED": "Renseigner les données de naissance du candidat",
-              "CANDIDATE_BIRTH_INSEE_CODE_NOT_VALID": "Donnée du champ \"Code INSEE\" invalide",
-              "CANDIDATE_BIRTH_INSEE_CODE_OR_BIRTH_POSTAL_CODE_AND_BIRTH_CITY_REQUIRED": "Renseigner soit un code INSEE, soit un code postal et un nom de commune de naissance",
-              "CANDIDATE_BIRTH_POSTAL_CODE_CITY_NOT_VALID": "Le code postal et le nom de la commune ne correspondent pas",
-              "CANDIDATE_BIRTH_POSTAL_CODE_NOT_FOUND": "Champ \"Code postal\" non trouvé",
-              "CANDIDATE_BIRTH_POSTAL_CODE_REQUIRED": "Champ obligatoire \"Code postal\" manquant",
-              "CANDIDATE_EMAIL_NOT_VALID": "Donnée du champ \"E-mail de convocation\" invalide",
-              "CANDIDATE_EXTRA_TIME_INTEGER": "Donnée du champ \"Temps majoré\" invalide (exemple de format accepté: 30%)",
-              "CANDIDATE_EXTRA_TIME_OUT_OF_RANGE": "Donnée du champ \"Temps majoré\" invalide (exemple de format accepté: 30%)",
-              "CANDIDATE_FIRST_NAME_REQUIRED": "Champ obligatoire \"Prénom\" manquant",
-              "CANDIDATE_FOREIGN_BIRTH_CITY_REQUIRED": "Candidat né à l'étranger, champ obligatoire \"Nom de la commune\" manquant",
-              "CANDIDATE_FOREIGN_INSEE_CODE_NOT_VALID": "Candidat né à l'étranger, inscrire 99 dans le champ \"Code INSEE\"",
-              "CANDIDATE_FOREIGN_POSTAL_CODE_MUST_BE_EMPTY": "Candidat né à l'étranger, le champ \"Code postal\" doit rester vide",
-              "CANDIDATE_LAST_NAME_REQUIRED": "Champ obligatoire \"Nom de naissance\" manquant",
-              "CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION": "Inscription possible qu'à une seule certification complémentaire par candidat",
-              "CANDIDATE_NOT_ALLOWED_FOR_STARTED_SESSION": "Édition des candidats impossible, le numéro de session correspond à une session déjà démarrée",
-              "CANDIDATE_PREPAYMENT_CODE_MUST_BE_EMPTY": "Champ \"Code de prépaiement\" doit rester vide (dans le cas de tarification part Pix gratuite ou payante)",
-              "CANDIDATE_PREPAYMENT_CODE_REQUIRED": "Champ obligatoire \"Code de prépaiement\" manquant (doit être renseigné en cas de tarification part Pix prépayée)",
-              "CANDIDATE_RESULT_RECIPIENT_EMAIL_NOT_VALID": "Donnée du champ \"E-mail du destinataire des résultats (formateur, enseignant…)\" invalide",
-              "CANDIDATE_SEX_NOT_VALID": "Donnée du champ \"Sexe\" invalide (format accepté \"M\"/\"F\")",
-              "CANDIDATE_SEX_REQUIRED": "Champ obligatoire \"Sexe\" manquant",
-              "INFORMATION_NOT_ALLOWED_WITH_SESSION_ID": "Numéro de session fourni, veuillez supprimer les informations de session associées",
-              "SESSION_ADDRESS_REQUIRED": "Champ obligatoire \"Nom du site\" manquant",
-              "SESSION_DATE_NOT_VALID": "Donnée du champ \"Date de session\" invalide (format accepté JJ/MM/AAAA)",
-              "SESSION_DATE_REQUIRED": "Champ obligatoire \"Date de session\" manquant",
-              "SESSION_EXAMINER_REQUIRED": "Champ obligatoire \"Surveillant(s)\" manquant",
-              "SESSION_ID_NOT_EXISTING": "Numéro de session inexistant",
-              "SESSION_ID_NOT_VALID": "Donnée du champ \"Numéro de session\" invalide",
-              "SESSION_ROOM_REQUIRED": "Champ obligatoire \"Nom de la salle\" manquant",
-              "SESSION_SCHEDULED_IN_THE_PAST": "Date et/ou heure indiquées antérieures à la date du jour",
-              "SESSION_TIME_NOT_VALID": "Donnée du champ \"Heure de début\" invalide (format accepté HH:MM)",
-              "SESSION_TIME_REQUIRED": "Champ obligatoire \"Heure de début\" manquant",
-              "SESSION_WITH_DATE_AND_TIME_ALREADY_EXISTS": "Une session a déjà été créée avec ces informations. Pour ajouter des candidats à une session, indiquer uniquement le numéro de session sans les informations de session"
+              "CANDIDATE_BILLING_MODE_NOT_VALID": "Invalid \"Pricing of Pix's share\" field data (accepted formats \"Free\", \"Payable\" or \"Prepaid\")",
+              "CANDIDATE_BILLING_MODE_REQUIRED": "Required field \"Pricing of Pix's share\" missing",
+              "CANDIDATE_BIRTHDATE_FORMAT_NOT_VALID": "Invalid \"Date of birth\" field data (accepted format DD/MM/YYYY)",
+              "CANDIDATE_BIRTHDATE_MUST_BE_GREATER": "\"Date of birth\" field must be greater than 01/01/1900",
+              "CANDIDATE_BIRTHDATE_REQUIRED": "Required field \"Date of birth\" missing",
+              "CANDIDATE_BIRTH_CITY_REQUIRED": "Required field \"Name of birth city\" missing",
+              "CANDIDATE_BIRTH_COUNTRY_NOT_FOUND": "\"Country of birth\" field not found",
+              "CANDIDATE_BIRTH_COUNTRY_REQUIRED": "Required field \"Country of birth\" missing",
+              "CANDIDATE_BIRTH_INFORMATION_REQUIRED": "Fill in candidate's birth information",
+              "CANDIDATE_BIRTH_INSEE_CODE_NOT_VALID": "Invalid \"INSEE code\" field data",
+              "CANDIDATE_BIRTH_INSEE_CODE_OR_BIRTH_POSTAL_CODE_AND_BIRTH_CITY_REQUIRED": "Fill in either an INSEE code, or a postal code and birth city name",
+              "CANDIDATE_BIRTH_POSTAL_CODE_CITY_NOT_VALID": "Postal code and city name do not match",
+              "CANDIDATE_BIRTH_POSTAL_CODE_NOT_FOUND": "\"Postal code\" field not found",
+              "CANDIDATE_BIRTH_POSTAL_CODE_REQUIRED": "Required field \"Postal code\" missing",
+              "CANDIDATE_EMAIL_NOT_VALID": "Invalid \"Convocation email\" field data",
+              "CANDIDATE_EXTRA_TIME_INTEGER": "Invalid \"Extra time\" field data (accepted format example: 30%)",
+              "CANDIDATE_EXTRA_TIME_OUT_OF_RANGE": "Invalid \"Extra time\" field data (accepted format example: 30%)",
+              "CANDIDATE_FIRST_NAME_REQUIRED": "Required field \"First name\" missing",
+              "CANDIDATE_FOREIGN_BIRTH_CITY_REQUIRED": "Candidate born abroad, required field \"Name of birth city\" missing",
+              "CANDIDATE_FOREIGN_INSEE_CODE_NOT_VALID": "Candidate born abroad, enter 99 in \"INSEE code\" field",
+              "CANDIDATE_FOREIGN_POSTAL_CODE_MUST_BE_EMPTY": "Candidate born abroad, \"Postal code\" field must remain empty",
+              "CANDIDATE_LAST_NAME_REQUIRED": "Required field \"Birth name\" missing",
+              "CANDIDATE_MAX_ONE_COMPLEMENTARY_CERTIFICATION": "Registration possible for only one complementary certification per candidate",
+              "CANDIDATE_NOT_ALLOWED_FOR_STARTED_SESSION": "Candidate editing impossible, session number corresponds to an already started session",
+              "CANDIDATE_PREPAYMENT_CODE_MUST_BE_EMPTY": "\"Prepayment code\" field must remain empty (in case of free or payable Pix pricing)",
+              "CANDIDATE_PREPAYMENT_CODE_REQUIRED": "Required field \"Prepayment code\" missing (must be filled in case of prepaid Pix pricing)",
+              "CANDIDATE_RESULT_RECIPIENT_EMAIL_NOT_VALID": "Invalid \"Email of results recipient (trainer, teacher...)\" field data",
+              "CANDIDATE_SEX_NOT_VALID": "Invalid \"Gender\" field data (accepted format \"M\"/\"F\")",
+              "CANDIDATE_SEX_REQUIRED": "Required field \"Gender\" missing",
+              "INFORMATION_NOT_ALLOWED_WITH_SESSION_ID": "Session number provided, please remove associated session information",
+              "SESSION_ADDRESS_REQUIRED": "Required field \"Site name\" missing",
+              "SESSION_DATE_NOT_VALID": "Invalid \"Session date\" field data (accepted format DD/MM/YYYY)",
+              "SESSION_DATE_REQUIRED": "Required field \"Session date\" missing",
+              "SESSION_EXAMINER_REQUIRED": "Required field \"Invigilator(s)\" missing",
+              "SESSION_ID_NOT_EXISTING": "Non-existent session number",
+              "SESSION_ID_NOT_VALID": "Invalid \"Session number\" field data",
+              "SESSION_ROOM_REQUIRED": "Required field \"Room name\" missing",
+              "SESSION_SCHEDULED_IN_THE_PAST": "Date and/or time indicated earlier than today's date",
+              "SESSION_TIME_NOT_VALID": "Invalid \"Start time\" field data (accepted format HH:MM)",
+              "SESSION_TIME_REQUIRED": "Required field \"Start time\" missing",
+              "SESSION_WITH_DATE_AND_TIME_ALREADY_EXISTS": "A session has already been created with this information. To add candidates to a session, indicate only the session number without session information"
             },
-            "information": "Veuillez corriger toutes les erreurs bloquantes avant de re-importer le fichier .csv :",
+            "information": "Please correct all blocking errors before re-importing the .csv file:",
             "line": "Line",
-            "tag-information": "{blockingErrorReportsCount} {blockingErrorReportsCount, plural,one {erreur} other {erreurs}}",
-            "title": "{blockingErrorReportsCount, plural,one {Erreur bloquante} other {Erreurs bloquantes}}"
+            "tag-information": "{blockingErrorReportsCount} {blockingErrorReportsCount, plural,one {error} other {errors}}",
+            "title": "{blockingErrorReportsCount, plural,one {Blocking error} other {Blocking errors}}"
           },
           "candidates-count": "{candidatesCount} {candidatesCount, plural,one {candidate} other {candidates}}",
           "non-blocking-errors": {
             "errors": {
-              "DUPLICATE_CANDIDATE_IN_SESSION": "Le candidat inscrit plusieurs fois à la même session, une seule inscription sera prise en compte.",
-              "EMPTY_SESSION": "La session ne contient pas de candidat"
+              "DUPLICATE_CANDIDATE_IN_SESSION": "Candidate enrolled multiple times in the same session, only one enrollment will be taken into account.",
+              "EMPTY_SESSION": "Session contains no candidates"
             },
-            "information": "Nous avons détecté {nonBlockingErrorReportsCount, plural,one {un point d’attention non bloquant} other {des points d’attention non bloquants}} lors de l’import, consultez-{nonBlockingErrorReportsCount, plural,one {le} other {les}} avant de procéder à la création ou l’édition de vos sessions :",
+            "information": "We detected {nonBlockingErrorReportsCount, plural,one {a non-blocking attention point} other {non-blocking attention points}} during import, check {nonBlockingErrorReportsCount, plural,one {it} other {them}} before proceeding to create or edit your sessions:",
             "line": "Line",
-            "tag-information": "{nonBlockingErrorReportsCount} {nonBlockingErrorReportsCount, plural,one {erreur} other {erreurs}}",
-            "title": "{nonBlockingErrorReportsCount, plural,one {Point d’attention non bloquant} other {Points d’attention non bloquants}}"
+            "tag-information": "{nonBlockingErrorReportsCount} {nonBlockingErrorReportsCount, plural,one {error} other {errors}}",
+            "title": "{nonBlockingErrorReportsCount, plural,one {Non-blocking attention point} other {Non-blocking attention points}}"
           },
           "sessions-and-empty-sessions-count": "{sessionsCount} {sessionsCount, plural,one {session} other {sessions}} including {sessionsWithoutCandidatesCount} {sessionsWithoutCandidatesCount, plural,one {session} other {sessions}} without candidates",
-          "title": "Récapitulatif"
+          "title": "Summary"
         },
-        "success": "Success! {sessionsCount} {sessionsCount, plural, one {session} other {sessions}} dont {sessionsWithoutCandidatesCount} {sessionsWithoutCandidatesCount, plural, one {session} other {sessions}} created without candidate and {candidatesCount} {candidatesCount, plural, one {candidate} other {candidates}} created or updated",
-        "title": "Créer/éditer plusieurs sessions"
+        "success": "Success! {sessionsCount} {sessionsCount, plural, one {session} other {sessions}} including {sessionsWithoutCandidatesCount} {sessionsWithoutCandidatesCount, plural, one {session} other {sessions}} created without candidate and {candidatesCount} {candidatesCount, plural, one {candidate} other {candidates}} created or updated",
+        "title": "Create/edit multiple sessions"
       },
       "list": {
         "actions": {
@@ -995,26 +995,26 @@
         }
       },
       "no-referer-section": {
-        "description": "Le référent de cette double certification sera notifié lorsque des résultats Pix-CléA Numérique seront disponibles et devront être enregistrés sur la plateforme de CléA Numérique.",
-        "select-referer-button": "Désigner un référent",
-        "title": "Aucun référent désigné pour la certification Pix-CléA Numérique"
+        "description": "The referent for this dual certification will be notified when Pix-CléA Numérique results are available and need to be registered on the CléA Numérique platform.",
+        "select-referer-button": "Designate a referent",
+        "title": "No referent designated for Pix-CléA Numérique certification"
       },
       "notifications": {
-        "success": "Un nouveau référent CléA Numérique a été nommé."
+        "success": "A new CléA Numérique referent has been appointed."
       },
-      "pix-referer": "Référent CléA Numérique",
-      "pix-referer-tooltip": "Le référent de cette double certification sera notifié lorsque des résultats Pix-CléA Numérique seront disponibles et devront être enregistrés sur la plateforme de CléA Numérique.",
-      "referer": "Référent",
+      "pix-referer": "CléA Numérique referent",
+      "pix-referer-tooltip": "The referent for this dual certification will be notified when Pix-CléA Numérique results are available and need to be registered on the CléA Numérique platform.",
+      "referer": "Referent",
       "select-referer-modal": {
         "actions": {
-          "cancel-extra-information": "Annuler la sélection de référent",
-          "validate": "Valider",
-          "validate-extra-information": "Valider la sélection de référent"
+          "cancel-extra-information": "Cancel referent selection",
+          "validate": "Validate",
+          "validate-extra-information": "Validate referent selection"
         },
         "description": "Le Groupement d’intérêt public, sis 21-23 rue des Ardennes 75019 Paris PIX met en œuvre en tant que responsable de traitement un traitement de données à caractère personnel portant sur votre adresse email professionnel de référent Pix.<br />La finalité de ce traitement est la communication des informations nécessaires aux attributions du référent Pix au sein du centre de certification agréé. Le traitement de cette données repose sur l’exécution de la convention d’agrément de votre centre de certification.<br />Les données sont conservées pendant la durée de la convention d’agrément en vigueur entre le GIP Pix et le centre habilité auquel vous êtes rattaché.<br />Vous disposez de droits personnels, droits d'accès, de rectification et d’effacement des données, le droit de limitation ou d’opposition au traitement pour motif légitime et le droit d’introduire une réclamation auprès d’une autorité de contrôle ainsi que le droit de définir des directives relatives à la conservation, à l'effacement et à la communication de vos données à caractère personnel en cas de décès que vous pouvez exercer par courriel auprès de notre DPD en adressant votre demande à l’adresse électronique suivante : dpd@pix.fr .<br />Vous disposez de la possibilité d’introduire une réclamation auprès de Commission nationale Informatique et libertés « CNIL » à l’adresse suivante : 3 Place de Fontenoy – TSA 80715 – 75334 Paris Cedex 07.",
-        "empty-option": "--Sélectionner--",
-        "label": "Sélectionner le référent CléA Numérique",
-        "title": "Sélection du référent CléA Numérique"
+        "empty-option": "--Select--",
+        "label": "Select the CléA Numérique referent",
+        "title": "CléA Numérique referent selection"
       },
       "table": {
         "caption": "Table listing the members of the certification centre. It includes the first and last name of the member and the role. If the logged-in user has an administrator role, there is an action column for changing a member's role, deleting a member from the space or leaving the certification space. If the centre has CléA accreditation, the table will include the referent."
@@ -1028,7 +1028,7 @@
         "member": "Members ({count, plural, =0 {-} other {{count}}})"
       },
       "title": "Team",
-      "update-referer-button": "Changer de référent CléA"
+      "update-referer-button": "Change CléA referent"
     },
     "team-invitations": {
       "actions": {
