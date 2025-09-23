@@ -1206,8 +1206,8 @@
       },
       "items": {
         "formation": {
-          "title": "Me estoy formando",
-          "description": "¡Completa tu prueba y desbloquea módulos de formación personalizados! Su número dependerá de tus resultados."
+          "title": "Programa personalizado de módulos",
+          "description": "¡Completa tu diagnóstico para desbloquear un programa de módulos adaptado a tu resultado!"
         },
         "completed": "¡Completado!",
         "tagText": "¡Ya estás ahí!",

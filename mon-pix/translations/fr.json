@@ -1214,8 +1214,8 @@
         "completed": "Complété !",
         "durationUnit": "min",
         "formation": {
-          "description": "Terminez votre test et débloquez des modules de formation sur mesure ! Leur nombre dépendra de vos résultats.",
-          "title": "Je me forme"
+          "description": "Terminez votre diagnostic pour débloquer un programme de modules adapté à votre résultat !",
+          "title": "Programme personnalisé de modules"
         },
         "tagText": "Vous en êtes là !"
       }
