@@ -1,4 +1,5 @@
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { concat } from '@ember/helper';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
@@ -138,7 +139,7 @@ export default class ModulixStepper extends Component {
   }
 
   get isHorizontalDirection() {
-    return this.args.direction === 'horizontal';
+    return this.args.direction === ModuleGrain.STEPPER_DIRECTION.HORIZONTAL && !this.modulixPreviewMode.isEnabled;
   }
 
   get isPreviousButtonControlDisabled() {
@@ -153,9 +154,20 @@ export default class ModulixStepper extends Component {
     return this.args.id || `pix-tabs-${guidFor(this)}`;
   }
 
+  get direction() {
+    return this.isHorizontalDirection
+      ? ModuleGrain.STEPPER_DIRECTION.HORIZONTAL
+      : ModuleGrain.STEPPER_DIRECTION.VERTICAL;
+  }
+
   <template>
+    {{#if this.modulixPreviewMode.isEnabled}}
+      <PixTag @color="dark">
+        {{t "pages.modulix.preview.stepper" direction=@direction}}
+      </PixTag>
+    {{/if}}
     <div
-      class="stepper stepper--{{@direction}}"
+      class="stepper stepper--{{this.direction}}"
       aria-live="{{if (eq @direction 'vertical') 'polite'}}"
       aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}

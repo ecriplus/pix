@@ -593,6 +593,42 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       });
 
       module('when preview mode is enabled', function () {
+        test('should display preview information', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
+
+          class PreviewModeServiceStub extends Service {
+            isEnabled = true;
+          }
+
+          this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+          // when
+          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="vertical" /></template>);
+
+          // then
+          assert.dom(screen.getByText('Preview : stepper vertical')).exists();
+        });
+
         test('should display all the steps', async function (assert) {
           // given
           const steps = [
@@ -708,7 +744,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         const screen = await render(
           <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
         );
-        // await this.pauseTest();
 
         // then
         assert.dom(find('#stepper-container-id-1')).exists();
@@ -1626,9 +1661,129 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             .doesNotExist();
         });
       });
+    });
 
-      module('when preview mode is enabled', function () {
-        test('should display all the steps', async function (assert) {
+    module('when in preview mode', function () {
+      test('should display preview information', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        class PreviewModeServiceStub extends Service {
+          isEnabled = true;
+        }
+        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByText('Preview : stepper horizontal')).exists();
+      });
+
+      test('should display all steps (becomes vertical stepper)', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        class PreviewModeServiceStub extends Service {
+          isEnabled = true;
+        }
+        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByText('Text 1')).exists();
+        assert.dom(screen.getByText('Text 2')).exists();
+        assert.dom(find('.stepper--vertical')).exists();
+      });
+
+      test('should not display controls buttons', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        class PreviewModeServiceStub extends Service {
+          isEnabled = true;
+        }
+        this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+          .doesNotExist();
+        assert
+          .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+          .doesNotExist();
+      });
+
+      module('when has unsupported elements', function () {
+        test('should display all the steps but filter out unsupported element', async function (assert) {
           const steps = [
             {
               elements: [
@@ -1648,6 +1803,14 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 },
               ],
             },
+            {
+              elements: [
+                {
+                  id: 'd7870bf4-e018-482a-829c-6a124066b352',
+                  type: 'nope',
+                },
+              ],
+            },
           ];
 
           class PreviewModeServiceStub extends Service {
@@ -1655,60 +1818,13 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           }
 
           this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
           // when
           const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
           // then
           assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
           assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
-        });
-
-        module('when has unsupported elements', function () {
-          test('should display all the steps but filter out unsupported element', async function (assert) {
-            const steps = [
-              {
-                elements: [
-                  {
-                    id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                    type: 'text',
-                    content: '<p>Text 1</p>',
-                  },
-                ],
-              },
-              {
-                elements: [
-                  {
-                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                    type: 'text',
-                    content: '<p>Text 2</p>',
-                  },
-                ],
-              },
-              {
-                elements: [
-                  {
-                    id: 'd7870bf4-e018-482a-829c-6a124066b352',
-                    type: 'nope',
-                  },
-                ],
-              },
-            ];
-
-            class PreviewModeServiceStub extends Service {
-              isEnabled = true;
-            }
-
-            this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
-
-            // when
-            const screen = await render(
-              <template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>,
-            );
-
-            // then
-            assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
-            assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
-          });
         });
       });
     });

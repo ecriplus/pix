@@ -1769,7 +1769,8 @@
       },
       "preview": {
         "showJson": "Show JSON",
-        "textarea-label": "Contenido del módulo"
+        "textarea-label": "Contenido del módulo",
+        "stepper" : "Preview : stepper {direction}"
       },
       "qab": {
         "correct-answer": "Respuesta correcta",
