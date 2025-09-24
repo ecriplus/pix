@@ -381,6 +381,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         challengeId: certificationFrameworkChallenge.challengeId,
         complementaryCertificationKey: complementaryCertification.key,
         version,
+        versionId: null,
       });
     });
   });
