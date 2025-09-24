@@ -34,7 +34,13 @@ export async function prompt({ message, chat }) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt.sign('foo', config.llm.authSecret)}`,
+        authorization: `Bearer ${jwt.sign(
+          {
+            client_id: 'pix-api',
+            scope: 'api',
+          },
+          config.llm.authSecret,
+        )}`,
       },
       body: payload,
     });
