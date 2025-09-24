@@ -1,5 +1,5 @@
 /**
- * @typedef {import('./index.js').SessionRepository} SessionRepository
+ * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').UserRepository} UserRepository
@@ -31,7 +31,7 @@ const { features } = config;
 
 /**
  * @param {Object} params
- * @param {SessionRepository} params.sessionRepository
+ * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {CertificationCandidateRepository} params.sharedCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
@@ -47,13 +47,13 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   assessmentRepository,
   sharedCertificationCandidateRepository,
   certificationCourseRepository,
-  sessionRepository,
+  evaluationSessionRepository,
   certificationCenterRepository,
   userRepository,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
-  const session = await sessionRepository.get({ id: sessionId });
+  const session = await evaluationSessionRepository.get({ id: sessionId });
 
   _validateSessionAccess(session, accessCode);
   _validateSessionIsActive(session);

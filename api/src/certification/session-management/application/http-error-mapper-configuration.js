@@ -44,7 +44,7 @@ const sessionDomainErrorMappingConfiguration = [
   },
   {
     name: SessionNotAccessible.name,
-    httpErrorFn: (error) => new HttpErrors.PreconditionFailedError(error.message, error.code),
+    httpErrorFn: (error) => new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta),
   },
   {
     name: InvalidSessionSupervisingLoginError.name,

@@ -17,7 +17,7 @@ import {
   competenceMarkRepository,
   cpfExportRepository,
   flashAlgorithmConfigurationRepository,
-  sessionRepositories,
+  repositories,
   sessionSummaryRepository,
   sharedCompetenceMarkRepository,
 } from '../../infrastructure/repositories/index.js';
@@ -30,7 +30,6 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').FinalizedSessionRepository} FinalizedSessionRepository
  * @typedef {import('../../infrastructure/repositories/index.js').JuryCertificationSummaryRepository} JuryCertificationSummaryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SupervisorAccessRepository} SupervisorAccessRepository
- * @typedef {import('../../../../shared/infrastructure/repositories/index.js').CertificationCenterRepository} CertificationCenterRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationOfficerRepository} CertificationOfficerRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationIssueReportRepository} CertificationIssueReportRepository
  * @typedef {import('../../infrastructure/repositories/index.js').FinalizedSessionRepository} FinalizedSessionRepository
@@ -65,6 +64,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationRescoringRepository} CertificationRescoringRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
+ * @typedef {import('../../infrastructure/repositories/index.js').CertificationCenterAccessRepository} CertificationCenterAccessRepository
  * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.respository.js').UserRepository} UserRepository
  **/
 
@@ -113,7 +113,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
  **/
 const dependencies = {
-  ...sessionRepositories,
+  ...repositories,
   sessionSummaryRepository,
   assessmentRepository,
   assessmentResultRepository,

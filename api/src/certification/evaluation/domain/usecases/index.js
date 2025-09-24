@@ -1,23 +1,19 @@
+import * as certificationChallengeLiveAlertRepository from '../../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
+import * as answerRepository from '../../../../shared/infrastructure/repositories/answer-repository.js';
+import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
+import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
+import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
-import {
-  answerRepository,
-  assessmentRepository,
-  assessmentResultRepository,
-  certificationChallengeRepository as sessionManagementCertificationChallengeRepository,
-  challengeRepository as sharedChallengeRepository,
-  competenceMarkRepository,
-  cpfExportRepository,
-  flashAlgorithmConfigurationRepository,
-  sessionRepositories,
-  sharedCompetenceMarkRepository,
-} from '../../../session-management/infrastructure/repositories/index.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
+import * as sessionManagementCertificationChallengeRepository from '../../../shared/infrastructure/repositories/certification-challenge-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
+import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
+import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
@@ -41,10 +37,10 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {certificationCourseRepository} CertificationCourseRepository
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
+ * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {services} Services
  */
 const dependencies = {
-  ...sessionRepositories,
   evaluationSessionRepository,
   sessionManagementCertificationChallengeRepository,
   challengeCalibrationRepository,
@@ -57,8 +53,6 @@ const dependencies = {
   sharedCompetenceMarkRepository,
   sharedChallengeRepository,
   userRepository,
-  competenceMarkRepository,
-  cpfExportRepository,
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   certificationBadgesService,
@@ -71,6 +65,7 @@ const dependencies = {
   complementaryCertificationCourseRepository,
   complementaryCertificationScoringCriteriaRepository,
   sharedFlashAlgorithmConfigurationRepository,
+  certificationChallengeLiveAlertRepository,
   services,
 };
 

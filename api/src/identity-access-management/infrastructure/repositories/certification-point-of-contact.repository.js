@@ -8,12 +8,77 @@ import { CertificationPointOfContact } from '../../domain/read-models/Certificat
 const CERTIFICATION_CENTER_MEMBERSHIPS_TABLE_NAME = 'certification-center-memberships';
 
 /**
+ * Retrieve a certification center access
+ *
+ * @param {number} certificationCenterId - List of certification centers.
+ * @returns {Promise<AllowedCertificationCenterAccess>} - center access
+ */
+const getCertificationCenterAccess = async ({ certificationCenterId }) => {
+  const certificationCenterAccess = await knex
+    .select({
+      id: 'certification-centers.id',
+      name: 'certification-centers.name',
+      externalId: 'certification-centers.externalId',
+      type: 'certification-centers.type',
+      isInWhitelist: 'certification-centers.isScoBlockedAccessWhitelist',
+      isRelatedToManagingStudentsOrganization: 'organizations.isManagingStudents',
+      tags: knex.raw('array_agg(?? order by ??)', ['tags.name', 'tags.name']),
+      habilitations: knex.raw(
+        `array_agg(json_build_object(
+          'id', "complementary-certifications".id,
+          'label', "complementary-certifications".label,
+          'key', "complementary-certifications".key
+        ) order by "complementary-certifications".id)`,
+      ),
+    })
+    .from('certification-centers')
+    .leftJoin('organizations', function () {
+      this.on('organizations.externalId', 'certification-centers.externalId').andOn(
+        'organizations.type',
+        'certification-centers.type',
+      );
+    })
+    .leftJoin('organization-tags', 'organization-tags.organizationId', 'organizations.id')
+    .leftJoin('tags', 'tags.id', 'organization-tags.tagId')
+    .leftJoin(
+      'complementary-certification-habilitations',
+      'complementary-certification-habilitations.certificationCenterId',
+      'certification-centers.id',
+    )
+    .leftJoin(
+      'complementary-certifications',
+      'complementary-certifications.id',
+      'complementary-certification-habilitations.complementaryCertificationId',
+    )
+    .where('certification-centers.id', certificationCenterId)
+    .groupBy('certification-centers.id', 'organizations.isManagingStudents')
+    .first();
+
+  return _toDomain({ certificationCenterAccess });
+};
+
+const _toDomain = ({ certificationCenterAccess }) => {
+  return new AllowedCertificationCenterAccess({
+    center: {
+      id: certificationCenterAccess.id,
+      name: certificationCenterAccess.name,
+      externalId: certificationCenterAccess.externalId,
+      type: certificationCenterAccess.type,
+      isInWhitelist: certificationCenterAccess.isInWhitelist,
+      habilitations: _cleanHabilitations(certificationCenterAccess),
+    },
+    isRelatedToManagingStudentsOrganization: certificationCenterAccess.isRelatedToManagingStudentsOrganization,
+    relatedOrganizationTags: _cleanTags(certificationCenterAccess),
+  });
+};
+
+/**
  * Retrieves allowed certification center accesses for a given list of centers.
  *
  * @param {Array} centerList - List of certification centers.
  * @returns {Promise<Array>} - List of allowed center accesses.
  */
-const getAllowedCenterAccesses = async function (centerList) {
+const getAllowedCenterAccesses = async function ({ centerList }) {
   const allowedCenterIdList = centerList.map((center) => center.id);
 
   const allowedAccessDTOs = await knex
@@ -55,7 +120,7 @@ const getAllowedCenterAccesses = async function (centerList) {
     .orderBy('certification-centers.id')
     .groupBy('certification-centers.id', 'organizations.isManagingStudents');
 
-  return _toDomain({ allowedAccessDTOs, centerList });
+  return _toDomainList({ allowedAccessDTOs, centerList });
 };
 
 /**
@@ -116,9 +181,9 @@ const getPointOfContact = async function ({
   });
 };
 
-export { getAllowedCenterAccesses, getAuthorizedCenterIds, getPointOfContact };
+export { getAllowedCenterAccesses, getAuthorizedCenterIds, getCertificationCenterAccess, getPointOfContact };
 
-function _toDomain({ allowedAccessDTOs, centerList }) {
+function _toDomainList({ allowedAccessDTOs, centerList }) {
   return allowedAccessDTOs.map((allowedCenterAccessDTO) => {
     const center = centerList.find((center) => center.id === allowedCenterAccessDTO.id);
 

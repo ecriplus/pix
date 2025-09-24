@@ -88,3 +88,4 @@ docker/data/
 
 # Claude Code documentation
 CLAUDE.md
+.claude/

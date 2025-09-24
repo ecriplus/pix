@@ -8,6 +8,8 @@ export default class ImportRoute extends Route {
   @service locale;
 
   beforeModel() {
+    this.currentUser.checkRestrictedAccess();
+
     const topLevelDomain = this.currentDomain.getExtension();
     const currentLocale = this.locale.currentLocale;
     const isOrgTldAndEnglishCurrentLocale = topLevelDomain === 'org' && currentLocale === 'en';
