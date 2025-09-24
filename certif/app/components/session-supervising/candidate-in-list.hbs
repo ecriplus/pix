@@ -28,7 +28,7 @@
     </div>
 
     <div class="session-supervising-candidate-in-list__middle-information">
-      <p>{{dayjs-format @candidate.birthdate "DD/MM/YYYY"}}</p>
+      <p>{{this.formattedBirthdate}}</p>
       {{#if this.shouldDisplayEnrolledComplementaryCertification}}
         <p class="session-supervising-candidate-in-list-details__enrolment">
           <PixIcon

@@ -3,6 +3,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(LocalizedFormat);
+dayjs.extend(utc);
 
 const Modals = {
   Confirmation: 'Confirmation',
@@ -27,6 +32,12 @@ export default class CandidateInList extends Component {
 
   get candidateFullName() {
     return `${this.args.candidate.firstName} ${this.args.candidate.lastName}`;
+  }
+
+  get formattedBirthdate() {
+    if (!this.args.candidate.birthdate) return '';
+
+    return dayjs.utc(this.args.candidate.birthdate).format('L');
   }
 
   get isConfirmButtonToBeDisplayed() {
