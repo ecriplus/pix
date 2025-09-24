@@ -14,6 +14,8 @@ export default class ActivityType extends Component {
         return { icon: 'profileShare', class: 'activity-type__icon--profile-collection' };
       case 'EXAM':
         return { icon: 'school', class: 'activity-type__icon--exam' };
+      case 'COMBINED_COURSE':
+        return { icon: 'brick', class: 'activity-type__icon--combined-course' };
       default:
         return { icon: 'close', class: '' };
     }
@@ -43,12 +45,14 @@ export default class ActivityType extends Component {
       ASSESSMENT: 'components.activity-type.information.ASSESSMENT',
       PROFILES_COLLECTION: 'components.activity-type.information.PROFILES_COLLECTION',
       EXAM: 'components.activity-type.information.EXAM',
+      COMBINED_COURSE: 'components.activity-type.information.COMBINED_COURSE',
     };
 
     const explanationLabels = {
       ASSESSMENT: 'components.activity-type.explanation.ASSESSMENT',
       PROFILES_COLLECTION: 'components.activity-type.explanation.PROFILES_COLLECTION',
       EXAM: 'components.activity-type.explanation.EXAM',
+      COMBINED_COURSE: 'components.activity-type.explanation.COMBINED_COURSE',
     };
 
     const { type, displayInformationLabel } = this.args;

@@ -1,3 +1,4 @@
+import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
@@ -54,10 +55,14 @@ export default class Header extends Component {
       </:title>
       <:subtitle>
         {{#if @campaign.isFromCombinedCourse}}
-          <p class="campaign-page__page-subtext">{{t
-              "pages.campaign.included-in-combined-course"
-              name=@campaign.combinedCourse.name
-            }}</p>
+          <p class="campaign-page__page-subtext">
+            {{t "pages.campaign.included-in-combined-course"}}
+            <LinkTo
+              class="link"
+              @route="authenticated.combined-course"
+              @model={{@campaign.combinedCourse.id}}
+            >{{@campaign.combinedCourse.name}}</LinkTo>{{t "pages.campaign.included-in-combined-course-end"}}
+          </p>
         {{/if}}
       </:subtitle>
       <:tools>

@@ -21,10 +21,12 @@ const formatedLinks = (links) =>
             <LinkTo @route="{{link.route}}" @model={{link.model}} aria-current={{link.ariaCurrent}}>
               {{link.label}}
             </LinkTo>
-          {{else}}
+          {{else if link.route}}
             <LinkTo @route="{{link.route}}" aria-current={{link.ariaCurrent}}>
               {{link.label}}
             </LinkTo>
+          {{else}}
+            {{link.label}}
           {{/if}}
         </li>
       {{/each}}

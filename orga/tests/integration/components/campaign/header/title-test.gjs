@@ -1,16 +1,16 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import CampaignTitle from 'pix-orga/components/campaign/header/title';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Campaign::Header::Title', function (hooks) {
+module('Integration | Component | CampaignTitle', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it should display campaign name', async function (assert) {
     // given
-    this.campaign = {
+    const campaign = {
       name: 'campagne 1',
       code: '1234PixTest',
       createdAt: new Date('2021-04-14'),
@@ -20,7 +20,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     };
 
     // when
-    const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+    const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
     // then
     const title = screen.getByRole('heading');
@@ -34,7 +34,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
 
   test('it should display combined course name if campaign is from combined course', async function (assert) {
     // given
-    this.campaign = {
+    const campaign = {
       name: 'campagne 1',
       code: '1234PixTest',
       createdAt: new Date('2021-04-14'),
@@ -45,15 +45,16 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     };
 
     // when
-    const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+    const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
     // then
-    assert.ok(screen.getByText(t('pages.campaign.included-in-combined-course', { name: 'COMBINIX' })));
+    assert.ok(screen.getByText(new RegExp(t('pages.campaign.included-in-combined-course'))));
+    assert.ok(screen.getByRole('link', { name: campaign.combinedCourse.name }));
   });
 
   test('it should not display combined course name if campaign is not from combined course', async function (assert) {
     // given
-    this.campaign = {
+    const campaign = {
       name: 'campagne 1',
       code: '1234PixTest',
       createdAt: new Date('2021-04-14'),
@@ -64,7 +65,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     };
 
     // when
-    const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+    const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
     // then
     assert.notOk(screen.queryByText(t('pages.campaign.included-in-combined-course', { name: 'ABC123' })));
@@ -73,7 +74,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
   module('campaign code display', function () {
     test('it should display campaign code when campaign is not from combined course', async function (assert) {
       // given
-      this.campaign = {
+      const campaign = {
         name: 'campagne 1',
         code: '1234PixTest',
         createdAt: new Date('2021-04-14'),
@@ -83,7 +84,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
       };
 
       // when
-      const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+      const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
       // then
       assert.ok(screen.getByText('1234PixTest'));
@@ -92,7 +93,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
 
     test('it should not display campaign code when campaign is from combined course', async function (assert) {
       // given
-      this.campaign = {
+      const campaign = {
         name: 'campagne 1',
         code: '1234PixTest',
         createdAt: new Date('2021-04-14'),
@@ -102,7 +103,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
       };
 
       // when
-      const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+      const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
       // then
       assert.notOk(screen.queryByText('1234PixTest'));
@@ -120,12 +121,12 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     module('when campaign type is PROFILES_COLLECTION', function () {
       test('it should display multiple sendings label', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILES_COLLECTION',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+        const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
         // then
         assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.title')));
       });
@@ -133,13 +134,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
       module('when multiple sendings is true', function () {
         test("it should display 'oui'", async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'PROFILES_COLLECTION',
             multipleSendings: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
           // then
           assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.enabled')));
@@ -149,13 +150,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
       module('when multiple sendings is false', function () {
         test("it should display 'Non'", async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'PROFILES_COLLECTION',
             multipleSendings: false,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
           // then
           assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.disabled')));
@@ -171,12 +172,12 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           currentUser.prescriber = {
             enableMultipleSendingAssessment: false,
           };
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
           // then
           assert.notOk(screen.queryByText(t('pages.campaign.multiple-sendings.title')));
@@ -197,11 +198,11 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           currentUser.prescriber = {
             enableMultipleSendingAssessment: true,
           };
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
           });
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
           // then
           assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.title')));
         });
@@ -209,13 +210,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
         module('when the campaign multiple sending is true', function () {
           test("it should display 'oui'", async function (assert) {
             // given
-            this.campaign = store.createRecord('campaign', {
+            const campaign = store.createRecord('campaign', {
               type: 'ASSESSMENT',
               multipleSendings: true,
             });
 
             // when
-            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+            const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
             // then
             assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.enabled')));
@@ -225,13 +226,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
         module('when the campaign multiple sending is false', function () {
           test("it should display 'non'", async function (assert) {
             // given
-            this.campaign = store.createRecord('campaign', {
+            const campaign = store.createRecord('campaign', {
               type: 'ASSESSMENT',
               multipleSendings: false,
             });
 
             // when
-            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+            const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
             // then
             assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.disabled')));
@@ -248,12 +249,12 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           currentUser.prescriber = {
             enableMultipleSendingAssessment: false,
           };
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
           // then
           assert.notOk(screen.queryByText(t('pages.campaign.multiple-sendings.title')));
@@ -274,11 +275,11 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
           currentUser.prescriber = {
             enableMultipleSendingAssessment: true,
           };
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
           });
           // when
-          const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+          const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
           // then
           assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.title')));
         });
@@ -286,13 +287,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
         module('when the campaign multiple sending is true', function () {
           test("it should display 'oui'", async function (assert) {
             // given
-            this.campaign = store.createRecord('campaign', {
+            const campaign = store.createRecord('campaign', {
               type: 'EXAM',
               multipleSendings: true,
             });
 
             // when
-            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+            const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
             // then
             assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.enabled')));
@@ -302,13 +303,13 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
         module('when the campaign multiple sending is false', function () {
           test("it should display 'non'", async function (assert) {
             // given
-            this.campaign = store.createRecord('campaign', {
+            const campaign = store.createRecord('campaign', {
               type: 'EXAM',
               multipleSendings: false,
             });
 
             // when
-            const screen = await render(hbs`<Campaign::Header::Title @campaign={{this.campaign}} />`);
+            const screen = await render(<template><CampaignTitle @campaign={{campaign}} /></template>);
 
             // then
             assert.ok(screen.getByText(t('pages.campaign.multiple-sendings.status.disabled')));

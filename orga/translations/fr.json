@@ -602,7 +602,8 @@
       "created-on": "Créée le",
       "empty-state": "Aucun participant pour l’instant !",
       "empty-state-with-copy-link": "Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.",
-      "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours {name}.",
+      "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours apprenant",
+      "included-in-combined-course-end": ".",
       "multiple-sendings": {
         "status": {
           "disabled": "Non",
@@ -1005,6 +1006,9 @@
       "no-students-imported-yet": "Dans cet onglet, vous retrouverez les résultats et les certificats des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement. ",
       "select-label": "Classe",
       "title": "Résultats de certification"
+    },
+    "combined-course": {
+      "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit"
     },
     "index": {
       "title": "Accueil"
