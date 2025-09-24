@@ -3,18 +3,44 @@ import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import Card from '../card';
 
 export default class OrganizationCreationForm extends Component {
+  @service store;
+
+  @tracked administrationTeams = [];
+
   organizationTypes = [
     { value: 'PRO', label: 'Organisation professionnelle' },
     { value: 'SCO', label: 'Établissement scolaire' },
     { value: 'SUP', label: 'Établissement supérieur' },
     { value: 'SCO-1D', label: 'Établissement scolaire du premier degré' },
   ];
+
+  constructor() {
+    super(...arguments);
+    this.#onMount();
+  }
+
+  async #onMount() {
+    this.administrationTeams = await this.store.findAll('administration-team');
+  }
+
+  get administrationTeamsOptions() {
+    const options = [];
+    this.administrationTeams?.forEach((administrationTeam) =>
+      options.push({
+        value: administrationTeam.id,
+        label: administrationTeam.name,
+      }),
+    );
+    return options;
+  }
 
   @action
   handleOrganizationTypeSelectionChange(value) {
@@ -24,6 +50,11 @@ export default class OrganizationCreationForm extends Component {
   @action
   handleOrganizationNameChange(event) {
     this.args.organization.name = event.target.value;
+  }
+
+  @action
+  handleAdministrationTeamSelectionChange(value) {
+    this.args.organization.administrationTeamId = value;
   }
 
   @action
@@ -53,7 +84,6 @@ export default class OrganizationCreationForm extends Component {
 
   <template>
     <form class="admin-form" {{on "submit" @onSubmit}}>
-
       <section class="admin-form__content admin-form__content--with-counters">
         <Card class="admin-form__card" @title="Information générique">
           <PixInput
@@ -76,6 +106,17 @@ export default class OrganizationCreationForm extends Component {
           >
             <:label>Sélectionner un type d'organisation</:label>
             <:default as |organizationType|>{{organizationType.label}}</:default>
+          </PixSelect>
+
+          <PixSelect
+            @onChange={{this.handleAdministrationTeamSelectionChange}}
+            @options={{this.administrationTeamsOptions}}
+            @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
+            @hideDefaultOption={{true}}
+            @value={{@organization.administrationTeamId}}
+            aria-required={{false}}
+          >
+            <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
         </Card>
 

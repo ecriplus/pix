@@ -1,6 +1,7 @@
 import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -25,7 +26,7 @@ module('Acceptance | Organizations | Create', function (hooks) {
   });
 
   module('when an organization is created', function () {
-    test('it redirects the user on the organization details page with the tags tab opened', async function (assert) {
+    test('it redirects the user on the organization details page on tags tab', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
       await fillByLabel('Nom', 'Stark Corp.');
@@ -34,7 +35,14 @@ module('Acceptance | Organizations | Create', function (hooks) {
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'Établissement scolaire' }));
 
+      await click(
+        screen.getByRole('button', { name: t('components.organizations.creation.administration-team.selector.label') }),
+      );
+      await screen.findByRole('listbox');
+      await click(screen.getByText('Équipe 2'));
+
       await fillByLabel('Crédits', 120);
+
       await fillByLabel('Prénom du DPO', 'Justin');
       await fillByLabel('Nom du DPO', 'Ptipeu');
       await fillByLabel('Adresse e-mail du DPO', 'justin.ptipeu@example.net');

@@ -644,6 +644,26 @@ function routes() {
   });
 
   this.post('/admin/campaigns', async () => new Response(204));
+  this.get('/admin/administration-teams', async () => {
+    return {
+      data: [
+        {
+          type: 'administration-team',
+          id: '2',
+          attributes: {
+            name: 'Équipe 2',
+          },
+        },
+        {
+          type: 'administration-team',
+          id: '1',
+          attributes: {
+            name: 'Équipe 1',
+          },
+        },
+      ],
+    };
+  });
 
   this.get('/admin/oidc/identity-providers', () => {
     return {
