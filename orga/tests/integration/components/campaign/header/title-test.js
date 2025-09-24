@@ -25,7 +25,7 @@ module('Integration | Component | Campaign::Header::Title', function (hooks) {
     // then
     const title = screen.getByRole('heading');
 
-    assert.ok(within(title).getByRole('img', { name: t('components.campaign.type.explanation.ASSESSMENT') }));
+    assert.ok(within(title).getByRole('img', { name: t('components.activity-type.explanation.ASSESSMENT') }));
     assert.ok(within(title).getByText('campagne 1'));
     assert.ok(screen.getByText('1234PixTest'));
     assert.ok(screen.getByText('Mulan Fa'));

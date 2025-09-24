@@ -3,8 +3,8 @@ import { array } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
+import ActivityType from 'pix-orga/components/activity-type';
 
-import CampaignType from '../../campaign/detail/type';
 import Date from '../../ui/date';
 import ParticipationStatus from '../../ui/participation-status';
 
@@ -31,7 +31,7 @@ export default class ParticipationRow extends Component {
       <:header>{{t "pages.organization-learner.activity.participation-list.table.column.campaign-type"}}
       </:header>
       <:cell>
-        <CampaignType @campaignType={{@participation.campaignType}} @displayInformationLabel={{true}} />
+        <ActivityType @type={{@participation.campaignType}} @displayInformationLabel={{true}} />
       </:cell>
     </PixTableColumn>
 

@@ -256,6 +256,20 @@
     }
   },
   "components": {
+    "activity-type": {
+      "explanation": {
+        "ASSESSMENT": "Campagne d'évaluation",
+        "COMBINED_COURSE": "Parcours apprenant",
+        "EXAM": "Mode interro [bêta]",
+        "PROFILES_COLLECTION": "Campagne de collecte de profil"
+      },
+      "information": {
+        "ASSESSMENT": "Évaluation",
+        "COMBINED_COURSE": "Parcours apprenant",
+        "EXAM": "Mode interro [bêta]",
+        "PROFILES_COLLECTION": "Collecte de profil"
+      }
+    },
     "analysis-per-competence": {
       "cover-rate-gauge-label": "Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
       "description": "Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
@@ -286,20 +300,6 @@
         "label": "Vue par :",
         "label-competences": "Compétences",
         "label-tubes": "Sujets"
-      }
-    },
-    "campaign": {
-      "type": {
-        "explanation": {
-          "ASSESSMENT": "Campagne d'évaluation",
-          "EXAM": "Mode interro [bêta]",
-          "PROFILES_COLLECTION": "Campagne de collecte de profil"
-        },
-        "information": {
-          "ASSESSMENT": "Évaluation",
-          "EXAM": "Mode interro [bêta]",
-          "PROFILES_COLLECTION": "Collecte de profil"
-        }
       }
     },
     "certificability": {

@@ -22,10 +22,9 @@
 @use 'settings/campaign-settings';
 @use 'stage-average';
 @use 'target-profile-details';
-@use 'detail';
 @use 'cards';
 
 .badge--unacquired {
-  opacity: .8;
+  opacity: 0.8;
   filter: grayscale(1);
 }

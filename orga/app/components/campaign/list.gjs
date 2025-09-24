@@ -13,12 +13,12 @@ import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
+import ActivityType from 'pix-orga/components/activity-type';
 
 import InElement from '../in-element';
 import SelectableList from '../selectable-list';
 import UiActionBar from '../ui/action-bar';
 import UiDeletionModal from '../ui/deletion-modal';
-import CampaignType from './detail/type';
 import CampaignFilters from './filter/campaign-filters';
 
 async function withFunction(wrappedFunction, func, ...args) {
@@ -116,7 +116,7 @@ export default class List extends Component {
               </:header>
               <:cell>
                 <span class="table__link-cell">
-                  <CampaignType @labels={{this.labels}} @campaignType={{campaign.type}} @hideLabel={{true}} />
+                  <ActivityType @labels={{this.labels}} @type={{campaign.type}} @hideLabel={{true}} />
                   <LinkTo @route="authenticated.campaigns.campaign" @model={{campaign.id}}>
                     {{campaign.name}}
                   </LinkTo>

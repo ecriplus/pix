@@ -2,11 +2,11 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import ActivityType from 'pix-orga/components/activity-type';
 
 import CopyPasteButton from '../../copy-paste-button';
 import Breadcrumb from '../../ui/breadcrumb';
 import PageTitle from '../../ui/page-title';
-import CampaignType from '../detail/type';
 
 export default class Header extends Component {
   @service intl;
@@ -49,7 +49,7 @@ export default class Header extends Component {
         <Breadcrumb @links={{this.breadcrumbLinks}} class="campaign-header-title__breadcrumb" />
       </:breadcrumb>
       <:title>
-        <CampaignType @big={{true}} @campaignType={{@campaign.type}} @hideLabel={{true}} />
+        <ActivityType @big={{true}} @type={{@campaign.type}} @hideLabel={{true}} />
         <span class="page-title__name">{{@campaign.name}}</span>
       </:title>
       <:subtitle>

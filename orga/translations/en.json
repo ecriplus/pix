@@ -256,6 +256,20 @@
     }
   },
   "components": {
+    "activity-type": {
+      "explanation": {
+        "ASSESSMENT": "Campaign of type assessment",
+        "COMBINED_COURSE": "Learning program",
+        "EXAM": "Exam mode [beta]",
+        "PROFILES_COLLECTION": "Campaign of type profiles collection"
+      },
+      "information": {
+        "ASSESSMENT": "Assessment",
+        "COMBINED_COURSE": "Learning program",
+        "EXAM": "Exam mode [beta]",
+        "PROFILES_COLLECTION": "Profiles collection"
+      }
+    },
     "analysis-per-competence": {
       "cover-rate-gauge-label": "Your participants have achieved a level of {reachedLevel} out of a maximum attainable level of {maxLevel}.",
       "description": "Below are the campaign competences and their descriptions, as well as the positioning of the participants.",
@@ -286,20 +300,6 @@
         "label": "View by:",
         "label-competences": "Competences",
         "label-tubes": "Topics"
-      }
-    },
-    "campaign": {
-      "type": {
-        "explanation": {
-          "ASSESSMENT": "Campaign of type assessment",
-          "EXAM": "Exam mode [beta]",
-          "PROFILES_COLLECTION": "Campaign of type profiles collection"
-        },
-        "information": {
-          "ASSESSMENT": "Assessment",
-          "EXAM": "Exam mode [beta]",
-          "PROFILES_COLLECTION": "Profiles collection"
-        }
       }
     },
     "certificability": {
