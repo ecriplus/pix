@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.217.0](https://github.com/1024pix/pix/compare/v5.216.0...v5.217.0) (2025-09-24)
+
+### :rocket: Amélioration
+
+- [#13638](https://github.com/1024pix/pix/pull/13638) - Ajout du bouton Répondre au questionnaire sur les parcours combinés (PIX-19609) 
+- [#13651](https://github.com/1024pix/pix/pull/13651) Afficher tout le contenu d'un stepper horizontal en preview sur Pix App (PIX-19372). 
+- [#13643](https://github.com/1024pix/pix/pull/13643) Modification feedback tom cruise 
+- [#13641](https://github.com/1024pix/pix/pull/13641) Retirer les variables des évènements Plausible 
+
+### :bug: Correction
+
+- [#13602](https://github.com/1024pix/pix/pull/13602) Traductions défectueuses suite à l'extraction de la méthode translate de i18n (PIX-19565) 
+
+### :building_construction: Tech
+
+- [#13655](https://github.com/1024pix/pix/pull/13655) Ajouter un éditeur de parcours combiné 
+
+### :arrow_up: Montée de version
+
+- [#13640](https://github.com/1024pix/pix/pull/13640) Update dependency @1024pix/pix-ui to ^55.28.0 (junior) 
+- [#13648](https://github.com/1024pix/pix/pull/13648) Update dependency @types/bcrypt to v6 (audit-logger) 
+- [#13654](https://github.com/1024pix/pix/pull/13654) Update dependency chai to v6 (api) 
+- [#13658](https://github.com/1024pix/pix/pull/13658) Update dependency chai to v6 (load-testing) 
+- [#13662](https://github.com/1024pix/pix/pull/13662) Update dependency ember-exam to v10 (admin) 
+- [#13529](https://github.com/1024pix/pix/pull/13529) Update dependency ember-source to ~6.7.0 (junior)
+
 # [5.216.0](https://github.com/1024pix/pix/compare/v5.215.0...v5.216.0) (2025-09-23)
 
 ### :rocket: Amélioration
