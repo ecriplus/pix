@@ -51,8 +51,8 @@ export default class TrainingDetailsCard extends Component {
           <dt class="training-details-card__details-label">{{t "pages.trainings.training.details.status"}}</dt>
           <dd class="training-details-card__details-value">{{if
               @training.isRecommendable
-              "Déclenchable"
-              "Non déclenchable"
+              (t "pages.trainings.training.details.status-label.enabled")
+              (t "pages.trainings.training.details.status-label.disabled")
             }}</dd>
         </dl>
       </div>

@@ -6,10 +6,11 @@ import { t } from 'ember-intl';
 import Details from './trigger/details';
 
 <template>
-  <section class="page-section trigger-card">
+  <section class="trigger-card">
     <h2 class="trigger-card__title">
       <span>{{t "pages.trainings.training.triggers.prerequisite.title"}}</span>
       {{#if @training.prerequisiteTrigger}}
+
         <strong class="trigger-card__threshold">Seuil&nbsp;: {{@training.prerequisiteTrigger.threshold}}%</strong>
         <PixTag class="trigger-card__tubes-count" @color="grey-light">
           {{@training.prerequisiteTrigger.tubesCount}}
@@ -35,7 +36,7 @@ import Details from './trigger/details';
     {{/if}}
   </section>
 
-  <section class="page-section trigger-card">
+  <section class="trigger-card">
     <h2 class="trigger-card__title">
       <span>{{t "pages.trainings.training.triggers.goal.title"}}</span>
       {{#if @training.goalTrigger}}

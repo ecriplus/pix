@@ -13,17 +13,22 @@
 }
 
 .trigger-card {
+  margin-bottom: var(--pix-spacing-8x);
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
   &__title {
     @extend %pix-body-l;
 
     display: flex;
+    gap: var(--pix-spacing-4x);
     align-items: baseline;
     margin-bottom: var(--pix-spacing-2x);
     font-weight: 500;
   }
 
   &__threshold {
-    margin-left: var(--pix-spacing-4x);
     color: var(--pix-neutral-900);
     font-size: 1rem;
     line-height: 1.5;

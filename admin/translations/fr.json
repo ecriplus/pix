@@ -1286,7 +1286,25 @@
           "localizedLanguage": "Langue localisée :",
           "publishedOn": "Publié sur :",
           "status": "Statut :",
-          "title": "Titre public :"
+          "title": "Titre public :",
+          "status-label": {
+            "enabled": "Déclenchable",
+            "disabled": "Non déclenchable"
+          }
+        },
+        "delete": {
+          "button": {
+            "goal-label": "Supprimer l'objectif à ne pas dépasser",
+            "prerequisite-label": "Supprimer le prérequis"
+          },
+          "modal": {
+            "instruction": "Cette action désactivera le déclenchemet de votre Contenu Formatif",
+            "goal-title": "Suprimer l'objectif à ne pas dépasser du contenu formatif ?",
+            "prerequisite-title": "Supprimer le prérequis du contenu formatif ?"
+          },
+          "notifications": {
+            "success": "Le déclencher à bien été supprimé!"
+          }
         },
         "duplicate": {
           "button": {

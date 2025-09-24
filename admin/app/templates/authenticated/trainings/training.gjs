@@ -10,6 +10,7 @@ import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import TrainingBreadCrumb from 'pix-admin/components/trainings/breadcrumb';
 import TrainingCreateOrUpdateTrainingForm from 'pix-admin/components/trainings/create-or-update-training-form';
+import DeleteTrainingTrigger from 'pix-admin/components/trainings/delete-training-trigger';
 import DuplicateTraining from 'pix-admin/components/trainings/duplicate-training';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 
@@ -62,6 +63,11 @@ export default class Training extends Component {
   }
 
   @action
+  async deleteTrainingTrigger(type, value) {
+    console.log({ type, value });
+  }
+
+  @action
   goToNewTrainingDetails(newTrainingId) {
     this.router.transitionTo('authenticated.trainings.training', newTrainingId);
   }
@@ -105,6 +111,7 @@ export default class Training extends Component {
                 }}
               </PixButton>
               <DuplicateTraining @onSubmit={{this.duplicateTraining}} />
+              <DeleteTrainingTrigger @training={{@model}} @onSubmit={{this.deleteTrainingTrigger}} />
             </div>
           {{/if}}
         {{/if}}
