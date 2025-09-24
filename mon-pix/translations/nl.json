@@ -1207,7 +1207,8 @@
       "completed": {
         "title": "Gefeliciteerd! Je bent klaar!",
         "description": "Bravo! Je hebt een belangrijke stap gezet om je weg te vinden in de digitale wereld.",
-        "survey-button": "De tevredenheidsenquête invullen"
+        "survey-button": "De tevredenheidsenquête invullen",
+        "survey-button-descritpion": "Beantwoord de vragenlijst om uw mening te geven over het parcours"
       },
       "items": {
         "formation": {

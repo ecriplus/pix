@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -44,7 +45,7 @@ const Header = <template>
         </PixButton>
       {{/if}}
       {{#if (and (eq @combinedCourse.status "COMPLETED") @isSurveyEnabled)}}
-        <PixTooltip @id="tooltip-satisfaction-survey" @position="right" @isWide={{true}}>
+        <PixTooltip @id="tooltip-satisfaction-survey" @position="right" @isInline={{true}}>
           <:triggerElement>
             <PixButtonLink
               @href={{@surveyLink}}

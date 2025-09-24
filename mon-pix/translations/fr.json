@@ -1204,6 +1204,7 @@
       "completed": {
         "description": "Bien joué ! Vous avez franchi une étape importante pour naviguer dans le monde numérique.",
         "survey-button": "Répondre au questionnaire",
+        "survey-button-description": "Répondez au questionnaire pour donner votre avis sur le parcours",
         "title": "Félicitations ! Vous avez terminé !"
       },
       "content": {
