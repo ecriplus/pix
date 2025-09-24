@@ -98,7 +98,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         expect(error.message).to.equal(`Échec de validation de l'entité.`);
         expect(error.invalidAttributes).to.deep.include({
           attribute: 'locale',
-          message: `La locale doit avoir l'une des valeurs suivantes : en, es, fr, nl, fr-be, fr-fr, nl-be`,
+          message: `La locale doit avoir l'une des valeurs suivantes : en, es, es-419, fr, nl, fr-be, fr-fr, nl-be`,
         });
       });
     });

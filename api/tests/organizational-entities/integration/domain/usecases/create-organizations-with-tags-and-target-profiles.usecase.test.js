@@ -98,7 +98,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           },
           {
             attribute: 'locale',
-            message: "La locale doit avoir l'une des valeurs suivantes : en, es, fr, nl, fr-be, fr-fr, nl-be",
+            message: "La locale doit avoir l'une des valeurs suivantes : en, es, es-419, fr, nl, fr-be, fr-fr, nl-be",
           },
           {
             attribute: 'locale',

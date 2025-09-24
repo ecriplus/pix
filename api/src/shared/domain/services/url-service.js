@@ -16,6 +16,7 @@ export const PIX_WEBSITE_ROOT_URLS = {
   nl: `${PIX_WEBSITE_DOMAIN_ORG}/nl-be`,
   en: `${PIX_WEBSITE_DOMAIN_ORG}/en`,
   es: `${PIX_WEBSITE_DOMAIN_ORG}/en`,
+  'es-419': `${PIX_WEBSITE_DOMAIN_ORG}/en`,
   fr: `${PIX_WEBSITE_DOMAIN_ORG}/fr`,
 };
 
@@ -122,6 +123,7 @@ export const PIX_WEBSITE_PATHS = {
     nl: 'support',
     en: 'support',
     es: 'support',
+    'es-419': 'support',
     fr: 'support',
   },
 };
