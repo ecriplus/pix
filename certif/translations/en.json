@@ -188,7 +188,9 @@
       "invigilator": "Invigilator"
     },
     "urls": {
-      "fraud": "https://cloud.pix.fr/s/9A598pR5ksp6jss/download"
+      "fraud": "https://cloud.pix.fr/s/9A598pR5ksp6jss/download",
+      "session-issue-report-sheet": "https://cloud.pix.fr/s/ro7jHtsZZbY5SCX/download",
+      "session-v3-issue-report-sheet": "https://cloud.pix.fr/s/ro7jHtsZZbY5SCX/download"
     }
   },
   "components": {

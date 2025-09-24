@@ -35,15 +35,11 @@ export default class Url extends UrlBaseService {
   }
 
   get urlToDownloadSessionIssueReportSheet() {
-    if (this.locale.currentLanguage === 'fr') {
-      return 'https://cloud.pix.fr/s/B76yA8ip9Radej9/download';
-    }
-
-    return 'https://cloud.pix.fr/s/ro7jHtsZZbY5SCX/download';
+    return this.intl.t('common.urls.session-issue-report-sheet');
   }
 
   get urlToDownloadSessionV3IssueReportSheet() {
-    return 'https://cloud.pix.fr/s/wJc6N3sZNZRC4MZ/download';
+    return this.intl.t('common.urls.session-v3-issue-report-sheet');
   }
 
   get fraudFormUrl() {
