@@ -52,8 +52,9 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
     it('should fetch and return frameworks, serialized as JSONAPI', async function () {
       // given
+      const locale = 'en';
       const request = {
-        headers: { 'accept-language': 'en' },
+        state: { locale },
       };
 
       // when

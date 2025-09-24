@@ -46,9 +46,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'STAGE_TITLE_IS_REQUIRED' }],
@@ -89,9 +87,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError to french', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'fr-fr',
-        },
+        state: { locale: 'fr-fr' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'STAGE_TITLE_IS_REQUIRED' }],
@@ -119,9 +115,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should fallback to the message if the translation is not found', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'message' }],
@@ -149,9 +143,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should fallback to the message if the translation is not found with special chars', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'special-:{%}/_chars' }],
@@ -179,9 +171,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError even if invalidAttributes is undefined', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: undefined,

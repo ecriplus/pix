@@ -161,7 +161,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { campaignId, campaignParticipationId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
       const h = Symbol('h');
 
@@ -206,7 +206,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { campaignId, campaignParticipationId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
       const h = Symbol('h');
 
@@ -246,7 +246,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { campaignParticipationId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
       const h = Symbol('h');
 
@@ -350,7 +350,7 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { campaignId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
       const dependencies = {
         participantResultSerializer: { serialize: sinon.stub() },

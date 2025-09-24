@@ -27,7 +27,7 @@ describe('Profile | Unit | Controller | profile-controller', function () {
         params: {
           id: userId,
         },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when

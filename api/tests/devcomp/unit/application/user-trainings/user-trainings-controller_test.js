@@ -10,8 +10,8 @@ describe('Unit | Controller | user-trainings-controller', function () {
       const locale = 'fr';
       const request = {
         auth: { credentials: { userId: 1 } },
+        state: { locale },
         query: { page },
-        headers: { 'accept-language': locale },
       };
       const expectedResult = Symbol('serialized-trainings');
       const userRecommendedTrainings = Symbol('userRecommendedTrainings');

@@ -31,7 +31,6 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
       const request = {
         auth: { credentials: { userId } },
         params: { id: campaignParticipationId },
-        headers: { 'accept-language': locale },
       };
       const h = Symbol('h');
 

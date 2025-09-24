@@ -125,7 +125,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
       const request = {
         deserializedPayload: { identityProvider: 'OIDC', authenticationKey: 'abcde' },
         headers: {
-          'accept-language': 'fr',
           'x-forwarded-proto': 'https',
           'x-forwarded-host': 'app.pix.fr',
         },
@@ -255,7 +254,6 @@ describe('Unit | Identity Access Management | Application | Controller | oidc-pr
         // given
         const request = {
           headers: {
-            'accept-language': 'fr',
             'x-forwarded-proto': 'https',
             'x-forwarded-host': 'app.pix.fr',
           },

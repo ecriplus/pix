@@ -68,7 +68,8 @@ describe('Unit | Controller | answer-controller', function () {
 
     beforeEach(function () {
       request = {
-        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
+        state: { locale },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
         payload: {
           data: {
             attributes: {
@@ -295,7 +296,8 @@ describe('Unit | Controller | answer-controller', function () {
           // given
           await featureToggles.set('isQuestEnabled', true);
           await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', false);
-          request.headers = { 'accept-language': locale }; // userId is not provided
+          // Setting headers so that userId is not provided
+          request.headers = {};
 
           // when
           await answerController.save(request, hFake, {
@@ -330,7 +332,8 @@ describe('Unit | Controller | answer-controller', function () {
       const response = await answerController.getCorrection(
         {
           params: { id: answerId },
-          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
+          state: { locale },
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
         },
         hFake,
         { correctionSerializer: correctionSerializerStub },

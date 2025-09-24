@@ -13,7 +13,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return serialized V3 certificate data', async function () {
         // given
         const locale = 'fr-fr';
-        const request = { payload: { verificationCode: 'P-123456BB' }, headers: { 'accept-language': locale } };
+        const request = { payload: { verificationCode: 'P-123456BB' } };
 
         const certificateSerializerStub = { serialize: sinon.stub() };
 
@@ -49,7 +49,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
       it('should return a serialized shareable certificate given by verification code', async function () {
         // given
         const locale = 'fr-fr';
-        const request = { payload: { verificationCode: 'P-123456BB' }, headers: { 'accept-language': locale } };
+        const request = { payload: { verificationCode: 'P-123456BB' } };
         const certificateSerializerStub = { serialize: sinon.stub() };
         sinon.stub(usecases, 'getShareableCertificate');
         sinon.stub(usecases, 'getCertificationCourseByVerificationCode');
@@ -88,7 +88,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const request = {
           auth: { credentials: { userId } },
           params: { certificationCourseId },
-          headers: { 'accept-language': locale },
         };
         const certificationCourse = domainBuilder.buildCertificationCourse({
           id: certificationCourseId,
@@ -128,7 +127,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const request = {
           auth: { credentials: { userId } },
           params: { certificationCourseId },
-          headers: { 'accept-language': locale },
         };
 
         const certificationCourse = domainBuilder.buildCertificationCourse({
@@ -286,7 +284,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           auth: { credentials: { userId } },
           params: { certificationCourseId: 9 },
           query: { isFrenchDomainExtension: true, lang: 'fr' },
-          headers: { 'accept-language': 'fr' },
         };
 
         const certificationCourse = domainBuilder.buildCertificationCourse({
@@ -343,7 +340,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           auth: { credentials: { userId } },
           params: { sessionId: session.id },
           query: { isFrenchDomainExtension: true },
-          headers: { 'accept-language': 'fr' },
         };
 
         sinon
@@ -406,7 +402,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           auth: { credentials: { userId } },
           params: { sessionId: session.id },
           query: { isFrenchDomainExtension: true },
-          headers: { 'accept-language': 'fr' },
         };
 
         sinon
@@ -469,7 +464,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           auth: { credentials: { userId } },
           params: { organizationId },
           query: { division, isFrenchDomainExtension: true, lang: 'fr' },
-          headers: { 'accept-language': 'fr' },
         };
 
         sinon
@@ -519,7 +513,6 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           auth: { credentials: { userId } },
           params: { organizationId },
           query: { division, isFrenchDomainExtension: true, lang },
-          headers: { 'accept-language': 'fr' },
         };
 
         sinon

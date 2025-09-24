@@ -282,6 +282,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
     context('language negociation', function () {
       it('should return translated tube title and description', async function () {
         // given
+        const locale = 'en';
         const targetProfile = databaseBuilder.factory.buildTargetProfile();
         const campaignInJurisdiction = databaseBuilder.factory.buildCampaign({
           organizationId: orgaInJurisdiction.id,
@@ -320,7 +321,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
           url: `/api/organizations/${orgaInJurisdiction.id}/campaigns?page[number]=1&page[size]=1`,
           headers: {
             authorization: generateValidRequestAuthorizationHeaderForApplication(clientId, 'pix-client', 'campaigns'),
-            'accept-language': 'en',
+            cookie: `locale=${locale}`,
           },
         };
 

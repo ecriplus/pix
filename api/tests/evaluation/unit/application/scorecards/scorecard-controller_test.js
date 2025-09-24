@@ -38,7 +38,7 @@ describe('Unit | Controller | scorecard-controller', function () {
         params: {
           id: scorecardId,
         },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when
@@ -74,7 +74,7 @@ describe('Unit | Controller | scorecard-controller', function () {
         params: {
           id: scorecardId,
         },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when

@@ -184,7 +184,11 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             competenceId: competenceId,
           });
           await databaseBuilder.commit();
-          postAnswersOptions.headers['accept-language'] = testCase.locale;
+
+          postAnswersOptions.headers = generateAuthenticatedUserRequestHeaders({
+            userId,
+            locale: testCase.locale,
+          });
 
           // when
           const response = await server.inject(postAnswersOptions);

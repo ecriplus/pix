@@ -15,12 +15,13 @@ describe('Certification | Session Management | Unit | Application | Controller |
         const sessionMainInfo = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
         const invigilatorKitBuffer = 'binary string';
         const userId = 1;
-        const i18n = getI18n(lang);
+        const locale = lang;
+        const i18n = getI18n(locale);
         const request = {
           i18n,
           auth: { credentials: { userId } },
           params: { sessionId: sessionMainInfo.id },
-          headers: { 'accept-language': lang },
+          state: { locale },
         };
 
         const invigilatorKitPdf = {

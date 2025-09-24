@@ -18,7 +18,6 @@ describe('Profile | Unit | Controller | attestation-controller', function () {
           userId,
           attestationKey,
         },
-        headers: { 'accept-language': locale },
       };
       sinon.stub(hFake, 'response');
       hFake.response.callThrough();

@@ -30,7 +30,6 @@ describe('Unit | Controller | certification-course-controller', function () {
             },
           },
         },
-        headers: { 'accept-language': 'fr' },
       };
       sinon.stub(usecases, 'retrieveLastOrCreateCertificationCourse');
       certificationCourseSerializer.serialize.returns('ok');
