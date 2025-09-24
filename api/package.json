@@ -94,7 +94,7 @@
     "@babel/plugin-syntax-import-attributes": "^7.24.1",
     "@eslint/compat": "^1.0.1",
     "@ls-lint/ls-lint": "^2.0.0",
-    "chai": "^5.0.0",
+    "chai": "^6.0.0",
     "chai-as-promised": "^8.0.0",
     "chai-sorted": "^0.2.0",
     "depcheck": "^1.4.3",
@@ -125,7 +125,7 @@
     "stream-to-promise": "^3.0.0"
   },
   "overrides": {
-    "chai": "^5.0.0"
+    "chai": "^6.0.0"
   },
   "scripts": {
     "clean": "rm -rf node_modules",
