@@ -4,12 +4,15 @@ import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
-import { eq, or } from 'ember-truth-helpers';
+import { and, eq } from 'ember-truth-helpers';
 import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 const Content = <template>
   <div
-    class="combined-course-item {{if (or @isCompleted @isLocked) 'combined-course-item--ended-locked-state'}}"
+    class="combined-course-item
+      {{if @hasYellowBorder 'combined-course-item--yellow-border'}}
+      {{if @hasWhiteBackground 'combined-course-item--white'}}
+      {{if @isCurrentItem 'combined-course-item--current'}}"
     ...attributes
   >
     <div class="combined-course-item__content">
@@ -37,9 +40,17 @@ const Content = <template>
       </div>
     {{/if}}
     {{#if @isCompleted}}
-      <div class="combined-course-item__indicator--completed">
+      <div
+        class="combined-course-item__indicator--completed
+          {{if @hasYellowBorder 'combined-course-item__indicator--yellow'}}"
+      >
         <span>{{t "pages.combined-courses.items.completed"}}</span>
-        <PixIcon @name="checkCircle" @plainIcon={{true}} class="combined-course-item__icon" @ariaHidden={{true}} />
+        <PixIcon
+          @name="checkCircle"
+          @plainIcon={{true}}
+          class="combined-course-item__icon {{if @hasYellowBorder 'combined-course-item__icon--yellow'}}"
+          @ariaHidden={{true}}
+        />
       </div>
 
     {{/if}}
@@ -55,6 +66,16 @@ const Duration = <template>
     }}{{@item.duration}}
     {{t "pages.combined-courses.items.durationUnit"}}</span>
 </template>;
+
+function hasWhiteBackground(item) {
+  if (!item.isCompleted && !item.isLocked) {
+    return true;
+  } else if (item.type === CombinedCourseItemTypes.MODULE && item.isCompleted) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 <template>
   {{#if (eq @item.type CombinedCourseItemTypes.FORMATION)}}
@@ -94,6 +115,9 @@ const Duration = <template>
           @isCompleted={{@item.isCompleted}}
           @iconUrl={{@item.iconUrl}}
           @displayDuration={{eq @item.type "MODULE"}}
+          @hasWhiteBackground={{hasWhiteBackground @item}}
+          @hasYellowBorder={{and (eq @item.type "MODULE") @isCombinedCourseCompleted}}
+          @isCurrentItem={{@isNextItemToComplete}}
         >
           <:duration>
             {{#if @item.duration}}
@@ -102,10 +126,10 @@ const Duration = <template>
           </:duration>
           <:blockEnd>
             {{#if @isNextItemToComplete}}
-              <PixTag @color="purple-light" @plainIcon={{true}} class="combined-course-item__current-item-tag">{{t
+              <PixTag @color="purple-light" class="combined-course-item__tag">{{t
                   "pages.combined-courses.items.tagText"
                 }}
-                <PixIcon @name="distance" @ariaHidden={{true}} /></PixTag>
+                <PixIcon @name="distance" @plainIcon={{true}} @ariaHidden={{true}} /></PixTag>
             {{/if}}
           </:blockEnd>
         </Content>

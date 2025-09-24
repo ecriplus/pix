@@ -88,6 +88,7 @@ export default class CombinedCourses extends Component {
           @isLocked={{item.isLocked}}
           @isNextItemToComplete={{eq @combinedCourse.nextCombinedCourseItem item}}
           @onClick={{if (eq @combinedCourse.status "NOT_STARTED") this.startQuestParticipation noop}}
+          @isCombinedCourseCompleted={{eq @combinedCourse.status "COMPLETED"}}
         />
       {{/each}}
     </section>
