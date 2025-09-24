@@ -104,7 +104,7 @@
       "add-organization-features-in-batch": {
         "description": "Note: Chercher à activer à nouveau des fonctionnalités déjà existantes sur une organisation renverrait une erreur.",
         "notifications": {
-          "success": "Les fonctionnalités ont bien été activés."
+          "success": "Les fonctionnalités ont bien été activées."
         },
         "title": "Activation de fonctionnalités",
         "upload-button": "Importer un fichier CSV"
