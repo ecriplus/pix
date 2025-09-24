@@ -1,15 +1,15 @@
 import fs from 'node:fs';
 
+import lodash from 'lodash';
+import papa from 'papaparse';
+
+import { FileValidationError, NotFoundError } from '../../src/shared/domain/errors.js';
+
 const { difference, isEmpty } = lodash;
 
 const { promises } = fs;
 
 const { readFile, access } = promises;
-
-import lodash from 'lodash';
-import papa from 'papaparse';
-
-import { FileValidationError, NotFoundError } from '../../src/shared/domain/errors.js';
 
 const ERRORS = {
   INVALID_FILE_EXTENSION: 'INVALID_FILE_EXTENSION',

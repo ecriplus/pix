@@ -1,6 +1,9 @@
 import * as url from 'node:url';
 
-import { batchOrganizationOptionsWithHeader } from '../../../../scripts/create-organizations-with-tags-and-target-profiles.js';
+import lodash from 'lodash';
+
+const { isEmpty } = lodash;
+
 import {
   checkCsvHeader,
   parseCsv,
@@ -84,10 +87,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
       context('when email column exists', function () {
         it('should remove spaces', async function () {
           // given & when
-          const data = await parseCsvWithHeader(
-            organizationWithTagsAndTargetProfilesFilePath,
-            batchOrganizationOptionsWithHeader,
-          );
+          const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
           // then
           expect(data[0].emailInvitations).to.equal('team-acces@example.net');
@@ -98,10 +98,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
       context('when credits column exists and the value is empty', function () {
         it('should return 0 by default', async function () {
           // given & when
-          const data = await parseCsvWithHeader(
-            organizationWithTagsAndTargetProfilesFilePath,
-            batchOrganizationOptionsWithHeader,
-          );
+          const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
           // then
           expect(data[0].credit).to.equal(0);
@@ -111,10 +108,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
       context('when locale column exists and the value is empty', function () {
         it('should return fr-fr by default', async function () {
           // given & when
-          const data = await parseCsvWithHeader(
-            organizationWithTagsAndTargetProfilesFilePath,
-            batchOrganizationOptionsWithHeader,
-          );
+          const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
           // then
           expect(data[0].locale).to.equal('fr-fr');
@@ -123,10 +117,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
 
       it('should convert isManagingStudents to a boolean', async function () {
         // given & when
-        const data = await parseCsvWithHeader(
-          organizationWithTagsAndTargetProfilesFilePath,
-          batchOrganizationOptionsWithHeader,
-        );
+        const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
         // then
         expect(data[0].isManagingStudents).to.equal(false);
@@ -136,10 +127,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
 
       it('should convert identityProviderForCampaigns to uppercase', async function () {
         // given & when
-        const data = await parseCsvWithHeader(
-          organizationWithTagsAndTargetProfilesFilePath,
-          batchOrganizationOptionsWithHeader,
-        );
+        const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
         // then
         expect(data[0].identityProviderForCampaigns).to.equal('POLE_EMPLOI');
@@ -147,10 +135,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
 
       it('should convert organizationInvitationRole to uppercase', async function () {
         // given & when
-        const data = await parseCsvWithHeader(
-          organizationWithTagsAndTargetProfilesFilePath,
-          batchOrganizationOptionsWithHeader,
-        );
+        const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
         // then
         expect(data[0].organizationInvitationRole).to.equal('ADMIN');
@@ -158,10 +143,7 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
 
       it('should convert type to uppercase', async function () {
         // given & when
-        const data = await parseCsvWithHeader(
-          organizationWithTagsAndTargetProfilesFilePath,
-          batchOrganizationOptionsWithHeader,
-        );
+        const data = await parseCsvWithHeader(organizationWithTagsAndTargetProfilesFilePath, _optionsWithHeader);
 
         // then
         expect(data[0].type).to.equal('PRO');
@@ -242,3 +224,47 @@ describe('Unit | Scripts | Helpers | csvHelpers.js', function () {
     });
   });
 });
+
+const _optionsWithHeader = {
+  skipEmptyLines: true,
+  header: true,
+  transform: (value, columnName) => {
+    if (typeof value === 'string') {
+      value = value.trim();
+    }
+    if (columnName === 'isManagingStudents') {
+      value = value?.toLowerCase() === 'true';
+    }
+    if (!isEmpty(value)) {
+      if (
+        columnName === 'type' ||
+        columnName === 'organizationInvitationRole' ||
+        columnName === 'identityProviderForCampaigns'
+      ) {
+        value = value.toUpperCase();
+      }
+      if (columnName === 'createdBy') {
+        value = parseInt(value, 10);
+      }
+      if (columnName === 'emailInvitations' || columnName === 'emailForSCOActivation' || columnName === 'DPOEmail') {
+        value = value.replaceAll(' ', '').toLowerCase();
+      }
+    } else {
+      if (columnName === 'credit') {
+        value = 0;
+      }
+      if (
+        columnName === 'identityProviderForCampaigns' ||
+        columnName === 'DPOFirstName' ||
+        columnName === 'DPOLastName' ||
+        columnName === 'DPOEmail'
+      ) {
+        value = null;
+      }
+      if (columnName === 'locale') {
+        value = 'fr-fr';
+      }
+    }
+    return value;
+  },
+};
