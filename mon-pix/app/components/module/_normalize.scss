@@ -85,6 +85,19 @@
     border: none;
   }
 
+  /* See https://youtube.com/watch?v=345V2MU3E_w */
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    font-style: italic;
+    vertical-align: middle;
+    background-color: var(--pix-neutral-0);
+    background-repeat: no-repeat;
+    background-size: contain;
+    shape-margin: 1rem;
+  }
+
   .modulix-two-columns {
     columns: 2;
   }
