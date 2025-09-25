@@ -1,5 +1,4 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -49,6 +48,13 @@ export default class SsoSelectionForm extends Component {
     return this.router.urlFor('account-recovery');
   }
 
+  @action
+  goToOidcProviderLoginPage() {
+    this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress = true;
+    const selectedOidcProviderSlug = this.oidcIdentityProviders[this.selectedProviderId].slug;
+    this.router.transitionTo('authentication.login-oidc', selectedOidcProviderSlug);
+  }
+
   <template>
     <section class="sso-selection-form">
       <h2 class="pix-title-s">
@@ -71,17 +77,18 @@ export default class SsoSelectionForm extends Component {
             }}
           </PixNotificationAlert>
         {{/if}}
-        <PixButtonLink
+
+        <PixButton
+          @triggerAction={{this.goToOidcProviderLoginPage}}
+          @isLoading={{this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress}}
           aria-describedby="signin-message"
-          @route="authentication.login-oidc"
-          @model={{this.selectedProviderId}}
         >
           {{#if @isForSignup}}
             {{t "pages.authentication.sso-selection.signup.button"}}
           {{else}}
             {{t "pages.authentication.sso-selection.signin.button"}}
           {{/if}}
-        </PixButtonLink>
+        </PixButton>
 
         <p id="signin-message" class="sso-selection-form__signin-message" aria-live="polite">
           {{t "pages.authentication.sso-selection.signin.message" providerName=this.selectedProviderName}}

@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 import omit from 'lodash/omit';
 import sinon from 'sinon';
 
@@ -151,6 +152,57 @@ export function stubCurrentUserService(owner, userData = {}, { withStoreStubbed 
   owner.unregister('service:current-user');
   owner.register('service:current-user', CurrentUserStub);
   return owner.lookup('service:current-user');
+}
+
+/**
+ * Stubs the oidcIdentityProviders service.
+ *
+ * @param {Object} owner - The owner object.
+ * @returns {Service} The stubbed oidcIdentityProviders service.
+ */
+export function stubOidcIdentityProvidersService(owner, { oidcIdentityProviders, featuredIdentityProviderCode } = {}) {
+  class OidcProvidersServiceStub extends Service {
+    @tracked isOidcProviderAuthenticationInProgress = false;
+
+    constructor() {
+      super();
+      this.oidcIdentityProviders = oidcIdentityProviders || [];
+
+      this.oidcIdentityProviders.forEach((oidcIdentityProvider) => {
+        this[oidcIdentityProvider.id] = oidcIdentityProvider;
+      });
+
+      this.featuredIdentityProviderCode = featuredIdentityProviderCode;
+
+      this.shouldDisplayAccountRecoveryBanner = sinon.stub();
+    }
+
+    get list() {
+      return this.oidcIdentityProviders;
+    }
+
+    get hasIdentityProviders() {
+      return this.list.length > 0;
+    }
+
+    get featuredIdentityProvider() {
+      return this.list.find((identityProvider) => {
+        return identityProvider.code === this.featuredIdentityProviderCode;
+      });
+    }
+
+    get hasOtherIdentityProviders() {
+      return this.list.some((identityProvider) => identityProvider.code != this.featuredIdentityProviderCode);
+    }
+
+    load() {
+      return Promise.resolve();
+    }
+  }
+
+  owner.unregister('service:oidcIdentityProviders');
+  owner.register('service:oidcIdentityProviders', OidcProvidersServiceStub);
+  return owner.lookup('service:oidcIdentityProviders');
 }
 
 function createRecord({ owner, key, data, withStoreStubbed }) {

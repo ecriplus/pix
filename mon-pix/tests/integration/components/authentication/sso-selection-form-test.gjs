@@ -1,63 +1,77 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import SsoSelectionForm from 'mon-pix/components/authentication/sso-selection-form';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
+import { stubOidcIdentityProvidersService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
-
-class OidcProvidersServiceStub extends Service {
-  get list() {
-    return [
-      { id: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi', isVisible: true },
-      { id: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true },
-      { id: 'fer', code: 'FER', organizationName: 'FER', isVisible: true },
-      { id: 'hidden1', code: 'FWB', organizationName: 'Not displayed provider 1', isVisible: true },
-      { id: 'hidden2', code: 'GOOGLE', organizationName: 'Not displayed provider 2', isVisible: true },
-    ];
-  }
-  shouldDisplayAccountRecoveryBanner(identityProviderCode) {
-    return identityProviderCode == 'FER';
-  }
-}
 
 module('Integration | Component | Authentication | SsoSelectionForm', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    this.owner.register('service:oidcIdentityProviders', OidcProvidersServiceStub);
+    const oidcProvidersServiceStub = stubOidcIdentityProvidersService(this.owner, {
+      oidcIdentityProviders: [
+        { id: 'cem', slug: 'cem', code: 'CEM', organizationName: 'ConnectEtMoi', isVisible: true },
+        { id: 'sc', slug: 'sc', code: 'SC', organizationName: 'StarConnect', isVisible: true },
+        { id: 'fer', slug: 'fer', code: 'FER', organizationName: 'FER', isVisible: true },
+        { id: 'hidden1', slug: 'hidden1', code: 'FWB', organizationName: 'Not displayed provider 1', isVisible: true },
+        {
+          id: 'hidden2',
+          slug: 'hidden2',
+          code: 'GOOGLE',
+          organizationName: 'Not displayed provider 2',
+          isVisible: true,
+        },
+      ],
+    });
+    oidcProvidersServiceStub.shouldDisplayAccountRecoveryBanner = (identityProviderCode) => {
+      return identityProviderCode == 'FER';
+    };
+
+    const router = this.owner.lookup('service:router');
+    sinon.stub(router, 'transitionTo');
   });
 
   test('it renders the component', async function (assert) {
-    //when
+    // when
     const screen = await render(<template><SsoSelectionForm /></template>);
 
     // then
-    const buttonLink = await screen.findByRole('button', {
+    const button = await screen.findByRole('button', {
       name: t('pages.authentication.sso-selection.signin.button'),
     });
-    assert.dom(buttonLink).hasAttribute('aria-disabled');
+    assert.dom(button).hasAttribute('aria-disabled');
   });
 
-  test('it selects a provider', async function (assert) {
+  test('it displays an identity provider button, disabled when clicked', async function (assert) {
     // given
     const providerName = 'ConnectEtMoi';
 
-    //when
+    // when
     const screen = await render(<template><SsoSelectionForm /></template>);
     await clickByName(t('components.authentication.oidc-provider-selector.label'));
     await screen.findByRole('listbox');
     await click(screen.getByRole('option', { name: providerName }));
 
     // then
-    const buttonLink = await screen.findByRole('link', { name: t('pages.authentication.sso-selection.signin.button') });
-    assert.strictEqual(buttonLink.getAttribute('href'), '/connexion/cem');
+    const button = await screen.findByRole('button', {
+      name: t('pages.authentication.sso-selection.signin.button'),
+    });
+    assert.dom(button).exists();
 
     const connexionMessage = await screen.findByText(
       t('pages.authentication.sso-selection.signin.message', { providerName }),
     );
     assert.dom(connexionMessage).exists();
+
+    // when
+    await click(button);
+
+    // then
+    assert.strictEqual(button.getAttribute('aria-disabled'), 'true');
   });
 
   test('it excludes some providers', async function (assert) {
