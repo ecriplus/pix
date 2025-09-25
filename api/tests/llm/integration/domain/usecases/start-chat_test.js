@@ -103,7 +103,9 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           configurationId,
           userId,
           assessmentId: 11,
+          challengeId: 33,
           passageId: 22,
+          moduleId: 44,
           randomUUID,
           chatRepository,
           configurationRepository,
@@ -115,7 +117,9 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
             assessmentId: 11,
+            challengeId: 33,
             passageId: 22,
+            moduleId: 44,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
@@ -128,6 +132,8 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           id: '123e4567-e89b-12d3-a456-426614174000',
           userId: 123456,
           assessmentId: 11,
+          challengeId: 33,
+          moduleId: 44,
           passageId: 22,
           configurationId: 'uneConfigQuiExist',
           configuration: {

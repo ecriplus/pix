@@ -6,7 +6,9 @@ export class Chat {
    * @param {string} params.id
    * @param {number=} params.userId
    * @param {number=} params.assessmentId
+   * @param {string=} params.challengeId
    * @param {number=} params.passageId
+   * @param {number=} params.moduleId
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
@@ -18,7 +20,9 @@ export class Chat {
     id,
     userId,
     assessmentId,
+    challengeId,
     passageId,
+    moduleId,
     configurationId,
     configuration,
     hasAttachmentContextBeenAdded,
@@ -29,7 +33,9 @@ export class Chat {
     this.id = id;
     this.userId = userId;
     this.assessmentId = assessmentId;
+    this.challengeId = challengeId;
     this.passageId = passageId;
+    this.moduleId = moduleId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
@@ -168,6 +174,8 @@ export class Chat {
       id: this.id,
       userId: this.userId,
       assessmentId: this.assessmentId,
+      challengeId: this.challengeId,
+      moduleId: this.moduleId,
       passageId: this.passageId,
       configurationId: this.configurationId,
       configuration: this.configuration.toDTO(),
