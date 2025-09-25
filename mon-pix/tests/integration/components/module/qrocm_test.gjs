@@ -1,4 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, fillIn, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -483,6 +484,26 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
     // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
+  });
+
+  module('when preview mode is enabled', function () {
+    test('should display all feedbacks', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+      const qrocm = prepareQrocm();
+
+      // when
+      const screen = await render(<template><ModuleQrocm @element={{qrocm}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('Correct!')).exists();
+      assert.dom(screen.getByText('Good job!')).exists();
+      assert.dom(screen.getByText('Wrong!')).exists();
+      assert.dom(screen.getByText('Too Bad!')).exists();
+    });
   });
 });
 
