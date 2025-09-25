@@ -7,7 +7,7 @@ import { t } from 'ember-intl';
     </h3>
 
     <p class="instructions-content__paragraph">
-      {{t "pages.certification-instructions.steps.1.paragraphs.1" htmlSafe=true}}
+      {{@step1Paragraph1}}
     </p>
 
     <p class="instructions-content__paragraph">

@@ -6,6 +6,7 @@ export default class CertificationCandidate extends Model {
   @attr('string') lastName;
   @attr('date-only') birthdate;
   @attr('boolean') hasSeenCertificationInstructions;
+  @attr('string') complementaryCertificationKey;
 
   // references
   @attr('number') sessionId;

@@ -54,4 +54,107 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       });
     });
   });
+
+  module('#certificationName', function () {
+    test('should return Pix when no complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: null,
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix');
+    });
+
+    test('should return complementary certification name when has key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'DROIT',
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix+ Droit');
+    });
+
+    test('should return Pix when has CLEA key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+
+      // then
+      assert.strictEqual(component.certificationName, 'Pix');
+    });
+  });
+
+  module('#title', function () {
+    test('should use Pix when CLEA complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+      component.pageId = 1;
+
+      // then
+      assert.strictEqual(component.title, 'Bienvenue à la certification Pix');
+    });
+  });
+
+  module('#certificationInstructionStep1Paragraph1', function () {
+    test('should return default text when no complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: null,
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des 16 compétences numériques du référentiel Pix'),
+      );
+    });
+
+    test('should return default text when CLEA complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'CLEA',
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des 16 compétences numériques du référentiel Pix'),
+      );
+    });
+
+    test('should return Pix+ specific text when has complementary certification key', function (assert) {
+      // given
+      const component = createGlimmerComponent('certification-instructions/steps', {
+        candidate: {
+          complementaryCertificationKey: 'DROIT',
+        },
+      });
+
+      // then
+      assert.ok(
+        component.certificationInstructionStep1Paragraph1
+          .toString()
+          .includes('ensemble des compétences du référentiel de certification Pix+ Droit'),
+      );
+    });
+  });
 });

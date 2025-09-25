@@ -744,13 +744,14 @@
       "steps": {
         "1": {
           "paragraphs": {
-            "1": "La Certification Pix est un '<strong>'test adaptatif'</strong>' permettant d’évaluer votre niveau sur l’'<strong>'ensemble des 16 compétences numériques du référentiel Pix'</strong>'.",
+            "1": "La Certification {certificationName} est un '<strong>'test adaptatif'</strong>' permettant d'évaluer votre niveau sur l’'<strong>'ensemble des 16 compétences numériques du référentiel Pix'</strong>'.",
             "2": "La '<strong>'difficulté des questions s’adapte en temps réel'</strong>' en fonction des réponses apportées.",
             "3": "Si certaines questions vous semblent difficiles, c’est parce que le test de certification cherche à mesurer votre niveau maximum. '<strong>'Si vous ne savez pas répondre à une question, vous avez la possibilité de la \"passer\"'</strong>' : celle-ci ne sera pas proposée à nouveau au cours de cette certification et ne sera pas validée.",
-            "4": "Pour obtenir un score au plus proche de votre capacité '<strong>'il est nécessaire d'aller au bout du test'</strong>'."
+            "4": "Pour obtenir un score au plus proche de votre capacité '<strong>'il est nécessaire d'aller au bout du test'</strong>'.",
+            "pix-plus-1": "La Certification {certificationName} est un '<strong>'test adaptatif'</strong>' permettant d'évaluer votre niveau sur l’'<strong>'ensemble des compétences du référentiel de certification {certificationName}'</strong>'."
           },
           "question": "Comment se déroule le test ?",
-          "title": "Bienvenue à la certification Pix"
+          "title": "Bienvenue à la certification {certificationName}"
         },
         "2": {
           "legend": {
@@ -800,7 +801,7 @@
             "3": "'<strong>'Avoir recours à un système d’intelligence artificielle'</strong>' ou un chatbot.",
             "4": "'<strong>'Consulter un forum d’entraide'</strong>' apportant directement la réponse à une question.",
             "5": "'<strong>'Mobiliser tout autre moyen délivrant directement la réponse à la question'</strong>', sans avoir effectué le travail requis par la consigne.",
-            "6": "'<strong>'Utiliser un autre navigateur'</strong>' que celui sur lequel vous effectuez votre test de Certification Pix.",
+            "6": "'<strong>'Utiliser un autre navigateur'</strong>' que celui sur lequel vous effectuez votre test de Certification {certificationName}.",
             "7": "'<strong>'Usurper l’identité'</strong>' d’une autre personne."
           },
           "pix-companion": "L'accès à certains sites est interdit dans le cadre du test de certification, grâce à une extension installée sur le navigateur. Toute fraude avérée (tentative de contournement de l'extension ou non-respect des comportements listés ci-dessus) peut entraîner l'invalidation de la certification.",
@@ -1334,6 +1335,13 @@
         "you-have-reached-level": "Vous avez atteint"
       },
       "title": "Résultats de votre compétence"
+    },
+    "complementary-certification-names": {
+      "DROIT": "Pix+ Droit",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Professionnels de Santé"
     },
     "course": {
       "errors": {

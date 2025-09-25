@@ -265,6 +265,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         data: {
           attributes: {
             birthdate: '2000-01-04',
+            'complementary-certification-key': null,
             'first-name': 'first-name',
             'has-seen-certification-instructions': true,
             'last-name': 'last-name',
@@ -315,6 +316,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         data: {
           attributes: {
             birthdate: '1945-12-24',
+            'complementary-certification-key': null,
             'first-name': 'Lemmy',
             'has-seen-certification-instructions': true,
             'last-name': 'Kilmister',

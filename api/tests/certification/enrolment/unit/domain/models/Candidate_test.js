@@ -1139,4 +1139,41 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       expect(hasCoreSubscription).to.be.false;
     });
   });
+
+  describe('#complementaryCertificationKey', function () {
+    it('should return null when there is no complementary subscription', function () {
+      // given
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        ...candidateData,
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+        ],
+      });
+
+      // when
+      const result = candidate.complementaryCertificationKey;
+
+      // then
+      expect(result).to.be.null;
+    });
+
+    it('should return the complementary certification key when there is a complementary subscription', function () {
+      // given
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        ...candidateData,
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
+            certificationCandidateId: null,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          }),
+        ],
+      });
+
+      // when
+      const result = candidate.complementaryCertificationKey;
+
+      // then
+      expect(result).to.equal(ComplementaryCertificationKeys.PIX_PLUS_DROIT);
+    });
+  });
 });
