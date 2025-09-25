@@ -171,12 +171,12 @@ describe('Unit | Utils | Request Utils', function () {
   });
 
   describe('#getChallengeLocale', function () {
-    it('returns fr-fr locale when there is no header (to ensure retro-compat)', async function () {
+    it('returns fr-fr locale when there is no header (to ensure retro-compat)', function () {
       // given
       const request = {};
 
       // when
-      const locale = await getChallengeLocale(request);
+      const locale = getChallengeLocale(request);
 
       // then
       expect(locale).to.equal('fr-fr');
@@ -196,7 +196,7 @@ describe('Unit | Utils | Request Utils', function () {
         const request = { state: { locale: userLocale } };
 
         // when
-        const locale = await getChallengeLocale(request);
+        const locale = getChallengeLocale(request);
 
         // then
         expect(locale).to.equal(challengeLocale);

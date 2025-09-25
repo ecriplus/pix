@@ -12,7 +12,7 @@ import * as correctionSerializer from '../../infrastructure/serializers/jsonapi/
 const save = async function (request, h, dependencies = { answerSerializer, assessmentRepository }) {
   const answer = dependencies.answerSerializer.deserialize(request.payload);
   const userId = extractUserIdFromRequest(request);
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const assessment = await dependencies.assessmentRepository.getWithAnswers(answer.assessmentId);
   let correctedAnswer;
   if (assessment.isCompetenceEvaluation()) {
@@ -83,7 +83,7 @@ const find = async function (request) {
 
 const getCorrection = async function (request, _h, dependencies = { correctionSerializer }) {
   const userId = extractUserIdFromRequest(request);
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const answerId = request.params.id;
 
   const correction = await evaluationUsecases.getCorrectionForAnswer({

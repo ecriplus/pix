@@ -8,8 +8,8 @@ import { Scorecard } from '../../domain/models/Scorecard.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 import * as scorecardSerializer from '../../infrastructure/serializers/jsonapi/scorecard-serializer.js';
 
-const getScorecard = async function (request, h, dependencies = { scorecardSerializer }) {
-  const locale = await getChallengeLocale(request);
+const getScorecard = function (request, h, dependencies = { scorecardSerializer }) {
+  const locale = getChallengeLocale(request);
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
@@ -23,7 +23,7 @@ const getScorecard = async function (request, h, dependencies = { scorecardSeria
 };
 
 const findTutorials = async function (request, h, dependencies = { tutorialSerializer }) {
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
@@ -39,10 +39,10 @@ const findTutorials = async function (request, h, dependencies = { tutorialSeria
   return dependencies.tutorialSerializer.serialize(tutorials);
 };
 
-const resetScorecard = async function (request, h, dependencies = { scorecardSerializer }) {
+const resetScorecard = function (request, h, dependencies = { scorecardSerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
   const competenceId = request.params.competenceId;
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
 
   return evaluationUsecases
     .resetScorecard({ userId: authenticatedUserId, competenceId, locale })

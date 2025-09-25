@@ -56,9 +56,9 @@ function getUserLocale(request = {}) {
  * When no locale found, return the default challenge locale.
  *
  * @param {*} request - http request
- * @returns {Promise<string>} - locale of a challenge (ie. fr-fr, fr, nl...)
+ * @returns {string} - locale of a challenge (ie. fr-fr, fr, nl...)
  */
-async function getChallengeLocale(request) {
+function getChallengeLocale(request) {
   const locale = request.query?.locale || request.query?.lang || request.state?.locale;
   return getNearestChallengeLocale(locale);
 }

@@ -522,9 +522,9 @@ function _mapToHttpError(error) {
   return new HttpErrors.BaseHttpError(error.message);
 }
 
-async function handle(request, h, error) {
+function handle(request, h, error) {
   if (error instanceof SharedDomainErrors.EntityValidationError) {
-    const locale = await getChallengeLocale(request);
+    const locale = getChallengeLocale(request);
     const language = getBaseLocale(locale);
 
     const jsonApiError =

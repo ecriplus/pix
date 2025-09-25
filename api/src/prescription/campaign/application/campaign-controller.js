@@ -24,7 +24,7 @@ const getGroups = async function (request) {
 const getPresentationSteps = async function (request, _, dependencies = { presentationStepsSerializer }) {
   const { userId } = request.auth.credentials;
   const campaignCode = request.params.campaignCode;
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
 
   const presentationSteps = await usecases.getPresentationSteps({ userId, campaignCode, locale });
   return dependencies.presentationStepsSerializer.serialize(presentationSteps);
@@ -36,7 +36,7 @@ const getLevelPerTubesAndCompetences = async function (
   dependencies = { campaignResultLevelsPerTubesAndCompetencesSerializer },
 ) {
   const { campaignId } = request.params;
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const campaignAnalysis = await usecases.getResultLevelsPerTubesAndCompetences({
     campaignId,
     locale,

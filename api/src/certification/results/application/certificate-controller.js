@@ -12,7 +12,7 @@ import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/gene
 import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 
 const getCertificateByVerificationCode = async function (request, h, dependencies = { certificateSerializer }) {
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const i18n = await getI18nFromRequest(request);
 
   let certificate;
@@ -39,7 +39,7 @@ const getCertificate = async function (
   h,
   dependencies = { certificateSerializer, privateCertificateSerializer },
 ) {
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
   const i18n = await getI18nFromRequest(request);
 
   const certificationCourseId = request.params.certificationCourseId;

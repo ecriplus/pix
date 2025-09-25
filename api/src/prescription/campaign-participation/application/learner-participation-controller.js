@@ -68,7 +68,7 @@ const getSharedCampaignParticipationProfile = async function (
 ) {
   const authenticatedUserId = request.auth.credentials.userId;
   const campaignId = request.params.campaignId;
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
 
   const sharedProfileForCampaign = await usecases.getSharedCampaignParticipationProfile({
     userId: authenticatedUserId,
