@@ -7,7 +7,7 @@ import { catchErr, expect, nock } from '../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repository | PixAssets', function () {
   const fakeAnswerContent = {
-    date: new Date('2025-09-12').toString(),
+    date: 'Fri, Sep 12 2025 02:00:00 GMT+0200',
     'content-type': 'image/svg+xml',
     'content-length': 4660,
     'x-request-id': 'e33deae7-a480-46af-886d-626adfa1dd43',
@@ -18,7 +18,7 @@ describe('Integration | Infrastructure | Repository | PixAssets', function () {
     'x-object-meta-width': 140,
     'x-object-meta-height': 140,
     etag: '5d000d7075553ddcc08bedfcc34dc2ae',
-    'last-modified': new Date('2025-09-11').toString(),
+    'last-modified': 'Thu, Sep 11 2025 02:00:00 GMT+0200',
     'x-timestamp': '1757611042.11464',
     'accept-ranges': 'bytes',
     'x-trans-id': 'tx44bf743653444a4d9e6aa-0068c41191',
