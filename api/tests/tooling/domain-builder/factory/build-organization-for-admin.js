@@ -29,6 +29,8 @@ function buildOrganizationForAdmin({
   features = {},
   parentOrganizationId = null,
   parentOrganizationName = null,
+  administrationTeamId = null,
+  administrationTeamName = null,
 } = {}) {
   return new OrganizationForAdmin({
     id,
@@ -59,6 +61,8 @@ function buildOrganizationForAdmin({
     features,
     parentOrganizationId,
     parentOrganizationName,
+    administrationTeamId,
+    administrationTeamName,
   });
 }
 
