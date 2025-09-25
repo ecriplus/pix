@@ -27,7 +27,7 @@ const findTutorials = async function (request, h, dependencies = { tutorialSeria
   const authenticatedUserId = request.auth.credentials.userId;
   const scorecardId = request.params.id;
 
-  const { userId, competenceId } = await Scorecard.parseId(scorecardId);
+  const { userId, competenceId } = Scorecard.parseId(scorecardId);
   if (parseInt(authenticatedUserId) !== parseInt(userId)) {
     throw new UserNotAuthorizedToAccessEntityError();
   }

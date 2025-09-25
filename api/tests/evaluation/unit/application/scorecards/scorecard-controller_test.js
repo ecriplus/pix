@@ -60,7 +60,7 @@ describe('Unit | Controller | scorecard-controller', function () {
         .stub(devCompUsecases, 'findTutorials')
         .withArgs({ userId: authenticatedUserId, competenceId, locale })
         .resolves(tutorials);
-      sinon.stub(Scorecard, 'parseId').withArgs(scorecardId).resolves(scorecard);
+      sinon.stub(Scorecard, 'parseId').withArgs(scorecardId).returns(scorecard);
       const tutorialSerializer = {
         serialize: sinon.stub(),
       };
