@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.218.0](https://github.com/1024pix/pix/compare/v5.217.0...v5.218.0) (2025-09-25)
+
+### :rocket: Amélioration
+
+- [#13652](https://github.com/1024pix/pix/pull/13652) À la connexion, protéger les OIDC Providers contre les multiples appels (PIX-18388) 
+- [#13650](https://github.com/1024pix/pix/pull/13650) Ajouter la locale es-419 à Pix API (PIX-19591) 
+- [#13574](https://github.com/1024pix/pix/pull/13574) Ajouter un sélecteur d'équipe à la création d'une organisation (PIX-19505). 
+- [#13469](https://github.com/1024pix/pix/pull/13469) Bloquer l'accès à Pix Certif sur une période donnée (PIX-19092). 
+- [#13665](https://github.com/1024pix/pix/pull/13665) Design combinix (PIX-19597) 
+- [#13673](https://github.com/1024pix/pix/pull/13673) Empêcher le layout shift sur les images vectorielles de Modulix (PIX-19650) 
+- [#13664](https://github.com/1024pix/pix/pull/13664) Mettre à jour l'appel à l'API prompt (PIX-19663) 
+
+### :bug: Correction
+
+- [#13661](https://github.com/1024pix/pix/pull/13661) Coquille dans la modale de validation d'activation de fonctionnalité sur admin (PIX-19660) 
+
+### :building_construction: Tech
+
+- [#13653](https://github.com/1024pix/pix/pull/13653) Mettre à jour les service url-base et locale dans les fronts (PIX-19641) 
+- [#13657](https://github.com/1024pix/pix/pull/13657) Supprimer le script OGA api/scripts/create-organizations-with-tags-and-target-profiles.js (PIX-19607) 
+
+### :arrow_up: Montée de version
+
+- [#13666](https://github.com/1024pix/pix/pull/13666) Update dependency ember-exam to v10 (certif) 
+- [#13667](https://github.com/1024pix/pix/pull/13667) Update dependency ember-exam to v10 (junior) 
+- [#13668](https://github.com/1024pix/pix/pull/13668) Update dependency ember-exam to v10 (mon-pix) 
+- [#13677](https://github.com/1024pix/pix/pull/13677) Update dependency ember-truth-helpers to v5 (admin) 
+- [#13678](https://github.com/1024pix/pix/pull/13678) Update dependency ember-truth-helpers to v5 (certif) 
+- [#13680](https://github.com/1024pix/pix/pull/13680) Update dependency ember-truth-helpers to v5 (orga) 
+- [#13681](https://github.com/1024pix/pix/pull/13681) Update dependency eslint-plugin-unicorn to v60 (api)
+
 # [5.217.0](https://github.com/1024pix/pix/compare/v5.216.0...v5.217.0) (2025-09-24)
 
 ### :rocket: Amélioration
