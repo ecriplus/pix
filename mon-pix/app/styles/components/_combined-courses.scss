@@ -23,6 +23,14 @@
     border-top: 1px solid var(--pix-neutral-100);
   }
 
+  &__retry-text {
+    @extend %pix-body-m;
+
+    margin-bottom: var(--pix-spacing-6x);
+    font-weight: var(--pix-font-bold);
+    text-align: right;
+  }
+
 }
 
 .combined-course-header {
