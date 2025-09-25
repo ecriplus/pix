@@ -9,6 +9,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
   describe('#serialize', function () {
     it('returns a JSON API serialized organization', function () {
       // given
+      const administrationTeam = domainBuilder.buildAdministrationTeam();
       const tags = [
         domainBuilder.buildTag({ id: 7, name: 'AEFE' }),
         domainBuilder.buildTag({ id: 44, name: 'PUBLIC' }),
@@ -47,6 +48,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         },
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: parentOrganization.name,
+        administrationTeamId: administrationTeam.id,
+        administrationTeamName: administrationTeam.name,
       });
       const meta = { some: 'meta' };
 
@@ -83,6 +86,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'data-protection-officer-email': organization.dataProtectionOfficer.email,
             'creator-full-name': organization.creatorFullName,
             'identity-provider-for-campaigns': NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
+            'administration-team-id': organization.administrationTeamId,
+            'administration-team-name': organization.administrationTeamName,
             features: organization.features,
           },
           relationships: {
@@ -157,6 +162,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerFirstName: 'Justin',
         dataProtectionOfficerLastName: 'Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
+        administrationTeamId: '1',
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true },
           [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
@@ -184,6 +190,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'data-protection-officer-first-name': organizationAttributes.dataProtectionOfficerFirstName,
             'data-protection-officer-last-name': organizationAttributes.dataProtectionOfficerLastName,
             'data-protection-officer-email': organizationAttributes.dataProtectionOfficerEmail,
+            'administration-team-id': organizationAttributes.administrationTeamId,
             features: organizationAttributes.features,
           },
         },
@@ -207,6 +214,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerFirstName: organizationAttributes.dataProtectionOfficerFirstName,
         dataProtectionOfficerLastName: organizationAttributes.dataProtectionOfficerLastName,
         dataProtectionOfficerEmail: organizationAttributes.dataProtectionOfficerEmail,
+        administrationTeamId: organizationAttributes.administrationTeamId,
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
             active: organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.active,
@@ -249,6 +257,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             logoUrl: organizationAttributes.logoUrl,
             'external-id': organizationAttributes.externalId,
             'province-code': organizationAttributes.provinceCode,
+            'organization-id': organizationAttributes.organizationId,
             features: organizationAttributes.features,
           },
           relationships: {

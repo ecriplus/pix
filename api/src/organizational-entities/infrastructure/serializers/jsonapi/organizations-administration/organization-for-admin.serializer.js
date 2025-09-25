@@ -46,6 +46,8 @@ const serialize = function (organizations, meta) {
       'features',
       'parentOrganizationId',
       'parentOrganizationName',
+      'administrationTeamId',
+      'administrationTeamName',
     ],
     organizationMemberships: {
       ref: 'id',
@@ -114,6 +116,7 @@ const deserialize = function (json) {
     dataProtectionOfficerFirstName: attributes['data-protection-officer-first-name'],
     dataProtectionOfficerLastName: attributes['data-protection-officer-last-name'],
     dataProtectionOfficerEmail: attributes['data-protection-officer-email'],
+    administrationTeamId: attributes['administration-team-id'],
     features: attributes.features,
     tagIds,
   });
