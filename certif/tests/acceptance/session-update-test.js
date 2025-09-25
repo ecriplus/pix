@@ -1,7 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, currentURL, fillIn, triggerEvent } from '@ember/test-helpers';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -47,65 +46,6 @@ module('Acceptance | Session Update', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/espace-ferme');
-    });
-  });
-
-  module('when user focus out required inputs without completing it', function () {
-    test('should display error messages', async function (assert) {
-      // given
-      const session = server.create('session-enrolment', { time: '14:00:00', date: '2020-01-01' });
-      server.create('session-management', {
-        id: session.id,
-      });
-      const screen = await visit(`/sessions/${session.id}/modification`);
-
-      // when
-      await fillIn(
-        screen.getByRole('textbox', {
-          name: 'Nom du site *',
-        }),
-        '',
-      );
-      await fillIn(
-        screen.getByRole('textbox', {
-          name: 'Nom de la salle *',
-        }),
-        '',
-      );
-
-      const examinerInput = screen.getByRole('textbox', {
-        name: 'Surveillant(s) *',
-      });
-      await fillIn(examinerInput, '');
-      await triggerEvent(examinerInput, 'focusout');
-
-      // then
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_ADDRESS_REQUIRED'))).exists();
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_ROOM_REQUIRED'))).exists();
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_EXAMINER_REQUIRED'))).exists();
-    });
-  });
-
-  module('when user tries to confirm form without filling mandatory fields', function () {
-    test('should display error notification', async function (assert) {
-      // given
-      const session = server.create('session-enrolment', {
-        address: ' ',
-        room: 'Salle 3',
-        time: '14:00:00',
-        date: '2020-01-01',
-        examiner: 'George',
-      });
-      server.create('session-management', {
-        id: session.id,
-      });
-      const screen = await visit(`/sessions/${session.id}/modification`);
-
-      // when
-      await click(screen.getByRole('button', { name: 'Modifier la session' }));
-
-      // then
-      assert.dom(screen.getByText(t('common.form-errors.fill-mandatory-fields'))).exists();
     });
   });
 

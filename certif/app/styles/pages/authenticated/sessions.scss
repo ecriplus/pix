@@ -19,12 +19,6 @@
   &__field {
     display: flex;
     flex-direction: column;
-
-    &--error {
-      .input {
-        border: 2px solid var(--pix-error-700);
-      }
-    }
   }
 
   &__actions {

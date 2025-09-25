@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click, fillIn, triggerEvent } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupIntl, t } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
@@ -72,19 +72,6 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       assert.strictEqual(session.description, 'Test Description');
     });
 
-    test('it shows validation errors when required fields are empty on focusout', async function (assert) {
-      // given
-      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
-
-      // when
-      const examinerInput = screen.getByRole('textbox', { name: 'Surveillant(s) *' });
-      await fillIn(examinerInput, '');
-      await triggerEvent(examinerInput, 'focusout');
-
-      // then
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_EXAMINER_REQUIRED'))).exists();
-    });
-
     test('it successfully creates a session with valid data', async function (assert) {
       // given
       const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
@@ -92,8 +79,8 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Test Address');
       await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Test Room');
       await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Test Examiner');
-      await fillIn('#session-date', '2029-12-25');
-      await fillIn('#session-time', '13:45');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
 
       this.session.id = 'session-id';
 
@@ -106,21 +93,29 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       assert.ok(routerStub.transitionTo.calledWith('authenticated.sessions.details', 'session-id'));
     });
 
-    test('it shows error notification when mandatory fields are not filled as expected', async function (assert) {
+    test('it marks required fields with required attribute', async function (assert) {
       // given
       const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
 
-      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), ' ');
-      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), ' ');
-      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), ' ');
+      // then
+      assert.dom(screen.getByRole('textbox', { name: 'Nom du site *' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Nom de la salle *' })).hasAttribute('required');
+      assert.dom(screen.getByRole('textbox', { name: 'Surveillant(s) *' })).hasAttribute('required');
+      assert.dom(screen.getByLabelText('Date de début *')).hasAttribute('required');
+      assert.dom(screen.getByLabelText('Heure de début (heure locale) *')).hasAttribute('required');
+      assert
+        .dom(screen.getByRole('textbox', { name: t('common.forms.session-labels.observations') }))
+        .doesNotHaveAttribute('required');
+    });
+
+    test('it prevents form submission when required fields are empty', async function (assert) {
+      // given
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
 
       // when
       await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
 
       // then
-      assert.ok(
-        pixToastStub.sendErrorNotification.calledWith({ message: t('common.form-errors.fill-mandatory-fields') }),
-      );
       assert.notOk(session.save.called);
     });
 
@@ -194,28 +189,15 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
 
     test('it updates date and time when native inputs are modified', async function (assert) {
       // given
-      await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
+      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
 
       // when
-      await fillIn('#session-date', '2030-01-15');
-      await fillIn('#session-time', '14:00');
+      await fillIn(screen.getByLabelText('Date de début *'), '2030-01-15');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '14:00');
 
       // then
       assert.strictEqual(session.date, '2030-01-15');
       assert.strictEqual(session.time, '14:00');
-    });
-
-    test('it shows validation errors when required fields are empty on focusout', async function (assert) {
-      // given
-      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
-
-      // when
-      const examinerInput = screen.getByRole('textbox', { name: 'Surveillant(s) *' });
-      await fillIn(examinerInput, '');
-      await triggerEvent(examinerInput, 'focusout');
-
-      // then
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_EXAMINER_REQUIRED'))).exists();
     });
 
     test('it successfully updates a session with valid data', async function (assert) {
@@ -225,8 +207,8 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), 'Updated Address');
       await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), 'Updated Room');
       await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), 'Updated Examiner');
-      await fillIn('#session-date', '2029-12-25');
-      await fillIn('#session-time', '13:45');
+      await fillIn(screen.getByLabelText('Date de début *'), '2029-12-25');
+      await fillIn(screen.getByLabelText('Heure de début (heure locale) *'), '13:45');
 
       // when
       await click(screen.getByRole('button', { name: t('pages.sessions.update.actions.edit-session') }));
@@ -234,24 +216,6 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
       // then
       assert.ok(session.save.calledOnce);
       assert.ok(routerStub.transitionTo.calledWith('authenticated.sessions.details', 'session-id'));
-    });
-
-    test('it shows error notification when mandatory fields are not filled as expected', async function (assert) {
-      // given
-      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
-
-      await fillIn(screen.getByRole('textbox', { name: 'Nom du site *' }), ' ');
-      await fillIn(screen.getByRole('textbox', { name: 'Nom de la salle *' }), ' ');
-      await fillIn(screen.getByRole('textbox', { name: 'Surveillant(s) *' }), ' ');
-
-      // when
-      await click(screen.getByRole('button', { name: t('pages.sessions.update.actions.edit-session') }));
-
-      // then
-      assert.ok(
-        pixToastStub.sendErrorNotification.calledWith({ message: t('common.form-errors.fill-mandatory-fields') }),
-      );
-      assert.notOk(session.save.called);
     });
 
     test('it redirects to session details when cancel is clicked in update mode', async function (assert) {
@@ -263,23 +227,6 @@ module('Integration | Component | sessions/edition-form', function (hooks) {
 
       // then
       assert.ok(routerStub.transitionTo.calledWith('authenticated.sessions.details', 'session-id'));
-    });
-
-    test('it shows date and time validation errors when fields are empty', async function (assert) {
-      // given
-      session.date = '';
-      session.time = '';
-      const screen = await render(hbs`<Sessions::EditionForm @session={{this.session}} />`);
-
-      // when
-      await click(screen.getByRole('button', { name: t('pages.sessions.update.actions.edit-session') }));
-
-      // then
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_DATE_REQUIRED'))).exists();
-      assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_TIME_REQUIRED'))).exists();
-      assert.ok(
-        pixToastStub.sendErrorNotification.calledWith({ message: t('common.form-errors.fill-mandatory-fields') }),
-      );
     });
   });
 
