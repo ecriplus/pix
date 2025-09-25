@@ -102,8 +102,8 @@ export default class SessionEditionFormComponent extends Component {
 
   <template>
     <div>
-      <form {{on 'submit' this.submitSession}} class='session-form'>
-        <p class='session-form__mandatory-information'>
+      <form {{on 'submit' this.submitSession}} class='session-edition-form'>
+        <p class='session-edition-form__mandatory-information'>
           {{t 'common.forms.mandatory-fields' htmlSafe=true}}
         </p>
 
@@ -129,7 +129,7 @@ export default class SessionEditionFormComponent extends Component {
           <:label>{{t 'common.forms.session-labels.room-name'}}</:label>
         </PixInput>
 
-        <div class='session-form__field'>
+        <div class='session-edition-form__field'>
           <PixLabel @requiredLabel={{t 'common.forms.required'}} for='session-date'>
             {{t 'common.forms.session-labels.date-start'}}
           </PixLabel>
@@ -145,7 +145,7 @@ export default class SessionEditionFormComponent extends Component {
           />
         </div>
 
-        <div class='session-form__field'>
+        <div class='session-edition-form__field'>
           <PixLabel @requiredLabel={{t 'common.forms.required'}} for='session-time'>
             {{t 'common.forms.session-labels.time-start'}}
           </PixLabel>
@@ -174,14 +174,14 @@ export default class SessionEditionFormComponent extends Component {
         <PixTextarea
           @id='session-description'
           @maxlength='350'
-          class='session-form__textarea'
+          class='session-edition-form__textarea'
           value={{if this.isUpdateMode @session.description ''}}
           {{on 'change' this.onChangeDescription}}
         >
           <:label>{{t 'common.forms.session-labels.observations'}}</:label>
         </PixTextarea>
 
-        <ul class='session-form__actions'>
+        <ul class='session-edition-form__actions'>
           <li>
             <PixButton
               data-test-id='session-form__cancel-button'
