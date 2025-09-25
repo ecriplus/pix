@@ -173,6 +173,7 @@ const buildDeletedAndAnonymised = function ({
   userId,
   createdAt,
   sharedAt,
+  organizationLearnerId,
   assessmentCreatedAt,
   assessmentUpdatedAt,
   deletedAt = new Date('1998-07-01'),
@@ -181,10 +182,10 @@ const buildDeletedAndAnonymised = function ({
 } = {}) {
   const campaign = buildCampaign();
   campaignSkills.forEach((skill) => buildCampaignSkill({ campaignId: campaign.id, skillId: skill }));
-  const learner = buildOrganizationLearner({ userId, campaignId: campaign.id });
+  const learnerId = organizationLearnerId || buildOrganizationLearner({ userId, campaignId: campaign.id }).id;
 
   const campaignParticipation = buildCampaignParticipation({
-    organizationLearnerId: learner.id,
+    organizationLearnerId: learnerId,
     campaignId: campaign.id,
     createdAt: createdAt,
     sharedAt: sharedAt || createdAt,
