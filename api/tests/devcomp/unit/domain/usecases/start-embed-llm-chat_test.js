@@ -42,14 +42,16 @@ describe('Unit | Devcomp | Domain | UseCases | start-embed-llm-chat', function (
   context('success case', function () {
     it('should return the newly created chat', async function () {
       // given
+      const moduleId = 'moduleWithLLM';
       passageRepository.get.withArgs({ passageId }).resolves(
         new Passage({
           id: passageId,
+          moduleId,
           userId,
         }),
       );
       const someLLMChatDTO = Symbol('LLMCHATDTO');
-      llmApi.startChat.withArgs({ configId, userId, passageId }).resolves(someLLMChatDTO);
+      llmApi.startChat.withArgs({ configId, userId, passageId, moduleId }).resolves(someLLMChatDTO);
 
       // when
       const chat = await startEmbedLlmChat({ configId, passageId, userId, llmApi, passageRepository });
