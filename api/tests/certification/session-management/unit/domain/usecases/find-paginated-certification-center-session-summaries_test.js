@@ -8,18 +8,18 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
   };
 
   const userRepository = {
-    isUserAllowedToAccessThisCertificationCenter: () => undefined,
+    isUserAllowedToAccessCertificationCenter: () => undefined,
   };
 
   beforeEach(function () {
     sessionSummaryRepository.findPaginatedByCertificationCenterId = sinon.stub();
-    userRepository.isUserAllowedToAccessThisCertificationCenter = sinon.stub();
+    userRepository.isUserAllowedToAccessCertificationCenter = sinon.stub();
   });
 
   context('when user is not a member of the certification center', function () {
     it('should throw a Forbidden Access error', async function () {
       // given
-      userRepository.isUserAllowedToAccessThisCertificationCenter.withArgs(123, 456).resolves(false);
+      userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(false);
       sessionSummaryRepository.findPaginatedByCertificationCenterId.rejects(new Error('should not be called'));
 
       // when
@@ -40,7 +40,7 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
   context('when user is a member of the certification center', function () {
     it('should return session summaries', async function () {
       // given
-      userRepository.isUserAllowedToAccessThisCertificationCenter.withArgs(123, 456).resolves(true);
+      userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(true);
       const sessionSummaries = Symbol('session-summaries');
       const meta = Symbol('meta');
       sessionSummaryRepository.findPaginatedByCertificationCenterId

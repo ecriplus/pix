@@ -199,7 +199,7 @@ const getWithMemberships = async function (userId) {
   return _toDomainFromDTO({ userDTO, membershipsDTO });
 };
 
-const isUserAllowedToAccessThisCertificationCenter = async function (userId, certificationCenterId) {
+const isUserAllowedToAccessCertificationCenter = async function (userId, certificationCenterId) {
   const user = await knex('users').where({ id: userId }).first();
   if (!user) throw new UserNotFoundError(`User not found for ID ${userId}`);
 
@@ -211,7 +211,7 @@ const isUserAllowedToAccessThisCertificationCenter = async function (userId, cer
     .whereNull('disabledAt')
     .first();
 
-  return !!userIsMemberOfThisCertificationCenter;
+  return Boolean(userIsMemberOfThisCertificationCenter);
 };
 
 const getBySamlId = async function (samlId) {
@@ -431,7 +431,7 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  * @property {function} getForObfuscation
  * @property {function} getFullById
  * @property {function} getUserDetailsForAdmin
- * @property {function} isUserAllowedToAccessThisCertificationCenter
+ * @property {function} isUserAllowedToAccessCertificationCenter
  * @property {function} getWithMemberships
  * @property {function} isUserExistingByEmail
  * @property {function} isUsernameAvailable
@@ -465,7 +465,7 @@ export {
   getFullById,
   getUserDetailsForAdmin,
   getWithMemberships,
-  isUserAllowedToAccessThisCertificationCenter,
+  isUserAllowedToAccessCertificationCenter,
   isUserExistingByEmail,
   isUsernameAvailable,
   update,
