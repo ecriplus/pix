@@ -7,7 +7,7 @@ import { catchErr, expect, nock } from '../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repository | PixAssets', function () {
   const fakeAnswerContent = {
-    date: 'Fri, Sep 12 2025 02:00:00 GMT+0200',
+    date: new Date('2025-09-12').toUTCString(),
     'content-type': 'image/svg+xml',
     'content-length': 4660,
     'x-request-id': 'e33deae7-a480-46af-886d-626adfa1dd43',
