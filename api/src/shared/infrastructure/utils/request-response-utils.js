@@ -1,17 +1,9 @@
-import accept from '@hapi/accept';
-
 import {
-  getChallengeLocales,
-  getDefaultChallengeLocale,
   getDefaultLocale,
   getNearestChallengeLocale,
   getNearestSupportedLocale,
 } from '../../../shared/domain/services/locale-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
-import { featureToggles } from '../feature-toggles/index.js';
-
-const acceptedLanguages = getChallengeLocales();
-const defaultChallengeLocale = getDefaultChallengeLocale();
 
 function extractTLDFromRequest(request) {
   const forwardedHost = request.headers['x-forwarded-host'];
@@ -67,22 +59,8 @@ function getUserLocale(request = {}) {
  * @returns {Promise<string>} - locale of a challenge (ie. fr-fr, fr, nl...)
  */
 async function getChallengeLocale(request) {
-  const useCookieLocaleInApi = await featureToggles.get('useCookieLocaleInApi');
-
-  if (!useCookieLocaleInApi) return _getLegacyChallengeLocale(request);
-
   const locale = request.query?.locale || request.query?.lang || request.state?.locale;
-
   return getNearestChallengeLocale(locale);
-}
-
-function _getLegacyChallengeLocale(request) {
-  const languageHeader = request.headers && request.headers['accept-language'];
-  if (!languageHeader) {
-    return defaultChallengeLocale;
-  }
-
-  return accept.language(languageHeader, acceptedLanguages) || defaultChallengeLocale;
 }
 
 function extractTimestampFromRequest(request) {
