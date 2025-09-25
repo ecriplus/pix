@@ -327,6 +327,7 @@ export class ModuleFactory {
             logger.warn(`Type de proposal inconnu: ${proposal.type}`);
         }
       }),
+      feedbacks: element.feedbacks,
     });
   }
 

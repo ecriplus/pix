@@ -325,6 +325,7 @@ function getComponents() {
         solutions: ['2'],
       }),
     ],
+    feedbacks: { valid: { state: 'valid' }, invalid: { state: 'invalid' } },
   });
   return [
     new ComponentStepper({
@@ -491,6 +492,14 @@ function getAttributesComponents() {
         type: 'select',
       },
     ],
+    feedbacks: {
+      invalid: {
+        state: 'invalid',
+      },
+      valid: {
+        state: 'valid',
+      },
+    },
     type: 'qrocm',
   };
   return [

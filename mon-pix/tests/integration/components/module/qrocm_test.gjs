@@ -228,33 +228,9 @@ module('Integration | Component | Module | QROCM', function (hooks) {
     assert.ok(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
   });
 
-  test('should display an error message if QROCM is validated without response', async function (assert) {
+  test('should display an error message, and no feedback, if QROCM is validated without response', async function (assert) {
     // given
-    const qrocm = {
-      id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
-      instruction: 'Instruction',
-      proposals: [
-        {
-          input: 'premiere-partie',
-          type: 'select',
-          display: 'block',
-          placeholder: '',
-          ariaLabel: 'select-aria',
-          defaultValue: '',
-          options: [
-            {
-              id: '1',
-              content: "l'identifiant",
-            },
-            {
-              id: '2',
-              content: "le fournisseur d'adresse mail",
-            },
-          ],
-        },
-      ],
-      type: 'qrocm',
-    };
+    const qrocm = prepareQrocm();
     const screen = await render(<template><ModuleQrocm @element={{qrocm}} /></template>);
 
     // when
@@ -262,34 +238,12 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('alert')).exists();
+    assert.dom(screen.queryByText('Correct!')).doesNotExist();
   });
 
   test('should hide the error message when QROCM is validated with response', async function (assert) {
     // given
-    const qrocm = {
-      instruction: 'Instruction',
-      proposals: [
-        {
-          input: 'premiere-partie',
-          type: 'select',
-          display: 'block',
-          placeholder: '',
-          ariaLabel: 'select-aria',
-          defaultValue: '',
-          options: [
-            {
-              id: '1',
-              content: "l'identifiant",
-            },
-            {
-              id: '2',
-              content: "le fournisseur d'adresse mail",
-            },
-          ],
-        },
-      ],
-      type: 'qrocm',
-    };
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     const screen = await render(
@@ -297,15 +251,10 @@ module('Integration | Component | Module | QROCM', function (hooks) {
     );
 
     // when
-    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
-    await clickByName('select-aria');
+    await click(screen.getByRole('button', { name: 'select-aria' }));
     await screen.findByRole('listbox');
-    await click(
-      screen.queryByRole('option', {
-        name: "le fournisseur d'adresse mail",
-      }),
-    );
-    await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
+    await click(screen.getByRole('option', { name: "le fournisseur d'adresse mail" }));
+    await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert
@@ -329,8 +278,19 @@ module('Integration | Component | Module | QROCM', function (hooks) {
             placeholder: '',
             ariaLabel: 'Réponse 1',
             defaultValue: '',
+            solutions: ['Réponse 1'],
           },
         ],
+        feedbacks: {
+          valid: {
+            state: 'Correct!',
+            diagnosis: 'Good job!',
+          },
+          invalid: {
+            state: 'Wrong!',
+            diagnosis: 'Too Bad!',
+          },
+        },
         type: 'qrocm',
       };
       const userResponse = 'user-response';
@@ -373,31 +333,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
     test('when proposal is a select', async function (assert) {
       // given
-      const qrocm = {
-        id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
-        instruction: 'Instruction',
-        proposals: [
-          {
-            input: 'premiere-partie',
-            type: 'select',
-            display: 'block',
-            placeholder: '',
-            ariaLabel: 'select-aria',
-            defaultValue: '',
-            options: [
-              {
-                id: '1',
-                content: "l'identifiant",
-              },
-              {
-                id: '2',
-                content: "le fournisseur d'adresse mail",
-              },
-            ],
-          },
-        ],
-        type: 'qrocm',
-      };
+      const qrocm = prepareQrocm();
       const userResponse = { input: 'premiere-partie', answer: '2' };
       const onElementAnswerSpy = sinon.spy();
       const screen = await render(
@@ -431,22 +367,17 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   test('should display an ok feedback when exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct!', diagnosis: 'Good job!' },
-      status: 'ok',
-      solution: 'solution',
-    });
-    const { qrocm } = prepareContextRecords.call(this, store, correctionResponse);
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
+    await click(screen.getByRole('button', { name: 'select-aria' }));
+    await screen.findByRole('listbox');
+    await click(screen.getByRole('option', { name: "l'identifiant" }));
+    await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.getByText('Correct!')).exists();
@@ -456,21 +387,17 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   test('should display a ko feedback when exists', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: 'solution',
-    });
-    const { qrocm } = prepareContextRecords.call(this, store, correctionResponse);
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
+    await click(screen.getByRole('button', { name: 'select-aria' }));
+    await screen.findByRole('listbox');
+    await click(screen.getByRole('option', { name: "le fournisseur d'adresse mail" }));
+    await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.getByText('Wrong!')).exists();
@@ -480,22 +407,17 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   test('should display retry button when a ko feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
-    const { qrocm } = prepareContextRecords.call(this, store, correctionResponse);
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
+    await click(screen.getByRole('button', { name: 'select-aria' }));
+    await screen.findByRole('listbox');
+    await click(screen.getByRole('option', { name: "le fournisseur d'adresse mail" }));
+    await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
 
     // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).exists();
@@ -520,27 +442,11 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       ],
       type: 'qrocm',
     };
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: 'solution',
-    });
-    store.createRecord('element-answer', {
-      correction: correctionResponse,
-      elementId: qrocm.id,
-    });
-    store.createRecord('element-answer', {
-      correction: correctionResponse,
-      elementId: qrocm.id,
-    });
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
 
     // then
@@ -551,21 +457,12 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   test('should be able to focus back a select to proposals when feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Wrong!', diagnosis: 'Too Bad!' },
-      status: 'ko',
-      solution: 'solution',
-    });
-
-    const { qrocm } = prepareContextRecords.call(this, store, correctionResponse);
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
 
     // then
@@ -576,21 +473,12 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   test('should not display retry button when an ok feedback appears', async function (assert) {
     // given
-    const store = this.owner.lookup('service:store');
-    const correctionResponse = store.createRecord('correction-response', {
-      feedback: { state: 'Correct', diagnosis: 'Nice!' },
-      status: 'ok',
-      solution: 'solution',
-    });
-
-    const { qrocm } = prepareContextRecords.call(this, store, correctionResponse);
+    const qrocm = prepareQrocm();
     const givenonElementAnswerStub = function () {};
 
     // when
     const screen = await render(
-      <template>
-        <ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} @correction={{correctionResponse}} />
-      </template>,
+      <template><ModuleQrocm @element={{qrocm}} @onAnswer={{givenonElementAnswerStub}} /></template>,
     );
 
     // then
@@ -598,8 +486,8 @@ module('Integration | Component | Module | QROCM', function (hooks) {
   });
 });
 
-function prepareContextRecords(store, correctionResponse) {
-  const qrocm = {
+function prepareQrocm() {
+  return {
     id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
     instruction: 'Instruction',
     proposals: [
@@ -620,20 +508,19 @@ function prepareContextRecords(store, correctionResponse) {
             content: "le fournisseur d'adresse mail",
           },
         ],
+        solutions: ['1'],
       },
     ],
+    feedbacks: {
+      valid: {
+        state: 'Correct!',
+        diagnosis: 'Good job!',
+      },
+      invalid: {
+        state: 'Wrong!',
+        diagnosis: 'Too Bad!',
+      },
+    },
     type: 'qrocm',
-  };
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qrocm.id,
-  });
-  store.createRecord('element-answer', {
-    correction: correctionResponse,
-    elementId: qrocm.id,
-  });
-  return {
-    qrocm,
-    correctionResponse,
   };
 }

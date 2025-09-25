@@ -8,6 +8,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QROCM', function () {
     it('should create a QROCM and keep attributes', function () {
       // given
       const proposal = Symbol('block');
+      const feedbacks = { valid: Symbol('valid-feedback'), invalid: Symbol('invalid-feedback') };
 
       // when
       const qrocm = new QROCM({
@@ -15,6 +16,7 @@ describe('Unit | Devcomp | Domain | Models | Element | QROCM', function () {
         instruction: '',
         locales: ['fr-FR'],
         proposals: [proposal],
+        feedbacks,
       });
 
       // then
@@ -67,6 +69,19 @@ describe('Unit | Devcomp | Domain | Models | Element | QROCM', function () {
       // then
       expect(error).to.be.instanceOf(ModuleInstantiationError);
       expect(error.message).to.equal('Les propositions doivent apparaître dans une liste');
+    });
+  });
+
+  describe('A QROCM does not have feedbacks', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(
+        () => new QROCM({ id: '1', instruction: '', locales: ['fr-FR'], proposals: ['toto'] }),
+      )();
+
+      // then
+      expect(error).to.be.instanceOf(DomainError);
+      expect(error.message).to.equal('The feedbacks are required for a QROCM.');
     });
   });
 });
