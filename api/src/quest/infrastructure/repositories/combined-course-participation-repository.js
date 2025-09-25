@@ -53,3 +53,33 @@ export const update = async function ({ combinedCourseParticipation }) {
 
   return new CombinedCourseParticipation(updatedRow);
 };
+
+export const findByQuestId = async function ({ questId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const questParticipations = await knexConnection('combined_course_participations')
+    .select(
+      'combined_course_participations.id',
+      'firstName',
+      'lastName',
+      'combined_course_participations.status',
+      'questId',
+      'organizationLearnerId',
+      'combined_course_participations.status',
+      'combined_course_participations.createdAt',
+      'combined_course_participations.updatedAt',
+    )
+    .join(
+      'view-active-organization-learners',
+      'view-active-organization-learners.id',
+      '=',
+      'combined_course_participations.organizationLearnerId',
+    )
+    .where({
+      questId,
+    })
+    .orderBy([
+      { column: 'lastName', order: 'asc' },
+      { column: 'firstName', order: 'asc' },
+    ]);
+  return questParticipations.map((participation) => new CombinedCourseParticipation(participation));
+};
