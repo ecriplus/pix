@@ -2475,4 +2475,92 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
       });
     });
   });
+
+  describe('#checkAuthorizationToAccessCombinedCourseFromQuestId', function () {
+    let request;
+
+    beforeEach(function () {
+      request = {
+        auth: {
+          credentials: {
+            userId: 1234,
+          },
+        },
+        params: {
+          questId: 'questId123',
+        },
+      };
+    });
+
+    context('Successful case', function () {
+      it('should authorize access when user is authorized to access combined course', async function () {
+        // given
+        const checkUserCanManageCombinedCourseUsecaseStub = {
+          execute: sinon.stub().resolves(true),
+        };
+
+        // when
+        const response = await securityPreHandlers.checkUserCanManageCombinedCourse(request, hFake, {
+          checkUserCanManageCombinedCourseUsecase: checkUserCanManageCombinedCourseUsecaseStub,
+        });
+
+        // then
+        expect(response.source).to.be.true;
+        expect(checkUserCanManageCombinedCourseUsecaseStub.execute).to.have.been.calledOnceWithExactly({
+          userId: 1234,
+          questId: 'questId123',
+        });
+      });
+    });
+
+    context('Error cases', function () {
+      it('should forbid access when user is not authorized', async function () {
+        // given
+        const checkUserCanManageCombinedCourseUsecaseStub = {
+          execute: sinon.stub().resolves(false),
+        };
+
+        // when
+        const response = await securityPreHandlers.checkUserCanManageCombinedCourse(request, hFake, {
+          checkUserCanManageCombinedCourseUsecase: checkUserCanManageCombinedCourseUsecaseStub,
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+      });
+
+      it('should forbid access when user is not authorized resource does not exist', async function () {
+        // given
+        const checkUserCanManageCombinedCourseUsecaseStub = {
+          execute: sinon.stub().rejects(new NotFoundError()),
+        };
+
+        // when
+        const response = await securityPreHandlers.checkUserCanManageCombinedCourse(request, hFake, {
+          checkUserCanManageCombinedCourseUsecase: checkUserCanManageCombinedCourseUsecaseStub,
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(response.isTakeOver).to.be.true;
+      });
+
+      it('should throw if usecase return an unknown error', async function () {
+        // given
+        const WhatIsThisError = class extends Error {};
+        const checkUserCanManageCombinedCourseUsecaseStub = {
+          execute: sinon.stub().rejects(new WhatIsThisError()),
+        };
+
+        // when
+        const error = await catchErr(securityPreHandlers.checkUserCanManageCombinedCourse)(request, hFake, {
+          checkUserCanManageCombinedCourseUsecase: checkUserCanManageCombinedCourseUsecaseStub,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(WhatIsThisError);
+      });
+    });
+  });
 });
