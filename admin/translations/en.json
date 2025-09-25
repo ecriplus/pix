@@ -553,6 +553,14 @@
         },
         "table-name": "List of children organisations"
       },
+      "creation": {
+        "administration-team": {
+          "selector" : {
+            "label": "Choose an administration team",
+            "placeholder": "Administration team"
+          }
+        }
+      },
       "information-section-view": {
         "child-organization": "Child organization of",
         "features": {
