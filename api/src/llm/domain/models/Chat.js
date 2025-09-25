@@ -86,15 +86,16 @@ export class Chat {
   }
 
   /**
-   * @param {string=} message
+   * @param {string} message
+   * @param {boolean} shouldBeForwardedToLLM
    */
-  addLLMMessage(message) {
+  addLLMMessage(message, shouldBeForwardedToLLM) {
     if (!message) return;
     this.messages.push(
       new Message({
         content: message,
         isFromUser: false,
-        shouldBeForwardedToLLM: true,
+        shouldBeForwardedToLLM,
         shouldBeRenderedInPreview: true,
         shouldBeCountedAsAPrompt: false,
       }),

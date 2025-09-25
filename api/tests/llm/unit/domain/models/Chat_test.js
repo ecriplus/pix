@@ -270,7 +270,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
 
       // when
-      chat.addLLMMessage('un message pas vide');
+      chat.addLLMMessage('un message pas vide', true);
 
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
@@ -311,9 +311,9 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
 
       // when
-      chat.addLLMMessage('');
-      chat.addLLMMessage(null);
-      chat.addLLMMessage();
+      chat.addLLMMessage('', true);
+      chat.addLLMMessage(null, true);
+      chat.addLLMMessage(undefined, true);
 
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
@@ -324,6 +324,48 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           isFromUser: false,
           shouldBeForwardedToLLM: false,
           shouldBeRenderedInPreview: false,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+        },
+      ]);
+    });
+
+    it('should set "shouldBeForwardedToLLM" to the value passed in parameter', function () {
+      // given
+      const chat = new Chat({
+        id: 'some-chat-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+
+      // when
+      chat.addLLMMessage('message1', true);
+      chat.addLLMMessage('message2', false);
+
+      // then
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'message1',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+        },
+        {
+          content: 'message2',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: false,
+          shouldBeRenderedInPreview: true,
           shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
