@@ -23,7 +23,7 @@ const Header = <template>
       <h1>{{@combinedCourse.name}}</h1>
 
       {{#if (eq @combinedCourse.status "COMPLETED")}}
-        <div class="combined-course-completed">
+        <div class="combined-course-header__completed">
           <img src="/images/illustrations/combined-course/completed.svg" alt="" role="presentation" />
           <CompletedText />
         </div>
