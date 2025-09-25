@@ -256,6 +256,20 @@
     }
   },
   "components": {
+    "activity-type": {
+      "explanation": {
+        "ASSESSMENT": "Beoordelingscampagne",
+        "COMBINED_COURSE": "Leerprogramma",
+        "EXAM": "Vraagmodus [beta]",
+        "PROFILES_COLLECTION": "Campagne profielverzameling"
+      },
+      "information": {
+        "ASSESSMENT": "Beoordeling",
+        "COMBINED_COURSE": "Leerprogramma",
+        "EXAM": "Vraagmodus [beta]",
+        "PROFILES_COLLECTION": "Profielverzameling"
+      }
+    },
     "analysis-per-competence": {
       "cover-rate-gauge-label": "Je deelnemers hebben een niveau bereikt van {reachedLevel} uit een maximaal haalbaar niveau van {maxLevel}.",
       "description": "Hieronder staan de campagnevaardigheden en hun beschrijvingen, evenals de positionering van de deelnemers.",
@@ -286,20 +300,6 @@
         "label": "Bekijken door:",
         "label-competences": "Competenties",
         "label-tubes": "Onderwerpen"
-      }
-    },
-    "campaign": {
-      "type": {
-        "explanation": {
-          "ASSESSMENT": "Beoordelingscampagne",
-          "EXAM": "Vraagmodus [beta]",
-          "PROFILES_COLLECTION": "Campagne profielverzameling"
-        },
-        "information": {
-          "ASSESSMENT": "Beoordeling",
-          "EXAM": "Vraagmodus [beta]",
-          "PROFILES_COLLECTION": "Profielverzameling"
-        }
       }
     },
     "certificability": {
@@ -602,7 +602,8 @@
       "created-on": "Gemaakt op",
       "empty-state": "Geen deelnemers op het moment",
       "empty-state-with-copy-link": "Geen deelnemers op het moment! Stuur ze de volgende link om mee te doen aan je campagne.",
-      "included-in-combined-course": "Deze evaluatiecampagne maakt deel uit van het {name}-traject.",
+      "included-in-combined-course": "Deze evaluatiecampagne maakt deel uit van het",
+      "included-in-combined-course-end": "-leerprogramma.",
       "multiple-sendings": {
         "status": {
           "disabled": "Nee",
@@ -1005,6 +1006,9 @@
       "no-students-imported-yet": "In dit tabblad vind je de resultaten en certificaten van de studenten. Eerst moet je de studentendatabase van je instelling importeren.",
       "select-label": "Klas",
       "title": "Resultaten certificering"
+    },
+    "combined-course": {
+      "introduction": "text d'intro"
     },
     "index": {
       "title": "Home"

@@ -1,6 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 
-.campaign-type {
+.activity-type {
   display: inline-flex;
   align-items: center;
 
@@ -22,6 +22,10 @@
 
     &--exam {
       fill: var(--pix-secondary-700);
+    }
+
+    &--combined-course {
+      fill: var(--pix-warning-500);
     }
 
     &--big {

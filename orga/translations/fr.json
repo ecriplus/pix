@@ -256,6 +256,20 @@
     }
   },
   "components": {
+    "activity-type": {
+      "explanation": {
+        "ASSESSMENT": "Campagne d'évaluation",
+        "COMBINED_COURSE": "Parcours apprenant",
+        "EXAM": "Mode interro [bêta]",
+        "PROFILES_COLLECTION": "Campagne de collecte de profil"
+      },
+      "information": {
+        "ASSESSMENT": "Évaluation",
+        "COMBINED_COURSE": "Parcours apprenant",
+        "EXAM": "Mode interro [bêta]",
+        "PROFILES_COLLECTION": "Collecte de profil"
+      }
+    },
     "analysis-per-competence": {
       "cover-rate-gauge-label": "Sur la compétence vos participants ont obtenu un niveau de {reachedLevel} sur un niveau maximum atteignable de {maxLevel}.",
       "description": "Ci-dessous, retrouvez les compétences de la campagne et leurs descriptifs ainsi que le positionnement des participants.",
@@ -286,20 +300,6 @@
         "label": "Vue par :",
         "label-competences": "Compétences",
         "label-tubes": "Sujets"
-      }
-    },
-    "campaign": {
-      "type": {
-        "explanation": {
-          "ASSESSMENT": "Campagne d'évaluation",
-          "EXAM": "Mode interro [bêta]",
-          "PROFILES_COLLECTION": "Campagne de collecte de profil"
-        },
-        "information": {
-          "ASSESSMENT": "Évaluation",
-          "EXAM": "Mode interro [bêta]",
-          "PROFILES_COLLECTION": "Collecte de profil"
-        }
       }
     },
     "certificability": {
@@ -602,7 +602,8 @@
       "created-on": "Créée le",
       "empty-state": "Aucun participant pour l’instant !",
       "empty-state-with-copy-link": "Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.",
-      "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours {name}.",
+      "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours apprenant",
+      "included-in-combined-course-end": ".",
       "multiple-sendings": {
         "status": {
           "disabled": "Non",
@@ -1005,6 +1006,9 @@
       "no-students-imported-yet": "Dans cet onglet, vous retrouverez les résultats et les certificats des élèves. Vous devez, dans un premier temps, importer la base élèves de votre établissement. ",
       "select-label": "Classe",
       "title": "Résultats de certification"
+    },
+    "combined-course": {
+      "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit"
     },
     "index": {
       "title": "Accueil"

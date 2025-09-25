@@ -653,4 +653,18 @@ function routes() {
     }
     return data;
   });
+
+  this.get('/combined-courses/:combinedCourseId', function (schema, request) {
+    const combinedCourseId = request.params.combinedCourseId;
+    const data = schema.combinedCourses.find(combinedCourseId);
+    if (data) {
+      return data;
+    }
+    return schema.combinedCourses.create({
+      id: 10000,
+      code: 'COMBIMIX',
+      name: 'Mon parcours mirage',
+      campaignIds: [],
+    });
+  });
 }
