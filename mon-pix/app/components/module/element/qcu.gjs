@@ -18,6 +18,7 @@ export default class ModuleQcu extends ModuleElement {
   @tracked selectedAnswerId = null;
   @tracked currentCorrection;
   @service passageEvents;
+  @service modulixPreviewMode;
   @tracked displayFeedbackState = false;
 
   @action
@@ -72,6 +73,11 @@ export default class ModuleQcu extends ModuleElement {
 
   get disableInput() {
     return !this.isOnRetryMode && (this.displayFeedbackState || !!this.currentCorrection);
+  }
+
+  @action
+  isValidFeedbackForPreview(proposalId) {
+    return this.element.solution === proposalId;
   }
 
   @action
@@ -141,6 +147,15 @@ export default class ModuleQcu extends ModuleElement {
                 {{htmlUnsafe proposal.content}}
               </:label>
             </PixRadioButton>
+
+            {{#if this.modulixPreviewMode.isEnabled}}
+              <div class="element-qcu__feedback" role="status" tabindex="-1">
+                <ModulixFeedback
+                  @answerIsValid={{this.isValidFeedbackForPreview proposal.id}}
+                  @feedback={{proposal.feedback}}
+                />
+              </div>
+            {{/if}}
           {{/each}}
         </div>
       </fieldset>
