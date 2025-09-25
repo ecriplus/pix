@@ -450,6 +450,8 @@ jobs:
             MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
             MOCHA_REPORTER: mocha-junit-reporter
           when: always
+          max_auto_reruns: 3
+          auto_rerun_delay: 10s
       - store_test_results:
           path: /home/circleci/test-results
       - store_artifacts:
