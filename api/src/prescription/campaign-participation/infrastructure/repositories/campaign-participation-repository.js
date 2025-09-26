@@ -220,7 +220,7 @@ const getCampaignParticipationsCountByUserId = async function ({ userId }) {
 
 const hasAssessmentParticipations = async function (userId) {
   const knexConn = DomainTransaction.getConnection();
-  const { count } = await knexConn('assessments')
+  const { count: assessmentCount } = await knexConn('assessments')
     .count('assessments.id')
     .leftJoin('campaign-participations', 'campaignParticipationId', 'campaign-participations.id')
     .leftJoin('campaigns', 'campaigns.id', 'campaignId')
@@ -248,7 +248,17 @@ const hasAssessmentParticipations = async function (userId) {
     })
     .first();
 
-  return count > 0;
+  const { count: combinedCourseCount } = await knexConn('view-active-organization-learners')
+    .count('combined_course_participations.id')
+    .join(
+      'combined_course_participations',
+      'combined_course_participations.organizationLearnerId',
+      'view-active-organization-learners.id',
+    )
+    .where({ userId })
+    .first();
+
+  return assessmentCount > 0 || combinedCourseCount > 0;
 };
 
 const getCodeOfLastParticipationToProfilesCollectionCampaignForUser = async function (userId) {
