@@ -8,7 +8,7 @@ export function getTransform(streamCapture) {
   return new Transform({
     objectMode: true,
     transform(chunk, _encoding, callback) {
-      const { message, isValid, usage, wasModerated, ping } = chunk;
+      const { error, message, isValid, usage, wasModerated, ping } = chunk;
       let data = '';
 
       if (ping) {
@@ -28,6 +28,11 @@ export function getTransform(streamCapture) {
       if (message) {
         streamCapture.LLMMessageParts.push(...message.split(''));
         data += getFormattedMessage(message);
+      }
+
+      if (error) {
+        streamCapture.errorOccurredDuringStream = error;
+        data += getErrorEvent();
       }
 
       if (usage) {
@@ -56,4 +61,8 @@ function getMessageModeratedEvent() {
 
 function getPingEvent() {
   return 'event: ping\ndata: \n\n';
+}
+
+function getErrorEvent() {
+  return 'event: error\ndata: \n\n';
 }

@@ -2232,7 +2232,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       });
     });
 
-    it.skip('should return a stream which will contain the partial llm response and the error', async function () {
+    it('should return a stream which will contain the partial llm response and the error', async function () {
       // given
       const chat = new Chat({
         id: 'chatId',
@@ -2289,7 +2289,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       }
       const llmResponse = parts.join('');
       expect(llmResponse).to.deep.equal(
-        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\nevent:  error\ndata: \n\n",
+        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\nevent: error\ndata: \n\n",
       );
       expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
         id: 'chatId',

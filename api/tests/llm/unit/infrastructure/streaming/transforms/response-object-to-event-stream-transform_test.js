@@ -19,7 +19,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       };
     });
 
-    it('should return a Transform that is capable of convert object "message" into event stream data', async function () {
+    it('should return a Transform that is capable of convert object "message" into event-stream data', async function () {
       // given
       const input = [
         { message: 'Coucou les amis comment ça va ?' },
@@ -39,7 +39,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       expect(result).to.equal('data: Coucou les amis comment ça va ?\n\ndata: Et toi ?\n\n');
     });
 
-    it('should replace "\n" with "\ndata: " to comply with event stream data', async function () {
+    it('should replace "\n" with "\ndata: " to comply with event-stream data', async function () {
       // given
       const input = [{ message: '\n des retours à \n la ligne \n\n dans tous les sens\n' }];
       const readable = Readable.from(input);
@@ -57,7 +57,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       );
     });
 
-    it('should return a Transform that is capable of convert information "isValid" into event stream event', async function () {
+    it('should return a Transform that is capable of convert information "isValid" into event-stream event', async function () {
       // given
       const input = [
         { message: 'Coucou les amis comment ça va ?' },
@@ -89,7 +89,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       );
     });
 
-    it('should return a Transform that is capable of convert information "wasModerated" into event stream event', async function () {
+    it('should return a Transform that is capable of convert information "wasModerated" into event-stream event', async function () {
       // given
       const input = [
         { message: 'Coucou les amis comment ça va ?' },
@@ -120,7 +120,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
       );
     });
 
-    it('should return a Transform that is capable of convert information "ping" into event stream event', async function () {
+    it('should return a Transform that is capable of convert information "ping" into event-stream event', async function () {
       // given
       const input = [
         { message: 'Coucou les amis comment ça va ?' },
@@ -138,6 +138,25 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
 
       // then
       expect(result).to.equal('data: Coucou les amis comment ça va ?\n\nevent: ping\ndata: \n\ndata: Et toi ?\n\n');
+    });
+
+    it('should return a Transform that is capable of convert information "error" into event-stream event', async function () {
+      // given
+      const input = [
+        { message: 'Coucou les amis comment ça va ?' },
+        { pasMessage: 'Ca va pas super', error: 'je me suis cassé un ongle' },
+      ];
+      const readable = Readable.from(input);
+      const transform = getTransform(streamCapture);
+      let result = '';
+
+      // when
+      readable.pipe(transform);
+      transform.on('data', (str) => (result = result + str));
+      await finished(transform);
+
+      // then
+      expect(result).to.equal('data: Coucou les amis comment ça va ?\n\nevent: error\ndata: \n\n');
     });
 
     context('streamCapture', function () {
@@ -254,6 +273,32 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           wasModerated: true,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
+      });
+
+      it('should capture the error content if error was present', async function () {
+        // given
+        const input = [
+          { message: 'Coucou les amis \ncomment ça va ?' },
+          { pasMessage: 'Ca va super', error: 'je me suis cassé un ongle' },
+        ];
+        const readable = Readable.from(input);
+        const transform = getTransform(streamCapture);
+
+        // when
+        readable.pipe(transform);
+        // eslint-disable-next-line no-empty-function
+        transform.on('data', () => {});
+        await finished(transform);
+
+        // then
+        expect(_.omit(streamCapture, 'LLMMessageParts')).to.deep.equal({
+          haveVictoryConditionsBeenFulfilled: false,
+          inputTokens: 0,
+          outputTokens: 0,
+          wasModerated: false,
+          errorOccurredDuringStream: 'je me suis cassé un ongle',
+        });
+        expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?');
       });
     });
   });

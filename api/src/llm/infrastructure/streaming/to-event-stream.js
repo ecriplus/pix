@@ -20,6 +20,7 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  * @property {number} inputTokens
  * @property {number} outputTokens
  * @property {boolean} wasModerated
+ * @property {string=} errorOccurredDuringStream
  */
 
 /**
