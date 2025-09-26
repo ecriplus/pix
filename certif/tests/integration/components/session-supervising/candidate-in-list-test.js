@@ -1,5 +1,6 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import dayjs from 'dayjs';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -559,6 +560,195 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // then
         await screen.findByRole('dialog');
         assert.dom(screen.getByRole('heading', { name: 'Confirmer que Alain Cendy a bien l’extension ?' })).exists();
+      });
+    });
+  });
+
+  module('when calculating theoretical end time for different certification types', function () {
+    module('when candidate has Pix+ Droit certification', function () {
+      test('it calculates end time using 45 minutes duration', async function (assert) {
+        // given
+        const startTime = new Date('2022-10-19T14:30:00Z');
+        const expectedEndTime = dayjs(startTime).add(45, 'minute').format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Marie',
+          lastName: 'Dupont',
+          startDateTime: startTime,
+          theoricalEndDateTime: new Date('2022-10-19T16:15:00Z'),
+          enrolledComplementaryCertificationLabel: 'Pix+ Droit',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedEndTime)).exists();
+      });
+    });
+
+    module('when candidate has Pix+ Pro Santé certification', function () {
+      test('it calculates end time using 45 minutes duration', async function (assert) {
+        // given
+        const startTime = new Date('2022-10-19T10:00:00Z');
+        const expectedEndTime = dayjs(startTime).add(45, 'minute').format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Jean',
+          lastName: 'Martin',
+          startDateTime: startTime,
+          theoricalEndDateTime: new Date('2022-10-19T11:45:00Z'),
+          enrolledComplementaryCertificationLabel: 'Pix+ Pro Santé',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedEndTime)).exists();
+      });
+    });
+
+    module('when candidate has Pix+ Edu certification', function () {
+      test('it calculates end time using 90 minutes duration for 1er degré', async function (assert) {
+        // given
+        const startTime = new Date('2022-10-19T09:00:00Z');
+        const expectedEndTime = dayjs(startTime).add(90, 'minute').format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Pierre',
+          lastName: 'Durand',
+          startDateTime: startTime,
+          theoricalEndDateTime: new Date('2022-10-19T10:45:00Z'),
+          enrolledComplementaryCertificationLabel: 'Pix+ Edu 1er Degré',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedEndTime)).exists();
+      });
+
+      test('it calculates end time using 90 minutes duration for 2nd degré', async function (assert) {
+        // given
+        const startTime = new Date('2022-10-19T14:15:00Z');
+        const expectedEndTime = dayjs(startTime).add(90, 'minute').format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Sophie',
+          lastName: 'Bernard',
+          startDateTime: startTime,
+          theoricalEndDateTime: new Date('2022-10-19T16:00:00Z'),
+          enrolledComplementaryCertificationLabel: 'Pix+ Edu 2nd Degré',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedEndTime)).exists();
+      });
+
+      test('it calculates end time using 90 minutes duration for CPE', async function (assert) {
+        // given
+        const startTime = new Date('2022-10-19T16:30:00Z');
+        const expectedEndTime = dayjs(startTime).add(90, 'minute').format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Antoine',
+          lastName: 'Moreau',
+          startDateTime: startTime,
+          theoricalEndDateTime: new Date('2022-10-19T18:15:00Z'),
+          enrolledComplementaryCertificationLabel: 'Pix+ Edu CPE',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedEndTime)).exists();
+      });
+    });
+
+    module('when candidate has standard Pix certification', function () {
+      test('it uses backend calculated theoretical end time', async function (assert) {
+        // given
+        const backendEndTime = new Date('2022-10-19T16:15:00Z');
+        const expectedDisplayTime = dayjs(backendEndTime).format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Claire',
+          lastName: 'Dubois',
+          startDateTime: new Date('2022-10-19T14:30:00Z'),
+          theoricalEndDateTime: backendEndTime,
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedDisplayTime)).exists();
+      });
+    });
+
+    module('when candidate has CléA certification', function () {
+      test('it uses backend calculated theoretical end time', async function (assert) {
+        // given
+        const backendEndTime = new Date('2022-10-19T14:45:00Z');
+        const expectedDisplayTime = dayjs(backendEndTime).format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Lucas',
+          lastName: 'Petit',
+          startDateTime: new Date('2022-10-19T13:00:00Z'),
+          theoricalEndDateTime: backendEndTime,
+          enrolledComplementaryCertificationLabel: 'CléA',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedDisplayTime)).exists();
+      });
+    });
+
+    module('when candidate has unknown complementary certification', function () {
+      test('it uses backend calculated theoretical end time as fallback', async function (assert) {
+        // given
+        const backendEndTime = new Date('2022-10-19T12:45:00Z');
+        const expectedDisplayTime = dayjs(backendEndTime).format('HH:mm');
+
+        this.candidate = store.createRecord('certification-candidate-for-supervising', {
+          id: '456',
+          firstName: 'Emma',
+          lastName: 'Leroy',
+          startDateTime: new Date('2022-10-19T11:00:00Z'),
+          theoricalEndDateTime: backendEndTime,
+          enrolledComplementaryCertificationLabel: 'Certification Inconnue',
+          assessmentStatus: 'started',
+        });
+
+        // when
+        const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
+
+        // then
+        assert.dom(screen.getByText(expectedDisplayTime)).exists();
       });
     });
   });
