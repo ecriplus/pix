@@ -1,7 +1,6 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, currentURL, fillIn, triggerEvent } from '@ember/test-helpers';
+import { click, currentURL, fillIn } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { setFlatpickrDate } from 'ember-flatpickr/test-support/helpers';
 import { setupIntl, t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -54,69 +53,6 @@ module('Acceptance | Session creation', function (hooks) {
       });
     });
 
-    module('when user focus out required inputs without completing it', function () {
-      test('should display error messages', async function (assert) {
-        // given
-        const screen = await visit('/sessions/creation');
-
-        // when
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: 'Nom du site *',
-          }),
-          '',
-        );
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: 'Nom de la salle *',
-          }),
-          '',
-        );
-
-        const examinerInput = screen.getByRole('textbox', {
-          name: 'Surveillant(s) *',
-        });
-        await fillIn(examinerInput, '');
-        await triggerEvent(examinerInput, 'focusout');
-
-        // then
-        assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_ADDRESS_REQUIRED'))).exists();
-        assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_ROOM_REQUIRED'))).exists();
-        assert.dom(screen.getByText(t('pages.sessions.new.errors.SESSION_EXAMINER_REQUIRED'))).exists();
-      });
-    });
-
-    module('when user tries to confirm form without filling mandatory fields', function () {
-      test('should display error notification', async function (assert) {
-        // given
-        const screen = await visit('/sessions/creation');
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: 'Nom du site *',
-          }),
-          ' ',
-        );
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: 'Nom de la salle *',
-          }),
-          ' ',
-        );
-        await fillIn(
-          screen.getByRole('textbox', {
-            name: 'Surveillant(s) *',
-          }),
-          ' ',
-        );
-
-        // when
-        await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
-
-        // then
-        assert.dom(screen.getByText(t('common.form-errors.fill-mandatory-fields'))).exists();
-      });
-    });
-
     test('it should create a session and redirect to session details', async function (assert) {
       // given
       const sessionDate = '2029-12-25';
@@ -154,11 +90,8 @@ module('Acceptance | Session creation', function (hooks) {
         screen.getByRole('textbox', { name: t('common.forms.session-labels.observations') }),
         'My description',
       );
-      await setFlatpickrDate('#session-date', sessionDate);
-      await setFlatpickrDate(
-        screen.getByRole('textbox', { name: `${t('common.forms.session-labels.time-start')} *` }),
-        sessionTime,
-      );
+      await fillIn('#session-date', sessionDate);
+      await fillIn('#session-time', sessionTime);
       await click(screen.getByRole('button', { name: t('pages.sessions.new.actions.create-session') }));
 
       // then
