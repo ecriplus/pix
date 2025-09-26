@@ -1,5 +1,6 @@
 import 'dayjs/locale/fr.js';
 
+import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
 import * as url from 'node:url';
 
@@ -119,12 +120,57 @@ function toStream(data, encoding = 'utf8') {
 }
 
 /**
+ * For acceptance tests. To be used as `const options = generateInjectOptions; await server.inject(options);`
+ *
+ * @param {Object} params
+ * @param {string} params.url
+ * @param {string} params.method
+ * @param {Object} [params.payload]
+ * @param {string} [params.locale]
+ * @param {string} [params.audience]
+ * @param {Object} [params.authorizationData] - data to generate an AccessToken, for example: { userId: 1234 }
+ * @param {boolean} [params.urlEncodePayload]
+ * @returns {Object} options
+ */
+function generateInjectOptions({ url, method, payload, locale, audience, authorizationData, urlEncodePayload }) {
+  const options = {
+    url,
+    method,
+    headers: {
+      // cf. cookies = req.headers.cookie in @hapi/hapi/lib/route.js +369
+      ...(locale && { cookie: `locale=${locale}` }),
+      ...(audience && generateForwardedHeaders(audience)),
+    },
+  };
+
+  if (payload) {
+    if (urlEncodePayload) {
+      options.payload = querystring.stringify(payload);
+      options.headers['content-type'] = 'application/x-www-form-urlencoded';
+    } else {
+      options.payload = payload;
+    }
+  }
+
+  if (authorizationData) {
+    if (!audience) {
+      throw new Error('You must provide an audience parameter when providing authorizationData.');
+    }
+
+    const accessToken = UserAccessToken.generateUserToken({ ...authorizationData, audience }).accessToken;
+    options.headers.authorization = `Bearer ${accessToken}`;
+  }
+
+  return options;
+}
+
+/**
  * @param {Object} params
  * @param {number} params.userId
  * @param {string} params.source
- * @param {string} params.audience
+ * @param {string} params.audience - an origin URL, for example: https://app.pix.org
  * @param {string} params.locale
- * @returns {Object} Header
+ * @returns {Object} headers
  */
 function generateAuthenticatedUserRequestHeaders({
   userId = 1234,
@@ -132,17 +178,27 @@ function generateAuthenticatedUserRequestHeaders({
   audience = 'https://app.pix.org',
   locale = 'fr-FR',
 } = {}) {
-  const url = new URL(audience);
-  const protoHeader = url.protocol.slice(0, -1);
-  const hostHeader = url.hostname;
   const accessToken = UserAccessToken.generateUserToken({ userId, source, audience }).accessToken;
 
   return {
+    ...generateForwardedHeaders(audience),
     authorization: `Bearer ${accessToken}`,
-    'x-forwarded-proto': protoHeader,
-    'x-forwarded-host': hostHeader,
     cookie: `locale=${locale}`,
   };
+}
+
+/**
+ * Generates HTTP X-Forwarded-Proto (XFP) headers.
+ *
+ * @param {string} audience - an origin URL, for example: https://app.pix.org
+ * @returns {Object} headers
+ */
+function generateForwardedHeaders(audience) {
+  const url = new URL(audience);
+  const protoHeader = url.protocol.slice(0, -1);
+  const hostHeader = url.hostname;
+
+  return { 'x-forwarded-proto': protoHeader, 'x-forwarded-host': hostHeader };
 }
 
 function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope = '') {
@@ -404,7 +460,9 @@ export {
   EMPTY_BLANK_AND_NULL,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateForwardedHeaders,
   generateIdTokenForExternalUser,
+  generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
