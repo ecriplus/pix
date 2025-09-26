@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -292,5 +293,45 @@ module('Integration | Component | Module | QCM', function (hooks) {
     const checkbox1 = screen.getByRole('checkbox', { name: 'checkbox1', disabled: true });
     checkbox1.focus();
     assert.deepEqual(document.activeElement, checkbox1);
+  });
+
+  module('when preview mode is enabled', function () {
+    test('should display all feedbacks', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+      const qcm = {
+        id: 'a2638f8e-05ee-42e0-9820-13a9977cf5dc',
+        instruction: 'Instruction',
+        proposals: [
+          { id: '1', content: 'checkbox1' },
+          { id: '2', content: 'checkbox2' },
+          { id: '3', content: 'checkbox3' },
+        ],
+        feedbacks: {
+          valid: {
+            state: 'Correct!',
+            diagnosis: '<p>Good job!</p>',
+          },
+          invalid: {
+            state: 'Wrong!',
+            diagnosis: '<p>Too Bad!</p>',
+          },
+        },
+        solutions: ['1', '2'],
+        type: 'qcm',
+      };
+
+      // when
+      const screen = await render(<template><ModulixQcm @element={{qcm}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('Correct!')).exists();
+      assert.dom(screen.getByText('Good job!')).exists();
+      assert.dom(screen.getByText('Wrong!')).exists();
+      assert.dom(screen.getByText('Too Bad!')).exists();
+    });
   });
 });
