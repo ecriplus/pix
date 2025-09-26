@@ -209,6 +209,7 @@ export class Message {
    * @param {boolean=} params.hasAttachmentBeenSubmittedAlongWithAPrompt
    * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
    * @param {boolean=} params.wasModerated
+   * @param {boolean=} params.hasErrorOccurred
    */
   constructor({
     content,
