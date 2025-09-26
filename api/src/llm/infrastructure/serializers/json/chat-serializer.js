@@ -37,12 +37,20 @@ export function serialize(chat) {
     totalOutputTokens: chat.totalOutputTokens,
     hasVictoryConditions: chat.hasVictoryConditions,
     messages: messagesForPreview.map(
-      ({ content, attachmentName, isFromUser, haveVictoryConditionsBeenFulfilled, wasModerated }) => ({
+      ({
         content,
         attachmentName,
         isFromUser,
         haveVictoryConditionsBeenFulfilled,
         wasModerated,
+        hasErrorOccurred,
+      }) => ({
+        content,
+        attachmentName,
+        isFromUser,
+        haveVictoryConditionsBeenFulfilled,
+        wasModerated,
+        hasErrorOccurred,
         isAttachmentValid: Boolean(attachmentName && chat.isAttachmentValid(attachmentName)),
       }),
     ),

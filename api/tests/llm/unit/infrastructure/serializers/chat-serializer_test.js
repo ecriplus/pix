@@ -32,6 +32,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             content: 'Bonjour comment puis-je vous aider ?',
             isFromUser: false,
             shouldBeRenderedInPreview: true,
+            hasErrorOccurred: true,
           }),
         ],
       });
@@ -57,6 +58,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
           {
             content: 'Bonjour comment puis-je vous aider ?',
@@ -65,6 +67,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: true,
           },
         ],
       });
@@ -127,6 +130,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
               wasModerated: true,
+              hasErrorOccurred: undefined,
             },
           ],
         });
@@ -213,6 +217,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -221,6 +226,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Que contient ce fichier ?',
@@ -229,6 +235,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: true,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
@@ -237,6 +244,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
@@ -245,6 +253,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
               wasModerated: true,
+              hasErrorOccurred: undefined,
             },
           ],
         });
@@ -331,6 +340,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Bonjour comment puis-je vous aider ?',
@@ -339,6 +349,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: undefined,
@@ -347,6 +358,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: true,
               haveVictoryConditionsBeenFulfilled: true,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Que contient ce fichier ?',
@@ -355,6 +367,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'Le fichier contient la photo d’un ours',
@@ -363,6 +376,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: undefined,
@@ -371,6 +385,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
@@ -379,6 +394,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               isAttachmentValid: false,
               haveVictoryConditionsBeenFulfilled: true,
               wasModerated: true,
+              hasErrorOccurred: undefined,
             },
           ],
         });
