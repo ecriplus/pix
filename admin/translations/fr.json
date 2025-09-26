@@ -430,15 +430,15 @@
       "item": {
         "complementary-certification": "Certification complémentaire",
         "framework": {
-          "create-button": "Créer un nouveau référentiel cadre",
+          "create-button": "Créer un nouveau référentiel de certification",
           "creation-form": {
-            "submit-button": "Créer le nouveau référentiel cadre",
-            "success-notification": "Le nouveau référentiel cadre a été créé avec succès",
-            "title": "Créer un nouveau référentiel cadre pour {complementaryCertificationLabel}"
+            "submit-button": "Créer le nouveau référentiel de certification",
+            "success-notification": "Le nouveau référentiel de certification a été créé avec succès",
+            "title": "Créer un nouveau référentiel de certification pour {complementaryCertificationLabel}"
           },
           "details": {
-            "empty-current-framework": "Le référentiel cadre actuel est vide.",
-            "title": "Détails du référentiel cadre actuel"
+            "empty-current-framework": "Le référentiel de certification actuel est vide.",
+            "title": "Détails du référentiel de certification actuel"
           },
           "history": {
             "table": {
@@ -446,8 +446,8 @@
             },
             "title": "Historique des versions du référentiel"
           },
-          "no-current-framework": "Aucun référentiel cadre n'est utilisé actuellement.",
-          "tab": "Référentiel cadre"
+          "no-current-framework": "Aucun référentiel de certification n'est utilisé actuellement.",
+          "tab": "Référentiel de certification"
         },
         "navigation": {
           "aria-label": "Navigation de la section certification complémentaire"
