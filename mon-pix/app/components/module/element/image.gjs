@@ -32,18 +32,14 @@ export default class ModulixImageElement extends Component {
 
   get width() {
     if (this.args.image.infos && this.hasDimensions) {
-      if (this.args.image.infos.type === 'vector') {
-        return ModulixImageElement.MAX_WIDTH;
-      }
+      return ModulixImageElement.MAX_WIDTH;
     }
     return null;
   }
 
   get height() {
     if (this.args.image.infos && this.hasDimensions) {
-      if (this.args.image.infos.type === 'vector') {
-        return Math.round((ModulixImageElement.MAX_WIDTH * this.args.image.infos.height) / this.args.image.infos.width);
-      }
+      return Math.round((ModulixImageElement.MAX_WIDTH * this.args.image.infos.height) / this.args.image.infos.width);
     }
     return null;
   }
