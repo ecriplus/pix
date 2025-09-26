@@ -42,4 +42,26 @@ module('Unit | Model | Combined Course', function (hooks) {
       assert.strictEqual(combinedCourse.nextCombinedCourseItem, secondCombinedCourseItem);
     });
   });
+  module('#hasItemOfTypeModule', function () {
+    test('returns true when there is an item of type module', function (assert) {
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'MODULE',
+        redirection: '/modules/demo-combinix-1',
+      });
+      const combinedCourse = store.createRecord('combined-course');
+      combinedCourse.items = [combinedCourseItem];
+      assert.true(combinedCourse.hasItemOfTypeModule);
+    });
+    test('returns false when there is not an item of type module', function (assert) {
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'popopo',
+        redirection: '/demo-combinix-1',
+      });
+      const combinedCourse = store.createRecord('combined-course');
+      combinedCourse.items = [combinedCourseItem];
+      assert.false(combinedCourse.hasItemOfTypeModule);
+    });
+  });
 });

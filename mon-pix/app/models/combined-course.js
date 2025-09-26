@@ -1,4 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
+import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
 export const CombinedCourseStatuses = {
   NOT_STARTED: 'NOT_STARTED',
@@ -20,5 +21,13 @@ export default class CombinedCourse extends Model {
     return this.hasMany('items')
       .value()
       .find((item) => !item.isCompleted);
+  }
+
+  get hasItemOfTypeModule() {
+    return Boolean(
+      this.hasMany('items')
+        ?.value()
+        ?.find((item) => item.type === CombinedCourseItemTypes.MODULE),
+    );
   }
 }

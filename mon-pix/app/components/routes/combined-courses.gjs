@@ -7,9 +7,9 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
 import ENV from 'mon-pix/config/environment';
+import { CombinedCourseStatuses } from 'mon-pix/models/combined-course';
 
 import CombinedCourseItem from '../combined-course/combined-course-item';
-
 const CompletedText = <template>
   <div class="completed-text">
     <h2 class="completed-text__title">{{t "pages.combined-courses.completed.title"}}</h2>
@@ -23,7 +23,7 @@ const Header = <template>
       <h1>{{@combinedCourse.name}}</h1>
 
       {{#if (eq @combinedCourse.status "COMPLETED")}}
-        <div class="combined-course-completed">
+        <div class="combined-course-header__completed">
           <img src="/images/illustrations/combined-course/completed.svg" alt="" role="presentation" />
           <CompletedText />
         </div>
@@ -81,7 +81,10 @@ export default class CombinedCourses extends Component {
         @isSurveyEnabled={{this.isSurveyEnabled}}
         @surveyLink={{this.surveyLink}}
       />
-      <div class="combined-course__divider" />
+      <hr class="combined-course__divider" />
+      {{#if this.shouldDisplayRetryModulesText}}
+        <p class="combined-course__retry-text">{{t "pages.combined-courses.completed.retry-text"}}</p>
+      {{/if}}
       {{#each @combinedCourse.items as |item|}}
         <CombinedCourseItem
           @item={{item}}
@@ -121,6 +124,13 @@ export default class CombinedCourses extends Component {
 
   get surveyLink() {
     return ENV.APP.COMBINIX_SURVEY_LINK;
+  }
+
+  get shouldDisplayRetryModulesText() {
+    return (
+      this.args.combinedCourse.hasItemOfTypeModule &&
+      this.args.combinedCourse.status === CombinedCourseStatuses.COMPLETED
+    );
   }
 }
 

@@ -459,5 +459,104 @@ module('Integration | Component | combined course', function (hooks) {
       assert.dom(link).hasAttribute('target', '_blank');
       assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
     });
+    test('should display retry text for modules if there are any in the course', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const moduleCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 2,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+        redirection: 'une+url+chiffree',
+        isCompleted: true,
+      });
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+      });
+      combinedCourse.items.push(moduleCombinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.ok(
+        screen
+          .getAllByRole('paragraph')
+          .find((element) => element.textContent === t('pages.combined-courses.completed.retry-text')),
+      );
+    });
+    test('should hide retry text for modules if the combined course is not completed', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const moduleCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 2,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+        redirection: 'une+url+chiffree',
+        isCompleted: true,
+      });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.STARTED,
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(moduleCombinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.notOk(
+        screen
+          .queryAllByRole('paragraph')
+          .find((element) => element.textContent === t('pages.combined-courses.completed.retry-text')),
+      );
+    });
+    test('should hide retry text for modules if there are any in the course', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const campaignCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'ma campagne',
+        reference: 'ABCDIAG1',
+        type: 'CAMPAIGN',
+        isCompleted: true,
+        isLocked: false,
+      });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+      });
+
+      combinedCourse.items.push(campaignCombinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.notOk(
+        screen
+          .queryAllByRole('paragraph')
+          .find((element) => element.textContent === t('pages.combined-courses.completed.retry-text')),
+      );
+    });
   });
 });

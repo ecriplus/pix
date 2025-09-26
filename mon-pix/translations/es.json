@@ -1204,7 +1204,8 @@
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
         "description": "¡Bien hecho! Ha dado un paso importante para navegar por el mundo digital.",
         "survey-button": "Responder a la encuesta de satisfacción",
-        "survey-button-description": "Responda al cuestionario para dar su opinión sobre el recorrido."
+        "survey-button-description": "Responda al cuestionario para dar su opinión sobre el recorrido.",
+        "retry-text": "¿Quieres repasar? ¡Puedes volver a reproducir todos los módulos libremente!"
       },
       "items": {
         "formation": {
