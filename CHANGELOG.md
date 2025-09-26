@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.219.0](https://github.com/1024pix/pix/compare/v5.218.0...v5.219.0) (2025-09-26)
+
+### :rocket: Amélioration
+
+- [#13676](https://github.com/1024pix/pix/pull/13676)  Afficher un parcours combiné dans PixOrga (PIX-19620) 
+- [#13620](https://github.com/1024pix/pix/pull/13620) Afficher les noms de certification dans les instructions (PIX-19588) 
+- [#13688](https://github.com/1024pix/pix/pull/13688) Ajouter les migrations des tables chats et chat-messages (PIX-19689) 
+- [#13671](https://github.com/1024pix/pix/pull/13671) Ajouter un route pour afficher le détail d'un parcours combiné (PIX-19672) 
+- [#13693](https://github.com/1024pix/pix/pull/13693) Ajouter un texte d'incitation à repasser les modules des parcours combinés (PIX-19023) 
+- [#13696](https://github.com/1024pix/pix/pull/13696) Modifier l'illustration de fin de module sur Pix App (PIX-19617). 
+- [#13609](https://github.com/1024pix/pix/pull/13609) Vérifier côté client le QROCM (PIX-19337) 
+
+### :bug: Correction
+
+- [#13691](https://github.com/1024pix/pix/pull/13691) Afficher le lien "Mes parcours" lorsque l'on a une participation a un parcours combiné (PIX-19593). 
+
+### :building_construction: Tech
+
+- [#13581](https://github.com/1024pix/pix/pull/13581) :recycle: Simplifie le mécanisme de vérification d'accès d'un utilisateur à un centre de certification (PIX-19614) 
+- [#13682](https://github.com/1024pix/pix/pull/13682) Activer l'auto retry sur les tests de l'api d'integration 
+- [#13694](https://github.com/1024pix/pix/pull/13694) Corrige un test flaky 
+- [#13683](https://github.com/1024pix/pix/pull/13683) Renommer les fichiers des modules IA (PIX-19698) 
+- [#13656](https://github.com/1024pix/pix/pull/13656) Utiliser des champs de date natifs dans les forms PixCertif (PIX-17969). 
+
+### :arrow_up: Montée de version
+
+- [#13699](https://github.com/1024pix/pix/pull/13699) Lock file maintenance (api) 
+- [#13679](https://github.com/1024pix/pix/pull/13679) Update dependency ember-truth-helpers to v5 (mon-pix) 
+- [#13684](https://github.com/1024pix/pix/pull/13684) Update dependency eslint-plugin-unicorn to v60 (audit-logger)
+
 # [5.218.0](https://github.com/1024pix/pix/compare/v5.217.0...v5.218.0) (2025-09-25)
 
 ### :rocket: Amélioration
