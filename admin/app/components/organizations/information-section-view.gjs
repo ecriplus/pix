@@ -91,6 +91,12 @@ class OrganizationDescription extends Component {
 
       <DescriptionList.Divider />
 
+      <DescriptionList.Item @label="Équipe en charge">
+        {{if @organization.administrationTeamName @organization.administrationTeamName "Non spécifié"}}
+      </DescriptionList.Item>
+
+      <DescriptionList.Divider />
+
       <DescriptionList.Item @label="Nom du DPO">
         {{@organization.dataProtectionOfficerFullName}}
       </DescriptionList.Item>
