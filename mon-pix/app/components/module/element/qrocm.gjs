@@ -17,6 +17,7 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
   @tracked currentCorrection;
+  @tracked isVerifying = false;
   @service passageEvents;
   @service qrocmSolutionVerification;
   @service modulixPreviewMode;
@@ -93,6 +94,7 @@ export default class ModuleQrocm extends ModuleElement {
 
   @action
   async onAnswer(event) {
+    this.isVerifying = true;
     super.onAnswer(event);
 
     if (this.shouldDisplayRequiredMessage === true) {
@@ -115,6 +117,8 @@ export default class ModuleQrocm extends ModuleElement {
       type: 'QROCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
+
+    this.isVerifying = false;
   }
 
   #waitFor(duration) {
@@ -138,6 +142,10 @@ export default class ModuleQrocm extends ModuleElement {
 
   isValidFeedbackForPreview(feedback) {
     return feedback.status === 'valid';
+  }
+
+  get disableInput() {
+    return super.disableInput || this.isVerifying;
   }
 
   <template>
