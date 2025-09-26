@@ -343,6 +343,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
@@ -471,6 +472,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   shouldBeRenderedInPreview: true,
                   shouldBeForwardedToLLM: true,
                   shouldBeCountedAsAPrompt: false,
+                  hasErrorOccurred: false,
                 },
               ],
             });
@@ -707,6 +709,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeRenderedInPreview: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -993,6 +996,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -1143,6 +1147,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -1778,6 +1783,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
             },
           ],
         });
@@ -1893,6 +1899,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
             },
           ],
         });
@@ -2096,6 +2103,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
@@ -2207,6 +2215,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
@@ -2334,6 +2343,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             shouldBeRenderedInPreview: true,
             shouldBeForwardedToLLM: false,
             shouldBeCountedAsAPrompt: false,
+            hasErrorOccurred: true,
           },
         ],
       });

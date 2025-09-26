@@ -96,7 +96,11 @@ function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
       streamCapture.haveVictoryConditionsBeenFulfilled,
       streamCapture.wasModerated,
     );
-    chat.addLLMMessage(streamCapture.LLMMessageParts.join(''), !hasErrorOccurredDuringStream);
+    chat.addLLMMessage(
+      streamCapture.LLMMessageParts.join(''),
+      !hasErrorOccurredDuringStream,
+      hasErrorOccurredDuringStream,
+    );
     chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
     await chatRepository.save(chat);
   };
