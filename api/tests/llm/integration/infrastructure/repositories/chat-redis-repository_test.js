@@ -1,13 +1,17 @@
 import { ChatNotFoundError } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX, get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import {
+  CHAT_STORAGE_PREFIX,
+  get,
+  save,
+} from '../../../../../src/llm/infrastructure/repositories/chat-redis-repository.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
-describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
+describe('LLM | Integration | Infrastructure | Repositories | chat-redis', function () {
   afterEach(async function () {
     await chatTemporaryStorage.flushAll();
   });

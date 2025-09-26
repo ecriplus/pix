@@ -9,7 +9,7 @@ import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/Traini
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-redis-repository.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,

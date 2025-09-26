@@ -12,7 +12,7 @@ export async function promptChat({
   userId,
   message,
   attachmentName,
-  chatRepository,
+  chatRedisRepository,
   promptRepository,
   toEventStream,
 }) {
@@ -25,7 +25,7 @@ export async function promptChat({
     throw new NoAttachmentNorMessageProvidedError();
   }
 
-  const chat = await chatRepository.get(chatId);
+  const chat = await chatRedisRepository.get(chatId);
   if (chat.userId != undefined && userId !== chat.userId) {
     throw new ChatForbiddenError();
   }
@@ -68,7 +68,7 @@ export async function promptChat({
 
   return toEventStream.fromLLMResponse({
     llmResponse: readableStream,
-    onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository),
+    onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRedisRepository),
     attachmentMessageType,
     shouldSendDebugData: chat.isPreview,
   });
@@ -81,10 +81,10 @@ export async function promptChat({
  * @param {Chat} chat
  * @param {string} message
  * @param {boolean} hasJustBeenSentToLLM
- * @param {Object} chatRepository
+ * @param {Object} chatRedisRepository
  * @returns {(streamCapture: StreamCapture) => Promise<void>}
  */
-function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
+function finalize(chat, message, hasJustBeenSentToLLM, chatRedisRepository) {
   return async (streamCapture) => {
     const hasErrorOccurredDuringStream = !!streamCapture.errorOccurredDuringStream;
     const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM && !hasErrorOccurredDuringStream;
@@ -102,6 +102,6 @@ function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
       hasErrorOccurredDuringStream,
     );
     chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
-    await chatRepository.save(chat);
+    await chatRedisRepository.save(chat);
   };
 }

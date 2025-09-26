@@ -13,12 +13,12 @@ import {
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
-import { chatRepository, promptRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
+import { chatRedisRepository, promptRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import * as toEventStream from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, expect, nock } from '../../../../test-helper.js';
 
-const chatTemporaryStorage = temporaryStorage.withPrefix(chatRepository.CHAT_STORAGE_PREFIX);
+const chatTemporaryStorage = temporaryStorage.withPrefix(chatRedisRepository.CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   let dependencies;
@@ -26,7 +26,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   beforeEach(function () {
     dependencies = {
       promptRepository,
-      chatRepository,
+      chatRedisRepository,
       toEventStream,
     };
   });

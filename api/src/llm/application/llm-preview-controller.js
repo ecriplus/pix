@@ -2,7 +2,7 @@ import { getPixAppUrl } from '../../shared/domain/services/url-service.js';
 import { ChatForbiddenError } from '../domain/errors.js';
 import { Configuration } from '../domain/models/Configuration.js';
 import { usecases } from '../domain/usecases/index.js';
-import { chatRepository } from '../infrastructure/repositories/index.js';
+import { chatRedisRepository } from '../infrastructure/repositories/index.js';
 import * as chatSerializer from '../infrastructure/serializers/json/chat-serializer.js';
 
 export const llmPreviewController = {
@@ -14,7 +14,7 @@ export const llmPreviewController = {
   },
 
   async getChat(request) {
-    const chat = await chatRepository.get(request.params.chatId);
+    const chat = await chatRedisRepository.get(request.params.chatId);
     if (chat.userId != undefined) {
       throw new ChatForbiddenError();
     }

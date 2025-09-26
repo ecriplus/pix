@@ -8,7 +8,7 @@ export async function startChat({
   challengeId,
   passageId,
   moduleId,
-  chatRepository,
+  chatRedisRepository,
   configurationRepository,
   randomUUID,
 }) {
@@ -30,6 +30,6 @@ export async function startChat({
     totalInputTokens: 0,
     totalOutputTokens: 0,
   });
-  await chatRepository.save(newChat);
+  await chatRedisRepository.save(newChat);
   return newChat;
 }

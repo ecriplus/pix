@@ -1,11 +1,14 @@
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { startChat } from '../../../../../src/llm/domain/usecases/start-chat.js';
-import { chatRepository, configurationRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
+import {
+  chatRedisRepository,
+  configurationRepository,
+} from '../../../../../src/llm/infrastructure/repositories/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { expect, nock, sinon } from '../../../../test-helper.js';
 
-const chatTemporaryStorage = temporaryStorage.withPrefix(chatRepository.CHAT_STORAGE_PREFIX);
+const chatTemporaryStorage = temporaryStorage.withPrefix(chatRedisRepository.CHAT_STORAGE_PREFIX);
 
 describe('LLM | Integration | Domain | UseCases | start-chat', function () {
   afterEach(async function () {
@@ -40,7 +43,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
       it('should return the newly created chat', async function () {
         // when
-        const chat = await startChat({ configuration, randomUUID, chatRepository });
+        const chat = await startChat({ configuration, randomUUID, chatRedisRepository });
 
         // then
         expect(chat).to.deepEqualInstance(
@@ -107,7 +110,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           passageId: 22,
           moduleId: 44,
           randomUUID,
-          chatRepository,
+          chatRedisRepository,
           configurationRepository,
         });
 
