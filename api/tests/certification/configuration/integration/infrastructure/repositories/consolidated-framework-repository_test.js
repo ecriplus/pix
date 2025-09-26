@@ -289,12 +289,14 @@ describe('Certification | Configuration | Integration | Repository | consolidate
           discriminant: firstCalibratedCertificationFrameworksChallenge.discriminant,
           difficulty: firstCalibratedCertificationFrameworksChallenge.difficulty,
           calibrationId: consolidatedFramework.calibrationId,
+          versionId: null,
         },
         {
           ...secondCertificationFrameworksChallenge,
           discriminant: secondCalibratedCertificationFrameworksChallenge.discriminant,
           difficulty: secondCalibratedCertificationFrameworksChallenge.difficulty,
           calibrationId: consolidatedFramework.calibrationId,
+          versionId: null,
         },
       ];
 
