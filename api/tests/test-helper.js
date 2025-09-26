@@ -123,7 +123,6 @@ function toStream(data, encoding = 'utf8') {
  * @param {number} params.userId
  * @param {string} params.source
  * @param {string} params.audience
- * @param {string} params.acceptLanguage
  * @param {string} params.locale
  * @returns {Object} Header
  */
@@ -131,7 +130,6 @@ function generateAuthenticatedUserRequestHeaders({
   userId = 1234,
   source = 'pix',
   audience = 'https://app.pix.org',
-  acceptLanguage,
   locale = 'fr-FR',
 } = {}) {
   const url = new URL(audience);
@@ -144,7 +142,6 @@ function generateAuthenticatedUserRequestHeaders({
     'x-forwarded-proto': protoHeader,
     'x-forwarded-host': hostHeader,
     cookie: `locale=${locale}`,
-    ...(acceptLanguage && { 'accept-language': acceptLanguage }),
   };
 }
 
