@@ -18,6 +18,7 @@ export async function save(chat) {
     id: chatId,
     assessmentId,
     challengeId,
+    configurationId: configId,
     configuration: configContent,
     moduleId,
     passageId,
@@ -28,23 +29,27 @@ export async function save(chat) {
   const startedAt = new Date();
   const updatedAt = new Date();
 
-  await knexConn('chats').insert({
-    id: chatId,
-    assessmentId,
-    challengeId,
-    configContent,
-    hasAttachmentContextBeenAdded,
-    moduleId,
-    passageId,
-    startedAt,
-    totalInputTokens,
-    totalOutputTokens,
-    updatedAt,
-  });
+  await knexConn('chats')
+    .insert({
+      id: chatId,
+      assessmentId,
+      challengeId,
+      configContent,
+      configId,
+      hasAttachmentContextBeenAdded,
+      moduleId,
+      passageId,
+      startedAt,
+      totalInputTokens,
+      totalOutputTokens,
+      updatedAt,
+    })
+    .onConflict(['id'])
+    .merge(['hasAttachmentContextBeenAdded', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
 
   for (const [index, message] of chatDTO.messages.entries()) {
     const databaseMessage = _buildDatabaseMessage({ chatId, index: index + 1, message });
-    await knexConn('chat_messages').insert(databaseMessage);
+    await knexConn('chat_messages').insert(databaseMessage).onConflict(['chatId', 'index']).ignore();
   }
 }
 
