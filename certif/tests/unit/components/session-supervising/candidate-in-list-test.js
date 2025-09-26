@@ -151,4 +151,54 @@ module('Unit | Component | session-supervising/candidate-in-list', function (hoo
       });
     });
   });
+
+  module('formattedBirthdate', function () {
+    test('it should format birthdate from YYYY-MM-DD to DD/MM/YYYY', function (assert) {
+      // given
+      const component = createGlimmerComponent('component:session-supervising/candidate-in-list');
+      component.args.candidate = { birthdate: '1984-05-28' };
+
+      // when
+      const result = component.formattedBirthdate;
+
+      // then
+      assert.strictEqual(result, '28/05/1984');
+    });
+
+    test('it should return empty string when birthdate is null', function (assert) {
+      // given
+      const component = createGlimmerComponent('component:session-supervising/candidate-in-list');
+      component.args.candidate = { birthdate: null };
+
+      // when
+      const result = component.formattedBirthdate;
+
+      // then
+      assert.strictEqual(result, '');
+    });
+
+    test('it should return empty string when birthdate is undefined', function (assert) {
+      // given
+      const component = createGlimmerComponent('component:session-supervising/candidate-in-list');
+      component.args.candidate = { birthdate: undefined };
+
+      // when
+      const result = component.formattedBirthdate;
+
+      // then
+      assert.strictEqual(result, '');
+    });
+
+    test('it should return empty string when birthdate is empty string', function (assert) {
+      // given
+      const component = createGlimmerComponent('component:session-supervising/candidate-in-list');
+      component.args.candidate = { birthdate: '' };
+
+      // when
+      const result = component.formattedBirthdate;
+
+      // then
+      assert.strictEqual(result, '');
+    });
+  });
 });
