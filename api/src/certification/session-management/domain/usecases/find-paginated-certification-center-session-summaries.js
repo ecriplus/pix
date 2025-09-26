@@ -7,8 +7,8 @@ const findPaginatedCertificationCenterSessionSummaries = async function ({
   sessionSummaryRepository,
   userRepository,
 }) {
-  const user = await userRepository.getWithCertificationCenterMemberships(userId);
-  if (!user.hasAccessToCertificationCenter(certificationCenterId)) {
+  const hasAccess = await userRepository.isUserAllowedToAccessCertificationCenter(userId, certificationCenterId);
+  if (!hasAccess) {
     throw new ForbiddenAccess(`User ${userId} is not a member of certification center ${certificationCenterId}`);
   }
 

@@ -50,7 +50,6 @@ describe('Unit | Identity Access Management | Serializer | JSONAPI | user-for-ad
             },
             relationships: {
               memberships: {},
-              'certification-center-memberships': {},
               'pix-score': {},
               profile: {
                 links: {

@@ -6,7 +6,7 @@ import * as localeService from '../../../shared/domain/services/locale-service.j
 import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/date-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 
-const { toLower, isNil } = lodash;
+const { toLower } = lodash;
 
 class User {
   constructor(
@@ -33,7 +33,6 @@ class User {
       locale,
       isAnonymous,
       memberships = [],
-      certificationCenterMemberships = [],
       pixScore,
       scorecards = [],
       updatedAt,
@@ -68,7 +67,6 @@ class User {
     this.isAnonymous = isAnonymous;
     this.pixScore = pixScore;
     this.memberships = memberships;
-    this.certificationCenterMemberships = certificationCenterMemberships;
     this.scorecards = scorecards;
     this.updatedAt = updatedAt;
     this.campaignParticipations = campaignParticipations;
@@ -120,20 +118,8 @@ class User {
     return this.memberships.length > 0;
   }
 
-  isLinkedToCertificationCenters() {
-    return this.certificationCenterMemberships.length > 0;
-  }
-
   hasAccessToOrganization(organizationId) {
     return this.memberships.some((membership) => membership.organization.id === organizationId);
-  }
-
-  hasAccessToCertificationCenter(certificationCenterId) {
-    return this.certificationCenterMemberships.some(
-      (certificationCenterMembership) =>
-        certificationCenterMembership.certificationCenter.id === certificationCenterId &&
-        isNil(certificationCenterMembership.disabledAt),
-    );
   }
 
   markEmailAsValid() {

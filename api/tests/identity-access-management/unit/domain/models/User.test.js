@@ -190,32 +190,6 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
     });
   });
 
-  describe('isLinkedToCertificationCenters', function () {
-    it('should be true if user has a role in a certification center', function () {
-      // given
-      const user = domainBuilder.buildUser({
-        certificationCenterMemberships: [domainBuilder.buildCertificationCenterMembership()],
-      });
-
-      // when
-      const isLinked = user.isLinkedToCertificationCenters();
-
-      // then
-      expect(isLinked).to.be.true;
-    });
-
-    it('should be false if user has no role in certification center', function () {
-      // given
-      const user = new User(undefined);
-
-      // when
-      const isLinked = user.isLinkedToCertificationCenters();
-
-      // then
-      expect(isLinked).to.be.false;
-    });
-  });
-
   describe('hasAccessToOrganization', function () {
     it('should be false is user has no access to no organizations', function () {
       // given
@@ -255,67 +229,6 @@ describe('Unit | Identity Access Management | Domain | Model | User', function (
 
       //then
       expect(hasAccess).to.be.true;
-    });
-  });
-
-  describe('hasAccessToCertificationCenter', function () {
-    it('should be false if user has no access to given certification center', function () {
-      // given
-      const user = new User(undefined);
-      const certificationCenterId = 12345;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      // then
-      expect(hasAccess).to.be.false;
-    });
-
-    it('should be false if user has access to many CertificationCenters, but not the given one', function () {
-      // given
-      const certificationCenterId = 12345;
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships.push(domainBuilder.buildCertificationCenterMembership());
-      user.certificationCenterMemberships[0].certificationCenter.id = 93472;
-      user.certificationCenterMemberships[1].certificationCenter.id = 74569;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.false;
-    });
-
-    it('should be true if the user has an access to the given CertificationCenterId', function () {
-      // given
-      const certificationCenterId = 12345;
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships[0].certificationCenter.id = 12345;
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.true;
-    });
-
-    it('should be false if the user has a disabled access to the given CertificationCenterId', function () {
-      // given
-      const certificationCenterId = 12345;
-      const now = new Date();
-      const user = domainBuilder.buildUser();
-      user.certificationCenterMemberships = [
-        domainBuilder.buildCertificationCenterMembership({
-          certificationCenter: { id: certificationCenterId },
-          disabledAt: now,
-        }),
-      ];
-
-      // when
-      const hasAccess = user.hasAccessToCertificationCenter(certificationCenterId);
-
-      //then
-      expect(hasAccess).to.be.false;
     });
   });
 

@@ -5,7 +5,6 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | UseCase | create-session', function () {
   let centerRepository;
   let sessionRepository;
-  let userWithMemberships;
   const userId = 'userId';
   const certificationCenterId = 123;
   const certificationCenterName = 'certificationCenterName';
@@ -14,7 +13,6 @@ describe('Unit | UseCase | create-session', function () {
   beforeEach(function () {
     centerRepository = { getById: sinon.stub() };
     sessionRepository = { save: sinon.stub() };
-    userWithMemberships = { hasAccessToCertificationCenter: sinon.stub() };
   });
 
   describe('#save', function () {
@@ -47,10 +45,8 @@ describe('Unit | UseCase | create-session', function () {
         accessCode = Symbol('accessCode');
         sessionValidatorStub = { validate: sinon.stub().returns() };
         sessionCodeServiceStub = { getNewSessionCode: sinon.stub().returns(accessCode) };
-        userWithMemberships.hasAccessToCertificationCenter = sinon.stub();
         centerRepository.getById = sinon.stub();
         sessionRepository.save = sinon.stub();
-        userWithMemberships.hasAccessToCertificationCenter.withArgs(certificationCenterId).returns(true);
         sessionRepository.save.resolves();
       });
 

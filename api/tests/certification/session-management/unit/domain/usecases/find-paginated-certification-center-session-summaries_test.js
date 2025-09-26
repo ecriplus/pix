@@ -1,6 +1,6 @@
 import { findPaginatedCertificationCenterSessionSummaries } from '../../../../../../src/certification/session-management/domain/usecases/find-paginated-certification-center-session-summaries.js';
 import { ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | find-paginated-certification-center-session-summaries', function () {
   const sessionSummaryRepository = {
@@ -8,25 +8,18 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
   };
 
   const userRepository = {
-    getWithCertificationCenterMemberships: () => undefined,
+    isUserAllowedToAccessCertificationCenter: () => undefined,
   };
 
   beforeEach(function () {
     sessionSummaryRepository.findPaginatedByCertificationCenterId = sinon.stub();
-    userRepository.getWithCertificationCenterMemberships = sinon.stub();
+    userRepository.isUserAllowedToAccessCertificationCenter = sinon.stub();
   });
 
   context('when user is not a member of the certification center', function () {
     it('should throw a Forbidden Access error', async function () {
       // given
-      const user = domainBuilder.buildUser();
-      const certificationCenter = domainBuilder.buildCertificationCenter({ id: 789 });
-      const certificationCenterMembership = domainBuilder.buildCertificationCenterMembership({
-        user,
-        certificationCenter,
-      });
-      user.certificationCenterMemberships = [certificationCenterMembership];
-      userRepository.getWithCertificationCenterMemberships.withArgs(123).resolves(user);
+      userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(false);
       sessionSummaryRepository.findPaginatedByCertificationCenterId.rejects(new Error('should not be called'));
 
       // when
@@ -47,14 +40,7 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
   context('when user is a member of the certification center', function () {
     it('should return session summaries', async function () {
       // given
-      const user = domainBuilder.buildUser();
-      const certificationCenter = domainBuilder.buildCertificationCenter({ id: 456 });
-      const certificationCenterMembership = domainBuilder.buildCertificationCenterMembership({
-        user,
-        certificationCenter,
-      });
-      user.certificationCenterMemberships = [certificationCenterMembership];
-      userRepository.getWithCertificationCenterMemberships.withArgs(123).resolves(user);
+      userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(true);
       const sessionSummaries = Symbol('session-summaries');
       const meta = Symbol('meta');
       sessionSummaryRepository.findPaginatedByCertificationCenterId
