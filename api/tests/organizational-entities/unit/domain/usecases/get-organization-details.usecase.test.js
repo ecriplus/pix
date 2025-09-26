@@ -26,7 +26,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | get-organization-d
       // given
       const organizationId = 1234;
       const code = 'MINIPIXOU';
-      const foundOrganization = domainBuilder.buildOrganization({
+      const foundOrganization = domainBuilder.buildOrganizationForAdmin({
         id: organizationId,
         email: 'sco.generic.account@example.net',
         type: Organization.types.SCO1D,
