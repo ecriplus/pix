@@ -169,21 +169,18 @@ function generateInjectOptions({ url, method, payload, locale, audience, authori
  * @param {number} params.userId
  * @param {string} params.source
  * @param {string} params.audience - an origin URL, for example: https://app.pix.org
- * @param {string} params.locale
  * @returns {Object} headers
  */
 function generateAuthenticatedUserRequestHeaders({
   userId = 1234,
   source = 'pix',
   audience = 'https://app.pix.org',
-  locale = 'fr-FR',
 } = {}) {
   const accessToken = UserAccessToken.generateUserToken({ userId, source, audience }).accessToken;
 
   return {
     ...generateForwardedHeaders(audience),
     authorization: `Bearer ${accessToken}`,
-    cookie: `locale=${locale}`,
   };
 }
 
