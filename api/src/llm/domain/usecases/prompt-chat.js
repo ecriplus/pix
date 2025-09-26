@@ -86,8 +86,9 @@ export async function promptChat({
  */
 function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
   return async (streamCapture) => {
-    const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM;
-    const shouldBeForwardedToLLM = hasJustBeenSentToLLM && !streamCapture.wasModerated;
+    const hasErrorOccurredDuringStream = !!streamCapture.errorOccurredDuringStream;
+    const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM && !hasErrorOccurredDuringStream;
+    const shouldBeForwardedToLLM = hasJustBeenSentToLLM && !streamCapture.wasModerated && !hasErrorOccurredDuringStream;
     chat.addUserMessage(
       message,
       shouldBeCountedAsAPrompt,
@@ -95,7 +96,11 @@ function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
       streamCapture.haveVictoryConditionsBeenFulfilled,
       streamCapture.wasModerated,
     );
-    chat.addLLMMessage(streamCapture.LLMMessageParts.join(''));
+    chat.addLLMMessage(
+      streamCapture.LLMMessageParts.join(''),
+      !hasErrorOccurredDuringStream,
+      hasErrorOccurredDuringStream,
+    );
     chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
     await chatRepository.save(chat);
   };

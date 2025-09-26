@@ -86,17 +86,20 @@ export class Chat {
   }
 
   /**
-   * @param {string=} message
+   * @param {string} message
+   * @param {boolean} shouldBeForwardedToLLM
+   * @param {boolean} hasErrorOccurred
    */
-  addLLMMessage(message) {
+  addLLMMessage(message, shouldBeForwardedToLLM, hasErrorOccurred) {
     if (!message) return;
     this.messages.push(
       new Message({
         content: message,
         isFromUser: false,
-        shouldBeForwardedToLLM: true,
+        shouldBeForwardedToLLM,
         shouldBeRenderedInPreview: true,
         shouldBeCountedAsAPrompt: false,
+        hasErrorOccurred,
       }),
     );
   }
@@ -210,6 +213,7 @@ export class Message {
     hasAttachmentBeenSubmittedAlongWithAPrompt,
     haveVictoryConditionsBeenFulfilled,
     wasModerated,
+    hasErrorOccurred,
   }) {
     this.content = content;
     this.isFromUser = isFromUser;
@@ -221,6 +225,7 @@ export class Message {
     this.hasAttachmentBeenSubmittedAlongWithAPrompt = hasAttachmentBeenSubmittedAlongWithAPrompt;
     this.haveVictoryConditionsBeenFulfilled = haveVictoryConditionsBeenFulfilled;
     this.wasModerated = wasModerated;
+    this.hasErrorOccurred = hasErrorOccurred;
   }
 
   get isAttachment() {
@@ -254,6 +259,7 @@ export class Message {
       hasAttachmentBeenSubmittedAlongWithAPrompt: this.hasAttachmentBeenSubmittedAlongWithAPrompt,
       haveVictoryConditionsBeenFulfilled: this.haveVictoryConditionsBeenFulfilled,
       wasModerated: this.wasModerated,
+      hasErrorOccurred: this.hasErrorOccurred,
     };
   }
 

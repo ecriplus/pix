@@ -95,6 +95,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
           wasModerated: undefined,
+          hasErrorOccurred: undefined,
         },
         {
           content: 'un message pas vide',
@@ -107,6 +108,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: false,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -138,6 +140,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
           wasModerated: undefined,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -167,6 +170,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: false,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -196,6 +200,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: false,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -225,6 +230,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: true,
           wasModerated: false,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -254,6 +260,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: true,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -270,7 +277,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
 
       // when
-      chat.addLLMMessage('un message pas vide');
+      chat.addLLMMessage('un message pas vide', true);
 
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
@@ -285,6 +292,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
           wasModerated: undefined,
+          hasErrorOccurred: undefined,
         },
         {
           content: 'un message pas vide',
@@ -297,6 +305,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
           wasModerated: undefined,
+          hasErrorOccurred: undefined,
         },
       ]);
     });
@@ -311,9 +320,9 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       });
 
       // when
-      chat.addLLMMessage('');
-      chat.addLLMMessage(null);
-      chat.addLLMMessage();
+      chat.addLLMMessage('', true);
+      chat.addLLMMessage(null, true);
+      chat.addLLMMessage(undefined, true);
 
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
@@ -328,6 +337,95 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
           haveVictoryConditionsBeenFulfilled: undefined,
           wasModerated: undefined,
+          hasErrorOccurred: undefined,
+        },
+      ]);
+    });
+
+    it('should set "shouldBeForwardedToLLM" to the value passed in parameter', function () {
+      // given
+      const chat = new Chat({
+        id: 'some-chat-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+
+      // when
+      chat.addLLMMessage('message1', true);
+      chat.addLLMMessage('message2', false);
+
+      // then
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'message1',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+          hasErrorOccurred: undefined,
+        },
+        {
+          content: 'message2',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: false,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+          hasErrorOccurred: undefined,
+        },
+      ]);
+    });
+
+    it('should set "hasErrorOccurred" to the value passed in parameter', function () {
+      // given
+      const chat = new Chat({
+        id: 'some-chat-id',
+        configuration: new Configuration({ id: 'some-config-id' }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+
+      // when
+      chat.addLLMMessage('message1', true, true);
+      chat.addLLMMessage('message2', true, false);
+
+      // then
+      expect(chat.toDTO()).to.have.deep.property('messages', [
+        {
+          content: 'message1',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+          hasErrorOccurred: true,
+        },
+        {
+          content: 'message2',
+          attachmentName: undefined,
+          attachmentContext: undefined,
+          isFromUser: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeRenderedInPreview: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
+          haveVictoryConditionsBeenFulfilled: undefined,
+          wasModerated: undefined,
+          hasErrorOccurred: false,
         },
       ]);
     });
@@ -373,6 +471,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -385,6 +484,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -397,6 +497,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -409,6 +510,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -450,6 +552,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -462,6 +565,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -474,6 +578,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -486,6 +591,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -530,6 +636,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -542,6 +649,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -554,6 +662,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -595,6 +704,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -607,6 +717,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -619,6 +730,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -665,6 +777,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -677,6 +790,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -689,6 +803,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -730,6 +845,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -742,6 +858,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -754,6 +871,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -798,6 +916,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -810,6 +929,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -822,6 +942,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -863,6 +984,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: 'some answer',
@@ -875,6 +997,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
               {
                 content: undefined,
@@ -887,6 +1010,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                 haveVictoryConditionsBeenFulfilled: undefined,
                 wasModerated: undefined,
+                hasErrorOccurred: undefined,
               },
             ]);
           });
@@ -1254,6 +1378,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'message llm 1',
@@ -1266,6 +1391,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
           ],
         });
@@ -1328,6 +1454,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
             {
               content: 'message llm 1',
@@ -1340,6 +1467,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
               haveVictoryConditionsBeenFulfilled: undefined,
               wasModerated: undefined,
+              hasErrorOccurred: undefined,
             },
           ],
         });
@@ -1375,6 +1503,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             shouldBeCountedAsAPrompt: false,
             shouldBeRenderedInPreview: true,
             shouldBeForwardedToLLM: true,
+            hasErrorOccurred: true,
           }),
           new Message({
             attachmentName: 'file.txt',
@@ -1422,6 +1551,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: true,
+            hasErrorOccurred: undefined,
           },
           {
             content: 'message llm 1',
@@ -1434,6 +1564,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: true,
           },
           {
             content: undefined,
@@ -1446,6 +1577,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasAttachmentBeenSubmittedAlongWithAPrompt: false,
             haveVictoryConditionsBeenFulfilled: true,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
           {
             content: undefined,
@@ -1458,6 +1590,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasAttachmentBeenSubmittedAlongWithAPrompt: undefined,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
         ],
       });

@@ -343,6 +343,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
@@ -471,6 +472,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   shouldBeRenderedInPreview: true,
                   shouldBeForwardedToLLM: true,
                   shouldBeCountedAsAPrompt: false,
+                  hasErrorOccurred: false,
                 },
               ],
             });
@@ -707,6 +709,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeRenderedInPreview: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -993,6 +996,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -1143,6 +1147,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeRenderedInPreview: true,
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
+                      hasErrorOccurred: false,
                     },
                   ],
                 });
@@ -1778,6 +1783,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
             },
           ],
         });
@@ -1893,6 +1899,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
               shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
             },
           ],
         });
@@ -2096,6 +2103,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
@@ -2207,12 +2215,139 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeRenderedInPreview: true,
                 shouldBeForwardedToLLM: true,
                 shouldBeCountedAsAPrompt: false,
+                hasErrorOccurred: false,
               },
             ],
           });
           expect(llmPostPromptScope.isDone()).to.be.true;
         });
       });
+    });
+  });
+
+  context('when an error occurs in stream', function () {
+    let configuration;
+    const configurationId = 'uneConfigQuiExist';
+
+    beforeEach(function () {
+      configuration = new Configuration({
+        llm: {
+          historySize: 123,
+        },
+        challenge: {
+          inputMaxPrompts: 100,
+          inputMaxChars: 255,
+        },
+      });
+    });
+
+    it('should return a stream which will contain the partial llm response and the error', async function () {
+      // given
+      const chat = new Chat({
+        id: 'chatId',
+        userId: 123,
+        configurationId,
+        configuration,
+        hasAttachmentContextBeenAdded: false,
+        messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+      });
+      await chatTemporaryStorage.save({
+        key: chat.id,
+        value: chat.toDTO(),
+        expirationDelaySeconds: ms('24h'),
+      });
+      const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+        .post('/chat', {
+          configuration: {
+            llm: {
+              historySize: 123,
+            },
+            challenge: {
+              inputMaxPrompts: 100,
+              inputMaxChars: 255,
+            },
+          },
+          history: [
+            { content: 'coucou user1', role: 'user' },
+            { content: 'coucou LLM1', role: 'assistant' },
+          ],
+          prompt: 'un message',
+        })
+        .reply(
+          201,
+          Readable.from([
+            '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+            '40:{"message":"\\nle couscous c plutot bon"}35:{"error":"une erreur est survenue"}',
+          ]),
+        );
+
+      // when
+      const stream = await promptChat({
+        chatId: 'chatId',
+        userId: 123,
+        message: 'un message',
+        attachmentName: null,
+        ...dependencies,
+      });
+
+      // then
+      const parts = [];
+      const decoder = new TextDecoder();
+      for await (const chunk of stream) {
+        parts.push(decoder.decode(chunk));
+      }
+      const llmResponse = parts.join('');
+      expect(llmResponse).to.deep.equal(
+        "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\nevent: error\ndata: \n\n",
+      );
+      expect(await chatTemporaryStorage.get('chatId')).to.deep.equal({
+        id: 'chatId',
+        userId: 123,
+        configurationId: 'uneConfigQuiExist',
+        configuration: {
+          llm: {
+            historySize: 123,
+          },
+          challenge: {
+            inputMaxPrompts: 100,
+            inputMaxChars: 255,
+          },
+        },
+        hasAttachmentContextBeenAdded: false,
+        messages: [
+          {
+            content: 'coucou user1',
+            isFromUser: true,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: true,
+          },
+          {
+            content: 'coucou LLM1',
+            isFromUser: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: true,
+            shouldBeCountedAsAPrompt: false,
+          },
+          {
+            content: 'un message',
+            isFromUser: true,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: false,
+            shouldBeCountedAsAPrompt: false,
+            wasModerated: false,
+          },
+          {
+            content: "coucou c'est super\nle couscous c plutot bon",
+            isFromUser: false,
+            shouldBeRenderedInPreview: true,
+            shouldBeForwardedToLLM: false,
+            shouldBeCountedAsAPrompt: false,
+            hasErrorOccurred: true,
+          },
+        ],
+      });
+      expect(llmPostPromptScope.isDone()).to.be.true;
     });
   });
 });

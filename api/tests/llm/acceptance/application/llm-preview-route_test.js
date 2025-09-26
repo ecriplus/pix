@@ -273,7 +273,7 @@ describe('Acceptance | Route | llm-preview', function () {
           totalOutputTokens: 5_000,
           messages: [
             { content: 'coucou user1', isFromUser: true, shouldBeRenderedInPreview: true },
-            { content: 'coucou LLM1', isFromUser: false, shouldBeRenderedInPreview: true },
+            { content: 'coucou LLM1', isFromUser: false, shouldBeRenderedInPreview: true, hasErrorOccurred: true },
             {
               attachmentName: 'expected_file.txt',
               isFromUser: true,
@@ -326,6 +326,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
           {
             content: 'coucou LLM1',
@@ -334,6 +335,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: true,
           },
           {
             content: 'un message',
@@ -342,6 +344,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isAttachmentValid: true,
             haveVictoryConditionsBeenFulfilled: true,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
@@ -350,6 +353,7 @@ describe('Acceptance | Route | llm-preview', function () {
             isAttachmentValid: false,
             haveVictoryConditionsBeenFulfilled: undefined,
             wasModerated: undefined,
+            hasErrorOccurred: undefined,
           },
         ],
       });
