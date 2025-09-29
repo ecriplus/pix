@@ -17,12 +17,14 @@ export async function get(chatId) {
   const chatDTO = await knexConn('chats').where({ id: chatId }).first();
   if (!chatDTO) return null;
   const messageDTOs = await knexConn('chat_messages').where({ chatId });
-  return toDomain({
-    ...chatDTO,
-    configurationId: chatDTO.configId,
-    configuration: chatDTO.configContent,
-    messages: messageDTOs,
-  });
+  return toDomain(
+    {
+      ...chatDTO,
+      configurationId: chatDTO.configId,
+      configuration: chatDTO.configContent,
+    },
+    messageDTOs,
+  );
 }
 
 /**
@@ -118,6 +120,13 @@ function _buildDatabaseMessage({ chatId, message }) {
   };
 }
 
-function toDomain(chatDTO) {
-  return Chat.fromDTO(chatDTO);
+function toDomain(chatDTO, messageDTOs) {
+  const messages = messageDTOs.map((messageDTO) => ({
+    ...messageDTO,
+    isFromUser: messageDTO.emitter === 'user',
+  }));
+  return Chat.fromDTO({
+    ...chatDTO,
+    messages,
+  });
 }

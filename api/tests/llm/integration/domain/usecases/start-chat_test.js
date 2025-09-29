@@ -6,7 +6,7 @@ import {
   configurationRepository,
 } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { expect, nock, sinon } from '../../../../test-helper.js';
+import { expect, nock } from '../../../../test-helper.js';
 
 const chatTemporaryStorage = temporaryStorage.withPrefix(chatRedisRepository.CHAT_STORAGE_PREFIX);
 
@@ -19,7 +19,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
     let randomUUID;
 
     beforeEach(async function () {
-      randomUUID = sinon.stub().returns('123e4567-e89b-12d3-a456-426614174000');
+      randomUUID = () => '123e4567-e89b-12d3-a456-426614174000';
     });
 
     context('when config object provided', function () {
