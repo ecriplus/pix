@@ -430,14 +430,14 @@
       "item": {
         "complementary-certification": "Complementary certification",
         "framework": {
-          "create-button": "Create a new consolidated framework",
+          "create-button": "Create a new certification framework",
           "creation-form": {
-            "submit-button": "Submit the new consolidated framework",
-            "success-notification": "The new framework has been successfully created.",
-            "title": "Creating a new consolidated framework for {complementaryCertificationLabel}"
+            "submit-button": "Submit the new certification framework",
+            "success-notification": "The new certification framework has been successfully created.",
+            "title": "Creating a new certification framework for {complementaryCertificationLabel}"
           },
           "details": {
-            "title": "Current consolidated framework details"
+            "title": "Current certification framework details"
           },
           "history": {
             "table": {
@@ -445,8 +445,8 @@
             },
             "title": "Framework versions history"
           },
-          "no-current-framework": "No consolidated framework is currently used.",
-          "tab": "Consolidated framework"
+          "no-current-framework": "No certification framework is currently used.",
+          "tab": "Certification framework"
         },
         "navigation": {
           "aria-label": "Navigation of the complementary certification section"
