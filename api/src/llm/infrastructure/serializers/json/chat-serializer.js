@@ -14,6 +14,7 @@ export function serialize(chat) {
 
     if (current.hasAttachmentBeenSubmittedAlongWithAPrompt) {
       const mergedMessage = new Message({
+        index: i,
         content: next.content,
         attachmentName: current.attachmentName,
         isFromUser: true,

@@ -24,11 +24,13 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
         totalOutputTokens: 5_000,
         messages: [
           new Message({
+            index: 0,
             content: 'Salut',
             isFromUser: true,
             shouldBeRenderedInPreview: true,
           }),
           new Message({
+            index: 1,
             content: 'Bonjour comment puis-je vous aider ?',
             isFromUser: false,
             shouldBeRenderedInPreview: true,
@@ -93,6 +95,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           totalOutputTokens: 5_000,
           messages: [
             new Message({
+              index: 0,
               content: 'Salut',
               isFromUser: true,
               shouldBeRenderedInPreview: false,
@@ -100,6 +103,7 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               wasModerated: true,
             }),
             new Message({
+              index: 1,
               content: 'Bonjour comment puis-je vous aider ?',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -157,13 +161,15 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           totalInputTokens: 2_000,
           totalOutputTokens: 5_000,
           messages: [
-            new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
+            new Message({ index: 0, content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
+              index: 1,
               content: 'Bonjour comment puis-je vous aider ?',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 2,
               attachmentName: 'chien.webp',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -171,22 +177,31 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
+              index: 3,
               content: 'i should not be serialized',
               shouldBeRenderedInPreview: false,
             }),
-            new Message({ content: 'Que contient ce fichier ?', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
+              index: 4,
+              content: 'Que contient ce fichier ?',
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+            }),
+            new Message({
+              index: 5,
               content: 'Le fichier contient la photo d’un ours',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 6,
               attachmentName: 'chat.webp',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               hasAttachmentBeenSubmittedAlongWithAPrompt: true,
             }),
             new Message({
+              index: 7,
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -280,13 +295,15 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
           totalInputTokens: 2_000,
           totalOutputTokens: 5_000,
           messages: [
-            new Message({ content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
+            new Message({ index: 0, content: 'Salut', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
+              index: 1,
               content: 'Bonjour comment puis-je vous aider ?',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 2,
               attachmentName: 'chien.webp',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -294,22 +311,31 @@ describe('LLM | Unit | Infrastructure | Serializers | Chat', function () {
               haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
+              index: 3,
               content: 'i should not be serialized',
               shouldBeRenderedInPreview: false,
             }),
-            new Message({ content: 'Que contient ce fichier ?', isFromUser: true, shouldBeRenderedInPreview: true }),
             new Message({
+              index: 4,
+              content: 'Que contient ce fichier ?',
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+            }),
+            new Message({
+              index: 5,
               content: 'Le fichier contient la photo d’un ours',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 6,
               attachmentName: 'chat.webp',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
               hasAttachmentBeenSubmittedAlongWithAPrompt: false,
             }),
             new Message({
+              index: 7,
               content: 'tu veux bien lire ce fichier avec un chat dedans ?',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
