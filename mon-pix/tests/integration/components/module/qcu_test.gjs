@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -222,6 +223,26 @@ module('Integration | Component | Module | QCU', function (hooks) {
 
     // then
     assert.dom(screen.queryByRole('button', { name: 'Réessayer' })).doesNotExist();
+  });
+
+  module('when preview mode is enabled', function () {
+    test('should display all feedbacks, without answering', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+      const qcuElement = _getQcuElement();
+
+      // when
+      const screen = await render(<template><ModulixQcu @element={{qcuElement}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('Correct!')).exists();
+      assert.dom(screen.getByText('Good job!')).exists();
+      assert.dom(screen.getByText('Wrong!')).exists();
+      assert.dom(screen.getByText('Try again!')).exists();
+    });
   });
 });
 

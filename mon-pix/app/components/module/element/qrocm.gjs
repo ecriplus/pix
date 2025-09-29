@@ -18,6 +18,7 @@ export default class ModuleQrocm extends ModuleElement {
   @tracked currentCorrection;
   @service passageEvents;
   @service qrocmSolutionVerification;
+  @service modulixPreviewMode;
 
   constructor() {
     super(...arguments);
@@ -120,6 +121,18 @@ export default class ModuleQrocm extends ModuleElement {
     };
   }
 
+  get previewFeedbacks() {
+    const feedbacks = [];
+    for (const [key, value] of Object.entries(this.element.feedbacks)) {
+      feedbacks.push({ status: key, ...value });
+    }
+    return feedbacks;
+  }
+
+  isValidFeedbackForPreview(feedback) {
+    return feedback.status === 'valid';
+  }
+
   <template>
     <form
       class="element-qrocm"
@@ -220,6 +233,16 @@ export default class ModuleQrocm extends ModuleElement {
           <ModulixFeedback @answerIsValid={{this.answerIsValid}} @feedback={{this.correction.feedback}} />
         {{/if}}
       </div>
+
+      {{#if this.modulixPreviewMode.isEnabled}}
+        <div role="status" tabindex="-1">
+          {{#each this.previewFeedbacks as |feedback|}}
+            <div class="element-qrocm__feedback">
+              <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
 
       {{#if this.shouldDisplayRetryButton}}
         <PixButton

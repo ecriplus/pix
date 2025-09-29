@@ -16,6 +16,7 @@ export const VERIFY_RESPONSE_DELAY = 500;
 
 export default class ModuleQcm extends ModuleElement {
   @service passageEvents;
+  @service modulixPreviewMode;
 
   @tracked isAnswering = false;
   @tracked currentCorrection;
@@ -106,6 +107,18 @@ export default class ModuleQcm extends ModuleElement {
     return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
+  get previewFeedbacks() {
+    const feedbacks = [];
+    for (const [key, value] of Object.entries(this.element.feedbacks)) {
+      feedbacks.push({ status: key, ...value });
+    }
+    return feedbacks;
+  }
+
+  isValidFeedbackForPreview(feedback) {
+    return feedback.status === 'valid';
+  }
+
   <template>
     <form class="element-qcm" aria-describedby="instruction-{{this.element.id}}">
       <fieldset>
@@ -160,6 +173,16 @@ export default class ModuleQcm extends ModuleElement {
           <ModulixFeedback @answerIsValid={{this.answerIsValid}} @feedback={{this.correction.feedback}} />
         {{/if}}
       </div>
+
+      {{#if this.modulixPreviewMode.isEnabled}}
+        <div role="status" tabindex="-1">
+          {{#each this.previewFeedbacks as |feedback|}}
+            <div class="element-qcm__feedback">
+              <ModulixFeedback @answerIsValid={{this.isValidFeedbackForPreview feedback}} @feedback={{feedback}} />
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
 
       {{#if this.shouldDisplayRetryButton}}
         <PixButton
