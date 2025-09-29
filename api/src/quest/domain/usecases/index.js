@@ -17,6 +17,7 @@ const dependencies = {
   campaignRepository: repositories.campaignRepository,
   userRepository: repositories.userRepository,
   targetProfileRepository: repositories.targetProfileRepository,
+  organizationLearnerPassageParticipationRepository: repositories.organizationLearnerPassageParticipationRepository,
   codeGenerator,
   logger,
 };

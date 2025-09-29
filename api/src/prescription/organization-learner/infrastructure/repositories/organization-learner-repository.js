@@ -40,7 +40,8 @@ function _buildIsCertifiable(queryBuilder, organizationLearnerId) {
 }
 
 async function get({ organizationLearnerId }) {
-  const row = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const row = await knexConn
     .with('subquery', (qb) => _buildIsCertifiable(qb, organizationLearnerId))
     .select(
       'view-active-organization-learners.id',
@@ -58,6 +59,7 @@ async function get({ organizationLearnerId }) {
       knex.raw('array_remove(ARRAY_AGG(features.key), NULL) as features'),
       'users.email',
       'users.username',
+      'users.id AS userId',
     )
     .from('view-active-organization-learners')
     .where('view-active-organization-learners.id', organizationLearnerId)

@@ -8,6 +8,7 @@ const StatusesEnumValues = Object.freeze({
 });
 
 class UserModuleStatus {
+  #referencePassage;
   constructor({ userId, moduleId, passages }) {
     assertNotNullOrUndefined(userId, 'The userId is required for a UserModuleStatus');
     assertNotNullOrUndefined(moduleId, 'The moduleId is required for a UserModuleStatus');
@@ -18,21 +19,23 @@ class UserModuleStatus {
 
     this.#assertAllPassageHaveTheSameUserAndModuleId(passages);
     this.passages = passages;
-    this.status = this.computeStatus();
+    this.#referencePassage = this.#getReferencePassage();
+
+    this.status = this.#computeStatus();
+
+    this.createdAt = this.#referencePassage?.createdAt ?? null;
+    this.updatedAt = this.#referencePassage?.updatedAt ?? null;
+    this.terminatedAt = this.#referencePassage?.terminatedAt ?? null;
   }
 
-  computeStatus() {
-    if (this.passages.length === 0) {
+  #computeStatus() {
+    if (!this.#referencePassage) {
       return StatusesEnumValues.NOT_STARTED;
     }
 
-    const hasTerminatedPassage = this.#hasTerminatedPassage(this.passages);
+    const hasTerminatedPassage = Boolean(this.#referencePassage.terminatedAt);
 
-    if (!hasTerminatedPassage) {
-      return StatusesEnumValues.IN_PROGRESS;
-    } else {
-      return StatusesEnumValues.COMPLETED;
-    }
+    return hasTerminatedPassage ? StatusesEnumValues.COMPLETED : StatusesEnumValues.IN_PROGRESS;
   }
 
   #assertAllPassageHaveTheSameUserAndModuleId(passages) {
@@ -43,9 +46,17 @@ class UserModuleStatus {
     }
   }
 
-  #hasTerminatedPassage(passages) {
-    return passages.some((passage) => passage.terminatedAt);
+  #getReferencePassage() {
+    const sortedPassages = this.passages.toSorted((a, b) => {
+      if (a.terminatedAt && b.terminatedAt) return b.terminatedAt - a.terminatedAt;
+      if (a.terminatedAt && !b.terminatedAt) return -1;
+      if (!a.terminatedAt && b.terminatedAt) return 1;
+
+      return b.updatedAt - a.updatedAt;
+    });
+
+    return sortedPassages[0];
   }
 }
 
-export { UserModuleStatus };
+export { StatusesEnumValues, UserModuleStatus };

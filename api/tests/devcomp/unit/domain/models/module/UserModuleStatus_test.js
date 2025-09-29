@@ -1,26 +1,49 @@
+import dayjs from 'dayjs';
+
 import { UserModuleStatus } from '../../../../../../src/devcomp/domain/models/module/UserModuleStatus.js';
 import { Passage } from '../../../../../../src/devcomp/domain/models/Passage.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { catchErrSync, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', function () {
   let userId, moduleId, passages;
-  let now;
+  let clock;
 
   beforeEach(function () {
+    clock = sinon.useFakeTimers({ now: new Date('2024-05-01'), toFake: ['Date'] });
     userId = '1';
     moduleId = '66f6dea7-1bb3-4ec2-b33d-1c5e7bde3675';
-    now = new Date('2025-07-02T14:00:00Z');
+
     passages = [
       new Passage({
         id: 1,
         moduleId,
         userId,
-        createdAt: now,
-        updatedAt: now,
-        terminatedAt: now,
+        createdAt: dayjs().subtract('30', 'days').toDate(),
+        updatedAt: dayjs().subtract('20', 'days').toDate(),
+        terminatedAt: dayjs().subtract('20', 'days').toDate(),
+      }),
+      new Passage({
+        id: 2,
+        moduleId,
+        userId,
+        createdAt: dayjs().subtract('18', 'days').toDate(),
+        updatedAt: dayjs().subtract('17', 'days').toDate(),
+        terminatedAt: dayjs().subtract('15', 'days').toDate(),
+      }),
+      new Passage({
+        id: 3,
+        moduleId,
+        userId,
+        createdAt: dayjs().subtract('10', 'days').toDate(),
+        updatedAt: dayjs().subtract('5', 'days').toDate(),
+        terminatedAt: null,
       }),
     ];
+  });
+
+  afterEach(function () {
+    clock.restore();
   });
 
   it('should init and keep attributes', function () {
@@ -32,6 +55,9 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
     expect(userModuleStatus.passages).to.deep.equal(passages);
     expect(userModuleStatus.userId).to.equal(userId);
     expect(userModuleStatus.status).to.equal('COMPLETED');
+    expect(userModuleStatus.createdAt).deep.equal(dayjs().subtract('18', 'days').toDate());
+    expect(userModuleStatus.updatedAt).deep.equal(dayjs().subtract('17', 'days').toDate());
+    expect(userModuleStatus.terminatedAt).deep.equal(dayjs().subtract('15', 'days').toDate());
   });
 
   describe('if userId passed is not defined', function () {
@@ -96,9 +122,9 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
           id: 2,
           moduleId: otherModuleId,
           userId: otherUserId,
-          createdAt: now,
-          updatedAt: now,
-          terminatedAt: now,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          terminatedAt: new Date(),
         }),
       ];
 
@@ -121,54 +147,47 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
   describe('#computeStatus', function () {
     context('when passages is empty', function () {
       it('should return "NOT_STARTED"', function () {
-        // given
+        // given && when
         passages = [];
         const userModuleStatus = new UserModuleStatus({ userId, moduleId, passages });
 
-        // when
-        const status = userModuleStatus.computeStatus();
-
         // then
-        expect(status).to.equal('NOT_STARTED');
+        expect(userModuleStatus.status).to.equal('NOT_STARTED');
       });
     });
 
     describe('when passages passed are not empty', function () {
       context('when all passages do not have a "terminatedAt" attribute', function () {
         it('should return IN_PROGRESS', function () {
-          // given
-          const nowMinusOneHour = new Date(now.getTime() - 3600);
+          // given && when
           passages = [
             new Passage({
               id: 1,
               moduleId,
               userId,
-              createdAt: nowMinusOneHour,
-              updatedAt: nowMinusOneHour,
+              createdAt: dayjs().subtract('1', 'hour').toDate(),
+              updatedAt: dayjs().subtract('1', 'hour').toDate(),
               terminatedAt: null,
             }),
             new Passage({
               id: 2,
               moduleId,
               userId,
-              createdAt: now,
-              updatedAt: now,
+              createdAt: new Date(),
+              updatedAt: new Date(),
               terminatedAt: null,
             }),
           ];
           const userModuleStatus = new UserModuleStatus({ userId, moduleId, passages });
 
-          // when
-          const status = userModuleStatus.computeStatus();
-
           // then
-          expect(status).to.equal('IN_PROGRESS');
+          expect(userModuleStatus.status).to.equal('IN_PROGRESS');
         });
       });
       context('when a passage has a "terminatedAt" attribute', function () {
         it('should set the status attribute to COMPLETED', function () {
-          // given
-          const nowMinusOneHour = new Date(now.getTime() - 3600);
+          // given && when
+          const nowMinusOneHour = dayjs().subtract('1', 'hour').toDate();
           passages = [
             new Passage({
               id: 1,
@@ -182,18 +201,15 @@ describe('Unit | Devcomp | Domain | Models | Module | UserModuleStatus', functio
               id: 2,
               moduleId,
               userId,
-              createdAt: now,
-              updatedAt: now,
+              createdAt: new Date(),
+              updatedAt: new Date(),
               terminatedAt: null,
             }),
           ];
           const userModuleStatus = new UserModuleStatus({ userId, moduleId, passages });
 
-          // when
-          const status = userModuleStatus.computeStatus();
-
           // then
-          expect(status).to.equal('COMPLETED');
+          expect(userModuleStatus.status).to.equal('COMPLETED');
         });
       });
     });

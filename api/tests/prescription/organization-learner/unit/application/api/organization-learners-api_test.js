@@ -151,7 +151,7 @@ describe('Unit | API | Organization Learner', function () {
 
       // then
       expect(learner).to.be.instanceOf(OrganizationLearner);
-      expect(learner.division).to.equal(organizationLearner['Libellé classe']);
+      expect(learner.id).to.equal(1242);
     });
   });
 });

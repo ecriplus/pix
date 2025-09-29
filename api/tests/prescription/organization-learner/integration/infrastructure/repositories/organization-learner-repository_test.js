@@ -45,6 +45,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
         const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId: 1233 });
         expect(organizationLearner.id).to.equal(1233);
+        expect(organizationLearner.userId).to.equal(userId);
         expect(organizationLearner.firstName).to.equal('Dark');
         expect(organizationLearner.lastName).to.equal('Sasuke');
         expect(organizationLearner.division).to.equal('Alone');
