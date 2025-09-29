@@ -2,22 +2,21 @@ import { randomUUID } from 'node:crypto';
 
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
-  let clock, now;
-
-  beforeEach(function () {
-    clock = sinon.useFakeTimers(new Date('2025-09-26'));
-    now = new Date(clock.now);
-  });
-
-  afterEach(function () {
-    clock.restore();
-  });
-
   describe('#save', function () {
+    let clock, now;
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers(new Date('2025-09-26'));
+      now = new Date(clock.now);
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
     context('when there is no chats or messages existing in database with chat id passed in parameter', function () {
       it('should save the chat and messages correctly in database', async function () {
         // given
@@ -245,6 +244,145 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           wasModerated: null,
         });
       });
+    });
+  });
+
+  describe('#get', function () {
+    it('should return null when chat is not found', async function () {
+      // when
+      const chat = await get('someChatId');
+
+      // then
+      expect(chat).to.be.null;
+    });
+
+    it('should return the Chat model when chat is found', async function () {
+      // given
+      const chatId = databaseBuilder.factory.buildChat({
+        assessmentId: 123,
+        challengeId: 'recCHallengeA',
+        configId: 'someConfigId',
+        configContent: {
+          llm: {
+            outputMaxToken: 10,
+            historySize: 20,
+          },
+          challenge: {
+            victoryConditions: {
+              expectations: [
+                {
+                  type: 'answer_does_not_contain',
+                  value: 'saucisse',
+                },
+              ],
+            },
+          },
+        },
+        hasAttachmentContextBeenAdded: true,
+        moduleId: null,
+        passageId: null,
+        totalInputTokens: 1500,
+        totalOutputTokens: 2500,
+      }).id;
+      databaseBuilder.factory.buildChatMessage({
+        attachmentName: 'attachmentA',
+        attachmentContext: 'Je suis un poulet',
+        chatId,
+        content: 'Voici le fichier :',
+        emitter: 'user',
+        hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+        hasErrorOccurred: null,
+        haveVictoryConditionsBeenFulfilled: false,
+        index: 0,
+        shouldBeForwardedToLLM: true,
+        shouldBeRenderedInPreview: true,
+        shouldBeCountedAsPrompt: true,
+        wasModerated: false,
+      });
+      databaseBuilder.factory.buildChatMessage({
+        attachmentName: null,
+        attachmentContext: null,
+        chatId,
+        content: 'Les arc en ciels c super bo',
+        emitter: 'assistant',
+        hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+        hasErrorOccurred: null,
+        haveVictoryConditionsBeenFulfilled: true,
+        index: 1,
+        shouldBeForwardedToLLM: true,
+        shouldBeRenderedInPreview: true,
+        shouldBeCountedAsPrompt: false,
+        wasModerated: false,
+      });
+      databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
+      await databaseBuilder.commit();
+
+      // when
+      const chat = await get(chatId);
+
+      // then
+      expect(chat).to.deepEqualInstance(
+        new Chat({
+          id: chatId,
+          userId: undefined,
+          assessmentId: 123,
+          challengeId: 'recCHallengeA',
+          passageId: null,
+          moduleId: null,
+          configurationId: 'someConfigId',
+          configuration: new Configuration({
+            llm: {
+              outputMaxToken: 10,
+              historySize: 20,
+            },
+            challenge: {
+              victoryConditions: {
+                expectations: [
+                  {
+                    type: 'answer_does_not_contain',
+                    value: 'saucisse',
+                  },
+                ],
+              },
+            },
+          }),
+          messages: [
+            new Message({
+              attachmentName: 'attachmentA',
+              attachmentContext: 'Je suis un poulet',
+              chatId,
+              content: 'Voici le fichier :',
+              emitter: 'user',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
+              index: 0,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsPrompt: true,
+              wasModerated: false,
+            }),
+            new Message({
+              attachmentName: null,
+              attachmentContext: null,
+              chatId,
+              content: 'Les arc en ciels c super bo',
+              emitter: 'assistant',
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: true,
+              index: 1,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsPrompt: false,
+              wasModerated: false,
+            }),
+          ],
+          hasAttachmentContextBeenAdded: true,
+          totalInputTokens: 1500,
+          totalOutputTokens: 2500,
+        }),
+      );
     });
   });
 });

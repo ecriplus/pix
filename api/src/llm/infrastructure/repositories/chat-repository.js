@@ -1,8 +1,29 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { Chat } from '../../domain/models/Chat.js';
 
 /**
  * @typedef {import('../../domain/models/Chat').Message} Message
  */
+
+/**
+ * @function
+ * @name get
+ *
+ * @param {UUID} chatId
+ * @returns {Promise<Chat|null>}
+ */
+export async function get(chatId) {
+  const knexConn = DomainTransaction.getConnection();
+  const chatDTO = await knexConn('chats').where({ id: chatId }).first();
+  if (!chatDTO) return null;
+  const messageDTOs = await knexConn('chat_messages').where({ chatId });
+  return toDomain({
+    ...chatDTO,
+    configurationId: chatDTO.configId,
+    configuration: chatDTO.configContent,
+    messages: messageDTOs,
+  });
+}
 
 /**
  * @function
@@ -93,4 +114,8 @@ function _buildDatabaseMessage({ chatId, message }) {
     shouldBeCountedAsPrompt: shouldBeCountedAsAPrompt,
     wasModerated: wasModerated ?? null,
   };
+}
+
+function toDomain(chatDTO) {
+  return Chat.fromDTO(chatDTO);
 }
