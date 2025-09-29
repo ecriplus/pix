@@ -10,8 +10,8 @@
     "level": "independent",
     "objectives": [
       "<p>Repérer des biais ou des stéréotypes présents dans les contenus. </p>",
-      "<p>Expliquer comment une IA générative reproduit les biais présents dans les textes de son entraînement.</p>",
-      "<p>Utiliser l’IA en étant vigilant sur ses propres biais de confirmation.</p>"
+      "<p>Expliquer comment une IA générative reproduit les biais présents dans les données de son entraînement.</p>",
+      "<p>Utiliser l’IA en étant vigilant sur ses propres biais, comme le biais de confirmation.</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -75,7 +75,7 @@
               "element": {
                 "id": "1fa1fc4c-90c4-456c-bd19-f2b83ff07856",
                 "type": "text",
-                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde actuel.&nbsp;🌍</p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?</p>"
+                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde.&nbsp;🌍</p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?</p>"
               }
             }
           ]
@@ -164,7 +164,7 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux, ce qui peut introduire certains biais culturels. <br>C’est le cas ici avec l’expression « Tiers Monde », utilisée dans le passé par les pays occidentaux plus développés. Cette expression est problématique car elle traduit une vision hiérarchisée et centrée sur les pays riches occidentaux, et ne correspond pas à la manière dont les pays concernés souhaitent être décrits. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait réemployer le terme « Tiers Monde » et ainsi véhiculer un biais culturel datant d’une autre époque.</p>"
                           }
                         },
                         {
@@ -242,7 +242,7 @@
               "element": {
                 "id": "7e8ef97e-9782-4eba-bc2c-806c4020caa3",
                 "type": "text",
-                "content": "<p>Les IA génératives sont <strong>entraînées </strong>sur une très <strong>grande quantité</strong> de données.</p>\n<p> Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p>\n<p><br></p>\n<p>Ces données peuvent&nbsp;:</p>\n<ul>\n    <li>Montrer des <strong>situations de discrimination </strong>déjà <strong>existantes&nbsp;</strong></li>\n    <li>Exprimer les <strong>expériences</strong>, ou les <strong>opinions </strong>des contributeurs qui les ont produites.</li>\n</ul><p>\n\nElles peuvent donc contenir &nbsp;: </p><ul>\n    <li> des <strong>idées reçues</strong> ou des <strong>stéréotypes</strong>, </li>\n    <li>des <strong>discriminations</strong>, </li>\n    <li>des <strong>différences culturelles</strong>.</li>\n</ul>"
+                "content": "<p>Les IA génératives sont <strong>entraînées </strong>sur une très <strong>grande quantité</strong> de données.</p><p> Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p><p><br></p><p>Ces données peuvent&nbsp;:</p><ul>    <li>Montrer des <strong>situations de discrimination </strong>déjà <strong>existantes&nbsp;</strong></li>    <li>Exprimer les <strong>expériences</strong>, ou les <strong>opinions </strong>des contributeurs qui les ont produites.</li></ul><p>    <strong>Elles peuvent aussi présenter un manque de représentation de la diversité culturelle</strong></p><ul>    <br></ul>"
               }
             }
           ]
@@ -299,14 +299,14 @@
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web. Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
+                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.&nbsp;Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.</p>"
                     }
                   }
                 ],
@@ -325,7 +325,7 @@
               "element": {
                 "id": "aba8fd9b-a0fd-42db-abfc-89ebc37fa983",
                 "type": "text",
-                "content": "<p>L’IA générative construit ses réponses à partir des éléments les plus fréquents dans ses données d’entraînement.</p><p><br>Cette méthode donne souvent de bons résultats 👍 mais les données du web sont déséquilibrées : certains faits ou opinions sont sur-représentés, d’autres sous-représentés.&nbsp;De plus, la sélection des données par les ingénieurs peut accentuer ces déséquilibres. Par exemple, si on ne prend que le web en anglais, la vision anglophone sera majoritaire.</p><p><br>L’IA peut donc produire des réponses biaisées : idées reçues, stéréotypes, discriminations ou biais culturels.<br></p>"
+                "content": "<p>L’IA générative construit ses réponses à partir des éléments les plus fréquents dans ses données d’entraînement.</p><p><br>Cette méthode donne souvent de bons résultats 👍 mais les données du web sont déséquilibrées : certains faits ou opinions sont sur-représentés, d’autres sous-représentés.&nbsp;De plus, la sélection des données par les personnes qui conçoivent des IA peut accentuer ces déséquilibres. Par exemple, si on ne prend que le web en anglais, la vision anglophone sera majoritaire.</p><p><br>L’IA peut donc produire des réponses biaisées : idées reçues, stéréotypes, discriminations ou biais culturels.<br></p>"
               }
             }
           ]
@@ -573,7 +573,7 @@
               "element": {
                 "id": "32fa1627-38dc-4699-9a71-c14e8e6412df",
                 "type": "text",
-                "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative contiennent des opinions,  des stéréotypes ou des préférences culturelles, parfois <strong>surreprésentés</strong>.&nbsp;📊\n</li><li>\n\nComme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>\n\n\nLes réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️\n</li><li>\n\nIl faut aussi garder à l’esprit que nous avons nos propres <strong>biais de confirmation</strong>, qui nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
+                "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative contiennent des opinions,  des stéréotypes ou des préférences culturelles, parfois <strong>surreprésentés</strong>.&nbsp;📊</li><li>Comme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>Les réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️</li><li>Il faut aussi garder à l’esprit que nous avons nos propres <strong>biais de confirmation</strong>, qui nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
               }
             },
             {
@@ -658,7 +658,7 @@
                   },
                   {
                     "id": "ea3fc5a8-ea7b-4b7c-8c92-39c245a26747",
-                    "text": "L’IA fait preuve d'esprit critique et peut corriger les biais dans ses réponses.",
+                    "text": "La plupart des IA dont preuve d'esprit critique et peuvent corriger corriger les biais dans ses réponses.",
                     "image": {
                       "url": "",
                       "altText": ""
