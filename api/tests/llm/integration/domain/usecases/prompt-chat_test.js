@@ -130,9 +130,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          buildBasicAssistantMessage('coucou LLM1'),
-          buildBasicAssistantMessage('coucou LLM2'),
-          buildBasicUserMessage('coucou user'),
+          buildBasicAssistantMessage('coucou LLM1', 0),
+          buildBasicAssistantMessage('coucou LLM2', 1),
+          buildBasicUserMessage('coucou user', 2),
         ],
       });
       await chatTemporaryStorage.save({
@@ -189,9 +189,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         }),
         hasAttachmentContextBeenAdded: false,
         messages: [
-          buildBasicUserMessage('coucou user1'),
-          buildBasicAssistantMessage('coucou LLM2'),
-          buildBasicUserMessage('coucou user2'),
+          buildBasicUserMessage('coucou user1', 0),
+          buildBasicAssistantMessage('coucou LLM2', 1),
+          buildBasicUserMessage('coucou user2', 2),
         ],
       });
       await chatTemporaryStorage.save({
@@ -248,7 +248,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             configurationId,
             configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -316,6 +316,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             hasAttachmentContextBeenAdded: false,
             messages: [
               {
+                index: 0,
                 content: 'coucou user1',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -323,6 +324,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: true,
               },
               {
+                index: 1,
                 content: 'coucou LLM1',
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -330,6 +332,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: false,
               },
               {
+                index: 2,
                 content: 'un message',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -338,6 +341,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 wasModerated: false,
               },
               {
+                index: 3,
                 content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -363,7 +367,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 inputMaxChars: 255,
               }),
               hasAttachmentContextBeenAdded: false,
-              messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+              messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
             });
             await chatTemporaryStorage.save({
               key: chat.id,
@@ -445,6 +449,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               hasAttachmentContextBeenAdded: false,
               messages: [
                 {
+                  index: 0,
                   content: 'coucou user1',
                   isFromUser: true,
                   shouldBeRenderedInPreview: true,
@@ -452,6 +457,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   shouldBeCountedAsAPrompt: true,
                 },
                 {
+                  index: 1,
                   content: 'coucou LLM1',
                   isFromUser: false,
                   shouldBeRenderedInPreview: true,
@@ -459,6 +465,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   shouldBeCountedAsAPrompt: false,
                 },
                 {
+                  index: 2,
                   content: 'un message',
                   isFromUser: true,
                   shouldBeRenderedInPreview: true,
@@ -467,6 +474,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   wasModerated: false,
                 },
                 {
+                  index: 3,
                   content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                   isFromUser: false,
                   shouldBeRenderedInPreview: true,
@@ -493,9 +501,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               configuration,
               hasAttachmentContextBeenAdded: false,
               messages: [
-                buildBasicUserMessage('coucou user1'),
-                buildBasicAssistantMessage('coucou LLM2'),
-                buildBasicUserMessage('coucou user2'),
+                buildBasicUserMessage('coucou user1', 0),
+                buildBasicAssistantMessage('coucou LLM2', 1),
+                buildBasicUserMessage('coucou user2', 2),
               ],
             });
             await chatTemporaryStorage.save({
@@ -535,9 +543,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    buildBasicUserMessage('coucou user1'),
-                    buildBasicAssistantMessage('coucou LLM1'),
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
                     new Message({
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -546,6 +555,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     }),
                     new Message({
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -553,8 +563,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
                     }),
-                    buildBasicUserMessage('coucou user2'),
-                    buildBasicAssistantMessage('coucou LLM2'),
+                    buildBasicUserMessage('coucou user2', 4),
+                    buildBasicAssistantMessage('coucou LLM2', 5),
                   ],
                 });
                 await chatTemporaryStorage.save({
@@ -644,6 +654,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   hasAttachmentContextBeenAdded: true,
                   messages: [
                     {
+                      index: 0,
                       content: 'coucou user1',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -651,6 +662,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 1,
                       content: 'coucou LLM1',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -658,6 +670,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -666,6 +679,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -674,6 +688,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 4,
                       content: 'coucou user2',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -681,6 +696,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 5,
                       content: 'coucou LLM2',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -688,6 +704,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 6,
                       attachmentName: 'wrong_file.txt',
                       isFromUser: true,
                       shouldBeForwardedToLLM: false,
@@ -696,6 +713,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 7,
                       content: 'un message',
                       isFromUser: true,
                       shouldBeForwardedToLLM: true,
@@ -704,6 +722,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       wasModerated: false,
                     },
                     {
+                      index: 8,
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
                       shouldBeForwardedToLLM: true,
@@ -727,7 +746,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 configurationId,
                 configuration: configurationWithAttachment,
                 hasAttachmentContextBeenAdded: false,
-                messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+                messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
               await chatTemporaryStorage.save({
                 key: chat.id,
@@ -773,6 +792,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 hasAttachmentContextBeenAdded: false,
                 messages: [
                   {
+                    index: 0,
                     content: 'coucou user1',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -780,6 +800,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: true,
                   },
                   {
+                    index: 1,
                     content: 'coucou LLM1',
                     isFromUser: false,
                     shouldBeRenderedInPreview: true,
@@ -787,6 +808,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: false,
                   },
                   {
+                    index: 2,
                     attachmentName: 'wrong_file.txt',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -795,6 +817,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                   },
                   {
+                    index: 3,
                     content: 'un message',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -822,9 +845,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    buildBasicUserMessage('coucou user1'),
-                    buildBasicAssistantMessage('coucou LLM1'),
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
                     new Message({
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -833,6 +857,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     }),
                     new Message({
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -840,8 +865,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
                     }),
-                    buildBasicUserMessage('coucou user2'),
-                    buildBasicAssistantMessage('coucou LLM2'),
+                    buildBasicUserMessage('coucou user2', 4),
+                    buildBasicAssistantMessage('coucou LLM2', 5),
                   ],
                 });
                 await chatTemporaryStorage.save({
@@ -931,6 +956,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   hasAttachmentContextBeenAdded: true,
                   messages: [
                     {
+                      index: 0,
                       content: 'coucou user1',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -938,6 +964,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 1,
                       content: 'coucou LLM1',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -945,6 +972,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -953,6 +981,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -961,6 +990,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 4,
                       content: 'coucou user2',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -968,6 +998,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 5,
                       content: 'coucou LLM2',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -975,6 +1006,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 6,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -983,6 +1015,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 7,
                       content: 'un message',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -991,6 +1024,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       wasModerated: false,
                     },
                     {
+                      index: 8,
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1017,7 +1051,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   configurationId,
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: false,
-                  messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+                  messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
                 await chatTemporaryStorage.save({
                   key: chat.id,
@@ -1104,6 +1138,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   hasAttachmentContextBeenAdded: true,
                   messages: [
                     {
+                      index: 0,
                       content: 'coucou user1',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1111,6 +1146,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 1,
                       content: 'coucou LLM1',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1118,6 +1154,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1126,6 +1163,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -1134,6 +1172,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 4,
                       content: 'un message',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1142,6 +1181,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       wasModerated: false,
                     },
                     {
+                      index: 5,
                       content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1169,7 +1209,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}),
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM2')],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM2', 1)],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -1203,9 +1243,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               configuration,
               hasAttachmentContextBeenAdded: false,
               messages: [
-                buildBasicUserMessage('coucou user1'),
-                buildBasicAssistantMessage('coucou LLM2'),
-                buildBasicUserMessage('coucou user2'),
+                buildBasicUserMessage('coucou user1', 0),
+                buildBasicAssistantMessage('coucou LLM2', 1),
+                buildBasicUserMessage('coucou user2', 2),
               ],
             });
             await chatTemporaryStorage.save({
@@ -1242,9 +1282,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 configuration: configurationWithAttachment,
                 hasAttachmentContextBeenAdded: true,
                 messages: [
-                  buildBasicUserMessage('coucou user1'),
-                  buildBasicAssistantMessage('coucou LLM1'),
+                  buildBasicUserMessage('coucou user1', 0),
+                  buildBasicAssistantMessage('coucou LLM1', 1),
                   new Message({
+                    index: 2,
                     attachmentName: 'expected_file.txt',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1253,6 +1294,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                   }),
                   new Message({
+                    index: 3,
                     attachmentName: 'expected_file.txt',
                     attachmentContext: 'add me in the chat !',
                     isFromUser: false,
@@ -1260,8 +1302,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeForwardedToLLM: true,
                     shouldBeCountedAsAPrompt: false,
                   }),
-                  buildBasicUserMessage('coucou user2'),
-                  buildBasicAssistantMessage('coucou LLM2'),
+                  buildBasicUserMessage('coucou user2', 4),
+                  buildBasicAssistantMessage('coucou LLM2', 5),
                 ],
               });
               await chatTemporaryStorage.save({
@@ -1308,6 +1350,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 hasAttachmentContextBeenAdded: true,
                 messages: [
                   {
+                    index: 0,
                     content: 'coucou user1',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1315,6 +1358,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: true,
                   },
                   {
+                    index: 1,
                     content: 'coucou LLM1',
                     isFromUser: false,
                     shouldBeRenderedInPreview: true,
@@ -1322,6 +1366,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: false,
                   },
                   {
+                    index: 2,
                     attachmentName: 'expected_file.txt',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1330,6 +1375,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                   },
                   {
+                    index: 3,
                     attachmentName: 'expected_file.txt',
                     attachmentContext: 'add me in the chat !',
                     isFromUser: false,
@@ -1338,6 +1384,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: false,
                   },
                   {
+                    index: 4,
                     content: 'coucou user2',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1345,6 +1392,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: true,
                   },
                   {
+                    index: 5,
                     content: 'coucou LLM2',
                     isFromUser: false,
                     shouldBeRenderedInPreview: true,
@@ -1352,6 +1400,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: false,
                   },
                   {
+                    index: 6,
                     attachmentName: 'wrong_file.txt',
                     isFromUser: true,
                     shouldBeForwardedToLLM: false,
@@ -1373,7 +1422,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 configurationId,
                 configuration: configurationWithAttachment,
                 hasAttachmentContextBeenAdded: false,
-                messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+                messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
               });
               await chatTemporaryStorage.save({
                 key: chat.id,
@@ -1419,6 +1468,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 hasAttachmentContextBeenAdded: false,
                 messages: [
                   {
+                    index: 0,
                     content: 'coucou user1',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1426,6 +1476,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: true,
                   },
                   {
+                    index: 1,
                     content: 'coucou LLM1',
                     isFromUser: false,
                     shouldBeRenderedInPreview: true,
@@ -1433,6 +1484,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                     shouldBeCountedAsAPrompt: false,
                   },
                   {
+                    index: 2,
                     attachmentName: 'wrong_file.txt',
                     isFromUser: true,
                     shouldBeRenderedInPreview: true,
@@ -1460,9 +1512,10 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: true,
                   messages: [
-                    buildBasicUserMessage('coucou user1'),
-                    buildBasicAssistantMessage('coucou LLM1'),
+                    buildBasicUserMessage('coucou user1', 0),
+                    buildBasicAssistantMessage('coucou LLM1', 1),
                     new Message({
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1471,6 +1524,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     }),
                     new Message({
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -1478,8 +1532,8 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeForwardedToLLM: true,
                       shouldBeCountedAsAPrompt: false,
                     }),
-                    buildBasicUserMessage('coucou user2'),
-                    buildBasicAssistantMessage('coucou LLM2'),
+                    buildBasicUserMessage('coucou user2', 4),
+                    buildBasicAssistantMessage('coucou LLM2', 5),
                   ],
                 });
                 await chatTemporaryStorage.save({
@@ -1525,6 +1579,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   hasAttachmentContextBeenAdded: true,
                   messages: [
                     {
+                      index: 0,
                       content: 'coucou user1',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1532,6 +1587,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 1,
                       content: 'coucou LLM1',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1539,6 +1595,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1547,6 +1604,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: true,
                     },
                     {
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -1555,6 +1613,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 4,
                       content: 'coucou user2',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1562,6 +1621,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 5,
                       content: 'coucou LLM2',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1569,6 +1629,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 6,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1594,7 +1655,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   configurationId: 'uneConfigQuiExist',
                   configuration: configurationWithAttachment,
                   hasAttachmentContextBeenAdded: false,
-                  messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+                  messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
                 });
                 await chatTemporaryStorage.save({
                   key: chat.id,
@@ -1639,6 +1700,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   hasAttachmentContextBeenAdded: true,
                   messages: [
                     {
+                      index: 0,
                       content: 'coucou user1',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1646,6 +1708,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: true,
                     },
                     {
+                      index: 1,
                       content: 'coucou LLM1',
                       isFromUser: false,
                       shouldBeRenderedInPreview: true,
@@ -1653,6 +1716,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       shouldBeCountedAsAPrompt: false,
                     },
                     {
+                      index: 2,
                       attachmentName: 'expected_file.txt',
                       isFromUser: true,
                       shouldBeRenderedInPreview: true,
@@ -1661,6 +1725,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                       hasAttachmentBeenSubmittedAlongWithAPrompt: false,
                     },
                     {
+                      index: 3,
                       attachmentName: 'expected_file.txt',
                       attachmentContext: 'add me in the chat !',
                       isFromUser: false,
@@ -1686,7 +1751,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           configurationId,
           configuration,
           hasAttachmentContextBeenAdded: false,
-          messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
         await chatTemporaryStorage.save({
           key: chat.id,
@@ -1755,6 +1820,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           hasAttachmentContextBeenAdded: false,
           messages: [
             {
+              index: 0,
               content: 'coucou user1',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -1762,6 +1828,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: true,
             },
             {
+              index: 1,
               content: 'coucou LLM1',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -1769,6 +1836,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: false,
             },
             {
+              index: 2,
               content: 'un message',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -1778,6 +1846,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               wasModerated: false,
             },
             {
+              index: 3,
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -1800,7 +1869,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           hasAttachmentContextBeenAdded: false,
           totalInputTokens: 1_000,
           totalOutputTokens: 2_000,
-          messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
         await chatTemporaryStorage.save({
           key: chat.id,
@@ -1871,6 +1940,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           totalOutputTokens: 7_000,
           messages: [
             {
+              index: 0,
               content: 'coucou user1',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -1878,6 +1948,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: true,
             },
             {
+              index: 1,
               content: 'coucou LLM1',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -1885,6 +1956,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: false,
             },
             {
+              index: 2,
               content: 'un message',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -1894,6 +1966,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               wasModerated: false,
             },
             {
+              index: 3,
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -1914,7 +1987,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           configurationId,
           configuration,
           hasAttachmentContextBeenAdded: false,
-          messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+          messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
         });
         await chatTemporaryStorage.save({
           key: chat.id,
@@ -1973,6 +2046,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           hasAttachmentContextBeenAdded: false,
           messages: [
             {
+              index: 0,
               content: 'coucou user1',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -1980,6 +2054,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: true,
             },
             {
+              index: 1,
               content: 'coucou LLM1',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -1987,6 +2062,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               shouldBeCountedAsAPrompt: false,
             },
             {
+              index: 2,
               content: "C'est quoi un chat tout terrain ? Un cat-cat !!",
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -2009,7 +2085,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             configurationId,
             configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -2076,6 +2152,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             hasAttachmentContextBeenAdded: false,
             messages: [
               {
+                index: 0,
                 content: 'coucou user1',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -2083,6 +2160,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: true,
               },
               {
+                index: 1,
                 content: 'coucou LLM1',
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -2090,6 +2168,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: false,
               },
               {
+                index: 2,
                 content: 'un message',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -2098,6 +2177,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 wasModerated: false,
               },
               {
+                index: 3,
                 content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -2120,7 +2200,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             configurationId,
             configuration,
             hasAttachmentContextBeenAdded: false,
-            messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
           });
           await chatTemporaryStorage.save({
             key: chat.id,
@@ -2188,6 +2268,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             hasAttachmentContextBeenAdded: false,
             messages: [
               {
+                index: 0,
                 content: 'coucou user1',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -2195,6 +2276,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: true,
               },
               {
+                index: 1,
                 content: 'coucou LLM1',
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -2202,6 +2284,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 shouldBeCountedAsAPrompt: false,
               },
               {
+                index: 2,
                 content: 'un message',
                 isFromUser: true,
                 shouldBeRenderedInPreview: true,
@@ -2210,6 +2293,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 wasModerated: false,
               },
               {
+                index: 3,
                 content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
                 isFromUser: false,
                 shouldBeRenderedInPreview: true,
@@ -2249,7 +2333,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         configurationId,
         configuration,
         hasAttachmentContextBeenAdded: false,
-        messages: [buildBasicUserMessage('coucou user1'), buildBasicAssistantMessage('coucou LLM1')],
+        messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
       });
       await chatTemporaryStorage.save({
         key: chat.id,
@@ -2316,6 +2400,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         hasAttachmentContextBeenAdded: false,
         messages: [
           {
+            index: 0,
             content: 'coucou user1',
             isFromUser: true,
             shouldBeRenderedInPreview: true,
@@ -2323,6 +2408,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             shouldBeCountedAsAPrompt: true,
           },
           {
+            index: 1,
             content: 'coucou LLM1',
             isFromUser: false,
             shouldBeRenderedInPreview: true,
@@ -2330,6 +2416,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             shouldBeCountedAsAPrompt: false,
           },
           {
+            index: 2,
             content: 'un message',
             isFromUser: true,
             shouldBeRenderedInPreview: true,
@@ -2338,6 +2425,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             wasModerated: false,
           },
           {
+            index: 3,
             content: "coucou c'est super\nle couscous c plutot bon",
             isFromUser: false,
             shouldBeRenderedInPreview: true,
@@ -2352,8 +2440,9 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   });
 });
 
-function buildBasicUserMessage(content) {
+function buildBasicUserMessage(content, index) {
   return new Message({
+    index,
     content,
     isFromUser: true,
     shouldBeRenderedInPreview: true,
@@ -2362,8 +2451,9 @@ function buildBasicUserMessage(content) {
   });
 }
 
-function buildBasicAssistantMessage(content) {
+function buildBasicAssistantMessage(content, index) {
   return new Message({
+    index,
     content,
     isFromUser: false,
     shouldBeRenderedInPreview: true,
