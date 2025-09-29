@@ -1,7 +1,8 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class CombinedCourse extends Model {
   @attr('string') name;
   @attr('string') code;
-  @attr campaignIds;
+  @attr({ defaultValue: () => [] }) campaignIds;
+  @hasMany('combined-course-participation', { async: true, inverse: null }) combinedCourseParticipations;
 }
