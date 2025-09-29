@@ -405,6 +405,7 @@
       "title": "{count, plural, =0 {Deelnemer} =1 {Deelnemer ({count})} other {Deelnemers ({count})}}"
     },
     "participation-status": {
+      "COMPLETED": "Voltooid",
       "SHARED": "Voltooid",
       "STARTED": "Bezig"
     },
@@ -1008,7 +1009,15 @@
       "title": "Resultaten certificering"
     },
     "combined-course": {
-      "introduction": "text d'intro"
+      "introduction": "text d'intro",
+      "table": {
+        "column": {
+          "first-name": "Voornaam",
+          "last-name": "Achternaam",
+          "status": "Status"
+        },
+        "description": "List of the combined course participations"
+      }
     },
     "index": {
       "title": "Home"
