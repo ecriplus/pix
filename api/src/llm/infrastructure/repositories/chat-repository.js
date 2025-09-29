@@ -111,7 +111,7 @@ function _buildDatabaseMessage({ chatId, message }) {
     index,
     shouldBeForwardedToLLM,
     shouldBeRenderedInPreview,
-    shouldBeCountedAsPrompt: shouldBeCountedAsAPrompt,
+    shouldBeCountedAsAPrompt,
     wasModerated: wasModerated ?? null,
   };
 }

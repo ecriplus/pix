@@ -16,7 +16,7 @@ const buildChatMessage = function ({
   index = 0,
   shouldBeForwardedToLLM = true,
   shouldBeRenderedInPreview = false,
-  shouldBeCountedAsPrompt = false,
+  shouldBeCountedAsAPrompt = false,
   wasModerated = false,
   createdAt = new Date(),
 } = {}) {
@@ -37,7 +37,7 @@ const buildChatMessage = function ({
     index,
     shouldBeForwardedToLLM,
     shouldBeRenderedInPreview,
-    shouldBeCountedAsPrompt,
+    shouldBeCountedAsAPrompt,
     wasModerated,
     createdAt,
   };

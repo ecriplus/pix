@@ -108,7 +108,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           attachmentContext: 'attachmentContext',
           shouldBeRenderedInPreview: true,
           shouldBeForwardedToLLM: true,
-          shouldBeCountedAsPrompt: true,
+          shouldBeCountedAsAPrompt: true,
           hasAttachmentBeenSubmittedAlongWithAPrompt: true,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: null,
@@ -121,7 +121,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           content: 'je suis LLM',
           shouldBeRenderedInPreview: true,
           shouldBeForwardedToLLM: true,
-          shouldBeCountedAsPrompt: false,
+          shouldBeCountedAsAPrompt: false,
           hasAttachmentBeenSubmittedAlongWithAPrompt: false,
           haveVictoryConditionsBeenFulfilled: true,
           wasModerated: null,
@@ -134,7 +134,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           content: 'message modéré',
           shouldBeRenderedInPreview: true,
           shouldBeForwardedToLLM: true,
-          shouldBeCountedAsPrompt: false,
+          shouldBeCountedAsAPrompt: false,
           haveVictoryConditionsBeenFulfilled: false,
           wasModerated: true,
           hasErrorOccurred: true,
@@ -196,13 +196,13 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         const firstMessage = new Message({
           ...firstDatabaseChatMessage,
           isFromUser: true,
-          shouldBeCountedAsAPrompt: firstDatabaseChatMessage.shouldBeCountedAsPrompt,
+          shouldBeCountedAsAPrompt: firstDatabaseChatMessage.shouldBeCountedAsAPrompt,
         });
         const secondMessage = new Message({
           ...secondDatabaseChatMessage,
           isFromUser: false,
           content: 'Content not to be saved',
-          shouldBeCountedAsAPrompt: secondDatabaseChatMessage.shouldBeCountedAsPrompt,
+          shouldBeCountedAsAPrompt: secondDatabaseChatMessage.shouldBeCountedAsAPrompt,
         });
         const thirdMessage = new Message({
           index: 2,
@@ -239,7 +239,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           content: thirdMessage.content,
           shouldBeRenderedInPreview: false,
           shouldBeForwardedToLLM: true,
-          shouldBeCountedAsPrompt: true,
+          shouldBeCountedAsAPrompt: true,
           haveVictoryConditionsBeenFulfilled: true,
           wasModerated: null,
         });
@@ -250,7 +250,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
   describe('#get', function () {
     it('should return null when chat is not found', async function () {
       // when
-      const chat = await get('someChatId');
+      const chat = await get(randomUUID());
 
       // then
       expect(chat).to.be.null;
@@ -296,7 +296,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         index: 0,
         shouldBeForwardedToLLM: true,
         shouldBeRenderedInPreview: true,
-        shouldBeCountedAsPrompt: true,
+        shouldBeCountedAsAPrompt: true,
         wasModerated: false,
       });
       databaseBuilder.factory.buildChatMessage({
@@ -311,7 +311,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         index: 1,
         shouldBeForwardedToLLM: true,
         shouldBeRenderedInPreview: true,
-        shouldBeCountedAsPrompt: false,
+        shouldBeCountedAsAPrompt: false,
         wasModerated: false,
       });
       databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
@@ -359,7 +359,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 0,
               shouldBeForwardedToLLM: true,
               shouldBeRenderedInPreview: true,
-              shouldBeCountedAsPrompt: true,
+              shouldBeCountedAsAPrompt: true,
               wasModerated: false,
             }),
             new Message({
@@ -374,7 +374,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               index: 1,
               shouldBeForwardedToLLM: true,
               shouldBeRenderedInPreview: true,
-              shouldBeCountedAsPrompt: false,
+              shouldBeCountedAsAPrompt: false,
               wasModerated: false,
             }),
           ],
