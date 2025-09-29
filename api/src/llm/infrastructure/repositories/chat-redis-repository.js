@@ -44,5 +44,10 @@ export async function get(id) {
     const configuration = await configurationRepository.get(chatDTO.configurationId);
     chatDTO.configuration = configuration.toDTO();
   }
+
+  chatDTO.messages.forEach((message, index) => {
+    message.index = message.index ?? index;
+  });
+
   return Chat.fromDTO(chatDTO);
 }

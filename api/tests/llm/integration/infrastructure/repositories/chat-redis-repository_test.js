@@ -39,6 +39,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
         hasAttachmentContextBeenAdded: false,
         messages: [
           new Message({
+            index: 0,
             content: 'je suis user',
             isFromUser: true,
             shouldBeRenderedInPreview: true,
@@ -46,6 +47,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
             shouldBeCountedAsAPrompt: true,
           }),
           new Message({
+            index: 1,
             content: 'je suis LLM',
             isFromUser: false,
             shouldBeRenderedInPreview: true,
@@ -79,6 +81,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
         hasAttachmentContextBeenAdded: false,
         messages: [
           {
+            index: 0,
             content: 'je suis user',
             isFromUser: true,
             shouldBeRenderedInPreview: true,
@@ -86,6 +89,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
             shouldBeCountedAsAPrompt: true,
           },
           {
+            index: 1,
             content: 'je suis LLM',
             isFromUser: false,
             shouldBeRenderedInPreview: true,
@@ -180,8 +184,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
             }), // configuration properties are not enumerable
             hasAttachmentContextBeenAdded: false,
             messages: [
-              new Message({ content: 'je suis user', isFromUser: true }),
-              new Message({ content: 'je suis LLM', isFromUser: false }),
+              new Message({ index: 0, content: 'je suis user', isFromUser: true }),
+              new Message({ index: 1, content: 'je suis LLM', isFromUser: false }),
             ],
           }),
         );
@@ -221,8 +225,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
               },
               hasAttachmentContextBeenAdded: false,
               messages: [
-                { content: 'je suis user', isFromUser: true, notCounted: false },
-                { content: 'je suis LLM', isFromUser: false, notCounted: false },
+                { index: 0, content: 'je suis user', isFromUser: true, notCounted: false },
+                { index: 1, content: 'je suis LLM', isFromUser: false, notCounted: false },
               ],
             },
           });
@@ -246,8 +250,8 @@ describe('LLM | Integration | Infrastructure | Repositories | chat-redis', funct
               configuration: new Configuration({}), // configuration properties are not enumerable
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'je suis user', isFromUser: true }),
-                new Message({ content: 'je suis LLM', isFromUser: false }),
+                new Message({ index: 0, content: 'je suis user', isFromUser: true }),
+                new Message({ index: 1, content: 'je suis LLM', isFromUser: false }),
               ],
             }),
           );
