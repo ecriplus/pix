@@ -47,8 +47,8 @@ export async function save(chat) {
     .onConflict(['id'])
     .merge(['hasAttachmentContextBeenAdded', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
 
-  for (const [index, message] of chatDTO.messages.entries()) {
-    const databaseMessage = _buildDatabaseMessage({ chatId, index: index + 1, message });
+  for (const message of chatDTO.messages) {
+    const databaseMessage = _buildDatabaseMessage({ chatId, message });
     await knexConn('chat_messages').insert(databaseMessage).onConflict(['chatId', 'index']).ignore();
   }
 }
@@ -59,12 +59,12 @@ export async function save(chat) {
  *
  * @param {Object} params
  * @param {string} params.chatId chatId
- * @param {number} params.index index
  * @param {Message} params.message message
  * @returns {Promise<void>}
  */
-function _buildDatabaseMessage({ chatId, index, message }) {
+function _buildDatabaseMessage({ chatId, message }) {
   const {
+    index,
     attachmentName,
     attachmentContext,
     content,

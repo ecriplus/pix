@@ -1,3 +1,4 @@
+import { assertGreaterOrEqualToZero } from '../../../shared/domain/models/asserts.js';
 import { Configuration } from './Configuration.js';
 
 export class Chat {
@@ -80,6 +81,7 @@ export class Chat {
     if (!message) return;
     this.messages.push(
       new Message({
+        index: this.messages.length,
         content: message,
         isFromUser: true,
         shouldBeCountedAsAPrompt,
@@ -100,6 +102,7 @@ export class Chat {
     if (!message) return;
     this.messages.push(
       new Message({
+        index: this.messages.length,
         content: message,
         isFromUser: false,
         shouldBeForwardedToLLM,
@@ -121,6 +124,7 @@ export class Chat {
     const isAttachmentValid = this.isAttachmentValid(attachmentName);
     this.messages.push(
       new Message({
+        index: this.messages.length,
         attachmentName,
         isFromUser: true,
         hasAttachmentBeenSubmittedAlongWithAPrompt: !!message,
@@ -132,6 +136,7 @@ export class Chat {
     if (isAttachmentValid && !this.hasAttachmentContextBeenAdded) {
       this.messages.push(
         new Message({
+          index: this.messages.length,
           attachmentName,
           attachmentContext,
           isFromUser: false,
@@ -199,6 +204,7 @@ export class Message {
   /**
    * @constructor
    * @param {Object} params
+   * @param {string=} params.index
    * @param {string=} params.content
    * @param {string=} params.attachmentName
    * @param {string=} params.attachmentContext
@@ -212,6 +218,7 @@ export class Message {
    * @param {boolean=} params.hasErrorOccurred
    */
   constructor({
+    index,
     content,
     attachmentName,
     attachmentContext,
@@ -224,6 +231,8 @@ export class Message {
     wasModerated,
     hasErrorOccurred,
   }) {
+    assertGreaterOrEqualToZero(index, 'index shall be greater or equal to 0');
+    this.index = index;
     this.content = content;
     this.isFromUser = isFromUser;
     this.attachmentName = attachmentName;
@@ -258,6 +267,7 @@ export class Message {
 
   toDTO() {
     return {
+      index: this.index,
       content: this.content,
       attachmentName: this.attachmentName,
       attachmentContext: this.attachmentContext,

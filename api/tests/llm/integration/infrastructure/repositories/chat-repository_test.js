@@ -45,6 +45,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           hasAttachmentContextBeenAdded: true,
           messages: [
             new Message({
+              index: 0,
               content: 'je suis user',
               isFromUser: true,
               attachmentName: 'attachmentName',
@@ -56,6 +57,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               haveVictoryConditionsBeenFulfilled: false,
             }),
             new Message({
+              index: 1,
               content: 'je suis LLM',
               isFromUser: false,
               shouldBeRenderedInPreview: true,
@@ -65,6 +67,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
               haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
+              index: 2,
               content: 'message modéré',
               isFromUser: true,
               shouldBeRenderedInPreview: true,
@@ -99,7 +102,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         expect(messages).to.have.lengthOf(3);
         expect(messages[0]).to.deep.include({
           chatId: chatDTO.id,
-          index: 1,
+          index: 0,
           emitter: 'user',
           content: 'je suis user',
           attachmentName: 'attachmentName',
@@ -114,7 +117,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
 
         expect(messages[1]).to.deep.include({
           chatId: chatDTO.id,
-          index: 2,
+          index: 1,
           emitter: 'assistant',
           content: 'je suis LLM',
           shouldBeRenderedInPreview: true,
@@ -127,7 +130,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
 
         expect(messages[2]).to.deep.include({
           chatId: chatDTO.id,
-          index: 3,
+          index: 2,
           emitter: 'user',
           content: 'message modéré',
           shouldBeRenderedInPreview: true,
@@ -183,7 +186,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         firstDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({ chatId: databaseChat.id });
         secondDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({
           chatId: databaseChat.id,
-          index: 2,
+          index: 1,
           emitter: 'assistant',
         });
 
@@ -203,6 +206,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           shouldBeCountedAsAPrompt: secondDatabaseChatMessage.shouldBeCountedAsPrompt,
         });
         const thirdMessage = new Message({
+          index: 2,
           content: 'contenu qui respecte les conditions de victoires : merguez',
           isFromUser: true,
           shouldBeRenderedInPreview: false,
@@ -231,7 +235,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         expect(messages[1].content).to.not.equal('Content not to be saved');
         expect(messages[2]).to.deep.include({
           chatId: databaseChat.id,
-          index: 3,
+          index: 2,
           emitter: 'user',
           content: thirdMessage.content,
           shouldBeRenderedInPreview: false,

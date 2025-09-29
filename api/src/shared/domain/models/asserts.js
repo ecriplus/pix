@@ -31,6 +31,12 @@ export function assertPositiveInteger(value, errorMessage = 'value must be a pos
   }
 }
 
+export function assertGreaterOrEqualToZero(value, errorMessage = 'value must be greater or equal to 0') {
+  if (!Number.isInteger(value) || value < 0) {
+    throw new DomainError(errorMessage);
+  }
+}
+
 export function assertIsArray(value, errorMessage = 'value must be an array') {
   if (!Array.isArray(value)) {
     throw new DomainError(errorMessage);
