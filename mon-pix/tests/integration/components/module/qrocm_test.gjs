@@ -4,6 +4,7 @@ import Service from '@ember/service';
 import { click, fillIn, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModuleQrocm from 'mon-pix/components/module/element/qrocm';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,6 +13,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QROCM', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const originalDelay = ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY;
   let passageEventService, passageEventRecordStub;
 
   hooks.beforeEach(function () {
@@ -21,6 +23,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   hooks.afterEach(function () {
     passageEventRecordStub.restore();
+    ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = originalDelay;
   });
 
   test('should display a block QROCM', async function (assert) {
@@ -263,9 +266,10 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       .doesNotExist();
   });
 
-  module('should call action and send an event when verify button is clicked', function () {
+  module('should call action, disable inputs, and send an event when verify button is clicked', function () {
     test('when proposal is an input', async function (assert) {
       // given
+      const clock = sinon.useFakeTimers();
       const qrocm = {
         id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
         instruction: 'Instruction',
@@ -296,6 +300,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       };
       const userResponse = 'user-response';
       const onElementAnswerSpy = sinon.spy();
+      ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = 10;
 
       // when
       const screen = await render(
@@ -303,10 +308,13 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       );
       await fillIn(screen.getByLabelText('Réponse 1'), userResponse);
 
+      const input = screen.getByRole('textbox', { name: 'Réponse 1' });
       const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
       await click(verifyButton);
 
       // then
+      assert.dom(input).hasAttribute('readonly');
+      await clock.tick(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY);
       sinon.assert.calledWith(onElementAnswerSpy, {
         userResponse: [
           {
@@ -330,6 +338,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
         },
       });
       assert.ok(true);
+      clock.restore();
     });
 
     test('when proposal is a select', async function (assert) {

@@ -1,4 +1,4 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
+import { clickByName, visit, within } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -94,9 +94,10 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
     await click(verifyButton);
 
     assert.dom(screen.getByRole('status')).exists();
+    const feedback = await screen.findByRole('status');
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
@@ -125,7 +126,8 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
     );
     await click(qrocmVerifyButtonCameBack);
 
-    assert.strictEqual(screen.queryByRole('status').innerText, 'Wrong!\nToo Bad!');
+    await within(feedback).findByText('Wrong!');
+    await within(feedback).findByText('Too Bad!');
   });
 
   test('after retrying a Qrocm, it display an error message if Qrocm is validated without response', async function (assert) {
@@ -202,7 +204,7 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
       id: 'bien-ecrire-son-adresse-mail',
       slug: 'bien-ecrire-son-adresse-mail',
       title: 'Bien écrire son adresse mail',
-      isBeta: true,
+      isBeta: false,
       sections: [section],
     });
 
@@ -229,13 +231,13 @@ module('Acceptance | Module | Routes | retryQrocm', function (hooks) {
     assert.dom(screen.getByRole('status')).exists();
 
     // when
-    const retryButton = screen.getByRole('button', { name: 'Réessayer' });
+    const retryButton = await screen.findByRole('button', { name: 'Réessayer' });
     await click(retryButton);
 
     // then
     const qrocmVerifyButtonCameBack = screen.getByRole('button', { name: 'Vérifier ma réponse' });
     await click(qrocmVerifyButtonCameBack);
-    const validationAlert = screen.queryAllByRole('alert')[1];
+    const validationAlert = await screen.findByRole('alert');
 
     assert.strictEqual(validationAlert.innerText, 'Pour valider, veuillez remplir tous les champs réponse.');
   });

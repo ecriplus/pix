@@ -11,11 +11,13 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import ModuleElement from 'mon-pix/components/module/element/module-element';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
+import ENV from 'mon-pix/config/environment';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
 export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
   @tracked currentCorrection;
+  @tracked isVerifying = false;
   @service passageEvents;
   @service qrocmSolutionVerification;
   @service modulixPreviewMode;
@@ -92,11 +94,14 @@ export default class ModuleQrocm extends ModuleElement {
 
   @action
   async onAnswer(event) {
+    this.isVerifying = true;
     super.onAnswer(event);
 
     if (this.shouldDisplayRequiredMessage === true) {
       return;
     }
+
+    await this.#waitFor(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY);
 
     const answerIsValid = this.answerIsValid;
     const status = answerIsValid ? 'ok' : 'ko';
@@ -112,6 +117,12 @@ export default class ModuleQrocm extends ModuleElement {
       type: 'QROCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
+
+    this.isVerifying = false;
+  }
+
+  #waitFor(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
   #updateSelectedValues(block, value) {
@@ -131,6 +142,10 @@ export default class ModuleQrocm extends ModuleElement {
 
   isValidFeedbackForPreview(feedback) {
     return feedback.status === 'valid';
+  }
+
+  get disableInput() {
+    return super.disableInput || this.isVerifying;
   }
 
   <template>
