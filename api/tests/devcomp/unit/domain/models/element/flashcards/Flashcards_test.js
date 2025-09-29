@@ -3,7 +3,7 @@ import { Flashcards } from '../../../../../../../src/devcomp/domain/models/eleme
 import { expect } from '../../../../../../test-helper.js';
 import { validateFlashcards } from '../../../../../shared/validateFlashcards.js';
 
-describe('Unit | Devcomp | Domain | Models | Element | Flashcards | Flashcards', function () {
+describe('Unit | Devcomp | Domain | Models | Element | Flashcards', function () {
   describe('#constructor', function () {
     it('should create a Flashcards element and keep attributes', function () {
       // given
@@ -13,14 +13,16 @@ describe('Unit | Devcomp | Domain | Models | Element | Flashcards | Flashcards',
         instruction: 'instruction',
         introImage: {
           url: 'https://...',
+          information: { width: 300, height: 300, type: 'vector' },
         },
         cards: [
           new Card({
             id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-            recto: { image: { url: 'https://...' } },
+            recto: { image: { url: 'https://...', information: { width: 300, height: 300, type: 'vector' } } },
             verso: {
               image: {
                 url: 'https://...',
+                information: {},
               },
             },
           }),

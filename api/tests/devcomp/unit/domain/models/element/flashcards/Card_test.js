@@ -11,12 +11,14 @@ describe('Unit | Devcomp | Domain | Models | Element | Flashcards | Card', funct
         recto: {
           image: {
             url: 'https://example.org/image.jpeg',
+            information: { width: 300, height: 300, type: 'vector' },
           },
           text: "A quoi sert l'arobase dans mon adresse email ?",
         },
         verso: {
           image: {
             url: 'https://example.org/image.jpeg',
+            information: {},
           },
           text: "Parce que c'est joli",
         },

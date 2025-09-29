@@ -235,6 +235,11 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           },
         ],
       });
+
+      // when
+      const json = moduleSerializer.serialize(moduleFromDomain);
+
+      // then
       const expectedJson = {
         data: {
           attributes: {
@@ -275,11 +280,6 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
           },
         ],
       };
-
-      // when
-      const json = moduleSerializer.serialize(moduleFromDomain);
-
-      // then
       expect(json).to.deep.equal(expectedJson);
     });
   });
@@ -435,10 +435,24 @@ function getComponents() {
         cards: [
           new Card({
             id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-            recto: { image: { url: 'https://...' } },
+            recto: {
+              image: {
+                url: 'https://...',
+                information: {
+                  height: 333,
+                  width: 333,
+                  type: 'vector',
+                },
+              },
+            },
             verso: {
               image: {
                 url: 'https://...',
+                information: {
+                  height: 333,
+                  width: 333,
+                  type: 'vector',
+                },
               },
             },
           }),
@@ -667,10 +681,24 @@ function getAttributesComponents() {
         cards: [
           {
             id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-            recto: { image: { url: 'https://...' } },
+            recto: {
+              image: {
+                url: 'https://...',
+                information: {
+                  height: 333,
+                  width: 333,
+                  type: 'vector',
+                },
+              },
+            },
             verso: {
               image: {
                 url: 'https://...',
+                information: {
+                  height: 333,
+                  width: 333,
+                  type: 'vector',
+                },
               },
             },
           },

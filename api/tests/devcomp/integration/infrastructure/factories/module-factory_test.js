@@ -1098,6 +1098,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
       it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', async function () {
         // given
+        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1129,20 +1130,20 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         title: "Introduction à l'adresse e-mail",
                         instruction: '<p>...</p>',
                         introImage: {
-                          url: 'https://example.org/image.jpeg',
+                          url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                         },
                         cards: [
                           {
                             id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
                             recto: {
                               image: {
-                                url: 'https://example.org/image.jpeg',
+                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                               },
                               text: "A quoi sert l'arobase dans mon adresse email ?",
                             },
                             verso: {
                               image: {
-                                url: 'https://example.org/image.jpeg',
+                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                               },
                               text: "Parce que c'est joli",
                             },
@@ -1290,7 +1291,9 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
     describe('With ComponentStepper', function () {
       it('should instantiate a Module with a ComponentStepper which contains an Image Element', async function () {
         // given
-        nock('https://assets.pix.org').head('/modulix/didacticiel/ordi-spatial.svg').reply(200, {});
+        nock('https://assets.pix.org')
+          .head('/modulix/didacticiel/ordi-spatial.svg')
+          .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1961,6 +1964,9 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
       it('should instantiate a Module with a ComponentElement which contains a Flashcard Element', async function () {
         // given
+        nock('https://assets.pix.org')
+          .head('/modulix/didacticiel/ordi-spatial.svg')
+          .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1995,20 +2001,20 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                               title: "Introduction à l'adresse e-mail",
                               instruction: '<p>...</p>',
                               introImage: {
-                                url: 'https://example.org/image.jpeg',
+                                url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                               },
                               cards: [
                                 {
                                   id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
                                   recto: {
                                     image: {
-                                      url: 'https://example.org/image.jpeg',
+                                      url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                                     },
                                     text: "A quoi sert l'arobase dans mon adresse email ?",
                                   },
                                   verso: {
                                     image: {
-                                      url: 'https://example.org/image.jpeg',
+                                      url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
                                     },
                                     text: "Parce que c'est joli",
                                   },
