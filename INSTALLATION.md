@@ -217,39 +217,6 @@ chargement des SSO OIDC :
    npm run db:reset
    ```
 
-#### Exécuter le lint à chaque commit
-
-Activer
-
-Ce repository est configuré pour indiquer aux IDE Webstorm et Vscode la configuration du linter.
-Malgré cela, il peut arriver que des erreurs de lint soient introduites.
-
-Pour tenter de les corriger automatiquement lors du commit, installer un hook de pre-commit.
-
-```
-npm run local:add-optional-checks
-```
-
-Si vous souhaitez désactiver
-
-```
-npm run local:remove-optional-checks
-```
-
-#### Détecter des secrets
-
-Installer un hook de pre-commit.
-
-```
-npm run local:add-optional-checks
-```
-
-Si vous souhaitez le désactiver
-
-```
-npm run local:remove-optional-checks
-```
-
 #### Tester les envois d'e-mails
 
 ##### Avec une interface web
