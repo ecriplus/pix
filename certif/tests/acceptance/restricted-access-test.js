@@ -76,7 +76,13 @@ module('Acceptance | Restricted access', function (hooks) {
         const screen = await visitScreen('/espace-ferme');
 
         // then
-        assert.dom(screen.getByText('Ouverture de votre espace Pix Certif le 12/11/2022')).exists();
+        assert
+          .dom(
+            screen.getByText(
+              'Ouverture de votre espace Pix Certif le 12/11/2022 (00h00, heure France métropolitaine).',
+            ),
+          )
+          .exists();
       });
     });
   });

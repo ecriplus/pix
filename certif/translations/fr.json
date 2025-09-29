@@ -322,7 +322,7 @@
         "title": "Inscrire des candidats"
       },
       "restricted-access": {
-        "title": "Ouverture de votre espace Pix Certif le"
+        "title-access": "Ouverture de votre espace Pix Certif le {date} (00h00, heure France métropolitaine)."
       }
     },
     "session-finalization": {
@@ -1080,5 +1080,5 @@
       "title": "Conditions générales d'utilisation de la plateforme Pix Certif"
     }
   },
-  "restricted-access": "Site en maintenance, réouverture de votre espace Pix Certif le {date}."
+  "restricted-access": "Site en maintenance, réouverture de votre espace Pix Certif le {date} (00h00, heure France métropolitaine)."
 }

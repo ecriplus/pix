@@ -118,7 +118,7 @@ module('Integration | Component | Login session supervisor | Form', function (ho
         assert
           .dom(
             within(screen.getByRole('alert')).getByText(
-              'Site en maintenance, réouverture de votre espace Pix Certif le 10/10/2020.',
+              'Site en maintenance, réouverture de votre espace Pix Certif le 10/10/2020 (00h00, heure France métropolitaine).',
             ),
           )
           .exists();

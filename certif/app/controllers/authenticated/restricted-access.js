@@ -1,17 +1,26 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(LocalizedFormat);
+dayjs.extend(utc);
 
 export default class RestrictedAccessController extends Controller {
   @service intl;
 
   get certificationOpeningDate() {
     if (this.model.isAccessBlockedCollege) {
-      return this.model.pixCertifScoBlockedAccessDateCollege;
+      return this.intl.t('pages.sco.restricted-access.title-access', {
+        date: dayjs.utc(this.model.pixCertifScoBlockedAccessDateCollege).format('L'),
+      });
     }
 
     if (this.model.isAccessBlockedLycee || this.model.isAccessBlockedAEFE || this.model.isAccessBlockedAgri) {
-      return this.model.pixCertifScoBlockedAccessDateLycee;
+      return this.intl.t('pages.sco.restricted-access.title-access', {
+        date: dayjs.utc(this.model.pixCertifScoBlockedAccessDateLycee).format('L'),
+      });
     }
 
     return null;
@@ -19,7 +28,7 @@ export default class RestrictedAccessController extends Controller {
 
   get accessBlockedLabel() {
     return this.intl.t('restricted-access', {
-      date: dayjs(this.model.pixCertifBlockedAccessUntilDate).format('DD/MM/YYYY'),
+      date: dayjs.utc(this.model.pixCertifBlockedAccessUntilDate).format('L'),
     });
   }
 }
