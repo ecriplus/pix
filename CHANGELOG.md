@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.220.0](https://github.com/1024pix/pix/compare/v5.219.0...v5.220.0) (2025-09-29)
+
+### :rocket: Amélioration
+
+- [#13701](https://github.com/1024pix/pix/pull/13701) Ajouter deux tables pour relier les participations à des parcours combinés aux organization learners (PIX-19676) 
+- [#13705](https://github.com/1024pix/pix/pull/13705) Désactiver les propositions lors de la vérification des réponses des QROCM (PIX-19374) 
+- [#13675](https://github.com/1024pix/pix/pull/13675) Enlever le fond violet en début de module (PIX-19679) 
+- [#13689](https://github.com/1024pix/pix/pull/13689) Enregistrer l'équipe en charge lors de la création d'une nouvelle organisation (PIX-19506) 
+- [#13702](https://github.com/1024pix/pix/pull/13702) Permettre de visualiser les feedbacks lors de la preview (PIX-12252) 
+- [#13706](https://github.com/1024pix/pix/pull/13706) Placer les attributs width/height des images matricielles si elles sont disponibles (PIX-19681) 
+- [#13698](https://github.com/1024pix/pix/pull/13698) Transmettre un event d'erreur durant le stream d'une réponse LLM si celle-ci contient une erreur (PIX-19697) 
+- [#13707](https://github.com/1024pix/pix/pull/13707) Update IAGenBiais_IND.json 
+
+### :bug: Correction
+
+- [#13672](https://github.com/1024pix/pix/pull/13672) Rendre les dates de naissance de l'ES insensibles à la timezone (PIX-19499). 
+
+### :building_construction: Tech
+
+- [#13686](https://github.com/1024pix/pix/pull/13686) Initiation de la notion de millesime (PIX-19670). 
+
+### :arrow_up: Montée de version
+
+- [#13710](https://github.com/1024pix/pix/pull/13710) Update dependency @1024pix/ember-testing-library to ^3.0.16 (admin) 
+- [#13711](https://github.com/1024pix/pix/pull/13711) Update dependency @1024pix/ember-testing-library to ^3.0.16 (certif) 
+- [#13712](https://github.com/1024pix/pix/pull/13712) Update dependency @1024pix/ember-testing-library to ^3.0.16 (junior) 
+- [#13713](https://github.com/1024pix/pix/pull/13713) Update dependency @1024pix/ember-testing-library to ^3.0.16 (mon-pix) 
+- [#13714](https://github.com/1024pix/pix/pull/13714) Update dependency @1024pix/ember-testing-library to ^3.0.16 (orga) 
+- [#13716](https://github.com/1024pix/pix/pull/13716) Update dependency @1024pix/pix-ui to ^55.28.4 (admin) 
+- [#13717](https://github.com/1024pix/pix/pull/13717) Update dependency @1024pix/pix-ui to ^55.28.4 (certif) 
+- [#13690](https://github.com/1024pix/pix/pull/13690) Update dependency eslint-plugin-unicorn to v60 (dossier racine) 
+- [#13692](https://github.com/1024pix/pix/pull/13692) Update dependency eslint-plugin-unicorn to v61 (api)
+
 # [5.219.0](https://github.com/1024pix/pix/compare/v5.218.0...v5.219.0) (2025-09-26)
 
 ### :rocket: Amélioration
