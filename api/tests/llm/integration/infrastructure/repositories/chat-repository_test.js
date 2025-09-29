@@ -89,6 +89,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
 
         expect(insertedChat).to.deep.include({
           id: chatDTO.id,
+          userId: chatDTO.userId,
           passageId: chatDTO.passageId,
           moduleId: chatDTO.moduleId,
           configContent: chatDTO.configuration,
@@ -260,6 +261,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       // given
       const chatId = databaseBuilder.factory.buildChat({
         assessmentId: 123,
+        userId: 456,
         challengeId: 'recCHallengeA',
         configId: 'someConfigId',
         configContent: {
@@ -324,7 +326,7 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
       expect(chat).to.deepEqualInstance(
         new Chat({
           id: chatId,
-          userId: undefined,
+          userId: 456,
           assessmentId: 123,
           challengeId: 'recCHallengeA',
           passageId: null,

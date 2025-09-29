@@ -6,6 +6,7 @@ const TABLE_NAME = 'chats';
 
 const buildChat = function ({
   id = randomUUID(),
+  userId = null,
   assessmentId = null,
   challengeId = null,
   configId = null,
@@ -35,6 +36,7 @@ const buildChat = function ({
 } = {}) {
   const values = {
     id,
+    userId,
     assessmentId,
     challengeId,
     configId,

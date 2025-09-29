@@ -37,6 +37,7 @@ export async function save(chat) {
   const chatDTO = chat.toDTO();
   const {
     id: chatId,
+    userId,
     assessmentId,
     challengeId,
     configurationId: configId,
@@ -53,6 +54,7 @@ export async function save(chat) {
   await knexConn('chats')
     .insert({
       id: chatId,
+      userId,
       assessmentId,
       challengeId,
       configContent,
