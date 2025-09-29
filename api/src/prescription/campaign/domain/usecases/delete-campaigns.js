@@ -31,7 +31,7 @@ const deleteCampaigns = async ({
     }
   }
 
-  const campaignsToDelete = await campaignAdministrationRepository.getByIds(campaignIds);
+  const campaignsToDelete = await campaignAdministrationRepository.findByIds(campaignIds);
   const campaignParticipationsToDelete = await campaignParticipationRepository.getByCampaignIds(campaignIds);
 
   const isAnonymizationWithDeletionEnabled = await featureToggles.get('isAnonymizationWithDeletionEnabled');
