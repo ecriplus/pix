@@ -325,7 +325,7 @@ export default class EvaluationResultsHero extends Component {
         />
       {{/if}}
 
-      {{#if @campaignParticipationResult.canRetry}}
+      {{#if (or @campaignParticipationResult.canRetry @campaignParticipationResult.canReset)}}
         <RetryOrResetBlock @campaign={{@campaign}} @campaignParticipationResult={{@campaignParticipationResult}} />
       {{/if}}
     </div>

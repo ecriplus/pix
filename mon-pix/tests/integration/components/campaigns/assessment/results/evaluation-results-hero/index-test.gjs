@@ -1165,46 +1165,68 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
   });
 
   module('retry or reset block', function () {
-    module('when the user can retry the campaign', function () {
-      test('displays the retry or reset block', async function (assert) {
-        // given
-        const campaign = { organizationId: 1, multipleSendings: true };
-        const campaignParticipationResult = { masteryRate: 0.1, canRetry: true, canReset: true };
+    test('displays the retry or reset block when the user can retry and reset the campaign', async function (assert) {
+      // given
+      const campaign = { organizationId: 1, multipleSendings: true };
+      const campaignParticipationResult = { masteryRate: 0.1, canRetry: true, canReset: true };
 
-        // when
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-            />
-          </template>,
-        );
+      // when
+      const screen = await render(
+        <template>
+          <EvaluationResultsHero @campaign={{campaign}} @campaignParticipationResult={{campaignParticipationResult}} />
+        </template>,
+      );
 
-        // then
-        assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
-      });
+      // then
+      assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
     });
 
-    module('when the user can not retry the campaign', function () {
-      test('not display the retry or reset block', async function (assert) {
-        // given
-        const campaign = { organizationId: 1, multipleSendings: false };
-        const campaignParticipationResult = { masteryRate: 0.1, canRetry: false, canReset: true };
+    test('displays the retry or reset block when the user can only reset the campaign', async function (assert) {
+      // given
+      const campaign = { organizationId: 1, multipleSendings: true };
+      const campaignParticipationResult = { masteryRate: 1, canImprove: false, canRetry: false, canReset: true };
 
-        // when
-        const screen = await render(
-          <template>
-            <EvaluationResultsHero
-              @campaign={{campaign}}
-              @campaignParticipationResult={{campaignParticipationResult}}
-            />
-          </template>,
-        );
+      // when
+      const screen = await render(
+        <template>
+          <EvaluationResultsHero @campaign={{campaign}} @campaignParticipationResult={{campaignParticipationResult}} />
+        </template>,
+      );
 
-        // then
-        assert.dom(screen.queryByText(t('pages.skill-review.hero.retry.title'))).doesNotExist();
-      });
+      // then
+      assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
+    });
+
+    test('displays the retry or reset block when the user can only retry the campaign', async function (assert) {
+      // given
+      const campaign = { organizationId: 1, multipleSendings: true };
+      const campaignParticipationResult = { masteryRate: 1, canImprove: false, canRetry: true, canReset: false };
+
+      // when
+      const screen = await render(
+        <template>
+          <EvaluationResultsHero @campaign={{campaign}} @campaignParticipationResult={{campaignParticipationResult}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByText(t('pages.skill-review.hero.retry.title'))).exists();
+    });
+
+    test('not display the retry or reset block when the user can not retry or reset the campaign', async function (assert) {
+      // given
+      const campaign = { organizationId: 1, multipleSendings: false };
+      const campaignParticipationResult = { masteryRate: 0.1, canRetry: false, canReset: false };
+
+      // when
+      const screen = await render(
+        <template>
+          <EvaluationResultsHero @campaign={{campaign}} @campaignParticipationResult={{campaignParticipationResult}} />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.queryByText(t('pages.skill-review.hero.retry.title'))).doesNotExist();
     });
   });
 });
