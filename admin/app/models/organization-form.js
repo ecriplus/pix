@@ -107,6 +107,7 @@ export default class OrganizationForm extends Model.extend(Validations) {
   @attr('number') credit;
   @attr('string') documentationUrl;
   @attr() identityProviderForCampaigns;
+  @attr('string') administrationTeamId;
 
   #getErrorAttribute(name) {
     const nameAttribute = this.validations.attrs.get(name);

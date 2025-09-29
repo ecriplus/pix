@@ -18,19 +18,30 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @service accessControl;
   @service store;
   @service oidcIdentityProviders;
+  @service intl;
 
   @tracked isEditMode = false;
   @tracked showArchivingConfirmationModal = false;
   @tracked toggleLockPlaces = false;
+  @tracked administrationTeams = [];
 
   noIdentityProviderOption = { label: 'Aucun', value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
+  noAdministrationTeamOption = {
+    label: this.intl.t('components.organizations.editing.administration-team.selector.none-option'),
+    value: 'None',
+  };
 
   constructor() {
     super(...arguments);
-    this._initForm();
+    this.#onMount();
 
     this.toggleLockPlaces = this.form.features['PLACES_MANAGEMENT']?.active ?? false;
+  }
+
+  async #onMount() {
+    this._initForm();
+    this.administrationTeams = await this.store.findAll('administration-team');
   }
 
   get isManagingStudentAvailable() {
@@ -48,9 +59,23 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return [this.noIdentityProviderOption, this.garIdentityProviderOption, ...oidcIdentityProvidersOptions];
   }
 
+  get administrationTeamsOptions() {
+    const options = this.administrationTeams.map((administrationTeam) => ({
+      value: administrationTeam.id,
+      label: administrationTeam.name,
+    }));
+
+    return options;
+  }
+
   @action
   onChangeIdentityProvider(newIdentityProvider) {
     this.form.identityProviderForCampaigns = newIdentityProvider;
+  }
+
+  @action
+  onChangeAdministrationTeam(newAdministrationTeamId) {
+    this.form.administrationTeamId = newAdministrationTeamId;
   }
 
   @action
@@ -86,6 +111,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
       this.form.identityProviderForCampaigns = null;
     }
 
+    const administrationTeamName = this.administrationTeams.find(
+      (team) => team.id === this.form.administrationTeamId,
+    )?.name;
+
     this.args.organization.set('name', this.form.name);
     this.args.organization.set('externalId', this.form.externalId);
     this.args.organization.set('provinceCode', this.form.provinceCode);
@@ -97,6 +126,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('documentationUrl', this.form.documentationUrl);
     this.args.organization.set('identityProviderForCampaigns', this.form.identityProviderForCampaigns);
     this.args.organization.set('features', this.form.features);
+    this.args.organization.set('administrationTeamId', this.form.administrationTeamId);
+    this.args.organization.set('administrationTeamName', administrationTeamName);
 
     this.closeAndResetForm();
     return this.args.onSubmit();
@@ -116,6 +147,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
       identityProviderForCampaigns:
         this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
       features: structuredClone(this.args.organization.features),
+      administrationTeamId: `${this.args.organization.administrationTeamId}`,
     });
   }
 
@@ -156,6 +188,19 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @value={{this.form.provinceCode}}
             {{on "input" (fn this.updateFormValue "provinceCode")}}
           ><:label>Département (en 3 chiffres)</:label></PixInput>
+        </div>
+
+        <div class="form-field">
+          <PixSelect
+            @options={{this.administrationTeamsOptions}}
+            @value={{this.form.administrationTeamId}}
+            @onChange={{this.onChangeAdministrationTeam}}
+            @hideDefaultOption={{true}}
+            class="admin-form__select"
+            @placeholder={{t "components.organizations.editing.administration-team.selector.placeholder"}}
+          >
+            <:label>{{t "components.organizations.editing.administration-team.selector.label"}}</:label>
+          </PixSelect>
         </div>
 
         <div class="form-field">

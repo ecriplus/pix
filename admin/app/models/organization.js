@@ -27,7 +27,7 @@ export default class Organization extends Model {
   @attr() parentOrganizationId;
   @attr('nullable-string') parentOrganizationName;
   //TODO REMOVE nullable-string BEFORE THE END OF EPIX
-  @attr('nullable-string') administrationTeamId;
+  @attr() administrationTeamId;
   @attr('nullable-string') administrationTeamName;
   @equal('type', 'SCO') isOrganizationSCO;
   @equal('type', 'SUP') isOrganizationSUP;

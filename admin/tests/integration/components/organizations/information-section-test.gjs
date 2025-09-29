@@ -17,6 +17,13 @@ module('Integration | Component | organizations/information-section', function (
       hasAccessToOrganizationActionsScope = true;
     }
     this.owner.register('service:access-control', AccessControlStub);
+
+    const store = this.owner.lookup('service:store');
+    store.findAll = () =>
+      Promise.resolve([
+        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
+        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
+      ]);
   });
 
   module('when displaying organization', function () {

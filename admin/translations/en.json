@@ -555,9 +555,17 @@
       },
       "creation": {
         "administration-team": {
-          "selector" : {
+          "selector": {
             "label": "Choose an administration team",
             "placeholder": "Administration team"
+          }
+        }
+      },
+      "editing": {
+        "administration-team": {
+          "selector": {
+            "label": "Administration team",
+            "placeholder": "Choose an administration team"
           }
         }
       },
