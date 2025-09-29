@@ -299,14 +299,14 @@
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web. Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.<br></p>"
+                      "diagnosis": "<p><strong>Eh non.<br></strong>Car, vous n’aviez accès qu’aux recettes présentes sur le web. Les données observées ici ont un biais&nbsp;: les taboulés à la semoule sont sur-représentés sur le web.&nbsp;Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.</p>"
                     }
                   }
                 ],
