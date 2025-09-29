@@ -411,6 +411,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         });
         const archivedAt = new Date('2019-04-28T02:42:00Z');
         const createdAt = new Date('2019-04-28T02:42:00Z');
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization catalina',
@@ -425,6 +426,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           archivedBy: archivist.id,
           archivedAt,
           createdAt,
+          administrationTeamId: administrationTeam.id,
         });
         const dataProtectionOfficer = databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
           firstName: 'Justin',
@@ -473,6 +475,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'archived-at': archivedAt,
               'creator-full-name': 'Tom Dereck',
               'identity-provider-for-campaigns': null,
+              'administration-team-id': administrationTeam.id,
+              'administration-team-name': administrationTeam.name,
               features: {
                 [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
                 [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true, params: null },

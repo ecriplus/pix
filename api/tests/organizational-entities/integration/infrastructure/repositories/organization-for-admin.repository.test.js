@@ -661,6 +661,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
   describe('#get', function () {
     it('returns an organization for admin by provided id', async function () {
       // given
+      const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
       const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
       const parentOrganization = databaseBuilder.factory.buildOrganization({
         type: 'SCO',
@@ -691,6 +692,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         showSkills: false,
         identityProviderForCampaigns: 'genericOidcProviderCode',
         parentOrganizationId: parentOrganization.id,
+        administrationTeamId: administrationTeam.id,
       });
 
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -748,6 +750,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         creatorFirstName: 'Cécile',
         creatorLastName: 'Encieux',
         identityProviderForCampaigns: 'genericOidcProviderCode',
+        administrationTeamId: administrationTeam.id,
+        administrationTeamName: administrationTeam.name,
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false },
           [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'BIDON' } },
@@ -774,6 +778,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('should return an organization with import feature with empty params', async function () {
         // given
         const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization of the dark side',
@@ -790,6 +795,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           formNPSUrl: 'https://pix.fr/',
           showSkills: false,
           identityProviderForCampaigns: 'genericOidcProviderCode',
+          administrationTeamId: administrationTeam.id,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -847,6 +853,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           },
           parentOrganizationId: null,
           parentOrganizationName: null,
+          administrationTeamId: administrationTeam.id,
+          administrationTeamName: administrationTeam.name,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -856,6 +864,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('should return if its enable and the additional params', async function () {
         // given
         const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization of the dark side',
@@ -872,6 +881,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           formNPSUrl: 'https://pix.fr/',
           showSkills: false,
           identityProviderForCampaigns: 'genericOidcProviderCode',
+          administrationTeamId: administrationTeam.id,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -952,6 +962,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           },
           parentOrganizationId: null,
           parentOrganizationName: null,
+          administrationTeamId: administrationTeam.id,
+          administrationTeamName: administrationTeam.name,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -992,6 +1004,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const superAdminUser = databaseBuilder.factory.buildUser();
         const archivist = databaseBuilder.factory.buildUser();
         const archivedAt = new Date('2022-02-02');
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
 
         const insertedOrganization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
@@ -1010,6 +1023,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           showSkills: false,
           archivedBy: archivist.id,
           archivedAt,
+          administrationTeamId: administrationTeam.id,
         });
 
         await databaseBuilder.commit();
@@ -1052,6 +1066,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           features: {},
           parentOrganizationId: null,
           parentOrganizationName: null,
+          administrationTeamId: administrationTeam.id,
+          administrationTeamName: administrationTeam.name,
         });
         expect(foundOrganizationForAdmin).to.deepEqualInstance(expectedOrganizationForAdmin);
       });

@@ -112,8 +112,15 @@ const get = async function ({ organizationId }) {
       identityProviderForCampaigns: 'organizations.identityProviderForCampaigns',
       parentOrganizationId: 'organizations.parentOrganizationId',
       parentOrganizationName: 'parentOrganizations.name',
+      administrationTeamId: 'organizations.administrationTeamId',
+      administrationTeamName: 'administrationTeams.name',
     })
     .leftJoin('users AS archivists', 'archivists.id', 'organizations.archivedBy')
+    .leftJoin(
+      'administration_teams AS administrationTeams',
+      'administrationTeams.id',
+      'organizations.administrationTeamId',
+    )
     .leftJoin('users AS creators', 'creators.id', 'organizations.createdBy')
     .leftJoin(
       'data-protection-officers AS dataProtectionOfficers',
@@ -200,6 +207,7 @@ const save = async function ({ organization }) {
     'credit',
     'createdBy',
     'documentationUrl',
+    'administrationTeamId',
   ]);
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME).returning('*').insert(data);
   const savedOrganization = _toDomain(organizationCreated);
@@ -230,6 +238,7 @@ const update = async function ({ organization }) {
     'provinceCode',
     'showSkills',
     'type',
+    'administrationTeamId',
   ]);
 
   await _enableFeatures(knexConn, organization.features, organization.id);
@@ -418,6 +427,8 @@ function _toDomain(rawOrganization) {
     tags: rawOrganization.tags || [],
     parentOrganizationId: rawOrganization.parentOrganizationId,
     parentOrganizationName: rawOrganization.parentOrganizationName,
+    administrationTeamId: rawOrganization.administrationTeamId,
+    administrationTeamName: rawOrganization.administrationTeamName,
   });
 
   return organization;
