@@ -1,5 +1,5 @@
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
-import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 const { getCertificationPointOfContact } = usecases;

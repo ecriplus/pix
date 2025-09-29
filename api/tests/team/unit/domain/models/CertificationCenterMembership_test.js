@@ -1,8 +1,8 @@
 import {
   CERTIFICATION_CENTER_MEMBERSHIP_ROLES,
   CertificationCenterMembership,
-} from '../../../../src/shared/domain/models/CertificationCenterMembership.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+} from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | CertificationCenterMembership', function () {
   const now = new Date('2023-09-12');

@@ -10,8 +10,8 @@ import {
   NotFoundError,
 } from '../../../shared/domain/errors.js';
 import { CertificationCenter } from '../../../shared/domain/models/CertificationCenter.js';
-import { CertificationCenterMembership } from '../../../shared/domain/models/CertificationCenterMembership.js';
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
+import { CertificationCenterMembership } from '../../domain/models/CertificationCenterMembership.js';
 
 const CERTIFICATION_CENTER_MEMBERSHIP_TABLE_NAME = 'certification-center-memberships';
 

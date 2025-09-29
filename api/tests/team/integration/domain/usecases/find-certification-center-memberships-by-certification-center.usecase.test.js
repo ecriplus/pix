@@ -1,4 +1,4 @@
-import { CertificationCenterMembership } from '../../../../../src/shared/domain/models/CertificationCenterMembership.js';
+import { CertificationCenterMembership } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
