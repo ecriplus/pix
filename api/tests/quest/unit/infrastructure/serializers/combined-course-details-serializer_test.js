@@ -39,6 +39,13 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-details'
           code: 'COMBINIX1',
           'campaign-ids': [1],
         },
+        relationships: {
+          'combined-course-participations': {
+            links: {
+              related: '/api/combined-courses/1/participations',
+            },
+          },
+        },
         type: 'combined-courses',
         id: '1',
       },

@@ -4,7 +4,17 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourse) {
   return new Serializer('combined-courses', {
-    attributes: ['name', 'code', 'campaignIds'],
+    attributes: ['name', 'code', 'campaignIds', 'combinedCourseParticipations'],
+    combinedCourseParticipations: {
+      ref: 'id',
+      nullIfMissing: true,
+      ignoreRelationshipData: true,
+      relationshipLinks: {
+        related: function (record) {
+          return `/api/combined-courses/${record.id}/participations`;
+        },
+      },
+    },
   }).serialize(combinedCourse);
 };
 
