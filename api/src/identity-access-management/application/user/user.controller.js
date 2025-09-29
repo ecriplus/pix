@@ -135,7 +135,7 @@ const getUserAuthenticationMethods = async function (request, h, dependencies = 
  */
 const createUser = async function (request, h, dependencies = { userSerializer, localeService }) {
   const locale = getUserLocale(request);
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const redirectionUrl = request.payload.meta ? request.payload.meta['redirection-url'] : null;
   const user = dependencies.userSerializer.deserialize(request.payload);

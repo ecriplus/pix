@@ -49,7 +49,7 @@ const getJuryCertificationSummaries = async function (
 ) {
   const { sessionId } = request.params;
   const { page } = request.query;
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const { juryCertificationSummaries, pagination } =
     await dependencies.juryCertificationSummaryRepository.findBySessionIdPaginated({
