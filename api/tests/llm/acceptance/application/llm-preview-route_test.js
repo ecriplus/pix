@@ -1,19 +1,14 @@
 import { Readable } from 'node:stream';
 
-import { Chat } from '../../../../src/llm/domain/models/Chat.js';
-import { Configuration } from '../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX } from '../../../../src/llm/infrastructure/repositories/chat-redis-repository.js';
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   createServer,
+  databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
   knex,
   nock,
 } from '../../../test-helper.js';
-
-const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 describe('Acceptance | Route | llm-preview', function () {
   let server;
@@ -21,10 +16,6 @@ describe('Acceptance | Route | llm-preview', function () {
   beforeEach(async function () {
     server = await createServer();
     await featureToggles.set('isEmbedLLMEnabled', true);
-  });
-
-  afterEach(async function () {
-    await chatTemporaryStorage.flushAll();
   });
 
   describe('POST /api/llm/preview/chats', function () {
@@ -227,25 +218,25 @@ describe('Acceptance | Route | llm-preview', function () {
     context('when chat belongs to a user', function () {
       it('returns status code 403', async function () {
         // given
-        await chatTemporaryStorage.save({
-          key: '123e4567-e89b-12d3-a456-426614174000',
-          value: {
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            userId: 123,
-            configurationId: 'some-config-id',
-            configuration: {
-              llm: {
-                historySize: 10,
-              },
-              challenge: {
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-              },
+        const chatId = '123e4567-e89b-12d3-a456-426614174000';
+        const chat = {
+          id: chatId,
+          userId: 123,
+          configId: 'some-config-id',
+          configContent: {
+            llm: {
+              historySize: 10,
             },
-            hasAttachmentContextBeenAdded: false,
-            messages: [],
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 4,
+            },
           },
-        });
+          hasAttachmentContextBeenAdded: false,
+          messages: [],
+        };
+        await databaseBuilder.factory.buildChat(chat);
+        await databaseBuilder.commit();
 
         // when
         const response = await server.inject({
@@ -260,59 +251,100 @@ describe('Acceptance | Route | llm-preview', function () {
 
     it('returns status code 200 and chat information', async function () {
       // given
-      await chatTemporaryStorage.save({
-        key: '123e4567-e89b-12d3-a456-426614174000',
-        value: {
-          id: '123e4567-e89b-12d3-a456-426614174000',
-          configuration: {
-            llm: {
-              historySize: 10,
-            },
-            challenge: {
-              inputMaxChars: 500,
-              inputMaxPrompts: 4,
-              context: 'modulix',
-              victoryConditions: {
-                expectations: ['expectation'],
-              },
-            },
-            attachment: {
-              name: 'expected_file.txt',
-              context: 'add me in the chat !',
+      const chatId = '123e4567-e89b-12d3-a456-426614174000';
+      const messages = [
+        {
+          attachmentName: null,
+          attachmentContext: null,
+          content: 'coucou user1',
+          chatId,
+          emitter: 'user',
+          shouldBeRenderedInPreview: true,
+          index: 0,
+          wasModerated: null,
+        },
+        {
+          attachmentName: null,
+          attachmentContext: null,
+          content: 'coucou LLM1',
+          chatId,
+          emitter: 'assistant',
+          index: 1,
+          shouldBeRenderedInPreview: true,
+          hasErrorOccurred: true,
+          wasModerated: null,
+        },
+        {
+          attachmentName: 'expected_file.txt',
+          attachmentContext: null,
+          chatId,
+          emitter: 'user',
+          index: 2,
+          shouldBeRenderedInPreview: true,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+          wasModerated: null,
+        },
+        {
+          attachmentName: 'expected_file.txt',
+          chatId,
+          content: null,
+          index: 3,
+          attachmentContext: 'add me in the chat !',
+          emitter: 'assistant',
+          shouldBeRenderedInPreview: false,
+          wasModerated: null,
+        },
+        {
+          attachmentName: null,
+          attachmentContext: null,
+          content: 'un message',
+          chatId,
+          emitter: 'user',
+          index: 4,
+          shouldBeRenderedInPreview: true,
+          haveVictoryConditionsBeenFulfilled: true,
+          wasModerated: null,
+        },
+        {
+          attachmentName: null,
+          attachmentContext: null,
+          chatId,
+          content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+          emitter: 'assistant',
+          index: 5,
+          shouldBeRenderedInPreview: true,
+          wasModerated: null,
+        },
+      ];
+      const chat = {
+        id: chatId,
+        configContent: {
+          llm: {
+            historySize: 10,
+          },
+          challenge: {
+            inputMaxChars: 500,
+            inputMaxPrompts: 4,
+            context: 'modulix',
+            victoryConditions: {
+              expectations: ['expectation'],
             },
           },
-          hasAttachmentContextBeenAdded: true,
-          totalInputTokens: 2_000,
-          totalOutputTokens: 5_000,
-          messages: [
-            { content: 'coucou user1', isFromUser: true, shouldBeRenderedInPreview: true },
-            { content: 'coucou LLM1', isFromUser: false, shouldBeRenderedInPreview: true, hasErrorOccurred: true },
-            {
-              attachmentName: 'expected_file.txt',
-              isFromUser: true,
-              shouldBeRenderedInPreview: true,
-              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
-            },
-            {
-              attachmentName: 'expected_file.txt',
-              attachmentContext: 'add me in the chat !',
-              isFromUser: false,
-              shouldBeRenderedInPreview: false,
-            },
-            {
-              content: 'un message',
-              isFromUser: true,
-              shouldBeRenderedInPreview: true,
-              haveVictoryConditionsBeenFulfilled: true,
-            },
-            {
-              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-              isFromUser: false,
-              shouldBeRenderedInPreview: true,
-            },
-          ],
+          attachment: {
+            name: 'expected_file.txt',
+            context: 'add me in the chat !',
+          },
         },
-      });
+        hasAttachmentContextBeenAdded: true,
+        messages,
+        totalInputTokens: 2_000,
+        totalOutputTokens: 5_000,
+      };
+      await databaseBuilder.factory.buildChat(chat);
+      for (const message of messages) {
+        await databaseBuilder.factory.buildChatMessage(message);
+      }
+      await databaseBuilder.commit();
 
       // when
       const response = await server.inject({
@@ -334,20 +366,20 @@ describe('Acceptance | Route | llm-preview', function () {
         messages: [
           {
             content: 'coucou user1',
-            attachmentName: undefined,
+            attachmentName: null,
             isFromUser: true,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: undefined,
-            wasModerated: undefined,
-            hasErrorOccurred: undefined,
+            haveVictoryConditionsBeenFulfilled: false,
+            wasModerated: null,
+            hasErrorOccurred: null,
           },
           {
             content: 'coucou LLM1',
-            attachmentName: undefined,
+            attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: undefined,
-            wasModerated: undefined,
+            haveVictoryConditionsBeenFulfilled: false,
+            wasModerated: null,
             hasErrorOccurred: true,
           },
           {
@@ -356,17 +388,17 @@ describe('Acceptance | Route | llm-preview', function () {
             isFromUser: true,
             isAttachmentValid: true,
             haveVictoryConditionsBeenFulfilled: true,
-            wasModerated: undefined,
+            wasModerated: null,
             hasErrorOccurred: undefined,
           },
           {
             content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
-            attachmentName: undefined,
+            attachmentName: null,
             isFromUser: false,
             isAttachmentValid: false,
-            haveVictoryConditionsBeenFulfilled: undefined,
-            wasModerated: undefined,
-            hasErrorOccurred: undefined,
+            haveVictoryConditionsBeenFulfilled: false,
+            wasModerated: null,
+            hasErrorOccurred: null,
           },
         ],
       });
@@ -374,10 +406,6 @@ describe('Acceptance | Route | llm-preview', function () {
   });
 
   describe('POST /api/llm/preview/chats/{chatId}/messages', function () {
-    afterEach(async function () {
-      await chatTemporaryStorage.flushAll();
-    });
-
     context('when feature toggle is disabled', function () {
       beforeEach(function () {
         return featureToggles.set('isEmbedLLMEnabled', false);
@@ -398,11 +426,11 @@ describe('Acceptance | Route | llm-preview', function () {
     context('when chat belongs to a user', function () {
       it('returns a 403 status code', async function () {
         // given
-        const chat = new Chat({
+        await databaseBuilder.factory.buildChat({
           id: '123e4567-e89b-12d3-a456-426614174000',
           userId: 123,
-          configurationId: 'some-config-id',
-          configuration: new Configuration({
+          configId: 'some-config-id',
+          configContent: {
             llm: {
               historySize: 123,
             },
@@ -410,14 +438,10 @@ describe('Acceptance | Route | llm-preview', function () {
               inputMaxChars: 999,
               inputMaxPrompts: 999,
             },
-          }),
+          },
           hasAttachmentContextBeenAdded: false,
-          messages: [],
         });
-        await chatTemporaryStorage.save({
-          key: '123e4567-e89b-12d3-a456-426614174000',
-          value: chat.toDTO(),
-        });
+        await databaseBuilder.commit();
 
         // when
         const response = await server.inject({
@@ -433,9 +457,11 @@ describe('Acceptance | Route | llm-preview', function () {
 
     it('returns LLM response as stream', async function () {
       // given
-      const chat = new Chat({
+      await databaseBuilder.factory.buildChat({
         id: '123e4567-e89b-12d3-a456-426614174000',
-        configuration: new Configuration({
+        userId: null,
+        configId: 'some-config-id',
+        configContent: {
           llm: {
             historySize: 123,
           },
@@ -447,14 +473,11 @@ describe('Acceptance | Route | llm-preview', function () {
             name: 'expected_file.pdf',
             context: 'some context',
           },
-        }),
+        },
         hasAttachmentContextBeenAdded: false,
-        messages: [],
       });
-      await chatTemporaryStorage.save({
-        key: '123e4567-e89b-12d3-a456-426614174000',
-        value: chat.toDTO(),
-      });
+      await databaseBuilder.commit();
+
       const promptLlmScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
           configuration: {
