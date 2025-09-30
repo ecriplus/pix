@@ -26,4 +26,33 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       expect(result).to.equal(serializedCombinedCourse);
     });
   });
+  describe('#getParticipations', function () {
+    it('should call getCombinedCourseParticipation usecase with questId', async function () {
+      // given
+      const questId = 'questId123';
+      const combinedCourseParticipations = Symbol('combinedCourseParticipations');
+      const serializedCombinedCourseParticipations = Symbol('serializedCombinedCourseParticipations');
+      const request = {
+        params: { questId },
+      };
+
+      sinon.stub(usecases, 'findCombinedCourseParticipations').resolves(combinedCourseParticipations);
+      const combinedCourseParticipationSerializer = { serialize: sinon.stub() };
+      combinedCourseParticipationSerializer.serialize
+        .withArgs(combinedCourseParticipations)
+        .returns(serializedCombinedCourseParticipations);
+
+      // when
+      const result = await combinedCourseController.findParticipations(request, null, {
+        combinedCourseParticipationSerializer: combinedCourseParticipationSerializer,
+      });
+
+      // then
+      expect(usecases.findCombinedCourseParticipations).to.have.been.calledOnceWithExactly({ questId });
+      expect(combinedCourseParticipationSerializer.serialize).to.have.been.calledOnceWithExactly(
+        combinedCourseParticipations,
+      );
+      expect(result).to.equal(serializedCombinedCourseParticipations);
+    });
+  });
 });

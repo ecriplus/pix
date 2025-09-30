@@ -4,6 +4,7 @@ import { getDataBuffer } from '../../prescription/learner-management/infrastruct
 import { extractUserIdFromRequest } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as combinedCourseDetailsSerializer from '../infrastructure/serializers/combined-course-details-serializer.js';
+import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 
 const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
@@ -20,6 +21,12 @@ const getById = async (request, _, dependencies = { combinedCourseDetailsSeriali
   const combinedCourseDetails = await usecases.getCombinedCourseByQuestId({ questId });
 
   return dependencies.combinedCourseDetailsSerializer.serialize(combinedCourseDetails);
+};
+
+const findParticipations = async (request, _, dependencies = { combinedCourseParticipationSerializer }) => {
+  const questId = request.params.questId;
+  const combinedCourseParticipations = await usecases.findCombinedCourseParticipations({ questId });
+  return dependencies.combinedCourseParticipationSerializer.serialize(combinedCourseParticipations);
 };
 
 const start = async function (request, h) {
@@ -57,6 +64,7 @@ const createCombinedCourses = async function (request, h) {
 const combinedCourseController = {
   getByCode,
   getById,
+  findParticipations,
   start,
   reassessStatus,
   createCombinedCourses,
