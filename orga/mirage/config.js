@@ -667,4 +667,18 @@ function routes() {
       campaignIds: [],
     });
   });
+  this.get('/combined-courses/:combinedCourseId/participations', function (schema) {
+    const data = schema.combinedCourseParticipations.all();
+
+    if (data) {
+      return data;
+    }
+    schema.combinedCourseParticipation.create({
+      id: 123,
+      fistName: 'Gérard',
+      lastName: 'Etlestars',
+      status: 'COMPLETED',
+    });
+    return schema.combinedCourseParticipations.all();
+  });
 }

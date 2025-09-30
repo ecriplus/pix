@@ -11,28 +11,43 @@ module('Acceptance | Combined course page', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+  let combinedCourse;
 
   hooks.beforeEach(async function () {
     const user = createUserManagingStudents('ADMIN');
     createPrescriberByUser({ user });
 
     await authenticateSession(user.id);
-  });
 
-  test('it should display a combined course', async function (assert) {
-    // given
-    const combinedCourse = server.create('combined-course', {
+    combinedCourse = server.create('combined-course', {
       id: 2,
       code: 'AZERTY',
       name: 'Parcours Magimix',
       campaignIds: [123454],
+    });
+  });
+
+  test('it should display a combined course', async function (assert) {
+    // when
+    const screen = await visit(`/parcours/${combinedCourse.id}`);
+
+    // then
+    assert.ok(await screen.getByRole('heading', { name: new RegExp(combinedCourse.name) }));
+  });
+
+  test('it should display combined course participation', async function (assert) {
+    // given
+    const participation = server.create('combined-course-participation', {
+      id: 3,
+      firstName: 'bob',
+      lastName: 'Azerty',
+      status: 'STARTED',
     });
 
     // when
     const screen = await visit(`/parcours/${combinedCourse.id}`);
 
     // then
-
-    assert.ok(await screen.getByRole('heading', { name: new RegExp(combinedCourse.name) }));
+    assert.ok(screen.getByText(participation.firstName));
   });
 });

@@ -405,6 +405,7 @@
       "title": "{count, plural, =0 {Participants} =1 {Participant ({count})} other {Participants ({count})}}"
     },
     "participation-status": {
+      "COMPLETED": "Terminé",
       "SHARED": "Terminé",
       "STARTED": "En cours"
     },
@@ -1008,7 +1009,15 @@
       "title": "Résultats de certification"
     },
     "combined-course": {
-      "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit"
+      "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit",
+      "table": {
+        "column": {
+          "first-name": "Prénom",
+          "last-name": "Nom",
+          "status": "Statut"
+        },
+        "description": "Listes des participations au parcours"
+      }
     },
     "index": {
       "title": "Accueil"
