@@ -4,6 +4,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   knex,
 } from '../../../../test-helper.js';
 
@@ -56,10 +57,9 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
 
         await databaseBuilder.commit();
 
-        request = {
-          headers: generateAuthenticatedUserRequestHeaders({ userId, locale }),
-          method: 'POST',
+        const options = generateInjectOptions({
           url: `/api/certification-centers/${certificationCenterId}/invitations`,
+          method: 'POST',
           payload: {
             data: {
               attributes: {
@@ -67,10 +67,13 @@ describe('Acceptance | Team | Application | Route | Certification Center Invitat
               },
             },
           },
-        };
+          locale,
+          audience: 'https://certif.pix.fr',
+          authorizationData: { userId },
+        });
 
         // when
-        const response = await server.inject(request);
+        const response = await server.inject(options);
 
         // then
         const certificationCenterInvitations = await knex(CERTIFICATION_CENTER_INVITATIONS_TABLE_NAME)

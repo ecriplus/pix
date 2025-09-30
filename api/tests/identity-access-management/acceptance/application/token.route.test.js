@@ -1,7 +1,7 @@
 import querystring from 'node:querystring';
 
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { createServer, databaseBuilder, expect, generateInjectOptions, knex } from '../../../test-helper.js';
 
 const { ROLES } = PIX_ADMIN;
 import { UserAccessToken } from '../../../../src/identity-access-management/domain/models/UserAccessToken.js';
@@ -35,10 +35,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
 
     it('returns a 200 with an access token and a refresh token when authentication is ok', async function () {
       // given
-      const options = _getPostFormOptions({
+      const options = generateInjectOptions({
         url: '/api/token',
-        dataToPost: { grant_type: 'password', username: userEmailAddress, password: userPassword },
-        applicationName: 'orga',
+        method: 'POST',
+        payload: { grant_type: 'password', username: userEmailAddress, password: userPassword },
+        urlEncodePayload: true,
+        audience: 'https://orga.pix.fr',
       });
 
       // when
@@ -66,10 +68,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
 
       await databaseBuilder.commit();
 
-      const options = _getPostFormOptions({
+      const options = generateInjectOptions({
         url: '/api/token',
-        dataToPost: { grant_type: 'password', username: 'beth.rave1212', password: userPassword },
-        applicationName: 'orga',
+        method: 'POST',
+        payload: { grant_type: 'password', username: 'beth.rave1212', password: userPassword },
+        urlEncodePayload: true,
+        audience: 'https://orga.pix.fr',
       });
 
       // when
@@ -84,24 +88,28 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
     context('when user needs to refresh his access token', function () {
       it('returns a 200 with a new access token', async function () {
         // given
-        const optionsForAccessToken = _getPostFormOptions({
+        const optionsForAccessToken = generateInjectOptions({
           url: '/api/token',
-          dataToPost: {
+          method: 'POST',
+          payload: {
             grant_type: 'password',
             username: userEmailAddress,
             password: userPassword,
           },
-          applicationName: 'orga',
+          urlEncodePayload: true,
+          audience: 'https://orga.pix.fr',
         });
         const { result: accessTokenResult } = await server.inject(optionsForAccessToken);
 
-        const options = _getPostFormOptions({
+        const options = generateInjectOptions({
           url: '/api/token',
-          dataToPost: {
+          method: 'POST',
+          payload: {
             grant_type: 'refresh_token',
             refresh_token: accessTokenResult.refresh_token,
           },
-          applicationName: 'orga',
+          urlEncodePayload: true,
+          audience: 'https://orga.pix.fr',
         });
 
         // when
@@ -135,10 +143,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: { grant_type: 'password', username: user.email, password: userPassword },
-            applicationName: 'admin',
+            method: 'POST',
+            payload: { grant_type: 'password', username: user.email, password: userPassword },
+            urlEncodePayload: true,
+            audience: 'https://admin.pix.fr',
           });
 
           // when
@@ -160,10 +170,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         databaseBuilder.factory.buildSupervisorAccess({ userId, sessionId: 121 });
         await databaseBuilder.commit();
 
-        const options = _getPostFormOptions({
+        const options = generateInjectOptions({
           url: '/api/token',
-          dataToPost: { grant_type: 'password', username: userEmailAddress, password: userPassword },
-          applicationName: 'certif',
+          method: 'POST',
+          payload: { grant_type: 'password', username: userEmailAddress, password: userPassword },
+          urlEncodePayload: true,
+          audience: 'https://certif.pix.fr',
         });
 
         // when
@@ -194,10 +206,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           databaseBuilder.factory.buildUserLogin({ userId, failureCount: 9 });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: { grant_type: 'password', username: 'email@without.mb', password: 'wrongPassword' },
-            applicationName: 'app',
+            method: 'POST',
+            payload: { grant_type: 'password', username: 'email@without.mb', password: 'wrongPassword' },
+            urlEncodePayload: true,
+            audience: 'https://app.pix.fr',
           });
 
           // when
@@ -226,10 +240,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: { grant_type: 'password', username: 'email@without.mb', password: userPassword },
-            applicationName: 'app',
+            method: 'POST',
+            payload: { grant_type: 'password', username: 'email@without.mb', password: userPassword },
+            urlEncodePayload: true,
+            audience: 'https://app.pix.fr',
           });
 
           // when
@@ -255,10 +271,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: { grant_type: 'password', username: 'email@without.mb', password: userPassword },
-            applicationName: 'app',
+            method: 'POST',
+            payload: { grant_type: 'password', username: 'email@without.mb', password: userPassword },
+            urlEncodePayload: true,
+            audience: 'https://app.pix.fr',
           });
 
           // when
@@ -286,10 +304,12 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: { grant_type: 'password', username: userWithoutLocale.email, password: userPassword },
-            applicationName: 'app',
+            method: 'POST',
+            payload: { grant_type: 'password', username: userWithoutLocale.email, password: userPassword },
+            urlEncodePayload: true,
+            audience: 'https://app.pix.fr',
             locale,
           });
 
@@ -319,14 +339,16 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
           });
           await databaseBuilder.commit();
 
-          const options = _getPostFormOptions({
+          const options = generateInjectOptions({
             url: '/api/token',
-            dataToPost: {
+            method: 'POST',
+            payload: {
               grant_type: 'password',
               username: userWithLocale.email,
               password: userPassword,
             },
-            applicationName: 'app',
+            urlEncodePayload: true,
+            audience: 'https://app.pix.fr',
             locale,
           });
 
@@ -355,13 +377,15 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         databaseBuilder.factory.buildCampaign({ code: campaignCode, targetProfile });
         await databaseBuilder.commit();
 
-        options = _getPostFormOptions({
+        options = generateInjectOptions({
           url: '/api/token/anonymous',
-          dataToPost: {
+          method: 'POST',
+          payload: {
             campaign_code: campaignCode,
             lang,
           },
-          applicationName: 'app',
+          urlEncodePayload: true,
+          audience: 'https://app.pix.fr',
         });
       });
 
@@ -387,13 +411,15 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
         databaseBuilder.factory.buildCampaign({ code: simplifiedAccessCampaignCode, targetProfileId });
         await databaseBuilder.commit();
 
-        options = _getPostFormOptions({
+        options = generateInjectOptions({
           url: '/api/token/anonymous',
-          dataToPost: {
+          method: 'POST',
+          payload: {
             campaign_code: simplifiedAccessCampaignCode,
             lang,
           },
-          applicationName: 'app',
+          urlEncodePayload: true,
+          audience: 'https://app.pix.fr',
         });
       });
 
@@ -609,17 +635,3 @@ describe('Acceptance | Identity Access Management | Route | Token', function () 
     });
   });
 });
-
-function _getPostFormOptions({ url, dataToPost, applicationName, locale }) {
-  return {
-    method: 'POST',
-    url,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'x-forwarded-proto': 'https',
-      'x-forwarded-host': `${applicationName}.pix.fr`,
-      ...(locale && { cookie: `locale=${locale}` }),
-    },
-    payload: querystring.stringify(dataToPost),
-  };
-}
