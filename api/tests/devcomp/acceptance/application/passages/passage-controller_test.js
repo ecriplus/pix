@@ -11,6 +11,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   nock,
+  waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | passage-controller', function () {
@@ -427,6 +428,7 @@ describe('Acceptance | Controller | passage-controller', function () {
             payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
+          await waitForStreamFinalizationToBeDone();
 
           // then
           expect(response.statusCode).to.equal(201);

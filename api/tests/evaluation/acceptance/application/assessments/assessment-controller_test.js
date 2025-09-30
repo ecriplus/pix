@@ -27,6 +27,7 @@ import {
   mockLearningContent,
   nock,
   sinon,
+  waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | assessment-controller', function () {
@@ -918,6 +919,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
             payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
+          await waitForStreamFinalizationToBeDone();
 
           // then
           expect(response.statusCode).to.equal(201);

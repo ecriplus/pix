@@ -8,6 +8,7 @@ import {
   generateValidRequestAuthorizationHeaderForApplication,
   knex,
   nock,
+  waitForStreamFinalizationToBeDone,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Route | llm-preview', function () {
@@ -521,6 +522,7 @@ describe('Acceptance | Route | llm-preview', function () {
         url: '/api/llm/preview/embed/llm/chats/123e4567-e89b-12d3-a456-426614174000/messages',
         payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
       });
+      await waitForStreamFinalizationToBeDone();
 
       // then
       expect(response.statusCode).to.equal(201);

@@ -18,9 +18,14 @@ import {
   promptRepository,
 } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import * as toEventStream from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
-import { catchErr, databaseBuilder, expect, knex, nock } from '../../../../test-helper.js';
-
-const WAIT_TIME = 500;
+import {
+  catchErr,
+  databaseBuilder,
+  expect,
+  knex,
+  nock,
+  waitForStreamFinalizationToBeDone,
+} from '../../../../test-helper.js';
 
 describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
   let dependencies, chatId;
@@ -34,9 +39,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       toEventStream,
     };
   });
-  /*afterEach(async function () {
-    await chatTemporaryStorage.flushAll();
-  });*/
 
   context('when no chat id provided', function () {
     it('should throw a ChatNotFoundError', async function () {
@@ -160,7 +162,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       for await (const chunk of stream) {
         parts.push(decoder.decode(chunk));
       }
-      await waitForStreamFinalizationToBeDone(WAIT_TIME);
+      await waitForStreamFinalizationToBeDone();
       const llmResponse = parts.join('');
       expect(llmResponse).to.deep.equal('data: salut\n\n');
       expect(llmPostPromptScope.isDone()).to.be.true;
@@ -278,7 +280,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           for await (const chunk of stream) {
             parts.push(decoder.decode(chunk));
           }
-          await waitForStreamFinalizationToBeDone(WAIT_TIME);
+          await waitForStreamFinalizationToBeDone();
           const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
@@ -494,7 +496,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 for await (const chunk of stream) {
                   parts.push(decoder.decode(chunk));
                 }
-                await waitForStreamFinalizationToBeDone(WAIT_TIME);
+                await waitForStreamFinalizationToBeDone();
                 const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
                 const llmMessage =
@@ -684,7 +686,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               for await (const chunk of stream) {
                 parts.push(decoder.decode(chunk));
               }
-              await waitForStreamFinalizationToBeDone(WAIT_TIME);
+              await waitForStreamFinalizationToBeDone();
               const llmResponse = parts.join('');
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
@@ -869,7 +871,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 for await (const chunk of stream) {
                   parts.push(decoder.decode(chunk));
                 }
-                await waitForStreamFinalizationToBeDone(WAIT_TIME);
+                await waitForStreamFinalizationToBeDone();
                 const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-success\ndata: \n\n';
                 const llmMessage =
@@ -1101,7 +1103,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 for await (const chunk of stream) {
                   parts.push(decoder.decode(chunk));
                 }
-                await waitForStreamFinalizationToBeDone(WAIT_TIME);
+                await waitForStreamFinalizationToBeDone();
                 const llmResponse = parts.join('');
                 const attachmentMessage = 'event: attachment-success\ndata: \n\n';
                 const llmMessage =
@@ -1340,7 +1342,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               for await (const chunk of stream) {
                 parts.push(decoder.decode(chunk));
               }
-              await waitForStreamFinalizationToBeDone(WAIT_TIME);
+              await waitForStreamFinalizationToBeDone();
               const llmResponse = parts.join('');
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
@@ -1497,7 +1499,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
               for await (const chunk of stream) {
                 parts.push(decoder.decode(chunk));
               }
-              await waitForStreamFinalizationToBeDone(WAIT_TIME);
+              await waitForStreamFinalizationToBeDone();
               const llmResponse = parts.join('');
               const attachmentMessage = 'event: attachment-failure\ndata: \n\n';
               expect(llmResponse).to.deep.equal(attachmentMessage);
@@ -1626,7 +1628,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 for await (const chunk of stream) {
                   parts.push(decoder.decode(chunk));
                 }
-                await waitForStreamFinalizationToBeDone(WAIT_TIME);
+                await waitForStreamFinalizationToBeDone();
                 const llmResponse = parts.join('');
                 expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
@@ -1786,7 +1788,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 for await (const chunk of stream) {
                   parts.push(decoder.decode(chunk));
                 }
-                await waitForStreamFinalizationToBeDone(WAIT_TIME);
+                await waitForStreamFinalizationToBeDone();
                 const llmResponse = parts.join('');
                 expect(llmResponse).to.deep.equal('event: attachment-success\ndata: \n\n');
                 const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
@@ -1930,7 +1932,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         for await (const chunk of stream) {
           parts.push(decoder.decode(chunk));
         }
-        await waitForStreamFinalizationToBeDone(WAIT_TIME);
+        await waitForStreamFinalizationToBeDone();
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal(
           "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: victory-conditions-success\ndata: \n\n",
@@ -2069,7 +2071,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         for await (const chunk of stream) {
           parts.push(decoder.decode(chunk));
         }
-        await waitForStreamFinalizationToBeDone(WAIT_TIME);
+        await waitForStreamFinalizationToBeDone();
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal(
           "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: victory-conditions-success\ndata: \n\n",
@@ -2198,7 +2200,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         for await (const chunk of stream) {
           parts.push(decoder.decode(chunk));
         }
-        await waitForStreamFinalizationToBeDone(WAIT_TIME);
+        await waitForStreamFinalizationToBeDone();
         const llmResponse = parts.join('');
         expect(llmResponse).to.deep.equal('event: user-message-moderated\ndata: \n\n');
         const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
@@ -2320,7 +2322,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           for await (const chunk of stream) {
             parts.push(decoder.decode(chunk));
           }
-          await waitForStreamFinalizationToBeDone(WAIT_TIME);
+          await waitForStreamFinalizationToBeDone();
           const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\nevent: debug-input-tokens\ndata: 3000\n\nevent: debug-output-tokens\ndata: 5000\n\n",
@@ -2458,7 +2460,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           for await (const chunk of stream) {
             parts.push(decoder.decode(chunk));
           }
-          await waitForStreamFinalizationToBeDone(WAIT_TIME);
+          await waitForStreamFinalizationToBeDone();
           const llmResponse = parts.join('');
           expect(llmResponse).to.deep.equal(
             "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\ndata:  mais la paella c pas mal aussi\ndata: \n\n",
@@ -2612,7 +2614,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       for await (const chunk of stream) {
         parts.push(decoder.decode(chunk));
       }
-      await waitForStreamFinalizationToBeDone(WAIT_TIME);
+      await waitForStreamFinalizationToBeDone();
       const llmResponse = parts.join('');
       expect(llmResponse).to.deep.equal(
         "data: coucou c'est super\n\ndata: \ndata: le couscous c plutot bon\n\nevent: error\ndata: \n\n",
@@ -2773,12 +2775,4 @@ async function getChatAndMessagesFromDB(chatId) {
       .where({ chatId })
       .orderBy('index'),
   };
-}
-
-function waitForStreamFinalizationToBeDone(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
 }

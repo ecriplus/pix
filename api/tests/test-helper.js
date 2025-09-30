@@ -384,6 +384,14 @@ const preventStubsToBeCalledUnexpectedly = (stubs) => {
     );
   }
 };
+
+function waitForStreamFinalizationToBeDone() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+}
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
@@ -419,4 +427,5 @@ export {
   sinon,
   streamToPromise,
   toStream,
+  waitForStreamFinalizationToBeDone,
 };
