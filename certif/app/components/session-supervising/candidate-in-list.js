@@ -16,6 +16,12 @@ const Modals = {
   HandledLiveAlertSuccess: 'HandledLiveAlertSuccess',
 };
 
+const PIX_PLUS_DURATIONS = {
+  DROIT: 45,
+  PRO_SANTE: 45,
+  EDU: 90,
+};
+
 export default class CandidateInList extends Component {
   @service pixToast;
   @service intl;
@@ -322,8 +328,30 @@ export default class CandidateInList extends Component {
   }
 
   get candidateTheoricalEndDateTime() {
+    const pixPlusDuration = this._getPixPlusDurationInMinutes();
+
+    if (pixPlusDuration !== null) {
+      const endTime = dayjs(this.args.candidate.startDateTime).add(pixPlusDuration, 'minute').format('HH:mm');
+      return endTime;
+    }
+
     const theoricalEndDateTime = dayjs(this.args.candidate.theoricalEndDateTime).format('HH:mm');
     return theoricalEndDateTime;
+  }
+
+  _getPixPlusDurationInMinutes() {
+    const label = this.enrolledCertificationLabel?.toLowerCase() || '';
+
+    switch (true) {
+      case label.includes('droit'):
+        return PIX_PLUS_DURATIONS.DROIT;
+      case label.includes('pro') && label.includes('santé'):
+        return PIX_PLUS_DURATIONS.PRO_SANTE;
+      case label.includes('edu'):
+        return PIX_PLUS_DURATIONS.EDU;
+      default:
+        return null;
+    }
   }
 
   get currentLiveAlertLabel() {
