@@ -1,4 +1,8 @@
+import Debug from 'debug';
+
 import { AssessmentEndedError } from '../../../shared/domain/errors.js';
+
+const debugChallengeLocales = Debug('pix:challenge:locales');
 
 const getNextChallengeForCampaignAssessment = async function ({
   assessment,
@@ -24,6 +28,18 @@ const getNextChallengeForCampaignAssessment = async function ({
       campaignParticipationRepository,
       improvementService,
     });
+
+  debugChallengeLocales(
+    'wanted locale "%s", proposed challenges with locales: %O',
+    locale,
+    (challenges || []).map((challenge) => {
+      return {
+        challengeId: challenge.id,
+        challengeLocales: challenge.locales,
+      };
+    }),
+  );
+
   const algoResult = smartRandomService.getPossibleSkillsForNextChallenge({
     knowledgeElements,
     challenges,
