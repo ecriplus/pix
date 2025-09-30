@@ -47,6 +47,7 @@ module('Integration | Component | organizations/information-section-view', funct
         identityProviderForCampaigns: 'IDP',
         dataProtectionOfficerFullName: 'Justin Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
+        administrationTeamName: 'team Rocket',
       };
 
       // when
@@ -58,6 +59,7 @@ module('Integration | Component | organizations/information-section-view', funct
       assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('justin.ptipeu@example.net');
       assert.dom(screen.getByText('Créée par').nextElementSibling).hasText('Gilles Parbal (1)');
       assert.dom(screen.getByText('Créée le').nextElementSibling).hasText('02/09/2022');
+      assert.dom(screen.getByText('Équipe en charge').nextElementSibling).hasText('team Rocket');
       assert
         .dom(
           screen.getByLabelText(
