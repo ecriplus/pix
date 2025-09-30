@@ -9,6 +9,7 @@ import {
   createServer,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
+  knex,
   nock,
 } from '../../../test-helper.js';
 
@@ -159,8 +160,21 @@ describe('Acceptance | Route | llm-preview', function () {
           /^https:\/\/test\.app\.pix\.fr\/llm\/preview\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
         );
 
-      expect(await chatTemporaryStorage.get(response.headers.location.split('/').at(-1))).to.deep.contain({
-        configuration: {
+      const chatId = response.headers.location.split('/').at(-1);
+      const chat = await knex('chats')
+        .select(
+          'id',
+          'userId',
+          'configId',
+          'configContent',
+          'hasAttachmentContextBeenAdded',
+          'totalInputTokens',
+          'totalOutputTokens',
+        )
+        .where({ id: chatId })
+        .first();
+      expect(chat).to.deep.contain({
+        configContent: {
           name: 'Config de test',
           llm: {
             historySize: 10,
@@ -175,7 +189,6 @@ describe('Acceptance | Route | llm-preview', function () {
           },
         },
         hasAttachmentContextBeenAdded: false,
-        messages: [],
       });
     });
   });
