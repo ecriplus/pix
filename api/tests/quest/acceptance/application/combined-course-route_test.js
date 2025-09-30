@@ -245,4 +245,40 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       });
     });
   });
+
+  describe('GET /api/combined-courses/{questId}/participations', function () {
+    context('when user has membership in the combined course organization', function () {
+      it('should return the combined course participations', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          name: 'Mon parcours combiné',
+          code: 'PARCOURS123',
+          organizationId,
+          successRequirements: [],
+        });
+        const learner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+        databaseBuilder.factory.buildCombinedCourseParticipation({
+          organizationLearnerId: learner.id,
+          questId,
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-courses/${questId}/participations`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data[0].type).to.equal('combined-course-participations');
+      });
+    });
+  });
 });
