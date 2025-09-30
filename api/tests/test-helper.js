@@ -13,7 +13,7 @@ import iconv from 'iconv-lite';
 import _ from 'lodash';
 import MockDate from 'mockdate';
 import nock from 'nock';
-import sinon, { restore } from 'sinon';
+import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
@@ -86,7 +86,7 @@ const { ROLES } = PIX_ADMIN;
 /* eslint-disable mocha/no-top-level-hooks */
 
 afterEach(async function () {
-  restore();
+  sinon.restore();
   nock.cleanAll();
   frameworkRepository.clearCache();
   areaRepository.clearCache();
@@ -384,6 +384,14 @@ const preventStubsToBeCalledUnexpectedly = (stubs) => {
     );
   }
 };
+
+function waitForStreamFinalizationToBeDone() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+}
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
@@ -419,4 +427,5 @@ export {
   sinon,
   streamToPromise,
   toStream,
+  waitForStreamFinalizationToBeDone,
 };

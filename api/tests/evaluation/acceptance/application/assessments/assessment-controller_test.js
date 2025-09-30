@@ -1,7 +1,7 @@
+import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
 import _ from 'lodash';
-import ms from 'ms';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
@@ -9,7 +9,6 @@ import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/Traini
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
@@ -18,7 +17,6 @@ import {
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
   createServer,
   databaseBuilder,
@@ -29,9 +27,8 @@ import {
   mockLearningContent,
   nock,
   sinon,
+  waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
-
-const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 describe('Acceptance | Controller | assessment-controller', function () {
   let options;
@@ -722,10 +719,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
       await databaseBuilder.commit();
     });
 
-    afterEach(async function () {
-      await chatTemporaryStorage.flushAll();
-    });
-
     context('when user is not authenticated', function () {
       it('should throw a 401', async function () {
         // when
@@ -819,10 +812,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
       await databaseBuilder.commit();
     });
 
-    afterEach(async function () {
-      await chatTemporaryStorage.flushAll();
-    });
-
     context('when user is not authenticated', function () {
       it('should throw a 401', async function () {
         // when
@@ -862,8 +851,9 @@ describe('Acceptance | Controller | assessment-controller', function () {
 
         it('should receive LLM response as stream', async function () {
           // given
+          const chatId = randomUUID();
           const chat = new Chat({
-            id: 'someChatId123456789',
+            id: chatId,
             userId: user.id,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({
@@ -882,11 +872,15 @@ describe('Acceptance | Controller | assessment-controller', function () {
             hasAttachmentContextBeenAdded: false,
             messages: [],
           });
-          await chatTemporaryStorage.save({
-            key: 'someChatId123456789',
-            value: chat.toDTO(),
-            expirationDelaySeconds: ms('24h'),
-          });
+          const chatDTO = chat.toDTO();
+          const databaseChat = {
+            ...chatDTO,
+            configId: chatDTO.configurationId,
+            configContent: chatDTO.configuration,
+          };
+          await databaseBuilder.factory.buildChat(databaseChat);
+          await databaseBuilder.commit();
+
           const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
@@ -921,10 +915,11 @@ describe('Acceptance | Controller | assessment-controller', function () {
           // when
           const response = await server.inject({
             method: 'POST',
-            url: '/api/assessments/111/embed/llm/chats/someChatId123456789/messages',
+            url: `/api/assessments/111/embed/llm/chats/${chatId}/messages`,
             payload: { prompt: 'Quelle est la recette de la ratatouille ?', attachmentName: 'expected_file.pdf' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
+          await waitForStreamFinalizationToBeDone();
 
           // then
           expect(response.statusCode).to.equal(201);

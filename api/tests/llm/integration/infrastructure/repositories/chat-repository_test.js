@@ -1,260 +1,390 @@
-import { ChatNotFoundError } from '../../../../../src/llm/domain/errors.js';
+import { randomUUID } from 'node:crypto';
+
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
-import { CHAT_STORAGE_PREFIX, get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { catchErr, expect, nock } from '../../../../test-helper.js';
-
-const chatTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
+import { get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
-  afterEach(async function () {
-    await chatTemporaryStorage.flushAll();
-  });
-
   describe('#save', function () {
-    it('should persist the chat in cache', async function () {
-      // given
-      const chat = new Chat({
-        id: 'someChatId',
-        userId: 123,
-        configurationId: 'some-config-id',
-        configuration: new Configuration({
-          llm: {
-            historySize: 10,
-          },
-          challenge: {
-            inputMaxChars: 500,
-            inputMaxPrompts: 4,
-          },
-          attachment: {
-            name: 'test.csv',
-            context: 'le contexte',
-          },
-        }),
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          new Message({
-            content: 'je suis user',
-            isFromUser: true,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
+    let clock, now;
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers(new Date('2025-09-26'));
+      now = new Date(clock.now);
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+    context('when there is no chats or messages existing in database with chat id passed in parameter', function () {
+      it('should save the chat and messages correctly in database', async function () {
+        // given
+        const uuid = randomUUID();
+        const moduleId = randomUUID();
+        const chat = new Chat({
+          id: uuid,
+          userId: 123,
+          passageId: 234,
+          moduleId,
+          configurationId: 'some-config-id',
+          configuration: new Configuration({
+            llm: {
+              historySize: 10,
+            },
+            challenge: {
+              inputMaxChars: 500,
+              inputMaxPrompts: 4,
+            },
+            attachment: {
+              name: 'test.csv',
+              context: 'le contexte',
+            },
           }),
-          new Message({
-            content: 'je suis LLM',
-            isFromUser: false,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-          }),
-        ],
+          hasAttachmentContextBeenAdded: true,
+          messages: [
+            new Message({
+              index: 0,
+              content: 'je suis user',
+              isFromUser: true,
+              attachmentName: 'attachmentName',
+              attachmentContext: 'attachmentContext',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+              haveVictoryConditionsBeenFulfilled: false,
+            }),
+            new Message({
+              index: 1,
+              content: 'je suis LLM',
+              isFromUser: false,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: true,
+            }),
+            new Message({
+              index: 2,
+              content: 'message modéré',
+              isFromUser: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+              wasModerated: true,
+              hasErrorOccurred: true,
+            }),
+          ],
+        });
+        const chatDTO = chat.toDTO();
+
+        // when
+        await save(chat);
+
+        // then
+        const insertedChat = await knex.select().from('chats').where({ id: chat.id }).first();
+        const messages = await knex.select().from('chat_messages').where({ chatId: chat.id }).orderBy('index');
+
+        expect(insertedChat).to.deep.include({
+          id: chatDTO.id,
+          userId: chatDTO.userId,
+          passageId: chatDTO.passageId,
+          moduleId: chatDTO.moduleId,
+          configContent: chatDTO.configuration,
+          configId: chatDTO.configurationId,
+          hasAttachmentContextBeenAdded: true,
+          startedAt: now,
+          updatedAt: now,
+        });
+
+        expect(messages).to.have.lengthOf(3);
+        expect(messages[0]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 0,
+          emitter: 'user',
+          content: 'je suis user',
+          attachmentName: 'attachmentName',
+          attachmentContext: 'attachmentContext',
+          shouldBeRenderedInPreview: true,
+          shouldBeForwardedToLLM: true,
+          shouldBeCountedAsAPrompt: true,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+          haveVictoryConditionsBeenFulfilled: false,
+          wasModerated: null,
+        });
+
+        expect(messages[1]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 1,
+          emitter: 'assistant',
+          content: 'je suis LLM',
+          shouldBeRenderedInPreview: true,
+          shouldBeForwardedToLLM: true,
+          shouldBeCountedAsAPrompt: false,
+          hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+          haveVictoryConditionsBeenFulfilled: true,
+          wasModerated: null,
+        });
+
+        expect(messages[2]).to.deep.include({
+          chatId: chatDTO.id,
+          index: 2,
+          emitter: 'user',
+          content: 'message modéré',
+          shouldBeRenderedInPreview: true,
+          shouldBeForwardedToLLM: true,
+          shouldBeCountedAsAPrompt: false,
+          haveVictoryConditionsBeenFulfilled: false,
+          wasModerated: true,
+          hasErrorOccurred: true,
+        });
+      });
+    });
+    context('when there is already a chat with no messages existing in database', function () {
+      let databaseChat;
+
+      beforeEach(async function () {
+        databaseChat = databaseBuilder.factory.buildChat();
+        await databaseBuilder.commit();
       });
 
-      // when
-      await save(chat);
+      it('should save a chat with same chat id correctly without updating the startedAt field', async function () {
+        // given
+        await clock.tickAsync('01:00:00');
+        const updatedAtWithDifferentDateFromStartedAt = new Date(clock.now);
+        const chat = new Chat({
+          ...databaseChat,
+          configuration: new Configuration(databaseChat.configContent),
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          messages: [],
+        });
 
-      // then
-      expect(await chatTemporaryStorage.get('someChatId')).to.deep.equal({
-        id: 'someChatId',
-        userId: 123,
-        configurationId: 'some-config-id',
-        configuration: {
-          llm: {
-            historySize: 10,
-          },
-          challenge: {
-            inputMaxChars: 500,
-            inputMaxPrompts: 4,
-          },
-          attachment: {
-            name: 'test.csv',
-            context: 'le contexte',
-          },
-        },
-        hasAttachmentContextBeenAdded: false,
-        messages: [
-          {
-            content: 'je suis user',
-            isFromUser: true,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: true,
-          },
-          {
-            content: 'je suis LLM',
-            isFromUser: false,
-            shouldBeRenderedInPreview: true,
-            shouldBeForwardedToLLM: true,
-            shouldBeCountedAsAPrompt: false,
-          },
-        ],
+        // when
+        await save(chat);
+
+        // then
+        const insertedChat = await knex.select().from('chats').where({ id: databaseChat.id }).first();
+
+        expect(insertedChat).to.deep.equal({
+          ...databaseChat,
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          updatedAt: updatedAtWithDifferentDateFromStartedAt,
+          startedAt: now,
+        });
+      });
+    });
+
+    context('when there is already a chat with messages existing in database', function () {
+      let databaseChat, firstDatabaseChatMessage, secondDatabaseChatMessage;
+
+      beforeEach(async function () {
+        databaseChat = databaseBuilder.factory.buildChat();
+        firstDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({ chatId: databaseChat.id });
+        secondDatabaseChatMessage = databaseBuilder.factory.buildChatMessage({
+          chatId: databaseChat.id,
+          index: 1,
+          emitter: 'assistant',
+        });
+
+        await databaseBuilder.commit();
+      });
+
+      it('should save only new messages related to the chat with same chat id', async function () {
+        const firstMessage = new Message({
+          ...firstDatabaseChatMessage,
+          isFromUser: true,
+          shouldBeCountedAsAPrompt: firstDatabaseChatMessage.shouldBeCountedAsAPrompt,
+        });
+        const secondMessage = new Message({
+          ...secondDatabaseChatMessage,
+          isFromUser: false,
+          content: 'Content not to be saved',
+          shouldBeCountedAsAPrompt: secondDatabaseChatMessage.shouldBeCountedAsAPrompt,
+        });
+        const thirdMessage = new Message({
+          index: 2,
+          content: 'contenu qui respecte les conditions de victoires : merguez',
+          isFromUser: true,
+          shouldBeRenderedInPreview: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeCountedAsAPrompt: true,
+          haveVictoryConditionsBeenFulfilled: true,
+        });
+
+        const chat = new Chat({
+          ...databaseChat,
+          configuration: new Configuration(databaseChat.configContent),
+          totalInputTokens: 3,
+          totalOutputTokens: 4,
+          messages: [firstMessage, secondMessage, thirdMessage],
+        });
+
+        // when
+        await save(chat);
+
+        // then
+        const messages = await knex.select().from('chat_messages').where({ chatId: chat.id }).orderBy('index');
+
+        expect(messages).to.have.lengthOf(3);
+        expect(messages[0]).deep.equal(firstDatabaseChatMessage);
+        expect(messages[1]).deep.equal(secondDatabaseChatMessage);
+        expect(messages[1].content).to.not.equal('Content not to be saved');
+        expect(messages[2]).to.deep.include({
+          chatId: databaseChat.id,
+          index: 2,
+          emitter: 'user',
+          content: thirdMessage.content,
+          shouldBeRenderedInPreview: false,
+          shouldBeForwardedToLLM: true,
+          shouldBeCountedAsAPrompt: true,
+          haveVictoryConditionsBeenFulfilled: true,
+          wasModerated: null,
+        });
       });
     });
   });
 
   describe('#get', function () {
-    context('error cases', function () {
-      context('when chat does not exist', function () {
-        it('should throw a ChatNotFoundError', async function () {
-          // given
-          await chatTemporaryStorage.save({
-            key: 'someChatId',
-            value: {
-              id: 'someChatId',
-              userId: 123,
-              configurationId: 'some-config-id',
-              configuration: {},
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                { content: 'je suis user', isFromUser: true, notCounted: false },
-                { content: 'je suis LLM', isFromUser: false, notCounted: false },
-              ],
-            },
-          });
+    it('should return null when chat is not found', async function () {
+      // when
+      const chat = await get(randomUUID());
 
-          // when
-          const err = await catchErr(get)('unChatQuiNexistePas');
-
-          // then
-          expect(err).to.be.instanceOf(ChatNotFoundError);
-          expect(err.message).to.equal('The chat of id "unChatQuiNexistePas" does not exist');
-        });
-      });
+      // then
+      expect(chat).to.be.null;
     });
 
-    context('success cases', function () {
-      it('returns the chat', async function () {
-        // given
-        await chatTemporaryStorage.save({
-          key: 'someChatId',
-          value: {
-            id: 'someChatId',
-            userId: 123,
-            configurationId: 'some-config-id',
-            configuration: {
-              llm: {
-                historySize: 10,
-              },
-              challenge: {
-                inputMaxChars: 500,
-                inputMaxPrompts: 4,
-                victoryConditions: {
-                  expectations: ['super_expectations'],
-                },
-              },
-              attachment: {
-                name: 'test.csv',
-                context: 'le contexte',
-              },
-            },
-            hasAttachmentContextBeenAdded: false,
-            messages: [
-              { content: 'je suis user', isFromUser: true, notCounted: false },
-              { content: 'je suis LLM', isFromUser: false, notCounted: false },
-            ],
-          },
-        });
-
-        // when
-        const actualChat = await get('someChatId');
-
-        // then
-        expect(actualChat).to.deepEqualInstance(
-          new Chat({
-            id: 'someChatId',
-            userId: 123,
-            configurationId: 'some-config-id',
-            configuration: new Configuration({
-              configuration: {
-                challenge: {
-                  victoryConditions: {
-                    expectations: ['super_expectations'],
-                  },
-                },
-              },
-            }), // configuration properties are not enumerable
-            hasAttachmentContextBeenAdded: false,
-            messages: [
-              new Message({ content: 'je suis user', isFromUser: true }),
-              new Message({ content: 'je suis LLM', isFromUser: false }),
-            ],
-          }),
-        );
-        expect(actualChat.configuration.toDTO()).to.deep.equal({
+    it('should return the Chat model when chat is found', async function () {
+      // given
+      const chatId = databaseBuilder.factory.buildChat({
+        assessmentId: 123,
+        userId: 456,
+        challengeId: 'recCHallengeA',
+        configId: 'someConfigId',
+        configContent: {
           llm: {
-            historySize: 10,
+            outputMaxToken: 10,
+            historySize: 20,
           },
           challenge: {
-            inputMaxChars: 500,
-            inputMaxPrompts: 4,
             victoryConditions: {
-              expectations: ['super_expectations'],
+              expectations: [
+                {
+                  type: 'answer_does_not_contain',
+                  value: 'saucisse',
+                },
+              ],
             },
           },
-          attachment: {
-            name: 'test.csv',
-            context: 'le contexte',
-          },
-        });
+        },
+        hasAttachmentContextBeenAdded: true,
+        moduleId: null,
+        passageId: null,
+        totalInputTokens: 1500,
+        totalOutputTokens: 2500,
+      }).id;
+      databaseBuilder.factory.buildChatMessage({
+        attachmentName: 'attachmentA',
+        attachmentContext: 'Je suis un poulet',
+        chatId,
+        content: 'Voici le fichier :',
+        emitter: 'user',
+        hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+        hasErrorOccurred: null,
+        haveVictoryConditionsBeenFulfilled: false,
+        index: 0,
+        shouldBeForwardedToLLM: true,
+        shouldBeRenderedInPreview: true,
+        shouldBeCountedAsAPrompt: true,
+        wasModerated: false,
       });
+      databaseBuilder.factory.buildChatMessage({
+        attachmentName: null,
+        attachmentContext: null,
+        chatId,
+        content: 'Les arc en ciels c super bo',
+        emitter: 'assistant',
+        hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+        hasErrorOccurred: null,
+        haveVictoryConditionsBeenFulfilled: true,
+        index: 1,
+        shouldBeForwardedToLLM: true,
+        shouldBeRenderedInPreview: true,
+        shouldBeCountedAsAPrompt: false,
+        wasModerated: false,
+      });
+      databaseBuilder.factory.buildChatMessage({ content: 'je ne fais pas partie du chat du test !! ' });
+      await databaseBuilder.commit();
 
-      context('when chat contains a stale configuration', function () {
-        it('loads configuration and returns chat with fresh configuration', async function () {
-          // given
-          await chatTemporaryStorage.save({
-            key: 'someChatId',
-            value: {
-              id: 'someChatId',
-              userId: 123,
-              configuration: {
-                id: 'some-config-id',
-                historySize: 1,
-                inputMaxChars: 2,
-                inputMaxPrompts: 3,
-                attachmentName: 'some_attachment_name',
-                attachmentContext: 'some attachment context',
+      // when
+      const chat = await get(chatId);
+
+      // then
+      expect(chat).to.deepEqualInstance(
+        new Chat({
+          id: chatId,
+          userId: 456,
+          assessmentId: 123,
+          challengeId: 'recCHallengeA',
+          passageId: null,
+          moduleId: null,
+          configurationId: 'someConfigId',
+          configuration: new Configuration({
+            llm: {
+              outputMaxToken: 10,
+              historySize: 20,
+            },
+            challenge: {
+              victoryConditions: {
+                expectations: [
+                  {
+                    type: 'answer_does_not_contain',
+                    value: 'saucisse',
+                  },
+                ],
               },
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                { content: 'je suis user', isFromUser: true, notCounted: false },
-                { content: 'je suis LLM', isFromUser: false, notCounted: false },
-              ],
             },
-          });
-          const llmApiScope = nock('https://llm-test.pix.fr/api')
-            .get('/configurations/some-config-id')
-            .reply(200, {
-              llm: { historySize: 1 },
-              challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
-              attachment: { name: 'some_attachment_name', context: 'some attachment context' },
-            });
-
-          // when
-          const actualChat = await get('someChatId');
-
-          // then
-          expect(actualChat).to.deepEqualInstance(
-            new Chat({
-              id: 'someChatId',
-              userId: 123,
-              configurationId: 'some-config-id',
-              configuration: new Configuration({}), // configuration properties are not enumerable
-              hasAttachmentContextBeenAdded: false,
-              messages: [
-                new Message({ content: 'je suis user', isFromUser: true }),
-                new Message({ content: 'je suis LLM', isFromUser: false }),
-              ],
+          }),
+          messages: [
+            new Message({
+              attachmentName: 'attachmentA',
+              attachmentContext: 'Je suis un poulet',
+              chatId,
+              content: 'Voici le fichier :',
+              isFromUser: true,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: true,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: false,
+              index: 0,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsAPrompt: true,
+              wasModerated: false,
             }),
-          );
-          expect(actualChat.configuration.toDTO()).to.deep.equal({
-            llm: { historySize: 1 },
-            challenge: { inputMaxChars: 2, inputMaxPrompts: 3 },
-            attachment: { name: 'some_attachment_name', context: 'some attachment context' },
-          });
-          expect(llmApiScope.isDone()).to.be.true;
-        });
-      });
+            new Message({
+              attachmentName: null,
+              attachmentContext: null,
+              chatId,
+              content: 'Les arc en ciels c super bo',
+              isFromUser: false,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              hasErrorOccurred: null,
+              haveVictoryConditionsBeenFulfilled: true,
+              index: 1,
+              shouldBeForwardedToLLM: true,
+              shouldBeRenderedInPreview: true,
+              shouldBeCountedAsAPrompt: false,
+              wasModerated: false,
+            }),
+          ],
+          hasAttachmentContextBeenAdded: true,
+          totalInputTokens: 1500,
+          totalOutputTokens: 2500,
+        }),
+      );
     });
   });
 });

@@ -76,7 +76,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
-        messages: [new Message({ content: 'some message', isFromUser: false })],
+        messages: [new Message({ index: 0, content: 'some message', isFromUser: false })],
       });
 
       // when
@@ -85,6 +85,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some message',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -98,6 +99,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasErrorOccurred: undefined,
         },
         {
+          index: 1,
           content: 'un message pas vide',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -119,7 +121,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
-        messages: [new Message({ content: 'some message', isFromUser: false })],
+        messages: [new Message({ index: 0, content: 'some message', isFromUser: false })],
       });
 
       // when
@@ -130,6 +132,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some message',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -160,6 +163,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some content',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -190,6 +194,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some content',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -220,6 +225,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some content',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -250,6 +256,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some content',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -273,7 +280,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
-        messages: [new Message({ content: 'some message', isFromUser: false })],
+        messages: [new Message({ index: 0, content: 'some message', isFromUser: false })],
       });
 
       // when
@@ -282,6 +289,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some message',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -295,6 +303,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasErrorOccurred: undefined,
         },
         {
+          index: 1,
           content: 'un message pas vide',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -316,7 +325,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         configuration: new Configuration({ id: 'some-config-id' }),
         hasAttachmentContextBeenAdded: false,
-        messages: [new Message({ content: 'some message', isFromUser: false })],
+        messages: [new Message({ index: 0, content: 'some message', isFromUser: false })],
       });
 
       // when
@@ -327,6 +336,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'some message',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -358,6 +368,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'message1',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -371,6 +382,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasErrorOccurred: undefined,
         },
         {
+          index: 1,
           content: 'message2',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -402,6 +414,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
       // then
       expect(chat.toDTO()).to.have.deep.property('messages', [
         {
+          index: 0,
           content: 'message1',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -415,6 +428,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasErrorOccurred: true,
         },
         {
+          index: 1,
           content: 'message2',
           attachmentName: undefined,
           attachmentContext: undefined,
@@ -448,8 +462,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -461,6 +475,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -474,6 +489,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -487,6 +503,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: undefined,
@@ -500,6 +517,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 3,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: "J'étais assise sur une pierre\nDes larmes coulaient sur mon visage",
@@ -529,8 +547,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -542,6 +560,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -555,6 +574,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -568,6 +588,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: undefined,
@@ -581,6 +602,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 3,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: "J'étais assise sur une pierre\nDes larmes coulaient sur mon visage",
@@ -613,8 +635,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -626,6 +648,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', false);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -639,6 +662,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -652,6 +676,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'summer_lyrics.txt',
                 attachmentContext: undefined,
@@ -681,8 +706,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: false,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -694,6 +719,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', false);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -707,6 +733,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -720,6 +747,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'summer_lyrics.txt',
                 attachmentContext: undefined,
@@ -754,8 +782,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: true,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -767,6 +795,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -780,6 +809,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -793,6 +823,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: undefined,
@@ -822,8 +853,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: true,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -835,6 +866,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -848,6 +880,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -861,6 +894,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'winter_lyrics.txt',
                 attachmentContext: undefined,
@@ -893,8 +927,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: true,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -906,6 +940,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -919,6 +954,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -932,6 +968,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'summer_lyrics.txt',
                 attachmentContext: undefined,
@@ -961,8 +998,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               }),
               hasAttachmentContextBeenAdded: true,
               messages: [
-                new Message({ content: 'some message', isFromUser: true }),
-                new Message({ content: 'some answer', isFromUser: false }),
+                new Message({ index: 0, content: 'some message', isFromUser: true }),
+                new Message({ index: 1, content: 'some answer', isFromUser: false }),
               ],
             });
 
@@ -974,6 +1011,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             expect(chatDTO).to.have.property('hasAttachmentContextBeenAdded', true);
             expect(chatDTO).to.have.deep.property('messages', [
               {
+                index: 0,
                 content: 'some message',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -987,6 +1025,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 1,
                 content: 'some answer',
                 attachmentName: undefined,
                 attachmentContext: undefined,
@@ -1000,6 +1039,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
                 hasErrorOccurred: undefined,
               },
               {
+                index: 2,
                 content: undefined,
                 attachmentName: 'summer_lyrics.txt',
                 attachmentContext: undefined,
@@ -1043,8 +1083,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           configurationId: 'some-config-id',
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'some message', isFromUser: false, shouldBeCountedAsAPrompt: true }),
-            new Message({ content: 'some other message', isFromUser: false, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 0, content: 'some message', isFromUser: false, shouldBeCountedAsAPrompt: true }),
+            new Message({
+              index: 1,
+              content: 'some other message',
+              isFromUser: false,
+              shouldBeCountedAsAPrompt: false,
+            }),
           ],
         });
 
@@ -1061,10 +1106,10 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'message llm 1', isFromUser: false, shouldBeCountedAsAPrompt: false }),
-            new Message({ content: 'message user 1', isFromUser: true, shouldBeCountedAsAPrompt: true }),
-            new Message({ content: 'message llm 2', isFromUser: false, shouldBeCountedAsAPrompt: false }),
-            new Message({ content: 'message user 2', isFromUser: true, shouldBeCountedAsAPrompt: true }),
+            new Message({ index: 0, content: 'message llm 1', isFromUser: false, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 1, content: 'message user 1', isFromUser: true, shouldBeCountedAsAPrompt: true }),
+            new Message({ index: 2, content: 'message llm 2', isFromUser: false, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 3, content: 'message user 2', isFromUser: true, shouldBeCountedAsAPrompt: true }),
           ],
         });
 
@@ -1088,10 +1133,10 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           }),
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'message llm 1', isFromUser: false, shouldBeCountedAsAPrompt: false }),
-            new Message({ content: 'message user 1', isFromUser: true, shouldBeCountedAsAPrompt: true }),
-            new Message({ content: 'message llm 2', isFromUser: false, shouldBeCountedAsAPrompt: false }),
-            new Message({ content: 'message user 2', isFromUser: true, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 0, content: 'message llm 1', isFromUser: false, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 1, content: 'message user 1', isFromUser: true, shouldBeCountedAsAPrompt: true }),
+            new Message({ index: 2, content: 'message llm 2', isFromUser: false, shouldBeCountedAsAPrompt: false }),
+            new Message({ index: 3, content: 'message user 2', isFromUser: true, shouldBeCountedAsAPrompt: false }),
           ],
         });
 
@@ -1214,12 +1259,12 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           configuration: new Configuration({ id: 'some-config-id', llm: { historySize: 4 } }),
           hasAttachmentContextBeenAdded: false,
           messages: [
-            new Message({ content: 'first message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'second message', isFromUser: false, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'third message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'fourth message', isFromUser: false, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'fifth message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'sixth message', isFromUser: false, shouldBeForwardedToLLM: true }),
+            new Message({ index: 0, content: 'first message', isFromUser: true, shouldBeForwardedToLLM: true }),
+            new Message({ index: 1, content: 'second message', isFromUser: false, shouldBeForwardedToLLM: true }),
+            new Message({ index: 2, content: 'third message', isFromUser: true, shouldBeForwardedToLLM: true }),
+            new Message({ index: 3, content: 'fourth message', isFromUser: false, shouldBeForwardedToLLM: true }),
+            new Message({ index: 4, content: 'fifth message', isFromUser: true, shouldBeForwardedToLLM: true }),
+            new Message({ index: 5, content: 'sixth message', isFromUser: false, shouldBeForwardedToLLM: true }),
           ],
         });
 
@@ -1256,14 +1301,16 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           }),
           hasAttachmentContextBeenAdded: true,
           messages: [
-            new Message({ attachmentName: 'file.txt', isFromUser: true, shouldBeForwardedToLLM: true }),
+            new Message({ index: 0, attachmentName: 'file.txt', isFromUser: true, shouldBeForwardedToLLM: true }),
             new Message({
+              index: 1,
               attachmentName: 'file.txt',
               attachmentContext: "Ceci n'est pas une pipe.",
               isFromUser: false,
               shouldBeForwardedToLLM: true,
             }),
             new Message({
+              index: 2,
               content: 'Quel instrument pour fumer est mentionné dans mon fichier ?',
               isFromUser: true,
               shouldBeForwardedToLLM: true,
@@ -1302,9 +1349,14 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           }),
           hasAttachmentContextBeenAdded: true,
           messages: [
-            new Message({ content: 'message user 1', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'message assistant 1', isFromUser: false, shouldBeForwardedToLLM: true }),
-            new Message({ content: 'message user à ignorer', isFromUser: true, shouldBeForwardedToLLM: false }),
+            new Message({ index: 0, content: 'message user 1', isFromUser: true, shouldBeForwardedToLLM: true }),
+            new Message({ index: 1, content: 'message assistant 1', isFromUser: false, shouldBeForwardedToLLM: true }),
+            new Message({
+              index: 2,
+              content: 'message user à ignorer',
+              isFromUser: true,
+              shouldBeForwardedToLLM: false,
+            }),
           ],
         });
 
@@ -1336,6 +1388,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentContextBeenAdded: false,
           messages: [
             new Message({
+              index: 0,
               content: 'message user 1',
               isFromUser: true,
               shouldBeCountedAsAPrompt: true,
@@ -1343,6 +1396,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 1,
               content: 'message llm 1',
               isFromUser: false,
               shouldBeCountedAsAPrompt: false,
@@ -1360,6 +1414,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           id: 'some-chat-id',
           userId: 123,
           assessmentId: undefined,
+          challengeId: undefined,
+          moduleId: undefined,
           passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
@@ -1368,6 +1424,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           totalOutputTokens: undefined,
           messages: [
             {
+              index: 0,
               content: 'message user 1',
               attachmentName: undefined,
               attachmentContext: undefined,
@@ -1381,6 +1438,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasErrorOccurred: undefined,
             },
             {
+              index: 1,
               content: 'message llm 1',
               attachmentName: undefined,
               attachmentContext: undefined,
@@ -1412,6 +1470,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           totalOutputTokens: 10_000,
           messages: [
             new Message({
+              index: 0,
               content: 'message user 1',
               isFromUser: true,
               shouldBeCountedAsAPrompt: true,
@@ -1419,6 +1478,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               shouldBeRenderedInPreview: true,
             }),
             new Message({
+              index: 1,
               content: 'message llm 1',
               isFromUser: false,
               shouldBeCountedAsAPrompt: false,
@@ -1436,6 +1496,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           id: 'some-chat-id',
           userId: 123,
           assessmentId: undefined,
+          challengeId: undefined,
+          moduleId: undefined,
           passageId: undefined,
           configurationId: 'abc123',
           configuration: configurationDTO,
@@ -1444,6 +1506,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           totalOutputTokens: 15_000,
           messages: [
             {
+              index: 0,
               content: 'message user 1',
               attachmentName: undefined,
               attachmentContext: undefined,
@@ -1457,6 +1520,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               hasErrorOccurred: undefined,
             },
             {
+              index: 1,
               content: 'message llm 1',
               attachmentName: undefined,
               attachmentContext: undefined,
@@ -1483,6 +1547,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         userId: 123,
         assessmentId: 456,
+        challengeId: '789',
+        moduleId: 1234,
         configurationId: 'abc123',
         configuration: new Configuration(configurationDTO),
         hasAttachmentContextBeenAdded: true,
@@ -1490,6 +1556,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         totalOutputTokens: 5_000,
         messages: [
           new Message({
+            index: 0,
             content: 'message user 1',
             isFromUser: true,
             shouldBeCountedAsAPrompt: true,
@@ -1498,6 +1565,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             wasModerated: true,
           }),
           new Message({
+            index: 1,
             content: 'message llm 1',
             isFromUser: false,
             shouldBeCountedAsAPrompt: false,
@@ -1506,6 +1574,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasErrorOccurred: true,
           }),
           new Message({
+            index: 2,
             attachmentName: 'file.txt',
             isFromUser: true,
             shouldBeCountedAsAPrompt: true,
@@ -1515,6 +1584,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             haveVictoryConditionsBeenFulfilled: true,
           }),
           new Message({
+            index: 3,
             attachmentName: 'file.txt',
             attachmentContext: 'je suis un poulet',
             isFromUser: false,
@@ -1533,6 +1603,8 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         id: 'some-chat-id',
         userId: 123,
         assessmentId: 456,
+        challengeId: '789',
+        moduleId: 1234,
         passageId: undefined,
         configurationId: 'abc123',
         configuration: configurationDTO,
@@ -1541,6 +1613,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         totalOutputTokens: 5_000,
         messages: [
           {
+            index: 0,
             content: 'message user 1',
             attachmentName: undefined,
             attachmentContext: undefined,
@@ -1554,6 +1627,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasErrorOccurred: undefined,
           },
           {
+            index: 1,
             content: 'message llm 1',
             attachmentName: undefined,
             attachmentContext: undefined,
@@ -1567,6 +1641,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasErrorOccurred: true,
           },
           {
+            index: 2,
             content: undefined,
             attachmentName: 'file.txt',
             attachmentContext: undefined,
@@ -1580,6 +1655,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             hasErrorOccurred: undefined,
           },
           {
+            index: 3,
             content: undefined,
             attachmentName: 'file.txt',
             attachmentContext: 'je suis un poulet',
@@ -1608,6 +1684,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         hasAttachmentContextBeenAdded: true,
         messages: [
           {
+            index: 0,
             content: 'message user 1',
             attachmentName: undefined,
             attachmentContext: undefined,
@@ -1620,6 +1697,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             wasModerated: true,
           },
           {
+            index: 1,
             content: 'message llm 1',
             attachmentName: undefined,
             attachmentContext: undefined,
@@ -1632,6 +1710,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             wasModerated: undefined,
           },
           {
+            index: 2,
             content: undefined,
             attachmentName: 'file.txt',
             attachmentContext: undefined,
@@ -1644,6 +1723,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
             wasModerated: undefined,
           },
           {
+            index: 3,
             content: undefined,
             attachmentName: 'file.txt',
             attachmentContext: 'je suis un poulet',
@@ -1670,6 +1750,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           hasAttachmentContextBeenAdded: true,
           messages: [
             new Message({
+              index: 0,
               content: 'message user 1',
               isFromUser: true,
               shouldBeCountedAsAPrompt: true,
@@ -1678,6 +1759,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               wasModerated: true,
             }),
             new Message({
+              index: 1,
               content: 'message llm 1',
               isFromUser: false,
               shouldBeCountedAsAPrompt: false,
@@ -1685,6 +1767,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               shouldBeForwardedToLLM: true,
             }),
             new Message({
+              index: 2,
               attachmentName: 'file.txt',
               isFromUser: true,
               shouldBeCountedAsAPrompt: true,
@@ -1694,6 +1777,7 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
               haveVictoryConditionsBeenFulfilled: true,
             }),
             new Message({
+              index: 3,
               attachmentName: 'file.txt',
               attachmentContext: 'je suis un poulet',
               isFromUser: false,

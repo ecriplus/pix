@@ -1,15 +1,31 @@
-import { config } from '../../../shared/config.js';
-import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
-import { ChatNotFoundError } from '../../domain/errors.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Chat } from '../../domain/models/Chat.js';
-import * as configurationRepository from './configuration-repository.js';
-
-export const CHAT_STORAGE_PREFIX = 'llm-chats:';
-const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
 
 /**
- * @typedef {import('../../domain/Chat').Chat} Chat
+ * @typedef {import('../../domain/models/Chat').Message} Message
  */
+
+/**
+ * @function
+ * @name get
+ *
+ * @param {UUID} chatId
+ * @returns {Promise<Chat|null>}
+ */
+export async function get(chatId) {
+  const knexConn = DomainTransaction.getConnection();
+  const chatDTO = await knexConn('chats').where({ id: chatId }).first();
+  if (!chatDTO) return null;
+  const messageDTOs = await knexConn('chat_messages').where({ chatId });
+  return toDomain(
+    {
+      ...chatDTO,
+      configurationId: chatDTO.configId,
+      configuration: chatDTO.configContent,
+    },
+    messageDTOs,
+  );
+}
 
 /**
  * @function
@@ -19,30 +35,98 @@ const chatsTemporaryStorage = temporaryStorage.withPrefix(CHAT_STORAGE_PREFIX);
  * @returns {Promise<void>}
  */
 export async function save(chat) {
-  await chatsTemporaryStorage.save({
-    key: chat.id,
-    value: chat.toDTO(),
-    expirationDelaySeconds: config.llm.temporaryStorage.expirationDelaySeconds,
-  });
+  const knexConn = DomainTransaction.getConnection();
+  const chatDTO = chat.toDTO();
+  const {
+    id: chatId,
+    userId,
+    assessmentId,
+    challengeId,
+    configurationId: configId,
+    configuration: configContent,
+    moduleId,
+    passageId,
+    hasAttachmentContextBeenAdded,
+    totalInputTokens,
+    totalOutputTokens,
+  } = chatDTO;
+  const startedAt = new Date();
+  const updatedAt = new Date();
+
+  await knexConn('chats')
+    .insert({
+      id: chatId,
+      userId,
+      assessmentId,
+      challengeId,
+      configContent,
+      configId,
+      hasAttachmentContextBeenAdded,
+      moduleId,
+      passageId,
+      startedAt,
+      totalInputTokens,
+      totalOutputTokens,
+      updatedAt,
+    })
+    .onConflict(['id'])
+    .merge(['hasAttachmentContextBeenAdded', 'totalInputTokens', 'totalOutputTokens', 'updatedAt']);
+
+  for (const message of chatDTO.messages) {
+    const databaseMessage = _buildDatabaseMessage({ chatId, message });
+    await knexConn('chat_messages').insert(databaseMessage).onConflict(['chatId', 'index']).ignore();
+  }
 }
 
 /**
  * @function
- * @name get
+ * @name save
  *
- * @param {string} id
- * @returns {Promise<Chat>}
+ * @param {Object} params
+ * @param {string} params.chatId chatId
+ * @param {Message} params.message message
+ * @returns {Promise<void>}
  */
-export async function get(id) {
-  const chatDTO = await chatsTemporaryStorage.get(id);
-  if (!chatDTO) {
-    throw new ChatNotFoundError(id);
-  }
-  // backward compatibility, may be removed after some time
-  if (!chatDTO.configuration.llm && chatDTO.configuration.id) {
-    chatDTO.configurationId = chatDTO.configuration.id;
-    const configuration = await configurationRepository.get(chatDTO.configurationId);
-    chatDTO.configuration = configuration.toDTO();
-  }
-  return Chat.fromDTO(chatDTO);
+function _buildDatabaseMessage({ chatId, message }) {
+  const {
+    index,
+    attachmentName,
+    attachmentContext,
+    content,
+    hasAttachmentBeenSubmittedAlongWithAPrompt,
+    hasErrorOccurred,
+    haveVictoryConditionsBeenFulfilled,
+    isFromUser,
+    shouldBeCountedAsAPrompt,
+    shouldBeRenderedInPreview,
+    shouldBeForwardedToLLM,
+    wasModerated,
+  } = message;
+
+  return {
+    attachmentName,
+    attachmentContext,
+    chatId,
+    content,
+    emitter: isFromUser ? 'user' : 'assistant',
+    hasAttachmentBeenSubmittedAlongWithAPrompt,
+    hasErrorOccurred: hasErrorOccurred ?? null,
+    haveVictoryConditionsBeenFulfilled,
+    index,
+    shouldBeForwardedToLLM,
+    shouldBeRenderedInPreview,
+    shouldBeCountedAsAPrompt,
+    wasModerated: wasModerated ?? null,
+  };
+}
+
+function toDomain(chatDTO, messageDTOs) {
+  const messages = messageDTOs.map((messageDTO) => ({
+    ...messageDTO,
+    isFromUser: messageDTO.emitter === 'user',
+  }));
+  return Chat.fromDTO({
+    ...chatDTO,
+    messages,
+  });
 }

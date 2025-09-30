@@ -42,14 +42,16 @@ describe('Unit | Eval | Domain | UseCases | start-embed-llm-chat', function () {
   context('success case', function () {
     it('should return the newly created chat', async function () {
       // given
+      const challengeId = 'challengeWithLLM';
       assessmentRepository.get.withArgs(assessmentId).resolves(
         new Assessment({
           id: assessmentId,
           userId,
+          lastChallengeId: challengeId,
         }),
       );
       const someLLMChatDTO = Symbol('LLMCHATDTO');
-      llmApi.startChat.withArgs({ configId, userId, assessmentId }).resolves(someLLMChatDTO);
+      llmApi.startChat.withArgs({ configId, userId, assessmentId, challengeId }).resolves(someLLMChatDTO);
 
       // when
       const chat = await startEmbedLlmChat({ configId, assessmentId, userId, llmApi, assessmentRepository });

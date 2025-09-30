@@ -2,21 +2,14 @@ import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { startChat } from '../../../../../src/llm/domain/usecases/start-chat.js';
 import { chatRepository, configurationRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
-import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { expect, nock, sinon } from '../../../../test-helper.js';
-
-const chatTemporaryStorage = temporaryStorage.withPrefix(chatRepository.CHAT_STORAGE_PREFIX);
+import { expect, knex, nock } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Domain | UseCases | start-chat', function () {
-  afterEach(async function () {
-    await chatTemporaryStorage.flushAll();
-  });
-
   describe('#startChat', function () {
     let randomUUID;
 
     beforeEach(async function () {
-      randomUUID = sinon.stub().returns('123e4567-e89b-12d3-a456-426614174000');
+      randomUUID = () => '123e4567-e89b-12d3-a456-426614174000';
     });
 
     context('when config object provided', function () {
@@ -52,26 +45,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             totalOutputTokens: 0,
           }),
         );
-        expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
-          id: '123e4567-e89b-12d3-a456-426614174000',
-          configuration: {
-            llm: {
-              historySize: 123,
-            },
-            challenge: {
-              inputMaxChars: 456,
-              inputMaxPrompts: 789,
-            },
-            attachment: {
-              name: 'file.txt',
-              context: '**coucou**',
-            },
-          },
-          hasAttachmentContextBeenAdded: false,
-          messages: [],
-          totalInputTokens: 0,
-          totalOutputTokens: 0,
-        });
       });
     });
 
@@ -98,12 +71,18 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
       });
 
       it('should return the newly created chat', async function () {
+        // given
+        const chatId = '123e4567-e89b-12d3-a456-426614174000';
+        const moduleId = randomUUID();
+
         // when
         const chat = await startChat({
           configurationId,
           userId,
           assessmentId: 11,
+          challengeId: 33,
           passageId: 22,
+          moduleId,
           randomUUID,
           chatRepository,
           configurationRepository,
@@ -115,7 +94,9 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             id: '123e4567-e89b-12d3-a456-426614174000',
             userId: 123456,
             assessmentId: 11,
+            challengeId: 33,
             passageId: 22,
+            moduleId,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({}), // Configuration’s properties are not enumerable
             hasAttachmentContextBeenAdded: false,
@@ -124,13 +105,16 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           }),
         );
         expect(llmApiScope.isDone()).to.be.true;
-        expect(await chatTemporaryStorage.get('123e4567-e89b-12d3-a456-426614174000')).to.deep.equal({
-          id: '123e4567-e89b-12d3-a456-426614174000',
+        const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
+        expect(chatDB).to.deep.equal({
+          id: chatId,
           userId: 123456,
           assessmentId: 11,
+          challengeId: '33',
+          moduleId,
           passageId: 22,
-          configurationId: 'uneConfigQuiExist',
-          configuration: {
+          configId: 'uneConfigQuiExist',
+          configContent: {
             llm: {
               historySize: 123,
             },
@@ -146,9 +130,46 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           hasAttachmentContextBeenAdded: false,
           totalInputTokens: 0,
           totalOutputTokens: 0,
-          messages: [],
         });
+        expect(messagesDB).to.be.empty;
       });
     });
   });
 });
+
+async function getChatAndMessagesFromDB(chatId) {
+  return {
+    chatDB: await knex('chats')
+      .select(
+        'id',
+        'assessmentId',
+        'challengeId',
+        'userId',
+        'configId',
+        'configContent',
+        'hasAttachmentContextBeenAdded',
+        'moduleId',
+        'passageId',
+        'totalInputTokens',
+        'totalOutputTokens',
+      )
+      .first(),
+    messagesDB: await knex('chat_messages')
+      .select(
+        'index',
+        'emitter',
+        'attachmentName',
+        'attachmentContext',
+        'hasAttachmentBeenSubmittedAlongWithAPrompt',
+        'haveVictoryConditionsBeenFulfilled',
+        'content',
+        'shouldBeRenderedInPreview',
+        'shouldBeForwardedToLLM',
+        'shouldBeCountedAsAPrompt',
+        'wasModerated',
+        'hasErrorOccurred',
+      )
+      .where({ chatId })
+      .orderBy('index'),
+  };
+}

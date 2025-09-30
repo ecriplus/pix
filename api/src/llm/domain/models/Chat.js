@@ -1,3 +1,4 @@
+import { assertGreaterOrEqualToZero } from '../../../shared/domain/models/asserts.js';
 import { Configuration } from './Configuration.js';
 
 export class Chat {
@@ -6,7 +7,9 @@ export class Chat {
    * @param {string} params.id
    * @param {number=} params.userId
    * @param {number=} params.assessmentId
+   * @param {string=} params.challengeId
    * @param {number=} params.passageId
+   * @param {number=} params.moduleId
    * @param {string} params.configurationId
    * @param {Configuration} params.configuration
    * @param {boolean} params.hasAttachmentContextBeenAdded
@@ -18,7 +21,9 @@ export class Chat {
     id,
     userId,
     assessmentId,
+    challengeId,
     passageId,
+    moduleId,
     configurationId,
     configuration,
     hasAttachmentContextBeenAdded,
@@ -29,7 +34,9 @@ export class Chat {
     this.id = id;
     this.userId = userId;
     this.assessmentId = assessmentId;
+    this.challengeId = challengeId;
     this.passageId = passageId;
+    this.moduleId = moduleId;
     this.configurationId = configurationId;
     this.configuration = configuration;
     this.hasAttachmentContextBeenAdded = hasAttachmentContextBeenAdded;
@@ -74,6 +81,7 @@ export class Chat {
     if (!message) return;
     this.messages.push(
       new Message({
+        index: this.messages.length,
         content: message,
         isFromUser: true,
         shouldBeCountedAsAPrompt,
@@ -94,6 +102,7 @@ export class Chat {
     if (!message) return;
     this.messages.push(
       new Message({
+        index: this.messages.length,
         content: message,
         isFromUser: false,
         shouldBeForwardedToLLM,
@@ -115,6 +124,7 @@ export class Chat {
     const isAttachmentValid = this.isAttachmentValid(attachmentName);
     this.messages.push(
       new Message({
+        index: this.messages.length,
         attachmentName,
         isFromUser: true,
         hasAttachmentBeenSubmittedAlongWithAPrompt: !!message,
@@ -126,6 +136,7 @@ export class Chat {
     if (isAttachmentValid && !this.hasAttachmentContextBeenAdded) {
       this.messages.push(
         new Message({
+          index: this.messages.length,
           attachmentName,
           attachmentContext,
           isFromUser: false,
@@ -168,6 +179,8 @@ export class Chat {
       id: this.id,
       userId: this.userId,
       assessmentId: this.assessmentId,
+      challengeId: this.challengeId,
+      moduleId: this.moduleId,
       passageId: this.passageId,
       configurationId: this.configurationId,
       configuration: this.configuration.toDTO(),
@@ -191,6 +204,7 @@ export class Message {
   /**
    * @constructor
    * @param {Object} params
+   * @param {string=} params.index
    * @param {string=} params.content
    * @param {string=} params.attachmentName
    * @param {string=} params.attachmentContext
@@ -201,8 +215,10 @@ export class Message {
    * @param {boolean=} params.hasAttachmentBeenSubmittedAlongWithAPrompt
    * @param {boolean=} params.haveVictoryConditionsBeenFulfilled
    * @param {boolean=} params.wasModerated
+   * @param {boolean=} params.hasErrorOccurred
    */
   constructor({
+    index,
     content,
     attachmentName,
     attachmentContext,
@@ -215,6 +231,8 @@ export class Message {
     wasModerated,
     hasErrorOccurred,
   }) {
+    assertGreaterOrEqualToZero(index, 'index shall be greater or equal to 0');
+    this.index = index;
     this.content = content;
     this.isFromUser = isFromUser;
     this.attachmentName = attachmentName;
@@ -249,6 +267,7 @@ export class Message {
 
   toDTO() {
     return {
+      index: this.index,
       content: this.content,
       attachmentName: this.attachmentName,
       attachmentContext: this.attachmentContext,
