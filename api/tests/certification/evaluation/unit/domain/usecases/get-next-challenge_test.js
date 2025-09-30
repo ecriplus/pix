@@ -703,7 +703,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCandidateRepository,
           complementaryCertificationRepository,
           certificationCandidateId,
-          complementaryCertificationScoringCriteriaRepository,
         });
 
         // then
