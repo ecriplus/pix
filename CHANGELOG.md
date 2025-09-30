@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.221.0](https://github.com/1024pix/pix/compare/v5.220.0...v5.221.0) (2025-09-30)
+
+### :rocket: Amélioration
+
+- [#13703](https://github.com/1024pix/pix/pull/13703) Afficher le champ "Equipe en charge" dans la page de détail d'une organisation (PIX-19509) 
+- [#13723](https://github.com/1024pix/pix/pull/13723) Afficher les participations aux parcours combinés dans PixOrga (pix-19704) 
+- [#13697](https://github.com/1024pix/pix/pull/13697) Ajouter une route pour récupérer les participations à un parcours combiné (PIX-19703) 
+- [#13709](https://github.com/1024pix/pix/pull/13709) modification images 
+- [#13725](https://github.com/1024pix/pix/pull/13725) Modifications suite retours PYO IAGENBiais_IND 
+- [#13704](https://github.com/1024pix/pix/pull/13704) Parler de "référentiel de certification" à la place de "référentiel cadre"(PIX-19555). 
+
+### :bug: Correction
+
+- [#13720](https://github.com/1024pix/pix/pull/13720) Corriger le fond des svg de succès/erreur sur les QAB et les bords de l'image de la flashcard (PIX-19742). 
+- [#13695](https://github.com/1024pix/pix/pull/13695) Permettre la remise à zéro même en ayant tout bon (PIX-19695) 
+- [#13721](https://github.com/1024pix/pix/pull/13721) Retourner un tableau vide au lieu de null lors de la récupération de campagnes (PIX-19743) 
+- [#13730](https://github.com/1024pix/pix/pull/13730) Retourner une erreur lorsque la campagne est supprimée lors de l'appel à POST /answers (PIX-19750). 
+
+### :building_construction: Tech
+
+- [#13589](https://github.com/1024pix/pix/pull/13589) :truck:  Déplace le modèle `CertificationCenterMemberShip` dans le contexte `team` (PIX-19615) 
+- [#13674](https://github.com/1024pix/pix/pull/13674) Ajout des traductions anglaises pour les URLs des fiches d'incident (PIX-19664) 
+- [#13722](https://github.com/1024pix/pix/pull/13722) Suppression de scripts et variable d'environnement non utlisés (PIX-19745). 
+- [#13481](https://github.com/1024pix/pix/pull/13481) Supprimer des informations périmées du guide d'installation 
+
+### :arrow_up: Montée de version
+
+- [#13731](https://github.com/1024pix/pix/pull/13731) Update dependency @1024pix/pix-ui to ^55.28.4 (junior) 
+- [#13732](https://github.com/1024pix/pix/pull/13732) Update dependency @1024pix/pix-ui to ^55.28.4 (mon-pix) 
+- [#13733](https://github.com/1024pix/pix/pull/13733) Update dependency @1024pix/pix-ui to ^55.28.4 (orga) 
+- [#13685](https://github.com/1024pix/pix/pull/13685) Update dependency eslint-plugin-unicorn to v60 (certif)
+
 # [5.220.0](https://github.com/1024pix/pix/compare/v5.219.0...v5.220.0) (2025-09-29)
 
 ### :rocket: Amélioration
