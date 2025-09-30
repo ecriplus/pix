@@ -13,16 +13,14 @@ import {
 
 describe('Certification | Evaluation | Acceptance | Application |  certification rescoring', function () {
   describe('GET /api/admin/certifications/{certificationCourseId}/rescore', function () {
-    let server, originalConfigValue, originalCalibrationDateValue, originalCoreCalibrationIdValue, calibrationId;
+    let server, originalConfigValue, originalCalibrationDateValue, calibrationId;
 
     beforeEach(async function () {
       calibrationId = 1;
       originalConfigValue = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification;
       originalCalibrationDateValue = config.v3Certification.latestCalibrationDate;
-      originalCoreCalibrationIdValue = config.v3Certification.certificationCoreCalibration2024Id;
       config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = 1;
       config.v3Certification.latestCalibrationDate = new Date('2024-07-23');
-      config.v3Certification.certificationCoreCalibration2024Id = calibrationId;
 
       server = await createServer();
     });
@@ -30,7 +28,6 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
     afterEach(function () {
       config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification = originalConfigValue;
       config.v3Certification.latestCalibrationDate = originalCalibrationDateValue;
-      config.v3Certification.certificationCoreCalibration2024Id = originalCoreCalibrationIdValue;
     });
 
     describe('when scoring from the current framework', function () {
