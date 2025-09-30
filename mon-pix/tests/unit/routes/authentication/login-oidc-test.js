@@ -72,53 +72,87 @@ module('Unit | Route | login-oidc', function (hooks) {
       });
 
       module('when attempting transition', function () {
-        test('should store the intent url in session data nextUrl', async function (assert) {
-          // given
-          const sessionStub = Service.create({
-            attemptedTransition: { intent: { url: '/organisations/PIXOIDC01/acces' } },
-            authenticate: sinon.stub().resolves(),
-            data: {},
+        module('when TransitionIntent is a URLTransitionIntent', function () {
+          test('stores the intent url in session data nextUrl', async function (assert) {
+            // given
+            const sessionStub = Service.create({
+              attemptedTransition: { intent: { url: '/organisations/PIXOIDC01/acces' } },
+              authenticate: sinon.stub().resolves(),
+              data: {},
+            });
+            const route = this.owner.lookup('route:authentication/login-oidc');
+            route.set('session', sessionStub);
+            sinon.stub(Location, 'assign');
+
+            const transition = {
+              to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+              abort: sinon.stub(),
+            };
+
+            // when
+            await route.beforeModel(transition);
+
+            // then
+            assert.strictEqual(sessionStub.data.nextURL, '/organisations/PIXOIDC01/acces');
           });
-          const route = this.owner.lookup('route:authentication/login-oidc');
-          route.set('session', sessionStub);
-          sinon.stub(Location, 'assign');
-
-          const transition = {
-            to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
-            abort: sinon.stub(),
-          };
-
-          // when
-          await route.beforeModel(transition);
-
-          // then
-          assert.strictEqual(sessionStub.data.nextURL, '/organisations/PIXOIDC01/acces');
         });
 
-        test('should build the url from the intent name and contexts in session data nextUrl', async function (assert) {
-          // given
-          const authenticateStub = sinon.stub().resolves();
-          const sessionStub = Service.create({
-            attemptedTransition: { intent: { name: 'organizations.access', contexts: ['PIXOIDC01'] } },
-            authenticate: authenticateStub,
-            data: {},
+        module('when TransitionIntent is a NamedTransitionIntent (no URL)', function () {
+          module('when there is at least one context', function () {
+            test('builds a url from the intent name and contexts and stores it in session data nextUrl', async function (assert) {
+              // given
+              const authenticateStub = sinon.stub().resolves();
+              const sessionStub = Service.create({
+                attemptedTransition: { intent: { name: 'organizations.access', contexts: ['PIXOIDC01'] } },
+                authenticate: authenticateStub,
+                data: {},
+              });
+              const route = this.owner.lookup('route:authentication/login-oidc');
+              route.set('session', sessionStub);
+              sinon.stub(Location, 'assign');
+              route.router.urlFor = sinon.stub();
+
+              const transition = {
+                to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+                abort: sinon.stub(),
+              };
+
+              // when
+              await route.beforeModel(transition);
+
+              // then
+              sinon.assert.calledWith(route.router.urlFor, 'organizations.access', 'PIXOIDC01');
+              assert.ok(true);
+            });
           });
-          const route = this.owner.lookup('route:authentication/login-oidc');
-          route.set('session', sessionStub);
-          sinon.stub(Location, 'assign');
-          route.router.urlFor = sinon.stub();
 
-          const transition = {
-            to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
-            abort: sinon.stub(),
-          };
+          module('when there is no context', function () {
+            test('builds a url from the intent name and stores it in session data nextUrl', async function (assert) {
+              // given
+              const authenticateStub = sinon.stub().resolves();
+              const sessionStub = Service.create({
+                attemptedTransition: { intent: { name: 'organizations.access', contexts: [] } },
+                authenticate: authenticateStub,
+                data: {},
+              });
+              const route = this.owner.lookup('route:authentication/login-oidc');
+              route.set('session', sessionStub);
+              sinon.stub(Location, 'assign');
+              route.router.urlFor = sinon.stub();
 
-          // when
-          await route.beforeModel(transition);
+              const transition = {
+                to: { queryParams: {}, params: { identity_provider_slug: 'oidc-partner' } },
+                abort: sinon.stub(),
+              };
 
-          // then
-          sinon.assert.calledWith(route.router.urlFor, 'organizations.access', 'PIXOIDC01');
-          assert.ok(true);
+              // when
+              await route.beforeModel(transition);
+
+              // then
+              sinon.assert.calledWith(route.router.urlFor, 'organizations.access');
+              assert.ok(true);
+            });
+          });
         });
       });
 
