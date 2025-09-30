@@ -26,8 +26,11 @@ export async function promptChat({
     throw new NoAttachmentNorMessageProvidedError();
   }
 
-  //const chat = await chatRedisRepository.get(chatId);
-  const chat = await chatRepository.get(chatId);
+  let chat = await chatRepository.get(chatId);
+
+  if (!chat) {
+    chat = await chatRedisRepository.get(chatId);
+  }
   if (chat.userId != undefined && userId !== chat.userId) {
     throw new ChatForbiddenError();
   }
