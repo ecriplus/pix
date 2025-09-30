@@ -80,6 +80,8 @@ export default class ModuleQcm extends ModuleElement {
     this.isAnswering = true;
     event.preventDefault();
 
+    await this.waitFor(VERIFY_RESPONSE_DELAY);
+
     super.onAnswer(event);
     if (this.shouldDisplayRequiredMessage === true) {
       this.isAnswering = false;
@@ -99,7 +101,6 @@ export default class ModuleQcm extends ModuleElement {
       type: 'QCM_ANSWERED',
       data: { answer: this.userResponse, elementId: this.element.id, status },
     });
-    await this.waitFor(VERIFY_RESPONSE_DELAY);
     this.isAnswering = false;
   }
 
