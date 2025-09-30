@@ -180,8 +180,9 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       challengeRepository.get.resolves(challenge);
       assessment = domainBuilder.buildAssessment({
         userId,
+        campaignParticipationId: 12,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
-        type: Assessment.types.COMPETENCE_EVALUATION,
+        type: Assessment.types.CAMPAIGN,
         answers: [],
       });
 

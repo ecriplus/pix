@@ -25,6 +25,9 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   if (assessment.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
   }
+  if (!assessment.campaignParticipationId) {
+    throw new ForbiddenAccess('Campaign does not accept any answer.');
+  }
   if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
     throw new ChallengeAlreadyAnsweredError();
   }
