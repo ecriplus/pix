@@ -255,6 +255,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @value={{this.form.identityProviderForCampaigns}}
             @onChange={{this.onChangeIdentityProvider}}
             @hideDefaultOption={{true}}
+            class="admin-form__select"
           >
             <:label>SSO</:label>
           </PixSelect>
