@@ -5,8 +5,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
 function _toDomain(row) {
   const hasComplementaryReferential = row.key !== ComplementaryCertificationKeys.CLEA;

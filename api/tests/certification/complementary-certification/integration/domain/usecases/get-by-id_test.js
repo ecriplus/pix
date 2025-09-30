@@ -1,5 +1,5 @@
 import { getById } from '../../../../../../src/certification/complementary-certification/domain/usecases/get-by-id.js';
-import * as complementaryCertificationRepository from '../../../../../../src/certification/complementary-certification/infrastructure/repositories/complementary-certification-repository.js';
+import * as complementaryCertificationRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
