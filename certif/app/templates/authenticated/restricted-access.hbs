@@ -4,8 +4,7 @@
     {{#if this.model.isAccessBlockedUntilDate}}
       {{this.accessBlockedLabel}}
     {{else}}
-      {{t "pages.sco.restricted-access.title"}}
-      {{dayjs-format this.certificationOpeningDate "DD/MM/YYYY"}}
+      {{this.certificationOpeningDate}}
     {{/if}}
   </h1>
 </div>

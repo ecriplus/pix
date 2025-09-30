@@ -322,7 +322,7 @@
         "title": "Enrol candidates"
       },
       "restricted-access": {
-        "title": "Opening of your PixCertif space on"
+        "title-access": "Opening of your PixCertif space on {date} (00:00, Metropolitan France time)."
       }
     },
     "session-finalization": {
@@ -1080,5 +1080,5 @@
       "title": "Terms and conditions of use of the Pix Certif platform"
     }
   },
-  "restricted-access": "Site under maintenance, your Pix Certif space will reopen on {date}."
+  "restricted-access": "Site under maintenance, your Pix Certif space will reopen on {date} (00:00, Metropolitan France time)."
 }
