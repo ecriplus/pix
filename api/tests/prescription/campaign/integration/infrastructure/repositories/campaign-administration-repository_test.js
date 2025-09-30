@@ -9,13 +9,13 @@ import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants
 import { catchErr, databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Campaign Administration', function () {
-  describe('#getByIds', function () {
-    it('should return null if campaigns does not exists', async function () {
+  describe('#findByIds', function () {
+    it('should return an empty array if campaigns does not exists', async function () {
       // given & when
-      const campaigns = await campaignAdministrationRepository.getByIds([1, 2]);
+      const campaigns = await campaignAdministrationRepository.findByIds([1, 2]);
 
       // then
-      expect(campaigns).to.be.null;
+      expect(campaigns).to.be.empty;
     });
 
     it('should return campaigns for given ids', async function () {
@@ -27,7 +27,7 @@ describe('Integration | Repository | Campaign Administration', function () {
       await databaseBuilder.commit();
 
       // when
-      const campaigns = await campaignAdministrationRepository.getByIds([firstCampaign.id, secondCampaign.id]);
+      const campaigns = await campaignAdministrationRepository.findByIds([firstCampaign.id, secondCampaign.id]);
 
       // then
       expect(campaigns).to.deep.equal([firstCampaign, secondCampaign]);

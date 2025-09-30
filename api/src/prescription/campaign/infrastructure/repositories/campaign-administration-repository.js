@@ -30,11 +30,9 @@ const CAMPAIGN_ATTRIBUTES = [
   'customResultPageButtonUrl',
 ];
 
-const getByIds = async (ids) => {
+const findByIds = async (ids) => {
   const knexConn = DomainTransaction.getConnection();
   const campaigns = await knexConn('campaigns').whereIn('id', ids);
-
-  if (campaigns.length === 0) return null;
 
   return campaigns.map((campaign) => new Campaign(campaign));
 };
@@ -202,4 +200,4 @@ export const deleteExternalIdLabelFromCampaigns = (campaignIds) => {
     .whereIn('campaign-features.campaignId', campaignIds);
 };
 
-export { archiveCampaigns, get, getByCode, getByIds, isFromSameOrganization, remove, save, swapCampaignCodes, update };
+export { archiveCampaigns, findByIds, get, getByCode, isFromSameOrganization, remove, save, swapCampaignCodes, update };
