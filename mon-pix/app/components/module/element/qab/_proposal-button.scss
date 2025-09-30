@@ -74,14 +74,6 @@
     color: var(--pix-neutral-800);
     font-weight: var(--pix-font-bold);
   }
-
-  &__icon {
-    position: absolute;
-    top: -6px;
-    right: -5px;
-    width: 40px;
-    height: 40px;
-  }
 }
 
 @include breakpoints.device-is('mobile') {
@@ -90,4 +82,13 @@
     gap: var(--pix-spacing-6x);
     align-items: center;
   }
+}
+
+img.qab-proposal-button__icon {
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
 }

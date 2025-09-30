@@ -24,6 +24,13 @@
       @extend %pix-title-s;
     }
   }
+
+  &__image {
+    img {
+      border-top-left-radius: var(--modulix-radius-l);
+      border-top-right-radius: var(--modulix-radius-l);
+    }
+  }
 }
 
 .element-flashcards-card {
