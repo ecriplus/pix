@@ -77,14 +77,14 @@ export async function promptChat({
           chat,
         });
       }
-
-      return toEventStream.fromLLMResponse({
-        llmResponse: readableStream,
-        onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository, redisMutex),
-        attachmentMessageType,
-        shouldSendDebugData: chat.isPreview,
-      });
     }
+
+    return toEventStream.fromLLMResponse({
+      llmResponse: readableStream,
+      onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository, redisMutex),
+      attachmentMessageType,
+      shouldSendDebugData: chat.isPreview,
+    });
   } catch (error) {
     await redisMutex.release(chatId);
     throw error;

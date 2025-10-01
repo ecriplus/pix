@@ -1516,7 +1516,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 attachmentName: 'wrong_file.txt',
                 ...dependencies,
               });
-
               // then
               const parts = [];
               const decoder = new TextDecoder();

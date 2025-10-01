@@ -30,6 +30,10 @@ class RedisClient {
     this.flushall = this._client.flushall.bind(this._client);
   }
 
+  get status() {
+    return this._client.status;
+  }
+
   _wrapWithPrefix(fn) {
     const prefix = this._prefix;
     return function (key, ...args) {

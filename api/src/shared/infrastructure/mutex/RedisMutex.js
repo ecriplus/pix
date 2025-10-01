@@ -45,5 +45,8 @@ export function quitMutex() {
 }
 
 export function clearMutex() {
-  return redisMutex.clearAll();
+  const status = redisMutex._client.status;
+  if (!['close', 'end'].includes(status)) {
+    return redisMutex.clearAll();
+  }
 }
