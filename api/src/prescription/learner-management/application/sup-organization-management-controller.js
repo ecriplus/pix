@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import * as fs from 'node:fs/promises';
 
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
