@@ -14,6 +14,7 @@ module('Integration | Component | Module | QCM', function (hooks) {
 
   let passageEventService, passageEventRecordStub;
   let clock;
+  const updateSkipButton = sinon.stub();
 
   hooks.beforeEach(function () {
     clock = sinon.useFakeTimers();
@@ -83,7 +84,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
     const proposal1Element = screen.getByLabelText(qcmElement.proposals[0].content);
     const proposal2Element = screen.getByLabelText(qcmElement.proposals[1].content);
     const proposal3Element = screen.getByLabelText(qcmElement.proposals[2].content);
@@ -128,7 +133,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
       type: 'qcm',
     };
     const onAnswerSpy = sinon.spy();
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
 
     // when
     await click(screen.getByLabelText('checkbox1'));
@@ -164,7 +173,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
       type: 'qcm',
     };
     const onAnswerSpy = sinon.spy();
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
 
     // when
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
@@ -203,7 +216,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
     await click(screen.getByLabelText('checkbox1'));
     await click(screen.getByLabelText('checkbox2'));
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
@@ -245,7 +262,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
     await click(screen.getByLabelText('checkbox1'));
     await click(screen.getByLabelText('checkbox3'));
     await click(screen.queryByRole('button', { name: 'Vérifier ma réponse' }));
@@ -287,7 +308,11 @@ module('Integration | Component | Module | QCM', function (hooks) {
     const onAnswerSpy = sinon.spy();
 
     // when
-    const screen = await render(<template><ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} /></template>);
+    const screen = await render(
+      <template>
+        <ModulixQcm @element={{qcmElement}} @onAnswer={{onAnswerSpy}} @updateSkipButton={{updateSkipButton}} />
+      </template>,
+    );
 
     // then
     const checkbox1 = screen.getByRole('checkbox', { name: 'checkbox1', disabled: true });
@@ -325,7 +350,9 @@ module('Integration | Component | Module | QCM', function (hooks) {
       };
 
       // when
-      const screen = await render(<template><ModulixQcm @element={{qcm}} /></template>);
+      const screen = await render(
+        <template><ModulixQcm @element={{qcm}} @updateSkipButton={{updateSkipButton}} /></template>,
+      );
 
       // then
       assert.dom(screen.getByText('Correct!')).exists();
