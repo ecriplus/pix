@@ -2879,6 +2879,40 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       expect(llmPostPromptScope.isDone()).to.be.true;
     });
   });
+
+  context('when error occured during usecase', function () {
+    it('should release the lock', async function () {
+      // given
+      const chat = new Chat({
+        id: chatId,
+        userId: 123456,
+        configurationId: 'uneConfigQuiExist',
+        configuration: new Configuration({ llm: {} }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+      await createChat(chat.toDTO());
+
+      // when
+      const err = await catchErr(promptChat)({
+        chatId,
+        userId: 12345,
+        message: 'un message',
+        ...dependencies,
+      });
+      const sameError = await catchErr(promptChat)({
+        chatId,
+        userId: 12345,
+        message: 'un message',
+        ...dependencies,
+      });
+
+      // then
+      expect(err).to.be.instanceOf(ChatForbiddenError);
+      expect(err.message).to.equal('User has not the right to use this chat');
+      expect(sameError).to.deepEqualInstance(err);
+    });
+  });
 });
 
 function buildBasicUserMessage(content, index) {
