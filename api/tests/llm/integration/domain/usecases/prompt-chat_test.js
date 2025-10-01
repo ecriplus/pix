@@ -13,11 +13,7 @@ import {
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
-import {
-  chatRedisRepository,
-  chatRepository,
-  promptRepository,
-} from '../../../../../src/llm/infrastructure/repositories/index.js';
+import { chatRepository, promptRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import * as toEventStream from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
 import { redisMutex } from '../../../../../src/shared/infrastructure/mutex/RedisMutex.js';
 import {
@@ -36,7 +32,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
     chatId = randomUUID();
     dependencies = {
       promptRepository,
-      chatRedisRepository,
       chatRepository,
       toEventStream,
       redisMutex,
@@ -64,6 +59,38 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       // then
       expect(err).to.be.instanceOf(PromptAlreadyOngoingError);
       expect(err.message).to.equal(`A prompt is already ongoing for chat with id ${chatId}`);
+    });
+  });
+
+  context('when chatId does not refer to an existing chat', function () {
+    it('should throw a ChatNotFoundError', async function () {
+      const anotherChatId = randomUUID();
+      const chat = new Chat({
+        id: chatId,
+        userId: 123,
+        configurationId: 'uneConfigQuiExist',
+        configuration: new Configuration({
+          llm: {},
+          challenge: {
+            inputMaxChars: 5,
+          },
+        }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+      await createChat(chat.toDTO());
+
+      // when
+      const err = await catchErr(promptChat)({
+        chatId: anotherChatId,
+        message: 'un message',
+        userId: 12345,
+        ...dependencies,
+      });
+
+      // then
+      expect(err).to.be.instanceOf(ChatNotFoundError);
+      expect(err.message).to.equal(`The chat of id "${anotherChatId}" does not exist`);
     });
   });
 
@@ -840,7 +867,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
 
           context('when the context for this attachmentName has not been added yet', function () {
-            it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist on redis', async function () {
+            it('should return a stream which will contain only the attachment-failure event, it will not forward the prompt to the llm but still persist the new message', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
@@ -1652,7 +1679,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           });
 
           context('when the context for this attachmentName has not been added yet', function () {
-            it('should return a stream which will contain only the attachment-failure event and still persist on redis', async function () {
+            it('should return a stream which will contain only the attachment-failure event and still persist the new message', async function () {
               // given
               const chat = new Chat({
                 id: chatId,
