@@ -95,6 +95,7 @@ export default class UpdateExpiredPasswordForm extends Component {
   @service intl;
   @service session;
   @service url;
+  @service errorMessages;
 
   @tracked validation = VALIDATION_MAP.default;
   @tracked newPassword = null;
@@ -159,7 +160,9 @@ export default class UpdateExpiredPasswordForm extends Component {
   _manageErrorsApi(error) {
     const statusCode = get(error, 'status');
     const code = get(error, 'code');
-    if (statusCode === '400') {
+    if (code === 'PASSWORD_RESET_TOKEN_INVALID_OR_EXPIRED') {
+      this.errorMessage = this.errorMessages.getAuthenticationErrorMessage(error);
+    } else if (statusCode === '400') {
       this.validation = VALIDATION_MAP.error;
     } else if (statusCode === '404' && code === 'USER_ACCOUNT_NOT_FOUND') {
       this.errorMessage = this.intl.t('common.error');

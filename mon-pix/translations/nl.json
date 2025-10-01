@@ -1547,7 +1547,8 @@
         "error-message": "Je moet de gebruiksvoorwaarden van Pix accepteren.",
         "expired-authentication-key": "Uw verificatieverzoek is verlopen.",
         "invalid-email": "Je e-mailadres is ongeldig.",
-        "login-unauthorized-error": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist."
+        "login-unauthorized-error": "Het ingevoerde e-mailadres en/of wachtwoord is onjuist.",
+        "password-reset-token-invalid-or-expired": "Er is te veel tijd verstreken om uw nieuwe wachtwoord te valideren. Ga terug naar de inlogpagina om uw gebruikersnaam en tijdelijke wachtwoord opnieuw in te voeren."
       },
       "login-form": {
         "button": "Inloggen",

@@ -1636,7 +1636,8 @@
         "error-message": "Vous devez accepter les conditions d’utilisation de Pix.",
         "expired-authentication-key": "Votre demande d'authentification a expiré.",
         "invalid-email": "Votre adresse e-mail n’est pas valide.",
-        "login-unauthorized-error": "L'adresse e-mail et/ou le mot de passe saisis sont incorrects."
+        "login-unauthorized-error": "L'adresse e-mail et/ou le mot de passe saisis sont incorrects.",
+        "password-reset-token-invalid-or-expired": "Il s'est écoulé trop de temps pour valider votre nouveau mot de passe. Revenez à la page de connexion pour saisir à nouveau votre identifiant et votre mot de passe temporaire."
       },
       "login-form": {
         "button": "Je me connecte",
