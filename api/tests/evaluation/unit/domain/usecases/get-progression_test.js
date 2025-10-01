@@ -1,5 +1,5 @@
 import { getProgression } from '../../../../../src/evaluation/domain/usecases/get-progression.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { ForbiddenAccess, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -51,6 +51,42 @@ describe('Unit | Domain | Use Cases | get-progression', function () {
           .withArgs(assessment.campaignParticipationId)
           .resolves(campaignParticipation);
         campaignRepository.findSkillIds.withArgs({ campaignId: campaignParticipation.campaignId }).resolves(skillIds);
+      });
+
+      it('should throw when campaignParticipationId is not linked to the assessment', async function () {
+        // when
+        assessment = domainBuilder.buildAssessment({
+          id: assessmentId,
+          userId,
+          state: 'completed',
+          type: Assessment.types.CAMPAIGN,
+          campaignParticipationId: null,
+        });
+        assessmentRepository.getByAssessmentIdAndUserId.withArgs(assessment.id, userId).resolves(assessment);
+
+        // given
+        domainBuilder.buildProgression({
+          id: progressionId,
+          skillIds,
+          knowledgeElements: [],
+          isProfileCompleted: assessment.isCompleted(),
+        });
+
+        // when
+        const error = await catchErr(getProgression)({
+          userId,
+          progressionId,
+          assessmentRepository,
+          campaignParticipationRepository,
+          competenceEvaluationRepository,
+          knowledgeElementRepository,
+          skillRepository,
+          campaignRepository,
+          improvementService,
+        });
+
+        // then
+        expect(error).instanceOf(ForbiddenAccess);
       });
 
       it('should return the progression associated to the assessment', async function () {
