@@ -26,8 +26,8 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       expect(result).to.equal(serializedCombinedCourse);
     });
   });
-  describe('#getParticipations', function () {
-    it('should call getCombinedCourseParticipation usecase with questId', async function () {
+  describe('#findParticipations', function () {
+    it('should call findCombinedCourseParticipation usecase with questId', async function () {
       // given
       const questId = 'questId123';
       const combinedCourseParticipations = Symbol('combinedCourseParticipations');
