@@ -74,9 +74,13 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  const complementaryCertificationKey = complementaryCertificationRepository.get({
-    id: certificationCourse.complementaryCertificationCourse.complementaryCertificationId,
-  }).complementaryCertificationKey;
+  let complementaryCertificationKey;
+  if (certificationCourse.complementaryCertificationCourse?.complementaryCertificationId) {
+    const complementaryCertification = await complementaryCertificationRepository.get({
+      id: certificationCourse.complementaryCertificationCourse.complementaryCertificationId,
+    });
+    complementaryCertificationKey = complementaryCertification.key;
+  }
 
   const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,

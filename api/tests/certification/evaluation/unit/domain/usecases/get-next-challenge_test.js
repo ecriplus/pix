@@ -10,13 +10,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     let answerRepository,
       sharedChallengeRepository,
       certificationCourseRepository,
+      complementaryCertificationRepository,
       certificationChallengeLiveAlertRepository,
       sessionManagementCertificationChallengeRepository,
       pickChallengeService,
       flashAlgorithmService,
       flashAlgorithmConfigurationRepository,
-      certificationCandidateRepository,
-      complementaryCertificationScoringCriteriaRepository;
+      certificationCandidateRepository;
 
     let flashAlgorithmConfiguration;
     let certificationCandidateId;
@@ -37,8 +37,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       certificationCourseRepository = {
         get: sinon.stub(),
       };
-      complementaryCertificationScoringCriteriaRepository = {
-        findByCertificationCourseId: sinon.stub().resolves([]),
+      complementaryCertificationRepository = {
+        get: sinon.stub(),
       };
       certificationChallengeLiveAlertRepository = {
         getLiveAlertValidatedChallengeIdsByAssessmentId: sinon.stub(),
@@ -58,7 +58,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         findByAssessmentId: sinon.stub(),
       };
       assessment = domainBuilder.buildAssessment();
-      const candidate = domainBuilder.buildCertificationCandidateForSupervising({
+      const candidate = domainBuilder.certification.evaluation.buildCandidate({
         accessibilityAdjustmentNeeded: false,
       });
       certificationCandidateId = candidate.id;
@@ -74,13 +74,22 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const nextChallengeToAnswer = domainBuilder.buildChallenge({
           blindnessCompatibility: 'KO',
         });
-        const v3CertificationCourse = domainBuilder.buildCertificationCourse({
-          version: AlgorithmEngineVersion.V3,
-        });
         const locale = 'fr-FR';
+        const complementaryCertificationId = 123;
+        const complementaryCertification =
+          domainBuilder.certification.complementaryCertification.buildComplementaryCertification({
+            id: complementaryCertificationId,
+            key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          });
+        const v3CertificationCourseWithComplementary = domainBuilder.buildCertificationCourse({
+          version: AlgorithmEngineVersion.V3,
+          complementaryCertificationCourse: {
+            complementaryCertificationId,
+          },
+        });
 
         flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
+          .withArgs(v3CertificationCourseWithComplementary.getStartDate())
           .resolves(flashAlgorithmConfiguration);
 
         answerRepository.findByAssessmentExcludingChallengeIds
@@ -92,34 +101,23 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         certificationCourseRepository.get
           .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
+          .resolves(v3CertificationCourseWithComplementary);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
-        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        const reconciledAt = new Date('2024-10-18');
+        const candidate = domainBuilder.certification.evaluation.buildCandidate({ reconciledAt });
         certificationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        const complementaryCertificationScoringCriteria =
-          domainBuilder.certification.evaluation.buildComplementaryCertificationScoringCriteria({
-            complementaryCertificationBadgeKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-            hasComplementaryReferential: true,
-          });
-        complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
-          .withArgs({ certificationCourseId: v3CertificationCourse.getId() })
-          .resolves([complementaryCertificationScoringCriteria]);
+        complementaryCertificationRepository.get
+          .withArgs({ id: complementaryCertificationId })
+          .resolves(complementaryCertification);
 
-        sharedChallengeRepository.findActiveFlashCompatible
-          .withArgs({
-            locale,
-            date: candidate.reconciledAt,
-            complementaryCertificationKey: complementaryCertificationScoringCriteria.complementaryCertificationBadgeKey,
-            hasComplementaryReferential: complementaryCertificationScoringCriteria.hasComplementaryReferential,
-          })
-          .resolves([nextChallengeToAnswer]);
+        sharedChallengeRepository.findActiveFlashCompatible.resolves([nextChallengeToAnswer]);
         sharedChallengeRepository.getMany.withArgs([]).resolves([]);
 
         flashAlgorithmService.getCapacityAndErrorRate
@@ -159,7 +157,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
-          complementaryCertificationScoringCriteriaRepository,
+          complementaryCertificationRepository,
         });
 
         // then
@@ -209,7 +207,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs(assessment.certificationCourseId, [])
             .resolves(null);
 
-          const candidateNeedingAccessibilityAdjustment = domainBuilder.buildCertificationCandidateForSupervising({
+          const candidateNeedingAccessibilityAdjustment = domainBuilder.certification.evaluation.buildCandidate({
             id: 'candidateNeedingAccessibilityAdjustmentId',
             accessibilityAdjustmentNeeded: true,
           });
@@ -217,16 +215,11 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({ assessmentId: assessment.id })
             .resolves(candidateNeedingAccessibilityAdjustment);
 
-          complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
-            .withArgs({ certificationCourseId: v3CertificationCourse.id })
-            .resolves([]);
-
           sharedChallengeRepository.findActiveFlashCompatible
             .withArgs({
               locale,
               date: candidateNeedingAccessibilityAdjustment.reconciledAt,
               complementaryCertificationKey: undefined,
-              hasComplementaryReferential: undefined,
             })
             .resolves(allChallenges);
 
@@ -269,7 +262,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             pickChallengeService,
             certificationCandidateRepository,
-            complementaryCertificationScoringCriteriaRepository,
+            complementaryCertificationRepository,
           });
 
           // then
@@ -325,6 +318,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             pickChallengeService,
             certificationCandidateRepository,
+            complementaryCertificationRepository,
           });
 
           // then
@@ -375,7 +369,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
-        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        const candidate = domainBuilder.certification.evaluation.buildCandidate();
         certificationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
@@ -385,7 +379,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             date: candidate.reconciledAt,
             complementaryCertificationKey: undefined,
-            hasComplementaryReferential: undefined,
           })
           .resolves([alreadyAnsweredChallenge, nextChallengeToAnswer]);
 
@@ -430,7 +423,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
-          complementaryCertificationScoringCriteriaRepository,
+          complementaryCertificationRepository,
         });
 
         // then
@@ -473,7 +466,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           })
           .resolves([]);
 
-        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        const candidate = domainBuilder.certification.evaluation.buildCandidate();
         certificationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
@@ -483,7 +476,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             date: candidate.reconciledAt,
             complementaryCertificationKey: undefined,
-            hasComplementaryReferential: undefined,
           })
           .resolves([nextChallenge, lastSeenChallenge]);
         sharedChallengeRepository.getMany.withArgs([]).resolves([]);
@@ -536,7 +528,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
-          complementaryCertificationScoringCriteriaRepository,
+          complementaryCertificationRepository,
         });
 
         // then
@@ -637,7 +629,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
-          complementaryCertificationScoringCriteriaRepository,
+          complementaryCertificationRepository,
         });
 
         // then
@@ -682,7 +674,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(null);
         sharedChallengeRepository.get.resolves();
 
-        const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+        const candidate = domainBuilder.certification.evaluation.buildCandidate();
         certificationCandidateRepository.findByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
@@ -692,7 +684,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             locale,
             date: candidate.reconciledAt,
             complementaryCertificationKey: undefined,
-            hasComplementaryReferential: undefined,
           })
           .resolves([answeredChallenge]);
         sharedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
@@ -710,6 +701,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           locale,
           pickChallengeService,
           certificationCandidateRepository,
+          complementaryCertificationRepository,
           certificationCandidateId,
           complementaryCertificationScoringCriteriaRepository,
         });
@@ -767,7 +759,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .resolves(null);
             sharedChallengeRepository.get.resolves();
 
-            const candidate = domainBuilder.buildCertificationCandidateForSupervising();
+            const candidate = domainBuilder.certification.evaluation.buildCandidate();
             certificationCandidateRepository.findByAssessmentId
               .withArgs({ assessmentId: assessment.id })
               .resolves(candidate);
@@ -777,7 +769,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
                 locale,
                 date: candidate.reconciledAt,
                 complementaryCertificationKey: undefined,
-                hasComplementaryReferential: undefined,
               })
               .resolves([nextChallengeToAnswer]);
             sharedChallengeRepository.getMany.withArgs([]).resolves([]);
@@ -819,7 +810,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               locale,
               pickChallengeService,
               certificationCandidateRepository,
-              complementaryCertificationScoringCriteriaRepository,
+              complementaryCertificationRepository,
             });
 
             // then
