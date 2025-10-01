@@ -21,7 +21,7 @@ class CampaignsDestructor {
    * @param {Array<CampaignParticipation>} params.campaignParticipationsToDelete - campaigns participations object to be deleted
    * @param {number} params.userId - userId for deletedBy
    * @param {number} params.organizationId - organizationId to check if campaigns belongs to given organizationId
-   * @param {OrganizationMembership} params.membership - class with property isAdmin to check is user is admin in organization or not
+   * @param {OrganizationMembership} params.membership - class with property isAdmin to check if user is admin in organization or not
    */
   constructor({ campaignsToDelete, campaignParticipationsToDelete, userId, organizationId, membership, pixAdminRole }) {
     this.#campaignsToDelete = campaignsToDelete;

@@ -92,6 +92,7 @@ import { computeCampaignCollectiveResult } from './compute-campaign-collective-r
 import { createCampaign } from './create-campaign.js';
 import { createCampaigns } from './create-campaigns.js';
 import { deleteCampaigns } from './delete-campaigns.js';
+import { findActiveCampaignIdsByOrganization } from './find-active-campaign-ids-by-organization.js';
 import { findAssessmentParticipationResultList } from './find-assessment-participation-result-list.js';
 import { findCampaignProfilesCollectionParticipationSummaries } from './find-campaign-profiles-collection-participation-summaries.js';
 import { findCampaignSkillIdsForCampaignParticipations } from './find-campaign-skill-ids-for-campaign-participations.js';
@@ -130,6 +131,7 @@ const usecasesWithoutInjectedDependencies = {
   createCampaign,
   createCampaigns,
   deleteCampaigns,
+  findActiveCampaignIdsByOrganization,
   findAssessmentParticipationResultList,
   findCampaignProfilesCollectionParticipationSummaries,
   findCampaignSkillIdsForCampaignParticipations,

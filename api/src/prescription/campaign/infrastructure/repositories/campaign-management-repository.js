@@ -1,5 +1,6 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignManagement } from '../../domain/models/CampaignManagement.js';
@@ -118,4 +119,9 @@ function _mapToParticipationByStatus(row = {}, campaignType) {
   return participationByStatus;
 }
 
-export { findPaginatedCampaignManagements, get };
+const findActiveCampaignIdsByOrganization = async ({ organizationId }) => {
+  const knexConn = await DomainTransaction.getConnection();
+  return knexConn('campaigns').where('organizationId', organizationId).whereNull('deletedAt').pluck('id');
+};
+
+export { findActiveCampaignIdsByOrganization, findPaginatedCampaignManagements, get };
