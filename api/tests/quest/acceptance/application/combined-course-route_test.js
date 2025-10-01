@@ -246,6 +246,41 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
+  describe('GET /api/combined-courses/{questId}/statistics', function () {
+    context('when user has membership in the combined course organization', function () {
+      it('should return the combined course statistics', async function () {
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          name: 'Mon parcours combiné',
+          code: 'PARCOURS123',
+          organizationId,
+          successRequirements: [],
+        });
+        const learner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+        databaseBuilder.factory.buildCombinedCourseParticipation({
+          organizationLearnerId: learner.id,
+          questId,
+        });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-courses/${questId}/statistics`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data.type).to.equal('combined-course-statistics');
+      });
+    });
+  });
+
   describe('GET /api/combined-courses/{questId}/participations', function () {
     context('when user has membership in the combined course organization', function () {
       it('should return the combined course participations', async function () {
