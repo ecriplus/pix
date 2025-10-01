@@ -30,7 +30,7 @@ describe('Unit | Application | Controller | Campaign Results', function () {
       const request = {
         auth: { credentials: { userId } },
         params: { campaignId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when
@@ -66,7 +66,6 @@ describe('Unit | Application | Controller | Campaign Results', function () {
   describe('#findAssessmentParticipationResults', function () {
     const campaignId = 1;
     const userId = 1;
-    const locale = FRENCH_SPOKEN;
     let campaignAssessmentResultMinimalSerializer;
     let pageSymbol, filterSymbol, resultSymbol, serializerResponseSymbol;
 
@@ -98,7 +97,6 @@ describe('Unit | Application | Controller | Campaign Results', function () {
           page: pageSymbol,
           filter: filterSymbol,
         },
-        headers: { 'accept-language': locale },
       };
 
       // when

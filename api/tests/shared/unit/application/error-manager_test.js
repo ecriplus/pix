@@ -46,16 +46,14 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'STAGE_TITLE_IS_REQUIRED' }],
       });
 
       // when
-      const response = await handle(request, hFake, error);
+      const response = handle(request, hFake, error);
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -80,7 +78,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message);
@@ -89,16 +87,14 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError to french', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'fr-fr',
-        },
+        state: { locale: 'fr-fr' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'STAGE_TITLE_IS_REQUIRED' }],
       });
 
       // when
-      const response = await handle(request, hFake, error);
+      const response = handle(request, hFake, error);
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -119,16 +115,14 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should fallback to the message if the translation is not found', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'message' }],
       });
 
       // when
-      const response = await handle(request, hFake, error);
+      const response = handle(request, hFake, error);
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -149,16 +143,14 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should fallback to the message if the translation is not found with special chars', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: [{ attribute: 'name', message: 'special-:{%}/_chars' }],
       });
 
       // when
-      const response = await handle(request, hFake, error);
+      const response = handle(request, hFake, error);
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -179,16 +171,14 @@ describe('Shared | Unit | Application | ErrorManager', function () {
     it('should translate EntityValidationError even if invalidAttributes is undefined', async function () {
       // given
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale: 'en' },
       };
       const error = new EntityValidationError({
         invalidAttributes: undefined,
       });
 
       // when
-      const response = await handle(request, hFake, error);
+      const response = handle(request, hFake, error);
 
       // then
       expect(response.statusCode).to.equal(422);
@@ -208,7 +198,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.NotFoundError).to.have.been.calledWithExactly(error.message);
@@ -221,7 +211,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message, error.code);
@@ -234,7 +224,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(
@@ -249,7 +239,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message, error.code);
@@ -262,7 +252,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(error.message, error.code);
@@ -276,7 +266,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(
@@ -294,7 +284,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(error.message);
@@ -307,7 +297,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message, error.code);
@@ -320,7 +310,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly('Aucun certificat pour la classe 1.');
@@ -333,7 +323,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BaseHttpError).to.have.been.calledOnce;
@@ -346,7 +336,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(error.message, error.code);
@@ -360,7 +350,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.PreconditionFailedError).to.have.been.calledWithExactly(
@@ -379,7 +369,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.ConflictError).to.have.been.calledWithExactly(error.message, error.code, error.meta);
@@ -418,7 +408,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message);
@@ -431,7 +421,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.ServiceUnavailableError).to.have.been.calledWithExactly(error.message);
@@ -444,7 +434,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
         const params = { request: {}, h: hFake, error };
 
         // when
-        await handle(params.request, params.h, params.error);
+        handle(params.request, params.h, params.error);
 
         // then
         expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(
@@ -465,7 +455,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ConflictError).to.have.been.calledWithExactly(error.message, error.code, error.meta);
@@ -478,7 +468,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message);
@@ -491,7 +481,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message);
@@ -504,7 +494,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ServiceUnavailableError).to.have.been.calledWithExactly(error.message);
@@ -517,7 +507,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ConflictError).to.have.been.calledWithExactly(error.message);
@@ -530,7 +520,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.UnauthorizedError).to.have.been.calledWithExactly(error.message);
@@ -543,7 +533,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.PreconditionFailedError).to.have.been.called;
@@ -556,7 +546,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message);
@@ -569,7 +559,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message, error.code);
@@ -582,7 +572,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message, error.code);
@@ -597,7 +587,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.UnprocessableEntityError).to.have.been.calledWithExactly(error.message, error.code, error.meta);
@@ -610,7 +600,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.PreconditionFailedError).to.have.been.calledWithExactly(error.message);
@@ -623,7 +613,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ForbiddenError).to.have.been.calledWithExactly(error.message, error.code);
@@ -636,7 +626,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.ConflictError).to.have.been.calledWithExactly(error.message);
@@ -649,7 +639,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.PreconditionFailedError).to.have.been.calledWithExactly(error.message);
@@ -662,7 +652,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(error.message);
@@ -675,7 +665,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.BadRequestError).to.have.been.calledWithExactly(
@@ -691,7 +681,7 @@ describe('Shared | Unit | Application | ErrorManager', function () {
       const params = { request: {}, h: hFake, error };
 
       // when
-      await handle(params.request, params.h, params.error);
+      handle(params.request, params.h, params.error);
 
       // then
       expect(HttpErrors.NotFoundError).to.have.been.calledWithExactly(error.message, error.code);

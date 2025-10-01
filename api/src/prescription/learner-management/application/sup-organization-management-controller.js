@@ -7,7 +7,7 @@ import { usecases } from '../domain/usecases/index.js';
 import { SupOrganizationLearnerParser } from '../infrastructure/serializers/csv/sup-organization-learner-parser.js';
 
 const importSupOrganizationLearners = async function (request, h, dependencies = { logger, unlink: fs.unlink }) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const organizationId = request.params.organizationId;
   const userId = request.auth.credentials.userId;
@@ -37,7 +37,7 @@ const importSupOrganizationLearners = async function (request, h, dependencies =
 };
 
 const replaceSupOrganizationLearners = async function (request, h, dependencies = { logger, unlink: fs.unlink }) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const userId = request.auth.credentials.userId;
   const organizationId = request.params.organizationId;
@@ -69,7 +69,7 @@ const replaceSupOrganizationLearners = async function (request, h, dependencies 
 };
 
 const getOrganizationLearnersCsvTemplate = async function (request, h, dependencies = { tokenService }) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const organizationId = request.params.organizationId;
   const token = request.query.accessToken;

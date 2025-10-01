@@ -56,7 +56,7 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
       method: 'POST',
       url: `/api/users/${userId}/competences/${competenceId}/reset`,
       payload: {},
-      headers: { 'accept-language': 'fr-fr' },
+      headers: {},
     };
 
     const learningContent = [

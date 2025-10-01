@@ -5,7 +5,7 @@ import * as trainingSerializer from '../../infrastructure/serializers/jsonapi/tr
 const findTrainings = async function (request, h, dependencies = { trainingSerializer }) {
   const { userId } = request.auth.credentials;
   const { id: campaignParticipationId } = request.params;
-  const locale = await getChallengeLocale(request);
+  const locale = getChallengeLocale(request);
 
   const trainings = await devcompUsecases.findCampaignParticipationTrainings({
     userId,

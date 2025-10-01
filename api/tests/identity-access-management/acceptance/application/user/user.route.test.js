@@ -14,6 +14,7 @@ import {
   domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   knex,
   sinon,
 } from '../../../../test-helper.js';
@@ -113,12 +114,9 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
           password: 'Password123',
         };
 
-        const options = {
-          method: 'POST',
+        const options = generateInjectOptions({
           url: '/api/users',
-          headers: {
-            cookie: `locale=${locale}`,
-          },
+          method: 'POST',
           payload: {
             data: {
               type: 'users',
@@ -126,7 +124,8 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
               relationships: {},
             },
           },
-        };
+          locale,
+        });
 
         // when
         const response = await server.inject(options);

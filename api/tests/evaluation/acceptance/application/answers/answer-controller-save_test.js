@@ -10,6 +10,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   knex,
   mockLearningContent,
 } from '../../../../test-helper.js';
@@ -24,6 +25,7 @@ describe('Acceptance | Controller | answer-controller-save', function () {
   describe('POST /api/answers', function () {
     let userId;
     let insertedAssessmentId;
+    let postAnswersOptionsPayload;
     let postAnswersOptions;
     let promise;
     const correctAnswer = 'correct';
@@ -83,32 +85,33 @@ describe('Acceptance | Controller | answer-controller-save', function () {
         };
         await mockLearningContent(learningContent);
 
-        postAnswersOptions = {
-          method: 'POST',
-          url: '/api/answers',
-          headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          payload: {
-            data: {
-              type: 'answers',
-              attributes: {
-                value: correctAnswer,
-              },
-              relationships: {
-                assessment: {
-                  data: {
-                    type: 'assessments',
-                    id: insertedAssessmentId,
-                  },
+        postAnswersOptionsPayload = {
+          data: {
+            type: 'answers',
+            attributes: {
+              value: correctAnswer,
+            },
+            relationships: {
+              assessment: {
+                data: {
+                  type: 'assessments',
+                  id: insertedAssessmentId,
                 },
-                challenge: {
-                  data: {
-                    type: 'challenges',
-                    id: challengeId,
-                  },
+              },
+              challenge: {
+                data: {
+                  type: 'challenges',
+                  id: challengeId,
                 },
               },
             },
           },
+        };
+        postAnswersOptions = {
+          method: 'POST',
+          url: '/api/answers',
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          payload: postAnswersOptionsPayload,
         };
       });
 
@@ -184,10 +187,18 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             competenceId: competenceId,
           });
           await databaseBuilder.commit();
-          postAnswersOptions.headers['accept-language'] = testCase.locale;
+
+          const options = generateInjectOptions({
+            url: '/api/answers',
+            method: 'POST',
+            payload: postAnswersOptionsPayload,
+            locale: testCase.locale,
+            audience: 'https://app.pix.org',
+            authorizationData: { userId },
+          });
 
           // when
-          const response = await server.inject(postAnswersOptions);
+          const response = await server.inject(options);
 
           // then
           const levelup = response.result.included[0].attributes;

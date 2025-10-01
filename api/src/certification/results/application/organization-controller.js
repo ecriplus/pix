@@ -7,7 +7,7 @@ const downloadCertificationResults = async function (
   h,
   dependencies = { getDivisionCertificationResultsCsv },
 ) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const organizationId = request.params.organizationId;
   const { division } = request.query;

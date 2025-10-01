@@ -59,10 +59,9 @@ describe('Unit | Controller | frameworks-controller', function () {
   describe('#getPixFrameworkAreasWithoutThematics', function () {
     it('should fetch and return framework, serialized as JSONAPI', async function () {
       // given
+      const locale = 'en';
       const request = {
-        headers: {
-          'accept-language': 'en',
-        },
+        state: { locale },
       };
 
       // when

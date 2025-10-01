@@ -28,7 +28,7 @@ describe('Unit | Application | Controller | Campaign', function () {
       const request = {
         auth: { credentials: { userId } },
         params: { campaignCode },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when
@@ -64,7 +64,7 @@ describe('Unit | Application | Controller | Campaign', function () {
 
       const request = {
         params: { campaignId },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
 
       // when

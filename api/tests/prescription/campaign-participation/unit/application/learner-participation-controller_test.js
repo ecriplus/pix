@@ -238,7 +238,7 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
       request = {
         params: { campaignId },
         auth: { credentials: { userId } },
-        headers: { 'accept-language': locale },
+        state: { locale },
       };
     });
 

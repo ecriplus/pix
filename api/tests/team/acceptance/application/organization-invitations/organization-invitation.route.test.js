@@ -7,6 +7,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   insertOrganizationUserWithRoleAdmin,
   knex,
   sinon,
@@ -426,10 +427,9 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       user2 = databaseBuilder.factory.buildUser();
       const locale = 'fr-FR';
 
-      options = {
-        method: 'POST',
+      options = generateInjectOptions({
         url: `/api/organizations/${organization.id}/invitations`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUserId, locale }),
+        method: 'POST',
         payload: {
           data: {
             type: 'organization-invitations',
@@ -438,7 +438,10 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
             },
           },
         },
-      };
+        locale,
+        audience: 'https://orga.pix.fr',
+        authorizationData: { userId: adminUserId },
+      });
 
       await databaseBuilder.commit();
     });
@@ -630,10 +633,9 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
       });
       await databaseBuilder.commit();
 
-      const options = {
-        method: 'POST',
+      const options = generateInjectOptions({
         url: '/api/organization-invitations/sco',
-        headers: { cookie: `locale=${locale}` },
+        method: 'POST',
         payload: {
           data: {
             attributes: {
@@ -643,7 +645,8 @@ describe('Acceptance | Team | Application | Controller | organization-invitation
             },
           },
         },
-      };
+        locale,
+      });
 
       // when
       const response = await server.inject(options);

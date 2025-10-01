@@ -12,8 +12,8 @@ import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/gene
 import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 
 const getCertificateByVerificationCode = async function (request, h, dependencies = { certificateSerializer }) {
-  const locale = await getChallengeLocale(request);
-  const i18n = await getI18nFromRequest(request);
+  const locale = getChallengeLocale(request);
+  const i18n = getI18nFromRequest(request);
 
   let certificate;
   const verificationCode = request.payload.verificationCode;
@@ -39,8 +39,8 @@ const getCertificate = async function (
   h,
   dependencies = { certificateSerializer, privateCertificateSerializer },
 ) {
-  const locale = await getChallengeLocale(request);
-  const i18n = await getI18nFromRequest(request);
+  const locale = getChallengeLocale(request);
+  const i18n = getI18nFromRequest(request);
 
   const certificationCourseId = request.params.certificationCourseId;
 
@@ -63,7 +63,7 @@ const getCertificate = async function (
 };
 
 const findUserCertificates = async function (request) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const userId = request.auth.credentials.userId;
 
@@ -78,7 +78,7 @@ const getPDFCertificate = async function (
 ) {
   const certificationCourseId = request.params.certificationCourseId;
   const { isFrenchDomainExtension } = request.query;
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const certificate = await usecases.getCertificate({ certificationCourseId, locale: i18n.getLocale() });
 
@@ -117,7 +117,7 @@ const getSessionCertificates = async function (
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const sessionId = request.params.sessionId;
   const isFrenchDomainExtension = request.query.isFrenchDomainExtension;
@@ -159,7 +159,7 @@ const downloadDivisionCertificates = async function (
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
 ) {
-  const i18n = await getI18nFromRequest(request);
+  const i18n = getI18nFromRequest(request);
 
   const organizationId = request.params.organizationId;
   const { division, isFrenchDomainExtension } = request.query;

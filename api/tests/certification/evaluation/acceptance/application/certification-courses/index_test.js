@@ -3,6 +3,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -238,19 +239,23 @@ describe('Acceptance | Route | Certification Courses', function () {
         await databaseBuilder.commit();
 
         // when
-        await server.inject({
-          headers: generateAuthenticatedUserRequestHeaders({ userId: 1, acceptLanguage: 'FR' }),
-          method: 'POST',
-          payload: {
-            data: {
-              attributes: {
-                'access-code': 'FMKP39',
-                'session-id': 2,
+        await server.inject(
+          generateInjectOptions({
+            method: 'POST',
+            url: `/api/certification-courses`,
+            payload: {
+              data: {
+                attributes: {
+                  'access-code': 'FMKP39',
+                  'session-id': 2,
+                },
               },
             },
-          },
-          url: `/api/certification-courses`,
-        });
+            locale: 'fr',
+            audience: 'https://app.pix.fr',
+            authorizationData: { userId: 1 },
+          }),
+        );
 
         // then
         const certificationCourse = await knex('certification-courses').select().where({ userId: 1 });

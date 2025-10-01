@@ -6,6 +6,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
   knex,
   learningContentBuilder,
 } from '../../../../../test-helper.js';
@@ -431,12 +432,14 @@ function _createRequestOptions(
       },
     },
   };
-  const options = {
+  const options = generateInjectOptions({
     method: 'POST',
     url: '/api/certification-courses',
-    headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: locale }),
     payload,
-  };
+    locale,
+    audience: 'https://app.pix.fr',
+    authorizationData: { userId },
+  });
 
   return {
     options,

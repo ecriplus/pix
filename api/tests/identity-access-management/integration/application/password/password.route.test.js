@@ -15,9 +15,7 @@ describe('Integration | Identity Access Management | Application | Route | passw
   describe('POST /api/password-reset-demands', function () {
     const method = 'POST';
     const url = '/api/password-reset-demands';
-    const headers = {
-      'accept-language': 'fr',
-    };
+    const headers = {};
     const payload = {
       data: {
         type: 'password-reset-demands',

@@ -299,7 +299,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
     const lastName = 'Doe';
     const password = 'P@ssW0rd';
     const anonymousUserToken = 'anonymous-token';
-    const language = 'fr';
     const locale = 'fr-FR';
     const userId = 1;
 
@@ -340,7 +339,6 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
               },
             },
           },
-          headers: { 'accept-language': language },
         },
         hFake,
         dependencies,
