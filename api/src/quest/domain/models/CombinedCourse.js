@@ -58,6 +58,7 @@ export class CombinedCourseDetails extends CombinedCourse {
           ? CombinedCourseStatuses.STARTED
           : CombinedCourseStatuses.COMPLETED;
     }
+    this.participation = participation;
   }
 
   get campaignIds() {
