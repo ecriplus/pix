@@ -342,6 +342,7 @@ const configuration = (function () {
       temporaryStorage: {
         expirationDelaySeconds: ms(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS ?? '12h'),
       },
+      lockChatExpirationDelayMilliseconds: (process.env.LLM_LOCK_CHAT_EXPIRATION_DELAY_SECONDS ?? 200) * 1000,
       getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
       postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_POST_PROMPT_URL ?? ''),
       authSecret: process.env.LLM_API_JWT_SECRET,
