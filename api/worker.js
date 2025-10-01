@@ -14,6 +14,7 @@ import { config, schema as configSchema } from './src/shared/config.js';
 import { learningContentCache } from './src/shared/infrastructure/caches/learning-content-cache.js';
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
+import { quitMutex } from './src/shared/infrastructure/mutex/RedisMutex.js';
 import { importNamedExportFromFile } from './src/shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { child } from './src/shared/infrastructure/utils/logger.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
@@ -160,6 +161,7 @@ async function main() {
 
   process.on('SIGINT', async () => {
     await quitAllStorages();
+    await quitMutex();
     await metrics.clearMetrics();
     await databaseConnections.disconnect();
     await learningContentCache.quit();

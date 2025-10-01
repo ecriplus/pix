@@ -25,6 +25,25 @@ class RedisMutex {
   async release(resourceId) {
     return (await this._client.del(resourceId)) === 1;
   }
+
+  async quit() {
+    await this._client.quit();
+  }
+
+  async clearAll() {
+    const keys = (await this._client.keys('*')).map((key) => key.split('mutex:')[1]);
+    for (const key of keys) {
+      await this._client.del(key);
+    }
+  }
 }
 
-export const redisMutex = new RedisMutex({ redisUrl: config.redis.url });
+export const redisMutex = new RedisMutex({ redisUrl: config.mutex.redisUrl });
+
+export function quitMutex() {
+  return redisMutex.quit();
+}
+
+export function clearMutex() {
+  return redisMutex.clearAll();
+}

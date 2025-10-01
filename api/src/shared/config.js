@@ -403,6 +403,9 @@ const configuration = (function () {
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
     },
     module: { secret: process.env.REDIRECTION_URL_SECRET },
+    mutex: {
+      redisUrl: process.env.REDIS_URL,
+    },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
     },
@@ -613,6 +616,8 @@ const configuration = (function () {
     config.caching.redisUrl = null;
     config.caching.redisCacheKeyLockTTL = 100;
     config.caching.redisCacheLockedWaitBeforeRetry = 1;
+
+    config.mutex.redisUrl = process.env.TEST_REDIS_URL;
 
     config.redis = {
       url: process.env.TEST_REDIS_URL,

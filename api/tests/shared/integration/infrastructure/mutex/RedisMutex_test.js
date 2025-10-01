@@ -1,18 +1,8 @@
-import { config, config as settings } from '../../../../../src/shared/config.js';
+import { config } from '../../../../../src/shared/config.js';
 import { redisMutex } from '../../../../../src/shared/infrastructure/mutex/RedisMutex.js';
-import { RedisClient } from '../../../../../src/shared/infrastructure/utils/RedisClient.js';
 import { expect, sinon, wait } from '../../../../test-helper.js';
 
-const REDIS_URL = settings.redis.url;
 describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function () {
-  afterEach(async function () {
-    const redisClient = new RedisClient(REDIS_URL, { name: 'mutex', prefix: 'mutex:' });
-    const keys = (await redisClient.keys('*')).map((key) => key.split('mutex:')[1]);
-    for (const key of keys) {
-      await redisClient.del(key);
-    }
-  });
-
   describe('#lock', function () {
     it('should successfully lock resource for the first time, but fail the second time because resource is already locked', async function () {
       // when
