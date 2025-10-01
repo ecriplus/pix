@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.222.0](https://github.com/1024pix/pix/compare/v5.221.0...v5.222.0) (2025-10-01)
+
+### :rocket: Amélioration
+
+- [#13708](https://github.com/1024pix/pix/pull/13708) Adapter l'heure de fin théorique des certification aux Pix plus (PIX-19086) 
+
+### :bug: Correction
+
+- [#13724](https://github.com/1024pix/pix/pull/13724) Éviter les problèmes de timezone dans la page de restriction d'accès de PixCertif (PIX-19747). 
+- [#13728](https://github.com/1024pix/pix/pull/13728) Permettre l'authentification par SSO aux utilisateurs sortant d'un parcours Modulix (PIX-19665) 
+
+### :building_construction: Tech
+
+- [#13719](https://github.com/1024pix/pix/pull/13719) Stocke les messages des épreuves LLM dans PG (PIX-19689). 
+
+### :arrow_up: Montée de version
+
+- [#13734](https://github.com/1024pix/pix/pull/13734) Update adobe/s3mock Docker tag to v4.9.1 (.circleci) 
+- [#13735](https://github.com/1024pix/pix/pull/13735) Update adobe/s3mock Docker tag to v4.9.1 (docker) 
+- [#13740](https://github.com/1024pix/pix/pull/13740) Update dependency @1024pix/ember-testing-library to ^3.0.18 (admin) 
+- [#13741](https://github.com/1024pix/pix/pull/13741) Update dependency @1024pix/ember-testing-library to ^3.0.18 (certif) 
+- [#13744](https://github.com/1024pix/pix/pull/13744) Update dependency @1024pix/ember-testing-library to ^3.0.18 (junior)
+
 # [5.221.0](https://github.com/1024pix/pix/compare/v5.220.0...v5.221.0) (2025-09-30)
 
 ### :rocket: Amélioration
