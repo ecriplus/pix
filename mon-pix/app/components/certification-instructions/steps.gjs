@@ -15,6 +15,14 @@ import StepOne from './step-one';
 import StepThree from './step-three';
 import StepTwo from './step-two';
 
+const PIX_PLUS_DURATIONS = {
+  DROIT: 45,
+  PRO_SANTE: 45,
+  EDU: 90,
+};
+
+const PIX_STANDARD_DURATION = 105;
+
 export default class Steps extends Component {
   @service intl;
   @tracked pageId = 1;
@@ -87,6 +95,55 @@ export default class Steps extends Component {
     });
   }
 
+  get certificationDurationInMinutes() {
+    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
+
+    if (!complementaryKey || complementaryKey === 'CLEA') {
+      return PIX_STANDARD_DURATION;
+    }
+
+    switch (complementaryKey) {
+      case 'DROIT':
+        return PIX_PLUS_DURATIONS.DROIT;
+      case 'PRO_SANTE':
+        return PIX_PLUS_DURATIONS.PRO_SANTE;
+      case 'EDU_1ER_DEGRE':
+      case 'EDU_2ND_DEGRE':
+      case 'EDU_CPE':
+        return PIX_PLUS_DURATIONS.EDU;
+      default:
+        return PIX_STANDARD_DURATION;
+    }
+  }
+
+  get durationLegend() {
+    const minutes = this.certificationDurationInMinutes;
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours === 0) {
+      return `${minutes} min`;
+    }
+    if (remainingMinutes === 0) {
+      return `${hours} H`;
+    }
+    return `${hours} H ${remainingMinutes.toString().padStart(2, '0')} min`;
+  }
+
+  get durationText() {
+    const minutes = this.certificationDurationInMinutes;
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours === 0) {
+      return `${minutes}min`;
+    }
+    if (remainingMinutes === 0) {
+      return `${hours}h`;
+    }
+    return `${hours}h${remainingMinutes.toString().padStart(2, '0')}`;
+  }
+
   focus(element) {
     element.focus();
   }
@@ -136,7 +193,7 @@ export default class Steps extends Component {
       />
     {{/if}}
     {{#if (eq this.pageId 2)}}
-      <StepTwo />
+      <StepTwo @durationLegend={{this.durationLegend}} @durationText={{this.durationText}} />
     {{/if}}
     {{#if (eq this.pageId 3)}}
       <StepThree />
