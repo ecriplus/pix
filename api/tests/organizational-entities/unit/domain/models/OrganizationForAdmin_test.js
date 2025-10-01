@@ -319,6 +319,34 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(givenOrganization.provinceCode).to.equal(newProvinceCode);
     });
 
+    it('updates organization administration team id', function () {
+      // given
+      const initialAdministrationTeamId = Symbol('initial id');
+      const newAdministrationTeamId = Symbol('new id');
+
+      const organization = new OrganizationForAdmin({ administrationTeamId: initialAdministrationTeamId });
+
+      // when
+      organization.updateWithDataProtectionOfficerAndTags({ administrationTeamId: newAdministrationTeamId, features });
+
+      // then
+      expect(organization.administrationTeamId).to.equal(newAdministrationTeamId);
+    });
+
+    it('does not update organization administration team id if empty value', function () {
+      // given
+      const initialAdministrationTeamId = Symbol('initial id');
+      const newAdministrationTeamId = '';
+
+      const organization = new OrganizationForAdmin({ administrationTeamId: initialAdministrationTeamId });
+
+      // when
+      organization.updateWithDataProtectionOfficerAndTags({ administrationTeamId: newAdministrationTeamId, features });
+
+      // then
+      expect(organization.administrationTeamId).to.equal(initialAdministrationTeamId);
+    });
+
     context('updates organization isManagingStudents', function () {
       it('updates organization isManagingStudents when LEARNER_IMPORT feature does not exist', function () {
         // given
