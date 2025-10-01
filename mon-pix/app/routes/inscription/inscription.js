@@ -9,7 +9,7 @@ export default class InscriptionRoute extends Route {
   @service currentUser;
 
   get isAnonymous() {
-    return this.currentUser?.user?.isAnonymous || false;
+    return Boolean(this.currentUser?.user?.isAnonymous);
   }
 
   beforeModel() {

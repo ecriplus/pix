@@ -74,19 +74,27 @@ export default class LoginOidcRoute extends Route {
   async _makeOidcAuthenticationRequest(identityProvider) {
     this.session.set('data.nextURL', undefined);
 
-    // Storing the `attemptedTransition` in the localstorage so when the user returns after
-    // the login they can be sent to the initial destination.
+    // Storing the `attemptedTransition` in the localstorage so that when the user returns after
+    // the login he can be sent to the initial destination.
     if (this.session.get('attemptedTransition')) {
-      // There is two types of intent in transition (see: https://github.com/tildeio/router.js/blob/9b3d00eb923e0bbc34c44f08c6de1e05684b907a/ARCHITECTURE.md#transitionintent)
-      // When the route is accessed by url (/campagnes/:code), the url is provided.
-      // When the route is accessed by the submit of the campaign code,
-      // the route name (organizations.access) and contexts ([Campaign]) are provided.
-      let { url } = this.session.get('attemptedTransition.intent');
-      const { name, contexts } = this.session.get('attemptedTransition.intent');
-      if (!url) {
-        url = this.router.urlFor(name, contexts[0]);
+      // cf. https://github.com/tildeio/router.js/blob/master/ARCHITECTURE.md#transitionintent
+      // there are 2 types of TransitionIntents:
+      // - URLTransitionIntent: for example when the route is accessed by url (/campagnes/:code), the url is provided
+      // - NamedTransitionIntent: for example when the route is accessed by the submit of the campaign code
+      //   the route name (organizations.access) and contexts ([Campaign]) are provided.
+      const { url, name, contexts } = this.session.get('attemptedTransition.intent');
+      let nextURL;
+      if (url) {
+        nextURL = url;
+      } else {
+        if (contexts[0]) {
+          nextURL = this.router.urlFor(name, contexts[0]);
+        } else {
+          nextURL = this.router.urlFor(name);
+        }
       }
-      this.session.set('data.nextURL', url);
+
+      this.session.set('data.nextURL', nextURL);
     }
 
     const response = await fetch(
