@@ -26,6 +26,7 @@ export const ATTACHMENT_MESSAGE_TYPES = {
 /**
  * @callback OnStreamDoneCallback
  * @param {StreamCapture} streamCapture
+ * @param {boolean} hasStreamSucceeded
  */
 
 /**
@@ -68,9 +69,8 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
         if (!writableStream.closed && !writableStream.errored) {
           writableStream.end('Error while streaming response from LLM');
         }
-      } else {
-        await onStreamDone(streamCapture);
       }
+      await onStreamDone(streamCapture, !err);
     },
   );
   return writableStream;

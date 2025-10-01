@@ -7,6 +7,7 @@ import yargs from 'yargs/yargs';
 import { databaseConnections } from '../../../../db/database-connections.js';
 import { learningContentCache } from '../../infrastructure/caches/learning-content-cache.js';
 import { quitAllStorages } from '../../infrastructure/key-value-storages/index.js';
+import { quitMutex } from '../../infrastructure/mutex/RedisMutex.js';
 import { child } from '../../infrastructure/utils/logger.js';
 
 function isRunningFromCli(scriptFileUrl) {
@@ -83,6 +84,7 @@ export class ScriptRunner {
       await databaseConnections.disconnect();
       await learningContentCache.quit();
       await quitAllStorages();
+      await quitMutex();
     }
   }
 }

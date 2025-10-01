@@ -342,6 +342,7 @@ const configuration = (function () {
       temporaryStorage: {
         expirationDelaySeconds: ms(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS ?? '12h'),
       },
+      lockChatExpirationDelayMilliseconds: (process.env.LLM_LOCK_CHAT_EXPIRATION_DELAY_SECONDS ?? 200) * 1000,
       getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
       postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_POST_PROMPT_URL ?? ''),
       authSecret: process.env.LLM_API_JWT_SECRET,
@@ -402,6 +403,9 @@ const configuration = (function () {
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
     },
     module: { secret: process.env.REDIRECTION_URL_SECRET },
+    mutex: {
+      redisUrl: process.env.REDIS_URL,
+    },
     partner: {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
     },
@@ -612,6 +616,8 @@ const configuration = (function () {
     config.caching.redisUrl = null;
     config.caching.redisCacheKeyLockTTL = 100;
     config.caching.redisCacheLockedWaitBeforeRetry = 1;
+
+    config.mutex.redisUrl = process.env.TEST_REDIS_URL;
 
     config.redis = {
       url: process.env.TEST_REDIS_URL,

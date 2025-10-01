@@ -519,6 +519,10 @@ function _mapToHttpError(error) {
     return new HttpErrors.BadRequestError(error.message, error.code);
   }
 
+  if (error instanceof LLMDomainErrors.PromptAlreadyOngoingError) {
+    return new HttpErrors.ConflictError(error.message, error.code);
+  }
+
   return new HttpErrors.BaseHttpError(error.message);
 }
 

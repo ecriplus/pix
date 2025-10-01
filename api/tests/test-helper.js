@@ -33,6 +33,7 @@ import * as missionRepository from '../src/school/infrastructure/repositories/mi
 import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
 import { Membership } from '../src/shared/domain/models/Membership.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
+import { clearMutex, quitMutex } from '../src/shared/infrastructure/mutex/RedisMutex.js';
 import * as areaRepository from '../src/shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../src/shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../src/shared/infrastructure/repositories/competence-repository.js';
@@ -101,10 +102,12 @@ afterEach(async function () {
   missionRepository.clearCache();
   await featureToggles.resetDefaults();
   await datamartBuilder.clean();
+  await clearMutex();
   return databaseBuilder.clean();
 });
 
 after(async function () {
+  await quitMutex();
   return await disconnect();
 });
 
@@ -435,12 +438,16 @@ const preventStubsToBeCalledUnexpectedly = (stubs) => {
   }
 };
 
-function waitForStreamFinalizationToBeDone() {
+function wait(ms) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 500);
+    }, ms);
   });
+}
+
+function waitForStreamFinalizationToBeDone() {
+  return wait(500);
 }
 // eslint-disable-next-line mocha/no-exports
 export {
@@ -479,5 +486,6 @@ export {
   sinon,
   streamToPromise,
   toStream,
+  wait,
   waitForStreamFinalizationToBeDone,
 };

@@ -7,6 +7,7 @@ import {
   MaxPromptsReachedError,
   NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
+  PromptAlreadyOngoingError,
   TooLargeMessageInputError,
 } from '../../../../../src/llm/domain/errors.js';
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
@@ -18,6 +19,7 @@ import {
   promptRepository,
 } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import * as toEventStream from '../../../../../src/llm/infrastructure/streaming/to-event-stream.js';
+import { redisMutex } from '../../../../../src/shared/infrastructure/mutex/RedisMutex.js';
 import {
   catchErr,
   databaseBuilder,
@@ -37,6 +39,7 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       chatRedisRepository,
       chatRepository,
       toEventStream,
+      redisMutex,
     };
   });
 
@@ -48,6 +51,19 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       // then
       expect(err).to.be.instanceOf(ChatNotFoundError);
       expect(err.message).to.equal('The chat of id "null id provided" does not exist');
+    });
+  });
+
+  context('when prompt is already ongoing for given chat', function () {
+    it('should throw a PromptAlreadyOngoingError', async function () {
+      // when
+      const chatId = randomUUID();
+      await dependencies.redisMutex.lock(chatId);
+      const err = await catchErr(promptChat)({ chatId, message: 'un message', userId: 12345, ...dependencies });
+
+      // then
+      expect(err).to.be.instanceOf(PromptAlreadyOngoingError);
+      expect(err.message).to.equal(`A prompt is already ongoing for chat with id ${chatId}`);
     });
   });
 
@@ -349,6 +365,171 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             {
               index: 3,
               content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+              emitter: 'assistant',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
+              wasModerated: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+          ]);
+          expect(llmPostPromptScope.isDone()).to.be.true;
+        });
+        it('should release chat resource', async function () {
+          // given
+          const chat = new Chat({
+            id: chatId,
+            userId: 123,
+            configurationId,
+            configuration,
+            hasAttachmentContextBeenAdded: false,
+            messages: [buildBasicUserMessage('coucou user1', 0), buildBasicAssistantMessage('coucou LLM1', 1)],
+          });
+          await createChat(chat.toDTO());
+          const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
+            .post('/chat', {
+              configuration: {
+                llm: {
+                  historySize: 123,
+                },
+                challenge: {
+                  inputMaxPrompts: 100,
+                  inputMaxChars: 255,
+                },
+              },
+              history: [
+                { content: 'coucou user1', role: 'user' },
+                { content: 'coucou LLM1', role: 'assistant' },
+              ],
+              prompt: 'un message',
+            })
+            .reply(
+              201,
+              Readable.from([
+                '60:{"ceci":"nest pas important","message":"coucou c\'est super"}',
+                '40:{"message":"\\nle couscous c plutot bon"}47:{"message":" mais la paella c pas mal aussi\\n"}',
+                '29:{"jecrois":{"que":"jaifini"}}',
+              ]),
+            )
+            .post('/chat')
+            .reply(201, Readable.from(['69:{"ceci":"nest pas important","message":"coucou c\'est vraiment super"}']));
+
+          // when
+          await promptChat({
+            chatId,
+            userId: 123,
+            message: 'un message',
+            attachmentName: null,
+            ...dependencies,
+          });
+
+          // then
+          await waitForStreamFinalizationToBeDone();
+          await promptChat({
+            chatId,
+            userId: 123,
+            message: 'un autre message',
+            attachmentName: null,
+            ...dependencies,
+          });
+          await waitForStreamFinalizationToBeDone();
+
+          const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
+          expect(chatDB).to.deep.equal({
+            id: chatId,
+            userId: 123,
+            configId: 'uneConfigQuiExist',
+            configContent: {
+              llm: {
+                historySize: 123,
+              },
+              challenge: {
+                inputMaxPrompts: 100,
+                inputMaxChars: 255,
+              },
+            },
+            hasAttachmentContextBeenAdded: false,
+            totalInputTokens: 0,
+            totalOutputTokens: 0,
+          });
+          expect(messagesDB).to.deep.equal([
+            {
+              index: 0,
+              content: 'coucou user1',
+              emitter: 'user',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: true,
+              wasModerated: null,
+              hasErrorOccurred: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+            {
+              index: 1,
+              content: 'coucou LLM1',
+              emitter: 'assistant',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+              wasModerated: null,
+              hasErrorOccurred: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+            {
+              index: 2,
+              content: 'un message',
+              emitter: 'user',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: true,
+              wasModerated: false,
+              hasErrorOccurred: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+            {
+              index: 3,
+              content: "coucou c'est super\nle couscous c plutot bon mais la paella c pas mal aussi\n",
+              emitter: 'assistant',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: false,
+              hasErrorOccurred: false,
+              wasModerated: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+            {
+              index: 4,
+              content: 'un autre message',
+              emitter: 'user',
+              shouldBeRenderedInPreview: true,
+              shouldBeForwardedToLLM: true,
+              shouldBeCountedAsAPrompt: true,
+              wasModerated: false,
+              hasErrorOccurred: null,
+              attachmentName: null,
+              attachmentContext: null,
+              hasAttachmentBeenSubmittedAlongWithAPrompt: false,
+              haveVictoryConditionsBeenFulfilled: false,
+            },
+            {
+              index: 5,
+              content: "coucou c'est vraiment super",
               emitter: 'assistant',
               shouldBeRenderedInPreview: true,
               shouldBeForwardedToLLM: true,
@@ -1335,7 +1516,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 attachmentName: 'wrong_file.txt',
                 ...dependencies,
               });
-
               // then
               const parts = [];
               const decoder = new TextDecoder();
@@ -2696,6 +2876,40 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         },
       ]);
       expect(llmPostPromptScope.isDone()).to.be.true;
+    });
+  });
+
+  context('when error occured during usecase', function () {
+    it('should release the lock', async function () {
+      // given
+      const chat = new Chat({
+        id: chatId,
+        userId: 123456,
+        configurationId: 'uneConfigQuiExist',
+        configuration: new Configuration({ llm: {} }),
+        hasAttachmentContextBeenAdded: false,
+        messages: [],
+      });
+      await createChat(chat.toDTO());
+
+      // when
+      const err = await catchErr(promptChat)({
+        chatId,
+        userId: 12345,
+        message: 'un message',
+        ...dependencies,
+      });
+      const sameError = await catchErr(promptChat)({
+        chatId,
+        userId: 12345,
+        message: 'un message',
+        ...dependencies,
+      });
+
+      // then
+      expect(err).to.be.instanceOf(ChatForbiddenError);
+      expect(err.message).to.equal('User has not the right to use this chat');
+      expect(sameError).to.deepEqualInstance(err);
     });
   });
 });
