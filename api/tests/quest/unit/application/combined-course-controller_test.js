@@ -55,4 +55,29 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       expect(result).to.equal(serializedCombinedCourseParticipations);
     });
   });
+  describe('#getStatistics', function () {
+    it('should call getCombinedCourseStatistics usecase with questId', async function () {
+      // given
+      const questId = 'questId123';
+      const combinedCourseStatistics = Symbol('combinedCourseStatistics');
+      const serializedCombinedCourseStatistics = Symbol('serializedCombinedCourseStatistics');
+      const request = {
+        params: { questId },
+      };
+
+      sinon.stub(usecases, 'getCombinedCourseStatistics').withArgs({ questId }).resolves(combinedCourseStatistics);
+      const combinedCourseStatisticsSerializer = { serialize: sinon.stub() };
+      combinedCourseStatisticsSerializer.serialize
+        .withArgs(combinedCourseStatistics)
+        .returns(serializedCombinedCourseStatistics);
+
+      // when
+      const result = await combinedCourseController.getStatistics(request, null, {
+        combinedCourseStatisticsSerializer: combinedCourseStatisticsSerializer,
+      });
+
+      // then
+      expect(result).to.equal(serializedCombinedCourseStatistics);
+    });
+  });
 });
