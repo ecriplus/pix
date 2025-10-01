@@ -4,6 +4,7 @@ import {
   MaxPromptsReachedError,
   NoAttachmentNeededError,
   NoAttachmentNorMessageProvidedError,
+  PromptAlreadyOngoingError,
   TooLargeMessageInputError,
 } from '../errors.js';
 
@@ -16,9 +17,14 @@ export async function promptChat({
   chatRepository,
   promptRepository,
   toEventStream,
+  redisMutex,
 }) {
   if (!chatId) {
     throw new ChatNotFoundError('null id provided');
+  }
+  const locked = await redisMutex.lock(chatId);
+  if (!locked) {
+    throw new PromptAlreadyOngoingError(chatId);
   }
   const hasAnAttachmentBeenProvided = !!attachmentName;
   const hasAMessageBeenProvided = !!message;
@@ -73,7 +79,7 @@ export async function promptChat({
 
   return toEventStream.fromLLMResponse({
     llmResponse: readableStream,
-    onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository),
+    onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository, redisMutex),
     attachmentMessageType,
     shouldSendDebugData: chat.isPreview,
   });
@@ -87,9 +93,10 @@ export async function promptChat({
  * @param {string} message
  * @param {boolean} hasJustBeenSentToLLM
  * @param {Object} chatRepository
+ * @param {Object} redisMutex
  * @returns {(streamCapture: StreamCapture) => Promise<void>}
  */
-function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
+function finalize(chat, message, hasJustBeenSentToLLM, chatRepository, redisMutex) {
   return async (streamCapture) => {
     const hasErrorOccurredDuringStream = !!streamCapture.errorOccurredDuringStream;
     const shouldBeCountedAsAPrompt = hasJustBeenSentToLLM && !hasErrorOccurredDuringStream;
@@ -108,5 +115,6 @@ function finalize(chat, message, hasJustBeenSentToLLM, chatRepository) {
     );
     chat.updateTokenConsumption(streamCapture.inputTokens, streamCapture.outputTokens);
     await chatRepository.save(chat);
+    await redisMutex.release(chat.id);
   };
 }

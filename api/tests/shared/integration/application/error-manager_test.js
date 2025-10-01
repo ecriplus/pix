@@ -74,6 +74,14 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(CONFLICT_ERROR);
       expect(responseCode(response)).to.equal('SESSION_ALREADY_FINALIZED');
     });
+
+    it('responds Conflict when a PromptAlreadyOngoingError error occurs', async function () {
+      routeHandler.throws(new LLMDomainErrors.PromptAlreadyOngoingError('chatId'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal('A prompt is already ongoing for chat with id chatId');
+    });
   });
 
   context('400 Bad Request', function () {

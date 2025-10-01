@@ -53,3 +53,9 @@ export class NoAttachmentNorMessageProvidedError extends DomainError {
     super('At least a message or an attachment, if applicable, must be provided');
   }
 }
+
+export class PromptAlreadyOngoingError extends DomainError {
+  constructor(chatId) {
+    super(`A prompt is already ongoing for chat with id ${chatId}`);
+  }
+}
