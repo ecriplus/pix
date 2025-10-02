@@ -136,6 +136,7 @@ const register = async function (server) {
             method: (request, h) =>
               securityPreHandlers.hasAtLeastOneAccessOf([
                 securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
                 securityPreHandlers.checkAdminMemberHasRoleSupport,
                 securityPreHandlers.checkAdminMemberHasRoleMetier,
               ])(request, h),
