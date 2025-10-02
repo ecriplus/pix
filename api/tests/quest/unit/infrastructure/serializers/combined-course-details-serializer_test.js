@@ -45,6 +45,11 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-details'
               related: '/api/combined-courses/1/participations',
             },
           },
+          'combined-course-statistics': {
+            links: {
+              related: '/api/combined-courses/1/statistics',
+            },
+          },
         },
         type: 'combined-courses',
         id: '1',
