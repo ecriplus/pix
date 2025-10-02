@@ -63,6 +63,72 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
+  describe('#findByOrganizationId', function () {
+    it('should return all combined courses for a given organization', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const quest1 = databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'COURSE1',
+        name: 'Parcours 1',
+        organizationId,
+      });
+      const quest2 = databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'COURSE2',
+        name: 'Parcours 2',
+        organizationId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourses = await combinedCourseRepository.findByOrganizationId({ organizationId });
+
+      // then
+      expect(combinedCourses).to.have.lengthOf(2);
+      expect(combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
+      expect(combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
+      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(quest1));
+      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(quest2));
+    });
+
+    it('should return an empty array when organization has no combined courses', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourses = await combinedCourseRepository.findByOrganizationId({ organizationId });
+
+      // then
+      expect(combinedCourses).to.deep.equal([]);
+    });
+
+    it('should not return combined courses from other organizations', async function () {
+      // given
+      const organization1Id = databaseBuilder.factory.buildOrganization().id;
+      const organization2Id = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'COURSE1',
+        name: 'Parcours 1',
+        organizationId: organization1Id,
+      });
+      databaseBuilder.factory.buildQuestForCombinedCourse({
+        code: 'COURSE2',
+        name: 'Parcours 2',
+        organizationId: organization2Id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourses = await combinedCourseRepository.findByOrganizationId({
+        organizationId: organization1Id,
+      });
+
+      // then
+      expect(combinedCourses).to.have.lengthOf(1);
+      expect(combinedCourses[0].organizationId).to.equal(organization1Id);
+    });
+  });
+
   describe('#getByCampaignId', function () {
     let organizationId, quest, campaignId;
 

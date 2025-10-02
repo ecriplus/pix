@@ -32,6 +32,16 @@ const getById = async ({ id }) => {
   return new CombinedCourse(quest);
 };
 
+const findByOrganizationId = async ({ organizationId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const combinedCourses = await knexConn('quests')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+    .where('organizationId', organizationId);
+
+  return combinedCourses.map((quest) => new CombinedCourse(quest));
+};
+
 const findByCampaignId = async ({ campaignId }) => {
   const knexConn = DomainTransaction.getConnection();
   const quests = await knexConn('quests')
@@ -63,4 +73,4 @@ const _toDTO = (combinedCourse) => {
   };
 };
 
-export { findByCampaignId, getByCode, getById, saveInBatch };
+export { findByCampaignId, findByOrganizationId, getByCode, getById, saveInBatch };
