@@ -1,5 +1,6 @@
-import { visit } from '@1024pix/ember-testing-library';
+import { visit, within } from '@1024pix/ember-testing-library';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -33,6 +34,35 @@ module('Acceptance | Combined course page', function (hooks) {
 
     // then
     assert.ok(await screen.getByRole('heading', { name: new RegExp(combinedCourse.name) }));
+  });
+
+  test('it should display combined course statistics', async function (assert) {
+    // given
+    const statistics = server.create('combined-course-statistic', {
+      id: combinedCourse.id,
+      participationsCount: 3,
+      completedParticipationsCount: 2,
+    });
+
+    server.create('combined-course-participation', {
+      id: 3,
+      firstName: 'bob',
+      lastName: 'Azerty',
+      status: 'STARTED',
+    });
+
+    // when
+    const screen = await visit(`/parcours/${combinedCourse.id}`);
+
+    // then
+    const totalParticipationsElement = within(
+      screen.getByText(t('pages.combined-course.statistics.total-participations')).closest('dl'),
+    ).getByRole('definition');
+    assert.strictEqual(totalParticipationsElement.innerText, statistics.participationsCount.toString());
+    const completedParticipationsElement = within(
+      screen.getByText(t('pages.combined-course.statistics.completed-participations')).closest('dl'),
+    ).getByRole('definition');
+    assert.strictEqual(completedParticipationsElement.innerText, statistics.completedParticipationsCount.toString());
   });
 
   test('it should display combined course participation', async function (assert) {
