@@ -114,4 +114,39 @@ module('Integration | Component | CombinedCourse', function (hooks) {
       assert.ok(screen.getByText(t('pages.campaign.code')));
     });
   });
+
+  module('combined course statistics', function () {
+    test('it should display participations count', async function (assert) {
+      // given
+      const combinedCourse = {
+        id: 1,
+        name: 'Parcours Magipix',
+        code: '1234PixTest',
+        campaignIds: [123],
+        combinedCourseStatistics: {
+          participationsCount: 20,
+          completedParticipationsCount: 8,
+        },
+      };
+
+      // when
+      const screen = await render(<template><CombinedCourse @model={{combinedCourse}} /></template>);
+
+      // then
+      const totalParticipationsBlock = screen.getByText(t('pages.combined-course.statistics.total-participations'));
+      const totalParticipationsElement = within(totalParticipationsBlock.closest('dl')).getByRole('definition');
+      assert.strictEqual(
+        totalParticipationsElement.innerText,
+        combinedCourse.combinedCourseStatistics.participationsCount.toString(),
+      );
+      const completedParticipationsBlock = screen.getByText(
+        t('pages.combined-course.statistics.completed-participations'),
+      );
+      const completedParticipationsElement = within(completedParticipationsBlock.closest('dl')).getByRole('definition');
+      assert.strictEqual(
+        completedParticipationsElement.innerText,
+        combinedCourse.combinedCourseStatistics.completedParticipationsCount.toString(),
+      );
+    });
+  });
 });

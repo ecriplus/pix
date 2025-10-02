@@ -1,0 +1,7 @@
+.combined-course-page {
+  &__statistics {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    margin-bottom: var(--pix-spacing-8x);
+  }
+}
