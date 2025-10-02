@@ -5,7 +5,7 @@ import {
   CombinedCourseStatuses,
 } from '../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
-import { CombinedCourseItem, ITEM_TYPE } from './CombinedCourseItem.js';
+import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
 import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
@@ -111,7 +111,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       id: campaign.id,
       reference: campaign.code,
       title: campaign.title,
-      type: ITEM_TYPE.CAMPAIGN,
+      type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
       isCompleted,
       isLocked,
     });
@@ -122,7 +122,7 @@ export class CombinedCourseDetails extends CombinedCourse {
       id: module.id,
       reference: module.slug,
       title: module.title,
-      type: ITEM_TYPE.MODULE,
+      type: COMBINED_COURSE_ITEM_TYPES.MODULE,
       redirection: encryptedCombinedCourseUrl,
       isCompleted,
       isLocked,
@@ -135,7 +135,7 @@ export class CombinedCourseDetails extends CombinedCourse {
     return new CombinedCourseItem({
       id: 'formation_' + this.quest.id + '_' + targetProfileId,
       reference: targetProfileId,
-      type: ITEM_TYPE.FORMATION,
+      type: COMBINED_COURSE_ITEM_TYPES.FORMATION,
     });
   }
 
@@ -146,7 +146,7 @@ export class CombinedCourseDetails extends CombinedCourse {
 
     const shouldBeInFormationItem = Boolean(targetProfileId);
     const hasFormationItem = this.items.find((item) => {
-      if (item.type !== ITEM_TYPE.FORMATION) return false;
+      if (item.type !== COMBINED_COURSE_ITEM_TYPES.FORMATION) return false;
       if (item.reference === targetProfileId) return true;
       return false;
     });

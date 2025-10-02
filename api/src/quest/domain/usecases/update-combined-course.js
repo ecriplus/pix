@@ -1,4 +1,4 @@
-import { ITEM_TYPE } from '../models/CombinedCourseItem.js';
+import { COMBINED_COURSE_ITEM_TYPES } from '../models/CombinedCourseItem.js';
 import combinedCourseDetailsService from '../services/combined-course-details-service.js';
 
 export async function updateCombinedCourse({
@@ -15,7 +15,7 @@ export async function updateCombinedCourse({
   });
 
   const moduleToSynchronizeIds = combinedCourseDetails.items
-    .filter((item) => item.type === ITEM_TYPE.MODULE)
+    .filter((item) => item.type === COMBINED_COURSE_ITEM_TYPES.MODULE)
     .map((item) => item.id);
 
   if (!combinedCourseDetails.participation) {

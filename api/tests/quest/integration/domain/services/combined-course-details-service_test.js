@@ -1,6 +1,9 @@
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import {
+  COMBINED_COURSE_ITEM_TYPES,
+  CombinedCourseItem,
+} from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import CombinedCourseDetailsService from '../../../../../src/quest/domain/services/combined-course-details-service.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -100,7 +103,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: campaign.id,
           reference: campaign.code,
           title: campaign.title,
-          type: ITEM_TYPE.CAMPAIGN,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
           redirection: undefined,
           isCompleted: false,
           isLocked: false,
@@ -111,7 +114,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: moduleId1,
           reference: 'bac-a-sable',
           title: 'Bac à sable',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
@@ -122,7 +125,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: moduleId2,
           reference: 'bases-clavier-1',
           title: 'Les bases du clavier sur ordinateur 1/2',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
@@ -249,7 +252,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: campaign.id,
           reference: campaign.code,
           title: campaign.title,
-          type: ITEM_TYPE.CAMPAIGN,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
           redirection: undefined,
           isCompleted: true,
           isLocked: false,
@@ -260,7 +263,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: moduleId1,
           reference: 'bac-a-sable',
           title: 'Bac à sable',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: true,
           isLocked: false,
@@ -271,7 +274,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           id: moduleId3,
           reference: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire une adresse mail',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: false,

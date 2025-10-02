@@ -1,6 +1,9 @@
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import { CombinedCourseItem, ITEM_TYPE } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import {
+  COMBINED_COURSE_ITEM_TYPES,
+  CombinedCourseItem,
+} from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -100,7 +103,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           id: campaign.id,
           reference: campaign.code,
           title: campaign.title,
-          type: ITEM_TYPE.CAMPAIGN,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
           redirection: undefined,
           isCompleted: false,
           isLocked: false,
@@ -111,7 +114,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           id: moduleId1,
           reference: 'bac-a-sable',
           title: 'Bac à sable',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
@@ -122,7 +125,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           id: moduleId2,
           reference: 'bases-clavier-1',
           title: 'Les bases du clavier sur ordinateur 1/2',
-          type: ITEM_TYPE.MODULE,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
