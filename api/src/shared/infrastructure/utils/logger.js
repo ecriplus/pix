@@ -31,8 +31,8 @@ export const loggerPino = pino(
   prettyPrint,
 );
 
-function buildLogWrapper(context, mergingObject, message) {
-  const loggerChild = loggerPino.child(getCorrelationContext());
+function buildLogWrapper(context, mergingObject, message, extraBindings = {}, extraOptions = undefined) {
+  const loggerChild = loggerPino.child({ ...getCorrelationContext(), ...extraBindings }, extraOptions);
   loggerChild[context](mergingObject, message);
 }
 
@@ -73,7 +73,30 @@ export function child(section, bindings, options) {
   if (micromatch.isMatch(section, logging.debugSections)) {
     optionsOverride.level = 'debug';
   }
-  return loggerPino.child(bindings, { ...options, ...optionsOverride });
+  const extraOptions = { ...options, ...optionsOverride };
+  return {
+    trace: (mergingObject, message) => {
+      buildLogWrapper('trace', mergingObject, message, bindings, extraOptions);
+    },
+    debug: (mergingObject, message) => {
+      buildLogWrapper('debug', mergingObject, message, bindings, extraOptions);
+    },
+    info: (mergingObject, message) => {
+      buildLogWrapper('info', mergingObject, message, bindings, extraOptions);
+    },
+    warn: (mergingObject, message) => {
+      buildLogWrapper('warn', mergingObject, message, bindings, extraOptions);
+    },
+    error: (mergingObject, message) => {
+      buildLogWrapper('error', mergingObject, message, bindings, extraOptions);
+    },
+    fatal: (mergingObject, message) => {
+      buildLogWrapper('fatal', mergingObject, message, bindings, extraOptions);
+    },
+    silent: (mergingObject, message) => {
+      buildLogWrapper('silent', mergingObject, message, bindings, extraOptions);
+    },
+  };
 }
 
 export const SCOPES = {
