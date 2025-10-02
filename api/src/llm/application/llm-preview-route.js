@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { jwtApplicationAuthenticationStrategyName } from '../../shared/infrastructure/authentication-strategy-names.js';
 import { llmPreviewController } from './llm-preview-controller.js';
 import { checkLLMChatIsEnabled } from './pre-handlers/index.js';
@@ -62,7 +63,7 @@ export async function register(server) {
         pre: [{ method: checkLLMChatIsEnabled }],
         validate: {
           params: Joi.object({
-            chatId: Joi.string().required(),
+            chatId: identifiersType.chatId,
           }).required(),
         },
         handler: llmPreviewController.getChat,
@@ -78,7 +79,7 @@ export async function register(server) {
         pre: [{ method: checkLLMChatIsEnabled }],
         validate: {
           params: Joi.object({
-            chatId: Joi.string().required(),
+            chatId: identifiersType.chatId,
           }).required(),
           payload: Joi.object({
             prompt: Joi.string().optional().allow('', null),

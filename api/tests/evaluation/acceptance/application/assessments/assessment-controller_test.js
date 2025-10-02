@@ -832,10 +832,13 @@ describe('Acceptance | Controller | assessment-controller', function () {
         });
 
         it('should throw a 503 status code', async function () {
+          // given
+          const chatId = randomUUID();
+
           // when
           const response = await server.inject({
             method: 'POST',
-            url: '/api/assessments/111/embed/llm/chats/cSomeChatId123/messages',
+            url: `/api/assessments/111/embed/llm/chats/${chatId}/messages`,
             payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });

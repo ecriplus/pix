@@ -342,10 +342,13 @@ describe('Acceptance | Controller | passage-controller', function () {
         });
 
         it('should throw a 503 status code', async function () {
+          // given
+          const uuid = randomUUID();
+
           // when
           const response = await server.inject({
             method: 'POST',
-            url: '/api/passages/111/embed/llm/chats/cSomeChatId123/messages',
+            url: `/api/passages/111/embed/llm/chats/${uuid}/messages`,
             payload: { prompt: 'Quelle est la recette de la ratatouille ?' },
             headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
           });
