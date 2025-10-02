@@ -913,7 +913,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const campaign = databaseBuilder.factory.buildCampaign();
 
         const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
-        databaseBuilder.factory.buildQuestForCombinedCourse({
+        databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix',
           rewardType: null,
           rewardId: null,
@@ -1243,12 +1243,12 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           userId,
           organizationId,
         }).id;
-        const combinedCourse = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix1',
           code: 'ABCD',
           organizationId,
         });
-        const secondCombinedCourse = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const secondCombinedCourse = databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix2',
           code: 'EFGH',
           organizationId,

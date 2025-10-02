@@ -14,7 +14,7 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
 
   it('should throw if a campaign belongs to combined course', async function () {
     // given
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
@@ -43,7 +43,7 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
   it('should not throw if campaign does not belongs to combined course', async function () {
     const anotherCampaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
 
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,

@@ -37,13 +37,12 @@ describe('Quest | Integration | Repository | combined-course', function () {
   describe('#getById', function () {
     it('should return a quest if quest id exists', async function () {
       // given
-      const id = 1;
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const quest = databaseBuilder.factory.buildQuestForCombinedCourse({ id: 1, code: 'COMBINIX1', organizationId });
+      const quest = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBINIX1', organizationId });
       await databaseBuilder.commit();
 
       // when
-      const combinedCourseResult = await combinedCourseRepository.getById({ id });
+      const combinedCourseResult = await combinedCourseRepository.getById({ id: quest.id });
 
       // then
       expect(combinedCourseResult).to.be.an.instanceof(CombinedCourse);
@@ -140,7 +139,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       const name = 'Mon parcours Combiné';
       const description = 'Le but de ma quête';
       const illustration = 'images/illustration.svg';
-      quest = databaseBuilder.factory.buildQuestForCombinedCourse({
+      quest = databaseBuilder.factory.buildCombinedCourse({
         code,
         name,
         organizationId,

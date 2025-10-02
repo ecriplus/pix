@@ -24,7 +24,7 @@ describe('Integration | UseCase | get-campaign', function () {
 
     it('should return combinedCourse info when a combined course is associated with a campaign', async function () {
       // given
-      const combinedCourseId = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,

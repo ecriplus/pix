@@ -42,7 +42,7 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
 
   it('should not delete the passed quests in file if they correspond to a combined course', async function () {
     // given
-    const id = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    const id = databaseBuilder.factory.buildCombinedCourse().id;
     await databaseBuilder.commit();
 
     filePath = await createTempFile(
@@ -62,7 +62,7 @@ describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-b
   });
   it('should not update the passed quests in file if they correspond to a combined course', async function () {
     // given
-    const id = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    const id = databaseBuilder.factory.buildCombinedCourse().id;
     await databaseBuilder.commit();
 
     filePath = await createTempFile(

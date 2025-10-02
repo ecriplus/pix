@@ -863,7 +863,7 @@ describe('Acceptance | API | Campaign Participations', function () {
       sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
 
       const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
         rewardType: null,
         rewardId: null,

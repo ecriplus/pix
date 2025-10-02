@@ -188,7 +188,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
-      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBINIX1',
         organizationId,
         successRequirements: [],
@@ -222,7 +222,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -287,7 +287,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,

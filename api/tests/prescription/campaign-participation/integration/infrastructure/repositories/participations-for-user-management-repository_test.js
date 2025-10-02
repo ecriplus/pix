@@ -82,7 +82,7 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           userId,
         });
         const combinedCourseCampaign = databaseBuilder.factory.buildCampaign();
-        databaseBuilder.factory.buildQuestForCombinedCourse({
+        databaseBuilder.factory.buildCombinedCourse({
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId: combinedCourseCampaign.organizationId,

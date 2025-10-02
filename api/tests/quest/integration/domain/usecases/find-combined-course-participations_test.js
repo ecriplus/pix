@@ -7,13 +7,13 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
   it('should return  CombinedCourseParticipations', async function () {
     // given
     const learner = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Paul', lastName: 'Azerty' });
-    const questId = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    const questId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' }).id;
     const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId,
       status: CombinedCourseParticipationStatuses.COMPLETED,
     });
-    const anotherquestId = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    const anotherquestId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI2' }).id;
     databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId: anotherquestId,
