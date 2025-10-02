@@ -55,21 +55,30 @@ const findByCampaignId = async ({ campaignId }) => {
 const saveInBatch = async ({ combinedCourses }) => {
   const knexConn = DomainTransaction.getConnection();
   const combinedCoursesToSave = combinedCourses.map(_toDTO);
-  await knexConn('quests').insert(combinedCoursesToSave);
+  for (const combinedCourseToSave of combinedCoursesToSave) {
+    const [{ id: questId }] = await knexConn('quests')
+      .insert({ ...combinedCourseToSave.quest, ...combinedCourseToSave.combinedCourse })
+      .returning('id');
+    await knexConn('combined_courses').insert({ ...combinedCourseToSave.combinedCourse, questId });
+  }
 };
 
 const _toDTO = (combinedCourse) => {
   const questDTO = combinedCourse.quest.toDTO();
   return {
-    ...questDTO,
-    id: combinedCourse.id,
-    organizationId: combinedCourse.organizationId,
-    code: combinedCourse.code,
-    name: combinedCourse.name,
-    eligibilityRequirements: JSON.stringify([]),
-    successRequirements: JSON.stringify(questDTO.successRequirements),
-    description: combinedCourse.description,
-    illustration: combinedCourse.illustration,
+    quest: {
+      ...questDTO,
+      id: combinedCourse.id,
+      eligibilityRequirements: JSON.stringify([]),
+      successRequirements: JSON.stringify(questDTO.successRequirements),
+    },
+    combinedCourse: {
+      organizationId: combinedCourse.organizationId,
+      code: combinedCourse.code,
+      name: combinedCourse.name,
+      description: combinedCourse.description,
+      illustration: combinedCourse.illustration,
+    },
   };
 };
 
