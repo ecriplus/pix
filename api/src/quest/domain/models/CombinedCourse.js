@@ -139,9 +139,10 @@ export class CombinedCourseDetails extends CombinedCourse {
   }
 
   #createFormationCombinedCourseItemIfNeeded(recommandableModule, targetProfileIdsThatNeedAFormationItem) {
-    const targetProfileId = recommandableModule.targetProfileIds.find((t) =>
-      targetProfileIdsThatNeedAFormationItem.includes(t),
+    const targetProfileId = targetProfileIdsThatNeedAFormationItem.find((targetProfileIdOfCampaign) =>
+      recommandableModule.targetProfileIds.includes(targetProfileIdOfCampaign),
     );
+
     const shouldBeInFormationItem = Boolean(targetProfileId);
     const hasFormationItem = this.items.find((item) => {
       if (item.type !== ITEM_TYPE.FORMATION) return false;
