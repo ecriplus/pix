@@ -281,4 +281,31 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       });
     });
   });
+
+  describe('GET /api/organizations/{organizationId}/combined-courses', function () {
+    context('when user belongs to the organization', function () {
+      it('should return the list of combined courses for the organization', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
+        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/organizations/${organizationId}/combined-courses`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data).to.have.lengthOf(2);
+      });
+    });
+  });
 });

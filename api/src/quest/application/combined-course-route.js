@@ -37,6 +37,25 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/organizations/{organizationId}/combined-courses',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToOrganization,
+          },
+        ],
+        handler: combinedCourseController.getByOrganizationId,
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        notes: ["- Récupération de la liste des parcours apprenants liés a l'organisation"],
+        tags: ['api', 'quest', 'combined-course'],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/combined-courses/{questId}',
       config: {
         pre: [
