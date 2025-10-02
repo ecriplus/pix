@@ -55,12 +55,19 @@ const buildQuestForCombinedCourse = function ({
   organizationId,
   description = 'Le but de ma quête',
   illustration = 'images/illustration.svg',
-  rewardId = null,
-  rewardType = null,
   ...args
 } = {}) {
   organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
-  return buildQuest({ ...args, code, name, organizationId, description, illustration, rewardId, rewardType });
+  return buildQuest({
+    ...args,
+    code,
+    name,
+    organizationId,
+    description,
+    illustration,
+    rewardId: null,
+    rewardType: null,
+  });
 };
 
 export { buildQuest, buildQuestForCombinedCourse };
