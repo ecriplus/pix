@@ -202,4 +202,79 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       ]);
     });
   });
+
+  describe('#findByQuestIds', function () {
+    it('should return participations for given quest IDs', async function () {
+      // given
+      const learner1 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Alice', lastName: 'Azerty' });
+      const learner2 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Bob', lastName: 'Bernard' });
+
+      const questId1 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const questId2 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const questId3 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+
+      const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
+        organizationLearnerId: learner1.id,
+        questId: questId1,
+        status: CombinedCourseParticipationStatuses.COMPLETED,
+      });
+      const participation2 = databaseBuilder.factory.buildCombinedCourseParticipation({
+        organizationLearnerId: learner2.id,
+        questId: questId2,
+        status: CombinedCourseParticipationStatuses.STARTED,
+      });
+      // Participation that should not be included
+      databaseBuilder.factory.buildCombinedCourseParticipation({
+        organizationLearnerId: learner1.id,
+        questId: questId3,
+        status: CombinedCourseParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const results = await combinedCourseParticipationRepository.findByQuestIds({ questIds: [questId1, questId2] });
+
+      // then
+      expect(results).lengthOf(2);
+      expect(results[0]).instanceOf(CombinedCourseParticipation);
+      expect(results[1]).instanceOf(CombinedCourseParticipation);
+
+      expect(results).deep.equal([
+        {
+          id: participation1.id,
+          firstName: learner1.firstName,
+          lastName: learner1.lastName,
+          status: CombinedCourseParticipationStatuses.COMPLETED,
+          createdAt: participation1.createdAt,
+          updatedAt: participation1.updatedAt,
+          organizationLearnerId: learner1.id,
+          questId: questId1,
+        },
+        {
+          id: participation2.id,
+          firstName: learner2.firstName,
+          lastName: learner2.lastName,
+          status: CombinedCourseParticipationStatuses.STARTED,
+          createdAt: participation2.createdAt,
+          updatedAt: participation2.updatedAt,
+          organizationLearnerId: learner2.id,
+          questId: questId2,
+        },
+      ]);
+    });
+
+    it('should return empty array when no participations match the quest IDs', async function () {
+      // given
+      const questId1 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const questId2 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      await databaseBuilder.commit();
+
+      // when
+      const results = await combinedCourseParticipationRepository.findByQuestIds({ questIds: [questId1, questId2] });
+
+      // then
+      expect(results).to.deep.equal([]);
+    });
+  });
 });
