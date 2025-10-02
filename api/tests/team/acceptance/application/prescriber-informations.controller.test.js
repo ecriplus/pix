@@ -66,6 +66,11 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
             type: organization.type,
           },
           relationships: {
+            'combined-courses': {
+              links: {
+                related: `/api/organizations/${organization.id}/combined-courses`,
+              },
+            },
             divisions: {
               links: {
                 related: `/api/organizations/${organization.id}/divisions`,
