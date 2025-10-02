@@ -66,7 +66,7 @@ const register = async function (server) {
         validate: {
           params: Joi.object({
             assessmentId: identifiersType.assessmentId.required(),
-            chatId: Joi.string().required(),
+            chatId: identifiersType.chatId,
           }).required(),
           payload: Joi.object({
             prompt: Joi.string().optional().allow('', null),

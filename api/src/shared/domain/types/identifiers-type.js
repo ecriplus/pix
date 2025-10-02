@@ -10,6 +10,7 @@ const implementationType = {
   positiveInteger64bits: Joi.number().integer().min(postgreSQLSequenceDefaultStart).max(postgreSQLSequenceInt64BitEnd),
   alphanumeric255: Joi.string().max(255),
   alphanumeric: Joi.string(),
+  uuid: Joi.string().uuid(),
 };
 
 const certificationVerificationCodeType = Joi.string().regex(/^P-[a-zA-Z0-9]{8}$/);
@@ -83,6 +84,8 @@ const typesPositiveInteger32bits = [
 
 const typesPositiveInteger64bits = ['answerId'];
 
+const typesUuid = ['chatId'];
+
 const typesAlphanumeric = ['courseId', 'tutorialId'];
 const typesAlphanumeric255 = ['challengeId', 'competenceId', 'frameworkId', 'tubeId', 'code', 'skillId'];
 
@@ -90,6 +93,7 @@ _assignValueToExport(typesPositiveInteger32bits, implementationType.positiveInte
 _assignValueToExport(typesPositiveInteger64bits, implementationType.positiveInteger64bits);
 _assignValueToExport(typesAlphanumeric, implementationType.alphanumeric);
 _assignValueToExport(typesAlphanumeric255, implementationType.alphanumeric255);
+_assignValueToExport(typesUuid, implementationType.uuid);
 
 paramsToExport.positiveInteger32bits = {
   min: postgreSQLSequenceDefaultStart,

@@ -117,7 +117,7 @@ const register = async function (server) {
         validate: {
           params: Joi.object({
             passageId: identifiersType.passageId.required(),
-            chatId: Joi.string().required(),
+            chatId: identifiersType.chatId,
           }).required(),
           payload: Joi.object({
             prompt: Joi.string().optional().allow('', null),
