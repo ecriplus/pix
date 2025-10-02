@@ -23,6 +23,7 @@ const ORGANIZATIONS_TABLE_NAME = 'organizations';
  * @return {Promise<void|MissingAttributesError|NotFoundError>}
  */
 const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
+  const knexConnection = DomainTransaction.getConnection();
   const organization = await knex(ORGANIZATIONS_TABLE_NAME).where({ id }).first();
   if (!organization) {
     throw new NotFoundError();
@@ -34,7 +35,7 @@ const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
 
   const archiveDate = new Date();
 
-  await knex('organization-invitations')
+  await knexConnection('organization-invitations')
     .where({ organizationId: id, status: OrganizationInvitation.StatusType.PENDING })
     .update({ status: OrganizationInvitation.StatusType.CANCELLED, updatedAt: archiveDate });
 
@@ -46,12 +47,16 @@ const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
     });
     await campaignApi.deleteActiveCampaigns({ userId: archivedBy, organizationId: id });
   } else {
-    await knex('campaigns').where({ organizationId: id, archivedAt: null }).update({ archivedAt: archiveDate });
+    await knexConnection('campaigns')
+      .where({ organizationId: id, archivedAt: null })
+      .update({ archivedAt: archiveDate });
   }
 
-  await knex('memberships').where({ organizationId: id, disabledAt: null }).update({ disabledAt: archiveDate });
+  await knexConnection('memberships')
+    .where({ organizationId: id, disabledAt: null })
+    .update({ disabledAt: archiveDate });
 
-  await knex(ORGANIZATIONS_TABLE_NAME)
+  await knexConnection(ORGANIZATIONS_TABLE_NAME)
     .where({ id: id, archivedBy: null })
     .update({ archivedBy: archivedBy, archivedAt: archiveDate });
 };

@@ -406,4 +406,58 @@ describe('Integration | Repository | Campaign-Management', function () {
       });
     });
   });
+
+  describe('#findActiveCampaignIdsByOrganization', function () {
+    it('should return only active campaign IDs for the organization', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const activeCampaign1 = databaseBuilder.factory.buildCampaign({ organizationId, deletedAt: null });
+      const activeCampaign2 = databaseBuilder.factory.buildCampaign({ organizationId, deletedAt: null });
+      databaseBuilder.factory.buildCampaign({ organizationId, deletedAt: new Date() });
+      databaseBuilder.factory.buildCampaign({ organizationId: otherOrganizationId, deletedAt: null });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignManagementRepository.findActiveCampaignIdsByOrganization({ organizationId });
+
+      // then
+      expect(result).to.have.lengthOf(2);
+      expect(result).to.have.members([activeCampaign1.id, activeCampaign2.id]);
+    });
+
+    it('should return an empty array when no active campaigns exist', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildCampaign({ organizationId, deletedAt: new Date() });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignManagementRepository.findActiveCampaignIdsByOrganization({ organizationId });
+
+      // then
+      expect(result).to.be.empty;
+    });
+
+    it('should not return campaigns from other organizations', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const activeCampaign = databaseBuilder.factory.buildCampaign({ organizationId, deletedAt: null });
+      databaseBuilder.factory.buildCampaign({ organizationId: otherOrganizationId, deletedAt: null });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignManagementRepository.findActiveCampaignIdsByOrganization({ organizationId });
+
+      // then
+      expect(result).to.have.lengthOf(1);
+      expect(result).to.deep.equal([activeCampaign.id]);
+    });
+  });
 });
