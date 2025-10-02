@@ -12,6 +12,7 @@ export default class Organization extends Model {
   @attr('string') schoolCode;
   @attr('date') sessionExpirationDate;
 
+  @hasMany('combined-course', { async: true, inverse: null }) combinedCourses;
   @hasMany('campaign', { async: true, inverse: 'organization' }) campaigns;
   @hasMany('target-profile', { async: true, inverse: null }) targetProfiles;
   @hasMany('organization-invitation', { async: true, inverse: 'organization' }) organizationInvitations;

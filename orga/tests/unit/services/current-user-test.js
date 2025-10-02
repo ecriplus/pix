@@ -560,6 +560,56 @@ module('Unit | Service | current-user', function (hooks) {
         assert.false(currentUserService.canEditLearnerName);
       });
     });
+
+    module('#loadCombinedCourses', function () {
+      test('should load combined courses from organization', async function (assert) {
+        // given
+        const combinedCourse1 = Object.create({ id: 1 });
+        const combinedCourse2 = Object.create({ id: 2 });
+        const combinedCourses = [combinedCourse1, combinedCourse2];
+        currentUserService.organization = Object.create({ combinedCourses: resolve(combinedCourses) });
+
+        // when
+        await currentUserService.loadCombinedCourses();
+
+        // then
+        assert.deepEqual(currentUserService.combinedCourses, combinedCourses);
+      });
+    });
+
+    module('#hasCombinedCourses', function () {
+      test('should return true when combined courses exist', function (assert) {
+        // given
+        currentUserService.combinedCourses = [Object.create({ id: 1 })];
+
+        // then
+        assert.true(currentUserService.hasCombinedCourses);
+      });
+
+      test('should return false when combined courses is empty array', function (assert) {
+        // given
+        currentUserService.combinedCourses = [];
+
+        // then
+        assert.false(currentUserService.hasCombinedCourses);
+      });
+
+      test('should return false when combined courses is null', function (assert) {
+        // given
+        currentUserService.combinedCourses = null;
+
+        // then
+        assert.false(currentUserService.hasCombinedCourses);
+      });
+
+      test('should return false when combined courses is undefined', function (assert) {
+        // given
+        currentUserService.combinedCourses = undefined;
+
+        // then
+        assert.false(currentUserService.hasCombinedCourses);
+      });
+    });
   });
 
   module('user is not authenticated', function () {
