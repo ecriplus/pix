@@ -146,7 +146,7 @@ export default class ModulixFlashcards extends Component {
     await this.goToNextCard();
 
     const elementToFocus = document.querySelector('.element-flashcards');
-    elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+    elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
   }
 
   <template>
