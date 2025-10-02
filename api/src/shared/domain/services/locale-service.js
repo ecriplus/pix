@@ -6,7 +6,7 @@ const SPANISH_SPOKEN = 'es';
 const FRENCH_FRANCE_LOCALE = 'fr-FR';
 
 const DEFAULT_CHALLENGE_LOCALE = 'fr-fr';
-const CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'it', 'de'];
+const CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de'];
 
 const DEFAULT_LOCALE = 'fr';
 const SUPPORTED_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'];
