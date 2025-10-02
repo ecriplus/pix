@@ -29,14 +29,16 @@ module('Acceptance | Organizations | Create', function (hooks) {
     test('it redirects the user on the organization details page on tags tab', async function (assert) {
       // given
       const screen = await visit('/organizations/new');
-      await fillByLabel('Nom', 'Stark Corp.');
+      await fillByLabel('Nom *', 'Stark Corp.');
 
-      await click(screen.getByRole('button', { name: `Sélectionner un type d'organisation` }));
+      await click(screen.getByRole('button', { name: `Sélectionner un type d'organisation *` }));
       await screen.findByRole('listbox');
       await click(screen.getByRole('option', { name: 'Établissement scolaire' }));
 
       await click(
-        screen.getByRole('button', { name: t('components.organizations.creation.administration-team.selector.label') }),
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.administration-team.selector.label')} *`,
+        }),
       );
       await screen.findByRole('listbox');
       await click(screen.getByText('Équipe 2'));
@@ -52,6 +54,20 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
       // then
       assert.strictEqual(currentURL(), '/organizations/1/all-tags');
+    });
+
+    test('it shows validation errors if form is not correctly filled', async function (assert) {
+      // given
+      const screen = await visit('/organizations/new');
+      await fillByLabel('Nom *', 'Stark Corp.');
+
+      // when
+      await clickByName('Ajouter');
+
+      // then
+      assert
+        .dom(screen.getByText(t('components.organizations.creation.administration-team.required-fields-error')))
+        .exists();
     });
   });
 });

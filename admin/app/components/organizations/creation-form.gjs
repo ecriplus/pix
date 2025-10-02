@@ -32,13 +32,10 @@ export default class OrganizationCreationForm extends Component {
   }
 
   get administrationTeamsOptions() {
-    const options = [];
-    this.administrationTeams?.forEach((administrationTeam) =>
-      options.push({
-        value: administrationTeam.id,
-        label: administrationTeam.name,
-      }),
-    );
+    const options = this.administrationTeams.map((administrationTeam) => ({
+      value: administrationTeam.id,
+      label: administrationTeam.name,
+    }));
     return options;
   }
 
@@ -91,6 +88,7 @@ export default class OrganizationCreationForm extends Component {
             onchange={{this.handleOrganizationNameChange}}
             required={{true}}
             aria-required={{true}}
+            @requiredLabel={{t "common.fields.required-field"}}
           >
             <:label>Nom</:label>
           </PixInput>
@@ -103,6 +101,7 @@ export default class OrganizationCreationForm extends Component {
             @value={{@organization.type}}
             required
             aria-required={{true}}
+            @requiredLabel={{t "common.fields.required-field"}}
           >
             <:label>Sélectionner un type d'organisation</:label>
             <:default as |organizationType|>{{organizationType.label}}</:default>
@@ -114,7 +113,9 @@ export default class OrganizationCreationForm extends Component {
             @placeholder={{t "components.organizations.creation.administration-team.selector.placeholder"}}
             @hideDefaultOption={{true}}
             @value={{@organization.administrationTeamId}}
-            aria-required={{false}}
+            required
+            aria-required={{true}}
+            @requiredLabel={{t "common.fields.required-field"}}
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
