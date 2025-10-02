@@ -331,19 +331,35 @@ export class ModuleFactory {
     });
   }
 
-  static #buildFlashcards(element) {
+  static async #buildFlashcards(element) {
     return new Flashcards({
       id: element.id,
       title: element.title,
       instruction: element.instruction,
-      introImage: element.introImage,
-      cards: element.cards.map(
-        (card) =>
-          new Card({
+      introImage: {
+        url: element.introImage.url,
+        information: element.introImage?.url ? await getAssetInfos(element.introImage.url) : {},
+      },
+      cards: await Promise.all(
+        element.cards.map(async (card) => {
+          return new Card({
             id: card.id,
-            recto: card.recto,
-            verso: card.verso,
-          }),
+            recto: {
+              text: card.recto.text,
+              image: {
+                url: card.recto.image?.url,
+                information: card.recto.image?.url ? await getAssetInfos(card.recto.image.url) : {},
+              },
+            },
+            verso: {
+              text: card.verso.text,
+              image: {
+                url: card.verso.image?.url,
+                information: card.verso.image?.url ? await getAssetInfos(card.verso.image.url) : {},
+              },
+            },
+          });
+        }),
       ),
     });
   }

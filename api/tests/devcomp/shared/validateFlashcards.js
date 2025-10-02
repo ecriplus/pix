@@ -8,6 +8,7 @@ function validateFlashcards(flashcards, expectedFlashcards) {
   expect(flashcards.title).to.equal(expectedFlashcards.title);
   expect(flashcards.instruction).to.equal(expectedFlashcards.instruction);
   expect(flashcards.introImage.url).to.equal(expectedFlashcards.introImage.url);
+  expect(flashcards.introImage.information).to.not.be.undefined;
   expect(flashcards.isAnswerable).to.equal(true);
   validateCard(flashcards.cards[0], expectedFlashcards.cards[0]);
 }
@@ -16,8 +17,10 @@ function validateCard(card, expectedCard) {
   expect(card).to.be.instanceOf(Card);
   expect(card.id).deep.equal(expectedCard.id);
   expect(card.recto.image.url).deep.equal(expectedCard.recto.image.url);
+  expect(card.recto.image.information).to.not.be.undefined;
   expect(card.recto.text).deep.equal(expectedCard.recto.text);
   expect(card.verso.image.url).deep.equal(expectedCard.verso.image.url);
+  expect(card.verso.image.information).to.not.be.undefined;
   expect(card.verso.text).deep.equal(expectedCard.verso.text);
 }
 
