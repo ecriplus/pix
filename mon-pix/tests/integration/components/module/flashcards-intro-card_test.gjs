@@ -30,18 +30,20 @@ module('Integration | Component | Module | Flashcards Intro Card', function (hoo
     assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.start') })).exists();
   });
 
-  test('should not display image if not provided', async function (assert) {
-    // given
-    const introImage = undefined;
-    const title = 'Introduction à la poésie';
+  module('when the intro image is not provided', function () {
+    test('should not display image', async function (assert) {
+      // given
+      const introImage = undefined;
+      const title = 'Introduction à la poésie';
 
-    // when
-    const screen = await render(
-      <template><ModulixFlashcardsIntroCard @introImage={{introImage}} @title={{title}} /></template>,
-    );
+      // when
+      const screen = await render(
+        <template><ModulixFlashcardsIntroCard @introImage={{introImage}} @title={{title}} /></template>,
+      );
 
-    // then
-    assert.dom(screen.queryByRole('img')).doesNotExist();
+      // then
+      assert.dom(screen.queryByRole('img')).doesNotExist();
+    });
   });
 
   module('when we click on "Commencer"', function () {
@@ -62,6 +64,26 @@ module('Integration | Component | Module | Flashcards Intro Card', function (hoo
 
       // then
       assert.true(onStartStub.calledOnce);
+    });
+  });
+
+  module('when width and height are available for intro image', function () {
+    test('should set them to the image', async function (assert) {
+      // given
+      const introImage = {
+        url: 'https://images.pix.fr/modulix/bien-ecrire-son-adresse-mail-explication-les-parties-dune-adresse-mail.svg',
+        information: { height: 400, width: 300 },
+      };
+      const title = 'Introduction à la poésie';
+
+      // when
+      const screen = await render(
+        <template><ModulixFlashcardsIntroCard @introImage={{introImage}} @title={{title}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('presentation')).hasAttribute('width', '300');
+      assert.dom(screen.getByRole('presentation')).hasAttribute('height', '400');
     });
   });
 });
