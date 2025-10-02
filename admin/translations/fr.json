@@ -556,9 +556,17 @@
       },
       "creation": {
         "administration-team": {
-          "selector" : {
+          "selector": {
             "label": "Sélectionner une équipe en charge",
             "placeholder": "Équipe en charge"
+          }
+        }
+      },
+      "editing": {
+        "administration-team": {
+          "selector": {
+            "label": "Équipe en charge",
+            "placeholder": "Sélectionner une équipe en charge"
           }
         }
       },

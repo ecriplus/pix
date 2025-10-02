@@ -1,6 +1,7 @@
-import { fillByLabel, render } from '@1024pix/ember-testing-library';
+import { fillByLabel, render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import InformationSectionEdit from 'pix-admin/components/organizations/information-section-edit';
@@ -10,6 +11,14 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | organizations/information-section-edit', function (hooks) {
   setupIntlRenderingTest(hooks);
+  hooks.beforeEach(function () {
+    const store = this.owner.lookup('service:store');
+    store.findAll = () =>
+      Promise.resolve([
+        store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
+        store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
+      ]);
+  });
 
   module('organization validation', function (hooks) {
     hooks.beforeEach(function () {
@@ -204,6 +213,95 @@ module('Integration | Component | organizations/information-section-edit', funct
           ).checked,
         );
       });
+    });
+  });
+
+  module('administration teams select', function () {
+    test('it should display select with options loaded', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      store.findAll = () =>
+        Promise.resolve([
+          store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
+          store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
+        ]);
+
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+      await click(
+        screen.getByRole('button', { name: t('components.organizations.editing.administration-team.selector.label') }),
+      );
+      const listbox = await screen.findByRole('listbox');
+
+      //then
+      assert.ok(within(listbox).getByRole('option', { name: 'Équipe 1' }));
+      assert.ok(within(listbox).getByRole('option', { name: 'Équipe 2' }));
+    });
+    test('it should display current administration team as pre-selected option if organization has one', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 456,
+      });
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: t('components.organizations.editing.administration-team.selector.label'),
+          }),
+        ).getByText('Équipe 2'),
+      );
+    });
+
+    test('it should display the placeholder if organization does not have an administration team', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: null,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: t('components.organizations.editing.administration-team.selector.label'),
+          }),
+        ).getByText(t('components.organizations.editing.administration-team.selector.placeholder')),
+      );
     });
   });
 });
