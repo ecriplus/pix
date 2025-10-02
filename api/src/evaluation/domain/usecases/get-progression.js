@@ -1,3 +1,4 @@
+import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { Progression } from '../models/Progression.js';
 
 const getProgression = async function ({
@@ -17,6 +18,8 @@ const getProgression = async function ({
   let progression;
 
   if (assessment.isForCampaign()) {
+    if (!assessment.campaignParticipationId) throw new ForbiddenAccess('Campaign does not accept any answer.');
+
     const campaignParticipation = await campaignParticipationRepository.get(assessment.campaignParticipationId);
 
     const skillIds = await campaignRepository.findSkillIds({ campaignId: campaignParticipation.campaignId });
