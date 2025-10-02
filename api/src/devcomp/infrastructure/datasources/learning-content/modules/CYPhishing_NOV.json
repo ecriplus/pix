@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Chaque jour, nous recevons des messages par SMS ou messagerie instantanée. Certains de ces messages cachent des arnaques.&nbsp; Dans ce module, découvrez les réflexes à avoir pour éviter les arnaques par message. 🛡️<br></p>",
+    "description": "<p>Chaque jour, nous recevons des messages par SMS ou messagerie instantanée. Certains de ces messages cachent des arnaques. Dans ce module, découvrez les réflexes à avoir pour éviter les arnaques par message. 🛡️<br></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -46,7 +46,7 @@
                     },
                     {
                       "userName": "Yvette",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "content": "Moi, je l’ai reçu la semaine dernière. Ma sœur aussi, alors qu’elle n’a même pas de compte bancaire !"
                     }
                   ]
@@ -227,7 +227,7 @@
               "element": {
                 "id": "c22766bc-ff57-4f2b-a457-952ed34f4adc",
                 "type": "text",
-                "content": "<p>Isham a reçu de nombreux messages de phishing récemment. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.<br><strong>Classez les notifications en fonction de l’expéditeur pour lequel se fait passer l’escroc.</strong></p>"
+                "content": "<p>Isham a reçu de nombreux messages de phishing récemment. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.</p>"
               }
             },
             {
@@ -302,7 +302,7 @@
                     {
                       "id": "d3bc02bb-5ad9-47c2-9af4-e598b58a5cd8",
                       "type": "text",
-                      "content": "<p>Ouvrez et lisez chacun des <strong>messages d’arnaque </strong>ci-dessous puis répondez à la question.</p>"
+                      "content": "<p>Pour chacun des cas ci-dessous&nbsp;:</p><ul><li>ouvrez et lisez le <strong>message d'arnaque</strong>.</li><li>répondez à la question.</li></ul>"
                     },
                     {
                       "id": "c0c8222d-2081-405f-94cb-47802c983eba",
@@ -570,7 +570,7 @@
                 "type": "custom-draft",
                 "title": "Sélection du bon message",
                 "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/message-conversation-select.html",
-                "instruction": "",
+                "instruction": "Aidez Xavier à répondre à Yvette"
                 "height": 550
               }
             }
