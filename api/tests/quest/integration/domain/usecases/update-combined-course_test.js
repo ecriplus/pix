@@ -18,7 +18,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     clock.restore();
   });
   it('should update combined course if it is completed', async function () {
-    nock('https://assets.pix.org').head('/modules/bac-a-sable/ordi-spatial.svg').reply(200, {});
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
     const code = 'SOMETHING';
     const moduleId = '6282925d-4775-4bca-b513-4c3009ec5886';
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
@@ -81,6 +81,107 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     expect(result.updatedAt).to.deep.equal(now);
   });
 
+  it('should update organization learner participations when passage is on a recommended module', async function () {
+    nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
+    const code = 'SOMETHING';
+    const moduleId = '6282925d-4775-4bca-b513-4c3009ec5886';
+    const module2Id = '9beb922f-4d8e-495d-9c85-0e7265ca78d6';
+    const module3Id = 'd4c4a2b2-0046-471d-ad9c-15f9cfc8f1f6';
+
+    const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
+    const trainingId = databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bac-a-sable' }).id;
+    const training2Id = databaseBuilder.factory.buildTraining({
+      type: 'modulix',
+      link: '/modules/au-dela-des-mots-de-passe',
+    }).id;
+    const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
+    databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfile.id, trainingId });
+    databaseBuilder.factory.buildTargetProfileTraining({ targetProfileId: targetProfile.id, trainingId: training2Id });
+
+    const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
+    const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+      campaignId: campaign.id,
+      userId,
+      organizationLearnerId,
+      status: 'SHARED',
+    }).id;
+    databaseBuilder.factory.buildUserRecommendedTraining({
+      userId,
+      trainingId: trainingId,
+      campaignParticipationId,
+    });
+    databaseBuilder.factory.buildPassage({ userId, moduleId, terminatedAt: new Date() });
+    databaseBuilder.factory.buildPassage({ userId, module2Id, terminatedAt: null });
+
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      code,
+      organizationId,
+      successRequirements: [
+        {
+          requirement_type: 'campaignParticipations',
+          comparison: 'all',
+          data: {
+            campaignId: {
+              data: campaign.id,
+              comparison: 'equal',
+            },
+          },
+        },
+        {
+          requirement_type: 'passages',
+          comparison: 'all',
+          data: {
+            moduleId: {
+              data: moduleId,
+              comparison: 'equal',
+            },
+          },
+        },
+        {
+          requirement_type: 'passages',
+          comparison: 'all',
+          data: {
+            moduleId: {
+              data: module2Id,
+              comparison: 'equal',
+            },
+          },
+        },
+        {
+          requirement_type: 'passages',
+          comparison: 'all',
+          data: {
+            moduleId: {
+              data: module3Id,
+              comparison: 'equal',
+            },
+          },
+        },
+      ],
+    });
+    databaseBuilder.factory.buildCombinedCourseParticipation({
+      organizationLearnerId,
+      questId,
+      createdAt: new Date('2022-01-01'),
+      updatedAt: new Date('2022-01-01'),
+      status: CombinedCourseParticipationStatuses.STARTED,
+    });
+    await databaseBuilder.commit();
+
+    await usecases.updateCombinedCourse({ userId, code });
+
+    // then
+    const result = await knex('organization_learner_participations')
+      .join(
+        'organization_learner_passage_participations',
+        'organization_learner_participations.id',
+        'organization_learner_passage_participations.organizationLearnerParticipationId',
+      )
+      .where({ organizationLearnerId });
+
+    expect(result).to.be.lengthOf(2);
+    expect(result[0].moduleId).equal(moduleId);
+  });
   it('should not update combined course if it not completed', async function () {
     const code = 'SOMETHING';
     const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();

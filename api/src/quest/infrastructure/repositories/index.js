@@ -4,6 +4,7 @@ import * as knowledgeElementsApi from '../../../evaluation/application/api/knowl
 import * as userApi from '../../../identity-access-management/application/api/users-api.js';
 import * as skillsApi from '../../../learning-content/application/api/skills-api.js';
 import * as campaignsApi from '../../../prescription/campaign/application/api/campaigns-api.js';
+import * as organizationLearnerApi from '../../../prescription/organization-learner/application/api/organization-learners-api.js';
 import * as organizationLearnerWithParticipationApi from '../../../prescription/organization-learner/application/api/organization-learners-with-participations-api.js';
 import * as targetProfilesApi from '../../../prescription/target-profile/application/api/target-profile-api.js';
 import * as profileRewardApi from '../../../profile/application/api/profile-reward-api.js';
@@ -17,6 +18,7 @@ import * as combinedCourseParticipationRepository from './combined-course-partic
 import * as combinedCourseRepository from './combined-course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
+import * as organizationLearnerPassageParticipationRepository from './organization-learner-passage-participation-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as recommendedModulesRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
@@ -29,6 +31,7 @@ const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewar
 const repositoriesWithoutInjectedDependencies = {
   accessCodeRepository,
   eligibilityRepository,
+  organizationLearnerPassageParticipationRepository,
   moduleRepository,
   successRepository,
   rewardRepository,
@@ -46,6 +49,7 @@ const dependencies = {
   organizationLearnerWithParticipationApi,
   knowledgeElementsApi,
   campaignsApi,
+  organizationLearnerApi,
   skillsApi,
   profileRewardApi,
   modulesApi,

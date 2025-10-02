@@ -1,3 +1,4 @@
+import { OrganizationLearner } from '../../../../../../src/prescription/organization-learner/application/api/models/OrganizationLearner.js';
 import * as organizationLearnersApi from '../../../../../../src/prescription/organization-learner/application/api/organization-learners-api.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
@@ -62,6 +63,7 @@ describe('Integration | API | Organization Learner', function () {
 
       // then
       expect(learner.id).to.equal(organizationLearnerId);
+      expect(learner).instanceOf(OrganizationLearner);
     });
   });
 });

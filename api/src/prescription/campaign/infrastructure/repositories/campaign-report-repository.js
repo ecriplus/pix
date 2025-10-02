@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { knex } from '../../../../../db/knex-database-connection.js';
 import * as injectedCombinedCourseRepo from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
@@ -16,7 +17,8 @@ import { getLatestParticipationSharedForOneLearner } from './helpers/get-latest-
 const { SHARED } = CampaignParticipationStatuses;
 
 const get = async function (id) {
-  const result = await knex('campaigns')
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('campaigns')
     .select({
       id: 'campaigns.id',
       name: 'campaigns.name',
@@ -56,7 +58,7 @@ const get = async function (id) {
     throw new NotFoundError(`La campagne d'id ${id} n'existe pas ou son accès est restreint`);
   }
 
-  const externalIdFeature = await knex('campaign-features')
+  const externalIdFeature = await knexConn('campaign-features')
     .select('params')
     .join('features', 'features.id', 'featureId')
     .where({ campaignId: id, 'features.key': CAMPAIGN_FEATURES.EXTERNAL_ID.key })
@@ -69,7 +71,7 @@ const get = async function (id) {
   });
 
   if (campaignReport.isAssessment || campaignReport.isExam) {
-    const skillIds = await knex('campaign_skills').where({ campaignId: id }).pluck('skillId');
+    const skillIds = await knexConn('campaign_skills').where({ campaignId: id }).pluck('skillId');
     const skills = await skillRepository.findByRecordIds(skillIds);
 
     const targetProfile = new TargetProfileForSpecifier({
@@ -88,16 +90,18 @@ const get = async function (id) {
   return campaignReport;
 };
 
-const findMasteryRates = async (campaignId) =>
-  (
-    await knex
-      .from('campaign-participations as cp')
-      .select(['organizationLearnerId', getLatestParticipationSharedForOneLearner(knex, 'masteryRate', campaignId)])
-      .groupBy('organizationLearnerId')
-      .where('status', SHARED)
-      .where('deletedAt', null)
-      .where({ campaignId })
-  ).map(({ masteryRate }) => Number(masteryRate));
+const findMasteryRates = async (campaignId) => {
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn
+    .from('campaign-participations as cp')
+    .select(['organizationLearnerId', getLatestParticipationSharedForOneLearner(knex, 'masteryRate', campaignId)])
+    .groupBy('organizationLearnerId')
+    .where('status', SHARED)
+    .where('deletedAt', null)
+    .where({ campaignId });
+
+  return result.map(({ masteryRate }) => Number(masteryRate));
+};
 
 const findPaginatedFilteredByOrganizationId = async function ({
   organizationId,
