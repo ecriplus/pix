@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.223.0](https://github.com/1024pix/pix/compare/v5.222.0...v5.223.0) (2025-10-02)
+
+### :rocket: Amélioration
+
+- [#13749](https://github.com/1024pix/pix/pull/13749) Copie des données de certification-configurations vers certification_versions (PIX-19671). 
+- [#13729](https://github.com/1024pix/pix/pull/13729) Remplir la table `organization_learner_participations` lors du passage de module (PIX-19738). 
+- [#13746](https://github.com/1024pix/pix/pull/13746) Sécuriser le prompting en évitant les prompts concurrents sur la même conversation (PIX-19772) 
+
+### :bug: Correction
+
+- [#13760](https://github.com/1024pix/pix/pull/13760) Ajouter la locale es-419 manquante dans Pix API CHALLENGE_LOCALES (PIX-19820) 
+- [#13752](https://github.com/1024pix/pix/pull/13752) Retourner une erreur dans le getProgression lorsque l'assessment ne contient plus de campaignParticipationId (PIX-19817). 
+
+### :building_construction: Tech
+
+- [#13753](https://github.com/1024pix/pix/pull/13753) Cesser d'essayer de lire des chats depuis Redis 
+- [#13669](https://github.com/1024pix/pix/pull/13669) Supprimer le feature toggle useCookieLocaleInApi (PIX-19338) 
+
+### :arrow_up: Montée de version
+
+- [#13745](https://github.com/1024pix/pix/pull/13745) Update dependency @1024pix/ember-testing-library to ^3.0.18 (mon-pix) 
+- [#13754](https://github.com/1024pix/pix/pull/13754) Update dependency @1024pix/pix-ui to ^55.29.0 (admin) 
+- [#13755](https://github.com/1024pix/pix/pull/13755) Update dependency @1024pix/pix-ui to ^55.29.0 (certif) 
+- [#13756](https://github.com/1024pix/pix/pull/13756) Update dependency @1024pix/pix-ui to ^55.29.0 (junior) 
+- [#13757](https://github.com/1024pix/pix/pull/13757) Update dependency @1024pix/pix-ui to ^55.29.0 (mon-pix) 
+- [#13758](https://github.com/1024pix/pix/pull/13758) Update dependency @1024pix/pix-ui to ^55.29.0 (orga)
+
 # [5.222.0](https://github.com/1024pix/pix/compare/v5.221.0...v5.222.0) (2025-10-01)
 
 ### :rocket: Amélioration
