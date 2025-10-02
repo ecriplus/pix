@@ -22,7 +22,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
       publishSession: sinon.stub(),
       manageEmails: sinon.stub(),
     };
-    sessionPublicationService.publishSession.resolves(session);
+    sessionPublicationService.publishSession.resolves({ session, startedCertificationCoursesUserIds: [123] });
 
     // when
     const result = await publishSession({
@@ -47,6 +47,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
       session,
+      startedCertificationCoursesUserIds: [123],
       publishedAt,
       certificationCenterRepository,
       sessionRepository,

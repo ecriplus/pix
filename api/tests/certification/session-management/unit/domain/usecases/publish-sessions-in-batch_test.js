@@ -30,9 +30,15 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
     const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
     const publishedAt = Symbol('a publication date');
+    const startedCertificationCoursesUserIds1 = [101, 102];
+    const startedCertificationCoursesUserIds2 = [201, 202];
 
-    sessionPublicationService.publishSession.onCall(0).resolves(session1);
-    sessionPublicationService.publishSession.onCall(1).resolves(session2);
+    sessionPublicationService.publishSession
+      .onCall(0)
+      .resolves({ session: session1, startedCertificationCoursesUserIds: startedCertificationCoursesUserIds1 });
+    sessionPublicationService.publishSession
+      .onCall(1)
+      .resolves({ session: session2, startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2 });
 
     // when
     await publishSessionsInBatch({
@@ -58,6 +64,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
       session: session1,
+      startedCertificationCoursesUserIds: startedCertificationCoursesUserIds1,
       publishedAt,
       certificationCenterRepository,
       sessionRepository,
@@ -73,6 +80,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
       session: session2,
+      startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2,
       publishedAt,
       certificationCenterRepository,
       sessionRepository,
@@ -85,6 +93,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
       const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
       const publishedAt = Symbol('a publication date');
+      const startedCertificationCoursesUserIds2 = [201, 202];
 
       sessionPublicationService.publishSession
         .withArgs({
@@ -96,7 +105,9 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
           sharedSessionRepository,
         })
         .rejects(new Error('an error'));
-      sessionPublicationService.publishSession.onCall(1).resolves(session2);
+      sessionPublicationService.publishSession
+        .onCall(1)
+        .resolves({ session: session2, startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2 });
 
       // when
       await publishSessionsInBatch({
@@ -121,6 +132,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       });
       expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
         session: session2,
+        startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2,
         publishedAt,
         certificationCenterRepository,
         sessionRepository,

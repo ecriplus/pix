@@ -24,7 +24,7 @@ const publishSession = async function ({
   sessionPublicationService,
 }) {
   return DomainTransaction.execute(async function () {
-    const session = await sessionPublicationService.publishSession({
+    const { session, startedCertificationCoursesUserIds } = await sessionPublicationService.publishSession({
       sessionId,
       publishedAt,
       certificationRepository,
@@ -35,6 +35,7 @@ const publishSession = async function ({
 
     await sessionPublicationService.manageEmails({
       session,
+      startedCertificationCoursesUserIds,
       publishedAt,
       certificationCenterRepository,
       sessionRepository,

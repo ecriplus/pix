@@ -230,11 +230,19 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
       mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
 
+      const startedCertificationCoursesUserIds = [
+        candidateWithRecipient1.userId,
+        candidateWithRecipient2.userId,
+        candidate2WithRecipient2.userId,
+        candidateWithNoRecipient.userId,
+      ];
+
       // when
       await manageEmails({
         session: originalSession,
         certificationCenterRepository,
         sessionRepository,
+        startedCertificationCoursesUserIds,
         dependencies: { mailService },
       });
 
@@ -275,11 +283,19 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
       mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
 
+      const startedCertificationCoursesUserIds = [
+        candidateWithRecipient1.userId,
+        candidateWithRecipient2.userId,
+        candidate2WithRecipient2.userId,
+        candidateWithNoRecipient.userId,
+      ];
+
       // when
       await manageEmails({
         session: originalSession,
         certificationCenterRepository,
         sessionRepository,
+        startedCertificationCoursesUserIds,
         dependencies: { mailService },
       });
 
@@ -308,12 +324,20 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
         mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
 
+        const startedCertificationCoursesUserIds = [
+          candidateWithRecipient1.userId,
+          candidateWithRecipient2.userId,
+          candidate2WithRecipient2.userId,
+          candidateWithNoRecipient.userId,
+        ];
+
         // when
         await manageEmails({
           session: originalSession,
           publishedAt: now,
           certificationCenterRepository,
           sessionRepository,
+          startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
 
@@ -341,11 +365,14 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         const now = new Date();
         const updatedSessionWithPublishedAt = { ...sessionWithoutResultsRecipient, publishedAt: now };
 
+        const startedCertificationCoursesUserIds = [candidateWithNoRecipient.userId];
+
         // when
         await manageEmails({
           session: updatedSessionWithPublishedAt,
           certificationCenterRepository,
           sessionRepository,
+          startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
 
@@ -354,14 +381,77 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       });
     });
 
+    context('when candidates did not start their certification course', function () {
+      it('should only send emails to recipients of candidates who started their certification', async function () {
+        // given
+        const userId1 = 101;
+        const userId2 = 102;
+        const userId3 = 103;
+        const candidateWhoStarted1 = domainBuilder.buildCertificationCandidate({
+          userId: userId1,
+          resultRecipientEmail: 'started1@example.net',
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+        });
+        const candidateWhoStarted2 = domainBuilder.buildCertificationCandidate({
+          userId: userId2,
+          resultRecipientEmail: 'started2@example.net',
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+        });
+        const candidateWhoDidNotStart = domainBuilder.buildCertificationCandidate({
+          userId: userId3,
+          resultRecipientEmail: 'not-started@example.net',
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+        });
+
+        const sessionWithMixedCandidates = domainBuilder.certification.sessionManagement.buildSession({
+          id: sessionId,
+          certificationCenter,
+          date: sessionDate,
+          certificationCandidates: [candidateWhoStarted1, candidateWhoStarted2, candidateWhoDidNotStart],
+          publishedAt: null,
+        });
+
+        mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success('started1@example.net'));
+        mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success('started2@example.net'));
+
+        const startedCertificationCoursesUserIds = [userId1, userId2];
+
+        // when
+        await manageEmails({
+          session: sessionWithMixedCandidates,
+          publishedAt: now,
+          certificationCenterRepository,
+          sessionRepository,
+          startedCertificationCoursesUserIds,
+          dependencies: { mailService },
+        });
+
+        // then
+        expect(mailService.sendCertificationResultEmail).to.have.been.calledTwice;
+        expect(mailService.sendCertificationResultEmail.firstCall).to.have.been.calledWithMatch({
+          email: 'started1@example.net',
+          resultRecipientEmail: 'started1@example.net',
+        });
+        expect(mailService.sendCertificationResultEmail.secondCall).to.have.been.calledWithMatch({
+          email: 'started2@example.net',
+          resultRecipientEmail: 'started2@example.net',
+        });
+      });
+    });
+
     context('when there is at least one acquired clea certification', function () {
       context('when there is a referer', function () {
         it('should send an email to the referer', async function () {
           // given
+          const candidate = domainBuilder.buildCertificationCandidate({
+            resultRecipientEmail: 'candidate@example.net',
+            subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+          });
           const session = domainBuilder.certification.sessionManagement.buildSession({
             certificationCenterId: 101,
             finalizedAt: now,
             publishedAt: null,
+            certificationCandidates: [candidate],
           });
           const updatedSessionWithPublishedAt = { ...session, publishedAt: now };
           const updatedSessionWithResultSent = { ...updatedSessionWithPublishedAt, resultsSentToPrescriberAt: now };
@@ -372,19 +462,21 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           mailService.sendNotificationToCertificationCenterRefererForCleaResults.resolves(
             EmailingAttempt.success('referer@example.net'),
           );
-          mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
-          mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
+          mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success('candidate@example.net'));
 
           sessionRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
           certificationCenterRepository.getRefererEmails
             .withArgs({ id: session.certificationCenterId })
             .resolves([{ email: user.email }]);
 
+          const startedCertificationCoursesUserIds = [candidate.userId];
+
           // when
           await manageEmails({
             session: updatedSessionWithPublishedAt,
             certificationCenterRepository,
             sessionRepository,
+            startedCertificationCoursesUserIds,
             dependencies: { mailService },
           });
 
@@ -401,10 +493,15 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         context('when an email sending attempt fails', function () {
           it('should throw an error', async function () {
             // given
+            const candidate = domainBuilder.buildCertificationCandidate({
+              resultRecipientEmail: 'candidate@example.net',
+              subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+            });
             const session = domainBuilder.certification.sessionManagement.buildSession({
               certificationCenterId: 101,
               finalizedAt: now,
               publishedAt: null,
+              certificationCandidates: [candidate],
             });
             const updatedSessionWithPublishedAt = { ...session, publishedAt: now };
             const updatedSessionWithResultSent = { ...updatedSessionWithPublishedAt, resultsSentToPrescriberAt: now };
@@ -416,19 +513,23 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             mailService.sendNotificationToCertificationCenterRefererForCleaResults.resolves(
               EmailingAttempt.failure('referer@example.net'),
             );
-            mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
-            mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
+            mailService.sendCertificationResultEmail
+              .onCall(0)
+              .resolves(EmailingAttempt.success('candidate@example.net'));
 
             sessionRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
             certificationCenterRepository.getRefererEmails
               .withArgs({ id: session.certificationCenterId })
               .resolves([{ email: user.email }]);
 
+            const startedCertificationCoursesUserIds = [candidate.userId];
+
             // when
             const error = await catchErr(manageEmails)({
               session: updatedSessionWithPublishedAt,
               certificationCenterRepository,
               sessionRepository,
+              startedCertificationCoursesUserIds,
               dependencies: { mailService },
             });
 
@@ -450,11 +551,19 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             .withArgs({ id: originalSession.certificationCenterId })
             .resolves([]);
 
+          const startedCertificationCoursesUserIds = [
+            candidateWithRecipient1.userId,
+            candidateWithRecipient2.userId,
+            candidate2WithRecipient2.userId,
+            candidateWithNoRecipient.userId,
+          ];
+
           // when
           await manageEmails({
             session: originalSession,
             certificationCenterRepository,
             sessionRepository,
+            startedCertificationCoursesUserIds,
             dependencies: { mailService },
           });
 
@@ -473,11 +582,19 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.failure(recipient1));
         mailService.sendCertificationResultEmail.onCall(1).resolves(EmailingAttempt.success(recipient2));
 
+        const startedCertificationCoursesUserIds = [
+          candidateWithRecipient1.userId,
+          candidateWithRecipient2.userId,
+          candidate2WithRecipient2.userId,
+          candidateWithNoRecipient.userId,
+        ];
+
         // when
         const error = await catchErr(manageEmails)({
           session: originalSession,
           certificationCenterRepository,
           sessionRepository,
+          startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
 

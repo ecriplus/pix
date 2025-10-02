@@ -49,13 +49,16 @@ async function publishSession({
 
   await _updateFinalizedSession(finalizedSessionRepository, sessionId, publishedAt);
 
-  return session;
+  const startedCertificationCoursesUserIds = certificationStatuses.map(({ userId }) => userId);
+
+  return { session, startedCertificationCoursesUserIds };
 }
 
 /**
  * @param {Object} params
  * @param {certificationCenterRepository} params.certificationCenterRepository
  * @param {sessionRepository} params.sessionRepository
+ * @param {Array<number>} params.startedCertificationCoursesUserIds
  * @param {Object} params.dependencies
  * @param {mailService} params.dependencies.mailService
  */
@@ -64,6 +67,7 @@ async function manageEmails({
   publishedAt,
   certificationCenterRepository,
   sessionRepository,
+  startedCertificationCoursesUserIds,
   dependencies = { mailService },
 }) {
   const cleaEmailingAttempts = await _manageCleaEmails({
@@ -73,8 +77,9 @@ async function manageEmails({
     mailService: dependencies.mailService,
   });
 
-  const prescribersEmailingAttempts = await _managerPrescriberEmails({
+  const prescribersEmailingAttempts = await _managePrescriberEmails({
     session,
+    startedCertificationCoursesUserIds,
     mailService: dependencies.mailService,
   });
 
@@ -130,10 +135,15 @@ async function _manageCleaEmails({ session, certificationCenterRepository, sessi
 
 /**
  * @param {Object} params
+ * @param {Array<number>} params.startedCertificationCoursesUserIds
  * @param {MailService} params.mailService
+ * @return {Object}
  */
-async function _managerPrescriberEmails({ session, mailService }) {
-  const recipientEmails = _distinctCandidatesResultRecipientEmails(session.certificationCandidates);
+async function _managePrescriberEmails({ session, startedCertificationCoursesUserIds, mailService }) {
+  const recipientEmails = _distinctCandidatesResultRecipientEmails(
+    session.certificationCandidates,
+    startedCertificationCoursesUserIds,
+  );
 
   const emailingAttempts = [];
   for (const recipientEmail of recipientEmails) {
@@ -150,8 +160,13 @@ async function _managerPrescriberEmails({ session, mailService }) {
   return emailingAttempts;
 }
 
-function _distinctCandidatesResultRecipientEmails(certificationCandidates) {
-  return uniqBy(certificationCandidates, (candidate) => candidate.resultRecipientEmail?.toLowerCase())
+function _distinctCandidatesResultRecipientEmails(certificationCandidates, startedCertificationCoursesUserIds) {
+  const userIdsSet = new Set(startedCertificationCoursesUserIds);
+  const candidatesWithStartedCertificationCourse = certificationCandidates.filter((candidate) =>
+    userIdsSet.has(candidate.userId),
+  );
+
+  return uniqBy(candidatesWithStartedCertificationCourse, (candidate) => candidate.resultRecipientEmail?.toLowerCase())
     .map((candidate) => candidate.resultRecipientEmail)
     .filter(Boolean);
 }
