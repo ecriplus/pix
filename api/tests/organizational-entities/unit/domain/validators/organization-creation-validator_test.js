@@ -15,7 +15,12 @@ describe('Unit | Domain | Validators | organization-validator', function () {
     context('when validation is successful', function () {
       it('should not throw any error', function () {
         // given
-        const organizationCreationParams = { name: 'ACME', type: 'PRO', documentationUrl: 'https://kingArthur.com' };
+        const organizationCreationParams = {
+          name: 'ACME',
+          type: 'PRO',
+          documentationUrl: 'https://kingArthur.com',
+          administrationTeamId: 1234,
+        };
 
         // when/then
         expect(() => organizationCreationValidator.validate(organizationCreationParams)).to.not.throw();
@@ -30,7 +35,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             attribute: 'name',
             message: 'Le nom n’est pas renseigné.',
           };
-          const organizationCreationParams = { name: MISSING_VALUE, type: 'PRO' };
+          const organizationCreationParams = { name: MISSING_VALUE, type: 'PRO', administrationTeamId: 1234 };
 
           try {
             // when
@@ -57,7 +62,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             },
           ];
 
-          const organizationCreationParams = { name: 'ACME', type: MISSING_VALUE };
+          const organizationCreationParams = { name: 'ACME', type: MISSING_VALUE, administrationTeamId: 1234 };
 
           try {
             // when
@@ -76,7 +81,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             attribute: 'type',
             message: 'Le type de l’organisation doit avoir l’une des valeurs suivantes: SCO, SUP, PRO.',
           };
-          const organizationCreationParams = { name: 'ACME', type: 'PTT' };
+          const organizationCreationParams = { name: 'ACME', type: 'PTT', administrationTeamId: 1234 };
 
           try {
             // when
@@ -91,7 +96,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
         ['SUP', 'SCO', 'PRO', 'SCO-1D'].forEach((type) => {
           it(`should not throw with ${type} as type`, function () {
             // given
-            const organizationCreationParams = { name: 'ACME', type };
+            const organizationCreationParams = { name: 'ACME', type, administrationTeamId: 1234 };
 
             // when/then
             return expect(() => organizationCreationValidator.validate(organizationCreationParams)).to.not.throw();
@@ -102,7 +107,12 @@ describe('Unit | Domain | Validators | organization-validator', function () {
       context('on documentationUrl attribute', function () {
         it('should reject with error when documentationUrl is invalide', async function () {
           // given
-          const organizationCreationParams = { name: 'ACME', type: 'PRO', documentationUrl: 'invalidUrl' };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            documentationUrl: 'invalidUrl',
+            administrationTeamId: 1234,
+          };
           const error = await catchErr(organizationCreationValidator.validate)(organizationCreationParams);
 
           // then
@@ -111,9 +121,33 @@ describe('Unit | Domain | Validators | organization-validator', function () {
         });
       });
 
+      context('on administrationTeamId attribute', function () {
+        it('should reject with error when administrationTeamId is missing', function () {
+          // given
+          const expectedError = {
+            attribute: 'administrationTeamId',
+            message: 'L’équipe en charge n’est pas renseignée.',
+          };
+          const organizationCreationParams = { name: 'ACME', type: 'PRO', administrationTeamId: undefined };
+
+          try {
+            // when
+            organizationCreationValidator.validate(organizationCreationParams);
+            expect.fail('should have thrown an error');
+          } catch (errors) {
+            // then
+            _assertErrorMatchesWithExpectedOne(errors, expectedError);
+          }
+        });
+      });
+
       it('should reject with errors on all fields (but only once by field) when all fields are missing', function () {
         // given
-        const organizationCreationParams = { name: MISSING_VALUE, type: MISSING_VALUE };
+        const organizationCreationParams = {
+          name: MISSING_VALUE,
+          type: MISSING_VALUE,
+          administrationTeamId: MISSING_VALUE,
+        };
 
         try {
           // when
@@ -121,7 +155,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           expect.fail('should have thrown an error');
         } catch (errors) {
           // then
-          expect(errors.invalidAttributes).to.have.lengthOf(3);
+          expect(errors.invalidAttributes).to.have.lengthOf(4);
         }
       });
     });

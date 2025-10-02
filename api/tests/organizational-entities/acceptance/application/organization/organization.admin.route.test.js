@@ -304,6 +304,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       it('returns 200 HTTP status code with the created organization', async function () {
         // given
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+        databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
         await databaseBuilder.commit();
 
         // when
@@ -318,6 +319,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                 type: 'PRO',
                 'documentation-url': 'https://kingArthur.com',
                 'data-protection-officer-email': 'justin.ptipeu@example.net',
+                'administration-team-id': 1234,
               },
             },
           },
