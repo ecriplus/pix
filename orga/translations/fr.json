@@ -1010,6 +1010,10 @@
     },
     "combined-course": {
       "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit",
+      "statistics": {
+        "completed-participations": "Participations complétées",
+        "total-participations": "Total des participations"
+      },
       "table": {
         "column": {
           "first-name": "Prénom",
