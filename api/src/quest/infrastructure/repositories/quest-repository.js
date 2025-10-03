@@ -1,7 +1,6 @@
 import chunk from 'lodash/chunk.js';
 
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Quest } from '../../domain/models/Quest.js';
 
 const toDomain = (quests) => quests.map((quest) => new Quest(quest));
@@ -20,17 +19,6 @@ const findById = async ({ questId }) => {
   const quest = await knexConn('quests').where('id', questId).first();
 
   if (!quest) return null;
-
-  return new Quest(quest);
-};
-
-const getByCode = async ({ code }) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  const quest = await knexConn('quests').where('code', code).first();
-  if (!quest) {
-    throw new NotFoundError(`La quête portant le code ${code} n'existe pas`);
-  }
 
   return new Quest(quest);
 };
@@ -61,4 +49,4 @@ const deleteByIds = async ({ questIds }) => {
   return knexConn('quests').whereIn('id', questIds).delete();
 };
 
-export { deleteByIds, findAllWithReward, findById, getByCode, saveInBatch };
+export { deleteByIds, findAllWithReward, findById, saveInBatch };

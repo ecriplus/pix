@@ -19,7 +19,6 @@ import * as userService from '../../../../shared/domain/services/user-service.js
  * Internal API Needed For
  * campaignRepository.getByCode
  * groupRepository.findByOrganizationId
- * questRepository.getByCode
  * combinedCourseRepository.getByCode
  */
 import * as passwordValidator from '../../../../shared/domain/validators/password-validator.js';
