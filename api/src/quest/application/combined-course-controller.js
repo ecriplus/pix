@@ -19,8 +19,8 @@ const getByCode = async function (request, _, dependencies = { combinedCourseSer
 };
 
 const getById = async (request, _, dependencies = { combinedCourseDetailsSerializer }) => {
-  const questId = request.params.questId;
-  const combinedCourseDetails = await usecases.getCombinedCourseByQuestId({ questId });
+  const combinedCourseId = request.params.combinedCourseId;
+  const combinedCourseDetails = await usecases.getCombinedCourseById({ combinedCourseId });
 
   return dependencies.combinedCourseDetailsSerializer.serialize(combinedCourseDetails);
 };

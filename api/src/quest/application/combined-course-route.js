@@ -56,7 +56,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/combined-courses/{questId}',
+      path: '/api/combined-courses/{combinedCourseId}',
       config: {
         pre: [
           {
@@ -66,7 +66,7 @@ const register = async function (server) {
         handler: combinedCourseController.getById,
         validate: {
           params: Joi.object({
-            questId: identifiersType.questId,
+            combinedCourseId: identifiersType.combinedCourseId,
           }),
         },
         notes: [
