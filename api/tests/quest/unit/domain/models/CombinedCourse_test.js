@@ -8,6 +8,7 @@ import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
 import { CombinedCourseTemplate } from '../../../../../src/quest/domain/models/CombinedCourseTemplate.js';
 import { DataForQuest } from '../../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
@@ -1845,6 +1846,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       });
     });
   });
+
   describe('CombinedCourse', function () {
     it('should return model with given parameters', function () {
       // given
@@ -1862,6 +1864,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       expect(combinedCourse.organizationId).to.deep.equal(organizationId);
       expect(combinedCourse.id).to.deep.equal(id);
     });
+
     it('should throw when combined course model does not pass validation', function () {
       // given
       const id = 1;
@@ -1873,6 +1876,83 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       expect(() => {
         new CombinedCourse({ id, organizationId, name, code });
       }).to.throw();
+    });
+
+    describe('#participationsCount', function () {
+      it('should return 0 when there are no participations', function () {
+        // given
+        const combinedCourse = new CombinedCourse({ id: 1, organizationId: 1, name: 'name', code: 'code' });
+
+        // when
+        const count = combinedCourse.participationsCount;
+
+        // then
+        expect(count).to.equal(0);
+      });
+
+      it('should return the number of participations', function () {
+        // given
+        const combinedCourse = new CombinedCourse({ id: 1, organizationId: 1, name: 'name', code: 'code' });
+        combinedCourse.participations = [
+          new CombinedCourseParticipation({
+            id: 1,
+            questId: 1,
+            organizationLearnerId: 1,
+            status: CombinedCourseParticipationStatuses.STARTED,
+          }),
+          new CombinedCourseParticipation({
+            id: 2,
+            questId: 1,
+            organizationLearnerId: 2,
+            status: CombinedCourseParticipationStatuses.STARTED,
+          }),
+          new CombinedCourseParticipation({
+            id: 3,
+            questId: 1,
+            organizationLearnerId: 3,
+            status: CombinedCourseParticipationStatuses.STARTED,
+          }),
+        ];
+
+        // when
+        const count = combinedCourse.participationsCount;
+
+        // then
+        expect(count).to.equal(3);
+      });
+    });
+
+    describe('#completedParticipationsCount', function () {
+      it('should return the number of completed participations', function () {
+        // given
+        const combinedCourse = new CombinedCourse({ id: 1, organizationId: 1, name: 'name', code: 'code' });
+        combinedCourse.participations = [
+          new CombinedCourseParticipation({
+            id: 1,
+            questId: 1,
+            organizationLearnerId: 1,
+            status: CombinedCourseParticipationStatuses.COMPLETED,
+          }),
+          new CombinedCourseParticipation({
+            id: 2,
+            questId: 1,
+            organizationLearnerId: 2,
+            status: CombinedCourseParticipationStatuses.STARTED,
+          }),
+          new CombinedCourseParticipation({
+            id: 3,
+            questId: 1,
+            organizationLearnerId: 3,
+            status: CombinedCourseParticipationStatuses.COMPLETED,
+          }),
+        ];
+
+        // when
+        const count = combinedCourse.completedParticipationsCount;
+
+        // then
+        expect(count).to.equal(2);
+      });
     });
   });
 });

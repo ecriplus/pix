@@ -88,4 +88,21 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
     });
   });
+
+  describe('GET /api/organizations/{organizationId}/combined-courses', function () {
+    it('should call prehandler', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').returns(() => true);
+      sinon.stub(combinedCourseController, 'getByOrganizationId').callsFake((request, h) => h.response());
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(combinedCourseRoute);
+
+      // when
+      await httpTestServer.request('GET', '/api/organizations/123/combined-courses');
+
+      // then
+      expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.called;
+    });
+  });
 });

@@ -20,13 +20,14 @@ const schema = Joi.object({
 export class CombinedCourse {
   #quest;
 
-  constructor({ id, code, organizationId, name, description, illustration } = {}, quest) {
+  constructor({ id, code, organizationId, name, description, illustration, participations = [] } = {}, quest) {
     this.id = id;
     this.code = code;
     this.organizationId = organizationId;
     this.name = name;
     this.description = description;
     this.illustration = illustration;
+    this.participations = participations;
 
     this.#validate({ id, code, organizationId, name, description, illustration });
 
@@ -35,6 +36,14 @@ export class CombinedCourse {
 
   get quest() {
     return this.#quest;
+  }
+
+  get participationsCount() {
+    return this.participations.length;
+  }
+
+  get completedParticipationsCount() {
+    return this.participations.filter((participation) => participation.isCompleted()).length;
   }
 
   #validate(combinedCourse) {
