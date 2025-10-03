@@ -147,7 +147,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
       identityProviderForCampaigns:
         this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
       features: structuredClone(this.args.organization.features),
-      administrationTeamId: `${this.args.organization.administrationTeamId}`,
+      // TODO: delete this logic when administration team is mandatory
+      administrationTeamId: this.args.organization.administrationTeamId
+        ? `${this.args.organization.administrationTeamId}`
+        : null,
     });
   }
 
