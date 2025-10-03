@@ -5,6 +5,7 @@ const { get } = lodash;
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
+import { PasswordResetTokenInvalidOrExpired } from '../errors.js';
 import { PasswordExpirationToken } from '../models/PasswordExpirationToken.js';
 
 const updateExpiredPassword = async function ({
@@ -15,6 +16,9 @@ const updateExpiredPassword = async function ({
   userRepository,
 }) {
   const { userId } = PasswordExpirationToken.decode(passwordExpirationToken);
+  if (!userId) {
+    throw new PasswordResetTokenInvalidOrExpired();
+  }
 
   let foundUser;
   try {

@@ -6,6 +6,15 @@ class AuthenticationKeyExpired extends DomainError {
   }
 }
 
+class PasswordResetTokenInvalidOrExpired extends DomainError {
+  constructor() {
+    super(
+      'The password reset token has expired, retry connecting with temporary password',
+      'PASSWORD_RESET_TOKEN_INVALID_OR_EXPIRED',
+    );
+  }
+}
+
 class DifferentExternalIdentifierError extends DomainError {
   constructor(
     message = "La valeur de l'externalIdentifier de la méthode de connexion ne correspond pas à celui reçu par le partenaire.",
@@ -126,6 +135,7 @@ export {
   OrganizationLearnerNotBelongToOrganizationIdentityError,
   PasswordNotMatching,
   PasswordResetDemandNotFoundError,
+  PasswordResetTokenInvalidOrExpired,
   PixAdminLoginFromPasswordDisabledError,
   RevokeUntilMustBeAnInstanceOfDate,
   UserCantBeCreatedError,
