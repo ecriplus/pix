@@ -5,15 +5,15 @@ import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
 const getByCode = async ({ code }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quest = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourse = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('code', code)
     .first();
-  if (!quest) {
+  if (!combinedCourse) {
     throw new NotFoundError(`Le parcours combiné portant le code ${code} n'existe pas`);
   }
 
-  return new CombinedCourse(quest);
+  return new CombinedCourse(combinedCourse);
 };
 
 const getById = async ({ id }) => {

@@ -10,7 +10,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // given
       const code = 'SOMETHING';
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const quest = databaseBuilder.factory.buildQuest({ code, organizationId });
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
       await databaseBuilder.commit();
 
       // when
@@ -18,7 +18,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
 
       // then
       expect(combinedCourseResult).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(quest));
+      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(combinedCourse));
     });
 
     it('should throw NotFoundError if quest does not exist', async function () {
