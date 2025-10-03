@@ -32,7 +32,6 @@ export class CombinedCourse {
     this.#validate({ id, code, organizationId, name, description, illustration });
 
     this.#quest = quest;
-    this.participations = [];
   }
 
   get quest() {
