@@ -49,7 +49,7 @@
               "element": {
                 "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
                 "type": "qcu-discovery",
-                "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que chatGPT réponde à cette demande ?</p>",
+                "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que ChatGPT réponde à cette demande ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -94,7 +94,7 @@
               "element": {
                 "id": "81f44774-8b4d-4d91-b1c2-2a26044eb9df",
                 "type": "qcu-discovery",
-                "instruction": "<p>Il existe d'autre logiciels comme chatGPT.&nbsp;</p><p>En reconnaissez-vous un ci-dessous ?&nbsp;</p>",
+                "instruction": "<p>Il existe d'autre logiciels comme ChatGPT.&nbsp;</p><p>En reconnaissez-vous un ci-dessous ?&nbsp;</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -503,7 +503,7 @@
               "element": {
                 "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
                 "type": "text",
-                "content": "<ul><li>Un logiciel d'IA générative est capable de discuter  avec un utilisateur, sur des sujets très variés. 💬</li><li>Il est entraîné avec énormément de textes disponibles sur internet. Cela  lui permet de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qu'il nous donne. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
+                "content": "<ul><li>Un logiciel d'IA générative est capable de discuter  avec un utilisateur, sur des sujets très variés. 💬</li><li>Il est entraîné avec énormément de textes disponibles sur internet. Cela  lui permet de répondre précisément aux demandes, sans que ses réponses ne soient préparées à l’avance. 📚</li><li>Il ne répond pas comme le ferait un humain&nbsp;: il écrit en construisant ses phrases mot par mot, avec des mots très probables. 🧩</li><li>Il faut toujours vérifier les réponses qu'il nous donne. Pour vérifier, on peut poursuivre la conversation ou aller chercher soi-même sur internet. 🔍</li></ul>"
               }
             }
           ]
@@ -593,7 +593,7 @@
                 "cards": [
                   {
                     "id": "4959c494-cf94-4d05-b69c-4735e6b2c5eb",
-                    "text": "Les logiciels d'IA générative sont entraînées uniquement sur les articles de Wikipédia.",
+                    "text": "Les logiciels d'IA générative sont entraînés uniquement sur les articles de Wikipédia.",
                     "image": {
                       "url": "",
                       "altText": ""
