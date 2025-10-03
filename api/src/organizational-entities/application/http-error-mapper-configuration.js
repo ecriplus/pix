@@ -1,6 +1,7 @@
 import { HttpErrors } from '../../shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../shared/application/models/domain-error-mapping-configuration.js';
 import {
+  AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
   ArchiveOrganizationsInBatchError,
   DpoEmailInvalid,
@@ -47,6 +48,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   },
   {
     name: ArchiveOrganizationsInBatchError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
+  },
+  {
+    name: AdministrationTeamNotFound.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));

@@ -12,6 +12,14 @@ class UnableToAttachChildOrganizationToParentOrganizationError extends DomainErr
   }
 }
 
+class AdministrationTeamNotFound extends DomainError {
+  constructor({ code = 'ADMINISTRATION_TEAM_NOT_FOUND', message = 'Administration team does not exist', meta } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 class ArchiveCertificationCentersInBatchError extends DomainError {
   constructor({ code = 'ARCHIVE_CERTIFICATION_CENTERS_IN_BATCH_ERROR', meta } = {}) {
     super();
@@ -75,6 +83,7 @@ class FeatureParamsNotProcessable extends DomainError {
 }
 
 export {
+  AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
   ArchiveOrganizationsInBatchError,
   DpoEmailInvalid,
