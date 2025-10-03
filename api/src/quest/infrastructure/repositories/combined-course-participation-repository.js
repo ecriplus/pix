@@ -61,15 +61,15 @@ const buildBaseQuery = (knexConnection) => {
       'firstName',
       'lastName',
       'combined_course_participations.status',
-      'questId',
+      'combined_course_participations.questId',
       'organizationLearnerId',
       'combined_course_participations.createdAt',
       'combined_course_participations.updatedAt',
     )
+    .join('combined_course_participations', 'combined_courses.questId', 'combined_course_participations.questId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
-      '=',
       'combined_course_participations.organizationLearnerId',
     )
     .orderBy([

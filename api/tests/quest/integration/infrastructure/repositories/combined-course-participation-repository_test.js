@@ -143,11 +143,11 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(updatedParticipation.updatedAt).to.deep.equal(now);
     });
   });
-  describe('#findByQuestId', function () {
+  describe('#findByCombinedCourseId', function () {
     it('should return participations for a given questId', async function () {
       // given
       const learner = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Paul', lastName: 'Azerty' });
-      const questId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' }).id;
+      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
       const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId: learner.id,
         questId,
@@ -172,7 +172,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await databaseBuilder.commit();
 
       // when
-      const results = await combinedCourseParticipationRepository.findByQuestId({ questId });
+      const results = await combinedCourseParticipationRepository.findByCombinedCourseId({ combinedCourseId });
 
       // then
       expect(results).lengthOf(2);
