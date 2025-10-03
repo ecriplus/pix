@@ -33,4 +33,31 @@ describe('Integration | Repository | administration-team-repository', function (
       expect(result).to.deep.equal([]);
     });
   });
+
+  describe('#getById', function () {
+    it('should return the administration team when it exists', async function () {
+      // given
+      const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
+      await databaseBuilder.commit();
+
+      // when
+      const result = await administrationTeamRepository.getById(administrationTeam.id);
+
+      // then
+      expect(result).to.deep.equal(
+        domainBuilder.buildAdministrationTeam({
+          id: administrationTeam.id,
+          name: administrationTeam.name,
+        }),
+      );
+    });
+
+    it('should return null when the administration team does not exist', async function () {
+      // when
+      const result = await administrationTeamRepository.getById(456);
+
+      // then
+      expect(result).to.be.null;
+    });
+  });
 });

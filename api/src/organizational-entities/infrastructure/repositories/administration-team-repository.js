@@ -7,10 +7,20 @@ const findAll = async function () {
   return administrationTeams.map(_toDomain);
 };
 
+const getById = async function (id) {
+  const administrationTeam = await knex.select('id', 'name').from('administration_teams').where({ id }).first();
+
+  if (!administrationTeam) {
+    return null;
+  }
+
+  return _toDomain(administrationTeam);
+};
+
 const _toDomain = function (administrationTeamDTO) {
   return new AdministrationTeam({
     ...administrationTeamDTO,
   });
 };
 
-export { findAll };
+export { findAll, getById };
