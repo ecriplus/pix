@@ -7,6 +7,7 @@ import {
   MissingOrInvalidCredentialsError,
   MissingUserAccountError,
   PasswordResetDemandNotFoundError,
+  PasswordResetTokenInvalidOrExpired,
   PixAdminLoginFromPasswordDisabledError,
   UserCantBeCreatedError,
   UserShouldChangePasswordError,
@@ -15,6 +16,10 @@ import {
 const authenticationDomainErrorMappingConfiguration = [
   {
     name: AuthenticationKeyExpired.name,
+    httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
+  },
+  {
+    name: PasswordResetTokenInvalidOrExpired.name,
     httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
   },
   {

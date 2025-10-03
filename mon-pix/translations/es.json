@@ -1543,7 +1543,8 @@
         "error-message": "Debes aceptar las condiciones de uso de Pix.",
         "expired-authentication-key": "Tu solicitud de autenticación ha caducado.",
         "invalid-email": "Tu dirección de correo electrónico no es válida.",
-        "login-unauthorized-error": "La dirección de correo electrónico y/o la contraseña introducidas son incorrectas."
+        "login-unauthorized-error": "La dirección de correo electrónico y/o la contraseña introducidas son incorrectas.",
+        "password-reset-token-invalid-or-expired": "Ha pasado demasiado tiempo para validar su nueva contraseña. Vuelva a la página de inicio de sesión para volver a introducir su nombre de usuario y contraseña temporal."
       },
       "login-form": {
         "button": "Iniciar sesión",

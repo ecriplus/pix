@@ -1,9 +1,9 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { PasswordResetTokenInvalidOrExpired } from '../../../../../src/identity-access-management/domain/errors.js';
 import { PasswordExpirationToken } from '../../../../../src/identity-access-management/domain/models/PasswordExpirationToken.js';
 import { updateExpiredPassword } from '../../../../../src/identity-access-management/domain/usecases/update-expired-password.usecase.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-expired-password', function () {
@@ -69,6 +69,24 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
     expect(login).to.equal('armand.talo1806');
   });
 
+  context('when password reset token is invalid or expired', function () {
+    it('throws PasswordResetTokenInvalidOrExpired', async function () {
+      // given
+      sinon.stub(PasswordExpirationToken, 'decode').returns(new PasswordExpirationToken({}));
+
+      // when /then
+      await expect(
+        updateExpiredPassword({
+          passwordExpirationToken,
+          newPassword,
+          cryptoService,
+          authenticationMethodRepository,
+          userRepository,
+        }),
+      ).to.be.rejectedWith(PasswordResetTokenInvalidOrExpired);
+    });
+  });
+
   context('when user does not have a username', function () {
     it('returns user email', async function () {
       // given
@@ -90,9 +108,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
     });
   });
 
-  context('when userId not exist', function () {
+  context('when user does not exist', function () {
     it('throws UserNotFoundError', async function () {
       // given
+      sinon.stub(PasswordExpirationToken, 'decode').returns(new PasswordExpirationToken({ userId: '123' }));
       userRepository.get.rejects(new UserNotFoundError());
 
       // when
@@ -100,18 +119,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | update-expired-
 
       // then
       expect(error).to.be.instanceOf(UserNotFoundError);
-    });
-
-    it('logs error', async function () {
-      // given
-      userRepository.get.rejects(new UserNotFoundError());
-      sinon.stub(logger, 'warn');
-
-      // when
-      await catchErr(updateExpiredPassword)({ passwordExpirationToken, userRepository });
-
-      // then
-      expect(logger.warn).to.have.been.calledWithExactly('Trying to change his password with incorrect user id');
     });
   });
 

@@ -16,6 +16,9 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
   EXPIRED_AUTHENTICATION_KEY: {
     i18nKey: 'pages.login-or-register-oidc.error.expired-authentication-key',
   },
+  PASSWORD_RESET_TOKEN_INVALID_OR_EXPIRED: {
+    i18nKey: 'pages.login-or-register-oidc.error.password-reset-token-invalid-or-expired',
+  },
   USER_IS_TEMPORARY_BLOCKED: {
     getI18nKey: (error) => {
       if (error.meta?.isLoginFailureWithUsername) {
@@ -73,9 +76,7 @@ export default class ErrorMessagesService extends Service {
 
   getAuthenticationErrorMessage(originalError) {
     const error = get(originalError, 'errors[0]') || originalError;
-
     const message = AUTHENTICATION_ERROR_CODES_MAPPING[error?.code];
-
     if (!message) {
       return this.getHttpErrorMessage(originalError, AUTHENTICATION_DEFAULT_MESSAGE);
     }
@@ -90,6 +91,7 @@ export default class ErrorMessagesService extends Service {
     if (getI18nKey) {
       return this.intl.t(getI18nKey(error), options);
     }
+
     return this.intl.t(i18nKey, options);
   }
 }

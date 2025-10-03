@@ -13,6 +13,8 @@ const ApiErrorMessages = ENV.APP.API_ERROR_MESSAGES;
 
 const PASSWORD_INPUT_LABEL = 'Mot de passe';
 
+const NEW_VALID_PASSWORD = 'Pix12345!';
+
 module('Integration | Component | update-expired-password-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
@@ -20,7 +22,7 @@ module('Integration | Component | update-expired-password-form', function (hooks
     // given / when
     const screen = await render(hbs`<UpdateExpiredPasswordForm />`);
 
-    //then
+    // then
     assert.dom(screen.getByRole('heading', { name: 'Réinitialiser le mot de passe' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Réinitialiser' })).exists();
     assert.dom(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false })).exists();
@@ -36,14 +38,13 @@ module('Integration | Component | update-expired-password-form', function (hooks
         unloadRecord: sinon.stub(),
       });
       this.set('resetExpiredPasswordDemand', resetExpiredPasswordDemand);
-      const newPassword = 'Pix12345!';
 
       const screen = await render(
         hbs`<UpdateExpiredPasswordForm @resetExpiredPasswordDemand={{this.resetExpiredPasswordDemand}} />`,
       );
 
       // when
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), newPassword);
+      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), NEW_VALID_PASSWORD);
       await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'change');
 
       await click(screen.getByRole('button', { name: 'Réinitialiser' }));
@@ -54,30 +55,58 @@ module('Integration | Component | update-expired-password-form', function (hooks
     });
   });
 
-  module('errors cases', function () {
-    test('should display an error, when saving fails', async function (assert) {
-      // given
-      const resetExpiredPasswordDemand = EmberObject.create({
-        login: 'toto',
-        password: 'Password123',
-        updateExpiredPassword: sinon.stub().rejects(),
-        unloadRecord: sinon.stub(),
+  module('error cases', function () {
+    module('when error code is PASSWORD_RESET_TOKEN_INVALID_OR_EXPIRED', function () {
+      test('displays that the password reset token has expired', async function (assert) {
+        // given
+        const response = {
+          errors: [{ code: 'PASSWORD_RESET_TOKEN_INVALID_OR_EXPIRED' }],
+        };
+
+        const resetExpiredPasswordDemand = EmberObject.create({
+          updateExpiredPassword: sinon.stub().rejects(response),
+        });
+        this.set('resetExpiredPasswordDemand', resetExpiredPasswordDemand);
+
+        const screen = await render(
+          hbs`<UpdateExpiredPasswordForm @resetExpiredPasswordDemand={{this.resetExpiredPasswordDemand}} />`,
+        );
+
+        // when
+        await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), NEW_VALID_PASSWORD);
+        await click(screen.getByRole('button', { name: 'Réinitialiser' }));
+
+        // then
+        assert
+          .dom(screen.getByText(t('pages.login-or-register-oidc.error.password-reset-token-invalid-or-expired')))
+          .exists();
       });
-      this.set('resetExpiredPasswordDemand', resetExpiredPasswordDemand);
-      const newPassword = 'Pix12345!';
 
-      const screen = await render(
-        hbs`<UpdateExpiredPasswordForm @resetExpiredPasswordDemand={{this.resetExpiredPasswordDemand}} />`,
-      );
+      module('when an unknown error happens', function () {
+        test('displays a generic error message', async function (assert) {
+          // given
+          const resetExpiredPasswordDemand = EmberObject.create({
+            login: 'toto',
+            password: 'Password123',
+            updateExpiredPassword: sinon.stub().rejects(),
+            unloadRecord: sinon.stub(),
+          });
+          this.set('resetExpiredPasswordDemand', resetExpiredPasswordDemand);
 
-      // when
-      await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), newPassword);
-      await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'change');
+          const screen = await render(
+            hbs`<UpdateExpiredPasswordForm @resetExpiredPasswordDemand={{this.resetExpiredPasswordDemand}} />`,
+          );
 
-      await click(screen.getByRole('button', { name: 'Réinitialiser' }));
+          // when
+          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), NEW_VALID_PASSWORD);
+          await triggerEvent(screen.getByLabelText(PASSWORD_INPUT_LABEL, { exact: false }), 'change');
 
-      // then
-      assert.ok(t(ApiErrorMessages.INTERNAL_SERVER_ERROR.I18N_KEY));
+          await click(screen.getByRole('button', { name: 'Réinitialiser' }));
+
+          // then
+          assert.ok(t(ApiErrorMessages.INTERNAL_SERVER_ERROR.I18N_KEY));
+        });
+      });
     });
   });
 });

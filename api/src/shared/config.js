@@ -204,7 +204,7 @@ const configuration = (function () {
       refreshTokenLifespanMs: ms(process.env.REFRESH_TOKEN_LIFESPAN || '7d'),
       revokedUserAccessLifespanMs: ms(process.env.REVOKED_USER_ACCESS_LIFESPAN || '7d'),
       tokenForStudentReconciliationLifespan: '1h',
-      passwordResetTokenLifespan: '1h',
+      passwordResetTokenLifespan: process.env.PASSWORD_RESET_TOKEN_LIFESPAN || '1h',
       permitPixAdminLoginFromPassword: toBoolean(process.env.PIX_ADMIN_LOGIN_FROM_PASSWORD_ENABLED),
     },
     authenticationSession: {
