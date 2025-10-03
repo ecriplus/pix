@@ -20,7 +20,10 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
   });
 
   it('should throw an error if CombinedCourse does not exist', async function () {
-    const error = await catchErr(CombinedCourseDetailsService.getCombinedCourseDetails)({ questId: 123, userId: 123 });
+    const error = await catchErr(CombinedCourseDetailsService.getCombinedCourseDetails)({
+      combinedCourseId: 123,
+      userId: 123,
+    });
 
     expect(error).to.be.instanceOf(NotFoundError);
   });
@@ -41,7 +44,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       const moduleId1 = '6282925d-4775-4bca-b513-4c3009ec5886';
       const moduleId2 = '654c44dc-0560-4acc-9860-4a67c923577f';
 
-      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -94,7 +97,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
 
       const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
         userId,
-        questId,
+        combinedCourseId,
       });
 
       expect(result).to.be.instanceOf(CombinedCourse);
@@ -133,7 +136,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
         },
       ]);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
@@ -175,7 +178,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       });
       databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
 
-      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -243,7 +246,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       await databaseBuilder.commit();
 
       const result = await CombinedCourseDetailsService.getCombinedCourseDetails({
-        questId,
+        combinedCourseId,
         userId,
       });
 
@@ -283,7 +286,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
         },
       ]);
       expect(result).to.be.instanceOf(CombinedCourse);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
@@ -318,7 +321,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
         trainingId: training2.id,
       });
 
-      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -383,9 +386,9 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
 
       await databaseBuilder.commit();
 
-      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({ questId, userId });
+      const result = await CombinedCourseDetailsService.getCombinedCourseDetails({ combinedCourseId, userId });
       expect(result).to.be.instanceOf(CombinedCourse);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
       expect(result.participation).to.equal(null);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
