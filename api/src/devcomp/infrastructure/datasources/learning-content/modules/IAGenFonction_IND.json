@@ -349,7 +349,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenFonction_IND/article-IAGenFonction_IND.svg",
                       "alt": "Capture d'écran d'un article de presse illustré décrit dans l'alternative textuelle.",
-                      "alternativeText": "<p>Les vélos en libre-service font le plein</p><p>Publié le 25 juin 2025 • Par Rédaction VéloActu</p><p></p><p>Le service de vélos en libre-service connaît un succès grandissant. De plus en plus d’usagers se tournent vers ce mode de transport pratique, économique et respectueux de l’environnement pour leurs trajets quotidiens. Les opérateurs annoncent une forte augmentation du nombre de trajets enregistrés, en particulier sur les lignes interquartiers et aux abords des zones d’activité. Les vélos sont désormais plébiscités comme une alternative crédible à la voiture pour les déplacements urbains.\"Nous assistons à une transformation des habitudes de mobilité\", souligne un porte-parole du secteur. \"Les utilisateurs veulent de la simplicité, de la flexibilité et un impact réduit sur l’environnement.\"</p>",
+                      "alternativeText": "<p>Les vélos en libre-service font le plein</p><p>Publié le 25 juin 2025 • Par Rédaction VéloActu</p><p>Le service de vélos en libre-service connaît un succès grandissant. De plus en plus d’usagers se tournent vers ce mode de transport pratique, économique et respectueux de l’environnement pour leurs trajets quotidiens. Les opérateurs annoncent une forte augmentation du nombre de trajets enregistrés, en particulier sur les lignes interquartiers et aux abords des zones d’activité. Les vélos sont désormais plébiscités comme une alternative crédible à la voiture pour les déplacements urbains.\"Nous assistons à une transformation des habitudes de mobilité\", souligne un porte-parole du secteur. \"Les utilisateurs veulent de la simplicité, de la flexibilité et un impact réduit sur l’environnement.\"</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -391,7 +391,7 @@
               "element": {
                 "id": "cfeb8a41-f755-4e9f-ad30-d103d9530837",
                 "type": "text",
-                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi à l'IA apprendre d’autres tâches : résumer un texte, rédiger une lettre de motivation, etc.</p>"
+                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi  apprendre d’autres tâches&nbsp;à l'IA : résumer un texte, rédiger une lettre de motivation, etc.</p>"
               }
             }
           ]
@@ -447,28 +447,28 @@
                     "id": "1",
                     "content": "<p>la réponse 1</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Bien joué !</strong> 🎉<br>Et oui ! Beaucoup de personnes ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Bien joué !</strong> 🎉<br>Et oui ! Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>la réponse 2</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Et non.</strong><br>Beaucoup de personnes ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Et non.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.<br></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>la réponse 3</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>Beaucoup de personnes ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p><strong>Pas vraiment.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.<br></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Beaucoup de personnes ont tendance à préférer les réponses utiles, agréables et positives et qui ne contredisent pas la demande formulée.</p>"
+                      "diagnosis": "<p>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.</p>"
                     }
                   }
                 ],
@@ -487,7 +487,7 @@
               "element": {
                 "id": "73d53e3f-ee96-4c2a-b752-a6225adf7df4",
                 "type": "text",
-                "content": "<p>Dans la <strong>phase d’alignement</strong>, les réponses de l’IA sont évaluées par des humains («&nbsp;👍&nbsp;» ou «&nbsp;👎&nbsp;») pour l’entraîner grâce à l’<strong>apprentissage par renforcement</strong>.</p><p>Ce travail est souvent mal rémunéré et, parfois, c’est l’utilisateur qui y contribue en cliquant sur un pouce.</p><p>Comme Beaucoup de personnes préfèrent des réponses utiles, polies ou flatteuses, les IA deviennent parfois complaisantes, quitte à inventer des faits (hallucinations).&nbsp;🤥</p>"
+                "content": "<p>Dans la <strong>phase d’alignement</strong>, les réponses de l’IA sont évaluées par des humains («&nbsp;👍&nbsp;» ou «&nbsp;👎&nbsp;») pour l’entraîner grâce à l’<strong>apprentissage par renforcement</strong>.</p><p>Ce travail est souvent mal rémunéré et, parfois, c’est l’utilisateur qui y contribue en cliquant sur un pouce. </p><p>Comme les réponses utiles, polies ou flatteuses sont les plus appréciées, les IA deviennent parfois complaisantes, quitte à inventer des faits (hallucinations).&nbsp;🤥 \"</p>"
               }
             }
           ]
