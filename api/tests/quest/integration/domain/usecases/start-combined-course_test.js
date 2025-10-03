@@ -8,7 +8,7 @@ describe('Integration | Combined course | Domain | UseCases | start-combined-cou
       //given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
-      const questId = databaseBuilder.factory.buildQuest({ organizationId, code: 'COMBINIX8' }).id;
+      const { questId } = databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBINIX8' });
       await databaseBuilder.commit();
 
       //when
@@ -32,7 +32,8 @@ describe('Integration | Combined course | Domain | UseCases | start-combined-cou
         //given
         const user = databaseBuilder.factory.buildUser();
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const questId = databaseBuilder.factory.buildQuest({ organizationId, code: 'COMBINIX8' }).id;
+        const { questId } = databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBINIX8' });
+
         await databaseBuilder.commit();
 
         const organizationLearner = domainBuilder.buildOrganizationLearner({

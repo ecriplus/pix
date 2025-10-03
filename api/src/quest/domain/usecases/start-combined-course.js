@@ -15,5 +15,5 @@ export async function startCombinedCourse({
     organizationLearner: { firstName: user.firstName, lastName: user.lastName },
   });
 
-  await combinedCourseParticipationRepository.save({ organizationLearnerId, questId: combinedCourse.id });
+  await combinedCourseParticipationRepository.save({ organizationLearnerId, questId: combinedCourse.questId });
 }
