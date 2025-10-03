@@ -18,7 +18,7 @@ const publishSessionsInBatch = async function ({
   for (const sessionId of sessionIds) {
     try {
       await DomainTransaction.execute(async () => {
-        const session = await sessionPublicationService.publishSession({
+        const { session, startedCertificationCoursesUserIds } = await sessionPublicationService.publishSession({
           sessionId,
           publishedAt,
           certificationRepository,
@@ -29,6 +29,7 @@ const publishSessionsInBatch = async function ({
 
         await sessionPublicationService.manageEmails({
           session,
+          startedCertificationCoursesUserIds,
           publishedAt,
           certificationCenterRepository,
           sessionRepository,

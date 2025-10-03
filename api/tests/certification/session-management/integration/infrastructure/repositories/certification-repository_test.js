@@ -7,12 +7,16 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
     it('should get status information', async function () {
       // given
       const sessionId = 200;
+      const userId1 = databaseBuilder.factory.buildUser().id;
+      const userId2 = databaseBuilder.factory.buildUser().id;
+      const userId3 = databaseBuilder.factory.buildUser().id;
+      const userId4 = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildSession({ id: sessionId + 1 });
       databaseBuilder.factory.buildSession({ id: sessionId });
-      _buildValidatedCertification({ id: 1, sessionId, isPublished: false });
-      _buildValidatedCertification({ id: 2, sessionId: sessionId + 1, isPublished: false });
-      _buildRejectedCertification({ id: 3, sessionId, isPublished: false });
-      _buildCancelledCertification({ id: 4, sessionId, isPublished: false });
+      _buildValidatedCertification({ id: 1, sessionId, isPublished: false, userId: userId1 });
+      _buildValidatedCertification({ id: 2, sessionId: sessionId + 1, isPublished: false, userId: userId2 });
+      _buildRejectedCertification({ id: 3, sessionId, isPublished: false, userId: userId3 });
+      _buildCancelledCertification({ id: 4, sessionId, isPublished: false, userId: userId4 });
       await databaseBuilder.commit();
 
       // when
@@ -24,14 +28,17 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
       expect(statuses).to.have.deep.members([
         {
           certificationCourseId: 1,
+          userId: userId1,
           pixCertificationStatus: AssessmentResult.status.VALIDATED,
         },
         {
           certificationCourseId: 3,
+          userId: userId3,
           pixCertificationStatus: AssessmentResult.status.REJECTED,
         },
         {
           certificationCourseId: 4,
+          userId: userId4,
           pixCertificationStatus: AssessmentResult.status.CANCELLED,
         },
       ]);
@@ -136,20 +143,20 @@ function _buildStartedCertification({ id, sessionId, isPublished }) {
   _buildCertification({ id, sessionId, isPublished, status: null });
 }
 
-function _buildValidatedCertification({ id, sessionId, isPublished }) {
-  _buildCertification({ id, sessionId, isPublished, status: status.VALIDATED });
+function _buildValidatedCertification({ id, sessionId, isPublished, userId }) {
+  _buildCertification({ id, sessionId, isPublished, userId, status: status.VALIDATED });
 }
 
-function _buildRejectedCertification({ id, sessionId, isPublished }) {
-  _buildCertification({ id, sessionId, isPublished, status: status.REJECTED });
+function _buildRejectedCertification({ id, sessionId, isPublished, userId }) {
+  _buildCertification({ id, sessionId, isPublished, userId, status: status.REJECTED });
 }
 
-function _buildCancelledCertification({ id, sessionId, isPublished }) {
-  _buildCertification({ id, sessionId, isPublished, status: status.CANCELLED });
+function _buildCancelledCertification({ id, sessionId, isPublished, userId }) {
+  _buildCertification({ id, sessionId, isPublished, userId, status: status.CANCELLED });
 }
 
-function _buildCertification({ id, sessionId, status, isPublished }) {
-  databaseBuilder.factory.buildCertificationCourse({ id, sessionId, isPublished });
+function _buildCertification({ id, sessionId, status, isPublished, userId }) {
+  databaseBuilder.factory.buildCertificationCourse({ id, sessionId, isPublished, userId });
   databaseBuilder.factory.buildAssessment({ id, certificationCourseId: id });
   if (status) {
     // not the latest

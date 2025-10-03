@@ -6,6 +6,7 @@ const getStatusesBySessionId = async function (sessionId) {
   return knexConn('certification-courses')
     .select({
       certificationCourseId: 'certification-courses.id',
+      userId: 'certification-courses.userId',
       pixCertificationStatus: 'assessment-results.status',
     })
     .where('certification-courses.sessionId', sessionId)
