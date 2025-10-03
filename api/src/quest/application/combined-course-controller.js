@@ -39,8 +39,8 @@ const getStatistics = async (request, _, dependencies = { combinedCourseStatisti
 };
 
 const findParticipations = async (request, _, dependencies = { combinedCourseParticipationSerializer }) => {
-  const questId = request.params.questId;
-  const combinedCourseParticipations = await usecases.findCombinedCourseParticipations({ questId });
+  const combinedCourseId = request.params.combinedCourseId;
+  const combinedCourseParticipations = await usecases.findCombinedCourseParticipations({ combinedCourseId });
   return dependencies.combinedCourseParticipationSerializer.serialize(combinedCourseParticipations);
 };
 

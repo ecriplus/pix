@@ -55,7 +55,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     });
   });
 
-  describe('GET /api/combined-courses/{questId}/participations', function () {
+  describe('GET /api/combined-courses/{combinedCourseId}/participations', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
