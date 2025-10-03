@@ -18,9 +18,10 @@ import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
   describe('CombinedCourseDetails', function () {
-    let id, organizationId, name, code;
+    let id, organizationId, name, code, questId;
     beforeEach(function () {
       id = 1;
+      questId = 2;
       organizationId = 1;
       name = 'name';
       code = 'code';
@@ -30,7 +31,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         // given
         const campaignId = 2;
         const quest = new Quest({
-          id: 1,
+          id: questId,
           rewardId: null,
           rewardType: null,
           eligibilityRequirements: [],
@@ -57,7 +58,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             },
           ],
         });
-        const combinedCourse = new CombinedCourseDetails(new CombinedCourse({ id, organizationId, name, code }), quest);
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          quest,
+        );
 
         // when
         const campaignIds = combinedCourse.campaignIds;
@@ -99,7 +103,10 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             },
           ],
         });
-        const combinedCourse = new CombinedCourseDetails(new CombinedCourse({ id, organizationId, name, code }), quest);
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          quest,
+        );
 
         // when
         const moduleIds = combinedCourse.moduleIds;
@@ -167,7 +174,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -233,7 +240,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -300,7 +307,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -365,7 +372,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -435,7 +442,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -502,7 +509,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const dataForQuest = new DataForQuest({ eligibility });
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -590,7 +597,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const dataForQuest = new DataForQuest({ eligibility });
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id, organizationId, name, code }),
+              new CombinedCourse({ id, organizationId, name, code, questId }),
               quest,
             );
 
@@ -680,7 +687,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const dataForQuest = new DataForQuest({ eligibility });
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id, organizationId, name, code }),
+              new CombinedCourse({ id, organizationId, name, code, questId }),
               quest,
             );
 
@@ -720,7 +727,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
 
@@ -762,7 +769,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
           const dataForQuest = new DataForQuest({
@@ -804,7 +811,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
 
@@ -847,7 +854,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
           const module = new Module({ id: 7, title: 'module', duration: 10 });
@@ -916,7 +923,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
 
@@ -986,7 +993,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
           });
           const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             combinedCourseQuestFormat,
           );
           const dataForQuest = new DataForQuest({
@@ -1083,7 +1090,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1' }),
+              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1', questId: 2 }),
               combinedCourseQuestFormat,
             );
             const dataForQuest = new DataForQuest({
@@ -1191,7 +1198,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
               secondCampaign,
             ]);
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1' }),
+              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1', questId: 2 }),
               combinedCourseQuestFormat,
             );
             const dataForQuest = new DataForQuest({
@@ -1299,7 +1306,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1' }),
+              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1', questId: 2 }),
               combinedCourseQuestFormat,
             );
 
@@ -1389,7 +1396,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign, campaign2]);
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id, organizationId, name, code }),
+              new CombinedCourse({ id, organizationId, name, code, questId: 2 }),
               combinedCourseQuestFormat,
             );
             const dataForQuest = new DataForQuest({
@@ -1499,7 +1506,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
             });
             const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
             const combinedCourse = new CombinedCourseDetails(
-              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1' }),
+              new CombinedCourse({ id: 1, organizationId: 1, name: 'COMBINIX', code: 'COMBINIX1', questId: 2 }),
               combinedCourseQuestFormat,
             );
             const dataForQuest = new DataForQuest({
@@ -1577,7 +1584,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign1, campaign2]);
         const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
+          new CombinedCourse({ id, organizationId, name, code, questId }),
           combinedCourseQuestFormat,
         );
         const dataForQuest = new DataForQuest({
@@ -1644,7 +1651,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign1, campaign2]);
         const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
+          new CombinedCourse({ id, organizationId, name, code, questId }),
           combinedCourseQuestFormat,
         );
         const dataForQuest = new DataForQuest({
@@ -1714,7 +1721,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([]);
         const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
+          new CombinedCourse({ id, organizationId, name, code, questId }),
           combinedCourseQuestFormat,
         );
         const dataForQuest = new DataForQuest({
@@ -1754,7 +1761,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
         });
         const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign]);
         const combinedCourse = new CombinedCourseDetails(
-          new CombinedCourse({ id, organizationId, name, code }),
+          new CombinedCourse({ id, organizationId, name, code, questId }),
           combinedCourseQuestFormat,
         );
         const dataForQuest = new DataForQuest({
@@ -1789,7 +1796,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
           // when
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
           );
 
@@ -1812,7 +1819,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
           // when
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
             participation,
           );
@@ -1835,7 +1842,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
           // when
           const combinedCourse = new CombinedCourseDetails(
-            new CombinedCourse({ id, organizationId, name, code }),
+            new CombinedCourse({ id, organizationId, name, code, questId }),
             quest,
             participation,
           );
@@ -1856,13 +1863,14 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
       const code = 'code';
 
       // when
-      const combinedCourse = new CombinedCourse({ id, organizationId, name, code });
+      const combinedCourse = new CombinedCourse({ id, organizationId, name, code, questId: 2 });
 
       // then
       expect(combinedCourse.code).to.deep.equal(code);
       expect(combinedCourse.name).to.deep.equal(name);
       expect(combinedCourse.organizationId).to.deep.equal(organizationId);
       expect(combinedCourse.id).to.deep.equal(id);
+      expect(combinedCourse.questId).to.deep.equal(2);
     });
 
     it('should throw when combined course model does not pass validation', function () {
