@@ -40,26 +40,56 @@ module('Integration | Component | Module | Flashcards Card', function (hooks) {
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.seeAnswer') })).exists();
     });
 
-    test('should not display recto image if no one is provided', async function (assert) {
-      // given
-      const card = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
+    module('when the recto image is not provided', function () {
+      test('should not display image', async function (assert) {
+        // given
+        const card = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+            text: "Parce que c'est joli",
+          },
+        };
 
-      // when
-      const screen = await render(
-        <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
-      );
+        // when
+        const screen = await render(
+          <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
+        );
 
-      // then
-      assert.dom(screen.queryByRole('img')).doesNotExist();
+        // then
+        assert.dom(screen.queryByRole('img')).doesNotExist();
+      });
+    });
+
+    module('when width and height are available', function () {
+      test('should set them to the image', async function (assert) {
+        // given
+        const card = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            image: {
+              url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+              information: { height: 400, width: 300 },
+            },
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            text: "Parce que c'est joli",
+          },
+        };
+
+        // when
+        const screen = await render(
+          <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByRole('presentation')).hasAttribute('width', '300');
+        assert.dom(screen.getByRole('presentation')).hasAttribute('height', '400');
+      });
     });
   });
 
@@ -94,26 +124,56 @@ module('Integration | Component | Module | Flashcards Card', function (hooks) {
       assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.flashcards.seeAgain') })).exists();
     });
 
-    test('should not display verso image if no one is provided', async function (assert) {
-      // given
-      const card = {
-        id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
-        recto: {
-          text: "A quoi sert l'arobase dans mon adresse email ?",
-        },
-        verso: {
-          image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
-          text: "Parce que c'est joli",
-        },
-      };
+    module('when the verso image is not provided', function () {
+      test('should not display image', async function (assert) {
+        // given
+        const card = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            image: { url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg' },
+            text: "Parce que c'est joli",
+          },
+        };
 
-      // when
-      const screen = await render(
-        <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
-      );
+        // when
+        const screen = await render(
+          <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
+        );
 
-      // then
-      assert.dom(screen.queryByRole('img')).doesNotExist();
+        // then
+        assert.dom(screen.queryByRole('img')).doesNotExist();
+      });
+    });
+
+    module('when width and height are available', function () {
+      test('should set them to the image', async function (assert) {
+        // given
+        const card = {
+          id: 'e1de6394-ff88-4de3-8834-a40057a50ff4',
+          recto: {
+            text: "A quoi sert l'arobase dans mon adresse email ?",
+          },
+          verso: {
+            image: {
+              url: 'https://images.pix.fr/modulix/didacticiel/ordi-spatial.svg',
+              information: { height: 400, width: 300 },
+            },
+            text: "Parce que c'est joli",
+          },
+        };
+
+        // when
+        const screen = await render(
+          <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="verso" /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByRole('presentation')).hasAttribute('width', '300');
+        assert.dom(screen.getByRole('presentation')).hasAttribute('height', '400');
+      });
     });
   });
 
