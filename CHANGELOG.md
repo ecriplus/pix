@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.224.0](https://github.com/1024pix/pix/compare/v5.223.0...v5.224.0) (2025-10-03)
+
+### :rocket: Amélioration
+
+- [#13769](https://github.com/1024pix/pix/pull/13769) :sparkles: Création d'un script pour l'import de la calibration ayant l'ID 1 (pix-19827) 
+- [#13727](https://github.com/1024pix/pix/pull/13727) Afficher le champ "Équipe en charge" dans le formulaire d'édition d'une organisation (PIX-19598) 
+- [#13772](https://github.com/1024pix/pix/pull/13772) Ajouter une table `combined_courses` pour isoler les données n'appartenant pas aux quêtes (Pix-19763). 
+- [#13771](https://github.com/1024pix/pix/pull/13771) Rendre plus robuste les API LLM demandant un chatId en entrée (PIX-19841) 
+- [#13736](https://github.com/1024pix/pix/pull/13736) Renvoyer les width/height des images dans les flashcards (PIX-19682) 
+- [#13763](https://github.com/1024pix/pix/pull/13763) WIP créa du module Cyber Phishing NOV  
+
+### :bug: Correction
+
+- [#13774](https://github.com/1024pix/pix/pull/13774) Corriger le bug d'affichage de la flashcard lorsqu'elle co-existe avec un stepper horizontal (PIX-19845) 
+- [#13778](https://github.com/1024pix/pix/pull/13778) Les logs issus de child loggers ne portent pas les données de corrélation telles que le user_id ou le request_id 
+- [#13768](https://github.com/1024pix/pix/pull/13768) Ne pas vider le cache redis s'il n'est pas démarré après chaque test (PIX-19840) 
+- [#13747](https://github.com/1024pix/pix/pull/13747) Permettre au rôle CERTIF d'archiver un centre de certif (PIX-19773) 
+
+### :building_construction: Tech
+
+- [#13751](https://github.com/1024pix/pix/pull/13751) Ajouter une transaction lors de l'archivage d'organisation (PIX-19756) 
+- [#13715](https://github.com/1024pix/pix/pull/13715) Inverser la manière dont on récupère les module recommandé (Pix-19284).
+
 # [5.223.0](https://github.com/1024pix/pix/compare/v5.222.0...v5.223.0) (2025-10-02)
 
 ### :rocket: Amélioration
