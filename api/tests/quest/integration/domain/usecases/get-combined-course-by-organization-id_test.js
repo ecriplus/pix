@@ -50,7 +50,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseByOrganizationId({ organizationId });
+    const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
     expect(result).to.have.lengthOf(2);
@@ -89,7 +89,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseByOrganizationId({ organizationId });
+    const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
     expect(result).to.have.lengthOf(1);
@@ -105,7 +105,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseByOrganizationId({ organizationId });
+    const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
     expect(result).to.deep.equal([]);
@@ -128,7 +128,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseByOrganizationId({ organizationId: organizationId1 });
+    const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId: organizationId1 });
 
     // then
     expect(result).to.have.lengthOf(1);
@@ -170,7 +170,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseByOrganizationId({ organizationId });
+    const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
     const firstCourse = result.find((course) => course.id === quest1.id);

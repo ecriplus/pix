@@ -1,9 +1,9 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
-import getCombinedCourseByOrganizationId from '../../../../../src/quest/domain/usecases/get-combined-course-by-organization-id.js';
+import getCombinedCoursesByOrganizationId from '../../../../../src/quest/domain/usecases/get-combined-courses-by-organization-id.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Quest | Unit | Domain | Usecases | getCombinedCourseByOrganizationId', function () {
+describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId', function () {
   it('should return combined courses with their participations', async function () {
     // given
     const organizationId = 123;
@@ -22,7 +22,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCourseByOrganizationId',
     };
 
     // when
-    const result = await getCombinedCourseByOrganizationId({
+    const result = await getCombinedCoursesByOrganizationId({
       organizationId,
       combinedCourseRepository: combinedCourseRepositoryStub,
       combinedCourseParticipationRepository: combinedCourseParticipationRepositoryStub,
@@ -50,7 +50,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCourseByOrganizationId',
     };
 
     // when
-    const result = await getCombinedCourseByOrganizationId({
+    const result = await getCombinedCoursesByOrganizationId({
       organizationId,
       combinedCourseRepository: combinedCourseRepositoryStub,
       combinedCourseParticipationRepository: combinedCourseParticipationRepositoryStub,

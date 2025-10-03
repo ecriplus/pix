@@ -30,8 +30,8 @@ import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.
 import { findCombinedCourseByCampaignId } from './find-combined-course-by-campaign-id.js';
 import { findCombinedCourseParticipations } from './find-combined-course-participations.js';
 import { getCombinedCourseByCode } from './get-combined-course-by-code.js';
-import getCombinedCourseByOrganizationId from './get-combined-course-by-organization-id.js';
 import getCombinedCourseByQuestId from './get-combined-course-by-quest-id.js';
+import getCombinedCoursesByOrganizationId from './get-combined-courses-by-organization-id.js';
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
 import { getVerifiedCode } from './get-verified-code.js';
 import { rewardUser } from './reward-user.js';
@@ -45,7 +45,7 @@ const usecasesWithoutInjectedDependencies = {
   getCombinedCourseByCode,
   getCombinedCourseByQuestId,
   findCombinedCourseParticipations,
-  getCombinedCourseByOrganizationId,
+  getCombinedCoursesByOrganizationId,
   getQuestResultsForCampaignParticipation,
   getVerifiedCode,
   rewardUser,

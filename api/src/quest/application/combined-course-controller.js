@@ -26,7 +26,7 @@ const getById = async (request, _, dependencies = { combinedCourseDetailsSeriali
 
 const getByOrganizationId = async (request, _, dependencies = { combinedCourseListSerializer }) => {
   const organizationId = request.params.organizationId;
-  const combinedCourses = await usecases.getCombinedCourseByOrganizationId({ organizationId });
+  const combinedCourses = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
   return dependencies.combinedCourseListSerializer.serialize(combinedCourses);
 };
