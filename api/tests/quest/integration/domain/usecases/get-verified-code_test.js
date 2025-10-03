@@ -17,10 +17,8 @@ describe('Quest | Integration | Domain | Usecases | getVerifiedCode', function (
 
   it('it returns verified code for a quest', async function () {
     const organizationId = databaseBuilder.factory.buildOrganization().id;
-    const quest = databaseBuilder.factory.buildQuest({
+    const quest = databaseBuilder.factory.buildCombinedCourse({
       name: 'Combinix',
-      rewardType: null,
-      rewardId: null,
       code: 'COMBINIX1',
       organizationId,
       eligibilityRequirements: [],

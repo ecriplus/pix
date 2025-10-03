@@ -1254,14 +1254,14 @@ describe('Integration | Repository | Campaign Participation Overview', function 
           organizationId,
         });
         const expectedFirstParticipation = databaseBuilder.factory.buildCombinedCourseParticipation({
-          questId: combinedCourse.id,
+          questId: combinedCourse.questId,
           organizationLearnerId,
           userId,
           updatedAt: new Date('2022-01-01'),
           status: CombinedCourseParticipationStatuses.STARTED,
         });
         const expectedSecondParticipation = databaseBuilder.factory.buildCombinedCourseParticipation({
-          questId: secondCombinedCourse.id,
+          questId: secondCombinedCourse.questId,
           organizationLearnerId,
           userId,
           updatedAt: new Date('2022-02-02'),
