@@ -38,15 +38,15 @@ describe('Quest | Integration | Repository | combined-course', function () {
     it('should return a quest if quest id exists', async function () {
       // given
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const quest = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBINIX1', organizationId });
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBINIX1', organizationId });
       await databaseBuilder.commit();
 
       // when
-      const combinedCourseResult = await combinedCourseRepository.getById({ id: quest.id });
+      const combinedCourseResult = await combinedCourseRepository.getById({ id: combinedCourse.id });
 
       // then
       expect(combinedCourseResult).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(quest));
+      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(combinedCourse));
     });
 
     it('should throw NotFoundError if quest does not exist', async function () {

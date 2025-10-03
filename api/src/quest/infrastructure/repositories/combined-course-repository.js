@@ -19,17 +19,17 @@ const getByCode = async ({ code }) => {
 const getById = async ({ id }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quest = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourse = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('id', id)
     .whereNotNull('organizationId')
     .whereNotNull('code')
     .first();
-  if (!quest) {
+  if (!combinedCourse) {
     throw new NotFoundError(`Le parcours combiné pour l'id ${id} n'existe pas`);
   }
 
-  return new CombinedCourse(quest);
+  return new CombinedCourse(combinedCourse);
 };
 
 const findByOrganizationId = async ({ organizationId }) => {
