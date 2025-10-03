@@ -17,6 +17,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
   afterEach(function () {
     clock.restore();
   });
+
   it('should update combined course if it is completed', async function () {
     nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
     const code = 'SOMETHING';
@@ -222,11 +223,11 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
 
   it('should not throw if combinedCourseParticipation does not exists', async function () {
     const code = 'SOMETHING';
-    const { userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
+    const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
       code,
       organizationId,
       successRequirements: [
@@ -246,6 +247,10 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
 
     const result = await usecases.updateCombinedCourse({ userId, code });
 
+    const participation = await knex('combined_course_participations')
+      .where({ organizationLearnerId, questId })
+      .first();
+    expect(participation).to.be.undefined;
     expect(result).to.not.throw;
   });
 

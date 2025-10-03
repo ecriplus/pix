@@ -1,96 +1,40 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../shared/domain/errors.js';
-import { CombinedCourseDetails } from '../models/CombinedCourse.js';
-import { DataForQuest } from '../models/DataForQuest.js';
+import { COMBINED_COURSE_ITEM_TYPES } from '../models/CombinedCourseItem.js';
+import combinedCourseDetailsService from '../services/combined-course-details-service.js';
 
-export const updateCombinedCourse = withTransaction(
-  async ({
+export async function updateCombinedCourse({
+  userId,
+  code,
+  combinedCourseRepository,
+  combinedCourseParticipationRepository,
+  organizationLearnerPassageParticipationRepository,
+}) {
+  const combinedCourse = await combinedCourseRepository.getByCode({ code });
+  const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
     userId,
-    code,
-    combinedCourseRepository,
-    combinedCourseParticipationRepository,
-    questRepository,
-    eligibilityRepository,
-    campaignRepository,
-    recommendedModulesRepository,
-    organizationLearnerPassageParticipationRepository,
-  }) => {
-    const combinedCourse = await combinedCourseRepository.getByCode({ code });
-    const quest = await questRepository.getByCode({ code });
+    questId: combinedCourse.id,
+  });
 
-    let combinedCourseParticipation;
-    try {
-      combinedCourseParticipation = await combinedCourseParticipationRepository.getByUserId({
-        questId: quest.id,
-        userId,
-      });
-    } catch (err) {
-      if (!(err instanceof NotFoundError)) {
-        throw err;
-      }
-    }
+  const moduleToSynchronizeIds = combinedCourseDetails.items
+    .filter((item) => item.type === COMBINED_COURSE_ITEM_TYPES.MODULE)
+    .map((item) => item.id);
 
-    if (!combinedCourseParticipation || combinedCourseParticipation.isCompleted()) {
-      return;
-    }
+  if (!combinedCourseDetails.participation) {
+    return null;
+  }
 
-    const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest, combinedCourseParticipation);
+  await organizationLearnerPassageParticipationRepository.synchronize({
+    organizationLearnerId: combinedCourseDetails.participation.organizationLearnerId,
+    moduleIds: moduleToSynchronizeIds,
+  });
 
-    const eligibility = await eligibilityRepository.findByUserIdAndOrganizationId({
-      userId,
-      organizationId: combinedCourse.organizationId,
-      moduleIds: combinedCourseDetails.moduleIds,
+  const isCombinedCourseCompleted = await combinedCourseDetails.items.every((item) => item.isCompleted);
+
+  if (isCombinedCourseCompleted) {
+    combinedCourseDetails.participation.complete();
+    return combinedCourseParticipationRepository.update({
+      combinedCourseParticipation: combinedCourseDetails.participation,
     });
+  }
 
-    const dataForQuest = new DataForQuest({ eligibility });
-
-    const campaignParticipationIds = quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
-
-    const campaignIds = combinedCourseDetails.campaignIds;
-    const targetProfileIds = [];
-    for (const campaignId of campaignIds) {
-      const campaign = await campaignRepository.get({ id: campaignId });
-      targetProfileIds.push(campaign.targetProfileId);
-    }
-
-    let recommendableModules = [];
-    if (targetProfileIds.length > 0) {
-      recommendableModules = await recommendedModulesRepository.findIdsByTargetProfileIds({
-        targetProfileIds,
-      });
-    }
-    const recommendableModuleIds = recommendableModules.map((module) => module.moduleId);
-
-    let recommendedModulesForUser = [];
-    if (campaignParticipationIds.length > 0) {
-      recommendedModulesForUser = await recommendedModulesRepository.findIdsByCampaignParticipationIds({
-        campaignParticipationIds,
-      });
-    }
-
-    const mandatoryModuleIds = combinedCourseDetails.moduleIds.filter(
-      (moduleId) => !recommendableModuleIds.includes(moduleId),
-    );
-
-    const recommendedModuleIds = recommendedModulesForUser.map(({ moduleId }) => moduleId);
-    const moduleToSynchronizeIds = [...recommendedModuleIds, ...mandatoryModuleIds];
-
-    await organizationLearnerPassageParticipationRepository.synchronize({
-      organizationLearnerId: combinedCourseParticipation.organizationLearnerId,
-      moduleIds: moduleToSynchronizeIds,
-    });
-
-    const isCombinedCourseCompleted = combinedCourseDetails.isCompleted(
-      dataForQuest,
-      recommendableModules,
-      recommendedModulesForUser,
-    );
-
-    if (isCombinedCourseCompleted) {
-      combinedCourseParticipation.complete();
-      return combinedCourseParticipationRepository.update({ combinedCourseParticipation });
-    }
-
-    return combinedCourseParticipation;
-  },
-);
+  return combinedCourseDetails.participation;
+}

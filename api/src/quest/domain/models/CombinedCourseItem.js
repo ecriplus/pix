@@ -1,4 +1,4 @@
-export const ITEM_TYPE = {
+export const COMBINED_COURSE_ITEM_TYPES = {
   CAMPAIGN: 'CAMPAIGN',
   MODULE: 'MODULE',
   FORMATION: 'FORMATION',

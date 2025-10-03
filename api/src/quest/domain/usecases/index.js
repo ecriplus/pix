@@ -2,6 +2,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
+import combinedCourseDetailsService from '../services/combined-course-details-service.js';
 
 const dependencies = {
   accessCodeRepository: repositories.accessCodeRepository,
@@ -18,6 +19,7 @@ const dependencies = {
   userRepository: repositories.userRepository,
   targetProfileRepository: repositories.targetProfileRepository,
   organizationLearnerPassageParticipationRepository: repositories.organizationLearnerPassageParticipationRepository,
+  combinedCourseDetailsService,
   codeGenerator,
   logger,
 };
