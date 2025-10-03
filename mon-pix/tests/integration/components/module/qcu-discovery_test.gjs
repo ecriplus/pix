@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModuleQcuDiscovery from 'mon-pix/components/module/element/qcu-discovery';
@@ -81,6 +82,42 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
         element: qcuDiscoveryElement,
       });
       assert.ok(true);
+    });
+  });
+
+  module('when preview mode is enabled', function () {
+    test('should display all feedbacks, without answering', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+      const qcuDiscoveryElement = _getQcuDiscoveryElement();
+
+      // when
+      const screen = await render(<template><ModuleQcuDiscovery @element={{qcuDiscoveryElement}} /></template>);
+
+      // then
+      assert
+        .dom(screen.getByText('Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !'))
+        .exists();
+      assert
+        .dom(
+          screen.getByText(
+            'Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.',
+          ),
+        )
+        .exists();
+      assert
+        .dom(screen.getByText('Parfait pour ceux qui préfèrent un goûter plus léger, mais tout aussi délicieux.'))
+        .exists();
+      assert
+        .dom(
+          screen.getByText(
+            'Un gâteau moelleux et gourmand qui se marie parfaitement avec une tasse de thé ou de café.',
+          ),
+        )
+        .exists();
     });
   });
 });

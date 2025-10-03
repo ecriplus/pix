@@ -11,6 +11,7 @@ export default class ModuleQcuDiscovery extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
   @service passageEvents;
+  @service modulixPreviewMode;
 
   get selectedProposalFeedback() {
     return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
@@ -66,6 +67,11 @@ export default class ModuleQcuDiscovery extends ModuleElement {
               @isSelected={{this.isProposalSelected proposal.id}}
               @isDiscoveryVariant={{true}}
             />
+            {{#if this.modulixPreviewMode.isEnabled}}
+              <div class="element-qcu-discovery__feedback" role="status" tabindex="-1">
+                {{htmlUnsafe proposal.feedback.diagnosis}}
+              </div>
+            {{/if}}
           {{/each}}
         </div>
       </fieldset>
