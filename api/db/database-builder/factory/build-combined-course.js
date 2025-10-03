@@ -40,15 +40,10 @@ const buildCombinedCourse = function ({
     questId,
   };
 
-  const insertedValues = databaseBuffer.pushInsertable({
+  return databaseBuffer.pushInsertable({
     tableName: 'combined_courses',
     values,
   });
-  return {
-    ...insertedValues,
-    // TODO: remove when use combined course id instead of quest.id to retrieve combined course
-    id: questId,
-  };
 };
 
 export { buildCombinedCourse };
