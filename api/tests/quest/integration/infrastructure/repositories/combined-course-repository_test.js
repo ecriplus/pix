@@ -129,7 +129,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#getByCampaignId', function () {
-    let organizationId, quest, campaignId;
+    let organizationId, combinedCourse, campaignId;
 
     beforeEach(async function () {
       // given
@@ -139,7 +139,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       const name = 'Mon parcours Combiné';
       const description = 'Le but de ma quête';
       const illustration = 'images/illustration.svg';
-      quest = databaseBuilder.factory.buildCombinedCourse({
+      combinedCourse = databaseBuilder.factory.buildCombinedCourse({
         code,
         name,
         organizationId,
@@ -172,7 +172,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // then
       expect(combinedCourseResult).lengthOf(1);
       expect(combinedCourseResult[0]).instanceof(CombinedCourse);
-      expect(combinedCourseResult[0]).deep.equal(new CombinedCourse(quest));
+      expect(combinedCourseResult[0]).deep.equal(new CombinedCourse(combinedCourse));
     });
 
     it('should return empty array if no combined course match campaignId', async function () {
