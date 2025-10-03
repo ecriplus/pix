@@ -1,3 +1,3 @@
-export const findCombinedCourseParticipations = async ({ questId, combinedCourseParticipationRepository }) => {
-  return combinedCourseParticipationRepository.findByQuestId({ questId });
+export const findCombinedCourseParticipations = async ({ combinedCourseId, combinedCourseParticipationRepository }) => {
+  return combinedCourseParticipationRepository.findByCombinedCourseId({ combinedCourseId });
 };
