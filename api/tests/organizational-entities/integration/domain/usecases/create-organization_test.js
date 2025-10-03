@@ -13,6 +13,7 @@ describe('Integration | UseCases | create-organization', function () {
 
   beforeEach(async function () {
     superAdminUserId = databaseBuilder.factory.buildUser().id;
+    databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
     await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
   });
@@ -24,6 +25,7 @@ describe('Integration | UseCases | create-organization', function () {
       type: 'PRO',
       documentationUrl: 'https://pix.fr',
       createdBy: superAdminUserId,
+      administrationTeamId: 1234,
     });
 
     // when
@@ -50,6 +52,7 @@ describe('Integration | UseCases | create-organization', function () {
         type: Organization.types.SCO1D,
         documentationUrl: 'https://pix.fr',
         createdBy: superAdminUserId,
+        administrationTeamId: 1234,
       });
 
       // when

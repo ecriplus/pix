@@ -17,8 +17,10 @@ const organizationValidationJoiSchema = Joi.object({
   documentationUrl: Joi.string().uri().allow(null).messages({
     'string.uri': 'Le lien vers la documentation n’est pas valide.',
   }),
-  // TODO passer l'administrationTeamId en .required() avant la fin de l'Epix
-  administrationTeamId: Joi.string().allow(null),
+
+  administrationTeamId: Joi.number().required().messages({
+    'any.required': 'L’équipe en charge n’est pas renseignée.',
+  }),
 });
 
 const validate = function (organizationCreationParams) {

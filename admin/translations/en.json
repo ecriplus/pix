@@ -28,6 +28,7 @@
       "id": "id",
       "internalName": "internal name",
       "name": "name",
+      "required-field": "Required field",
       "status": "status",
       "target-profile": {
         "category": {
@@ -555,6 +556,7 @@
       },
       "creation": {
         "administration-team": {
+          "required-fields-error": "Please fill in all required fields.",
           "selector": {
             "label": "Choose an administration team",
             "placeholder": "Administration team"

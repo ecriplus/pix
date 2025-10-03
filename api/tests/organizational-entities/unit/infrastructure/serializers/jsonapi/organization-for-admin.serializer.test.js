@@ -214,7 +214,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerFirstName: organizationAttributes.dataProtectionOfficerFirstName,
         dataProtectionOfficerLastName: organizationAttributes.dataProtectionOfficerLastName,
         dataProtectionOfficerEmail: organizationAttributes.dataProtectionOfficerEmail,
-        administrationTeamId: organizationAttributes.administrationTeamId,
+        administrationTeamId: parseInt(organizationAttributes.administrationTeamId),
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
             active: organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.active,

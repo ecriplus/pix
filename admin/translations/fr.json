@@ -28,6 +28,7 @@
       "id": "ID",
       "internalName": "nom interne",
       "name": "nom",
+      "required-field": "Champ obligatoire",
       "status": "statut",
       "target-profile": {
         "category": {
@@ -556,6 +557,7 @@
       },
       "creation": {
         "administration-team": {
+          "required-fields-error": "Veuillez remplir tous les champs obligatoires.",
           "selector": {
             "label": "Sélectionner une équipe en charge",
             "placeholder": "Équipe en charge"
