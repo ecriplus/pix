@@ -7,6 +7,7 @@ import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-pa
 import { getDataBuffer } from '../../../shared/infrastructure/utils/buffer.js';
 import { OrganizationBatchUpdateDTO } from '../dtos/OrganizationBatchUpdateDTO.js';
 import {
+  AdministrationTeamNotFound,
   DpoEmailInvalid,
   OrganizationBatchUpdateError,
   OrganizationNotFound,
@@ -56,6 +57,10 @@ const CSV_HEADER = {
       name: 'DPO E-mail',
       property: 'dataProtectionOfficerEmail',
     }),
+    new CsvColumn({
+      name: 'Administration Team ID',
+      property: 'administrationTeamId',
+    }),
   ],
 };
 
@@ -64,9 +69,14 @@ const CSV_HEADER = {
  * @param {Object} params
  * @param {string} params.filePath
  * @param {OrganizationForAdminRepository} params.organizationForAdminRepository
+ * @param {AdministrationTeamRepository} params.administrationTeamRepository
  * @return {Promise<void>}
  */
-export const updateOrganizationsInBatch = async function ({ filePath, organizationForAdminRepository }) {
+export const updateOrganizationsInBatch = async function ({
+  filePath,
+  organizationForAdminRepository,
+  administrationTeamRepository,
+}) {
   const organizationBatchUpdateDtos = await _getCsvData(filePath);
 
   if (organizationBatchUpdateDtos.length === 0) return;
@@ -74,7 +84,11 @@ export const updateOrganizationsInBatch = async function ({ filePath, organizati
   await DomainTransaction.execute(async () => {
     await Promise.all(
       organizationBatchUpdateDtos.map(async (organizationBatchUpdateDto) => {
-        await checkOrganizationUpdate(organizationBatchUpdateDto, organizationForAdminRepository);
+        await _checkOrganizationUpdate({
+          organizationBatchUpdateDto,
+          organizationForAdminRepository,
+          administrationTeamRepository,
+        });
 
         try {
           const organization = await organizationForAdminRepository.get({
@@ -93,7 +107,11 @@ export const updateOrganizationsInBatch = async function ({ filePath, organizati
   });
 };
 
-async function checkOrganizationUpdate(organizationBatchUpdateDto, organizationForAdminRepository) {
+async function _checkOrganizationUpdate({
+  organizationBatchUpdateDto,
+  organizationForAdminRepository,
+  administrationTeamRepository,
+}) {
   const organization = await organizationForAdminRepository.exist({ organizationId: organizationBatchUpdateDto.id });
   if (!organization) {
     throw new OrganizationNotFound({
@@ -125,6 +143,18 @@ async function checkOrganizationUpdate(organizationBatchUpdateDto, organizationF
       meta: {
         organizationId: organizationBatchUpdateDto.id,
         value: organizationBatchUpdateDto.dataProtectionOfficerEmail,
+      },
+    });
+  }
+
+  const administrationTeam = await administrationTeamRepository.getById(
+    organizationBatchUpdateDto.administrationTeamId,
+  );
+
+  if (!administrationTeam) {
+    throw new AdministrationTeamNotFound({
+      meta: {
+        administrationTeamId: organizationBatchUpdateDto.administrationTeamId,
       },
     });
   }
