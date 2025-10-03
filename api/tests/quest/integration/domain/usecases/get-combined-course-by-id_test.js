@@ -1,16 +1,14 @@
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import getCombinedCourseByQuestId from '../../../../../src/quest/domain/usecases/get-combined-course-by-quest-id.js';
-import * as combinedCourseRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-repository.js';
-import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
+import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Quest | Integration | Domain | Usecases | getCombinedCourseByQuestId', function () {
+describe('Quest | Integration | Domain | Usecases | getCombinedCourseById', function () {
   it('should return a CombinedCourseDetails instance with quest and combined course data', async function () {
     // given
     const organizationId = databaseBuilder.factory.buildOrganization().id;
 
-    const questId = databaseBuilder.factory.buildQuest({
+    const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
       name: 'Test Combined Course',
       description: 'A test combined course description',
       illustration: 'https://example.com/image.png',
@@ -34,22 +32,18 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseByQuestId',
           requirement_type: 'campaignParticipations',
         },
       ],
-      rewardType: 'attestations',
-      rewardId: null,
     }).id;
 
     await databaseBuilder.commit();
 
     // when
-    const result = await getCombinedCourseByQuestId({
-      questId,
-      questRepository,
-      combinedCourseRepository,
+    const result = await usecases.getCombinedCourseById({
+      combinedCourseId,
     });
 
     // then
     expect(result).to.be.instanceOf(CombinedCourseDetails);
-    expect(result.id).to.equal(questId);
+    expect(result.id).to.equal(combinedCourseId);
     expect(result.name).to.equal('Test Combined Course');
     expect(result.description).to.equal('A test combined course description');
     expect(result.illustration).to.equal('https://example.com/image.png');
@@ -59,26 +53,9 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseByQuestId',
   });
 
   it('should throw if quest is not combined course', async function () {
-    // given
-    const questId = databaseBuilder.factory.buildQuest({
-      name: 'Test Combined Course',
-      description: 'A test combined course description',
-      illustration: 'https://example.com/image.png',
-      code: null,
-      organizationId: null,
-      eligibilityRequirements: [],
-      successRequirements: [],
-      rewardType: null,
-      rewardId: null,
-    }).id;
-
-    await databaseBuilder.commit();
-
     // when
-    const error = await catchErr(getCombinedCourseByQuestId)({
-      questId,
-      questRepository,
-      combinedCourseRepository,
+    const error = await catchErr(usecases.getCombinedCourseById)({
+      combinedCourseId: 12,
     });
 
     // then
