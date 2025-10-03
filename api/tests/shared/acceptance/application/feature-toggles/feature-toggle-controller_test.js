@@ -29,6 +29,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'is-self-account-deletion-enabled': true,
             'is-text-to-speech-button-enabled': true,
             'use-locale': false,
+            'use-pix-orga-new-auth-design': false,
           },
         },
       };
