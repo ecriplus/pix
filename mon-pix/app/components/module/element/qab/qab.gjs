@@ -12,7 +12,7 @@ import { htmlUnsafe } from '../../../../helpers/html-unsafe';
 import ModuleElement from '../module-element';
 
 const NEXT_CARD_REMOVE_DELAY = 400;
-const NEXT_CARD_TRANSITION_DELAY = 1600;
+const NEXT_CARD_TRANSITION_DELAY = 400;
 export const NEXT_CARD_DELAY = NEXT_CARD_TRANSITION_DELAY + NEXT_CARD_REMOVE_DELAY;
 
 export default class ModuleQab extends ModuleElement {
