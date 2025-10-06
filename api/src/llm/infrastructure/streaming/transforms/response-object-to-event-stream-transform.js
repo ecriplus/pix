@@ -24,6 +24,7 @@ export function getTransform(streamCapture) {
 
       if (wasModerated) {
         streamCapture.wasModerated = true;
+        streamCapture.done = true;
         data += events.getMessageModerated();
       }
 
@@ -34,6 +35,7 @@ export function getTransform(streamCapture) {
 
       if (error) {
         streamCapture.errorOccurredDuringStream = error;
+        streamCapture.done = true;
         data += events.getError();
       }
 

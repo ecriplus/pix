@@ -22,6 +22,7 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  * @property {number} outputTokens
  * @property {boolean} wasModerated
  * @property {string=} errorOccurredDuringStream
+ * @property {boolean} done - Indicates whether all data have been received from ChatPix or not
  */
 
 /**
@@ -64,6 +65,7 @@ export async function fromLLMResponse({
     inputTokens: 0,
     outputTokens: 0,
     wasModerated: false,
+    done: !llmResponse,
   };
   pipeline(
     readableStream,
@@ -72,8 +74,8 @@ export async function fromLLMResponse({
     sendDebugDataTransform.getTransform(streamCapture, shouldSendDebugData),
     writableStream,
     async (err) => {
-      if (err) {
-        logger.error({ err, prompt }, 'error in pipeline');
+      if (err || !streamCapture.done || streamCapture.errorOccurredDuringStream) {
+        logger.error({ err, prompt }, 'error in stream');
         if (!writableStream.closed && !writableStream.errored) {
           writableStream.end(events.getError());
         }
