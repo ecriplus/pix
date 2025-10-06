@@ -3,7 +3,9 @@ import { RedisClient } from '../utils/RedisClient.js';
 
 class RedisMutex {
   constructor({ redisUrl }) {
-    this._client = new RedisClient(redisUrl, { name: 'mutex', prefix: 'mutex:' });
+    if (redisUrl) {
+      this._client = new RedisClient(redisUrl, { name: 'mutex', prefix: 'mutex:' });
+    }
   }
 
   /**
@@ -27,7 +29,7 @@ class RedisMutex {
   }
 
   async quit() {
-    await this._client.quit();
+    await this._client?.quit();
   }
 
   async clearAll() {
@@ -45,7 +47,7 @@ export function quitMutex() {
 }
 
 export function clearMutex() {
-  const status = redisMutex._client.status;
+  const status = redisMutex._client?.status;
   if (status === 'ready') {
     return redisMutex.clearAll();
   }
