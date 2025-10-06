@@ -120,6 +120,7 @@ async function deserializeForOrganizationsImport(file) {
     'DPOFirstName',
     'DPOLastName',
     'DPOEmail',
+    'administrationTeamId',
   ];
   const batchOrganizationOptionsWithHeader = {
     skipEmptyLines: true,
@@ -160,6 +161,9 @@ async function deserializeForOrganizationsImport(file) {
         }
         if (columnName === 'locale') {
           value = 'fr-fr';
+        }
+        if (columnName === 'adminstrationTeamId') {
+          value = parseInt(value, 10);
         }
       }
       return value;
