@@ -17,7 +17,10 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseStatistics'
       firstName: 'John',
       lastName: 'Qwerty',
     });
-    const questId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1', organizationId }).questId;
+    const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
+      code: 'COMBI1',
+      organizationId,
+    });
     databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId,
@@ -39,12 +42,12 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseStatistics'
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getCombinedCourseStatistics({ questId });
+    const result = await usecases.getCombinedCourseStatistics({ combinedCourseId });
 
     // then
     expect(result).instanceOf(CombinedCourseStatistics);
     expect(result).deep.equal({
-      id: questId,
+      id: combinedCourseId,
       participationsCount: 2,
       completedParticipationsCount: 1,
     });
