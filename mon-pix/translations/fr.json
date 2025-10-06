@@ -1978,7 +1978,7 @@
       "forgotten-password": "Mot de passe oublié ?",
       "title": "Connexion"
     },
-    "sign-up": {
+    "signup": {
       "actions": {
         "login": "Se connecter",
         "sign-up-on-pix": "S'inscrire sur Pix",
