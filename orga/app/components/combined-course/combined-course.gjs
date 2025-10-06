@@ -1,3 +1,4 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIndicatorCard from '@1024pix/pix-ui/components/pix-indicator-card';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
@@ -30,6 +31,10 @@ export default class CombinedCourse extends Component {
     ];
   }
 
+  getCampaignIndex(index) {
+    return index + 1;
+  }
+
   <template>
     <PageTitle>
       <:breadcrumb>
@@ -40,9 +45,22 @@ export default class CombinedCourse extends Component {
         <span class="page-title__name">{{@model.name}}</span>
       </:title>
       <:subtitle>
-
-        <p class="campaign-page__page-subtext">{{t "pages.combined-course.introduction"}}</p>
-
+        <div class="combined-course-page__header">
+          <p class="combined-course-page__header-body">{{t "pages.combined-course.introduction"}}</p>
+          {{#if @model.campaignIds.length}}
+            <div class="combined-course-page__campaigns">
+              {{#each @model.campaignIds as |campaignId index|}}
+                <PixButtonLink @route="authenticated.campaigns.campaign" @model={{campaignId}} @variant="primary">
+                  {{t
+                    "pages.combined-course.campaigns"
+                    count=@model.campaignIds.length
+                    index=(this.getCampaignIndex index)
+                  }}
+                </PixButtonLink>
+              {{/each}}
+            </div>
+          {{/if}}
+        </div>
       </:subtitle>
       <:tools>
         <dl class="campaign-header-title__details">

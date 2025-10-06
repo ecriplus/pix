@@ -1,7 +1,25 @@
+@use 'pix-design-tokens/typography';
+
 .combined-course-page {
   &__statistics {
     display: flex;
     gap: var(--pix-spacing-4x);
     margin-bottom: var(--pix-spacing-8x);
+  }
+
+  &__header {
+    display: flex;
+    gap: var(--pix-spacing-4x);
+    justify-content: space-between;
+  }
+
+  &__header-body {
+    @extend %pix-body-s;
+  }
+
+  &__campaigns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
   }
 }

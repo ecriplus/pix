@@ -1023,6 +1023,7 @@
       "title": "Certification results"
     },
     "combined-course": {
+      "campaigns": "{count, plural, =1 {See campaign details} other {See details of campaign no. {index}}}",
       "introduction": "text d'intro",
       "statistics": {
         "completed-participations": "Completed participations",

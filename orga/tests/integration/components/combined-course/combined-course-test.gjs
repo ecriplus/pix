@@ -10,7 +10,7 @@ module('Integration | Component | CombinedCourse', function (hooks) {
     id: 1,
     name: 'Parcours MagiPix',
     code: '1234PixTest',
-    campaignIds: [123],
+    campaignIds: [123, 234],
     combinedCourseParticipations: [
       {
         id: 123,
@@ -41,6 +41,53 @@ module('Integration | Component | CombinedCourse', function (hooks) {
     assert.ok(within(title).getByRole('img', { name: t('components.activity-type.explanation.COMBINED_COURSE') }));
     assert.ok(within(title).getByText('Parcours MagiPix'));
     assert.ok(screen.getByText('1234PixTest'));
+  });
+
+  module('combine course campaign link', function () {
+    test('it should display a link button for each associated campaign', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        name: 'Parcours MagiPix',
+        code: '1234PixTest',
+        campaignIds: [123, 234],
+        combinedCourseParticipations: [
+          store.createRecord('combined-course-participation', {
+            id: 123,
+            firstName: 'TOTO',
+            lastName: 'Cornichon',
+            status: 'STARTED',
+          }),
+        ],
+      });
+
+      // when
+      const screen = await render(<template><CombinedCourse @model={{combinedCourse}} /></template>);
+
+      // then
+      const link1 = screen.getByRole('link', { name: t('pages.combined-course.campaigns', { count: 2, index: 1 }) });
+      assert.ok(link1.getAttribute('href').endsWith('campagnes/123'));
+      const link2 = screen.getByRole('link', { name: t('pages.combined-course.campaigns', { count: 2, index: 2 }) });
+      assert.ok(link2.getAttribute('href').endsWith('campagnes/234'));
+    });
+    test('it should not display a campaign link button if no associated campaign', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        name: 'Parcours MagiPix',
+        code: '1234PixTest',
+        campaignIds: [],
+        combinedCourseParticipations: [],
+      });
+
+      // when
+      const screen = await render(<template><CombinedCourse @model={{combinedCourse}} /></template>);
+
+      // then
+      assert.notOk(screen.queryByRole('link', { name: t('pages.combined-course.campaigns', { count: 0, index: 0 }) }));
+    });
   });
 
   test('it should have a caption to describe the table ', async function (assert) {
