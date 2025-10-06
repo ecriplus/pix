@@ -15,6 +15,7 @@ export default class ModuleGrain extends Component {
   @service modulixAutoScroll;
   @service intl;
   @tracked answeredElements = new TrackedSet();
+  @tracked isSkipButtonDisabled = false;
 
   grain = this.args.grain;
 
@@ -64,6 +65,11 @@ export default class ModuleGrain extends Component {
     } else {
       return 'lesson';
     }
+  }
+
+  @action
+  updateSkipButton(value) {
+    this.isSkipButtonDisabled = value;
   }
 
   @action
@@ -284,6 +290,7 @@ export default class ModuleGrain extends Component {
                   @getLastCorrectionForElement={{this.getLastCorrectionForElement}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
+                  @updateSkipButton={{this.updateSkipButton}}
                 />
               </div>
             {{else if (eq component.type "stepper")}}
@@ -301,6 +308,7 @@ export default class ModuleGrain extends Component {
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
                   @direction={{this.stepperDirection}}
+                  @updateSkipButton={{this.updateSkipButton}}
                 />
               </div>
             {{/if}}
@@ -310,7 +318,12 @@ export default class ModuleGrain extends Component {
 
       {{#if this.shouldDisplaySkipButton}}
         <footer class="grain-card__footer">
-          <PixButton @variant="tertiary" @triggerAction={{@onGrainSkip}} @iconAfter="arrowBottom">
+          <PixButton
+            @variant="tertiary"
+            @triggerAction={{@onGrainSkip}}
+            @iconAfter="arrowBottom"
+            @isDisabled={{this.isSkipButtonDisabled}}
+          >
             {{this.skipButtonLabel}}
           </PixButton>
         </footer>

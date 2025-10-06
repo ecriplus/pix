@@ -3,6 +3,7 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { click, find, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import { VERIFY_RESPONSE_DELAY as QCM_VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcm';
 import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { module, test } from 'qunit';
@@ -571,6 +572,89 @@ module('Integration | Component | Module | Grain', function (hooks) {
           assert
             .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.grain.skipActivity') }))
             .doesNotExist();
+        });
+      });
+    });
+
+    module('when element is a qcm', function (hooks) {
+      let clock;
+      hooks.beforeEach(function () {
+        clock = sinon.useFakeTimers();
+      });
+      hooks.afterEach(function () {
+        clock.restore();
+      });
+      module('when verify button is clicked with answers', function () {
+        test('should disable skip activity button', async function (assert) {
+          // given
+          const store = this.owner.lookup('service:store');
+          const element = {
+            type: 'qcm',
+            proposals: [
+              { id: '1', content: 'checkbox1' },
+              { id: '2', content: 'checkbox2' },
+              { id: '3', content: 'checkbox3' },
+            ],
+            feedbacks: {
+              valid: {
+                state: 'Correct!',
+                diagnosis: '<p>Good job!</p>',
+              },
+              invalid: {
+                state: 'Pas Bravo!',
+                diagnosis: '<p>Vous nous avez mal cernés</p>',
+              },
+            },
+            solutions: ['1', '2'],
+            isAnswerable: true,
+          };
+          const grain = {
+            title: 'Grain title',
+            components: [{ type: 'element', element }],
+          };
+          this.set('grain', grain);
+          const passage = store.createRecord('passage');
+          this.set('passage', passage);
+
+          // when
+          const screen = await render(hbs`
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+          await click(screen.getByLabelText('checkbox1'));
+          await click(screen.getByLabelText('checkbox2'));
+          const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+          await click(verifyButton);
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
+
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
+        });
+      });
+
+      module('when verify button is clicked with no selected answers', function () {
+        test('should first disable, and then enable skip activity button', async function (assert) {
+          // given
+          const store = this.owner.lookup('service:store');
+          const element = { type: 'qcm', isAnswerable: true };
+          const grain = {
+            title: 'Grain title',
+            components: [{ type: 'element', element }],
+          };
+          this.set('grain', grain);
+          const passage = store.createRecord('passage');
+          this.set('passage', passage);
+
+          // when
+          const screen = await render(hbs`
+            <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
+          const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
+          await click(verifyButton);
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
+
+          // then
+          assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
+
+          assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).doesNotHaveAttribute('aria-disabled');
         });
       });
     });

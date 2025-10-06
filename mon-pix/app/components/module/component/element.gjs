@@ -62,6 +62,7 @@ export default class ModulixElement extends Component {
         @onAnswer={{@onElementAnswer}}
         @onRetry={{@onElementRetry}}
         @correction={{this.getLastCorrectionForElement @element}}
+        @updateSkipButton={{@updateSkipButton}}
       />
     {{else if (eq @element.type "qrocm")}}
       <QrocmElement
