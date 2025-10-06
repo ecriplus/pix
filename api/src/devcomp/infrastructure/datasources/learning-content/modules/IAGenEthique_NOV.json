@@ -473,15 +473,9 @@
       "type": "practise",
       "grains": [
         {
-          "id": "4e3f58a6-4bfa-479a-acd7-8d3ce99307bb",
-          "type": "lesson",
-          "title": "",
-          "components": []
-        },
-        {
           "id": "69e793b5-9488-47b9-b288-3bf633c6391e",
           "type": "activity",
-          "title": "Activité #1 : Avez vous compris pourquoi l’IA réutilise des données ?",
+          "title": "Activité : Avez vous compris pourquoi l’IA réutilise des données ?",
           "components": [
             {
               "type": "element",
@@ -518,11 +512,18 @@
                   "2"
                 ]
               }
-            },
+            }
+          ]
+        },
+        {
+          "id": "43ab6861-e7a5-49fe-babb-b68b471777d7",
+          "type": "activity",
+          "title": "Activité : identifier les prompt qui causent un soucis vis à vis des données confidentielles",
+          "components": [
             {
               "type": "element",
               "element": {
-                "id": "4b981fff-99d4-400a-b863-d3b328e8b9eb",
+                "id": "dee26d54-a074-4904-9180-38800a025450",
                 "type": "qab",
                 "instruction": "<p>Lesquels de ces prompts sont respectueux de la confidentialité ?&nbsp;</p>",
                 "cards": [
@@ -586,45 +587,76 @@
                   "diagnosis": ""
                 }
               }
+            }
+          ]
+        },
+        {
+          "id": "42850024-2a3a-4e13-983d-ec4839ef6ca8",
+          "type": "activity",
+          "title": "Activité : Le cas GitHub Copilot",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "935a2724-84d4-4cd0-b320-9a79ab743547",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 2,
+                  "title": "💻 GitHub Copilot épinglé pour des fuites de mots de passe",
+                  "author": "Rédaction Tech",
+                  "date": "6 octobre 2025",
+                  "paragraphs": [
+                    "Une équipe de chercheurs en cybersécurité a mis au jour une faille inquiétante dans GitHub Copilot, l’assistant de programmation basé sur l’intelligence artificielle. En analysant le code généré par l’outil, ils ont réussi à extraire plus de 2 700 mots de passe, dont certains étaient encore actifs et exploitables.",
+                    "Ces données provenaient de fragments de code publics réutilisés par Copilot lors de la génération automatique. GitHub assure avoir renforcé ses filtres pour limiter ces risques, mais les spécialistes préviennent : {{highlightedSentence}}. Cette affaire souligne la nécessité d’une vigilance accrue face aux outils d’IA générative."
+                  ],
+                  "highlightedSentence": "le risque de fuites accidentelles demeure bien réel",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
+              }
             },
             {
               "type": "element",
               "element": {
-                "id": "ed2eba8e-37ff-4188-9b54-fac4da5822f5",
-                "type": "qcm",
-                "instruction": "<p>GitHub Copilot, un outil IA pour aider à programmer, a parfois proposé du code contenant des codes confidentiels ou mots de passe.</p><p>En 2025, des chercheurs ont réussi à en extraire plus de 2 700 mot de passe, dont certains encore utilisables. </p><p>Ces fuites involontaires représentent un vrai danger pour la confidentialité et la sécurité. </p><p>GitHub a mis en place des filtres pour limiter ce risque mais le risque de fuites reste réel pour la sécurité.</p><p><strong>D’après cet exemple de GitHub Copilot sur les risques liés aux IA gratuites ou grand public ?</strong></p>",
+                "id": "2f2d99a4-0f6e-4f27-bbad-72cf7937ecc8",
+                "type": "qcu",
+                "instruction": "<p><strong>D’après cet exemple de GitHub Copilot sur les risques liés aux IA gratuites ou grand public ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Elles dévoilent parfois des données sensibles.</p>"
+                    "content": "<p>Elles dévoilent parfois des données sensibles.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse</p>",
+                      "diagnosis": "<p>C’est exactement ce que montre l’exemple de GitHub Copilot : en générant du code, l’IA a parfois reproduit des éléments confidentiels comme des mots de passe. Cela illustre le risque de fuite de données sensibles avec les outils d’IA grand public.</p>"
+                    }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Elles ne sont jamais capables de générer du code utile.</p>"
+                    "content": "<p>Elles ne sont jamais capables de générer du code utile.</p>",
+                    "feedback": {
+                      "state": "<p>Incorrect</p>",
+                      "diagnosis": "<p>Au contraire, GitHub Copilot est très performant pour aider les développeurs à produire du code rapidement. Le problème ne vient pas de son utilité, mais des risques liés à la confidentialité des données qu’il peut réutiliser sans discernement.</p>"
+                    }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Le code informatique généré contient parfois des bugs</p>"
+                    "content": "<p>Le code informatique généré contient parfois des bugs</p>",
+                    "feedback": {
+                      "state": "<p>Partiellement vrai, mais hors sujet</p>",
+                      "diagnosis": "<p>Oui, comme tout outil automatisé, Copilot peut générer du code imparfait. Cependant, l’exemple mentionné ne parle pas de bugs, mais de fuites de mots de passe. Le risque principal évoqué concerne la sécurité, pas la qualité du code.</p>"
+                    }
                   },
                   {
                     "id": "4",
-                    "content": "<p>On peut perdre toutes nos données par erreur.</p>"
+                    "content": "<p>On peut perdre toutes nos données par erreur.</p>",
+                    "feedback": {
+                      "state": "<p>Incorrect</p>",
+                      "diagnosis": "<p>L’exemple de GitHub Copilot ne mentionne pas de perte de données, mais plutôt une divulgation involontaire de données confidentielles. La perte totale de données serait un autre type de problème, non évoqué ici.</p>"
+                    }
                   }
                 ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bravo !&nbsp;</p>",
-                    "diagnosis": "<p>L’exemple de GitHub montre que les IA généralistes peuvent laisser fuiter des <strong>données confidentielles</strong> (mots de passe etc.).</p><br>"
-                  },
-                  "invalid": {
-                    "state": "<p>Pas vraiment&nbsp;</p>",
-                    "diagnosis": "<p>L’exemple de GitHub montre que les IA généralistes peuvent laisser fuiter des <strong>données confidentielles</strong> (mots de passe etc.).<br><br></p>"
-                  }
-                },
-                "solutions": [
-                  "",
-                  ""
-                ]
+                "solution": "1"
               }
             }
           ]
