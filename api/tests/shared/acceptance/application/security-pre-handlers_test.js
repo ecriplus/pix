@@ -44,7 +44,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
 
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
@@ -620,7 +620,7 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
       const code = 'COMBINIX1';
       userId = databaseBuilder.factory.buildUser().id;
       organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
 
       server.route({
         method: 'GET',

@@ -10,7 +10,7 @@ describe('Acceptance | Quest | Application | combined-course-api', function () {
     organizationId = databaseBuilder.factory.buildOrganization().id;
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     combinedCourseName = 'Mon parcours Combiné';
-    combinedCourseId = databaseBuilder.factory.buildQuestForCombinedCourse({
+    combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: combinedCourseName,
       organizationId,
@@ -60,7 +60,7 @@ describe('Acceptance | Quest | Application | combined-course-api', function () {
     //given
     const organizationId = databaseBuilder.factory.buildOrganization().id;
 
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    databaseBuilder.factory.buildCombinedCourse({
       code: 'QWERTY123',
       name: combinedCourseName,
       organizationId,

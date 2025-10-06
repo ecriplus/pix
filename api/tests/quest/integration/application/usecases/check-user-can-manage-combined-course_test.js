@@ -8,7 +8,7 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId }).id;
+      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       databaseBuilder.factory.buildMembership({ userId, organizationId });
       await databaseBuilder.commit();
 
@@ -25,7 +25,7 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId }).id;
+      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       await databaseBuilder.commit();
 
       // when
@@ -58,7 +58,7 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId }).id;
+      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       databaseBuilder.factory.buildMembership({ userId, organizationId, disabledAt: new Date() });
       await databaseBuilder.commit();
 

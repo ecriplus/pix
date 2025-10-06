@@ -648,7 +648,7 @@ describe('Integration | UseCases | delete-campaign', function () {
       buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
       const campaignId = buildCampaign({ organizationId }).id;
 
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,

@@ -1072,7 +1072,7 @@ describe('Integration | Repository | Campaign-Report', function () {
         // given
         const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
         const campaignNotInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
-        databaseBuilder.factory.buildQuestForCombinedCourse({
+        databaseBuilder.factory.buildCombinedCourse({
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId,

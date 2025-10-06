@@ -40,7 +40,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       campaignParticipationId,
     });
     databaseBuilder.factory.buildPassage({ userId, moduleId, terminatedAt: new Date() });
-    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
       successRequirements: [
@@ -114,7 +114,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     databaseBuilder.factory.buildPassage({ userId, moduleId, terminatedAt: new Date() });
     databaseBuilder.factory.buildPassage({ userId, module2Id, terminatedAt: null });
 
-    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
       successRequirements: [
@@ -189,7 +189,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
-    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
       successRequirements: [
@@ -227,7 +227,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
-    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
       successRequirements: [
@@ -260,7 +260,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
-    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
       successRequirements: [

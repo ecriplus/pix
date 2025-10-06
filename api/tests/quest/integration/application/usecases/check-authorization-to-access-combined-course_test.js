@@ -9,7 +9,7 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
       const code = 'COMBINIX1';
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
       databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
       await databaseBuilder.commit();
 
@@ -27,7 +27,7 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
       const code = 'COMBINIX1';
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
       await databaseBuilder.commit();
 
       // when
@@ -41,7 +41,7 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
       const code = 'COMBINIX1';
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization({ isManagingStudents: true }).id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
       await databaseBuilder.commit();
 
       // when
@@ -60,7 +60,7 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
         organizationId,
         featureId: importFeature.id,
       });
-      databaseBuilder.factory.buildQuestForCombinedCourse({ code, organizationId });
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
       await databaseBuilder.commit();
 
       // when

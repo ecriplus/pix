@@ -1453,7 +1453,7 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return true user linked to a combined course', async function () {
       const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
 
-      const questId = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const questId = databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
         rewardType: null,
         rewardId: null,
@@ -1520,7 +1520,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         organizationLearnerId,
         userId,
       });
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         successRequirements: [
           {
             requirement_type: 'campaignParticipations',
