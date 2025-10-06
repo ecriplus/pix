@@ -24,7 +24,6 @@ export function getTransform(streamCapture) {
 
       if (wasModerated) {
         streamCapture.wasModerated = true;
-        streamCapture.done = true;
         data += events.getMessageModerated();
       }
 
@@ -35,13 +34,13 @@ export function getTransform(streamCapture) {
 
       if (error) {
         streamCapture.errorOccurredDuringStream = error;
-        streamCapture.done = true;
         data += events.getError();
       }
 
       if (usage) {
         streamCapture.inputTokens = usage?.input_tokens ?? streamCapture.inputTokens;
         streamCapture.outputTokens = usage?.output_tokens ?? streamCapture.outputTokens;
+        streamCapture.done = true;
       }
 
       if (data) callback(null, data);
