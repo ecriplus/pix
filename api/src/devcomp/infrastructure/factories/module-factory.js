@@ -17,6 +17,7 @@ import { Card } from '../../domain/models/element/flashcards/Card.js';
 import { Flashcards } from '../../domain/models/element/flashcards/Flashcards.js';
 import { Image } from '../../domain/models/element/Image.js';
 import { QAB } from '../../domain/models/element/qab/QAB.js';
+import { QABCard } from '../../domain/models/element/qab/QABCard.js';
 import { QCM } from '../../domain/models/element/QCM.js';
 import { QCU } from '../../domain/models/element/QCU.js';
 import { QCUDeclarative } from '../../domain/models/element/QCU-declarative.js';
@@ -236,12 +237,23 @@ export class ModuleFactory {
     });
   }
 
-  static #buildQAB(element) {
+  static async #buildQAB(element) {
     return new QAB({
       id: element.id,
       type: element.type,
       instruction: element.instruction,
-      cards: element.cards,
+      cards: await Promise.all(
+        element.cards.map(async (card) => {
+          return new QABCard({
+            ...card,
+            image: {
+              altText: card.image?.altText,
+              url: card.image?.url,
+              information: card.image?.url ? await getAssetInfos(card.image.url) : {},
+            },
+          });
+        }),
+      ),
       feedback: element.feedback,
     });
   }

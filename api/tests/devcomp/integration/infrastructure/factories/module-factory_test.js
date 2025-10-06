@@ -1222,6 +1222,9 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
 
       it('should instantiate a Module with a ComponentElement which contains a QAB Element', async function () {
         // given
+        nock('https://assets.pix.org')
+          .head('/modulix/didacticiel/ordi-spatial.svg')
+          .reply(200, { width: 100, height: 100, type: 'vector' });
         const moduleData = {
           id: '6282925d-4775-4bca-b513-4c3009ec5886',
           slug: 'title',
@@ -1256,6 +1259,10 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                           {
                             id: '4420c9f6-ae21-4401-a16c-41296d898a66',
                             text: 'La Terre est plus proche du Soleil que Mars.',
+                            image: {
+                              url: 'https://assets.pix.org/modulix/didacticiel/ordi-spatial.svg',
+                              altText: 'coucou',
+                            },
                             proposalA: 'Vrai',
                             proposalB: 'Faux',
                             solution: 'B',
@@ -1284,7 +1291,9 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         const module = await ModuleFactory.build(moduleData);
 
         // then
-        expect(module.sections[0].grains[0].components[0].element).to.be.instanceOf(QAB);
+        const qab = module.sections[0].grains[0].components[0].element;
+        expect(qab).to.be.instanceOf(QAB);
+        expect(qab.cards[0].image.information).to.not.be.undefined;
       });
     });
 
