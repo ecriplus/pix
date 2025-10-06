@@ -5,7 +5,12 @@ import { t } from 'ember-intl';
   <div class="element-flashcards-intro-card">
     {{#if @introImage}}
       <div class="element-flashcards-intro-card__image">
-        <img src={{@introImage.url}} alt="" />
+        <img
+          src={{@introImage.url}}
+          width={{@introImage.information.width}}
+          height={{@introImage.information.height}}
+          alt=""
+        />
       </div>
     {{/if}}
 
