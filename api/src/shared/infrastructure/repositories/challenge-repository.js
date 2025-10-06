@@ -134,7 +134,7 @@ export async function findActiveFlashCompatible({
   if (complementaryCertificationKey && complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA) {
     const version = getVersionNumber(date);
 
-    challengeDtos = await _findChallengesForComplementaryCertification({
+    challengeDtos = await _findValidChallengesForComplementaryCertification({
       complementaryCertificationKey,
       cacheKey,
       version,
@@ -148,7 +148,7 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, version }) {
+async function _findValidChallengesForComplementaryCertification({ complementaryCertificationKey, cacheKey, version }) {
   const { closestVersion } = await knex('certification-frameworks-challenges')
     .where({ complementaryCertificationKey })
     .andWhere('version', '<=', version)
@@ -169,9 +169,10 @@ async function _findChallengesForComplementaryCertification({ complementaryCerti
   };
 
   const challengeDtos = await getInstance().find(cacheKey, findCallback);
+  const validChallengeDtos = challengeDtos.filter((challenge) => challenge.status === VALIDATED_STATUS);
 
   return decorateWithCertificationCalibration({
-    challengeDtos,
+    validChallengeDtos,
     complementaryCertificationChallenges,
   });
 }
@@ -192,8 +193,8 @@ function _findChallengesForCoreCertification({ locale, accessibilityAdjustmentNe
   return getInstance().find(cacheKey, findCallback);
 }
 
-function decorateWithCertificationCalibration({ challengeDtos, complementaryCertificationChallenges }) {
-  return challengeDtos.map((challenge) => {
+function decorateWithCertificationCalibration({ validChallengeDtos, complementaryCertificationChallenges }) {
+  return validChallengeDtos.map((challenge) => {
     const { discriminant, difficulty } = complementaryCertificationChallenges.find(
       ({ challengeId }) => challengeId === challenge.id,
     );
