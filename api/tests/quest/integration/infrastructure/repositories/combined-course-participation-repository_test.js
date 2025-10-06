@@ -204,15 +204,21 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
-  describe('#findByQuestIds', function () {
+  describe('#findByCombinedCourseIds', function () {
     it('should return participations for given quest IDs', async function () {
       // given
       const learner1 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Alice', lastName: 'Azerty' });
       const learner2 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Bob', lastName: 'Bernard' });
 
-      const questId1 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
-      const questId2 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
-      const questId3 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const { id: combinedCourseId1, questId: questId1 } = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBI1',
+      });
+      const { id: combinedCourseId2, questId: questId2 } = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBI2',
+      });
+      const { questId: questId3 } = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBI3',
+      });
 
       const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId: learner1.id,
@@ -234,7 +240,9 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await databaseBuilder.commit();
 
       // when
-      const results = await combinedCourseParticipationRepository.findByQuestIds({ questIds: [questId1, questId2] });
+      const results = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+        combinedCourseIds: [combinedCourseId1, combinedCourseId2],
+      });
 
       // then
       expect(results).lengthOf(2);
@@ -267,12 +275,14 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
     it('should return empty array when no participations match the quest IDs', async function () {
       // given
-      const questId1 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
-      const questId2 = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+      const { id: combinedCourseId1 } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
+      const { id: combinedCourseId2 } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI2' });
       await databaseBuilder.commit();
 
       // when
-      const results = await combinedCourseParticipationRepository.findByQuestIds({ questIds: [questId1, questId2] });
+      const results = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+        combinedCourseIds: [combinedCourseId1, combinedCourseId2],
+      });
 
       // then
       expect(results).to.deep.equal([]);
