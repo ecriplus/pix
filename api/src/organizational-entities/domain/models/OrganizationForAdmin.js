@@ -184,6 +184,8 @@ class OrganizationForAdmin {
     if (organizationBatchUpdateDto.dataProtectionOfficerEmail)
       dataProtectionOfficer.email = organizationBatchUpdateDto.dataProtectionOfficerEmail;
     this.dataProtectionOfficer.updateInformation(dataProtectionOfficer);
+    if (organizationBatchUpdateDto.administrationTeamId)
+      this.administrationTeamId = organizationBatchUpdateDto.administrationTeamId;
   }
 
   updateParentOrganizationId(parentOrganizationId) {
