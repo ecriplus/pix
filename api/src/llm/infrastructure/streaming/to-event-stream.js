@@ -1,6 +1,7 @@
 import { PassThrough, pipeline } from 'node:stream';
 
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
+import * as events from './transforms/events.js';
 import * as lengthPrefixedJsonDecoderTransform from './transforms/length-prefixed-json-decoder-transform.js';
 import * as responseObjectToEventStreamTransform from './transforms/response-object-to-event-stream-transform.js';
 import * as sendDebugDataTransform from './transforms/send-debug-data-transform.js';
@@ -53,7 +54,7 @@ export async function fromLLMResponse({
     logger.error({ err, prompt }, 'error while streaming response');
   });
   if (attachmentMessageType !== ATTACHMENT_MESSAGE_TYPES.NONE) {
-    writableStream.write(getAttachmentEventMessage(attachmentMessageType === ATTACHMENT_MESSAGE_TYPES.IS_VALID));
+    writableStream.write(events.getAttachmentMessage(attachmentMessageType === ATTACHMENT_MESSAGE_TYPES.IS_VALID));
   }
   const readableStream = llmResponse ?? emptyReadable();
   /** @type {StreamCapture} */
@@ -74,17 +75,13 @@ export async function fromLLMResponse({
       if (err) {
         logger.error({ err, prompt }, 'error in pipeline');
         if (!writableStream.closed && !writableStream.errored) {
-          writableStream.end('Error while streaming response from LLM');
+          writableStream.end(events.getError());
         }
       }
       await onStreamDone(streamCapture, !err);
     },
   );
   return writableStream;
-}
-
-function getAttachmentEventMessage(isValid) {
-  return 'event: attachment-' + (isValid ? 'success' : 'failure') + '\ndata: \n\n';
 }
 
 function emptyReadable() {

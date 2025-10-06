@@ -1,5 +1,7 @@
 import { Transform } from 'node:stream';
 
+import * as events from './events.js';
+
 /**
  * @param {StreamCapture} streamCapture Structure that will hold state, such as the accumulated LLM response
  * @returns {module:stream.internal.Transform}
@@ -12,17 +14,17 @@ export function getTransform(streamCapture) {
       let data = '';
 
       if (ping) {
-        data += getPingEvent();
+        data += events.getPing();
       }
 
       if (isValid) {
         streamCapture.haveVictoryConditionsBeenFulfilled = true;
-        data += getVictoryConditionsSuccessEvent();
+        data += events.getVictoryConditionsSuccess();
       }
 
       if (wasModerated) {
         streamCapture.wasModerated = true;
-        data += getMessageModeratedEvent();
+        data += events.getMessageModerated();
       }
 
       if (message) {
@@ -32,7 +34,7 @@ export function getTransform(streamCapture) {
 
       if (error) {
         streamCapture.errorOccurredDuringStream = error;
-        data += getErrorEvent();
+        data += events.getError();
       }
 
       if (usage) {
@@ -49,20 +51,4 @@ export function getTransform(streamCapture) {
 function getFormattedMessage(message) {
   const formattedMessage = message.replaceAll('\n', '\ndata: ');
   return `data: ${formattedMessage}\n\n`;
-}
-
-function getVictoryConditionsSuccessEvent() {
-  return 'event: victory-conditions-success\ndata: \n\n';
-}
-
-function getMessageModeratedEvent() {
-  return 'event: user-message-moderated\ndata: \n\n';
-}
-
-function getPingEvent() {
-  return 'event: ping\ndata: \n\n';
-}
-
-function getErrorEvent() {
-  return 'event: error\ndata: \n\n';
 }
