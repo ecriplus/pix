@@ -28,6 +28,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           SHOW_SKILLS: { active: false },
           IS_MANAGING_STUDENTS: { active: false },
         },
+        administrationTeamId: 456,
       });
       this.server.create('organization', { id: '1234' });
 

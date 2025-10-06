@@ -567,6 +567,7 @@
       "editing": {
         "administration-team": {
           "selector": {
+            "error-message": "L'équipe en charge est requise",
             "label": "Équipe en charge",
             "placeholder": "Sélectionner une équipe en charge"
           }

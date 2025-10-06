@@ -150,6 +150,33 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.dom(screen.getByText("Le lien n'est pas valide.")).exists();
     });
 
+    test("it should show error message if organization's administration is empty", async function (assert) {
+      const organizationWithoutAdministrationTeam = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: null,
+      });
+
+      // when
+      const screen = await render(
+        <template><InformationSectionEdit @organization={{organizationWithoutAdministrationTeam}} /></template>,
+      );
+
+      const administrationTeamIdErrorMessage = screen.getByText(
+        t('components.organizations.editing.administration-team.selector.error-message'),
+      );
+
+      // then
+      assert.ok(administrationTeamIdErrorMessage);
+    });
+
     module('#features', function () {
       test('should display place management features as deactivated', async function (assert) {
         organization.features = {
@@ -219,13 +246,6 @@ module('Integration | Component | organizations/information-section-edit', funct
   module('administration teams select', function () {
     test('it should display select with options loaded', async function (assert) {
       // given
-      const store = this.owner.lookup('service:store');
-      store.findAll = () =>
-        Promise.resolve([
-          store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
-          store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
-        ]);
-
       const organization = EmberObject.create({
         id: 1,
         name: 'Organization SCO',
@@ -242,7 +262,9 @@ module('Integration | Component | organizations/information-section-edit', funct
       //when
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
       await click(
-        screen.getByRole('button', { name: t('components.organizations.editing.administration-team.selector.label') }),
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
+        }),
       );
       const listbox = await screen.findByRole('listbox');
 
@@ -270,7 +292,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.ok(
         within(
           screen.getByRole('button', {
-            name: t('components.organizations.editing.administration-team.selector.label'),
+            name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
           }),
         ).getByText('Équipe 2'),
       );
@@ -298,7 +320,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.ok(
         within(
           screen.getByRole('button', {
-            name: t('components.organizations.editing.administration-team.selector.label'),
+            name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
           }),
         ).getByText(t('components.organizations.editing.administration-team.selector.placeholder')),
       );

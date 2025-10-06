@@ -566,6 +566,7 @@
       "editing": {
         "administration-team": {
           "selector": {
+            "error-message": "Administration team is required",
             "label": "Administration team",
             "placeholder": "Choose an administration team"
           }

@@ -21,8 +21,8 @@ module('Integration | Component | organizations/information-section', function (
     const store = this.owner.lookup('service:store');
     store.findAll = () =>
       Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
+        store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
+        store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
       ]);
   });
 
@@ -145,6 +145,7 @@ module('Integration | Component | organizations/information-section', function (
       credit: 0,
       documentationUrl: 'https://pix.fr/',
       features: {},
+      administrationTeamId: 123,
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {
@@ -270,6 +271,7 @@ module('Integration | Component | organizations/information-section', function (
       assert.dom(screen.getByRole('heading', { name: 'new name' })).exists();
       assert.dom(screen.getByText('Identifiant externe').nextElementSibling).hasText('new externalId');
       assert.dom(screen.queryByText('Département')).doesNotExist();
+      assert.dom(screen.getByText('Équipe en charge').nextElementSibling).hasText('Équipe 1');
       assert.dom(screen.getByText('Crédits').nextElementSibling).hasText('50');
       assert
         .dom(
@@ -300,6 +302,25 @@ module('Integration | Component | organizations/information-section', function (
           ),
         )
         .exists();
+    });
+
+    test('it should not submit the form if there is an error', async function (assert) {
+      // given
+      const onSubmit = () => {};
+      const screen = await render(
+        <template><InformationSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await clickByName(t('common.actions.edit'));
+
+      await fillIn(screen.getByLabelText('Nom *', { exact: false }), '');
+
+      // when
+      await clickByName(t('common.actions.save'));
+
+      // then
+      assert.ok(screen.getByRole('button', { name: t('common.actions.cancel') }));
+      assert.ok(screen.getByRole('button', { name: t('common.actions.save') }));
+      assert.notOk(screen.queryByRole('button', { name: t('common.actions.edit') }));
     });
   });
 });

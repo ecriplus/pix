@@ -68,6 +68,12 @@ export default class OrganizationInformationSectionEditionMode extends Component
     return options;
   }
 
+  get translatedAdministrationTeamIdErrorMessage() {
+    return this.form.administrationTeamIdError.message
+      ? this.intl.t(this.form.administrationTeamIdError.message)
+      : null;
+  }
+
   @action
   onChangeIdentityProvider(newIdentityProvider) {
     this.form.identityProviderForCampaigns = newIdentityProvider;
@@ -147,7 +153,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
       identityProviderForCampaigns:
         this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
       features: structuredClone(this.args.organization.features),
-      // TODO: delete this logic when administration team is mandatory
       administrationTeamId: this.args.organization.administrationTeamId
         ? `${this.args.organization.administrationTeamId}`
         : null,
@@ -195,6 +200,11 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
         <div class="form-field">
           <PixSelect
+            required
+            @aria-required={{true}}
+            @requiredLabel={{t "common.forms.mandatory"}}
+            @errorMessage={{this.translatedAdministrationTeamIdErrorMessage}}
+            @validationStatus={{this.form.administrationTeamIdError.status}}
             @options={{this.administrationTeamsOptions}}
             @value={{this.form.administrationTeamId}}
             @onChange={{this.onChangeAdministrationTeam}}
