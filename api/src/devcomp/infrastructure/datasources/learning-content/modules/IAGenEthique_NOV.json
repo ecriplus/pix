@@ -4,7 +4,7 @@
   "title": "Ce qu’il vaut mieux ne pas dire à une IA générative.",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
     "description": "<p>Quand on parle à une IA générative, ce n’est pas une discussion privée. </p><p>Tout ce que vous écrivez peut être enregistré, parfois réutilisé pour améliorer l’IA ou même être donné aux autorités si la loi l’impose.</p><p> Dans ce module, vous allez comprendre pourquoi les conversations avec l’IA ne sont pas privées et quelles informations il ne faut jamais écrire dans un prompt.<br><br></p>",
     "duration": 10,
     "level": "novice",
