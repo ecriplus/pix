@@ -118,14 +118,14 @@
                     }
                   },
                   {
-                    "id": "2",
+                    "id": "3",
                     "content": "<p>Tout ce que vous écrivez est automatiquement publié et rendu visible sur Internet.</p>",
                     "feedback": {
                       "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.</p>"
                     }
                   },
                   {
-                    "id": "3",
+                    "id": "4",
                     "content": "<p>Rien n’est enregistré : tout est supprimé immédiatement après utilisation.</p>",
                     "feedback": {
                       "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br></p>"
@@ -220,7 +220,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
-                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li></ul><p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
+                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p>\n<ul>\n    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li>\n    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>\n    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li>\n</ul>\n<p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
               }
             }
           ]
@@ -409,7 +409,7 @@
               "element": {
                 "id": "2e7d7557-fd13-4a5c-89ab-e4d40184da2c",
                 "type": "text",
-                "content": "<ul>    <li>Situation -------------------&gt; Réutilisation des données ?</li>    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li></ul>"
+                "content": "<ul>\n    <li>Situation -------------------&gt; Réutilisation des données ?</li>\n    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>\n    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>\n    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li>\n</ul>"
               }
             },
             {
@@ -438,7 +438,7 @@
               "element": {
                 "id": "9cbfbaae-17ab-4316-ba32-2f8ca4531632",
                 "type": "text",
-                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>Le type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
+                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.\n</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>\nLe type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
               }
             }
           ]
@@ -457,41 +457,44 @@
             {
               "type": "element",
               "element": {
-                "id": "c0f7b4b0-9f61-4f67-9a99-2d7e7f3c4a6e",
-                "type": "qcm",
+                "id": "dee26d54-a074-4904-9180-38800a025450",
+                "type": "qcu",
                 "instruction": "<p>Pourquoi vos données peuvent-elles être concernées par les lois d’un autre pays&nbsp;?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Parce que les serveurs qui stockent ou traitent les données ne sont pas toujours situés dans votre pays.</p>"
+                    "content": "<p>Parce que les serveurs qui stockent ou traitent les données ne sont pas toujours situés dans votre pays.</p>",
+                    "feedback": {
+                      "state": "<p>Exact !</p>",
+                      "diagnosis": "<p> Les données que vous envoyez à une IA peuvent être hébergées ou traitées sur des serveurs situés à l’étranger.<br>\n    Cela signifie qu’elles relèvent parfois des lois d’un autre pays — y compris pour les demandes d’accès par la justice ou les autorités locales.</p>"
+                    }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Parce que les données voyagent physiquement avec votre ordinateur.</p>"
+                    "content": "<p>Parce que les données voyagent physiquement avec votre ordinateur.</p>",
+                    "feedback": {
+                      "state": "<p>Non.</p>",
+                      "diagnosis": "<p>Les données ne “voyagent” pas avec votre appareil.<br>\n    Elles sont copiées et transférées vers des serveurs distants via Internet : c’est là qu’elles peuvent être traitées et stockées, parfois dans un autre pays.</p>"
+                    }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Parce que chaque pays partage automatiquement ses bases de données avec les autres.</p>"
+                    "content": "<p>Parce que chaque pays partage automatiquement ses bases de données avec les autres.</p>",
+                    "feedback": {
+                      "state": "<p>Ce n'est pas le cas.</p>",
+                      "diagnosis": "<p>Il n’existe pas de partage automatique entre États : les échanges de données sont encadrés par des accords ou des demandes judiciaires précises, pas par défaut.</p>"
+                    }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Parce que les IA refusent les données étrangères.</p>"
+                    "content": "<p>Parce que les IA refusent les données étrangères.</p>",
+                    "feedback": {
+                      "state": "<p>Non.<br></p>",
+                      "diagnosis": "<p>Elles traitent des données de toutes origines ; c’est le lieu des serveurs et les lois applicables dans le pays qui s’applique, pas la nationalité d'ou viennent les informations.</p>"
+                    }
                   }
                 ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bonne réponse&nbsp;!</p>",
-                    "diagnosis": "<p><strong>Les serveurs peuvent être situés à l’étranger</strong> et donc soumis à d’autres lois. C’est pourquoi vos données peuvent relever de la juridiction d’un autre pays.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Les données ne voyagent pas avec votre appareil ni automatiquement entre pays. Elles peuvent simplement être traitées sur des serveurs à l’étranger, soumis à d’autres lois.</p>"
-                  }
-                },
-                "solutions": [
-                  "1",
-                  ""
-                ]
+                "solution": "1"
               }
             }
           ]
@@ -504,7 +507,7 @@
             {
               "type": "element",
               "element": {
-                "id": "dee26d54-a074-4904-9180-38800a025450",
+                "id": "d4ff85f1-b3e0-43e8-9050-69aa610de921",
                 "type": "qab",
                 "instruction": "<p>Ce prompt est-il respectueux de la confidentialité ?</p>",
                 "cards": [
