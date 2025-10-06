@@ -35,8 +35,8 @@ const getById = async ({ id }) => {
 const findByOrganizationId = async ({ organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const combinedCourses = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourses = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('organizationId', organizationId);
 
   return combinedCourses.map((quest) => new CombinedCourse(quest));

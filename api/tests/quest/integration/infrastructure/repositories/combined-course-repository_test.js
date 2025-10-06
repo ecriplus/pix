@@ -66,12 +66,12 @@ describe('Quest | Integration | Repository | combined-course', function () {
     it('should return all combined courses for a given organization', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const quest1 = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const combinedCourse1 = databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE1',
         name: 'Parcours 1',
         organizationId,
       });
-      const quest2 = databaseBuilder.factory.buildQuestForCombinedCourse({
+      const combinedCourse2 = databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE2',
         name: 'Parcours 2',
         organizationId,
@@ -85,8 +85,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(combinedCourses).to.have.lengthOf(2);
       expect(combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
       expect(combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(quest1));
-      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(quest2));
+      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(combinedCourse1));
+      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(combinedCourse2));
     });
 
     it('should return an empty array when organization has no combined courses', async function () {
@@ -105,12 +105,12 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // given
       const organization1Id = databaseBuilder.factory.buildOrganization().id;
       const organization2Id = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE1',
         name: 'Parcours 1',
         organizationId: organization1Id,
       });
-      databaseBuilder.factory.buildQuestForCombinedCourse({
+      databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE2',
         name: 'Parcours 2',
         organizationId: organization2Id,

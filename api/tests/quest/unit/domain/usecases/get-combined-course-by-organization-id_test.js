@@ -18,7 +18,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
       findByOrganizationId: sinon.stub().resolves([combinedCourse1, combinedCourse2]),
     };
     const combinedCourseParticipationRepositoryStub = {
-      findByQuestIds: sinon.stub().resolves([participation1, participation2, participation3]),
+      findByCombinedCourseIds: sinon.stub().resolves([participation1, participation2, participation3]),
     };
 
     // when
@@ -30,7 +30,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
 
     // then
     expect(combinedCourseRepositoryStub.findByOrganizationId).to.have.been.calledOnceWithExactly({ organizationId });
-    expect(combinedCourseParticipationRepositoryStub.findByQuestIds).to.have.been.calledOnceWithExactly({
+    expect(combinedCourseParticipationRepositoryStub.findByCombinedCourseIds).to.have.been.calledOnceWithExactly({
       questIds: [1, 2],
     });
     expect(result).to.have.lengthOf(2);
@@ -46,7 +46,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
       findByOrganizationId: sinon.stub().resolves([]),
     };
     const combinedCourseParticipationRepositoryStub = {
-      findByQuestIds: sinon.stub(),
+      findByCombinedCourseIds: sinon.stub(),
     };
 
     // when
@@ -58,6 +58,6 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
 
     // then
     expect(result).to.deep.equal([]);
-    expect(combinedCourseParticipationRepositoryStub.findByQuestIds).to.not.have.been.called;
+    expect(combinedCourseParticipationRepositoryStub.findByCombinedCourseIds).to.not.have.been.called;
   });
 });
