@@ -3,16 +3,16 @@ import { CombinedCourseParticipation } from '../../../../../src/quest/domain/mod
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organization-id', function () {
+describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-organization-id', function () {
   it('should return combined courses for an organization with their participations', async function () {
     // given
     const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-    const quest1 = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: combinedCourseId1, questId: quest1 } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COURSE1',
       name: 'First Combined Course',
       organizationId,
     });
-    const quest2 = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: combinedCourseId2, questId: quest2 } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COURSE2',
       name: 'Second Combined Course',
       organizationId,
@@ -35,15 +35,15 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     });
 
     databaseBuilder.factory.buildCombinedCourseParticipation({
-      questId: quest1.id,
+      questId: quest1,
       organizationLearnerId: organizationLearnerId1,
     });
     databaseBuilder.factory.buildCombinedCourseParticipation({
-      questId: quest1.id,
+      questId: quest1,
       organizationLearnerId: organizationLearnerId2,
     });
     databaseBuilder.factory.buildCombinedCourseParticipation({
-      questId: quest2.id,
+      questId: quest2,
       organizationLearnerId: organizationLearnerId3,
     });
 
@@ -57,8 +57,8 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     expect(result[0]).to.be.an.instanceof(CombinedCourse);
     expect(result[1]).to.be.an.instanceof(CombinedCourse);
 
-    const firstCourse = result.find((course) => course.id === quest1.id);
-    const secondCourse = result.find((course) => course.id === quest2.id);
+    const firstCourse = result.find((course) => course.id === combinedCourseId1);
+    const secondCourse = result.find((course) => course.id === combinedCourseId2);
 
     expect(firstCourse.code).to.equal('COURSE1');
     expect(firstCourse.name).to.equal('First Combined Course');
@@ -80,7 +80,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
   it('should return combined courses with empty participations when no participations exist', async function () {
     // given
     const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-    const quest1 = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: combinedCourseId1 } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COURSE3',
       name: 'Third Combined Course',
       organizationId,
@@ -94,7 +94,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     // then
     expect(result).to.have.lengthOf(1);
     expect(result[0]).to.be.an.instanceof(CombinedCourse);
-    expect(result[0].id).to.equal(quest1.id);
+    expect(result[0].id).to.equal(combinedCourseId1);
     expect(result[0].code).to.equal('COURSE3');
     expect(result[0].participations).to.deep.equal([]);
   });
@@ -116,11 +116,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     const { id: organizationId1 } = databaseBuilder.factory.buildOrganization();
     const { id: organizationId2 } = databaseBuilder.factory.buildOrganization();
 
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    databaseBuilder.factory.buildCombinedCourse({
       code: 'ORG1COURSE',
       organizationId: organizationId1,
     });
-    databaseBuilder.factory.buildQuestForCombinedCourse({
+    databaseBuilder.factory.buildCombinedCourse({
       code: 'ORG2COURSE',
       organizationId: organizationId2,
     });
@@ -138,11 +138,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
   it('should not include participations from other combined courses', async function () {
     // given
     const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-    const quest1 = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: combinedCourseId1, questId: quest1 } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COURSE1',
       organizationId,
     });
-    const quest2 = databaseBuilder.factory.buildQuestForCombinedCourse({
+    const { id: combinedCourseId2, questId: quest2 } = databaseBuilder.factory.buildCombinedCourse({
       code: 'COURSE2',
       organizationId,
     });
@@ -159,11 +159,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     });
 
     databaseBuilder.factory.buildCombinedCourseParticipation({
-      questId: quest1.id,
+      questId: quest1,
       organizationLearnerId: organizationLearnerId1,
     });
     databaseBuilder.factory.buildCombinedCourseParticipation({
-      questId: quest2.id,
+      questId: quest2,
       organizationLearnerId: organizationLearnerId2,
     });
 
@@ -173,8 +173,8 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-organ
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
-    const firstCourse = result.find((course) => course.id === quest1.id);
-    const secondCourse = result.find((course) => course.id === quest2.id);
+    const firstCourse = result.find((course) => course.id === combinedCourseId1);
+    const secondCourse = result.find((course) => course.id === combinedCourseId2);
 
     expect(firstCourse.participations).to.have.lengthOf(1);
     expect(firstCourse.participations[0].firstName).to.equal('Alice');

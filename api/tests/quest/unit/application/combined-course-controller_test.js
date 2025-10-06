@@ -6,14 +6,14 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
   describe('#getById', function () {
     it('should call getCombinedCourseByQuestId usecase with questId', async function () {
       // given
-      const questId = 'questId123';
+      const combinedCourseId = 'combinedCourseId123';
       const combinedCourse = Symbol('combinedCourse');
       const serializedCombinedCourse = Symbol('serializedCombinedCourse');
       const request = {
-        params: { questId },
+        params: { combinedCourseId },
       };
 
-      sinon.stub(usecases, 'getCombinedCourseByQuestId').resolves(combinedCourse);
+      sinon.stub(usecases, 'getCombinedCourseById').resolves(combinedCourse);
       const combinedCourseDetailsSerializer = { serialize: sinon.stub() };
       combinedCourseDetailsSerializer.serialize.withArgs(combinedCourse).returns(serializedCombinedCourse);
 
@@ -21,7 +21,7 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       const result = await combinedCourseController.getById(request, null, { combinedCourseDetailsSerializer });
 
       // then
-      expect(usecases.getCombinedCourseByQuestId).to.have.been.calledOnceWithExactly({ questId });
+      expect(usecases.getCombinedCourseById).to.have.been.calledOnceWithExactly({ combinedCourseId });
       expect(combinedCourseDetailsSerializer.serialize).to.have.been.calledOnceWithExactly(combinedCourse);
       expect(result).to.equal(serializedCombinedCourse);
     });
@@ -29,11 +29,11 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
   describe('#findParticipations', function () {
     it('should call findCombinedCourseParticipation usecase with questId', async function () {
       // given
-      const questId = 'questId123';
+      const combinedCourseId = 'combinedCourseId123';
       const combinedCourseParticipations = Symbol('combinedCourseParticipations');
       const serializedCombinedCourseParticipations = Symbol('serializedCombinedCourseParticipations');
       const request = {
-        params: { questId },
+        params: { combinedCourseId },
       };
 
       sinon.stub(usecases, 'findCombinedCourseParticipations').resolves(combinedCourseParticipations);
@@ -48,7 +48,7 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       });
 
       // then
-      expect(usecases.findCombinedCourseParticipations).to.have.been.calledOnceWithExactly({ questId });
+      expect(usecases.findCombinedCourseParticipations).to.have.been.calledOnceWithExactly({ combinedCourseId });
       expect(combinedCourseParticipationSerializer.serialize).to.have.been.calledOnceWithExactly(
         combinedCourseParticipations,
       );
@@ -58,14 +58,17 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
   describe('#getStatistics', function () {
     it('should call getCombinedCourseStatistics usecase with questId', async function () {
       // given
-      const questId = 'questId123';
+      const combinedCourseId = 'combinedCourseId123';
       const combinedCourseStatistics = Symbol('combinedCourseStatistics');
       const serializedCombinedCourseStatistics = Symbol('serializedCombinedCourseStatistics');
       const request = {
-        params: { questId },
+        params: { combinedCourseId },
       };
 
-      sinon.stub(usecases, 'getCombinedCourseStatistics').withArgs({ questId }).resolves(combinedCourseStatistics);
+      sinon
+        .stub(usecases, 'getCombinedCourseStatistics')
+        .withArgs({ combinedCourseId })
+        .resolves(combinedCourseStatistics);
       const combinedCourseStatisticsSerializer = { serialize: sinon.stub() };
       combinedCourseStatisticsSerializer.serialize
         .withArgs(combinedCourseStatistics)

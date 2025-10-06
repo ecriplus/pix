@@ -5,38 +5,38 @@ import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
 const getByCode = async ({ code }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quest = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourse = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('code', code)
     .first();
-  if (!quest) {
+  if (!combinedCourse) {
     throw new NotFoundError(`Le parcours combiné portant le code ${code} n'existe pas`);
   }
 
-  return new CombinedCourse(quest);
+  return new CombinedCourse(combinedCourse);
 };
 
 const getById = async ({ id }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const quest = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourse = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('id', id)
     .whereNotNull('organizationId')
     .whereNotNull('code')
     .first();
-  if (!quest) {
+  if (!combinedCourse) {
     throw new NotFoundError(`Le parcours combiné pour l'id ${id} n'existe pas`);
   }
 
-  return new CombinedCourse(quest);
+  return new CombinedCourse(combinedCourse);
 };
 
 const findByOrganizationId = async ({ organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const combinedCourses = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
+  const combinedCourses = await knexConn('combined_courses')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('organizationId', organizationId);
 
   return combinedCourses.map((quest) => new CombinedCourse(quest));
@@ -44,12 +44,20 @@ const findByOrganizationId = async ({ organizationId }) => {
 
 const findByCampaignId = async ({ campaignId }) => {
   const knexConn = DomainTransaction.getConnection();
-  const quests = await knexConn('quests')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration')
-    .whereNotNull('code')
-    .whereJsonSupersetOf('successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
+  const combinedCourses = await knexConn('combined_courses')
+    .select(
+      'combined_courses.id',
+      'combined_courses.organizationId',
+      'combined_courses.code',
+      'combined_courses.name',
+      'combined_courses.description',
+      'combined_courses.illustration',
+      'questId',
+    )
+    .join('quests', 'quests.id', 'combined_courses.questId')
+    .whereJsonSupersetOf('quests.successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
 
-  return quests.map((quest) => new CombinedCourse(quest));
+  return combinedCourses.map((quest) => new CombinedCourse(quest));
 };
 
 const saveInBatch = async ({ combinedCourses }) => {

@@ -93,13 +93,17 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         organizationId,
       });
 
-      const quest = databaseBuilder.factory.buildQuest({ code: 'SOMETHING', name: 'Mon parcours', organizationId });
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'SOMETHING',
+        name: 'Mon parcours',
+        organizationId,
+      });
 
       await databaseBuilder.commit();
 
       const options = {
         method: 'GET',
-        url: `/api/combined-courses/?filter[code]=${quest.code}`,
+        url: `/api/combined-courses/?filter[code]=${combinedCourse.code}`,
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
@@ -108,7 +112,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(Number(response.result.data.id)).to.equal(quest.id);
+      expect(Number(response.result.data.id)).to.equal(combinedCourse.id);
       expect(response.result.data.attributes.name).to.equal('Mon parcours');
     });
 
@@ -140,7 +144,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId });
-      databaseBuilder.factory.buildQuest({ name: 'MA QUETE', organizationId, code: 'COMBINIX2' });
+      databaseBuilder.factory.buildCombinedCourse({ name: 'MA QUETE', organizationId, code: 'COMBINIX2' });
 
       await databaseBuilder.commit();
       const options = {
@@ -160,7 +164,11 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildQuest({ name: 'MA QUETE', organizationId, code: 'COMBINIX2' }).id;
+      const { questId } = databaseBuilder.factory.buildCombinedCourse({
+        name: 'MA QUETE',
+        organizationId,
+        code: 'COMBINIX2',
+      });
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId });
       databaseBuilder.factory.buildCombinedCourseParticipation({
         questId,
@@ -188,7 +196,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
-      const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { questId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBINIX1',
         organizationId,
         successRequirements: [],
@@ -216,13 +224,13 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
-  describe('GET /api/combined-courses/{questId}', function () {
+  describe('GET /api/combined-courses/{combinedCourseId}', function () {
     context('when user has membership in the combined course organization', function () {
       it('should return the combined course details', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+        const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -233,7 +241,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${questId}`,
+          url: `/api/combined-courses/${combinedCourseId}`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -246,12 +254,12 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
-  describe('GET /api/combined-courses/{questId}/statistics', function () {
+  describe('GET /api/combined-courses/{combinedCourseId}/statistics', function () {
     context('when user has membership in the combined course organization', function () {
       it('should return the combined course statistics', async function () {
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -267,7 +275,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${questId}/statistics`,
+          url: `/api/combined-courses/${combinedCourseId}/statistics`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -281,13 +289,13 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
-  describe('GET /api/combined-courses/{questId}/participations', function () {
+  describe('GET /api/combined-courses/{combinedCourseId}/participations', function () {
     context('when user has membership in the combined course organization', function () {
       it('should return the combined course participations', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+        const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -303,7 +311,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${questId}/participations`,
+          url: `/api/combined-courses/${combinedCourseId}/participations`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -324,8 +332,8 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         databaseBuilder.factory.buildMembership({ userId, organizationId });
-        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
-        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
+        databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBI1' });
+        databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBI2' });
         await databaseBuilder.commit();
 
         const options = {

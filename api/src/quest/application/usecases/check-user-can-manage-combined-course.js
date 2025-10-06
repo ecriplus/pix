@@ -3,10 +3,10 @@ import * as combinedCourseRepository from '../../infrastructure/repositories/com
 
 const execute = async function ({
   userId,
-  questId,
+  combinedCourseId,
   dependencies = { membershipRepository, combinedCourseRepository },
 }) {
-  const { organizationId } = await dependencies.combinedCourseRepository.getById({ id: questId });
+  const { organizationId } = await dependencies.combinedCourseRepository.getById({ id: combinedCourseId });
   const memberships = await dependencies.membershipRepository.findByUserIdAndOrganizationId({
     userId,
     organizationId,

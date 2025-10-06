@@ -7,7 +7,7 @@ import { DataForQuest } from '../models/DataForQuest.js';
 
 async function getCombinedCourseDetails({
   userId,
-  questId,
+  combinedCourseId,
   combinedCourseParticipationRepository = repositories.combinedCourseParticipationRepository,
   combinedCourseRepository = repositories.combinedCourseRepository,
   campaignRepository = repositories.campaignRepository,
@@ -16,8 +16,8 @@ async function getCombinedCourseDetails({
   eligibilityRepository = repositories.eligibilityRepository,
   recommendedModulesRepository = repositories.recommendedModulesRepository,
 }) {
-  const quest = await questRepository.findById({ questId });
-  const combinedCourse = await combinedCourseRepository.getById({ id: questId });
+  const combinedCourse = await combinedCourseRepository.getById({ id: combinedCourseId });
+  const quest = await questRepository.findById({ questId: combinedCourse.questId });
   let participation = null;
   try {
     participation = await combinedCourseParticipationRepository.getByUserId({ questId: quest.id, userId });

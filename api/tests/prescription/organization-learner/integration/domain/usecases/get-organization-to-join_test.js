@@ -29,9 +29,9 @@ describe('Integration | UseCases | get-organization-to-join', function () {
     //then
     expect(result).to.deep.equal(organizationToJoin);
   });
-  it('should return organizationToJoin given quest code', async function () {
+  it('should return organizationToJoin given combinedCourse code', async function () {
     //given
-    const quest = databaseBuilder.factory.buildQuest({ organizationId: 1, code: 'ABC' });
+    const quest = databaseBuilder.factory.buildCombinedCourse({ organizationId: 1, code: 'ABC' });
     const organization = databaseBuilder.factory.buildOrganization({ id: 1 });
     const organizationToJoin = new OrganizationToJoin({
       ...organization,

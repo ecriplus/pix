@@ -44,7 +44,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const moduleId1 = '6282925d-4775-4bca-b513-4c3009ec5886';
       const moduleId2 = '654c44dc-0560-4acc-9860-4a67c923577f';
 
-      const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -133,7 +133,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
         },
       ]);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
@@ -175,7 +175,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       });
       databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
 
-      const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -280,7 +280,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         },
       ]);
       expect(result).to.be.instanceOf(CombinedCourse);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
@@ -314,7 +314,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         trainingId: training2.id,
       });
 
-      const { id: questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -381,7 +381,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
 
       const result = await usecases.getCombinedCourseByCode({ code, userId });
       expect(result).to.be.instanceOf(CombinedCourse);
-      expect(result.id).to.equal(questId);
+      expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);

@@ -55,6 +55,7 @@ function buildCombinedCourseDetails({ combinedCourse, quest, items } = {}) {
       name: 'Mon parcours',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       illustration: '/illustrations/image.svg',
+      questId: 1,
     });
 
   const encryptedCombinedCourseUrl = 'encryptedCombinedCourseUrl';

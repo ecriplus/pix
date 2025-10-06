@@ -56,7 +56,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/combined-courses/{questId}',
+      path: '/api/combined-courses/{combinedCourseId}',
       config: {
         pre: [
           {
@@ -66,7 +66,7 @@ const register = async function (server) {
         handler: combinedCourseController.getById,
         validate: {
           params: Joi.object({
-            questId: identifiersType.questId,
+            combinedCourseId: identifiersType.combinedCourseId,
           }),
         },
         notes: [
@@ -78,7 +78,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/combined-courses/{questId}/statistics',
+      path: '/api/combined-courses/{combinedCourseId}/statistics',
       config: {
         pre: [
           {
@@ -88,7 +88,7 @@ const register = async function (server) {
         handler: combinedCourseController.getStatistics,
         validate: {
           params: Joi.object({
-            questId: identifiersType.questId,
+            combinedCourseId: identifiersType.combinedCourseId,
           }),
         },
         notes: [
@@ -100,7 +100,7 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/combined-courses/{questId}/participations',
+      path: '/api/combined-courses/{combinedCourseId}/participations',
       config: {
         pre: [
           {
@@ -110,7 +110,7 @@ const register = async function (server) {
         handler: combinedCourseController.findParticipations,
         validate: {
           params: Joi.object({
-            questId: identifiersType.questId,
+            combinedCourseId: identifiersType.combinedCourseId,
           }),
         },
         notes: [

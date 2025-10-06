@@ -8,12 +8,12 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
+      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       databaseBuilder.factory.buildMembership({ userId, organizationId });
       await databaseBuilder.commit();
 
       // when
-      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, questId });
+      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, combinedCourseId });
 
       // then
       expect(canManage).to.be.true;
@@ -25,11 +25,11 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
+      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       await databaseBuilder.commit();
 
       // when
-      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, questId });
+      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, combinedCourseId });
 
       // then
       expect(canManage).to.be.false;
@@ -40,15 +40,11 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
     it('should throw NotFoundError', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const questId = databaseBuilder.factory.buildQuest({
-        code: null,
-        name: 'Not a combined course',
-        organizationId: null,
-      }).id;
+
       await databaseBuilder.commit();
 
       // when / then
-      const error = await catchErr(checkUserCanManageCombinedCourse.execute)({ userId, questId });
+      const error = await catchErr(checkUserCanManageCombinedCourse.execute)({ userId, combinedCourseId: 12 });
       expect(error).to.be.instanceOf(NotFoundError);
     });
   });
@@ -58,12 +54,12 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const questId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
+      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
       databaseBuilder.factory.buildMembership({ userId, organizationId, disabledAt: new Date() });
       await databaseBuilder.commit();
 
       // when
-      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, questId });
+      const canManage = await checkUserCanManageCombinedCourse.execute({ userId, combinedCourseId });
 
       // then
       expect(canManage).to.be.false;

@@ -129,11 +129,17 @@ async function createDataForCombinedCourse() {
     },
   ]);
   const eligibilityRequirements = JSON.stringify([]);
-  await knex('quests').insert({
+  const [{ id: questId }] = await knex('quests')
+    .insert({
+      successRequirements,
+      eligibilityRequirements,
+    })
+    .returning('id');
+
+  await knex('combined_courses').insert({
     name: 'Mon parcours combiné',
     code: 'COMBINIX1',
     organizationId,
-    successRequirements,
-    eligibilityRequirements,
+    questId,
   });
 }

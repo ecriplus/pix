@@ -11,7 +11,7 @@ export async function updateCombinedCourse({
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
   const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
     userId,
-    questId: combinedCourse.id,
+    combinedCourseId: combinedCourse.id,
   });
 
   const moduleToSynchronizeIds = combinedCourseDetails.items

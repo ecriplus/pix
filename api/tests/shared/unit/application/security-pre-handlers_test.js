@@ -2487,7 +2487,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
           },
         },
         params: {
-          questId: 'questId123',
+          combinedCourseId: 'questId123',
         },
       };
     });
@@ -2508,7 +2508,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
         expect(response.source).to.be.true;
         expect(checkUserCanManageCombinedCourseUsecaseStub.execute).to.have.been.calledOnceWithExactly({
           userId: 1234,
-          questId: 'questId123',
+          combinedCourseId: 'questId123',
         });
       });
     });

@@ -1,8 +1,7 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Repository | quest', function () {
   describe('#saveInBatch', function () {
@@ -116,34 +115,6 @@ describe('Quest | Integration | Repository | quest', function () {
 
       // then
       expect(quest).to.be.null;
-    });
-  });
-
-  describe('#getByCode', function () {
-    it('should return a quest if code exists', async function () {
-      // given
-      const code = 'SOMETHING';
-      const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const quest = databaseBuilder.factory.buildQuest({ code, organizationId });
-      await databaseBuilder.commit();
-
-      // when
-      const questResult = await questRepository.getByCode({ code });
-
-      // then
-      expect(questResult).to.be.an.instanceof(Quest);
-      expect(questResult).to.deep.equal(new Quest(quest));
-    });
-
-    it('should throw NotFoundError if quest does not exist', async function () {
-      // given
-      const code = 'NOTHINGTT';
-
-      // when
-      const error = await catchErr(questRepository.getByCode)({ code });
-
-      // then
-      expect(error).to.be.instanceOf(NotFoundError);
     });
   });
 

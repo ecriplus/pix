@@ -6,13 +6,13 @@ export default async ({ organizationId, combinedCourseRepository, combinedCourse
   }
 
   const combinedCourseIds = combinedCourses.map((combinedCourse) => combinedCourse.id);
-  const combinedCourseParticipations = await combinedCourseParticipationRepository.findByQuestIds({
-    questIds: combinedCourseIds,
+  const combinedCourseParticipations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+    combinedCourseIds,
   });
 
   return combinedCourses.map((combinedCourse) => {
     combinedCourse.participations = combinedCourseParticipations.filter(
-      (participation) => participation.questId === combinedCourse.id,
+      (participation) => participation.questId === combinedCourse.questId,
     );
     return combinedCourse;
   });

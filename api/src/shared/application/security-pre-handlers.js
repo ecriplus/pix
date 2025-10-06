@@ -693,12 +693,12 @@ async function checkUserCanManageCombinedCourse(
   dependencies = { checkUserCanManageCombinedCourseUsecase },
 ) {
   const userId = request.auth.credentials.userId;
-  const questId = request.params.questId;
+  const combinedCourseId = request.params.combinedCourseId;
 
   try {
     const canManageCombinedCourse = await dependencies.checkUserCanManageCombinedCourseUsecase.execute({
       userId,
-      questId,
+      combinedCourseId,
     });
     if (canManageCombinedCourse) {
       return h.response(true);
