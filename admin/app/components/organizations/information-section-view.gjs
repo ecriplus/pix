@@ -24,10 +24,11 @@ export default class OrganizationInformationSection extends Component {
     <div class="organization__data">
       {{#if @organization.isArchived}}
         <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
-          Archivée le
-          {{@organization.archivedFormattedDate}}
-          par
-          {{@organization.archivistFullName}}.
+          {{t
+            "components.organizations.information-section-view.is-archived-warning"
+            archivedAt=@organization.archivedFormattedDate
+            archivedBy=@organization.archivistFullName
+          }}
         </PixNotificationAlert>
       {{/if}}
 
@@ -41,7 +42,7 @@ export default class OrganizationInformationSection extends Component {
             </PixButton>
             {{#unless @organization.isArchived}}
               <PixButton @variant="error" @size="small" @triggerAction={{@toggleArchivingConfirmationModal}}>
-                Archiver l'organisation
+                {{t "components.organizations.information-section-view.archive-organization"}}
               </PixButton>
             {{/unless}}
           </div>
@@ -53,6 +54,7 @@ export default class OrganizationInformationSection extends Component {
 
 class OrganizationDescription extends Component {
   @service oidcIdentityProviders;
+  @service intl;
 
   get identityProviderName() {
     const GARIdentityProvider = { code: 'GAR', organizationName: 'GAR' };
@@ -61,77 +63,77 @@ class OrganizationDescription extends Component {
       (identityProvider) => identityProvider.code === this.args.organization.identityProviderForCampaigns,
     );
     const identityProviderName = identityProvider?.organizationName;
-    return identityProviderName || 'Aucun';
+    return identityProviderName || this.intl.t('common.words.none');
   }
 
   <template>
     <DescriptionList>
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Type">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.type"}}>
         {{@organization.type}}
       </DescriptionList.Item>
-      <DescriptionList.Item @label="Créée par">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.created-by"}}>
         {{@organization.creatorFullName}}
         ({{@organization.createdBy}})
       </DescriptionList.Item>
-      <DescriptionList.Item @label="Créée le">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.created-at"}}>
         {{@organization.createdAtFormattedDate}}
       </DescriptionList.Item>
       {{#if @organization.externalId}}
-        <DescriptionList.Item @label="Identifiant externe">
+        <DescriptionList.Item @label={{t "components.organizations.information-section-view.external-id"}}>
           {{@organization.externalId}}
         </DescriptionList.Item>
       {{/if}}
       {{#if @organization.provinceCode}}
-        <DescriptionList.Item @label="Département">
+        <DescriptionList.Item @label={{t "components.organizations.information-section-view.province-code"}}>
           {{@organization.provinceCode}}
         </DescriptionList.Item>
       {{/if}}
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Équipe en charge">
-        {{if @organization.administrationTeamName @organization.administrationTeamName "Non spécifié"}}
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.administration-team"}}>
+        {{if @organization.administrationTeamName @organization.administrationTeamName (t "common.not-specified")}}
       </DescriptionList.Item>
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Nom du DPO">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.dpo-name"}}>
         {{@organization.dataProtectionOfficerFullName}}
       </DescriptionList.Item>
-      <DescriptionList.Item @label="Adresse e-mail du DPO">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.dpo-email"}}>
         {{@organization.dataProtectionOfficerEmail}}
       </DescriptionList.Item>
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Crédits">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.credits"}}>
         {{@organization.credit}}
       </DescriptionList.Item>
-      <DescriptionList.Item @label="Lien vers la documentation">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.documentation-link"}}>
         {{#if @organization.documentationUrl}}
           <a href="{{@organization.documentationUrl}}" target="_blank" rel="noopener noreferrer">
             {{@organization.documentationUrl}}
           </a>
         {{else}}
-          Non spécifié
+          {{t "common.not-specified"}}
         {{/if}}
       </DescriptionList.Item>
-      <DescriptionList.Item @label="SSO">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.sso"}}>
         {{this.identityProviderName}}
       </DescriptionList.Item>
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Adresse e-mail d'activation SCO">
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.sco-activation-email"}}>
         {{@organization.email}}
       </DescriptionList.Item>
 
       {{#if @organization.code}}
         <DescriptionList.Divider />
 
-        <DescriptionList.Item @label="Code">
+        <DescriptionList.Item @label={{t "components.organizations.information-section-view.code"}}>
           {{@organization.code}}
         </DescriptionList.Item>
       {{/if}}

@@ -25,7 +25,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @tracked toggleLockPlaces = false;
   @tracked administrationTeams = [];
 
-  noIdentityProviderOption = { label: 'Aucun', value: 'None' };
+  noIdentityProviderOption = { label: this.intl.t('common.words.none'), value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
 
   constructor() {
@@ -166,13 +166,13 @@ export default class OrganizationInformationSectionEditionMode extends Component
         <div class="form-field">
           <PixInput
             required={{true}}
-            @requiredLabel="obligatoire"
+            @requiredLabel={{t "common.forms.mandatory"}}
             @errorMessage={{this.form.nameError.message}}
             @validationStatus={{this.form.nameError.status}}
             @value={{this.form.name}}
             {{on "input" (fn this.updateFormValue "name")}}
           ><:label>
-              Nom
+              {{t "components.organizations.editing.name.label"}}
             </:label></PixInput>
         </div>
 
@@ -182,7 +182,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.externalIdError.status}}
             @value={{this.form.externalId}}
             {{on "input" (fn this.updateFormValue "externalId")}}
-          ><:label>Identifiant externe</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.external-id"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -191,7 +191,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.provinceCodeError.status}}
             @value={{this.form.provinceCode}}
             {{on "input" (fn this.updateFormValue "provinceCode")}}
-          ><:label>Département (en 3 chiffres)</:label></PixInput>
+          ><:label>{{t "components.organizations.editing.province-code.label"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -218,7 +218,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.dataProtectionOfficerFirstNameError.status}}
             @value={{this.form.dataProtectionOfficerFirstName}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerFirstName")}}
-          ><:label>Prénom du DPO</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.dpo-firstname"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -227,7 +227,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.dataProtectionOfficerLastNameError.status}}
             @value={{this.form.dataProtectionOfficerLastName}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerLastName")}}
-          ><:label>Nom du DPO</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.dpo-lastname"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -236,7 +236,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.dataProtectionOfficerEmailError.status}}
             @value={{this.form.dataProtectionOfficerEmail}}
             {{on "input" (fn this.updateFormValue "dataProtectionOfficerEmail")}}
-          ><:label>Adresse e-mail du DPO</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.dpo-email"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -246,7 +246,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.creditError.status}}
             @value={{this.form.credit}}
             {{on "input" (fn this.updateFormValue "credit")}}
-          ><:label>Crédits</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.credits"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -255,7 +255,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.documentationUrlError.status}}
             @value={{this.form.documentationUrl}}
             {{on "input" (fn this.updateFormValue "documentationUrl")}}
-          ><:label>Lien vers la documentation</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.documentation-link"}}</:label></PixInput>
         </div>
 
         <div class="form-field">
@@ -266,7 +266,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @hideDefaultOption={{true}}
             class="admin-form__select"
           >
-            <:label>SSO</:label>
+            <:label>{{t "components.organizations.information-section-view.sso"}}</:label>
           </PixSelect>
         </div>
 
@@ -276,7 +276,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @validationStatus={{this.form.emailError.status}}
             @value={{this.form.email}}
             {{on "input" (fn this.updateFormValue "email")}}
-          ><:label>Adresse e-mail d'activation SCO</:label></PixInput>
+          ><:label>{{t "components.organizations.information-section-view.sco-activation-email"}}</:label></PixInput>
         </div>
 
         <FeaturesForm

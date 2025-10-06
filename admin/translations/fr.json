@@ -80,6 +80,7 @@
       "send-new-confirm": "Un email a bien été renvoyé à {invitationEmail}",
       "send-new-label": "Renvoyer l'invitation à {invitationEmail}"
     },
+    "not-specified": "Non spécifié",
     "notifications": {
       "close-button": {
         "extra-information": "Fermer la notification"
@@ -97,6 +98,7 @@
     },
     "words": {
       "no": "Non",
+      "none": "Aucun",
       "yes": "Oui"
     }
   },
@@ -571,10 +573,28 @@
             "label": "Équipe en charge",
             "placeholder": "Sélectionner une équipe en charge"
           }
+        },
+        "name": {
+          "label": "Nom"
+        },
+        "province-code": {
+          "label": "Département (en 3 chiffres)"
         }
       },
       "information-section-view": {
+        "administration-team": "Équipe en charge",
+        "archive-organization": "Archiver l'organisation",
         "child-organization": "Organisation fille de",
+        "code": "Code",
+        "created-at": "Créée le",
+        "created-by": "Créée par",
+        "credits": "Crédits",
+        "documentation-link": "Lien vers la documentation",
+        "dpo-email": "Adresse e-mail du DPO",
+        "dpo-firstname": "Prénom du DPO",
+        "dpo-lastname": "Nom du DPO",
+        "dpo-name": "Nom du DPO",
+        "external-id": "Identifiant externe",
         "features": {
           "ATTESTATIONS_MANAGEMENT": "Attestations",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Certificabilité automatique",
@@ -591,7 +611,12 @@
           },
           "title": "Fonctionnalités"
         },
-        "parent-organization": "Organisation mère"
+        "is-archived-warning": "Archivée le {archivedAt} par {archivedBy}.",
+        "parent-organization": "Organisation mère",
+        "province-code": "Département",
+        "sco-activation-email": "Adresse e-mail d'activation SCO",
+        "sso": "SSO",
+        "type": "Type"
       },
       "invitations": {
         "table": {

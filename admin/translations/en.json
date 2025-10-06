@@ -80,6 +80,7 @@
       "send-new-confirm": "An email has been sent to {invitationEmail}",
       "send-new-label": "Resend the invitation to {invitationEmail}"
     },
+    "not-specified": "Not specified",
     "notifications": {
       "close-button": {
         "extra-information": "Close notification"
@@ -97,6 +98,7 @@
     },
     "words": {
       "no": "No",
+      "none": "None",
       "yes": "Yes"
     }
   },
@@ -570,10 +572,28 @@
             "label": "Administration team",
             "placeholder": "Choose an administration team"
           }
+        },
+        "name": {
+          "label": "Name"
+        },
+        "province-code": {
+          "label": "Province code (3 digits)"
         }
       },
       "information-section-view": {
+        "administration-team": "Administration team",
+        "archive-organization": "Archive organization",
         "child-organization": "Child organization of",
+        "code": "Code",
+        "created-at": "Created on",
+        "created-by": "Created by",
+        "credits": "Credits",
+        "documentation-link": "Link to the documentation",
+        "dpo-email": "DPO's e-mail address",
+        "dpo-firstname": "DPO's firstname",
+        "dpo-lastname": "DPO's lastname",
+        "dpo-name": "DPO's name",
+        "external-id": "External identifier",
         "features": {
           "ATTESTATIONS_MANAGEMENT": "Attestations",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Automatic certificability",
@@ -590,7 +610,12 @@
           },
           "title": "Features"
         },
-        "parent-organization": "Parent organization"
+        "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
+        "parent-organization": "Parent organization",
+        "province-code": "Province code",
+        "sco-activation-email": "SCO activation e-mail address",
+        "sso": "SSO",
+        "type": "Type"
       },
       "invitations": {
         "table": {
