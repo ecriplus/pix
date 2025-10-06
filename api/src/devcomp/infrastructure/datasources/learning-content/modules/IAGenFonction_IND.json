@@ -257,7 +257,7 @@
                           "id": "1",
                           "content": "<p>utile</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Effectivement, un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.<br></p>"
+                            "diagnosis": "<p><strong>Effectivement, un forum en ligne est très utile !</strong> <br>Ce type de données contient des questions, des réponses, des vraies conversations à analyser et à reproduire.</p>"
                           }
                         },
                         {
@@ -454,14 +454,14 @@
                     "id": "2",
                     "content": "<p>la réponse 2</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Et non.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.<br></p>"
+                      "diagnosis": "<p><strong>Et non.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>la réponse 3</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas vraiment.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.<br></p>"
+                      "diagnosis": "<p><strong>Pas vraiment.<br></strong>Les réponses utiles, agréables et positives, qui ne contredisent pas la demande formulée sont souvent les plus appréciées.</p>"
                     }
                   },
                   {
