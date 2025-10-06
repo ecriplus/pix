@@ -27,10 +27,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   noIdentityProviderOption = { label: 'Aucun', value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
-  noAdministrationTeamOption = {
-    label: this.intl.t('components.organizations.editing.administration-team.selector.none-option'),
-    value: 'None',
-  };
 
   constructor() {
     super(...arguments);
