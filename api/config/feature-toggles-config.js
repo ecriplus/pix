@@ -74,4 +74,11 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['frontend', 'team-prescription'],
   },
+  usePixOrgaNewAuthDesign: {
+    type: 'boolean',
+    description: 'Displays the new design of authentication pages',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['frontend', 'team-acces', 'pix-orga'],
+  },
 };
