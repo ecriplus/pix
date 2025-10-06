@@ -16,6 +16,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
         inputTokens: 0,
         outputTokens: 0,
         wasModerated: false,
+        done: false,
       };
     });
 
@@ -182,6 +183,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           inputTokens: 0,
           outputTokens: 0,
           wasModerated: false,
+          done: false,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
@@ -212,6 +214,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           inputTokens: 0,
           outputTokens: 0,
           wasModerated: false,
+          done: false,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
@@ -241,11 +244,12 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           inputTokens: 2_000,
           outputTokens: 5_000,
           wasModerated: false,
+          done: false,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
 
-      it('should capture the wasModerated flag if present', async function () {
+      it('should capture the wasModerated flag if present and set streamCapture as done', async function () {
         // given
         const input = [
           { message: 'Coucou les amis \ncomment ça va ?' },
@@ -271,11 +275,12 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           inputTokens: 0,
           outputTokens: 0,
           wasModerated: true,
+          done: true,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?Et toi ?');
       });
 
-      it('should capture the error content if error was present', async function () {
+      it('should capture the error content if error was present and set streamCapture as done', async function () {
         // given
         const input = [
           { message: 'Coucou les amis \ncomment ça va ?' },
@@ -297,6 +302,7 @@ describe('LLM | Unit | Infrastructure | Streaming | Transforms | ResponseObjectT
           outputTokens: 0,
           wasModerated: false,
           errorOccurredDuringStream: 'je me suis cassé un ongle',
+          done: true,
         });
         expect(streamCapture.LLMMessageParts.join('')).to.equal('Coucou les amis \ncomment ça va ?');
       });
