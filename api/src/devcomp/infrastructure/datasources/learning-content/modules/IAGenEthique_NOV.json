@@ -38,38 +38,22 @@
                     {
                       "userName": "Octave",
                       "direction": "outgoing",
-                      "content": "Tu sais, au fond, je pense que quand t’as des choses sur le cœur, le mieux c’est d’en parler à une IA. Elle ne risque pas de répéter à qui que ce soit et au moins elle ne te juge pas. ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Tu sais, au fond, je pense que quand t’as des choses sur le cœur, le mieux c’est d’en parler à une IA. Elle ne risque pas de répéter à qui que ce soit et au moins elle ne te juge pas. "
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
-                      "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
                     },
                     {
                       "userName": "Octave",
                       "direction": "outgoing",
-                      "content": "Tu veux dire que des gens peuvent lire ce que je dis à mon IA ? ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Tu veux dire que des gens peuvent lire ce que je dis à mon IA ? "
                     },
                     {
                       "userName": "Quentin",
                       "direction": "incoming",
-                      "content": "C’est un peu plus compliqué que ça… Mais en gros oui.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "C’est un peu plus compliqué que ça… Mais en gros oui."
                     }
                   ]
                 }
@@ -282,11 +266,7 @@
                     {
                       "userName": "Sixtine",
                       "direction": "incoming",
-                      "content": "J’en sais rien mais je ne vais pas m’amuser à envoyer de l’appeller.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "J’en sais rien mais je ne vais pas m’amuser à envoyer de l’appeller."
                     }
                   ]
                 }
