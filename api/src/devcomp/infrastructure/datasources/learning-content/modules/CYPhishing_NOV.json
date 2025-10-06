@@ -45,7 +45,7 @@
                       "content": "Ah, toi aussi tu l’as reçu ?  "
                     },
                     {
-                      "userName": "Yvette",
+                      "userName": "Xavier",
                       "direction": "outgoing",
                       "content": "Moi, je l’ai reçu la semaine dernière. Ma sœur aussi, alors qu’elle n’a même pas de compte bancaire !"
                     }
@@ -136,28 +136,28 @@
                     "id": "1",
                     "content": "<p>Récupérer des données personnelles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, en demandant de fournir son adresse et de payer en ligne, l’escroc veut récupérer des données personnelles. Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>Effectivement, l’escroc cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Recevoir le paiement des frais de livraison.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;En demandant de fournir son adresse et de payer en ligne, l’escroc veut récupérer des données personnelles. Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>En fait, il n’y a pas de livraison. L’escroc cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Signaler un problème.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;En demandant de fournir son adresse et de payer en ligne, l’escroc veut récupérer des données personnelles. Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En demandant de fournir son adresse et de payer en ligne, l’escroc veut récupérer des données personnelles. Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.<p></p>"
                     }
                   }
                 ],
@@ -176,7 +176,7 @@
               "element": {
                 "id": "4c853dca-4711-4bb0-8bca-1480ee237245",
                 "type": "text",
-                "content": "<p>Les tentatives d’arnaque par message sont des <strong>messages trompeurs</strong> envoyés à <strong>un très grand nombre de personnes</strong> par des escrocs.&nbsp;</p><p>📝 Leur but est que la victime donne des<strong> informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple).</p><p><br><strong>🤔 Bon à savoir</strong><br>On appelle cela du hameçonnage (ou phishing en anglais).</p>"
+                "content": "<p>Les tentatives d’arnaque par message sont des <strong>messages trompeurs</strong> envoyés à <strong>un très grand nombre de personnes</strong> par des escrocs, pour récupérer des données personnelles.&nbsp;</p><p><br><strong>🤔 Bon à savoir</strong><br>On appelle cela du hameçonnage (ou phishing en anglais).</p>"
               }
             }
           ]
@@ -199,7 +199,7 @@
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Attention à ce message ! Si tu leur donnes ce qu’ils demandent, tu risques de perdre de l’argent."
+                      "content": "Attention à ce message ! Si tu leur donnes ce qu’ils demandent, tu risques de te faire arnaquer et de perdre de l’argent."
                     },
                     {
                       "userName": "Yvette",
@@ -227,7 +227,7 @@
               "element": {
                 "id": "c22766bc-ff57-4f2b-a457-952ed34f4adc",
                 "type": "text",
-                "content": "<p>Isham a reçu de nombreux messages de phishing récemment. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.</p>"
+                "content": "<p>Isham a reçu de nombreux <strong>messages d’arnaque</strong> récemment. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.</p>"
               }
             },
             {
@@ -237,7 +237,7 @@
                 "type": "custom-draft",
                 "title": "Notifications mobile",
                 "url": "https://1024pix.github.io/atelier-contenus/LSI/cyphishingnov/notifications.html",
-                "instruction": "<p>Classez les notifications en fonction de l’expéditeur pour lequel se fait passer l’escroc.</p>",
+                "instruction": "<p>Classez les notifications de message en fonction de l’expéditeur pour lequel se fait passer l’escroc.</p>",
                 "height": 550
               }
             }
@@ -253,7 +253,7 @@
               "element": {
                 "id": "732eb744-d3f5-42b5-9d80-786b22f0e661",
                 "type": "text",
-                "content": "<p>🥸 Souvent, les messages d’arnaque se font passer pour un <strong>proche</strong>, une célébrité, une entreprise ou un <strong>service public connu</strong> (Les impôts, la CAF ou Ameli par exemple) <strong>pour gagner votre confiance</strong>.</p><p><br><strong>📌 À retenir</strong> <br>Un service public ou une entreprise commerciale sérieuse <strong>ne vous demandera pas vos données</strong> bancaires ou vos mots de passe par message ou par téléphone.</p>"
+                "content": "<p><strong>📌 À retenir</strong> <br>Un service public ou une entreprise commerciale sérieuse <strong>ne vous demandera pas vos données</strong> bancaires ou vos mots de passe par message ou par téléphone.</p>"
               }
             }
           ]
@@ -281,7 +281,7 @@
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Là par exemple, le message est très alarmiste pour te pousser à répondre."
+                      "content": "Là par exemple, le faux message de ta banque est très alarmiste pour te pousser à répondre."
                     }
                   ]
                 }
@@ -302,7 +302,7 @@
                     {
                       "id": "d3bc02bb-5ad9-47c2-9af4-e598b58a5cd8",
                       "type": "text",
-                      "content": "<p>Pour chacun des cas ci-dessous&nbsp;:</p><ul><li>ouvrez et lisez le <strong>message d'arnaque</strong>.</li><li>répondez à la question.</li></ul>"
+                      "content": "<p>Pour chacun des cas ci-dessous&nbsp;:</p><ul><li>ouvrez et lisez le <strong>message d’arnaque</strong>.</li><li>répondez à la question.</li></ul>"
                     },
                     {
                       "id": "c0c8222d-2081-405f-94cb-47802c983eba",
@@ -321,42 +321,42 @@
                           "id": "1",
                           "content": "<p>un sentiment de peur</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.<br></p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>un sentiment d’urgence</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>un sentiment d’espoir</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>un sentiment de colère</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "6",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         }
                       ],
@@ -383,42 +383,42 @@
                           "id": "1",
                           "content": "<p>un sentiment de peur</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>un sentiment d’urgence</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>un sentiment d’espoir</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>un sentiment de colère</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "6",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         }
                       ],
@@ -445,42 +445,42 @@
                           "id": "1",
                           "content": "<p>un sentiment de peur</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>un sentiment d’urgence</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence  pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>un sentiment d’espoir</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Eh non, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>un sentiment de colère</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivment, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Effectivment, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         },
                         {
                           "id": "6",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de l’empathie pour cette cousine bloquée à l’étranger.</p>"
+                            "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence pour cette cousine bloquée à l’étranger.&nbsp;C’est un moyen pour pousser le lecteur à agir sans réfléchir.</p>"
                           }
                         }
                       ],
@@ -516,20 +516,12 @@
                 "legend": "",
                 "licence": ""
               }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "7f274cae-833c-4918-ae3f-910b552ceafb",
-                "type": "text",
-                "content": "<p>Pour vous poussez à répondre ou à cliquer, les escrocs cherchent&nbsp;: </p><ul><li>à vous faire <strong>peur</strong>, 😱</li><li>à vous faire espérer un <strong>gain</strong>, 💵</li><li>à vous faire croire à une <strong>urgence </strong>🚨</li></ul>"
-              }
             }
           ]
         },
         {
           "id": "09d276a4-2e15-4b95-a787-ca88d87126e5",
-          "type": "lesson",
+          "type": "transition",
           "title": "Transition #3",
           "components": [
             {
@@ -586,7 +578,7 @@
               "element": {
                 "id": "2ef6189b-0332-4104-b9c2-aba957e30e59",
                 "type": "text",
-                "content": "<p>Pour éviter de tomber dans le piège d’un message d’arnaque&nbsp;:&nbsp; </p><ul><li><strong>Prendre le temps de réfléchir</strong> avant d’agir.&nbsp;⌛</li><li><strong>Ne pas communiquer</strong> d’informations personnelles.&nbsp;ℹ️</li><li><strong> Ne pas cliquer</strong> sur le lien, ne pas répondre.&nbsp;🙉</li></ul><p><br>🕵️ Dans le doute<strong> vérifiez l’information</strong> en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire.</p><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaques sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
+                "content": "<p>Pour éviter de tomber dans le piège d’un message d’arnaque&nbsp;:&nbsp; </p><ul>    <li><strong>Prendre le temps de réfléchir</strong> avant d’agir.&nbsp;⌛</li>    <li><strong>Ne pas communiquer</strong> d’informations personnelles.&nbsp;ℹ️</li>    <li><strong> Ne pas cliquer</strong> sur le lien, ne pas répondre.&nbsp;🙉</li></ul><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaques sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
               }
             }
           ]
