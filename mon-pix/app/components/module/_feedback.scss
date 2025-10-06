@@ -22,25 +22,24 @@
   }
 
   @media (not (prefers-reduced-motion: reduce)) {
-    animation:
-      0.4s slide-in ease-in-out,
-      0.5s fade-in ease-in-out;
+    animation: 0.75s zoom-in-zoom-out ease;
 
-    @keyframes slide-in {
+    @keyframes zoom-in-zoom-out {
       0% {
         height: 0;
         max-height: 0;
-        padding: 0 var(--pix-spacing-6x);
+        scale: 100%;
         overflow: hidden;
       }
 
-      60% {
+      50% {
         max-height: 100%;
-        padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+        scale: 110%;
       }
 
       100% {
         max-height: 100%;
+        scale: 100%;
       }
     }
   }
