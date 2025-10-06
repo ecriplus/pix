@@ -1,3 +1,4 @@
+import PixIndicatorCard from '@1024pix/pix-ui/components/pix-indicator-card';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { service } from '@ember/service';
@@ -59,6 +60,24 @@ export default class CombinedCourse extends Component {
         </dl>
       </:tools>
     </PageTitle>
+
+    <div class="combined-course-page__statistics">
+      <PixIndicatorCard
+        @title={{t "pages.combined-course.statistics.total-participations"}}
+        @iconName="users"
+        @color="purple"
+      >
+        <:default>{{@model.combinedCourseStatistics.participationsCount}}</:default>
+      </PixIndicatorCard>
+
+      <PixIndicatorCard
+        @title={{t "pages.combined-course.statistics.completed-participations"}}
+        @iconName="inboxIn"
+        @color="green"
+      >
+        <:default>{{@model.combinedCourseStatistics.completedParticipationsCount}}</:default>
+      </PixIndicatorCard>
+    </div>
 
     <PixTable
       @variant="orga"

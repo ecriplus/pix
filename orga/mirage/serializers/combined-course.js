@@ -6,6 +6,9 @@ export default ApplicationSerializer.extend({
       combinedCourseParticipations: {
         related: `/api/combined-courses/${combinedCourse.id}/participations`,
       },
+      combinedCourseStatistics: {
+        related: `/api/combined-courses/${combinedCourse.id}/statistics`,
+      },
     };
   },
 });

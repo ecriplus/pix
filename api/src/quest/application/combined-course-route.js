@@ -78,6 +78,28 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/combined-courses/{questId}/statistics',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserCanManageCombinedCourse,
+          },
+        ],
+        handler: combinedCourseController.getStatistics,
+        validate: {
+          params: Joi.object({
+            questId: identifiersType.questId,
+          }),
+        },
+        notes: [
+          "- Récupération des statistiques de participations d'un parcours combiné dont l'id de la quête est passé en paramètre,\n" +
+            " Nécessite que l'utilisateur soit membre de l'organisation propriétaire du parcours combiné",
+        ],
+        tags: ['api', 'combined-course', 'orga'],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/combined-courses/{questId}/participations',
       config: {
         pre: [

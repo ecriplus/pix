@@ -1010,6 +1010,10 @@
     },
     "combined-course": {
       "introduction": "text d'intro",
+      "statistics": {
+        "completed-participations": "Voltooide deelnames",
+        "total-participations": "Totaal van de deelnemingen"
+      },
       "table": {
         "column": {
           "first-name": "Voornaam",

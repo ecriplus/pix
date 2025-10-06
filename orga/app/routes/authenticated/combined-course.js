@@ -15,10 +15,7 @@ export default class CombinedCourseRoute extends Route {
   model(params) {
     return this.store
       .findRecord('combined-course', params.combined_course_id)
-      .then(async (data) => {
-        await data.combinedCourseParticipations;
-        return data;
-      })
+
       .catch((error) => {
         console.error(error);
         this.router.replaceWith('not-found');

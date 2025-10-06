@@ -7,6 +7,7 @@ import * as combinedCourseDetailsSerializer from '../infrastructure/serializers/
 import * as combinedCourseListSerializer from '../infrastructure/serializers/combined-course-list-serializer.js';
 import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
+import * as combinedCourseStatisticsSerializer from '../infrastructure/serializers/combined-course-statistics-serializer.js';
 
 const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
   const { code } = request.query.filter;
@@ -29,6 +30,12 @@ const getByOrganizationId = async (request, _, dependencies = { combinedCourseLi
   const combinedCourses = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
   return dependencies.combinedCourseListSerializer.serialize(combinedCourses);
+};
+
+const getStatistics = async (request, _, dependencies = { combinedCourseStatisticsSerializer }) => {
+  const questId = request.params.questId;
+  const combinedCourseStatistics = await usecases.getCombinedCourseStatistics({ questId });
+  return dependencies.combinedCourseStatisticsSerializer.serialize(combinedCourseStatistics);
 };
 
 const findParticipations = async (request, _, dependencies = { combinedCourseParticipationSerializer }) => {
@@ -73,6 +80,7 @@ const combinedCourseController = {
   getByCode,
   getById,
   getByOrganizationId,
+  getStatistics,
   findParticipations,
   start,
   reassessStatus,

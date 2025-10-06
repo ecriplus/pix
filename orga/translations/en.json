@@ -1010,6 +1010,10 @@
     },
     "combined-course": {
       "introduction": "text d'intro",
+      "statistics": {
+        "completed-participations": "Completed participations",
+        "total-participations": "Total participations"
+      },
       "table": {
         "column": {
           "first-name": "First name",

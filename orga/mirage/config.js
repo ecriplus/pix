@@ -667,18 +667,34 @@ function routes() {
       campaignIds: [],
     });
   });
+
   this.get('/combined-courses/:combinedCourseId/participations', function (schema) {
     const data = schema.combinedCourseParticipations.all();
 
     if (data) {
       return data;
     }
-    schema.combinedCourseParticipation.create({
+    schema.combinedCourseParticipations.create({
       id: 123,
       fistName: 'Gérard',
       lastName: 'Etlestars',
       status: 'COMPLETED',
     });
     return schema.combinedCourseParticipations.all();
+  });
+
+  this.get('/combined-courses/:combinedCourseId/statistics', function (schema, request) {
+    const combinedCourseId = request.params.combinedCourseId;
+    const data = schema.combinedCourseStatistics.find(combinedCourseId);
+
+    if (data) {
+      return data;
+    }
+    schema.combinedCourseStatistics.create({
+      id: combinedCourseId,
+      participationsCount: 5,
+      completedParticipationsCount: 2,
+    });
+    return schema.combinedCourseStatistics.find(combinedCourseId);
   });
 }

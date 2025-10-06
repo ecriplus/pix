@@ -38,11 +38,28 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     });
   });
 
+  describe('GET /api/combined-courses/{questId}/statistics', function () {
+    it('should call prehandler', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
+      sinon.stub(combinedCourseController, 'getStatistics').callsFake((request, h) => h.response());
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(combinedCourseRoute);
+
+      // when
+      await httpTestServer.request('GET', '/api/combined-courses/123/statistics');
+
+      // then
+      expect(securityPreHandlers.checkUserCanManageCombinedCourse).to.have.been.called;
+    });
+  });
+
   describe('GET /api/combined-courses/{questId}/participations', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkUserCanManageCombinedCourse').returns(() => true);
-      sinon.stub(combinedCourseController, 'getById').callsFake((request, h) => h.response());
+      sinon.stub(combinedCourseController, 'findParticipations').callsFake((request, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(combinedCourseRoute);
