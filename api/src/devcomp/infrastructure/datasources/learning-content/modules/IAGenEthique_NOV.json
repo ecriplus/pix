@@ -118,14 +118,14 @@
                     }
                   },
                   {
-                    "id": "3",
+                    "id": "2",
                     "content": "<p>Tout ce que vous écrivez est automatiquement publié et rendu visible sur Internet.</p>",
                     "feedback": {
                       "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.</p>"
                     }
                   },
                   {
-                    "id": "4",
+                    "id": "3",
                     "content": "<p>Rien n’est enregistré : tout est supprimé immédiatement après utilisation.</p>",
                     "feedback": {
                       "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br></p>"
