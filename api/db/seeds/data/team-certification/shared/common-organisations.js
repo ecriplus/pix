@@ -22,11 +22,15 @@ export class CommonOrganizations {
       this.sco = {};
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
+      const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'Sco administration team' });
+      await databaseBuilder.commit();
+
       const organization = new OrganizationForAdmin({
         name: 'Certification SCO Managing students organization',
         type: CenterTypes.SCO,
         isManagingStudents: true,
         externalId: 'SCO_MANAGING_STUDENTS_EXTERNAL_ID',
+        administrationTeamId: administrationTeam.id,
       });
 
       const scoOrganization = await organizationalEntitiesUsecases.createOrganization({
@@ -55,11 +59,15 @@ export class CommonOrganizations {
       this.pro = {};
       const organizationMember = await new CommonOrganizations({ databaseBuilder }).#initOrgaMember();
 
+      const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'Pro administration team' });
+      await databaseBuilder.commit();
+
       const organization = new OrganizationForAdmin({
         name: 'Certification PRO organization',
         type: CenterTypes.PRO,
         isManagingStudents: false,
         externalId: 'PRO_EXTERNAL_ID',
+        administrationTeamId: administrationTeam.id,
       });
 
       const proOrganization = await organizationalEntitiesUsecases.createOrganization({
