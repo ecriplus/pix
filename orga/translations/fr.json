@@ -469,6 +469,7 @@
       "campaigns": "Campagnes",
       "certifications": "Certifications",
       "close": "Fermer la navigation",
+      "combined-courses": "Parcours apprenants",
       "documentation": "Documentation",
       "home": "Accueil",
       "missions": "Missions",
@@ -615,6 +616,7 @@
       "name": "Nom de la campagne",
       "tab": {
         "activity": "Activité",
+        "combined-courses": "Parcours apprenants",
         "results": "Résultats ({count, number})",
         "review": "Analyse",
         "settings": "Paramètres"
@@ -1021,6 +1023,18 @@
           "status": "Statut"
         },
         "description": "Listes des participations au parcours"
+      }
+    },
+    "combined-courses": {
+      "empty-state": "Aucun parcours apprenant disponible pour l'instant.",
+      "table": {
+        "caption": "Liste des parcours apprenants",
+        "column": {
+          "code": "Code",
+          "completed": "Participants ayant terminé",
+          "name": "Nom du parcours",
+          "participants": "Participants"
+        }
       }
     },
     "index": {

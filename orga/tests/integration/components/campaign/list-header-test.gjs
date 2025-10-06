@@ -9,6 +9,44 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign | ListHeader', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  module('Combined courses tab', function () {
+    test('it displays combined courses tab when user has combined courses', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      sinon.stub(currentUser, 'combinedCourses').value([{ id: 1 }]);
+
+      // when
+      const screen = await render(<template><ListHeader /></template>);
+
+      // then
+      assert.dom(screen.getByRole('link', { name: t('pages.campaign.tab.combined-courses') })).exists();
+    });
+
+    test('it does not display combined courses tab when user has no combined courses', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      sinon.stub(currentUser, 'combinedCourses').value([]);
+
+      // when
+      const screen = await render(<template><ListHeader /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('link', { name: t('pages.campaign.tab.combined-courses') })).doesNotExist();
+    });
+
+    test('it does not display combined courses tab when combined courses is undefined', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      sinon.stub(currentUser, 'combinedCourses').value(undefined);
+
+      // when
+      const screen = await render(<template><ListHeader /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('link', { name: t('pages.campaign.tab.combined-courses') })).doesNotExist();
+    });
+  });
+
   module('when places limit feature is inactive', function () {
     test('it displays a disabled link', async function (assert) {
       // given
