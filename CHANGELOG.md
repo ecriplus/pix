@@ -1,5 +1,43 @@
 # Pix Changelog
 
+# [5.225.0](https://github.com/1024pix/pix/compare/v5.224.0...v5.225.0) (2025-10-06)
+
+### :rocket: Amélioration
+
+- [#13738](https://github.com/1024pix/pix/pull/13738) : S'assurer que le bouton "passer" devient "continuer" après l'apparition des feedbacks pour les QCM (PIX-19425) 
+- [#13759](https://github.com/1024pix/pix/pull/13759) Afficher les statistiques de participation d'un parcours combiné (PIX-19634) 
+- [#13773](https://github.com/1024pix/pix/pull/13773) Ajouter les parcours apprenants au chargement de PixOrga (pix-19813) 
+- [#13726](https://github.com/1024pix/pix/pull/13726) IAgenbiais_IND coquille 
+- [#13781](https://github.com/1024pix/pix/pull/13781) Intégration retours IAGENFonction_NOV 
+- [#13765](https://github.com/1024pix/pix/pull/13765) Récupérer les parcours combinés d'une organisation (PIX-19800) 
+- [#13780](https://github.com/1024pix/pix/pull/13780) Renseigner la table combined_courses (PIX-19865). 
+
+### :bug: Correction
+
+- [#13776](https://github.com/1024pix/pix/pull/13776) Empêcher d'envoyer un email à un destinaire des résultats si le candidat n'a pas de certif-course (PIX-19805). 
+- [#13750](https://github.com/1024pix/pix/pull/13750) Gérer le cas où le token de réinitialisation du mot de passe a expiré (PIX-19474). 
+- [#13796](https://github.com/1024pix/pix/pull/13796) Réparer la création d'orga dans les seeds certif 
+
+### :building_construction: Tech
+
+- [#13762](https://github.com/1024pix/pix/pull/13762) Ajoute un service pour mutualiser la logique de calcul des parcours combiné (PIX-19812) 
+- [#13770](https://github.com/1024pix/pix/pull/13770) Gestion du caractère obligatoire du champ administration-team à la création unitaire (PIX-19808) 
+- [#13775](https://github.com/1024pix/pix/pull/13775) Migrer les confs de PixCoeur dans la table certification_versions (PIX-19830). 
+- [#13779](https://github.com/1024pix/pix/pull/13779) Passer l'id de corrélation de requête à ChatPix pour faciliter le regroupement des logs et le débuggage sur Datadog 
+- [#13795](https://github.com/1024pix/pix/pull/13795) Supprimer les erreurs de connexion à Redis pour Maddo 
+
+### :arrow_up: Montée de version
+
+- [#13761](https://github.com/1024pix/pix/pull/13761) Update dependency @1024pix/ember-testing-library to ^3.0.18 (orga) 
+- [#13789](https://github.com/1024pix/pix/pull/13789) Update dependency @1024pix/ember-testing-library to ^3.0.19 (admin) 
+- [#13790](https://github.com/1024pix/pix/pull/13790) Update dependency @1024pix/ember-testing-library to ^3.0.19 (certif) 
+- [#13791](https://github.com/1024pix/pix/pull/13791) Update dependency @1024pix/ember-testing-library to ^3.0.19 (junior) 
+- [#13792](https://github.com/1024pix/pix/pull/13792) Update dependency @1024pix/ember-testing-library to ^3.0.19 (mon-pix) 
+- [#13794](https://github.com/1024pix/pix/pull/13794) Update dependency @1024pix/ember-testing-library to ^3.0.19 (orga) 
+- [#13797](https://github.com/1024pix/pix/pull/13797) Update dependency @1024pix/eslint-plugin to ^2.1.12 (api) 
+- [#13802](https://github.com/1024pix/pix/pull/13802) Update dependency @1024pix/eslint-plugin to ^2.1.12 (audit-logger) 
+- [#13804](https://github.com/1024pix/pix/pull/13804) Update dependency @1024pix/eslint-plugin to ^2.1.12 (certif)
+
 # [5.224.0](https://github.com/1024pix/pix/compare/v5.223.0...v5.224.0) (2025-10-03)
 
 ### :rocket: Amélioration
