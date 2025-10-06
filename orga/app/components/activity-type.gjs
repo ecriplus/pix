@@ -15,7 +15,7 @@ export default class ActivityType extends Component {
       case 'EXAM':
         return { icon: 'school', class: 'activity-type__icon--exam' };
       case 'COMBINED_COURSE':
-        return { icon: 'brick', class: 'activity-type__icon--combined-course' };
+        return { icon: 'studyLesson', class: 'activity-type__icon--combined-course' };
       default:
         return { icon: 'close', class: '' };
     }
