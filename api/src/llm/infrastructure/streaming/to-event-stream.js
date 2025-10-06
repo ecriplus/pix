@@ -38,12 +38,19 @@ export const ATTACHMENT_MESSAGE_TYPES = {
  * @param {OnStreamDoneCallback} params.onStreamDone
  * @param {string} params.attachmentMessageType
  * @param {boolean} params.shouldSendDebugData
+ * @param {string} params.prompt
  * @returns {Promise<module:stream.internal.PassThrough>}
  */
-export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMessageType, shouldSendDebugData }) {
+export async function fromLLMResponse({
+  llmResponse,
+  onStreamDone,
+  attachmentMessageType,
+  shouldSendDebugData,
+  prompt,
+}) {
   const writableStream = new PassThrough();
   writableStream.on('error', (err) => {
-    logger.error(`error while streaming response: ${err}`);
+    logger.error({ err, prompt }, 'error while streaming response');
   });
   if (attachmentMessageType !== ATTACHMENT_MESSAGE_TYPES.NONE) {
     writableStream.write(getAttachmentEventMessage(attachmentMessageType === ATTACHMENT_MESSAGE_TYPES.IS_VALID));
@@ -65,7 +72,7 @@ export async function fromLLMResponse({ llmResponse, onStreamDone, attachmentMes
     writableStream,
     async (err) => {
       if (err) {
-        logger.error(`error in pipeline: ${err}`);
+        logger.error({ err, prompt }, 'error in pipeline');
         if (!writableStream.closed && !writableStream.errored) {
           writableStream.end('Error while streaming response from LLM');
         }

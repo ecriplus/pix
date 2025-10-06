@@ -84,6 +84,7 @@ export async function promptChat({
       onStreamDone: finalize(chat, message, shouldSendMessageToLLM, chatRepository, redisMutex),
       attachmentMessageType,
       shouldSendDebugData: chat.isPreview,
+      prompt: message,
     });
   } catch (error) {
     await redisMutex.release(chatId);
