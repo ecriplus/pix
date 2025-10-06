@@ -143,6 +143,22 @@ module('Integration | Component | CombinedCourse', function (hooks) {
     );
   });
 
+  test('it should display empty state', async function (assert) {
+    // given
+    const emptyCombinedCourse = {
+      id: 1,
+      name: 'Parcours MagiPix',
+      code: '1234PixTest',
+      campaignIds: [123, 234],
+      combinedCourseParticipations: [],
+    };
+    // when
+    const screen = await render(<template><CombinedCourse @model={{emptyCombinedCourse}} /></template>);
+
+    assert.notOk(screen.queryByRole('table'));
+    assert.ok(screen.getByText(t('pages.campaign.empty-state')));
+  });
+
   module('combined course code display', function () {
     test('it should display combined course code', async function (assert) {
       // given

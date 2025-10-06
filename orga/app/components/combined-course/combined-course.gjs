@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import ActivityType from 'pix-orga/components/activity-type';
+import EmptyState from 'pix-orga/components/campaign/empty-state';
 import CopyPasteButton from 'pix-orga/components/copy-paste-button';
 import Breadcrumb from 'pix-orga/components/ui/breadcrumb';
 import PageTitle from 'pix-orga/components/ui/page-title';
@@ -100,41 +101,44 @@ export default class CombinedCourse extends Component {
         <:default>{{@model.combinedCourseStatistics.completedParticipationsCount}}</:default>
       </PixIndicatorCard>
     </div>
+    {{#if @model.combinedCourseParticipations.length}}
+      <PixTable
+        @variant="orga"
+        @caption={{t "pages.combined-course.table.description"}}
+        @data={{@model.combinedCourseParticipations}}
+        class="table"
+      >
+        <:columns as |participation context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.last-name"}}
+            </:header>
+            <:cell>
+              {{participation.lastName}}
+            </:cell>
+          </PixTableColumn>
 
-    <PixTable
-      @variant="orga"
-      @caption={{t "pages.combined-course.table.description"}}
-      @data={{@model.combinedCourseParticipations}}
-      class="table"
-    >
-      <:columns as |participation context|>
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.last-name"}}
-          </:header>
-          <:cell>
-            {{participation.lastName}}
-          </:cell>
-        </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.first-name"}}
+            </:header>
+            <:cell>
+              {{participation.firstName}}
+            </:cell>
+          </PixTableColumn>
 
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.first-name"}}
-          </:header>
-          <:cell>
-            {{participation.firstName}}
-          </:cell>
-        </PixTableColumn>
-
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.status"}}
-          </:header>
-          <:cell>
-            <ParticipationStatus @status={{participation.status}} />
-          </:cell>
-        </PixTableColumn>
-      </:columns>
-    </PixTable>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.status"}}
+            </:header>
+            <:cell>
+              <ParticipationStatus @status={{participation.status}} />
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <EmptyState />
+    {{/if}}
   </template>
 }
