@@ -8,8 +8,20 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
     // given
     const organizationId = 123;
 
-    const combinedCourse1 = new CombinedCourse({ id: 1, name: 'Combined Course 1', code: '1', organizationId });
-    const combinedCourse2 = new CombinedCourse({ id: 2, name: 'Combined Course 2', code: '2', organizationId });
+    const combinedCourse1 = new CombinedCourse({
+      id: 1,
+      name: 'Combined Course 1',
+      code: '1',
+      organizationId,
+      questId: 1,
+    });
+    const combinedCourse2 = new CombinedCourse({
+      id: 2,
+      name: 'Combined Course 2',
+      code: '2',
+      organizationId,
+      questId: 2,
+    });
     const participation1 = new CombinedCourseParticipation({ id: 1, questId: 1, organizationLearnerId: 1 });
     const participation2 = new CombinedCourseParticipation({ id: 2, questId: 1, organizationLearnerId: 2 });
     const participation3 = new CombinedCourseParticipation({ id: 3, questId: 2, organizationLearnerId: 3 });
@@ -31,7 +43,7 @@ describe('Quest | Unit | Domain | Usecases | getCombinedCoursesByOrganizationId'
     // then
     expect(combinedCourseRepositoryStub.findByOrganizationId).to.have.been.calledOnceWithExactly({ organizationId });
     expect(combinedCourseParticipationRepositoryStub.findByCombinedCourseIds).to.have.been.calledOnceWithExactly({
-      questIds: [1, 2],
+      combinedCourseIds: [1, 2],
     });
     expect(result).to.have.lengthOf(2);
     expect(result[0].participations).to.deep.equal([participation1, participation2]);

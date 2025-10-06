@@ -332,8 +332,8 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         databaseBuilder.factory.buildMembership({ userId, organizationId });
-        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
-        databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId });
+        databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBI1' });
+        databaseBuilder.factory.buildCombinedCourse({ organizationId, code: 'COMBI2' });
         await databaseBuilder.commit();
 
         const options = {
