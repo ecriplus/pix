@@ -58,14 +58,17 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
   describe('#getStatistics', function () {
     it('should call getCombinedCourseStatistics usecase with questId', async function () {
       // given
-      const questId = 'questId123';
+      const combinedCourseId = 'combinedCourseId123';
       const combinedCourseStatistics = Symbol('combinedCourseStatistics');
       const serializedCombinedCourseStatistics = Symbol('serializedCombinedCourseStatistics');
       const request = {
-        params: { questId },
+        params: { combinedCourseId },
       };
 
-      sinon.stub(usecases, 'getCombinedCourseStatistics').withArgs({ questId }).resolves(combinedCourseStatistics);
+      sinon
+        .stub(usecases, 'getCombinedCourseStatistics')
+        .withArgs({ combinedCourseId })
+        .resolves(combinedCourseStatistics);
       const combinedCourseStatisticsSerializer = { serialize: sinon.stub() };
       combinedCourseStatisticsSerializer.serialize
         .withArgs(combinedCourseStatistics)

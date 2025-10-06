@@ -17,7 +17,7 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseStatistics'
       firstName: 'John',
       lastName: 'Qwerty',
     });
-    const questId = databaseBuilder.factory.buildQuestForCombinedCourse({ organizationId }).id;
+    const questId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1', organizationId }).questId;
     databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId,
@@ -29,7 +29,7 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseStatistics'
       status: CombinedCourseParticipationStatuses.STARTED,
     });
 
-    const anotherquestId = databaseBuilder.factory.buildQuestForCombinedCourse().id;
+    const anotherquestId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI2' }).questId;
     databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId: anotherquestId,

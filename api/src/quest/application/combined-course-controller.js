@@ -33,8 +33,8 @@ const getByOrganizationId = async (request, _, dependencies = { combinedCourseLi
 };
 
 const getStatistics = async (request, _, dependencies = { combinedCourseStatisticsSerializer }) => {
-  const questId = request.params.questId;
-  const combinedCourseStatistics = await usecases.getCombinedCourseStatistics({ questId });
+  const combinedCourseId = request.params.combinedCourseId;
+  const combinedCourseStatistics = await usecases.getCombinedCourseStatistics({ combinedCourseId });
   return dependencies.combinedCourseStatisticsSerializer.serialize(combinedCourseStatistics);
 };
 

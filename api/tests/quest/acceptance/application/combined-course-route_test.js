@@ -254,12 +254,12 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
     });
   });
 
-  describe('GET /api/combined-courses/{questId}/statistics', function () {
+  describe('GET /api/combined-courses/{combinedCourseId}/statistics', function () {
     context('when user has membership in the combined course organization', function () {
       it('should return the combined course statistics', async function () {
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -275,7 +275,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${questId}/statistics`,
+          url: `/api/combined-courses/${combinedCourseId}/statistics`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
