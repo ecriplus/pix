@@ -67,6 +67,7 @@ const serialize = function (prescriber) {
           'participationStatistics',
           'groups',
           'schoolCode',
+          'combinedCourses',
           'sessionExpirationDate',
         ],
         memberships: {
@@ -129,6 +130,16 @@ const serialize = function (prescriber) {
           relationshipLinks: {
             related: function (record, current, parent) {
               return `/api/organizations/${parent.id}/participation-statistics`;
+            },
+          },
+        },
+        combinedCourses: {
+          ref: 'id',
+          ignoreRelationshipData: true,
+          nullIfMissing: true,
+          relationshipLinks: {
+            related: function (record, current, parent) {
+              return `/api/organizations/${parent.id}/combined-courses`;
             },
           },
         },

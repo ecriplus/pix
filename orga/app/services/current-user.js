@@ -15,6 +15,7 @@ export default class CurrentUserService extends Service {
   @tracked isGarAuthenticationMethod;
   @tracked organizationPlaceStatistics;
   @tracked participationStatistics;
+  @tracked combinedCourses;
 
   get canAccessImportPage() {
     return Boolean(
@@ -57,6 +58,14 @@ export default class CurrentUserService extends Service {
 
   get placeStatistics() {
     return this.organizationPlaceStatistics;
+  }
+
+  async loadCombinedCourses() {
+    this.combinedCourses = await this.organization.combinedCourses;
+  }
+
+  get hasCombinedCourses() {
+    return Boolean(this.combinedCourses && this.combinedCourses.length > 0);
   }
 
   async loadPlaceStatistics() {
@@ -119,6 +128,7 @@ export default class CurrentUserService extends Service {
     this.isAgriculture = organization.isAgriculture;
     this.organization = organization;
     await this.loadPlaceStatistics();
+    await this.loadCombinedCourses();
     await this.loadParticipationStatistics();
   }
 }
