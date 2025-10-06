@@ -461,7 +461,7 @@
               "element": {
                 "id": "9cbfbaae-17ab-4316-ba32-2f8ca4531632",
                 "type": "text",
-                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>Le type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
+                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.\n</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>\nLe type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
               }
             }
           ]
