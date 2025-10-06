@@ -71,7 +71,7 @@
               "element": {
                 "id": "7dc81673-0539-407f-a85b-a2d527ea2591",
                 "type": "text",
-                "content": "<p>Oui, ce qui est raconté à l’IA n’est pas vraiment uniquement entre le logiciel et vous. Voyons ensemble pourquoi et ce que cela peut impliquer.</p>"
+                "content": "<p>Oui, les échanges avec une IA ne restent pas toujours totalement privés. Voyons ensemble pourquoi et quelles conséquences cela peut avoir.</p>"
               }
             }
           ]
@@ -92,7 +92,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
-                "content": "<p>Voici un extrait traduit des questions fréquemment posées à OpenAI, les créateurs de ChatGPT.</p>"
+                "content": "<p>Voici un extrait traduit des questions fréquemment posées à Open IA, l'entreprise qui a créé ChatGPT.</p>"
               }
             },
             {
@@ -108,31 +108,31 @@
               "element": {
                 "id": "116e35a3-6c9c-4d5d-a97f-1bfac4b1c1c0",
                 "type": "qcu-discovery",
-                "instruction": "<p>Basé sur cet extrait de FAQ, selon vous, quand vous utilisez ChatGPT (ou un autre logiciel d’IA générative), que peut faire ChatGPT de vos prompts ?&nbsp;<br><br></p>",
+                "instruction": "<p>Basé sur cet extrait de FAQ, quand vous utilisez ChatGPT (ou un autre logiciel d’IA générative), que peut faire ChatGPT de vos prompts ?&nbsp;<br><br></p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Ils peuvent servir à améliorer le modèle et certains extraits peuvent être vérifiés par des équipes humaines</p>",
+                    "content": "<p>Ils servent à améliorer le modèle et des extraits peuvent être vérifiés par des humains.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br><br></p>"
+                      "diagnosis": "<p>Effectivement, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Tout ce que vous écrivez est automatiquement publié sur Internet</p>",
+                    "content": "<p>Tout ce que vous écrivez est automatiquement publié et rendu visible sur Internet.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br><br></p>"
+                      "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Rien n’est enregistré, tout est immédiatement effacé après usage</p>",
+                    "content": "<p>Rien n’est enregistré : tout est supprimé immédiatement après utilisation.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br><br></p>"
+                      "diagnosis": "<p>En fait, le fabriquant de l’IA peut <strong>examiner certaines conversations</strong> afin de rendre son logiciel plus sûr et plus utile. La justification donnée par le fabricant de ChatGPT&nbsp;: améliorer le système, et s’assurer que le contenu échangé respecte les règles de sécurité et les <strong>politiques d’utilisation</strong>.<br></p>"
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "1"
               }
             }
           ]
@@ -187,7 +187,7 @@
               "type": "element",
               "element": {
                 "id": "f936d59d-7f97-4234-85cc-6792c7ed3f25",
-                "type": "qcu-declarative",
+                "type": "qcu-discovery",
                 "instruction": "<p>Avez-vous remarqué un lien entre les informations qui ont été corrigées ?&nbsp;<br></p>",
                 "proposals": [
                   {
@@ -204,7 +204,8 @@
                       "diagnosis": "<p>Ce sont toutes des données personnelles, sensibles ou confidentielles.</p>"
                     }
                   }
-                ]
+                ],
+                "solution": "1"
               }
             }
           ]
@@ -219,7 +220,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
-                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul><li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li><li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li><li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li></ul><p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.&nbsp;<br><br></p>"
+                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li></ul><p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
               }
             }
           ]
@@ -260,13 +261,13 @@
                       "content": " J’avais besoin d’une image de carte de visite pour un jeu que je développe. J’ai demandé à l’IA et j’ai eu ça. Tu penses que c’est une vraie ? ",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/iagenethiquenov/a971c385-bad5-4038-8334-1115b509c3e4.png",
-                        "alt": ""
+                        "alt": "Uiui"
                       }
                     },
                     {
                       "userName": "Sixtine",
                       "direction": "incoming",
-                      "content": "J’en sais rien mais je ne vais pas m’amuser à envoyer de l’appeller."
+                      "content": "J’en sais rien mais je ne vais pas m’amuser à l’appeler."
                     }
                   ]
                 }
@@ -281,30 +282,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>non c’est impossible</p>",
+                    "content": "<p>Non c’est impossible.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les IA génératives produisent du contenu en se basant sur des données réelles.<br><br></p>"
+                      "diagnosis": "<p>En fait, comme les IA génératives <strong>produisent du contenu en se basant sur des données réelles</strong>, le doute est permis. Il est possible que ce soit des <strong>vraies informations</strong>, même si les entreprises d'IA font leur possible pour que cela n'arrive pas</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>C’est sans doute une vraie carte de visite</p>",
+                    "content": "<p>C’est sans doute une vraie carte de visite.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les IA génératives produisent du contenu en se basant sur des données réelles.<br><br></p>"
+                      "diagnosis": "<p>En fait, comme les IA génératives <strong>produisent du contenu en se basant sur des données réelles</strong>, le doute est permis. Il est possible que ce soit des <strong>vraies informations</strong>, même si les entreprises d'IA font leur possible pour que cela n'arrive pas</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>le doute est permis<br></p>",
+                    "content": "<p>Le doute est permis.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Les IA génératives produisent du contenu en se basant sur des données réelles.<br><br></p>"
+                      "diagnosis": "<p>En fait, comme les IA génératives <strong>produisent du contenu en se basant sur des données réelles</strong>, le doute est permis. Il est possible que ce soit des <strong>vraies informations</strong>, même si les entreprises d'IA font leur possible pour que cela n'arrive pas</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>je ne sais pas</p>",
+                    "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les IA génératives produisent du contenu en se basant sur des données réelles.<br><br></p>"
+                      "diagnosis": "<p>En fait, comme les IA génératives <strong>produisent du contenu en se basant sur des données réelles</strong>, le doute est permis. Il est possible que ce soit des <strong>vraies informations</strong>, même si les entreprises d'IA font leur possible pour que cela n'arrive pas</p>"
                     }
                   }
                 ],
@@ -365,23 +366,23 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Parce que les entreprises veulent aider gratuitement à entraîner les modèles d’IA.</p>",
+                    "content": "<p>Parce qu’elles craignent que leurs employés abiment l'IA en y mettant des mauvaises données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les entreprises gèrent des informations confidentielles (clients, finances, contrats…) doivent garantir que les données ne seront pas réutilisées. Certaines entreprises créent même leurs propres IA en interne pour s’assurer que rien ne soit réutilisé.&nbsp;<br><br></p>"
+                      "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;<br><br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Parce qu’elles doivent respecter la confidentialité et protéger leurs données sensibles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les entreprises gèrent des informations confidentielles (clients, finances, contrats…) doivent garantir que les données ne seront pas réutilisées. Certaines entreprises créent même leurs propres IA en interne pour s’assurer que rien ne soit réutilisé.</p>"
+                      "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Parce que Claude for Work ne fonctionne pas sans récupérer vos données.</p>",
+                    "content": "<p>Parce qu'elles veulent que Anthropic paye pour les employés aident l'IA à s'améliorer.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les entreprises gèrent des informations confidentielles (clients, finances, contrats…) doivent garantir que les données ne seront pas réutilisées. Certaines entreprises créent même leurs propres IA en interne pour s’assurer que rien ne soit réutilisé.&nbsp;<br><br></p>"
+                      "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;</p>"
                     }
                   }
                 ],
@@ -407,12 +408,8 @@
               "type": "element",
               "element": {
                 "id": "2e7d7557-fd13-4a5c-89ab-e4d40184da2c",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/iagenethiquenov/2025-10-06%2009_16_25-.png",
-                "alt": "",
-                "alternativeText": "",
-                "legend": "",
-                "licence": ""
+                "type": "text",
+                "content": "<ul>    <li>Situation -------------------&gt; Réutilisation des données ?</li>    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li></ul>"
               }
             },
             {
@@ -441,7 +438,7 @@
               "element": {
                 "id": "9cbfbaae-17ab-4316-ba32-2f8ca4531632",
                 "type": "text",
-                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.\n</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>\nLe type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
+                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>Le type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
               }
             }
           ]
@@ -462,34 +459,38 @@
               "element": {
                 "id": "dee26d54-a074-4904-9180-38800a025450",
                 "type": "qcm",
-                "instruction": "<p>Lorem</p>",
+                "instruction": "<p>Pourquoi vos données peuvent-elles être concernées par les lois d’un autre pays&nbsp;?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Lorem</p>"
+                    "content": "<p>Parce que les serveurs qui stockent ou traitent les données ne sont pas toujours situés dans votre pays.</p>"
                   },
                   {
                     "id": "2",
-                    "content": "<p>Lorem</p>"
+                    "content": "<p>Parce que les données voyagent physiquement avec votre ordinateur.</p>"
                   },
                   {
                     "id": "3",
-                    "content": "<p>Lorem</p>"
+                    "content": "<p>Parce que chaque pays partage automatiquement ses bases de données avec les autres.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Parce que les IA refusent les données étrangères.</p>"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Lorem</p>",
-                    "diagnosis": "<p><strong>Lorem</strong><br></p>"
+                    "state": "<p>Bonne réponse&nbsp;!</p>",
+                    "diagnosis": "<p><strong>Les serveurs peuvent être situés à l’étranger</strong> et donc soumis à d’autres lois. C’est pourquoi vos données peuvent relever de la juridiction d’un autre pays.</p>"
                   },
                   "invalid": {
-                    "state": "<p>Lorem</p>",
-                    "diagnosis": "<p>Lorem</p>"
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Les données ne voyagent pas avec votre appareil ni automatiquement entre pays. Elles peuvent simplement être traitées sur des serveurs à l’étranger, soumis à d’autres lois.</p>"
                   }
                 },
                 "solutions": [
                   "1",
-                  "2"
+                  ""
                 ]
               }
             }
@@ -505,7 +506,7 @@
               "element": {
                 "id": "dee26d54-a074-4904-9180-38800a025450",
                 "type": "qab",
-                "instruction": "<p>Lesquels de ces prompts sont respectueux de la confidentialité ?&nbsp;</p>",
+                "instruction": "<p>Ce prompt est-il respectueux de la confidentialité ?</p>",
                 "cards": [
                   {
                     "id": "5cb223a7-e61a-4095-8e02-1cba9bc8b621",
@@ -514,8 +515,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Bon prompt",
-                    "proposalB": "Mauvais prompt",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -525,19 +526,19 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Bon prompt",
-                    "proposalB": "Mauvais prompt",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
                     "id": "7c0cc776-3d01-4c0a-b31d-a560cc96472c",
-                    "text": "Tu peux me donner une idée de cadeaux pour ma sœur de 38 ans qui aime les livres policiers ",
+                    "text": "Tu peux me donner une idée de cadeaux pour ma sœur de 38 ans qui aime les livres policiers ?",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Bon prompt",
-                    "proposalB": "Mauvais prompt",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -547,8 +548,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Bon prompt",
-                    "proposalB": "Mauvais prompt",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -558,8 +559,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Bon prompt",
-                    "proposalB": "Mauvais prompt",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   }
                 ],
@@ -601,7 +602,7 @@
               "element": {
                 "id": "2f2d99a4-0f6e-4f27-bbad-72cf7937ecc8",
                 "type": "qcu",
-                "instruction": "<p><strong>D’après cet exemple de GitHub Copilot sur les risques liés aux IA gratuites ou grand public ?</strong></p>",
+                "instruction": "<p><strong>D’après l’exemple de GitHub Copilot, quel risque peut présenter l’utilisation d’outils d’intelligence artificielle gratuits ou grand public ?</strong></p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -655,12 +656,20 @@
             {
               "type": "element",
               "element": {
+                "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
+                "type": "text",
+                "content": "<p><strong>Voici le prompt écrit par Ismaël</strong> </p><p> <em> Fais une analyse de ces clients et propose un plan marketing adapté :</em></p><ul><li><em>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, 31000 Toulouse, téléphone : 06 11 22 33 44, e-mail : marie.dubois@gmail.com</em></li><li><em>Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de Paris, 94100 Créteil, téléphone : 06 55 44 33 22, e-mail : ahmed.ouali@yahoo.fr</em></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "3eca7c8d-531d-4cc8-9ccb-f9cac3714fd9",
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Corrige le prompt",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg7tpodh00001t01ygol69a8",
-                "instruction": "<p>Voici le prompt écrit par Ismaël </p><p><em>« Fais une analyse de ces clients et propose un plan marketing adapté :<br>Marie Dubois, 45 ans, mariée, 2 enfants, habite au 18 rue Lafayette, 31000 Toulouse, téléphone : 06 11 22 33 44, e-mail : marie.dubois@gmail.com<br>Ahmed Ouali, 38 ans, célibataire, habite au 12 avenue de Paris, 94100 Créteil, téléphone : 06 55 44 33 22, e-mail : ahmed.ouali@yahoo.fr »</em></p><p><br>Corrigez le jusqu'à obtenir une versions sans données confidentielles. <br><br></p>",
+                "instruction": "<p>Corrigez le jusqu'à obtenir une versions sans données confidentielles.<br> </p>",
                 "solution": "pix-llm-success",
                 "height": 600
               }
