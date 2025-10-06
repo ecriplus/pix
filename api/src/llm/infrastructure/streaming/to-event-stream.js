@@ -76,9 +76,6 @@ export async function fromLLMResponse({
     async (err) => {
       if (err || !streamCapture.done || streamCapture.errorOccurredDuringStream) {
         logger.error({ err, prompt }, 'error in stream');
-        if (!writableStream.closed && !writableStream.errored) {
-          writableStream.end(events.getError());
-        }
       }
       await onStreamDone(streamCapture, !err);
     },
