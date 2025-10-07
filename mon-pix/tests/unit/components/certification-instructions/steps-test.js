@@ -12,6 +12,9 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       test('should change the pageId', async function (assert) {
         // given
         const component = createGlimmerComponent('certification-instructions/steps');
+        component.args.candidate = {
+          complementaryCertificationKey: null,
+        };
 
         component.pageId = 1;
         component.pageCount = 2;
@@ -58,11 +61,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#certificationName', function () {
     test('should return Pix when no complementary certification key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: null,
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: null,
+      };
 
       // then
       assert.strictEqual(component.certificationName, 'Pix');
@@ -70,11 +72,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return complementary certification name when has key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'DROIT',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'DROIT',
+      };
 
       // then
       assert.strictEqual(component.certificationName, 'Pix+ Droit');
@@ -82,11 +83,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return Pix when has CLEA key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'CLEA',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'CLEA',
+      };
 
       // then
       assert.strictEqual(component.certificationName, 'Pix');
@@ -96,11 +96,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#title', function () {
     test('should use Pix when CLEA complementary certification key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'CLEA',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'CLEA',
+      };
       component.pageId = 1;
 
       // then
@@ -111,11 +110,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#certificationInstructionStep1Paragraph1', function () {
     test('should return default text when no complementary certification key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: null,
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: null,
+      };
 
       // then
       assert.ok(
@@ -127,11 +125,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return default text when CLEA complementary certification key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'CLEA',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'CLEA',
+      };
 
       // then
       assert.ok(
@@ -143,11 +140,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return Pix+ specific text when has complementary certification key', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'DROIT',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'DROIT',
+      };
 
       // then
       assert.ok(
@@ -161,11 +157,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#certificationDurationInMinutes', function () {
     test('should return 105 minutes for standard Pix certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: null,
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: null,
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 105);
@@ -173,11 +168,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 105 minutes for CLEA certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'CLEA',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'CLEA',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 105);
@@ -185,11 +179,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 45 minutes for Pix+ Droit certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'DROIT',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'DROIT',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 45);
@@ -197,11 +190,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 45 minutes for Pix+ Pro Santé certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'PRO_SANTE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'PRO_SANTE',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 45);
@@ -209,11 +201,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 90 minutes for Pix+ Édu 1er degré certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'EDU_1ER_DEGRE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'EDU_1ER_DEGRE',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 90);
@@ -221,11 +212,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 90 minutes for Pix+ Édu 2nd degré certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'EDU_2ND_DEGRE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'EDU_2ND_DEGRE',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 90);
@@ -233,11 +223,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return 90 minutes for Pix+ Édu CPE certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'EDU_CPE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'EDU_CPE',
+      };
 
       // then
       assert.strictEqual(component.certificationDurationInMinutes, 90);
@@ -247,11 +236,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#durationLegend', function () {
     test('should return "1 H 45 min" for standard Pix certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: null,
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: null,
+      };
 
       // then
       assert.strictEqual(component.durationLegend, '1 H 45 min');
@@ -259,11 +247,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return "45 min" for Pix+ Droit certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'DROIT',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'DROIT',
+      };
 
       // then
       assert.strictEqual(component.durationLegend, '45 min');
@@ -271,11 +258,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return "1 H 30 min" for Pix+ Édu certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'EDU_1ER_DEGRE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'EDU_1ER_DEGRE',
+      };
 
       // then
       assert.strictEqual(component.durationLegend, '1 H 30 min');
@@ -285,11 +271,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
   module('#durationText', function () {
     test('should return "1h45" for standard Pix certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: null,
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: null,
+      };
 
       // then
       assert.strictEqual(component.durationText, '1h45');
@@ -297,11 +282,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return "45min" for Pix+ Droit certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'DROIT',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'DROIT',
+      };
 
       // then
       assert.strictEqual(component.durationText, '45min');
@@ -309,11 +293,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
 
     test('should return "1h30" for Pix+ Édu certification', function (assert) {
       // given
-      const component = createGlimmerComponent('certification-instructions/steps', {
-        candidate: {
-          complementaryCertificationKey: 'EDU_2ND_DEGRE',
-        },
-      });
+      const component = createGlimmerComponent('certification-instructions/steps');
+      component.args.candidate = {
+        complementaryCertificationKey: 'EDU_2ND_DEGRE',
+      };
 
       // then
       assert.strictEqual(component.durationText, '1h30');

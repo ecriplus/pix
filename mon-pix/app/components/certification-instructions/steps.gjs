@@ -44,6 +44,13 @@ export default class Steps extends Component {
     return false;
   }
 
+  _formatDuration(minutes) {
+    return {
+      hours: Math.floor(minutes / 60),
+      remainingMinutes: minutes % 60,
+    };
+  }
+
   get certificationName() {
     const complementaryKey = this.args.candidate?.complementaryCertificationKey;
     if (this._isPixPlus()) {
@@ -96,9 +103,9 @@ export default class Steps extends Component {
   }
 
   get certificationDurationInMinutes() {
-    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
+    const complementaryKey = this.args.candidate.complementaryCertificationKey;
 
-    if (!complementaryKey || complementaryKey === 'CLEA') {
+    if (!complementaryKey) {
       return PIX_STANDARD_DURATION;
     }
 
@@ -118,8 +125,7 @@ export default class Steps extends Component {
 
   get durationLegend() {
     const minutes = this.certificationDurationInMinutes;
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+    const { hours, remainingMinutes } = this._formatDuration(minutes);
 
     if (hours === 0) {
       return `${minutes} min`;
@@ -132,8 +138,7 @@ export default class Steps extends Component {
 
   get durationText() {
     const minutes = this.certificationDurationInMinutes;
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+    const { hours, remainingMinutes } = this._formatDuration(minutes);
 
     if (hours === 0) {
       return `${minutes}min`;
