@@ -158,6 +158,8 @@ async function _findValidChallengesForComplementaryCertification({ complementary
   const complementaryCertificationChallenges = await knex
     .from('certification-frameworks-challenges')
     .where({ complementaryCertificationKey })
+    .whereNotNull('discriminant')
+    .whereNotNull('difficulty')
     .andWhere('version', '=', closestVersion);
 
   const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
