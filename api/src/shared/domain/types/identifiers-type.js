@@ -79,6 +79,7 @@ const typesPositiveInteger32bits = [
   'targetProfileId',
   'targetProfileTemplateId',
   'trainingId',
+  'trainingTriggerId',
   'userId',
   'userOrgaSettingsId',
 ];

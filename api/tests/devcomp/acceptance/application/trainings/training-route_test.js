@@ -304,6 +304,43 @@ describe('Acceptance | Controller | training-controller', function () {
     });
   });
 
+  describe('DELETE /api/admin/trainings/{trainingId}/triggers/{trainingTriggerId}', function () {
+    let options;
+
+    it('should delete trigger related to training', async function () {
+      // given
+      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const training = databaseBuilder.factory.buildTraining();
+      const trainingTrigger = databaseBuilder.factory.buildTrainingTrigger({
+        trainingId: training.id,
+        type: 'prerequisite',
+      });
+      databaseBuilder.factory.buildTrainingTriggerTube({ trainingTriggerId: trainingTrigger.id, tubeId: 'rec0' });
+
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'DELETE',
+        url: `/api/admin/trainings/${training.id}/triggers/${trainingTrigger.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+
+      const deletedTrainingTrigger = await knex('training-triggers').where({ id: trainingTrigger.id }).first();
+      const deletedTrainingTriggerTube = await knex('training-trigger-tubes')
+        .where({ trainingTriggerId: trainingTrigger.id })
+        .first();
+
+      expect(deletedTrainingTrigger).to.be.undefined;
+      expect(deletedTrainingTriggerTube).to.be.undefined;
+    });
+  });
+
   describe('GET /api/admin/training-summaries', function () {
     let options;
 
