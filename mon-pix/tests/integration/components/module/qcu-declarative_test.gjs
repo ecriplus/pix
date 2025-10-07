@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import ModuleQcuDeclarative from 'mon-pix/components/module/element/qcu-declarative';
 import { module, test } from 'qunit';
@@ -57,6 +58,7 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
         },
       });
     });
+
     test('it should call "onAnswer" function pass as argument', async function (assert) {
       // given
       const passageEventService = this.owner.lookup('service:passageEvents');
@@ -78,6 +80,25 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
         element: qcuDeclarativeElement,
       });
       assert.ok(true);
+    });
+  });
+
+  module('when preview mode is enabled', function () {
+    test('should display all feedbacks, without answering', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+      const qcuDeclarativeElement = _getQcuDeclarativeElement();
+
+      // when
+      const screen = await render(<template><ModuleQcuDeclarative @element={{qcuDeclarativeElement}} /></template>);
+
+      // then
+      assert.dom(screen.getByText("C'est l'approche de la plupart des gens.")).exists();
+      assert.dom(screen.getByText('Possible, mais attention à ne pas faire une rafarinade !')).exists();
+      assert.dom(screen.getByText('Digne des plus grands acrobates !')).exists();
     });
   });
 });

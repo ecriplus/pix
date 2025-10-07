@@ -11,6 +11,7 @@ export default class ModuleQcuDeclarative extends ModuleElement {
   @tracked selectedProposalId = null;
   @tracked shouldDisplayFeedback = false;
   @service passageEvents;
+  @service modulixPreviewMode;
 
   get selectedProposalFeedback() {
     return this.element.proposals.find((proposal) => proposal.id === this.selectedProposalId).feedback.diagnosis;
@@ -64,6 +65,11 @@ export default class ModuleQcuDeclarative extends ModuleElement {
               @isDisabled={{this.isAnswered}}
               @isSelected={{this.isProposalSelected proposal.id}}
             />
+            {{#if this.modulixPreviewMode.isEnabled}}
+              <div class="element-qcu-declarative__feedback" role="status" tabindex="-1">
+                {{htmlUnsafe proposal.feedback.diagnosis}}
+              </div>
+            {{/if}}
           {{/each}}
         </div>
       </fieldset>
