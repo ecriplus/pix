@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.226.0](https://github.com/1024pix/pix/compare/v5.225.0...v5.226.0) (2025-10-07)
+
+### :rocket: Amélioration
+
+- [#13815](https://github.com/1024pix/pix/pull/13815) Ajouter deux colonnes à la table combined_course_participations : combinedCourseId et organizationLearnerParticipationId 
+- [#13807](https://github.com/1024pix/pix/pull/13807) Ajouter les feedbacks pour les QCU déclaratif en mode preview (PIX-19892). 
+- [#13786](https://github.com/1024pix/pix/pull/13786) Ajouter les feedbacks pour les QCU discovery en mode preview (PIX-19859) 
+- [#13788](https://github.com/1024pix/pix/pull/13788) Ajouter un feature toggle pour le nouveau design des pages d'authentification de Pix Orga (PIX-19794) 
+- [#13785](https://github.com/1024pix/pix/pull/13785) Empêcher le layout shift sur les images des flashcards (PIX-19842). 
+- [#13784](https://github.com/1024pix/pix/pull/13784) Enregistrer l'équipe en charge lors de la modification d'organisations en masse (PIX-19602) 
+- [#13767](https://github.com/1024pix/pix/pull/13767) Enregistrer la nouvelle équipe en charge lors de la modification d'une organisation (PIX-19599) 
+- [#13782](https://github.com/1024pix/pix/pull/13782) Intégrations retours IAGENfonction_IND 
+- [#13799](https://github.com/1024pix/pix/pull/13799) modifs module cyphishing1 suite changement pattern 
+- [#13793](https://github.com/1024pix/pix/pull/13793) Remonter les métadonnées des images présentes dans les QAB (PIX-19683). 
+- [#13783](https://github.com/1024pix/pix/pull/13783) Utiliser les données de la table `combined_courses` au lieu de quests (Pix-19851). 
+
+### :bug: Correction
+
+- [#13814](https://github.com/1024pix/pix/pull/13814) Ne sélectionner que des challenges calibrés dans une certification Pix+ (PIX-19895). 
+- [#13800](https://github.com/1024pix/pix/pull/13800) Sélectionner uniquement les challenges validés durant une certif Pix+ (PIX-19883). 
+- [#13817](https://github.com/1024pix/pix/pull/13817) Un logger.error() se déclenche en fin de stream même lorsque tout s'est bien passé 
+
+### :building_construction: Tech
+
+- [#13766](https://github.com/1024pix/pix/pull/13766) :truck: Déplace le répository `complementaryCertificationRepository` vers le  contexte `certification/configuration/` (PIX-19836) 
+- [#13810](https://github.com/1024pix/pix/pull/13810) Logger le prompt en cas d'erreur LLM. 
+
+### :arrow_up: Montée de version
+
+- [#13805](https://github.com/1024pix/pix/pull/13805) Update dependency @1024pix/eslint-plugin to ^2.1.12 (dossier racine)
+
 # [5.225.0](https://github.com/1024pix/pix/compare/v5.224.0...v5.225.0) (2025-10-06)
 
 ### :rocket: Amélioration
