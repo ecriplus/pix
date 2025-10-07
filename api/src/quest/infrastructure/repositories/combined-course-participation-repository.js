@@ -1,5 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourseParticipation } from '../../domain/models/CombinedCourseParticipation.js';
 
 export const save = async function ({ organizationLearnerId, questId }) {
@@ -58,9 +59,9 @@ export const update = async function ({ combinedCourseParticipation }) {
  * @param {[number]} combinedCourseIds
  * @returns {Promise<[CombinedCourseParticipation]>}
  */
-export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
+export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
   const knexConnection = DomainTransaction.getConnection();
-  const questParticipations = await knexConnection('combined_courses')
+  const queryBuilder = knexConnection('combined_courses')
     .select(
       'combined_course_participations.id',
       'firstName',
@@ -77,11 +78,14 @@ export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
       'view-active-organization-learners.id',
       'combined_course_participations.organizationLearnerId',
     )
+    .whereIn('combined_courses.id', combinedCourseIds)
     .orderBy([
       { column: 'lastName', order: 'asc' },
       { column: 'firstName', order: 'asc' },
-    ])
-    .whereIn('combined_courses.id', combinedCourseIds);
-
-  return questParticipations.map((participation) => new CombinedCourseParticipation(participation));
+    ]);
+  const { results, pagination } = await fetchPage({ queryBuilder, paginationParams: page });
+  return {
+    combinedCourseParticipations: results.map((participation) => new CombinedCourseParticipation(participation)),
+    meta: { ...pagination },
+  };
 };

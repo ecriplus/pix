@@ -6,7 +6,7 @@ export default async ({ organizationId, combinedCourseRepository, combinedCourse
   }
 
   const combinedCourseIds = combinedCourses.map((combinedCourse) => combinedCourse.id);
-  const combinedCourseParticipations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+  const { combinedCourseParticipations } = await combinedCourseParticipationRepository.findByCombinedCourseIds({
     combinedCourseIds,
   });
 

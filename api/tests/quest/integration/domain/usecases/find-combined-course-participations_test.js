@@ -6,8 +6,16 @@ import { databaseBuilder, expect } from '../../../../test-helper.js';
 describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipations', function () {
   it('should return  CombinedCourseParticipations', async function () {
     // given
-    const learner = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Paul', lastName: 'Azerty' });
-    const { questId, id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
+    const {
+      questId,
+      organizationId,
+      id: combinedCourseId,
+    } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
+    const learner = databaseBuilder.factory.buildOrganizationLearner({
+      firstName: 'Paul',
+      lastName: 'Azerty',
+      organizationId,
+    });
     const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
       organizationLearnerId: learner.id,
       questId,
@@ -23,12 +31,12 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
     await databaseBuilder.commit();
 
     // when
-    const results = await usecases.findCombinedCourseParticipations({ combinedCourseId });
+    const { combinedCourseParticipations } = await usecases.findCombinedCourseParticipations({ combinedCourseId });
 
     // then
-    expect(results).lengthOf(1);
-    expect(results[0]).instanceOf(CombinedCourseParticipation);
-    expect(results).deep.equal([
+    expect(combinedCourseParticipations).lengthOf(1);
+    expect(combinedCourseParticipations[0]).instanceOf(CombinedCourseParticipation);
+    expect(combinedCourseParticipations).deep.equal([
       {
         id: participation1.id,
         firstName: learner.firstName,

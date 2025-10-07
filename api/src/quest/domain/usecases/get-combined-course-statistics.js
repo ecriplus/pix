@@ -1,14 +1,14 @@
 import { CombinedCourseStatistics } from '../models/CombinedCourseStatistics.js';
 
 export const getCombinedCourseStatistics = async ({ combinedCourseId, combinedCourseParticipationRepository }) => {
-  const participations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+  const { combinedCourseParticipations } = await combinedCourseParticipationRepository.findByCombinedCourseIds({
     combinedCourseIds: [combinedCourseId],
   });
-  const completedParticipations = participations.filter((participation) => participation.isCompleted());
+  const completedParticipations = combinedCourseParticipations.filter((participation) => participation.isCompleted());
 
   return new CombinedCourseStatistics({
     id: combinedCourseId,
-    participationsCount: participations.length,
+    participationsCount: combinedCourseParticipations.length,
     completedParticipationsCount: completedParticipations.length,
   });
 };
