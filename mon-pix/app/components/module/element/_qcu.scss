@@ -23,6 +23,26 @@
           color 0.25s 0.25s;
       }
     }
+
+    .pix-label-wrapped--variant-tile.pix-label-wrapped--disabled.pix-label-wrapped--state-error {
+      color: var(--pix-warning-700);
+      background-color: var(--state-background-color);
+      border-color: var(--pix-warning-700);
+
+      --state-background-color: var(--pix-warning-50);
+    }
+
+    .pix-label-wrapped--variant-tile.pix-label-wrapped--disabled.pix-label-wrapped--state-success {
+      color: var(--pix-success-700);
+      background-color: var(--state-background-color);
+      border-color: var(--pix-success-700);
+
+      --state-background-color: var(--pix-success-50);
+    }
+
+    .pix-label-wrapped--variant-tile.pix-label-wrapped--disabled .pix-label-wrapped__state-icon {
+      background-color: var(--state-background-color);
+    }
   }
 
   &__required-field-missing {

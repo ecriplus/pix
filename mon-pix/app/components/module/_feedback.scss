@@ -11,9 +11,9 @@
   }
 
   &--error {
-    --modulix-feedback-state-color: var(--pix-error-700);
+    --modulix-feedback-state-color: var(--pix-warning-700);
 
-    background-color: var(--pix-error-50);
+    background-color: var(--pix-warning-50);
   }
 
   &__state {
@@ -22,25 +22,20 @@
   }
 
   @media (not (prefers-reduced-motion: reduce)) {
-    animation:
-      0.4s slide-in ease-in-out,
-      0.5s fade-in ease-in-out;
+    animation: 0.75s zoom-in-zoom-out ease;
 
-    @keyframes slide-in {
+    @keyframes zoom-in-zoom-out {
       0% {
-        height: 0;
-        max-height: 0;
-        padding: 0 var(--pix-spacing-6x);
+        scale: 100%;
         overflow: hidden;
       }
 
-      60% {
-        max-height: 100%;
-        padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+      50% {
+        scale: 110%;
       }
 
       100% {
-        max-height: 100%;
+        scale: 100%;
       }
     }
   }

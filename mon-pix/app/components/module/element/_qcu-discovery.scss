@@ -20,9 +20,7 @@
   }
 
   &__feedback {
-    padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
     color: var(--pix-neutral-800);
-    background: var(--pix-orga-50);
-    border-radius: 16px;
+    background: var(--pix-info-100);
   }
 }

@@ -77,7 +77,7 @@ export default class ModuleQcuDiscovery extends ModuleElement {
       </fieldset>
     </form>
     {{#if this.shouldDisplayFeedback}}
-      <div class="element-qcu-discovery__feedback" role="status" tabindex="-1">
+      <div class="feedback element-qcu-discovery__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.selectedProposalFeedback}}
       </div>
     {{/if}}

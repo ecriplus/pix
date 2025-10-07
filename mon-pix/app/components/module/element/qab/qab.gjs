@@ -179,7 +179,7 @@ export default class ModuleQab extends ModuleElement {
       </fieldset>
     </form>
     {{#if this.shouldDisplayFeedback}}
-      <div class="element-qab__feedback" role="status" tabindex="-1">
+      <div class="feedback element-qab__feedback" role="status" tabindex="-1">
         {{htmlUnsafe this.feedback}}
       </div>
     {{/if}}
