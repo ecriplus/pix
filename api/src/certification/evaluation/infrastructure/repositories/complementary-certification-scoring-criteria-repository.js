@@ -1,5 +1,4 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { ComplementaryCertificationScoringCriteria } from '../../domain/models/ComplementaryCertificationScoringCriteria.js';
 
 export const findByCertificationCourseId = async function ({ certificationCourseId }) {
@@ -34,18 +33,14 @@ export const findByCertificationCourseId = async function ({ certificationCourse
       complementaryCertificationBadgeKey,
       minimumReproducibilityRate,
       minimumReproducibilityRateLowerLevel,
-      complementaryCertificationKey,
       minimumEarnedPix,
     }) => {
-      const hasComplementaryReferential = complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA;
-
       return new ComplementaryCertificationScoringCriteria({
         complementaryCertificationCourseId,
         complementaryCertificationBadgeId,
         complementaryCertificationBadgeKey,
         minimumReproducibilityRate: Number(minimumReproducibilityRate),
         minimumReproducibilityRateLowerLevel: Number(minimumReproducibilityRateLowerLevel),
-        hasComplementaryReferential,
         minimumEarnedPix,
       });
     },
