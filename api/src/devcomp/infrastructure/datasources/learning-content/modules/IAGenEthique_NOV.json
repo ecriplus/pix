@@ -375,7 +375,7 @@
                     "id": "1",
                     "content": "<p>Parce qu’elles craignent que leurs employés abiment l'IA en y mettant des mauvaises données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;<br><br></p>"
+                      "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;</p>"
                     }
                   },
                   {
