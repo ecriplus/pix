@@ -36,7 +36,7 @@
                   "title": "Conversation à propos de la confidentialité de l’IA",
                   "messages": [
                     {
-                      "userName": "Octave",
+                      "userName": "Asmae",
                       "direction": "outgoing",
                       "content": "Tu sais, au fond, je pense que quand t’as des choses sur le cœur, le mieux c’est d’en parler à une IA. Elle ne risque pas de répéter à qui que ce soit et au moins elle ne te juge pas. "
                     },
@@ -46,7 +46,7 @@
                       "content": "Houla… Tu sais que quand tu discutes avec une IA, ce n’est pas vraiment une discussion privée ?"
                     },
                     {
-                      "userName": "Octave",
+                      "userName": "Asmae",
                       "direction": "outgoing",
                       "content": "Tu veux dire que des gens peuvent lire ce que je dis à mon IA ? "
                     },
@@ -147,7 +147,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
-                "content": "<p>Quand vous discutez avec une IA, ce n’est <strong>pas</strong> une conversation <strong>privée</strong>.&nbsp; </p><p>Les données que vous lui transmettez ou les questions que vous lui posez ne sont pas effacées. Elles sont stockées et peuvent être réutilisées&nbsp;:&nbsp; </p><ul><li>pour <strong>améliorer l’IA</strong> (corriger ses erreurs, l’entraîner),</li><li>pour faire des <strong>statistiques</strong> (par exemple&nbsp;: combien de fois une question est posée),</li></ul><p>De plus, une entreprise d’IA peut <strong>être amenée à fournir vos données</strong> à la justice ou aux services de renseignement d’un pays, même si ce n’est pas celui où vous vivez.&nbsp; </p><p>👉 Cela peut poser des risques pour votre vie privée, la sécurité de vos données et la confiance que vous placez dans ces technologies.<br><br></p>"
+                "content": "<p>Quand vous discutez avec une IA, ce n’est <strong>pas</strong> une conversation <strong>privée</strong>.&nbsp; </p><p>Les données que vous lui transmettez ou les questions que vous lui posez ne sont pas effacées. Elles sont stockées et peuvent être réutilisées&nbsp;:&nbsp; </p><ul>    <li>pour <strong>améliorer l’IA</strong> (corriger ses erreurs, l’entraîner),</li>    <li>pour faire des <strong>statistiques</strong> (par exemple&nbsp;: combien de fois une question est posée),</li></ul><p>De plus, une entreprise d’IA peut <strong>être amenée à fournir vos données</strong> à la justice ou aux services de renseignement d’un pays, même si ce n’est pas celui où vous vivez.&nbsp; </p><p>👉 Cela peut poser des risques pour votre vie privée, la sécurité de vos données et la confiance que vous placez dans ces technologies.</p>"
               }
             }
           ]
@@ -172,6 +172,14 @@
           "type": "discovery",
           "title": "Découverte 2",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3a93f685-54c5-42eb-83b0-2459f1c81007",
+                "type": "text",
+                "content": "<p>Texte finaux :&nbsp;</p><p>« J'habite au [12 rue des Lilas, 75014 Paris], je m'appelle [Jean Dupont], je suis maçon, mon numéro est [06 12 34 56 78]. Peux-tu me faire une carte de visite élégante et qui me démarque des autres ?\"</p><p>\"Peux-tu écrire une lettre  pour le [docteur Vanderbrooke] lui demandant de prendre en charge [Madame Sarfati], suivie par moi pour son [diabète] depuis [5 ans] ?\"</p><p>\"Peux-tu rédiger un mail pour mon équipe afin de leur rappeler que le mot de passe du&nbsp;[serveur OVH de l'entreprise]&nbsp;est&nbsp;[AzErTy2024!]&nbsp;et qu’ils doivent suivre la procédure suivante :&nbsp;[http://intranet.example.invalid/procedure-connexion]&nbsp;pour s’y connecter ?\"</p>"
+              }
+            },
             {
               "type": "element",
               "element": {
@@ -220,7 +228,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
-                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p>\n<ul>\n    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li>\n    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>\n    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li>\n</ul>\n<p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
+                "content": "<p>💡 Quand vous utilisez une IA, gardez en tête que vos messages peuvent être enregistrés.<br> Certaines informations ne doivent donc pas apparaître dans vos prompts&nbsp;: </p><ul>    <li>Données personnelles&nbsp;: nom, adresse, numéro de téléphone, identifiants…</li>    <li>Données sensibles&nbsp;: concernant la santé, le travail, les données financières...</li>    <li>Informations confidentielles&nbsp;: stratégie, sécurité, procédés internes…</li></ul><p><strong>👉 Règle d’or&nbsp;:</strong> Un prompt doit rester précis tout en évitant d’inclure des informations personnelles, sensibles ou confidentielles.</p>"
               }
             }
           ]
@@ -256,7 +264,7 @@
                   "title": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
                   "messages": [
                     {
-                      "userName": "Septime",
+                      "userName": "Sarah",
                       "direction": "outgoing",
                       "content": " J’avais besoin d’une image de carte de visite pour un jeu que je développe. J’ai demandé à l’IA et j’ai eu ça. Tu penses que c’est une vraie ? ",
                       "image": {
@@ -265,7 +273,7 @@
                       }
                     },
                     {
-                      "userName": "Sixtine",
+                      "userName": "Maëlle",
                       "direction": "incoming",
                       "content": "J’en sais rien mais je ne vais pas m’amuser à l’appeler."
                     }
@@ -282,7 +290,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Non c’est impossible.</p>",
+                    "content": "<p>Non, c’est impossible.</p>",
                     "feedback": {
                       "diagnosis": "<p>En fait, comme les IA génératives <strong>produisent du contenu en se basant sur des données réelles</strong>, le doute est permis. Il est possible que ce soit des <strong>vraies informations</strong>, même si les entreprises d'IA font leur possible pour que cela n'arrive pas</p>"
                     }
@@ -324,7 +332,7 @@
               "element": {
                 "id": "d0544bda-383f-4f85-9780-388b2a1c9d47",
                 "type": "text",
-                "content": "<p>💡 Ce que vous écrivez à une IA peut réapparaître ailleurs. </p><ul><li>Le contenu de vos prompts peuvent être réutilisés dans d’autres réponses.</li><li>Des informations personnelles (nom, adresse…) peuvent ressortir sans que vous le vouliez.</li><li>Elles peuvent aussi servir d’exemples dans des documents générés.</li></ul><p>👉 Dans la majorité des cas, un logiciel d’IA générative ne “recrache” pas des données exactes, mais il existe une petite chance qu’une information générée corresponde à des données existantes.</p>"
+                "content": "<p>💡 Ce que vous écrivez à une IA peut réapparaître ailleurs. </p><ul>    <li>Le contenu de vos prompts peuvent être réutilisés dans d’autres réponses.</li>    <li>Des informations personnelles (nom, adresse…) peuvent ressortir sans que vous le vouliez.</li>    <li>Elles peuvent aussi servir d’exemples dans des documents générés.</li></ul><p>👉 Dans la majorité des cas, un logiciel d’IA générative ne “recrache” pas des données exactes, mais il existe une petite chance qu’une information générée corresponde à des données existantes.</p>"
               }
             }
           ]
@@ -337,8 +345,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0a0f2f7a-655e-42d1-9fcb-68e3b88fa7f4",
-                "type": "text",
+                "id": "0a0f2f7a-655e-42d1-9fcb-68e3b88fa7f4",                "type": "text",
                 "content": "<p>Cependant, certains fabricants d’IA ou organisations disent que sous certaines conditions vos données peuvent être sûres. Voyons ce qu’il en est en détail.&nbsp;<br><br></p>"
               }
             }
@@ -380,7 +387,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Parce qu'elles veulent que Anthropic paye pour les employés aident l'IA à s'améliorer.</p>",
+                    "content": "<p>Parce qu’elles considèrent qu’Anthropic doit rémunérer ceux qui aident à perfectionner l’IA.</p>",
                     "feedback": {
                       "diagnosis": "<p>Les entreprises gèrent des <strong>informations confidentielles</strong> (clients, finances, contrats…) doivent garantir que les données ne seront<strong> pas réutilisées</strong>. Certaines entreprises <strong>créent </strong>même <strong>leurs propres IA</strong> en interne pour s’assurer que rien ne soit réutilisé.&nbsp;</p>"
                     }
@@ -409,7 +416,7 @@
               "element": {
                 "id": "2e7d7557-fd13-4a5c-89ab-e4d40184da2c",
                 "type": "text",
-                "content": "<ul>\n    <li>Situation -------------------&gt; Réutilisation des données ?</li>\n    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>\n    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>\n    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li>\n</ul>"
+                "content": "<ul>    <li>Situation -------------------&gt; Réutilisation des données ?</li>    <li>Gratuit (particulier) -------&gt;&nbsp;&nbsp;⚠️⚠️ ⚠️ Oui, vos prompts seront réutilisés</li>    <li>Abonnement individuel --&gt;&nbsp;&nbsp;⚠️ ⚠️ 🔎&nbsp;Parfois désactivable (selon l’option choisie)</li>    <li>Abonnement entreprise --&gt;&nbsp; ⚠️ 🤷Non (“promesse contractuelle”)</li></ul>"
               }
             },
             {
@@ -438,7 +445,7 @@
               "element": {
                 "id": "9cbfbaae-17ab-4316-ba32-2f8ca4531632",
                 "type": "text",
-                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.\n</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>\nLe type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
+                "content": "<ul><li><strong>Les conversations avec une IA</strong> générative ne sont pas privées. Elles peuvent être réutilisées pour améliorer l’IA. Il ne faut pas négliger le <strong>risque de réapparition</strong> de vos discussions dans les résultats d’autres utilisateurs.</li><li>Un bon prompt doit décrire une <strong>situation générale</strong>, sans inclure de données personnelles, sensibles ou confidentielles.</li><li>Le type d’abonnement ou propriétaire du logiciel d’IA générative change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
               }
             }
           ]
@@ -459,38 +466,38 @@
               "element": {
                 "id": "dee26d54-a074-4904-9180-38800a025450",
                 "type": "qcu",
-                "instruction": "<p>Pourquoi vos données peuvent-elles être concernées par les lois d’un autre pays&nbsp;?</p>",
+                "instruction": "<p>Pourquoi les entreprises d’intelligence artificielle collectent-elles des données&nbsp;?</p>",
                 "proposals": [
                   {
-                    "id": "1",
-                    "content": "<p>Parce que les serveurs qui stockent ou traitent les données ne sont pas toujours situés dans votre pays.</p>",
+                    "id": "2",
+                    "content": "<p>Parce que les données servent à mieux connaître les clients et vendre plus de produits.</p>",
                     "feedback": {
-                      "state": "<p>Exact !</p>",
-                      "diagnosis": "<p> Les données que vous envoyez à une IA peuvent être hébergées ou traitées sur des serveurs situés à l’étranger.<br>\n    Cela signifie qu’elles relèvent parfois des lois d’un autre pays — y compris pour les demandes d’accès par la justice ou les autorités locales.</p>"
+                      "state": "<p>Ce n’est pas la bonne réponse. </p>",
+                      "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
                     }
                   },
                   {
-                    "id": "2",
-                    "content": "<p>Parce que les données voyagent physiquement avec votre ordinateur.</p>",
+                    "id": "1",
+                    "content": "<p>Parce que les données servent à apprendre à l’intelligence artificielle à mieux fonctionner.</p>",
                     "feedback": {
-                      "state": "<p>Non.</p>",
-                      "diagnosis": "<p>Les données ne “voyagent” pas avec votre appareil.<br>\n    Elles sont copiées et transférées vers des serveurs distants via Internet : c’est là qu’elles peuvent être traitées et stockées, parfois dans un autre pays.</p>"
+                      "state": "<p>Exact ! </p>",
+                      "diagnosis": "<p>L’IA a besoin de beaucoup de données pour mieux comprendre et faire moins d’erreurs.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Parce que chaque pays partage automatiquement ses bases de données avec les autres.</p>",
+                    "content": "<p>Parce que les données servent à protéger les fabriquant contre un usage illégal de l'IA.</p>",
                     "feedback": {
-                      "state": "<p>Ce n'est pas le cas.</p>",
-                      "diagnosis": "<p>Il n’existe pas de partage automatique entre États : les échanges de données sont encadrés par des accords ou des demandes judiciaires précises, pas par défaut.</p>"
+                      "state": "<p>Ce n’est pas la bonne réponse.</p>",
+                      "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Parce que les IA refusent les données étrangères.</p>",
+                    "content": "<p>Parce que les données servent à réparer les ordinateurs quand ils ont des bugs.</p>",
                     "feedback": {
-                      "state": "<p>Non.<br></p>",
-                      "diagnosis": "<p>Elles traitent des données de toutes origines ; c’est le lieu des serveurs et les lois applicables dans le pays qui s’applique, pas la nationalité d'ou viennent les informations.</p>"
+                      "state": "<p>Ce n’est pas la bonne réponse.</p>",
+                      "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
                     }
                   }
                 ],
@@ -507,7 +514,7 @@
             {
               "type": "element",
               "element": {
-                "id": "d4ff85f1-b3e0-43e8-9050-69aa610de921",
+                "id": "dee26d54-a074-4904-9180-38800a025450",
                 "type": "qab",
                 "instruction": "<p>Ce prompt est-il respectueux de la confidentialité ?</p>",
                 "cards": [
@@ -524,7 +531,7 @@
                   },
                   {
                     "id": "eefcb119-7033-4e8d-ae7d-542d7dc57688",
-                    "text": "Fais moi une carte de visite avec ces informations  : Erwan Leguebec, Erwan.Leguebec@email.com, 06 12 34 56 78.",
+                    "text": "Fais moi des invitation pour ma soirée d'anniversaire : Erwan Leguebec, 30 ans, mardi 14 octobre à 20h, 14 chemin des Bas Vignons 01000 Bourg en Bresse, 06 12 34 56 78.",
                     "image": {
                       "url": "",
                       "altText": ""
