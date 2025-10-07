@@ -9,6 +9,7 @@ describe('Unit | Organizational Entities | Domain | DTO | OrganizationBatchUpdat
         id: '1',
         name: 'Mon Orga',
         dataProtectionOfficerEmail: 'adam.troisjour@example.net',
+        administrationTeamId: '1234',
       };
 
       // when
@@ -27,6 +28,7 @@ describe('Unit | Organizational Entities | Domain | DTO | OrganizationBatchUpdat
         dataProtectionOfficerLastName: '',
         dataProtectionOfficerFirstName: '',
         dataProtectionOfficerEmail: 'adam.troisjour@example.net',
+        administrationTeamId: '1234',
       });
     });
   });

@@ -1181,6 +1181,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       let firstOrganization, otherOrganization;
 
       beforeEach(async function () {
+        databaseBuilder.factory.buildAdministrationTeam({ id: 1234 });
         firstOrganization = databaseBuilder.factory.buildOrganization({ name: 'first organization', type: 'PRO' });
         otherOrganization = databaseBuilder.factory.buildOrganization({ name: 'other organization', type: 'PRO' });
 
@@ -1189,9 +1190,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
       it('responds with a 204 - no content', async function () {
         // given
-        const input = `Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail
-      ${firstOrganization.id};MSFT;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;
-      ${otherOrganization.id};APPL;;;;;;;Cali;`;
+        const input = `Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID
+      ${firstOrganization.id};MSFT;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+      ${otherOrganization.id};APPL;;;;;;;Cali;;1234`;
 
         const options = {
           method: 'POST',

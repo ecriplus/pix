@@ -11,6 +11,7 @@ export class OrganizationBatchUpdateDTO {
    * @param {string|undefined} data.dataProtectionOfficerLastName
    * @param {string|undefined} data.dataProtectionOfficerFirstName
    * @param {string|undefined} data.dataProtectionOfficerEmail
+   * @param {string|undefined} data.administrationTeamId
    */
   constructor(data) {
     this.id = data.id;
@@ -23,5 +24,6 @@ export class OrganizationBatchUpdateDTO {
     this.dataProtectionOfficerLastName = data.dataProtectionOfficerLastName ?? '';
     this.dataProtectionOfficerFirstName = data.dataProtectionOfficerFirstName ?? '';
     this.dataProtectionOfficerEmail = data.dataProtectionOfficerEmail ?? '';
+    this.administrationTeamId = data.administrationTeamId ?? '';
   }
 }

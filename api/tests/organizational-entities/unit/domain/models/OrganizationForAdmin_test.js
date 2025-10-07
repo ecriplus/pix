@@ -888,5 +888,21 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organizationToUpdate.dataProtectionOfficer.email).to.equal(dataProtectionOfficerEmail);
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
+
+    it('updates the organization administration team id', function () {
+      // given
+      const administrationTeamId = 42;
+      const organizationToUpdate = domainBuilder.buildOrganizationForAdmin();
+
+      // when
+      organizationToUpdate.updateFromOrganizationBatchUpdateDto(
+        new OrganizationBatchUpdateDTO({ id: '1', administrationTeamId }),
+      );
+
+      // then
+      const expectedOrganization = domainBuilder.buildOrganizationForAdmin({ administrationTeamId });
+      expect(organizationToUpdate.administrationTeamId).to.equal(administrationTeamId);
+      expect(organizationToUpdate).to.deep.equal(expectedOrganization);
+    });
   });
 });
