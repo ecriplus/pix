@@ -1,0 +1,35 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.footer-links__list {
+  &--small {
+    @extend %pix-body-s;
+  }
+
+  &--extra-small {
+    @extend %pix-body-xs;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  li {
+    display: inline-block;
+    padding-block: 0.25em;
+    margin-inline: 0 2ch;
+  }
+
+  a {
+    &:hover,
+    &:focus {
+      color: var(--pix-primary-500);
+    }
+  }
+}
+
+.footer-links__list--align-right {
+  @include breakpoints.device-is('tablet') {
+    text-align: right;
+  }
+}
