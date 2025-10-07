@@ -142,7 +142,7 @@
                     "id": "1",
                     "content": "<p>Elle apprend par cœur les réponses à chaque question.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>L’IA générative est entraînée à connaître par cœur des faits. Mais pour parler comme un humain, elle passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
+                      "diagnosis": "<p><strong>Pas vraiment.</strong><br>Pour parler comme un humain, l'IA générative passe par des <strong>prédictions statistiques</strong> et elle <strong>s’entraîne sur des textes à trous</strong>.</p>"
                     }
                   },
                   {
