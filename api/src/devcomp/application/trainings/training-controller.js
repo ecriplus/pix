@@ -48,6 +48,12 @@ const update = async function (request, h, dependencies = { trainingSerializer }
   return dependencies.trainingSerializer.serializeForAdmin(updatedTraining);
 };
 
+const deleteTrainingTrigger = async function (request, h) {
+  const { trainingTriggerId } = request.params;
+  await usecases.deleteTrainingTrigger({ trainingTriggerId });
+  return h.response({}).code(204);
+};
+
 const createOrUpdateTrigger = async function (request, h, dependencies = { trainingTriggerSerializer }) {
   const { trainingId } = request.params;
   const { threshold, tubes, type } = await dependencies.trainingTriggerSerializer.deserialize(request.payload);
@@ -122,6 +128,7 @@ const trainingController = {
   getById,
   create,
   duplicate,
+  deleteTrainingTrigger,
   update,
   createOrUpdateTrigger,
   attachTargetProfiles,

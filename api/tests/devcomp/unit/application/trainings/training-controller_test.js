@@ -425,4 +425,26 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
       expect(response).to.deep.equal(expectedResult);
     });
   });
+
+  describe('#deleteTrainingTrigger', function () {
+    it('should call the deleteTrigger use-case', async function () {
+      // given
+      const trainingTriggerId = 'trigger-123';
+      sinon.stub(usecases, 'deleteTrainingTrigger').resolves();
+
+      // when
+      const response = await trainingController.deleteTrainingTrigger(
+        {
+          params: { trainingTriggerId },
+        },
+        hFake,
+      );
+
+      // then
+      expect(usecases.deleteTrainingTrigger).to.have.been.calledWithExactly({
+        trainingTriggerId,
+      });
+      expect(response.statusCode).to.equal(204);
+    });
+  });
 });
