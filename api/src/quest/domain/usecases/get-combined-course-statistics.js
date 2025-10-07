@@ -1,7 +1,9 @@
 import { CombinedCourseStatistics } from '../models/CombinedCourseStatistics.js';
 
 export const getCombinedCourseStatistics = async ({ combinedCourseId, combinedCourseParticipationRepository }) => {
-  const participations = await combinedCourseParticipationRepository.findByCombinedCourseId({ combinedCourseId });
+  const participations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+    combinedCourseIds: [combinedCourseId],
+  });
   const completedParticipations = participations.filter((participation) => participation.isCompleted());
 
   return new CombinedCourseStatistics({

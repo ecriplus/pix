@@ -54,8 +54,13 @@ export const update = async function ({ combinedCourseParticipation }) {
   return new CombinedCourseParticipation(updatedRow);
 };
 
-const buildBaseQuery = (knexConnection) => {
-  return knexConnection('combined_courses')
+/**
+ * @param {[number]} combinedCourseIds
+ * @returns {Promise<[CombinedCourseParticipation]>}
+ */
+export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
+  const knexConnection = DomainTransaction.getConnection();
+  const questParticipations = await knexConnection('combined_courses')
     .select(
       'combined_course_participations.id',
       'firstName',
@@ -75,27 +80,8 @@ const buildBaseQuery = (knexConnection) => {
     .orderBy([
       { column: 'lastName', order: 'asc' },
       { column: 'firstName', order: 'asc' },
-    ]);
-};
-
-/**
- * @param {number} combinedCourseId
- * @returns {Promise<CombinedCourseParticipation>}
- */
-export const findByCombinedCourseId = async function ({ combinedCourseId }) {
-  const knexConnection = DomainTransaction.getConnection();
-  const questParticipations = await buildBaseQuery(knexConnection).where({ 'combined_courses.id': combinedCourseId });
-
-  return questParticipations.map((participation) => new CombinedCourseParticipation(participation));
-};
-
-/**
- * @param {[number]} combinedCourseIds
- * @returns {Promise<[CombinedCourseParticipation]>}
- */
-export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
-  const knexConnection = DomainTransaction.getConnection();
-  const questParticipations = await buildBaseQuery(knexConnection).whereIn('combined_courses.id', combinedCourseIds);
+    ])
+    .whereIn('combined_courses.id', combinedCourseIds);
 
   return questParticipations.map((participation) => new CombinedCourseParticipation(participation));
 };

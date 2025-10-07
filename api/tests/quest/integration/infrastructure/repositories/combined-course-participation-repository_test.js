@@ -143,69 +143,9 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(updatedParticipation.updatedAt).to.deep.equal(now);
     });
   });
-  describe('#findByCombinedCourseId', function () {
-    it('should return participations for a given questId', async function () {
-      // given
-      const learner = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Paul', lastName: 'Azerty' });
-      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI1' });
-      const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
-        organizationLearnerId: learner.id,
-        questId,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
-      });
-      const anotherlearner = databaseBuilder.factory.buildOrganizationLearner({
-        firstName: 'Jeanne',
-        lastName: 'Qwertee',
-      });
-      const participation2 = databaseBuilder.factory.buildCombinedCourseParticipation({
-        organizationLearnerId: anotherlearner.id,
-        questId,
-        status: CombinedCourseParticipationStatuses.STARTED,
-      });
-      const anotherquestId = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBI2' }).questId;
-      databaseBuilder.factory.buildCombinedCourseParticipation({
-        organizationLearnerId: anotherlearner.id,
-        questId: anotherquestId,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const results = await combinedCourseParticipationRepository.findByCombinedCourseId({ combinedCourseId });
-
-      // then
-      expect(results).lengthOf(2);
-      expect(results[0]).instanceOf(CombinedCourseParticipation);
-      expect(results[1]).instanceOf(CombinedCourseParticipation);
-
-      expect(results).deep.equal([
-        {
-          id: participation1.id,
-          firstName: learner.firstName,
-          lastName: learner.lastName,
-          status: CombinedCourseParticipationStatuses.COMPLETED,
-          createdAt: participation1.createdAt,
-          updatedAt: participation1.updatedAt,
-          organizationLearnerId: learner.id,
-          questId,
-        },
-        {
-          id: participation2.id,
-          firstName: anotherlearner.firstName,
-          lastName: anotherlearner.lastName,
-          status: CombinedCourseParticipationStatuses.STARTED,
-          createdAt: participation2.createdAt,
-          updatedAt: participation2.updatedAt,
-          organizationLearnerId: anotherlearner.id,
-          questId,
-        },
-      ]);
-    });
-  });
 
   describe('#findByCombinedCourseIds', function () {
-    it('should return participations for given quest IDs', async function () {
+    it('should return a paginated list of participations for given quest IDs', async function () {
       // given
       const learner1 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Alice', lastName: 'Azerty' });
       const learner2 = databaseBuilder.factory.buildOrganizationLearner({ firstName: 'Bob', lastName: 'Bernard' });
