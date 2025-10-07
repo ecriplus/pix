@@ -1,12 +1,7 @@
-import * as url from 'node:url';
-
-import * as dotenv from 'dotenv';
-
 import { buildPostgresEnvironment } from '../db/utils/build-postgres-environment.js';
+import { loadEnvFile } from '../src/shared/load-env-file.js';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-dotenv.config({ path: `${__dirname}/../.env`, quiet: true });
+loadEnvFile();
 
 const baseConfiguration = {
   name: 'datamart',

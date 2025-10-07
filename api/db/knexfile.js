@@ -1,9 +1,7 @@
-import * as url from 'node:url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-import * as dotenv from 'dotenv';
-
+import { loadEnvFile } from '../src/shared/load-env-file.js';
 import { buildPostgresEnvironment } from './utils/build-postgres-environment.js';
-dotenv.config({ path: `${__dirname}/../.env`, quiet: true });
+
+loadEnvFile();
 
 const baseConfiguration = {
   name: 'live',

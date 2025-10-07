@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { databaseConnections } from './db/database-connections.js';
 import { createMaddoServer } from './server.maddo.js';
 import { JobGroup } from './src/shared/application/jobs/job-controller.js';

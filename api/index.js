@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { databaseConnections } from './db/database-connections.js';
 import { databaseConnection as liveDatabaseConnection } from './db/knex-database-connection.js';
 import { createServer } from './server.js';

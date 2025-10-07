@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import lodash from 'lodash';
 const { groupBy, sum, has, partition, negate } = lodash;
 

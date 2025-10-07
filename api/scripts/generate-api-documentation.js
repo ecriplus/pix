@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import * as url from 'node:url';
 
 import jsdocToMarkdown from 'jsdoc-to-markdown';

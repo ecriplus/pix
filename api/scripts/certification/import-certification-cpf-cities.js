@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import lodash from 'lodash';
 
 import { disconnect, knex } from '../../db/knex-database-connection.js';

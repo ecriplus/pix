@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import PgBoss from 'pg-boss';
 
 import { databaseConnections } from '../../db/database-connections.js';

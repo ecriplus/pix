@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import * as fs from 'node:fs';
 import { resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';

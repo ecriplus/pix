@@ -3,16 +3,11 @@ import { resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { fileURLToPath } from 'node:url';
 
-import * as dotenv from 'dotenv';
 import { read as readXlsx, utils as xlsxUtils } from 'xlsx';
 
 import { logger } from '../../../src/shared/infrastructure/utils/logger.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-dotenv.config({
-  path: `${__dirname}/../../../.env`,
-});
 
 async function doJob(multiFormFiles) {
   const multiFormDatas = await Promise.all(

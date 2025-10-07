@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { knex } from '../../db/knex-database-connection.js';
 import { AlgorithmEngineVersion } from '../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { isoDateParser } from '../../src/shared/application/scripts/parsers.js';

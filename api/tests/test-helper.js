@@ -2,14 +2,12 @@ import 'dayjs/locale/fr.js';
 
 import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
-import * as url from 'node:url';
 
 import { Assertion, AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import * as dotenv from 'dotenv';
 import iconv from 'iconv-lite';
 import _ from 'lodash';
 import MockDate from 'mockdate';
@@ -50,9 +48,6 @@ import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-dotenv.config({ path: `${__dirname}/../.env` });
 dayjs.extend(localizedFormat);
 
 chaiUse(chaiAsPromised);

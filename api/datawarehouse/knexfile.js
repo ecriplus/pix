@@ -1,9 +1,7 @@
-import * as url from 'node:url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-import * as dotenv from 'dotenv';
-
 import { buildPostgresEnvironment } from '../db/utils/build-postgres-environment.js';
-dotenv.config({ path: `${__dirname}/../.env` });
+import { loadEnvFile } from '../src/shared/load-env-file.js';
+
+loadEnvFile();
 
 const baseConfiguration = {
   name: 'datawarehouse',
