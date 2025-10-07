@@ -9,6 +9,11 @@ export default class TrainingTriggerAdapter extends ApplicationAdapter {
     return `${this.host}/${this.namespace}/trainings/${trainingId}/triggers`;
   }
 
+  async delete({ trainingId, triggerId }) {
+    const url = `${this.host}/${this.namespace}/trainings/${trainingId}/triggers/${triggerId}`;
+    return this.ajax(url, 'DELETE');
+  }
+
   createRecord(store, type, snapshot) {
     const { adapterOptions } = snapshot;
     const payload = this.serialize(snapshot);

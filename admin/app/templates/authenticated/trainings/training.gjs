@@ -63,8 +63,19 @@ export default class Training extends Component {
   }
 
   @action
-  async deleteTrainingTrigger(type, value) {
-    console.log({ type, value });
+  async deleteTrainingTrigger(triggerId) {
+    try {
+      const adapter = this.store.adapterFor('training-trigger');
+      await adapter.delete({ trainingId: this.args.model.id, triggerId });
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('pages.trainings.training.delete.notifications.success'),
+      });
+      this.args.model.reload();
+    } catch (error) {
+      error.errors.forEach((apiError) => {
+        this.pixToast.sendErrorNotification({ message: apiError.detail });
+      });
+    }
   }
 
   @action

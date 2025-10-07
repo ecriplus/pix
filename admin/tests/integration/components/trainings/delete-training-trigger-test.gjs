@@ -102,3 +102,4 @@ module('Integration | Component | Trainings | Delete training trigger', function
     });
   });
 });
+/* eslint-enable ember/template-no-let-reference */

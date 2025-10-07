@@ -26,7 +26,7 @@ export default class DuplicateTraining extends Component {
   }
 
   @action
-  resetTringgerElement() {
+  resetTriggerElement() {
     this.value = null;
     this.type = null;
   }
@@ -34,7 +34,7 @@ export default class DuplicateTraining extends Component {
   @action
   closeModal() {
     this.showModal = false;
-    this.resetTringgerElement();
+    this.resetTriggerElement();
   }
 
   @action
@@ -45,10 +45,10 @@ export default class DuplicateTraining extends Component {
   }
 
   @action
-  validateDuplication() {
+  validateDestruction() {
     this.args.onSubmit(this.value);
     this.showModal = false;
-    this.resetTringgerElement();
+    this.resetTriggerElement();
   }
 
   <template>
@@ -74,7 +74,7 @@ export default class DuplicateTraining extends Component {
         <PixButton @variant="secondary" @isBorderVisible={{true}} @triggerAction={{this.closeModal}}>
           {{t "common.actions.cancel"}}
         </PixButton>
-        <PixButton @triggerAction={{this.validateDuplication}}>{{t "common.actions.validate"}}</PixButton>
+        <PixButton @triggerAction={{this.validateDestruction}}>{{t "common.actions.validate"}}</PixButton>
       </:footer>
     </PixModal>
   </template>

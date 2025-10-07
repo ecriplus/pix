@@ -61,4 +61,15 @@ module('Unit | Adapter | TrainingTrigger', function (hooks) {
       assert.ok(adapter.ajax.calledWith(`https://example.net`, 'PUT', expectedPayload));
     });
   });
+
+  module('#delete', function () {
+    test('should trigger DELETE request with correct url', async function (assert) {
+      // given
+      // when
+      await adapter.delete({ trainingId: '1', triggerId: '2' });
+
+      // then
+      assert.ok(adapter.ajax.calledWith(`http://localhost:3000/api/admin/trainings/1/triggers/2`, 'DELETE'));
+    });
+  });
 });
