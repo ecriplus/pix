@@ -9,7 +9,7 @@ import { t } from 'ember-intl';
         {{t "pages.certification-instructions.steps.2.legend.strong-text"}}
       </p>
 
-      <p class="instructions-content__legend">{{t "pages.certification-instructions.steps.2.legend.text"}}</p>
+      <p class="instructions-content__legend">{{@durationLegend}}</p>
     </div>
 
     <div class="instructions-content__text">
@@ -18,7 +18,7 @@ import { t } from 'ember-intl';
       </p>
 
       <p>
-        {{t "pages.certification-instructions.steps.2.paragraphs.2" htmlSafe=true}}
+        {{t "pages.certification-instructions.steps.2.paragraphs.2" duration=@durationText htmlSafe=true}}
 
         <br />
         <span class="instructions-content__paragraph--light">

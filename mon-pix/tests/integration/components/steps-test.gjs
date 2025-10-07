@@ -13,8 +13,10 @@ module('Integration | Component | steps', function (hooks) {
     module('on first page', function () {
       test('should display instructions', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // then
         assert
@@ -40,8 +42,10 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should not display the previous button', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // then
         assert
@@ -55,8 +59,10 @@ module('Integration | Component | steps', function (hooks) {
     module('on second page', function () {
       test('should display instructions', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
         await click(
           screen.getByRole('button', { name: t('pages.certification-instructions.buttons.continuous.aria-label') }),
         );
@@ -84,8 +90,10 @@ module('Integration | Component | steps', function (hooks) {
     module('on third page', function () {
       test('should display instructions', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
         await click(
           screen.getByRole('button', { name: t('pages.certification-instructions.buttons.continuous.aria-label') }),
         );
@@ -123,8 +131,10 @@ module('Integration | Component | steps', function (hooks) {
     module('on fourth page', function () {
       test('should display instructions', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
         for (let i = 0; i < 3; i++) {
           await click(
             screen.getByRole('button', { name: t('pages.certification-instructions.buttons.continuous.aria-label') }),
@@ -150,8 +160,10 @@ module('Integration | Component | steps', function (hooks) {
     module('on the last page', function () {
       test('should display information', async function (assert) {
         // given
+        const candidate = { complementaryCertificationKey: null };
+
         // when
-        const screen = await render(<template><Steps /></template>);
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
         await _goToLastPage(screen);
 
         // then
@@ -178,7 +190,8 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should change the continue aria label button', async function (assert) {
         // given
-        const screen = await render(<template><Steps /></template>);
+        const candidate = { complementaryCertificationKey: null };
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when
         await _goToLastPage(screen);
@@ -195,7 +208,8 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should disable the continue button', async function (assert) {
         // given
-        const screen = await render(<template><Steps /></template>);
+        const candidate = { complementaryCertificationKey: null };
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when
         await _goToLastPage(screen);
@@ -213,7 +227,8 @@ module('Integration | Component | steps', function (hooks) {
       module('when the checkbox is checked', function () {
         test('should enable the continue button', async function (assert) {
           // given
-          const screen = await render(<template><Steps /></template>);
+          const candidate = { complementaryCertificationKey: null };
+          const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
           await _goToLastPage(screen);
 
           // when
@@ -238,7 +253,8 @@ module('Integration | Component | steps', function (hooks) {
     module('on all pages except the first', function () {
       test('should display the previous button', async function (assert) {
         // given
-        const screen = await render(<template><Steps /></template>);
+        const candidate = { complementaryCertificationKey: null };
+        const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when
         await click(
