@@ -17,6 +17,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
     provinceCode: '123',
     tags: 'TAG1',
     type: 'SCO',
+    administrationTeamId: 1,
   };
 
   context('success', function () {
@@ -48,6 +49,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
               externalId: 'EXTERNAL_ID',
               name: 'Organization Name',
               createdBy: 0,
+              administrationTeamId: 1,
             };
 
             // when
@@ -78,6 +80,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
           { attribute: 'externalId', message: '"externalId" is required' },
           { attribute: 'name', message: '"name" is required' },
           { attribute: 'createdBy', message: "L'id du créateur est manquant" },
+          { attribute: 'administrationTeamId', message: "L'id de l'équipe en charge est manquant" },
         ]);
       });
     });
