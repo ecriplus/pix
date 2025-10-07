@@ -14,6 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
+import { AdministrationTeamNotFound } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 
@@ -26,6 +27,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
   organizations,
 
   // dependencies
+  administrationTeamRepository,
   dataProtectionOfficerRepository,
   organizationForAdminRepository,
   organizationTagRepository,
@@ -50,6 +52,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
     const transformedOrganizationsData = _transformOrganizationsCsvData(organizations);
 
     createdOrganizations = await _createOrganizations({
+      administrationTeamRepository,
       organizationForAdminRepository,
       transformedOrganizationsData,
     });
@@ -84,8 +87,23 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
 
 export { createOrganizationsWithTagsAndTargetProfiles };
 
-async function _createOrganizations({ transformedOrganizationsData, organizationForAdminRepository }) {
+async function _createOrganizations({
+  transformedOrganizationsData,
+  administrationTeamRepository,
+  organizationForAdminRepository,
+}) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
+    const { administrationTeamId } = organizationToCreate.organization;
+    const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
+
+    if (!administrationTeam) {
+      throw new AdministrationTeamNotFound({
+        meta: {
+          administrationTeamId,
+        },
+      });
+    }
+
     try {
       const createdOrganization = await organizationForAdminRepository.save({
         organization: {
