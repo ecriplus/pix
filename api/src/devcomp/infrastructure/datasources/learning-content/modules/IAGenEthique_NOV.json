@@ -470,7 +470,7 @@
                 "proposals": [
                   {
                     "id": "2",
-                    "content": "<p>Parce que les données servent à mieux connaître les clients et vendre plus de produits.</p>",
+                    "content": "<p>Parce que les données servent à savoir qui utilise l’ordinateur.</p>",
                     "feedback": {
                       "state": "<p>Ce n’est pas la bonne réponse. </p>",
                       "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
@@ -486,7 +486,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Parce que les données servent à protéger les fabriquant contre un usage illégal de l'IA.</p>",
+                    "content": "<p>Parce que les données servent à faire de la publicité.</p>",
                     "feedback": {
                       "state": "<p>Ce n’est pas la bonne réponse.</p>",
                       "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
@@ -634,7 +634,7 @@
                     "id": "3",
                     "content": "<p>Le code informatique généré contient parfois des bugs</p>",
                     "feedback": {
-                      "state": "<p>Partiellement vrai, mais hors sujet</p>",
+                      "state": "<p>Oui, mais ce n’est pas l’idée principale de l’article.</p>",
                       "diagnosis": "<p>Oui, comme tout outil automatisé, Copilot peut générer du code imparfait. Cependant, l’exemple mentionné ne parle pas de bugs, mais de fuites de mots de passe. Le risque principal évoqué concerne la sécurité, pas la qualité du code.</p>"
                     }
                   },
@@ -679,7 +679,7 @@
                 "isCompletionRequired": true,
                 "title": "Corrige le prompt",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg7tpodh00001t01ygol69a8",
-                "instruction": "<p>Corrigez le jusqu'à obtenir une versions sans données confidentielles.<br> </p>",
+                "instruction": "<p>Corrigez le jusqu'à obtenir une version qui respecte la règle d'or de ce module.<br> </p>",
                 "solution": "pix-llm-success",
                 "height": 600
               }
