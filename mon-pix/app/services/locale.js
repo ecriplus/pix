@@ -74,7 +74,7 @@ export default class LocaleService extends Service {
    * @deprecated use pixLocales instead whenever possible.
    */
   get pixLanguages() {
-    return PIX_LANGUAGES.map((elem) => elem.value);
+    return PIX_LANGUAGES.map((language) => language.value);
   }
 
   get acceptLanguageHeader() {
@@ -83,9 +83,9 @@ export default class LocaleService extends Service {
   }
 
   get switcherDisplayedLanguages() {
-    return PIX_LANGUAGES.filter((elem) => this.supportedLocales.includes(elem.value) && elem.displayedInSwitcher).map(
-      (elem) => ({ value: elem.value, label: elem.nativeName }),
-    );
+    return PIX_LANGUAGES.filter(
+      (language) => this.supportedLocales.includes(language.value) && language.displayedInSwitcher,
+    ).map((language) => ({ value: language.value, label: language.nativeName }));
   }
 
   isSupportedLocale(locale) {
