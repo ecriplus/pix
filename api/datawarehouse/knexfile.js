@@ -1,7 +1,7 @@
 import { buildPostgresEnvironment } from '../db/utils/build-postgres-environment.js';
-import { loadEnvFile } from '../src/shared/load-env-file.js';
+import { loadEnvFileIfExists } from '../src/shared/load-env-file-if-exists.js';
 
-loadEnvFile();
+loadEnvFileIfExists();
 
 const baseConfiguration = {
   name: 'datawarehouse',

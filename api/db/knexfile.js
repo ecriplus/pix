@@ -1,7 +1,7 @@
-import { loadEnvFile } from '../src/shared/load-env-file.js';
+import { loadEnvFileIfExists } from '../src/shared/load-env-file-if-exists.js';
 import { buildPostgresEnvironment } from './utils/build-postgres-environment.js';
 
-loadEnvFile();
+loadEnvFileIfExists();
 
 const baseConfiguration = {
   name: 'live',

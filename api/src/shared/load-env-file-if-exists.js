@@ -3,7 +3,7 @@ import * as url from 'node:url';
 
 const envFilePath = url.fileURLToPath(new URL('../../.env', import.meta.url));
 
-export function loadEnvFile() {
+export function loadEnvFileIfExists() {
   if (existsSync(envFilePath)) {
     process.loadEnvFile(envFilePath);
   }
