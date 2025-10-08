@@ -391,7 +391,7 @@
               "element": {
                 "id": "cfeb8a41-f755-4e9f-ad30-d103d9530837",
                 "type": "text",
-                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi  apprendre d’autres tâches&nbsp;à l'IA : résumer un texte, rédiger une lettre de motivation, etc.</p>"
+                "content": "<p>Lors de la phase d'<strong>ajustement</strong>, les ingénieurs donnent à l’IA des <strong>questions-réponses</strong> de grande qualité.<br>L’IA apprend ainsi, par <strong>apprentissage supervisé</strong>, à simuler une conversation.</p><p> Le saviez-vous ? Certains contenus de Wikipédia ont même été transformés en questions-réponses pour entraîner des IA.<br>Ce procédé sert aussi à apprendre d’autres tâches&nbsp;à l'IA : résumer un texte, rédiger une lettre de motivation, etc.</p>"
               }
             }
           ]
