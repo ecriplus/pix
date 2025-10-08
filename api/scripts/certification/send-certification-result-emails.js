@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import * as url from 'node:url';
 
 import { databaseConnections } from '../../db/database-connections.js';

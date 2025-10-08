@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';

@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import * as url from 'node:url';
 
 import { disconnect as disconnectFromDb } from '../../db/knex-database-connection.js';

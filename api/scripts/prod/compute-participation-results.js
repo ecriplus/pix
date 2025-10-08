@@ -1,10 +1,6 @@
 // Usage: node compute-participation-results.js
 import * as url from 'node:url';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-import * as dotenv from 'dotenv';
-
-dotenv.config({ path: `${__dirname}/../../.env` });
 import * as campaignRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowlegeElementSnapshotRepository from '../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { ParticipantResultsShared } from '../../src/prescription/campaign-participation/domain/models/ParticipantResultsShared.js';

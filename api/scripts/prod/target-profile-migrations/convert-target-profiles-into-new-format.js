@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import * as url from 'node:url';
 
 import _ from 'lodash';

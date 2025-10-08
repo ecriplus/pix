@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { readFile } from 'node:fs/promises';
 
 import Redis from 'ioredis';
