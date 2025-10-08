@@ -1,5 +1,6 @@
 import lodash from 'lodash';
 
+import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
@@ -20,13 +21,20 @@ import {
 const { omit } = lodash;
 
 describe('Integration | UseCases | create-organizations-with-tags-and-target-profiles', function () {
-  let missionFeature, oralizationFeature, importStudentsFeature, ondeImportFormat, userId, byDefaultFeatureId;
+  let missionFeature,
+    oralizationFeature,
+    importStudentsFeature,
+    ondeImportFormat,
+    userId,
+    byDefaultFeatureId,
+    administrationTeamId;
 
   beforeEach(async function () {
     databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
     missionFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT);
     oralizationFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER);
     importStudentsFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
+    administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
     ondeImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
     });
@@ -69,6 +77,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: '',
             targetProfiles: '',
             organizationInvitationRole: '',
+            administrationTeamId: '',
           },
         ];
 
@@ -112,6 +121,10 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             attribute: 'createdBy',
             message: "L'id du créateur est manquant",
           },
+          {
+            attribute: 'administrationTeamId',
+            message: "L'id de l'équipe en charge est manquant",
+          },
         ]);
       });
     });
@@ -133,6 +146,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
+            administrationTeamId,
           },
           {
             type: 'PRO',
@@ -147,6 +161,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
+            administrationTeamId,
           },
           {
             type: 'PRO',
@@ -161,6 +176,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             documentationUrl: 'http://www.pix.fr',
             targetProfiles: '1_2_3',
             organizationInvitationRole: 'ADMIN',
+            administrationTeamId,
           },
         ];
 
@@ -175,70 +191,6 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           {
             attribute: 'emailInvitations',
             message: "L'email fourni n'est pas valide.",
-          },
-        ]);
-      });
-    });
-
-    context('when an organization name is missing', function () {
-      it('throws an error', async function () {
-        // given
-        const organizationsWithTagsWithOneMissingName = [
-          {
-            type: 'PRO',
-            externalId: 'b200',
-            name: 'Youness et Fils',
-            provinceCode: '123',
-            credit: 0,
-            emailInvitations: 'youness@example.net',
-            locale: 'fr-fr',
-            tags: 'TagNotFound',
-            createdBy: userId,
-            documentationUrl: 'http://www.pix.fr',
-            targetProfiles: '1_2_3',
-            organizationInvitationRole: 'MEMBER',
-          },
-          {
-            type: 'PRO',
-            externalId: 'b201',
-            name: '',
-            provinceCode: '345',
-            credit: 10,
-            emailInvitations: 'andreia@example.net',
-            locale: 'fr-fr',
-            tags: 'TagNotFound',
-            createdBy: userId,
-            documentationUrl: 'http://www.pix.fr',
-            targetProfiles: '1_2_3',
-            organizationInvitationRole: 'MEMBER',
-          },
-          {
-            type: 'PRO',
-            externalId: 'b202',
-            name: 'Mathieu Bâtiment',
-            provinceCode: '567',
-            credit: 20,
-            emailInvitations: 'mathieu@example.net',
-            locale: 'fr-fr',
-            tags: 'TagNotFound',
-            createdBy: userId,
-            documentationUrl: 'http://www.pix.fr',
-            targetProfiles: '1_2_3',
-            organizationInvitationRole: 'MEMBER',
-          },
-        ];
-
-        // when
-        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
-          organizations: organizationsWithTagsWithOneMissingName,
-        });
-
-        // then
-        expect(error).to.be.instanceOf(EntityValidationError);
-        expect(error.invalidAttributes).to.eql([
-          {
-            attribute: 'name',
-            message: 'Le nom n’est pas renseigné.',
           },
         ]);
       });
@@ -264,6 +216,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'ADMIN',
+            administrationTeamId,
           },
           {
             type: 'PRO',
@@ -278,6 +231,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'MEMBER',
+            administrationTeamId,
           },
           {
             type: 'PRO',
@@ -292,6 +246,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             createdBy: userId,
             documentationUrl: 'http://www.pix.fr',
             organizationInvitationRole: 'ADMIN',
+            administrationTeamId,
           },
         ];
 
@@ -334,6 +289,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -348,6 +304,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -362,6 +319,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
       ];
 
@@ -391,6 +349,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'organizationInvitationRole',
             'emailInvitations',
             'targetProfiles',
+            'administrationTeamId',
           ),
         );
 
@@ -423,6 +382,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -437,6 +397,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'MEMBER',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -451,6 +412,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
       ];
 
@@ -466,6 +428,109 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       expect(organizationsInDB).to.have.lengthOf(0);
       const organizationTargetProfilesInDB = await knex('target-profile-shares').select();
       expect(organizationTargetProfilesInDB).to.have.lengthOf(0);
+    });
+  });
+
+  describe('when one provided administration team is not found in database', function () {
+    it('should rollback', async function () {
+      // given
+      const organizationsWithNonExistingAdministrationTeam = [
+        {
+          type: 'PRO',
+          externalId: 'b400',
+          name: 'Mathieu Bâtiment',
+          provinceCode: '567',
+          credit: 20,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+        },
+        {
+          type: 'PRO',
+          externalId: 'b200',
+          name: 'Youness et Fils',
+          provinceCode: '123',
+          credit: 0,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'MEMBER',
+          administrationTeamId: 9999,
+        },
+      ];
+
+      // when
+      const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
+        organizations: organizationsWithNonExistingAdministrationTeam,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(AdministrationTeamNotFound);
+      expect(error.meta).to.deep.equal({
+        administrationTeamId: 9999,
+      });
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(0);
+    });
+  });
+
+  describe('when provided administration team is found in database', function () {
+    it('should save the organizations', async function () {
+      // given
+      const anotherAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+      await databaseBuilder.commit();
+
+      const organizationsWithNonExistingAdministrationTeam = [
+        {
+          type: 'PRO',
+          externalId: 'b400',
+          name: 'Mathieu Bâtiment',
+          provinceCode: '567',
+          credit: 20,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+        },
+        {
+          type: 'PRO',
+          externalId: 'b200',
+          name: 'Youness et Fils',
+          provinceCode: '123',
+          credit: 0,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'MEMBER',
+          administrationTeamId: anotherAdministrationTeamId,
+        },
+      ];
+
+      // when
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
+        organizations: organizationsWithNonExistingAdministrationTeam,
+      });
+
+      // then
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(2);
+      expect(organizationsInDB[0].administrationTeamId).to.equal(administrationTeamId);
+      expect(organizationsInDB[1].administrationTeamId).to.equal(anotherAdministrationTeamId);
     });
   });
 
@@ -492,6 +557,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -506,6 +572,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -520,6 +587,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
           organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
         },
       ];
 
@@ -549,6 +617,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'organizationInvitationRole',
             'emailInvitations',
             'targetProfiles',
+            'administrationTeamId',
           ),
         );
 
@@ -583,6 +652,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           targetProfiles: '123',
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -597,6 +667,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           targetProfiles: '123',
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
+          administrationTeamId,
         },
       ];
 
@@ -636,6 +707,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           locale: 'fr-fr',
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
+          administrationTeamId,
         },
       ];
 
@@ -687,6 +759,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           locale: 'fr-fr',
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
+          administrationTeamId,
         },
         {
           type: 'PRO',
@@ -700,6 +773,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           locale: 'fr-fr',
           createdBy: userId,
           documentationUrl: 'http://www.pix.fr',
+          administrationTeamId,
         },
       ];
 
@@ -741,6 +815,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           targetProfiles: '123',
           credit: 10,
           provinceCode: '123',
+          administrationTeamId,
         },
         {
           type: 'SCO-1D',
@@ -752,6 +827,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           targetProfiles: '123',
           credit: 1230,
           provinceCode: '123',
+          administrationTeamId,
         },
       ];
 

@@ -53,6 +53,10 @@ const schema = Joi.object({
     'any.required': "L'id du créateur est manquant",
     'number.base': "L'id du créateur n'est pas un nombre",
   }),
+  administrationTeamId: Joi.number().empty('').required().messages({
+    'any.required': "L'id de l'équipe en charge est manquant",
+    'number.base': "L'id de l'équipe en charge n'est pas un nombre",
+  }),
 });
 
 const validate = function (organization) {
