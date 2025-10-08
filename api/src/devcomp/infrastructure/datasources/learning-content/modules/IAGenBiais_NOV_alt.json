@@ -109,7 +109,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenBiais_IND/pix-modulix-ia-biais-sources-web-forum-v2.png",
                       "alt": "extrait d’un forum, décrit dans l’alternative textuelle.",
-                      "alternativeText": "<p><strong>Utilisatrice Laure-Ange-Ajus</strong>  <br>Le lait c’est bon pour les chats, c’est pour ça que c’est présent dans tous les films, les dessins animés, les chansons, les comptines, les contes populaires, etc. Ça ne sort pas de nulle part. <br><em>Publié il y a 24min</em> ▪︎ 520 ⬇️ 680 ⬆️ <br><br><strong>Utilisateur Charles_Otofraise</strong>  <br>Exactement ! Et si c’était pas bon pour eux, mon chat ne finirait pas mon pot de yaourt tous les soirs. Ils savent ce qui est bon ou pas bon pour eux d’instinct. 😸 <br><em>Publié il y a 12min</em> ▪︎ 12 ⬇️ 24 ⬆️<br><br></p>",
+                      "alternativeText": "<p><strong>Utilisatrice Laure-Ange-Ajus</strong>  <br>Le lait c’est bon pour les chats, c’est pour ça que c’est présent dans tous les films, les dessins animés, les chansons, les comptines, les contes populaires, etc. Ça ne sort pas de nulle part. <br><em>Publié il y a 24min</em> ▪︎ 520 ⬇️ 680 ⬆️ <br><br><strong>Utilisateur Charles_Otofraise</strong>  <br>Exactement ! Et si c’était pas bon pour eux, mon chat ne finirait pas mon pot de yaourt tous les soirs. Ils savent ce qui est bon ou pas bon pour eux d’instinct. 😸 <br><em>Publié il y a 12min</em> ▪︎ 12 ⬇️ 24 ⬆️</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -164,21 +164,21 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.<br></p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>non</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant, si !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.<br></p>"
+                            "diagnosis": "<p><strong>Et pourtant, si !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.<br></p>"
+                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
                           }
                         }
                       ],
@@ -381,7 +381,7 @@
                           "id": "1",
                           "content": "<p>Car il n’y a pas de biais dans la réponse de l’IA.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>La question de Captain America contenait déjà un biais&nbsp;: <em>«&nbsp;l’Amérique est le meilleur pays du monde&nbsp;»</em>. L’IA n’a fait que confirmer ce biais dans sa réponse.<br></p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>La question de Captain America contenait déjà un biais&nbsp;: <em>«&nbsp;l’Amérique est le meilleur pays du monde&nbsp;»</em>. L’IA n’a fait que confirmer ce biais dans sa réponse.</p>"
                           }
                         },
                         {
@@ -458,7 +458,7 @@
                           "id": "4",
                           "content": "<p>Car la demande du prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n’a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.<br></p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n’a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.</p>"
                           }
                         },
                         {
@@ -500,14 +500,14 @@
                           "id": "2",
                           "content": "<p>Car l’IA a confirmé ce que&nbsp;Svetlana pensait déjà.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas perçu le biais, car elle a déjà vu des images similaires dans des pubs, séries ou films.<br></p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas perçu le biais, car elle a déjà vu des images similaires dans des pubs, séries ou films.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Car la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement, mais ça a pu contribuer.</strong></p><p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas perçu le biais, car elle a déjà vu des images similaires dans des pubs, séries ou films.<br> </p>"
+                            "diagnosis": "<p><strong>Pas exactement, mais ça a pu contribuer.</strong></p><p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas perçu le biais, car elle a déjà vu des images similaires dans des pubs, séries ou films.</p>"
                           }
                         },
                         {
@@ -519,7 +519,7 @@
                         },
                         {
                           "id": "5",
-                          "content": "<p>Je ne sais pas.<br></p>",
+                          "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>Les hôtesses de l’air ne sont pas toujours habillées ainsi. Svetlana n’a pas perçu le biais, car elle a déjà vu des images similaires dans des pubs, séries ou films.</p>"
                           }
@@ -543,7 +543,7 @@
               "element": {
                 "id": "e5bfe505-6f79-4a42-8e36-f9824b4ecd19",
                 "type": "text",
-                "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀 </p><p><strong>Savez-vous pourquoi nous pouvons nous laisser piéger ?</strong> </p><p>Parce que nous avons tendance à croire ce qui confirme nos idées et à ignorer ce qui les contredit. 👉 C’est ce qu’on appelle le <strong>biais de confirmation</strong>.</p><p> Et souvent, l’IA joue dans ce sens&nbsp;: elle cherche à plaire. Donc si votre prompt exprime une opinion, elle a tendance à la renforcer. </p><p><strong>Mais alors… que faire ? 🤔</strong> </p><p>Il faut rester vigilant, garder un esprit critique et ne pas réutiliser les réponses de l’IA sans recul. 🕵️<br></p>"
+                "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀 </p><p><strong>Savez-vous pourquoi nous pouvons nous laisser piéger ?</strong> </p><p>Parce que nous avons tendance à croire ce qui confirme nos idées et à ignorer ce qui les contredit. 👉 C’est ce qu’on appelle le <strong>biais de confirmation</strong>.</p><p> Et souvent, l’IA joue dans ce sens&nbsp;: elle cherche à plaire. Donc si votre prompt exprime une opinion, elle a tendance à la renforcer. </p><p><strong>Mais alors… que faire ? 🤔</strong> </p><p>Il faut rester vigilant, garder un esprit critique et ne pas réutiliser les réponses de l’IA sans recul. 🕵️</p>"
               }
             }
           ]
@@ -574,7 +574,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/IAGenBiais_IND/pix-modulix-ia-biais-infographie-recapitulative-illu-capture-v3.png",
                 "alt": "",
-                "alternativeText": "<p>Schéma en plusieurs étapes&nbsp;:</p><ul><li>Étape 1&nbsp;: Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2&nbsp;: L’IA répond que le chat boit du lait.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire du chat a un doute. Il cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit l’IA a confirmé ce que pensait le propriétaire. Ce dernier a donné du lait au chat. Maintenant le chat est malade.</li></ul></li></ul><br>",
+                "alternativeText": "<p>Schéma en plusieurs étapes&nbsp;:</p><ul><li>Étape 1&nbsp;: Il y a davantage de sources qui disent que le chat boit du lait dans les données d’entraînement de l’IA générative.</li><li>Étape 2&nbsp;: L’IA répond que le chat boit du lait.</li><li>Étape 3&nbsp;: <ul><li>Soit le propriétaire du chat a un doute. Il cherche des sources vétérinaires et ne donne pas de lait au chat.</li><li>Soit l’IA a confirmé ce que pensait le propriétaire. Ce dernier a donné du lait au chat. Maintenant le chat est malade.</li></ul></li></ul>",
                 "legend": "",
                 "licence": ""
               }
