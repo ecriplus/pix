@@ -1,7 +1,9 @@
+import { AdministrationTeamNotFound } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
   organization,
+  administrationTeamRepository,
   dataProtectionOfficerRepository,
   organizationForAdminRepository,
   organizationCreationValidator,
@@ -9,6 +11,17 @@ const createOrganization = async function ({
   codeGenerator,
 }) {
   organizationCreationValidator.validate(organization);
+
+  const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
+
+  if (!administrationTeam) {
+    throw new AdministrationTeamNotFound({
+      meta: {
+        administrationTeamId: organization.administrationTeamId,
+      },
+    });
+  }
+
   const savedOrganization = await organizationForAdminRepository.save({ organization });
 
   await dataProtectionOfficerRepository.create({

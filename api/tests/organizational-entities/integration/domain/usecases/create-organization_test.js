@@ -1,7 +1,9 @@
+import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import {
+  catchErr,
   databaseBuilder,
   expect,
   insertMultipleSendingFeatureForNewOrganization,
@@ -40,6 +42,31 @@ describe('Integration | UseCases | create-organization', function () {
     expect(createdOrganization.dataProtectionOfficer.firstName).to.equal('');
     expect(createdOrganization.dataProtectionOfficer.lastName).to.equal('');
     expect(createdOrganization.dataProtectionOfficer.email).to.equal('');
+  });
+
+  describe('error cases', function () {
+    describe('when organization administration team does not exist', function () {
+      it('throws AdministrationTeamNotFound error', async function () {
+        // given
+        const organization = new OrganizationForAdmin({
+          name: 'ACME',
+          type: 'PRO',
+          documentationUrl: 'https://pix.fr',
+          createdBy: superAdminUserId,
+          administrationTeamId: 9999,
+        });
+
+        // when
+        const error = await catchErr(usecases.createOrganization)({ organization });
+
+        // then
+        expect(error).to.deep.equal(
+          new AdministrationTeamNotFound({
+            meta: { administrationTeamId: organization.administrationTeamId },
+          }),
+        );
+      });
+    });
   });
 
   describe('junior organization', function () {
