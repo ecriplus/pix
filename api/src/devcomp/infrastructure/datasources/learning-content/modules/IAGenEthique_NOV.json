@@ -484,14 +484,7 @@
                       "diagnosis": "<p>L’IA a besoin de beaucoup de données pour mieux comprendre et faire moins d’erreurs.</p>"
                     }
                   },
-                  {
-                    "id": "3",
-                    "content": "<p>Parce que les données servent à faire de la publicité.</p>",
-                    "feedback": {
-                      "state": "<p>Ce n’est pas la bonne réponse.</p>",
-                      "diagnosis": "<p>En réalité, les entreprises d’IA utilisent les données pour apprendre à leurs programmes à mieux fonctionner.</p>"
-                    }
-                  },
+                  
                   {
                     "id": "4",
                     "content": "<p>Parce que les données servent à réparer les ordinateurs quand ils ont des bugs.</p>",
