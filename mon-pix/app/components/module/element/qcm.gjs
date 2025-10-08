@@ -77,9 +77,9 @@ export default class ModuleQcm extends ModuleElement {
 
   @action
   async onAnswer(event) {
+    event.preventDefault();
     this.args.updateSkipButton(true);
     this.isAnswering = true;
-    event.preventDefault();
     await this.waitFor(VERIFY_RESPONSE_DELAY);
 
     super.onAnswer(event);
