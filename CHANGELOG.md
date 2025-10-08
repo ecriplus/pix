@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.227.0](https://github.com/1024pix/pix/compare/v5.226.0...v5.227.0) (2025-10-08)
+
+### :rocket: Amélioration
+
+- [#13748](https://github.com/1024pix/pix/pull/13748) Afficher les durées des certifications Pix+ sur les écrans d'entrée (PIX-19589) 
+- [#13801](https://github.com/1024pix/pix/pull/13801) Animation et couleurs des feedbacks (PIX-19327). 
+- [#13821](https://github.com/1024pix/pix/pull/13821) correction erreur contenu 
+- [#13803](https://github.com/1024pix/pix/pull/13803) QAB : fixer la hauteur des images et temps de transition des cartes (PIX-19618) 
+
+### :bug: Correction
+
+- [#13820](https://github.com/1024pix/pix/pull/13820) Correction de la durée de la certification Pix+ Édu - espace surveillant (PIX-19903) 
+- [#13829](https://github.com/1024pix/pix/pull/13829) Corriger la validation des réponses d'un QCM dans un stepper (PIX-19921) 
+- [#13787](https://github.com/1024pix/pix/pull/13787) Ne pas afficher le message informatif du repasser quand on ne peut pas repasser (PIX-19852) 
+
+### :building_construction: Tech
+
+- [#13818](https://github.com/1024pix/pix/pull/13818) Supprime la dépendance dotenv. 
+
+### :coffee: Autre
+
 # [5.226.0](https://github.com/1024pix/pix/compare/v5.225.0...v5.226.0) (2025-10-07)
 
 ### :rocket: Amélioration
