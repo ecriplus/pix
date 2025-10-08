@@ -71,20 +71,17 @@ export default class EvaluationResultsHeroRetryOrResetBlock extends Component {
   }
 
   get retryOrResetExplanation() {
-    const { campaignParticipationResult } = this.args;
+    const { canRetry, canReset } = this.args.campaignParticipationResult;
     const isAutoShareEnabled = this.featureToggles?.featureToggles?.isAutoShareEnabled || false;
+    const suffix = isAutoShareEnabled ? 'notification-with-auto-share' : 'notification';
 
-    if (campaignParticipationResult.canReset && campaignParticipationResult.canRetry) {
-      if (isAutoShareEnabled) {
-        return this.intl.t('pages.skill-review.reset.notification-with-auto-share');
-      }
-      return this.intl.t('pages.skill-review.reset.notification');
-    }
-
-    if (isAutoShareEnabled) {
-      return this.intl.t('pages.skill-review.retry.notification-with-auto-share');
-    }
-    return this.intl.t('pages.skill-review.retry.notification');
+    if (canReset && canRetry) {
+      return this.intl.t(`pages.skill-review.retry-and-reset.${suffix}`);
+    } else if (!canReset && canRetry) {
+      return this.intl.t(`pages.skill-review.retry.${suffix}`);
+    } else if (canReset && !canRetry) {
+      return this.intl.t(`pages.skill-review.reset.${suffix}`);
+    } else return '';
   }
 
   <template>

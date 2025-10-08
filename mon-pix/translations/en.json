@@ -2068,14 +2068,18 @@
           "text": "You are about to reset and restart your customised test <strong>{targetProfileName}</strong>, in order to try to improve your results. At the end of this customised test, you can submit your results.",
           "warning-text": "Your pix score, levels and eligibility for certification obtained during this customised test will be deleted."
         },
-        "notification": "If you choose to retry the failed questions or reset and restart from the beginning, you will need to submit your new results for them to be taken into account by the organizer. Previously submitted results remain accessible to the organizer.",
-        "notification-with-auto-share": "Retry the failed questions to improve your result or reset and restart from the beginning. The organiser will continue to have access to your previously submitted results."
+        "notification": "If you choose to reset and restart from the beginning, you will need to submit your new results for them to be taken into account by the organizer. Previously submitted results remain accessible to the organizer.",
+        "notification-with-auto-share": "Reset and restart from the beginning. The organiser will continue to have access to your previously submitted results."
       },
       "retry": {
         "button": "Retake my customised test",
         "message": "{organizationName} encourages you to retake your test to measure your progress.",
         "notification": "Retake the failed questions to improve your result and continue to progress. You will need to send in your results again so that they can be counted by the organiser. The organiser will continue to have access to your previously submitted results.",
         "notification-with-auto-share": "Retake the failed questions to improve your result and continue to progress. The organiser will continue to have access to your previously submitted results."
+      },
+      "retry-and-reset":{
+        "notification": "If you choose to retry the failed questions or reset and restart from the beginning, you will need to submit your new results for them to be taken into account by the organizer. Previously submitted results remain accessible to the organizer.",
+        "notification-with-auto-share": "Retry the failed questions to improve your result or reset and restart from the beginning. The organiser will continue to have access to your previously submitted results."
       },
       "send-results": "Don't forget to submit your results.",
       "send-status": {

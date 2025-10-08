@@ -2076,14 +2076,18 @@
           "text": "Vous êtes sur le point de remettre à zéro votre parcours <strong>{targetProfileName}</strong>, afin de tenter d’améliorer votre niveau. A la fin du parcours, vous pourrez à nouveau envoyer vos résultats.",
           "warning-text": "Vos Pix, vos niveaux et votre certificabilité obtenus lors de ce parcours vont être supprimés."
         },
-        "notification": "Si vous repassez les questions échouées ou remettez à zéro pour tout retenter, vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilisés par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
-        "notification-with-auto-share": "Repassez les questions échouées ou remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
+        "notification": "Si vous remettez à zéro pour tout retenter, vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilisés par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
+        "notification-with-auto-share": "Remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
       },
       "retry": {
         "button": "Repasser mon parcours",
         "message": "{organizationName} vous invite à repasser ce parcours afin d'améliorer votre résultat et de continuer à progresser.",
         "notification": "Repassez les questions échouées afin d'améliorer votre résultat et de continuer à progresser. Vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilités par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
         "notification-with-auto-share": "Repassez les questions échouées afin d'améliorer votre résultat et de continuer à progresser. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
+      },
+      "retry-and-reset":{
+        "notification": "Si vous repassez les questions échouées ou remettez à zéro pour tout retenter, vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilisés par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
+        "notification-with-auto-share": "Repassez les questions échouées ou remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
       },
       "send-results": "N'oubliez pas d'envoyer vos résultats à l'organisateur du parcours.",
       "send-status": {

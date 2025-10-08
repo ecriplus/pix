@@ -125,6 +125,23 @@ module(
       test('should display reset message with auto share', async function (assert) {
         //given
         this.set('campaign', { code: 'CODECAMPAIGN' });
+        this.set('campaignParticipationResult', { canRetry: false, canReset: true });
+
+        //when
+        const screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+/>`,
+        );
+
+        //then
+        assert.ok(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share')));
+      });
+
+      test('should display reset and retry message with auto share', async function (assert) {
+        //given
+        this.set('campaign', { code: 'CODECAMPAIGN' });
         this.set('campaignParticipationResult', { canRetry: true, canReset: true });
 
         //when
@@ -136,16 +153,17 @@ module(
         );
 
         //then
-        assert.dom(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share'))).exists();
+        assert.dom(screen.getByText(t('pages.skill-review.retry-and-reset.notification-with-auto-share'))).exists();
       });
     });
 
-    module('when user can retry the assessment', function () {
-      test('displays a retry link', async function (assert) {
-        // given
+    module('when user can only retry the assessment', function (hooks) {
+      hooks.beforeEach(function () {
         this.set('campaign', { code: 'CODECAMPAIGN' });
         this.set('campaignParticipationResult', { canRetry: true, canReset: false });
+      });
 
+      test('displays a retry link and not reset button', async function (assert) {
         // when
         const screen = await render(
           hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
@@ -158,62 +176,20 @@ module(
         const retryLink = screen.getByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') });
         assert.dom(retryLink).exists();
         assert.dom(retryLink).hasAttribute('href', '/campagnes/CODECAMPAIGN?retry=true');
-
         assert
           .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') }))
           .doesNotExist();
         assert.dom(screen.getByText(t('pages.skill-review.retry.notification'))).exists();
       });
-
-      module('with auto share enabled', function (hooks) {
-        hooks.beforeEach(function () {
-          const featureToggles = this.owner.lookup('service:featureToggles');
-          sinon.stub(featureToggles, 'featureToggles').value({ isAutoShareEnabled: true });
-        });
-
-        test('should display retry message with auto share', async function (assert) {
-          //given
-          this.set('campaign', { code: 'CODECAMPAIGN' });
-          this.set('campaignParticipationResult', { canRetry: true, canReset: false });
-
-          //when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-          );
-
-          //then
-          assert.dom(screen.getByText(t('pages.skill-review.retry.notification-with-auto-share'))).exists();
-        });
-
-        test('should display reset message with auto share', async function (assert) {
-          //given
-          this.set('campaign', { code: 'CODECAMPAIGN' });
-          this.set('campaignParticipationResult', { canRetry: true, canReset: true });
-
-          //when
-          const screen = await render(
-            hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
-  @campaign={{this.campaign}}
-  @campaignParticipationResult={{this.campaignParticipationResult}}
-/>`,
-          );
-
-          //then
-          assert.dom(screen.getByText(t('pages.skill-review.reset.notification-with-auto-share'))).exists();
-        });
-      });
     });
 
-    module('when user can reset the assessment', function (hooks) {
+    module('when user can only reset the assessment', function (hooks) {
       let screen;
 
       hooks.beforeEach(async function () {
         // given
         this.set('campaign', { code: 'CODECAMPAIGN', targetProfileName: 'targetProfileName' });
-        this.set('campaignParticipationResult', { canRetry: true, canReset: true });
+        this.set('campaignParticipationResult', { canRetry: false, canReset: true });
 
         // when
         screen = await render(
@@ -226,7 +202,9 @@ module(
 
       test('it should display a reset button', async function (assert) {
         // then
-        assert.dom(screen.getByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).exists();
+        assert
+          .dom(screen.queryByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') }))
+          .doesNotExist();
         assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') })).exists();
         assert.dom(screen.getByText(t('pages.skill-review.reset.notification'))).exists();
       });
@@ -245,6 +223,31 @@ module(
         assert.dom(linkButton).exists();
         assert.dom(linkButton).hasAttribute('href', '/campagnes/CODECAMPAIGN?reset=true');
         assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
+      });
+    });
+
+    module('when user can retry and reset the assessment', function (hooks) {
+      let screen;
+
+      hooks.beforeEach(async function () {
+        // given
+        this.set('campaign', { code: 'CODECAMPAIGN', targetProfileName: 'targetProfileName' });
+        this.set('campaignParticipationResult', { canRetry: true, canReset: true });
+
+        // when
+        screen = await render(
+          hbs`<Campaigns::Assessment::Results::EvaluationResultsHero::RetryOrResetBlock
+  @campaign={{this.campaign}}
+  @campaignParticipationResult={{this.campaignParticipationResult}}
+/>`,
+        );
+      });
+
+      test('it should display a retry and reset button', async function (assert) {
+        // then
+        assert.dom(screen.getByRole('link', { name: t('pages.skill-review.hero.retry.actions.retry') })).exists();
+        assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.retry.actions.reset') })).exists();
+        assert.dom(screen.getByText(t('pages.skill-review.retry-and-reset.notification'))).exists();
       });
     });
   },

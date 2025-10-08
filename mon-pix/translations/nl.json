@@ -2059,14 +2059,18 @@
           "text": "Je staat op het punt om je <strong>{targetProfileName}</strong> cursus te resetten in een poging om je niveau te verbeteren. Aan het einde van de cursus kun je je resultaten weer insturen.",
           "warning-text": "Je Pix, niveaus en certificeerbaarheid verkregen tijdens deze cursus zullen worden verwijderd."
         },
-        "notification": "Als je de mislukte vragen opnieuw probeert of alles op nul zet om alles opnieuw te proberen, kan je organisatie je laatste resultaat niet meer zien. Om je resultaat mee te laten tellen door de organisator van de test, moet je het opnieuw insturen.",
-        "notification-with-auto-share": "Herhaal mislukte vragen of stel in op nul om het opnieuw te proberen. De organisator blijft toegang houden tot je eerder ingediende resultaten."
+        "notification": "Als u alles op nul zet om opnieuw te beginnen, kan uw organisatie uw laatste resultaat niet meer zien. Om uw resultaat door de organisator van de test te laten meetellen, moet u het opnieuw indienen.",
+        "notification-with-auto-share": "Zet alles op nul om opnieuw te beginnen. De organisator blijft toegang hebben tot uw eerder ingediende resultaten."
       },
       "retry": {
         "button": "Mijn reis naspelen",
         "message": "{organizationName} nodigt je uit om deze test opnieuw te doen om je resultaat te verbeteren en vooruitgang te blijven boeken.",
         "notification": "Herhaal de vragen waarvoor je gezakt bent om je resultaat te verbeteren en verder te komen. Je moet je resultaten opnieuw insturen zodat ze kunnen worden geteld door de organisator. De organisator blijft toegang houden tot je eerder ingestuurde resultaten.",
         "notification-with-auto-share": "Herhaal mislukte vragen om je resultaat te verbeteren en verder te gaan. De organisator blijft toegang houden tot je eerder ingediende resultaten."
+      },
+      "retry-and-reset":{
+        "notification": "Als je de mislukte vragen opnieuw probeert of alles op nul zet om alles opnieuw te proberen, kan je organisatie je laatste resultaat niet meer zien. Om je resultaat mee te laten tellen door de organisator van de test, moet je het opnieuw insturen.",
+        "notification-with-auto-share": "Herhaal mislukte vragen of stel in op nul om het opnieuw te proberen. De organisator blijft toegang houden tot je eerder ingediende resultaten."
       },
       "send-results": "Vergeet niet je resultaten naar de cursusorganisator te sturen.",
       "send-status": {
