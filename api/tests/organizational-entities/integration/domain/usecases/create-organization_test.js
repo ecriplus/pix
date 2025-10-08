@@ -2,6 +2,7 @@ import { AdministrationTeamNotFound } from '../../../../../src/organizational-en
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import {
   catchErr,
   databaseBuilder,
@@ -65,6 +66,22 @@ describe('Integration | UseCases | create-organization', function () {
             meta: { administrationTeamId: organization.administrationTeamId },
           }),
         );
+      });
+    });
+
+    context('when params are not valid', function () {
+      it('rejects an EntityValidationError', async function () {
+        // given
+        const organization = new OrganizationForAdmin({
+          name: 'ACME',
+          type: 'PRO',
+        });
+
+        // when
+        const error = await catchErr(usecases.createOrganization)({ organization });
+
+        // then
+        expect(error).to.be.an.instanceOf(EntityValidationError);
       });
     });
   });
