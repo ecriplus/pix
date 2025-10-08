@@ -19,6 +19,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @service store;
   @service oidcIdentityProviders;
   @service intl;
+  @service pixToast;
 
   @tracked isEditMode = false;
   @tracked showArchivingConfirmationModal = false;
@@ -106,6 +107,9 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
     const { validations } = await this.form.validate();
     if (!validations.isValid) {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.organizations.editing.required-fields-error'),
+      });
       return;
     }
 

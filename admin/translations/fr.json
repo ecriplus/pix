@@ -579,7 +579,8 @@
         },
         "province-code": {
           "label": "Département (en 3 chiffres)"
-        }
+        },
+        "required-fields-error": "Veuillez remplir tous les champs obligatoires."
       },
       "information-section-view": {
         "administration-team": "Équipe en charge",

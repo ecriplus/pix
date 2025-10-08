@@ -578,7 +578,8 @@
         },
         "province-code": {
           "label": "Province code (3 digits)"
-        }
+        },
+        "required-fields-error": "Please fill in all required fields."
       },
       "information-section-view": {
         "administration-team": "Administration team",
