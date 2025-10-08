@@ -347,7 +347,7 @@ export default class CandidateInList extends Component {
         return PIX_PLUS_DURATIONS.DROIT;
       case label.includes('pro') && label.includes('santé'):
         return PIX_PLUS_DURATIONS.PRO_SANTE;
-      case label.includes('edu'):
+      case label.includes('édu'):
         return PIX_PLUS_DURATIONS.EDU;
       default:
         return null;

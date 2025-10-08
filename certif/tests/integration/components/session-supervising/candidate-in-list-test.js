@@ -625,7 +625,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Durand',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T10:45:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Edu 1er Degré',
+          enrolledComplementaryCertificationLabel: 'Pix+ Édu 1er Degré',
           assessmentStatus: 'started',
         });
 
@@ -647,7 +647,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Bernard',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T16:00:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Edu 2nd Degré',
+          enrolledComplementaryCertificationLabel: 'Pix+ Édu 2nd Degré',
           assessmentStatus: 'started',
         });
 
@@ -669,7 +669,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Moreau',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T18:15:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Edu CPE',
+          enrolledComplementaryCertificationLabel: 'Pix+ Édu CPE',
           assessmentStatus: 'started',
         });
 
