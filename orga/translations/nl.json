@@ -469,6 +469,7 @@
       "campaigns": "Campagnes",
       "certifications": "Certificeringen",
       "close": "Sluit de navigatie",
+      "combined-courses": "Leerprogramma's",
       "documentation": "Documentatie",
       "home": "Home",
       "missions": "Opdrachten",
@@ -615,6 +616,7 @@
       "name": "Naam Campagne",
       "tab": {
         "activity": "Activiteit",
+        "combined-courses": "Leerprogramma's",
         "results": "Resultaten ({count, number})",
         "review": "Analyse",
         "settings": "Instellingen"
@@ -1021,6 +1023,18 @@
           "status": "Status"
         },
         "description": "List of the combined course participations"
+      }
+    },
+    "combined-courses": {
+      "empty-state": "Geen leerprogramma beschikbaar op dit moment.",
+      "table": {
+        "caption": "Lijst van leerprogramma's",
+        "column": {
+          "code": "Code",
+          "completed": "Deelnemers die voltooid hebben",
+          "name": "Naam van het programma",
+          "participants": "Deelnemers"
+        }
       }
     },
     "index": {

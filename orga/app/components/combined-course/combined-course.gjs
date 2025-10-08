@@ -17,8 +17,12 @@ export default class CombinedCourse extends Component {
   get breadcrumbLinks() {
     return [
       {
-        route: 'authenticated.campaigns',
+        route: 'authenticated.campaigns.list.my-campaigns',
         label: this.intl.t('navigation.main.campaigns'),
+      },
+      {
+        route: 'authenticated.campaigns.combined-courses',
+        label: this.intl.t('navigation.main.combined-courses'),
       },
       {
         label: this.args.model.name,

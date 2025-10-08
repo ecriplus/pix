@@ -42,6 +42,11 @@ export default class List extends Component {
         <LinkTo @route="authenticated.campaigns.list.my-campaigns">
           {{t "pages.campaigns-list.tabs.my-campaigns"}}
         </LinkTo>
+        {{#if this.currentUser.hasCombinedCourses}}
+          <LinkTo @route="authenticated.campaigns.combined-courses">
+            {{t "pages.campaign.tab.combined-courses"}}
+          </LinkTo>
+        {{/if}}
         <LinkTo @route="authenticated.campaigns.list.all-campaigns">
           {{t "pages.campaigns-list.tabs.all-campaigns"}}
         </LinkTo>

@@ -79,6 +79,7 @@ Router.map(function () {
         });
         this.route('settings', { path: '/parametres' });
       });
+      this.route('combined-courses', { path: '/parcours-apprenants' });
     });
     this.route('certifications');
     this.route('attestations');
