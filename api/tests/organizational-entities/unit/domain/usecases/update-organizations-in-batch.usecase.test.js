@@ -154,28 +154,54 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       });
     });
 
-    context('when administration team does not exist', function () {
-      it('throws an AdministrationTeamNotFound', async function () {
+    describe('when administration team id is provided', function () {
+      context('when administration team does not exist', function () {
+        it('throws an AdministrationTeamNotFound', async function () {
+          // given
+          const fileData = `${csvHeaders}
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        `;
+          filePath = await createTempFile('test.csv', fileData);
+          organizationForAdminRepository.exist.resolves(true);
+          administrationTeamRepository.getById.resolves(null);
+
+          // when
+          const error = await catchErr(updateOrganizationsInBatch)({
+            filePath,
+            organizationForAdminRepository,
+            administrationTeamRepository,
+          });
+
+          // then
+          expect(organizationForAdminRepository.update).to.not.have.been.called;
+          expect(error).to.be.instanceOf(AdministrationTeamNotFound);
+          expect(error.message).to.equal('Administration team does not exist');
+          expect(error.meta.administrationTeamId).to.equal('1234');
+        });
+      });
+    });
+
+    describe('when administration team id is not provided', function () {
+      it('does not call administrationTeamRepository.getById', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234
+        1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
-        administrationTeamRepository.getById.resolves(null);
+        const organization = domainBuilder.buildOrganizationForAdmin({ id: 1 });
+        organizationForAdminRepository.get.resolves(organization);
 
         // when
-        const error = await catchErr(updateOrganizationsInBatch)({
+        await updateOrganizationsInBatch({
           filePath,
           organizationForAdminRepository,
           administrationTeamRepository,
         });
 
         // then
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(AdministrationTeamNotFound);
-        expect(error.message).to.equal('Administration team does not exist');
-        expect(error.meta.administrationTeamId).to.equal('1234');
+        expect(administrationTeamRepository.getById).to.not.have.been.called;
+        expect(organizationForAdminRepository.update).to.have.been.calledOnceWithExactly({ organization });
       });
     });
 
