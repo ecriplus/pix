@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.228.0](https://github.com/1024pix/pix/compare/v5.227.0...v5.228.0) (2025-10-09)
+
+### :rocket: Amélioration
+
+- [#13811](https://github.com/1024pix/pix/pull/13811) Afficher la liste des parcours apprenants (PIX-19814) 
+- [#13813](https://github.com/1024pix/pix/pull/13813) Afficher les boutons des campagnes sur la page de parcours combinés (PIX-19799) 
+- [#13798](https://github.com/1024pix/pix/pull/13798) création IAGenEthique_NOV.json 
+- [#13812](https://github.com/1024pix/pix/pull/13812) Enregistrer l'équipe en charge lors de la création d'organisations en masse (PIX-19600) 
+- [#13827](https://github.com/1024pix/pix/pull/13827) fix typo IAGenFonction 
+- [#13831](https://github.com/1024pix/pix/pull/13831) Version alternative module IA Biais IND 
+
+### :bug: Correction
+
+- [#13826](https://github.com/1024pix/pix/pull/13826) Corriger le fond violet sur la page de récap (PIX-19912) 
+
+### :building_construction: Tech
+
+- [#13832](https://github.com/1024pix/pix/pull/13832) Ne pas rendre l'id de l'équipe en charge obligatoire lors de l'update en masse (PIX-19925) 
+- [#13777](https://github.com/1024pix/pix/pull/13777) Seeds : ajouter des versions CORE pour la table certification_versions (PIX-19847). 
+- [#13828](https://github.com/1024pix/pix/pull/13828) Vérifier que l'équipe en charge existe bien avant de créer l'organisation (PIX-19904)
+
 # [5.227.0](https://github.com/1024pix/pix/compare/v5.226.0...v5.227.0) (2025-10-08)
 
 ### :rocket: Amélioration
