@@ -1011,6 +1011,7 @@
       "title": "Résultats de certification"
     },
     "combined-course": {
+      "campaigns": "{count, plural, =1 {Voir le détail de la campagne} other {Voir le détail de la campagne n°{index}}}",
       "introduction": "Un parcours apprenant est un parcours qui mixe campagnes d'évaluation et modules de formations. La selection des modules de formation sera adapter au niveau du prescrit",
       "statistics": {
         "completed-participations": "Participations complétées",

@@ -1,3 +1,4 @@
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIndicatorCard from '@1024pix/pix-ui/components/pix-indicator-card';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
@@ -5,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import ActivityType from 'pix-orga/components/activity-type';
+import EmptyState from 'pix-orga/components/campaign/empty-state';
 import CopyPasteButton from 'pix-orga/components/copy-paste-button';
 import Breadcrumb from 'pix-orga/components/ui/breadcrumb';
 import PageTitle from 'pix-orga/components/ui/page-title';
@@ -30,6 +32,10 @@ export default class CombinedCourse extends Component {
     ];
   }
 
+  getCampaignIndex(index) {
+    return index + 1;
+  }
+
   <template>
     <PageTitle>
       <:breadcrumb>
@@ -40,9 +46,22 @@ export default class CombinedCourse extends Component {
         <span class="page-title__name">{{@model.name}}</span>
       </:title>
       <:subtitle>
-
-        <p class="campaign-page__page-subtext">{{t "pages.combined-course.introduction"}}</p>
-
+        <div class="combined-course-page__header">
+          <p class="combined-course-page__header-body">{{t "pages.combined-course.introduction"}}</p>
+          {{#if @model.campaignIds.length}}
+            <div class="combined-course-page__campaigns">
+              {{#each @model.campaignIds as |campaignId index|}}
+                <PixButtonLink @route="authenticated.campaigns.campaign" @model={{campaignId}} @variant="primary">
+                  {{t
+                    "pages.combined-course.campaigns"
+                    count=@model.campaignIds.length
+                    index=(this.getCampaignIndex index)
+                  }}
+                </PixButtonLink>
+              {{/each}}
+            </div>
+          {{/if}}
+        </div>
       </:subtitle>
       <:tools>
         <dl class="campaign-header-title__details">
@@ -82,41 +101,44 @@ export default class CombinedCourse extends Component {
         <:default>{{@model.combinedCourseStatistics.completedParticipationsCount}}</:default>
       </PixIndicatorCard>
     </div>
+    {{#if @model.combinedCourseParticipations.length}}
+      <PixTable
+        @variant="orga"
+        @caption={{t "pages.combined-course.table.description"}}
+        @data={{@model.combinedCourseParticipations}}
+        class="table"
+      >
+        <:columns as |participation context|>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.last-name"}}
+            </:header>
+            <:cell>
+              {{participation.lastName}}
+            </:cell>
+          </PixTableColumn>
 
-    <PixTable
-      @variant="orga"
-      @caption={{t "pages.combined-course.table.description"}}
-      @data={{@model.combinedCourseParticipations}}
-      class="table"
-    >
-      <:columns as |participation context|>
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.last-name"}}
-          </:header>
-          <:cell>
-            {{participation.lastName}}
-          </:cell>
-        </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.first-name"}}
+            </:header>
+            <:cell>
+              {{participation.firstName}}
+            </:cell>
+          </PixTableColumn>
 
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.first-name"}}
-          </:header>
-          <:cell>
-            {{participation.firstName}}
-          </:cell>
-        </PixTableColumn>
-
-        <PixTableColumn @context={{context}}>
-          <:header>
-            {{t "pages.combined-course.table.column.status"}}
-          </:header>
-          <:cell>
-            <ParticipationStatus @status={{participation.status}} />
-          </:cell>
-        </PixTableColumn>
-      </:columns>
-    </PixTable>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "pages.combined-course.table.column.status"}}
+            </:header>
+            <:cell>
+              <ParticipationStatus @status={{participation.status}} />
+            </:cell>
+          </PixTableColumn>
+        </:columns>
+      </PixTable>
+    {{else}}
+      <EmptyState />
+    {{/if}}
   </template>
 }

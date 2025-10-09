@@ -1011,6 +1011,7 @@
       "title": "Resultaten certificering"
     },
     "combined-course": {
+      "campaigns": "{count, plural, =1 {Bekijk de details van de campagne} other {Bekijk de details van campagne nr. {index}}}",
       "introduction": "text d'intro",
       "statistics": {
         "completed-participations": "Voltooide deelnames",
