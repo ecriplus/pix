@@ -6,6 +6,7 @@ import * as complementaryCertificationRepository from '../../../configuration/in
 import { mailService } from '../../../shared/domain/services/mail-service.js';
 import * as targetProfileHistoryRepository from '../../../shared/infrastructure/repositories/target-profile-history-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../infrastructure/repositories/complementary-certification-badge-repository.js';
+
 /**
  *
  * Using {@link https://jsdoc.app/tags-type "Closure Compiler's syntax"} to document injected dependencies
