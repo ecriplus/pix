@@ -1753,11 +1753,7 @@
       },
       "grain": {
         "tag": {
-          "activity": "Activiteit",
-          "challenge": "Uitdaging",
-          "discovery": "Ontdekking",
-          "lesson": "Les",
-          "summary": "Recap"
+          "activity": "Activiteit"
         },
         "title": {
           "lesson": "Les",
