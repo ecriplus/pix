@@ -147,16 +147,18 @@ async function _checkOrganizationUpdate({
     });
   }
 
-  const administrationTeam = await administrationTeamRepository.getById(
-    organizationBatchUpdateDto.administrationTeamId,
-  );
+  if (organizationBatchUpdateDto.administrationTeamId) {
+    const administrationTeam = await administrationTeamRepository.getById(
+      organizationBatchUpdateDto.administrationTeamId,
+    );
 
-  if (!administrationTeam) {
-    throw new AdministrationTeamNotFound({
-      meta: {
-        administrationTeamId: organizationBatchUpdateDto.administrationTeamId,
-      },
-    });
+    if (!administrationTeam) {
+      throw new AdministrationTeamNotFound({
+        meta: {
+          administrationTeamId: organizationBatchUpdateDto.administrationTeamId,
+        },
+      });
+    }
   }
 
   return organization;
