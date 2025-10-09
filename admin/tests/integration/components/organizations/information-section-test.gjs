@@ -277,12 +277,24 @@ module('Integration | Component | organizations/information-section', function (
       await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
       await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
       await fillByLabel(t('components.organizations.editing.province-code.label'), '');
+
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      await click(screen.getByRole('option', { name: 'Équipe 2' }));
+
       await fillByLabel(t('components.organizations.information-section-view.credits'), 50);
       await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
       await fillByLabel(t('components.organizations.information-section-view.documentation-link'), 'https://pix.fr/');
+
       await clickByName(t('components.organizations.information-section-view.sso'));
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: 'organization 2' }));
+      const ssoOption = await screen.findByRole('option', { name: 'organization 2' });
+      await click(ssoOption);
+
       await clickByName(t('components.organizations.information-section-view.features.SHOW_SKILLS'));
       await clickByName(t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT'));
       await clickByName(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'));
@@ -303,7 +315,7 @@ module('Integration | Component | organizations/information-section', function (
           screen.getByText(t('components.organizations.information-section-view.administration-team'))
             .nextElementSibling,
         )
-        .hasText('Équipe 1');
+        .hasText('Équipe 2');
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.credits')).nextElementSibling)
         .hasText('50');
