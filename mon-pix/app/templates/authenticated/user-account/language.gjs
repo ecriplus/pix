@@ -6,8 +6,8 @@ import LocaleSwitcher from 'mon-pix/components/locale-switcher';
   <div class="language">
     <LocaleSwitcher
       @label={{t "pages.user-account.language.lang"}}
-      @defaultValue={{@model.lang}}
       @onChange={{@controller.onLanguageChange}}
+      @defaultValue={{@model.locale}}
     />
 
     {{#if @controller.shouldDisplayLanguageUpdatedMessage}}

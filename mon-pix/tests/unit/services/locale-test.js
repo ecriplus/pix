@@ -314,33 +314,38 @@ module('Unit | Services | locale', function (hooks) {
     });
   });
 
-  module('switcherDisplayedLanguages', function () {
-    module('when supportedLocales contains all the pixLanguages', function () {
-      test('returns all the pixLanguages that should be displayed in the switcher with french first', function (assert) {
-        // when
-        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
+  module('switcherDisplayedLocales', function () {
+    test('returns all the pixLocales that should be displayed in the switcher with french first', function (assert) {
+      // when
+      const switcherDisplayedLocales = localeService.switcherDisplayedLocales;
 
-        // then
-        assert.deepEqual(switcherDisplayedLanguages, [
-          { value: 'fr', label: 'Français' },
-          { value: 'en', label: 'English' },
-          { value: 'nl', label: 'Nederlands' },
-        ]);
-      });
-    });
-
-    module('when supportedLocales does not contain all the pixLanguages', function () {
-      test('returns the pixLanguages part of the supportedLocales that should be displayed in the switcher with french first', function (assert) {
-        // when
-        sinon.stub(localeService, 'supportedLocales').value(['en', 'fr']);
-        const switcherDisplayedLanguages = localeService.switcherDisplayedLanguages;
-
-        // then
-        assert.deepEqual(switcherDisplayedLanguages, [
-          { value: 'fr', label: 'Français' },
-          { value: 'en', label: 'English' },
-        ]);
-      });
+      // then
+      assert.deepEqual(switcherDisplayedLocales, [
+        {
+          label: 'English',
+          value: 'en',
+        },
+        {
+          label: 'Español',
+          value: 'es',
+        },
+        {
+          label: 'Español (Latinoamérica)',
+          value: 'es-419',
+        },
+        {
+          label: 'Français',
+          value: 'fr',
+        },
+        {
+          label: 'Français (Belgique)',
+          value: 'fr-BE',
+        },
+        {
+          label: 'Nederlands (België)',
+          value: 'nl-BE',
+        },
+      ]);
     });
   });
 });
