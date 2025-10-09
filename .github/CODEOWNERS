@@ -1,3 +1,5 @@
+
+# Directories maintained by team Devcomp
 # @1024pix/devcomp owns any file in the `/api/src/devcomp/` directory in the root of your repository and any of its subdirectories.
 /api/scripts/modulix/ @1024pix/team-devcomp
 /api/src/devcomp/application/ @1024pix/team-devcomp
@@ -51,13 +53,9 @@
 
 /api/src/authorization/ @1024pix/team-acces
 /api/src/identity-access-management/ @1024pix/team-acces
-/api/src/organizational-entities/ @1024pix/team-acces
-/api/src/team/ @1024pix/team-acces
 
 /api/tests/authorization/ @1024pix/team-acces
 /api/tests/identity-access-management/ @1024pix/team-acces
-/api/tests/organizational-entities/ @1024pix/team-acces
-/api/tests/team/ @1024pix/team-acces
 
 /mon-pix/app/authenticators/ @1024pix/team-acces
 /mon-pix/app/components/sign* @1024pix/team-acces
@@ -84,6 +82,15 @@
 /admin/app/services/locale.js @1024pix/team-acces
 /admin/app/services/session.js @1024pix/team-acces
 /admin/app/services/url-base.js @1024pix/team-acces
+
+
+# Directories maintained by team Acquisition
+/api/src/organizational-entities/ @1024pix/team-acquisition
+/api/src/team/ @1024pix/team-acquisition
+
+/api/tests/organizational-entities/ @1024pix/team-acquisition
+/api/tests/team/ @1024pix/team-acquisition
+
 
 # Directories maintained by team Captains
 /api/db/migrations/ @1024pix/team-captains
