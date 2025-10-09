@@ -8,6 +8,7 @@
 
 import { AnswerCollectionForScoring } from '../../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { ComplementaryCertificationCourseResult } from '../../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { ComplementaryCertificationKeys } from '../../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { ReproducibilityRate } from '../../../../shared/domain/models/ReproducibilityRate.js';
 import { ComplementaryCertificationScoringWithComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithComplementaryReferential.js';
 import { ComplementaryCertificationScoringWithoutComplementaryReferential } from '../../models/ComplementaryCertificationScoringWithoutComplementaryReferential.js';
@@ -19,6 +20,7 @@ import { ComplementaryCertificationScoringWithoutComplementaryReferential } from
  * @param {ComplementaryCertificationCourseResultRepository} params.complementaryCertificationCourseResultRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {ComplementaryCertificationBadgesRepository} params.complementaryCertificationBadgesRepository
+ * @param {ComplementaryCertificationRepository} params.complementaryCertificationRepository
  */
 export async function scoreComplementaryCertificationV2({
   certificationCourseId,
@@ -28,6 +30,7 @@ export async function scoreComplementaryCertificationV2({
   complementaryCertificationCourseResultRepository,
   certificationCourseRepository,
   complementaryCertificationBadgesRepository,
+  complementaryCertificationRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   const assessmentResult = await assessmentResultRepository.getByCertificationCourseId({ certificationCourseId });
@@ -38,15 +41,22 @@ export async function scoreComplementaryCertificationV2({
     complementaryCertificationCourseId,
     complementaryCertificationBadgeId,
     complementaryCertificationBadgeKey,
-    hasComplementaryReferential,
     minimumEarnedPix,
   } = complementaryCertificationScoringCriteria;
 
+  let complementaryCertificationKey;
+  if (certificationCourse.complementaryCertificationCourse?.complementaryCertificationId) {
+    const complementaryCertification = await complementaryCertificationRepository.get({
+      id: certificationCourse.complementaryCertificationCourse.complementaryCertificationId,
+    });
+    complementaryCertificationKey = complementaryCertification?.key;
+  }
+
   const complementaryCertificationScoring = await _buildComplementaryCertificationScoring({
-    hasComplementaryReferential,
     certificationAssessmentRepository,
     certificationCourseId,
     complementaryCertificationBadgeKey,
+    complementaryCertificationKey,
     minimumReproducibilityRate,
     complementaryCertificationCourseId,
     complementaryCertificationBadgeId,
@@ -58,7 +68,7 @@ export async function scoreComplementaryCertificationV2({
   const { computedComplementaryCertificationBadgeId, isAcquired, isLowerLevelComplementaryCertificationAcquired } =
     await _getComplementaryCertificationResultInformation({
       complementaryCertificationScoring,
-      hasComplementaryReferential,
+      complementaryCertificationKey,
       complementaryCertificationBadgesRepository,
       assessmentResult,
       minimumReproducibilityRateLowerLevel,
@@ -77,12 +87,16 @@ export async function scoreComplementaryCertificationV2({
 
 async function _getComplementaryCertificationResultInformation({
   complementaryCertificationScoring,
-  hasComplementaryReferential,
+  complementaryCertificationKey,
   complementaryCertificationBadgesRepository,
   assessmentResult,
   minimumReproducibilityRateLowerLevel,
 }) {
-  if (hasComplementaryReferential && assessmentResult.isValidated()) {
+  if (
+    complementaryCertificationKey &&
+    complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA &&
+    assessmentResult.isValidated()
+  ) {
     const lowerLevelComplementaryCertificationBadge = await _getNextLowerLevelBadge(
       complementaryCertificationBadgesRepository,
       complementaryCertificationScoring.complementaryCertificationBadgeId,
@@ -148,7 +162,7 @@ async function _getNextLowerLevelBadge(complementaryCertificationBadgesRepositor
 }
 
 async function _buildComplementaryCertificationScoring({
-  hasComplementaryReferential,
+  complementaryCertificationKey,
   certificationAssessmentRepository,
   certificationCourseId,
   complementaryCertificationBadgeKey,
@@ -159,7 +173,7 @@ async function _buildComplementaryCertificationScoring({
   certificationCourse,
   minimumEarnedPix,
 }) {
-  if (hasComplementaryReferential) {
+  if (complementaryCertificationKey && complementaryCertificationKey.key !== ComplementaryCertificationKeys.CLEA) {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId,
     });
