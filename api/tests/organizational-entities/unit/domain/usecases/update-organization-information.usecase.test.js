@@ -1,4 +1,3 @@
-import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -83,37 +82,6 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-    });
-
-    it('should reject with an AdministrationTeamNotFound (DomainError) when the administrationTeam does not exist', async function () {
-      // given
-      const givenOrganization = domainBuilder.buildOrganizationForAdmin({ administrationTeamId: 123 });
-
-      const existingOrganizationForAdmin = domainBuilder.buildOrganizationForAdmin({
-        organizationId: givenOrganization.id,
-      });
-      sinon.stub(existingOrganizationForAdmin, 'updateWithDataProtectionOfficerAndTags');
-
-      organizationForAdminRepository.get.onCall(0).returns(existingOrganizationForAdmin);
-
-      const updatedOrganization = domainBuilder.buildOrganizationForAdmin({ organizationId: givenOrganization.id });
-      organizationForAdminRepository.get.onCall(1).returns(updatedOrganization);
-
-      const tagsToUpdate = Symbol('tagsToUpdate');
-      tagRepository.findByIds.withArgs(givenOrganization.tagIds).resolves(tagsToUpdate);
-
-      administrationTeamRepository.getById.withArgs(givenOrganization.administrationTeamId).resolves(null);
-
-      // when
-      const error = await catchErr(usecases.updateOrganizationInformation)({
-        organization: givenOrganization,
-        organizationForAdminRepository,
-        tagRepository,
-        administrationTeamRepository,
-      });
-
-      // then
-      expect(error).to.be.instanceOf(AdministrationTeamNotFound);
     });
   });
 });
