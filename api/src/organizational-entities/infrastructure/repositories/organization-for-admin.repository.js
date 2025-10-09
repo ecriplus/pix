@@ -268,8 +268,18 @@ const update = async function ({ organization }) {
 const findPaginatedFiltered = async function ({ filter, page }) {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn(ORGANIZATIONS_TABLE_NAME)
+    .select({
+      id: 'organizations.id',
+      name: 'organizations.name',
+      type: 'organizations.type',
+      externalId: 'organizations.externalId',
+      archivedAt: 'organizations.archivedAt',
+      administrationTeamId: 'organizations.administrationTeamId',
+      administrationTeamName: 'administration_teams.name',
+    })
+    .leftJoin('administration_teams', 'administration_teams.id', 'organizations.administrationTeamId')
     .modify(_setSearchFiltersForQueryBuilder, filter)
-    .orderBy('name', 'ASC');
+    .orderBy('organizations.name', 'ASC');
 
   const { results, pagination } = await fetchPage({
     queryBuilder: query,
@@ -369,7 +379,7 @@ function _setSearchFiltersForQueryBuilder(qb, filter) {
     qb.where('organizations.id', id);
   }
   if (name) {
-    qb.whereILike('name', `%${name}%`);
+    qb.whereILike('organizations.name', `%${name}%`);
   }
   if (type) {
     qb.where('type', type);

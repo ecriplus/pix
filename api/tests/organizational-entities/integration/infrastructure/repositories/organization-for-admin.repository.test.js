@@ -31,16 +31,22 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
   describe('#findPaginatedFiltered', function () {
     context('when there are Organizations in the database', function () {
-      beforeEach(function () {
-        _.times(3, databaseBuilder.factory.buildOrganization);
-        return databaseBuilder.commit();
-      });
-
-      it('should return an Array of Organizations', async function () {
+      it('should return an Array of Organizations with informations', async function () {
         // given
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'ma team' });
+        const expectedOrganization = databaseBuilder.factory.buildOrganization({
+          id: 123,
+          name: 'mon orga',
+          type: 'PRO',
+          externalId: 'externalId',
+          administrationTeamId: administrationTeam.id,
+        });
+        databaseBuilder.factory.buildOrganization({ name: 'team', administrationTeamId: administrationTeam.id });
+        await databaseBuilder.commit();
+
         const filter = {};
         const page = { number: 1, size: 10 };
-        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 3 };
+        const expectedPagination = { page: page.number, pageSize: page.size, pageCount: 1, rowCount: 2 };
 
         // when
         const { models: matchingOrganizations, pagination } =
@@ -51,8 +57,13 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
         // then
         expect(matchingOrganizations).to.exist;
-        expect(matchingOrganizations).to.have.lengthOf(3);
+        expect(matchingOrganizations).to.have.lengthOf(2);
         expect(matchingOrganizations[0]).to.be.an.instanceOf(OrganizationForAdmin);
+        expect(matchingOrganizations[0].name).to.equal(expectedOrganization.name);
+        expect(matchingOrganizations[0].type).to.equal(expectedOrganization.type);
+        expect(matchingOrganizations[0].externalId).to.equal(expectedOrganization.externalId);
+        expect(matchingOrganizations[0].administrationTeamId).to.equal(administrationTeam.id);
+        expect(matchingOrganizations[0].administrationTeamName).to.equal(administrationTeam.name);
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });
@@ -274,7 +285,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           });
 
         // then
-        expect(_.map(matchingOrganizations, 'provinceCode')).to.have.members(['ABC', 'DEF']);
+        expect(matchingOrganizations).to.have.lengthOf(2);
         expect(pagination).to.deep.equal(expectedPagination);
       });
     });
