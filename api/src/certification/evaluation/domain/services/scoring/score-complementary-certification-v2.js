@@ -46,7 +46,7 @@ export async function scoreComplementaryCertificationV2({
 
   let complementaryCertificationKey;
   if (certificationCourse.complementaryCertificationCourse?.complementaryCertificationId) {
-    const complementaryCertification = await complementaryCertificationRepository.get({
+    const complementaryCertification = await complementaryCertificationRepository.getById({
       id: certificationCourse.complementaryCertificationCourse.complementaryCertificationId,
     });
     complementaryCertificationKey = complementaryCertification?.key;
@@ -173,7 +173,7 @@ async function _buildComplementaryCertificationScoring({
   certificationCourse,
   minimumEarnedPix,
 }) {
-  if (complementaryCertificationKey && complementaryCertificationKey.key !== ComplementaryCertificationKeys.CLEA) {
+  if (complementaryCertificationKey && complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA) {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId,
     });

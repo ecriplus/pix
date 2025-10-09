@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
+import * as complementaryCertificationRepository from '../../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-repository.js';
 import { scoreComplementaryCertificationV2 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/score-complementary-certification-v2.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../../../../../../src/certification/evaluation/infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import * as certificationAssessmentRepository from '../../../../../../../src/certification/shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationCourseRepository from '../../../../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
@@ -18,15 +20,30 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
 
   describe('when the candidate has taken a complementary certification', function () {
     describe('when it is acquired', function () {
+      beforeEach(async function () {
+        databaseBuilder.factory.learningContent.buildChallenge({
+          id: 'recChallenge1',
+          competenceId: 'recCompetence0',
+          skillId: 'someSkillIdForAcquired',
+        });
+        databaseBuilder.factory.learningContent.buildChallenge({
+          id: 'recChallenge2',
+          competenceId: 'recCompetence0',
+          skillId: 'someSkillIdForAcquired',
+        });
+        databaseBuilder.factory.learningContent.buildSkill({ id: 'someSkillIdForAcquired' });
+        await databaseBuilder.commit();
+      });
+
       it('should save a result', async function () {
         // given
+        const assessmentId = 123;
         const complementaryCertificationScoringCriteria = {
           minimumReproducibilityRate: 80,
           minimumReproducibilityRateLowerLevel: 60.0,
           complementaryCertificationCourseId: 99,
           complementaryCertificationBadgeId: 501,
           complementaryCertificationBadgeKey: 'badge_key',
-          hasComplementaryReferential: false,
           minimumEarnedPix: 500,
         };
         const complementaryCertificationCourseId = 99;
@@ -36,16 +53,43 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationBadgeId: 501,
           minimumReproducibilityRate: 80,
           minimumEarnedPix: 500,
-          hasComplementaryReferential: false,
         });
         _buildComplementaryCertificationCourse({
           certificationCourseId: 900,
           complementaryCertificationId: 101,
           complementaryCertificationCourseId,
           complementaryCertificationBadgeId: 501,
+          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           userId: 401,
           pixScore: 700,
           reproducibilityRate: 90,
+          assessmentId,
+        });
+
+        const { challengeId: challengeId1 } = databaseBuilder.factory.buildCertificationChallenge({
+          courseId: 900,
+          isNeutralized: false,
+          challengeId: 'recChallenge1',
+          competenceId: 'recCompetence0',
+          certifiableBadgeKey: 'badge_key',
+        });
+        databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: challengeId1,
+          result: AnswerStatus.OK.status,
+        });
+
+        const { challengeId: challengeId2 } = databaseBuilder.factory.buildCertificationChallenge({
+          courseId: 900,
+          isNeutralized: false,
+          challengeId: 'recChallenge2',
+          competenceId: 'recCompetence0',
+          certifiableBadgeKey: 'badge_key',
+        });
+        databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: challengeId2,
+          result: AnswerStatus.OK.status,
         });
 
         await databaseBuilder.commit();
@@ -59,6 +103,8 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationCourseResultRepository,
           complementaryCertificationScoringCriteriaRepository,
           certificationCourseRepository,
+          complementaryCertificationRepository,
+          complementaryCertificationBadgesRepository,
         });
 
         // then
@@ -84,7 +130,6 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
             complementaryCertificationCourseId: 99,
             complementaryCertificationBadgeId: 501,
             complementaryCertificationBadgeKey: 'badge_key',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 500,
           };
 
@@ -93,13 +138,13 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
             complementaryCertificationBadgeId: 501,
             minimumReproducibilityRate: 80,
             minimumEarnedPix: 500,
-            hasComplementaryReferential: false,
           });
           _buildComplementaryCertificationCourse({
             certificationCourseId: 900,
             complementaryCertificationId: 101,
             complementaryCertificationCourseId,
             complementaryCertificationBadgeId: 501,
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
             userId: 401,
             pixScore: 700,
             reproducibilityRate: 90,
@@ -117,6 +162,8 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
             complementaryCertificationCourseResultRepository,
             complementaryCertificationScoringCriteriaRepository,
             certificationCourseRepository,
+            complementaryCertificationRepository,
+            complementaryCertificationBadgesRepository,
           });
           // then
           const complementaryCertificationCourseResults = await knex('complementary-certification-course-results')
@@ -156,6 +203,10 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
 
       it('should save a result', async function () {
         // given
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          minimumReproducibilityRate: 80,
+        });
         const complementaryCertificationCourseId = 99;
         const assessmentId = 123;
 
@@ -165,22 +216,20 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationCourseId: 99,
           complementaryCertificationBadgeId: 501,
           complementaryCertificationBadgeKey: 'badge_key',
-          hasComplementaryReferential: true,
           minimumEarnedPix: 200,
         };
 
         _buildComplementaryCertificationBadges({
-          complementaryCertificationId: 101,
-          minimumReproducibilityRate: 80,
+          complementaryCertificationId: complementaryCertification.id,
           minimumEarnedPix: 500,
-          hasComplementaryReferential: true,
         });
 
         _buildComplementaryCertificationCourse({
           certificationCourseId: 900,
-          complementaryCertificationId: 101,
+          complementaryCertificationId: complementaryCertification.id,
           complementaryCertificationCourseId,
           complementaryCertificationBadgeId: 501,
+          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           userId: 401,
           pixScore: 450,
           reproducibilityRate: 65,
@@ -238,6 +287,7 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationScoringCriteriaRepository,
           complementaryCertificationBadgesRepository,
           certificationCourseRepository,
+          complementaryCertificationRepository,
         });
 
         // then
@@ -263,6 +313,7 @@ function _buildComplementaryCertificationCourse({
   complementaryCertificationId,
   complementaryCertificationBadgeId,
   complementaryCertificationCourseId,
+  complementaryCertificationKey,
   userId,
   pixScore,
   reproducibilityRate,
@@ -280,6 +331,7 @@ function _buildComplementaryCertificationCourse({
     certificationCourseId,
     complementaryCertificationId,
     complementaryCertificationBadgeId,
+    complementaryCertificationKey,
   });
   if (assessmentId) {
     databaseBuilder.factory.buildAssessment({
@@ -292,6 +344,7 @@ function _buildComplementaryCertificationCourse({
     pixScore,
     reproducibilityRate,
     assessmentId,
+    status: 'validated',
   });
 }
 
@@ -300,14 +353,14 @@ function _buildComplementaryCertificationBadge({
   complementaryCertificationId,
   minimumReproducibilityRate,
   minimumEarnedPix,
-  hasComplementaryReferential,
   targetProfileId,
   level,
+  complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT,
 }) {
   databaseBuilder.factory.buildComplementaryCertification({
     id: complementaryCertificationId,
     minimumReproducibilityRate,
-    hasComplementaryReferential,
+    complementaryCertificationKey,
   });
   const { id: badgeId } = databaseBuilder.factory.buildBadge({
     key: 'badge_key',
@@ -323,18 +376,8 @@ function _buildComplementaryCertificationBadge({
   });
 }
 
-function _buildComplementaryCertificationBadges({
-  minimumReproducibilityRate,
-  minimumEarnedPix,
-  hasComplementaryReferential,
-  complementaryCertificationId,
-}) {
+function _buildComplementaryCertificationBadges({ minimumEarnedPix, complementaryCertificationId }) {
   databaseBuilder.factory.buildTargetProfile({ id: 1 });
-  databaseBuilder.factory.buildComplementaryCertification({
-    id: complementaryCertificationId,
-    minimumReproducibilityRate,
-    hasComplementaryReferential,
-  });
   const { id: badgeId1 } = databaseBuilder.factory.buildBadge({
     key: 'badge_key_1',
     isCertifiable: true,

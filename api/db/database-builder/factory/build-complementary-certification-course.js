@@ -8,10 +8,11 @@ const buildComplementaryCertificationCourse = function ({
   certificationCourseId,
   createdAt = new Date('2020-01-01'),
   complementaryCertificationBadgeId,
+  complementaryCertificationKey,
 } = {}) {
   complementaryCertificationId = complementaryCertificationId
     ? complementaryCertificationId
-    : buildComplementaryCertification().id;
+    : buildComplementaryCertification({ complementaryCertificationKey }).id;
   complementaryCertificationBadgeId = complementaryCertificationBadgeId
     ? complementaryCertificationBadgeId
     : buildComplementaryCertificationBadge({ complementaryCertificationId, badgeId: null }).id;
