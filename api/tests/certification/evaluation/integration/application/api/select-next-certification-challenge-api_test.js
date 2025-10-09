@@ -36,7 +36,7 @@ describe('Integration | Application | Certification | Evaluation | API', functio
         type: Assessment.types.CERTIFICATION,
       });
 
-      databaseBuilder.factory.buildCertificationConfiguration();
+      databaseBuilder.factory.buildCertificationVersion();
       await databaseBuilder.commit();
 
       // The usecase is called after the lock is placed by the api

@@ -16,16 +16,16 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       sessionManagementCertificationChallengeRepository,
       pickChallengeService,
       flashAlgorithmService,
-      flashAlgorithmConfigurationRepository,
-      certificationCandidateRepository;
+      certificationCandidateRepository,
+      versionsRepository;
 
-    let flashAlgorithmConfiguration;
+    let challengesConfiguration;
     let certificationCandidateId;
     let assessment;
 
     beforeEach(function () {
-      flashAlgorithmConfigurationRepository = {
-        getMostRecentBeforeDate: sinon.stub(),
+      versionsRepository = {
+        getByScopeAndReconciliationDate: sinon.stub(),
       };
       answerRepository = {
         findByAssessmentExcludingChallengeIds: sinon.stub(),
@@ -66,7 +66,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
+      challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
     });
 
     context('when there are challenges left to answer', function () {
@@ -89,9 +89,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           },
         });
 
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourseWithComplementary.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
+        versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
@@ -153,7 +151,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
+          versionsRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -190,9 +188,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           const assessment = domainBuilder.buildAssessment();
           const locale = 'fr-FR';
 
-          flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-            .withArgs(v3CertificationCourse.getStartDate())
-            .resolves(flashAlgorithmConfiguration);
+          versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
           answerRepository.findByAssessmentExcludingChallengeIds
             .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
@@ -258,7 +254,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
             sharedChallengeRepository,
-            flashAlgorithmConfigurationRepository,
+            versionsRepository,
             flashAlgorithmService,
             locale,
             pickChallengeService,
@@ -314,7 +310,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             certificationChallengeLiveAlertRepository,
             certificationCourseRepository,
             sharedChallengeRepository,
-            flashAlgorithmConfigurationRepository,
+            versionsRepository,
             flashAlgorithmService,
             locale,
             pickChallengeService,
@@ -348,9 +344,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
         const locale = 'fr-FR';
 
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
+        versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
         const answerStillValid = domainBuilder.buildAnswer({ challengeId: alreadyAnsweredChallenge.id });
         const answerWithOutdatedChallenge = domainBuilder.buildAnswer({ challengeId: outdatedChallenge.id });
@@ -419,7 +413,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
+          versionsRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -456,9 +450,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           id: nonAnsweredCertificationChallenge.challengeId,
         });
 
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
+        versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({
@@ -524,7 +516,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
+          versionsRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -567,9 +559,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           skill: firstSkill,
         });
 
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
+        versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({
@@ -625,7 +615,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
+          versionsRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -655,10 +645,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           getCapacityAndErrorRate: sinon.stub(),
         };
 
-        flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
+        challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
+        versionsRepository.getByScopeAndReconciliationDate.resolves({ challengesConfiguration });
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
@@ -697,7 +685,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
+          versionsRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -735,11 +723,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               version: AlgorithmEngineVersion.V3,
             });
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate.reset();
             const configuration = domainBuilder.buildFlashAlgorithmConfiguration(flashConfiguration);
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(v3CertificationCourse.getStartDate())
-              .resolves(configuration);
+            versionsRepository.getByScopeAndReconciliationDate.resolves({
+              challengesConfiguration: configuration,
+            });
 
             const assessment = domainBuilder.buildAssessment();
             const locale = 'fr-FR';
@@ -805,7 +792,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               certificationChallengeLiveAlertRepository,
               certificationCourseRepository,
               sharedChallengeRepository,
-              flashAlgorithmConfigurationRepository,
+              versionsRepository,
               flashAlgorithmService,
               locale,
               pickChallengeService,
@@ -829,11 +816,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseId: v3CertificationCourse.getId(),
         });
         const locale = 'fr-FR';
-
-        flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
@@ -867,7 +849,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,
@@ -895,11 +876,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationCourseId: v3CertificationCourse.getId(),
         });
         const locale = 'fr-FR';
-
-        flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(v3CertificationCourse.getStartDate())
-          .resolves(flashAlgorithmConfiguration);
 
         answerRepository.findByAssessmentExcludingChallengeIds
           .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
@@ -933,7 +909,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           certificationChallengeLiveAlertRepository,
           certificationCourseRepository,
           sharedChallengeRepository,
-          flashAlgorithmConfigurationRepository,
           flashAlgorithmService,
           locale,
           pickChallengeService,

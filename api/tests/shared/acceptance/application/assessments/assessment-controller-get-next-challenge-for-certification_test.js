@@ -1,6 +1,7 @@
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
@@ -91,17 +92,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,
           }).id;
-          databaseBuilder.factory.buildCertificationConfiguration();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             isPublished: false,
             version: AlgorithmEngineVersion.V3,
             userId,
             sessionId,
           }).id;
+
           const candidate = databaseBuilder.factory.buildCertificationCandidate({
             ...user,
             userId: user.id,
             sessionId,
+            reconciledAt: new Date('2020-01-15'),
+          });
+          databaseBuilder.factory.buildCertificationVersion({
+            scope: Frameworks.CORE,
+            startDate: candidate.reconciledAt,
           });
           databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
           databaseBuilder.factory.buildAssessment({
@@ -217,7 +223,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             certificationCenterId,
             version: AlgorithmEngineVersion.V3,
           }).id;
-          databaseBuilder.factory.buildCertificationConfiguration();
+          databaseBuilder.factory.buildCertificationVersion();
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             isPublished: false,
             version: AlgorithmEngineVersion.V3,
