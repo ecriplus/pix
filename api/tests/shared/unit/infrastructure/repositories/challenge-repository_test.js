@@ -33,10 +33,8 @@ describe('Unit | Shared | Infrastructure | Repositories | challenge-repository',
           });
 
           // then
-          expect(findStub).to.have.been.calledOnceWithExactly(
-            `findActiveFlashCompatible({ scope: ${Frameworks.CORE}, locale: fr, accessibilityAdjustmentNeeded: false})`,
-            sinon.match.func,
-          );
+          const expectedCacheKey = `findActiveFlashCompatible({ scope: ${Frameworks.CORE}, locale: fr, accessibilityAdjustmentNeeded: false })`;
+          expect(findStub).to.have.been.calledOnceWithExactly(expectedCacheKey, sinon.match.func);
         });
       });
 
@@ -56,10 +54,8 @@ describe('Unit | Shared | Infrastructure | Repositories | challenge-repository',
           });
 
           // then
-          expect(findStub).to.have.been.calledOnceWithExactly(
-            `findActiveFlashCompatible({ scope: ${Frameworks.CORE}, locale: fr, accessibilityAdjustmentNeeded: false})`,
-            sinon.match.func,
-          );
+          const expectedCacheKey = `findActiveFlashCompatible({ scope: ${Frameworks.CORE}, locale: fr, accessibilityAdjustmentNeeded: false })`;
+          expect(findStub).to.have.been.calledOnceWithExactly(expectedCacheKey, sinon.match.func);
         });
       });
     });

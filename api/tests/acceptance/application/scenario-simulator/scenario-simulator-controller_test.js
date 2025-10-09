@@ -238,23 +238,28 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     describe('when simulating a complementary certification scenario', function () {
       it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
         // given
+        const versionId = databaseBuilder.factory.buildCertificationVersion().id;
+        const otherVersionId = databaseBuilder.factory.buildCertificationVersion().id;
         databaseBuilder.factory.buildComplementaryCertification({ key: 'DROIT' });
         databaseBuilder.factory.buildComplementaryCertification({ key: 'EDU' });
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: 'DROIT',
           challengeId: 'challenge1',
+          versionId,
         });
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: 'DROIT',
           challengeId: 'challenge3',
+          versionId,
         });
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: 'EDU',
           challengeId: 'challenge2',
+          versionId: otherVersionId,
         });
         await databaseBuilder.commit();
         options.headers = adminAuthorizationHeaders;
-        options.payload = { ...validPayload, complementaryCertificationKey: 'DROIT' };
+        options.payload = { ...validPayload, complementaryCertificationKey: 'DROIT', versionId };
 
         // when
         const response = await server.inject(options);

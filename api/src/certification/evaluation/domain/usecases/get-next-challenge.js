@@ -77,10 +77,15 @@ const getNextChallenge = async function ({
   const complementaryCertificationKey =
     candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
 
+  const certificationVersion = await versionsRepository.getByScopeAndReconciliationDate({
+    scope: candidate.subscriptionScope,
+    reconciliationDate: candidate.reconciledAt,
+  });
+
   const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,
-    date: candidate.reconciledAt,
     complementaryCertificationKey,
+    versionId: certificationVersion.id,
   });
 
   const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
@@ -100,13 +105,6 @@ const getNextChallenge = async function ({
       ? `Candidate needs accessibility adjustment, possible challenges have been filtered (${challengesForCandidate.length} out of ${challengesWithoutSkillsWithAValidatedLiveAlert.length} selected`
       : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
   );
-
-  const scope = _determineScope(complementaryCertificationKey);
-
-  const certificationVersion = await versionsRepository.getByScopeAndReconciliationDate({
-    scope,
-    reconciliationDate: candidate.reconciledAt,
-  });
 
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
@@ -160,14 +158,6 @@ const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAler
 
 const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationChallengeLiveAlertRepository }) => {
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
-};
-
-const _determineScope = (complementaryCertificationKey) => {
-  if (!complementaryCertificationKey || complementaryCertificationKey === ComplementaryCertificationKeys.CLEA) {
-    return Frameworks.CORE;
-  }
-
-  return complementaryCertificationKey;
 };
 
 export { getNextChallenge };

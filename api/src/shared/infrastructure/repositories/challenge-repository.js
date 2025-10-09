@@ -1,5 +1,4 @@
 import { knex } from '../../../../db/knex-database-connection.js';
-import { getVersionNumber } from '../../../certification/configuration/domain/services/get-version-number.js';
 import { ComplementaryCertificationKeys } from '../../../certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../certification/shared/domain/models/Frameworks.js';
 import { config } from '../../config.js';
@@ -122,11 +121,11 @@ export async function findValidatedBySkills(skills, locale) {
 }
 
 export async function findActiveFlashCompatible({
-  date,
   locale,
   successProbabilityThreshold = config.features.successProbabilityThreshold,
   accessibilityAdjustmentNeeded = false,
   complementaryCertificationKey,
+  versionId,
   dependencies = {
     getInstance,
   },
@@ -136,8 +135,7 @@ export async function findActiveFlashCompatible({
   const hasCoreScope =
     !complementaryCertificationKey || complementaryCertificationKey === ComplementaryCertificationKeys.CLEA;
 
-  const cacheKey = `findActiveFlashCompatible({ scope: ${hasCoreScope ? Frameworks.CORE : complementaryCertificationKey}, locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded}})`;
-
+  const cacheKey = `findActiveFlashCompatible({ scope: ${hasCoreScope ? Frameworks.CORE : complementaryCertificationKey}, locale: ${locale}, accessibilityAdjustmentNeeded: ${accessibilityAdjustmentNeeded} })`;
   let challengeDtos;
 
   if (hasCoreScope) {
@@ -148,12 +146,9 @@ export async function findActiveFlashCompatible({
       dependencies,
     });
   } else {
-    const version = getVersionNumber(date);
-
     challengeDtos = await _findValidChallengesForComplementaryCertification({
-      complementaryCertificationKey,
       cacheKey,
-      version,
+      versionId,
       dependencies,
     });
   }
@@ -163,24 +158,12 @@ export async function findActiveFlashCompatible({
   );
 }
 
-async function _findValidChallengesForComplementaryCertification({
-  complementaryCertificationKey,
-  cacheKey,
-  version,
-  dependencies,
-}) {
-  const { closestVersion } = await knex('certification-frameworks-challenges')
-    .where({ complementaryCertificationKey })
-    .andWhere('version', '<=', version)
-    .max('version as closestVersion')
-    .first();
-
+async function _findValidChallengesForComplementaryCertification({ cacheKey, versionId, dependencies }) {
   const complementaryCertificationChallenges = await knex
     .from('certification-frameworks-challenges')
-    .where({ complementaryCertificationKey })
+    .where({ versionId })
     .whereNotNull('discriminant')
-    .whereNotNull('difficulty')
-    .andWhere('version', '=', closestVersion);
+    .whereNotNull('difficulty');
 
   const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
     ({ challengeId }) => challengeId,
