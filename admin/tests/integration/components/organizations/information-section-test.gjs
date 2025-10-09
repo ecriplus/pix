@@ -198,10 +198,7 @@ module('Integration | Component | organizations/information-section', function (
 
       await clickByName(t('common.actions.edit'));
 
-      await fillIn(
-        screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`, { exact: false }),
-        'new name',
-      );
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
       await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
       await fillByLabel(t('components.organizations.editing.province-code.label'), 'new provinceCode');
       await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
@@ -277,10 +274,7 @@ module('Integration | Component | organizations/information-section', function (
       );
       await clickByName(t('common.actions.edit'));
 
-      await fillIn(
-        screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`, { exact: false }),
-        'new name',
-      );
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
       await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
       await fillByLabel(t('components.organizations.editing.province-code.label'), '');
       await fillByLabel(t('components.organizations.information-section-view.credits'), 50);
@@ -354,10 +348,7 @@ module('Integration | Component | organizations/information-section', function (
       );
       await clickByName(t('common.actions.edit'));
 
-      await fillIn(
-        screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`, { exact: false }),
-        '',
-      );
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), '');
 
       // when
       await clickByName(t('common.actions.save'));

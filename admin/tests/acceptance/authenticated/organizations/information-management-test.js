@@ -43,7 +43,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       await fillByLabel('Nom du DPO', 'No');
       await fillByLabel('Adresse e-mail du DPO', 'bru.no@example.net');
 
-      await clickByName('Enregistrer', { exact: true });
+      await clickByName('Enregistrer');
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'newOrganizationName', level: 1 })).exists();
@@ -75,7 +75,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       await clickByName('Modifier');
 
       // when
-      await clickByName('Enregistrer', { exact: true });
+      await clickByName('Enregistrer');
 
       // then
       assert.dom(screen.getByText(t('components.organizations.editing.required-fields-error'))).exists();
