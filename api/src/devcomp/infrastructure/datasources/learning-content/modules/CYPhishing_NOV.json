@@ -609,17 +609,17 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
-                      "content": "C’est bon, j’ai appelé ma banque. C’était bien une arnaque, il n’y a pas de problème avec mon compte ! ",
+                      "content": "C’est bon, j’ai appelé ma banque. C’était bien une arnaque, il n’y a pas de problème avec mon compte ! "
                     },
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Bien joué ! Tu n’es pas tombée dans le piège. 👏 ",
+                      "content": "Bien joué ! Tu n’es pas tombée dans le piège. 👏 "
                     },
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
-                      "content": "Merci Xavier ! Heureusement que tu étais là !",
+                      "content": "Merci Xavier ! Heureusement que tu étais là !"
                     }
                   ]
                 }
