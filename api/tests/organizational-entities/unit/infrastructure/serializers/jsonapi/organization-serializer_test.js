@@ -11,11 +11,14 @@ describe('Unit | Serializer | organization-serializer', function () {
         domainBuilder.buildTag({ id: 7, name: 'AEFE' }),
         domainBuilder.buildTag({ id: 44, name: 'PUBLIC' }),
       ];
-      const organization = domainBuilder.buildOrganization({
+      const administrationTeam = domainBuilder.buildAdministrationTeam({ name: 'pouet' });
+      const organization = domainBuilder.buildOrganizationForAdmin({
         email: 'sco.generic.account@example.net',
         tags,
         createdBy: 10,
         documentationUrl: 'https://pix.fr/',
+        administrationTeamId: administrationTeam.id,
+        administrationTeamName: administrationTeam.name,
       });
       const meta = { some: 'meta' };
 
@@ -41,6 +44,7 @@ describe('Unit | Serializer | organization-serializer', function () {
             'show-nps': organization.showNPS,
             'form-nps-url': organization.formNPSUrl,
             'show-skills': organization.showSkills,
+            'administration-team-name': organization.administrationTeamName,
           },
           relationships: {
             memberships: {
