@@ -1,4 +1,5 @@
 import { databaseBuffer } from '../database-buffer.js';
+import { buildAdministrationTeam } from './build-administration-team.js';
 
 const buildOrganization = function buildOrganization({
   id = databaseBuffer.getNextId(),
@@ -23,6 +24,10 @@ const buildOrganization = function buildOrganization({
   parentOrganizationId = null,
   administrationTeamId = null,
 } = {}) {
+  if (!administrationTeamId) {
+    administrationTeamId = buildAdministrationTeam().id;
+  }
+
   const values = {
     id,
     type,
