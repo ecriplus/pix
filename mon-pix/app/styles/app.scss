@@ -16,7 +16,7 @@
 @use '../components/campaigns/assessment/results/evaluation-results-hero/attestation-result' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-landing-page-details' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-step' as *;
-@use 'components/authentication/login-or-register-oidc' as *;
+@use 'components/authentication/oidc-signup-or-login' as *;
 @use 'components/authentication/oidc-reconciliation' as *;
 @use 'components/autonomous-course/landing-page-start-block' as *;
 @use 'components/assessments/live-alert' as *;
@@ -74,7 +74,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'components/llm/preview' as *;
 @use 'components/locale-switcher' as *;
 @use 'components/login-form' as *;
-@use 'components/login-or-register' as *;
+@use 'components/sco-signup-or-login' as *;
 @use '../components/module/instruction/details' as *;
 @use '../components/module/feedback' as *;
 @use '../components/module/grain/grain' as *;
@@ -125,7 +125,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'components/account-recovery/student-information-form' as *;
 @use 'components/account-recovery/confirmation-step' as *;
 @use 'components/account-recovery/update-sco-record-form' as *;
-@use 'components/register-form' as *;
+@use 'components/sco-signup-form' as *;
 @use 'components/result-item' as *;
 @use 'components/rounded-panel' as *;
 @use 'components/scorecard-details' as *;
@@ -155,7 +155,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'authentication/new-password-input/password-checklist' as *;
 @use 'authentication/new-password-input/password-rule' as *;
 @use 'authentication/oidc-provider-selector' as *;
-@use 'authentication/other-authentication-providers' as *;
+@use 'authentication/authentication-identity-providers' as *;
 @use 'authentication/password-reset-demand/password-reset-demand' as *;
 @use 'authentication/password-reset-form' as *;
 @use 'authentication/login-form' as *;
@@ -177,7 +177,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'pages/fill-in-campaign-code' as *;
 @use 'pages/fill-in-certificate-verification-code' as *;
 @use 'pages/fill-in-participant-external-id' as *;
-@use 'pages/inscription' as *;
+@use 'pages/signup' as *;
 @use 'pages/join-restricted-campaign' as *;
 @use 'pages/module' as *;
 @use '../components/module/module-preview' as *;

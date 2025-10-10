@@ -179,7 +179,7 @@
         "placeholder": "Seleccione una organización",
         "searchLabel": "Búsqueda por palabras clave"
       },
-      "other-authentication-providers": {
+      "authentication-identity-providers": {
         "login": {
           "heading": "Otros medios de conexión",
           "login-with-featured-identity-provider-link": "Conectar con {featuredIdentityProvider}"
@@ -1533,7 +1533,7 @@
       "iframe-title": "ChatPix",
       "title": "Previsualización ChatPix"
     },
-    "login-or-register-oidc": {
+    "oidc-signup-or-login": {
       "error": {
         "account-conflict": "Esta cuenta ya está asociada a esta organización. Conéctate con otra cuenta o ponte en contacto con el servicio de asistencia.",
         "data-sharing-refused": "Te informamos de que la transmisión de tus datos, especificados en la página anterior, es imprescindible para poder acceder y utilizar el servicio.",
@@ -1550,7 +1550,7 @@
         "password": "Contraseña",
         "title": "Ya tengo una cuenta Pix"
       },
-      "register-form": {
+      "signup-form": {
         "button": "Creo una cuenta",
         "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
         "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
@@ -1560,7 +1560,7 @@
       },
       "title": "Crea una cuenta Pix"
     },
-    "login-or-register": {
+    "sco-signup-or-login": {
       "invitation": "{ organizationName } te invita a unirte a Pix",
       "login-form": {
         "button": "Conectarse",
@@ -1581,7 +1581,7 @@
         "title": "Ya tengo una cuenta Pix",
         "unexpected-user-account-error": "La dirección de correo electrónico o el nombre de usuario es incorrecto. Para continuar, debes conectarte a tu cuenta, que tiene la forma: "
       },
-      "register-form": {
+      "signup-form": {
         "button": "Inscribirse",
         "button-form": "Crear cuenta",
         "fields": {
@@ -1953,7 +1953,7 @@
       "forgotten-password": "¿Olvidaste tu contraseña?",
       "title": "Conexión"
     },
-    "sign-up": {
+    "signup": {
       "actions": {
         "login": "Iniciar sesión",
         "submit": "Crear cuenta",

@@ -57,10 +57,10 @@
 /api/tests/authorization/ @1024pix/team-acces
 /api/tests/identity-access-management/ @1024pix/team-acces
 
+/mon-pix/**signup** @1024pix/team-acces
+/mon-pix/**login** @1024pix/team-acces
+/mon-pix/**authentication** @1024pix/team-acces
 /mon-pix/app/authenticators/ @1024pix/team-acces
-/mon-pix/app/components/sign* @1024pix/team-acces
-/mon-pix/app/components/routes/register* @1024pix/team-acces
-/mon-pix/app/components/routes/login* @1024pix/team-acces
 /mon-pix/app/components/locale-switcher.gjs @1024pix/team-acces
 /mon-pix/app/services/session.js @1024pix/team-acces
 /mon-pix/app/services/locale.js @1024pix/team-acces
