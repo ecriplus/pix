@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
-import { getMostRecentBeforeDate } from './flash-algorithm-configuration-repository.js';
 
 async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
@@ -65,9 +65,8 @@ async function get({ id }) {
 
   let accessibilityAdjustmentNeeded;
   if (certificationCourseDTO.version === 3) {
-    const configuration = await getMostRecentBeforeDate(certificationCourseDTO.createdAt);
-
-    certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
+    // TODO: get the number of challenge per course in a better way
+    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
 
     ({ accessibilityAdjustmentNeeded } = await knexConn('certification-candidates')
       .select('accessibilityAdjustmentNeeded')
@@ -144,9 +143,8 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   const challengesDTO = await _findAllChallenges(certificationCourseDTO.id, knexConn);
 
   if (certificationCourseDTO.version === 3) {
-    const configuration = await getMostRecentBeforeDate(certificationCourseDTO.createdAt);
-
-    certificationCourseDTO.numberOfChallenges = configuration.maximumAssessmentLength;
+    // TODO: get the number of challenge per course in a better way
+    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
   }
 
   return _toDomain({
