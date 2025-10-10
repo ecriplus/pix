@@ -46,7 +46,6 @@ export const getByUserId = async function ({ userId, questId }) {
       'combined_course_participations.createdAt',
       'combined_course_participations.updatedAt',
       'combined_course_participations.organizationLearnerParticipationId',
-      'combined_course_participations.combinedCourseId',
     )
     .join(
       'view-active-organization-learners',
@@ -75,12 +74,15 @@ export const update = async function ({ combinedCourseParticipation }) {
     status: combinedCourseParticipation.status,
     createdAt: combinedCourseParticipation.createdAt,
     updatedAt: combinedCourseParticipation.updatedAt,
-    combinedCourseId: combinedCourseParticipation.combinedCourseId,
   });
   if (combinedCourseParticipation.organizationLearnerParticipationId) {
     await knexConnection('organization_learner_participations')
       .where({ id: combinedCourseParticipation.organizationLearnerParticipationId })
-      .update(organizationLearnerParticipation);
+      .update({
+        updatedAt: organizationLearnerParticipation.updatedAt,
+        status: combinedCourseParticipation.status,
+        completedAt: organizationLearnerParticipation.completedAt,
+      });
   }
   const [updatedRow] = await knexConnection('combined_course_participations')
     .where({ id: combinedCourseParticipation.id })

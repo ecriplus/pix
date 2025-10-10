@@ -10,7 +10,6 @@ export class CombinedCourseParticipation {
     status,
     updatedAt,
     createdAt,
-    combinedCourseId,
     organizationLearnerParticipationId = null,
   }) {
     this.id = id;
@@ -22,7 +21,6 @@ export class CombinedCourseParticipation {
     this.firstName = firstName;
     this.lastName = lastName;
     this.organizationLearnerParticipationId = organizationLearnerParticipationId;
-    this.combinedCourseId = combinedCourseId;
   }
 
   complete() {
