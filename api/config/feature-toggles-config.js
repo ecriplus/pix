@@ -60,13 +60,6 @@ export default {
     defaultValue: false,
     tags: ['frontend', 'team-prescription', 'pix-app'],
   },
-  useLocale: {
-    type: 'boolean',
-    description: 'Enable usage of cookie locale in Frontend apps keeping retro-compatibility with the backend.',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-acces'],
-  },
   isSurveyEnabledForCombinedCourses: {
     type: 'boolean',
     description: 'Enables survey button at the end of the combined courses',
