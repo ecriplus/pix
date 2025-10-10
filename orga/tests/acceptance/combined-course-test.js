@@ -65,7 +65,7 @@ module('Acceptance | Combined course page', function (hooks) {
     assert.strictEqual(completedParticipationsElement.innerText, statistics.completedParticipationsCount.toString());
   });
 
-  test('it should display combined course participation', async function (assert) {
+  test('it should display combined course participations', async function (assert) {
     // given
     const participation = server.create('combined-course-participation', {
       id: 3,

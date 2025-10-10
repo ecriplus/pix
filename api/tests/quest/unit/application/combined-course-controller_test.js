@@ -32,14 +32,20 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       const combinedCourseId = 'combinedCourseId123';
       const combinedCourseParticipations = Symbol('combinedCourseParticipations');
       const serializedCombinedCourseParticipations = Symbol('serializedCombinedCourseParticipations');
+      const page = Symbol('page');
+      const meta = Symbol('meta');
       const request = {
         params: { combinedCourseId },
+        query: { page },
       };
 
-      sinon.stub(usecases, 'findCombinedCourseParticipations').resolves(combinedCourseParticipations);
+      sinon
+        .stub(usecases, 'findCombinedCourseParticipations')
+        .withArgs({ combinedCourseId, page })
+        .resolves({ combinedCourseParticipations, meta });
       const combinedCourseParticipationSerializer = { serialize: sinon.stub() };
       combinedCourseParticipationSerializer.serialize
-        .withArgs(combinedCourseParticipations)
+        .withArgs(combinedCourseParticipations, meta)
         .returns(serializedCombinedCourseParticipations);
 
       // when
@@ -48,10 +54,6 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       });
 
       // then
-      expect(usecases.findCombinedCourseParticipations).to.have.been.calledOnceWithExactly({ combinedCourseId });
-      expect(combinedCourseParticipationSerializer.serialize).to.have.been.calledOnceWithExactly(
-        combinedCourseParticipations,
-      );
       expect(result).to.equal(serializedCombinedCourseParticipations);
     });
   });

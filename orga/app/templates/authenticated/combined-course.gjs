@@ -1,2 +1,11 @@
-import CombinedCourse from 'pix-orga/components/combined-course/combined-course';
-<template><CombinedCourse @model={{@model}} /></template>
+import CombinedCourseHeader from 'pix-orga/components/combined-course/header';
+
+<template>
+  <CombinedCourseHeader
+    @code={{@model.code}}
+    @name={{@model.name}}
+    @participationsCount={{@model.combinedCourseStatistics.participationsCount}}
+    @completedParticipationsCount={{@model.combinedCourseStatistics.completedParticipationsCount}}
+  />
+  {{outlet}}
+</template>

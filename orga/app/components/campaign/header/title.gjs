@@ -59,7 +59,7 @@ export default class Header extends Component {
             {{t "pages.campaign.included-in-combined-course"}}
             <LinkTo
               class="link"
-              @route="authenticated.combined-course"
+              @route="authenticated.combined-course.participations"
               @model={{@campaign.combinedCourse.id}}
             >{{@campaign.combinedCourse.name}}</LinkTo>{{t "pages.campaign.included-in-combined-course-end"}}
           </p>

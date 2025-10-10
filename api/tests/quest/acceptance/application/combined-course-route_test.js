@@ -311,7 +311,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
         const options = {
           method: 'GET',
-          url: `/api/combined-courses/${combinedCourseId}/participations`,
+          url: `/api/combined-courses/${combinedCourseId}/participations?page[number]=1&page[size]=5`,
           headers: generateAuthenticatedUserRequestHeaders({ userId }),
         };
 
@@ -321,6 +321,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         // then
         expect(response.statusCode).to.equal(200);
         expect(response.result.data[0].type).to.equal('combined-course-participations');
+        expect(response.result.meta).deep.equal({ rowCount: 1, page: 1, pageCount: 1, pageSize: 5 });
       });
     });
   });

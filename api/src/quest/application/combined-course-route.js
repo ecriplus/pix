@@ -112,6 +112,12 @@ const register = async function (server) {
           params: Joi.object({
             combinedCourseId: identifiersType.combinedCourseId,
           }),
+          query: Joi.object({
+            page: {
+              number: Joi.number().integer().empty('').default(1),
+              size: Joi.number().integer().empty('').default(10),
+            },
+          }),
         },
         notes: [
           "- Récupération des participations d'un parcours combiné dont l'id de la quête est passé en paramètre,\n" +
