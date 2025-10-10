@@ -8,14 +8,15 @@ import PageTitle from 'pix-orga/components/ui/page-title';
 
 <template>
   {{pageTitle (t "pages.login.title")}}
-
   {{#if @controller.isNewAuthDesignEnabled}}
+
     <main class="authentication">
       <AuthenticationLayout>
         <:header>
         </:header>
 
         <:content>
+          <h1 class="pix-title-m">{{t "pages.login.title"}}</h1>
           <LoginForm
             @isWithInvitation={{false}}
             @hasInvitationAlreadyBeenAccepted={{@controller.hasInvitationAlreadyBeenAccepted}}
