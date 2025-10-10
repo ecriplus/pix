@@ -45,7 +45,10 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillIn(screen.getByLabelText('Nom *', { exact: false }), '');
+      await fillIn(
+        screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`, { exact: false }),
+        '',
+      );
 
       // then
       assert.dom(screen.getByText('Le nom ne peut pas être vide')).exists();
@@ -56,7 +59,10 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'a'.repeat(256));
+      await fillIn(
+        screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`, { exact: false }),
+        'a'.repeat(256),
+      );
 
       // then
       assert.dom(screen.getByText('La longueur du nom ne doit pas excéder 255 caractères')).exists();
@@ -67,7 +73,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Identifiant externe', 'a'.repeat(256));
+      await fillByLabel(t('components.organizations.information-section-view.external-id'), 'a'.repeat(256));
 
       // then
       assert.dom(screen.getByText("La longueur de l'identifiant externe ne doit pas excéder 255 caractères")).exists();
@@ -78,7 +84,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Département (en 3 chiffres)', 'a'.repeat(256));
+      await fillByLabel(t('components.organizations.editing.province-code.label'), 'a'.repeat(256));
 
       // then
       assert.dom(screen.getByText('La longueur du département ne doit pas excéder 255 caractères')).exists();
@@ -89,7 +95,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Adresse e-mail du DPO', 'a'.repeat(256));
+      await fillByLabel(t('components.organizations.information-section-view.dpo-email'), 'a'.repeat(256));
 
       // then
       assert.dom(screen.getByText("La longueur de l'email ne doit pas excéder 255 caractères.")).exists();
@@ -100,7 +106,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Adresse e-mail du DPO', 'not-valid-email-format');
+      await fillByLabel(t('components.organizations.information-section-view.dpo-email'), 'not-valid-email-format');
 
       // then
       assert.dom(screen.getByText("L'e-mail n'a pas le bon format.")).exists();
@@ -111,7 +117,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel("Adresse e-mail d'activation SCO", 'a'.repeat(256));
+      await fillByLabel(t('components.organizations.information-section-view.sco-activation-email'), 'a'.repeat(256));
 
       // then
       assert.dom(screen.getByText("La longueur de l'email ne doit pas excéder 255 caractères.")).exists();
@@ -122,7 +128,10 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel("Adresse e-mail d'activation SCO", 'not-valid-email-format');
+      await fillByLabel(
+        t('components.organizations.information-section-view.sco-activation-email'),
+        'not-valid-email-format',
+      );
 
       // then
       assert.dom(screen.getByText("L'e-mail n'a pas le bon format.")).exists();
@@ -133,7 +142,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Crédits', 'credit');
+      await fillByLabel(t('components.organizations.information-section-view.credits'), 'credit');
 
       // then
       assert.dom(screen.getByText('Le nombre de crédits doit être un nombre supérieur ou égal à 0.')).exists();
@@ -144,10 +153,40 @@ module('Integration | Component | organizations/information-section-edit', funct
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
       // when
-      await fillByLabel('Lien vers la documentation', 'not-valid-url-format');
+      await fillByLabel(
+        t('components.organizations.information-section-view.documentation-link'),
+        'not-valid-url-format',
+      );
 
       // then
       assert.dom(screen.getByText("Le lien n'est pas valide.")).exists();
+    });
+
+    test("it should show error message if organization's administration is empty", async function (assert) {
+      const organizationWithoutAdministrationTeam = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: null,
+      });
+
+      // when
+      const screen = await render(
+        <template><InformationSectionEdit @organization={{organizationWithoutAdministrationTeam}} /></template>,
+      );
+
+      const administrationTeamIdErrorMessage = screen.getByText(
+        t('components.organizations.editing.administration-team.selector.error-message'),
+      );
+
+      // then
+      assert.ok(administrationTeamIdErrorMessage);
     });
 
     module('#features', function () {
@@ -219,13 +258,6 @@ module('Integration | Component | organizations/information-section-edit', funct
   module('administration teams select', function () {
     test('it should display select with options loaded', async function (assert) {
       // given
-      const store = this.owner.lookup('service:store');
-      store.findAll = () =>
-        Promise.resolve([
-          store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
-          store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
-        ]);
-
       const organization = EmberObject.create({
         id: 1,
         name: 'Organization SCO',
@@ -242,7 +274,9 @@ module('Integration | Component | organizations/information-section-edit', funct
       //when
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
       await click(
-        screen.getByRole('button', { name: t('components.organizations.editing.administration-team.selector.label') }),
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
+        }),
       );
       const listbox = await screen.findByRole('listbox');
 
@@ -270,7 +304,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.ok(
         within(
           screen.getByRole('button', {
-            name: t('components.organizations.editing.administration-team.selector.label'),
+            name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
           }),
         ).getByText('Équipe 2'),
       );
@@ -298,7 +332,7 @@ module('Integration | Component | organizations/information-section-edit', funct
       assert.ok(
         within(
           screen.getByRole('button', {
-            name: t('components.organizations.editing.administration-team.selector.label'),
+            name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
           }),
         ).getByText(t('components.organizations.editing.administration-team.selector.placeholder')),
       );

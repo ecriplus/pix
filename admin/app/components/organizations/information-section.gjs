@@ -82,7 +82,7 @@ export default class OrganizationInformationSection extends Component {
         </div>
 
         <div class="organization__title">
-          <h2 class="organization__name">{{@organization.name}}</h2>
+          <h1 class="organization__name">{{@organization.name}}</h1>
 
           <ul class="organization-tags-list">
             {{#if this.hasChildren}}

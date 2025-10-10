@@ -21,8 +21,8 @@ module('Integration | Component | organizations/information-section', function (
     const store = this.owner.lookup('service:store');
     store.findAll = () =>
       Promise.resolve([
-        store.createRecord('administration-team', { id: 'team-1', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: 'team-2', name: 'Équipe 2' }),
+        store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
+        store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
       ]);
   });
 
@@ -89,7 +89,9 @@ module('Integration | Component | organizations/information-section', function (
         const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Organisation mère')).exists();
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.parent-organization')))
+          .exists();
       });
     });
 
@@ -111,7 +113,9 @@ module('Integration | Component | organizations/information-section', function (
         const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Organisation fille de')).exists();
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.child-organization')))
+          .exists();
         assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
       });
     });
@@ -129,7 +133,9 @@ module('Integration | Component | organizations/information-section', function (
         const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.queryByText('Organisation mère')).doesNotExist();
+        assert
+          .dom(screen.queryByText(t('components.organizations.information-section-view.parent-organization')))
+          .doesNotExist();
       });
     });
   });
@@ -145,6 +151,7 @@ module('Integration | Component | organizations/information-section', function (
       credit: 0,
       documentationUrl: 'https://pix.fr/',
       features: {},
+      administrationTeamId: 123,
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {
@@ -152,50 +159,67 @@ module('Integration | Component | organizations/information-section', function (
       const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
 
       // when
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
       // then
-      assert.dom(screen.getByRole('textbox', { name: 'Nom *' })).exists();
-      assert.dom(screen.getByRole('textbox', { name: 'Identifiant externe' })).exists();
-      assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
-      assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
+      assert
+        .dom(screen.getByRole('textbox', { name: `${t('components.organizations.editing.name.label')} *` }))
+        .exists();
+      assert
+        .dom(screen.getByRole('textbox', { name: t('components.organizations.information-section-view.external-id') }))
+        .exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
     });
 
     test('it should toggle display mode on click to cancel button', async function (assert) {
       // given
       const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
       // when
-      await clickByName('Annuler');
+      await clickByName(t('common.actions.cancel'));
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'Organization SCO' })).exists();
-      assert.dom(screen.getByRole('button', { name: 'Modifier' })).exists();
-      assert.dom(screen.getByRole('button', { name: "Archiver l'organisation" })).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.edit') })).exists();
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: t('components.organizations.information-section-view.archive-organization'),
+          }),
+        )
+        .exists();
     });
 
     test('it should revert changes on click to cancel button', async function (assert) {
       // given
       const screen = await render(<template><InformationSection @organization={{organization}} /></template>);
 
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
-      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
-      await fillByLabel('Identifiant externe', 'new externalId');
-      await fillByLabel('Département (en 3 chiffres)', 'new provinceCode');
-      await clickByName("Gestion d'élèves/étudiants");
-      await fillByLabel('Lien vers la documentation', 'new documentationUrl');
-      await clickByName("Affichage des acquis dans l'export de résultats");
-      await clickByName("Envoi multiple sur les campagnes d'évaluation");
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
+      await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
+      await fillByLabel(t('components.organizations.editing.province-code.label'), 'new provinceCode');
+      await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
+      await fillByLabel(
+        t('components.organizations.information-section-view.documentation-link'),
+        'new documentationUrl',
+      );
+      await clickByName(t('components.organizations.information-section-view.features.SHOW_SKILLS'));
+      await clickByName(t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT'));
 
       // when
-      await clickByName('Annuler');
+      await clickByName(t('common.actions.cancel'));
 
       // then
       assert.dom(screen.getByRole('heading', { name: organization.name })).exists();
-      assert.dom(screen.getByText('Identifiant externe').nextElementSibling).hasText(organization.externalId);
-      assert.dom(screen.getByText('Département').nextElementSibling).hasText(organization.provinceCode);
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.external-id')).nextElementSibling)
+        .hasText(organization.externalId);
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.province-code')).nextElementSibling)
+        .hasText(organization.provinceCode);
       assert.dom(screen.getByRole('link', { name: organization.documentationUrl })).exists();
       assert
         .dom(
@@ -248,29 +272,53 @@ module('Integration | Component | organizations/information-section', function (
       const screen = await render(
         <template><InformationSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
       );
-      await clickByName('Modifier');
+      await clickByName(t('common.actions.edit'));
 
-      await fillIn(screen.getByLabelText('Nom *', { exact: false }), 'new name');
-      await fillByLabel('Identifiant externe', 'new externalId');
-      await fillByLabel('Département (en 3 chiffres)', '');
-      await fillByLabel('Crédits', 50);
-      await clickByName("Gestion d'élèves/étudiants");
-      await fillByLabel('Lien vers la documentation', 'https://pix.fr/');
-      await clickByName('SSO');
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), 'new name');
+      await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
+      await fillByLabel(t('components.organizations.editing.province-code.label'), '');
+
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.administration-team.selector.label')} *`,
+        }),
+      );
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: 'organization 2' }));
-      await clickByName("Affichage des acquis dans l'export de résultats");
-      await clickByName("Envoi multiple sur les campagnes d'évaluation");
-      await clickByName('Affichage de la page Places sur PixOrga');
+      await click(screen.getByRole('option', { name: 'Équipe 2' }));
+
+      await fillByLabel(t('components.organizations.information-section-view.credits'), 50);
+      await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
+      await fillByLabel(t('components.organizations.information-section-view.documentation-link'), 'https://pix.fr/');
+
+      await clickByName(t('components.organizations.information-section-view.sso'));
+      await screen.findByRole('listbox');
+      const ssoOption = await screen.findByRole('option', { name: 'organization 2' });
+      await click(ssoOption);
+
+      await clickByName(t('components.organizations.information-section-view.features.SHOW_SKILLS'));
+      await clickByName(t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT'));
+      await clickByName(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'));
 
       // when
-      await clickByName('Enregistrer');
+      await clickByName(t('common.actions.save'));
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'new name' })).exists();
-      assert.dom(screen.getByText('Identifiant externe').nextElementSibling).hasText('new externalId');
-      assert.dom(screen.queryByText('Département')).doesNotExist();
-      assert.dom(screen.getByText('Crédits').nextElementSibling).hasText('50');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.external-id')).nextElementSibling)
+        .hasText('new externalId');
+      assert
+        .dom(screen.queryByText(t('components.organizations.information-section-view.province-code')))
+        .doesNotExist();
+      assert
+        .dom(
+          screen.getByText(t('components.organizations.information-section-view.administration-team'))
+            .nextElementSibling,
+        )
+        .hasText('Équipe 2');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.credits')).nextElementSibling)
+        .hasText('50');
       assert
         .dom(
           screen.getByLabelText(
@@ -281,7 +329,9 @@ module('Integration | Component | organizations/information-section', function (
         )
         .exists();
       assert.dom(screen.getByRole('link', { name: 'https://pix.fr/' })).exists();
-      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('organization 2');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
+        .hasText('organization 2');
       assert
         .dom(
           screen.getByLabelText(
@@ -300,6 +350,25 @@ module('Integration | Component | organizations/information-section', function (
           ),
         )
         .exists();
+    });
+
+    test('it should not submit the form if there is an error', async function (assert) {
+      // given
+      const onSubmit = () => {};
+      const screen = await render(
+        <template><InformationSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await clickByName(t('common.actions.edit'));
+
+      await fillIn(screen.getByLabelText(`${t('components.organizations.editing.name.label')} *`), '');
+
+      // when
+      await clickByName(t('common.actions.save'));
+
+      // then
+      assert.ok(screen.getByRole('button', { name: t('common.actions.cancel') }));
+      assert.ok(screen.getByRole('button', { name: t('common.actions.save') }));
+      assert.notOk(screen.queryByRole('button', { name: t('common.actions.edit') }));
     });
   });
 });

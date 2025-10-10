@@ -587,6 +587,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
   describe('PATCH /api/admin/organizations/{organizationId}', function () {
     it('should return the updated organization and status code 200', async function () {
       // given
+      const administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+
       const organizationAttributes = {
         externalId: '0446758F',
         provinceCode: '044',
@@ -606,6 +608,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             'province-code': organizationAttributes.provinceCode,
             email: organizationAttributes.email,
             credit: organizationAttributes.credit,
+            'administration-team-id': administrationTeamId,
           },
         },
       };

@@ -94,6 +94,15 @@ const Validations = buildValidations({
       }),
     ],
   },
+  administrationTeamId: {
+    validators: [
+      validator('presence', {
+        presence: true,
+        ignoreBlank: true,
+        message: 'components.organizations.editing.administration-team.selector.error-message',
+      }),
+    ],
+  },
 });
 
 export default class OrganizationForm extends Model.extend(Validations) {
@@ -112,7 +121,10 @@ export default class OrganizationForm extends Model.extend(Validations) {
   #getErrorAttribute(name) {
     const nameAttribute = this.validations.attrs.get(name);
     if (nameAttribute.isInvalid) {
-      return { message: nameAttribute.message, status: 'error' };
+      return {
+        message: nameAttribute.message,
+        status: 'error',
+      };
     }
     return { message: null, status: null };
   }
@@ -151,5 +163,9 @@ export default class OrganizationForm extends Model.extend(Validations) {
 
   get provinceCodeError() {
     return this.#getErrorAttribute('provinceCode');
+  }
+
+  get administrationTeamIdError() {
+    return this.#getErrorAttribute('administrationTeamId');
   }
 }

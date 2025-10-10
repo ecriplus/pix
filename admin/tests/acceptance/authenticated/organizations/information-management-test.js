@@ -1,6 +1,7 @@
 import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { module, test } from 'qunit';
@@ -28,6 +29,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
           SHOW_SKILLS: { active: false },
           IS_MANAGING_STUDENTS: { active: false },
         },
+        administrationTeamId: 456,
       });
       this.server.create('organization', { id: '1234' });
 
@@ -41,12 +43,42 @@ module('Acceptance | Organizations | Information management', function (hooks) {
       await fillByLabel('Nom du DPO', 'No');
       await fillByLabel('Adresse e-mail du DPO', 'bru.no@example.net');
 
-      await clickByName('Enregistrer', { exact: true });
+      await clickByName('Enregistrer');
 
       // then
-      assert.dom(screen.getByRole('heading', { name: 'newOrganizationName', level: 2 })).exists();
+      assert.dom(screen.getByRole('heading', { name: 'newOrganizationName', level: 1 })).exists();
       assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Bru No');
       assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('bru.no@example.net');
+    });
+
+    test('should display an error toast if administration team is not filled in', async function (assert) {
+      // given
+      const organization = this.server.create('organization', {
+        name: 'oldOrganizationName',
+        features: {
+          PLACES_MANAGEMENT: { active: false },
+          LEARNER_IMPORT: { active: false },
+          MULTIPLE_SENDING_ASSESSMENT: { active: false },
+          COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
+          ATTESTATIONS_MANAGEMENT: { active: false },
+          SHOW_NPS: { active: false },
+          SHOW_SKILLS: { active: false },
+          IS_MANAGING_STUDENTS: { active: false },
+        },
+        administrationTeamId: null,
+      });
+
+      this.server.create('organization', { id: '1234' });
+
+      const screen = await visit(`/organizations/${organization.id}`);
+
+      await clickByName('Modifier');
+
+      // when
+      await clickByName('Enregistrer');
+
+      // then
+      assert.dom(screen.getByText(t('components.organizations.editing.required-fields-error'))).exists();
     });
   });
 

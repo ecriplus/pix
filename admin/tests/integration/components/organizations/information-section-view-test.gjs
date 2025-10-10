@@ -54,12 +54,27 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByText('Type').nextElementSibling).hasText('SUP');
-      assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Justin Ptipeu');
-      assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('justin.ptipeu@example.net');
-      assert.dom(screen.getByText('Créée par').nextElementSibling).hasText('Gilles Parbal (1)');
-      assert.dom(screen.getByText('Créée le').nextElementSibling).hasText('02/09/2022');
-      assert.dom(screen.getByText('Équipe en charge').nextElementSibling).hasText('team Rocket');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.type')).nextElementSibling)
+        .hasText('SUP');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.dpo-name')).nextElementSibling)
+        .hasText('Justin Ptipeu');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.dpo-email')).nextElementSibling)
+        .hasText('justin.ptipeu@example.net');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.created-by')).nextElementSibling)
+        .hasText('Gilles Parbal (1)');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.created-at')).nextElementSibling)
+        .hasText('02/09/2022');
+      assert
+        .dom(
+          screen.getByText(t('components.organizations.information-section-view.administration-team'))
+            .nextElementSibling,
+        )
+        .hasText('team Rocket');
       assert
         .dom(
           screen.getByLabelText(
@@ -67,11 +82,19 @@ module('Integration | Component | organizations/information-section-view', funct
           ),
         )
         .exists();
-      assert.dom(screen.getByText('Crédits').nextElementSibling).hasText('350');
-      assert.dom(screen.getByText('Lien vers la documentation').nextElementSibling).hasText('https://pix.fr');
-      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('super-sso');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.credits')).nextElementSibling)
+        .hasText('350');
+      assert
+        .dom(
+          screen.getByText(t('components.organizations.information-section-view.documentation-link'))
+            .nextElementSibling,
+        )
+        .hasText('https://pix.fr');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
+        .hasText('super-sso');
     });
-
     test('it renders GAR identity provider correctly', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
@@ -98,7 +121,9 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByText('SSO').nextElementSibling).hasText('GAR');
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
+        .hasText('GAR');
     });
 
     module('data protection officer information', function () {
@@ -126,8 +151,12 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('Justin Ptipeu');
-        assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('justin.ptipeu@example.net');
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.dpo-name')).nextElementSibling)
+          .hasText('Justin Ptipeu');
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.dpo-email')).nextElementSibling)
+          .hasText('justin.ptipeu@example.net');
       });
 
       test('it renders without DPO information', async function (assert) {
@@ -155,8 +184,12 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Nom du DPO').nextElementSibling).hasText('');
-        assert.dom(screen.getByText('Adresse e-mail du DPO').nextElementSibling).hasText('');
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.dpo-name')).nextElementSibling)
+          .hasText('');
+        assert
+          .dom(screen.getByText(t('components.organizations.information-section-view.dpo-email')).nextElementSibling)
+          .hasText('');
       });
     });
 
@@ -168,8 +201,14 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('button', { name: 'Modifier' })).exists();
-      assert.dom(screen.getByRole('button', { name: "Archiver l'organisation" })).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.edit') })).exists();
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: t('components.organizations.information-section-view.archive-organization'),
+          }),
+        )
+        .exists();
     });
 
     test('it should display empty documentation link message', async function (assert) {
@@ -180,7 +219,12 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.getByText('Lien vers la documentation').nextElementSibling).hasText('Non spécifié');
+      assert
+        .dom(
+          screen.getByText(t('components.organizations.information-section-view.documentation-link'))
+            .nextElementSibling,
+        )
+        .hasText(t('common.not-specified'));
     });
 
     module('when organization is archived', function () {
@@ -194,7 +238,16 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText('Archivée le 22/02/2022 par Rob Lochon.')).exists();
+        assert
+          .dom(
+            screen.getByText(
+              t('components.organizations.information-section-view.is-archived-warning', {
+                archivedAt: '22/02/2022',
+                archivedBy: 'Rob Lochon',
+              }),
+            ),
+          )
+          .exists();
       });
     });
 
@@ -256,7 +309,13 @@ module('Integration | Component | organizations/information-section-view', funct
         const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.queryByRole('checkbox', { name: 'Gestion d’élèves/étudiants' })).doesNotExist();
+        assert
+          .dom(
+            screen.queryByRole('checkbox', {
+              name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
+            }),
+          )
+          .doesNotExist();
       });
     });
 
@@ -428,8 +487,14 @@ module('Integration | Component | organizations/information-section-view', funct
       const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
 
       // then
-      assert.dom(screen.queryByRole('button', { name: 'Modifier' })).doesNotExist();
-      assert.dom(screen.queryByRole('button', { name: "Archiver l'organisation" })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: t('common.actions.edit') })).doesNotExist();
+      assert
+        .dom(
+          screen.queryByRole('button', {
+            name: t('components.organizations.information-section-view.archive-organization'),
+          }),
+        )
+        .doesNotExist();
     });
   });
 });

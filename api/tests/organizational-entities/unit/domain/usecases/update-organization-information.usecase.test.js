@@ -4,7 +4,7 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | update-organization-information', function () {
-  let organizationForAdminRepository, tagRepository;
+  let organizationForAdminRepository, tagRepository, administrationTeamRepository;
 
   beforeEach(function () {
     organizationForAdminRepository = {
@@ -14,30 +14,49 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
     tagRepository = {
       findByIds: sinon.stub(),
     };
+    administrationTeamRepository = {
+      getById: sinon.stub(),
+    };
   });
 
   it('should update organization information', async function () {
     // given
-    const givenOrganization = domainBuilder.buildOrganizationForAdmin();
+    const givenOrganization = domainBuilder.buildOrganizationForAdmin({
+      administrationTeamId: Symbol('administrationTeamId'),
+    });
 
     const existingOrganizationForAdmin = domainBuilder.buildOrganizationForAdmin({
       organizationId: givenOrganization.id,
     });
-    sinon.stub(existingOrganizationForAdmin, 'updateWithDataProtectionOfficerAndTags');
     organizationForAdminRepository.get.onCall(0).returns(existingOrganizationForAdmin);
+
+    sinon.stub(existingOrganizationForAdmin, 'updateWithDataProtectionOfficerAndTags');
+
     const updatedOrganization = domainBuilder.buildOrganizationForAdmin({ organizationId: givenOrganization.id });
     organizationForAdminRepository.get.onCall(1).returns(updatedOrganization);
+
     const tagsToUpdate = Symbol('tagsToUpdate');
     tagRepository.findByIds.withArgs(givenOrganization.tagIds).resolves(tagsToUpdate);
+
+    const existingAdministrationTeam = Symbol('existingAdministrationTeam');
+
+    administrationTeamRepository.getById
+      .withArgs(givenOrganization.administrationTeamId)
+      .resolves(existingAdministrationTeam);
+
     // when
     const result = await usecases.updateOrganizationInformation({
       organization: givenOrganization,
       organizationForAdminRepository,
       tagRepository,
+      administrationTeamRepository,
     });
 
     // then
     expect(organizationForAdminRepository.get).to.have.been.calledWithExactly({ organizationId: givenOrganization.id });
+
+    expect(administrationTeamRepository.getById).to.have.been.calledWithExactly(givenOrganization.administrationTeamId);
+
     expect(existingOrganizationForAdmin.updateWithDataProtectionOfficerAndTags).to.have.been.calledWithExactly(
       givenOrganization,
       givenOrganization.dataProtectionOfficer,

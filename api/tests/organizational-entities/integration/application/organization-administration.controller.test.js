@@ -6,8 +6,11 @@ import { databaseBuilder, expect, hFake, knex } from '../../../test-helper.js';
 describe('Integration | Organizational Entities | Application | Controller | Organization Administration', function () {
   let organization;
   let featureId;
+  let administrationTeamId;
 
   beforeEach(async function () {
+    administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+
     organization = databaseBuilder.factory.buildOrganization({
       name: 'organization name',
       type: 'SCO',
@@ -20,6 +23,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
       documentationUrl: 'overthere',
       showSkills: false,
       identityProviderForCampaigns: 'POLE_EMPLOI',
+      administrationTeamId: administrationTeamId,
     });
     databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
     featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
@@ -46,6 +50,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
               'documentation-url': 'here',
               'show-skills': true,
               'identity-provider-for-campaigns': 'genericOidcProviderCode',
+              'administration-team-id': administrationTeamId,
             },
           },
         },
@@ -72,6 +77,9 @@ describe('Integration | Organizational Entities | Application | Controller | Org
       expect(response.source.data.attributes['identity-provider-for-campaigns']).to.equal(
         savedOrganization.identityProviderForCampaigns,
       );
+      expect(response.source.data.attributes['administration-team-id']).to.equal(
+        savedOrganization.administrationTeamId,
+      );
     });
   });
 
@@ -88,7 +96,9 @@ describe('Integration | Organizational Entities | Application | Controller | Org
       payload: {
         data: {
           id: organization.id,
-          attributes: {},
+          attributes: {
+            'administration-team-id': administrationTeamId,
+          },
           relationships: {
             tags: {
               data: [{ type: 'tags', id: newTag.id }],
@@ -125,6 +135,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
         data: {
           id: organization.id,
           attributes: {
+            'administration-team-id': administrationTeamId,
             'data-protection-officer-first-name': 'updated first name',
             'data-protection-officer-last-name': 'updated last name',
             'data-protection-officer-email': 'updatedEmail',
@@ -152,6 +163,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
         data: {
           id: organization.id,
           attributes: {
+            'administration-team-id': administrationTeamId,
             features: {
               [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
             },
@@ -185,6 +197,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
         data: {
           id: organization.id,
           attributes: {
+            'administration-team-id': administrationTeamId,
             features: {
               [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
             },
