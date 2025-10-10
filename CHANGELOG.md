@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.229.0](https://github.com/1024pix/pix/compare/v5.228.0...v5.229.0) (2025-10-10)
+
+### :rocket: Amélioration
+
+- [#13824](https://github.com/1024pix/pix/pull/13824) Ajouter la pagination dans la liste des participations (PIX-19631) 
+- [#13816](https://github.com/1024pix/pix/pull/13816) Ajouter le caractère obligatoire du champ "Équipe en charge" lors de la modification d'une orga (PIX-19677) 
+- [#13841](https://github.com/1024pix/pix/pull/13841) Ajouter une colonne jsonb dans la table `organization_learner_participations` (PIX-19966). 
+- [#13830](https://github.com/1024pix/pix/pull/13830) QAB front - placer les attributs width/height (PIX-19848) 
+- [#13847](https://github.com/1024pix/pix/pull/13847) Retour validation IAGenEthique-NOV 
+- [#13851](https://github.com/1024pix/pix/pull/13851) WIP modif module phishing_nov suite relectures 
+
+### :bug: Correction
+
+- [#13843](https://github.com/1024pix/pix/pull/13843) : La barre de navigation d'un Module n'est plus sticky en haut (PIX-19967) 
+- [#13854](https://github.com/1024pix/pix/pull/13854) Corriger le script toggles côté API 
+
+### :building_construction: Tech
+
+- [#13835](https://github.com/1024pix/pix/pull/13835) Mettre à jour le fichier CODEOWNERS pour prendre en compte la nouvelle team-acquisition 
+
+### :arrow_up: Montée de version
+
+- [#13837](https://github.com/1024pix/pix/pull/13837) Update dependency @1024pix/pix-ui to 55.29.1 
+
+### :coffee: Autre
+
+- [#13825](https://github.com/1024pix/pix/pull/13825) Normaliser le nommage dans le code concernant l’inscription et la connexion (PIX-19658)
+
 # [5.228.0](https://github.com/1024pix/pix/compare/v5.227.0...v5.228.0) (2025-10-09)
 
 ### :rocket: Amélioration
