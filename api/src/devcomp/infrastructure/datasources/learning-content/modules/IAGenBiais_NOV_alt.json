@@ -75,7 +75,7 @@
               "element": {
                 "id": "3b17e7c9-b5c1-41ff-ad2d-4901af0148dc",
                 "type": "text",
-                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde.&nbsp;🌍&nbsp;C’est ce qu’on appelle un <strong>biais</strong>&nbsp;: une vision simplifiée ou déformée de la réalité.<br></p><p>Mais alors, d’où viennent les biais dans les réponses de l’IA générative ?</p>"
+                "content": "<p>Les images ou textes générés par l’intelligence artificielle ne reflètent pas toujours la diversité du monde.&nbsp;🌍<br></p><p>Mais alors, <strong>d’où viennent les biais</strong> dans les réponses de l’IA générative ?</p>"
               }
             }
           ]
@@ -164,21 +164,21 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. </p><p>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>non</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant, si !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
+                            "diagnosis": "<p><strong>Et pourtant, si !</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. </p><p> Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. Par exemple, on y trouve encore l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux développés. Si une IA s’entraîne dessus, elle peut reprendre ce terme et véhiculer ce biais culturel.</p>"
+                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Wikipédia peut contenir des biais, car la majorité de ses contributeurs sont des hommes occidentaux. </p><p> Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
                           }
                         }
                       ],
@@ -206,21 +206,21 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong> </p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir ce prix.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong> </p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir de prix Nobel.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>non</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant si </strong><strong>! </strong></p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir ce prix.</p>"
+                            "diagnosis": "<p><strong>Et pourtant si </strong><strong>! </strong></p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir de prix Nobel.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir ce prix.</p>"
+                            "diagnosis": "<p><strong>C’était oui.</strong></p><p>Dans cet article, on voit que la majorité des lauréats des prix Nobel sont des hommes, blancs occidentaux et âgés. Si l’IA s’entraîne sur ces données, elle risque d’en conclure que d’autres profils ne peuvent pas recevoir de prix Nobel.</p>"
                           }
                         }
                       ],
@@ -242,7 +242,7 @@
               "element": {
                 "id": "c2493723-53c2-48f2-b2ba-41c3985726cc",
                 "type": "text",
-                "content": "<p>Les IA génératives s’entraînent sur une <strong>immense variété de données venues d’internet</strong>&nbsp;: articles Wikipédia, forums, images, etc. 🌐 </p><p>Mais ces données ne sont pas neutres&nbsp;: </p><ul><li>elles peuvent refléter <strong>des discriminations existantes</strong>,</li><li>transmettre les opinions ou expériences des contributeurs,</li><li>ou manquer de diversité culturelle.</li></ul>"
+                "content": "<p>Les <strong>IA génératives s’entraînent sur une immense variété de données venues d’internet</strong>&nbsp;: articles Wikipédia, forums, images, etc. 🌐 </p><p>Mais ces données <strong>ne sont pas neutres</strong>&nbsp;: </p><ul><li>elles peuvent refléter des discriminations existantes,</li><li>transmettre les opinions ou expériences des contributeurs,</li><li>ou manquer de diversité culturelle.</li></ul>"
               }
             }
           ]
@@ -257,7 +257,7 @@
               "element": {
                 "id": "53b7f24d-cde3-42f4-b4cd-0be391b5f906",
                 "type": "text",
-                "content": "<p>Mais alors comment ces données influencent-elles les réponses des IA génératives ?</p>"
+                "content": "<p>Mais alors comment <strong>ces données influencent-elles </strong>les réponses des IA génératives ?</p>"
               }
             }
           ]
@@ -299,14 +299,14 @@
                     "id": "1",
                     "content": "<p>la semoule</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Les données que vous avez observées viennent du web… et elles ont un <strong>biais</strong>&nbsp;: les recettes de taboulé à la semoule y sont <strong>sur-représentées</strong>.</p>"
+                      "diagnosis": "<p><strong>C’est normal que vous ayez fait cette hypothèse.</strong><br> Les données que vous avez observées viennent du web… et elles ont un <strong>biais</strong>&nbsp;: les recettes de taboulé à la semoule y sont <strong>sur-représentées</strong>.</p><p>Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>le persil</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non.</strong></p><p>Les données que vous avez observées viennent du web… et elles ont un <strong>biais</strong>&nbsp;: les recettes de taboulé à la semoule y sont <strong>sur-représentées.</strong></p>"
+                      "diagnosis": "<p><strong>Eh non.</strong></p><p>Les données que vous avez observées viennent du web… et elles ont un <strong>biais</strong>&nbsp;: les recettes de taboulé à la semoule y sont <strong>sur-représentées.</strong></p><p>Au Liban le résultat aurait été différent car le taboulé y est fait principalement avec du persil.<br></p>"
                     }
                   }
                 ],
@@ -325,7 +325,7 @@
               "element": {
                 "id": "13f368a7-b7ef-47a5-8d02-8f764dddd44d",
                 "type": "text",
-                "content": "<p>Une IA générative apprend à partir de ce qu’elle rencontre le plus souvent dans ses données. </p><p>👉 Cette méthode donne généralement de bons résultats.</p><p> ⚠️ Mais si certaines informations sont sur- ou sous-représentées, ses réponses peuvent être déséquilibrées. </p><p>Et les choix des développeurs — par exemple privilégier l’anglais — peuvent accentuer ce biais.</p><p>Résultat&nbsp;: l’IA peut <strong>reproduire des stéréotypes, des idées reçues ou des biais culturels</strong>.</p>"
+                "content": "<p>Une IA générative apprend à partir de ce qu’elle rencontre le plus souvent dans ses données.</p><p><strong>Mais pas seulement</strong>&nbsp;: les choix des développeurs orientent aussi les réponses des IA (par exemple, privilégier des textes en anglais ou exclure certaines données). </p><p><strong>Résultat</strong>&nbsp;: certaines visions se retrouvent surreprésentées et l’IA peut renforcer des <strong>stéréotypes ou des biais culturels</strong>.<br></p>"
               }
             }
           ]
@@ -458,14 +458,14 @@
                           "id": "4",
                           "content": "<p>Car la demande du prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n’a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p><strong>Pas exactement.</strong></p><p>L’IA a produit un cliché (les Français avec des bérets)&nbsp;: si Satô n’a jamais vu de Français, il pourrait le croire vrai.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p>Je ne sais pas</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici, le logiciel d’IA générative a produit une vision stéréotypée des français avec un couple à Paris, portant des bérêts.&nbsp; Si Satô n’a jamais rencontré de français, il risque de ne pas remettre en question ce cliché.</p>"
+                            "diagnosis": "<p>L’IA a produit un cliché (les Français avec des bérets)&nbsp;: si Satô n’a jamais vu de Français, il pourrait le croire vrai.</p>"
                           }
                         }
                       ],
