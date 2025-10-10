@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 
 import { categories } from '../../../../../src/shared/domain/models/TargetProfile.js';
 import {
+  ADMINISTRATION_TEAM_SOLO_ID,
   REAL_PIX_SUPER_ADMIN_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
@@ -19,6 +20,7 @@ export default async function initUser(databaseBuilder) {
     isManagingStudents: false,
     adminIds: [USER_ID_ADMIN_ORGANIZATION],
     memberIds: [USER_ID_MEMBER_ORGANIZATION],
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
 
   // 2. Create membership between superadmin user and our specific organization

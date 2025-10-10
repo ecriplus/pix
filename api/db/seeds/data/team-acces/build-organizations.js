@@ -1,3 +1,5 @@
+import { ADMINISTRATION_TEAM_SOLO_ID } from '../common/constants.js';
+
 export function buildOrganizations(databaseBuilder) {
   _buildOrganizationWithoutAdmins(databaseBuilder);
 }
@@ -6,6 +8,7 @@ function _buildOrganizationWithoutAdmins(databaseBuilder) {
   const organization = databaseBuilder.factory.buildOrganization({
     type: 'PRO',
     name: 'Accis',
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
 
   const tag1 = databaseBuilder.factory.buildTag({ name: 'tag1' });

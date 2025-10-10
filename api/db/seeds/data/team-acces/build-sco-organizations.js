@@ -1,6 +1,10 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
-import { PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from '../common/constants.js';
+import {
+  ADMINISTRATION_TEAM_SOLO_ID,
+  PIX_PUBLIC_TARGET_PROFILE_ID,
+  REAL_PIX_SUPER_ADMIN_ID,
+} from '../common/constants.js';
 import {
   PIX_ORGA_ADMIN_LEAVING_ID,
   PIX_ORGA_ALL_ORGA_ID,
@@ -31,6 +35,7 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     provinceCode: '12',
     identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
   databaseBuilder.factory.buildOrganization({
     type: 'SCO',
@@ -43,6 +48,7 @@ function _buildCollegeHouseOfTheDragonOrganization(databaseBuilder) {
     identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
     parentOrganizationId: SCO_ORGANIZATION_ID,
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
 
   [
@@ -89,6 +95,7 @@ function _buildJosephineBaker(databaseBuilder) {
     provinceCode: '13',
     identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
 
   [
@@ -111,6 +118,7 @@ function _buildScoManagingStudentsNoGarOrganization(databaseBuilder) {
     documentationUrl: 'https://pix.fr/',
     provinceCode: '13',
     createdBy: REAL_PIX_SUPER_ADMIN_ID,
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
 
   [
