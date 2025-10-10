@@ -15,7 +15,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
 
   const triggerFiltering = function () {};
 
-  test('it should display header with id, name, type and externalId', async function (assert) {
+  test('it should display header with id, name, type, team and externalId', async function (assert) {
     // given
     const externalId = '1234567A';
     const organizations = [
@@ -37,6 +37,13 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     assert.dom(within(table).getByRole('columnheader', { name: 'ID' })).exists();
     assert.dom(within(table).getByRole('columnheader', { name: 'Nom' })).exists();
     assert.dom(within(table).getByRole('columnheader', { name: 'Type' })).exists();
+    assert
+      .dom(
+        within(table).getByRole('columnheader', {
+          name: t('components.organizations.list-items.table.header.administration-team-name'),
+        }),
+      )
+      .exists();
     assert.dom(within(table).getByRole('columnheader', { name: 'Identifiant externe' })).exists();
   });
 
@@ -55,9 +62,9 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     // given
     const externalId = '1234567A';
     const organizations = [
-      { id: 1, name: 'École ACME', type: 'SCO', externalId: '1234567A' },
-      { id: 2, name: 'Université BROS', type: 'SUP', externalId: '1234567B' },
-      { id: 3, name: 'Entreprise KSSOS', type: 'PRO', externalId: '1234567C' },
+      { id: 1, name: 'École ACME', type: 'SCO', externalId: '1234567A', administrationTeamName: 'Team A' },
+      { id: 2, name: 'Université BROS', type: 'SUP', externalId: '1234567B', administrationTeamName: 'Team B' },
+      { id: 3, name: 'Entreprise KSSOS', type: 'PRO', externalId: '1234567C', administrationTeamName: 'Team C' },
     ];
     organizations.meta = {
       rowCount: 3,
@@ -74,6 +81,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     assert.dom(within(table).getByRole('cell', { name: '1' })).exists();
     assert.dom(within(table).getByRole('cell', { name: 'École ACME' })).exists();
     assert.dom(within(table).getByRole('cell', { name: 'SCO' })).exists();
+    assert.dom(within(table).getByRole('cell', { name: 'Team A' })).exists();
     assert.dom(within(table).getByRole('cell', { name: externalId })).exists();
     assert.strictEqual(rows.length, 4);
   });

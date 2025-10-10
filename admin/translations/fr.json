@@ -626,7 +626,10 @@
       },
       "list-items": {
         "table": {
-          "caption": "Liste des organisations. Contient l'identifiant, le nom, de type et l'identifiant externe de l'organisation."
+          "caption": "Liste des organisations. Contient l'identifiant, le nom, le type, l'équipe en charge et l'identifiant externe de l'organisation.",
+          "header": {
+            "administration-team-name": "Équipe"
+          }
         }
       },
       "member-items": {
