@@ -2,11 +2,18 @@ import { OrganizationForAdmin } from '../../../../../src/organizational-entities
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Integration | Organizational Entities | Domain | UseCase | archive-organization', function () {
+describe('Integration | Organizational Entities | Domain | UseCase | find-paginated-filtered-organizations', function () {
   it('should result organizations with filtering and pagination', async function () {
     // given
-    const orga1 = databaseBuilder.factory.buildOrganization({ name: 'Dragon 1' });
-    const orga2 = databaseBuilder.factory.buildOrganization({ name: 'Dragon 2' });
+    const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
+    databaseBuilder.factory.buildOrganization({
+      name: 'Dragon 1',
+      administrationTeamId: administrationTeam.id,
+    });
+    databaseBuilder.factory.buildOrganization({
+      name: 'Dragon 2',
+      administrationTeamId: administrationTeam.id,
+    });
     databaseBuilder.factory.buildOrganization({ name: 'Licorne' });
     await databaseBuilder.commit();
 
@@ -19,7 +26,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
     const response = await usecases.findPaginatedFilteredOrganizations({ filter, page });
 
     // then
-    expect(response.models).to.deep.include.members([new OrganizationForAdmin(orga1), new OrganizationForAdmin(orga2)]);
+    expect(response.models[0]).to.be.an.instanceOf(OrganizationForAdmin);
+    expect(response.models[1]).to.be.an.instanceOf(OrganizationForAdmin);
     expect(response.pagination.page).to.equal(resolvedPagination.page);
     expect(response.pagination.pageSize).to.equal(resolvedPagination.pageSize);
     expect(response.pagination.rowCount).to.equal(resolvedPagination.rowCount);

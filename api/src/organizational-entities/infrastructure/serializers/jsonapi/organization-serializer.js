@@ -24,6 +24,7 @@ const serialize = function (organizations, meta) {
       'showNPS',
       'formNPSUrl',
       'showSkills',
+      'administrationTeamName',
     ],
     memberships: {
       ref: 'id',

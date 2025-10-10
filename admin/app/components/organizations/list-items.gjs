@@ -120,6 +120,14 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
               {{organization.type}}
             </:cell>
           </PixTableColumn>
+          <PixTableColumn @context={{context}}>
+            <:header>
+              {{t "components.organizations.list-items.table.header.administration-team-name"}}
+            </:header>
+            <:cell>
+              {{organization.administrationTeamName}}
+            </:cell>
+          </PixTableColumn>
           <PixTableColumn @context={{context}} class="break-word">
             <:header>
               Identifiant externe
