@@ -1850,31 +1850,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
     });
   });
 
-  module('when grain has type ‘Discovery‘', function () {
-    test('should display the corresponding tag', async function (assert) {
-      // given
-      const textElement = {
-        content: 'element content',
-        type: 'text',
-        isAnswerable: false,
-      };
-      const grain = {
-        id: '12345-abcdef',
-        type: 'discovery',
-        components: [{ type: 'element', element: textElement }],
-      };
-
-      this.set('grain', grain);
-
-      // when
-      const screen = await render(hbs`
-          <Module::Grain::Grain @grain={{this.grain}} />`);
-
-      // then
-      assert.dom(screen.getByText('Découverte')).exists();
-    });
-  });
-
   module('when grain has type ‘Activity‘', function () {
     test('should display the corresponding tag', async function (assert) {
       // given

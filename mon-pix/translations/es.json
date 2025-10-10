@@ -1749,11 +1749,7 @@
       },
       "grain": {
         "tag": {
-          "activity": "Actividad",
-          "challenge": "Desafío",
-          "discovery": "Descubrimiento",
-          "lesson": "Lección",
-          "summary": "Recapitular"
+          "activity": "Actividad"
         },
         "title": {
           "lesson": "Lección",

@@ -221,8 +221,8 @@ export default class ModuleGrain extends Component {
     return this.args.grain.type === 'lesson' || this.args.grain.type === 'summary';
   }
 
-  get isGrainTypeWithTag() {
-    return this.args.grain.type === 'activity' || this.args.grain.type === 'discovery';
+  get isGrainTypeActivity() {
+    return this.args.grain.type === 'activity';
   }
 
   get grainTitle() {
@@ -234,10 +234,6 @@ export default class ModuleGrain extends Component {
       default:
         return '';
     }
-  }
-
-  get tagText() {
-    return this.intl.t(`pages.modulix.grain.tag.${this.args.grain.type}`);
   }
 
   get skipButtonLabel() {
@@ -266,9 +262,9 @@ export default class ModuleGrain extends Component {
           total=@totalSteps
         }}</h3>
       <div class="grain__card grain-card--{{this.grainType}}">
-        {{#if this.isGrainTypeWithTag}}
+        {{#if this.isGrainTypeActivity}}
           <PixTag class="grain-card-tag" @color="grey">
-            {{this.tagText}}
+            {{t "pages.modulix.grain.tag.activity"}}
           </PixTag>
         {{/if}}
         {{#if this.isGrainTypeWithTitle}}
