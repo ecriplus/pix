@@ -144,28 +144,28 @@
                     "id": "1",
                     "content": "<p>Récupérer des données personnelles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, l’escroc cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>Effectivement, l’escroc cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Recevoir le paiement des frais de livraison.</p>",
+                    "content": "<p>Engager la conversation avec la personne qui reçoit le message.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En fait, il n’y a pas de livraison. L’escroc cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>Ici, l’escroc ne cherche pas à engager la conversation. Il cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Signaler un problème.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage.<p></p>"
+                      "diagnosis": "<p>L’escroc cherche à<strong> récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
                   }
                 ],
@@ -235,7 +235,7 @@
               "element": {
                 "id": "c22766bc-ff57-4f2b-a457-952ed34f4adc",
                 "type": "text",
-                "content": "<p>Isham a reçu de nombreux <strong>messages d’arnaque</strong> récemment. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.</p>"
+                "content": "<p>Voici plusieurs&nbsp;<strong>messages d’arnaque</strong>. Avec ces messages, les escrocs se font passer pour des expéditeurs de confiance.</p>"
               }
             },
             {
@@ -584,9 +584,57 @@
             {
               "type": "element",
               "element": {
-                "id": "2ef6189b-0332-4104-b9c2-aba957e30e59",
+                "id": "56b11acd-0a06-4ca7-8872-9da44dd4fc30",
                 "type": "text",
-                "content": "<p>Pour éviter de tomber dans le piège d’un message d’arnaque&nbsp;:&nbsp; </p><ul>    <li><strong>Prendre le temps de réfléchir</strong> avant d’agir.&nbsp;⌛</li>    <li><strong>Ne pas communiquer</strong> d’informations personnelles.&nbsp;ℹ️</li>    <li><strong> Ne pas cliquer</strong> sur le lien, ne pas répondre.&nbsp;🙉</li></ul><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaques sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
+                "content": "<p>Pour éviter de tomber dans le piège d’un message d’arnaque&nbsp;:&nbsp; </p><ul>    <li><strong>Prenez le temps de réfléchir</strong> avant d’agir.&nbsp;⌛</li>    <li><strong>Ne pas communiquez&nbsp;</strong>d’informations personnelles.&nbsp;ℹ️</li>    <li><strong> Ne cliquez</strong><strong>&nbsp; pas</strong> sur le lien, ne répondez pas.&nbsp;🙉</li></ul><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaques sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "32b1b4ec-3d68-482e-a5e0-6354244f4898",
+          "type": "transition",
+          "title": "Transition #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2ef6189b-0332-4104-b9c2-aba957e30e59",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Fin de la conversation",
+                  "messages": [
+                    {
+                      "userName": "Yvette",
+                      "direction": "incoming",
+                      "content": "C’est bon, j’ai appelé ma banque. C’était bien une arnaque, il n’y a pas de problème avec mon compte ! ",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    },
+                    {
+                      "userName": "Xavier",
+                      "direction": "outgoing",
+                      "content": "Bien joué ! Tu n’es pas tombée dans le piège. 👏 ",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    },
+                    {
+                      "userName": "Yvette",
+                      "direction": "incoming",
+                      "content": "Merci Xavier ! Heureusement que tu étais là !",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -620,6 +668,14 @@
                 "alternativeText": "<p>Un dessin représentant une personne tenant un smartphone. Sur l’écran du téléphone, un message est affiché avec un lien en surbrillance.<br>Trois encadrés de texte, reliés par des flèches violettes au téléphone, expliquent&nbsp;:</p><ul><li>«&nbsp;Ils cherchent à gagner votre confiance, en utilisant l’identité d’un proche, ou d’un service public connu.&nbsp;»</li><li>«&nbsp;Ils invitent à agir, souvent en cliquant sur un lien.&nbsp;»</li><li>«&nbsp;Ils utilisent vos émotions pour vous faire réagir rapidement.&nbsp;»</li></ul>",
                 "legend": "",
                 "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9379c03e-aca3-439d-b522-c1b584c9b563",
+                "type": "text",
+                "content": "<p>🛡️Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir, ne communiquez pas d’informations personnelles et ignorez le message.</p><p>🕵️ Si vous avez un doute, <strong>vérifiez l’information </strong>en contactant la personne ou le service par un autre moyen.</p><br>"
               }
             }
           ]
@@ -681,7 +737,7 @@
                   },
                   {
                     "id": "ba4e0c32-0d94-4fb9-b8d0-efa190305548",
-                    "text": "L’objectif des messages d’arnaque est de récupérer vos informations personnelles.",
+                    "text": "Un objectif des messages d’arnaque est de récupérer vos informations personnelles.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -927,7 +983,7 @@
               "element": {
                 "id": "d99fa99d-4e91-44e0-b9c2-f73fe71c0eff",
                 "type": "text",
-                "content": "<p>Sur Instagram, un artiste que vous suivez vous envoie un lien pour ✨un super concours✨.</p>"
+                "content": "<p>Sur Instagram, votre chanteur préféré que vous suivez vous envoie un lien pour ✨un super concours✨&nbsp;: gagner une rencontre dans les loges après un de ses concerts.</p>"
               }
             },
             {
