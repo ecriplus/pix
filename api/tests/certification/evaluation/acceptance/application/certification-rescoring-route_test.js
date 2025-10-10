@@ -86,10 +86,12 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           version: AlgorithmEngineVersion.V3,
         }).id;
 
-        databaseBuilder.factory.buildCertificationCandidate({
+        const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
           sessionId,
           userId: candidate.id,
         });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
+
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId,
           userId: candidate.id,
@@ -221,10 +223,12 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           version: AlgorithmEngineVersion.V3,
         }).id;
 
-        databaseBuilder.factory.buildCertificationCandidate({
+        const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
           sessionId,
           userId: candidate.id,
         });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
+
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId,
           userId: candidate.id,

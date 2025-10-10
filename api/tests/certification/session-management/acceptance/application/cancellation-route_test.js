@@ -72,11 +72,12 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           version: AlgorithmEngineVersion.V2,
           sessionId: session.id,
         });
-        databaseBuilder.factory.buildCertificationCandidate({
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
           userId: certificationCourse.userId,
           reconciledAt: new Date('2024-01-15'),
           sessionId: session.id,
         });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
         const assessment = databaseBuilder.factory.buildAssessment({
           id: 456,
           type: Assessment.types.CERTIFICATION,
