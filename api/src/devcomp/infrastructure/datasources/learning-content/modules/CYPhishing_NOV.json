@@ -149,7 +149,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Engager la conversation avec la personne qui reçoit le message.</p>",
+                    "content": "<p>Engager la conversation.</p>",
                     "feedback": {
                       "diagnosis": "<p>Ici, l’escroc ne cherche pas à engager la conversation. Il cherche à <strong>récupérer des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
