@@ -610,28 +610,16 @@
                       "userName": "Yvette",
                       "direction": "incoming",
                       "content": "C’est bon, j’ai appelé ma banque. C’était bien une arnaque, il n’y a pas de problème avec mon compte ! ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
                       "content": "Bien joué ! Tu n’es pas tombée dans le piège. 👏 ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
                       "content": "Merci Xavier ! Heureusement que tu étais là !",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
