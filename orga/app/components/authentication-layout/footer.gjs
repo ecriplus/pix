@@ -7,13 +7,9 @@ import LocaleSwitcher from '../locale-switcher';
 export default class Footer extends Component {
   @service currentDomain;
 
-  get isInternationalDomain() {
-    return !this.currentDomain.isFranceDomain;
-  }
-
   <template>
     <footer class="authentication-layout-footer">
-      {{#if this.isInternationalDomain}}
+      {{#if this.currentDomain.isInternationalDomain}}
         <LocaleSwitcher />
       {{/if}}
       <FooterLinks />

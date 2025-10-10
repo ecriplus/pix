@@ -9,6 +9,10 @@ export default class CurrentDomainService extends Service {
     return this.getExtension() === FRANCE_TLD;
   }
 
+  get isInternationalDomain() {
+    return !this.isFranceDomain;
+  }
+
   getExtension() {
     const { hostname } = new URL(Location.getHref());
     return last(hostname.split('.'));

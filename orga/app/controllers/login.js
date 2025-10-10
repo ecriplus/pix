@@ -6,7 +6,7 @@ export default class LoginController extends Controller {
   @service featureToggles;
 
   get isInternationalDomain() {
-    return !this.currentDomain.isFranceDomain;
+    return this.currentDomain.isInternationalDomain;
   }
 
   get isNewAuthDesignEnabled() {

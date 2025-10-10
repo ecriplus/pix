@@ -69,6 +69,36 @@ module('Unit | Service | currentDomain', function (hooks) {
     });
   });
 
+  module('#isInternationalDomain', function () {
+    module('when location is FR TLD', function () {
+      test('returns false', function (assert) {
+        // given
+        sinon.stub(Location, 'getHref').returns('https://pix.fr/foo?bar=baz');
+
+        // when
+        const service = this.owner.lookup('service:currentDomain');
+        const isInternationalDomain = service.isInternationalDomain;
+
+        // then
+        assert.false(isInternationalDomain);
+      });
+    });
+
+    module('when location is ORG TLD', function () {
+      test('returns true', function (assert) {
+        // given
+        sinon.stub(Location, 'getHref').returns('https://pix.org/foo?bar=baz');
+
+        // when
+        const service = this.owner.lookup('service:currentDomain');
+        const isInternationalDomain = service.isInternationalDomain;
+
+        // then
+        assert.true(isInternationalDomain);
+      });
+    });
+  });
+
   module('#domain', function () {
     module('when location is localhost', function () {
       test('returns locahost as domain', function (assert) {
