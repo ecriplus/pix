@@ -3,8 +3,8 @@ import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/component/element';
-import ModulixStepper, { NEXT_STEP_BUTTON_DELAY } from 'mon-pix/components/module/component/stepper';
+import ModulixStepper from 'mon-pix/components/module/component/stepper';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,16 +12,6 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | Stepper', function (hooks) {
   setupIntlRenderingTest(hooks);
-
-  let clock;
-
-  hooks.beforeEach(function () {
-    clock = sinon.useFakeTimers();
-  });
-
-  hooks.afterEach(function () {
-    clock.restore();
-  });
 
   module('When stepper is vertical', function () {
     module('A Stepper with 2 steps', function () {
@@ -85,7 +75,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
-      module('When step contains answerable elements', function () {
+      module('When step contains answerable elements', function (hooks) {
+        let clock;
+
+        hooks.beforeEach(function () {
+          clock = sinon.useFakeTimers();
+        });
+
+        hooks.afterEach(function () {
+          clock.restore();
+        });
         module('When the only answerable element is unanswered', function () {
           test('should not display the Next button', async function (assert) {
             // given
@@ -809,133 +808,134 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           }),
         });
         assert.dom(title).exists();
-      });
-
-      module('on the first step', function () {
-        test('should display disabled controls buttons', async function (assert) {
-          // given
-          const steps = [
-            {
-              elements: [
-                {
-                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                  type: 'text',
-                  content: '<p>Text 1</p>',
-                },
-              ],
-            },
-            {
-              elements: [
-                {
-                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                  type: 'text',
-                  content: '<p>Text 2</p>',
-                },
-              ],
-            },
-          ];
-
-          // when
-          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
-
-          // then
-          assert
-            .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
-            .hasAria('disabled', 'true');
-          assert
-            .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
-            .hasAria('disabled', 'true');
-        });
-
-        test('should not be able to navigate to negative step', async function (assert) {
-          // given
-          const steps = [
-            {
-              elements: [
-                {
-                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                  type: 'text',
-                  content: '<p>Text 1</p>',
-                },
-              ],
-            },
-            {
-              elements: [
-                {
-                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                  type: 'text',
-                  content: '<p>Text 2</p>',
-                },
-              ],
-            },
-          ];
-
-          // when
-          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
-
-          // then
-          await click(
-            screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
-          );
-          assert
-            .dom(
-              screen.getByRole('group', {
-                name: t('pages.modulix.stepper.step.aria-label', {
-                  currentStep: 1,
-                  totalSteps: 2,
-                }),
+        await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+        assert
+          .dom(
+            screen.getByRole('paragraph', {
+              name: t('pages.modulix.stepper.step.aria-label', {
+                currentStep: 2,
+                totalSteps: 2,
               }),
-            )
-            .exists();
-        });
+            }),
+          )
+          .exists();
       });
 
-      module('on the last step', function () {
-        test('should not display the Next button', async function (assert) {
-          const steps = [
-            {
-              elements: [
-                {
-                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                  type: 'text',
-                  content: '<p>Text 1</p>',
-                },
-              ],
-            },
-            {
-              elements: [
-                {
-                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                  type: 'text',
-                  content: '<p>Text 2</p>',
-                },
-              ],
-            },
-          ];
+      test('should display the first step with the button Next', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
 
-          function stepperIsFinished() {}
+        // when
+        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
-          function onStepperNextStepStub() {}
+        // then
+        assert
+          .dom(
+            screen.getByRole('group', {
+              name: t('pages.modulix.stepper.step.aria-label', {
+                currentStep: 1,
+                totalSteps: 2,
+              }),
+            }),
+          )
+          .exists();
+        assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+      });
 
-          const screen = await render(
-            <template>
-              <ModulixStepper
-                @direction="horizontal"
-                @steps={{steps}}
-                @stepperIsFinished={{stepperIsFinished}}
-                @onStepperNextStep={{onStepperNextStepStub}}
-              />
-            </template>,
-          );
+      test('should display disabled controls buttons', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
 
-          // when
-          await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
+        // when
+        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
-          //then
-          assert
-            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
-            .doesNotExist();
-        });
+        // then
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+          .hasAria('disabled', 'true');
+        assert
+          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+          .hasAria('disabled', 'true');
+      });
+
+      test('should not be able to navigate to negative step', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+
+        // then
+        await click(
+          screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+        );
+        assert
+          .dom(
+            screen.getByRole('group', {
+              name: t('pages.modulix.stepper.step.aria-label', {
+                currentStep: 1,
+                totalSteps: 2,
+              }),
+            }),
+          )
+          .exists();
       });
 
       module('When step contains answerable elements', function () {
@@ -1047,13 +1047,21 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             await clickByName('radio1');
             await clickByName(t('pages.modulix.buttons.activity.verify'));
-            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
             sinon.assert.calledOnce(onElementAnswerStub);
             assert.ok(true);
           });
         });
 
-        module('When we retry an answerable element', function () {
+        module('When we retry an answerable element', function (hooks) {
+          let clock;
+
+          hooks.beforeEach(function () {
+            clock = sinon.useFakeTimers();
+          });
+
+          hooks.afterEach(function () {
+            clock.restore();
+          });
           test('should call the onElementRetry action', async function (assert) {
             // given
             const passageEventService = this.owner.lookup('service:passage-events');
@@ -1224,18 +1232,16 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               },
             ];
 
-            function getLastCorrectionForElementStub(element) {
-              if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
-                return Symbol('Correction');
-              } else {
-                return undefined;
-              }
-            }
-            const onElementAnswerStub = sinon.stub();
+            function getLastCorrectionForElementStub() {}
+
             const store = this.owner.lookup('service:store');
             const passage = store.createRecord('passage');
-            const passageEventService = this.owner.lookup('service:passage-events');
-            sinon.stub(passageEventService, 'record');
+            const correction = store.createRecord('correction-response');
+            store.createRecord('element-answer', {
+              elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
+              correction,
+              passage,
+            });
 
             // when
             const screen = await render(
@@ -1244,7 +1250,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                   @direction="horizontal"
                   @passage={{passage}}
                   @steps={{steps}}
-                  @onElementAnswer={{onElementAnswerStub}}
                   @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
                 />
               </template>,
@@ -1253,20 +1258,6 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
-              .doesNotExist();
-
-            // when
-            await clickByName('radio2');
-            await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
-            passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
-
-            // then
-            assert
-              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
-              .doesNotExist();
-            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
-            assert
-              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .exists();
           });
         });
@@ -1511,10 +1502,9 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
             await click(
               screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
-            );
-
-            // then
-            assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
+            ),
+              // then
+              assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
             assert
               .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
               .isFocused();
@@ -1623,6 +1613,52 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                 .isFocused();
             });
           });
+        });
+
+        test('should not display the Next button when there are no steps left', async function (assert) {
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
+
+          function stepperIsFinished() {}
+
+          function onStepperNextStepStub() {}
+
+          const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @steps={{steps}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+              />
+            </template>,
+          );
+
+          // when
+          await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
+
+          //then
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+            .doesNotExist();
         });
       });
     });
