@@ -18,10 +18,6 @@ export default class LoginOrRegister extends Component {
 
   @tracked displayRegisterForm = true;
 
-  get isInternationalDomain() {
-    return !this.currentDomain.isFranceDomain;
-  }
-
   @action
   toggleFormsVisibility() {
     this.displayRegisterForm = !this.displayRegisterForm;
@@ -88,7 +84,7 @@ export default class LoginOrRegister extends Component {
           </div>
         </div>
       </PixBlock>
-      {{#if this.isInternationalDomain}}
+      {{#if this.currentDomain.isInternationalDomain}}
         <div class="login-or-register__locale-switcher">
           <LocaleSwitcher />
         </div>

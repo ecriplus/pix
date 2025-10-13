@@ -14,6 +14,7 @@
 @use 'globals/texts' as *;
 
 // components
+@use 'components/authentication-layout' as *;
 @use 'components/activity-type' as *;
 @use 'components/banner' as *;
 @use 'components/certificability' as *;
@@ -26,6 +27,7 @@
 @use 'components/current-organization' as *;
 @use 'components/edit-student-number-modal' as *;
 @use 'components/dropdown' as *;
+@use 'components/footer-links' as *;
 @use 'components/index/action-cards-list' as *;
 @use 'components/join-request-form' as *;
 @use 'components/layout/footer' as *;
@@ -56,6 +58,7 @@
 @use 'components/statistics/cover-rate-gauge' as *;
 
 // pages
+
 @use 'pages/login' as *;
 @use 'pages/join' as *;
 @use 'pages/join-request' as *;
