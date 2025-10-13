@@ -142,11 +142,12 @@ const findPaginatedFilteredByOrganizationId = async function ({
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const atLeastOneCampaign = await knex('campaigns')
-    .select('id')
+    .count('id')
     .where({ organizationId })
     .whereNull('deletedAt')
-    .first(1);
-  const hasCampaigns = Boolean(atLeastOneCampaign);
+    .whereNotIn('campaigns.id', campaignIdsToExclude)
+    .first();
+  const hasCampaigns = atLeastOneCampaign.count > 0;
 
   const campaignReports = results.map((attributes) => new CampaignReport(attributes));
 
