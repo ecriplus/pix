@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.231.0](https://github.com/1024pix/pix/compare/v5.230.0...v5.231.0) (2025-10-13)
+
+### :rocket: Amélioration
+
+- [#13866](https://github.com/1024pix/pix/pull/13866) corrections avant validation module 
+
+### :arrow_up: Montée de version
+
+- [#13868](https://github.com/1024pix/pix/pull/13868) Update dependency @1024pix/ember-testing-library to ^3.0.20 (admin) 
+- [#13870](https://github.com/1024pix/pix/pull/13870) Update dependency @1024pix/ember-testing-library to ^3.0.20 (junior) 
+- [#13869](https://github.com/1024pix/pix/pull/13869) Update dependency @1024pix/ember-testing-library to ^3.0.20 (orga) 
+- [#13806](https://github.com/1024pix/pix/pull/13806) Update dependency @1024pix/eslint-plugin to ^2.1.12 (e2e-playwright) 
+
+### :coffee: Autre
+
+- [#13834](https://github.com/1024pix/pix/pull/13834) Ajouter le nouveau layout pour les pages d'authentification (PIX-19797)
+
 # [5.230.0](https://github.com/1024pix/pix/compare/v5.229.0...v5.230.0) (2025-10-13)
 
 ### :rocket: Amélioration
