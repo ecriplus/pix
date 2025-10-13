@@ -8,8 +8,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import ENV from 'pix-orga/config/environment';
 
 import isEmailValid from '../../utils/email-validator';
@@ -24,8 +22,8 @@ export default class LoginForm extends Component {
 
   @tracked errorMessage = null;
   @tracked isLoading = false;
-  @tracked password = null;
-  @tracked email = null;
+  @tracked password = '';
+  @tracked email = '';
   @tracked passwordValidationMessage = null;
   @tracked emailValidationMessage = null;
 
@@ -76,8 +74,8 @@ export default class LoginForm extends Component {
 
   @action
   validatePassword(event) {
-    this.password = event.target.value;
-    const isInvalidInput = isEmpty(this.password);
+    this.password = event.target.value ?? '';
+    const isInvalidInput = this.password === '';
     this.passwordValidationMessage = null;
 
     if (isInvalidInput) {
@@ -99,11 +97,11 @@ export default class LoginForm extends Component {
 
   @action
   updateEmail(event) {
-    this.email = event.target.value?.trim();
+    this.email = event.target.value?.trim() ?? '';
   }
 
   get isFormValid() {
-    return isEmailValid(this.email) && !isEmpty(this.password);
+    return isEmailValid(this.email) && this.password !== '';
   }
 
   async _authenticate(password, email) {
@@ -135,7 +133,7 @@ export default class LoginForm extends Component {
   }
 
   _handleApiError(responseError) {
-    const errors = get(responseError, 'responseJSON.errors');
+    const errors = responseError?.responseJSON?.errors;
     const error = Array.isArray(errors) && errors.length > 0 && errors[0];
     switch (error?.code) {
       case 'SHOULD_CHANGE_PASSWORD':
