@@ -1,10 +1,10 @@
 {
   "id": "bc6d164f-26bd-4f58-9925-8cf5365e2ca6",
   "slug": "tmp-ia-def-ind",
-  "title": "Une IA apprentie botaniste : un cas d'un apprentissage supervisé 🌱",
+  "title": "Une IA apprentie botaniste : un cas d'un apprentissage supervisé.",
   "isBeta": true,
   "details": {
-    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/IAGenDef_IND/picto_moduleIA_img.svg",
     "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé. 🤖</p><p>A travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage : de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces. 🖼️</p>",
     "duration": 10,
     "level": "independent",
@@ -29,7 +29,7 @@
               "element": {
                 "id": "6e186654-fd70-4d4c-af3e-530b7664b193",
                 "type": "text",
-                "content": "<p>Arthur a entendu parler de l’ail des ours, une plante qui se mange, et il voudrait goûter. 😋 </p><p>Mais il a peur de se tromper pendant sa cueillette, alors il demande à Lila. 🧺<br><br></p>"
+                "content": "<p>Arthur a entendu parler de l’ail des ours, une plante qui se mange, et il voudrait goûter. 😋 </p><p>Mais il a peur de se tromper pendant sa cueillette, alors il demande à son amie, Lila. 🧺<br><br></p>"
               }
             },
             {
@@ -140,72 +140,147 @@
                       "licence": ""
                     }
                   ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5c25263f-14ec-4407-a1cf-ab2b97275476",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours2.jpg",
+                      "alt": "Une photo d'une plante",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "d057728c-18fd-4891-a53c-9f6413917bd9",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Ail des ours</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Muguet</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Vous aurez peut-être plus de chance avec la prochaine !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "9d5cc2dd-24fc-49b7-9eb9-fa20228d04a2",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet2.jpg",
+                      "alt": "Une photo d'une plante",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "bec3bcf1-0a25-49a7-a5f0-c322ccb271b3",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Ail des ours</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, plus de chance avec la prochaine ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Muguet</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp;</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "84204059-07f5-4303-a6e5-a48c484a2919",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet4.jpg",
+                      "alt": "Une photo d'une feuille",
+                      "alternativeText": "<p><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
+                      "type": "qcu-declarative",
+                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Ail des ours</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Muguet</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p>"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "799d55e3-6f85-4480-b1e5-bc6bc80eb9bf",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours4.jpg",
+                      "alt": "Une photo d'une plante",
+                      "alternativeText": "<p><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "706832ba-14ae-4a7d-886a-39e562e66557",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Ail des ours</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Muguet</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "id": "8832f25f-422e-4e09-9790-8cff61d7b27f",
-          "type": "discovery",
-          "title": "Découverte n°1bis - Données étiquetées : le jeu",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "365d0e92-7b9e-406a-920b-4d12e08c7a28",
-                "type": "qab",
-                "instruction": "<p>Regardez l’image et identifiez si c’est de l’ail des ours ou du muguet.<br></p>",
-                "cards": [
-                  {
-                    "id": "993c38a2-b94e-42e8-966c-28b2ce8376f7",
-                    "text": "",
-                    "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours2.jpg",
-                      "altText": "Une photo d'une plante"
-                    },
-                    "proposalA": "Ail des ours",
-                    "proposalB": "Muguet",
-                    "solution": "A"
-                  },
-                  {
-                    "id": "dba2358a-c5d9-4d46-a026-f1266ae270b7",
-                    "text": "",
-                    "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet2.jpg",
-                      "altText": "Une photo d'une plante"
-                    },
-                    "proposalA": "Ail des ours",
-                    "proposalB": "Muguet",
-                    "solution": "B"
-                  },
-                  {
-                    "id": "f222d212-cf40-4d56-b582-f7f30893fb00",
-                    "text": "",
-                    "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet4.jpg",
-                      "altText": "Une photo d'une plante"
-                    },
-                    "proposalA": "Ail des ours ",
-                    "proposalB": "Muguet",
-                    "solution": "B"
-                  },
-                  {
-                    "id": "24bebede-539b-44d3-a5a3-fe75a2181aef",
-                    "text": "",
-                    "image": {
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/ailours4.jpg",
-                      "altText": "Une photo d'une plante"
-                    },
-                    "proposalA": "Ail des ours",
-                    "proposalB": "Muguet",
-                    "solution": "A"
-                  }
-                ],
-                "feedback": {
-                  "diagnosis": "<p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d'IA. 🔍</p>"
-                }
-              }
             }
           ]
         },
@@ -266,7 +341,7 @@
         {
           "id": "db006d48-ab80-407b-92c3-65094b635c9e",
           "type": "discovery",
-          "title": "Découverte 2a - décomposition en valeurs numérique",
+          "title": "Découverte 2 - décomposition en valeurs numérique",
           "components": [
             {
               "type": "stepper",
@@ -312,7 +387,7 @@
                     {
                       "id": "b6763b47-e272-480d-b735-3aea9528acbf",
                       "type": "text",
-                      "content": "<p>Chaque pixel contient une information : une valeur numérique qui indique sa couleur.</p><p>C’est grâce à ces valeurs que le logiciel peut traiter l’image.</p>"
+                      "content": "<p>Chaque pixel contient des nombres qui indiquent sa couleur.</p>"
                     },
                     {
                       "id": "333f5d88-b336-487b-a45c-c3e38269b1fa",
@@ -332,14 +407,14 @@
         {
           "id": "b0076163-02ae-4805-af3e-dd82781347ba",
           "type": "lesson",
-          "title": "Lesson 2a : décomposition en valeurs numériques",
+          "title": "Lesson 2 : décomposition en valeurs numériques",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
-                "content": "<p>Pour un logiciel d’IA, une photographie est une multitude de petits points appelés <strong>pixels</strong>.🟢</p><p>Chaque pixel est associé à une <strong>valeur numérique</strong> qui indique sa couleur.</p><p>En informatique, une image est donc un tableau de valeurs numériques.🖼️➡️🔢</p>"
+                "content": "<p>En informatique, une photographie est une multitude de petits points appelés pixels.🟢<br></p><p>Chaque pixel est associé à des nombres qui indiquent sa couleur.&nbsp;🖼️➡️🔢<br></p><p>À partir du tableau de nombre représentant l’image, le logiciel d’IA va pouvoir faire des calculs.</p>"
               }
             }
           ]
@@ -362,14 +437,14 @@
         {
           "id": "ee2eb6fe-6740-45f4-886a-994545855110",
           "type": "discovery",
-          "title": "Découverte 2b : Ajustement des paramètres",
+          "title": "Découverte 3 : Ajustement des paramètres",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "9e2e1178-89e5-4c87-beb1-b7548e6d3937",
                 "type": "text",
-                "content": "<p>Mettons-nous de nouveau à la place du logiciel qui est en train d’apprendre.🤖 </p>"
+                "content": "<p>Aidez le logiciel d’IA à améliorer ces prédictions.<br></p>"
               }
             },
             {
@@ -377,7 +452,7 @@
               "element": {
                 "id": "e5badfae-bca4-421a-ae72-299891ef31da",
                 "type": "text",
-                "content": "<p>Cette photo montre une plante d'ail des ours.🌱 </p><p>Ajustez les réglages progressivement, jusqu’à ce que la prédiction indique correctement qu’il s’agit d’ail des ours. <br></p><p><em>[Le simulatur est en cours de création]</em></p>"
+                "content": "<p>Cette photo montre une plante d'ail des ours.🌱 </p><p>Au départ, les calculs de l’IA ne sont pas bien réglés et la prédiction n’est pas correcte. </p><p> Ajustez les réglages pour obtenir la prédiction “ail des ours”.</p><p><em>[Le simulatur est en cours de création]</em></p>"
               }
             },
             {
@@ -397,37 +472,22 @@
         {
           "id": "bdc51924-26ee-4f22-b302-fe4dec080387",
           "type": "lesson",
-          "title": "Lesson 2b : Ajustement des paramètres",
+          "title": "Lesson 3 : Ajustement des paramètres",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "58f708f8-ad08-4c04-9876-c616e6d9a490",
-                      "type": "text",
-                      "content": "<p>Le logiciel dispose de plusieurs<strong> paramètres </strong>pour faire des<strong> calculs </strong>sur ces valeurs.</p><p>Au départ, les paramètres sont ajustés au hasard, produisant une <strong>prédiction </strong>qui est le résultat de ses calculs.🎲</p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue.</p><p>Ainsi, par essai erreur,<strong> il ajuste progressivement les paramètres </strong>jusqu'à obtenir la bonne prédiction.🧮</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "b3d22c1d-d09e-4f92-8691-5cf7bcddcb96",
-                      "type": "text",
-                      "content": "<p>🤔 Le saviez-vous ?</p><p><br> Ce type de modèle de calcul s’appelle un “<strong>réseau de neurones</strong>” car les chercheurs se sont inspirés du fonctionnement des neurones dans le cerveau humain.🧠<br></p>"
-                    }
-                  ]
-                }
-              ]
+              "type": "element",
+              "element": {
+                "id": "d14cf5f8-6d3f-4e77-abb2-033f8d13b062",
+                "type": "text",
+                "content": "<p>Le logiciel dispose de plusieurs paramètres pour faire des calculs sur ces valeurs. </p><p>Au départ, les paramètres sont ajustés au hasard, produisant une prédiction qui est le résultat de ses calculs.🎲 </p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue. </p><p>Ainsi, par essai erreur, il ajuste progressivement les paramètres jusqu'à obtenir la bonne prédiction.🧮</p><p><strong>🤔 Le saviez-vous ? <br> </strong>Ce genre de mécanisme de calcul s’appelle un “réseau de neurones” car les chercheurs se sont inspirés du fonctionnement des neurones dans le cerveau humain.🧠</p>"
+              }
             }
           ]
         },
         {
           "id": "d11b5bf5-bd63-40d2-92dd-d03b5d5b7bf2",
           "type": "discovery",
-          "title": "Découverte 3 : Généralisation",
+          "title": "Découverte 4 : Généralisation",
           "components": [
             {
               "type": "stepper",
@@ -442,7 +502,7 @@
                     {
                       "id": "1b67fab0-9ad4-45a6-aded-160b77b24993",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/jeudedonne-sanslegende.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/dec4_bdd.png",
                       "alt": "Une illustration du jeu de données avec des exemples",
                       "alternativeText": "<p>On voit des photos d'ail des ours (avec des fleurs, avec des feuilles) et de muguet (avec des feuilles, avec des fleurs)</p>",
                       "legend": "",
@@ -455,14 +515,14 @@
                     {
                       "id": "df83f537-de47-43da-8087-480f5b44bc8f",
                       "type": "text",
-                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d'ail des ours.</p><p>Le logiciel n'arrive pas à trancher avec certitude. </p><p>Il indique une probabilité de 53% pour ail des ours et de 47% pour muguet.</p>"
+                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d'ail des ours.</p><p>Le logiciel n'arrive pas à trancher avec certitude. </p><p>Il indique un score 0,4 pour ail des ours et de 0,6 pour muguet.</p>"
                     },
                     {
                       "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeunepousseaildesours.jpg",
+                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/IAGenDefIndDec4b.png",
                       "alt": "",
-                      "alternativeText": "<p>Une photo d'une jeune pousse d'ail des ours.</p>",
+                      "alternativeText": "<p>Une photo d'une jeune pousse d'ail des ours, son&nbsp;score est de 0,4 pour ail des ours et de 0,6 pour muguet.</p>",
                       "legend": "",
                       "licence": "Unsplash"
                     },
@@ -497,7 +557,7 @@
         {
           "id": "08c2f199-5026-487b-9c27-9f16d4ab481f",
           "type": "lesson",
-          "title": "Lesson 3 : Généralisation",
+          "title": "Lesson 4 : Généralisation",
           "components": [
             {
               "type": "stepper",
@@ -507,7 +567,7 @@
                     {
                       "id": "4f15ba33-8b56-49de-a277-be097b576d94",
                       "type": "text",
-                      "content": "<p>Le but du logiciel est d’attribuer la bonne étiquette à des exemples qu’il n’a jamais vus pendant son entraînement. C’est ce qu’on appelle <strong>la généralisation</strong>. 🚀</p><p>Pour atteindre une<strong> bonne généralisation</strong>, il faut lui donner des<strong> exemples variés</strong>, différents entre eux et représentant tous les cas typiques. Ceci réduit le risque d'erreur. </p><p>📌<strong>Important :</strong></p><p>Comme une prédiction repose sur <strong>des calculs statistiques</strong>, il existe toujours <strong>un risque d’erreur</strong>.</p>"
+                      "content": "<p>Le but du logiciel est d’attribuer la bonne étiquette à des exemples qu’il n’a jamais vus pendant son entraînement. C’est ce qu’on appelle <strong>la généralisation</strong>. 🚀</p><p>Pour atteindre une<strong> bonne généralisation</strong>, il faut lui donner des<strong> exemples variés</strong>, différents entre eux et représentant tous les cas typiques. Ceci réduit le risque d'erreur. </p><p>📌<strong>Important :</strong></p><p>Même si on a bien entraîné l’IA avec une base de données variées, dans le monde réel, il y aura toujours des exemples différents et des cas limites. Il y a donc toujours un risque d’erreurs.</p>"
                     }
                   ]
                 },
@@ -530,7 +590,7 @@
                     {
                       "id": "fdc063a3-de25-43e4-ab22-007339ad8d68",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/schema-nouvelle-etiquette.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema_prediction.png",
                       "alt": "Un schéma ",
                       "alternativeText": "<p>Un schéma représentant le fait que le logiciel ne peut pas prédire \"Tournesol\" s'il n'a été entrainé qu'avec des étiquettes \"ail des ours\" ou \"muguet\".</p>",
                       "legend": "Si le logiciel ne connaît que les étiquettes “ail des ours” et “muguet” et qu’on lui présente une image de “tournesol”, il ne peut pas prédire que c’est un tournesol. Il va seulement donner une prédiction qui s’approche des étiquettes qu’il connaît.",
@@ -552,7 +612,7 @@
               "element": {
                 "id": "f071912a-b067-4d03-8217-cc087d3cdbff",
                 "type": "text",
-                "content": "<p>Avec beaucoup de nouvelles données, et quelques corrections, le logiciel est prêt ! 🎉<br><br></p>"
+                "content": "<p>Avec beaucoup de nouvelles données, et quelques corrections, le logiciel est prêt ! 🎉</p>"
               }
             }
           ]
@@ -560,7 +620,7 @@
         {
           "id": "f62d3175-8837-4713-996f-34c1e9846c98",
           "type": "discovery",
-          "title": "Découverte 4 - D’autres cas d’usages, dont le texte",
+          "title": "Découverte 5 - D’autres cas d’usages, dont le texte",
           "components": [
             {
               "type": "element",
@@ -599,7 +659,9 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -623,7 +685,9 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -633,7 +697,7 @@
                   },
                   "invalid": {
                     "state": "<p>Et non !</p>",
-                    "diagnosis": ""
+                    "diagnosis": "<p><br></p>"
                   }
                 }
               }
@@ -643,7 +707,7 @@
         {
           "id": "4b313eb6-b343-47ea-983d-dd82fe7ac03c",
           "type": "transition",
-          "title": "Transition 4",
+          "title": "Transition 5",
           "components": [
             {
               "type": "element",
@@ -658,7 +722,7 @@
         {
           "id": "3f86b7a5-8df1-48a0-94ef-2a28c8c0c010",
           "type": "lesson",
-          "title": "Leçon #4 : D’autres cas d’usages, dont le texte",
+          "title": "Leçon #5 : D’autres cas d’usages, dont le texte",
           "components": [
             {
               "type": "stepper",
@@ -701,7 +765,7 @@
               "element": {
                 "id": "c68dc04d-69b2-4ca6-9635-e38fea109723",
                 "type": "text",
-                "content": "<p>L’a<strong>pprentissage automatique</strong> est une technique de l’intelligence artificielle qui permet de donner aux machines la capacité d'adapter ce qu'elles savent faire à une situations qu'elles n'ont jamais rencontrées.🦾</p>\n<p>L’<strong>apprentissage automatique supervisé</strong> est l’une des méthodes de l’apprentissage automatique.🤖</p>\n<p>Cete méthode consiste à fournir à un logiciel d’IA de nombreuses données étiquetées afin de lui apprendre à reconnaître les bonnes réponses. </p>\n<ul>\n    <li>🏷️ Pendant la&nbsp;<strong>phase d’entraînement</strong> : le logiciel ajuste, par essais et erreurs, ses paramètres de calcul sur les valeurs numériques des données d’entrée afin de prédire la bonne étiquette. </li>\n    <li>🏋️Pendant la&nbsp;<strong>phase de test </strong>: on vérifie ensuite si le logiciel est capable de bien prédire les étiquettes sur de nouvelles données qu’il n’a jamais vues. C’est ce qu’on appelle la généralisation 🚀. </li><li>La qualité des données fournies est essentielle pour rendre le logiciel fiable. Comme les prédictions reposent sur des statistiques, il existe toujours un risque d’erreur. ⚠️</li>\n</ul><p>\nL'apprentissage supervisé est utilisé dans <strong>de nombreux domaines</strong> : génération de texte, prévision météo, reconnaissance vocale ou détection de tumeurs.🌐</p>"
+                "content": "<p>L’a<strong>pprentissage automatique</strong> est une technique de l’intelligence artificielle qui permet de donner aux machines la capacité d'adapter ce qu'elles savent faire à une situations qu'elles n'ont jamais rencontrées.🦾</p>\n<p>L’<strong>apprentissage automatique supervisé</strong> est l’une des méthodes de l’apprentissage automatique.🤖</p>\n<p>Cette méthode consiste à fournir à un logiciel d’IA de nombreuses données étiquetées afin de lui apprendre à reconnaître les bonnes réponses. </p>\n<ul>\n    <li>🏷️ Pendant la&nbsp;<strong>phase d’entraînement</strong> : le logiciel ajuste ses paramètres de calcul sur les valeurs numériques des données d’entrée afin de prédire la bonne étiquette. </li>\n    <li>🏋️Pendant la&nbsp;<strong>phase de test </strong>: on vérifie ensuite si le logiciel est capable de bien prédire les étiquettes sur de nouvelles données qu’il n’a jamais vues. C’est ce qu’on appelle la généralisation 🚀. </li><li>La qualité des données fournies est essentielle pour rendre le logiciel fiable. Comme les prédictions reposent sur des statistiques, il existe toujours un risque d’erreur. ⚠️</li>\n</ul><p>\nL'apprentissage supervisé est utilisé dans <strong>de nombreux domaines</strong> : génération de texte, prévision météo, reconnaissance vocale ou détection de tumeurs.🌐</p>"
               }
             }
           ]
@@ -811,11 +875,25 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "jeux de données 1",
-                      "description": "jeux de données pour logiciel de reconnaissance d'images ",
+                      "title": "Jeu de données n°1",
+                      "description": "Jeu de données pour le logiciel d'IA",
                       "displayWidth": 624,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%203.png",
+                        "src": "https://assets.pix.org/modules/IAGenDef_IND/act2_bdd1.png",
+                        "alt": "Jeu de données"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Jeu de données n°2",
+                      "description": "Jeu de données pour le logiciel d'IA",
+                      "displayWidth": 624,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/IAGenDef_IND/act2_bdd2.png",
                         "alt": "Jeu de données"
                       },
                       "license": {
@@ -825,30 +903,16 @@
                       }
                     },
                     {
-                      "title": "jeux de données 2",
-                      "description": "jeux de données pour logiciel de reconnaissance d’images ",
+                      "title": "Jeu de données n°3",
+                      "description": "Jeu de données pour le logiciel d'IA",
                       "displayWidth": 624,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%202.png",
+                        "src": "https://assets.pix.org/modules/IAGenDef_IND/act2_bdd3.png",
                         "alt": "Jeu de données"
                       },
                       "license": {
                         "name": "",
-                        "attribution": "unsplash",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "jeux de données 3",
-                      "description": "jeux de données pour logiciel de reconnaissance d’images ",
-                      "displayWidth": 624,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/apprentissage-supervise/jeu%20de%20donn%C3%A9es%201.png",
-                        "alt": "Jeu de données"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "unsplash",
+                        "attribution": "",
                         "url": ""
                       }
                     }
@@ -865,11 +929,11 @@
               "element": {
                 "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
                 "type": "qcu",
-                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel de reconnaissance d’image de tournesols ?</p>",
+                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel d'IA à différencier les tournesols et les tulipes ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Jeu de données 1</p>",
+                    "content": "<p>Jeu de données n°1</p>",
                     "feedback": {
                       "state": "<p>Et non !</p>",
                       "diagnosis": "<p>Plusiers photographies de ce jeu de données sont mal étiquetées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés pour qu’il apprenne à les identifier correctement.</p>"
@@ -877,7 +941,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Jeu de données 2</p>",
+                    "content": "<p>Jeu de données n°2</p>",
                     "feedback": {
                       "state": "<p>Et non !<br></p>",
                       "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut donner des exemples très variés afin qu’il aprenne à généraliser.</p>"
@@ -885,7 +949,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Jeu de données 3</p>",
+                    "content": "<p>Jeu de données n°3</p>",
                     "feedback": {
                       "state": "<p>Bravo !<br></p>",
                       "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés et variés, c’est-à-dire de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
@@ -919,19 +983,19 @@
                     "id": "1",
                     "content": "<p>J’ai très confiance car il y a une phase de test.</p>",
                     "feedback": {
-                      "diagnosis": "<p> Gardez de la prudence, car la phase de test n’empêche pas les erreurs.<br></p>"
+                      "diagnosis": "<p> Gardez de la prudence, car la phase de test n’empêche pas les erreurs.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>J’ai confiance car les logiciels d'intelligence artificielle sont entraînés sur beaucoup d’exemples.<br></p>",
+                    "content": "<p>J’ai confiance car les logiciels d'intelligence artificielle sont entraînés sur beaucoup d’exemples.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Gardez de la prudence, car le nombre d’exemples n’empêche pas les erreurs.<br></p>"
+                      "diagnosis": "<p>Gardez de la prudence, car le nombre d’exemples n’empêche pas les erreurs.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je n’ai pas confiance car les logiciels d’intelligence artificielle peuvent toujours se tromper.<br></p>",
+                    "content": "<p>Je n’ai pas confiance car les logiciels d’intelligence artificielle peuvent toujours se tromper.</p>",
                     "feedback": {
                       "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, une erreur peut être dangereuse !</p>"
                     }
@@ -940,7 +1004,7 @@
                     "id": "4",
                     "content": "<p>Je n’ai pas du tout confiance car les logiciels d’IA ne peuvent pas goûter les champignons.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est vrai ! ! Même si la réponse de l’IA sera souvent juste, elle ne prend pas en compte certaines informations (odeur, goût…)</p>"
+                      "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, elle ne prend pas en compte certaines informations (odeur, goût…)</p>"
                     }
                   }
                 ]
