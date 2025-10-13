@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.230.0](https://github.com/1024pix/pix/compare/v5.229.0...v5.230.0) (2025-10-13)
+
+### :rocket: Amélioration
+
+- [#13858](https://github.com/1024pix/pix/pull/13858) Afficher le nom de l'équipe en charge sur la liste des organisations (PIX-19768) 
+- [#13859](https://github.com/1024pix/pix/pull/13859) correction contenu 
+- [#13856](https://github.com/1024pix/pix/pull/13856) Correction coquille 
+- [#13739](https://github.com/1024pix/pix/pull/13739) Module Deepfake - correction coquille 
+- [#13860](https://github.com/1024pix/pix/pull/13860) Module IA Biais IND alt modifs 
+- [#13853](https://github.com/1024pix/pix/pull/13853) Supprimer le tag Découverte dans les modules (PIX-19958). 
+
+### :bug: Correction
+
+- [#13863](https://github.com/1024pix/pix/pull/13863) Recuperer a nouveau la cle de complementaire dans le get-next-challenge (PIX-19982). 
+
+### :building_construction: Tech
+
+- [#13836](https://github.com/1024pix/pix/pull/13836) Créer un utilitaire pour redimensionner les images (PIX-19942) 
+- [#13864](https://github.com/1024pix/pix/pull/13864) Source correctement le fichier `.env` lors du lancement des scripts de test de l'API. 
+- [#13862](https://github.com/1024pix/pix/pull/13862) Supprimer les dernières traces du FT useLocale
+
 # [5.229.0](https://github.com/1024pix/pix/compare/v5.228.0...v5.229.0) (2025-10-10)
 
 ### :rocket: Amélioration
