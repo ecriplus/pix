@@ -49,8 +49,8 @@ const update = async function (request, h, dependencies = { trainingSerializer }
 };
 
 const deleteTrainingTrigger = async function (request, h) {
-  const { trainingTriggerId } = request.params;
-  await usecases.deleteTrainingTrigger({ trainingTriggerId });
+  const { trainingId, trainingTriggerId } = request.params;
+  await usecases.deleteTrainingTrigger({ trainingTriggerId, trainingId });
   return h.response({}).code(204);
 };
 

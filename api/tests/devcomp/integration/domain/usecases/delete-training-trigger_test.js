@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Devcomp | Domain | UseCases | deleteTrainingTrigger', function () {
   context('when deleting a training trigger', function () {
@@ -28,6 +29,7 @@ describe('Integration | Devcomp | Domain | UseCases | deleteTrainingTrigger', fu
       // when
       const result = await usecases.deleteTrainingTrigger({
         trainingTriggerId: trainingTrigger.id,
+        trainingId,
       });
 
       // then
@@ -43,17 +45,20 @@ describe('Integration | Devcomp | Domain | UseCases | deleteTrainingTrigger', fu
   });
 
   context('when trying to delete a non-existent training trigger', function () {
-    it('should not throw an error and return undefined', async function () {
+    it('should throw an error', async function () {
       // given
+      const { id: trainingId } = databaseBuilder.factory.buildTraining();
       const nonExistentTriggerId = 12;
 
       // when
-      const result = await usecases.deleteTrainingTrigger({
+      const error = await catchErr(usecases.deleteTrainingTrigger)({
         trainingTriggerId: nonExistentTriggerId,
+        trainingId,
       });
 
       // then
-      expect(result).to.be.undefined;
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error.message).to.equal(`The training trigger 12 is not related to the training ${trainingId}`);
     });
   });
 });
