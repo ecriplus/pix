@@ -31,6 +31,15 @@
     text-align: right;
   }
 
+  &__step-title {
+    @extend %pix-title-xs;
+
+    margin: var(--pix-spacing-10x) 0 var(--pix-spacing-4x);
+
+    &:first-of-type {
+      margin-top : 0
+    }
+  }
 }
 
 .combined-course-header {

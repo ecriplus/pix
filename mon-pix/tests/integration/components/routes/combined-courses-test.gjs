@@ -559,4 +559,83 @@ module('Integration | Component | combined course', function (hooks) {
       );
     });
   });
+  module('when items are of different types', function () {
+    test('should display steps', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.STARTED,
+        code: 'COMBINIX9',
+      });
+
+      const campaignCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'ma campagne',
+        reference: 'ABCDIAG1',
+        type: 'CAMPAIGN',
+        isCompleted: true,
+      });
+
+      const moduleCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 2,
+        title: 'mon module',
+        reference: 'mon-module',
+        type: 'MODULE',
+        redirection: 'une+url+chiffree',
+        isCompleted: false,
+      });
+
+      combinedCourse.items.push(campaignCombinedCourseItem, moduleCombinedCourseItem);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      // then
+      assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.content.step', { stepNumber: 1 }) }));
+      assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.content.step', { stepNumber: 2 }) }));
+    });
+  });
+  module('when items are of same types', function () {
+    test('should not display steps', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.STARTED,
+        code: 'COMBINIX9',
+      });
+
+      const campaignCombinedCourseItem = store.createRecord('combined-course-item', {
+        id: 3,
+        title: 'ma campagne',
+        reference: 'ABCDIAG1',
+        type: 'CAMPAIGN',
+        isCompleted: true,
+      });
+
+      const campaignCombinedCourse2Item = store.createRecord('combined-course-item', {
+        id: 4,
+        title: 'ma campagne',
+        reference: 'ABCDIAG1',
+        type: 'CAMPAIGN',
+        isCompleted: true,
+      });
+
+      combinedCourse.items.push(campaignCombinedCourseItem, campaignCombinedCourse2Item);
+
+      this.setProperties({ combinedCourse });
+
+      // when
+      const screen = await render(hbs`
+        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+
+      // then
+      assert.notOk(screen.queryByRole('heading', { name: 'étape 1' }));
+    });
+  });
 });

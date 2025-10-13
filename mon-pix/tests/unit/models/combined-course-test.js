@@ -64,4 +64,38 @@ module('Unit | Model | Combined Course', function (hooks) {
       assert.false(combinedCourse.hasItemOfTypeModule);
     });
   });
+  module('#areItemsOfTheSameType', function () {
+    test('returns false when items are of different types', function (assert) {
+      const combinedCourseItem1 = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'CAMPAIGN',
+      });
+      const combinedCourseItem2 = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'FORMATION',
+      });
+      const combinedCourseItem3 = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'MODULE',
+        redirection: '/modules/demo-combinix-2',
+      });
+
+      const combinedCourse = store.createRecord('combined-course');
+      combinedCourse.items = [combinedCourseItem1, combinedCourseItem2, combinedCourseItem3];
+      assert.false(combinedCourse.areItemsOfTheSameType);
+    });
+    test('returns true when items are of different types', function (assert) {
+      const combinedCourseItem1 = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'CAMPAIGN',
+      });
+      const combinedCourseItem2 = store.createRecord('combined-course-item', {
+        isCompleted: false,
+        type: 'CAMPAIGN',
+      });
+      const combinedCourse = store.createRecord('combined-course');
+      combinedCourse.items = [combinedCourseItem1, combinedCourseItem2];
+      assert.true(combinedCourse.areItemsOfTheSameType);
+    });
+  });
 });
