@@ -1210,7 +1210,8 @@
       },
       "content": {
         "resume-button": "Continuer mon parcours",
-        "start-button": "Commencer mon parcours"
+        "start-button": "Commencer mon parcours",
+        "step": "Étape {stepNumber}"
       },
       "items": {
         "approximatelySymbol": "≈",

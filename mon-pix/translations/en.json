@@ -1209,7 +1209,8 @@
       },
       "content": {
         "resume-button": "Resume course",
-        "start-button": "Start course"
+        "start-button": "Start course",
+        "step": "Step {stepNumber}"
       },
       "items": {
         "approximatelySymbol": "≈",

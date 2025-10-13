@@ -1198,7 +1198,8 @@
     "combined-courses": {
       "content": {
         "start-button": "Iniciar el curso",
-        "resume-course": "Reanudar mi curso"
+        "resume-course": "Reanudar mi curso",
+        "step": "Paso {stepNumber}"
       },
       "completed": {
         "title": "¡Enhorabuena! ¡Ya ha terminado!",
