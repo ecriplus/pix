@@ -1068,7 +1068,7 @@ describe('Integration | Repository | Campaign-Report', function () {
     });
 
     context('when campaigns are related to combine course', function () {
-      it('should set isFromCombineCourse', async function () {
+      it('should not return campaigns belonging to a combined course', async function () {
         // given
         const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
         const campaignNotInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
@@ -1099,16 +1099,41 @@ describe('Integration | Repository | Campaign-Report', function () {
         });
 
         // then
-        expect(models.map(({ id, isFromCombinedCourse }) => ({ id, isFromCombinedCourse }))).to.have.deep.members([
-          {
-            id: campaignInQuest.id,
-            isFromCombinedCourse: true,
-          },
-          {
-            id: campaignNotInQuest.id,
-            isFromCombinedCourse: false,
-          },
-        ]);
+        expect(models).lengthOf(1);
+        expect(models[0].id).equal(campaignNotInQuest.id);
+      });
+      it('should return empty campaigns and hasCampaigns to false', async function () {
+        // given
+        const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
+        databaseBuilder.factory.buildCombinedCourse({
+          code: 'ABCDE1234',
+          name: 'Mon parcours Combiné',
+          organizationId,
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: campaignInQuest.id,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { models, meta } = await campaignReportRepository.findPaginatedFilteredByOrganizationId({
+          organizationId,
+          filter,
+          page,
+        });
+
+        // then
+        expect(models).lengthOf(0);
+        expect(meta.hasCampaigns).false;
       });
     });
   });
