@@ -80,7 +80,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
       editorName: this.form.editorName,
       isDisabled: this.form.isDisabled,
     };
-    training.editorLogoUrl = `https://images.pix.fr/contenu-formatif/editeur/${this.form.editorLogoUrl}`;
+    training.editorLogoUrl = `https://assets.pix.org/contenu-formatif/editeur/${this.form.editorLogoUrl}`;
 
     try {
       this.submitting = true;

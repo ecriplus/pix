@@ -139,7 +139,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       // then
       assert.ok(onSubmitStub.called);
       const submittedData = onSubmitStub.getCall(0).firstArg;
-      assert.strictEqual(submittedData.editorLogoUrl, 'https://images.pix.fr/contenu-formatif/editeur/new-logo.svg');
+      assert.strictEqual(submittedData.editorLogoUrl, 'https://assets.pix.org/contenu-formatif/editeur/new-logo.svg');
     });
 
     test('should toggle isDisabled field when checkbox is clicked', async function (assert) {
