@@ -1,4 +1,5 @@
 import { Candidate } from '../../../../../../src/certification/evaluation/domain/models/Candidate.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
 
@@ -6,12 +7,17 @@ describe('Certification | Evaluation | Unit | Domain | Models | Candidate', func
   it('should build an evaluated candidate', function () {
     // given
     // when
-    const candidate = new Candidate({ accessibilityAdjustmentNeeded: true, reconciledAt: new Date('2024-10-18') });
+    const candidate = new Candidate({
+      accessibilityAdjustmentNeeded: true,
+      reconciledAt: new Date('2024-10-18'),
+      subscriptionScope: Frameworks.CORE,
+    });
 
     // then
     expect(candidate).to.deep.equal({
       accessibilityAdjustmentNeeded: true,
       reconciledAt: new Date('2024-10-18'),
+      subscriptionScope: Frameworks.CORE,
     });
   });
 

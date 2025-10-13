@@ -64,11 +64,12 @@ async function _setupTestData(databaseBuilder, { competenceId, doesCandidateNeed
 
   const session = databaseBuilder.factory.buildSession({});
 
-  databaseBuilder.factory.buildCertificationCandidate({
+  const candidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId: session.id,
     userId,
     accessibilityAdjustmentNeeded: doesCandidateNeedAccessibilityAdjustment,
   });
+  databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
 
   const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
     userId,

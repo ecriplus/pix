@@ -1,6 +1,7 @@
 import { getNextChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/get-next-challenge.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { config } from '../../../../../../src/shared/config.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -816,6 +817,138 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             expect(challenge).to.equal(nextChallengeToAnswer);
           });
         });
+    });
+
+    context('when the certification is a complementary certification', function () {
+      it('should call findActiveFlashCompatible with the complementary certification key', async function () {
+        // given
+        const v3CertificationCourse = domainBuilder.buildCertificationCourse({
+          version: AlgorithmEngineVersion.V3,
+        });
+        const assessment = domainBuilder.buildAssessment({
+          certificationCourseId: v3CertificationCourse.getId(),
+        });
+        const locale = 'fr-FR';
+
+        flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
+        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
+          .withArgs(v3CertificationCourse.getStartDate())
+          .resolves(flashAlgorithmConfiguration);
+
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+          .resolves([]);
+        certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves([]);
+
+        certificationCourseRepository.get
+          .withArgs({ id: assessment.certificationCourseId })
+          .resolves(v3CertificationCourse);
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
+          .withArgs(assessment.certificationCourseId, [])
+          .resolves(null);
+        sharedChallengeRepository.get.resolves();
+
+        const candidate = domainBuilder.certification.evaluation.buildCandidate({
+          subscriptionScope: Frameworks.PIX_PLUS_EDU_CPE,
+        });
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
+        sharedChallengeRepository.findActiveFlashCompatible.resolves([]);
+
+        // when
+        await catchErr(getNextChallenge)({
+          answerRepository,
+          assessment,
+          sessionManagementCertificationChallengeRepository,
+          certificationChallengeLiveAlertRepository,
+          certificationCourseRepository,
+          sharedChallengeRepository,
+          flashAlgorithmConfigurationRepository,
+          flashAlgorithmService,
+          locale,
+          pickChallengeService,
+          certificationCandidateRepository,
+          complementaryCertificationRepository,
+          certificationCandidateId,
+        });
+
+        // then
+        expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
+          locale,
+          date: candidate.reconciledAt,
+          complementaryCertificationKey: Frameworks.PIX_PLUS_EDU_CPE,
+        });
+      });
+    });
+
+    context('when the certification is a Pix core or double certification', function () {
+      it('should call findActiveFlashCompatible without complementary certification key', async function () {
+        // given
+        const v3CertificationCourse = domainBuilder.buildCertificationCourse({
+          version: AlgorithmEngineVersion.V3,
+        });
+        const assessment = domainBuilder.buildAssessment({
+          certificationCourseId: v3CertificationCourse.getId(),
+        });
+        const locale = 'fr-FR';
+
+        flashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({ maximumAssessmentLength: 1 });
+        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
+          .withArgs(v3CertificationCourse.getStartDate())
+          .resolves(flashAlgorithmConfiguration);
+
+        answerRepository.findByAssessmentExcludingChallengeIds
+          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+          .resolves([]);
+        certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves([]);
+
+        certificationCourseRepository.get
+          .withArgs({ id: assessment.certificationCourseId })
+          .resolves(v3CertificationCourse);
+        sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
+          .withArgs(assessment.certificationCourseId, [])
+          .resolves(null);
+        sharedChallengeRepository.get.resolves();
+
+        const candidate = domainBuilder.certification.evaluation.buildCandidate({
+          subscriptionScope: Frameworks.CORE,
+        });
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessment.id })
+          .resolves(candidate);
+
+        sharedChallengeRepository.findActiveFlashCompatible.resolves([]);
+
+        // when
+        await catchErr(getNextChallenge)({
+          answerRepository,
+          assessment,
+          sessionManagementCertificationChallengeRepository,
+          certificationChallengeLiveAlertRepository,
+          certificationCourseRepository,
+          sharedChallengeRepository,
+          flashAlgorithmConfigurationRepository,
+          flashAlgorithmService,
+          locale,
+          pickChallengeService,
+          certificationCandidateRepository,
+          complementaryCertificationRepository,
+          certificationCandidateId,
+        });
+
+        // then
+        expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
+          locale,
+          date: candidate.reconciledAt,
+          complementaryCertificationKey: undefined,
+        });
+      });
     });
   });
 });

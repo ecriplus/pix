@@ -130,7 +130,12 @@ const buildKnowledgeElementsFromAnswers = ({ answers, challenges, userId }) => {
 export const createSuccessfulCertificationCourse = async ({ sessionId, userId, certificationCourse }) => {
   const { challenges } = createLearningContent();
 
-  databaseBuilder.factory.buildCertificationCandidate({ sessionId, userId, reconciledAt: new Date('2020-01-01') });
+  const candidate = databaseBuilder.factory.buildCertificationCandidate({
+    sessionId,
+    userId,
+    reconciledAt: new Date('2020-01-01'),
+  });
+  databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
 
   const assessment = databaseBuilder.factory.buildAssessment({
     userId,

@@ -36,6 +36,13 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ * @typedef {flashAlgorithmService} FlashAlgorithmService
+ * @typedef {certificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ * @typedef {answerRepository} AnswerRepository
+ * @typedef {sharedChallengeRepository} SharedChallengeRepository
+ * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
+ * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {services} Services
  */
 const dependencies = {

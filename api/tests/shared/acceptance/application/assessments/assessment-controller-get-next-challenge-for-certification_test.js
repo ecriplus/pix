@@ -98,7 +98,12 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             userId,
             sessionId,
           }).id;
-          databaseBuilder.factory.buildCertificationCandidate({ ...user, userId: user.id, sessionId });
+          const candidate = databaseBuilder.factory.buildCertificationCandidate({
+            ...user,
+            userId: user.id,
+            sessionId,
+          });
+          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
           databaseBuilder.factory.buildAssessment({
             id: assessmentId,
             type: Assessment.types.CERTIFICATION,
@@ -219,7 +224,12 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
             userId,
             sessionId,
           }).id;
-          databaseBuilder.factory.buildCertificationCandidate({ ...user, userId: user.id, sessionId });
+          const candidate = databaseBuilder.factory.buildCertificationCandidate({
+            ...user,
+            userId: user.id,
+            sessionId,
+          });
+          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
           const assessment = databaseBuilder.factory.buildAssessment({
             id: assessmentId,
             type: Assessment.types.CERTIFICATION,

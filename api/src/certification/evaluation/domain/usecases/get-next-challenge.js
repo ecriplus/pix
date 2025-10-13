@@ -1,13 +1,12 @@
 /**
- * @typedef {import('../../../session-management/domain/usecases/index.js').AnswerRepository} AnswerRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').ChallengeRepository} ChallengeRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').ComplementaryCertificationRepository} ComplementaryCertificationRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
- * @typedef {import('../../../session-management/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').AnswerRepository} AnswerRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
  */
 
@@ -15,6 +14,7 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
@@ -25,8 +25,7 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {ChallengeRepository} params.sharedChallengeRepository
- * @param {ComplementaryCertificationRepository} params.complementaryCertificationRepository
+ * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -39,7 +38,6 @@ const getNextChallenge = async function ({
   certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
-  complementaryCertificationRepository,
   flashAlgorithmConfigurationRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
@@ -74,13 +72,8 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  let complementaryCertificationKey;
-  if (certificationCourse.complementaryCertificationCourse?.complementaryCertificationId) {
-    const complementaryCertification = await complementaryCertificationRepository.get({
-      id: certificationCourse.complementaryCertificationCourse.complementaryCertificationId,
-    });
-    complementaryCertificationKey = complementaryCertification.key;
-  }
+  const complementaryCertificationKey =
+    candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
 
   const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,
