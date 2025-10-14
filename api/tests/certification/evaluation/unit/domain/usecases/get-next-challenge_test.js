@@ -66,7 +66,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
+      challengesConfiguration = domainBuilder.certification.configuration.buildVersion().challengesConfiguration;
     });
 
     context('when there are challenges left to answer', function () {
