@@ -50,7 +50,7 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
 
       // when
       const result = await combinedCourseController.findParticipations(request, null, {
-        combinedCourseParticipationSerializer: combinedCourseParticipationSerializer,
+        combinedCourseParticipationSerializer,
       });
 
       // then
