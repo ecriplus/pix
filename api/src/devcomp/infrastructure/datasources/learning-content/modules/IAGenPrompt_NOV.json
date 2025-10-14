@@ -265,7 +265,7 @@
                     "id": "2",
                     "content": "<p>On parle à un logiciel d’IA générative comme on parle avec une autre personne.</p>",
                     "feedback": {
-                      "diagnosis": ""
+                      "diagnosis": "<p>En effet ! On fait des demandes en langage courant à un logiciel d’IA générative. On lui parle comme si c’était une autre personne.</p>"
                     }
                   },
                   {
