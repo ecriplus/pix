@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.233.0](https://github.com/1024pix/pix/compare/v5.232.0...v5.233.0) (2025-10-14)
+
+### :rocket: Amélioration
+
+- [#13879](https://github.com/1024pix/pix/pull/13879) Ajouter le script pour lister les modules et leur id dans l'API (PIX-19881) 
+- [#13881](https://github.com/1024pix/pix/pull/13881) corrections module phishingnov suite validation 
+- [#13886](https://github.com/1024pix/pix/pull/13886) Modifs description module phishing nov 
+
+### :rewind: Retour en arrière
+
+- [#13885](https://github.com/1024pix/pix/pull/13885) Revert "[FEATURE] Ajouter un délai sur le bouton "Suivant" du stepper horizontal (PIX-19424)."
+
+### :building_construction: Tech
+
+- [#13857](https://github.com/1024pix/pix/pull/13857) Ajouter une équipe en charge par défaut dans les seeds d'organisation (PIX-19846) 
+- [#13822](https://github.com/1024pix/pix/pull/13822) Supprimer lodash de pixOrga (PIX-19941) 
+- [#13872](https://github.com/1024pix/pix/pull/13872) Utiliser le helper de redimensionnement d'image dans le composant qab-card et dans le composant image (PIX-19993) 
+
+### :arrow_up: Montée de version
+
+- [#13871](https://github.com/1024pix/pix/pull/13871) Update dependency @1024pix/ember-testing-library to ^3.0.20 (certif) 
+- [#13880](https://github.com/1024pix/pix/pull/13880) Update dependency @1024pix/ember-testing-library to ^3.0.20 (mon-pix) 
+- [#13882](https://github.com/1024pix/pix/pull/13882) Update dependency @1024pix/eslint-plugin to ^2.1.12 (junior)
+
 # [5.232.0](https://github.com/1024pix/pix/compare/v5.231.0...v5.232.0) (2025-10-13)
 
 ### :rocket: Amélioration
