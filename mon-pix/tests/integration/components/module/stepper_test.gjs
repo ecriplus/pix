@@ -3,8 +3,8 @@ import Service from '@ember/service';
 // eslint-disable-next-line no-restricted-imports
 import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import ModulixStepper from 'mon-pix/components/module/component/stepper';
 import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/component/element';
+import ModulixStepper, { NEXT_STEP_BUTTON_DELAY } from 'mon-pix/components/module/component/stepper';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,6 +12,16 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | Stepper', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  let clock;
+
+  hooks.beforeEach(function () {
+    clock = sinon.useFakeTimers();
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
 
   module('When stepper is vertical', function () {
     module('A Stepper with 2 steps', function () {
@@ -75,16 +85,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
       });
 
-      module('When step contains answerable elements', function (hooks) {
-        let clock;
-
-        hooks.beforeEach(function () {
-          clock = sinon.useFakeTimers();
-        });
-
-        hooks.afterEach(function () {
-          clock.restore();
-        });
+      module('When step contains answerable elements', function () {
         module('When the only answerable element is unanswered', function () {
           test('should not display the Next button', async function (assert) {
             // given
@@ -193,6 +194,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             await clickByName('radio1');
             await clickByName(t('pages.modulix.buttons.activity.verify'));
+            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
             sinon.assert.calledOnce(onElementAnswerStub);
             assert.ok(true);
           });
@@ -395,6 +397,153 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .exists();
+          });
+        });
+      });
+
+      module('When step contains locally answerable elements', function () {
+        module('When the only answerable element is unanswered', function () {
+          test('should not display the Next button', async function (assert) {
+            // given
+            const steps = [
+              {
+                elements: [
+                  {
+                    id: '0c397035-a940-441f-8936-050db7f997af',
+                    instruction: 'Instruction',
+                    isAnswerable: true,
+                    proposals: [
+                      {
+                        id: '1',
+                        content: 'Des cookies maison tout chauds',
+                        feedback: {
+                          diagnosis:
+                            '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                        },
+                      },
+                      {
+                        id: '2',
+                        content: 'Des mini-éclairs au chocolat',
+                        feedback: {
+                          diagnosis:
+                            '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                        },
+                      },
+                    ],
+                    solution: '1',
+                    type: 'qcu-discovery',
+                  },
+                ],
+              },
+              {
+                elements: [
+                  {
+                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                    type: 'text',
+                    content: '<p>Text 2</p>',
+                    isAnswerable: false,
+                  },
+                ],
+              },
+            ];
+
+            const store = this.owner.lookup('service:store');
+            const passage = store.createRecord('passage');
+
+            // when
+            const screen = await render(
+              <template><ModulixStepper @direction="vertical" @passage={{passage}} @steps={{steps}} /></template>,
+            );
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+          });
+        });
+
+        module('When all answerable elements are answered', function () {
+          test('should display the next button', async function (assert) {
+            // given
+            const steps = [
+              {
+                elements: [
+                  {
+                    id: '0c397035-a940-441f-8936-050db7f997af',
+                    instruction: 'Instruction',
+                    isAnswerable: true,
+                    proposals: [
+                      {
+                        id: '1',
+                        content: 'Des cookies maison tout chauds',
+                        feedback: {
+                          diagnosis:
+                            '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                        },
+                      },
+                      {
+                        id: '2',
+                        content: 'Des mini-éclairs au chocolat',
+                        feedback: {
+                          diagnosis:
+                            '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                        },
+                      },
+                    ],
+                    solution: '1',
+                    type: 'qcu-discovery',
+                  },
+                ],
+              },
+              {
+                elements: [
+                  {
+                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                    type: 'text',
+                    content: '<p>Text 2</p>',
+                    isAnswerable: false,
+                  },
+                ],
+              },
+            ];
+
+            const getLastCorrectionForElementStub = sinon.stub();
+            const onElementAnswerStub = sinon.stub();
+            const store = this.owner.lookup('service:store');
+            const passage = store.createRecord('passage');
+            const passageEventService = this.owner.lookup('service:passage-events');
+            sinon.stub(passageEventService, 'record');
+
+            // when
+            const screen = await render(
+              <template>
+                <ModulixStepper
+                  @direction="vertical"
+                  @passage={{passage}}
+                  @steps={{steps}}
+                  @onElementAnswer={{onElementAnswerStub}}
+                  @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
+                />
+              </template>,
+            );
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+
+            // when
+            await clickByName('Des mini-éclairs au chocolat');
+            passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
+            assert
+              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .exists();
           });
         });
@@ -808,134 +957,133 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           }),
         });
         assert.dom(title).exists();
-        await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
-        assert
-          .dom(
-            screen.getByRole('paragraph', {
-              name: t('pages.modulix.stepper.step.aria-label', {
-                currentStep: 2,
-                totalSteps: 2,
-              }),
-            }),
-          )
-          .exists();
       });
 
-      test('should display the first step with the button Next', async function (assert) {
-        // given
-        const steps = [
-          {
-            elements: [
-              {
-                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                type: 'text',
-                content: '<p>Text 1</p>',
-              },
-            ],
-          },
-          {
-            elements: [
-              {
-                id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                type: 'text',
-                content: '<p>Text 2</p>',
-              },
-            ],
-          },
-        ];
+      module('on the first step', function () {
+        test('should display disabled controls buttons', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
 
-        // when
-        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+          // when
+          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
 
-        // then
-        assert
-          .dom(
-            screen.getByRole('group', {
-              name: t('pages.modulix.stepper.step.aria-label', {
-                currentStep: 1,
-                totalSteps: 2,
+          // then
+          assert
+            .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
+            .hasAria('disabled', 'true');
+          assert
+            .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
+            .hasAria('disabled', 'true');
+        });
+
+        test('should not be able to navigate to negative step', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
+
+          // when
+          const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+
+          // then
+          await click(
+            screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
+          );
+          assert
+            .dom(
+              screen.getByRole('group', {
+                name: t('pages.modulix.stepper.step.aria-label', {
+                  currentStep: 1,
+                  totalSteps: 2,
+                }),
               }),
-            }),
-          )
-          .exists();
-        assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+            )
+            .exists();
+        });
       });
 
-      test('should display disabled controls buttons', async function (assert) {
-        // given
-        const steps = [
-          {
-            elements: [
-              {
-                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                type: 'text',
-                content: '<p>Text 1</p>',
-              },
-            ],
-          },
-          {
-            elements: [
-              {
-                id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                type: 'text',
-                content: '<p>Text 2</p>',
-              },
-            ],
-          },
-        ];
+      module('on the last step', function () {
+        test('should not display the Next button', async function (assert) {
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                },
+              ],
+            },
+          ];
 
-        // when
-        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+          function stepperIsFinished() {}
 
-        // then
-        assert
-          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
-          .hasAria('disabled', 'true');
-        assert
-          .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.next.ariaLabel') }))
-          .hasAria('disabled', 'true');
-      });
+          function onStepperNextStepStub() {}
 
-      test('should not be able to navigate to negative step', async function (assert) {
-        // given
-        const steps = [
-          {
-            elements: [
-              {
-                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
-                type: 'text',
-                content: '<p>Text 1</p>',
-              },
-            ],
-          },
-          {
-            elements: [
-              {
-                id: '768441a5-a7d6-4987-ada9-7253adafd842',
-                type: 'text',
-                content: '<p>Text 2</p>',
-              },
-            ],
-          },
-        ];
+          const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @steps={{steps}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+              />
+            </template>,
+          );
 
-        // when
-        const screen = await render(<template><ModulixStepper @steps={{steps}} @direction="horizontal" /></template>);
+          // when
+          await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
 
-        // then
-        await click(
-          screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
-        );
-        assert
-          .dom(
-            screen.getByRole('group', {
-              name: t('pages.modulix.stepper.step.aria-label', {
-                currentStep: 1,
-                totalSteps: 2,
-              }),
-            }),
-          )
-          .exists();
+          //then
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+            .doesNotExist();
+        });
       });
 
       module('When step contains answerable elements', function () {
@@ -1047,21 +1195,13 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             await clickByName('radio1');
             await clickByName(t('pages.modulix.buttons.activity.verify'));
+            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
             sinon.assert.calledOnce(onElementAnswerStub);
             assert.ok(true);
           });
         });
 
-        module('When we retry an answerable element', function (hooks) {
-          let clock;
-
-          hooks.beforeEach(function () {
-            clock = sinon.useFakeTimers();
-          });
-
-          hooks.afterEach(function () {
-            clock.restore();
-          });
+        module('When we retry an answerable element', function () {
           test('should call the onElementRetry action', async function (assert) {
             // given
             const passageEventService = this.owner.lookup('service:passage-events');
@@ -1232,16 +1372,18 @@ module('Integration | Component | Module | Stepper', function (hooks) {
               },
             ];
 
-            function getLastCorrectionForElementStub() {}
-
+            function getLastCorrectionForElementStub(element) {
+              if (element.id === 'd0690f26-978c-41c3-9a21-da931857739c') {
+                return Symbol('Correction');
+              } else {
+                return undefined;
+              }
+            }
+            const onElementAnswerStub = sinon.stub();
             const store = this.owner.lookup('service:store');
             const passage = store.createRecord('passage');
-            const correction = store.createRecord('correction-response');
-            store.createRecord('element-answer', {
-              elementId: 'd0690f26-978c-41c3-9a21-da931857739c',
-              correction,
-              passage,
-            });
+            const passageEventService = this.owner.lookup('service:passage-events');
+            sinon.stub(passageEventService, 'record');
 
             // when
             const screen = await render(
@@ -1250,6 +1392,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                   @direction="horizontal"
                   @passage={{passage}}
                   @steps={{steps}}
+                  @onElementAnswer={{onElementAnswerStub}}
                   @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
                 />
               </template>,
@@ -1258,8 +1401,221 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             // then
             assert
               .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+
+            // when
+            await clickByName('radio2');
+            await click(screen.getByRole('button', { name: 'Vérifier ma réponse' }));
+            passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
+            assert
+              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
               .exists();
           });
+        });
+      });
+
+      module('When step contains locally answerable elements', function () {
+        module('When the only answerable element is unanswered', function () {
+          test('should not display the Next button', async function (assert) {
+            // given
+            const steps = [
+              {
+                elements: [
+                  {
+                    id: '0c397035-a940-441f-8936-050db7f997af',
+                    instruction: 'Instruction',
+                    isAnswerable: true,
+                    proposals: [
+                      {
+                        id: '1',
+                        content: 'Des cookies maison tout chauds',
+                        feedback: {
+                          diagnosis:
+                            '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                        },
+                      },
+                      {
+                        id: '2',
+                        content: 'Des mini-éclairs au chocolat',
+                        feedback: {
+                          diagnosis:
+                            '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                        },
+                      },
+                    ],
+                    solution: '1',
+                    type: 'qcu-discovery',
+                  },
+                ],
+              },
+              {
+                elements: [
+                  {
+                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                    type: 'text',
+                    content: '<p>Text 2</p>',
+                    isAnswerable: false,
+                  },
+                ],
+              },
+            ];
+
+            const store = this.owner.lookup('service:store');
+            const passage = store.createRecord('passage');
+
+            // when
+            const screen = await render(
+              <template><ModulixStepper @direction="horizontal" @passage={{passage}} @steps={{steps}} /></template>,
+            );
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+          });
+        });
+
+        module('When all answerable elements are answered', function () {
+          test('should display the next button', async function (assert) {
+            // given
+            const steps = [
+              {
+                elements: [
+                  {
+                    id: '0c397035-a940-441f-8936-050db7f997af',
+                    instruction: 'Instruction',
+                    isAnswerable: true,
+                    proposals: [
+                      {
+                        id: '1',
+                        content: 'Des cookies maison tout chauds',
+                        feedback: {
+                          diagnosis:
+                            '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                        },
+                      },
+                      {
+                        id: '2',
+                        content: 'Des mini-éclairs au chocolat',
+                        feedback: {
+                          diagnosis:
+                            '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                        },
+                      },
+                    ],
+                    solution: '1',
+                    type: 'qcu-discovery',
+                  },
+                ],
+              },
+              {
+                elements: [
+                  {
+                    id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                    type: 'text',
+                    content: '<p>Text 2</p>',
+                    isAnswerable: false,
+                  },
+                ],
+              },
+            ];
+
+            const getLastCorrectionForElementStub = sinon.stub();
+            const onElementAnswerStub = sinon.stub();
+            const store = this.owner.lookup('service:store');
+            const passage = store.createRecord('passage');
+            const passageEventService = this.owner.lookup('service:passage-events');
+            sinon.stub(passageEventService, 'record');
+
+            // when
+            const screen = await render(
+              <template>
+                <ModulixStepper
+                  @direction="horizontal"
+                  @passage={{passage}}
+                  @steps={{steps}}
+                  @onElementAnswer={{onElementAnswerStub}}
+                  @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
+                />
+              </template>,
+            );
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+
+            // when
+            await clickByName('Des mini-éclairs au chocolat');
+            passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+
+            // then
+            assert
+              .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .doesNotExist();
+            await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
+            assert
+              .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+              .exists();
+          });
+        });
+      });
+
+      module('A Stepper with non answerable elements', function () {
+        test('should display the next button', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: 'd0690f26-978c-41c3-9a21-da931857739c',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                  isAnswerable: false,
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                  type: 'text',
+                  content: '<p>Text 2</p>',
+                  isAnswerable: false,
+                },
+              ],
+            },
+          ];
+
+          const store = this.owner.lookup('service:store');
+          const passage = store.createRecord('passage');
+          const passageEventService = this.owner.lookup('service:passage-events');
+          sinon.stub(passageEventService, 'record');
+          function stepperIsFinished() {}
+
+          function onStepperNextStepStub() {}
+
+          // when
+          const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @passage={{passage}}
+                @steps={{steps}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
         });
       });
 
@@ -1502,9 +1858,10 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
             await click(
               screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }),
-            ),
-              // then
-              assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
+            );
+
+            // then
+            assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
             assert
               .dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.controls.previous.ariaLabel') }))
               .isFocused();
@@ -1614,15 +1971,21 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             });
           });
         });
+      });
+    });
 
-        test('should not display the Next button when there are no steps left', async function (assert) {
+    module('A Stepper with multiple steps', function () {
+      module('A Stepper with non answerable elements', function () {
+        test('should display the next button in all steps except the last one', async function (assert) {
+          // given
           const steps = [
             {
               elements: [
                 {
-                  id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                  id: 'd0690f26-978c-41c3-9a21-da931857739c',
                   type: 'text',
                   content: '<p>Text 1</p>',
+                  isAnswerable: false,
                 },
               ],
             },
@@ -1632,19 +1995,36 @@ module('Integration | Component | Module | Stepper', function (hooks) {
                   id: '768441a5-a7d6-4987-ada9-7253adafd842',
                   type: 'text',
                   content: '<p>Text 2</p>',
+                  isAnswerable: false,
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a766-4987-ada9-7777adafd842',
+                  type: 'text',
+                  content: '<p>Text 3</p>',
+                  isAnswerable: false,
                 },
               ],
             },
           ];
 
+          const store = this.owner.lookup('service:store');
+          const passage = store.createRecord('passage');
+          const passageEventService = this.owner.lookup('service:passage-events');
+          sinon.stub(passageEventService, 'record');
           function stepperIsFinished() {}
 
           function onStepperNextStepStub() {}
 
+          // when
           const screen = await render(
             <template>
               <ModulixStepper
                 @direction="horizontal"
+                @passage={{passage}}
                 @steps={{steps}}
                 @stepperIsFinished={{stepperIsFinished}}
                 @onStepperNextStep={{onStepperNextStepStub}}
@@ -1652,10 +2032,193 @@ module('Integration | Component | Module | Stepper', function (hooks) {
             </template>,
           );
 
-          // when
-          await clickByName(t('pages.modulix.buttons.stepper.next.ariaLabel'));
+          // then
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
 
-          //then
+          // when
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+
+          // then
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+
+          // when
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+
+          // then
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+            .doesNotExist();
+        });
+      });
+
+      module('A Stepper with answerable and non answerable elements', function () {
+        test('should display the next button at specific times', async function (assert) {
+          // given
+          const steps = [
+            {
+              elements: [
+                {
+                  id: '0c397035-a922-441f-2222-050db7f997ff',
+                  instruction: 'Instruction',
+                  isAnswerable: true,
+                  proposals: [
+                    { id: '1', content: 'select1' },
+                    { id: '2', content: 'select2' },
+                    { id: '3', content: 'select3' },
+                  ],
+                  feedbacks: {
+                    valid: 'Bravo',
+                    invalid: 'Pas bravo',
+                  },
+                  solutions: ['1', '3'],
+                  type: 'qcm',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '768441a5-a766-4987-ada9-7777adafd842',
+                  instruction: 'Instruction',
+                  proposals: [
+                    { id: '1', content: 'radio1' },
+                    { id: '2', content: 'radio2' },
+                  ],
+                  isAnswerable: true,
+                  type: 'qcu',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: 'd0690f26-978c-41c3-9a21-da931857739c',
+                  type: 'text',
+                  content: '<p>Text 1</p>',
+                  isAnswerable: false,
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '0c397035-a940-441f-8936-050db7f997af',
+                  instruction: 'Instruction',
+                  isAnswerable: true,
+                  proposals: [
+                    {
+                      id: '1',
+                      content: 'Des cookies maison tout chauds',
+                      feedback: {
+                        diagnosis:
+                          '<p>Il n’y a rien de plus réconfortant que des cookies tout juste sortis du four !</p>',
+                      },
+                    },
+                    {
+                      id: '2',
+                      content: 'Des mini-éclairs au chocolat',
+                      feedback: {
+                        diagnosis:
+                          '<p>Les éclairs, c’est un peu l’élégance à l’état pur. Légers, crémeux, et surtout irrésistibles.</p>',
+                      },
+                    },
+                  ],
+                  solution: '1',
+                  type: 'qcu-discovery',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: 'd0690f26-978c-41c3-9a21-da123456789c',
+                  instruction: 'Instruction',
+                  proposals: [
+                    {
+                      id: '1',
+                      content: 'prop1',
+                      feedback: {
+                        diagnosis: '<p>Oui.</p>',
+                      },
+                    },
+                    {
+                      id: '2',
+                      content: 'prop2',
+                      feedback: {
+                        diagnosis: '<p>Non.</p>',
+                      },
+                    },
+                  ],
+                  type: 'qcu-declarative',
+                },
+              ],
+            },
+          ];
+
+          function getLastCorrectionForElementStub() {
+            return Symbol('Correction');
+          }
+          const store = this.owner.lookup('service:store');
+          const passage = store.createRecord('passage');
+          const passageEventService = this.owner.lookup('service:passage-events');
+          sinon.stub(passageEventService, 'record');
+          const onElementAnswerStub = sinon.stub();
+
+          function stepperIsFinished() {}
+
+          function onStepperNextStepStub() {}
+
+          function updateSkipButton() {}
+          passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+
+          // when
+          const screen = await render(
+            <template>
+              <ModulixStepper
+                @direction="horizontal"
+                @passage={{passage}}
+                @steps={{steps}}
+                @onElementAnswer={{onElementAnswerStub}}
+                @stepperIsFinished={{stepperIsFinished}}
+                @onStepperNextStep={{onStepperNextStepStub}}
+                @getLastCorrectionForElement={{getLastCorrectionForElementStub}}
+                @updateSkipButton={{updateSkipButton}}
+              />
+            </template>,
+          );
+
+          // then
+          await clickByName('select1');
+          await clickByName('select3');
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.activity.verify') }));
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+
+          passage.getLastCorrectionForElement = () => {};
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+          await clickByName('radio1');
+          passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.activity.verify') }));
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+            .doesNotExist();
+          await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+
+          passage.getLastCorrectionForElement = () => {};
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+          await clickByName('Des mini-éclairs au chocolat');
+          passage.getLastCorrectionForElement = getLastCorrectionForElementStub;
+          assert
+            .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
+            .doesNotExist();
+          await clock.tickAsync(NEXT_STEP_BUTTON_DELAY + 100);
+          assert.dom(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') })).exists();
+
+          await click(screen.getByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }));
+          await clickByName('prop1');
           assert
             .dom(screen.queryByRole('button', { name: t('pages.modulix.buttons.stepper.next.ariaLabel') }))
             .doesNotExist();

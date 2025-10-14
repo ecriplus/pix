@@ -12,10 +12,16 @@ import Step from 'mon-pix/components/module/component/step';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import { inc } from 'mon-pix/helpers/inc';
+import { TrackedSet } from 'tracked-built-ins';
 
 import didInsert from '../../../modifiers/modifier-did-insert';
+import { VERIFY_RESPONSE_DELAY } from './element';
+
+export const NEXT_STEP_BUTTON_DELAY = VERIFY_RESPONSE_DELAY + 500;
 
 export default class ModulixStepper extends Component {
+  @tracked locallyAnsweredElements = new TrackedSet();
+
   @service modulixAutoScroll;
   @service modulixPreviewMode;
 
@@ -24,10 +30,6 @@ export default class ModulixStepper extends Component {
   );
 
   @tracked stepsToDisplay = this._initialStepsToDisplay;
-  get _initialStepsToDisplay() {
-    const firstDisplayableStep = this.displayableSteps[0];
-    return this.modulixPreviewMode.isEnabled ? this.displayableSteps : [firstDisplayableStep];
-  }
 
   @tracked displayedStepIndex = 0;
 
@@ -35,6 +37,12 @@ export default class ModulixStepper extends Component {
   preventScrollAndFocus = false;
 
   @tracked shouldAppearToRight = false;
+  @tracked shouldDisplayHorizontalNextButton = this.shouldDisplayNextButton;
+
+  get _initialStepsToDisplay() {
+    const firstDisplayableStep = this.displayableSteps[0];
+    return this.modulixPreviewMode.isEnabled ? this.displayableSteps : [firstDisplayableStep];
+  }
 
   @action
   stepIsActive(index) {
@@ -80,6 +88,8 @@ export default class ModulixStepper extends Component {
     const nextStep = this.displayableSteps[currentStepPosition];
     this.stepsToDisplay = [...this.stepsToDisplay, nextStep];
 
+    this.shouldDisplayHorizontalNextButton = this.shouldDisplayNextButton;
+
     if (!this.hasNextStep) {
       this.args.stepperIsFinished();
     }
@@ -121,17 +131,20 @@ export default class ModulixStepper extends Component {
 
   get allAnswerableElementsAreAnsweredInCurrentStep() {
     return this.answerableElementsInCurrentStep.every((element) => {
-      return this.args.passage.getLastCorrectionForElement(element) !== undefined;
+      return (
+        this.args.passage.getLastCorrectionForElement(element) !== undefined ||
+        this.locallyAnsweredElements.has(element.id)
+      );
     });
   }
 
-  get shouldDisplayHorizontalNextButton() {
+  get shouldDisplayNextButton() {
     return this.hasNextStep && this.allAnswerableElementsAreAnsweredInCurrentStep;
   }
 
   @action
   shouldDisplayVerticalNextButton(currentIndex) {
-    return this.shouldDisplayHorizontalNextButton && this.stepIsActive(currentIndex);
+    return this.shouldDisplayNextButton && this.stepIsActive(currentIndex);
   }
 
   get totalSteps() {
@@ -158,6 +171,25 @@ export default class ModulixStepper extends Component {
     return this.isHorizontalDirection
       ? ModuleGrain.STEPPER_DIRECTION.HORIZONTAL
       : ModuleGrain.STEPPER_DIRECTION.VERTICAL;
+  }
+
+  @action
+  async onElementAnswer(...args) {
+    await this.waitFor(NEXT_STEP_BUTTON_DELAY);
+
+    args.forEach((elementAnswer) => {
+      if (ModuleGrain.LOCALLY_ANSWERABLE_ELEMENTS.includes(elementAnswer.element.type)) {
+        this.locallyAnsweredElements.add(elementAnswer.element.id);
+      }
+    });
+
+    await this.args.onElementAnswer(...args);
+
+    this.shouldDisplayHorizontalNextButton = this.shouldDisplayNextButton;
+  }
+
+  async waitFor(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
   }
 
   <template>
@@ -221,7 +253,7 @@ export default class ModulixStepper extends Component {
                 @step={{step}}
                 @currentStep={{inc index}}
                 @totalSteps={{this.totalSteps}}
-                @onElementAnswer={{@onElementAnswer}}
+                @onElementAnswer={{this.onElementAnswer}}
                 @onElementRetry={{@onElementRetry}}
                 @getLastCorrectionForElement={{@getLastCorrectionForElement}}
                 @isActive={{this.stepIsActive index}}
@@ -247,7 +279,7 @@ export default class ModulixStepper extends Component {
               @step={{step}}
               @currentStep={{inc index}}
               @totalSteps={{this.totalSteps}}
-              @onElementAnswer={{@onElementAnswer}}
+              @onElementAnswer={{this.onElementAnswer}}
               @onElementRetry={{@onElementRetry}}
               @getLastCorrectionForElement={{@getLastCorrectionForElement}}
               @isActive={{this.stepIsActive index}}
