@@ -203,6 +203,7 @@ import { buildAssessmentResult as buildCertificationScoringAssessmentResult } fr
 import { buildCertificationAssessmentHistory } from './certification/scoring/build-certification-assessment-history.js';
 import { buildCertificationChallengeCapacity } from './certification/scoring/build-certification-challenge-capacity.js';
 import { buildChallengeCalibration } from './certification/scoring/build-challenge-calibration.js';
+import { buildAllowedCertificationCenterAccess as buildSessionManagementAllowedCertificationCenterAccess } from './certification/session-management/build-allowed-certification-center-access.js';
 import { buildCertificationCandidate as buildSessionManagementCandidate } from './certification/session-management/build-certification-candidate.js';
 import { buildCertificationDetails } from './certification/session-management/build-certification-details.js';
 import { buildCertificationSessionComplementaryCertification } from './certification/session-management/build-certification-session-complementary-certification.js';
@@ -278,6 +279,7 @@ const certification = {
     buildPixPlusCertificationCourse,
   },
   sessionManagement: {
+    buildAllowedCertificationCenterAccess: buildSessionManagementAllowedCertificationCenterAccess,
     buildCertificationSessionComplementaryCertification,
     buildSession: buildSessionManagement,
     buildCertificationCandidate: buildSessionManagementCandidate,

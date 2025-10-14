@@ -3,6 +3,7 @@
  * @typedef {import('./index.js').InvigilatorSessionRepository} InvigilatorSessionRepository
  * @typedef {import('./index.js').SupervisorAccessRepository} SupervisorAccessRepository
  * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
+ * @typedef {import('./index.js').CertificationCenterAccessRepository} CertificationCenterAccessRepository
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -21,6 +22,7 @@ export const superviseSession = withTransaction(
    * @param {InvigilatorSessionRepository} params.invigilatorSessionRepository
    * @param {SupervisorAccessRepository} params.supervisorAccessRepository
    * @param {CertificationCenterRepository} params.certificationCenterRepository
+   * @param {CertificationCenterAccessRepository} params.certificationCenterAccessRepository
    */
   async ({
     sessionId,
@@ -29,6 +31,7 @@ export const superviseSession = withTransaction(
     invigilatorSessionRepository,
     supervisorAccessRepository,
     certificationCenterRepository,
+    certificationCenterAccessRepository,
   }) => {
     const session = await invigilatorSessionRepository.get({ id: sessionId });
 
@@ -36,6 +39,26 @@ export const superviseSession = withTransaction(
 
     if (session.isNotAccessible) {
       throw new SessionNotAccessible();
+    }
+
+    const certificationCenterAccess = await certificationCenterAccessRepository.getCertificationCenterAccess({
+      certificationCenterId: certificationCenter.id,
+    });
+
+    if (certificationCenterAccess.isAccessBlockedCollege) {
+      throw new SessionNotAccessible(certificationCenterAccess.pixCertifScoBlockedAccessDateCollege);
+    }
+
+    if (certificationCenterAccess.isAccessBlockedLycee) {
+      throw new SessionNotAccessible(certificationCenterAccess.pixCertifScoBlockedAccessDateLycee);
+    }
+
+    if (certificationCenterAccess.isAccessBlockedAEFE) {
+      throw new SessionNotAccessible(certificationCenterAccess.pixCertifScoBlockedAccessDateLycee);
+    }
+
+    if (certificationCenterAccess.isAccessBlockedAgri) {
+      throw new SessionNotAccessible(certificationCenterAccess.pixCertifScoBlockedAccessDateLycee);
     }
 
     if (!session.checkPassword(invigilatorPassword)) {

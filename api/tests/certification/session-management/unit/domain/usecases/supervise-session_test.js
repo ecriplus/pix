@@ -12,6 +12,7 @@ describe('Unit | UseCase | supervise-session', function () {
   let invigilatorSessionRepository;
   let supervisorAccessRepository;
   let certificationCenterRepository;
+  let certificationCenterAccessRepository;
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -25,6 +26,9 @@ describe('Unit | UseCase | supervise-session', function () {
     };
     certificationCenterRepository = {
       getBySessionId: sinon.stub(),
+    };
+    certificationCenterAccessRepository = {
+      getCertificationCenterAccess: sinon.stub(),
     };
   });
 
@@ -41,6 +45,9 @@ describe('Unit | UseCase | supervise-session', function () {
 
     invigilatorSessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves(certificationCenter);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess(),
+    );
 
     // when
     const error = await catchErr(superviseSession)({
@@ -50,6 +57,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorSessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
@@ -69,6 +77,9 @@ describe('Unit | UseCase | supervise-session', function () {
 
     invigilatorSessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves(certificationCenter);
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess(),
+    );
 
     // when
     const error = await catchErr(superviseSession)({
@@ -78,6 +89,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorSessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
@@ -95,6 +107,9 @@ describe('Unit | UseCase | supervise-session', function () {
 
     invigilatorSessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves({ archivedAt: new Date(), archivedBy: 1234 });
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess(),
+    );
 
     // when
     const error = await catchErr(superviseSession)({
@@ -104,10 +119,45 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorSessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
     expect(error).to.be.an.instanceOf(CertificationCenterIsArchivedError);
+  });
+
+  context('when certification center has SCO blocked access', function () {
+    it('should throw SessionNotAccessible when college is blocked', async function () {
+      // given
+      const sessionId = 123;
+      const certificationCenterId = 456;
+      const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
+      const userId = 434;
+      const certificationCenter = domainBuilder.buildCertificationCenter({ id: certificationCenterId });
+      const blockedCertificationCenterAccess =
+        domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess({
+          isAccessBlockedCollege: true,
+          pixCertifScoBlockedAccessDateCollege: '2021-01-01',
+        });
+
+      invigilatorSessionRepository.get.resolves(session);
+      certificationCenterRepository.getBySessionId.resolves(certificationCenter);
+      certificationCenterAccessRepository.getCertificationCenterAccess.resolves(blockedCertificationCenterAccess);
+
+      // when
+      const error = await catchErr(superviseSession)({
+        sessionId,
+        invigilatorPassword: session.invigilatorPassword,
+        userId,
+        invigilatorSessionRepository,
+        supervisorAccessRepository,
+        certificationCenterRepository,
+        certificationCenterAccessRepository,
+      });
+
+      // then
+      expect(error).to.be.an.instanceOf(SessionNotAccessible);
+    });
   });
 
   it('should create a supervisor access', async function () {
@@ -121,6 +171,9 @@ describe('Unit | UseCase | supervise-session', function () {
 
     invigilatorSessionRepository.get.resolves(session);
     certificationCenterRepository.getBySessionId.resolves({ archivedAt: null, archivedBy: null });
+    certificationCenterAccessRepository.getCertificationCenterAccess.resolves(
+      domainBuilder.certification.sessionManagement.buildAllowedCertificationCenterAccess(),
+    );
 
     // when
     await superviseSession({
@@ -130,6 +183,7 @@ describe('Unit | UseCase | supervise-session', function () {
       invigilatorSessionRepository,
       supervisorAccessRepository,
       certificationCenterRepository,
+      certificationCenterAccessRepository,
     });
 
     // then
