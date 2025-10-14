@@ -16,7 +16,7 @@ import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
-describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
+describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
   describe('CombinedCourseDetails', function () {
     let id, organizationId, name, code, questId;
     beforeEach(function () {
@@ -113,6 +113,113 @@ describe('Quest | Unit | Domain | Models | CombinedCourse ', function () {
 
         // then
         expect(moduleIds).to.deep.equal([moduleId]);
+      });
+    });
+
+    describe('#participationDetails', function () {
+      it('should return a participation details with correct items count', function () {
+        // given
+        const participation = new CombinedCourseParticipation({
+          id: 123,
+          firstName: 'Bob',
+          lastName: 'Lapointe',
+          status: CombinedCourseParticipationStatuses.STARTED,
+          updatedAt: new Date('2024-12-10'),
+          createdAt: new Date('2024-12-09'),
+        });
+
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          {},
+          participation,
+        );
+        const inProgressCampaignItem = new CombinedCourseItem({
+          id: 1,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+          isCompleted: false,
+        });
+        const doneCampaignItem = new CombinedCourseItem({
+          id: 2,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+          isCompleted: true,
+        });
+        const inProgressModuleItem = new CombinedCourseItem({
+          id: 3,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          isCompleted: false,
+        });
+        const doneModuleItem = new CombinedCourseItem({
+          id: 4,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          isCompleted: true,
+        });
+
+        combinedCourse.items = [doneCampaignItem, doneModuleItem, inProgressCampaignItem, inProgressModuleItem];
+
+        // then
+        expect(combinedCourse.participationDetails).deep.equal({
+          id: participation.id,
+          firstName: participation.firstName,
+          lastName: participation.lastName,
+          status: participation.status,
+          createdAt: participation.createdAt,
+          updatedAt: participation.updatedAt,
+          hasFormationItem: false,
+          nbCampaigns: 2,
+          nbModules: 2,
+          nbModulesCompleted: 1,
+          nbCampaignsCompleted: 1,
+        });
+      });
+
+      it('should return hasFormationItems if a formation item is present', function () {
+        // given
+        const participation = new CombinedCourseParticipation({
+          id: 123,
+          firstName: 'Bob',
+          lastName: 'Lapointe',
+          status: CombinedCourseParticipationStatuses.STARTED,
+          updatedAt: new Date('2024-12-10'),
+          createdAt: new Date('2024-12-09'),
+        });
+
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          {},
+          participation,
+        );
+        const inProgressCampaignItem = new CombinedCourseItem({
+          id: 1,
+          type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+          isCompleted: false,
+        });
+        const inProgressModuleItem = new CombinedCourseItem({
+          id: 2,
+          type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          isCompleted: false,
+        });
+        const formationItem = new CombinedCourseItem({
+          id: 3,
+          type: COMBINED_COURSE_ITEM_TYPES.FORMATION,
+          isCompleted: false,
+        });
+
+        combinedCourse.items = [inProgressCampaignItem, formationItem, inProgressModuleItem];
+
+        // then
+        expect(combinedCourse.participationDetails).deep.equal({
+          id: participation.id,
+          firstName: participation.firstName,
+          lastName: participation.lastName,
+          status: participation.status,
+          createdAt: participation.createdAt,
+          updatedAt: participation.updatedAt,
+          hasFormationItem: true,
+          nbCampaigns: 1,
+          nbModules: 2,
+          nbModulesCompleted: 0,
+          nbCampaignsCompleted: 0,
+        });
       });
     });
 
