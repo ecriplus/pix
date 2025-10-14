@@ -258,7 +258,7 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d’IA générative en langage informatique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
+                      "diagnosis": "<p>Eh non ! On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
                     }
                   },
                   {
@@ -272,7 +272,7 @@
                     "id": "3",
                     "content": "<p>On parle à un logiciel d’IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
+                      "diagnosis": "<p>Eh non ! On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
                     }
                   }
                 ],
