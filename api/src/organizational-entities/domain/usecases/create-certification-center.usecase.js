@@ -1,4 +1,4 @@
-import { ComplementaryCertificationHabilitation } from '../../../shared/domain/models/ComplementaryCertificationHabilitation.js';
+import { ComplementaryCertificationHabilitation } from '../model/ComplementaryCertificationHabilitation.js';
 import * as certificationCenterCreationValidator from '../validators/certification-center-creation.validator.js';
 
 /**
