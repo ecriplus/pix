@@ -4,10 +4,18 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 
+import { resizeImage } from '../../../../utils/resize-image';
+
 export default class ModulixFlashcardsCard extends Component {
+  static MAX_HEIGHT = 170;
+
   get currentSide() {
     const side = this.args.displayedSideName;
     return this.args.card[side];
+  }
+
+  get dimensions() {
+    return resizeImage(this.currentSide.image.information, { MAX_HEIGHT: ModulixFlashcardsCard.MAX_HEIGHT });
   }
 
   <template>
@@ -20,8 +28,8 @@ export default class ModulixFlashcardsCard extends Component {
           <div class="element-flashcards-card__image">
             <img
               src={{this.currentSide.image.url}}
-              width={{this.currentSide.image.information.width}}
-              height={{this.currentSide.image.information.height}}
+              width={{this.dimensions.width}}
+              height={{this.dimensions.height}}
               alt=""
             />
           </div>
