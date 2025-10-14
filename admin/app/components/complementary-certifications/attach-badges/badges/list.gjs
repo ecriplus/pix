@@ -125,7 +125,7 @@ export default class List extends Component {
                   <PixInput
                     @id="{{row.id}}-certificate-image"
                     name="certificate-image"
-                    placeholder="Ex : https://images.pix.fr/..."
+                    placeholder="Ex : https://assets.pix.org/..."
                     required="true"
                     aria-required="true"
                     @screenReaderOnly={{true}}
@@ -175,7 +175,7 @@ export default class List extends Component {
                   <PixInput
                     @id="{{row.id}}-certificate-sticker"
                     name="certificate-sticker"
-                    placeholder="Ex : https://images.pix.fr/..."
+                    placeholder="Ex : https://assets.pix.org/..."
                     required="true"
                     aria-required="true"
                     @screenReaderOnly={{true}}
