@@ -1,4 +1,4 @@
-import { UserOrgaSettings } from '../../../../../../src/shared/domain/models/UserOrgaSettings.js';
+import { UserOrgaSettings } from '../../../../../../src/team/domain/models/UserOrgaSettings.js';
 import * as serializer from '../../../../../../src/team/infrastructure/serializers/jsonapi/user-orga-settings.serializer.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 

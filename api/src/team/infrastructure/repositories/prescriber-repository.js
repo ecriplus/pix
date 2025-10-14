@@ -4,7 +4,7 @@ import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
 import { config } from '../../../shared/config.js';
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { Membership } from '../../../shared/domain/models/Membership.js';
-import { UserOrgaSettings } from '../../../shared/domain/models/UserOrgaSettings.js';
+import { UserOrgaSettings } from '../../domain/models/UserOrgaSettings.js';
 import { Prescriber } from '../../domain/read-models/Prescriber.js';
 
 /**

@@ -2,8 +2,8 @@ import { knex } from '../../../../db/knex-database-connection.js';
 import { User } from '../../../identity-access-management/domain/models/User.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { UserOrgaSettingsCreationError } from '../../../shared/domain/errors.js';
-import { UserOrgaSettings } from '../../../shared/domain/models/UserOrgaSettings.js';
 import * as knexUtils from '../../../shared/infrastructure/utils/knex-utils.js';
+import { UserOrgaSettings } from '../../domain/models/UserOrgaSettings.js';
 
 /**
  * @param {string} userId

@@ -1,7 +1,7 @@
 import { User } from '../../../../src/identity-access-management/domain/models/User.js';
 import { Organization } from '../../../../src/organizational-entities/domain/models/Organization.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
-import { UserOrgaSettings } from '../../../../src/shared/domain/models/UserOrgaSettings.js';
+import { UserOrgaSettings } from '../../../../src/team/domain/models/UserOrgaSettings.js';
 import { Prescriber } from '../../../../src/team/domain/read-models/Prescriber.js';
 
 /*
