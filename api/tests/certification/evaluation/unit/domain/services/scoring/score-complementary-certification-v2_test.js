@@ -2,6 +2,7 @@ import range from 'lodash/range.js';
 
 import { scoreComplementaryCertificationV2 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/score-complementary-certification-v2.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { status as assessmentResultStatuses } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 
@@ -13,6 +14,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
   const certificationCourseRepository = {};
   const complementaryCertificationBadgesRepository = {};
   const complementaryCertificationRepository = {};
+  const certificationCandidateRepository = {};
 
   const dependencies = {
     certificationAssessmentRepository,
@@ -22,6 +24,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
     certificationCourseRepository,
     complementaryCertificationBadgesRepository,
     complementaryCertificationRepository,
+    certificationCandidateRepository,
   };
 
   beforeEach(function () {
@@ -33,6 +36,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
     certificationCourseRepository.get = sinon.stub();
     complementaryCertificationBadgesRepository.getAllWithSameTargetProfile = sinon.stub();
     complementaryCertificationRepository.get = sinon.stub();
+    certificationCandidateRepository.findByAssessmentId = sinon.stub();
   });
 
   context('when there is a complementary referential', function () {
@@ -59,7 +63,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
           complementaryCertificationBadgeId: 888,
           minimumReproducibilityRate: 70,
           complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-          hasComplementaryReferential: true,
         });
 
       complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -72,9 +75,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         .withArgs({ certificationCourseId })
         .resolves(certificationAssessment);
 
+      const assessmentResult = domainBuilder.buildAssessmentResult();
       assessmentResultRepository.getByCertificationCourseId
         .withArgs({ certificationCourseId })
-        .resolves(domainBuilder.buildAssessmentResult());
+        .resolves(assessmentResult);
 
       const complementaryCertificationCourse = {
         id: 999,
@@ -88,6 +92,14 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
           complementaryCertificationCourse,
         }),
       );
+
+      certificationCandidateRepository.findByAssessmentId
+        .withArgs({ assessmentId: assessmentResult.assessmentId })
+        .resolves(
+          domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+          }),
+        );
 
       complementaryCertificationRepository.get
         .withArgs({ id: complementaryCertificationId })
@@ -365,7 +377,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                 minimumReproducibilityRateLowerLevel,
                 minimumEarnedPix: level3.minimumEarnedPix,
                 complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-                hasComplementaryReferential: true,
               });
             complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
               .withArgs({
@@ -386,6 +397,14 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
               reproducibilityRate,
               status: pixValidated ? assessmentResultStatuses.VALIDATED : assessmentResultStatuses.REJECTED,
             });
+
+            const evaluationCandidate = domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+            });
+
+            certificationCandidateRepository.findByAssessmentId
+              .withArgs({ assessmentId: assessmentResult.assessmentId })
+              .resolves(evaluationCandidate);
 
             assessmentResultRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId })
@@ -456,9 +475,19 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
           certificationAssessmentRepository.getByCertificationCourseId
             .withArgs({ certificationCourseId })
             .resolves(certificationAssessment);
+
+          const assessmentResult = domainBuilder.buildAssessmentResult.rejected();
           assessmentResultRepository.getByCertificationCourseId
             .withArgs({ certificationCourseId })
-            .resolves(domainBuilder.buildAssessmentResult.rejected());
+            .resolves(assessmentResult);
+
+          certificationCandidateRepository.findByAssessmentId
+            .withArgs({ assessmentId: assessmentResult.assessmentId })
+            .resolves(
+              domainBuilder.certification.evaluation.buildCandidate({
+                subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+              }),
+            );
 
           const complementaryCertificationId = 456;
           const complementaryCertificationCourse = {
@@ -478,13 +507,16 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             .withArgs({ id: complementaryCertificationId })
             .resolves({ key: 'PIX_PLUS_TEST' });
 
+          complementaryCertificationBadgesRepository.getAllWithSameTargetProfile.resolves([
+            domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({ id: 888 }),
+          ]);
+
           const complementaryCertificationScoringCriteria =
             domainBuilder.certification.evaluation.buildComplementaryCertificationScoringCriteria({
               complementaryCertificationCourseId: 999,
               complementaryCertificationBadgeId: 888,
               minimumReproducibilityRate: 100,
               complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-              hasComplementaryReferential: true,
             });
 
           complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -492,7 +524,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
               certificationCourseId,
             })
             .resolves([complementaryCertificationScoringCriteria]);
-
           // when
           await scoreComplementaryCertificationV2({
             ...dependencies,
@@ -560,7 +591,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                 minimumReproducibilityRate: 75,
                 minimumReproducibilityRateLowerLevel: 75,
                 complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-                hasComplementaryReferential: true,
               });
             complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
               .withArgs({
@@ -570,9 +600,20 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             certificationAssessmentRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId: 123 })
               .resolves(certificationAssessment);
+
+            const assessmentResult = domainBuilder.buildAssessmentResult.validated();
             assessmentResultRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId: 123 })
-              .resolves(domainBuilder.buildAssessmentResult.validated());
+              .resolves(assessmentResult);
+
+            certificationCandidateRepository.findByAssessmentId
+              .withArgs({ assessmentId: assessmentResult.assessmentId })
+              .resolves(
+                domainBuilder.certification.evaluation.buildCandidate({
+                  subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+                }),
+              );
+
             complementaryCertificationBadgesRepository.getAllWithSameTargetProfile.resolves([
               domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({ id: 888 }),
             ]);
@@ -624,7 +665,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                 complementaryCertificationBadgeId: 888,
                 minimumReproducibilityRate: 75,
                 complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-                hasComplementaryReferential: true,
               });
             complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
               .withArgs({
@@ -653,9 +693,20 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             certificationAssessmentRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId })
               .resolves(certificationAssessment);
+
+            const assessmentResult = domainBuilder.buildAssessmentResult.validated();
             assessmentResultRepository.getByCertificationCourseId
               .withArgs({ certificationCourseId })
-              .resolves(domainBuilder.buildAssessmentResult.validated());
+              .resolves(assessmentResult);
+
+            certificationCandidateRepository.findByAssessmentId
+              .withArgs({ assessmentId: assessmentResult.assessmentId })
+              .resolves(
+                domainBuilder.certification.evaluation.buildCandidate({
+                  subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+                }),
+              );
+
             complementaryCertificationBadgesRepository.getAllWithSameTargetProfile.resolves([
               domainBuilder.certification.enrolment.buildComplementaryCertificationBadge({ id: 888 }),
             ]);
@@ -715,7 +766,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                     complementaryCertificationBadgeId: 888,
                     minimumReproducibilityRate: 75,
                     complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-                    hasComplementaryReferential: true,
                     minimumEarnedPix: 60,
                     minimumReproducibilityRateLowerLevel: 60,
                     complementaryCertificationId: 123,
@@ -759,9 +809,19 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                 certificationAssessmentRepository.getByCertificationCourseId
                   .withArgs({ certificationCourseId })
                   .resolves(certificationAssessment);
+
+                const assessmentResult = domainBuilder.buildAssessmentResult.validated({ pixScore: 50 });
                 assessmentResultRepository.getByCertificationCourseId
                   .withArgs({ certificationCourseId })
-                  .resolves(domainBuilder.buildAssessmentResult.validated({ pixScore: 50 }));
+                  .resolves(assessmentResult);
+
+                certificationCandidateRepository.findByAssessmentId
+                  .withArgs({ assessmentId: assessmentResult.assessmentId })
+                  .resolves(
+                    domainBuilder.certification.evaluation.buildCandidate({
+                      subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+                    }),
+                  );
 
                 // when
                 await scoreComplementaryCertificationV2({
@@ -816,7 +876,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                     complementaryCertificationBadgeId: 888,
                     minimumReproducibilityRate: 75,
                     complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-                    hasComplementaryReferential: true,
                     minimumReproducibilityRateLowerLevel: 60,
                     complementaryCertificationId: 123,
                   });
@@ -854,9 +913,19 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
                 certificationAssessmentRepository.getByCertificationCourseId
                   .withArgs({ certificationCourseId })
                   .resolves(certificationAssessment);
+
+                const assessmentResult = domainBuilder.buildAssessmentResult.validated({ pixScore: 50 });
                 assessmentResultRepository.getByCertificationCourseId
                   .withArgs({ certificationCourseId })
-                  .resolves(domainBuilder.buildAssessmentResult.validated({ pixScore: 50 }));
+                  .resolves(assessmentResult);
+
+                certificationCandidateRepository.findByAssessmentId
+                  .withArgs({ assessmentId: assessmentResult.assessmentId })
+                  .resolves(
+                    domainBuilder.certification.evaluation.buildCandidate({
+                      subscriptionScope: Frameworks.PIX_PLUS_DROIT,
+                    }),
+                  );
 
                 // when
                 await scoreComplementaryCertificationV2({
@@ -907,7 +976,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
           minimumReproducibilityRate: 70,
           minimumEarnedPix: 50,
           complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-          hasComplementaryReferential: false,
         });
       complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
         .withArgs({
@@ -919,9 +987,18 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         .withArgs({ certificationCourseId })
         .resolves(certificationAssessment);
 
+      const assessmentResult = domainBuilder.buildAssessmentResult({ pixScore: 128, reproducibilityRate: 100 });
       assessmentResultRepository.getByCertificationCourseId
         .withArgs({ certificationCourseId })
-        .resolves(domainBuilder.buildAssessmentResult({ pixScore: 128, reproducibilityRate: 100 }));
+        .resolves(assessmentResult);
+
+      certificationCandidateRepository.findByAssessmentId
+        .withArgs({ assessmentId: assessmentResult.assessmentId })
+        .resolves(
+          domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: Frameworks.CORE,
+          }),
+        );
 
       const complementaryCertificationId = 456;
       const complementaryCertificationCourse = {
@@ -979,19 +1056,29 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
           .resolves(certificationAssessment);
-        assessmentResultRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(
-          domainBuilder.buildAssessmentResult.validated({
-            pixScore: 45,
-            reproducibilityRate: 70,
-          }),
-        );
+
+        const assessmentResult = domainBuilder.buildAssessmentResult.validated({
+          pixScore: 45,
+          reproducibilityRate: 70,
+        });
+        assessmentResultRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(assessmentResult);
+
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessmentResult.assessmentId })
+          .resolves(
+            domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.CORE,
+            }),
+          );
+
         const complementaryCertificationScoringCriteria =
           domainBuilder.certification.evaluation.buildComplementaryCertificationScoringCriteria({
             complementaryCertificationCourseId: 999,
             complementaryCertificationBadgeId: 888,
             minimumReproducibilityRate: 75,
             complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 50,
           });
         complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -1063,7 +1150,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             complementaryCertificationBadgeId: 888,
             minimumReproducibilityRate: 75,
             complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 50,
           });
         complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -1074,12 +1160,22 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
           .resolves(certificationAssessment);
-        assessmentResultRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(
-          domainBuilder.buildAssessmentResult.validated({
-            pixScore: 60,
-            reproducibilityRate: 70,
-          }),
-        );
+
+        const assessmentResult = domainBuilder.buildAssessmentResult.validated({
+          pixScore: 60,
+          reproducibilityRate: 70,
+        });
+        assessmentResultRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(assessmentResult);
+
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessmentResult.assessmentId })
+          .resolves(
+            domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.CORE,
+            }),
+          );
 
         const complementaryCertificationId = 456;
         const complementaryCertificationCourse = {
@@ -1144,7 +1240,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             complementaryCertificationBadgeId: 888,
             minimumReproducibilityRate: 70,
             complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 50,
           });
         complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -1155,12 +1250,22 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
           .resolves(certificationAssessment);
-        assessmentResultRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(
-          domainBuilder.buildAssessmentResult.validated({
-            pixScore: 45,
-            reproducibilityRate: 75,
-          }),
-        );
+
+        const assessmentResult = domainBuilder.buildAssessmentResult.validated({
+          pixScore: 45,
+          reproducibilityRate: 75,
+        });
+        assessmentResultRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(assessmentResult);
+
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessmentResult.assessmentId })
+          .resolves(
+            domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.CORE,
+            }),
+          );
 
         const complementaryCertificationId = 456;
         const complementaryCertificationCourse = {
@@ -1225,7 +1330,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             complementaryCertificationBadgeId: 888,
             minimumReproducibilityRate: 70,
             complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 50,
           });
         complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -1236,12 +1340,22 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
           .resolves(certificationAssessment);
-        assessmentResultRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(
-          domainBuilder.buildAssessmentResult.validated({
-            pixScore: 120,
-            reproducibilityRate: 75,
-          }),
-        );
+
+        const assessmentResult = domainBuilder.buildAssessmentResult.validated({
+          pixScore: 120,
+          reproducibilityRate: 75,
+        });
+        assessmentResultRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(assessmentResult);
+
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessmentResult.assessmentId })
+          .resolves(
+            domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.CORE,
+            }),
+          );
 
         const complementaryCertificationId = 456;
         const complementaryCertificationCourse = {
@@ -1306,7 +1420,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
             complementaryCertificationBadgeId: 888,
             minimumReproducibilityRate: 70,
             complementaryCertificationBadgeKey: 'PIX_PLUS_TEST',
-            hasComplementaryReferential: false,
             minimumEarnedPix: 50,
           });
         complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId
@@ -1317,12 +1430,23 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring Comple
         certificationAssessmentRepository.getByCertificationCourseId
           .withArgs({ certificationCourseId })
           .resolves(certificationAssessment);
-        assessmentResultRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(
-          domainBuilder.buildAssessmentResult.validated({
-            pixScore: 120,
-            reproducibilityRate: 75,
-          }),
-        );
+
+        const assessmentResult = domainBuilder.buildAssessmentResult.validated({
+          pixScore: 120,
+          reproducibilityRate: 75,
+        });
+        assessmentResultRepository.getByCertificationCourseId
+          .withArgs({ certificationCourseId })
+          .resolves(assessmentResult);
+
+        certificationCandidateRepository.findByAssessmentId
+          .withArgs({ assessmentId: assessmentResult.assessmentId })
+          .resolves(
+            domainBuilder.certification.evaluation.buildCandidate({
+              subscriptionScope: Frameworks.CORE,
+            }),
+          );
+
         const complementaryCertificationId = 456;
         const complementaryCertificationCourse = {
           id: 999,

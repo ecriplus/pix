@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import * as complementaryCertificationRepository from '../../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-repository.js';
 import { scoreComplementaryCertificationV2 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/score-complementary-certification-v2.js';
+import * as certificationCandidateRepository from '../../../../../../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../../../../../../src/certification/evaluation/infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
@@ -103,6 +104,7 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationCourseResultRepository,
           complementaryCertificationScoringCriteriaRepository,
           certificationCourseRepository,
+          certificationCandidateRepository,
           complementaryCertificationRepository,
           complementaryCertificationBadgesRepository,
         });
@@ -162,6 +164,7 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
             complementaryCertificationCourseResultRepository,
             complementaryCertificationScoringCriteriaRepository,
             certificationCourseRepository,
+            certificationCandidateRepository,
             complementaryCertificationRepository,
             complementaryCertificationBadgesRepository,
           });
@@ -287,6 +290,7 @@ describe('Certification | Evaluation | Integration | Domain | Services | Score C
           complementaryCertificationScoringCriteriaRepository,
           complementaryCertificationBadgesRepository,
           certificationCourseRepository,
+          certificationCandidateRepository,
           complementaryCertificationRepository,
         });
 
@@ -321,9 +325,11 @@ function _buildComplementaryCertificationCourse({
   assessmentId = undefined,
 }) {
   databaseBuilder.factory.buildUser({ id: userId });
+  const sessionId = databaseBuilder.factory.buildSession().id;
   databaseBuilder.factory.buildCertificationCourse({
     id: certificationCourseId,
     userId,
+    sessionId,
     isRejectedForFraud,
   });
   databaseBuilder.factory.buildComplementaryCertificationCourse({
@@ -339,12 +345,28 @@ function _buildComplementaryCertificationCourse({
       certificationCourseId,
     });
   }
+  const resultAssessmentId =
+    assessmentId ??
+    databaseBuilder.factory.buildAssessment({
+      certificationCourseId,
+    }).id;
   databaseBuilder.factory.buildAssessmentResult({
     certificationCourseId,
     pixScore,
     reproducibilityRate,
-    assessmentId,
+    assessmentId: resultAssessmentId,
     status: 'validated',
+  });
+  const { id: certificationCandidateId } = databaseBuilder.factory.buildCertificationCandidate({
+    userId,
+    sessionId,
+  });
+  databaseBuilder.factory.buildComplementaryCertificationSubscription({
+    certificationCandidateId,
+    complementaryCertificationId,
+  });
+  databaseBuilder.factory.buildCoreSubscription({
+    certificationCandidateId,
   });
 }
 
