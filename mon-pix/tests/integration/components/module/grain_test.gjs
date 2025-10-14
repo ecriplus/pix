@@ -3,7 +3,8 @@ import { clickByName, render } from '@1024pix/ember-testing-library';
 import { click, find, findAll } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
-import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/component/element';
+import { VERIFY_RESPONSE_DELAY as QCM_VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcm';
+import { VERIFY_RESPONSE_DELAY } from 'mon-pix/components/module/element/qcu';
 import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -622,7 +623,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           await click(screen.getByLabelText('checkbox2'));
           const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
           await click(verifyButton);
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
 
           // then
           assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
@@ -647,11 +648,11 @@ module('Integration | Component | Module | Grain', function (hooks) {
             <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
           const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
           await click(verifyButton);
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
 
           // then
           assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
+          await clock.tickAsync(Math.round(QCM_VERIFY_RESPONSE_DELAY / 2));
 
           assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).doesNotHaveAttribute('aria-disabled');
         });
