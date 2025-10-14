@@ -1,11 +1,21 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { COLLEGE_TAG, PIX_PUBLIC_TARGET_PROFILE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
+import {
+  ADMINISTRATION_TEAM_ALPHA_ID,
+  ADMINISTRATION_TEAM_ROCKET_ID,
+  ADMINISTRATION_TEAM_SOLO_ID,
+  COLLEGE_TAG,
+  PIX_PUBLIC_TARGET_PROFILE_ID,
+  REAL_PIX_SUPER_ADMIN_ID,
+} from './constants.js';
 import { acceptPixOrgaTermsOfService, createPixOrgaTermsOfService } from './tooling/legal-documents.js';
 import { createTargetProfile } from './tooling/target-profile-tooling.js';
 
 const { ROLES } = PIX_ADMIN;
 
 export const commonBuilder = async function ({ databaseBuilder }) {
+  // administration teams
+  _createAdministrationTeams(databaseBuilder);
+
   // legal-document
   createPixOrgaTermsOfService(databaseBuilder);
 
@@ -20,6 +30,33 @@ export const commonBuilder = async function ({ databaseBuilder }) {
   await _createPublicTargetProfile(databaseBuilder);
   await databaseBuilder.commit();
 };
+
+function _createAdministrationRocketTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_ROCKET_ID,
+    name: 'Team Rocket',
+  });
+}
+
+function _createAdministrationAlphaTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_ALPHA_ID,
+    name: 'Team Alpha',
+  });
+}
+
+function _createAdministrationSoloTeam(databaseBuilder) {
+  databaseBuilder.factory.buildAdministrationTeam({
+    id: ADMINISTRATION_TEAM_SOLO_ID,
+    name: 'Team Solo',
+  });
+}
+
+function _createAdministrationTeams(databaseBuilder) {
+  _createAdministrationRocketTeam(databaseBuilder);
+  _createAdministrationAlphaTeam(databaseBuilder);
+  _createAdministrationSoloTeam(databaseBuilder);
+}
 
 function _createSuperAdmin(databaseBuilder) {
   databaseBuilder.factory.buildUser.withRawPassword({

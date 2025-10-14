@@ -10,6 +10,7 @@ import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
 import {
+  ADMINISTRATION_TEAM_SOLO_ID,
   AEFE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   PRO_ORGANIZATION_ID,
@@ -356,7 +357,12 @@ const USERS = [
     email: 'disabled-attestation@example.net',
   },
 ];
-const ORGANIZATION = { name: 'Attestation', type: 'SCO', isManagingStudents: true };
+const ORGANIZATION = {
+  name: 'Attestation',
+  type: 'SCO',
+  isManagingStudents: true,
+  administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+};
 const CAMPAIGN = [
   { code: 'ATTEST001', multipleSendings: true, name: 'campagne attestation 1' },
   { code: 'ATTEST002', multipleSendings: true, name: 'campagne attestation 2' },

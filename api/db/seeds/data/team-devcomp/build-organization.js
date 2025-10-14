@@ -1,4 +1,6 @@
 import {
+  ADMINISTRATION_TEAM_ALPHA_ID,
+  ADMINISTRATION_TEAM_ROCKET_ID,
   FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID,
   FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID,
   USER_ID_MEMBER_ORGANIZATION,
@@ -20,6 +22,7 @@ export async function createDevcompOrganization({ databaseBuilder, adminId }) {
       { id: FEATURE_COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY_ID },
       { id: FEATURE_MULTIPLE_SENDING_ASSESSMENT_ID },
     ],
+    administrationTeamId: ADMINISTRATION_TEAM_ROCKET_ID,
   });
 
   return _buildOrganizationsIdForTargetProfileShares({
@@ -41,6 +44,7 @@ async function _buildOrganizationsIdForTargetProfileShares({ databaseBuilder, ad
       externalId: `SCO_DEVCOMP ${i}`,
       adminIds: [adminId],
       memberIds: [USER_ID_MEMBER_ORGANIZATION],
+      administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
     });
 
     result.push(organizationId);

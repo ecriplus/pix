@@ -34,6 +34,7 @@ export { createOrganization };
  * @param {Array<number>} memberIds
  * @param {Array<number>} tagIds
  * @param {Array<Feature>} features
+ * @param {number} administrationTeamId
  * @param configOrganization {learnerCount: number }
  * @returns {Promise<{organizationId: number}>}
  */
@@ -64,6 +65,7 @@ async function createOrganization({
   features = [],
   configOrganization,
   parentOrganizationId,
+  administrationTeamId,
 }) {
   organizationId = _buildOrganization({
     databaseBuilder,
@@ -87,6 +89,7 @@ async function createOrganization({
     archivedAt,
     identityProviderForCampaigns,
     parentOrganizationId,
+    administrationTeamId,
   }).id;
 
   _buildMemberships({
@@ -211,6 +214,7 @@ function _buildOrganization({
   archivedAt,
   identityProviderForCampaigns,
   parentOrganizationId,
+  administrationTeamId,
 }) {
   return databaseBuilder.factory.buildOrganization({
     id: organizationId,
@@ -233,5 +237,6 @@ function _buildOrganization({
     archivedAt,
     identityProviderForCampaigns,
     parentOrganizationId,
+    administrationTeamId,
   });
 }

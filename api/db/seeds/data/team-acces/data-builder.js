@@ -1,4 +1,3 @@
-import { buildAdministrationTeams } from './build-administration-teams.js';
 import { buildArchivedOrganizations } from './build-archived-organizations.js';
 import { buildBlockedUsers } from './build-blocked-users.js';
 import { buildCertificationCenters } from './build-certification-centers.js';
@@ -24,7 +23,6 @@ async function teamAccesDataBuilder(databaseBuilder) {
   await buildCertificationCenters(databaseBuilder);
   await buildOidcProviders(databaseBuilder);
   buildOrganizations(databaseBuilder);
-  buildAdministrationTeams(databaseBuilder);
   buildLtiPlatformRegistrations(databaseBuilder);
 }
 

@@ -1,4 +1,5 @@
 import {
+  ADMINISTRATION_TEAM_ALPHA_ID,
   FEATURE_LEARNER_IMPORT_ID,
   FEATURE_MISSIONS_MANAGEMENT_ID,
   FEATURE_ORALIZATION_ID,
@@ -54,6 +55,7 @@ async function _createSco1dOrganizations(databaseBuilder) {
       { id: FEATURE_ORALIZATION_ID },
       { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_ONDE_ID } },
     ],
+    administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
   });
 
   const sessionExpirationDate = new Date();
@@ -146,6 +148,7 @@ async function _createSco1dOrganizations(databaseBuilder) {
       { id: FEATURE_ORALIZATION_ID },
       { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_ONDE_ID } },
     ],
+    administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
   });
 
   await databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearnerFeature({

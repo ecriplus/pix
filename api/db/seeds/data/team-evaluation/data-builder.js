@@ -1,3 +1,4 @@
+import { ADMINISTRATION_TEAM_SOLO_ID } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 import createAutonomousCourses from './autonomous-courses/create-autonomous-courses.js';
@@ -30,6 +31,7 @@ function createScoOrganization(databaseBuilder) {
     name: 'Sco Orga team eval',
     isManagingStudents: false,
     externalId: 'EVAL',
+    administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
   });
   databaseBuilder.factory.buildUser.withRawPassword({
     id: SCO_ORGANIZATION_USER_ID,
