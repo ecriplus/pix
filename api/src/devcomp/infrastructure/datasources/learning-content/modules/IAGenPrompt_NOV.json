@@ -91,41 +91,79 @@
               "type": "element",
               "element": {
                 "id": "88af557c-e8f8-4bce-bc72-4f3aa35262fa",
-                "type": "custom-draft",
-                "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/NAI/decouverteinterfaceIA.html",
+                "type": "custom",
                 "instruction": "<p>Cliquez sur les différentes zones de la conversation pour en apprendre plus.</p>",
-                "height": 550
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/mon-premier-prompt/yogasso.webp",
+                    "alt": "IA générative ChatPIX",
+                    "width": 1634,
+                    "height": 1135
+                  },
+                  "areas": [
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 660,
+                        "y1": 32,
+                        "x2": 1158,
+                        "y2": 86
+                      },
+                      "info": "Ce texte est le prompt envoyé. C’est la question posée ou la consigne donnée au logiciel d’IA générative par l’utilisateur.",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 23,
+                        "y1": 105,
+                        "x2": 636,
+                        "y2": 275
+                      },
+                      "info": "Ce texte c’est la réponse apportée par le logiciel d’IA générative.",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 30,
+                        "y1": 558,
+                        "x2": 1148,
+                        "y2": 671
+                      },
+                      "info": "Cette zone est le champ de saisie. C’est ici qu’on écrit les prompts.",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                }
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "4cd2311c-6c89-4d04-9087-1b874a412882",
-                "type": "qcu",
+                "type": "qcu-discovery",
                 "instruction": "<p>Parmi les messages de cette discussion, lequel est le prompt ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Des idées de noms pour une association de yoga ?</p>",
                     "feedback": {
-                      "state": "<p>Bien vu !</p>",
                       "diagnosis": "<p>En effet, le prompt, c’est la question posée ou la consigne donnée au logiciel d’IA générative.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga :</p><p>1. Yoga en mouvement</p><p>2. Roulez en Paix</p><p>3.Équilibre sur Roues</p><p>4. Yoga en Roue Libre</p>",
+                    "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga :</p><p>1. Yoga en mouvement</p><p>2. Souffle &amp; Racines</p><p>3.&nbsp;Clair de Lune Yoga</p><p>4. Yogâme</p>",
                     "feedback": {
-                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>C’est la réponse donnée par un logiciel d’IA générative. Le prompt, c’est la question posée ou la consigne donnée au logiciel d’IA générative.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Écrivez votre message ici.</p>",
+                    "content": "<p>Posez une question</p>",
                     "feedback": {
-                      "state": "<p>Et non !</p>",
                       "diagnosis": "<p>C’est le champ de saisie, la zone pour écrire les prompts ! Le prompt, c’est la question posée ou la consigne donnée au logiciel d’IA générative.</p>"
                     }
                   }
@@ -220,7 +258,7 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d’IA générative en langage informatique.</p>",
                     "feedback": {
-                      "state": "<p>Et non !</p>",
+                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
                     }
                   },
@@ -236,7 +274,7 @@
                     "id": "3",
                     "content": "<p>On parle à un logiciel d’IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "state": "<p>Et non !</p>",
+                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>On parle à un logiciel d’IA générative comme on parle à une autre personne.</p>"
                     }
                   }
@@ -331,7 +369,7 @@
                     "id": "1",
                     "content": "<p>Écris une recette de gâteau.</p>",
                     "feedback": {
-                      "state": "<p>Mauvaise réponse !</p>",
+                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
                     }
                   },
@@ -339,7 +377,7 @@
                     "id": "2",
                     "content": "<p>Écris une recette de gâteau pour 10 personnes.</p>",
                     "feedback": {
-                      "state": "<p>Mauvaise réponse !</p>",
+                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
                     }
                   },
@@ -409,7 +447,7 @@
                     "id": "1",
                     "content": "<p>La réponse du logiciel d’IA générative est adaptée à la demande.</p>",
                     "feedback": {
-                      "state": "<p>Et non !</p>",
+                      "state": "<p>Eh non !</p>",
                       "diagnosis": "<p>La réponse du logiciel d’IA générative ne respecte pas ce qui est demandé dans le prompt ! Le crocodile n’est pas l’animal le plus adapté pour un appartement, c’est dangereux et même illégal !</p>"
                     }
                   },
