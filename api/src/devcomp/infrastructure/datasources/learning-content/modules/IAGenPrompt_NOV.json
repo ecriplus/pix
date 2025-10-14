@@ -321,7 +321,7 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
-                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰Mais il est allergique au chocolat.🍫</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d’IA générative.</p>"
+                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰</p><p>Mais il est allergique au chocolat.🍫</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d’IA générative.</p>"
               }
             },
             {
@@ -366,21 +366,21 @@
                     "id": "1",
                     "content": "<p>Écris une recette de gâteau.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Écris une recette de gâteau pour 10 personnes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.<br><br></p>"
+                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Écris une recette de gâteau pour 10 personnes sans chocolat.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, ce prompt contient des éléments précis : un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                      "diagnosis": "<p>Bien vu, ce prompt contient des éléments précis : un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
                     }
                   }
                 ],
