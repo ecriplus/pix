@@ -448,7 +448,7 @@
                     "id": "2",
                     "content": "<p>La réponse du logiciel d’IA générative n’est pas adaptée à la demande.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La réponse du logiciel d’IA générative n’est pas adaptée : adopter un crocodile n’est pas une bonne option pour quelqu’un qui habite en appartement, c’est dangereux et même illégal !<br><br></p>"
+                      "diagnosis": "<p>Bien vu, la réponse du logiciel d’IA générative n’est pas adaptée : adopter un crocodile n’est pas une bonne option pour quelqu’un qui habite en appartement, c’est dangereux et même illégal !<br><br></p>"
                     }
                   },
                   {
