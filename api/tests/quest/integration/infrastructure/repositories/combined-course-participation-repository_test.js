@@ -104,7 +104,11 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     it('should return quest participation for given user and quest', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId }).id;
+      const {
+        firstName,
+        lastName,
+        id: organizationLearnerId,
+      } = databaseBuilder.factory.buildOrganizationLearner({ userId });
       const { questId, id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
       databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId,
@@ -121,6 +125,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(result.id).to.be.finite;
       expect(result.questId).to.deep.equal(questId);
       expect(result.organizationLearnerId).to.deep.equal(organizationLearnerId);
+      expect(result.firstName).equal(firstName);
+      expect(result.lastName).equal(lastName);
       expect(result.status).to.deep.equal(CombinedCourseParticipationStatuses.COMPLETED);
     });
 
@@ -176,19 +182,22 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId: organizationLearnerId1,
         questId,
+        combinedCourseId,
       });
       databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId: organizationLearnerId2,
         questId,
+        combinedCourseId,
       });
 
-      const { questId: anotherQuestId } = databaseBuilder.factory.buildCombinedCourse({
+      const { questId: anotherQuestId, id: anotherCombinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         organizationId,
         code: 'anotherQuest',
       });
       databaseBuilder.factory.buildCombinedCourseParticipation({
         organizationLearnerId: organizationLearnerId1,
         questId: anotherQuestId,
+        combinedCourseId: anotherCombinedCourseId,
       });
 
       await databaseBuilder.commit();

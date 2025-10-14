@@ -42,6 +42,8 @@ export const getByUserId = async function ({ userId, questId }) {
       'combined_course_participations.id',
       'questId',
       'organizationLearnerId',
+      'firstName',
+      'lastName',
       'combined_course_participations.status',
       'combined_course_participations.createdAt',
       'combined_course_participations.updatedAt',
