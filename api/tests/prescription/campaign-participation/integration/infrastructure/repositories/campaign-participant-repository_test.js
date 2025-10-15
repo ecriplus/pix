@@ -1148,7 +1148,7 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
 
     context('when there is an exception', function () {
       context('when there already is a participation for this campaign', function () {
-        it('throws an exception AlreadyExistingCampaignParticipationError', async function () {
+        it('throws an exception AlreadyExistingCampaignParticipationError for the same users', async function () {
           //GIVEN
           const campaign = databaseBuilder.factory.buildCampaign({
             externalIdLabel: null,
@@ -1184,6 +1184,49 @@ describe('Integration | Infrastructure | Repository | CampaignParticipant', func
           expect(error).to.be.an.instanceof(AlreadyExistingCampaignParticipationError);
           expect(error.message).to.equal(
             `User ${userIdentity.id} has already a campaign participation with campaign ${campaign.id}`,
+          );
+        });
+
+        it('throws an exception AlreadyExistingCampaignParticipationError for the same learner different users', async function () {
+          //GIVEN
+          const campaign = databaseBuilder.factory.buildCampaign({
+            externalIdLabel: null,
+          });
+          const userId = databaseBuilder.factory.buildUser().id;
+
+          const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: campaign.organizationId,
+            userId: userIdentity.id,
+          }).id;
+
+          databaseBuilder.factory.buildCampaignParticipation({
+            campaignId: campaign.id,
+            organizationLearnerId,
+            userId,
+            isImproved: false,
+          });
+
+          await databaseBuilder.commit();
+
+          const campaignToStartParticipation = new CampaignToStartParticipation(campaign);
+          const campaignParticipant = new CampaignParticipant({
+            campaignToStartParticipation,
+            userIdentity,
+            organizationLearner: {
+              id: organizationLearnerId,
+              hasParticipated: false,
+            },
+          });
+
+          campaignParticipant.start({ participantExternalId: null });
+
+          //WHEN
+          const error = await catchErr(campaignParticipantRepository.save)({ campaignParticipant });
+
+          //THEN
+          expect(error).to.be.an.instanceof(AlreadyExistingCampaignParticipationError);
+          expect(error.message).to.equal(
+            `learner ${organizationLearnerId} has already a campaign participation with campaign ${campaign.id}`,
           );
         });
       });
