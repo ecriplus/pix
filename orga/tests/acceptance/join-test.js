@@ -108,8 +108,8 @@ module('Acceptance | join', function (hooks) {
         // then
         assert.strictEqual(currentURL(), '/connexion');
         assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is still unauthenticated');
-        assert.ok('.login-form__invitation-error');
-        assert.dom('.login-form__invitation-error').hasText(expectedErrorMessage);
+        assert.ok('.login-form-legacy-design__invitation-error');
+        assert.dom('.login-form-legacy-design__invitation-error').hasText(expectedErrorMessage);
       });
     });
     module('when organization-invitation has been cancelled', function () {
@@ -141,7 +141,7 @@ module('Acceptance | join', function (hooks) {
     let loginButton;
 
     hooks.beforeEach(function () {
-      emailInputLabel = t('pages.login-form.email');
+      emailInputLabel = t('pages.login-form.email.label');
       passwordInputLabel = t('pages.login-form.password');
       loginButton = t('pages.login-form.login');
     });

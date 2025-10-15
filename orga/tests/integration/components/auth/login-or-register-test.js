@@ -13,8 +13,11 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   let loginButton;
 
   hooks.beforeEach(function () {
+    const featureToggles = this.owner.lookup('service:featureToggles');
+    sinon.stub(featureToggles, 'featureToggles').value({ usePixOrgaNewAuthDesign: false });
     loginButton = t('pages.login-or-register.login-form.button');
   });
+
   test('displays the organization name the user is invited to', async function (assert) {
     // when
     const invitationMessage = t('pages.login-or-register.title', { organizationName: 'Organization Aztec' });
@@ -41,7 +44,7 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
     await clickByName(loginButton);
 
     // then
-    assert.dom('.login-form').exists();
+    assert.dom('.login-form-legacy-design').exists();
   });
 
   test('toggles the register form on click on register button', async function (assert) {
@@ -61,6 +64,9 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
   module('when domain is not .fr', function () {
     test('displays the locale switcher and translate to selected locale', async function (assert) {
       // given
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('org');
+
       const routerService = this.owner.lookup('service:router');
       sinon.stub(routerService, 'replaceWith').returns(false);
 
@@ -74,8 +80,11 @@ module('Integration | Component | Auth::LoginOrRegister', function (hooks) {
       assert.dom(screen.getByText('You have been invited to join the organisation Organization Aztec')).exists();
     });
 
-    test('saves selected locale and remove lang from query params', async function (assert) {
+    test('saves selected locale and removes lang from query params', async function (assert) {
       // given
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('org');
+
       const routerService = this.owner.lookup('service:router');
       const localeService = this.owner.lookup('service:locale');
 

@@ -1070,13 +1070,19 @@
       "organization-code": "UAI/RNE de l'établissement"
     },
     "login": {
-      "title": "Log in"
+      "title": "Log in",
+      "with-pix-account": "with your Pix Account"
     },
     "login-form": {
-      "active-or-retrieve": "Are you a headteacher? Activate or become the administrator of your school's Pix Orga space",
-      "email": "Email address",
+      "active-or-retrieve": "Activate or become the administrator of your school's Pix Orga space",
+      "admin-role-question": "Are you a headteacher?",
+      "email": {
+        "label": "Email address",
+        "placeholder": "e.g. john.smith@email.com"
+      },
       "errors": {
-        "empty-password": "Your password can't be empty.",
+        "empty-email": "You have not entered your e-mail address.",
+        "empty-password": "You have not entered your password.",
         "invalid-email": "Your email address is invalid.",
         "should-change-password": "You currently have a temporary password. '<'a href=\"{url}\"'>'Reset your password here'</a>'.",
         "status": {
