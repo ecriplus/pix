@@ -81,14 +81,18 @@ module('Integration | Component | Module | Flashcards Card', function (hooks) {
           },
         };
 
+        const expectedWidth = Math.round(
+          (ModulixFlashcardsCard.MAX_HEIGHT * card.recto.image.information.width) / card.recto.image.information.height,
+        );
+
         // when
         const screen = await render(
           <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="recto" /></template>,
         );
 
         // then
-        assert.dom(screen.getByRole('presentation')).hasAttribute('width', '300');
-        assert.dom(screen.getByRole('presentation')).hasAttribute('height', '400');
+        assert.dom(screen.getByRole('presentation')).hasAttribute('height', `${ModulixFlashcardsCard.MAX_HEIGHT}`);
+        assert.dom(screen.getByRole('presentation')).hasAttribute('width', `${expectedWidth}`);
       });
     });
   });
@@ -165,14 +169,18 @@ module('Integration | Component | Module | Flashcards Card', function (hooks) {
           },
         };
 
+        const expectedWidth = Math.round(
+          (ModulixFlashcardsCard.MAX_HEIGHT * card.verso.image.information.width) / card.verso.image.information.height,
+        );
+
         // when
         const screen = await render(
           <template><ModulixFlashcardsCard @card={{card}} @displayedSideName="verso" /></template>,
         );
 
         // then
-        assert.dom(screen.getByRole('presentation')).hasAttribute('width', '300');
-        assert.dom(screen.getByRole('presentation')).hasAttribute('height', '400');
+        assert.dom(screen.getByRole('presentation')).hasAttribute('height', `${ModulixFlashcardsCard.MAX_HEIGHT}`);
+        assert.dom(screen.getByRole('presentation')).hasAttribute('width', `${expectedWidth}`);
       });
     });
   });
