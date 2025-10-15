@@ -1,4 +1,7 @@
-import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationStatuses,
+  CombinedCourseParticipationStatuses,
+} from '../../../../src/prescription/shared/domain/constants.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import {
@@ -194,7 +197,7 @@ function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
     }),
   );
 
-  databaseBuilder.factory.buildCombinedCourse({
+  const combinix2 = databaseBuilder.factory.buildCombinedCourse({
     name: 'Combinix',
     code: 'COMBINIX2',
     description:
@@ -260,6 +263,63 @@ function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
         },
       },
     ],
+  });
+
+  const bernardUser = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Bernard',
+    lastName: 'Peur',
+    email: 'bernard.peur@example.net',
+  });
+  const bernardLearner = databaseBuilder.factory.buildOrganizationLearner({
+    firstName: 'Bernard',
+    lastName: 'Peur',
+    userId: bernardUser.id,
+    organizationId,
+  });
+  databaseBuilder.factory.buildCombinedCourseParticipation({
+    combinedCourseId: combinix2.id,
+    questId: combinix2.questId,
+    organizationId,
+    organizationLearnerId: bernardLearner.id,
+    status: CombinedCourseParticipationStatuses.STARTED,
+  });
+  const participationBernard = databaseBuilder.factory.buildCampaignParticipation({
+    campaignId: campaign.id,
+    userId: bernardUser.id,
+    organizationLearnerId: bernardLearner.id,
+    status: CampaignParticipationStatuses.STARTED,
+  });
+  databaseBuilder.factory.buildAssessment({
+    userId: bernardUser.id,
+    courseId: null,
+    state: Assessment.states.STARTED,
+    competenceId: null,
+    lastQuestionState: null,
+    type: Assessment.types.CAMPAIGN,
+    campaignParticipationId: participationBernard.id,
+  });
+
+  const jacquelineUser = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Jacqueline',
+    lastName: 'Colson',
+    email: 'jacqueline.colson@example.net',
+  });
+  const jacquelineLearner = databaseBuilder.factory.buildOrganizationLearner({
+    firstName: 'Jacqueline',
+    lastName: 'Colson',
+    userId: jacquelineUser.id,
+    organizationId,
+  });
+  databaseBuilder.factory.buildCombinedCourseParticipation({
+    combinedCourseId: combinix2.id,
+    questId: combinix2.questId,
+    organizationId,
+    organizationLearnerId: jacquelineLearner.id,
+    status: CombinedCourseParticipationStatuses.STARTED,
+  });
+  databaseBuilder.factory.buildCampaignParticipation({
+    campaignId: campaign.id,
+    organizationLearnerId: jacquelineLearner.id,
   });
 
   databaseBuilder.factory.buildTraining({
