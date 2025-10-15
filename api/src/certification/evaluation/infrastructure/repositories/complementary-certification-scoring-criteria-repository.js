@@ -10,7 +10,6 @@ export const findByCertificationCourseId = async function ({ certificationCourse
       minimumReproducibilityRate: 'complementary-certifications.minimumReproducibilityRate',
       minimumReproducibilityRateLowerLevel: 'complementary-certifications.minimumReproducibilityRateLowerLevel',
       complementaryCertificationBadgeKey: 'badges.key',
-      complementaryCertificationKey: 'complementary-certifications.key',
       minimumEarnedPix: 'complementary-certification-badges.minimumEarnedPix',
     })
     .join(
