@@ -70,7 +70,7 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
     });
 
     it('should update passage when participation already exists', async function () {
-      const learnerParcipationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+      const learnerParticipationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         status: 'STARTED',
         type: OrganizationLearnerParticipationTypes.PASSAGE,
         organizationLearnerId: organizationLearner.id,
@@ -113,7 +113,7 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
         .where({ organizationLearnerId: organizationLearner.id });
 
       expect(result).lengthOf(1);
-      expect(result[0].id).equal(learnerParcipationId);
+      expect(result[0].id).equal(learnerParticipationId);
       expect(result[0].status).deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
       expect(result[0].updatedAt).deep.equal(now);
       expect(result[0].createdAt).deep.equal(dayjs().subtract('30', 'days').toDate());

@@ -122,9 +122,10 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(result.questId).to.deep.equal(questId);
       expect(result.organizationLearnerId).to.deep.equal(organizationLearnerId);
       expect(result.status).to.deep.equal(CombinedCourseParticipationStatuses.COMPLETED);
+      expect(result.combinedCourseId).to.deep.equal(combinedCourseId);
     });
 
-    it('should organizationLearnerParticipationId when combined_course_particiaptions is linked', async function () {
+    it('should return organizationLearnerParticipationId when combined_course_participations is linked', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId }).id;
@@ -246,7 +247,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         expect(result.completedAt).to.be.null;
       });
 
-      it('should update completedAt / updatedAt / status from organization_learner_participations when participation is completed', async function () {
+      it('should update completedAt / updatedAt / status and attributes from organization_learner_participations when participation is completed', async function () {
         //given
         const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse();
         const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner();

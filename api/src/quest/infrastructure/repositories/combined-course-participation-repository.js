@@ -1,4 +1,3 @@
-import { CombinedCourseParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
@@ -7,6 +6,7 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../domain/models/OrganizationLearnerParticipation.js';
+import { OrganizationLearnerParticipation } from '../../domain/models/OrganizationLearnerParticipation.js';
 
 export const save = async function ({ organizationLearnerId, questId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
@@ -46,6 +46,7 @@ export const getByUserId = async function ({ userId, questId }) {
       'combined_course_participations.createdAt',
       'combined_course_participations.updatedAt',
       'combined_course_participations.organizationLearnerParticipationId',
+      'combined_course_participations.combinedCourseId',
     )
     .join(
       'view-active-organization-learners',
@@ -62,23 +63,24 @@ export const getByUserId = async function ({ userId, questId }) {
       `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et la quête d'id ${questId}`,
     );
   }
-
   return new CombinedCourseParticipation(questParticipations[0]);
 };
 
 export const update = async function ({ combinedCourseParticipation }) {
   const knexConnection = DomainTransaction.getConnection();
+  const organizationLearnerParticipation = OrganizationLearnerParticipation.buildFromCombinedCourseParticipation({
+    id: combinedCourseParticipation.organizationLearnerParticipationId,
+    organizationLearnerId: combinedCourseParticipation.organizationLearnerId,
+    questId: combinedCourseParticipation.questId,
+    status: combinedCourseParticipation.status,
+    createdAt: combinedCourseParticipation.createdAt,
+    updatedAt: combinedCourseParticipation.updatedAt,
+    combinedCourseId: combinedCourseParticipation.combinedCourseId,
+  });
   if (combinedCourseParticipation.organizationLearnerParticipationId) {
     await knexConnection('organization_learner_participations')
       .where({ id: combinedCourseParticipation.organizationLearnerParticipationId })
-      .update({
-        status: combinedCourseParticipation.status,
-        updatedAt: combinedCourseParticipation.updatedAt,
-        completedAt:
-          combinedCourseParticipation.status === CombinedCourseParticipationStatuses.COMPLETED
-            ? combinedCourseParticipation.updatedAt
-            : null,
-      });
+      .update(organizationLearnerParticipation);
   }
   const [updatedRow] = await knexConnection('combined_course_participations')
     .where({ id: combinedCourseParticipation.id })

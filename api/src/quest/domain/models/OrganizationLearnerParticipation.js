@@ -1,4 +1,5 @@
 import { StatusesEnumValues } from '../../../devcomp/domain/models/module/UserModuleStatus.js';
+import { CombinedCourseParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
 
 export const OrganizationLearnerParticipationTypes = {
   PASSAGE: 'PASSAGE',
@@ -67,6 +68,28 @@ export class OrganizationLearnerParticipation {
       status: participationStatus,
       type: OrganizationLearnerParticipationTypes.PASSAGE,
       attributes: JSON.stringify({ id: moduleId }),
+    });
+  }
+
+  static buildFromCombinedCourseParticipation({
+    id,
+    organizationLearnerId,
+    status,
+    createdAt,
+    updatedAt,
+    combinedCourseId,
+  }) {
+    return new OrganizationLearnerParticipation({
+      id,
+      organizationLearnerId,
+      createdAt,
+      updatedAt,
+      completedAt: status === CombinedCourseParticipationStatuses.COMPLETED ? updatedAt : null,
+      deletedAt: null,
+      deletedBy: null,
+      status,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      attributes: JSON.stringify({ id: combinedCourseId }),
     });
   }
 }
