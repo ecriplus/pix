@@ -1,14 +1,13 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import * as injectedCombinedCourseRepo from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
+import * as injectedCombinedCourseDetailRepository from '../../../../quest/infrastructure/repositories/combined-course-details-repository.js';
 import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
-import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { TargetProfileForSpecifier } from '../../../target-profile/domain/read-models/TargetProfileForSpecifier.js';
 import { CampaignReport } from '../../domain/read-models/CampaignReport.js';
@@ -108,8 +107,10 @@ const findPaginatedFilteredByOrganizationId = async function ({
   filter = {},
   page,
   userId,
-  combinedCourseRepo = injectedCombinedCourseRepo,
+  combinedCourseDetailsRepository = injectedCombinedCourseDetailRepository,
 }) {
+  const combinedCourses = await combinedCourseDetailsRepository.findByOrganizationId({ organizationId });
+  const campaignIdsToExclude = combinedCourses.flatMap((combinedCourse) => combinedCourse.campaignIds);
   const query = knex('campaigns')
     .distinct('campaigns.id')
     .select(
@@ -135,23 +136,21 @@ const findPaginatedFilteredByOrganizationId = async function ({
     .leftJoin('campaign-participations', 'campaign-participations.campaignId', 'campaigns.id')
     .where('campaigns.organizationId', organizationId)
     .whereNull('campaigns.deletedAt')
+    .whereNotIn('campaigns.id', campaignIdsToExclude)
     .modify(_setSearchFiltersForQueryBuilder, filter, userId)
     .orderBy('campaigns.createdAt', 'DESC');
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const atLeastOneCampaign = await knex('campaigns')
-    .select('id')
+    .count('id')
     .where({ organizationId })
     .whereNull('deletedAt')
-    .first(1);
-  const hasCampaigns = Boolean(atLeastOneCampaign);
+    .whereNotIn('campaigns.id', campaignIdsToExclude)
+    .first();
+  const hasCampaigns = atLeastOneCampaign.count > 0;
 
-  const campaignReports = await PromiseUtils.mapSeries(results, async (attributes) => {
-    const campaignReport = new CampaignReport(attributes);
-    const combinedCourseInfo = await combinedCourseRepo.findByCampaignId({ campaignId: campaignReport.id });
-    campaignReport.setCombinedCourse(combinedCourseInfo[0]);
-    return campaignReport;
-  });
+  const campaignReports = results.map((attributes) => new CampaignReport(attributes));
+
   return { models: campaignReports, meta: { ...pagination, hasCampaigns } };
 };
 
