@@ -66,13 +66,9 @@ const acceptPixOrgaTermsOfService = async function (request, h) {
  */
 const changeUserLocale = async function (request, h, dependencies = { userSerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const language = request.params.lang;
   const locale = getUserLocale(request);
-  const updatedUser = await usecases.changeUserLocale({
-    userId: authenticatedUserId,
-    language,
-    locale,
-  });
+
+  const updatedUser = await usecases.changeUserLocale({ userId: authenticatedUserId, locale });
 
   return dependencies.userSerializer.serialize(updatedUser);
 };
