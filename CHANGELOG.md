@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.234.0](https://github.com/1024pix/pix/compare/v5.233.0...v5.234.0) (2025-10-15)
+
+### :rocket: Amélioration
+
+- [#13840](https://github.com/1024pix/pix/pull/13840) Utiliser la table certification_versions pour la sélection des challenges (PIX-19930). 
+- [#13890](https://github.com/1024pix/pix/pull/13890) WIP IAgenpromptnov-version2 
+
+### :bug: Correction
+
+- [#13892](https://github.com/1024pix/pix/pull/13892) Corriger une clé de traduction erronée (PIX-20018). 
+
+### :building_construction: Tech
+
+- [#13894](https://github.com/1024pix/pix/pull/13894) Ajouter un domain-builder pour le modèle Version (PIX-20024). 
+- [#13876](https://github.com/1024pix/pix/pull/13876) Modifier l'url pour enregistrer le logo d'un contenu formatif sur Admin (PIX-20002). 
+- [#13888](https://github.com/1024pix/pix/pull/13888) Utiliser le helper de redimensionnement d'image dans le composant flashcards-card (PIX-19922)
+
 # [5.233.0](https://github.com/1024pix/pix/compare/v5.232.0...v5.233.0) (2025-10-14)
 
 ### :rocket: Amélioration
