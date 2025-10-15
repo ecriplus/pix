@@ -85,14 +85,13 @@
 
     &__position {
       display: inline-block;
-
-      @extend %pix-body-m;
-
       margin: var(--pix-spacing-1x) 0 var(--pix-spacing-4x) 0;
       padding: var(--pix-spacing-2x) var(--pix-spacing-4x);
       color: var(--pix-neutral-800);
       background: var(--pix-neutral-20);
       border-radius: var(--modulix-radius-l);
+
+      @extend %pix-body-m;
     }
   }
 }
@@ -107,6 +106,7 @@
 
     flex: 0 0 100%;
     align-items: center;
+    height:fit-content;
     margin-right: var(--stepper-gap-between-steps);
     padding: var(--pix-spacing-4x);
     border: 1px solid var(--pix-neutral-100);
