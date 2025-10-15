@@ -165,9 +165,13 @@ async function buildBaseDataForCertification() {
     INSEECode: '66136',
     isActualName: true,
   });
-  await knex('certification-configurations').insert({
-    startingDate: new Date('1980-01-01'),
+  await knex('certification_versions').insert({
+    scope: 'CORE',
+    startDate: new Date('2024-10-19'),
     expirationDate: null,
+    assessmentDuration: 120,
+    globalScoringConfiguration: null,
+    competencesScoringConfiguration: null,
     challengesConfiguration: JSON.stringify({
       maximumAssessmentLength: 32,
       challengesBetweenSameCompetence: null,

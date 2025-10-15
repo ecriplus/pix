@@ -1,0 +1,62 @@
+/**
+ * @typedef {import('../../../shared/domain/models/Frameworks.js').Frameworks} Frameworks
+ */
+
+import Joi from 'joi';
+
+import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
+
+export class Version {
+  static #schema = Joi.object({
+    id: Joi.number().required(),
+    scope: Joi.string()
+      .required()
+      .valid(...Object.values(Frameworks)),
+    startDate: Joi.date().required(),
+    expirationDate: Joi.date().allow(null).optional(),
+    assessmentDuration: Joi.number().required(),
+    globalScoringConfiguration: Joi.array().allow(null).optional(),
+    competencesScoringConfiguration: Joi.array().allow(null).optional(),
+    challengesConfiguration: Joi.object().required(),
+  });
+
+  /**
+   * @param {Object} params
+   * @param {number} params.id - version identifier
+   * @param {Frameworks} params.scope - Framework scope (CORE, DROIT, etc.)
+   * @param {Date} params.startDate - When this version becomes active
+   * @param {Date|null} [params.expirationDate] - When this version expires (null if current)
+   * @param {number} params.assessmentDuration - Assessment duration in minutes
+   * @param {Array<Object>} [params.globalScoringConfiguration] - Global scoring configuration
+   * @param {Array<Object>} [params.competencesScoringConfiguration] - Competences scoring configuration
+   * @param {Object} params.challengesConfiguration - Challenges configuration
+   */
+  constructor({
+    id,
+    scope,
+    startDate,
+    expirationDate,
+    assessmentDuration,
+    globalScoringConfiguration,
+    competencesScoringConfiguration,
+    challengesConfiguration,
+  }) {
+    this.id = id;
+    this.scope = scope;
+    this.startDate = startDate;
+    this.expirationDate = expirationDate;
+    this.assessmentDuration = assessmentDuration;
+    this.globalScoringConfiguration = globalScoringConfiguration;
+    this.competencesScoringConfiguration = competencesScoringConfiguration;
+    this.challengesConfiguration = challengesConfiguration;
+    this.#validate();
+  }
+
+  #validate() {
+    const { error } = Version.#schema.validate(this, { allowUnknown: false });
+    if (error) {
+      throw EntityValidationError.fromJoiErrors(error.details);
+    }
+  }
+}

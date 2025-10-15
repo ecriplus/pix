@@ -5,6 +5,7 @@ import * as assessmentRepository from '../../../../shared/infrastructure/reposit
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
+import * as versionsRepository from '../../../configuration/infrastructure/repositories/versions-repository.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
@@ -27,6 +28,7 @@ import pickChallengeService from '../services/pick-challenge-service.js';
 
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
+ * @typedef {versionsRepository} VersionsRepository
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
@@ -70,6 +72,7 @@ const dependencies = {
   complementaryCertificationScoringCriteriaRepository,
   sharedFlashAlgorithmConfigurationRepository,
   certificationChallengeLiveAlertRepository,
+  versionsRepository,
   services,
 };
 

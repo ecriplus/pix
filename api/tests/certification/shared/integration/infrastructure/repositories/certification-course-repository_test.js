@@ -14,8 +14,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
       userId = databaseBuilder.factory.buildUser().id;
       sessionId = databaseBuilder.factory.buildSession({ version: 3 }).id;
 
-      databaseBuilder.factory.buildCertificationConfiguration();
-
       databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
       certificationCourse = domainBuilder.buildCertificationCourse.unpersisted({
         userId,
@@ -178,55 +176,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
           });
         });
       });
-
-      context('When the certification course is v3', function () {
-        it('should retrieve the number of challenges from the configuration', async function () {
-          const maximumAssessmentLength = 10;
-          const { expectedCertificationCourse, certificationCandidate } = _buildCertificationCourse({
-            description,
-            version: 3,
-            createdAt: new Date('2022-01-03'),
-          });
-
-          // Older configuration
-          databaseBuilder.factory.buildCertificationConfiguration({
-            startingDate: new Date('2022-01-01'),
-            expirationDate: new Date('2022-01-02'),
-            challengesConfiguration: {
-              maximumAssessmentLength: 5,
-            },
-          });
-
-          // Active configuration on the certification day
-          databaseBuilder.factory.buildCertificationConfiguration({
-            startingDate: new Date('2022-01-02'),
-            expirationDate: new Date('2022-01-04'),
-            challengesConfiguration: {
-              maximumAssessmentLength: maximumAssessmentLength,
-            },
-          });
-
-          // Newer configuration
-          databaseBuilder.factory.buildCertificationConfiguration({
-            startingDate: new Date('2022-01-04'),
-            challengesConfiguration: {
-              maximumAssessmentLength: 15,
-            },
-          });
-
-          await databaseBuilder.commit();
-          // when
-          const actualCertificationCourse = await certificationCourseRepository.get({
-            id: expectedCertificationCourse.id,
-          });
-
-          // then
-          expect(actualCertificationCourse.getNumberOfChallenges()).to.equal(maximumAssessmentLength);
-          expect(actualCertificationCourse.isAdjustementNeeded()).to.equal(
-            certificationCandidate.accessibilityAdjustmentNeeded,
-          );
-        });
-      });
     });
 
     context('When the certification course does not exist', function () {
@@ -243,8 +192,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
   describe('#findOneCertificationCourseByUserIdAndSessionId', function () {
     const createdAt = new Date('2018-12-11T01:02:03Z');
     const createdAtLater = new Date('2018-12-12T01:02:03Z');
-    const v3ConfigurationCreationDate = new Date('2018-12-12T01:00:03Z');
-    const numberOfQuestionsForV3 = 10;
     let userId;
     let sessionId;
 
@@ -296,13 +243,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         databaseBuilder.factory.buildCertificationCourse({ sessionId });
         databaseBuilder.factory.buildCertificationCourse({ userId });
 
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: v3ConfigurationCreationDate,
-          challengesConfiguration: {
-            maximumAssessmentLength: numberOfQuestionsForV3,
-          },
-        });
-
         return databaseBuilder.commit();
       });
 
@@ -325,7 +265,7 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         });
 
         // then
-        expect(certificationCourse.toDTO().numberOfChallenges).to.equal(numberOfQuestionsForV3);
+        expect(certificationCourse.toDTO().numberOfChallenges).to.equal(32);
       });
     });
   });

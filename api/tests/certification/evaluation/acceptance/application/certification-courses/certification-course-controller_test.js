@@ -328,7 +328,7 @@ describe('Acceptance | API | Certification Course', function () {
         it('should have created a v3 certification course without any challenges', async function () {
           // given
           const { options, userId, sessionId } = _createRequestOptions({ version: AlgorithmEngineVersion.V3 });
-          const { flashConfiguration } = _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
+          _createNonExistingCertifCourseSetup({ learningContent, userId, sessionId });
           await databaseBuilder.commit();
 
           // when
@@ -338,7 +338,7 @@ describe('Acceptance | API | Certification Course', function () {
           const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
           expect(certificationCourse.version).to.equal(AlgorithmEngineVersion.V3);
           expect(response.result.data.attributes).to.include({
-            'nb-challenges': JSON.parse(flashConfiguration.challengesConfiguration).maximumAssessmentLength,
+            'nb-challenges': 32,
           });
         });
 
@@ -451,7 +451,6 @@ function _createRequestOptions(
 function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userId }) {
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
   databaseBuilder.factory.learningContent.build(learningContentObjects);
-  const flashConfiguration = databaseBuilder.factory.buildCertificationConfiguration();
   const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId,
     userId,
@@ -475,10 +474,7 @@ function _createNonExistingCertifCourseSetup({ learningContent, sessionId, userI
     createdAt: new Date('2023-03-03'),
   });
 
-  return {
-    certificationCandidate,
-    flashConfiguration,
-  };
+  return { certificationCandidate };
 }
 
 function _createExistingCertifCourseSetup({ userId, sessionId, version = 2 }) {

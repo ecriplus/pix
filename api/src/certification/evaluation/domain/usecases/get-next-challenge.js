@@ -6,6 +6,7 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
+ * @typedef {import('../../../configuration/domain/usecases/index.js').VersionsRepository} VersionsRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {import('../../../evaluation/domain/usecases/index.js').PickChallengeService} PickChallengeService
  */
@@ -14,6 +15,7 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
@@ -26,7 +28,7 @@ const debugGetNextChallenge = Debug('pix:certif:get-next-challenge');
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
- * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
+ * @param {VersionsRepository} params.versionsRepository
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
  * @param {PickChallengeService} params.pickChallengeService
@@ -38,9 +40,9 @@ const getNextChallenge = async function ({
   certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
   certificationCourseRepository,
-  flashAlgorithmConfigurationRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
+  versionsRepository,
   flashAlgorithmService,
   pickChallengeService,
 }) {
@@ -99,13 +101,16 @@ const getNextChallenge = async function ({
       : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
   );
 
-  const algorithmConfiguration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
-    certificationCourse.getStartDate(),
-  );
+  const scope = _determineScope(complementaryCertificationKey);
+
+  const certificationVersion = await versionsRepository.getByScopeAndReconciliationDate({
+    scope,
+    reconciliationDate: candidate.reconciledAt,
+  });
 
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
-    configuration: algorithmConfiguration,
+    configuration: certificationVersion.challengesConfiguration,
   });
   const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
     assessmentAnswers: allAnswers,
@@ -155,6 +160,14 @@ const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAler
 
 const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationChallengeLiveAlertRepository }) => {
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
+};
+
+const _determineScope = (complementaryCertificationKey) => {
+  if (!complementaryCertificationKey || complementaryCertificationKey === ComplementaryCertificationKeys.CLEA) {
+    return Frameworks.CORE;
+  }
+
+  return complementaryCertificationKey;
 };
 
 export { getNextChallenge };
