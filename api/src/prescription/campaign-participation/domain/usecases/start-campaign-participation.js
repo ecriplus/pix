@@ -1,51 +1,54 @@
+import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 import { ParticipationStartedJob } from '../models/ParticipationStartedJob.js';
 
-export async function startCampaignParticipation({
-  campaignParticipation,
-  userId,
-  campaignRepository,
-  assessmentRepository,
-  knowledgeElementRepository,
-  campaignParticipantRepository,
-  campaignParticipationRepository,
-  competenceEvaluationRepository,
-  participationStartedJobRepository,
-}) {
-  const campaignParticipant = await campaignParticipantRepository.get({
+export const startCampaignParticipation = withTransaction(
+  async ({
+    campaignParticipation,
     userId,
-    campaignId: campaignParticipation.campaignId,
-  });
-
-  campaignParticipant.start({
-    participantExternalId: campaignParticipation.participantExternalId,
-    isReset: campaignParticipation.isReset,
-  });
-
-  const campaignParticipationId = await campaignParticipantRepository.save({ campaignParticipant });
-
-  const createdCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
-
-  const areKnowledgeElementsResettable = await campaignRepository.areKnowledgeElementsResettable({
-    id: campaignParticipation.campaignId,
-  });
-
-  if (areKnowledgeElementsResettable && campaignParticipation.isReset) {
-    await _resetCampaignParticipation({
-      campaignParticipation,
+    campaignRepository,
+    assessmentRepository,
+    knowledgeElementRepository,
+    campaignParticipantRepository,
+    campaignParticipationRepository,
+    competenceEvaluationRepository,
+    participationStartedJobRepository,
+  }) => {
+    const campaignParticipant = await campaignParticipantRepository.get({
       userId,
-      assessmentRepository,
-      campaignRepository,
-      competenceEvaluationRepository,
-      knowledgeElementRepository,
+      campaignId: campaignParticipation.campaignId,
     });
-  }
 
-  await participationStartedJobRepository.performAsync(new ParticipationStartedJob({ campaignParticipationId }));
-  return {
-    campaignParticipation: createdCampaignParticipation,
-  };
-}
+    campaignParticipant.start({
+      participantExternalId: campaignParticipation.participantExternalId,
+      isReset: campaignParticipation.isReset,
+    });
+
+    const campaignParticipationId = await campaignParticipantRepository.save({ campaignParticipant });
+
+    const createdCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
+
+    const areKnowledgeElementsResettable = await campaignRepository.areKnowledgeElementsResettable({
+      id: campaignParticipation.campaignId,
+    });
+
+    if (areKnowledgeElementsResettable && campaignParticipation.isReset) {
+      await _resetCampaignParticipation({
+        campaignParticipation,
+        userId,
+        assessmentRepository,
+        campaignRepository,
+        competenceEvaluationRepository,
+        knowledgeElementRepository,
+      });
+    }
+
+    await participationStartedJobRepository.performAsync(new ParticipationStartedJob({ campaignParticipationId }));
+    return {
+      campaignParticipation: createdCampaignParticipation,
+    };
+  },
+);
 
 async function _resetCampaignParticipation({
   campaignParticipation,

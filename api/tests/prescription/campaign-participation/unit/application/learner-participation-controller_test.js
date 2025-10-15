@@ -149,9 +149,6 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
       usecases.startCampaignParticipation.resolves({});
       const deserializedCampaignParticipation = Symbol('campaignParticipation');
       dependencies.campaignParticipationSerializer.deserialize.resolves(deserializedCampaignParticipation);
-      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
-        return callback();
-      });
 
       // when
       await learnerParticipationController.save(request, hFake, dependencies);
@@ -172,9 +169,6 @@ describe('Unit | Application | Controller | Learner-Participation', function () 
       const campaignParticipation = domainBuilder.buildCampaignParticipation();
       usecases.startCampaignParticipation.resolves({
         campaignParticipation,
-      });
-      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
-        return callback();
       });
 
       const serializedCampaignParticipation = { id: 88, assessmentId: 12 };
