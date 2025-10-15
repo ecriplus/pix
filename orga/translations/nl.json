@@ -1019,12 +1019,17 @@
         "total-participations": "Totaal van de deelnemingen"
       },
       "table": {
+        "campaign-completion": "{count, plural, =0 {Geen enkele campagne voltooid op {nbCampaigns}} =1 {1 van de {nbCampaigns} campagnes voltooid} other {{count} van de {nbCampaigns} campagnes voltooid}}.",
         "column": {
+          "campaigns": "Campagnes",
           "first-name": "Voornaam",
           "last-name": "Achternaam",
+          "modules": "Modules",
           "status": "Status"
         },
-        "description": "List of the combined course participations"
+        "description": "List of the combined course participations",
+        "module-completion": "{count, plural, =0 {geen module voltooid op {nbModules}} =1 {1 van de {nbModules} modules voltooid} other {{count} van de {nbModules} modules voltooid}}.",
+        "no-module": "Geen aanbevolen module."
       }
     },
     "combined-courses": {

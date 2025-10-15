@@ -1019,12 +1019,17 @@
         "total-participations": "Total des participations"
       },
       "table": {
+        "campaign-completion": "{count, plural, =0 {Aucune campagne complétée sur {nbCampaigns}} =1 {Une campagne complétée sur {nbCampaigns}} other {{count} campagnes complétées sur {nbCampaigns}}}.",
         "column": {
+          "campaigns": "Campagnes",
           "first-name": "Prénom",
           "last-name": "Nom",
+          "modules": "Modules",
           "status": "Statut"
         },
-        "description": "Listes des participations au parcours"
+        "description": "Listes des participations au parcours",
+        "module-completion": "{count, plural, =0 {Aucun module complété sur {nbModules}} =1 {Un module complété sur {nbModules}} other {{count} modules complétés sur {nbModules}}}.",
+        "no-module": "Aucun module recommandé."
       }
     },
     "combined-courses": {
