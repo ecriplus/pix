@@ -16,8 +16,12 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
 
     try {
       await organizationAdapter.attachChildOrganization({ childOrganizationIds, parentOrganizationId });
+
+      const count = childOrganizationIds.split(',').length;
       this.pixToast.sendSuccessNotification({
-        message: this.intl.t('pages.organization-children.notifications.success.attach-child-organization'),
+        message: this.intl.t('pages.organization-children.notifications.success.attach-child-organization', {
+          count,
+        }),
       });
 
       await this.model.organization.hasMany('children').reload();

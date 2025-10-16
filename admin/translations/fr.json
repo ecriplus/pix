@@ -1067,7 +1067,7 @@
           "unable-to-attach-parent-organization-as-child-organization": "Impossible d'attacher une organisation mère en tant qu'organisation fille."
         },
         "success": {
-          "attach-child-organization": "L'organisation fille a bien été liée à l'organisation mère"
+          "attach-child-organization": "{count, plural, =1 {L'organisation fille a bien été liée à l'organisation mère} other {Les {count} organisations filles ont bien été liées à l'organisation mère}}"
         }
       },
       "title": "Organisations filles"

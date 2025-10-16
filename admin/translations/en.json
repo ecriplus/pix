@@ -1066,7 +1066,7 @@
           "unable-to-attach-parent-organization-as-child-organization": "Unable to attach a parent organization as child organization"
         },
         "success": {
-          "attach-child-organization": "The child organization has been linked to the parent organization"
+          "attach-child-organization": "{count, plural, =1 {The child organization has been linked to the parent organization} other {The {count} child organizations have been linked to the parent organization}}"
         }
       },
       "title": "Children organisations"

@@ -16,12 +16,14 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
     controller = this.owner.lookup('controller:authenticated/organizations/get/children');
     notifications = this.owner.lookup('service:pixToast');
     store = this.owner.lookup('service:store');
+
+    this.intl = this.owner.lookup('service:intl');
   });
 
   module('#handleFormSubmitted', function () {
     test('attaches child organization to parent organization and displays success notification', async function (assert) {
       // given
-      const childOrganizationId = '1234';
+      const childOrganizationIds = '1234, 5678';
       const organizationAdapter = { attachChildOrganization: sinon.stub().resolves() };
 
       sinon.stub(store, 'adapterFor').returns(organizationAdapter);
@@ -36,19 +38,21 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
       });
 
       // when
-      await controller.handleFormSubmitted(childOrganizationId);
+      await controller.handleFormSubmitted(childOrganizationIds);
 
       // then
       assert.true(store.adapterFor.calledWithExactly('organization'));
       assert.true(
         organizationAdapter.attachChildOrganization.calledWithExactly({
-          childOrganizationIds: '1234',
+          childOrganizationIds: '1234, 5678',
           parentOrganizationId: '12',
         }),
       );
       assert.true(
         notifications.sendSuccessNotification.calledWithExactly({
-          message: `L'organisation fille a bien été liée à l'organisation mère`,
+          message: this.intl.t('pages.organization-children.notifications.success.attach-child-organization', {
+            count: 2,
+          }),
         }),
       );
       assert.true(reloadStub.calledOnce);
