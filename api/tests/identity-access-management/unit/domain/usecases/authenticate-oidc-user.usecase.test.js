@@ -3,8 +3,8 @@ import { AuthenticationMethod } from '../../../../../src/identity-access-managem
 import { authenticateOidcUser } from '../../../../../src/identity-access-management/domain/usecases/authenticate-oidc-user.usecase.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
+import { AdminMember } from '../../../../../src/team/domain/models/AdminMember.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oidc-user', function () {

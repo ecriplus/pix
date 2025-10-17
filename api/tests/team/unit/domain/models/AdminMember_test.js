@@ -4,7 +4,7 @@ import { expect } from '../../../../test-helper.js';
 const { ROLES } = PIX_ADMIN;
 
 import { ObjectValidationError } from '../../../../../src/shared/domain/errors.js';
-import { AdminMember } from '../../../../../src/shared/domain/models/AdminMember.js';
+import { AdminMember } from '../../../../../src/team/domain/models/AdminMember.js';
 
 describe('Unit | Shared | Domain | Models | AdminMember', function () {
   describe('constructor', function () {
