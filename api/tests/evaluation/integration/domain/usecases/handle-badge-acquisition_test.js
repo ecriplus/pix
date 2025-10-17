@@ -188,4 +188,23 @@ describe('Integration | Usecase | Handle Badge Acquisition', function () {
       });
     });
   });
+
+  context('when assessment is not linked to a campaign', function () {
+    it('should not throw', async function () {
+      const userId = databaseBuilder.factory.buildUser().id;
+
+      const assessmentDB = databaseBuilder.factory.buildAssessment({
+        userId,
+        campaignParticipationId: null,
+        type: Assessment.types.CAMPAIGN,
+      });
+
+      await databaseBuilder.commit();
+
+      const assessment = domainBuilder.buildAssessment(assessmentDB);
+      const result = evaluationUsecases.handleBadgeAcquisition({ assessment });
+
+      await expect(result).to.fulfilled;
+    });
+  });
 });

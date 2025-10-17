@@ -6,7 +6,7 @@ const handleBadgeAcquisition = async function ({
   badgeAcquisitionRepository,
   knowledgeElementRepository,
 }) {
-  if (assessment.isForCampaign()) {
+  if (assessment.isCampaignParticipationAvailable()) {
     const campaignParticipationId = assessment.campaignParticipationId;
     const associatedBadges = await _fetchPossibleCampaignAssociatedBadges(
       campaignParticipationId,
