@@ -10,7 +10,7 @@ import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { UserOrgaSettings } from '../../../../../src/shared/domain/models/UserOrgaSettings.js';
+import { UserOrgaSettings } from '../../../../../src/team/domain/models/UserOrgaSettings.js';
 import { Prescriber } from '../../../../../src/team/domain/read-models/Prescriber.js';
 import { repositories } from '../../../../../src/team/infrastructure/repositories/index.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
