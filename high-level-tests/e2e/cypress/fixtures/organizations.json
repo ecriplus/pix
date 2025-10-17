@@ -2,18 +2,21 @@
   {
     "id": 1,
     "type": "PRO",
-    "name": "Dragon & Co"
+    "name": "Dragon & Co",
+    "administrationTeamId": 1
   },
   {
     "id": 2,
     "type": "SCO",
     "name": "The Night Watch",
-    "isManagingStudents": true
+    "isManagingStudents": true,
+    "administrationTeamId": 2
   },
   {
     "id": 3,
     "type": "SUP",
     "name": "The Order of Maesters",
-    "isManagingStudents": true
+    "isManagingStudents": true,
+    "administrationTeamId": 1
   }
 ]
