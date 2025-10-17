@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Assessment } from '../../../shared/domain/models/Assessment.js';
@@ -27,7 +26,8 @@ const save = async function ({ competenceEvaluation }) {
 };
 
 const updateStatusByUserIdAndCompetenceId = async function ({ userId, competenceId, status }) {
-  const [competenceEvaluation] = await knex('competence-evaluations')
+  const knexConn = DomainTransaction.getConnection();
+  const [competenceEvaluation] = await knexConn('competence-evaluations')
     .where({ userId, competenceId })
     .update({ status })
     .returning('*');
@@ -46,12 +46,13 @@ const updateAssessmentId = async function ({ currentAssessmentId, newAssessmentI
 };
 
 const getByAssessmentId = async function (assessmentId) {
-  const competenceEvaluation = await knex('competence-evaluations').where({ assessmentId }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const competenceEvaluation = await knexConn('competence-evaluations').where({ assessmentId }).first();
   if (!competenceEvaluation) {
     throw new NotFoundError();
   }
 
-  const assessment = await knex('assessments').where({ id: competenceEvaluation.assessmentId }).first();
+  const assessment = await knexConn('assessments').where({ id: competenceEvaluation.assessmentId }).first();
 
   return _toDomain({ competenceEvaluation, assessment });
 };
@@ -76,8 +77,9 @@ const getByCompetenceIdAndUserId = async function ({
 };
 
 const findByUserId = async function (userId) {
-  const competenceEvaluations = await knex('competence-evaluations').where({ userId }).orderBy('createdAt', 'asc');
-  const assessments = await knex('assessments').whereIn(
+  const knexConn = DomainTransaction.getConnection();
+  const competenceEvaluations = await knexConn('competence-evaluations').where({ userId }).orderBy('createdAt', 'asc');
+  const assessments = await knexConn('assessments').whereIn(
     'id',
     competenceEvaluations.map((competenceEvaluation) => competenceEvaluation.assessmentId),
   );
@@ -93,7 +95,8 @@ const findByUserId = async function (userId) {
 };
 
 const findByAssessmentId = async function (assessmentId) {
-  const competenceEvaluations = await knex('competence-evaluations')
+  const knexConn = DomainTransaction.getConnection();
+  const competenceEvaluations = await knexConn('competence-evaluations')
     .where({ assessmentId })
     .orderBy('createdAt', 'asc');
 

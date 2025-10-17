@@ -129,6 +129,12 @@ async function _createNewCampaignParticipation(campaignParticipation) {
         `User ${campaignParticipation.userId} has already a campaign participation with campaign ${campaignParticipation.campaignId}`,
       );
     }
+
+    if (error.constraint === 'one_active_participation_by_learner') {
+      throw new AlreadyExistingCampaignParticipationError(
+        `learner ${campaignParticipation.organizationLearnerId} has already a campaign participation with campaign ${campaignParticipation.campaignId}`,
+      );
+    }
     throw error;
   }
 }

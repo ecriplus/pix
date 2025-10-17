@@ -10,8 +10,9 @@ const save = async function (request, h, dependencies = { campaignParticipationS
   const userId = request.auth.credentials.userId;
   const campaignParticipation = await dependencies.campaignParticipationSerializer.deserialize(request.payload);
 
-  const { campaignParticipation: campaignParticipationCreated } = await DomainTransaction.execute(() => {
-    return usecases.startCampaignParticipation({ campaignParticipation, userId });
+  const { campaignParticipation: campaignParticipationCreated } = await usecases.startCampaignParticipation({
+    campaignParticipation,
+    userId,
   });
 
   return h.response(dependencies.campaignParticipationSerializer.serialize(campaignParticipationCreated)).created();
