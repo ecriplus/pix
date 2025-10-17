@@ -21,7 +21,7 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
     localeService = this.owner.lookup('service:locale');
     routerService = this.owner.lookup('service:router');
 
-    sinon.stub(localeService, 'switcherDisplayedLanguages').value([
+    sinon.stub(localeService, 'switcherDisplayedLocales').value([
       { value: 'fr', label: 'Français' },
       { value: 'en', label: 'English' },
       { value: 'nl', label: 'Nederlands' },
@@ -42,26 +42,13 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
       const selectedOption = screen.getByRole('option', { name: 'English' });
       assert.dom(selectedOption).hasAttribute('aria-selected', 'true');
     });
-
-    test('displays a defaultValue', async function (assert) {
-      // given
-      setCurrentLocale('fr');
-
-      // when
-      const screen = await render(<template><LocaleSwitcher @defaultValue="en" /></template>);
-      await click(screen.getByRole('button', { name: 'Sélectionnez une langue' }));
-      await screen.findByRole('listbox');
-
-      // then
-      const selectedOption = screen.getByRole('option', { name: 'English' });
-      assert.dom(selectedOption).hasAttribute('aria-selected', 'true');
-    });
   });
 
   module('when component is clicked', function () {
     test('displays a list of available locales with french locale first', async function (assert) {
       // given
-      const screen = await render(<template><LocaleSwitcher @defaultValue="en" /></template>);
+      setCurrentLocale('fr');
+      const screen = await render(<template><LocaleSwitcher /></template>);
 
       // when
       await click(screen.getByRole('button', { name: 'Sélectionnez une langue' }));
@@ -81,19 +68,18 @@ module('Integration | Component | LocaleSwitcher', function (hooks) {
       const onLocaleChangeStub = sinon.stub();
       sinon.stub(localeService, 'setCurrentLocale');
       sinon.stub(routerService, 'replaceWith');
+      setCurrentLocale('fr');
 
-      const screen = await render(
-        <template><LocaleSwitcher @onChange={{onLocaleChangeStub}} @defaultValue="en" /></template>,
-      );
+      const screen = await render(<template><LocaleSwitcher @onChange={{onLocaleChangeStub}} /></template>);
 
       // when
       await click(screen.getByRole('button', { name: 'Sélectionnez une langue' }));
       await screen.findByRole('listbox');
-      await click(screen.getByRole('option', { name: 'Français' }));
+      await click(screen.getByRole('option', { name: 'English' }));
 
       // then
-      assert.ok(onLocaleChangeStub.calledWithExactly('fr'));
-      assert.ok(localeService.setCurrentLocale.calledWith('fr'));
+      assert.ok(onLocaleChangeStub.calledWithExactly('en'));
+      assert.ok(localeService.setCurrentLocale.calledWith('en'));
       assert.ok(routerService.replaceWith.calledWith({ queryParams: { lang: null } }));
     });
   });
