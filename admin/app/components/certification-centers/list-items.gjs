@@ -17,7 +17,7 @@ export default class CertificationCenterListItems extends Component {
   <template>
     <div class="certification-centers-list">
       <PixFilterBanner @title={{t "common.filters.title"}}>
-        <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}}>
+        <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}} type="number">
           <:label>Identifiant</:label>
         </PixInput>
         <PixInput value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}}>
