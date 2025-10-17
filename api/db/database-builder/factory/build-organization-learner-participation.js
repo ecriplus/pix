@@ -1,11 +1,14 @@
 import _ from 'lodash';
 
+import { OrganizationLearnerParticipationTypes } from '../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { databaseBuffer } from '../database-buffer.js';
+import { buildCombinedCourseParticipation } from './build-combined-course-participation.js';
+import { buildOrganizationLearnerPassageParticipation } from './build-organization-learner-passage-participation.js';
 import { buildOrganizationLearner } from './prescription/organization-learners/build-organization-learner.js';
 
 const buildOrganizationLearnerParticipation = function ({
   id = databaseBuffer.getNextId(),
-  type = 'passage',
+  type = OrganizationLearnerParticipationTypes.PASSAGE,
   createdAt = new Date(),
   updatedAt = new Date(),
   completedAt = null,
@@ -14,6 +17,9 @@ const buildOrganizationLearnerParticipation = function ({
   organizationLearnerId,
   status,
   moduleId,
+  combinedCourseId,
+  questId,
+  addAttributes = true,
 } = {}) {
   organizationLearnerId = _.isUndefined(organizationLearnerId) ? buildOrganizationLearner().id : organizationLearnerId;
 
@@ -27,19 +33,38 @@ const buildOrganizationLearnerParticipation = function ({
     deletedBy,
     organizationLearnerId,
     status,
+    attributes: addAttributes ? JSON.stringify({ id: moduleId ?? combinedCourseId }) : null,
   };
 
   const organizationLearnerParticipation = databaseBuffer.pushInsertable({
     tableName: 'organization_learner_participations',
     values,
   });
+  let organizationLearnerPassageId, organizationLearnerCombinedCourseParticipationId;
+  if (type === OrganizationLearnerParticipationTypes.PASSAGE) {
+    organizationLearnerPassageId = buildOrganizationLearnerPassageParticipation({
+      moduleId,
+      organizationLearnerParticipationId: organizationLearnerParticipation.id,
+    }).id;
+  }
 
-  databaseBuffer.pushInsertable({
-    tableName: 'organization_learner_passage_participations',
-    values: { id, moduleId, organizationLearnerParticipationId: organizationLearnerParticipation.id },
-  });
+  if (type === OrganizationLearnerParticipationTypes.COMBINED_COURSE) {
+    organizationLearnerCombinedCourseParticipationId = buildCombinedCourseParticipation({
+      organizationLearnerId,
+      questId,
+      combinedCourseId,
+      status,
+      createdAt,
+      updatedAt,
+      organizationLearnerParticipationId: organizationLearnerParticipation.id,
+    }).id;
+  }
 
-  return organizationLearnerParticipation;
+  return {
+    ...organizationLearnerParticipation,
+    organizationLearnerPassageId,
+    organizationLearnerCombinedCourseParticipationId,
+  };
 };
 
 export { buildOrganizationLearnerParticipation };
