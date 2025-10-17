@@ -81,302 +81,247 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
     const assessmentId = 1;
     const userId = 1234;
 
-    context('When passing a V3 certification session', function () {
-      context('When there is still challenges to answer', function () {
-        let clock;
+    context('When there are still challenges to answer', function () {
+      let clock;
 
-        beforeEach(async function () {
-          const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          const sessionId = databaseBuilder.factory.buildSession({
-            certificationCenterId,
-            version: AlgorithmEngineVersion.V3,
-          }).id;
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-            isPublished: false,
-            version: AlgorithmEngineVersion.V3,
-            userId,
-            sessionId,
-          }).id;
+      beforeEach(async function () {
+        const user = databaseBuilder.factory.buildUser({ id: userId });
+        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+        const sessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          version: AlgorithmEngineVersion.V3,
+        }).id;
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          isPublished: false,
+          version: AlgorithmEngineVersion.V3,
+          userId,
+          sessionId,
+        }).id;
 
-          const candidate = databaseBuilder.factory.buildCertificationCandidate({
-            ...user,
-            userId: user.id,
-            sessionId,
-            reconciledAt: new Date('2020-01-15'),
-          });
-          databaseBuilder.factory.buildCertificationVersion({
-            scope: Frameworks.CORE,
-            startDate: candidate.reconciledAt,
-          });
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
-          databaseBuilder.factory.buildAssessment({
-            id: assessmentId,
-            type: Assessment.types.CERTIFICATION,
-            certificationCourseId,
-            userId,
-            lastQuestionDate: new Date('2020-01-20'),
-            state: 'started',
-          });
-          databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-          await databaseBuilder.commit();
-
-          clock = sinon.useFakeTimers({
-            now: Date.now(),
-            toFake: ['Date'],
-          });
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          ...user,
+          userId: user.id,
+          sessionId,
+          reconciledAt: new Date('2020-01-15'),
         });
-
-        afterEach(async function () {
-          clock.restore();
+        databaseBuilder.factory.buildCertificationVersion({
+          scope: Frameworks.CORE,
+          startDate: candidate.reconciledAt,
         });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+        databaseBuilder.factory.buildAssessment({
+          id: assessmentId,
+          type: Assessment.types.CERTIFICATION,
+          certificationCourseId,
+          userId,
+          lastQuestionDate: new Date('2020-01-20'),
+          state: 'started',
+        });
+        databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
+        await databaseBuilder.commit();
 
-        it('should save and return an assessment', async function () {
-          // given
-          const options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          };
-
-          const lastQuestionDate = new Date();
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastQuestionDate');
-          const { count: countSavedChallenge } = await knex('certification-challenges').count('* AS count').first();
-
-          expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
-          expect(countSavedChallenge).to.equal(1);
-          expect(response.result.data.id).to.equal(assessmentId.toString());
-          expect(response.result.data.relationships['next-challenge'].data.id).to.be.oneOf([
-            firstChallengeId,
-            secondChallengeId,
-            thirdChallengeId,
-            otherChallengeId,
-          ]);
+        clock = sinon.useFakeTimers({
+          now: Date.now(),
+          toFake: ['Date'],
         });
       });
 
-      context('When there is are ongoing live and companion alerts for a challenge', function () {
-        beforeEach(async function () {
-          const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          const sessionId = databaseBuilder.factory.buildSession({
-            certificationCenterId,
-            version: AlgorithmEngineVersion.V3,
-          }).id;
-          databaseBuilder.factory.buildCertificationConfiguration();
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-            isPublished: false,
-            version: AlgorithmEngineVersion.V3,
-            userId,
-            sessionId,
-          }).id;
-          databaseBuilder.factory.buildCertificationCandidate({ ...user, userId: user.id, sessionId });
-          const assessment = databaseBuilder.factory.buildAssessment({
-            id: assessmentId,
-            type: Assessment.types.CERTIFICATION,
-            certificationCourseId,
-            lastChallengeId: firstChallengeId,
-            userId,
-            lastQuestionDate: new Date('2020-01-20'),
-            state: 'started',
-          });
-          databaseBuilder.factory.buildCertificationChallengeLiveAlert({
-            assessmentId: assessment.id,
-            challengeId: firstChallengeId,
-            status: CertificationChallengeLiveAlertStatus.ONGOING,
-          });
-          databaseBuilder.factory.buildCertificationCompanionLiveAlert({
-            assessmentId: assessment.id,
-            status: CertificationCompanionLiveAlertStatus.ONGOING,
-          });
-          databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-          await databaseBuilder.commit();
-        });
-
-        it('returns flags related to live alerts', async function () {
-          // given
-          const options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.result.data.attributes['has-ongoing-challenge-live-alert']).to.be.true;
-          expect(response.result.data.attributes['has-ongoing-companion-live-alert']).to.be.true;
-        });
+      afterEach(async function () {
+        clock.restore();
       });
 
-      context('When there is a validated live alert for a challenge', function () {
-        beforeEach(async function () {
-          const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          const sessionId = databaseBuilder.factory.buildSession({
-            certificationCenterId,
-            version: AlgorithmEngineVersion.V3,
-          }).id;
-          databaseBuilder.factory.buildCertificationVersion();
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-            isPublished: false,
-            version: AlgorithmEngineVersion.V3,
-            userId,
-            sessionId,
-          }).id;
-          const candidate = databaseBuilder.factory.buildCertificationCandidate({
-            ...user,
-            userId: user.id,
-            sessionId,
-          });
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
-          const assessment = databaseBuilder.factory.buildAssessment({
-            id: assessmentId,
-            type: Assessment.types.CERTIFICATION,
-            certificationCourseId,
-            lastChallengeId: firstChallengeId,
-            userId,
-            lastQuestionDate: new Date('2020-01-20'),
-            state: 'started',
-          });
-          databaseBuilder.factory.buildCertificationChallengeLiveAlert({
-            assessmentId: assessment.id,
-            challengeId: firstChallengeId,
-            status: 'validated',
-          });
-          databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-          await databaseBuilder.commit();
-        });
+      it('should save and return an assessment', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
 
-        it('returns another challenge', async function () {
-          // given
-          const options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          };
+        const lastQuestionDate = new Date();
 
-          // when
-          const response = await server.inject(options);
+        // when
+        const response = await server.inject(options);
 
-          // then
-          expect(response.result.data.id).to.not.equal(firstChallengeId);
-          const assessment = await knex('assessments').first();
-          expect(assessment.lastChallengeId).to.not.equal(firstChallengeId);
-        });
-      });
+        // then
+        const assessmentsInDb = await knex('assessments').where('id', assessmentId).first('lastQuestionDate');
+        const { count: countSavedChallenge } = await knex('certification-challenges').count('* AS count').first();
 
-      context('When resuming certification session after leaving', function () {
-        it('should return the last challenge the user has seen before leaving the session', async function () {
-          const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          databaseBuilder.factory.buildCertificationConfiguration();
-          const sessionId = databaseBuilder.factory.buildSession({
-            certificationCenterId,
-            version: AlgorithmEngineVersion.V3,
-          }).id;
-          const candidate = databaseBuilder.factory.buildCertificationCandidate({
-            userId: user.id,
-            sessionId,
-          });
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-            isPublished: false,
-            version: AlgorithmEngineVersion.V3,
-            userId: user.id,
-            sessionId,
-          }).id;
-          databaseBuilder.factory.buildCertificationChallenge({
-            associatedSkillName: '@web3',
-            associatedSkillId: skillWeb3Id,
-            challengeId: secondChallengeId,
-            competenceId,
-            courseId: certificationCourseId,
-          });
-          databaseBuilder.factory.buildAssessment({
-            id: assessmentId,
-            type: Assessment.types.CERTIFICATION,
-            certificationCourseId,
-            userId: user.id,
-            lastQuestionDate: new Date('2020-01-20'),
-            state: 'started',
-            lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
-          });
-          databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-          await databaseBuilder.commit();
-
-          // given
-          const options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
-        });
+        expect(assessmentsInDb.lastQuestionDate).to.deep.equal(lastQuestionDate);
+        expect(countSavedChallenge).to.equal(1);
+        expect(response.result.data.id).to.equal(assessmentId.toString());
+        expect(response.result.data.relationships['next-challenge'].data.id).to.be.oneOf([
+          firstChallengeId,
+          secondChallengeId,
+          thirdChallengeId,
+          otherChallengeId,
+        ]);
       });
     });
 
-    context('When passing a V2 certification session', function () {
-      context('When resuming certification session after leaving', function () {
-        it('should return the last challenge the user has seen before leaving the session', async function () {
-          const user = databaseBuilder.factory.buildUser({ id: userId });
-          const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
-          const sessionId = databaseBuilder.factory.buildSession({
-            certificationCenterId,
-          }).id;
-          const candidate = databaseBuilder.factory.buildCertificationCandidate({
-            userId: user.id,
-            sessionId,
-          });
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
-          const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-            isPublished: false,
-            userId: user.id,
-            sessionId,
-          }).id;
-          databaseBuilder.factory.buildCertificationChallenge({
-            associatedSkillName: '@web3',
-            associatedSkillId: skillWeb3Id,
-            challengeId: firstChallengeId,
-            competenceId,
-            courseId: certificationCourseId,
-          });
-          databaseBuilder.factory.buildAssessment({
-            id: assessmentId,
-            type: Assessment.types.CERTIFICATION,
-            certificationCourseId,
-            userId: user.id,
-            lastQuestionDate: new Date('2020-01-20'),
-            state: 'started',
-            lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
-          });
-          databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-          await databaseBuilder.commit();
-
-          // given
-          const options = {
-            method: 'GET',
-            url: `/api/assessments/${assessmentId}`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId }),
-          };
-
-          // when
-          const response = await server.inject(options);
-
-          // then
-          expect(response.result.data.relationships['next-challenge'].data.id).to.equal(firstChallengeId);
+    context('When there is are ongoing live and companion alerts for a challenge', function () {
+      beforeEach(async function () {
+        const user = databaseBuilder.factory.buildUser({ id: userId });
+        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+        const sessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          version: AlgorithmEngineVersion.V3,
+        }).id;
+        databaseBuilder.factory.buildCertificationConfiguration();
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          isPublished: false,
+          version: AlgorithmEngineVersion.V3,
+          userId,
+          sessionId,
+        }).id;
+        databaseBuilder.factory.buildCertificationCandidate({ ...user, userId: user.id, sessionId });
+        const assessment = databaseBuilder.factory.buildAssessment({
+          id: assessmentId,
+          type: Assessment.types.CERTIFICATION,
+          certificationCourseId,
+          lastChallengeId: firstChallengeId,
+          userId,
+          lastQuestionDate: new Date('2020-01-20'),
+          state: 'started',
         });
+        databaseBuilder.factory.buildCertificationChallengeLiveAlert({
+          assessmentId: assessment.id,
+          challengeId: firstChallengeId,
+          status: CertificationChallengeLiveAlertStatus.ONGOING,
+        });
+        databaseBuilder.factory.buildCertificationCompanionLiveAlert({
+          assessmentId: assessment.id,
+          status: CertificationCompanionLiveAlertStatus.ONGOING,
+        });
+        databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
+        await databaseBuilder.commit();
+      });
+
+      it('returns flags related to live alerts', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.result.data.attributes['has-ongoing-challenge-live-alert']).to.be.true;
+        expect(response.result.data.attributes['has-ongoing-companion-live-alert']).to.be.true;
+      });
+    });
+
+    context('When there is a validated live alert for a challenge', function () {
+      beforeEach(async function () {
+        const user = databaseBuilder.factory.buildUser({ id: userId });
+        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+        const sessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          version: AlgorithmEngineVersion.V3,
+        }).id;
+        databaseBuilder.factory.buildCertificationVersion();
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          isPublished: false,
+          version: AlgorithmEngineVersion.V3,
+          userId,
+          sessionId,
+        }).id;
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          ...user,
+          userId: user.id,
+          sessionId,
+        });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+        const assessment = databaseBuilder.factory.buildAssessment({
+          id: assessmentId,
+          type: Assessment.types.CERTIFICATION,
+          certificationCourseId,
+          lastChallengeId: firstChallengeId,
+          userId,
+          lastQuestionDate: new Date('2020-01-20'),
+          state: 'started',
+        });
+        databaseBuilder.factory.buildCertificationChallengeLiveAlert({
+          assessmentId: assessment.id,
+          challengeId: firstChallengeId,
+          status: 'validated',
+        });
+        databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
+        await databaseBuilder.commit();
+      });
+
+      it('returns another challenge', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.result.data.id).to.not.equal(firstChallengeId);
+        const assessment = await knex('assessments').first();
+        expect(assessment.lastChallengeId).to.not.equal(firstChallengeId);
+      });
+    });
+
+    context('When resuming certification session after leaving', function () {
+      it('should return the last challenge the user has seen before leaving the session', async function () {
+        const user = databaseBuilder.factory.buildUser({ id: userId });
+        const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+        databaseBuilder.factory.buildCertificationConfiguration();
+        const sessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          version: AlgorithmEngineVersion.V3,
+        }).id;
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          userId: user.id,
+          sessionId,
+        });
+        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          isPublished: false,
+          version: AlgorithmEngineVersion.V3,
+          userId: user.id,
+          sessionId,
+        }).id;
+        databaseBuilder.factory.buildCertificationChallenge({
+          associatedSkillName: '@web3',
+          associatedSkillId: skillWeb3Id,
+          challengeId: secondChallengeId,
+          competenceId,
+          courseId: certificationCourseId,
+        });
+        databaseBuilder.factory.buildAssessment({
+          id: assessmentId,
+          type: Assessment.types.CERTIFICATION,
+          certificationCourseId,
+          userId: user.id,
+          lastQuestionDate: new Date('2020-01-20'),
+          state: 'started',
+          lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
+        });
+        databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
+        await databaseBuilder.commit();
+
+        // given
+        const options = {
+          method: 'GET',
+          url: `/api/assessments/${assessmentId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.result.data.relationships['next-challenge'].data.id).to.equal(secondChallengeId);
       });
     });
   });
