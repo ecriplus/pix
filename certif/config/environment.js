@@ -33,7 +33,12 @@ module.exports = function (environment) {
       API_HOST: process.env.API_HOST || '',
       APPLICATION_NAME: process.env.APP || 'pix-certif-local',
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
-      SUPPORTED_LOCALES: ['en', 'fr', 'fr-FR', 'fr-BE'],
+      SUPPORTED_LOCALES: [
+        { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
+        { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
+        { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
+        { value: 'en', nativeName: 'English', displayedInSwitcher: true },
+      ],
       BANNER: {
         CONTENT: process.env.BANNER_CONTENT || '',
         TYPE: process.env.BANNER_TYPE || '',
