@@ -17,11 +17,12 @@ import {
 } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | organization-for-admin', function () {
-  let clock, byDefaultFeatureId;
+  let clock, byDefaultFeatureId, administrationTeam;
   const now = new Date('2022-02-02');
 
   beforeEach(async function () {
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'ma team' });
     await databaseBuilder.commit();
   });
 
@@ -33,7 +34,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     context('when there are Organizations in the database', function () {
       it('should return an Array of Organizations with informations', async function () {
         // given
-        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'ma team' });
         const expectedOrganization = databaseBuilder.factory.buildOrganization({
           id: 123,
           name: 'mon orga',
@@ -672,7 +672,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
   describe('#get', function () {
     it('returns an organization for admin by provided id', async function () {
       // given
-      const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
       const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
       const parentOrganization = databaseBuilder.factory.buildOrganization({
         type: 'SCO',
@@ -789,7 +788,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('should return an organization with import feature with empty params', async function () {
         // given
         const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
-        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization of the dark side',
@@ -875,7 +873,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       it('should return if its enable and the additional params', async function () {
         // given
         const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
-        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization of the dark side',
@@ -1015,7 +1012,6 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const superAdminUser = databaseBuilder.factory.buildUser();
         const archivist = databaseBuilder.factory.buildUser();
         const archivedAt = new Date('2022-02-02');
-        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam();
 
         const insertedOrganization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
@@ -1097,6 +1093,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         name: 'Organization SCO',
         type: 'SCO',
         createdBy: superAdminUserId,
+        administrationTeamId: administrationTeam.id,
       });
 
       // when
@@ -1130,6 +1127,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           name: "École de l'avenir",
           type: 'SCO-1D',
           createdBy: superAdminUserId,
+          administrationTeamId: administrationTeam.id,
         });
 
         const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });
