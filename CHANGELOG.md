@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.235.0](https://github.com/1024pix/pix/compare/v5.234.0...v5.235.0) (2025-10-17)
+
+### :rocket: Amélioration
+
+- [#13875](https://github.com/1024pix/pix/pull/13875) Cacher les campagnes qui appartiennent à un parcours combinés (pix-19834) 
+
+### :bug: Correction
+
+- [#13902](https://github.com/1024pix/pix/pull/13902) Faire en sorte que la hauteur d'une step s'adapte à son contenu (PIX-19897) 
+
+### :building_construction: Tech
+
+- [#13895](https://github.com/1024pix/pix/pull/13895) :truck: Déplace le modèle `ComplementaryCertificationHabilitation` vers le contexte `organizationnal-entities`  
+- [#13897](https://github.com/1024pix/pix/pull/13897) :truck: Déplace le modèle `UserOrgaSettings` vers le contexte `team` 
+- [#13839](https://github.com/1024pix/pix/pull/13839) Remplace l'utilisation de `hasComplementaryReferential` par la clef de complémentaire dans le service de score v2 (Pix-19964) 
+
+### :arrow_up: Montée de version
+
+- [#13883](https://github.com/1024pix/pix/pull/13883) Update dependency @1024pix/eslint-plugin to ^2.1.12 (mon-pix) 
+- [#13906](https://github.com/1024pix/pix/pull/13906) Update dependency @1024pix/eslint-plugin to ^2.1.12 (orga) 
+- [#13905](https://github.com/1024pix/pix/pull/13905) Update dependency @1024pix/pix-ui to ^55.29.2 (admin) 
+- [#13910](https://github.com/1024pix/pix/pull/13910) Update dependency @1024pix/pix-ui to ^55.29.2 (certif) 
+- [#13911](https://github.com/1024pix/pix/pull/13911) Update dependency @1024pix/pix-ui to ^55.29.2 (junior) 
+- [#13912](https://github.com/1024pix/pix/pull/13912) Update dependency @1024pix/pix-ui to ^55.29.2 (mon-pix) 
+- [#13913](https://github.com/1024pix/pix/pull/13913) Update dependency @1024pix/pix-ui to ^55.29.2 (orga)
+
 # [5.234.0](https://github.com/1024pix/pix/compare/v5.233.0...v5.234.0) (2025-10-15)
 
 ### :rocket: Amélioration
