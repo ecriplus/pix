@@ -7,6 +7,7 @@ import t from 'ember-intl/helpers/t';
 import eq from 'ember-truth-helpers/helpers/eq';
 import jsyaml from 'js-yaml';
 import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
+import FormattedSolution from 'mon-pix/components/solution-panel/formatted-solution';
 import inc from 'mon-pix/helpers/inc';
 import answersAsObject from 'mon-pix/utils/answers-as-object';
 import labelsAsObject from 'mon-pix/utils/labels-as-object';
@@ -42,7 +43,7 @@ export default class QrocmDepSolutionPanel extends Component {
                 {{#if block.solution}}
                   <p class="correction-qrocm__solution">
                     <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                    <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                    <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                   </p>
                 {{/if}}
               </div>
@@ -58,7 +59,7 @@ export default class QrocmDepSolutionPanel extends Component {
                 {{#if block.solution}}
                   <p class="correction-qrocm__solution">
                     <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                    <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                    <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                   </p>
                 {{/if}}
               </div>
@@ -77,7 +78,7 @@ export default class QrocmDepSolutionPanel extends Component {
                 {{#if block.solution}}
                   <p class="correction-qrocm__solution">
                     <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                    <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                    <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                   </p>
                 {{/if}}
               </div>
@@ -92,7 +93,10 @@ export default class QrocmDepSolutionPanel extends Component {
           {{#unless this.shouldDisplayAnswersUnderInputs}}
             <p class="comparison-window-solution">
               <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-              <span class="correction-qrocm__solution-text">{{this.formattedSolution}}</span>
+              <FormattedSolution
+                class="correction-qrocm__solution-text"
+                @solutionToDisplay={{this.formattedSolution}}
+              />
             </p>
           {{/unless}}
         {{/unless}}

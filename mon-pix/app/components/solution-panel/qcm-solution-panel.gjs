@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 import isEmpty from 'lodash/isEmpty';
 import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
+import FormattedSolution from 'mon-pix/components/solution-panel/formatted-solution';
 import labeledCheckboxes from 'mon-pix/utils/labeled-checkboxes';
 import proposalsAsArray from 'mon-pix/utils/proposals-as-array';
 import { pshuffle } from 'mon-pix/utils/pshuffle';
@@ -37,12 +38,13 @@ export default class QcmSolutionPanel extends Component {
         {{#if @solutionToDisplay}}
           <div class="comparison-window-solution comparison-window-solution--with-margin">
             <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-            <div class="comparison-window-solution__text">{{@solutionToDisplay}}</div>
+            <FormattedSolution class="comparison-window-solution__text" @solutionToDisplay={{@solutionToDisplay}} />
           </div>
         {{/if}}
       {{/if}}
     </div>
   </template>
+
   get solutionArray() {
     const solution = this.args.solution;
     const solutionArray = !isEmpty(solution) ? valueAsArrayOfBoolean(solution, this._proposalsArray.length) : [];
