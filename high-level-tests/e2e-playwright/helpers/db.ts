@@ -249,6 +249,15 @@ export async function createOrganizationInDB({
   isManagingStudents: boolean;
 }) {
   const someDate = new Date();
+  const administrationTeamId = await knex('administration_teams')
+    .insert({
+      name: `Team for ${externalId}`,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .returning('id')
+    .then((rows) => rows[0].id);
+
   const [{ id }] = await knex('organizations')
     .insert({
       type,
@@ -270,6 +279,7 @@ export async function createOrganizationInDB({
       archivedAt: null,
       identityProviderForCampaigns: null,
       parentOrganizationId: null,
+      administrationTeamId,
     })
     .returning('id');
   return id;
