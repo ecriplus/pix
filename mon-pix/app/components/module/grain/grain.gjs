@@ -293,7 +293,7 @@ export default class ModuleGrain extends Component {
               <div class="grain-card-content__stepper">
                 <Stepper
                   @steps={{component.steps}}
-                  @onElementAnswer={{@onElementAnswer}}
+                  @onElementAnswer={{this.onElementAnswer}}
                   @onElementRetry={{@onElementRetry}}
                   @passage={{@passage}}
                   @getLastCorrectionForElement={{this.getLastCorrectionForElement}}
