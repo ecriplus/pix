@@ -1,5 +1,5 @@
 import { courseController } from '../../../../../src/evaluation/application/courses/course-controller.js';
-import { Course } from '../../../../../src/shared/domain/models/Course.js';
+import { Course } from '../../../../../src/evaluation/domain/models/Course.js';
 import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Controller | course-controller', function () {

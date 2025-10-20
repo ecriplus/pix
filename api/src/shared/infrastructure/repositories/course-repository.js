@@ -1,5 +1,5 @@
+import { Course } from '../../../evaluation/domain/models/Course.js';
 import { NotFoundError } from '../../domain/errors.js';
-import { Course } from '../../domain/models/Course.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 const TABLE_NAME = 'learningcontent.courses';
