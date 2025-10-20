@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.236.0](https://github.com/1024pix/pix/compare/v5.235.0...v5.236.0) (2025-10-20)
+
+### :rocket: Amélioration
+
+- [#13819](https://github.com/1024pix/pix/pull/13819) Créer des organization_learner_participations au démarrage d'un Parcours Combiné (PIX-19889). 
+
+### :bug: Correction
+
+- [#13919](https://github.com/1024pix/pix/pull/13919) Intercepter la contrainte d'unicité sur la création de participations lié à un même learner (PIX-20047). 
+
+### :building_construction: Tech
+
+- [#13889](https://github.com/1024pix/pix/pull/13889) Migration de la table Organizations pour que le nouveau champ soit obligatoire (PIX-19606)
+
 # [5.235.0](https://github.com/1024pix/pix/compare/v5.234.0...v5.235.0) (2025-10-17)
 
 ### :rocket: Amélioration
