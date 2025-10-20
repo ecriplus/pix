@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 import isEmpty from 'lodash/isEmpty';
 import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
+import FormattedSolution from 'mon-pix/components/solution-panel/formatted-solution';
 import labeledCheckboxes from 'mon-pix/utils/labeled-checkboxes';
 import proposalsAsArray from 'mon-pix/utils/proposals-as-array';
 import { pshuffle } from 'mon-pix/utils/pshuffle';
@@ -60,13 +61,17 @@ export default class QcuSolutionPanel extends Component {
           </p>
         </div>
       {{else}}
-        <MarkdownToHtml
+        <FormattedSolution
           class="qcu-solution-answer-feedback__expected-answer"
-          @markdown="{{t 'pages.comparison-window.results.feedback.wrong' htmlSafe=true}} {{this.solutionAsText}}"
+          @solutionToDisplay="{{t
+            'pages.comparison-window.results.feedback.wrong'
+            htmlSafe=true
+          }} {{this.solutionAsText}}"
         />
       {{/if}}
     </div>
   </template>
+
   get solutionArray() {
     const solution = this.args.solution;
     return !isEmpty(solution) ? valueAsArrayOfBoolean(solution) : [];

@@ -7,6 +7,7 @@ import t from 'ember-intl/helpers/t';
 import eq from 'ember-truth-helpers/helpers/eq';
 import keys from 'lodash/keys';
 import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
+import FormattedSolution from 'mon-pix/components/solution-panel/formatted-solution';
 import getQrocInputSize from 'mon-pix/helpers/get-qroc-input-size';
 import inc from 'mon-pix/helpers/inc';
 import answersAsObject from 'mon-pix/utils/answers-as-object';
@@ -49,7 +50,7 @@ export default class QrocmIndSolutionPanel extends Component {
               {{#if block.emptyOrWrongAnswer}}
                 <p class="correction-qrocm__solution">
                   <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                  <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                  <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                 </p>
               {{/if}}
             {{else if (eq @challenge.format "phrase")}}
@@ -66,7 +67,7 @@ export default class QrocmIndSolutionPanel extends Component {
               {{#if block.emptyOrWrongAnswer}}
                 <p class="correction-qrocm__solution">
                   <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                  <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                  <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                 </p>
               {{/if}}
             {{else}}
@@ -84,7 +85,7 @@ export default class QrocmIndSolutionPanel extends Component {
                 {{#if block.emptyOrWrongAnswer}}
                   <p class="correction-qrocm__solution">
                     <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-                    <span class="correction-qrocm__solution-text">{{block.solution}}</span>
+                    <FormattedSolution class="correction-qrocm__solution-text" @solutionToDisplay={{block.solution}} />
                   </p>
                 {{/if}}
               </div>
@@ -102,7 +103,7 @@ export default class QrocmIndSolutionPanel extends Component {
         {{#if @solutionToDisplay}}
           <div class="comparison-window-solution comparison-window-solution--with-margin">
             <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-            <div class="comparison-window-solution__text">{{@solutionToDisplay}}</div>
+            <FormattedSolution class="comparison-window-solution__text" @solutionToDisplay={{@solutionToDisplay}} />
           </div>
         {{/if}}
       {{/if}}

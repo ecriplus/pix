@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
+import FormattedSolution from 'mon-pix/components/solution-panel/formatted-solution';
 
 import inc from '../../helpers/inc';
 
@@ -118,7 +119,10 @@ export default class QrocSolutionPanel extends Component {
           {{#if this.understandableSolution}}
             <p class="comparison-window-solution">
               <span class="sr-only">{{t "pages.comparison-window.results.a11y.the-answer-was"}}</span>
-              <span class="comparison-window-solution__text">{{this.understandableSolution}}</span>
+              <FormattedSolution
+                class="comparison-window-solution__text"
+                @solutionToDisplay={{this.understandableSolution}}
+              />
             </p>
           {{/if}}
         {{/if}}
