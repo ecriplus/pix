@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import Model, { attr, hasMany } from '@ember-data/model';
 import { CombinedCourseItemTypes } from 'mon-pix/models/combined-course-item';
 
@@ -21,6 +22,25 @@ export default class CombinedCourse extends Model {
     return this.hasMany('items')
       .value()
       .find((item) => !item.isCompleted);
+  }
+
+  @action
+  isPreviousItemDifferent(index) {
+    if (index === 0) {
+      return true;
+    }
+    const item = this.hasMany('items').value();
+    if (item[index].typeForStepDisplay !== item[index - 1].typeForStepDisplay) {
+      return true;
+    }
+  }
+
+  get areItemsOfTheSameType() {
+    const items = this.hasMany('items').value();
+    return (
+      items.every((item) => item.type === CombinedCourseItemTypes.MODULE) ||
+      items.every((item) => item.type === CombinedCourseItemTypes.CAMPAIGN)
+    );
   }
 
   get hasItemOfTypeModule() {

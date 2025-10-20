@@ -31,5 +31,10 @@ export default class CombinedCourseItem extends Model {
     return this.image;
   }
 
+  get typeForStepDisplay() {
+    if (this.type === CombinedCourseItemTypes.FORMATION) return CombinedCourseItemTypes.MODULE;
+    return this.type;
+  }
+
   @belongsTo('combined-course', { async: false, inverse: 'items' }) combinedCourse;
 }

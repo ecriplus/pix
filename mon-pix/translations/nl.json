@@ -1202,7 +1202,8 @@
     "combined-courses": {
       "content": {
         "start-button": "Cursus starten",
-        "resume-button": "Cursus hervatten"
+        "resume-button": "Cursus hervatten",
+        "step": "Stap {stepNumber}"
       },
       "completed": {
         "title": "Gefeliciteerd! Je bent klaar!",

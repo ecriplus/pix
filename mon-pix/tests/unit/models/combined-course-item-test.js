@@ -52,5 +52,12 @@ module('Unit | Model | Combined Course Item', function (hooks) {
       });
       assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.FORMATION_ICON);
     });
+    test('should return module when typeForStepDisplay getter is called', function (assert) {
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        type: CombinedCourseItemTypes.FORMATION,
+        image: 'my-module-url',
+      });
+      assert.strictEqual(combinedCourseItem.typeForStepDisplay, CombinedCourseItemTypes.MODULE);
+    });
   });
 });

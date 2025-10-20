@@ -66,6 +66,11 @@ const Header = <template>
   </header>
 </template>;
 
+const Step = <template>
+  <h2 class="combined-course__step-title">{{t "pages.combined-courses.content.step" stepNumber=(@stepNumber)}}
+  </h2>
+</template>;
+
 export default class CombinedCourses extends Component {
   <template>
     <section class="combined-course">
@@ -85,7 +90,12 @@ export default class CombinedCourses extends Component {
       {{#if this.shouldDisplayRetryModulesText}}
         <p class="combined-course__retry-text">{{t "pages.combined-courses.completed.retry-text"}}</p>
       {{/if}}
-      {{#each @combinedCourse.items as |item|}}
+      {{#each @combinedCourse.items as |item index|}}
+        {{#unless @combinedCourse.areItemsOfTheSameType}}
+          {{#if (@combinedCourse.isPreviousItemDifferent index)}}
+            <Step @stepNumber={{this.getCurrentStep}} />
+          {{/if}}
+        {{/unless}}
         <CombinedCourseItem
           @item={{item}}
           @isLocked={{item.isLocked}}
@@ -103,6 +113,8 @@ export default class CombinedCourses extends Component {
   @service intl;
   @service store;
   @service router;
+
+  step = 1;
 
   @action
   async startQuestParticipation(e) {
@@ -131,6 +143,11 @@ export default class CombinedCourses extends Component {
       this.args.combinedCourse.hasItemOfTypeModule &&
       this.args.combinedCourse.status === CombinedCourseStatuses.COMPLETED
     );
+  }
+
+  @action
+  getCurrentStep() {
+    return this.step++;
   }
 }
 
