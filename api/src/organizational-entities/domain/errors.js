@@ -82,6 +82,18 @@ class FeatureParamsNotProcessable extends DomainError {
   }
 }
 
+class UnableToDetachParentOrganizationFromChildOrganization extends DomainError {
+  constructor({
+    code = 'UNABLE_TO_DETACH_PARENT_ORGANIZATION_FROM_CHILD_ORGANIZATION',
+    message = 'Unable to detach parent organization from child organization',
+    meta,
+  } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 export {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
@@ -93,4 +105,5 @@ export {
   OrganizationNotFound,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
+  UnableToDetachParentOrganizationFromChildOrganization,
 };

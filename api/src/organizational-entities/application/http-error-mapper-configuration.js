@@ -11,12 +11,17 @@ import {
   OrganizationNotFound,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
+  UnableToDetachParentOrganizationFromChildOrganization,
 } from '../domain/errors.js';
 
 const organizationalEntitiesDomainErrorMappingConfiguration = [
   {
     name: UnableToAttachChildOrganizationToParentOrganizationError.name,
     httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
+  },
+  {
+    name: UnableToDetachParentOrganizationFromChildOrganization.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
   {
     name: OrganizationNotFound.name,

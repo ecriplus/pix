@@ -1,5 +1,8 @@
 import { organizationalEntitiesDomainErrorMappingConfiguration } from '../../../../src/organizational-entities/application/http-error-mapper-configuration.js';
-import { TagNotFoundError } from '../../../../src/organizational-entities/domain/errors.js';
+import {
+  TagNotFoundError,
+  UnableToDetachParentOrganizationFromChildOrganization,
+} from '../../../../src/organizational-entities/domain/errors.js';
 import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../../../src/shared/application/models/domain-error-mapping-configuration.js';
 import { expect } from '../../../test-helper.js';
@@ -28,6 +31,25 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
       //then
       expect(error).to.be.instanceOf(HttpErrors.NotFoundError);
       expect(error.message).to.equal('Tag does not exist');
+      expect(error.meta).to.equal(meta);
+    });
+  });
+
+  context('when mapping "UnableToDetachParentOrganizationFromChildOrganization"', function () {
+    it('should return a UnprocessableEntityError Http Error', function () {
+      // given
+      const httpErrorMapper = organizationalEntitiesDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === UnableToDetachParentOrganizationFromChildOrganization.name,
+      );
+
+      const meta = { organizationId: 1234 };
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new UnableToDetachParentOrganizationFromChildOrganization({ meta }));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
+      expect(error.message).to.equal('Unable to detach parent organization from child organization');
       expect(error.meta).to.equal(meta);
     });
   });
