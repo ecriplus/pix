@@ -1,7 +1,7 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { ComplementaryCertificationBadgeForAdmin } from '../../../../shared/domain/models/ComplementaryCertificationBadgeForAdmin.js';
 import { TargetProfileHistoryForAdmin } from '../../../../shared/domain/models/TargetProfileHistoryForAdmin.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
+import { ComplementaryCertificationBadgeForAdmin } from '../../domain/models/ComplementaryCertificationBadgeForAdmin.js';
 
 const getCurrentTargetProfilesHistoryWithBadgesByComplementaryCertificationId = async function ({
   complementaryCertificationId,
