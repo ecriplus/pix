@@ -1061,10 +1061,10 @@
       "empty-table": "Aucune organisation fille",
       "notifications": {
         "error": {
-          "unable-to-attach-already-attached-child-organization": "L'organisation fille est déjà liée.",
-          "unable-to-attach-child-organization-to-another-child-organization": "Impossible d'attacher une organisation fille à une autre organisation fille.",
-          "unable-to-attach-child-organization-to-itself": "Impossible d'attacher l'organisation à elle-même",
-          "unable-to-attach-parent-organization-as-child-organization": "Impossible d'attacher une organisation mère en tant qu'organisation fille."
+          "unable-to-attach-already-attached-child-organization": "L'organisation fille {childOrganizationId} est déjà liée.",
+          "unable-to-attach-child-organization-to-another-child-organization": "Impossible d'attacher l'organisation fille à une autre organisation fille.",
+          "unable-to-attach-child-organization-to-itself": "Impossible d'attacher l'organisation {childOrganizationId} à elle-même",
+          "unable-to-attach-parent-organization-as-child-organization": "Impossible d'attacher l'organisation mère {childOrganizationId} en tant qu'organisation fille."
         },
         "success": {
           "attach-child-organization": "{count, plural, =1 {L'organisation fille a bien été liée à l'organisation mère} other {Les {count} organisations filles ont bien été liées à l'organisation mère}}"

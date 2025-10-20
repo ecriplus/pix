@@ -58,51 +58,113 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
       assert.true(reloadStub.calledOnce);
     });
 
-    module('when form submit fails', function () {
-      [
-        {
-          code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF',
-          message: `Impossible d'attacher l'organisation à elle-même`,
-        },
-        {
-          code: 'UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION',
-          message: `L'organisation fille est déjà liée.`,
-        },
-        {
-          code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-          message: `Impossible d'attacher une organisation fille à une autre organisation fille.`,
-        },
-        {
-          code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION',
-          message: `Impossible d'attacher une organisation mère en tant qu'organisation fille.`,
-        },
-      ].forEach(({ code, message }) => {
-        module(`when receiving ${code} error code`, function () {
-          test('calls notification service error', async function (assert) {
-            // given
-            const childOrganizationId = '1234';
-            const organizationAdapter = {
-              attachChildOrganization: sinon.stub().rejects({
-                errors: [{ code }],
-              }),
-            };
+    module('when form submit fails', function (hooks) {
+      let organizationAdapter;
+      hooks.beforeEach(function () {
+        organizationAdapter = {
+          attachChildOrganization: sinon.stub(),
+        };
+        sinon.stub(store, 'adapterFor').returns(organizationAdapter);
+        sinon.stub(notifications, 'sendErrorNotification');
 
-            sinon.stub(store, 'adapterFor').returns(organizationAdapter);
-            sinon.stub(notifications, 'sendErrorNotification');
+        controller.model = {
+          organization: store.createRecord('organization', { id: '12' }),
+          organizations: { reload: sinon.stub().resolves() },
+        };
+      });
 
-            controller.model = {
-              organization: store.createRecord('organization', { id: '12' }),
-              organizations: { reload: sinon.stub().resolves() },
-            };
-
-            // when
-            await controller.handleFormSubmitted(childOrganizationId);
-
-            // then
-            assert.true(notifications.sendErrorNotification.calledWithExactly({ message }));
-            assert.true(controller.model.organizations.reload.notCalled);
-          });
+      test('calls notification service error for UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF error', async function (assert) {
+        // given
+        const childOrganizationId = '1234';
+        organizationAdapter.attachChildOrganization.rejects({
+          errors: [{ code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF', meta: { childOrganizationId } }],
         });
+
+        // when
+        await controller.handleFormSubmitted(childOrganizationId);
+
+        // then
+        assert.true(
+          notifications.sendErrorNotification.calledWithExactly({
+            message: this.intl.t(
+              'pages.organization-children.notifications.error.unable-to-attach-child-organization-to-itself',
+              { childOrganizationId },
+            ),
+          }),
+        );
+        assert.true(controller.model.organizations.reload.notCalled);
+      });
+
+      test('calls notification service error for UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION error', async function (assert) {
+        // given
+        const childOrganizationId = '1234';
+        organizationAdapter.attachChildOrganization.rejects({
+          errors: [{ code: 'UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION', meta: { childOrganizationId } }],
+        });
+
+        // when
+        await controller.handleFormSubmitted(childOrganizationId);
+
+        // then
+        assert.true(
+          notifications.sendErrorNotification.calledWithExactly({
+            message: this.intl.t(
+              'pages.organization-children.notifications.error.unable-to-attach-already-attached-child-organization',
+              { childOrganizationId },
+            ),
+          }),
+        );
+        assert.true(controller.model.organizations.reload.notCalled);
+      });
+
+      test('calls notification service error for UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION error', async function (assert) {
+        // given
+        const childOrganizationId = '1234';
+        organizationAdapter.attachChildOrganization.rejects({
+          errors: [
+            {
+              code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+              meta: {},
+            },
+          ],
+        });
+
+        // when
+        await controller.handleFormSubmitted(childOrganizationId);
+
+        // then
+        assert.true(
+          notifications.sendErrorNotification.calledWithExactly({
+            message: this.intl.t(
+              'pages.organization-children.notifications.error.unable-to-attach-child-organization-to-another-child-organization',
+            ),
+          }),
+        );
+        assert.true(controller.model.organizations.reload.notCalled);
+      });
+
+      test('calls notification service error for UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION error', async function (assert) {
+        // given
+        const childOrganizationId = '1234';
+        organizationAdapter.attachChildOrganization.rejects({
+          errors: [
+            { code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION', meta: { childOrganizationId } },
+          ],
+        });
+
+        // when
+        await controller.handleFormSubmitted(childOrganizationId);
+
+        // then
+        assert.true(
+          notifications.sendErrorNotification.calledWithExactly({
+            message: this.intl.t(
+              'pages.organization-children.notifications.error.unable-to-attach-parent-organization-as-child-organization',
+              { childOrganizationId },
+            ),
+          }),
+        );
+        assert.true(controller.model.organizations.reload.notCalled);
       });
     });
   });
