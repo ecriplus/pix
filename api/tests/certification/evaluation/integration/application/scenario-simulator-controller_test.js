@@ -301,10 +301,11 @@ describe('Integration | Application | scenario-simulator-controller', function (
           });
         });
 
-        context('When the route is called with a complementary certification key', function () {
+        context('When the route is called with a version ID', function () {
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const capacity = -3.1;
+            const versionId = 1;
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
@@ -319,7 +320,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 initialCapacity,
                 pickChallenge: pickChallengeImplementation,
                 pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
-                complementaryCertificationKey: 'DROIT',
+                versionId,
               })
               .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -332,7 +333,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 capacity,
                 initialCapacity,
                 locale: 'en',
-                complementaryCertificationKey: 'DROIT',
+                versionId,
               },
               null,
             );

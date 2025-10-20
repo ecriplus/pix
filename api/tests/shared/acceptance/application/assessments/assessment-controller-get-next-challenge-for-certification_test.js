@@ -106,7 +106,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
         });
         databaseBuilder.factory.buildCertificationVersion({
           scope: Frameworks.CORE,
-          startDate: candidate.reconciledAt,
+          startDate: new Date('2020-01-10'),
         });
         databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
         databaseBuilder.factory.buildAssessment({

@@ -15,7 +15,6 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
@@ -77,7 +76,7 @@ const getNextChallenge = async function ({
   const complementaryCertificationKey =
     candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
 
-  const certificationVersion = await versionsRepository.getByScopeAndReconciliationDate({
+  const version = await versionsRepository.getByScopeAndReconciliationDate({
     scope: candidate.subscriptionScope,
     reconciliationDate: candidate.reconciledAt,
   });
@@ -85,7 +84,7 @@ const getNextChallenge = async function ({
   const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,
     complementaryCertificationKey,
-    versionId: certificationVersion.id,
+    version,
   });
 
   const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
@@ -108,7 +107,7 @@ const getNextChallenge = async function ({
 
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
-    configuration: certificationVersion.challengesConfiguration,
+    configuration: version.challengesConfiguration,
   });
   const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
     assessmentAnswers: allAnswers,

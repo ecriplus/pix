@@ -22,13 +22,13 @@ import * as certificationCompanionAlertRepository from '../../infrastructure/rep
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
+import * as versionRepository from '../../infrastructure/repositories/version-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
 
 /**
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
- * @typedef {versionsRepository} VersionsRepository
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
  * @typedef {certificationChallengeRepository} CertificationChallengeRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
@@ -45,6 +45,8 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
+ * @typedef {versionRepository} VersionRepository
+ * @typedef {versionsRepository} VersionsRepository
  * @typedef {services} Services
  */
 const dependencies = {
@@ -72,6 +74,7 @@ const dependencies = {
   complementaryCertificationScoringCriteriaRepository,
   sharedFlashAlgorithmConfigurationRepository,
   certificationChallengeLiveAlertRepository,
+  versionRepository,
   versionsRepository,
   services,
 };

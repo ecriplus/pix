@@ -23,7 +23,7 @@ export const getByScopeAndReconciliationDate = async ({ scope, reconciliationDat
       'challengesConfiguration',
     )
     .where({ scope })
-    .where('startDate', '<=', reconciliationDate)
+    .andWhere('startDate', '<=', reconciliationDate)
     .andWhere((queryBuilder) => {
       queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', reconciliationDate);
     })

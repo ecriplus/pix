@@ -216,7 +216,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({
               locale,
               complementaryCertificationKey: undefined,
-              versionId: version.id,
+              version,
             })
             .resolves(allChallenges);
 
@@ -373,7 +373,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             locale,
             complementaryCertificationKey: undefined,
-            versionId: version.id,
+            version,
           })
           .resolves([alreadyAnsweredChallenge, nextChallengeToAnswer]);
 
@@ -468,7 +468,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             locale,
             complementaryCertificationKey: undefined,
-            versionId: version.id,
+            version,
           })
           .resolves([nextChallenge, lastSeenChallenge]);
         sharedChallengeRepository.getMany.withArgs([]).resolves([]);
@@ -673,7 +673,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({
             locale,
             complementaryCertificationKey: undefined,
-            versionId: version.id,
+            version,
           })
           .resolves([answeredChallenge]);
         sharedChallengeRepository.getMany.withArgs([answeredChallenge.id]).resolves([answeredChallenge]);
@@ -755,7 +755,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({
                 locale,
                 complementaryCertificationKey: undefined,
-                versionId: version.id,
+                version,
               })
               .resolves([nextChallengeToAnswer]);
             sharedChallengeRepository.getMany.withArgs([]).resolves([]);
@@ -807,7 +807,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     });
 
     context('when the certification is a complementary certification', function () {
-      it('should call findActiveFlashCompatible with the complementary certification key and versionId', async function () {
+      it('should call findActiveFlashCompatible with the version', async function () {
         // given
         versionsRepository = {
           getByScopeAndReconciliationDate: sinon.stub(),
@@ -873,13 +873,13 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
           complementaryCertificationKey: Frameworks.PIX_PLUS_EDU_CPE,
-          versionId: version.id,
+          version,
         });
       });
     });
 
     context('when the certification is a Pix core or double certification', function () {
-      it('should call findActiveFlashCompatible without complementary certification key', async function () {
+      it('should call findActiveFlashCompatible without version', async function () {
         // given
         const v3CertificationCourse = domainBuilder.buildCertificationCourse({
           version: AlgorithmEngineVersion.V3,
@@ -935,7 +935,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         expect(sharedChallengeRepository.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
           complementaryCertificationKey: undefined,
-          versionId: version.id,
+          version,
         });
       });
     });

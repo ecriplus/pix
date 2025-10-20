@@ -26,7 +26,6 @@ async function simulateFlashAssessmentScenario(
     capacity,
     accessibilityAdjustmentNeeded,
     locale,
-    complementaryCertificationKey,
     stopAtChallenge,
     versionId,
   } = request.payload;
@@ -47,7 +46,6 @@ async function simulateFlashAssessmentScenario(
           initialCapacity,
           variationPercent,
           accessibilityAdjustmentNeeded,
-          complementaryCertificationKey,
           stopAtChallenge,
           versionId,
         },
