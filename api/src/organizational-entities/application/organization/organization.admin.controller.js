@@ -31,6 +31,14 @@ const attachChildOrganization = async function (request, h) {
   return h.response().code(204);
 };
 
+const detachParentOrganization = async function (request, h) {
+  const { childOrganizationId } = request.params;
+
+  await usecases.detachParentOrganizationFromOrganization({ childOrganizationId });
+
+  return h.response().code(204);
+};
+
 const getTemplateForAddOrganizationFeatureInBatch = async function (request, h) {
   const fields = ORGANIZATION_FEATURES_HEADER.columns.map(({ name }) => name);
   const csvTemplateFileContent = generateCSVTemplate(fields);
@@ -130,6 +138,7 @@ const organizationAdminController = {
   archiveOrganization,
   archiveInBatch,
   attachChildOrganization,
+  detachParentOrganization,
   getTemplateForAddOrganizationFeatureInBatch,
   addOrganizationFeatureInBatch,
   getOrganizationDetails,
