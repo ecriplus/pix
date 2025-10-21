@@ -1,6 +1,6 @@
 import { knex } from '../../../../db/knex-database-connection.js';
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { AdminMember } from '../../domain/models/AdminMember.js';
+import { AdminMember } from '../../../team/domain/models/AdminMember.js';
 
 const TABLE_NAME = 'pix-admin-roles';
 
