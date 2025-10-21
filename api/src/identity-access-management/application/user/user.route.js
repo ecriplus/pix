@@ -324,7 +324,7 @@ export const userRoutes = [
       validate: {
         params: Joi.object({
           id: identifiersType.userId,
-          lang: Joi.string().valid(...localeService.getSupportedLanguages()),
+          lang: Joi.string().valid(...localeService.getSupportedLocales()),
         }),
       },
       pre: [

@@ -111,7 +111,26 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       await userController.changeUserLocale(request, hFake, { userSerializer });
 
       // then
-      sinon.assert.calledWith(usecases.changeUserLocale, { userId, language: lang, locale: 'en' });
+      sinon.assert.calledWith(usecases.changeUserLocale, { userId, locale: 'en' });
+    });
+
+    describe('when there is a country specific locale', function () {
+      it('updates user language and locale', async function () {
+        // given
+        usecases.changeUserLocale.resolves({});
+        userSerializer.serialize.withArgs({}).returns('ok');
+        request = {
+          auth: { credentials: { userId } },
+          params: { id: userId, lang: 'fr-BE' },
+          state: { locale: 'fr-BE' },
+        };
+
+        // when
+        await userController.changeUserLocale(request, hFake, { userSerializer });
+
+        // then
+        sinon.assert.calledWith(usecases.changeUserLocale, { userId, locale: 'fr-BE' });
+      });
     });
   });
 

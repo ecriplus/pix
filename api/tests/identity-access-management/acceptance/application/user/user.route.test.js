@@ -607,24 +607,25 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
 
   describe('PATCH /api/users/{id}/lang/{lang}', function () {
     let user;
-    let options;
-    const newLang = 'en';
+    let defaultOptions;
 
     beforeEach(async function () {
-      user = databaseBuilder.factory.buildUser({ lang: 'fr' });
+      user = databaseBuilder.factory.buildUser({ lang: 'fr', locale: 'fr-FR' });
+      await databaseBuilder.commit();
 
-      options = {
+      defaultOptions = {
         method: 'PATCH',
-        url: `/api/users/${user.id}/lang/${newLang}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        url: `/api/users/${user.id}/lang/en`,
+        audience: 'https://app.pix.org',
+        authorizationData: { userId: user.id },
+        locale: 'en',
       };
-
-      return databaseBuilder.commit();
     });
 
     describe('Resource access management', function () {
       it('responds with a 401 - unauthorized access - if user is not authenticated', async function () {
         // given
+        const options = generateInjectOptions(defaultOptions);
         options.headers.authorization = 'invalid.access.token';
 
         // when
@@ -637,7 +638,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       it('responds with a 403 - forbidden access - if requested user is not the same as authenticated user', async function () {
         // given
         const otherUserId = 9999;
-        options.headers = generateAuthenticatedUserRequestHeaders({ userId: otherUserId });
+        const options = generateInjectOptions({ ...defaultOptions, authorizationData: { userId: otherUserId } });
 
         // when
         const response = await server.inject(options);
@@ -646,26 +647,35 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         expect(response.statusCode).to.equal(403);
       });
 
-      it('responds with a 400 where the langage is not correct', async function () {
-        // given
-        options.url = `/api/users/${user.id}/lang/jp`;
+      describe('when the language is not in the supported locales', function () {
+        it('responds with a 400', async function () {
+          // given
+          const options = generateInjectOptions({
+            ...defaultOptions,
+            url: `/api/users/${user.id}/lang/fr-CA`,
+            locale: 'fr-CA',
+          });
 
-        // when
-        const response = await server.inject(options);
+          // when
+          const response = await server.inject(options);
 
-        // then
-        expect(response.statusCode).to.equal(400);
+          // then
+          expect(response.statusCode).to.equal(400);
+        });
       });
     });
 
     describe('Success case', function () {
       it('returns the user with new lang', async function () {
+        // given
+        const options = generateInjectOptions(defaultOptions);
+
         // when
         const response = await server.inject(options);
 
         // then
         expect(response.statusCode).to.equal(200);
-        expect(response.result.data.attributes['lang']).to.equal(newLang);
+        expect(response.result.data.attributes['lang']).to.equal('en');
       });
     });
   });

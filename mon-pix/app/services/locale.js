@@ -22,12 +22,7 @@ const PIX_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'
 // This cannot be changed without migrating the challenges content.
 const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de'];
 
-const PIX_LANGUAGES = [
-  { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
-  { value: 'en', nativeName: 'English', displayedInSwitcher: true },
-  { value: 'nl', nativeName: 'Nederlands', displayedInSwitcher: true },
-  { value: 'es', nativeName: 'Español', displayedInSwitcher: false },
-];
+const PIX_LANGUAGES = ['fr', 'en', 'nl', 'es'];
 
 const COOKIE_LOCALE = 'locale';
 
@@ -52,7 +47,7 @@ export default class LocaleService extends Service {
    * Returns all locales supported by this application
    */
   get supportedLocales() {
-    return SUPPORTED_LOCALES;
+    return SUPPORTED_LOCALES.map((locale) => locale.value);
   }
 
   /**
@@ -74,7 +69,7 @@ export default class LocaleService extends Service {
    * @deprecated use pixLocales instead whenever possible.
    */
   get pixLanguages() {
-    return PIX_LANGUAGES.map((elem) => elem.value);
+    return PIX_LANGUAGES;
   }
 
   get acceptLanguageHeader() {
@@ -82,10 +77,13 @@ export default class LocaleService extends Service {
     return this.currentLanguage;
   }
 
-  get switcherDisplayedLanguages() {
-    return PIX_LANGUAGES.filter((elem) => this.supportedLocales.includes(elem.value) && elem.displayedInSwitcher).map(
-      (elem) => ({ value: elem.value, label: elem.nativeName }),
-    );
+  get switcherDisplayedLocales() {
+    return SUPPORTED_LOCALES.filter((locale) => locale.displayedInSwitcher)
+      .map((displayedLanguage) => ({
+        value: displayedLanguage.value,
+        label: displayedLanguage.nativeName,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
   }
 
   isSupportedLocale(locale) {
