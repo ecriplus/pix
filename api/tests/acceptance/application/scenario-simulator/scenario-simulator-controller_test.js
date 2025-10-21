@@ -22,12 +22,12 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       role: SUPER_ADMIN,
     });
 
-    databaseBuilder.factory.buildCertificationConfiguration({
+    const version = databaseBuilder.factory.buildCertificationVersion({
       challengesConfiguration: {
         maximumAssessmentLength: 2,
       },
-      startingDate: new Date('2022-02-01'),
     });
+    const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });
     await databaseBuilder.commit();
@@ -35,6 +35,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     validPayload = {
       capacity: 4.5,
       locale: 'fr-fr',
+      versionId: version.id,
     };
 
     const learningContent = {
@@ -131,6 +132,42 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         },
       ],
     };
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge1',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge2',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge3',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge4',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge5',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      complementaryCertificationKey: complementaryCertification.key,
+      challengeId: 'challenge6',
+      versionId: version.id,
+    });
 
     await mockLearningContent(learningContent);
 
@@ -232,53 +269,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
 
         // then
         expect(response).to.have.property('statusCode', 400);
-      });
-    });
-
-    describe('when simulating a complementary certification scenario', function () {
-      it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
-        // given
-        const versionId = databaseBuilder.factory.buildCertificationVersion({
-          scope: 'DROIT',
-          challengesConfiguration: { maximumAssessmentLength: 2 },
-        }).id;
-        const otherVersionId = databaseBuilder.factory.buildCertificationVersion().id;
-        databaseBuilder.factory.buildComplementaryCertification({ key: 'DROIT' });
-        databaseBuilder.factory.buildComplementaryCertification({ key: 'EDU' });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'DROIT',
-          challengeId: 'challenge1',
-          versionId,
-        });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'DROIT',
-          challengeId: 'challenge3',
-          versionId,
-        });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'EDU',
-          challengeId: 'challenge2',
-          versionId: otherVersionId,
-        });
-        await databaseBuilder.commit();
-        options.headers = adminAuthorizationHeaders;
-        options.payload = { ...validPayload, versionId };
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        expect(response).to.have.property('statusCode', 200);
-        const parsedResponse = parseJsonStream(response);
-        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
-        expect(parsedResponse[0].simulationReport[0].challengeId).to.exist;
-        expect(parsedResponse[0].simulationReport[0].capacity).to.exist;
-        expect(parsedResponse[0].simulationReport[0].difficulty).to.exist;
-        expect(parsedResponse[0].simulationReport[0].discriminant).to.exist;
-        expect(parsedResponse[0].simulationReport[0].reward).to.exist;
-        expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
-        expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
-        expect(parsedResponse[0].simulationReport[0].numberOfAvailableChallenges).to.exist;
       });
     });
   });

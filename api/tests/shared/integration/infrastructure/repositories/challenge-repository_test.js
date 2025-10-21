@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/ValidatorQCM.js';
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -1717,7 +1718,7 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
     });
 
-    context('when complementary certification and versionId given', function () {
+    context('when complementary certification', function () {
       it('returns only valid calibrated flash compatible challenges that link to complementary', async function () {
         // given
         const candidateReconciliationDate = new Date('2025-01-01');
@@ -1762,6 +1763,65 @@ describe('Integration | Repository | challenge-repository', function () {
           challengeId: challengesLC[3].id,
           version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
           versionId: version.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
+          date: candidateReconciliationDate,
+          locale: 'fr',
+          version,
+        });
+
+        // then
+        expect(flashCompatibleChallenges).to.have.lengthOf(1);
+        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[3].id);
+        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
+        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
+      });
+    });
+
+    context('when core certification', function () {
+      it('returns only valid calibrated flash compatible challenges that link to the core certification', async function () {
+        // given
+        const candidateReconciliationDate = new Date('2025-01-01');
+
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
+        const version = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
+        const otherVersion = databaseBuilder.factory.buildCertificationVersion({
+          scope: complementaryCertification.key,
+        });
+
+        challengesLC.push(
+          domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
+        );
+        challengesLC.push(
+          domainBuilder.buildChallenge({
+            id: 'otherChallengeForComplementaryCertification',
+            status: 'validé',
+          }),
+        );
+        challengesLC.push(domainBuilder.buildChallenge({ id: 'toto', status: 'archivé' }));
+
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: null,
+          challengeId: challengesLC[3].id,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[4].id,
+          versionId: otherVersion.Id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: null,
+          challengeId: challengesLC[0].id,
+          versionId: otherVersion.id,
         });
 
         await databaseBuilder.commit();
@@ -1870,11 +1930,25 @@ describe('Integration | Repository | challenge-repository', function () {
           challengesLC.push(challengeData09_skill03_qcu_archive_flashCompatible_fr_noEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           const version = databaseBuilder.factory.buildCertificationVersion();
+          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({});
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[3].id,
+            versionId: version.id,
+          });
+
+          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[4].id,
+            versionId: version.id,
+          });
+
           await databaseBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findActiveFlashCompatible({
-            locale: 'fr',
+            locale: 'nl',
             version,
           });
 
@@ -1888,8 +1962,8 @@ describe('Integration | Repository | challenge-repository', function () {
               colorBlindnessCompatibility:
                 challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.accessibility2,
               focused: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.focusable,
-              discriminant: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.alpha,
-              difficulty: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.delta,
+              discriminant: certificationFrameworkChallenge.discriminant,
+              difficulty: certificationFrameworkChallenge.difficulty,
               validator: new ValidatorQCU({
                 solution: domainBuilder.buildSolution({
                   id: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.id,
@@ -1898,33 +1972,6 @@ describe('Integration | Repository | challenge-repository', function () {
                   isT1Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t1Status,
                   isT2Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t2Status,
                   isT3Enabled: challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData00_tube00competence00_actif,
-                difficulty: skillData00_tube00competence00_actif.level,
-                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
-              }),
-            }),
-            domainBuilder.buildChallenge({
-              ...challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson,
-              successProbabilityThreshold: defaultSuccessProbabilityThreshold,
-              blindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
-              focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
-              discriminant: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.alpha,
-              difficulty: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.delta,
-              validator: new ValidatorQCU({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
-                  type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
-                  value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
                   qrocBlocksTypes: {},
                 }),
               }),
@@ -1944,6 +1991,10 @@ describe('Integration | Repository | challenge-repository', function () {
           challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           const version = databaseBuilder.factory.buildCertificationVersion();
+          const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            challengeId: challengesLC[3].id,
+            versionId: version.id,
+          });
           await databaseBuilder.commit();
 
           // when
@@ -1963,8 +2014,8 @@ describe('Integration | Repository | challenge-repository', function () {
               colorBlindnessCompatibility:
                 challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
               focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
-              discriminant: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.alpha,
-              difficulty: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.delta,
+              discriminant: certificationFrameworkChallenge.discriminant,
+              difficulty: certificationFrameworkChallenge.difficulty,
               validator: new ValidatorQCU({
                 solution: domainBuilder.buildSolution({
                   id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
@@ -2045,6 +2096,50 @@ describe('Integration | Repository | challenge-repository', function () {
           });
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           const version = databaseBuilder.factory.buildCertificationVersion();
+          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({});
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[3].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[4].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[5].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[6].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[7].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[8].id,
+            versionId: version.id,
+          });
+
+          databaseBuilder.factory.buildCertificationFrameworksChallenge({
+            complementaryCertificationKey: complementaryCertification.key,
+            challengeId: challengesLC[9].id,
+            versionId: version.id,
+          });
+
           await databaseBuilder.commit();
 
           // when
@@ -2062,60 +2157,6 @@ describe('Integration | Repository | challenge-repository', function () {
             'challengeA1RasA2Ras',
           ]);
         });
-      });
-    });
-
-    context('when only version id is given', function () {
-      it('returns only valid calibrated flash compatible challenges that link to this version', async function () {
-        // given
-        const candidateReconciliationDate = new Date('2025-01-01');
-
-        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
-
-        const version = databaseBuilder.factory.buildCertificationVersion({ scope: complementaryCertification.key });
-        const otherVersion = databaseBuilder.factory.buildCertificationVersion();
-
-        challengesLC.push(
-          domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
-        );
-        challengesLC.push(
-          domainBuilder.buildChallenge({
-            id: 'otherChallengeForComplementaryCertification',
-            status: 'validé',
-          }),
-        );
-
-        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
-
-        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[3].id,
-          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
-          versionId: version.id,
-        });
-
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[0].id,
-          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
-          versionId: otherVersion.id,
-        });
-
-        await databaseBuilder.commit();
-
-        // when
-        const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
-          date: candidateReconciliationDate,
-          locale: 'fr',
-          version,
-          complementaryCertificationKey: complementaryCertification.key,
-        });
-
-        // then
-        expect(flashCompatibleChallenges).to.have.lengthOf(1);
-        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[3].id);
-        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
-        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
       });
     });
   });

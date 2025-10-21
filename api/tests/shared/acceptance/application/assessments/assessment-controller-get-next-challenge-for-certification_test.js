@@ -104,10 +104,37 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           sessionId,
           reconciledAt: new Date('2020-01-15'),
         });
-        databaseBuilder.factory.buildCertificationVersion({
+        const version = databaseBuilder.factory.buildCertificationVersion({
           scope: Frameworks.CORE,
           startDate: new Date('2020-01-10'),
         });
+
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: firstChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: secondChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: thirdChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: otherChallengeId,
+          versionId: version.id,
+        });
+
         databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
         databaseBuilder.factory.buildAssessment({
           id: assessmentId,
@@ -222,7 +249,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           certificationCenterId,
           version: AlgorithmEngineVersion.V3,
         }).id;
-        databaseBuilder.factory.buildCertificationVersion();
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           isPublished: false,
           version: AlgorithmEngineVersion.V3,
@@ -233,6 +259,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           ...user,
           userId: user.id,
           sessionId,
+          reconciledAt: new Date('2020-01-01'),
         });
         databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
         const assessment = databaseBuilder.factory.buildAssessment({
@@ -250,6 +277,37 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           status: 'validated',
         });
         databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
+        const version = databaseBuilder.factory.buildCertificationVersion({
+          scope: Frameworks.CORE,
+          startDate: new Date('2019-01-01'),
+        });
+
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: firstChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: secondChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: thirdChallengeId,
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: otherChallengeId,
+          versionId: version.id,
+        });
+
         await databaseBuilder.commit();
       });
 
