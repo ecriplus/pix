@@ -1,11 +1,17 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class NewController extends Controller {
   @service pixToast;
   @service router;
   @service intl;
+
+  queryParams = ['parentOrganizationId', 'parentOrganizationName'];
+
+  @tracked parentOrganizationId = null;
+  @tracked parentOrganizationName = null;
 
   @action
   goBackToOrganizationList() {
@@ -21,6 +27,12 @@ export default class NewController extends Controller {
         message: this.intl.t('components.organizations.creation.administration-team.required-fields-error'),
       });
       return;
+    }
+
+    if (this.parentOrganizationId) {
+      this.model.setProperties({
+        parentOrganizationId: this.parentOrganizationId,
+      });
     }
 
     try {
