@@ -13,6 +13,7 @@ const buildCertificationFrameworksChallenge = function ({
   calibrationId,
   createdAt = new Date('2020-01-01'),
   version = getVersionNumber(createdAt),
+  versionId,
 } = {}) {
   complementaryCertificationKey = _.isUndefined(complementaryCertificationKey)
     ? buildComplementaryCertification().key
@@ -29,6 +30,7 @@ const buildCertificationFrameworksChallenge = function ({
     calibrationId,
     createdAt,
     version,
+    versionId,
   };
 
   return databaseBuffer.pushInsertable({

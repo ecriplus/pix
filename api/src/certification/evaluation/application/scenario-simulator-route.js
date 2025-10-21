@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { getChallengeLocales } from '../../../shared/domain/services/locale-service.js';
-import { ComplementaryCertificationKeys } from '../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { scenarioSimulatorController } from './scenario-simulator-controller.js';
 
 const register = async (server) => {
@@ -33,7 +32,7 @@ const register = async (server) => {
                 .valid(...getChallengeLocales())
                 .lowercase()
                 .required(),
-              complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
+              versionId: Joi.number().integer().min(0),
               stopAtChallenge: Joi.number().min(1).max(32).description('Limit the number of question in an iteration.'),
             })
             .required(),

@@ -15,7 +15,6 @@ import Debug from 'debug';
 
 import { AssessmentEndedError } from '../../../../shared/domain/errors.js';
 import { CertificationChallenge } from '../../../shared/domain/models/CertificationChallenge.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
@@ -77,10 +76,15 @@ const getNextChallenge = async function ({
   const complementaryCertificationKey =
     candidate.subscriptionScope !== Frameworks.CORE ? candidate.subscriptionScope : undefined;
 
+  const version = await versionsRepository.getByScopeAndReconciliationDate({
+    scope: candidate.subscriptionScope,
+    reconciliationDate: candidate.reconciledAt,
+  });
+
   const activeFlashCompatibleChallenges = await sharedChallengeRepository.findActiveFlashCompatible({
     locale,
-    date: candidate.reconciledAt,
     complementaryCertificationKey,
+    version,
   });
 
   const alreadyAnsweredChallenges = await sharedChallengeRepository.getMany(alreadyAnsweredChallengeIds);
@@ -101,16 +105,9 @@ const getNextChallenge = async function ({
       : `Candidate does need any adjustment, all ${challengesWithoutSkillsWithAValidatedLiveAlert.length} have been selected`,
   );
 
-  const scope = _determineScope(complementaryCertificationKey);
-
-  const certificationVersion = await versionsRepository.getByScopeAndReconciliationDate({
-    scope,
-    reconciliationDate: candidate.reconciledAt,
-  });
-
   const assessmentAlgorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: flashAlgorithmService,
-    configuration: certificationVersion.challengesConfiguration,
+    configuration: version.challengesConfiguration,
   });
   const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
     assessmentAnswers: allAnswers,
@@ -160,14 +157,6 @@ const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAler
 
 const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationChallengeLiveAlertRepository }) => {
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
-};
-
-const _determineScope = (complementaryCertificationKey) => {
-  if (!complementaryCertificationKey || complementaryCertificationKey === ComplementaryCertificationKeys.CLEA) {
-    return Frameworks.CORE;
-  }
-
-  return complementaryCertificationKey;
 };
 
 export { getNextChallenge };

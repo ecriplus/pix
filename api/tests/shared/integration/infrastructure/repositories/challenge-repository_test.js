@@ -1717,7 +1717,7 @@ describe('Integration | Repository | challenge-repository', function () {
       challengesLC.push(challengeData08_skill03_qcu_archive_notFlashCompatible_fr_noEmbedJson);
     });
 
-    context('when complementary certification given', function () {
+    context('when complementary certification and versionId given', function () {
       it('returns only valid calibrated flash compatible challenges that link to complementary', async function () {
         // given
         const candidateReconciliationDate = new Date('2025-01-01');
@@ -1726,6 +1726,9 @@ describe('Integration | Repository | challenge-repository', function () {
         const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.pixEdu1erDegre(
           {},
         );
+
+        const version = databaseBuilder.factory.buildCertificationVersion({ scope: complementaryCertification.key });
+        const otherVersion = databaseBuilder.factory.buildCertificationVersion();
 
         challengesLC.push(
           domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
@@ -1744,43 +1747,21 @@ describe('Integration | Repository | challenge-repository', function () {
           complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[0].id,
           version: dayjs(candidateReconciliationDate).subtract(10, 'day').format('YYYYMMDDHHmmss'),
+          versionId: version.id,
         });
 
-        // other complementary challenge
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: otherComplementaryCertification.key,
           challengeId: challengesLC[4].id,
           version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
+          versionId: otherVersion.Id,
         });
 
-        // valid complementary challenge
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[3].id,
           version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
-        });
-
-        // valid complementary challenge without calibration
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[4].id,
-          discriminant: null,
-          difficulty: null,
-          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
-        });
-
-        // too old version certificationFrameworksChallenge
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[1].id,
-          version: dayjs(candidateReconciliationDate).subtract(2, 'month').format('YYYYMMDDHHmmss'),
-        });
-
-        // too recent version certificationFrameworksChallenge
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[2].id,
-          version: dayjs(candidateReconciliationDate).add(1, 'second').format('YYYYMMDDHHmmss'),
+          versionId: version.id,
         });
 
         await databaseBuilder.commit();
@@ -1789,7 +1770,7 @@ describe('Integration | Repository | challenge-repository', function () {
         const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
           date: candidateReconciliationDate,
           locale: 'fr',
-          complementaryCertificationKey: complementaryCertification.key,
+          version,
         });
 
         // then
@@ -1808,33 +1789,24 @@ describe('Integration | Repository | challenge-repository', function () {
           {},
         );
 
+        const version = databaseBuilder.factory.buildCertificationVersion({ scope: complementaryCertification.key });
+        const otherVersion = databaseBuilder.factory.buildCertificationVersion();
+
         challengesLC.push(domainBuilder.buildChallenge({ id: 'toto' }));
         challengesLC.push(domainBuilder.buildChallenge({ id: 'recChallenge' }));
 
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
-        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
-          challengeId: challengesLC[0].id,
-          version: '20250423125634',
-        });
-
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: otherComplementaryCertification.key,
-          challengeId: challengesLC[3].id,
-          version: '20250423125634',
-        });
-
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[4].id,
-          version: '20250423125634',
+          versionId: otherVersion.id,
         });
 
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
           complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[1].id,
-          version: '20200423125634',
+          versionId: version.id,
         });
 
         await databaseBuilder.commit();
@@ -1844,11 +1816,12 @@ describe('Integration | Repository | challenge-repository', function () {
           locale: 'fr',
           complementaryCertificationKey: complementaryCertification.key,
           hasComplementaryReferential: complementaryCertification.hasComplementaryReferential,
+          version,
         });
 
         // then
         expect(flashCompatibleChallenges).to.have.lengthOf(1);
-        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[4].id);
+        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[1].id);
         expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
         expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
       });
@@ -1873,11 +1846,13 @@ describe('Integration | Repository | challenge-repository', function () {
         it('should return an empty array', async function () {
           // given
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
           await databaseBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findActiveFlashCompatible({
             locale: 'fr',
+            version,
           });
 
           // then
@@ -1894,11 +1869,13 @@ describe('Integration | Repository | challenge-repository', function () {
           challengesLC.push(challengeData02_skill00_qcm_archive_flashCompatible_en_noEmbedJson);
           challengesLC.push(challengeData09_skill03_qcu_archive_flashCompatible_fr_noEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
           await databaseBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findActiveFlashCompatible({
             locale: 'fr',
+            version,
           });
 
           // then
@@ -1966,12 +1943,14 @@ describe('Integration | Repository | challenge-repository', function () {
           // given
           challengesLC.push(challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
           await databaseBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findActiveFlashCompatible({
             locale: 'fr',
             successProbabilityThreshold: 0.75,
+            version,
           });
 
           // then
@@ -2065,12 +2044,14 @@ describe('Integration | Repository | challenge-repository', function () {
             accessibility2: 'KO',
           });
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+          const version = databaseBuilder.factory.buildCertificationVersion();
           await databaseBuilder.commit();
 
           // when
           const challenges = await challengeRepository.findActiveFlashCompatible({
             locale: 'fr',
             accessibilityAdjustmentNeeded: true,
+            version,
           });
 
           // then
@@ -2081,6 +2062,60 @@ describe('Integration | Repository | challenge-repository', function () {
             'challengeA1RasA2Ras',
           ]);
         });
+      });
+    });
+
+    context('when only version id is given', function () {
+      it('returns only valid calibrated flash compatible challenges that link to this version', async function () {
+        // given
+        const candidateReconciliationDate = new Date('2025-01-01');
+
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
+
+        const version = databaseBuilder.factory.buildCertificationVersion({ scope: complementaryCertification.key });
+        const otherVersion = databaseBuilder.factory.buildCertificationVersion();
+
+        challengesLC.push(
+          domainBuilder.buildChallenge({ id: 'challengeForComplementaryCertification', status: 'validé' }),
+        );
+        challengesLC.push(
+          domainBuilder.buildChallenge({
+            id: 'otherChallengeForComplementaryCertification',
+            status: 'validé',
+          }),
+        );
+
+        databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
+
+        const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[3].id,
+          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
+          versionId: version.id,
+        });
+
+        databaseBuilder.factory.buildCertificationFrameworksChallenge({
+          complementaryCertificationKey: complementaryCertification.key,
+          challengeId: challengesLC[0].id,
+          version: dayjs(candidateReconciliationDate).subtract(1, 'day').format('YYYYMMDDHHmmss'),
+          versionId: otherVersion.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
+          date: candidateReconciliationDate,
+          locale: 'fr',
+          version,
+          complementaryCertificationKey: complementaryCertification.key,
+        });
+
+        // then
+        expect(flashCompatibleChallenges).to.have.lengthOf(1);
+        expect(flashCompatibleChallenges[0].id).to.equal(challengesLC[3].id);
+        expect(flashCompatibleChallenges[0].difficulty).to.equal(certificationFrameworksChallenge.difficulty);
+        expect(flashCompatibleChallenges[0].discriminant).to.equal(certificationFrameworksChallenge.discriminant);
       });
     });
   });
