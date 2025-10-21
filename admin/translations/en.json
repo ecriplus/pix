@@ -1276,6 +1276,20 @@
     },
     "trainings": {
       "training": {
+        "delete": {
+          "button": {
+            "goal-label": "Delete formative goal",
+            "prerequisite-label": "Delete formative prerequisite "
+          },
+          "modal": {
+            "goal-title": "Delete formative goal ?",
+            "instruction": "This action will delete the formative trigger and will deactivate this.",
+            "prerequisite-title": "Delete formative prerequisite ?"
+          },
+          "notifications": {
+            "success": "The trigger has been deleted."
+          }
+        },
         "details": {
           "contentType": "Content type : ",
           "duration": "Duration : ",
@@ -1285,6 +1299,10 @@
           "localizedLanguage": "Localized language : ",
           "publishedOn": "Published on : ",
           "status": "Status : ",
+          "status-label": {
+            "disabled": "Non-triggerable",
+            "enabled": "Triggerable"
+          },
           "title": "Public title : "
         },
         "duplicate": {

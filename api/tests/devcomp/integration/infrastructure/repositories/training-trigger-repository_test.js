@@ -513,4 +513,80 @@ describe('Integration | Repository | training-trigger-repository', function () {
       expect(result).to.be.empty;
     });
   });
+
+  describe('#deleteTrainingTrigger', function () {
+    it('should delete training triggers and training trigger tubes for a given trainingTriggerId', async function () {
+      // given
+      const trainingId = databaseBuilder.factory.buildTraining().id;
+      const trainingTrigger = databaseBuilder.factory.buildTrainingTrigger({ trainingId });
+      databaseBuilder.factory.buildTrainingTriggerTube({
+        trainingTriggerId: trainingTrigger.id,
+        tubeId: tube.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await trainingTriggerRepository.deleteTrainingTrigger({ trainingTriggerId: trainingTrigger.id });
+
+      // then
+      const trainingTriggers = await knex('training-triggers').where({ id: trainingTrigger.id });
+      expect(trainingTriggers).to.have.lengthOf(0);
+
+      const trainingTriggerTubes = await knex('training-trigger-tubes').where({
+        trainingTriggerId: trainingTrigger.id,
+      });
+      expect(trainingTriggerTubes).to.have.lengthOf(0);
+    });
+
+    it('should not delete training triggers and training trigger tubes for a different trainingTriggerId', async function () {
+      // given
+      const trainingId = databaseBuilder.factory.buildTraining().id;
+      const trainingTrigger1 = databaseBuilder.factory.buildTrainingTrigger({ trainingId, type: 'goal' });
+      const trainingTrigger2 = databaseBuilder.factory.buildTrainingTrigger({ trainingId, type: 'prerequisite' });
+      databaseBuilder.factory.buildTrainingTriggerTube({
+        trainingTriggerId: trainingTrigger1.id,
+        tubeId: tube.id,
+      });
+      databaseBuilder.factory.buildTrainingTriggerTube({
+        trainingTriggerId: trainingTrigger2.id,
+        tubeId: tube1.id,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      await trainingTriggerRepository.deleteTrainingTrigger({ trainingTriggerId: trainingTrigger1.id });
+
+      // then
+      const trainingTriggers1 = await knex('training-triggers').where({ id: trainingTrigger1.id });
+      expect(trainingTriggers1).to.have.lengthOf(0);
+
+      const trainingTriggerTubes1 = await knex('training-trigger-tubes').where({
+        trainingTriggerId: trainingTrigger1.id,
+      });
+      expect(trainingTriggerTubes1).to.have.lengthOf(0);
+
+      const trainingTriggers2 = await knex('training-triggers').where({ id: trainingTrigger2.id });
+      expect(trainingTriggers2).to.have.lengthOf(1);
+
+      const trainingTriggerTubes2 = await knex('training-trigger-tubes').where({
+        trainingTriggerId: trainingTrigger2.id,
+      });
+      expect(trainingTriggerTubes2).to.have.lengthOf(1);
+    });
+
+    it('should not fail when trainingTriggerId does not exist', async function () {
+      // given
+      const trainingTriggerId = 999999;
+
+      // when
+      await trainingTriggerRepository.deleteTrainingTrigger({ trainingTriggerId });
+
+      // then
+      const trainingTriggers = await knex('training-triggers').where({ id: trainingTriggerId });
+      expect(trainingTriggers).to.have.lengthOf(0);
+
+      const trainingTriggerTubes = await knex('training-trigger-tubes').where({ trainingTriggerId: trainingTriggerId });
+      expect(trainingTriggerTubes).to.have.lengthOf(0);
+    });
+  });
 });

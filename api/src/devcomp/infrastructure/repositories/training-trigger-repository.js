@@ -13,6 +13,13 @@ import { TrainingTriggerForAdmin } from '../../domain/read-models/TrainingTrigge
 
 const TABLE_NAME = 'training-triggers';
 
+const deleteTrainingTrigger = async function ({ trainingTriggerId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  await knexConn('training-trigger-tubes').where({ trainingTriggerId }).delete();
+  await knexConn(TABLE_NAME).where({ id: trainingTriggerId }).delete();
+};
+
 const createOrUpdate = async function ({ trainingId, triggerTubesForCreation, type, threshold }) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -82,7 +89,7 @@ const findByTrainingId = async function ({ trainingId }) {
   );
 };
 
-export { createOrUpdate, findByTrainingId, findByTrainingIdForAdmin };
+export { createOrUpdate, deleteTrainingTrigger, findByTrainingId, findByTrainingIdForAdmin };
 
 async function _toDomain({ trainingTrigger, triggerTubes }) {
   const triggerTubeIds = triggerTubes.map(({ tubeId }) => tubeId);

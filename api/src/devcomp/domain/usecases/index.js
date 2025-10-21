@@ -37,6 +37,7 @@ import { attachTargetProfilesToTraining } from './attach-target-profiles-to-trai
 import { createOrUpdateTrainingTrigger } from './create-or-update-training-trigger.js';
 import { createPassage } from './create-passage.js';
 import { createTraining } from './create-training.js';
+import { deleteTrainingTrigger } from './delete-training-trigger.js';
 import { detachTargetProfilesFromTraining } from './detach-target-profiles-from-training.js';
 import { duplicateTraining } from './duplicate-training.js';
 import { findCampaignParticipationTrainings } from './find-campaign-participation-trainings.js';
@@ -67,6 +68,7 @@ const usecasesWithoutInjectedDependencies = {
   attachTargetProfilesToTraining,
   createOrUpdateTrainingTrigger,
   createPassage,
+  deleteTrainingTrigger,
   createTraining,
   detachTargetProfilesFromTraining,
   duplicateTraining,

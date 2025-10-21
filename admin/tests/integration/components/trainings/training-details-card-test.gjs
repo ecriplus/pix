@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import TrainingDetailsCard from 'pix-admin/components/trainings/training-details-card';
 import { module, test } from 'qunit';
 
@@ -43,7 +44,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     const screen = await render(<template><TrainingDetailsCard @training={{training}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Déclenchable')).exists();
+    assert.dom(screen.getByText(t('pages.trainings.training.details.status-label.enabled'))).exists();
   });
 
   test('it should display "Non déclenchable" when training is not recommendable', async function (assert) {
@@ -52,7 +53,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     const screen = await render(<template><TrainingDetailsCard @training={{training}} /></template>);
 
     // then
-    assert.dom(screen.getByText('Non déclenchable')).exists();
+    assert.dom(screen.getByText(t('pages.trainings.training.details.status-label.disabled'))).exists();
   });
 
   test('it should display "Actif" when training is not disabled', async function (assert) {

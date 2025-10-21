@@ -1277,6 +1277,20 @@
     },
     "trainings": {
       "training": {
+        "delete": {
+          "button": {
+            "goal-label": "Supprimer l'objectif à ne pas dépasser",
+            "prerequisite-label": "Supprimer le prérequis"
+          },
+          "modal": {
+            "goal-title": "Supprimer l'objectif à ne pas dépasser du contenu formatif ?",
+            "instruction": "Cette action supprimera le déclenchement de votre contenu formatif.",
+            "prerequisite-title": "Supprimer le prérequis du contenu formatif ?"
+          },
+          "notifications": {
+            "success": "Le déclencheur à bien été supprimé."
+          }
+        },
         "details": {
           "contentType": "Type de contenu :",
           "duration": "Durée :",
@@ -1286,6 +1300,10 @@
           "localizedLanguage": "Langue localisée :",
           "publishedOn": "Publié sur :",
           "status": "Statut :",
+          "status-label": {
+            "disabled": "Non déclenchable",
+            "enabled": "Déclenchable"
+          },
           "title": "Titre public :"
         },
         "duplicate": {

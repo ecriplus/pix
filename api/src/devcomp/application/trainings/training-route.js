@@ -228,6 +228,30 @@ const register = async function (server) {
       },
     },
     {
+      method: 'DELETE',
+      path: '/api/admin/trainings/{trainingId}/triggers/{trainingTriggerId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+          },
+        ],
+        handler: trainingsController.deleteTrainingTrigger,
+        validate: {
+          params: Joi.object({
+            trainingId: identifiersType.trainingId,
+            trainingTriggerId: identifiersType.trainingTriggerId,
+          }),
+        },
+        tags: ['api', 'admin', 'trainings'],
+        notes: ["- Permet à un administrateur de supprimer le déclencheur d'un contenu formatif."],
+      },
+    },
+    {
       method: 'PUT',
       path: '/api/admin/trainings/{trainingId}/triggers',
       config: {
