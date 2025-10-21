@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.238.0](https://github.com/1024pix/pix/compare/v5.237.0...v5.238.0) (2025-10-21)
+
+### :rocket: Amélioration
+
+- [#13848](https://github.com/1024pix/pix/pull/13848) Ajout d'un paramètre versionId pour la recherche de challenges de complémentaires (PIX-19957). 
+
+### :bug: Correction
+
+- [#13903](https://github.com/1024pix/pix/pull/13903) Empêcher l'erreur sur la recherche par ID de centre de certification (PIX-19394) 
+- [#13944](https://github.com/1024pix/pix/pull/13944) Réparer l'import fwb / import générique (PIX-20075) 
+
+### :arrow_up: Montée de version
+
+- [#13937](https://github.com/1024pix/pix/pull/13937) Update dependency @1024pix/pix-ui to ^55.29.5 (certif) 
+- [#13938](https://github.com/1024pix/pix/pull/13938) Update dependency @1024pix/pix-ui to ^55.29.5 (junior) 
+- [#13939](https://github.com/1024pix/pix/pull/13939) Update dependency @1024pix/pix-ui to ^55.29.5 (mon-pix) 
+- [#13940](https://github.com/1024pix/pix/pull/13940) Update dependency @1024pix/pix-ui to ^55.29.5 (orga) 
+- [#13943](https://github.com/1024pix/pix/pull/13943) Update dependency webpack to v5.102.1 (junior)
+
 # [5.237.0](https://github.com/1024pix/pix/compare/v5.236.0...v5.237.0) (2025-10-21)
 
 ### :rocket: Amélioration
