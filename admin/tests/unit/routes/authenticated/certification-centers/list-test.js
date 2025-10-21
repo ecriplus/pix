@@ -44,12 +44,12 @@ module('Unit | Route | authenticated/certification-centers/list', function (hook
     module('when queryParams filters are  truthy', function () {
       test('it should call store.query with filters containing trimmed values', async function (assert) {
         // given
-        params.id = 'someId';
+        params.id = ' 12 3 456 ';
         params.name = ' someName';
         params.type = 'someType ';
-        params.externalId = 'someExternalId';
+        params.externalId = ' someExternalId ';
         expectedQueryArgs.filter = {
-          id: 'someId',
+          id: '123456',
           name: 'someName',
           type: 'someType',
           externalId: 'someExternalId',
@@ -61,6 +61,21 @@ module('Unit | Route | authenticated/certification-centers/list', function (hook
         // then
         sinon.assert.calledWith(route.store.query, 'certification-center', expectedQueryArgs);
         assert.ok(true);
+      });
+    });
+
+    module('when route is in error', function () {
+      test('it should return an empty model', async function (assert) {
+        // given
+        params.id = { id: 'Non number ID' };
+
+        route.store.query = sinon.stub().rejects();
+
+        // when
+        const certificationCenters = await route.model(params);
+
+        // then
+        assert.deepEqual(certificationCenters, []);
       });
     });
   });

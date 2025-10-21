@@ -55,7 +55,7 @@ module('Integration | Component | routes/authenticated/certification-centers | l
 
     // then
     assert.dom(screen.getByRole('textbox', { name: 'Type' })).exists();
-    assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).exists();
+    assert.dom(screen.getByRole('spinbutton', { name: 'Identifiant' })).exists();
     assert.dom(screen.getByRole('textbox', { name: 'Nom' })).exists();
     assert.dom(screen.getByRole('textbox', { name: 'ID externe' })).exists();
   });
