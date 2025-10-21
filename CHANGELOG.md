@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.237.0](https://github.com/1024pix/pix/compare/v5.236.0...v5.237.0) (2025-10-21)
+
+### :rocket: Amélioration
+
+- [#13907](https://github.com/1024pix/pix/pull/13907) Afficher le nombre d'organisations filles rattachées à l'orga parente (PIX-18893) 
+- [#13844](https://github.com/1024pix/pix/pull/13844) Afficher les locales dans le locale switcher sur Pix App (PIX-19700). 
+- [#13904](https://github.com/1024pix/pix/pull/13904) ajout des images dans la découverte 2 
+- [#13884](https://github.com/1024pix/pix/pull/13884) Ajouter des étapes aux parcours combinés (PIX-19798) 
+- [#13887](https://github.com/1024pix/pix/pull/13887) Ajouter un délai sur le bouton "Suivant" du stepper horizontal (2nd round) (PIX-20007) 
+- [#13663](https://github.com/1024pix/pix/pull/13663) Autoriser la suppression de trigger sur les contenus formatifs (PIX-19692). 
+- [#13925](https://github.com/1024pix/pix/pull/13925) Prendre en compte les retours à la ligne à l'affichage d'une "bonne réponse à afficher" (PIX-19931) 
+
+### :building_construction: Tech
+
+- [#13917](https://github.com/1024pix/pix/pull/13917) :broom: Supprime des fichiers inutilisés 
+- [#13920](https://github.com/1024pix/pix/pull/13920) :truck: Déplace le modèle `AdminMember` dans le contest `src/team` 
+- [#13899](https://github.com/1024pix/pix/pull/13899) :truck: Déplace le modèle `ComplementaryCertificatrionBadgeForAdmin` vers le contexte partagé de `Certification` 
+- [#13898](https://github.com/1024pix/pix/pull/13898) :truck: Déplace le modèle `Course` vers le context `src/evaluation` 
+
+### :arrow_up: Montée de version
+
+- [#13921](https://github.com/1024pix/pix/pull/13921) Update adobe/s3mock Docker tag to v4.9.1 (dossier racine) 
+- [#13927](https://github.com/1024pix/pix/pull/13927) Update dependency @1024pix/ember-testing-library to ^3.0.21 (admin) 
+- [#13928](https://github.com/1024pix/pix/pull/13928) Update dependency @1024pix/ember-testing-library to ^3.0.21 (certif) 
+- [#13929](https://github.com/1024pix/pix/pull/13929) Update dependency @1024pix/ember-testing-library to ^3.0.21 (junior) 
+- [#13930](https://github.com/1024pix/pix/pull/13930) Update dependency @1024pix/ember-testing-library to ^3.0.21 (mon-pix) 
+- [#13932](https://github.com/1024pix/pix/pull/13932) Update dependency @1024pix/ember-testing-library to ^3.0.21 (orga) 
+- [#13933](https://github.com/1024pix/pix/pull/13933) Update dependency @1024pix/pix-ui to ^55.29.5 (admin) 
+- [#13915](https://github.com/1024pix/pix/pull/13915) Update nginx Docker tag to v1.29.2
+
 # [5.236.0](https://github.com/1024pix/pix/compare/v5.235.0...v5.236.0) (2025-10-20)
 
 ### :rocket: Amélioration
