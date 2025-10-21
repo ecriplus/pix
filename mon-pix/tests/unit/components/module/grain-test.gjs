@@ -179,4 +179,25 @@ module('Unit | Component | Module | Grain', function (hooks) {
       });
     });
   });
+
+  module('#grainType', function () {
+    module('when the grain type is short-lesson', function () {
+      test('should return the short-lesson type', function (assert) {
+        // given
+        const qcu = { id: 'qcu-id-1', type: 'qcu' };
+        const grain = {
+          type: 'short-lesson',
+          components: [{ type: 'element', element: qcu }],
+        };
+
+        const component = createGlimmerComponent('module/grain/grain', { grain });
+
+        // when
+        const grainType = component.grainType;
+
+        // then
+        assert.strictEqual(grainType, 'short-lesson');
+      });
+    });
+  });
 });
