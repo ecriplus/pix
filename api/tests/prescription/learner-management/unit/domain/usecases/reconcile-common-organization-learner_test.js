@@ -4,7 +4,7 @@ import { reconcileCommonOrganizationLearner } from '../../../../../../src/prescr
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | reconcile-common-organization-learner', function () {
-  let campaignCode,
+  let code,
     organizationId,
     importFormat,
     userId,
@@ -17,7 +17,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
     userReconciliationService;
 
   beforeEach(function () {
-    campaignCode = 'PIX123456';
+    code = 'PIX123456';
     organizationId = 'organization id';
     userId = Symbol('userId');
     reconcileInfos = Symbol('reconcile infos');
@@ -51,7 +51,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
 
       // when
       const error = await catchErr(reconcileCommonOrganizationLearner)({
-        campaignCode,
+        code,
         userId,
         reconcileInfos,
         campaignRepository,
@@ -69,14 +69,14 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
   context('when there is no import feature on organization', function () {
     it('should throw a ReconcileCommonOrganizationLearnerError', async function () {
       // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves({ organizationId });
+      campaignRepository.getByCode.withArgs(code).resolves({ organizationId });
       organizationFeatureApi.getAllFeaturesFromOrganization
         .withArgs(organizationId)
         .resolves({ hasLearnersImportFeature: false });
 
       //when
       const error = await catchErr(reconcileCommonOrganizationLearner)({
-        campaignCode,
+        code,
         userId,
         reconcileInfos,
         campaignRepository,
@@ -94,7 +94,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
   context('when there is no import format for organization', function () {
     it('should throw a ReconcileCommonOrganizationLearnerError', async function () {
       // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves({ organizationId });
+      campaignRepository.getByCode.withArgs(code).resolves({ organizationId });
       organizationFeatureApi.getAllFeaturesFromOrganization
         .withArgs(organizationId)
         .resolves({ hasLearnersImportFeature: true });
@@ -102,7 +102,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
 
       //when
       const error = await catchErr(reconcileCommonOrganizationLearner)({
-        campaignCode,
+        code,
         userId,
         reconcileInfos,
         campaignRepository,
@@ -120,7 +120,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
   context('Reconciliation', function () {
     beforeEach(function () {
       // given
-      campaignRepository.getByCode.withArgs(campaignCode).resolves({ organizationId });
+      campaignRepository.getByCode.withArgs(code).resolves({ organizationId });
       organizationFeatureApi.getAllFeaturesFromOrganization
         .withArgs(organizationId)
         .resolves({ hasLearnersImportFeature: true });
@@ -139,7 +139,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
 
         //when
         const error = await catchErr(reconcileCommonOrganizationLearner)({
-          campaignCode,
+          code,
           userId,
           reconcileInfos,
           campaignRepository,
@@ -173,7 +173,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
           .returns(null);
         //when
         const error = await catchErr(reconcileCommonOrganizationLearner)({
-          campaignCode,
+          code,
           userId,
           reconcileInfos,
           campaignRepository,
@@ -216,7 +216,7 @@ describe('Unit | UseCase | reconcile-common-organization-learner', function () {
 
         //when
         const result = await reconcileCommonOrganizationLearner({
-          campaignCode,
+          code,
           userId,
           reconcileInfos,
           campaignRepository,

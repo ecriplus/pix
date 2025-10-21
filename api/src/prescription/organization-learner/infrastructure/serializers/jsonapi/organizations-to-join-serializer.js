@@ -22,9 +22,6 @@ const serialize = function (organizations) {
       'isReconciliationRequired',
       'hasReconciliationFields',
     ],
-    reconciliationFields: {
-      attributes: ['name', 'fieldId', 'position', 'type'],
-    },
   }).serialize(organizations);
 };
 

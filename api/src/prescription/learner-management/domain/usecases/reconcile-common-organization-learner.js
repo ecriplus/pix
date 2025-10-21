@@ -8,14 +8,14 @@ import { ReconcileCommonOrganizationLearnerError } from '../errors.js';
 
  * @name reconcileCommonOrganizationLearner
  * @param {Object} params
- * @param {string} params.campaignCode
+ * @param {string} params.code
  * @param {number} params.userId
  * @param {Object} params.reconciliationInfos
  *
  * @returns {Promise<void>}
  */
 const reconcileCommonOrganizationLearner = async function ({
-  campaignCode,
+  code,
   userId,
   reconciliationInfos,
   campaignRepository,
@@ -24,7 +24,7 @@ const reconcileCommonOrganizationLearner = async function ({
   organizationLearnerRepository,
   userReconciliationService,
 }) {
-  const campaign = await campaignRepository.getByCode(campaignCode);
+  const campaign = await campaignRepository.getByCode(code);
   if (!campaign) {
     throw new ReconcileCommonOrganizationLearnerError('CAMPAIGN_NOT_FOUND');
   }
@@ -35,6 +35,7 @@ const reconcileCommonOrganizationLearner = async function ({
   }
 
   const importFormat = await organizationLearnerImportFormatRepository.get(campaign.organizationId);
+
   if (!importFormat) {
     throw new ReconcileCommonOrganizationLearnerError('IMPORT_FORMAT_NOT_FOUND');
   }

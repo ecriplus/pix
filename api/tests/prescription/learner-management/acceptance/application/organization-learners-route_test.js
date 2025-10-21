@@ -206,7 +206,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
         payload: {
           data: {
             attributes: {
-              'campaign-code': campaign.code,
+              code: campaign.code,
               'reconciliation-infos': {
                 reconcileField1: 'Aheurfix',
                 reconcileField2: 'Edgar',

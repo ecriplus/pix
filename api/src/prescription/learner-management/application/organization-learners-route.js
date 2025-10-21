@@ -127,7 +127,7 @@ const register = async (server) => {
           payload: Joi.object({
             data: {
               attributes: {
-                'campaign-code': Joi.string().required(),
+                code: Joi.string().required(),
                 'reconciliation-infos': Joi.object().required(),
               },
               type: Joi.string().required(),

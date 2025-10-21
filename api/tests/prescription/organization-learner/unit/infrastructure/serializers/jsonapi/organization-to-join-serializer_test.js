@@ -24,7 +24,7 @@ describe('Unit | Serializer | JSONAPI | organization-to-join-serializer', functi
             'reconciliation-fields': [
               {
                 name: 'COMMON_FIRSTNAME',
-                'field-id': 'reconcileField2',
+                fieldId: 'reconcileField2',
                 position: 2,
                 type: 'string',
               },
