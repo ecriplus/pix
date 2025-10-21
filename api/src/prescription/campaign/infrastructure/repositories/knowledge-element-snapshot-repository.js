@@ -9,18 +9,17 @@ export async function save({ snapshot, campaignParticipationId }) {
     .from('knowledge-element-snapshots')
     .where('campaignParticipationId', campaignParticipationId)
     .first();
+
   if (existingSnapshot) {
-    return await knexConn('knowledge-element-snapshots')
-      .update({
-        snapshot,
-      })
+    return knexConn('knowledge-element-snapshots')
+      .update('snapshot', snapshot)
       .where('campaignParticipationId', campaignParticipationId);
-  } else {
-    return await knexConn('knowledge-element-snapshots').insert({
-      snapshot,
-      campaignParticipationId,
-    });
   }
+
+  return knexConn('knowledge-element-snapshots').insert({
+    snapshot,
+    campaignParticipationId,
+  });
 }
 
 /**

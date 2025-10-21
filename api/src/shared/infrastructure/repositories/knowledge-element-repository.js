@@ -43,7 +43,8 @@ const findUniqByUserIds = async function ({ userIds }) {
 
 const batchSave = async function ({ knowledgeElements }) {
   const knexConn = DomainTransaction.getConnection();
-  const knowledgeElementsToSave = knowledgeElements.map((ke) => _.omit(ke, ['id', 'createdAt']));
+  // eslint-disable-next-line no-unused-vars
+  const knowledgeElementsToSave = knowledgeElements.map(({ id, createdAt, ...ke }) => ke);
   const savedKnowledgeElements = await knex
     .batchInsert(tableName, knowledgeElementsToSave)
     .transacting(knexConn.isTransaction ? knexConn : null)
