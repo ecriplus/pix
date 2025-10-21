@@ -117,6 +117,7 @@ const deserialize = function (json) {
     dataProtectionOfficerLastName: attributes['data-protection-officer-last-name'],
     dataProtectionOfficerEmail: attributes['data-protection-officer-email'],
     administrationTeamId: parseInt(attributes['administration-team-id']),
+    parentOrganizationId: attributes['parent-organization-id'] ? parseInt(attributes['parent-organization-id']) : null,
     features: attributes.features,
     tagIds,
   });

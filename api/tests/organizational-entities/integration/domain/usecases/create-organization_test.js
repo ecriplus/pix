@@ -1,8 +1,11 @@
-import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
+import {
+  AdministrationTeamNotFound,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../../../../../src/organizational-entities/domain/errors.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { EntityValidationError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import {
   catchErr,
   databaseBuilder,
@@ -46,6 +49,69 @@ describe('Integration | UseCases | create-organization', function () {
   });
 
   describe('error cases', function () {
+    describe('when parent organization is provided', function () {
+      describe('when parent organization does not exist', function () {
+        it('throws an error', async function () {
+          // given
+          const organization = new OrganizationForAdmin({
+            name: 'ACME',
+            type: 'PRO',
+            documentationUrl: 'https://pix.fr',
+            createdBy: superAdminUserId,
+            administrationTeamId: 1234,
+            parentOrganizationId: 9999,
+          });
+
+          // when
+          const error = await catchErr(usecases.createOrganization)({ organization });
+
+          // then
+          expect(error).to.deep.equal(new NotFoundError('Not found organization for ID 9999'));
+        });
+      });
+
+      describe('when parent organization is a child organization', function () {
+        ('throws UnableToAttachChildOrganizationToParentOrganizationError',
+          async function () {
+            // given
+            const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+            const childOrganizationId = databaseBuilder.factory.buildOrganization({
+              id: 2000,
+              name: 'Parent Org',
+              type: Organization.types.SCO1D,
+              parentOrganizationId,
+            }).id;
+
+            await databaseBuilder.commit();
+
+            const organization = new OrganizationForAdmin({
+              name: 'ACME',
+              type: 'PRO',
+              documentationUrl: 'https://pix.fr',
+              createdBy: superAdminUserId,
+              administrationTeamId: 1234,
+              parentOrganizationId: childOrganizationId,
+            });
+
+            // when
+            const error = await catchErr(usecases.createOrganization)({ organization });
+
+            // then
+            expect(error).to.deep.equal(
+              new UnableToAttachChildOrganizationToParentOrganizationError({
+                code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+                message:
+                  'Unable to attach child organization to parent organization which is also a child organization',
+                meta: {
+                  grandParentOrganizationId: parentOrganizationId,
+                  parentOrganizationId: childOrganizationId,
+                },
+              }),
+            );
+          });
+      });
+    });
+
     describe('when organization administration team does not exist', function () {
       it('throws AdministrationTeamNotFound error', async function () {
         // given

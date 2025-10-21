@@ -215,6 +215,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerLastName: organizationAttributes.dataProtectionOfficerLastName,
         dataProtectionOfficerEmail: organizationAttributes.dataProtectionOfficerEmail,
         administrationTeamId: parseInt(organizationAttributes.administrationTeamId),
+        parentOrganizationId: null,
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
             active: organizationAttributes.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.active,
@@ -274,6 +275,28 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
       // then
       expect(organization.tags).to.be.empty;
       expect(organization.tagIds).to.deep.members([4, 2]);
+    });
+
+    it('should deserialize parentOrganizationId if present', function () {
+      // when
+      const organization = organizationForAdminSerializer.deserialize({
+        data: {
+          type: 'organizations',
+          id: '7',
+          attributes: {
+            name: 'Lycée St Cricq',
+            type: Organization.types.SCO,
+            'external-id': 'ABCD123',
+            'province-code': '64',
+            'created-by': '10',
+            'administration-team-id': '1',
+            'parent-organization-id': '5',
+          },
+        },
+      });
+
+      // then
+      expect(organization.parentOrganizationId).to.equal(5);
     });
   });
 });
