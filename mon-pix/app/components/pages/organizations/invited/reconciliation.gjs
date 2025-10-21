@@ -24,17 +24,17 @@ export default class InvitedWrapper extends Component {
   async registerLearner(reconciliationInfos) {
     this.isLoading = true;
     this.errorMessage = null;
+    const verifiedCode = await this.store.findRecord('verified-code', this.args.model.verifiedCode.id);
     const organizationLearner = this.store.createRecord('organization-learner', {
       organizationId: this.args.model.organizationToJoin.id,
       reconciliationInfos,
+      code: verifiedCode.id,
     });
 
     try {
       await organizationLearner.save();
 
       this.accessStorage.setAssociationDone(this.args.model.organizationToJoin.id);
-      const verifiedCode = await this.store.findRecord('verified-code', this.args.model.campaign.code);
-
       if (verifiedCode.type === 'campaign') {
         this.router.transitionTo('campaigns.fill-in-participant-external-id', verifiedCode.id);
       } else {
@@ -61,6 +61,7 @@ export default class InvitedWrapper extends Component {
       }
     });
   }
+
   get reconciliationFieldNames() {
     return this.args.model.organizationToJoin.reconciliationFields.map(({ name }) => {
       const translationKey = this.FIELD_KEY[name];

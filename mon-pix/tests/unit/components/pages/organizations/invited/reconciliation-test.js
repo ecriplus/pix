@@ -6,17 +6,17 @@ import createGlimmerComponent from '../../../../../helpers/create-glimmer-compon
 
 module('Unit | Component | Pages | Organizations | Invited | Reconciliation', function (hooks) {
   setupTest(hooks);
-  let createRecordStub, component, model, campaignCode, organizationId;
+  let createRecordStub, component, model, code, organizationId;
   hooks.beforeEach(function () {
-    campaignCode = Symbol('code');
+    code = Symbol('code');
     organizationId = Symbol(1);
     createRecordStub = {
       unloadRecord: sinon.stub(),
       save: sinon.stub(),
     };
     model = {
-      campaign: {
-        code: campaignCode,
+      verifiedCode: {
+        id: code,
       },
       organizationToJoin: {
         id: organizationId,
@@ -46,11 +46,11 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', fu
       .withArgs('organization-learner', {
         organizationId,
         reconciliationInfos,
+        code,
       })
       .returns(createRecordStub);
 
-    component.store.findRecord.withArgs('verified-code', campaignCode).returns({ id: campaignCode, type: 'campaign' });
-
+    component.store.findRecord.withArgs('verified-code', code).returns({ id: code, type: 'campaign' });
     // when
     await component.registerLearner(reconciliationInfos);
 
@@ -59,7 +59,7 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', fu
     assert.true(createRecordStub.unloadRecord.called, 'called unloadRecord');
     assert.true(component.accessStorage.setAssociationDone.calledWithExactly(organizationId), 'called accessStorage');
     assert.true(
-      component.router.transitionTo.calledWithExactly('campaigns.fill-in-participant-external-id', campaignCode),
+      component.router.transitionTo.calledWithExactly('campaigns.fill-in-participant-external-id', code),
       'called transitionTo',
     );
   });
@@ -71,10 +71,14 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', fu
       .withArgs('organization-learner', {
         organizationId,
         reconciliationInfos,
+        code,
       })
       .returns(createRecordStub);
     createRecordStub.save.rejects({ errors: [{ status: 400, detail: 'oh no !' }] });
     // when
+
+    component.store.findRecord.withArgs('verified-code', code).returns({ id: code, type: 'campaign' });
+
     await component.registerLearner(reconciliationInfos);
 
     // then
@@ -91,10 +95,14 @@ module('Unit | Component | Pages | Organizations | Invited | Reconciliation', fu
       .withArgs('organization-learner', {
         organizationId,
         reconciliationInfos,
+        code,
       })
       .returns(createRecordStub);
     createRecordStub.save.rejects({ errors: [{ status: 400, title: ' title error ', detail: 'Une erreur !' }] });
+
     // when
+    component.store.findRecord.withArgs('verified-code', code).returns({ id: code, type: 'campaign' });
+
     await component.registerLearner(reconciliationInfos);
 
     // then

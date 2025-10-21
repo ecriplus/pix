@@ -99,7 +99,7 @@ describe('Unit | Prescription | learner management | Application | Router | orga
     describe('error cases', function () {
       it('should throw an error when payload reconciliationInfos is not an object', async function () {
         // given
-        const payload = { data: { attributes: { 'campaign-code': 'myCode', 'reconciliation-infos': null } } };
+        const payload = { data: { attributes: { code: 'myCode', 'reconciliation-infos': null } } };
 
         // when
         const response = await httpTestServer.request(method, url, payload, null, headers);
@@ -111,7 +111,7 @@ describe('Unit | Prescription | learner management | Application | Router | orga
 
       it('should not called controller when payload campaignCode is not a string', async function () {
         // given
-        const payload = { data: { attributes: { 'campaign-code': null, 'reconciliation-infos': {} } } };
+        const payload = { data: { attributes: { code: null, 'reconciliation-infos': {} } } };
 
         // when
         const response = await httpTestServer.request(method, url, payload, null, headers);
@@ -125,7 +125,7 @@ describe('Unit | Prescription | learner management | Application | Router | orga
     it('should called the controller when everything is ok', async function () {
       // given
       const payload = {
-        data: { attributes: { 'campaign-code': 'myCode', 'reconciliation-infos': {} }, type: 'organization-learner' },
+        data: { attributes: { code: 'myCode', 'reconciliation-infos': {} }, type: 'organization-learner' },
       };
 
       // when

@@ -40,12 +40,12 @@ describe('Unit | Prescription | Learner Management | Application | organization-
 
     it('called usecases with correct parameters', async function () {
       const userId = Symbol('userId');
-      const campaignCode = Symbol('campaignCode');
+      const code = Symbol('campaignCode');
       const reconciliationInfos = Symbol('reconciliationInfos');
       const request = {
         auth: { credentials: { userId } },
         deserializedPayload: {
-          campaignCode,
+          code,
           reconciliationInfos,
         },
       };
@@ -53,7 +53,7 @@ describe('Unit | Prescription | Learner Management | Application | organization-
       const response = await organizationLearnersController.reconcileCommonOrganizationLearner(request, hFake);
 
       expect(
-        reconcileCommonOrganizationLearnerStub.calledWithExactly({ userId, campaignCode, reconciliationInfos }),
+        reconcileCommonOrganizationLearnerStub.calledWithExactly({ userId, code, reconciliationInfos }),
         'reconcileCommonOrganizationLearner',
       ).to.be.true;
       expect(response.statusCode).to.be.equal(204);
