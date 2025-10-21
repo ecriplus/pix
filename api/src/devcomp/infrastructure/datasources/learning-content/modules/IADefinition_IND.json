@@ -356,7 +356,7 @@
                     {
                       "id": "e549531a-3326-4bc5-bc84-2d04288916b0",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/muguet1.jpg",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/dec2_img1.png",
                       "alt": "Une photographie de plante",
                       "alternativeText": "",
                       "legend": "",
@@ -374,7 +374,7 @@
                     {
                       "id": "ee4a85c2-59a0-4541-acb3-bbbbb0a055ca",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/pixelplante.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/dec2_img2.png",
                       "alt": "Les pixels d'une photographie avec une plante.",
                       "alternativeText": "",
                       "legend": "",
@@ -392,7 +392,7 @@
                     {
                       "id": "333f5d88-b336-487b-a45c-c3e38269b1fa",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/matricepixelplante.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/dec2_img3.png",
                       "alt": "Un tableau avec des nombres représentant la couleur de la plante",
                       "alternativeText": "",
                       "legend": "",
