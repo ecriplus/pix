@@ -37,7 +37,6 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
         // then
         expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
-          accessibilityAdjustmentNeeded: undefined,
           version,
         });
       });
@@ -109,7 +108,19 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
         // given
         const locale = FRENCH_FRANCE;
         const accessibilityAdjustmentNeeded = false;
+        const versionId = 1;
+        const challengesConfiguration = { minimumEstimatedSuccessRateRanges: [] };
+        const version = domainBuilder.certification.configuration.buildVersion({
+          id: versionId,
+          scope: Frameworks.PIX_PLUS_DROIT,
+          challengesConfiguration,
+        });
+
         const challengeRepositoryStub = { findActiveFlashCompatible: sinon.stub() };
+
+        const versionRepositoryStub = {
+          getById: sinon.stub().resolves(version),
+        };
 
         // when
         await catchErr(simulateFlashAssessmentScenario)({
@@ -117,13 +128,13 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
           accessibilityAdjustmentNeeded,
           complementaryCertificationKey: undefined,
           sharedChallengeRepository: challengeRepositoryStub,
+          versionRepository: versionRepositoryStub,
         });
 
         // then
         expect(challengeRepositoryStub.findActiveFlashCompatible).to.have.been.calledOnceWithExactly({
           locale,
-          accessibilityAdjustmentNeeded,
-          version: undefined,
+          version,
         });
       });
     });

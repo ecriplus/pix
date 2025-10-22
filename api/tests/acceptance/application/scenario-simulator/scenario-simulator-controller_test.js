@@ -83,6 +83,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: -2,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.3,
+          accessibility1: 'RAS',
+          accessibility2: 'KO',
         },
         {
           id: 'challenge2',
@@ -92,6 +94,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 6,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.4,
+          accessibility1: 'KO',
+          accessibility2: 'RAS',
         },
         {
           id: 'challenge3',
@@ -101,6 +105,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 8.5,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.5,
+          accessibility1: 'RAS',
+          accessibility2: 'OK',
         },
         {
           id: 'challenge4',
@@ -110,6 +116,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 0.145,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.6,
+          accessibility1: 'OK',
+          accessibility2: 'OK',
         },
         {
           id: 'challenge5',
@@ -119,6 +127,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 1,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.7,
+          accessibility1: 'RAS',
+          accessibility2: 'RAS',
         },
         {
           id: 'challenge6',
@@ -128,6 +138,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: -1,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.8,
+          accessibility1: 'OK',
+          accessibility2: 'RAS',
         },
       ],
     };
@@ -217,6 +229,31 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         expect(response).to.have.property('statusCode', 200);
         const parsedResponse = parseJsonStream(response);
         expect(parsedResponse[0].simulationReport).to.have.lengthOf(1);
+      });
+    });
+
+    describe('when the accessibilityAdjustmentNeeded parameter is given', function () {
+      it('should return a report that contains the targeted number of challenges', async function () {
+        // given
+        options.headers = adminAuthorizationHeaders;
+        options.payload = {
+          ...validPayload,
+          accessibilityAdjustmentNeeded: true,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response).to.have.property('statusCode', 200);
+        const parsedResponse = parseJsonStream(response);
+        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
+        expect(['challenge3', 'challenge4', 'challenge5', 'challenge6']).to.include(
+          parsedResponse[0].simulationReport[0].challengeId,
+        );
+        expect(['challenge3', 'challenge4', 'challenge5', 'challenge6']).to.include(
+          parsedResponse[0].simulationReport[1].challengeId,
+        );
       });
     });
 
