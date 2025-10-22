@@ -22,7 +22,7 @@ export const save = async function ({ organizationLearnerId, questId, combinedCo
       organizationLearnerId,
       status: OrganizationLearnerParticipationStatuses.STARTED,
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-      attributes: JSON.stringify({ id: combinedCourseId }),
+      referenceId: combinedCourseId,
     })
     .returning('id');
 
