@@ -39,6 +39,12 @@ export default class OrganizationCreationForm extends Component {
     return options;
   }
 
+  get submitButtonText() {
+    return this.args.parentOrganizationName
+      ? 'components.organizations.creation.actions.add-child-organization'
+      : 'common.actions.add';
+  }
+
   @action
   handleOrganizationTypeSelectionChange(value) {
     this.args.organization.type = value;
@@ -83,6 +89,14 @@ export default class OrganizationCreationForm extends Component {
     <form class="admin-form" {{on "submit" @onSubmit}}>
       <section class="admin-form__content admin-form__content--with-counters">
         <Card class="admin-form__card" @title="Information générique">
+          {{#if @parentOrganizationName}}
+            <h2 class="admin-form__content title">
+              {{t
+                "components.organizations.creation.parent-organization-name"
+                parentOrganizationName=@parentOrganizationName
+              }}
+            </h2>
+          {{/if}}
           <PixInput
             @id="organizationName"
             onchange={{this.handleOrganizationNameChange}}
@@ -148,7 +162,7 @@ export default class OrganizationCreationForm extends Component {
           {{t "common.actions.cancel"}}
         </PixButton>
         <PixButton @type="submit" @size="small" @variant="success">
-          {{t "common.actions.add"}}
+          {{t this.submitButtonText}}
         </PixButton>
       </section>
     </form>

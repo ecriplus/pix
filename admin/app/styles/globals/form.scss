@@ -112,6 +112,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--pix-spacing-6x);
+
+    .title {
+      @extend %pix-title-xs;
+
+      color: var(--pix-neutral-900);
+    }
 }
 
 .admin-form__card {
