@@ -32,7 +32,7 @@ const register = async (server) => {
                 .valid(...getChallengeLocales())
                 .lowercase()
                 .required(),
-              versionId: Joi.number().integer().min(0),
+              versionId: Joi.number().integer().min(0).required(),
               stopAtChallenge: Joi.number().min(1).max(32).description('Limit the number of question in an iteration.'),
             })
             .required(),
