@@ -9,7 +9,6 @@
     "duration": 10,
     "level": "advanced",
     "objectives": [
-      "",
       "<p>Décrire les attaques par ingénierie sociale les plus courantes</p>",
       "<p>Expliquer les mécanismes sur lesquels s’appuie l’ingénierie sociale</p>"
     ],
@@ -364,7 +363,7 @@
                           }
                         }
                       ],
-                      "solution": ""
+                      "solution": "1"
                     }
                   ]
                 },
