@@ -180,10 +180,6 @@ module.exports = function (environment) {
       enabled: _isFeatureEnabled(process.env.SENTRY_ENABLED),
     },
 
-    emberInspector: {
-      enabled: _isFeatureEnabled(process.env.ALLOW_EMBER_INSPECTOR),
-    },
-
     'ember-cli-mirage': {
       enabled: false,
     },
