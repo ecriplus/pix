@@ -42,7 +42,15 @@ export default class ModuleGrain extends Component {
     'text',
     'video',
   ];
-  static AVAILABLE_GRAIN_TYPES = ['lesson', 'activity', 'discovery', 'challenge', 'summary', 'transition'];
+  static AVAILABLE_GRAIN_TYPES = [
+    'short-lesson',
+    'lesson',
+    'activity',
+    'discovery',
+    'challenge',
+    'summary',
+    'transition',
+  ];
 
   static LOCALLY_ANSWERABLE_ELEMENTS = ['qab', 'qcu-declarative', 'qcu-discovery', 'flashcards'];
 
