@@ -42,7 +42,7 @@
                 "props": {
                   "titleLevel": 0,
                   "title": "AgroDélices victime d’une arnaque : 150 000 € envolés",
-                  "author": "Rédaction - Actualités",
+                  "author": "Le journal de l'actualité",
                   "date": "Mars 2025",
                   "paragraphs": [
                     "{{highlightedSentence}}",
@@ -60,7 +60,7 @@
               "element": {
                 "id": "c9b08416-e55d-425e-bf06-5aa6c3250fa1",
                 "type": "qcu-discovery",
-                "instruction": "<p>De quelle faiblesse de l’entreprise l’attaquant a-t-il profité ?</p>",
+                "instruction": "<p>De quelle faiblesse de l’entreprise les cyberattaquants ont-ils profité ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -120,7 +120,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
-                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme étant son conseiller bancaire.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
+                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant faisant partie du service sécurité de la Banque Nationnale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
               }
             },
             {
@@ -162,7 +162,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>pour fournir ses&nbsp;</span></p>"
+                    "content": "<span>pour fournir ses&nbsp;</span>"
                   },
                   {
                     "input": "pixtext",
@@ -185,7 +185,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span></span>et valider un</p>"
+                    "content": "<span>et valider un</span>"
                   },
                   {
                     "input": "pixpai",
@@ -229,6 +229,10 @@
                       "cyberattaquant",
                       "arnaqueur"
                     ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>.</span>"
                   }
                 ],
                 "feedbacks": {
@@ -270,7 +274,7 @@
               "element": {
                 "id": "ccb78000-0b6b-41b3-86ea-f4f0b5d8b76a",
                 "type": "text",
-                "content": "<p>Mais comment font-ils pour obtenir la réaction qu’ils souhaitent ?</p>"
+                "content": "<p>Mais comment font les cyberattaquants pour obtenir la réaction qu’ils souhaitent ?</p>"
               }
             }
           ]
@@ -307,14 +311,14 @@
                           "id": "1",
                           "content": "<p>message 1</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                            "diagnosis": "<p>Ici, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>message 2</p>",
                           "feedback": {
-                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                            "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
                         },
                         {
@@ -345,7 +349,7 @@
                           "id": "1",
                           "content": "<p>message 1</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                            "diagnosis": "<p>Effectivement, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
                         },
                         {
@@ -390,7 +394,7 @@
                           "id": "2",
                           "content": "<p>message 2</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                            "diagnosis": "<p>Effectivement, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
                           }
                         },
                         {
@@ -458,55 +462,6 @@
                 {
                   "elements": [
                     {
-                      "id": "770d503d-16f5-4612-a618-c1c9614fbaec",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail1.png",
-                      "alt": "mail décrit dans l’alternative textuelle",
-                      "alternativeText": "<p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery<br><br></p>",
-                      "legend": "",
-                      "licence": ""
-                    },
-                    {
-                      "id": "b6d97db2-c642-4b6f-a808-a41ea6c43ba9",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, quelle affirmation correspond le mieux à cet email ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Effectivement, il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>L’attaquant a choisi le destinataire du message en fonction d’informations à son sujet qu’il a trouvé en ligne.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Le message fait suite à de nombreux échanges entre l’attaquant et le destinataire.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, il n’y a pas de conversation suivie. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "6d33c0ec-2f0b-4672-9879-438ef7ea7635",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail2.png",
@@ -550,6 +505,55 @@
                         }
                       ],
                       "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "770d503d-16f5-4612-a618-c1c9614fbaec",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail1.png",
+                      "alt": "mail décrit dans l’alternative textuelle",
+                      "alternativeText": "<p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery<br><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "b6d97db2-c642-4b6f-a808-a41ea6c43ba9",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, quelle affirmation correspond le mieux à cet email ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’attaquant a choisi le destinataire du message en fonction d’informations à son sujet qu’il a trouvé en ligne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le message fait suite à de nombreux échanges entre l’attaquant et le destinataire.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il n’y a pas de conversation suivie. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
                   ]
                 },
@@ -680,7 +684,7 @@
                     "content": "<p>Convaincre une personne d’agir volontairement contre son propre intérêt.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                      "diagnosis": "<p>L’ingénierie sociale repose sur la manipulation psychologique pour pousser la victime à coopérer avec l’attaquant.<br></p>"
+                      "diagnosis": "<p>L’ingénierie sociale repose sur la manipulation psychologique pour pousser la victime à coopérer avec l’attaquant.</p>"
                     }
                   },
                   {
@@ -688,7 +692,7 @@
                     "content": "<p>Utiliser des algorithmes pour obtenir des mots de passe et des codes d’accès.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.<br></p>",
-                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;<br></p>"
+                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;</p>"
                     }
                   },
                   {
@@ -696,7 +700,7 @@
                     "content": "<p>Infecter l’ensemble d’un réseau informatique grâce à un logiciel malveillant.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;<br><br></p>"
+                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;</p>"
                     }
                   }
                 ],
@@ -876,7 +880,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<p>Le biais</p>"
+                          "content": "<span>Le biais</span>"
                         },
                         {
                           "input": "pixtop",
