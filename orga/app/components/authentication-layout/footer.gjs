@@ -12,7 +12,7 @@ export default class Footer extends Component {
       {{#if this.currentDomain.isInternationalDomain}}
         <LocaleSwitcher />
       {{/if}}
-      <FooterLinks />
+      <FooterLinks @size="extra-small" />
     </footer>
   </template>
 }

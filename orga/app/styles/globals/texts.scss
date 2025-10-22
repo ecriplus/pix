@@ -86,6 +86,14 @@
     text-decoration: underline;
   }
 
+  &--black {
+    color: var(--pix-neutral-900);
+  }
+
+  &--grey {
+    color: var(--pix-neutral-500);
+  }
+
   &--white {
     color: var(--pix-neutral-0);
 

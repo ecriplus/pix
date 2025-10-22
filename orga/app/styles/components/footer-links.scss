@@ -8,10 +8,6 @@
 
   &--extra-small {
     @extend %pix-body-xs;
-
-    a {
-      text-decoration: underline;
-    }
   }
 
   li {
@@ -21,6 +17,9 @@
   }
 
   a {
+    color: var(--pix-neutral-800);
+    text-decoration: underline;
+
     &:hover,
     &:focus {
       color: var(--pix-primary-500);
