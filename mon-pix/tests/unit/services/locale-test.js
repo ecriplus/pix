@@ -315,7 +315,7 @@ module('Unit | Services | locale', function (hooks) {
   });
 
   module('switcherDisplayedLocales', function () {
-    test('returns all the pixLocales that should be displayed in the switcher with french first', function (assert) {
+    test('returns all the pixLocales that should be displayed in the switcher', function (assert) {
       // when
       const switcherDisplayedLocales = localeService.switcherDisplayedLocales;
 
@@ -324,14 +324,6 @@ module('Unit | Services | locale', function (hooks) {
         {
           label: 'English',
           value: 'en',
-        },
-        {
-          label: 'Español',
-          value: 'es',
-        },
-        {
-          label: 'Español (Latinoamérica)',
-          value: 'es-419',
         },
         {
           label: 'Français',
