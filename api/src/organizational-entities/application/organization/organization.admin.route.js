@@ -398,6 +398,29 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'POST',
+      path: '/api/admin/organizations/{childOrganizationId}/detach-parent-organization',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            childOrganizationId: identifiersType.organizationId,
+          }),
+        },
+        handler: (request, h) => organizationAdminController.detachParentOrganization(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'organizations'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN, permettant un accès à l'application d'administration de Pix**\n" +
+            '- Elle permet de détacher une organization fille de son organization mère.',
+        ],
+      },
+    },
   ]);
 };
 

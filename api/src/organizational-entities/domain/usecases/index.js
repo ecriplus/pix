@@ -73,6 +73,7 @@ import { createCertificationCenter } from './create-certification-center.usecase
 import { createOrganization } from './create-organization.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizations-with-tags-and-target-profiles.usecase.js';
 import { createTag } from './create-tag.js';
+import { detachParentOrganizationFromOrganization } from './detach-parent-organization-from-organization.usecase.js';
 import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
 import { findAllTags } from './find-all-tags.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
@@ -100,6 +101,7 @@ const usecasesWithoutInjectedDependencies = {
   createOrganization,
   createOrganizationsWithTagsAndTargetProfiles,
   createTag,
+  detachParentOrganizationFromOrganization,
   findAllTags,
   findChildrenOrganizations,
   findOrganizationFeatures,
@@ -121,6 +123,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {attachChildOrganizationToOrganization} attachChildOrganizationToOrganization
  * @property {createCertificationCenter} createCertificationCenter
  * @property {createTag} createTag
+ * @property {detachParentOrganizationFromOrganization} detachParentOrganizationFromOrganization
  * @property {findPaginatedFilteredCertificationCenters} findPaginatedFilteredCertificationCenters
  * @property {getOrganizationDetails} getOrganizationDetails
  * @property {updateOrganizationsInBatch} updateOrganizationsInBatch

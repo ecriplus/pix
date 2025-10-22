@@ -17,11 +17,11 @@ const { ROLES } = PIX_ADMIN;
 const { map: _map } = lodash;
 
 describe('Acceptance | Organizational Entities | Application | Route | Admin | Organization', function () {
-  let admin;
+  let superAdmin;
   let server;
 
   beforeEach(async function () {
-    admin = await insertUserWithRoleSuperAdmin();
+    superAdmin = await insertUserWithRoleSuperAdmin();
     await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
 
@@ -447,7 +447,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/${organization.id}`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         });
 
         // then
@@ -534,7 +534,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/999`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         });
 
         // then
@@ -638,13 +638,13 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/${organizationId}/archive`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       });
 
       // then
       expect(response.statusCode).to.equal(200);
       const archivedOrganization = response.result.data.attributes;
-      expect(archivedOrganization['archivist-full-name']).to.equal(`${admin.firstName} ${admin.lastName}`);
+      expect(archivedOrganization['archivist-full-name']).to.equal(`${superAdmin.firstName} ${superAdmin.lastName}`);
     });
 
     it('is forbidden for role certif', async function () {
@@ -797,7 +797,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         url: '/api/admin/organizations/add-organization-features/template',
       };
 
@@ -829,7 +829,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           url: '/api/admin/organizations/add-organization-features',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -871,7 +871,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${firstChildOrganization.id},${secondChildOrganization.id}`,
             },
@@ -993,7 +993,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-              headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+              headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
               payload: {
                 childOrganizationIds: '984512',
               },
@@ -1017,7 +1017,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${parentOrganizationId}`,
             },
@@ -1052,7 +1052,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1087,7 +1087,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1118,7 +1118,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${parentOrganizationId}`,
             },
@@ -1154,7 +1154,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1180,6 +1180,42 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('POST /api/admin/organizations/{childOrganizationId}/detach-parent-organization', function () {
+    context('success cases', function () {
+      let parentOrganization;
+      let childOrganization;
+
+      beforeEach(async function () {
+        parentOrganization = databaseBuilder.factory.buildOrganization({ name: 'Parent Organization' });
+        childOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'Child Organization',
+          parentOrganizationId: parentOrganization.id,
+        });
+        await databaseBuilder.commit();
+      });
+
+      context('when user has role "SUPER_ADMIN', function () {
+        it('should detach child organization from its parent', async function () {
+          // given
+          const options = {
+            method: 'POST',
+            url: `/api/admin/organizations/${childOrganization.id}/detach-parent-organization`,
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          };
+
+          // when
+          const response = await server.inject(options);
+
+          // then
+          const updatedChildOrganization = await knex('organizations').where({ id: childOrganization.id }).first();
+
+          expect(response.statusCode).to.equal(204);
+          expect(updatedChildOrganization.parentOrganizationId).to.be.null;
+        });
+      });
+    });
+  });
+
   describe('POST /api/admin/organizations/update-organizations', function () {
     context('when a CSV file is loaded', function () {
       let firstOrganization, otherOrganization;
@@ -1200,7 +1236,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           url: '/api/admin/organizations/update-organizations',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -1292,7 +1328,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: admin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           url: '/api/admin/organizations/import-tags-csv',
           payload: iconv.encode(input, 'UTF-8'),
         };
