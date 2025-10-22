@@ -109,28 +109,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           startDate: new Date('2020-01-10'),
         });
 
-        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: firstChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: secondChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: thirdChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: otherChallengeId,
           versionId: version.id,
         });
@@ -282,28 +276,22 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           startDate: new Date('2019-01-01'),
         });
 
-        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: firstChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: secondChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: thirdChallengeId,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: otherChallengeId,
           versionId: version.id,
         });

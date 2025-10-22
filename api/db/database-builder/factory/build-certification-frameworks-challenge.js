@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { databaseBuffer } from '../database-buffer.js';
-import { buildComplementaryCertification } from './build-complementary-certification.js';
 import { buildChallenge } from './learning-content/index.js';
 
 const buildCertificationFrameworksChallenge = function ({
@@ -15,10 +14,6 @@ const buildCertificationFrameworksChallenge = function ({
   version = getVersionNumber(createdAt),
   versionId,
 } = {}) {
-  complementaryCertificationKey = _.isUndefined(complementaryCertificationKey)
-    ? buildComplementaryCertification().key
-    : complementaryCertificationKey;
-
   challengeId = _.isUndefined(challengeId) ? buildChallenge().id : challengeId;
 
   const values = {

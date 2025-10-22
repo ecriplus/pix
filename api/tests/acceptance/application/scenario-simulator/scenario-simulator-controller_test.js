@@ -27,7 +27,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
         maximumAssessmentLength: 2,
       },
     });
-    const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });
     await databaseBuilder.commit();
@@ -134,37 +133,31 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     };
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge1',
       versionId: version.id,
     });
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge2',
       versionId: version.id,
     });
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge3',
       versionId: version.id,
     });
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge4',
       versionId: version.id,
     });
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge5',
       versionId: version.id,
     });
 
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      complementaryCertificationKey: complementaryCertification.key,
       challengeId: 'challenge6',
       versionId: version.id,
     });

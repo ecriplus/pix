@@ -1787,10 +1787,9 @@ describe('Integration | Repository | challenge-repository', function () {
         // given
         const candidateReconciliationDate = new Date('2025-01-01');
 
-        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
         const version = databaseBuilder.factory.buildCertificationVersion({ scope: Frameworks.CORE });
         const otherVersion = databaseBuilder.factory.buildCertificationVersion({
-          scope: complementaryCertification.key,
+          scope: Frameworks.CORE,
         });
 
         challengesLC.push(
@@ -1807,19 +1806,16 @@ describe('Integration | Repository | challenge-repository', function () {
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
         const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: null,
           challengeId: challengesLC[3].id,
           versionId: version.id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[4].id,
           versionId: otherVersion.Id,
         });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: null,
           challengeId: challengesLC[0].id,
           versionId: otherVersion.id,
         });
@@ -1845,10 +1841,6 @@ describe('Integration | Repository | challenge-repository', function () {
       it('returns the most recent flash compatible challenges that link to complementary ', async function () {
         // given
         const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification.droit({});
-        const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.pixEdu1erDegre(
-          {},
-        );
-
         const version = databaseBuilder.factory.buildCertificationVersion({ scope: complementaryCertification.key });
         const otherVersion = databaseBuilder.factory.buildCertificationVersion();
 
@@ -1858,13 +1850,11 @@ describe('Integration | Repository | challenge-repository', function () {
         databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: otherComplementaryCertification.key,
           challengeId: challengesLC[4].id,
           versionId: otherVersion.id,
         });
 
         const certificationFrameworksChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: complementaryCertification.key,
           challengeId: challengesLC[1].id,
           versionId: version.id,
         });
@@ -1874,8 +1864,6 @@ describe('Integration | Repository | challenge-repository', function () {
         // when
         const flashCompatibleChallenges = await challengeRepository.findActiveFlashCompatible({
           locale: 'fr',
-          complementaryCertificationKey: complementaryCertification.key,
-          hasComplementaryReferential: complementaryCertification.hasComplementaryReferential,
           version,
         });
 
@@ -1930,16 +1918,13 @@ describe('Integration | Repository | challenge-repository', function () {
           challengesLC.push(challengeData09_skill03_qcu_archive_flashCompatible_fr_noEmbedJson);
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           const version = databaseBuilder.factory.buildCertificationVersion();
-          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({});
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[3].id,
             versionId: version.id,
           });
 
           const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[4].id,
             versionId: version.id,
           });
@@ -2096,46 +2081,38 @@ describe('Integration | Repository | challenge-repository', function () {
           });
           databaseBuilder.factory.learningContent.build({ skills: skillsLC, challenges: challengesLC });
           const version = databaseBuilder.factory.buildCertificationVersion();
-          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({});
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[3].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[4].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[5].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[6].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[7].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[8].id,
             versionId: version.id,
           });
 
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
-            complementaryCertificationKey: complementaryCertification.key,
             challengeId: challengesLC[9].id,
             versionId: version.id,
           });
