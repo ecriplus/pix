@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/ValidatorQCM.js';
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';

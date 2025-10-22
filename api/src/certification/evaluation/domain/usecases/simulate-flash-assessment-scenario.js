@@ -30,65 +30,17 @@ export async function simulateFlashAssessmentScenario({
 }) {
   const version = await versionRepository.getById(versionId);
 
-  if (versionId && !accessibilityAdjustmentNeeded) {
-    return _simulateComplementaryCertificationScenario({
-      version,
-      challengeRepository: sharedChallengeRepository,
-      flashAlgorithmService,
-      pickChallenge,
-      pickAnswerStatus,
-      initialCapacity,
-      variationPercent,
-      locale,
-      stopAtChallenge,
-      versionRepository,
-    });
-  } else {
-    return _simulateCoreCertificationScenario({
-      locale,
-      accessibilityAdjustmentNeeded,
-      challengeRepository: sharedChallengeRepository,
-      flashAlgorithmService,
-      pickChallenge,
-      pickAnswerStatus,
-      initialCapacity,
-      variationPercent,
-      stopAtChallenge,
-      version,
-    });
-  }
-}
-
-/**
- * @param {Object} params
- * @param {SharedChallengeRepository} params.challengeRepository
- */
-async function _simulateComplementaryCertificationScenario({
-  locale,
-  version,
-  pickChallenge,
-  pickAnswerStatus,
-  initialCapacity,
-  variationPercent,
-  challengeRepository,
-  flashAlgorithmService,
-  stopAtChallenge,
-}) {
-  const challenges = await _getChallenges({
+  return _simulateCertificationScenario({
     locale,
-    challengeRepository,
-    version,
-  });
-
-  return _simulation({
-    challenges,
-    mostRecentAlgorithmConfiguration: version.challengesConfiguration,
+    accessibilityAdjustmentNeeded,
+    challengeRepository: sharedChallengeRepository,
     flashAlgorithmService,
     pickChallenge,
     pickAnswerStatus,
     initialCapacity,
     variationPercent,
     stopAtChallenge,
+    version,
   });
 }
 
@@ -96,7 +48,7 @@ async function _simulateComplementaryCertificationScenario({
  * @param {Object} params
  * @param {SharedChallengeRepository} params.challengeRepository
  */
-async function _simulateCoreCertificationScenario({
+async function _simulateCertificationScenario({
   pickChallenge,
   pickAnswerStatus,
   initialCapacity,
@@ -108,8 +60,7 @@ async function _simulateCoreCertificationScenario({
   stopAtChallenge,
   version,
 }) {
-  let challenges = await _getChallenges({
-    challengeRepository,
+  let challenges = await challengeRepository.findActiveFlashCompatible({
     locale,
     version,
   });
@@ -127,17 +78,6 @@ async function _simulateCoreCertificationScenario({
     initialCapacity,
     variationPercent,
     stopAtChallenge,
-  });
-}
-
-/**
- * @param {Object} params
- * @param {SharedChallengeRepository} params.challengeRepository
- */
-function _getChallenges({ challengeRepository, locale, version }) {
-  return challengeRepository.findActiveFlashCompatible({
-    locale,
-    version,
   });
 }
 
