@@ -216,9 +216,14 @@
   border-top: 1px solid var(--pix-neutral-100);
 }
 
-.evaluation-results-hero-organization-block__link {
-  width: fit-content;
-  margin: 0 auto var(--pix-spacing-4x);
+.evaluation-results-hero-organization-block {
+  &__link {
+    width: fit-content;
+  }
+
+  &__message {
+    margin-bottom: var(--pix-spacing-4x);
+  }
 }
 
 // Retry or reset block
