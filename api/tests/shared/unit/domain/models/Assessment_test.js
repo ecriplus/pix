@@ -224,6 +224,62 @@ describe('Unit | Domain | Models | Assessment', function () {
     });
   });
 
+  describe('#isCampaignParticipationAvailable', function () {
+    it('should return false when the assessment is for a CAMPAIGN and not linked to a participation', function () {
+      // given
+      const assessment = new Assessment({
+        type: 'CAMPAIGN',
+        campaign: domainBuilder.buildCampaign(),
+        campaignParticipationId: null,
+      });
+
+      // when
+      const isCampaignParticipationAvailable = assessment.isCampaignParticipationAvailable();
+
+      // then
+      expect(isCampaignParticipationAvailable).to.be.false;
+    });
+    it('should return true when the assessment is for a CAMPAIGN and linked to a participation', function () {
+      // given
+      const assessment = new Assessment({
+        type: 'CAMPAIGN',
+        campaign: domainBuilder.buildCampaign(),
+        campaignParticipationId: Symbol('campaignParticipationId'),
+      });
+
+      // when
+      const isCampaignParticipationAvailable = assessment.isCampaignParticipationAvailable();
+
+      // then
+      expect(isCampaignParticipationAvailable).to.be.true;
+    });
+
+    it('should return false when the assessment is not a CAMPAIGN type', function () {
+      // given
+      const assessment = new Assessment({
+        type: 'PLACEMENT',
+        campaignParticipationId: Symbol('campaignParticipationId'),
+      });
+
+      // when
+      const isCampaignParticipationAvailable = assessment.isCampaignParticipationAvailable();
+
+      // then
+      expect(isCampaignParticipationAvailable).to.be.false;
+    });
+
+    it('should return false when the assessment has no type and has campaignParticipationId', function () {
+      // given
+      const assessment = new Assessment({ campaignParticipationId: Symbol('campaignParticipationId') });
+
+      // when
+      const isCampaignParticipationAvailable = assessment.isCampaignParticipationAvailable();
+
+      // then
+      expect(isCampaignParticipationAvailable).to.be.false;
+    });
+  });
+
   describe('#isCertification', function () {
     it('should return true when the assessment is a CERTIFICATION', function () {
       // given
