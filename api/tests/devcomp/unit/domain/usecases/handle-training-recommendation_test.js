@@ -106,6 +106,26 @@ describe('Unit | Devcomp | Domain | UseCases | handle-training-recommendation', 
     });
   });
 
+  describe('when campaign participation is not available', function () {
+    it('should do nothing', async function () {
+      // given
+      const locale = Symbol('locale');
+      const assessment = domainBuilder.buildAssessment.ofTypeCampaign({ campaignParticipationId: null });
+
+      findWithTriggersByCampaignParticipationIdAndLocaleStub.throws();
+
+      // when & then
+      await expect(
+        handleTrainingRecommendation({
+          locale,
+          assessment,
+          trainingRepository,
+          userRecommendedTrainingRepository,
+        }),
+      ).to.fulfilled;
+    });
+  });
+
   describe('when assessment is not for campaign', function () {
     it('should do nothing', async function () {
       // given

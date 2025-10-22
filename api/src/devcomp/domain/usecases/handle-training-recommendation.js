@@ -6,7 +6,7 @@ const handleTrainingRecommendation = async function ({
   trainingRepository,
   userRecommendedTrainingRepository,
 }) {
-  if (!assessment.isForCampaign()) {
+  if (!assessment.isCampaignParticipationAvailable()) {
     return;
   }
   const { campaignParticipationId } = assessment;

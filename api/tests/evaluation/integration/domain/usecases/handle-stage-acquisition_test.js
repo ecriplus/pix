@@ -104,7 +104,24 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
 
         await mockLearningContent(learningContentBuilder(learningContent));
       });
+      context('When campaignParticipation is not available', function () {
+        it('should not throw', async function () {
+          // given
+          assessment = new Assessment({
+            userId,
+            campaignParticipationId: null,
+            type: Assessment.types.CAMPAIGN,
+          });
+          stages = [databaseBuilder.factory.buildStage({ targetProfileId, threshold: 0 })];
 
+          // when & then
+          await expect(
+            evaluationUsecases.handleStageAcquisition({
+              assessment,
+            }),
+          ).fulfilled;
+        });
+      });
       context('when some KEs are acquired', function () {
         beforeEach(async function () {
           databaseBuilder.factory.buildKnowledgeElement({ userId, skillId: 'web1', status: 'validated' });

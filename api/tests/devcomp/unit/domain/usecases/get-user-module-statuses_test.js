@@ -4,10 +4,15 @@ import { getUserModuleStatuses } from '../../../../../src/devcomp/domain/usecase
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | get-user-module-statuses', function () {
-  let now;
+  const now = new Date('2025-07-02T14:00:00Z');
+  let clock;
 
   beforeEach(function () {
-    now = new Date('2025-07-02T14:00:00Z');
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
   });
 
   it('should return a list of UserModuleStatuses', async function () {

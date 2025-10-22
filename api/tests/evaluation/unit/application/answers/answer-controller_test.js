@@ -146,7 +146,10 @@ describe('Unit | Controller | answer-controller', function () {
 
       it('should call appropriate usecase when assessment is of type CAMPAIGN', async function () {
         // given
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
+        const assessment = domainBuilder.buildAssessment({
+          type: Assessment.types.CAMPAIGN,
+          campaignParticipationId: 1234,
+        });
         assessmentRepository.getWithAnswers.withArgs(assessmentId).resolves(assessment);
 
         // when

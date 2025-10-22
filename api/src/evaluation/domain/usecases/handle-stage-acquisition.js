@@ -25,7 +25,7 @@ const handleStageAcquisition = async function ({
   getMasteryPercentageService,
   convertLevelStagesIntoThresholdsService,
 }) {
-  if (!assessment.isForCampaign()) return;
+  if (!assessment.isCampaignParticipationAvailable()) return;
 
   const campaignParticipation = await campaignParticipationRepository.get(assessment.campaignParticipationId);
 

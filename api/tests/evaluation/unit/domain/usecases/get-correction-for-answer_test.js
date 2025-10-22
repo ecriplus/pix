@@ -57,6 +57,7 @@ describe('Unit | UseCase | getCorrectionForAnswer', function () {
         const assessment = domainBuilder.buildAssessment({
           state: 'started',
           type: Assessment.types.CAMPAIGN,
+          campaignParticipationId: 1234,
         });
         assessmentRepository.get.withArgs(assessmentId).resolves(assessment);
 
