@@ -1,0 +1,979 @@
+{
+  "id": "f924b0e8-0b2b-4b8e-b7fe-f1b14e9b8094",
+  "slug": "tmp-cyber-ingenierie-sociale",
+  "title": "Cyberattaques : quand l’ingénierie sociale s’en mêle !",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois aux cyberattaquants de convaincre une personne d’agir volontairement pour arriver à leurs fins.<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><br></p>",
+    "duration": 10,
+    "level": "advanced",
+    "objectives": [
+      "",
+      "<p>Décrire les attaques par ingénierie sociale les plus courantes</p>",
+      "<p>Expliquer les mécanismes sur lesquels s’appuie l’ingénierie sociale</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "50a702c3-d22e-4b37-9690-0372f1bfe98d",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "a4ca59bc-3a7c-4c22-a259-af041348fa55",
+          "type": "activity",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2476fe57-7696-4368-a657-7a0ccf392d7b",
+                "type": "text",
+                "content": "<p>L’entreprise AgroDélices a été victime d’une arnaque.<br>Lisez l’article ci-dessous, puis répondez à la question.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b9441697-9c04-44bd-a239-c9364bae8b71",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 0,
+                  "title": "AgroDélices victime d’une arnaque : 150 000 € envolés",
+                  "author": "Rédaction - Actualités",
+                  "date": "Mars 2025",
+                  "paragraphs": [
+                    "{{highlightedSentence}}",
+                    "Un faux courriel se faisant passer pour le dirigeant a demandé un virement « urgent ». Une aide comptable a exécuté l’ordre vers un compte étranger. L’escroquerie n’a été découverte que plusieurs jours plus tard, rendant la récupération des fonds quasi impossible.",
+                    "Déjà fragilisée par la conjoncture, l’entreprise gèle certains investissements et réorganise son budget. La salariée impliquée a été licenciée pour faute grave, une décision qui divise en interne.",
+                    "Une enquête est ouverte. Les premiers éléments évoquent un spoofing d’adresse e‑mail. Ce cas rappelle l’importance de la vérification des ordres de paiement et de la sensibilisation aux fraudes ciblant les entreprises."
+                  ],
+                  "highlightedSentence": "L’entreprise agroalimentaire AgroDélices a subi une <strong>fraude au président</strong>, entraînant la perte de <strong>150 000 €</strong>.",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c9b08416-e55d-425e-bf06-5aa6c3250fa1",
+                "type": "qcu-discovery",
+                "instruction": "<p>De quelle faiblesse de l’entreprise l’attaquant a-t-il profité ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le réseau informatique de l’entreprise était mal sécurisé.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! Ici, l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Un clé usb vérolée a été branchée sur l’un des ordinateurs de l’entreprise.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! Ici, l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Une salariée a été bernée par un faux message du dirigeant de l’entreprise.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement,&nbsp;l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "197b2562-cd2c-4a4b-841e-7c835beb40ce",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0252575f-bb33-4972-9b22-b23cd6b8b345",
+                "type": "text",
+                "content": "<p>Quelle est la technique utilisée par ces cyberattaquants ?</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "85385d63-dab2-41b2-8378-2cd858edb5d9",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "e9547039-71a4-465d-9614-76a0357ed721",
+          "type": "discovery",
+          "title": "Découverte #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
+                "type": "text",
+                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme étant son conseiller bancaire.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8f66c79b-a97e-4019-99b0-e45024016a70",
+                "type": "text",
+                "content": "<div style=\" display: flex; justify-content: center; align-items: center; margin-top:1rem; margin-left:8px;\">    <audio controls=\"\">        <source src=\"https://assets.pix.org/draft/modules/cy_phishing_ava/Conversation.mp3\" type=\"audio/mpeg\">    </audio></div>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b69e5412-68ae-434d-896f-7f34cc8829e2",
+                "type": "qrocm",
+                "instruction": "<p>Complétez la phrase suivante&nbsp;:</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p><span>Marie a été</span></p>"
+                  },
+                  {
+                    "input": "pixname",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "taper ici",
+                    "ariaLabel": "taper ici",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "manipulée"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>pour fournir ses&nbsp;</span></p>"
+                  },
+                  {
+                    "input": "pixtext",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 30,
+                    "display": "inline",
+                    "placeholder": "taper ici",
+                    "ariaLabel": "taper ici",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "informations personnelles",
+                      "données personnelles"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span></span>et valider un</p>"
+                  },
+                  {
+                    "input": "pixpai",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "taper ici",
+                    "ariaLabel": "taper ici",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "paiement",
+                      "virement"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>à un</span>"
+                  },
+                  {
+                    "input": "pixten",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 15,
+                    "display": "inline",
+                    "placeholder": "taper ici",
+                    "ariaLabel": "taper ici",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "escroc",
+                      "cyberattaquant",
+                      "arnaqueur"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "",
+                    "diagnosis": "<p>Effectivement,&nbsp;ici, l’attaquant ne force pas la <strong>victime </strong>: il la pousse à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                  },
+                  "invalid": {
+                    "state": "",
+                    "diagnosis": "<p>Eh non !&nbsp;Ici, l’attaquant ne force pas la <strong>victime </strong>: il la pousse à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fee5f92d-fe8e-4b10-abd5-048fc9fd0a12",
+          "type": "lesson",
+          "title": "Leçon #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "37c91342-5737-434c-89d1-ad0012d56cfd",
+                "type": "text",
+                "content": "<p>Ces attaques sont appelées des attaques par <strong>ingénierie sociale</strong>. <br>Il s’agit d’<strong>escroqueries</strong> ayant pour but de<strong> manipuler une personne</strong> afin d‘obtenir de l’<strong>argent</strong> ou des<strong> informations confidentielles</strong> pour commettre une infraction.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "713a87e7-57a1-4cf4-946e-0752a6275c68",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ccb78000-0b6b-41b3-86ea-f4f0b5d8b76a",
+                "type": "text",
+                "content": "<p>Mais comment font-ils pour obtenir la réaction qu’ils souhaitent ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fe3aaec3-d9b3-422c-b2ed-6c736b0d48b9",
+          "type": "discovery",
+          "title": "Découverte #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8b5e15f0-fb15-45bd-abbf-d2d3a2d6c8d4",
+                "type": "text",
+                "content": "<p>Lisez les exemples de messages ci-dessous puis répondez aux questions.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "a6becee0-ccd9-4076-90a9-8a6ec5c71d09",
+                      "type": "text",
+                      "content": "<p>Vous recevez un message qui vous demande de régler une facture en retard. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>“Bonjour, une facture est arrivée à échéance. Merci de la régler dans les plus brefs délais.”</li><li>“⚠️ URGENT&nbsp;: Si vous ne réglez pas cette facture sous 24h, votre compte sera suspendu et des pénalités financières s’appliqueront.”</li></ol>"
+                    },
+                    {
+                      "id": "b4345ed0-1a07-4fbb-beeb-3b13ed25bdec",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Lequel de ces deux messages vous donnerait le plus envie de cliquer rapidement ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>message 1</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>message 2</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "22b8c918-e299-4e77-8a1f-ff1124694636",
+                      "type": "text",
+                      "content": "<p>Vous recevez un message sur un réseau social de la part d’un contact que vous connaissez vaguement. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>\"Salut, je suis vraiment en galère… Mon filleul est gravement malade, j’ai lancé une collecte pour financer sa prochaine opération. Si elle n’a pas lieu cette semaine, sa vie est en danger. Tu peux faire un don rapidement, on a besoin d’aide ! 🙏\"</li><li>\"Salut, je partage une collecte pour financer une opération pour mon filleul malade. Si ça te touche, tu peux consulter les infos sur le site et faire un don. 👌\"</li></ol>"
+                    },
+                    {
+                      "id": "d01441a1-c767-4797-954e-83bcb9f07ee1",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Lequel de ces deux messages vous donnerait le plus envie de faire un don ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>message 1</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>message 2</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
+                          }
+                        }
+                      ],
+                      "solution": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "236171b6-22b0-4351-b7b0-bf520afc43c6",
+                      "type": "text",
+                      "content": "<p>Vous avez investi de l’argent dans une plateforme d’investissement en ligne.&nbsp;Quelques semaines plus tard, vous recevez un nouveau message.<br>Voici deux versions de ce message&nbsp;:&nbsp;</p><ol><li>\"Bonjour, votre période d’essai arrive à son terme.<br>Si vous souhaitez continuer à utiliser la plateforme, vous pouvez effectuer un nouveau versement.\"</li><li>\"Bonjour, vous avez déjà versé 200 € sur la plateforme.<br>Pour éviter la perte de votre mise de départ et les bénéfices accumulés, effectuez un versement supplémentaire de seulement 50 €.\"</li></ol>"
+                    },
+                    {
+                      "id": "f6227e89-4a7c-44e2-87d5-80c7c6909eba",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Lequel de ces deux messages, vous donnerait le plus envie de continuer à investir ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>message 1</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>message 2</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fe7d1c66-d151-4ac7-91fa-2c57cdeb1d3a",
+          "type": "lesson",
+          "title": "Leçon #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
+                "type": "text",
+                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. <br><br> 🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "890205bc-1d9f-42d6-8900-2e3fdbaa79c9",
+          "type": "transition",
+          "title": "Transition #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9cabbbb0-6973-4453-a99b-2fc1ba39a2be",
+                "type": "text",
+                "content": "<p>À quoi ressemblent ces arnaques par ingénierie sociale ? </p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "64a4275e-5d4b-461f-9dad-2d0ecf210b13",
+          "type": "discovery",
+          "title": "Découverte #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "96f89456-39ce-492f-b64e-cb93844b4071",
+                "type": "text",
+                "content": "<p>Voici 3 messages d’arnaques, ils n’ont pas été préparés et diffusés de la même façon.</p><p>Lisez-les puis répondez aux questions.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "770d503d-16f5-4612-a618-c1c9614fbaec",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail1.png",
+                      "alt": "mail décrit dans l’alternative textuelle",
+                      "alternativeText": "<p>Objet&nbsp;: Urgent — Votre colis est en attente de paiement<br>Bonjour, Votre livraison est actuellement bloquée pour non-paiement des frais de dédouanement.<br>Pour débloquer votre colis, merci de régler immédiatement la taxe en cliquant ici&nbsp;: 🔗 https://livraison-action-paiement.com/verification<br>Numéro de suivi&nbsp;: LX123456789FR <br>Service clients — Express Delivery<br><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "b6d97db2-c642-4b6f-a808-a41ea6c43ba9",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, quelle affirmation correspond le mieux à cet email ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’attaquant a choisi le destinataire du message en fonction d’informations à son sujet qu’il a trouvé en ligne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le message fait suite à de nombreux échanges entre l’attaquant et le destinataire.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il n’y a pas de conversation suivie. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, l’attaquant n’a pas choisi un destinataire spécifique. Il s’agit d’un <strong>hameçonnage de masse </strong>(ou non ciblé)&nbsp;: un même message est envoyé à des milliers de personnes sans critère spécifique de choix.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6d33c0ec-2f0b-4672-9879-438ef7ea7635",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail2.png",
+                      "alt": "mail décrit dans l’alternative textuelle",
+                      "alternativeText": "<p>Objet&nbsp;: URGENT — Virement confidentiel requis<br>Bonjour Claire,<br>Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général<br><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "95c9b0b1-8e62-417e-a8ad-48d02cd27878",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, quelle affirmation correspond le mieux à cet email ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Par exemple, au sein d’une entreprise, dans une <strong>arnaque au président</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’attaquant a choisi le destinataire du message en fonction d’informations à son sujet qu’il a trouvé en ligne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Par exemple, au sein d’une entreprise, dans une <strong>arnaque au président</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le message fait suite à de nombreux échanges entre l’attaquant et le destinataire.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Dans ce cas, il n’y a pas forcément de conversation suivie entre l’attaquant et sa victime. Il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Par exemple, au sein d’une entreprise, dans une <strong>arnaque au président</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agit d’un <strong>hameçonnage ciblé</strong>&nbsp;: un message personnalisé est envoyé à une personne ou un petit groupe de personnes, grâce aux informations disponibles sur internet à leur sujet. Par exemple, au sein d’une entreprise, dans une <strong>arnaque au président</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "6b929f72-cc01-4888-9b31-7c060c7708fa",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ava/mail3.png",
+                      "alt": "mail décrit dans l’alternative textuelle",
+                      "alternativeText": "<p>Objet&nbsp;: J’ai besoin de toi&nbsp;<br>Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex<br><br></p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "6a1432fa-40cd-4c85-a96c-d0172cf5c0e3",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, quelle affirmation correspond le mieux à cet email ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le même message a pu être envoyé à des milliers de personnes.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il s’agit d’une <strong>arnaque à la confiance</strong>&nbsp;: l’attaquant construit une relation sur le long terme avec la victime pour mieux la manipuler.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>L’attaquant a choisi le destinataire du message en fonction d’informations à son sujet qu’il a trouvé en ligne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Pas forcément, il s’agit d’une <strong>arnaque à la confiance</strong>&nbsp;: l’attaquant construit une relation sur le long terme avec la victime pour mieux la manipuler.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le message fait suite à de nombreux échanges entre l’attaquant et le destinataire.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement, il s’agit d’une <strong>arnaque à la confiance</strong>&nbsp;: l’attaquant construit une relation sur le long terme avec la victime pour mieux la manipuler.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agit d’une <strong>arnaque à la confiance</strong>&nbsp;: l’attaquant construit une relation sur le long terme avec la victime pour mieux la manipuler.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "682c14b6-2e04-43e5-85d1-29e40507def2",
+          "type": "lesson",
+          "title": "Leçon #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "af215ff5-1482-4681-95c0-96d22b0c75f0",
+                "type": "text",
+                "content": "<p><strong>🤔 Le saviez-vous ?</strong> <br>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer, même des experts en cybersécurité tombent parfois dans le piège.<br><br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2ec60b08-c6b1-4024-a819-7e5ced6a61a0",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "87828b06-7358-49d4-8024-6abc281e5a05",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "97dbd631-143c-4904-8ecd-785b5b7384c1",
+                "type": "text",
+                "content": "<ul><li>Les attaques par ingénierie sociale exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>. L’attaquant pousse la victime à <strong>agir volontairement</strong>.</li><li>Dans certains cas, l’attaquant manipule <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><li>Ces attaques reposent sur des mécanismes de <strong>manipulation </strong>qui exploitent des <strong>biais cognitifs</strong> pour influencer nos décisions.</li><li>Ces attaques peuvent prendre plusieurs formes&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6a533726-f417-4ff9-9a54-a1ebb25c994d",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "8ecb489d-bdcf-40c4-b9fe-71493a301cba",
+          "type": "transition",
+          "title": "Transition #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6c450994-a384-4e91-bea1-65d6215a97d7",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2be88c9b-daa8-4aa8-ac8a-4e659e46fb88",
+          "type": "activity",
+          "title": "Activité d’application #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6eb5956d-4b45-4999-8eba-38535734253b",
+                "type": "qcu",
+                "instruction": "<p>Parmi les affirmations suivantes, laquelle décrit le principe d’une attaque par ingénierie sociale ?<br></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Convaincre une personne d’agir volontairement contre son propre intérêt.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                      "diagnosis": "<p>L’ingénierie sociale repose sur la manipulation psychologique pour pousser la victime à coopérer avec l’attaquant.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Utiliser des algorithmes pour obtenir des mots de passe et des codes d’accès.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.<br></p>",
+                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;<br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Infecter l’ensemble d’un réseau informatique grâce à un logiciel malveillant.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>L’attaque par ingénierie sociale repose sur l’exploitation d’une faille humaine et non technique.&nbsp;<br><br></p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5a82c551-014e-49cf-bea5-3345b3061cdb",
+          "type": "activity",
+          "title": "Activité d’application #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "69985cbb-bdab-4206-a32f-de86107b8f21",
+                "type": "custom",
+                "instruction": "<p>Lisez l’article ci-dessous et répondez aux questions.</p>",
+                "tagName": "pix-article",
+                "props": {
+                  "titleLevel": 0,
+                  "title": "Cyberattaque contre un groupe hôtelier",
+                  "author": "Brève cybersécurité - Las Vegas",
+                  "date": "septembre 2023",
+                  "paragraphs": [
+                    "{{highlightedSentence}}",
+                    "Le mode opératoire était simple mais redoutable : des cybercriminels ont appelé le centre de support informatique d’un prestataire externe en se faisant passer pour un employé autorisé.",
+                    "Sous prétexte d’un problème urgent d’accès, ils ont persuadé les techniciens de réinitialiser des identifiants et de leur donner un point d’entrée vers les systèmes internes.",
+                    "Une fois à l’intérieur, les attaquants ont contourné la protection multifactorielle et accédé à des bases de données clients sensibles.  Des millions d’informations personnelles ont ainsi été exposées : noms, numéros d’identité et données de programmes de fidélité.",
+                    "Selon plusieurs sources, une demande de rançon a ensuite été formulée. L’entreprise a ouvert une enquête, notifié ses clients et renforcé ses procédures de sécurité.",
+                    "Les experts soulignent que l’attaque ne reposait pas sur une faille technique, mais sur la manipulation psychologique d’un interlocuteur au helpdesk.  Cet incident illustre les dangers du vishing (hameçonnage par téléphone) et rappelle que la confiance mal placée peut être exploitée plus facilement qu’un pare-feu."
+                  ],
+                  "highlightedSentence": "Un important groupe hôtelier a confirmé avoir été victime d’une cyberattaque reposant sur l’ingénierie sociale.",
+                  "colorOfHighlightSentence": "#bb0101"
+                }
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d7a1b5cd-0cac-430c-9f40-77ebedd37b00",
+                      "type": "qcu",
+                      "instruction": "<p>Quel était l’objectif principal de l’attaquant ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Tester la sécurité de l’entreprise.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Il ne s’agissait pas d’un test mais bien d’une attaque.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Obtenir des accès pour voler des informations personnelles.</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                            "diagnosis": "<p>Les attaquants ont pu récupérer les données de milliers d’utilisateurs.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Saboter le centre informatique de l’entreprise.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’attaque ne visait pas au sabotage d’une infrastrure technique.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Diffuser un virus à grande échelle.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Aucun virus n’a été diffusé lors de cette attaque.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "cb2710df-7aae-47c7-9a78-4bd4d6edce3a",
+                      "type": "qcm",
+                      "instruction": "<p>Quelles faiblesses ont été exploitées par l’attaquant ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>une faille technique dans le pare feu de l’entreprise</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>des procédures du support technique trop permissives</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>un manque de vérification lors d’un appel téléphonique</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>l’utilisation de mots de passe trop simples</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                          "diagnosis": "<p>Les attaquants ont tiré parti de la confiance et du manque de rigueur des procédures internes pour contourner les contrôles d’accès.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Les attaquants n’ont pas exploités une faille technique pour pouvoir entrer dans les systèmes.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "2",
+                        "3"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "9fc13896-8641-4a33-9d48-c6b867cd3e40",
+                      "type": "qcu",
+                      "instruction": "<p>De quel type d’attaque s’agit-il ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>d’un hameçonnage de masse par mail</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Il ne s’agissait pas d’un envoi massif d’e-mails trompeurs, mais d’un contact direct et ciblé.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>d’un hameçonnage ciblé par message</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’attaque n’a pas utilisé de messages personnalisés, mais une conversation orale pour instaurer la confiance.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>d’une arnaque à la confiance par téléphone</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                            "diagnosis": "<p>Les attaquants ont utilisé l’urgence et l’usurpation d’identité pour pousser leur cible à agir sans vérifier la légitimité de la demande.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>d’une simple erreur humaine</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’incident n’était pas une simple maladresse, mais le résultat d’une manipulation intentionnelle par les attaquants.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "aaddfe1c-d8bc-44ad-867a-b103f72fe198",
+                      "type": "qrocm",
+                      "instruction": "<p>Quel biais psychologique a été utilisé ?</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Le biais</p>"
+                        },
+                        {
+                          "input": "pixtop",
+                          "type": "input",
+                          "inputType": "text",
+                          "size": 12,
+                          "display": "inline",
+                          "placeholder": "2 mots",
+                          "ariaLabel": "taper ici",
+                          "defaultValue": "",
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "de cadrage"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                          "diagnosis": "<p>Les attaquants ont exploité le biais de cadrage en présentant la situation comme urgente et légitime pour orienter la décision du support sans qu’il remette le contexte en question.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Mauvaise réponse.</p>",
+                          "diagnosis": "<p>Ici, le levier principal n’était pas la peur, mais la manière dont les attaquants ont cadré la demande pour influencer la perception et pousser la victime à agir.</p>"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dc25651c-e32a-48c5-9167-699af95137d3",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "7721de11-efa2-4757-9142-eed1b0412d29",
+          "type": "activity",
+          "title": "Transfert ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "114623c4-60db-4bce-b993-53e47f5241a3",
+                "type": "qcu-declarative",
+                "instruction": "<p>D’après vous, quelle serait la meilleure action que vous pourriez mettre en œuvre pour renforcer la vigilance face aux arnaques par ingénierie sociale ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Mettre à jour régulièrement mes mots de passe et mes appareils.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce réflexe est essentiel à titre individuel, mais la prochaine étape consiste à  diffuser ses connaissances&nbsp;: parler des arnaques, donner l’alerte, relayer les bonnes pratiques. Faire circuler l’information protège tout le groupe.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Sensibiliser mes collègues ou proches aux signes de manipulation.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bon réflexe&nbsp;: partager ses connaissances et sensibiliser autour de soi, c’est essentiel. Faire circuler l’information protège tout le groupe !</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Signaler systématiquement tout message suspect au support informatique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce réflexe est essentiel à titre individuel, mais la prochaine étape consiste à  diffuser ses connaissances&nbsp;: parler des arnaques, donner l’alerte, relayer les bonnes pratiques. Faire circuler l’information protège tout le groupe.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Éviter de cliquer sur des liens dans les mails suspects.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce réflexe est essentiel à titre individuel, mais la prochaine étape consiste à  diffuser ses connaissances&nbsp;: parler des arnaques, donner l’alerte, relayer les bonnes pratiques. Faire circuler l’information protège tout le groupe.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Même sans expertise technique, chacun peut participer à sensibiliser les autres en partageant ses connaissances. Faire circuler l’information protège tout le groupe.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
