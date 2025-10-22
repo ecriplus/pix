@@ -1,5 +1,4 @@
 import { knex } from '../../../../db/knex-database-connection.js';
-import { Frameworks } from '../../../certification/shared/domain/models/Frameworks.js';
 import { config } from '../../config.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Challenge } from '../../domain/models/Challenge.js';
@@ -127,53 +126,21 @@ export async function findActiveFlashCompatible({
 } = {}) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
-  let challengeDtos;
 
-  if (version && version.scope !== Frameworks.CORE) {
-    challengeDtos = await _findValidChallengesForComplementaryCertification({
-      cacheKey,
-      versionId: version.id,
-      dependencies,
-    });
-  } else {
-    challengeDtos = await _findChallengesForCoreCertification({
-      locale,
-      cacheKey,
-      versionId: version.id,
-      dependencies,
-    });
-  }
+  const challengeDtos = await _findChallengesForCertification({
+    locale,
+    cacheKey,
+    versionId: version.id,
+    dependencies,
+  });
+
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
   return challengesDtosWithSkills.map(([challengeDto, skill]) =>
     toDomain({ challengeDto, skill, successProbabilityThreshold }),
   );
 }
 
-async function _findValidChallengesForComplementaryCertification({ cacheKey, versionId, dependencies }) {
-  const complementaryCertificationChallenges = await knex
-    .from('certification-frameworks-challenges')
-    .where({ versionId })
-    .whereNotNull('discriminant')
-    .whereNotNull('difficulty');
-
-  const complementaryCertificationChallengesIds = complementaryCertificationChallenges.map(
-    ({ challengeId }) => challengeId,
-  );
-
-  const findCallback = async (knex) => {
-    return knex.whereIn('id', complementaryCertificationChallengesIds).orderBy('id');
-  };
-
-  const challengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
-  const validChallengeDtos = challengeDtos.filter((challenge) => challenge.status === VALIDATED_STATUS);
-
-  return decorateWithCertificationCalibration({
-    validChallengeDtos,
-    complementaryCertificationChallenges,
-  });
-}
-
-async function _findChallengesForCoreCertification({ versionId, locale, cacheKey, dependencies }) {
+async function _findChallengesForCertification({ versionId, locale, cacheKey, dependencies }) {
   const certificationChallenges = await knex
     .from('certification-frameworks-challenges')
     .where({ versionId })
@@ -191,13 +158,13 @@ async function _findChallengesForCoreCertification({ versionId, locale, cacheKey
 
   return decorateWithCertificationCalibration({
     validChallengeDtos,
-    complementaryCertificationChallenges: certificationChallenges,
+    certificationChallenges,
   });
 }
 
-function decorateWithCertificationCalibration({ validChallengeDtos, complementaryCertificationChallenges }) {
+function decorateWithCertificationCalibration({ validChallengeDtos, certificationChallenges }) {
   return validChallengeDtos.map((challenge) => {
-    const { discriminant, difficulty } = complementaryCertificationChallenges.find(
+    const { discriminant, difficulty } = certificationChallenges.find(
       ({ challengeId }) => challengeId === challenge.id,
     );
 

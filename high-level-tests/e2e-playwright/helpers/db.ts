@@ -166,21 +166,37 @@ async function buildBaseDataForCertification() {
     INSEECode: '66136',
     isActualName: true,
   });
-  await knex('certification_versions').insert({
-    scope: 'CORE',
-    startDate: new Date('2024-10-19'),
-    expirationDate: null,
-    assessmentDuration: 120,
-    globalScoringConfiguration: null,
-    competencesScoringConfiguration: null,
-    challengesConfiguration: JSON.stringify({
-      maximumAssessmentLength: 32,
-      challengesBetweenSameCompetence: null,
-      limitToOneQuestionPerTube: true,
-      enablePassageByAllCompetences: true,
-      variationPercent: 0.5,
-    }),
-  });
+  const [{ id: versionId }] = await knex('certification_versions')
+    .insert({
+      scope: 'CORE',
+      startDate: new Date('2024-10-19'),
+      expirationDate: null,
+      assessmentDuration: 120,
+      globalScoringConfiguration: null,
+      competencesScoringConfiguration: null,
+      challengesConfiguration: JSON.stringify({
+        maximumAssessmentLength: 32,
+        challengesBetweenSameCompetence: null,
+        limitToOneQuestionPerTube: true,
+        enablePassageByAllCompetences: true,
+        variationPercent: 0.5,
+      }),
+    })
+    .returning('id');
+  const challenges = await knex('learningcontent.challenges')
+    .whereRaw('?=ANY(??)', ['fr', 'locales'])
+    .where('status', 'validé')
+    .limit(500);
+
+  for (const challenge of challenges) {
+    await knex('certification-frameworks-challenges').insert({
+      challengeId: challenge.id,
+      discriminant: 1.0,
+      difficulty: 2.1,
+      version: '202001010900',
+      versionId,
+    });
+  }
 }
 
 async function createUserInDB(
