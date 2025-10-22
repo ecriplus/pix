@@ -215,7 +215,7 @@
         },
         {
           "id": "bd0e1d7a-2538-439e-ab8c-006393e03efb",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 1 : Que peut faire un ordinateur ? ",
           "components": [
             {
@@ -373,7 +373,7 @@
         },
         {
           "id": "16244191-1e74-4396-b9bd-d27ace391181",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 2 : Où trouver des utilisations de l'IA",
           "components": [
             {
@@ -447,7 +447,7 @@
         },
         {
           "id": "fdf3c015-b354-4f35-a463-76cfc0de4b03",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 3 : IA et secteurs d'activité",
           "components": [
             {

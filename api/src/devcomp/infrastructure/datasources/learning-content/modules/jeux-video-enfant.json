@@ -222,7 +222,7 @@
         },
         {
           "id": "935c4c4c-4705-4e2e-8c8f-a8db2a285bde",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 1 ",
           "components": [
             {
@@ -310,7 +310,7 @@
         },
         {
           "id": "b30b20c6-ba19-4992-8efb-20a6bf932c01",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 2",
           "components": [
             {
@@ -381,7 +381,7 @@
         },
         {
           "id": "75794098-82f6-4f6e-b768-5315ea55ae6b",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 3",
           "components": [
             {
@@ -467,7 +467,7 @@
         },
         {
           "id": "d09b483b-c182-44be-9c55-8c570e7b70d2",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 4",
           "components": [
             {
@@ -563,7 +563,7 @@
         },
         {
           "id": "779de80b-ba18-4e95-ab6d-bbc5ce8edd5a",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 5 : Les interactions entre joueurs",
           "components": [
             {

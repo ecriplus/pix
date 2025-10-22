@@ -377,7 +377,7 @@
         },
         {
           "id": "be1e7402-03dc-41d4-b688-f14631793661",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 1 ",
           "components": [
             {
@@ -483,7 +483,7 @@
         },
         {
           "id": "c3e770fb-f410-4b3a-9be6-465e0bba410a",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 2",
           "components": [
             {
@@ -596,7 +596,7 @@
         },
         {
           "id": "6ad583ab-11b2-4530-a663-75544292108a",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 3",
           "components": [
             {
@@ -758,7 +758,7 @@
         },
         {
           "id": "25aa32f6-954f-4032-98db-6659ac47a66e",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 4",
           "components": [
             {

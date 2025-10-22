@@ -124,7 +124,7 @@
         },
         {
           "id": "f2c81b8b-1574-4304-bd69-8ed05f579794",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 1 ",
           "components": [
             {
@@ -203,7 +203,7 @@
         },
         {
           "id": "f97811eb-2349-48e3-95a2-8c378724909a",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 2 ",
           "components": [
             {
@@ -420,7 +420,7 @@
         },
         {
           "id": "6c2e4b2c-bc41-4fd3-a8e3-d904fcede740",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - 3 : Les différents types de comptes de l'ENT",
           "components": [
             {

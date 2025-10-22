@@ -240,7 +240,7 @@
         },
         {
           "id": "fab2ec90-8350-4f51-8700-336bcd3acade",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon 1 - Vidéo",
           "components": [
             {
@@ -355,7 +355,7 @@
         },
         {
           "id": "6e9c3dbf-34de-4652-b119-aa2a02772fdd",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon 2 - infographie",
           "components": [
             {

@@ -181,7 +181,7 @@
         },
         {
           "id": "20a54ce5-2e41-42f5-8848-474a139c68fb",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Dec 1 Lesson 1",
           "components": [
             {
@@ -383,7 +383,7 @@
         },
         {
           "id": "633e8926-63a6-4301-9d7f-8c89dbb9c403",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Dec 2 Lesson 2",
           "components": [
             {
@@ -479,7 +479,7 @@
         },
         {
           "id": "c7fc8a64-3a00-4f72-9cf8-75c821223102",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Dec 3 Lesson 3",
           "components": [
             {

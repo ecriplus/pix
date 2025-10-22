@@ -286,7 +286,7 @@
         },
         {
           "id": "3fd6303e-499d-4ace-a5a6-8882a118726d",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson n°1 : données étiquetées",
           "components": [
             {
@@ -406,7 +406,7 @@
         },
         {
           "id": "b0076163-02ae-4805-af3e-dd82781347ba",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 2 : décomposition en valeurs numériques",
           "components": [
             {
@@ -471,7 +471,7 @@
         },
         {
           "id": "bdc51924-26ee-4f22-b302-fe4dec080387",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 3 : Ajustement des paramètres",
           "components": [
             {
@@ -556,7 +556,7 @@
         },
         {
           "id": "08c2f199-5026-487b-9c27-9f16d4ab481f",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 4 : Généralisation",
           "components": [
             {
@@ -721,7 +721,7 @@
         },
         {
           "id": "3f86b7a5-8df1-48a0-94ef-2a28c8c0c010",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #5 : D’autres cas d’usages, dont le texte",
           "components": [
             {

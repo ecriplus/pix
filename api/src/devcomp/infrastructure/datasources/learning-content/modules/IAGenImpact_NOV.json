@@ -297,7 +297,7 @@
         },
         {
           "id": "24f08127-eeea-44a5-a5b3-21c7f333b760",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Un long voyage",
           "components": [
             {
@@ -494,7 +494,7 @@
         },
         {
           "id": "67ffb9ff-0a27-4ef4-aefe-ea406e053988",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "L’IA, ça calcule, ça chauffe, ça consomme.",
           "components": [
             {
@@ -738,7 +738,7 @@
         },
         {
           "id": "c388aeb1-74d6-49cf-924c-87fa8a015bb7",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon conso énergie supercalculateur",
           "components": [
             {
@@ -923,7 +923,7 @@
         },
         {
           "id": "a17d541a-c8dd-427a-a685-4842f7e8f164",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon - Agir pour réduire l‘impact",
           "components": [
             {
