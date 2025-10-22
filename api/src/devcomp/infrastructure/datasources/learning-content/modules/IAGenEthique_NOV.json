@@ -139,7 +139,7 @@
         },
         {
           "id": "62cf44b8-1c7e-41f6-b647-eeaa35f5ab26",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson #1 : Vos discussions avec l’IA sont conservées",
           "components": [
             {
@@ -220,7 +220,7 @@
         },
         {
           "id": "177c84a2-8744-42ac-a603-4c3d6fc9c5b7",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #2 : Ce qu’il vaut mieux éviter de partager ",
           "components": [
             {
@@ -324,7 +324,7 @@
         },
         {
           "id": "3fbddcb3-8286-495b-91fd-9b8bff036f96",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #3 : Ce que vous écrivez à l’IA peut réapparaître ailleurs",
           "components": [
             {
@@ -401,7 +401,7 @@
         },
         {
           "id": "a8274031-5c1c-494b-9737-90d972fd5f5b",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon 4",
           "components": [
             {

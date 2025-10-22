@@ -132,7 +132,7 @@
         },
         {
           "id": "1fce9705-da34-49c7-a7f2-c65db62018a6",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 1",
           "components": [
             {
@@ -363,7 +363,7 @@
         },
         {
           "id": "6a0ff61b-362d-41c4-8dd6-420eb60bf743",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 2 - avec stepper",
           "components": [
             {
@@ -474,7 +474,7 @@
         },
         {
           "id": "06a185df-1a0f-4709-abe7-953211e75a4f",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Lesson 3 - avec stepper",
           "components": [
             {

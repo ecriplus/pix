@@ -407,7 +407,7 @@
         },
         {
           "id": "8bbfb1ef-3d35-48ce-bb3f-b63a8df9a8ac",
-          "type": "short-lesson",
+          "type": "lesson",
           "title": "",
           "components": [
             {
@@ -415,7 +415,7 @@
               "element": {
                 "id": "60b9e09b-dbb8-4de8-83fd-665873ca2f03",
                 "type": "text",
-                "content": "<p>Ceci est un grain de type leçon courte, dédié au bon vieux pattern</p>"
+                "content": "<p>Ceci est un grain de type leçon, dédié au bon vieux pattern</p>"
               }
             }
           ]

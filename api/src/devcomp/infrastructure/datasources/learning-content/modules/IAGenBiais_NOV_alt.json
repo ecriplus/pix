@@ -234,7 +234,7 @@
         },
         {
           "id": "3a24ab4a-8868-4ebe-91b6-77dd9da41366",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Des biais sont présents dans les données du Web",
           "components": [
             {
@@ -317,7 +317,7 @@
         },
         {
           "id": "8fbcf927-c430-41ae-b9e9-27f5d2a78cb0",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "L’IA reproduit les biais qu’elle trouve dans les contenus",
           "components": [
             {
@@ -535,7 +535,7 @@
         },
         {
           "id": "5698bfa3-1026-489c-9c5a-bd450e463137",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Le biais de confirmation",
           "components": [
             {

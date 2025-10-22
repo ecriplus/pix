@@ -141,7 +141,7 @@
         },
         {
           "id": "417ba69e-c96c-445a-b4dc-1107fd18c4cd",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Le contexte du prompt",
           "components": [
             {
@@ -238,7 +238,7 @@
         },
         {
           "id": "ac059738-54bc-4682-bc96-af014c8f6705",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Le ton dans un prompt",
           "components": [
             {
@@ -313,7 +313,7 @@
         },
         {
           "id": "a280f603-3c78-4b98-a858-c2e0119a19af",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "L’importance du format et de l’itération dans les prompts",
           "components": [
             {
