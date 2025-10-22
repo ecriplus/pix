@@ -42,7 +42,7 @@
                 "props": {
                   "titleLevel": 0,
                   "title": "AgroDélices victime d’une arnaque : 150 000 € envolés",
-                  "author": "Le journal de l'actualité",
+                  "author": "Le journal des actualités",
                   "date": "Mars 2025",
                   "paragraphs": [
                     "{{highlightedSentence}}",
@@ -140,7 +140,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>Marie a été</span></p>"
+                    "content": "<span>Marie a été</span>"
                   },
                   {
                     "input": "pixname",
@@ -423,7 +423,7 @@
               "element": {
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
-                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. <br><br> 🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…<br><br></p>"
+                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. <br><br> 🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
               }
             }
           ]
@@ -620,7 +620,7 @@
               "element": {
                 "id": "af215ff5-1482-4681-95c0-96d22b0c75f0",
                 "type": "text",
-                "content": "<p><strong>🤔 Le saviez-vous ?</strong> <br>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer, même des experts en cybersécurité tombent parfois dans le piège.<br><br></p>"
+                "content": "<p><strong>🤔 Le saviez-vous ?</strong> <br>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer, même des experts en cybersécurité tombent parfois dans le piège.</p>"
               }
             }
           ]
