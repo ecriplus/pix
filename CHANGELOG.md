@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.239.0](https://github.com/1024pix/pix/compare/v5.238.0...v5.239.0) (2025-10-22)
+
+### :rocket: Amélioration
+
+- [#13934](https://github.com/1024pix/pix/pull/13934) API - Ajouter le type de grain "leçon courte"(PIX-20065) 
+- [#13935](https://github.com/1024pix/pix/pull/13935) Autoriser le nouveau type de grain `short-lesson` sur Pix App (PIX-20066)  
+- [#13931](https://github.com/1024pix/pix/pull/13931) Créer une route pour détacher une orga fille de son parent (PIX-19983) 
+- [#13950](https://github.com/1024pix/pix/pull/13950) WIP nouveau module Phishing avancé 
+
+### :bug: Correction
+
+- [#13923](https://github.com/1024pix/pix/pull/13923) Gérer le usecase handle-badge-acquisition quand le campaign Id n'existe pas (PIX-20053) 
+
+### :building_construction: Tech
+
+- [#13926](https://github.com/1024pix/pix/pull/13926) Ajouter une colonne `referenceId` dans la table `organization_learner_participations` (PIX-20058). 
+- [#13945](https://github.com/1024pix/pix/pull/13945) Récupérer Ember Inspector sur Pix Admin.
+
 # [5.238.0](https://github.com/1024pix/pix/compare/v5.237.0...v5.238.0) (2025-10-21)
 
 ### :rocket: Amélioration
