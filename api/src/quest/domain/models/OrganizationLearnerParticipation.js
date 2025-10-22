@@ -23,7 +23,6 @@ export class OrganizationLearnerParticipation {
     deletedBy,
     status,
     type,
-    attributes,
     referenceId,
   }) {
     this.id = id;
@@ -35,7 +34,6 @@ export class OrganizationLearnerParticipation {
     this.deletedBy = deletedBy;
     this.status = status;
     this.type = type;
-    this.attributes = attributes;
     this.referenceId = referenceId;
   }
 
@@ -69,7 +67,7 @@ export class OrganizationLearnerParticipation {
       deletedBy,
       status: participationStatus,
       type: OrganizationLearnerParticipationTypes.PASSAGE,
-      attributes: JSON.stringify({ id: moduleId }),
+      referenceId: moduleId,
     });
   }
 

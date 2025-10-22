@@ -32,7 +32,7 @@ describe('Quest | Unit | Domain | Models | OrganizationLearnerParticipation', fu
       expect(organizationLearnerParticipation.deletedAt).deep.to.equal(new Date('2025-03-01'));
       expect(organizationLearnerParticipation.deletedBy).to.equal(13);
       expect(organizationLearnerParticipation.type).to.equal(OrganizationLearnerParticipationTypes.PASSAGE);
-      expect(organizationLearnerParticipation.attributes).deep.equal(JSON.stringify({ id: 'abcdef-42' }));
+      expect(organizationLearnerParticipation.referenceId).deep.equal('abcdef-42');
     });
 
     describe('status', function () {
