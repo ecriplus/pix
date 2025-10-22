@@ -85,4 +85,39 @@ module('Integration | Component | Module | Recap', function (hooks) {
     // then
     assert.dom(screen.getByRole('link', { name: 'Continuer' })).exists();
   });
+
+  module('when a redirection url is set', function () {
+    test('should display link to a custom url', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const module = store.createRecord('module', {
+        id: 'mon-slug',
+        title: 'Module title',
+        isBeta: true,
+        redirectionUrl: 'https//some-url.fr',
+      });
+      // when
+      const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+
+      // then
+      const button = screen.getByRole('link', { name: 'Continuer' });
+      assert.strictEqual(button.getAttribute('href'), module.redirectionUrl);
+    });
+
+    test('should not display quit link', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const module = store.createRecord('module', {
+        id: 'mon-slug',
+        title: 'Module title',
+        isBeta: true,
+        redirectionUrl: 'https//some-url.fr',
+      });
+      // when
+      const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+
+      // then
+      assert.strictEqual(screen.queryByRole('link', { name: 'Quitter' }), null);
+    });
+  });
 });
