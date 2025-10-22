@@ -865,48 +865,75 @@
           "title": "Les biais de confirmation",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "707cf2da-0e1c-4225-ba2c-9d80b5d06cbe",
-                "type": "qcm",
-                "instruction": "<p>Parmi ces attitudes, lesquelles illustrent <strong>le biais de confirmation</strong> lors de l’utilisation d’un logiciel d’IA générative ?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>Jeanne demande à un logiciel d’IA générative&nbsp;: «&nbsp;Explique-moi pourquoi il faut investir dans le bitcoin.&nbsp;»</p>"
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>Ali demande à un logiciel d’IA générative&nbsp;: «&nbsp;Quels investissements sont les plus rentables et les plus sûrs ?&nbsp;»</p>"
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>Marceau interroge un logiciel d’IA générative sur le bitcoin mais ne retient que les aspects positifs et ignore les mises en garde.</p>"
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Khaïs demande à un logiciel d'IA générative «&nbsp;J'ai décidé d'investir dans le Bitcoin, quels sont les inconvénients ?&nbsp;»</p>"
-                  },
-                  {
-                    "id": "5",
-                    "content": "<p>Lyna demande à une IA générative ses sources sur les avantages et les inconvénients du bitcoin.</p>"
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": "<p>Vous avez parfaitement identifié les cas qui ont été victimes de leurs propres biais de confirmation.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Les biais de confirmation sont des erreurs humaines qui nous poussent à croire les choses que nous pensons déjà. C’est le cas pour plusieurs des personnes ci-dessus. N’hésitez pas à réessayer.</p>"
-                  }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "430b4a5d-d0b0-465f-97f0-64eb7f1509df",
+                      "type": "text",
+                      "content": "<p>Thais a envie d'investir dans le bitcoin. </p><p>Elle demande conseil à une IA générative.</p><p>Aidez-là à <strong>limiter</strong> le <strong>biais de confirmation</strong>.</p>"
+                    },
+                    {
+                      "id": "b0e8366a-012c-4108-af7f-61950ce3766e",
+                      "type": "qcu",
+                      "instruction": "<p>Quel prompt conseillez-vous à Thais ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Quelles sont les avantages d’investir dans le bitcoin ?</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Ce prompt comporte déjà un biais en faveur du bitcoin.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Quelles sont les avantages d’investir dans le bitcoin ?</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Ce prompt permet une réponse plus nuancé.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
                 },
-                "solutions": [
-                  "1",
-                  "3"
-                ]
-              }
+                {
+                  "elements": [
+                    {
+                      "id": "369adc11-3be5-4c03-adb0-583b2ddad416",
+                      "type": "text",
+                      "content": "<p>Thais a lu la réponse de l'IA générative.</p>"
+                    },
+                    {
+                      "id": "31d6c8d7-b110-4a87-b812-1fa710a78cde",
+                      "type": "qcu",
+                      "instruction": "<p>Quelle attitude conseillez-vous à Thais ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Retenir les aspects positifs du bitcoin uniquement.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Le risque pour Thais, qui a déjà envie d'investir dans le bitcoin, est de ne retenir que les aspects positifs, et d'ignore les aspects négatifs. Elle risque de perdre son argent.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>S'informer sur les inconvénients de l’investissement dans le bitcoin.<br></p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>C’est une bonne idée de s’intéresser aux avis différents du sien, pour mieux comprendre les autres arguments et les nuances.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
