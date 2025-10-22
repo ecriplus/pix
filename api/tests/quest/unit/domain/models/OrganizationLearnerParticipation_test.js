@@ -88,7 +88,7 @@ describe('Quest | Unit | Domain | Models | OrganizationLearnerParticipation', fu
       expect(organizationLearnerParticipation.deletedAt).to.equal(null);
       expect(organizationLearnerParticipation.deletedBy).to.equal(null);
       expect(organizationLearnerParticipation.type).to.equal(OrganizationLearnerParticipationTypes.COMBINED_COURSE);
-      expect(organizationLearnerParticipation.attributes).deep.equal(JSON.stringify({ id: 1 }));
+      expect(organizationLearnerParticipation.referenceId).deep.equal('1');
     });
   });
   describe('when participation is completed', function () {

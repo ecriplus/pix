@@ -24,6 +24,7 @@ export class OrganizationLearnerParticipation {
     status,
     type,
     attributes,
+    referenceId,
   }) {
     this.id = id;
     this.organizationLearnerId = organizationLearnerId;
@@ -35,6 +36,7 @@ export class OrganizationLearnerParticipation {
     this.status = status;
     this.type = type;
     this.attributes = attributes;
+    this.referenceId = referenceId;
   }
 
   static buildFromPassage({
@@ -89,7 +91,7 @@ export class OrganizationLearnerParticipation {
       deletedBy: null,
       status,
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-      attributes: JSON.stringify({ id: combinedCourseId }),
+      referenceId: combinedCourseId?.toString(),
     });
   }
 }
