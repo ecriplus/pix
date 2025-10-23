@@ -124,7 +124,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
-  describe('#findUserIdsByCombinedCourseId', function () {
+  describe('#findPaginatedCombinedCourseParticipationById', function () {
     let combinedCourseId;
     const userId1 = 987;
     const userId2 = 456;
@@ -158,21 +158,23 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         organizationId: combinedCourse.organizationId,
       });
 
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: organizationLearner1.id,
-        questId: combinedCourse.questId,
         combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: organizationLearner2.id,
-        questId: combinedCourse.questId,
         combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: organizationLearner3.id,
-        questId: combinedCourse.questId,
         combinedCourseId,
         status: CombinedCourseParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
 
       const { questId: anotherQuestId, id: anotherCombinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
@@ -183,6 +185,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         organizationLearnerId: organizationLearner1.id,
         questId: anotherQuestId,
         combinedCourseId: anotherCombinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
 
       await databaseBuilder.commit();
@@ -190,7 +194,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
     it('should return user ids only for given quest id', async function () {
       // when
-      const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+      const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
         combinedCourseId,
       });
 
@@ -200,7 +204,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
     it('should return paginated user ids', async function () {
       // when
-      const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+      const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
         combinedCourseId,
         page: { size: 1, number: 3 },
       });
@@ -211,7 +215,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     describe('filters', function () {
       it('should return participations even with empty filters', async function () {
         // when
-        const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: {},
         });
@@ -221,7 +225,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       });
       it('should return participation matching learner lastName', async function () {
         // when
-        const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: { fullName: 'are' },
         });
@@ -231,7 +235,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       });
       it('should return participation matching learner firstName', async function () {
         // when
-        const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: { fullName: 'GEO' },
         });
@@ -241,7 +245,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       });
       it('should return participation matching participation status', async function () {
         // when
-        const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: { statuses: [CombinedCourseParticipationStatuses.STARTED] },
         });
@@ -251,7 +255,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       });
       it('should return participations even with empty status filter', async function () {
         // when
-        const { userIds } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
+        const { userIds } = await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({
           combinedCourseId,
           filters: { statuses: [] },
         });

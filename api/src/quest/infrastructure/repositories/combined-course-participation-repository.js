@@ -65,19 +65,21 @@ export const getByUserId = async function ({ userId, combinedCourseId }) {
   return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
-export const findUserIdsByCombinedCourseId = async function ({ combinedCourseId, page, filters }) {
+export const findPaginatedCombinedCourseParticipationById = async function ({ combinedCourseId, page, filters }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const queryBuilder = knexConnection('combined_courses')
-    .select('userId')
-    .join('quests', 'quests.id', 'combined_courses.questId')
-    .join('combined_course_participations', 'combined_course_participations.questId', 'quests.id')
+  const queryBuilder = knexConnection('organization_learner_participations')
+    .select('view-active-organization-learners.userId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations.organizationLearnerId',
     )
-    .where('combined_courses.id', combinedCourseId)
+    .where({
+      referenceId: combinedCourseId.toString(),
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .whereNotNull('userId')
     .orderBy(['lastName', 'firstName', 'userId']);
 
   queryBuilder.modify(addSearchFilters, filters);
