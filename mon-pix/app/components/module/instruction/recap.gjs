@@ -9,17 +9,19 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
   {{/if}}
 
   <main class="module-recap">
-    <div class="module-recap__header">
-      <PixButtonLink
-        @size="large"
-        @route="authenticated.user-dashboard"
-        @variant="tertiary"
-        @iconAfter="doorOpen"
-        class="module-recap-header__icon"
-      >
-        {{t "pages.modulix.recap.backToModuleDetails"}}
-      </PixButtonLink>
-    </div>
+    {{#unless @module.redirectionUrl}}
+      <div class="module-recap__header">
+        <PixButtonLink
+          @size="large"
+          @route="authenticated.user-dashboard"
+          @variant="tertiary"
+          @iconAfter="doorOpen"
+          class="module-recap-header__icon"
+        >
+          {{t "pages.modulix.recap.backToModuleDetails"}}
+        </PixButtonLink>
+      </div>
+    {{/unless}}
 
     <img class="module-recap__illustration" src="/images/modulix/recap-success.svg" alt="" width="228" height="200" />
 
