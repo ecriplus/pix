@@ -5,6 +5,7 @@ import sinon from 'sinon';
 
 module('Unit | Route | authenticated/organizations/new', function (hooks) {
   setupTest(hooks);
+  const transition = { to: { queryParams: {} } };
 
   test('it should check if current user is super admin, support, or metier', function (assert) {
     // given
@@ -17,7 +18,7 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
     this.owner.register('service:access-control', AccessControlStub);
 
     // when
-    route.beforeModel();
+    route.beforeModel(transition);
 
     // then
     assert.ok(restrictAccessToStub.calledWith(['isSuperAdmin', 'isSupport', 'isMetier'], 'authenticated'));
@@ -36,7 +37,7 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
 
     // when
-    route.beforeModel();
+    route.beforeModel(transition);
 
     // then
     assert.ok(router.transitionTo.notCalled);
@@ -55,7 +56,7 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
 
     // when
-    route.beforeModel();
+    route.beforeModel(transition);
 
     // then
     assert.ok(router.transitionTo.notCalled);
@@ -74,7 +75,7 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
 
     // when
-    route.beforeModel();
+    route.beforeModel(transition);
 
     // then
     assert.ok(router.transitionTo.notCalled);
@@ -93,9 +94,83 @@ module('Unit | Route | authenticated/organizations/new', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
 
     // when
-    route.beforeModel();
+    route.beforeModel(transition);
 
     // then
     assert.ok(router.transitionTo.called);
+  });
+
+  module('query params', function (hooks) {
+    let route;
+    let router;
+    hooks.beforeEach(function () {
+      route = this.owner.lookup('route:authenticated/organizations/new');
+      router = this.owner.lookup('service:router');
+      sinon.stub(router, 'replaceWith');
+      class AccessControlStub extends Service {
+        restrictAccessTo = sinon.stub();
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+    });
+    test('it should allow parentOrganizationId and parentOrganizationName query params', async function (assert) {
+      // given
+      const transition = {
+        to: {
+          queryParams: {
+            parentOrganizationId: '1',
+            parentOrganizationName: 'Orga Name',
+          },
+        },
+      };
+
+      // when
+      route.beforeModel(transition);
+
+      // then
+      assert.ok(router.replaceWith.notCalled);
+    });
+
+    test('it should allow any other query params', async function (assert) {
+      // given
+      const transition = {
+        to: {
+          queryParams: {
+            otherQueryParam: 'A random query param',
+          },
+        },
+      };
+
+      // when
+      route.beforeModel(transition);
+
+      // then
+      assert.ok(router.replaceWith.notCalled);
+    });
+
+    test('it should redirect to home page and set query params to null if one of parentOrganizationId and parentOrganizationName is provided but the other is missing', async function (assert) {
+      // given
+      const routeToRedirect = 'authenticated';
+
+      const transition = {
+        to: {
+          queryParams: {
+            parentOrganizationId: '1',
+          },
+        },
+      };
+
+      // when
+      route.beforeModel(transition);
+
+      // then
+      assert.ok(
+        router.replaceWith.calledWith(routeToRedirect, {
+          queryParams: {
+            parentOrganizationId: null,
+            parentOrganizationName: null,
+          },
+        }),
+      );
+    });
   });
 });
