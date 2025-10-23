@@ -98,7 +98,7 @@ export default class LoginForm extends Component {
   <template>
     <form {{on "submit" this.signin}} class="authentication-login-form">
       {{#if this.globalError}}
-        <PixNotificationAlert @type="error" @withIcon={{true}} role="alert">
+        <PixNotificationAlert @type="error" role="alert">
           {{this.globalError}}
         </PixNotificationAlert>
       {{/if}}
