@@ -1,7 +1,6 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
  * @typedef {import('./index.js').SharedChallengeRepository} SharedChallengeRepository
- * @typedef {import('./index.js').SharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {import('./index.js').VersionRepository} VersionRepository
  */
 
@@ -14,7 +13,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {Object} params
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
- * @param {SharedFlashAlgorithmConfigurationRepository} params.sharedFlashAlgorithmConfigurationRepository
  * @param {VersionRepository} params.versionRepository
  */
 export async function simulateFlashAssessmentScenario({
@@ -25,64 +23,51 @@ export async function simulateFlashAssessmentScenario({
   variationPercent,
   flashAlgorithmService,
   sharedChallengeRepository,
-  sharedFlashAlgorithmConfigurationRepository,
   accessibilityAdjustmentNeeded,
   stopAtChallenge,
   versionId,
   versionRepository,
 }) {
-  if (versionId) {
-    return _simulateComplementaryCertificationScenario({
-      versionId,
-      challengeRepository: sharedChallengeRepository,
-      flashAlgorithmService,
-      pickChallenge,
-      pickAnswerStatus,
-      initialCapacity,
-      variationPercent,
-      locale,
-      stopAtChallenge,
-      versionRepository,
-    });
-  } else {
-    return _simulateCoreCertificationScenario({
-      locale,
-      accessibilityAdjustmentNeeded,
-      challengeRepository: sharedChallengeRepository,
-      flashAlgorithmService,
-      sharedFlashAlgorithmConfigurationRepository,
-      pickChallenge,
-      pickAnswerStatus,
-      initialCapacity,
-      variationPercent,
-      stopAtChallenge,
-    });
-  }
+  const version = await versionRepository.getById(versionId);
+
+  return _simulateCertificationScenario({
+    locale,
+    accessibilityAdjustmentNeeded,
+    challengeRepository: sharedChallengeRepository,
+    flashAlgorithmService,
+    pickChallenge,
+    pickAnswerStatus,
+    initialCapacity,
+    variationPercent,
+    stopAtChallenge,
+    version,
+  });
 }
 
 /**
  * @param {Object} params
  * @param {SharedChallengeRepository} params.challengeRepository
  */
-async function _simulateComplementaryCertificationScenario({
-  locale,
-  versionId,
+async function _simulateCertificationScenario({
   pickChallenge,
   pickAnswerStatus,
   initialCapacity,
   variationPercent,
   challengeRepository,
   flashAlgorithmService,
+  locale,
+  accessibilityAdjustmentNeeded,
   stopAtChallenge,
-  versionRepository,
+  version,
 }) {
-  const version = await versionRepository.getById(versionId);
-
-  const challenges = await _getChallenges({
+  let challenges = await challengeRepository.findActiveFlashCompatible({
     locale,
-    challengeRepository,
     version,
   });
+
+  if (accessibilityAdjustmentNeeded) {
+    challenges = challenges.filter((challenge) => challenge.isAccessible);
+  }
 
   return _simulation({
     challenges,
@@ -93,55 +78,6 @@ async function _simulateComplementaryCertificationScenario({
     initialCapacity,
     variationPercent,
     stopAtChallenge,
-  });
-}
-
-/**
- * @param {Object} params
- * @param {SharedChallengeRepository} params.challengeRepository
- * @param {SharedFlashAlgorithmConfigurationRepository} params.sharedFlashAlgorithmConfigurationRepository
- */
-async function _simulateCoreCertificationScenario({
-  pickChallenge,
-  pickAnswerStatus,
-  initialCapacity,
-  variationPercent,
-  challengeRepository,
-  sharedFlashAlgorithmConfigurationRepository,
-  flashAlgorithmService,
-  locale,
-  accessibilityAdjustmentNeeded,
-  stopAtChallenge,
-}) {
-  const challenges = await _getChallenges({
-    challengeRepository,
-    locale,
-    accessibilityAdjustmentNeeded,
-  });
-
-  const mostRecentAlgorithmConfiguration = await sharedFlashAlgorithmConfigurationRepository.getMostRecent();
-
-  return _simulation({
-    challenges,
-    mostRecentAlgorithmConfiguration,
-    flashAlgorithmService,
-    pickChallenge,
-    pickAnswerStatus,
-    initialCapacity,
-    variationPercent,
-    stopAtChallenge,
-  });
-}
-
-/**
- * @param {Object} params
- * @param {SharedChallengeRepository} params.challengeRepository
- */
-function _getChallenges({ challengeRepository, locale, accessibilityAdjustmentNeeded, version }) {
-  return challengeRepository.findActiveFlashCompatible({
-    locale,
-    accessibilityAdjustmentNeeded,
-    version,
   });
 }
 

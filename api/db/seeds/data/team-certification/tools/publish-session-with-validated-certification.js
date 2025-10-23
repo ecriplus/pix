@@ -11,6 +11,7 @@ import { CertificationReport } from '../../../../../src/certification/shared/dom
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
 import { config } from '../../../../../src/shared/config.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
+import { knex } from '../../../../knex-database-connection.js';
 
 /**
  * @param {Object} params
@@ -26,6 +27,8 @@ export default async function publishSessionWithValidatedCertification({
   pixScoreTarget,
 }) {
   const session = await enrolmentUseCases.getSession({ sessionId });
+
+  const version = await knex('certification_versions').where('expirationDate', null).andWhere('scope', 'CORE').first();
 
   const reports = [];
 
@@ -58,6 +61,7 @@ export default async function publishSessionWithValidatedCertification({
       stopAtChallenge: config.v3Certification.numberOfChallengesPerCourse - 1,
       pickChallenge,
       pickAnswerStatus,
+      versionId: version.id,
     });
 
     let timePad = 1;

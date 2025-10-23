@@ -48,6 +48,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
         it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
           // given
           const challengePickProbability = 40;
+          const versionId = 1;
 
           const pickChallengeImplementation = sinon.stub();
           pickChallengeService.getChallengePicker
@@ -64,6 +65,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               locale: 'en',
               pickChallenge: pickChallengeImplementation,
               initialCapacity,
+              versionId,
             })
             .resolves(simulationResults);
           securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -77,6 +79,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               capacity: 6,
               challengePickProbability,
               locale: 'en',
+              versionId,
             },
             null,
           );
@@ -110,6 +113,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const capacity = -3.1;
+            const versionId = 1;
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
@@ -123,6 +127,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 pickChallenge: pickChallengeImplementation,
                 locale: 'en',
                 pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
+                versionId,
               })
               .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -134,6 +139,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
               {
                 capacity,
                 locale: 'en',
+                versionId,
               },
               null,
             );
@@ -166,6 +172,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const capacity = -3.1;
+            const versionId = 1;
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
@@ -180,6 +187,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 locale: 'en',
                 pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
                 initialCapacity,
+                versionId,
               })
               .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -192,6 +200,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 capacity,
                 initialCapacity,
                 locale: 'en',
+                versionId,
               },
               null,
             );
@@ -224,6 +233,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
           it('should call simulateFlashAssessmentScenario usecase with correct arguments', async function () {
             // given
             const capacity = -3.1;
+            const versionId = 1;
 
             const pickChallengeImplementation = sinon.stub();
             pickChallengeService.getChallengePicker.returns(pickChallengeImplementation);
@@ -238,6 +248,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 locale: 'en',
                 pickAnswerStatus: pickAnswerStatusFromCapacityImplementation,
                 initialCapacity,
+                versionId,
               })
               .resolves(simulationResults);
             securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.returns(() => true);
@@ -250,6 +261,7 @@ describe('Integration | Application | scenario-simulator-controller', function (
                 capacity,
                 initialCapacity,
                 locale: 'EN',
+                versionId,
               },
               null,
             );

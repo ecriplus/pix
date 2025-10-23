@@ -22,11 +22,10 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       role: SUPER_ADMIN,
     });
 
-    databaseBuilder.factory.buildCertificationConfiguration({
+    const version = databaseBuilder.factory.buildCertificationVersion({
       challengesConfiguration: {
         maximumAssessmentLength: 2,
       },
-      startingDate: new Date('2022-02-01'),
     });
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });
@@ -35,6 +34,7 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     validPayload = {
       capacity: 4.5,
       locale: 'fr-fr',
+      versionId: version.id,
     };
 
     const learningContent = {
@@ -83,6 +83,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: -2,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.3,
+          accessibility1: 'RAS',
+          accessibility2: 'KO',
         },
         {
           id: 'challenge2',
@@ -92,6 +94,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 6,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.4,
+          accessibility1: 'KO',
+          accessibility2: 'RAS',
         },
         {
           id: 'challenge3',
@@ -101,6 +105,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 8.5,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.5,
+          accessibility1: 'RAS',
+          accessibility2: 'OK',
         },
         {
           id: 'challenge4',
@@ -110,6 +116,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 0.145,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.6,
+          accessibility1: 'OK',
+          accessibility2: 'OK',
         },
         {
           id: 'challenge5',
@@ -119,6 +127,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: 1,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.7,
+          accessibility1: 'RAS',
+          accessibility2: 'RAS',
         },
         {
           id: 'challenge6',
@@ -128,9 +138,41 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
           delta: -1,
           locales: ['fr-fr'],
           successProbabilityThreshold: 0.8,
+          accessibility1: 'OK',
+          accessibility2: 'RAS',
         },
       ],
     };
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge1',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge2',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge3',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge4',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge5',
+      versionId: version.id,
+    });
+
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId: 'challenge6',
+      versionId: version.id,
+    });
 
     await mockLearningContent(learningContent);
 
@@ -190,6 +232,31 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       });
     });
 
+    describe('when the accessibilityAdjustmentNeeded parameter is given', function () {
+      it('should return a report that contains the targeted number of challenges', async function () {
+        // given
+        options.headers = adminAuthorizationHeaders;
+        options.payload = {
+          ...validPayload,
+          accessibilityAdjustmentNeeded: true,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response).to.have.property('statusCode', 200);
+        const parsedResponse = parseJsonStream(response);
+        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
+        expect(['challenge3', 'challenge4', 'challenge5', 'challenge6']).to.include(
+          parsedResponse[0].simulationReport[0].challengeId,
+        );
+        expect(['challenge3', 'challenge4', 'challenge5', 'challenge6']).to.include(
+          parsedResponse[0].simulationReport[1].challengeId,
+        );
+      });
+    });
+
     describe('when there is no connected user', function () {
       it('should return status code 401', async function () {
         // given
@@ -232,53 +299,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
 
         // then
         expect(response).to.have.property('statusCode', 400);
-      });
-    });
-
-    describe('when simulating a complementary certification scenario', function () {
-      it('should return a report with the same number of simulation scenario reports as the number of challenges in the configuration', async function () {
-        // given
-        const versionId = databaseBuilder.factory.buildCertificationVersion({
-          scope: 'DROIT',
-          challengesConfiguration: { maximumAssessmentLength: 2 },
-        }).id;
-        const otherVersionId = databaseBuilder.factory.buildCertificationVersion().id;
-        databaseBuilder.factory.buildComplementaryCertification({ key: 'DROIT' });
-        databaseBuilder.factory.buildComplementaryCertification({ key: 'EDU' });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'DROIT',
-          challengeId: 'challenge1',
-          versionId,
-        });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'DROIT',
-          challengeId: 'challenge3',
-          versionId,
-        });
-        databaseBuilder.factory.buildCertificationFrameworksChallenge({
-          complementaryCertificationKey: 'EDU',
-          challengeId: 'challenge2',
-          versionId: otherVersionId,
-        });
-        await databaseBuilder.commit();
-        options.headers = adminAuthorizationHeaders;
-        options.payload = { ...validPayload, versionId };
-
-        // when
-        const response = await server.inject(options);
-
-        // then
-        expect(response).to.have.property('statusCode', 200);
-        const parsedResponse = parseJsonStream(response);
-        expect(parsedResponse[0].simulationReport).to.have.lengthOf(2);
-        expect(parsedResponse[0].simulationReport[0].challengeId).to.exist;
-        expect(parsedResponse[0].simulationReport[0].capacity).to.exist;
-        expect(parsedResponse[0].simulationReport[0].difficulty).to.exist;
-        expect(parsedResponse[0].simulationReport[0].discriminant).to.exist;
-        expect(parsedResponse[0].simulationReport[0].reward).to.exist;
-        expect(parsedResponse[0].simulationReport[0].errorRate).to.exist;
-        expect(parsedResponse[0].simulationReport[0].answerStatus).to.exist;
-        expect(parsedResponse[0].simulationReport[0].numberOfAvailableChallenges).to.exist;
       });
     });
   });
