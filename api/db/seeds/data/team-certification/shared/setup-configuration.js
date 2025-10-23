@@ -5,7 +5,7 @@ import { createIssueReportCategories } from '../tools/algorithm-configuration/cr
 export async function setupConfigurations({ databaseBuilder }) {
   await createCertificationConfiguration({ databaseBuilder });
 
-  await createCertificationVersion({ databaseBuilder });
+  // await createCertificationVersion({ databaseBuilder });
 
   await createIssueReportCategories({ databaseBuilder });
 

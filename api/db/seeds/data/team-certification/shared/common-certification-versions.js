@@ -1,64 +1,67 @@
-import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
-import { knex } from '../../../../../knex-database-connection.js';
+import { usecases as configurationUsecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { usecases as learningContentUsecases } from '../../../../../src/learning-content/domain/usecases/index.js';
+import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 
-export const createCertificationVersion = async ({ databaseBuilder }) => {
-  _createExpiredVersion({ databaseBuilder });
-  const version = _createActiveVersion({ databaseBuilder });
-  await _createActiveVersionChallenges({ databaseBuilder, version });
-};
-
-const _createActiveVersion = ({ databaseBuilder }) => {
-  const version = databaseBuilder.factory.buildCertificationVersion({
-    scope: Frameworks.CORE,
-    startDate: new Date('2024-10-19'),
-    expirationDate: null,
-    assessmentDuration: 456,
-    globalScoringConfiguration,
-    competencesScoringConfiguration,
-    challengesConfiguration,
-  });
-
-  return version;
-};
-
-const _createExpiredVersion = ({ databaseBuilder }) => {
-  databaseBuilder.factory.buildCertificationVersion({
-    scope: Frameworks.CORE,
-    startDate: new Date('2018-10-19'),
-    expirationDate: new Date('2024-10-19'),
-    assessmentDuration: 123,
-    globalScoringConfiguration: null,
-    competencesScoringConfiguration: null,
-    challengesConfiguration: {
-      maximumAssessmentLength: 20,
-      challengesBetweenSameCompetence: null,
-      limitToOneQuestionPerTube: false,
-      enablePassageByAllCompetences: false,
-      variationPercent: 0.3,
-    },
-  });
-};
-
-const _createActiveVersionChallenges = async ({ databaseBuilder, version }) => {
-  const challenges = await knex('learningcontent.challenges')
-    .where('status', 'validé')
-    .whereRaw('?=ANY(??)', ['fr', 'locales'])
-    .limit(50);
-
-  const challengeIds = challenges.map((challenge) => challenge.id);
-
-  for (const challengeId of challengeIds) {
-    databaseBuilder.factory.buildCertificationFrameworksChallenge({
-      challengeId,
-      versionId: version.id,
-      discriminant: 2.1,
-      difficulty: 1,
-    });
+export class CommonCertificationVersions {
+  constructor({ databaseBuilder }) {
+    this.databaseBuilder = databaseBuilder;
   }
-};
 
-const challengesConfiguration = {
+  static async #getTubeIdsByFramework({ frameworkName }) {
+    const areas = await learningContentUsecases.getFrameworkAreas({
+      frameworkName,
+      locale: FRENCH_SPOKEN,
+    });
+
+    return areas.flatMap((area) =>
+      area.competences.flatMap((competence) =>
+        competence.thematics.flatMap((thematic) => thematic.tubes.map((tube) => tube.id)),
+      ),
+    );
+  }
+
+  /**
+   * This does not exist as a feature as of today (current feature still using certification-configurations table)
+   */
+  static async #forceConfigurations({ databaseBuilder, versionId }) {
+    await databaseBuilder
+      .knex('certification_versions')
+      .where('id', versionId)
+      .update({
+        challengesConfiguration: JSON.stringify(CHALLENGES_CONFIGURATION),
+        globalScoringConfiguration: JSON.stringify(GLOBAL_SCORING_CONFIGURATION),
+        competencesScoringConfiguration: JSON.stringify(COMPETENCES_SCORING_CONFIGURATION),
+      });
+    await databaseBuilder.commit();
+  }
+
+  static async initCoreVersions({ databaseBuilder }) {
+    if (!this.coreVersion) {
+      this.coreVersion = {};
+
+      // Having an expired version alows to verify that versioning works
+      this.coreVersion.expiredVersionId = await configurationUsecases.createCertificationVersion({
+        scope: Frameworks.CORE,
+        tubeIds: [],
+      });
+
+      const coreFrameworkName = 'Pix';
+      const tubeIds = await this.#getTubeIdsByFramework({ frameworkName: coreFrameworkName });
+      this.coreVersion.activeVersionId = await configurationUsecases.createCertificationVersion({
+        scope: Frameworks.CORE,
+        tubeIds,
+      });
+
+      await this.#forceConfigurations({
+        databaseBuilder,
+        versionId: this.coreVersion.activeVersionId,
+      });
+    }
+  }
+}
+
+const CHALLENGES_CONFIGURATION = {
   maximumAssessmentLength: 32,
   challengesBetweenSameCompetence: null,
   limitToOneQuestionPerTube: true,
@@ -66,7 +69,7 @@ const challengesConfiguration = {
   variationPercent: 0.5,
 };
 
-const globalScoringConfiguration = [
+const GLOBAL_SCORING_CONFIGURATION = [
   {
     meshLevel: 0,
     bounds: {
@@ -125,7 +128,7 @@ const globalScoringConfiguration = [
   },
 ];
 
-const competencesScoringConfiguration = [
+const COMPETENCES_SCORING_CONFIGURATION = [
   {
     competence: '1.1',
     values: [

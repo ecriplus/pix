@@ -15,6 +15,7 @@ import {
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import { PRO_CERTIFICATION_CENTER_ID, PUBLISHED_PRO_SESSION, STARTED_PRO_SESSION } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
@@ -35,6 +36,8 @@ export class ProSeed {
   }
 
   async create() {
+    await this.#initCertificationReferentials();
+
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({
       organization,
@@ -72,6 +75,12 @@ export class ProSeed {
       sessionId: PUBLISHED_PRO_SESSION,
       candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 250,
+    });
+  }
+
+  async #initCertificationReferentials() {
+    await CommonCertificationVersions.initCoreVersions({
+      databaseBuilder: this.databaseBuilder,
     });
   }
 
