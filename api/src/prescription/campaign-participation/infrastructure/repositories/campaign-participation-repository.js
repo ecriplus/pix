@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
+import { OrganizationLearnerParticipationTypes } from '../../../../quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -249,13 +250,13 @@ const hasAssessmentParticipations = async function (userId) {
     .first();
 
   const { count: combinedCourseCount } = await knexConn('view-active-organization-learners')
-    .count('combined_course_participations.id')
+    .count('organization_learner_participations.id')
     .join(
-      'combined_course_participations',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations',
+      'organization_learner_participations.organizationLearnerId',
       'view-active-organization-learners.id',
     )
-    .where({ userId })
+    .where({ userId, type: OrganizationLearnerParticipationTypes.COMBINED_COURSE })
     .first();
 
   return assessmentCount > 0 || combinedCourseCount > 0;
