@@ -302,39 +302,83 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
 
     describe('Success case', function () {
-      it('returns 200 HTTP status code with the created organization', async function () {
-        // given
-        const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-        databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
-        await databaseBuilder.commit();
+      context('when no parent organization id is provided', function () {
+        it('returns 200 HTTP status code with the created organization', async function () {
+          // given
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          await databaseBuilder.commit();
 
-        // when
-        const { result, statusCode } = await server.inject({
-          method: 'POST',
-          url: '/api/admin/organizations',
-          payload: {
-            data: {
-              type: 'organizations',
-              attributes: {
-                name: 'The name of the organization',
-                type: 'PRO',
-                'documentation-url': 'https://kingArthur.com',
-                'data-protection-officer-email': 'justin.ptipeu@example.net',
-                'administration-team-id': 1234,
+          // when
+          const { result, statusCode } = await server.inject({
+            method: 'POST',
+            url: '/api/admin/organizations',
+            payload: {
+              data: {
+                type: 'organizations',
+                attributes: {
+                  name: 'The name of the organization',
+                  type: 'PRO',
+                  'documentation-url': 'https://kingArthur.com',
+                  'data-protection-officer-email': 'justin.ptipeu@example.net',
+                  'administration-team-id': 1234,
+                },
               },
             },
-          },
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
-        });
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+          });
 
-        // then
-        expect(statusCode).to.equal(200);
-        const createdOrganization = result.data.attributes;
-        expect(createdOrganization.name).to.equal('The name of the organization');
-        expect(createdOrganization.type).to.equal('PRO');
-        expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
-        expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
-        expect(createdOrganization['created-by']).to.equal(superAdminUserId);
+          // then
+          const createdOrganization = result.data.attributes;
+
+          expect(statusCode).to.equal(200);
+          expect(createdOrganization.name).to.equal('The name of the organization');
+          expect(createdOrganization.type).to.equal('PRO');
+          expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
+          expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
+          expect(createdOrganization['created-by']).to.equal(superAdminUserId);
+        });
+      });
+
+      context('when a parent organization id is provided', function () {
+        it('returns 200 HTTP status code with the created child organization', async function () {
+          // given
+          const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+          databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          await databaseBuilder.commit();
+
+          // when
+          const { result, statusCode } = await server.inject({
+            method: 'POST',
+            url: `/api/admin/organizations`,
+            payload: {
+              data: {
+                type: 'organizations',
+                attributes: {
+                  name: 'The name of the organization',
+                  type: 'PRO',
+                  'documentation-url': 'https://kingArthur.com',
+                  'data-protection-officer-email': 'justin.ptipeu@example.net',
+                  'administration-team-id': 1234,
+                  'parent-organization-id': parentOrganizationId,
+                },
+              },
+            },
+            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+          });
+
+          // then
+          const createdOrganization = result.data.attributes;
+
+          expect(statusCode).to.equal(200);
+          expect(createdOrganization.name).to.equal('The name of the organization');
+          expect(createdOrganization.type).to.equal('PRO');
+          expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
+          expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
+          expect(createdOrganization['created-by']).to.equal(superAdminUserId);
+          expect(createdOrganization['parent-organization-id']).to.equal(parentOrganizationId);
+        });
       });
     });
 

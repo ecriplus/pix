@@ -213,6 +213,7 @@ const save = async function ({ organization }) {
     'createdBy',
     'documentationUrl',
     'administrationTeamId',
+    'parentOrganizationId',
   ]);
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME).returning('*').insert(data);
   const savedOrganization = _toDomain(organizationCreated);

@@ -1,4 +1,4 @@
-import { AdministrationTeamNotFound } from '../errors.js';
+import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
@@ -10,6 +10,14 @@ const createOrganization = async function ({
   schoolRepository,
   codeGenerator,
 }) {
+  if (organization.parentOrganizationId) {
+    const parentOrganization = await organizationForAdminRepository.get({
+      organizationId: organization.parentOrganizationId,
+    });
+
+    _assertParentOrganizationIsNotChildOrganization(parentOrganization);
+  }
+
   organizationCreationValidator.validate(organization);
 
   const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
@@ -39,3 +47,16 @@ const createOrganization = async function ({
 };
 
 export { createOrganization };
+
+function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
+  if (parentOrganization.parentOrganizationId) {
+    throw new UnableToAttachChildOrganizationToParentOrganizationError({
+      code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+      message: 'Unable to attach child organization to parent organization which is also a child organization',
+      meta: {
+        grandParentOrganizationId: parentOrganization.parentOrganizationId,
+        parentOrganizationId: parentOrganization.id,
+      },
+    });
+  }
+}
