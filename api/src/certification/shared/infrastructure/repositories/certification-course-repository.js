@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -67,9 +66,6 @@ async function get({ id }) {
 
   let accessibilityAdjustmentNeeded;
   if (certificationCourseDTO.version === 3) {
-    // TODO: get the number of challenge per course in a better way
-    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
-
     ({ accessibilityAdjustmentNeeded } = await knexConn('certification-candidates')
       .select('accessibilityAdjustmentNeeded')
       .where({
@@ -143,11 +139,6 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
   const assessmentDTO = await _findAssessment(certificationCourseDTO.id, knexConn);
 
   const challengesDTO = await _findAllChallenges(certificationCourseDTO.id, knexConn);
-
-  if (certificationCourseDTO.version === 3) {
-    // TODO: get the number of challenge per course in a better way
-    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
-  }
 
   return _toDomain({
     certificationCourseDTO,
