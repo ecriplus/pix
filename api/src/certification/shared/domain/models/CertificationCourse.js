@@ -305,11 +305,11 @@ class CertificationCourse {
   }
 
   getNumberOfChallenges() {
-    if (this.isV3()) {
-      return this._numberOfChallenges;
-    }
+    return this._numberOfChallenges ?? this._challenges?.length ?? 0;
+  }
 
-    return this._challenges?.length ?? 0;
+  setNumberOfChallenges(numberOfChallenges) {
+    this._numberOfChallenges = numberOfChallenges;
   }
 
   isV2() {

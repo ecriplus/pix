@@ -8,6 +8,8 @@ import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
+import { ComplementaryCertificationKeys } from '../../domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../domain/models/Frameworks.js';
 
 async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
@@ -212,11 +214,37 @@ async function findCertificationCoursesBySessionId({ sessionId }) {
   return certificationCoursesDTO.map((certificationCourseDTO) => _toDomain({ certificationCourseDTO }));
 }
 
+/**
+ * @param {Object} params
+ * @param {number} params.courseId
+ * @returns {Promise<Frameworks>}
+ */
+async function getCertificationScope({ courseId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('complementary-certification-courses')
+    .select('complementary-certifications.key')
+    .where({ certificationCourseId: courseId })
+    .join(
+      'complementary-certifications',
+      'complementary-certifications.id',
+      'complementary-certification-courses.complementaryCertificationId',
+    )
+    .first();
+
+  if (result?.key && result.key !== ComplementaryCertificationKeys.CLEA) {
+    return result.key;
+  }
+
+  return Frameworks.CORE;
+}
+
 export {
   findAllByUserId,
   findCertificationCoursesBySessionId,
   findOneCertificationCourseByUserIdAndSessionId,
   get,
+  getCertificationScope,
   getSessionId,
   isVerificationCodeAvailable,
   save,
