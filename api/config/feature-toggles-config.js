@@ -74,4 +74,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: false },
     tags: ['frontend', 'team-acces', 'pix-orga'],
   },
+  isModulixNavEnabled: {
+    type: 'boolean',
+    description: 'Enables navigation for modules',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['frontend', 'team-devcomp', 'modulix', 'pix-app'],
+  },
 };
