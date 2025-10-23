@@ -53,6 +53,7 @@ export async function buildFreshPixOrgaUser(
     organizationId,
   }));
   await knex('target-profile-shares').insert(targetProfileSharesToInsert);
+  return { userId, targetProfileId: targetProfileIds[0] };
 }
 
 export async function setAssessmentIdSequence(id: number) {

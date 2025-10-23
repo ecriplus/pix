@@ -45,6 +45,11 @@ export default defineConfig({
       testDir: 'tests/assessments',
       testMatch: '**/*.ts',
     },
+    {
+      name: 'combined courses',
+      testDir: 'tests/combined-courses',
+      testMatch: '**/*.ts',
+    },
   ],
   webServer: isCI
     ? [

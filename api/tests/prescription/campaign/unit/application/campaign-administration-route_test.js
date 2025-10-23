@@ -400,6 +400,7 @@ describe('Unit | Application | Router | campaign-administration-router', functio
 
   it('should call checkCampaignBelongsToCombinedCourse pre-handler', async function () {
     // given
+    sinon.stub(campaignAdministrationController, 'archiveCampaign').returns(null);
     sinon.stub(securityPreHandlers, 'checkAuthorizationToManageCampaign').callsFake((request, h) => h.response(true));
     sinon.stub(securityPreHandlers, 'checkCampaignBelongsToCombinedCourse').callsFake((request, h) => h.response(true));
 

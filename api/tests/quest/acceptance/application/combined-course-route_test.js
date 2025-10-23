@@ -292,7 +292,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
 
   describe('GET /api/combined-courses/{combinedCourseId}/participations', function () {
     context('when user has membership in the combined course organization', function () {
-      it('should return the combined course participations', async function () {
+      it('should return the combined course participations with details', async function () {
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;

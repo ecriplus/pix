@@ -6,6 +6,7 @@ import {
 } from '../../../prescription/shared/domain/constants.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
+import { CombinedCourseParticipationDetails } from './CombinedCourseParticipationDetails.js';
 import { Quest } from './Quest.js';
 import { TYPES } from './Requirement.js';
 
@@ -81,6 +82,28 @@ export class CombinedCourseDetails extends CombinedCourse {
     return this.quest.successRequirements
       .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.PASSAGES)
       .map(({ data }) => data.moduleId.data);
+  }
+
+  get participationDetails() {
+    return new CombinedCourseParticipationDetails({
+      id: this.participation.id,
+      status: this.status,
+      firstName: this.participation.firstName,
+      lastName: this.participation.lastName,
+      createdAt: this.participation.createdAt,
+      updatedAt: this.participation.updatedAt,
+      hasFormationItem: this.items.some(({ type }) => type === COMBINED_COURSE_ITEM_TYPES.FORMATION),
+      nbCampaigns: this.items.filter(({ type }) => type === COMBINED_COURSE_ITEM_TYPES.CAMPAIGN).length,
+      nbModules: this.items.filter(
+        ({ type }) => type === COMBINED_COURSE_ITEM_TYPES.MODULE || type === COMBINED_COURSE_ITEM_TYPES.FORMATION,
+      ).length,
+      nbModulesCompleted: this.items.filter(
+        ({ isCompleted, type }) => isCompleted && type === COMBINED_COURSE_ITEM_TYPES.MODULE,
+      ).length,
+      nbCampaignsCompleted: this.items.filter(
+        ({ isCompleted, type }) => isCompleted && type === COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+      ).length,
+    });
   }
 
   isCompleted(dataForQuest, recommendableModuleIds = [], recommendedModuleIdsForUser = []) {

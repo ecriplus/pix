@@ -4,7 +4,18 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourseParticipations, meta) {
   return new Serializer('combined-course-participations', {
-    attributes: ['firstName', 'lastName', 'status', 'createdAt', 'updatedAt'],
+    attributes: [
+      'firstName',
+      'lastName',
+      'status',
+      'createdAt',
+      'updatedAt',
+      'hasFormationItem',
+      'nbModules',
+      'nbCampaigns',
+      'nbModulesCompleted',
+      'nbCampaignsCompleted',
+    ],
     meta,
   }).serialize(combinedCourseParticipations);
 };

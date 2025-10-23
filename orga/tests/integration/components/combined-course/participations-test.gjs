@@ -12,12 +12,20 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       firstName: 'Marcelle',
       lastName: 'Labe',
       status: 'COMPLETED',
+      nbCampaigns: 3,
+      nbModules: 5,
+      nbCampaignsCompleted: 2,
+      nbModulesCompleted: 2,
     },
     {
       id: 234,
       firstName: 'Vincent',
       lastName: 'Deli',
       status: 'STARTED',
+      nbCampaigns: 2,
+      nbModules: 2,
+      nbCampaignsCompleted: 0,
+      nbModulesCompleted: 0,
     },
   ];
   participations.meta = { page: 1, pageSize: 1, rowCount: 2, pageCount: 2 };
@@ -56,6 +64,16 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         name: t('pages.combined-course.table.column.status'),
       }),
     );
+    assert.ok(
+      within(table).getByRole('columnheader', {
+        name: t('pages.combined-course.table.column.campaigns'),
+      }),
+    );
+    assert.ok(
+      within(table).getByRole('columnheader', {
+        name: t('pages.combined-course.table.column.modules'),
+      }),
+    );
   });
 
   test('it should display participation details', async function (assert) {
@@ -81,6 +99,61 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         name: t(`components.participation-status.${participations[0].status}`),
       }),
     );
+    assert.ok(
+      within(table).getByText(
+        t('pages.combined-course.table.campaign-completion', {
+          count: participations[0].nbCampaignsCompleted,
+          nbCampaigns: participations[0].nbCampaigns,
+        }),
+      ),
+    );
+    assert.ok(
+      within(table).getByText(
+        t('pages.combined-course.table.module-completion', {
+          count: participations[0].nbModulesCompleted,
+          nbModules: participations[0].nbModules,
+        }),
+      ),
+    );
+  });
+
+  test('it should display a dash when there is no module', async function (assert) {
+    // given
+    const participations = [
+      {
+        id: 123,
+        firstName: 'Marcelle',
+        lastName: 'Labe',
+        status: 'COMPLETED',
+        nbCampaigns: 1,
+        nbModules: 0,
+        nbCampaignsCompleted: 1,
+        nbModulesCompleted: 0,
+      },
+    ];
+
+    // when
+    const screen = await render(
+      <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+    );
+
+    const table = screen.getByRole('table');
+
+    // then
+    assert.ok(
+      within(table).getByText(
+        t('pages.combined-course.table.campaign-completion', {
+          count: participations[0].nbCampaignsCompleted,
+          nbCampaigns: participations[0].nbCampaigns,
+        }),
+      ),
+    );
+    assert.ok(
+      within(table).getByRole('cell', {
+        name: t('pages.combined-course.table.no-module'),
+      }),
+    );
+    ('');
   });
 
   test('it should display empty state', async function (assert) {
