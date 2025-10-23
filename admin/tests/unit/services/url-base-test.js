@@ -208,10 +208,10 @@ module('Unit | Service | url-base', function (hooks) {
   });
 
   module('Checks Pix website URLs and Paths', function () {
-    SUPPORTED_LOCALES.forEach(function (locale) {
-      test(`checks PIX_WEBSITE_ROOT_URLS manage all supported locales for ${locale}`, function (assert) {
+    SUPPORTED_LOCALES.forEach(function ({ value }) {
+      test(`checks PIX_WEBSITE_ROOT_URLS manage all supported locales for ${value}`, function (assert) {
         // given / when
-        const url = PIX_WEBSITE_ROOT_URLS[locale];
+        const url = PIX_WEBSITE_ROOT_URLS[value];
 
         // then
         assert.ok(url);
@@ -219,10 +219,10 @@ module('Unit | Service | url-base', function (hooks) {
     });
 
     Object.keys(PIX_WEBSITE_PATHS).forEach(function (pathKey) {
-      SUPPORTED_LOCALES.forEach(function (locale) {
-        test(`checks PIX_WEBSITE_PATHS.${pathKey} manage all supported locales for ${locale}`, function (assert) {
+      SUPPORTED_LOCALES.forEach(function ({ value }) {
+        test(`checks PIX_WEBSITE_PATHS.${pathKey} manage all supported locales for ${value}`, function (assert) {
           // given / when
-          const path = PIX_WEBSITE_PATHS[pathKey][locale];
+          const path = PIX_WEBSITE_PATHS[pathKey][value];
 
           // then
           assert.ok(path);

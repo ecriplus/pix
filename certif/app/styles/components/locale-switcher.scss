@@ -1,6 +1,10 @@
 .locale-switcher {
   width: fit-content;
 
+  .pix-select__dropdown {
+    max-height: 20rem;
+  }
+
   .pix-select-button__text {
     flex: 1;
     text-align: left;

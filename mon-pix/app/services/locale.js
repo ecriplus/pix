@@ -79,9 +79,9 @@ export default class LocaleService extends Service {
 
   get switcherDisplayedLocales() {
     return SUPPORTED_LOCALES.filter((locale) => locale.displayedInSwitcher)
-      .map((displayedLanguage) => ({
-        value: displayedLanguage.value,
-        label: displayedLanguage.nativeName,
+      .map((displayedLocale) => ({
+        value: displayedLocale.value,
+        label: displayedLocale.nativeName,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
   }

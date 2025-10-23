@@ -17,7 +17,7 @@ export default class LocaleSwitcher extends Component {
 
   constructor() {
     super(...arguments);
-    this.selectedLocale = this.args.defaultValue || this.locale.currentLanguage;
+    this.selectedLocale = this.locale.currentLocale;
   }
 
   @action
@@ -39,7 +39,7 @@ export default class LocaleSwitcher extends Component {
       @id="locale-switcher"
       @iconName="globe"
       @value={{this.selectedLocale}}
-      @options={{this.locale.switcherDisplayedLanguages}}
+      @options={{this.locale.switcherDisplayedLocales}}
       @onChange={{this.onChange}}
       @hideDefaultOption="true"
       @screenReaderOnly="true"
