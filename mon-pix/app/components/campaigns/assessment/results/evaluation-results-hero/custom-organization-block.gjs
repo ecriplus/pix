@@ -47,8 +47,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
     <div class="evaluation-results-hero__organization-block">
       {{#if @campaign.customResultPageText}}
         <MarkdownToHtml
-          class="evaluation-results-hero-organization-block__message"
-          @isInline={{true}}
+          @class="evaluation-results-hero-organization-block__message"
           @markdown={{@campaign.customResultPageText}}
         />
       {{/if}}
@@ -58,6 +57,7 @@ export default class EvaluationResultsCustomOrganizationBlock extends Component 
           class="evaluation-results-hero-organization-block__link"
           @href={{this.customButtonUrl}}
           @variant="primary"
+          @size="large"
           onclick={{this.handleCustomButtonClick}}
         >
           {{@campaign.customResultPageButtonText}}

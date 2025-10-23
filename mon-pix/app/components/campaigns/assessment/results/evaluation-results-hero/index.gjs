@@ -316,14 +316,14 @@ export default class EvaluationResultsHero extends Component {
         {{#if @campaignParticipationResult.acquiredBadges.length}}
           <AcquiredBadges @acquiredBadges={{@campaignParticipationResult.acquiredBadges}} />
         {{/if}}
-      </div>
 
-      {{#if this.showCustomOrganizationBlock}}
-        <CustomOrganizationBlock
-          @campaign={{@campaign}}
-          @campaignParticipationResult={{@campaignParticipationResult}}
-        />
-      {{/if}}
+        {{#if this.showCustomOrganizationBlock}}
+          <CustomOrganizationBlock
+            @campaign={{@campaign}}
+            @campaignParticipationResult={{@campaignParticipationResult}}
+          />
+        {{/if}}
+      </div>
 
       {{#if (or @campaignParticipationResult.canRetry @campaignParticipationResult.canReset)}}
         <RetryOrResetBlock @campaign={{@campaign}} @campaignParticipationResult={{@campaignParticipationResult}} />
