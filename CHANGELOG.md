@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.240.0](https://github.com/1024pix/pix/compare/v5.239.0...v5.240.0) (2025-10-23)
+
+### :rocket: Amélioration
+
+- [#13922](https://github.com/1024pix/pix/pull/13922) Afficher les locales dans le locale switcher sur Certif, Orga et Admin (PIX-19701) 
+- [#13958](https://github.com/1024pix/pix/pull/13958) Déplace le bouton de fin de campagne personnalisé (PIX-19976) 
+- [#13953](https://github.com/1024pix/pix/pull/13953) Masquer es et es-419 dans le locale switcher (PIX-20087) 
+- [#13951](https://github.com/1024pix/pix/pull/13951) Migrer les leçons `lesson` des modules multi sections en leçons courte `short-lesson` (PIX-20068)(PIX-20042). 
+- [#13962](https://github.com/1024pix/pix/pull/13962) Suppression de la normalisation des props optionnelles des POI (PIX-20108) 
+
+### :building_construction: Tech
+
+- [#13941](https://github.com/1024pix/pix/pull/13941) :wastebasket: Supprime des utilisation de `hasComplementaryReferential` devenu inutile (PIX-20074) 
+- [#13964](https://github.com/1024pix/pix/pull/13964) Mettre à jour la dépendance webcomponent 
+- [#13957](https://github.com/1024pix/pix/pull/13957) Récupérer Ember Inspector sur Pix Orga.  
+- [#13954](https://github.com/1024pix/pix/pull/13954) Remplir la colonne referenceId quand on insère et on met à jour des participations de type combined-course ou passages (PIX-20059)
+
 # [5.239.0](https://github.com/1024pix/pix/compare/v5.238.0...v5.239.0) (2025-10-22)
 
 ### :rocket: Amélioration
