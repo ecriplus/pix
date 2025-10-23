@@ -1,13 +1,15 @@
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { knex } from '../../../../../knex-database-connection.js';
 
-export const createCertificationVersion = ({ databaseBuilder }) => {
+export const createCertificationVersion = async ({ databaseBuilder }) => {
   _createExpiredVersion({ databaseBuilder });
-  _createActiveVersion({ databaseBuilder });
+  const version = _createActiveVersion({ databaseBuilder });
+  await _createActiveVersionChallenges({ databaseBuilder, version });
 };
 
 const _createActiveVersion = ({ databaseBuilder }) => {
-  databaseBuilder.factory.buildCertificationVersion({
+  const version = databaseBuilder.factory.buildCertificationVersion({
     scope: Frameworks.CORE,
     startDate: new Date('2024-10-19'),
     expirationDate: null,
@@ -16,6 +18,8 @@ const _createActiveVersion = ({ databaseBuilder }) => {
     competencesScoringConfiguration,
     challengesConfiguration,
   });
+
+  return version;
 };
 
 const _createExpiredVersion = ({ databaseBuilder }) => {
@@ -34,6 +38,25 @@ const _createExpiredVersion = ({ databaseBuilder }) => {
       variationPercent: 0.3,
     },
   });
+};
+
+const _createActiveVersionChallenges = async ({ databaseBuilder, version }) => {
+  const challenges = await knex('learningcontent.challenges')
+    .where('status', 'validé')
+    .whereRaw('?=ANY(??)', ['fr', 'locales'])
+    .limit(50);
+
+  const challengeIds = challenges.map((challenge) => challenge.id);
+
+  for (const challengeId of challengeIds) {
+    databaseBuilder.factory.buildCertificationFrameworksChallenge({
+      challengeId,
+      versionId: version.id,
+      version: '202001010900',
+      discriminant: 2.1,
+      difficulty: 1,
+    });
+  }
 };
 
 const challengesConfiguration = {
