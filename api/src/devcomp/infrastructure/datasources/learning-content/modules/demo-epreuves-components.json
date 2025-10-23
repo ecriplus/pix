@@ -969,7 +969,6 @@
                 "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
-                  "aspectRatio": 1.84,
                   "titleLevel": 2,
                   "type": "image",
                   "randomSlides": false,
