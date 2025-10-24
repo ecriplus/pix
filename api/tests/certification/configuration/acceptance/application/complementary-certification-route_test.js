@@ -643,29 +643,26 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history', function () {
-    it('should return the framework history for given complementaryCertificationKey', async function () {
+    it('should return the framework history for given complementaryCertificationKey ordered by start date descending', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2024-01-11'),
+      const olderVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2024-01-11'),
       });
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2025-01-11'),
+      const newerVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2025-01-11'),
       });
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: otherComplementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2023-01-11'),
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: otherComplementaryCertification.key,
+        startDate: new Date('2023-01-11'),
       });
 
       await databaseBuilder.commit();
@@ -686,7 +683,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'framework-histories',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          history: ['20250111000000', '20240111000000'],
+          history: [newerVersion.id, olderVersion.id],
         },
       });
     });

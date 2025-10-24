@@ -118,6 +118,17 @@ export async function update({ version }) {
   await knexConn('certification_versions').where({ id: version.id }).update({ expirationDate: version.expirationDate });
 }
 
+/**
+ * @param {Object} params
+ * @param {Frameworks} params.scope
+ * @returns {Promise<Array<number>>}
+ */
+export async function getFrameworkHistory({ scope }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('certification_versions').where({ scope }).orderBy('startDate', 'desc').pluck('id');
+}
+
 const _toDomain = ({
   id,
   scope,

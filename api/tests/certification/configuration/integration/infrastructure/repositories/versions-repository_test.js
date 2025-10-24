@@ -235,4 +235,56 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       });
     });
   });
+
+  describe('#getFrameworkHistory', function () {
+    it('should return an empty array when there is no framework history', async function () {
+      // given
+      const scope = Frameworks.PIX_PLUS_DROIT;
+
+      // when
+      const frameworkHistory = await versionsRepository.getFrameworkHistory({ scope });
+
+      // then
+      expect(frameworkHistory).to.deep.equal([]);
+    });
+
+    it('should return the framework history ordered by start date descending', async function () {
+      // given
+      const scope = Frameworks.PIX_PLUS_DROIT;
+      const otherScope = Frameworks.CLEA;
+
+      const version1 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2024-03-15'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      const version2 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2025-06-21'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      const version3 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2026-01-01'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: otherScope,
+        startDate: new Date('2025-06-21'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const frameworkHistory = await versionsRepository.getFrameworkHistory({ scope });
+
+      // then
+      expect(frameworkHistory).to.deep.equal([version3.id, version2.id, version1.id]);
+    });
+  });
 });

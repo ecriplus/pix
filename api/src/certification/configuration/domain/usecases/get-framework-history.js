@@ -1,17 +1,13 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
- * @typedef {import ('./index.js').ConsolidatedFrameworkRepository} ConsolidatedFrameworkRepository
+ * @typedef {import ('./index.js').VersionsRepository} VersionsRepository
  */
 
 /**
  * @param {Object} params
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
- * @param {ConsolidatedFrameworkRepository} params.consolidatedFrameworkRepository
+ * @param {VersionsRepository} params.versionsRepository
  */
-export const getFrameworkHistory = async ({ complementaryCertificationKey, consolidatedFrameworkRepository }) => {
-  const frameworkHistory = await consolidatedFrameworkRepository.getFrameworkHistory({
-    complementaryCertificationKey,
-  });
-
-  return frameworkHistory;
+export const getFrameworkHistory = async ({ complementaryCertificationKey, versionsRepository }) => {
+  return versionsRepository.getFrameworkHistory({ scope: complementaryCertificationKey });
 };
