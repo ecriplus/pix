@@ -1,28 +1,42 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
- * @typedef {import ('./index.js').ConsolidatedFrameworkRepository} ConsolidatedFrameworkRepository
+ * @typedef {import ('./index.js').FrameworkChallengesRepository} FrameworkChallengesRepository
  * @typedef {import ('./index.js').LearningContentRepository} LearningContentRepository
+ * @typedef {import ('./index.js').VersionsRepository} VersionsRepository
  */
+
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
  * @param {Object} params
  * @param {ComplementaryCertificationKeys} params.complementaryCertificationKey
- * @param {ConsolidatedFrameworkRepository} params.consolidatedFrameworkRepository
+ * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository
  * @param {LearningContentRepository} params.learningContentRepository
+ * @param {VersionsRepository} params.versionsRepository
  */
 export const getCurrentConsolidatedFramework = async ({
   complementaryCertificationKey,
-  consolidatedFrameworkRepository,
+  frameworkChallengesRepository,
   learningContentRepository,
+  versionsRepository,
 }) => {
-  const currentConsolidatedFramework =
-    await consolidatedFrameworkRepository.getCurrentFrameworkByComplementaryCertificationKey({
-      complementaryCertificationKey,
-    });
+  const activeVersion = await versionsRepository.findActiveByScope({ scope: complementaryCertificationKey });
 
-  const frameworkAreas = await learningContentRepository.getFrameworkReferential({
-    challengeIds: currentConsolidatedFramework.challenges.map(({ challengeId }) => challengeId),
+  if (!activeVersion) {
+    throw new NotFoundError(`There is no framework for complementary ${complementaryCertificationKey}`);
+  }
+
+  const frameworkChallenges = await frameworkChallengesRepository.getByVersionId({
+    versionId: activeVersion.id,
   });
 
-  return { ...currentConsolidatedFramework, areas: frameworkAreas };
+  const frameworkAreas = await learningContentRepository.getFrameworkReferential({
+    challengeIds: frameworkChallenges.challenges.map(({ challengeId }) => challengeId),
+  });
+
+  return {
+    scope: activeVersion.scope,
+    versionId: activeVersion.id,
+    areas: frameworkAreas,
+  };
 };

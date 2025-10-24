@@ -509,12 +509,20 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       await mockLearningContent(learningContentObjects);
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+
+      const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2023-01-11'),
+        expirationDate: null,
+      });
+
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         complementaryCertificationKey: complementaryCertification.key,
         challengeId: 'rec123',
         discriminant: 2.1,
         difficulty: 3.4,
         createdAt: new Date('2023-01-11'),
+        versionId: certificationVersion.id,
       });
 
       await databaseBuilder.commit();
@@ -535,7 +543,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'certification-consolidated-frameworks',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          version: '20230111000000',
+          version: String(certificationVersion.id),
         },
         relationships: {
           areas: {
