@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.241.0](https://github.com/1024pix/pix/compare/v5.240.0...v5.241.0) (2025-10-24)
+
+### :rocket: Amélioration
+
+- [#13901](https://github.com/1024pix/pix/pull/13901) Afficher la progression des campagnes et modules sur les participations (PIX-19630) 
+- [#13960](https://github.com/1024pix/pix/pull/13960) Cache le bouton "Quitter" sur la page de récap d'un module si une url de redirection est passée (PIX-20109) 
+- [#13842](https://github.com/1024pix/pix/pull/13842) Dupliquer la donnée de la table combined course participations vers organization learner participations (PIX-19913) 
+- [#13952](https://github.com/1024pix/pix/pull/13952) Enregistrer l'id de l'orga parente, lors de la création d'une orga fille (PIX-20023) 
+- [#13893](https://github.com/1024pix/pix/pull/13893) Intégrer le formulaire de connexion dans le nouveau layout (PIX-19801) 
+- [#13946](https://github.com/1024pix/pix/pull/13946) Pix Admins : migrer la gestion de complementaire en millesime (PIX-20029) 
+
+### :building_construction: Tech
+
+- [#13961](https://github.com/1024pix/pix/pull/13961) Créer le feature toogle pour la nouvelle nav modulix (PIX-20101) 
+- [#13976](https://github.com/1024pix/pix/pull/13976) Mettre à jour la table oidc-providers pour gérer du SSO pour chaque application de manière générique (PIX-20119) 
+- [#13955](https://github.com/1024pix/pix/pull/13955) Récupérer Ember Inspector sur Pix App.  
+- [#13959](https://github.com/1024pix/pix/pull/13959) Unification des methodes de récupération des challenges de certification (PIX-19933). 
+
+### :arrow_up: Montée de version
+
+- [#13949](https://github.com/1024pix/pix/pull/13949) Update actions/setup-node action to v6 (workflows) 
+- [#13968](https://github.com/1024pix/pix/pull/13968) Update dependency @1024pix/pix-ui to ^55.30.0 (admin) 
+- [#13969](https://github.com/1024pix/pix/pull/13969) Update dependency @1024pix/pix-ui to ^55.30.0 (certif) 
+- [#13971](https://github.com/1024pix/pix/pull/13971) Update dependency @1024pix/pix-ui to ^55.30.0 (junior) 
+- [#13978](https://github.com/1024pix/pix/pull/13978) Update dependency @1024pix/pix-ui to ^55.30.0 (orga) 
+- [#13942](https://github.com/1024pix/pix/pull/13942) Update dependency ember-source to ~6.8.0 (junior) 
+- [#13966](https://github.com/1024pix/pix/pull/13966) Update dependency eslint-plugin-unicorn to v61 (audit-logger)
+
 # [5.240.0](https://github.com/1024pix/pix/compare/v5.239.0...v5.240.0) (2025-10-23)
 
 ### :rocket: Amélioration
