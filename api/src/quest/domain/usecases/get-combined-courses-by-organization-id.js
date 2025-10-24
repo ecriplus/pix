@@ -14,7 +14,7 @@ export default async ({ organizationId, combinedCourseRepository, combinedCourse
 
   return combinedCourses.map((combinedCourse) => {
     combinedCourse.participations = allCombinedCourseParticipations.filter(
-      (participation) => participation.questId === combinedCourse.questId,
+      (participation) => participation.combinedCourseId === combinedCourse.id,
     );
     return combinedCourse;
   });

@@ -133,24 +133,27 @@ export const update = async function ({ combinedCourseParticipation, combinedCou
  */
 export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
   const knexConnection = DomainTransaction.getConnection();
-  const queryBuilder = knexConnection('combined_courses')
+  const queryBuilder = knexConnection('organization_learner_participations')
     .select(
-      'combined_course_participations.id',
+      'organization_learner_participations.id',
       'firstName',
       'lastName',
-      'combined_course_participations.status',
-      'combined_course_participations.questId',
+      'organization_learner_participations.status',
       'organizationLearnerId',
-      'combined_course_participations.createdAt',
-      'combined_course_participations.updatedAt',
+      'organization_learner_participations.createdAt',
+      'organization_learner_participations.updatedAt',
+      'organization_learner_participations.referenceId',
     )
-    .join('combined_course_participations', 'combined_courses.questId', 'combined_course_participations.questId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations.organizationLearnerId',
     )
-    .whereIn('combined_courses.id', combinedCourseIds)
+    .whereIn(
+      'organization_learner_participations.referenceId',
+      combinedCourseIds.map((combinedCourseId) => combinedCourseId.toString()),
+    )
+    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE)
     .orderBy([
       { column: 'lastName', order: 'asc' },
       { column: 'firstName', order: 'asc' },

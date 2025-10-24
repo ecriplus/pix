@@ -46,7 +46,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       const participation = participations[0];
 
       expect(participation.combinedCourseParticipationsCombinedCourseId).equal(combinedCourseId.toString());
-      expect(participation.combinedCourseParticipationStatus).equal(CombinedCourseParticipationStatuses.STARTED);
+      expect(participation.combinedCourseParticipationStatus).equal(OrganizationLearnerParticipationStatuses.STARTED);
       expect(participation.type).equal(OrganizationLearnerParticipationTypes.COMBINED_COURSE);
       expect(participation.combinedCourseParticipationsOrganizationLearnerId).equal(organizationLearnerId);
     });
@@ -58,7 +58,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId,
         combinedCourseId,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
       await databaseBuilder.commit();
@@ -73,7 +73,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
       expect(participations).to.have.lengthOf(1);
       expect(participations[0].organizationLearnerId).to.deep.equal(organizationLearnerId);
-      expect(participations[0].status).to.deep.equal(CombinedCourseParticipationStatuses.COMPLETED);
+      expect(participations[0].status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
       expect(participations[0].referenceId).to.deep.equal(combinedCourseId.toString());
     });
   });
@@ -312,7 +312,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         combinedCourseParticipationFromDB.organizationLearnerId,
       );
       expect(updatedParticipation.questId).to.equal(combinedCourseParticipationFromDB.questId);
-      expect(updatedParticipation.status).to.deep.equal(CombinedCourseParticipationStatuses.COMPLETED);
+      expect(updatedParticipation.status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
       expect(updatedParticipation.updatedAt).to.deep.equal(now);
     });
 
@@ -448,18 +448,14 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
   describe('#findByCombinedCourseIds', function () {
     it('should return a paginated list of participations for given quest IDs', async function () {
       // given
-      const {
-        id: combinedCourseId1,
-        questId: questId1,
-        organizationId,
-      } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId1, organizationId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI1',
       });
-      const { id: combinedCourseId2, questId: questId2 } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId2 } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI2',
         organizationId,
       });
-      const { questId: questId3, id: combinedCourseId3 } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId3 } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI3',
       });
 
@@ -474,24 +470,24 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         organizationId,
       });
 
-      const participation1 = databaseBuilder.factory.buildCombinedCourseParticipation({
+      const participation1 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: learner1.id,
-        questId: questId1,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
         combinedCourseId: combinedCourseId1,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
-      const participation2 = databaseBuilder.factory.buildCombinedCourseParticipation({
+      const participation2 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: learner2.id,
-        questId: questId2,
-        status: CombinedCourseParticipationStatuses.STARTED,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
         combinedCourseId: combinedCourseId2,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
       // Participation that should not be included
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId: learner1.id,
-        questId: questId3,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
         combinedCourseId: combinedCourseId3,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
 
       await databaseBuilder.commit();
@@ -512,25 +508,23 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(combinedCourseParticipations).deep.equal([
         {
           id: participation1.id,
+          combinedCourseId: combinedCourseId1,
           firstName: learner1.firstName,
           lastName: learner1.lastName,
-          status: CombinedCourseParticipationStatuses.COMPLETED,
+          status: OrganizationLearnerParticipationStatuses.COMPLETED,
           createdAt: participation1.createdAt,
           updatedAt: participation1.updatedAt,
           organizationLearnerId: learner1.id,
-          questId: questId1,
-          organizationLearnerParticipationId: null,
         },
         {
           id: participation2.id,
+          combinedCourseId: combinedCourseId2,
           firstName: learner2.firstName,
           lastName: learner2.lastName,
-          status: CombinedCourseParticipationStatuses.STARTED,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           createdAt: participation2.createdAt,
           updatedAt: participation2.updatedAt,
           organizationLearnerId: learner2.id,
-          questId: questId2,
-          organizationLearnerParticipationId: null,
         },
       ]);
     });
@@ -554,18 +548,14 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
     it('should return the second page of participations for a given questId', async function () {
       // given
-      const {
-        id: combinedCourseId1,
-        questId: questId1,
-        organizationId,
-      } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId1, organizationId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI1',
       });
-      const { id: combinedCourseId2, questId: questId2 } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId2 } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI2',
         organizationId,
       });
-      const { id: combinedCourseId3, questId: questId3 } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId3 } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBI3',
       });
 
@@ -580,24 +570,24 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         organizationId,
       });
 
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
         organizationLearnerId: learner1.id,
-        questId: questId1,
         combinedCourseId: combinedCourseId1,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
       });
-      const participation2 = databaseBuilder.factory.buildCombinedCourseParticipation({
+      const participation2 = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
         organizationLearnerId: learner2.id,
-        questId: questId2,
         combinedCourseId: combinedCourseId2,
-        status: CombinedCourseParticipationStatuses.STARTED,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
       // Participation that should not be included
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
         organizationLearnerId: learner1.id,
-        questId: questId3,
         combinedCourseId: combinedCourseId3,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
       });
       await databaseBuilder.commit();
 
@@ -616,14 +606,13 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       expect(combinedCourseParticipations).deep.equal([
         {
           id: participation2.id,
+          combinedCourseId: combinedCourseId2,
           firstName: learner2.firstName,
           lastName: learner2.lastName,
-          status: CombinedCourseParticipationStatuses.STARTED,
-          organizationLearnerParticipationId: null,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           createdAt: participation2.createdAt,
           updatedAt: participation2.updatedAt,
           organizationLearnerId: learner2.id,
-          questId: questId2,
         },
       ]);
     });
