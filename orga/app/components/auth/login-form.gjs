@@ -203,7 +203,6 @@ class NewLoginForm extends Component {
         name="login"
         {{on "input" this.updateLogin}}
         @value={{this.login}}
-        type="email"
         placeholder={{t "pages.login-form.email.placeholder"}}
         @validationStatus={{this.validation.login.status}}
         @errorMessage={{t this.validation.login.error}}
