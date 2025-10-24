@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import { concat } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -25,7 +26,11 @@ export default class ModuleSectionTitle extends Component {
   }
 
   <template>
-    <div class="module-preview-passage-content-section" {{didInsert this.focusAndScroll}}>
+    <div
+      id={{concat "section_" @sectionType}}
+      class="module-preview-passage-content-section"
+      {{didInsert this.focusAndScroll}}
+    >
       <PixIcon @name={{this.sectionTitleIcon @sectionType}} @ariaHidden={{true}} />
       <h2>{{this.sectionTitle @sectionType}}</h2>
     </div>
