@@ -54,7 +54,7 @@ module('Unit | Adapters | organization', function (hooks) {
       const expectedPayload = {
         data: { 'target-profile-ids': ['123', '456'] },
       };
-      const expectedUrl = `http://localhost:3000/api/admin/organizations/${organizationId}/attach-target-profiles`;
+      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/organizations/${organizationId}/attach-target-profiles`;
 
       // when
       await adapter.attachTargetProfile({ organizationId, targetProfileIds: ['123', '456'] });
@@ -77,9 +77,27 @@ module('Unit | Adapters | organization', function (hooks) {
       // then
       assert.true(
         adapter.ajax.calledOnceWithExactly(
-          'http://localhost:3000/api/admin/organizations/2/attach-child-organization',
+          `${ENV.APP.API_HOST}/api/admin/organizations/2/attach-child-organization`,
           'POST',
           { data: { childOrganizationIds } },
+        ),
+      );
+    });
+  });
+
+  module('#detachChildOrganizationFromParent', function () {
+    test('sends an HTTP POST request', async function (assert) {
+      // given
+      const childOrganizationId = '1234';
+
+      // when
+      await adapter.detachChildOrganizationFromParent({ childOrganizationId });
+
+      // then
+      assert.true(
+        adapter.ajax.calledOnceWithExactly(
+          `${ENV.APP.API_HOST}/api/admin/organizations/1234/detach-parent-organization`,
+          'POST',
         ),
       );
     });
