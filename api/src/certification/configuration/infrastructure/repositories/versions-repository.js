@@ -1,14 +1,18 @@
+/**
+ * @typedef {import('../../../shared/domain/models/Frameworks.js').Frameworks} Frameworks
+ * @typedef {import('../../domain/models/Version.js').Version} Version
+ * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
+ */
+import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Version } from '../../domain/models/Version.js';
 
 /**
  * @param {Object} params
- * @param {import('../../../shared/domain/models/Frameworks.js').Frameworks} params.scope
- * @param {Date} params.reconciliationDate
- * @returns {Promise<Version>}
+ * @param {Frameworks} params.scope
+ * @returns {Promise<Version|null>}
  */
-export const getByScopeAndReconciliationDate = async ({ scope, reconciliationDate }) => {
+export async function findActiveByScope({ scope }) {
   const knexConn = DomainTransaction.getConnection();
 
   const versionData = await knexConn('certification_versions')
@@ -23,19 +27,65 @@ export const getByScopeAndReconciliationDate = async ({ scope, reconciliationDat
       'challengesConfiguration',
     )
     .where({ scope })
-    .andWhere('startDate', '<=', reconciliationDate)
-    .andWhere((queryBuilder) => {
-      queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', reconciliationDate);
-    })
-    .orderBy('startDate', 'desc')
+    .whereNull('expirationDate')
     .first();
 
   if (!versionData) {
-    throw new NotFoundError('No certification framework version found for the given scope and reconciliationDate');
+    return null;
   }
 
   return _toDomain(versionData);
-};
+}
+
+/**
+ * @param {Object} params
+ * @param {Version} params.version
+ * @param {Array<Challenge>} params.challenges
+ * @returns {Promise<number>} versionId
+ */
+export async function create({ version, challenges }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const [{ id }] = await knexConn('certification_versions')
+    .insert({
+      scope: version.scope,
+      startDate: version.startDate,
+      expirationDate: version.expirationDate,
+      assessmentDuration: version.assessmentDuration,
+      globalScoringConfiguration: version.globalScoringConfiguration
+        ? JSON.stringify(version.globalScoringConfiguration)
+        : null,
+      competencesScoringConfiguration: version.competencesScoringConfiguration
+        ? JSON.stringify(version.competencesScoringConfiguration)
+        : null,
+      challengesConfiguration: JSON.stringify(version.challengesConfiguration),
+    })
+    .returning('id');
+
+  const challengesDTO = challenges.map((challenge) => ({
+    complementaryCertificationKey: version.scope,
+    challengeId: challenge.id,
+    version: String(id),
+    versionId: id,
+  }));
+
+  await knex
+    .batchInsert('certification-frameworks-challenges', challengesDTO)
+    .transacting(knexConn.isTransaction ? knexConn : null);
+
+  return id;
+}
+
+/**
+ * @param {Object} params
+ * @param {Version} params.version
+ * @returns {Promise<void>}
+ */
+export async function update({ version }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  await knexConn('certification_versions').where({ id: version.id }).update({ expirationDate: version.expirationDate });
+}
 
 const _toDomain = ({
   id,

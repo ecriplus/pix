@@ -11,6 +11,7 @@ import * as centerRepository from '../../infrastructure/repositories/center-repo
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
 import * as consolidatedFrameworkRepository from '../../infrastructure/repositories/consolidated-framework-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
+import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
 
 /**
  *
@@ -28,6 +29,7 @@ import * as learningContentRepository from '../../infrastructure/repositories/le
  * @typedef {tubeRepository} TubeRepository
  * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
+ * @typedef {versionsRepository} VersionsRepository
  **/
 const dependencies = {
   activeCalibratedChallengeRepository,
@@ -42,11 +44,12 @@ const dependencies = {
   tubeRepository,
   flashAlgorithmConfigurationRepository,
   sharedFlashAlgorithmConfigurationRepository,
+  versionsRepository,
 };
 
 import { calibrateConsolidatedFramework } from './calibrate-consolidated-framework.js';
 import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
-import { createConsolidatedFramework } from './create-consolidated-framework.js';
+import { createCertificationVersion } from './create-certification-version.js';
 import { createFlashAssessmentConfiguration } from './create-flash-assessment-configuration.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
@@ -59,7 +62,7 @@ import { searchAttachableTargetProfiles } from './search-attachable-target-profi
 const usecasesWithoutInjectedDependencies = {
   calibrateConsolidatedFramework,
   catchingUpCandidateReconciliation,
-  createConsolidatedFramework,
+  createCertificationVersion,
   createFlashAssessmentConfiguration,
   exportScoWhitelist,
   findComplementaryCertifications,
