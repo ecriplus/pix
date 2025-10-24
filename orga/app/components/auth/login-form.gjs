@@ -94,6 +94,12 @@ class NewLoginForm extends Component {
     }
   }
 
+  get pixAppForgottenPasswordUrlWithEmail() {
+    const url = new URL(this.url.pixAppForgottenPasswordUrl);
+    if (this.login) url.searchParams.set('email', this.login);
+    return url.toString();
+  }
+
   @action
   updatePassword(event) {
     this.password = event.target.value?.trim();
@@ -222,7 +228,7 @@ class NewLoginForm extends Component {
         </PixInputPassword>
         <a
           class="link link--grey link--underlined pix-body-s"
-          href="{{this.url.pixAppForgottenPasswordUrl}}"
+          href="{{this.pixAppForgottenPasswordUrlWithEmail}}"
           target="_blank"
           rel="noopener noreferrer"
         >
