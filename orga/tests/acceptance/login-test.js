@@ -79,7 +79,7 @@ module('Acceptance | Login', function (hooks) {
       const screen = await visit('/connexion');
 
       // when
-      await fillByLabel(t('pages.login-form.email'), user.email);
+      await fillByLabel(t('pages.login-form.email.label'), user.email);
       await fillByLabel(t('pages.login-form.password'), 'secret');
       await clickByName(t('pages.login-form.login'));
 
@@ -152,7 +152,7 @@ module('Acceptance | Login', function (hooks) {
       const screen = await visit('/connexion');
 
       // when
-      await fillByLabel(t('pages.login-form.email'), user.email);
+      await fillByLabel(t('pages.login-form.email.label'), user.email);
       await fillByLabel(t('pages.login-form.password'), 'secret');
       await clickByName(t('pages.login-form.login'));
 

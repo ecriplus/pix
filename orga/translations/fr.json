@@ -1058,13 +1058,19 @@
       "organization-code": "UAI/RNE de l'établissement"
     },
     "login": {
-      "title": "Connectez-vous"
+      "title": "Connectez-vous",
+      "with-pix-account": "avec votre compte Pix"
     },
     "login-form": {
-      "active-or-retrieve": "Vous êtes personnel de direction ou directeur d'école ? Activez ou devenez l'administrateur de l'espace Pix Orga de votre établissement scolaire",
-      "email": "Adresse e-mail",
+      "active-or-retrieve": "Activez ou devenez l'administrateur de l'espace Pix Orga de votre établissement scolaire",
+      "admin-role-question": "Vous êtes personnel de direction ou directeur d'école ?",
+      "email": {
+        "label": "Adresse e-mail",
+        "placeholder": "ex: jean.dupont@email.com"
+      },
       "errors": {
-        "empty-password": "Le champ mot de passe est obligatoire.",
+        "empty-email": "Votre adresse e-mail n’est pas renseignée.",
+        "empty-password": "Votre mot de passe n’est pas renseigné.",
         "invalid-email": "Votre adresse e-mail n’est pas valide.",
         "should-change-password": "Vous avez actuellement un mot de passe temporaire. Cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser.",
         "status": {

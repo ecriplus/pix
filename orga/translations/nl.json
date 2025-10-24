@@ -1058,13 +1058,19 @@
       "organization-code": "UAI/RNE van de instelling"
     },
     "login": {
-      "title": "Inloggen"
+      "title": "Inloggen",
+      "with-pix-account": "met uw Pix-account"
     },
     "login-form": {
-      "active-or-retrieve": "Are you a headteacher? Activate or become the administrator of your school's Pix Orga space",
-      "email": "E-mailadres",
+      "active-or-retrieve": "Activeer of word beheerder van de Pix Orga-ruimte van uw school.",
+      "admin-role-question": "Bent u een schoolhoofd?",
+      "email": {
+        "label": "E-mailadres",
+        "placeholder": "b.v. jan.jansen@email.com"
+      },
       "errors": {
-        "empty-password": "Het veld wachtwoord is verplicht.",
+        "empty-email": "Uw e-mailadres is niet ingevuld.",
+        "empty-password": "Uw wachtwoord is niet ingevoerd.",
         "invalid-email": "Je e-mailadres is ongeldig.",
         "should-change-password": "Je hebt momenteel een tijdelijk wachtwoord. Klik op '<'a href=\"{url}\"'>'wachtwoord vergeten'</a>' om het opnieuw in te stellen.",
         "status": {
