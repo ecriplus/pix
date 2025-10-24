@@ -30,29 +30,57 @@ module('Acceptance | join', function (hooks) {
 
   module('When prescriber tries to go on join page', function () {
     module('when organization-invitation exists', function () {
-      test('remains on join page', async function (assert) {
-        // given
-        const code = 'ABCDEFGH01';
-        const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
-        const organizationInvitationId = server.create('organizationInvitation', {
-          organizationId,
-          email: 'random@email.com',
-          status: 'pending',
-          code,
-        }).id;
+      module('when new authentication design is enabled', function () {
+        test('remains on join page and displays AuthenticationLayout component', async function (assert) {
+          // given
+          const code = 'ABCDEFGH01';
+          server.create('feature-toggle', {
+            id: 0,
+            usePixOrgaNewAuthDesign: true,
+          });
+          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
+          const organizationInvitationId = server.create('organizationInvitation', {
+            organizationId,
+            email: 'random@email.com',
+            status: 'pending',
+            code,
+          }).id;
 
-        // when
-        await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+          // when
+          const screen = await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
 
-        // then
-        assert.strictEqual(currentURL(), `/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
-        assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is still unauthenticated');
+          // then
+          assert.strictEqual(currentURL(), `/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+          assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is still unauthenticated');
+          assert.ok(screen.getByText('Vous êtes invité(e) à rejoindre :'));
+        });
+      });
+
+      module('when new authentication design is disabled', function () {
+        test('remains on join page and displays LoginOrRegister component', async function (assert) {
+          // given
+          const code = 'ABCDEFGH01';
+          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
+          const organizationInvitationId = server.create('organizationInvitation', {
+            organizationId,
+            email: 'random@email.com',
+            status: 'pending',
+            code,
+          }).id;
+
+          // when
+          await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+
+          // then
+          assert.strictEqual(currentURL(), `/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+          assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is still unauthenticated');
+        });
       });
     });
     module(
       'When accessing the login page with "English" as selected language in url query params and select another language',
       function () {
-        test('remains on join page whithout the query params', async function (assert) {
+        test('remains on join page without the query params', async function (assert) {
           // given
           const code = 'ABCDEFGH01';
           const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
