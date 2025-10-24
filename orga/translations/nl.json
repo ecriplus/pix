@@ -1013,6 +1013,14 @@
     },
     "combined-course": {
       "campaigns": "{count, plural, =1 {Bekijk de details van de campagne} other {Bekijk de details van campagne nr. {index}}}",
+      "filters": {
+        "by-status": "Zoeken op deelnamestatus",
+        "status": {
+          "COMPLETED": "Voltooid",
+          "STARTED": "Bezig",
+          "placeholder": "Alle statuten"
+        }
+      },
       "introduction": "De leertrajecten bestaan uit een diagnose en leermodules, waardoor het onderwijs kan worden aangepast aan het werkelijke niveau van elke deelnemer.",
       "statistics": {
         "completed-participations": "Voltooide deelnames",

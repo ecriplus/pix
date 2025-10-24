@@ -9,3 +9,8 @@ export default class CombinedCourseParticipation extends Model {
   @attr('number') nbCampaignsCompleted;
   @attr('number') nbModulesCompleted;
 }
+
+export const COMBINED_COURSE_PARTICIPATION_STATUSES = {
+  STARTED: 'STARTED',
+  COMPLETED: 'COMPLETED',
+};
