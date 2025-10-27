@@ -1,9 +1,9 @@
-import { getCurrentConsolidatedFramework } from '../../../../../../src/certification/configuration/domain/usecases/get-current-consolidated-framework.js';
+import { getCurrentFrameworkVersion } from '../../../../../../src/certification/configuration/domain/usecases/get-current-framework-version.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Certification | Configuration | Unit | UseCase | get-current-consolidated-framework', function () {
+describe('Certification | Configuration | Unit | UseCase | get-current-framework-version', function () {
   let versionsRepository, frameworkChallengesRepository, learningContentRepository;
 
   beforeEach(function () {
@@ -20,11 +20,11 @@ describe('Certification | Configuration | Unit | UseCase | get-current-consolida
     };
   });
 
-  it('should return the current consolidated framework', async function () {
+  it('should return the current framework', async function () {
     // given
     const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
     const versionId = 123;
-    const version = domainBuilder.certification.configuration.buildConfigurationVersion({
+    const version = domainBuilder.certification.configuration.buildVersion({
       id: versionId,
       scope: complementaryCertificationKey,
     });
@@ -44,7 +44,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-consolida
     learningContentRepository.getFrameworkReferential.resolves([area]);
 
     // when
-    const results = await getCurrentConsolidatedFramework({
+    const results = await getCurrentFrameworkVersion({
       complementaryCertificationKey,
       versionsRepository,
       frameworkChallengesRepository,
@@ -74,7 +74,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-consolida
     versionsRepository.findActiveByScope.withArgs({ scope: complementaryCertificationKey }).resolves(null);
 
     // when
-    const error = await catchErr(getCurrentConsolidatedFramework)({
+    const error = await catchErr(getCurrentFrameworkVersion)({
       complementaryCertificationKey,
       versionsRepository,
       frameworkChallengesRepository,

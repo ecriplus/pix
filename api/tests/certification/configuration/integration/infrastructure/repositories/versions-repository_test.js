@@ -1,8 +1,8 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import * as versionsRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/versions-repository.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | Versions', function () {
@@ -34,7 +34,19 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       const versionId = await versionsRepository.create({ version, challenges: [challenge1, challenge2] });
 
       // then
-      const results = await knex('certification_versions').where({ scope: version.scope }).first();
+      const results = await knex('certification_versions')
+        .select(
+          'id',
+          'scope',
+          'startDate',
+          'expirationDate',
+          'assessmentDuration',
+          'globalScoringConfiguration',
+          'competencesScoringConfiguration',
+          'challengesConfiguration',
+        )
+        .where({ scope: version.scope })
+        .first();
 
       expect(results).to.deep.equal({
         id: versionId,
@@ -53,15 +65,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
 
       expect(linkedChallenges).to.have.lengthOf(2);
       expect(linkedChallenges[0]).to.include({
-        complementaryCertificationKey: version.scope,
         challengeId: challenge1.id,
-        version: String(versionId),
         versionId,
       });
       expect(linkedChallenges[1]).to.include({
-        complementaryCertificationKey: version.scope,
         challengeId: challenge2.id,
-        version: String(versionId),
         versionId,
       });
     });

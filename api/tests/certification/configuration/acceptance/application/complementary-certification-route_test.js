@@ -310,16 +310,15 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(certificationVersion.startDate).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')
-        .select('discriminant', 'difficulty', 'challengeId', 'complementaryCertificationKey', 'versionId')
+        .select('discriminant', 'difficulty', 'challengeId', 'versionId')
         .where({
-          complementaryCertificationKey: complementaryCertification.key,
+          versionId: certificationVersion.id,
         });
       expect(consolidatedFramework).to.deep.equal([
         {
           discriminant: null,
           difficulty: null,
           challengeId: challenge.id,
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: certificationVersion.id,
         },
       ]);
@@ -388,17 +387,15 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(newVersion.startDate).to.be.instanceOf(Date);
       expect(newVersion.startDate.getTime()).to.equal(oldVersion.expirationDate.getTime());
 
-      const consolidatedFramework = await knex('certification-frameworks-challenges')
-        .select('challengeId', 'complementaryCertificationKey', 'versionId')
+      const frameworkChallenges = await knex('certification-frameworks-challenges')
+        .select('challengeId', 'versionId')
         .where({
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: newVersion.id,
         });
 
-      expect(consolidatedFramework).to.deep.equal([
+      expect(frameworkChallenges).to.deep.equal([
         {
           challengeId: challenge.id,
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: newVersion.id,
         },
       ]);
@@ -482,7 +479,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
-    it('should return the current consolidated framework for given complementaryCertificationKey', async function () {
+    it('should return the current framework for given complementaryCertificationKey', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 

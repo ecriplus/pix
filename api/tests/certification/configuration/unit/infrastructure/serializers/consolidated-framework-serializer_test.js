@@ -5,7 +5,7 @@ import { domainBuilder } from '../../../../../tooling/domain-builder/domain-buil
 
 describe('Certification | Configuration | Unit | Serializer | consolidated-framework-serializer', function () {
   describe('#serialize', function () {
-    it('should serialize a consolidated framework to JSONAPI', function () {
+    it('should serialize a framework to JSONAPI', function () {
       // given
       const versionId = 123;
       const scope = ComplementaryCertificationKeys.PIX_PLUS_DROIT;

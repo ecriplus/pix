@@ -47,27 +47,27 @@ const dependencies = {
   versionsRepository,
 };
 
-import { calibrateConsolidatedFramework } from './calibrate-consolidated-framework.js';
+import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
 import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
 import { createCertificationVersion } from './create-certification-version.js';
 import { createFlashAssessmentConfiguration } from './create-flash-assessment-configuration.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
-import { getCurrentConsolidatedFramework } from './get-current-consolidated-framework.js';
+import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 
 const usecasesWithoutInjectedDependencies = {
-  calibrateConsolidatedFramework,
+  calibrateFrameworkVersion,
   catchingUpCandidateReconciliation,
   createCertificationVersion,
   createFlashAssessmentConfiguration,
   exportScoWhitelist,
   findComplementaryCertifications,
   getActiveFlashAssessmentConfiguration,
-  getCurrentConsolidatedFramework,
+  getCurrentFrameworkVersion,
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,

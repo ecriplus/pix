@@ -120,7 +120,7 @@ const register = async function (server) {
             },
           }),
         },
-        handler: complementaryCertificationController.calibrateConsolidatedFramework,
+        handler: complementaryCertificationController.calibrateFrameworkVersion,
         tags: ['api', 'admin'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
@@ -149,7 +149,7 @@ const register = async function (server) {
             complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
           }),
         },
-        handler: complementaryCertificationController.getCurrentConsolidatedFramework,
+        handler: complementaryCertificationController.getCurrentFrameworkVersion,
         tags: ['api', 'admin'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec un rôle Super Admin, Certif, Support ou Métier',

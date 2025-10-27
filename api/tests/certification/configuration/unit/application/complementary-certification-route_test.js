@@ -110,7 +110,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         sinon
           .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
           .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(complementaryCertificationController, 'calibrateConsolidatedFramework').returns('ok');
+        sinon.stub(complementaryCertificationController, 'calibrateFrameworkVersion').returns('ok');
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -123,7 +123,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
 
         // then
         expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(complementaryCertificationController.calibrateConsolidatedFramework);
+        sinon.assert.notCalled(complementaryCertificationController.calibrateFrameworkVersion);
       });
     });
   });
@@ -135,7 +135,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         sinon
           .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
           .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(complementaryCertificationController, 'getCurrentConsolidatedFramework').returns('ok');
+        sinon.stub(complementaryCertificationController, 'getCurrentFrameworkVersion').returns('ok');
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -147,7 +147,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
 
         // then
         expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(complementaryCertificationController.getCurrentConsolidatedFramework);
+        sinon.assert.notCalled(complementaryCertificationController.getCurrentFrameworkVersion);
       });
     });
 
@@ -157,7 +157,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
         it('should return 200 HTTP status code', async function () {
           // given
           sinon.stub(securityPreHandlers, `checkAdminMemberHasRole${role}`).returns(true);
-          sinon.stub(complementaryCertificationController, 'getCurrentConsolidatedFramework').returns('ok');
+          sinon.stub(complementaryCertificationController, 'getCurrentFrameworkVersion').returns('ok');
 
           const httpTestServer = new HttpTestServer();
           await httpTestServer.register(moduleUnderTest);
@@ -170,7 +170,7 @@ describe('Certification | Configuration | Unit | Application | Router | compleme
 
           // then
           expect(response.statusCode).to.equal(200);
-          sinon.assert.calledOnce(complementaryCertificationController.getCurrentConsolidatedFramework);
+          sinon.assert.calledOnce(complementaryCertificationController.getCurrentFrameworkVersion);
         });
       });
     });

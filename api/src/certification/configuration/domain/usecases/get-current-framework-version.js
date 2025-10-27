@@ -14,7 +14,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
  * @param {LearningContentRepository} params.learningContentRepository
  * @param {VersionsRepository} params.versionsRepository
  */
-export const getCurrentConsolidatedFramework = async ({
+export const getCurrentFrameworkVersion = async ({
   complementaryCertificationKey,
   frameworkChallengesRepository,
   learningContentRepository,

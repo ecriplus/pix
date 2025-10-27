@@ -1,16 +1,16 @@
-import { calibrateConsolidatedFramework } from '../../../../../../src/certification/configuration/domain/usecases/calibrate-consolidated-framework.js';
+import { calibrateFrameworkVersion } from '../../../../../../src/certification/configuration/domain/usecases/calibrate-framework-version.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Certification | Configuration | Unit | UseCase | calibrate-consolidated-framework', function () {
+describe('Certification | Configuration | Unit | UseCase | calibrate-framework-version', function () {
   let frameworkChallengesRepository, activeCalibratedChallengeRepository, versionsRepository, version;
 
   beforeEach(async function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
 
-    version = domainBuilder.certification.configuration.buildConfigurationVersion({
+    version = domainBuilder.certification.configuration.buildVersion({
       scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
     });
 
@@ -68,7 +68,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         .resolves(activeCalibratedChallenges);
 
       // when
-      await calibrateConsolidatedFramework({
+      await calibrateFrameworkVersion({
         versionId,
         calibrationId,
         frameworkChallengesRepository,
@@ -126,7 +126,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         .resolves(activeCalibratedChallenges);
 
       // when
-      await calibrateConsolidatedFramework({
+      await calibrateFrameworkVersion({
         versionId,
         calibrationId,
         frameworkChallengesRepository,
@@ -182,7 +182,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-consolidate
         .resolves(activeCalibratedChallenges);
 
       // when
-      const error = await catchErr(calibrateConsolidatedFramework)({
+      const error = await catchErr(calibrateFrameworkVersion)({
         versionId,
         calibrationId,
         frameworkChallengesRepository,

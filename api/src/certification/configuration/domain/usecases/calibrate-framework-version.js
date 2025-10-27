@@ -10,7 +10,7 @@
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 
-export const calibrateConsolidatedFramework = withTransaction(
+export const calibrateFrameworkVersion = withTransaction(
   /**
    * @param {Object} params
    * @param {number} params.versionId

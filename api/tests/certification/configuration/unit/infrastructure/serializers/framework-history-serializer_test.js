@@ -2,7 +2,7 @@ import * as serializer from '../../../../../../src/certification/configuration/i
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('Certification | Configuration | Unit | Serializer | consolidated-framework-serializer', function () {
+describe('Certification | Configuration | Unit | Serializer | framework-history-serializer', function () {
   describe('#serialize', function () {
     it('should serialize a framework history to JSONAPI', function () {
       // given
