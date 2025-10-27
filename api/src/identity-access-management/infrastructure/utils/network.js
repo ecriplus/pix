@@ -6,6 +6,14 @@ const PIX_ORGA_APPLICATION_NAME = 'orga';
 const PIX_CERTIF_APPLICATION_NAME = 'certif';
 const PIX_JUNIOR_APPLICATION_NAME = 'junior';
 
+export const VALID_APPLICATIONS = [
+  PIX_APP_APPLICATION_NAME,
+  PIX_ADMIN_APPLICATION_NAME,
+  PIX_ORGA_APPLICATION_NAME,
+  PIX_CERTIF_APPLICATION_NAME,
+  PIX_JUNIOR_APPLICATION_NAME,
+];
+
 const localhostApplicationPortMapping = {
   4200: PIX_APP_APPLICATION_NAME,
   4201: PIX_ORGA_APPLICATION_NAME,
@@ -20,7 +28,7 @@ const localhostApplicationPortMapping = {
  * @param {Object} headers
  * @returns {string} an URL as a string
  */
-function getForwardedOrigin(headers) {
+export function getForwardedOrigin(headers) {
   const protoHeader = headers['x-forwarded-proto'];
   const hostHeader = headers['x-forwarded-host'];
   if (!protoHeader || !hostHeader) {
@@ -30,7 +38,7 @@ function getForwardedOrigin(headers) {
   return `${_getHeaderFirstValue(protoHeader)}://${_getHeaderFirstValue(hostHeader)}`;
 }
 
-class RequestedApplication {
+export class RequestedApplication {
   /**
    * @param {string} applicationName
    */
@@ -96,7 +104,7 @@ class RequestedApplication {
   }
 }
 
-class ForwardedOriginError extends HttpErrors.BadRequestError {
+export class ForwardedOriginError extends HttpErrors.BadRequestError {
   constructor(message) {
     super(message);
   }
@@ -105,5 +113,3 @@ class ForwardedOriginError extends HttpErrors.BadRequestError {
 function _getHeaderFirstValue(headerValue) {
   return headerValue.split(',')[0];
 }
-
-export { ForwardedOriginError, getForwardedOrigin, RequestedApplication };
