@@ -36,7 +36,7 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
       const clock = sinon.useFakeTimers({ now: new Date('2025-10-21T10:00:00Z'), toFake: ['Date'] });
       const scope = Frameworks.PIX_PLUS_PRO_SANTE;
 
-      const currentVersion = domainBuilder.certification.configuration.buildConfigurationVersion({
+      const currentVersion = domainBuilder.certification.configuration.buildVersion({
         id: 123,
         scope,
         startDate: new Date('2024-01-01'),
