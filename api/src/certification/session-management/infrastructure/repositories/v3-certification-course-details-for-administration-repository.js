@@ -1,7 +1,6 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
-import { getMostRecentBeforeDate } from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import { V3CertificationChallengeForAdministration } from '../../domain/models/V3CertificationChallengeForAdministration.js';
 import { V3CertificationChallengeLiveAlertForAdministration } from '../../domain/models/V3CertificationChallengeLiveAlertForAdministration.js';
 import { V3CertificationCourseDetailsForAdministration } from '../../domain/models/V3CertificationCourseDetailsForAdministration.js';
@@ -56,10 +55,6 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
     })
     .first();
 
-  const { maximumAssessmentLength: numberOfChallenges } = await getMostRecentBeforeDate(
-    certificationCourseDTO.createdAt,
-  );
-
   const certificationChallengesDetailsDTO = await knex
     .select({
       challengeId: 'certification-challenges.challengeId',
@@ -81,10 +76,10 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
     })
     .orderBy('certification-challenges.createdAt', 'asc');
 
-  return _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO, numberOfChallenges });
+  return _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO });
 };
 
-function _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO, numberOfChallenges }) {
+function _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO }) {
   const certificationChallengesForAdministration = certificationChallengesDetailsDTO.map(
     (certificationChallengeDetailsDTO) =>
       new V3CertificationChallengeForAdministration({
@@ -101,7 +96,7 @@ function _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certifica
 
   return new V3CertificationCourseDetailsForAdministration({
     ...certificationCourseDTO,
-    numberOfChallenges,
+    numberOfChallenges: null,
     certificationChallengesForAdministration,
   });
 }

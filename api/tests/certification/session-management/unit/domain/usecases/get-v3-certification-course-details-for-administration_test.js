@@ -3,7 +3,7 @@ import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerS
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-certification-course-details-for-administration', function () {
-  it('should return the details with the associated competence name', async function () {
+  it('should return the details with the associated competence name and number of challenges', async function () {
     // given
     const certificationCourseId = '1234';
     const challengeId = 'challenge1';
@@ -13,6 +13,9 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
     const skillName = 'skillName';
     const competenceName = 'competenceName';
     const competenceIndex = '1.2';
+    const reconciledAt = new Date(2024, 1, 15);
+    const scope = 'scope';
+    const numberOfChallenges = 64;
 
     const v3CertificationCourseDetailsForAdministrationRepository = {
       getV3DetailsByCertificationCourseId: sinon.stub(),
@@ -20,6 +23,18 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
 
     const competenceRepository = {
       list: sinon.stub(),
+    };
+
+    const certificationCandidateRepository = {
+      getByCertificationCourseId: sinon.stub(),
+    };
+
+    const sharedCertificationCourseRepository = {
+      getCertificationScope: sinon.stub(),
+    };
+
+    const evaluationVersionRepository = {
+      getByScopeAndReconciliationDate: sinon.stub(),
     };
 
     const competences = [
@@ -40,8 +55,19 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
 
     const expectedDetails = domainBuilder.buildV3CertificationCourseDetailsForAdministration({
       certificationCourseId,
+      numberOfChallenges: null,
       certificationChallengesForAdministration: [challengeForAdministration],
     });
+
+    const candidate = domainBuilder.buildCertificationCandidate({
+      reconciledAt,
+    });
+
+    const version = {
+      challengesConfiguration: {
+        maximumAssessmentLength: numberOfChallenges,
+      },
+    };
 
     v3CertificationCourseDetailsForAdministrationRepository.getV3DetailsByCertificationCourseId
       .withArgs({ certificationCourseId })
@@ -49,16 +75,30 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
 
     competenceRepository.list.resolves(competences);
 
+    certificationCandidateRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(candidate);
+
+    sharedCertificationCourseRepository.getCertificationScope
+      .withArgs({ courseId: certificationCourseId })
+      .resolves(scope);
+
+    evaluationVersionRepository.getByScopeAndReconciliationDate
+      .withArgs({ scope, reconciliationDate: reconciledAt })
+      .resolves(version);
+
     // when
     const details = await getV3CertificationCourseDetailsForAdministration({
       certificationCourseId,
       v3CertificationCourseDetailsForAdministrationRepository,
       competenceRepository,
+      certificationCandidateRepository,
+      sharedCertificationCourseRepository,
+      evaluationVersionRepository,
     });
 
     // then
     expect(details).to.deep.equal({
       ...expectedDetails,
+      numberOfChallenges,
       certificationChallengesForAdministration: [
         {
           ...challengeForAdministration,

@@ -401,16 +401,24 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     let server;
 
     beforeEach(async function () {
-      certificationCourse = databaseBuilder.factory.buildCertificationCourse({ version: 3 });
-      databaseBuilder.factory.buildCertificationConfiguration({
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: 'CORE',
+        startDate: new Date('2020-01-01'),
+        expirationDate: null,
         challengesConfiguration: {
           maximumAssessmentLength: 10,
         },
-        startingAt: new Date('2020-01-01'),
       });
 
       const user = await insertUserWithRoleSuperAdmin();
+      const session = databaseBuilder.factory.buildSession();
+      certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+        version: 3,
+        sessionId: session.id,
+        userId: user.id,
+      });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
+        sessionId: session.id,
         userId: user.id,
         certificationCourse,
       }));
