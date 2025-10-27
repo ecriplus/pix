@@ -140,7 +140,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Un</span>"
+                    "content": "<p><span>Un</span></p>"
                   },
                   {
                     "input": "pixname",
@@ -164,7 +164,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>a utilisé la&nbsp;</span>"
+                    "content": "<p><span>a utilisé la&nbsp;</span></p>"
                   },
                   {
                     "input": "pixtext",
@@ -186,7 +186,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>pour pousser Marie à fournir ses&nbsp;</span>"
+                    "content": "<p><span>pour pousser Marie à fournir ses&nbsp;</span></p>"
                   },
                   {
                     "input": "pixpai",
@@ -209,7 +209,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>et valider un</span>"
+                    "content": "<p><span>et valider un</span></p>"
                   },
                   {
                     "input": "pixten",
@@ -330,6 +330,36 @@
                         }
                       ],
                       "solution": "2"
+                    },
+                    {
+                      "id": "11b429bb-558b-48d4-926b-cc9c45b63c28",
+                      "type": "custom",
+                      "instruction": "<p>Voici deux versions de ce message.&nbsp;<br>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
+                      "tagName": "image-quiz",
+                      "props": {
+                        "name": "Message facture",
+                        "multiple": false,
+                        "maxChoicesPerLine": 2,
+                        "hideChoicesName": false,
+                        "orderChoices": true,
+                        "imageChoicesSize": "large",
+                        "choices": [
+                          {
+                            "name": "message 1",
+                            "image": {
+                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a1.png"
+                            },
+                            "response": ""
+                          },
+                          {
+                            "name": "message 2",
+                            "image": {
+                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a2.png"
+                            },
+                            "response": ""
+                          }
+                        ]
+                      }
                     }
                   ]
                 },
