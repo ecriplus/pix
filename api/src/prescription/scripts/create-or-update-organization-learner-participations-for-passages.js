@@ -103,7 +103,8 @@ class CreateOrUpdateOrganizationLearnerParticipationsForPassages extends Script 
             .from('organization_learner_participations')
             .where({ type: OrganizationLearnerParticipationTypes.PASSAGE })
             .whereNotNull('referenceId');
-        });
+        })
+        .whereNotNull('view-active-organization-learners.userId');
       logger.info(
         `create-or-update-organization-learner-participations-for-passages | organizationLearnerWithoutPassagesOnCombinedCourse to process : ${organizationLearnerWithoutPassagesOnCombinedCourse.length}`,
       );
