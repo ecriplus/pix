@@ -348,15 +348,13 @@
                             "name": "message 1",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a1.png"
-                            },
-                            "response": ""
+                            }
                           },
                           {
                             "name": "message 2",
                             "image": {
                               "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a2.png"
-                            },
-                            "response": ""
+                            }
                           }
                         ]
                       }
