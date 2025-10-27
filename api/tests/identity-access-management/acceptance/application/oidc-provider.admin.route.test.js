@@ -28,7 +28,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
         {
           accessTokenLifespan: '7d',
           claimsToStore: 'email',
-          clientId: 'client-id-aqwzsxedcrfvtgbyhnuj,ikolp',
+          clientId: 'client-id-aqwzsxedcrfvtgbyhnuj-ikolp',
           clientSecret: 'client-secret-azertyuiopqsdfghjklmwxcvbn',
           enabled: false,
           enabledForPixAdmin: true,
@@ -56,6 +56,21 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       expect(response.statusCode).to.equal(204);
       const oidcProviders = await knex('oidc-providers').select();
       expect(oidcProviders).to.have.lengthOf(1);
+      expect(oidcProviders[0]).to.contain({
+        accessTokenLifespan: '7d',
+        claimsToStore: 'email',
+        clientId: 'client-id-aqwzsxedcrfvtgbyhnuj-ikolp',
+        enabled: false,
+        enabledForPixAdmin: true,
+        identityProvider: 'GOOGLE',
+        openidConfigurationUrl: 'https://accounts.google.com/.well-known/openid-configuration',
+        organizationName: 'Google',
+        redirectUri: 'https://redirect.uri/',
+        scope: 'openid profile email',
+        slug: 'google',
+        source: 'google',
+        isVisible: true,
+      });
     });
   });
 
