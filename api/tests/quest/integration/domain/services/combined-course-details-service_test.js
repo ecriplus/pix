@@ -4,6 +4,10 @@ import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import combinedCourseDetailsService from '../../../../../src/quest/domain/services/combined-course-details-service.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -193,7 +197,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       });
       databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
 
-      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -256,7 +260,12 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
         ],
       });
 
-      databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        organizationLearnerId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
 
       await databaseBuilder.commit();
 

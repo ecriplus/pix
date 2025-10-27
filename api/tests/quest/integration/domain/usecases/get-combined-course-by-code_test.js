@@ -1,9 +1,12 @@
-import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -134,7 +137,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         },
       ]);
       expect(result.id).to.equal(combinedCourseId);
-      expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
+      expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.NOT_STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
@@ -175,7 +178,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       });
       databaseBuilder.factory.buildPassage({ moduleId: moduleId1, userId, terminatedAt: new Date() });
 
-      const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
         successRequirements: [
@@ -238,7 +241,12 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         ],
       });
 
-      databaseBuilder.factory.buildCombinedCourseParticipation({ questId, organizationLearnerId });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      });
 
       await databaseBuilder.commit();
 
@@ -281,7 +289,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       ]);
       expect(result).to.be.instanceOf(CombinedCourse);
       expect(result.id).to.equal(combinedCourseId);
-      expect(result.status).to.equal(CombinedCourseStatuses.STARTED);
+      expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
@@ -382,7 +390,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const result = await usecases.getCombinedCourseByCode({ code, userId });
       expect(result).to.be.instanceOf(CombinedCourse);
       expect(result.id).to.equal(combinedCourseId);
-      expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
+      expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.NOT_STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
