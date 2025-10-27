@@ -77,21 +77,6 @@
               }
             }
           ]
-        },
-        {
-          "id": "fd80af1f-4e44-4200-b337-cf6f1abb9edc",
-          "type": "transition",
-          "title": "Transition 1",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "be27c10e-48ee-40cd-a7ed-83479ba36099",
-                "type": "text",
-                "content": "<p>Même en ouvrant l'œil, il est parfois difficile de savoir si une image ou une vidéo est vraie ou fausse.</p>"
-              }
-            }
-          ]
         }
       ]
     },
@@ -146,7 +131,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>En fait, ces trois personnes n'existent pas ! Avant, on pouvait facilement détecter les fausses images à cause de flous ou de détails ratés, mais c'est devenu très difficile.</p>"
+                  "diagnosis": "<p>En fait, ces trois personnes n'existent pas ! Avant, on pouvait facilement détecter les fausses images à cause de flous ou de détails ratés, mais aujourd'hui c'est devenu très difficile.</p>"
                 }
               }
             }
@@ -162,7 +147,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
-                "content": "<p>Ces 3 images sont&nbsp;<strong>hyperréalistes</strong>&nbsp;mais fausses&nbsp;: ce sont des deepfakes.    Les deepfakes peuvent être&nbsp;:&nbsp;</p><ul>    <li>        des vidéos▶️    </li>    <li> des images&nbsp;🖼️</li>    <li>        des sons&nbsp;🎙️    </li>    <li> des textes&nbsp;🗒️    </li></ul><p>    Les deepfakes, hypertrucages en français, sont créés&nbsp;<strong>grâce à l’intelligence artificielle</strong>. Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus&nbsp;<strong>difficile de reconnaître un deepfake </strong>!     </p><p>👂Parfois des indices peuvent vous mettre la puce à l’oreille&nbsp;: des doigts en trop, des mouvements étranges une voix qui se modifie par moment...&nbsp;</p><p>🔎 Mais,&nbsp;observer&nbsp;une image, une vidéo ou écouter attentivement un son<strong>&nbsp;n</strong><strong>e suffit pas pour détecter un deepfake.</strong></p>"
+                "content": "<p>Les deepfakes, hypertrucages en français, sont créés grâce à <strong>l’intelligence artificielle.</strong> Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake.</strong></p>"
               }
             }
           ]
@@ -223,7 +208,7 @@
               "element": {
                 "id": "cbe6027b-3113-4772-a81f-c44d381f9585",
                 "type": "text",
-                "content": "<p>Pour créer un deepfake, un logiciel d’intelligence artificielle <strong>n’a&nbsp;pas besoin de beaucoup d’informations</strong>&nbsp;en entrée (une photo, un son, une courte vidéo…).</p><p>    Par exemple, avec une photo et un enregistrement de quelques phrases, on peut fabriquer une vidéo d’une personne qui fait un discours. 🗣️</p><p>    ⚠️ Comme ils sont <strong>faciles à fabriquer</strong>, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p>"
+                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Simple à faire ne veux pas dire autorisé : il s'agit d'une pratique illégale."
               }
             }
           ]
@@ -264,34 +249,34 @@
                     {
                       "id": "eeb6ed38-d2d1-4191-8805-2100de5e128b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>🎭 Une vidéo d’une personne connue qui fait la danse des canards déguisée en hot dog.<br><br>Quel est le but du créateur de cette vidéo ?</p>",
+                      "instruction": "<p>🎭 Une vidéo d’un petit chien déguisé en hot dog.<br><br>Quel est le but du créateur de cette vidéo ?</p>",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>💸 Arnaquer.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante. Par contre, elle peut chercher à être virale et polluer ainsi l'espace numérique.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>😂 Amuser.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, cette vidéo est amusante, par contre elle peut enfreindre le droit à l'image.</p>"
+                            "diagnosis": "<p>Effectivement, cette vidéo est amusante, par contre elle peut polluer l'espace numérique.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>🧠 Manipuler.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut polluer l'espace numérique.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>😕 Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut enfreindre le droit à l'image.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut polluer l'espace numérique.</p>"
                           }
                         }
                       ],
@@ -393,7 +378,7 @@
               "element": {
                 "id": "d0540829-7feb-48c7-b621-fb99765d6720",
                 "type": "text",
-                "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces usages sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p>Cependant, ils sont aussi utilisés sans intention malveillante, dans l’art ou le divertissement, par exemple pour faire apparaître un acteur absent ou décédé dans un film.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, le <strong>droit à l’image</strong> doit être respecté.</p>"
+                "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces usages sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p>Cependant, ils sont aussi utilisés sans intention malveillante, dans l’art ou le divertissement.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, toute utilisation de l'image d'une personne sans son accord est <strong>interdite par la loi</strong>.</p>"
               }
             }
           ]
@@ -496,7 +481,7 @@
               "element": {
                 "id": "6d557df0-b390-43de-9115-5f693b7d123b",
                 "type": "text",
-                "content": "<p>Quand vous recevez un message avec un média surprenant (trop beau pour être vrai, énervant ou inquiétant),&nbsp;<strong>prenez le temps avant de le liker ou de le partager</strong>. C’est peut-être un deepfake !</p><p>                                    Si vous partagez un deepfake créé avec de mauvaises intentions, vous pouvez répandre de&nbsp;<strong>fausses informations</strong>&nbsp;ou participer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne.<br>👉 Cela peut aussi enfreindre le droit à l’image et mener à un dépôt de plainte contre vous.</p><p>                                    🔎&nbsp;<strong>Au moindre doute, ne partagez pas l'information. Mais vérifiez l'information et sa source.</strong></p>"
+                "content": "<p>Quand vous recevez un média surprenant (trop beau pour être vrai, choquant ou inquiétant),&nbsp;<strong>n’agissez pas trop vite :</strong>ne likez pas, ne partagez pas immédiatement. C’est peut-être un <strong>deepfake !</strong></p><p>Partagez un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne.</p><p>👉 Cela peut aussi violer le droit à l’image et entraîner à une plainte contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
               }
             }
           ]
@@ -517,7 +502,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<ul>    <li>Un deepfake est un <strong>média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle</strong>. Un deepfake est difficile à détecter. 🔎</li>    <li>Un deepfake demande peu de matériel et de compétence pour être créé. Il y en a donc<strong> beaucoup qui circulent</strong> en ligne. ⚠️</li>    <li>Un deepfake est <strong>souvent créé avec une intention malveillante</strong>&nbsp;: pour faire circuler de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li>    <li>Au moindre doute face à un média, il ne faut pas le partager immédiatement. <strong>Vérifiez d'abord sa source et s'il est vrai</strong>. ℹ️</li></ul><p><br>🤔 <strong>Bon à savoir&nbsp;:</strong><br>Pour limiter le risque de vous retrouver dans un deepfake, évitez de partager des vidéos, des images de vous ou des enregistrements de votre voix.</p>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être crée. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est crée avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
           ]
@@ -633,7 +618,7 @@
                   "author": "Rédaction locale",
                   "date": "14 mai 2025",
                   "paragraphs": [
-                    "Une vidéo diffusée ce matin montre la maire de la capitale, Claire Durand, déclarant : « Il faut faire de la place aux jeunes. À partir de l’an prochain, les personnes âgées n’auront plus accès aux parcs municipaux ».",
+                    "Une vidéo diffusée ce matin montre la maire de Jolieville, Coline Dupontneuf, déclarant : « Il faut faire de la place aux jeunes. À partir de l’an prochain, les personnes âgées n’auront plus accès aux parcs municipaux ».",
                     "Relayée massivement sur les réseaux, la séquence suscite de vives réactions, dénonçant des propos « discriminatoires ». Certains demandent la démission immédiate de la maire. Mais l’après-midi même, la mairie réagit : {{highlightedSentence}}, affirme le service communication. La vidéo a été retirée des réseaux sociaux, à la demande de la mairie. Une plainte a été déposée."
                   ],
                   "highlightedSentence": "« Il s’agit d’un deepfake »",
