@@ -46,8 +46,8 @@
                   "date": "Mars 2025",
                   "paragraphs": [
                     "{{highlightedSentence}}",
-                    "Un faux courriel se faisant passer pour le dirigeant a demandé un virement « urgent ». Une aide comptable a exécuté l’ordre vers un compte étranger. L’escroquerie n’a été découverte que plusieurs jours plus tard, rendant la récupération des fonds quasi impossible.",
-                    "Déjà fragilisée par la conjoncture, l’entreprise gèle certains investissements et réorganise son budget. La salariée impliquée a été licenciée pour faute grave, une décision qui divise en interne.",
+                    "Un faux courriel se faisant passer pour le dirigeant a demandé un virement « urgent ». Un aide comptable a exécuté l’ordre vers un compte étranger. L’escroquerie n’a été découverte que plusieurs jours plus tard, rendant la récupération des fonds quasi impossible.",
+                    "Déjà fragilisée par la conjoncture, l’entreprise gèle certains investissements et réorganise son budget. Le salarié impliqué a été licencié pour faute grave, une décision qui divise en interne.",
                     "Une enquête est ouverte. Les premiers éléments évoquent un spoofing d’adresse e‑mail. Ce cas rappelle l’importance de la vérification des ordres de paiement et de la sensibilisation aux fraudes ciblant les entreprises."
                   ],
                   "highlightedSentence": "L’entreprise agroalimentaire AgroDélices a subi une <strong>fraude au président</strong>, entraînant la perte de <strong>150 000 €</strong>.",
@@ -60,27 +60,27 @@
               "element": {
                 "id": "c9b08416-e55d-425e-bf06-5aa6c3250fa1",
                 "type": "qcu-discovery",
-                "instruction": "<p>De quelle faiblesse de l’entreprise les cyberattaquants ont-ils profité ?</p>",
+                "instruction": "<p>Quelle faille de l’entreprise les cyberattaquants ont-ils profité ?</p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Le réseau informatique de l’entreprise était mal sécurisé.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Ici, l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.</p>"
+                      "diagnosis": "<p>Eh non ! Ici, les attaquants n’ont pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, ils ont pu atteindre l’ensemble de l’entreprise.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Un clé usb vérolée a été branchée sur l’un des ordinateurs de l’entreprise.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Ici, l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.<br><br></p>"
+                      "diagnosis": "<p>Eh non ! Ici, les attaquants n’ont pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, ils ont pu atteindre l’ensemble de l’entreprise.<br></p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Une salariée a été bernée par un faux message du dirigeant de l’entreprise.</p>",
+                    "content": "<p>Un salarié a été berné par un faux message du dirigeant de l’entreprise.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement,&nbsp;l’attaquant n’a pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, il a pu atteindre l’ensemble de l’entreprise.</p>"
+                      "diagnosis": "<p>Effectivement,&nbsp;les attaquants n’ont pas profité d’une faille technique, mais d’une faille humaine. <br>En contactant une seule personne, ils ont pu atteindre l’ensemble de l’entreprise.</p>"
                     }
                   }
                 ],
@@ -140,7 +140,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Marie a été</span>"
+                    "content": "<p><span>Un</span></p>"
                   },
                   {
                     "input": "pixname",
@@ -157,15 +157,39 @@
                       "t3"
                     ],
                     "solutions": [
-                      "manipulée"
+                      "escroc",
+                      "cyberattaquant",
+                      "arnaqueur"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": "<span>pour fournir ses&nbsp;</span>"
+                    "content": "<p><span>a utilisé la&nbsp;</span></p>"
                   },
                   {
                     "input": "pixtext",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 14,
+                    "display": "inline",
+                    "placeholder": "taper ici",
+                    "ariaLabel": "taper ici",
+                    "defaultValue": "",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "manipulation"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>pour pousser Marie à fournir ses&nbsp;</span></p>"
+                  },
+                  {
+                    "input": "pixpai",
                     "type": "input",
                     "inputType": "text",
                     "size": 30,
@@ -185,30 +209,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>et valider un</span>"
-                  },
-                  {
-                    "input": "pixpai",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
-                    "display": "inline",
-                    "placeholder": "taper ici",
-                    "ariaLabel": "taper ici",
-                    "defaultValue": "",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "paiement",
-                      "virement"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<span>à un</span>"
+                    "content": "<p><span>et valider un</span></p>"
                   },
                   {
                     "input": "pixten",
@@ -225,9 +226,8 @@
                       "t3"
                     ],
                     "solutions": [
-                      "escroc",
-                      "cyberattaquant",
-                      "arnaqueur"
+                      "paiement",
+                      "virement"
                     ]
                   },
                   {
@@ -238,11 +238,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p>Effectivement,&nbsp;ici, l’attaquant ne force pas la <strong>victime </strong>: il la pousse à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                    "diagnosis": "<p>Effectivement,&nbsp;ici, l’attaquant ne force pas la <strong>victime </strong>: il la manipule pour la pousser à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p>Eh non !&nbsp;Ici, l’attaquant ne force pas la <strong>victime </strong>: il la pousse à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                    "diagnosis": "<p>Ici, l’attaquant ne force pas la <strong>victime </strong>: il la manipule pour la pousser à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
                   }
                 }
               }
@@ -305,7 +305,7 @@
                     {
                       "id": "b4345ed0-1a07-4fbb-beeb-3b13ed25bdec",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Lequel de ces deux messages vous donnerait le plus envie de cliquer rapidement ?</p>",
+                      "instruction": "<p>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -330,6 +330,34 @@
                         }
                       ],
                       "solution": "2"
+                    },
+                    {
+                      "id": "11b429bb-558b-48d4-926b-cc9c45b63c28",
+                      "type": "custom",
+                      "instruction": "<p>Voici deux versions de ce message.&nbsp;<br>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
+                      "tagName": "image-quiz",
+                      "props": {
+                        "name": "Message facture",
+                        "multiple": false,
+                        "maxChoicesPerLine": 2,
+                        "hideChoicesName": false,
+                        "orderChoices": true,
+                        "imageChoicesSize": "large",
+                        "choices": [
+                          {
+                            "name": "message 1",
+                            "image": {
+                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a1.png"
+                            }
+                          },
+                          {
+                            "name": "message 2",
+                            "image": {
+                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a2.png"
+                            }
+                          }
+                        ]
+                      }
                     }
                   ]
                 },
@@ -338,7 +366,7 @@
                     {
                       "id": "22b8c918-e299-4e77-8a1f-ff1124694636",
                       "type": "text",
-                      "content": "<p>Vous recevez un message sur un réseau social de la part d’un contact que vous connaissez vaguement. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>\"Salut, je suis vraiment en galère… Mon filleul est gravement malade, j’ai lancé une collecte pour financer sa prochaine opération. Si elle n’a pas lieu cette semaine, sa vie est en danger. Tu peux faire un don rapidement, on a besoin d’aide ! 🙏\"</li><li>\"Salut, je partage une collecte pour financer une opération pour mon filleul malade. Si ça te touche, tu peux consulter les infos sur le site et faire un don. 👌\"</li></ol>"
+                      "content": "<p>Vous recevez un message sur un réseau social de la part d’un contact que vous connaissez à peine. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>\"Salut, je suis vraiment en galère… Mon filleul est gravement malade, j’ai lancé une collecte pour financer sa prochaine opération. Si elle n’a pas lieu cette semaine, sa vie est en danger. Tu peux faire un don rapidement, on a besoin d’aide ! 🙏\"</li><li>\"Salut, je partage une collecte pour financer une opération pour mon filleul malade. Si ça te touche, tu peux consulter les infos sur le site et faire un don. 👌\"</li></ol>"
                     },
                     {
                       "id": "d01441a1-c767-4797-954e-83bcb9f07ee1",
@@ -641,7 +669,7 @@
               "element": {
                 "id": "97dbd631-143c-4904-8ecd-785b5b7384c1",
                 "type": "text",
-                "content": "<ul><li>Les attaques par ingénierie sociale exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>. L’attaquant pousse la victime à <strong>agir volontairement</strong>.</li><li>Dans certains cas, l’attaquant manipule <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><li>Ces attaques reposent sur des mécanismes de <strong>manipulation </strong>qui exploitent des <strong>biais cognitifs</strong> pour influencer nos décisions.</li><li>Ces attaques peuvent prendre plusieurs formes&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
+                "content": "<ul>    <li>Les attaques par ingénierie sociale exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>. L’attaquant pousse la victime à <strong>agir volontairement</strong>.</li><br>    <li>Dans certains cas, l’attaquant manipule <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><br>    <li>Ces attaques reposent sur des mécanismes de <strong>manipulation </strong>qui exploitent des <strong>biais cognitifs</strong> pour influencer nos décisions.<br></li><br>    <li>Ces attaques peuvent prendre plusieurs formes&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
               }
             }
           ]
