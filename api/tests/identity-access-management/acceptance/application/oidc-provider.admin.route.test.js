@@ -26,13 +26,15 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const payload = [
         {
+          application: 'orga',
+          applicationTld: '.org',
           accessTokenLifespan: '7d',
           claimsToStore: 'email',
           clientId: 'client-id-aqwzsxedcrfvtgbyhnuj-ikolp',
           clientSecret: 'client-secret-azertyuiopqsdfghjklmwxcvbn',
           enabled: false,
           enabledForPixAdmin: true,
-          identityProvider: 'GOOGLE',
+          identityProvider: 'GOOGLE-ORGA',
           openidConfigurationUrl: 'https://accounts.google.com/.well-known/openid-configuration',
           organizationName: 'Google',
           redirectUri: 'https://redirect.uri/',
@@ -40,6 +42,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
           slug: 'google',
           source: 'google',
           isVisible: true,
+          connectionMethodCode: 'GOOGLE',
         },
       ];
       const options = {
@@ -57,12 +60,14 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       const oidcProviders = await knex('oidc-providers').select();
       expect(oidcProviders).to.have.lengthOf(1);
       expect(oidcProviders[0]).to.contain({
+        application: 'orga',
+        applicationTld: '.org',
         accessTokenLifespan: '7d',
         claimsToStore: 'email',
         clientId: 'client-id-aqwzsxedcrfvtgbyhnuj-ikolp',
         enabled: false,
         enabledForPixAdmin: true,
-        identityProvider: 'GOOGLE',
+        identityProvider: 'GOOGLE-ORGA',
         openidConfigurationUrl: 'https://accounts.google.com/.well-known/openid-configuration',
         organizationName: 'Google',
         redirectUri: 'https://redirect.uri/',
@@ -70,6 +75,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
         slug: 'google',
         source: 'google',
         isVisible: true,
+        connectionMethodCode: 'GOOGLE',
       });
     });
   });

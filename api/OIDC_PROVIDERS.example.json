@@ -1,5 +1,7 @@
 [
   {
+    "application": "app",
+    "applicationTld": ".fr",
     "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-A",
     "organizationName": "OIDC Example A from file",
     "scope": "openid profile",
@@ -13,6 +15,8 @@
     "redirectUri": "https://app.dev.pix.org/connexion/file-a-oidc-example-net"
   },
   {
+    "application": "app",
+    "applicationTld": ".org",
     "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-B",
     "organizationName": "OIDC Example B from file",
     "scope": "openid profile",
@@ -25,8 +29,26 @@
     "openidConfigurationUrl": "https://file-b.oidc.example.net/.well-known/openid-configuration",
     "redirectUri": "https://app.dev.pix.org/connexion/file-b-oidc-example-net"
    },
+   {
+    "application": "orga",
+    "applicationTld": ".org",
+    "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-B-ORGA",
+    "organizationName": "OIDC Example B from file",
+    "scope": "openid profile",
+    "slug": "file-b-oidc-example-net",
+    "source": "file-b-oidc-example-net",
+    "clientId": "b-XXX",
+    "clientSecret": "b-YYY",
+    "connectionMethodCode": "OIDC_EXAMPLE_NET_FROM_FILE-B",
+    "accessTokenLifespan": "48h",
+    "enabled": true,
+    "openidConfigurationUrl": "https://file-b.oidc.example.net/.well-known/openid-configuration",
+    "redirectUri": "https://app.dev.pix.org/connexion/file-b-oidc-example-net"
+   },
   {
     "identityProvider": "OIDC_EXAMPLE_NET_FROM_FILE-C",
+    "application": "app",
+    "applicationTld": ".org",
     "organizationName": "OIDC Example C from file",
     "scope": "openid profile",
     "slug": "file-c-oidc-example-net",

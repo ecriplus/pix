@@ -6,10 +6,13 @@
  * @param {Object} params
  * @param {string} params.accessTokenLifespan
  * @param {Object} params.additionalRequiredProperties
+ * @param {string} params.application
+ * @param {string} params.applicationTld
  * @param {Object} params.claimMapping
  * @param {string} params.claimsToStore
  * @param {string} params.clientId
  * @param {string} params.clientSecret
+ * @param {string} params.connectionMethodCode
  * @param {boolean} params.enabled
  * @param {boolean} params.enabledForPixAdmin
  * @param {Object} params.extraAuthorizationUrlParameters
@@ -31,10 +34,13 @@
 const addOidcProvider = async function ({
   accessTokenLifespan,
   additionalRequiredProperties,
+  application,
+  applicationTld,
   claimMapping,
   claimsToStore,
   clientId,
   clientSecret,
+  connectionMethodCode,
   enabled,
   enabledForPixAdmin,
   extraAuthorizationUrlParameters,
@@ -56,10 +62,13 @@ const addOidcProvider = async function ({
   addOidcProviderValidator.validate({
     accessTokenLifespan,
     additionalRequiredProperties,
+    application,
+    applicationTld,
     claimMapping,
     claimsToStore,
     clientId,
     clientSecret,
+    connectionMethodCode,
     enabled,
     enabledForPixAdmin,
     extraAuthorizationUrlParameters,
@@ -81,9 +90,12 @@ const addOidcProvider = async function ({
   await oidcProviderRepository.create({
     accessTokenLifespan,
     additionalRequiredProperties,
+    application,
+    applicationTld,
     claimMapping,
     claimsToStore,
     clientId,
+    connectionMethodCode,
     enabled,
     enabledForPixAdmin,
     encryptedClientSecret,

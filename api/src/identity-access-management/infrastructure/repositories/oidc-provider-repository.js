@@ -14,9 +14,12 @@ const OIDC_PROVIDERS_TABLE_NAME = 'oidc-providers';
  * @param {Object} oidcProviderProperties
  * @param {string} oidcProviderProperties.accessTokenLifespan
  * @param {Object} oidcProviderProperties.additionalRequiredProperties
+ * @param {string} oidcProviderProperties.application
+ * @param {string} oidcProviderProperties.applicationTld
  * @param {Object} oidcProviderProperties.claimMapping
  * @param {string} oidcProviderProperties.claimsToStore
  * @param {string} oidcProviderProperties.clientId
+ * @param {string} oidcProviderProperties.connectionMethodCode
  * @param {boolean} oidcProviderProperties.enabled
  * @param {boolean} oidcProviderProperties.enabledForPixAdmin
  * @param {string} oidcProviderProperties.encryptedClientSecret
