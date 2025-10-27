@@ -16,7 +16,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
     frameworkChallengesRepository = {
       getByVersionId: sinon.stub(),
-      save: sinon.stub(),
+      update: sinon.stub(),
     };
 
     activeCalibratedChallengeRepository = {
@@ -77,7 +77,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       });
 
       // then
-      expect(frameworkChallengesRepository.save).to.have.been.calledOnceWith(frameworkChallenges);
+      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(frameworkChallenges);
     });
   });
 
@@ -135,7 +135,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       });
 
       // then
-      expect(frameworkChallengesRepository.save).to.have.been.calledOnceWith(frameworkChallenges);
+      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(frameworkChallenges);
     });
   });
 

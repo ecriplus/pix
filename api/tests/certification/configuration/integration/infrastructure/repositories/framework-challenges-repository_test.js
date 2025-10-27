@@ -78,7 +78,7 @@ describe('Certification | Configuration | Integration | Repository | framework-c
     });
   });
 
-  describe('#save', function () {
+  describe('#update', function () {
     it('should update framework challenges with calibration data', async function () {
       // given
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
@@ -121,7 +121,7 @@ describe('Certification | Configuration | Integration | Repository | framework-c
       });
 
       // when
-      await frameworkChallengesRepository.save(frameworkChallenges);
+      await frameworkChallengesRepository.update(frameworkChallenges);
 
       // then
       const updatedChallenges = await knex('certification-frameworks-challenges')

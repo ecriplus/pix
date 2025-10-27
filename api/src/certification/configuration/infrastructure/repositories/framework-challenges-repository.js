@@ -28,7 +28,7 @@ export async function getByVersionId({ versionId }) {
  * @param {FrameworkChallenges} frameworkChallenges
  * @returns {Promise<void>}
  */
-export async function save(frameworkChallenges) {
+export async function update(frameworkChallenges) {
   const knexConn = DomainTransaction.getConnection();
 
   for (const { discriminant, difficulty, challengeId } of frameworkChallenges.challenges) {

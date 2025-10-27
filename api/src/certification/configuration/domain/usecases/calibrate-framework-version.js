@@ -40,7 +40,7 @@ export const calibrateFrameworkVersion = withTransaction(
       activeCalibratedChallenges,
     });
 
-    return frameworkChallengesRepository.save(frameworkChallenges);
+    return frameworkChallengesRepository.update(frameworkChallenges);
   },
 );
 
