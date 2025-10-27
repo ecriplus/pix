@@ -565,7 +565,7 @@
               "element": {
                 "id": "c28617dd-2134-4551-8157-b7beef89ab35",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, pourquoi y a-t-il une différence entre les réponses de ChatPT 3 et de ChatGPT 4o ?</p>",
+                "instruction": "<p>À votre avis, pourquoi y a-t-il une différence entre les réponses de ChatGPT 3 et de ChatGPT 4o ?</p>",
                 "proposals": [
                   {
                     "id": "1",
