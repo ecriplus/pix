@@ -9,13 +9,13 @@ import { EntityValidationError } from '../../../../shared/domain/errors.js';
 export class FrameworkChallenges {
   static #schema = Joi.object({
     versionId: Joi.number().integer().required(),
-    challenges: Joi.array().optional(),
+    challenges: Joi.array().required(),
   });
 
   /**
    * @param {Object} params
    * @param {number} params.versionId
-   * @param {Array<CertificationFrameworksChallenge>} [params.challenges]
+   * @param {Array<CertificationFrameworksChallenge>} params.challenges
    */
   constructor({ versionId, challenges = [] }) {
     this.versionId = versionId;
