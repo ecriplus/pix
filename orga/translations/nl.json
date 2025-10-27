@@ -1029,7 +1029,11 @@
         },
         "description": "List of the combined course participations",
         "module-completion": "{count, plural, =0 {geen module voltooid op {nbModules}} =1 {1 van de {nbModules} modules voltooid} other {{count} van de {nbModules} modules voltooid}}.",
-        "no-module": "Geen aanbevolen module."
+        "no-module": "Geen aanbevolen module.",
+        "tooltip": {
+          "campaigns-column": "'x / y' geeft de voortgang van de deelnemer aan: hij/zij heeft x campagnes voltooid van een totaal van y. Bijvoorbeeld: 1/2 betekent dat hij/zij 1 campagne van de 2 heeft voltooid.",
+          "modules-column": "'x / y' geeft de voortgang van de deelnemer aan: hij/zij heeft x modules voltooid van een totaal van y. Het totale aantal modules verschilt per persoon, afhankelijk van de persoonlijke aanbevelingen."
+        }
       }
     },
     "combined-courses": {

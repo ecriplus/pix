@@ -1029,7 +1029,11 @@
         },
         "description": "Listes des participations au parcours",
         "module-completion": "{count, plural, =0 {Aucun module complété sur {nbModules}} =1 {Un module complété sur {nbModules}} other {{count} modules complétés sur {nbModules}}}.",
-        "no-module": "Aucun module recommandé."
+        "no-module": "Aucun module recommandé.",
+        "tooltip": {
+          "campaigns-column": "'x / y' indique la progression du participant : il a terminé x campagnes sur un total de y. Par exemple, 1/2 signifie qu’il a terminé 1 campagne sur 2.",
+          "modules-column": "'x / y' indique la progression du participant : il a terminé x modules sur un total de y. Le total de modules diffère pour chacun, en fonction des recommandations personnalisées."
+        }
       }
     },
     "combined-courses": {

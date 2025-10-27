@@ -31,49 +31,72 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
   participations.meta = { page: 1, pageSize: 1, rowCount: 2, pageCount: 2 };
 
   setupIntlRenderingTest(hooks);
+  module('table', function () {
+    test('it should have a caption to describe the table ', async function (assert) {
+      const screen = await render(
+        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+      );
 
-  test('it should have a caption to describe the table ', async function (assert) {
-    const screen = await render(
-      <template><CombinedCourseParticipations @participations={{participations}} /></template>,
-    );
+      // then
+      assert.ok(screen.getByRole('table', { name: t('pages.combined-course.table.description') }));
+    });
 
-    // then
-    assert.ok(screen.getByRole('table', { name: t('pages.combined-course.table.description') }));
-  });
+    test('it should display column headers', async function (assert) {
+      // when
+      const screen = await render(
+        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+      );
 
-  test('it should display column headers', async function (assert) {
-    // when
-    const screen = await render(
-      <template><CombinedCourseParticipations @participations={{participations}} /></template>,
-    );
+      const table = screen.getByRole('table');
+      // then
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: t('pages.combined-course.table.column.first-name'),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: t('pages.combined-course.table.column.last-name'),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: t('pages.combined-course.table.column.status'),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.campaigns')),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.modules')),
+        }),
+      );
+    });
 
-    const table = screen.getByRole('table');
-    // then
-    assert.ok(
-      within(table).getByRole('columnheader', {
-        name: t('pages.combined-course.table.column.first-name'),
-      }),
-    );
-    assert.ok(
-      within(table).getByRole('columnheader', {
-        name: t('pages.combined-course.table.column.last-name'),
-      }),
-    );
-    assert.ok(
-      within(table).getByRole('columnheader', {
-        name: t('pages.combined-course.table.column.status'),
-      }),
-    );
-    assert.ok(
-      within(table).getByRole('columnheader', {
-        name: t('pages.combined-course.table.column.campaigns'),
-      }),
-    );
-    assert.ok(
-      within(table).getByRole('columnheader', {
-        name: t('pages.combined-course.table.column.modules'),
-      }),
-    );
+    test('it should render a tooltip for campaign column', async function (assert) {
+      // when
+      const screen = await render(
+        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+      );
+      const campaignHeader = screen.getByRole('columnheader', {
+        name: new RegExp(t('pages.combined-course.table.column.campaigns')),
+      });
+      assert.ok(within(campaignHeader).getByText(t('pages.combined-course.table.tooltip.campaigns-column')));
+    });
+
+    test('it should render a tooltip for module column', async function (assert) {
+      // when
+      const screen = await render(
+        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+      );
+      const campaignHeader = screen.getByRole('columnheader', {
+        name: new RegExp(t('pages.combined-course.table.column.modules')),
+      });
+      assert.ok(within(campaignHeader).getByText(t('pages.combined-course.table.tooltip.modules-column')));
+    });
   });
 
   test('it should display participation details', async function (assert) {
