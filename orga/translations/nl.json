@@ -1013,7 +1013,7 @@
     },
     "combined-course": {
       "campaigns": "{count, plural, =1 {Bekijk de details van de campagne} other {Bekijk de details van campagne nr. {index}}}",
-      "introduction": "text d'intro",
+      "introduction": "De leertrajecten bestaan uit een diagnose en leermodules, waardoor het onderwijs kan worden aangepast aan het werkelijke niveau van elke deelnemer.",
       "statistics": {
         "completed-participations": "Voltooide deelnames",
         "total-participations": "Totaal van de deelnemingen"

@@ -1025,7 +1025,7 @@
     },
     "combined-course": {
       "campaigns": "{count, plural, =1 {See campaign details} other {See details of campaign no. {index}}}",
-      "introduction": "text d'intro",
+      "introduction": "The learning pathways combine an assessment and learning modules, enabling teaching to be tailored to each participant's actual level.",
       "statistics": {
         "completed-participations": "Completed participations",
         "total-participations": "Total participations"
