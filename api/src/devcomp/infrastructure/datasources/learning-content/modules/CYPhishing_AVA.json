@@ -140,7 +140,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>Un</span></p>"
+                    "content": "<span>Un</span>"
                   },
                   {
                     "input": "pixname",
@@ -164,7 +164,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>a utilisé la&nbsp;</span></p>"
+                    "content": "<span>a utilisé la&nbsp;</span>"
                   },
                   {
                     "input": "pixtext",
@@ -186,7 +186,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>pour pousser Marie à fournir ses&nbsp;</span></p>"
+                    "content": "<span>pour pousser Marie à fournir ses&nbsp;</span>"
                   },
                   {
                     "input": "pixpai",
@@ -209,7 +209,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>et valider un</span></p>"
+                    "content": "<span>et valider un</span>"
                   },
                   {
                     "input": "pixten",
@@ -251,7 +251,7 @@
         },
         {
           "id": "fee5f92d-fe8e-4b10-abd5-048fc9fd0a12",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #1",
           "components": [
             {
@@ -443,7 +443,7 @@
         },
         {
           "id": "fe7d1c66-d151-4ac7-91fa-2c57cdeb1d3a",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #2",
           "components": [
             {
@@ -640,7 +640,7 @@
         },
         {
           "id": "682c14b6-2e04-43e5-85d1-29e40507def2",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Leçon #3",
           "components": [
             {
