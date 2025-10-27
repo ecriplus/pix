@@ -140,7 +140,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>Un</span></p>"
+                    "content": "<span>Un</span>"
                   },
                   {
                     "input": "pixname",
@@ -164,7 +164,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>a utilisé la&nbsp;</span></p>"
+                    "content": "<span>a utilisé la&nbsp;</span>"
                   },
                   {
                     "input": "pixtext",
@@ -186,7 +186,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>pour pousser Marie à fournir ses&nbsp;</span></p>"
+                    "content": "<span>pour pousser Marie à fournir ses&nbsp;</span>"
                   },
                   {
                     "input": "pixpai",
@@ -209,7 +209,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>et valider un</span></p>"
+                    "content": "<span>et valider un</span>"
                   },
                   {
                     "input": "pixten",
