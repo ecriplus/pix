@@ -5,24 +5,31 @@ import { domainBuilder } from '../../../../../tooling/domain-builder/domain-buil
 
 describe('Certification | Configuration | Unit | Serializer | consolidated-framework-serializer', function () {
   describe('#serialize', function () {
-    it('should serialize attachable a consolidated framework to JSONAPI', function () {
+    it('should serialize a consolidated framework to JSONAPI', function () {
       // given
-      const consolidatedFramework = domainBuilder.certification.configuration.buildConsolidatedFramework();
+      const versionId = 123;
+      const scope = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
       const area = domainBuilder.buildArea({
         competences: [domainBuilder.buildCompetence({ tubes: [domainBuilder.buildTube()] })],
       });
 
+      const consolidatedFramework = {
+        scope,
+        versionId,
+        areas: [area],
+      };
+
       // when
-      const serializedConsolidatedFramework = serializer.serialize({ ...consolidatedFramework, areas: [area] });
+      const serializedConsolidatedFramework = serializer.serialize(consolidatedFramework);
 
       // then
       expect(serializedConsolidatedFramework).to.deep.equal({
         data: {
           attributes: {
-            'complementary-certification-key': ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-            version: consolidatedFramework.version,
+            'complementary-certification-key': scope,
+            version: String(versionId),
           },
-          id: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          id: scope,
           relationships: {
             areas: {
               data: [

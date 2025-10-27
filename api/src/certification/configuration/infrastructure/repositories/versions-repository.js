@@ -94,9 +94,7 @@ export async function create({ version, challenges }) {
     .returning('id');
 
   const challengesDTO = challenges.map((challenge) => ({
-    complementaryCertificationKey: version.scope,
     challengeId: challenge.id,
-    version: String(id),
     versionId: id,
   }));
 
