@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class NewRoute extends Route {
+  @service router;
   @service store;
   @service accessControl;
 
@@ -10,8 +11,18 @@ export default class NewRoute extends Route {
     parentOrganizationName: { refreshModel: true },
   };
 
-  beforeModel() {
+  beforeModel(transition) {
     this.accessControl.restrictAccessTo(['isSuperAdmin', 'isSupport', 'isMetier'], 'authenticated');
+    const queryParams = transition.to.queryParams;
+
+    if (_hasParentOrganizationQueryParamsAndOneIsMissing(queryParams)) {
+      this.router.replaceWith('authenticated', {
+        queryParams: {
+          parentOrganizationId: null,
+          parentOrganizationName: null,
+        },
+      });
+    }
   }
 
   model() {
@@ -24,4 +35,12 @@ export default class NewRoute extends Route {
       controller.parentOrganizationName = null;
     }
   }
+}
+
+function _hasParentOrganizationQueryParamsAndOneIsMissing(queryParams) {
+  return (
+    Object.keys(queryParams).length > 0 &&
+    (Boolean(!queryParams.parentOrganizationName && queryParams.parentOrganizationId) ||
+      Boolean(queryParams.parentOrganizationName && !queryParams.parentOrganizationId))
+  );
 }

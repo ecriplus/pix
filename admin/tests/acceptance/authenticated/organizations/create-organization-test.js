@@ -14,6 +14,8 @@ module('Acceptance | Organizations | Create', function (hooks) {
   setupIntl(hooks);
 
   hooks.beforeEach(async function () {
+    this.intl = this.owner.lookup('service:intl');
+
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
   });
 
@@ -23,6 +25,52 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('link', { name: 'Organisations' })).hasClass('active');
+  });
+
+  module('when creating an organization without a parent organization', function () {
+    test('it shows the creation form without parent organization name', async function (assert) {
+      // when
+      const screen = await visit('/organizations/new');
+
+      // then
+      assert.dom(screen.queryByText('Organisation mère', { exact: false })).doesNotExist();
+      assert.dom(screen.getByText('Nouvelle organisation')).exists();
+      assert.dom(screen.getByRole('button', { name: this.intl.t('common.actions.add') })).exists();
+    });
+  });
+
+  module('when creating an organization with a parent organization', function () {
+    test('it shows the creation form with parent organization name', async function (assert) {
+      // given
+      const parentOrganization = server.create('organization', { name: 'Wayne Enterprises' });
+
+      // when
+      const screen = await visit(
+        `/organizations/new?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(
+          parentOrganization.name,
+        )}`,
+      );
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('heading', {
+            name: this.intl.t('components.organizations.creation.parent-organization-name', {
+              parentOrganizationName: parentOrganization.name,
+            }),
+            level: 2,
+          }),
+        )
+        .exists();
+      assert.dom(screen.getByText('Nouvelle organisation fille')).exists();
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: this.intl.t('components.organizations.creation.actions.add-child-organization'),
+          }),
+        )
+        .exists();
+    });
   });
 
   module('when an organization is created', function () {
