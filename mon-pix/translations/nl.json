@@ -1535,7 +1535,7 @@
       "title": "Voor meer informatie"
     },
     "levelup-notif": {
-      "obtained-level": "Niveau {level} gewonnen!"
+      "obtained-level": "Niveau {level} behaald !"
     },
     "llm-preview": {
       "iframe-title": "ChatPix",
