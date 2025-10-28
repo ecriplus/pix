@@ -162,6 +162,14 @@ class FeaturesSection extends Component {
     );
   };
 
+  getOrganizationPlacesLimitText = (isActive) => {
+    if (isActive)
+      return this.intl.t(
+        'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.enabled',
+      );
+    return this.intl.t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.disabled');
+  };
+
   <template>
     <ul class="organization-information-section__features">
       {{#each (keys Organization.featureList) as |feature|}}
@@ -184,6 +192,10 @@ class FeaturesSection extends Component {
           {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
             <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
               {{formatList (this.attestationLabels organizationFeature.params)}}
+            </Feature>
+          {{else if (eq feature "PLACES_MANAGEMENT")}}
+            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
+              {{this.getOrganizationPlacesLimitText organizationFeature.params.enableMaximumPlacesLimit}}
             </Feature>
           {{else}}
             <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
