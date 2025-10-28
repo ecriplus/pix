@@ -68,10 +68,6 @@ class SessionManagement {
   isPublished() {
     return this.publishedAt !== null;
   }
-
-  get isFinalized() {
-    return this.finalizedAt !== null;
-  }
 }
 
 export { NO_EXAMINER_GLOBAL_COMMENT, SessionManagement };

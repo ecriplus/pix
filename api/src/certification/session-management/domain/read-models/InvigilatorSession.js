@@ -1,11 +1,14 @@
+/**
+ * @class InvigilatorSession
+ */
 class InvigilatorSession {
+  /**
+   * @param {date} finalizedAt
+   * @param {string} invigilatorPassword
+   */
   constructor({ finalizedAt, invigilatorPassword }) {
     this.invigilatorPassword = invigilatorPassword;
-    this.finalizedAt = finalizedAt;
-  }
-
-  isAccessible() {
-    return this.finalizedAt === null;
+    this.isNotAccessible = !!finalizedAt;
   }
 
   checkPassword(invigilatorPassword) {
