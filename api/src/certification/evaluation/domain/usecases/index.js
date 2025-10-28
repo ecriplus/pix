@@ -75,6 +75,7 @@ const dependencies = {
 
 import { createCompanionAlert } from './create-companion-alert.js';
 import { deneutralizeChallenge } from './deneutralize-challenge.js';
+import { getCertificationCourse } from './get-certification-course.js';
 import { getNextChallenge } from './get-next-challenge.js';
 import { neutralizeChallenge } from './neutralize-challenge.js';
 import { rescoreV2Certification } from './rescore-v2-certification.js';
@@ -87,6 +88,7 @@ const usecasesWithoutInjectedDependencies = {
   createCompanionAlert,
   deneutralizeChallenge,
   getNextChallenge,
+  getCertificationCourse,
   neutralizeChallenge,
   rescoreV2Certification,
   rescoreV3Certification,

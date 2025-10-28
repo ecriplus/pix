@@ -1,4 +1,3 @@
-import { usecases as certificationSharedUsecases } from '../../shared/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificationSerializer from '../infrastructure/serializers/certification-serializer.js';
 import * as juryCommentSerializer from '../infrastructure/serializers/jury-comment-serializer.js';
@@ -61,10 +60,9 @@ const update = async function (request, h, dependencies = { certificationSeriali
     certificationCourseId,
     userId,
   );
-  await usecases.correctCandidateIdentityInCertificationCourse({ command });
-  const updatedCertificationCourse = await certificationSharedUsecases.getCertificationCourse({
-    certificationCourseId: command.certificationCourseId,
-  });
+
+  const updatedCertificationCourse = await usecases.correctCandidateIdentityInCertificationCourse({ command });
+
   return dependencies.certificationSerializer.serializeFromCertificationCourse(updatedCertificationCourse);
 };
 
