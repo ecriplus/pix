@@ -416,9 +416,9 @@
               "element": {
                 "id": "6e6af05b-b933-4022-baa9-6194fdb63584",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/deepfakes/telephone_deepfake.png",
+                "url": "https://assets.pix.org/modules/deepfakes/plusjamaisdevacances.png",
                 "alt": "",
-                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les 3ème D\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE DEVOIRS !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
+                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les collègues du taff\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE VACANCES !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Cécile, du département RH. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -434,35 +434,35 @@
                     "id": "1",
                     "content": "<p>Liker le message de Brian.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Partager la photo à ses contacts.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Cécile.  Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Chercher la source de l'image sur internet.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin.  Mme Martin pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe !<br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
                     }
                   }
                 ],
