@@ -89,3 +89,13 @@ docker/data/
 # Claude Code documentation
 CLAUDE.md
 .claude/
+
+# Allow JSON files in translations directories
+!**/translations/*.json
+
+# Allow package.json and package-lock.json
+!package.json
+!package-lock.json
+
+# Allow JSON files in learning-content/modules directory
+!learning-content/modules/*.json
