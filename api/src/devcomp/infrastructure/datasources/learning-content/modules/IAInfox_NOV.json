@@ -481,7 +481,7 @@
               "element": {
                 "id": "6d557df0-b390-43de-9115-5f693b7d123b",
                 "type": "text",
-                "content": "<p>Quand vous recevez un média surprenant (trop beau pour être vrai, choquant ou inquiétant),&nbsp;<strong>n’agissez pas trop vite :</strong>ne likez pas, ne partagez pas immédiatement. C’est peut-être un <strong>deepfake !</strong></p><p>Partagez un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne.</p><p>👉 Cela peut aussi violer le droit à l’image et entraîner à une plainte contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
+                "content": "<p>Quand vous recevez un média surprenant (trop beau pour être vrai, choquant ou inquiétant),&nbsp;<strong>n’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. C’est peut-être un <strong>deepfake !</strong></p><p>Partager un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne.</p><p>👉 Cela peut aussi violer le droit à l’image et entraîner une plainte contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
               }
             }
           ]
@@ -502,7 +502,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être crée. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est crée avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est crée avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
           ]
@@ -614,7 +614,7 @@
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "🔴 Une vidéo de la maire de la capitale crée la polémique",
+                  "title": "🔴 Une vidéo de la maire de Jolieville crée la polémique",
                   "author": "Rédaction locale",
                   "date": "14 mai 2025",
                   "paragraphs": [
