@@ -59,7 +59,7 @@ const addOidcProvider = async function ({
   cryptoService,
   addOidcProviderValidator,
 }) {
-  addOidcProviderValidator.validate({
+  const properties = {
     accessTokenLifespan,
     additionalRequiredProperties,
     application,
@@ -83,35 +83,15 @@ const addOidcProvider = async function ({
     slug,
     source,
     isVisible,
-  });
+  };
+  addOidcProviderValidator.validate(properties);
 
   const encryptedClientSecret = await cryptoService.encrypt(clientSecret);
+  // eslint-disable-next-line no-unused-vars
+  const { clientSecret: _, ...propertiesWithoutClientSecret } = properties;
+  const propertiesWithEncryptedClientSecret = { encryptedClientSecret, ...propertiesWithoutClientSecret };
 
-  await oidcProviderRepository.create({
-    accessTokenLifespan,
-    additionalRequiredProperties,
-    application,
-    applicationTld,
-    claimMapping,
-    claimsToStore,
-    clientId,
-    connectionMethodCode,
-    enabled,
-    enabledForPixAdmin,
-    encryptedClientSecret,
-    extraAuthorizationUrlParameters,
-    identityProvider,
-    openidClientExtraMetadata,
-    openidConfigurationUrl,
-    organizationName,
-    postLogoutRedirectUri,
-    redirectUri,
-    scope,
-    shouldCloseSession,
-    slug,
-    source,
-    isVisible,
-  });
+  await oidcProviderRepository.create(propertiesWithEncryptedClientSecret);
 };
 
 export { addOidcProvider };
