@@ -1,5 +1,45 @@
 # Pix Changelog
 
+# [5.242.0](https://github.com/1024pix/pix/compare/v5.241.0...v5.242.0) (2025-10-28)
+
+### :rocket: Amélioration
+
+- [#13974](https://github.com/1024pix/pix/pull/13974) Adapter les scripts extract CSV pour prendre en compte ce nouveau type de grain (PIX-20117) 
+- [#13956](https://github.com/1024pix/pix/pull/13956) Afficher le nom de l'orga mère sur le formulaire de création d'organisation (PIX-20048) 
+- [#14003](https://github.com/1024pix/pix/pull/14003) Ajouter un tooltip pour les colonnes module et campagnes (PIX-19970) 
+- [#13990](https://github.com/1024pix/pix/pull/13990) WIP module CY_Phishing_AVA 
+- [#13987](https://github.com/1024pix/pix/pull/13987) WIP module Cyber_Phishing_AVA 
+
+### :bug: Correction
+
+- [#13967](https://github.com/1024pix/pix/pull/13967) Afficher les boutons d'accès aux campagnes associé à un parcours combiné (PIX-20118) 
+
+### :building_construction: Tech
+
+- [#13981](https://github.com/1024pix/pix/pull/13981) Déplacer le usecase getCertificationCourse (PIX-20139). 
+- [#13997](https://github.com/1024pix/pix/pull/13997) Exclure les `organization_learners` qui n'ont pas de userId rattaché "dissocier" (PIX-20058). 
+- [#14016](https://github.com/1024pix/pix/pull/14016) Mettre à jour la table oidc-providers pour gérer de manière générique sur quel TLD un SSO doit être disponible (PIX-20160) 
+- [#13977](https://github.com/1024pix/pix/pull/13977) Script de suppression des challenges des certifications Pix+ (PIX-20093). 
+- [#13982](https://github.com/1024pix/pix/pull/13982) Suppression de scripts temporaires du contexte IAM 
+- [#14004](https://github.com/1024pix/pix/pull/14004) Supprimer des contraintes sur les challenges de framework de certif  pour pouvoir decommissioner le code relie (PIX-20148). 
+
+### :arrow_up: Montée de version
+
+- [#13988](https://github.com/1024pix/pix/pull/13988) Update dependency @1024pix/ember-testing-library to ^3.0.24 (admin) 
+- [#13989](https://github.com/1024pix/pix/pull/13989) Update dependency @1024pix/ember-testing-library to ^3.0.24 (certif) 
+- [#13992](https://github.com/1024pix/pix/pull/13992) Update dependency @1024pix/ember-testing-library to ^3.0.24 (junior) 
+- [#13994](https://github.com/1024pix/pix/pull/13994) Update dependency @1024pix/ember-testing-library to ^3.0.24 (mon-pix) 
+- [#13995](https://github.com/1024pix/pix/pull/13995) Update dependency @1024pix/ember-testing-library to ^3.0.24 (orga) 
+- [#13998](https://github.com/1024pix/pix/pull/13998) Update dependency @1024pix/eslint-plugin to ^2.1.13 (api) 
+- [#13999](https://github.com/1024pix/pix/pull/13999) Update dependency @1024pix/eslint-plugin to ^2.1.13 (audit-logger) 
+- [#14005](https://github.com/1024pix/pix/pull/14005) Update dependency @1024pix/eslint-plugin to ^2.1.13 (certif) 
+- [#14006](https://github.com/1024pix/pix/pull/14006) Update dependency @1024pix/eslint-plugin to ^2.1.13 (dossier racine) 
+- [#14010](https://github.com/1024pix/pix/pull/14010) Update dependency @1024pix/eslint-plugin to ^2.1.13 (e2e-playwright) 
+- [#14011](https://github.com/1024pix/pix/pull/14011) Update dependency @1024pix/eslint-plugin to ^2.1.13 (junior) 
+- [#14012](https://github.com/1024pix/pix/pull/14012) Update dependency @1024pix/eslint-plugin to ^2.1.13 (mon-pix) 
+- [#14013](https://github.com/1024pix/pix/pull/14013) Update dependency @1024pix/eslint-plugin to ^2.1.13 (orga) 
+- [#13979](https://github.com/1024pix/pix/pull/13979) Update dependency eslint-plugin-unicorn to v61 (certif)
+
 # [5.241.0](https://github.com/1024pix/pix/compare/v5.240.0...v5.241.0) (2025-10-24)
 
 ### :rocket: Amélioration
