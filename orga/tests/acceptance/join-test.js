@@ -38,12 +38,11 @@ module('Acceptance | join', function (hooks) {
             id: 0,
             usePixOrgaNewAuthDesign: true,
           });
-          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
           const organizationInvitationId = server.create('organizationInvitation', {
-            organizationId,
             email: 'random@email.com',
             status: 'pending',
             code,
+            organizationName: 'College BRO & Evil Associates',
           }).id;
 
           // when
@@ -52,7 +51,9 @@ module('Acceptance | join', function (hooks) {
           // then
           assert.strictEqual(currentURL(), `/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
           assert.notOk(currentSession(this.application).get('isAuthenticated'), 'The user is still unauthenticated');
-          assert.ok(screen.getByText('Vous êtes invité(e) à rejoindre :'));
+          assert.ok(
+            screen.getByText(t('pages.login.join-invitation', { organizationName: 'College BRO & Evil Associates' })),
+          );
         });
       });
 
@@ -60,9 +61,11 @@ module('Acceptance | join', function (hooks) {
         test('remains on join page and displays LoginOrRegister component', async function (assert) {
           // given
           const code = 'ABCDEFGH01';
-          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
+          server.create('feature-toggle', {
+            id: 0,
+            usePixOrgaNewAuthDesign: false,
+          });
           const organizationInvitationId = server.create('organizationInvitation', {
-            organizationId,
             email: 'random@email.com',
             status: 'pending',
             code,
@@ -83,9 +86,7 @@ module('Acceptance | join', function (hooks) {
         test('remains on join page without the query params', async function (assert) {
           // given
           const code = 'ABCDEFGH01';
-          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
           const organizationInvitationId = server.create('organizationInvitation', {
-            organizationId,
             email: 'random@email.com',
             status: 'pending',
             code,
@@ -121,9 +122,7 @@ module('Acceptance | join', function (hooks) {
       test('redirects user to login page', async function (assert) {
         // given
         const code = 'ABCDEFGH01';
-        const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
         const organizationInvitationId = server.create('organizationInvitation', {
-          organizationId,
           email: 'random@email.com',
           status: 'accepted',
           code,
@@ -144,9 +143,7 @@ module('Acceptance | join', function (hooks) {
       test('redirects user to login page ', async function (assert) {
         // given
         const code = 'ABCDEFGH01';
-        const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
         const organizationInvitationId = server.create('organizationInvitation', {
-          organizationId,
           email: 'random@email.com',
           status: 'cancelled',
           code,
@@ -208,6 +205,27 @@ module('Acceptance | join', function (hooks) {
         assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
       });
 
+      module('when new authentication design is enabled', function () {
+        test('redirects user to the terms-of-service page', async function (assert) {
+          // given
+          server.create('feature-toggle', {
+            id: 0,
+            usePixOrgaNewAuthDesign: true,
+          });
+
+          await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+          await fillByLabel(emailInputLabel, user.email);
+          await fillByLabel(passwordInputLabel, 'secret');
+
+          // when
+          await clickByName(loginButton);
+
+          // then
+          assert.strictEqual(currentURL(), '/cgu');
+          assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
+        });
+      });
+
       test("redirects user to the terms-of-service page in the user's language even if another language selected in join page", async function (assert) {
         // given
         const screen = await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
@@ -266,6 +284,29 @@ module('Acceptance | join', function (hooks) {
         }).id;
       });
 
+      module('when new authentication design is enabled', function () {
+        test('redirects user to the homepage that contains prescriber name', async function (assert) {
+          // given
+          server.create('feature-toggle', {
+            id: 0,
+            usePixOrgaNewAuthDesign: true,
+          });
+          server.create('campaign');
+
+          const screen = await visit(`/rejoindre?invitationId=${organizationInvitationId}&code=${code}`);
+          await fillByLabel(emailInputLabel, user.email);
+          await fillByLabel(passwordInputLabel, 'secret');
+
+          // when
+          await clickByName(loginButton);
+
+          // then
+          assert.strictEqual(currentURL(), '/');
+          assert.ok(currentSession(this.application).get('isAuthenticated'), 'The user is authenticated');
+          assert.ok(screen.getByText('Harry Cover'));
+        });
+      });
+
       test('redirects user to the homepage that contains prescriber name', async function (assert) {
         // given
         server.create('campaign');
@@ -296,9 +337,7 @@ module('Acceptance | join', function (hooks) {
           user = createUserWithMembership();
           server.create('prescriber', { id: user.id });
 
-          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
           organizationInvitationId = server.create('organizationInvitation', {
-            organizationId,
             email: 'random@email.com',
             status: 'pending',
             code,
@@ -344,9 +383,7 @@ module('Acceptance | join', function (hooks) {
           createPrescriberByUser({ user });
 
           code = 'ABCDEFGH01';
-          const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
           organizationInvitationId = server.create('organizationInvitation', {
-            organizationId,
             email: 'random@email.com',
             status: 'pending',
             code,
@@ -386,9 +423,7 @@ module('Acceptance | join', function (hooks) {
             createPrescriberByUser({ user });
 
             code = 'ABCDEFGH01';
-            const organizationId = server.create('organization', { name: 'College BRO & Evil Associates' }).id;
             organizationInvitationId = server.create('organizationInvitation', {
-              organizationId,
               email: 'random@email.com',
               status: 'pending',
               code,
