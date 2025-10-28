@@ -514,6 +514,65 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       assert.dom(screen.getByText('Too Bad!')).exists();
     });
   });
+
+  module('when input type is text', function () {
+    module('when no answer is provided by the user and verify button is clicked', function () {
+      test('it should still be possible to answer and verify response', async function (assert) {
+        const clock = sinon.useFakeTimers();
+        const qrocm = {
+          id: '994b6a96-a3c2-47ae-a461-87548ac6e02b',
+          instruction: 'Instruction',
+          proposals: [
+            {
+              input: 'symbole',
+              type: 'input',
+              inputType: 'text',
+              size: 1,
+              display: 'block',
+              placeholder: '',
+              ariaLabel: 'Réponse 1',
+              defaultValue: '',
+              solutions: ['Réponse 1'],
+            },
+          ],
+          feedbacks: {
+            valid: {
+              state: 'Correct!',
+              diagnosis: 'Good job!',
+            },
+            invalid: {
+              state: 'Wrong!',
+              diagnosis: 'Too Bad!',
+            },
+          },
+          type: 'qrocm',
+        };
+        ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = 10;
+        const onElementAnswerSpy = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template><ModuleQrocm @element={{qrocm}} @onAnswer={{onElementAnswerSpy}} /></template>,
+        );
+        const input = screen.getByRole('textbox', { name: 'Réponse 1' });
+        const verifyButton = screen.queryByRole('button', { name: 'Vérifier ma réponse' });
+        await click(verifyButton);
+
+        // then
+        await clock.tick(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY + 1);
+        assert.dom(input).hasNoAttribute('readonly');
+
+        await fillIn(screen.getByLabelText('Réponse 1'), 'Réponse 1');
+        await click(verifyButton);
+        await clock.tickAsync(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY + 1);
+        assert.dom(screen.getByText('Correct!')).exists();
+        assert.dom(screen.getByText('Good job!')).exists();
+        assert.ok(true);
+
+        clock.restore();
+      });
+    });
+  });
 });
 
 function prepareQrocm() {
