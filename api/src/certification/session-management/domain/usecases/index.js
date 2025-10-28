@@ -2,12 +2,12 @@ import * as userRepository from '../../../../identity-access-management/infrastr
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as flashAlgorithmService from '../../../evaluation/domain/services/algorithm-methods/flash.js';
-import * as evaluationVersionRepository from '../../../evaluation/infrastructure/repositories/version-repository.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as sharedCertificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
+import * as evaluationVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import {
   answerRepository,
   assessmentRepository,
