@@ -82,7 +82,7 @@ test('Combined courses', async ({ page }) => {
     ).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Summers' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Buffy' })).toBeVisible();
-    await expect(page.getByText('Terminé')).toBeVisible();
+    await expect(page.getByText('Terminé', { exact: true })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Une campagne complétée sur 1.' })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'Un module complété sur 1.' })).toBeVisible();
   });

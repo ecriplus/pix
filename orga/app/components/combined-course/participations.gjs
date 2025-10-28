@@ -1,6 +1,9 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
+import { uniqueId } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -48,9 +51,11 @@ export default class CombinedCourse extends Component {
               <ParticipationStatus @status={{participation.status}} />
             </:cell>
           </PixTableColumn>
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} @type="number">
             <:header>
               {{t "pages.combined-course.table.column.campaigns"}}
+
+              <Tooltip @content={{t "pages.combined-course.table.tooltip.campaigns-column"}} />
             </:header>
             <:cell>
               <CompletionDisplay
@@ -60,9 +65,11 @@ export default class CombinedCourse extends Component {
               />
             </:cell>
           </PixTableColumn>
-          <PixTableColumn @context={{context}}>
+          <PixTableColumn @context={{context}} @type="number">
             <:header>
               {{t "pages.combined-course.table.column.modules"}}
+
+              <Tooltip @content={{t "pages.combined-course.table.tooltip.modules-column"}} />
             </:header>
             <:cell>
               <CompletionDisplay
@@ -105,4 +112,29 @@ const CompletionDisplay = <template>
     <span aria-hidden="true">-</span>
     <span class="screen-reader-only">{{t "pages.combined-course.table.no-module"}}</span>
   {{/if}}
+</template>;
+
+const tooltipId = uniqueId();
+
+const Tooltip = <template>
+  <PixTooltip @id={{tooltipId}} @isWide={{true}}>
+    <:triggerElement>
+
+      <PixIcon
+        @name="help"
+        @plainIcon={{true}}
+        aria-label={{@content}}
+        aria-describedby={{tooltipId}}
+        @ariaHidden={{@ariaHiddenIcon}}
+        @ariaHiddenIcon={{true}}
+        class="tooltip-with-icon-small"
+      />
+
+    </:triggerElement>
+
+    <:tooltip>
+      {{@content}}
+    </:tooltip>
+
+  </PixTooltip>
 </template>;

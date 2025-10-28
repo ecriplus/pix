@@ -1013,7 +1013,7 @@
     },
     "combined-course": {
       "campaigns": "{count, plural, =1 {Bekijk de details van de campagne} other {Bekijk de details van campagne nr. {index}}}",
-      "introduction": "text d'intro",
+      "introduction": "De leertrajecten bestaan uit een diagnose en leermodules, waardoor het onderwijs kan worden aangepast aan het werkelijke niveau van elke deelnemer.",
       "statistics": {
         "completed-participations": "Voltooide deelnames",
         "total-participations": "Totaal van de deelnemingen"
@@ -1029,7 +1029,11 @@
         },
         "description": "List of the combined course participations",
         "module-completion": "{count, plural, =0 {geen module voltooid op {nbModules}} =1 {1 van de {nbModules} modules voltooid} other {{count} van de {nbModules} modules voltooid}}.",
-        "no-module": "Geen aanbevolen module."
+        "no-module": "Geen aanbevolen module.",
+        "tooltip": {
+          "campaigns-column": "'x / y' geeft de voortgang van de deelnemer aan: hij/zij heeft x campagnes voltooid van een totaal van y. Bijvoorbeeld: 1/2 betekent dat hij/zij 1 campagne van de 2 heeft voltooid.",
+          "modules-column": "'x / y' geeft de voortgang van de deelnemer aan: hij/zij heeft x modules voltooid van een totaal van y. Het totale aantal modules verschilt per persoon, afhankelijk van de persoonlijke aanbevelingen."
+        }
       }
     },
     "combined-courses": {
