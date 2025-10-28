@@ -609,7 +609,7 @@
         "results": "{result, number, ::percent} succes",
         "resume": {
           "extra-information": "Hervat de {campaignTitle} route",
-          "information": "Overnemen"
+          "information": "Verder gaan"
         },
         "retry": "Verbeter mezelf",
         "see-more": "Zie details",
@@ -1287,7 +1287,7 @@
       "actions": {
         "continue": {
           "extra-information": "De competentie hervatten {competenceName}",
-          "label": "Overnemen"
+          "label": "Verder gaan"
         },
         "improve": {
           "description": {
@@ -1317,7 +1317,7 @@
         }
       },
       "for-competence": "de vaardigheid  {competence}",
-      "next-level-info": "{ remainingPixToNextLevel } pix voordat de niveau { level }",
+      "next-level-info": "Nog { remainingPixToNextLevel } pix voor niveau { level }",
       "title": "Bevoegdheid",
       "tutorials": {
         "description": "Hier is een selectie van tutorials om je te helpen Pix te verdienen.",
@@ -1888,7 +1888,7 @@
         },
         "actions": {
           "continue": "Ga verder met",
-          "resume": "Overnemen"
+          "resume": "Verder gaan"
         },
         "reminder-continue-campaign": "Je hebt je cursus niet afgerond",
         "reminder-continue-campaign-with-title": "Je hebt de \"{title}\" route niet voltooid",
