@@ -98,6 +98,7 @@ export default class ModuleQrocm extends ModuleElement {
     super.onAnswer(event);
 
     if (this.shouldDisplayRequiredMessage === true) {
+      this.isVerifying = false;
       return;
     }
 
