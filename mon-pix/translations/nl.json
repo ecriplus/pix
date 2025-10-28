@@ -43,7 +43,7 @@
       "download": "Downloaden",
       "lets-go": "Laten we gaan!",
       "login": "Inloggen",
-      "quit": "Verlaat",
+      "quit": "Terug",
       "refresh-page": "Pagina verversen",
       "show-less": "Minder tonen",
       "show-more": "Meer bekijken",
@@ -1432,7 +1432,7 @@
       "mediacentre-start-campaign-modal": {
         "actions": {
           "continue": "Ga verder met",
-          "quit": "Verlaat"
+          "quit": "Terug"
         },
         "message": "Om toegang te krijgen tot de cursus :",
         "message-footer": "Maak verbinding met Pix via je Mediacenter",
