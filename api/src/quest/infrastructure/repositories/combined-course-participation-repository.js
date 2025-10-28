@@ -68,7 +68,7 @@ export const getByUserId = async function ({ userId, questId }) {
   return new CombinedCourseParticipation(questParticipations[0]);
 };
 
-export const findUserIdsById = async function ({ combinedCourseId, page, filters }) {
+export const findUserIdsByCombinedCourseId = async function ({ combinedCourseId, page, filters }) {
   const knexConnection = DomainTransaction.getConnection();
 
   const queryBuilder = knexConnection('combined_courses')

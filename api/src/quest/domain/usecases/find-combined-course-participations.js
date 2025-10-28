@@ -7,7 +7,7 @@ export const findCombinedCourseParticipations = async ({
   combinedCourseParticipationRepository,
   combinedCourseDetailsService,
 }) => {
-  const { userIds, meta } = await combinedCourseParticipationRepository.findUserIdsById({
+  const { userIds, meta } = await combinedCourseParticipationRepository.findUserIdsByCombinedCourseId({
     combinedCourseId,
     page,
     filters,
