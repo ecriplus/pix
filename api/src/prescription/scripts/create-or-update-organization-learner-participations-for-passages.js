@@ -105,12 +105,18 @@ class CreateOrUpdateOrganizationLearnerParticipationsForPassages extends Script 
             .whereNotNull('referenceId');
         })
         .whereNotNull('view-active-organization-learners.userId');
+      const nbLearnerToProcess = organizationLearnerWithoutPassagesOnCombinedCourse.length;
       logger.info(
-        `create-or-update-organization-learner-participations-for-passages | organizationLearnerWithoutPassagesOnCombinedCourse to process : ${organizationLearnerWithoutPassagesOnCombinedCourse.length}`,
+        `create-or-update-organization-learner-participations-for-passages | organizationLearnerWithoutPassagesOnCombinedCourse to process : ${nbLearnerToProcess}`,
       );
       const organizationLearnerParticipationToInsert = [];
-
+      let index = 0;
       for (const organizationLearnerWithoutPassageOnCombinedCourse of organizationLearnerWithoutPassagesOnCombinedCourse) {
+        index++;
+
+        logger.info(
+          `create-or-update-organization-learner-participations-for-passages | START Processing : ${index} / ${nbLearnerToProcess}`,
+        );
         // same logic as usecases/update-combined-course.js to get module to synchronize
         const combinedCourseDetails = await combinedCourseDetailsService.getCombinedCourseDetails({
           userId: organizationLearnerWithoutPassageOnCombinedCourse.userId,
@@ -149,6 +155,10 @@ class CreateOrUpdateOrganizationLearnerParticipationsForPassages extends Script 
             organizationLearnerParticipationToInsert.push(organizationLearnerParticipation);
           }
         }
+
+        logger.info(
+          `create-or-update-organization-learner-participations-for-passages | END Processing : ${index} / ${nbLearnerToProcess}`,
+        );
       }
       logger.info(
         `create-or-update-organization-learner-participations-for-passages | organizationLearnerParticipationToInsert to create : ${organizationLearnerParticipationToInsert.length}`,
