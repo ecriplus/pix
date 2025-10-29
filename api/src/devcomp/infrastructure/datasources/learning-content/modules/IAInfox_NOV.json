@@ -53,23 +53,23 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>oui</p>",
+                    "content": "<p>Oui.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. <br></p>"
+                      "diagnosis": "<p>Et non ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>non</p>",
+                    "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un deepfake&nbsp;ou un hypertrucage, en français. <br></p>"
+                      "diagnosis": "<p>Bien vu ! Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong>&nbsp;ou un <strong>hypertrucage, en français</strong>. <br></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un deepfake ou un hypertrucage, en français. <br></p>"
+                      "diagnosis": "<p>Cette vidéo est fausse. C'est ce qu’on appelle un <strong>deepfake</strong> ou un <strong>hypertrucage, en français</strong>. <br></p>"
                     }
                   }
                 ],
@@ -147,7 +147,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
-                "content": "<p>Les deepfakes, hypertrucages en français, sont créés grâce à <strong>l’intelligence artificielle.</strong> Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake.</strong></p>"
+                "content": "<p>Les deepfakes, hypertrucages en français, sont créés grâce à <strong>l’intelligence artificielle.</strong>🤖</p><p>Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus <strong>difficile de reconnaître un deepfake.</strong> 😱</p><p>Les deepfakes sont fait <strong>pour tromper</strong>, ils cherchent à faire croire qu'ils montrent quelque chose de vrai.🤥"
               }
             }
           ]
@@ -208,7 +208,7 @@
               "element": {
                 "id": "cbe6027b-3113-4772-a81f-c44d381f9585",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire ne veut pas dire permis : un deepfake sans consentement peut être illégal s’il porte atteinte aux droits de la personne."
+                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire ne veut pas dire permis : un deepfake peut être illégal."
               }
             }
           ]
