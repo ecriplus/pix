@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Chaque jour, nous recevons des messages par SMS ou messagerie instantanée. Certains d'entre eux cachent des arnaques.<br> Dans ce module, découvrez les réflexes à avoir pour éviter de tomber dans le piège. 🛡️</p>",
+    "description": "<p>Chaque jour, nous recevons des messages par SMS ou messagerie instantanée. Certains d’entre eux cachent des arnaques.<br> Dans ce module, découvrez les réflexes à avoir pour éviter de tomber dans le piège. 🛡️</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -45,12 +45,12 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
-                      "content": "J’ai reçu un message bizarre… Il dit que mon compte bancaire va être bloqué si je ne clique pas tout de suite sur un lien. Qu'est-ce que je dois faire ? 😰"
+                      "content": "J’ai reçu un message bizarre… Il dit que mon compte bancaire va être bloqué si je ne clique pas tout de suite sur un lien. Qu’est-ce que je dois faire ? 😰"
                     },
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Ah ! Toi aussi, tu l'as reçu ?"
+                      "content": "Ah ! Toi aussi, tu l’as reçu ?"
                     },
                     {
                       "userName": "Xavier",
@@ -86,7 +86,7 @@
                     "id": "3",
                     "content": "<p>Une information importante</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, ce message ne donne aucune information importante, cette livraison de colis n'existe pas. Attention, de nombreux messages cachent une tentative d’arnaque.</p>"
+                      "diagnosis": "<p>Eh non, ce message ne donne aucune information importante, cette livraison de colis n’existe pas. Attention, de nombreux messages cachent une tentative d’arnaque.</p>"
                     }
                   },
                   {
@@ -118,7 +118,7 @@
               "element": {
                 "id": "9074de8f-e4df-47b0-bc96-46b6e08f058a",
                 "type": "text",
-                "content": "<p>Comme Yvette et Xavier, vous pouvez recevoir des messages qui proviennent d'inconnus.<br>Lisez le message ci-dessous.&nbsp;</p>"
+                "content": "<p>Comme Yvette et Xavier, vous pouvez recevoir des messages qui proviennent d’inconnus.<br>Lisez le message ci-dessous.&nbsp;</p>"
               }
             },
             {
@@ -152,28 +152,28 @@
                     "id": "1",
                     "content": "<p>Récupérer des données personnelles.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, l'auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
+                      "diagnosis": "<p>Effectivement, l’auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles </strong>(un mot de passe, un numéro de carte bancaire, une adresse mail ou une adresse personnelle par exemple). Il les utilisera ensuite à son avantage, pour gagner de l’argent et mieux cibler ses attaques suivantes.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Engager la conversation.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ici,&nbsp;l'auteur de ce message est un escroc. Il&nbsp;ne cherche pas à engager la conversation. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
+                      "diagnosis": "<p>Ici,&nbsp;l’auteur de ce message est un escroc. Il&nbsp;ne cherche pas à engager la conversation. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Signaler un problème.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !&nbsp;l'auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;l’auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>L'auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
+                      "diagnosis": "<p>L’auteur de ce message est un escroc. Il cherche à <strong>obtenir des informations personnelles</strong> (mot de passe, numéro de carte bancaire, adresse…) pour gagner de l’argent et préparer d’autres arnaques.</p>"
                     }
                   }
                 ],
@@ -215,10 +215,10 @@
                     {
                       "userName": "Yvette",
                       "direction": "incoming",
-                      "content": "Alors, qu'est-ce que tu me conseilles de faire avec ce message ?",
+                      "content": "Alors, qu’est-ce que tu me conseilles de faire avec ce message ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/CYPhishingNov/msgyvette.svg",
-                        "alt": "SMS : CREDIT BANQUE\u0003ATTENTION votre compte va être bloqué définitivement suite à des opérations suspectes. Cliquez immédiatement sur le lien pour éviter la désactivation : http://blocbanque.fr"
+                        "alt": "SMS : CREDIT BANQUE\u0003ATTENTION votre compte va être bloqué définitivement suite à des opérations suspectes. Cliquez immédiatement sur le lien pour éviter la désactivation : http://blocbanque.fr"
                       }
                     },
                     {
@@ -234,7 +234,7 @@
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Oui les escrocs sont forts, ils arrivent même à se faire passer pour une banque ! 🤯 "
+                      "content": "Oui les escrocs sont forts, ils arrivent même à se faire passer pour une banque ! 🤯 "
                     }
                   ]
                 }
@@ -306,7 +306,7 @@
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Là, par exemple, le faux message de ta banque est très alarmiste. C'est pour te pousser à répondre."
+                      "content": "Là, par exemple, le faux message de ta banque est très alarmiste. C’est pour te pousser à répondre."
                     }
                   ]
                 }
@@ -415,7 +415,7 @@
                           "id": "2",
                           "content": "<p>Un sentiment d’urgence</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
+                            "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
                           }
                         },
                         {
@@ -470,7 +470,7 @@
                           "id": "1",
                           "content": "<p>Un sentiment de peur</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment de peur et d'urgence pour cette cousine bloquée à l’étranger.&nbsp;</p>"
+                            "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment de peur et d’urgence pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
@@ -491,7 +491,7 @@
                           "id": "4",
                           "content": "<p>Un sentiment de colère</p>",
                           "feedback": {
-                            "diagnosis": "<p>He non ! Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
+                            "diagnosis": "<p>He non ! Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
@@ -567,7 +567,7 @@
                     {
                       "userName": "Xavier",
                       "direction": "outgoing",
-                      "content": "Déjà, tu m'en as parlé et c'est un bon réflexe."
+                      "content": "Déjà, tu m’en as parlé et c’est un bon réflexe."
                     }
                   ]
                 }
@@ -603,7 +603,7 @@
               "element": {
                 "id": "56b11acd-0a06-4ca7-8872-9da44dd4fc30",
                 "type": "text",
-                "content": "<p>Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir : ne communiquez pas d’informations personnelles et ignorez le message.</p><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaque sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
+                "content": "<p>Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir&nbsp;: ne communiquez pas d’informations personnelles et ignorez le message.</p><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaque sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
               }
             }
           ]
