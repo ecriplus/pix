@@ -1,15 +1,14 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
-import { CandidateFactory } from '../../domain/models/factories/CandidateFactory.js';
+import { Candidate } from '../../../evaluation/domain/models/Candidate.js';
+import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 export const findByAssessmentId = async function ({ assessmentId }) {
   const result = await knex('certification-candidates')
-    .select(
-      'certification-candidates.accessibilityAdjustmentNeeded',
-      'certification-candidates.reconciledAt',
-      { subscriptionType: 'certification-subscriptions.type' },
-      { complementaryCertificationKey: 'complementary-certifications.key' },
-    )
+    .select('certification-candidates.accessibilityAdjustmentNeeded', 'certification-candidates.reconciledAt', {
+      complementaryCertificationKey: 'complementary-certifications.key',
+    })
     .join('certification-courses', function () {
       this.on('certification-courses.userId', '=', 'certification-candidates.userId').andOn(
         'certification-courses.sessionId',
@@ -18,14 +17,14 @@ export const findByAssessmentId = async function ({ assessmentId }) {
       );
     })
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
-    .join(
-      'certification-subscriptions',
-      'certification-subscriptions.certificationCandidateId',
-      'certification-candidates.id',
+    .leftJoin(
+      'complementary-certification-courses',
+      'complementary-certification-courses.certificationCourseId',
+      'certification-courses.id',
     )
     .leftJoin(
       'complementary-certifications',
-      'certification-subscriptions.complementaryCertificationId',
+      'complementary-certification-courses.complementaryCertificationId',
       'complementary-certifications.id',
     )
     .where('assessments.id', assessmentId)
@@ -38,16 +37,17 @@ export const findByAssessmentId = async function ({ assessmentId }) {
   return _toDomain(result);
 };
 
-const _toDomain = ({
-  accessibilityAdjustmentNeeded,
-  reconciledAt,
-  subscriptionType,
-  complementaryCertificationKey,
-}) => {
-  return CandidateFactory.fromSubscription({
+const _toDomain = ({ accessibilityAdjustmentNeeded, reconciledAt, complementaryCertificationKey }) => {
+  return new Candidate({
     accessibilityAdjustmentNeeded,
     reconciledAt,
-    subscriptionType,
-    complementaryCertificationKey,
+    subscriptionScope: _determineScope(complementaryCertificationKey),
   });
+};
+
+const _determineScope = (complementaryCertificationKey) => {
+  if (complementaryCertificationKey && complementaryCertificationKey !== ComplementaryCertificationKeys.CLEA) {
+    return complementaryCertificationKey;
+  }
+  return Frameworks.CORE;
 };

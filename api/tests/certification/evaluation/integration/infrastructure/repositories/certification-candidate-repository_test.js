@@ -76,6 +76,11 @@ describe('Integration | Repository | certification candidate', function () {
             sessionId: session.id,
             createdAt: new Date('2022-10-01T14:00:00Z'),
           });
+          databaseBuilder.factory.buildComplementaryCertificationCourse({
+            certificationCourseId: certificationCourse.id,
+            complementaryCertificationId: complementaryCertification.id,
+            complementaryCertificationKey: complementaryCertification.key,
+          });
           const assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId: certificationCourse.id,
             state: Assessment.states.STARTED,
@@ -126,6 +131,11 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             sessionId: session.id,
             createdAt: new Date('2022-10-01T14:00:00Z'),
+          });
+          databaseBuilder.factory.buildComplementaryCertificationCourse({
+            certificationCourseId: certificationCourse.id,
+            complementaryCertificationId: complementaryCertification.id,
+            complementaryCertificationKey: complementaryCertification.key,
           });
           const assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId: certificationCourse.id,
