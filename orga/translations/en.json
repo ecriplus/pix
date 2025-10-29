@@ -1033,7 +1033,7 @@
           "placeholder": "All statuses"
         }
       },
-      "introduction": "The learning pathways combine an assessment and learning modules, enabling teaching to be tailored to each participant's actual level.",
+      "introduction": "The learning courses combine assessments and personalised learning modules, enabling teaching to be tailored to each participant's level.",
       "statistics": {
         "completed-participations": "Completed participations",
         "total-participations": "Total participations"
@@ -1057,9 +1057,9 @@
       }
     },
     "combined-courses": {
-      "empty-state": "No learning program available at the moment.",
+      "empty-state": "No learning course available at the moment.",
       "table": {
-        "caption": "List of learning programs",
+        "caption": "List of learning courses",
         "column": {
           "code": "Code",
           "completed": "Participants who completed",

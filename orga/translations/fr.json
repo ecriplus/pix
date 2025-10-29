@@ -1021,7 +1021,7 @@
           "placeholder": "Tous les statuts"
         }
       },
-      "introduction": "Les parcours apprenants articulent un diagnostic et des modules d’apprentissage, permettant une adaptation pédagogique fondée sur le niveau réel de chaque participant.",
+      "introduction": "Les parcours apprenants articulent des évaluations et des modules d’apprentissage personnalisés, permettant une adaptation pédagogique fondée sur le niveau de chaque participant.",
       "statistics": {
         "completed-participations": "Participations complétées",
         "total-participations": "Total des participations"
