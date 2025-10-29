@@ -17,6 +17,7 @@ export default class ModulePassage extends Component {
   @service store;
   @service modulixAutoScroll;
   @service passageEvents;
+  @service featureToggles;
 
   get sectionsWithFirstGrain() {
     return this.args.module.sections.map((section) => {
@@ -239,16 +240,19 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-    {{#if @module.isBeta}}
-      <BetaBanner />
-    {{/if}}
-    <ModuleNavbar
-      @currentStep={{this.currentPassageStep}}
-      @totalSteps={{this.displayableGrains.length}}
-      @module={{@module}}
-    />
+    {{#unless this.featureToggles.featureToggles.isModulixNavEnabled}}
+      <ModuleNavbar
+        @currentStep={{this.currentPassageStep}}
+        @totalSteps={{this.displayableGrains.length}}
+        @module={{@module}}
+      />
+    {{/unless}}
 
     <main class="module-passage">
+      {{#if @module.isBeta}}
+        <BetaBanner />
+      {{/if}}
+
       <div class="module-passage__title">
         <h1>{{@module.title}}</h1>
       </div>

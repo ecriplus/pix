@@ -65,6 +65,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
     test('should display navigation', async function (assert) {
       // given
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: false });
+
       const store = this.owner.lookup('service:store');
       const textElement = { content: 'content', type: 'text' };
       const qcuElement = {
@@ -197,6 +200,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('alert')).exists();
+      assert.dom(screen.getByText(t('pages.modulix.beta-banner'))).exists();
     });
   });
 
@@ -224,6 +228,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
       // then
       assert.dom(screen.queryByRole('alert')).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.modulix.beta-banner'))).doesNotExist();
     });
   });
 

@@ -1,0 +1,29 @@
+@use 'pix-design-tokens/breakpoints';
+
+img.module-navigation {
+  &__logo {
+    height: 40px;
+  }
+}
+
+.module-navigation {
+  @include breakpoints.device-is('mobile') {
+    position: sticky;
+    padding: 0;
+  }
+
+  & .pix-navigation__nav {
+    gap: var(--pix-spacing-4x);
+    align-items: center;
+  }
+
+  .pix-navigation__footer::before {
+    display: none;
+  }
+
+  &__button {
+    width: 3.375rem;
+    background-color: rgb(var(--pix-primary-700-inline), 0.2);
+    border-radius: var(--pix-spacing-2x);
+  }
+}

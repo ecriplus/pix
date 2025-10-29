@@ -1,6 +1,7 @@
 import { visit } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import setupIntl from 'mon-pix/tests/helpers/setup-intl';
 import { module, test } from 'qunit';
@@ -35,6 +36,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
     assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/details');
     assert.ok(document.title.includes(module.title));
     assert.dom(screen.queryByRole('alert')).doesNotExist();
+    assert.dom(screen.queryByText(t('pages.modulix.beta-banner'))).doesNotExist();
     assert.dom(screen.getByRole('contentinfo')).exists();
   });
 
@@ -62,6 +64,7 @@ module('Acceptance | Module | Routes | details', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('alert')).exists();
+      assert.dom(screen.getByText(t('pages.modulix.beta-banner'))).exists();
     });
   });
   test('should redirect /modules/:slug to /modules/:slug/details', async function (assert) {
