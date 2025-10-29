@@ -70,28 +70,28 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>une erreur de destinataire</p>",
+                    "content": "<p>Une erreur de destinataire</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non, ce message a bien été envoyé à Yvette. Mais attention, de nombreux messages cachent une tentative d’arnaque.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>une tentative d’arnaque</p>",
+                    "content": "<p>Une tentative d’arnaque</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, de nombreux messages cachent en fait une tentative d’arnaque.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>une information importante</p>",
+                    "content": "<p>Une information importante</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non, ce message ne donne aucune information importante, cette livraison de colis n'existe pas. Attention, de nombreux messages cachent une tentative d’arnaque.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>aucune idée</p>",
+                    "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Il s’agit ici d’une tentative d’arnaque par message.</p>"
                     }
@@ -344,35 +344,35 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>un sentiment de peur</p>",
+                          "content": "<p>Un sentiment de peur</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;<br></p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>un sentiment d’urgence</p>",
+                          "content": "<p>Un sentiment d’urgence</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>un sentiment d’espoir</p>",
+                          "content": "<p>Un sentiment d’espoir</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "<p>un sentiment de colère</p>",
+                          "content": "<p>Un sentiment de colère</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "5",
-                          "content": "<p>aucun de ces sentiments</p>",
+                          "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
                             "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de la peur et un sentiment d’urgence.</p>"
                           }
@@ -406,35 +406,35 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>un sentiment de peur</p>",
+                          "content": "<p>Un sentiment de peur</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>un sentiment d’urgence</p>",
+                          "content": "<p>Un sentiment d’urgence</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>un sentiment d’espoir</p>",
+                          "content": "<p>Un sentiment d’espoir</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "<p>un sentiment de colère</p>",
+                          "content": "<p>Un sentiment de colère</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non !&nbsp;Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "5",
-                          "content": "<p>aucun de ces sentiments</p>",
+                          "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
                             "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente de l’espoir&nbsp;: recevoir une somme d’argent inattendue.&nbsp;</p>"
                           }
@@ -468,35 +468,35 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>un sentiment de peur</p>",
+                          "content": "<p>Un sentiment de peur</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment de peur et d'urgence pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>un sentiment d’urgence</p>",
+                          "content": "<p>Un sentiment d’urgence</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur&nbsp; pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>un sentiment d’espoir</p>",
+                          "content": "<p>Un sentiment d’espoir</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non, avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "<p>un sentiment de colère</p>",
+                          "content": "<p>Un sentiment de colère</p>",
                           "feedback": {
                             "diagnosis": "<p>He non ! Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "5",
-                          "content": "<p>aucun de ces sentiments</p>",
+                          "content": "<p>Aucun de ces sentiments</p>",
                           "feedback": {
                             "diagnosis": "<p>Avec ce message, l’escroc veut que le lecteur ressente un sentiment d’urgence et de peur pour cette cousine bloquée à l’étranger.&nbsp;</p>"
                           }
