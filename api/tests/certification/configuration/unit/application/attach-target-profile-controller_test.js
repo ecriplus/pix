@@ -1,5 +1,5 @@
-import { attachTargetProfileController } from '../../../../../src/certification/configuration/application/attach-target-profile-controller.js';
 import { usecases as complementaryCertificationUsecases } from '../../../../../src/certification/complementary-certification/domain/usecases/index.js';
+import { attachTargetProfileController } from '../../../../../src/certification/configuration/application/attach-target-profile-controller.js';
 import { usecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
