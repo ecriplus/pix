@@ -102,7 +102,10 @@ Router.map(function () {
     });
     this.route('existing-participation', { path: '/participation-existante' });
   });
-  this.route('combined-courses', { path: '/parcours/:code' });
+  this.route('combined-courses', { path: '/parcours/:code' }, function () {
+    this.route('presentation', { path: '/' });
+    this.route('loading', { path: '/chargement' });
+  });
 
   this.route('module-preview-existing', { path: '/modules/preview/:slug' });
   this.route('module-preview', { path: '/modules/preview' });
