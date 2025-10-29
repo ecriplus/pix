@@ -7,11 +7,8 @@ const buildCertificationFrameworksChallenge = function ({
   id = databaseBuffer.getNextId(),
   discriminant = 2.2,
   difficulty = 3.5,
-  complementaryCertificationKey,
   challengeId,
-  calibrationId,
   createdAt = new Date('2020-01-01'),
-  version = getVersionNumber(createdAt),
   versionId,
 } = {}) {
   challengeId = _.isUndefined(challengeId) ? buildChallenge().id : challengeId;
@@ -20,11 +17,8 @@ const buildCertificationFrameworksChallenge = function ({
     id,
     discriminant,
     difficulty,
-    complementaryCertificationKey,
     challengeId,
-    calibrationId,
     createdAt,
-    version,
     versionId,
   };
 
@@ -33,17 +27,5 @@ const buildCertificationFrameworksChallenge = function ({
     values,
   });
 };
-
-function getVersionNumber(date) {
-  const pad = (n) => String(n).padStart(2, '0');
-  return (
-    date.getUTCFullYear().toString() +
-    pad(date.getUTCMonth() + 1) +
-    pad(date.getUTCDate()) +
-    pad(date.getUTCHours()) +
-    pad(date.getUTCMinutes()) +
-    pad(date.getSeconds())
-  );
-}
 
 export { buildCertificationFrameworksChallenge };

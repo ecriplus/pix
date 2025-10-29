@@ -413,8 +413,6 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       });
       const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         challengeId: 'recChallengeId',
-        complementaryCertificationKey: complementaryCertification.key,
-        version: '20230618000000',
         versionId: certificationVersion.id,
       });
 
@@ -466,13 +464,13 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         versionId: certificationVersion.id,
       });
       expect(certificationFrameworksChallenges).to.have.length(1);
-      expect(_.omit(certificationFrameworksChallenges[0], 'id', 'createdAt')).to.deep.equal({
+      expect(
+        _.omit(certificationFrameworksChallenges[0], 'id', 'createdAt', 'complementaryCertificationKey', 'version'),
+      ).to.deep.equal({
         calibrationId: null,
         discriminant: activeCalibratedChallenge.alpha,
         difficulty: activeCalibratedChallenge.delta,
         challengeId: certificationFrameworkChallenge.challengeId,
-        complementaryCertificationKey: complementaryCertification.key,
-        version: '20230618000000',
         versionId: certificationVersion.id,
       });
     });
@@ -514,7 +512,6 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       });
 
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
         challengeId: 'rec123',
         discriminant: 2.1,
         difficulty: 3.4,
