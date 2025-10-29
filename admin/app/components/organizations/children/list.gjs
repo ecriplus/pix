@@ -7,10 +7,14 @@ import ListItem from './list-item';
   <PixTable
     @variant="admin"
     @caption={{t "components.organizations.children-list.table-name"}}
-    @data={{@organizations}}
+    @data={{@childOrganizations}}
   >
-    <:columns as |organization context|>
-      <ListItem @organization={{organization}} @context={{context}} />
+    <:columns as |childOrganization context|>
+      <ListItem
+        @childOrganization={{childOrganization}}
+        @context={{context}}
+        @onRefreshOrganizationChildren={{@onRefreshOrganizationChildren}}
+      />
     </:columns>
   </PixTable>
 </template>

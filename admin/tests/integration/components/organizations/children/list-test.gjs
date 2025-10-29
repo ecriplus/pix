@@ -7,6 +7,12 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | organizations/children/list', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let currentUser;
+
+  hooks.beforeEach(async function () {
+    currentUser = this.owner.lookup('service:currentUser');
+    currentUser.adminMember = { isSuperAdmin: true };
+  });
 
   test('display children organizations list', async function (assert) {
     // given
@@ -24,7 +30,7 @@ module('Integration | Component | organizations/children/list', function (hooks)
     const organizations = [organization1, organization2];
 
     //  when
-    const screen = await renderScreen(<template><List @organizations={{organizations}} /></template>);
+    const screen = await renderScreen(<template><List @childOrganizations={{organizations}} /></template>);
 
     // then
     assert.dom(screen.getByRole('table', { name: t('components.organizations.children-list.table-name') })).exists();
@@ -32,6 +38,11 @@ module('Integration | Component | organizations/children/list', function (hooks)
     assert.dom(screen.getByRole('columnheader', { name: 'ID' })).exists();
     assert.dom(screen.getByRole('columnheader', { name: 'Nom' })).exists();
     assert.dom(screen.getByRole('columnheader', { name: 'Identifiant externe' })).exists();
+    assert
+      .dom(
+        screen.getByRole('columnheader', { name: t('components.organizations.children-list.table-headers.actions') }),
+      )
+      .exists();
 
     assert.strictEqual((await screen.findAllByRole('row')).length, 3);
 
