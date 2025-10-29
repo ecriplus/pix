@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/jameliore-mes-prompts/picto_moduleIA_prompt2.svg",
-    "description": "<p>Les IA génératives (ChatGPT, LeChat, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
+    "description": "<p>Les IA génératives (LeChat, ChatGPT, DeepSeek…) permettent de répondre à une grande variété de nos demandes. Mais la qualité de leurs réponses dépend beaucoup des questions qu’on leur pose, c’est-à-dire, des prompts qu’on leur donne.🤔 </p><p>Dans ce module, vous allez apprendre à formuler des prompts efficaces pour répondre à vos besoins&nbsp;et à ajuster au fur et à mesure vos demandes pour améliorer le résultat obtenu.&nbsp;🚀</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -30,7 +30,7 @@
               "element": {
                 "id": "339e443a-9eb7-476c-8689-9a7714c31607",
                 "type": "text",
-                "content": "<p>Gustave organise un tournoi de volley. 🏐</p><p>Il veut gagner du temps et demande à une IA générative d’écrire à sa place l’invitation aux participants. </p><p>Mais il est déçu du résultat… </p>"
+                "content": "<p>Gustave organise un tournoi de volley dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à une IA générative d’écrire à sa place l’invitation aux participants. </p><p>Mais il est déçu du résultat… </p>"
               }
             }
           ]
@@ -68,10 +68,25 @@
                     {
                       "userName": "Emma",
                       "direction": "outgoing",
-                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉 Il y a des techniques pour améliorer les résultats. 💡"
+                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉"
                     }
                   ]
                 }
+              }
+            }
+          ]
+        },
+        {
+          "id": "63688f5c-ca96-4b64-8cd4-db99e08b6767",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1fa1fc4c-90c4-456c-bd19-f2b83ff07856",
+                "type": "text",
+                "content": "<p>Eh oui, on peut améliorer ces résultats en étant plus précis. Comme lorsque l’on parle à quelqu’un, on sera mieux compris si  l’on explique les choses clairement.<br><br></p>"
               }
             }
           ]
@@ -149,7 +164,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<p>Un prompt bien formulé donne des <strong>précisions </strong>sur la situation&nbsp;: </p><ul><li>le lieu,&nbsp;🏠</li><li>le moment,&nbsp;⌛</li><li>l’objectif, etc.&nbsp;🎯</li></ul><p>Cela ajoute du <strong>contexte </strong>et donne du sens à la demande.</p><p> Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
+                "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte : l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>… </p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -246,7 +261,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
-                "content": "<p>On peut modifier le ton d’un prompt en précisant&nbsp;:&nbsp; </p><ul><li>à qui on veut s’adresser,&nbsp;👥</li><li>de quelle manière (de manière brève, pédagogue, professionnelle, etc.),💬</li><li>un rôle à jouer («en tant que coach sportif&nbsp;», «&nbsp;comme un professeur&nbsp;», etc.).🎭</li></ul>"
+                "content": "<h5>🤔Comment modifier la manière dont l’IA écrit ses réponses ? <br></h5><p>Pour obtenir un résultat adapté à nos besoins, on peut préciser :<br></p><ul><li><strong>à qui</strong> on veut s’adresser (un enfant de 7 ans, un expert du sujet…), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («en tant que coach sportif », «comme si tu étais Jules César », etc.).🎭</li></ul>"
               }
             }
           ]
@@ -261,7 +276,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs en vue du tournoi. </p><p>Pour cela, il prépare un document d’entraînement sous la forme d’un <strong>tableau</strong>.</p>"
+                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi. </p><p>Pour cela, il prépare un document d’entraînement sous la forme d’un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -317,12 +332,27 @@
           "title": "L’importance du format et de l’itération dans les prompts",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "c4a6a0a4-bbc8-4462-9098-af1e9d453cf3",
-                "type": "text",
-                "content": "<p>Préciser le <strong>format</strong> attendu dans le prompt permet de gagner du temps&nbsp;:&nbsp; </p><ul><li>il peut s’agir d’un <strong>texte</strong>, d’un <strong>tableau</strong>, d’une <strong>liste</strong>, d’un <strong>plan détaillé</strong>… </li></ul><p>On peut aussi préciser des <strong>contraintes </strong>dans ce format, par exemple&nbsp;:&nbsp; </p><ul><li>un texte d’une <strong>longueur maximale</strong> de 10 lignes, </li><li>un plan détaillé <strong>en précisant la structure</strong>, le nombre de parties et le titre.</li></ul><p>Mais vous n’avez pas besoin de préciser tous les détails et les contraintes dès le départ, vous pouvez le faire <strong>au fur et à mesure,</strong> en demandant des modifications.</p><p>💡Bon à savoir&nbsp;: Vous pouvez aussi demander à l’IA de partir d’un <strong>exemple </strong>et de le reproduire.</p>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
+                      "type": "text",
+                      "content": "<h5>🤔 Comment être efficace lorsque l’on utilise une IA générative ? <br></h5><ul><li>Préciser le <strong>format </strong>voulu, par exemple : un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajouter des <strong>contraintes </strong>comme la <strong>longueur </strong>(“en moins de 10 lignes”) ou la <strong>structure </strong>(“fais 2 parties et 2 sous-parties...”)</li></ul><p>Une autre manière de faire est de demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.<br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
+                      "type": "text",
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à ce que je voulais, que faire ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….<br></p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -342,7 +372,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
-                "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton.</strong></li>\n    <li>Attribuer éventuellement un <strong>rôle </strong>ou une identité à l’IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
+                "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:&nbsp;</p>\n<ul>\n    <li>Utiliser un verbe d’<strong>action.</strong></li>\n    <li>Donner du <strong>contexte.</strong></li>\n    <li>Préciser le <strong>format attendu.</strong></li>\n    <li>Préciser éventuellement le <strong>ton </strong>et <strong>des contraintes.</strong></li>\n    <li>Attribuer si nécessaire un <strong>rôle </strong>ou une identité à l’IA.</li>\n\n</ul>\n\n<p>🔄 Vous pouvez demander des corrections&nbsp; ou des précisions au fur et à mesure.</p>\n<p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des <strong>erreurs</strong>.</p>\n<p><strong>🔍&nbsp;Relire </strong>la réponse de l’IA est essentiel avant de la diffuser ou de la présenter à quelqu’un.</p>\n"
               }
             }
           ]
@@ -553,7 +583,7 @@
               "element": {
                 "id": "e90e7470-54a6-444d-bc77-39cfc9b0fad1",
                 "type": "text",
-                "content": "<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi&nbsp;:&nbsp;</p><p><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p><p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p><p><em>- musique&nbsp;: demander mairie pour sono </em></p><p><em>- si pluie → gymnase dispo ? ok !&nbsp;:-) </em></p><p><em>- buvette&nbsp;: jus, sandwichs, fruits → pas de chaud </em></p><p><em>- récompenses ? médailles → à chiffrer</em></p>"
+                "content": "<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi&nbsp;:&nbsp;</p><p><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p><p><em>- récompenses ? médailles → à chiffrer</em></p><p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p><p><em>- musique&nbsp;: demander mairie pour sono </em></p><p><em>- si pluie → gymnase dispo ? ok !&nbsp;:-) </em></p><p><em>- buvette&nbsp;: jus, sandwichs, fruits → pas de chaud </em></p>"
               }
             },
             {
@@ -561,7 +591,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pû être présentes.</p><p>Discutez avec l’IA&nbsp;jusqu’à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pu être présentes.</p><p>Discutez avec l’IA&nbsp;jusqu’à obtenir un compte-rendu qui correspond bien aux notes de Gustave.</p>"
               }
             },
             {
@@ -603,7 +633,7 @@
               "element": {
                 "id": "dd2cf906-b77f-4c4d-8f11-9aa53a606d03",
                 "type": "text",
-                "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée une publication sur le site du gymnase, à sa manière…</p><p>Ses précédentes publications sont disponibles ci-dessous&nbsp;:</p>"
+                "content": "<p>Gustave est content ; le tournoi de l’été a été un succès !&nbsp;🌞</p><p>Pour chaque édition du tournoi, il crée une <strong>publication</strong> sur le site du gymnase, à sa manière…</p><p>Il n'a pas encore écrit le texte pour le tournoi de l'été et a besoin de votre aide.</p><p>Ses précédentes publications et l<strong>'illustration de la prochaine publication</strong> se trouvent ci-dessous.</p>"
               }
             },
             {
@@ -643,6 +673,20 @@
                         "attribution": "",
                         "url": ""
                       }
+                    },
+                    {
+                      "title": "Le tournoi de l'été ☀️",
+                      "description": "Ce texte est manquant... C'est à vous de le générer avec l'IA ci-dessous.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
+                        "alt": "Une affiche concernant le tournoi de Volley.  Elle annonce l’équipe des volley-raptors vainqueur !"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
                     }
                   ],
                   "randomSlides": false,
@@ -657,19 +701,7 @@
               "element": {
                 "id": "52c9f208-8f95-4926-a64e-214041a834d2",
                 "type": "text",
-                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l’image illustrant le tournoi.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "9fb1cf79-a154-4b71-a1e5-cea6803b950b",
-                "type": "image",
-                "url": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
-                "alt": "Une affiche concernant le tournoi de volley - lire l’alternative textuelle",
-                "alternativeText": "<p>Une affiche concernant le tournoi de Volley. </p><p>Elle annonce l’équipe des volley-raptors vainqueur !&nbsp;</p>",
-                "legend": "",
-                "licence": ""
+                "content": "<p>À votre tour d’écrire l’<strong>actualité du tournoi de l’été</strong> à la façon des précédentes actualités de Gustave et en vous basant sur l’image illustrant le tournoi de l'été.</p>"
               }
             },
             {
@@ -690,7 +722,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details><p></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details></p><p></p><p></p><p></p>"
               }
             }
           ]
