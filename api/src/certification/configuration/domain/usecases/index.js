@@ -63,6 +63,7 @@ import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
+import { updateCertificationVersion } from './update-certification-version.js';
 
 const usecasesWithoutInjectedDependencies = {
   calibrateFrameworkVersion,
@@ -77,6 +78,7 @@ const usecasesWithoutInjectedDependencies = {
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,
+  updateCertificationVersion,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

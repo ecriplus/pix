@@ -76,26 +76,28 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
   });
 
   describe('#update', function () {
-    it('should update the expiration date of a certification version', async function () {
+    it('should update the expiration date and challenges configuration of a certification version', async function () {
       // given
+      const initialChallengesConfiguration = { maximumAssessmentLength: 20, limitToOneQuestionPerTube: false };
       const existingVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: Frameworks.PIX_PLUS_DROIT,
         startDate: new Date('2024-01-01'),
         expirationDate: null,
         assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-        challengesConfiguration: {},
+        challengesConfiguration: initialChallengesConfiguration,
       });
 
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
+      const newChallengesConfiguration = { maximumAssessmentLength: 32, limitToOneQuestionPerTube: true };
       const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
         id: existingVersion.id,
         scope: existingVersion.scope,
         startDate: existingVersion.startDate,
         expirationDate: newExpirationDate,
         assessmentDuration: existingVersion.assessmentDuration,
-        challengesConfiguration: JSON.parse(existingVersion.challengesConfiguration),
+        challengesConfiguration: newChallengesConfiguration,
       });
 
       // when
@@ -105,6 +107,7 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       const updatedVersion = await knex('certification_versions').where({ id: existingVersion.id }).first();
 
       expect(updatedVersion.expirationDate).to.deep.equal(newExpirationDate);
+      expect(updatedVersion.challengesConfiguration).to.deep.equal(newChallengesConfiguration);
       expect(updatedVersion.scope).to.equal(existingVersion.scope);
       expect(updatedVersion.startDate).to.deep.equal(existingVersion.startDate);
     });

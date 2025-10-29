@@ -113,7 +113,10 @@ export async function create({ version, challenges }) {
 export async function update({ version }) {
   const knexConn = DomainTransaction.getConnection();
 
-  await knexConn('certification_versions').where({ id: version.id }).update({ expirationDate: version.expirationDate });
+  await knexConn('certification_versions').where({ id: version.id }).update({
+    expirationDate: version.expirationDate,
+    challengesConfiguration: version.challengesConfiguration,
+  });
 }
 
 /**
