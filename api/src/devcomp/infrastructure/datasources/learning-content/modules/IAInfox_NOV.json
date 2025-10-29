@@ -408,7 +408,7 @@
               "element": {
                 "id": "46999db8-c96c-42e8-93ac-a558c72a55f2",
                 "type": "text",
-                "content": "<p>Djibril a reçu un message de son collègue Brian sur le groupe de collègues du travail. <br>Consultez le message puis répondez à la question.</p>"
+                "content": "<p>Djibril a reçu un message de son ami Brian sur le groupe de sa classe. <br>Consultez le message puis répondez à la question.</p>"
               }
             },
             {
@@ -416,9 +416,9 @@
               "element": {
                 "id": "6e6af05b-b933-4022-baa9-6194fdb63584",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/deepfakes/plusjamaisdevacances.png",
+                "url": "https://assets.pix.org/modules/deepfakes/telephone_deepfake.png",
                 "alt": "",
-                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les collègues du taff\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE VACANCES !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Cécile, du département RH. Faut envoyer ça à tout le monde pour qu’elle soit virée ! On va lui gâcher sa vie !&nbsp;»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
+                "alternativeText": "<p>Une conversation dans un groupe de messagerie instantanné nommé \"Les collègues du taff\"&nbsp;:&nbsp;<br>Brian partage une photo d'une femme manifestant avec une pancarte&nbsp;: «&nbsp;PLUS JAMAIS DE VACANCES !&nbsp;», suivi du message suivant&nbsp;:«&nbsp;Vous avez vu ! C’est Mme Martin, la prof de maths. Faut envoyer ça à tout le monde pour qu’elle soit virée !»<br>Des emojis sont visibles sous le message&nbsp;: 🔥, 💗, 😂, 😱, ➕</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -434,21 +434,21 @@
                     "id": "1",
                     "content": "<p>Liker le message de Brian.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de liker une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Liker cette photo, pourrait être considéré comme un soutien au cyberharcèlement mené par Brian. La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Partager la photo à ses contacts.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Cécile.  Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Mauvaise idée ! Avant de partager une image, le bon réflexe, c’est de vérifier d’où l’image vient et si elle est vraie. <br>Partager cette photo, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Demander à Brian d’où vient cette photo.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Cécile. Elle pourrait porter plainte.</p>"
+                      "diagnosis": "<p>Effectivement, chercher à savoir d'où vient une information avant de la partager, c'est le bon réflexe ! <br>La partager, comme le demande Brian, pourrait être considéré comme du cyberharcèlement.&nbsp;La diffusion de cette image pourrait avoir de graves conséquences pour Mme Martin. Elle pourrait porter plainte.</p>"
                     }
                   },
                   {
@@ -502,7 +502,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est crée avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
           ]
