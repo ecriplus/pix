@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.243.0](https://github.com/1024pix/pix/compare/v5.242.1...v5.243.0) (2025-10-29)
+
+### :rocket: Amélioration
+
+- [#13991](https://github.com/1024pix/pix/pull/13991) Ajouter un bouton "Détacher" dans la liste des filles d'une organisation mère (PIX-17882) 
+- [#13970](https://github.com/1024pix/pix/pull/13970) Ajouter une navigation dans les modules sur Pix App (PIX-20104). 
+- [#13984](https://github.com/1024pix/pix/pull/13984) Correction des traductions NL (PIX-20032) 
+- [#13947](https://github.com/1024pix/pix/pull/13947) Corriger la récupération du nombre d'épreuves d'une certification (PIX-19977). 
+- [#14018](https://github.com/1024pix/pix/pull/14018) Modifs module phishing nov suite relcture edito 
+
+### :bug: Correction
+
+- [#14002](https://github.com/1024pix/pix/pull/14002) Recourir aux courses de complémentaires au lieu des souscriptions dans `evaluation` (PIX-20144). 
+
+### :building_construction: Tech
+
+- [#14008](https://github.com/1024pix/pix/pull/14008) Suppression de scripts non utilisés côté Certification (PIX-20155).
+
 ## [5.242.1](https://github.com/1024pix/pix/compare/v5.242.0...v5.242.1) (2025-10-29)
 
 ### :bug: Correction
