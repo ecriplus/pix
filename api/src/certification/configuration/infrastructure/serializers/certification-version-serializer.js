@@ -1,6 +1,26 @@
+import jsonapiSerializer from 'jsonapi-serializer';
+
 import { Version } from '../../domain/models/Version.js';
 
-const deserialize = (json) => {
+const { Serializer } = jsonapiSerializer;
+
+export const serialize = (certificationVersion) => {
+  const attributes = [
+    'scope',
+    'startDate',
+    'expirationDate',
+    'assessmentDuration',
+    'globalScoringConfiguration',
+    'competencesScoringConfiguration',
+    'challengesConfiguration',
+  ];
+
+  return new Serializer('certification-versions', {
+    attributes,
+  }).serialize(certificationVersion);
+};
+
+export const deserialize = (json) => {
   const attributes = json.data.attributes;
 
   return new Version({
@@ -14,5 +34,3 @@ const deserialize = (json) => {
     challengesConfiguration: attributes['challenges-configuration'],
   });
 };
-
-export { deserialize };

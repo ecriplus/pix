@@ -58,6 +58,7 @@ import { createFlashAssessmentConfiguration } from './create-flash-assessment-co
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
+import { getActiveVersionByScope } from './get-active-version-by-scope.js';
 import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
@@ -74,6 +75,7 @@ const usecasesWithoutInjectedDependencies = {
   findComplementaryCertifications,
   getActiveFlashAssessmentConfiguration,
   getCurrentFrameworkVersion,
+  getActiveVersionByScope,
   getComplementaryCertificationForTargetProfileAttachmentRepository,
   getFrameworkHistory,
   importScoWhitelist,

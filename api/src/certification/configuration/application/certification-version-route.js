@@ -11,6 +11,35 @@ import { certificationVersionController } from './certification-version-controll
 const register = async function (server) {
   server.route([
     {
+      method: 'GET',
+      path: '/api/admin/certification-versions/{scope}/active',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasRoleSuperAdmin',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            scope: Joi.string()
+              .required()
+              .valid(...Object.values(Frameworks)),
+          }),
+        },
+        handler: certificationVersionController.getActiveVersionByScope,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
+          'Elle permet de récupérer la version active de certification pour un scope donné',
+        ],
+      },
+    },
+    {
       method: 'PATCH',
       path: '/api/admin/certification-versions/{certificationVersionId}',
       config: {
