@@ -26,6 +26,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
 
       // then
       assert.dom(screen.getByRole('alert')).exists();
+      assert.dom(screen.getByText(t('pages.modulix.beta-banner'))).exists();
     });
   });
 
@@ -46,7 +47,7 @@ module('Integration | Component | Module | Recap', function (hooks) {
       const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
 
       // then
-      assert.dom(screen.queryByRole('alert')).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.modulix.beta-banner'))).doesNotExist();
     });
   });
 
