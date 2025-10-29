@@ -171,7 +171,6 @@ import { buildComplementaryCertificationBadge } from './certification/complement
 import { buildActiveCalibratedChallenge } from './certification/configuration/build-active-calibrated-challenge.js';
 import { buildCenter as buildConfigurationCenter } from './certification/configuration/build-center.js';
 import { buildCertificationFrameworksChallenge } from './certification/configuration/build-certification-frameworks-challenge.js';
-import { buildFrameworkChallenges } from './certification/configuration/build-framework-challenges.js';
 import { buildVersion as buildConfigurationVersion } from './certification/configuration/build-version.js';
 import { buildCandidate } from './certification/enrolment/build-candidate.js';
 import { buildCertificationEligibility } from './certification/enrolment/build-certification-eligibility.js';
@@ -239,8 +238,7 @@ const certification = {
     buildActiveCalibratedChallenge,
     buildCenter: buildConfigurationCenter,
     buildCertificationFrameworksChallenge,
-    buildFrameworkChallenges,
-    buildConfigurationVersion,
+    buildVersion: buildConfigurationVersion,
   },
   complementaryCertification: {
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadge,

@@ -8,6 +8,7 @@ describe('Certification | Configuration | Unit | Domain | Models | Certification
     it('updates discriminant and difficulty of a certificaitonFrameworksChallenge', function () {
       const complementaryCertification = domainBuilder.certification.shared.buildComplementaryCertification();
       const certificationFrameworksChallenge = new CertificationFrameworksChallenge({
+        versionId: 1,
         discriminant: null,
         difficulty: null,
         challengeId: 'rec123',
@@ -33,7 +34,9 @@ describe('Certification | Configuration | Unit | Domain | Models | Certification
     it('should not allow CertificationFrameworksChallenge without challengeId', function () {
       // given
       // when
-      const error = catchErrSync(() => new CertificationFrameworksChallenge({ discriminant: 2.5, difficulty: 3.0 }))();
+      const error = catchErrSync(
+        () => new CertificationFrameworksChallenge({ versionId: 1, discriminant: 2.5, difficulty: 3.0 }),
+      )();
 
       // then
       expect(error).to.be.an.instanceOf(EntityValidationError);
@@ -43,7 +46,8 @@ describe('Certification | Configuration | Unit | Domain | Models | Certification
       // given
       // when
       const error = catchErrSync(
-        () => new CertificationFrameworksChallenge({ challengeId: null, discriminant: 2.5, difficulty: 3.0 }),
+        () =>
+          new CertificationFrameworksChallenge({ versionId: 1, challengeId: null, discriminant: 2.5, difficulty: 3.0 }),
       )();
 
       // then
@@ -54,7 +58,8 @@ describe('Certification | Configuration | Unit | Domain | Models | Certification
       // given
       // when
       const error = catchErrSync(
-        () => new CertificationFrameworksChallenge({ challengeId: 123, discriminant: 2.5, difficulty: 3.0 }),
+        () =>
+          new CertificationFrameworksChallenge({ versionId: 1, challengeId: 123, discriminant: 2.5, difficulty: 3.0 }),
       )();
 
       // then

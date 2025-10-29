@@ -29,16 +29,16 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
       scope: complementaryCertificationKey,
     });
 
-    const frameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-      versionId,
-      challenges: [
-        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({ challengeId: 'rec1' }),
-      ],
-    });
+    const challenges = [
+      domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+        versionId,
+        challengeId: 'rec1',
+      }),
+    ];
 
     versionsRepository.findActiveByScope.withArgs({ scope: complementaryCertificationKey }).resolves(version);
 
-    frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(frameworkChallenges);
+    frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
     const area = domainBuilder.buildArea();
     learningContentRepository.getFrameworkReferential.resolves([area]);

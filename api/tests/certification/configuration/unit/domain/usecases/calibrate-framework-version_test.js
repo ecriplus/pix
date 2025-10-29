@@ -34,21 +34,19 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       const calibrationId = 1;
       const versionId = 123;
 
-      const frameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-        versionId,
-        challenges: [
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec1234',
-            discriminant: null,
-            difficulty: null,
-          }),
-        ],
-      });
+      const challenges = [
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId,
+          challengeId: 'rec1234',
+          discriminant: null,
+          difficulty: null,
+        }),
+      ];
 
       const activeCalibratedChallenges = [
         domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
           scope: version.scope,
-          challengeId: frameworkChallenges.challenges[0].challengeId,
+          challengeId: challenges[0].challengeId,
           discriminant: 1.4,
           difficulty: 2.2,
         }),
@@ -56,9 +54,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
 
-      frameworkChallengesRepository.getByVersionId
-        .withArgs({ versionId })
-        .resolves(frameworkChallenges);
+      frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
       activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
@@ -77,7 +73,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       });
 
       // then
-      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(frameworkChallenges);
+      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(challenges);
     });
   });
 
@@ -87,26 +83,25 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       const calibrationId = 1;
       const versionId = 123;
 
-      const frameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-        versionId,
-        challenges: [
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec1234',
-            discriminant: null,
-            difficulty: null,
-          }),
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec3456',
-            discriminant: null,
-            difficulty: null,
-          }),
-        ],
-      });
+      const challenges = [
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId,
+          challengeId: 'rec1234',
+          discriminant: null,
+          difficulty: null,
+        }),
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId,
+          challengeId: 'rec3456',
+          discriminant: null,
+          difficulty: null,
+        }),
+      ];
 
       const activeCalibratedChallenges = [
         domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
           scope: version.scope,
-          challengeId: frameworkChallenges.challenges[1].challengeId,
+          challengeId: challenges[1].challengeId,
           discriminant: 1.4,
           difficulty: 2.2,
         }),
@@ -114,9 +109,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
 
-      frameworkChallengesRepository.getByVersionId
-        .withArgs({ versionId })
-        .resolves(frameworkChallenges);
+      frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
       activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({
@@ -135,7 +128,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       });
 
       // then
-      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(frameworkChallenges);
+      expect(frameworkChallengesRepository.update).to.have.been.calledOnceWith(challenges);
     });
   });
 
@@ -145,21 +138,19 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       const calibrationId = 1;
       const versionId = 123;
 
-      const frameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-        versionId,
-        challenges: [
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec1234',
-            discriminant: null,
-            difficulty: null,
-          }),
-        ],
-      });
+      const challenges = [
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId,
+          challengeId: 'rec1234',
+          discriminant: null,
+          difficulty: null,
+        }),
+      ];
 
       const activeCalibratedChallenges = [
         domainBuilder.certification.configuration.buildActiveCalibratedChallenge({
           scope: version.scope,
-          challengeId: frameworkChallenges.challenges[0].challengeId,
+          challengeId: challenges[0].challengeId,
           discriminant: 1.4,
           difficulty: 2.2,
         }),
@@ -170,9 +161,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
 
-      frameworkChallengesRepository.getByVersionId
-        .withArgs({ versionId })
-        .resolves(frameworkChallenges);
+      frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
       activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
         .withArgs({

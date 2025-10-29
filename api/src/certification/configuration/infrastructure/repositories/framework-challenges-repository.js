@@ -1,12 +1,11 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationFrameworksChallenge } from '../../domain/models/CertificationFrameworksChallenge.js';
-import { FrameworkChallenges } from '../../domain/models/FrameworkChallenges.js';
 
 /**
  * @param {Object} params
  * @param {number} params.versionId
- * @returns {Promise<FrameworkChallenges>}
+ * @returns {Promise<Array<CertificationFrameworksChallenge>>}
  * @throws {NotFoundError}
  */
 export async function getByVersionId({ versionId }) {
@@ -25,32 +24,33 @@ export async function getByVersionId({ versionId }) {
 }
 
 /**
- * @param {FrameworkChallenges} frameworkChallenges
+ * @param {Array<CertificationFrameworksChallenge>} challenges
  * @returns {Promise<void>}
  */
-export async function update(frameworkChallenges) {
+export async function update(challenges) {
   const knexConn = DomainTransaction.getConnection();
 
-  for (const { discriminant, difficulty, challengeId } of frameworkChallenges.challenges) {
+  for (const { versionId, discriminant, difficulty, challengeId } of challenges) {
     await knexConn('certification-frameworks-challenges')
       .update({
         discriminant,
         difficulty,
       })
       .where({
-        versionId: frameworkChallenges.versionId,
+        versionId,
         challengeId,
       });
   }
 }
 
 function _toDomain({ certificationFrameworksChallengesDTO }) {
-  const { versionId } = certificationFrameworksChallengesDTO[0];
-
-  return new FrameworkChallenges({
-    versionId,
-    challenges: certificationFrameworksChallengesDTO.map(
-      (challenge) => new CertificationFrameworksChallenge(challenge),
-    ),
-  });
+  return certificationFrameworksChallengesDTO.map(
+    ({ versionId, challengeId, discriminant, difficulty }) =>
+      new CertificationFrameworksChallenge({
+        versionId,
+        challengeId,
+        discriminant,
+        difficulty,
+      }),
+  );
 }

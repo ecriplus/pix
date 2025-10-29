@@ -52,29 +52,28 @@ describe('Certification | Configuration | Integration | Repository | framework-c
 
       await databaseBuilder.commit();
 
-      const expectedFrameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-        versionId: version.id,
-        challenges: [
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: firstChallengeSelected.challengeId,
-            discriminant: firstChallengeSelected.discriminant,
-            difficulty: firstChallengeSelected.difficulty,
-          }),
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: secondChallengeSelected.challengeId,
-            discriminant: secondChallengeSelected.discriminant,
-            difficulty: secondChallengeSelected.difficulty,
-          }),
-        ],
-      });
+      const expectedChallenges = [
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId: version.id,
+          challengeId: firstChallengeSelected.challengeId,
+          discriminant: firstChallengeSelected.discriminant,
+          difficulty: firstChallengeSelected.difficulty,
+        }),
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId: version.id,
+          challengeId: secondChallengeSelected.challengeId,
+          discriminant: secondChallengeSelected.discriminant,
+          difficulty: secondChallengeSelected.difficulty,
+        }),
+      ];
 
       // when
-      const frameworkChallenges = await frameworkChallengesRepository.getByVersionId({
+      const challenges = await frameworkChallengesRepository.getByVersionId({
         versionId: version.id,
       });
 
       // then
-      expect(frameworkChallenges).to.deep.equal(expectedFrameworkChallenges);
+      expect(challenges).to.deep.equal(expectedChallenges);
     });
   });
 
@@ -104,24 +103,23 @@ describe('Certification | Configuration | Integration | Repository | framework-c
 
       await databaseBuilder.commit();
 
-      const frameworkChallenges = domainBuilder.certification.configuration.buildFrameworkChallenges({
-        versionId: version.id,
-        challenges: [
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec123',
-            discriminant: 1.5,
-            difficulty: 2.0,
-          }),
-          domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
-            challengeId: 'rec456',
-            discriminant: 2.5,
-            difficulty: 3.0,
-          }),
-        ],
-      });
+      const challenges = [
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId: version.id,
+          challengeId: 'rec123',
+          discriminant: 1.5,
+          difficulty: 2.0,
+        }),
+        domainBuilder.certification.configuration.buildCertificationFrameworksChallenge({
+          versionId: version.id,
+          challengeId: 'rec456',
+          discriminant: 2.5,
+          difficulty: 3.0,
+        }),
+      ];
 
       // when
-      await frameworkChallengesRepository.update(frameworkChallenges);
+      await frameworkChallengesRepository.update(challenges);
 
       // then
       const updatedChallenges = await knex('certification-frameworks-challenges')

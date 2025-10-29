@@ -4,6 +4,7 @@ import { EntityValidationError } from '../../../../shared/domain/errors.js';
 
 export class CertificationFrameworksChallenge {
   static #schema = Joi.object({
+    versionId: Joi.number().required(),
     challengeId: Joi.string().required(),
     discriminant: Joi.number().allow(null).optional(),
     difficulty: Joi.number().allow(null).optional(),
@@ -11,11 +12,13 @@ export class CertificationFrameworksChallenge {
 
   /**
    * @param {Object} params
+   * @param {number} params.versionId
+   * @param {string} params.challengeId
    * @param {number} [params.discriminant]
    * @param {number} [params.difficulty]
-   * @param {string} params.challengeId
    */
-  constructor({ challengeId, discriminant, difficulty }) {
+  constructor({ versionId, challengeId, discriminant, difficulty }) {
+    this.versionId = versionId;
     this.challengeId = challengeId;
     this.discriminant = discriminant;
     this.difficulty = difficulty;

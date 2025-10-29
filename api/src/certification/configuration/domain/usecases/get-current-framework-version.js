@@ -26,12 +26,12 @@ export const getCurrentFrameworkVersion = async ({
     throw new NotFoundError(`There is no framework for complementary ${complementaryCertificationKey}`);
   }
 
-  const frameworkChallenges = await frameworkChallengesRepository.getByVersionId({
+  const challenges = await frameworkChallengesRepository.getByVersionId({
     versionId: activeVersion.id,
   });
 
   const frameworkAreas = await learningContentRepository.getFrameworkReferential({
-    challengeIds: frameworkChallenges.challenges.map(({ challengeId }) => challengeId),
+    challengeIds: challenges.map(({ challengeId }) => challengeId),
   });
 
   return {
