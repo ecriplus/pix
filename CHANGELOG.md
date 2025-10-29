@@ -1,5 +1,17 @@
 # Pix Changelog
 
+## [5.242.1](https://github.com/1024pix/pix/compare/v5.242.0...v5.242.1) (2025-10-29)
+
+### :bug: Correction
+
+- [#14015](https://github.com/1024pix/pix/pull/14015) Permettre de répondre à nouveau à un QROCM validé sans réponse 
+
+### :building_construction: Tech
+
+- [#14017](https://github.com/1024pix/pix/pull/14017) Ajouter des logs dans le scripts sur le rééquilibrage des passages dans la table génrique des participations. 
+- [#13996](https://github.com/1024pix/pix/pull/13996) Enlever les anciens fichiers json présents du gitignore   
+- [#14001](https://github.com/1024pix/pix/pull/14001) Supprimer les scripts obsolètes du scope prescription .
+
 # [5.242.0](https://github.com/1024pix/pix/compare/v5.241.0...v5.242.0) (2025-10-28)
 
 ### :rocket: Amélioration
