@@ -455,12 +455,12 @@
     "params": {
       "acceptInvitation": "Uitnodiging accepteren",
       "doNotAnswer": "Dit is een automatische e-mail, antwoord niet.",
-      "here": "hier",
+      "here": "Neem contact met ons op hier.",
       "moreAbout": "Ontdek meer over",
-      "needHelp": "Hulp nodig? Neem contact met ons op",
+      "needHelp": "Hulp nodig?",
       "oneTimeLink": "Deze link is voor eenmalig gebruik",
       "pixPresentation": "Pix is de openbare online service voor het beoordelen, ontwikkelen en certificeren van je digitale vaardigheden.",
-      "subtitle": "Met het Pix Orga platform kun je testcampagnes maken en beheren en de voortgang van je deelnemers volgen.",
+      "subtitle": "Met het Pix Orga-platform kun je testcampagnes aanmaken en beheren, en de voortgang van je deelnemers volgen.",
       "title": "Je bent uitgenodigd om lid te worden van Pix Orga",
       "yourOrganization": "Uw organisatie"
     },
@@ -471,12 +471,12 @@
       "askForHelp": "Hulp nodig? Neem contact met ons op",
       "disclaimer": "Als je de account niet hebt aangemaakt, kun je vragen om deze te verwijderen.",
       "doNotAnswer": "Dit is een automatische e-mail, antwoord niet.",
-      "goToPix": "Ik bevestig mijn e-mailadres",
+      "goToPix": "Mijn e-mailadres bevestigen",
       "helpdeskLinkLabel": "hier",
       "moreOn": "Ontdek meer over",
       "pixPresentation": "Pix is de online overheidsdienst voor het beoordelen, ontwikkelen en certificeren van je digitale vaardigheden.",
-      "subtitle": "Bedankt voor het aanmaken van je account. Er is nog één stap over om je account te beveiligen door je e-mailadres te valideren.",
-      "subtitleDescription": "Het is heel eenvoudig, klik op de knop hieronder en log in op je Pix-account.",
+      "subtitle": "Bedankt dat je een account hebt aangemaakt! Er is nog één stap nodig om je account te beveiligen: bevestig je e-mailadres.",
+      "subtitleDescription": "Klik op de knop hieronder om je e-mailadres te valideren en toegang te krijgen tot je Pix-account.",
       "title": "Hallo {firstName},"
     },
     "subject": "Je Pix-account is aangemaakt"
@@ -486,12 +486,12 @@
       "clickOnTheButton": "Klik op de knop hieronder om een nieuw wachtwoord te kiezen.",
       "contactUs": "neem hier contact met ons op",
       "doNotAnswer": "Dit is een automatische e-mail, antwoord niet. Hulp nodig?",
-      "linkValidFor": "Deze link is 24 uur geldig. Als je dit verzoek niet hebt ingediend, negeer deze e-mail dan.",
+      "linkValidFor": "Deze link is 24 uur geldig. Heb je dit verzoek niet zelf ingediend? Negeer deze e-mail dan gewoon.",
       "moreOn": "Ontdek meer over",
       "pixPresentation": "Pix is de online overheidsdienst voor het beoordelen, ontwikkelen en certificeren van je digitale vaardigheden.",
       "resetMyPassword": "Een nieuw wachtwoord instellen",
       "title": "Wachtwoord opnieuw instellen",
-      "weCannotSendYourPassword": "Hallo, om veiligheidsredenen sturen we jouw wachtwoord niet per e-mail."
+      "weCannotSendYourPassword": "Hallo, Om veiligheidsredenen sturen we je wachtwoord niet per e-mail."
     },
     "subject": "Verzoek instellen nieuw wachtwoord Pix"
   },
@@ -499,11 +499,11 @@
     "params": {
       "contactUs": "neem hier contact met ons op",
       "hello": "Hallo {firstName},",
-      "requestConfirmation": "Na je verzoek zullen we de verwijdering van je Pix-account en je persoonlijke gegevens bevestigen.",
-      "seeYouSoon": "We hopen je snel te zien voor nieuwe digitale avonturen.",
-      "signing": "Het Pix team",
+      "requestConfirmation": "We hebben je verzoek ontvangen om je Pix-account te verwijderen. Zodra het proces is afgerond, ontvang je een bevestiging van ons.",
+      "seeYouSoon": "We hopen je in de toekomst weer te mogen verwelkomen voor nieuwe digitale avonturen.",
+      "signing": "Groeten, Het Pix team",
       "title": "Je account verwijderen",
-      "warning": "Als u niet de bron van dit verzoek bent, neem dan contact op met ondersteuning."
+      "warning": "Was jij dit niet? Neem dan contact op met onze ondersteuning."
     },
     "subject": "Je account verwijderen"
   },

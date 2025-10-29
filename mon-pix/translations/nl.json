@@ -43,7 +43,7 @@
       "download": "Downloaden",
       "lets-go": "Laten we gaan!",
       "login": "Inloggen",
-      "quit": "Verlaat",
+      "quit": "Terug",
       "refresh-page": "Pagina verversen",
       "show-less": "Minder tonen",
       "show-more": "Meer bekijken",
@@ -609,7 +609,7 @@
         "results": "{result, number, ::percent} succes",
         "resume": {
           "extra-information": "Hervat de {campaignTitle} route",
-          "information": "Overnemen"
+          "information": "Verder gaan"
         },
         "retry": "Verbeter mezelf",
         "see-more": "Zie details",
@@ -1123,7 +1123,7 @@
         "qcm": "Selecteer ten minste twee antwoorden om te bevestigen. Zo niet, sla dan over.",
         "qcu": "Selecteer een antwoord om te bevestigen. Sla anders over.",
         "qroc": "Vul het tekstveld in om te valideren. Sla anders over.",
-        "qroc-auto-reply": "\"U kunt valideren\" wordt weergegeven wanneer de test is geslaagd. Probeer het opnieuw of slaag.",
+        "qroc-auto-reply": "\"U kunt valideren\" wordt weergegeven wanneer de proef is geslaagd. Probeer het opnieuw of ga verder.",
         "qroc-positive-number": "Voer om te valideren een getal in dat groter is dan of gelijk is aan 0, sla anders over.",
         "qrocm": "Vul alle antwoordvelden in om te valideren. Zo niet, sla dan over."
       },
@@ -1287,7 +1287,7 @@
       "actions": {
         "continue": {
           "extra-information": "De competentie hervatten {competenceName}",
-          "label": "Overnemen"
+          "label": "Verder gaan"
         },
         "improve": {
           "description": {
@@ -1317,7 +1317,7 @@
         }
       },
       "for-competence": "de vaardigheid  {competence}",
-      "next-level-info": "{ remainingPixToNextLevel } pix voordat de niveau { level }",
+      "next-level-info": "Nog { remainingPixToNextLevel } pix voor niveau { level }",
       "title": "Bevoegdheid",
       "tutorials": {
         "description": "Hier is een selectie van tutorials om je te helpen Pix te verdienen.",
@@ -1379,7 +1379,7 @@
       },
       "started-competences": {
         "subtitle": "Ga door met je vaardigheidstests, vind de nieuwste hier.",
-        "title": "Een vaardigheid terugnemen"
+        "title": "Een vaardigheid hernemen"
       },
       "title": "Home",
       "welcome": "Welkom { firstName }"
@@ -1432,7 +1432,7 @@
       "mediacentre-start-campaign-modal": {
         "actions": {
           "continue": "Ga verder met",
-          "quit": "Verlaat"
+          "quit": "Terug"
         },
         "message": "Om toegang te krijgen tot de cursus :",
         "message-footer": "Maak verbinding met Pix via je Mediacenter",
@@ -1535,7 +1535,7 @@
       "title": "Voor meer informatie"
     },
     "levelup-notif": {
-      "obtained-level": "Niveau {level} gewonnen!"
+      "obtained-level": "Niveau {level} behaald !"
     },
     "llm-preview": {
       "iframe-title": "ChatPix",
@@ -1888,7 +1888,7 @@
         },
         "actions": {
           "continue": "Ga verder met",
-          "resume": "Overnemen"
+          "resume": "Verder gaan"
         },
         "reminder-continue-campaign": "Je hebt je cursus niet afgerond",
         "reminder-continue-campaign-with-title": "Je hebt de \"{title}\" route niet voltooid",
@@ -2125,7 +2125,7 @@
     "timed-challenge-instructions": {
       "action": "Beginnen",
       "primary": "Je hebt '<span class=\"timed-challenge-instructies__time\">'{time}'</span>' om de volgende vraag te beantwoorden.",
-      "secondary": "Als je doorgaat wordt de opdracht niet als voltooid beschouwd.",
+      "secondary": "Daarna kun je nog antwoorden, maar wordt de opdracht niet als voltooid beschouwd.",
       "time": {
         "and": " en ",
         "minutes": "{minutes, plural, =0 {} =1 {# minuut} other {# minuten}}",
