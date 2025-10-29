@@ -1,5 +1,6 @@
+import { usecases as complementaryCertificationUsecases } from '../../complementary-certification/domain/usecases/index.js';
 import { usecases } from '../domain/usecases/index.js';
-import * as complementaryCertificationBadgeSerializer from '../infrastructure/serializers/jsonapi/complementary-certification-badge-serializer.js';
+import * as complementaryCertificationBadgeSerializer from '../infrastructure/serializers/complementary-certification-badge-serializer.js';
 
 const attachTargetProfile = async function (request, h, dependencies = { complementaryCertificationBadgeSerializer }) {
   const { userId } = request.auth.credentials;
@@ -10,7 +11,7 @@ const attachTargetProfile = async function (request, h, dependencies = { complem
     complementaryCertificationId,
   });
 
-  await usecases.attachBadges({
+  await complementaryCertificationUsecases.attachBadges({
     userId,
     complementaryCertification,
     targetProfileIdToDetach: targetProfileId,
@@ -18,7 +19,7 @@ const attachTargetProfile = async function (request, h, dependencies = { complem
   });
 
   if (!!targetProfileId && notifyOrganizations) {
-    await usecases.sendTargetProfileNotifications({
+    await complementaryCertificationUsecases.sendTargetProfileNotifications({
       targetProfileIdToDetach: targetProfileId,
       complementaryCertification,
     });
