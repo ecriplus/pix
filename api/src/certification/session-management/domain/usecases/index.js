@@ -5,7 +5,9 @@ import * as flashAlgorithmService from '../../../evaluation/domain/services/algo
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
+import * as sharedCertificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
+import * as evaluationVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import {
   answerRepository,
   assessmentRepository,
@@ -134,7 +136,9 @@ const dependencies = {
   flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   sessionPublicationService,
+  sharedCertificationCourseRepository,
   sharedSessionRepository,
+  evaluationVersionRepository,
   userRepository,
 };
 

@@ -42,6 +42,16 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       beforeEach(async function () {
         server = await createServer();
         await insertUserWithRoleSuperAdmin();
+
+        databaseBuilder.factory.buildCertificationVersion({
+          scope: 'CORE',
+          startDate: new Date('2019-01-01'),
+          expirationDate: null,
+          challengesConfiguration: {
+            maximumAssessmentLength: 10,
+          },
+        });
+
         databaseBuilder.factory.buildCertificationCpfCountry({
           code: '99100',
           commonName: 'FRANCE',
@@ -52,12 +62,22 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           INSEECode: '01091',
           isActualName: true,
         });
-        certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           verificationCode: 'ABCD123',
           createdAt: new Date('2019-12-21T15:44:38Z'),
           completedAt: new Date('2017-12-21T15:48:38Z'),
           sex: 'F',
-        }).id;
+        });
+        certificationCourseId = certificationCourse.id;
+
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          userId: certificationCourse.userId,
+          sessionId: certificationCourse.sessionId,
+        });
+
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: candidate.id,
+        });
 
         options = {
           headers: generateAuthenticatedUserRequestHeaders(),
@@ -381,16 +401,24 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     let server;
 
     beforeEach(async function () {
-      certificationCourse = databaseBuilder.factory.buildCertificationCourse({ version: 3 });
-      databaseBuilder.factory.buildCertificationConfiguration({
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: 'CORE',
+        startDate: new Date('2020-01-01'),
+        expirationDate: null,
         challengesConfiguration: {
           maximumAssessmentLength: 10,
         },
-        startingAt: new Date('2020-01-01'),
       });
 
       const user = await insertUserWithRoleSuperAdmin();
+      const session = databaseBuilder.factory.buildSession();
+      certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+        version: 3,
+        sessionId: session.id,
+        userId: user.id,
+      });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
+        sessionId: session.id,
         userId: user.id,
         certificationCourse,
       }));

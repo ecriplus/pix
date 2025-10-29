@@ -1,13 +1,14 @@
 import _ from 'lodash';
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { config } from '../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
+import { ComplementaryCertificationKeys } from '../../domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../domain/models/Frameworks.js';
 
 async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
@@ -65,9 +66,6 @@ async function get({ id }) {
 
   let accessibilityAdjustmentNeeded;
   if (certificationCourseDTO.version === 3) {
-    // TODO: get the number of challenge per course in a better way
-    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
-
     ({ accessibilityAdjustmentNeeded } = await knexConn('certification-candidates')
       .select('accessibilityAdjustmentNeeded')
       .where({
@@ -142,11 +140,6 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
 
   const challengesDTO = await _findAllChallenges(certificationCourseDTO.id, knexConn);
 
-  if (certificationCourseDTO.version === 3) {
-    // TODO: get the number of challenge per course in a better way
-    certificationCourseDTO.numberOfChallenges = config.v3Certification.numberOfChallengesPerCourse;
-  }
-
   return _toDomain({
     certificationCourseDTO,
     challengesDTO,
@@ -212,11 +205,37 @@ async function findCertificationCoursesBySessionId({ sessionId }) {
   return certificationCoursesDTO.map((certificationCourseDTO) => _toDomain({ certificationCourseDTO }));
 }
 
+/**
+ * @param {Object} params
+ * @param {number} params.courseId
+ * @returns {Promise<Frameworks>}
+ */
+async function getCertificationScope({ courseId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('complementary-certification-courses')
+    .select('complementary-certifications.key')
+    .where({ certificationCourseId: courseId })
+    .join(
+      'complementary-certifications',
+      'complementary-certifications.id',
+      'complementary-certification-courses.complementaryCertificationId',
+    )
+    .first();
+
+  if (result?.key && result.key !== ComplementaryCertificationKeys.CLEA) {
+    return result.key;
+  }
+
+  return Frameworks.CORE;
+}
+
 export {
   findAllByUserId,
   findCertificationCoursesBySessionId,
   findOneCertificationCourseByUserIdAndSessionId,
   get,
+  getCertificationScope,
   getSessionId,
   isVerificationCodeAvailable,
   save,

@@ -18,7 +18,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const assessmentId = 78;
       const isRejectedForFraud = true;
       const createdAt = new Date('2022-02-02');
-      const flashAlgorithmConfigurationCreationDate = new Date('2022-02-01');
       const completedAt = new Date('2022-02-03');
       const assessmentState = Assessment.states.ENDED_DUE_TO_FINALIZATION;
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
@@ -63,16 +62,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         lastAssessmentResultId,
       });
 
-      const numberOfChallenges = 1;
-
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: flashAlgorithmConfigurationCreationDate,
-        expirationDate: null,
-        challengesConfiguration: {
-          maximumAssessmentLength: numberOfChallenges,
-        },
-      });
-
       const answer = databaseBuilder.factory.buildAnswer({
         assessmentId,
         challengeId,
@@ -106,7 +95,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         assessmentResultStatus,
         abortReason,
         pixScore,
-        numberOfChallenges,
+        numberOfChallenges: null,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
       });
 
@@ -119,16 +108,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const firstChallengeId = 'recCHAL456';
       const secondChallengeId = 'recCHAL789';
       const thirdChallengeId = 'recCHAL123';
-      const flashAlgorithmConfigurationCreationDate = new Date('2020-01-01');
       const assessmentId = 78;
-
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: flashAlgorithmConfigurationCreationDate,
-        expirationDate: null,
-        challengesConfiguration: {
-          maximumAssessmentLength: 3,
-        },
-      });
 
       databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
       databaseBuilder.factory.buildCertificationChallenge({
@@ -269,16 +249,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       it('should return a V3CertificationCourseDetails without challenges', async function () {
         // given
         const certificationCourseId = 123;
-        const flashAlgorithmConfigurationCreationDate = new Date('2020-01-01');
         const assessmentId = 78;
-
-        databaseBuilder.factory.buildCertificationConfiguration({
-          startingDate: flashAlgorithmConfigurationCreationDate,
-          expirationDate: null,
-          challengesConfiguration: {
-            maximumAssessmentLength: 3,
-          },
-        });
 
         databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
         databaseBuilder.factory.buildAssessment({

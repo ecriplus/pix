@@ -240,7 +240,7 @@ const certification = {
     buildCenter: buildConfigurationCenter,
     buildCertificationFrameworksChallenge,
     buildConsolidatedFramework,
-    buildConfigurationVersion,
+    buildVersion: buildConfigurationVersion,
   },
   complementaryCertification: {
     buildComplementaryCertificationBadge: buildComplementaryCertificationBadge,
@@ -276,7 +276,7 @@ const certification = {
     buildComplementaryCertificationScoringWithoutComplementaryReferential,
     buildComplementaryCertificationScoringWithComplementaryReferential,
     buildDoubleCertificationScoring,
-    buildEvaluationVersion,
+    buildVersion: buildEvaluationVersion,
   },
   sessionManagement: {
     buildAllowedCertificationCenterAccess: buildSessionManagementAllowedCertificationCenterAccess,
