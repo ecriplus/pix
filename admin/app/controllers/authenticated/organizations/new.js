@@ -7,6 +7,7 @@ export default class NewController extends Controller {
   @service pixToast;
   @service router;
   @service intl;
+  @service store;
 
   queryParams = ['parentOrganizationId', 'parentOrganizationName'];
 
@@ -38,6 +39,12 @@ export default class NewController extends Controller {
     try {
       await this.model.save();
       this.pixToast.sendSuccessNotification({ message: 'L’organisation a été créée avec succès.' });
+
+      if (this.model.parentOrganizationId) {
+        const parentOrganization = await this.store.findRecord('organization', this.model.parentOrganizationId);
+        await parentOrganization.hasMany('children').reload();
+      }
+
       this.router.transitionTo('authenticated.organizations.get.all-tags', this.model.id);
     } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
