@@ -41,13 +41,25 @@ describe('Integration | Infrastructure | Repository | PixAssets', function () {
   });
 
   describe('#getAssetInfos', function () {
-    describe('when not from assets.pix.org', function () {
+    context('when not from assets.pix.org', function () {
       it('should throw', async function () {
         // when
         const error = await catchErr(getAssetInfos)('https://images.pix.fr/modules/placeholder-details.svg');
 
         // then
         expect(error.message).to.equal(`Asset URL "images.pix.fr" hostname is not handled. Use "assets.pix.org"`);
+      });
+    });
+
+    context('when assetsUrl is not a valid URL', function () {
+      it('should throw an error', async function () {
+        // when
+        const assetUrl = 'this.is.not.a.valid.url';
+        const error = await catchErr(getAssetInfos)(assetUrl);
+
+        // then
+        expect(error).to.be.instanceOf(Error);
+        expect(error.message).to.equal(`Asset URL "${assetUrl}" is invalid`);
       });
     });
 
