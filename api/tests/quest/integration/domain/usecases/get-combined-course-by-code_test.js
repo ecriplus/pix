@@ -1,12 +1,16 @@
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPARISONS as COMPARISONS_REQUIREMENT } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
@@ -40,7 +44,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         campaignId: campaign.id,
         userId,
         organizationLearnerId,
-        status: 'STARTED',
+        status: CampaignParticipationStatuses.STARTED,
       });
       databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bac-a-sable' });
       databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bases-clavier-1' });
@@ -52,44 +56,44 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               campaignId: {
                 data: campaign.id,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               status: {
-                data: 'SHARED',
-                comparison: 'equal',
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId1,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId2,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
@@ -107,6 +111,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: campaign.code,
           title: campaign.title,
           type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+          masteryRate: null,
           redirection: undefined,
           isCompleted: false,
           isLocked: false,
@@ -118,6 +123,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: 'bac-a-sable',
           title: 'Bac à sable',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          masteryRate: undefined,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
@@ -129,6 +135,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: 'bases-clavier-1',
           title: 'Les bases du clavier sur ordinateur 1/2',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          masteryRate: undefined,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
@@ -152,7 +159,8 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         campaignId: campaign.id,
         userId,
         organizationLearnerId,
-        status: 'SHARED',
+        status: CampaignParticipationStatuses.SHARED,
+        masteryRate: 0.5,
       });
       const training1 = databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bac-a-sable' });
       const training2 = databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bases-clavier-1' });
@@ -183,58 +191,58 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               campaignId: {
                 data: campaign.id,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               status: {
-                data: 'SHARED',
-                comparison: 'equal',
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId1,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId2,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId3,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
@@ -258,6 +266,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: campaign.code,
           title: campaign.title,
           type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+          masteryRate: 0.5,
           redirection: undefined,
           isCompleted: true,
           isLocked: false,
@@ -269,6 +278,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: 'bac-a-sable',
           title: 'Bac à sable',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          masteryRate: undefined,
           redirection: 'encryptedUrl',
           isCompleted: true,
           isLocked: false,
@@ -280,6 +290,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
           reference: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire une adresse mail',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+          masteryRate: undefined,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: false,
@@ -327,58 +338,58 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
         organizationId,
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               campaignId: {
                 data: campaign.id,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               status: {
-                data: 'SHARED',
-                comparison: 'equal',
+                data: CampaignParticipationStatuses.SHARED,
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId1,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId2,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: moduleId3,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },

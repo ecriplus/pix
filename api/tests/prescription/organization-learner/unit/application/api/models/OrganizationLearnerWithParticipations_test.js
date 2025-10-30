@@ -15,6 +15,7 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         status: CampaignParticipationStatuses.SHARED,
         campaignName: 'Mon nom 1',
         campaignId: 66,
+        masteryRate: 75,
       }),
       domainBuilder.buildCampaignParticipationOverview({
         id: 456,
@@ -22,6 +23,7 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         status: CampaignParticipationStatuses.TO_SHARE,
         campaignName: 'Mon nom 2',
         campaignId: 77,
+        masteryRate: 80,
       }),
     ];
 
@@ -55,6 +57,7 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         status: CampaignParticipationStatuses.SHARED,
         campaignName: 'Mon nom 1',
         campaignId: 66,
+        masteryRate: 75,
       },
       {
         targetProfileId: 654,
@@ -62,6 +65,7 @@ describe('Unit | Application| API | Models | OrganizationLearnerWithParticipatio
         status: CampaignParticipationStatuses.TO_SHARE,
         campaignName: 'Mon nom 2',
         campaignId: 77,
+        masteryRate: 80,
       },
     ]);
   });

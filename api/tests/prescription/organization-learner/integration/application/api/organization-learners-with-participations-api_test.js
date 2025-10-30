@@ -50,6 +50,7 @@ describe('Integration | API | Organization Learner With Participations', functio
         campaignId: campaign.id,
         organizationLearnerId: organizationLearner2.id,
         userId: user1.id,
+        masteryRate: 0.6,
       });
 
       await databaseBuilder.commit();
@@ -82,6 +83,7 @@ describe('Integration | API | Organization Learner With Participations', functio
               id: campaignParticipation.id,
               status: campaignParticipation.status,
               targetProfileId: campaign.targetProfileId,
+              masteryRate: 0.6,
             },
           ],
         },
@@ -131,6 +133,7 @@ describe('Integration | API | Organization Learner With Participations', functio
         campaignId: campaign.id,
         organizationLearnerId: organizationLearner1.id,
         userId: user1.id,
+        masteryRate: 0,
       });
 
       await databaseBuilder.commit();
@@ -160,6 +163,7 @@ describe('Integration | API | Organization Learner With Participations', functio
             id: campaignParticipation.id,
             status: campaignParticipation.status,
             targetProfileId: campaign.targetProfileId,
+            masteryRate: 0,
           },
         ],
       });
