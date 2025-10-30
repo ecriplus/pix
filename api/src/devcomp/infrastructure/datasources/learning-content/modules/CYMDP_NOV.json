@@ -46,56 +46,32 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Ohlala mon compte Snapgram a été piraté, je peux plus me connecter ! 😧",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Ohlala mon compte Snapgram a été piraté, je peux plus me connecter ! 😧"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ho zut ! Mais qu’est ce qui s’est passé ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Ho zut ! Mais qu’est ce qui s’est passé ?"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Je comprends pas, pourtant j’avais un super mot de passe !",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Je comprends pas, pourtant j’avais un super mot de passe !"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Ah bon ! tu es sûre ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Ah bon ! tu es sûre ?"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "C’était le nom de mon fils et l’année de naissance de mon chat ! Y’a que moi qui peut le savoir ! ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "C’était le nom de mon fils et l’année de naissance de mon chat ! Y’a que moi qui peut le savoir ! "
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Mais non, ce mot de passe n’est pas assez fort, un pirate informatique peut le trouver facilement ! 😐",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Mais non, ce mot de passe n’est pas assez fort, un pirate informatique peut le trouver facilement ! 😐"
                     }
                   ]
                 }
@@ -191,29 +167,17 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Ok, ok. Je vais choisir un nouveau mot de passe sans utiliser d’informations personnelles alors. ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Ok, ok. Je vais choisir un nouveau mot de passe sans utiliser d’informations personnelles alors. "
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Fini les piratages de mon compte ! 🛡️",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Fini les piratages de mon compte ! 🛡️"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "En fait, les pirates ont d’autres techniques pour trouver les mots de passe. 🥲",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "En fait, les pirates ont d’autres techniques pour trouver les mots de passe. 🥲"
                     }
                   ]
                 }
@@ -327,38 +291,22 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Bon, donc il me faut un mot de passe sans informations personnelles, pas trop courant…",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Bon, donc il me faut un mot de passe sans informations personnelles, pas trop courant…"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Et sans mots du dictionnaire… Si je mélange un peu quelques lettres dans mon mot de passe, ça suffira non ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Et sans mots du dictionnaire… Si je mélange un peu quelques lettres dans mon mot de passe, ça suffira non ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": " Alors… 🫣",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": " Alors… 🫣"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Quoi ? Il y a encore autre chose ? Ils sont forts ces pirates ! 😧",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Quoi ? Il y a encore autre chose ? Ils sont forts ces pirates ! 😧"
                     }
                   ]
                 }
@@ -471,20 +419,12 @@
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Ohlala, j’imaginais pas qu’il y avait tant de règles à suivre pour avoir un mot de passe fort. 😩",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Ohlala, j’imaginais pas qu’il y avait tant de règles à suivre pour avoir un mot de passe fort. 😩"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Et oui, bien protéger ses comptes en ligne, c’est important ! ☺️",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Et oui, bien protéger ses comptes en ligne, c’est important ! ☺️"
                     }
                   ]
                 }
@@ -757,56 +697,32 @@
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Tu as toujours du mal avec tes mots de passe ? 😅",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Tu as toujours du mal avec tes mots de passe ? 😅"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Oui, j’oublie tout le temps 😭",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Oui, j’oublie tout le temps 😭"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation  2️⃣ Transforme-la pour en faire un mot de passe fort.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Essaie ma méthode ! 1️⃣ Choisis une phrase que tu aimes avec des lettres, des chiffres et de la ponctuation  2️⃣ Transforme-la pour en faire un mot de passe fort."
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré » ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré » ?"
                     },
                     {
                       "userName": "Jennifer",
                       "direction": "outgoing",
-                      "content": "Parfait ! Si tu prends les premières lettres, ça donne B-Nel7nemcp 🔒",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Parfait ! Si tu prends les premières lettres, ça donne B-Nel7nemcp 🔒"
                     },
                     {
                       "userName": "Emma",
                       "direction": "incoming",
-                      "content": "Trop malin 😍",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
+                      "content": "Trop malin 😍"
                     }
                   ]
                 }
