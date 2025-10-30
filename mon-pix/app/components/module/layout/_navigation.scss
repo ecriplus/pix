@@ -22,6 +22,29 @@ img.module-navigation {
   }
 
   &__button {
+
+    &--current {
+      background-color: rgb(var(--pix-primary-700-inline), 0.60);
+
+      .pix-icon {
+        fill: var(--pix-neutral-0);
+      }
+    }
+
+    &--disabled {
+      background-color: var(--pix-neutral-0);
+      border: 1px solid var(--pix-primary-100);
+
+    .pix-icon {
+      fill: rgb(var(--pix-neutral-800-inline), 0.50);
+    }
+
+    }
+
+    &--enabled {
+      background-color: rgb(var(--pix-primary-700-inline), 0.2);
+    }
+
     width: 3.375rem;
     background-color: rgb(var(--pix-primary-700-inline), 0.2);
     border-radius: var(--pix-spacing-2x);

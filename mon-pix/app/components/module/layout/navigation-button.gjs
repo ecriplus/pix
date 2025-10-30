@@ -31,7 +31,7 @@ export default class ModulixNavigationButton extends Component {
       >{{this.sectionTitle @section.type}}</PixNavigationButton>
     {{else}}
       <PixIconButton
-        class="module-navigation__button"
+        class="module-navigation__button module-navigation__button{{if @isCurrentSection '--current' '--enabled'}}"
         @ariaLabel={{this.sectionTitle @section.type}}
         @triggerAction={{this.dummyFunction}}
         @iconName={{this.sectionTitleIcon @section.type}}
