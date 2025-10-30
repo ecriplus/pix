@@ -546,7 +546,8 @@
           "input-information": "ID of organisation(s) to add",
           "input-label": "Add one or more child organisations",
           "name": "Add child organisation(s) form"
-        }
+        },
+        "create-child-organization-button": "Create a child organization"
       },
       "children-list": {
         "actions": {

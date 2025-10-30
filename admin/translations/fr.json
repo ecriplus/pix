@@ -547,7 +547,8 @@
           "input-information": "ID d'organisation(s) à ajouter",
           "input-label": "Ajouter une ou plusieurs organisations filles",
           "name": "Formulaire d'ajout d'organisation(s) fille(s)"
-        }
+        },
+        "create-child-organization-button": "Créer une organisation fille"
       },
       "children-list": {
         "actions": {
