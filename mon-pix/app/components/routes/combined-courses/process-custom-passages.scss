@@ -56,8 +56,8 @@
     display: flex;
     gap: var(--pix-spacing-2x);
     margin-top: var(--pix-spacing-3x);
-    opacity: 0;
     color: var(--pix-neutral-500);
+    opacity: 0;
     transition: opacity 150ms ease-in;
 
     &--visible {
