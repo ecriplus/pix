@@ -13,6 +13,10 @@ export default class ModulixNavigation extends Component {
     return this.modulixNavigationProgress.currentSectionIndex === index;
   }
 
+  @action isPastSection(index) {
+    return this.modulixNavigationProgress.currentSectionIndex > index;
+  }
+
   <template>
     <PixNavigation
       class="app-navigation module-navigation"
@@ -25,7 +29,11 @@ export default class ModulixNavigation extends Component {
       </:brand>
       <:navElements>
         {{#each @sections as |section index|}}
-          <ModulixNavigationButton @section={{section}} @isCurrentSection={{this.isCurrentSection index}} />
+          <ModulixNavigationButton
+            @section={{section}}
+            @isCurrentSection={{this.isCurrentSection index}}
+            @isPastSection={{this.isPastSection index}}
+          />
         {{/each}}
       </:navElements>
     </PixNavigation>

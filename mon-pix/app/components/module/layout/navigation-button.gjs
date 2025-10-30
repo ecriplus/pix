@@ -20,18 +20,29 @@ export default class ModulixNavigationButton extends Component {
     return SECTION_TITLE_ICONS[type];
   }
 
+  get buttonClass() {
+    if (this.args.isCurrentSection) {
+      return '--current';
+    }
+    if (this.args.isPastSection) {
+      return '--enabled';
+    }
+    return '--disabled';
+  }
+
   @action
   dummyFunction() {}
 
   <template>
     {{#if this.media.isMobile}}
       <PixNavigationButton
+        class="module-navigation__mobile-button module-navigation__mobile-button{{this.buttonClass}}"
         href={{concat "#section_" @section.type}}
         @icon={{this.sectionTitleIcon @section.type}}
       >{{this.sectionTitle @section.type}}</PixNavigationButton>
     {{else}}
       <PixIconButton
-        class="module-navigation__button module-navigation__button{{if @isCurrentSection '--current' '--enabled'}}"
+        class="module-navigation__button module-navigation__button{{this.buttonClass}}"
         @ariaLabel={{this.sectionTitle @section.type}}
         @triggerAction={{this.dummyFunction}}
         @iconName={{this.sectionTitleIcon @section.type}}
