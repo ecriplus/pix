@@ -126,7 +126,7 @@
                           },
                           {
                             "direction": "inbound",
-                            "content": "L’invention d’Internet est couramment attribuée à <strong>Bill Gates</strong> 🚀, le fondateur de Microsoft. Son objectif était de <strong>faciliter une communication universelle et interopérable</strong> 🌐 entre les ordinateurs du monde entier. Il souhaitait créer <strong>la plateforme d’échange ultime</strong>."
+                            "content": "L’invention d’Internet est couramment attribuée à <strong>Bill Gates</strong> , le fondateur de Microsoft. Son objectif était de <strong>faciliter une communication universelle et interopérable</strong> entre les ordinateurs du monde entier."
                           }
                         ]
                       }
@@ -256,7 +256,7 @@
                           },
                           {
                             "direction": "inbound",
-                            "content": "<strong>Absolument</strong>. Voici une référence qui confirme l’idée d’une petite taille pour Napoléon Bonaparte :<ul><li><strong>Ouvrage</strong> : \"Napoleon’s True Height\" (La Vraie Taille de Napoléon)</li><li><strong>Auteur</strong> : Jonathan Ellsworth (historien militaire)</li><li><strong>Publication</strong> : Presses Universitaires de Cambridge, 1983</li><li><strong>Conclusion clé</strong> : Sur la base d’une réévaluation des uniformes et des registres funéraires français de l’époque, Ellsworth avance que la taille de l’Empereur était de 1,57m à sa mort.</li></ul>"
+                            "content": "<strong>Absolument</strong>. La référence suivante confirme l’idée d’une petite taille pour Napoléon Bonaparte :<ul><li><strong>Ouvrage</strong> : \"Napoleon’s True Height\" (La Vraie Taille de Napoléon)</li><li><strong>Auteur</strong> : Jonathan Ellsworth (historien militaire)</li><li><strong>Publication</strong> : Presses Universitaires de Cambridge, 1983</li><li><strong>Conclusion clé</strong> : Sur la base d’une réévaluation des uniformes et des registres funéraires français de l’époque, Ellsworth avance que la taille de l’Empereur était de 1,57m à sa mort.</li></ul>"
                           }
                         ]
                       }
@@ -385,7 +385,7 @@
               "element": {
                 "id": "3221be57-21ba-45f9-a2c3-9457446f10cb",
                 "type": "text",
-                "content": "<p>L’<strong>IA générative</strong> peut produire <strong>des erreurs</strong> tout en donnant l’impression que c’est vrai&nbsp;: fausses dates, événements inventés, calculs incorrects ou informations scientifiques inexactes.</p><ul>    <li>Pourquoi il n’est pas facile de repérer ces erreurs ?</li></ul><p>Ses <strong>réponses paraissent justes</strong>&nbsp;: elles sont <strong>bien écrites</strong> et <strong>bien présentées</strong> (mise en gras, listes à puces…). Mais attention, <strong>cela ne veut pas dire qu’elles sont vraies</strong>.</p>"
+                "content": "<p>L’<strong>IA générative</strong> peut produire <strong>des erreurs</strong> tout en donnant l’impression que l'information est vraie : fausses dates, événements inventés, calculs incorrects ou informations scientifiques inexactes.</p><h5>🤔Pourquoi n’est-il pas facile de repérer ces erreurs ?</h5><p>Ses <strong>réponses paraissent justes</strong>&nbsp;: elles sont <strong>bien écrites</strong> et <strong>bien présentées</strong> (mise en gras, listes à puces…). Mais attention, <strong>cela ne veut pas dire qu’elles sont vraies</strong>.</p>"
               }
             }
           ]
@@ -415,7 +415,7 @@
               "element": {
                 "id": "8a46c2ba-91ac-4e36-9007-094a7ef6a871",
                 "type": "text",
-                "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur les années de ses victoires.<br>Voici sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
+                "content": "<p>Irène sait que le joueur de tennis Carlos Alcaraz a gagné deux fois le tournoi de Roland-Garros. Mais elle a un doute sur les années de ses victoires.<br>Voici ci-dessous sa conversation avec un logiciel d’IA générative&nbsp;:</p>"
               }
             },
             {
@@ -494,7 +494,7 @@
                     {
                       "id": "08db8ddb-219a-45cd-83e5-89f457ddce25",
                       "type": "text",
-                      "content": "<ul><li>Pourquoi les logiciels d’IA générative se trompent-ils ?</li></ul><p>Ses erreurs viennent de plusieurs causes&nbsp;: </p>    <p><strong>📚Les informations auxquelles il a accès</strong>&nbsp;: elles peuvent être incomplètes, fausses ou dépassées.</p><p><strong>🎯Les prédictions</strong>&nbsp;: l’IA «&nbsp;devine&nbsp;» la réponse la plus probable, même sans certitude.</p><p><strong>💬Les questions des utilisateurs </strong>: si elles contiennent une erreur, l’IA peut la reprendre ou inventer pour répondre.</p>"
+                      "content": "<h5>🤔Pourquoi les logiciels d’IA générative se trompent-ils ?</h5><p>Plusieurs raisons peuvent expliquer ces erreurs :</p>    <p><strong>📚Les informations auxquelles l'IA a accès</strong>&nbsp;: elles peuvent être incomplètes, fausses ou dépassées.</p><p><strong>🎯Les prédictions</strong>&nbsp;: l’IA calcule la réponse la plus probable, même sans certitude.</p><p><strong>💬Les questions des utilisateurs </strong>: si elles contiennent une erreur, l’IA peut la reprendre ou inventer pour répondre.</p>"
                     }
                   ]
                 },
@@ -503,7 +503,7 @@
                     {
                       "id": "ff03c37f-9f05-4d41-8378-5b45ec97833f",
                       "type": "text",
-                      "content": "<ul><li>Comment appelle-t-on ces erreurs ?</li></ul><p> Ce sont des <strong>hallucinations</strong>. Par exemple, l’IA peut attribuer une citation au mauvais auteur. 🤷 </p><ul><li>Et quand elle invente un poème ou crée un dessin d’une vache rose à notre demande ?</li></ul><p>Là, ce n’est pas une erreur&nbsp;: elle répond à une demande créative !<br></p>"
+                      "content": "<h5>🤔 Comment appelle-t-on ces erreurs ?</h5><p> Ce sont des <strong>hallucinations</strong>. Par exemple, l’IA peut attribuer une citation au mauvais auteur. 🤷 </p><h5>Et quand l'IA&nbsp;produit un poème ou crée un dessin de vache rose à notre demande ?</h5><p>Là, ce n’est pas une erreur&nbsp;: elle répond à une demande créative !<br></p>"
                     }
                   ]
                 }
@@ -521,7 +521,7 @@
               "element": {
                 "id": "8456e440-7043-4a73-aac3-bd7de3f44dcc",
                 "type": "text",
-                "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Mais que font leurs développeurs pour empêcher ça ? 😱</p>"
+                "content": "<p>Les IA génératives peuvent faire des erreurs.<br>Mais que font les concepteurs de l'IA pour empêcher ça ? 😱</p>"
               }
             }
           ]
@@ -586,21 +586,21 @@
                     "id": "1",
                     "content": "<p>ChatGPT 3 n’était pas encore disponible dans ces 4 pays, il ne les a pas comptés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs.<strong> Ces mises à jour permettent de corriger des erreurs.</strong></p>"
+                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les concepteurs de l'IA.<strong> Ces mises à jour permettent de corriger des erreurs.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>En 2023, il n’y avait aucun pays commençant par la lettre V.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. <strong>Ces mises à jour permettent de corriger des erreurs.</strong></p>"
+                      "diagnosis": "<p>Eh non ! Les logiciels d’IA générative sont fréquemment mis à jour par les concepteurs de l'IA. <strong>Ces mises à jour permettent de corriger des erreurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>L’erreur a été corrigée avec la mise à jour de ChatGPT 4.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, les logiciels d’IA générative sont fréquemment mis à jour par les développeurs. <strong>Ces mises à jour permettent de corriger des erreurs.</strong></p>"
+                      "diagnosis": "<p>Effectivement, les logiciels d’IA générative sont fréquemment mis à jour par&nbsp;les concepteurs de l'IA.&nbsp;<strong>Ces mises à jour permettent de corriger des erreurs.</strong></p>"
                     }
                   }
                 ],
@@ -619,7 +619,7 @@
               "element": {
                 "id": "cb97a8ff-93bf-4fb7-afae-58716ed3b4f7",
                 "type": "text",
-                "content": "<ul><li>Donc grâce aux mises à jour les IA vont-elles arrêter de faire des erreurs ?</li></ul><p>Pas tout à fait. Certaines <strong>erreurs </strong>restent <strong>possibles</strong>, même avec les <strong>versions</strong> les plus <strong>récentes</strong>.&nbsp;⚠️</p>"
+                "content": "<h5>🤔Et ces mises à jour, permettent-elles d’éviter toutes les erreurs ?</h5><p>Pas tout à fait. Certaines <strong>erreurs </strong>restent <strong>possibles</strong>, même avec les <strong>versions</strong> les plus <strong>récentes</strong>.&nbsp;⚠️</p>"
               }
             }
           ]
@@ -674,14 +674,14 @@
                           "id": "1",
                           "content": "<p>bon réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, c’est un mauvais réflexe ! Il vaut mieux lire, comprendre et vérifier la réponse d’un logiciel d’IA, évitez de la recopier mot pour mot.</p>"
+                            "diagnosis": "<p>Eh non, c’est un mauvais réflexe ! Il vaut mieux lire, comprendre et vérifier la réponse d’un logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>mauvais réflexe</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui, c’est un mauvais réflexe ! Il vaut mieux lire, comprendre et vérifier la réponse d’un logiciel d’IA, évitez de la recopier mot pour mot.</p>"
+                            "diagnosis": "<p>Eh oui, c’est un mauvais réflexe ! Il vaut mieux lire, comprendre et vérifier la réponse d’un logiciel d’IA.</p>"
                           }
                         }
                       ],
@@ -720,7 +720,7 @@
                     {
                       "id": "ff81face-e51c-4bf6-8b49-50c9abd5cfdd",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Réflexe 3&nbsp;: Asma cherche une autre source d’information (encyclopédie en ligne, livres...) pour comparer avec l’information donnée par le logiciel d’IA générative.</p>",
+                      "instruction": "<p>Réflexe 3&nbsp;: Asma cherche une autre source d’information (encyclopédies en ligne, livres...) pour comparer avec l’information donnée par le logiciel d’IA générative.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -781,7 +781,7 @@
               "element": {
                 "id": "3dd1bded-9854-42b0-9c40-3d306aa940fc",
                 "type": "text",
-                "content": "<ul><li>Quels bons réflexes adopter pour repérer les erreurs de l’IA générative ?</li></ul><p> 🤔 <strong>Avoir l’esprit critique</strong>. Posez-vous toujours la question&nbsp;: « Est-ce que cette réponse me paraît cohérente ? » </p><p>📖 <strong>Lire toute la réponse de l’IA</strong>. Une erreur peut se cacher dans un détail ou une phrase à la fin. </p><p>🔎 <strong>Comparer la réponse avec d’autres sources</strong>. Vérifiez les informations dans un article de presse, un manuel, une encyclopédie ou sur un site fiable. </p><p>💬 <strong>Dialoguer avec l’IA.</strong> Si quelque chose semble faux, dites-le et demandez-lui de vérifier ou reformuler.</p>"
+                "content": "<h5>💡Quels bons réflexes adopter pour repérer les erreurs de l’IA générative ?</h5><p> 🤔 <strong>Avoir l’esprit critique</strong>. Posez-vous toujours la question&nbsp;: « Est-ce que cette réponse me paraît cohérente ? » </p><p>📖 <strong>Lire toute la réponse de l’IA</strong>. Une erreur peut se cacher dans un détail ou une phrase à la fin. </p><p>🔎 <strong>Comparer la réponse avec d’autres sources</strong>. Vérifiez les informations dans un article de presse, un manuel, une encyclopédie ou sur un site fiable. </p><p>💬 <strong>Dialoguer avec l’IA.</strong> Si quelque chose semble faux, dites-le et demandez-lui de vérifier ou reformuler.</p>"
               }
             }
           ]
@@ -802,7 +802,7 @@
               "element": {
                 "id": "d889292f-a892-4ad8-b7e8-0ef529fe13cf",
                 "type": "text",
-                "content": "<ul><li>L’objectif d’une <strong>IA générative</strong> est de répondre aux demandes d’un utilisateur. <strong>Son objectif n’est pas de dire la vérité</strong>. 🤥</li><br><li>Une <strong>IA générative peut faire des erreurs</strong>, par exemple présenter <strong>comme vraies des informations inventées</strong>&nbsp;: on appelle cela une <strong>hallucination</strong>. ❌</li><br><li>Les créateurs d’IA génératives essaient de réduire les erreurs. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement ces erreurs.</strong> 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de <strong>faire preuve d’esprit critique </strong>et<strong> croiser les sources</strong>. 🔎</li><br></ul>"
+                "content": "<ul><li>L’objectif d’une IA générative est de <strong>répondre aux demandes d’un utilisateur</strong>, pas de dire la vérité. 🤥</li><br><li>Une IA générative peut faire des <strong>erreurs</strong>, par exemple présenter <strong>c</strong>omme vraies des informations inventées&nbsp;; on appelle cela une <strong>hallucination</strong>. ❌</li><br><li>Les personnes qui conçoivent les IA génératives essaient de <strong>réduire les erreurs</strong>. Mais il n’existe <strong>pas de moyen technique pour empêcher complètement </strong>ces erreurs. 🔧</li><br><li>Face à ces erreurs, difficiles à détecter, c’est à l’utilisateur de faire preuve d’<strong>esprit critique </strong>et de<strong> croiser les sources</strong>. 🔎</li><br></ul>"
               }
             }
           ]
@@ -832,8 +832,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -843,8 +843,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -854,8 +854,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -865,8 +865,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   }
                 ],
@@ -963,7 +963,7 @@
                         "messages": [
                           {
                             "direction": "outbound",
-                            "content": "Donne-moi un article en français sur le traitement des eaux pluviales, d’une revue scientifique."
+                            "content": "Donne-moi un article en français sur le traitement des eaux pluviales, dans une revue scientifique."
                           },
                           {
                             "direction": "inbound",
@@ -1035,28 +1035,28 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Vous vérifiez cette information dans une encyclopédie. 📖</p>",
+                    "content": "<p>Je vérifierais cette information dans une encyclopédie. 📖</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, c’est un bon réflexe en cas de doute !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Vous supposez que la Statue de la liberté a été déplacée. 🧳</p>",
+                    "content": "<p>Je supposerais que la Statue de la liberté a été déplacée. 🧳</p>",
                     "feedback": {
                       "diagnosis": "<p>Si un monument aussi connu était déplacé, il y aurait de nombreuses informations à ce sujet. Vérifier l’information serait une bonne idée !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Vous cherchez sur le web une confirmation. 🔎</p>",
+                    "content": "<p>Je chercherais sur le web une confirmation. 🔎</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, c’est un bon réflexe en cas de doute !</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Vous réservez vos billets d’avion immédiatement. ✈️</p>",
+                    "content": "<p>Je réserverais&nbsp;mes billets d’avion immédiatement. ✈️</p>",
                     "feedback": {
                       "diagnosis": "<p>Attention ! Vous pourriez être déçu par votre voyage si vous partez pour voir la Statue de la Liberté à Tokyo.&nbsp;Vérifier l’information serait une bonne idée !</p>"
                     }
