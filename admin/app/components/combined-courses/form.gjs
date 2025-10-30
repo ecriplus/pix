@@ -36,7 +36,7 @@ export default class CombineCourseForm extends Component {
         comparison: 'all',
         data: {
           targetProfileId: {
-            data: this.itemId,
+            data: Number(this.itemId),
             comparison: 'equal',
           },
         },
