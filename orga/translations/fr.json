@@ -1013,7 +1013,15 @@
     },
     "combined-course": {
       "campaigns": "{count, plural, =1 {Voir le détail de la campagne} other {Voir le détail de la campagne n°{index}}}",
-      "introduction": "Les parcours apprenants articulent un diagnostic et des modules d’apprentissage, permettant une adaptation pédagogique fondée sur le niveau réel de chaque participant.",
+      "filters": {
+        "by-status": "Rechercher par le statut de la particpation",
+        "status": {
+          "COMPLETED": "Terminé",
+          "STARTED": "En cours",
+          "placeholder": "Tous les statuts"
+        }
+      },
+      "introduction": "Les parcours apprenants articulent des évaluations et des modules d’apprentissage personnalisés, permettant une adaptation pédagogique fondée sur le niveau de chaque participant.",
       "statistics": {
         "completed-participations": "Participations complétées",
         "total-participations": "Total des participations"

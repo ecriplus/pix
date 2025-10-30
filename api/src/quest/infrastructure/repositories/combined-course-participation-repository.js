@@ -1,5 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { filterByFullName } from '../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourseParticipation } from '../../domain/models/CombinedCourseParticipation.js';
 import {
@@ -67,11 +68,11 @@ export const getByUserId = async function ({ userId, questId }) {
   return new CombinedCourseParticipation(questParticipations[0]);
 };
 
-export const findUserIdsById = async function ({ combinedCourseId, page }) {
+export const findUserIdsByCombinedCourseId = async function ({ combinedCourseId, page, filters }) {
   const knexConnection = DomainTransaction.getConnection();
 
   const queryBuilder = knexConnection('combined_courses')
-    .select('users.id')
+    .select('userId')
     .join('quests', 'quests.id', 'combined_courses.questId')
     .join('combined_course_participations', 'combined_course_participations.questId', 'quests.id')
     .join(
@@ -79,15 +80,25 @@ export const findUserIdsById = async function ({ combinedCourseId, page }) {
       'view-active-organization-learners.id',
       'combined_course_participations.organizationLearnerId',
     )
-    .join('users', 'users.id', 'view-active-organization-learners.userId')
-    .where('combined_courses.id', combinedCourseId);
+    .where('combined_courses.id', combinedCourseId)
+    .orderBy(['lastName', 'firstName', 'userId']);
 
+  queryBuilder.modify(addSearchFilters, filters);
   const { results, pagination } = await fetchPage({ queryBuilder, paginationParams: page });
   return {
-    userIds: results.map((result) => result.id),
+    userIds: results.map((result) => result.userId),
     meta: pagination,
   };
 };
+
+function addSearchFilters(queryBuilder, filters = {}) {
+  if (filters.fullName) {
+    filterByFullName(queryBuilder, filters.fullName, 'firstName', 'lastName');
+  }
+  if (filters.statuses?.length > 0) {
+    queryBuilder.whereIn('combined_course_participations.status', filters.statuses);
+  }
+}
 
 export const update = async function ({ combinedCourseParticipation, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
