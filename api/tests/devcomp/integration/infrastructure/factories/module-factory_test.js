@@ -18,6 +18,8 @@ import { Video } from '../../../../../src/devcomp/domain/models/element/Video.js
 import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factories/module-factory.js';
+import { PixAssetImageInfos } from '../../../../../src/shared/domain/models/PixAssetImageInfos.js';
+import { getAssetInfos } from '../../../../../src/shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
 import { validateFlashcards } from '../../../shared/validateFlashcards.js';
@@ -2345,6 +2347,65 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
       expect(module.sections[0].grains).not.to.be.empty;
       expect(module.sections[0].grains[0].components).to.have.lengthOf(1);
       expect(module.sections[0].grains[0].components[0].element).not.to.be.empty;
+    });
+
+    describe('#getAssetMetadata', function () {
+      context('when an error occurred by fetching metadata', function () {
+        it('should return an empty object', async function () {
+          // given
+          const basePath = 'https://assets.pix.org';
+          const uri = '/modulix/didacticiel/ordi-pas-spatial.svg';
+          const url = `${basePath}${uri}`;
+          const notFoundErrorCode = 404;
+
+          nock(basePath).head(uri).reply(notFoundErrorCode, {});
+
+          // when
+          const result = await ModuleFactory.getAssetMetadata(url);
+
+          // then
+          expect(result).to.deep.equal({});
+        });
+      });
+
+      it('should return assets metadata', async function () {
+        const assetPath = '/modules/placeholder-details.svg';
+        const width = 140;
+        const height = 140;
+        const fakeAnswerContent = {
+          date: new Date('2025-09-12').toUTCString(),
+          'content-type': 'image/svg+xml',
+          'content-length': 4660,
+          'x-request-id': 'e33deae7-a480-46af-886d-626adfa1dd43',
+          vary: 'Accept-Encoding',
+          'x-object-meta-optimized': 'true',
+          'x-object-meta-uploader': 'yann.bertrand@pix.fr',
+          'x-object-meta-comment': '',
+          'x-object-meta-width': width,
+          'x-object-meta-height': height,
+          etag: '5d000d7075553ddcc08bedfcc34dc2ae',
+          'last-modified': new Date('2025-09-11').toUTCString(),
+          'x-timestamp': '1757611042.11464',
+          'accept-ranges': 'bytes',
+          'x-trans-id': 'tx44bf743653444a4d9e6aa-0068c41191',
+          'x-openstack-request-id': 'tx44bf743653444a4d9e6aa-0068c41191',
+          'x-iplb-request-id': '94FD60BE:9DF4_5762BBC9:01BB_68C41191_4BD0A3B5:4174',
+          'x-iplb-instance': 54408,
+          'access-control-allow-origin': '*',
+          'cache-control': 'public, max-age=172800',
+          'strict-transport-security': 'max-age=31536000',
+        };
+
+        nock('https://assets.pix.org').head(assetPath).reply(200, '', fakeAnswerContent);
+
+        const expectedResult = new PixAssetImageInfos({ width, height, contentType: 'image/svg+xml' });
+
+        // when
+        const result = await getAssetInfos('https://assets.pix.org/modules/placeholder-details.svg');
+
+        // then
+        expect(result).to.deep.equal(expectedResult);
+      });
     });
   });
 });

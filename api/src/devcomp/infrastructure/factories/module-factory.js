@@ -375,4 +375,13 @@ export class ModuleFactory {
       ),
     });
   }
+
+  static async getAssetMetadata(url) {
+    try {
+      return await getAssetInfos(url);
+    } catch (error) {
+      logger.debug(`Error when getting assets metadata with url ${url}: ${error}`);
+      return {};
+    }
+  }
 }
