@@ -1,6 +1,8 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseTemplate } from '../../../../../src/quest/domain/models/CombinedCourseTemplate.js';
+import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPARISONS as COMPARISONS_REQUIREMENT, TYPES } from '../../../../../src/quest/domain/models/Requirement.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () {
@@ -8,22 +10,22 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
     it('should return target profile ids from campaignParticipations success requirements', async function () {
       const successRequirements = [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             targetProfileId: {
               data: 1,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             targetProfileId: {
               data: 8,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -36,12 +38,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
     it('should return empty list of ids if template has not any campaignParticipations success requirements', async function () {
       const successRequirements = [
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             moduleId: {
               data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -50,6 +52,66 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
         successRequirements,
       });
       expect(combinedCourseTemplate.targetProfileIds).to.deep.equal([]);
+    });
+  });
+
+  describe('#moduleIds', function () {
+    it('should return module ids from passages success requirements', async function () {
+      const successRequirements = [
+        {
+          requirement_type: TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
+          data: {
+            moduleId: {
+              data: 'abcdef-555',
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+          },
+        },
+        {
+          requirement_type: TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
+          data: {
+            moduleId: {
+              data: 'abcdef-777',
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+          },
+        },
+        {
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
+          data: {
+            targetProfileId: {
+              data: 8,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+          },
+        },
+      ];
+      const combinedCourseTemplate = new CombinedCourseTemplate({
+        successRequirements,
+      });
+      expect(combinedCourseTemplate.moduleIds).to.deep.equal(['abcdef-555', 'abcdef-777']);
+    });
+
+    it('should return empty list of ids if template has not any campaignParticipations success requirements', async function () {
+      const successRequirements = [
+        {
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
+          data: {
+            targetProfileId: {
+              data: 12,
+              comparison: COMPARISONS_CRITERION.EQUAL,
+            },
+          },
+        },
+      ];
+      const combinedCourseTemplate = new CombinedCourseTemplate({
+        successRequirements,
+      });
+      expect(combinedCourseTemplate.moduleIds).to.deep.equal([]);
     });
   });
   describe('#toCombinedCourse', function () {
@@ -74,32 +136,32 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
       ];
       const successRequirements = [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             targetProfileId: {
               data: firstTargetProfileId,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             targetProfileId: {
               data: secondTargetProfileId,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIREMENT.ALL,
           data: {
             moduleId: {
               data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -121,44 +183,44 @@ describe('Quest | Unit | Domain | Models | CombinedCourseTemplate', function () 
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               campaignId: {
                 data: firstCampaignId,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               status: {
                 data: 'SHARED',
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'campaignParticipations',
-            comparison: 'all',
+            requirement_type: TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               campaignId: {
                 data: secondCampaignId,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               status: {
                 data: 'SHARED',
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
           {
-            requirement_type: 'passages',
-            comparison: 'all',
+            requirement_type: TYPES.OBJECT.PASSAGES,
+            comparison: COMPARISONS_REQUIREMENT.ALL,
             data: {
               moduleId: {
                 data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
               isTerminated: {
                 data: true,
-                comparison: 'equal',
+                comparison: COMPARISONS_CRITERION.EQUAL,
               },
             },
           },
