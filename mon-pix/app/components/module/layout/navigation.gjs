@@ -7,10 +7,11 @@ import { t } from 'ember-intl';
 import ModulixNavigationButton from './navigation-button';
 
 export default class ModulixNavigation extends Component {
-  @service intl;
+  @service modulixNavigationProgress;
 
-  @action
-  dummyFunction() {}
+  @action isCurrentSection(index) {
+    return this.modulixNavigationProgress.currentSectionIndex === index;
+  }
 
   <template>
     <PixNavigation
@@ -23,8 +24,8 @@ export default class ModulixNavigation extends Component {
         <img class="module-navigation__logo" src="/images/modulix-pix-logo.svg" alt={{t "navigation.homepage"}} />
       </:brand>
       <:navElements>
-        {{#each @sections as |section|}}
-          <ModulixNavigationButton @section={{section}} />
+        {{#each @sections as |section index|}}
+          <ModulixNavigationButton @section={{section}} @isCurrentSection={{this.isCurrentSection index}} />
         {{/each}}
       </:navElements>
     </PixNavigation>
