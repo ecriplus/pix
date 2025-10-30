@@ -1,7 +1,9 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModuleRecap from 'mon-pix/components/module/instruction/recap';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -105,20 +107,25 @@ module('Integration | Component | Module | Recap', function (hooks) {
       assert.strictEqual(button.getAttribute('href'), module.redirectionUrl);
     });
 
-    test('should not display quit link', async function (assert) {
+    test('should call transitionTo with custom url from application', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
+      const router = this.owner.lookup('service:router');
+      const transitionToStub = sinon.stub(router, 'transitionTo');
       const module = store.createRecord('module', {
         id: 'mon-slug',
         title: 'Module title',
         isBeta: true,
-        redirectionUrl: 'https//some-url.fr',
+        redirectionUrl: '/parcours/combinix3',
       });
       // when
       const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+      const button = screen.queryByRole('button', { name: 'Quitter' });
+      await click(button);
 
       // then
-      assert.strictEqual(screen.queryByRole('link', { name: 'Quitter' }), null);
+
+      assert.ok(transitionToStub.calledWithExactly(module.redirectionUrl));
     });
   });
 });

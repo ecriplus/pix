@@ -1,4 +1,8 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import ModuleObjectives from 'mon-pix/components/module/instruction/objectives';
 import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
@@ -9,19 +13,9 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
   {{/if}}
 
   <main class="module-recap">
-    {{#unless @module.redirectionUrl}}
-      <div class="module-recap__header">
-        <PixButtonLink
-          @size="large"
-          @route="authenticated.user-dashboard"
-          @variant="tertiary"
-          @iconAfter="doorOpen"
-          class="module-recap-header__icon"
-        >
-          {{t "pages.modulix.recap.backToModuleDetails"}}
-        </PixButtonLink>
-      </div>
-    {{/unless}}
+    <div class="module-recap__header">
+      <QuitButton @redirectionUrl={{@module.redirectionUrl}} />
+    </div>
 
     <img class="module-recap__illustration" src="/images/modulix/recap-success.svg" alt="" width="228" height="200" />
 
@@ -46,3 +40,48 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
     </div>
   </main>
 </template>
+
+class QuitButton extends Component {
+  @service router;
+
+  @action
+  transitionToRedirectionUrl() {
+    if (this.isRedirectionUrlInternal) {
+      this.router.transitionTo(this.args.redirectionUrl);
+    } else {
+      window.location = this.args.redirectionUrl;
+    }
+  }
+
+  get isRedirectionUrlInternal() {
+    try {
+      return Boolean(this.router.recognize(this.args.redirectionUrl));
+    } catch {
+      return false;
+    }
+  }
+
+  <template>
+    {{#if @redirectionUrl}}
+      <PixButton
+        @size="large"
+        @variant="tertiary"
+        @iconAfter="doorOpen"
+        class="module-recap-header__icon"
+        @triggerAction={{this.transitionToRedirectionUrl}}
+      >
+        {{t "pages.modulix.recap.backToModuleDetails"}}
+      </PixButton>
+    {{else}}
+      <PixButtonLink
+        @size="large"
+        @route="authenticated.user-dashboard"
+        @variant="tertiary"
+        @iconAfter="doorOpen"
+        class="module-recap-header__icon"
+      >
+        {{t "pages.modulix.recap.backToModuleDetails"}}
+      </PixButtonLink>
+    {{/if}}
+  </template>
+}
