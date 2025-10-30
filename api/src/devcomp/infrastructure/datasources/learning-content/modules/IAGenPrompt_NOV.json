@@ -321,7 +321,7 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
-                "content": "<p>Cette fois-ci, Gustave cherche une recette de gâteau pour 10 personnes.🍰</p><p>Mais il est allergique au chocolat.🍫</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d’IA générative.</p>"
+                "content": "<p>Cette fois-ci, Agnès reçoit pour le week-end des amis végétariens.</p><p>Elle aimerait les épater avec ses&nbsp;repas mais elle ne sait pas quoi cuisiner.</p><p>Cliquez sur les prompts suivants et observez les réponses du logiciel d’IA générative.</p>"
               }
             },
             {
@@ -340,16 +340,16 @@
                   ],
                   "prompts": [
                     {
-                      "prompt": "Écris une recette de gâteau.",
-                      "response": "<p>Voici une recette de gâteau pour 6 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Fais fondre 200 g de chocolat noir avec 100 g de beurre.</p><p>3. Ajoute 100 g de sucre, 3 œufs, puis 50 g de farine, en mélangeant bien./p><p>4. Verse la pâte dans un moule beurré.</p><p>5. Enfourne 20 à 25 minutes, laisse tiédir avant de démouler.</p>"
+                      "prompt": "Propose un planning de repas pour le week-end.",
+                      "response": "<p> <strong>Samedi </strong> </p><p>🥗 Déjeuner : Salade de quinoa, poulet, avocat, tomates  </p><p>🐟 Dîner : Saumon au four, courgettes, riz</p>  <p><strong>Dimanche </strong></p> <p>🍗 Déjeuner : Poulet rôti, gratin de légumes, tarte aux fruits  </p><p>🍲 Dîner : Soupe de légumes, croque-monsieur</p>"
                     },
                     {
-                      "prompt": "Écris une recette de gâteau pour 10 personnes.",
-                      "response": "<p>Voici une recette de gâteau au chocolat pour 10 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Fais fondre 300 g de chocolat noir avec 150 g de beurre.</p><p>3. Incorpore 150 g de sucre, 5 œufs, puis 100 g de farine.</p><p>4. Verse dans un grand moule beurré et fariné.</p><p>5. Enfourne 30 à 35 minutes, laisse refroidir avant de démouler.</p>"
+                      "prompt": "Propose un planning de repas végétariens pour le week-end.",
+                      "response": "<p> <strong>Samedi </strong> </p><p>🥪 Déjeuner : Sandwich houmous, crudités (carottes, concombre, salade) + fruit  </p><p>🍝 Dîner : Pâtes complètes + sauce tomate aux herbes + parmesan ou levure maltée</p>  <p><strong>Dimanche </strong></p> <p>🥗 Déjeuner : Salade composée (lentilles en boîte, feta, tomates, maïs, vinaigrette citronnée)  </p><p>🌮 Déjeuner : Tacos aux haricots noirs, maïs, poivrons, guacamole et coriandre</p>"
                     },
                     {
-                      "prompt": "Écris une recette de gâteau pour 10 personnes sans chocolat.",
-                      "response": "<p>Voici une recette de gâteau à la pistache pour 10 personnes :</p><p>1. Préchauffe le four à 180°C.</p><p>2. Mélange 5 œufs avec 150 g de sucre jusqu’à ce que le mélange blanchisse.</p><p>3. Ajoute 150 g de poudre d’amandes, 100 g de pâte de pistache et 100 g de beurre fondu.</p><p>4. Incorpore 100 g de farine et 1 sachet de levure.</p><p>5. Verse dans un moule beurré, enfourne 35 min, laisse refroidir.</p>"
+                      "prompt": "Propose un planning de repas végétariens pour le week-end pour impressionner mes amis.",
+                      "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
                     }
                   ]
                 }
