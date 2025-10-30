@@ -40,6 +40,7 @@
       "cancel": "Cancelar",
       "close": "Cerrar",
       "confirm": "Confirmar",
+      "continue": "Continuar",
       "download": "Descargar",
       "lets-go": "¡Empecemos!",
       "login": "Iniciar sesión",
@@ -1196,6 +1197,15 @@
       }
     },
     "combined-courses": {
+      "process-custom-passages": {
+        "title": "Cálculo de los siguientes pasos en tu curso actual.",
+        "description": "Analizamos tus resultados y elaboramos tu plan de formación personalizado.",
+        "list": {
+          "results-analysis": "Análisis de tus resultados.",
+          "select-passages": "Selección de cursos de formación adecuados.",
+          "generate-personalise-course": "Generación de su curso personalizado."
+        }
+      },
       "content": {
         "start-button": "Iniciar el curso",
         "resume-course": "Reanudar mi curso"
@@ -2056,7 +2066,7 @@
         "notification": "Vuelva a realizar las preguntas fallidas para mejorar su resultado y seguir progresando. Deberá enviar de nuevo sus resultados para que el organizador pueda contabilizarlos. El organizador seguirá teniendo acceso a tus resultados enviados anteriormente.",
         "notification-with-auto-share": "Repite las preguntas fallidas para mejorar tu resultado y seguir progresando. El organizador seguirá teniendo acceso a tus resultados anteriores."
       },
-      "retry-and-reset":{
+      "retry-and-reset": {
         "notification": "Si vuelves a intentar las preguntas fallidas o pones a cero para volver a intentarlo todo, tu organización ya no podrá ver tu último resultado. Para que el organizador de la prueba contabilice tu resultado, tendrás que volver a enviarlo.",
         "notification-with-auto-share": "Repita las preguntas fallidas o vuelva a cero para intentarlo de nuevo. El organizador seguirá teniendo acceso a sus resultados anteriores."
       },

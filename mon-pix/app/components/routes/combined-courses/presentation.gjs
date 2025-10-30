@@ -71,7 +71,7 @@ const Step = <template>
   </h2>
 </template>;
 
-export default class Presentation extends Component {
+export default class CombinedCoursePresentation extends Component {
   <template>
     <section class="combined-course">
       <div class="combined-course__exit">

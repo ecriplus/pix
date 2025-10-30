@@ -40,6 +40,7 @@
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
+      "continue": "Continue",
       "download": "Download",
       "lets-go": "Let's go!",
       "login": "Log in to Pix",
@@ -1221,6 +1222,15 @@
           "title": "Customised module programme"
         },
         "tagText": "You're at that point!"
+      },
+      "process-custom-passages": {
+        "description": "We analyse your results and build your personalised training plan.",
+        "list": {
+          "generate-personalise-course": "Generating your personalised course.",
+          "results-analysis": "Analysis of your results.",
+          "select-passages": "Selecting suitable training courses."
+        },
+        "title": "Calculating the next steps in your current course."
       }
     },
     "comparison-window": {
@@ -2074,7 +2084,7 @@
         "notification": "Retake the failed questions to improve your result and continue to progress. You will need to send in your results again so that they can be counted by the organiser. The organiser will continue to have access to your previously submitted results.",
         "notification-with-auto-share": "Retake the failed questions to improve your result and continue to progress. The organiser will continue to have access to your previously submitted results."
       },
-      "retry-and-reset":{
+      "retry-and-reset": {
         "notification": "If you choose to retry the failed questions or reset and restart from the beginning, you will need to submit your new results for them to be taken into account by the organizer. Previously submitted results remain accessible to the organizer.",
         "notification-with-auto-share": "Retry the failed questions to improve your result or reset and restart from the beginning. The organiser will continue to have access to your previously submitted results."
       },

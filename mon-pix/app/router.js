@@ -104,7 +104,7 @@ Router.map(function () {
   });
   this.route('combined-courses', { path: '/parcours/:code' }, function () {
     this.route('presentation', { path: '/' });
-    this.route('loading', { path: '/chargement' });
+    this.route('process-custom-passages', { path: '/chargement' });
   });
 
   this.route('module-preview-existing', { path: '/modules/preview/:slug' });
