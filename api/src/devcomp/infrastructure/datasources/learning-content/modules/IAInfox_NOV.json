@@ -147,7 +147,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
-                "content": "<p>Les deepfakes, hypertrucages en français, sont créés grâce à <strong>l’intelligence artificielle, pour <strong>tromper</strong> et faire croire qu'ils montrent quelque chose de vrai. 🤥 Comme les intelligences artificielles s'améliorent chaque jour, il est de plus en plus difficile de reconnaître un deepfake !</strong>😱</p>"
+                "content": "<p>Les <strong>deepfakes</strong>, hypertrucages en français, sont <strong>créés grâce à</strong> <strong>l’intelligence artificielle, pour tromper.</strong> Ils sont réalistes mais pourtant ils ne montrent pas la réalité.<strong>🤥 </strong></p><p>Comme les intelligences artificielles s'améliorent chaque jour, il est de <strong>plus en plus difficile de reconnaître un deepfake</strong> !😱</p>"
               }
             }
           ]
@@ -208,7 +208,7 @@
               "element": {
                 "id": "cbe6027b-3113-4772-a81f-c44d381f9585",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire ne veut pas dire permis : un deepfake peut être illégal."
+                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp;: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire ne veut pas dire permis : un deepfake peut être illégal.</p>"
               }
             }
           ]
@@ -255,28 +255,28 @@
                           "id": "1",
                           "content": "<p>💸 Arnaquer.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante. Par contre, elle peut chercher à être virale et polluer ainsi l'espace numérique.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante. En revanche, ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>😂 Amuser.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, cette vidéo est amusante, par contre elle peut polluer l'espace numérique.</p>"
+                            "diagnosis": "<p>Effectivement ! Et ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>🧠 Manipuler.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut polluer l'espace numérique.</p>"
+                            "diagnosis": "<p>Eh non, cette vidéo n'est pas malveillante. </p><p>En revnache, ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>😕 Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais elle peut polluer l'espace numérique.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
                           }
                         }
                       ],
@@ -481,7 +481,7 @@
               "element": {
                 "id": "6d557df0-b390-43de-9115-5f693b7d123b",
                 "type": "text",
-                "content": "<p>Quand vous recevez un média surprenant (trop beau pour être vrai, choquant ou inquiétant),&nbsp;<strong>n’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. C’est peut-être un <strong>deepfake !</strong></p><p>Partager un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne.</p><p>👉 Cela peut aussi violer le droit à l’image et entraîner une plainte contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
+                "content": "<h5>🧐Et si vous recevez un média trop beau pour être vrai, choquant ou inquiétant, que faire?&nbsp;</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p><p>⚠️Partager un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong>contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
               }
             }
           ]
