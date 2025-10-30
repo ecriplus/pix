@@ -209,7 +209,7 @@ export class ModuleFactory {
       alternativeText: element.alternativeText,
       legend: element.legend,
       licence: element.licence,
-      infos: await getAssetInfos(element.url),
+      infos: await ModuleFactory.getAssetMetadata(element.url),
     });
   }
 
@@ -249,7 +249,7 @@ export class ModuleFactory {
             image: {
               altText: card.image?.altText,
               url: card.image?.url,
-              information: card.image?.url ? await getAssetInfos(card.image.url) : {},
+              information: card.image?.url ? await ModuleFactory.getAssetMetadata(card.image.url) : {},
             },
           });
         }),
@@ -350,7 +350,7 @@ export class ModuleFactory {
       instruction: element.instruction,
       introImage: {
         url: element.introImage.url,
-        information: element.introImage?.url ? await getAssetInfos(element.introImage.url) : {},
+        information: element.introImage?.url ? await ModuleFactory.getAssetMetadata(element.introImage.url) : {},
       },
       cards: await Promise.all(
         element.cards.map(async (card) => {
@@ -360,14 +360,14 @@ export class ModuleFactory {
               text: card.recto.text,
               image: {
                 url: card.recto.image?.url,
-                information: card.recto.image?.url ? await getAssetInfos(card.recto.image.url) : {},
+                information: card.recto.image?.url ? await ModuleFactory.getAssetMetadata(card.recto.image.url) : {},
               },
             },
             verso: {
               text: card.verso.text,
               image: {
                 url: card.verso.image?.url,
-                information: card.verso.image?.url ? await getAssetInfos(card.verso.image.url) : {},
+                information: card.verso.image?.url ? await ModuleFactory.getAssetMetadata(card.verso.image.url) : {},
               },
             },
           });
