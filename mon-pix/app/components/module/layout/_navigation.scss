@@ -68,10 +68,9 @@ img.module-navigation {
     &--disabled {
       background-color: unset;
 
-      &:hover{
+      &:focus{
         background-color: var(--pix-neutral-0);
         border: 1px solid var(--pix-primary-100);
-
       }
 
       .pix-icon {
