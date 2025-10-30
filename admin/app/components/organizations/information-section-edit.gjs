@@ -330,7 +330,7 @@ const FeaturesForm = <template>
               (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
             }}
           ><:label>{{t
-                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT"
+                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label"
               }}</:label></PixCheckbox>
         </div>
       {{/if}}

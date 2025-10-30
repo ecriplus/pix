@@ -206,7 +206,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.notOk(
           screen.queryByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
           ),
         );
       });
@@ -227,7 +227,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.false(
           screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
           ).checked,
         );
       });
@@ -248,7 +248,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         );
         assert.true(
           screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT'),
+            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
           ).checked,
         );
       });

@@ -421,6 +421,71 @@ module('Integration | Component | organizations/information-section-view', funct
         });
       });
 
+      module('Places', function () {
+        module('when places in pixOrga is enabled', function () {
+          test('should display block enabled message, if this features is enabled', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              features: {
+                PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: true } },
+              },
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.ok(
+              screen.getByText(
+                `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
+                  'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.enabled',
+                )}`,
+              ),
+            );
+          });
+          test('should display block disabled message, if this features is not enabled', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              features: {
+                PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: false } },
+              },
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.ok(
+              screen.getByText(
+                `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
+                  'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.disabled',
+                )}`,
+              ),
+            );
+          });
+        });
+
+        module('when places in pixOrga is not enabled', function () {
+          test('should display label with no', async function (assert) {
+            // given
+            const organization = EmberObject.create({
+              features: {
+                PLACES_MANAGEMENT: { active: false },
+              },
+            });
+
+            // when
+            const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+            // then
+            assert.ok(
+              screen.getByLabelText(
+                `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
+                  'common.words.no',
+                )}`,
+              ),
+            );
+          });
+        });
+      });
+
       module('Net Promoter Score', function () {
         module('when NPS is enabled', function () {
           test('should display a link to formNPSUrl', async function (assert) {
