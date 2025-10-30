@@ -1,7 +1,10 @@
 import iconv from 'iconv-lite';
 
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { CombinedCourseParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import {
   createServer,
   databaseBuilder,
@@ -164,16 +167,17 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const { questId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         name: 'MA QUETE',
         organizationId,
         code: 'COMBINIX2',
       });
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
-        questId,
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        combinedCourseId,
         organizationLearnerId: organizationLearner.id,
-        status: CombinedCourseParticipationStatuses.COMPLETED,
       });
       await databaseBuilder.commit();
       const options = {
@@ -196,17 +200,17 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       const userId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId }).id;
-      const { questId, id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code: 'COMBINIX1',
         organizationId,
         successRequirements: [],
       });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
         organizationLearnerId,
-        questId,
         createdAt: new Date('2022-01-01'),
         updatedAt: new Date('2022-01-01'),
-        status: CombinedCourseParticipationStatuses.STARTED,
         combinedCourseId,
       });
       await databaseBuilder.commit();
@@ -260,7 +264,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
       it('should return the combined course statistics', async function () {
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
+        const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -268,9 +272,11 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         });
         const learner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
         databaseBuilder.factory.buildMembership({ userId, organizationId });
-        databaseBuilder.factory.buildCombinedCourseParticipation({
+        databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           organizationLearnerId: learner.id,
-          questId,
+          combinedCourseId,
         });
         await databaseBuilder.commit();
 
@@ -296,7 +302,7 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
         // given
         const userId = databaseBuilder.factory.buildUser().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const { id: combinedCourseId, questId } = databaseBuilder.factory.buildCombinedCourse({
+        const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
           name: 'Mon parcours combiné',
           code: 'PARCOURS123',
           organizationId,
@@ -313,14 +319,16 @@ ${organizationId};"{""name"":""Combinix"",""successRequirements"":[],""descripti
           lastName: 'Qwerty',
         });
         databaseBuilder.factory.buildMembership({ userId, organizationId });
-        databaseBuilder.factory.buildCombinedCourseParticipation({
+        databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           organizationLearnerId: learner.id,
-          questId,
           combinedCourseId,
         });
-        databaseBuilder.factory.buildCombinedCourseParticipation({
+        databaseBuilder.factory.buildOrganizationLearnerParticipation({
           organizationLearnerId: learner2.id,
-          questId,
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           combinedCourseId,
         });
         await databaseBuilder.commit();

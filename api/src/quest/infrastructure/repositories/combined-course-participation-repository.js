@@ -7,18 +7,21 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../domain/models/OrganizationLearnerParticipation.js';
-import { OrganizationLearnerParticipation } from '../../domain/models/OrganizationLearnerParticipation.js';
 
-export const save = async function ({ organizationLearnerId, questId, combinedCourseId }) {
+export const save = async function ({ organizationLearnerId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const existingcombinedCourse = await knexConnection('combined_course_participations')
-    .where({ questId, organizationLearnerId })
+  const existingcombinedCourse = await knexConnection('organization_learner_participations')
+    .where({
+      referenceId: combinedCourseId.toString(),
+      organizationLearnerId,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
     .first();
 
   if (existingcombinedCourse) return;
 
-  const [{ id: organizationLearnerParticipationId }] = await knexConnection('organization_learner_participations')
+  await knexConnection('organization_learner_participations')
     .insert({
       organizationLearnerId,
       status: OrganizationLearnerParticipationStatuses.STARTED,
@@ -26,61 +29,56 @@ export const save = async function ({ organizationLearnerId, questId, combinedCo
       referenceId: combinedCourseId,
     })
     .returning('id');
-
-  await knexConnection('combined_course_participations').insert({
-    questId,
-    combinedCourseId,
-    organizationLearnerId,
-    organizationLearnerParticipationId,
-  });
 };
 
-export const getByUserId = async function ({ userId, questId }) {
+export const getByUserId = async function ({ userId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const questParticipations = await knexConnection('combined_course_participations')
+  const combinedCourseParticipations = await knexConnection('organization_learner_participations')
     .select(
-      'combined_course_participations.id',
-      'questId',
+      'organization_learner_participations.id',
       'organizationLearnerId',
       'firstName',
       'lastName',
-      'combined_course_participations.status',
-      'combined_course_participations.createdAt',
-      'combined_course_participations.updatedAt',
-      'combined_course_participations.organizationLearnerParticipationId',
+      'organization_learner_participations.status',
+      'organization_learner_participations.createdAt',
+      'organization_learner_participations.updatedAt',
+      'organization_learner_participations.referenceId',
     )
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
       '=',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations.organizationLearnerId',
     )
     .where({
       'view-active-organization-learners.userId': userId,
-      questId,
+      'organization_learner_participations.referenceId': combinedCourseId.toString(),
+      'organization_learner_participations.type': OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     });
-  if (questParticipations.length === 0) {
+  if (combinedCourseParticipations.length === 0) {
     throw new NotFoundError(
-      `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et la quête d'id ${questId}`,
+      `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et au parcours d'id ${combinedCourseId}`,
     );
   }
-  return new CombinedCourseParticipation(questParticipations[0]);
+  return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
-export const findUserIdsByCombinedCourseId = async function ({ combinedCourseId, page, filters }) {
+export const findPaginatedCombinedCourseParticipationById = async function ({ combinedCourseId, page, filters }) {
   const knexConnection = DomainTransaction.getConnection();
 
-  const queryBuilder = knexConnection('combined_courses')
-    .select('userId')
-    .join('quests', 'quests.id', 'combined_courses.questId')
-    .join('combined_course_participations', 'combined_course_participations.questId', 'quests.id')
+  const queryBuilder = knexConnection('organization_learner_participations')
+    .select('view-active-organization-learners.userId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations.organizationLearnerId',
     )
-    .where('combined_courses.id', combinedCourseId)
+    .where({
+      referenceId: combinedCourseId.toString(),
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .whereNotNull('userId')
     .orderBy(['lastName', 'firstName', 'userId']);
 
   queryBuilder.modify(addSearchFilters, filters);
@@ -96,36 +94,21 @@ function addSearchFilters(queryBuilder, filters = {}) {
     filterByFullName(queryBuilder, filters.fullName, 'firstName', 'lastName');
   }
   if (filters.statuses?.length > 0) {
-    queryBuilder.whereIn('combined_course_participations.status', filters.statuses);
+    queryBuilder.whereIn('organization_learner_participations.status', filters.statuses);
   }
 }
 
-export const update = async function ({ combinedCourseParticipation, combinedCourseId }) {
+export const update = async function ({ combinedCourseParticipation }) {
   const knexConnection = DomainTransaction.getConnection();
-  if (combinedCourseParticipation.organizationLearnerParticipationId) {
-    const organizationLearnerParticipation = OrganizationLearnerParticipation.buildFromCombinedCourseParticipation({
-      id: combinedCourseParticipation.organizationLearnerParticipationId,
-      organizationLearnerId: combinedCourseParticipation.organizationLearnerId,
-      questId: combinedCourseParticipation.questId,
-      status: combinedCourseParticipation.status,
-      createdAt: combinedCourseParticipation.createdAt,
-      updatedAt: combinedCourseParticipation.updatedAt,
-      combinedCourseId,
-    });
-    await knexConnection('organization_learner_participations')
-      .where({ id: combinedCourseParticipation.organizationLearnerParticipationId })
-      .update({
-        updatedAt: organizationLearnerParticipation.updatedAt,
-        status: combinedCourseParticipation.status,
-        completedAt: organizationLearnerParticipation.completedAt,
-      });
-  }
-  const [updatedRow] = await knexConnection('combined_course_participations')
+  const updatedRow = await knexConnection('organization_learner_participations')
     .where({ id: combinedCourseParticipation.id })
-    .update({ status: combinedCourseParticipation.status, updatedAt: combinedCourseParticipation.updatedAt })
+    .update({
+      updatedAt: combinedCourseParticipation.updatedAt,
+      status: combinedCourseParticipation.status,
+      completedAt: combinedCourseParticipation.completedAt,
+    })
     .returning('*');
-
-  return new CombinedCourseParticipation(updatedRow);
+  return new CombinedCourseParticipation(updatedRow[0]);
 };
 
 /**
@@ -134,24 +117,27 @@ export const update = async function ({ combinedCourseParticipation, combinedCou
  */
 export const findByCombinedCourseIds = async ({ combinedCourseIds, page }) => {
   const knexConnection = DomainTransaction.getConnection();
-  const queryBuilder = knexConnection('combined_courses')
+  const queryBuilder = knexConnection('organization_learner_participations')
     .select(
-      'combined_course_participations.id',
+      'organization_learner_participations.id',
       'firstName',
       'lastName',
-      'combined_course_participations.status',
-      'combined_course_participations.questId',
+      'organization_learner_participations.status',
       'organizationLearnerId',
-      'combined_course_participations.createdAt',
-      'combined_course_participations.updatedAt',
+      'organization_learner_participations.createdAt',
+      'organization_learner_participations.updatedAt',
+      'organization_learner_participations.referenceId',
     )
-    .join('combined_course_participations', 'combined_courses.questId', 'combined_course_participations.questId')
     .join(
       'view-active-organization-learners',
       'view-active-organization-learners.id',
-      'combined_course_participations.organizationLearnerId',
+      'organization_learner_participations.organizationLearnerId',
     )
-    .whereIn('combined_courses.id', combinedCourseIds)
+    .whereIn(
+      'organization_learner_participations.referenceId',
+      combinedCourseIds.map((combinedCourseId) => combinedCourseId.toString()),
+    )
+    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE)
     .orderBy([
       { column: 'lastName', order: 'asc' },
       { column: 'firstName', order: 'asc' },

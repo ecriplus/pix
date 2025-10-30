@@ -10,6 +10,10 @@ import {
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -1450,6 +1454,24 @@ describe('Integration | Repository | Campaign Participation', function () {
       // then
       expect(result).to.equal(true);
     });
+
+    it('should return false user linked to a passage', async function () {
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        moduleId: 'azef-666',
+        type: OrganizationLearnerParticipationTypes.PASSAGE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await campaignParticipationRepository.hasAssessmentParticipations(userId);
+
+      // then
+      expect(result).to.be.false;
+    });
+
     it('should return true user linked to a combined course', async function () {
       const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign();
 
@@ -1491,10 +1513,11 @@ describe('Integration | Repository | Campaign Participation', function () {
           },
         ],
       });
-      databaseBuilder.factory.buildCombinedCourseParticipation({
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId,
-        questId: combinedCourse.questId,
         combinedCourseId: combinedCourse.id,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
       });
 
       await databaseBuilder.commit();
