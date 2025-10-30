@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.244.0](https://github.com/1024pix/pix/compare/v5.243.0...v5.244.0) (2025-10-30)
+
+### :rocket: Amélioration
+
+- [#14019](https://github.com/1024pix/pix/pull/14019) Afficher si une organisation a le blocage auto en cas de dépassement de places (PIX-20072) 
+- [#13986](https://github.com/1024pix/pix/pull/13986) Filtrer les participations d'un parcours apprenants (PIX-19632) 
+- [#14032](https://github.com/1024pix/pix/pull/14032) WIP module Mot de passe Novice 
+
+### :arrow_up: Montée de version
+
+- [#13972](https://github.com/1024pix/pix/pull/13972) Update dependency @1024pix/pix-ui to ^55.31.0 (mon-pix)
+
 # [5.243.0](https://github.com/1024pix/pix/compare/v5.242.1...v5.243.0) (2025-10-29)
 
 ### :rocket: Amélioration
