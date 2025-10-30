@@ -340,15 +340,15 @@
                   ],
                   "prompts": [
                     {
-                      "prompt": "Propose un planning de repas pour le week-end.",
+                      "prompt": "Propose un programme de repas pour le week-end.",
                       "response": "<p> <strong>Samedi </strong> </p><p>🥗 Déjeuner : Salade de quinoa, poulet, avocat, tomates  </p><p>🐟 Dîner : Saumon au four, courgettes, riz</p>  <p><strong>Dimanche </strong></p> <p>🍗 Déjeuner : Poulet rôti, gratin de légumes, tarte aux fruits  </p><p>🍲 Dîner : Soupe de légumes, croque-monsieur</p>"
                     },
                     {
-                      "prompt": "Propose un planning de repas végétariens pour le week-end.",
+                      "prompt": "Propose un programme de repas végétariens pour le week-end.",
                       "response": "<p> <strong>Samedi </strong> </p><p>🥪 Déjeuner : Sandwich houmous, crudités (carottes, concombre, salade) + fruit  </p><p>🍝 Dîner : Pâtes complètes + sauce tomate aux herbes + parmesan ou levure maltée</p>  <p><strong>Dimanche </strong></p> <p>🥗 Déjeuner : Salade composée (lentilles en boîte, feta, tomates, maïs, vinaigrette citronnée)  </p><p>🌮 Déjeuner : Tacos aux haricots noirs, maïs, poivrons, guacamole et coriandre</p>"
                     },
                     {
-                      "prompt": "Propose un planning de repas végétariens pour le week-end pour impressionner mes amis.",
+                      "prompt": "Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.",
                       "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
                     }
                   ]
@@ -364,21 +364,21 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Propose un planning de repas pour le week-end.</p>",
+                    "content": "<p>Propose un programme de repas pour le week-end.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut <strong>préciser tous les éléments importants </strong>de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Propose un planning de repas végétariens pour le week-end.</p>",
+                    "content": "<p>Propose un programme de repas végétariens pour le week-end.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut <strong>préciser tous les éléments importants</strong> de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Propose un planning de repas végétariens pour le week-end pour impressionner mes amis.</p>",
+                    "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l'objectif (impressioner ces amis).</p>"
                     }
