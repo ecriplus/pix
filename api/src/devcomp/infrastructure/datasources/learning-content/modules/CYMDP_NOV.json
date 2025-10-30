@@ -787,7 +787,7 @@
               "element": {
                 "id": "401dce3e-8708-4c9f-9c0a-cf8e4e899ee6",
                 "type": "text",
-                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p></p><details>    <summary>Indice</summary>    <p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p></details><p></p>"
+                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><details>    <summary>Indice</summary>    <p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p></details><p></p>"
               }
             }
           ]
