@@ -71,7 +71,7 @@
                     "id": "1",
                     "content": "<p>C’est quand l’IA fait une erreur.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Pas tout à fait. </strong></p><p>Un <strong>biais</strong>, c’est quand l'IA donne des <strong>r</strong><strong>éponses qui ne représentent pas bien la diversité de la réalité</strong>. </p><p>Ici, ça donne l’impression que tous les procès ont lieu aux Etats-Unis ou que tous les juges sont vieux. Alors que ce n’est pas toujours le cas ! Cependant, ce n’est pas tout à fait une erreur car c’est parfois le cas.<br></p>"
+                      "diagnosis": "<p><strong>Pas tout à fait. </strong></p><p>Un <strong>biais</strong>, c’est quand l'IA donne des <strong>r</strong><strong>éponses qui ne représentent pas bien la diversité de la réalité</strong>. </p><p>Ici, ça donne l’impression que tous les procès ont lieu aux Etats-Unis ou que tous les juges sont vieux. Alors que ce n’est pas toujours le cas ! Cependant, ce n’est pas vraiment une erreur car c’est parfois le cas.<br></p>"
                     }
                   },
                   {
@@ -178,10 +178,10 @@
                     {
                       "id": "ffffaa3c-0d3c-4297-898b-a235c3dd2118",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenBiais_IND/wikipediatiersmonde.png",
-                      "alt": "Capture d'écran de la page « Tiers Monde » de Wikipédia",
-                      "alternativeText": "<p>Voici les paragraphes lisibles de la capture d'écran de la page Tiers Monde de Wikipédia&nbsp;:&nbsp;</p><p>«&nbsp;L'expression&nbsp;tiers monde, ou&nbsp;tiers-monde, lancée en 1952, se rapporte à l'ensemble des pays&nbsp;africains,&nbsp;asiatiques,&nbsp;océaniens&nbsp;ou du&nbsp;continent américain&nbsp;en carence de&nbsp;développement. Ce terme est considéré comme obsolète par certains,&nbsp;au profit de celui de&nbsp;pays les moins avancés&nbsp;(PMA). <br><br>Les termes&nbsp;premier monde,&nbsp;second monde&nbsp;et tiers monde ont été employés pour regrouper les nations en trois grandes catégories. Ces trois termes ne sont pas apparus simultanément. Après la&nbsp;Seconde Guerre mondiale, l’OTAN&nbsp;et le&nbsp;Pacte de Varsovie&nbsp;ont été considérés comme les deux grands blocs. Le nombre de pays faisant partie de ces deux blocs n’étant pas fixé de manière précise, on s’est finalement aperçu qu’un grand nombre de pays ne rentraient dans aucune de ces deux catégories. </p><p>En 1952, le&nbsp;démographe&nbsp;français&nbsp;Alfred Sauvy&nbsp;et le&nbsp;sociologue&nbsp;Georges Balandier&nbsp;inventent le terme «&nbsp;tiers monde&nbsp;» pour désigner ces pays. La fameuse expression «&nbsp;Tiers Monde&nbsp;», est initialement publiée dans un article dans&nbsp;L'Obs&nbsp;écrit en 1952 par Sauvy&nbsp;:&nbsp;«&nbsp;Nous parlons volontiers des deux mondes en présence, de leur guerre possible, de leur coexistence, etc. oubliant trop souvent qu'il en existe un troisième, le plus important […] C'est l'ensemble de ceux que l'on appelle […] les pays sous-développés […]. Ce Tiers Monde ignoré, exploité, méprisé […] veut, lui aussi, être quelque chose&nbsp;». L'expression «&nbsp;le tiers monde&nbsp;», du fait de son caractère générique ne doit toutefois pas occulter les spécificités historiques et le contexte socio-politique de chacun des pays censés y correspondre.&nbsp;»</p>",
-                      "legend": "",
+                      "url": "https://assets.pix.org/modules/IAGenBiais_IND/biographie-femmes-wikipedia.png",
+                      "alt": "Graphique représentant la part de biographies concernant des femmes sur Wikipédia en français.",
+                      "alternativeText": "<p>D'après le site&nbsp;Humaniki, Wikipédia en français compte 585&nbsp;813&nbsp;biographies d'hommes, contre 149&nbsp;479 de femmes, soit seulement 20,298%. <br><br></p>",
+                      "legend": "Graphique représentant la part de biographies concernant des femmes sur Wikipédia en français.",
                       "licence": ""
                     },
                     {
@@ -193,21 +193,21 @@
                           "id": "1",
                           "content": "<p>oui</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Bien vu !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux, ce qui peut introduire certains biais culturels. <br>C’est le cas ici avec l’expression « Tiers Monde », utilisée dans le passé par les pays occidentaux plus développés. Cette expression est problématique car elle traduit une vision hiérarchisée et centrée sur les pays riches occidentaux, et ne correspond pas à la manière dont les pays concernés souhaitent être décrits. <br>Si l’IA utilise cette source pour son entraînement, elle pourrait réemployer le terme « Tiers Monde » et ainsi véhiculer un biais culturel datant d’une autre époque.</p>"
+                            "diagnosis": "<p><strong>Bien vu !</strong></p><p> Comme les hommes sont plus représentés dans que les femmes dans les biographies sur Wikipédia, ils risquent d'être plus souvent cités dans les réponses de l'IA.</p><p>Cela peut en partie s'expliquer par le fait que les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes, ce qui peut introduire certains biais dans les sujets traités. <br> </p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>non</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Et pourtant, si !</strong> <br>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
+                            "diagnosis": "<p><strong>Et pourtant, si !</strong></p><p>Comme les hommes sont plus représentés dans que les femmes dans les biographies sur Wikipédia, ils risquent d'être plus souvent cités dans les réponses de l'IA. Cela peut en partie s'expliquer par le fait que les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes, ce qui peut introduire certains biais dans les sujets traités. <br></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>C'était oui.<br></strong>Les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes occidentaux. Certains biais culturels y sont donc présents. C’est le cas ici avec l’expression «&nbsp;Tiers Monde&nbsp;», utilisée dans le passé par les pays occidentaux plus développés.<br>Si l’IA utilise cette source pour son entraînement, elle pourrait réutiliser l’expression Tiers monde et ainsi véhiculer un biais culturel, datant d’une autre époque.</p>"
+                            "diagnosis": "<p><strong>C'était oui.</strong></p><p>Comme les hommes sont plus représentés dans que les femmes dans les biographies sur Wikipédia, ils risquent d'être plus souvent cités dans les réponses de l'IA. Cela peut en partie s'expliquer par le fait que les contributeurs de l’encyclopédie en ligne Wikipédia sont majoritairement des hommes, ce qui peut introduire certains biais dans les sujets traités.</p>"
                           }
                         }
                       ],
@@ -267,12 +267,27 @@
           "title": "Des biais sont présents dans les données du Web",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "7e8ef97e-9782-4eba-bc2c-806c4020caa3",
-                "type": "text",
-                "content": "<p>Les IA génératives sont <strong>entraînées </strong>sur une très <strong>grande quantité</strong> de données.</p><p> Ces données proviennent d'internet et sont très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p><p><br></p><p>Ces données peuvent&nbsp;:</p><ul>    <li>Montrer des <strong>situations de discrimination </strong>déjà <strong>existantes&nbsp;</strong></li>    <li>Exprimer les <strong>expériences</strong>, ou les <strong>opinions </strong>des contributeurs qui les ont produites.</li></ul><p>    <strong>Elles peuvent aussi présenter un manque de représentation de la diversité.</strong></p>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "2a3475d8-2ab7-4187-af90-1e9461c59dd3",
+                      "type": "text",
+                      "content": "<p>Vous l’avez vu : les <strong>IA génératives apprennent à partir des données trouvées sur internet</strong>. Ces données sont très nombreuses et très diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐<br></p><h5>🤔Mais ces données sont-elles neutres ?</h5><p>💡 Pas vraiment : elles reflètent souvent la <strong>culture </strong>ou les <strong>opinions </strong>des personnes qui les ont produites.<br>🌍 Par exemple, certains pays, langues ou points de vue sont plus présents que d’autres en ligne.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f0e8bc19-f703-4a0d-a127-748e7767e67f",
+                      "type": "text",
+                      "content": "<h5>Résultat ?&nbsp; </h5><p>⚠️ Les réponses de l’IA peuvent reproduire ces <strong>biais </strong>sans s’en rendre compte. </p><p>Les réponses peuvent aussi refléter des <strong>discriminations </strong>existantes, au sein de la société.<br><br></p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -354,7 +369,7 @@
               "element": {
                 "id": "aba8fd9b-a0fd-42db-abfc-89ebc37fa983",
                 "type": "text",
-                "content": "<p>L’IA générative construit ses réponses à partir des éléments les plus fréquents dans ses données d’entraînement.</p><p><br>Cette méthode donne souvent de bons résultats 👍 mais les données du web sont déséquilibrées : certains faits ou opinions sont sur-représentés, d’autres sous-représentés.&nbsp;De plus, la sélection des données par les personnes qui conçoivent des IA peut accentuer ces déséquilibres.</p><p><br>L’IA peut donc produire des réponses biaisées : idées reçues, stéréotypes, discriminations, biais linguistiques et culturels.<br></p>"
+                "content": "<p>Sur internet, certains sujets ou points de vue sont beaucoup plus visibles que d’autres. 🌐 </p><h5>🤔 Que se passe-t-il alors quand une IA apprend surtout à partir de ces contenus ? </h5><p>Le plus souvent, cette méthode a de très bons résultats. C’est pour cela qu’on l’utilise. </p><p>Cependant,&nbsp; l’IA risque de présenter plus souvent les idées <strong>sur-représentées</strong> dans ses réponses. &nbsp;</p><p>Et ce déséquilibre ne vient pas seulement d’internet : les personnes qui conçoivent les IA font aussi des choix. En sélectionnant certaines langues ou sources, elles peuvent renforcer des <strong>biais ou des stéréotypes</strong>. ⚠️</p>"
               }
             }
           ]
@@ -369,7 +384,7 @@
               "element": {
                 "id": "f363fc36-1c2e-4cc0-b915-5afc4357db2b",
                 "type": "text",
-                "content": "<p>Les utilisateurs voient-ils les biais dans les réponses des logiciels d’IA génératives ?</p>"
+                "content": "<p>Les utilisateurs voient-ils les biais dans les réponses des logiciels d’IA générative ?</p>"
               }
             }
           ]
@@ -462,6 +477,11 @@
                 {
                   "elements": [
                     {
+                      "id": "286f56ef-fce5-4f34-a322-462fea5a7e75",
+                      "type": "text",
+                      "content": "<p><strong>Sato n’a jamais été en France. Il se demande à quoi ressemble les français.<br></strong>&nbsp;&nbsp;&nbsp;</p>"
+                    },
+                    {
                       "id": "274394d5-c33a-4e93-9889-c770f5e039d9",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IAGenBiais_IND/pix-modulix-ia-biais-conversation-ia-gen-v2-img2.png",
@@ -469,11 +489,6 @@
                       "alternativeText": "<p>Satô&nbsp;:&nbsp;<br>Génère deux images d’un couple français.</p><p>Réponse de l'IA générative&nbsp;:</p><ul><li>Première image&nbsp;:&nbsp;Illustration de style vintage représentant un couple français caricatural devant la tour Eiffel. L’homme porte un béret noir, une marinière à rayures bleues et blanches, un foulard rouge autour du cou et tient une baguette sous le bras. La femme, coiffée d’un béret noir, porte une robe rouge. L'homme tient un verre de vin rouge à la main. Ils sourient, côte à côte, avec la tour Eiffel en arrière-plan.</li><li>Seconde image&nbsp;:&nbsp;Photographie d'un jeune couple qui se tient ensemble dans une rue de Paris, avec la tour Eiffel en arrière-plan. L’homme porte un trench beige, un béret bleu marine. La femme, à ses côtés, sourit et porte un manteau crème clair. Tous deux posent côte à côte, l’air complice, devant la Tour Eiffel.</li></ul><p>Satô&nbsp;:&nbsp;<br>C'est parfait, merci !</p>",
                       "legend": "",
                       "licence": ""
-                    },
-                    {
-                      "id": "286f56ef-fce5-4f34-a322-462fea5a7e75",
-                      "type": "text",
-                      "content": "<p>Sato n’a jamais été France et s’interroge à quoi ressemble les français.<br></p>"
                     },
                     {
                       "id": "2969727b-55aa-4661-a720-9749780b3924",
@@ -567,21 +582,21 @@
                           "id": "3",
                           "content": "<p>Car la réponse de l’IA est claire et structurée, ça l’a convaincu.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Cela a pu contribuer.</strong></p><p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un biais de genre. Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p><strong>Cela a pu contribuer.</strong></p><p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un <strong>biais de genre.</strong> Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Car la question posée dans le prompt comportait déjà un biais.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong>Eh non, pourtant la réponse en comporte un.</strong><br></p><p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un biais de <strong>genre</strong>. </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p><strong>Eh non, pourtant la réponse en comporte un.</strong><br></p><p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un <strong>biais de</strong> <strong>genre</strong>. </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "<p><strong></strong>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un biais de genre. </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
+                            "diagnosis": "<p>Cette IA proposé à Enora des métiers souvent considérés comme « féminins » par les clichés, en oubliant d’autres professions du numérique comme développeur, expert en cybersécurité, ingénieur système...  C’est ce qu’on appelle un <strong>biais de genre</strong>. </p><p>Si Enora ne remet pas en question les choix de l’IA, elle risque de limiter ses idées de carrière et de renforcer les stéréotypes déjà présents dans le monde du travail.</p>"
                           }
                         }
                       ],
@@ -599,21 +614,27 @@
           "title": "Le biais de confirmation",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "a901737a-8a58-4d58-afd5-2547711002d8",
-                "type": "text",
-                "content": "<p>Un biais dans une réponse d’IA générative peut sauter aux yeux ou passer inaperçu. 👀<br>Il faut savoir que les humains ont un point faible : nous croyons plus facilement ce qui confirme nos idées et ignorons ce qui les contredit.</p><p>👉 Cela s’appelle le <strong>biais de confirmation</strong>.</p><p><br></p><p>Souvent, un logiciel d’IA générative va générer des réponses pour nous plaire et ne pas nous contredire. Si le contexte de notre prompt exprime une opinion ou une préférence, l’IA aura tendance à la confirmer.<br><br>Il faut donc être vigilant, garder un <strong>regard critique</strong> et éviter de réutiliser les productions de l’IA telles quelles. 🕵️</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c6784bf2-ccc5-4f4e-bf03-3789da7c38a4",
-                "type": "expand",
-                "title": "💡Quelques astuces pour détecter des biais",
-                "content": "<p> Posez-vous ces questions (si la réponse est « oui », attention 👀) : </p><ul><li> Y a-t-il des clichés ou stéréotypes ? 😕</li><li>Est-ce qu’un seul point de vue est présenté ? 🙈</li><li>Est-ce surtout des opinions plutôt que des faits ? 💭</li><li>Les exemples sont-ils trop semblables ? 🌍</li></ul>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "0e59aacb-120f-45eb-92f4-d53bbe983d7e",
+                      "type": "text",
+                      "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀<br></p><h5>🤔Savez-vous pourquoi nous pouvons nous laisser piéger ?<br><br></h5><p>Parce que nous croyons plus facilement ce qui va dans le sens de nos idées. C’est ce qu’on appelle le <strong>biais de confirmation</strong>.<br> <br>De plus, souvent, si notre question contient une opinion,  l’<strong>IA a tendance à la confirmer plutôt qu’à la contredire.</strong></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "93bac79a-191d-4cb2-9add-c2b464bffd85",
+                      "type": "text",
+                      "content": "<h5>🤔Mais alors… que faire ? <br><br></h5><p>Il faut rester vigilant, garder un esprit critique et toujours vérifier les réponses de l’IA. </p><h5>Quelques astuces pour détecter des biais : <br></h5><p>Posez-vous ces questions (si la réponse est « oui », attention 👀) :<br></p><ul><li>Y a-t-il des clichés ou stéréotypes ? 😕<br></li><li>Est-ce qu’un seul point de vue est présenté ? 🙈<br></li><li>Est-ce surtout des opinions plutôt que des faits ? 💭<br></li><li>Les exemples sont-ils trop semblables ? 🌍<br><br></li></ul>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -633,7 +654,7 @@
               "element": {
                 "id": "32fa1627-38dc-4699-9a71-c14e8e6412df",
                 "type": "text",
-                "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative contiennent des opinions,  des stéréotypes, des biais linguistiques ou des préférences culturelles, parfois <strong>surreprésentés</strong>.&nbsp;📊</li><li>Comme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>Les réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️</li><li>Il faut aussi garder à l’esprit que nous avons nos propres <strong>biais de confirmation</strong>, qui nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
+                "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative contiennent des <strong>opinions</strong>,  des <strong>stéréotypes</strong>, des biais. Des préférences linguistique&nbsp;ou culturelles sont parfois <strong>surreprésentées</strong>.&nbsp;📊</li><li>Comme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>Les réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️</li><li>Il faut aussi garder à l’esprit que nous avons nos propres <strong>biais de confirmation</strong>, qui nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
               }
             },
             {
