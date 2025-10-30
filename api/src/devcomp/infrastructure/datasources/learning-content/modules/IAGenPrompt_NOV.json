@@ -157,14 +157,14 @@
                     "id": "2",
                     "content": "<p>Bien sûr, voici quelques idées de noms pour une association de yoga :</p><p>1. Yoga en mouvement</p><p>2. Souffle &amp; Racines</p><p>3.&nbsp;Clair de Lune Yoga</p><p>4. Yogâme</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est la réponse donnée par un logiciel d’IA générative. <strong>Le prompt</strong>, c’est <strong>la question posée ou la consigne donnée</strong> au logiciel d’IA générative.</p>"
+                      "diagnosis": "<p>Pas tout à fait ! C’est la réponse donnée par le logiciel d’IA générative. Le <strong>prompt</strong>, c’est la<strong> question posée </strong>ou la<strong> consigne donnée</strong> au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Posez une question</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est <strong>la question posée ou la consigne donnée</strong> au logiciel d’IA générative.</p>"
+                      "diagnosis": "<p>Pas tout à fait ! C’est le champ de saisie, la zone pour écrire les prompts ! <strong>Le prompt</strong>, c’est <strong>la question posée</strong> ou la<strong> consigne </strong>donnée au <strong>logiciel d’IA générative</strong>.</p>"
                     }
                   }
                 ],
@@ -183,7 +183,7 @@
               "element": {
                 "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
                 "type": "text",
-                "content": "<ul><li><strong>Les réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</li><li>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans <strong>la zone située juste en dessous.</strong></li></ul>"
+                "content": "<p><strong>Les réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans <strong>la zone située juste en dessous.</strong></p>"
               }
             }
           ]
@@ -258,21 +258,21 @@
                     "id": "1",
                     "content": "<p>On parle à un logiciel d’IA générative en langage informatique.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, mais <strong>de façon simple et claire</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>On parle à un logiciel d’IA générative comme on parle avec une autre personne.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet ! On écrit en <strong>langage courant</strong>, mais <strong>de façon simple et claire</strong>.</p>"
+                      "diagnosis": "<p>En effet ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>On parle à un logiciel d’IA générative avec des mots-clés uniquement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, mais <strong>de façon simple et claire</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
                   }
                 ],
@@ -291,7 +291,7 @@
               "element": {
                 "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
                 "type": "text",
-                "content": "<p>En revanche, pour que le logiciel d’IA générative réponde vraiment à ce que vous voulez, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’actions</strong> comme : «lister», «traduire», «résumer», etc.</p>"
+                "content": "<p>En revanche, pour que le logiciel d’IA générative réponde vraiment à ce que vous voulez, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’action</strong> comme : «lister», «traduire», «résumer», etc.</p>"
               }
             }
           ]
@@ -360,27 +360,27 @@
               "element": {
                 "id": "ee3bd7af-b9d4-432d-a6a2-78bada14d03a",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, parmi ces prompts, lequel exprime au mieux le besoin de Gustave ?</p>",
+                "instruction": "<p>D’après vous, parmi ces prompts, lequel exprime le mieux le besoin d'Agnès ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Écris une recette de gâteau.</p>",
+                    "content": "<p>Propose un planning de repas pour le week-end.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.</p>"
+                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut <strong>préciser tous les éléments importants </strong>de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Écris une recette de gâteau pour 10 personnes.</p>",
+                    "content": "<p>Propose un planning de repas végétariens pour le week-end.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut préciser tous les éléments importants de la demande dans le prompt.</p>"
+                      "diagnosis": "<p>Pas tout à fait. Le logiciel d’IA générative ne peut pas deviner les détails d’une demande. Pour être sûr d’avoir la réponse recherchée, il faut <strong>préciser tous les éléments importants</strong> de la demande dans le prompt.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Écris une recette de gâteau pour 10 personnes sans chocolat.</p>",
+                    "content": "<p>Propose un planning de repas végétariens pour le week-end pour impressionner mes amis.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu, ce prompt contient des éléments précis : un verbe, le nombre de personnes et les ingrédients à supprimer.</p>"
+                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l'objectif (impressioner ces amis).</p>"
                     }
                   }
                 ],
@@ -474,7 +474,7 @@
               "element": {
                 "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
                 "type": "text",
-                "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, <strong>un logiciel d’IA générative peut se tromper</strong>.😓 Il faut TOUJOURS relire et vérifier la réponse.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
+                "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, un<strong> logiciel d’IA générative </strong>peut <strong>se tromper</strong>.😓 Il faut <strong>toujours&nbsp;</strong><strong>relire et vérifier la réponse</strong>.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation avec le logiciel d’IA générative en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
               }
             }
           ]
@@ -495,7 +495,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
-                "content": "<ul><li>Un prompt («instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, sous forme de consigne simple et claire.💬</li><li>Plus la <strong>demande est claire et précise</strong>, plus la réponse du logiciel d’IA générative sera adaptée et pertinente.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «Traduis», «Liste», «Résume», etc.</li><li>On peut ajouter des <strong>informations supplémentaires</strong> pour donner du contexte.</li></ul></li><li>Il est important de <strong>toujours relire la réponse</strong> du logiciel d’IA générative pour vérifier qu’il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> son prompt pour mieux guider le logiciel.📝</li></ul>"
+                "content": "<ul><li>Un <strong>prompt </strong>(«instruction» ou «requête» en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.🧑‍💻</li><li>Un prompt s’écrit en <strong>langage courant</strong>, sous forme de consigne simple et claire.💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<ul><li>On peut utiliser des <strong>verbes d’action</strong> comme «Traduis», «Liste», «Résume», etc.</li><li>On peut ajouter des informations supplémentaires pour donner du <strong>contexte</strong>.</li></ul></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong> pour vérifier qu’il répond bien à la demande.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong> pour mieux guider le logiciel.📝</li></ul>"
               }
             }
           ]
@@ -557,7 +557,7 @@
                           "content": "<p>Faux</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !🎉</p>",
-                            "diagnosis": "<p>Le prompt, ce n’est pas la réponse que donne un logiciel d’IA générative ! C’est la demande que l’utilisateur fait au logiciel d’IA générative sous forme de question ou de consigne. </p>"
+                            "diagnosis": "<p>Le prompt est la demande que l’utilisateur fait au logiciel d’IA générative sous forme de question ou de consigne. </p>"
                           }
                         }
                       ],
@@ -577,7 +577,7 @@
                           "content": "<p>Vrai</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !🎉</p>",
-                            "diagnosis": "<p>En effet, pas besoin de formulation spéciale pour faire une demande à l’IA générative ! On lui parle en langage courant, avec de phrases simples et claires.</p>"
+                            "diagnosis": "<p>En effet, pas besoin de formulation spéciale pour faire une demande à l’IA générative ! </p>"
                           }
                         },
                         {
@@ -585,7 +585,7 @@
                           "content": "<p>Faux</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse</p>",
-                            "diagnosis": "<p>On n’utilise pas de formulation spéciale pour parler à un logiciel d’IA générative. On lui parle en langage courant, comme si on parlait avec une autre personne.</p>"
+                            "diagnosis": "<p>On n’utilise pas de formulation spéciale pour parler à un logiciel d’IA générative. On lui parle en langage courant,&nbsp;avec des phrases simples et claires.</p>"
                           }
                         }
                       ],
@@ -711,7 +711,7 @@
                   },
                   {
                     "id": "1abb2292-e98c-4181-8d00-4e4f5e2f5f89",
-                    "text": "Propose trois idées d’activités d’art plastique pour un atelier enfants (6–8 ans). 🧒",
+                    "text": "Propose trois idées d’activités d’arts plastiques pour un atelier enfants (6–8 ans). 🧒",
                     "image": {
                       "url": "",
                       "altText": ""
