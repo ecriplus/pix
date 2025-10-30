@@ -17,8 +17,9 @@ import QrocmElement from 'mon-pix/components/module/element/qrocm';
 import SeparatorElement from 'mon-pix/components/module/element/separator';
 import TextElement from 'mon-pix/components/module/element/text';
 import VideoElement from 'mon-pix/components/module/element/video';
+import ENV from 'mon-pix/config/environment';
 
-export const VERIFY_RESPONSE_DELAY = 500;
+export const VERIFY_RESPONSE_DELAY = ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY;
 
 export default class ModulixElement extends Component {
   @action
