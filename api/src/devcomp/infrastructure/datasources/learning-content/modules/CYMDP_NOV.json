@@ -740,7 +740,7 @@
               "element": {
                 "id": "e2f7c052-02eb-40e0-9ada-6f9a5bf6f738",
                 "type": "text",
-                "content": "<p>À vous de créer un mot de passe fort en utilisant la même méthode que Jennifer.<br>Transformez la phrase suivante&nbsp;: </p>\n<blockquote><strong>L</strong>e <strong>s</strong>oir<strong>,</strong> <strong>j</strong>’aime <strong>b</strong>oire <strong>d</strong>e <strong>l</strong>a <strong>s</strong>oupe <strong>a</strong>vec <strong>d</strong>es <strong>c</strong>roûtons <strong>e</strong>t <strong>m</strong>anger <strong>3</strong> <strong>t</strong>artines&nbsp;<strong>!</strong></blockquote>"
+                "content": "<p>À vous de créer un mot de passe fort en utilisant la même méthode que Jennifer.<br>Transformez la phrase suivante&nbsp;: </p><blockquote><strong>L</strong>e <strong>s</strong>oir<strong>,</strong> <strong>j</strong>’aime <strong>b</strong>oire <strong>d</strong>e <strong>l</strong>a <strong>s</strong>oupe <strong>a</strong>vec <strong>d</strong>es <strong>c</strong>roûtons <strong>e</strong>t <strong>m</strong>anger <strong>3</strong> <strong>t</strong>artines&nbsp;<strong>!</strong></blockquote>"
               }
             },
             {
@@ -768,10 +768,6 @@
                       "Ls,jbdlsadcem3t!",
                       "Ls,j’bdlsadcem3t!"
                     ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p><br>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><details>    <summary>Indice</summary>    <p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p></details>"
                   }
                 ],
                 "feedbacks": {
@@ -784,6 +780,14 @@
                     "diagnosis": "<p>Vérifiez que vous n’avez pas oublié la première lettre d’un mot, un chiffre, un signe de ponctuation ou encore la majuscule en début de phrase.<br></p>"
                   }
                 }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "401dce3e-8708-4c9f-9c0a-cf8e4e899ee6",
+                "type": "text",
+                "content": "<p>🗝️Si vous avez besoin d’aide, vous pouvez cliquer sur l’indice ci-dessous&nbsp;:</p><p></p><details>    <summary>Indice</summary>    <p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p></details><p></p>"
               }
             }
           ]
