@@ -31,6 +31,6 @@ export default class CombinedCourseRoute extends Route {
         this.router.replaceWith('not-found');
       });
 
-    return combinedCourseParticipations;
+    return { combinedCourse, combinedCourseParticipations };
   }
 }
