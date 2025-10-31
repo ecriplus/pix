@@ -29,7 +29,7 @@
               "element": {
                 "id": "35a9be34-9b63-4cf5-b984-432010aff74e",
                 "type": "text",
-                "content": "<p>Enzo teste sur son smartphone un logiciel d’intelligence artificielle générative.</p><p>    Il est impressionné par sa rapidité…</p>"
+                "content": "<p>Enzo teste un logiciel d’intelligence artificielle générative&nbsp;son smartphone.</p><p>    Il est impressionné par sa rapidité…</p>"
               }
             }
           ]
@@ -271,21 +271,21 @@
                     "id": "2",
                     "content": "<p>Dans un supercalculateur</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet !</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, mais par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>En effet !</p><p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Sur internet</p>",
                     "feedback": {
-                      "diagnosis": "<p>En fait, non.</p><p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, mais par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>En fait, non.</p><p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur </strong>accessible via <strong>internet</strong>.<br></p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La réponse n’est pas <strong>calculée dans votre appareil</strong>, mais par un <strong>supercalculateur</strong> accessible via <strong>internet</strong>.</p>"
+                      "diagnosis": "<p>La réponse est <strong>calculée </strong>par un <strong>supercalculateur </strong>accessible via <strong>internet</strong>.<br></p>"
                     }
                   }
                 ],
@@ -388,7 +388,7 @@
                       }
                     },
                     {
-                      "title": "Elle est transmise à des serveurs (gros ordinateurs) spécialisés pour l‘IA.",
+                      "title": "Elle est transmise à des serveurs (ordinateurs puissants) spécialisés pour l‘IA.",
                       "description": "",
                       "displayWidth": 300,
                       "image": {
@@ -505,7 +505,7 @@
               "element": {
                 "id": "40de84e9-fc48-40c3-9d3f-499f6454d46a",
                 "type": "text",
-                "content": "<p>Nous savons désormais que répondre à une requête <strong>demande de nombreux calculs</strong> sur des ordinateurs puissants, des supercalculateurs. <strong>Cela consomme beaucoup</strong> d’électricité et d’eau. </p><p>🤔Et si personne ne fait de demande ?</p><p>Les <strong>machines</strong> restent <strong>allumées en permanence</strong> et elles continuent à <strong>consommer de l’énergie</strong>.⚡&nbsp;</p><br>"
+                "content": "<p>Nous savons désormais que répondre à une requête demande de<strong> nombreux calculs</strong> <strong>sur des ordinateurs puissants</strong>, des supercalculateurs. Cela consomme<strong> beaucoup</strong> <strong>d’électricité </strong>et <strong>d’eau.</strong> </p><p>🤔Et si personne ne fait de demande ?</p><p>Les <strong>machines</strong> restent <strong>allumées en permanence</strong> et elles continuent à <strong>consommer de l’énergie</strong>.⚡&nbsp;</p><br>"
               }
             }
           ]
@@ -586,21 +586,21 @@
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps</p>"
+                            "diagnosis": "<p>En effet !</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait, si.</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps</p>"
+                            "diagnosis": "<p>En fait, si.</p><p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps</p><p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La <strong>création vidéo</strong> demande beaucoup de <strong>puissance de calcul</strong>. Mais le supercalculateur peut traiter plusieurs centaines de demandes en même temps.</p><p>Sélectionnez la demande de création d‘une vidéo et ajustez la quantité à 800 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -619,21 +619,21 @@
                           "id": "1",
                           "content": "<p>Oui</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>Eh non.</p><p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Non</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p>"
+                            "diagnosis": "<p>En effet !</p><p> La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne pas peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
+                            "diagnosis": "<p>La <strong>création d’images</strong> demande <strong>beaucoup de calculs.</strong> Le supercalculateur ne peut pas créer 25 000 images en même temps.</p><p>Sélectionnez la demande de création d‘un dessin et ajustez la quantité à 25 000 pour visualiser le résultat.</p>"
                           }
                         }
                       ],
@@ -685,28 +685,28 @@
                           "id": "1",
                           "content": "<p>La création de texte</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p> Ce sont <strong>les vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En fait non. </p><p> Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "<p>La création d‘image</p>",
                           "feedback": {
-                            "diagnosis": "<p>En fait non. </p><p>Ce sont <strong>les vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En fait non. </p><p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>La création de vidéo</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>Ce sont <strong>les vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
+                            "diagnosis": "<p>En effet !</p><p>Ce sont les<strong> vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ce sont <strong>les vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
+                            "diagnosis": "<p>Ce sont les <strong>vidéos </strong>qui demandent la<strong> plus grande puissance de calculs.</strong></p><p>Testez les trois requêtes avec un nombre de 15 000 utilisateurs.</p>"
                           }
                         }
                       ],
@@ -852,7 +852,7 @@
                     {
                       "id": "4793a2cc-0044-4a58-a1b7-eb186ecc4243",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Écris une courte scène de théâtre pour 5 acteurs sur le thème de la révolution française.</p>",
+                      "instruction": "<p>Écris une courte scène de théâtre pour 5 acteurs sur le thème de la Révolution française.</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -884,14 +884,14 @@
                           "id": "1",
                           "content": "<p>utile</p>",
                           "feedback": {
-                            "diagnosis": "<p>Mauvais choix.</p><p>Pour connaître la météo, autant utiliser <strong>une appli météo</strong> ou <strong>regarder sur Internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
+                            "diagnosis": "<p>Mauvais choix.</p><p>Pour connaître la météo, autant utiliser <strong>une application météo</strong> ou <strong>regarder sur Internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>pas utile</p>",
                           "feedback": {
-                            "diagnosis": "<p>En effet !</p><p>Pour connaître la météo, autant utiliser <strong>une appli météo</strong> ou <strong>regarder sur Internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
+                            "diagnosis": "<p>En effet !</p><p>Pour connaître la météo, autant utiliser <strong>une application météo</strong> ou <strong>regarder sur Internet</strong>&nbsp;: c’est <strong>plus rapide et précis</strong>.</p>"
                           }
                         }
                       ],
@@ -913,7 +913,7 @@
               "element": {
                 "id": "65f0620b-6632-480d-ad77-f4a2e7e59289",
                 "type": "text",
-                "content": "<p>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</p><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><p>🤔 Comment faire concrètement ? </p><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.&nbsp;</li></ul><p>🤔 Et les créateurs d’IA, que peuvent-ils faire ?</p><p>Ils peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
+                "content": "<h5>🤔 Peut-on réduire l’énergie consommée par les IA génératives ?</h5><p>Oui ! On peut tous agir en utilisant l’IA seulement quand c’est utile.&nbsp;</p><p><br></p><h5>🤔 Comment faire concrètement ? </h5><ul>    <li><strong>Éviter les requêtes inutiles</strong>,</li>    <li><strong>Privilégier des solutions plus adaptées</strong> quand elles existent,</li>    <li><strong>Limiter les demandes d’images ou de vidéos</strong>, qui consomment beaucoup.</li></ul><p><br></p><h5>🤔 Et les personnes qui conçoivent l'IA, que peuvent-ils faire ?</h5><p>Elles peuvent <strong>concevoir des IA plus économes</strong> et utiliser de <strong>l’électricité verte</strong>.</p><br>"
               }
             }
           ]
@@ -934,7 +934,7 @@
               "element": {
                 "id": "d705c485-ea6d-4109-a7c7-b236684b8330",
                 "type": "text",
-                "content": "<ul>    <li>Chaque <strong>question posée</strong> à une <strong>IA</strong> générative demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres instructions</strong>.</li>    <li>Ces <strong>calculs sont effectués</strong> par des <strong>supercalculateurs</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> et d’eau pour leur refroidissement.</li>    <li>Les <strong>demandes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie</strong>.</li><li>On peut <strong>réduire la consommation</strong> d’énergie <strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
+                "content": "<ul>    <li>Chaque <strong>question </strong>posée à une <strong>IA</strong> <strong>générative </strong>demande des <strong>millions de calculs</strong>, qui s’additionnent à ceux de <strong>millions d’autres requêtes</strong>.</li>    <li>Ces calculs sont effectués par des <strong>supercalculateurs</strong>, parfois à l’autre bout du monde, qui <strong>c</strong><strong>onsomment beaucoup d’énergie</strong> <strong>et d’eau</strong> pour leur refroidissement.</li>    <li>Les <strong>demandes d’images</strong>  ou de <strong>vidéos</strong> consomment encore <strong>plus d’énergie&nbsp;</strong>que les demandes de texte.</li><li>On peut <strong>réduire la consommation</strong> <strong>d’énergie </strong><strong>des IA</strong> génératives en les <strong>utilisant seulement quand c’est utile.</strong></li></ul>"
               }
             }
           ]
@@ -979,8 +979,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -990,8 +990,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -1001,8 +1001,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -1012,8 +1012,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   }
                 ],
@@ -1099,7 +1099,7 @@
                     "content": "<p>Créer&nbsp;<strong>un</strong> <strong>poster</strong> publicitaire.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Les images demandent souvent plus de calcul aux logiciels d‘IA générative. Mais ce n’est pas la requête qui consomme le plus d‘énergie dans la liste ci-dessus.</p>"
+                      "diagnosis": "<p>Les images demandent souvent plus de calculs aux logiciels d‘IA générative. Mais ce n’est pas la requête qui consomme le plus d‘énergie dans la liste.</p>"
                     }
                   },
                   {
@@ -1107,7 +1107,7 @@
                     "content": "<p>Écrire <strong>un mail</strong> de réclamation.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Un texte court ne demande pas beaucoup d‘énergie par rapport aux autres exemples ci-dessus.</p>"
+                      "diagnosis": "<p>Un texte court ne demande pas beaucoup d‘énergie par rapport aux autres exemples.</p>"
                     }
                   }
                 ],
