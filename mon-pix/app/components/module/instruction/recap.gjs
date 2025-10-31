@@ -14,7 +14,13 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
 
   <main class="module-recap">
     <div class="module-recap__header">
-      <QuitButton @redirectionUrl={{@module.redirectionUrl}} />
+      <ButtonAction
+        @redirectionUrl={{@module.redirectionUrl}}
+        @iconAfter="doorOpen"
+        @buttonText={{t "pages.modulix.recap.backToModuleDetails"}}
+        @buttonClass="module-recap-header__icon"
+        @variant="tertiary"
+      />
     </div>
 
     <img class="module-recap__illustration" src="/images/modulix/recap-success.svg" alt="" width="228" height="200" />
@@ -27,30 +33,21 @@ import ModuleBetaBanner from 'mon-pix/components/module/layout/beta-banner';
     </div>
 
     <div class="module-recap__link-details">
-      {{#if @module.redirectionUrl}}
-        <PixButtonLink @size="large" @href={{@module.redirectionUrl}} @variant="primary">
-          {{t "pages.modulix.recap.goToHomepage"}}
-        </PixButtonLink>
-      {{else}}
-        <PixButtonLink @size="large" @route="authenticated.user-dashboard" @variant="primary">
-          {{t "pages.modulix.recap.goToHomepage"}}
-        </PixButtonLink>
-      {{/if}}
-
+      <ButtonAction
+        @redirectionUrl={{@module.redirectionUrl}}
+        @buttonText={{t "pages.modulix.recap.goToHomepage"}}
+        @variant="primary"
+      />
     </div>
   </main>
 </template>
 
-class QuitButton extends Component {
+class ButtonAction extends Component {
   @service router;
 
   @action
   transitionToRedirectionUrl() {
-    if (this.isRedirectionUrlInternal) {
-      this.router.transitionTo(this.args.redirectionUrl);
-    } else {
-      window.location = this.args.redirectionUrl;
-    }
+    this.router.transitionTo(this.args.redirectionUrl);
   }
 
   get isRedirectionUrlInternal() {
@@ -63,24 +60,36 @@ class QuitButton extends Component {
 
   <template>
     {{#if @redirectionUrl}}
-      <PixButton
-        @size="large"
-        @variant="tertiary"
-        @iconAfter="doorOpen"
-        class="module-recap-header__icon"
-        @triggerAction={{this.transitionToRedirectionUrl}}
-      >
-        {{t "pages.modulix.recap.backToModuleDetails"}}
-      </PixButton>
+      {{#if this.isRedirectionUrlInternal}}
+        <PixButton
+          @size="large"
+          @variant={{@variant}}
+          @iconAfter={{@iconAfter}}
+          class={{@buttonClass}}
+          @triggerAction={{this.transitionToRedirectionUrl}}
+        >
+          {{@buttonText}}
+        </PixButton>
+      {{else}}
+        <PixButtonLink
+          @size="large"
+          @href={{@redirectionUrl}}
+          @variant={{@variant}}
+          @iconAfter={{@iconAfter}}
+          class={{@buttonClass}}
+        >
+          {{@buttonText}}
+        </PixButtonLink>
+      {{/if}}
     {{else}}
       <PixButtonLink
         @size="large"
         @route="authenticated.user-dashboard"
-        @variant="tertiary"
-        @iconAfter="doorOpen"
-        class="module-recap-header__icon"
+        @variant={{@variant}}
+        @iconAfter={{@iconAfter}}
+        class={{@buttonClass}}
       >
-        {{t "pages.modulix.recap.backToModuleDetails"}}
+        {{@buttonText}}
       </PixButtonLink>
     {{/if}}
   </template>
