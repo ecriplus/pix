@@ -36,6 +36,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
   setupIntlRenderingTest(hooks);
   module('table', function () {
     test('it should have a caption to describe the table ', async function (assert) {
+      // when
       const screen = await render(
         <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
       );
@@ -51,6 +52,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       );
 
       const table = screen.getByRole('table');
+
       // then
       assert.ok(
         within(table).getByRole('columnheader', {
@@ -87,6 +89,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       const campaignHeader = screen.getByRole('columnheader', {
         name: new RegExp(t('pages.combined-course.table.column.campaigns')),
       });
+
+      // then
       assert.ok(within(campaignHeader).getByText(t('pages.combined-course.table.tooltip.campaigns-column')));
     });
 
@@ -98,6 +102,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       const campaignHeader = screen.getByRole('columnheader', {
         name: new RegExp(t('pages.combined-course.table.column.modules')),
       });
+
+      // then
       assert.ok(within(campaignHeader).getByText(t('pages.combined-course.table.tooltip.modules-column')));
     });
   });
@@ -109,6 +115,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     );
 
     const table = screen.getByRole('table');
+
     // then
     assert.ok(
       within(table).getByRole('cell', {
@@ -152,6 +159,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       <template><CombinedCourseParticipations @participations={{noParticipation}} @onFilter={{onFilter}} /></template>,
     );
 
+    // then
     assert.notOk(screen.queryByRole('table'));
     assert.ok(screen.getByText(t('pages.campaign.empty-state')));
   });
@@ -164,12 +172,17 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       const screen = await render(
         <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
       );
+
+      // then
       assert.ok(screen.getByLabelText(/items/));
     });
     test('should display pagination', async function (assert) {
+      //when
       const screen = await render(
         <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
       );
+
+      // then
       assert.ok(screen.getByText(/1-1 sur 2 éléments/));
       assert.ok(screen.getByLabelText("Nombre d'élément à afficher par page"));
       assert.ok(screen.getByRole('button', { name: 'Aller à la page précédente' }));
@@ -185,6 +198,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
 
         const statusFilter = [];
 
+        // when
         const screen = await render(
           <template>
             <CombinedCourseParticipations
@@ -196,7 +210,6 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
           </template>,
         );
 
-        // when
         await screen.getByRole('button', { name: t('common.filters.actions.clear') }).click();
 
         // then
@@ -210,6 +223,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         const onFilter = sinon.stub();
         const fullNameFilter = '';
 
+        // when
         const screen = await render(
           <template>
             <CombinedCourseParticipations
@@ -220,7 +234,6 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
           </template>,
         );
 
-        // when
         const input = screen.getByLabelText(t('common.filters.fullname.label'));
 
         assert.ok(screen.getByPlaceholderText(t('common.filters.fullname.placeholder')));
@@ -272,6 +285,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
 
         const statusFilter = [];
 
+        // when
         const screen = await render(
           <template>
             <CombinedCourseParticipations
@@ -281,7 +295,7 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
             />
           </template>,
         );
-        // when
+
         const select = screen.getByLabelText(t('pages.combined-course.filters.by-status'));
 
         await click(select);
