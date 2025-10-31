@@ -40,10 +40,13 @@ export function getForwardedOrigin(headers) {
 
 export class RequestedApplication {
   /**
-   * @param {string} applicationName
+   * @param {Object} params
+   * @param {string} params.applicationName
+   * @param {string} params.applicationTld
    */
-  constructor(applicationName) {
+  constructor({ applicationName, applicationTld }) {
     this.applicationName = applicationName;
+    this.applicationTld = applicationTld;
   }
 
   get isPixApp() {
@@ -79,10 +82,12 @@ export class RequestedApplication {
     }
 
     let applicationName;
+    let applicationTld;
 
     if (url.hostname == 'localhost') {
       applicationName = localhostApplicationPortMapping[url.port];
-      return new RequestedApplication(applicationName);
+      applicationTld = '';
+      return new RequestedApplication({ applicationName, applicationTld });
     }
 
     const hostnameParts = url.hostname.split('.');
@@ -91,6 +96,7 @@ export class RequestedApplication {
     }
 
     const urlFirstLabel = hostnameParts[0];
+    applicationTld = `.${hostnameParts.at(-1)}`;
 
     const urlFirstLabelParts = urlFirstLabel.split('-');
     if (urlFirstLabelParts.length == 2) {
@@ -100,7 +106,7 @@ export class RequestedApplication {
       applicationName = urlFirstLabel;
     }
 
-    return new RequestedApplication(applicationName);
+    return new RequestedApplication({ applicationName, applicationTld });
   }
 }
 
