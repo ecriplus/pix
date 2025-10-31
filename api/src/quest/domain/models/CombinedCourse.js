@@ -72,6 +72,14 @@ export class CombinedCourseDetails extends CombinedCourse {
     this.participation = participation;
   }
 
+  get hasCampaigns() {
+    return this.campaignIds.length > 0;
+  }
+
+  get hasModules() {
+    return this.moduleIds.length > 0;
+  }
+
   get campaignIds() {
     return this.quest.successRequirements
       .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)

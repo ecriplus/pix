@@ -22,6 +22,7 @@ import { domainBuilder, expect } from '../../../../test-helper.js';
 describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
   describe('CombinedCourseDetails', function () {
     let id, organizationId, name, code, questId;
+
     beforeEach(function () {
       id = 1;
       questId = 2;
@@ -29,6 +30,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
       name = 'name';
       code = 'code';
     });
+
     describe('#campaignIds', function () {
       it('should only return ids of all campaigns included in the given combined course', function () {
         // given
@@ -67,10 +69,46 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         );
 
         // when
+        const hasCampaigns = combinedCourse.hasCampaigns;
         const campaignIds = combinedCourse.campaignIds;
 
         // then
+        expect(hasCampaigns).equal(true);
         expect(campaignIds).to.deep.equal([campaignId]);
+      });
+
+      it('should return false to hasCampaign if no campaign on combined course', function () {
+        // given
+        const questWithoutCampaign = new Quest({
+          id: questId,
+          rewardId: null,
+          rewardType: null,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'passages',
+              comparison: 'all',
+              data: {
+                moduleId: {
+                  data: 7,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          questWithoutCampaign,
+        );
+
+        // when
+        const hasCampaigns = combinedCourse.hasCampaigns;
+        const campaignIds = combinedCourse.campaignIds;
+
+        // then
+        expect(hasCampaigns).equal(false);
+        expect(campaignIds).deep.equal([]);
       });
     });
 
@@ -112,10 +150,46 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
         );
 
         // when
+        const hasModules = combinedCourse.hasModules;
         const moduleIds = combinedCourse.moduleIds;
 
         // then
+        expect(hasModules).equal(true);
         expect(moduleIds).to.deep.equal([moduleId]);
+      });
+
+      it('should return false to hasModules if no module on combined course', function () {
+        // given
+        const questWithoutModules = new Quest({
+          id: questId,
+          rewardId: null,
+          rewardType: null,
+          eligibilityRequirements: [],
+          successRequirements: [
+            {
+              requirement_type: 'campaignParticipations',
+              comparison: 'all',
+              data: {
+                campaignId: {
+                  data: 2,
+                  comparison: 'equal',
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          questWithoutModules,
+        );
+
+        // when
+        const hasModules = combinedCourse.hasModules;
+        const moduleIds = combinedCourse.moduleIds;
+
+        // then
+        expect(hasModules).equal(false);
+        expect(moduleIds).deep.equal([]);
       });
     });
 
