@@ -38,28 +38,7 @@
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 2,
-                  "images": {
-                    "initial": {
-                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-initial.svg"
-                    },
-                    "normal_weak": {
-                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                    },
-                    "normal_medium": {
-                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-normal.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                    },
-                    "warning": {
-                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-warning.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-warning.svg"
-                    },
-                    "error": {
-                      "capacityImg": "https://assets.pix.org/modules/capacity-calculation/capacity-error.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-error.svg"
-                    }
-                  }
+                  "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
                 }
               }
             }
