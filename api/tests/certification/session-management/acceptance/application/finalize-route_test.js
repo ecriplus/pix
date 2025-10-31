@@ -446,7 +446,14 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             questionNumber: 1,
           });
 
-          databaseBuilder.factory.buildAssessmentResult({ assessmentId });
+          const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
+            assessmentId,
+            certificationCourseId,
+          });
+          databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+            lastAssessmentResultId: assessmentResult.id,
+            certificationCourseId,
+          });
 
           const certificationChallenge = databaseBuilder.factory.buildCertificationChallenge({
             courseId: certificationCourseId,

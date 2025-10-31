@@ -192,6 +192,7 @@ import { buildComplementaryCertificationScoringCriteria } from './certification/
 import { buildComplementaryCertificationScoringWithoutComplementaryReferential } from './certification/evaluation/build-complementary-certification-scoring-without-complementary-referential.js';
 import { buildDoubleCertificationScoring } from './certification/evaluation/build-double-certification-scoring.js';
 import { buildFlashAssessmentAlgorithm } from './certification/evaluation/build-flash-assessment-algorithm.js';
+import { buildPixPlusCertificationCourse } from './certification/evaluation/build-pix-plus-certification-course.js';
 import { buildComplementaryCertificationScoringWithComplementaryReferential } from './certification/evaluation/build-pix-plus-certification-scoring.js';
 import { buildResultsSession } from './certification/evaluation/build-session.js';
 import { buildVersion as buildEvaluationVersion } from './certification/evaluation/build-version.js';
@@ -275,6 +276,7 @@ const certification = {
     buildComplementaryCertificationScoringWithComplementaryReferential,
     buildDoubleCertificationScoring,
     buildVersion: buildEvaluationVersion,
+    buildPixPlusCertificationCourse,
   },
   sessionManagement: {
     buildAllowedCertificationCenterAccess: buildSessionManagementAllowedCertificationCenterAccess,
@@ -453,6 +455,7 @@ export {
   buildOrganizationsToAttachToTargetProfile,
   buildOrganizationTag,
   buildParticipationForCampaignManagement,
+  buildPixPlusCertificationCourse,
   buildPlacementProfile,
   buildPoleEmploiSending,
   buildPrescriber,

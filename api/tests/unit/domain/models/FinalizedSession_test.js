@@ -102,6 +102,22 @@ describe('Unit | Domain | Models | FinalizedSession', function () {
       expect(finalizedSession.isPublishable).to.be.false;
     });
 
+    it('is not publishable when there is no score', function () {
+      // given / when
+      const finalizedSession = FinalizedSession.from({
+        sessionId: 1234,
+        certificationCenterName: 'a certification center',
+        sessionDate: '2021-01-29',
+        sessionTime: '16:00',
+        hasExaminerGlobalComment: false,
+        juryCertificationSummaries: _noneWithRequiredActionButHasNoScore(),
+        finalizedAt: new Date('2020-01-01T00:00:00Z'),
+      });
+
+      // then
+      expect(finalizedSession.isPublishable).to.be.false;
+    });
+
     it('is not publishable when at least one assessment has not been completed', function () {
       // given / when
       const finalizedSession = FinalizedSession.from({
@@ -393,6 +409,23 @@ function _someWhichAreUnfinishedButHaveNoAbortReason() {
           resolution: 'des points gratos offerts',
         }),
       ],
+    }),
+  ];
+}
+
+function _noneWithRequiredActionButHasNoScore() {
+  return [
+    new JuryCertificationSummary({
+      id: 1,
+      firstName: 'firstName',
+      lastName: 'lastName',
+      status: assessmentResultStatuses.VALIDATED,
+      pixScore: null,
+      createdAt: new Date(),
+      completedAt: new Date(),
+      isPublished: false,
+      cleaCertificationStatus: 'not_passed',
+      certificationIssueReports: [],
     }),
   ];
 }

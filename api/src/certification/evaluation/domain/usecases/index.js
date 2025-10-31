@@ -20,6 +20,7 @@ import * as certificationCandidateRepository from '../../infrastructure/reposito
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import * as pixPlusCertificationCourseRepository from '../../infrastructure/repositories/pix-plus-certification-course-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
@@ -69,6 +70,7 @@ const dependencies = {
   certificationAssessmentRepository,
   complementaryCertificationScoringCriteriaRepository,
   certificationChallengeLiveAlertRepository,
+  pixPlusCertificationCourseRepository,
   versionRepository,
   services,
 };
