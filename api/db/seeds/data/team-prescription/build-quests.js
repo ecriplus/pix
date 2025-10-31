@@ -196,8 +196,18 @@ function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
     }),
   );
 
+  databaseBuilder.factory.buildCombinedCourse({
+    name: 'Combinix 3',
+    code: 'COMBINIX3',
+    createdAt: new Date('2024-01-01'),
+    description: 'Combinix créé à une date antérieure au Combinix 2 pour tester le tri par date de création',
+    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
+    organizationId,
+    eligibilityRequirements: [],
+    successRequirements: [],
+  });
   const combinix2 = databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix',
+    name: 'Combinix 2',
     code: 'COMBINIX2',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',

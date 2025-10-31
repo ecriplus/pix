@@ -37,7 +37,8 @@ const findByOrganizationId = async ({ organizationId }) => {
 
   const combinedCourses = await knexConn('combined_courses')
     .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
-    .where('organizationId', organizationId);
+    .where('organizationId', organizationId)
+    .orderBy('createdAt', 'desc');
 
   return combinedCourses.map((quest) => new CombinedCourse(quest));
 };

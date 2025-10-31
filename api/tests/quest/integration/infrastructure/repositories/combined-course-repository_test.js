@@ -63,18 +63,20 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#findByOrganizationId', function () {
-    it('should return all combined courses for a given organization', async function () {
+    it('should return all combined courses for a given organization ordered by creation date', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const combinedCourse1 = databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE1',
         name: 'Parcours 1',
         organizationId,
+        createdAt: new Date('2024-01-01'),
       });
       const combinedCourse2 = databaseBuilder.factory.buildCombinedCourse({
         code: 'COURSE2',
         name: 'Parcours 2',
         organizationId,
+        createdAt: new Date('2025-01-01'),
       });
       await databaseBuilder.commit();
 
@@ -85,8 +87,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(combinedCourses).to.have.lengthOf(2);
       expect(combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
       expect(combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(combinedCourse1));
-      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(combinedCourse2));
+      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(combinedCourse2));
+      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(combinedCourse1));
     });
 
     it('should return an empty array when organization has no combined courses', async function () {
