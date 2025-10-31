@@ -263,7 +263,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>On parle à un logiciel d’IA générative comme on parle avec une autre personne.</p>",
+                    "content": "<p>On parle à un logiciel d’IA générative comme on parle avec une personne.</p>",
                     "feedback": {
                       "diagnosis": "<p>En effet ! On écrit en <strong>langage courant</strong>, de façon simple et claire.</p>"
                     }
@@ -380,7 +380,7 @@
                     "id": "3",
                     "content": "<p>Propose un programme de repas végétariens pour le week-end pour impressionner mes amis.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l'objectif (impressioner ces amis).</p>"
+                      "diagnosis": "<p>Bien vu, ce prompt contient des <strong>éléments précis </strong>: un verbe, la contrainte (repas végétarien) et l'objectif (impressionner ses amis).</p>"
                     }
                   }
                 ],
