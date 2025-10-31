@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.246.0](https://github.com/1024pix/pix/compare/v5.245.0...v5.246.0) (2025-10-31)
+
+### :rocket: Amélioration
+
+- [#14025](https://github.com/1024pix/pix/pull/14025) Gestion de la progression sur la nouvelle navigation coté module (PIX-20105). 
+- [#13963](https://github.com/1024pix/pix/pull/13963) IAGenImpact_NOV modification suite panel + retours IG 
+- [#14036](https://github.com/1024pix/pix/pull/14036) Modification d'un lien URL afin qu'il pointe vers le contenu en NL (PIX-20178) 
+- [#13936](https://github.com/1024pix/pix/pull/13936) Tmp retours ig module biais ind 
+- [#14021](https://github.com/1024pix/pix/pull/14021) Trier la liste des parcours apprenants par date de création (PIX-20015) 
+- [#14037](https://github.com/1024pix/pix/pull/14037) Update IADefinition_NOV : retours IG + version light 
+- [#14026](https://github.com/1024pix/pix/pull/14026) WIP Module premier prompt nouvelle version 
+
+### :building_construction: Tech
+
+- [#14042](https://github.com/1024pix/pix/pull/14042) Mise à jour majeure de epreuves-components 
+- [#13983](https://github.com/1024pix/pix/pull/13983) Supprimer derniers usages des colonnes obsoletes dans certification-frameworks-challenges (PIX-20113). 
+
+### :coffee: Autre
+
+- [#13908](https://github.com/1024pix/pix/pull/13908) Création d'un ADR sur l'usage des langues dans les documentations de nos bases de données (PIX-20050)
+
 # [5.245.0](https://github.com/1024pix/pix/compare/v5.244.0...v5.245.0) (2025-10-31)
 
 ### :rocket: Amélioration
