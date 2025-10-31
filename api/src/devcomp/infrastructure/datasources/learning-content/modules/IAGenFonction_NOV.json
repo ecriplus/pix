@@ -112,7 +112,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Mistral<br></p>",
+                    "content": "<p>Mistral</p>",
                     "feedback": {
                       "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: Microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
