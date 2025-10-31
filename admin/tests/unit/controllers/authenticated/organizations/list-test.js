@@ -52,4 +52,25 @@ module('Unit | Controller | authenticated/organizations/list', function (hooks) 
       });
     });
   });
+
+  module('#onResetFilter', function () {
+    test('resets all filters', async function (assert) {
+      // given
+      controller.id = 123;
+      controller.name = 'name';
+      controller.type = 'PRO';
+      controller.externalId = 'abc';
+      controller.hideArchived = true;
+
+      // when
+      controller.onResetFilter();
+
+      // then
+      assert.strictEqual(controller.id, null);
+      assert.strictEqual(controller.name, null);
+      assert.strictEqual(controller.type, null);
+      assert.strictEqual(controller.externalId, null);
+      assert.false(controller.hideArchived);
+    });
+  });
 });

@@ -63,4 +63,13 @@ export default class TargetProfileOrganizationsController extends Controller {
       return this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
     }
   }
+
+  @action
+  onResetFilter() {
+    this.id = null;
+    this.name = null;
+    this.type = null;
+    this.externalId = null;
+    this.hideArchived = false;
+  }
 }

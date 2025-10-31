@@ -11,6 +11,7 @@ module('Integration | Component | ListItems', function (hooks) {
   let currentUser;
 
   hooks.beforeEach(function () {
+    this.intl = this.owner.lookup('service:intl');
     currentUser = this.owner.lookup('service:currentUser');
     currentUser.adminMember = { isSuperAdmin: true };
   });
@@ -117,6 +118,51 @@ module('Integration | Component | ListItems', function (hooks) {
 
       // then
       assert.true(detachOrganizations.calledWith(organizations[0].id));
+    });
+  });
+
+  module('filters', () => {
+    test('when one filter is active, clic on reset filter button should trigger onResetFilters method', async function (assert) {
+      // given
+      const onResetFilters = sinon.stub();
+
+      const screen = await render(
+        <template>
+          <ListItems
+            @organizations={{organizations}}
+            @externalId={{"123"}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @triggerFiltering={{triggerFiltering}}
+            @onResetFilter={{onResetFilters}}
+          />
+        </template>,
+      );
+
+      // when
+      const button = screen.getByRole('button', { name: this.intl.t('common.filters.actions.clear') });
+      await click(button);
+
+      // then
+      assert.true(onResetFilters.calledOnce);
+    });
+
+    test('when no filter is active, reset filter button should be disabled', async function (assert) {
+      // given
+      const screen = await render(
+        <template>
+          <ListItems
+            @organizations={{organizations}}
+            @goToOrganizationPage={{goToOrganizationPage}}
+            @triggerFiltering={{triggerFiltering}}
+          />
+        </template>,
+      );
+
+      // when
+      const button = screen.getByRole('button', { name: this.intl.t('common.filters.actions.clear') });
+
+      // then
+      assert.ok(button.hasAttribute('aria-disabled'));
     });
   });
 });
