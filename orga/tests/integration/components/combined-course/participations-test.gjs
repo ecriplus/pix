@@ -38,7 +38,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     test('it should have a caption to describe the table ', async function (assert) {
       // when
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -48,7 +55,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     test('it should display column headers', async function (assert) {
       // when
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
       );
 
       const table = screen.getByRole('table');
@@ -84,7 +98,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     test('it should render a tooltip for campaign column', async function (assert) {
       // when
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            onFilter={{onFilter}}
+          />
+        </template>,
       );
       const campaignHeader = screen.getByRole('columnheader', {
         name: new RegExp(t('pages.combined-course.table.column.campaigns')),
@@ -97,7 +118,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     test('it should render a tooltip for module column', async function (assert) {
       // when
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            onFilter={{onFilter}}
+          />
+        </template>,
       );
       const campaignHeader = screen.getByRole('columnheader', {
         name: new RegExp(t('pages.combined-course.table.column.modules')),
@@ -111,7 +139,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
   test('it should display participation details', async function (assert) {
     // when
     const screen = await render(
-      <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
+      <template>
+        <CombinedCourseParticipations
+          @hasCampaigns={{true}}
+          @hasModules={{true}}
+          @participations={{participations}}
+          @onFilter={{onFilter}}
+        />
+      </template>,
     );
 
     const table = screen.getByRole('table');
@@ -156,7 +191,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
 
     // when
     const screen = await render(
-      <template><CombinedCourseParticipations @participations={{noParticipation}} @onFilter={{onFilter}} /></template>,
+      <template>
+        <CombinedCourseParticipations
+          @hasCampaigns={{true}}
+          @hasModules={{true}}
+          @participations={{noParticipation}}
+          @onFilter={{onFilter}}
+        />
+      </template>,
     );
 
     // then
@@ -170,7 +212,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       const locale = this.owner.lookup('service:locale');
       locale.setCurrentLocale('en');
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -179,7 +228,14 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     test('should display pagination', async function (assert) {
       //when
       const screen = await render(
-        <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
       );
 
       // then
@@ -202,6 +258,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         const screen = await render(
           <template>
             <CombinedCourseParticipations
+              @hasCampaigns={{true}}
+              @hasModules={{true}}
               @statusFilter={{statusFilter}}
               @clearFilters={{clearFilters}}
               @participations={{participations}}
@@ -227,6 +285,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         const screen = await render(
           <template>
             <CombinedCourseParticipations
+              @hasCampaigns={{true}}
+              @hasModules={{true}}
               @fullNameFilter={{fullNameFilter}}
               @onFilter={{onFilter}}
               @participations={{participations}}
@@ -254,6 +314,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         const screen = await render(
           <template>
             <CombinedCourseParticipations
+              @hasCampaigns={{true}}
+              @hasModules={{true}}
               @fullNameFilter={{fullNameFilter}}
               @onFilter={{onFilter}}
               @participations={{participations}}
@@ -289,6 +351,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         const screen = await render(
           <template>
             <CombinedCourseParticipations
+              @hasCampaigns={{true}}
+              @hasModules={{true}}
               @statusFilter={{statusFilter}}
               @onFilter={{onFilter}}
               @participations={{participations}}
