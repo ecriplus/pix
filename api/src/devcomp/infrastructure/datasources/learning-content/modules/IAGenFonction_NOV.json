@@ -195,7 +195,7 @@
                     {
                       "id": "de590f05-252c-4110-859a-07a2e276ac80",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Comment avez-vous choisi votre mot ?<br></p>",
+                      "instruction": "<p>Comment avez-vous choisi votre mot ?</p>",
                       "proposals": [
                         {
                           "id": "1",
@@ -206,14 +206,14 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p><strong></strong>Un mot très probable.<br></p>",
+                          "content": "<p>Un mot très probable.</p>",
                           "feedback": {
                             "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n'êtes pas une IA. </p><p>Un logiciel d'IA générative lui, utilise toujours la même méthode : ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong></p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Un mot que je préfère.<br></p>",
+                          "content": "<p>Un mot que je préfère.</p>",
                           "feedback": {
                             "diagnosis": "<p>Vous pouvez choisir la méthode que vous préférez car vous n'êtes pas une IA. </p><p> Un logiciel d'IA générative lui, utilise toujours la même méthode : ni par hasard, ni par préférence. Il choisit des mots très probables <strong>selon le contexte de la conversation.</strong><br></p>"
                           }
