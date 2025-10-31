@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/ia-dit-ia/picto-ia-dit-ia.svg",
-    "description": "<p>Depuis quelques années, on entend beaucoup parler de l'IA, dans la presse, à la télévision et même dans les discours politiques. Mais c'est quoi au juste l'IA ?<br>C'est ce que vous allez découvrir dans ce module.</p>",
+    "description": "<p>Depuis quelques années, on entend beaucoup parler de l'IA, dans la presse, à la télévision et même dans les discours politiques. Mais, c'est quoi au juste l'IA ?<br>C'est ce que vous allez découvrir dans ce module.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -130,7 +130,7 @@
               "element": {
                 "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
                 "type": "text",
-                "content": "<p>Avec la récente popularité de chatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! 🦣&nbsp;</p>"
+                "content": "<p>Avec la récente popularité de ChatGPT et d'autres logiciels d'IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! ⌛</p>"
               }
             }
           ]
@@ -219,12 +219,27 @@
           "title": "Leçon - 1 : Que peut faire un ordinateur ? ",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "d4c2fcb1-74b0-474e-8bda-470c83ced9c2",
-                "type": "text",
-                "content": "<p>Aujourd’hui, les ordinateurs sont capables de réaliser <strong>toutes sortes de tâches</strong>&nbsp;:</p><ul>    <li>Des tâches que nous faisons sans y penser comme, par exemple, reconnaître un chien dans une image.&nbsp;👀</li>    <li>Et des tâches qui nous demandent plus de concentration comme, par exemple, résoudre des problèmes de mathématiques.&nbsp;🧠</li></ul><p>Le <strong>domaine scientifique</strong> qui a permis ces progrès est celui de&nbsp;<strong>l’intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’<strong>imiter les mécanismes de l’intelligence</strong>.&nbsp;🔬</p>"
-              }
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "53537649-ddc5-4971-a5a4-7998646fd2e9",
+                      "type": "text",
+                      "content": "<p>Aujourd’hui, les <strong>ordinateurs </strong>peuvent <strong>réaliser toutes sortes de tâches</strong> :<br></p><ul><li>Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image. 👀<br></li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, analyser de grandes quantités de données. 🧠<br></li></ul>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "35c0b9f8-c09e-49f3-9408-25073a69bea5",
+                      "type": "text",
+                      "content": "<p>Le <strong>domaine scientifique </strong>qui a permis ces <strong>progrès</strong> est celui de&nbsp;l’<strong>intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’imiter les mécanismes de l’intelligence humaine.&nbsp;🔬</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -354,17 +369,19 @@
                     "ariaLabel": "nombre d'utilisation de l'IA",
                     "defaultValue": "",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p>C'est ça ! L'IA est présente dans de nombreux appareils et services du quotidien.&nbsp;</p>"
+                    "diagnosis": "<p>C'est ça ! L'IA est présente dans de nombreux appareils et services du quotidien, comme ici : le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p>Et non. Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
+                    "diagnosis": "<p><strong>Eh non. </strong></p><p>Dans le salon de Mariam, il y a 6 appareils et services qui utilisent des logiciels d'IA&nbsp;: le thermostat, le service de vidéo à la demande sur la télévision, le logiciel d'IA générative sur l'ordinateur, le robot aspirateur, l'enceinte connectée et le jeu vidéo sur la console.</p>"
                   }
                 }
               }
@@ -381,7 +398,7 @@
               "element": {
                 "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
                 "type": "text",
-                "content": "<p>De nombreux <strong>appareils et services numériques du quotidien</strong> utilisent des logiciels d’intelligence artificielle.</p><p><br>Certains logiciels sont <strong>spécialisés </strong>dans <strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Les logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de réaliser des tâches diverses&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes de mathématiques, etc.&nbsp;📝<br></p>"
+                "content": "<p>Ces exemples ne sont pas rares : aujourd’hui, de nombreux <strong>appareils et services du quotidien</strong> utilisent des <strong>logiciels d’intelligence artificielle</strong>.</p><p>Certains logiciels sont <strong>spécialisés </strong><strong>dans </strong><strong>un type de tâche</strong>&nbsp;: reconnaître des images, reconnaître des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Des logiciels à base d’<strong>IA générative</strong>, comme Le chat, Gemini ou chatGPT, sont capables de <strong>réaliser des tâches</strong><strong> diverses</strong>&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes ...&nbsp;📝</p><p>Mais attention : même ces logiciels peuvent <strong>se tromper</strong> !</p>"
               }
             }
           ]
@@ -429,15 +446,15 @@
                     },
                     {
                       "name": "Culture",
-                      "description": "Reconnaissance des textes pour classer des documents dans une bibliothèque",
+                      "description": "Reconnaissance de textes pour classer des documents dans une bibliothèque",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-palette.svg",
                       "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-livre.svg"
                     },
                     {
                       "name": "Sécurité",
-                      "description": "Reconnaissance des visages pour identifier des personnes autorisées",
+                      "description": "Reconnaissance de visages pour identifier des personnes autorisées",
                       "icon": "https://assets.pix.org/modules/flip-cards/icon-shield.svg",
-                      "image": "https://assets.pix.org/modules/ia-dit-ia/flipcard-securite.svg"
+                      "image": "https://assets.pix.orgmodules/ia-dit-ia/flipcard-securite.svg"
                     }
                   ]
                 }
@@ -455,7 +472,7 @@
               "element": {
                 "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
                 "type": "text",
-                "content": "<p>L’intelligence artificielle est utilisée dans tous les secteurs d’activité&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 Parfois, l'utilisation de l'intelligence artificielle permet de faire des découvertes ou des progrès importants</strong>. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Certaines maladies comme les cancers sont mieux dépistées depuis qu'on utilise l'IA pour détecter les tumeurs.</li>    <li>Les effets du changement climatique sont mieux compris depuis qu'on utilise l'IA pour analyser ses impacts.</li></ul>"
+                "content": "<p>L’intelligence artificielle est utilisée dans <strong>tous les secteurs d’activité</strong>&nbsp;: l’agriculture,&nbsp; la culture, l’éducation, la finance, l’industrie, le loisir, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 </strong>Parfois, l'utilisation de l'intelligence artificielle permet de faire des <strong>découvertes </strong>ou des <strong>progrès </strong>importants. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Les médecins l'utilisent pour améliorer le diagnostic de maladies, comme les cancers.</li>    <li>Les scientifiques s’en servent pour améliorer les simulations du changement climatique.</li></ul>"
               }
             }
           ]
@@ -476,7 +493,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
-                "content": "<ul>    <li><strong>L’intelligence artificielle est un domaine scientifique</strong> qui étudie comment permettre à des machines d’imiter les mécanismes de l’intelligence pour réaliser toutes sortes de tâches.&nbsp;🔬</li>    <li><strong>Certains logiciels d’IA sont spécialisés dans un type de tâche</strong>. D'autres comme <strong>les IA génératives réalisent différentes tâches</strong>.&nbsp;👩‍💻</li>    <li>Les logiciels d’IA sont utilisés dans <strong>des appareils et services de notre quotidien</strong>.&nbsp;📱</li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès scientifiques</strong>.&nbsp;📈</li></ul>"
+                "content": "<ul>    <li>L’<strong>intelligence artificielle</strong> est un <strong>domaine scientifique</strong> qui étudie comment les machines peuvent <strong>imiter </strong>certains mécanismes de l<strong>’i</strong><strong>ntelligence humaine</strong>.</li>    <li>Certains logiciels d’IA sont<strong> spécialisés </strong>dans un type de tâche. D'autres peuvent&nbsp;réaliser plusieurs<strong> tâches différentes</strong>.&nbsp;👩‍💻</li>    <li>Les logiciels d’IA sont utilisés dans de nombreux<strong> appareils et services de notre quotidien</strong>.&nbsp;📱</li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès </strong>dans des domaines très variés.&nbsp;📈</li></ul>"
               }
             }
           ]
@@ -514,8 +531,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -525,8 +542,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -536,8 +553,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -547,8 +564,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   }
                 ],
@@ -584,7 +601,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la reconnaissance du son</p>",
+                          "content": "<p>la reconnaissance de son</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>De nombreuses applications proposent aujourd’hui de retrouver le titre d’une musique à partir de quelques secondes de son ou de voix.</p>"
@@ -611,7 +628,7 @@
                           "content": "<p>la génération de contenu</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ici, pas de génération de contenu. L’ia doit savoir identifier quelque chose.</p>"
+                            "diagnosis": "<p>Ici, pas de génération de contenu. L’IA doit savoir identifier quelque chose.</p>"
                           }
                         }
                       ],
@@ -628,7 +645,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la reconnaissance du son</p>",
+                          "content": "<p>la reconnaissance de son</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Ici, il ne s’agit pas d’identifier quelque chose, mais de proposer des contenus en fonction du profil d’un utilisateur.</p>"
@@ -647,7 +664,7 @@
                           "content": "<p>la recommandation de contenu</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Les IA spécialisées dans la recommandation de contenus sont largement utilisées pour personnaliser les expériences utilisateurs sur les plateformes numériques, par exemple les services de vidéos à la demande.</p>"
+                            "diagnosis": "<p>Les IA spécialisées dans la recommandation de contenu sont largement utilisées pour personnaliser les expériences utilisateurs sur les plateformes numériques, par exemple les services de vidéo à la demande.</p>"
                           }
                         },
                         {
@@ -668,11 +685,11 @@
                     {
                       "id": "e67d64c3-9912-4046-9f03-46059c51247c",
                       "type": "qcu",
-                      "instruction": "<h5>📷 🏷️ Un logiciel ajoute automatiquement des mots clés à des photographies.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
+                      "instruction": "<h5>📷 🏷️ Un logiciel ajoute automatiquement des mots-clés à des photographies.</h5><p><br>Dans quel type de tâche est spécialisée l'IA utilisée ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la reconnaissance du son</p>",
+                          "content": "<p>la reconnaissance de son</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Ici, ce n’est pas un son que l’IA doit savoir reconnaître.</p>"
@@ -683,7 +700,7 @@
                           "content": "<p>la reconnaissance d’image</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Les IA spécialisées dans la reconnaissance d’image sont notamment très utilisées dans le commerce en ligne pour taguer automatiquement des produits.</p>"
+                            "diagnosis": "<p>Les IA spécialisées dans la reconnaissance d’image sont très utilisées dans le commerce en ligne pour taguer automatiquement des produits.</p>"
                           }
                         },
                         {
@@ -691,7 +708,7 @@
                           "content": "<p>la recommandation de contenu</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ici, pas de recommandation de contenu. L’ia doit savoir identifier quelque chose.</p>"
+                            "diagnosis": "<p>Ici, pas de recommandation de contenu. L’IA doit savoir identifier quelque chose.</p>"
                           }
                         },
                         {
@@ -727,18 +744,18 @@
               "element": {
                 "id": "7289c873-1f53-4e62-8ed0-5462618547dd",
                 "type": "qcu-declarative",
-                "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des appareils avec de l’intelligence artificielle ?</p>",
+                "instruction": "<p>Maintenant, vous en savez plus sur ce qu'est l'intelligence artificielle.<br>Dans votre quotidien, utilisez-vous des appareils ou des services avec de l’intelligence artificielle ?</p>",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>oui</p>",
+                    "content": "<p>Oui.</p>",
                     "feedback": {
                       "diagnosis": "<p>Pas étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>non</p>",
+                    "content": "<p>Non.</p>",
                     "feedback": {
                       "diagnosis": "<p>Étonnant ! L'intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
