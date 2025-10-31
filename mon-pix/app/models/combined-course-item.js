@@ -16,6 +16,7 @@ export default class CombinedCourseItem extends Model {
   @attr('string') type;
   @attr('string') redirection;
   @attr('boolean') isCompleted;
+  @attr('number') masteryRate;
   @attr('boolean') isLocked;
   @attr('number') duration;
   @attr('string') image;

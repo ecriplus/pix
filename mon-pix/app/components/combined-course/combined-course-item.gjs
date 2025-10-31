@@ -43,8 +43,16 @@ const Content = <template>
       <div
         class="combined-course-item__indicator--completed
           {{if @hasYellowBorder 'combined-course-item__indicator--yellow'}}"
+        aria-label={{if
+          @isCampaignType
+          (t "pages.combined-courses.items.aria-label-completed-campaign" value=@masteryRate)
+          undefined
+        }}
       >
-        <span>{{t "pages.combined-courses.items.completed"}}</span>
+        {{#if @isCampaignType}}
+          <span>{{t "common.display.percentage" value=@masteryRate}}</span>
+        {{/if}}
+        <span class="combined-course-item__completion-field">{{t "pages.combined-courses.items.completed"}}</span>
         <PixIcon
           @name="checkCircle"
           @plainIcon={{true}}
@@ -52,7 +60,6 @@ const Content = <template>
           @ariaHidden={{true}}
         />
       </div>
-
     {{/if}}
     {{#if (has-block "blockEnd")}}
       {{yield to="blockEnd"}}

@@ -35,6 +35,9 @@
     "description": "Pix es una plataforma en línea para evaluar y certificar las competencias digitales de ciudadanos (alumnos/as, estudiantes, jóvenes que dejan la escuela, demandantes de empleo, personas mayores)"
   },
   "common": {
+    "display": {
+      "percentage": "{value, number, ::percent}"
+    },
     "actions": {
       "back": "Volver",
       "cancel": "Cancelar",
@@ -1223,6 +1226,7 @@
           "title": "Programa personalizado de módulos",
           "description": "¡Completa tu diagnóstico para desbloquear un programa de módulos adaptado a tu resultado!"
         },
+        "aria-label-completed-campaign": "Este elemento se completa con una tasa de éxito del {value, number, ::percent}",
         "completed": "¡Completado!",
         "tagText": "¡Ya estás ahí!",
         "durationUnit": "min",
