@@ -95,6 +95,62 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       );
     });
 
+    test('it should not display campaigns column when no campaigns on combined course', async function (assert) {
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{false}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+
+      // then
+      assert.notOk(
+        within(table).queryByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.campaigns')),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.modules')),
+        }),
+      );
+    });
+
+    test('it should not display modules column when no modules on combined course', async function (assert) {
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{false}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+
+      // then
+      assert.notOk(
+        within(table).queryByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.modules')),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: new RegExp(t('pages.combined-course.table.column.campaigns')),
+        }),
+      );
+    });
+
     test('it should render a tooltip for campaign column', async function (assert) {
       // when
       const screen = await render(
@@ -170,16 +226,16 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     assert.ok(
       within(table).getByText(
         t('pages.combined-course.table.campaign-completion', {
-          count: participations[0].nbCampaignsCompleted,
-          nbCampaigns: participations[0].nbCampaigns,
+          nbItemsCompleted: participations[0].nbCampaignsCompleted,
+          nbItems: participations[0].nbCampaigns,
         }),
       ),
     );
     assert.ok(
       within(table).getByText(
         t('pages.combined-course.table.module-completion', {
-          count: participations[0].nbModulesCompleted,
-          nbModules: participations[0].nbModules,
+          nbItemsCompleted: participations[0].nbModulesCompleted,
+          nbItems: participations[0].nbModules,
         }),
       ),
     );

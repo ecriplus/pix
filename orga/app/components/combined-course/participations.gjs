@@ -154,7 +154,7 @@ export default class CombinedCourse extends Component {
 const CompletionDisplay = <template>
   <span aria-hidden="true">{{@nbItemsCompleted}}/{{@nbItems}}</span>
   <span class="screen-reader-only">
-    {{t @translationKey count=@nbItemsCompleted nbCampaigns=@nbItems}}
+    {{t @translationKey nbItems=@nbItems nbItemsCompleted=@nbItemsCompleted}}
   </span>
 </template>;
 

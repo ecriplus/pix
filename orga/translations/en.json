@@ -1039,7 +1039,7 @@
         "total-participations": "Total participations"
       },
       "table": {
-        "campaign-completion": "{count, plural, =0 {No campaign completed out of {nbCampaigns}} =1 {One campaign completed out of {nbCampaigns}} other {{count} campaigns completed out of {nbCampaigns}}}.",
+        "campaign-completion": "{nbItemsCompleted, plural, =0 {No campaign completed out of {nbItems}} =1 {One campaign completed out of {nbItems}} other {{nbItemsCompleted} campaigns completed out of {nbItems}}}.",
         "column": {
           "campaigns": "Campaigns",
           "first-name": "First name",
@@ -1048,7 +1048,7 @@
           "status": "Status"
         },
         "description": "List of learning courses participations",
-        "module-completion": "{count, plural, =0 {No module completed out of {nbModules}} =1 {One module completed out of {nbModules}} other {{count} modules completed out of {nbModules}}}.",
+        "module-completion": "{nbItemsCompleted, plural, =0 {No module completed out of {nbItems}} =1 {One module completed out of {nbItems}} other {{nbItemsCompleted} modules completed out of {nbItems}}}.",
         "no-module": "No modules recommended.",
         "tooltip": {
           "campaigns-column": "'x / y' indicates the participant’s progress : they have completed x campaigns out of a total of y. For example, 1/2 means they have completed 1 campaign out of 2.",
