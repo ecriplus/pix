@@ -18,11 +18,15 @@ export default class ModulePassage extends Component {
   @service modulixAutoScroll;
   @service passageEvents;
   @service featureToggles;
+  @service modulixNavigationProgress;
 
-  get sectionsWithFirstGrain() {
-    return this.args.module.sections.map((section) => {
+  get enrichedSections() {
+    return this.args.module.sections.map((section, index) => {
       return {
         firstGrainId: section.grains[0].id,
+        lastGrainId: section.grains[section.grains.length - 1].id,
+        sectionId: section.id,
+        sectionIndex: index,
         sectionType: section.type,
       };
     });
@@ -30,12 +34,12 @@ export default class ModulePassage extends Component {
 
   @action
   getSectionTypeForGrain(grain) {
-    return this.sectionsWithFirstGrain.find((section) => section.firstGrainId === grain.id).sectionType;
+    return this.enrichedSections.find((section) => section.firstGrainId === grain.id).sectionType;
   }
 
   @action
   shouldDisplaySectionTitle(grain) {
-    return this.sectionsWithFirstGrain.some(
+    return this.enrichedSections.some(
       (section) => section.firstGrainId === grain.id && section.sectionType !== 'blank',
     );
   }
@@ -76,7 +80,7 @@ export default class ModulePassage extends Component {
   @action
   onGrainSkip() {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
-
+    this.modulixNavigationProgress.determineCurrentSection(this.enrichedSections, currentGrain);
     this.addNextGrainToDisplay();
 
     this.passageEvents.record({
@@ -90,6 +94,8 @@ export default class ModulePassage extends Component {
   @action
   onGrainContinue() {
     const currentGrain = this.displayableGrains[this.currentGrainIndex];
+
+    this.modulixNavigationProgress.determineCurrentSection(this.enrichedSections, currentGrain);
 
     this.addNextGrainToDisplay();
 
