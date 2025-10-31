@@ -4,12 +4,12 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | active-calibrated-challenge', function () {
-  describe('#getByComplementaryKeyAndCalibrationId', function () {
+  describe('#getByScopeAndCalibrationId', function () {
     it('should return empty array when empty challenges given', async function () {
       const calibrationId = '1234';
       const complementaryCertificationKey = ComplementaryCertificationKeys.PIX_PLUS_DROIT;
 
-      const calibratedChallenges = activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
+      const calibratedChallenges = activeCalibratedChallengeRepository.getByScopeAndCalibrationId({
         scope: complementaryCertificationKey,
         calibrationId,
       });
@@ -78,7 +78,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       await datamartBuilder.commit();
 
       //when
-      const calibratedChallenges = await activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
+      const calibratedChallenges = await activeCalibratedChallengeRepository.getByScopeAndCalibrationId({
         scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: calibration.id,
       });
@@ -101,7 +101,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       await datamartBuilder.commit();
 
       //when
-      const error = await catchErr(activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId)({
+      const error = await catchErr(activeCalibratedChallengeRepository.getByScopeAndCalibrationId)({
         scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: calibration.id,
       });
@@ -124,7 +124,7 @@ describe('Certification | Configuration | Integration | Repository | active-cali
       await datamartBuilder.commit();
 
       //when
-      const error = await catchErr(activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId)({
+      const error = await catchErr(activeCalibratedChallengeRepository.getByScopeAndCalibrationId)({
         scope: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         calibrationId: toValidateCalibration.id,
       });

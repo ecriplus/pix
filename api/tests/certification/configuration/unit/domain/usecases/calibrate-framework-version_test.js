@@ -20,7 +20,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
     };
 
     activeCalibratedChallengeRepository = {
-      getByComplementaryKeyAndCalibrationId: sinon.stub(),
+      getByScopeAndCalibrationId: sinon.stub(),
     };
 
     versionsRepository = {
@@ -56,7 +56,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
-      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
+      activeCalibratedChallengeRepository.getByScopeAndCalibrationId
         .withArgs({
           scope: version.scope,
           calibrationId,
@@ -111,7 +111,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
-      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
+      activeCalibratedChallengeRepository.getByScopeAndCalibrationId
         .withArgs({
           scope: version.scope,
           calibrationId,
@@ -163,7 +163,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
-      activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId
+      activeCalibratedChallengeRepository.getByScopeAndCalibrationId
         .withArgs({
           scope: version.scope,
           calibrationId,

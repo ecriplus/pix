@@ -12,7 +12,7 @@ import { ActiveCalibratedChallenge } from '../../domain/read-models/ActiveCalibr
  * @returns {Promise<Array<ActiveCalibratedChallenge>>}
  * @throws {NotFoundError}
  */
-export async function getByComplementaryKeyAndCalibrationId({ scope, calibrationId }) {
+export async function getByScopeAndCalibrationId({ scope, calibrationId }) {
   const activeCalibratedChallengesDTO = await datamartKnex('data_active_calibrated_challenges')
     .select('scope', 'alpha as discriminant', 'delta as difficulty', 'challenge_id as challengeId')
     .innerJoin('data_calibrations', 'data_active_calibrated_challenges.calibration_id', 'data_calibrations.id')

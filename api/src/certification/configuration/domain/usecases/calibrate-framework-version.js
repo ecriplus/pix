@@ -29,7 +29,7 @@ export const calibrateFrameworkVersion = withTransaction(
     const version = await versionsRepository.getById({ id: versionId });
     const challenges = await frameworkChallengesRepository.getByVersionId({ versionId });
 
-    const activeCalibratedChallenges = await activeCalibratedChallengeRepository.getByComplementaryKeyAndCalibrationId({
+    const activeCalibratedChallenges = await activeCalibratedChallengeRepository.getByScopeAndCalibrationId({
       scope: version.scope,
       calibrationId,
     });
