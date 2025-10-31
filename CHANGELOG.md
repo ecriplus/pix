@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.245.0](https://github.com/1024pix/pix/compare/v5.244.0...v5.245.0) (2025-10-31)
+
+### :rocket: Amélioration
+
+- [#14029](https://github.com/1024pix/pix/pull/14029) #IAGenPrompt_IND - J'améliore mes prompts - Retours des IG et passage en version light 
+- [#14000](https://github.com/1024pix/pix/pull/14000) Configurer les OIDC providers par application (PIX-19806) 
+- [#14034](https://github.com/1024pix/pix/pull/14034) Créer des variables d'env pour gérer les délais pour apparition feedback (PIX-20001) 
+- [#14033](https://github.com/1024pix/pix/pull/14033) Fixer la navigation des modules en haut de l'écran en format mobile (PIX-20167) 
+- [#13948](https://github.com/1024pix/pix/pull/13948) IAGenBiais_NOV modification suite panel + retours IG 
+- [#13924](https://github.com/1024pix/pix/pull/13924) IAGenFonctionnement_NOV modification mineures 
+- [#14007](https://github.com/1024pix/pix/pull/14007) Intégrer le formulaire de connexion suite à une invitation (PIX-19802) 
+- [#14022](https://github.com/1024pix/pix/pull/14022) Redirige l'utilisateur vers le parcours combiné quand il clique sur Quitter dans un module (PIX-20184) 
+- [#13973](https://github.com/1024pix/pix/pull/13973) Utiliser les données  de `organization_learner_participations`  dans l'utilisation des participations aux parcours combinés (Pix-19890)
+
 # [5.244.0](https://github.com/1024pix/pix/compare/v5.243.0...v5.244.0) (2025-10-30)
 
 ### :rocket: Amélioration
