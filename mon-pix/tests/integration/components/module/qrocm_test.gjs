@@ -13,7 +13,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | QROCM', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  const originalDelay = ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY;
+  const originalDelay = ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY;
   let passageEventService, passageEventRecordStub;
 
   hooks.beforeEach(function () {
@@ -23,7 +23,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
   hooks.afterEach(function () {
     passageEventRecordStub.restore();
-    ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = originalDelay;
+    ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY = originalDelay;
   });
 
   test('should display a block QROCM', async function (assert) {
@@ -300,7 +300,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       };
       const userResponse = 'user-response';
       const onElementAnswerSpy = sinon.spy();
-      ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = 10;
+      ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY = 10;
 
       // when
       const screen = await render(
@@ -314,7 +314,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
 
       // then
       assert.dom(input).hasAttribute('readonly');
-      await clock.tick(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY);
+      await clock.tick(ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY);
       sinon.assert.calledWith(onElementAnswerSpy, {
         userResponse: [
           {
@@ -547,7 +547,7 @@ module('Integration | Component | Module | QROCM', function (hooks) {
           },
           type: 'qrocm',
         };
-        ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY = 10;
+        ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY = 10;
         const onElementAnswerSpy = sinon.stub();
 
         // when
@@ -559,12 +559,12 @@ module('Integration | Component | Module | QROCM', function (hooks) {
         await click(verifyButton);
 
         // then
-        await clock.tick(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY + 1);
+        await clock.tick(ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY + 1);
         assert.dom(input).hasNoAttribute('readonly');
 
         await fillIn(screen.getByLabelText('Réponse 1'), 'Réponse 1');
         await click(verifyButton);
-        await clock.tickAsync(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY + 1);
+        await clock.tickAsync(ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY + 1);
         assert.dom(screen.getByText('Correct!')).exists();
         assert.dom(screen.getByText('Good job!')).exists();
         assert.ok(true);

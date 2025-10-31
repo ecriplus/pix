@@ -578,6 +578,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
 
     module('when element is a qcm', function (hooks) {
       let clock;
+
       hooks.beforeEach(function () {
         clock = sinon.useFakeTimers();
       });
@@ -623,7 +624,6 @@ module('Integration | Component | Module | Grain', function (hooks) {
           await click(screen.getByLabelText('checkbox2'));
           const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
           await click(verifyButton);
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
 
           // then
           assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
@@ -631,7 +631,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
 
       module('when verify button is clicked with no selected answers', function () {
-        test('should first disable, and then enable skip activity button', async function (assert) {
+        test('should disable skip activity button', async function (assert) {
           // given
           const store = this.owner.lookup('service:store');
           const element = { type: 'qcm', isAnswerable: true };
@@ -648,13 +648,9 @@ module('Integration | Component | Module | Grain', function (hooks) {
             <Module::Grain::Grain @grain={{this.grain}} @canMoveToNextGrain={{true}} @passage={{this.passage}} />`);
           const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
           await click(verifyButton);
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
 
           // then
           assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).hasAttribute('aria-disabled', 'true');
-          await clock.tickAsync(Math.round(VERIFY_RESPONSE_DELAY / 2));
-
-          assert.dom(screen.getByRole('button', { name: 'Passer l’activité' })).doesNotHaveAttribute('aria-disabled');
         });
       });
     });

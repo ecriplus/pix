@@ -11,8 +11,9 @@ import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import ModuleElement from 'mon-pix/components/module/element/module-element';
 import ModulixFeedback from 'mon-pix/components/module/feedback';
-import ENV from 'mon-pix/config/environment';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
+
+import { VERIFY_RESPONSE_DELAY } from '../component/element';
 
 export default class ModuleQrocm extends ModuleElement {
   @tracked selectedValues = {};
@@ -102,7 +103,7 @@ export default class ModuleQrocm extends ModuleElement {
       return;
     }
 
-    await this.#waitFor(ENV.APP.MODULIX_QROCM_VERIFICATION_DELAY);
+    await this.#waitFor(VERIFY_RESPONSE_DELAY);
 
     const answerIsValid = this.answerIsValid;
     const status = answerIsValid ? 'ok' : 'ko';
