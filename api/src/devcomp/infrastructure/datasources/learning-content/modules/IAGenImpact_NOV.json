@@ -563,28 +563,7 @@
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 0,
-                  "images": {
-                    "initial": {
-                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-initial.svg"
-                    },
-                    "normal_weak": {
-                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity2.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                    },
-                    "normal_medium": {
-                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity3.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-normal.svg"
-                    },
-                    "warning": {
-                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity4.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-warning.svg"
-                    },
-                    "error": {
-                      "capacityImg": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity5.svg",
-                      "consumptionImg": "https://assets.pix.org/modules/capacity-calculation/consumption-error.svg"
-                    }
-                  }
+                  "capacityImage": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg"
                 }
               }
             },
