@@ -1141,7 +1141,7 @@
           },
           "description": "Pix laat je kiezen welk bestandsformaat je wilt downloaden. Als je niet weet welke optie je moet kiezen, houd dan de standaardkeuze aan. Dit is het bestandsformaat dat door het grootste aantal softwaretoepassingen wordt ondersteund.",
           "file-type": "bestand .{fileExtension}",
-          "help": "Hulp nodig bij het '<a href=\"https://pix.org/en/help-how-to-open-modify-find-a-downloaded-file-in-a-pix-question\" class=\"challenge-statement__action-help--link\" target=\"_blank\" aria-label=\"open, wijzig of vind dit bestand (openen in nieuw venster)\">'openen, wijzigen of vinden van dit bestand'</a>'?"
+          "help": "Hulp nodig bij het '<a href=\"https://pix.org/nl-be/support/particulier/particulier/een-gedownload-bestand-openen-wijzigen-of-ophalen\" class=\"challenge-statement__action-help--link\" target=\"_blank\" aria-label=\"open, wijzig of vind dit bestand (openen in nieuw venster)\">'openen, wijzigen of vinden van dit bestand'</a>'?"
         },
         "sr-only": {
           "alternative-instruction": "Deze proefdruk bevat een illustratie met een tekstalternatief.",
