@@ -1,7 +1,8 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 .combined-course {
-  padding: var(--pix-spacing-12x) 80px;
+  padding: var(--pix-spacing-4x);
 
   &__exit {
     display: flex;
@@ -44,8 +45,14 @@
 
 .combined-course-header {
   display: flex;
+  flex-direction: column-reverse;
   gap: var(--pix-spacing-8x);
+  align-items: center;
   justify-content: space-between;
+
+  @include breakpoints.device-is('tablet') {
+    flex-direction: row;
+  }
 
   &__completed {
     display: flex;

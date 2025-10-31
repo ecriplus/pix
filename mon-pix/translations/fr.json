@@ -35,9 +35,6 @@
     "description": "Pix est une plateforme en ligne d'évaluation et de certification des compétences numériques des citoyens francophones (élèves, étudiant•e•s, décrocheur•se•s, demandeur•se•s d'emploi, sénior•e•s)"
   },
   "common": {
-    "display": {
-      "percentage": "{value, number, ::percent}"
-    },
     "actions": {
       "back": "Retour",
       "cancel": "Annuler",
@@ -97,6 +94,9 @@
     "data-protection-policy-information-banner": {
       "title": "Notre politique de confidentialité a évolué. Nous vous invitons à en prendre connaissance : ",
       "url-label": "Politique de protection des données."
+    },
+    "display": {
+      "percentage": "{value, number, ::percent}"
     },
     "error": "Une erreur est survenue. Veuillez recommencer ou contacter le support.",
     "form": {
@@ -1218,14 +1218,14 @@
         "step": "Étape {stepNumber}"
       },
       "items": {
-        "duration": "≈ {duration} min",
+        "aria-label-completed-campaign": "Cet élément est complété avec un taux de réussite de {value, number, ::percent}",
         "aria-label-duration": "Durée estimée : {duration} minutes",
         "completed": "Complété !",
+        "duration": "≈ {duration} min",
         "formation": {
           "description": "Terminez votre diagnostic pour débloquer un programme de modules adapté à votre résultat !",
           "title": "Programme personnalisé de modules"
         },
-        "aria-label-completed-campaign": "Cet élément est complété avec un taux de réussite de {value, number, ::percent}",
         "tagText": "Vous en êtes là !"
       },
       "process-custom-passages": {
