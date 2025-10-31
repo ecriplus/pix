@@ -9,7 +9,7 @@ import * as attachableTargetProfileRepository from '../../infrastructure/reposit
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
-import * as consolidatedFrameworkRepository from '../../infrastructure/repositories/consolidated-framework-repository.js';
+import * as frameworkChallengesRepository from '../../infrastructure/repositories/framework-challenges-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
 
@@ -23,7 +23,7 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {centerRepository} CenterRepository
  * @typedef {challengeRepository} ChallengeRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
- * @typedef {consolidatedFrameworkRepository} ConsolidatedFrameworkRepository
+ * @typedef {frameworkChallengesRepository} FrameworkChallengesRepository
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
@@ -38,7 +38,7 @@ const dependencies = {
   centerRepository,
   challengeRepository,
   complementaryCertificationRepository,
-  consolidatedFrameworkRepository,
+  frameworkChallengesRepository,
   learningContentRepository,
   skillRepository,
   tubeRepository,
@@ -47,27 +47,27 @@ const dependencies = {
   versionsRepository,
 };
 
-import { calibrateConsolidatedFramework } from './calibrate-consolidated-framework.js';
+import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
 import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
 import { createCertificationVersion } from './create-certification-version.js';
 import { createFlashAssessmentConfiguration } from './create-flash-assessment-configuration.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
-import { getCurrentConsolidatedFramework } from './get-current-consolidated-framework.js';
+import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 
 const usecasesWithoutInjectedDependencies = {
-  calibrateConsolidatedFramework,
+  calibrateFrameworkVersion,
   catchingUpCandidateReconciliation,
   createCertificationVersion,
   createFlashAssessmentConfiguration,
   exportScoWhitelist,
   findComplementaryCertifications,
   getActiveFlashAssessmentConfiguration,
-  getCurrentConsolidatedFramework,
+  getCurrentFrameworkVersion,
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,

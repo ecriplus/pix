@@ -310,16 +310,15 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(certificationVersion.startDate).to.exist;
 
       const consolidatedFramework = await knex('certification-frameworks-challenges')
-        .select('discriminant', 'difficulty', 'challengeId', 'complementaryCertificationKey', 'versionId')
+        .select('discriminant', 'difficulty', 'challengeId', 'versionId')
         .where({
-          complementaryCertificationKey: complementaryCertification.key,
+          versionId: certificationVersion.id,
         });
       expect(consolidatedFramework).to.deep.equal([
         {
           discriminant: null,
           difficulty: null,
           challengeId: challenge.id,
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: certificationVersion.id,
         },
       ]);
@@ -388,17 +387,15 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(newVersion.startDate).to.be.instanceOf(Date);
       expect(newVersion.startDate.getTime()).to.equal(oldVersion.expirationDate.getTime());
 
-      const consolidatedFramework = await knex('certification-frameworks-challenges')
-        .select('challengeId', 'complementaryCertificationKey', 'versionId')
+      const frameworkChallenges = await knex('certification-frameworks-challenges')
+        .select('challengeId', 'versionId')
         .where({
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: newVersion.id,
         });
 
-      expect(consolidatedFramework).to.deep.equal([
+      expect(frameworkChallenges).to.deep.equal([
         {
           challengeId: challenge.id,
-          complementaryCertificationKey: complementaryCertification.key,
           versionId: newVersion.id,
         },
       ]);
@@ -411,11 +408,12 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
-      const version = '20230618000000';
+      const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+      });
       const certificationFrameworkChallenge = databaseBuilder.factory.buildCertificationFrameworksChallenge({
         challengeId: 'recChallengeId',
-        complementaryCertificationKey: complementaryCertification.key,
-        version,
+        versionId: certificationVersion.id,
       });
 
       await databaseBuilder.commit();
@@ -444,12 +442,12 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
 
       const options = {
         method: 'PATCH',
-        url: `/api/admin/complementary-certifications/${complementaryCertification.key}/consolidated-framework`,
+        url: '/api/admin/complementary-certifications/consolidated-framework',
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             attributes: {
-              version,
+              versionId: certificationVersion.id,
               calibrationId: calibration.id,
             },
           },
@@ -463,24 +461,23 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       expect(response.statusCode).to.equal(200);
 
       const certificationFrameworksChallenges = await knex('certification-frameworks-challenges').where({
-        complementaryCertificationKey: complementaryCertification.key,
-        version,
+        versionId: certificationVersion.id,
       });
       expect(certificationFrameworksChallenges).to.have.length(1);
-      expect(_.omit(certificationFrameworksChallenges[0], 'id', 'createdAt')).to.deep.equal({
-        calibrationId: calibration.id,
+      expect(
+        _.omit(certificationFrameworksChallenges[0], 'id', 'createdAt', 'complementaryCertificationKey', 'version'),
+      ).to.deep.equal({
+        calibrationId: null,
         discriminant: activeCalibratedChallenge.alpha,
         difficulty: activeCalibratedChallenge.delta,
         challengeId: certificationFrameworkChallenge.challengeId,
-        complementaryCertificationKey: complementaryCertification.key,
-        version,
-        versionId: null,
+        versionId: certificationVersion.id,
       });
     });
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
-    it('should return the current consolidated framework for given complementaryCertificationKey', async function () {
+    it('should return the current framework for given complementaryCertificationKey', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
@@ -507,12 +504,19 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
       await mockLearningContent(learningContentObjects);
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
+
+      const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2023-01-11'),
+        expirationDate: null,
+      });
+
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
         challengeId: 'rec123',
         discriminant: 2.1,
         difficulty: 3.4,
         createdAt: new Date('2023-01-11'),
+        versionId: certificationVersion.id,
       });
 
       await databaseBuilder.commit();
@@ -533,7 +537,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'certification-consolidated-frameworks',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          version: '20230111000000',
+          version: String(certificationVersion.id),
         },
         relationships: {
           areas: {
@@ -633,29 +637,26 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/framework-history', function () {
-    it('should return the framework history for given complementaryCertificationKey', async function () {
+    it('should return the framework history for given complementaryCertificationKey ordered by start date descending', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
       const otherComplementaryCertification = databaseBuilder.factory.buildComplementaryCertification.clea({});
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2024-01-11'),
+      const olderVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2024-01-11'),
       });
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: complementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2025-01-11'),
+      const newerVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: complementaryCertification.key,
+        startDate: new Date('2025-01-11'),
       });
 
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        complementaryCertificationKey: otherComplementaryCertification.key,
-        challengeId: 'rec123',
-        createdAt: new Date('2023-01-11'),
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: otherComplementaryCertification.key,
+        startDate: new Date('2023-01-11'),
       });
 
       await databaseBuilder.commit();
@@ -676,7 +677,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
         type: 'framework-histories',
         attributes: {
           'complementary-certification-key': complementaryCertification.key,
-          history: ['20250111000000', '20240111000000'],
+          history: [newerVersion.id, olderVersion.id],
         },
       });
     });

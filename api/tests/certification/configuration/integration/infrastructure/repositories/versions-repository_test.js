@@ -2,7 +2,8 @@ import { Version } from '../../../../../../src/certification/configuration/domai
 import * as versionsRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/versions-repository.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Repository | Versions', function () {
   describe('#create', function () {
@@ -33,7 +34,19 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
       const versionId = await versionsRepository.create({ version, challenges: [challenge1, challenge2] });
 
       // then
-      const results = await knex('certification_versions').where({ scope: version.scope }).first();
+      const results = await knex('certification_versions')
+        .select(
+          'id',
+          'scope',
+          'startDate',
+          'expirationDate',
+          'assessmentDuration',
+          'globalScoringConfiguration',
+          'competencesScoringConfiguration',
+          'challengesConfiguration',
+        )
+        .where({ scope: version.scope })
+        .first();
 
       expect(results).to.deep.equal({
         id: versionId,
@@ -52,15 +65,11 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
 
       expect(linkedChallenges).to.have.lengthOf(2);
       expect(linkedChallenges[0]).to.include({
-        complementaryCertificationKey: version.scope,
         challengeId: challenge1.id,
-        version: String(versionId),
         versionId,
       });
       expect(linkedChallenges[1]).to.include({
-        complementaryCertificationKey: version.scope,
         challengeId: challenge2.id,
-        version: String(versionId),
         versionId,
       });
     });
@@ -187,6 +196,103 @@ describe('Certification | Configuration | Integration | Repository | Versions', 
         // then
         expect(result).to.be.null;
       });
+    });
+  });
+
+  describe('#getById', function () {
+    it('should return the version with the given id', async function () {
+      // given
+      const scope = Frameworks.PIX_PLUS_DROIT;
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2025-06-01'),
+        expirationDate: new Date('2025-12-31'),
+        assessmentDuration: 120,
+        globalScoringConfiguration: [{ config: 'test' }],
+        competencesScoringConfiguration: [{ config: 'test' }],
+        challengesConfiguration: { config: 'test' },
+      }).id;
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await versionsRepository.getById({ id: versionId });
+
+      // then
+      expect(result).to.be.instanceOf(Version);
+      expect(result.id).to.equal(versionId);
+      expect(result.scope).to.equal(scope);
+      expect(result.startDate).to.deep.equal(new Date('2025-06-01'));
+      expect(result.expirationDate).to.deep.equal(new Date('2025-12-31'));
+      expect(result.assessmentDuration).to.equal(120);
+      expect(result.globalScoringConfiguration).to.deep.equal([{ config: 'test' }]);
+      expect(result.competencesScoringConfiguration).to.deep.equal([{ config: 'test' }]);
+      expect(result.challengesConfiguration).to.deep.equal({ config: 'test' });
+    });
+
+    context('when the version does not exist', function () {
+      it('should throw a NotFoundError', async function () {
+        // given
+        const nonExistentVersionId = 99999;
+
+        // when
+        const error = await catchErr(versionsRepository.getById)({ id: nonExistentVersionId });
+
+        // then
+        expect(error).to.deepEqualInstance(new NotFoundError(`Version with id ${nonExistentVersionId} not found`));
+      });
+    });
+  });
+
+  describe('#getFrameworkHistory', function () {
+    it('should return an empty array when there is no framework history', async function () {
+      // given
+      const scope = Frameworks.PIX_PLUS_DROIT;
+
+      // when
+      const frameworkHistory = await versionsRepository.getFrameworkHistory({ scope });
+
+      // then
+      expect(frameworkHistory).to.deep.equal([]);
+    });
+
+    it('should return the framework history ordered by start date descending', async function () {
+      // given
+      const scope = Frameworks.PIX_PLUS_DROIT;
+      const otherScope = Frameworks.CLEA;
+
+      const version1 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2024-03-15'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      const version2 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2025-06-21'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      const version3 = databaseBuilder.factory.buildCertificationVersion({
+        scope,
+        startDate: new Date('2026-01-01'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+      databaseBuilder.factory.buildCertificationVersion({
+        scope: otherScope,
+        startDate: new Date('2025-06-21'),
+        assessmentDuration: 90,
+        challengesConfiguration: {},
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const frameworkHistory = await versionsRepository.getFrameworkHistory({ scope });
+
+      // then
+      expect(frameworkHistory).to.deep.equal([version3.id, version2.id, version1.id]);
     });
   });
 });

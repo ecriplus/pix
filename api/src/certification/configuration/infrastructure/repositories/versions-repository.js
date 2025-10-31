@@ -5,7 +5,38 @@
  */
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Version } from '../../domain/models/Version.js';
+
+/**
+ * @param {Object} params
+ * @param {number} params.id
+ * @returns {Promise<Version>}
+ * @throws {NotFoundError}
+ */
+export async function getById({ id }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const versionData = await knexConn('certification_versions')
+    .select(
+      'id',
+      'scope',
+      'startDate',
+      'expirationDate',
+      'assessmentDuration',
+      'globalScoringConfiguration',
+      'competencesScoringConfiguration',
+      'challengesConfiguration',
+    )
+    .where({ id })
+    .first();
+
+  if (!versionData) {
+    throw new NotFoundError(`Version with id ${id} not found`);
+  }
+
+  return _toDomain(versionData);
+}
 
 /**
  * @param {Object} params
@@ -63,9 +94,7 @@ export async function create({ version, challenges }) {
     .returning('id');
 
   const challengesDTO = challenges.map((challenge) => ({
-    complementaryCertificationKey: version.scope,
     challengeId: challenge.id,
-    version: String(id),
     versionId: id,
   }));
 
@@ -85,6 +114,17 @@ export async function update({ version }) {
   const knexConn = DomainTransaction.getConnection();
 
   await knexConn('certification_versions').where({ id: version.id }).update({ expirationDate: version.expirationDate });
+}
+
+/**
+ * @param {Object} params
+ * @param {Frameworks} params.scope
+ * @returns {Promise<Array<number>>}
+ */
+export async function getFrameworkHistory({ scope }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  return knexConn('certification_versions').where({ scope }).orderBy('startDate', 'desc').pluck('id');
 }
 
 const _toDomain = ({

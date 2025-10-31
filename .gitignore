@@ -90,6 +90,10 @@ docker/data/
 CLAUDE.md
 .claude/
 
+# Gemini Code documentation
+GEMINI.md
+.gemini/
+
 # Allow JSON files in translations directories
 !**/translations/*.json
 

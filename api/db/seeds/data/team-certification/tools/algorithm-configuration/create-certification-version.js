@@ -52,7 +52,6 @@ const _createActiveVersionChallenges = async ({ databaseBuilder, version }) => {
     databaseBuilder.factory.buildCertificationFrameworksChallenge({
       challengeId,
       versionId: version.id,
-      version: '202001010900',
       discriminant: 2.1,
       difficulty: 1,
     });

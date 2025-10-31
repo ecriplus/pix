@@ -31,22 +31,21 @@ const createCertificationVersion = async function (request, h) {
     .code(201);
 };
 
-const calibrateConsolidatedFramework = async function (request, h) {
-  const { complementaryCertificationKey } = request.params;
-  const { version, calibrationId } = request.payload.data.attributes;
-  await usecases.calibrateConsolidatedFramework({ version, calibrationId, complementaryCertificationKey });
+const calibrateFrameworkVersion = async function (request, h) {
+  const { versionId, calibrationId } = request.payload.data.attributes;
+  await usecases.calibrateFrameworkVersion({ versionId, calibrationId });
 
   return h.response().code(200);
 };
 
-const getCurrentConsolidatedFramework = async function (request) {
+const getCurrentFrameworkVersion = async function (request) {
   const { complementaryCertificationKey } = request.params;
 
-  const currentConsolidatedFramework = await usecases.getCurrentConsolidatedFramework({
+  const currentFrameworkVersion = await usecases.getCurrentFrameworkVersion({
     complementaryCertificationKey,
   });
 
-  return certificationConsolidatedFrameworkSerializer.serialize(currentConsolidatedFramework);
+  return certificationConsolidatedFrameworkSerializer.serialize(currentFrameworkVersion);
 };
 
 const getFrameworkHistory = async function (request) {
@@ -60,10 +59,10 @@ const getFrameworkHistory = async function (request) {
 };
 
 const complementaryCertificationController = {
-  calibrateConsolidatedFramework,
+  calibrateFrameworkVersion,
   createCertificationVersion,
   findComplementaryCertifications,
-  getCurrentConsolidatedFramework,
+  getCurrentFrameworkVersion,
   getFrameworkHistory,
   searchAttachableTargetProfilesForComplementaryCertifications,
 };

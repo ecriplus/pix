@@ -4,6 +4,13 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (currentConsolidatedFramework) {
   return new Serializer('certification-consolidated-framework', {
+    transform: (record) => {
+      return {
+        ...record,
+        complementaryCertificationKey: record.scope,
+        version: String(record.versionId),
+      };
+    },
     id: 'complementaryCertificationKey',
     attributes: ['complementaryCertificationKey', 'version', 'areas'],
     areas: {

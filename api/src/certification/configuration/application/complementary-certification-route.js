@@ -98,7 +98,7 @@ const register = async function (server) {
     },
     {
       method: 'PATCH',
-      path: '/api/admin/complementary-certifications/{complementaryCertificationKey}/consolidated-framework',
+      path: '/api/admin/complementary-certifications/consolidated-framework',
       config: {
         pre: [
           {
@@ -111,19 +111,16 @@ const register = async function (server) {
           },
         ],
         validate: {
-          params: Joi.object({
-            complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
-          }),
           payload: Joi.object({
             data: {
               attributes: {
-                version: Joi.string().required(),
+                versionId: Joi.number().integer().required(),
                 calibrationId: Joi.number().required(),
               },
             },
           }),
         },
-        handler: complementaryCertificationController.calibrateConsolidatedFramework,
+        handler: complementaryCertificationController.calibrateFrameworkVersion,
         tags: ['api', 'admin'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
@@ -152,7 +149,7 @@ const register = async function (server) {
             complementaryCertificationKey: Joi.string().valid(...Object.values(ComplementaryCertificationKeys)),
           }),
         },
-        handler: complementaryCertificationController.getCurrentConsolidatedFramework,
+        handler: complementaryCertificationController.getCurrentFrameworkVersion,
         tags: ['api', 'admin'],
         notes: [
           'Cette route est restreinte aux utilisateurs authentifiés avec un rôle Super Admin, Certif, Support ou Métier',

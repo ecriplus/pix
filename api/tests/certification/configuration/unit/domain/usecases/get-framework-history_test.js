@@ -6,26 +6,26 @@ describe('Certification | Configuration | Unit | UseCase | get-framework-history
     // given
     const complementaryCertificationKey = Symbol('complementaryCertificationKey');
 
-    const consolidatedFrameworkRepository = {
+    const versionsRepository = {
       getFrameworkHistory: sinon.stub(),
     };
 
-    const currentFrameworkVersion = '20250607080000';
-    const previousFrameworkVersion = '20241021080000';
+    const currentVersionId = 456;
+    const previousVersionId = 123;
 
-    consolidatedFrameworkRepository.getFrameworkHistory.resolves([currentFrameworkVersion, previousFrameworkVersion]);
+    versionsRepository.getFrameworkHistory.resolves([currentVersionId, previousVersionId]);
 
     // when
     const frameworkHistory = await getFrameworkHistory({
       complementaryCertificationKey,
-      consolidatedFrameworkRepository,
+      versionsRepository,
     });
 
     // then
-    expect(consolidatedFrameworkRepository.getFrameworkHistory).to.have.been.calledOnceWithExactly({
-      complementaryCertificationKey,
+    expect(versionsRepository.getFrameworkHistory).to.have.been.calledOnceWithExactly({
+      scope: complementaryCertificationKey,
     });
 
-    expect(frameworkHistory).to.deep.equal([currentFrameworkVersion, previousFrameworkVersion]);
+    expect(frameworkHistory).to.deep.equal([currentVersionId, previousVersionId]);
   });
 });
