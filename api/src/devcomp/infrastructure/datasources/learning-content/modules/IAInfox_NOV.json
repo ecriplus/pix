@@ -103,8 +103,8 @@
                       "url": "https://assets.pix.org/modules/deepfakes/visage1.jpg",
                       "altText": ""
                     },
-                    "proposalA": "vraie personne",
-                    "proposalB": "fausse personne",
+                    "proposalA": "Vraie personne",
+                    "proposalB": "Fausse personne",
                     "solution": "B"
                   },
                   {
@@ -114,8 +114,8 @@
                       "url": "https://assets.pix.org/modules/deepfakes/visage2.jpeg",
                       "altText": ""
                     },
-                    "proposalA": "vraie personne",
-                    "proposalB": "fausse personne",
+                    "proposalA": "Vraie personne",
+                    "proposalB": "Fausse personne",
                     "solution": "B"
                   },
                   {
@@ -125,8 +125,8 @@
                       "url": "https://assets.pix.org/modules/deepfakes/visage3.jpg",
                       "altText": ""
                     },
-                    "proposalA": "vraie personne",
-                    "proposalB": "fausse personne",
+                    "proposalA": "Vraie personne",
+                    "proposalB": "Fausse personne",
                     "solution": "B"
                   }
                 ],
@@ -147,7 +147,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
-                "content": "<p>Les <strong>deepfakes</strong>, hypertrucages en français, sont <strong>créés grâce à</strong> <strong>l’intelligence artificielle, pour tromper.</strong> Ils sont réalistes mais pourtant ils ne montrent pas la réalité.<strong>🤥 </strong></p><p>Comme les intelligences artificielles s'améliorent chaque jour, il est de <strong>plus en plus difficile de reconnaître un deepfake</strong> !😱</p>"
+                "content": "<p>Les <strong>deepfakes</strong>, <strong>hypertrucages</strong> en français, sont créés grâce à <strong>l’intelligence artificielle, pour tromper.</strong> Ils sont réalistes.&nbsp;Pourtant, ils ne montrent pas la réalité.<strong>🤥 </strong></p><p>Comme les intelligences artificielles s'améliorent chaque jour, il est de <strong>plus en plus difficile de reconnaître un deepfake</strong> !😱</p>"
               }
             }
           ]
@@ -208,7 +208,7 @@
               "element": {
                 "id": "cbe6027b-3113-4772-a81f-c44d381f9585",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp;: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire ne veut pas dire permis : un deepfake peut être illégal.</p>"
+                "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp;: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire, ne veut pas dire permis : un deepfake peut être illégal.</p>"
               }
             }
           ]
@@ -255,28 +255,28 @@
                           "id": "1",
                           "content": "<p>💸 Arnaquer.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante. En revanche, ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante. En revanche, ce genre de vidéo risque d'inonder le web...</p><p>Avec des contenus&nbsp;faux, flous ou inutiles, il est plus difficile de faire la différence entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>😂 Amuser.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement ! Et ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
+                            "diagnosis": "<p>Effectivement ! Et ce genre de vidéo risque d'inonder le web...&nbsp;</p><p>Avec des contenus&nbsp;faux, flous ou inutiles, il est plus difficile de faire la différence entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>🧠 Manipuler.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, cette vidéo n'est pas malveillante. </p><p>En revnache, ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
+                            "diagnosis": "<p>Eh non, cette vidéo n'est pas malveillante. </p><p>En revanche, ce genre de vidéo risque d'inonder le web...&nbsp;</p><p>Avec des contenus&nbsp;faux, flous ou inutiles, il est plus difficile de faire la différence entre le vrai et le faux.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>😕 Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais ce genre de vidéo risque d'inonder le web... Ces contenus faux, flous ou inutiles rendent plus difficile la distinction entre le vrai et le faux.</p>"
+                            "diagnosis": "<p>Cette vidéo n'est pas malveillante, juste amusante, mais ce genre de vidéo risque d'inonder le web... </p><p>Avec des contenus&nbsp;faux, flous ou inutiles, il est plus difficile de faire la différence entre le vrai et le faux.</p>"
                           }
                         }
                       ],
@@ -302,7 +302,7 @@
                           "id": "2",
                           "content": "<p>😂 Amuser.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici pas de divertissement ! Créer une fausse déclaration permet de manipuler le public.</p>"
+                            "diagnosis": "<p>Ici, pas de divertissement ! Créer une fausse déclaration permet de manipuler le public.</p>"
                           }
                         },
                         {
@@ -378,7 +378,7 @@
               "element": {
                 "id": "d0540829-7feb-48c7-b621-fb99765d6720",
                 "type": "text",
-                "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces usages sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p>Cependant, ils sont aussi utilisés sans intention malveillante, dans l’art ou le divertissement.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, toute utilisation de l'image d'une personne sans son accord est <strong>interdite par la loi</strong>.</p>"
+                "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces <strong>usages </strong>sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p><br></p><p>Cependant, ils peuvent aussi être utilisés dans l’art ou le divertissement sans intention malveillante.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, toute <strong>utilisation de l'image d'une personne sans son accord</strong> est <strong>interdite </strong>par la loi.</p>"
               }
             }
           ]
@@ -481,7 +481,7 @@
               "element": {
                 "id": "6d557df0-b390-43de-9115-5f693b7d123b",
                 "type": "text",
-                "content": "<h5>🧐Et si vous recevez un média trop beau pour être vrai, choquant ou inquiétant, que faire?&nbsp;</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p><p>⚠️Partager un deepfake malveillant peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong>contre vous.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
+                "content": "<h5>🧐Que faire si vous recevez un média trop beau pour être vrai, choquant ou inquiétant ?</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p><p>⚠️<strong>Partager un deepfake malveillant</strong> peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong><strong>contre vous</strong>.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
               }
             }
           ]
@@ -502,7 +502,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
-                "content": "<p>Un <strong>deepfake</strong> est un média hyper réaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande <strong>peu de matériel et de compétence</strong> pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> en ligne. ⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, <strong>il ne faut pas le partager immédiatement.</strong> Vérifiez d'abord sa source et sa fiabilité. ℹ️</li></ul>"
+                "content": "<p>Un <strong>deepfake</strong> est un média hyperréaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande peu de matériel et de compétence pour être créé. Voilà pourquoi <strong>beaucoup circulent</strong> <strong>en ligne. </strong>⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, il ne faut pas le partager immédiatement. <strong>Vérifiez</strong> d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
           ]
@@ -532,8 +532,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "A"
                   },
                   {
@@ -543,8 +543,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -554,8 +554,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   },
                   {
@@ -565,8 +565,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "vrai",
-                    "proposalB": "faux",
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
                     "solution": "B"
                   }
                 ],
@@ -674,7 +674,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>avec un programme d’intelligence artificielle</p>"
+                          "content": "<p>avec un logiciel d’intelligence artificielle</p>"
                         },
                         {
                           "id": "2",
@@ -682,11 +682,11 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>avec quelques images de la maire de la capitale</p>"
+                          "content": "<p>avec quelques images de la maire de Jolieville</p>"
                         },
                         {
                           "id": "4",
-                          "content": "<p>avec un sosie de la maire de la capitale</p>"
+                          "content": "<p>avec un sosie de la maire de Jolieville</p>"
                         },
                         {
                           "id": "5",
@@ -696,11 +696,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Bonne réponse ! 🎉</p>",
-                          "diagnosis": "<p>Un programme d'intelligence artificielle et quelques images sont suffisants pour créer un deepfake très difficile à détecter.</p>"
+                          "diagnosis": "<p>Un logiciel d'intelligence artificielle et quelques images sont suffisants pour créer un deepfake très difficile à repérer.</p>"
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ni de compétences.</p>"
+                          "diagnosis": "<p>La création d'un deepfake ne demande pas beaucoup de matériel ou de compétences.</p>"
                         }
                       },
                       "solutions": [
@@ -722,7 +722,7 @@
                           "content": "<p>Ils ont empêché la diffusion de la vidéo.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Au contraire, la vidéo a été largement partagée.</p>"
+                            "diagnosis": "<p>Au contraire, la vidéo a été largement partagée sur les réseaux sociaux.</p>"
                           }
                         },
                         {
@@ -738,7 +738,7 @@
                           "content": "<p>Ils ont permis une large diffusion de la vidéo.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Le deepfake s’est propagé très rapidement grâce aux partages sur les réseaux.</p>"
+                            "diagnosis": "<p>Le deepfake s’est propagé très rapidement avec les partages sur les réseaux.</p>"
                           }
                         }
                       ],
@@ -770,28 +770,28 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Partager la vidéo.</p>",
+                    "content": "<p>J'aurais partagé la vidéo.</p>",
                     "feedback": {
                       "diagnosis": "<p>Attention à ne pas partager de deepfakes !</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Signaler la vidéo.</p>",
+                    "content": "<p>J'aurais signalé la vidéo.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, quand on repère un deepfake sur un réseau social, on peut le signaler.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Chercher la source.</p>",
+                    "content": "<p>J'aurais cherché la source.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bon réflexe !&nbsp;</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>En discuter avec vos amis.</p>",
+                    "content": "<p> J'aurais discuté de la vidéo avec des amis.</p>",
                     "feedback": {
                       "diagnosis": "<p>Effectivement, lorsqu'on a un doute sur un contenu en ligne, on peut demander l'avis de ses amis.</p>"
                     }
