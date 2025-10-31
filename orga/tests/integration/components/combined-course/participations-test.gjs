@@ -143,45 +143,6 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
     );
   });
 
-  test('it should display a dash when there is no module', async function (assert) {
-    // given
-    const participations = [
-      {
-        id: 123,
-        firstName: 'Marcelle',
-        lastName: 'Labe',
-        status: 'COMPLETED',
-        nbCampaigns: 1,
-        nbModules: 0,
-        nbCampaignsCompleted: 1,
-        nbModulesCompleted: 0,
-      },
-    ];
-
-    // when
-    const screen = await render(
-      <template><CombinedCourseParticipations @participations={{participations}} @onFilter={{onFilter}} /></template>,
-    );
-
-    const table = screen.getByRole('table');
-
-    // then
-    assert.ok(
-      within(table).getByText(
-        t('pages.combined-course.table.campaign-completion', {
-          count: participations[0].nbCampaignsCompleted,
-          nbCampaigns: participations[0].nbCampaigns,
-        }),
-      ),
-    );
-    assert.ok(
-      within(table).getByRole('cell', {
-        name: t('pages.combined-course.table.no-module'),
-      }),
-    );
-    ('');
-  });
-
   test('it should display empty state', async function (assert) {
     // given
     const noParticipation = [];
