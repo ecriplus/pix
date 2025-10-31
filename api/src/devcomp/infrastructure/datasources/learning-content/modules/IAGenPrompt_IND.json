@@ -339,7 +339,7 @@
                     {
                       "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
                       "type": "text",
-                      "content": "<h5>🤔 Comment être efficace lorsque l’on utilise une IA générative ? <br></h5><ul><li>Préciser le <strong>format </strong>voulu, par exemple : un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajouter des <strong>contraintes </strong>comme la <strong>longueur </strong>(“en moins de 10 lignes”) ou la <strong>structure </strong>(“fais 2 parties et 2 sous-parties...”)</li></ul><p>Une autre manière de faire est de demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.<br></p>"
+                      "content": "<h5>🤔 Comment être efficace lorsque l’on utilise une IA générative ? <br></h5><ul><li>Préciser le <strong>format </strong>voulu, par exemple : un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>…</li><li>Ajouter des <strong>contraintes </strong>comme la <strong>longueur </strong>(“en moins de 10 lignes”) ou la <strong>structure </strong>(“fais 2 parties et 2 sous-parties...”)</li></ul><p>Une autre manière de faire est de demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
                 },
@@ -348,7 +348,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
-                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à ce que je voulais, que faire ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….<br></p>"
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à ce que je voulais, que faire ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….</p>"
                     }
                   ]
                 }
@@ -722,7 +722,7 @@
               "element": {
                 "id": "e553af3a-34e3-4238-be9c-d40466cf43dd",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><p></p><p></p><p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details></p><p></p><p></p><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice 1</summary><p>Avez-vous pensé à décrire le format voulu ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié que le résultat comportait bien l’équipe vainqueur ?</p></details>"
               }
             }
           ]
