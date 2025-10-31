@@ -43,6 +43,10 @@ export default class ModulixNavigationButton extends Component {
     return this.args.isCurrentSection;
   }
 
+  get isPlainIcon() {
+    return this.isTooltipVisible && (this.args.isPastSection || this.args.isCurrentSection);
+  }
+
   @action
   dummyFunction() {}
 
@@ -92,6 +96,7 @@ export default class ModulixNavigationButton extends Component {
           @iconName={{this.sectionTitleIcon @section.type}}
           @isDisabled={{this.isDisabled}}
           aria-current="{{this.isCurrentSection}}"
+          @plainIcon={{this.isPlainIcon}}
         />
         <span role="tooltip" class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}">
           {{this.sectionTitle @section.type}}
