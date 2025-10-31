@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import ListItems from 'pix-admin/components/organizations/list-items';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -122,6 +122,26 @@ module('Integration | Component | ListItems', function (hooks) {
   });
 
   module('filters', () => {
+    module('internal identifier', () => {
+      test('it should not allow to search text in id input', async function (assert) {
+        const screen = await render(
+          <template>
+            <ListItems
+              @organizations={{organizations}}
+              @externalId="123"
+              @goToOrganizationPage={{goToOrganizationPage}}
+              @triggerFiltering={{triggerFiltering}}
+            />
+          </template>,
+        );
+        const input = screen.getByLabelText('Identifiant');
+
+        await fillIn(input, 'not allowed text');
+
+        assert.strictEqual(input.value, '');
+      });
+    });
+
     test('when one filter is active, clic on reset filter button should trigger onResetFilters method', async function (assert) {
       // given
       const onResetFilters = sinon.stub();
@@ -130,7 +150,7 @@ module('Integration | Component | ListItems', function (hooks) {
         <template>
           <ListItems
             @organizations={{organizations}}
-            @externalId={{"123"}}
+            @externalId="123"
             @goToOrganizationPage={{goToOrganizationPage}}
             @triggerFiltering={{triggerFiltering}}
             @onResetFilter={{onResetFilters}}

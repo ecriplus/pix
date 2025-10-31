@@ -52,7 +52,7 @@ module('Integration | Component | routes/authenticated/organizations | list-item
     const screen = await render(<template><ListItems @triggerFiltering={{triggerFiltering}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('textbox', { name: 'Identifiant' })).exists();
+    assert.dom(screen.getByRole('spinbutton', { name: 'Identifiant' })).exists();
     assert.dom(screen.getByRole('textbox', { name: 'Nom' })).exists();
     assert.dom(screen.getByRole('button', { name: 'Type' })).exists();
     assert.dom(screen.getByRole('textbox', { name: 'Identifiant externe' })).exists();
