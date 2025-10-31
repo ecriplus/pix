@@ -4,7 +4,6 @@ import {
   ABORT_REASONS,
   CertificationCourse,
 } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
@@ -53,41 +52,6 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
         id: certificationCourseId,
         createdAt: certificationCourseStartDate,
         completedAt: null,
-      });
-    });
-
-    describe('when the candidate has passed a complementary certification', function () {
-      it('should do nothing', async function () {
-        // given
-        certificationAssessmentRepository.getByCertificationCourseId.resolves(
-          domainBuilder.buildCertificationAssessment({
-            id: assessmentId,
-            certificationCourseId,
-            userId,
-            certificationChallenges: [
-              domainBuilder.buildCertificationChallengeWithType({
-                certifiableBadgeKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-              }),
-            ],
-            version: AlgorithmEngineVersion.V3,
-          }),
-        );
-        const dependencies = {
-          certificationCourseRepository,
-          certificationAssessmentRepository,
-          services,
-        };
-
-        // when
-        await scoreCompletedCertification({
-          certificationCourseId,
-          locale: 'fr-FR',
-          ...dependencies,
-        });
-
-        // then
-        expect(certificationCourseRepository.update).to.not.have.been.called;
-        expect(services.scoreDoubleCertificationV3).to.not.have.been.called;
       });
     });
 

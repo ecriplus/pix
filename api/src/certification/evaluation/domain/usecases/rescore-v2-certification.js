@@ -62,10 +62,6 @@ export const rescoreV2Certification = async ({
     certificationCourseId,
   });
 
-  if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
-    return;
-  }
-
   return _handleV2CertificationScoring({
     certificationAssessment,
     event,

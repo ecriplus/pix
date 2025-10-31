@@ -28,10 +28,6 @@ export const scoreCompletedCertification = withTransaction(
       certificationCourseId,
     });
 
-    if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
-      return;
-    }
-
     const certificationCourse = await services.handleV3CertificationScoring({
       certificationAssessment,
       locale,
