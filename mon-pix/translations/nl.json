@@ -1233,8 +1233,8 @@
         "aria-label-completed-campaign": "Dit element wordt aangevuld met een slagingspercentage van {value, number, ::percent}",
         "completed": "Voltooid!",
         "tagText": "U bent er nu!",
-        "durationUnit": "min",
-        "approximatelySymbol": "≈"
+        "duration": "≈ {duration} min",
+        "aria-label-duration": "Geschatte duur: {duration} minuten"
       }
     },
     "comparison-window": {

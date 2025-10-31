@@ -68,10 +68,11 @@ const Content = <template>
 </template>;
 
 const Duration = <template>
-  <PixIcon @name="acute" class="combined-course-item__duration__icon" /><span>{{t
-      "pages.combined-courses.items.approximatelySymbol"
-    }}{{@item.duration}}
-    {{t "pages.combined-courses.items.durationUnit"}}</span>
+  <PixIcon @name="acute" class="combined-course-item__duration__icon" @ariaHidden={{true}} />
+  <span aria-label={{t "pages.combined-courses.items.aria-label-duration" duration=@item.duration}}>{{t
+      "pages.combined-courses.items.duration"
+      duration=@item.duration
+    }}</span>
 </template>;
 
 function hasWhiteBackground(item) {
@@ -120,7 +121,9 @@ function hasWhiteBackground(item) {
         <Content
           @title={{@item.title}}
           @isCompleted={{@item.isCompleted}}
+          @masteryRate={{@item.masteryRate}}
           @iconUrl={{@item.iconUrl}}
+          @isCampaignType={{eq @item.type "CAMPAIGN"}}
           @displayDuration={{eq @item.type "MODULE"}}
           @hasWhiteBackground={{hasWhiteBackground @item}}
           @hasYellowBorder={{and (eq @item.type "MODULE") @isCombinedCourseCompleted}}

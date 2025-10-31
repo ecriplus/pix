@@ -1218,9 +1218,9 @@
         "step": "Étape {stepNumber}"
       },
       "items": {
-        "approximatelySymbol": "≈",
+        "duration": "≈ {duration} min",
+        "aria-label-duration": "Durée estimée : {duration} minutes",
         "completed": "Complété !",
-        "durationUnit": "min",
         "formation": {
           "description": "Terminez votre diagnostic pour débloquer un programme de modules adapté à votre résultat !",
           "title": "Programme personnalisé de modules"

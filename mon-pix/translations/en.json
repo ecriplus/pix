@@ -1217,9 +1217,9 @@
         "step": "Step {stepNumber}"
       },
       "items": {
-        "approximatelySymbol": "≈",
+        "duration": "≈ {duration} min",
+        "aria-label-duration": "Estimated duration: {duration} minutes",
         "completed": "Completed!",
-        "durationUnit": "min",
         "formation": {
           "description": "Complete your assessment to unlock a programme of modules tailored to your results!",
           "title": "Customised module programme"

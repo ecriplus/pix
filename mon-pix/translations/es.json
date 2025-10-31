@@ -1229,8 +1229,8 @@
         "aria-label-completed-campaign": "Este elemento se completa con una tasa de éxito del {value, number, ::percent}",
         "completed": "¡Completado!",
         "tagText": "¡Ya estás ahí!",
-        "durationUnit": "min",
-        "approximatelySymbol": "≈"
+        "duration": "≈ {duration} min.",
+        "aria-label-duration": "Duración estimada: {duration} minutos."
       }
     },
     "comparison-window": {
