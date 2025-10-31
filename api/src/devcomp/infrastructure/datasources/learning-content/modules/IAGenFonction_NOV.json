@@ -364,7 +364,7 @@
               "element": {
                 "id": "7d0771bd-5a31-45ab-8cad-1f6bbda5d3a9",
                 "type": "text",
-                "content": "<p>Pour répondre, un logiciel d’<strong>IA générative </strong>complète la phrase de l’utilisateur.</p><p> Il cherche <strong>la suite la plus probable</strong>, en tenant compte de toute la conversation, pas seulement du dernier mot. Puis il recommence, étape par étape, jusqu’à former une réponse entière.<br></p>"
+                "content": "<p>Pour répondre, un logiciel d’<strong>IA générative </strong>complète la phrase de l’utilisateur.</p><p> Il cherche <strong>la suite la plus probable</strong>, en tenant compte de toute la conversation, pas seulement du dernier mot. Puis il recommence, étape par étape, jusqu’à former une réponse entière.</p>"
               }
             },
             {
@@ -384,7 +384,7 @@
               "element": {
                 "id": "2bb5feaf-d938-4340-be65-c57b44162aba",
                 "type": "text",
-                "content": "<p>⚠️ Cette méthode a des <strong>limites</strong>. L’IA génère simplement la suite de mots la plus probable. </p><p>Le texte créé peut donc être <strong>trompeur</strong>, <strong>faux </strong>ou même <strong>illogique</strong>.</p><p>    🔍 Il faut donc <strong>toujours vérifier</strong> si le texte produit a du sens et correspond à la réalité.<br></p>"
+                "content": "<p>⚠️ Cette méthode a des <strong>limites</strong>. L’IA génère simplement la suite de mots la plus probable. </p><p>Le texte créé peut donc être <strong>trompeur</strong>, <strong>faux </strong>ou même <strong>illogique</strong>.</p><p>    🔍 Il faut donc <strong>toujours vérifier</strong> si le texte produit a du sens et correspond à la réalité.</p>"
               }
             }
           ]
@@ -442,7 +442,7 @@
                     "id": "3",
                     "content": "<p>Des articles scientifiques.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est utile pour avoir du vocabulaire scientifique, donc des mots très précis.&nbsp;Mais les autres types de textes proposés ici sont également utiles.&nbsp;Plus une <strong>IA est entraînée</strong> sur des <strong>textes nombreux et variés</strong>, plus elle sera <strong>efficace</strong>.&nbsp;<br></p>"
+                      "diagnosis": "<p>C’est utile pour avoir du vocabulaire scientifique, donc des mots très précis.&nbsp;Mais les autres types de textes proposés ici sont également utiles.&nbsp;Plus une <strong>IA est entraînée</strong> sur des <strong>textes nombreux et variés</strong>, plus elle sera <strong>efficace</strong>.&nbsp;</p>"
                     }
                   },
                   {
