@@ -2,9 +2,12 @@ export class OidcProvider {
   constructor({
     accessTokenLifespan,
     additionalRequiredProperties,
+    application,
+    applicationTld,
     claimMapping,
     claimsToStore,
     clientId,
+    connectionMethodCode,
     enabled,
     enabledForPixAdmin,
     encryptedClientSecret,
@@ -23,9 +26,12 @@ export class OidcProvider {
   } = {}) {
     this.accessTokenLifespan = accessTokenLifespan;
     this.additionalRequiredProperties = additionalRequiredProperties;
+    this.application = application;
+    this.applicationTld = applicationTld;
     this.claimMapping = claimMapping;
     this.claimsToStore = claimsToStore;
     this.clientId = clientId;
+    this.connectionMethodCode = connectionMethodCode;
     this.enabled = enabled;
     this.enabledForPixAdmin = enabledForPixAdmin;
     this.encryptedClientSecret = encryptedClientSecret;
@@ -44,7 +50,6 @@ export class OidcProvider {
   }
 
   /**
-   *
    * @param {CryptoService} cryptoService
    * @return {Promise<string | null}>}
    */

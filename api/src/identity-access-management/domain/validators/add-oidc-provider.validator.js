@@ -1,14 +1,19 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../shared/domain/errors.js';
-
+import { VALID_APPLICATIONS } from '../../infrastructure/utils/network.js';
 const schema = Joi.object({
   accessTokenLifespan: Joi.string().optional().default('7d'),
   additionalRequiredProperties: Joi.object().optional(),
+  application: Joi.string()
+    .valid(...VALID_APPLICATIONS)
+    .optional(),
+  applicationTld: Joi.string().valid('.fr', '.org').optional(),
   claimMapping: Joi.object().optional(),
   claimsToStore: Joi.string().optional(),
   clientId: Joi.string().required(),
   clientSecret: Joi.string().required(),
+  connectionMethodCode: Joi.string().optional(),
   enabled: Joi.boolean().optional().default(false),
   enabledForPixAdmin: Joi.boolean().optional().default(false),
   extraAuthorizationUrlParameters: Joi.object().optional(),

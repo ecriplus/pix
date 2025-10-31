@@ -6,10 +6,13 @@
  * @param {Object} params
  * @param {string} params.accessTokenLifespan
  * @param {Object} params.additionalRequiredProperties
+ * @param {string} params.application
+ * @param {string} params.applicationTld
  * @param {Object} params.claimMapping
  * @param {string} params.claimsToStore
  * @param {string} params.clientId
  * @param {string} params.clientSecret
+ * @param {string} params.connectionMethodCode
  * @param {boolean} params.enabled
  * @param {boolean} params.enabledForPixAdmin
  * @param {Object} params.extraAuthorizationUrlParameters
@@ -31,10 +34,13 @@
 const addOidcProvider = async function ({
   accessTokenLifespan,
   additionalRequiredProperties,
+  application,
+  applicationTld,
   claimMapping,
   claimsToStore,
   clientId,
   clientSecret,
+  connectionMethodCode,
   enabled,
   enabledForPixAdmin,
   extraAuthorizationUrlParameters,
@@ -53,13 +59,16 @@ const addOidcProvider = async function ({
   cryptoService,
   addOidcProviderValidator,
 }) {
-  addOidcProviderValidator.validate({
+  const properties = {
     accessTokenLifespan,
     additionalRequiredProperties,
+    application,
+    applicationTld,
     claimMapping,
     claimsToStore,
     clientId,
     clientSecret,
+    connectionMethodCode,
     enabled,
     enabledForPixAdmin,
     extraAuthorizationUrlParameters,
@@ -74,32 +83,15 @@ const addOidcProvider = async function ({
     slug,
     source,
     isVisible,
-  });
+  };
+  addOidcProviderValidator.validate(properties);
 
   const encryptedClientSecret = await cryptoService.encrypt(clientSecret);
+  // eslint-disable-next-line no-unused-vars
+  const { clientSecret: _, ...propertiesWithoutClientSecret } = properties;
+  const propertiesWithEncryptedClientSecret = { encryptedClientSecret, ...propertiesWithoutClientSecret };
 
-  await oidcProviderRepository.create({
-    accessTokenLifespan,
-    additionalRequiredProperties,
-    claimMapping,
-    claimsToStore,
-    clientId,
-    enabled,
-    enabledForPixAdmin,
-    encryptedClientSecret,
-    extraAuthorizationUrlParameters,
-    identityProvider,
-    openidClientExtraMetadata,
-    openidConfigurationUrl,
-    organizationName,
-    postLogoutRedirectUri,
-    redirectUri,
-    scope,
-    shouldCloseSession,
-    slug,
-    source,
-    isVisible,
-  });
+  await oidcProviderRepository.create(propertiesWithEncryptedClientSecret);
 };
 
 export { addOidcProvider };

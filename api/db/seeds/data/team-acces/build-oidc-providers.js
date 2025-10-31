@@ -27,6 +27,8 @@ async function _buildVisibleOidcProviders(databaseBuilder) {
   await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
+        application: 'app',
+        applicationTld: '.fr',
         identityProvider: OIDC_PROVIDER_EXAMPLE_NET_IDENTITY_PROVIDER,
         organizationName: 'OIDC Example 1 from seeds',
         slug: 'seeds-1-oidc-example-net',
@@ -43,6 +45,8 @@ async function _buildVisibleOidcProviders(databaseBuilder) {
   await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
+        application: 'app',
+        applicationTld: '.fr',
         identityProvider: 'OIDC_EXAMPLE_NET_FROM_SEEDS-2',
         organizationName: 'OIDC Example 2 from seeds',
         slug: 'seeds-2-oidc-example-net',
@@ -55,12 +59,33 @@ async function _buildVisibleOidcProviders(databaseBuilder) {
       defaultVisibleOidcProviderProperties,
     ),
   );
+
+  await databaseBuilder.factory.buildOidcProvider(
+    Object.assign(
+      {
+        application: 'orga',
+        applicationTld: '.org',
+        identityProvider: 'OIDC_EXAMPLE_NET_FROM_SEEDS-2-ORGA',
+        organizationName: 'OIDC Example 2 from seeds',
+        slug: 'seeds-2-oidc-example-net',
+        source: 'seeds-2-oidc-example-net',
+        clientId: '2-XXX',
+        clientSecret: '2-YYY',
+        connectionMethodCode: 'OIDC_EXAMPLE_NET_FROM_SEEDS-2',
+        openidConfigurationUrl: 'https://seeds-2.oidc.example.net/.well-known/openid-configuration',
+        redirectUri: 'https://app.dev.pix.org/connexion/seeds-2-oidc-example-net',
+      },
+      defaultVisibleOidcProviderProperties,
+    ),
+  );
 }
 
 async function _buildNotVisibleOidcProviders(databaseBuilder) {
   await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
+        application: 'app',
+        applicationTld: '.fr',
         identityProvider: 'OIDC_EXAMPLE_NET_NOT_VISIBLE_FROM_SEEDS-1',
         organizationName: 'OIDC Example not visible 1 from seeds',
         slug: 'seeds-not-visible-1-oidc-example-net',
@@ -77,6 +102,8 @@ async function _buildNotVisibleOidcProviders(databaseBuilder) {
   await databaseBuilder.factory.buildOidcProvider(
     Object.assign(
       {
+        application: 'app',
+        applicationTld: '.fr',
         identityProvider: 'OIDC_EXAMPLE_NET_NOT_VISIBLE_FROM_SEEDS-2',
         organizationName: 'OIDC Example not visible 2 from seeds',
         slug: 'seeds-not-visible-2-oidc-example-net',
