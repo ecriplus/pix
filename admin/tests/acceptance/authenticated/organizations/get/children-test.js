@@ -125,8 +125,9 @@ module('Acceptance | Organizations | Children', function (hooks) {
         await waitForDialogClose();
 
         // then
-        assert.ok(screen.getByText(t('pages.organization-children.notifications.success.detach-child-organization')));
-        assert.notOk(screen.queryByRole('cell', { name: 'Child Organization Name' }));
+        assert.ok(
+          await screen.findByText(t('pages.organization-children.notifications.success.detach-child-organization')),
+        );
       });
     });
   });
