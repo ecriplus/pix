@@ -73,8 +73,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
       expect(participations).to.have.lengthOf(1);
       expect(participations[0].organizationLearnerId).to.deep.equal(organizationLearnerId);
-      expect(participations[0].status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
-      expect(participations[0].referenceId).to.deep.equal(combinedCourseId.toString());
+      expect(participations[0].status).equal(OrganizationLearnerParticipationStatuses.COMPLETED);
+      expect(participations[0].referenceId).equal(combinedCourseId.toString());
     });
   });
 
@@ -278,7 +278,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       clock.restore();
     });
 
-    it('should update only status and updatedAt for given id', async function () {
+    it('should update only given field', async function () {
       //given
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
@@ -286,7 +286,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         organizationLearnerId,
         status: OrganizationLearnerParticipationStatuses.STARTED,
         createdAt: new Date('2022-01-01'),
-        updatedAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-02-01'),
         combinedCourseId,
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
         referenceId: combinedCourseId.toString(),
@@ -295,26 +295,29 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await databaseBuilder.commit();
 
       //when
-      const combinedCourseParticipation = new CombinedCourseParticipation({
-        ...combinedCourseParticipationFromDB,
-        questId: 1,
-        organizationLearnerId: 1,
+
+      await combinedCourseParticipationRepository.update({
+        id: combinedCourseParticipationFromDB.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
       });
 
-      combinedCourseParticipation.complete();
-
-      const updatedParticipation = await combinedCourseParticipationRepository.update({
-        combinedCourseParticipation,
-      });
+      const updatedParticipation = await knex('organization_learner_participations')
+        .where({
+          id: combinedCourseParticipationFromDB.id,
+        })
+        .first();
 
       //then
       expect(updatedParticipation.id).to.equal(combinedCourseParticipationFromDB.id);
       expect(updatedParticipation.organizationLearnerId).to.equal(
         combinedCourseParticipationFromDB.organizationLearnerId,
       );
-      expect(updatedParticipation.questId).to.equal(combinedCourseParticipationFromDB.questId);
+      expect(updatedParticipation.type).to.equal(OrganizationLearnerParticipationTypes.COMBINED_COURSE);
+      expect(updatedParticipation.referenceId).to.equal(combinedCourseId.toString());
+      expect(updatedParticipation.updatedAt).to.deep.equal(new Date('2022-02-01'));
+      expect(updatedParticipation.createdAt).to.deep.equal(new Date('2022-01-01'));
+
       expect(updatedParticipation.status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
-      expect(updatedParticipation.updatedAt).to.deep.equal(now);
     });
   });
 

@@ -1,8 +1,11 @@
-import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
+import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { COMPARISONS as COMPARISONS_CRITERION } from '../../../../../src/quest/domain/models/CriterionProperty.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { REQUIREMENT_TYPES } from '../../../../../src/quest/domain/models/Quest.js';
+import { COMPARISONS as COMPARISONS_REQUIMENTS } from '../../../../../src/quest/domain/models/Requirement.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
 
@@ -32,7 +35,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       campaignId: campaign.id,
       userId,
       organizationLearnerId,
-      status: 'SHARED',
+      status: CampaignParticipationStatuses.SHARED,
     }).id;
     databaseBuilder.factory.buildUserRecommendedTraining({
       userId,
@@ -45,28 +48,28 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             moduleId: {
               data: moduleId,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
       ],
     });
-    databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    const combinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       organizationLearnerId,
       combinedCourseId,
@@ -76,9 +79,12 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     });
     await databaseBuilder.commit();
 
-    const result = await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourse({ userId, code });
 
-    expect(result).to.be.instanceOf(CombinedCourseParticipation);
+    const result = await knex('organization_learner_participations')
+      .where({ id: combinedCourseParticipation.id })
+      .first();
+
     expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
     expect(result.updatedAt).to.deep.equal(now);
   });
@@ -105,7 +111,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       campaignId: campaign.id,
       userId,
       organizationLearnerId,
-      status: 'SHARED',
+      status: CampaignParticipationStatuses.SHARED,
     }).id;
     databaseBuilder.factory.buildUserRecommendedTraining({
       userId,
@@ -120,42 +126,42 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             moduleId: {
               data: moduleId,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             moduleId: {
               data: module2Id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
         {
-          requirement_type: 'passages',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             moduleId: {
               data: module3Id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -194,12 +200,12 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -215,11 +221,14 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     });
     await databaseBuilder.commit();
 
-    const result = await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourse({ userId, code });
 
-    expect(result).to.be.instanceOf(CombinedCourseParticipation);
-    expect(result.status).to.equal(OrganizationLearnerParticipationStatuses.STARTED);
-    expect(result.updatedAt).to.deep.equal(combinedCourseParticipation.createdAt);
+    const result = await knex('organization_learner_participations')
+      .where({ id: combinedCourseParticipation.id })
+      .first();
+
+    expect(result.status).to.equal(combinedCourseParticipation.status);
+    expect(result.updatedAt).to.deep.equal(combinedCourseParticipation.updatedAt);
   });
 
   it('should not throw if combinedCourseParticipation does not exist', async function () {
@@ -233,12 +242,12 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },
@@ -264,12 +273,12 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       organizationId,
       successRequirements: [
         {
-          requirement_type: 'campaignParticipations',
-          comparison: 'all',
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: COMPARISONS_REQUIMENTS.ALL,
           data: {
             campaignId: {
               data: campaign.id,
-              comparison: 'equal',
+              comparison: COMPARISONS_CRITERION.EQUAL,
             },
           },
         },

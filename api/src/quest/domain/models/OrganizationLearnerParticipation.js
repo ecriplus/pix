@@ -36,6 +36,39 @@ export class OrganizationLearnerParticipation {
     this.referenceId = referenceId;
   }
 
+  get fieldsForUpdate() {
+    return {
+      id: this.id,
+      updatedAt: this.updatedAt,
+      status: this.status,
+      completedAt: this.completedAt,
+    };
+  }
+
+  static buildFromCombinedCourse({
+    id,
+    organizationLearnerId,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    deletedBy,
+    status,
+    combinedCourseId,
+  }) {
+    return new OrganizationLearnerParticipation({
+      id,
+      organizationLearnerId,
+      createdAt,
+      updatedAt,
+      completedAt: status === OrganizationLearnerParticipationStatuses.COMPLETED ? updatedAt : null,
+      deletedAt,
+      deletedBy,
+      status,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      referenceId: combinedCourseId.toString(),
+    });
+  }
+
   static buildFromPassage({
     id,
     organizationLearnerId,
