@@ -16,7 +16,7 @@ module('Unit | Route | authenticated/administration/certification', function (ho
       this.owner.register('service:store', StoreStub);
       const route = this.owner.lookup('route:authenticated/administration/certification');
       const expectedModel = Symbol('model');
-      queryRecordStub.withArgs('flash-algorithm-configuration', { id: 0 }).resolves(expectedModel);
+      queryRecordStub.withArgs('certification-version', { scope: 'CORE' }).resolves(expectedModel);
 
       // when
       const model = await route.model();

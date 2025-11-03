@@ -5,7 +5,7 @@ import { on } from '@ember/modifier';
 import { t } from 'ember-intl';
 
 <template>
-  <form class="flash-algorithm-configuration-form">
+  <form class="certification-version-challenges-configuration-form">
     <PixInput
       {{on "input" @updateNumberValues}}
       @id="maximumAssessmentLength"
@@ -14,7 +14,7 @@ import { t } from 'ember-intl';
       min="0"
     >
       <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.maximumAssessmentLength"
+          "pages.administration.certification.certification-version-challenges-configuration.form.maximumAssessmentLength"
         }}</:label>
     </PixInput>
 
@@ -26,7 +26,7 @@ import { t } from 'ember-intl';
       min="0"
     >
       <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.challengesBetweenSameCompetence"
+          "pages.administration.certification.certification-version-challenges-configuration.form.challengesBetweenSameCompetence"
         }}</:label>
     </PixInput>
 
@@ -37,7 +37,9 @@ import { t } from 'ember-intl';
       type="number"
       min="0"
     >
-      <:label>{{t "pages.administration.certification.flash-algorithm-configuration.form.variationPercent"}}</:label>
+      <:label>{{t
+          "pages.administration.certification.certification-version-challenges-configuration.form.variationPercent"
+        }}</:label>
     </PixInput>
 
     <PixCheckbox
@@ -47,7 +49,7 @@ import { t } from 'ember-intl';
       checked={{@form.limitToOneQuestionPerTube}}
     >
       <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.limitToOneQuestionPerTube"
+          "pages.administration.certification.certification-version-challenges-configuration.form.limitToOneQuestionPerTube"
         }}</:label>
     </PixCheckbox>
 
@@ -58,14 +60,12 @@ import { t } from 'ember-intl';
       checked={{@form.enablePassageByAllCompetences}}
     >
       <:label>{{t
-          "pages.administration.certification.flash-algorithm-configuration.form.enablePassageByAllCompetences"
+          "pages.administration.certification.certification-version-challenges-configuration.form.enablePassageByAllCompetences"
         }}</:label>
     </PixCheckbox>
 
-    <PixButton
-      class="scoring-simulator__form-button"
-      @type="submit"
-      @triggerAction={{@onCreateFlashAlgorithmConfiguration}}
-    >{{t "common.actions.save"}}</PixButton>
+    <PixButton class="scoring-simulator__form-button" @type="submit" @triggerAction={{@onSave}}>{{t
+        "common.actions.save"
+      }}</PixButton>
   </form>
 </template>

@@ -5,8 +5,8 @@ export default class CertificationRoute extends Route {
   @service store;
 
   async model() {
-    return this.store.queryRecord('flash-algorithm-configuration', {
-      id: 0,
+    return this.store.queryRecord('certification-version', {
+      scope: 'CORE',
     });
   }
 }

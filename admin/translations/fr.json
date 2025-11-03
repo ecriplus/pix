@@ -784,13 +784,7 @@
           },
           "title": "Configuration des mailles pour le score global"
         },
-        "competence-scoring-configuration": {
-          "form": {
-            "label": "Ajout de la configuration de niveau par compétence (JSON)"
-          },
-          "title": "Configuration des seuils par compétence"
-        },
-        "flash-algorithm-configuration": {
+        "certification-version-challenges-configuration": {
           "form": {
             "challengesBetweenSameCompetence": "Nombre de questions entre 2 questions de la même compétence",
             "enablePassageByAllCompetences": "Forcer le passage par les 16 compétences",
@@ -799,6 +793,12 @@
             "variationPercent": "Capage de la capacité (en % )"
           },
           "title": "Configuration de l’algorithme de déroulé du test"
+        },
+        "competence-scoring-configuration": {
+          "form": {
+            "label": "Ajout de la configuration de niveau par compétence (JSON)"
+          },
+          "title": "Configuration des seuils par compétence"
         },
         "sco-whitelist": {
           "export": {
