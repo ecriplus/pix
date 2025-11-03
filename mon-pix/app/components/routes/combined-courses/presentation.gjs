@@ -6,10 +6,10 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
+import CombinedCourseItem from 'mon-pix/components/combined-course/combined-course-item';
 import ENV from 'mon-pix/config/environment';
 import { CombinedCourseStatuses } from 'mon-pix/models/combined-course';
 
-import CombinedCourseItem from '../combined-course/combined-course-item';
 const CompletedText = <template>
   <div class="completed-text">
     <h2 class="completed-text__title">{{t "pages.combined-courses.completed.title"}}</h2>
@@ -71,7 +71,7 @@ const Step = <template>
   </h2>
 </template>;
 
-export default class CombinedCourses extends Component {
+export default class CombinedCoursePresentation extends Component {
   <template>
     <section class="combined-course">
       <div class="combined-course__exit">

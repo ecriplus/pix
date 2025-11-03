@@ -43,6 +43,7 @@
 @use 'components/certifications/shareable-certificate/v2-certificate' as *;
 @use 'components/certifications/certification-ender' as *;
 @use 'components/combined-courses' as *;
+@use '../components/routes/combined-courses/process-custom-passages' as *;
 @use 'components/communication-banner' as *;
 @use 'components/companion/blocker' as *;
 @use 'components/companion/check' as *;
@@ -204,7 +205,6 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 @use 'pages/download-session-results' as *;
 
 .page-without-navbar {
-
   &--login-page {
     background-color: var(--pix-neutral-0);
   }
@@ -222,10 +222,10 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
   }
 }
 
-.modulix-layout{
-  & > .pix-app-layout__main{
-  max-width: 100%;
-  padding: 0;
+.modulix-layout {
+  & > .pix-app-layout__main {
+    max-width: 100%;
+    padding: 0;
   }
 
   & > .pix-app-layout__navigation{
@@ -239,7 +239,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
   }
 
   &--page-without-navbar {
-    & > .pix-app-layout__navigation{
+    & > .pix-app-layout__navigation {
       @include breakpoints.device-is('desktop') {
         padding: 0;
       }

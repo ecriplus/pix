@@ -12,6 +12,7 @@ export const createCombinedCourses = withTransaction(
     codeGenerator,
     accessCodeRepository,
     combinedCourseRepository,
+    recommendedModulesRepository,
   }) => {
     const csvParser = new CsvParser(payload, COMBINED_COURSE_HEADER);
     const csvData = csvParser.parse();
@@ -27,25 +28,44 @@ export const createCombinedCourses = withTransaction(
       const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
 
       for (const organizationId of organizationIds) {
-        const code = await codeGenerator.generate(accessCodeRepository, pendingCodes);
-        pendingCodes.push(code);
-        const combinedCourseUrl = '/parcours/' + code;
-        const campaigns = targetProfiles.map((targetProfile) => {
-          return new Campaign({
-            organizationId: parseInt(organizationId),
-            targetProfileId: targetProfile.id,
-            creatorId: parseInt(creatorId),
-            ownerId: parseInt(creatorId),
-            name: targetProfile.internalName,
-            title: targetProfile.name,
-            customResultPageButtonUrl: combinedCourseUrl,
-            customResultPageButtonText: 'Continuer',
+        const campaigns = [];
+        const combinedCourseCode = await codeGenerator.generate(accessCodeRepository, pendingCodes);
+        pendingCodes.push(combinedCourseCode);
+
+        for (const targetProfile of targetProfiles) {
+          const recommendableModules = await recommendedModulesRepository.findIdsByTargetProfileIds({
+            targetProfileIds: [targetProfile.id],
           });
-        });
+
+          const hasRecommendableModulesInTargetProfile =
+            recommendableModules.length > 0 &&
+            Boolean(recommendableModules.filter(({ moduleId }) => combinedCourseTemplate.moduleIds.includes(moduleId)));
+
+          let combinedCourseUrl = '/parcours/' + combinedCourseCode;
+
+          if (hasRecommendableModulesInTargetProfile) combinedCourseUrl += '/chargement';
+
+          campaigns.push(
+            new Campaign({
+              organizationId: parseInt(organizationId),
+              targetProfileId: targetProfile.id,
+              creatorId: parseInt(creatorId),
+              ownerId: parseInt(creatorId),
+              name: targetProfile.internalName,
+              title: targetProfile.name,
+              customResultPageButtonUrl: combinedCourseUrl,
+              customResultPageButtonText: 'Continuer',
+            }),
+          );
+        }
 
         const createdCampaigns = await campaignRepository.save({ campaigns });
 
-        const combinedCourse = combinedCourseTemplate.toCombinedCourse(code, organizationId, createdCampaigns);
+        const combinedCourse = combinedCourseTemplate.toCombinedCourse(
+          combinedCourseCode,
+          organizationId,
+          createdCampaigns,
+        );
         combinedCourses.push(combinedCourse);
       }
     }

@@ -13,17 +13,31 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     const targetProfile = databaseBuilder.factory.buildTargetProfile({
       ownerOrganizationId: firstOrganizationId,
     });
-
     databaseBuilder.factory.buildTargetProfileShare({
       organizationId: secondOrganizationId,
       targetProfileId: targetProfile.id,
+    });
+
+    const targetProfileWithTraining = databaseBuilder.factory.buildTargetProfile({
+      ownerOrganizationId: firstOrganizationId,
+    });
+    const trainingId = databaseBuilder.factory.buildTraining({
+      type: 'modulix',
+      title: 'Demo combinix 1',
+      link: '/modules/demo-combinix-1',
+      locale: 'fr-fr',
+    }).id;
+
+    databaseBuilder.factory.buildTargetProfileTraining({
+      targetProfileId: targetProfileWithTraining.id,
+      trainingId: trainingId,
     });
 
     await databaseBuilder.commit();
 
     const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*
 ${firstOrganizationId},${secondOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfile.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}],""description"":""ma description"", ""illustration"":""mon_illu.svg""}";${userId}
-${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfile.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
+${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requirement_type"":""campaignParticipations"",""comparison"":""all"",""data"":{""targetProfileId"":{""data"":${targetProfileWithTraining.id},""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""eeeb4951-6f38-4467-a4ba-0c85ed71321a"",""comparison"":""equal""}}},{""requirement_type"":""passages"",""comparison"":""all"",""data"":{""moduleId"":{""data"":""f32a2238-4f65-4698-b486-15d51935d335"",""comparison"":""equal""}}}]}";${userId}
 `;
 
     const payload = iconv.encode(input, 'UTF-8');
@@ -34,7 +48,8 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
     const [firstCreatedCampaignForFirstOrganization, secondCreatedCampaignForFirstOrganization] = await knex(
       'campaigns',
     )
-      .where({ targetProfileId: targetProfile.id, organizationId: firstOrganizationId })
+      .where({ organizationId: firstOrganizationId })
+      .whereIn('targetProfileId', [targetProfile.id, targetProfileWithTraining.id])
       .orderBy('id');
     const createdCampaignForSecondOrganization = await knex('campaigns')
       .where({ targetProfileId: targetProfile.id, organizationId: secondOrganizationId })
@@ -172,6 +187,8 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
     //Campaign
     expect(firstCreatedCampaignForFirstOrganization.name).to.equal(targetProfile.internalName);
     expect(firstCreatedCampaignForFirstOrganization.title).to.equal(targetProfile.name);
+    expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonUrl.includes('/chargement')).false;
+    expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
 
     // Quest
     expect(secondCreatedQuestForFirstOrganization.code).not.to.be.null;
@@ -182,8 +199,10 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
     expect(secondCreatedQuestForFirstOrganization.description).null;
     expect(secondCreatedQuestForFirstOrganization.illustration).null;
     //Campaign
-    expect(secondCreatedCampaignForFirstOrganization.name).to.equal(targetProfile.internalName);
-    expect(secondCreatedCampaignForFirstOrganization.title).to.equal(targetProfile.name);
+    expect(secondCreatedCampaignForFirstOrganization.name).to.equal(targetProfileWithTraining.internalName);
+    expect(secondCreatedCampaignForFirstOrganization.title).to.equal(targetProfileWithTraining.name);
+    expect(secondCreatedCampaignForFirstOrganization.customResultPageButtonUrl.endsWith('/chargement')).true;
+    expect(secondCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
 
     // 2nd Organization
     // Quest
@@ -197,6 +216,8 @@ ${firstOrganizationId};"{""name"":""Combinix"",""successRequirements"":[{""requi
     // Campaign
     expect(createdCampaignForSecondOrganization.name).to.equal(targetProfile.internalName);
     expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
+    expect(createdCampaignForSecondOrganization.customResultPageButtonUrl.endsWith('/chargement')).false;
+    expect(createdCampaignForSecondOrganization.customResultPageButtonText).to.equal('Continuer');
   });
 
   it('should save same date for each quest in same row, but not for the other rows', async function () {

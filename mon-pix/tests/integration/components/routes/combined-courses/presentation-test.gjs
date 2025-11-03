@@ -1,14 +1,13 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import CombinedCoursesPresentation from 'mon-pix/components/routes/combined-courses/presentation';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import { CombinedCourseStatuses } from '../../../../models/combined-course.js';
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering.js';
-
-module('Integration | Component | combined course', function (hooks) {
+import { CombinedCourseStatuses } from '../../../../../models/combined-course.js';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering.js';
+module('Integration | Component | Combined Courses | Presentation', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('in all cases', function () {
@@ -23,11 +22,10 @@ module('Integration | Component | combined course', function (hooks) {
         name: 'Combinix',
       });
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByRole('heading', { name: 'Combinix' }));
@@ -43,10 +41,10 @@ module('Integration | Component | combined course', function (hooks) {
         description: 'Le but de ma quête',
       });
 
-      this.setProperties({ combinedCourse });
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
       assert.ok(screen.getByText('Le but de ma quête'));
     });
     test('should display exit button', async function (assert) {
@@ -61,11 +59,10 @@ module('Integration | Component | combined course', function (hooks) {
         name: 'Combinix',
       });
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       const link = screen.getByRole('link', { name: t('common.actions.quit') });
@@ -92,11 +89,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(combinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText(t('pages.combined-courses.items.formation.title')));
@@ -114,11 +110,10 @@ module('Integration | Component | combined course', function (hooks) {
         code: 'COMBINIX9',
       });
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByRole('button', { name: t('pages.combined-courses.content.start-button') }));
@@ -145,15 +140,16 @@ module('Integration | Component | combined course', function (hooks) {
       sinon.stub(combinedCourse, 'reload').callsFake(() => {
         combinedCourse.status = 'STARTED';
       });
-      this.setProperties({ combinedCourse });
+
       sinon.stub(store, 'adapterFor');
       sinon.stub(router, 'transitionTo');
 
       store.adapterFor.withArgs('combined-course').returns({ start: sinon.stub().withArgs('COMBINIX9').resolves() });
 
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
       await click(screen.getByRole('button', { name: t('pages.combined-courses.content.start-button') }));
 
       // then
@@ -180,11 +176,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(combinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText('ma campagne'));
@@ -211,11 +206,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(combinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText('mon module'));
@@ -244,11 +238,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(combinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText('ma campagne'));
@@ -278,11 +271,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(combinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText('mon module'));
@@ -319,11 +311,11 @@ module('Integration | Component | combined course', function (hooks) {
       });
 
       combinedCourse.items.push(combinedCourseItem);
-      this.setProperties({ combinedCourse });
 
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByText(t('pages.combined-courses.items.completed')));
@@ -361,11 +353,10 @@ module('Integration | Component | combined course', function (hooks) {
 
     combinedCourse.items.push(campaignCombinedCourseItem, moduleCombinedCourseItem);
 
-    this.setProperties({ combinedCourse });
-
     // when
-    const screen = await render(hbs`
-      <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+    const screen = await render(
+      <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+    );
 
     // then
     await click(screen.getByRole('button', { name: t('pages.combined-courses.content.resume-button') }));
@@ -400,11 +391,11 @@ module('Integration | Component | combined course', function (hooks) {
       code: 'COMBINIX9',
     });
     combinedCourse.items.push(campaignCombinedCourseItem, moduleCombinedCourseItem);
-    this.setProperties({ combinedCourse });
 
     // when
-    const screen = await render(hbs`
-      <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+    const screen = await render(
+      <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+    );
 
     // then
     assert.ok(screen.getByRole('button', { name: t('pages.combined-courses.content.resume-button') }));
@@ -421,11 +412,10 @@ module('Integration | Component | combined course', function (hooks) {
         code: 'COMBINIX9',
       });
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
@@ -442,11 +432,10 @@ module('Integration | Component | combined course', function (hooks) {
         code: 'COMBINIX9',
       });
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       const link = screen.getByRole('link', { name: t('pages.combined-courses.completed.survey-button') });
@@ -479,11 +468,10 @@ module('Integration | Component | combined course', function (hooks) {
       });
       combinedCourse.items.push(moduleCombinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.ok(
@@ -512,11 +500,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(moduleCombinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.notOk(
@@ -545,11 +532,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(campaignCombinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.notOk(
@@ -589,11 +575,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(campaignCombinedCourseItem, moduleCombinedCourseItem);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
       // then
       assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.content.step', { stepNumber: 1 }) }));
       assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.content.step', { stepNumber: 2 }) }));
@@ -628,11 +613,10 @@ module('Integration | Component | combined course', function (hooks) {
 
       combinedCourse.items.push(campaignCombinedCourseItem, campaignCombinedCourse2Item);
 
-      this.setProperties({ combinedCourse });
-
       // when
-      const screen = await render(hbs`
-        <Routes::CombinedCourses @combinedCourse={{this.combinedCourse}}  />`);
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
 
       // then
       assert.notOk(screen.queryByRole('heading', { name: 'étape 1' }));

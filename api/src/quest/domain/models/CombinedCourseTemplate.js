@@ -30,6 +30,12 @@ export class CombinedCourseTemplate {
       .map(({ data }) => data.targetProfileId.data);
   }
 
+  get moduleIds() {
+    return this.#quest.successRequirements
+      .filter((requirement) => requirement.requirement_type === TYPES.OBJECT.PASSAGES)
+      .map(({ data }) => data.moduleId.data);
+  }
+
   toCombinedCourse(code, organizationId, campaigns) {
     const quest = this.toCombinedCourseQuestFormat(campaigns);
     return new CombinedCourse(

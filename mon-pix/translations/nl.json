@@ -40,6 +40,7 @@
       "cancel": "Annuleer",
       "close": "Sluit",
       "confirm": "Bevestig",
+      "continue": "Doorgaan",
       "download": "Downloaden",
       "lets-go": "Laten we gaan!",
       "login": "Inloggen",
@@ -1200,6 +1201,15 @@
       }
     },
     "combined-courses": {
+      "process-custom-passages": {
+        "title": "De volgende stappen in uw huidige cursus berekenen.",
+        "description": "We analyseren uw resultaten en stellen uw gepersonaliseerde trainingsplan op.",
+        "list": {
+          "results-analysis": "Analyse van uw resultaten.",
+          "select-passages": "Geschikte trainingen selecteren.",
+          "generate-personalise-course": "Uw gepersonaliseerde cursus genereren."
+        }
+      },
       "content": {
         "start-button": "Cursus starten",
         "resume-button": "Cursus hervatten",
@@ -1775,7 +1785,7 @@
       "preview": {
         "showJson": "Show JSON",
         "textarea-label": "Inhoud module",
-        "stepper" : "Preview : stepper {direction}"
+        "stepper": "Preview : stepper {direction}"
       },
       "qab": {
         "correct-answer": "Correct antwoord",
@@ -2065,7 +2075,7 @@
         "notification": "Herhaal de vragen waarvoor je gezakt bent om je resultaat te verbeteren en verder te komen. Je moet je resultaten opnieuw insturen zodat ze kunnen worden geteld door de organisator. De organisator blijft toegang houden tot je eerder ingestuurde resultaten.",
         "notification-with-auto-share": "Herhaal mislukte vragen om je resultaat te verbeteren en verder te gaan. De organisator blijft toegang houden tot je eerder ingediende resultaten."
       },
-      "retry-and-reset":{
+      "retry-and-reset": {
         "notification": "Als je de mislukte vragen opnieuw probeert of alles op nul zet om alles opnieuw te proberen, kan je organisatie je laatste resultaat niet meer zien. Om je resultaat mee te laten tellen door de organisator van de test, moet je het opnieuw insturen.",
         "notification-with-auto-share": "Herhaal mislukte vragen of stel in op nul om het opnieuw te proberen. De organisator blijft toegang houden tot je eerder ingediende resultaten."
       },

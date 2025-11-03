@@ -40,6 +40,7 @@
       "cancel": "Annuler",
       "close": "Fermer",
       "confirm": "Confirmer",
+      "continue": "Continuer",
       "download": "Télécharger",
       "lets-go": "C'est parti !",
       "login": "Se connecter sur Pix",
@@ -1222,6 +1223,15 @@
           "title": "Programme personnalisé de modules"
         },
         "tagText": "Vous en êtes là !"
+      },
+      "process-custom-passages": {
+        "description": "Nous analysons vos résultats et construisons votre plan de formation personnalisé.",
+        "list": {
+          "generate-personalize-course": "Génération de votre parcours personnalisé.",
+          "results-analysis": "Analyse de vos résultats.",
+          "select-passages": "Séléction des formations adaptées."
+        },
+        "title": "Calcul de la suite du parcours en cours."
       }
     },
     "comparison-window": {
@@ -2082,7 +2092,7 @@
         "notification": "Repassez les questions échouées afin d'améliorer votre résultat et de continuer à progresser. Vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilités par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
         "notification-with-auto-share": "Repassez les questions échouées afin d'améliorer votre résultat et de continuer à progresser. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
       },
-      "retry-and-reset":{
+      "retry-and-reset": {
         "notification": "Si vous repassez les questions échouées ou remettez à zéro pour tout retenter, vous devrez à nouveau envoyer vos résultats afin qu’ils soient comptabilisés par l’organisateur. Il continuera d’avoir accès à vos résultats précédemment envoyés.",
         "notification-with-auto-share": "Repassez les questions échouées ou remettez à zéro pour tout retenter. L'organisateur continuera d’avoir accès à vos résultats précédemment envoyés."
       },

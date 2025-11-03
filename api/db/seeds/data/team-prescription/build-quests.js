@@ -38,7 +38,7 @@ function buildCombinedCourseQuest(databaseBuilder, organizationId) {
     code: 'CODE123',
     targetProfileId: targetProfile.id,
     customResultPageButtonText: 'Continuer',
-    customResultPageButtonUrl: '/parcours/COMBINIX1',
+    customResultPageButtonUrl: '/parcours/COMBINIX1/chargement',
   });
   CAMPAIGN_SKILLS[0].map((skillId) =>
     databaseBuilder.factory.buildCampaignSkill({

@@ -1,14 +1,13 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-
-export default class CombinedCourseRoute extends Route {
+export default class CombinedCoursePresentationRoute extends Route {
   @service session;
   @service store;
   @service router;
   @service accessStorage;
 
   async beforeModel(transition) {
-    const { code } = transition.to.params;
+    const { code } = this.paramsFor('combined-courses');
 
     if (!transition.from) {
       return this.router.replaceWith('organizations.access', code, { queryParams: { from: 'parcours' } });
@@ -24,8 +23,8 @@ export default class CombinedCourseRoute extends Route {
     });
   }
 
-  async model(params) {
-    const code = params.code;
+  async model() {
+    const { code } = this.paramsFor('combined-courses');
     await this.store.adapterFor('combined-course').reassessStatus(code);
     return this.store.queryRecord('combined-course', { filter: { code } });
   }
