@@ -1,6 +1,6 @@
 import onEscapeAction from '@1024pix/pix-ui/addon/modifiers/on-escape-action';
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
-import PixNavigationButton from '@1024pix/pix-ui/components/pix-navigation-button';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -81,13 +81,13 @@ export default class ModulixNavigationButton extends Component {
 
   <template>
     {{#if this.media.isMobile}}
-      <PixNavigationButton
+      <PixButton
         class="module-navigation-mobile-button module-navigation-mobile-button{{this.buttonClass}}"
-        href={{this.scrollToSection}}
-        @icon={{this.sectionTitleIcon @section.type}}
-        aria-disabled="{{this.isDisabled}}"
+        @triggerAction={{this.scrollToSection}}
+        @iconBefore={{this.sectionTitleIcon @section.type}}
+        @isDisabled={{this.isDisabled}}
         aria-current="{{this.isCurrentSection}}"
-      >{{this.sectionTitle @section.type}}</PixNavigationButton>
+      >{{this.sectionTitle @section.type}}</PixButton>
     {{else}}
       <div
         class="navigation-tooltip {{if this.isTooltipVisible 'navigation-tooltip--visible' ''}}"
