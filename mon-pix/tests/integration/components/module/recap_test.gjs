@@ -86,46 +86,92 @@ module('Integration | Component | Module | Recap', function (hooks) {
     const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('link', { name: 'Continuer' })).exists();
+    assert.dom(screen.getByRole('link', { name: t('pages.modulix.recap.goToHomepage') })).exists();
   });
 
   module('when a redirection url is set', function () {
-    test('should display link to a custom url', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const module = store.createRecord('module', {
-        id: 'mon-slug',
-        title: 'Module title',
-        isBeta: true,
-        redirectionUrl: 'https//some-url.fr',
-      });
-      // when
-      const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+    module('Continue button', function () {
+      test('should display link to a custom url when not redict to internal Application', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const module = store.createRecord('module', {
+          id: 'mon-slug',
+          title: 'Module title',
+          isBeta: true,
+          redirectionUrl: 'https//some-url.fr',
+        });
+        // when
+        const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
 
-      // then
-      const button = screen.getByRole('link', { name: 'Continuer' });
-      assert.strictEqual(button.getAttribute('href'), module.redirectionUrl);
+        // then
+        const link = screen.getByRole('link', { name: t('pages.modulix.recap.goToHomepage') });
+
+        // then
+        assert.strictEqual(link.getAttribute('href'), module.redirectionUrl);
+      });
+
+      test('should call transitionTo with custom url when redirect to internal Application', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const router = this.owner.lookup('service:router');
+        const transitionToStub = sinon.stub(router, 'transitionTo');
+        const module = store.createRecord('module', {
+          id: 'mon-slug',
+          title: 'Module title',
+          isBeta: true,
+          redirectionUrl: '/parcours/combinix3',
+        });
+        // when
+        const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+        const button = screen.getByRole('button', { name: t('pages.modulix.recap.goToHomepage') });
+        await click(button);
+
+        // then
+
+        assert.ok(transitionToStub.calledWithExactly(module.redirectionUrl));
+      });
     });
 
-    test('should call transitionTo with custom url from application', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const router = this.owner.lookup('service:router');
-      const transitionToStub = sinon.stub(router, 'transitionTo');
-      const module = store.createRecord('module', {
-        id: 'mon-slug',
-        title: 'Module title',
-        isBeta: true,
-        redirectionUrl: '/parcours/combinix3',
+    module('Quit button', function () {
+      test('should display link to a custom url when not redict to internal Application', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const module = store.createRecord('module', {
+          id: 'mon-slug',
+          title: 'Module title',
+          isBeta: true,
+          redirectionUrl: 'https//some-url.fr',
+        });
+        // when
+        const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+
+        // then
+        const link = screen.getByRole('link', { name: t('pages.modulix.recap.backToModuleDetails') });
+
+        // then
+        assert.strictEqual(link.getAttribute('href'), module.redirectionUrl);
       });
-      // when
-      const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
-      const button = screen.queryByRole('button', { name: 'Quitter' });
-      await click(button);
 
-      // then
+      test('should call transitionTo with custom url when redirect to internal Application', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const router = this.owner.lookup('service:router');
+        const transitionToStub = sinon.stub(router, 'transitionTo');
+        const module = store.createRecord('module', {
+          id: 'mon-slug',
+          title: 'Module title',
+          isBeta: true,
+          redirectionUrl: '/parcours/combinix3',
+        });
+        // when
+        const screen = await render(<template><ModuleRecap @module={{module}} /></template>);
+        const button = screen.getByRole('button', { name: t('pages.modulix.recap.backToModuleDetails') });
+        await click(button);
 
-      assert.ok(transitionToStub.calledWithExactly(module.redirectionUrl));
+        // then
+
+        assert.ok(transitionToStub.calledWithExactly(module.redirectionUrl));
+      });
     });
   });
 });
