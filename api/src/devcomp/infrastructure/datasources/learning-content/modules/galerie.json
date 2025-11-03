@@ -16,6 +16,7 @@
       "id": "06f70348-a80b-4ae5-9b04-5efd55f770cd",
       "type": "question-yourself",
       "grains": [
+
         {
           "id": "9f7af22d-8cd2-45e0-b2d0-611e9903300e",
           "type": "transition",
@@ -663,6 +664,24 @@
                 "poster": "https://assets.pix.org/modules/utiliser-souris-ordinateur-1/bravo-vous-etes-sur-internet.jpg",
                 "subtitles": "",
                 "transcription": "Bravo, vous êtes sur Internet !"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "33981e84-9d31-4a40-b260-04c0ebc1cbf7",
+                "type": "text",
+                "content": "<p><strong>short video</strong></p><p>Il permet d'insérer une vidéo courte jouée automatiquement et en boucle (comme un gif) hébergée sur <strong>assets.pix.org</strong> au format mp4</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "493d1311-a31b-4898-992a-e3abd1927fd5",
+                "type": "short-video",
+                "title": "Exemple de vidéo courte",
+                "url": "https://assets.pix.org/modules/bac-a-sable/clic-droit.mp4",
+                "transcription": "Je clique avec le bouton droit de la souris."
               }
             }
           ]
