@@ -4,6 +4,7 @@ import { filterByFullName } from '../../../shared/infrastructure/utils/filter-ut
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourseParticipation } from '../../domain/models/CombinedCourseParticipation.js';
 import {
+  OrganizationLearnerParticipation,
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../domain/models/OrganizationLearnerParticipation.js';
@@ -98,17 +99,13 @@ function addSearchFilters(queryBuilder, filters = {}) {
   }
 }
 
-export const update = async function ({ combinedCourseParticipation }) {
+export const update = async function ({ id, ...updateFields }) {
   const knexConnection = DomainTransaction.getConnection();
   const updatedRow = await knexConnection('organization_learner_participations')
-    .where({ id: combinedCourseParticipation.id })
-    .update({
-      updatedAt: combinedCourseParticipation.updatedAt,
-      status: combinedCourseParticipation.status,
-      completedAt: combinedCourseParticipation.completedAt,
-    })
+    .where({ id })
+    .update(updateFields)
     .returning('*');
-  return new CombinedCourseParticipation(updatedRow[0]);
+  return new OrganizationLearnerParticipation(updatedRow[0]);
 };
 
 /**

@@ -1,4 +1,5 @@
 import { COMBINED_COURSE_ITEM_TYPES } from '../models/CombinedCourseItem.js';
+import { OrganizationLearnerParticipation } from '../models/OrganizationLearnerParticipation.js';
 
 export async function updateCombinedCourse({
   userId,
@@ -31,9 +32,10 @@ export async function updateCombinedCourse({
 
   if (isCombinedCourseCompleted) {
     combinedCourseDetails.participation.complete();
-    return combinedCourseParticipationRepository.update({
-      combinedCourseParticipation: combinedCourseDetails.participation,
-    });
+    const organizationLearnerParticipation = OrganizationLearnerParticipation.buildFromCombinedCourse(
+      combinedCourseDetails.participation,
+    );
+    await combinedCourseParticipationRepository.update(organizationLearnerParticipation.fieldsForUpdate);
   }
 
   return combinedCourseDetails.participation;
