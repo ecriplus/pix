@@ -20,6 +20,7 @@ export const getMostRecent = async () => {
   return _toDomain({ ...flashAlgorithmConfiguration.challengesConfiguration });
 };
 
+// A supprimer une fois remplacée dans scoring-V3
 export const getMostRecentBeforeDate = async (date) => {
   const knexConn = DomainTransaction.getConnection();
   const flashAlgorithmConfiguration = await knexConn('certification-configurations')

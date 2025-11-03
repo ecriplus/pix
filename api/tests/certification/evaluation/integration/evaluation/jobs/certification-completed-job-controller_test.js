@@ -387,6 +387,8 @@ describe('Integration | Certification | Application | jobs | CertificationComple
     certificationCompletedJobController = new CertificationCompletedJobController();
 
     databaseBuilder.factory.buildCertificationConfiguration();
+    databaseBuilder.factory.buildCertificationVersion();
+
     await databaseBuilder.commit();
   });
 

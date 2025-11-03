@@ -223,6 +223,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             },
           ],
         });
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2018-12-01T01:02:03Z'),
+        });
 
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
@@ -291,6 +294,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       });
 
       databaseBuilder.factory.buildCertificationConfiguration();
+      databaseBuilder.factory.buildCertificationVersion();
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,

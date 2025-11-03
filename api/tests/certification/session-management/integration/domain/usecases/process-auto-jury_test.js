@@ -384,6 +384,7 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
         await mockLearningContent(learningContentObjects);
 
         databaseBuilder.factory.buildCertificationConfiguration();
+        databaseBuilder.factory.buildCertificationVersion();
         await databaseBuilder.commit();
       });
 

@@ -394,6 +394,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
       context('when session is v3', function () {
         beforeEach(async function () {
           ({ options, session } = await _createSession({ version: 3 }));
+          databaseBuilder.factory.buildCertificationVersion();
           databaseBuilder.factory.buildCertificationConfiguration();
           await databaseBuilder.commit();
         });
@@ -924,6 +925,9 @@ const _createSessionWithoutChallenge = async () => {
   const session = databaseBuilder.factory.buildSession({ version });
   databaseBuilder.factory.buildCertificationConfiguration({
     startingDate: new Date('2024-01-01'),
+  });
+  databaseBuilder.factory.buildCertificationVersion({
+    startDate: new Date('2024-01-01'),
   });
   databaseBuilder.factory.buildCertificationCenterMembership({
     userId,
