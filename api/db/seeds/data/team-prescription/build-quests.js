@@ -196,16 +196,58 @@ function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
     }),
   );
 
-  databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix 3',
-    code: 'COMBINIX3',
-    createdAt: new Date('2024-01-01'),
-    description: 'Combinix créé à une date antérieure au Combinix 2 pour tester le tri par date de création',
+  const combinix4 = databaseBuilder.factory.buildCombinedCourse({
+    name: 'Combinix 4',
+    code: 'COMBINIX4',
+    createdAt: new Date('2023-01-01'),
+    description: 'Parcours combiné sans campagne.',
     illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
     organizationId,
     eligibilityRequirements: [],
-    successRequirements: [],
+    successRequirements: [
+      {
+        requirement_type: 'passages',
+        comparison: 'all',
+        data: {
+          moduleId: {
+            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
+            comparison: 'equal',
+          },
+          isTerminated: {
+            data: true,
+            comparison: 'equal',
+          },
+        },
+      },
+    ],
   });
+
+  const combinix3 = databaseBuilder.factory.buildCombinedCourse({
+    name: 'Combinix 3',
+    code: 'COMBINIX3',
+    createdAt: new Date('2024-01-01'),
+    description: 'Parcours combiné sans module.',
+    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
+    organizationId,
+    eligibilityRequirements: [],
+    successRequirements: [
+      {
+        requirement_type: 'campaignParticipations',
+        comparison: 'all',
+        data: {
+          campaignId: {
+            data: campaign.id,
+            comparison: 'equal',
+          },
+          status: {
+            data: 'SHARED',
+            comparison: 'equal',
+          },
+        },
+      },
+    ],
+  });
+
   const combinix2 = databaseBuilder.factory.buildCombinedCourse({
     name: 'Combinix 2',
     code: 'COMBINIX2',
@@ -287,6 +329,18 @@ function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
   });
   databaseBuilder.factory.buildOrganizationLearnerParticipation({
     combinedCourseId: combinix2.id,
+    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    organizationLearnerId: bernardLearner.id,
+    status: OrganizationLearnerParticipationStatuses.STARTED,
+  });
+  databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    combinedCourseId: combinix3.id,
+    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    organizationLearnerId: bernardLearner.id,
+    status: OrganizationLearnerParticipationStatuses.STARTED,
+  });
+  databaseBuilder.factory.buildOrganizationLearnerParticipation({
+    combinedCourseId: combinix4.id,
     type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     organizationLearnerId: bernardLearner.id,
     status: OrganizationLearnerParticipationStatuses.STARTED,
