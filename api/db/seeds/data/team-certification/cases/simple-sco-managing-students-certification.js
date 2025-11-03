@@ -15,6 +15,7 @@ import {
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
 import { usecases as teamUsecases } from '../../../../../src/team/domain/usecases/index.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import { PUBLISHED_SCO_SESSION, SCO_CERTIFICATION_CENTER_ID, STARTED_SCO_SESSION } from '../shared/constants.js';
 import addSession from '../tools/add-session.js';
@@ -35,6 +36,7 @@ export class ScoManagingStudent {
   }
 
   async create() {
+    await this.#initCertificationReferentials();
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
     const organizationLearners = await this.#addCertifiableUsers({ organization });
@@ -75,6 +77,12 @@ export class ScoManagingStudent {
       sessionId: PUBLISHED_SCO_SESSION,
       candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 550,
+    });
+  }
+
+  async #initCertificationReferentials() {
+    await CommonCertificationVersions.initCoreVersions({
+      databaseBuilder: this.databaseBuilder,
     });
   }
 

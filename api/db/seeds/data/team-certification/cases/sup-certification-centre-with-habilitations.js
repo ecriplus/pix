@@ -18,6 +18,7 @@ import {
   PIX_EDU_1ER_DEGRE_COMPLEMENTARY_CERTIFICATION_ID,
 } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import {
   STARTED_PIX_DROIT_CERTIFICATION_SESSION,
@@ -40,6 +41,8 @@ export class SupWithHabilitationsSeed {
   }
 
   async create() {
+    await this.#initCertificationReferentials();
+
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter, certificationCenterMember } = await this.#addCertificationCenter({
       organization,
@@ -97,6 +100,20 @@ export class SupWithHabilitationsSeed {
         }),
       ),
     );
+  }
+
+  async #initCertificationReferentials() {
+    await CommonCertificationVersions.initCoreVersions({
+      databaseBuilder: this.databaseBuilder,
+    });
+
+    await CommonCertificationVersions.initPixPlusDroitVersion({
+      databaseBuilder: this.databaseBuilder,
+    });
+
+    await CommonCertificationVersions.initPixPlusEdu1erDegreVersion({
+      databaseBuilder: this.databaseBuilder,
+    });
   }
 
   async #addOrganization() {

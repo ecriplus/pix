@@ -8,6 +8,8 @@ import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-
 
 /**
  * @property {{ expiredVersionId: string, currentVersionId: string }} coreVersion
+ * @property {{ currentVersionId: string }} pixPlusDroitVersion
+ * @property {{ currentVersionId: string }} pixPlusEdu1erDegreVersion
  */
 export class CommonCertificationVersions {
   /**
@@ -16,6 +18,64 @@ export class CommonCertificationVersions {
    */
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<void>}
+   */
+  static async initCoreVersions({ databaseBuilder }) {
+    if (!this.coreVersion) {
+      this.coreVersion = {};
+
+      this.coreVersion.expiredVersionId = await this.#createExpiredCoreVersion({
+        databaseBuilder,
+      });
+
+      const coreFrameworkName = 'Pix';
+      this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+        databaseBuilder,
+        fromLcmsFrameworkName: coreFrameworkName,
+        toFrameworkScope: Frameworks.CORE,
+      });
+    }
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<void>}
+   */
+  static async initPixPlusDroitVersion({ databaseBuilder }) {
+    if (!this.pixPlusDroitVersion) {
+      this.pixPlusDroitVersion = {};
+
+      const pixPlusDroitFrameworkName = 'Droit';
+      this.pixPlusDroitVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+        databaseBuilder,
+        fromLcmsFrameworkName: pixPlusDroitFrameworkName,
+        toFrameworkScope: Frameworks.PIX_PLUS_DROIT,
+      });
+    }
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<void>}
+   */
+  static async initPixPlusEdu1erDegreVersion({ databaseBuilder }) {
+    if (!this.pixPlusEdu1erDegreVersion) {
+      this.pixPlusEdu1erDegreVersion = {};
+
+      const pixPlusEdu1erDegreFrameworkName = 'Edu';
+      this.pixPlusEdu1erDegreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+        databaseBuilder,
+        fromLcmsFrameworkName: pixPlusEdu1erDegreFrameworkName,
+        toFrameworkScope: Frameworks.PIX_PLUS_EDU_1ER_DEGRE,
+      });
+    }
   }
 
   /**
@@ -142,28 +202,6 @@ export class CommonCertificationVersions {
     await databaseBuilder.commit();
 
     return currentVersionId;
-  }
-
-  /**
-   * @param {Object} params
-   * @param {Knex} params.databaseBuilder
-   * @returns {Promise<void>}
-   */
-  static async initCoreVersions({ databaseBuilder }) {
-    if (!this.coreVersion) {
-      this.coreVersion = {};
-
-      this.coreVersion.expiredVersionId = await this.#createExpiredCoreVersion({
-        databaseBuilder,
-      });
-
-      const coreFrameworkName = 'Pix';
-      this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
-        databaseBuilder,
-        fromLcmsFrameworkName: coreFrameworkName,
-        toFrameworkScope: Frameworks.CORE,
-      });
-    }
   }
 }
 

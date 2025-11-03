@@ -21,6 +21,7 @@ import {
   CLEA_V2_TARGET_PROFILE_ID,
 } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import {
   CLEA_CERTIFICATION_CENTER_ID,
@@ -46,6 +47,7 @@ export class CleaV3Seed {
   }
 
   async create() {
+    await this.#initCertificationReferentials();
     const { organization, organizationMember } = await this.#addOrganization();
 
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({ organizationMember });
@@ -86,6 +88,12 @@ export class CleaV3Seed {
       sessionId: PUBLISHED_DOUBLE_CERTIFICATION_CLEA_SESSION,
       candidatesIds: candidatesToPublish.map((candidate) => candidate.id),
       pixScoreTarget: 350,
+    });
+  }
+
+  async #initCertificationReferentials() {
+    await CommonCertificationVersions.initCoreVersions({
+      databaseBuilder: this.databaseBuilder,
     });
   }
 
