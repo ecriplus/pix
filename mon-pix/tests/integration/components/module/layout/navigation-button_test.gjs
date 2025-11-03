@@ -1,9 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { triggerEvent } from '@ember/test-helpers';
+import { click, triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import NavigationButton from 'mon-pix/components/module/layout/navigation-button';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
@@ -199,7 +200,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       this.owner.register('service:media', MediaServiceStub);
     });
 
-    test('should display a link with an icon', async function (assert) {
+    test('should display a button with an icon', async function (assert) {
       // given
       const type = 'question-yourself';
       const section = {
@@ -214,7 +215,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       );
 
       // then
-      assert.dom(screen.getByRole('link', { href: '#question-yourself' })).exists();
+      assert.dom(screen.getByRole('button', { href: '#question-yourself' })).exists();
     });
 
     module('when isCurrentSection and isPastSection arguments are false', function () {
@@ -232,7 +233,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         );
 
         // then
-        assert.dom(screen.getByRole('link')).hasAria('disabled', 'true');
+        assert.dom(screen.getByRole('button')).hasAria('disabled', 'true');
       });
     });
 
@@ -251,7 +252,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         );
 
         // then
-        assert.dom(screen.getByRole('link')).hasAria('disabled', 'false');
+        assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
       });
     });
 
@@ -270,7 +271,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         );
 
         // then
-        assert.dom(screen.getByRole('link')).hasAria('disabled', 'false');
+        assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
       });
     });
 
@@ -293,8 +294,60 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
       // then
       assert
-        .dom(screen.getByRole('link', { name: t('pages.modulix.section.question-yourself') }))
+        .dom(screen.getByRole('button', { name: t('pages.modulix.section.question-yourself') }))
         .hasAria('current', 'true');
+    });
+  });
+
+  module('when user click on navigation button', function () {
+    test('should call focusAndScroll service', async function (assert) {
+      // given
+      const section = {
+        type: 'question-yourself',
+      };
+      const focusAndScroll = sinon.stub();
+      class ModulixAutoScrollService extends Service {
+        focusAndScroll = focusAndScroll;
+      }
+      this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+
+      // when
+      const screen = await render(
+        <template>
+          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{true}} />
+        </template>,
+      );
+      await click(screen.getByRole('button', { name: 'Se questionner' }));
+
+      // then
+      sinon.assert.called(focusAndScroll);
+      assert.ok(true);
+    });
+  });
+
+  module('when user click on a disabled navigation button', function () {
+    test('should not call focusAndScroll service', async function (assert) {
+      // given
+      const section = {
+        type: 'question-yourself',
+      };
+      const focusAndScroll = sinon.stub();
+      class ModulixAutoScrollService extends Service {
+        focusAndScroll = focusAndScroll;
+      }
+      this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+
+      // when
+      const screen = await render(
+        <template>
+          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+        </template>,
+      );
+      await click(screen.getByRole('button', { name: 'Se questionner' }));
+
+      // then
+      sinon.assert.notCalled(focusAndScroll);
+      assert.ok(true);
     });
   });
 });

@@ -1,7 +1,6 @@
 import onEscapeAction from '@1024pix/pix-ui/addon/modifiers/on-escape-action';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixNavigationButton from '@1024pix/pix-ui/components/pix-navigation-button';
-import { concat } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -12,6 +11,7 @@ import { SECTION_TITLE_ICONS } from 'mon-pix/models/section';
 export default class ModulixNavigationButton extends Component {
   @service intl;
   @service media;
+  @service modulixAutoScroll;
 
   @tracked isTooltipVisible = false;
 
@@ -48,7 +48,15 @@ export default class ModulixNavigationButton extends Component {
   }
 
   @action
-  dummyFunction() {}
+  scrollToSection() {
+    if (this.isDisabled) {
+      return;
+    }
+
+    const htmlElement = document.querySelector(`#section_${this.args.section.type}`);
+
+    this.modulixAutoScroll.focusAndScroll(htmlElement);
+  }
 
   @action
   showTooltip() {
@@ -75,7 +83,7 @@ export default class ModulixNavigationButton extends Component {
     {{#if this.media.isMobile}}
       <PixNavigationButton
         class="module-navigation-mobile-button module-navigation-mobile-button{{this.buttonClass}}"
-        href={{concat "#section_" @section.type}}
+        href={{this.scrollToSection}}
         @icon={{this.sectionTitleIcon @section.type}}
         aria-disabled="{{this.isDisabled}}"
         aria-current="{{this.isCurrentSection}}"
@@ -92,7 +100,7 @@ export default class ModulixNavigationButton extends Component {
         <PixIconButton
           class="module-navigation-button module-navigation-button{{this.buttonClass}}"
           @ariaLabel={{this.sectionTitle @section.type}}
-          @triggerAction={{this.dummyFunction}}
+          @triggerAction={{this.scrollToSection}}
           @iconName={{this.sectionTitleIcon @section.type}}
           @isDisabled={{this.isDisabled}}
           aria-current="{{this.isCurrentSection}}"
