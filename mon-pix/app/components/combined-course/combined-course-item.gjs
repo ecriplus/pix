@@ -43,8 +43,16 @@ const Content = <template>
       <div
         class="combined-course-item__indicator--completed
           {{if @hasYellowBorder 'combined-course-item__indicator--yellow'}}"
+        aria-label={{if
+          @isCampaignType
+          (t "pages.combined-courses.items.aria-label-completed-campaign" value=@masteryRate)
+          undefined
+        }}
       >
-        <span>{{t "pages.combined-courses.items.completed"}}</span>
+        {{#if @isCampaignType}}
+          <span>{{t "common.display.percentage" value=@masteryRate}}</span>
+        {{/if}}
+        <span class="combined-course-item__completion-field">{{t "pages.combined-courses.items.completed"}}</span>
         <PixIcon
           @name="checkCircle"
           @plainIcon={{true}}
@@ -52,7 +60,6 @@ const Content = <template>
           @ariaHidden={{true}}
         />
       </div>
-
     {{/if}}
     {{#if (has-block "blockEnd")}}
       {{yield to="blockEnd"}}
@@ -61,10 +68,11 @@ const Content = <template>
 </template>;
 
 const Duration = <template>
-  <PixIcon @name="acute" class="combined-course-item__duration__icon" /><span>{{t
-      "pages.combined-courses.items.approximatelySymbol"
-    }}{{@item.duration}}
-    {{t "pages.combined-courses.items.durationUnit"}}</span>
+  <PixIcon @name="acute" class="combined-course-item__duration__icon" @ariaHidden={{true}} />
+  <span aria-label={{t "pages.combined-courses.items.aria-label-duration" duration=@item.duration}}>{{t
+      "pages.combined-courses.items.duration"
+      duration=@item.duration
+    }}</span>
 </template>;
 
 function hasWhiteBackground(item) {
@@ -113,7 +121,9 @@ function hasWhiteBackground(item) {
         <Content
           @title={{@item.title}}
           @isCompleted={{@item.isCompleted}}
+          @masteryRate={{@item.masteryRate}}
           @iconUrl={{@item.iconUrl}}
+          @isCampaignType={{eq @item.type "CAMPAIGN"}}
           @displayDuration={{eq @item.type "MODULE"}}
           @hasWhiteBackground={{hasWhiteBackground @item}}
           @hasYellowBorder={{and (eq @item.type "MODULE") @isCombinedCourseCompleted}}

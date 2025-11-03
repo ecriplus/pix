@@ -10,12 +10,13 @@ export class OrganizationLearnerWithParticipations {
       type: organization.type,
     };
     this.campaignParticipations = campaignParticipations.map(
-      ({ id, targetProfileId, status, campaignName, campaignId }) => ({
+      ({ id, targetProfileId, status, campaignName, campaignId, masteryRate }) => ({
         id,
         targetProfileId,
         status,
         campaignName,
         campaignId,
+        masteryRate,
       }),
     );
   }

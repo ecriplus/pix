@@ -139,12 +139,13 @@ export class CombinedCourseDetails extends CombinedCourse {
     return questForUser.isSuccessful(dataForQuest);
   }
 
-  #createCampaignCombinedCourseItem(campaign, isCompleted, isLocked) {
+  #createCampaignCombinedCourseItem(campaign, isCompleted, isLocked, masteryRate) {
     return new CombinedCourseItem({
       id: campaign.id,
       reference: campaign.code,
       title: campaign.title,
       type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+      masteryRate: isCompleted ? masteryRate : null,
       isCompleted,
       isLocked,
     });
@@ -212,23 +213,32 @@ export class CombinedCourseDetails extends CombinedCourse {
   }) {
     this.items = [];
     const targetProfileIdsThatNeedAFormationItem = [];
+
     for (const requirement of this.quest.successRequirements) {
       const previousItem = this.items[this.items.length - 1];
       const isLocked = this.#isCombinedCourseItemLocked(previousItem);
+
       if (requirement.requirement_type === TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         const campaign = itemDetails.find(({ id }) => id === requirement.data.campaignId.data);
-
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
+
+        const associatedParticipation = dataForQuest?.campaignParticipations?.find(
+          (campaignParticipation) => (campaignParticipation.campaignId = requirement.data.campaignId.data),
+        );
 
         const doesCampaignRecommendModules =
           recommendableModuleIds.find((recommandableModule) => {
             if (!this.moduleIds.includes(recommandableModule.moduleId)) return false;
+
             return recommandableModule.targetProfileIds.includes(campaign.targetProfileId);
           }) ?? [];
+
         if (doesCampaignRecommendModules && !isCompleted) {
           targetProfileIdsThatNeedAFormationItem.push(campaign.targetProfileId);
         }
-        this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted, isLocked));
+
+        const masteryRate = associatedParticipation?.masteryRate ?? null;
+        this.items.push(this.#createCampaignCombinedCourseItem(campaign, isCompleted, isLocked, masteryRate));
       } else if (requirement.requirement_type === TYPES.OBJECT.PASSAGES) {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
         const module = itemDetails.find(({ id }) => id === requirement.data.moduleId.data);

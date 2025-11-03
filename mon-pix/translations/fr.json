@@ -95,6 +95,9 @@
       "title": "Notre politique de confidentialité a évolué. Nous vous invitons à en prendre connaissance : ",
       "url-label": "Politique de protection des données."
     },
+    "display": {
+      "percentage": "{value, number, ::percent}"
+    },
     "error": "Une erreur est survenue. Veuillez recommencer ou contacter le support.",
     "form": {
       "error": "erreur",
@@ -1215,9 +1218,10 @@
         "step": "Étape {stepNumber}"
       },
       "items": {
-        "approximatelySymbol": "≈",
+        "aria-label-completed-campaign": "Cet élément est complété avec un taux de réussite de {value, number, ::percent}",
+        "aria-label-duration": "Durée estimée : {duration} minutes",
         "completed": "Complété !",
-        "durationUnit": "min",
+        "duration": "≈ {duration} min",
         "formation": {
           "description": "Terminez votre diagnostic pour débloquer un programme de modules adapté à votre résultat !",
           "title": "Programme personnalisé de modules"

@@ -35,6 +35,9 @@
     "description": "Pix is een online platform voor het beoordelen en certificeren van de digitale vaardigheden van Franstalige burgers (scholieren, studenten, schoolverlaters, werkzoekenden, senioren)."
   },
   "common": {
+    "display": {
+      "percentage": "{value, number, ::percent}"
+    },
     "actions": {
       "back": "Terug",
       "cancel": "Annuleer",
@@ -1227,10 +1230,11 @@
           "title": "Gepersonaliseerd programma met modules",
           "description": "Voltooi uw diagnose om een moduleprogramma te ontgrendelen dat is afgestemd op uw resultaat!"
         },
+        "aria-label-completed-campaign": "Dit element wordt aangevuld met een slagingspercentage van {value, number, ::percent}",
         "completed": "Voltooid!",
         "tagText": "U bent er nu!",
-        "durationUnit": "min",
-        "approximatelySymbol": "≈"
+        "duration": "≈ {duration} min",
+        "aria-label-duration": "Geschatte duur: {duration} minuten"
       }
     },
     "comparison-window": {
