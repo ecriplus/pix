@@ -14,6 +14,7 @@ import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { qrocmElementSchema } from './element/qrocm-schema.js';
 import { separatorElementSchema } from './element/separator-schema.js';
+import { shortVideoElementSchema } from './element/short-video-schema.js';
 import { textElementSchema } from './element/text-schema.js';
 import { videoElementSchema } from './element/video-schema.js';
 import { htmlNotAllowedSchema, htmlSchema, uuidSchema } from './utils.js';
@@ -33,6 +34,7 @@ const ALLOWED_ELEMENTS_SCHEMA = [
   { is: 'qcm', then: qcmElementSchema },
   { is: 'qrocm', then: qrocmElementSchema },
   { is: 'separator', then: separatorElementSchema },
+  { is: 'short-video', then: shortVideoElementSchema },
   { is: 'text', then: textElementSchema },
   { is: 'video', then: videoElementSchema },
 ];
