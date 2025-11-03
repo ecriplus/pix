@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { triggerEvent } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import NavigationButton from 'mon-pix/components/module/layout/navigation-button';
 import { module, test } from 'qunit';
@@ -82,6 +83,109 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
+      });
+    });
+
+    module('when a button is hovered', function () {
+      test('should display tooltip', async function (assert) {
+        // given
+        const section = {
+          id: 'section1',
+          type: 'question-yourself',
+        };
+
+        class MediaServiceStub extends Service {
+          isMobile = false;
+        }
+        this.owner.register('service:media', MediaServiceStub);
+
+        //  when
+        await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+        // then
+        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        await triggerEvent('.navigation-tooltip', 'mouseenter');
+        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+      });
+
+      module('then when a button is left', function () {
+        test('should not display tooltip anymore', async function (assert) {
+          // given
+          const section = {
+            id: 'section1',
+            type: 'question-yourself',
+            grains: [
+              { title: 'Grain title', type: 'discovery', id: '123-abc' },
+              { title: 'Grain title', type: 'activity', id: '234-abc' },
+            ],
+          };
+          class MediaServiceStub extends Service {
+            isMobile = false;
+          }
+          this.owner.register('service:media', MediaServiceStub);
+
+          //  when
+          await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+          // then
+          await triggerEvent('.navigation-tooltip', 'mouseenter');
+          assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+          await triggerEvent('.navigation-tooltip', 'mouseleave');
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
+      });
+    });
+
+    module('when a button is focused', function () {
+      test('should display tooltip', async function (assert) {
+        // given
+        const section = {
+          id: 'section1',
+          type: 'question-yourself',
+          grains: [
+            { title: 'Grain title', type: 'discovery', id: '123-abc' },
+            { title: 'Grain title', type: 'activity', id: '234-abc' },
+          ],
+        };
+        class MediaServiceStub extends Service {
+          isMobile = false;
+        }
+        this.owner.register('service:media', MediaServiceStub);
+
+        //  when
+        await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+        // then
+        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        await triggerEvent('.navigation-tooltip', 'focusin');
+        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+      });
+
+      module('then when a button is not focused anymore', function () {
+        test('should not display tooltip anymore', async function (assert) {
+          // given
+          const section = {
+            id: 'section1',
+            type: 'question-yourself',
+            grains: [
+              { title: 'Grain title', type: 'discovery', id: '123-abc' },
+              { title: 'Grain title', type: 'activity', id: '234-abc' },
+            ],
+          };
+          class MediaServiceStub extends Service {
+            isMobile = false;
+          }
+          this.owner.register('service:media', MediaServiceStub);
+
+          //  when
+          await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+          // then
+          await triggerEvent('.navigation-tooltip', 'focusin');
+          assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+          await triggerEvent('.navigation-tooltip', 'focusout');
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
       });
     });
   });
