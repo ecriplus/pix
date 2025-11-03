@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.247.0](https://github.com/1024pix/pix/compare/v5.246.0...v5.247.0) (2025-11-03)
+
+### :rocket: Amélioration
+
+- [#14041](https://github.com/1024pix/pix/pull/14041) Afficher le score de la campagne dans la page présentation du parcours (PIX-20060). 
+- [#14031](https://github.com/1024pix/pix/pull/14031) Ajouter une page de loader apres un diagnostic (PIX-18349)  
+- [#14009](https://github.com/1024pix/pix/pull/14009) WIP IAinfox_NOV-versionlight 
+
+### :building_construction: Tech
+
+- [#14045](https://github.com/1024pix/pix/pull/14045) Corriger un test flaky sur le détachement d'orga fille (PIX-20271) 
+- [#14047](https://github.com/1024pix/pix/pull/14047) Permettre au bouton continuer sur la page des modules de rediriger vers l'application en utilisant le router interne (PIX-20273). 
+- [#14039](https://github.com/1024pix/pix/pull/14039) Retirer la quote lors de la génération du JSON lorsque l'on utilise l'id du profile cible (PIX-20013).
+
 # [5.246.0](https://github.com/1024pix/pix/compare/v5.245.0...v5.246.0) (2025-10-31)
 
 ### :rocket: Amélioration
