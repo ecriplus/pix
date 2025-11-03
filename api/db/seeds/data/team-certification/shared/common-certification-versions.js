@@ -1,28 +1,49 @@
+import dayjs from 'dayjs';
+import _ from 'lodash';
+
 import { usecases as configurationUsecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { usecases as learningContentUsecases } from '../../../../../src/learning-content/domain/usecases/index.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 
+/**
+ * @property {{ expiredVersionId: string, currentVersionId: string }} coreVersion
+ */
 export class CommonCertificationVersions {
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   */
   constructor({ databaseBuilder }) {
     this.databaseBuilder = databaseBuilder;
   }
 
+  /**
+   * @param {Object} params
+   * @param {string} params.frameworkName
+   * @returns {Promise<Array<number>>}
+   */
   static async #getTubeIdsByFramework({ frameworkName }) {
     const areas = await learningContentUsecases.getFrameworkAreas({
       frameworkName,
       locale: FRENCH_SPOKEN,
     });
 
-    return areas.flatMap((area) =>
+    const allTubeIds = areas.flatMap((area) =>
       area.competences.flatMap((competence) =>
         competence.thematics.flatMap((thematic) => thematic.tubes.map((tube) => tube.id)),
       ),
     );
+
+    return _.sampleSize(allTubeIds, 100);
   }
 
   /**
    * This does not exist as a feature as of today (current feature still using certification-configurations table)
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @param {number} params.versionId
+   * @returns {Promise<void>}
    */
   static async #forceConfigurations({ databaseBuilder, versionId }) {
     await databaseBuilder
@@ -36,26 +57,111 @@ export class CommonCertificationVersions {
     await databaseBuilder.commit();
   }
 
+  /**
+   * Sadly the usecase calibrateFrameworkVersion has a dependency on the datamart
+   * That would make it very hard to use for seeding
+   */
+  static async #simulateCalibration({ databaseBuilder, versionId }) {
+    const algoConfiguration = await databaseBuilder
+      .knex('certification_versions')
+      .select('challengesConfiguration', 'globalScoringConfiguration')
+      .where('id', versionId)
+      .first();
+
+    const challengeIds = await databaseBuilder
+      .knex('certification-frameworks-challenges')
+      .select('challengeId')
+      .where('versionId', versionId)
+      .pluck('challengeId');
+
+    const { min, max } = this.#getCapacityBounds(algoConfiguration.globalScoringConfiguration);
+
+    for (const challengeId of challengeIds) {
+      const difficulty = Math.random() * (max - min) + min;
+      await databaseBuilder.knex('certification-frameworks-challenges').where('challengeId', challengeId).update({
+        discriminant: algoConfiguration.challengesConfiguration.variationPercent,
+        difficulty,
+      });
+    }
+  }
+
+  static #getCapacityBounds(globalScoringConfiguration) {
+    const meshLevels = globalScoringConfiguration.map((config) => config.meshLevel);
+    const minMeshLevel = Math.min(...meshLevels);
+    const maxMeshLevel = Math.max(...meshLevels);
+
+    const minBound = globalScoringConfiguration.find((config) => config.meshLevel === minMeshLevel).bounds.min;
+    const maxBound = globalScoringConfiguration.find((config) => config.meshLevel === maxMeshLevel).bounds.max;
+
+    return { min: minBound, max: maxBound };
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<number>}
+   */
+  static async #createExpiredCoreVersion({ databaseBuilder }) {
+    const expiredVersionId = await configurationUsecases.createCertificationVersion({
+      scope: Frameworks.CORE,
+      tubeIds: [],
+    });
+
+    // Allows for an easier identification during tests, and represents a "more real" versioning
+    await databaseBuilder
+      .knex('certification_versions')
+      .where('id', expiredVersionId)
+      .update({
+        startDate: dayjs().subtract(1, 'year').toDate(),
+      });
+
+    await databaseBuilder.commit();
+
+    return expiredVersionId;
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<number>}
+   */
+  static async #createActiveFrameworkVersion({ databaseBuilder, fromLcmsFrameworkName, toFrameworkScope }) {
+    const tubeIds = await this.#getTubeIdsByFramework({ frameworkName: fromLcmsFrameworkName });
+    const currentVersionId = await configurationUsecases.createCertificationVersion({
+      scope: toFrameworkScope,
+      tubeIds,
+    });
+
+    await this.#forceConfigurations({
+      databaseBuilder,
+      versionId: currentVersionId,
+    });
+
+    await this.#simulateCalibration({ databaseBuilder, versionId: currentVersionId });
+
+    await databaseBuilder.commit();
+
+    return currentVersionId;
+  }
+
+  /**
+   * @param {Object} params
+   * @param {Knex} params.databaseBuilder
+   * @returns {Promise<void>}
+   */
   static async initCoreVersions({ databaseBuilder }) {
     if (!this.coreVersion) {
       this.coreVersion = {};
 
-      // Having an expired version alows to verify that versioning works
-      this.coreVersion.expiredVersionId = await configurationUsecases.createCertificationVersion({
-        scope: Frameworks.CORE,
-        tubeIds: [],
+      this.coreVersion.expiredVersionId = await this.#createExpiredCoreVersion({
+        databaseBuilder,
       });
 
       const coreFrameworkName = 'Pix';
-      const tubeIds = await this.#getTubeIdsByFramework({ frameworkName: coreFrameworkName });
-      this.coreVersion.activeVersionId = await configurationUsecases.createCertificationVersion({
-        scope: Frameworks.CORE,
-        tubeIds,
-      });
-
-      await this.#forceConfigurations({
+      this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
         databaseBuilder,
-        versionId: this.coreVersion.activeVersionId,
+        fromLcmsFrameworkName: coreFrameworkName,
+        toFrameworkScope: Frameworks.CORE,
       });
     }
   }
