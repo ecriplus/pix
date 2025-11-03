@@ -10,10 +10,10 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     beforeEach(async function () {
       // given
-      session = databaseBuilder.factory.buildSession({});
+      const finalizedAt = new Date();
+      session = databaseBuilder.factory.buildSession({ finalizedAt });
       expectedSessionValues = {
         invigilatorPassword: session.invigilatorPassword,
-        finalizedAt: session.finalizedAt,
       };
       await databaseBuilder.commit();
     });

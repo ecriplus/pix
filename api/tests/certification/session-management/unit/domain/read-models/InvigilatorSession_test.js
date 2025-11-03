@@ -2,27 +2,15 @@ import { InvigilatorSession } from '../../../../../../src/certification/session-
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Session | Domain | Models | InvigilatorSession', function () {
-  context('#isAccessible', function () {
-    it(`returns true when the session doesn't have finalized date`, function () {
-      // given
+  context('#isNotAccessible', function () {
+    it(`returns false when the session doesn't have finalized date`, function () {
       const invigilatorSession = new InvigilatorSession({ finalizedAt: null });
-
-      // when
-      const isAccessible = invigilatorSession.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.true;
+      expect(invigilatorSession.isNotAccessible).to.be.false;
     });
 
-    it('returns false when the session has finalized date', function () {
-      // given
+    it('returns true when the session has finalized date', function () {
       const invigilatorSession = new InvigilatorSession({ finalizedAt: new Date() });
-
-      // when
-      const isAccessible = invigilatorSession.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.false;
+      expect(invigilatorSession.isNotAccessible).to.be.true;
     });
   });
 

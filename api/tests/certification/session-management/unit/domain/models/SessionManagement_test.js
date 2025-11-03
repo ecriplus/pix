@@ -144,22 +144,22 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
   context('.isNotAccessible', function () {
     it('returns true when the session is created', function () {
       const session = domainBuilder.certification.sessionManagement.buildSession.created();
-      expect(session.isNotAccessible).to.be.true;
+      expect(session.isAccessible()).to.be.true;
     });
 
     it('returns false when the session is finalized', function () {
       const session = domainBuilder.certification.sessionManagement.buildSession.finalized();
-      expect(session.isNotAccessible).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is in process', function () {
       const session = domainBuilder.certification.sessionManagement.buildSession.inProcess();
-      expect(session.isNotAccessible).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is processed', function () {
       const session = domainBuilder.certification.sessionManagement.buildSession.processed();
-      expect(session.isNotAccessible).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
   });
 });
