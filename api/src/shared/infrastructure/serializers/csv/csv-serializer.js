@@ -121,6 +121,7 @@ async function deserializeForOrganizationsImport(file) {
     'DPOLastName',
     'DPOEmail',
     'administrationTeamId',
+    'parentOrganizationId',
   ];
   const batchOrganizationOptionsWithHeader = {
     skipEmptyLines: true,
@@ -147,6 +148,10 @@ async function deserializeForOrganizationsImport(file) {
         if (columnName === 'emailInvitations' || columnName === 'emailForSCOActivation' || columnName === 'DPOEmail') {
           value = value.replaceAll(' ', '').toLowerCase();
         }
+
+        if (columnName === 'parentOrganizationId') {
+          value = parseInt(value, 10);
+        }
       } else {
         if (columnName === 'credit') {
           value = 0;
@@ -155,7 +160,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'identityProviderForCampaigns' ||
           columnName === 'DPOFirstName' ||
           columnName === 'DPOLastName' ||
-          columnName === 'DPOEmail'
+          columnName === 'DPOEmail' ||
+          columnName === 'parentOrganizationId'
         ) {
           value = null;
         }
