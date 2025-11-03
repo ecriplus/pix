@@ -8,7 +8,7 @@ import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-organization-id', function () {
-  it('should return combined courses for an organization with their participations', async function () {
+  it('should return combined courses for an organization with their participations and pagination metadata', async function () {
     // given
     const { id: organizationId } = databaseBuilder.factory.buildOrganization();
     const { id: combinedCourseId1 } = databaseBuilder.factory.buildCombinedCourse({
@@ -63,12 +63,18 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
-    expect(result).to.have.lengthOf(2);
-    expect(result[0]).to.be.an.instanceof(CombinedCourse);
-    expect(result[1]).to.be.an.instanceof(CombinedCourse);
+    expect(result.combinedCourses).to.have.lengthOf(2);
+    expect(result.combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
+    expect(result.combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
+    expect(result.meta).to.deep.include({
+      page: 1,
+      pageSize: 10,
+      rowCount: 2,
+      pageCount: 1,
+    });
 
-    const firstCourse = result.find((course) => course.id === combinedCourseId1);
-    const secondCourse = result.find((course) => course.id === combinedCourseId2);
+    const firstCourse = result.combinedCourses.find((course) => course.id === combinedCourseId1);
+    const secondCourse = result.combinedCourses.find((course) => course.id === combinedCourseId2);
 
     expect(firstCourse.code).to.equal('COURSE1');
     expect(firstCourse.name).to.equal('First Combined Course');
@@ -102,11 +108,11 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
-    expect(result).to.have.lengthOf(1);
-    expect(result[0]).to.be.an.instanceof(CombinedCourse);
-    expect(result[0].id).to.equal(combinedCourseId1);
-    expect(result[0].code).to.equal('COURSE3');
-    expect(result[0].participations).to.deep.equal([]);
+    expect(result.combinedCourses).to.have.lengthOf(1);
+    expect(result.combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
+    expect(result.combinedCourses[0].id).to.equal(combinedCourseId1);
+    expect(result.combinedCourses[0].code).to.equal('COURSE3');
+    expect(result.combinedCourses[0].participations).to.deep.equal([]);
   });
 
   it('should return empty array when no combined courses exist for organization', async function () {
@@ -118,7 +124,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
-    expect(result).to.deep.equal([]);
+    expect(result.combinedCourses).to.deep.equal([]);
   });
 
   it('should not return combined courses from other organizations', async function () {
@@ -141,8 +147,8 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId: organizationId1 });
 
     // then
-    expect(result).to.have.lengthOf(1);
-    expect(result[0].code).to.equal('ORG1COURSE');
+    expect(result.combinedCourses).to.have.lengthOf(1);
+    expect(result.combinedCourses[0].code).to.equal('ORG1COURSE');
   });
 
   it('should not include participations from other combined courses', async function () {
@@ -187,8 +193,8 @@ describe('Integration | Quest | Domain | UseCases | get-combined-courses-by-orga
     const result = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
 
     // then
-    const firstCourse = result.find((course) => course.id === combinedCourseId1);
-    const secondCourse = result.find((course) => course.id === combinedCourseId2);
+    const firstCourse = result.combinedCourses.find((course) => course.id === combinedCourseId1);
+    const secondCourse = result.combinedCourses.find((course) => course.id === combinedCourseId2);
 
     expect(firstCourse.participations).to.have.lengthOf(1);
     expect(firstCourse.participations[0].firstName).to.equal('Alice');

@@ -50,6 +50,12 @@ const register = async function (server) {
           params: Joi.object({
             organizationId: identifiersType.organizationId,
           }),
+          query: Joi.object({
+            page: {
+              number: Joi.number().integer().empty('').default(1),
+              size: Joi.number().integer().empty('').default(25),
+            },
+          }),
         },
         notes: ["- Récupération de la liste des parcours apprenants liés a l'organisation"],
         tags: ['api', 'quest', 'combined-course'],

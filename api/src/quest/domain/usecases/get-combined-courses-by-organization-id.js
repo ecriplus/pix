@@ -1,8 +1,12 @@
-export default async ({ organizationId, combinedCourseRepository, combinedCourseParticipationRepository }) => {
-  const combinedCourses = await combinedCourseRepository.findByOrganizationId({ organizationId });
+export default async ({ organizationId, page, combinedCourseRepository, combinedCourseParticipationRepository }) => {
+  const { combinedCourses, meta } = await combinedCourseRepository.findByOrganizationId({
+    organizationId,
+    page: page?.number,
+    size: page?.size,
+  });
 
   if (combinedCourses.length === 0) {
-    return [];
+    return { combinedCourses: [], meta };
   }
 
   const combinedCourseIds = combinedCourses.map((combinedCourse) => combinedCourse.id);
@@ -12,12 +16,14 @@ export default async ({ organizationId, combinedCourseRepository, combinedCourse
     combinedCourseParticipationRepository,
   });
 
-  return combinedCourses.map((combinedCourse) => {
+  const combinedCoursesWithParticipations = combinedCourses.map((combinedCourse) => {
     combinedCourse.participations = allCombinedCourseParticipations.filter(
       (participation) => participation.combinedCourseId === combinedCourse.id,
     );
     return combinedCourse;
   });
+
+  return { combinedCourses: combinedCoursesWithParticipations, meta };
 };
 
 async function getAllCombinedCourseParticipations({ combinedCourseIds, combinedCourseParticipationRepository }) {

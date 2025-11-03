@@ -27,9 +27,10 @@ const getById = async (request, _, dependencies = { combinedCourseDetailsSeriali
 
 const getByOrganizationId = async (request, _, dependencies = { combinedCourseListSerializer }) => {
   const organizationId = request.params.organizationId;
-  const combinedCourses = await usecases.getCombinedCoursesByOrganizationId({ organizationId });
+  const page = request.query.page;
+  const { combinedCourses, meta } = await usecases.getCombinedCoursesByOrganizationId({ organizationId, page });
 
-  return dependencies.combinedCourseListSerializer.serialize(combinedCourses);
+  return dependencies.combinedCourseListSerializer.serialize(combinedCourses, meta);
 };
 
 const getStatistics = async (request, _, dependencies = { combinedCourseStatisticsSerializer }) => {
