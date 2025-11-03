@@ -84,6 +84,8 @@ describe('Integration | API | Organization Learner With Participations', functio
               status: campaignParticipation.status,
               targetProfileId: campaign.targetProfileId,
               masteryRate: 0.6,
+              totalStagesCount: undefined,
+              validatedStagesCount: undefined,
             },
           ],
         },
