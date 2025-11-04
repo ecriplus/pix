@@ -41,8 +41,6 @@ export class SupWithHabilitationsSeed {
   }
 
   async create() {
-    await this.#initCertificationReferentials();
-
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter, certificationCenterMember } = await this.#addCertificationCenter({
       organization,
@@ -53,6 +51,7 @@ export class SupWithHabilitationsSeed {
     /**
      * Session Pix+Edu 1er degré with candidate ready to start his certification
      */
+    await this.#initCertificationReferentials();
     const sessionDroitReadyToStart = await this.#addReadyToStartSession({
       certificationCenterMember,
       certificationCenter,

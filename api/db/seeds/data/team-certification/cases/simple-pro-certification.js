@@ -36,8 +36,6 @@ export class ProSeed {
   }
 
   async create() {
-    await this.#initCertificationReferentials();
-
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter, certificationCenterMember } = await this.#addCertifCenter({
       organization,
@@ -48,6 +46,7 @@ export class ProSeed {
     /**
      * Session with candidat ready to start his certification
      */
+    await this.#initCertificationReferentials();
     const sessionReadyToStart = await this.#addReadyToStartSession({ certificationCenterMember, certificationCenter });
 
     await Promise.all(

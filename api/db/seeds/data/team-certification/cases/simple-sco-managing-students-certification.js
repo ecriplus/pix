@@ -36,7 +36,6 @@ export class ScoManagingStudent {
   }
 
   async create() {
-    await this.#initCertificationReferentials();
     const { organization, organizationMember } = await this.#addOrganization();
     const { certificationCenter } = await this.#addCertifCenter({ organization, organizationMember });
     const organizationLearners = await this.#addCertifiableUsers({ organization });
@@ -44,6 +43,7 @@ export class ScoManagingStudent {
     /**
      * Session with candidat ready to start his certification
      */
+    await this.#initCertificationReferentials();
     const sessionReadyToStart = await this.#addReadyToStartSession({
       certificationCenterMember: organizationMember,
       certificationCenter,

@@ -3,6 +3,7 @@
 # Possible personal data
 *.json
 *.csv
+*.BAK
 
 # compiled output
 **/dist

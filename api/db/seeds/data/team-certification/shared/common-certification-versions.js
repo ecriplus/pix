@@ -4,7 +4,9 @@ import _ from 'lodash';
 import { usecases as configurationUsecases } from '../../../../../src/certification/configuration/domain/usecases/index.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { usecases as learningContentUsecases } from '../../../../../src/learning-content/domain/usecases/index.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
+import { UnseedableError } from './UnseedableError.js';
 
 /**
  * @property {{ expiredVersionId: string, currentVersionId: string }} coreVersion
@@ -26,19 +28,27 @@ export class CommonCertificationVersions {
    * @returns {Promise<void>}
    */
   static async initCoreVersions({ databaseBuilder }) {
-    if (!this.coreVersion) {
-      this.coreVersion = {};
+    try {
+      if (!this.coreVersion) {
+        this.coreVersion = {};
 
-      this.coreVersion.expiredVersionId = await this.#createExpiredCoreVersion({
-        databaseBuilder,
-      });
+        this.coreVersion.expiredVersionId = await this.#createExpiredCoreVersion({
+          databaseBuilder,
+        });
 
-      const coreFrameworkName = 'Pix';
-      this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
-        databaseBuilder,
-        fromLcmsFrameworkName: coreFrameworkName,
-        toFrameworkScope: Frameworks.CORE,
-      });
+        const coreFrameworkName = 'Pix';
+        this.coreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+          databaseBuilder,
+          fromLcmsFrameworkName: coreFrameworkName,
+          toFrameworkScope: Frameworks.CORE,
+        });
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new UnseedableError('Could not find Pix referential', error);
+      }
+      this.coreVersion = null;
+      throw error;
     }
   }
 
@@ -48,15 +58,23 @@ export class CommonCertificationVersions {
    * @returns {Promise<void>}
    */
   static async initPixPlusDroitVersion({ databaseBuilder }) {
-    if (!this.pixPlusDroitVersion) {
-      this.pixPlusDroitVersion = {};
+    try {
+      if (!this.pixPlusDroitVersion) {
+        this.pixPlusDroitVersion = {};
 
-      const pixPlusDroitFrameworkName = 'Droit';
-      this.pixPlusDroitVersion.currentVersionId = await this.#createActiveFrameworkVersion({
-        databaseBuilder,
-        fromLcmsFrameworkName: pixPlusDroitFrameworkName,
-        toFrameworkScope: Frameworks.PIX_PLUS_DROIT,
-      });
+        const pixPlusDroitFrameworkName = 'Droit';
+        this.pixPlusDroitVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+          databaseBuilder,
+          fromLcmsFrameworkName: pixPlusDroitFrameworkName,
+          toFrameworkScope: Frameworks.PIX_PLUS_DROIT,
+        });
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new UnseedableError('Could not find Droit referential', error);
+      }
+      this.coreVersion = null;
+      throw error;
     }
   }
 
@@ -66,15 +84,23 @@ export class CommonCertificationVersions {
    * @returns {Promise<void>}
    */
   static async initPixPlusEdu1erDegreVersion({ databaseBuilder }) {
-    if (!this.pixPlusEdu1erDegreVersion) {
-      this.pixPlusEdu1erDegreVersion = {};
+    try {
+      if (!this.pixPlusEdu1erDegreVersion) {
+        this.pixPlusEdu1erDegreVersion = {};
 
-      const pixPlusEdu1erDegreFrameworkName = 'Edu';
-      this.pixPlusEdu1erDegreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
-        databaseBuilder,
-        fromLcmsFrameworkName: pixPlusEdu1erDegreFrameworkName,
-        toFrameworkScope: Frameworks.PIX_PLUS_EDU_1ER_DEGRE,
-      });
+        const pixPlusEdu1erDegreFrameworkName = 'Edu';
+        this.pixPlusEdu1erDegreVersion.currentVersionId = await this.#createActiveFrameworkVersion({
+          databaseBuilder,
+          fromLcmsFrameworkName: pixPlusEdu1erDegreFrameworkName,
+          toFrameworkScope: Frameworks.PIX_PLUS_EDU_1ER_DEGRE,
+        });
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new UnseedableError('Could not find Edu referential', error);
+      }
+      this.coreVersion = null;
+      throw error;
     }
   }
 
