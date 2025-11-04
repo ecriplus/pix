@@ -30,6 +30,8 @@ export class OidcAuthenticationService {
     {
       accessTokenLifespan = '48h',
       additionalRequiredProperties,
+      application,
+      applicationTld,
       claimsToStore,
       clientId,
       clientSecret,
@@ -53,6 +55,8 @@ export class OidcAuthenticationService {
   ) {
     this.accessTokenLifespanMs = ms(accessTokenLifespan);
     this.additionalRequiredProperties = additionalRequiredProperties;
+    this.application = application;
+    this.applicationTld = applicationTld;
     this.clientId = clientId;
     this.clientSecret = clientSecret;
     this.enabled = enabled;
