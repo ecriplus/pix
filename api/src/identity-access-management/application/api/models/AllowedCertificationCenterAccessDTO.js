@@ -3,22 +3,9 @@
  */
 export class AllowedCertificationCenterAccessDTO {
   /**
-   * @type {boolean}
+   * @param {Object} params - DTO properties
    */
-  isAccessBlockedUntilDate;
-
-  /**
-   * @type {string|null}
-   */
-  pixCertifBlockedAccessUntilDate;
-
-  /**
-   * @param {Object} params
-   * @param {boolean} params.isAccessBlockedUntilDate
-   * @param {string|null} params.pixCertifBlockedAccessUntilDate
-   */
-  constructor({ isAccessBlockedUntilDate, pixCertifBlockedAccessUntilDate }) {
-    this.isAccessBlockedUntilDate = !!isAccessBlockedUntilDate;
-    this.pixCertifBlockedAccessUntilDate = pixCertifBlockedAccessUntilDate;
+  constructor(params = {}) {
+    Object.assign(this, params);
   }
 }

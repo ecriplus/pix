@@ -15,10 +15,8 @@ export default class AllowedCertificationCenterAccess extends Model {
   @attr() isAccessBlockedLycee;
   @attr() isAccessBlockedAEFE;
   @attr() isAccessBlockedAgri;
-  @attr() isAccessBlockedUntilDate;
   @attr() relatedOrganizationTags;
   @attr() habilitations;
-  @attr() pixCertifBlockedAccessUntilDate;
   @attr() pixCertifScoBlockedAccessDateLycee;
   @attr() pixCertifScoBlockedAccessDateCollege;
 
@@ -40,11 +38,7 @@ export default class AllowedCertificationCenterAccess extends Model {
 
   get isAccessRestricted() {
     return (
-      this.isAccessBlockedUntilDate ||
-      this.isAccessBlockedCollege ||
-      this.isAccessBlockedLycee ||
-      this.isAccessBlockedAEFE ||
-      this.isAccessBlockedAgri
+      this.isAccessBlockedCollege || this.isAccessBlockedLycee || this.isAccessBlockedAEFE || this.isAccessBlockedAgri
     );
   }
 

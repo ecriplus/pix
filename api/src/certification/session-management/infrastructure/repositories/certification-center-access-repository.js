@@ -21,12 +21,7 @@ export const getCertificationCenterAccess = async ({ certificationCenterId, cert
 
 /**
  * @param {Object} params
- * @param {boolean} params.isAccessBlockedUntilDate
- * @param {string|null} params.pixCertifBlockedAccessUntilDate
  */
-const _toDomain = ({ isAccessBlockedUntilDate, pixCertifBlockedAccessUntilDate }) => {
-  return new AllowedCertificationCenterAccess({
-    isAccessBlockedUntilDate,
-    pixCertifBlockedAccessUntilDate,
-  });
+const _toDomain = (dto) => {
+  return new AllowedCertificationCenterAccess(dto);
 };

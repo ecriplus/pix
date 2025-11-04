@@ -23,7 +23,6 @@ const SESSION_PROPS = [
   'certificationCandidates',
   'certificationCenterId',
   'assignedCertificationOfficerId',
-  'invigilatorPassword',
   'version',
   'createdBy',
 ];
@@ -142,73 +141,25 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
     });
   });
 
-  context('#isAccessible', function () {
+  context('.isNotAccessible', function () {
     it('returns true when the session is created', function () {
-      // given
       const session = domainBuilder.certification.sessionManagement.buildSession.created();
-
-      // when
-      const isAccessible = session.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.true;
+      expect(session.isAccessible()).to.be.true;
     });
 
     it('returns false when the session is finalized', function () {
-      // given
       const session = domainBuilder.certification.sessionManagement.buildSession.finalized();
-
-      // when
-      const isAccessible = session.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is in process', function () {
-      // given
       const session = domainBuilder.certification.sessionManagement.buildSession.inProcess();
-
-      // when
-      const isAccessible = session.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is processed', function () {
-      // given
       const session = domainBuilder.certification.sessionManagement.buildSession.processed();
-
-      // when
-      const isAccessible = session.isAccessible();
-
-      // then
-      expect(isAccessible).to.be.false;
-    });
-  });
-
-  context('#isSupervisable', function () {
-    it('should return true when the invigilator password match', function () {
-      // given
-      const session = domainBuilder.certification.sessionManagement.buildSession.created();
-
-      // when
-      const isSupervisable = session.isSupervisable(session.invigilatorPassword);
-
-      // then
-      expect(isSupervisable).to.be.true;
-    });
-
-    it('should return false when the invigilator password does not match', function () {
-      // given
-      const session = domainBuilder.certification.sessionManagement.buildSession.created();
-
-      // when
-      const isSupervisable = session.isSupervisable('NOT_MATCHING-SUPERVISOR_PASSWORD');
-
-      // then
-      expect(isSupervisable).to.be.false;
+      expect(session.isAccessible()).to.be.false;
     });
   });
 });

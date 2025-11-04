@@ -131,7 +131,7 @@ function _validateSessionAccess(session, accessCode) {
 }
 
 function _validateSessionIsActive(session) {
-  if (!session.isAccessible()) {
+  if (session.isNotAccessible) {
     throw new SessionNotAccessible();
   }
 }
