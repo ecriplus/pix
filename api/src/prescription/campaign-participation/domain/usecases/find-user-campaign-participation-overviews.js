@@ -40,8 +40,10 @@ const findUserCampaignParticipationOverviews = async function ({
         acquiredStagesForThisCampaign,
       );
 
-      campaignParticipationOverview.totalStagesCount = stagesComparison.totalNumberOfStages;
-      campaignParticipationOverview.validatedStagesCount = stagesComparison.reachedStageNumber;
+      campaignParticipationOverview.stagesStatus = {
+        totalStages: stagesComparison.totalNumberOfStages,
+        reachedStages: stagesComparison.reachedStageNumber,
+      };
 
       return campaignParticipationOverview;
     },
