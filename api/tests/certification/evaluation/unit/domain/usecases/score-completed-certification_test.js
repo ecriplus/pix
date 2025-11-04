@@ -4,13 +4,13 @@ import {
   ABORT_REASONS,
   CertificationCourse,
 } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertification', function () {
   let certificationCourseRepository;
   let certificationAssessmentRepository;
+  let pixPlusCertificationCourseRepository;
   let services;
 
   let now;
@@ -35,6 +35,9 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
     certificationAssessmentRepository = {
       getByCertificationCourseId: sinon.stub(),
     };
+    pixPlusCertificationCourseRepository = {
+      getByCertificationCourseId: sinon.stub(),
+    };
   });
 
   afterEach(function () {
@@ -56,41 +59,6 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
       });
     });
 
-    describe('when the candidate has passed a complementary certification', function () {
-      it('should do nothing', async function () {
-        // given
-        certificationAssessmentRepository.getByCertificationCourseId.resolves(
-          domainBuilder.buildCertificationAssessment({
-            id: assessmentId,
-            certificationCourseId,
-            userId,
-            certificationChallenges: [
-              domainBuilder.buildCertificationChallengeWithType({
-                certifiableBadgeKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-              }),
-            ],
-            version: AlgorithmEngineVersion.V3,
-          }),
-        );
-        const dependencies = {
-          certificationCourseRepository,
-          certificationAssessmentRepository,
-          services,
-        };
-
-        // when
-        await scoreCompletedCertification({
-          certificationCourseId,
-          locale: 'fr-FR',
-          ...dependencies,
-        });
-
-        // then
-        expect(certificationCourseRepository.update).to.not.have.been.called;
-        expect(services.scoreDoubleCertificationV3).to.not.have.been.called;
-      });
-    });
-
     describe('when less than the minimum number of answers required by the config has been answered', function () {
       describe('when the candidate did not finish due to a lack of time', function () {
         it('completes the certification', async function () {
@@ -109,12 +77,15 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
               version: AlgorithmEngineVersion.V3,
             }),
           );
+
+          pixPlusCertificationCourseRepository.getByCertificationCourseId.resolves(null);
           services.handleV3CertificationScoring.resolves(abortedCertificationCourse);
           services.scoreDoubleCertificationV3.resolves();
 
           const dependencies = {
             certificationCourseRepository,
             certificationAssessmentRepository,
+            pixPlusCertificationCourseRepository,
             services,
           };
 
@@ -158,12 +129,15 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
               version: AlgorithmEngineVersion.V3,
             }),
           );
+
+          pixPlusCertificationCourseRepository.getByCertificationCourseId.resolves(null);
           services.handleV3CertificationScoring.resolves(certificationCourse);
           services.scoreDoubleCertificationV3.resolves();
 
           const dependencies = {
             certificationCourseRepository,
             certificationAssessmentRepository,
+            pixPlusCertificationCourseRepository,
             services,
           };
 
@@ -207,12 +181,15 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
                 version: AlgorithmEngineVersion.V3,
               }),
             );
+
+            pixPlusCertificationCourseRepository.getByCertificationCourseId.resolves(null);
             services.handleV3CertificationScoring.resolves(certificationCourse);
             services.scoreDoubleCertificationV3.resolves(certificationCourse);
 
             const dependencies = {
               certificationCourseRepository,
               certificationAssessmentRepository,
+              pixPlusCertificationCourseRepository,
               services,
             };
 
@@ -256,12 +233,15 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
                 version: AlgorithmEngineVersion.V3,
               }),
             );
+
+            pixPlusCertificationCourseRepository.getByCertificationCourseId.resolves(null);
             services.handleV3CertificationScoring.resolves(certificationCourse);
             services.scoreDoubleCertificationV3.resolves(certificationCourse);
 
             const dependencies = {
               certificationCourseRepository,
               certificationAssessmentRepository,
+              pixPlusCertificationCourseRepository,
               services,
             };
 
@@ -284,6 +264,57 @@ describe('Unit | Certification | Evaluation | UseCases | scoreCompletedCertifica
               certificationCourseId: certificationCourse.getId(),
             });
           });
+        });
+      });
+    });
+
+    describe('when the certification is a Pix+ certification', function () {
+      it('completes the certification without scoring', async function () {
+        // given
+        const certificationCourse = domainBuilder.buildCertificationCourse({
+          id: certificationCourseId,
+          createdAt: certificationCourseStartDate,
+          completedAt: null,
+        });
+
+        const pixPlusCertificationCourse = domainBuilder.certification.evaluation.buildPixPlusCertificationCourse();
+
+        certificationAssessmentRepository.getByCertificationCourseId.resolves(
+          domainBuilder.buildCertificationAssessment({
+            id: assessmentId,
+            certificationCourseId,
+            userId,
+            version: AlgorithmEngineVersion.V3,
+          }),
+        );
+
+        pixPlusCertificationCourseRepository.getByCertificationCourseId.resolves(pixPlusCertificationCourse);
+
+        certificationCourseRepository.get.resolves(certificationCourse);
+
+        const dependencies = {
+          certificationCourseRepository,
+          certificationAssessmentRepository,
+          pixPlusCertificationCourseRepository,
+          services,
+        };
+
+        // when
+        await scoreCompletedCertification({
+          certificationCourseId,
+          locale: 'fr-FR',
+          ...dependencies,
+        });
+
+        // then
+        expect(services.handleV3CertificationScoring).to.not.have.been.called;
+        expect(services.scoreDoubleCertificationV3).to.not.have.been.called;
+
+        expect(certificationCourseRepository.update).to.have.been.calledWithExactly({
+          certificationCourse: new CertificationCourse({
+            ...certificationCourse.toDTO(),
+            completedAt: now,
+          }),
         });
       });
     });

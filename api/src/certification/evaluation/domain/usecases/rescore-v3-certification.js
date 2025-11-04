@@ -47,10 +47,6 @@ export const rescoreV3Certification = withTransaction(
       certificationCourseId,
     });
 
-    if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
-      return;
-    }
-
     return _handleV3CertificationScoring({
       certificationAssessment,
       event,

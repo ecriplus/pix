@@ -22,25 +22,36 @@ export const scoreCompletedCertification = withTransaction(
     locale,
     certificationCourseRepository,
     certificationAssessmentRepository,
+    pixPlusCertificationCourseRepository,
     services,
   }) => {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId,
     });
 
-    if (certificationAssessment.isScoringBlockedDueToComplementaryOnlyChallenges) {
+    const pixPlusCertificationCourse =
+      await pixPlusCertificationCourseRepository.getByCertificationCourseId(certificationCourseId);
+
+    if (!pixPlusCertificationCourse) {
+      const certificationCourse = await services.handleV3CertificationScoring({
+        certificationAssessment,
+        locale,
+        dependencies: {
+          findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId,
+        },
+      });
+
+      certificationCourse.complete({ now: new Date() });
+      await certificationCourseRepository.update({ certificationCourse });
+
+      return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
+    } else {
+      const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
+
+      certificationCourse.complete({ now: new Date() });
+      await certificationCourseRepository.update({ certificationCourse });
+
       return;
     }
-
-    const certificationCourse = await services.handleV3CertificationScoring({
-      certificationAssessment,
-      locale,
-      dependencies: { findByCertificationCourseIdAndAssessmentId: services.findByCertificationCourseIdAndAssessmentId },
-    });
-
-    certificationCourse.complete({ now: new Date() });
-    await certificationCourseRepository.update({ certificationCourse });
-
-    return services.scoreDoubleCertificationV3({ certificationCourseId: certificationCourse.getId() });
   },
 );
