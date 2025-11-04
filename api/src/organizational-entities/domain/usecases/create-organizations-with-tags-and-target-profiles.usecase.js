@@ -14,7 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import { AdministrationTeamNotFound } from '../errors.js';
+import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 
@@ -93,7 +93,7 @@ async function _createOrganizations({
   organizationForAdminRepository,
 }) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
-    const { administrationTeamId } = organizationToCreate.organization;
+    const { administrationTeamId, parentOrganizationId } = organizationToCreate.organization;
     const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
 
     if (!administrationTeam) {
@@ -102,6 +102,14 @@ async function _createOrganizations({
           administrationTeamId,
         },
       });
+    }
+
+    if (parentOrganizationId) {
+      const organization = await organizationForAdminRepository.get({
+        organizationId: parentOrganizationId,
+      });
+
+      _assertOrganizationIsNotChildOrganization(organization);
     }
 
     try {
@@ -130,6 +138,19 @@ async function _createOrganizations({
       throw new DomainError(error.message);
     }
   });
+}
+
+function _assertOrganizationIsNotChildOrganization(organization) {
+  if (organization.parentOrganizationId) {
+    throw new UnableToAttachChildOrganizationToParentOrganizationError({
+      code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+      message: 'Unable to attach child organization to parent organization which is also a child organization',
+      meta: {
+        grandParentOrganizationId: organization.parentOrganizationId,
+        parentOrganizationId: organization.id,
+      },
+    });
+  }
 }
 
 function _transformOrganizationsCsvData(organizationsCsvData) {

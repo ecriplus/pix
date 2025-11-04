@@ -38,13 +38,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
       databaseBuilder.factory.buildAdministrationTeam({ id: 1234 });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId }).id;
       await databaseBuilder.commit();
 
       const buffer =
-        'type,externalId,name,provinceCode,credit,createdBy,documentationUrl,identityProviderForCampaigns,isManagingStudents,emailForSCOActivation,DPOFirstName,DPOLastName,DPOEmail,emailInvitations,organizationInvitationRole,locale,tags,targetProfiles,administrationTeamId\n' +
-        `SCO,ANNEGRAELLE,Orga des Anne-Graelle,33700,666,${superAdminUserId},url.com,,true,,Anne,Graelle,anne-graelle@example.net,,ADMIN,fr,GRAS_GARGOUILLE,${targetProfileId},1234\n` +
-        `PRO,ANNEGARBURE,Orga des Anne-Garbure,33700,999,${superAdminUserId},,,,,Anne,Garbure,anne-garbure@example.net,,ADMIN,fr,GARBURE,${targetProfileId},1234`;
+        'type,externalId,name,provinceCode,credit,createdBy,documentationUrl,identityProviderForCampaigns,isManagingStudents,emailForSCOActivation,DPOFirstName,DPOLastName,DPOEmail,emailInvitations,organizationInvitationRole,locale,tags,targetProfiles,administrationTeamId,parentOrganizationId\n' +
+        `SCO,ANNEGRAELLE,Orga des Anne-Graelle,33700,666,${superAdminUserId},url.com,,true,,Anne,Graelle,anne-graelle@example.net,,ADMIN,fr,GRAS_GARGOUILLE,${targetProfileId},1234,\n` +
+        `PRO,ANNEGARBURE,Orga des Anne-Garbure,33700,999,${superAdminUserId},,,,,Anne,Garbure,anne-garbure@example.net,,ADMIN,fr,GARBURE,${targetProfileId},1234,${parentOrganizationId}`;
 
       // when
       const response = await server.inject({
@@ -58,7 +59,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       expect(response.statusCode).to.equal(204);
 
       const organizations = await knex('organizations');
-      expect(organizations).to.have.lengthOf(3);
+      expect(organizations).to.have.lengthOf(4);
 
       const firstOrganizationCreated = organizations.find((organization) => organization.externalId === 'ANNEGRAELLE');
       expect(firstOrganizationCreated).to.deep.include({
@@ -71,6 +72,20 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         documentationUrl: 'url.com',
         identityProviderForCampaigns: null,
         isManagingStudents: true,
+        parentOrganizationId: null,
+      });
+
+      const secondOrganizationCreated = organizations.find((organization) => organization.externalId === 'ANNEGARBURE');
+      expect(secondOrganizationCreated).to.deep.include({
+        type: 'PRO',
+        externalId: 'ANNEGARBURE',
+        name: 'Orga des Anne-Garbure',
+        provinceCode: '33700',
+        credit: 999,
+        createdBy: superAdminUserId,
+        identityProviderForCampaigns: null,
+        isManagingStudents: false,
+        parentOrganizationId,
       });
 
       const dataProtectionOfficers = await knex('data-protection-officers');

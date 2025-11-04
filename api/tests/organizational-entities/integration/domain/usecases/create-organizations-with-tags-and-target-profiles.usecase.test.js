@@ -1,9 +1,13 @@
 import lodash from 'lodash';
 
-import { AdministrationTeamNotFound } from '../../../../../src/organizational-entities/domain/errors.js';
+import {
+  AdministrationTeamNotFound,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
+  NotFoundError,
   ObjectValidationError,
   OrganizationTagNotFound,
   TargetProfileInvalidError,
@@ -844,6 +848,92 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       expect(proOrganization).to.include({ externalId, type: 'PRO' });
       expect(scoOrganization).to.include({ externalId, type: 'SCO' });
       expect(sco1dOrganization).to.include({ externalId, type: 'SCO-1D' });
+    });
+  });
+
+  describe('when parent organization id is provided', function () {
+    describe('when parent organization exists and is not already a child', function () {
+      it('should add parent organization id to organization', async function () {
+        // given
+        const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+        await databaseBuilder.commit();
+
+        const organizations = [
+          {
+            type: 'SCO',
+            externalId: 'ABC',
+            name: 'Orga',
+            locale: 'fr-fr',
+            createdBy: userId,
+            administrationTeamId,
+            parentOrganizationId,
+          },
+        ];
+
+        // when
+        const createdOrganizations = await usecases.createOrganizationsWithTagsAndTargetProfiles({
+          organizations,
+        });
+
+        // then
+        expect(createdOrganizations[0].parentOrganizationId).to.deep.equal(parentOrganizationId);
+      });
+    });
+
+    describe('when parent organization does not exist', function () {
+      it('should throw', async function () {
+        // given
+        const organizations = [
+          {
+            type: 'SCO',
+            externalId: 'ABC',
+            name: 'Orga',
+            locale: 'fr-fr',
+            createdBy: userId,
+            administrationTeamId,
+            parentOrganizationId: 12345,
+          },
+        ];
+
+        // when
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
+          organizations,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+    });
+
+    describe('when parent organization is already a child', function () {
+      it('should throw', async function () {
+        // given
+        const grandParentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+        const parentOrganizationId = databaseBuilder.factory.buildOrganization({
+          parentOrganizationId: grandParentOrganizationId,
+        }).id;
+
+        await databaseBuilder.commit();
+        const organizations = [
+          {
+            type: 'SCO',
+            externalId: 'ABC',
+            name: 'Orga',
+            locale: 'fr-fr',
+            createdBy: userId,
+            administrationTeamId,
+            parentOrganizationId,
+          },
+        ];
+
+        // when
+        const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
+          organizations,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
+      });
     });
   });
 });
