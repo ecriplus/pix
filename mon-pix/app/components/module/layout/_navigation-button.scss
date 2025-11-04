@@ -2,38 +2,8 @@
 @use 'pix-design-tokens/breakpoints';
 
 .module-navigation-button {
-  @include breakpoints.device-is('mobile') {
-    .pix-navigation-button {
-      border-radius: var(--pix-spacing-2x);
-    }
-  }
-
   width: 3.375rem;
   background-color: rgb(var(--pix-primary-700-inline), 0.2);
-}
-
-.module-navigation-button, .module-navigation-mobile-button {
-  border-radius: var(--pix-spacing-2x);
-
-  &--current {
-    background-color: rgb(var(--pix-primary-700-inline), 0.60);
-
-    @include breakpoints.device-is('mobile') {
-      color: var(--pix-neutral-0);
-      background-color: rgb(var(--pix-primary-700-inline), 0.60);
-    }
-
-    &.pix-icon-button:not([aria-disabled="true"]){
-      &:hover,&:focus{
-        background-color: rgb(var(--pix-primary-700-inline), 0.60)
-      }
-
-    }
-
-    .pix-icon {
-      fill: var(--pix-neutral-0);
-    }
-  }
 
   &--disabled {
     background-color: unset;
@@ -43,14 +13,12 @@
       border: 1px solid var(--pix-primary-100);
     }
 
-    .pix-icon {
+    .pix-icon{
       fill: rgb(var(--pix-neutral-800-inline), 0.50);
     }
-
   }
 
   &--enabled {
-    background-color: rgb(var(--pix-primary-700-inline), 0.2);
 
     &.pix-icon-button:not([aria-disabled="true"]){
       &:focus, &:hover{
@@ -61,8 +29,62 @@
   }
 }
 
+.module-navigation-button, .module-navigation-mobile-button {
+  border-radius: var(--pix-spacing-2x);
+
+  &--current {
+    background-color: rgb(var(--pix-primary-700-inline), 0.60);
+
+    &.pix-icon-button:not([aria-disabled="true"]){
+      &:hover,&:focus{
+        background-color: rgb(var(--pix-primary-700-inline), 0.60)
+      }
+    }
+
+    .pix-icon {
+      fill: var(--pix-neutral-0);
+    }
+  }
+
+  &--enabled {
+    background-color: rgb(var(--pix-primary-700-inline), 0.2);
+  }
+}
+
 .module-navigation-mobile-button {
+  @extend %pix-title-xxs;
+
+  justify-content: start;
+  width: 100%;
   margin-bottom: var(--pix-spacing-1x);
+  padding: var(--pix-spacing-2x) var(--pix-spacing-3x);
+  font-weight: var(--pix-font-normal);
+  font-size: .875rem;
+
+  &--enabled {
+    color: var(--pix-neutral-900);
+  }
+
+  &--current {
+    color: var(--pix-neutral-0);
+    background-color: rgb(var(--pix-primary-700-inline), 0.60);
+  }
+
+  &.pix-button[aria-disabled="true"] {
+    color: var(--pix-neutral-900);
+    background-color: unset;
+    opacity: 1;
+
+    .pix-icon {
+      opacity: 0.5;
+      fill: var(--pix-neutral-800);
+    }
+  }
+
+  .pix-button__icon {
+   width: 1.5rem;
+   height: 1.5rem;
+  }
 }
 
 .navigation-tooltip {
