@@ -73,17 +73,6 @@ module('Acceptance | Organizations | Children', function (hooks) {
       });
     });
 
-    test('displays attach child organization form', async function (assert) {
-      // given
-      const parentOrganizationId = this.server.create('organization', { name: 'Orga name' }).id;
-
-      // when
-      const screen = await visit(`/organizations/${parentOrganizationId}/children`);
-
-      // then
-      assert.dom(screen.getByRole('form', { name: `Formulaire d'ajout d'organisation(s) fille(s)` })).exists();
-    });
-
     module('when attaching child organization', function () {
       test('attaches child organization to parent organization and displays success notification', async function (assert) {
         // given
@@ -130,10 +119,27 @@ module('Acceptance | Organizations | Children', function (hooks) {
         );
       });
     });
+
+    module('when creating child organization from parent page', function () {
+      test('it should redirect to New organization page, with parent infos in query params', async function (assert) {
+        // given
+        const parentOrganization = this.server.create('organization', { id: 1, name: 'Parent Organization Name' });
+        const screen = await visit(`/organizations/${parentOrganization.id}/children`);
+
+        // when
+        await click(
+          screen.getByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        );
+
+        const expectedQueryParams = `?parentOrganizationId=${parentOrganization.id}&parentOrganizationName=${encodeURIComponent(parentOrganization.name)}`;
+
+        // then
+        assert.strictEqual(currentURL(), `/organizations/new${expectedQueryParams}`);
+      });
+    });
   });
 
   [
-    { name: 'CERTIF', authData: { isCertif: true } },
     { name: 'METIER', authData: { isMetier: true } },
     { name: 'SUPPORT', authData: { isSupport: true } },
   ].forEach((role) => {
@@ -143,18 +149,33 @@ module('Acceptance | Organizations | Children', function (hooks) {
       hooks.beforeEach(async function () {
         await authenticateAdminMemberWithRole(role.authData)(server);
         parentOrganizationId = this.server.create('organization', { name: 'Parent Orga name' }).id;
-        this.server.create('organization', { name: 'Child Orga name', parentOrganizationId });
       });
 
-      test('it does not display attach child organization form', async function (assert) {
+      test('it displays actions section with create child organization button', async function (assert) {
         // when
         const screen = await visit(`/organizations/${parentOrganizationId}/children`);
 
         // then
-        assert
-          .dom(screen.queryByRole('form', { name: `Formulaire d'ajout d'organisation(s) fille(s)` }))
-          .doesNotExist();
+        assert.ok(
+          screen.getByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        );
       });
+    });
+  });
+
+  module('when user has role "CERTIF"', function () {
+    test('it should not display actions section', async function (assert) {
+      await authenticateAdminMemberWithRole({ isCertif: true })(server);
+      const parentOrganizationId = this.server.create('organization', { name: 'Parent Orga name' }).id;
+      this.server.create('organization', { name: 'Child Orga name', parentOrganizationId });
+
+      // when
+      const screen = await visit(`/organizations/${parentOrganizationId}/children`);
+
+      // then
+      assert.notOk(
+        screen.queryByRole(('link', { name: t('components.organizations.children.create-child-organization-button') })),
+      );
     });
   });
 });
