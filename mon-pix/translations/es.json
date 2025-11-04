@@ -817,8 +817,7 @@
           "outdated": "<strong>Ya no eres elegible para la certificación {doubleCertificationName} después de su evolución.</strong><br />Ponte de nuevo en contacto con tu centro o la organización que te ofreció el test para realizar de nuevo una campaña y volver a ser elegible. Tu progreso se ha conservado y solo tendrás que hacer las pruebas nuevas, debería ir rápido."
         },
         "link": {
-          "text": "¿Cómo puedo obtener el certificado?",
-          "url": "https://pix.fr/se-certifier#slice-2"
+          "text": "¿Cómo puedo obtener el certificado?"
         },
         "message": "Enhorabuena {fullName}, tu perfil Pix se puede certificar."
       },

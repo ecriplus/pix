@@ -821,8 +821,7 @@
           "outdated": "<strong>Vous n'êtes plus éligible à la certification {doubleCertificationName} suite à son évolution.</strong><br />Recontactez votre établissement ou l’organisation vous ayant proposé le parcours afin de repasser une campagne et ainsi redevenir éligible. Votre progression a été conservée et vous n'aurez qu'à jouer les nouvelles épreuves, cela devrait être rapide."
         },
         "link": {
-          "text": "How do I certify my digital skills?",
-          "url": "https://support.pix.org/fr/support/solutions/articles/15000039372-la-certification-pix-c-est-quoi-"
+          "text": "How do I certify my digital skills?"
         },
         "message": "Well done, {fullName}, your Pix profile can now be certified."
       },

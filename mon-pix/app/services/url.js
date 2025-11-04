@@ -33,4 +33,8 @@ export default class Url extends UrlBaseService {
   get certificationResultsExplanationUrl() {
     return this.getPixWebsiteUrlFor('CERTIFICATION_RESULTS_EXPLANATION');
   }
+
+  get certificationHowToUrl() {
+    return this.getPixWebsiteUrlFor('CERTIFICATION_HOW_TO');
+  }
 }

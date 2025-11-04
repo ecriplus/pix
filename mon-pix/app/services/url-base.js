@@ -141,4 +141,14 @@ export const PIX_WEBSITE_PATHS = {
     'es-419': 'understand-certification-results',
     fr: 'certification-comprendre-score-niveau',
   },
+  CERTIFICATION_HOW_TO: {
+    'fr-FR': 'se-certifier',
+    'fr-BE': 'se-certifier',
+    'nl-BE': 'mijn-digitale-vaardigheden-certificeren',
+    nl: 'mijn-digitale-vaardigheden-certificeren',
+    en: 'certify-my-digital-skills',
+    es: 'certify-my-digital-skills',
+    'es-419': 'certify-my-digital-skills',
+    fr: 'se-certifier',
+  },
 };
