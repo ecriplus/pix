@@ -68,6 +68,11 @@ class CampaignParticipationOverview {
   _timeBeforeRetryingPassed(sharedAt) {
     return sharedAt ? dayjs().diff(sharedAt, 'days', true) >= MINIMUM_DELAY_IN_DAYS_BEFORE_RETRYING : false;
   }
+
+  set stagesStatus({ totalStages, reachedStages }) {
+    this.totalStagesCount = totalStages;
+    this.validatedStagesCount = reachedStages;
+  }
 }
 
 export { CampaignParticipationOverview };
