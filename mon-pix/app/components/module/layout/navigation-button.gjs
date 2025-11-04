@@ -12,6 +12,7 @@ export default class ModulixNavigationButton extends Component {
   @service intl;
   @service media;
   @service modulixAutoScroll;
+  @service pixMetrics;
 
   @tracked isTooltipVisible = false;
 
@@ -56,6 +57,11 @@ export default class ModulixNavigationButton extends Component {
     const htmlElement = document.querySelector(`#section_${this.args.section.type}`);
 
     this.modulixAutoScroll.focusAndScroll(htmlElement);
+
+    this.pixMetrics.trackEvent('Clic sur le bouton de la navigation', {
+      category: 'Modulix',
+      sectionId: this.args.section.id,
+    });
   }
 
   @action

@@ -11,7 +11,14 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | NavigationButton', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when screen is desktop', function () {
+  module('when screen is desktop', function (hooks) {
+    hooks.beforeEach(function () {
+      class MediaServiceStub extends Service {
+        isMobile = false;
+      }
+      this.owner.register('service:media', MediaServiceStub);
+    });
+
     test('should display a button with an icon', async function (assert) {
       const type = 'question-yourself';
       const section = {
@@ -95,11 +102,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
 
-        class MediaServiceStub extends Service {
-          isMobile = false;
-        }
-        this.owner.register('service:media', MediaServiceStub);
-
         //  when
         await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
 
@@ -120,10 +122,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               { title: 'Grain title', type: 'activity', id: '234-abc' },
             ],
           };
-          class MediaServiceStub extends Service {
-            isMobile = false;
-          }
-          this.owner.register('service:media', MediaServiceStub);
 
           //  when
           await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
@@ -148,10 +146,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             { title: 'Grain title', type: 'activity', id: '234-abc' },
           ],
         };
-        class MediaServiceStub extends Service {
-          isMobile = false;
-        }
-        this.owner.register('service:media', MediaServiceStub);
 
         //  when
         await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
@@ -173,10 +167,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               { title: 'Grain title', type: 'activity', id: '234-abc' },
             ],
           };
-          class MediaServiceStub extends Service {
-            isMobile = false;
-          }
-          this.owner.register('service:media', MediaServiceStub);
 
           //  when
           await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
@@ -195,7 +185,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
     hooks.beforeEach(function () {
       class MediaServiceStub extends Service {
         isMobile = true;
-        toto = true;
       }
       this.owner.register('service:media', MediaServiceStub);
     });
@@ -277,10 +266,6 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
     test('should set aria-current attribute to NavigationButton element', async function (assert) {
       // given
-      class MediaServiceStub extends Service {
-        isMobile = true;
-      }
-      this.owner.register('service:media', MediaServiceStub);
       const section = {
         type: 'question-yourself',
       };
@@ -321,6 +306,38 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
       // then
       sinon.assert.called(focusAndScroll);
+      assert.ok(true);
+    });
+
+    test('should push analytics event', async function (assert) {
+      // given
+      const section = {
+        id: 'section1',
+        type: 'question-yourself',
+      };
+      const trackEvent = sinon.stub();
+
+      class MetricsStubService extends Service {
+        trackEvent = trackEvent;
+      }
+      this.owner.register('service:pix-metrics', MetricsStubService);
+      const focusAndScroll = sinon.stub();
+      class ModulixAutoScrollService extends Service {
+        focusAndScroll = focusAndScroll;
+      }
+      this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+
+      //  when
+      const screen = await render(
+        <template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>,
+      );
+      await click(screen.getByRole('button', { name: 'Se questionner' }));
+
+      // then
+      sinon.assert.calledWithExactly(trackEvent, 'Clic sur le bouton de la navigation', {
+        category: 'Modulix',
+        sectionId: 'section1',
+      });
       assert.ok(true);
     });
   });
