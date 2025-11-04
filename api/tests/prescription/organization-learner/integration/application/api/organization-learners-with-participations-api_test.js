@@ -127,15 +127,31 @@ describe('Integration | API | Organization Learner With Participations', functio
         organizationId: organization2.id,
       });
 
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+
       const campaign = databaseBuilder.factory.buildCampaign({
         organizationId: organization1.id,
         type: CampaignTypes.ASSESSMENT,
+        targetProfileId,
       });
+
+      const firstStage = databaseBuilder.factory.buildStage({
+        targetProfileId,
+        threshold: 10,
+      });
+      databaseBuilder.factory.buildStage({ targetProfileId, threshold: 20 });
+      databaseBuilder.factory.buildStage({ targetProfileId, threshold: 30 });
+
       const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         organizationLearnerId: organizationLearner1.id,
         userId: user1.id,
         masteryRate: 0,
+      });
+
+      databaseBuilder.factory.buildStageAcquisition({
+        stageId: firstStage.id,
+        campaignParticipationId: campaignParticipation.id,
       });
 
       await databaseBuilder.commit();
@@ -164,8 +180,10 @@ describe('Integration | API | Organization Learner With Participations', functio
             campaignName: campaign.name,
             id: campaignParticipation.id,
             status: campaignParticipation.status,
-            targetProfileId: campaign.targetProfileId,
+            targetProfileId: targetProfileId,
             masteryRate: 0,
+            validatedStagesCount: 1,
+            totalStagesCount: 3,
           },
         ],
       });

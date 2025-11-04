@@ -1,3 +1,6 @@
+import * as stageAcquisitionComparisonService from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
+import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
+import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
 import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import * as campaignParticipationOverviewRepository from '../../../campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
@@ -6,7 +9,6 @@ import * as organizationLearnerRepository from '../../../organization-learner/in
 import { findOrganizationLearnersWithParticipations } from '../../domain/usecases/find-organization-learners-with-participations.js';
 import { getOrganizationLearnerWithParticipations } from '../../domain/usecases/get-organization-learner-with-participations.js';
 import { OrganizationLearnerWithParticipations } from './read-models/OrganizationLearnerWithParticipations.js';
-
 /**
  * @module OrganizationLearnerWithParticipationsApi
  */
@@ -86,6 +88,9 @@ export async function getByUserIdAndOrganizationId({ userId, organizationId }) {
     organizationRepository,
     tagRepository,
     campaignParticipationOverviewRepository,
+    stageRepository,
+    stageAcquisitionRepository,
+    stageAcquisitionComparisonService,
   });
   return new OrganizationLearnerWithParticipations(organizationLearnerWithParticipation);
 }
