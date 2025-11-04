@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import CombinedCourseItem from 'mon-pix/components/combined-course/combined-course-item';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -23,15 +23,17 @@ module('Integration | Component | combined course item', function (hooks) {
         duration: 10,
       });
 
-      this.setProperties({ combinedCourseItem, onClickStub });
       // when
-      const screen = await render(hbs`
-        <CombinedCourse::CombinedCourseItem
-          @item={{this.combinedCourseItem}}
-          @isLocked={{this.combinedCourseItem.isLocked}}
-          @isNextItemToComplete={{false}}
-          @onClick={{this.onClickStub}}
-        />`);
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
 
       //then
       assert.ok(screen.getByText(/10 min/));
@@ -39,7 +41,6 @@ module('Integration | Component | combined course item', function (hooks) {
 
     test('should not display duration on item if it does not exists', async function (assert) {
       // given
-
       const store = this.owner.lookup('service:store');
       const combinedCourseItem = store.createRecord('combined-course-item', {
         id: 1,
@@ -48,15 +49,18 @@ module('Integration | Component | combined course item', function (hooks) {
         type: 'MODULE',
       });
       const onClickStub = sinon.stub();
-      this.setProperties({ combinedCourseItem, onClickStub });
+
       // when
-      const screen = await render(hbs`
-        <CombinedCourse::CombinedCourseItem
-          @item={{this.combinedCourseItem}}
-          @isLocked={{this.combinedCourseItem.isLocked}}
-          @isNextItemToComplete={{false}}
-          @onClick={{this.onClickStub}}
-        />`);
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
 
       //then
       assert.notOk(screen.queryByText(t('pages.combined-courses.items.durationUnit')));
@@ -76,15 +80,17 @@ module('Integration | Component | combined course item', function (hooks) {
         isLocked: false,
       });
 
-      this.setProperties({ combinedCourseItem, onClickStub });
       // when
-      const screen = await render(hbs`
-        <CombinedCourse::CombinedCourseItem
-          @item={{this.combinedCourseItem}}
-          @isLocked={{this.combinedCourseItem.isLocked}}
-          @isNextItemToComplete={{false}}
-          @onClick={{this.onClickStub}}
-        />`);
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
 
       //then
       assert.ok(screen.getByRole('presentation').hasAttribute('src', '/images/combined-course/campaign-icon.svg'));
@@ -103,15 +109,17 @@ module('Integration | Component | combined course item', function (hooks) {
         isLocked: false,
       });
 
-      this.setProperties({ combinedCourseItem, onClickStub });
       // when
-      const screen = await render(hbs`
-        <CombinedCourse::CombinedCourseItem
-          @item={{this.combinedCourseItem}}
-          @isLocked={{this.combinedCourseItem.isLocked}}
-          @isNextItemToComplete={{false}}
-          @onClick={{this.onClickStub}}
-        />`);
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
 
       //then
       assert.ok(screen.getByRole('presentation').hasAttribute('src', 'my-awesome-img.svg'));
@@ -129,15 +137,17 @@ module('Integration | Component | combined course item', function (hooks) {
         isLocked: false,
       });
 
-      this.setProperties({ combinedCourseItem, onClickStub });
       // when
-      const screen = await render(hbs`
-        <CombinedCourse::CombinedCourseItem
-          @item={{this.combinedCourseItem}}
-          @isLocked={{this.combinedCourseItem.isLocked}}
-          @isNextItemToComplete={{false}}
-          @onClick={{this.onClickStub}}
-        />`);
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
 
       //then
       assert.ok(screen.getByRole('presentation').hasAttribute('src', '/images/formation-book.svg'));
