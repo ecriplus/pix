@@ -23,6 +23,7 @@ const buildOrganization = function buildOrganization({
   identityProviderForCampaigns = null,
   parentOrganizationId = null,
   administrationTeamId = null,
+  countryCode = null,
 } = {}) {
   if (!administrationTeamId) {
     administrationTeamId = buildAdministrationTeam().id;
@@ -50,6 +51,7 @@ const buildOrganization = function buildOrganization({
     identityProviderForCampaigns,
     parentOrganizationId,
     administrationTeamId,
+    countryCode,
   };
 
   return databaseBuffer.pushInsertable({

@@ -33,6 +33,7 @@ describe('Integration | Team | Infrastructure | Repository | UserOrgaSettings', 
     'schoolCode',
     'sessionExpirationDate',
     'administrationTeamId',
+    'countryCode',
   ];
 
   let clock;
