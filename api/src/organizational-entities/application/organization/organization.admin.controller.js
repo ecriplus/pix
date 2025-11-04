@@ -81,6 +81,16 @@ const create = async function (request) {
   return serializedOrganization;
 };
 
+const getTemplateForCreateOrganizationsInBatch = async function (request, h) {
+  const csvTemplateFileContent = generateCSVTemplate(csvSerializer.requiredFieldNamesForOrganizationsImport);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=create-organizations-in-batch')
+    .code(200);
+};
+
 const createInBatch = async function (request, h) {
   const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
 
@@ -148,6 +158,7 @@ const organizationAdminController = {
   getTemplateForAddTagsToOrganizations,
   addTagsToOrganizations,
   create,
+  getTemplateForCreateOrganizationsInBatch,
   createInBatch,
   archiveOrganization,
   archiveInBatch,

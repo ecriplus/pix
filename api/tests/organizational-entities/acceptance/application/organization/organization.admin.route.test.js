@@ -28,6 +28,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     server = await createServer();
   });
 
+  describe('GET /api/admin/organizations/import-csv/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/import-csv/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/organizations/import-csv', function () {
     it('create organizations for the given csv file', async function () {
       // given
