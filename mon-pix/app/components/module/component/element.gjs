@@ -23,6 +23,7 @@ import ENV from 'mon-pix/config/environment';
 export const VERIFY_RESPONSE_DELAY = ENV.APP.MODULIX_VERIFICATION_RESPONSE_DELAY;
 
 export default class ModulixElement extends Component {
+  // @deprecated to remove due to function not being used anymore on qcu, qcm and qrocm element
   @action
   getLastCorrectionForElement() {
     return this.args.getLastCorrectionForElement(this.args.element);
