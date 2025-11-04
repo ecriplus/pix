@@ -5,6 +5,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import AdministrationBlockLayout from '../block-layout';
+import DownloadTemplate from '../download-template';
 
 export default class CertificationCentersBatchArchive extends Component {
   @service intl;
@@ -57,14 +58,16 @@ export default class CertificationCentersBatchArchive extends Component {
       @title={{t "components.administration.certification-centers-batch-archive.title"}}
       @description={{t "components.administration.certification-centers-batch-archive.description"}}
     >
-      <PixButtonUpload
-        @id="archive-certification-centers-file-upload"
-        @onChange={{this.archiveCertificationCenters}}
-        @variant="secondary"
-        accept=".csv"
-      >
-        {{t "components.administration.certification-centers-batch-archive.upload-button"}}
-      </PixButtonUpload>
+      <DownloadTemplate @url="/api/admin/certification-centers/batch-archive/template">
+        <PixButtonUpload
+          @id="archive-certification-centers-file-upload"
+          @onChange={{this.archiveCertificationCenters}}
+          @variant="secondary"
+          accept=".csv"
+        >
+          {{t "components.administration.certification-centers-batch-archive.upload-button"}}
+        </PixButtonUpload>
+      </DownloadTemplate>
     </AdministrationBlockLayout>
   </template>
 }
