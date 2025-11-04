@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.248.0](https://github.com/1024pix/pix/compare/v5.247.0...v5.248.0) (2025-11-04)
+
+### :rocket: Amélioration
+
+- [#14040](https://github.com/1024pix/pix/pull/14040) Afficher un bouton de création d'orga fille depuis la page d'une orga mère (PIX-20049) 
+- [#14038](https://github.com/1024pix/pix/pull/14038) Ajout des tooltips sur les boutons de la nouvelle navigation (PIX-20146). 
+- [#14055](https://github.com/1024pix/pix/pull/14055) Ajouter l'id de l'orga mère lors de la création en masse (PIX-20063) 
+- [#14048](https://github.com/1024pix/pix/pull/14048) Empêcher le scoring et la publication d'une certification Pix+ (PIX-20152). 
+- [#14049](https://github.com/1024pix/pix/pull/14049) Rendre plus robuste la récupération des métadonnées des images (PIX-20227) 
+
+### :building_construction: Tech
+
+- [#14020](https://github.com/1024pix/pix/pull/14020) :truck: Déplace la route `attach target profile` dans le contexte de `certification/configuration` (PIX-20299) 
+- [#14054](https://github.com/1024pix/pix/pull/14054) :truck: Déplace le test unitaire de `FinalizedSession` dans le contexte `certification/session-management` (PIX-20300) 
+- [#14030](https://github.com/1024pix/pix/pull/14030) Utiliser des methodes du model pour fournir les champs à mettre à jour sur les parcours combiné (PIX-20261). 
+
+### :arrow_up: Montée de version
+
+- [#14057](https://github.com/1024pix/pix/pull/14057) Update dependency @1024pix/ember-testing-library to ^3.0.25 (admin) 
+- [#14058](https://github.com/1024pix/pix/pull/14058) Update dependency @1024pix/ember-testing-library to ^3.0.25 (certif) 
+- [#14060](https://github.com/1024pix/pix/pull/14060) Update dependency @1024pix/ember-testing-library to ^3.0.25 (junior)
+
 # [5.247.0](https://github.com/1024pix/pix/compare/v5.246.0...v5.247.0) (2025-11-03)
 
 ### :rocket: Amélioration
