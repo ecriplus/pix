@@ -741,6 +741,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('GET /api/admin/organizations/batch-archive/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/batch-archive/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/organizations/batch-archive', function () {
     context('success case', function () {
       it('returns a 204 http request', async function () {

@@ -99,6 +99,16 @@ const createInBatch = async function (request, h) {
   return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(204);
 };
 
+const getTemplateForArchiveOrganizationsInBatch = async function (request, h) {
+  const csvTemplateFileContent = generateCSVTemplate(csvSerializer.requiredFieldNamesForOrganizationBatchArchive);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=archive-organizations-in-batch')
+    .code(200);
+};
+
 const archiveInBatch = async function (request, h) {
   const userId = extractUserIdFromRequest(request);
 
@@ -172,6 +182,7 @@ const organizationAdminController = {
   getTemplateForCreateOrganizationsInBatch,
   createInBatch,
   archiveOrganization,
+  getTemplateForArchiveOrganizationsInBatch,
   archiveInBatch,
   attachChildOrganization,
   detachParentOrganization,
