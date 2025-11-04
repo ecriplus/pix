@@ -1,4 +1,5 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -51,6 +52,14 @@ const Content = <template>
       >
         {{#if @isCampaignType}}
           <span>{{t "common.display.percentage" value=@masteryRate}}</span>
+          {{#if @hasStagesStars}}
+            <PixStars
+              @count={{@validatedStagesCount}}
+              @total={{@totalStagesCount}}
+              @alt={{t "pages.skill-review.stage.starsAcquired" acquired=@validatedStagesCount total=@totalStagesCount}}
+              class="combined-course-item__stars"
+            />
+          {{/if}}
         {{/if}}
         <span class="combined-course-item__completion-field">{{t "pages.combined-courses.items.completed"}}</span>
         <PixIcon
@@ -122,6 +131,9 @@ function hasWhiteBackground(item) {
           @title={{@item.title}}
           @isCompleted={{@item.isCompleted}}
           @masteryRate={{@item.masteryRate}}
+          @hasStagesStars={{@item.hasStagesStars}}
+          @validatedStagesCount={{@item.validatedStages}}
+          @totalStagesCount={{@item.totalStages}}
           @iconUrl={{@item.iconUrl}}
           @isCampaignType={{eq @item.type "CAMPAIGN"}}
           @displayDuration={{eq @item.type "MODULE"}}

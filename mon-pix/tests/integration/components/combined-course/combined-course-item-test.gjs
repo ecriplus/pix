@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
 import CombinedCourseItem from 'mon-pix/components/combined-course/combined-course-item';
 import { module, test } from 'qunit';
@@ -151,6 +151,52 @@ module('Integration | Component | combined course item', function (hooks) {
 
       //then
       assert.ok(screen.getByRole('presentation').hasAttribute('src', '/images/formation-book.svg'));
+    });
+  });
+
+  module('stages and mastery rate', function () {
+    test('should display stages count and mastery rate when item is a campaign', async function (assert) {
+      // given
+      const onClickStub = sinon.stub();
+      const store = this.owner.lookup('service:store');
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        id: 1,
+        title: 'ma campagne',
+        reference: 'ma-campagne',
+        type: 'CAMPAIGN',
+        isLocked: false,
+        isCompleted: true,
+        masteryRate: 0.15,
+        totalStagesCount: 5,
+        validatedStagesCount: 2,
+      });
+
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseItem
+            @item={{combinedCourseItem}}
+            @isLocked={{combinedCourseItem.isLocked}}
+            @isNextItemToComplete={{false}}
+            @onClick={{onClickStub}}
+          />
+        </template>,
+      );
+
+      //then
+      assert.ok(
+        screen.getByText(t('common.display.percentage', { value: 0.15 }), {
+          normalizer: getDefaultNormalizer({ trim: false, collapseWhitespace: false }),
+        }),
+      );
+      assert.ok(
+        screen.getByText(
+          t('pages.skill-review.stage.starsAcquired', {
+            acquired: combinedCourseItem.validatedStagesCount - 1,
+            total: combinedCourseItem.totalStagesCount - 1,
+          }),
+        ),
+      );
     });
   });
 });
