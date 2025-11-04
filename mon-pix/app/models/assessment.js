@@ -37,6 +37,7 @@ export default class Assessment extends Model {
   @belongsTo('course', { async: true, inverse: null }) course;
   @belongsTo('progression', { async: true, inverse: null }) progression;
   @belongsTo('challenge', { async: false, inverse: null }) nextChallenge;
+  @belongsTo('campaign', { async: true, inverse: null }) campaign;
 
   // methods
   @equal('type', 'CERTIFICATION') isCertification;
