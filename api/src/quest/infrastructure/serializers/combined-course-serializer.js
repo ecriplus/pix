@@ -16,6 +16,8 @@ const serialize = function (combinedCourse) {
         'isCompleted',
         'isLocked',
         'masteryRate',
+        'validatedStagesCount',
+        'totalStagesCount',
         'duration',
         'image',
       ],
