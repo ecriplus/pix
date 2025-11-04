@@ -62,7 +62,7 @@ export default class CertificationCentersBatchArchive extends Component {
         <PixButtonUpload
           @id="archive-certification-centers-file-upload"
           @onChange={{this.archiveCertificationCenters}}
-          @variant="secondary"
+          @variant="primary"
           accept=".csv"
         >
           {{t "components.administration.certification-centers-batch-archive.upload-button"}}

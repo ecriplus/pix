@@ -74,7 +74,7 @@ export default class OrganizationsBatchArchive extends Component {
         <PixButtonUpload
           @id="organizations-file-upload"
           @onChange={{this.archiveOrganizations}}
-          @variant="secondary"
+          @variant="primary"
           accept=".csv"
         >
           {{t "components.administration.organizations-batch-archive.upload-button"}}
