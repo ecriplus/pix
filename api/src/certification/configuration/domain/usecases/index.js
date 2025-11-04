@@ -2,13 +2,14 @@ import * as challengeRepository from '../../../../shared/infrastructure/reposito
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import * as flashAlgorithmConfigurationRepository from '../../../configuration/infrastructure/repositories/flash-algorithm-configuration-repository.js';
+import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../../complementary-certification/infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
 import * as sharedFlashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as activeCalibratedChallengeRepository from '../../infrastructure/repositories/active-calibrated-challenge-repository.js';
 import * as attachableTargetProfileRepository from '../../infrastructure/repositories/attachable-target-profiles-repository.js';
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
+import * as flashAlgorithmConfigurationRepository from '../../infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as frameworkChallengesRepository from '../../infrastructure/repositories/framework-challenges-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
@@ -24,6 +25,8 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {challengeRepository} ChallengeRepository
  * @typedef {complementaryCertificationRepository} ComplementaryCertificationRepository
  * @typedef {frameworkChallengesRepository} FrameworkChallengesRepository
+ * @typedef {consolidatedFrameworkRepository} ConsolidatedFrameworkRepository
+ * @typedef {complementaryCertificationForTargetProfileAttachmentRepository} ComplementaryCertificationForTargetProfileAttachmentRepository
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
@@ -37,12 +40,13 @@ const dependencies = {
   candidateRepository,
   centerRepository,
   challengeRepository,
+  complementaryCertificationForTargetProfileAttachmentRepository,
   complementaryCertificationRepository,
+  flashAlgorithmConfigurationRepository,
   frameworkChallengesRepository,
   learningContentRepository,
   skillRepository,
   tubeRepository,
-  flashAlgorithmConfigurationRepository,
   sharedFlashAlgorithmConfigurationRepository,
   versionsRepository,
 };
@@ -54,6 +58,7 @@ import { createFlashAssessmentConfiguration } from './create-flash-assessment-co
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
 import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
+import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
@@ -68,6 +73,7 @@ const usecasesWithoutInjectedDependencies = {
   findComplementaryCertifications,
   getActiveFlashAssessmentConfiguration,
   getCurrentFrameworkVersion,
+  getComplementaryCertificationForTargetProfileAttachmentRepository,
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,
