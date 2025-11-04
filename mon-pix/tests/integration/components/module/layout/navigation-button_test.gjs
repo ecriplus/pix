@@ -308,6 +308,38 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       sinon.assert.called(focusAndScroll);
       assert.ok(true);
     });
+
+    test('should push analytics event', async function (assert) {
+      // given
+      const section = {
+        id: 'section1',
+        type: 'question-yourself',
+      };
+      const trackEvent = sinon.stub();
+
+      class MetricsStubService extends Service {
+        trackEvent = trackEvent;
+      }
+      this.owner.register('service:pix-metrics', MetricsStubService);
+      const focusAndScroll = sinon.stub();
+      class ModulixAutoScrollService extends Service {
+        focusAndScroll = focusAndScroll;
+      }
+      this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+
+      //  when
+      const screen = await render(
+        <template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>,
+      );
+      await click(screen.getByRole('button', { name: 'Se questionner' }));
+
+      // then
+      sinon.assert.calledWithExactly(trackEvent, 'Clic sur le bouton de la navigation', {
+        category: 'Modulix',
+        sectionId: 'section1',
+      });
+      assert.ok(true);
+    });
   });
 
   module('when user click on a disabled navigation button', function () {
