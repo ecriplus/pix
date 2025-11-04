@@ -182,13 +182,13 @@ async function deserializeForOrganizationsImport(file) {
   return await parseCsvWithHeader(file, batchOrganizationOptionsWithHeader);
 }
 
+const requiredFieldNamesForCertificationCenterBatchArchive = ['ID du centre de certification'];
+
 async function deserializeForCertificationCenterBatchArchive(
   file,
   { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper,
 ) {
-  const requiredFieldNames = ['ID du centre de certification'];
-
-  await checkCsvHeader({ filePath: file, requiredFieldNames });
+  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForCertificationCenterBatchArchive });
   const cleanedData = await readCsvFile(file);
 
   const batchCertificationCenterOptionsWithHeader = {
@@ -544,6 +544,7 @@ export {
   deserializeForSessionsImport,
   fieldNamesForCampaignsImport,
   parseForCampaignsImport,
+  requiredFieldNamesForCertificationCenterBatchArchive,
   requiredFieldNamesForOrganizationBatchArchive,
   requiredFieldNamesForOrganizationsImport,
   serializeLine,
