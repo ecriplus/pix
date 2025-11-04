@@ -13,7 +13,7 @@ import ResultItem from 'mon-pix/components/result-item';
 
     <div class="challenge__banner">
       <AssessmentBanner
-        @title={{@model.title}}
+        @assessment={{@model}}
         @displayHomeLink={{@controller.displayHomeLink}}
         @displayTextToSpeechActivationButton={{false}}
       />

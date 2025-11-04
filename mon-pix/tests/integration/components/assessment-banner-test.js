@@ -19,10 +19,12 @@ module('Integration | Component | assessment-banner', function (hooks) {
   });
 
   module('When home button is requested', function (hooks) {
-    let screen;
+    let screen, router;
 
     hooks.beforeEach(async function () {
       // given
+      router = this.owner.lookup('service:router');
+      sinon.stub(router, 'transitionTo');
       screen = await render(hbs`<AssessmentBanner @displayHomeLink={{true}} />`);
     });
 
@@ -49,6 +51,62 @@ module('Integration | Component | assessment-banner', function (hooks) {
       // then
       assert.dom(screen.queryByRole('dialog', { name: "Besoin d'une pause ?" })).doesNotExist();
     });
+
+    test('it should redirect to home when quit button is clicked', async function (assert) {
+      // when
+      await click(screen.getByRole('button', { name: 'Quitter' }));
+      await waitForDialog();
+
+      // then
+      const link = screen.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" });
+      assert.strictEqual(link.getAttribute('href'), '/');
+    });
+
+    test('it should redirect to external url configured on campaign when quit button is clicked', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        customResultPageButtonUrl: 'https://pix.fr',
+      });
+      const assessment = store.createRecord('assessment', {
+        title: 'Mon titre',
+        type: 'CAMPAIGN',
+        campaign,
+      });
+      this.set('assessment', assessment);
+      screen = await render(hbs`<AssessmentBanner @displayHomeLink={{true}} @assessment={{this.assessment}} />`);
+
+      // when
+      await click(screen.getByRole('button', { name: 'Quitter' }));
+      await waitForDialog();
+
+      // then
+      const link = screen.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" });
+      assert.strictEqual(link.getAttribute('href'), campaign.customResultPageButtonUrl);
+    });
+
+    test('it should redirect to internal url configured on campaign when quit button is clicked', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        customResultPageButtonUrl: '/parcours/CODE',
+      });
+      const assessment = store.createRecord('assessment', {
+        title: 'Mon titre',
+        type: 'CAMPAIGN',
+        campaign,
+      });
+      this.set('assessment', assessment);
+      screen = await render(hbs`<AssessmentBanner @displayHomeLink={{true}} @assessment={{this.assessment}} />`);
+
+      // when
+      await click(screen.getByRole('button', { name: 'Quitter' }));
+      await waitForDialog();
+      await click(screen.getByRole('button', { name: "Quitter l'épreuve et retourner à la page d'accueil" }));
+
+      // then
+      assert.ok(router.transitionTo.calledWith(campaign.customResultPageButtonUrl));
+    });
   });
 
   module('When assessment has a title', function () {
@@ -59,10 +117,10 @@ module('Integration | Component | assessment-banner', function (hooks) {
         title: 'Assessment title',
       });
 
-      this.set('title', assessment.title);
+      this.set('assessment', assessment);
 
       // when
-      const screen = await render(hbs`<AssessmentBanner @title={{this.title}} />`);
+      const screen = await render(hbs`<AssessmentBanner @assessment={{this.assessment}} />`);
 
       // then
       assert.dom(screen.getByRole('heading', { name: "Épreuve pour l'évaluation : Assessment title" })).exists();
@@ -77,10 +135,10 @@ module('Integration | Component | assessment-banner', function (hooks) {
         title: null,
       });
 
-      this.set('title', assessment.title);
+      this.set('assessment', assessment);
 
       // when
-      const screen = await render(hbs`<AssessmentBanner @title={{this.title}} />`);
+      const screen = await render(hbs`<AssessmentBanner @assessment={{this.assessment}} />`);
 
       // then
       assert.dom(screen.queryByRole('heading', { name: "Épreuve pour l'évaluation :" })).doesNotExist();

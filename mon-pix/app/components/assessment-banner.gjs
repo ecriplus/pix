@@ -15,11 +15,11 @@ export default class AssessmentBanner extends Component {
     <div class="assessment-banner">
       <header class="assessment-banner-container" role="banner">
         <img class="assessment-banner__pix-logo" src="/images/pix-logo-blanc.svg" alt="{{t 'common.pix'}}" />
-        {{#if @title}}
+        {{#if this.title}}
           <div class="assessment-banner__splitter"></div>
           <h1 class="assessment-banner__title">
             <span class="sr-only"> {{t "pages.assessment-banner.title"}} </span>
-            {{@title}}
+            {{this.title}}
           </h1>
         {{/if}}
         <div class="assessment-banner__actions">
@@ -54,12 +54,13 @@ export default class AssessmentBanner extends Component {
                   <PixButton @variant="secondary" @triggerAction={{this.toggleClosingModal}}>
                     {{t "common.actions.stay"}}
                   </PixButton>
-                  <PixButtonLink
-                    @route="authenticated"
+                  <ButtonLinkWithHistory
+                    @redirectionUrl={{this.redirectionUrl}}
+                    @defaultRoute="authenticated"
                     aria-label={{t "pages.assessment-banner.modal.actions.quit.extra-information"}}
                   >
                     {{t "common.actions.quit"}}
-                  </PixButtonLink>
+                  </ButtonLinkWithHistory>
                 </div>
               </:footer>
             </PixModal>
@@ -72,6 +73,23 @@ export default class AssessmentBanner extends Component {
   @service featureToggles;
 
   @tracked showClosingModal = false;
+  @tracked campaign = null;
+
+  constructor(...args) {
+    super(...args);
+    this.args?.assessment?.campaign.then((campaign) => {
+      this.campaign = campaign;
+    });
+  }
+
+  get redirectionUrl() {
+    if (!this.campaign) return null;
+    return this.campaign.customResultPageButtonUrl;
+  }
+
+  get title() {
+    return this.args?.assessment?.title;
+  }
 
   get textToSpeechTooltipText() {
     return this.args.isTextToSpeechActivated
@@ -90,4 +108,39 @@ export default class AssessmentBanner extends Component {
   @action toggleClosingModal() {
     this.showClosingModal = !this.showClosingModal;
   }
+}
+
+class ButtonLinkWithHistory extends Component {
+  @service router;
+
+  @action
+  transitionToRedirectionUrl() {
+    this.router.transitionTo(this.args.redirectionUrl);
+  }
+
+  get isRedirectionUrlInternal() {
+    try {
+      return Boolean(this.router.recognize(this.args.redirectionUrl));
+    } catch {
+      return false;
+    }
+  }
+
+  <template>
+    {{#if @redirectionUrl}}
+      {{#if this.isRedirectionUrlInternal}}
+        <PixButton @triggerAction={{this.transitionToRedirectionUrl}} ...attributes>
+          {{yield}}
+        </PixButton>
+      {{else}}
+        <PixButtonLink @href={{@redirectionUrl}} ...attributes>
+          {{yield}}
+        </PixButtonLink>
+      {{/if}}
+    {{else}}
+      <PixButtonLink @route={{@defaultRoute}} ...attributes>
+        {{yield}}
+      </PixButtonLink>
+    {{/if}}
+  </template>
 }

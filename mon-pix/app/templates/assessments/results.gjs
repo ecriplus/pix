@@ -11,7 +11,7 @@ import ResultItem from 'mon-pix/components/result-item';
 
     <div class="assessment-results__assessment-banner">
       <AssessmentBanner
-        @title={{@model.title}}
+        @assessment={{@model}}
         @checkpoint={{false}}
         @displayHomeLink={{false}}
         @displayTextToSpeechActivationButton={{false}}
