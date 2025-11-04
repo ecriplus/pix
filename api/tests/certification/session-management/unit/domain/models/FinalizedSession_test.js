@@ -4,7 +4,7 @@ import { CertificationIssueReportCategory } from '../../../../../../src/certific
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | FinalizedSession', function () {
+describe('Unit | Certification | Session-Management | Domain | Models | FinalizedSession', function () {
   context('#isPublishable', function () {
     it('is not publishable when session has an examiner global comment', function () {
       // given / when
