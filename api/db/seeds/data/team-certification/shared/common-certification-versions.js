@@ -14,6 +14,8 @@ import { UnseedableError } from './UnseedableError.js';
  * @property {{ currentVersionId: string }} pixPlusEdu1erDegreVersion
  */
 export class CommonCertificationVersions {
+  static #NUMBER_OF_CHALLENGES_PER_VERSION = 100;
+
   /**
    * @param {Object} params
    * @param {Knex} params.databaseBuilder
@@ -121,7 +123,7 @@ export class CommonCertificationVersions {
       ),
     );
 
-    return _.sampleSize(allTubeIds, 100);
+    return _.sampleSize(allTubeIds, CommonCertificationVersions.#NUMBER_OF_CHALLENGES_PER_VERSION);
   }
 
   /**
