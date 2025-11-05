@@ -35,8 +35,9 @@ module('Unit | Route | authenticated/combined-course-participations', function (
 
       // when
       const result = await route.model({});
+
       // then
-      assert.deepEqual(result, combinedCourseParticipations);
+      assert.deepEqual(result, { combinedCourse, combinedCourseParticipations });
     });
 
     test('fetch combined-course participations with pagination', async function (assert) {
@@ -67,7 +68,7 @@ module('Unit | Route | authenticated/combined-course-participations', function (
       const result = await route.model({ pageNumber: 2, pageSize: 20, fullName: 'fullName', statuses: ['STARTED'] });
 
       // then
-      assert.deepEqual(result, combinedCourseParticipations);
+      assert.deepEqual(result, { combinedCourse, combinedCourseParticipations });
     });
   });
 });

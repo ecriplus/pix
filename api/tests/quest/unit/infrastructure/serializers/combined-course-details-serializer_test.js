@@ -24,6 +24,16 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-details'
               },
             },
           },
+          {
+            requirement_type: 'passages',
+            comparison: 'all',
+            data: {
+              moduleId: {
+                data: 7,
+                comparison: 'equal',
+              },
+            },
+          },
         ],
       }),
     });
@@ -37,6 +47,8 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-details'
         attributes: {
           name: 'Mon parcours',
           code: 'COMBINIX1',
+          'has-campaigns': true,
+          'has-modules': true,
           'campaign-ids': [1],
         },
         relationships: {

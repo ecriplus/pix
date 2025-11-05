@@ -4,7 +4,15 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourse) {
   return new Serializer('combined-courses', {
-    attributes: ['name', 'code', 'campaignIds', 'combinedCourseParticipations', 'combinedCourseStatistics'],
+    attributes: [
+      'name',
+      'code',
+      'hasCampaigns',
+      'hasModules',
+      'campaignIds',
+      'combinedCourseParticipations',
+      'combinedCourseStatistics',
+    ],
     combinedCourseStatistics: {
       ref: 'id',
       nullIfMissing: true,
