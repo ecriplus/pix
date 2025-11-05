@@ -112,7 +112,11 @@ export default class ModulixNavigationButton extends Component {
           aria-current="{{this.isCurrentSection}}"
           @plainIcon={{this.isPlainIcon}}
         />
-        <span role="tooltip" class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}">
+        <span
+          role="tooltip"
+          class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}"
+          aria-hidden="true"
+        >
           {{this.sectionTitle @section.type}}
         </span>
       </div>

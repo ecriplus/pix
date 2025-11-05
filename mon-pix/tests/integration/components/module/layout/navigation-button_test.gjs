@@ -94,8 +94,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       });
     });
 
-    module('when a button is hovered', function () {
-      test('should display tooltip', async function (assert) {
+    module('on tooltip', function () {
+      test('should not vocalise the tooltip for screen readers', async function (assert) {
         // given
         const section = {
           id: 'section1',
@@ -106,58 +106,52 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
 
         // then
-        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
-        await triggerEvent('.navigation-tooltip', 'mouseenter');
-        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-      });
+        assert.dom('.navigation-tooltip__content').hasAttribute('aria-hidden', 'true');
+      })
 
-      module('then when a button is left', function () {
-        test('should not display tooltip anymore', async function (assert) {
+      module('when a button is hovered', function () {
+        test('should display tooltip', async function (assert) {
           // given
           const section = {
             id: 'section1',
             type: 'question-yourself',
-            grains: [
-              { title: 'Grain title', type: 'discovery', id: '123-abc' },
-              { title: 'Grain title', type: 'activity', id: '234-abc' },
-            ],
           };
 
           //  when
           await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
 
           // then
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
           await triggerEvent('.navigation-tooltip', 'mouseenter');
           assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-          await triggerEvent('.navigation-tooltip', 'mouseleave');
-          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
+
+        module('then when a button is left', function () {
+          test('should not display tooltip anymore', async function (assert) {
+            // given
+            const section = {
+              id: 'section1',
+              type: 'question-yourself',
+              grains: [
+                { title: 'Grain title', type: 'discovery', id: '123-abc' },
+                { title: 'Grain title', type: 'activity', id: '234-abc' },
+              ],
+            };
+
+            //  when
+            await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+            // then
+            await triggerEvent('.navigation-tooltip', 'mouseenter');
+            assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+            await triggerEvent('.navigation-tooltip', 'mouseleave');
+            assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+          });
         });
       });
-    });
 
-    module('when a button is focused', function () {
-      test('should display tooltip', async function (assert) {
-        // given
-        const section = {
-          id: 'section1',
-          type: 'question-yourself',
-          grains: [
-            { title: 'Grain title', type: 'discovery', id: '123-abc' },
-            { title: 'Grain title', type: 'activity', id: '234-abc' },
-          ],
-        };
-
-        //  when
-        await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
-
-        // then
-        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
-        await triggerEvent('.navigation-tooltip', 'focusin');
-        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-      });
-
-      module('then when a button is not focused anymore', function () {
-        test('should not display tooltip anymore', async function (assert) {
+      module('when a button is focused', function () {
+        test('should display tooltip', async function (assert) {
           // given
           const section = {
             id: 'section1',
@@ -172,13 +166,35 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
 
           // then
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
           await triggerEvent('.navigation-tooltip', 'focusin');
           assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-          await triggerEvent('.navigation-tooltip', 'focusout');
-          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
+
+        module('then when a button is not focused anymore', function () {
+          test('should not display tooltip anymore', async function (assert) {
+            // given
+            const section = {
+              id: 'section1',
+              type: 'question-yourself',
+              grains: [
+                { title: 'Grain title', type: 'discovery', id: '123-abc' },
+                { title: 'Grain title', type: 'activity', id: '234-abc' },
+              ],
+            };
+
+            //  when
+            await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+
+            // then
+            await triggerEvent('.navigation-tooltip', 'focusin');
+            assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+            await triggerEvent('.navigation-tooltip', 'focusout');
+            assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+          });
         });
       });
-    });
+    })
   });
 
   module('when screen is mobile', function (hooks) {
