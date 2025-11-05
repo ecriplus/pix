@@ -1,5 +1,40 @@
 # Pix Changelog
 
+# [5.249.0](https://github.com/1024pix/pix/compare/v5.248.0...v5.249.0) (2025-11-05)
+
+### :rocket: Amélioration
+
+- [#14071](https://github.com/1024pix/pix/pull/14071) ajout imgs définitives module CY_Phishing_Nov 
+- [#14043](https://github.com/1024pix/pix/pull/14043) Ajouter des PixMetrics à chaque clic sur un bouton de la navigation (PIX-20106). 
+- [#14063](https://github.com/1024pix/pix/pull/14063) Ajouter une colonne "countryCode" sur la table organizations (PIX-20134) 
+- [#14044](https://github.com/1024pix/pix/pull/14044) Conditionner l'affichage de la colonne Campagnes et Modules d'un parcours combiné (PIX-20112)  
+- [#14051](https://github.com/1024pix/pix/pull/14051) Créer une nouvelle modalité Vidéo Courte (PIX-20277) 
+- [#14079](https://github.com/1024pix/pix/pull/14079) modifs module CY_phishing_AVA suite relectures 
+- [#14052](https://github.com/1024pix/pix/pull/14052) Permettre de se déplacer sur une section au clic sur les boutons de la nav (PIX-20268). 
+
+### :bug: Correction
+
+- [#14062](https://github.com/1024pix/pix/pull/14062) Récupérer l'URL localisée du lien "Comment se certifier ?"  (PIX-20304). 
+
+### :building_construction: Tech
+
+- [#13850](https://github.com/1024pix/pix/pull/13850) Suppression du système de blocage général d'accès à Pix Certif  (PIX-19951) 
+
+### :arrow_up: Montée de version
+
+- [#14072](https://github.com/1024pix/pix/pull/14072) Update dependency @1024pix/ember-testing-library to ^3.0.25 (orga) 
+- [#14073](https://github.com/1024pix/pix/pull/14073) Update dependency @1024pix/eslint-plugin to ^2.1.14 (api) 
+- [#14074](https://github.com/1024pix/pix/pull/14074) Update dependency @1024pix/eslint-plugin to ^2.1.14 (audit-logger) 
+- [#14075](https://github.com/1024pix/pix/pull/14075) Update dependency @1024pix/eslint-plugin to ^2.1.14 (certif) 
+- [#14076](https://github.com/1024pix/pix/pull/14076) Update dependency @1024pix/eslint-plugin to ^2.1.14 (dossier racine) 
+- [#14077](https://github.com/1024pix/pix/pull/14077) Update dependency @1024pix/eslint-plugin to ^2.1.14 (e2e-playwright) 
+- [#14078](https://github.com/1024pix/pix/pull/14078) Update dependency @1024pix/eslint-plugin to ^2.1.14 (junior) 
+- [#14081](https://github.com/1024pix/pix/pull/14081) Update dependency @1024pix/eslint-plugin to ^2.1.14 (mon-pix) 
+- [#14082](https://github.com/1024pix/pix/pull/14082) Update dependency @1024pix/eslint-plugin to ^2.1.14 (orga) 
+- [#14027](https://github.com/1024pix/pix/pull/14027) Update dependency @1024pix/pix-ui to ^55.31.0 (admin) 
+- [#14084](https://github.com/1024pix/pix/pull/14084) Update dependency @1024pix/pix-ui to ^55.31.0 (certif) 
+- [#14085](https://github.com/1024pix/pix/pull/14085) Update dependency @1024pix/pix-ui to ^55.31.0 (junior)
+
 # [5.248.0](https://github.com/1024pix/pix/compare/v5.247.0...v5.248.0) (2025-11-04)
 
 ### :rocket: Amélioration
