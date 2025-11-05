@@ -286,7 +286,7 @@
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p>Ici,un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>l’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à <strong>agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
+                    "diagnosis": "<p>Ici, un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>l’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à <strong>agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
                   }
                 }
               }
