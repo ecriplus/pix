@@ -196,7 +196,7 @@
                 "id": "968dd044-bd7b-4d32-b339-99556319bf47",
                 "type": "custom-draft",
                 "title": "POIC",
-                "url": "https://github.com/1024pix/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
+                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
                 "instruction": "<p>edqfd</p>",
                 "height": 500
               }
@@ -395,7 +395,7 @@
         },
         {
           "id": "2f5cea4c-2efe-419f-9583-419b70dbd600",
-          "type": "lesson",
+          "type": "activity",
           "title": "Activité 2",
           "components": [
             {
