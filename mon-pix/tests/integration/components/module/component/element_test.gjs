@@ -164,6 +164,24 @@ module('Integration | Component | Module | Element', function (hooks) {
     assert.dom(screen.getByRole('button', { name: 'Afficher la transcription' })).exists();
   });
 
+  test('should display an element with a short video element', async function (assert) {
+    // given
+    const element = {
+      id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
+      type: 'short-video',
+      title: 'Vidéo courte de présentation de Pix',
+      url: 'https://assets.pix.org/modules/placeholder-video.mp4',
+      transcription: '<p>transcription</p>',
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.strictEqual(findAll('.element-short-video').length, 1);
+    assert.dom(screen.getByRole('button', { name: 'Afficher la transcription' })).exists();
+  });
+
   test('should display an element with an download element', async function (assert) {
     // given
     const element = {

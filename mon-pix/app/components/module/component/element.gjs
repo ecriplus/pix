@@ -15,6 +15,7 @@ import QcuDeclarativeElement from 'mon-pix/components/module/element/qcu-declara
 import QcuDiscoveryElement from 'mon-pix/components/module/element/qcu-discovery';
 import QrocmElement from 'mon-pix/components/module/element/qrocm';
 import SeparatorElement from 'mon-pix/components/module/element/separator';
+import ShortVideoElement from 'mon-pix/components/module/element/short-video';
 import TextElement from 'mon-pix/components/module/element/text';
 import VideoElement from 'mon-pix/components/module/element/video';
 import ENV from 'mon-pix/config/environment';
@@ -34,6 +35,8 @@ export default class ModulixElement extends Component {
       <ImageElement @image={{@element}} @onAlternativeTextOpen={{@onImageAlternativeTextOpen}} />
     {{else if (eq @element.type "video")}}
       <VideoElement @video={{@element}} @onTranscriptionOpen={{@onVideoTranscriptionOpen}} />
+    {{else if (eq @element.type "short-video")}}
+      <ShortVideoElement @element={{@element}} @onTranscriptionOpen={{@onVideoTranscriptionOpen}} />
     {{else if (eq @element.type "download")}}
       <DownloadElement @download={{@element}} @onDownload={{@onFileDownload}} />
     {{else if (eq @element.type "embed")}}
