@@ -60,7 +60,7 @@
               "element": {
                 "id": "c9b08416-e55d-425e-bf06-5aa6c3250fa1",
                 "type": "qcu-discovery",
-                "instruction": "<p>Quelle faille de l’entreprise les cyberattaquants ont-ils profité ?</p>",
+                "instruction": "<p>De quelle faille de l’entreprise les cyberattaquants ont-ils profité ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -99,7 +99,7 @@
               "element": {
                 "id": "0252575f-bb33-4972-9b22-b23cd6b8b345",
                 "type": "text",
-                "content": "<p>Quelle est la technique utilisée par ces cyberattaquants ?</p>"
+                "content": "<p>Quelle est la technique utilisée par ces cyberattaquants ? Découvrons le ensemble.</p>"
               }
             }
           ]
@@ -120,7 +120,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
-                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant faisant partie du service sécurité de la Banque Nationnale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
+                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant faisant partie du service sécurité de la Banque Nationale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
               }
             },
             {
@@ -144,78 +144,109 @@
                   },
                   {
                     "input": "pixname",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "taper ici",
-                    "ariaLabel": "taper ici",
-                    "defaultValue": "",
+                    "placeholder": "sélectionner ",
+                    "ariaLabel": "sélectionner ",
+                    "defaultValue": "sélectionner ",
                     "tolerances": [
                       "t1",
                       "t2",
                       "t3"
                     ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "conseiller bancaire"
+                      },
+                      {
+                        "id": "2",
+                        "content": "cyberattaquant"
+                      },
+                      {
+                        "id": "3",
+                        "content": "ami"
+                      }
+                    ],
                     "solutions": [
-                      "escroc",
-                      "cyberattaquant",
-                      "arnaqueur"
+                      "2"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": "<span>a utilisé la&nbsp;</span>"
+                    "content": "<span>a utilisé</span>"
                   },
                   {
                     "input": "pixtext",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 14,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "taper ici",
-                    "ariaLabel": "taper ici",
-                    "defaultValue": "",
+                    "placeholder": "sélectionner",
+                    "ariaLabel": "sélectionner",
+                    "defaultValue": "sélectionner",
                     "tolerances": [
                       "t1",
                       "t2",
                       "t3"
                     ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "l’honnêteté"
+                      },
+                      {
+                        "id": "2",
+                        "content": "la menace"
+                      },
+                      {
+                        "id": "3",
+                        "content": "la manipulation"
+                      }
+                    ],
                     "solutions": [
-                      "manipulation"
+                      "3"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": "<span>pour pousser Marie à fournir ses&nbsp;</span>"
+                    "content": "<span>pour pousser Marie à donner</span>"
                   },
                   {
                     "input": "pixpai",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 30,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "taper ici",
-                    "ariaLabel": "taper ici",
-                    "defaultValue": "",
+                    "placeholder": "sélectionner",
+                    "ariaLabel": "sélectionner",
+                    "defaultValue": "sélectionner",
                     "tolerances": [
                       "t1",
                       "t2",
                       "t3"
                     ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "ses informations personnelles"
+                      },
+                      {
+                        "id": "2",
+                        "content": "ses clés de domicile"
+                      },
+                      {
+                        "id": "3",
+                        "content": "son adresse postale"
+                      }
+                    ],
                     "solutions": [
-                      "informations personnelles",
-                      "données personnelles"
+                      "1"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": "<span>et valider un</span>"
+                    "content": "<span>et valider</span>"
                   },
                   {
                     "input": "pixten",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 15,
+                    "type": "select",
                     "display": "inline",
                     "placeholder": "taper ici",
                     "ariaLabel": "taper ici",
@@ -225,9 +256,22 @@
                       "t2",
                       "t3"
                     ],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "l’envoi d’un colis"
+                      },
+                      {
+                        "id": "2",
+                        "content": "un paiement en ligne"
+                      },
+                      {
+                        "id": "3",
+                        "content": "une enquête d’opinion"
+                      }
+                    ],
                     "solutions": [
-                      "paiement",
-                      "virement"
+                      "2"
                     ]
                   },
                   {
@@ -238,11 +282,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "",
-                    "diagnosis": "<p>Effectivement,&nbsp;ici, l’attaquant ne force pas la <strong>victime </strong>: il la manipule pour la pousser à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                    "diagnosis": "<p>Effectivement,&nbsp;un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>l’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à<strong> agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p>Ici, l’attaquant ne force pas la <strong>victime </strong>: il la manipule pour la pousser à<strong> agir volontairement</strong>, en jouant sur la <strong>confiance </strong>et l’urgence.</p>"
+                    "diagnosis": "<p>Ici,un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>l’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à <strong>agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
                   }
                 }
               }
@@ -334,7 +378,7 @@
                     {
                       "id": "11b429bb-558b-48d4-926b-cc9c45b63c28",
                       "type": "custom",
-                      "instruction": "<p>Voici deux versions de ce message.&nbsp;<br>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
+                      "instruction": "<p>Voici deux versions de ce message.&nbsp;<br>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
                       "tagName": "image-quiz",
                       "props": {
                         "name": "Message facture",
@@ -864,7 +908,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>d’un hameçonnage de masse par mail</p>",
+                          "content": "<p>d’un hameçonnage de masse</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Il ne s’agissait pas d’un envoi massif d’e-mails trompeurs, mais d’un contact direct et ciblé.</p>"
@@ -872,18 +916,18 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>d’un hameçonnage ciblé par message</p>",
+                          "content": "<p>d’un hameçonnage ciblé</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>L’attaque n’a pas utilisé de messages personnalisés, mais une conversation orale pour instaurer la confiance.</p>"
+                            "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                            "diagnosis": "<p>Les attaquants ont choisi avec soin leur victime. Puis, ils ont utilisé l’urgence et l’usurpation d’identité la pousser  à agir sans vérifier la légitimité de la demande.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>d’une arnaque à la confiance par téléphone</p>",
+                          "content": "<p>d’une arnaque à la confiance</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !&nbsp;🎉</p>",
-                            "diagnosis": "<p>Les attaquants ont utilisé l’urgence et l’usurpation d’identité pour pousser leur cible à agir sans vérifier la légitimité de la demande.</p>"
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Ici, les attaquants n’ont pas construit de relation dans le temps avec leur victime.</p>"
                           }
                         },
                         {
@@ -895,7 +939,7 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "2"
                     }
                   ]
                 },
@@ -904,7 +948,7 @@
                     {
                       "id": "aaddfe1c-d8bc-44ad-867a-b103f72fe198",
                       "type": "qrocm",
-                      "instruction": "<p>Quel biais psychologique a été utilisé ?</p>",
+                      "instruction": "<p>Quel biais cognitif a été utilisé ?</p>",
                       "proposals": [
                         {
                           "type": "text",
@@ -912,20 +956,32 @@
                         },
                         {
                           "input": "pixtop",
-                          "type": "input",
-                          "inputType": "text",
-                          "size": 12,
+                          "type": "select",
                           "display": "inline",
-                          "placeholder": "2 mots",
-                          "ariaLabel": "taper ici",
-                          "defaultValue": "",
+                          "placeholder": "sélectionner un biais",
+                          "ariaLabel": "sélectionner un biais",
+                          "defaultValue": "sélectionner un biais",
                           "tolerances": [
                             "t1",
                             "t2",
                             "t3"
                           ],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "de cadrage"
+                            },
+                            {
+                              "id": "2",
+                              "content": "d’empathie"
+                            },
+                            {
+                              "id": "3",
+                              "content": "du coût irrécupérable"
+                            }
+                          ],
                           "solutions": [
-                            "de cadrage"
+                            "1"
                           ]
                         }
                       ],
@@ -936,7 +992,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le levier principal n’était pas la peur, mais la manière dont les attaquants ont cadré la demande pour influencer la perception et pousser la victime à agir.</p>"
+                          "diagnosis": "<p>Ici, le levier principal n’était pas les sentiments ni l’attachement, mais la manière dont les attaquants ont cadré la demande pour influencer la perception et pousser la victime à agir.</p>"
                         }
                       }
                     }
@@ -962,7 +1018,7 @@
               "element": {
                 "id": "114623c4-60db-4bce-b993-53e47f5241a3",
                 "type": "qcu-declarative",
-                "instruction": "<p>D’après vous, quelle serait la meilleure action que vous pourriez mettre en œuvre pour renforcer la vigilance face aux arnaques par ingénierie sociale ?</p>",
+                "instruction": "<p>Après la lecture de ce module, comment envisagez-vous d’agir contre les arnaques par ingénierie sociale ?</p>",
                 "proposals": [
                   {
                     "id": "1",
