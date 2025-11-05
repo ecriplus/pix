@@ -4,7 +4,7 @@ import ModulixShortVideo from 'mon-pix/components/module/element/short-video';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | ShortVideo', function (hooks) {
   setupIntlRenderingTest(hooks);
