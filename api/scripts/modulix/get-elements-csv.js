@@ -50,6 +50,7 @@ export function getElements(modules) {
     'separator',
     'text',
     'video',
+    'short-video',
     'custom',
     'custom-draft',
   ];

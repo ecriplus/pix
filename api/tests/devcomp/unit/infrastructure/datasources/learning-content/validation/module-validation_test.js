@@ -13,6 +13,7 @@ import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
 import { qcuElementSchema } from './element/qcu-schema.js';
 import { blockInputSchema, blockSelectSchema, qrocmElementSchema } from './element/qrocm-schema.js';
 import { separatorElementSchema } from './element/separator-schema.js';
+import { shortVideoElementSchema } from './element/short-video-schema.js';
 import { textElementSchema } from './element/text-schema.js';
 import { videoElementSchema } from './element/video-schema.js';
 import { joiErrorParser } from './joi-error-parser.js';
@@ -472,6 +473,25 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         expect(joiError).to.equal(undefined, formattedError);
       }
     });
+
+    it('should validate sample short video structure', async function () {
+      try {
+        const sample = {
+          id: randomUUID(),
+          type: 'short-video',
+          title: 'Une vidéo courte',
+          url: 'https://assets.pix.org/modules/placeholder-video.mp4',
+          transcription: 'Je clique sur le bouton droit de la souris.',
+        };
+
+        await shortVideoElementSchema.validateAsync(sample, {
+          abortEarly: false,
+        });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
   });
 
   describe('when element contains not allowed HTML', function () {
@@ -510,6 +530,28 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
 
       try {
         await videoElementSchema.validateAsync(invalidVideo, {
+          abortEarly: false,
+        });
+        throw new Error('Joi validation should have thrown');
+      } catch (joiError) {
+        expect(joiError.message).to.deep.equal(
+          '"title" failed custom validation because HTML is not allowed in this field',
+        );
+      }
+    });
+
+    it('should throw htmlNotAllowedSchema custom error for shortVideo.title field', async function () {
+      // given
+      const invalidShortVideo = {
+        id: '73ac3644-7637-4cee-86d4-1a75f53f0b9c',
+        type: 'short-video',
+        title: '<h1>Une vidéo</h1>',
+        url: 'https://videos.pix.fr/modulix/placeholder-video.mp4',
+        transcription: 'Je clique sur le bouton droit de la souris.',
+      };
+
+      try {
+        await shortVideoElementSchema.validateAsync(invalidShortVideo, {
           abortEarly: false,
         });
         throw new Error('Joi validation should have thrown');

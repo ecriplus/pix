@@ -13,6 +13,7 @@ import { QCUDeclarative } from '../../../../../src/devcomp/domain/models/element
 import { QCUDiscovery } from '../../../../../src/devcomp/domain/models/element/QCU-discovery.js';
 import { QROCM } from '../../../../../src/devcomp/domain/models/element/QROCM.js';
 import { Separator } from '../../../../../src/devcomp/domain/models/element/Separator.js';
+import { ShortVideo } from '../../../../../src/devcomp/domain/models/element/ShortVideo.js';
 import { Text } from '../../../../../src/devcomp/domain/models/element/Text.js';
 import { Video } from '../../../../../src/devcomp/domain/models/element/Video.js';
 import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
@@ -615,6 +616,63 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
           transcription: 'Insert transcription here',
           isAnswerable: false,
           poster: 'https://example.org/modulix/video-poster.jpg',
+        });
+      });
+
+      it('should instantiate a Module with a ComponentElement which contains a Short Video Element', async function () {
+        // given
+        const moduleData = {
+          id: '256900b7-4c4f-4f1c-8326-ebec85a694c2',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'novice',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          sections: [
+            {
+              id: 'edca017b-1953-4308-b741-b559a642a1c0',
+              type: 'practise',
+              grains: [
+                {
+                  id: 'f27eb412-ba11-4170-a677-63178cca36e9',
+                  type: 'lesson',
+                  title: 'title',
+                  components: [
+                    {
+                      type: 'element',
+                      element: {
+                        id: 'c976a2d7-2e69-4f34-aa84-14bbc69f9563',
+                        type: 'short-video',
+                        title: 'Comment faire un clic droit avec une souris',
+                        url: 'https://assets.pix.org/modules/clic_droit.mp4',
+                        transcription: 'Je clique sur le bouton droit de la souris.',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = await ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(ShortVideo);
+        expect(module.sections[0].grains[0].components[0].element).to.deep.equal({
+          id: 'c976a2d7-2e69-4f34-aa84-14bbc69f9563',
+          type: 'short-video',
+          title: 'Comment faire un clic droit avec une souris',
+          url: 'https://assets.pix.org/modules/clic_droit.mp4',
+          transcription: 'Je clique sur le bouton droit de la souris.',
+          isAnswerable: false,
         });
       });
 
@@ -1527,6 +1585,63 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
         expect(module.sections[0].grains[0].components[0].steps[0]).to.be.an.instanceOf(Step);
         expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(Video);
+      });
+
+      it('should instantiate a Module with a ComponentStepper which contains a Short Video Element', async function () {
+        // given
+        const moduleData = {
+          id: 'effc5154-bc45-4eb1-b4ec-84036a574161',
+          slug: 'title',
+          title: 'title',
+          isBeta: true,
+          details: {
+            image: 'https://assets.pix.org/modulix/placeholder-details.svg',
+            description: 'Description',
+            duration: 5,
+            level: 'novice',
+            tabletSupport: 'comfortable',
+            objectives: ['Objective 1'],
+          },
+          sections: [
+            {
+              id: 'dda7be6c-855d-4219-be4d-362fe53304bb',
+              type: 'practise',
+              grains: [
+                {
+                  id: '59f5cc13-e96f-4e9b-a123-0845746e1614',
+                  type: 'lesson',
+                  title: 'title',
+                  components: [
+                    {
+                      type: 'stepper',
+                      steps: [
+                        {
+                          elements: [
+                            {
+                              id: 'd724ce03-c425-489a-bfdc-72d938f55b9f',
+                              type: 'short-video',
+                              title: 'Vidéo courte de présentation de Pix',
+                              url: 'https://assets.pix.org/modulix/short-video.mp4',
+                              transcription: 'Je clique sur le bouton droit de la souris.',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+
+        // when
+        const module = await ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.sections[0].grains[0].components[0]).to.be.an.instanceOf(ComponentStepper);
+        expect(module.sections[0].grains[0].components[0].steps[0]).to.be.an.instanceOf(Step);
+        expect(module.sections[0].grains[0].components[0].steps[0].elements[0]).to.be.an.instanceOf(ShortVideo);
       });
 
       it('should instantiate a Module with a ComponentStepper which contains a Download Element', async function () {

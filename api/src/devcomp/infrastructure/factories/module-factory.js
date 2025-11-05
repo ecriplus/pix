@@ -24,6 +24,7 @@ import { QCUDeclarative } from '../../domain/models/element/QCU-declarative.js';
 import { QCUDiscovery } from '../../domain/models/element/QCU-discovery.js';
 import { QROCM } from '../../domain/models/element/QROCM.js';
 import { Separator } from '../../domain/models/element/Separator.js';
+import { ShortVideo } from '../../domain/models/element/ShortVideo.js';
 import { Text } from '../../domain/models/element/Text.js';
 import { Video } from '../../domain/models/element/Video.js';
 import { Grain } from '../../domain/models/Grain.js';
@@ -133,6 +134,8 @@ export class ModuleFactory {
         return ModuleFactory.#buildText(element);
       case 'video':
         return ModuleFactory.#buildVideo(element);
+      case 'short-video':
+        return ModuleFactory.#buildShortVideo(element);
       case 'qab':
         return ModuleFactory.#buildQAB(element);
       case 'qcm':
@@ -234,6 +237,15 @@ export class ModuleFactory {
       subtitles: element.subtitles,
       transcription: element.transcription,
       poster: element.poster,
+    });
+  }
+
+  static #buildShortVideo(element) {
+    return new ShortVideo({
+      id: element.id,
+      title: element.title,
+      url: element.url,
+      transcription: element.transcription,
     });
   }
 
