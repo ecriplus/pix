@@ -85,6 +85,22 @@ export default class ModulixNavigationButton extends Component {
     this.hideTooltip(event);
   }
 
+  get ariaLabelButton() {
+    const totalSections = this.args.sections.length;
+    const currentSectionIndex = this.args.sections.indexOf(this.args.section) + 1;
+    const steps = this.intl.t('pages.modulix.navigation.buttons.aria-label.steps', {
+      indexSection: currentSectionIndex,
+      totalSections: totalSections,
+    });
+
+    if (this.isDisabled) {
+      return `${steps} ${this.intl.t('pages.modulix.navigation.buttons.aria-label.disabled')}`;
+    }
+    return `${steps} ${this.intl.t('pages.modulix.navigation.buttons.aria-label.enabled', {
+      sectionTitle: this.sectionTitle(this.args.section.type),
+    })}`;
+  }
+
   <template>
     {{#if this.media.isMobile}}
       <PixButton
@@ -92,6 +108,7 @@ export default class ModulixNavigationButton extends Component {
         @triggerAction={{this.scrollToSection}}
         @iconBefore={{this.sectionTitleIcon @section.type}}
         @isDisabled={{this.isDisabled}}
+        aria-label={{this.ariaLabelButton}}
         aria-current="{{this.isCurrentSection}}"
       >{{this.sectionTitle @section.type}}</PixButton>
     {{else}}
@@ -105,7 +122,7 @@ export default class ModulixNavigationButton extends Component {
       >
         <PixIconButton
           class="module-navigation-button module-navigation-button{{this.buttonClass}}"
-          @ariaLabel={{this.sectionTitle @section.type}}
+          @ariaLabel={{this.ariaLabelButton}}
           @triggerAction={{this.scrollToSection}}
           @iconName={{this.sectionTitleIcon @section.type}}
           @isDisabled={{this.isDisabled}}

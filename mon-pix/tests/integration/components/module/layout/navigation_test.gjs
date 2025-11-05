@@ -36,10 +36,28 @@ module('Integration | Component | Module | Navigation', function (hooks) {
 
       // then
       assert
-        .dom(await screen.findByRole('button', { name: t('pages.modulix.section.explore-to-understand') }))
+        .dom(
+          screen.getByRole('button', {
+            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+              indexSection: 2,
+              totalSections: 5,
+            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+              sectionTitle: 'Explorer pour comprendre',
+            })}`,
+          }),
+        )
         .hasAria('current', 'true');
       assert
-        .dom(screen.getByRole('button', { name: t('pages.modulix.section.question-yourself') }))
+        .dom(
+          screen.getByRole('button', {
+            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+              indexSection: 1,
+              totalSections: 5,
+            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+              sectionTitle: 'Se questionner',
+            })}`,
+          }),
+        )
         .hasAria('current', 'false');
     });
   });

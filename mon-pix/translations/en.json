@@ -1678,6 +1678,15 @@
           "title": "Transcription"
         }
       },
+      "navigation": {
+        "buttons": {
+          "aria-label": {
+            "disabled": "Not available. Complete the previous step.",
+            "enabled": "Go to {sectionTitle}",
+            "steps": "Step {indexSection} of {totalSections}."
+          }
+        }
+      },
       "preview": {
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",

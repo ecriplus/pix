@@ -161,10 +161,18 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
         const navigation = screen.getByRole('navigation', { name: t('navigation.nav-bar.aria-label') });
         const firstSectionButton = within(navigation).getByRole('button', {
-          name: t('pages.modulix.section.explore-to-understand'),
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: 1,
+            totalSections: 2,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+            sectionTitle: 'Explorer pour comprendre',
+          })}`,
         });
         const secondSectionButton = within(navigation).getByRole('button', {
-          name: t('pages.modulix.section.go-further'),
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: 2,
+            totalSections: 2,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
         });
 
         // then

@@ -33,6 +33,7 @@ export default class ModulixNavigation extends Component {
             @section={{section}}
             @isCurrentSection={{this.isCurrentSection index}}
             @isPastSection={{this.isPastSection index}}
+            @sections={{@sections}}
           />
         {{/each}}
       </:navElements>
