@@ -344,23 +344,23 @@
                     {
                       "id": "a6becee0-ccd9-4076-90a9-8a6ec5c71d09",
                       "type": "text",
-                      "content": "<p>Vous recevez un message qui vous demande de régler une facture en retard. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>“Bonjour, une facture est arrivée à échéance. Merci de la régler dans les plus brefs délais.”</li><li>“⚠️ URGENT&nbsp;: Si vous ne réglez pas cette facture sous 24h, votre compte sera suspendu et des pénalités financières s’appliqueront.”</li></ol>"
+                      "content": "<p>Voici deux versions d’un message qui vous demande de régler une facture en retard&nbsp;: </p><ol><li>“Bonjour, une facture est arrivée à échéance. Merci de la régler dans les plus brefs délais.”</li><li>“⚠️ URGENT&nbsp;: Si vous ne réglez pas cette facture sous 24h, votre compte sera suspendu et des pénalités financières s’appliqueront.”</li></ol>"
                     },
                     {
                       "id": "b4345ed0-1a07-4fbb-beeb-3b13ed25bdec",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
+                      "instruction": "<p>Quelle version de ce message vous inciterait le plus à cliquer ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>message 1</p>",
+                          "content": "<p>Version 1</p>",
                           "feedback": {
                             "diagnosis": "<p>Ici, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>message 2</p>",
+                          "content": "<p>Version 2</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, même si les deux messages transmettent la même idée, le second message crée un <strong>sentiment d’urgence et de menace</strong>.<br>C’est le <strong>biais de cadrage</strong>&nbsp;: la manière dont l’information est présentée influence notre réaction.</p>"
                           }
@@ -382,23 +382,23 @@
                     {
                       "id": "22b8c918-e299-4e77-8a1f-ff1124694636",
                       "type": "text",
-                      "content": "<p>Vous recevez un message sur un réseau social de la part d’un contact que vous connaissez à peine. <br>Voici deux versions de ce message&nbsp;: </p><ol><li>\"Salut, je suis vraiment en galère… Mon filleul est gravement malade, j’ai lancé une collecte pour financer sa prochaine opération. Si elle n’a pas lieu cette semaine, sa vie est en danger. Tu peux faire un don rapidement, on a besoin d’aide ! 🙏\"</li><li>\"Salut, je partage une collecte pour financer une opération pour mon filleul malade. Si ça te touche, tu peux consulter les infos sur le site et faire un don. 👌\"</li></ol>"
+                      "content": "<p>Voici deux versions d’un message sur un réseau social de la part d’un contact que vous connaissez à peine&nbsp;: </p><ol><li>\"Salut, je suis vraiment en galère… Mon filleul est gravement malade, j’ai lancé une collecte pour financer sa prochaine opération. Si elle n’a pas lieu cette semaine, sa vie est en danger. Tu peux faire un don rapidement, on a besoin d’aide ! 🙏\"</li><li>\"Salut, je partage une collecte pour financer une opération pour mon filleul malade. Si ça te touche, tu peux consulter les infos sur le site et faire un don. 👌\"</li></ol>"
                     },
                     {
                       "id": "d01441a1-c767-4797-954e-83bcb9f07ee1",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Lequel de ces deux messages vous donnerait le plus envie de faire un don ?</p>",
+                      "instruction": "<p>Quelle version de ce message vous donnerait le plus envie de faire un don ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>message 1</p>",
+                          "content": "<p>Version 1</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>message 2</p>",
+                          "content": "<p>Version 2</p>",
                           "feedback": {
                             "diagnosis": "<p>Le premier message est écrit pour déclencher une <strong>réaction émotionnelle immédiate</strong>&nbsp;: compassion, urgence, peur pour l’autre.<br>C’est le <strong>biais d’empathie</strong>&nbsp;: l’émotion forte, ressentie pour l’autre, prend le dessus sur la réflexion.</p>"
                           }
@@ -420,23 +420,23 @@
                     {
                       "id": "236171b6-22b0-4351-b7b0-bf520afc43c6",
                       "type": "text",
-                      "content": "<p>Vous avez investi de l’argent dans une plateforme d’investissement en ligne.&nbsp;Quelques semaines plus tard, vous recevez un nouveau message.<br>Voici deux versions de ce message&nbsp;:&nbsp;</p><ol><li>\"Bonjour, votre période d’essai arrive à son terme.<br>Si vous souhaitez continuer à utiliser la plateforme, vous pouvez effectuer un nouveau versement.\"</li><li>\"Bonjour, vous avez déjà versé 200 € sur la plateforme.<br>Pour éviter la perte de votre mise de départ et les bénéfices accumulés, effectuez un versement supplémentaire de seulement 50 €.\"</li></ol>"
+                      "content": "<p>Vous avez investi de l’argent dans une plateforme d’investissement en ligne. Voici deux versions du message que la plateforme en ligne vous envoie quelques semaines plus tard&nbsp;:&nbsp;</p><ol><li>\"Bonjour, votre période d’essai arrive à son terme.<br>Si vous souhaitez continuer à utiliser la plateforme, vous pouvez effectuer un nouveau versement.\"</li><li>\"Bonjour, vous avez déjà versé 200 € sur la plateforme.<br>Pour éviter la perte de votre mise de départ et les bénéfices accumulés, effectuez un versement supplémentaire de seulement 50 €.\"</li></ol>"
                     },
                     {
                       "id": "f6227e89-4a7c-44e2-87d5-80c7c6909eba",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Lequel de ces deux messages, vous donnerait le plus envie de continuer à investir ?</p>",
+                      "instruction": "<p>Quelle version de ce message vous donnerait le plus envie de continuer à investir ?</p>",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>message 1</p>",
+                          "content": "<p>Version 1</p>",
                           "feedback": {
                             "diagnosis": "<p>Le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>message 2</p>",
+                          "content": "<p>Version 2</p>",
                           "feedback": {
                             "diagnosis": "<p>Effectivement, le second message met l’accent sur <strong>ce que vous avez déjà investi</strong> et <strong>ce que vous risquez de perdre.</strong><br>Ce type de formulation déclenche le <strong>biais du coût irrécupérable</strong>&nbsp;: on poursuit une action pour ne pas “perdre” ce qu’on a déjà investi.</p>"
                           }
