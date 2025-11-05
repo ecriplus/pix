@@ -1,8 +1,8 @@
-import * as countryRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/country-repository.js';
-import { Country } from '../../../../../../src/shared/domain/read-models/Country.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { Country } from '../../../../../src/shared/domain/read-models/Country.js';
+import * as countryRepository from '../../../../../src/shared/infrastructure/repositories/country-repository.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
-describe('Certification | Enrolment | Integration | Repository | country-repository', function () {
+describe('Integration | Repository | country-repository', function () {
   describe('#findAll', function () {
     describe('when there are countries', function () {
       it('should return all common named countries ordered by name', async function () {
