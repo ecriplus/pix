@@ -4,7 +4,7 @@
   "title": "Vous avez un nouveau message ✉️ : attention aux arnaques",
   "isBeta": true,
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/CYPhishingNov/cy-phishing-nov-picto.svg",
     "description": "<p>Chaque jour, nous recevons des messages par SMS ou messagerie instantanée. Certains d’entre eux cachent des arnaques.<br> Dans ce module, découvrez les réflexes à avoir pour éviter de tomber dans le piège. 🛡️</p>",
     "duration": 10,
     "level": "novice",
@@ -126,7 +126,7 @@
               "element": {
                 "id": "04c1d53e-629c-4e9b-9955-0d5200984ef4",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/cyphinov1.png",
+                "url": "https://assets.pix.org/modules/CYPhishingNov/colis.svg",
                 "alt": "",
                 "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;:«&nbsp;Nous avons essayé de livrer votre colis 00073679039. Confirmez votre adresse de livraison et payez les frais en ligne (2,99€)&nbsp;: http://bit.do/fHXym&nbsp;».</p>",
                 "legend": "",
@@ -525,19 +525,11 @@
             {
               "type": "element",
               "element": {
-                "id": "37456903-7211-469f-86a6-e6c3b10287b4",
-                "type": "text",
-                "content": "<p>Les messages d’arnaque vous poussent toujours à <strong>agir rapidement et sans réfléchir</strong>&nbsp;:</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "2d35527e-e647-49ff-9879-f77294e8b7e4",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/lecon3.png",
+                "url": "https://assets.pix.org/modules/CYPhishingNov/infographie-lecon3.svg",
                 "alt": "image décrite en détail dans l’alternative textuelle",
-                "alternativeText": "<ul><li>cliquer sur un lien</li><li>appeler un numéro de téléphone</li><li>répondre au message au plus vite</li></ul>",
+                "alternativeText": "<p>Infographie sur les messages d’arnaque. Titre : « Les messages d’arnaque vous poussent toujours à agir rapidement et sans réfléchir ».<br> Trois exemples illustrés par des pictogrammes violets :</p><ul><li>en cliquant sur un lien,</li><li>en appelant un numéro de téléphone,</li><li>en répondant au message plus vite.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -668,19 +660,11 @@
               "element": {
                 "id": "32ed31f7-6d00-4c70-a4e7-da26e59617fe",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/recap.png",
+                "url": "https://assets.pix.org/modules/CYPhishingNov/infographie-recap.png",
                 "alt": "Infographie décrite en détail dans l’alternative textuelle",
-                "alternativeText": "<p>Un dessin représentant une personne tenant un smartphone. Sur l’écran du téléphone, un message est affiché avec un lien en surbrillance.<br>Trois encadrés de texte, reliés par des flèches violettes au téléphone, expliquent&nbsp;:</p><ul><li>«&nbsp;Ils cherchent à gagner votre confiance, en utilisant l’identité d’un proche, ou d’un service public connu.&nbsp;»</li><li>«&nbsp;Ils invitent à agir, souvent en cliquant sur un lien.&nbsp;»</li><li>«&nbsp;Ils utilisent vos émotions pour vous faire réagir rapidement.&nbsp;»</li></ul>",
+                "alternativeText": "<p>Un dessin représentant une personne tenant un smartphone. Sur l’écran du téléphone, un message est affiché avec un lien en surbrillance.<br>Trois encadrés de texte, reliés au téléphone, expliquent&nbsp;:</p><ul><li>«&nbsp;Ils cherchent à gagner votre confiance, en utilisant l’identité d’un proche, ou d’un service public connu.&nbsp;»</li><li>«&nbsp;Ils invitent à agir, souvent en cliquant sur un lien.&nbsp;»</li><li>«&nbsp;Ils utilisent vos émotions pour vous faire réagir rapidement.&nbsp;»</li></ul><p>Liste de recommandations avec le titre : « Trois conseils pour éviter de tomber dans le piège »</p><ul><li>Conseil 1 : prenez le temps de réfléchir avant d’agir.</li><li> Conseil 2 : ne communiquez pas d’informations personnelles.</li><li>Conseil 3 : ne cliquez pas sur le lien, ne répondez pas.</li></ul>",
                 "legend": "",
                 "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "9379c03e-aca3-439d-b522-c1b584c9b563",
-                "type": "text",
-                "content": "<p>Pour éviter de tomber dans le piège d’un message d’arnaque&nbsp;:&nbsp; </p><ul>    <li><strong>Prenez le temps de réfléchir</strong> avant d’agir.&nbsp;⌛</li>    <li><strong>Ne pas communiquez&nbsp;</strong>d’informations personnelles.&nbsp;ℹ️</li>    <li><strong> Ne cliquez</strong><strong>&nbsp; pas</strong> sur le lien, ne répondez pas.&nbsp;🙉</li></ul><p><br>🕵️ Si vous avez un doute sur un message, <strong>vérifiez l’information </strong>en contactant la personne ou le service par un autre moyen.</p>"
               }
             }
           ]
@@ -788,7 +772,7 @@
                     {
                       "id": "e8520281-878e-4b94-97fa-2a807ddf9316",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/papamaman.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingNov/mamanpapa.svg",
                       "alt": "Image décrite dans l’alternative textuelle",
                       "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;: <br>«&nbsp;Bonjour maman/papa, c’est moi, mon téléphone est cassé, c’est mon nouveau numéro&nbsp;: +33774889453. Vous pouvez enregistrer ceci. Envoyez-moi un message sur WhatsApp le plus rapidement possible.&nbsp;»</p>",
                       "legend": "",
@@ -825,7 +809,7 @@
                     {
                       "id": "890b12b7-49df-4d90-806f-a63a3c66d9c7",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/venteprivee.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingNov/venteprivee.svg",
                       "alt": "Image décrite dans l’alternative textuelle",
                       "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;:<br>«&nbsp;VENTE PRIVÉE ce jeudi dans votre magasin Mode chic, -20% sur toute la nouvelle collection pour fêter les 10 ans du magasin ! À très vite. STOP au 36184&nbsp;».</p>",
                       "legend": "",
@@ -862,7 +846,7 @@
                     {
                       "id": "1d8f4d81-84d1-441f-b4df-5473d4b80966",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/engie.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingNov/engie.svg",
                       "alt": "Image décrite dans l’alternative textuelle",
                       "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;:«&nbsp;ENGIE INFO&nbsp;: Vous avez un crédit de 350€ disponible. Cliquez pour le récupérer&nbsp;: engie-refund.site/350 Vérifiez maintenant pour éviter l’annulation automatique. (Ref&nbsp;: 7F4A).&nbsp;»</p>",
                       "legend": "",
@@ -899,7 +883,7 @@
                     {
                       "id": "56978014-7efc-433a-9d6c-622522e52b67",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/ameli.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingNov/ameli.svg",
                       "alt": "Image décrite dans l’alternative textuelle",
                       "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;:<br>«&nbsp;Dernière relance avant suspension de vos droits de la sécurité sociale AMELI. L’actualisation de votre dossier est disponible dès à présent sur votre espace client via ce lien&nbsp;: https://mesdroitsenligne.info.ca&nbsp;»</p>",
                       "legend": "",
@@ -936,7 +920,7 @@
                     {
                       "id": "19b81b9b-646d-4658-8d39-97c646e9d9fc",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_Phishing_nov/banquepostale.png",
+                      "url": "https://assets.pix.org/modules/CYPhishingNov/banquepostale.svg",
                       "alt": "Image décrite dans l’alternative textuelle",
                       "alternativeText": "<p>Un smartphone affichant un SMS. Le message dit&nbsp;:<br>«&nbsp;Relevé La Banque Postale Le 01/09/2025 à 01h35 CCP 0637***8023 Solde +982.36€ -54.99€ -625.00€ -54.99€ -12.99€ Aucun crédit&nbsp;».</p>",
                       "legend": "",
