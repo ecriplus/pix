@@ -374,34 +374,6 @@
                         }
                       ],
                       "solution": "2"
-                    },
-                    {
-                      "id": "11b429bb-558b-48d4-926b-cc9c45b63c28",
-                      "type": "custom",
-                      "instruction": "<p>Voici deux versions de ce message.&nbsp;<br>Lequel de ces deux messages vous inciterait le plus à cliquer ?</p>",
-                      "tagName": "image-quiz",
-                      "props": {
-                        "name": "Message facture",
-                        "multiple": false,
-                        "maxChoicesPerLine": 2,
-                        "hideChoicesName": false,
-                        "orderChoices": true,
-                        "imageChoicesSize": "large",
-                        "choices": [
-                          {
-                            "name": "message 1",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a1.png"
-                            }
-                          },
-                          {
-                            "name": "message 2",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/cy_phishing_ava/message-a2.png"
-                            }
-                          }
-                        ]
-                      }
                     }
                   ]
                 },
@@ -495,7 +467,7 @@
               "element": {
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
-                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. 🧠<p/> <p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
+                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. 🧠</p><p> </p><p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
               }
             }
           ]
@@ -1018,7 +990,7 @@
               "element": {
                 "id": "114623c4-60db-4bce-b993-53e47f5241a3",
                 "type": "qcu-declarative",
-                "instruction": "<p>Après la lecture de ce module, comment envisagez-vous d’agir contre les arnaques par ingénierie sociale ? 💪</p>",
+                "instruction": "<p>Après la lecture de ce module, comment envisagez-vous d’agir contre les arnaques par ingénierie sociale ? 💪</p>",
                 "proposals": [
                   {
                     "id": "1",
