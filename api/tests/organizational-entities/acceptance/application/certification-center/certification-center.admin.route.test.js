@@ -424,6 +424,23 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
     });
   });
 
+  describe('GET /api/admin/certification-centers/batch-archive/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+        url: '/api/admin/certification-centers/batch-archive/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/certification-centers/batch-archive', function () {
     context('success case', function () {
       it('returns a 204 http request', async function () {

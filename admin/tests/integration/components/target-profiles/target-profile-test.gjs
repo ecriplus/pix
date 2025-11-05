@@ -133,8 +133,6 @@ function _findByListItemText(screen, text) {
         .replace(/(\r\n|\n|\r)/gm, '')
         .trim()
         .replace(/  +/g, ' ');
-      console.log(text);
-      console.log(cleanListItemText);
       return cleanListItemText === text;
     }) || null
   );

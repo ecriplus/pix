@@ -100,29 +100,30 @@ function deserializeForSessionsImport({ parsedCsvData, hasBillingMode, certifica
   }));
 }
 
+const requiredFieldNamesForOrganizationsImport = [
+  'type',
+  'externalId',
+  'name',
+  'provinceCode',
+  'credit',
+  'emailInvitations',
+  'emailForSCOActivation',
+  'identityProviderForCampaigns',
+  'organizationInvitationRole',
+  'locale',
+  'tags',
+  'createdBy',
+  'documentationUrl',
+  'targetProfiles',
+  'isManagingStudents',
+  'DPOFirstName',
+  'DPOLastName',
+  'DPOEmail',
+  'administrationTeamId',
+  'parentOrganizationId',
+];
+
 async function deserializeForOrganizationsImport(file) {
-  const requiredFieldNames = [
-    'type',
-    'externalId',
-    'name',
-    'provinceCode',
-    'credit',
-    'emailInvitations',
-    'emailForSCOActivation',
-    'identityProviderForCampaigns',
-    'organizationInvitationRole',
-    'locale',
-    'tags',
-    'createdBy',
-    'documentationUrl',
-    'targetProfiles',
-    'isManagingStudents',
-    'DPOFirstName',
-    'DPOLastName',
-    'DPOEmail',
-    'administrationTeamId',
-    'parentOrganizationId',
-  ];
   const batchOrganizationOptionsWithHeader = {
     skipEmptyLines: true,
     header: true,
@@ -176,18 +177,18 @@ async function deserializeForOrganizationsImport(file) {
     },
   };
 
-  await checkCsvHeader({ filePath: file, requiredFieldNames });
+  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForOrganizationsImport });
 
   return await parseCsvWithHeader(file, batchOrganizationOptionsWithHeader);
 }
+
+const requiredFieldNamesForCertificationCenterBatchArchive = ['ID du centre de certification'];
 
 async function deserializeForCertificationCenterBatchArchive(
   file,
   { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper,
 ) {
-  const requiredFieldNames = ['ID du centre de certification'];
-
-  await checkCsvHeader({ filePath: file, requiredFieldNames });
+  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForCertificationCenterBatchArchive });
   const cleanedData = await readCsvFile(file);
 
   const batchCertificationCenterOptionsWithHeader = {
@@ -212,10 +213,10 @@ async function deserializeForCertificationCenterBatchArchive(
   return parsedData.map((data) => data['ID du centre de certification']);
 }
 
-async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper) {
-  const columnName = "ID de l'organisation";
+const requiredFieldNamesForOrganizationBatchArchive = ["ID de l'organisation"];
 
-  await checkCsvHeader({ filePath: file, requiredFieldNames: [columnName] });
+async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper) {
+  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForOrganizationBatchArchive });
   const cleanedData = await readCsvFile(file);
 
   const batchOrganizationOptionsWithHeader = {
@@ -237,7 +238,7 @@ async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, re
 
   const parsedData = await parseCsvData(cleanedData, batchOrganizationOptionsWithHeader);
 
-  return parsedData.map((data) => data[columnName]);
+  return parsedData.map((data) => data[requiredFieldNamesForOrganizationBatchArchive]);
 }
 
 const requiredFieldNamesForCampaignsImport = {
@@ -543,6 +544,9 @@ export {
   deserializeForSessionsImport,
   fieldNamesForCampaignsImport,
   parseForCampaignsImport,
+  requiredFieldNamesForCertificationCenterBatchArchive,
+  requiredFieldNamesForOrganizationBatchArchive,
+  requiredFieldNamesForOrganizationsImport,
   serializeLine,
   verifyColumnsValueAgainstConstraints,
 };

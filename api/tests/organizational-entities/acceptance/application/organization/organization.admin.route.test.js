@@ -28,6 +28,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     server = await createServer();
   });
 
+  describe('GET /api/admin/organizations/import-csv/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/import-csv/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/organizations/import-csv', function () {
     it('create organizations for the given csv file', async function () {
       // given
@@ -724,6 +741,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('GET /api/admin/organizations/batch-archive/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/batch-archive/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/organizations/batch-archive', function () {
     context('success case', function () {
       it('returns a 204 http request', async function () {
@@ -1275,6 +1309,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     });
   });
 
+  describe('GET /api/admin/organizations/update-organizations/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/update-organizations/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
   describe('POST /api/admin/organizations/update-organizations', function () {
     context('when a CSV file is loaded', function () {
       let firstOrganization, otherOrganization;
@@ -1354,6 +1405,23 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           expect(response.statusCode).to.equal(403);
         });
       });
+    });
+  });
+
+  describe('GET /api/admin/organizations/import-tags-csv/template', function () {
+    it('responds with a 200', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        url: '/api/admin/organizations/import-tags-csv/template',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
     });
   });
 

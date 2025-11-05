@@ -2,11 +2,24 @@ import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
-import { ORGANIZATION_FEATURES_HEADER } from '../../domain/constants.js';
+import { ORGANIZATION_FEATURES_HEADER, ORGANIZATIONS_UPDATE_HEADER } from '../../domain/constants.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationTagCsvParser } from '../../infrastructure/parsers/csv/organization-tag-csv.parser.js';
 import * as organizationSerializer from '../../infrastructure/serializers/jsonapi/organization-serializer.js';
 import { organizationForAdminSerializer } from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
+
+const ADD_TAGS_TO_ORGANIZATIONS_HEADER = organizationTagCsvParser.CSV_HEADER;
+
+const getTemplateForAddTagsToOrganizations = async function (request, h) {
+  const fields = ADD_TAGS_TO_ORGANIZATIONS_HEADER.columns.map(({ name }) => name);
+  const csvTemplateFileContent = generateCSVTemplate(fields);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=add-tags-to-organizations')
+    .code(200);
+};
 
 const addTagsToOrganizations = async function (request, h) {
   const filePath = request.payload.path;
@@ -68,12 +81,32 @@ const create = async function (request) {
   return serializedOrganization;
 };
 
+const getTemplateForCreateOrganizationsInBatch = async function (request, h) {
+  const csvTemplateFileContent = generateCSVTemplate(csvSerializer.requiredFieldNamesForOrganizationsImport);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=create-organizations-in-batch')
+    .code(200);
+};
+
 const createInBatch = async function (request, h) {
   const organizations = await csvSerializer.deserializeForOrganizationsImport(request.payload.path);
 
   const createdOrganizations = await usecases.createOrganizationsWithTagsAndTargetProfiles({ organizations });
 
   return h.response(organizationForAdminSerializer.serialize(createdOrganizations)).code(204);
+};
+
+const getTemplateForArchiveOrganizationsInBatch = async function (request, h) {
+  const csvTemplateFileContent = generateCSVTemplate(csvSerializer.requiredFieldNamesForOrganizationBatchArchive);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=archive-organizations-in-batch')
+    .code(200);
 };
 
 const archiveInBatch = async function (request, h) {
@@ -90,6 +123,17 @@ const getOrganizationDetails = async function (request, h, dependencies = { orga
 
   const organizationDetails = await usecases.getOrganizationDetails({ organizationId });
   return dependencies.organizationForAdminSerializer.serialize(organizationDetails);
+};
+
+const getTemplateForUpdateOrganizationsInBatch = async function (request, h) {
+  const fields = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name);
+  const csvTemplateFileContent = generateCSVTemplate(fields);
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=update-organizations-in-batch')
+    .code(200);
 };
 
 const updateOrganizationsInBatch = async function (request, h) {
@@ -132,16 +176,20 @@ const findChildrenOrganizations = async function (request, h, dependencies = { o
 };
 
 const organizationAdminController = {
+  getTemplateForAddTagsToOrganizations,
   addTagsToOrganizations,
   create,
+  getTemplateForCreateOrganizationsInBatch,
   createInBatch,
   archiveOrganization,
+  getTemplateForArchiveOrganizationsInBatch,
   archiveInBatch,
   attachChildOrganization,
   detachParentOrganization,
   getTemplateForAddOrganizationFeatureInBatch,
   addOrganizationFeatureInBatch,
   getOrganizationDetails,
+  getTemplateForUpdateOrganizationsInBatch,
   updateOrganizationsInBatch,
   updateOrganizationInformation,
   findPaginatedFilteredOrganizations,

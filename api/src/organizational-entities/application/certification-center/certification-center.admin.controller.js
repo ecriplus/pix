@@ -1,6 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/monitoring-tools.js';
 import * as csvSerializer from '../../../shared/infrastructure/serializers/csv/csv-serializer.js';
+import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { usecases } from '../../domain/usecases/index.js';
 import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as certificationCenterForAdminSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center-for-admin.serializer.js';
@@ -11,6 +12,18 @@ const archiveCertificationCenter = async function (request, h) {
   await usecases.archiveCertificationCenter({ certificationCenterId, userId });
 
   return h.response().code(204);
+};
+
+const getTemplateForArchiveInBatch = async function (request, h) {
+  const csvTemplateFileContent = generateCSVTemplate(
+    csvSerializer.requiredFieldNamesForCertificationCenterBatchArchive,
+  );
+
+  return h
+    .response(csvTemplateFileContent)
+    .header('Content-Type', 'text/csv; charset=utf-8')
+    .header('content-disposition', 'filename=archive-certification-center-in-batch')
+    .code(200);
 };
 
 const archiveInBatch = async function (request, h) {
@@ -88,6 +101,7 @@ const update = async function (request) {
 
 const certificationCenterAdminController = {
   archiveCertificationCenter,
+  getTemplateForArchiveInBatch,
   archiveInBatch,
   create,
   findPaginatedFilteredCertificationCenters,

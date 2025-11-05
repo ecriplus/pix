@@ -47,6 +47,24 @@ const register = async function (server) {
     },
     {
       method: 'GET',
+      path: '/api/admin/organizations/import-csv/template',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: (request, h) => organizationAdminController.getTemplateForCreateOrganizationsInBatch(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'organizations', 'tags'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
+            '- Elle permet de télécharger le template pour créer de nouvelles organisations en masse.',
+        ],
+      },
+    },
+    {
+      method: 'GET',
       path: '/api/admin/organizations/{organizationId}/children',
       config: {
         pre: [
@@ -239,6 +257,24 @@ const register = async function (server) {
       },
     },
     {
+      method: 'GET',
+      path: '/api/admin/organizations/batch-archive/template',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: (request, h) => organizationAdminController.getTemplateForArchiveOrganizationsInBatch(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'organizations', 'tags'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
+            '- Elle permet de télécharger le template pour archiver des organisations en masse.',
+        ],
+      },
+    },
+    {
       method: 'POST',
       path: '/api/admin/organizations/batch-archive',
       config: {
@@ -296,6 +332,24 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN, METIER ou SUPPORT permettant un accès à l'application d'administration de Pix**\n" +
             "- Elle permet d'attacher une organisation mère à une organisation fille",
+        ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/organizations/import-tags-csv/template',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: (request, h) => organizationAdminController.getTemplateForAddTagsToOrganizations(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'organizations', 'tags'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
+            '- Elle permet de télécharger le template pour ajouter en masse des tags à des organisations.',
         ],
       },
     },
@@ -395,6 +449,24 @@ const register = async function (server) {
         notes: [
           "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
             "- Elle permet de mettre à jour des informations d'une ou plusieurs organisations",
+        ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/organizations/update-organizations/template',
+      config: {
+        pre: [
+          {
+            method: (request, h) => securityPreHandlers.checkAdminMemberHasRoleSuperAdmin(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: (request, h) => organizationAdminController.getTemplateForUpdateOrganizationsInBatch(request, h),
+        tags: ['api', 'admin', 'organizational-entities', 'organizations'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant un rôle SUPER_ADMIN permettant un accès à l'application d'administration de Pix**\n" +
+            "- Elle permet de télécharger de template du csv pour mettre à jour des informations d'une ou plusieurs organisations",
         ],
       },
     },
