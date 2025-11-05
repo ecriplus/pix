@@ -296,6 +296,28 @@ module('Integration | Component | Module | Grain', function (hooks) {
       });
     });
 
+    module('when element is a short video', function () {
+      test('should display a short video element', async function (assert) {
+        // given
+        const url = 'https://assets.pix.org/modules/placeholder-video.mp4';
+        const shortVideoElement = {
+          id: 'f6869b46-30b8-4d41-b937-542e405862d1',
+          url,
+          transcription: 'transcription',
+          type: 'short-video',
+        };
+        const grain = {
+          components: [{ type: 'element', element: shortVideoElement }],
+        };
+
+        // when
+        await render(<template><ModuleGrain @grain={{grain}} /></template>);
+
+        // then
+        assert.dom('video').hasAttribute('src', url);
+      });
+    });
+
     module('when element is of type flashcards', function () {
       test('should display a flashcards element', async function (assert) {
         // given
