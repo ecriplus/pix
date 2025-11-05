@@ -99,7 +99,7 @@
               "element": {
                 "id": "0252575f-bb33-4972-9b22-b23cd6b8b345",
                 "type": "text",
-                "content": "<p>Quelle est la technique utilisée par ces cyberattaquants ? Découvrons le ensemble.</p>"
+                "content": "<p>Comment les failles humaines sont-elles exploitées ? Découvrons le ensemble.</p>"
               }
             }
           ]
@@ -120,7 +120,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
-                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant faisant partie du service sécurité de la Banque Nationale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
+                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme faisant partie du service sécurité de la Banque Nationale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
               }
             },
             {
