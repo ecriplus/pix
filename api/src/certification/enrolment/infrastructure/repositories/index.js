@@ -1,5 +1,4 @@
 import * as dataProtectionOfficerRepository from '../../../../organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import * as countryRepository from '../../../../shared/infrastructure/repositories/country-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as complementaryCertificationApi from '../../../complementary-certification/application/api/complementary-certification-api.js';
 import * as sessionManagementRepository from '../../../session-management/infrastructure/repositories/session-repository.js';
@@ -32,7 +31,6 @@ import * as sessionRepository from './session-repository.js';
  * @typedef {certificationCpfCityRepository} CertificationCpfCityRepository
  * @typedef {sessionForAttendanceSheetRepository} SessionForAttendanceSheetRepository
  * @typedef {sessionManagementRepository} SessionManagementRepository
- * @typedef {countryRepository} CountryRepository
  * @typedef {enrolledCandidateRepository} EnrolledCandidateRepository
  * @typedef {scoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {dataProtectionOfficerRepository} DataProtectionOfficerRepository
@@ -49,7 +47,6 @@ const repositoriesWithoutInjectedDependencies = {
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
   complementaryCertificationRepository,
-  countryRepository,
   dataProtectionOfficerRepository,
   enrolledCandidateRepository,
   scoCertificationCandidateRepository,
