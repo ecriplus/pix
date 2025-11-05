@@ -477,7 +477,7 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
   });
 
   describe('GET /api/admin/complementary-certifications/{complementaryCertificationKey}/current-consolidated-framework', function () {
-    it('should return the current framework for given complementaryCertificationKey', async function () {
+    it('should return the current framework for given complementary certification', async function () {
       // given
       const superAdmin = await insertUserWithRoleSuperAdmin();
 
@@ -491,7 +491,10 @@ describe('Certification | Configuration | Acceptance | API | complementary-certi
                 {
                   id: 'recThemCompetence1',
                   tubes: [
-                    { id: 'recTubeCompetence1', skills: [{ id: 'skillId@web3', challenges: [{ id: 'rec123' }] }] },
+                    {
+                      id: 'recTubeCompetence1',
+                      skills: [{ id: 'skillId@web3', challenges: [{ id: 'rec123', langues: ['Franco Français'] }] }],
+                    },
                   ],
                 },
               ],

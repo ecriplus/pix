@@ -1,4 +1,5 @@
-import * as learningContentRepository from '../../../../../../../api/src/certification/configuration/infrastructure/repositories/learning-content-repository.js';
+import * as learningContentRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/learning-content-repository.js';
+import { FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Integration | Infrastructure | Repository | LearningContentRepository', function () {
@@ -11,8 +12,16 @@ describe('Certification | Configuration | Integration | Infrastructure | Reposit
       const thematicId = databaseBuilder.factory.learningContent.buildCompetence({ id: 'thematic', competenceId }).id;
       const tubeId = databaseBuilder.factory.learningContent.buildTube({ id: 'tube', competenceId, thematicId }).id;
       const skillId = databaseBuilder.factory.learningContent.buildSkill({ id: 'skill', tubeId, competenceId }).id;
-      const challenge1 = databaseBuilder.factory.learningContent.buildChallenge({ id: 'chall1', skillId });
-      const challenge2 = databaseBuilder.factory.learningContent.buildChallenge({ id: 'chall2', skillId });
+      const challenge1 = databaseBuilder.factory.learningContent.buildChallenge({
+        id: 'chall1',
+        skillId,
+        locales: [FRENCH_FRANCE],
+      });
+      const challenge2 = databaseBuilder.factory.learningContent.buildChallenge({
+        id: 'chall2',
+        skillId,
+        locales: [FRENCH_FRANCE],
+      });
 
       const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification();
 
