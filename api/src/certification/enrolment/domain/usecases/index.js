@@ -100,7 +100,6 @@ const dependencies = {
   countryRepository,
 };
 
-import { findCountries } from '../../../../shared/domain/usecases/find-countries.js';
 import { addCandidateToSession } from './add-candidate-to-session.js';
 import { candidateHasSeenCertificationInstructions } from './candidate-has-seen-certification-instructions.js';
 import { createSession } from './create-session.js';
@@ -137,7 +136,6 @@ const usecasesWithoutInjectedDependencies = {
   deleteSession,
   deleteUnlinkedCertificationCandidate,
   enrolStudentsToSession,
-  findCountries,
   findDivisionsByCertificationCenter,
   findStudentsForEnrolment,
   getAttendanceSheet,

@@ -1,4 +1,4 @@
-import { countryController } from './country-controller.js';
+import { countryController } from '../../../shared/application/country/country-controller.js';
 
 const register = async function (server) {
   server.route([

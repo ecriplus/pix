@@ -1,5 +1,5 @@
-import { countryController } from '../../../../../src/certification/enrolment/application/country-controller.js';
-import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
+import { countryController } from '../../../../../src/shared/application/country/country-controller.js';
+import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
 import {
   domainBuilder,
   expect,
@@ -8,7 +8,7 @@ import {
   sinon,
 } from '../../../../test-helper.js';
 
-describe('Certification | Enrolment | Unit | Application | country-controller', function () {
+describe('Unit | Application | Controller | country-controller', function () {
   describe('#findCountries', function () {
     it('should fetch and return the countries, serialized as JSONAPI', async function () {
       // given
@@ -38,9 +38,9 @@ describe('Certification | Enrolment | Unit | Application | country-controller', 
 
       const userId = 42;
       const countrySerializerStub = { serialize: sinon.stub() };
-      sinon.stub(usecases, 'findCountries');
+      sinon.stub(sharedUsecases, 'findCountries');
 
-      usecases.findCountries.resolves(countries);
+      sharedUsecases.findCountries.resolves(countries);
       countrySerializerStub.serialize.withArgs(countries).resolves(serializedCountries);
 
       const request = {
@@ -55,7 +55,7 @@ describe('Certification | Enrolment | Unit | Application | country-controller', 
       });
 
       // then
-      expect(usecases.findCountries).to.have.been.called;
+      expect(sharedUsecases.findCountries).to.have.been.called;
       expect(countrySerializerStub.serialize).to.have.been.calledWithExactly(countries);
       expect(response).to.deep.equal(serializedCountries);
     });
