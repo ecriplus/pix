@@ -5,7 +5,7 @@
   "isBeta": true,
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois aux cyberattaquants de convaincre une personne d’agir volontairement pour arriver à leurs fins.<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><br></p>",
+    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois aux cyberattaquants de convaincre une personne d’agir volontairement pour arriver à leurs fins.🔓<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -120,7 +120,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
-                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme faisant partie du service sécurité de la Banque Nationale.<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
+                "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme faisant partie du service sécurité de la Banque Nationale.📲<br>Écoutez la conversation et observez la manière dont l’interlocuteur formule sa demande.</p>"
               }
             },
             {
@@ -303,7 +303,7 @@
               "element": {
                 "id": "37c91342-5737-434c-89d1-ad0012d56cfd",
                 "type": "text",
-                "content": "<p>Ces attaques sont appelées des attaques par <strong>ingénierie sociale</strong>. <br>Il s’agit d’<strong>escroqueries</strong> ayant pour but de<strong> manipuler une personne</strong> afin d‘obtenir de l’<strong>argent</strong> ou des<strong> informations confidentielles</strong> pour commettre une infraction.</p>"
+                "content": "<p>Ces attaques sont appelées des attaques par <strong>ingénierie sociale</strong>. <br>🥸 Il s’agit d’<strong>escroqueries</strong> ayant pour but de<strong> manipuler une personne</strong> afin d‘obtenir de l’<strong>argent</strong> ou des<strong> informations confidentielles</strong> pour commettre une infraction.</p>"
               }
             }
           ]
@@ -495,7 +495,7 @@
               "element": {
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
-                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. <br><br> 🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
+                "content": "<p>Dans les attaques par ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par l’attaquant. 🧠<p/> <p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance…</p>"
               }
             }
           ]
@@ -1018,7 +1018,7 @@
               "element": {
                 "id": "114623c4-60db-4bce-b993-53e47f5241a3",
                 "type": "qcu-declarative",
-                "instruction": "<p>Après la lecture de ce module, comment envisagez-vous d’agir contre les arnaques par ingénierie sociale ?</p>",
+                "instruction": "<p>Après la lecture de ce module, comment envisagez-vous d’agir contre les arnaques par ingénierie sociale ? 💪</p>",
                 "proposals": [
                   {
                     "id": "1",
