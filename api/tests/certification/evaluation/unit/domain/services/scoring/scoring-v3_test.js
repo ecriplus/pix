@@ -28,8 +28,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       scoringDegradationService,
       scoringConfigurationRepository,
       sharedCertificationCandidateRepository,
-      versionRepository,
-      baseFlashAlgorithmConfiguration,
+      sharedVersionRepository,
       dependencies;
     let clock;
     const now = new Date('2019-01-01T05:06:07Z');
@@ -52,7 +51,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
         getCertificationScope: sinon.stub(),
       };
       competenceMarkRepository = { save: sinon.stub().rejects(new Error('Args mismatch')) };
-      flashAlgorithmConfigurationRepository = { getMostRecentBeforeDate: sinon.stub() };
       flashAlgorithmService = {
         getCapacityAndErrorRate: sinon.stub().callsFake((a) => {
           throw new Error(`Args mismatch, was called with ${JSON.stringify(a.challenges)}`);
@@ -70,13 +68,9 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       sharedCertificationCandidateRepository = {
         getBySessionIdAndUserId: sinon.stub(),
       };
-      versionRepository = {
+      sharedVersionRepository = {
         getByScopeAndReconciliationDate: sinon.stub(),
       };
-
-      baseFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-        maximumAssessmentLength,
-      });
 
       dependencies = {
         findByCertificationCourseIdAndAssessmentId: sinon.stub(),
@@ -99,7 +93,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
       const certificationCourseStartDate = new Date('2022-02-01');
       let scoringConfiguration;
       const scoreForCapacity = 438;
-      let baseFlashAlgorithmConfig;
 
       beforeEach(function () {
         event = new CertificationCompletedJob({
@@ -140,10 +133,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
         assessmentResultRepository.save.resolves(assessmentResult);
         competenceMarkRepository.save.resolves();
-
-        baseFlashAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength,
-        });
       });
 
       it('should save the score', async function () {
@@ -182,10 +171,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           capacityHistory,
         });
 
-        flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-          .withArgs(certificationCourseStartDate)
-          .resolves(baseFlashAlgorithmConfig);
-
         answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
         certificationCourseRepository.get
@@ -203,7 +188,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           .withArgs({ courseId: abortedCertificationCourse.getId() })
           .resolves(Frameworks.CORE);
 
-        versionRepository.getByScopeAndReconciliationDate
+        sharedVersionRepository.getByScopeAndReconciliationDate
           .withArgs({
             scope: Frameworks.CORE,
             reconciliationDate: candidate.reconciledAt,
@@ -262,7 +247,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           flashAlgorithmService,
           scoringConfigurationRepository,
           sharedCertificationCandidateRepository,
-          versionRepository,
+          sharedVersionRepository,
           dependencies,
         });
 
@@ -333,9 +318,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
 
             answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
             certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfiguration);
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 challenges: answeredChallenges,
@@ -359,7 +341,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: certificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -393,7 +375,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -468,9 +450,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               scoringConfigurationRepository.getLatestByDateAndLocale
                 .withArgs({ locale: 'fr', date: certificationCourse.getStartDate() })
                 .resolves(scoringConfiguration);
-              flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-                .withArgs(certificationCourseStartDate)
-                .resolves(baseFlashAlgorithmConfig);
               answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
               certificationCourseRepository.get
                 .withArgs({ id: certificationAssessment.certificationCourseId })
@@ -486,7 +465,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({ courseId: certificationCourse.getId() })
                 .resolves(Frameworks.CORE);
 
-              versionRepository.getByScopeAndReconciliationDate
+              sharedVersionRepository.getByScopeAndReconciliationDate
                 .withArgs({
                   scope: Frameworks.CORE,
                   reconciliationDate: candidate.reconciledAt,
@@ -534,7 +513,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 flashAlgorithmService,
                 scoringConfigurationRepository,
                 sharedCertificationCandidateRepository,
-                versionRepository,
+                sharedVersionRepository,
                 dependencies,
               });
 
@@ -617,15 +596,12 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 .withArgs({ courseId: certificationCourse.getId() })
                 .resolves(Frameworks.CORE);
 
-              versionRepository.getByScopeAndReconciliationDate
+              sharedVersionRepository.getByScopeAndReconciliationDate
                 .withArgs({
                   scope: Frameworks.CORE,
                   reconciliationDate: candidate.reconciledAt,
                 })
                 .resolves(version);
-              flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-                .withArgs(certificationCourseStartDate)
-                .resolves(baseFlashAlgorithmConfiguration);
               flashAlgorithmService.getCapacityAndErrorRate
                 .withArgs({
                   challenges: allChallenges,
@@ -664,7 +640,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 flashAlgorithmService,
                 scoringConfigurationRepository,
                 sharedCertificationCandidateRepository,
-                versionRepository,
+                sharedVersionRepository,
                 dependencies,
               });
 
@@ -693,8 +669,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
     });
 
     context('for rescoring certification', function () {
-      let baseFlashAlgorithmConfig,
-        scoringConfiguration,
+      let scoringConfiguration,
         assessmentId,
         candidate,
         version,
@@ -720,9 +695,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           certificationCourseId,
           id: assessmentId,
           version: AlgorithmEngineVersion.V3,
-        });
-        baseFlashAlgorithmConfig = domainBuilder.buildFlashAlgorithmConfiguration({
-          maximumAssessmentLength,
         });
 
         scoringConfiguration = domainBuilder.buildV3CertificationScoring({
@@ -787,7 +759,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -797,10 +769,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             scoringConfigurationRepository.getLatestByDateAndLocale
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
               .resolves(scoringConfiguration);
-
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfiguration);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
@@ -844,7 +812,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -897,10 +865,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               capacityHistory,
             });
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfiguration);
-
             dependencies.findByCertificationCourseIdAndAssessmentId.resolves({
               allChallenges: answeredChallenges,
               askedChallengesWithoutLiveAlerts: answeredChallenges,
@@ -923,7 +887,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -971,7 +935,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -1040,10 +1004,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               capacityHistory,
             });
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfiguration);
-
             dependencies.findByCertificationCourseIdAndAssessmentId.resolves({
               allChallenges: answeredChallenges,
               askedChallengesWithoutLiveAlerts: answeredChallenges,
@@ -1071,7 +1031,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -1116,7 +1076,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -1203,16 +1163,13 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfiguration);
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
                 challenges: [challengeExcludedFromCalibration, ...challengesAfterCalibration],
@@ -1256,7 +1213,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
               scoringDegradationService,
             });
@@ -1341,16 +1298,12 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
               })
               .resolves(version);
-
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(abortedCertificationCourse.getStartDate())
-              .resolves(baseFlashAlgorithmConfig);
 
             flashAlgorithmService.getCapacityAndErrorRate
               .withArgs({
@@ -1394,7 +1347,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -1461,10 +1414,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
               .resolves(scoringConfiguration);
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfig);
-
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
             certificationCourseRepository.get
@@ -1482,7 +1431,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -1532,7 +1481,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 
@@ -1596,10 +1545,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
               .resolves(scoringConfiguration);
 
-            flashAlgorithmConfigurationRepository.getMostRecentBeforeDate
-              .withArgs(certificationCourseStartDate)
-              .resolves(baseFlashAlgorithmConfig);
-
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
 
             certificationCourseRepository.get
@@ -1617,7 +1562,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               .withArgs({ courseId: abortedCertificationCourse.getId() })
               .resolves(Frameworks.CORE);
 
-            versionRepository.getByScopeAndReconciliationDate
+            sharedVersionRepository.getByScopeAndReconciliationDate
               .withArgs({
                 scope: Frameworks.CORE,
                 reconciliationDate: candidate.reconciledAt,
@@ -1677,7 +1622,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               flashAlgorithmService,
               scoringConfigurationRepository,
               sharedCertificationCandidateRepository,
-              versionRepository,
+              sharedVersionRepository,
               dependencies,
             });
 

@@ -1,6 +1,5 @@
 //@ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../domain/models/FlashAssessmentAlgorithmConfiguration.js';
 
 /**
@@ -15,23 +14,6 @@ export const getMostRecent = async () => {
 
   if (!flashAlgorithmConfiguration?.challengesConfiguration) {
     return _toDomain({});
-  }
-
-  return _toDomain({ ...flashAlgorithmConfiguration.challengesConfiguration });
-};
-
-// A supprimer une fois remplacée dans scoring-V3
-export const getMostRecentBeforeDate = async (date) => {
-  const knexConn = DomainTransaction.getConnection();
-  const flashAlgorithmConfiguration = await knexConn('certification-configurations')
-    .where('startingDate', '<=', date)
-    .andWhere((queryBuilder) => {
-      queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
-    })
-    .first();
-
-  if (!flashAlgorithmConfiguration) {
-    throw new NotFoundError('Configuration not found');
   }
 
   return _toDomain({ ...flashAlgorithmConfiguration.challengesConfiguration });

@@ -6,7 +6,7 @@
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
  * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {import('../index.js').VersionRepository} VersionRepository
+ * @typedef {import('../index.js').SharedVersionRepository} SharedVersionRepository
  * @typedef {import('../index.js').SharedCertificationCandidateRepository} SharedCertificationCandidateRepository
  * @typedef {import('../index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../index.js').FlashAlgorithmService} FlashAlgorithmService
@@ -30,7 +30,7 @@ export const handleV3CertificationScoring = withTransaction(
    * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
    * @param {CertificationChallengeRepository} params.certificationChallengeRepository
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {VersionRepository} params.versionRepository
+   * @param {SharedVersionRepository} params.SharedVersionRepository
    * @param {SharedCertificationCandidateRepository} params.sharedCertificationCandidateRepository
    * @param {AnswerRepository} params.answerRepository
    * @param {FlashAlgorithmService} params.flashAlgorithmService
@@ -45,7 +45,7 @@ export const handleV3CertificationScoring = withTransaction(
     certificationAssessmentHistoryRepository,
     certificationCourseRepository,
     competenceMarkRepository,
-    versionRepository,
+    sharedVersionRepository,
     flashAlgorithmService,
     scoringDegradationService,
     scoringConfigurationRepository,
@@ -73,7 +73,7 @@ export const handleV3CertificationScoring = withTransaction(
 
     const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
 
-    const version = await versionRepository.getByScopeAndReconciliationDate({
+    const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
       scope,
       reconciliationDate: certificationCandidate.reconciledAt,
     });

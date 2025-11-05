@@ -18,7 +18,7 @@ import * as complementaryCertificationBadgesRepository from '../../../shared/inf
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
-import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
+import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
@@ -48,6 +48,8 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository *
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
+ * @typedef {sharedCertificationCandidateRepository} SharedCertificationCandidateRepository
+ * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  */
 const dependencies = {
@@ -73,7 +75,7 @@ const dependencies = {
   complementaryCertificationScoringCriteriaRepository,
   sharedChallengeRepository,
   sharedCertificationCandidateRepository,
-  versionRepository,
+  sharedVersionRepository,
 };
 
 import { findByCertificationCourseIdAndAssessmentId } from './scoring/calibrated-challenge-service.js';
