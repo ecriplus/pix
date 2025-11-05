@@ -1,5 +1,5 @@
-import { Country } from '../../../../../../src/certification/enrolment/domain/read-models/Country.js';
 import * as countryRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/country-repository.js';
+import { Country } from '../../../../../../src/shared/domain/read-models/Country.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Integration | Repository | country-repository', function () {
