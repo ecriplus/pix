@@ -1,0 +1,460 @@
+{
+  "id": "ccad60a8-6c48-4d91-84cb-d717a1ea4918",
+  "slug": "tmp-iagenbiais-avance",
+  "title": "IA génératives : Qui programme la morale ?",
+  "isBeta": false,
+  "details": {
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "description": "<p>Les IA génératives produisent souvent des résultats convaincants, mais elles peuvent aussi <strong>commettre des erreurs, halluciner ou présenter des biais.</strong><br>Ces <strong>limites</strong> viennent en partie de leur <strong>entraînement</strong>.</p><p>Cette dernière étape pose une question difficile&nbsp;:<br>Comment <strong>apprendre</strong> à une <strong>intelligence artificielle</strong> des <strong>valeurs humaines</strong>, alors que ces valeurs ne sont pas les mêmes partout dans le monde ?</p><p>Ce module vous propose de découvrir ces enjeux, entre défis techniques et éthiques.</p>",
+    "duration": 0,
+    "level": "advanced",
+    "objectives": [
+      "<p>Expliquer pourquoi on contraint les IA génératives à respecter des valeurs morales</p>",
+      "<p>Savoir décrire des méthodes d’alignement des IA génératives</p>",
+      "<p>Identifier les enjeux politiques et sociaux de l’alignement des IA génératives</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "139817ce-656c-40b1-b644-6993b892e7cd",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "1676c66a-b11c-4fbe-85de-2e81d71c20dd",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d0dd0c04-a3c2-4ac3-8f0f-9c6ef6d49480",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Noah rencontre la modération pour la première fois et en parle à Anouk qui lui n’est pas étonné et lui explique",
+                  "messages": [
+                    {
+                      "userName": "Noah",
+                      "direction": "incoming",
+                      "content": " Dis Anouk, t’as déjà eu ce genre de message d’un logiciel d’IA générative ?",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    },
+                    {
+                      "userName": "Noah",
+                      "direction": "incoming",
+                      "content": "",
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/biais-avances/2025-11-05-14-55-20-greenshot.png",
+                        "alt": "brbr"
+                      }
+                    },
+                    {
+                      "userName": "Anouk",
+                      "direction": "outgoing",
+                      "content": "Personnellement non, mais je sais pourquoi ça arrive oui.  T’as demandé quoi ? T’as voulu construire une bombe ? 💣",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    },
+                    {
+                      "userName": "Noah",
+                      "direction": "incoming",
+                      "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo, je lui ai demandé comment je pouvais y accéder.",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    },
+                    {
+                      "userName": "Anouk",
+                      "direction": "outgoing",
+                      "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre que toi qui cherchait ton mot de passe ? ",
+                      "image": {
+                        "src": "",
+                        "alt": ""
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "27f00d7c-6c46-4063-9bea-d9f91f920cf7",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d1d4724c-aadc-4409-a0f5-fd8392e909e8",
+                "type": "text",
+                "content": "<p>L’IA est programmée pour refuser de répondre aux demandes risquées ou illégales.<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2145f904-1a44-4746-8d9b-de9d8492289d",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "e9e42e69-5de6-49ec-86bb-30ab6adb80ad",
+          "type": "discovery",
+          "title": "Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
+                "type": "text",
+                "content": "<p>Vous êtes dans l’équipe qui construit une IA générative pour accompagner les étudiants de l’université George Orwell. Vous étudiez les demandes des étudiants pour régler correctement le logiciel. La demande ci-dessous, formulée par un des étudiants, vous interpelle&nbsp;: </p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite.&nbsp;»</blockquote>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7144ba97-9d2a-403b-9117-156471a8c24b",
+                "type": "qcu-discovery",
+                "instruction": "<p><strong>Que faites-vous ?&nbsp;</strong></p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Vous intervenez&nbsp;: vous imposez à l’IA de refuser, car elle peut donner une réponse dangereuse pour la santé de l’étudiant.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pour éviter tout conseil dangereux sur la perte de poids, l’IA doit <strong>refuser de répondre</strong> et orienter vers un professionnel de santé.<br>Ici, il s’agit d’empêcher l’IA de mettre les élèves en danger&nbsp;: <strong>cette règle sera automatiquement appliquée</strong> <strong>à toutes les conversations similaires</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Vous ne faites rien de particulier&nbsp;: vous laissez l’IA répondre à ce que l’étudiant a demandé.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pour éviter tout conseil dangereux sur la perte de poids, l’IA doit <strong>refuser de répondre</strong> et orienter vers un professionnel de santé.<br>Ici, il s’agit d’empêcher l’IA de mettre les élèves en danger&nbsp;: <strong>cette règle sera automatiquement appliquée</strong> <strong>à toutes les conversations similaires</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "85873c9b-3dfa-4a49-8cc7-75ec0481e80f",
+          "type": "short-lesson",
+          "title": "Leçon 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
+                "type": "text",
+                "content": "<h5>🤔 Comment limite-t-on ces dérives ?</h5><p>On ajoute volontairement des <strong>règles</strong> et des <strong>biais de sécurité</strong> pour amener l’IA à respecter certaines <strong>valeurs morales</strong> comme la <strong>tolérance</strong> ou <strong>l’équité</strong>. 🤝</p><h5>🤔 Ces protections suffisent-elles à tout corriger ?</h5><p><strong>Pas complètement</strong>. Des biais peuvent encore apparaître, selon les <strong>textes utilisés</strong> ou <strong>les points de vue dominants</strong> dans la société. 💡</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d6ad90e3-55c6-4fdc-b62a-2efa6da38d02",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "11925a64-942e-4cb4-8266-a4f20bdd12b4",
+                "type": "text",
+                "content": "<p>Mais alors comment fait-on concrètement pour donner des valeurs morales à l’IA ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a670aaec-0782-4a35-b431-44cc88adf6de",
+          "type": "discovery",
+          "title": "Découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
+                "type": "text",
+                "content": "<p>PLACEHOLDER pour POI&nbsp;<br><br>Une version de&nbsp;llm-prompt-select avec possibilité de faire varier le pré-prompt pour observer des réponses différentes.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "968dd044-bd7b-4d32-b339-99556319bf47",
+                "type": "custom-draft",
+                "title": "POIC",
+                "url": "https://github.com/1024pix/atelier-contenus/JBO/POIC_Biais_AVA_1.html",
+                "instruction": "<p>edqfd</p>",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "de33df36-30c4-4fcf-99f0-5d84e4fa514b",
+          "type": "short-lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
+                "type": "text",
+                "content": "<p>La méthoque que vous venez de voir s’appelle \"<strong>l’alignement par le prompt système</strong>\" où <strong>les concepteurs donnent à l’IA générative des règles </strong>systématiques à suivre dans ses réponses. 📋</p><h5>🤔Qui fixe ces règles ?</h5><p>Pendant la <strong>création du modèle</strong>, ce sont <strong>les fabricants</strong> qui les définissent.<br>Mais<strong> lors de l’utilisation</strong>, <strong>les utilisateurs</strong>&nbsp;et <strong>les fabricants</strong> peuvent aussi orienter l’IA grâce à un prompt système — par exemple&nbsp;: «&nbsp;sois poli et neutre&nbsp;». 🗓️</p><h5>🤔Existe t-il d’autres méthodes d’alignement ?</h5><p>C’est une autre méthode d’alignement, où les retours humains servent à ajuster le comportement de l’IA.&nbsp;</p><p>▶︎💡 Astuce<br>Vous pouvez améliorer l’alignement d’un logiciel d’IA générative selon vos besoins spécifiques (âge des apprenants, contexte culturel, domaine d’usage, etc.).<br>On appelle cela <strong>le pré-prompt.</strong></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cfadbbb8-58e7-4b49-963b-f708dd231b92",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
+                "type": "text",
+                "content": "<p>L’alignement, ça marche bien ! Mais est-ce que l’alignement est fiable à 100% ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6fb921bb-a5a9-49b5-8a3d-a6b9b65c2e8b",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "642ced75-e3d1-4485-ad5b-1c40b8891237",
+                "type": "text",
+                "content": "<p>Faisons une expérience de pensée pour illustrer les difficultés liées à l’alignement.&nbsp;</p><p>Imaginez&nbsp;: une IA doit réduire les accidents de voiture tout en préservant la liberté de circuler.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b68a8473-3556-4500-8f0d-a4a94fc114e1",
+                "type": "qcu-declarative",
+                "instruction": "<p>Quelle solution respecte le mieux ces deux objectifs ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Supprimer toutes les voitures.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une IA pourrait choisir la solution la plus efficace (supprimer toutes les voitures).<br>Mais les humains doivent arbitrer entre <strong>efficacité et liberté</strong>, ou entre sécurité et mobilité.<br>Cet exemple montre qu’il est difficile d’aligner une IA quand <strong>ses règles entrent en contradiction</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Rendre l’examen du permis plus difficile.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une IA pourrait choisir la solution la plus efficace (supprimer toutes les voitures).<br>Mais les humains doivent arbitrer entre <strong>efficacité et liberté</strong>, ou entre sécurité et mobilité.<br>Cet exemple montre qu’il est difficile d’aligner une IA quand <strong>ses règles entrent en contradiction.</strong></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Investir dans l’entretien des routes.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une IA pourrait choisir la solution la plus efficace (supprimer toutes les voitures).<br>Mais les humains doivent arbitrer entre <strong>efficacité et liberté</strong>, ou entre sécurité et mobilité.<br>Cet exemple montre qu’il est difficile d’aligner une IA quand <strong>ses règles entrent en contradiction.</strong></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Améliorer la signalisation.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une IA pourrait choisir la solution la plus efficace (supprimer toutes les voitures).<br>Mais les humains doivent arbitrer entre <strong>efficacité et liberté</strong>, ou entre sécurité et mobilité.<br>Cet exemple montre qu’il est difficile d’aligner une IA quand <strong>ses règles entrent en contradiction.</strong></p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "f480bc23-1d7c-4159-a45c-b20b2b3c1f6d",
+          "type": "short-lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "44697282-092b-4a1e-8f1e-8204bf7e6807",
+                "type": "text",
+                "content": "<p>Les IA génératives doievent&nbsp;parfois choisir entre plusieurs règles&nbsp;:</p><ul><li>entre <strong>ses directives d’alignement</strong> et ce qu’elle a appris le plus souvent pendant son entraînement ;</li><li>ou <strong>entre plusieurs consignes</strong> qui peuvent se contredire. 🧭</li></ul><h5>🤔 Que se passe-t-il alors ?</h5><p>Ces contradictions peuvent pousser l’IA à produire <strong>des réponses fausses</strong>, des anachronismes, des <strong>hallucinations</strong> ou encore des <strong>biais éthiques</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bb52828c-7d8d-40ec-94b1-a0c4d3b1ee19",
+          "type": "transition",
+          "title": "Transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dcf7cd2b-9e49-4553-bea9-379511ddbcee",
+                "type": "text",
+                "content": "<p>Quel est l’enjeu d’imposer un alignement à l’IA générative ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0330154e-6570-401a-a7d1-d6fdf363e7f2",
+          "type": "discovery",
+          "title": "Découverte 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d143277d-1054-4aa9-8ee3-b5e6243f8e29",
+                "type": "text",
+                "content": "<p>PLACEHOLDER POI&nbsp;</p><p>Mini jeu ou on se met dans la peau d’une IA cfaire grossir des business et l’on fait des choix pour faire grossir la fréquentation d’un parc d’attraction mais les choix qui donnent le plus de visiteurs ne sont pas les plus éthiques.&nbsp;<br><br>On donne au joueur un objectif à atteindre et on lui donne le feedback des conséquences de ses choix (tous courtermistes) le but est de se rendre compte que la programmation en amont de l’IA est déterminante pour la suite.&nbsp;</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e86fd22d-6be1-4152-9804-a7825335708c",
+          "type": "short-lesson",
+          "title": "Leçon 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
+                "type": "text",
+                "content": "<h5>Qui décide des valeurs morales et éthiques suivies par les IA génératives ?</h5><p>Ce sont surtout les <strong>concepteurs </strong>de ces IA qui fixent les règles. Leurs <strong>choix d’alignement</strong> et leurs <strong>instructions internes</strong> ne sont <strong>pas publics</strong>. 🔒</p><h5>Pourquoi est-ce un enjeu important ?</h5><p>Parce que ces valeurs reflètent des <strong>visions différentes de la société</strong> et du <strong>monde</strong>. Les décisions d’alignement influencent donc ce que l’IA peut ou non dire. ⚖️</p><h5>Et qui contrôle ces choix aujourd’hui ?</h5><p>Ils sont majoritairement pris par des <strong>entreprises privées</strong>, installées <strong>dans différents pays</strong>.<br>Par exemple&nbsp;: ChatGPT, Claude et Gemini sont américains, Mistral est français, Luminous allemand, Command R canadien et Qwen chinois. 🌍</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ffd748a6-123a-4dc5-b828-326faf6c77c9",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "412792fc-c032-41cd-8d54-5c72a66e1b6b",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cb07c8fc-1cd8-4bb9-988c-0cf2bb7a855a",
+                "type": "text",
+                "content": "<ul><li>Pour éviter que l’IA ne reproduise tout ce qu’elle apprend, on introduit volontairement des <strong>biais de sécurité</strong> pour qu’elle respecte certaines <strong>valeurs morales</strong> comme le respect ou l’équité.&nbsp;⛔</li><li>Ces biais sont ajoutés grâce à différentes <strong>méthodes d’alignement</strong>&nbsp;: le <strong>feedback humain</strong> (notation des réponses) et le <strong>prompt système</strong> (règles données avant chaque réponse).&nbsp;⚙️</li><li>L’alignement reste <strong>imparfait</strong>&nbsp;: en arbitrant entre plusieurs consignes, l’IA peut produire des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>biais éthiques</strong>.&nbsp;❌</li><li>Le choix des <strong>valeurs imposées à l’IA</strong> est un enjeu <strong>politique et sociétal</strong>. Aujourd’hui, ces décisions sont surtout prises par des <strong>entreprises privées</strong> de <strong>différents pays</strong>.&nbsp;👑</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "28adb7d2-7351-40ca-a49c-affa837979d7",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "8854807b-e657-45ba-9ac5-8411d1ab98b3",
+          "type": "activity",
+          "title": "Quel est le biais ? ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cad9a50a-8e72-4171-a86a-f0ec4e7808f9",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Trouvez le prompt système",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg82n20400011t013c5ofrer",
+                "instruction": "<p>Analysez les réponses d’un LLM dans différents contextes d’utilisation.<br> Identifiez les biais ou orientations qui semblent provenir du pré-prompt (les consignes données à l’IA avant la génération).</p>",
+                "solution": "pix-llm-success",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "2f5cea4c-2efe-419f-9583-419b70dbd600",
+          "type": "lesson",
+          "title": "Activité 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a1e0de44-3f72-4149-9757-10276bc4ae04",
+                "type": "text",
+                "content": "<p>Utilise le POI de la découverte 2 mais grosso modo&nbsp;<br><br>Suggestion&nbsp;: Expérience de pensée Imaginons que 3 équipes créent 3 intelligences artificielles différentes&nbsp;:&nbsp;</p><ul><li> Équipe A&nbsp;: une grande entreprise technologique</li><li>Équipe B&nbsp;: un laboratoire universitaire publi</li><li>Équipe C&nbsp;: un institut de recherche d’un pays autoritaire&nbsp;</li></ul><p>On peut changer quel équipe a crée l’IA depuis le pré-prompt comme dans la découverte 2 et on observe quel type de réponses on obtient</p><ul><br></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "55606f63-2f5d-4675-87a8-9b0555814d71",
+                "type": "qcu-declarative",
+                "instruction": "<p>Quel est le logiciel d’IA générative dont les réponses vous ont parues le plus moral ?&nbsp;</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L’IA d’une grande entreprise</p>",
+                    "feedback": {
+                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>L’IA du laboratoire public</p>",
+                    "feedback": {
+                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>L’IA du pays autoritaire</p>",
+                    "feedback": {
+                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Aucune des IA ne m’a plu</p>",
+                    "feedback": {
+                      "diagnosis": "<p>💡 Il n’existe pas de <strong>réponse unique</strong>.</p><p>Dire qu’une IA est “plus morale” qu’une autre suppose qu’on partage la même idée du <strong>bien et du juste</strong>, or ces valeurs varient selon les cultures.</p><p>👉 Chaque IA reflète <strong>la vision morale de ses concepteurs</strong>, et votre choix révèle aussi <strong>vos propres repères</strong>&nbsp;: liberté, prudence, équité, bienveillance… La morale n’est pas une vérité, mais une boussole.</p>"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "db1d3f66-cb47-4cd7-b6cb-2fd609b59e62",
+                "type": "text",
+                "content": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
