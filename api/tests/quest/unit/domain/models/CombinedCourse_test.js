@@ -2034,6 +2034,176 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
           expect(campaignItem.masteryRate).null;
         });
       });
+
+      it('should not mess with the combined course items', function () {
+        // given
+        const campaign1 = new Campaign({ id: 2, code: 'ABCDIAG1', title: 'diagnostique', targetProfileId: 888 });
+        const campaign2 = new Campaign({ id: 3, code: 'ABCDIAG2', title: 'diagnostique2', targetProfileId: 999 });
+        const module1 = new Module({ id: 7, title: 'module diag 1', slug: 'module-abcdef-1' });
+        const module11 = new Module({ id: 8, title: 'module diag 1.1', slug: 'module-azerty-1.1' });
+        const module2 = new Module({ id: 9, title: 'module diag 2', slug: 'module-querty-2' });
+        const module22 = new Module({ id: 10, title: 'module diag 2.2', slug: 'module-osef-2-2' });
+
+        const combinedCourseTemplate = new CombinedCourseTemplate({
+          successRequirements: [
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                targetProfileId: {
+                  data: campaign2.targetProfileId,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                moduleId: {
+                  data: module2.id,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                moduleId: {
+                  data: module22.id,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                targetProfileId: {
+                  data: campaign1.targetProfileId,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                moduleId: {
+                  data: module1.id,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+            {
+              requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+              comparison: COMPARISONS_REQUIREMENT.ALL,
+              data: {
+                moduleId: {
+                  data: module11.id,
+                  comparison: COMPARISONS_CRITERION.EQUAL,
+                },
+              },
+            },
+          ],
+        });
+        const combinedCourseQuestFormat = combinedCourseTemplate.toCombinedCourseQuestFormat([campaign1, campaign2]);
+        const combinedCourse = new CombinedCourseDetails(
+          new CombinedCourse({ id, organizationId, name, code, questId }),
+          combinedCourseQuestFormat,
+        );
+        const dataForQuest = new DataForQuest({
+          eligibility: new Eligibility({
+            campaignParticipations: [
+              { campaignId: campaign1.id, status: CampaignParticipationStatuses.SHARED, masteryRate: 0.21 },
+              { campaignId: campaign2.id, status: CampaignParticipationStatuses.SHARED, masteryRate: 0.12 },
+            ],
+            passages: [
+              { id: module2.id, status: 'COMPLETED' },
+              { id: module22.id, status: 'COMPLETED' },
+            ],
+          }),
+        });
+        const redirectionUrl = 'redirectionUrl';
+
+        // when
+        combinedCourse.generateItems({
+          recommendableModuleIds: [
+            { moduleId: module1.id, targetProfileIds: [888, 999] },
+            { moduleId: module11.id, targetProfileIds: [888, 999] },
+            { moduleId: module2.id, targetProfileIds: [888, 999] },
+            { moduleId: module22.id, targetProfileIds: [888, 999] },
+          ],
+          recommendedModuleIdsForUser: [
+            { moduleId: module1.id },
+            { moduleId: module11.id },
+            { moduleId: module2.id },
+            { moduleId: module22.id },
+          ],
+          itemDetails: [campaign1, campaign2, module1, module11, module2, module22],
+          encryptedCombinedCourseUrl: redirectionUrl,
+          dataForQuest,
+        });
+
+        // then
+        expect(combinedCourse.items).to.deep.equal([
+          new CombinedCourseItem({
+            id: campaign2.id,
+            reference: campaign2.code,
+            title: campaign2.title,
+            type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+            masteryRate: 0.12,
+            isCompleted: true,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: module2.id,
+            reference: module2.slug,
+            title: module2.title,
+            type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+            redirection: redirectionUrl,
+            isCompleted: true,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: module22.id,
+            reference: module22.slug,
+            title: module22.title,
+            type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+            redirection: redirectionUrl,
+            isCompleted: true,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: campaign1.id,
+            reference: campaign1.code,
+            title: campaign1.title,
+            type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
+            masteryRate: 0.21,
+            isCompleted: true,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: module1.id,
+            reference: module1.slug,
+            title: module1.title,
+            type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+            redirection: redirectionUrl,
+            isCompleted: false,
+            isLocked: false,
+          }),
+          new CombinedCourseItem({
+            id: module11.id,
+            reference: module11.slug,
+            title: module11.title,
+            type: COMBINED_COURSE_ITEM_TYPES.MODULE,
+            redirection: redirectionUrl,
+            isCompleted: false,
+            isLocked: true,
+          }),
+        ]);
+      });
     });
 
     describe('#status', function () {

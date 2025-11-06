@@ -231,7 +231,7 @@ export class CombinedCourseDetails extends CombinedCourse {
         const isCompleted = dataForQuest ? requirement.isFulfilled(dataForQuest) : false;
 
         const associatedParticipation = dataForQuest?.campaignParticipations?.find(
-          (campaignParticipation) => (campaignParticipation.campaignId = requirement.data.campaignId.data),
+          (campaignParticipation) => campaignParticipation.campaignId === requirement.data.campaignId.data,
         );
 
         const doesCampaignRecommendModules =
