@@ -25,6 +25,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         type,
       };
       const sections = [section];
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
@@ -34,6 +35,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sections={{sections}}
             @isPastSection={{false}}
             @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );
@@ -61,6 +63,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -70,6 +73,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{false}}
               @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -86,6 +90,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -95,6 +100,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{false}}
               @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -111,6 +117,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -120,6 +127,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{true}}
               @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -137,11 +145,17 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         //  when
         await render(
           <template>
-            <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+            <NavigationButton
+              @section={{section}}
+              @sections={{sections}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -157,11 +171,17 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             type: 'question-yourself',
           };
           const sections = [section];
+          const handleArrowKeyNavigation = sinon.stub();
 
           //  when
           await render(
             <template>
-              <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+              <NavigationButton
+                @section={{section}}
+                @sections={{sections}}
+                @isCurrentSection={{true}}
+                @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+              />
             </template>,
           );
 
@@ -183,11 +203,17 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               ],
             };
             const sections = [section];
+            const handleArrowKeyNavigation = sinon.stub();
 
             //  when
             await render(
               <template>
-                <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+                <NavigationButton
+                  @section={{section}}
+                  @sections={{sections}}
+                  @isCurrentSection={{true}}
+                  @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+                />
               </template>,
             );
 
@@ -212,11 +238,17 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             ],
           };
           const sections = [section];
+          const handleArrowKeyNavigation = sinon.stub();
 
           //  when
           await render(
             <template>
-              <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+              <NavigationButton
+                @section={{section}}
+                @sections={{sections}}
+                @isCurrentSection={{true}}
+                @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+              />
             </template>,
           );
 
@@ -238,11 +270,17 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               ],
             };
             const sections = [section];
+            const handleArrowKeyNavigation = sinon.stub();
 
             //  when
             await render(
               <template>
-                <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+                <NavigationButton
+                  @section={{section}}
+                  @sections={{sections}}
+                  @isCurrentSection={{true}}
+                  @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+                />
               </template>,
             );
 
@@ -272,6 +310,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         type,
       };
       const sections = [section];
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
@@ -281,6 +320,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sections={{sections}}
             @isPastSection={{false}}
             @isCurrentSection={{false}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );
@@ -296,6 +336,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -305,6 +346,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{false}}
               @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -321,6 +363,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -330,6 +373,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{false}}
               @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -346,6 +390,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           type: 'question-yourself',
         };
         const sections = [section];
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
@@ -355,6 +400,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               @sections={{sections}}
               @isPastSection={{true}}
               @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
           </template>,
         );
@@ -370,6 +416,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         type: 'question-yourself',
       };
       const sections = [section];
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
@@ -379,6 +426,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sections={{sections}}
             @isPastSection={{true}}
             @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );
@@ -411,6 +459,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         focusAndScroll = focusAndScroll;
       }
       this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
@@ -420,6 +469,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sections={{sections}}
             @isPastSection={{false}}
             @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );
@@ -447,6 +497,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       };
       const sections = [section];
       const trackEvent = sinon.stub();
+      const handleArrowKeyNavigation = sinon.stub();
 
       class MetricsStubService extends Service {
         trackEvent = trackEvent;
@@ -461,7 +512,12 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       //  when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @sections={{sections}} @isCurrentSection={{true}} />
+          <NavigationButton
+            @section={{section}}
+            @sections={{sections}}
+            @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
       await click(
@@ -492,6 +548,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       };
       const sections = [section];
       const focusAndScroll = sinon.stub();
+      const handleArrowKeyNavigation = sinon.stub();
       class ModulixAutoScrollService extends Service {
         focusAndScroll = focusAndScroll;
       }
@@ -505,6 +562,7 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sections={{sections}}
             @isPastSection={{false}}
             @isCurrentSection={{false}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );

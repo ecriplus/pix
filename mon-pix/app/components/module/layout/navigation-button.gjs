@@ -128,6 +128,7 @@ export default class ModulixNavigationButton extends Component {
           @isDisabled={{this.isDisabled}}
           aria-current="{{this.isCurrentSection}}"
           @plainIcon={{this.isPlainIcon}}
+          {{on "keydown" @handleArrowKeyNavigation}}
         />
         <span
           role="tooltip"
