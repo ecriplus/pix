@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.250.0](https://github.com/1024pix/pix/compare/v5.249.0...v5.250.0) (2025-11-06)
+
+### :rocket: Amélioration
+
+- [#14067](https://github.com/1024pix/pix/pull/14067) Ajouter la possibilité de télécharger des templates de csv sur PixAdmin (PIX-20330) 
+- [#14083](https://github.com/1024pix/pix/pull/14083) IAGenImpact_NOV changement media 
+- [#14080](https://github.com/1024pix/pix/pull/14080) Permettre d'identifier des campagnes / module / parcours dans plausible (PIX-20318) 
+
+### :bug: Correction
+
+- [#14096](https://github.com/1024pix/pix/pull/14096) Réparer le generateItems (PIX-20336) 
+
+### :building_construction: Tech
+
+- [#14093](https://github.com/1024pix/pix/pull/14093) Mettre à jour epreuve component 
+
+### :arrow_up: Montée de version
+
+- [#14086](https://github.com/1024pix/pix/pull/14086) Update dependency @1024pix/pix-ui to ^55.31.0 (orga) 
+- [#14087](https://github.com/1024pix/pix/pull/14087) Update dependency @types/node to v24 (e2e-playwright)
+
 # [5.249.0](https://github.com/1024pix/pix/compare/v5.248.0...v5.249.0) (2025-11-05)
 
 ### :rocket: Amélioration
