@@ -2,10 +2,6 @@ import { CampaignParticipationStatuses } from '../../../../src/prescription/shar
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
 import {
-  OrganizationLearnerParticipationStatuses,
-  OrganizationLearnerParticipationTypes,
-} from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
@@ -17,372 +13,13 @@ import {
   ADMINISTRATION_TEAM_SOLO_ID,
   AEFE_TAG,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
-  PRO_ORGANIZATION_ID,
   SCO_ORGANIZATION_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
 } from '../common/constants.js';
-import { QUEST_OFFSET, TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
+import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
-const firstTrainingfrFRId = QUEST_OFFSET + 1;
-const secondTrainingfrFRId = QUEST_OFFSET + 2;
-const firstTrainingFRId = QUEST_OFFSET + 3;
-const secondTrainingFRId = QUEST_OFFSET + 4;
-
-function buildCombinedCourseQuest(databaseBuilder, organizationId) {
-  const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
-  const campaign = databaseBuilder.factory.buildCampaign({
-    name: 'Je teste mes compétences',
-    organizationId,
-    code: 'CODE123',
-    targetProfileId: targetProfile.id,
-    customResultPageButtonText: 'Continuer',
-    customResultPageButtonUrl: '/parcours/COMBINIX1/chargement',
-  });
-  CAMPAIGN_SKILLS[0].map((skillId) =>
-    databaseBuilder.factory.buildCampaignSkill({
-      campaignId: campaign.id,
-      skillId,
-    }),
-  );
-  databaseBuilder.factory.buildTraining({
-    id: firstTrainingfrFRId,
-    type: 'modulix',
-    title: 'Demo combinix 1',
-    link: '/modules/demo-combinix-1',
-    locale: 'fr-fr',
-  });
-  databaseBuilder.factory.buildTraining({
-    id: secondTrainingfrFRId,
-    type: 'modulix',
-    title: 'Demo combinix 2',
-    link: '/modules/demo-combinix-2',
-    locale: 'fr-fr',
-  });
-
-  // For now, we make doubles of the previous trainings because training does not accept multiple locales
-  // The behaviour is the same in production
-
-  databaseBuilder.factory.buildTraining({
-    id: firstTrainingFRId,
-    type: 'modulix',
-    title: 'Demo combinix 1',
-    link: '/modules/demo-combinix-1',
-    locale: 'fr',
-  });
-  databaseBuilder.factory.buildTraining({
-    id: secondTrainingFRId,
-    type: 'modulix',
-    title: 'Demo combinix 2',
-    link: '/modules/demo-combinix-2',
-    locale: 'fr',
-  });
-
-  databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix',
-    code: 'COMBINIX1',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
-    organizationId,
-    eligibilityRequirements: [],
-    successRequirements: [
-      {
-        requirement_type: 'campaignParticipations',
-        comparison: 'all',
-        data: {
-          campaignId: {
-            data: campaign.id,
-            comparison: 'equal',
-          },
-          status: {
-            data: 'SHARED',
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'f32a2238-4f65-4698-b486-15d51935d335',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-    ],
-  });
-  const trainingTriggerIds = [
-    databaseBuilder.factory.buildTrainingTrigger({
-      trainingId: firstTrainingfrFRId,
-      threshold: 0,
-      type: 'prerequisite',
-    }).id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingfrFRId, threshold: 50, type: 'goal' }).id,
-    databaseBuilder.factory.buildTrainingTrigger({
-      trainingId: secondTrainingfrFRId,
-      threshold: 50,
-      type: 'prerequisite',
-    }).id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingfrFRId, threshold: 100, type: 'goal' }).id,
-    databaseBuilder.factory.buildTrainingTrigger({
-      trainingId: firstTrainingFRId,
-      threshold: 0,
-      type: 'prerequisite',
-    }).id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: firstTrainingFRId, threshold: 50, type: 'goal' }).id,
-    databaseBuilder.factory.buildTrainingTrigger({
-      trainingId: secondTrainingFRId,
-      threshold: 51,
-      type: 'prerequisite',
-    }).id,
-    databaseBuilder.factory.buildTrainingTrigger({ trainingId: secondTrainingFRId, threshold: 100, type: 'goal' }).id,
-  ];
-  trainingTriggerIds.forEach((trainingTriggerId) =>
-    TARGET_PROFILE_TUBES[0].map((tube) =>
-      databaseBuilder.factory.buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
-    ),
-  );
-}
-
-function buildProCombinedCourseQuest(databaseBuilder, organizationId) {
-  const targetProfile = buildTargetProfile(databaseBuilder, { id: organizationId }, 0, TARGET_PROFILE_TUBES[0]);
-  const campaign = databaseBuilder.factory.buildCampaign({
-    name: 'Je teste mes compétences',
-    organizationId,
-    code: 'CODEABC',
-    targetProfileId: targetProfile.id,
-    customResultPageButtonText: 'Continuer',
-    customResultPageButtonUrl: '/parcours/COMBINIX2',
-  });
-  CAMPAIGN_SKILLS[0].map((skillId) =>
-    databaseBuilder.factory.buildCampaignSkill({
-      campaignId: campaign.id,
-      skillId,
-    }),
-  );
-
-  const combinix4 = databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix 4',
-    code: 'COMBINIX4',
-    createdAt: new Date('2023-01-01'),
-    description: 'Parcours combiné sans campagne.',
-    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
-    organizationId,
-    eligibilityRequirements: [],
-    successRequirements: [
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-    ],
-  });
-
-  const combinix3 = databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix 3',
-    code: 'COMBINIX3',
-    createdAt: new Date('2024-01-01'),
-    description: 'Parcours combiné sans module.',
-    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
-    organizationId,
-    eligibilityRequirements: [],
-    successRequirements: [
-      {
-        requirement_type: 'campaignParticipations',
-        comparison: 'all',
-        data: {
-          campaignId: {
-            data: campaign.id,
-            comparison: 'equal',
-          },
-          status: {
-            data: 'SHARED',
-            comparison: 'equal',
-          },
-        },
-      },
-    ],
-  });
-
-  const combinix2 = databaseBuilder.factory.buildCombinedCourse({
-    name: 'Combinix 2',
-    code: 'COMBINIX2',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
-    organizationId,
-    eligibilityRequirements: [],
-    successRequirements: [
-      {
-        requirement_type: 'campaignParticipations',
-        comparison: 'all',
-        data: {
-          campaignId: {
-            data: campaign.id,
-            comparison: 'equal',
-          },
-          status: {
-            data: 'SHARED',
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: '65b761ab-3ebd-44a9-84b7-8b5e151aee76',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'd4c4a2b2-0046-471d-ad9c-15f9cfc8f1f6',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-      {
-        requirement_type: 'passages',
-        comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
-      },
-    ],
-  });
-
-  const bernardUser = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Bernard',
-    lastName: 'Peur',
-    email: 'bernard.peur@example.net',
-  });
-  const bernardLearner = databaseBuilder.factory.buildOrganizationLearner({
-    firstName: 'Bernard',
-    lastName: 'Peur',
-    userId: bernardUser.id,
-    organizationId,
-  });
-  databaseBuilder.factory.buildOrganizationLearnerParticipation({
-    combinedCourseId: combinix2.id,
-    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-    organizationLearnerId: bernardLearner.id,
-    status: OrganizationLearnerParticipationStatuses.STARTED,
-  });
-  databaseBuilder.factory.buildOrganizationLearnerParticipation({
-    combinedCourseId: combinix3.id,
-    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-    organizationLearnerId: bernardLearner.id,
-    status: OrganizationLearnerParticipationStatuses.STARTED,
-  });
-  databaseBuilder.factory.buildOrganizationLearnerParticipation({
-    combinedCourseId: combinix4.id,
-    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-    organizationLearnerId: bernardLearner.id,
-    status: OrganizationLearnerParticipationStatuses.STARTED,
-  });
-  const participationBernard = databaseBuilder.factory.buildCampaignParticipation({
-    campaignId: campaign.id,
-    userId: bernardUser.id,
-    organizationLearnerId: bernardLearner.id,
-    status: CampaignParticipationStatuses.STARTED,
-  });
-  databaseBuilder.factory.buildAssessment({
-    userId: bernardUser.id,
-    courseId: null,
-    state: Assessment.states.STARTED,
-    competenceId: null,
-    lastQuestionState: null,
-    type: Assessment.types.CAMPAIGN,
-    campaignParticipationId: participationBernard.id,
-  });
-
-  const jacquelineUser = databaseBuilder.factory.buildUser.withRawPassword({
-    firstName: 'Jacqueline',
-    lastName: 'Colson',
-    email: 'jacqueline.colson@example.net',
-  });
-  const jacquelineLearner = databaseBuilder.factory.buildOrganizationLearner({
-    firstName: 'Jacqueline',
-    lastName: 'Colson',
-    userId: jacquelineUser.id,
-    organizationId,
-  });
-  databaseBuilder.factory.buildOrganizationLearnerParticipation({
-    combinedCourseId: combinix2.id,
-    organizationLearnerId: jacquelineLearner.id,
-    status: OrganizationLearnerParticipationStatuses.STARTED,
-    type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-  });
-  databaseBuilder.factory.buildCampaignParticipation({
-    campaignId: campaign.id,
-    organizationLearnerId: jacquelineLearner.id,
-  });
-}
 
 function buildParenthoodQuest(databaseBuilder) {
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
@@ -452,6 +89,7 @@ const ORGANIZATION = {
   isManagingStudents: true,
   administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
 };
+
 const CAMPAIGN = [
   { code: 'ATTEST001', multipleSendings: true, name: 'campagne attestation 1' },
   { code: 'ATTEST002', multipleSendings: true, name: 'campagne attestation 2' },
@@ -640,23 +278,6 @@ const buildTargetProfile = (databaseBuilder, organization, index, tubes) => {
     name: `parcours attestation 6 eme numero ${index + 1}`,
     ownerOrganizationId: organization.id,
   });
-  databaseBuilder.factory.buildTargetProfileTraining({
-    targetProfileId: targetProfile.id,
-    trainingId: firstTrainingfrFRId,
-  });
-  databaseBuilder.factory.buildTargetProfileTraining({
-    targetProfileId: targetProfile.id,
-    trainingId: secondTrainingfrFRId,
-  });
-  databaseBuilder.factory.buildTargetProfileTraining({
-    targetProfileId: targetProfile.id,
-    trainingId: firstTrainingFRId,
-  });
-  databaseBuilder.factory.buildTargetProfileTraining({
-    targetProfileId: targetProfile.id,
-    trainingId: secondTrainingFRId,
-  });
-
   tubes.map(({ id, level }) =>
     databaseBuilder.factory.buildTargetProfileTube({
       targetProfileId: targetProfile.id,
@@ -746,7 +367,6 @@ export const buildQuests = async (databaseBuilder) => {
   ] = buildOrganizationLearners(databaseBuilder, organization, organizationLearnersData);
 
   // Create target profile
-
   const targetProfiles = buildTargetProfiles(databaseBuilder, organization);
 
   // Create campaigns
@@ -806,8 +426,6 @@ export const buildQuests = async (databaseBuilder) => {
   // Create quests
   buildSixthGradeQuests(databaseBuilder, rewardId, targetProfiles);
   const parenthoodAttestationId = buildParenthoodQuest(databaseBuilder);
-  buildProCombinedCourseQuest(databaseBuilder, PRO_ORGANIZATION_ID);
-  buildCombinedCourseQuest(databaseBuilder, organization.id);
 
   // Create reward for success user
   databaseBuilder.factory.buildProfileReward({
@@ -858,46 +476,22 @@ export const buildQuests = async (databaseBuilder) => {
     profileRewardId: otherUserProfileRewardId,
   });
 
-  const eduIncontournablesAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-incontournables-attestation-template',
-    key: 'EDUINCONTOURNABLES',
-  });
-  const eduDocAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-documents-attestation-template',
-    key: 'EDUDOC',
-  });
-  const eduVeilleAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-veille-attestation-template',
-    key: 'EDUVEILLE',
-  });
-  const eduCultureNumAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-culture-numerique-attestation-template',
-    key: 'EDUCULTURENUM',
-  });
-  const eduRessourcesAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-ressources-attestation-template',
-    key: 'EDURESSOURCES',
-  });
-  const eduSupportAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-supports-attestation-template',
-    key: 'EDUSUPPORT',
-  });
-  const eduSecuAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-securite-attestation-template',
-    key: 'EDUSECU',
-  });
-  const eduCollabAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-collaborer-attestation-template',
-    key: 'EDUCOLLAB',
-  });
-  const eduIaAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'edu-ia-attestation-template',
-    key: 'EDUIA',
-  });
-  const minarmAttestation = databaseBuilder.factory.buildAttestation({
-    templateName: 'minarm-attestation-template',
-    key: 'MINARM',
-  });
+  const attestationsData = [
+    { templateName: 'edu-incontournables-attestation-template', key: 'EDUINCONTOURNABLES' },
+    { templateName: 'edu-documents-attestation-template', key: 'EDUDOC' },
+    { templateName: 'edu-veille-attestation-template', key: 'EDUVEILLE' },
+    { templateName: 'edu-culture-numerique-attestation-template', key: 'EDUCULTURENUM' },
+    { templateName: 'edu-ressources-attestation-template', key: 'EDURESSOURCES' },
+    { templateName: 'edu-supports-attestation-template', key: 'EDUSUPPORT' },
+    { templateName: 'edu-securite-attestation-template', key: 'EDUSECU' },
+    { templateName: 'edu-collaborer-attestation-template', key: 'EDUCOLLAB' },
+    { templateName: 'edu-ia-attestation-template', key: 'EDUIA' },
+    { templateName: 'minarm-attestation-template', key: 'MINARM' },
+  ];
+
+  const educationAttestations = attestationsData.map(({ templateName, key }) =>
+    databaseBuilder.factory.buildAttestation({ templateName, key }),
+  );
 
   // Create user with all available attestations
   const allAttestationsUser = databaseBuilder.factory.buildUser.withRawPassword({
@@ -907,75 +501,17 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   // Create profile rewards for all available attestation types using existing attestations
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId, // sixth-grade attestation already created above
-  });
+  const allAttestationIds = [
+    rewardId, // sixth-grade attestation
+    parenthoodAttestationId, // parenthood attestation
+    ...educationAttestations.map((attestation) => attestation.id),
+  ];
 
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: parenthoodAttestationId, // parenthood attestation already created above
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduIncontournablesAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduDocAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduVeilleAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduCultureNumAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduRessourcesAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduSupportAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduSecuAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduCollabAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: eduIaAttestation.id,
-  });
-
-  databaseBuilder.factory.buildProfileReward({
-    userId: allAttestationsUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId: minarmAttestation.id,
+  allAttestationIds.forEach((attestationId) => {
+    databaseBuilder.factory.buildProfileReward({
+      userId: allAttestationsUser.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
+      rewardId: attestationId,
+    });
   });
 };
