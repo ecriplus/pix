@@ -71,20 +71,51 @@ export default class AssessmentBanner extends Component {
   </template>
   @service intl;
   @service featureToggles;
+  @service currentUser;
+  @service store;
+  @service router;
 
   @tracked showClosingModal = false;
   @tracked campaign = null;
+  @tracked campaignParticipation = null;
 
   constructor(...args) {
     super(...args);
-    this.args?.assessment?.campaign.then((campaign) => {
+    this.args?.assessment?.campaign.then(async (campaign) => {
       this.campaign = campaign;
+      if (this.campaign?.customResultPageButtonUrl && !this.isRedirectionUrlInternal) {
+        this.campaignParticipation = await this.store.queryRecord('campaign-participation', {
+          campaignId: campaign.id,
+          userId: this.currentUser.user.id,
+        });
+      }
     });
   }
 
+  get isRedirectionUrlInternal() {
+    if (this.campaign.customResultPageButtonUrl.startsWith('http')) {
+      return false;
+    }
+    try {
+      this.router.recognize(this.campaign.customResultPageButtonUrl);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   get redirectionUrl() {
-    if (!this.campaign) return null;
-    return this.campaign.customResultPageButtonUrl;
+    if (!this.campaign || !this.campaign.customResultPageButtonUrl) return null;
+
+    if (this.isRedirectionUrlInternal) {
+      return this.campaign.customResultPageButtonUrl;
+    } else {
+      const params = {};
+
+      params.externalId = this.campaignParticipation?.participantExternalId ?? undefined;
+
+      return buildUrl(this.campaign.customResultPageButtonUrl, params);
+    }
   }
 
   get title() {
@@ -119,6 +150,9 @@ class ButtonLinkWithHistory extends Component {
   }
 
   get isRedirectionUrlInternal() {
+    if (this.args.redirectionUrl.startsWith('http')) {
+      return false;
+    }
     try {
       return Boolean(this.router.recognize(this.args.redirectionUrl));
     } catch {
@@ -143,4 +177,17 @@ class ButtonLinkWithHistory extends Component {
       </PixButtonLink>
     {{/if}}
   </template>
+}
+
+function buildUrl(customUrl, params) {
+  const url = new URL(customUrl);
+  const urlParams = new URLSearchParams(url.search);
+
+  for (const key in params) {
+    if (params[key] !== undefined) {
+      urlParams.set(key, params[key]);
+    }
+  }
+  url.search = urlParams.toString();
+  return url.toString();
 }

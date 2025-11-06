@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
@@ -9,6 +10,14 @@ import { waitForDialog } from '../../helpers/wait-for';
 
 module('Integration | Component | assessment-banner', function (hooks) {
   setupIntlRenderingTest(hooks);
+
+  hooks.beforeEach(function () {
+    class CurrentUserStub extends Service {
+      user = { id: 2, isAnonymous: false };
+    }
+
+    this.owner.register('service:currentUser', CurrentUserStub);
+  });
 
   test('should not display home link button if not requested', async function (assert) {
     // given & when
@@ -61,18 +70,28 @@ module('Integration | Component | assessment-banner', function (hooks) {
       const link = screen.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" });
       assert.strictEqual(link.getAttribute('href'), '/');
     });
-
-    test('it should redirect to external url configured on campaign when quit button is clicked', async function (assert) {
+    test('it should redirect to external url without externalId configured on campaign when quit button is clicked', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const campaign = store.createRecord('campaign', {
-        customResultPageButtonUrl: 'https://pix.fr',
+        customResultPageButtonUrl: 'https://pix.fr/',
       });
       const assessment = store.createRecord('assessment', {
         title: 'Mon titre',
         type: 'CAMPAIGN',
         campaign,
       });
+      const campaignParticipation = store.createRecord('campaign-participation', {
+        campaignId: campaign.id,
+        userId: 2,
+      });
+      sinon.stub(store, 'queryRecord');
+      store.queryRecord
+        .withArgs('campaign-participation', {
+          campaignId: campaign.id,
+          userId: 2,
+        })
+        .resolves(campaignParticipation);
       this.set('assessment', assessment);
       screen = await render(hbs`<AssessmentBanner @displayHomeLink={{true}} @assessment={{this.assessment}} />`);
 
@@ -83,6 +102,41 @@ module('Integration | Component | assessment-banner', function (hooks) {
       // then
       const link = screen.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" });
       assert.strictEqual(link.getAttribute('href'), campaign.customResultPageButtonUrl);
+    });
+
+    test('it should redirect to external url with externalId configured on campaign when quit button is clicked', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        customResultPageButtonUrl: 'https://pix.fr/',
+      });
+      const assessment = store.createRecord('assessment', {
+        title: 'Mon titre',
+        type: 'CAMPAIGN',
+        campaign,
+      });
+      const campaignParticipation = store.createRecord('campaign-participation', {
+        campaignId: campaign.id,
+        userId: 2,
+        participantExternalId: 1,
+      });
+      sinon.stub(store, 'queryRecord');
+      store.queryRecord
+        .withArgs('campaign-participation', {
+          campaignId: campaign.id,
+          userId: 2,
+        })
+        .resolves(campaignParticipation);
+      this.set('assessment', assessment);
+      screen = await render(hbs`<AssessmentBanner @displayHomeLink={{true}} @assessment={{this.assessment}} />`);
+
+      // when
+      await click(screen.getByRole('button', { name: 'Quitter' }));
+      await waitForDialog();
+
+      // then
+      const link = screen.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" });
+      assert.strictEqual(link.getAttribute('href'), campaign.customResultPageButtonUrl + '?externalId=1');
     });
 
     test('it should redirect to internal url configured on campaign when quit button is clicked', async function (assert) {
