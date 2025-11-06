@@ -4,7 +4,7 @@ import { expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | Quest | Application | Controller | CombinedCourse', function () {
   describe('#getById', function () {
-    it('should call getCombinedCourseByQuestId usecase with questId', async function () {
+    it('should call getCombinedCourseById usecase with combinedCourseId', async function () {
       // given
       const combinedCourseId = 'combinedCourseId123';
       const combinedCourse = Symbol('combinedCourse');
@@ -26,8 +26,9 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       expect(result).to.equal(serializedCombinedCourse);
     });
   });
+
   describe('#findParticipations', function () {
-    it('should call findCombinedCourseParticipation usecase with questId', async function () {
+    it('should call findCombinedCourseParticipation usecase with combinedCourseId', async function () {
       // given
       const combinedCourseId = 'combinedCourseId123';
       const combinedCourseParticipations = Symbol('combinedCourseParticipations');
@@ -58,8 +59,9 @@ describe('Unit | Quest | Application | Controller | CombinedCourse', function ()
       expect(result).to.equal(serializedCombinedCourseParticipations);
     });
   });
+
   describe('#getStatistics', function () {
-    it('should call getCombinedCourseStatistics usecase with questId', async function () {
+    it('should call getCombinedCourseStatistics usecase with combinedCourseId', async function () {
       // given
       const combinedCourseId = 'combinedCourseId123';
       const combinedCourseStatistics = Symbol('combinedCourseStatistics');
