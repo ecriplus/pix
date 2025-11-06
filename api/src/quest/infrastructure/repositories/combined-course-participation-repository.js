@@ -32,6 +32,29 @@ export const save = async function ({ organizationLearnerId, combinedCourseId })
     .returning('id');
 };
 
+/**
+ * @param {number} participationId
+ * @returns {Promise<CombinedCourseParticipation | null>}
+ */
+export const findById = async function ({ participationId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const combinedCourseParticipation = await knexConnection('organization_learner_participations')
+    .select('organization_learner_participations.id', 'firstName', 'lastName')
+    .join(
+      'view-active-organization-learners',
+      'view-active-organization-learners.id',
+      'organization_learner_participations.organizationLearnerId',
+    )
+    .where({
+      'organization_learner_participations.id': participationId,
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+    })
+    .whereNull('organization_learner_participations.deletedAt')
+    .first();
+  if (!combinedCourseParticipation) return null;
+  return new CombinedCourseParticipation(combinedCourseParticipation);
+};
+
 export const getByUserId = async function ({ userId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
 
