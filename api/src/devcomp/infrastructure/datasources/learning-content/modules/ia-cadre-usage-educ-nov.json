@@ -230,16 +230,16 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Attention cette œuvre  doit être libre de droit. Il faut veiller à respecter le droit d’auteur.</p>",
+                    "content": "<p>Attention cette œuvre doit être libre de droit. Il faut veiller à respecter le droit d’auteur.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, il convient de renoncer&nbsp;quand des  protégées par le droit d’auteur sont en jeu.</p>"
+                      "diagnosis": "<p>En effet, il convient de renoncer quand des oeuvres protégées par le droit d’auteur sont en jeu.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Oui tu peux en effet utiliser n’importe quelle œuvre. C’est l’avantage de l’IA.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, il convient de renoncer&nbsp;quand des  protégées par le droit d’auteur sont en jeu.</p>"
+                      "diagnosis": "<p>Eh non, il convient de renoncer quand des oeuvres protégées par le droit d’auteur sont en jeu.</p>"
                     }
                   }
                 ],
