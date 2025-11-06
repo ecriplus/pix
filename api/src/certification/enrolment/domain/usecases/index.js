@@ -2,6 +2,7 @@
 import * as divisionRepository from '../../../../prescription/campaign/infrastructure/repositories/division-repository.js';
 import * as organizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
+import * as countryRepository from '../../../../shared/infrastructure/repositories/country-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as attendanceSheetPdfUtils from '../../../enrolment/infrastructure/utils/pdf/attendance-sheet-pdf.js';
@@ -30,7 +31,7 @@ import * as temporarySessionsStorageForMassImportService from '../services/tempo
  * @typedef {import('../../infrastructure/repositories/index.js').EnrolledCandidateRepository} EnrolledCandidateRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SessionForAttendanceSheetRepository} SessionForAttendanceSheetRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CenterRepository} CenterRepository
- * @typedef {import('../../infrastructure/repositories/index.js').CountryRepository} CountryRepository
+ * @typedef {import('../../../../shared/infrastructure/repositories/index.js').CountryRepository} CountryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').ScoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {import('../../../../shared/infrastructure/repositories/index.js').UserRepository} UserRepository
  * @typedef {import('../../../shared/domain/validators/session-validator.js')} SessionValidator
@@ -96,6 +97,7 @@ const dependencies = {
   certificationCourseRepository,
   certificationAssessmentRepository,
   certificationCenterRepository,
+  countryRepository,
 };
 
 import { addCandidateToSession } from './add-candidate-to-session.js';
@@ -105,7 +107,6 @@ import { createSessions } from './create-sessions.js';
 import { deleteSession } from './delete-session.js';
 import { deleteUnlinkedCertificationCandidate } from './delete-unlinked-certification-candidate.js';
 import { enrolStudentsToSession } from './enrol-students-to-session.js';
-import { findCountries } from './find-countries.js';
 import { findDivisionsByCertificationCenter } from './find-divisions-by-certification-center.js';
 import { findStudentsForEnrolment } from './find-students-for-enrolment.js';
 import { getAttendanceSheet } from './get-attendance-sheet.js';
@@ -135,7 +136,6 @@ const usecasesWithoutInjectedDependencies = {
   deleteSession,
   deleteUnlinkedCertificationCandidate,
   enrolStudentsToSession,
-  findCountries,
   findDivisionsByCertificationCenter,
   findStudentsForEnrolment,
   getAttendanceSheet,

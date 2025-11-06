@@ -9,8 +9,8 @@ const register = async function (server) {
         handler: countryController.findCountries,
         tags: ['api'],
         notes: [
-          'Cette route est utilisée par Pix Certif',
-          "Elle renvoie la liste des noms de pays issus du référentiel INSEE dans le cas de l'inscription d'un candidat en certification",
+          'Cette route est utilisée par Pix Certif et Pix Admin',
+          'Elle renvoie la liste des pays issus du référentiel INSEE.',
         ],
       },
     },

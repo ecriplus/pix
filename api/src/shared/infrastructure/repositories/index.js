@@ -3,6 +3,7 @@ import * as certificationEvaluationRepository from '../../../certification/evalu
 import * as campaignsAPI from '../../../prescription/campaign/application/api/campaigns-api.js';
 import * as knowledgeElementSnapshotAPI from '../../../prescription/campaign/application/api/knowledge-element-snapshots-api.js';
 import { injectDependencies } from '../utils/dependency-injection.js';
+import * as countryRepository from './country-repository.js';
 import * as knowledgeElementRepository from './knowledge-element-repository.js';
 
 /**
@@ -14,6 +15,7 @@ import * as knowledgeElementRepository from './knowledge-element-repository.js';
 const repositoriesWithoutInjectedDependencies = {
   certificationEvaluationRepository,
   knowledgeElementRepository,
+  countryRepository,
 };
 
 /**
