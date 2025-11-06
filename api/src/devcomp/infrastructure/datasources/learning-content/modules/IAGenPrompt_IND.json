@@ -679,7 +679,7 @@
                       "description": "Ce texte est manquant... C’est à vous de le générer avec l’IA ci-dessous.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.svg",
+                        "src": "https://assets.pix.org/modules/jameliore-mes-prompts/pix-modulix-ia-jameliore-mon-prompt-illu.png",
                         "alt": "Une affiche concernant le tournoi de Volley.  Elle annonce l’équipe des volley-raptors vainqueur !"
                       },
                       "license": {
