@@ -19,10 +19,6 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
   @tracked showModal = false;
   @tracked organizationToDetach;
 
-  searchedId = this.args.id;
-  searchedName = this.args.name;
-  searchedExternalId = this.args.externalId;
-
   optionType = [
     { value: 'PRO', label: 'PRO' },
     { value: 'SCO', label: 'SCO' },
@@ -60,12 +56,21 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
     this.args.triggerFiltering('hideArchived', event);
   }
 
+  get isClearFiltersButtonDisabled() {
+    return !this.args.id && !this.args.name && !this.args.type && !this.args.externalId && !this.args.hideArchived;
+  }
+
   <template>
-    <PixFilterBanner @title={{t "common.filters.title"}}>
-      <PixInput value={{this.searchedId}} oninput={{fn @triggerFiltering "id"}}>
+    <PixFilterBanner
+      @title={{t "common.filters.title"}}
+      @onClearFilters={{@onResetFilter}}
+      @clearFiltersLabel={{t "common.filters.actions.clear"}}
+      @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
+    >
+      <PixInput value={{@id}} oninput={{fn @triggerFiltering "id"}} type="number" min="1">
         <:label>Identifiant</:label>
       </PixInput>
-      <PixInput value={{this.searchedName}} oninput={{fn @triggerFiltering "name"}}>
+      <PixInput value={{@name}} oninput={{fn @triggerFiltering "name"}}>
         <:label>Nom</:label>
       </PixInput>
       <PixSelect
@@ -77,7 +82,7 @@ export default class ActionsOnUsersRoleInOrganization extends Component {
       >
         <:label>Type</:label>
       </PixSelect>
-      <PixInput value={{this.searchedExternalId}} oninput={{fn @triggerFiltering "externalId"}}>
+      <PixInput value={{@externalId}} oninput={{fn @triggerFiltering "externalId"}}>
         <:label>Identifiant externe</:label>
       </PixInput>
       <PixToggleButton @onChange={{this.filterHideArchived}} @toggled={{@hideArchived}}>

@@ -193,6 +193,7 @@ export default class Organizations extends Component {
         @targetProfileName={{@targetProfile.internalName}}
         @hideArchived={{@hideArchived}}
         @showDetachColumn={{this.isSuperAdminOrMetier}}
+        @onResetFilter={{@onResetFilter}}
       />
     </section>
   </template>
