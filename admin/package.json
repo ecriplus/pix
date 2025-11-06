@@ -111,7 +111,7 @@
     "sinon": "^21.0.0",
     "stylelint": "^16.25.0",
     "tracked-built-ins": "^4.0.0",
-    "webpack": "^5.100.2",
+    "webpack": "^5.102.1",
     "xss": "^1.0.15"
   },
   "overrides": {
