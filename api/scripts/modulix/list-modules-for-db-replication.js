@@ -6,14 +6,28 @@ import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learn
  */
 async function listModulesForDBReplication() {
   const imports = await moduleDatasource.list();
+  console.log('--- List of modules for DB replication ---');
   const moduleInformation = imports.map((module) => {
     return { id: module.id, slug: module.slug, title: module.title };
   });
   console.log(JSON.stringify(moduleInformation, null, 2).replace(/"([^"]+)": "([^"]+)"/g, "$1: '$2'"));
 }
 
+/*
+ * List all modules for Metabase filter with id, slug
+ * @returns {Promise<void>}
+ */
+async function listModulesForMetabaseFilter() {
+  const imports = await moduleDatasource.list();
+  console.log('--- List of modules for Metabase filter ---');
+  imports.map((module) => {
+    console.log(`${module.id}, ${module.slug}`);
+  });
+}
+
 async function main() {
   await listModulesForDBReplication();
+  await listModulesForMetabaseFilter();
 }
 
 await main();
