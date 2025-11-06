@@ -4,6 +4,7 @@ import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { PRO_COMBINED_COURSE } from './fixtures/pro-combined-course.js';
 import { COMBINED_COURSE_WITHOUT_CAMPAIGN } from './fixtures/pro-combined-course-without-campaign.js';
 import { COMBINED_COURSE_WITHOUT_MODULES } from './fixtures/pro-combined-course-without-modules.js';
+import { MAXI_COMBINED_COURSE } from './fixtures/pro-complete-combined-course.js';
 
 const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
   const {
@@ -59,6 +60,8 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
 
     // Build campaign
     buildCampaign({
+      targetProfileId,
+      organizationId: combinedCourseData.organizationId,
       id: combinedCourseData.targetProfile.campaign.id,
       name: combinedCourseData.targetProfile.campaign.name,
       code: combinedCourseData.targetProfile.campaign.code,
@@ -77,16 +80,11 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     // Build trainings if any
     combinedCourseData.targetProfile.trainings?.map((training) => {
       // Build training
-      const { id: trainingId } = buildTraining({
-        title: training.title,
-        link: training.link,
-        locale: training.locale,
-      });
-
+      const { id: trainingId } = buildTraining(training);
       // Build training trigger
       const { id: trainingTriggerId } = buildTrainingTrigger({
         trainingId,
-        threshold: training.threshold,
+        threshold: 10,
         type: 'prerequisite',
       });
 
@@ -116,6 +114,8 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     const { id: organizationLearnerId } = buildOrganizationLearner({
       firstName: participation.firstName,
       lastName: participation.lastName,
+      group: participation.group,
+      division: participation.division,
       userId,
       organizationId: combinedCourseData.organizationId,
     });
@@ -156,7 +156,12 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
 };
 
 export const buildCombinedCourses = (databaseBuilder) => {
-  [PRO_COMBINED_COURSE, COMBINED_COURSE_WITHOUT_CAMPAIGN, COMBINED_COURSE_WITHOUT_MODULES].forEach((config) => {
+  [
+    PRO_COMBINED_COURSE,
+    COMBINED_COURSE_WITHOUT_CAMPAIGN,
+    COMBINED_COURSE_WITHOUT_MODULES,
+    MAXI_COMBINED_COURSE,
+  ].forEach((config) => {
     buildCombinixQuest(databaseBuilder, config);
   });
 };
