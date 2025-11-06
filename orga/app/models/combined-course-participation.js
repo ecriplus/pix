@@ -4,6 +4,8 @@ export default class CombinedCourseParticipation extends Model {
   @attr('string') firstName;
   @attr('string') lastName;
   @attr('string') status;
+  @attr('nullable-string') group;
+  @attr('nullable-string') division;
   @attr('number') nbCampaigns;
   @attr('number') nbModules;
   @attr('number') nbCampaignsCompleted;

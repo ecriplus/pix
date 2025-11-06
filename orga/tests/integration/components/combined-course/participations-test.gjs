@@ -14,6 +14,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       firstName: 'Marcelle',
       lastName: 'Labe',
       status: 'COMPLETED',
+      division: '6eme A',
+      group: 'Groupe 1',
       nbCampaigns: 3,
       nbModules: 5,
       nbCampaignsCompleted: 2,
@@ -24,6 +26,8 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       firstName: 'Vincent',
       lastName: 'Deli',
       status: 'STARTED',
+      division: '5eme B',
+      group: 'Groupe 2',
       nbCampaigns: 2,
       nbModules: 2,
       nbCampaignsCompleted: 0,
@@ -34,6 +38,15 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
   const onFilter = sinon.stub();
 
   setupIntlRenderingTest(hooks);
+
+  hooks.beforeEach(function () {
+    const currentUser = this.owner.lookup('service:current-user');
+    currentUser.organization = {
+      isManagingStudents: true,
+      isSco: false,
+    };
+  });
+
   module('table', function () {
     test('it should have a caption to describe the table ', async function (assert) {
       // when
@@ -363,7 +376,6 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
 
       test('it should init the fullName filter value', async function (assert) {
         // given
-        const onFilter = sinon.stub();
         const fullNameFilter = 'Marcelo';
 
         // when
@@ -388,19 +400,6 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
       test('it should trigger onFilter on change statuses', async function (assert) {
         // given
         const onFilter = sinon.stub();
-        const participations = [
-          {
-            id: 123,
-            firstName: 'Marcelle',
-            lastName: 'Labe',
-            status: 'COMPLETED',
-            nbCampaigns: 1,
-            nbModules: 0,
-            nbCampaignsCompleted: 1,
-            nbModulesCompleted: 0,
-          },
-        ];
-
         const statusFilter = [];
 
         // when
@@ -426,6 +425,116 @@ module('Integration | Component | CombinedCourse | Participations', function (ho
         assert.true(onFilter.calledOnce);
         assert.deepEqual(onFilter.args[0], ['statuses', ['COMPLETED']]);
       });
+    });
+  });
+
+  module('division and group column', function (hooks) {
+    let currentUser;
+
+    hooks.beforeEach(function () {
+      currentUser = this.owner.lookup('service:current-user');
+    });
+
+    test('it should display division column for SCO organizations if organisation is managing students', async function (assert) {
+      // given
+      currentUser.organization = {
+        isManagingStudents: true,
+        isSco: true,
+      };
+
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+
+      // then
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: t('components.group.SCO'),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('cell', {
+          name: participations[0].division,
+        }),
+      );
+    });
+
+    test('it should display group column for SUP organizations with is managing students', async function (assert) {
+      // given
+      currentUser.organization = {
+        isManagingStudents: true,
+        isSco: false,
+      };
+
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+
+      // then
+      assert.ok(
+        within(table).getByRole('columnheader', {
+          name: t('components.group.SUP'),
+        }),
+      );
+      assert.ok(
+        within(table).getByRole('cell', {
+          name: participations[0].group,
+        }),
+      );
+    });
+
+    test('it should not display division/group column when organization is not managing students', async function (assert) {
+      // given
+      currentUser.organization = {
+        isManagingStudents: false,
+        isSco: true,
+      };
+
+      // when
+      const screen = await render(
+        <template>
+          <CombinedCourseParticipations
+            @hasCampaigns={{true}}
+            @hasModules={{true}}
+            @participations={{participations}}
+            @onFilter={{onFilter}}
+          />
+        </template>,
+      );
+
+      const table = screen.getByRole('table');
+
+      // then
+      assert.notOk(
+        within(table).queryByRole('columnheader', {
+          name: t('components.group.SCO'),
+        }),
+      );
+      assert.notOk(
+        within(table).queryByRole('columnheader', {
+          name: t('components.group.SUP'),
+        }),
+      );
     });
   });
 });

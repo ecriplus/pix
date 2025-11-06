@@ -36,6 +36,18 @@ export default class CombinedCourse extends Component {
     ];
   }
 
+  get displayDivisionColumn() {
+    return this.currentUser.organization.isManagingStudents;
+  }
+
+  get isScoOrganization() {
+    return this.currentUser.organization.isSco;
+  }
+
+  get divisionColumnName() {
+    return this.intl.t(`components.group.${this.isScoOrganization ? 'SCO' : 'SUP'}`);
+  }
+
   @action
   onSelectStatus(statuses) {
     this.args.onFilter('statuses', statuses);
@@ -105,6 +117,21 @@ export default class CombinedCourse extends Component {
               <ParticipationStatus @status={{participation.status}} />
             </:cell>
           </PixTableColumn>
+
+          {{#if this.displayDivisionColumn}}
+            <PixTableColumn @context={{context}}>
+              <:header>
+                {{this.divisionColumnName}}
+              </:header>
+              <:cell>
+                {{#if this.isScoOrganization}}
+                  {{participation.division}}
+                {{else}}
+                  {{participation.group}}
+                {{/if}}
+              </:cell>
+            </PixTableColumn>
+          {{/if}}
 
           {{#if @hasCampaigns}}
             <PixTableColumn @context={{context}} @type="number">
