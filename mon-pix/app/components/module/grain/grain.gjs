@@ -40,6 +40,7 @@ export default class ModuleGrain extends Component {
     'qrocm',
     'separator',
     'text',
+    'short-video',
     'video',
   ];
   static AVAILABLE_GRAIN_TYPES = [

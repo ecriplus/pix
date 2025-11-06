@@ -4,7 +4,7 @@ import { t } from 'ember-intl/test-support';
 import ModulixElement from 'mon-pix/components/module/component/element';
 import { module, test } from 'qunit';
 
-import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Module | Element', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -161,6 +161,24 @@ module('Integration | Component | Module | Element', function (hooks) {
 
     // then
     assert.strictEqual(findAll('.element-video').length, 1);
+    assert.dom(screen.getByRole('button', { name: 'Afficher la transcription' })).exists();
+  });
+
+  test('should display an element with a short video element', async function (assert) {
+    // given
+    const element = {
+      id: '3a9f2269-99ba-4631-b6fd-6802c88d5c26',
+      type: 'short-video',
+      title: 'Vidéo courte de présentation de Pix',
+      url: 'https://assets.pix.org/modules/placeholder-video.mp4',
+      transcription: '<p>transcription</p>',
+    };
+
+    // when
+    const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+    // then
+    assert.strictEqual(findAll('.element-short-video').length, 1);
     assert.dom(screen.getByRole('button', { name: 'Afficher la transcription' })).exists();
   });
 
