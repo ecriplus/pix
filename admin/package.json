@@ -115,9 +115,6 @@
     "xss": "^1.0.15"
   },
   "overrides": {
-    "eslint-plugin-ember": {
-      "ember-eslint-parser": "$ember-eslint-parser"
-    },
     "ember-dayjs": {
       "ember-source": "$ember-source"
     }
