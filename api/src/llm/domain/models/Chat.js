@@ -50,10 +50,7 @@ export class Chat {
   }
 
   get messagesToForwardToLLM() {
-    return this.messages
-      .filter((message) => message.shouldBeForwardedToLLM)
-      .slice(-this.configuration.historySize)
-      .map((message) => message.toLLMHistory());
+    return this.messages.filter((message) => message.shouldBeForwardedToLLM).map((message) => message.toLLMHistory());
   }
 
   get isPreview() {

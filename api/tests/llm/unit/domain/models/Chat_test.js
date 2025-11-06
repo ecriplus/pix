@@ -1125,7 +1125,6 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           id: 'some-chat-id',
           configuration: new Configuration({
             id: 'some-config-id',
-            historySize: 10,
             inputMaxChars: 500,
             inputMaxPrompts: 4,
             attachmentName: 'test.csv',
@@ -1242,51 +1241,13 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
         // given
         const chat = new Chat({
           id: 'some-chat-id',
-          configuration: new Configuration({ id: 'some-config-id', llm: { historySize: 45 } }),
+          configuration: new Configuration({ id: 'some-config-id' }),
           hasAttachmentContextBeenAdded: false,
           messages: [],
         });
 
         // then
         expect(chat.messagesToForwardToLLM).to.deep.equal([]);
-      });
-    });
-    context('history size', function () {
-      it('returns the N latest messages according to configuration history size', function () {
-        // given
-        const chat = new Chat({
-          id: 'some-chat-id',
-          configuration: new Configuration({ id: 'some-config-id', llm: { historySize: 4 } }),
-          hasAttachmentContextBeenAdded: false,
-          messages: [
-            new Message({ index: 0, content: 'first message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ index: 1, content: 'second message', isFromUser: false, shouldBeForwardedToLLM: true }),
-            new Message({ index: 2, content: 'third message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ index: 3, content: 'fourth message', isFromUser: false, shouldBeForwardedToLLM: true }),
-            new Message({ index: 4, content: 'fifth message', isFromUser: true, shouldBeForwardedToLLM: true }),
-            new Message({ index: 5, content: 'sixth message', isFromUser: false, shouldBeForwardedToLLM: true }),
-          ],
-        });
-
-        // then
-        expect(chat.messagesToForwardToLLM).to.deep.equal([
-          {
-            content: 'third message',
-            role: 'user',
-          },
-          {
-            content: 'fourth message',
-            role: 'assistant',
-          },
-          {
-            content: 'fifth message',
-            role: 'user',
-          },
-          {
-            content: 'sixth message',
-            role: 'assistant',
-          },
-        ]);
       });
     });
     context('attachments', function () {
@@ -1296,7 +1257,6 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           id: 'some-chat-id',
           configuration: new Configuration({
             id: 'some-config-id',
-            llm: { historySize: 4 },
             attachment: { name: 'file.txt', context: "Ceci n'est pas une pipe." },
           }),
           hasAttachmentContextBeenAdded: true,
@@ -1344,7 +1304,6 @@ describe('LLM | Unit | Domain | Models | Chat', function () {
           id: 'some-chat-id',
           configuration: new Configuration({
             id: 'some-config-id',
-            llm: { historySize: 4 },
             attachment: { name: 'file.txt', context: "Ceci n'est pas une pipe." },
           }),
           hasAttachmentContextBeenAdded: true,

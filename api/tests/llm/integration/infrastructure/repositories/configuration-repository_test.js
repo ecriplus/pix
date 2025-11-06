@@ -59,7 +59,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
         const llmApiScope = nock('https://llm-test.pix.fr/api')
           .get('/configurations/unIdDeConfiguration')
           .reply(200, {
-            llm: { historySize: 1 },
             challenge: { inputMaxChars: 2, inputMaxPrompts: 4 },
             attachment: { name: 'some_attachment_name', context: 'some attachment context' },
           });
@@ -69,7 +68,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
 
         // then
         expect(configuration).to.contain({
-          historySize: 1,
           inputMaxChars: 2,
           inputMaxPrompts: 3,
           attachmentName: 'some_attachment_name',

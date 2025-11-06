@@ -35,9 +35,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
       it('return property values', function () {
         // given
         const configuration = new Configuration({
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxChars: 456,
             inputMaxPrompts: 789,
@@ -51,7 +48,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
 
         // then
         expect(configuration).to.contain({
-          historySize: 123,
           inputMaxChars: 456,
           inputMaxPrompts: 788,
           hasAttachment: true,
@@ -66,9 +62,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
       it('returns undefined for attachment properties', function () {
         // given
         const configuration = new Configuration({
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxChars: 456,
             inputMaxPrompts: 789,
@@ -77,7 +70,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
 
         // then
         expect(configuration).to.contain({
-          historySize: 123,
           inputMaxChars: 456,
           inputMaxPrompts: 789,
           hasAttachment: false,
@@ -107,9 +99,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
     it('returns Configuration model', function () {
       // given
       const dto = {
-        llm: {
-          historySize: 123,
-        },
         challenge: {
           inputMaxChars: 456,
           inputMaxPrompts: 789,
@@ -127,7 +116,6 @@ describe('LLM | Unit | Domain | Models | Configuration', function () {
       // then
       expect(configuration).to.be.instanceOf(Configuration);
       expect(configuration).to.contain({
-        historySize: 123,
         inputMaxChars: 456,
         inputMaxPrompts: 788,
         hasAttachment: true,

@@ -741,9 +741,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
         it('should start a new chat', async function () {
           // given
           const config = {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxChars: 456,
               inputMaxPrompts: 789,
@@ -860,9 +857,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
             userId: user.id,
             configurationId: 'uneConfigQuiExist',
             configuration: new Configuration({
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxChars: 999,
                 inputMaxPrompts: 999,
@@ -887,9 +881,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
           const promptLlmScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
-                llm: {
-                  historySize: 123,
-                },
                 challenge: {
                   inputMaxChars: 999,
                   inputMaxPrompts: 999,

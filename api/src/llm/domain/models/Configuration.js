@@ -9,10 +9,6 @@ export class Configuration {
     this.#dto = configurationDTO;
   }
 
-  get historySize() {
-    return this.#dto.llm.historySize;
-  }
-
   get inputMaxChars() {
     return this.#dto.challenge.inputMaxChars;
   }
@@ -55,8 +51,6 @@ export class Configuration {
 
 /**
  * @typedef {object} ConfigurationDTO
- * @property {object} llm
- * @property {number} llm.historySize
  * @property {string} name
  * @property {object} challenge
  * @property {string[]} challenge.tools

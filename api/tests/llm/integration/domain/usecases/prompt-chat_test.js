@@ -246,18 +246,12 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
     beforeEach(function () {
       configuration = new Configuration({
-        llm: {
-          historySize: 123,
-        },
         challenge: {
           inputMaxPrompts: 100,
           inputMaxChars: 255,
         },
       });
       configurationWithAttachment = new Configuration({
-        llm: {
-          historySize: 123,
-        },
         challenge: {
           inputMaxPrompts: 100,
           inputMaxChars: 255,
@@ -285,9 +279,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
-                llm: {
-                  historySize: 123,
-                },
                 challenge: {
                   inputMaxPrompts: 100,
                   inputMaxChars: 255,
@@ -334,9 +325,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configId: 'uneConfigQuiExist',
             configContent: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -420,9 +408,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
-                llm: {
-                  historySize: 123,
-                },
                 challenge: {
                   inputMaxPrompts: 100,
                   inputMaxChars: 255,
@@ -471,9 +456,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configId: 'uneConfigQuiExist',
             configContent: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -650,9 +632,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
-                      llm: {
-                        historySize: 123,
-                      },
                       challenge: {
                         inputMaxPrompts: 100,
                         inputMaxChars: 255,
@@ -717,9 +696,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configId: 'uneConfigQuiExist',
                   configContent: {
-                    llm: {
-                      historySize: 123,
-                    },
                     challenge: {
                       inputMaxPrompts: 100,
                       inputMaxChars: 255,
@@ -905,9 +881,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 userId: 123,
                 configId: 'uneConfigQuiExist',
                 configContent: {
-                  llm: {
-                    historySize: 123,
-                  },
                   challenge: {
                     inputMaxPrompts: 100,
                     inputMaxChars: 255,
@@ -1025,9 +998,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
-                      llm: {
-                        historySize: 123,
-                      },
                       challenge: {
                         inputMaxPrompts: 100,
                         inputMaxChars: 255,
@@ -1092,9 +1062,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configId: 'uneConfigQuiExist',
                   configContent: {
-                    llm: {
-                      historySize: 123,
-                    },
                     challenge: {
                       inputMaxPrompts: 100,
                       inputMaxChars: 255,
@@ -1259,9 +1226,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
                   .post('/chat', {
                     configuration: {
-                      llm: {
-                        historySize: 123,
-                      },
                       challenge: {
                         inputMaxPrompts: 100,
                         inputMaxChars: 255,
@@ -1324,9 +1288,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configId: 'uneConfigQuiExist',
                   configContent: {
-                    llm: {
-                      historySize: 123,
-                    },
                     challenge: {
                       inputMaxPrompts: 100,
                       inputMaxChars: 255,
@@ -1559,9 +1520,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 userId: 123,
                 configId: 'uneConfigQuiExist',
                 configContent: {
-                  llm: {
-                    historySize: 123,
-                  },
                   challenge: {
                     inputMaxPrompts: 100,
                     inputMaxChars: 255,
@@ -1716,9 +1674,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                 userId: 123,
                 configId: 'uneConfigQuiExist',
                 configContent: {
-                  llm: {
-                    historySize: 123,
-                  },
                   challenge: {
                     inputMaxPrompts: 100,
                     inputMaxChars: 255,
@@ -1844,9 +1799,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configId: 'uneConfigQuiExist',
                   configContent: {
-                    llm: {
-                      historySize: 123,
-                    },
                     challenge: {
                       inputMaxPrompts: 100,
                       inputMaxChars: 255,
@@ -2004,9 +1956,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
                   userId: 123,
                   configId: 'uneConfigQuiExist',
                   configContent: {
-                    llm: {
-                      historySize: 123,
-                    },
                     challenge: {
                       inputMaxPrompts: 100,
                       inputMaxChars: 255,
@@ -2100,9 +2049,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -2150,9 +2096,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configId: 'uneConfigQuiExist',
           configContent: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxPrompts: 100,
               inputMaxChars: 255,
@@ -2239,9 +2182,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -2289,9 +2229,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configId: 'uneConfigQuiExist',
           configContent: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxPrompts: 100,
               inputMaxChars: 255,
@@ -2376,9 +2313,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
           .post('/chat', {
             configuration: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -2416,9 +2350,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           userId: 123,
           configId: 'uneConfigQuiExist',
           configContent: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxPrompts: 100,
               inputMaxChars: 255,
@@ -2491,9 +2422,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
-                llm: {
-                  historySize: 123,
-                },
                 challenge: {
                   inputMaxPrompts: 100,
                   inputMaxChars: 255,
@@ -2539,9 +2467,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             id: chatId,
             configId: 'uneConfigQuiExist',
             configContent: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -2629,9 +2554,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
           const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
             .post('/chat', {
               configuration: {
-                llm: {
-                  historySize: 123,
-                },
                 challenge: {
                   inputMaxPrompts: 100,
                   inputMaxChars: 255,
@@ -2678,9 +2600,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
             userId: 123,
             configId: 'uneConfigQuiExist',
             configContent: {
-              llm: {
-                historySize: 123,
-              },
               challenge: {
                 inputMaxPrompts: 100,
                 inputMaxChars: 255,
@@ -2760,9 +2679,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
 
     beforeEach(function () {
       configuration = new Configuration({
-        llm: {
-          historySize: 123,
-        },
         challenge: {
           inputMaxPrompts: 100,
           inputMaxChars: 255,
@@ -2784,9 +2700,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
       const llmPostPromptScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
           configuration: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxPrompts: 100,
               inputMaxChars: 255,
@@ -2832,9 +2745,6 @@ describe('LLM | Integration | Domain | UseCases | prompt-chat', function () {
         userId: 123,
         configId: 'uneConfigQuiExist',
         configContent: {
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxPrompts: 100,
             inputMaxChars: 255,

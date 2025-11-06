@@ -68,7 +68,7 @@ describe('Acceptance | Route | llm-preview', function () {
             configuration: {
               name: 'Config de test',
               challenge: {
-                inputMaxChars: 1024,
+                inputMaxChars: 'coucou maman',
                 inputMaxPrompts: 5,
               },
             },
@@ -99,9 +99,6 @@ describe('Acceptance | Route | llm-preview', function () {
           payload: {
             configuration: {
               name: 'Config de test',
-              llm: {
-                historySize: 10,
-              },
               challenge: {
                 inputMaxChars: 1024,
                 inputMaxPrompts: 5,
@@ -129,9 +126,6 @@ describe('Acceptance | Route | llm-preview', function () {
         payload: {
           configuration: {
             name: 'Config de test',
-            llm: {
-              historySize: 10,
-            },
             challenge: {
               inputMaxChars: 1024,
               inputMaxPrompts: 5,
@@ -168,9 +162,6 @@ describe('Acceptance | Route | llm-preview', function () {
       expect(chat).to.deep.contain({
         configContent: {
           name: 'Config de test',
-          llm: {
-            historySize: 10,
-          },
           challenge: {
             inputMaxChars: 1024,
             inputMaxPrompts: 5,
@@ -225,9 +216,6 @@ describe('Acceptance | Route | llm-preview', function () {
           userId: 123,
           configId: 'some-config-id',
           configContent: {
-            llm: {
-              historySize: 10,
-            },
             challenge: {
               inputMaxChars: 500,
               inputMaxPrompts: 4,
@@ -320,9 +308,6 @@ describe('Acceptance | Route | llm-preview', function () {
       const chat = {
         id: chatId,
         configContent: {
-          llm: {
-            historySize: 10,
-          },
           challenge: {
             inputMaxChars: 500,
             inputMaxPrompts: 4,
@@ -432,9 +417,6 @@ describe('Acceptance | Route | llm-preview', function () {
           userId: 123,
           configId: 'some-config-id',
           configContent: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxChars: 999,
               inputMaxPrompts: 999,
@@ -463,9 +445,6 @@ describe('Acceptance | Route | llm-preview', function () {
         userId: null,
         configId: 'some-config-id',
         configContent: {
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxChars: 999,
             inputMaxPrompts: 999,
@@ -482,9 +461,6 @@ describe('Acceptance | Route | llm-preview', function () {
       const promptLlmScope = nock('https://llm-test.pix.fr/api')
         .post('/chat', {
           configuration: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxChars: 999,
               inputMaxPrompts: 999,
