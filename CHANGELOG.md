@@ -1,5 +1,16 @@
 # Pix Changelog
 
+# [5.251.0](https://github.com/1024pix/pix/compare/v5.250.0...v5.251.0) (2025-11-06)
+
+### :rocket: Amélioration
+
+- [#14050](https://github.com/1024pix/pix/pull/14050) Ajouter la pagination aux parcours combinés (PIX-19815) 
+
+### :building_construction: Tech
+
+- [#14098](https://github.com/1024pix/pix/pull/14098) Ne plus utiliser l'historySize de la configuration LLM (PIX-20338) 
+- [#14089](https://github.com/1024pix/pix/pull/14089) Refactorise les seeds de parcours combinés avec des fixtures (PIX-19815)
+
 # [5.250.0](https://github.com/1024pix/pix/compare/v5.249.0...v5.250.0) (2025-11-06)
 
 ### :rocket: Amélioration
