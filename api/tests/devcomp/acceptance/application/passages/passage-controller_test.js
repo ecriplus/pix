@@ -221,11 +221,15 @@ describe('Acceptance | Controller | passage-controller', function () {
   });
 
   describe('POST /api/passages/{passageId}/embed/llm/chats', function () {
-    let user;
+    let user, passage;
 
     beforeEach(async function () {
       user = databaseBuilder.factory.buildUser();
-      databaseBuilder.factory.buildPassage({ id: 111, userId: user.id }).id;
+      passage = databaseBuilder.factory.buildPassage({
+        id: 111,
+        userId: user.id,
+        moduleId: 'c47ffa11-5785-434b-9ea8-8d70c877715b',
+      });
       await databaseBuilder.commit();
     });
 
@@ -287,6 +291,9 @@ describe('Acceptance | Controller | passage-controller', function () {
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;
           expect(llmApiScope.isDone()).to.be.true;
+          const chat = await knex('chats').first();
+          expect(chat.passageId).to.equal(passage.id);
+          expect(chat.moduleId).to.equal(passage.moduleId);
         });
       });
 

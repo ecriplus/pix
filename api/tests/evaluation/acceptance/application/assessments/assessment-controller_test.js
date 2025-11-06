@@ -711,11 +711,11 @@ describe('Acceptance | Controller | assessment-controller', function () {
   });
 
   describe('POST /api/assessments/{assessmentId}/embed/llm/chats', function () {
-    let user;
+    let user, assessment;
 
     beforeEach(async function () {
       user = databaseBuilder.factory.buildUser();
-      databaseBuilder.factory.buildAssessment({ id: 111, userId: user.id });
+      assessment = databaseBuilder.factory.buildAssessment({ id: 111, userId: user.id, lastChallengeId: '222' });
       await databaseBuilder.commit();
     });
 
@@ -777,6 +777,9 @@ describe('Acceptance | Controller | assessment-controller', function () {
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;
           expect(llmApiScope.isDone()).to.be.true;
+          const createdChat = await knex('chats').first();
+          expect(createdChat.assessmentId).to.equal(assessment.id);
+          expect(createdChat.challengeId).to.equal(assessment.lastChallengeId);
         });
       });
 
