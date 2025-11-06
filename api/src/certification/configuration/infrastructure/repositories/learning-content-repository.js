@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
+import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
@@ -9,7 +9,7 @@ import * as thematicRepository from '../../../../shared/infrastructure/repositor
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
 async function getFrameworkReferential({ challengeIds }) {
-  const challenges = await challengeRepository.getMany(challengeIds, FRENCH_SPOKEN);
+  const challenges = await challengeRepository.getMany(challengeIds, FRENCH_FRANCE);
 
   const skillIds = challenges.map((challenge) => challenge.skill.id);
   const uniqSkillIds = _.uniq(skillIds);
