@@ -1,4 +1,4 @@
-{
+!{
   "id": "d03cef94-74af-463d-8901-c886b48d6e0b",
   "slug": "tmp-ia-fonctionnement-ind",
   "title": "Comment l’IA générative apprend-elle à discuter avec vous ?",
@@ -488,7 +488,7 @@
                 {
                   "elements": [
                     {
-                      "id": "030ae07a-741d-4a4e-b164-366865ca1b54",
+                      "id": "3d8761c3-3f9e-44a4-af41-66432ce30f21",
                       "type": "text",
                       "content": "<p>Dans la dernière étape, <strong>l’alignement</strong>, les<strong> réponses de l’IA</strong> sont<strong> évaluées par des humains.</strong><br>Cette étape permet d’entraîner l’IA grâce à l’<strong>apprentissage par renforcement</strong>.<br> </p><h5>🤔Mais qui sont les personnes qui évaluent les réponses de l’IA ?</h5><ul><li>Certaines personnes dont c’est le travail, appelées “<strong>travailleurs du clic</strong>”&nbsp;: c’est un travail souvent mal rémunéré.</li><li>Mais nous aussi, les <strong>utilisateurs de l’IA</strong>, y contribuons parfois en cliquant sur un pouce (👍 ou👎).<br></li></ul>"
                     }
