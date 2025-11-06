@@ -266,7 +266,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         configId: 'someConfigId',
         configContent: {
           llm: {
-            outputMaxToken: 10,
             historySize: 20,
           },
           challenge: {
@@ -334,7 +333,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           configurationId: 'someConfigId',
           configuration: new Configuration({
             llm: {
-              outputMaxToken: 10,
               historySize: 20,
             },
             challenge: {

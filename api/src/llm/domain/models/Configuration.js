@@ -56,12 +56,7 @@ export class Configuration {
 /**
  * @typedef {object} ConfigurationDTO
  * @property {object} llm
- * @property {string} llm.model
- * @property {string} llm.environment
  * @property {number} llm.historySize
- * @property {number} llm.temperature
- * @property {number} llm.outputMaxToken
- * @property {string} llm.moderationModel
  * @property {string} name
  * @property {object} challenge
  * @property {string[]} challenge.tools
