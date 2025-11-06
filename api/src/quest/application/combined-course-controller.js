@@ -5,6 +5,7 @@ import { extractUserIdFromRequest } from '../../shared/infrastructure/utils/requ
 import { usecases } from '../domain/usecases/index.js';
 import * as combinedCourseDetailsSerializer from '../infrastructure/serializers/combined-course-details-serializer.js';
 import * as combinedCourseListSerializer from '../infrastructure/serializers/combined-course-list-serializer.js';
+import * as combinedCourseParticipationDetailSerializer from '../infrastructure/serializers/combined-course-participation-detail-serializer.js';
 import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 import * as combinedCourseStatisticsSerializer from '../infrastructure/serializers/combined-course-statistics-serializer.js';
@@ -37,6 +38,16 @@ const getStatistics = async (request, _, dependencies = { combinedCourseStatisti
   const combinedCourseId = request.params.combinedCourseId;
   const combinedCourseStatistics = await usecases.getCombinedCourseStatistics({ combinedCourseId });
   return dependencies.combinedCourseStatisticsSerializer.serialize(combinedCourseStatistics);
+};
+
+const getCombinedCourseParticipationById = async function (
+  request,
+  _,
+  dependencies = { combinedCourseParticipationDetailSerializer },
+) {
+  const participationId = request.params.participationId;
+  const combinedCourseParticipation = await usecases.getCombinedCourseParticipationById({ participationId });
+  return dependencies.combinedCourseParticipationDetailSerializer.serialize(combinedCourseParticipation);
 };
 
 const findParticipations = async (request, _, dependencies = { combinedCourseParticipationSerializer }) => {
@@ -88,6 +99,7 @@ const combinedCourseController = {
   getById,
   getByOrganizationId,
   getStatistics,
+  getCombinedCourseParticipationById,
   findParticipations,
   start,
   reassessStatus,
