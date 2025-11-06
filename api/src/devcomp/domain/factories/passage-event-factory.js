@@ -12,6 +12,7 @@ import {
   ExpandOpenedEvent,
   FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
+  ShortVideoTranscriptionOpenedEvent,
   VideoPlayedEvent,
   VideoTranscriptionOpenedEvent,
 } from '../models/passage-events/events.js';
@@ -74,6 +75,8 @@ class PassageEventFactory {
         return new QCUDeclarativeAnsweredEvent(eventData);
       case 'QCU_DISCOVERY_ANSWERED':
         return new QCUDiscoveryAnsweredEvent(eventData);
+      case 'SHORT_VIDEO_TRANSCRIPTION_OPENED':
+        return new ShortVideoTranscriptionOpenedEvent(eventData);
       case 'VIDEO_TRANSCRIPTION_OPENED':
         return new VideoTranscriptionOpenedEvent(eventData);
       case 'VIDEO_PLAYED':
