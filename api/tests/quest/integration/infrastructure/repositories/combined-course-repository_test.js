@@ -63,7 +63,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#findByOrganizationId', function () {
-    it('should return all combined courses for a given organization ordered by creation date', async function () {
+    it('should return all combined courses for a given organization ordered by creation date descending with pagination metadata', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const combinedCourse1 = databaseBuilder.factory.buildCombinedCourse({
@@ -81,14 +81,20 @@ describe('Quest | Integration | Repository | combined-course', function () {
       await databaseBuilder.commit();
 
       // when
-      const combinedCourses = await combinedCourseRepository.findByOrganizationId({ organizationId });
+      const result = await combinedCourseRepository.findByOrganizationId({ organizationId, page: 1, size: 10 });
 
       // then
-      expect(combinedCourses).to.have.lengthOf(2);
-      expect(combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourses[0]).to.deep.equal(new CombinedCourse(combinedCourse2));
-      expect(combinedCourses[1]).to.deep.equal(new CombinedCourse(combinedCourse1));
+      expect(result.combinedCourses).to.have.lengthOf(2);
+      expect(result.combinedCourses[0]).to.be.an.instanceof(CombinedCourse);
+      expect(result.combinedCourses[1]).to.be.an.instanceof(CombinedCourse);
+      expect(result.combinedCourses[0]).to.deep.equal(new CombinedCourse(combinedCourse2));
+      expect(result.combinedCourses[1]).to.deep.equal(new CombinedCourse(combinedCourse1));
+      expect(result.meta).to.deep.include({
+        page: 1,
+        pageSize: 10,
+        rowCount: 2,
+        pageCount: 1,
+      });
     });
 
     it('should return an empty array when organization has no combined courses', async function () {
@@ -97,10 +103,16 @@ describe('Quest | Integration | Repository | combined-course', function () {
       await databaseBuilder.commit();
 
       // when
-      const combinedCourses = await combinedCourseRepository.findByOrganizationId({ organizationId });
+      const result = await combinedCourseRepository.findByOrganizationId({ organizationId, page: 1, size: 10 });
 
       // then
-      expect(combinedCourses).to.deep.equal([]);
+      expect(result.combinedCourses).to.deep.equal([]);
+      expect(result.meta).to.deep.include({
+        page: 1,
+        pageSize: 10,
+        rowCount: 0,
+        pageCount: 0,
+      });
     });
 
     it('should not return combined courses from other organizations', async function () {
@@ -120,13 +132,15 @@ describe('Quest | Integration | Repository | combined-course', function () {
       await databaseBuilder.commit();
 
       // when
-      const combinedCourses = await combinedCourseRepository.findByOrganizationId({
+      const result = await combinedCourseRepository.findByOrganizationId({
         organizationId: organization1Id,
+        page: 1,
+        size: 10,
       });
 
       // then
-      expect(combinedCourses).to.have.lengthOf(1);
-      expect(combinedCourses[0].organizationId).to.equal(organization1Id);
+      expect(result.combinedCourses).to.have.lengthOf(1);
+      expect(result.combinedCourses[0].organizationId).to.equal(organization1Id);
     });
   });
 

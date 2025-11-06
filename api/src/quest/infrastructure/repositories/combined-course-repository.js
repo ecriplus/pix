@@ -1,5 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
 
 const getByCode = async ({ code }) => {
@@ -32,15 +33,23 @@ const getById = async ({ id }) => {
   return new CombinedCourse(combinedCourse);
 };
 
-const findByOrganizationId = async ({ organizationId }) => {
+const findByOrganizationId = async ({ organizationId, page, size }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const combinedCourses = await knexConn('combined_courses')
+  const queryBuilder = knexConn('combined_courses')
     .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
     .where('organizationId', organizationId)
     .orderBy('createdAt', 'desc');
 
-  return combinedCourses.map((quest) => new CombinedCourse(quest));
+  const { results, pagination } = await fetchPage({
+    queryBuilder,
+    paginationParams: { number: page, size },
+  });
+
+  return {
+    combinedCourses: results.map((quest) => new CombinedCourse(quest)),
+    meta: pagination,
+  };
 };
 
 const findByCampaignId = async ({ campaignId }) => {
