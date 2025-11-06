@@ -11,10 +11,6 @@ const buildChat = function ({
   challengeId = null,
   configId = null,
   configContent = {
-    llm: {
-      outputMaxToken: 1,
-      historySize: 2,
-    },
     challenge: {
       victoryConditions: {
         expectations: [

@@ -29,9 +29,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           moduleId,
           configurationId: 'some-config-id',
           configuration: new Configuration({
-            llm: {
-              historySize: 10,
-            },
             challenge: {
               inputMaxChars: 500,
               inputMaxPrompts: 4,
@@ -265,10 +262,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
         challengeId: 'recCHallengeA',
         configId: 'someConfigId',
         configContent: {
-          llm: {
-            outputMaxToken: 10,
-            historySize: 20,
-          },
           challenge: {
             victoryConditions: {
               expectations: [
@@ -333,10 +326,6 @@ describe('LLM | Integration | Infrastructure | Repositories | chat', function ()
           moduleId: null,
           configurationId: 'someConfigId',
           configuration: new Configuration({
-            llm: {
-              outputMaxToken: 10,
-              historySize: 20,
-            },
             challenge: {
               victoryConditions: {
                 expectations: [

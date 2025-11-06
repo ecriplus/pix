@@ -17,9 +17,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
 
       beforeEach(function () {
         configuration = new Configuration({
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxChars: 456,
             inputMaxPrompts: 789,
@@ -55,9 +52,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
         configurationId = 'uneConfigQuiExist';
         userId = 123456;
         config = {
-          llm: {
-            historySize: 123,
-          },
           challenge: {
             inputMaxChars: 456,
             inputMaxPrompts: 789,
@@ -115,9 +109,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           passageId: 22,
           configId: 'uneConfigQuiExist',
           configContent: {
-            llm: {
-              historySize: 123,
-            },
             challenge: {
               inputMaxChars: 456,
               inputMaxPrompts: 789,

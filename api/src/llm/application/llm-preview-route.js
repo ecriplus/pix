@@ -19,11 +19,6 @@ export async function register(server) {
         validate: {
           payload: Joi.object({
             configuration: Joi.object({
-              llm: Joi.object({
-                historySize: Joi.number().required(),
-              })
-                .required()
-                .unknown(true),
               challenge: Joi.object({
                 inputMaxChars: Joi.number().required(),
                 inputMaxPrompts: Joi.number().required(),
