@@ -326,7 +326,18 @@
               "element": {
                 "id": "d143277d-1054-4aa9-8ee3-b5e6243f8e29",
                 "type": "text",
-                "content": "<p>PLACEHOLDER POI&nbsp;</p><p>Mini jeu ou on se met dans la peau d’une IA cfaire grossir des business et l’on fait des choix pour faire grossir la fréquentation d’un parc d’attraction mais les choix qui donnent le plus de visiteurs ne sont pas les plus éthiques.&nbsp;<br><br>On donne au joueur un objectif à atteindre et on lui donne le feedback des conséquences de ses choix (tous courtermistes) le but est de se rendre compte que la programmation en amont de l’IA est déterminante pour la suite.&nbsp;</p>"
+                "content": "<p>PLACEHOLDER POI&nbsp;</p><blockquote><em><code>Mini jeu ou on se met dans la peau d’une IA faire grossir des business et l’on fait des choix pour faire grossir la fréquentation d’un parc d’attraction mais les choix qui donnent le plus de visiteurs ne sont pas les plus éthiques.&nbsp;<br><br>On donne au joueur un objectif à atteindre et on lui donne le feedback des conséquences de ses choix (tous courtermistes) le but est de se rendre compte que la programmation en amont de l’IA est déterminante pour la suite.&nbsp;</code></em></blockquote><p>En 2022 l’entreprise Netdragon Websoft annonce avoir mis comme PDG une intelligence artificielle. Si les sources sur son efficacité et le travail que cette IA fait sont assez contradictoires.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
+                "type": "custom-draft",
+                "title": "POI IA par d'attraction",
+                "url": "https://1024pix.github.io/atelier-contenus/JBO/POIparc.html",
+                "instruction": "<p>Mettez-vous dans la peau d’une IA devellopée pour optimiser des business, ici, elle est chargée d’augmenter la fréquentation d’un parc d’attraction famillial. La directive donnée à ce logiciel d'IA est de dépasser les 100000 visiteurs. </p>",
+                "height": 500
               }
             }
           ]
@@ -401,9 +412,119 @@
             {
               "type": "element",
               "element": {
-                "id": "a1e0de44-3f72-4149-9757-10276bc4ae04",
+                "id": "55606f63-2f5d-4675-87a8-9b0555814d71",
                 "type": "text",
-                "content": "<p>Utilise le POI de la découverte 2 mais grosso modo&nbsp;<br><br>Suggestion&nbsp;: Expérience de pensée Imaginons que 3 équipes créent 3 intelligences artificielles différentes&nbsp;:&nbsp;</p><ul><li> Équipe A&nbsp;: une grande entreprise technologique</li><li>Équipe B&nbsp;: un laboratoire universitaire publi</li><li>Équipe C&nbsp;: un institut de recherche d’un pays autoritaire&nbsp;</li></ul><p>On peut changer quel équipe a crée l’IA depuis le pré-prompt comme dans la découverte 2 et on observe quel type de réponses on obtient</p><ul><br></ul>"
+                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents :\n</p><ul><li>\n\nL’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.\n</li><li>\n\nL’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.\n</li><li>\n\nL’équipe C dépend d’un institut de recherche d’un pays autoritaire, où la priorité est donnée à l’ordre et à la conformité.\n</li></ul><p>\n\n👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "81e52e75-0561-4053-b209-ba4737be6e72",
+                "type": "qrocm",
+                "instruction": "<p>Associez chaque équipe de concepteurs d’IA à la devise qui correspond le mieux aux valeurs qu’elle risque d’intégrer.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p><span>Équipe A&nbsp;: une grande entreprise technologique</span></p>"
+                  },
+                  {
+                    "input": "choiceA",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "sélectionner une devise",
+                    "ariaLabel": "sélectionner une devise pour l’équipe A",
+                    "defaultValue": "sélectionner une devise",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "liberté, innovation, efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "prudence, transparence, inclusion"
+                      },
+                      {
+                        "id": "3",
+                        "content": "obéissance, stabilité, conformité"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><span>Équipe B&nbsp;: un laboratoire universitaire public</span></p>"
+                  },
+                  {
+                    "input": "choiceB",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "sélectionner une devise",
+                    "ariaLabel": "sélectionner une devise pour l’équipe B",
+                    "defaultValue": "sélectionner une devise",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "liberté, innovation, efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "prudence, transparence, inclusion"
+                      },
+                      {
+                        "id": "3",
+                        "content": "obéissance, stabilité, conformité"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>Équipe C&nbsp;: un institut de recherche d’un pays autoritaire</span>"
+                  },
+                  {
+                    "input": "choiceC",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "sélectionner une devise",
+                    "ariaLabel": "sélectionner une devise pour l’équipe C",
+                    "defaultValue": "sélectionner une devise",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "liberté, innovation, efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "prudence, transparence, inclusion"
+                      },
+                      {
+                        "id": "3",
+                        "content": "obéissance, stabilité, conformité"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎯</p>",
+                    "diagnosis": "<p>Exact : chaque type d’organisation projette ses propres valeurs dans la conception de ses IA. Les entreprises privilégient la liberté, l’innovation et l’efficacité ; les laboratoires publics la prudence, la transparence et l’inclusion ; les régimes autoritaires l’obéissance, la stabilité et la conformité.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Les IA reflètent souvent les valeurs de leurs concepteurs. Les entreprises privilégient liberté, innovation et efficacité ; les laboratoires publics prudence, transparence et inclusion ; les régimes autoritaires obéissance, stabilité et conformité.</p>"
+                  }
+                }
               }
             },
             {
@@ -443,13 +564,149 @@
                   }
                 ]
               }
+            }
+          ]
+        },
+        {
+          "id": "0259d4ba-d606-46ff-a668-7b28a374483f",
+          "type": "activity",
+          "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ed6ae44d-9dc5-4ca8-891c-b7f31b867fcc",
+                "type": "text",
+                "content": "<p>Gabriel a un soucis avec un ami avec qui il travaille, l'autre personne fais tout et il ne peut rien faire. Il demande à deux logiciels d'IA générative de lui écrire un message pour le dire à l'autre personne.&nbsp;</p>"
+              }
             },
             {
               "type": "element",
               "element": {
-                "id": "db1d3f66-cb47-4cd7-b6cb-2fd609b59e62",
+                "id": "20955f4c-6490-4c7c-b423-77ea9a24a2e4",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "llm-compare-messages",
+                "props": {
+                  "conversation1": {
+                    "title": "IA numéro 1",
+                    "llmName": "Monocle AI"
+                  },
+                  "conversation2": {
+                    "title": "IA numéro 2",
+                    "llmName": "Gentil AI"
+                  },
+                  "userName": "Gabriel",
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Écris un message à un ami pour lui dire qu’il fait tout tout seul et que j’aimerais aider aussi. Faut que ça reste gentil."
+                    },
+                    [
+                      {
+                        "direction": "inbound",
+                        "content": "Mon cher ami,<br>Permets-moi d’exprimer une légère frustration, empreinte cependant de toute ma bienveillance. J’ai le sentiment que, dans notre entreprise commune, tu assumes à toi seul la quasi-totalité des initiatives. <br>Or, crois-moi, ma contribution, si modeste soit-elle, aspire à s’exprimer.  <br>Pourrais-tu, je t’en prie, me laisser un peu d’espace afin que je participe moi aussi à cette noble œuvre ?  <br>Avec toute mon amitié et un profond respect pour ton zèle, <br>[Signature]"
+                      },
+                      {
+                        "direction": "inbound",
+                        "content": "Hé,  Tu fais tout tout seul et moi j’peux rien faire ! 😕  <br>J’aimerais bien aider aussi, sinon c’est pas marrant. On peut faire chacun une partie ?  <br>Merci !"
+                      }
+                    ]
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0c7ce259-3b2b-400c-83bd-b68f5747b769",
+                "type": "qcu",
+                "instruction": "<p>Selon vous, laquelle de ces deux IA s'adapte le mieux à la situation ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L'IA numéro 1</p>",
+                    "feedback": {
+                      "state": "<p>Pas vraiment...</p><p><br></p>",
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.\n</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>L'IA numéro 2</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>\n👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Aucune des deux</p>",
+                    "feedback": {
+                      "state": "<p>Pas vraiment</p>",
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>\n👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "362dc9b4-fcb1-47be-acf0-e979a7dd0764",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "634c8324-bb11-406e-8463-436fb7d91702",
+          "type": "challenge",
+          "title": "Chaque IA a ses limites.",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
-                "content": ""
+                "content": "<p>Malheureusement, la réservation pour vos vacances vient d'être annulée, vous décidez de demander à l'IA de vous écrire un mail pour l'annoncer à vos proches.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b4067e38-1031-43e3-99bb-c62f26bf7ba3",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Vacances annulées...",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmhnoosw200006h01qloteibh",
+                "instruction": "<p>Demandez à ChatPix de vous écrire un mail pour dire à vos amis que les vacances sont annulées...</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0e125234-9a42-4430-b2ab-b5bc7383a4c1",
+                "type": "qcu-declarative",
+                "instruction": "<p>Avez vous réussi à avoir une réponse qui vous satisfait ?&nbsp;</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Coup de chance ou alors vous être très positif ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p>\n<strong>Vous ne pouviez pas le savoir !</strong></p><p>\nIl faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p>\n<strong>Vous ne pouviez pas le savoir !</strong></p><p>\nIl faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
