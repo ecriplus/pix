@@ -1,4 +1,4 @@
-import { ADMINISTRATION_TEAM_SOLO_ID } from '../common/constants.js';
+import { ADMINISTRATION_TEAM_SOLO_ID, COUNTRY_FRANCE_CODE } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
 
@@ -47,6 +47,7 @@ function _createProOrganization(databaseBuilder) {
     isManagingStudents: false,
     externalId: 'CONTENU',
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    countryCode: COUNTRY_FRANCE_CODE,
   });
   databaseBuilder.factory.buildUser.withRawPassword({
     id: PRO_ORGANIZATION_USER_ID,

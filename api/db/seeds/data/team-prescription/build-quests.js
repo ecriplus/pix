@@ -12,6 +12,7 @@ import { temporaryStorage } from '../../../../src/shared/infrastructure/key-valu
 import {
   ADMINISTRATION_TEAM_SOLO_ID,
   AEFE_TAG,
+  COUNTRY_FRANCE_CODE,
   FEATURE_ATTESTATIONS_MANAGEMENT_ID,
   SCO_ORGANIZATION_ID,
   USER_ID_ADMIN_ORGANIZATION,
@@ -88,6 +89,7 @@ const ORGANIZATION = {
   type: 'SCO',
   isManagingStudents: true,
   administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+  countryCode: COUNTRY_FRANCE_CODE,
 };
 
 const CAMPAIGN = [

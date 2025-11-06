@@ -1,4 +1,4 @@
-import { ADMINISTRATION_TEAM_SOLO_ID } from '../common/constants.js';
+import { ADMINISTRATION_TEAM_SOLO_ID, COUNTRY_CANADA_CODE } from '../common/constants.js';
 
 export function buildOrganizations(databaseBuilder) {
   _buildOrganizationWithoutAdmins(databaseBuilder);
@@ -9,6 +9,7 @@ function _buildOrganizationWithoutAdmins(databaseBuilder) {
     type: 'PRO',
     name: 'Accis',
     administrationTeamId: ADMINISTRATION_TEAM_SOLO_ID,
+    countryCode: COUNTRY_CANADA_CODE,
   });
 
   const tag1 = databaseBuilder.factory.buildTag({ name: 'tag1' });

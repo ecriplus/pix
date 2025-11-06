@@ -1,3 +1,5 @@
+import { COUNTRY_FRANCE_CODE } from '../constants.js';
+
 export { createOrganization };
 
 /**
@@ -35,6 +37,7 @@ export { createOrganization };
  * @param {Array<number>} tagIds
  * @param {Array<Feature>} features
  * @param {number} administrationTeamId
+ * @param {number} countryCode
  * @param configOrganization {learnerCount: number }
  * @returns {Promise<{organizationId: number}>}
  */
@@ -66,6 +69,7 @@ async function createOrganization({
   configOrganization,
   parentOrganizationId,
   administrationTeamId,
+  countryCode = COUNTRY_FRANCE_CODE,
 }) {
   organizationId = _buildOrganization({
     databaseBuilder,
@@ -90,6 +94,7 @@ async function createOrganization({
     identityProviderForCampaigns,
     parentOrganizationId,
     administrationTeamId,
+    countryCode,
   }).id;
 
   _buildMemberships({
@@ -215,6 +220,7 @@ function _buildOrganization({
   identityProviderForCampaigns,
   parentOrganizationId,
   administrationTeamId,
+  countryCode,
 }) {
   return databaseBuilder.factory.buildOrganization({
     id: organizationId,
@@ -238,5 +244,6 @@ function _buildOrganization({
     identityProviderForCampaigns,
     parentOrganizationId,
     administrationTeamId,
+    countryCode,
   });
 }
