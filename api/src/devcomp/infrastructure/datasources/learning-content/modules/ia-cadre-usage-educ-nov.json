@@ -9,8 +9,8 @@
     "duration": 10,
     "level": "novice",
     "objectives": [
-      "<p>Justifier le     besoin d’un cadre pour l’usage des IA en éducation</p>",
-      "<p>Adapter les     usages des IA génératives en fonction du niveau des élèves, conformément     au cadre d’usage</p>"
+      "<p>Justifier le besoin d’un cadre pour l’usage des IA en éducation</p>",
+      "<p>Adapter les usages des IA génératives en fonction du niveau des élèves, conformément     au cadre d’usage</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -46,55 +46,31 @@
                       "userName": "Cynthia",
                       "direction": "outgoing",
                       "content": "Tiens , j’ai préparé mon cours de français avec l’IA générative hier soir. ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Quoi ! Moi j’ose pas, j’ai pas confiance.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
                       "content": "Franchement c’est quand même intéressant.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Oui mais faut faire attention, t’as pas peur de sortir des clous ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
                       "content": "Heu, non j’ai fait attention, je me suis basée sur le cadre qui existe.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Quel cadre ? Tu pourrais me le montrer je ne sais pas ce que je dois faire, ce que je peux faire ou pas.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
@@ -136,16 +112,12 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "discussion",
                   "messages": [
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "J’ai regardé le document. Je pensais utiliser l’IA pour proposer des exercices différenciés à mes élèves sur l’imparfait. Tu en penses quoi ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
@@ -233,25 +205,17 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "discussion",
                   "messages": [
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "En effet les données personnelles ne doivent pas être saisies dans une IA grand public.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "",
                       "direction": "incoming",
                       "content": "Je pense aussi utiliser une œuvre littéraire pour la fin de ce cours. C’est possible ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
@@ -339,16 +303,12 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "discussion",
                   "messages": [
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Puisque c’est un outil que j’utilise désormais, je pense faire une séance d’esprit critique avec les élèves, notamment sur les résultats obtenus.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
@@ -436,34 +396,22 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "suite de la discussion",
                   "messages": [
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Tu as déjà fait utiliser une IA générative à tes élèves ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Cynthia",
                       "direction": "outgoing",
                       "content": "Oui avec mes 3ème pour la rédaction d’un prompt afin qu’ils sachent l’utiliser convenablement.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
                       "content": "Tu peux me donner ta séance pour que je la fasse avec mes 5ème.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
