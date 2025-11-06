@@ -5,6 +5,7 @@ export default class CombinedCoursePresentationRoute extends Route {
   @service store;
   @service router;
   @service accessStorage;
+  @service metrics;
 
   async beforeModel(transition) {
     const { code } = this.paramsFor('combined-courses');
@@ -31,5 +32,15 @@ export default class CombinedCoursePresentationRoute extends Route {
 
   afterModel(combinedCourse) {
     this.accessStorage.clear(combinedCourse.organizationId);
+  }
+
+  activate() {
+    this.metrics.context.code = this.paramsFor('combined-courses').code;
+    this.metrics.context.type = 'combined-course';
+  }
+
+  deactivate() {
+    delete this.metrics.context.code;
+    delete this.metrics.context.type;
   }
 }

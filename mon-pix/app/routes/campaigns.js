@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 export default class CampaignsRoute extends Route {
   @service store;
   @service router;
+  @service metrics;
 
   async model(params) {
     const verifiedCode = await this.store.findRecord('verified-code', params.code);
@@ -12,5 +13,15 @@ export default class CampaignsRoute extends Route {
     } else {
       this.router.replaceWith('combined-courses', verifiedCode.id);
     }
+  }
+
+  activate() {
+    this.metrics.context.code = this.paramsFor('campaigns').code;
+    this.metrics.context.type = 'campaigns';
+  }
+
+  deactivate() {
+    delete this.metrics.context.code;
+    delete this.metrics.context.type;
   }
 }
