@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { htmlUnsafe } from 'mon-pix/helpers/html-unsafe';
@@ -9,11 +10,19 @@ import ModuleElement from './module-element';
 
 export default class ModulixShortVideoElement extends ModuleElement {
   @tracked modalIsOpen = false;
+  @service passageEvents;
 
   @action
   showModal() {
     this.modalIsOpen = true;
     this.args.onTranscriptionOpen(this.args.element.id);
+
+    this.passageEvents.record({
+      type: 'SHORT_VIDEO_TRANSCRIPTION_OPENED',
+      data: {
+        elementId: this.args.element.id,
+      },
+    });
   }
 
   @action
