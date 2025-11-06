@@ -1,7 +1,7 @@
 import { findCountries } from '../../../../../src/shared/domain/usecases/find-countries.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | UseCase | find-country', function () {
+describe('Unit | Shared | UseCase | find-country', function () {
   let countryRepository;
 
   beforeEach(function () {

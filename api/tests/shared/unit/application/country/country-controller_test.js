@@ -8,7 +8,7 @@ import {
   sinon,
 } from '../../../../test-helper.js';
 
-describe('Unit | Application | Controller | country-controller', function () {
+describe('Unit | Shared | Application | Controller | country-controller', function () {
   describe('#findCountries', function () {
     it('should fetch and return the countries, serialized as JSONAPI', async function () {
       // given
