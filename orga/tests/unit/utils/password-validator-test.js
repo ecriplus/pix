@@ -1,10 +1,7 @@
-import { setupTest } from 'ember-qunit';
-import isPasswordValid from 'pix-orga/utils/password-validator';
+import isPasswordValid from 'pix-orga/utils/password-validator.js';
 import { module, test } from 'qunit';
 
-module('Unit | Utils | password validator', function (hooks) {
-  setupTest(hooks);
-
+module('Unit | Utility | password validator', function () {
   module('Validation rules', function () {
     test('should contain at least 8 characters:', function (assert) {
       assert.true(isPasswordValid('Ab123456'));
