@@ -396,7 +396,7 @@
               "element": {
                 "id": "0490f920-e6fb-4af2-9148-7284f29df9e8",
                 "type": "text",
-                "content": "<p>Pour <strong>ralentir</strong> les piratages de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>utilisez toutes les sortes de caractères&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des chiffres, des caractères spéciaux&nbsp;: = @ $ # ! ?.</li></ul>"
+                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>utilisez toutes les sortes de caractères&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des chiffres, des caractères spéciaux&nbsp;: = @ $ # ! ?.</li></ul><p>En respectant ces règles, vous augmentez le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
               }
             }
           ]
@@ -448,7 +448,7 @@
               "element": {
                 "id": "466e4d1f-ce33-4084-90d7-f6c2f22a869d",
                 "type": "text",
-                "content": "<p><strong>Pour créer un mot de passe fort donc difficile à deviner pour un pirate ou un proche&nbsp;:</strong>&nbsp; </p><ul>    <li><strong>Règle n°1&nbsp;:</strong> n’utilisez pas d’informations personnelles. 🤫</li>    <li><strong>Règle n°2&nbsp;:</strong> n’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;</li>    <li><strong>Règle n°3&nbsp;:</strong> créez un mot de passe long (au moins 12 caractères). 📏</li>    <li><strong>Règle n°4&nbsp;:</strong> mélangez des lettres minuscules ou majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
+                "content": "<p><strong>Pour créer un mot de passe fort donc difficile à deviner pour un pirate ou un proche&nbsp;:</strong>&nbsp; </p><ul>    <li><strong>Règle n°1&nbsp;:</strong> n’utilisez pas d’informations personnelles. 🤫</li>    <li><strong>Règle n°2&nbsp;:</strong> n’utilisez pas de prénoms, de noms ni de mots du dictionnaire.&nbsp;</li>    <li><strong>Règle n°3&nbsp;:</strong> créez un mot de passe long (au moins 12 caractères). 📏</li>    <li><strong>Règle n°4&nbsp;:</strong> mélangez des lettres minuscules et majuscules, des chiffres et des caractères spéciaux. 🔣</li></ul>"
               }
             }
           ]
@@ -487,7 +487,7 @@
                           "content": "<p>Il contient des informations personnelles. 🤫</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe est suffisamment long, mais ne respecte pas l’une des règles.</p>"
+                            "diagnosis": "<p>Le mot de passe ne contient pas d'informations personnelles, mais ne respecte pas l’une des règles.</p>"
                           }
                         },
                         {
@@ -511,7 +511,7 @@
                           "content": "<p>Il ne mélange pas de lettres, de chiffres et de caractères spéciaux. 🔣</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe est suffisamment long, mais ne respecte pas l’une des règles.</p>"
+                            "diagnosis": "<p>Le mot de passe contient des caractères suffisamment variés, mais ne respecte pas l’une des règles.</p>"
                           }
                         }
                       ],
@@ -539,7 +539,7 @@
                           "content": "<p>Il contient des mots du dictionnaire.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p> Le mot de passe n’utilise pas de mots courants du dictionnaire, mais il contient des informations faciles à deviner pour un pirate.</p>"
                           }
                         },
                         {
@@ -547,7 +547,7 @@
                           "content": "<p>Il n’est pas assez long. 📏</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Le mot de passe est suffisamment long, mais il contient aussi des informations faciles à deviner pour un pirate.</p>"
                           }
                         },
                         {
@@ -555,7 +555,7 @@
                           "content": "<p>Il ne mélange pas de lettres, de chiffres et de caractères spéciaux. 🔣</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Le mot de passe contient des caractères suffisamment variés, mais il contient aussi des informations faciles à deviner pour un pirate.</p>"
                           }
                         }
                       ],
@@ -575,7 +575,7 @@
                           "content": "<p>Il contient des informations personnelles. 🤫</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Le mot de passe ne contient pas d'informations personnelles, mais il ne contient que des lettres.</p>"
                           }
                         },
                         {
@@ -583,7 +583,7 @@
                           "content": "<p>Il contient des mots du dictionnaire.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Le mot de passe ne contient de mots du dictionnaire, mais il ne contient que des lettres.</p>"
                           }
                         },
                         {
@@ -591,7 +591,7 @@
                           "content": "<p>Il n’est pas assez long. 📏</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe contient des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Le mot de passe est suffisamment long, mais il ne contient que des lettres.</p>"
                           }
                         },
                         {
@@ -619,7 +619,7 @@
                           "content": "<p>Il contient des informations personnelles. 🤫</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ce mot de passe peut sembler compliqué, mais il ne respecte pas une des règles.</p>"
+                            "diagnosis": "<p>Ce mot de passe ne contient pas d'informations personnelles et peut sembler compliqué, mais il ne respecte pas une des règles.</p>"
                           }
                         },
                         {
@@ -627,7 +627,7 @@
                           "content": "<p>Il contient des mots du dictionnaire.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ce mot de passe peut sembler compliqué, mais il ne respecte pas une des règles.</p>"
+                            "diagnosis": "<p>Ce mot de passe ne contient pas de mots du dictionnaire et peut sembler compliqué, mais il ne respecte pas une des règles.</p>"
                           }
                         },
                         {
@@ -635,7 +635,7 @@
                           "content": "<p>Il n’est pas assez long. 📏</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !🎉</p>",
-                            "diagnosis": "<p>Effectivement, ce mot de passe contient un prénom et un code postal. Ce sont des informations faciles à deviner pour un pirate.</p>"
+                            "diagnosis": "<p>Effectivement, ce mot de passe est trop court : il ne comporte que 6 caractères.</p>"
                           }
                         },
                         {
@@ -643,7 +643,7 @@
                           "content": "<p>Il ne mélange pas de lettres, de chiffres et de caractères spéciaux. 🔣</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Ce mot de passe peut sembler compliqué, mais il ne respecte pas une des règles.</p>"
+                            "diagnosis": "<p>Ce mot de passe contient des caractères variés, mais il ne respecte pas une des règles.</p>"
                           }
                         }
                       ],
