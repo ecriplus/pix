@@ -56,7 +56,7 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     await databaseBuilder.commit();
   });
 
-  it('returns enabled oidc providers (excluding the PixAdmin ones)', async function () {
+  it('returns the ready OIDC Providers for Pix App', async function () {
     // given
     const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
 
@@ -72,21 +72,19 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
     expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_APP');
   });
 
-  describe('when the provided requestedApplication is Pix Admin', function () {
-    it('returns enabled oidc providers for PixAdmin only', async function () {
-      // given
-      const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
+  it('returns the ready OIDC Providers for Pix Admin', async function () {
+    // given
+    const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
 
-      // when
-      const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
+    // when
+    const identityProviders = await usecases.getReadyIdentityProviders({ requestedApplication });
 
-      // then
-      expect(identityProviders).to.be.instanceOf(Array);
-      expect(identityProviders.length).to.equal(1);
+    // then
+    expect(identityProviders).to.be.instanceOf(Array);
+    expect(identityProviders.length).to.equal(1);
 
-      const returnedIdentityProvider = identityProviders[0];
-      expect(returnedIdentityProvider).to.be.instanceOf(OidcAuthenticationService);
-      expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_ADMIN');
-    });
+    const returnedIdentityProvider = identityProviders[0];
+    expect(returnedIdentityProvider).to.be.instanceOf(OidcAuthenticationService);
+    expect(returnedIdentityProvider.identityProvider).to.equal('OIDC_PROVIDER_FOR_ADMIN');
   });
 });
