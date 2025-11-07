@@ -11,6 +11,7 @@ export default class ApplicationRoute extends Route {
   @service session;
   @service locale;
   @service intl;
+  @service oidcIdentityProviders;
   @service pixMetrics;
   @service router;
 
@@ -31,6 +32,7 @@ export default class ApplicationRoute extends Route {
     this.locale.setBestLocale({ queryParams });
     await this.session.setup();
     await this.featureToggles.load();
+    await this.oidcIdentityProviders.load().catch();
     await this.currentUser.load();
   }
 
