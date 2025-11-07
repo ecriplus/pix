@@ -23,12 +23,10 @@ export default class ModulixNavigation extends Component {
     const navigationButtonsList = triggeredButtonParent.parentNode.children;
     const triggeredButtonParentIndex = Array.from(navigationButtonsList).indexOf(triggeredButtonParent);
 
-    const totalSections = this.args.sections.length;
-
     if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
       event.preventDefault();
 
-      if (triggeredButtonParentIndex + 1 < totalSections) {
+      if (triggeredButtonParentIndex + 1 < this.sectionsLength) {
         const nextButton = triggeredButtonParent.nextElementSibling.firstElementChild;
         nextButton.focus();
       } else {
@@ -44,6 +42,14 @@ export default class ModulixNavigation extends Component {
         triggeredButton.focus();
       }
     }
+  }
+
+  get sectionsLength() {
+    return this.args.sections.length;
+  }
+
+  @action currentSectionIndex(section) {
+    return this.args.sections.indexOf(section) + 1;
   }
 
   <template>
@@ -62,7 +68,8 @@ export default class ModulixNavigation extends Component {
             @section={{section}}
             @isCurrentSection={{this.isCurrentSection index}}
             @isPastSection={{this.isPastSection index}}
-            @sections={{@sections}}
+            @sectionsLength={{this.sectionsLength}}
+            @currentSectionIndex={{this.currentSectionIndex section}}
             @handleArrowKeyNavigation={{this.handleArrowKeyNavigation}}
           />
         {{/each}}

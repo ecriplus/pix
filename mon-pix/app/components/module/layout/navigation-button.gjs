@@ -41,7 +41,7 @@ export default class ModulixNavigationButton extends Component {
   }
 
   get isCurrentSection() {
-    return this.args.isCurrentSection;
+    return this.args.isCurrentSection ? 'step' : false;
   }
 
   get isPlainIcon() {
@@ -86,11 +86,9 @@ export default class ModulixNavigationButton extends Component {
   }
 
   get ariaLabelButton() {
-    const totalSections = this.args.sections.length;
-    const currentSectionIndex = this.args.sections.indexOf(this.args.section) + 1;
     const steps = this.intl.t('pages.modulix.navigation.buttons.aria-label.steps', {
-      indexSection: currentSectionIndex,
-      totalSections: totalSections,
+      indexSection: this.args.currentSectionIndex,
+      totalSections: this.args.sectionsLength,
     });
 
     if (this.isDisabled) {

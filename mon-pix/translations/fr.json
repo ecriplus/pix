@@ -1690,7 +1690,7 @@
         "buttons": {
           "aria-label": {
             "disabled": "Non disponible. Terminer l'étape précédente",
-            "enabled": "Accéder à {sectionTitle}",
+            "enabled": "Accéder à l'étape {sectionTitle}",
             "steps": "Étape {indexSection} sur {totalSections}."
           }
         }

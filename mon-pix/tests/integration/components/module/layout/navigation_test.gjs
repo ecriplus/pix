@@ -9,60 +9,6 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Module | Navigation', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when current section is second section', function () {
-    test('should set aria-current attribute to the second NavigationButton element', async function (assert) {
-      // given
-      const modulixNavigationProgressService = this.owner.lookup('service:modulix-navigation-progress');
-      modulixNavigationProgressService.setCurrentSectionIndex(1);
-      const sections = [
-        {
-          type: 'question-yourself',
-        },
-        {
-          type: 'explore-to-understand',
-        },
-        {
-          type: 'retain-the-essentials',
-        },
-        {
-          type: 'practise',
-        },
-        {
-          type: 'go-further',
-        },
-      ];
-
-      // when
-      const screen = await render(<template><ModulixNavigation @sections={{sections}} /></template>);
-
-      // then
-      assert
-        .dom(
-          screen.getByRole('button', {
-            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-              indexSection: 2,
-              totalSections: 5,
-            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
-              sectionTitle: 'Explorer pour comprendre',
-            })}`,
-          }),
-        )
-        .hasAria('current', 'true');
-      assert
-        .dom(
-          screen.getByRole('button', {
-            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-              indexSection: 1,
-              totalSections: 5,
-            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
-              sectionTitle: 'Se questionner',
-            })}`,
-          }),
-        )
-        .hasAria('current', 'false');
-    });
-  });
-
   module('handleArrowKeyNavigation', function () {
     module('when user press arrow down or right on buttons', function () {
       test('should focus on next button', async function (assert) {

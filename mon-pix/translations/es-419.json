@@ -1659,7 +1659,7 @@
           "aria-label": {
             "steps": "Paso {indexSection} de {totalSections}.",
             "disabled": "No disponible. Finalizar el paso anterior.",
-            "enabled": "Acceder a {sectionTitle}"
+            "enabled": "Acceder al paso {sectionTitle}"
           }
         }
       },

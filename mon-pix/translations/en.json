@@ -1682,7 +1682,7 @@
         "buttons": {
           "aria-label": {
             "disabled": "Not available. Complete the previous step.",
-            "enabled": "Go to {sectionTitle}",
+            "enabled": "Go to step {sectionTitle}",
             "steps": "Step {indexSection} of {totalSections}."
           }
         }

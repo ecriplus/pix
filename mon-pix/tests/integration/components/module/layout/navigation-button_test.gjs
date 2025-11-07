@@ -24,7 +24,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type,
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const handleArrowKeyNavigation = sinon.stub();
 
       // when
@@ -32,7 +33,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{false}}
             @isCurrentSection={{true}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -45,8 +47,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         .dom(
           screen.getByRole('button', {
             name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-              indexSection: 1,
-              totalSections: 1,
+              indexSection: currentSectionIndex,
+              totalSections: sectionsLength,
             })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
               sectionTitle: 'Se questionner',
             })}`,
@@ -62,7 +64,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -70,7 +73,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{false}}
               @isCurrentSection={{false}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -89,7 +93,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -97,7 +102,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{false}}
               @isCurrentSection={{true}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -116,7 +122,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -124,7 +131,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{true}}
               @isCurrentSection={{false}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -144,7 +152,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           id: 'section1',
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         //  when
@@ -152,7 +161,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isCurrentSection={{true}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
             />
@@ -170,7 +180,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             id: 'section1',
             type: 'question-yourself',
           };
-          const sections = [section];
+          const sectionsLength = [section].length;
+          const currentSectionIndex = 1;
           const handleArrowKeyNavigation = sinon.stub();
 
           //  when
@@ -178,7 +189,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             <template>
               <NavigationButton
                 @section={{section}}
-                @sections={{sections}}
+                @sectionsLength={{sectionsLength}}
+                @currentSectionIndex={{currentSectionIndex}}
                 @isCurrentSection={{true}}
                 @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
               />
@@ -202,7 +214,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
                 { title: 'Grain title', type: 'activity', id: '234-abc' },
               ],
             };
-            const sections = [section];
+            const sectionsLength = [section].length;
+            const currentSectionIndex = 1;
             const handleArrowKeyNavigation = sinon.stub();
 
             //  when
@@ -210,7 +223,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               <template>
                 <NavigationButton
                   @section={{section}}
-                  @sections={{sections}}
+                  @sectionsLength={{sectionsLength}}
+                  @currentSectionIndex={{currentSectionIndex}}
                   @isCurrentSection={{true}}
                   @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
                 />
@@ -237,7 +251,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               { title: 'Grain title', type: 'activity', id: '234-abc' },
             ],
           };
-          const sections = [section];
+          const sectionsLength = [section].length;
+          const currentSectionIndex = 1;
           const handleArrowKeyNavigation = sinon.stub();
 
           //  when
@@ -245,7 +260,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             <template>
               <NavigationButton
                 @section={{section}}
-                @sections={{sections}}
+                @sectionsLength={{sectionsLength}}
+                @currentSectionIndex={{currentSectionIndex}}
                 @isCurrentSection={{true}}
                 @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
               />
@@ -269,7 +285,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
                 { title: 'Grain title', type: 'activity', id: '234-abc' },
               ],
             };
-            const sections = [section];
+            const sectionsLength = [section].length;
+            const currentSectionIndex = 1;
             const handleArrowKeyNavigation = sinon.stub();
 
             //  when
@@ -277,7 +294,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               <template>
                 <NavigationButton
                   @section={{section}}
-                  @sections={{sections}}
+                  @sectionsLength={{sectionsLength}}
+                  @currentSectionIndex={{currentSectionIndex}}
                   @isCurrentSection={{true}}
                   @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
                 />
@@ -309,7 +327,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type,
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const handleArrowKeyNavigation = sinon.stub();
 
       // when
@@ -317,7 +336,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{false}}
             @isCurrentSection={{false}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -335,7 +355,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -343,7 +364,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{false}}
               @isCurrentSection={{false}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -362,7 +384,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -370,7 +393,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{false}}
               @isCurrentSection={{true}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -389,7 +413,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
-        const sections = [section];
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
         const handleArrowKeyNavigation = sinon.stub();
 
         // when
@@ -397,7 +422,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
           <template>
             <NavigationButton
               @section={{section}}
-              @sections={{sections}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
               @isPastSection={{true}}
               @isCurrentSection={{false}}
               @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -415,7 +441,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const handleArrowKeyNavigation = sinon.stub();
 
       // when
@@ -423,7 +450,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{true}}
             @isCurrentSection={{true}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -436,14 +464,14 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         .dom(
           screen.getByRole('button', {
             name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-              indexSection: 1,
-              totalSections: 1,
+              indexSection: currentSectionIndex,
+              totalSections: sectionsLength,
             })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
               sectionTitle: 'Se questionner',
             })}`,
           }),
         )
-        .hasAria('current', 'true');
+        .hasAria('current', 'step');
     });
   });
 
@@ -453,7 +481,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const focusAndScroll = sinon.stub();
       class ModulixAutoScrollService extends Service {
         focusAndScroll = focusAndScroll;
@@ -466,7 +495,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{false}}
             @isCurrentSection={{true}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -476,8 +506,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       await click(
         screen.getByRole('button', {
           name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-            indexSection: 1,
-            totalSections: 1,
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
           })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
             sectionTitle: 'Se questionner',
           })}`,
@@ -495,7 +525,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         id: 'section1',
         type: 'question-yourself',
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const trackEvent = sinon.stub();
       const handleArrowKeyNavigation = sinon.stub();
 
@@ -514,7 +545,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isCurrentSection={{true}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
@@ -523,8 +555,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       await click(
         screen.getByRole('button', {
           name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-            indexSection: 1,
-            totalSections: 1,
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
           })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
             sectionTitle: 'Se questionner',
           })}`,
@@ -546,7 +578,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
-      const sections = [section];
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const focusAndScroll = sinon.stub();
       const handleArrowKeyNavigation = sinon.stub();
       class ModulixAutoScrollService extends Service {
@@ -559,7 +592,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         <template>
           <NavigationButton
             @section={{section}}
-            @sections={{sections}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{false}}
             @isCurrentSection={{false}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
@@ -569,8 +603,8 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       await click(
         screen.getByRole('button', {
           name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
-            indexSection: 1,
-            totalSections: 1,
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
           })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
         }),
       );

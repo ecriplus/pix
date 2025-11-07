@@ -176,7 +176,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         });
 
         // then
-        assert.dom(firstSectionButton).hasAttribute('aria-current', 'true');
+        assert.dom(firstSectionButton).hasAttribute('aria-current', 'step');
         assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
 
         assert.dom(secondSectionButton).hasAttribute('aria-current', 'false');
@@ -190,7 +190,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         assert.dom(firstSectionButton).hasAttribute('aria-current', 'false');
         assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
 
-        assert.dom(secondSectionButton).hasAttribute('aria-current', 'true');
+        assert.dom(secondSectionButton).hasAttribute('aria-current', 'step');
         assert.dom(secondSectionButton).hasNoAttribute('aria-disabled');
       });
     });

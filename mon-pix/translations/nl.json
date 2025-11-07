@@ -1667,7 +1667,7 @@
           "aria-label": {
             "steps": "Stap {indexSection} van {totalSections}.",
             "disabled": "Niet beschikbaar. Vorige stap voltooien.",
-            "enabled": "Ga naar {sectionTitle}"
+            "enabled": "Ga naar stap {sectionTitle}"
           }
         }
       },
