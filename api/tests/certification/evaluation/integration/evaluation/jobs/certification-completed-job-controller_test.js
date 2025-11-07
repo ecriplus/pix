@@ -562,7 +562,7 @@ describe('Integration | Certification | Application | jobs | CertificationComple
 
           expect(competenceMarks).to.have.lengthOf(1);
 
-          expect(competenceMarks[0].level).to.equal(1);
+          expect(competenceMarks[0].level).to.equal(6);
         });
       });
     });

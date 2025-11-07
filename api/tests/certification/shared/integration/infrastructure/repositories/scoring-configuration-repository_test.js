@@ -37,20 +37,20 @@ describe('Integration | Repository | scoring-configuration-repository', function
       buildFramework({ competenceIndex, origin: 'external' });
       buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: firstConfigurationDate,
+      databaseBuilder.factory.buildCertificationVersion({
+        startDate: firstConfigurationDate,
         expirationDate: secondConfigurationDate,
         globalScoringConfiguration: null,
       });
 
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: secondConfigurationDate,
+      databaseBuilder.factory.buildCertificationVersion({
+        startDate: secondConfigurationDate,
         expirationDate: thirdConfigurationDate,
         competencesScoringConfiguration: secondCompetenceScoringConfiguration,
       });
 
-      databaseBuilder.factory.buildCertificationConfiguration({
-        startingDate: thirdConfigurationDate,
+      databaseBuilder.factory.buildCertificationVersion({
+        startDate: thirdConfigurationDate,
         expirationDate: null,
       });
 
@@ -94,8 +94,8 @@ describe('Integration | Repository | scoring-configuration-repository', function
       expect(result).to.be.instanceOf(V3CertificationScoring);
       expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
-      expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-5.12345);
-      expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(6.56789);
+      expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-8);
+      expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(8);
     });
   });
 

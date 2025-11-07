@@ -10,13 +10,12 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   // NOTE : only works for certification of core competencies
   const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
 
-  const configuration = await knexConn('certification-configurations')
+  const configuration = await knexConn('certification_versions')
     .select('id', 'globalScoringConfiguration', 'competencesScoringConfiguration')
-    .where('startingDate', '<=', date)
+    .where('startDate', '<=', date)
     .andWhere((queryBuilder) => {
       queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
     })
-    .orderBy('startingDate', 'asc')
     .first();
 
   if (!configuration || !configuration.competencesScoringConfiguration || !configuration.globalScoringConfiguration) {
