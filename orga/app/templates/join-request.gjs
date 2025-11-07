@@ -2,7 +2,7 @@ import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import { LinkTo } from '@ember/routing';
 import pageTitle from 'ember-page-title/helpers/page-title';
-import JoinRequestForm from 'pix-orga/components/auth/join-request-form';
+import JoinRequestForm from 'pix-orga/components/authentication/join-request-form';
 import PageTitle from 'pix-orga/components/ui/page-title';
 <template>
   {{pageTitle "Activez ou récupérez votre espace"}}
