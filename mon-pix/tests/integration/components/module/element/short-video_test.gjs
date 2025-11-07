@@ -42,7 +42,6 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
       title: 'title',
       transcription: 'transcription',
     };
-    const onShortVideoTranscriptionOpenStub = sinon.stub();
 
     const passageEventService = this.owner.lookup('service:passageEvents');
     const passageEventRecordStub = sinon.stub(passageEventService, 'record');
@@ -51,17 +50,12 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     const trackEventStub = sinon.stub(metricsService, 'trackEvent');
 
     //  when
-    const screen = await render(
-      <template>
-        <ModulixShortVideo @element={{shortVideoElement}} @onTranscriptionOpen={{onShortVideoTranscriptionOpenStub}} />
-      </template>,
-    );
+    const screen = await render(<template><ModulixShortVideo @element={{shortVideoElement}} /></template>);
 
     // then
     await click(screen.getByRole('button', { name: 'Afficher la transcription' }));
     assert.ok(await screen.findByRole('dialog'));
     assert.ok(screen.getByText('transcription'));
-    assert.ok(onShortVideoTranscriptionOpenStub.calledOnceWith(shortVideoId));
     sinon.assert.calledWithExactly(passageEventRecordStub, {
       type: 'SHORT_VIDEO_TRANSCRIPTION_OPENED',
       data: {

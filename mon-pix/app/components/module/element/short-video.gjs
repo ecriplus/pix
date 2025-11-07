@@ -16,7 +16,6 @@ export default class ModulixShortVideoElement extends ModuleElement {
   @action
   showModal() {
     this.modalIsOpen = true;
-    this.args.onTranscriptionOpen(this.args.element.id);
 
     this.passageEvents.record({
       type: 'SHORT_VIDEO_TRANSCRIPTION_OPENED',
