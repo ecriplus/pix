@@ -162,7 +162,7 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
   });
 
   describe('#getOidcProviderServiceByCode', function () {
-    it('returns a ready OIDC Provider for Pix App', async function () {
+    it('returns the ready OIDC Providers for Pix App', async function () {
       // given
       const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
       await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
@@ -177,21 +177,19 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       expect(service.code).to.equal('OIDC_EXAMPLE');
     });
 
-    describe('when the requestedApplication is admin', function () {
-      it('returns a ready OIDC provider for Pix Admin', async function () {
-        // given
-        const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
-        await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+    it('returns the ready OIDC Providers for Pix Admin', async function () {
+      // given
+      const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
+      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-        // when
-        const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
-          identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
-          requestedApplication,
-        });
-
-        // then
-        expect(service.code).to.equal('OIDC_EXAMPLE_FOR_PIX_ADMIN');
+      // when
+      const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+        identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
+        requestedApplication,
       });
+
+      // then
+      expect(service.code).to.equal('OIDC_EXAMPLE_FOR_PIX_ADMIN');
     });
 
     describe('when the OIDC Provider is not for the requestedApplication', function () {
