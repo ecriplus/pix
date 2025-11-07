@@ -1,0 +1,831 @@
+{
+  "id": "bbc48a68-6bef-4261-89f0-86459413c10c",
+  "slug": "ia-cadre-usage-educ-nov",
+  "title": "IA et éducation, découverte du cadre d’usage",
+  "isBeta": true,
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>L’usage des IA génératives par les élèves et par certains enseignants est déjà largement répandu. Ce développement rapide pose question, et a mené le ministère de l’Éducation nationale à élaborer des recommandations.&nbsp;</p><p>Vous allez en découvrir dans ce module les grandes lignes.</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Justifier le besoin d’un cadre pour l’usage des IA en éducation</p>",
+      "<p>Adapter les usages des IA génératives en fonction du niveau des élèves, conformément au cadre d’usage</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "0b73db28-3a0a-42d6-a9de-6156eb494dd0",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "a8113988-a6e6-47d5-9847-d9f1b2182309",
+          "type": "discovery",
+          "title": "Conversation intro",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c12191b0-88c1-4b9a-b2d8-d0a05dfdb82f",
+                "type": "text",
+                "content": "<p>Cynthia et Sofiane sont <strong>enseignants</strong> en collège. </p><p>Lors d’une discussion, ils abordent le sujet de <strong>l’usagede l’intelligence artificielle dans le cadre de leur métier.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "923acce9-afc2-4693-80b5-0406233e472a",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "ACCROCHE",
+                  "messages": [
+                    {
+                      "userName": "Cynthia",
+                      "direction": "outgoing",
+                      "content": "Tiens , j’ai préparé mon cours de français avec l’IA générative hier soir. "
+                    },
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Quoi ! Moi j’ose pas, j’ai pas confiance."
+                    },
+                    {
+                      "userName": "Cynthia",
+                      "direction": "outgoing",
+                      "content": "Franchement c’est quand même intéressant."
+                    },
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Oui mais faut faire attention, t’as pas peur de sortir des clous ?"
+                    },
+                    {
+                      "userName": "Cynthia",
+                      "direction": "outgoing",
+                      "content": "Heu, non j’ai fait attention, je me suis basée sur le cadre qui existe."
+                    },
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Quel cadre ? Tu pourrais me le montrer je ne sais pas ce que je dois faire, ce que je peux faire ou pas."
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "65282a3b-7abc-4560-8a59-5f877cc83bdc",
+          "type": "transition",
+          "title": "Fin accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2d402640-16b7-4031-92c7-1fec00f409c4",
+                "type": "text",
+                "content": "<p>Sofiane suit le conseil de Cynthia, il consulte le cadre d’usage de l’IA en éducation.</p><p>Le lendemain, ils poursuivent leurs échanges.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b69c907b-4435-4dd9-bcc9-82439d35ba25",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "8e2ff146-2719-4d9a-912c-75648642d712",
+          "type": "activity",
+          "title": "Conversation interactive 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b7f408c0-8c52-453e-9359-7393e0779eb8",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "discussion",
+                  "messages": [
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "J’ai regardé le document. Je pensais utiliser l’IA pour proposer des exercices différenciés à mes élèves sur l’imparfait. Tu en penses quoi ?"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c1bcbc5c-de2b-4fc3-9b5c-aa870f5efdeb",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis&nbsp;: que peut lui répondre Cynthia ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Non, tu ne peux pas. Les IA génératives ne proposent pas ce genre de choses.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>L’usage des IA génératives est autorisé, mais il existe des restrictions.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Oui, tu peux utiliser les IA génératives pour t’assister pédagogiquement mais sans y saisir les résultats nominatifs de tes élèves.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>L’usage des IA génératives est autorisé, mais il existe des restrictions.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9718b54d-e874-4593-9e39-3ba76c09bff4",
+          "type": "short-lesson",
+          "title": "Leçon Je peux",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ac433486-1a29-43ea-88d0-42c78c3c5c89",
+                "type": "text",
+                "content": "<p>Le cadre d’usage de l’IA en éducation indique les <strong>usages possibles de l’IA</strong>.&nbsp;</p><p>Pour résumer&nbsp;:&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7a675723-90b4-4121-931f-ad95ea318d70",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-cadre-educ-nov/infographie-je-peux.png",
+                "alt": "",
+                "alternativeText": "<p>D’après le cadre d’usage de l’IA en éducation, je peux&nbsp;:&nbsp;</p><ul><li>Utiliser l’IA pour&nbsp;m’assisterdans lapréparation decours.</li><li>Proposer desséquencespédagogiquesintégrant l’IA.</li><li>Utiliser des IApour destâchesadministratives.</li></ul>",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "73dfc5ec-f48b-489f-a1ec-b15c6a320868",
+          "type": "transition",
+          "title": "de je peux à je ne peux pas",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a3c05aca-a1dd-44a0-a1ee-497c65200b9b",
+                "type": "text",
+                "content": "<p>Quelles sont les restrictions d’usage ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5dd48a0d-4b88-4c93-985b-81ca47f6336c",
+          "type": "activity",
+          "title": "Discussion interactive 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "60e7ecf8-a1c3-426e-b2ce-7a0ac8aa99e9",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "discussion",
+                  "messages": [
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "En effet les données personnelles ne doivent pas être saisies dans une IA grand public."
+                    },
+                    {
+                      "userName": "Cynthia",
+                      "direction": "incoming",
+                      "content": "Je pense aussi utiliser une œuvre littéraire pour la fin de ce cours. C’est possible ?"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "39d7b4bf-85a0-4cf6-bae8-c3795c56e154",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis&nbsp;: que peut  répondre Cynthia ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Attention cette œuvre doit être libre de droit. Il faut veiller à respecter le droit d’auteur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, il convient de renoncer quand des oeuvres protégées par le droit d’auteur sont en jeu.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Oui tu peux en effet utiliser n’importe quelle œuvre. C’est l’avantage de l’IA.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non, il convient de renoncer quand des oeuvres protégées par le droit d’auteur sont en jeu.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "622302e3-5667-43c3-b484-1fda5f3c6127",
+          "type": "short-lesson",
+          "title": "Leçon je ne peux pas",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4e14e436-f724-431a-8c94-d9f12dddb448",
+                "type": "text",
+                "content": "<p>Le cadre d’usage de l’IA en éducation indique les <strong>restrictions des usages</strong> de l’IA.</p><p>Pour résumer&nbsp;:&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fabfc249-abd8-4c41-ac9b-68b560b4ad8a",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-cadre-educ-nov/infographie-je-ne-peux-pas.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "fe130de4-414f-470d-9fb6-1cebda438c96",
+          "type": "transition",
+          "title": "de je ne peux pas à je dois",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ef6d37ca-7a04-4fb1-aad2-804fa661872e",
+                "type": "text",
+                "content": "<p>De nombreux élèves utilisent les IA génératives pour des recherches d’informations, pour réviser ou pour produire des textes ou des images.&nbsp;</p><p>Quelle place accorder à ces nouveaux outils à l’école ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "de075f3c-b944-4d57-8e64-ecafc1a0f58a",
+          "type": "activity",
+          "title": "Discussion intercative 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4809b132-0503-4ec6-95e6-8850a9d870e3",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "discussion",
+                  "messages": [
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Puisque c’est un outil que j’utilise désormais, je pense faire une séance d’esprit critique avec les élèves, notamment sur les résultats obtenus."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "89bc77ee-4954-41fe-8d0a-ac7fc5d4ec78",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis&nbsp;: que peut  répondre Cynthia ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui tu dois développer l’esprit critique sur ce thème.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, il est important de sensibiliser les élèves aux enjeux éthiques et environnementaux des IA, et de développer leur esprit critique.&nbsp;</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non tu ne dois pas aborder les IA génératives avec tes élèves.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Au contraire,&nbsp;il est important de sensibiliser les élèves aux enjeux éthiques et environnementaux des IA, et de développer leur esprit critique.&nbsp;</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2be0c372-e354-4cf4-991b-50a247f65cd7",
+          "type": "short-lesson",
+          "title": "Leçon je dois",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1d2b65dc-d812-4c0d-afd1-c354b2114b70",
+                "type": "text",
+                "content": "<p>L’école doit  accompagner les élèves dans leurs usages des IA génératives. &nbsp;&nbsp;&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "076b0eb6-7c4b-41e9-a49d-7318917c3b41",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-cadre-educ-nov/infographie-je-dois.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "30cb7f6f-ff1d-4c51-9223-a3856c493ed9",
+          "type": "transition",
+          "title": "de je dois vers niveaux",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3c952907-2f15-4164-bfb0-217922bd1838",
+                "type": "text",
+                "content": "<p>A la sortie d’un conseil de classe, Sofiane et Cynthia poursuivent leurs échanges sur l’utilisation des IA grand public.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "72008f76-dd7f-42c6-9c40-dfc482334f4f",
+          "type": "activity",
+          "title": "Discussion séquence collège",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1b1244da-0e84-4ef0-a3f5-a8a252e5f63d",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "suite de la discussion",
+                  "messages": [
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Tu as déjà fait utiliser une IA générative à tes élèves ?"
+                    },
+                    {
+                      "userName": "Cynthia",
+                      "direction": "outgoing",
+                      "content": "Oui avec mes 3ème pour la rédaction d’un prompt afin qu’ils sachent l’utiliser convenablement."
+                    },
+                    {
+                      "userName": "Sofiane",
+                      "direction": "incoming",
+                      "content": "Tu peux me donner ta séance pour que je la fasse avec mes 5ème."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dd08b1cc-6f9f-41fe-a2c3-11d8616af14a",
+                "type": "qcu-discovery",
+                "instruction": "<p>A votre avis, Sofiane peut-il reprendre la séance de Cynthia pour ses 5ème ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui car il est important que tous les élèves y soient sensibilisés.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp;</p><p>Sofiane ne peut pas la réutiliser à l’identique bien que tous les élèves doivent être sensibilisés àl’usage des IA génératives. \"Le cadre d’usage des IA en éducation\" autorise la manipulation directe de celles-ci <strong>àpartir de la 4ème</strong> (de manière encadrée et accompagnée sans création de compte par les élèves)</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non car le cadre d’usage de l’IA en classe ne le permet pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet.</p><p> Le \"cadre d’usage des IA en éducation\" autorise l’utilisation des IA génératives par lesélèves (de manière encadrée et accompagnée) à partir de la 4ième (sans création de compte par les élèves).</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Sofiane ne peut pas la réutiliser à l’identique bien que tous les élèves doivent être sensibilisés àl’usage des IA génératives. \"Le cadre d’usage des IA en éducation\" autorise la manipulation directe de celles-ci <strong>àpartir de la 4ème</strong> (de manière encadrée et accompagnée sans création de compte par les élèves).</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "275acaf0-c156-4bd1-9094-a15970c1dbbd",
+          "type": "short-lesson",
+          "title": "adaptation selon le niveau des élèves",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7cd0a1a1-c6fb-4d5e-ab3d-580c3eea0be8",
+                "type": "text",
+                "content": "<p>Certains usages de l’IA sont autorisés mais doivent être adaptés selon le niveau des élèves.</p><p>Pour résumer&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "01390199-dd40-4e9d-a04f-d08534e7bf68",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-cadre-educ-nov/infographie-niveaux.png",
+                "alt": "",
+                "alternativeText": "<h4>Les IA en éducation</h4><p>Tout au long de leur scolarité, les élèves sont amenés à developper leur&nbsp;esprit critique&nbsp;vis à vis des IA.</p><p>   Dès l’école primaire</p><p>Les élèves sont sensibilisés aux IA génératives (connaissances de base) sans manipulation directe.</p><p>A partir de la 4e</p><p> L’utilisation pédagogique des IA génératives en classe est autorisée. Elle est toutefois encadrée, expliquée et accompagnée par l’enseignant.</p><p>  Au lycée</p><p>  Les IA génératives peuvent être utilisées par les élèves de manière autonome. Cet usage se fait dans un cadre d’apprentissage défini par l’enseignant. <br>   </p>",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "512dfd50-97fb-45bb-9b39-1ca5fc26220e",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "a12428d7-7af7-4dcd-92a0-87392d4c45d5",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f4bd56d2-bc5c-451b-bf81-d20301333732",
+                "type": "text",
+                "content": "<p>L’IA en éducation - Cadre d’usage, publié par le ministère de l’Éducation nationale en juin 2025, aborde les questions essentielles concernant l’utilisation de l’IA dans le milieu éducatif.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "80265304-605f-4e2b-828f-7eeb87b3de36",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/ia-cadre-educ-nov/infographie-recap.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0d6312be-50ce-4cb5-8ac6-2500eb972c1e",
+                "type": "text",
+                "content": "<p>Lien vers le cadre d’usage&nbsp;: <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">Cadre d’usage de l’IA enéducation|Ministère del’Éducation nationale</a></p><p>Lien vers le <a href=\"https://eduscol.education.fr/document/67356/download\" target=\"_blank\">poster récapitulatif</a></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0fbdc0b9-d271-41d7-9229-5143c106ac3a",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "481ce8db-a8c6-4ad2-9249-eb878300347b",
+          "type": "transition",
+          "title": "intro éval",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "60ac39c8-bb44-4a2f-9748-601fa096e577",
+                "type": "text",
+                "content": "<p>Pour donner suite aux éléments donnés, testez vos connaissances !</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "41983e99-5aa9-4389-8130-c670d89d3745",
+          "type": "activity",
+          "title": "QCU1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d4714d77-2959-4adc-bfb6-3748b40809db",
+                "type": "qcu",
+                "instruction": "<p>Qui a publié le cadre d’usage de l’IA en éducation ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le ministère de l’Éducation nationale</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p> Le&nbsp;cadre d’usage de l’IA en éducation a été publié par le&nbsp;ministère de l’Éducation nationale.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Un syndicat enseignant</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La commission enfant et écran</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a51cbed3-6c1f-40c3-b021-ddbe5b533b65",
+          "type": "activity",
+          "title": "QCM2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "69f23768-c0a9-41f4-9a08-3f09a4b45274",
+                "type": "qcm",
+                "instruction": "<p>À qui s’adresse le cadre d’usage de l’IA en éducation ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>aux enseignants du secteur public</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>aux enseignants du secteur privé sous contrat</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>à la communauté éducative</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>aux entreprises qui développent les IA grand public</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse</p>",
+                    "diagnosis": "<p>à développer</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse</p>",
+                    "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "26c76553-97c4-4371-8e04-7df0e16f75a3",
+          "type": "activity",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "09d41ca2-0580-448e-906d-22c7c5e6ee36",
+                "type": "qcm",
+                "instruction": "<p>Ce cadre des usages des IA vise à fournir des réponses claires sur…</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>les potentialités des IA en éducation</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>les risques liés aux usages de l’IA en éducation</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Les obligations légales associées aux usages de l’IA en éducation</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>la liste des IA génératives à utiliser en éducation</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": "<p>à développer</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "e9ab9e64-7136-4e7f-ade5-a6492d47fa23",
+          "type": "activity",
+          "title": "QCU situation 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2e66aaea-caba-4974-8f7d-d581f90b7c80",
+                "type": "qcu",
+                "instruction": "<p>Thomas est enseignant en premier degré, il a des CM2. Il souhaite utiliser une IA pour faire créer des histoires à ses élèves. </p><p>Que peut-il faire en classe avec ses élèves?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Laisser les élèves utiliser une IA générative afin qu’elle leur fasse des suggestions en autonomie.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>N’hésitez pas à consulter la leçon.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Demander à une IA générative en amont du cours des images pour aider les élèves à rédiger l’histoire.</p>",
+                    "feedback": {
+                      "state": "<p>En effet.<br></p>",
+                      "diagnosis": "<p>Thomas ne peut pas laisser ses élèves en autonomie sur une IA générative car ses élèves sont dupremier degré. Il peut toutefois utiliser l’IA lors de sa préparation de cours afin de créer des supports pouvant aiderses élèves.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Proposer aux élèves d’écrire dans une IA générative leur texte afin qu’elle l’améliore.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>N’hésitez pas à consulter la leçon.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b0638fc8-99a5-4e28-8d7d-ccf673105903",
+          "type": "activity",
+          "title": "QCU situation 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "58a27d70-b05b-407b-ae1b-913994ea144f",
+                "type": "qcu",
+                "instruction": "<p>Mathilde est enseignante en histoire géographie en collège. Elle a des 3e. </p><p>Quelle précaution doit-elle prendre&nbsp;avant d’utiliser un outil d’IA en classe afin de résumer un évènement historique ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Ne pas en parler aux élèves.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>N’hésitez pas à consulter la leçon.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Demander aux élèves de créer un compte et de questionner une IA générative afin de la questionner et&nbsp;rédiger leur résumé.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>N’hésitez pas à consulter la leçon.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Organiser un débat en classe sur les raisons de l’écart entre le résumé qu’ils ont produit et celui rédigé par l’IA&nbsp;générative.</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p>Mathilde peut faire utiliser l’IA en classe de manière encadrée, elle doit expliciter aux élèves ce type de travail et&nbsp;faire appel à l’esprit critique de ses élèves. Elle ne peut pas leur demander en 3e de se créer un compte.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5cd06766-cd86-409b-ab4a-1349e732e253",
+          "type": "activity",
+          "title": "QCU situation 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9c5551af-a4e6-4b8a-b366-0f5f4e86d559",
+                "type": "qcu",
+                "instruction": "<p>Eliott est enseignant en lycée, il souhaite une analyse des résultats de ses élèves afin de constituer des groupes de&nbsp;travail hétérogènes. </p><p>Que peut-il donner comme éléments à l’IA ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Ses documents préalablement traités (il a anonymisé et remplacé toutes les autres données personnelles par&nbsp;des chiffres)&nbsp;: relevés de note de la période, observations individuelles et collectives...</p>",
+                    "feedback": {
+                      "state": "<p>Bonne réponse !</p>",
+                      "diagnosis": "<p> Elliott peut analyser les résultats de ses élèves si les documents saisis ont été préalablement traités&nbsp;afin de ne pas utiliser de donnée confidentielle ou à caractère personnel.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Ses documents complets&nbsp;: relevés de note de la période, observations individuelles et collectives...</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.&nbsp;</p>",
+                      "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Il ne peut mettre aucun de ces documents.</p>",
+                    "feedback": {
+                      "state": "<p>Mauvaise réponse.</p>",
+                      "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a8fa8461-5386-4edf-84d8-5791d1c42c0a",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "a6302b53-151d-4c38-9c1b-a2a255647d65",
+          "type": "transition",
+          "title": "en attente",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f140b9f1-5da9-4e68-9fca-78e075765a5a",
+                "type": "text",
+                "content": "<p>Cette section est en cours de rédaction.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
