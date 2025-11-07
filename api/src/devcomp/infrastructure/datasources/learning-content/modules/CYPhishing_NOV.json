@@ -660,7 +660,7 @@
               "element": {
                 "id": "32ed31f7-6d00-4c70-a4e7-da26e59617fe",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/CYPhishingNov/infographie-recap.png",
+                "url": "https://assets.pix.org/modules/CYPhishingNov/infographie-recap.svg",
                 "alt": "Infographie décrite en détail dans l’alternative textuelle",
                 "alternativeText": "<p>Un dessin représentant une personne tenant un smartphone. Sur l’écran du téléphone, un message est affiché avec un lien en surbrillance.<br>Trois encadrés de texte, reliés au téléphone, expliquent&nbsp;:</p><ul><li>«&nbsp;Ils cherchent à gagner votre confiance, en utilisant l’identité d’un proche, ou d’un service public connu.&nbsp;»</li><li>«&nbsp;Ils invitent à agir, souvent en cliquant sur un lien.&nbsp;»</li><li>«&nbsp;Ils utilisent vos émotions pour vous faire réagir rapidement.&nbsp;»</li></ul><p>Liste de recommandations avec le titre : « Trois conseils pour éviter de tomber dans le piège »</p><ul><li>Conseil 1 : prenez le temps de réfléchir avant d’agir.</li><li> Conseil 2 : ne communiquez pas d’informations personnelles.</li><li>Conseil 3 : ne cliquez pas sur le lien, ne répondez pas.</li></ul>",
                 "legend": "",
