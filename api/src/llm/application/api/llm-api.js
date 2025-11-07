@@ -6,13 +6,24 @@ import { LLMChatDTO } from './models/LLMChatDTO.js';
  * @param {Object} params
  * @param {string} params.configId
  * @param {string} params.userId
+ * @param {string|undefined} params.challengeId
+ * @param {number|undefined} params.assessmentId
+ * @param {string|undefined} params.moduleId
+ * @param {number|undefined} params.passageId
  * @returns {Promise<LLMChatDTO>}
  */
-export async function startChat({ configId, userId }) {
+export async function startChat({ configId, userId, challengeId, assessmentId, moduleId, passageId }) {
   if (!userId) {
     throw new NoUserIdProvidedError();
   }
-  const { id, configuration } = await usecases.startChat({ configurationId: configId, userId });
+  const { id, configuration } = await usecases.startChat({
+    configurationId: configId,
+    userId,
+    challengeId,
+    assessmentId,
+    moduleId,
+    passageId,
+  });
 
   return new LLMChatDTO({
     id,

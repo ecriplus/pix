@@ -46,9 +46,20 @@ describe('LLM | Unit | Application | API | llm', function () {
       it('returns the newly created chat', async function () {
         const configId = 'abc123';
         const userId = 123;
+        const challengeId = undefined;
+        const assessmentId = undefined;
+        const moduleId = undefined;
+        const passageId = undefined;
 
         // when
-        const chat = await llmApi.startChat({ configId, userId });
+        const chat = await llmApi.startChat({
+          configId,
+          userId,
+          challengeId,
+          assessmentId,
+          moduleId,
+          passageId,
+        });
         // then
         expect(chat).to.deepEqualInstance(
           new LLMChatDTO({
@@ -60,7 +71,80 @@ describe('LLM | Unit | Application | API | llm', function () {
             context: newChat.configuration.context,
           }),
         );
-        expect(startChat).to.have.been.calledOnceWithExactly({ configurationId: configId, userId });
+        expect(startChat).to.have.been.calledOnceWithExactly({
+          configurationId: configId,
+          userId,
+          challengeId,
+          assessmentId,
+          moduleId,
+          passageId,
+        });
+      });
+
+      context('when challenge id, assessment id are provided', function () {
+        it('returns the newly created chat', async function () {
+          const configId = 'abc123';
+          const userId = 123;
+          const challengeId = 'fakeChallengeId';
+          const assessmentId = 1;
+          const moduleId = undefined;
+          const passageId = undefined;
+
+          // when
+          const chat = await llmApi.startChat({ configId, userId, challengeId, assessmentId, moduleId, passageId });
+          // then
+          expect(chat).to.deepEqualInstance(
+            new LLMChatDTO({
+              id: newChat.id,
+              attachmentName: newChat.configuration.attachmentName,
+              inputMaxChars: newChat.configuration.inputMaxChars,
+              inputMaxPrompts: newChat.configuration.inputMaxPrompts,
+              hasVictoryConditions: newChat.hasVictoryConditions,
+              context: newChat.configuration.context,
+            }),
+          );
+          expect(startChat).to.have.been.calledOnceWithExactly({
+            configurationId: configId,
+            userId,
+            challengeId,
+            assessmentId,
+            moduleId,
+            passageId,
+          });
+        });
+      });
+
+      context('when passage id, module id are provided', function () {
+        it('returns the newly created chat', async function () {
+          const configId = 'abc123';
+          const userId = 123;
+          const challengeId = undefined;
+          const assessmentId = undefined;
+          const moduleId = '550e8400-e29b-41d4-a716-446655440000';
+          const passageId = 1;
+
+          // when
+          const chat = await llmApi.startChat({ configId, userId, challengeId, assessmentId, moduleId, passageId });
+          // then
+          expect(chat).to.deepEqualInstance(
+            new LLMChatDTO({
+              id: newChat.id,
+              attachmentName: newChat.configuration.attachmentName,
+              inputMaxChars: newChat.configuration.inputMaxChars,
+              inputMaxPrompts: newChat.configuration.inputMaxPrompts,
+              hasVictoryConditions: newChat.hasVictoryConditions,
+              context: newChat.configuration.context,
+            }),
+          );
+          expect(startChat).to.have.been.calledOnceWithExactly({
+            configurationId: configId,
+            userId,
+            challengeId,
+            assessmentId,
+            moduleId,
+            passageId,
+          });
+        });
       });
     });
   });
