@@ -39,10 +39,6 @@
                       "userName": "Noah",
                       "direction": "incoming",
                       "content": " Dis Anouk, t’as déjà eu ce genre de message d’un logiciel d’IA générative ?",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Noah",
@@ -57,28 +53,16 @@
                       "userName": "Anouk",
                       "direction": "outgoing",
                       "content": "Personnellement non, mais je sais pourquoi ça arrive oui.  T’as demandé quoi ? T’as voulu construire une bombe ? 💣",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Noah",
                       "direction": "incoming",
                       "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo, je lui ai demandé comment je pouvais y accéder.",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
                       "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre que toi qui cherchait ton mot de passe ? ",
-                      "image": {
-                        "src": "",
-                        "alt": ""
-                      }
                     }
                   ]
                 }
@@ -211,7 +195,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
+                "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
                 "content": "<p>La méthoque que vous venez de voir s’appelle \"<strong>l’alignement par le prompt système</strong>\" où <strong>les concepteurs donnent à l’IA générative des règles </strong>systématiques à suivre dans ses réponses. 📋</p><h5>🤔Qui fixe ces règles ?</h5><p>Pendant la <strong>création du modèle</strong>, ce sont <strong>les fabricants</strong> qui les définissent.<br>Mais<strong> lors de l’utilisation</strong>, <strong>les utilisateurs</strong>&nbsp;et <strong>les fabricants</strong> peuvent aussi orienter l’IA grâce à un prompt système — par exemple&nbsp;: «&nbsp;sois poli et neutre&nbsp;». 🗓️</p><h5>🤔Existe t-il d’autres méthodes d’alignement ?</h5><p>C’est une autre méthode d’alignement, où les retours humains servent à ajuster le comportement de l’IA.&nbsp;</p><p>▶︎💡 Astuce<br>Vous pouvez améliorer l’alignement d’un logiciel d’IA générative selon vos besoins spécifiques (âge des apprenants, contexte culturel, domaine d’usage, etc.).<br>On appelle cela <strong>le pré-prompt.</strong></p>"
               }
@@ -414,7 +398,7 @@
               "element": {
                 "id": "55606f63-2f5d-4675-87a8-9b0555814d71",
                 "type": "text",
-                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents :\n</p><ul><li>\n\nL’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.\n</li><li>\n\nL’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.\n</li><li>\n\nL’équipe C dépend d’un institut de recherche d’un pays autoritaire, où la priorité est donnée à l’ordre et à la conformité.\n</li></ul><p>\n\n👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
+                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents :</p><ul><li>L’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.</li><li>L’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.</li><li>L’équipe C dépend d’un institut de recherche d’un pays autoritaire, où la priorité est donnée à l’ordre et à la conformité.</li></ul><p>👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
               }
             },
             {
@@ -628,7 +612,7 @@
                     "content": "<p>L'IA numéro 1</p>",
                     "feedback": {
                       "state": "<p>Pas vraiment...</p><p><br></p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.\n</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
                     }
                   },
                   {
@@ -636,7 +620,7 @@
                     "content": "<p>L'IA numéro 2</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !</p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>\n👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
                     }
                   },
                   {
@@ -644,7 +628,7 @@
                     "content": "<p>Aucune des deux</p>",
                     "feedback": {
                       "state": "<p>Pas vraiment</p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>\nCes différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>\n👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
+                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique : l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
                     }
                   }
                 ],
@@ -696,14 +680,14 @@
                     "id": "1",
                     "content": "<p>Oui</p>",
                     "feedback": {
-                      "diagnosis": "<p>Coup de chance ou alors vous être très positif ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p>\n<strong>Vous ne pouviez pas le savoir !</strong></p><p>\nIl faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Coup de chance ou alors vous être très positif ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Non</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p>\n<strong>Vous ne pouviez pas le savoir !</strong></p><p>\nIl faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
+                      "diagnosis": "<p>Pas étonnant ! L’IA ne pouvait pas annoncer la mauvaise nouvelle : son <strong>prompt système lui interdisait de le faire</strong>.</p><p><strong>Vous ne pouviez pas le savoir !</strong></p><p>Il faut choisir l’IA<strong> adaptée au contexte</strong> et <strong>vérifier ses réponses</strong> : chaque modèle privilégie certaines valeurs plutôt que d’autres.</p>"
                     }
                   }
                 ]
