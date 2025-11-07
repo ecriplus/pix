@@ -16,8 +16,8 @@ import StepThree from './step-three';
 import StepTwo from './step-two';
 
 const PIX_PLUS_DURATIONS = {
-  DROIT: 45,
-  PRO_SANTE: 45,
+  DROIT: 60,
+  PRO_SANTE: 60,
   EDU: 90,
 };
 

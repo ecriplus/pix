@@ -566,10 +566,10 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
 
   module('when calculating theoretical end time for different certification types', function () {
     module('when candidate has Pix+ Droit certification', function () {
-      test('it calculates end time using 45 minutes duration', async function (assert) {
+      test('it calculates end time using 1 hour duration', async function (assert) {
         // given
         const startTime = new Date('2022-10-19T14:30:00Z');
-        const expectedEndTime = dayjs(startTime).add(45, 'minute').format('HH:mm');
+        const expectedEndTime = dayjs(startTime).add(60, 'minute').format('HH:mm');
 
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '456',
@@ -590,10 +590,10 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
     });
 
     module('when candidate has Pix+ Pro Santé certification', function () {
-      test('it calculates end time using 45 minutes duration', async function (assert) {
+      test('it calculates end time using 1 hour duration', async function (assert) {
         // given
         const startTime = new Date('2022-10-19T10:00:00Z');
-        const expectedEndTime = dayjs(startTime).add(45, 'minute').format('HH:mm');
+        const expectedEndTime = dayjs(startTime).add(60, 'minute').format('HH:mm');
 
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '456',
