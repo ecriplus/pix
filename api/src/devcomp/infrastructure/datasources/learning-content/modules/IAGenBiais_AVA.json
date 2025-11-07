@@ -38,12 +38,12 @@
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": " Dis Anouk, t’as déjà eu ce genre de message d’un logiciel d’IA générative ?",
+                      "content": " Dis Anouk, t’as déjà eu ce genre de message d’un logiciel d’IA générative ?"
                     },
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "",
+                      "content": " ",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/biais-avances/2025-11-05-14-55-20-greenshot.png",
                         "alt": "brbr"
@@ -52,17 +52,17 @@
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Personnellement non, mais je sais pourquoi ça arrive oui.  T’as demandé quoi ? T’as voulu construire une bombe ? 💣",
+                      "content": "Personnellement non, mais je sais pourquoi ça arrive oui.  T’as demandé quoi ? T’as voulu construire une bombe ? 💣"
                     },
                     {
                       "userName": "Noah",
                       "direction": "incoming",
-                      "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo, je lui ai demandé comment je pouvais y accéder.",
+                      "content": "Mais non, t’es bête. Je ne retrouve pas le mot de passe de mon compte PixVideo, je lui ai demandé comment je pouvais y accéder."
                     },
                     {
                       "userName": "Anouk",
                       "direction": "outgoing",
-                      "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre que toi qui cherchait ton mot de passe ? ",
+                      "content": "Évidemment ! L’IA ne peut pas savoir que c’est ton compte, donc par mesure de sécurité, il n’est pas permis de répondre à ce genre de questions.  Et si c’était quelqu’un d’autre que toi qui cherchait ton mot de passe ?"
                     }
                   ]
                 }
@@ -73,7 +73,7 @@
         {
           "id": "27f00d7c-6c46-4063-9bea-d9f91f920cf7",
           "type": "transition",
-          "title": "",
+          "title": "Transition 0",
           "components": [
             {
               "type": "element",
