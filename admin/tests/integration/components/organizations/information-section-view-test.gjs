@@ -48,6 +48,8 @@ module('Integration | Component | organizations/information-section-view', funct
         dataProtectionOfficerFullName: 'Justin Ptipeu',
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         administrationTeamName: 'team Rocket',
+        countryCode: 99100,
+        countryName: 'France',
       };
 
       // when
@@ -69,6 +71,11 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.created-at')).nextElementSibling)
         .hasText('02/09/2022');
+
+      assert
+        .dom(screen.getByText(t('components.organizations.information-section-view.country.label')).nextElementSibling)
+        .hasText('France (99100)');
+
       assert
         .dom(
           screen.getByText(t('components.organizations.information-section-view.administration-team'))
@@ -124,6 +131,49 @@ module('Integration | Component | organizations/information-section-view', funct
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
         .hasText('GAR');
+    });
+
+    module('country information', function () {
+      test('it renders Not specified value if no country code', async function (assert) {
+        // given
+        const organization = {
+          name: 'Orga with no country code',
+          countryCode: null,
+        };
+
+        // when
+        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+        // then
+        assert
+          .dom(
+            screen.getByText(t('components.organizations.information-section-view.country.label')).nextElementSibling,
+          )
+          .hasText(t('common.not-specified'));
+      });
+
+      test('it renders country not found message if no country name', async function (assert) {
+        // given
+        const organization = {
+          name: 'Orga with country code but no country name',
+          countryCode: 1234,
+          countryName: undefined,
+        };
+
+        // when
+        const screen = await render(<template><InformationSectionView @organization={{organization}} /></template>);
+
+        // then
+        assert
+          .dom(
+            screen.getByText(t('components.organizations.information-section-view.country.label')).nextElementSibling,
+          )
+          .hasText(
+            t('components.organizations.information-section-view.country.not-found', {
+              countryCode: organization.countryCode,
+            }),
+          );
+      });
     });
 
     module('data protection officer information', function () {

@@ -66,6 +66,21 @@ class OrganizationDescription extends Component {
     return identityProviderName || this.intl.t('common.words.none');
   }
 
+  get country() {
+    //TODO: remove condition based on countryCode when it becomes not nullable at the end of Epix
+    if (!this.args.organization.countryCode && !this.args.organization.countryName) {
+      return this.intl.t('common.not-specified');
+    }
+
+    if (this.args.organization.countryCode && !this.args.organization.countryName) {
+      return this.intl.t('components.organizations.information-section-view.country.not-found', {
+        countryCode: this.args.organization.countryCode,
+      });
+    }
+
+    return `${this.args.organization.countryName} (${this.args.organization.countryCode})`;
+  }
+
   <template>
     <DescriptionList>
       <DescriptionList.Divider />
@@ -90,6 +105,10 @@ class OrganizationDescription extends Component {
           {{@organization.provinceCode}}
         </DescriptionList.Item>
       {{/if}}
+
+      <DescriptionList.Item @label={{t "components.organizations.information-section-view.country.label"}}>
+        {{this.country}}
+      </DescriptionList.Item>
 
       <DescriptionList.Divider />
 
