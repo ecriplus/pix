@@ -1,0 +1,98 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Possible personal data
+*.json
+*.csv
+
+# compiled output
+**/dist
+**/tmp
+**/coverage
+**/pix.log.*
+**/test-results
+
+# misc
+**/.eslintcache
+**/.sass-cache
+**/npm-debug.log
+**/testem.log
+**/out.log
+**/*.log
+**/*.log.*
+
+# IDE
+**/.fleet
+**/.idea
+!.idea/runConfigurations/*.xml
+*.iml
+*.code-workspace
+
+# system
+.DS_Store
+
+**/.env
+
+# CircleCI
+*.circle-cache-key
+
+# ember-try
+**/.node_modules.ember-try/
+**/bower.json.ember-try
+**/package.json.ember-try
+
+api/.vscode/*
+api/.vscode
+.vscode/*
+!.vscode/sample.launch.json
+!.vscode/sample.settings.json
+!.vscode/extensions.json
+.history
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
+
+# cypress
+high-level-tests/e2e/cypress/screenshots/*
+high-level-tests/e2e/cypress/screenshots
+high-level-tests/e2e/cypress/videos/*
+high-level-tests/e2e/cypress/videos
+
+# Heap files
+*.heapsnapshot
+*.heapprofile
+
+# Artillery.io
+high-level-tests/load-testing/report/*.json
+high-level-tests/load-testing/report/*.html
+
+# Dependency violations script
+api/dependencies-violations.json
+api/dependencies-violations.md
+
+# Answers extracts
+api/scripts/extractions
+
+# Visual regression snapshots
+high-level-tests/e2e/cypress/snapshots/actual/**
+
+# Pipe viewer
+**/pv*.out
+
+# Docker-compose config
+docker/data/
+
+# Claude Code documentation
+CLAUDE.md
+.claude/
+
+# Allow JSON files in translations directories
+!**/translations/*.json
+
+# Allow package.json and package-lock.json
+!package.json
+!package-lock.json
+
+# Allow JSON files in learning-content/modules directory
+!learning-content/modules/*.json
