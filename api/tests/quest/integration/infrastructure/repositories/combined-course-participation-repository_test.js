@@ -164,6 +164,68 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
+  describe('#isParticipationOnCombinedCourse', function () {
+    it('should return true if participation is on combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).true;
+    });
+
+    it('should return false if participation is not on combined course', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId: '123',
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).false;
+    });
+
+    it('should return false if participation is not of COMBINED_COURSE type', async function () {
+      // given
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
+      const { id: participationId } = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.PASSAGE,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.isParticipationOnCombinedCourse({
+        combinedCourseId,
+        participationId,
+      });
+
+      // then
+      expect(result).false;
+    });
+  });
+
   describe('#getByUserId', function () {
     it('should return combinedCourse participation for given user and combinedCourse ids', async function () {
       // given
