@@ -511,6 +511,13 @@ export default class LoginForm extends Component {
     return this.featureToggles.featureToggles.usePixOrgaNewAuthDesign;
   }
 
+  get queryParams() {
+    return {
+      invitationId: this.args.organizationInvitationId,
+      code: this.args.organizationInvitationCode,
+    };
+  }
+
   <template>
     {{#if this.isNewAuthDesignEnabled}}
       <NewLoginForm
