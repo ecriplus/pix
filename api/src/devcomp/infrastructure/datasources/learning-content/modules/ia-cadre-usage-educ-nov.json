@@ -10,7 +10,7 @@
     "level": "novice",
     "objectives": [
       "<p>Justifier le besoin d’un cadre pour l’usage des IA en éducation</p>",
-      "<p>Adapter les usages des IA génératives en fonction du niveau des élèves, conformément     au cadre d’usage</p>"
+      "<p>Adapter les usages des IA génératives en fonction du niveau des élèves, conformément au cadre d’usage</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -70,7 +70,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
-                      "content": "Quel cadre ? Tu pourrais me le montrer je ne sais pas ce que je dois faire, ce que je peux faire ou pas.",
+                      "content": "Quel cadre ? Tu pourrais me le montrer je ne sais pas ce que je dois faire, ce que je peux faire ou pas."
                     }
                   ]
                 }
@@ -117,7 +117,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
-                      "content": "J’ai regardé le document. Je pensais utiliser l’IA pour proposer des exercices différenciés à mes élèves sur l’imparfait. Tu en penses quoi ?",
+                      "content": "J’ai regardé le document. Je pensais utiliser l’IA pour proposer des exercices différenciés à mes élèves sur l’imparfait. Tu en penses quoi ?"
                     }
                   ]
                 }
@@ -215,7 +215,7 @@
                     {
                       "userName": "",
                       "direction": "incoming",
-                      "content": "Je pense aussi utiliser une œuvre littéraire pour la fin de ce cours. C’est possible ?",
+                      "content": "Je pense aussi utiliser une œuvre littéraire pour la fin de ce cours. C’est possible ?"
                     }
                   ]
                 }
@@ -308,7 +308,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
-                      "content": "Puisque c’est un outil que j’utilise désormais, je pense faire une séance d’esprit critique avec les élèves, notamment sur les résultats obtenus.",
+                      "content": "Puisque c’est un outil que j’utilise désormais, je pense faire une séance d’esprit critique avec les élèves, notamment sur les résultats obtenus."
                     }
                   ]
                 }
@@ -411,7 +411,7 @@
                     {
                       "userName": "Sofiane",
                       "direction": "incoming",
-                      "content": "Tu peux me donner ta séance pour que je la fasse avec mes 5ème.",
+                      "content": "Tu peux me donner ta séance pour que je la fasse avec mes 5ème."
                     }
                   ]
                 }
