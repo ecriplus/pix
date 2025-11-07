@@ -30,6 +30,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
           [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
         },
         name: 'motherSco',
+        countryCode: 99100,
+        countryName: 'France',
       });
       const organization = domainBuilder.buildOrganizationForAdmin({
         email: 'sco.generic.account@example.net',
@@ -50,6 +52,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         parentOrganizationName: parentOrganization.name,
         administrationTeamId: administrationTeam.id,
         administrationTeamName: administrationTeam.name,
+        countryCode: 99100,
+        countryName: 'France',
       });
       const meta = { some: 'meta' };
 
@@ -89,6 +93,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'administration-team-id': organization.administrationTeamId,
             'administration-team-name': organization.administrationTeamName,
             features: organization.features,
+            'country-code': organization.countryCode,
+            'country-name': organization.countryName,
           },
           relationships: {
             'organization-memberships': {
