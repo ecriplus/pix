@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.253.0](https://github.com/1024pix/pix/compare/v5.252.0...v5.253.0) (2025-11-07)
+
+### :rocket: Amélioration
+
+- [#13891](https://github.com/1024pix/pix/pull/13891) Bloquer l'accès au portail surveillant pour les centres SCO pendant leur fermeture annuelle (PIX-19390) 
+- [#14111](https://github.com/1024pix/pix/pull/14111) Images carrousel svg vers png 
+- [#14066](https://github.com/1024pix/pix/pull/14066) Mettre à jour la conf de Pix coeur via Admin (PIX-20189). 
+- [#14116](https://github.com/1024pix/pix/pull/14116) Modification des durées de certification Pix+ Pro Santé et Pix+ Droit (PIX-20358) 
+- [#14092](https://github.com/1024pix/pix/pull/14092) Passer par les versions de certifications pour le scoring des certifs V3 (PIX-20275). 
+- [#14110](https://github.com/1024pix/pix/pull/14110) Renseigner les champs `challengeId`, `assessmentId`, `moduleId` et `passageId` dans la table `chats` (PIX-20357) 
+
+### :building_construction: Tech
+
+- [#14059](https://github.com/1024pix/pix/pull/14059) :truck: Déplace des tests dans le contexte `school` 
+- [#14114](https://github.com/1024pix/pix/pull/14114) Autoriser les utm dans l'url à l'atterrissage sur les lien de campagne direct (PIX-20366). 
+- [#14053](https://github.com/1024pix/pix/pull/14053) Creation de referentiel de certification dans les seeds (PIX-20099).
+
 # [5.252.0](https://github.com/1024pix/pix/compare/v5.251.0...v5.252.0) (2025-11-07)
 
 ### :rocket: Amélioration
