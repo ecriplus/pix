@@ -110,8 +110,23 @@ function routes() {
     adminMember.destroy();
   });
 
-  this.get('/admin/flash-assessment-configuration', (schema, _) => {
-    return schema.create('flash-algorithm-configuration');
+  this.get('/admin/certification-versions/:scope/active', (schema) => {
+    return schema.create('certification-version', {
+      scope: 'CORE',
+      challengesConfiguration: {
+        maximumAssessmentLength: 32,
+        challengesBetweenSameCompetence: 2,
+        variationPercent: 0.5,
+        limitToOneQuestionPerTube: true,
+        enablePassageByAllCompetences: false,
+      },
+    });
+  });
+  this.patch('/admin/certification-versions/:id', (schema, request) => {
+    const certificationVersionId = request.params.id;
+    const certificationVersion = schema.certificationVersions.find(certificationVersionId);
+    const params = JSON.parse(request.requestBody);
+    return certificationVersion.update(params.data.attributes);
   });
 
   this.get('/admin/sessions', findPaginatedAndFilteredSessions);

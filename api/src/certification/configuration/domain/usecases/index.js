@@ -9,7 +9,6 @@ import * as attachableTargetProfileRepository from '../../infrastructure/reposit
 import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as centerRepository from '../../infrastructure/repositories/center-repository.js';
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as frameworkChallengesRepository from '../../infrastructure/repositories/framework-challenges-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
@@ -30,7 +29,6 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {sharedFlashAlgorithmConfigurationRepository} SharedFlashAlgorithmConfigurationRepository
  * @typedef {versionsRepository} VersionsRepository
  **/
@@ -42,7 +40,6 @@ const dependencies = {
   challengeRepository,
   complementaryCertificationForTargetProfileAttachmentRepository,
   complementaryCertificationRepository,
-  flashAlgorithmConfigurationRepository,
   frameworkChallengesRepository,
   learningContentRepository,
   skillRepository,
@@ -54,29 +51,29 @@ const dependencies = {
 import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
 import { catchingUpCandidateReconciliation } from './catching-up-candidate-reconciliation.js';
 import { createCertificationVersion } from './create-certification-version.js';
-import { createFlashAssessmentConfiguration } from './create-flash-assessment-configuration.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
-import { getActiveFlashAssessmentConfiguration } from './get-active-flash-assessment-configuration.js';
+import { getActiveVersionByScope } from './get-active-version-by-scope.js';
 import { getComplementaryCertificationForTargetProfileAttachmentRepository } from './get-complementary-certification-for-target-profile-attachment.js';
 import { getCurrentFrameworkVersion } from './get-current-framework-version.js';
 import { getFrameworkHistory } from './get-framework-history.js';
 import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
+import { updateCertificationVersion } from './update-certification-version.js';
 
 const usecasesWithoutInjectedDependencies = {
   calibrateFrameworkVersion,
   catchingUpCandidateReconciliation,
   createCertificationVersion,
-  createFlashAssessmentConfiguration,
   exportScoWhitelist,
   findComplementaryCertifications,
-  getActiveFlashAssessmentConfiguration,
   getCurrentFrameworkVersion,
+  getActiveVersionByScope,
   getComplementaryCertificationForTargetProfileAttachmentRepository,
   getFrameworkHistory,
   importScoWhitelist,
   searchAttachableTargetProfiles,
+  updateCertificationVersion,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

@@ -783,13 +783,7 @@
           },
           "title": "Mesh configuration for global score"
         },
-        "competence-scoring-configuration": {
-          "form": {
-            "label": "Level configuration by skill added (JSON)"
-          },
-          "title": "Configuration of thresholds by skill"
-        },
-        "flash-algorithm-configuration": {
+        "certification-version-challenges-configuration": {
           "form": {
             "challengesBetweenSameCompetence": "Nombre de questions entre 2 questions de la même compétence",
             "enablePassageByAllCompetences": "Forcer le passage par les 16 compétences",
@@ -798,6 +792,12 @@
             "variationPercent": "Capage de la capacité (en % )"
           },
           "title": "Configuration de l’algorithme de déroulé du test"
+        },
+        "competence-scoring-configuration": {
+          "form": {
+            "label": "Level configuration by skill added (JSON)"
+          },
+          "title": "Configuration of thresholds by skill"
         },
         "sco-whitelist": {
           "export": {
