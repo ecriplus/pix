@@ -196,7 +196,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
           .resolves(version);
 
         scoringConfigurationRepository.getLatestByDateAndLocale
-          .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+          .withArgs({ locale: 'fr', date: candidate.reconciledAt })
           .resolves(scoringConfiguration);
 
         flashAlgorithmService.getCapacityAndErrorRate
@@ -348,6 +348,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               })
               .resolves(version);
 
+            scoringConfigurationRepository.getLatestByDateAndLocale
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
+              .resolves(scoringConfiguration);
+
             flashAlgorithmService.getCapacityAndErrorRateHistory
               .withArgs({
                 challenges: challengeCalibrationsWithoutLiveAlerts,
@@ -493,6 +497,11 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                     capacity: expectedCapacity,
                   },
                 ]);
+
+              scoringConfigurationRepository.getLatestByDateAndLocale
+                .withArgs({ locale: 'fr', date: candidate.reconciledAt })
+                .resolves(scoringConfiguration);
+
               const event = new CertificationCompletedJob({
                 assessmentId: certificationAssessment.id,
                 userId: 4567,
@@ -625,6 +634,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                     capacity: expectedCapacity,
                   },
                 ]);
+
+              scoringConfigurationRepository.getLatestByDateAndLocale
+                .withArgs({ locale: 'fr', date: candidate.reconciledAt })
+                .resolves(scoringConfiguration);
 
               // when
               await handleV3CertificationScoring({
@@ -794,6 +807,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                 },
               ]);
 
+            scoringConfigurationRepository.getLatestByDateAndLocale
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
+              .resolves(scoringConfiguration);
+
             const event = new CertificationJuryDone({
               certificationCourseId,
             });
@@ -917,8 +934,9 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
                   capacity: expectedCapacity,
                 },
               ]);
+
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             // when
@@ -1011,7 +1029,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
@@ -1194,7 +1212,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
               ]);
 
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             scoringDegradationService.downgradeCapacity.returns(expectedCapacity);
@@ -1278,7 +1296,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
@@ -1411,7 +1429,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
@@ -1542,7 +1560,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V3', f
             });
 
             scoringConfigurationRepository.getLatestByDateAndLocale
-              .withArgs({ locale: 'fr', date: abortedCertificationCourse.getStartDate() })
+              .withArgs({ locale: 'fr', date: candidate.reconciledAt })
               .resolves(scoringConfiguration);
 
             answerRepository.findByAssessment.withArgs(certificationAssessment.id).resolves(answers);
