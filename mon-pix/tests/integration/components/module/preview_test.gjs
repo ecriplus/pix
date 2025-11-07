@@ -1,8 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixPreview from 'mon-pix/components/module/preview';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -21,6 +23,21 @@ module('Integration | Component | Module | Preview', function (hooks) {
     const linkToModulixEditor = screen.getByRole('link', { name: linkName });
     assert.dom(linkToModulixEditor).exists();
     assert.strictEqual(linkToModulixEditor.href, expectedUrl);
+  });
+
+  test('should enable preview mode service', async function (assert) {
+    // given
+    const enableStub = sinon.stub();
+    class PreviewModeServiceStub extends Service {
+      enable = enableStub;
+    }
+    this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+    // when
+    await render(<template><ModulixPreview /></template>);
+
+    // then
+    assert.true(enableStub.calledOnce);
   });
 
   test('should hide json textarea by default', async function (assert) {
