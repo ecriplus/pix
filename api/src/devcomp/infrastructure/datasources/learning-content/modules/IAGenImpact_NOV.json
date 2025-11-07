@@ -378,7 +378,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape1.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel1.png",
                         "alt": "Une requête est reçue par le supercalculateur."
                       },
                       "license": {
@@ -392,7 +392,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape2.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel2.png",
                         "alt": "Elle est transmise à des supercalculateurs (gros ordinateurs) spécialisés pour l‘IA."
                       },
                       "license": {
@@ -406,7 +406,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape3.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel3.png",
                         "alt": "Les serveurs calculent la réponse. Ils consomment de l‘énergie."
                       },
                       "license": {
@@ -420,7 +420,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape4.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel4.png",
                         "alt": "Les serveurs dégagent de la chaleur."
                       },
                       "license": {
@@ -434,7 +434,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape5.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel5.png",
                         "alt": "Un système de refroidissement est nécessaire. Il consomme de l‘énergie supplémentaire et de l‘eau."
                       },
                       "license": {
@@ -448,7 +448,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape6.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel6.png",
                         "alt": "Les serveurs poursuivent les calculs et préparent la réponse."
                       },
                       "license": {
@@ -462,7 +462,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape7.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel7.png",
                         "alt": "La réponse est prête et sort des serveurs."
                       },
                       "license": {
@@ -476,7 +476,7 @@
                       "description": "",
                       "displayWidth": 300,
                       "image": {
-                        "src": "https://assets.pix.org/modules/les-ia-consomment/carrousel-traitement-requete/carrousel_traitement_requete_etape8.svg",
+                        "src": "https://assets.pix.org/modules/IAGenImpact_NOV/carrousel-serveur/carrousel8.png",
                         "alt": "La réponse sort du supercalculateur et est envoyée sur internet."
                       },
                       "license": {
