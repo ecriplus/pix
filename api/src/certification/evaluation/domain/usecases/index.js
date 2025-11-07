@@ -13,7 +13,6 @@ import * as certificationCenterRepository from '../../../shared/infrastructure/r
 import * as sessionManagementCertificationChallengeRepository from '../../../shared/infrastructure/repositories/certification-challenge-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
-import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
@@ -41,7 +40,6 @@ import pickChallengeService from '../services/pick-challenge-service.js';
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
- * @typedef {flashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {versionRepository} VersionRepository
  * @typedef {services} Services
@@ -59,7 +57,6 @@ const dependencies = {
   sharedCompetenceMarkRepository,
   sharedChallengeRepository,
   userRepository,
-  flashAlgorithmConfigurationRepository,
   flashAlgorithmService,
   certificationBadgesService,
   pickChallengeService,
