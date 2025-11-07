@@ -3,6 +3,7 @@
 # Possible personal data
 *.json
 *.csv
+*.BAK
 
 # compiled output
 **/dist
@@ -103,3 +104,4 @@ GEMINI.md
 
 # Allow JSON files in learning-content/modules directory
 !learning-content/modules/*.json
+.geminiignore

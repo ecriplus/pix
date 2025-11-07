@@ -18,6 +18,7 @@ import {
   PIX_EDU_1ER_DEGRE_COMPLEMENTARY_CERTIFICATION_ID,
 } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';
+import { CommonCertificationVersions } from '../shared/common-certification-versions.js';
 import { CommonOrganizations } from '../shared/common-organisations.js';
 import {
   STARTED_PIX_DROIT_CERTIFICATION_SESSION,
@@ -50,6 +51,7 @@ export class SupWithHabilitationsSeed {
     /**
      * Session Pix+Edu 1er degré with candidate ready to start his certification
      */
+    await this.#initCertificationReferentials();
     const sessionDroitReadyToStart = await this.#addReadyToStartSession({
       certificationCenterMember,
       certificationCenter,
@@ -97,6 +99,20 @@ export class SupWithHabilitationsSeed {
         }),
       ),
     );
+  }
+
+  async #initCertificationReferentials() {
+    await CommonCertificationVersions.initCoreVersions({
+      databaseBuilder: this.databaseBuilder,
+    });
+
+    await CommonCertificationVersions.initPixPlusDroitVersion({
+      databaseBuilder: this.databaseBuilder,
+    });
+
+    await CommonCertificationVersions.initPixPlusEdu1erDegreVersion({
+      databaseBuilder: this.databaseBuilder,
+    });
   }
 
   async #addOrganization() {

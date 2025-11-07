@@ -1,3 +1,6 @@
+/**
+ * @deprecated usages (Pix Admin and scoring v3) are being removed in favor of `certification_versions` table)
+ */
 export const createCertificationConfiguration = ({ databaseBuilder }) => {
   _createExpiredConfiguration({ databaseBuilder });
   _createActiveConfiguration({ databaseBuilder });
