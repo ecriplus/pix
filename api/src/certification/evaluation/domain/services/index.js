@@ -11,12 +11,14 @@ import * as sharedChallengeRepository from '../../../../shared/infrastructure/re
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as challengeRepository from '../../../evaluation/infrastructure/repositories/challenge-repository.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
+import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as competenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as flashAlgorithmConfigurationRepository from '../../../shared/infrastructure/repositories/flash-algorithm-configuration-repository.js';
 import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
+import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
@@ -46,6 +48,8 @@ import * as flashAlgorithmService from './algorithm-methods/flash.js';
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository *
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
+ * @typedef {sharedCertificationCandidateRepository} SharedCertificationCandidateRepository
+ * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  */
 const dependencies = {
@@ -70,6 +74,8 @@ const dependencies = {
   complementaryCertificationCourseResultRepository,
   complementaryCertificationScoringCriteriaRepository,
   sharedChallengeRepository,
+  sharedCertificationCandidateRepository,
+  sharedVersionRepository,
 };
 
 import { findByCertificationCourseIdAndAssessmentId } from './scoring/calibrated-challenge-service.js';

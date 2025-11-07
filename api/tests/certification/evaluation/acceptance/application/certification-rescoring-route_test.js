@@ -66,6 +66,16 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           skillId: 'recSkill0_0',
         });
 
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2009-02-01'),
+          expirationDate: new Date('2010-02-01'),
+          challengesConfiguration: null,
+        });
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2010-02-01'),
+          expirationDate: null,
+        });
+
         databaseBuilder.factory.buildCertificationConfiguration({
           startingDate: new Date('2009-02-01'),
           expirationDate: new Date('2010-02-01'),
@@ -197,6 +207,20 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           challengeId: 'recChallenge0_0_0',
           alpha: 3.3,
           delta: 4.4,
+        });
+
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2010-02-01'),
+          expirationDate: new Date('2024-02-01'),
+          challengesConfiguration: {
+            maximumAssessmentLength: 1,
+          },
+        });
+
+        databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2024-02-01'),
+          expirationDate: null,
+          challengesConfiguration: null,
         });
 
         databaseBuilder.factory.buildCertificationConfiguration({

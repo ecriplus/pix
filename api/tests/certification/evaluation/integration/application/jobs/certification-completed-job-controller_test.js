@@ -388,6 +388,8 @@ describe('Certification | Evaluation | Integration | Application | Certification
 
       databaseBuilder.factory.buildCertificationConfiguration();
 
+      databaseBuilder.factory.buildCertificationVersion();
+
       await databaseBuilder.commit();
     });
 

@@ -6,11 +6,10 @@
  * @typedef {import('../index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
  * @typedef {import('../index.js').CertificationChallengeRepository} CertificationChallengeRepository
  * @typedef {import('../index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {import('../index.js').FlashAlgorithmConfigurationRepository} FlashAlgorithmConfigurationRepository
+ * @typedef {import('../index.js').SharedVersionRepository} SharedVersionRepository
+ * @typedef {import('../index.js').SharedCertificationCandidateRepository} SharedCertificationCandidateRepository
  * @typedef {import('../index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../index.js').FlashAlgorithmService} FlashAlgorithmService
- * @typedef {import('../index.js').ChallengeRepository} ChallengeRepository
- * @typedef {import('../index.js').ScoringDegradationService} ScoringDegradationService
  */
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
@@ -31,25 +30,26 @@ export const handleV3CertificationScoring = withTransaction(
    * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
    * @param {CertificationChallengeRepository} params.certificationChallengeRepository
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {FlashAlgorithmConfigurationRepository} params.flashAlgorithmConfigurationRepository
+   * @param {SharedVersionRepository} params.SharedVersionRepository
+   * @param {SharedCertificationCandidateRepository} params.sharedCertificationCandidateRepository
    * @param {AnswerRepository} params.answerRepository
    * @param {FlashAlgorithmService} params.flashAlgorithmService
-   * @param {ChallengeRepository} params.challengeRepository
    * @param {ScoringDegradationService} params.scoringDegradationService
    */
   async ({
     event,
-    certificationAssessment,
     locale,
+    certificationAssessment,
     answerRepository,
     assessmentResultRepository,
     certificationAssessmentHistoryRepository,
     certificationCourseRepository,
     competenceMarkRepository,
-    flashAlgorithmConfigurationRepository,
+    sharedVersionRepository,
     flashAlgorithmService,
     scoringDegradationService,
     scoringConfigurationRepository,
+    sharedCertificationCandidateRepository,
     dependencies,
   }) => {
     const { certificationCourseId, id: assessmentId } = certificationAssessment;
@@ -66,13 +66,21 @@ export const handleV3CertificationScoring = withTransaction(
 
     const abortReason = certificationCourse.getAbortReason();
 
-    const configuration = await flashAlgorithmConfigurationRepository.getMostRecentBeforeDate(
-      certificationCourse.getStartDate(),
-    );
+    const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
+      sessionId: certificationCourse.getSessionId(),
+      userId: certificationCourse.getUserId(),
+    });
+
+    const scope = await certificationCourseRepository.getCertificationScope({ courseId: certificationCourse.getId() });
+
+    const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
+      scope,
+      reconciliationDate: certificationCandidate.reconciledAt,
+    });
 
     const algorithm = new FlashAssessmentAlgorithm({
       flashAlgorithmImplementation: flashAlgorithmService,
-      configuration,
+      configuration: version.challengesConfiguration,
     });
 
     const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
