@@ -177,7 +177,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       assert.strictEqual(component.certificationDurationInMinutes, 105);
     });
 
-    test('should return 45 minutes for Pix+ Droit certification', function (assert) {
+    test('should return 1 hour for Pix+ Droit certification', function (assert) {
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
@@ -185,10 +185,10 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       };
 
       // then
-      assert.strictEqual(component.certificationDurationInMinutes, 45);
+      assert.strictEqual(component.certificationDurationInMinutes, 60);
     });
 
-    test('should return 45 minutes for Pix+ Pro Santé certification', function (assert) {
+    test('should return 1 hour for Pix+ Pro Santé certification', function (assert) {
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
@@ -196,7 +196,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       };
 
       // then
-      assert.strictEqual(component.certificationDurationInMinutes, 45);
+      assert.strictEqual(component.certificationDurationInMinutes, 60);
     });
 
     test('should return 90 minutes for Pix+ Édu 1er degré certification', function (assert) {
@@ -245,7 +245,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       assert.strictEqual(component.durationLegend, '1 H 45 min');
     });
 
-    test('should return "45 min" for Pix+ Droit certification', function (assert) {
+    test('should return "1 H" for Pix+ Droit certification', function (assert) {
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
@@ -253,7 +253,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       };
 
       // then
-      assert.strictEqual(component.durationLegend, '45 min');
+      assert.strictEqual(component.durationLegend, '1 H');
     });
 
     test('should return "1 H 30 min" for Pix+ Édu certification', function (assert) {
@@ -280,7 +280,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       assert.strictEqual(component.durationText, '1h45');
     });
 
-    test('should return "45min" for Pix+ Droit certification', function (assert) {
+    test('should return "1h" for Pix+ Droit certification', function (assert) {
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
@@ -288,7 +288,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       };
 
       // then
-      assert.strictEqual(component.durationText, '45min');
+      assert.strictEqual(component.durationText, '1h');
     });
 
     test('should return "1h30" for Pix+ Édu certification', function (assert) {
