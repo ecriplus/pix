@@ -3,6 +3,7 @@ import * as learnersApi from '../../../prescription/learner-management/applicati
 import * as schoolRepository from '../../../school/infrastructure/repositories/school-repository.js';
 import * as codeGenerator from '../../../shared/domain/services/code-generator.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
+import * as countryRepository from '../../../shared/infrastructure/repositories/country-repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import * as administrationTeamRepository from '../../infrastructure/repositories/administration-team-repository.js';
@@ -36,6 +37,7 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
+ * @typedef {import ('../../../shared/infrastructure/repositories/country-repository.js')} CountryRepository
  */
 
 const repositories = {
@@ -47,6 +49,7 @@ const repositories = {
   centerRepository,
   certificationCenterRepository,
   certificationCenterForAdminRepository,
+  countryRepository,
   dataProtectionOfficerRepository,
   certificationCenterApiRepository,
   complementaryCertificationHabilitationRepository,
