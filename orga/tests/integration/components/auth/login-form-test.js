@@ -9,7 +9,7 @@ import ENV from '../../../../config/environment';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 const ApiErrorMessages = ENV.APP.API_ERROR_MESSAGES;
 
-module('Integration | Component | Auth::LoginForm', function (hooks) {
+module('Integration | Component | Authentication::LoginForm', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let sessionService;
@@ -36,7 +36,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
     module('When the login form is displayed', function () {
       test('it asks for email and password', async function (assert) {
         // given & when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('#login-email').exists();
@@ -45,7 +45,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('[a11y] it displays a message that all inputs are required', async function (assert) {
         // given & when
-        const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+        const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom(screen.getByText('Tous les champs sont obligatoires.')).exists();
@@ -53,7 +53,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('it displays no error message', async function (assert) {
         // given & when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('#login-form-error-message').doesNotExist();
@@ -65,7 +65,9 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         // given
         sinon.stub(sessionService, 'authenticate');
         sessionService.authenticate.resolves();
-        await renderScreen(hbs`<Auth::LoginForm @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`);
+        await renderScreen(
+          hbs`<Authentication::LoginForm @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+        );
         await fillByLabel(emailInputLabel, ' pix@example.net ');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
 
@@ -82,7 +84,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         test('it displays an invalid email error message when focus-out', async function (assert) {
           // given
           const invalidEmail = 'invalidEmail';
-          const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
 
           // when
           await fillByLabel(emailInputLabel, invalidEmail);
@@ -94,7 +96,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
         test('it displays an empty password error message when focus-out', async function (assert) {
           // given
-          const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
 
           // when
           await fillByLabel(passwordInputLabel, '');
@@ -118,7 +120,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
           sinon.stub(sessionService, 'authenticate');
           sessionService.authenticate.rejects(errorResponse);
 
-          const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
           await fillByLabel(emailInputLabel, 'pix@example.net');
           await fillByLabel(passwordInputLabel, 'Mauvais mot de passe');
 
@@ -156,7 +158,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
           sinon.stub(sessionService, 'authenticate');
           sessionService.authenticate.rejects(errorResponse);
 
-          const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
           await fillByLabel(emailInputLabel, 'pix@example.net');
           await fillByLabel(passwordInputLabel, 'Mauvais mot de passe');
 
@@ -181,7 +183,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
           sinon.stub(sessionService, 'authenticate');
           sessionService.authenticate.rejects(errorResponse);
 
-          const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+          const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
           await fillByLabel(emailInputLabel, 'pix@example.net');
           await fillByLabel(passwordInputLabel, 'pix123');
 
@@ -200,13 +202,13 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sessionService.authenticate.resolves();
       });
       test('it displays context message', async function (assert) {
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         assert.dom('.login-form-legacy-design__information').exists();
       });
 
       test('it calls authentication service with appropriate parameters', async function (assert) {
         // given
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
 
@@ -219,7 +221,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('does not call authenticate session when form is invalid', async function (assert) {
         // given
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         await fillByLabel(emailInputLabel, '');
         await fillByLabel(passwordInputLabel, 'pix123');
 
@@ -248,7 +250,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('it displays no context message', async function (assert) {
         // given & when
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
 
         // then
@@ -258,7 +260,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('it calls authentication service with appropriate parameters', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
@@ -273,7 +275,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('accepts organization invitation when form is valid', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
@@ -288,7 +290,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('does not accept organization invitation when form is invalid', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, '');
         await fillByLabel(passwordInputLabel, 'pix123');
@@ -308,7 +310,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sinon.stub(domainService, 'getExtension').returns('org');
 
         // when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('.login-form-legacy-design__recover-access-link').doesNotExist();
@@ -323,7 +325,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sinon.stub(domainService, 'getExtension').returns('fr');
 
         // when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('.login-form-legacy-design__recover-access-link').exists();
@@ -340,7 +342,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
     module('When the login form is displayed', function () {
       test('it asks for email and password', async function (assert) {
         // given & when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('#login-email').exists();
@@ -349,7 +351,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('[a11y] it displays a message that all inputs are required', async function (assert) {
         // given & when
-        const screen = await renderScreen(hbs`<Auth::LoginForm />`);
+        const screen = await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom(screen.getByText('Tous les champs sont obligatoires.')).exists();
@@ -357,7 +359,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('it displays no error message', async function (assert) {
         // given & when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('#login-form-error-message').doesNotExist();
@@ -370,13 +372,13 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sessionService.authenticate.resolves();
       });
       test('it displays no context message', async function (assert) {
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         assert.dom('.login-form-legacy-design__information').doesNotExist();
       });
 
       test('it calls authentication service with appropriate parameters', async function (assert) {
         // given
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
 
@@ -389,7 +391,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
 
       test('does not call authenticate session when form is invalid', async function (assert) {
         // given
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
         await fillByLabel(emailInputLabel, '');
         await fillByLabel(passwordInputLabel, 'pix123');
 
@@ -418,7 +420,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('it displays no context message', async function (assert) {
         // given & when
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
 
         // then
@@ -428,7 +430,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('it calls authentication service with appropriate parameters', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
@@ -443,7 +445,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('accepts organization invitation when form is valid', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, 'pix@example.net');
         await fillByLabel(passwordInputLabel, 'JeMeLoggue1024');
@@ -458,7 +460,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
       test('does not accept organization invitation when form is invalid', async function (assert) {
         // given
         await renderScreen(
-          hbs`<Auth::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
+          hbs`<Authentication::LoginForm @isWithInvitation='true' @organizationInvitationId='1' @organizationInvitationCode='C0D3' />`,
         );
         await fillByLabel(emailInputLabel, '');
         await fillByLabel(passwordInputLabel, 'pix123');
@@ -478,7 +480,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sinon.stub(domainService, 'getExtension').returns('org');
 
         // when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('.authentication-login-form__recover-access__question').doesNotExist();
@@ -494,7 +496,7 @@ module('Integration | Component | Auth::LoginForm', function (hooks) {
         sinon.stub(domainService, 'getExtension').returns('fr');
 
         // when
-        await renderScreen(hbs`<Auth::LoginForm />`);
+        await renderScreen(hbs`<Authentication::LoginForm />`);
 
         // then
         assert.dom('.authentication-login-form__recover-access__question').exists();
