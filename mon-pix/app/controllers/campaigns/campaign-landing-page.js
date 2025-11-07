@@ -1,9 +1,9 @@
-import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import ENV from 'mon-pix/config/environment';
+import UtmQueryParamsController from 'mon-pix/services/UtmQueryParamsController';
 
-export default class CampaignLandingPageController extends Controller {
+export default class CampaignLandingPageController extends UtmQueryParamsController {
   @service currentDomain;
   @service router;
   @service session;
