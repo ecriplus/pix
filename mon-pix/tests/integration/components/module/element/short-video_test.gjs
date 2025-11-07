@@ -44,6 +44,9 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     };
     const onShortVideoTranscriptionOpenStub = sinon.stub();
 
+    const passageEventService = this.owner.lookup('service:passageEvents');
+    const passageEventRecordStub = sinon.stub(passageEventService, 'record');
+
     //  when
     const screen = await render(
       <template>
@@ -56,5 +59,11 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     assert.ok(await screen.findByRole('dialog'));
     assert.ok(screen.getByText('transcription'));
     assert.ok(onShortVideoTranscriptionOpenStub.calledOnceWith(shortVideoId));
+    sinon.assert.calledWithExactly(passageEventRecordStub, {
+      type: 'SHORT_VIDEO_TRANSCRIPTION_OPENED',
+      data: {
+        elementId: shortVideoElement.id,
+      },
+    });
   });
 });

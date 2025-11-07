@@ -63,6 +63,27 @@ class ImageAlternativeTextOpenedEvent extends PassageEventWithElement {
 }
 
 /**
+ * @class ShortVideoTranscriptionOpenedEvent
+ * See PassageEventWithElement for more info.
+ *
+ * This event is generated when the user opens the transcription of a short video.
+ *
+ * */
+class ShortVideoTranscriptionOpenedEvent extends PassageEventWithElement {
+  constructor({ id, occurredAt, createdAt, passageId, sequenceNumber, elementId }) {
+    super({
+      type: 'SHORT_VIDEO_TRANSCRIPTION_OPENED',
+      id,
+      occurredAt,
+      createdAt,
+      passageId,
+      sequenceNumber,
+      elementId,
+    });
+  }
+}
+
+/**
  * @class VideoTranscriptionOpenedEvent
  * See PassageEventWithElement for more info.
  *
@@ -129,6 +150,7 @@ export {
   ExpandOpenedEvent,
   FileDownloadedEvent,
   ImageAlternativeTextOpenedEvent,
+  ShortVideoTranscriptionOpenedEvent,
   VideoPlayedEvent,
   VideoTranscriptionOpenedEvent,
 };
