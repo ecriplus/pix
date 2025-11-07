@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.252.0](https://github.com/1024pix/pix/compare/v5.251.0...v5.252.0) (2025-11-07)
+
+### :rocket: Amélioration
+
+- [#14035](https://github.com/1024pix/pix/pull/14035) #IAGenFonction_IND - Retours IG  + vers version light 
+- [#14090](https://github.com/1024pix/pix/pull/14090) Ajouter le nouvel élement short video au front (PIX-20278) 
+- [#14112](https://github.com/1024pix/pix/pull/14112) changement format récap Module phishing nov 
+- [#14107](https://github.com/1024pix/pix/pull/14107) Enregistrer les traces d'apprentissage pour l'élément ShortVideo (PIX-20287) 
+- [#14113](https://github.com/1024pix/pix/pull/14113) IAGenImpact_NOV média carrousel 
+- [#14106](https://github.com/1024pix/pix/pull/14106) modif moduyle MDP nov suite relecture Franck 
+- [#14069](https://github.com/1024pix/pix/pull/14069) Modifications suite retour edito 
+- [#14109](https://github.com/1024pix/pix/pull/14109) Modifs module Phishing AVA 
+- [#14100](https://github.com/1024pix/pix/pull/14100) Pouvoir supprimer les filtres sur la page de recherche d'organisations (PIX-20025) 
+- [#14105](https://github.com/1024pix/pix/pull/14105) Premiere version du module produit par canope 
+
+### :bug: Correction
+
+- [#14094](https://github.com/1024pix/pix/pull/14094) Affichage Pix Admin : récupérer les challenges avec la locale et non la langue (PIX-20333). 
+
+### :building_construction: Tech
+
+- [#14070](https://github.com/1024pix/pix/pull/14070) :truck: Déplace une série de tests unitaires du répertoire générique vers le répertoire du contexte `devcomp` 
+- [#14103](https://github.com/1024pix/pix/pull/14103) Ajouter une fonction pour lister, au bon format, les modules (slug et id) pour Metabase (PIX-20356) 
+- [#14099](https://github.com/1024pix/pix/pull/14099) Déplacer la route country dans le contexte shared 
+
+### :arrow_up: Montée de version
+
+- [#14104](https://github.com/1024pix/pix/pull/14104) Update dependency @1024pix/pix-ui to ^55.31.1 (mon-pix)
+
 # [5.251.0](https://github.com/1024pix/pix/compare/v5.250.0...v5.251.0) (2025-11-06)
 
 ### :rocket: Amélioration
