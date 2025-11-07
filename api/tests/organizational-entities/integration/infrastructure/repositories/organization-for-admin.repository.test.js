@@ -703,6 +703,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         identityProviderForCampaigns: 'genericOidcProviderCode',
         parentOrganizationId: parentOrganization.id,
         administrationTeamId: administrationTeam.id,
+        countryCode: 99100,
       });
 
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -768,6 +769,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         },
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: 'Mother Of Dark Side',
+        countryCode: 99100,
       });
       expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
     });
@@ -805,6 +807,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           showSkills: false,
           identityProviderForCampaigns: 'genericOidcProviderCode',
           administrationTeamId: administrationTeam.id,
+          countryCode: 99100,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -864,6 +867,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           parentOrganizationName: null,
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
+          countryCode: 99100,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -890,6 +894,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           showSkills: false,
           identityProviderForCampaigns: 'genericOidcProviderCode',
           administrationTeamId: administrationTeam.id,
+          countryCode: 99100,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -972,6 +977,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           parentOrganizationName: null,
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
+          countryCode: 99100,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -1031,6 +1037,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           archivedBy: archivist.id,
           archivedAt,
           administrationTeamId: administrationTeam.id,
+          countryCode: 99100,
         });
 
         await databaseBuilder.commit();
@@ -1075,6 +1082,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           parentOrganizationName: null,
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
+          countryCode: 99100,
         });
         expect(foundOrganizationForAdmin).to.deepEqualInstance(expectedOrganizationForAdmin);
       });

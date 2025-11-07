@@ -51,6 +51,8 @@ class OrganizationForAdmin {
     parentOrganizationName,
     administrationTeamId,
     administrationTeamName,
+    countryCode,
+    countryName,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -128,6 +130,8 @@ class OrganizationForAdmin {
     this.tagsToAdd = [];
     this.tagsToRemove = [];
     this.code = code;
+    this.countryCode = countryCode;
+    this.countryName = countryName;
 
     this.#validate();
   }
@@ -224,6 +228,10 @@ class OrganizationForAdmin {
     this.tagsToAdd = differenceBy(tags, this.tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     this.tagsToRemove = differenceBy(this.tags, tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     if (organization.administrationTeamId) this.administrationTeamId = organization.administrationTeamId;
+  }
+
+  setCountryName(countryName) {
+    this.countryName = countryName;
   }
 }
 
