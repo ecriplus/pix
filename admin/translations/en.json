@@ -599,6 +599,10 @@
         "archive-organization": "Archive organization",
         "child-organization": "Child organization of",
         "code": "Code",
+        "country": {
+          "label": "Country (INSEE code)",
+          "not-found": "Country not found for code {countryCode}"
+        },
         "created-at": "Created on",
         "created-by": "Created by",
         "credits": "Credits",
