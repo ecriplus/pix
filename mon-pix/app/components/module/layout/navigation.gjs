@@ -23,24 +23,24 @@ export default class ModulixNavigation extends Component {
     const navigationButtonsList = triggeredButtonParent.parentNode.children;
     const triggeredButtonParentIndex = Array.from(navigationButtonsList).indexOf(triggeredButtonParent);
 
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-      event.preventDefault();
+    const trackedEventsKey = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 
-      if (triggeredButtonParentIndex + 1 < this.sectionsLength) {
-        const nextButton = triggeredButtonParent.nextElementSibling.firstElementChild;
-        nextButton.focus();
-      } else {
-        triggeredButton.focus();
-      }
-    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-      event.preventDefault();
+    if (trackedEventsKey.indexOf(event.key) === -1) return;
 
-      if (triggeredButtonParentIndex >= 1) {
-        const previousButton = triggeredButtonParent.previousElementSibling.firstElementChild;
-        previousButton.focus();
-      } else {
-        triggeredButton.focus();
-      }
+    event.preventDefault();
+
+    if (
+      (event.key === 'ArrowDown' || event.key === 'ArrowRight') &&
+      triggeredButtonParentIndex + 1 < this.sectionsLength
+    ) {
+      const nextButton = triggeredButtonParent.nextElementSibling.firstElementChild;
+      nextButton.focus();
+      return;
+    }
+
+    if ((event.key === 'ArrowUp' || event.key === 'ArrowLeft') && triggeredButtonParentIndex >= 1) {
+      const previousButton = triggeredButtonParent.previousElementSibling.firstElementChild;
+      previousButton.focus();
     }
   }
 
