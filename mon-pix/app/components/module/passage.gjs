@@ -9,7 +9,6 @@ import { inc } from '../../helpers/inc';
 import didInsert from '../../modifiers/modifier-did-insert';
 import ModuleGrain from './grain/grain';
 import BetaBanner from './layout/beta-banner';
-import ModuleNavbar from './layout/navbar';
 import ModuleSectionTitle from './section-title';
 
 export default class ModulePassage extends Component {
@@ -72,10 +71,6 @@ export default class ModulePassage extends Component {
 
   get currentGrainIndex() {
     return this.grainsToDisplay.length - 1;
-  }
-
-  get currentPassageStep() {
-    return this.currentGrainIndex + 1;
   }
 
   @action
@@ -255,13 +250,6 @@ export default class ModulePassage extends Component {
 
   <template>
     {{pageTitle @module.title}}
-    {{#unless this.featureToggles.featureToggles.isModulixNavEnabled}}
-      <ModuleNavbar
-        @currentStep={{this.currentPassageStep}}
-        @totalSteps={{this.displayableGrains.length}}
-        @module={{@module}}
-      />
-    {{/unless}}
 
     <main class="module-passage">
       {{#if @module.isBeta}}
