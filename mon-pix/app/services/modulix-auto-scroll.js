@@ -4,27 +4,23 @@ import Service, { service } from '@ember/service';
 export default class ModulixAutoScroll extends Service {
   @service modulixPreviewMode;
 
-  #DISTANCE_BETWEEN_GRAIN_AND_NAVBAR_PX = 70;
+  #DISTANCE_BETWEEN_GRAIN_AND_PAGE_TOP_PX = 70;
 
   @action
   setHTMLElementScrollOffsetCssProperty(htmlElement) {
     htmlElement.style.setProperty('--scroll-offset', `${this.#getScrollOffset()}px`);
   }
 
-  #getScrollOffset({ getNavbar } = { getNavbar: this.#getNavbar }) {
-    const navbarElement = getNavbar();
-    const navbarHeight = navbarElement ? navbarElement.getBoundingClientRect().height : 0;
-
-    return this.#DISTANCE_BETWEEN_GRAIN_AND_NAVBAR_PX + navbarHeight;
+  #getScrollOffset() {
+    return this.#DISTANCE_BETWEEN_GRAIN_AND_PAGE_TOP_PX;
   }
 
   focusAndScroll(
     htmlElement,
-    { scroll, userPrefersReducedMotion, getWindowScrollY, getNavbar } = {
+    { scroll, userPrefersReducedMotion, getWindowScrollY } = {
       scroll: this.#scroll,
       userPrefersReducedMotion: this.#userPrefersReducedMotion,
       getWindowScrollY: this.#getWindowScrollY,
-      getNavbar: this.#getNavbar,
     },
   ) {
     if (this.modulixPreviewMode.isEnabled) {
@@ -35,7 +31,7 @@ export default class ModulixAutoScroll extends Service {
 
     const elementY = htmlElement.getBoundingClientRect().top + getWindowScrollY();
     scroll({
-      top: elementY - this.#getScrollOffset({ getNavbar }),
+      top: elementY - this.#getScrollOffset(),
       behavior: userPrefersReducedMotion() ? 'instant' : 'smooth',
     });
   }
@@ -51,9 +47,5 @@ export default class ModulixAutoScroll extends Service {
 
   #getWindowScrollY() {
     return window.scrollY;
-  }
-
-  #getNavbar() {
-    return document.getElementById('module-navbar');
   }
 }
