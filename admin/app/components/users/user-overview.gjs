@@ -11,7 +11,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import CopyButton from 'ember-cli-clipboard/components/copy-button';
 import isClipboardSupported from 'ember-cli-clipboard/helpers/is-clipboard-supported';
 import { t } from 'ember-intl';
@@ -69,7 +68,8 @@ export default class UserOverview extends Component {
   get shouldDisplayTemporaryBlockedDate() {
     const userIsTemporaryBlockedUntilDate = this.args.user?.userLogin?.get('temporaryBlockedUntil');
     if (userIsTemporaryBlockedUntilDate) {
-      return dayjs().isBefore(dayjs(userIsTemporaryBlockedUntilDate));
+      const today = new Date();
+      return today < new Date(userIsTemporaryBlockedUntilDate);
     }
     return false;
   }

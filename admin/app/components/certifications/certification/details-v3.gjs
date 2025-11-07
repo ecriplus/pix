@@ -15,7 +15,7 @@ import formatDate from 'ember-intl/helpers/format-date';
 import formatTime from 'ember-intl/helpers/format-time';
 import { lt } from 'ember-truth-helpers';
 
-import DayjsFormatDuration from '../../../helpers/dayjs-format-duration';
+import formatDuration from '../../../helpers/format-duration';
 import { assessmentStates } from '../../../models/certification';
 import { AnswerStatus } from '../../../models/certification-challenges-for-administration';
 import { subcategoryToCode, subcategoryToLabel } from '../../../models/certification-issue-report';
@@ -237,7 +237,7 @@ export default class DetailsV3 extends Component {
                 </:tooltip>
               </PixTooltip>
               {{#if (lt @details.duration this.twentyFourHoursInMs)}}
-                <PixTag @color={{this.durationTagColor}}>{{DayjsFormatDuration @details.duration "HH[h]mm"}}</PixTag>
+                <PixTag @color={{this.durationTagColor}}>{{formatDuration @details.duration "HHhmm"}}</PixTag>
               {{else}}
                 <PixTag @color={{this.durationTagColor}}> > 24h</PixTag>
               {{/if}}
