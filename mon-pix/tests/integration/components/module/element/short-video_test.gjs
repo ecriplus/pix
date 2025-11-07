@@ -47,6 +47,9 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     const passageEventService = this.owner.lookup('service:passageEvents');
     const passageEventRecordStub = sinon.stub(passageEventService, 'record');
 
+    const metricsService = this.owner.lookup('service:pix-metrics');
+    const trackEventStub = sinon.stub(metricsService, 'trackEvent');
+
     //  when
     const screen = await render(
       <template>
@@ -64,6 +67,10 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
       data: {
         elementId: shortVideoElement.id,
       },
+    });
+    sinon.assert.calledWithExactly(trackEventStub, 'Clic sur le bouton transcription d’une vidéo courte', {
+      category: 'Modulix',
+      elementId: shortVideoId,
     });
   });
 });

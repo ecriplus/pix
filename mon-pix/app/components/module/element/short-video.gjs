@@ -11,6 +11,7 @@ import ModuleElement from './module-element';
 export default class ModulixShortVideoElement extends ModuleElement {
   @tracked modalIsOpen = false;
   @service passageEvents;
+  @service pixMetrics;
 
   @action
   showModal() {
@@ -22,6 +23,11 @@ export default class ModulixShortVideoElement extends ModuleElement {
       data: {
         elementId: this.args.element.id,
       },
+    });
+
+    this.pixMetrics.trackEvent('Clic sur le bouton transcription d’une vidéo courte', {
+      category: 'Modulix',
+      elementId: this.args.element.id,
     });
   }
 
