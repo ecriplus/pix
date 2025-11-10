@@ -85,6 +85,36 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         // then
         assert.dom(screen.getByRole('button')).hasAttribute('aria-disabled', 'true');
       });
+
+      test('should display a specific tooltip message', async function (assert) {
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const tooltip = screen.getByRole('tooltip', { hidden: true });
+        const tooltipText = t('pages.modulix.navigation.tooltip.disabled', {
+          sectionTitle: t('pages.modulix.section.question-yourself'),
+        });
+        assert.dom(tooltip).hasText(tooltipText);
+      });
     });
 
     module('when isCurrentSection argument is true', function () {
@@ -114,9 +144,38 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         // then
         assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
       });
+
+      test('should display section title as tooltip message', async function (assert) {
+        // given
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const tooltip = screen.getByRole('tooltip', { hidden: true });
+        const tooltipText = t('pages.modulix.section.question-yourself');
+        assert.dom(tooltip).hasText(tooltipText);
+      });
     });
 
-    module('when isPactSection argument is true', function () {
+    module('when isPastSection argument is true', function () {
       test('should enable the navigation button', async function (assert) {
         // given
         const section = {
@@ -142,6 +201,35 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
+      });
+
+      test('should display section title as tooltip message', async function (assert) {
+        // given
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{true}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const tooltip = screen.getByRole('tooltip', { hidden: true });
+        const tooltipText = t('pages.modulix.section.question-yourself');
+        assert.dom(tooltip).hasText(tooltipText);
       });
     });
 

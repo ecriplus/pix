@@ -26,6 +26,19 @@ export default class ModulixNavigationButton extends Component {
     return SECTION_TITLE_ICONS[type];
   }
 
+  @action
+  tooltipText(type) {
+    const sectionTitle = this.intl.t(`pages.modulix.section.${type}`);
+
+    if (this.args.isCurrentSection || this.args.isPastSection) {
+      return sectionTitle;
+    }
+
+    return this.intl.t('pages.modulix.navigation.tooltip.disabled', {
+      sectionTitle,
+    });
+  }
+
   get buttonClass() {
     if (this.args.isCurrentSection) {
       return '--current';
@@ -133,7 +146,7 @@ export default class ModulixNavigationButton extends Component {
           class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}"
           aria-hidden="true"
         >
-          {{this.sectionTitle @section.type}}
+          {{this.tooltipText @section.type}}
         </span>
       </div>
     {{/if}}

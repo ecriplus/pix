@@ -1670,6 +1670,9 @@
             "disabled": "Niet beschikbaar. Vorige stap voltooien.",
             "enabled": "Ga naar stap {sectionTitle}"
           }
+        },
+        "tooltip": {
+          "disabled": "Te volgen: {sectionTitle}"
         }
       },
       "beta-banner": "Deze module is in bètaversie. In de loop van de tijd kunnen er wijzigingen worden aangebracht.",
