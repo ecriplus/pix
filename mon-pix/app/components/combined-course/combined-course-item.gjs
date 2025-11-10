@@ -47,7 +47,6 @@ const Content = <template>
         aria-label={{if
           @isCampaignType
           (t "pages.combined-courses.items.aria-label-completed-campaign" value=@masteryRate)
-          undefined
         }}
       >
         {{#if @isCampaignType}}
@@ -56,7 +55,11 @@ const Content = <template>
             <PixStars
               @count={{@validatedStagesCount}}
               @total={{@totalStagesCount}}
-              @alt={{t "pages.skill-review.stage.starsAcquired" acquired=@validatedStagesCount total=@totalStagesCount}}
+              @alt={{t
+                "pages.combined-courses.items.aria-label-completed-campaign-with-stages"
+                acquired=@validatedStagesCount
+                total=@totalStagesCount
+              }}
               class="combined-course-item__stars"
             />
           {{/if}}

@@ -1222,6 +1222,7 @@
           "description": "¡Completa tu prueba y desbloquea módulos de formación personalizados! Su número dependerá de tus resultados."
         },
         "aria-label-completed-campaign": "Este elemento se completa con una tasa de éxito del {value, number, ::percent}",
+        "aria-label-completed-campaign-with-stages": "Ha obtenido {acquired, plural, =0 {no estrella} =1 {# estrella} other {# estrellas}} de {total}",
         "completed": "¡Completado!",
         "tagText": "¡Ya estás ahí!",
         "duration": "≈ {duration} min.",

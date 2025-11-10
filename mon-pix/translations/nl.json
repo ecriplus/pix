@@ -1230,6 +1230,7 @@
           "description": "Voltooi uw diagnose om een moduleprogramma te ontgrendelen dat is afgestemd op uw resultaat!"
         },
         "aria-label-completed-campaign": "Dit element wordt aangevuld met een slagingspercentage van {value, number, ::percent}",
+        "aria-label-completed-campaign-with-stages": "Je hebt {acquired, plural, =0 {gen ster} =1 {# ster} other {# strerren}} van de {total}",
         "completed": "Voltooid!",
         "tagText": "U bent er nu!",
         "duration": "≈ {duration} min",

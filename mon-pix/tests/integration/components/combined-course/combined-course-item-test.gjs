@@ -189,9 +189,10 @@ module('Integration | Component | combined course item', function (hooks) {
           normalizer: getDefaultNormalizer({ trim: false, collapseWhitespace: false }),
         }),
       );
+
       assert.ok(
         screen.getByText(
-          t('pages.skill-review.stage.starsAcquired', {
+          t('pages.combined-courses.items.aria-label-completed-campaign-with-stages', {
             acquired: combinedCourseItem.validatedStagesCount - 1,
             total: combinedCourseItem.totalStagesCount - 1,
           }),
