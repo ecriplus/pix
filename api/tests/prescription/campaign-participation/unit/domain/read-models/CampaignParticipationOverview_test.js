@@ -371,4 +371,30 @@ describe('Unit | Domain | Read-Models | CampaignParticipationOverview', function
       expect(result).to.be.false;
     });
   });
+
+  describe('#setStagesStatus', function () {
+    it('should set values for instance', function () {
+      const stageCollection = domainBuilder.buildStageCollectionForUserCampaignResults({
+        campaignId: 3,
+        stages: [],
+      });
+      const campaignParticipationOverview = new CampaignParticipationOverview({
+        id: 10,
+        createdAt: new Date('2020-02-15T15:00:34Z'),
+        status: SHARED,
+        sharedAt: new Date('2020-03-15T15:00:34Z'),
+        organizationName: 'Pix',
+        campaignCode: 'campaignCode',
+        campaignTitle: 'campaignTitle',
+        campaignName: 'campaignName',
+        masteryRate: 0.5,
+        stageCollection,
+        totalStagesCount: null,
+        validatedStagesCount: null,
+      });
+      campaignParticipationOverview.stagesStatus = { totalStages: 5, reachedStages: 1 };
+      expect(campaignParticipationOverview.validatedStagesCount).equal(1);
+      expect(campaignParticipationOverview.totalStagesCount).equal(5);
+    });
+  });
 });

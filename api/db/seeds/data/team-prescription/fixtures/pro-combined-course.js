@@ -9,64 +9,32 @@ export const PRO_COMBINED_COURSE = {
   organizationId: PRO_ORGANIZATION_ID,
   quest: {
     code: 'COMBINIX1',
-    name: 'Parcours combine complet',
+    name: 'Parcours apprenant complet',
     eligibilityRequirements: [],
     successRequirements: [
       {
+        data: {
+          status: { data: 'SHARED', comparison: 'equal' },
+          campaignId: { data: CAMPAIGN_PRO_COMBINED_COURSE_ID, comparison: 'equal' },
+        },
+        comparison: 'all',
         requirement_type: 'campaignParticipations',
-        comparison: 'all',
-        data: {
-          campaignId: {
-            data: CAMPAIGN_PRO_COMBINED_COURSE_ID,
-            comparison: 'equal',
-          },
-          status: {
-            data: 'SHARED',
-            comparison: 'equal',
-          },
-        },
       },
       {
-        requirement_type: 'passages',
-        comparison: 'all',
         data: {
-          moduleId: {
-            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
+          moduleId: { data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a', comparison: 'equal' },
+          isTerminated: { data: true, comparison: 'equal' },
         },
+        comparison: 'all',
+        requirement_type: 'passages',
       },
       {
-        requirement_type: 'passages',
-        comparison: 'all',
         data: {
-          moduleId: {
-            data: 'f32a2238-4f65-4698-b486-15d51935d335',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
+          moduleId: { data: 'f32a2238-4f65-4698-b486-15d51935d335', comparison: 'equal' },
+          isTerminated: { data: true, comparison: 'equal' },
         },
-      },
-      {
-        requirement_type: 'passages',
         comparison: 'all',
-        data: {
-          moduleId: {
-            data: 'ab82925d-4775-4bca-b513-4c3009ec5886',
-            comparison: 'equal',
-          },
-          isTerminated: {
-            data: true,
-            comparison: 'equal',
-          },
-        },
+        requirement_type: 'passages',
       },
     ],
   },
@@ -74,28 +42,16 @@ export const PRO_COMBINED_COURSE = {
     description: 'Description parcours combinix 1',
     name: 'Parcours combinix 1',
     stages: [
-      { title: 'Stage 1', threshold: 10 },
-      { title: 'Stage 2', threshold: 20 },
-      { title: 'Stage 3', threshold: 30 },
-      { title: 'Stage 4', threshold: 40 },
+      { title: 'Stage 1', threshold: 20 },
+      { title: 'Stage 2', threshold: 40 },
+      { title: 'Stage 3', threshold: 60 },
+      { title: 'Stage 4', threshold: 80 },
     ],
     tubes: [
-      {
-        id: 'tube2e715GxaaWzNK6',
-        level: 2,
-      },
-      {
-        id: 'recs1vdbHxX8X55G9',
-        level: 2,
-      },
-      {
-        id: 'recBbCIEKgrQi7eb6',
-        level: 2,
-      },
-      {
-        id: 'recpe7Y8Wq2D56q6I',
-        level: 2,
-      },
+      { id: 'recrkpItPsNRg2OjJ', level: 2 },
+      { id: 'recpQLhHdOTQAx6UL', level: 2 },
+      { id: 'recMPzW9BRjRdOisX', level: 2 },
+      { id: 'recVpgUtxW3xx5Pu', level: 2 },
     ],
     campaign: {
       id: CAMPAIGN_PRO_COMBINED_COURSE_ID,
@@ -103,20 +59,32 @@ export const PRO_COMBINED_COURSE = {
       code: 'CODE123',
       customResultPageButtonText: 'Continuer',
       customResultPageButtonUrl: '/parcours/COMBINIX1/chargement',
-      skills: ['reczOCGv8pz976Acl', 'skill1QAVccgLO16Rx8', 'skill2wQfMYrOHlL6HI', 'skillX5Rpk2rucNfnF'],
+      skills: ['rec0J9OXaAj5v7w3r', 'rec1BJ9Z7bZRX2zkY', 'rec1EM9oLKC6itxs0', 'rec1kFnt3fpPE6Ixe'],
     },
     trainings: [
       {
         title: 'Demo combinix 1',
         link: '/modules/demo-combinix-1',
+        type: 'modulix',
+        duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
         locale: 'fr',
-        threshold: 50,
+        editorName: 'Pix',
+        editorLogoUrl: 'https://assets.pix.org/modules/placeholder-details.svg',
+        isDisabled: 'false',
+        internalTitle: 'Demo combinix 1 (internal)',
+        threshold: 30,
       },
       {
         title: 'Demo combinix 2',
         link: '/modules/demo-combinix-2',
-        locale: 'fr',
-        threshold: 90,
+        type: 'modulix',
+        duration: '0 years 0 mons 0 days 0 hours 1 mins 0.0 secs',
+        locale: 'fr-fr',
+        editorName: 'Pix',
+        editorLogoUrl: 'https://assets.pix.org/modules/placeholder-details.svg',
+        isDisabled: 'false',
+        internalTitle: 'Demo combinix 2 (internal)',
+        threshold: 70,
       },
     ],
   },
@@ -124,7 +92,7 @@ export const PRO_COMBINED_COURSE = {
     {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      email: 'combined@pix.fr',
+      email: 'combined@example.net',
       status: OrganizationLearnerParticipationStatuses.STARTED,
       campaignStatus: CampaignParticipationStatuses.SHARED,
     },

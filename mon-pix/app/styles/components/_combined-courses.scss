@@ -175,6 +175,7 @@
       display: flex;
       gap: var(--pix-spacing-2x);
       align-items: center;
+      height: 24px;
       color: var(--pix-primary-500);
       font-weight: var(--pix-font-bold);
 
@@ -219,9 +220,17 @@
     }
   }
 
+
+ &__stars {
+  height: 24px;
+  margin-right: var(--pix-spacing-6x);
+  margin-left: var(--pix-spacing-4x);
+}
+
   .combined-course-item__text {
     display: flex;
     flex-direction: column;
     gap: var(--pix-spacing-1x);
   }
 }
+

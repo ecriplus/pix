@@ -17,6 +17,8 @@ export default class CombinedCourseItem extends Model {
   @attr('string') redirection;
   @attr('boolean') isCompleted;
   @attr('number') masteryRate;
+  @attr('number') totalStagesCount;
+  @attr('number') validatedStagesCount;
   @attr('boolean') isLocked;
   @attr('number') duration;
   @attr('string') image;
@@ -35,6 +37,18 @@ export default class CombinedCourseItem extends Model {
   get typeForStepDisplay() {
     if (this.type === CombinedCourseItemTypes.FORMATION) return CombinedCourseItemTypes.MODULE;
     return this.type;
+  }
+
+  get hasStagesStars() {
+    return this.totalStagesCount > 0;
+  }
+
+  get totalStages() {
+    return this.totalStagesCount - 1;
+  }
+
+  get validatedStages() {
+    return this.validatedStagesCount - 1;
   }
 
   @belongsTo('combined-course', { async: false, inverse: 'items' }) combinedCourse;

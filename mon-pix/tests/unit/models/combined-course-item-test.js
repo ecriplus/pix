@@ -25,6 +25,15 @@ module('Unit | Model | Combined Course Item', function (hooks) {
       });
       assert.strictEqual(combinedCourseItem.iconUrl, CombinedCourseAssets.CAMPAIGN_ICON);
     });
+    test('retrieves 1 from totalStagesCount and validatedStagesCount', function (assert) {
+      const combinedCourseItem = store.createRecord('combined-course-item', {
+        type: CombinedCourseItemTypes.CAMPAIGN,
+        totalStagesCount: 5,
+        validatedStagesCount: 2,
+      });
+      assert.strictEqual(combinedCourseItem.totalStages, 4);
+      assert.strictEqual(combinedCourseItem.validatedStages, 1);
+    });
   });
 
   module('Type is MODULE', function () {

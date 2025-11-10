@@ -136,30 +136,36 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           isLocked: false,
           duration: undefined,
           image: undefined,
+          totalStagesCount: null,
+          validatedStagesCount: null,
         },
         {
           id: moduleId1,
           reference: 'bac-a-sable',
           title: 'Bac à sable',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
-          masteryRate: undefined,
+          masteryRate: null,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
           duration: 5,
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          totalStagesCount: null,
+          validatedStagesCount: null,
         },
         {
           id: moduleId2,
           reference: 'bases-clavier-1',
           title: 'Les bases du clavier sur ordinateur 1/2',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
-          masteryRate: undefined,
+          masteryRate: null,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: true,
           duration: 10,
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          totalStagesCount: null,
+          validatedStagesCount: null,
         },
       ]);
       expect(result.id).to.equal(combinedCourseId);
@@ -173,13 +179,20 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
       const { id: organizationLearnerId, userId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
       const targetProfile = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId });
+      const stage = databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
       const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         userId,
         organizationLearnerId,
         status: CampaignParticipationStatuses.SHARED,
+        masteryRate: 0.5,
       });
+      databaseBuilder.factory.buildStageAcquisition({
+        campaignParticipationId: campaignParticipation.id,
+        stageId: stage.id,
+      });
+
       const training1 = databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bac-a-sable' });
       const training2 = databaseBuilder.factory.buildTraining({ type: 'modulix', link: '/modules/bases-clavier-1' });
       databaseBuilder.factory.buildTraining({
@@ -287,36 +300,42 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           reference: campaign.code,
           title: campaign.title,
           type: COMBINED_COURSE_ITEM_TYPES.CAMPAIGN,
-          masteryRate: null,
+          masteryRate: 0.5,
           redirection: undefined,
           isCompleted: true,
           isLocked: false,
           duration: undefined,
           image: undefined,
+          totalStagesCount: 1,
+          validatedStagesCount: 1,
         },
         {
           id: moduleId1,
           reference: 'bac-a-sable',
           title: 'Bac à sable',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
-          masteryRate: undefined,
+          masteryRate: null,
           redirection: 'encryptedUrl',
           isCompleted: true,
           isLocked: false,
           duration: 5,
           image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          totalStagesCount: null,
+          validatedStagesCount: null,
         },
         {
           id: moduleId3,
           reference: 'bien-ecrire-son-adresse-mail',
           title: 'Bien écrire une adresse mail',
           type: COMBINED_COURSE_ITEM_TYPES.MODULE,
-          masteryRate: undefined,
+          masteryRate: null,
           redirection: 'encryptedUrl',
           isCompleted: false,
           isLocked: false,
           duration: 10,
           image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+          totalStagesCount: null,
+          validatedStagesCount: null,
         },
       ]);
       expect(result).to.be.instanceOf(CombinedCourse);
