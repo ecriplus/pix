@@ -17,6 +17,11 @@ export default class ModulixNavigationButton extends Component {
   @tracked isTooltipVisible = false;
 
   @action
+  mobileSectionTitle(type) {
+    return this.tooltipText(type);
+  }
+
+  @action
   sectionTitle(type) {
     return this.intl.t(`pages.modulix.section.${type}`);
   }

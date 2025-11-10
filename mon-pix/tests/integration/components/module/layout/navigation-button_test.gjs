@@ -427,14 +427,14 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
             @sectionsLength={{sectionsLength}}
             @currentSectionIndex={{currentSectionIndex}}
             @isPastSection={{false}}
-            @isCurrentSection={{false}}
+            @isCurrentSection={{true}}
             @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
           />
         </template>,
       );
 
       // then
-      assert.dom(screen.getByRole('button', { href: '#question-yourself' })).exists();
+      assert.dom(screen.getByRole('button')).hasText(t('pages.modulix.section.question-yourself'));
     });
 
     module('when isCurrentSection and isPastSection arguments are false', function () {
@@ -463,6 +463,36 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('button')).hasAria('disabled', 'true');
+      });
+
+      test('should display a button with a specific text', async function (assert) {
+        // given
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const buttonText = t('pages.modulix.navigation.tooltip.disabled', {
+          sectionTitle: t('pages.modulix.section.question-yourself'),
+        });
+        assert.dom(screen.getByRole('button')).hasText(buttonText);
       });
     });
 
@@ -493,9 +523,37 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         // then
         assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
       });
+
+      test('should display a button with section title as text', async function (assert) {
+        // given
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const buttonText = t('pages.modulix.section.question-yourself');
+        assert.dom(screen.getByRole('button')).hasText(buttonText);
+      });
     });
 
-    module('when isPactSection argument is true', function () {
+    module('when isPastSection argument is true', function () {
       test('should enable the navigation link', async function (assert) {
         // given
         const section = {
@@ -521,6 +579,34 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
         // then
         assert.dom(screen.getByRole('button')).hasNoAttribute('aria-disabled');
+      });
+
+      test('should display a button with section title as text', async function (assert) {
+        // given
+        const section = {
+          type: 'question-yourself',
+        };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{true}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
+
+        // then
+        const buttonText = t('pages.modulix.section.question-yourself');
+        assert.dom(screen.getByRole('button')).hasText(buttonText);
       });
     });
 
