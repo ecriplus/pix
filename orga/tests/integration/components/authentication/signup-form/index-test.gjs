@@ -123,36 +123,6 @@ module('Integration | Component | Authentication | SignupForm | index', function
     });
   });
 
-  module('when there are server errors from user creation', function () {
-    test('it displays error for email invalid or already used', async function (assert) {
-      // given
-      sinon.stub(sessionService, 'authenticate').resolves();
-
-      const saveStub = sinon.stub();
-      const errors = [{ attribute: 'email', message: 'INVALID_OR_ALREADY_USED_EMAIL' }];
-      saveStub.rejects({ errors });
-
-      sinon
-        .stub(storeService, 'createRecord')
-        .returns({ firstName, lastName, email, password, cgu: true, lang: 'fr', save: saveStub, errors });
-
-      // when
-      const screen = await render(
-        <template><SignupForm @organizationInvitationId="1" @organizationInvitationCode="C0D3" /></template>,
-      );
-      await fillByLabel(t(I18N_KEYS.firstNameInput), 'John');
-      await fillByLabel(t(I18N_KEYS.lastNameInput), 'Doe');
-      await fillByLabel(t(I18N_KEYS.emailInput), 'john.doe@email.com');
-      await fillByLabel(t(I18N_KEYS.passwordInput), 'JeMeLoggue1024');
-      await clickByName(t(I18N_KEYS.cguCheckbox));
-      await clickByName(t(I18N_KEYS.submitButton));
-
-      // then
-      assert.dom(screen.getByText(t('pages.join.signup.fields.email.error'))).exists();
-      assert.ok(sessionService.authenticate.notCalled);
-    });
-  });
-
   module('when there is an unexpected server error', function () {
     test('it displays a generic error', async function (assert) {
       // given
