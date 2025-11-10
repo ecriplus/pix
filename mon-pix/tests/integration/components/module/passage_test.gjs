@@ -1560,4 +1560,34 @@ module('Integration | Component | Module | Passage', function (hooks) {
       assert.ok(true);
     });
   });
+
+  test('should inform user at which step it is', async function (assert) {
+    // given
+    const store = this.owner.lookup('service:store');
+    const textElement = { content: 'content', type: 'text' };
+    const section = store.createRecord('section', {
+      id: 'section1',
+      type: 'blank',
+      grains: [
+        {
+          title: 'Grain title',
+          type: 'discovery',
+          id: '123-abc',
+          components: [{ type: 'element', element: textElement }],
+        },
+      ],
+    });
+    const module = store.createRecord('module', {
+      title: 'Didacticiel',
+      slug: 'module-slug',
+      sections: [section],
+    });
+    const passage = store.createRecord('passage');
+
+    //  when
+    const screen = await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+    // then
+    assert.dom(screen.getByText('Étape 1 sur 1')).exists();
+  });
 });

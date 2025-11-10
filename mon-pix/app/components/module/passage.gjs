@@ -2,6 +2,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 
 import { inc } from '../../helpers/inc';
@@ -244,6 +245,14 @@ export default class ModulePassage extends Component {
     });
   }
 
+  get sectionsLength() {
+    return this.args.module.sections.length;
+  }
+
+  get currentStep() {
+    return this.modulixNavigationProgress.currentSectionIndex + 1;
+  }
+
   <template>
     {{pageTitle @module.title}}
     {{#unless this.featureToggles.featureToggles.isModulixNavEnabled}}
@@ -271,6 +280,13 @@ export default class ModulePassage extends Component {
         {{#each this.grainsToDisplay as |grain index|}}
           {{#if (this.shouldDisplaySectionTitle grain)}}
             <ModuleSectionTitle @sectionType={{this.getSectionTypeForGrain grain}} />
+            <h3 class="screen-reader-only">
+              {{t
+                "pages.modulix.flashcards.navigation.longCurrentStep"
+                current=this.currentStep
+                total=this.sectionsLength
+              }}
+            </h3>
           {{/if}}
           <ModuleGrain
             @grain={{grain}}

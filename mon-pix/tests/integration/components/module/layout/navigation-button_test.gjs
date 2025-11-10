@@ -24,16 +24,37 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type,
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isPastSection={{false}}
+            @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
 
       // then
-      assert.dom(screen.getByRole('button', { name: t(`pages.modulix.section.${type}`) })).exists();
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+              indexSection: currentSectionIndex,
+              totalSections: sectionsLength,
+            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+              sectionTitle: 'Se questionner',
+            })}`,
+          }),
+        )
+        .exists();
       assert.dom(screen.getByRole('img', { hidden: true })).exists();
     });
 
@@ -43,11 +64,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -62,11 +93,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{true}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -81,11 +122,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{true}} @isCurrentSection={{false}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{true}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -94,70 +145,103 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       });
     });
 
-    module('when a button is hovered', function () {
-      test('should display tooltip', async function (assert) {
+    module('on tooltip', function () {
+      test('should not vocalise the tooltip for screen readers', async function (assert) {
         // given
         const section = {
           id: 'section1',
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         //  when
-        await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+        await render(
+          <template>
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
+          </template>,
+        );
 
         // then
-        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
-        await triggerEvent('.navigation-tooltip', 'mouseenter');
-        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+        assert.dom('.navigation-tooltip__content').hasAttribute('aria-hidden', 'true');
       });
 
-      module('then when a button is left', function () {
-        test('should not display tooltip anymore', async function (assert) {
+      module('when a button is hovered', function () {
+        test('should display tooltip', async function (assert) {
           // given
           const section = {
             id: 'section1',
             type: 'question-yourself',
-            grains: [
-              { title: 'Grain title', type: 'discovery', id: '123-abc' },
-              { title: 'Grain title', type: 'activity', id: '234-abc' },
-            ],
           };
+          const sectionsLength = [section].length;
+          const currentSectionIndex = 1;
+          const handleArrowKeyNavigation = sinon.stub();
 
           //  when
-          await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+          await render(
+            <template>
+              <NavigationButton
+                @section={{section}}
+                @sectionsLength={{sectionsLength}}
+                @currentSectionIndex={{currentSectionIndex}}
+                @isCurrentSection={{true}}
+                @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+              />
+            </template>,
+          );
 
           // then
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
           await triggerEvent('.navigation-tooltip', 'mouseenter');
           assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-          await triggerEvent('.navigation-tooltip', 'mouseleave');
-          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
+
+        module('then when a button is left', function () {
+          test('should not display tooltip anymore', async function (assert) {
+            // given
+            const section = {
+              id: 'section1',
+              type: 'question-yourself',
+              grains: [
+                { title: 'Grain title', type: 'discovery', id: '123-abc' },
+                { title: 'Grain title', type: 'activity', id: '234-abc' },
+              ],
+            };
+            const sectionsLength = [section].length;
+            const currentSectionIndex = 1;
+            const handleArrowKeyNavigation = sinon.stub();
+
+            //  when
+            await render(
+              <template>
+                <NavigationButton
+                  @section={{section}}
+                  @sectionsLength={{sectionsLength}}
+                  @currentSectionIndex={{currentSectionIndex}}
+                  @isCurrentSection={{true}}
+                  @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+                />
+              </template>,
+            );
+
+            // then
+            await triggerEvent('.navigation-tooltip', 'mouseenter');
+            assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+            await triggerEvent('.navigation-tooltip', 'mouseleave');
+            assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+          });
         });
       });
-    });
 
-    module('when a button is focused', function () {
-      test('should display tooltip', async function (assert) {
-        // given
-        const section = {
-          id: 'section1',
-          type: 'question-yourself',
-          grains: [
-            { title: 'Grain title', type: 'discovery', id: '123-abc' },
-            { title: 'Grain title', type: 'activity', id: '234-abc' },
-          ],
-        };
-
-        //  when
-        await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
-
-        // then
-        assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
-        await triggerEvent('.navigation-tooltip', 'focusin');
-        assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-      });
-
-      module('then when a button is not focused anymore', function () {
-        test('should not display tooltip anymore', async function (assert) {
+      module('when a button is focused', function () {
+        test('should display tooltip', async function (assert) {
           // given
           const section = {
             id: 'section1',
@@ -167,15 +251,63 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
               { title: 'Grain title', type: 'activity', id: '234-abc' },
             ],
           };
+          const sectionsLength = [section].length;
+          const currentSectionIndex = 1;
+          const handleArrowKeyNavigation = sinon.stub();
 
           //  when
-          await render(<template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>);
+          await render(
+            <template>
+              <NavigationButton
+                @section={{section}}
+                @sectionsLength={{sectionsLength}}
+                @currentSectionIndex={{currentSectionIndex}}
+                @isCurrentSection={{true}}
+                @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+              />
+            </template>,
+          );
 
           // then
+          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
           await triggerEvent('.navigation-tooltip', 'focusin');
           assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
-          await triggerEvent('.navigation-tooltip', 'focusout');
-          assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+        });
+
+        module('then when a button is not focused anymore', function () {
+          test('should not display tooltip anymore', async function (assert) {
+            // given
+            const section = {
+              id: 'section1',
+              type: 'question-yourself',
+              grains: [
+                { title: 'Grain title', type: 'discovery', id: '123-abc' },
+                { title: 'Grain title', type: 'activity', id: '234-abc' },
+              ],
+            };
+            const sectionsLength = [section].length;
+            const currentSectionIndex = 1;
+            const handleArrowKeyNavigation = sinon.stub();
+
+            //  when
+            await render(
+              <template>
+                <NavigationButton
+                  @section={{section}}
+                  @sectionsLength={{sectionsLength}}
+                  @currentSectionIndex={{currentSectionIndex}}
+                  @isCurrentSection={{true}}
+                  @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+                />
+              </template>,
+            );
+
+            // then
+            await triggerEvent('.navigation-tooltip', 'focusin');
+            assert.dom('.navigation-tooltip').hasClass('navigation-tooltip--visible');
+            await triggerEvent('.navigation-tooltip', 'focusout');
+            assert.dom('.navigation-tooltip').doesNotHaveClass('navigation-tooltip--visible');
+          });
         });
       });
     });
@@ -195,11 +327,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type,
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isPastSection={{false}}
+            @isCurrentSection={{false}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
 
@@ -213,11 +355,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -232,11 +384,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{true}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{false}}
+              @isCurrentSection={{true}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -251,11 +413,21 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         const section = {
           type: 'question-yourself',
         };
+        const sectionsLength = [section].length;
+        const currentSectionIndex = 1;
+        const handleArrowKeyNavigation = sinon.stub();
 
         // when
         const screen = await render(
           <template>
-            <NavigationButton @section={{section}} @isPastSection={{true}} @isCurrentSection={{false}} />
+            <NavigationButton
+              @section={{section}}
+              @sectionsLength={{sectionsLength}}
+              @currentSectionIndex={{currentSectionIndex}}
+              @isPastSection={{true}}
+              @isCurrentSection={{false}}
+              @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+            />
           </template>,
         );
 
@@ -269,18 +441,37 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @isPastSection={{true}} @isCurrentSection={{true}} />
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isPastSection={{true}}
+            @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
 
       // then
       assert
-        .dom(screen.getByRole('button', { name: t('pages.modulix.section.question-yourself') }))
-        .hasAria('current', 'true');
+        .dom(
+          screen.getByRole('button', {
+            name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+              indexSection: currentSectionIndex,
+              totalSections: sectionsLength,
+            })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+              sectionTitle: 'Se questionner',
+            })}`,
+          }),
+        )
+        .hasAria('current', 'step');
     });
   });
 
@@ -290,19 +481,38 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const focusAndScroll = sinon.stub();
       class ModulixAutoScrollService extends Service {
         focusAndScroll = focusAndScroll;
       }
       this.owner.register('service:modulix-auto-scroll', ModulixAutoScrollService);
+      const handleArrowKeyNavigation = sinon.stub();
 
       // when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{true}} />
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isPastSection={{false}}
+            @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
-      await click(screen.getByRole('button', { name: 'Se questionner' }));
+      await click(
+        screen.getByRole('button', {
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+            sectionTitle: 'Se questionner',
+          })}`,
+        }),
+      );
 
       // then
       sinon.assert.called(focusAndScroll);
@@ -315,7 +525,10 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
         id: 'section1',
         type: 'question-yourself',
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const trackEvent = sinon.stub();
+      const handleArrowKeyNavigation = sinon.stub();
 
       class MetricsStubService extends Service {
         trackEvent = trackEvent;
@@ -329,9 +542,26 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
 
       //  when
       const screen = await render(
-        <template><NavigationButton @section={{section}} @isCurrentSection={{true}} /></template>,
+        <template>
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isCurrentSection={{true}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
+        </template>,
       );
-      await click(screen.getByRole('button', { name: 'Se questionner' }));
+      await click(
+        screen.getByRole('button', {
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+            sectionTitle: 'Se questionner',
+          })}`,
+        }),
+      );
 
       // then
       sinon.assert.calledWithExactly(trackEvent, 'Clic sur le bouton de la navigation', {
@@ -348,7 +578,10 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       const section = {
         type: 'question-yourself',
       };
+      const sectionsLength = [section].length;
+      const currentSectionIndex = 1;
       const focusAndScroll = sinon.stub();
+      const handleArrowKeyNavigation = sinon.stub();
       class ModulixAutoScrollService extends Service {
         focusAndScroll = focusAndScroll;
       }
@@ -357,10 +590,24 @@ module('Integration | Component | Module | NavigationButton', function (hooks) {
       // when
       const screen = await render(
         <template>
-          <NavigationButton @section={{section}} @isPastSection={{false}} @isCurrentSection={{false}} />
+          <NavigationButton
+            @section={{section}}
+            @sectionsLength={{sectionsLength}}
+            @currentSectionIndex={{currentSectionIndex}}
+            @isPastSection={{false}}
+            @isCurrentSection={{false}}
+            @handleArrowKeyNavigation={{handleArrowKeyNavigation}}
+          />
         </template>,
       );
-      await click(screen.getByRole('button', { name: 'Se questionner' }));
+      await click(
+        screen.getByRole('button', {
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: currentSectionIndex,
+            totalSections: sectionsLength,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
+        }),
+      );
 
       // then
       sinon.assert.notCalled(focusAndScroll);

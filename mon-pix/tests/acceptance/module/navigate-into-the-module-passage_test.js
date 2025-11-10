@@ -1,8 +1,10 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
-import { currentURL, waitUntil } from '@ember/test-helpers';
+import { clickByName, visit, within } from '@1024pix/ember-testing-library';
+import { click, currentURL, waitUntil } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (hooks) {
   setupApplicationTest(hooks);
@@ -139,6 +141,60 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
       assert.strictEqual(currentURL(), '/modules/bien-ecrire-son-adresse-mail/recap');
     });
   });
+
+  module('when FT isModulixNavEnabled is enabled', function () {
+    module('when the user moves on to the next section', function () {
+      test('should change the state of navigation section buttons', async function (assert) {
+        // given
+        const featureToggles = this.owner.lookup('service:featureToggles');
+        sinon.stub(featureToggles, 'featureToggles').value({ isModulixNavEnabled: true });
+        const sections = _createSections(server);
+
+        server.create('module', {
+          id: 'bien-ecrire-son-adresse-mail',
+          slug: 'bien-ecrire-son-adresse-mail',
+          title: 'Bien écrire son adresse mail',
+          sections,
+        });
+
+        // when
+        const screen = await visit('/modules/bien-ecrire-son-adresse-mail/passage');
+        const navigation = screen.getByRole('navigation', { name: t('navigation.nav-bar.aria-label') });
+        const firstSectionButton = within(navigation).getByRole('button', {
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: 1,
+            totalSections: 2,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.enabled', {
+            sectionTitle: 'Explorer pour comprendre',
+          })}`,
+        });
+        const secondSectionButton = within(navigation).getByRole('button', {
+          name: `${t('pages.modulix.navigation.buttons.aria-label.steps', {
+            indexSection: 2,
+            totalSections: 2,
+          })} ${t('pages.modulix.navigation.buttons.aria-label.disabled')}`,
+        });
+
+        // then
+        assert.dom(firstSectionButton).hasAttribute('aria-current', 'step');
+        assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
+
+        assert.dom(secondSectionButton).hasAttribute('aria-current', 'false');
+        assert.dom(secondSectionButton).hasAttribute('aria-disabled', 'true');
+
+        //when
+        await click(screen.getByRole('button', { name: 'Continuer' }));
+        await click(screen.getByRole('button', { name: 'Continuer' }));
+
+        // then
+        assert.dom(firstSectionButton).hasAttribute('aria-current', 'false');
+        assert.dom(firstSectionButton).hasNoAttribute('aria-disabled');
+
+        assert.dom(secondSectionButton).hasAttribute('aria-current', 'step');
+        assert.dom(secondSectionButton).hasNoAttribute('aria-disabled');
+      });
+    });
+  });
 });
 
 const text1 = {
@@ -158,10 +214,11 @@ const text3 = {
   type: 'text',
   content: 'content-3',
 };
+
 function _createSections(server) {
   const section1 = server.create('section', {
     id: 'sectionId-1',
-    type: 'blank',
+    type: 'explore-to-understand',
     grains: [
       {
         id: 'grainId-1',
@@ -187,7 +244,7 @@ function _createSections(server) {
   });
   const section2 = server.create('section', {
     id: 'sectionId-2',
-    type: 'blank',
+    type: 'go-further',
     grains: [
       {
         id: 'grainId-3',

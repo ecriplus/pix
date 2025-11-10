@@ -1658,6 +1658,15 @@
       "title": "Conectarse a Pix"
     },
     "modulix": {
+      "navigation" : {
+        "buttons": {
+          "aria-label": {
+            "steps": "Paso {indexSection} de {totalSections}.",
+            "disabled": "No disponible. Finalizar el paso anterior.",
+            "enabled": "Acceder al paso {sectionTitle}"
+          }
+        }
+      },
       "beta-banner": "Este módulo está en versión beta. Se podrán realizar modificaciones a lo largo del tiempo.",
       "buttons": {
         "activity": {

@@ -41,7 +41,7 @@ export default class ModulixNavigationButton extends Component {
   }
 
   get isCurrentSection() {
-    return this.args.isCurrentSection;
+    return this.args.isCurrentSection ? 'step' : false;
   }
 
   get isPlainIcon() {
@@ -85,6 +85,20 @@ export default class ModulixNavigationButton extends Component {
     this.hideTooltip(event);
   }
 
+  get ariaLabelButton() {
+    const steps = this.intl.t('pages.modulix.navigation.buttons.aria-label.steps', {
+      indexSection: this.args.currentSectionIndex,
+      totalSections: this.args.sectionsLength,
+    });
+
+    if (this.isDisabled) {
+      return `${steps} ${this.intl.t('pages.modulix.navigation.buttons.aria-label.disabled')}`;
+    }
+    return `${steps} ${this.intl.t('pages.modulix.navigation.buttons.aria-label.enabled', {
+      sectionTitle: this.sectionTitle(this.args.section.type),
+    })}`;
+  }
+
   <template>
     {{#if this.media.isMobile}}
       <PixButton
@@ -92,6 +106,7 @@ export default class ModulixNavigationButton extends Component {
         @triggerAction={{this.scrollToSection}}
         @iconBefore={{this.sectionTitleIcon @section.type}}
         @isDisabled={{this.isDisabled}}
+        aria-label={{this.ariaLabelButton}}
         aria-current="{{this.isCurrentSection}}"
       >{{this.sectionTitle @section.type}}</PixButton>
     {{else}}
@@ -105,14 +120,19 @@ export default class ModulixNavigationButton extends Component {
       >
         <PixIconButton
           class="module-navigation-button module-navigation-button{{this.buttonClass}}"
-          @ariaLabel={{this.sectionTitle @section.type}}
+          @ariaLabel={{this.ariaLabelButton}}
           @triggerAction={{this.scrollToSection}}
           @iconName={{this.sectionTitleIcon @section.type}}
           @isDisabled={{this.isDisabled}}
           aria-current="{{this.isCurrentSection}}"
           @plainIcon={{this.isPlainIcon}}
+          {{on "keydown" @handleArrowKeyNavigation}}
         />
-        <span role="tooltip" class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}">
+        <span
+          role="tooltip"
+          class="navigation-tooltip__content navigation-tooltip__content{{this.buttonClass}}"
+          aria-hidden="true"
+        >
           {{this.sectionTitle @section.type}}
         </span>
       </div>

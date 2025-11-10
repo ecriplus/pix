@@ -1686,6 +1686,15 @@
           "title": "Transcription"
         }
       },
+      "navigation": {
+        "buttons": {
+          "aria-label": {
+            "disabled": "Non disponible. Terminer l'étape précédente",
+            "enabled": "Accéder à l'étape {sectionTitle}",
+            "steps": "Étape {indexSection} sur {totalSections}."
+          }
+        }
+      },
       "preview": {
         "showJson": "Afficher le JSON",
         "stepper": "Preview : stepper {direction}",

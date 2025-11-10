@@ -17,6 +17,41 @@ export default class ModulixNavigation extends Component {
     return this.modulixNavigationProgress.currentSectionIndex > index;
   }
 
+  @action handleArrowKeyNavigation(event) {
+    const triggeredButton = document.activeElement;
+    const triggeredButtonParent = triggeredButton.parentElement;
+    const navigationButtonsList = triggeredButtonParent.parentNode.children;
+    const triggeredButtonParentIndex = Array.from(navigationButtonsList).indexOf(triggeredButtonParent);
+
+    const trackedEventsKey = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
+
+    if (trackedEventsKey.indexOf(event.key) === -1) return;
+
+    event.preventDefault();
+
+    if (
+      (event.key === 'ArrowDown' || event.key === 'ArrowRight') &&
+      triggeredButtonParentIndex + 1 < this.sectionsLength
+    ) {
+      const nextButton = triggeredButtonParent.nextElementSibling.firstElementChild;
+      nextButton.focus();
+      return;
+    }
+
+    if ((event.key === 'ArrowUp' || event.key === 'ArrowLeft') && triggeredButtonParentIndex >= 1) {
+      const previousButton = triggeredButtonParent.previousElementSibling.firstElementChild;
+      previousButton.focus();
+    }
+  }
+
+  get sectionsLength() {
+    return this.args.sections.length;
+  }
+
+  @action currentSectionIndex(section) {
+    return this.args.sections.indexOf(section) + 1;
+  }
+
   <template>
     <PixNavigation
       class="app-navigation module-navigation"
@@ -33,6 +68,9 @@ export default class ModulixNavigation extends Component {
             @section={{section}}
             @isCurrentSection={{this.isCurrentSection index}}
             @isPastSection={{this.isPastSection index}}
+            @sectionsLength={{this.sectionsLength}}
+            @currentSectionIndex={{this.currentSectionIndex section}}
+            @handleArrowKeyNavigation={{this.handleArrowKeyNavigation}}
           />
         {{/each}}
       </:navElements>
