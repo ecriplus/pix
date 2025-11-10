@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.253.1](https://github.com/1024pix/pix/compare/v5.253.0...v5.253.1) (2025-11-10)
+
+### :building_construction: Tech
+
+- [#14101](https://github.com/1024pix/pix/pull/14101) Mise à jour des dépendances de Pix Admin
+
 # [5.253.0](https://github.com/1024pix/pix/compare/v5.252.0...v5.253.0) (2025-11-07)
 
 ### :rocket: Amélioration
