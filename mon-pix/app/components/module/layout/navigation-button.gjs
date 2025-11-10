@@ -126,7 +126,7 @@ export default class ModulixNavigationButton extends Component {
         @isDisabled={{this.isDisabled}}
         aria-label={{this.ariaLabelButton}}
         aria-current="{{this.isCurrentSection}}"
-      >{{this.sectionTitle @section.type}}</PixButton>
+      ><span class="module-navigation-mobile-button__text">{{this.mobileSectionTitle @section.type}}</span></PixButton>
     {{else}}
       <div
         class="navigation-tooltip {{if this.isTooltipVisible 'navigation-tooltip--visible' ''}}"

@@ -81,6 +81,11 @@
     }
   }
 
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .pix-button__icon {
    width: 1.5rem;
    height: 1.5rem;
