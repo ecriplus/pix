@@ -9,6 +9,10 @@ export default class AccessControlService extends Service {
     return !!(this.currentUser.adminMember.isSuperAdmin || this.currentUser.adminMember.isSupport);
   }
 
+  get hasAccessToDeleteOrganizationLearnerScope() {
+    return this.currentUser.adminMember.isSupport || false;
+  }
+
   get hasAccessToTargetProfilesActionsScope() {
     return !!(
       this.currentUser.adminMember.isSuperAdmin ||

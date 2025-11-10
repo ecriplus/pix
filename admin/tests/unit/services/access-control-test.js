@@ -65,6 +65,26 @@ module('Unit | Service | access-control', function (hooks) {
     });
   });
 
+  module('#hasAccessToDeleteOrganizationLearnerScope', function () {
+    [
+      { role: 'isSuperAdmin', hasAccess: false },
+      { role: 'isSupport', hasAccess: true },
+      { role: 'isMetier', hasAccess: false },
+      { role: 'isCertif', hasAccess: false },
+    ].forEach(function ({ role, hasAccess }) {
+      test(`should be ${hasAccess} if current admin member is ${role}`, async function (assert) {
+        // given
+        const currentUser = this.owner.lookup('service:currentUser');
+        currentUser.adminMember = { [role]: true };
+
+        const service = this.owner.lookup('service:access-control');
+
+        // when / then
+        assert.deepEqual(service.hasAccessToDeleteOrganizationLearnerScope, hasAccess);
+      });
+    });
+  });
+
   module('#hasAccessToTargetProfilesActionsScope', function () {
     [
       { role: 'isSuperAdmin', hasAccess: true },
