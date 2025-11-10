@@ -320,7 +320,9 @@ module(
         );
 
         // then
-        assert.dom(screen.queryByText(t('components.organization-learner-information.table.actions.dissociate')).doesNotExist();
+        assert
+          .dom(screen.queryByText(t('components.organization-learner-information.table.actions.dissociate')))
+          .doesNotExist();
       });
     });
 
