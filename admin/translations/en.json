@@ -103,6 +103,31 @@
     }
   },
   "components": {
+    "organisation-learner-information": {
+      "table": {
+        "actions": {
+          "delete": "Delete",
+          "dissociate": "Dissociate"
+        },
+        "active": {
+          "false": "Registration deactivated",
+          "true": "Registration activated"
+        },
+        "caption": "List of information about a prescribed person and the different organisations to which they belong. In the case of an organisation with import, it is possible to dissociate the user via the action column.",
+        "columns": {
+          "actions": "Actions",
+          "active": "Active",
+          "birthdate": "Date of birth",
+          "createdAt": "Created on",
+          "division-group": "Class/Group",
+          "firstName": "First name",
+          "lastName": "Surname",
+          "organisation": "Organisation",
+          "updatedAt": "Updated on"
+        }
+      },
+      "title": "Prescribed information"
+    },
     "administration": {
       "add-organization-features-in-batch": {
         "description": "Note: Trying to enable already existing features on organizations would produce an error.",
@@ -294,7 +319,7 @@
           "label": "Quel profil cible voulez-vous associer à ce parcours autonome ?",
           "placeholder": "Choisir un profil cible",
           "search-label": "Recherchez un profil cible",
-          "sub-label": "Le profil cible doit être en accès simplifié et relié à l’organisation \"Organisation pour les parcours autonomes\""
+          "sub-label": "Le profil cible doit être en accès simplifié et relié à l'organisation \"Organisation pour les parcours autonomes\""
         },
         "technical-informations": {
           "label": "Nom interne",
@@ -730,9 +755,23 @@
           "caption": "Liste des utilisateurs. Contient le prénom, le nom, l'adresse e-mail et l'identifiant."
         }
       },
-      "organization-learner-information": {
+      "organisation-learner-information": {
+        "title": "Prescribed information",
         "table": {
-          "caption": "Liste des informations d'un prescrit. Contient le prénom, le nom, la date de naissance, sa classe ou groupe, le nom de l'organisation auquel prescrit est rattaché, la date de création, la dernière date de mise à jour de ses informations, son état (actif ou inactif). Une action permet le dissocier le prescrit de l'organisation auquel il est rattaché.."
+          "caption": "List of information about a prescribed person and the different organisations to which they belong. In the case of an organisation with import, it is possible to dissociate the user via the action column.",
+          "columns": {
+            "firstName": "First name",
+            "lastName": "Surname",
+            "birthdate": "Date of birth",
+            "organisation": "Organisation",
+            "division-group": "Class/Group",
+            "createdAt": "Created on",
+            "updatedAt": "Updated on",
+            "active": "Active",
+            "actions": "Actions"
+          },
+          "actions": { "dissociate": "Dissociate" },
+          "active": { "true": "Registration activated", "false": "Registration deactivated" }
         }
       },
       "organizations": {
@@ -795,7 +834,7 @@
             "maximumAssessmentLength": "Nombre de questions",
             "variationPercent": "Capage de la capacité (en % )"
           },
-          "title": "Configuration de l’algorithme de déroulé du test"
+          "title": "Configuration de l'algorithme de déroulé du test"
         },
         "competence-scoring-configuration": {
           "form": {
@@ -954,7 +993,7 @@
             },
             "completion-date-tooltip": {
               "ended-by-supervisor": "Date et heure à laquelle le test de certification a été terminé par le surveillant.",
-              "ended-due-to-finalization": "Date et heure d’affichage de la dernière question proposée au candidat."
+              "ended-due-to-finalization": "Date et heure d'affichage de la dernière question proposée au candidat."
             },
             "general-informations": {
               "labels": {

@@ -14,19 +14,19 @@ export default class OrganizationLearnerInformation extends Component {
 
   <template>
     <header class="page-section__header">
-      <h2 class="page-section__title">Informations prescrit</h2>
+      <h2 class="page-section__title">{{t "components.organization-learner-information.title"}}</h2>
     </header>
 
     {{#if @user.organizationLearners}}
       <PixTable
         @variant="admin"
-        @caption={{t "components.users.organization-learner-information.table.caption"}}
+        @caption={{t "components.organization-learner-information.table.caption"}}
         @data={{@user.organizationLearners}}
       >
         <:columns as |organizationLearner context|>
           <PixTableColumn @context={{context}} class="break-word">
             <:header>
-              Prénom
+              {{t "components.organization-learner-information.table.columns.firstName"}}
             </:header>
             <:cell>
               {{organizationLearner.firstName}}
@@ -34,7 +34,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}} class="break-word">
             <:header>
-              Nom
+              {{t "components.organization-learner-information.table.columns.lastName"}}
             </:header>
             <:cell>
               {{organizationLearner.lastName}}
@@ -42,7 +42,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
             <:header>
-              DDN
+              {{t "components.organization-learner-information.table.columns.birthdate"}}
             </:header>
             <:cell>
               {{#if organizationLearner.birthdate}}
@@ -52,7 +52,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
             <:header>
-              Classe / Groupe
+              {{t "components.organization-learner-information.table.columns.division-group"}}
             </:header>
             <:cell>
               {{if organizationLearner.division organizationLearner.division}}
@@ -61,7 +61,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}} class="break-word">
             <:header>
-              Organisation
+              {{t "components.organization-learner-information.table.columns.organization"}}
             </:header>
             <:cell>
               <LinkTo @route="authenticated.organizations.get" @model={{organizationLearner.organizationId}}>
@@ -71,7 +71,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
             <:header>
-              Création
+              {{t "components.organization-learner-information.table.columns.createdAt"}}
             </:header>
             <:cell>
               {{formatDate organizationLearner.createdAt}}
@@ -79,7 +79,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
             <:header>
-              Dernière MAJ
+              {{t "components.organization-learner-information.table.columns.updatedAt"}}
             </:header>
             <:cell>
               {{formatDate organizationLearner.updatedAt}}
@@ -87,7 +87,7 @@ export default class OrganizationLearnerInformation extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}} class="table-admin-organization-learners-status">
             <:header>
-              Actif
+              {{t "components.organization-learner-information.table.columns.active"}}
             </:header>
             <:cell>
               {{#if organizationLearner.isDisabled}}
@@ -95,7 +95,7 @@ export default class OrganizationLearnerInformation extends Component {
                   @name="cancel"
                   @plainIcon={{true}}
                   @ariaHidden={{false}}
-                  aria-label="Inscription désactivée"
+                  aria-label={{t "components.organization-learner-information.table.active.false"}}
                   class="organization-learners-table__status--isDisabled"
                 />
               {{else}}
@@ -103,7 +103,7 @@ export default class OrganizationLearnerInformation extends Component {
                   @name="checkCircle"
                   @plainIcon={{true}}
                   @ariaHidden={{false}}
-                  aria-label="Inscription activée"
+                  aria-label={{t "components.organization-learner-information.table.active.true"}}
                   class="organization-learners-table__status--isEnabled"
                 />
               {{/if}}
@@ -112,7 +112,7 @@ export default class OrganizationLearnerInformation extends Component {
           {{#if this.accessControl.hasAccessToUsersActionsScope}}
             <PixTableColumn @context={{context}}>
               <:header>
-                Actions
+                {{t "components.organization-learner-information.table.columns.actions"}}
               </:header>
               <:cell>
                 {{#if organizationLearner.canBeDissociated}}
@@ -121,7 +121,7 @@ export default class OrganizationLearnerInformation extends Component {
                     @size="small"
                     @variant="error"
                   >
-                    Dissocier
+                    {{t "components.organization-learner-information.table.actions.dissociate"}}
                   </PixButton>
                 {{/if}}
               </:cell>
