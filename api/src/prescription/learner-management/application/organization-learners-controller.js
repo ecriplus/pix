@@ -1,3 +1,4 @@
+import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
@@ -7,14 +8,12 @@ const deleteOrganizationLearners = async function (request, h) {
   const listLearners = request.payload.listLearners;
   const organizationId = request.params.organizationId;
 
-  await DomainTransaction.execute(async () => {
-    await usecases.deleteOrganizationLearners({
-      organizationLearnerIds: listLearners,
-      userId: authenticatedUserId,
-      organizationId,
-      userRole: 'ORGA_ADMIN',
-      client: 'PIX_ORGA',
-    });
+  await usecases.deleteOrganizationLearners({
+    organizationLearnerIds: listLearners,
+    userId: authenticatedUserId,
+    organizationId,
+    userRole: 'ORGA_ADMIN',
+    client: 'PIX_ORGA',
   });
   return h.response().code(200);
 };
