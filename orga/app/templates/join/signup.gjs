@@ -11,7 +11,7 @@ import SignupForm from '../../components/authentication/signup-form/index';
 
   <AuthenticationLayout class="signin-page-layout">
     <:header>
-      <PixButtonLink @variant="secondary" @route="join" @query={{@controller.queryParams}}>
+      <PixButtonLink @variant="secondary" @route="join" @query={{@controller.routeQueryParams}}>
         {{t "pages.login-or-register.login-form.button"}}
       </PixButtonLink>
     </:header>

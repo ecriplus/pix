@@ -3,7 +3,6 @@ import { service } from '@ember/service';
 
 export default class JoinController extends Controller {
   @service featureToggles;
-  @service router;
 
   queryParams = ['code', 'invitationId'];
   code = null;
