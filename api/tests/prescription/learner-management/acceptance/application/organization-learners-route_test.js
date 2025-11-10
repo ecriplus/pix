@@ -1,3 +1,4 @@
+import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { IMPORT_KEY_FIELD } from '../../../../../src/prescription/learner-management/domain/constants.js';
 import { getLastByOrganizationId } from '../../../../../src/prescription/learner-management/infrastructure/repositories/organization-import-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
@@ -40,7 +41,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
     });
   });
 
-  describe('DELETE /organizations/{id}/organization-learners', function () {
+  describe('DELETE /organizations/{organizationId}/organization-learners', function () {
     let options;
 
     it('should return a 200 status after having successfully deleted organization learners', async function () {
@@ -59,6 +60,30 @@ describe('Acceptance | Prescription | learner management | Application | organiz
         payload: {
           listLearners: [firstOrganizationLearnerId, secondOrganizationLearnerId],
         },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+  });
+
+  describe('DELETE /admin/organizations/{organizationId}/organization-learners/{organizationLearnerId}', function () {
+    let options;
+
+    it('should return a 200 status after having successfully deleted organization learners', async function () {
+      // given
+      const { id: organizationLearnerId, organizationId } = databaseBuilder.factory.buildOrganizationLearner();
+      const userId = databaseBuilder.factory.buildUser.withRole({ role: PIX_ADMIN.ROLES.SUPPORT }).id;
+
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'DELETE',
+        url: `/api/admin/organizations/${organizationId}/organization-learners/${organizationLearnerId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when

@@ -4,6 +4,31 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | learner management | Application | Router | organization-learner-router', function () {
+  describe('DELETE /api/admin/organizations/{organizationId}/organization-learners/{organizationLearnerId}', function () {
+    it('should call right handler before calling controller', async function () {
+      // given
+      sinon
+        .stub(securityPreHandlers, 'checkOrganizationLearnerBelongsToOrganization')
+        .callsFake((request, h) => h.response().code(200));
+      sinon
+        .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+        .callsFake((request, h) => h.response().code(200));
+      sinon
+        .stub(organizationLearnersController, 'deleteOrganizationLearnerFromAdmin')
+        .callsFake((request, h) => h.response('ok').code(200));
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('DELETE', '/api/admin/organizations/1/organization-learners/2');
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkOrganizationLearnerBelongsToOrganization);
+      sinon.assert.calledOnce(securityPreHandlers.checkAdminMemberHasRoleSupport);
+      sinon.assert.calledOnce(organizationLearnersController.deleteOrganizationLearnerFromAdmin);
+    });
+  });
+
   describe('DELETE /api/admin/organization-learners/{id}/association', function () {
     it('should return a HTTP status code 204 when user role is "SUPER_ADMIN"', async function () {
       // given
