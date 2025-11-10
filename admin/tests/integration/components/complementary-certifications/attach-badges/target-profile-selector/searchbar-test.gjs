@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { fillIn } from '@ember/test-helpers';
-import { setupMirage } from 'ember-cli-mirage/test-support';
 import Searchbar from 'pix-admin/components/complementary-certifications/attach-badges/target-profile-selector/searchbar';
+import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 

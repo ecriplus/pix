@@ -1,5 +1,4 @@
-import { applyEmberDataSerializers, discoverEmberDataModels } from 'ember-cli-mirage';
-import { createServer, Response } from 'miragejs';
+import { Response } from 'miragejs';
 import { assessmentResultStatus } from 'pix-admin/models/certification';
 
 import { createAdminMember } from './handlers/admin-members';
@@ -57,20 +56,8 @@ import {
 } from './handlers/trainings';
 import { findPaginatedFilteredUsers } from './handlers/users';
 
-export default function makeServer(config) {
-  const finalConfig = {
-    ...config,
-    models: { ...discoverEmberDataModels(config.store), ...config.models },
-    serializers: applyEmberDataSerializers(config.serializers),
-    routes,
-    logging: true,
-    urlPrefix: 'http://localhost:3000',
-  };
-
-  return createServer(finalConfig);
-}
-
-function routes() {
+/* eslint-disable ember/no-get */
+export default function routes() {
   this.namespace = 'api';
 
   this.get('feature-toggles', (schema) => {
@@ -745,6 +732,7 @@ function _configureOrganizationsRoutes(context) {
     return new Response(204);
   });
 }
+/* eslint-enable ember/no-get */
 
 function _parseUserIdFromJWT(request) {
   const userToken = request.requestHeaders.Authorization.replace('Bearer ', '');

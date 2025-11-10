@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { setupMirage } from 'ember-cli-mirage/test-support';
 import ContentHeader from 'pix-admin/components/complementary-certifications/attach-badges/badges/content-header';
+import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../../helpers/setup-intl-rendering';

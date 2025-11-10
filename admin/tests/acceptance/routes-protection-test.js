@@ -1,7 +1,7 @@
 import { currentURL, visit } from '@ember/test-helpers';
-import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
+import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
 module('Acceptance | routes protection', function (hooks) {
