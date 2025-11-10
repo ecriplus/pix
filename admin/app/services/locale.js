@@ -30,7 +30,6 @@ export default class LocaleService extends Service {
   @service cookies;
   @service currentDomain;
   @service intl;
-  @service dayjs;
 
   @tracked __currentLocale = DEFAULT_LOCALE;
 
@@ -102,7 +101,12 @@ export default class LocaleService extends Service {
 
     const language = this.#getLanguageFromLocale(nearestLocale);
     this.intl.setLocale(language);
-    this.dayjs.setLocale(language);
+
+    // dayjsService may not be available for the different front apps
+    const dayjsService = getOwner(this).lookup('service:dayjs');
+    if (dayjsService) {
+      dayjsService.setLocale(language);
+    }
 
     // metricsService may not be available for the different front apps
     const metricsService = getOwner(this).lookup('service:metrics');
