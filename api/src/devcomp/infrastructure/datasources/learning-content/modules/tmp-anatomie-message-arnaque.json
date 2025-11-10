@@ -4,7 +4,7 @@
   "title": "Anatomie d’un message d’arnaque",
   "isBeta": true,
   "details": {
-    "image": "",
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les messages et mails d’arnaques sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez les indices et techniques qui permettent de vérifier vos messages. </p><p>Découvrez aussi les réflexes pour vous protéger et protéger les autres. 🕵️<br><br></p>",
     "duration": 10,
     "level": "independent",
@@ -335,14 +335,6 @@
           "type": "discovery",
           "title": "Activité découverte 2",
           "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "9cd084f2-b913-4691-8226-5c514d42dfc1",
-                "type": "text",
-                "content": ""
-              }
-            },
             {
               "type": "element",
               "element": {
