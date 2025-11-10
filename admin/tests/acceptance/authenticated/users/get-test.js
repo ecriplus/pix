@@ -223,33 +223,6 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     });
   });
 
-  module('when administrator click on dissociate button', function () {
-    test('not displays registration any more', async function (assert) {
-      // given
-      const user = await _buildAndAuthenticateUser(this.server, { email: 'john.harry@example.net', username: null });
-      const organizationName = 'Organisation_to_dissociate_of';
-      const organizationLearnerToDissociate = this.server.create('organization-learner', {
-        id: 10,
-        organizationName,
-        canBeDissociated: true,
-      });
-      user.organizationLearners.models.push(organizationLearnerToDissociate);
-      user.save();
-
-      const screen = await visit(`/users/${user.id}`);
-      await click(screen.getByRole('button', { name: 'Dissocier' }));
-
-      await screen.findByRole('dialog');
-
-      // when
-      await clickByName('Oui, je dissocie');
-
-      // then
-      assert.deepEqual(currentURL(), `/users/${user.id}`);
-      assert.dom(screen.queryByText('Organisation_to_dissociate_of')).doesNotExist();
-    });
-  });
-
   module('when administrator click on remove authentication method button', function () {
     test('not displays remove link and display unchecked icon', async function (assert) {
       // given

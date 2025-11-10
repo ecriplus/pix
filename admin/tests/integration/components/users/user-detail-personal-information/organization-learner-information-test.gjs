@@ -272,8 +272,7 @@ module(
         );
 
         // then
-        sinon.assert.called(toggleDisplayDeletionLearnerModal);
-        assert.ok(true);
+        assert.ok(toggleDisplayDeletionLearnerModal.calledOnce);
       });
 
       test('should be able to dissociate user if it is enabled', async function (assert) {
