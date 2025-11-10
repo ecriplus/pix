@@ -3,9 +3,11 @@
     "actions": {
       "add": "Ajouter",
       "archive": "Archiver",
+      "are-you-sure": "En cochant cette case vous affirmer avoir les droits d'effectuer cette action.",
       "cancel": "Annuler",
       "close": "Fermer",
       "confirm": "Confirmer",
+      "confirm-deletion": "Oui, je supprime",
       "confirm-title": "Merci de confirmer",
       "deactivate": "Désactiver",
       "download-template": "Télécharger le template",
@@ -103,30 +105,6 @@
     }
   },
   "components": {
-    "organization-learner-information": {
-      "title": "Informations prescrit",
-      "table": {
-        "caption": "Liste des informations d'un prescrit sur les différentes organisations auxquels il appartient. Dans le cas d'une organisation avec import, il est possible de dissocier l'utilisateur via la colonne action.",
-        "columns": {
-          "firstName": "Prénom",
-          "lastName": "Nom",
-          "birthdate": "Date de naissance",
-          "organization": "Organisation",
-          "division-group": "Classe/Groupe",
-          "createdAt": "Créé le",
-          "updatedAt": "Mise à jour le",
-          "active": "Actif",
-          "actions": "Actions"
-        },
-        "actions": {
-          "dissociate": "Dissocier"
-        },
-        "active": {
-          "true": "Inscription activée",
-          "false": "Inscription désactivée"
-        }
-      }
-    },
     "administration": {
       "add-organization-features-in-batch": {
         "description": "Note: Chercher à activer à nouveau des fonctionnalités déjà existantes sur une organisation renverrait une erreur.",
@@ -561,6 +539,36 @@
       "table": {
         "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
+    },
+    "organization-learner-information": {
+      "deletion-modal": {
+        "warning-message": "Vous êtes sur le point de supprimer {firstName} {lastName} de l'organisation {organizationName}. Cette action est irréversible.",
+        "success-message": "l'utilisateur a bien été supprimé de l'organisation.",
+        "title": "Confirmer la suppression du prescrit"
+      },
+      "table": {
+        "actions": {
+          "delete": "Supprimer",
+          "dissociate": "Dissocier"
+        },
+        "active": {
+          "false": "Inscription désactivée",
+          "true": "Inscription activée"
+        },
+        "caption": "Liste des informations d'un prescrit sur les différentes organisations auxquels il appartient. Dans le cas d'une organisation avec import, il est possible de dissocier l'utilisateur via la colonne action.",
+        "columns": {
+          "actions": "Actions",
+          "active": "Actif",
+          "birthdate": "Date de naissance",
+          "createdAt": "Créé le",
+          "division-group": "Classe/Groupe",
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "organization": "Organisation",
+          "updatedAt": "Mise à jour le"
+        }
+      },
+      "title": "Informations prescrit"
     },
     "organizations": {
       "all-tags": {

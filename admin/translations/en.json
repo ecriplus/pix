@@ -3,9 +3,11 @@
     "actions": {
       "add": "Add",
       "archive": "Archive",
+      "are-you-sure": "By ticking this box, you confirm that you have the right to perform this action.",
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
+      "confirm-deletion": "Yes, delete",
       "confirm-title": "Please confirm",
       "deactivate": "Deactivate",
       "download-template": "Download template",
@@ -103,31 +105,6 @@
     }
   },
   "components": {
-    "organisation-learner-information": {
-      "table": {
-        "actions": {
-          "delete": "Delete",
-          "dissociate": "Dissociate"
-        },
-        "active": {
-          "false": "Registration deactivated",
-          "true": "Registration activated"
-        },
-        "caption": "List of information about a prescribed person and the different organisations to which they belong. In the case of an organisation with import, it is possible to dissociate the user via the action column.",
-        "columns": {
-          "actions": "Actions",
-          "active": "Active",
-          "birthdate": "Date of birth",
-          "createdAt": "Created on",
-          "division-group": "Class/Group",
-          "firstName": "First name",
-          "lastName": "Surname",
-          "organisation": "Organisation",
-          "updatedAt": "Updated on"
-        }
-      },
-      "title": "Prescribed information"
-    },
     "administration": {
       "add-organization-features-in-batch": {
         "description": "Note: Trying to enable already existing features on organizations would produce an error.",
@@ -561,6 +538,36 @@
       "table": {
         "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
+    },
+    "organization-learner-information": {
+      "deletion-modal": {
+        "success-message": "The user has been successfully removed from the organisation.",
+        "warning-message": "You are about to remove {firstName} {lastName} from the organisation {organisationName}. This action cannot be undone.",
+        "title": "Confirm learner deletion"
+      },
+      "table": {
+        "actions": {
+          "delete": "Delete",
+          "dissociate": "Dissociate"
+        },
+        "active": {
+          "false": "Registration deactivated",
+          "true": "Registration activated"
+        },
+        "caption": "List of information about a prescribed person and the different organisations to which they belong. In the case of an organisation with import, it is possible to dissociate the user via the action column.",
+        "columns": {
+          "actions": "Actions",
+          "active": "Active",
+          "birthdate": "Date of birth",
+          "createdAt": "Created on",
+          "division-group": "Class/Group",
+          "firstName": "First name",
+          "lastName": "Surname",
+          "organization": "Organisation",
+          "updatedAt": "Updated on"
+        }
+      },
+      "title": "Prescribed information"
     },
     "organizations": {
       "all-tags": {
