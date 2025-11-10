@@ -2,10 +2,9 @@ import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library'
 import { click, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
+import { createLearningContent } from 'pix-admin/tests/mirage/helpers/create-learning-content';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
-
-import { createLearningContent } from '../../../../../mirage/helpers/create-learning-content';
 
 module('Acceptance | Target profile creation', function (hooks) {
   setupApplicationTest(hooks);
