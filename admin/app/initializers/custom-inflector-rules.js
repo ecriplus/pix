@@ -8,6 +8,5 @@ export function initialize() {
 
 export default {
   name: 'custom-inflector-rules',
-  before: process.env.NODE_ENV === 'production' ? undefined : 'ember-cli-mirage',
   initialize,
 };

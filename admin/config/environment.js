@@ -111,9 +111,6 @@ module.exports = function (environment) {
         minValue: 0,
       }),
     },
-    'ember-cli-mirage': {
-      enabled: false,
-    },
   };
 
   if (environment === 'development') {
@@ -146,11 +143,6 @@ module.exports = function (environment) {
 
     ENV.pagination.debounce = 0;
     ENV.searchTargetProfiles.debounce = 0;
-
-    ENV['ember-cli-mirage'] = {
-      enabled: true,
-      usingProxy: false,
-    };
   }
 
   return ENV;
