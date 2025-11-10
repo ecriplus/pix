@@ -1,5 +1,4 @@
-import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { CLIENT, PIX_ADMIN, PIX_ORGA } from '../../../authorization/domain/constants.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 
@@ -12,9 +11,25 @@ const deleteOrganizationLearners = async function (request, h) {
     organizationLearnerIds: listLearners,
     userId: authenticatedUserId,
     organizationId,
-    userRole: 'ORGA_ADMIN',
-    client: 'PIX_ORGA',
+    userRole: PIX_ORGA.ROLES.ADMIN,
+    client: CLIENT.PIX_ORGA,
   });
+  return h.response().code(200);
+};
+
+const deleteOrganizationLearnerFromAdmin = async function (request, h) {
+  const authenticatedUserId = request.auth.credentials.userId;
+  const organizationLearnerId = request.params.organizationLearnerId;
+  const organizationId = request.params.organizationId;
+
+  await usecases.deleteOrganizationLearners({
+    organizationLearnerIds: [organizationLearnerId],
+    userId: authenticatedUserId,
+    organizationId,
+    userRole: PIX_ADMIN.ROLES.SUPPORT,
+    client: CLIENT.PIX_ADMIN,
+  });
+
   return h.response().code(200);
 };
 
@@ -78,6 +93,7 @@ const updateOrganizationLearnerName = async function (request, h) {
 const organizationLearnersController = {
   reconcileCommonOrganizationLearner,
   deleteOrganizationLearners,
+  deleteOrganizationLearnerFromAdmin,
   importOrganizationLearnerFromFeature,
   dissociate,
   reconcileScoOrganizationLearnerAutomatically,
