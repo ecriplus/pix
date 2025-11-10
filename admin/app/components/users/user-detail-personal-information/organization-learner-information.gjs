@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
@@ -123,6 +124,14 @@ export default class OrganizationLearnerInformation extends Component {
                   >
                     {{t "components.organization-learner-information.table.actions.dissociate"}}
                   </PixButton>
+                {{/if}}
+
+                {{#if this.accessControl.hasAccessToDeleteOrganizationLearnerScope}}
+                  <PixIconButton
+                    @triggerAction={{fn @toggleDisplayDeletionLearnerModal organizationLearner}}
+                    @ariaLabel={{t "components.organization-learner-information.table.actions.delete"}}
+                    @iconName="delete"
+                  />
                 {{/if}}
               </:cell>
             </PixTableColumn>

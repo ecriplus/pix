@@ -105,6 +105,31 @@
     }
   },
   "components": {
+    "organization-learner-information": {
+      "title": "Informations prescrit",
+      "table": {
+        "caption": "Liste des informations d'un prescrit sur les différentes organisations auxquels il appartient. Dans le cas d'une organisation avec import, il est possible de dissocier l'utilisateur via la colonne action.",
+        "columns": {
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "birthdate": "Date de naissance",
+          "organization": "Organisation",
+          "division-group": "Classe/Groupe",
+          "createdAt": "Créé le",
+          "updatedAt": "Mise à jour le",
+          "active": "Actif",
+          "actions": "Actions"
+        },
+        "actions": {
+          "dissociate": "Dissocier",
+          "delete": "Supprimer"
+        },
+        "active": {
+          "true": "Inscription activée",
+          "false": "Inscription désactivée"
+        }
+      }
+    },
     "administration": {
       "add-organization-features-in-batch": {
         "description": "Note: Chercher à activer à nouveau des fonctionnalités déjà existantes sur une organisation renverrait une erreur.",

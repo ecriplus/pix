@@ -1,20 +1,49 @@
 import { clickByName, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import OrganizationLearnerInformation from 'pix-admin/components/users/user-detail-personal-information/organization-learner-information';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest, { t } from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module(
   'Integration | Component | users | user-detail-personal-information | organization-learner-information',
   function (hooks) {
     setupIntlRenderingTest(hooks);
 
-    module('When the admin member has access to users actions scope', function () {
+    module('When the admin has access to users actions scope', function () {
       class AccessControlStub extends Service {
         hasAccessToUsersActionsScope = true;
+        hasAccessToDeleteOrganizationLearnerScope = true;
       }
+
+      module('When the admin does not have access to deletion learner scope', function () {
+        test('it should not be able to see deletion action button', async function (assert) {
+          // Given
+          class AccessControlStub extends Service {
+            hasAccessToUsersActionsScope = true;
+            hasAccessToDeleteOrganizationLearnerScope = false;
+          }
+          const user = {
+            organizationLearners: [{ firstName: 'some name', canBeDissociated: true }],
+          };
+          this.owner.register('service:access-control', AccessControlStub);
+
+          // When
+          const screen = await render(<template><OrganizationLearnerInformation @user={{user}} /></template>);
+
+          // Then
+          assert
+            .dom(
+              screen.queryByRole('button', {
+                name: t('components.organization-learner-information.table.actions.delete'),
+              }),
+            )
+            .doesNotExist();
+        });
+      });
 
       module('When user has no organizationLearners', function () {
         test('should display no result in organization learners table', async function (assert) {
@@ -56,7 +85,7 @@ module(
 
         // then
         const table = screen.getByRole('table', {
-          name: t('components.users.organization-learner-information.table.caption'),
+          name: t('components.organization-learner-information.table.caption'),
         });
         const rows = within(table).getAllByRole('row');
         assert.strictEqual(rows.length, 3);
@@ -195,7 +224,7 @@ module(
         );
 
         // then
-        assert.dom(screen.getByLabelText('Inscription activée')).exists();
+        assert.dom(screen.getByLabelText(t('components.organization-learner-information.table.active.true'))).exists();
       });
 
       test('should display organization learner as inactive', async function (assert) {
@@ -217,7 +246,34 @@ module(
         );
 
         // then
-        assert.dom(screen.getByLabelText('Inscription désactivée')).exists();
+        assert.dom(screen.getByLabelText(t('components.organization-learner-information.table.active.false'))).exists();
+      });
+
+      test('should be able to delete organization learner', async function (assert) {
+        // given
+        const toggleDisplayDeletionLearnerModal = sinon.stub();
+
+        const user = {
+          organizationLearners: [{ firstName: 'some name', canBeDissociated: true }],
+        };
+        this.owner.register('service:access-control', AccessControlStub);
+
+        // when
+        const screen = await render(
+          <template>
+            <OrganizationLearnerInformation
+              @user={{user}}
+              @toggleDisplayDeletionLearnerModal={{toggleDisplayDeletionLearnerModal}}
+            />
+          </template>,
+        );
+        await click(
+          screen.getByRole('button', { name: t('components.organization-learner-information.table.actions.delete') }),
+        );
+
+        // then
+        sinon.assert.called(toggleDisplayDeletionLearnerModal);
+        assert.ok(true);
       });
 
       test('should be able to dissociate user if it is enabled', async function (assert) {
@@ -238,7 +294,7 @@ module(
             />
           </template>,
         );
-        await clickByName('Dissocier');
+        await clickByName(t('components.organization-learner-information.table.actions.dissociate'));
 
         // then
         sinon.assert.called(toggleDisplayDissociateModal);
@@ -265,7 +321,7 @@ module(
         );
 
         // then
-        assert.dom(screen.queryByText('Dissocier')).doesNotExist();
+        assert.dom(screen.queryByText(t('components.organization-learner-information.table.actions.dissociate')).doesNotExist();
       });
     });
 
@@ -284,7 +340,13 @@ module(
         const screen = await render(<template><OrganizationLearnerInformation @user={{user}} /></template>);
 
         // Then
-        assert.dom(screen.queryByRole('button', { name: 'Dissocier' })).doesNotExist();
+        assert
+          .dom(
+            screen.queryByRole('button', {
+              name: t('components.organization-learner-information.table.actions.dissociate'),
+            }),
+          )
+          .doesNotExist();
       });
     });
   },

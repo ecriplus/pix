@@ -777,7 +777,7 @@
             "active": "Active",
             "actions": "Actions"
           },
-          "actions": { "dissociate": "Dissociate" },
+          "actions": { "dissociate": "Dissociate", "delete": "Delete" },
           "active": { "true": "Registration activated", "false": "Registration deactivated" }
         }
       },
