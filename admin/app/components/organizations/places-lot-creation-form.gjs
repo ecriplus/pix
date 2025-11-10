@@ -6,7 +6,6 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
 
@@ -31,7 +30,7 @@ export default class PlacesLotCreationForm extends Component {
   constructor() {
     super(...arguments);
     this.categories = categories;
-    this.activationDate = dayjs(new Date()).format('YYYY-MM-DD');
+    this.activationDate = new Date().toISOString().split('T')[0];
   }
 
   @action

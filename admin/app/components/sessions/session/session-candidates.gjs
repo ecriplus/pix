@@ -3,8 +3,8 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 export default class SessionCandidates extends Component {
   @service intl;
@@ -58,7 +58,9 @@ export default class SessionCandidates extends Component {
               {{t "pages.sessions.candidates.candidate.birth-date"}}
             </:header>
             <:cell>
-              {{dayjsFormat candidate.birthdate "DD/MM/YYYY"}}
+              {{#if candidate.birthdate}}
+                {{formatDate candidate.birthdate}}
+              {{/if}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}} class="table__column">

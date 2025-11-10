@@ -5,8 +5,8 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 import MembershipItemActions from './membership-item-actions';
 import MembershipItemRole from './membership-item-role';
@@ -95,7 +95,7 @@ export default class UsersCertificationCentersMembershipItemComponent extends Co
       </:header>
       <:cell>
         {{#if @certificationCenterMembership.lastAccessedAt}}
-          {{dayjsFormat @certificationCenterMembership.lastAccessedAt "DD/MM/YYYY"}}
+          {{formatDate @certificationCenterMembership.lastAccessedAt}}
         {{else}}
           {{t "components.users.certification-centers.memberships.no-last-connection-date-info"}}
         {{/if}}

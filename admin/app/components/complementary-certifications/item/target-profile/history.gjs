@@ -1,8 +1,8 @@
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 <template>
   <section class="page-section">
@@ -34,7 +34,7 @@ import { t } from 'ember-intl';
             {{t "components.complementary-certifications.target-profiles.history-list.headers.attached-at"}}
           </:header>
           <:cell>
-            {{dayjsFormat row.attachedAt "DD/MM/YYYY"}}
+            {{formatDate row.attachedAt}}
           </:cell>
         </PixTableColumn>
         <PixTableColumn @context={{targetProfileHistory}}>
@@ -42,7 +42,7 @@ import { t } from 'ember-intl';
             {{t "components.complementary-certifications.target-profiles.history-list.headers.detached-at"}}
           </:header>
           <:cell>
-            {{if row.detachedAt (dayjsFormat row.detachedAt "DD/MM/YYYY") "-"}}
+            {{if row.detachedAt (formatDate row.detachedAt) "-"}}
           </:cell>
         </PixTableColumn>
       </:columns>

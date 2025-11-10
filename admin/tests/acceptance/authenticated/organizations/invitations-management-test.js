@@ -11,6 +11,12 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
   setupIntl(hooks, 'fr');
   setupMirage(hooks);
 
+  let intl;
+
+  hooks.beforeEach(function () {
+    intl = this.owner.lookup('service:intl');
+  });
+
   test('should allow to invite a member when user has access', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -67,7 +73,6 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
     module('and an error occurs', function () {
       test('it should display an error notification and the invitation should remain in the list', async function (assert) {
         // given
-        const dayjsService = this.owner.lookup('service:dayjs');
         await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
         const updatedAt = new Date('2023-12-05T09:00:00Z');
 
@@ -93,11 +98,9 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
         await click(screen.getByRole('button', { name: 'Annuler l’invitation de kabuki@example.net' }));
 
         // then
-        const formattedDate = dayjsService.self(updatedAt).format('DD/MM/YYYY [-] HH:mm');
-
         assert.dom(screen.getByText('Une erreur s’est produite, veuillez réessayer.')).exists();
         assert.dom(screen.getByRole('cell', { name: 'kabuki@example.net' })).exists();
-        assert.dom(screen.getByRole('cell', { name: formattedDate })).exists();
+        assert.dom(screen.getByRole('cell', { name: intl.formatDate(updatedAt, { format: 'medium' }) })).exists();
       });
     });
   });

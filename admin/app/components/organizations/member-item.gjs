@@ -2,7 +2,6 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjs from 'dayjs';
 
 import ActionsOnUsersRoleInOrganization from '../actions-on-users-role-in-organization';
 
@@ -13,7 +12,7 @@ export default class MemberItem extends Component {
     if (!this.args.organizationMembership.lastAccessedAt) {
       return this.intl.t('components.organizations.member-items.no-last-connection-date-info');
     }
-    return dayjs(this.args.organizationMembership.lastAccessedAt).format('DD/MM/YYYY');
+    return this.intl.formatDate(this.args.organizationMembership.lastAccessedAt);
   }
 
   <template>

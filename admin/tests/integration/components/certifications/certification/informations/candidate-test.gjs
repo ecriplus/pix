@@ -1,6 +1,6 @@
 import { clickByName, fillByLabel, fireEvent, render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import dayjs from 'dayjs';
+import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import CertificationInformationCandidate from 'pix-admin/components/certifications/certification/informations/candidate';
 import { module, test } from 'qunit';
@@ -10,11 +10,14 @@ import { waitForDialogClose } from '../../../../../helpers/wait-for';
 
 module('Integration | Component | Certifications | Certification | Information | Candidate', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, 'fr');
 
   let store;
+  let intl;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    intl = this.owner.lookup('service:intl');
     sinon.stub(store, 'findAll').withArgs('country').resolves([]);
   });
 
@@ -49,9 +52,7 @@ module('Integration | Component | Certifications | Certification | Information |
 
     const birthdateInfo = screen.getByText('Date de naissance :');
     assert.dom(birthdateInfo).exists();
-    assert
-      .dom(within(birthdateInfo.parentNode).getByText(dayjs(certification.birthdate).format('DD/MM/YYYY')))
-      .exists();
+    assert.dom(within(birthdateInfo.parentNode).getByText(intl.formatDate(certification.birthdate))).exists();
 
     const sexInfo = screen.getByText('Sexe :');
     assert.dom(sexInfo).exists();

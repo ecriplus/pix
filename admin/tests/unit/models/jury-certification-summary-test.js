@@ -1,14 +1,18 @@
 import { setupTest } from 'ember-qunit';
 import { certificationStatuses } from 'pix-admin/models/certification';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { module, test } from 'qunit';
 
 module('Unit | Model | jury-certification-summary', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
 
   let store;
+  let intl;
 
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
+    intl = this.owner.lookup('service:intl');
   });
 
   module('#statusLabel', function () {
@@ -183,12 +187,12 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
 
     test('it should a formatted date when completedAt is defined', function (assert) {
       // given
-      const juryCertificationSummary = store.createRecord('jury-certification-summary', {
-        completedAt: '2021-06-30 15:10:45',
-      });
+      const completedAt = '2021-06-30 15:10:45';
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', { completedAt });
 
       // then
-      assert.strictEqual(juryCertificationSummary.completionDate, '30/06/2021, 15:10:45');
+      const expectedFormat = intl.formatDate(new Date(completedAt), { format: 'long' });
+      assert.strictEqual(juryCertificationSummary.completionDate, expectedFormat);
     });
   });
 });

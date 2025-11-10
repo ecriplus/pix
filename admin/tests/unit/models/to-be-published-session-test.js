@@ -1,8 +1,10 @@
 import { setupTest } from 'ember-qunit';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { module, test } from 'qunit';
 
 module('Unit | Model | to be published session', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
 
   module('#printableDateAndTime', function () {
     test('it should return a printable version of to be published session date and time', function (assert) {

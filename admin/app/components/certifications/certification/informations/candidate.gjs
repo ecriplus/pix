@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import formatDate from 'ember-intl/helpers/format-date';
 
 import CandidateEditModal from '../../candidate-edit-modal';
 
@@ -49,11 +49,7 @@ export default class CertificationInformationCandidate extends Component {
       </div>
       <div class="certification-info-field">
         <span>Date de naissance :</span>
-        <span>{{if
-            @certification.birthdate
-            (dayjsFormat @certification.birthdate "DD/MM/YYYY" allow-empty=true)
-            ""
-          }}</span>
+        <span>{{if @certification.birthdate (formatDate @certification.birthdate) ""}}</span>
       </div>
       <div class="certification-info-field">
         <span>Sexe :</span>

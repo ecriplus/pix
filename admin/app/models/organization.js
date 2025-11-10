@@ -1,10 +1,12 @@
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { equal } from '@ember/object/computed';
+import { service } from '@ember/service';
 import Model, { attr, hasMany } from '@ember-data/model';
-import dayjs from 'dayjs';
 import pick from 'lodash/pick';
 
 export default class Organization extends Model {
+  @service intl;
+
   @attr('nullable-string') name;
   @attr('nullable-string') type;
   @attr('nullable-string') logoUrl;
@@ -70,11 +72,11 @@ export default class Organization extends Model {
   }
 
   get archivedFormattedDate() {
-    return dayjs(this.archivedAt).format('DD/MM/YYYY');
+    return this.intl.formatDate(this.archivedAt);
   }
 
   get createdAtFormattedDate() {
-    return dayjs(this.createdAt).format('DD/MM/YYYY');
+    return this.intl.formatDate(this.createdAt);
   }
 
   get isArchived() {

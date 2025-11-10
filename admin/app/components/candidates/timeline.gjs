@@ -3,8 +3,8 @@ import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { concat } from '@ember/helper';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 export default class Timeline extends Component {
   transformMetaToJSON(metadata) {
@@ -35,7 +35,7 @@ export default class Timeline extends Component {
                 {{t "pages.candidate.when"}}
               </:header>
               <:cell>
-                {{dayjsFormat event.when "DD/MM/YYYY [-] HH:mm:ss [[].SSS]"}}
+                {{formatDate event.when format="long"}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}} class="table__column">

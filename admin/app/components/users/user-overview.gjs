@@ -14,8 +14,8 @@ import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
 import CopyButton from 'ember-cli-clipboard/components/copy-button';
 import isClipboardSupported from 'ember-cli-clipboard/helpers/is-clipboard-supported';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import { and, not } from 'ember-truth-helpers';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 import ENV from 'pix-admin/config/environment';
@@ -301,7 +301,7 @@ export default class UserOverview extends Component {
             <DescriptionList.Item @label="Locale">{{@user.locale}}</DescriptionList.Item>
             <DescriptionList.Item @label="Date de création">
               {{#if @user.createdAt}}
-                {{dayjsFormat @user.createdAt "DD/MM/YYYY"}}
+                {{formatDate @user.createdAt}}
               {{/if}}
             </DescriptionList.Item>
 
@@ -336,17 +336,17 @@ export default class UserOverview extends Component {
             </DescriptionList.Item>
             {{#if @user.userLogin.blockedAt}}
               <DescriptionList.Item @label="Utilisateur totalement bloqué le">
-                {{dayjsFormat @user.userLogin.blockedAt "DD/MM/YYYY HH:mm"}}
+                {{formatDate @user.userLogin.blockedAt format="medium"}}
               </DescriptionList.Item>
             {{/if}}
             {{#if this.shouldDisplayTemporaryBlockedDate}}
               <DescriptionList.Item @label="Utilisateur temporairement bloqué jusqu'au">
-                {{dayjsFormat @user.userLogin.temporaryBlockedUntil "DD/MM/YYYY HH:mm"}}
+                {{formatDate @user.userLogin.temporaryBlockedUntil format="medium"}}
               </DescriptionList.Item>
             {{/if}}
             <DescriptionList.Item @label={{t "components.users.user-overview.global-last-login"}}>
               {{#if @user.lastLoggedAt}}
-                {{dayjsFormat @user.lastLoggedAt "DD/MM/YYYY"}}
+                {{formatDate @user.lastLoggedAt}}
               {{else}}
                 {{t "components.users.user-overview.no-last-connection-date-info"}}
               {{/if}}

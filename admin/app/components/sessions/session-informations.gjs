@@ -2,15 +2,11 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import { not } from 'ember-truth-helpers';
 
-import { formatDate } from '../../helpers/format-date';
 import ConfirmPopup from '../confirm-popup';
 import JuryComment from './jury-comment';
-
-function getFormattedDate(param) {
-  return formatDate([param]);
-}
 
 <template>
   <section class="page-section">
@@ -40,7 +36,7 @@ function getFormattedDate(param) {
 
         <li class="session-info__list-item">
           <span>{{t "pages.sessions.informations.labels.session-date-time"}}</span>
-          <span>{{getFormattedDate @sessionModel.date}} à {{@sessionModel.time}}</span>
+          <span>{{formatDate @sessionModel.date}} à {{@sessionModel.time}}</span>
         </li>
         <li class="session-info__list-item">
           <span>{{t "pages.sessions.informations.labels.examiner"}}</span>
@@ -62,24 +58,24 @@ function getFormattedDate(param) {
         </li>
         <li class="session-info__list-item">
           <span>{{t "pages.sessions.informations.labels.creation-date"}}</span>
-          <span>{{getFormattedDate @sessionModel.createdAt}}</span>
+          <span>{{formatDate @sessionModel.createdAt}}</span>
         </li>
         {{#if @sessionModel.finalizedAt}}
           <li class="session-info__list-item">
             <span>{{t "pages.sessions.informations.labels.finalization-date"}}</span>
-            <span>{{getFormattedDate @sessionModel.finalizedAt}}</span>
+            <span>{{formatDate @sessionModel.finalizedAt}}</span>
           </li>
         {{/if}}
         {{#if @sessionModel.publishedAt}}
           <li class="session-info__list-item">
             <span>{{t "pages.sessions.informations.labels.publication-date"}}</span>
-            <span>{{getFormattedDate @sessionModel.publishedAt}}</span>
+            <span>{{formatDate @sessionModel.publishedAt}}</span>
           </li>
         {{/if}}
         {{#if @sessionModel.resultsSentToPrescriberAt}}
           <li class="session-info__list-item">
             <span>{{t "pages.sessions.informations.labels.results-sent-date"}}</span>
-            <span>{{getFormattedDate @sessionModel.resultsSentToPrescriberAt}}</span>
+            <span>{{formatDate @sessionModel.resultsSentToPrescriberAt}}</span>
           </li>
         {{/if}}
       </ul>

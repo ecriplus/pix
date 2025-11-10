@@ -1,7 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import Invitations from 'pix-admin/components/organizations/invitations';
@@ -44,21 +43,21 @@ module('Integration | Component | organization-invitations', function (hooks) {
             role: 'ADMIN',
             locale: 'fr',
             roleInFrench: 'Administrateur',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
           {
             email: 'fifi@example.net',
             role: 'MEMBER',
             roleInFrench: 'Membre',
             locale: 'en',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
           {
             email: 'loulou@example.net',
             role: null,
             locale: 'nl',
             roleInFrench: '-',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
         ];
 
@@ -92,7 +91,7 @@ module('Integration | Component | organization-invitations', function (hooks) {
               email: 'naruto.uzumaki@example.net',
               role: 'ADMIN',
               roleInFrench: 'Administrateur',
-              updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+              updatedAt: new Date('2019-10-08T10:50:00Z'),
             },
           ];
 
@@ -112,7 +111,7 @@ module('Integration | Component | organization-invitations', function (hooks) {
             email: 'naruto.uzumaki@example.net',
             role: 'ADMIN',
             roleInFrench: 'Administrateur',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           });
           assert.ok(true);
         });
@@ -124,13 +123,13 @@ module('Integration | Component | organization-invitations', function (hooks) {
           email: 'old@example.net',
           role: 'MEMBER',
           roleInFrench: 'Membre',
-          updatedAt: dayjs('2018-10-08T10:50:00Z').utcOffset(2),
+          updatedAt: new Date('2018-10-08T10:50:00Z'),
         };
         const newInvitation = {
           email: 'new@example.net',
           role: 'ADMIN',
           roleInFrench: 'Administrateur',
-          updatedAt: dayjs('2021-10-08T10:50:00Z').utcOffset(2),
+          updatedAt: new Date('2021-10-08T10:50:00Z'),
         };
 
         const invitations = [oldInvitation, newInvitation];
@@ -180,19 +179,19 @@ module('Integration | Component | organization-invitations', function (hooks) {
             email: 'riri@example.net',
             role: 'ADMIN',
             roleInFrench: 'Administrateur',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
           {
             email: 'fifi@example.net',
             role: 'MEMBER',
             roleInFrench: 'Membre',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
           {
             email: 'loulou@example.net',
             role: null,
             roleInFrench: '-',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
         ];
 
@@ -221,7 +220,7 @@ module('Integration | Component | organization-invitations', function (hooks) {
             email: 'sakura.haruno@example.net',
             role: 'ADMIN',
             roleInFrench: 'Administrateur',
-            updatedAt: dayjs('2019-10-08T10:50:00Z').utcOffset(2),
+            updatedAt: new Date('2019-10-08T10:50:00Z'),
           },
         ];
 

@@ -4,8 +4,8 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import sortBy from 'lodash/sortBy';
 
 export default class CertificationCenterInvitations extends Component {
@@ -57,7 +57,7 @@ export default class CertificationCenterInvitations extends Component {
                 Date de dernier envoi
               </:header>
               <:cell>
-                {{dayjsFormat invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}
+                {{formatDate invitation.updatedAt format="medium"}}
               </:cell>
             </PixTableColumn>
             <PixTableColumn @context={{context}} class="certification-center-invitations__actions-buttons">

@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
 import List from 'pix-admin/components/organizations/places/list';
 import { module, test } from 'qunit';
@@ -7,6 +8,7 @@ import sinon from 'sinon';
 
 module('Integration | Component | Organizations | Places | List', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks, 'fr');
 
   module('When user is superAdmin', function (hooks) {
     let store;

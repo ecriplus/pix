@@ -5,8 +5,8 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import noop from 'lodash/noop';
 
 import ConfirmPopup from '../confirm-popup';
@@ -115,7 +115,7 @@ export default class JuryComment extends Component {
         <div>
           <span class="jury-comment__author">{{@author}}</span>
           -
-          <time class="jury-comment__date">{{dayjsFormat @date "DD/MM/YYYY à HH:mm"}}</time>
+          <time class="jury-comment__date">{{formatDate @date format="medium"}}</time>
         </div>
         <p class="jury-comment__content">{{this.comment}}</p>
         {{#if this.accessControl.hasAccessToCertificationActionsScope}}

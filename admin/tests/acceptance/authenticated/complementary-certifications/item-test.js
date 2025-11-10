@@ -1,6 +1,5 @@
 import { visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
@@ -50,8 +49,8 @@ module('Acceptance | Complementary certifications | Complementary certification 
       key: 'KEY',
       label: 'MARIANNE CERTIF',
       targetProfilesHistory: [
-        { name: 'ALEX TARGET', id: 3, attachedAt: dayjs('2023-10-10T10:50:00Z') },
-        { name: 'JEREM TARGET', id: 2, attachedAt: dayjs('2020-10-10T10:50:00Z') },
+        { name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') },
+        { name: 'JEREM TARGET', id: 2, attachedAt: new Date('2020-10-10T10:50:00Z') },
       ],
     });
     server.create('target-profile', {

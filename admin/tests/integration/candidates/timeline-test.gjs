@@ -8,18 +8,19 @@ module('Integration | Component | Candidates | Timeline', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   let store;
+  let intl;
 
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
+    intl = this.owner.lookup('service:intl');
   });
 
   test('it should display events', async function (assert) {
     // given
-    const dayjsService = this.owner.lookup('service:dayjs');
     const timeline = store.createRecord('certification-candidate-timeline', {
       events: [{ code: 'ComplementaryCertifiableEvent', when: new Date(), metadata: {} }],
     });
-    const formattedDate = dayjsService.self(timeline.events[0].when).format('DD/MM/YYYY [-] HH:mm:ss [[].SSS]');
+    const formattedDate = intl.formatDate(timeline.events[0].when, { format: 'long' });
 
     // when
     const screen = await render(<template><Timeline @timeline={{timeline}} /></template>);

@@ -3,8 +3,8 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 import sortBy from 'lodash/sortBy';
 
 import ActionsOnUsersRoleInOrganization from '../actions-on-users-role-in-organization';
@@ -76,7 +76,7 @@ export default class UserOrganizationMemberships extends Component {
             </:header>
             <:cell>
               {{#if organizationMembership.lastAccessedAt}}
-                {{dayjsFormat organizationMembership.lastAccessedAt "DD/MM/YYYY"}}
+                {{formatDate organizationMembership.lastAccessedAt}}
               {{else}}
                 {{t "components.users.organizations.memberships.no-last-connection-date-info"}}
               {{/if}}

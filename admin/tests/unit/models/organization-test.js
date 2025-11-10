@@ -1,8 +1,10 @@
 import { setupTest } from 'ember-qunit';
+import setupIntl from 'pix-admin/tests/helpers/setup-intl';
 import { module, test } from 'qunit';
 
 module('Unit | Model | organization', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
 
   module('#archivedFormattedDate', function () {
     test('it formats the archived date', function (assert) {

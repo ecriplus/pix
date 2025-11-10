@@ -1,5 +1,4 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import dayjs from 'dayjs';
 import History from 'pix-admin/components/complementary-certifications/item/target-profile/history';
 import { module, test } from 'qunit';
 
@@ -13,12 +12,12 @@ module('Integration | Component | complementary-certifications/item/target-profi
     const store = this.owner.lookup('service:store');
     const complementaryCertification = store.createRecord('complementary-certification', {
       targetProfilesHistory: [
-        { id: 1023, name: 'Target Cascade', attachedAt: dayjs('2023-10-10T10:50:00Z'), detachedAt: null },
+        { id: 1023, name: 'Target Cascade', attachedAt: new Date('2023-10-10T10:50:00Z'), detachedAt: null },
         {
           id: 1025,
           name: 'Target Volcan',
-          attachedAt: dayjs('2019-10-08T10:50:00Z'),
-          detachedAt: dayjs('2020-10-08T10:50:00Z'),
+          attachedAt: new Date('2019-10-08T10:50:00Z'),
+          detachedAt: new Date('2020-10-08T10:50:00Z'),
         },
       ],
     });
