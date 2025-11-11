@@ -1,5 +1,16 @@
 # Pix Changelog
 
+# [5.254.0](https://github.com/1024pix/pix/compare/v5.253.1...v5.254.0) (2025-11-11)
+
+### :rocket: Amélioration
+
+- [#14056](https://github.com/1024pix/pix/pull/14056) Ajout des paliers sur la page de diagnostic Combinix (PIX-20274) 
+- [#14095](https://github.com/1024pix/pix/pull/14095) Renforcer l'accessibilité sur la navigation (PIX-20265). 
+
+### :building_construction: Tech
+
+- [#14091](https://github.com/1024pix/pix/pull/14091) Remplacer ember-cli-mirage par miragejs sur Pix Admin
+
 ## [5.253.1](https://github.com/1024pix/pix/compare/v5.253.0...v5.253.1) (2025-11-10)
 
 ### :building_construction: Tech
