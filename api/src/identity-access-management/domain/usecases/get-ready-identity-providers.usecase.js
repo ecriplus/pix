@@ -8,10 +8,6 @@
 const getReadyIdentityProviders = async function ({ requestedApplication, oidcAuthenticationServiceRegistry }) {
   await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-  if (requestedApplication?.isPixAdmin) {
-    return oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
-  }
-
   return oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
 };
 

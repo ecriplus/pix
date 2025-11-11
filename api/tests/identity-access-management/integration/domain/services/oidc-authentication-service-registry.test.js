@@ -132,32 +132,31 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     it('returns ready OIDC Providers by requestedApplication', async function () {
       // given
       await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-      const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
+      const requestedApplicationForApp = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
+      const requestedApplicationForAdmin = new RequestedApplication({
+        applicationName: 'admin',
+        applicationTld: '.fr',
+      });
 
       // when
-      const services =
-        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
+      const readyServicesForApp =
+        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+          requestedApplicationForApp,
+        );
+      const readyServicesForAdmin =
+        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+          requestedApplicationForAdmin,
+        );
 
       // then
-      const serviceCodes = services.map((service) => service.code);
-      expect(serviceCodes).to.have.lengthOf(2);
-      expect(serviceCodes).to.contain('OIDC_EXAMPLE');
-      expect(serviceCodes).to.contain('FWB');
-    });
-  });
+      const serviceCodesForApp = readyServicesForApp.map((service) => service.code);
+      expect(serviceCodesForApp).to.have.lengthOf(2);
+      expect(serviceCodesForApp).to.contain('OIDC_EXAMPLE');
+      expect(serviceCodesForApp).to.contain('FWB');
 
-  describe('#getReadyOidcProviderServicesForPixAdmin', function () {
-    it('returns ready OIDC Providers for Pix Admin', async function () {
-      // given
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-
-      // when
-      const services = oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
-
-      // then
-      const serviceCodes = services.map((service) => service.code);
-      expect(serviceCodes).to.have.lengthOf(1);
-      expect(serviceCodes).to.contain('OIDC_EXAMPLE_FOR_PIX_ADMIN');
+      const serviceCodesForAdmin = readyServicesForAdmin.map((service) => service.code);
+      expect(serviceCodesForAdmin).to.have.lengthOf(1);
+      expect(serviceCodesForAdmin).to.contain('OIDC_EXAMPLE_FOR_PIX_ADMIN');
     });
   });
 

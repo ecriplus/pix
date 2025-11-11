@@ -55,17 +55,12 @@ describe('Unit | Identity Access Management | Domain | Services | oidc-authentic
         const allOidcProviderServices = oidcAuthenticationServiceRegistry.getAllOidcProviderServices();
         const readyOidcProviderServices =
           oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
-        const readyOidcProviderServicesForPixAdmin =
-          oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesForPixAdmin();
 
         expect(result).to.be.true;
         expect(allOidcProviderServices).to.have.lengthOf(3);
 
         expect(readyOidcProviderServices).to.have.lengthOf(1);
         expect(readyOidcProviderServices.map((service) => service.code)).to.contain('OIDC');
-
-        expect(readyOidcProviderServicesForPixAdmin).to.have.lengthOf(1);
-        expect(readyOidcProviderServicesForPixAdmin.map((service) => service.code)).to.contain('OIDC_FOR_PIX_ADMIN');
       });
     });
 

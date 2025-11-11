@@ -7,7 +7,6 @@ import { PoleEmploiOidcAuthenticationService } from './pole-emploi-oidc-authenti
 
 export class OidcAuthenticationServiceRegistry {
   #allOidcProviderServices = null;
-  #readyOidcProviderServicesForPixAdmin = null;
   #readyOidcProviderServicesByRequestedApplications = {};
 
   constructor(dependencies = {}) {
@@ -31,10 +30,6 @@ export class OidcAuthenticationServiceRegistry {
    */
   getAllOidcProviderServices() {
     return this.#allOidcProviderServices;
-  }
-
-  getReadyOidcProviderServicesForPixAdmin() {
-    return this.#readyOidcProviderServicesForPixAdmin;
   }
 
   getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
@@ -78,10 +73,6 @@ export class OidcAuthenticationServiceRegistry {
 
     this.#allOidcProviderServices = oidcProviderServices;
 
-    this.#readyOidcProviderServicesForPixAdmin = this.#allOidcProviderServices.filter(
-      (oidcProviderService) => oidcProviderService.isReadyForPixAdmin,
-    );
-
     this.#readyOidcProviderServicesByRequestedApplications = Object.groupBy(
       this.#allOidcProviderServices.filter(
         (oidcProviderService) => oidcProviderService.isReady || oidcProviderService.isReadyForPixAdmin,
@@ -94,7 +85,6 @@ export class OidcAuthenticationServiceRegistry {
 
   testOnly_reset() {
     this.#allOidcProviderServices = null;
-    this.#readyOidcProviderServicesForPixAdmin = null;
     this.#readyOidcProviderServicesByRequestedApplications = {};
   }
 }
