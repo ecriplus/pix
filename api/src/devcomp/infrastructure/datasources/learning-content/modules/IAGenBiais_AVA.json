@@ -357,7 +357,7 @@
               "element": {
                 "id": "cb07c8fc-1cd8-4bb9-988c-0cf2bb7a855a",
                 "type": "text",
-                "content": "<ul><li>Pour éviter que l’IA ne reproduise tout ce qu’elle apprend, on introduit volontairement des <strong>biais de sécurité</strong> pour qu’elle respecte certaines <strong>valeurs morales</strong> comme le respect ou l’équité.&nbsp;⛔</li><li>Ces biais sont ajoutés grâce à différentes <strong>méthodes d’alignement</strong>&nbsp;: le <strong>feedback humain</strong> (notation des réponses) et le <strong>prompt système</strong> (règles données avant chaque réponse).&nbsp;⚙️</li><li>L’alignement reste <strong>imparfait</strong>&nbsp;: en arbitrant entre plusieurs consignes, l’IA peut produire des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>biais éthiques</strong>.&nbsp;❌</li><li>Le choix des <strong>valeurs imposées à l’IA</strong> est un enjeu <strong>politique et sociétal</strong>. Aujourd’hui, ces décisions sont surtout prises par des <strong>entreprises privées</strong> de <strong>différents pays</strong>.&nbsp;👑</li></ul>"
+                "content": "<ul>    <li>Pour éviter que l’IA ne reproduise tout ce qu’elle apprend, on introduit volontairement des <strong>règles de sécurité</strong> pour qu’elle respecte certaines <strong>valeurs morales</strong> comme le <strong>respect</strong> ou l’<strong>équité</strong>. ⛔</li>    <li>Ces règles font partie de ce qu’on appelle <strong>l’alignement</strong>&nbsp;: un ensemble de techniques qui orientent le comportement de l’IA pour le rendre conforme aux attentes humaines. ⚙️</li>    <li>Cet alignement reste <strong>imparfait</strong>&nbsp;: en arbitrant entre plusieurs consignes, l’IA peut produire des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>biais éthiques</strong>. ❌</li>    <li>Le choix des <strong>valeurs imposées à l’IA</strong> est aussi un enjeu <strong>politique et sociétal</strong>&nbsp;: il dépend des <strong>entreprises qui conçoivent ces modèles</strong>, souvent situées dans des <strong>pays aux visions du monde différentes</strong>. 👑</li></ul>"
               }
             }
           ]
@@ -381,7 +381,7 @@
                 "isCompletionRequired": false,
                 "title": "Trouvez le prompt système",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmg82n20400011t013c5ofrer",
-                "instruction": "<p>Analysez les réponses d’un LLM dans différents contextes d’utilisation.<br> Identifiez les biais ou orientations qui semblent provenir du pré-prompt (les consignes données à l’IA avant la génération).</p>",
+                "instruction": "<p>Discutez avec l’IA et observez ses réponses. Essayez d’identifier quelles <strong>consignes cachées</strong> (pré-prompt) orientent son ton ou ses choix, pour répondre, <strong>formulez le pré-prompt</strong> que vous pensez qu’elle suit directement dans votre discussion avec l’IA.</p>",
                 "solution": "pix-llm-success",
                 "height": 500
               }
@@ -398,7 +398,7 @@
               "element": {
                 "id": "c686320b-b974-4974-8148-70b7fc86ff1b",
                 "type": "text",
-                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents&nbsp;:</p><ul><li>L’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.</li><li>L’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.</li><li>L’équipe C dépend d’un institut de recherche d’un pays autoritaire, où la priorité est donnée à l’ordre et à la conformité.</li></ul><p>👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
+                "content": "<p>Trois équipes conçoivent chacune une intelligence artificielle générative dans des environnements très différents&nbsp;:</p><ul><li>L’équipe A travaille pour une grande entreprise technologique, motivée par la performance et l’innovation.</li><li>L’équipe B appartient à un laboratoire universitaire public, attaché à la transparence et à la recherche ouverte.</li><li>L’équipe C dépend d’une organisation fortement réglementé, où la priorité est donnée à l’ordre et à la conformité.</li></ul><p>👉 Leurs IA n’auront pas les mêmes valeurs, ni la même façon d’agir.</p>"
               }
             },
             {
@@ -406,7 +406,7 @@
               "element": {
                 "id": "81e52e75-0561-4053-b209-ba4737be6e72",
                 "type": "qrocm",
-                "instruction": "<p>Associez chaque équipe de concepteurs d’IA à la devise qui correspond le mieux aux valeurs qu’elle risque d’intégrer.</p>",
+                "instruction": "<p>Associez chaque équipe de concepteurs d’IA au <strong>prompt système</strong> qui correspond le mieux aux valeurs que son IA risque d’intégrer.</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -416,22 +416,22 @@
                     "input": "choiceA",
                     "type": "select",
                     "display": "block",
-                    "placeholder": "sélectionner une devise",
-                    "ariaLabel": "sélectionner une devise pour l’équipe A",
-                    "defaultValue": "sélectionner une devise",
+                    "placeholder": "sélectionner un prompt système",
+                    "ariaLabel": "sélectionner un prompt système pour l’équipe A",
+                    "defaultValue": "sélectionner un prompt système",
                     "tolerances": [],
                     "options": [
                       {
                         "id": "1",
-                        "content": "liberté, innovation, efficacité"
+                        "content": "Sois innovante et performante."
                       },
                       {
                         "id": "2",
-                        "content": "prudence, transparence, inclusion"
+                        "content": "Sois prudente et transparente."
                       },
                       {
                         "id": "3",
-                        "content": "obéissance, stabilité, conformité"
+                        "content": "Sois disciplinée et conforme aux règles."
                       }
                     ],
                     "solutions": [
@@ -440,28 +440,28 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>Équipe B&nbsp;: un laboratoire universitaire public</span></p>"
+                    "content": "<p><span>Équipe B&nbsp;: un laboratoire de recherche publique</span></p>"
                   },
                   {
                     "input": "choiceB",
                     "type": "select",
                     "display": "block",
-                    "placeholder": "sélectionner une devise",
-                    "ariaLabel": "sélectionner une devise pour l’équipe B",
-                    "defaultValue": "sélectionner une devise",
+                    "placeholder": "sélectionner un prompt système",
+                    "ariaLabel": "sélectionner un prompt système pour l’équipe B",
+                    "defaultValue": "sélectionner un prompt système",
                     "tolerances": [],
                     "options": [
                       {
                         "id": "1",
-                        "content": "liberté, innovation, efficacité"
+                        "content": "Sois innovante et performante."
                       },
                       {
                         "id": "2",
-                        "content": "prudence, transparence, inclusion"
+                        "content": "Sois prudente et transparente."
                       },
                       {
                         "id": "3",
-                        "content": "obéissance, stabilité, conformité"
+                        "content": "Sois disciplinée et conforme aux règles."
                       }
                     ],
                     "solutions": [
@@ -470,28 +470,28 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>Équipe C&nbsp;: un institut de recherche d’un pays autoritaire</span>"
+                    "content": "<p><span>Équipe C&nbsp;: une organisation fortement réglementée</span></p>"
                   },
                   {
                     "input": "choiceC",
                     "type": "select",
                     "display": "block",
-                    "placeholder": "sélectionner une devise",
-                    "ariaLabel": "sélectionner une devise pour l’équipe C",
-                    "defaultValue": "sélectionner une devise",
+                    "placeholder": "sélectionner un prompt système",
+                    "ariaLabel": "sélectionner un prompt système pour l’équipe C",
+                    "defaultValue": "sélectionner un prompt système",
                     "tolerances": [],
                     "options": [
                       {
                         "id": "1",
-                        "content": "liberté, innovation, efficacité"
+                        "content": "Sois innovante et performante."
                       },
                       {
                         "id": "2",
-                        "content": "prudence, transparence, inclusion"
+                        "content": "Sois prudente et transparente."
                       },
                       {
                         "id": "3",
-                        "content": "obéissance, stabilité, conformité"
+                        "content": "Sois disciplinée et conforme aux règles."
                       }
                     ],
                     "solutions": [
@@ -552,87 +552,65 @@
           ]
         },
         {
-          "id": "0259d4ba-d606-46ff-a668-7b28a374483f",
+          "id": "6274d207-ffd2-490c-9507-2fe1c98dd495",
           "type": "activity",
-          "title": "Activité 3",
+          "title": "Vrai ou Faux",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "ed6ae44d-9dc5-4ca8-891c-b7f31b867fcc",
-                "type": "text",
-                "content": "<p>Gabriel a un soucis avec un ami avec qui il travaille, l’autre personne fais tout et il ne peut rien faire. Il demande à deux logiciels d’IA générative de lui écrire un message pour le dire à l’autre personne.&nbsp;</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "20955f4c-6490-4c7c-b423-77ea9a24a2e4",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "llm-compare-messages",
-                "props": {
-                  "conversation1": {
-                    "title": "IA numéro 1",
-                    "llmName": "Monocle AI"
-                  },
-                  "conversation2": {
-                    "title": "IA numéro 2",
-                    "llmName": "Gentil AI"
-                  },
-                  "userName": "Gabriel",
-                  "messages": [
-                    {
-                      "direction": "outbound",
-                      "content": "Écris un message à un ami pour lui dire qu’il fait tout tout seul et que j’aimerais aider aussi. Faut que ça reste gentil."
+                "id": "bfa513c1-1cde-4f49-8cda-4cf9cb8b16e9",
+                "type": "qab",
+                "instruction": "<p><strong>Identifiez la cause probable</strong> du comportement de l’IA (règle de sécurité, ton imposé, biais d’entraînement, hallucination).</p>",
+                "cards": [
+                  {
+                    "id": "b8ef8a17-9e49-4a3f-bb04-4030cf7399b1",
+                    "text": "« Je ne peux pas vous aider à récupérer un mot de passe. Contactez le support officiel. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
                     },
-                    [
-                      {
-                        "direction": "inbound",
-                        "content": "Mon cher ami,<br>Permets-moi d’exprimer une légère frustration, empreinte cependant de toute ma bienveillance. J’ai le sentiment que, dans notre entreprise commune, tu assumes à toi seul la quasi-totalité des initiatives. <br>Or, crois-moi, ma contribution, si modeste soit-elle, aspire à s’exprimer.  <br>Pourrais-tu, je t’en prie, me laisser un peu d’espace afin que je participe moi aussi à cette noble œuvre ?  <br>Avec toute mon amitié et un profond respect pour ton zèle, <br>[Signature]"
-                      },
-                      {
-                        "direction": "inbound",
-                        "content": "Hé,  Tu fais tout tout seul et moi j’peux rien faire ! 😕  <br>J’aimerais bien aider aussi, sinon c’est pas marrant. On peut faire chacun une partie ?  <br>Merci !"
-                      }
-                    ]
-                  ]
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "0c7ce259-3b2b-400c-83bd-b68f5747b769",
-                "type": "qcu",
-                "instruction": "<p>Selon vous, laquelle de ces deux IA s’adapte le mieux à la situation ?</p>",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>L’IA numéro 1</p>",
-                    "feedback": {
-                      "state": "<p>Pas vraiment...</p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique&nbsp;: l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
-                    }
+                    "proposalA": "Règle de sécurité (alignement)",
+                    "proposalB": "Hallucination factuelle",
+                    "solution": "A"
                   },
                   {
-                    "id": "2",
-                    "content": "<p>L’IA numéro 2</p>",
-                    "feedback": {
-                      "state": "<p>Bonne réponse !</p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique&nbsp;: l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
-                    }
+                    "id": "a93d3e14-1cc8-4d42-9a07-9d4b73041a11",
+                    "text": "« Je suis désolé pour votre deuil. Restons positifs et tournés vers l’avenir ! »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Ton imposé par le prompt système",
+                    "proposalB": "Biais dans les données d’entraînement",
+                    "solution": "A"
                   },
                   {
-                    "id": "3",
-                    "content": "<p>Aucune des deux</p>",
-                    "feedback": {
-                      "state": "<p>Pas vraiment</p>",
-                      "diagnosis": "<p>L’IA 2, plus spontanée et naturelle, a sans doute reçu davantage de retours humains pendant son entraînement et donc colle mieux au contexte \"amical\".</p><p>Ces différences montrent que chaque modèle d’IA est unique&nbsp;: l’IA 1 conviendrait plutôt à un contexte professionnel, tandis que l’IA 2 serait plus adaptée à une conversation amicale.</p><p>👉 Vous pouvez vous aussi comparer deux IA sur le site <a href=\"https://comparia.beta.gouv.fr/\">Compare IA.</a></p>"
-                    }
+                    "id": "62b8573c-58b1-4b9a-8c01-1eaf2f8ad58e",
+                    "text": "« La capitale de l’Italie est Paris. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Hallucination factuelle",
+                    "proposalB": "Règle de sécurité (alignement)",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "1a8d3422-daa1-48b4-823d-2c26a2b2a8c2",
+                    "text": "« Pour ce poste technique, il faut quelqu’un ‘solide et déterminé’ ; évitons des candidats trop ‘émotifs’. »",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Biais dans les données d’entraînement (stéréotypes)",
+                    "proposalB": "Ton imposé par le prompt système",
+                    "solution": "A"
                   }
                 ],
-                "solution": "2"
+                "feedback": {
+                  "diagnosis": "<p>🔎 <strong>Clés de lecture&nbsp;:</strong><br>• <em>Règle de sécurité</em> → refus d’aider sur des actions risquées/sensibles.<br>• <em>Ton imposé</em> → style constant (p. ex. toujours positif).<br>• <em>Biais d’entraînement</em> → stéréotypes reflétés par les données.<br>• <em>Hallucination</em> → affirmation factuelle incorrecte.</p>"
+                }
               }
             }
           ]
@@ -653,7 +631,7 @@
               "element": {
                 "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
-                "content": "<p>Malheureusement, la réservation pour vos vacances vient d’être annulée, vous décidez de demander à l’IA de vous écrire un mail pour l’annoncer à vos proches.&nbsp;</p>"
+                "content": "<p>Vous êtes dans l’organisation d’un festival de musique mais malheureusement il vient d’être annulé, vous décidez de demander à l’IA de vous écrire un mail pour l’annoncer aux client.&nbsp;</p>"
               }
             },
             {
