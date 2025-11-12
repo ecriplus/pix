@@ -225,7 +225,7 @@
                     },
                     {
                       "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
-                      "type": "qcu-declarative",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
                       "proposals": [
                         {
@@ -242,7 +242,8 @@
                             "diagnosis": "<p>Bien vu !</p>"
                           }
                         }
-                      ]
+                      ],
+                      "solution": "2"
                     }
                   ]
                 },
@@ -298,7 +299,7 @@
                     {
                       "id": "e2964222-34ba-41d5-a8f4-d52b30c22bd2",
                       "type": "text",
-                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, on lui fait faire ce que vous venez de faire :</p><ul><li>D’abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données</strong>.🌼</li><li>Chaque exemple est accompagné d’une étiquette indiquant <strong>le nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit alors que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
+                      "content": "<p>Pour entraîner un logiciel d’IA à reconnaître des images, une des méthodes consiste à lui faire faire ce que vous venez de faire :</p><ul><li>D’abord, on lui donne <strong>plusieurs exemples</strong> de photographies de la plante à reconnaître. On appelle cela le<strong> jeu de données</strong>.🌼</li><li>Chaque exemple est accompagné d’une étiquette indiquant <strong>le nom</strong> de la plante qu’il doit apprendre à reconnaître. On dit alors que <strong>les données sont étiquetées</strong>.🏷️</li></ul>"
                     }
                   ]
                 },
@@ -307,7 +308,7 @@
                     {
                       "id": "e089a941-4bfb-473f-879a-892f1be410ce",
                       "type": "text",
-                      "content": "<p>Ensuite, le logiciel d’IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</p>"
+                      "content": "<p>Ensuite, l'IA va analyser les photographies pour y <strong>repérer des caractéristiques</strong> lui permettant d’identifier les plantes.🔍 Et il va essayer de retrouver le nom de la plante sur chaque photographie.🧐</p>"
                     }
                   ]
                 },
@@ -334,7 +335,7 @@
               "element": {
                 "id": "73bb13a6-34a5-41be-bdb6-5b9fce3593aa",
                 "type": "text",
-                "content": "<p>Mais au fait, un logiciel d’IA ne ’voit’ pas comme nous. Alors, comment est-ce qu’il traite une image ?👁️ Découvrons cela ensemble. </p>"
+                "content": "<p>Mais au fait, comment un logiciel d'IA traite-t-il une image ? Découvrons cela ensemble. </p>"
               }
             }
           ]
@@ -370,7 +371,7 @@
                     {
                       "id": "4c380d32-3c56-4235-9d3e-8c1497575b07",
                       "type": "text",
-                      "content": "<p>Le logiciel d’intelligence artificielle ne peut pas \"voir\".</p><p>Pour lui, la photographie est composée de milliers de petits points appelés pixels.</p>"
+                      "content": "<p>Une photographie numérique est composée de milliers de petits carrés appelés pixels. Notre œil ne voit pas ces carrés tellement ils sont petits !<br></p>"
                     },
                     {
                       "id": "ee4a85c2-59a0-4541-acb3-bbbbb0a055ca",
@@ -480,7 +481,7 @@
               "element": {
                 "id": "d14cf5f8-6d3f-4e77-abb2-033f8d13b062",
                 "type": "text",
-                "content": "<p>Le logiciel dispose de plusieurs paramètres pour faire des calculs sur ces valeurs. </p><p>Au départ, les paramètres sont ajustés au hasard, produisant une prédiction qui est le résultat de ses calculs.🎲 </p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue. </p><p>Ainsi, par essai erreur, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.🧮</p><p><strong>🤔 Le saviez-vous ? <br> </strong>Ce genre de mécanisme de calcul s’appelle un “réseau de neurones” car les chercheurs se sont inspirés du fonctionnement des neurones dans le cerveau humain.🧠</p>"
+                "content": "<p>Le logiciel dispose de plusieurs paramètres pour faire des calculs sur ces valeurs. </p><p>Au départ, les paramètres sont ajustés au hasard, produisant une prédiction qui est le résultat de ses calculs.🎲 </p><p>À chaque nouvel exemple, le logiciel compare sa prédiction à la réponse attendue. </p><p>Ainsi, par essai erreur, il ajuste progressivement les paramètres jusqu’à obtenir la bonne prédiction.🧮</p>"
               }
             }
           ]
@@ -498,7 +499,7 @@
                     {
                       "id": "7f771c91-272f-42e9-875c-97640fcb7809",
                       "type": "text",
-                      "content": "<p>Lila a donné à son logiciel des centaines de photographies ressemblant à celles ci-dessous.</p><p>Elle se demande si cet entrainement suffit pour qu’il reconnaisse l’ail des ours. 🥕</p>"
+                      "content": "<p>Lila a donné à son logiciel des centaines de photographies ressemblant à celles ci-dessous.</p><p>Elle se demande si cet entraînement suffit pour qu’il reconnaisse l’ail des ours. 🥕</p>"
                     },
                     {
                       "id": "1b67fab0-9ad4-45a6-aded-160b77b24993",
@@ -516,7 +517,7 @@
                     {
                       "id": "df83f537-de47-43da-8087-480f5b44bc8f",
                       "type": "text",
-                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d’ail des ours.</p><p>Le logiciel n’arrive pas à trancher avec certitude. </p><p>Il indique un score 0,4 pour ail des ours et de 0,6 pour muguet.</p>"
+                      "content": "<p>Lila a testé son logiciel sur cette nouvelle photographie d’ail des ours.</p><p>Le logiciel n’arrive pas à trancher avec certitude. </p><p>Il indique un score 0,4 pour « ail des ours » et de 0,6 pour « muguet ».</p>"
                     },
                     {
                       "id": "50a81069-df2e-4d31-86b5-9b885dad1099",
@@ -534,7 +535,7 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Les images d’entraînement ne comportent pas de photos de pousses de l’ail des ours.</p>",
+                          "content": "<p>Les images d’entraînement ne comportent pas de photos de pousses d’ail des ours.</p>",
                           "feedback": {
                             "diagnosis": "<p>Et oui ! Ces données ne sont pas suffisamment variées, elles manquent de diversité.</p>"
                           }
@@ -733,7 +734,7 @@
                     {
                       "id": "a041b7dc-9566-4bee-aaf4-106de9a98662",
                       "type": "text",
-                      "content": "<p>L’apprentissage supervisé ne sert pas uniquement à reconnaître des images.</p><p> Par exemple, les logiciels d<strong>’IA générative</strong> peuvent aussi être entraînés à produire du texte selon un <strong>principe similaire</strong>&nbsp;: </p><ul>    <li>On leur <strong>fournit des textes</strong> dans lesquels certains mots sont volontairement masqués 🙈. </li>    <li>Chaque <strong>mot manquant</strong> est alors considéré comme une <strong>étiquette </strong>🏷️. </li>    <li>En étudiant les caractéristiques des textes, le modèle apprend à prédire le mot manquant 📃.</li></ul><p>C’est ainsi qu’ils acquièrent la capacité de générer du texte cohérent et pertinent.</p>"
+                      "content": "<p>L’apprentissage supervisé ne sert pas uniquement à reconnaître des images.</p><p> Par exemple, les logiciels d<strong>’IA générative</strong> peuvent aussi être entraînés à produire du texte selon un <strong>principe similaire</strong>&nbsp;: </p><ul>    <li>On leur <strong>fournit des textes</strong> dans lesquels certains mots sont volontairement masqués 🙈. </li>    <li>Chaque <strong>mot manquant</strong> est alors considéré comme une <strong>étiquette </strong>🏷️. </li>    <li>En étudiant les caractéristiques des textes, le modèle apprend à prédire le mot manquant 📃.</li></ul><p>C’est ainsi qu’ils acquièrent la capacité de générer du texte.</p>"
                     }
                   ]
                 },
