@@ -1,5 +1,10 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
-import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
+import {
+  CRITERION_COMPARISONS,
+  Quest,
+  REQUIREMENT_COMPARISONS,
+  REQUIREMENT_TYPES,
+} from '../../../../../src/quest/domain/models/Quest.js';
 import * as combinedCourseRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -328,6 +333,277 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(secondSavedCombinedCourse.description).null;
       expect(secondSavedCombinedCourse.illustration).null;
       expect(secondSavedCombinedCourse.code).equal('secondCode');
+    });
+  });
+
+  describe('#findByModuleIdAndOrganizationIds', function () {
+    it('should return combined course for a given module id and organization ids', async function () {
+      //given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationId2 = databaseBuilder.factory.buildOrganization().id;
+      const moduleId = 'module-abc';
+
+      const combinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY123',
+        name: 'name1',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: moduleId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      const otherCombinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY123',
+        name: 'name2',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: moduleId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY456',
+        name: 'name3',
+        organizationId: organizationId2,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: moduleId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY456',
+        name: 'name3',
+        organizationId: organizationId,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: 'module-cde',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      const result = await combinedCourseRepository.findByModuleIdAndOrganizationIds({
+        moduleId,
+        organizationIds: [organizationId],
+      });
+
+      //then
+      expect(result).lengthOf(2);
+      expect(result[0]).instanceOf(CombinedCourse);
+      expect(result[1]).instanceOf(CombinedCourse);
+      expect(result).deep.members([
+        {
+          id: combinedCourseWithModule.id,
+          code: combinedCourseWithModule.code,
+          organizationId: combinedCourseWithModule.organizationId,
+          name: combinedCourseWithModule.name,
+          description: combinedCourseWithModule.description,
+          illustration: combinedCourseWithModule.illustration,
+          participations: [],
+          questId: combinedCourseWithModule.questId,
+        },
+        {
+          id: otherCombinedCourseWithModule.id,
+          code: otherCombinedCourseWithModule.code,
+          organizationId: otherCombinedCourseWithModule.organizationId,
+          name: otherCombinedCourseWithModule.name,
+          description: otherCombinedCourseWithModule.description,
+          illustration: otherCombinedCourseWithModule.illustration,
+          participations: [],
+          questId: otherCombinedCourseWithModule.questId,
+        },
+      ]);
+    });
+
+    it('should return combined course for a same moduleId and multiple organizationIds', async function () {
+      //given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationId2 = databaseBuilder.factory.buildOrganization().id;
+      const moduleId = 'module-abc';
+
+      const combinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY123',
+        name: 'name1',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: moduleId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      const combinedCourseWithModuleAndOtherOrga = databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY123',
+        name: 'name2',
+        organizationId: organizationId2,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: moduleId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY456',
+        name: 'name3',
+        organizationId,
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: 'module-cde',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+        rewardId: null,
+        rewardType: null,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      const result = await combinedCourseRepository.findByModuleIdAndOrganizationIds({
+        moduleId,
+        organizationIds: [organizationId, organizationId2],
+      });
+
+      //then
+      expect(result).lengthOf(2);
+      expect(result[0]).instanceOf(CombinedCourse);
+      expect(result[1]).instanceOf(CombinedCourse);
+      expect(result).deep.members([
+        {
+          id: combinedCourseWithModule.id,
+          code: combinedCourseWithModule.code,
+          organizationId: combinedCourseWithModule.organizationId,
+          name: combinedCourseWithModule.name,
+          description: combinedCourseWithModule.description,
+          illustration: combinedCourseWithModule.illustration,
+          participations: [],
+          questId: combinedCourseWithModule.questId,
+        },
+        {
+          id: combinedCourseWithModuleAndOtherOrga.id,
+          code: combinedCourseWithModuleAndOtherOrga.code,
+          organizationId: combinedCourseWithModuleAndOtherOrga.organizationId,
+          name: combinedCourseWithModuleAndOtherOrga.name,
+          description: combinedCourseWithModuleAndOtherOrga.description,
+          illustration: combinedCourseWithModuleAndOtherOrga.illustration,
+          participations: [],
+          questId: combinedCourseWithModuleAndOtherOrga.questId,
+        },
+      ]);
+    });
+
+    it('should return an empty array when the tuple organizationId and moduleId is not found in combined_courses', async function () {
+      //given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const moduleId = 'module-abc';
+
+      await databaseBuilder.commit();
+
+      //when
+      const result = await combinedCourseRepository.findByModuleIdAndOrganizationIds({
+        moduleId,
+        organizationIds: [organizationId],
+      });
+
+      //then
+      expect(result).lengthOf(0);
     });
   });
 });
