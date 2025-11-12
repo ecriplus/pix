@@ -31,6 +31,7 @@ module('Acceptance | authenticated/users/get', function (hooks) {
     const expectedOrganizationMembershipsCount = 2;
     const expectedParticipationCount = 1;
     const expectedAuthenticationMethodCount = 3;
+    const expectedCertificationCenterMembershipsCount = 3;
     const connectionTabLabel = this.intl.t('pages.user-details.navbar.connections');
 
     // when
@@ -53,7 +54,9 @@ module('Acceptance | authenticated/users/get', function (hooks) {
       .dom(
         userNavigation.getByLabelText(this.intl.t('pages.user-details.navbar.certification-centers-list-aria-label')),
       )
-      .hasText(this.intl.t('pages.user-details.navbar.certification-centers-list'));
+      .hasText(
+        `${this.intl.t('pages.user-details.navbar.certification-centers-list')} (${expectedCertificationCenterMembershipsCount})`,
+      );
     assert
       .dom(userNavigation.getByRole('link', { name: this.intl.t('pages.user-details.navbar.certification-courses') }))
       .exists();
