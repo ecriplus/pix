@@ -127,6 +127,7 @@ module('Integration | Component | Module | Step', function (hooks) {
                 @step={{step}}
                 @shouldDisplayNextButton={{true}}
                 @onNextButtonClick={{onNextButtonClickSpy}}
+                @lastDisplayedStepIndex={{0}}
               />
             </template>,
           );

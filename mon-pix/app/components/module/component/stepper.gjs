@@ -268,6 +268,7 @@ export default class ModulixStepper extends Component {
                 @shouldAppearToRight={{this.shouldAppearToRight}}
                 @updateSkipButton={{@updateSkipButton}}
                 @nextButtonName={{t "pages.modulix.buttons.stepper.next.horizontal.name"}}
+                @lastDisplayedStepIndex={{this.lastDisplayedStepIndex}}
               />
             {{/each}}
           {{/if}}
@@ -292,6 +293,7 @@ export default class ModulixStepper extends Component {
               @shouldDisplayNextButton={{this.shouldDisplayVerticalNextButton index}}
               @updateSkipButton={{@updateSkipButton}}
               @nextButtonName={{t "pages.modulix.buttons.stepper.next.vertical.name"}}
+              @lastDisplayedStepIndex={{index}}
             />
           {{/each}}
         {{/if}}
