@@ -192,7 +192,9 @@ class CampaignAssessmentExport {
     knowledgeElementSnapshotRepository,
     sharedParticipations,
   }) {
-    let participantKnowledgeElementsByCompetenceId = [];
+    let participantKnowledgeElementsByCompetenceId;
+    if (!campaignParticipationInfo.userId) return this.learningContent.getKnowledgeElementsGroupedByCompetence([]);
+
     if (campaignParticipationInfo.isShared) {
       const sharedKnowledgeElementsByUserIdAndCompetenceId =
         await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
