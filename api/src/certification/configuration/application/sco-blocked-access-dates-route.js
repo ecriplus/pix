@@ -23,11 +23,13 @@ const register = async function (server) {
           },
         ],
         validate: {
-          params: Joi.string(),
+          params: Joi.object({
+            key: Joi.string().required(),
+          }),
           payload: Joi.object({
             data: {
               attributes: {
-                value: Joi.date().required,
+                value: Joi.date().format('YYYY-MM-DD').required(),
               },
             },
           }),
