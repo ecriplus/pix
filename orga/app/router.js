@@ -98,6 +98,7 @@ Router.map(function () {
     this.route('statistics', { path: '/statistiques' });
     this.route('combined-course', { path: '/parcours/:combined_course_id' }, function () {
       this.route('participations', { path: '/' });
+      this.route('participation-detail', { path: '/participations/:participation_id' });
     });
   });
 
