@@ -76,7 +76,7 @@
               "element": {
                 "id": "b85bf93d-d444-4cd4-8cbd-bb8f7fc70714",
                 "type": "text",
-                "content": "<p>Il est donc essentiel d’apprendre à <strong>se protéger de ces arnaques</strong>, en évitant de mordre à l’hameçon.🪝</p>"
+                "content": "<p>Il est donc essentiel d’apprendre à <strong>se protéger de ces arnaques</strong>, en évitant de mordre à l’hameçon.&nbsp;🪝</p>"
               }
             }
           ]
@@ -109,8 +109,8 @@
                       "id": "5a60d1c3-1f52-435c-bb16-cd48f82f9af3",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-ca.png",
-                      "alt": "tt",
-                      "alternativeText": "<p>tt</p>",
+                      "alt": "Mail détaillé dans l'alternative textuelle",
+                      "alternativeText": "<h5>Boîte de réception</h5>\n<p><strong>Date de reception :</strong> mar 9 fev. 2025 - 09h12</p>\n<p><strong>Expéditeur :</strong>&nbsp;Crédit Agricole - hotlinesbo@resepku.online\n</p>\n<p><strong>Objet du mail : </strong>Information : nous venons de désactiver votre carte de crédit</p>\n<p>\n    <hotlinesbo@resepku.online><strong>Corps du mail :&nbsp;</strong><br><strong>Logo : </strong>Crédit Agricole-CA« Bonjour,<br>Nous venons de désactiver votre carte de crédit.<br>Nous avons détecté plusieurs IP connectons à votre compte CRÉDIT AGRICOLE banque crédit agricole et des erreurs de mots de passe avant<br>session.<br>Pour le réactiver, vous devez vous connecter sur le site de La<br>Banque Crédit Agricole et accéder à votre espace sécurisé via le lien ci-dessous :<br>La procédure est simple:</p><ul><li>Cliquez sur le lien pour ouvrir une fenêtre sécurisée.</li><li> Suivre les instructions.</li>\n</ul>\n<p>Lien cliquable : Accéder à votre compte»</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -151,8 +151,8 @@
                       "id": "46c75561-e9b8-4aaa-84cb-212a128bf4cb",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-lidl.png",
-                      "alt": "tt",
-                      "alternativeText": "<p>tt</p>",
+                      "alt": "Mail détaillé dans l'alternative textuelle",
+                      "alternativeText": "<p><h5>Boite de reception</h5><p><strong>Date de reception :</strong> mar 9 fev. 2025 - 09h12</p><p><strong>Objet du mail :&nbsp;</strong> [FELICITATIONS] Vous avez gagné un Monsieur Cuisine Boîte de réception</p><p><strong>Expediteur : </strong>LIDL-marie-tarte@unknow.po.org</p><p><strong>Corps du mail :</strong></p><p>Logo : LIDL</p><p>Félicitations ! Vous avez été choisi pour recevoir le tout nouveau Monsieur Cuisine Connect. Remplissez vite le formulaire pour le recevoir dès demain :<br>Bouton : CLIQUER ICI<br>Photographie d'un appareil electromenager Monsieur Cuisine.</p></p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -179,7 +179,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p dir=\"ltr\" style=\"line-height:1.38;margin-right: 72.22440944881893pt;margin-top:0pt;margin-bottom:0pt;\"><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est un message d’arnaque.</span></strong></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">Dans ce message, </span></strong><span style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"><strong>l’escroc joue avec </strong></span></span><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 700; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">vos émotions</span><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"> (ici l’espérance d’un gain) pour vous pousser à agir. </span></strong></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est une technique utilisée dans les arnaques par hameçonnage.</span></strong></p>"
+                            "diagnosis": "<p>C’est un message d’arnaque.</p><p>Dans ce message, <strong>l’escroc joue avec vos émotions</strong> (ici l’espérance d’un gain) pour vous pousser à agir. C’est une technique utilisée dans les arnaques par hameçonnage.</p>"
                           }
                         }
                       ],
@@ -193,8 +193,8 @@
                       "id": "9c3c5320-4e60-477f-9bd5-d38c2adb47ac",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-c4-f.png",
-                      "alt": "tt",
-                      "alternativeText": "<p>tt</p>",
+                      "alt": "SMS détaillé dans l'alternative textuelle",
+                      "alternativeText": "<p>reçu à&nbsp;8:30</p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;La C4F<br>Vous avez 300 euros d’aide disponible sur votre compte Caf. Pour les recevoir, remplissez le formulaire sur https://cutt.ly/sejiodFE et donnez nous votre RIB.&nbsp;»</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -235,8 +235,8 @@
                       "id": "3021d1d6-b49f-45ec-8aa8-0d191fd8c602",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-top-chaussures.png",
-                      "alt": "tt",
-                      "alternativeText": "<p>tt</p>",
+                      "alt": "SMS détaillé dans l'alternative textuelle",
+                      "alternativeText": "<p>reçu à&nbsp;8:30 </p><p><strong>Corps du SMS&nbsp;:&nbsp;</strong></p><p>«&nbsp;Pour identifier votre achat de 120 EUR sur le site&nbsp;TopChaussures, veuillez saisir le code 445147.&nbsp;»</p>",
                       "legend": "",
                       "licence": ""
                     },
