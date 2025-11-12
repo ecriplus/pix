@@ -1,5 +1,16 @@
 # Pix Changelog
 
+# [5.255.0](https://github.com/1024pix/pix/compare/v5.254.0...v5.255.0) (2025-11-12)
+
+### :rocket: Amélioration
+
+- [#14130](https://github.com/1024pix/pix/pull/14130) Create tmp-anatomie-message-arnaque.json 
+- [#14132](https://github.com/1024pix/pix/pull/14132) modifs-relecture-cyber 
+
+### :building_construction: Tech
+
+- [#14126](https://github.com/1024pix/pix/pull/14126) Remplacer dayjs/ember-dayjs par ember-intl sur Pix Admin
+
 # [5.254.0](https://github.com/1024pix/pix/compare/v5.253.1...v5.254.0) (2025-11-11)
 
 ### :rocket: Amélioration
