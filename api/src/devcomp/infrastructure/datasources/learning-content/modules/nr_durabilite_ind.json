@@ -1,0 +1,572 @@
+{
+  "id": "e2b42968-4797-46e7-b9ca-11d0d0dfa978",
+  "slug": "metaux-eau-reemploi",
+  "title": "Métaux, eau douce, produits chimiques : pourquoi faut-il réutiliser nos équipements numériques ?",
+  "isBeta": false,
+  "details": {
+    "image": "https://images.pix.fr/modulix/placeholder-details.svg",
+    "description": "<p>Nos smartphones et ordinateurs renferment de nombreux métaux comme le lithium, le cobalt ou les terres rares. Leur extraction consomme beaucoup d’eau et de produits chimiques, au détriment de l’environnement et de la santé des travailleurs. 🌍</p><p>Dans ce module, vous découvrirez l’envers du numérique&nbsp;: les impacts cachés de la fabrication de nos appareils, mais aussi comment le réemploi et le reconditionnement peuvent en réduire durablement les effets. 🔁</p>",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "<p>Connaître les métaux et terres rares qui composent les appareils informatiques.</p>",
+      "<p>Identifier les principaux impacts environnementaux liés à l’extraction des métaux et terres rares.</p>",
+      "<p>Comprendre pourquoi et comment le réemploi et le reconditionnement permettent de réduire ces impacts.</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "1eed067d-36c7-40ab-905a-c109320cd850",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "3969c325-f7a2-44d2-bf97-1f73504cc6fd",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "539c81ce-9924-46f1-b221-00fc2ce2642e",
+                "type": "custom",
+                "instruction": "<p>Selon vous, combien de kilos de matières premières faut-il pour fabriquer un seul smartphone ?<br></p>",
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "200 grammes",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                      }
+                    },
+                    {
+                      "label": "2 kilogrammes",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                      }
+                    },
+                    {
+                      "label": "20 kilogrammes",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                      }
+                    },
+                    {
+                      "label": "200 kilogrammes",
+                      "feedback": {
+                        "type": "good",
+                        "text": "Pour un seul smartphone, c’est environ 200 kilogrammes de matières premières qu’il faut extraire, transformer et transporter pour produire un seul smartphone neuf."
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2310c551-3019-4ca2-8edc-2cfb684fc70c",
+          "type": "transition",
+          "title": "Transition 0",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d55e6ae8-8bb5-40e3-b256-1568a51ebe95",
+                "type": "text",
+                "content": "<p>Voyons ensemble ce pourquoi <strong>autant de matière est nécessaire</strong> pour un si petit objet.&nbsp;<br><br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fe25ae50-a44d-48fb-8052-bbd909643c0c",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "efdbf671-9d87-4578-b621-50b6cca2002b",
+          "type": "discovery",
+          "title": "Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9b0552bc-4f23-4190-9c27-f7f4892b3383",
+                "type": "custom",
+                "instruction": "<p>Survolez les différentes parties du smartphone pour découvrir les métaux et terres rares qui le composent.</p>",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/draft/modules/nr_durabilite_ind/unnamed.png",
+                    "alt": "Smartphone démonté en plusieurs parties : batterie, écran, boîtier, carte de circuits et coque",
+                    "width": 512,
+                    "height": 341
+                  },
+                  "areas": [
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 10,
+                        "y1": 100,
+                        "x2": 90,
+                        "y2": 260
+                      },
+                      "info": "🔋 Batterie : Stockage d’énergie grâce aux métaux rares lithium et cobalt."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 100,
+                        "y1": 60,
+                        "x2": 180,
+                        "y2": 280
+                      },
+                      "info": "📱 Écran tactile : Sensibilité et couleurs assurées par l’indium, l’étain et plusieurs terres rares (europium, terbium et yttrium)."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 190,
+                        "y1": 40,
+                        "x2": 270,
+                        "y2": 300
+                      },
+                      "info": "💻 Boîtier / Structure : Solidité et légèreté obtenues grâce à l’aluminium et au magnésium."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 280,
+                        "y1": 70,
+                        "x2": 360,
+                        "y2": 290
+                      },
+                      "info": "⚙️ Circuits électroniques : Conduction et résistance assurées par le cuivre, l’argent, l’or, le nickel et l’étain."
+                    },
+                    {
+                      "shape": "rect",
+                      "coords": {
+                        "x1": 370,
+                        "y1": 50,
+                        "x2": 460,
+                        "y2": 310
+                      },
+                      "info": "🔈 Haut-parleur / Microphone : Production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "aceecf16-a635-4a19-83a4-76ba9a75de85",
+                "type": "qrocm",
+                "instruction": "<p>Combien avez-vous trouvé d’éléments dans cet appareil numérique ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Nombre de métaux ou terres rares différents&nbsp;:&nbsp;</p>"
+                  },
+                  {
+                    "input": "1",
+                    "type": "input",
+                    "inputType": "number",
+                    "size": 2,
+                    "display": "inline",
+                    "placeholder": "0",
+                    "ariaLabel": "Nombre de métaux et terres rares",
+                    "defaultValue": "0",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "15"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien joué !&nbsp;</p>",
+                    "diagnosis": "<p>Nous avons sélectionné un échantillon de quelques exemples parmi <strong>plus de 50 métaux et terres rares différents</strong> utilisés dans la fabrication d’un smartphone.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas exactement...</p>",
+                    "diagnosis": "<p>Il y en avait 15 à trouver dans l’image, mais nous avons sélectionné un échantillon de quelques exemples parmi plus de <strong>50 métaux et terres rares différents</strong> utilisés dans la fabrication d’un smartphone.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "8107a2b1-a293-4b16-85a3-2e085564eb4d",
+          "type": "short-lesson",
+          "title": "Leçon 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dad5436d-1659-4514-99b3-b316dc795888",
+                "type": "text",
+                "content": "<h5>🤔Et que se passe-t-il quand on produit toujours plus d’appareils ?</h5><p> La <strong>demande</strong> en métaux et en terres rares <strong>augmente fortement</strong>. Le secteur du numérique <strong>mobilise</strong> désormais <strong>une grande part des réserves mondiales</strong> de certains matériaux, comme le tantale ou l’indium. </p><p><strong>💡Bon à savoir</strong> </p><p>Les <strong>terres rares</strong> sont des métaux <strong>essentiels aux appareils numériques</strong>. Présentes dans la terre mais <strong>très peu concentrées</strong>, leur extraction exige beaucoup d’énergie, d’eau et de produits chimiques polluants.<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5338a238-97bf-45fe-bcbd-fe39ea35157e",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "149fd62a-f59a-4534-8a74-30f7bcebc934",
+                "type": "text",
+                "content": "<p>Maintenant que nous savons<strong> de quoi sont faits nos appareils</strong>, voyons <strong>ce que leur fabrication implique</strong> pour l’<strong>environnement</strong> et les <strong>populations</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4eaf6934-02c8-4fd6-973f-dc4400a89f56",
+          "type": "discovery",
+          "title": "Découverte 2",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
+                      "type": "text",
+                      "content": "<p><a href=\"https://earth.google.com/web/search/Bayan+Obo,+Baotou,+Mongolie-int%c3%a9rieure,+Chine/@41.80231179,109.99371383,1603.900575a,30139.21568664d,35y,0h,0t,0r/data=CjsiJgokCdr95P0-HiDAEWVu9880gSHAGUXlCzo3b1LAIaC-jA5Q11LAOg0IAREAAAAAAADwPyABQgIIAToDCgEwQgIIAEoNCP___________wEQAA\" target=\"_blank\">Vue Google Earth&nbsp;: Bayan Obo / Baotou, Chine </a></p><p>La plus grande mine de terres rares au monde. À côté, un immense bassin de boues toxiques&nbsp;: résidus issus du raffinage des métaux. Ces boues contiennent des produits chimiques et des métaux lourds qui contaminent les sols et les cours d’eau environnants.<br><br></p>"
+                    },
+                    {
+                      "id": "8db7e730-9601-4e62-b6a4-9e351097e40f",
+                      "type": "qcu",
+                      "instruction": "<p>Vous imaginez vivre à côté d’un lac… de déchets chimiques ?<br> Ce “lac noir” visible depuis l’espace s’est formé à cause de quoi ?<br><br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>De la fonte des glaces</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...</p>",
+                            "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Du traitement des terres rares&nbsp;</p>",
+                          "feedback": {
+                            "state": "<p>Exact !</p>",
+                            "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>D’une coulée de pétrole</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...</p>",
+                            "diagnosis": "<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "d03f5276-0dbf-46f1-8c85-88edd79f1fe9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/2025-11-07-12-08-01-greenshot.png",
+                      "alt": "Schéma extraction lithium",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "154555e7-4169-41f8-a3ea-e74f40decb34",
+                      "type": "text",
+                      "content": "<p>Pour extraire le lithium, on pompe l’eau salée des nappes souterraines dans de grands bassins d’évaporation.<br> Ce procédé consomme d’<strong>énormes volumes d’eau</strong> dans des régions souvent arides, et laisse derrière lui<strong> des déchets salins et chimiques</strong>.<br> Les sols s’appauvrissent, les sources d’eau potable s’assèchent, et la faune locale décline.</p>"
+                    },
+                    {
+                      "id": "f6da76af-0fca-4bb8-862e-f3f6433b1dcb",
+                      "type": "qcu",
+                      "instruction": "<p>Une batterie “écologique”, ça existe vraiment ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Oui, grâce au Lithium</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...</p>",
+                            "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et <strong>contamine les nappes phréatiques</strong>.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Pas encore car l’extraction est polluante</p>",
+                          "feedback": {
+                            "state": "<p>Exact !&nbsp;</p>",
+                            "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et <strong>contamine les nappes phréatiques</strong>.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Oui, si on les recharge souvent</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...</p>",
+                            "diagnosis": "<p>Le lithium est essentiel aux batteries rechargeables, mais son extraction détruit les écosystèmes locaux et contamine les nappes phréatiques.<br>Les populations voisines souffrent souvent d’un manque d’eau et de la pollution.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "25443807-d8bc-4abe-8041-6a30ad46976f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/child-labor-artisan-mining-in-kailo-congo.jpg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "4aa32b42-e1e5-42e6-bda8-259a57f04e19",
+                      "type": "text",
+                      "content": "<p>Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques. </p><p>Des enfants participent parfois au tri ou au transport du minerai, exposés comme leurs parents à des conditions précaires et à des risques sanitaires.</p>"
+                    },
+                    {
+                      "id": "664090f9-9d14-45f8-bfbd-8c09715ee51a",
+                      "type": "qcu",
+                      "instruction": "<p>Saviez-vous que certains de vos appareils numériques pouvaient contenir un peu du travail d’un enfant ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Non, impossible !</p>",
+                          "feedback": {
+                            "state": "<p>Malheusement si...</p>",
+                            "diagnosis": "<p>Le travail des enfants reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Oui, dans certains cas</p>",
+                          "feedback": {
+                            "state": "<p>Malheureusement...</p>",
+                            "diagnosis": "<p>Le <strong>travail des enfants</strong> reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Seulement pour les appareils anciens</p>",
+                          "feedback": {
+                            "state": "<p>Malheureusement non...</p>",
+                            "diagnosis": "<p>Le <strong>travail des enfants</strong> reste une réalité dans certaines mines de cobalt, d’étain et de tungstène.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "02f17511-3391-4039-852e-b37a0f40a258",
+          "type": "short-lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5d37b812-b5a9-4ebc-af92-260c6ede361e",
+                "type": "text",
+                "content": "<p>L’extraction des métaux utilisés pour fabriquer nos smartphones, ordinateurs et batteries a des <strong>conséquences environnementales et humaines majeures</strong>, entre autres&nbsp;: </p><ul><li>forte consommation d’eau</li><li>&nbsp;pollution chimique des sols</li><li>&nbsp;dégradation des paysages</li><li>&nbsp;atteintes à la santé et au travail</li></ul><h5>🤔Tout ça pour nos smartphones et ordinateurs ?</h5><p>&nbsp;Oui. Le lithium, le cobalt, l’étain ou le tungstène sont essentiels, mais leur demande croissante met à mal l’environnement et les droits humains.&nbsp;<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2bc858b4-afbf-48af-9d11-d535a07e9ec1",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "138eea6b-49c9-449c-993d-0440fdf59a0b",
+                "type": "text",
+                "content": "<p>Après avoir vu à quel point l’extraction des métaux est polluante et lourde de conséquences humaines, rappelons une évidence&nbsp;: <strong>moins on consomme, moins on produit, et moins on pollue</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "71cee838-2709-4c62-b637-2a85dcab7e62",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "1a7e6933-9fd4-42ce-a844-44547efcd603",
+                      "type": "text",
+                      "content": "<p><strong>Amandine a un soucis d’ordinateur portable.</strong><br>Le sien a quelques années et commence à avoir <strong>des pixels morts</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais c’est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
+                    },
+                    {
+                      "id": "c62a71c2-ec8a-4da8-b1dc-fbebd3e86f69",
+                      "type": "qcu",
+                      "instruction": "<p>A votre avis, quelle solution Amandine devrait choisir pour limiter son impact et avoir un PC fonctionnel à nouveau ?</p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le garder encore un peu</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...&nbsp;</p>",
+                            "diagnosis": "<p>Bonne idée, mais seulement<strong> à court terme</strong>, mais si l’appareil devient difficile à utiliser, <strong>le réparer</strong> permet de <strong>vraiment prolonger sa durée de vie</strong> tout en évitant une nouvelle production.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Acheter un ordinateur d’occasion remis en état (reconditionné)</p>",
+                          "feedback": {
+                            "state": "<p>C’est bien, mais pas l’idéal...</p>",
+                            "diagnosis": "<p>C’est un <strong>bon compromis</strong>, mais pas le meilleur ici. Le reconditionné évite la fabrication d’un neuf, mais <strong>réparer votre appareil actuel</strong> reste plus écologique.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Acheter un ordinateur portable neuf.</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...</p>",
+                            "diagnosis": "<p>C’est l’option la <strong>plus polluante</strong>&nbsp;: chaque appareil neuf mobilise beaucoup de métaux, d’eau et d’énergie. Acheter neuf relance la production et <strong>augmente les impacts environnementaux</strong>.<br><br></p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Réparer son ordinateur actuel</p>",
+                          "feedback": {
+                            "state": "<p>Exact !&nbsp;</p>",
+                            "diagnosis": "<p>C’est la <strong>meilleure option</strong> pour l’environnement. Remplacer la batterie ou l’écran prolonge la vie de l’appareil sans en produire un nouveau. Chaque réparation évite<strong> des kilos de matières extraites et des centaines de litres d’eau douce consommés</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "4"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "685e2165-8a4c-426c-b43d-5e48b6ce67ea",
+                      "type": "text",
+                      "content": "<p><strong>Deux ans plus tard</strong>, Amandine commence une formation de graphisme.<br><strong>Son ordinateur</strong> réparé <strong>fonctionne toujours</strong>, mais il n’est <strong>plus assez puissant</strong> pour faire tourner les logiciels de création dont elle a <strong>besoin</strong> (retouche photo, modélisation 3D…).<br><br></p>"
+                    },
+                    {
+                      "id": "22e11b89-febc-4cbc-b65a-ebc109072b52",
+                      "type": "qcu",
+                      "instruction": "<p>Que peut faire Amandine pour limiter son impact environnemental tout en répondant à ses nouveaux besoins ?<br></p>",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>acheter un ordinateur neuf</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...&nbsp;</p>",
+                            "diagnosis": "<p>C’est l’option qui <strong>consomme le plus de ressources</strong>. Chaque appareil neuf mobilise beaucoup de métaux, d’eau et de produits chimiques, et relance toute la production.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Louer un appareil temporairement</p>",
+                          "feedback": {
+                            "state": "<p>Pas vraiment...&nbsp;</p>",
+                            "diagnosis": "<p>C’est une solution <strong>temporaire</strong>, mais peu durable. Les appareils loués sont <strong>souvent neufs</strong> ou <strong>fréquemment renouvelés</strong>, ce qui maintient la production et la consommation de ressources.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>acheter un ordinateur reconditionné</p>",
+                          "feedback": {
+                            "state": "<p>Exact !&nbsp;</p>",
+                            "diagnosis": "<p>C’est le meilleur choix pour allier performance et sobriété. Déjà fabriqué, l’appareil reconditionné est remis en état <strong>avant revente</strong>. Il répond à de nouveaux besoins <strong>sans relancer la production d’un neuf</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "9dd2444c-4ef4-4f16-8f7d-44d5cefdd8b9",
+                "type": "text",
+                "content": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "8ac88484-52c8-4f91-8767-3db9314c04f8",
+          "type": "short-lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "367f03f5-4e1a-41c1-b345-f374ef78d331",
+                "type": "text",
+                "content": "<h5><strong>🤔</strong>Prolonger la vie d’un appareil, c’est vraiment utile ?</h5><p>Oui ! <strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter de fabriquer un nouvel appareil.&nbsp; </p><h5>🤔Mais si j’ai besoin de changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>, ce qui lui donne une seconde vie et limite son impact. </p><h5>🤔Mais ça marche à tous les coups ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p><p><strong>💡Astuce&nbsp;:</strong> </p><p>Pensez à <strong>protéger</strong> vos appareils numériques (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;<br><br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a8c1c485-88cb-482c-be17-555b3d551419",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "46d74c21-8ec7-4f48-8a98-eb1424afbc4a",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
+                "type": "text",
+                "content": "<ul><li>Nos ordinateurs et téléphones contiennent plus de<strong> 50 métaux</strong>, dont plusieurs<strong> terres rares</strong>, <strong>extraits</strong> au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li><li><strong>Faire durer</strong> ou <strong>réparer</strong> ses appareils, c’est <strong>éviter la production d’un neuf</strong> et limiter l’extraction de métaux et la consommation d’eau.</li><li>Dans le cas d’un <strong>achat</strong>, choisir le <strong>reconditionné</strong> reste la solution la <strong>plus économe</strong> en ressources et la<strong> plus responsable</strong>.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
