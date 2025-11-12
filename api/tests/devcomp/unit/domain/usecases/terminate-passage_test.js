@@ -65,6 +65,11 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         };
         passageRepository.get.withArgs({ passageId }).resolves(passage);
 
+        const saveOrganizationLearnerPassageForUserJobRepository = {
+          performAsync: sinon.stub(),
+        };
+        saveOrganizationLearnerPassageForUserJobRepository.performAsync.resolves();
+
         const updatedPassage = {
           terminatedAt: new Date('2025-03-04'),
           id: passageId,
@@ -75,11 +80,57 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
         const returnedPassage = await terminatePassage({
           passageId,
           passageRepository,
+          saveOrganizationLearnerPassageForUserJobRepository,
         });
 
         // then
         expect(passage.terminate).to.have.been.calledOnce;
         expect(returnedPassage).to.equal(updatedPassage);
+      });
+
+      it('should schedule a job to notify passage termination', async function () {
+        // given
+        const passageId = 1234;
+
+        const passageRepository = {
+          get: sinon.stub(),
+          update: sinon.stub(),
+        };
+
+        const passage = {
+          id: passageId,
+          userId: Symbol('user-id'),
+          moduleId: Symbol('module-id'),
+          terminatedAt: null,
+          terminate: sinon.stub(),
+        };
+        passageRepository.get.withArgs({ passageId }).resolves(passage);
+
+        const updatedPassage = {
+          id: passageId,
+          terminatedAt: new Date('2025-03-04'),
+        };
+        passageRepository.update.withArgs({ passage }).resolves(updatedPassage);
+
+        const saveOrganizationLearnerPassageForUserJobRepository = {
+          performAsync: sinon.stub(),
+        };
+        saveOrganizationLearnerPassageForUserJobRepository.performAsync
+          .withArgs({ moduleId: passage.moduleId, userId: passage.userId })
+          .resolves();
+
+        // when
+        await terminatePassage({
+          passageId,
+          passageRepository,
+          saveOrganizationLearnerPassageForUserJobRepository,
+        });
+
+        // then
+        expect(saveOrganizationLearnerPassageForUserJobRepository.performAsync).to.have.been.calledOnceWith({
+          userId: passage.userId,
+          moduleId: passage.moduleId,
+        });
       });
     });
   });
