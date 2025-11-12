@@ -11,6 +11,7 @@ import * as centerRepository from '../../infrastructure/repositories/center-repo
 import * as complementaryCertificationRepository from '../../infrastructure/repositories/complementary-certification-repository.js';
 import * as frameworkChallengesRepository from '../../infrastructure/repositories/framework-challenges-repository.js';
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
+import * as scoBlockedAccessDatesRepository from '../../infrastructure/repositories/sco-blocked-access-dates-repository.js';
 import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
 
 /**
@@ -29,6 +30,7 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {learningContentRepository} LearningContentRepository
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
+ * @typedef {scoBlockedAccessDatesRepository} scoBlockedAccessDatesRepository
  * @typedef {versionsRepository} VersionsRepository
  **/
 const dependencies = {
@@ -36,6 +38,7 @@ const dependencies = {
   attachableTargetProfileRepository,
   candidateRepository,
   centerRepository,
+  scoBlockedAccessDatesRepository,
   challengeRepository,
   complementaryCertificationForTargetProfileAttachmentRepository,
   complementaryCertificationRepository,
