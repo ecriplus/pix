@@ -9,9 +9,9 @@
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Connaître la définition du hameçonnage (phishing).</p>",
-      "<p>Reconnaître les indices caractéristiques d’un message d’arnaque.</p>",
-      "<p>Agir face à un message d’hameçonnage.</p>"
+      "<p>Connaître la définition du hameçonnage (phishing)</p>",
+      "<p>Reconnaître les indices caractéristiques d’un message d’arnaque</p>",
+      "<p>Agir face à un message d’hameçonnage</p>"
     ],
     "tabletSupport": "comfortable"
   },
@@ -26,68 +26,43 @@
           "title": "statistiques",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "0b69c5ef-f0f9-4c66-a9fb-3d273033f814",
-                      "type": "text",
-                      "content": "<p>En 2024, plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde, accompagnés d’une <strong>diffusion de messages</strong> pour <strong>inciter les internautes</strong> à s’y rendre.</p>"
+              "type": "element",
+              "element": {
+                "id": "f9a9eca3-9b86-4c44-9651-02c61a0a445c",
+                "type": "text",
+                "content": "<p>En 2024, plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde, accompagnés d’une <strong>diffusion de messages</strong> pour <strong>inciter les internautes</strong> à s’y rendre.</p><p>L’<strong>impact&nbsp;économique</strong> est colossal, avec des pertes estimées à plus de 1&nbsp;000 milliards de dollars.💲💲💲</p><p><strong>Même les professionnels de l’informatique</strong>&nbsp;sont touchés&nbsp;: près d’un tiers des équipes techniques déclarent avoir déjà été visées ou piégées par ce type d’attaque.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e785fb13-5a62-4814-9a7c-4aaf11591fb9",
+                "type": "qcu-declarative",
+                "instruction": "<p>Et vous, pensez-vous avoir déjà reçu des messages d’arnaque par mail ou par SMS ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Oui</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "2ee44939-6f6a-42cd-b027-a54472f5610f",
-                      "type": "text",
-                      "content": "<p><strong>L’impact </strong><strong>économique est colossal</strong>, avec des pertes estimées à plus de 1 000 milliards de dollars. 💲💲💲</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Non</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "7312fe55-8393-4a3f-9652-c764d14b28a7",
-                      "type": "text",
-                      "content": "<p><strong>Même les professionnels de l’informatique</strong> sont touchés&nbsp;: près d’un tiers des équipes techniques déclarent avoir déjà été visées ou piégées par ce type d’attaque.<br><br></p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "1b3167e3-4b12-4d36-9d9c-a54a6422888a",
-                      "type": "qcu-declarative",
-                      "instruction": "<p>Et vous, pensez-vous avoir déjà reçu des messages d’arnaque par mail ou par SMS ?</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Oui</p>",
-                          "feedback": {
-                            "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Non</p>",
-                          "feedback": {
-                            "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Je ne sais pas</p>",
-                          "feedback": {
-                            "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
+                  }
+                ]
+              }
             }
           ]
         },
@@ -204,7 +179,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"></strong></p><p dir=\"ltr\" style=\"line-height:1.38;margin-right: 72.22440944881893pt;margin-top:0pt;margin-bottom:0pt;\"><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est un message d’arnaque.</span></strong></p><p></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">Dans ce message, </span></strong><span style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"><strong>l’escroc joue avec</strong></span></span><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 700; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">vos émotions</span><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"> (ici l’espérance d’un gain) pour vous pousser à agir. </span></strong></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"></strong><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est une technique utilisée dans les arnaques par hameçonnage.</span></strong></p>"
+                            "diagnosis": "<p dir=\"ltr\" style=\"line-height:1.38;margin-right: 72.22440944881893pt;margin-top:0pt;margin-bottom:0pt;\"><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est un message d’arnaque.</span></strong></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">Dans ce message, </span></strong><span style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"><strong>l’escroc joue avec </strong></span></span><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 700; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">vos émotions</span><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\"> (ici l’espérance d’un gain) pour vous pousser à agir. </span></strong></p><p><strong style=\"font-weight:normal;\" id=\"docs-internal-guid-80c9699c-7fff-cbd7-cdc4-62d778d5869f\"><span style=\"font-family: Roboto, sans-serif; color: rgb(18, 38, 71); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap; font-size: 13.5pt;\">C’est une technique utilisée dans les arnaques par hameçonnage.</span></strong></p>"
                           }
                         }
                       ],
@@ -310,7 +285,7 @@
               "element": {
                 "id": "cb301130-8149-461b-b203-7f40281ee8ff",
                 "type": "text",
-                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels</strong> qui imite une personne ou un organisme de confiance.🎣</p><p>⚠️ Les messages de hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
+                "content": "<p>Pour résumer, <strong>l’hameçonnage</strong> (ou phishing en anglais) est une technique d’arnaque par <strong>messages privés, SMS, mails ou appels</strong> qui imite une personne ou un organisme de confiance.🎣</p><p><br>⚠️ Les messages de hameçonnage sont <strong>de plus en plus réalistes</strong>, année après année. Ils sont donc plus durs à repérer.<br><br></p>"
               }
             }
           ]
@@ -401,11 +376,19 @@
             {
               "type": "element",
               "element": {
+                "id": "7ece3d8c-d1cb-4589-a664-a9de98f9fd97",
+                "type": "text",
+                "content": "<p>Depuis votre boîte mail, vous pouvez agir pour vous protéger et protéger les autres.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "227352f9-9b3a-4a60-a174-d803352ed41f",
                 "type": "custom-draft",
                 "title": "POIC bloquer et signaler",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_Phishing_IND-POI-proteger.html",
-                "instruction": "<h5>Depuis votre boîte mail, vous pouvez agir pour vous protéger et protéger les autres.</h5><p>Suivez les consignes de l’interface ci-dessous.<br></p>",
+                "instruction": "<p>Suivez les consignes de l’interface ci-dessous.<br></p>",
                 "height": 550
               }
             }
@@ -421,7 +404,7 @@
               "element": {
                 "id": "70cadc99-643a-4257-b711-72a76f194da3",
                 "type": "text",
-                "content": "<h5>Comment réagir en cas de hameçonnage ? 🛡️</h5><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
+                "content": "<h4>Comment réagir en cas de hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
               }
             }
           ]
@@ -464,8 +447,12 @@
               "type": "element",
               "element": {
                 "id": "2d596aa9-c13a-4800-8378-f0257024e173",
-                "type": "text",
-                "content": "<p>[ajouter image]</p>"
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/recap-cy-phishing-ind.png",
+                "alt": "infographie présentant les indices à repérer, détaillés dans l’alternative textuelle.",
+                "alternativeText": "<ul><li>Un sentiment d’urgence qui vous pousse à agir rapidement 🚨</li><li>Un expéditeur imité de façon imparfaite 👺</li><li>Un lien suspect qui est mal orthographié ou pas en lien avec l’expéditeur ou le sujet du mail 🔗</li><br></ul>",
+                "legend": "",
+                "licence": ""
               }
             },
             {
@@ -473,7 +460,7 @@
               "element": {
                 "id": "72f816fc-c3dc-4dfb-9cd9-16f08a4d2a34",
                 "type": "text",
-                "content": "<h5>Pour vous protéger&nbsp;:</h5><ul><li><strong>Ne pas cliquer</strong> sur les liens</li><li><strong>Bloquer</strong> l’expéditeur</li></ul><h5>Pour protéger les autres&nbsp;:</h5><ul><li><strong>Ne pas transférer</strong> ce message</li><li>Marquer le message comme <strong>courrier indésirable</strong>.</li></ul>"
+                "content": "<h5>Pour vous protéger&nbsp;:</h5><ul>    <li><strong>Ne pas cliquer</strong> sur les liens</li>    <li><strong>Bloquer</strong> l’expéditeur</li></ul><h5>Pour protéger les autres&nbsp;:</h5><ul>    <li><strong>Ne pas transférer</strong> ce message</li>    <li>Marquer le message comme <strong>courrier indésirable</strong>.</li></ul>"
               }
             }
           ]
@@ -585,6 +572,26 @@
                     "solutions": [
                       "1"
                     ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>En français, cette technique d’arnaque s’appelle le</span>"
+                  },
+                  {
+                    "input": "",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 25,
+                    "display": "inline",
+                    "placeholder": "tapez le nom",
+                    "ariaLabel": "tapez le nom",
+                    "defaultValue": "tapez le nom",
+                    "tolerances": [
+                      "t1"
+                    ],
+                    "solutions": [
+                      "hameçonnage"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -594,7 +601,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Vous pouvez ré-essayer.</p>"
+                    "diagnosis": "<p>Il vous manque un ou plusieurs éléments pour identifier les caractéristiques des messages de phishing. N’hésitez pas à réessayer.<br></p>"
                   }
                 }
               }
@@ -609,9 +616,17 @@
             {
               "type": "element",
               "element": {
+                "id": "93c7cfc9-93e9-42b8-95e2-b424da4548aa",
+                "type": "text",
+                "content": "<p>Votre abonnement à la revue <em>Paysages du monde</em> se termine. Vous avez reçu plusieurs emails pour vous inviter à le prolonger.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "852947b8-f1dc-475d-984b-2dd379c9d0ac",
                 "type": "qcm",
-                "instruction": "<p>Votre abonnement à la revue Paysages du monde se termine. Vous avez reçu plusieurs emails pour vous inviter à le prolonger. </p><p>Parmi les expéditeurs suivants, lesquels vous semblent dignes de confiance ?</p>",
+                "instruction": "<p>Parmi les expéditeurs suivants, lesquels vous semblent dignes de confiance ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -641,7 +656,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Pour vérifier la cohérence des adresses mail, regardez bien des deux côtés de l’arobase. Vous pouvez ré-essayer.</p>"
+                    "diagnosis": "<p>Pour vérifier la cohérence des adresses mail, regardez bien des deux côtés de l’arobase. Vous pouvez réessayer.</p>"
                   }
                 },
                 "solutions": [
@@ -660,17 +675,22 @@
             {
               "type": "element",
               "element": {
-                "id": "cc430dd1-89fb-45cf-9629-325338eb6ffe",
+                "id": "99512111-5353-4ecd-98e5-6be31c09939a",
                 "type": "text",
-                "content": "<p><strong>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant.</strong></p><p><strong>Sélectionnez-le et marquez-le comme indésirable.</strong></p>"
+                "content": "<p>[embed Pixmail avec 3 messages et fonctionalité Signaler comme indésirable]</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "99512111-5353-4ecd-98e5-6be31c09939a",
-                "type": "text",
-                "content": "<p>[embed Pixmail avec 3 messages et fonctionalité Signaler comme indésirable]</p>"
+                "id": "b4378629-5d13-4a5d-a1a7-d512f312865c",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "",
+                "url": "https://epreuves.pix.fr/pixmail-phishing.html?lang=fr&mode=a",
+                "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p>",
+                "solution": "",
+                "height": 500
               }
             }
           ]
@@ -689,9 +709,17 @@
             {
               "type": "element",
               "element": {
+                "id": "72764293-9f8c-4c9e-83d1-a94cfbbe840c",
+                "type": "text",
+                "content": "<p>Vous avez reçu un email d’un site de vente de chaussures où vous avez passé commande.  Le message vous indique un problème avec votre commande.  Vous avez <strong>un doute sur l’authenticité de ce message</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "79554085-8e51-4d07-b39b-32010a95bb57",
                 "type": "qcu-declarative",
-                "instruction": "<p>Vous avez reçu un email d’un site de vente de chaussures où vous avez passé commande. </p><p>Le message vous indique un problème avec votre commande. </p><p>Vous avez un doute sur l’authenticité de ce message. </p><p>Choisissez un moyen de <strong>vérifier si c’est une arnaque</strong>&nbsp;:</p>",
+                "instruction": "<p>Choisissez un moyen de vérifier si ce message est une arnaque&nbsp;:</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -704,7 +732,7 @@
                     "id": "2",
                     "content": "<p>J’appelle le numéro du service après-vente sur le site.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement c’est une très bonne idée. Vous auriez aussi pu vérifier sur votre compte client si un problème existait dans le suivi de votre commande.</p>"
+                      "diagnosis": "<p>Effectivement c’est une très bonne idée. </p><p>Vous auriez aussi pu vérifier sur votre compte client si un problème existait dans le suivi de votre commande.</p>"
                     }
                   },
                   {
@@ -718,7 +746,7 @@
                     "id": "4",
                     "content": "<p>Je réponds au mail pour poser mes questions.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Vous risquez de tomber dans le piège de l’escroc. Il est préférable d’utiliser un autre canal de contact, par exemple vous connecter à votre compte client ou contacter le service après-vente.</p>"
+                      "diagnosis": "<p>Vous risquez de tomber dans le piège de l’escroc.</p><p>Il est préférable d’utiliser un autre canal de contact, par exemple vous connecter à votre compte client ou contacter le service après-vente.</p>"
                     }
                   },
                   {
